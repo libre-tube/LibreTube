@@ -74,8 +74,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:ellipsize="end"
-        android:textAlignment="viewStart"
         android:maxLines="2"
+        android:textAlignment="viewStart"
         app:layout_constraintEnd_toStartOf="@id/delete_video"
         app:layout_constraintStart_toEndOf="@id/thumbnail_card"
         app:layout_constraintTop_toTopOf="parent" />
@@ -85,8 +85,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:textAlignment="viewStart"
         android:maxLines="1"
+        android:textAlignment="viewStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/thumbnail_card"
         app:layout_constraintTop_toBottomOf="@id/video_title" />
@@ -95,13 +95,13 @@
         android:id="@+id/channel_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="start|center_vertical"
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/video_info"
-        android:layout_gravity="start|center_vertical">
+        app:layout_constraintTop_toBottomOf="@id/video_info">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/channel_image"
@@ -113,6 +113,7 @@
             android:id="@+id/channel_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginStart="8dp"
             android:ellipsize="end"
             android:maxLines="1" />
