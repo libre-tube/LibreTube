@@ -44,10 +44,12 @@ import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.ChapterSegment
+import com.github.libretube.api.obj.Message
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
+import com.github.libretube.api.obj.Token
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentPlayerBinding
@@ -117,6 +119,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.LocalDate
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
 
@@ -652,13 +655,13 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             streams = try {
                 RetrofitInstance.api.getStreams(videoId!!)
             } catch (e: IOException) {
-                println(e)
-                Log.e(TAG(), "IOException, you might not have internet connection")
-                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_LONG).show()
                 return@launchWhenCreated
             } catch (e: HttpException) {
-                Log.e(TAG(), "HttpException, unexpected response")
-                Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
+                val errorMessage = e.response()?.errorBody()?.string()?.let {
+                    JsonHelper.json.decodeFromString<Message>(it).message
+                } ?: context?.getString(R.string.server_error) ?: ""
+                Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
                 return@launchWhenCreated
             }
 
