@@ -10,6 +10,7 @@ import androidx.core.view.children
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
@@ -32,16 +33,17 @@ import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.sheets.AddChannelToGroupSheet
 import com.github.libretube.util.deArrow
-import java.io.IOException
-import kotlin.math.ceil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
+import java.io.IOException
+import kotlin.math.ceil
 
 class ChannelFragment : DynamicLayoutManagerFragment() {
     private var _binding: FragmentChannelBinding? = null
     private val binding get() = _binding!!
+    private val args by navArgs<ChannelFragmentArgs>()
 
     private var channelId: String? = null
     private var channelName: String? = null
@@ -61,12 +63,8 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            channelId = it.getString(IntentData.channelId)?.toID()
-            channelName = it.getString(IntentData.channelName)
-                ?.replace("/c/", "")
-                ?.replace("/user/", "")
-        }
+        channelId = args.channelId?.toID()
+        channelName = args.channelName?.replace("/c/", "")?.replace("/user/", "")
     }
 
     override fun onCreateView(

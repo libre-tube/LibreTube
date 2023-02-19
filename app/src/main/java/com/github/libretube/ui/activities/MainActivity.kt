@@ -22,6 +22,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.NavDirections
 import com.github.libretube.R
 import com.github.libretube.compat.PictureInPictureCompat
 import com.github.libretube.constants.IntentData
@@ -269,11 +270,8 @@ class MainActivity : BaseActivity() {
         searchView = searchItem.actionView as SearchView
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                navController.navigate(
-                    R.id.searchResultFragment,
-                    bundleOf(IntentData.query to query)
-                )
+            override fun onQueryTextSubmit(query: String): Boolean {
+                navController.navigate(NavDirections.showSearchResults(query))
                 searchView.clearFocus()
                 return true
             }
@@ -406,22 +404,13 @@ class MainActivity : BaseActivity() {
         }
 
         intent?.getStringExtra(IntentData.channelId)?.let {
-            navController.navigate(
-                R.id.channelFragment,
-                bundleOf(IntentData.channelId to it)
-            )
+            navController.navigate(NavDirections.openChannel(channelId = it))
         }
         intent?.getStringExtra(IntentData.channelName)?.let {
-            navController.navigate(
-                R.id.channelFragment,
-                bundleOf(IntentData.channelName to it)
-            )
+            navController.navigate(NavDirections.openChannel(channelName = it))
         }
         intent?.getStringExtra(IntentData.playlistId)?.let {
-            navController.navigate(
-                R.id.playlistFragment,
-                bundleOf(IntentData.playlistId to it)
-            )
+            navController.navigate(NavDirections.openPlaylist(playlistId = it))
         }
         intent?.getStringExtra(IntentData.videoId)?.let {
             NavigationHelper.navigateVideo(

@@ -4,6 +4,7 @@ plugins {
     id("kotlin-android")
     id("kotlinx-serialization")
     id("kotlin-parcelize")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {

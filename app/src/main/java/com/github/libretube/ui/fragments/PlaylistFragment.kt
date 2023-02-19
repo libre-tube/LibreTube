@@ -13,9 +13,11 @@ import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.NavDirections
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
@@ -29,7 +31,6 @@ import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
-import com.github.libretube.extensions.serializable
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.ImageHelper
@@ -51,9 +52,10 @@ import kotlinx.coroutines.withContext
 class PlaylistFragment : DynamicLayoutManagerFragment() {
     private var _binding: FragmentPlaylistBinding? = null
     private val binding get() = _binding!!
+    private val args by navArgs<PlaylistFragmentArgs>()
 
     // general playlist information
-    private var playlistId: String? = null
+    private lateinit var playlistId: String
     private var playlistName: String? = null
     private var playlistType = PlaylistType.PUBLIC
 
@@ -75,10 +77,8 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            playlistId = it.getString(IntentData.playlistId)!!.toID()
-            playlistType = it.serializable(IntentData.playlistType) ?: PlaylistType.PUBLIC
-        }
+        playlistId = args.playlistId
+        playlistType = args.playlistType
     }
 
     override fun onCreateView(
@@ -100,7 +100,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
         binding.playlistProgress.isVisible = true
 
         isBookmarked = runBlocking(Dispatchers.IO) {
-            DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId!!)
+            DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId)
         }
         updateBookmarkRes()
 
@@ -127,7 +127,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
         lifecycleScope.launch {
             val response = try {
                 withContext(Dispatchers.IO) {
-                    PlaylistsHelper.getPlaylist(playlistId!!)
+                    PlaylistsHelper.getPlaylist(playlistId)
                 }
             } catch (e: Exception) {
                 Log.e(TAG(), e.toString())
@@ -146,10 +146,8 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
 
             binding.playlistInfo.text = getChannelAndVideoString(response, response.videos)
             binding.playlistInfo.setOnClickListener {
-                (context as MainActivity).navController.navigate(
-                    R.id.channelFragment,
-                    bundleOf(IntentData.channelId to response.uploaderUrl?.toID())
-                )
+                (context as MainActivity).navController
+                    .navigate(NavDirections.openChannel(response.uploaderUrl))
             }
 
             binding.playlistDescription.text = response.description?.parseAsHtml()
@@ -162,7 +160,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
             binding.optionsMenu.setOnClickListener {
                 val sheet = PlaylistOptionsBottomSheet()
                 sheet.arguments = bundleOf(
-                    IntentData.playlistId to playlistId.orEmpty(),
+                    IntentData.playlistId to playlistId,
                     IntentData.playlistName to playlistName.orEmpty(),
                     IntentData.playlistType to playlistType
                 )
@@ -214,10 +212,10 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
                     lifecycleScope.launch(Dispatchers.IO) {
                         if (!isBookmarked) {
                             DatabaseHolder.Database.playlistBookmarkDao()
-                                .deleteById(playlistId!!)
+                                .deleteById(playlistId)
                         } else {
                             DatabaseHolder.Database.playlistBookmarkDao()
-                                .insert(response.toPlaylistBookmark(playlistId!!))
+                                .insert(response.toPlaylistBookmark(playlistId))
                         }
                     }
                 }
@@ -295,7 +293,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
         playlistAdapter = PlaylistAdapter(
             playlistFeed,
             videos.toMutableList(),
-            playlistId!!,
+            playlistId,
             playlistType
         )
         binding.playlistRecView.adapter = playlistAdapter
@@ -373,9 +371,9 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
                 withContext(Dispatchers.IO) {
                     // load locally stored playlists with the auth api
                     if (playlistType == PlaylistType.PRIVATE) {
-                        RetrofitInstance.authApi.getPlaylistNextPage(playlistId!!, nextPage!!)
+                        RetrofitInstance.authApi.getPlaylistNextPage(playlistId, nextPage!!)
                     } else {
-                        RetrofitInstance.api.getPlaylistNextPage(playlistId!!, nextPage!!)
+                        RetrofitInstance.api.getPlaylistNextPage(playlistId, nextPage!!)
                     }
                 }
             } catch (e: Exception) {

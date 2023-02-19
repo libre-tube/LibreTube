@@ -11,6 +11,7 @@ import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import androidx.fragment.app.commitNow
 import androidx.fragment.app.replace
+import com.github.libretube.NavDirections
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
@@ -29,8 +30,7 @@ object NavigationHelper {
         if (channelId == null) return
 
         val activity = ContextHelper.unwrapActivity(context)
-        val bundle = bundleOf(IntentData.channelId to channelId)
-        activity.navController.navigate(R.id.channelFragment, bundle)
+        activity.navController.navigate(NavDirections.openChannel(channelId))
         try {
             if (activity.binding.mainMotionLayout.progress == 0.toFloat()) {
                 activity.binding.mainMotionLayout.transitionToEnd()
@@ -86,11 +86,7 @@ object NavigationHelper {
         if (playlistId == null) return
 
         val activity = ContextHelper.unwrapActivity(context)
-        val bundle = bundleOf(
-            IntentData.playlistId to playlistId,
-            IntentData.playlistType to playlistType
-        )
-        activity.navController.navigate(R.id.playlistFragment, bundle)
+        activity.navController.navigate(NavDirections.openPlaylist(playlistId, playlistType))
     }
 
     /**
