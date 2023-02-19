@@ -36,13 +36,10 @@ class RenamePlaylistDialog(
             .show()
             .apply {
                 getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
-                    val input = binding.input.text.toString()
-                    if (input == "") {
-                        Toast.makeText(
-                            context,
-                            R.string.emptyPlaylistName,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                    val input = binding.input.text?.toString()
+                    if (input.isNullOrEmpty()) {
+                        Toast.makeText(context, R.string.emptyPlaylistName, Toast.LENGTH_SHORT)
+                            .show()
                         return@setOnClickListener
                     }
                     if (input == currentPlaylistName) return@setOnClickListener

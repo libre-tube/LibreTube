@@ -291,13 +291,12 @@ class MainActivity : BaseActivity() {
                 }
 
                 // prevent malicious navigation when the search view is getting collapsed
-                if (navController.currentDestination?.id in listOf(
-                        R.id.searchResultFragment,
-                        R.id.channelFragment,
-                        R.id.playlistFragment
-                    ) &&
-                    (newText == null || newText == "")
-                ) {
+                val destIds = listOf(
+                    R.id.searchResultFragment,
+                    R.id.channelFragment,
+                    R.id.playlistFragment
+                )
+                if (navController.currentDestination?.id in destIds && newText.isNullOrEmpty()) {
                     return false
                 }
 

@@ -1270,7 +1270,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
     private fun setStreamSource() {
         val defaultResolution = PlayerHelper.getDefaultResolution(requireContext()).replace("p", "")
-        if (defaultResolution != "") setPlayerResolution(defaultResolution.toInt())
+        if (defaultResolution.isNotEmpty()) setPlayerResolution(defaultResolution.toInt())
 
         if (!PreferenceHelper.getBoolean(PreferenceKeys.USE_HLS_OVER_DASH, false) &&
             streams.videoStreams.isNotEmpty()

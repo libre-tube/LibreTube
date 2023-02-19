@@ -51,7 +51,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         // fetch the search or history
         binding.historyEmpty.visibility = View.GONE
         binding.suggestionsRecycler.visibility = View.VISIBLE
-        if (query == null || query == "") {
+        if (query.isNullOrEmpty()) {
             showHistory()
         } else {
             fetchSuggestions(query)
@@ -71,7 +71,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 response.reversed(),
                 (activity as MainActivity).searchView
             )
-            if (isAdded && viewModel.searchQuery.value != "") {
+            if (isAdded && !viewModel.searchQuery.value.isNullOrEmpty()) {
                 binding.suggestionsRecycler.adapter = suggestionsAdapter
             }
         }
