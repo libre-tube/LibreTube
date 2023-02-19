@@ -34,7 +34,7 @@
     <string name="category_interaction_description">ਜਦੋਂ ਸਮੱਗਰੀ ਦੇ ਮੱਧ ਵਿੱਚ ਪਸੰਦ ਕਰਨ, ਗਾਹਕ ਬਣਨ ਜਾਂ ਪਾਲਣਾ ਕਰਨ ਲਈ ਇੱਕ ਛੋਟੀ ਰੀਮਾਈਂਡਰ ਹੁੰਦੀ ਹੈ। ਜੇ ਲੰਮੀ ਜਾਂ ਕਿਸੇ ਖਾਸ ਚੀਜ਼ ਬਾਰੇ, ਇਸ ਦੀ ਬਜਾਏ ਸਵੈ-ਪ੍ਰਚਾਰ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ।</string>
     <string name="category_filler_description">ਵਿਡੀਓ ਦੀ ਮੁੱਖ ਸਮੱਗਰੀ ਨੂੰ ਸਮਝਣ ਲਈ ਸਿਰਫ਼ ਫਿਲਰ ਜਾਂ ਹਾਸੇ-ਮਜ਼ਾਕ ਲਈ ਸ਼ਾਮਲ ਕੀਤੇ ਗਏ ਸਪਰਸ਼ ਦ੍ਰਿਸ਼ਾਂ ਲਈ ਜ਼ਰੂਰੀ ਨਹੀਂ ਹੈ।</string>
     <string name="category_music_offtopic_description">ਸਿਰਫ਼ ਸੰਗੀਤ ਵੀਡੀਓਜ਼ ਵਿੱਚ ਵਰਤਣ ਲਈ। ਇਹ ਵੀਡੀਓ ਦੇ ਭਾਗਾਂ ਨੂੰ ਕਵਰ ਕਰਨਾ ਚਾਹੀਦਾ ਹੈ ਨਾ ਕਿ ਅਧਿਕਾਰਤ ਮਿਸ਼ਰਣਾਂ ਦਾ ਹਿੱਸਾ। ਅੰਤ ਵਿੱਚ, ਵੀਡੀਓ ਨੂੰ ਜਿੰਨਾ ਸੰਭਵ ਹੋ ਸਕੇ Spotify ਜਾਂ ਕਿਸੇ ਹੋਰ ਮਿਸ਼ਰਤ ਸੰਸਕਰਣ ਵਰਗਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ, ਜਾਂ ਗੱਲ ਕਰਨ ਜਾਂ ਹੋਰ ਭਟਕਣਾ ਨੂੰ ਘੱਟ ਕਰਨਾ ਚਾਹੀਦਾ ਹੈ।</string>
-    <string name="update_available_text">ਇਸ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨ ਲਈ GitHub \'ਤੇ ਰਿਲੀਜ਼ਾਂ \'ਤੇ ਜਾਓ\?</string>
+    <string name="update_available_text">ਨਵਾਂ ਅੱਪਡੇਟ ਉਪਲਬਧ ਹੈ। GitHub ਰਿਲੀਜ਼ ਪੰਨੇ ਨੂੰ ਖੋਲ੍ਹਣ ਲਈ ਕਲਿੱਕ ਕਰੋ।</string>
     <string name="cannotDownload">ਇਸ ਸਟ੍ਰੀਮ ਨੂੰ ਡਾਊਨਲੋਡ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ।</string>
     <string name="importsuccess">ਸਬਸਕ੍ਰਾਈਬ ਕੀਤਾ</string>
     <string name="subscribeIsEmpty">ਪਹਿਲਾਂ ਕੁਝ ਚੈਨਲਾਂ ਨੂੰ ਸਬਸਕ੍ਰਾਈਬ ਕਰੋ।</string>
@@ -46,7 +46,7 @@
     <string name="import_from_yt">ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਆਯਾਤ ਕਰੋ</string>
     <string name="import_from_yt_summary">YouTube ਜਾਂ NewPipe ਤੋਂ</string>
     <string name="app_theme">ਥੀਮ</string>
-    <string name="server_error">ਸਰਵਰ ਵਿੱਚ ਕੋਈ ਸਮੱਸਿਆ ਹੈ। ਕੋਈ ਹੋਰ ਇੰਸਟੈਂਸ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ\?</string>
+    <string name="server_error">ਚੁਣੇ ਸਰਵਰ ਵਿੱਚ ਕੋਈ ਸਮੱਸਿਆ ਲੱਗਦੀ ਹੈ। ਕੋਈ ਹੋਰ ਇੰਸਟੈਂਸ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ।</string>
     <string name="unknown_error">ਨੈੱਟਵਰਕ ਤਰੁੱਟੀ।</string>
     <string name="error">ਕੁਝ ਤਰੁੱਟੀ ਹੋਈ ਹੈ।</string>
     <string name="empty">ਤੁਹਾਨੂੰ ਇੱਕ ਉਪਭੋਗਤਾ ਨਾਮ ਅਤੇ ਪਾਸਵਰਡ ਦਰਜ ਕਰਨਾ ਹੋਵੇਗਾ।</string>
@@ -447,4 +447,6 @@
     <string name="unsupported_file_format">ਅਸਮਰਥਿਤ ਫ਼ਾਈਲ ਫਾਰਮੈਟ: %1$s</string>
     <string name="mark_as_watched">ਵੇਖੇ ਗਏ ਵਜੋਂ ਮਾਰਕ ਕਰੋ</string>
     <string name="codecs">ਕੋਡੈਕਸ</string>
+    <string name="custom_playback_speed">ਕਸਟਮ ਗਤੀ</string>
+    <string name="custom_playback_speed_summary">ਆਮ ਪਲੇਅਰ ਨਾਲੋਂ ਵੱਖਰੀ ਪਲੇਬੈਕ ਸਪੀਡ ਦੀ ਵਰਤੋਂ ਕਰੋ।</string>
 </resources>
