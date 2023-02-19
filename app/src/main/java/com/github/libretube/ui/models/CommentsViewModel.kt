@@ -3,16 +3,15 @@ package com.github.libretube.ui.models
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.CommentsPage
 import com.github.libretube.extensions.TAG
 import com.github.libretube.ui.extensions.filterNonEmptyComments
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CommentsViewModel : ViewModel() {
-    private val scope = CoroutineScope(Dispatchers.IO)
     private var isLoading = false
 
     val commentsPage = MutableLiveData<CommentsPage?>()
@@ -25,7 +24,7 @@ class CommentsViewModel : ViewModel() {
 
     fun fetchComments() {
         videoId ?: return
-        scope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             isLoading = true
             val response = try {
                 RetrofitInstance.api.getComments(videoId!!)
@@ -42,7 +41,7 @@ class CommentsViewModel : ViewModel() {
 
     fun fetchNextComments() {
         if (isLoading || nextPage == null || videoId == null) return
-        scope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             isLoading = true
             val response = try {
                 RetrofitInstance.api.getCommentsNextPage(videoId!!, nextPage!!)
