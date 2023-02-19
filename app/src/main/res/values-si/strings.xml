@@ -85,7 +85,7 @@
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="update_available">නිකුතු අංකය %1$s ඇත</string>
-    <string name="update_available_text">එය බාගත කිරීමට GitHub හි නිකුතු වෙත යන්නද\?</string>
+    <string name="update_available_text">නව යාවත්කාලීන ලබා ගත හැක. GitHub නිකුතු පිටුව විවෘත කිරීමට ක්ලික් කරන්න.</string>
     <string name="appearance">පෙනුම</string>
     <string name="downloads">බාගත කිරීම්</string>
     <string name="video_format">වීඩියෝ ආකෘතිය</string>
@@ -326,7 +326,7 @@
     <string name="dlisinprogress">තවත් බාගත කිරීමක් දැනටමත් සිදු වෙමින් පවතී, කරුණාකර එය අවසන් වන තෙක් රැඳී සිටින්න.</string>
     <string name="vlcerror">VLC හි විවෘත කළ නොහැක. එය පිහිටුවා නැති විය හැකිය.</string>
     <string name="empty">ඔබ පරිශීලක නාමයක් සහ මුරපදයක් ඇතුළත් කළ යුතුය.</string>
-    <string name="server_error">සේවාදායකයේ ගැටලුවක් තිබේ. වෙනත් සේවාදායකයක් උත්සාහ කරන්නද\?</string>
+    <string name="server_error">තෝරාගත් සේවාදායකයේ ගැටලුවක් තිබේ. වෙනත් සේවාදායකයක් උත්සාහ කරන්න.</string>
     <string name="notgmail">මෙය Piped ගිණුමක් සඳහා ය.</string>
     <string name="defres">වීඩියෝ විභේදනය</string>
     <string name="playlistName">වාදන ලැයිස්තුවේ නම</string>
@@ -447,4 +447,6 @@
     <string name="mark_as_watched">නැරඹූ ලෙස ලකුණු කරන්න</string>
     <string name="unsupported_file_format">සහාය නොදක්වන ගොනු ආකෘතියකි: %1$s</string>
     <string name="codecs">කෝඩෙක්ස්</string>
+    <string name="custom_playback_speed">අභිරුචි වේගය</string>
+    <string name="custom_playback_speed_summary">සාමාන්‍ය වාදකයට වෙනස් වාදන වේගයක් භාවිතා කරන්න.</string>
 </resources>
