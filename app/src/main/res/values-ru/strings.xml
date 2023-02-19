@@ -225,7 +225,7 @@
     <string name="never">Никогда</string>
     <string name="autoRotatePlayer">Автоматический полноэкранный режим</string>
     <string name="pure_theme">Чистая тема</string>
-    <string name="pure_theme_summary">Чистая белая/чёрная тема</string>
+    <string name="pure_theme_summary">Чистая белая/черная тема</string>
     <string name="no_player_found">Внешний проигрыватель не найден. Убедитесь, что он у вас установлен.</string>
     <string name="data_saver_mode">Режим экономии трафика</string>
     <string name="search_history_summary">Запоминать историю поисков</string>
