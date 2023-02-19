@@ -6,13 +6,13 @@ import android.text.InputType
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.databinding.DialogTextPreferenceBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainThread
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -41,7 +41,7 @@ class RenamePlaylistDialog(
                 }
                 if (input == currentPlaylistName) return@setPositiveButton
                 val appContext = requireContext().applicationContext
-                CoroutineScope(Dispatchers.IO).launch {
+                lifecycleScope.launch(Dispatchers.IO) {
                     val success = try {
                         PlaylistsHelper.renamePlaylist(playlistId, binding.input.text.toString())
                     } catch (e: Exception) {

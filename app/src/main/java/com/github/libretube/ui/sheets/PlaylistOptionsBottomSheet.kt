@@ -1,6 +1,7 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
@@ -8,7 +9,6 @@ import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.awaitQuery
-import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.BackgroundHelper
@@ -16,10 +16,10 @@ import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.dialogs.DeletePlaylistDialog
 import com.github.libretube.ui.dialogs.RenamePlaylistDialog
 import com.github.libretube.ui.dialogs.ShareDialog
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 class PlaylistOptionsBottomSheet(
     private val playlistId: String,
@@ -68,7 +68,7 @@ class PlaylistOptionsBottomSheet(
                 // Clone the playlist to the users Piped account
                 getString(R.string.clonePlaylist) -> {
                     val appContext = context?.applicationContext
-                    CoroutineScope(Dispatchers.IO).launch {
+                    lifecycleScope.launch(Dispatchers.IO) {
                         val playlistId = PlaylistsHelper.clonePlaylist(
                             requireContext().applicationContext,
                             playlistId
@@ -95,12 +95,9 @@ class PlaylistOptionsBottomSheet(
                         .show(parentFragmentManager, null)
                 }
                 else -> {
-                    CoroutineScope(Dispatchers.IO).launch {
+                    lifecycleScope.launch(Dispatchers.IO) {
                         if (isBookmarked) {
-                            query {
-                                DatabaseHolder.Database.playlistBookmarkDao()
-                                    .deleteById(playlistId)
-                            }
+                            DatabaseHolder.Database.playlistBookmarkDao().deleteById(playlistId)
                         } else {
                             val bookmark = try {
                                 RetrofitInstance.api.getPlaylist(playlistId)
@@ -109,8 +106,10 @@ class PlaylistOptionsBottomSheet(
                             }.toPlaylistBookmark(playlistId)
                             DatabaseHolder.Database.playlistBookmarkDao().insertAll(bookmark)
                         }
+                        withContext(Dispatchers.Main) {
+                            dismiss()
+                        }
                     }
-                    dismiss()
                 }
             }
         }

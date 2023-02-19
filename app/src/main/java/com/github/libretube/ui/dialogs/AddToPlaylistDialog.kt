@@ -18,7 +18,6 @@ import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.ui.models.PlaylistViewModel
 import com.github.libretube.util.PlayingQueue
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -85,7 +84,7 @@ class AddToPlaylistDialog(
 
     private fun addToPlaylist(playlistId: String) {
         val appContext = context?.applicationContext ?: return
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             val streams = when {
                 videoId != null -> listOf(
                     RetrofitInstance.api.getStreams(videoId).toStreamItem(videoId)

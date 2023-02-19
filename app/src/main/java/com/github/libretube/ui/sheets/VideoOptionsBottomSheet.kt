@@ -2,6 +2,7 @@ package com.github.libretube.ui.sheets
 
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
@@ -20,7 +21,6 @@ import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.fragments.SubscriptionsFragment
 import com.github.libretube.util.PlayingQueue
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -77,11 +77,10 @@ class VideoOptionsBottomSheet(
                     shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
                 getString(R.string.play_next) -> {
-                    CoroutineScope(Dispatchers.IO).launch {
+                    lifecycleScope.launch(Dispatchers.IO) {
                         try {
                             PlayingQueue.addAsNext(
-                                RetrofitInstance.api.getStreams(videoId)
-                                    .toStreamItem(videoId)
+                                RetrofitInstance.api.getStreams(videoId).toStreamItem(videoId)
                             )
                         } catch (e: Exception) {
                             e.printStackTrace()
@@ -89,7 +88,7 @@ class VideoOptionsBottomSheet(
                     }
                 }
                 getString(R.string.add_to_queue) -> {
-                    CoroutineScope(Dispatchers.IO).launch {
+                    lifecycleScope.launch(Dispatchers.IO) {
                         try {
                             PlayingQueue.add(
                                 RetrofitInstance.api.getStreams(videoId)

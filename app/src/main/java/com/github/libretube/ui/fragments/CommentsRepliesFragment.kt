@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
@@ -19,7 +20,6 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.ui.adapters.CommentsAdapter
 import com.github.libretube.ui.extensions.filterNonEmptyComments
 import com.github.libretube.ui.models.CommentsViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -89,7 +89,7 @@ class CommentsRepliesFragment : Fragment() {
         nextPage: String,
         onFinished: (CommentsPage) -> Unit
     ) {
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             if (isLoading) return@launch
             isLoading = true
             repliesPage = try {

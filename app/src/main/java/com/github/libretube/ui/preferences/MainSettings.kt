@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commitNow
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import com.github.libretube.BuildConfig
 import com.github.libretube.R
@@ -12,9 +13,9 @@ import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.UpdateAvailableDialog
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainSettings : BasePreferenceFragment() {
     override val titleResourceId: Int = R.string.settings
@@ -84,10 +85,12 @@ class MainSettings : BasePreferenceFragment() {
 
         // checking for update: yes -> dialog, no -> snackBar
         update?.setOnPreferenceClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
+            lifecycleScope.launch {
                 // check for update
                 val updateInfo = try {
-                    RetrofitInstance.externalApi.getUpdateInfo()
+                    withContext(Dispatchers.IO) {
+                        RetrofitInstance.externalApi.getUpdateInfo()
+                    }
                 } catch (e: Exception) {
                     showSnackBar(R.string.unknown_error)
                     return@launch
