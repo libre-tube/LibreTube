@@ -20,6 +20,7 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.SearchAdapter
 import java.io.IOException
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
@@ -125,12 +126,10 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
     private fun addToHistory(query: String) {
         val searchHistoryEnabled =
             PreferenceHelper.getBoolean(PreferenceKeys.SEARCH_HISTORY_TOGGLE, true)
-        if (searchHistoryEnabled && query != "") {
-            DatabaseHelper.addToSearchHistory(
-                SearchHistoryItem(
-                    query = query
-                )
-            )
+        if (searchHistoryEnabled && query.isNotEmpty()) {
+            lifecycleScope.launch(Dispatchers.IO) {
+                DatabaseHelper.addToSearchHistory(SearchHistoryItem(query))
+            }
         }
     }
 }

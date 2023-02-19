@@ -5,7 +5,6 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.db.obj.WatchHistoryItem
-import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PreferenceHelper
 import kotlinx.coroutines.Dispatchers
@@ -38,16 +37,13 @@ object DatabaseHelper {
         }
     }
 
-    fun addToSearchHistory(searchHistoryItem: SearchHistoryItem) {
-        query {
-            Database.searchHistoryDao().insertAll(searchHistoryItem)
+    suspend fun addToSearchHistory(searchHistoryItem: SearchHistoryItem) {
+        Database.searchHistoryDao().insertAll(listOf(searchHistoryItem))
 
-            // delete the first watch history entry if the limit is reached
-            val searchHistory = Database.searchHistoryDao().getAll()
-            if (searchHistory.size > MAX_SEARCH_HISTORY_SIZE) {
-                Database.searchHistoryDao()
-                    .delete(searchHistory.first())
-            }
+        // delete the first watch history entry if the limit is reached
+        val searchHistory = Database.searchHistoryDao().getAll()
+        if (searchHistory.size > MAX_SEARCH_HISTORY_SIZE) {
+            Database.searchHistoryDao().delete(searchHistory.first())
         }
     }
 }
