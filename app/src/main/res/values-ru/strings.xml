@@ -56,9 +56,9 @@
     <string name="videos">Видео</string>
     <string name="changeLanguage">Язык</string>
     <string name="systemLanguage">Системный</string>
-    <string name="systemDefault">Системный</string>
+    <string name="systemDefault">Системная</string>
     <string name="lightTheme">Светлая</string>
-    <string name="darkTheme">Темная</string>
+    <string name="darkTheme">Тёмная</string>
     <string name="subscribers">%1$s подписчиков</string>
     <string name="startpage">Главная</string>
     <string name="import_from_yt_summary">Из YouTube или NewPipe</string>
