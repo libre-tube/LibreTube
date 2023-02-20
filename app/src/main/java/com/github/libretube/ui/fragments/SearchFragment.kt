@@ -13,11 +13,13 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.FragmentSearchBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.extensions.TAG
-import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.SearchHistoryAdapter
 import com.github.libretube.ui.adapters.SearchSuggestionsAdapter
 import com.github.libretube.ui.models.SearchViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
     private val binding by viewBinding(FragmentSearchBinding::bind)
@@ -76,18 +78,19 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     }
 
     private fun showHistory() {
-        val historyList = awaitQuery {
-            Database.searchHistoryDao().getAll().map { it.query }
-        }
-        if (historyList.isNotEmpty()) {
-            binding.suggestionsRecycler.adapter =
-                SearchHistoryAdapter(
+        lifecycleScope.launch {
+            val historyList = withContext(Dispatchers.IO) {
+                Database.searchHistoryDao().getAll().map { it.query }
+            }
+            if (historyList.isNotEmpty()) {
+                binding.suggestionsRecycler.adapter = SearchHistoryAdapter(
                     historyList,
                     (activity as MainActivity).searchView
                 )
-        } else {
-            binding.suggestionsRecycler.visibility = View.GONE
-            binding.historyEmpty.visibility = View.VISIBLE
+            } else {
+                binding.suggestionsRecycler.visibility = View.GONE
+                binding.historyEmpty.visibility = View.VISIBLE
+            }
         }
     }
 }

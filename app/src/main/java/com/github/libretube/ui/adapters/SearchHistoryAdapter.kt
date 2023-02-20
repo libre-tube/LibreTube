@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.SuggestionRowBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.SearchHistoryItem
-import com.github.libretube.extensions.query
 import com.github.libretube.ui.viewholders.SuggestionsViewHolder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 
 class SearchHistoryAdapter(
     private var historyList: List<String>,
@@ -36,10 +37,8 @@ class SearchHistoryAdapter(
 
             deleteHistory.setOnClickListener {
                 historyList -= historyQuery
-                query {
-                    Database.searchHistoryDao().delete(
-                        SearchHistoryItem(query = historyQuery)
-                    )
+                runBlocking(Dispatchers.IO) {
+                    Database.searchHistoryDao().delete(SearchHistoryItem(historyQuery))
                 }
                 notifyItemRemoved(position)
                 notifyItemRangeChanged(position, itemCount)

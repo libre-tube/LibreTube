@@ -47,9 +47,7 @@ object BackupHelper {
         } ?: return
 
         Database.watchHistoryDao().insertAll(backupFile.watchHistory.orEmpty())
-        Database.searchHistoryDao().insertAll(
-            *backupFile.searchHistory.orEmpty().toTypedArray()
-        )
+        Database.searchHistoryDao().insertAll(backupFile.searchHistory.orEmpty())
         Database.watchPositionDao().insertAll(
             *backupFile.watchPositions.orEmpty().toTypedArray()
         )
