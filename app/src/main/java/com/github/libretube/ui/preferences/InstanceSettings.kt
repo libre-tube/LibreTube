@@ -33,10 +33,15 @@ class InstanceSettings : BasePreferenceFragment() {
         setPreferencesFromResource(R.xml.instance_settings, rootKey)
 
         val instancePref = findPreference<ListPreference>(PreferenceKeys.FETCH_INSTANCE)!!
-        initCustomInstances(instancePref)
+        val authInstanceToggle = findPreference<SwitchPreferenceCompat>(
+            PreferenceKeys.AUTH_INSTANCE_TOGGLE
+        )!!
+        val authInstance = findPreference<ListPreference>(PreferenceKeys.AUTH_INSTANCE)!!
+        initInstancesPref(listOf(instancePref, authInstance))
+
         instancePref.setOnPreferenceChangeListener { _, newValue ->
             RetrofitInstance.url = newValue.toString()
-            if (!PreferenceHelper.getBoolean(PreferenceKeys.AUTH_INSTANCE_TOGGLE, false)) {
+            if (!authInstanceToggle.isChecked) {
                 RetrofitInstance.authUrl = newValue.toString()
                 logoutAndUpdateUI()
             }
@@ -45,12 +50,8 @@ class InstanceSettings : BasePreferenceFragment() {
             true
         }
 
-        val authInstance = findPreference<ListPreference>(PreferenceKeys.AUTH_INSTANCE)
-        initCustomInstances(authInstance!!)
         // hide auth instance if option deselected
-        if (!PreferenceHelper.getBoolean(PreferenceKeys.AUTH_INSTANCE_TOGGLE, false)) {
-            authInstance.isVisible = false
-        }
+        authInstance.isVisible = authInstanceToggle.isChecked
         authInstance.setOnPreferenceChangeListener { _, newValue ->
             // save new auth url
             RetrofitInstance.authUrl = newValue.toString()
@@ -59,9 +60,7 @@ class InstanceSettings : BasePreferenceFragment() {
             true
         }
 
-        val authInstanceToggle =
-            findPreference<SwitchPreferenceCompat>(PreferenceKeys.AUTH_INSTANCE_TOGGLE)
-        authInstanceToggle?.setOnPreferenceChangeListener { _, newValue ->
+        authInstanceToggle.setOnPreferenceChangeListener { _, newValue ->
             authInstance.isVisible = newValue == true
             // either use new auth url or the normal api url if auth instance disabled
             RetrofitInstance.authUrl = if (newValue == false) {
@@ -121,7 +120,7 @@ class InstanceSettings : BasePreferenceFragment() {
         }
     }
 
-    private fun initCustomInstances(instancePref: ListPreference) {
+    private fun initInstancesPref(instancePrefs: List<ListPreference>) {
         val appContext = requireContext().applicationContext
         lifecycleScope.launchWhenCreated {
             val customInstances = withContext(Dispatchers.IO) {
@@ -148,13 +147,15 @@ class InstanceSettings : BasePreferenceFragment() {
             instances.addAll(customInstances.map { Instances(it.name, it.apiUrl) })
 
             runOnUiThread {
-                // add custom instances to the list preference
-                instancePref.entries = instances.map { it.name }.toTypedArray()
-                instancePref.entryValues = instances.map { it.apiUrl }.toTypedArray()
-                instancePref.summaryProvider =
-                    Preference.SummaryProvider<ListPreference> { preference ->
-                        preference.entry
-                    }
+                for (instancePref in instancePrefs) {
+                    // add custom instances to the list preference
+                    instancePref.entries = instances.map { it.name }.toTypedArray()
+                    instancePref.entryValues = instances.map { it.apiUrl }.toTypedArray()
+                    instancePref.summaryProvider =
+                        Preference.SummaryProvider<ListPreference> { preference ->
+                            preference.entry
+                        }
+                }
             }
         }
     }
