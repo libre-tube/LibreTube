@@ -449,4 +449,5 @@
     <string name="unsupported_file_format">ଅସମର୍ଥିତ ଫାଇଲ୍ ଫର୍ମାଟ୍: %1$s</string>
     <string name="custom_playback_speed">କଷ୍ଟମ୍ ବେଗ</string>
     <string name="custom_playback_speed_summary">ସାଧାରଣ ପ୍ଲେୟାର ଅପେକ୍ଷା ଏକ ଭିନ୍ନ ପ୍ଲେକ୍ ବେଗ ବ୍ୟବହାର କରନ୍ତୁ ।</string>
+    <string name="category">ବର୍ଗ</string>
 </resources>
