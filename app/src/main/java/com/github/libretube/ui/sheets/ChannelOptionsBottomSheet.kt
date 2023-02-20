@@ -11,7 +11,8 @@ import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.dialogs.ShareDialog
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * Dialog with different options for a selected video.
@@ -41,7 +42,7 @@ class ChannelOptionsBottomSheet(
                 }
                 getString(R.string.play_latest_videos) -> {
                     try {
-                        val channel = runBlocking {
+                        val channel = withContext(Dispatchers.IO) {
                             RetrofitInstance.api.getChannel(channelId)
                         }
                         channel.relatedStreams.firstOrNull()?.url?.toID()?.let {
@@ -57,7 +58,7 @@ class ChannelOptionsBottomSheet(
                 }
                 getString(R.string.playOnBackground) -> {
                     try {
-                        val channel = runBlocking {
+                        val channel = withContext(Dispatchers.IO) {
                             RetrofitInstance.api.getChannel(channelId)
                         }
                         channel.relatedStreams.firstOrNull()?.url?.toID()?.let {

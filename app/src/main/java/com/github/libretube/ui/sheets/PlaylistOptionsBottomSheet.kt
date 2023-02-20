@@ -1,7 +1,6 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
-import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
@@ -17,8 +16,6 @@ import com.github.libretube.ui.dialogs.DeletePlaylistDialog
 import com.github.libretube.ui.dialogs.RenamePlaylistDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class PlaylistOptionsBottomSheet(
@@ -55,28 +52,26 @@ class PlaylistOptionsBottomSheet(
             when (optionsList[which]) {
                 // play the playlist in the background
                 getString(R.string.playOnBackground) -> {
-                    runBlocking {
-                        val playlist = PlaylistsHelper.getPlaylist(playlistId)
-                        if (playlist.relatedStreams.isEmpty()) return@runBlocking
+                    val playlist = withContext(Dispatchers.IO) {
+                        PlaylistsHelper.getPlaylist(playlistId)
+                    }
+                    playlist.relatedStreams.firstOrNull()?.let {
                         BackgroundHelper.playOnBackground(
-                            context = requireContext(),
-                            videoId = playlist.relatedStreams[0].url!!.toID(),
+                            requireContext(),
+                            it.url!!.toID(),
                             playlistId = playlistId
                         )
                     }
                 }
                 // Clone the playlist to the users Piped account
                 getString(R.string.clonePlaylist) -> {
-                    val appContext = context?.applicationContext
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        val playlistId = PlaylistsHelper.clonePlaylist(
-                            requireContext().applicationContext,
-                            playlistId
-                        )
-                        appContext?.toastFromMainThread(
-                            if (playlistId != null) R.string.playlistCloned else R.string.server_error
-                        )
+                    val context = requireContext()
+                    val playlistId = withContext(Dispatchers.IO) {
+                        PlaylistsHelper.clonePlaylist(context, playlistId)
                     }
+                    context.toastFromMainThread(
+                        if (playlistId != null) R.string.playlistCloned else R.string.server_error
+                    )
                 }
                 // share the playlist
                 getString(R.string.share) -> {
@@ -87,7 +82,7 @@ class PlaylistOptionsBottomSheet(
                 getString(R.string.deletePlaylist) -> {
                     DeletePlaylistDialog(playlistId, playlistType) {
                         // try to refresh the playlists in the library on deletion success
-                        onDelete.invoke()
+                        onDelete()
                     }.show(parentFragmentManager, null)
                 }
                 getString(R.string.renamePlaylist) -> {
@@ -95,19 +90,16 @@ class PlaylistOptionsBottomSheet(
                         .show(parentFragmentManager, null)
                 }
                 else -> {
-                    lifecycleScope.launch(Dispatchers.IO) {
+                    withContext(Dispatchers.IO) {
                         if (isBookmarked) {
                             DatabaseHolder.Database.playlistBookmarkDao().deleteById(playlistId)
                         } else {
                             val bookmark = try {
                                 RetrofitInstance.api.getPlaylist(playlistId)
                             } catch (e: Exception) {
-                                return@launch
+                                return@withContext
                             }.toPlaylistBookmark(playlistId)
                             DatabaseHolder.Database.playlistBookmarkDao().insertAll(bookmark)
-                        }
-                        withContext(Dispatchers.Main) {
-                            dismiss()
                         }
                     }
                 }
