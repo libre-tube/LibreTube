@@ -20,7 +20,6 @@ import android.text.format.DateUtils
 import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
 import android.util.Base64
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -49,7 +48,6 @@ import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
-import com.github.libretube.api.obj.Token
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentPlayerBinding
@@ -58,7 +56,6 @@ import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.ShareObjectType
-import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.hideKeyboard
