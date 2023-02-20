@@ -447,4 +447,5 @@
     <string name="unsupported_file_format">Desteklenmeyen dosya biçimi: %1$s</string>
     <string name="custom_playback_speed">Özel hız</string>
     <string name="custom_playback_speed_summary">Normal oynatıcıdan farklı oynatma hızı kullan.</string>
+    <string name="category">Kategori</string>
 </resources>
