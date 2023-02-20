@@ -24,6 +24,7 @@ import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.PlayerGestureControlsViewBinding
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.normalize
+import com.github.libretube.extensions.round
 import com.github.libretube.helpers.AudioHelper
 import com.github.libretube.helpers.BrightnessHelper
 import com.github.libretube.helpers.PlayerHelper
@@ -309,52 +310,46 @@ internal class CustomExoPlayerView(
                     context.getString(R.string.playback_speed),
                     R.drawable.ic_speed,
                     {
-                        "${
-                            player?.playbackParameters?.speed
-                                .toString()
-                                .replace(".0", "")
-                        }x"
+                        "${player?.playbackParameters?.speed?.round(2)}x"
                     }
                 ) {
                     onPlaybackSpeedClicked()
                 }
             )
 
-            if (playerOptionsInterface != null) {
-                items.add(
-                    BottomSheetItem(
-                        context.getString(R.string.quality),
-                        R.drawable.ic_hd,
-                        { "${player?.videoSize?.height}p" }
-                    ) {
-                        playerOptionsInterface?.onQualityClicked()
-                    }
-                )
-                items.add(
-                    BottomSheetItem(
-                        context.getString(R.string.audio_track),
-                        R.drawable.ic_audio,
-                        {
-                            trackSelector?.parameters?.preferredAudioLanguages?.firstOrNull()
-                        }
-                    ) {
-                        playerOptionsInterface?.onAudioStreamClicked()
-                    }
-                )
-                items.add(
-                    BottomSheetItem(
-                        context.getString(R.string.captions),
-                        R.drawable.ic_caption,
-                        {
-                            if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
-                                trackSelector!!.parameters.preferredTextLanguages[0]
-                            } else {
-                                context.getString(R.string.none)
+            playerOptionsInterface?.let {
+                items.addAll(
+                    listOf(
+                        BottomSheetItem(
+                            context.getString(R.string.quality),
+                            R.drawable.ic_hd,
+                            { "${player?.videoSize?.height}p" }
+                        ) {
+                            it.onQualityClicked()
+                        },
+                        BottomSheetItem(
+                            context.getString(R.string.audio_track),
+                            R.drawable.ic_audio,
+                            {
+                                trackSelector?.parameters?.preferredAudioLanguages?.firstOrNull()
                             }
+                        ) {
+                            it.onAudioStreamClicked()
+                        },
+                        BottomSheetItem(
+                            context.getString(R.string.captions),
+                            R.drawable.ic_caption,
+                            {
+                                if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
+                                    trackSelector!!.parameters.preferredTextLanguages[0]
+                                } else {
+                                    context.getString(R.string.none)
+                                }
+                            }
+                        ) {
+                            it.onCaptionsClicked()
                         }
-                    ) {
-                        playerOptionsInterface?.onCaptionsClicked()
-                    }
+                    )
                 )
             }
 
