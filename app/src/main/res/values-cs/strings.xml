@@ -447,4 +447,5 @@
     <string name="unsupported_file_format">Nepodporovaný formát souboru: %1$s</string>
     <string name="custom_playback_speed">Vlastní rychlost</string>
     <string name="custom_playback_speed_summary">Použít jinou rychlost přehrávání než u běžného přehrávače.</string>
+    <string name="category">Kategorie</string>
 </resources>
