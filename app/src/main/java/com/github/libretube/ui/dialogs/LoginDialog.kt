@@ -3,6 +3,7 @@ package com.github.libretube.ui.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
@@ -14,7 +15,6 @@ import com.github.libretube.api.obj.Token
 import com.github.libretube.databinding.DialogLoginBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.helpers.PreferenceHelper
-import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.serialization.decodeFromString
 import retrofit2.HttpException
@@ -113,6 +113,6 @@ class LoginDialog(
     }
 
     private fun isEmail(text: String): Boolean {
-        return TextUtils.EMAIL_REGEX.toRegex().matches(text)
+        return Patterns.EMAIL_ADDRESS.toRegex().matches(text)
     }
 }

@@ -15,11 +15,6 @@ object TextUtils {
     const val SEPARATOR = " • "
 
     /**
-     * Regex to check for e-mails
-     */
-    const val EMAIL_REGEX = "^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})"
-
-    /**
      * Reserved characters by unix which can not be used for file name.
      */
     const val RESERVED_CHARS = "?:\"*|/\\<>\u0000"
