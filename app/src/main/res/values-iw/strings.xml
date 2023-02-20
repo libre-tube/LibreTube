@@ -449,4 +449,5 @@
     <string name="unsupported_file_format">סוג הקובץ לא נתמך: %1$s</string>
     <string name="custom_playback_speed">מהירות מותאמת אישית</string>
     <string name="custom_playback_speed_summary">להשתמש במהירות נגינה שונה מהנגן הרגיל.</string>
+    <string name="category">קטגוריה</string>
 </resources>

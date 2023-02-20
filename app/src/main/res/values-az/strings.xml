@@ -449,4 +449,5 @@
     <string name="mark_as_watched">Baxılmış kimi nişanla</string>
     <string name="custom_playback_speed_summary">Adi oynadıcıdan ayrı oynatma sürəti istifadə et.</string>
     <string name="custom_playback_speed">Fərdi sürət</string>
+    <string name="category">Kateqoriya</string>
 </resources>

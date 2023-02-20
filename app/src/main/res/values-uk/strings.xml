@@ -449,4 +449,5 @@
     <string name="unsupported_file_format">Непідтримуваний формат файлу: %1$s</string>
     <string name="custom_playback_speed">Користувацька швидкість</string>
     <string name="custom_playback_speed_summary">Використовувати іншу швидкість відтворення, ніж для звичайного програвача.</string>
+    <string name="category">Категорія</string>
 </resources>

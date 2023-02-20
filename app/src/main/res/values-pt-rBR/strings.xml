@@ -449,4 +449,5 @@
     <string name="mark_as_watched">Marcar como visto</string>
     <string name="custom_playback_speed">Velocidade personalizada</string>
     <string name="custom_playback_speed_summary">Use uma velocidade de reprodução diferente da do reprodutor normal.</string>
+    <string name="category">Categoria</string>
 </resources>
