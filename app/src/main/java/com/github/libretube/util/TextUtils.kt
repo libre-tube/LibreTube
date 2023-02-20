@@ -4,8 +4,11 @@ import android.icu.text.RelativeDateTimeFormatter
 import android.os.Build
 import android.text.format.DateUtils
 import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
+import java.time.temporal.ChronoUnit
 import java.util.*
 import kotlin.time.Duration
 import kotlinx.datetime.LocalDate
@@ -22,10 +25,6 @@ object TextUtils {
      * Reserved characters by unix which can not be used for file name.
      */
     const val RESERVED_CHARS = "?:\"*|/\\<>\u0000"
-
-    private const val weekInMillis: Long = 604800016
-    private const val monthInMillis: Long = 2629800000
-    private const val yearInMillis: Long = 31557600000
 
     /**
      * Localize the date from a time string
@@ -61,15 +60,19 @@ object TextUtils {
     }
 
     fun formatRelativeDate(unixTime: Long): CharSequence {
-        val timeDiff = Instant.now().toEpochMilli() - unixTime
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && timeDiff > weekInMillis) {
-            val fmt = RelativeDateTimeFormatter.getInstance()
+        val date = LocalDateTime.ofInstant(Instant.ofEpochMilli(unixTime), ZoneId.systemDefault())
+        val now = LocalDateTime.now()
+        val weeks = date.until(now, ChronoUnit.WEEKS)
+
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && weeks >= 1) {
+            val months = date.until(now, ChronoUnit.MONTHS)
             val (timeFormat, time) = when {
-                timeDiff >= yearInMillis -> RelativeDateTimeFormatter.RelativeUnit.YEARS to timeDiff / yearInMillis
-                timeDiff >= monthInMillis -> RelativeDateTimeFormatter.RelativeUnit.MONTHS to timeDiff / monthInMillis
-                else -> RelativeDateTimeFormatter.RelativeUnit.WEEKS to timeDiff / weekInMillis
+                months / 12 > 0 -> RelativeDateTimeFormatter.RelativeUnit.YEARS to months / 12
+                months > 0 -> RelativeDateTimeFormatter.RelativeUnit.MONTHS to months
+                else -> RelativeDateTimeFormatter.RelativeUnit.WEEKS to weeks
             }
-            fmt.format(time.toDouble(), RelativeDateTimeFormatter.Direction.LAST, timeFormat)
+            RelativeDateTimeFormatter.getInstance()
+                .format(time.toDouble(), RelativeDateTimeFormatter.Direction.LAST, timeFormat)
         } else {
             DateUtils.getRelativeTimeSpanString(unixTime)
         }
