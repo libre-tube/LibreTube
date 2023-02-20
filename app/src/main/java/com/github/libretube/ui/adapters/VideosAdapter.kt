@@ -142,7 +142,7 @@ class VideosAdapter(
                 video.views.formatShort() + " " +
                 root.context.getString(R.string.views_placeholder) +
                 TextUtils.SEPARATOR + video.uploaded?.let {
-                    DateUtils.getRelativeTimeSpanString(it)
+                    TextUtils.formatRelativeDate(it)
                 }
             video.duration?.let { thumbnailDuration.setFormattedDuration(it, video.isShort) }
             channelImage.setOnClickListener {
@@ -174,7 +174,7 @@ class VideosAdapter(
                 video.views.formatShort() + " " +
                 root.context.getString(R.string.views_placeholder) +
                 TextUtils.SEPARATOR + video.uploaded?.let {
-                    DateUtils.getRelativeTimeSpanString(it)
+                    TextUtils.formatRelativeDate(it)
                 }
 
             thumbnailDuration.text =
