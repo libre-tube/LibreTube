@@ -39,6 +39,7 @@ class CreatePlaylistDialog(
                     appContext?.toastFromMainThread(
                         if (playlistId != null) R.string.playlistCloned else R.string.server_error
                     )
+                    dismiss()
                 }
             } ?: run {
                 Toast.makeText(context, R.string.invalid_url, Toast.LENGTH_SHORT).show()
