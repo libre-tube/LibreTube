@@ -443,6 +443,7 @@
     <string name="mark_as_watched">Mark as watched</string>
     <string name="custom_playback_speed">Custom speed</string>
     <string name="custom_playback_speed_summary">Use a different playback speed than for the normal player.</string>
+    <string name="category">Category</string>
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
     <string name="download_channel_description">Shows a notification when downloading media.</string>

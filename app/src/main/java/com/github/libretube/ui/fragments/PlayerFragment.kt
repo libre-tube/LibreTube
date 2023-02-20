@@ -983,6 +983,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         val description = streams.description
 
         setupDescription(binding.playerDescription, description)
+        binding.videoCategory.text = "${context?.getString(R.string.category)}: ${streams.category}"
 
         binding.playerChannel.setOnClickListener {
             val activity = view?.context as MainActivity
