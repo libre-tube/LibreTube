@@ -57,6 +57,7 @@ class PlaylistOptionsBottomSheet(
                 getString(R.string.playOnBackground) -> {
                     runBlocking {
                         val playlist = PlaylistsHelper.getPlaylist(playlistId)
+                        if (playlist.relatedStreams.isEmpty()) return@runBlocking
                         BackgroundHelper.playOnBackground(
                             context = requireContext(),
                             videoId = playlist.relatedStreams[0].url!!.toID(),
