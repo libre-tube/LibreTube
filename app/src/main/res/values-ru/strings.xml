@@ -447,4 +447,5 @@
     <string name="unsupported_file_format">Неподдерживаемый формат файла: %1$s</string>
     <string name="custom_playback_speed">Пользовательская скорость</string>
     <string name="custom_playback_speed_summary">Используйте скорость воспроизведения, отличную от скорости обычного плеера.</string>
+    <string name="category">Категория</string>
 </resources>
