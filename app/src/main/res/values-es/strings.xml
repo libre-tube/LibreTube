@@ -449,4 +449,5 @@
     <string name="unsupported_file_format">Formato de archivo no compatible: %1$s</string>
     <string name="custom_playback_speed">Velocidad personalizada</string>
     <string name="custom_playback_speed_summary">Utilice una velocidad de reproducción diferente a la del reproductor normal.</string>
+    <string name="category">Categoría</string>
 </resources>
