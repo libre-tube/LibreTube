@@ -1,5 +1,9 @@
 package com.github.libretube.util
 
+import android.icu.text.RelativeDateTimeFormatter
+import android.os.Build
+import android.text.format.DateUtils
+import java.time.Instant
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.*
@@ -18,6 +22,10 @@ object TextUtils {
      * Reserved characters by unix which can not be used for file name.
      */
     const val RESERVED_CHARS = "?:\"*|/\\<>\u0000"
+
+    private const val weekInMillis: Long = 604800016
+    private const val monthInMillis: Long = 2629800000
+    private const val yearInMillis: Long = 31557600000
 
     /**
      * Localize the date from a time string
@@ -49,6 +57,21 @@ object TextUtils {
                 "youtu.be" -> it.pathSegments.lastOrNull()
                 else -> null
             }
+        }
+    }
+
+    fun formatRelativeDate(unixTime: Long): CharSequence {
+        val timeDiff = Instant.now().toEpochMilli() - unixTime
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && timeDiff > weekInMillis) {
+            val fmt = RelativeDateTimeFormatter.getInstance()
+            val (timeFormat, time) = when {
+                timeDiff >= yearInMillis -> RelativeDateTimeFormatter.RelativeUnit.YEARS to timeDiff / yearInMillis
+                timeDiff >= monthInMillis -> RelativeDateTimeFormatter.RelativeUnit.MONTHS to timeDiff / monthInMillis
+                else -> RelativeDateTimeFormatter.RelativeUnit.WEEKS to timeDiff / weekInMillis
+            }
+            fmt.format(time.toDouble(), RelativeDateTimeFormatter.Direction.LAST, timeFormat)
+        } else {
+            DateUtils.getRelativeTimeSpanString(unixTime)
         }
     }
 }
