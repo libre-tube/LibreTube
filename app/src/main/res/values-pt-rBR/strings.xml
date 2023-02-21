@@ -155,7 +155,7 @@
     <string name="shareTo">Compartilhar URL para</string>
     <string name="legacyIcon">Legado perdido</string>
     <string name="flameIcon">Chama voadora</string>
-    <string name="instance_summary">Piped, sessão e inscrições</string>
+    <string name="instance_summary">Piped, sessão e conta</string>
     <string name="instance_name">Nome da instância</string>
     <string name="instance_api_url">URL para API de instância</string>
     <string name="addInstance">Adicionar instância</string>
@@ -448,4 +448,6 @@
     <string name="custom_playback_speed">Velocidade personalizada</string>
     <string name="custom_playback_speed_summary">Use uma velocidade de reprodução diferente da do reprodutor normal.</string>
     <string name="category">Categoria</string>
+    <string name="normal_views">%1$s visualizações%2$s</string>
+    <string name="trending_views">%1$s • %2$s visualizações • %3$s</string>
 </resources>
