@@ -338,7 +338,6 @@
     <string name="default_load_interval">默认</string>
     <string name="playback_pitch">音调</string>
     <string name="progressive_load_interval">渐进加载间隔大小</string>
-    <string name="views_placeholder">观看</string>
     <string name="filename">文件名</string>
     <string name="invalid_filename">无效的文件名！</string>
     <string name="playlists_order">播放列表顺序</string>

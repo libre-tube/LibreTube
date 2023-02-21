@@ -332,7 +332,6 @@
     <string name="wifi">Wi-Fi</string>
     <string name="navigation_bar">Navigasjonsfelt</string>
     <string name="select_at_least_one">Velg minst ett element</string>
-    <string name="views_placeholder">visninger</string>
     <string name="default_load_interval">Forvalg</string>
     <string name="limit_hls">Begrens HLS til 1080p</string>
     <string name="filename">Filnavn</string>

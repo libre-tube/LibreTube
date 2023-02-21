@@ -319,7 +319,6 @@
     <string name="limit_hls">HLS auf 1080p beschränken</string>
     <string name="save_feed_summary">Lade den Abo-Feed im Hintergrund und verhindere, dass er automatisch aktualisiert wird.</string>
     <string name="delete">Aus Downloads löschen</string>
-    <string name="views_placeholder">Aufrufe</string>
     <string name="skip_buttons_summary">Schaltflächen anzeigen, um zum nächsten oder vorherigen Video zu springen.</string>
     <string name="resize_mode_zoom">Vergrößern</string>
     <string name="repeat_mode">Dauerschleife</string>

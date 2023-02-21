@@ -333,7 +333,6 @@
     <string name="category_outro_description">Informação após o final. Não para conclusões com informações.</string>
     <string name="playing_queue">Fila de reprodução</string>
     <string name="queue">Fila de espera</string>
-    <string name="views_placeholder">visualizações</string>
     <string name="progressive_load_interval_summary">Um valor mais baixo pode acelerar o carregamento inicial do vídeo.</string>
     <string name="default_load_interval">Padrão</string>
     <string name="playback_pitch">Passo</string>

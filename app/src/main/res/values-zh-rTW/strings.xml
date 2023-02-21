@@ -259,7 +259,6 @@
     <string name="community">社群</string>
     <string name="require_restart">需要重新啟動APP</string>
     <string name="auth_instance_summary">授權呼叫時使用不同的實例。</string>
-    <string name="views_placeholder">觀看次數</string>
     <string name="concurrent_downloads">最大並行下載數</string>
     <string name="concurrent_downloads_limit_reached">已達到最大並行下載數。</string>
     <string name="unknown">未知</string>

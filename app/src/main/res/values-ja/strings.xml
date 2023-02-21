@@ -253,7 +253,6 @@
     <string name="playerAudioQuality">音声の品質</string>
     <string name="best_quality">最高</string>
     <string name="worst_quality">最低</string>
-    <string name="views_placeholder">回視聴</string>
     <string name="playlistCloned">プレイリストを複製しました</string>
     <string name="confirm_unsubscribe">%1$s の登録を解除しますか？</string>
     <string name="confirm_unsubscribing_summary">登録を解除する前に確認します。</string>

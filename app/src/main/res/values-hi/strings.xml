@@ -133,7 +133,6 @@
     <string name="end_time">समय समाप्त</string>
     <string name="notification_time">सूचना का समय</string>
     <string name="notification_time_summary">समय अवधि जिसमें सूचनाओं को दिखाने की अनुमति है।</string>
-    <string name="views_placeholder">व्यूज</string>
     <string name="birdIcon">बूसटड पक्षी</string>
     <string name="channel_name_az">चैनल का नाम (ए-जेड)</string>
     <string name="channel_name_za">चैनल का नाम (जेड-ए)</string>

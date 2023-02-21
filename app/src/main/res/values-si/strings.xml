@@ -106,7 +106,6 @@
     <string name="downloads_directory">ෆෝල්ඩරය බාගත කරන්න</string>
     <string name="sdcard">SD කාඩ්</string>
     <string name="shareTo">URL එක බෙදාගන්න</string>
-    <string name="views_placeholder">බැලීම්</string>
     <string name="views">%1$s බැලීම්</string>
     <string name="defaultIcon">පෙරනිමිය</string>
     <string name="color_accent">අවධාරණ</string>

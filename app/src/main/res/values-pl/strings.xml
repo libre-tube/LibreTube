@@ -336,7 +336,6 @@
     <string name="show_more">Pokaż więcej</string>
     <string name="time_code">Kod czasowy (sekundy)</string>
     <string name="playback_pitch">Wysokość dźwięku</string>
-    <string name="views_placeholder">wyświetleń</string>
     <string name="progressive_load_interval">Wstępne wczytywanie wideo</string>
     <string name="default_load_interval">Domyślny</string>
     <string name="filename">Nazwa pliku</string>

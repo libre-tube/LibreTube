@@ -302,7 +302,6 @@
     <string name="mobile_data">মোবাইল ডেটা</string>
     <string name="local_subscriptions">লোকাল সাবস্ক্রিপশন</string>
     <string name="seekbar_preview_summary">প্লেব্যাক ইন্ডিকেটর টানার সময় স্ন্যাপশট দেখান।</string>
-    <string name="views_placeholder">ভিউস</string>
     <string name="player_resize_mode">রিসাইজ মোড</string>
     <string name="break_reminder_time">মনে করানোর আগের সময়</string>
     <string name="sb_skip_manual">ম্যানুয়ালি স্কিপ করুন</string>

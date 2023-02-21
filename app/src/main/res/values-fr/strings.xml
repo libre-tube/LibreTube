@@ -334,7 +334,6 @@
     <string name="background_channel_name">Mode arrière-plan</string>
     <string name="limit_hls">Limiter le HLS à 1080p</string>
     <string name="push_channel_description">Affiche une notification lorsque de nouveaux flux sont disponibles.</string>
-    <string name="views_placeholder">vues</string>
     <string name="progressive_load_interval">Taille de l\'intervalle de charge progressive</string>
     <string name="progressive_load_interval_summary">Une valeur inférieure peut accélérer le chargement initial de la vidéo.</string>
     <string name="default_load_interval">Par défaut</string>

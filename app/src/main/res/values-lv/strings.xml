@@ -312,7 +312,6 @@
     <string name="trending_layout">Citādāks tendenču izkārtojums</string>
     <string name="renamePlaylist">Pārsaukt atskaņošanas sarakstu</string>
     <string name="new_videos_badge">Jauno video indikators</string>
-    <string name="views_placeholder">skatījumi</string>
     <string name="skip_segment">Izlaist segmentu</string>
     <string name="sb_skip_manual">Izlaist manuāli</string>
     <string name="sb_skip_manual_summary">Neizlaiž segmentus automātiski, vienmēr vispirms pajautā.</string>

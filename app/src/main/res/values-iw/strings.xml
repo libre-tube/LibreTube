@@ -335,7 +335,6 @@
     <string name="playback_pitch">גובה צליל</string>
     <string name="default_load_interval">ברירת מחדל</string>
     <string name="limit_hls">הגבלת שידור חי ל־1080p</string>
-    <string name="views_placeholder">צפיות</string>
     <string name="progressive_load_interval_summary">ערך נמוך יותר עשוי להאיץ את טעינת הסרטון הראשונית.</string>
     <string name="progressive_load_interval">גודל מרווח טעינה במקטעים</string>
     <string name="change_region">כנראה שהמובילים לא זמינים לאזור הנוכחי. נא לבחור באזור אחר בהגדרות.</string>

@@ -329,7 +329,6 @@
     <string name="trending_layout">Bố cục thay thế cho trending</string>
     <string name="renamePlaylist">Đổi tên playlist</string>
     <string name="mobile_data">Dữ liệu di động</string>
-    <string name="views_placeholder">lượt xem</string>
     <string name="play_next">Tiếp theo</string>
     <string name="navigation_bar">Thanh điều hướng</string>
     <string name="limit_hls">Đặt giới hạn HLS thành 1080p</string>

@@ -316,7 +316,6 @@
     <string name="navigation_bar">Barra de navegação</string>
     <string name="select_at_least_one">Por favor, selecione pelo menos um item</string>
     <string name="download_channel_description">Exibe uma notificação ao baixar mídia.</string>
-    <string name="views_placeholder">visualizações</string>
     <string name="export_subscriptions">Exportar inscrições</string>
     <string name="history_size">Tamanho máximo do histórico</string>
     <string name="resize_mode_zoom">Ampliar</string>

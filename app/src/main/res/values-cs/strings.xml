@@ -338,7 +338,6 @@
     <string name="progressive_load_interval_summary">Nižší hodnota může urychlit počáteční načítání videa.</string>
     <string name="default_load_interval">Výchozí</string>
     <string name="playback_pitch">Výška</string>
-    <string name="views_placeholder">zhlédnutí</string>
     <string name="invalid_filename">Nesprávný název souboru!</string>
     <string name="filename">Název souboru</string>
     <string name="playlists_order">Pořadí playlistů</string>

@@ -337,7 +337,6 @@
     <string name="progressive_load_interval">Yükselen yükleme aralığı boyutu</string>
     <string name="default_load_interval">Varsayılan</string>
     <string name="progressive_load_interval_summary">Daha düşük bir değer, ilk video yüklemesini hızlandırabilir.</string>
-    <string name="views_placeholder">görüntüleme</string>
     <string name="playback_pitch">Ses yüksekliği</string>
     <string name="playlists_order">Oynatma listesi sırası</string>
     <string name="playlistNameReversed">Oynatma listesi adı (ters)</string>

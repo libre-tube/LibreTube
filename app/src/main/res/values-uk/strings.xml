@@ -338,7 +338,6 @@
     <string name="trending_layout">Альтернативний вигляд трендів</string>
     <string name="renamePlaylist">Перейменувати добірку</string>
     <string name="mobile_data">Мобільні дані</string>
-    <string name="views_placeholder">переглядів</string>
     <string name="filename">Назва файлу</string>
     <string name="invalid_filename">Неприпустима назва файлу!</string>
     <string name="recentlyUpdated">Нещодавно оновлені</string>

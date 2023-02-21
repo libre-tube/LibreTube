@@ -315,7 +315,6 @@
     <string name="background_channel_description">Приказује обавештење са дугмадима за контролу аудио плејера.</string>
     <string name="push_channel_description">Приказује обавештење када су нови стримови доступни.</string>
     <string name="push_channel_name">Нотификацијски радник</string>
-    <string name="views_placeholder">прегледа</string>
     <string name="device_info">О уређају</string>
     <string name="delete">Избриши из преузимања</string>
     <string name="wifi">Wi-Fi</string>

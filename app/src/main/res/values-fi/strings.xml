@@ -202,5 +202,4 @@
     <string name="autoplay_summary">Automaattisesti toistaa seuraavan videon kun nykyinen on päättynyt.</string>
     <string name="clonePlaylist">Kloonaa soittolista</string>
     <string name="watch_history">Katso historia</string>
-    <string name="views_placeholder">näyttökertaa</string>
 </resources>

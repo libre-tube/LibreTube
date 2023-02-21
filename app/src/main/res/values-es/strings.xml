@@ -338,7 +338,6 @@
     <string name="playback_pitch">Tono</string>
     <string name="progressive_load_interval">Tamaño del intervalo de la carga progresiva</string>
     <string name="progressive_load_interval_summary">Un valor más bajo puede acelerar la carga inicial del vídeo.</string>
-    <string name="views_placeholder">vistas</string>
     <string name="filename">Nombre del archivo</string>
     <string name="invalid_filename">¡Nombre de archivo inválido!</string>
     <string name="recentlyUpdated">Recientemente actualizado</string>
