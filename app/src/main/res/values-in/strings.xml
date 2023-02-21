@@ -447,4 +447,7 @@
     <string name="unsupported_file_format">Format berkas tidak didukung: %1$s</string>
     <string name="custom_playback_speed">Kecepatan kustom</string>
     <string name="custom_playback_speed_summary">Gunakan kecepatan pemutaran yang berbeda daripada pemutar yang normal.</string>
+    <string name="normal_views">%1$s tampilan%2$s</string>
+    <string name="trending_views">%1$s • %2$s tampilan • %3$s</string>
+    <string name="category">Kategori</string>
 </resources>
