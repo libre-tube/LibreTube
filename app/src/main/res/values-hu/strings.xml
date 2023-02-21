@@ -442,7 +442,7 @@
     <string name="help">Súgó</string>
     <string name="faq">GYIK</string>
     <string name="replies">Válaszok</string>
-    <string name="mark_as_watched">Megtekintettként jelölés</string>
+    <string name="mark_as_watched">Jelölés megnézettként</string>
     <string name="custom_playback_speed">Egyéni sebesség</string>
     <string name="custom_playback_speed_summary">A normális lejátszótól való különböző sebesség használata.</string>
     <string name="unsupported_file_format">Nem támogatott fájlformátum: %1$s</string>

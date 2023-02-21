@@ -447,4 +447,5 @@
     <string name="unsupported_file_format">不支持的文件格式：%1$s</string>
     <string name="custom_playback_speed">自定义速度</string>
     <string name="custom_playback_speed_summary">使用不同于常规播放器的播放速度。</string>
+    <string name="category">类别</string>
 </resources>
