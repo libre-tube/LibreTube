@@ -213,7 +213,7 @@
     <string name="aspect_ratio">Співвідношення сторін відео</string>
     <string name="auto_rotation">Автоповорот</string>
     <string name="chapters">Епізоди</string>
-    <string name="no_audio">Немає звуку</string>
+    <string name="no_audio">Немає аудіо</string>
     <string name="audio">Аудіо</string>
     <string name="autoRotatePlayer_summary">Поноекранний режим при обертанні пристрою.</string>
     <string name="watch_positions_summary">Продовжувати з останньої позиції відео</string>
@@ -448,4 +448,6 @@
     <string name="custom_playback_speed">Користувацька швидкість</string>
     <string name="custom_playback_speed_summary">Використовувати іншу швидкість відтворення, ніж для звичайного програвача.</string>
     <string name="category">Категорія</string>
+    <string name="normal_views">%1$s переглядів%2$s</string>
+    <string name="trending_views">%1$s • %2$s переглядів • %3$s</string>
 </resources>
