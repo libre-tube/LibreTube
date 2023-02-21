@@ -23,7 +23,7 @@
     <string name="dlcomplete">Descarga terminada.</string>
     <string name="downloadfailed">Falha ao descarregar.</string>
     <string name="app_theme">Tema</string>
-    <string name="server_error">Parece que existe um problema com o servidor selecionado. Deseja tentar com outra instância\?</string>
+    <string name="server_error">Parece que existe um problema com o servidor selecionado. Tente com outra instância.</string>
     <string name="unknown_error">Erro de rede.</string>
     <string name="error">Ocorreu um erro.</string>
     <string name="notgmail">Apenas com uma conta Piped.</string>
@@ -141,7 +141,7 @@
     <string name="download_folder_summary">O nome da pasta em que os ficheiros estão guardados.</string>
     <string name="downloads_directory">Pasta de descargas</string>
     <string name="shapedIcon">Forma</string>
-    <string name="instance_summary">Piped, sessão e subscrições</string>
+    <string name="instance_summary">Piped, sessão e conta</string>
     <string name="customInstance_summary">Adicionar…</string>
     <string name="instance_name">Nome da instância</string>
     <string name="update_available">A versão %1$s está disponível</string>
