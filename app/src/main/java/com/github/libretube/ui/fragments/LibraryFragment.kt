@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -19,7 +20,6 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentLibraryBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.extensions.TAG
-import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.PreferenceHelper
@@ -28,6 +28,9 @@ import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.CreatePlaylistDialog
 import com.github.libretube.ui.models.PlayerViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LibraryFragment : BaseFragment() {
 
@@ -91,14 +94,16 @@ class LibraryFragment : BaseFragment() {
     }
 
     private fun initBookmarks() {
-        val bookmarks = awaitQuery {
-            DatabaseHolder.Database.playlistBookmarkDao().getAll()
+        lifecycleScope.launch {
+            val bookmarks = withContext(Dispatchers.IO) {
+                DatabaseHolder.Database.playlistBookmarkDao().getAll()
+            }
+
+            binding.bookmarksCV.isVisible = bookmarks.isNotEmpty()
+            if (bookmarks.isNotEmpty()) {
+                binding.bookmarksRecView.adapter = PlaylistBookmarkAdapter(bookmarks)
+            }
         }
-
-        binding.bookmarksCV.visibility = if (bookmarks.isEmpty()) View.GONE else View.VISIBLE
-        if (bookmarks.isEmpty()) return
-
-        binding.bookmarksRecView.adapter = PlaylistBookmarkAdapter(bookmarks)
     }
 
     private fun updateFABMargin(isMiniPlayerVisible: Boolean) {

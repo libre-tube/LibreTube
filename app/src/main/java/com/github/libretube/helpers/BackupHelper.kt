@@ -51,11 +51,9 @@ object BackupHelper {
         Database.watchPositionDao().insertAll(backupFile.watchPositions.orEmpty())
         Database.localSubscriptionDao().insertAll(backupFile.localSubscriptions.orEmpty())
         Database.customInstanceDao().insertAll(backupFile.customInstances.orEmpty())
-        Database.playlistBookmarkDao().insertAll(
-            *backupFile.playlistBookmarks.orEmpty().toTypedArray()
-        )
+        Database.playlistBookmarkDao().insertAll(backupFile.playlistBookmarks.orEmpty())
 
-        backupFile.localPlaylists.orEmpty().forEach {
+        backupFile.localPlaylists?.forEach {
             Database.localPlaylistsDao().createPlaylist(it.playlist)
             val playlistId = Database.localPlaylistsDao().getAll().last().playlist.id
             it.videos.forEach {

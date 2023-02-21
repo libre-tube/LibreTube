@@ -7,7 +7,6 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.enums.ShareObjectType
-import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.BackgroundHelper
@@ -16,6 +15,7 @@ import com.github.libretube.ui.dialogs.DeletePlaylistDialog
 import com.github.libretube.ui.dialogs.RenamePlaylistDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class PlaylistOptionsBottomSheet(
@@ -31,7 +31,7 @@ class PlaylistOptionsBottomSheet(
             getString(R.string.playOnBackground)
         )
 
-        val isBookmarked = awaitQuery {
+        val isBookmarked = runBlocking(Dispatchers.IO) {
             DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId)
         }
 
@@ -99,7 +99,8 @@ class PlaylistOptionsBottomSheet(
                             } catch (e: Exception) {
                                 return@withContext
                             }.toPlaylistBookmark(playlistId)
-                            DatabaseHolder.Database.playlistBookmarkDao().insertAll(bookmark)
+                            DatabaseHolder.Database.playlistBookmarkDao()
+                                .insertAll(listOf(bookmark))
                         }
                     }
                 }

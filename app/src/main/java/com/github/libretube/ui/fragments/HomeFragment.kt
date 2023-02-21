@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,7 +17,6 @@ import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentHomeBinding
 import com.github.libretube.db.DatabaseHolder
-import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.launchWhenCreatedIO
 import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.helpers.PreferenceHelper
@@ -26,6 +26,7 @@ import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class HomeFragment : BaseFragment() {
@@ -123,21 +124,22 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun loadBookmarks() {
-        val bookmarkedPlaylists = awaitQuery {
-            DatabaseHolder.Database.playlistBookmarkDao().getAll()
-        }.takeIf { it.isNotEmpty() } ?: return
-
-        runOnUiThread {
-            makeVisible(binding.bookmarksTV, binding.bookmarksRV)
-            binding.bookmarksRV.layoutManager = LinearLayoutManager(
-                context,
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
-            binding.bookmarksRV.adapter = PlaylistBookmarkAdapter(
-                bookmarkedPlaylists,
-                PlaylistBookmarkAdapter.Companion.BookmarkMode.HOME
-            )
+        lifecycleScope.launch {
+            val bookmarkedPlaylists = withContext(Dispatchers.IO) {
+                DatabaseHolder.Database.playlistBookmarkDao().getAll()
+            }
+            if (bookmarkedPlaylists.isNotEmpty()) {
+                makeVisible(binding.bookmarksTV, binding.bookmarksRV)
+                binding.bookmarksRV.layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+                binding.bookmarksRV.adapter = PlaylistBookmarkAdapter(
+                    bookmarkedPlaylists,
+                    PlaylistBookmarkAdapter.Companion.BookmarkMode.HOME
+                )
+            }
         }
     }
 
