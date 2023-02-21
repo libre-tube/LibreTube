@@ -158,7 +158,6 @@
     <string name="authors">Pembuat</string>
     <string name="internal_storage">Penyimpanan internal</string>
     <string name="sdcard">Kartu SD</string>
-    <string name="views">%1$s tontonan</string>
     <string name="defaultIcon">Bawaan</string>
     <string name="torchIcon">Obor kece</string>
     <string name="shapedIcon">Berbentuk aneh</string>

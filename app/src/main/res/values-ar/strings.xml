@@ -122,7 +122,6 @@
     <string name="downloads_directory">مجلد التنزيل</string>
     <string name="sdcard">بطاقة الذاكرة</string>
     <string name="music_directory">مجلد الموسيقى</string>
-    <string name="views">%1$s مشاهدة</string>
     <string name="defaultIcon">الإفتراضي</string>
     <string name="update">ابحث عن الإصدار الجديد</string>
     <string name="update_summary">التحقق من وجود تحديث</string>

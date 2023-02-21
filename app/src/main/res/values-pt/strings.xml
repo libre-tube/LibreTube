@@ -98,7 +98,6 @@
     <string name="category_intro">Intromissão/Animação inicial</string>
     <string name="sdcard">Cartão SD</string>
     <string name="internal_storage">Armazenamento interno</string>
-    <string name="views">%1$s visualizações</string>
     <string name="defaultIcon">Padrão</string>
     <string name="sponsorblock_state">Ligado</string>
     <string name="category_selfpromo_description">Similar a \"Patrocínio\", com exceção de autopromoção ou promoção gratuita. Inclui secções de marketing, donativos e/ou informações acerca dos diversos participantes.</string>

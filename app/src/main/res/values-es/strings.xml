@@ -116,7 +116,6 @@
     <string name="enabled">Activado</string>
     <string name="disabled">Desactivado</string>
     <string name="playOnBackground">Reproducir en segundo plano</string>
-    <string name="views">%1$s visualizaciones</string>
     <string name="update_available_text">Nueva actualización disponible. Haga clic para abrir la página de las versiones de GitHub.</string>
     <string name="update_available">La versión %1$s está disponible</string>
     <string name="app_behavior">Comportamiento</string>

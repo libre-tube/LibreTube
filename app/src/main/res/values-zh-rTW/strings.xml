@@ -2,7 +2,6 @@
 <resources>
     <string name="shareTo">分享URL到</string>
     <string name="defaultIcon">預設</string>
-    <string name="views">%1$s 觀看次數</string>
     <string name="hide_chapters">隱藏章節</string>
     <string name="buffering_goal_summary">最多預先載入幾秒鐘的影片。</string>
     <string name="startpage">首頁</string>

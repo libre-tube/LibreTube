@@ -122,7 +122,6 @@
     <string name="authors">Autorzy</string>
     <string name="internal_storage">Pamięć wewnętrzna</string>
     <string name="sdcard">Karta SD</string>
-    <string name="views">%1$s wyświetleń</string>
     <string name="defaultIcon">Domyślna</string>
     <string name="download_directory">Pobierz do</string>
     <string name="download_directory_summary">Miejsce przechowywania pobranych mediów.</string>

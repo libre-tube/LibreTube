@@ -112,7 +112,6 @@
     <string name="sdcard">SD картица</string>
     <string name="download_folder_summary">Назив фасцикле у којој ће преузети медији бити складиштени.</string>
     <string name="downloads_directory">Download фасцикла</string>
-    <string name="views">%1$s прегледа</string>
     <string name="shapedIcon">Обликована</string>
     <string name="flameIcon">Пламен</string>
     <string name="birdIcon">Птица</string>

@@ -135,7 +135,6 @@
     <string name="flameIcon">Liesmas</string>
     <string name="shapedIcon">Formu</string>
     <string name="birdIcon">Putna</string>
-    <string name="views">%1$s skatījumi</string>
     <string name="legacyIcon">Vecā</string>
     <string name="update_available">%1$s versija ir pieejama</string>
     <string name="update_available_text">Doties uz GitHub, lai to lejupielādētu\?</string>

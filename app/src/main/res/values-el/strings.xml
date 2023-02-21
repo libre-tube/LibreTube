@@ -152,7 +152,6 @@
     <string name="gradientIcon">Κλίση Glib</string>
     <string name="shapedIcon">Ανόητο σχήμα</string>
     <string name="legacyIcon">Χαμένη κληρονομιά</string>
-    <string name="views">%1$s προβολές</string>
     <string name="defaultIcon">Προεπιλεγμένο</string>
     <string name="flameIcon">Ιπτάμενη φλόγα</string>
     <string name="birdIcon">Ενισχυμένο πουλί</string>

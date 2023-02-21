@@ -137,7 +137,6 @@
     <string name="downloads_directory">Dosarul de descărcări</string>
     <string name="movies_directory">Dosarul de filme</string>
     <string name="shareTo">Distribuie adresa web către</string>
-    <string name="views">%1$s vizualizări</string>
     <string name="defaultIcon">Implicit</string>
     <string name="legacyIcon">Moștenire pierdută</string>
     <string name="gradientIcon">Glib gradient</string>

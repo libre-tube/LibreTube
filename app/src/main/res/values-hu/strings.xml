@@ -133,7 +133,6 @@
     <string name="sdcard">SD-kártya</string>
     <string name="shareTo">URL megosztása ide</string>
     <string name="playOnBackground">Lejátszás háttérben</string>
-    <string name="views">%1$s megtekintés</string>
     <string name="defaultIcon">Alapértelmezett</string>
     <string name="download_directory">Letöltés ide</string>
     <string name="gradientIcon">Sima átmenet</string>

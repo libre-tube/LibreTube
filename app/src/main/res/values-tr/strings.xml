@@ -153,7 +153,6 @@
     <string name="torchIcon">Şık fener</string>
     <string name="birdIcon">Hızlandırılmış kuş</string>
     <string name="legacyIcon">Kayıp miras</string>
-    <string name="views">%1$s görüntüleme</string>
     <string name="shapedIcon">Aptal şekilli</string>
     <string name="flameIcon">Uçan alev</string>
     <string name="instance_summary">Piped, giriş ve abonelikler</string>

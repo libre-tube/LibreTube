@@ -147,7 +147,6 @@
     <string name="app_uptodate">正在使用最新的版本。</string>
     <string name="no_update_available">您正在运行最新的版本。</string>
     <string name="live">直播</string>
-    <string name="views">%1$s 次观看</string>
     <string name="defaultIcon">默认</string>
     <string name="shapedIcon">简约图形</string>
     <string name="flameIcon">飞舞的火焰</string>

@@ -127,7 +127,6 @@
     <string name="authors">Auteurs</string>
     <string name="internal_storage">Interne opslag</string>
     <string name="sdcard">SD-kaart</string>
-    <string name="views">%1$s weergaven</string>
     <string name="defaultIcon">Standaard</string>
     <string name="download_directory_summary">Waar gedownloade media wordt opgeslagen.</string>
     <string name="download_directory">Download naar</string>

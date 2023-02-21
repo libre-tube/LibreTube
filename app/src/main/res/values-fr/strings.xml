@@ -147,7 +147,6 @@
     <string name="music_directory">Dossier musique</string>
     <string name="shareTo">Partager l\'URL vers</string>
     <string name="movies_directory">Dossier de films</string>
-    <string name="views">%1$s vues</string>
     <string name="defaultIcon">Par défaut</string>
     <string name="legacyIcon">Héritage perdu</string>
     <string name="fireIcon">Feu à la mode</string>

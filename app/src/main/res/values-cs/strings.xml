@@ -133,7 +133,6 @@
     <string name="music_directory">Hudební složka</string>
     <string name="movies_directory">Filmová složka</string>
     <string name="shareTo">Sdílet URL s</string>
-    <string name="views">%1$s zhlédnutí</string>
     <string name="defaultIcon">Výchozí</string>
     <string name="video_format_summary">Převod obou souborů při stažení zvuku i videa.</string>
     <string name="update">Najít novou verzi</string>

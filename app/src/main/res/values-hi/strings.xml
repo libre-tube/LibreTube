@@ -115,7 +115,6 @@
     <string name="category_intro_description">वास्तविक सामग्री के बिना एक अंतराल। एक ठहराव, स्थिर फ्रेम, दोहराए जाने वाला एनीमेशन हो सकता है। जानकारी वाले संक्रमणों के लिए उपयोग नहीं किया जाना चाहिए।</string>
     <string name="internal_storage">आंतरिक स्टोरेज</string>
     <string name="sdcard">एसडी कार्ड</string>
-    <string name="views">%1$s व्यूज</string>
     <string name="defaultIcon">डिफॉल्ट</string>
     <string name="sponsorblock_summary">https://sponsor.ajay.app API का उपयोग करता है</string>
     <string name="sponsorblock_state">आन</string>

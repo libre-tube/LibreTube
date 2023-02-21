@@ -100,7 +100,6 @@
     <string name="authors">Tác giả</string>
     <string name="download_folder">Tên</string>
     <string name="internal_storage">Kho lưu trữ nội bộ</string>
-    <string name="views">%1$s lượt xem</string>
     <string name="defaultIcon">Mặc định</string>
     <string name="dlisinprogress">Đang có một phiên tải đang thực thi, hãy chờ cho tới khi nó hoàn thành.</string>
     <string name="notgmail">Cái này dành cho tài khoản Piped.</string>

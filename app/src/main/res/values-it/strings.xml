@@ -154,7 +154,6 @@
     <string name="birdIcon">Uccello potenziato</string>
     <string name="defaultIcon">Predefinita</string>
     <string name="shapedIcon">Sagomato sciocco</string>
-    <string name="views">%1$s visualizzazioni</string>
     <string name="flameIcon">Fiamma volante</string>
     <string name="instance_name">Nome istanza</string>
     <string name="addInstance">Aggiungi istanza</string>

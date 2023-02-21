@@ -176,7 +176,6 @@
     <string name="no_update_available">آپ تازہ ترین ورژن چلا رہے ہیں۔</string>
     <string name="appearance_summary">ایپ کو اپنی پسند کے مطابق ایڈجسٹ کریں۔</string>
     <string name="download_folder_summary">ڈاؤن لوڈ کردہ فولڈر کا نام جہاں میڈیا محفوظ ہے۔</string>
-    <string name="views">%1$s بار دیکھا گیا</string>
     <string name="instance_summary">پائپ، لاگ ان، اور سبسکرپشنز</string>
     <string name="birdIcon">بڑھا ہوا پرندہ</string>
     <string name="instance_name">انسٹنش کا نام</string>

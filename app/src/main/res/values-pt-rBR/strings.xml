@@ -120,7 +120,6 @@
     <string name="internal_storage">Armazenamento interno</string>
     <string name="sdcard">Cartão SD</string>
     <string name="defaultIcon">Padrão</string>
-    <string name="views">%1$s visualizações</string>
     <string name="update_available_text">Nova atualização disponível. Clique para abrir a página de lançamentos do GitHub.</string>
     <string name="download_directory_summary">Onde a mídia baixada é armazenada.</string>
     <string name="app_uptodate">Executando a versão mais recente.</string>

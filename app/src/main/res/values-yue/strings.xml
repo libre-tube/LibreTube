@@ -121,7 +121,6 @@
     <string name="sdcard">SD card</string>
     <string name="music_directory">音樂資料夾</string>
     <string name="shareTo">些牙個網址俾</string>
-    <string name="views">%1$s 睇左條片</string>
     <string name="defaultIcon">預設</string>
     <string name="instance_summary">Piped, 登入同訂閱</string>
     <string name="customInstance_summary">加…</string>

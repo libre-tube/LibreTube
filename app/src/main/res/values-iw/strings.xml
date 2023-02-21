@@ -147,7 +147,6 @@
     <string name="download_folder">שם</string>
     <string name="sdcard">כרטיס SD</string>
     <string name="shareTo">שיתוף כתובת אל</string>
-    <string name="views">%1$s צפיות</string>
     <string name="defaultIcon">ברירת מחדל</string>
     <string name="legacyIcon">מורשת שאבדה</string>
     <string name="gradientIcon">מדרג של Glib</string>

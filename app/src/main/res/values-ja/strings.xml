@@ -142,7 +142,6 @@
     <string name="movies_directory">動画フォルダ</string>
     <string name="playOnBackground">バックグラウンドで再生</string>
     <string name="defaultIcon">デフォルト</string>
-    <string name="views">%1$s 回再生</string>
     <string name="app_icon">アイコン</string>
     <string name="disabled">オフ</string>
     <string name="download_directory_summary">ダウンロードされたメディアを保存する場所。</string>

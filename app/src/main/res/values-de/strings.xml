@@ -147,7 +147,6 @@
     <string name="shareTo">URL teilen an</string>
     <string name="downloads_directory">Download-Ordner</string>
     <string name="movies_directory">Filmordner</string>
-    <string name="views">%1$s Aufrufe</string>
     <string name="defaultIcon">Standard</string>
     <string name="instance_name">Instanzname</string>
     <string name="instance_api_url">URL zur Instanz-API</string>

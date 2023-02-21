@@ -161,7 +161,6 @@
     <string name="update_summary">আপডেট চেক করুন</string>
     <string name="no_update_available">আপনি সর্বশেষ সংস্করণ ব্যবহার করছেন।</string>
     <string name="live">সরাসরি</string>
-    <string name="views">দর্শক সংখ্যা %1$s</string>
     <string name="torchIcon">ট্রেন্ডি টর্চ</string>
     <string name="shapedIcon">কিম্ভুতকিমাকার</string>
     <string name="related_streams_summary">আপনার দেখতে থাকা ভিডিওর অনুরুপ ভিডিও প্রদর্শন করুন।</string>

@@ -115,7 +115,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.datetime.LocalDate
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
@@ -517,13 +516,14 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     }
 
     private fun toggleDescription() {
-        var viewInfo = if (!streams.livestream) {
-            TextUtils.SEPARATOR + localizedDate(
-                streams.uploadDate
-            )
+        val views = if (binding.descLinLayout.isVisible) {
+            // show formatted short view count
+            streams.views.formatShort()
         } else {
-            ""
+            // show exact view count
+            String.format("%,d", streams.views)
         }
+        val viewInfo = getString(R.string.normal_views, views, localizeDate(streams))
         if (binding.descLinLayout.isVisible) {
             // hide the description and chapters
             binding.playerDescriptionArrow.animate().rotation(0F).setDuration(250).start()
@@ -531,9 +531,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
             // limit the title height to two lines
             binding.playerTitle.maxLines = 2
-
-            // show formatted short view count
-            viewInfo = getString(R.string.views, streams.views.formatShort()) + viewInfo
         } else {
             // show the description and chapters
             binding.playerDescriptionArrow.animate().rotation(180F).setDuration(250).start()
@@ -541,9 +538,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
             // show the whole title
             binding.playerTitle.maxLines = Int.MAX_VALUE
-
-            // show exact view count
-            viewInfo = getString(R.string.views, String.format("%,d", streams.views)) + viewInfo
         }
         binding.playerViewsInfo.text = viewInfo
 
@@ -822,9 +816,13 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         playerBinding.exoProgress.setPlayer(exoPlayer)
     }
 
-    private fun localizedDate(date: LocalDate): String {
-        val locale = ConfigurationCompat.getLocales(resources.configuration)[0]!!
-        return TextUtils.localizeDate(date, locale)
+    private fun localizeDate(streams: Streams): String {
+        return if (!streams.livestream) {
+            val locale = ConfigurationCompat.getLocales(resources.configuration)[0]!!
+            TextUtils.SEPARATOR + TextUtils.localizeDate(streams.uploadDate, locale)
+        } else {
+            ""
+        }
     }
 
     private fun handleLiveVideo() {
@@ -850,9 +848,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         )
 
         binding.apply {
-            playerViewsInfo.text =
-                context?.getString(R.string.views, streams.views.formatShort()) +
-                if (!streams.livestream) TextUtils.SEPARATOR + localizedDate(streams.uploadDate) else ""
+            val views = streams.views.formatShort()
+            playerViewsInfo.text = getString(R.string.normal_views, views, localizeDate(streams))
 
             textLike.text = streams.likes.formatShort()
             textDislike.text = streams.dislikes.formatShort()

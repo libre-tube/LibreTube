@@ -111,7 +111,6 @@
     <string name="category_intro">Pausesegment/introduksjonsanimasjon</string>
     <string name="movies_directory">Filmmappe</string>
     <string name="shareTo">Del nettadresse til …</string>
-    <string name="views">%1$s visninger</string>
     <string name="defaultIcon">Forvalg</string>
     <string name="legacyIcon">God gammeldags</string>
     <string name="gradientIcon">Glidende gradient</string>

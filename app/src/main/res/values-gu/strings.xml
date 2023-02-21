@@ -47,7 +47,6 @@
     <string name="sdcard">મેમરી કાર્ડ</string>
     <string name="playOnBackground">પાશ્વ ભાગમાં વગાડો</string>
     <string name="defaultIcon">મૂળભૂત</string>
-    <string name="views">%1$s દેખાવો</string>
     <string name="customization">ગોઠવણીઓ</string>
     <string name="noInternet">પહેલા ઈન્ટરનેટ સાથે કનેક્ટ કરો.</string>
     <string name="sponsorblock_summary">https://sponsor.ajay.app API નો ઉપયોગ કરે છે</string>

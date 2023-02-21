@@ -126,7 +126,6 @@
     <string name="sdcard">SD-kortti</string>
     <string name="music_directory">Musiikki kansio</string>
     <string name="movies_directory">Elokuva kansio</string>
-    <string name="views">%1$s näyttökertaa</string>
     <string name="defaultIcon">Oletus</string>
     <string name="sponsorblock_summary">Käyttää https://sponsor.ajay.app ohjelmointirajapintaa</string>
     <string name="category_intro_description">Aikaväli ilman mitään todellista sisältöä. Voi olla tauko, staattinen freimi tai toistuva animaatio. Ei tule käyttää siirroksiin, jotka sisältävät tietoa.</string>

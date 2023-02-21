@@ -163,7 +163,6 @@
     <string name="music_directory">Carpeta de música</string>
     <string name="movies_directory">Carpeta de pel·lícules</string>
     <string name="shareTo">Comparteix l\'URL a</string>
-    <string name="views">%1$s visualitzacions</string>
     <string name="defaultIcon">Predeterminat</string>
     <string name="legacyIcon">Antic</string>
     <string name="gradientIcon">Difuminat</string>
