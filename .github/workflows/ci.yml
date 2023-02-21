@@ -68,7 +68,7 @@ jobs:
         run: |
           mv .github/uploader.py .
           echo "GH_REPO = '${{ github.repository }}'" > tgconfig.py
-          git clone https://github.com/LibreTubeAlpha/Archive archive
+          git clone --filter=blob:none https://github.com/LibreTubeAlpha/Archive archive
           rm -rf archive/*.apk
           mv app/build/outputs/apk/debug/*.apk archive/
           cd archive
