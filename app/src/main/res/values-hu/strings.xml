@@ -133,7 +133,6 @@
     <string name="sdcard">SD-kártya</string>
     <string name="shareTo">URL megosztása ide</string>
     <string name="playOnBackground">Lejátszás háttérben</string>
-    <string name="views">%1$s megtekintés</string>
     <string name="defaultIcon">Alapértelmezett</string>
     <string name="download_directory">Letöltés ide</string>
     <string name="gradientIcon">Sima átmenet</string>
@@ -326,7 +325,6 @@
     <string name="navigation_bar">Navigációs sáv</string>
     <string name="download_channel_description">Értesítés megjelenítése média letöltésekor.</string>
     <string name="select_at_least_one">Válasszon ki legalább egy elemet</string>
-    <string name="views_placeholder">megtekintés</string>
     <string name="progressive_load_interval_summary">Egy alacsonyabb érték lehet, hogy felgyorsítja a kezdeti videóbetöltést.</string>
     <string name="save_feed_summary">Töltse be az feliratkozott videófolyamot a háttérben, és akadályozza meg az automatikus frissítést.</string>
     <string name="background_channel_description">Megjelenít egy értesítést a lejátszó vezérlésére szolgáló gombokkal.</string>

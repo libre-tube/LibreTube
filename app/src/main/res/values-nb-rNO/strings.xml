@@ -111,7 +111,6 @@
     <string name="category_intro">Pausesegment/introduksjonsanimasjon</string>
     <string name="movies_directory">Filmmappe</string>
     <string name="shareTo">Del nettadresse til …</string>
-    <string name="views">%1$s visninger</string>
     <string name="defaultIcon">Forvalg</string>
     <string name="legacyIcon">God gammeldags</string>
     <string name="gradientIcon">Glidende gradient</string>
@@ -332,7 +331,6 @@
     <string name="wifi">Wi-Fi</string>
     <string name="navigation_bar">Navigasjonsfelt</string>
     <string name="select_at_least_one">Velg minst ett element</string>
-    <string name="views_placeholder">visninger</string>
     <string name="default_load_interval">Forvalg</string>
     <string name="limit_hls">Begrens HLS til 1080p</string>
     <string name="filename">Filnavn</string>

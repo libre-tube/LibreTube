@@ -147,7 +147,6 @@
     <string name="download_folder">שם</string>
     <string name="sdcard">כרטיס SD</string>
     <string name="shareTo">שיתוף כתובת אל</string>
-    <string name="views">%1$s צפיות</string>
     <string name="defaultIcon">ברירת מחדל</string>
     <string name="legacyIcon">מורשת שאבדה</string>
     <string name="gradientIcon">מדרג של Glib</string>
@@ -335,7 +334,6 @@
     <string name="playback_pitch">גובה צליל</string>
     <string name="default_load_interval">ברירת מחדל</string>
     <string name="limit_hls">הגבלת שידור חי ל־1080p</string>
-    <string name="views_placeholder">צפיות</string>
     <string name="progressive_load_interval_summary">ערך נמוך יותר עשוי להאיץ את טעינת הסרטון הראשונית.</string>
     <string name="progressive_load_interval">גודל מרווח טעינה במקטעים</string>
     <string name="change_region">כנראה שהמובילים לא זמינים לאזור הנוכחי. נא לבחור באזור אחר בהגדרות.</string>

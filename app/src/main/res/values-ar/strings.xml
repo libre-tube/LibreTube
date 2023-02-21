@@ -122,7 +122,6 @@
     <string name="downloads_directory">مجلد التنزيل</string>
     <string name="sdcard">بطاقة الذاكرة</string>
     <string name="music_directory">مجلد الموسيقى</string>
-    <string name="views">%1$s مشاهدة</string>
     <string name="defaultIcon">الإفتراضي</string>
     <string name="update">ابحث عن الإصدار الجديد</string>
     <string name="update_summary">التحقق من وجود تحديث</string>
@@ -334,7 +333,6 @@
     <string name="select_at_least_one">يرجى اختيار عنصر واحد على الأقل</string>
     <string name="change_region">المتصدرة يبدو أنها غير متاحة في المنطقة الحالية . الرجاء اختيار آخر في الإعداد .</string>
     <string name="limit_hls">الحد من HLS إلى 1080p</string>
-    <string name="views_placeholder">المشاهدات</string>
     <string name="progressive_load_interval">حجم الفاصل الزمني للتحميل التدريجي</string>
     <string name="default_load_interval">الإفتراضي</string>
     <string name="playback_pitch">الحدة</string>

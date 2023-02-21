@@ -70,7 +70,6 @@
     <string name="download_folder">Namn</string>
     <string name="sdcard">SD-kort</string>
     <string name="shareTo">Del URL till …</string>
-    <string name="views">%1$s visningar</string>
     <string name="gradientIcon">Glidande gradient</string>
     <string name="internal_storage">Internlagring</string>
     <string name="movies_directory">Film-mapp</string>

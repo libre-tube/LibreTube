@@ -158,7 +158,6 @@
     <string name="authors">Pembuat</string>
     <string name="internal_storage">Penyimpanan internal</string>
     <string name="sdcard">Kartu SD</string>
-    <string name="views">%1$s tontonan</string>
     <string name="defaultIcon">Bawaan</string>
     <string name="torchIcon">Obor kece</string>
     <string name="shapedIcon">Berbentuk aneh</string>
@@ -334,7 +333,6 @@
     <string name="select_at_least_one">Mohon pilih setidaknya satu item</string>
     <string name="change_region">Sedang Tren sepertinya tidak tersedia untuk wilayah saat ini. Pilih yang lain di pengaturan.</string>
     <string name="limit_hls">Batasi HLS ke 1080p</string>
-    <string name="views_placeholder">tampilan</string>
     <string name="progressive_load_interval">Ukuran interval muatan progresif</string>
     <string name="playback_pitch">Nada</string>
     <string name="progressive_load_interval_summary">Nilai yang rendah dapat mempercepat pemuatan video awal.</string>

@@ -118,7 +118,6 @@
     <string name="music_directory">Musika karpeta</string>
     <string name="movies_directory">Bideo karpeta</string>
     <string name="shareTo">Partekatu URLa honekin</string>
-    <string name="views">%1$s ikustaldi</string>
     <string name="gradientIcon">Glib gradientea</string>
     <string name="defaultIcon">Lehenetsia</string>
     <string name="legacyIcon">Galdutako ondarea</string>
@@ -337,7 +336,6 @@
     <string name="default_load_interval">Lehenetsia</string>
     <string name="playing_queue">Ilaran erreproduzitu</string>
     <string name="queue">Ilara</string>
-    <string name="views_placeholder">ikustaldiak</string>
     <string name="progressive_load_interval_summary">Balio baxuago batek hasierako bideoaren karga bizkortu dezake.</string>
     <string name="added_to_playlist">Gehitu erreprodukzio zerrendara</string>
     <string name="filename">Fitxategi izena</string>

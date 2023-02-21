@@ -142,7 +142,6 @@
     <string name="download_folder">이름</string>
     <string name="sdcard">SD 카드</string>
     <string name="shareTo">URL 공유</string>
-    <string name="views">조회수 %1$s</string>
     <string name="defaultIcon">기본</string>
     <string name="music_directory">음악 폴더</string>
     <string name="movies_directory">동영상 폴더</string>
@@ -359,7 +358,6 @@
     <string name="sb_skip_manual">수동으로 건너뛰기</string>
     <string name="sb_skip_manual_summary">세그먼트를 자동으로 건너뛰지 말고, 항상 건너뛰기 전에 확인하십시오.</string>
     <string name="gradientIcon">glib 기울기</string>
-    <string name="views_placeholder">조회수</string>
     <string name="open">열기…</string>
     <string name="alternative_player_layout_summary">아래가 아닌 댓글 위에 관련 동영상을 행으로 표시합니다.</string>
     <string name="seek_increment">증가분 찾기</string>

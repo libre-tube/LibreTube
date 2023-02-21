@@ -140,7 +140,6 @@
     <string name="live">Пряма трансляція</string>
     <string name="advanced">Розширене</string>
     <string name="sdcard">SD-карта</string>
-    <string name="views">%1$s переглядів</string>
     <string name="defaultIcon">Типова</string>
     <string name="download_directory_summary">Тека, в яку зберігатимуться всі завантажені медіа.</string>
     <string name="video_format_summary">Перетворення файлів, якщо аудіо і відео завантажені.</string>
@@ -338,7 +337,6 @@
     <string name="trending_layout">Альтернативний вигляд трендів</string>
     <string name="renamePlaylist">Перейменувати добірку</string>
     <string name="mobile_data">Мобільні дані</string>
-    <string name="views_placeholder">переглядів</string>
     <string name="filename">Назва файлу</string>
     <string name="invalid_filename">Неприпустима назва файлу!</string>
     <string name="recentlyUpdated">Нещодавно оновлені</string>

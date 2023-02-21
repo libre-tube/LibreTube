@@ -154,7 +154,6 @@
     <string name="birdIcon">Uccello potenziato</string>
     <string name="defaultIcon">Predefinita</string>
     <string name="shapedIcon">Sagomato sciocco</string>
-    <string name="views">%1$s visualizzazioni</string>
     <string name="flameIcon">Fiamma volante</string>
     <string name="instance_name">Nome istanza</string>
     <string name="addInstance">Aggiungi istanza</string>
@@ -337,7 +336,6 @@
     <string name="default_load_interval">Predefinita</string>
     <string name="playback_pitch">Tono</string>
     <string name="progressive_load_interval_summary">Un valore inferiore può accelerare il caricamento iniziale del video.</string>
-    <string name="views_placeholder">visualizzazioni</string>
     <string name="filename">Nome del file</string>
     <string name="invalid_filename">Nome del file non valido!</string>
     <string name="playlists_order">Ordine delle playlist</string>

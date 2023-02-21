@@ -147,7 +147,6 @@
     <string name="music_directory">Dossier musique</string>
     <string name="shareTo">Partager l\'URL vers</string>
     <string name="movies_directory">Dossier de films</string>
-    <string name="views">%1$s vues</string>
     <string name="defaultIcon">Par défaut</string>
     <string name="legacyIcon">Héritage perdu</string>
     <string name="fireIcon">Feu à la mode</string>
@@ -334,7 +333,6 @@
     <string name="background_channel_name">Mode arrière-plan</string>
     <string name="limit_hls">Limiter le HLS à 1080p</string>
     <string name="push_channel_description">Affiche une notification lorsque de nouveaux flux sont disponibles.</string>
-    <string name="views_placeholder">vues</string>
     <string name="progressive_load_interval">Taille de l\'intervalle de charge progressive</string>
     <string name="progressive_load_interval_summary">Une valeur inférieure peut accélérer le chargement initial de la vidéo.</string>
     <string name="default_load_interval">Par défaut</string>

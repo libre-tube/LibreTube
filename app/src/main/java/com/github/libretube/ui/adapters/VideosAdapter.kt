@@ -137,13 +137,12 @@ class VideosAdapter(
             }
 
             textViewTitle.text = video.title
-            textViewChannel.text =
-                video.uploaderName + TextUtils.SEPARATOR +
-                video.views.formatShort() + " " +
-                root.context.getString(R.string.views_placeholder) +
-                TextUtils.SEPARATOR + video.uploaded?.let {
-                    TextUtils.formatRelativeDate(it)
-                }
+            textViewChannel.text = root.context.getString(
+                R.string.trending_views,
+                video.uploaderName,
+                video.views.formatShort(),
+                video.uploaded?.let { TextUtils.formatRelativeDate(it) }
+            )
             video.duration?.let { thumbnailDuration.setFormattedDuration(it, video.isShort) }
             channelImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, video.uploaderUrl)
@@ -170,15 +169,13 @@ class VideosAdapter(
         holder.videoRowBinding?.apply {
             videoTitle.text = video.title
 
-            videoInfo.text =
-                video.views.formatShort() + " " +
-                root.context.getString(R.string.views_placeholder) +
-                TextUtils.SEPARATOR + video.uploaded?.let {
-                    TextUtils.formatRelativeDate(it)
-                }
+            videoInfo.text = root.context.getString(
+                R.string.normal_views,
+                video.views.formatShort(),
+                video.uploaded?.let { TextUtils.SEPARATOR + TextUtils.formatRelativeDate(it) }
+            )
 
-            thumbnailDuration.text =
-                video.duration?.let { DateUtils.formatElapsedTime(it) }
+            thumbnailDuration.text = video.duration?.let { DateUtils.formatElapsedTime(it) }
 
             ImageHelper.loadImage(video.thumbnail, thumbnail)
 

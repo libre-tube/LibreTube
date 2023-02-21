@@ -100,7 +100,6 @@
     <string name="authors">Tác giả</string>
     <string name="download_folder">Tên</string>
     <string name="internal_storage">Kho lưu trữ nội bộ</string>
-    <string name="views">%1$s lượt xem</string>
     <string name="defaultIcon">Mặc định</string>
     <string name="dlisinprogress">Đang có một phiên tải đang thực thi, hãy chờ cho tới khi nó hoàn thành.</string>
     <string name="notgmail">Cái này dành cho tài khoản Piped.</string>
@@ -329,7 +328,6 @@
     <string name="trending_layout">Bố cục thay thế cho trending</string>
     <string name="renamePlaylist">Đổi tên playlist</string>
     <string name="mobile_data">Dữ liệu di động</string>
-    <string name="views_placeholder">lượt xem</string>
     <string name="play_next">Tiếp theo</string>
     <string name="navigation_bar">Thanh điều hướng</string>
     <string name="limit_hls">Đặt giới hạn HLS thành 1080p</string>

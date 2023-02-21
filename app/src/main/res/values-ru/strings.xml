@@ -124,7 +124,6 @@
     <string name="movies_directory">Папка фильмов</string>
     <string name="internal_storage">Внутреннее хранилище</string>
     <string name="downloads_directory">Папка загрузок</string>
-    <string name="views">%1$s просмотров</string>
     <string name="defaultIcon">По умолчанию</string>
     <string name="shapedIcon">Формальная форма</string>
     <string name="shareTo">Поделиться URL с</string>
@@ -338,7 +337,6 @@
     <string name="progressive_load_interval_summary">Меньшие значения могут увеличить начальную скорость загрузки видео.</string>
     <string name="default_load_interval">По умолчанию</string>
     <string name="playback_pitch">Скорость</string>
-    <string name="views_placeholder">просмотров</string>
     <string name="filename">Имя файла</string>
     <string name="invalid_filename">Неверное имя файла!</string>
     <string name="playlists_order">Порядок плейлистов</string>

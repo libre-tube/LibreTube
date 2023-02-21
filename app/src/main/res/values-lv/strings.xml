@@ -135,7 +135,6 @@
     <string name="flameIcon">Liesmas</string>
     <string name="shapedIcon">Formu</string>
     <string name="birdIcon">Putna</string>
-    <string name="views">%1$s skatījumi</string>
     <string name="legacyIcon">Vecā</string>
     <string name="update_available">%1$s versija ir pieejama</string>
     <string name="update_available_text">Doties uz GitHub, lai to lejupielādētu\?</string>
@@ -312,7 +311,6 @@
     <string name="trending_layout">Citādāks tendenču izkārtojums</string>
     <string name="renamePlaylist">Pārsaukt atskaņošanas sarakstu</string>
     <string name="new_videos_badge">Jauno video indikators</string>
-    <string name="views_placeholder">skatījumi</string>
     <string name="skip_segment">Izlaist segmentu</string>
     <string name="sb_skip_manual">Izlaist manuāli</string>
     <string name="sb_skip_manual_summary">Neizlaiž segmentus automātiski, vienmēr vispirms pajautā.</string>

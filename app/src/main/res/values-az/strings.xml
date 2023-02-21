@@ -147,7 +147,6 @@
     <string name="sdcard">SD kart</string>
     <string name="internal_storage">Daxili yaddaş</string>
     <string name="download_folder_summary">Endirilmiş medianın saxlanıldığı qovluğun adı.</string>
-    <string name="views">%1$s baxış</string>
     <string name="defaultIcon">Standart</string>
     <string name="legacyIcon">İtmiş miras</string>
     <string name="fireIcon">Dəbdəbəli yanğın</string>
@@ -337,7 +336,6 @@
     <string name="default_load_interval">Standart</string>
     <string name="progressive_load_interval">Qabaqcıl, yükləmə intervalı ölçüsü</string>
     <string name="progressive_load_interval_summary">Daha aşağı dəyər ilkin video yükləməni sürətləndirə bilər.</string>
-    <string name="views_placeholder">baxış</string>
     <string name="playback_pitch">Ucalıq</string>
     <string name="filename">Fayl adı</string>
     <string name="invalid_filename">Yanlış fayl adı!</string>

@@ -147,7 +147,6 @@
     <string name="shareTo">URL teilen an</string>
     <string name="downloads_directory">Download-Ordner</string>
     <string name="movies_directory">Filmordner</string>
-    <string name="views">%1$s Aufrufe</string>
     <string name="defaultIcon">Standard</string>
     <string name="instance_name">Instanzname</string>
     <string name="instance_api_url">URL zur Instanz-API</string>
@@ -319,7 +318,6 @@
     <string name="limit_hls">HLS auf 1080p beschränken</string>
     <string name="save_feed_summary">Lade den Abo-Feed im Hintergrund und verhindere, dass er automatisch aktualisiert wird.</string>
     <string name="delete">Aus Downloads löschen</string>
-    <string name="views_placeholder">Aufrufe</string>
     <string name="skip_buttons_summary">Schaltflächen anzeigen, um zum nächsten oder vorherigen Video zu springen.</string>
     <string name="resize_mode_zoom">Vergrößern</string>
     <string name="repeat_mode">Dauerschleife</string>
