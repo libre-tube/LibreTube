@@ -155,7 +155,7 @@
     <string name="legacyIcon">Kayıp miras</string>
     <string name="shapedIcon">Aptal şekilli</string>
     <string name="flameIcon">Uçan alev</string>
-    <string name="instance_summary">Piped, giriş ve abonelikler</string>
+    <string name="instance_summary">Piped, giriş ve hesap</string>
     <string name="addInstance">Oluşum Ekle</string>
     <string name="clear_customInstances">Eklenenleri temizle</string>
     <string name="instance_api_url">Oluşum API\'sinin URL\'si</string>
@@ -448,4 +448,6 @@
     <string name="custom_playback_speed">Özel hız</string>
     <string name="custom_playback_speed_summary">Normal oynatıcıdan farklı oynatma hızı kullan.</string>
     <string name="category">Kategori</string>
+    <string name="normal_views">%1$s görüntüleme%2$s</string>
+    <string name="trending_views">%1$s • %2$s görüntüleme • %3$s</string>
 </resources>
