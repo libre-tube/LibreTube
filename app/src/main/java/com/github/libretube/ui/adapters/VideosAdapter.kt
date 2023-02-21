@@ -33,8 +33,7 @@ import com.github.libretube.util.TextUtils
 class VideosAdapter(
     private val streamItems: MutableList<StreamItem>,
     private val showAllAtOnce: Boolean = true,
-    private val forceMode: ForceMode = ForceMode.NONE,
-    private val hideWatched: Boolean = false
+    private val forceMode: ForceMode = ForceMode.NONE
 ) : RecyclerView.Adapter<VideosViewHolder>() {
 
     private var visibleCount = minOf(10, streamItems.size)
@@ -116,13 +115,8 @@ class VideosAdapter(
         }
 
         videoId?.let {
-            val shouldHide =
-                (holder.trendingRowBinding?.watchProgress ?: holder.videoRowBinding!!.watchProgress)
-                    .setWatchProgressLength(it, video.duration ?: 0L)
-            if (hideWatched && shouldHide) {
-                hideItemView(holder)
-                return
-            }
+            (holder.trendingRowBinding?.watchProgress ?: holder.videoRowBinding!!.watchProgress)
+                .setWatchProgressLength(it, video.duration ?: 0L)
         }
 
         // Trending layout

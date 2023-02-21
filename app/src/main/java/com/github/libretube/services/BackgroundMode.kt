@@ -25,8 +25,6 @@ import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.extensions.TAG
-import com.github.libretube.extensions.awaitQuery
-import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.checkForSegments
@@ -37,8 +35,10 @@ import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.PlaybackException
 import com.google.android.exoplayer2.Player
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 
@@ -154,7 +154,7 @@ class BackgroundMode : LifecycleService() {
             // indicator that a new video is getting loaded
             this.streams ?: return@let
 
-            query {
+            CoroutineScope(Dispatchers.IO).launch {
                 Database.watchPositionDao().insertAll(watchPosition)
             }
         }
@@ -213,7 +213,7 @@ class BackgroundMode : LifecycleService() {
             player?.seekTo(seekToPosition)
         } else if (PlayerHelper.watchPositionsAudio) {
             runCatching {
-                val watchPosition = awaitQuery {
+                val watchPosition = runBlocking {
                     Database.watchPositionDao().findById(videoId)
                 }
                 streams?.duration?.let {
