@@ -9,7 +9,7 @@
     <string name="share">শেয়ার</string>
     <string name="import_from_yt_summary">ইউটিউব অথবা নিউপাইপ হতে</string>
     <string name="app_theme">থিম</string>
-    <string name="server_error">সার্ভারের সাথে সংযোগ স্থাপনে সমস্যা হয়েছে। আপনি কি অন্য ইনস্ট্যান্স চেষ্টা করবেন\?</string>
+    <string name="server_error">সার্ভারের সাথে সংযোগ স্থাপনে সমস্যা হয়েছে। অন্য ইনস্ট্যান্স ব্যবহার করুন।</string>
     <string name="unknown_error">নেটওয়ার্ক ত্রুটি।</string>
     <string name="error">একটি ত্রুটি দেখা দিয়েছে।</string>
     <string name="empty">আপনাকে ব্যবহারকারীর নাম ও পাসওয়ার্ড উল্লেখ করতে হবে।</string>
@@ -75,7 +75,7 @@
     <string name="youtube">ইউটিউব</string>
     <string name="playOnBackground">ব্যাকগ্রাউন্ডে প্লে করুন</string>
     <string name="update_available">সংস্করণ %1$s এ আপডেট করা যাবে</string>
-    <string name="update_available_text">আপনি কি গিটহাব রিলিজ থেকে ডাউনলোড করতে ইচ্ছুক\?</string>
+    <string name="update_available_text">নতুন আপডেট এসেছে। গিটহাব রিলিজ পেইজ খুলতে চাপুন।</string>
     <string name="appearance">উপস্থাপনা</string>
     <string name="app_behavior">আচরণ</string>
     <string name="downloads">ডাউনলোডগুলো</string>
@@ -387,4 +387,9 @@
     <string name="clear_bookmarks">বুকমার্ক মুছে দিন</string>
     <string name="bookmarks_empty">কোনো বুকমার্ক নেই!</string>
     <string name="pop_up">পপ-আপ</string>
+    <string name="replies">রিপ্লাইগুলা</string>
+    <string name="download_completed">ডাউনলোড শেষ হয়েছে</string>
+    <string name="concurrent_downloads">সর্বোচ্চ সমান্তরাল ডাউনলোড</string>
+    <string name="no_subtitle">সাবটাইটেল নেই</string>
+    <string name="download_paused">ডাউনলোড থামানো আছে</string>
 </resources>
