@@ -161,7 +161,7 @@
     <string name="app_behavior">Поведінка</string>
     <string name="download_directory">Завантажити до</string>
     <string name="donate">Підтримати</string>
-    <string name="instance_summary">Piped, обліковий запис і підписки</string>
+    <string name="instance_summary">Piped, паролі й обліковий запис</string>
     <string name="quality">Якість</string>
     <string name="behavior">Поведінка</string>
     <string name="version">Версія %1$s</string>
