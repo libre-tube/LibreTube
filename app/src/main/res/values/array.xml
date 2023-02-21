@@ -13,16 +13,16 @@
         <item>privacy.com.de</item>
     </string-array>
     <string-array name="instancesValue">
-        <item>https://pipedapi.kavin.rocks/</item>
-        <item>https://pipedapi.tokhmi.xyz/</item>
-        <item>https://pipedapi.moomoo.me/</item>
-        <item>https://pa.mint.lgbt/</item>
-        <item>https://pa.il.ax/</item>
-        <item>https://pipedapi.syncpundit.com/</item>
-        <item>https://api-piped.mha.fi/</item>
-        <item>https://api-piped.shimul.me/</item>
-        <item>https://api.yt.jae.fi/</item>
-        <item>https://piped-api.privacy.com.de/</item>
+        <item>https://pipedapi.kavin.rocks</item>
+        <item>https://pipedapi.tokhmi.xyz</item>
+        <item>https://pipedapi.moomoo.me</item>
+        <item>https://pa.mint.lgbt</item>
+        <item>https://pa.il.ax</item>
+        <item>https://pipedapi.syncpundit.com</item>
+        <item>https://api-piped.mha.fi</item>
+        <item>https://api-piped.shimul.me</item>
+        <item>https://api.yt.jae.fi</item>
+        <item>https://piped-api.privacy.com.de</item>
     </string-array>
 
     <string-array name="languages">
