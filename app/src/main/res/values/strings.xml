@@ -164,7 +164,7 @@
     <string name="shapedIcon">Silly shaped</string>
     <string name="flameIcon">Flying flame</string>
     <string name="birdIcon">Boosted bird</string>
-    <string name="instance_summary">Piped, login, and subscriptions</string>
+    <string name="instance_summary">Piped, login, and account</string>
     <string name="customInstance_summary">Add…</string>
     <string name="instance_name">Instance name</string>
     <string name="instance_api_url">URL to instance API</string>
