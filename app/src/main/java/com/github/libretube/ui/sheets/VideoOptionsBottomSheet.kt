@@ -101,7 +101,7 @@ class VideoOptionsBottomSheet(
                 getString(R.string.mark_as_watched) -> {
                     val watchPosition = WatchPosition(videoId, Long.MAX_VALUE)
                     CoroutineScope(Dispatchers.IO).launch {
-                        DatabaseHolder.Database.watchPositionDao().insertAll(watchPosition)
+                        DatabaseHolder.Database.watchPositionDao().insertAll(listOf(watchPosition))
                     }
                     if (PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)) {
                         // get the host fragment containing the current fragment
