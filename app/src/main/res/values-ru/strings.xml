@@ -136,7 +136,7 @@
     <string name="fireIcon">Огненный огонь</string>
     <string name="torchIcon">Модный факел</string>
     <string name="flameIcon">Порхающее пламя</string>
-    <string name="instance_summary">Аккаунт Piped и подписки</string>
+    <string name="instance_summary">Piped, вход и аккаунт</string>
     <string name="version">Версия %1$s</string>
     <string name="about_summary">Познакомьтесь с командой LibreTube и узнайте, как все это происходит.</string>
     <string name="category_filler">Филлер/шутки</string>
@@ -448,4 +448,6 @@
     <string name="custom_playback_speed">Пользовательская скорость</string>
     <string name="custom_playback_speed_summary">Используйте скорость воспроизведения, отличную от скорости обычного плеера.</string>
     <string name="category">Категория</string>
+    <string name="normal_views">%1$s просмотров%2$s</string>
+    <string name="trending_views">%1$s • %2$s просмотров • %3$s</string>
 </resources>
