@@ -123,21 +123,16 @@ class InstanceSettings : BasePreferenceFragment() {
     private fun initInstancesPref(instancePrefs: List<ListPreference>) {
         val appContext = requireContext().applicationContext
 
-        instancePrefs.forEach { instancePref ->
-            if (instancePref.entry.isNullOrBlank()) {
-                instancePref.value = context?.resources?.getStringArray(R.array.instancesValue)?.first().orEmpty()
-            }
-
-            instancePref.summaryProvider =
-                Preference.SummaryProvider<ListPreference> { preference ->
-                    preference.entry.takeIf { !it.isNullOrBlank() }
-                        ?: context?.resources?.getStringArray(R.array.instances)?.first().orEmpty()
-                }
-        }
-
         lifecycleScope.launchWhenCreated {
             val customInstances = withContext(Dispatchers.IO) {
                 Database.customInstanceDao().getAll()
+            }
+
+            for (instancePref in instancePrefs) {
+                instancePref.summaryProvider =
+                    Preference.SummaryProvider<ListPreference> { preference ->
+                        preference.entry
+                    }
             }
 
             // fetch official public instances from kavin.rocks as well as tokhmi.xyz as fallback
@@ -164,6 +159,10 @@ class InstanceSettings : BasePreferenceFragment() {
                     // add custom instances to the list preference
                     instancePref.entries = instances.map { it.name }.toTypedArray()
                     instancePref.entryValues = instances.map { it.apiUrl }.toTypedArray()
+                    instancePref.summaryProvider =
+                        Preference.SummaryProvider<ListPreference> { preference ->
+                            preference.entry
+                        }
                 }
             }
         }
