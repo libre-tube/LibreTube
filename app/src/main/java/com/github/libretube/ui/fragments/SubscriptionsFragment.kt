@@ -13,6 +13,8 @@ import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
+import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.LegacySubscriptionAdapter
 import com.github.libretube.ui.adapters.SubscriptionChannelAdapter
@@ -20,6 +22,8 @@ import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 
 class SubscriptionsFragment : BaseFragment() {
     private lateinit var binding: FragmentSubscriptionsBinding
@@ -159,7 +163,16 @@ class SubscriptionsFragment : BaseFragment() {
                 2 -> it.isShort
                 else -> throw IllegalArgumentException()
             }
+        }.let { streams ->
+            runBlocking {
+                if (!PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)) {
+                    streams
+                } else {
+                    removeWatchVideosFromFeed(streams)
+                }
+            }
         }
+
         // sort the feed
         val sortedFeed = when (selectedSortOrder) {
             0 -> feed
@@ -191,12 +204,25 @@ class SubscriptionsFragment : BaseFragment() {
         binding.subProgress.visibility = View.GONE
         subscriptionsAdapter = VideosAdapter(
             sortedFeed.toMutableList(),
-            showAllAtOnce = false,
-            hideWatched = PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)
+            showAllAtOnce = false
         )
         binding.subFeed.adapter = subscriptionsAdapter
 
         PreferenceHelper.updateLastFeedWatchedTime()
+    }
+
+    private fun removeWatchVideosFromFeed(streams: List<StreamItem>): List<StreamItem> {
+        return runBlocking {
+            streams.filter {
+                runBlocking(Dispatchers.IO) {
+                    runCatching {
+                        val watchPosition = DatabaseHolder.Database.watchPositionDao()
+                            .findById(it.url.orEmpty().toID())?.position?.div(1000)
+                        (watchPosition ?: 0) < 0.9 * (it.duration ?: 1L)
+                    }.getOrDefault(false)
+                }
+            }
+        }
     }
 
     private fun showSubscriptions() {

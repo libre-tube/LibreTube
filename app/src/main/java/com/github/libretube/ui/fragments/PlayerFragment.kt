@@ -56,10 +56,8 @@ import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.ShareObjectType
-import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.hideKeyboard
-import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.BackgroundHelper
@@ -114,6 +112,7 @@ import kotlin.math.abs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -609,7 +608,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     private fun saveWatchPosition() {
         if (!PlayerHelper.watchPositionsVideo) return
         val watchPosition = WatchPosition(videoId!!, exoPlayer.currentPosition)
-        query {
+        CoroutineScope(Dispatchers.IO).launch {
             Database.watchPositionDao().insertAll(watchPosition)
         }
     }
@@ -765,7 +764,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     private fun seekToWatchPosition() {
         // browse the watch positions
         val position = try {
-            awaitQuery {
+            runBlocking {
                 Database.watchPositionDao().findById(videoId!!)?.position
             }
         } catch (e: Exception) {
