@@ -29,7 +29,7 @@ class CreatePlaylistDialog(
 
             playlistUrl?.queryParameter("list")?.let {
                 lifecycleScope.launch {
-                    dialog?.hide()
+                    requireDialog().hide()
                     val playlistId = withContext(Dispatchers.IO) {
                         PlaylistsHelper.clonePlaylist(requireContext(), it)
                     }
@@ -56,6 +56,7 @@ class CreatePlaylistDialog(
             val listName = binding.playlistName.text.toString()
             if (listName != "") {
                 lifecycleScope.launch {
+                    requireDialog().hide()
                     val playlistId = withContext(Dispatchers.IO) {
                         PlaylistsHelper.createPlaylist(listName, requireContext())
                     }
