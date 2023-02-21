@@ -31,7 +31,7 @@
     <string name="defres">Risoluzione video</string>
     <string name="dlisinprogress">Un altro scaricamento è in corso, si prega di attendere che termini.</string>
     <string name="unknown_error">Errore di connessione.</string>
-    <string name="server_error">Il server ha un problema. Prova un\'altra istanza\?</string>
+    <string name="server_error">Sembra esserci un problema con il server selezionato. Prova un\'altra istanza.</string>
     <string name="customInstance">Personalizzata</string>
     <string name="instances">Scegli…</string>
     <string name="success">Finito.</string>
@@ -121,7 +121,7 @@
     <string name="video_format">Formato video</string>
     <string name="advanced_summary">Download e ripristino</string>
     <string name="update_available">La versione %1$s è disponibile</string>
-    <string name="update_available_text">Andare ai rilasci su GitHub per scaricarlo\?</string>
+    <string name="update_available_text">Nuovo aggiornamento disponibile. Clicca per aprire la pagina delle pubblicazioni su GitHub.</string>
     <string name="appearance">Aspetto</string>
     <string name="app_behavior">Comportamento</string>
     <string name="download_directory">Scarica in</string>
@@ -159,7 +159,7 @@
     <string name="addInstance">Aggiungi istanza</string>
     <string name="clear_customInstances">Cancella le aggiunte</string>
     <string name="empty_instance">Compila il nome e l\'URL dell\'API.</string>
-    <string name="instance_summary">Piped, accesso, e iscrizioni</string>
+    <string name="instance_summary">Piped, accesso e account</string>
     <string name="customInstance_summary">Aggiungi…</string>
     <string name="instance_api_url">URL API dell\'istanza</string>
     <string name="invalid_url">Si prega di inserire un URL che funzioni</string>
@@ -445,4 +445,9 @@
     <string name="codecs">Codec</string>
     <string name="mark_as_watched">Segna come visto</string>
     <string name="unsupported_file_format">Formato di file non supportato: %1$s</string>
+    <string name="trending_views">%1$s • %2$s visualizzazioni • %3$s</string>
+    <string name="normal_views">%1$s visualizzazioni%2$s</string>
+    <string name="custom_playback_speed">Velocità personalizzata</string>
+    <string name="custom_playback_speed_summary">Usa una velocità di riproduzione diversa da quella del lettore normale.</string>
+    <string name="category">Categoria</string>
 </resources>
