@@ -6,4 +6,6 @@ interface OnlinePlayerOptions {
     fun onQualityClicked()
 
     fun onAudioStreamClicked()
+
+    fun onStatsClicked()
 }

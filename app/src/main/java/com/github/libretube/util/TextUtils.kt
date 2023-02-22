@@ -77,4 +77,9 @@ object TextUtils {
             DateUtils.getRelativeTimeSpanString(unixTime)
         }
     }
+
+    fun formatBitrate(bitrate: Int?): String {
+        bitrate ?: return ""
+        return "${bitrate / 1024}kbps"
+    }
 }
