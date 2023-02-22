@@ -450,4 +450,6 @@
     <string name="category">קטגוריה</string>
     <string name="trending_views">%1$s • %2$s צפיות • %3$s</string>
     <string name="normal_views">%1$s צפיות%2$s</string>
+    <string name="video_id">מזהה סרטון</string>
+    <string name="stats_for_nerds">סטטיסטיקה לחנונים</string>
 </resources>
