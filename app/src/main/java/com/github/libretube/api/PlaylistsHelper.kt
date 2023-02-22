@@ -128,7 +128,7 @@ object PlaylistsHelper {
             true
         } else {
             val playlist = PlaylistId(playlistId, newName = newName)
-            RetrofitInstance.authApi.renamePlaylist(token, playlist).playlistId != null
+            RetrofitInstance.authApi.renamePlaylist(token, playlist).message == "ok"
         }
     }
 
@@ -229,6 +229,25 @@ object PlaylistsHelper {
         return runCatching {
             RetrofitInstance.authApi.clonePlaylist(token, PlaylistId(playlistId))
         }.getOrNull()?.playlistId
+    }
+
+    suspend fun deletePlaylist(playlistId: String, playlistType: PlaylistType): Boolean {
+        if (playlistType == PlaylistType.LOCAL) {
+            DatabaseHolder.Database.localPlaylistsDao().deletePlaylistById(playlistId)
+            DatabaseHolder.Database.localPlaylistsDao().deletePlaylistItemsByPlaylistId(playlistId)
+            return true
+        }
+
+        val response = try {
+            RetrofitInstance.authApi.deletePlaylist(
+                PreferenceHelper.getToken(),
+                PlaylistId(playlistId)
+            )
+        } catch (e: Exception) {
+            Log.e(TAG(), e.toString())
+            return false
+        }
+        return response.message == "ok"
     }
 
     fun getPrivatePlaylistType(): PlaylistType {

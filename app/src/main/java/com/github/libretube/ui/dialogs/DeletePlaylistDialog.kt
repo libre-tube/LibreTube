@@ -2,17 +2,13 @@ package com.github.libretube.ui.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
-import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.obj.PlaylistId
-import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.enums.PlaylistType
-import com.github.libretube.extensions.TAG
-import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.extensions.toastFromMainDispatcher
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -27,41 +23,20 @@ class DeletePlaylistDialog(
             .setTitle(R.string.deletePlaylist)
             .setMessage(R.string.areYouSure)
             .setPositiveButton(R.string.yes) { _, _ ->
-                lifecycleScope.launch(Dispatchers.IO) {
-                    deletePlaylist()
+                val appContext = context?.applicationContext
+                CoroutineScope(Dispatchers.IO).launch {
+                    val success = PlaylistsHelper.deletePlaylist(playlistId, playlistType)
+                    appContext?.toastFromMainDispatcher(
+                        if (success) R.string.success else R.string.fail
+                    )
+                    withContext(Dispatchers.Main) {
+                        runCatching {
+                            onSuccess.invoke()
+                        }
+                    }
                 }
             }
             .setNegativeButton(R.string.cancel, null)
             .show()
-    }
-
-    private suspend fun deletePlaylist() {
-        if (playlistType == PlaylistType.LOCAL) {
-            DatabaseHolder.Database.localPlaylistsDao().deletePlaylistById(playlistId)
-            DatabaseHolder.Database.localPlaylistsDao().deletePlaylistItemsByPlaylistId(playlistId)
-            withContext(Dispatchers.Main) {
-                onSuccess()
-            }
-            return
-        }
-
-        val response = try {
-            RetrofitInstance.authApi.deletePlaylist(
-                PreferenceHelper.getToken(),
-                PlaylistId(playlistId)
-            )
-        } catch (e: Exception) {
-            Log.e(TAG(), e.toString())
-            return
-        }
-        try {
-            if (response.message == "ok") {
-                withContext(Dispatchers.Main) {
-                    onSuccess()
-                }
-            }
-        } catch (e: Exception) {
-            Log.e(TAG(), e.toString())
-        }
     }
 }
