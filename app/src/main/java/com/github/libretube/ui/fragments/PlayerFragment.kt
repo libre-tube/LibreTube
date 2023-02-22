@@ -923,7 +923,11 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                     binding.player.autoplayEnabled
                 ) {
                     transitioning = true
-                    playNextVideo()
+                    if (PlayerHelper.autoPlayCountdown) {
+                        showAutoPlayCountdown()
+                    } else {
+                        playNextVideo()
+                    }
                 }
 
                 if (playbackState == Player.STATE_READY) {
@@ -1011,6 +1015,18 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         }
 
         playerBinding.skipNext.setOnClickListener {
+            playNextVideo()
+        }
+    }
+
+    private fun showAutoPlayCountdown() {
+        binding.player.useController = false
+        binding.player.hideController()
+        binding.autoplayCountdown.setHideSelfListener {
+            binding.autoplayCountdown.visibility = View.GONE
+            binding.player.useController = true
+        }
+        binding.autoplayCountdown.startCountdown {
             playNextVideo()
         }
     }
