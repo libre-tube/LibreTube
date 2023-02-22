@@ -155,7 +155,7 @@ class BackgroundMode : LifecycleService() {
             this.streams ?: return@let
 
             CoroutineScope(Dispatchers.IO).launch {
-                Database.watchPositionDao().insertAll(watchPosition)
+                Database.watchPositionDao().insertAll(listOf(watchPosition))
             }
         }
         handler.postDelayed(this::updateWatchPosition, 500)

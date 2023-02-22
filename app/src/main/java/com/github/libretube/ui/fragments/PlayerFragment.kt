@@ -609,7 +609,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         if (!PlayerHelper.watchPositionsVideo) return
         val watchPosition = WatchPosition(videoId!!, exoPlayer.currentPosition)
         CoroutineScope(Dispatchers.IO).launch {
-            Database.watchPositionDao().insertAll(watchPosition)
+            Database.watchPositionDao().insertAll(listOf(watchPosition))
         }
     }
 

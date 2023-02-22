@@ -1,7 +1,6 @@
 package com.github.libretube.db.dao
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -16,13 +15,7 @@ interface WatchPositionDao {
     suspend fun findById(videoId: String): WatchPosition?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(vararg watchPositions: WatchPosition)
-
-    @Delete
-    suspend fun delete(watchPosition: WatchPosition)
-
-    @Query("DELETE FROM watchHistoryItem WHERE videoId = :videoId")
-    suspend fun deleteById(videoId: String)
+    suspend fun insertAll(watchPositions: List<WatchPosition>)
 
     @Query("DELETE FROM watchPosition")
     suspend fun deleteAll()
