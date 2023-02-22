@@ -4,12 +4,12 @@ import android.app.Dialog
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.databinding.DialogCreatePlaylistBinding
 import com.github.libretube.extensions.toastFromMainThread
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -28,17 +28,19 @@ class CreatePlaylistDialog(
             val appContext = context?.applicationContext
 
             playlistUrl?.queryParameter("list")?.let {
-                CoroutineScope(Dispatchers.IO).launch {
-                    val playlistId = PlaylistsHelper.clonePlaylist(requireContext(), it)?.also {
-                        withContext(Dispatchers.Main) {
-                            onSuccess.invoke()
-                        }
+                lifecycleScope.launch {
+                    requireDialog().hide()
+                    val playlistId = withContext(Dispatchers.IO) {
+                        PlaylistsHelper.clonePlaylist(requireContext(), it)
+                    }
+                    if (playlistId != null) {
+                        onSuccess()
                     }
                     appContext?.toastFromMainThread(
                         if (playlistId != null) R.string.playlistCloned else R.string.server_error
                     )
+                    dismiss()
                 }
-                dismiss()
             } ?: run {
                 Toast.makeText(context, R.string.invalid_url, Toast.LENGTH_SHORT).show()
             }
@@ -53,16 +55,16 @@ class CreatePlaylistDialog(
             binding.createNewPlaylist.setOnClickListener(null)
             val listName = binding.playlistName.text.toString()
             if (listName != "") {
-                CoroutineScope(Dispatchers.IO).launch {
-                    val playlistId = PlaylistsHelper.createPlaylist(
-                        listName,
-                        requireContext().applicationContext
-                    )
-                    withContext(Dispatchers.Main) {
-                        if (playlistId != null) onSuccess.invoke()
+                lifecycleScope.launch {
+                    requireDialog().hide()
+                    val playlistId = withContext(Dispatchers.IO) {
+                        PlaylistsHelper.createPlaylist(listName, requireContext())
                     }
+                    if (playlistId != null) {
+                        onSuccess()
+                    }
+                    dismiss()
                 }
-                dismiss()
             } else {
                 Toast.makeText(context, R.string.emptyPlaylistName, Toast.LENGTH_LONG).show()
             }

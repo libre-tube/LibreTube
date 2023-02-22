@@ -18,9 +18,8 @@ import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.fragments.SubscriptionsFragment
 import com.github.libretube.util.PlayingQueue
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Dialog with different options for a selected video.
@@ -75,27 +74,23 @@ class VideoOptionsBottomSheet(
                     shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
                 getString(R.string.play_next) -> {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        try {
-                            PlayingQueue.addAsNext(
-                                RetrofitInstance.api.getStreams(videoId)
-                                    .toStreamItem(videoId)
-                            )
-                        } catch (e: Exception) {
-                            e.printStackTrace()
+                    try {
+                        val streamItem = withContext(Dispatchers.IO) {
+                            RetrofitInstance.api.getStreams(videoId).toStreamItem(videoId)
                         }
+                        PlayingQueue.addAsNext(streamItem)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
                 getString(R.string.add_to_queue) -> {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        try {
-                            PlayingQueue.add(
-                                RetrofitInstance.api.getStreams(videoId)
-                                    .toStreamItem(videoId)
-                            )
-                        } catch (e: Exception) {
-                            e.printStackTrace()
+                    try {
+                        val streamItem = withContext(Dispatchers.IO) {
+                            RetrofitInstance.api.getStreams(videoId).toStreamItem(videoId)
                         }
+                        PlayingQueue.add(streamItem)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
                 getString(R.string.mark_as_watched) -> {

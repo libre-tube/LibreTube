@@ -109,7 +109,6 @@ import java.io.IOException
 import java.util.*
 import java.util.concurrent.Executors
 import kotlin.math.abs
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -656,7 +655,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             }
 
             if (PlayingQueue.isEmpty()) {
-                CoroutineScope(Dispatchers.IO).launch {
+                lifecycleScope.launch(Dispatchers.IO) {
                     if (playlistId != null) {
                         PlayingQueue.insertPlaylist(playlistId!!, streams.toStreamItem(videoId!!))
                     } else if (channelId != null) {
@@ -721,7 +720,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
      * fetch the segments for SponsorBlock
      */
     private fun fetchSponsorBlockSegments() {
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             runCatching {
                 val categories = PlayerHelper.getSponsorBlockCategories()
                 if (categories.isEmpty()) return@runCatching
