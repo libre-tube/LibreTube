@@ -128,7 +128,7 @@ object PlaylistsHelper {
             true
         } else {
             val playlist = PlaylistId(playlistId, newName = newName)
-            RetrofitInstance.authApi.renamePlaylist(token, playlist).playlistId != null
+            RetrofitInstance.authApi.renamePlaylist(token, playlist).message == "ok"
         }
     }
 
