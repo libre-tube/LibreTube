@@ -913,7 +913,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 // save the watch position to the database
                 // only called when the position is unequal to 0, otherwise it would become reset
                 // before the player can seek to the saved position from videos of the queue
-                if (exoPlayer.currentPosition != 0L) saveWatchPosition()
+                // not called when the video has ended, since it then might save it to the next autoplay video
+                if (exoPlayer.currentPosition != 0L && playbackState != Player.STATE_ENDED) saveWatchPosition()
 
                 // check if video has ended, next video is available and autoplay is enabled.
                 if (
