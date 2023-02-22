@@ -231,6 +231,25 @@ object PlaylistsHelper {
         }.getOrNull()?.playlistId
     }
 
+    suspend fun deletePlaylist(playlistId: String, playlistType: PlaylistType): Boolean {
+        if (playlistType == PlaylistType.LOCAL) {
+            DatabaseHolder.Database.localPlaylistsDao().deletePlaylistById(playlistId)
+            DatabaseHolder.Database.localPlaylistsDao().deletePlaylistItemsByPlaylistId(playlistId)
+            return true
+        }
+
+        val response = try {
+            RetrofitInstance.authApi.deletePlaylist(
+                PreferenceHelper.getToken(),
+                PlaylistId(playlistId)
+            )
+        } catch (e: Exception) {
+            Log.e(TAG(), e.toString())
+            return false
+        }
+        return response.message == "ok"
+    }
+
     fun getPrivatePlaylistType(): PlaylistType {
         return if (loggedIn) PlaylistType.PRIVATE else PlaylistType.LOCAL
     }
