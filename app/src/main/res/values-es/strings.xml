@@ -452,4 +452,7 @@
     <string name="trending_views">%1$s • %2$s visualizaciones • %3$s</string>
     <string name="stats_for_nerds">Estadísticas para frikis</string>
     <string name="video_id">Identificación del vídeo</string>
+    <string name="autoplay_countdown">Cuenta atrás para reproducción automática</string>
+    <string name="autoplay_countdown_summary">Muestra una cuenta atrás de 5 segundos antes de reproducir automáticamente el siguiente vídeo.</string>
+    <string name="playing_next">Próxima reprodución en %1$s</string>
 </resources>
