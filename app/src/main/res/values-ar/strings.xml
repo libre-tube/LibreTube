@@ -450,4 +450,6 @@
     <string name="category">الفئة</string>
     <string name="trending_views">%1$s • %2$s مشاهدات • %3$s</string>
     <string name="normal_views">%1$s مشاهدات %2$s</string>
+    <string name="stats_for_nerds">احصائيات لتقنيين</string>
+    <string name="video_id">معرف الفيديو</string>
 </resources>
