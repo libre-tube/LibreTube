@@ -78,6 +78,7 @@ import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.dialogs.StatsDialog
 import com.github.libretube.ui.extensions.setAspectRatio
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
@@ -1377,6 +1378,12 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 }
             }
             .show(childFragmentManager)
+    }
+
+    override fun onStatsClicked() {
+        if (!this::streams.isInitialized) return
+        StatsDialog(exoPlayer, videoId ?: return)
+            .show(childFragmentManager, null)
     }
 
     override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {

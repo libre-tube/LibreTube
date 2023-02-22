@@ -64,6 +64,15 @@
 
     </style>
 
+    <style name="DisabledTextInput">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:editable">false</item>
+        <item name="android:textIsSelectable">true</item>
+
+    </style>
+
     <style name="PlayerActionsLayout">
 
         <item name="android:layout_width">0dp</item>

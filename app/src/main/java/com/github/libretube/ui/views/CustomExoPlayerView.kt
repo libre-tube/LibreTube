@@ -348,6 +348,12 @@ internal class CustomExoPlayerView(
                             }
                         ) {
                             it.onCaptionsClicked()
+                        },
+                        BottomSheetItem(
+                            context.getString(R.string.stats_for_nerds),
+                            R.drawable.ic_info
+                        ) {
+                            it.onStatsClicked()
                         }
                     )
                 )

@@ -444,6 +444,8 @@
     <string name="custom_playback_speed">Custom speed</string>
     <string name="custom_playback_speed_summary">Use a different playback speed than for the normal player.</string>
     <string name="category">Category</string>
+    <string name="stats_for_nerds">Stats for nerds</string>
+    <string name="video_id">Video ID</string>
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
     <string name="download_channel_description">Shows a notification when downloading media.</string>
