@@ -92,6 +92,7 @@ object PreferenceKeys {
     const val ALTERNATIVE_PIP_CONTROLS = "alternative_pip_controls"
     const val SKIP_SILENCE = "skip_silence"
     const val ENABLED_VIDEO_CODECS = "video_codecs"
+    const val AUTOPLAY_COUNTDOWN = "autoplay_countdown"
 
     /**
      * Background mode

@@ -41,9 +41,9 @@
         <SwitchPreferenceCompat
             android:defaultValue="false"
             android:icon="@drawable/ic_headphones"
+            android:summary="@string/alternative_pip_controls_summary"
             app:key="alternative_pip_controls"
-            app:title="@string/alternative_pip_controls"
-            android:summary="@string/alternative_pip_controls_summary"/>
+            app:title="@string/alternative_pip_controls" />
 
         <SwitchPreferenceCompat
             android:defaultValue="false"
@@ -159,16 +159,23 @@
             app:key="autoplay"
             app:title="@string/player_autoplay" />
 
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_speed"
+            android:summary="@string/autoplay_countdown_summary"
+            app:defaultValue="false"
+            app:key="autoplay_countdown"
+            app:title="@string/autoplay_countdown" />
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/background_mode">
 
         <SwitchPreferenceCompat
+            android:icon="@drawable/ic_headphones"
+            android:summary="@string/custom_playback_speed_summary"
             app:defaultValue="false"
             app:key="custom_playback_speed"
-            app:title="@string/custom_playback_speed"
-            android:summary="@string/custom_playback_speed_summary"
-            android:icon="@drawable/ic_headphones" />
+            app:title="@string/custom_playback_speed" />
 
         <com.github.libretube.ui.views.SliderPreference
             android:icon="@drawable/ic_speed"

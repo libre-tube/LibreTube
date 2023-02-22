@@ -446,6 +446,9 @@
     <string name="category">Category</string>
     <string name="stats_for_nerds">Stats for nerds</string>
     <string name="video_id">Video ID</string>
+    <string name="autoplay_countdown">Autoplay countdown</string>
+    <string name="autoplay_countdown_summary">Show a 5s countdown before auto-playing the next video.</string>
+    <string name="playing_next">Playing next in %1$s</string>
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
     <string name="download_channel_description">Shows a notification when downloading media.</string>

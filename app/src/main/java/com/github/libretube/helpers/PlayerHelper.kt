@@ -274,6 +274,12 @@ object PlayerHelper {
             true
         )
 
+    val autoPlayCountdown: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.AUTOPLAY_COUNTDOWN,
+            false
+        )
+
     val seekIncrement: Long
         get() = PreferenceHelper.getString(
             PreferenceKeys.SEEK_INCREMENT,

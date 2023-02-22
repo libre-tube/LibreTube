@@ -349,6 +349,12 @@
                 app:drawableTint="@android:color/white" />
 
         </com.google.android.material.card.MaterialCardView>
+        
+        <com.github.libretube.ui.views.AutoplayCountdownView
+            android:id="@+id/autoplay_countdown"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
 
     </com.github.libretube.ui.views.CustomExoPlayerView>
 
