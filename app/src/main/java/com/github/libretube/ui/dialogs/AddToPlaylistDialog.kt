@@ -18,7 +18,6 @@ import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.ui.models.PlaylistViewModel
 import com.github.libretube.util.PlayingQueue
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 /**
@@ -75,34 +74,35 @@ class AddToPlaylistDialog(
                 binding.addToPlaylist.setOnClickListener {
                     val index = binding.playlistsSpinner.selectedItemPosition
                     viewModel.lastSelectedPlaylistId = response[index].id!!
-                    addToPlaylist(response[index].id!!)
-                    dialog?.dismiss()
+                    dialog?.hide()
+                    lifecycleScope.launch {
+                        addToPlaylist(response[index].id!!)
+                        dialog?.dismiss()
+                    }
                 }
             }
         }
     }
 
-    private fun addToPlaylist(playlistId: String) {
+    private suspend fun addToPlaylist(playlistId: String) {
         val appContext = context?.applicationContext ?: return
-        lifecycleScope.launch(Dispatchers.IO) {
-            val streams = when {
-                videoId != null -> listOf(
-                    RetrofitInstance.api.getStreams(videoId).toStreamItem(videoId)
-                )
-                else -> PlayingQueue.getStreams()
-            }
-
-            val success = try {
-                PlaylistsHelper.addToPlaylist(playlistId, *streams.toTypedArray())
-            } catch (e: Exception) {
-                Log.e(TAG(), e.toString())
-                appContext.toastFromMainThread(R.string.unknown_error)
-                return@launch
-            }
-            appContext.toastFromMainThread(
-                if (success) R.string.added_to_playlist else R.string.fail
+        val streams = when {
+            videoId != null -> listOf(
+                RetrofitInstance.api.getStreams(videoId).toStreamItem(videoId)
             )
+            else -> PlayingQueue.getStreams()
         }
+
+        val success = try {
+            PlaylistsHelper.addToPlaylist(playlistId, *streams.toTypedArray())
+        } catch (e: Exception) {
+            Log.e(TAG(), e.toString())
+            appContext.toastFromMainThread(R.string.unknown_error)
+            return
+        }
+        appContext.toastFromMainThread(
+            if (success) R.string.added_to_playlist else R.string.fail
+        )
     }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
