@@ -154,7 +154,7 @@
     <string name="gradientIcon">渐变</string>
     <string name="torchIcon">时尚火炬</string>
     <string name="fireIcon">简约火焰</string>
-    <string name="instance_summary">Piped、登录和订阅</string>
+    <string name="instance_summary">Piped、登录和账户</string>
     <string name="instance_api_url">实例 API 的 URL</string>
     <string name="addInstance">添加实例</string>
     <string name="empty_instance">需要填写名称与实例URL或链接才能保存。</string>
@@ -448,4 +448,5 @@
     <string name="custom_playback_speed">自定义速度</string>
     <string name="custom_playback_speed_summary">使用不同于常规播放器的播放速度。</string>
     <string name="category">类别</string>
+    <string name="trending_views">%1$s • %2$s 视图 • %3$s</string>
 </resources>
