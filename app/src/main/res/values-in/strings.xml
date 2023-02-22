@@ -75,7 +75,7 @@
     <string name="choose_filter">Pilih filter penelusuran</string>
     <string name="channels">Saluran</string>
     <string name="all">Semua</string>
-    <string name="playlists">Daftar putar</string>
+    <string name="playlists">Daftar Putar</string>
     <string name="okay">OK</string>
     <string name="history">Riwayat</string>
     <string name="search_history">Riwayat Penelusuran</string>
@@ -128,7 +128,7 @@
     <string name="instance_api_url">URL ke API instansi</string>
     <string name="player_autoplay">Mainkan secara otomatis</string>
     <string name="hls">HLS</string>
-    <string name="instance_summary">Piped, login, dan langganan</string>
+    <string name="instance_summary">Piped, log masuk, dan akun</string>
     <string name="reset">Atur ulang ke bawaan</string>
     <string name="watch_history">Riwayat Tontonan</string>
     <string name="audio">Audio</string>
@@ -376,7 +376,7 @@
     <string name="limit_to_runtime">Batasi ke runtime</string>
     <string name="trends">Tren</string>
     <string name="featured">Unggulan</string>
-    <string name="trending">Apa yang sedang tren</string>
+    <string name="trending">Sedang Tren</string>
     <string name="open_queue_from_notification">Buka antrean dari notifikasi</string>
     <string name="bookmarks">Markah</string>
     <string name="bookmark">Markah</string>

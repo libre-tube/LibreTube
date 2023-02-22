@@ -159,7 +159,7 @@
     <string name="donate">تبرّع</string>
     <string name="legacyIcon">الإرث الضائع</string>
     <string name="gradientIcon">التدرج اللوني</string>
-    <string name="instance_summary">الأنابيب وتسجيل الدخول والاشتراكات</string>
+    <string name="instance_summary">الأنابيب وتسجيل الدخول والحساب</string>
     <string name="instance_name">اسم المثيل</string>
     <string name="clear_customInstances">مسح المضاف</string>
     <string name="live">مباشر</string>
@@ -448,4 +448,6 @@
     <string name="custom_playback_speed">سرعة مخصصة</string>
     <string name="custom_playback_speed_summary">استخدم سرعة تشغيل مختلفة عن سرعة المشغل العادي.</string>
     <string name="category">الفئة</string>
+    <string name="trending_views">%1$s • %2$s مشاهدات • %3$s</string>
+    <string name="normal_views">%1$s مشاهدات %2$s</string>
 </resources>

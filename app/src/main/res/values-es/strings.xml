@@ -136,7 +136,7 @@
     <string name="shapedIcon">Conformado</string>
     <string name="flameIcon">Flama viva</string>
     <string name="birdIcon">Pájaro</string>
-    <string name="instance_summary">Piped, sesión, y suscripciones</string>
+    <string name="instance_summary">Piped, inicio de sesión y cuenta</string>
     <string name="instance_name">Nombre de la instancia</string>
     <string name="instance_api_url">URL de la API de la instancia</string>
     <string name="empty_instance">Rellene el nombre y la URL de la API.</string>
@@ -448,4 +448,6 @@
     <string name="custom_playback_speed">Velocidad personalizada</string>
     <string name="custom_playback_speed_summary">Utilice una velocidad de reproducción diferente a la del reproductor normal.</string>
     <string name="category">Categoría</string>
+    <string name="normal_views">%1$s visualizaciones%2$s</string>
+    <string name="trending_views">%1$s • %2$s visualizaciones • %3$s</string>
 </resources>

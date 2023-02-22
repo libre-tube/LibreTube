@@ -154,7 +154,7 @@
     <string name="empty_instance">Gebe den Namen und die API-URL ein.</string>
     <string name="clear_customInstances">Benutzerdefinierte Instanzen löschen</string>
     <string name="invalid_url">Bitte eine funktionierende URL angeben</string>
-    <string name="instance_summary">Piped, Anmeldung &amp; Abonnements</string>
+    <string name="instance_summary">Piped, Anmeldung und Konto</string>
     <string name="customInstance_summary">Hinzufügen…</string>
     <string name="category_music_offtopic">Musik: Nicht-musikalischer Abschnitt</string>
     <string name="category_preview">Vorschau/Rückblick</string>
@@ -446,4 +446,8 @@
     <string name="unsupported_file_format">Nicht unterstütztes Dateiformat: %1$s</string>
     <string name="codecs">Codecs</string>
     <string name="custom_playback_speed">Benutzerdefinierte Geschwindigkeit</string>
+    <string name="trending_views">%1$s • %2$s Aufrufe • %3$s</string>
+    <string name="normal_views">%1$s Aufrufe%2$s</string>
+    <string name="custom_playback_speed_summary">Verwenden Sie eine andere Wiedergabegeschwindigkeit als für den normalen Player.</string>
+    <string name="category">Kategorie</string>
 </resources>

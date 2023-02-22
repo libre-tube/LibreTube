@@ -238,7 +238,7 @@
     <string name="playing_queue">ଧାଡି ଖେଳିବା</string>
     <string name="queue">ଧାଡ଼ି</string>
     <string name="sb_markers">ମାର୍କର ଗୁଡ଼ିକ</string>
-    <string name="instance_summary">ପାଇପ୍, ଲଗ୍ ଇନ୍, ଆଉ ସଦସ୍ୟତା ଗୁଡ଼ିକ</string>
+    <string name="instance_summary">ପାଇପ୍, ଲଗଇନ୍, ଏବଂ ଆକାଉଣ୍ଟ୍</string>
     <string name="clear_customInstances">ଯୋଡ଼ାଯାଇଥିବା ଗୁଡ଼ିକୁ ବିଲୋପ କରନ୍ତୁ</string>
     <string name="related_streams">ସମ୍ବନ୍ଧିତ ବିଷୟବସ୍ତୁ</string>
     <string name="pauseOnScreenOff_summary">ସ୍କ୍ରିନ୍ ବନ୍ଦ ହୋଇଗଲେ ପ୍ଲେ-ବକ୍ ବନ୍ଦ କରନ୍ତୁ ।</string>
@@ -448,4 +448,6 @@
     <string name="custom_playback_speed">କଷ୍ଟମ୍ ବେଗ</string>
     <string name="custom_playback_speed_summary">ସାଧାରଣ ପ୍ଲେୟାର ଅପେକ୍ଷା ଏକ ଭିନ୍ନ ପ୍ଲେକ୍ ବେଗ ବ୍ୟବହାର କରନ୍ତୁ ।</string>
     <string name="category">ବର୍ଗ</string>
+    <string name="trending_views">%1$s •%2$s ଦର୍ଶନ •%3$s</string>
+    <string name="normal_views">%1$s ଦର୍ଶନ%2$s</string>
 </resources>

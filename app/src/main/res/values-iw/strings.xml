@@ -154,7 +154,7 @@
     <string name="flameIcon">להבה מעופפת</string>
     <string name="birdIcon">ציפור מוגברת</string>
     <string name="torchIcon">לפיד בוער</string>
-    <string name="instance_summary">Piped, כניסה ומינויים</string>
+    <string name="instance_summary">Piped, כניסה וחשבון</string>
     <string name="customInstance_summary">הוספה…</string>
     <string name="instance_name">שם העותק</string>
     <string name="empty_instance">יש למלא את השם ואת כתובת ה־API.</string>

@@ -160,7 +160,7 @@
     <string name="addInstance">Nümunə Əlavə Et</string>
     <string name="invalid_url">Zəhmət olmasa, işləyən URL\'ni daxil et</string>
     <string name="customInstance_summary">Əlavə et…</string>
-    <string name="instance_summary">Piped, giriş və abunəliklər</string>
+    <string name="instance_summary">Piped, giriş və hesab</string>
     <string name="empty_instance">Adı və API URL\'ni doldur.</string>
     <string name="clear_customInstances">Əlavələri təmizlə</string>
     <string name="version">Versiya %1$s</string>
