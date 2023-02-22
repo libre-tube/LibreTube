@@ -450,4 +450,9 @@
     <string name="category">Категорія</string>
     <string name="normal_views">%1$s переглядів%2$s</string>
     <string name="trending_views">%1$s • %2$s переглядів • %3$s</string>
+    <string name="playing_next">Наступне відтворення за %1$s</string>
+    <string name="autoplay_countdown">Таймер автовідтворення</string>
+    <string name="autoplay_countdown_summary">Показувати зворотний відлік 5 с до автовідтворення наступного відео.</string>
+    <string name="stats_for_nerds">Статистика для допитливих</string>
+    <string name="video_id">ID відео</string>
 </resources>
