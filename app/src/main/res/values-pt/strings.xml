@@ -450,4 +450,7 @@
     <string name="normal_views">%1$s visualizações %2$s</string>
     <string name="trending_views">%1$s • %2$s visualizações • %3$s</string>
     <string name="category">Categoria</string>
+    <string name="playing_next">Reproduzindo próximo em %1$s</string>
+    <string name="stats_for_nerds">Estatísticas para nerds</string>
+    <string name="video_id">ID do vídeo</string>
 </resources>
