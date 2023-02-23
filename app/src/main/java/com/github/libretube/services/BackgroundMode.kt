@@ -234,6 +234,7 @@ class BackgroundMode : LifecycleService() {
         if (player != null) return
 
         player = ExoPlayer.Builder(this)
+            .setUsePlatformDiagnostics(false)
             .setHandleAudioBecomingNoisy(true)
             .setAudioAttributes(PlayerHelper.getAudioAttributes(), true)
             .setLoadControl(PlayerHelper.getLoadControl())

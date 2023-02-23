@@ -70,6 +70,7 @@ class OfflinePlayerActivity : BaseActivity() {
         trackSelector = DefaultTrackSelector(this)
 
         player = ExoPlayer.Builder(this)
+            .setUsePlatformDiagnostics(false)
             .setHandleAudioBecomingNoisy(true)
             .setTrackSelector(trackSelector)
             .setLoadControl(PlayerHelper.getLoadControl())
