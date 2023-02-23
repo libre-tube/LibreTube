@@ -1304,6 +1304,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         }
 
         exoPlayer = ExoPlayer.Builder(requireContext())
+            .setUsePlatformDiagnostics(false)
             .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
             .setLoadControl(PlayerHelper.getLoadControl())
             .setTrackSelector(trackSelector)
