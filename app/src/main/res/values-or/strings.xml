@@ -450,4 +450,9 @@
     <string name="category">ବର୍ଗ</string>
     <string name="trending_views">%1$s •%2$s ଦର୍ଶନ •%3$s</string>
     <string name="normal_views">%1$s ଦର୍ଶନ%2$s</string>
+    <string name="playing_next">%1$s ରେ ପରବର୍ତ୍ତୀ ଚାଲିବ</string>
+    <string name="stats_for_nerds">ନର୍ଡସ୍ ପାଇଁ ପରିସଂଖ୍ୟାନ</string>
+    <string name="video_id">ଭିଡିଓ ID</string>
+    <string name="autoplay_countdown">ଅଟୋପ୍ଲେ କାଉଣ୍ଟଡାଉନ୍</string>
+    <string name="autoplay_countdown_summary">ପରବର୍ତ୍ତୀ ଭିଡିଓକୁ ଅଟୋ-ଖେଳିବା ପୂର୍ବରୁ 5s କାଉଣ୍ଟଡାଉନ୍ ଦେଖାନ୍ତୁ ।</string>
 </resources>

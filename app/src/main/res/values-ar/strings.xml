@@ -452,4 +452,7 @@
     <string name="normal_views">%1$s مشاهدات %2$s</string>
     <string name="stats_for_nerds">احصائيات لتقنيين</string>
     <string name="video_id">معرف الفيديو</string>
+    <string name="autoplay_countdown">العد التنازلي للتشغيل التلقائي</string>
+    <string name="playing_next">يتم التشغيل بعد ذلك في %1$s</string>
+    <string name="autoplay_countdown_summary">أظهر العد التنازلي 5 ثوانٍ قبل التشغيل التلقائي للفيديو التالي.</string>
 </resources>

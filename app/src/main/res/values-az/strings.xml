@@ -450,4 +450,9 @@
     <string name="category">Kateqoriya</string>
     <string name="trending_views">%1$s • %2$s baxış • %3$s</string>
     <string name="normal_views">%1$s baxış %2$s</string>
+    <string name="playing_next">Növbəti %1$s saniyə ərzində oynadılır</string>
+    <string name="stats_for_nerds">Nerdlər üçün statistika</string>
+    <string name="video_id">Video ID</string>
+    <string name="autoplay_countdown">Avtomatik oynatma geri sayım</string>
+    <string name="autoplay_countdown_summary">Növbəti videonu avtomatik oynatmazdan əvvəl 5 saniyəlik geri sayım göstərir.</string>
 </resources>

@@ -452,4 +452,7 @@
     <string name="normal_views">%1$s צפיות%2$s</string>
     <string name="video_id">מזהה סרטון</string>
     <string name="stats_for_nerds">סטטיסטיקה לחנונים</string>
+    <string name="playing_next">לנגן את הבא בעוד %1$s</string>
+    <string name="autoplay_countdown">ספירה לאחור עד לנגינה אוטומטית</string>
+    <string name="autoplay_countdown_summary">להציג ספירה לאחור של 5 שניות בטרם ניגון הסרטון הבא אוטומטית.</string>
 </resources>
