@@ -1023,11 +1023,16 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         binding.player.useController = false
         binding.player.hideController()
         binding.autoplayCountdown.setHideSelfListener {
-            binding.autoplayCountdown.visibility = View.GONE
-            binding.player.useController = true
+            // could fail if the video already got closed before
+            runCatching {
+                binding.autoplayCountdown.visibility = View.GONE
+                binding.player.useController = true
+            }
         }
         binding.autoplayCountdown.startCountdown {
-            playNextVideo()
+            runCatching {
+                playNextVideo()
+            }
         }
     }
 
