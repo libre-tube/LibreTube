@@ -453,4 +453,6 @@
     <string name="playing_next">Reproduzindo próximo em %1$s</string>
     <string name="stats_for_nerds">Estatísticas para nerds</string>
     <string name="video_id">ID do vídeo</string>
+    <string name="autoplay_countdown">Contagem decrescente do Autoplay</string>
+    <string name="autoplay_countdown_summary">Mostrar uma contagem decrescente de 5s antes de reproduzir automaticamente o próximo vídeo.</string>
 </resources>
