@@ -135,7 +135,7 @@
     <string name="music_directory">Folder z muzyką</string>
     <string name="movies_directory">Folder z filmami</string>
     <string name="shareTo">Udostępnij link do</string>
-    <string name="instance_summary">Piped, logowanie i subskrypcje</string>
+    <string name="instance_summary">Piped, logowanie i konto</string>
     <string name="instance_api_url">Link do interfejsu API instancji</string>
     <string name="addInstance">Dodaj instancję</string>
     <string name="empty_instance">Wpisz nazwę i adres URL interfejsu API.</string>
@@ -447,4 +447,12 @@
     <string name="codecs">Kodeki</string>
     <string name="custom_playback_speed">Niestandardowa prędkość</string>
     <string name="custom_playback_speed_summary">Użyj innej prędkości odtwarzania.</string>
+    <string name="trending_views">%1$s • %2$s wyświetleń • %3$s</string>
+    <string name="normal_views">%1$s wyświetleń%2$s</string>
+    <string name="autoplay_countdown">Timer autoodtwarzania</string>
+    <string name="autoplay_countdown_summary">Pokaż 5 sekundowe odliczanie przed automatycznym odtwarzaniem następnego filmu.</string>
+    <string name="playing_next">Następny film za %1$s</string>
+    <string name="stats_for_nerds">Statystyki dla nerdów</string>
+    <string name="video_id">ID wideo</string>
+    <string name="category">Kategoria</string>
 </resources>
