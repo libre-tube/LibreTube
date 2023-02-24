@@ -99,7 +99,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
         val latestFeedStreamId = videoFeed.firstOrNull()?.url?.toID() ?: return true
 
         // first time notifications are enabled or no new video available
-        if (lastSeenStreamId == "" || lastSeenStreamId == latestFeedStreamId) {
+        if (lastSeenStreamId.isEmpty() || lastSeenStreamId == latestFeedStreamId) {
             PreferenceHelper.setLatestVideoId(lastSeenStreamId)
             return true
         }

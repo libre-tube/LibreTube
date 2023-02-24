@@ -28,35 +28,30 @@ class LoginDialog(
         binding = DialogLoginBinding.inflate(layoutInflater)
 
         binding.login.setOnClickListener {
-            if (isInsertionValid()) {
-                signIn(
-                    binding.username.text.toString(),
-                    binding.password.text.toString()
-                )
+            val email = binding.username.text?.toString()
+            val password = binding.password.text?.toString()
+
+            if (!email.isNullOrEmpty() && !password.isNullOrEmpty()) {
+                signIn(email, password)
             } else {
                 Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
             }
         }
         binding.register.setOnClickListener {
-            if (isEmail(binding.username.text.toString())) {
+            val email = binding.username.text?.toString().orEmpty()
+            val password = binding.password.text?.toString().orEmpty()
+
+            if (isEmail(email)) {
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle(R.string.privacy_alert)
                     .setMessage(R.string.username_email)
                     .setNegativeButton(R.string.proceed) { _, _ ->
-                        signIn(
-                            binding.username.text.toString(),
-                            binding.password.text.toString(),
-                            true
-                        )
+                        signIn(email, password, true)
                     }
                     .setPositiveButton(R.string.cancel, null)
                     .show()
-            } else if (isInsertionValid()) {
-                signIn(
-                    binding.username.text.toString(),
-                    binding.password.text.toString(),
-                    true
-                )
+            } else if (email.isNotEmpty() && password.isNotEmpty()) {
+                signIn(email, password, true)
             } else {
                 Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
             }
@@ -65,10 +60,6 @@ class LoginDialog(
         return MaterialAlertDialogBuilder(requireContext())
             .setView(binding.root)
             .show()
-    }
-
-    private fun isInsertionValid(): Boolean {
-        return binding.username.text.toString() != "" && binding.password.text.toString() != ""
     }
 
     private fun signIn(username: String, password: String, createNewAccount: Boolean = false) {

@@ -27,8 +27,9 @@ class DeleteAccountDialog(
         }
 
         binding.deleteAccountConfirm.setOnClickListener {
-            if (binding.deletePassword.text.toString() != "") {
-                deleteAccount(binding.deletePassword.text.toString())
+            val password = binding.deletePassword.text?.toString()
+            if (!password.isNullOrEmpty()) {
+                deleteAccount(password)
             } else {
                 Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
             }

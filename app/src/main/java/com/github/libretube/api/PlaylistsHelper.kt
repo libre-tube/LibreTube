@@ -104,7 +104,7 @@ object PlaylistsHelper {
                 DatabaseHolder.Database.localPlaylistsDao().addPlaylistVideo(localPlaylistItem)
 
                 val playlist = localPlaylist.playlist
-                if (playlist.thumbnailUrl == "") {
+                if (playlist.thumbnailUrl.isEmpty()) {
                     // set the new playlist thumbnail URL
                     localPlaylistItem.thumbnailUrl?.let {
                         playlist.thumbnailUrl = it
