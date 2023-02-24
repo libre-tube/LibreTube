@@ -11,11 +11,13 @@ import com.github.libretube.databinding.PlaylistsRowBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.PlaylistBookmark
 import com.github.libretube.enums.PlaylistType
-import com.github.libretube.extensions.query
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.ui.viewholders.PlaylistBookmarkViewHolder
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class PlaylistBookmarkAdapter(
     private val bookmarks: List<PlaylistBookmark>,
@@ -80,13 +82,12 @@ class PlaylistBookmarkAdapter(
                 deletePlaylist.setImageResource(
                     if (isBookmarked) R.drawable.ic_bookmark else R.drawable.ic_bookmark_outlined
                 )
-                query {
+                CoroutineScope(Dispatchers.IO).launch {
                     if (!isBookmarked) {
                         DatabaseHolder.Database.playlistBookmarkDao()
                             .deleteById(bookmark.playlistId)
                     } else {
-                        DatabaseHolder.Database.playlistBookmarkDao()
-                            .insertAll(bookmark)
+                        DatabaseHolder.Database.playlistBookmarkDao().insertAll(listOf(bookmark))
                     }
                 }
             }

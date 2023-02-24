@@ -21,9 +21,7 @@ import com.github.libretube.databinding.FragmentPlaylistBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
-import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.dpToPx
-import com.github.libretube.extensions.query
 import com.github.libretube.extensions.serializable
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ImageHelper
@@ -34,6 +32,9 @@ import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class PlaylistFragment : BaseFragment() {
     private lateinit var binding: FragmentPlaylistBinding
@@ -78,7 +79,7 @@ class PlaylistFragment : BaseFragment() {
 
         binding.playlistProgress.visibility = View.VISIBLE
 
-        isBookmarked = awaitQuery {
+        isBookmarked = runBlocking(Dispatchers.IO) {
             DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId!!)
         }
         updateBookmarkRes()
@@ -148,14 +149,13 @@ class PlaylistFragment : BaseFragment() {
                     binding.bookmark.setOnClickListener {
                         isBookmarked = !isBookmarked
                         updateBookmarkRes()
-                        query {
+                        lifecycleScope.launch(Dispatchers.IO) {
                             if (!isBookmarked) {
                                 DatabaseHolder.Database.playlistBookmarkDao()
                                     .deleteById(playlistId!!)
                             } else {
-                                DatabaseHolder.Database.playlistBookmarkDao().insertAll(
-                                    response.toPlaylistBookmark(playlistId!!)
-                                )
+                                DatabaseHolder.Database.playlistBookmarkDao()
+                                    .insertAll(listOf(response.toPlaylistBookmark(playlistId!!)))
                             }
                         }
                     }
@@ -254,13 +254,12 @@ class PlaylistFragment : BaseFragment() {
                 }
 
                 // update the playlist thumbnail if bookmarked
-                val playlistBookmark = awaitQuery {
-                    DatabaseHolder.Database.playlistBookmarkDao().getAll()
-                }.firstOrNull { it.playlistId == playlistId }
-                playlistBookmark?.let {
-                    if (it.thumbnailUrl != response.thumbnailUrl) {
-                        it.thumbnailUrl = response.thumbnailUrl
-                        query {
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val playlistBookmark = DatabaseHolder.Database.playlistBookmarkDao().getAll()
+                        .firstOrNull { it.playlistId == playlistId }
+                    playlistBookmark?.let {
+                        if (it.thumbnailUrl != response.thumbnailUrl) {
+                            it.thumbnailUrl = response.thumbnailUrl
                             DatabaseHolder.Database.playlistBookmarkDao().update(it)
                         }
                     }
