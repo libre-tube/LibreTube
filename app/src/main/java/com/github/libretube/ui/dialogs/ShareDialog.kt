@@ -31,7 +31,9 @@ class ShareDialog(
             getString(R.string.youtube)
         )
         val instanceUrl = getCustomInstanceFrontendUrl()
-        val shareableTitle = getShareableTitle(shareData)
+        val shareableTitle = shareData.currentChannel
+            ?: shareData.currentVideo
+            ?: shareData.currentPlaylist.orEmpty()
         // add instanceUrl option if custom instance frontend url available
         if (instanceUrl.isNotEmpty()) {
             shareOptions += getString(R.string.instance)
@@ -106,20 +108,5 @@ class ShareDialog(
 
         // return the custom instance frontend url if available
         return customInstances.firstOrNull { it.apiUrl == instancePref }?.frontendUrl.orEmpty()
-    }
-
-    private fun getShareableTitle(shareData: ShareData): String {
-        shareData.apply {
-            currentChannel?.let {
-                return it
-            }
-            currentVideo?.let {
-                return it
-            }
-            currentPlaylist?.let {
-                return it
-            }
-        }
-        return ""
     }
 }
