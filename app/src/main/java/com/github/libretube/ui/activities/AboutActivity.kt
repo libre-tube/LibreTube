@@ -33,14 +33,10 @@ class AboutActivity : BaseActivity() {
         }
 
         binding.appIcon.setOnClickListener {
-            val sendIntent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, GITHUB_URL)
-                type = "text/plain"
-            }
-
-            val shareIntent = Intent.createChooser(sendIntent, null)
-            startActivity(shareIntent)
+            val sendIntent = Intent(Intent.ACTION_SEND)
+                .putExtra(Intent.EXTRA_TEXT, GITHUB_URL)
+                .setType("text/plain")
+            startActivity(Intent.createChooser(sendIntent, null))
         }
 
         setupCard(binding.website, WEBSITE_URL)
