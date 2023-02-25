@@ -402,7 +402,7 @@
     <string name="defaults">Defaults</string>
     <string name="pop_up">Pop-Up</string>
     <string name="comments_disabled">Comments are disabled by the uploader.</string>
-    <string name="no_comments_available">This video has no comments available.</string>
+    <string name="no_comments_available">This video has no comments.</string>
     <string name="theme_monochrome">Minimalistic Monochrome</string>
     <string name="captions_size">Captions size</string>
     <string name="double_tap_seek">Double tap to seek</string>
