@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.constants.PIPED_FRONTEND_URL
@@ -23,8 +24,6 @@ class ShareDialog(
     private val shareObjectType: ShareObjectType,
     private val shareData: ShareData
 ) : DialogFragment() {
-    private var binding: DialogShareBinding? = null
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         var shareOptions = arrayOf(
             getString(R.string.piped),
@@ -39,12 +38,13 @@ class ShareDialog(
             shareOptions += getString(R.string.instance)
         }
 
+        val binding = DialogShareBinding.inflate(layoutInflater)
         if (shareObjectType == ShareObjectType.VIDEO) {
-            setupTimeStampBinding()
+            setupTimeStampBinding(binding)
         }
 
         return MaterialAlertDialogBuilder(requireContext())
-            .setTitle(context?.getString(R.string.share))
+            .setTitle(getString(R.string.share))
             .setItems(shareOptions) { _, which ->
                 val host = when (which) {
                     0 -> PIPED_FRONTEND_URL
@@ -59,8 +59,8 @@ class ShareDialog(
                 }
                 var url = "$host$path"
 
-                if (shareObjectType == ShareObjectType.VIDEO && binding!!.timeCodeSwitch.isChecked) {
-                    url += "&t=${binding!!.timeStamp.text}"
+                if (shareObjectType == ShareObjectType.VIDEO && binding.timeCodeSwitch.isChecked) {
+                    url += "&t=${binding.timeStamp.text}"
                 }
 
                 val intent = Intent(Intent.ACTION_SEND)
@@ -70,22 +70,23 @@ class ShareDialog(
                 val shareIntent = Intent.createChooser(intent, getString(R.string.shareTo))
                 requireContext().startActivity(shareIntent)
             }
-            .setView(binding?.root)
+            .setView(binding.root)
             .show()
     }
 
-    private fun setupTimeStampBinding() {
-        binding = DialogShareBinding.inflate(layoutInflater)
-        binding!!.timeCodeSwitch.isChecked = PreferenceHelper.getBoolean(
+    private fun setupTimeStampBinding(binding: DialogShareBinding) {
+        binding.timeCodeSwitch.isChecked = PreferenceHelper.getBoolean(
             PreferenceKeys.SHARE_WITH_TIME_CODE,
             true
         )
-        binding!!.timeCodeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            binding!!.timeStampLayout.visibility = if (isChecked) View.VISIBLE else View.GONE
+        binding.timeCodeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            binding.timeStampLayout.isVisible = isChecked
             PreferenceHelper.putBoolean(PreferenceKeys.SHARE_WITH_TIME_CODE, isChecked)
         }
-        binding!!.timeStamp.setText((shareData.currentPosition ?: 0L).toString())
-        if (binding!!.timeCodeSwitch.isChecked) binding!!.timeStampLayout.visibility = View.VISIBLE
+        binding.timeStamp.setText((shareData.currentPosition ?: 0L).toString())
+        if (binding.timeCodeSwitch.isChecked) {
+            binding.timeStampLayout.visibility = View.VISIBLE
+        }
     }
 
     // get the frontend url if it's a custom instance
