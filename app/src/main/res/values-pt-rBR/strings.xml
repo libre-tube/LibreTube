@@ -393,7 +393,7 @@
     <string name="volume">Volume</string>
     <string name="defaults">Padrões</string>
     <string name="pop_up">Pop-up</string>
-    <string name="no_comments_available">Este vídeo não tem comentários disponíveis.</string>
+    <string name="no_comments_available">Este vídeo não tem comentários.</string>
     <string name="comments_disabled">O autor não permite comentários.</string>
     <string name="captions_size">Tamanho das legendas</string>
     <string name="double_tap_seek">Dois toques para avançar/retrodeceder</string>
