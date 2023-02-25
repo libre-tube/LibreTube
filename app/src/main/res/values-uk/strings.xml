@@ -395,7 +395,7 @@
     <string name="pop_up">Спливне вікно</string>
     <string name="double_tap_seek">Двічі торкніться, щоб шукати</string>
     <string name="double_tap_seek_summary">Двічі торкніться ліворуч або праворуч, щоб перемотати назад або вперед.</string>
-    <string name="no_comments_available">Це відео не має коментарів.</string>
+    <string name="no_comments_available">До цього відео немає коментарів.</string>
     <string name="comments_disabled">Коментарі вимкнені завантажувачем.</string>
     <string name="captions_size">Розмір підписів</string>
     <string name="all_caught_up">Ви все переглянули</string>
