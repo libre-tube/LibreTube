@@ -393,7 +393,7 @@
     <string name="swipe_controls_summary">Usa el gesto de deslizar para ajustar el brillo y el volumen.</string>
     <string name="defaults">Por defecto</string>
     <string name="pop_up">Emergente</string>
-    <string name="no_comments_available">Este vídeo no tiene comentarios disponibles.</string>
+    <string name="no_comments_available">Este vídeo no tiene comentarios.</string>
     <string name="comments_disabled">Los comentarios están desactivados por el creador del contenido.</string>
     <string name="captions_size">Tamaño de los subtítulos</string>
     <string name="all_caught_up">Estás al día</string>
