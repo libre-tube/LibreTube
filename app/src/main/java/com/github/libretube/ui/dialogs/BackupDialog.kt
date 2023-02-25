@@ -92,8 +92,8 @@ class BackupDialog(
                     backupOptions.forEachIndexed { index, option ->
                         if (selected[index]) option.onSelected(backupFile)
                     }
+                    createBackupFile(backupFile)
                 }
-                createBackupFile(backupFile)
             }
             .create()
     }
