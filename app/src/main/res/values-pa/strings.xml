@@ -167,7 +167,7 @@
     <string name="fireIcon">ਫੈਸ਼ਨੇਬਲ ਅੱਗ-ਰੰਗਾ</string>
     <string name="torchIcon">ਟਰੈਡੀ ਟਾਰਚ</string>
     <string name="birdIcon">ਬੂਸਟਡ ਪੰਛੀ</string>
-    <string name="instance_summary">ਪਾਈਪਡ, ਲਾਗ-ਇਨ, ਅਤੇ ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ</string>
+    <string name="instance_summary">ਪਾਈਪਡ, ਲਾਗ-ਇਨ, ਅਤੇ ਖਾਤਾ</string>
     <string name="customInstance_summary">ਸ਼ਾਮਲ ਕਰੋ…</string>
     <string name="instance_name">ਇੰਸਟੈਂਸ ਨਾਮ</string>
     <string name="instance_api_url">URL ਤੋਂ ਇੰਸਟੈਂਸ API</string>
@@ -447,4 +447,12 @@
     <string name="codecs">ਕੋਡੈਕਸ</string>
     <string name="custom_playback_speed">ਕਸਟਮ ਗਤੀ</string>
     <string name="custom_playback_speed_summary">ਆਮ ਪਲੇਅਰ ਨਾਲੋਂ ਵੱਖਰੀ ਪਲੇਬੈਕ ਸਪੀਡ ਦੀ ਵਰਤੋਂ ਕਰੋ।</string>
+    <string name="trending_views">%1$s • %2$s ਵਿਊਜ਼ • %3$s</string>
+    <string name="normal_views">%1$s ਵਿਊਜ਼%2$s</string>
+    <string name="autoplay_countdown">ਸਵੈਚਲਿਤ ਕਾਊਂਟਡਾਊਨ</string>
+    <string name="autoplay_countdown_summary">ਅਗਲੀ ਵੀਡੀਓ ਨੂੰ ਆਟੋ-ਪਲੇਅ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ 5 ਸਕਿੰਟ ਕਾਊਂਟਡਾਊਨ ਦਿਖਾਓ।</string>
+    <string name="playing_next">ਅਗਲਾ %1$s ਵਿੱਚ ਚੱਲੇਗਾ</string>
+    <string name="stats_for_nerds">ਨਰਡਾਂ ਲਈ ਅੰਕੜੇ</string>
+    <string name="video_id">ਵੀਡੀਓ ਆਈ ਡੀ</string>
+    <string name="category">ਸ਼੍ਰੇਣੀ</string>
 </resources>
