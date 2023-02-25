@@ -66,7 +66,7 @@
     <string name="subscribeIsEmpty">Əvvəlcə bir neçə kanala abunə ol.</string>
     <string name="cannotDownload">Bu yayımı endirmək mümkün deyil.</string>
     <string name="dlcomplete">Endirmə tamamlandı.</string>
-    <string name="dlisinprogress">Artıq digər endirmə davam edir, zəhmət olmasa, bitənə qədər gözlə.</string>
+    <string name="dlisinprogress">Bütün cari endirmələrin bitməsini gözləyin.</string>
     <string name="downloadfailed">Endirmə alınmadı.</string>
     <string name="vlc">VLC\'də Aç</string>
     <string name="vlcerror">VLC-də açmaq mümkün olmadı. O, quraşdırılmamış ola bilər.</string>
@@ -393,7 +393,7 @@
     <string name="swipe_controls">Sürüşdürmə nəzarətləri</string>
     <string name="defaults">Standartlar</string>
     <string name="pop_up">Ani pəncərə</string>
-    <string name="no_comments_available">Bu videoda şərhlər əlçatan deyil.</string>
+    <string name="no_comments_available">Bu videoda şərh yoxdur.</string>
     <string name="comments_disabled">Şərhlər yükləyici tərəfindən deaktiv edilib.</string>
     <string name="double_tap_seek">Axtarmaq üçün iki dəfə kliklə</string>
     <string name="double_tap_seek_summary">Oynadıcı mövqeyini geri və ya irəli çəkmək üçün sola yaxud sağa iki dəfə kliklə.</string>
