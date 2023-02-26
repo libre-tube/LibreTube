@@ -13,6 +13,7 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
@@ -27,7 +28,6 @@ import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.services.BackgroundMode
 import com.github.libretube.ui.activities.MainActivity
-import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.interfaces.AudioPlayerOptions
 import com.github.libretube.ui.listeners.AudioPlayerThumbnailListener
@@ -36,7 +36,7 @@ import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.util.PlayingQueue
 
-class AudioPlayerFragment : BaseFragment(), AudioPlayerOptions {
+class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     private lateinit var binding: FragmentAudioPlayerBinding
     private lateinit var audioHelper: AudioHelper
 

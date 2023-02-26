@@ -9,6 +9,7 @@ import android.os.IBinder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +23,6 @@ import com.github.libretube.obj.DownloadStatus
 import com.github.libretube.receivers.DownloadReceiver
 import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.adapters.DownloadsAdapter
-import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
 import java.io.File
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +31,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class DownloadsFragment : BaseFragment() {
+class DownloadsFragment : Fragment() {
     private lateinit var binding: FragmentDownloadsBinding
     private var binder: DownloadService.LocalBinder? = null
     private val downloads = mutableListOf<DownloadWithItems>()
