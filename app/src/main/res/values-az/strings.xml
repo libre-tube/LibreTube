@@ -135,7 +135,7 @@
     <string name="appearance_summary">Tətbiqi zövqünüzə görə uyğunlaşdırın.</string>
     <string name="advanced_summary">Yüklənənlər və sıfırla</string>
     <string name="update_summary">Yeniləmək üçün yoxla</string>
-    <string name="no_update_available">Ən son versiyanı işlədirsiniz.</string>
+    <string name="no_update_available">Ən son versiya işlədirsiniz.</string>
     <string name="live">Canlı</string>
     <string name="authors">Müəlliflər</string>
     <string name="no_replies">Bu şərh cavabsızdır.</string>
@@ -164,9 +164,9 @@
     <string name="empty_instance">Adı və API URL\'ni doldur.</string>
     <string name="clear_customInstances">Əlavələri təmizlə</string>
     <string name="version">Versiya %1$s</string>
-    <string name="about_summary">LibreTube komandasını tanı və hər şeyin necə baş verdiyini öyrən.</string>
+    <string name="about_summary">LibreTube komandasın tanı və hər şeyin necə baş verdiyin öyrən.</string>
     <string name="related_streams">Əlaqəli məzmun</string>
-    <string name="related_streams_summary">Baxdığınızla yanaşı oxşar yayımları göstər.</string>
+    <string name="related_streams_summary">Baxdığınızla yanaşı oxşar yayımlar göstər.</string>
     <string name="category_filler">Əlaqəsiz/Zarafatlar</string>
     <string name="show_chapters">Bölmələri göstər</string>
     <string name="category_music_offtopic">Musiqi: Musiqisiz Bölmə</string>
@@ -247,7 +247,7 @@
     <string name="playingOnBackground">Fonda oynadılır…</string>
     <string name="caption_settings">Altyazılar</string>
     <string name="downloading_apk">APK Endirilir…</string>
-    <string name="playerAudioFormat">Oynadıcı üçün səs formatı</string>
+    <string name="playerAudioFormat">Oynadıcı üçün səs format</string>
     <string name="playerAudioQuality">Səs keyfiyyəti</string>
     <string name="best_quality">Ən yaxşı</string>
     <string name="worst_quality">Ən pis</string>
@@ -321,14 +321,14 @@
     <string name="preferences">Tənzimləmələr</string>
     <string name="backup_customInstances">Fərdi Nümunələr</string>
     <string name="save_feed">Axını fonda yüklə</string>
-    <string name="save_feed_summary">Abunəlik axınının fonda yüklənilməsinin və avtomatik yenilənməsinin qarşısını al.</string>
+    <string name="save_feed_summary">Abunəlik axınının fonda yüklənilməsi və avtomatik yenilənməsinin qarşısını al.</string>
     <string name="download_channel_name">Endirmə Xidməti</string>
     <string name="download_channel_description">Media yükləyərkən bildiriş göstərir.</string>
     <string name="background_channel_name">Fon Rejimi</string>
     <string name="push_channel_name">Bildiriş İşçisi</string>
     <string name="push_channel_description">Yeni yayımlar mövcuddursa bildiriş göstərir.</string>
     <string name="background_channel_description">Səs oynadıcını idarə etmək üçün düymələrlə bildiriş göstərir.</string>
-    <string name="play_next">Sonrakında oynat</string>
+    <string name="play_next">Sonrakın oynat</string>
     <string name="navigation_bar">Naviqasiya çubuğu</string>
     <string name="select_at_least_one">Xahiş edirik, ən az bir element seç</string>
     <string name="change_region">Trend\'in hazırkı ölkə üçün əlçatan olmadığı görünür.Xahiş edirik, tənzimləmələrdə başqasını seç.</string>
@@ -356,8 +356,8 @@
     <string name="playlistCloned">Pleylist klonlandı</string>
     <string name="confirm_unsubscribe">%1$s abunəliyini ləğv etmək istədiyinizə əminsiniz\?</string>
     <string name="confirm_unsubscribing">Abunəlik ləğvini təsdiqlə</string>
-    <string name="confirm_unsubscribing_summary">Abunəliyi ləğv etməzdən əvvəl təsdiqləmə dialoqunu göstər.</string>
-    <string name="play_all">Hamısını oynat</string>
+    <string name="confirm_unsubscribing_summary">Abunəliyi ləğv etməzdən əvvəl təsdiqləmə dialoqun göstər.</string>
+    <string name="play_all">Hamısın oynat</string>
     <string name="time">Vaxt</string>
     <string name="start_time">Başlama vaxtı</string>
     <string name="end_time">Bitmə vaxtı</string>
@@ -397,7 +397,7 @@
     <string name="comments_disabled">Şərhlər yükləyici tərəfindən deaktiv edilib.</string>
     <string name="double_tap_seek">Axtarmaq üçün iki dəfə kliklə</string>
     <string name="double_tap_seek_summary">Oynadıcı mövqeyini geri və ya irəli çəkmək üçün sola yaxud sağa iki dəfə kliklə.</string>
-    <string name="all_caught_up">Hamısını yuxarıda tutmusunuz</string>
+    <string name="all_caught_up">Hamısın yuxarıda tutmusunuz</string>
     <string name="all_caught_up_summary">Bütün yeni videoları gördünüz</string>
     <string name="captions_size">Altyazı ölçüsü</string>
     <string name="import_playlists">Pleylistləri idxal et</string>
@@ -454,5 +454,5 @@
     <string name="stats_for_nerds">Nerdlər üçün statistika</string>
     <string name="video_id">Video ID</string>
     <string name="autoplay_countdown">Avtomatik oynatma geri sayım</string>
-    <string name="autoplay_countdown_summary">Növbəti videonu avtomatik oynatmazdan əvvəl 5 saniyəlik geri sayım göstərir.</string>
+    <string name="autoplay_countdown_summary">Növbəti video avtomatik oynadılmazdan əvvəl 5 saniyəlik geri sayım göstərilir.</string>
 </resources>
