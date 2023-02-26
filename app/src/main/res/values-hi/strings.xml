@@ -294,7 +294,7 @@
     <string name="hide_chapters">अध्याय छुपाएं</string>
     <string name="buffering_goal">प्रीलोडिंग</string>
     <string name="buffering_goal_summary">बफ़र करने के लिए वीडियो की सेकंडस में उच्चतम मात्रा।</string>
-    <string name="instance_summary">पाइप्ड, लॉगिन और सब्सक्रिप्शन</string>
+    <string name="instance_summary">पाइप्ड, लॉगिन और खाता</string>
     <string name="clear_customInstances">जोड़े गये हटाएं</string>
     <string name="version">वर्शन %1$s</string>
     <string name="about_summary">टीम लिब्रेट्यूब के बारे में जानें और जानें कि यह सब कैसे होता है।</string>
@@ -393,7 +393,7 @@
     <string name="best_quality">श्रेष्ठ</string>
     <string name="worst_quality">न्यूनतम</string>
     <string name="pop_up">पॉप अप</string>
-    <string name="no_comments_available">इस वीडियो में कोई टिप्पणी उपलब्ध नहीं है।</string>
+    <string name="no_comments_available">इस वीडियो पे कोई टिप्पणी नहीं है।</string>
     <string name="captions_size">कैप्शन का आकार</string>
     <string name="double_tap_seek">तलाश के लिए दो बार टैप करें</string>
     <string name="double_tap_seek_summary">प्लेयर की स्थिति को रिवाइंड या फॉरवर्ड करने के लिए बाईं या दाईं ओर दो बार टैप करें।</string>
@@ -447,4 +447,12 @@
     <string name="codecs">कोडेक्स</string>
     <string name="custom_playback_speed">कस्टम गति</string>
     <string name="custom_playback_speed_summary">सामान्य प्लेयर की तुलना में एक अलग प्लेबैक गति का उपयोग करें।</string>
+    <string name="normal_views">%1$s ने देखा %2$s</string>
+    <string name="trending_views">%1$s • %2$s दृश्य • %3$s</string>
+    <string name="autoplay_countdown">ऑटोप्ले की उलटी गिनती</string>
+    <string name="autoplay_countdown_summary">अगले वीडियो को स्वतः चलाने से पहले 5 सेकंड उलटी गिनती दिखाएं।</string>
+    <string name="playing_next">अगला %1$s में चलाया जा रहा है</string>
+    <string name="stats_for_nerds">नरडों के लिए आँकड़े</string>
+    <string name="video_id">वीडियो आईडी</string>
+    <string name="category">वर्ग</string>
 </resources>
