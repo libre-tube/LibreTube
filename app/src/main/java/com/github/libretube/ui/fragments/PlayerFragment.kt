@@ -980,7 +980,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 }
             }
         }
-        initializeRelatedVideos(streams.relatedStreams)
+        initializeRelatedVideos(streams.relatedStreams.filter { !it.title.isNullOrBlank() })
         // set video description
         val description = streams.description
 
