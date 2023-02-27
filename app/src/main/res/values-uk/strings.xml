@@ -43,7 +43,7 @@
     <string name="importsuccess">Підписаний</string>
     <string name="cannotDownload">Неможливо завантажити цей стрім.</string>
     <string name="dlcomplete">Завантаження завершене.</string>
-    <string name="dlisinprogress">Наразі триває завантаження, зачекайте, доки воно завершиться.</string>
+    <string name="dlisinprogress">Будь ласка, дочекайтеся завершення всіх поточних завантажень.</string>
     <string name="vlc">Відкрити у VLC</string>
     <string name="vlcerror">Не вдалося відкрити у VLC. Можливо, його не встановлено.</string>
     <string name="import_from_yt">Імпорт підписок</string>
