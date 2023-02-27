@@ -44,7 +44,7 @@
     <string name="playlistName">Nombre de la lista de reproducción</string>
     <string name="success">Hecho.</string>
     <string name="fail">Error :(</string>
-    <string name="dlisinprogress">Otra descarga ya está en curso, por favor espere hasta que termine.</string>
+    <string name="dlisinprogress">Espere a que finalicen todas las descargas actuales.</string>
     <string name="server_error">Parece que hay un problema con el servidor seleccionado. Pruebe con otra instancia.</string>
     <string name="unknown_error">Error de red.</string>
     <string name="deletePlaylist">Eliminar lista de reproducción</string>
