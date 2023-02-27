@@ -25,7 +25,7 @@
     <string name="importsuccess">Subskrypcje zostały zaimportowane</string>
     <string name="subscribeIsEmpty">Najpierw zasubskrybuj kilka kanałów.</string>
     <string name="dlcomplete">Pobieranie ukończone.</string>
-    <string name="dlisinprogress">Obecnie trwa już inne pobieranie, proszę poczekać aż zostanie ukończone.</string>
+    <string name="dlisinprogress">Poczekaj, aż wszystkie bieżące pobieranie zostanie zakończone.</string>
     <string name="downloadfailed">Pobieranie nie powiodło się.</string>
     <string name="logout">Wyloguj się</string>
     <string name="import_from_yt">Importuj subskrypcje</string>
