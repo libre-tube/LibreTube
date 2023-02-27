@@ -48,7 +48,7 @@
     <string name="region">क्षेत्र चुनें</string>
     <string name="please_login">कृपया पहले सेटिंग में लॉग इन या रजिस्टर करें!</string>
     <string name="dlcomplete">डाउनलोड पूरा हो गया है।</string>
-    <string name="dlisinprogress">एक और डाउनलोड पहले से ही हो रहा है कृपया इसके समाप्त होने तक प्रतीक्षा करें।</string>
+    <string name="dlisinprogress">कृपया सभी मौजूदा डाउनलोड पूर्ण होने तक प्रतीक्षा करें।</string>
     <string name="choose_quality_dialog">गुणवत्ता चुनें:</string>
     <string name="about">के बारे में</string>
     <string name="startpage">घर</string>
