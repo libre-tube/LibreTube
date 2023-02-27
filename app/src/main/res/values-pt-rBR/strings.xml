@@ -43,7 +43,7 @@
     <string name="about">Sobre</string>
     <string name="choose_quality_dialog">Qualidade</string>
     <string name="subscribe">Inscrever-se</string>
-    <string name="dlisinprogress">Já há uma transferência em progresso, por favor espere até que seja concluída...</string>
+    <string name="dlisinprogress">Aguarde até que todos os downloads atuais sejam concluídos.</string>
     <string name="username">Nome de usuário</string>
     <string name="registered">Registrado. Agora pode se inscrever a canais.</string>
     <string name="login_first">Inicie sessão e tente de novo.</string>
