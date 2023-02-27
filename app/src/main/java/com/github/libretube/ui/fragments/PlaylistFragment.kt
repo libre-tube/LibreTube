@@ -128,7 +128,7 @@ class PlaylistFragment : Fragment() {
 
             binding.playlistInfo.text =
                 (if (response.uploader != null) response.uploader + TextUtils.SEPARATOR else "") +
-                    getString(R.string.videoCount, response.videos.toString())
+                getString(R.string.videoCount, response.videos.toString())
 
             // show playlist options
             binding.optionsMenu.setOnClickListener {
@@ -197,12 +197,12 @@ class PlaylistFragment : Fragment() {
 
                     val info = binding.playlistInfo.text.split(TextUtils.SEPARATOR)
                     binding.playlistInfo.text = (
-                            if (info.size == 2) {
-                                info[0] + TextUtils.SEPARATOR
-                            } else {
-                                ""
-                            }
-                            ) + getString(
+                        if (info.size == 2) {
+                            info[0] + TextUtils.SEPARATOR
+                        } else {
+                            ""
+                        }
+                        ) + getString(
                         R.string.videoCount,
                         playlistAdapter!!.itemCount.toString()
                     )

@@ -30,7 +30,7 @@ object PlayingQueue {
 
     fun add(vararg streamItem: StreamItem) {
         for (stream in streamItem) {
-            if (currentStream?.url?.toID() == stream.url?.toID()) continue
+            if (currentStream?.url?.toID() == stream.url?.toID() || stream.title.isNullOrBlank()) continue
             // remove if already present
             queue.remove(stream)
             queue.add(stream)
@@ -119,7 +119,7 @@ object PlayingQueue {
                     playlistNextPage!!
                 ).apply {
                     add(
-                        *this.relatedStreams.orEmpty().toTypedArray()
+                        *this.relatedStreams.toTypedArray()
                     )
                     playlistNextPage = this.nextpage
                 }

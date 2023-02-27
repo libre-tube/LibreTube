@@ -45,7 +45,7 @@ class ChannelFragment : Fragment() {
 
     private var onScrollEnd: () -> Unit = {}
 
-    val possibleTabs = listOf(
+    private val possibleTabs = listOf(
         ChannelTabs.Channels,
         ChannelTabs.Playlists,
         ChannelTabs.Livestreams,

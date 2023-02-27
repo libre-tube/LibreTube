@@ -17,9 +17,9 @@ import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.google.android.material.snackbar.Snackbar
+import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.io.IOException
 import retrofit2.HttpException
 
 class TrendsFragment : Fragment() {
