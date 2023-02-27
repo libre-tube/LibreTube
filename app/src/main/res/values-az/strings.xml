@@ -15,7 +15,7 @@
     <string name="register">Qeydiyyatdan keç</string>
     <string name="logout">Çıx</string>
     <string name="cancel">Ləğv et</string>
-    <string name="loggedIn">Giriş edildi.</string>
+    <string name="loggedIn">Girildi.</string>
     <string name="loggedout">Çıxıldı.</string>
     <string name="registered">Qeydiyyatdan keçilib. İndi kanallara abunə ola bilərsiniz.</string>
     <string name="already_logged_in">Artıq daxil olunub.İstəsəniz hesabınızdan çıxa bilərsiniz.</string>
@@ -450,7 +450,7 @@
     <string name="category">Kateqoriya</string>
     <string name="trending_views">%1$s • %2$s baxış • %3$s</string>
     <string name="normal_views">%1$s baxış %2$s</string>
-    <string name="playing_next">Növbəti %1$s saniyə ərzində oynadılır</string>
+    <string name="playing_next">Növbəti %1$s saniyə sonra oynadılır</string>
     <string name="stats_for_nerds">Nerdlər üçün statistika</string>
     <string name="video_id">Video ID</string>
     <string name="autoplay_countdown">Avtomatik oynatma geri sayım</string>
