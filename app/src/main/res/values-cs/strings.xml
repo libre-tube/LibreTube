@@ -41,7 +41,7 @@
     <string name="region">Oblast</string>
     <string name="please_login">Nejprve se prosím v nastavení přihlaste nebo zaregistrujte!</string>
     <string name="cannotDownload">Tento stream nelze stáhnout.</string>
-    <string name="dlisinprogress">Již probíhá další stahování, počkejte prosím, než bude dokončeno.</string>
+    <string name="dlisinprogress">Počkejte prosím, dokud nebudou dokončena všechna aktuální stahování.</string>
     <string name="error">Něco se pokazilo.</string>
     <string name="login_register">Přihlásit/registrovat</string>
     <string name="subscribeIsEmpty">Nejprve se přihlaste k odběru některých kanálů.</string>
