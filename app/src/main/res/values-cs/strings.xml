@@ -41,7 +41,7 @@
     <string name="region">Oblast</string>
     <string name="please_login">Nejprve se prosím v nastavení přihlaste nebo zaregistrujte!</string>
     <string name="cannotDownload">Tento stream nelze stáhnout.</string>
-    <string name="dlisinprogress">Již probíhá další stahování, počkejte prosím, než bude dokončeno.</string>
+    <string name="dlisinprogress">Počkejte prosím, dokud nebudou dokončena všechna aktuální stahování.</string>
     <string name="error">Něco se pokazilo.</string>
     <string name="login_register">Přihlásit/registrovat</string>
     <string name="subscribeIsEmpty">Nejprve se přihlaste k odběru některých kanálů.</string>
@@ -147,7 +147,7 @@
     <string name="downloads_directory">Složka pro stažené</string>
     <string name="flameIcon">Létající plamen</string>
     <string name="birdIcon">Posílený pták</string>
-    <string name="instance_summary">Piped, přihlášení a odběry</string>
+    <string name="instance_summary">Piped, přihlášení a účet</string>
     <string name="customInstance_summary">Přidat…</string>
     <string name="version">Verze %1$s</string>
     <string name="category_filler">Výplň/vtipy</string>
@@ -448,4 +448,11 @@
     <string name="custom_playback_speed">Vlastní rychlost</string>
     <string name="custom_playback_speed_summary">Použít jinou rychlost přehrávání než u běžného přehrávače.</string>
     <string name="category">Kategorie</string>
+    <string name="trending_views">%1$s • %2$s zhlédnutí • %3$s</string>
+    <string name="normal_views">%1$s zhlédnutí%2$s</string>
+    <string name="autoplay_countdown">Odpočítávání automatického přehrávání</string>
+    <string name="autoplay_countdown_summary">Před automatickým přehráním dalšího videa zobrazit 5s odpočítávání.</string>
+    <string name="playing_next">Přehrávání dalšího videa za %1$s</string>
+    <string name="stats_for_nerds">Statistiky pro nerdy</string>
+    <string name="video_id">ID videa</string>
 </resources>

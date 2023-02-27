@@ -43,7 +43,7 @@
     <string name="about">Sobre</string>
     <string name="choose_quality_dialog">Qualidade</string>
     <string name="subscribe">Inscrever-se</string>
-    <string name="dlisinprogress">Já há uma transferência em progresso, por favor espere até que seja concluída...</string>
+    <string name="dlisinprogress">Aguarde até que todos os downloads atuais sejam concluídos.</string>
     <string name="username">Nome de usuário</string>
     <string name="registered">Registrado. Agora pode se inscrever a canais.</string>
     <string name="login_first">Inicie sessão e tente de novo.</string>
@@ -393,7 +393,7 @@
     <string name="volume">Volume</string>
     <string name="defaults">Padrões</string>
     <string name="pop_up">Pop-up</string>
-    <string name="no_comments_available">Este vídeo não tem comentários disponíveis.</string>
+    <string name="no_comments_available">Este vídeo não tem comentários.</string>
     <string name="comments_disabled">O autor não permite comentários.</string>
     <string name="captions_size">Tamanho das legendas</string>
     <string name="double_tap_seek">Dois toques para avançar/retrodeceder</string>

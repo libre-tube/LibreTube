@@ -44,7 +44,7 @@
     <string name="playlistName">اسم قائمة التشغيل</string>
     <string name="success">انتهى.</string>
     <string name="fail">فشل ذريع :(</string>
-    <string name="dlisinprogress">هناك تنزيل آخر قيد التقدم بالفعل، يرجى الانتظار حتى ينتهي.</string>
+    <string name="dlisinprogress">الرجاء الانتظار حتى تنتهي كافة التنزيلات الحالية.</string>
     <string name="vlc">فتح باستخدام VLC</string>
     <string name="unknown_error">خطأ في الشبكة.</string>
     <string name="server_error">يبدو أن هناك مشكلة في هذا الخادم المحدد. جرب خادم أخر.</string>
@@ -393,7 +393,7 @@
     <string name="defaults">الإفتراضي</string>
     <string name="pop_up">نافذة منبثقة</string>
     <string name="swipe_controls_summary">استخدم إيماءة السحب لضبط السطوع ومستوى الصوت.</string>
-    <string name="no_comments_available">لا يحتوي هذا الفيديو على تعليقات متوفرة.</string>
+    <string name="no_comments_available">هذا الفيديو ليس له تعليقات.</string>
     <string name="comments_disabled">التعليقات معطلة من قبل القائم بالتحميل.</string>
     <string name="double_tap_seek_summary">اضغط مرتين على اليسار أو اليمين لترجيع موضع المشغل أو إعادة تقديمه.</string>
     <string name="all_caught_up">لقد وصلت الى النهاية</string>

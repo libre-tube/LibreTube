@@ -28,7 +28,7 @@
     <string name="subscribeIsEmpty">Сначала подпишитесь на некоторые каналы.</string>
     <string name="cannotDownload">Невозможно скачать это видео.</string>
     <string name="dlcomplete">Загрузка завершена.</string>
-    <string name="dlisinprogress">Пожалуйста, подождите, пока все загрузки завершатся.</string>
+    <string name="dlisinprogress">Пожалуйста, дождитесь окончания всех текущих загрузок</string>
     <string name="downloadfailed">Загрузка не удалась.</string>
     <string name="vlc">Открыть в VLC</string>
     <string name="vlcerror">Не удалось открыть в VLC. Возможно, он не установлен.</string>
@@ -231,7 +231,7 @@
     <string name="selected">Выбранное</string>
     <string name="watch_positions_title">Запомненные позиции воспроизведения</string>
     <string name="system_caption_style">Системный стиль субтитров</string>
-    <string name="none">Нет</string>
+    <string name="none">Откл.</string>
     <string name="autoRotatePlayer_summary">Полноэкранный режим при повороте устройства.</string>
     <string name="navLabelVisibility">Видимость меток</string>
     <string name="always">Всегда</string>
@@ -297,7 +297,7 @@
     <string name="resize_mode_fit">Уместить</string>
     <string name="resize_mode_fill">Заполнить</string>
     <string name="resize_mode_zoom">Увеличить</string>
-    <string name="repeat_mode_none">Нет</string>
+    <string name="repeat_mode_none">Без</string>
     <string name="repeat_mode_current">Текущий</string>
     <string name="player_resize_mode">Масштаб видео</string>
     <string name="maximum_image_cache">Макс. размер кэша изображений</string>
@@ -392,7 +392,7 @@
     <string name="swipe_controls_summary">Используйте жест прокрутки, чтобы отрегулировать яркость и громкость.</string>
     <string name="swipe_controls">Управление прокруткой</string>
     <string name="defaults">По умолчанию</string>
-    <string name="no_comments_available">У этого видео нет доступных комментариев.</string>
+    <string name="no_comments_available">Это видео не имеет комментариев.</string>
     <string name="double_tap_seek">Двойное нажатие для поиска</string>
     <string name="double_tap_seek_summary">Нажмите дважды слева или справа, чтобы перемотать назад или вперед позицию плеера.</string>
     <string name="import_playlists">Импортировать плейлисты</string>

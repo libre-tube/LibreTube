@@ -31,7 +31,7 @@
     <string name="subscribeIsEmpty">Berlangganan ke beberapa saluran terlebih dahulu.</string>
     <string name="cannotDownload">Tidak dapat mengunduh, ini adalah aliran.</string>
     <string name="dlcomplete">Unduhan selesai.</string>
-    <string name="dlisinprogress">Unduhan yang lain sedang berlangsung, silahkan tunggu sampai selesai.</string>
+    <string name="dlisinprogress">Harap tunggu hingga semua unduhan saat ini selesai.</string>
     <string name="vlc">Buka di VLC</string>
     <string name="playlistCreated">Daftar putar dibuat.</string>
     <string name="please_login">Silakan masuk atau buat akun di setelan terlebih dahulu</string>
@@ -393,7 +393,7 @@
     <string name="defaults">Bawaan</string>
     <string name="brightness">Kecerahan</string>
     <string name="pop_up">Hamparan</string>
-    <string name="no_comments_available">Video ini tidak ada komentar yang tersedia.</string>
+    <string name="no_comments_available">Video ini tidak memiliki komentar.</string>
     <string name="comments_disabled">Komentar dinonaktifkan oleh pengunggah.</string>
     <string name="captions_size">Ukuran takarir</string>
     <string name="double_tap_seek">Ketuk dua kali untuk seek</string>

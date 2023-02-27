@@ -44,7 +44,7 @@
     <string name="registered">Registo efetuado. Agora já pode subscrever canais.</string>
     <string name="login_register">Entrar/registar</string>
     <string name="please_login">Deve iniciar sessão ou criar uma conta nas definições.</string>
-    <string name="dlisinprogress">Já existe uma descarga em curso. Por favor aguarde.</string>
+    <string name="dlisinprogress">Aguarde até que todos os downloads atuais sejam concluídos.</string>
     <string name="vlc">Abrir no VLC</string>
     <string name="vlcerror">Não foi possível abrir no VLC, pode não estar instalado.</string>
     <string name="import_from_yt">Importar subscrições</string>

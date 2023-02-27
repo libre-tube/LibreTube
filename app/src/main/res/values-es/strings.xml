@@ -44,7 +44,7 @@
     <string name="playlistName">Nombre de la lista de reproducción</string>
     <string name="success">Hecho.</string>
     <string name="fail">Error :(</string>
-    <string name="dlisinprogress">Otra descarga ya está en curso, por favor espere hasta que termine.</string>
+    <string name="dlisinprogress">Espere a que finalicen todas las descargas actuales.</string>
     <string name="server_error">Parece que hay un problema con el servidor seleccionado. Pruebe con otra instancia.</string>
     <string name="unknown_error">Error de red.</string>
     <string name="deletePlaylist">Eliminar lista de reproducción</string>
@@ -393,7 +393,7 @@
     <string name="swipe_controls_summary">Usa el gesto de deslizar para ajustar el brillo y el volumen.</string>
     <string name="defaults">Por defecto</string>
     <string name="pop_up">Emergente</string>
-    <string name="no_comments_available">Este vídeo no tiene comentarios disponibles.</string>
+    <string name="no_comments_available">Este vídeo no tiene comentarios.</string>
     <string name="comments_disabled">Los comentarios están desactivados por el creador del contenido.</string>
     <string name="captions_size">Tamaño de los subtítulos</string>
     <string name="all_caught_up">Estás al día</string>

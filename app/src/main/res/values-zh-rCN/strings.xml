@@ -448,5 +448,9 @@
     <string name="custom_playback_speed">自定义速度</string>
     <string name="custom_playback_speed_summary">使用不同于常规播放器的播放速度。</string>
     <string name="category">类别</string>
-    <string name="trending_views">%1$s • %2$s 视图 • %3$s</string>
+    <string name="trending_views">%1$s • %2$s 次观看 • %3$s</string>
+    <string name="autoplay_countdown">自动播放倒计时</string>
+    <string name="autoplay_countdown_summary">在自动播放下一个视频之前显示 5 秒倒计时。</string>
+    <string name="stats_for_nerds">详细统计信息</string>
+    <string name="video_id">视频识别码</string>
 </resources>

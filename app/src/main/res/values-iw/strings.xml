@@ -95,7 +95,7 @@
     <string name="login_first">נא להיכנס ולנסות שוב.</string>
     <string name="save">שמירה</string>
     <string name="region">אזור</string>
-    <string name="dlisinprogress">כבר מתבצעת הורדה, נא להמתין לסיומה.</string>
+    <string name="dlisinprogress">המתן עד שכל ההורדות הנוכחיות יסתיימו.</string>
     <string name="downloadfailed">ההורדה נכשלה.</string>
     <string name="import_from_yt">ייבוא מינויים</string>
     <string name="systemDefault">מערכת</string>
@@ -393,7 +393,7 @@
     <string name="defaults">ברירות מחדל</string>
     <string name="pop_up">צף</string>
     <string name="swipe_controls_summary">להשתמש במחוות החלקה כדי לכוון את הבהירות ואת עצמת השמע.</string>
-    <string name="no_comments_available">התגובות לא זמינות לסרטון הזה.</string>
+    <string name="no_comments_available">לסרטון זה אין תגובות.</string>
     <string name="comments_disabled">הערות הושבתו על ידי מעלה הסרטון.</string>
     <string name="double_tap_seek">נגיעה כפולה לדילוג</string>
     <string name="all_caught_up">אין יותר הצעות</string>

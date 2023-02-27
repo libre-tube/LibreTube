@@ -38,7 +38,7 @@
     <string name="videos">動画</string>
     <string name="login_first">ログインしてから再試行してください。</string>
     <string name="customInstance">カスタム</string>
-    <string name="dlisinprogress">他のダウンロードが進行中です。完了するまでお待ちください。</string>
+    <string name="dlisinprogress">現在のすべてのダウンロードが完了するまでお待ちください。</string>
     <string name="error">エラーが発生しました。</string>
     <string name="subscriptions">登録チャンネル</string>
     <string name="region">地域</string>
