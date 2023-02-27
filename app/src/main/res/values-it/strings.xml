@@ -452,4 +452,7 @@
     <string name="category">Categoria</string>
     <string name="playing_next">Prossimo gioco in %1$s</string>
     <string name="video_id">ID video</string>
+    <string name="autoplay_countdown">Conto alla rovescia per riproduzione automatica</string>
+    <string name="autoplay_countdown_summary">Mostra un conto alla rovescia di 5 secondi prima di riprodurre automaticamente il video successivo.</string>
+    <string name="stats_for_nerds">Statistiche per nerd</string>
 </resources>
