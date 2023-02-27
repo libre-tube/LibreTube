@@ -32,7 +32,7 @@
     <string name="subscribeIsEmpty">Subscribe to some channels first.</string>
     <string name="cannotDownload">Can\'t download this stream.</string>
     <string name="dlcomplete">Download completed.</string>
-    <string name="dlisinprogress">Another download is already in progress, please wait until it\'s finished.</string>
+    <string name="dlisinprogress">Please wait for all current downloads to finish.</string>
     <string name="downloadfailed">Download failed.</string>
     <string name="vlc">Open in VLC</string>
     <string name="vlcerror">Could not open in VLC. It might not be installed.</string>
