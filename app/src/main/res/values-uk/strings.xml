@@ -28,7 +28,7 @@
     <string name="password">Пароль</string>
     <string name="login">Вхід</string>
     <string name="logout">Вихід</string>
-    <string name="cancel">Відміна</string>
+    <string name="cancel">Скасувати</string>
     <string name="loggedIn">Увійшли.</string>
     <string name="loggedout">Вийшли.</string>
     <string name="registered">Зареєстровано. Тепер ви можете підписуватися на канали.</string>
@@ -93,7 +93,7 @@
     <string name="music_playlists">Добірки з YT Music</string>
     <string name="defaultTab">Типова вкладка</string>
     <string name="sponsorblock">SponsorBlock</string>
-    <string name="sponsorblock_summary">Використовує АРІ з https://sponsor.ajay.app/</string>
+    <string name="sponsorblock_summary">Використовує АРІ https://sponsor.ajay.app</string>
     <string name="segment_skipped">Пропущений сегмент</string>
     <string name="sponsorblock_state">Увімкнено</string>
     <string name="category_segments">Сегменти</string>
