@@ -3,9 +3,9 @@ package com.github.libretube.helpers
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.widget.ImageView
+import androidx.core.graphics.drawable.toBitmap
 import coil.ImageLoader
 import coil.disk.DiskCache
 import coil.load
@@ -65,10 +65,7 @@ object ImageHelper {
     fun getAsync(context: Context, url: String?, onSuccess: (Bitmap) -> Unit) {
         val request = ImageRequest.Builder(context)
             .data(url)
-            .target { result ->
-                val bitmap = (result as BitmapDrawable).bitmap
-                onSuccess.invoke(bitmap)
-            }
+            .target { onSuccess(it.toBitmap()) }
             .build()
 
         imageLoader.enqueue(request)
