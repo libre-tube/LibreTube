@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.media.MediaDescriptionCompat
@@ -16,6 +15,7 @@ import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.os.bundleOf
 import coil.request.ImageRequest
 import com.github.libretube.R
@@ -122,8 +122,8 @@ class NowPlayingNotification(
     private fun enqueueThumbnailRequest(callback: PlayerNotificationManager.BitmapCallback) {
         val request = ImageRequest.Builder(context)
             .data(streams?.thumbnailUrl)
-            .target { result ->
-                val bm = (result as BitmapDrawable).bitmap
+            .target {
+                val bm = it.toBitmap()
                 // returns the bitmap on Android 13+, for everything below scaled down to a square
                 bitmap = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
                     ImageHelper.getSquareBitmap(bm)
