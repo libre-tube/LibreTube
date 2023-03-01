@@ -14,6 +14,7 @@ import com.github.libretube.ui.extensions.setFormattedDuration
 import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.WatchHistoryViewHolder
+import com.github.libretube.util.TextUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 
@@ -55,7 +56,7 @@ class WatchHistoryAdapter(
         holder.binding.apply {
             videoTitle.text = video.title
             channelName.text = video.uploader
-            videoInfo.text = video.uploadDate
+            videoInfo.text = video.uploadDate?.let { TextUtils.localizeDate(it) }
             thumbnailDuration.setFormattedDuration(video.duration!!, null)
             ImageHelper.loadImage(video.thumbnailUrl, thumbnail)
             ImageHelper.loadImage(video.uploaderAvatar, channelImage)

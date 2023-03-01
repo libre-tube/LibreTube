@@ -3,6 +3,7 @@ package com.github.libretube.db
 import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.github.libretube.db.dao.CustomInstanceDao
 import com.github.libretube.db.dao.DownloadDao
 import com.github.libretube.db.dao.LocalPlaylistsDao
@@ -42,6 +43,7 @@ import com.github.libretube.db.obj.WatchPosition
         AutoMigration(from = 9, to = 10)
     ]
 )
+@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     /**
      * Watch History

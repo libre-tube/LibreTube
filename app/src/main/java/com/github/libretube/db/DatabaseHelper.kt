@@ -17,7 +17,7 @@ object DatabaseHelper {
         val watchHistoryItem = WatchHistoryItem(
             videoId,
             streams.title,
-            streams.uploadDate.toString(),
+            streams.uploadDate,
             streams.uploader,
             streams.uploaderUrl.toID(),
             streams.uploaderAvatar,

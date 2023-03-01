@@ -90,7 +90,7 @@ class WatchHistoryFragment : Fragment() {
                         uploaderName = it.uploader,
                         uploaderUrl = it.uploaderUrl,
                         uploaderAvatar = it.uploaderAvatar,
-                        uploadedDate = it.uploadDate,
+                        uploadedDate = it.uploadDate?.toString(),
                         duration = it.duration
                     )
                 }.toTypedArray()
