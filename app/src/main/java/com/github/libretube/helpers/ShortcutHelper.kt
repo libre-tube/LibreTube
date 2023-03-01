@@ -16,30 +16,25 @@ object ShortcutHelper {
         AppShortcut("trends", R.string.trends, R.drawable.ic_trending),
         AppShortcut("subscriptions", R.string.subscriptions, R.drawable.ic_subscriptions),
         AppShortcut("library", R.string.library, R.drawable.ic_library)
-    ).reversed()
+    )
 
-    private fun createShortcut(context: Context, action: String, label: String, icon: IconCompat) {
-        val shortcut = ShortcutInfoCompat.Builder(context, action)
+    private fun createShortcut(context: Context, appShortcut: AppShortcut): ShortcutInfoCompat {
+        val label = context.getString(appShortcut.label)
+        return ShortcutInfoCompat.Builder(context, appShortcut.action)
             .setShortLabel(label)
             .setLongLabel(label)
-            .setIcon(icon)
+            .setIcon(IconCompat.createWithResource(context, appShortcut.drawable))
             .setIntent(
-                Intent(context, MainActivity::class.java).apply {
-                    this.action = Intent.ACTION_VIEW
-                    putExtra(IntentData.fragmentToOpen, action)
-                }
+                Intent(Intent.ACTION_VIEW, null, context, MainActivity::class.java)
+                    .putExtra(IntentData.fragmentToOpen, appShortcut.action)
             )
             .build()
-
-        ShortcutManagerCompat.pushDynamicShortcut(context, shortcut)
     }
 
     fun createShortcuts(context: Context) {
-        ShortcutManagerCompat.getDynamicShortcuts(context).takeIf { it.isEmpty() } ?: return
-
-        shortcuts.forEach {
-            val icon = IconCompat.createWithResource(context, it.drawable)
-            createShortcut(context, it.action, context.getString(it.label), icon)
+        if (ShortcutManagerCompat.getDynamicShortcuts(context).isEmpty()) {
+            val dynamicShortcuts = shortcuts.map { createShortcut(context, it) }
+            ShortcutManagerCompat.setDynamicShortcuts(context, dynamicShortcuts)
         }
     }
 }
