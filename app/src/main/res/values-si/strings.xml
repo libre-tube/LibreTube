@@ -118,7 +118,7 @@
     <string name="fireIcon">විලාසිතාමය ගින්න</string>
     <string name="torchIcon">නවීන පන්දම</string>
     <string name="flameIcon">පියාඹන දැල්ල</string>
-    <string name="instance_summary">Piped, පුරනය සහ දායකත්ව</string>
+    <string name="instance_summary">Piped, පුරනය සහ ගිණුම</string>
     <string name="instance_name">සේවාදායකයේ නම</string>
     <string name="instance_api_url">සේවාදායක API වෙත URL</string>
     <string name="addInstance">සේවාදායකයක් එකතු කරන්න</string>
@@ -321,7 +321,7 @@
     <string name="instances">තෝරන්න…</string>
     <string name="login_register">පුරනය වන්න / ලියාපදිංචි වන්න</string>
     <string name="subscribeIsEmpty">මුලින්ම නාලිකා කිහිපයකට දායක වෙන්න.</string>
-    <string name="dlisinprogress">තවත් බාගත කිරීමක් දැනටමත් සිදු වෙමින් පවතී, කරුණාකර එය අවසන් වන තෙක් රැඳී සිටින්න.</string>
+    <string name="dlisinprogress">සියලුම බාගැනීම් අවසන් වන තෙක් කරුණාකර රැඳී සිටින්න.</string>
     <string name="vlcerror">VLC හි විවෘත කළ නොහැක. එය පිහිටුවා නැති විය හැකිය.</string>
     <string name="empty">ඔබ පරිශීලක නාමයක් සහ මුරපදයක් ඇතුළත් කළ යුතුය.</string>
     <string name="server_error">තෝරාගත් සේවාදායකයේ ගැටලුවක් තිබේ. වෙනත් සේවාදායකයක් උත්සාහ කරන්න.</string>
@@ -447,4 +447,9 @@
     <string name="codecs">කෝඩෙක්ස්</string>
     <string name="custom_playback_speed">අභිරුචි වේගය</string>
     <string name="custom_playback_speed_summary">සාමාන්‍ය වාදකයට වෙනස් වාදන වේගයක් භාවිතා කරන්න.</string>
+    <string name="trending_views">%1$s • %2$s බැලීම් • %3$s</string>
+    <string name="normal_views">%1$s බැලීම්%2$s</string>
+    <string name="autoplay_countdown_summary">මීළඟ වීඩියෝව ස්වයංක්‍රීයව වාදනය කිරීමට පෙර තත්පර 5 කවුන්ට් ඩවුන් එකක් පෙන්වන්න.</string>
+    <string name="video_id">වීඩියෝ ID</string>
+    <string name="category">කාණ්ඩය</string>
 </resources>
