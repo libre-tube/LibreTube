@@ -453,4 +453,5 @@
     <string name="autoplay_countdown_summary">在自动播放下一个视频之前显示 5 秒倒计时。</string>
     <string name="stats_for_nerds">详细统计信息</string>
     <string name="video_id">视频识别码</string>
+    <string name="playing_next">%1$s后播放下一个</string>
 </resources>
