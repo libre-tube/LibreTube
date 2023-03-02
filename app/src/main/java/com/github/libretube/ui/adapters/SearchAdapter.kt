@@ -109,13 +109,18 @@ class SearchAdapter : ListAdapter<ContentItem, SearchViewHolder>(SearchCallback)
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, searchChannelImage)
             searchChannelName.text = item.name
-            searchViews.text = root.context.getString(
-                R.string.subscribers,
-                item.subscribers.formatShort()
-            ) + TextUtils.SEPARATOR + root.context.getString(
-                R.string.videoCount,
-                item.videos.toString()
-            )
+
+            searchViews.text = listOfNotNull(
+                root.context.getString(
+                    R.string.subscribers,
+                    item.subscribers.formatShort()
+                ).takeIf { item.subscribers >= 0 },
+                root.context.getString(
+                    R.string.videoCount,
+                    item.videos.toString()
+                ).takeIf { item.videos >= 0 }
+            ).joinToString(TextUtils.SEPARATOR)
+
             root.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, item.url)
             }
