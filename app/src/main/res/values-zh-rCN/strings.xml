@@ -21,7 +21,7 @@
     <string name="cancel">取消</string>
     <string name="region">地区</string>
     <string name="dlcomplete">下载已完成。</string>
-    <string name="dlisinprogress">另一个下载正在进行中，请等待其下载完成。</string>
+    <string name="dlisinprogress">请等待所有当前下载任务完成。</string>
     <string name="downloadfailed">下载失败。</string>
     <string name="vlc">在 VLC 中打开</string>
     <string name="vlcerror">无法在 VLC 中打开。也许没有安装它。</string>
@@ -453,4 +453,5 @@
     <string name="autoplay_countdown_summary">在自动播放下一个视频之前显示 5 秒倒计时。</string>
     <string name="stats_for_nerds">详细统计信息</string>
     <string name="video_id">视频识别码</string>
+    <string name="playing_next">%1$s后播放下一个</string>
 </resources>

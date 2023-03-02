@@ -66,7 +66,7 @@
     <string name="subscribeIsEmpty">Əvvəlcə bir neçə kanala abunə ol.</string>
     <string name="cannotDownload">Bu yayımı endirmək mümkün deyil.</string>
     <string name="dlcomplete">Endirmə tamamlandı.</string>
-    <string name="dlisinprogress">Bütün cari endirmələrin bitməsini gözləyin.</string>
+    <string name="dlisinprogress">Bütün cari endirmələri bitirmək üçün gözlə.</string>
     <string name="downloadfailed">Endirmə alınmadı.</string>
     <string name="vlc">VLC\'də Aç</string>
     <string name="vlcerror">VLC-də açmaq mümkün olmadı. O, quraşdırılmamış ola bilər.</string>
@@ -146,7 +146,7 @@
     <string name="download_folder">Ad</string>
     <string name="sdcard">SD kart</string>
     <string name="internal_storage">Daxili yaddaş</string>
-    <string name="download_folder_summary">Endirilmiş medianın saxlanıldığı qovluğ adı.</string>
+    <string name="download_folder_summary">Endirilmiş medianın saxlanıldığı qovluq adı.</string>
     <string name="defaultIcon">Standart</string>
     <string name="legacyIcon">İtmiş miras</string>
     <string name="fireIcon">Dəbdəbəli yanğın</string>
@@ -331,7 +331,7 @@
     <string name="play_next">Sonrakın oynat</string>
     <string name="navigation_bar">Naviqasiya çubuğu</string>
     <string name="select_at_least_one">Xahiş edirik, ən az bir element seç</string>
-    <string name="change_region">Trend\'in hazırkı ölkə üçün əlçatan olmadığı görünür.Xahiş edirik, tənzimləmələrdə başqasını seç.</string>
+    <string name="change_region">Trend\'in hazırkı ölkə üçün əlçatan olmadığı görünür.Xahiş edirik, tənzimləmələrdə başqasın seç.</string>
     <string name="limit_hls">HLS\'ni 1080p ilə məhdudlaşdır</string>
     <string name="default_load_interval">Standart</string>
     <string name="progressive_load_interval">Qabaqcıl, yükləmə intervalı ölçüsü</string>
