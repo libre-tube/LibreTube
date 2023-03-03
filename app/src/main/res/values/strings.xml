@@ -458,15 +458,15 @@
     <string name="push_channel_description">Shows a notification when new streams are available.</string>
     <!-- Relative time formatting strings (remove when setting the minSdk to 24) -->
     <plurals name="years_ago">
-        <item quantity="one">1 year ago</item>
+        <item quantity="one">%d year ago</item>
         <item quantity="other">%d years ago</item>
     </plurals>
     <plurals name="months_ago">
-        <item quantity="one">1 month ago</item>
+        <item quantity="one">%d month ago</item>
         <item quantity="other">%d months ago</item>
     </plurals>
     <plurals name="weeks_ago">
-        <item quantity="one">1 week ago</item>
+        <item quantity="one">%d week ago</item>
         <item quantity="other">%d weeks ago</item>
     </plurals>
 </resources>
