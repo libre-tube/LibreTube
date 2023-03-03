@@ -166,7 +166,7 @@
     <string name="related_streams">Conteúdo relacionado</string>
     <string name="show_chapters">Exibir capítulos</string>
     <string name="category_filler_description">Para cenas tangenciais adicionadas só para preencher ou humor não preciso para entender o conteúdo do vídeo.</string>
-    <string name="category_preview_description">Para segmentos que detalham o conteúdo futuro neste ou em futuros vídeos da série, mas não fornecem mais informações. Provavelmente é a categoria errada Se incluir clipes que só aparecem aqui.</string>
+    <string name="category_preview_description">Para segmentos detalhando conteúdo futuro sem informações adicionais. Se incluir clipes que aparecem apenas aqui, é muito provável que esta seja a categoria errada.</string>
     <string name="buffering_goal">Pré-carregamento</string>
     <string name="buffering_goal_summary">Número máximo de segundos para pôr em memória.</string>
     <string name="playerVideoFormat">Formato de vídeo para o reprodutor</string>
