@@ -455,4 +455,13 @@
     <string name="playing_next">Memutar berikutnya dalam %1$s</string>
     <string name="stats_for_nerds">Statistik untuk kutu buku</string>
     <string name="video_id">ID Video</string>
+    <plurals name="months_ago">
+        <item quantity="other">%d bulan yang lalu</item>
+    </plurals>
+    <plurals name="weeks_ago">
+        <item quantity="other">%d minggu yang lalu</item>
+    </plurals>
+    <plurals name="years_ago">
+        <item quantity="other">%d tahun yang lalu</item>
+    </plurals>
 </resources>

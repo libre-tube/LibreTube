@@ -62,7 +62,7 @@
     <string name="cannotDownload">この動画をダウンロードできませんでした。</string>
     <string name="vlcerror">VLCで開くことができません。インストールされていない可能性があります。</string>
     <string name="app_theme">テーマ</string>
-    <string name="server_error">サーバーに問題があります。ほかのインスタンスを試しますか？</string>
+    <string name="server_error">選択したサーバーに問題があるようです。 別のインスタンスを試してください。</string>
     <string name="empty">ユーザー名とパスワードを入力する必要があります。</string>
     <string name="import_from_yt">登録チャンネルをインポート</string>
     <string name="defres">動画の画質</string>
@@ -145,7 +145,7 @@
     <string name="app_icon">アイコン</string>
     <string name="disabled">オフ</string>
     <string name="download_directory_summary">ダウンロードされたメディアを保存する場所。</string>
-    <string name="instance_summary">Piped、ログイン、チャンネル登録</string>
+    <string name="instance_summary">Piped、ログイン、およびアカウント</string>
     <string name="customInstance_summary">追加…</string>
     <string name="invalid_url">有効なURLを入力してください</string>
     <string name="version">バージョン %1$s</string>
@@ -158,7 +158,7 @@
     <string name="category_music_offtopic">音楽: 非音楽部分</string>
     <string name="category_preview">プレビュー/要約</string>
     <string name="enabled">オン</string>
-    <string name="update_available_text">GitHubにアクセスしてダウンロードしますか？</string>
+    <string name="update_available_text">新しいアップデートが利用可能です。 クリックして GitHub リリース ページを開きます。</string>
     <string name="appearance">外観</string>
     <string name="app_uptodate">最新バージョンを使用しています。</string>
     <string name="no_update_available">あなたは最新のバージョンを使用しています。</string>
@@ -376,7 +376,7 @@
     <string name="swipe_controls">スワイプ操作</string>
     <string name="swipe_controls_summary">輝度と音量を調整するために、スワイプジェスチャーを使用します。</string>
     <string name="pop_up">ポップアップ</string>
-    <string name="no_comments_available">この動画にコメントはありません。</string>
+    <string name="no_comments_available">この動画にはコメントがありません。</string>
     <string name="captions_size">字幕の大きさ</string>
     <string name="double_tap_seek">ダブルタップしてシーク</string>
     <string name="all_caught_up">すでに最新です</string>
@@ -422,4 +422,44 @@
     <string name="shuffle">シャッフル再生</string>
     <string name="add_to_bookmarks">ブックマークに追加</string>
     <string name="remove_bookmark">ブックマークを削除</string>
+    <string name="trending_views">%1$s • %2$s ビュー • %3$s</string>
+    <string name="normal_views">%1$s ビュー%2$s</string>
+    <string name="pause">一時停止</string>
+    <string name="autoplay_countdown">自動再生カウントダウン</string>
+    <string name="playing_next">次は %1$s でプレイ</string>
+    <string name="stats_for_nerds">オタクのための統計</string>
+    <string name="video_id">動画 ID</string>
+    <string name="skip_silence">無音をスキップ</string>
+    <string name="help">ヘルプ</string>
+    <string name="faq">よくある質問</string>
+    <string name="rewind">巻き戻し</string>
+    <string name="forward">前方</string>
+    <string name="alternative_pip_controls">代替 PiP コントロール</string>
+    <string name="alternative_pip_controls_summary">オーディオのみを表示し、早送りと巻き戻しの代わりに PiP でコントロールをスキップします</string>
+    <string name="audio_only_mode">音声のみモード</string>
+    <string name="audio_only_mode_summary">LibreTube を音楽プレーヤーに変えます。</string>
+    <string name="mark_as_watched">視聴済みとしてマーク</string>
+    <string name="custom_playback_speed">カスタム速度</string>
+    <string name="custom_playback_speed_summary">通常のプレーヤーとは異なる再生速度を使用します。</string>
+    <string name="category">カテゴリー</string>
+    <string name="codecs">コーデック</string>
+    <plurals name="years_ago">
+        <item quantity="other">%d年前</item>
+    </plurals>
+    <plurals name="months_ago">
+        <item quantity="other">%d か月前</item>
+    </plurals>
+    <plurals name="weeks_ago">
+        <item quantity="other">%d 週間前</item>
+    </plurals>
+    <string name="concurrent_downloads_limit_reached">同時ダウンロード数の上限に達しました。</string>
+    <string name="no_subtitle">サブタイトルなし</string>
+    <string name="download_paused">ダウンロードを一時停止しました</string>
+    <string name="download_completed">ダウンロード完了</string>
+    <string name="concurrent_downloads">最大同時ダウンロード数</string>
+    <string name="unknown">知らない</string>
+    <string name="resume">履歴書</string>
+    <string name="autoplay_countdown_summary">次のビデオを自動再生する前に 5 秒のカウントダウンを表示します。</string>
+    <string name="audio_player">オーディオプレイヤー</string>
+    <string name="unsupported_file_format">サポートされていないファイル形式: %1$s</string>
 </resources>

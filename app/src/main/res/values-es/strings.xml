@@ -455,4 +455,19 @@
     <string name="autoplay_countdown">Cuenta atrás para reproducción automática</string>
     <string name="autoplay_countdown_summary">Muestra una cuenta atrás de 5 segundos antes de reproducir automáticamente el siguiente vídeo.</string>
     <string name="playing_next">Próxima reprodución en %1$s</string>
+    <plurals name="years_ago">
+        <item quantity="one">Hace 1 año</item>
+        <item quantity="many">Hace %d años</item>
+        <item quantity="other">Hace %d años</item>
+    </plurals>
+    <plurals name="months_ago">
+        <item quantity="one">Hace 1 mes</item>
+        <item quantity="many">Hace %d meses</item>
+        <item quantity="other">Hace %d meses</item>
+    </plurals>
+    <plurals name="weeks_ago">
+        <item quantity="one">Hace 1 semana</item>
+        <item quantity="many">Hace %d semanas</item>
+        <item quantity="other">Hace %d semanas</item>
+    </plurals>
 </resources>

@@ -455,4 +455,19 @@
     <string name="video_id">ID do vídeo</string>
     <string name="autoplay_countdown">Contagem decrescente do Autoplay</string>
     <string name="autoplay_countdown_summary">Mostrar uma contagem decrescente de 5s antes de reproduzir automaticamente o próximo vídeo.</string>
+    <plurals name="months_ago">
+        <item quantity="one">1 mês atrás</item>
+        <item quantity="many">%d meses atrás</item>
+        <item quantity="other">%d meses atrás</item>
+    </plurals>
+    <plurals name="weeks_ago">
+        <item quantity="one">1 semana atrás</item>
+        <item quantity="many">%d semanas atrás</item>
+        <item quantity="other">%d semanas atrás</item>
+    </plurals>
+    <plurals name="years_ago">
+        <item quantity="one">1 ano atrás</item>
+        <item quantity="many">%d anos atrás</item>
+        <item quantity="other">%d anos atrás</item>
+    </plurals>
 </resources>

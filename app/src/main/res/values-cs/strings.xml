@@ -455,4 +455,19 @@
     <string name="playing_next">Přehrávání dalšího videa za %1$s</string>
     <string name="stats_for_nerds">Statistiky pro nerdy</string>
     <string name="video_id">ID videa</string>
+    <plurals name="years_ago">
+        <item quantity="one">Před rokem</item>
+        <item quantity="few">Před %d lety</item>
+        <item quantity="other">Před %d lety</item>
+    </plurals>
+    <plurals name="months_ago">
+        <item quantity="one">Před měsícem</item>
+        <item quantity="few">Před %d měsíci</item>
+        <item quantity="other">Před %d měsíci</item>
+    </plurals>
+    <plurals name="weeks_ago">
+        <item quantity="one">Před týdnem</item>
+        <item quantity="few">Před %d týdny</item>
+        <item quantity="other">Před %d týdny</item>
+    </plurals>
 </resources>

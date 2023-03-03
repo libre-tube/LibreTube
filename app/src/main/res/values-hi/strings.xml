@@ -455,4 +455,12 @@
     <string name="stats_for_nerds">नरडों के लिए आँकड़े</string>
     <string name="video_id">वीडियो आईडी</string>
     <string name="category">वर्ग</string>
+    <plurals name="years_ago">
+        <item quantity="one">1 साल पहले</item>
+        <item quantity="other">%d वर्ष पहले</item>
+    </plurals>
+    <plurals name="months_ago">
+        <item quantity="one">1 महीने पहले</item>
+        <item quantity="other">%d महीने पहले</item>
+    </plurals>
 </resources>

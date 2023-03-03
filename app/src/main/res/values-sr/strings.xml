@@ -447,4 +447,27 @@
     <string name="unsupported_file_format">Неподржан формат датотеке: %1$s</string>
     <string name="mark_as_watched">Означи као гледано</string>
     <string name="codecs">Цодецс</string>
+    <string name="autoplay_countdown">Аутоматско одбројавање</string>
+    <string name="stats_for_nerds">Статистика за штребере</string>
+    <string name="video_id">ИД видеа</string>
+    <string name="custom_playback_speed">Прилагођена брзина</string>
+    <string name="custom_playback_speed_summary">Користите другачију брзину репродукције него за нормалан плејер.</string>
+    <string name="category">Категорија</string>
+    <plurals name="years_ago">
+        <item quantity="one">Пре 1 године</item>
+        <item quantity="few">Пре %d година</item>
+        <item quantity="other">Пре %d година</item>
+    </plurals>
+    <plurals name="weeks_ago">
+        <item quantity="one">Пре 1 недељу</item>
+        <item quantity="few">Пре %d недеље</item>
+        <item quantity="other">Пре %d недеље</item>
+    </plurals>
+    <plurals name="months_ago">
+        <item quantity="one">Пре 1 месец</item>
+        <item quantity="few">Пре %d месеци</item>
+        <item quantity="other">Пре %d месеци</item>
+    </plurals>
+    <string name="playing_next">Следеће се игра за %1$s</string>
+    <string name="autoplay_countdown_summary">Прикажите 5с одбројавање пре аутоматског пуштања следећег видеа.</string>
 </resources>

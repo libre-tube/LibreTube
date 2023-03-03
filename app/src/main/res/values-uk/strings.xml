@@ -455,4 +455,22 @@
     <string name="autoplay_countdown_summary">Показувати зворотний відлік 5 с до автовідтворення наступного відео.</string>
     <string name="stats_for_nerds">Статистика для допитливих</string>
     <string name="video_id">ID відео</string>
+    <plurals name="years_ago">
+        <item quantity="one">1 рік тому</item>
+        <item quantity="few">%d роки тому</item>
+        <item quantity="many">%d років тому</item>
+        <item quantity="other">%d років тому</item>
+    </plurals>
+    <plurals name="months_ago">
+        <item quantity="one">1 місяць тому</item>
+        <item quantity="few">%d місяці тому</item>
+        <item quantity="many">%d місяців тому</item>
+        <item quantity="other">%d місяців тому</item>
+    </plurals>
+    <plurals name="weeks_ago">
+        <item quantity="one">1 тиждень тому</item>
+        <item quantity="few">%d тижні тому</item>
+        <item quantity="many">%d тижнів тому</item>
+        <item quantity="other">%d тижнів тому</item>
+    </plurals>
 </resources>
