@@ -26,7 +26,6 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.net.toUri
-import androidx.core.os.ConfigurationCompat
 import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import androidx.core.text.parseAsHtml
@@ -818,8 +817,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
     private fun localizeDate(streams: Streams): String {
         return if (!streams.livestream) {
-            val locale = ConfigurationCompat.getLocales(resources.configuration)[0]!!
-            TextUtils.SEPARATOR + TextUtils.localizeDate(streams.uploadDate, locale)
+            TextUtils.SEPARATOR + TextUtils.localizeDate(streams.uploadDate)
         } else {
             ""
         }

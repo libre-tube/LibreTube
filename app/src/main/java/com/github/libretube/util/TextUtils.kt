@@ -9,7 +9,6 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.time.temporal.ChronoUnit
-import java.util.*
 import kotlin.time.Duration
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.toJavaLocalDate
@@ -27,14 +26,17 @@ object TextUtils {
     const val RESERVED_CHARS = "?:\"*|/\\<>\u0000"
 
     /**
-     * Localize the date from a time string
-     * @param date The date to parse
-     * @param locale The locale to use, otherwise uses system default
-     * return Localized date string
+     * Date time formatter which uses the [FormatStyle.MEDIUM] format style.
      */
-    fun localizeDate(date: LocalDate, locale: Locale): String {
-        val formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(locale)
-        return date.toJavaLocalDate().format(formatter)
+    private val MEDIUM_DATE_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
+
+    /**
+     * Localize the date from a date string, using the medium format.
+     * @param date The date to parse
+     * @return localized date string
+     */
+    fun localizeDate(date: LocalDate): String {
+        return date.toJavaLocalDate().format(MEDIUM_DATE_FORMATTER)
     }
 
     /**
