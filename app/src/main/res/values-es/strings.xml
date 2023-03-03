@@ -174,7 +174,7 @@
     <string name="category_filler">Tangente/chistes de relleno</string>
     <string name="category_music_offtopic">Música: Sección no musical</string>
     <string name="category_preview">Vista previa/Resumen</string>
-    <string name="category_preview_description">Para los segmentos que detallan los próximos contenidos de este o futuros vídeos de su serie, pero que no proporcionan información adicional. Si incluye clips que sólo aparecen aquí, es muy probable que esta sea la categoría equivocada.</string>
+    <string name="category_preview_description">Para segmentos que detallan contenido futuro sin información adicional. Si incluye clips que solo aparecen aquí, es muy probable que se trate de una categoría incorrecta.</string>
     <string name="category_filler_description">Para las escenas tangenciales que se añaden sólo para el relleno o el humor que no es necesario para entender el contenido principal del vídeo.</string>
     <string name="playerVideoFormat">Formato de vídeo para el reproductor</string>
     <string name="category_music_offtopic_description">Sólo para su uso en vídeos musicales. Debe abarcar partes del vídeo que no formen parte de las mezclas oficiales. Al final, el vídeo debe parecerse lo más posible a la versión de Spotify o a cualquier otra versión mezclada, o reducir las conversaciones u otras distracciones.</string>
