@@ -174,7 +174,7 @@
     <string name="category_filler_description">Per le scene marginali aggiunte solo come riempitivo o umorismo, non necessarie per comprendere il contenuto principale del video.</string>
     <string name="category_music_offtopic_description">Solo per l\'uso in video musicali. Dovrebbe coprire parti del video non parte di mix ufficiali. Alla fine, il video dovrebbe assomigliare il più vicino possibile alla versione di Spotify o a qualsiasi altra versione mixata, o riducendo la conversazione o altre distrazioni.</string>
     <string name="category_preview">Anteprima/Riepilogo</string>
-    <string name="category_preview_description">Per i segmenti che mostrano in dettaglio i prossimi contenuti in questo o futuri video della serie, ma non forniscono ulteriori informazioni. Se include clip che appaiono solo qui, questa probabilmente è la categoria sbagliata.</string>
+    <string name="category_preview_description">Per i segmenti che descrivono in dettaglio i contenuti futuri senza informazioni aggiuntive. Se include clip che appaiono solo qui, è molto probabile che questa sia la categoria sbagliata.</string>
     <string name="buffering_goal">Precaricamento</string>
     <string name="buffering_goal_summary">La quantità massima di secondi che viene bufferizzata nei video.</string>
     <string name="playerVideoFormat">Formato video del lettore</string>
