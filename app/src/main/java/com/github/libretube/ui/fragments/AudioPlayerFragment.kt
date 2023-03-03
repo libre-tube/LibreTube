@@ -71,6 +71,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         audioHelper = AudioHelper(requireContext())
         Intent(activity, BackgroundMode::class.java).also { intent ->
             activity?.bindService(intent, connection, Context.BIND_AUTO_CREATE)
