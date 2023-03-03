@@ -72,9 +72,9 @@ class LoginDialog(
                     RetrofitInstance.authApi.login(login)
                 }
             } catch (e: HttpException) {
-                val errorMessage = e.response()?.errorBody()?.string()?.let {
-                    JsonHelper.json.decodeFromString<Token>(it).error
-                } ?: context?.getString(R.string.server_error) ?: ""
+                val errorMessage = e.response()?.errorBody()?.string()?.runCatching {
+                    JsonHelper.json.decodeFromString<Token>(this).error
+                }?.getOrNull() ?: context?.getString(R.string.server_error) ?: ""
                 Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
                 return@launchWhenCreated
             } catch (e: Exception) {

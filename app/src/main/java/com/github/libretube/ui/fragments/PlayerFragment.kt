@@ -648,9 +648,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_LONG).show()
                 return@launchWhenCreated
             } catch (e: HttpException) {
-                val errorMessage = e.response()?.errorBody()?.string()?.let {
-                    JsonHelper.json.decodeFromString<Message>(it).message
-                } ?: context?.getString(R.string.server_error) ?: ""
+                val errorMessage = e.response()?.errorBody()?.string()?.runCatching {
+                    JsonHelper.json.decodeFromString<Message>(this).message
+                }?.getOrNull() ?: context?.getString(R.string.server_error) ?: ""
                 Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
                 return@launchWhenCreated
             }
