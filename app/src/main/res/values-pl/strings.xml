@@ -455,4 +455,22 @@
     <string name="stats_for_nerds">Statystyki dla nerdów</string>
     <string name="video_id">ID wideo</string>
     <string name="category">Kategoria</string>
+    <plurals name="years_ago">
+        <item quantity="one">1 rok temu</item>
+        <item quantity="few">%d lata temu</item>
+        <item quantity="many">%d lat temu</item>
+        <item quantity="other">%d lat temu</item>
+    </plurals>
+    <plurals name="months_ago">
+        <item quantity="one">1 miesiąc temu</item>
+        <item quantity="few">%d miesiące temu</item>
+        <item quantity="many">%d miesięcy temu</item>
+        <item quantity="other">%d miesięcy temu</item>
+    </plurals>
+    <plurals name="weeks_ago">
+        <item quantity="one">1 tydzień temu</item>
+        <item quantity="few">%d tygodnie temu</item>
+        <item quantity="many">%d tygodni temu</item>
+        <item quantity="other">%d tygodni temu</item>
+    </plurals>
 </resources>
