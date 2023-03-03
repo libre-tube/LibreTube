@@ -106,7 +106,7 @@
     <string name="category_filler">ਫਿਲਰ ਟੈਂਜੈਂਟ/ਚੁਟਕਲੇ</string>
     <string name="category_music_offtopic">ਸੰਗੀਤ: ਗੈਰ-ਸੰਗੀਤ ਸੈਕਸ਼ਨ</string>
     <string name="category_preview">ਪ੍ਰੀਵਿਊ/ਰੀਕੈਪ</string>
-    <string name="category_preview_description">ਇਸ ਜਾਂ ਇਸਦੀ ਲੜੀ ਵਿੱਚ ਆਉਣ ਵਾਲੇ ਵੀਡੀਓ ਵਿੱਚ ਆਉਣ ਵਾਲੀ ਸਮਗਰੀ ਦਾ ਵੇਰਵਾ ਦੇਣ ਵਾਲੇ ਹਿੱਸਿਆਂ ਲਈ, ਪਰ ਵਾਧੂ ਜਾਣਕਾਰੀ ਪ੍ਰਦਾਨ ਨਾ ਕਰੋ। ਜੇਕਰ ਇਸ ਵਿੱਚ ਕਲਿੱਪ ਸ਼ਾਮਲ ਹਨ ਜੋ ਸਿਰਫ਼ ਇੱਥੇ ਦਿਖਾਈ ਦਿੰਦੀਆਂ ਹਨ, ਤਾਂ ਇਹ ਗਲਤ ਸ਼੍ਰੇਣੀ ਹੈ।</string>
+    <string name="category_preview_description">ਬਿਨਾਂ ਵਾਧੂ ਜਾਣਕਾਰੀ ਦੇ ਭਵਿੱਖ ਦੀ ਸਮੱਗਰੀ ਦਾ ਵੇਰਵਾ ਦੇਣ ਵਾਲੇ ਹਿੱਸਿਆਂ ਲਈ। ਜੇਕਰ ਇਸ ਵਿੱਚ ਕਲਿੱਪ ਸ਼ਾਮਲ ਹਨ ਜੋ ਸਿਰਫ਼ ਇੱਥੇ ਦਿਖਾਈ ਦਿੰਦੀਆਂ ਹਨ, ਤਾਂ ਇਹ ਗਲਤ ਸ਼੍ਰੇਣੀ ਹੈ।</string>
     <string name="license">ਲਾਈਸੈਂਸ</string>
     <string name="color_accent">ਲਹਿਜ਼ੇ</string>
     <string name="color_red">ਆਰਾਮਦਾਇਕ ਲਾਲ</string>
@@ -455,4 +455,16 @@
     <string name="stats_for_nerds">ਨਰਡਾਂ ਲਈ ਅੰਕੜੇ</string>
     <string name="video_id">ਵੀਡੀਓ ਆਈ ਡੀ</string>
     <string name="category">ਸ਼੍ਰੇਣੀ</string>
+    <plurals name="years_ago">
+        <item quantity="one">1 ਸਾਲ ਪਹਿਲਾਂ</item>
+        <item quantity="other">%d ਸਾਲ ਪਹਿਲਾਂ</item>
+    </plurals>
+    <plurals name="months_ago">
+        <item quantity="one">1 ਮਹੀਨਾ ਪਹਿਲਾਂ</item>
+        <item quantity="other">%d ਮਹੀਨੇ ਪਹਿਲਾਂ</item>
+    </plurals>
+    <plurals name="weeks_ago">
+        <item quantity="one">1 ਹਫ਼ਤਾ ਪਹਿਲਾਂ</item>
+        <item quantity="other">%d ਹਫ਼ਤੇ ਪਹਿਲਾਂ</item>
+    </plurals>
 </resources>
