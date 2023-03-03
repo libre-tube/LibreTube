@@ -1,8 +1,10 @@
 package com.github.libretube.util
 
+import android.content.Context
 import android.icu.text.RelativeDateTimeFormatter
 import android.os.Build
 import android.text.format.DateUtils
+import com.github.libretube.R
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -61,20 +63,31 @@ object TextUtils {
         }
     }
 
-    fun formatRelativeDate(unixTime: Long): CharSequence {
+    fun formatRelativeDate(context: Context, unixTime: Long): CharSequence {
         val date = LocalDateTime.ofInstant(Instant.ofEpochMilli(unixTime), ZoneId.systemDefault())
         val now = LocalDateTime.now()
         val weeks = date.until(now, ChronoUnit.WEEKS)
 
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && weeks >= 1) {
+        return if (weeks > 0) {
             val months = date.until(now, ChronoUnit.MONTHS)
-            val (timeFormat, time) = when {
-                months / 12 > 0 -> RelativeDateTimeFormatter.RelativeUnit.YEARS to months / 12
-                months > 0 -> RelativeDateTimeFormatter.RelativeUnit.MONTHS to months
-                else -> RelativeDateTimeFormatter.RelativeUnit.WEEKS to weeks
+            val years = months / 12
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                val (timeFormat, time) = when {
+                    years > 0 -> RelativeDateTimeFormatter.RelativeUnit.YEARS to years
+                    months > 0 -> RelativeDateTimeFormatter.RelativeUnit.MONTHS to months
+                    else -> RelativeDateTimeFormatter.RelativeUnit.WEEKS to weeks
+                }
+                RelativeDateTimeFormatter.getInstance()
+                    .format(time.toDouble(), RelativeDateTimeFormatter.Direction.LAST, timeFormat)
+            } else {
+                val (timeAgoRes, time) = when {
+                    years > 0 -> R.plurals.years_ago to years
+                    months > 0 -> R.plurals.months_ago to months
+                    else -> R.plurals.weeks_ago to weeks
+                }
+                context.resources.getQuantityString(timeAgoRes, time.toInt(), time)
             }
-            RelativeDateTimeFormatter.getInstance()
-                .format(time.toDouble(), RelativeDateTimeFormatter.Direction.LAST, timeFormat)
         } else {
             DateUtils.getRelativeTimeSpanString(unixTime)
         }
