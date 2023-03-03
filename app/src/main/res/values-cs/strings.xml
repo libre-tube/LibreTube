@@ -173,7 +173,7 @@
     <string name="github">GitHub</string>
     <string name="category_filler_description">Pro výplňové scény přidané jen jako přídavek nebo humor, které nejsou vyžadovány pro pochopení hlavního obsahu videa.</string>
     <string name="category_music_offtopic_description">Použití pouze u hudebních videí. Mělo by pokrývat části videa, ne části oficiálních skladeb. Ve výsledku by mělo video připomínat verzi ze Spotify nebo jakoukoli jinou mixovanou verzi jak nejlépe je to možné, nebo omezit mluvení a další rušivé prvky.</string>
-    <string name="category_preview_description">Pro segmenty s informacemi o nadcházejícím obsahu nebo budoucích videích v dané sérii, neposkytuje ale další info. Pokud to zahrnuje klipy, které se zobrazí pouze zde, je to s největší pravděpodobností špatná kategorie.</string>
+    <string name="category_preview_description">Pro segmenty popisující budoucí obsah bez dalších informací. Pokud obsahuje klipy, které se objevují pouze zde, je to velmi pravděpodobně špatná kategorie.</string>
     <string name="instance_api_url">URL API instance</string>
     <string name="empty_instance">Zadejte název a URL API.</string>
     <string name="invalid_url">Zadejte prosím adresu URL, která funguje</string>
