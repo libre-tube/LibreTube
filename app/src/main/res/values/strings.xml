@@ -106,7 +106,7 @@
     <string name="category_music_offtopic">Music: Non-Music Section</string>
     <string name="category_music_offtopic_description">Only for use in music videos. It should cover parts of the video not part of official mixes. In the end, the video should resemble the Spotify or any other mixed version as closely as possible, or reduce talking or other distractions.</string>
     <string name="category_preview">Preview/Recap</string>
-    <string name="category_preview_description">For segments detailing upcoming content in this or future videos in its series, but do not provide additional info. If it includes clips that only appear here, this is very likely the wrong category.</string>
+    <string name="category_preview_description">For segments detailing future content without additional info. If it includes clips that only appear here, this is very likely the wrong category.</string>
     <string name="license">License</string>
     <string name="color_accent">Accents</string>
     <string name="color_red">Resting red</string>
