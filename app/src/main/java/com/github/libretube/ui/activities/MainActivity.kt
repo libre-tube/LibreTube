@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.ScrollView
 import androidx.activity.addCallback
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.children
 import androidx.core.widget.NestedScrollView
@@ -411,17 +412,18 @@ class MainActivity : BaseActivity() {
             )
         }
 
-        when (intent?.getStringExtra("fragmentToOpen")) {
-            "home" ->
-                navController.navigate(R.id.homeFragment)
-            "trends" ->
-                navController.navigate(R.id.trendsFragment)
-            "subscriptions" ->
-                navController.navigate(R.id.subscriptionsFragment)
-            "library" ->
-                navController.navigate(R.id.libraryFragment)
-            "downloads" ->
-                navController.navigate(R.id.downloadsFragment)
+        intent?.getStringExtra("fragmentToOpen")?.let {
+            if (it != "downloads") { // Not a shortcut
+                ShortcutManagerCompat.reportShortcutUsed(this, it)
+            }
+
+            when (it) {
+                "home" -> navController.navigate(R.id.homeFragment)
+                "trends" -> navController.navigate(R.id.trendsFragment)
+                "subscriptions" -> navController.navigate(R.id.subscriptionsFragment)
+                "library" -> navController.navigate(R.id.libraryFragment)
+                "downloads" -> navController.navigate(R.id.downloadsFragment)
+            }
         }
         if (intent?.getBooleanExtra(IntentData.downloading, false) == true) {
             (supportFragmentManager.fragments.find { it is NavHostFragment })
