@@ -466,7 +466,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             exoPlayer.currentPosition,
             playlistId,
             channelId,
-            true
+            keepQueue = true,
+            keepVideoPlayerAlive = true
         )
         handler.postDelayed(500) {
             NavigationHelper.startAudioPlayer(requireContext())
