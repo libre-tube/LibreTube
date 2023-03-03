@@ -133,8 +133,8 @@
     <string name="shapedIcon">不規則裁切</string>
     <string name="flameIcon">飛馳烈焰</string>
     <string name="birdIcon">加速鳥兒</string>
-    <string name="instance_summary">Piped，登入，訂閱</string>
-    <string name="customInstance_summary">加入實例</string>
+    <string name="instance_summary">Piped，登錄和帳戶</string>
+    <string name="customInstance_summary">添加…</string>
     <string name="instance_name">實例名稱</string>
     <string name="instance_api_url">實例API網址</string>
     <string name="addInstance">新增實例</string>
@@ -159,8 +159,8 @@
     <string name="about">關於</string>
     <string name="changeLanguage">語言</string>
     <string name="register">註冊</string>
-    <string name="server_error">伺服器出了點問題。換個實例試試？</string>
-    <string name="dlisinprogress">有其他下載正在進行，請等待所有下載完成…</string>
+    <string name="server_error">所選服務器似乎有問題。 嘗試另一個實例。</string>
+    <string name="dlisinprogress">請等待所有當前下載完成。</string>
     <string name="systemLanguage">系統</string>
     <string name="okay">好</string>
     <string name="location">位置</string>
@@ -169,7 +169,7 @@
     <string name="category_music_offtopic">音樂: 非音樂片段</string>
     <string name="category_music_offtopic_description">此設定僅用於音樂影片，不包含官方合輯。影片最後應只顯示Spotify的類似版本，避免多餘談話或干擾。</string>
     <string name="disabled">關閉</string>
-    <string name="update_available_text">前往Github Releases下載？</string>
+    <string name="update_available_text">有新的更新可用。 單擊以打開 GitHub 發布頁面。</string>
     <string name="video_format_summary">影片和音訊都下載完成後進行轉檔。</string>
     <string name="download_directory">下載到</string>
     <string name="update">檢查新版本</string>
@@ -228,7 +228,7 @@
     <string name="notify_new_streams_summary">您跟隨的創作者最新串流的通知。</string>
     <string name="wifi">Wi-Fi</string>
     <string name="pop_up">彈出</string>
-    <string name="no_comments_available">這部影片沒有留言。</string>
+    <string name="no_comments_available">此視頻沒有評論。</string>
     <string name="required_network">需要的連線</string>
     <string name="network_all">全部</string>
     <string name="pause">暫停</string>
@@ -441,4 +441,24 @@
     <string name="alternative_pip_controls">另一種畫中畫控制模式</string>
     <string name="alternative_pip_controls_summary">只顯示音訊，跳過畫中畫的前進後退控制</string>
     <string name="all_caught_up_summary">您已經看完了所有影片</string>
+    <string name="mark_as_watched">標記為已觀看</string>
+    <string name="trending_views">%1$s • %2$s 觀看次數 • %3$s</string>
+    <string name="normal_views">%1$s 次觀看%2$s</string>
+    <string name="autoplay_countdown">自動播放倒計時</string>
+    <string name="autoplay_countdown_summary">在自動播放下一個視頻之前顯示 5 秒倒計時。</string>
+    <string name="playing_next">接下來在 %1$s 播放</string>
+    <string name="custom_playback_speed">自定義速度</string>
+    <string name="custom_playback_speed_summary">使用不同於傳統播放器的播放速度。</string>
+    <string name="unsupported_file_format">不支持的文件格式：%1$s</string>
+    <string name="category">類別</string>
+    <string name="codecs">編解碼器</string>
+    <plurals name="years_ago">
+        <item quantity="other">%d 年前</item>
+    </plurals>
+    <plurals name="months_ago">
+        <item quantity="other">%d 個月前</item>
+    </plurals>
+    <plurals name="weeks_ago">
+        <item quantity="other">%d 週前</item>
+    </plurals>
 </resources>
