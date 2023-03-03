@@ -455,4 +455,22 @@
     <string name="playing_next">לנגן את הבא בעוד %1$s</string>
     <string name="autoplay_countdown">ספירה לאחור עד לנגינה אוטומטית</string>
     <string name="autoplay_countdown_summary">להציג ספירה לאחור של 5 שניות בטרם ניגון הסרטון הבא אוטומטית.</string>
+    <plurals name="months_ago">
+        <item quantity="one">לפני חודש</item>
+        <item quantity="two">לפני חודשיים</item>
+        <item quantity="many">לפני %d חודשים</item>
+        <item quantity="other"></item>
+    </plurals>
+    <plurals name="weeks_ago">
+        <item quantity="one">לפני שבוע</item>
+        <item quantity="two">לפני שבועיים</item>
+        <item quantity="many">לפני %d שבועות</item>
+        <item quantity="other"></item>
+    </plurals>
+    <plurals name="years_ago">
+        <item quantity="one">לפני שנה</item>
+        <item quantity="two">לפני שנתיים</item>
+        <item quantity="many">לפני %d שנים</item>
+        <item quantity="other"></item>
+    </plurals>
 </resources>
