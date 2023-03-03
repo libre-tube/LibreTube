@@ -39,7 +39,7 @@
     <string name="areYouSure">Biztosan törölni szeretné a lejátszási listát\?</string>
     <string name="app_theme">Téma</string>
     <string name="emptyList">Itt nincs semmi.</string>
-    <string name="dlisinprogress">Egy másik letöltés már folyamatban van, várjon amíg befejeződik.</string>
+    <string name="dlisinprogress">Várjon amíg az összes jelenlegi letöltés befejeződik.</string>
     <string name="customInstance">Egyéni</string>
     <string name="dlcomplete">A letöltés befejezve.</string>
     <string name="importsuccess">Sikeres feliratkozás</string>
@@ -289,7 +289,7 @@
     <string name="no_replies">Erre a hozzászólásra nincsenek válaszok.</string>
     <string name="download_folder">Név</string>
     <string name="network_all">Összes</string>
-    <string name="instance_summary">Piped, bejelentkezés, és feliratkozások</string>
+    <string name="instance_summary">Piped, bejelentkezés, és fiók</string>
     <string name="no_audio">Nincs hang</string>
     <string name="audio">Hang</string>
     <string name="downloading">Letöltés…</string>
@@ -393,7 +393,7 @@
     <string name="swipe_controls">Húzási vezérlők</string>
     <string name="defaults">Alapértelmezett</string>
     <string name="pop_up">Felugró</string>
-    <string name="no_comments_available">Nincsenek elérhető hozzászólások a videóhoz.</string>
+    <string name="no_comments_available">Nincsenek hozzászólások a videóhoz.</string>
     <string name="comments_disabled">A hozzászólásokat a feltöltő letiltotta.</string>
     <string name="double_tap_seek_summary">Koppintson kétszer balra vagy jobbra a lejátszás a vissza- vagy előretekeréshez.</string>
     <string name="captions_size">Feliratok mérete</string>
@@ -447,4 +447,9 @@
     <string name="custom_playback_speed_summary">A normális lejátszótól való különböző sebesség használata.</string>
     <string name="unsupported_file_format">Nem támogatott fájlformátum: %1$s</string>
     <string name="codecs">Kodekek</string>
+    <string name="autoplay_countdown">Automatikus visszaszámolás</string>
+    <string name="autoplay_countdown_summary">5 másodperces visszaszámlálás megjelenítése a következő videó automatikus lejátszása előtt.</string>
+    <string name="stats_for_nerds">Statisztikák a kockáknak</string>
+    <string name="video_id">Videóazonosító</string>
+    <string name="category">Kategória</string>
 </resources>
