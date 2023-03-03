@@ -1,6 +1,7 @@
 package com.github.libretube.ui.adapters
 
 import android.annotation.SuppressLint
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,8 @@ import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.ThemeHelper
 import com.github.libretube.ui.fragments.CommentsRepliesFragment
 import com.github.libretube.ui.viewholders.CommentsViewHolder
+import com.github.libretube.util.HtmlParser
+import com.github.libretube.util.LinkHandler
 import com.github.libretube.util.TextUtils
 import kotlinx.serialization.encodeToString
 
@@ -35,6 +38,7 @@ class CommentsAdapter(
     private val videoId: String,
     private val comments: MutableList<Comment>,
     private val isRepliesAdapter: Boolean = false,
+    private val handleLink: ((url: String) -> Unit)?,
     private val dismiss: () -> Unit
 ) : RecyclerView.Adapter<CommentsViewHolder>() {
     fun clear() {
@@ -60,7 +64,10 @@ class CommentsAdapter(
         val comment = comments[position]
         holder.binding.apply {
             commentInfos.text = comment.author + TextUtils.SEPARATOR + comment.commentedTime
-            commentText.text = comment.commentText?.parseAsHtml()
+
+            commentText.movementMethod = LinkMovementMethod.getInstance()
+            commentText.text = comment.commentText
+                ?.parseAsHtml(tagHandler = HtmlParser(LinkHandler(handleLink ?: {})))
 
             ImageHelper.loadImage(comment.thumbnail, commentorImage)
             likesTextView.text = comment.likeCount.formatShort()
@@ -108,7 +115,6 @@ class CommentsAdapter(
                     }
                 }
             }
-
             root.setOnLongClickListener {
                 ClipboardHelper.save(root.context, comment.commentText ?: "")
                 Toast.makeText(root.context, R.string.copied, Toast.LENGTH_SHORT).show()

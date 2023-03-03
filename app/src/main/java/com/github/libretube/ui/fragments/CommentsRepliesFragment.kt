@@ -49,7 +49,13 @@ class CommentsRepliesFragment : Fragment() {
             arguments?.getString(IntentData.comment)!!
         )
 
-        repliesAdapter = CommentsAdapter(null, videoId, mutableListOf(comment), true) {
+        repliesAdapter = CommentsAdapter(
+            null,
+            videoId,
+            mutableListOf(comment),
+            true,
+            viewModel.handleLink
+        ) {
             viewModel.commentsSheetDismiss?.invoke()
         }
 
