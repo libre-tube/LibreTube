@@ -416,7 +416,7 @@
     <string name="color_violet">Versatile Violet</string>
     <string name="failed_fetching_instances">无法获取可用实例。</string>
     <string name="hide_watched_from_feed_summary">不要在订阅选项卡中显示观看比例超过 90% 的视频。</string>
-    <string name="hide_watched_from_feed">在 feed 中隐藏看过的视频</string>
+    <string name="hide_watched_from_feed">在推送中隐藏观看的视频</string>
     <string name="playlistUrl">播放列表 URL</string>
     <string name="pause_on_quit">退出时暂停</string>
     <string name="shuffle">随机播放</string>
@@ -454,4 +454,14 @@
     <string name="stats_for_nerds">详细统计信息</string>
     <string name="video_id">视频识别码</string>
     <string name="playing_next">%1$s后播放下一个</string>
+    <string name="normal_views">%1$s 次观看%2$s</string>
+    <plurals name="years_ago">
+        <item quantity="other">%d 年前</item>
+    </plurals>
+    <plurals name="months_ago">
+        <item quantity="other">%d 个月前</item>
+    </plurals>
+    <plurals name="weeks_ago">
+        <item quantity="other">%d 周前</item>
+    </plurals>
 </resources>
