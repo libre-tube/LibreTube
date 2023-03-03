@@ -455,4 +455,19 @@
     <string name="autoplay_countdown">Conto alla rovescia per riproduzione automatica</string>
     <string name="autoplay_countdown_summary">Mostra un conto alla rovescia di 5 secondi prima di riprodurre automaticamente il video successivo.</string>
     <string name="stats_for_nerds">Statistiche per nerd</string>
+    <plurals name="months_ago">
+        <item quantity="one">1 mese fa</item>
+        <item quantity="many">%d mesi fa</item>
+        <item quantity="other">%d mesi fa</item>
+    </plurals>
+    <plurals name="weeks_ago">
+        <item quantity="one">1 settimana fa</item>
+        <item quantity="many">%d settimane fa</item>
+        <item quantity="other">%d settimane fa</item>
+    </plurals>
+    <plurals name="years_ago">
+        <item quantity="one">1 anno fa</item>
+        <item quantity="many">%d anni fa</item>
+        <item quantity="other">%d anni fa</item>
+    </plurals>
 </resources>
