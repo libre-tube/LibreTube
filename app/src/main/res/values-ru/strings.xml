@@ -28,7 +28,7 @@
     <string name="subscribeIsEmpty">Сначала подпишитесь на некоторые каналы.</string>
     <string name="cannotDownload">Невозможно скачать это видео.</string>
     <string name="dlcomplete">Загрузка завершена.</string>
-    <string name="dlisinprogress">Пожалуйста, дождитесь окончания всех текущих загрузок.</string>
+    <string name="dlisinprogress">Дождитесь завершения всех текущих загрузок.</string>
     <string name="downloadfailed">Загрузка не удалась.</string>
     <string name="vlc">Открыть в VLC</string>
     <string name="vlcerror">Не удалось открыть в VLC. Возможно, он не установлен.</string>
