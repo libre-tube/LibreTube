@@ -145,7 +145,7 @@
     <string name="category_filler_description">للمشاهد العرضية المضافة فقط للحشو أو الفكاهة غير المطلوبة لفهم المحتوى الرئيسي للفيديو.</string>
     <string name="category_music_offtopic">الموسيقى: قسم غير الموسيقى</string>
     <string name="category_preview">معاينة / خلاصة</string>
-    <string name="category_preview_description">بالنسبة للأجزاء التي تعرض بالتفصيل المحتوى القادم في هذا أو مقاطع الفيديو المستقبلية في سلسلتها ، لكن لا تقدم معلومات إضافية. إذا كانت تتضمن مقاطع تظهر هنا فقط ، فمن المحتمل جدًا أن تكون هذه الفئة الخطأ.</string>
+    <string name="category_preview_description">للأجزاء التي توضح بالتفصيل المحتوى المستقبلي بدون معلومات إضافية. إذا كانت تتضمن مقاطع تظهر هنا فقط ، فمن المحتمل جدًا أن تكون هذه الفئة الخطأ.</string>
     <string name="instance_api_url">عنوان URL لمثيل واجهة برمجة التطبيقات</string>
     <string name="addInstance">إضافة مثيل</string>
     <string name="empty_instance">املأ الاسم وعنوان URL لواجهة برمجة التطبيقات.</string>
@@ -459,6 +459,22 @@
         <item quantity="zero">0 سنة مضت</item>
         <item quantity="one">منذ سنة 1</item>
         <item quantity="two">منذ 2 عام</item>
+        <item quantity="few"/>
+        <item quantity="many"/>
+        <item quantity="other"/>
+    </plurals>
+    <plurals name="months_ago">
+        <item quantity="zero">قبل 0 شهر</item>
+        <item quantity="one">1 قبل شهر</item>
+        <item quantity="two">منذ شهرين</item>
+        <item quantity="few"></item>
+        <item quantity="many">‪</item>
+        <item quantity="other"></item>
+    </plurals>
+    <plurals name="weeks_ago">
+        <item quantity="zero">قبل 0 أسبوع</item>
+        <item quantity="one">1 قبل أسبوع</item>
+        <item quantity="two">2 منذ أسابيع</item>
         <item quantity="few"></item>
         <item quantity="many"></item>
         <item quantity="other"></item>
