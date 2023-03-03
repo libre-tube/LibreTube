@@ -455,4 +455,12 @@
     <string name="autoplay_countdown">العد التنازلي للتشغيل التلقائي</string>
     <string name="playing_next">يتم التشغيل بعد ذلك في %1$s</string>
     <string name="autoplay_countdown_summary">أظهر العد التنازلي 5 ثوانٍ قبل التشغيل التلقائي للفيديو التالي.</string>
+    <plurals name="years_ago">
+        <item quantity="zero">0 سنة مضت</item>
+        <item quantity="one">منذ سنة 1</item>
+        <item quantity="two">منذ 2 عام</item>
+        <item quantity="few"></item>
+        <item quantity="many"></item>
+        <item quantity="other"></item>
+    </plurals>
 </resources>
