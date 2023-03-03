@@ -174,7 +174,7 @@
     <string name="category_music_offtopic">מוזיקה: קטע לא מוזיקלי</string>
     <string name="category_preview">תצוגה מקדימה/סיכום</string>
     <string name="category_music_offtopic_description">מיועד רק לסרטונים מוזיקליים. הוא אמור לכסות חלקים מהסרטון שאינם חלק מהערבולים הרשמיים. בסוף, הסרטון אמור לחקות את Spotify או כל גרסה מעורבלת אחרת בצורה כמה שיותר נאמנה או לצמצם דיבור או כל הפרעה אחרת.</string>
-    <string name="category_preview_description">למקטעים שמפרטים על תוכן עתידי בסרטון הזה או בסרטונים העוקבים, אך לא מספק מידע נוסף. אם הוא כולל מקטעים שמופיעים רק כאן, סביר להניח שזאת לא הקטגוריה הנכונה.</string>
+    <string name="category_preview_description">לקטעים המפרטים תוכן עתידי ללא מידע נוסף. אם הוא כולל קליפים שמופיעים רק כאן, סביר להניח שזו הקטגוריה הלא נכונה.</string>
     <string name="buffering_goal">טעינה טרומית</string>
     <string name="buffering_goal_summary">כמות השניות המרבית של וידאו שייאגר לזיכרון.</string>
     <string name="playerVideoFormat">תצורת הסרטונים לנגן</string>
@@ -459,18 +459,18 @@
         <item quantity="one">לפני חודש</item>
         <item quantity="two">לפני חודשיים</item>
         <item quantity="many">לפני %d חודשים</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
     <plurals name="weeks_ago">
         <item quantity="one">לפני שבוע</item>
         <item quantity="two">לפני שבועיים</item>
         <item quantity="many">לפני %d שבועות</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
     <plurals name="years_ago">
         <item quantity="one">לפני שנה</item>
         <item quantity="two">לפני שנתיים</item>
         <item quantity="many">לפני %d שנים</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
 </resources>
