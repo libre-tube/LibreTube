@@ -43,7 +43,8 @@ class CommentsMainFragment : Fragment() {
         commentsAdapter = CommentsAdapter(
             this,
             viewModel.videoId!!,
-            viewModel.commentsPage.value?.comments.orEmpty().toMutableList()
+            viewModel.commentsPage.value?.comments.orEmpty().toMutableList(),
+            handleLink = viewModel.handleLink
         ) {
             viewModel.commentsSheetDismiss?.invoke()
         }

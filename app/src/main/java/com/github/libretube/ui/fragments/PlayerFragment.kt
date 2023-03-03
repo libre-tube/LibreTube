@@ -368,6 +368,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         binding.commentsToggle.setOnClickListener {
             videoId ?: return@setOnClickListener
             // set the max height to not cover the currently playing video
+            commentsViewModel.handleLink = this::handleLink
             commentsViewModel.maxHeight = binding.root.height - binding.player.height
             commentsViewModel.videoId = videoId
             CommentsSheet().show(childFragmentManager)
