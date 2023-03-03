@@ -28,7 +28,7 @@
     <string name="subscribeIsEmpty">Сначала подпишитесь на некоторые каналы.</string>
     <string name="cannotDownload">Невозможно скачать это видео.</string>
     <string name="dlcomplete">Загрузка завершена.</string>
-    <string name="dlisinprogress">Пожалуйста, дождитесь окончания всех текущих загрузок</string>
+    <string name="dlisinprogress">Пожалуйста, дождитесь окончания всех текущих загрузок.</string>
     <string name="downloadfailed">Загрузка не удалась.</string>
     <string name="vlc">Открыть в VLC</string>
     <string name="vlcerror">Не удалось открыть в VLC. Возможно, он не установлен.</string>
@@ -455,4 +455,22 @@
     <string name="playing_next">Следующее воспроизведение за %1$s</string>
     <string name="stats_for_nerds">Статистика для любознательных</string>
     <string name="video_id">ID видео</string>
+    <plurals name="months_ago">
+        <item quantity="one">1 месяц назад</item>
+        <item quantity="few">%d месяца назад</item>
+        <item quantity="many">%d месяцев назад</item>
+        <item quantity="other">%d месяцев назад</item>
+    </plurals>
+    <plurals name="years_ago">
+        <item quantity="one">1 год назад</item>
+        <item quantity="few">%d года назад</item>
+        <item quantity="many">%d лет назад</item>
+        <item quantity="other">%d лет назад</item>
+    </plurals>
+    <plurals name="weeks_ago">
+        <item quantity="one">1 неделю назад</item>
+        <item quantity="few">%d недели назад</item>
+        <item quantity="many">%d недель назад</item>
+        <item quantity="other">%d недель назад</item>
+    </plurals>
 </resources>
