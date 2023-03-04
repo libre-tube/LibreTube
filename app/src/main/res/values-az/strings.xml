@@ -171,7 +171,7 @@
     <string name="show_chapters">Bölmələri göstər</string>
     <string name="category_music_offtopic">Musiqi: Musiqisiz Bölmə</string>
     <string name="category_preview">Önbaxış/Anons</string>
-    <string name="category_preview_description">Əlavə məlumat olmadan gələcək məzmunu təfərrüatlandıran seqmentlər üçün. Əgər o, yalnız burada görünən klipləri ehtiva edirsə, bu, çox güman ki, yanlış kateqoriyadır.</string>
+    <string name="category_preview_description">Əlavə məlumatsız gələcək məzmunu təfərrüatlandıran seqmentlər üçün. Əgər o, yalnız burada görünən hissələri ehtiva edirsə, bu, çox güman ki, yanlış kateqoriyadır.</string>
     <string name="hide_chapters">Bölmələri gizlət</string>
     <string name="category_filler_description">Yalnız əlaqəsiz və ya yumor üçün əlavə edilmiş əlaqəsiz səhnələr üçün,videonun əsas məzmununu başa düşməyə ehtiyac yoxdur.</string>
     <string name="category_music_offtopic_description">Yalnız musiqi videolarında istifadə üçün. O, rəsmi mikslərin bir hissəsi deyil, videonun hissələrini əhatə etməlidir. Sonda video Spotify və ya hər hansı digər miks versiyaya mümkün qədər yaxından bənzəməlidir və ya danışıq və ya digər diqqəti yayındıran amilləri azaltmalıdır.</string>
