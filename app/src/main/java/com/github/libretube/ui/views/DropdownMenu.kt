@@ -46,6 +46,6 @@ class DropdownMenu(
     }
 
     fun setSelection(index: Int) {
-        binding.autoCompleteTextView.setText(adapter.getItem(index))
+        binding.autoCompleteTextView.setText(adapter.getItem(index), false)
     }
 }
