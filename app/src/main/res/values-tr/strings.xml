@@ -456,15 +456,15 @@
     <string name="video_id">video kimliği</string>
     <string name="stats_for_nerds">İnekler için istatistikler</string>
     <plurals name="years_ago">
-        <item quantity="one">1 yıl önce</item>
+        <item quantity="one">%d yıl önce</item>
         <item quantity="other">%d yıl önce</item>
     </plurals>
     <plurals name="months_ago">
-        <item quantity="one">1 ay önce</item>
+        <item quantity="one">%d ay önce</item>
         <item quantity="other">%d ay önce</item>
     </plurals>
     <plurals name="weeks_ago">
-        <item quantity="one">1 hafta önce</item>
+        <item quantity="one">%d hafta önce</item>
         <item quantity="other">%d hafta önce</item>
     </plurals>
 </resources>
