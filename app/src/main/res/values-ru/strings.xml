@@ -28,7 +28,7 @@
     <string name="subscribeIsEmpty">Сначала подпишитесь на некоторые каналы.</string>
     <string name="cannotDownload">Невозможно скачать это видео.</string>
     <string name="dlcomplete">Загрузка завершена.</string>
-    <string name="dlisinprogress">Пожалуйста, дождитесь окончания всех текущих загрузок.</string>
+    <string name="dlisinprogress">Дождитесь завершения всех текущих загрузок.</string>
     <string name="downloadfailed">Загрузка не удалась.</string>
     <string name="vlc">Открыть в VLC</string>
     <string name="vlcerror">Не удалось открыть в VLC. Возможно, он не установлен.</string>
@@ -142,7 +142,7 @@
     <string name="category_filler">Филлер/шутки</string>
     <string name="category_music_offtopic">Музыка: Немузыкальная секция</string>
     <string name="category_preview">Предварительный просмотр/Повтор</string>
-    <string name="category_preview_description">Для сегментов, подробно описывающих предстоящий контент в этом или будущих видео этой серии, но не предоставляющих дополнительную информацию. Если он включает в себя клипы, которые появляются только здесь, скорее всего, это неправильная категория.</string>
+    <string name="category_preview_description">Для сегментов с подробным описанием будущего контента без дополнительной информации. Если он включает в себя клипы, которые появляются только здесь, скорее всего, это неправильная категория.</string>
     <string name="appearance">Внешний вид</string>
     <string name="no_replies">Этот комментарий не имеет ответов.</string>
     <string name="customInstance_summary">Добавить…</string>
@@ -293,7 +293,7 @@
     <string name="repeat_mode">Повтор</string>
     <string name="backup_restore">Резервное копирование и восстановление</string>
     <string name="backup">Резервное копирование</string>
-    <string name="picture_in_picture">Картинка в картинке</string>
+    <string name="picture_in_picture">PiP</string>
     <string name="resize_mode_fit">Уместить</string>
     <string name="resize_mode_fill">Заполнить</string>
     <string name="resize_mode_zoom">Увеличить</string>

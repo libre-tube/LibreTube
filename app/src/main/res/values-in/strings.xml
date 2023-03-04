@@ -214,7 +214,7 @@
     <string name="no_replies">Komentar ini tidak ada balasan.</string>
     <string name="movies_directory">Folder film</string>
     <string name="shareTo">Bagikan URL ke</string>
-    <string name="category_preview_description">Untuk segmen berinci konten berikut dalam video ini atau video masa mendatang dalam serinya, tetapi tidak menambahkan info tambahan. Jika berisi klip yang hanya muncul di sini, ini mungkin kategori yang salah.</string>
+    <string name="category_preview_description">Untuk segmen yang merinci konten mendatang tanpa info tambahan. Jika termasuk klip yang hanya muncul di sini, kemungkinan besar ini adalah kategori yang salah.</string>
     <string name="background_mode">Mode latar belakang</string>
     <string name="landscape">Lanskap</string>
     <string name="audio_video">Audio dan video</string>

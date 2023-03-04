@@ -343,7 +343,7 @@
     <string name="playlistNameReversed">Nome da lista de reprodução (invertido)</string>
     <string name="recentlyUpdated">Atualizado recentemente</string>
     <string name="recentlyUpdatedReversed">Atualizado recentemente (invertido)</string>
-    <string name="category_preview_description">Para segmentos que detalham o conteúdo futuro deste ou dos próximos vídeos mas não fornecem informações adicionais. Se incluir clipes que só aparecem aqui, é muito provável que esta seja a categoria errada.</string>
+    <string name="category_preview_description">Para segmentos detalhando conteúdo futuro sem informações adicionais. Se incluir clipes que aparecem apenas aqui, é muito provável que esta seja a categoria errada.</string>
     <string name="sb_markers">Marcadores</string>
     <string name="sb_markers_summary">Marcar segmentos na barra de tempo.</string>
     <string name="livestreams">Emissões em direto</string>

@@ -128,7 +128,7 @@
     <string name="material_you">ମିଟରିଆଲ ୟୁ</string>
     <string name="category_preview">ରିକେପ୍</string>
     <string name="license">ଲାଇସେନ୍ସ</string>
-    <string name="category_preview_description">ଏହାର କ୍ରମରେ (ସିରିଜ୍ ରେ), ଏହି ଭିଡିଓ ର କିମ୍ବା ଭବିଷ୍ୟତର ଭିଡିଓ ଗୁଡିକର ଆଗାମୀ ବିଷୟବସ୍ତୁ ବିଷୟରେ ବିସ୍ତୃତ ବିଭାଗଗୁଡିକ ପାଇଁ, କିନ୍ତୁ ଅତିରିକ୍ତ ସୂଚନା ପ୍ରଦାନ କରେ ନାହିଁ । ଯଦି ଏଥିରେ ଏପରି କିଛି କ୍ଲିପ୍ ଅନ୍ତର୍ଭୂକ୍ତ ହୁଏ, ଯାହା କେବଳ ଏଠାରେ ଦେଖାଯାଏ, ଏହା ସମ୍ଭବତଃ ଭୁଲ ବର୍ଗ ଅଟେ ।</string>
+    <string name="category_preview_description">ଅତିରିକ୍ତ ସୂଚନା ବିନା ଭବିଷ୍ୟତର ବିଷୟବସ୍ତୁକୁ ବିସ୍ତୃତ ବିଭାଗଗୁଡିକ ପାଇଁ | ଯଦି ଏଥିରେ କ୍ଲିପ୍ ଅନ୍ତର୍ଭୂକ୍ତ ହୁଏ ଯାହା କେବଳ ଏଠାରେ ଦେଖାଯାଏ, ଏହା ସମ୍ଭବତଃ ଭୁଲ ବର୍ଗ ଅଟେ ।</string>
     <string name="sponsorblock_notifications">ବିଜ୍ଞପ୍ତି ଗୁଡ଼ିକ</string>
     <string name="update_available">ବର୍ଶନ %1$s ଉପଲବ୍ଧ</string>
     <string name="downloads">ଡାଉନଲୋଡ୍</string>
@@ -455,4 +455,16 @@
     <string name="video_id">ଭିଡିଓ ID</string>
     <string name="autoplay_countdown">ଅଟୋପ୍ଲେ କାଉଣ୍ଟଡାଉନ୍</string>
     <string name="autoplay_countdown_summary">ପରବର୍ତ୍ତୀ ଭିଡିଓକୁ ଅଟୋ-ଖେଳିବା ପୂର୍ବରୁ 5s କାଉଣ୍ଟଡାଉନ୍ ଦେଖାନ୍ତୁ ।</string>
+    <plurals name="years_ago">
+        <item quantity="one">1 ବର୍ଷ ପୂର୍ବେ</item>
+        <item quantity="other">%d ବର୍ଷ ପୂର୍ବେ</item>
+    </plurals>
+    <plurals name="months_ago">
+        <item quantity="one">1 ମାସ ପୂର୍ବରୁ</item>
+        <item quantity="other">%d ମାସ ପୂର୍ବରୁ</item>
+    </plurals>
+    <plurals name="weeks_ago">
+        <item quantity="one">1 ସପ୍ତାହ ପୂର୍ବରୁ |</item>
+        <item quantity="other">%d ସପ୍ତାହ ପୂର୍ବରୁ |</item>
+    </plurals>
 </resources>

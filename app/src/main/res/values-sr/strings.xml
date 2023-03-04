@@ -79,7 +79,7 @@
     <string name="category_filler">Филер/Шале</string>
     <string name="category_music_offtopic">Музика: Немузичка секција</string>
     <string name="category_preview">Преглед/Рекапитулација</string>
-    <string name="category_preview_description">За сегменте са детаљима о предстојећем садржају у овом или у будућим видео снимцима у његовој серији, али без додатних информација. Ако садржи исечке који се појављују само овде, ово је врло вероватно погрешна категорија.</string>
+    <string name="category_preview_description">За сегменте са детаљима будућег садржаја без додатних информација. Ако укључује клипове који се појављују само овде, ово је врло вероватно погрешна категорија.</string>
     <string name="color_accent">Боја</string>
     <string name="color_yellow">Жута</string>
     <string name="color_green">Зелена</string>

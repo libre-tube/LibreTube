@@ -187,7 +187,7 @@
     <string name="buffering_goal_summary">動画をバッファする最大秒数。</string>
     <string name="category_filler_description">動画の主な内容を理解するのに必要ない穴埋めや、ユーモアのためだけに追加された余分なシーン。</string>
     <string name="category_music_offtopic_description">ミュージックビデオにのみ使用。公式ミックスに含まれない部分をカバーします。これによって、Spotifyやその他のミックスバージョンに可能な限り近い映像になるか、話し声などの邪魔なものを減少させます。</string>
-    <string name="category_preview_description">動画またはそのシリーズの次の動画の詳細を示すセグメントで、追加情報が提供されない場合。ここにしか表示されないクリップが含まれている場合、間違ったカテゴリである可能性が非常に高いです。</string>
+    <string name="category_preview_description">追加情報なしで将来のコンテンツを詳述するセグメント用。 ここにしか表示されないクリップが含まれている場合、これは間違ったカテゴリである可能性が非常に高くなります。</string>
     <string name="buffering_goal">プリロード</string>
     <string name="playerVideoFormat">プレーヤーの動画形式</string>
     <string name="audio_video">音声と映像</string>

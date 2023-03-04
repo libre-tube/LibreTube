@@ -228,7 +228,7 @@
     <string name="playlistNameReversed">प्लेलिस्ट का नाम (उलट)</string>
     <string name="recentlyUpdated">हाल ही में अपडेट हुए</string>
     <string name="recentlyUpdatedReversed">हाल ही में अपडेट हुए (उलट)</string>
-    <string name="category_preview_description">इस श्रृंखला में आगामी सामग्री या भविष्य के वीडियो का विवरण देने वाले खंडों के लिए, लेकिन अतिरिक्त जानकारी प्रदान न करें। यदि इसमें क्लिप शामिल हैं जो केवल यहां दिखाई देती हैं, तो बहुत संभव है कि यह गलत श्रेणी हो।</string>
+    <string name="category_preview_description">अतिरिक्त जानकारी के बिना भविष्य की सामग्री का विवरण देने वाले सेगमेंट के लिए। यदि इसमें क्लिप शामिल हैं जो केवल यहां दिखाई देती हैं, तो बहुत संभव है कि यह गलत श्रेणी हो।</string>
     <string name="oledTheme">काला</string>
     <string name="category_filler_description">केवल फिलर या हास्य के लिए जोड़े गए स्पर्शरेखा दृश्यों के लिए वीडियो की मुख्य सामग्री को समझने की आवश्यकता नहीं है।</string>
     <string name="sb_markers">मार्करज</string>
@@ -442,7 +442,7 @@
     <string name="help">सहायता</string>
     <string name="faq">आम सवाल</string>
     <string name="replies">जवाब</string>
-    <string name="unsupported_file_format">असमर्थित फ़ाइल प्रारूप: %1$s</string>
+    <string name="unsupported_file_format">असमर्थित फाइल फॉर्मेट: %1$s</string>
     <string name="mark_as_watched">देखा गया चिह्नित करें</string>
     <string name="codecs">कोडेक्स</string>
     <string name="custom_playback_speed">कस्टम गति</string>
@@ -462,5 +462,9 @@
     <plurals name="months_ago">
         <item quantity="one">1 महीने पहले</item>
         <item quantity="other">%d महीने पहले</item>
+    </plurals>
+    <plurals name="weeks_ago">
+        <item quantity="one">1 सप्ताह पहले</item>
+        <item quantity="other">%d सप्ताह पहले</item>
     </plurals>
 </resources>

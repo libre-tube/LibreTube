@@ -88,7 +88,7 @@
     <string name="category_filler">填充內容/笑話</string>
     <string name="category_filler_description">此類片段是填充空白或用於搞笑用，與影片主旨無關。</string>
     <string name="category_preview">預覽/回顧</string>
-    <string name="category_preview_description">影片中針對未來或過去內容的預覽片段，但並無包含任何新資訊。如果影片只會出現在這裡，那這應該不是正確的分類。</string>
+    <string name="category_preview_description">對於沒有附加信息的詳細未來內容的片段。 如果它包含只出現在這裡的剪輯，這很可能是錯誤的類別。</string>
     <string name="license">授權</string>
     <string name="color_accent">強調色</string>
     <string name="color_red">放鬆紅</string>

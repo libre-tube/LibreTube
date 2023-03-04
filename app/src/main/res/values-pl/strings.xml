@@ -169,7 +169,7 @@
     <string name="category_music_offtopic">Muzyka: Sekcja bez muzyki</string>
     <string name="category_music_offtopic_description">Tylko do użytku w teledyskach. Obejmuje fragmenty teledysku, które nie są częścią oficjalnego mixu. Teledysk powinien jak najbardziej przypominać wersję Spotify lub inną zmiksowaną wersję, lub ograniczyć ilość rozmów i innych elementów rozpraszających uwagę.</string>
     <string name="category_preview">Zajawka/Skrót</string>
-    <string name="category_preview_description">Segmenty zapowiadające ten lub przyszłe filmy z danej serii, ale nie dostarczające dodatkowych informacji. Jeśli zawiera klipy niepojawiające się nigdzie indziej, najprawdopodobniej jest to niewłaściwa kategoria.</string>
+    <string name="category_preview_description">W przypadku segmentów opisujących przyszłe treści bez dodatkowych informacji. Jeśli zawiera klipy, które pojawiają się tylko tutaj, najprawdopodobniej jest to zła kategoria.</string>
     <string name="buffering_goal">Wstępne ładowanie</string>
     <string name="buffering_goal_summary">Maks. liczba sekund filmu do zbuforowania.</string>
     <string name="playerVideoFormat">Format wideo odtwarzacza</string>
