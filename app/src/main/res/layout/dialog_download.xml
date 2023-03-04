@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingHorizontal="20dp">
 
@@ -25,23 +26,26 @@
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Spinner
+    <com.github.libretube.ui.views.DropdownMenu
         android:id="@+id/video_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp" />
+        app:hint="@string/video"
+        app:icon="@drawable/ic_video" />
 
-    <Spinner
+    <com.github.libretube.ui.views.DropdownMenu
         android:id="@+id/audio_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp" />
+        app:hint="@string/audio"
+        app:icon="@drawable/ic_audio" />
 
-    <Spinner
+    <com.github.libretube.ui.views.DropdownMenu
         android:id="@+id/subtitle_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp" />
+        app:icon="@drawable/ic_caption"
+        app:hint="@string/captions" />
 
     <Button
         android:id="@+id/download"

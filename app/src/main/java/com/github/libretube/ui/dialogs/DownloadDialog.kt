@@ -91,14 +91,16 @@ class DownloadDialog(
             it.quality.getWhileDigit()
         }
 
-        val subtitles = streams.subtitles.filter { !it.url.isNullOrEmpty() }.sortedBy { it.name }
+        val subtitles = streams.subtitles
+            .filter { !it.url.isNullOrEmpty() && !it.name.isNullOrEmpty() }
+            .sortedBy { it.name }
 
         if (subtitles.isEmpty()) binding.subtitleSpinner.visibility = View.GONE
 
         // initialize the video sources
         val videoArrayAdapter = ArrayAdapter(
             requireContext(),
-            android.R.layout.simple_spinner_item,
+            R.layout.dropdown_item,
             videoStreams.map { "${it.quality} ${it.format}" }.toMutableList().also {
                 it.add(0, getString(R.string.no_video))
             }
@@ -106,7 +108,7 @@ class DownloadDialog(
 
         val audioArrayAdapter = ArrayAdapter(
             requireContext(),
-            android.R.layout.simple_spinner_item,
+            R.layout.dropdown_item,
             audioStreams.map { "${it.quality} ${it.format}" }.toMutableList().also {
                 it.add(0, getString(R.string.no_audio))
             }
@@ -114,15 +116,12 @@ class DownloadDialog(
 
         val subtitleArrayAdapter = ArrayAdapter(
             requireContext(),
-            android.R.layout.simple_spinner_item,
-            subtitles.map { it.name }.toMutableList().also {
+            R.layout.dropdown_item,
+            subtitles.map { it.name.orEmpty() }.toMutableList().also {
                 it.add(0, getString(R.string.no_subtitle))
             }
         )
 
-        listOf(videoArrayAdapter, audioArrayAdapter, subtitleArrayAdapter).forEach {
-            it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        }
         binding.videoSpinner.adapter = videoArrayAdapter
         binding.audioSpinner.adapter = audioArrayAdapter
         binding.subtitleSpinner.adapter = subtitleArrayAdapter
