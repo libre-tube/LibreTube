@@ -456,15 +456,15 @@
     <string name="autoplay_countdown">Avtomatik oynatma geri sayım</string>
     <string name="autoplay_countdown_summary">Növbəti video avtomatik oynadılmazdan əvvəl 5 saniyəlik geri sayım göstərilir.</string>
     <plurals name="months_ago">
-        <item quantity="one">1 ay əvvəl</item>
+        <item quantity="one">%d ay əvvəl</item>
         <item quantity="other">%d ay əvvəl</item>
     </plurals>
     <plurals name="weeks_ago">
-        <item quantity="one">1 həftə əvvəl</item>
+        <item quantity="one">%d həftə əvvəl</item>
         <item quantity="other">%d həftə əvvəl</item>
     </plurals>
     <plurals name="years_ago">
-        <item quantity="one">1 il əvvəl</item>
+        <item quantity="one">%d il əvvəl</item>
         <item quantity="other">%d il əvvəl</item>
     </plurals>
 </resources>
