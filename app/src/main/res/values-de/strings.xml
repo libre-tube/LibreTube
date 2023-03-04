@@ -456,15 +456,15 @@
     <string name="stats_for_nerds">Statistiken für Nerds</string>
     <string name="video_id">Video-ID</string>
     <plurals name="months_ago">
-        <item quantity="one">Vor 1 Monat</item>
+        <item quantity="one">Vor %d Monat</item>
         <item quantity="other">Vor %d Monaten</item>
     </plurals>
     <plurals name="years_ago">
-        <item quantity="one">Vor 1 Jahr</item>
+        <item quantity="one">Vor %d Jahr</item>
         <item quantity="other">Vor %d Jahren</item>
     </plurals>
     <plurals name="weeks_ago">
-        <item quantity="one">Vor 1 Woche</item>
+        <item quantity="one">Vor %d Woche</item>
         <item quantity="other">Vor %d Wochen</item>
     </plurals>
 </resources>
