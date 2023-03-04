@@ -456,27 +456,27 @@
     <string name="playing_next">يتم التشغيل بعد ذلك في %1$s</string>
     <string name="autoplay_countdown_summary">أظهر العد التنازلي 5 ثوانٍ قبل التشغيل التلقائي للفيديو التالي.</string>
     <plurals name="years_ago">
-        <item quantity="zero">0 سنة مضت</item>
-        <item quantity="one">منذ سنة 1</item>
-        <item quantity="two">منذ 2 عام</item>
-        <item quantity="few"/>
-        <item quantity="many"/>
-        <item quantity="other"/>
+        <item quantity="zero">%d منذ سنة</item>
+        <item quantity="one">%d منذ سنة</item>
+        <item quantity="two">%d منذ سنتين</item>
+        <item quantity="few">%d منذ سنوات</item>
+        <item quantity="many">%d منذ سنوات</item>
+        <item quantity="other">%d منذ سنين</item>
     </plurals>
     <plurals name="months_ago">
-        <item quantity="zero">قبل 0 شهر</item>
-        <item quantity="one">1 قبل شهر</item>
-        <item quantity="two">منذ شهرين</item>
-        <item quantity="few"></item>
-        <item quantity="many">‪</item>
-        <item quantity="other"></item>
+        <item quantity="zero">%d منذ شهر</item>
+        <item quantity="one">%d منذ شهر</item>
+        <item quantity="two">%d منذ شهرين</item>
+        <item quantity="few">%d منذ أشهر</item>
+        <item quantity="many">%d منذ أشهر</item>
+        <item quantity="other">%d منذ أشهر</item>
     </plurals>
     <plurals name="weeks_ago">
-        <item quantity="zero">قبل 0 أسبوع</item>
-        <item quantity="one">1 قبل أسبوع</item>
-        <item quantity="two">2 منذ أسابيع</item>
-        <item quantity="few"></item>
-        <item quantity="many"></item>
-        <item quantity="other"></item>
+        <item quantity="zero">%d منذ أسبوع</item>
+        <item quantity="one">%d منذ أسبوع</item>
+        <item quantity="two">%d منذ أسبوعين</item>
+        <item quantity="few">%d منذ أسابيع</item>
+        <item quantity="many">%d منذ أسابيع</item>
+        <item quantity="other">%d منذ أسابيع</item>
     </plurals>
 </resources>
