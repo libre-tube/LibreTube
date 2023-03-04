@@ -293,7 +293,7 @@
     <string name="repeat_mode">Повтор</string>
     <string name="backup_restore">Резервное копирование и восстановление</string>
     <string name="backup">Резервное копирование</string>
-    <string name="picture_in_picture">PiP</string>
+    <string name="picture_in_picture">Картинка в картинке (PiP)</string>
     <string name="resize_mode_fit">Уместить</string>
     <string name="resize_mode_fill">Заполнить</string>
     <string name="resize_mode_zoom">Увеличить</string>
