@@ -441,4 +441,30 @@
     <string name="faq">O-S-S</string>
     <string name="add_to_bookmarks">Bokmerk</string>
     <string name="remove_bookmark">Fjern bokmerke</string>
+    <string name="mark_as_watched">Marker som sett</string>
+    <string name="trending_views">%1$s • %2$s visninger • %3$s</string>
+    <string name="normal_views">%1$s visninger%2$s</string>
+    <string name="unsupported_file_format">Ustøttet filformat: %1$s</string>
+    <string name="autoplay_countdown">Autospillingsnedtelling</string>
+    <string name="stats_for_nerds">Statistikk for nerder</string>
+    <string name="video_id">Video-ID</string>
+    <string name="replies">Svar</string>
+    <string name="custom_playback_speed">Egendefinert hastighet</string>
+    <string name="custom_playback_speed_summary">Bruk avspillingshastighet forskjellig fra den for normal avspiller.</string>
+    <string name="category">Kategori</string>
+    <string name="codecs">Kodek</string>
+    <plurals name="years_ago">
+        <item quantity="one">%d år siden</item>
+        <item quantity="other">%d år siden</item>
+    </plurals>
+    <plurals name="months_ago">
+        <item quantity="one">%d måned siden</item>
+        <item quantity="other">%d måneder siden</item>
+    </plurals>
+    <plurals name="weeks_ago">
+        <item quantity="one">%d uke siden</item>
+        <item quantity="other">%d uker siden</item>
+    </plurals>
+    <string name="autoplay_countdown_summary">Vis 5 sekunders nedtelling før autospilling av neste video.</string>
+    <string name="playing_next">Spiller neste om %1$s</string>
 </resources>
