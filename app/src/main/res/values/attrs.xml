@@ -17,4 +17,9 @@
         <attr name="android:gravity" />
     </declare-styleable>
 
+    <declare-styleable name="DropdownMenu">
+        <attr name="hint" format="string" />
+        <attr name="icon" format="reference" />
+    </declare-styleable>
+
 </resources>
