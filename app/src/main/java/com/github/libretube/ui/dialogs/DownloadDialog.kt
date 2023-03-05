@@ -81,7 +81,7 @@ class DownloadDialog(
 
         val videoStreams = streams.videoStreams.filter {
             !it.url.isNullOrEmpty()
-        }.sortedByDescending {
+        }.filter { !it.format.orEmpty().contains("HLS") }.sortedByDescending {
             it.quality.getWhileDigit()
         }
 
