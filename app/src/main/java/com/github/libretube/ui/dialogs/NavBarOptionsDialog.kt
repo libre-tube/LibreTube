@@ -13,13 +13,9 @@ import com.github.libretube.ui.adapters.NavBarOptionsAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class NavBarOptionsDialog : DialogFragment() {
-    private lateinit var binding: DialogNavbarOptionsBinding
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        binding = DialogNavbarOptionsBinding.inflate(layoutInflater)
-
+        val binding = DialogNavbarOptionsBinding.inflate(layoutInflater)
         val options = NavBarHelper.getNavBarItems(requireContext())
-
         val adapter = NavBarOptionsAdapter(
             options.toMutableList(),
             NavBarHelper.getStartFragmentId(requireContext())
