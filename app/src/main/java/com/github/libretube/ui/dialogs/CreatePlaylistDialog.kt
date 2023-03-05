@@ -18,10 +18,8 @@ import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 class CreatePlaylistDialog(
     private val onSuccess: () -> Unit = {}
 ) : DialogFragment() {
-    private lateinit var binding: DialogCreatePlaylistBinding
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        binding = DialogCreatePlaylistBinding.inflate(layoutInflater)
+        val binding = DialogCreatePlaylistBinding.inflate(layoutInflater)
 
         binding.clonePlaylist.setOnClickListener {
             val playlistUrl = binding.playlistUrl.text.toString().toHttpUrlOrNull()
