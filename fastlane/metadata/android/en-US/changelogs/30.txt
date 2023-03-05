@@ -1,0 +1,6 @@
+* Stats for nerds dialog containing video info
+* Support for LBRY HLS
+* Autoplay Countdown when the video ended
+* Clickable comment timestamps
+* Display the video category in the description
+* Restore the orientation when leaving PiP
