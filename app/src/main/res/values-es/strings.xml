@@ -470,4 +470,6 @@
         <item quantity="many">Hace %d semanas</item>
         <item quantity="other">Hace %d semanas</item>
     </plurals>
+    <string name="lbry_hls_summary">Utilice LBRY HLS para el streaming si está disponible.</string>
+    <string name="lbry_hls">LBRY HLS</string>
 </resources>
