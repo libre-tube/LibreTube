@@ -27,12 +27,10 @@ import retrofit2.HttpException
 class DownloadDialog(
     private val videoId: String
 ) : DialogFragment() {
-    private lateinit var binding: DialogDownloadBinding
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        binding = DialogDownloadBinding.inflate(layoutInflater)
+        val binding = DialogDownloadBinding.inflate(layoutInflater)
 
-        fetchAvailableSources()
+        fetchAvailableSources(binding)
 
         binding.fileName.filters += InputFilter { source, start, end, _, _, _ ->
             if (source.isNullOrBlank()) {
@@ -58,7 +56,7 @@ class DownloadDialog(
             .show()
     }
 
-    private fun fetchAvailableSources() {
+    private fun fetchAvailableSources(binding: DialogDownloadBinding) {
         lifecycleScope.launchWhenCreated {
             val response = try {
                 RetrofitInstance.api.getStreams(videoId)
@@ -72,11 +70,11 @@ class DownloadDialog(
                 Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                 return@launchWhenCreated
             }
-            initDownloadOptions(response)
+            initDownloadOptions(binding, response)
         }
     }
 
-    private fun initDownloadOptions(streams: Streams) {
+    private fun initDownloadOptions(binding: DialogDownloadBinding, streams: Streams) {
         binding.fileName.setText(streams.title)
 
         val videoStreams = streams.videoStreams.filter {
@@ -126,7 +124,7 @@ class DownloadDialog(
         binding.audioSpinner.adapter = audioArrayAdapter
         binding.subtitleSpinner.adapter = subtitleArrayAdapter
 
-        restorePreviousSelections(videoStreams, audioStreams, subtitles)
+        restorePreviousSelections(binding, videoStreams, audioStreams, subtitles)
 
         binding.download.setOnClickListener {
             if (binding.fileName.text.toString().isEmpty()) {
@@ -185,6 +183,7 @@ class DownloadDialog(
      * Restore the download selections from a previous session
      */
     private fun restorePreviousSelections(
+        binding: DialogDownloadBinding,
         videoStreams: List<PipedStream>,
         audioStreams: List<PipedStream>,
         subtitles: List<Subtitle>
