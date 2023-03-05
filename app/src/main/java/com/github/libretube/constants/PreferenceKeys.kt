@@ -93,6 +93,7 @@ object PreferenceKeys {
     const val SKIP_SILENCE = "skip_silence"
     const val ENABLED_VIDEO_CODECS = "video_codecs"
     const val AUTOPLAY_COUNTDOWN = "autoplay_countdown"
+    const val LBRY_HLS = "lbry_hls"
 
     /**
      * Background mode
