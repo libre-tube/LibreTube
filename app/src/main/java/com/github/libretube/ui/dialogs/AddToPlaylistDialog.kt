@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.databinding.DialogAddtoplaylistBinding
+import com.github.libretube.databinding.DialogAddToPlaylistBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.ui.models.PlaylistViewModel
@@ -27,26 +27,25 @@ import kotlinx.coroutines.launch
 class AddToPlaylistDialog(
     private val videoId: String? = null
 ) : DialogFragment() {
-    private lateinit var binding: DialogAddtoplaylistBinding
     private val viewModel: PlaylistViewModel by activityViewModels()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        binding = DialogAddtoplaylistBinding.inflate(layoutInflater)
+        val binding = DialogAddToPlaylistBinding.inflate(layoutInflater)
 
         binding.createPlaylist.setOnClickListener {
             CreatePlaylistDialog {
-                fetchPlaylists()
+                fetchPlaylists(binding)
             }.show(childFragmentManager, null)
         }
 
-        fetchPlaylists()
+        fetchPlaylists(binding)
 
         return MaterialAlertDialogBuilder(requireContext())
             .setView(binding.root)
             .show()
     }
 
-    private fun fetchPlaylists() {
+    private fun fetchPlaylists(binding: DialogAddToPlaylistBinding) {
         lifecycleScope.launchWhenCreated {
             val response = try {
                 PlaylistsHelper.getPlaylists()
