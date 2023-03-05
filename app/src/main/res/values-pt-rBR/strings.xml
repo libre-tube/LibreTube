@@ -456,17 +456,17 @@
     <string name="autoplay_countdown">Contagem regressiva de reprodução automática</string>
     <string name="autoplay_countdown_summary">Mostre uma contagem regressiva de 5 segundos antes de reproduzir automaticamente o próximo vídeo.</string>
     <plurals name="years_ago">
-        <item quantity="one">1 ano atrás</item>
+        <item quantity="one">%d ano atrás</item>
         <item quantity="many">%d anos atrás</item>
         <item quantity="other">%d anos atrás</item>
     </plurals>
     <plurals name="weeks_ago">
-        <item quantity="one">1 semana atrás</item>
+        <item quantity="one">%d semana atrás</item>
         <item quantity="many">%d semanas atrás</item>
         <item quantity="other">%d semanas atrás</item>
     </plurals>
     <plurals name="months_ago">
-        <item quantity="one">1 mês atrás</item>
+        <item quantity="one">%d mês atrás</item>
         <item quantity="many">%d meses atrás</item>
         <item quantity="other">%d meses atrás</item>
     </plurals>
