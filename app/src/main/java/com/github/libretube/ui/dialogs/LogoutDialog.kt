@@ -13,11 +13,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 class LogoutDialog(
     private val onLogout: () -> Unit
 ) : DialogFragment() {
-    private lateinit var binding: DialogLogoutBinding
-
     @SuppressLint("SetTextI18n")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        binding = DialogLogoutBinding.inflate(layoutInflater)
+        val binding = DialogLogoutBinding.inflate(layoutInflater)
 
         val user = PreferenceHelper.getUsername()
 
