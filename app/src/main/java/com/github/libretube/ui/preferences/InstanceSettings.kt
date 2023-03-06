@@ -154,16 +154,14 @@ class InstanceSettings : BasePreferenceFragment() {
 
             instances.addAll(customInstances.map { Instances(it.name, it.apiUrl) })
 
-            runOnUiThread {
-                for (instancePref in instancePrefs) {
-                    // add custom instances to the list preference
-                    instancePref.entries = instances.map { it.name }.toTypedArray()
-                    instancePref.entryValues = instances.map { it.apiUrl }.toTypedArray()
-                    instancePref.summaryProvider =
-                        Preference.SummaryProvider<ListPreference> { preference ->
-                            preference.entry
-                        }
-                }
+            for (instancePref in instancePrefs) {
+                // add custom instances to the list preference
+                instancePref.entries = instances.map { it.name }.toTypedArray()
+                instancePref.entryValues = instances.map { it.apiUrl }.toTypedArray()
+                instancePref.summaryProvider =
+                    Preference.SummaryProvider<ListPreference> { preference ->
+                        preference.entry
+                    }
             }
         }
     }
