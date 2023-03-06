@@ -59,8 +59,6 @@ class MainActivity : BaseActivity() {
     lateinit var searchView: SearchView
     private lateinit var searchItem: MenuItem
 
-    val windowHelper = WindowHelper(this)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -465,8 +463,8 @@ class MainActivity : BaseActivity() {
         super.onConfigurationChanged(newConfig)
 
         when (newConfig.orientation) {
-            Configuration.ORIENTATION_PORTRAIT -> windowHelper.unsetFullscreen()
-            Configuration.ORIENTATION_LANDSCAPE -> windowHelper.setFullscreen()
+            Configuration.ORIENTATION_PORTRAIT -> WindowHelper.toggleFullscreen(this, false)
+            Configuration.ORIENTATION_LANDSCAPE -> WindowHelper.toggleFullscreen(this, true)
         }
     }
 

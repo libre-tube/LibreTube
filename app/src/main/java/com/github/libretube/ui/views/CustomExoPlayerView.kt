@@ -16,6 +16,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.os.postDelayed
+import androidx.core.view.ViewCompat
 import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.LifecycleOwner
 import com.github.libretube.R
@@ -28,8 +29,8 @@ import com.github.libretube.extensions.round
 import com.github.libretube.helpers.AudioHelper
 import com.github.libretube.helpers.BrightnessHelper
 import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.BottomSheetItem
-import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
@@ -84,11 +85,11 @@ internal class CustomExoPlayerView(
 
     private var resizeModePref = PlayerHelper.resizeModePref
 
-    private val windowHelper
-        get() = (context as? MainActivity)?.windowHelper
+    private val activity
+        get() = context as BaseActivity
 
     private val supportFragmentManager
-        get() = (context as BaseActivity).supportFragmentManager
+        get() = activity.supportFragmentManager
 
     private fun toggleController() {
         if (isControllerFullyVisible) hideController() else showController()
@@ -200,11 +201,7 @@ internal class CustomExoPlayerView(
         })
 
         playerViewModel?.isFullscreen?.observe(viewLifecycleOwner!!) { isFullscreen ->
-            if (isFullscreen) {
-                windowHelper?.setFullscreen()
-            } else {
-                windowHelper?.unsetFullscreen()
-            }
+            WindowHelper.toggleFullscreen(activity, isFullscreen)
         }
     }
 
@@ -230,7 +227,7 @@ internal class CustomExoPlayerView(
         // hide system bars if in fullscreen
         playerViewModel?.let {
             if (it.isFullscreen.value == true) {
-                windowHelper?.setFullscreen()
+                WindowHelper.toggleFullscreen(activity, true)
             }
             updateTopBarMargin()
         }
@@ -592,7 +589,7 @@ internal class CustomExoPlayerView(
         updateTopBarMargin()
 
         // don't add extra padding if there's no cutout
-        if ((context as? MainActivity)?.windowHelper?.hasCutout() == false) return
+        if (ViewCompat.getRootWindowInsets(this)?.displayCutout == null) return
 
         // add a margin to the top and the bottom bar in landscape mode for notches
         val newMargin = when (newConfig?.orientation) {
