@@ -15,10 +15,10 @@ import com.github.libretube.obj.ImportPlaylist
 import com.github.libretube.obj.ImportPlaylistFile
 import com.github.libretube.obj.NewPipeSubscription
 import com.github.libretube.obj.NewPipeSubscriptions
+import kotlin.streams.toList
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
-import okio.use
 
 object ImportHelper {
     /**
@@ -58,8 +58,8 @@ object ImportHelper {
             "text/csv", "text/comma-separated-values" -> {
                 // import subscriptions from Google/YouTube Takeout
                 activity.contentResolver.openInputStream(uri)?.use {
-                    it.bufferedReader().useLines { lines ->
-                        lines.map { line -> line.substringBefore(",") }
+                    it.bufferedReader().use { reader ->
+                        reader.lines().map { line -> line.substringBefore(",") }
                             .filter { channelId -> channelId.length == 24 }
                             .toList()
                     }
@@ -103,7 +103,7 @@ object ImportHelper {
             "text/csv", "text/comma-separated-values" -> {
                 val playlist = ImportPlaylist()
                 activity.contentResolver.openInputStream(uri)?.use {
-                    val lines = it.bufferedReader().readLines()
+                    val lines = it.bufferedReader().use { reader -> reader.lines().toList() }
                     playlist.name = lines[1].split(",").reversed()[2]
                     val splitIndex = lines.indexOfFirst { line -> line.isBlank() }
                     lines.subList(splitIndex + 2, lines.size).forEach { line ->
