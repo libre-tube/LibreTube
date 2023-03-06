@@ -15,8 +15,6 @@ import com.github.libretube.api.CronetHelper
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.util.DataSaverMode
 import java.io.File
-import java.io.FileOutputStream
-import okio.use
 
 object ImageHelper {
     lateinit var imageLoader: ImageLoader
@@ -78,18 +76,15 @@ object ImageHelper {
     }
 
     private fun saveImage(context: Context, bitmapImage: Bitmap, imagePath: Uri) {
-        context.contentResolver.openFileDescriptor(imagePath, "w")?.use {
-            FileOutputStream(it.fileDescriptor).use { fos ->
-                bitmapImage.compress(Bitmap.CompressFormat.PNG, 25, fos)
-            }
+        context.contentResolver.openOutputStream(imagePath)?.use {
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 25, it)
         }
     }
 
     private fun getImage(context: Context, imagePath: Uri): Bitmap? {
-        context.contentResolver.openInputStream(imagePath)?.use {
-            return BitmapFactory.decodeStream(it)
+        return context.contentResolver.openInputStream(imagePath)?.use {
+            BitmapFactory.decodeStream(it)
         }
-        return null
     }
 
     /**
