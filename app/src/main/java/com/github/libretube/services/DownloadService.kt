@@ -103,7 +103,7 @@ class DownloadService : LifecycleService() {
                     streams.title,
                     streams.description,
                     streams.uploader,
-                    streams.uploadDate.toString(),
+                    streams.uploadDate,
                     thumbnailTargetFile.absolutePath
                 )
                 Database.downloadDao().insertDownload(download)

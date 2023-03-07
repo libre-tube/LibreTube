@@ -16,6 +16,7 @@ import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.ui.activities.OfflinePlayerActivity
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
+import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File
 import kotlinx.coroutines.Dispatchers
@@ -42,7 +43,7 @@ class DownloadsAdapter(
         holder.binding.apply {
             title.text = download.title
             uploaderName.text = download.uploader
-            videoInfo.text = download.uploadDate
+            videoInfo.text = download.uploadDate?.let { TextUtils.localizeDate(it) }
 
             val downloadSize = items.sumOf { it.downloadSize }
             val currentSize = items.sumOf { File(it.path).length() }

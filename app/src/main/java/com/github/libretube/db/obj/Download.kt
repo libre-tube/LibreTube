@@ -2,6 +2,7 @@ package com.github.libretube.db.obj
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.datetime.LocalDate
 
 @Entity(tableName = "download")
 data class Download(
@@ -10,6 +11,6 @@ data class Download(
     val title: String = "",
     val description: String = "",
     val uploader: String = "",
-    val uploadDate: String? = null,
+    val uploadDate: LocalDate? = null,
     val thumbnailPath: String? = null
 )
