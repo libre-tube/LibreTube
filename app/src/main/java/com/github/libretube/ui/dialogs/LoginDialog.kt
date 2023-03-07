@@ -22,10 +22,8 @@ import retrofit2.HttpException
 class LoginDialog(
     private val onLogin: () -> Unit
 ) : DialogFragment() {
-    private lateinit var binding: DialogLoginBinding
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        binding = DialogLoginBinding.inflate(layoutInflater)
+        val binding = DialogLoginBinding.inflate(layoutInflater)
 
         binding.login.setOnClickListener {
             val email = binding.username.text?.toString()

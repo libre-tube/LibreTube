@@ -17,10 +17,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 class DeleteAccountDialog(
     private val onLogout: () -> Unit
 ) : DialogFragment() {
-    private lateinit var binding: DialogDeleteAccountBinding
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        binding = DialogDeleteAccountBinding.inflate(layoutInflater)
+        val binding = DialogDeleteAccountBinding.inflate(layoutInflater)
 
         binding.cancelButton.setOnClickListener {
             dialog?.dismiss()
