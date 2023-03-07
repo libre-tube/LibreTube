@@ -5,6 +5,7 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.github.libretube.enums.FileType
+import java.nio.file.Path
 
 @Entity(
     tableName = "downloadItem",
@@ -24,7 +25,7 @@ data class DownloadItem(
     val type: FileType,
     val videoId: String,
     val fileName: String,
-    var path: String,
+    var path: Path,
     var url: String? = null,
     var format: String? = null,
     var quality: String? = null,

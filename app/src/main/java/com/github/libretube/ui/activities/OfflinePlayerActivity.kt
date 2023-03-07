@@ -15,6 +15,7 @@ import com.github.libretube.databinding.ActivityOfflinePlayerBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.enums.FileType
+import com.github.libretube.extensions.toAndroidUri
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
@@ -33,7 +34,6 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.FileDataSource
 import com.google.android.exoplayer2.util.MimeTypes
-import java.io.File
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -107,10 +107,6 @@ class OfflinePlayerActivity : BaseActivity() {
         )
     }
 
-    private fun File.toUri(): Uri? {
-        return if (this.exists()) Uri.fromFile(this) else null
-    }
-
     private fun playVideo() {
         lifecycleScope.launch {
             val downloadFiles = withContext(Dispatchers.IO) {
@@ -121,9 +117,9 @@ class OfflinePlayerActivity : BaseActivity() {
             val audio = downloadFiles.firstOrNull { it.type == FileType.AUDIO }
             val subtitle = downloadFiles.firstOrNull { it.type == FileType.SUBTITLE }
 
-            val videoUri = video?.path?.let { File(it).toUri() }
-            val audioUri = audio?.path?.let { File(it).toUri() }
-            val subtitleUri = subtitle?.path?.let { File(it).toUri() }
+            val videoUri = video?.path?.toAndroidUri()
+            val audioUri = audio?.path?.toAndroidUri()
+            val subtitleUri = subtitle?.path?.toAndroidUri()
 
             setMediaSource(videoUri, audioUri, subtitleUri)
 
@@ -143,7 +139,6 @@ class OfflinePlayerActivity : BaseActivity() {
                 .setMimeType(MimeTypes.APPLICATION_SUBRIP)
                 .build()
         }
-        subtitle?.id
 
         when {
             videoUri != null && audioUri != null -> {

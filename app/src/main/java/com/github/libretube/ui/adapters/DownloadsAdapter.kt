@@ -18,7 +18,8 @@ import com.github.libretube.ui.activities.OfflinePlayerActivity
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
 import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.io.File
+import kotlin.io.path.deleteIfExists
+import kotlin.io.path.fileSize
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 
@@ -46,7 +47,7 @@ class DownloadsAdapter(
             videoInfo.text = download.uploadDate?.let { TextUtils.localizeDate(it) }
 
             val downloadSize = items.sumOf { it.downloadSize }
-            val currentSize = items.sumOf { File(it.path).length() }
+            val currentSize = items.sumOf { it.path.fileSize() }
 
             if (downloadSize == -1L) {
                 progressBar.isIndeterminate = true
@@ -96,16 +97,10 @@ class DownloadsAdapter(
                     .setTitle(R.string.delete)
                     .setMessage(R.string.irreversible)
                     .setPositiveButton(R.string.okay) { _, _ ->
-                        items.map { File(it.path) }.forEach { file ->
-                            runCatching {
-                                if (file.exists()) file.delete()
-                            }
+                        items.forEach {
+                            it.path.deleteIfExists()
                         }
-                        runCatching {
-                            download.thumbnailPath?.let {
-                                File(it).delete()
-                            }
-                        }
+                        download.thumbnailPath?.deleteIfExists()
 
                         runBlocking(Dispatchers.IO) {
                             DatabaseHolder.Database.downloadDao().deleteDownload(download)
