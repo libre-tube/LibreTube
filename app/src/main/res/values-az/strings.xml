@@ -17,7 +17,7 @@
     <string name="cancel">Ləğv et</string>
     <string name="loggedIn">Girildi.</string>
     <string name="loggedout">Çıxıldı.</string>
-    <string name="registered">Qeydiyyatdan keçilib. İndi kanallara abunə ola bilərsiniz.</string>
+    <string name="registered">Qeydiyyatdan keçilib. Kanallara abunə ola bilərsiniz.</string>
     <string name="already_logged_in">Artıq daxil olunub.İstəsəniz hesabınızdan çıxa bilərsiniz.</string>
     <string name="login_first">Zəhmət olmasa, daxil ol və təkrar cəhd et.</string>
     <string name="startpage">Ev</string>
@@ -27,7 +27,7 @@
     <string name="customInstance">Fərdi</string>
     <string name="region">Ölkə</string>
     <string name="all">Hamısı</string>
-    <string name="choose_filter">Axtarış filtrini seç</string>
+    <string name="choose_filter">Axtarış filtrin seç</string>
     <string name="channels">Kanallar</string>
     <string name="playlists">Pleylistlər</string>
     <string name="okay">Oldu</string>
@@ -40,14 +40,14 @@
     <string name="music_playlists">YT Musiqi Pleylistləri</string>
     <string name="defaultTab">Standart Panel</string>
     <string name="sponsorblock">SponsorBlok</string>
-    <string name="sponsorblock_summary">https://sponsor.ajay.app API\'sini istifadə edir</string>
+    <string name="sponsorblock_summary">https://sponsor.ajay.app API\'sin istifadə edir</string>
     <string name="category_intro_description">Həqiqi məzmunu olmayan aralıq. Fasilə, statik çərçivə, təkrarlanan animasiya ola bilər. Məlumat ehtiva edən keçidlər üçün istifadə edilməməlidir.</string>
     <string name="category_outro">Son kartlar və kredit</string>
     <string name="category_outro_description">Bitişdən sonra məlumat. Məlumatla nəticə çıxarmaq üçün deyil.</string>
     <string name="category_segments">Seqmentlər</string>
     <string name="category_sponsor">Sponsor</string>
-    <string name="category_selfpromo">Ödənişsiz/Öz Reklamı</string>
-    <string name="category_selfpromo_description">Ödənişsiz və ya öz reklamı istisna olmaqla, \"sponsor\" kimi. Bunlar mallar, ianələr və ya kiminlə əməkdaşlıq etdikləri məlumat haqqında bölmələrdir.</string>
+    <string name="category_selfpromo">Ödənilməmiş/Öz Reklamı</string>
+    <string name="category_selfpromo_description">Ödənilməmiş və ya öz reklamı istisna olmaqla, \"sponsor\" kimi. Bunlar mallar, ianələr və ya kiminlə əməkdaşlıq etdikləri məlumat haqqında bölmələrdir.</string>
     <string name="category_interaction_description">Məzmunun ortasında izləmək və ya bəyənmək, abunə olmaq üçün qısa xatırlatma olduqda. Əgər uzun və ya xüsusi bir şey haqqındadırsa, onun əvəzinə öz reklamıdır.</string>
     <string name="license">Lisenziya</string>
     <string name="emptyPlaylistName">Pleylist adı boş ola bilməz</string>
@@ -57,8 +57,8 @@
     <string name="retry">Təkrar Cəhd Et</string>
     <string name="segment_skipped">Seqment ötürüldü</string>
     <string name="sponsorblock_state">Aç</string>
-    <string name="category_sponsor_description">Ödənişli reklam, tövsiyələr və birbaşa reklamlar.Öz reklamı və ya səbəblərə, yaradıcılara, veb saytlara və məhsullara pulsuz orijinal elanlar üçün deyil.</string>
-    <string name="category_interaction">İnteraksiya xatırladıcı(bəyən və abunə ol)</string>
+    <string name="category_sponsor_description">Ödənilmiş reklam, tövsiyələr və birbaşa reklamlar.Öz reklamı və ya səbəblərə, yaradıcılara, veb saytlara və məhsullara pulsuz həqiqi elanlar üçün deyil.</string>
+    <string name="category_interaction">Əlaqələndirmə xatırladıcı(bəyən və abunə ol)</string>
     <string name="category_intro">Fasilə/Giriş Animasiyası</string>
     <string name="login_register">Daxil ol/qeydiyyatdan keç</string>
     <string name="please_login">Zəhmət olmasa, əvvəlcə tənzimləmələrdə giriş et və ya qeydiyyatdan keç.</string>
