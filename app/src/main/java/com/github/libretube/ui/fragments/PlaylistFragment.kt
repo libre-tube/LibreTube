@@ -1,6 +1,5 @@
 package com.github.libretube.ui.fragments
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentPlaylistBinding
@@ -31,7 +31,6 @@ import com.github.libretube.ui.adapters.PlaylistAdapter
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.util.PlayingQueue
-import com.github.libretube.util.TextUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -100,7 +99,6 @@ class PlaylistFragment : Fragment() {
         )
     }
 
-    @SuppressLint("SetTextI18n")
     private fun fetchPlaylist() {
         binding.playlistScrollview.visibility = View.GONE
         lifecycleScope.launchWhenCreated {
@@ -126,9 +124,7 @@ class PlaylistFragment : Fragment() {
                     if (binding.playlistName.maxLines == 2) Int.MAX_VALUE else 2
             }
 
-            binding.playlistInfo.text =
-                (if (response.uploader != null) response.uploader + TextUtils.SEPARATOR else "") +
-                getString(R.string.videoCount, response.videos.toString())
+            binding.playlistInfo.text = getChannelAndVideoString(response, response.videos)
 
             // show playlist options
             binding.optionsMenu.setOnClickListener {
@@ -195,17 +191,8 @@ class PlaylistFragment : Fragment() {
                         )
                     }
 
-                    val info = binding.playlistInfo.text.split(TextUtils.SEPARATOR)
-                    binding.playlistInfo.text = (
-                        if (info.size == 2) {
-                            info[0] + TextUtils.SEPARATOR
-                        } else {
-                            ""
-                        }
-                        ) + getString(
-                        R.string.videoCount,
-                        playlistAdapter!!.itemCount.toString()
-                    )
+                    binding.playlistInfo.text =
+                        getChannelAndVideoString(response, playlistAdapter!!.itemCount)
                     super.onItemRangeRemoved(positionStart, itemCount)
                 }
             })
@@ -266,6 +253,12 @@ class PlaylistFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun getChannelAndVideoString(playlist: Playlist, count: Int): String {
+        return playlist.uploader?.let {
+            getString(R.string.uploaderAndVideoCount, it, count)
+        } ?: getString(R.string.videoCount, count)
     }
 
     private fun fetchNextPage() {
