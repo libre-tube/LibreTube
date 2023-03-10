@@ -192,8 +192,7 @@ class PlaylistFragment : Fragment() {
                     }
 
                     binding.playlistInfo.text =
-                        getChannelAndVideoString(response, playlistAdapter!!.itemCount)
-                    super.onItemRangeRemoved(positionStart, itemCount)
+                        getChannelAndVideoString(response, playlistFeed.size)
                 }
             })
 
