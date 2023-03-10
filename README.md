@@ -166,6 +166,7 @@ Privacy Policy and Disclaimer
 > LibreTube connects to Piped instances instead of directly to YouTube, providing an additional layer of privacy. However, trust is shifted to the instance owner. Piped instances do not log user-specific data, but there is no guarantee regarding the actions of the instance owner. Even if logging occurred, the data would be less than that collected by YouTube since LibreTube does not send telemetry data to the instance's server.
 
 ### Disclaimer
+> **Warning**
 > The LibreTube project is not affiliated, authorized, or endorsed by YouTube, Google LLC, or any of its affiliates or subsidiaries. Any intellectual property used is owned by the respective owners.
 
 ### Changes to Privacy Policy
