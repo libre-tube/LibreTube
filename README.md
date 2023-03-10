@@ -141,14 +141,30 @@ Both are great clients for watching YouTube videos. It depends on the individual
 Privacy Policy and Disclaimer
 </h2>
 
-The LibreTube project aims to provide a private, anonymous experience for using web-based media services. Therefore, the app does not collect any data without your consent.
 
-The LibreTube project and its contents are not affiliated with, funded, authorized, endorsed by, or in any way associated with YouTube, Google LLC, or any of its affiliates or subsidaries.<br>
-Any trademark, service mark, trade name, or other intellectual property rights used are owned by the respective owners.
+At LibreTube, we are committed to protecting the privacy of our users. This Privacy Policy outlines the types of information we collect, how we use it, and how we protect your personal information.
 
-LibreTube is an open source software built for learning and research purposes.
+### Information Collection
+The LibreTube app is designed to provide a private and anonymous experience when using web-based media services. We do not collect any data without your consent. However, if you choose to login to LibreTube, we may collect some data about your search history, playlists, and subscriptions to improve your experience within the app.
 
-## License
+### Information Use
+Any data that we collect will be used solely for the purpose of improving your experience within the app. We may also use it for statistical analysis to help us understand how users interact with the app. We will not share any of your personal information with any third-party without your express consent.
+
+### Open Source Software
+LibreTube is an open source software that is built for learning and research purposes. We welcome and encourage collaboration and contributions from the community to help improve the app.
+
+### Disclaimer
+The LibreTube project and its contents are not affiliated with, funded, authorized, endorsed by, or in any way associated with YouTube, Google LLC, or any of its affiliates or subsidiaries. Any trademark, service mark, trade name, or other intellectual property rights used are owned by the respective owners.
+
+### Data Security
+We take the security of your personal information seriously and have implemented measures to protect your data from unauthorized access, alteration, or disclosure. However, no system can be completely secure, and we cannot guarantee the security of your personal information.
+
+### Changes to Privacy Policy
+We reserve the right to modify or update this Privacy Policy at any time. We encourage you to review this Privacy Policy periodically to stay informed about how we are protecting your personal information.
+
+By using the LibreTube app, you consent to the collection and use of your personal information as outlined in this Privacy Policy. If you have any questions or concerns about our Privacy Policy, you are free to ask us question.
+
+### License
 [![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)](http://www.gnu.org/licenses/gpl-3.0.en.html)
 
 LibreTube is Free Software: You can use, study, share and modify it at your will. The app can be redistributed and/or modified under the terms of the
