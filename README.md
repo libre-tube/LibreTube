@@ -164,6 +164,7 @@ We reserve the right to modify or update this Privacy Policy at any time. We enc
 
 By using the LibreTube app, you consent to the collection and use of your personal information as outlined in this Privacy Policy. If you have any questions or concerns about our Privacy Policy, you are free to ask us question.
 
+---
 ### License
 [![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)](http://www.gnu.org/licenses/gpl-3.0.en.html)
 
