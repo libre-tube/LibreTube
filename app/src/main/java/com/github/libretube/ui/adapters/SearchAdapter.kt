@@ -1,6 +1,5 @@
 package com.github.libretube.ui.adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,7 +23,6 @@ import com.github.libretube.ui.sheets.ChannelOptionsBottomSheet
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.SearchViewHolder
-import com.github.libretube.util.TextUtils
 
 class SearchAdapter : ListAdapter<ContentItem, SearchViewHolder>(SearchCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
@@ -104,22 +102,21 @@ class SearchAdapter : ListAdapter<ContentItem, SearchViewHolder>(SearchCallback)
         }
     }
 
-    @SuppressLint("SetTextI18n")
     private fun bindChannel(item: ContentItem, binding: ChannelRowBinding) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, searchChannelImage)
             searchChannelName.text = item.name
 
-            searchViews.text = listOfNotNull(
-                root.context.getString(
-                    R.string.subscribers,
-                    item.subscribers.formatShort()
-                ).takeIf { item.subscribers >= 0 },
-                root.context.getString(
-                    R.string.videoCount,
-                    item.videos.toString()
-                ).takeIf { item.videos >= 0 }
-            ).joinToString(TextUtils.SEPARATOR)
+            val subscribers = item.subscribers.formatShort()
+            searchViews.text = if (item.subscribers >= 0 && item.videos >= 0) {
+                root.context.getString(R.string.subscriberAndVideoCounts, subscribers, item.videos)
+            } else if (item.subscribers >= 0) {
+                root.context.getString(R.string.subscribers, subscribers)
+            } else if (item.videos >= 0) {
+                root.context.getString(R.string.videoCount, item.videos)
+            } else {
+                ""
+            }
 
             root.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, item.url)

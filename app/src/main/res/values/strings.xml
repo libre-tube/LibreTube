@@ -68,7 +68,9 @@
     <string name="instance">Instance</string>
     <string name="customization">Adjustments</string>
     <string name="website">Website</string>
-    <string name="videoCount">%1$s videos</string>
+    <string name="uploaderAndVideoCount">%1$s • %2$d videos</string>
+    <string name="subscriberAndVideoCounts">%1$s subscribers • %2$d videos</string>
+    <string name="videoCount">%1$d videos</string>
     <string name="noInternet">Connect to the Internet first.</string>
     <string name="retry">Retry</string>
     <string name="comments">Comments</string>
