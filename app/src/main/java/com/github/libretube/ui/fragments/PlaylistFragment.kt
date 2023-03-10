@@ -166,6 +166,7 @@ class PlaylistFragment : Fragment() {
                 binding.bookmark.setIconResource(R.drawable.ic_shuffle)
                 binding.bookmark.text = getString(R.string.shuffle)
                 binding.bookmark.setOnClickListener {
+                    if (playlistFeed.isEmpty()) return@setOnClickListener
                     val queue = playlistFeed.shuffled()
                     PlayingQueue.resetToDefaults()
                     PlayingQueue.add(*queue.toTypedArray())
