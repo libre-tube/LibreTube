@@ -142,7 +142,7 @@ Privacy Policy and Disclaimer
 </h2>
 
 
-At LibreTube, we are committed to protecting the privacy of our users. This Privacy Policy outlines the types of information we collect, how we use it, and how we protect your personal information.
+At LibreTube, we are committed to protecting the privacy of our users. This Privacy Policy outlines the types of information application collect, how we use it, and how it protect your personal information.
 
 ### Information Collection
 The LibreTube app is designed to provide a private and anonymous experience when using web-based media services. We do not collect any data without your consent. However, if you choose to login to LibreTube through Piped instance, app may collect some data about your search history, playlists, and subscriptions to improve your experience within the app.
