@@ -145,16 +145,16 @@ Privacy Policy and Disclaimer
 At LibreTube, we are committed to protecting the privacy of our users. This Privacy Policy outlines the types of information we collect, how we use it, and how we protect your personal information.
 
 ### Information Collection
-The LibreTube app is designed to provide a private and anonymous experience when using web-based media services. We do not collect any data without your consent. However, if you choose to login to LibreTube, we may collect some data about your search history, playlists, and subscriptions to improve your experience within the app.
+The LibreTube app is designed to provide a private and anonymous experience when using web-based media services. We do not collect any data without your consent. However, if you choose to login to LibreTube through Piped instance, app may collect some data about your search history, playlists, and subscriptions to improve your experience within the app.
 
 ### Information Use
-Any data that we collect will be used solely for the purpose of improving your experience within the app. We may also use it for statistical analysis to help us understand how users interact with the app. We will not share any of your personal information with any third-party without your express consent.
+Any data that app collect will be used solely for the purpose of improving your experience within the app. We will not share any of your personal information with any third-party without your express consent.
 
 ### Open Source Software
 LibreTube is an open source software that is built for learning and research purposes. We welcome and encourage collaboration and contributions from the community to help improve the app.
 
 ### Disclaimer
-The LibreTube project and its contents are not affiliated with, funded, authorized, endorsed by, or in any way associated with YouTube, Google LLC, or any of its affiliates or subsidiaries. Any trademark, service mark, trade name, or other intellectual property rights used are owned by the respective owners.
+The LibreTube project and its contents are  **not affiliated with, funded, authorized, endorsed by, or in any way associated with YouTube, Google LLC, or any of its affiliates or subsidiaries**. Any trademark, service mark, trade name, or other intellectual property rights used are owned by the respective owners.
 
 ### Data Security
 We take the security of your personal information seriously and have implemented measures to protect your data from unauthorized access, alteration, or disclosure. However, no system can be completely secure, and we cannot guarantee the security of your personal information.
