@@ -31,10 +31,10 @@
     <string name="already_logged_in">Vous êtes déjà connecté(e), vous pouvez vous déconnecter.</string>
     <string name="region">Région</string>
     <string name="login_register">Se connecter/s\'inscrire</string>
-    <string name="dlisinprogress">Un autre téléchargement est en cours, veuillez attendre qu\'il soit terminé.</string>
+    <string name="dlisinprogress">Veuillez attendre la fin de tous les téléchargements en cours.</string>
     <string name="please_login">Vous devez d\'abord vous connecter ou vous inscrire depuis les paramètres !</string>
     <string name="import_from_yt">Importer les abonnements</string>
-    <string name="server_error">Le serveur a rencontré un problème. Peut-être essayez une autre instance \?</string>
+    <string name="server_error">Il semble y avoir un problème avec le serveur sélectionné. Essayez une autre instance.</string>
     <string name="unknown_error">Erreur réseau.</string>
     <string name="error">Quelque chose s\'est mal passé.</string>
     <string name="empty">Le nom d\'utilisateur et le mot de passe ne peuvent pas être vides.</string>
@@ -64,7 +64,7 @@
     <string name="darkTheme">Sombre</string>
     <string name="subscribers">%1$s abonnés</string>
     <string name="comments">Commentaires</string>
-    <string name="videoCount">%1$s vidéos</string>
+    <string name="videoCount">%1$d vidéos</string>
     <string name="retry">Réessayer</string>
     <string name="noInternet">Connectez-vous d\'abord à Internet.</string>
     <string name="website">Site web</string>
@@ -122,7 +122,7 @@
     <string name="video_format_summary">Conversion des fichiers si on télécharge à la fois de l\'audio et de la vidéo.</string>
     <string name="download_directory_summary">Où sont stockés les médias téléchargés.</string>
     <string name="update_available">La version %1$s est disponible</string>
-    <string name="update_available_text">Aller sur les versions sur GitHub pour la télécharger \?</string>
+    <string name="update_available_text">Nouvelle mise à jour disponible. Cliquez pour ouvrir la page des versions de GitHub.</string>
     <string name="appearance">Apparence</string>
     <string name="app_behavior">Comportement</string>
     <string name="downloads">Téléchargements</string>
@@ -152,7 +152,7 @@
     <string name="fireIcon">Feu à la mode</string>
     <string name="birdIcon">Oiseau boosté</string>
     <string name="torchIcon">Torche tendance</string>
-    <string name="instance_summary">Piped, connexion, et abonnements</string>
+    <string name="instance_summary">Piped, connexion et compte</string>
     <string name="invalid_url">Veuillez entrer une URL qui fonctionne</string>
     <string name="customInstance_summary">Ajouter …</string>
     <string name="instance_name">Nom de l\'instance</string>
@@ -177,7 +177,7 @@
     <string name="buffering_goal_summary">Nombre maximal de secondes de vidéo à mettre en mémoire tampon.</string>
     <string name="category_music_offtopic_description">Uniquement pour une utilisation dans des vidéos musicales. Elle doit couvrir les parties de la vidéo qui ne font pas partie des mixages officiels. Au final, la vidéo doit ressembler le plus possible à la version Spotify ou à toute autre version mixée, ou réduire les discussions ou autres distractions.</string>
     <string name="playerVideoFormat">Format vidéo pour le lecteur</string>
-    <string name="category_preview_description">Pour les segments détaillant le contenu à venir de cette vidéo ou des futures vidéos de sa série, mais qui ne fournissent pas d\'informations supplémentaires. Si elle comprend des clips qui n\'apparaissent qu\'ici, il s\'agit très probablement de la mauvaise catégorie.</string>
+    <string name="category_preview_description">Pour les segments détaillant le contenu futur sans informations supplémentaires. S\'il comprend des clips qui n\'apparaissent qu\'ici, il s\'agit très probablement de la mauvaise catégorie.</string>
     <string name="player_autoplay">Lecture automatique</string>
     <string name="no_audio">Sans audio</string>
     <string name="no_video">Sans vidéo</string>
@@ -442,4 +442,20 @@
     <string name="download_completed">Téléchargement terminé</string>
     <string name="sleep_timer">Minuteur de sommeil</string>
     <string name="replies">Réponses</string>
+    <string name="lbry_hls_summary">Utilisez LBRY HLS pour le streaming si disponible.</string>
+    <string name="trending_views">%1$s • %2$s vues • %3$s</string>
+    <string name="normal_views">%1$s vues%2$s</string>
+    <string name="autoplay_countdown">Compte à rebours de lecture automatique</string>
+    <string name="autoplay_countdown_summary">Afficher un compte à rebours de 5 secondes avant de lire automatiquement la vidéo suivante.</string>
+    <string name="playing_next">Prochaine lecture dans %1$s</string>
+    <string name="stats_for_nerds">Statistiques pour nerd</string>
+    <string name="video_id">ID vidéo</string>
+    <string name="custom_playback_speed">Vitesse personnalisée</string>
+    <string name="custom_playback_speed_summary">Utilisez une vitesse de lecture différente de celle du lecteur normal.</string>
+    <string name="mark_as_watched">Marquer comme regardé</string>
+    <string name="uploaderAndVideoCount">%1$s • %2$d vidéos</string>
+    <string name="subscriberAndVideoCounts">%1$s abonnés • %2$d vidéos</string>
+    <string name="category">Catégorie</string>
+    <string name="codecs">Codecs</string>
+    <string name="unsupported_file_format">Format de fichier non pris en charge: %1$s</string>
 </resources>
