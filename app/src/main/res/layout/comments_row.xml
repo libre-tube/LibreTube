@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:animateLayoutChanges="true"
         android:layout_marginBottom="16dp"
+        android:animateLayoutChanges="true"
         android:orientation="horizontal"
         android:paddingStart="15dp"
         android:paddingEnd="15dp">
@@ -43,8 +43,8 @@
                     android:ellipsize="end"
                     android:maxLines="2"
                     android:textAlignment="viewStart"
-                    android:textSize="14sp"
                     android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="14sp"
                     tools:text="Octacat • 10h" />
 
                 <ImageView
@@ -72,8 +72,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="8dp"
-                android:textSize="15sp"
                 android:textAlignment="viewStart"
+                android:textIsSelectable="true"
+                android:textSize="15sp"
                 tools:text="Comment Text" />
 
             <LinearLayout
@@ -84,12 +85,12 @@
 
                 <com.github.libretube.ui.views.DrawableTextView
                     android:id="@+id/likes_textView"
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
+                    android:drawablePadding="6dp"
                     android:gravity="center_vertical"
                     android:includeFontPadding="false"
-                    android:drawablePadding="6dp"
                     app:drawableStartCompat="@drawable/ic_thumb_up"
                     app:drawableStartDimen="16dp"
                     tools:text="1.2k" />
@@ -105,8 +106,8 @@
 
                 <com.github.libretube.ui.views.DrawableTextView
                     android:id="@+id/replies_count"
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:drawablePadding="6dp"
                     android:gravity="center_vertical"
                     android:includeFontPadding="false"
