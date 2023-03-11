@@ -7,7 +7,7 @@
 LibreTube - Privacy Policy
 </h2>
 
-``At LibreTube, we are committed to protecting the privacy of our users. This Privacy Policy outlines the types of information application collect, how we use it, and how it protect your personal information.``
+``LibreTube aims to protect the privacy of its users. [Our Privacy Policy](/PRIVACY_POLICY.md) gives detailed information on which data the app stores in order to work, how it is being used, and how the project protects your personal information. It is recommended to read the privacy policy of LibreTube as well as the privacy policy of the instance you have chosen inside the app.``
 
 ### Information Collection
 LibreTube only collects necessary data such as watch history, settings, and bookmarks. Users can choose to turn off data collection features. The app does not collect any data about how it is used or profile its users, and app also avoids using libraries that could track usage data.
