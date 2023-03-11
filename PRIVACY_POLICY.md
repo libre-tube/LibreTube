@@ -34,4 +34,4 @@ LibreTube connects to Piped instances instead of directly to YouTube, providing 
 The LibreTube project is not affiliated, authorized, or endorsed by YouTube, Google LLC, or any of its affiliates or subsidiaries. Any intellectual property used is owned by the respective owners.
 
 ### Changes to Privacy Policy
-By using the LibreTube app, you consent to the handling of your information as outlined in this Privacy Policy. If you have any questions or concerns about our Privacy Policy, you are free to ask us question.
+By using the LibreTube app, you consent to the handling of your information as outlined in this Privacy Policy. If you have any questions or concerns about our Privacy Policy, you are free to open an issue to ask about it or ask at the official Matrix room of the app.
