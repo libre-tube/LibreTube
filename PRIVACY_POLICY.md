@@ -13,7 +13,7 @@ LibreTube - Privacy Policy
 LibreTube only collects necessary data such as watch history, settings, and bookmarks. Users can choose to turn off data collection features. The app does not collect any data about how it is used or profile its users, and app also avoids using libraries that could track usage data.
 
 ### Information Use
-LibreTube keeps your data only on your device and does not share it with anyone else. Your data is protected by encryption to prevent unauthorized access.
+LibreTube doesn't share your data with 3rd parties. If you use the app without being logged in with an account, no relevant data will be shared with the Piped servers at all, it'll only be stored locally on the device. When being logged in with a Piped account, your subscriptions and playlists are saved to your Piped account.
 
 ### Open Source Software
 LibreTube is an open source software that is built for learning and research purposes. We welcome and encourage collaboration and contributions from the community to help improve the app.
