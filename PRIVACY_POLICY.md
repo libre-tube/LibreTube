@@ -18,7 +18,7 @@ LibreTube keeps your data only on your device and does not share it with anyone 
 ### Open Source Software
 LibreTube is an open source software that is built for learning and research purposes. We welcome and encourage collaboration and contributions from the community to help improve the app.
 
-### Source Instances
+### Instance list source
 By default, the app retrieves a list of instances from piped-instances.kavin.rocks, which is considered an official and reliable source. In cases where this source is blocked in certain regions, the app falls back to instances.tokhmi.xyz. This ensures that the app can still function properly and access a list of instances, even in regions where the primary source is not available.
 
 ### Instances & Data handling
