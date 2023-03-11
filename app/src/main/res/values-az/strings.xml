@@ -95,7 +95,7 @@
     <string name="lightTheme">İşıqlı</string>
     <string name="darkTheme">Qaranlıq</string>
     <string name="subscribers">%1$s abunəçi</string>
-    <string name="videoCount">%1$s video</string>
+    <string name="videoCount">%1$d video</string>
     <string name="settings">Tənzimləmələr</string>
     <string name="location">Məkan</string>
     <string name="instance">Nümunə</string>
@@ -469,4 +469,6 @@
     </plurals>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="lbry_hls_summary">Mövcuddursa, yayım üçün LBRY HLS istifadə et.</string>
+    <string name="subscriberAndVideoCounts">%1$s abunəçi • %2$d video</string>
+    <string name="uploaderAndVideoCount">%1$s • %2$d video</string>
 </resources>

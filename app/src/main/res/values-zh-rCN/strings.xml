@@ -31,7 +31,7 @@
     <string name="server_error">所选的服务器似乎有问题。请试试其他实例。</string>
     <string name="unknown_error">网络错误。</string>
     <string name="error">出了点问题。</string>
-    <string name="videoCount">%1$s 个视频</string>
+    <string name="videoCount">%1$d 个视频</string>
     <string name="noInternet">请先连接到互联网。</string>
     <string name="retry">重试</string>
     <string name="comments">评论</string>
@@ -466,4 +466,6 @@
     </plurals>
     <string name="lbry_hls_summary">若可用则使用 LBRY HLS 进行流式传输。</string>
     <string name="lbry_hls">LBRY HLS</string>
+    <string name="uploaderAndVideoCount">%1$s • %2$d 个视频</string>
+    <string name="subscriberAndVideoCounts">%1$s 订阅者 • %2$d 个视频</string>
 </resources>
