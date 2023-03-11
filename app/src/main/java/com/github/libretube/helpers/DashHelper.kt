@@ -149,7 +149,7 @@ object DashHelper {
         audioChannelConfiguration.setAttribute("value", "2")
 
         val baseUrl = doc.createElement("BaseURL")
-        baseUrl.appendChild(doc.createTextNode(stream.url!!))
+        baseUrl.appendChild(doc.createTextNode(ProxyHelper.unwrapIfEnabled(stream.url!!)))
 
         val segmentBase = doc.createElement("SegmentBase")
         segmentBase.setAttribute("indexRange", "${stream.indexStart}-${stream.indexEnd}")
@@ -175,7 +175,7 @@ object DashHelper {
         representation.setAttribute("frameRate", stream.fps.toString())
 
         val baseUrl = doc.createElement("BaseURL")
-        baseUrl.appendChild(doc.createTextNode(stream.url!!))
+        baseUrl.appendChild(doc.createTextNode(ProxyHelper.unwrapIfEnabled(stream.url!!)))
 
         val segmentBase = doc.createElement("SegmentBase")
         segmentBase.setAttribute("indexRange", "${stream.indexStart}-${stream.indexEnd}")

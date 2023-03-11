@@ -2,6 +2,7 @@ package com.github.libretube.api.obj
 
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
+import com.github.libretube.helpers.ProxyHelper
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
 
@@ -54,7 +55,7 @@ data class Streams(
                     videoId = videoId,
                     fileName = stream?.getQualityString(fileName).orEmpty(),
                     path = "",
-                    url = stream?.url,
+                    url = stream?.url?.let { ProxyHelper.unwrapIfEnabled(it) },
                     format = videoFormat,
                     quality = videoQuality
                 )
@@ -71,7 +72,7 @@ data class Streams(
                     videoId = videoId,
                     fileName = stream?.getQualityString(fileName).orEmpty(),
                     path = "",
-                    url = stream?.url,
+                    url = stream?.url?.let { ProxyHelper.unwrapIfEnabled(it) },
                     format = audioFormat,
                     quality = audioQuality
                 )
@@ -85,7 +86,9 @@ data class Streams(
                     videoId = videoId,
                     fileName = "${fileName}_$subtitleCode.srt",
                     path = "",
-                    url = subtitles.find { it.code == subtitleCode }?.url
+                    url = subtitles.find {
+                        it.code == subtitleCode
+                    }?.url?.let { ProxyHelper.unwrapIfEnabled(it) }
                 )
             )
         }

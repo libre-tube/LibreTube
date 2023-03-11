@@ -133,6 +133,7 @@ object PreferenceKeys {
     const val CONFIRM_UNSUBSCRIBE = "confirm_unsubscribing"
     const val CLEAR_BOOKMARKS = "clear_bookmarks"
     const val MAX_CONCURRENT_DOWNLOADS = "max_concurrent_downloads"
+    const val DISABLE_VIDEO_IMAGE_PROXY = "disable_video_image_proxy"
 
     /**
      * History
