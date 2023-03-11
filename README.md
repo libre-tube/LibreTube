@@ -142,7 +142,7 @@ Privacy Policy and Disclaimer
 </h2>
 
 
-At LibreTube, we are committed to protecting the privacy of our users. [Privacy Policy](/PRIVACY_POLICY.md) outlines the types of information application collect, how we use it, and how it protect your personal information. [Read Privacy policy](/PRIVACY_POLICY.md)
+LibreTube aims to protect the privacy of its users. [Our Privacy Policy](/PRIVACY_POLICY.md) gives detailed information on which data the app stores in order to work, how it is being used, and how the project protects your personal information. It is recommended to read the privacy policy of LibreTube as well as the privacy policy of the instance you have chosen inside the app.
 
 ### License
 [![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)](http://www.gnu.org/licenses/gpl-3.0.en.html)
