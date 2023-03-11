@@ -435,7 +435,7 @@
     <string name="download_channel_name">බාගත කිරීමේ සේවාව</string>
     <string name="push_channel_name">දැනුම්දීම් සේවකයා</string>
     <string name="category_sponsor_description">ගෙවුම් ප්‍රවර්ධනය, ගෙවුම් යොමු කිරීම් සහ සෘජු දැන්වීම්. ස්වයං ප්‍රවර්ධනය හෝ නොමිලේ නිර්මාණකරුවන්, වෙබ් අඩවි සහ නිෂ්පාදන සඳහා සත්‍ය ප්‍රචාරක කටයුතු, සඳහා නොවේ.</string>
-    <string name="category_preview_description">මෙම හෝ එහි මාලාවේ අනාගත වීඩියෝවල ඉදිරියට එන අන්තර්ගතය විස්තර කරන කොටස් සඳහා, නමුත් අමතර තොරතුරු ලබා නොදේ. මෙහි පමණක් පෙනෙන ක්ලිප් ඇතුළත් නම්, මෙය බොහෝ දුරට වැරදි කාණ්ඩයකි.</string>
+    <string name="category_preview_description">අමතර තොරතුරු නොමැතිව අනාගත අන්තර්ගතය විස්තර කරන කොටස් සඳහා. මෙහි පමණක් පෙනෙන ක්ලිප් ඇතුළත් නම්, මෙය බොහෝ දුරට වැරදි කාණ්ඩයකි.</string>
     <string name="alternative_pip_controls_summary">ඉදිරියට සහ පසුපසට යැවීම වෙනුවට PiP හි ශබ්ද පමණක් සහ මඟහරින පාලක පෙන්වන්න</string>
     <string name="replies">පිළිතුරු</string>
     <string name="skip_silence">නිහඬ කොටස් මඟ හරින්න</string>
@@ -452,4 +452,21 @@
     <string name="autoplay_countdown_summary">මීළඟ වීඩියෝව ස්වයංක්‍රීයව වාදනය කිරීමට පෙර තත්පර 5 කවුන්ට් ඩවුන් එකක් පෙන්වන්න.</string>
     <string name="video_id">වීඩියෝ ID</string>
     <string name="category">කාණ්ඩය</string>
+    <string name="lbry_hls">LBRY HLS</string>
+    <string name="lbry_hls_summary">තිබේ නම් ප්‍රවාහය සඳහා LBRY HLS භාවිත කරන්න.</string>
+    <plurals name="years_ago">
+        <item quantity="one">වසර %d කට පෙර</item>
+        <item quantity="other">වසර %d කට පෙර</item>
+    </plurals>
+    <plurals name="months_ago">
+        <item quantity="one">මාස %dකට පෙර</item>
+        <item quantity="other">මාස %dකට පෙර</item>
+    </plurals>
+    <plurals name="weeks_ago">
+        <item quantity="one">සති %d කට පෙර</item>
+        <item quantity="other">සති %d කට පෙර</item>
+    </plurals>
+    <string name="autoplay_countdown">ස්වයංක්‍රීය වාදනය ගණන් කිරීම</string>
+    <string name="playing_next">මීළඟ වීඩියෝව %1$s හි වාදනය වේ</string>
+    <string name="stats_for_nerds">නර්ඩ්ස් සඳහා සංඛ්‍යාලේඛන</string>
 </resources>
