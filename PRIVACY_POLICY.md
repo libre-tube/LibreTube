@@ -4,7 +4,7 @@
       height="30"
       width="30">
 </sub>
-The LibreTube project - Privacy Policy
+LibreTube - Privacy Policy
 </h2>
 
 ``At LibreTube, we are committed to protecting the privacy of our users. This Privacy Policy outlines the types of information application collect, how we use it, and how it protect your personal information.``
