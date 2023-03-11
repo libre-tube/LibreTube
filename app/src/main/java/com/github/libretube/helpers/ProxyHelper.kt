@@ -32,7 +32,14 @@ object ProxyHelper {
      * Load the YT url directly instead of the proxied Piped URL if enabled
      */
     fun unwrapIfEnabled(url: String): String {
-        if (!PreferenceHelper.getBoolean(PreferenceKeys.DISABLE_VIDEO_IMAGE_PROXY, false)) return url
+        if (!PreferenceHelper.getBoolean(
+                PreferenceKeys.DISABLE_VIDEO_IMAGE_PROXY,
+                false
+            )
+        ) {
+            return url
+        }
+
         return url.toHttpUrlOrNull()?.let {
             it.newBuilder()
                 .host(it.queryParameter("host").orEmpty())

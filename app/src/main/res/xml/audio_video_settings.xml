@@ -101,7 +101,7 @@
             android:icon="@drawable/ic_server"
             android:summary="@string/disable_proxy_summary"
             android:title="@string/disable_proxy"
-            app:key="lbry_hls" />
+            app:key="disable_video_image_proxy" />
 
     </PreferenceCategory>
 
