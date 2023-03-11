@@ -87,7 +87,7 @@
     <string name="choose_filter">検索フィルタを選択</string>
     <string name="all">すべて</string>
     <string name="instance">インスタンス</string>
-    <string name="videoCount">%1$s 件の動画</string>
+    <string name="videoCount">%1$d 件の動画</string>
     <string name="playlists">プレイリスト</string>
     <string name="history">履歴</string>
     <string name="category_segments">セグメント</string>
@@ -444,7 +444,7 @@
     <string name="category">カテゴリー</string>
     <string name="codecs">コーデック</string>
     <plurals name="years_ago">
-        <item quantity="other">%d年前</item>
+        <item quantity="other">%d 年前</item>
     </plurals>
     <plurals name="months_ago">
         <item quantity="other">%d か月前</item>
@@ -462,4 +462,7 @@
     <string name="autoplay_countdown_summary">次のビデオを自動再生する前に 5 秒のカウントダウンを表示します。</string>
     <string name="audio_player">オーディオプレイヤー</string>
     <string name="unsupported_file_format">サポートされていないファイル形式: %1$s</string>
+    <string name="lbry_hls">LBRY HLS</string>
+    <string name="uploaderAndVideoCount">%1$s • %2$d 件の動画</string>
+    <string name="lbry_hls_summary">可能な場合は、ストリーミングに LBRY HLS を使用します。</string>
 </resources>

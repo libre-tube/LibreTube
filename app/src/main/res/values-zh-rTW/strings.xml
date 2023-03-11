@@ -57,7 +57,7 @@
     <string name="instance">實例</string>
     <string name="customization">自訂</string>
     <string name="website">網站</string>
-    <string name="videoCount">%1$s部影片</string>
+    <string name="videoCount">%1$d 個視頻</string>
     <string name="retry">重試</string>
     <string name="comments">留言</string>
     <string name="choose_filter">選擇搜尋過濾器</string>
@@ -461,4 +461,6 @@
     <plurals name="weeks_ago">
         <item quantity="other">%d 週前</item>
     </plurals>
+    <string name="subscriberAndVideoCounts">%1$s 訂閱者 • %2$d 個視頻</string>
+    <string name="uploaderAndVideoCount">%1$s • %2$d 個視頻</string>
 </resources>
