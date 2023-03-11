@@ -104,7 +104,7 @@ class HomeFragment : Fragment() {
                 withContext(Dispatchers.IO) {
                     SubscriptionHelper.getFeed()
                 }
-            }.getOrElse { return }
+            }.getOrNull()?.takeIf { it.isNotEmpty() } ?: return
         }.take(20)
 
         makeVisible(binding.featuredRV, binding.featuredTV)
@@ -122,20 +122,18 @@ class HomeFragment : Fragment() {
     private suspend fun loadBookmarks() {
         val bookmarkedPlaylists = withContext(Dispatchers.IO) {
             DatabaseHolder.Database.playlistBookmarkDao().getAll()
-        }
+        }.takeIf { it.isNotEmpty() } ?: return
 
-        if (bookmarkedPlaylists.isNotEmpty()) {
-            makeVisible(binding.bookmarksTV, binding.bookmarksRV)
-            binding.bookmarksRV.layoutManager = LinearLayoutManager(
-                context,
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
-            binding.bookmarksRV.adapter = PlaylistBookmarkAdapter(
-                bookmarkedPlaylists,
-                PlaylistBookmarkAdapter.Companion.BookmarkMode.HOME
-            )
-        }
+        makeVisible(binding.bookmarksTV, binding.bookmarksRV)
+        binding.bookmarksRV.layoutManager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
+        binding.bookmarksRV.adapter = PlaylistBookmarkAdapter(
+            bookmarkedPlaylists,
+            PlaylistBookmarkAdapter.Companion.BookmarkMode.HOME
+        )
     }
 
     private suspend fun loadPlaylists() {
