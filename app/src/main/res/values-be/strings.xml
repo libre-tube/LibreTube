@@ -460,4 +460,21 @@
         <item quantity="many">%d гадоў таму</item>
         <item quantity="other">%d гадоў таму</item>
     </plurals>
+    <string name="category_preview_description">Для сегментаў з падрабязным апісаннем будучага кантэнту без дадатковай інфармацыі. Калі яна ўключае ў сябе кліпы, якія з\'яўляюцца толькі тут, гэта, хутчэй за ўсё, няправільная катэгорыя.</string>
+    <string name="alternative_trending_layout">Альтэрнатыўны від трэндаў</string>
+    <string name="alternative_player_layout">Альтэрнатыўны макет плэера</string>
+    <string name="featured">Рэкамендацыі</string>
+    <string name="not_enabled">Пункт меню не ўключаны!</string>
+    <string name="pinch_control">Упраўленне шчыпком</string>
+    <string name="pinch_control_summary">Выкарыстоўвайце жэст шчыпка для павелічэння/памяншэння.</string>
+    <string name="pop_up">Усплывальнае акно</string>
+    <string name="color_violet">Універсальны фіялетавы</string>
+    <string name="download_channel_name">Служба запампоўкі</string>
+    <string name="live">Прамы эфір</string>
+    <string name="playback_pitch">Хуткасць</string>
+    <string name="limit_to_runtime">Абмежаванне часу выканання</string>
+    <string name="double_tap_seek">Падвойны націск для пошуку</string>
+    <string name="all_caught_up">Вы ўсё праглядзелі</string>
+    <string name="all_caught_up_summary">Вы бачылі ўсё новыя відэа</string>
+    <string name="shuffle">Змяшаць</string>
 </resources>
