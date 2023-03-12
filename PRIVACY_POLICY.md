@@ -19,13 +19,13 @@ LibreTube doesn't share your data with third parties. When using the app without
 By default, the app retrieves a list of instances from piped-instances.kavin.rocks, which is considered an official and reliable source. In cases where this source is blocked in certain regions, the app falls back to instances.tokhmi.xyz. This ensures that the app can still function properly and access a list of instances, even in regions where the primary source is not available.
 
 ### Instances & Data handling
-if the user is not logged in to any Piped instances. In such cases, user data remains private and is not shared with any third parties. Local playlists are stored on the app and not shared with Piped. There are no logs of user activity or accessed information kept by the app.
+if the user is not logged in to any Piped instances. In such cases, user data remains private and is not shared with any third parties. Local playlists are stored on the app and not shared with Piped. Users have the option to disable the feature that records their browsing history and timestamps. This information is stored only locally and is not shared with any other piped instances.
 
 ### Piped account
 Piped accounts can be completely deleted with no history kept, providing increased security for users on the site.
 
 ### Data Security
-LibreTube connects to Piped instances instead of directly to YouTube, providing an additional layer of privacy. However, trust is shifted to the instance owner. Piped instances do not log user-specific data, but there is no guarantee regarding the actions of the instance owner. Even if logging occurred, the data would be less than that collected by YouTube since LibreTube does not send telemetry data to the instance's server.
+LibreTube connects to Piped instances instead of directly to YouTube, providing an additional layer of privacy. However, trust is shifted to the instance owner. Piped instances do not log user-specific data, but there is no guarantee regarding the actions of the instance owner. In the event that logging occurs on LibreTube, the amount of data collected would be lower than what is typically gathered by YouTube's official app. This is because LibreTube does not send user behavior or other telemetry data to the server of the instance being used.
 
 ### Disclaimer
 The LibreTube project is not affiliated, authorized, or endorsed by YouTube, Google LLC, or any of its affiliates or subsidiaries. Any intellectual property used is owned by the respective owners.
