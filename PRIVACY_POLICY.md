@@ -13,16 +13,13 @@ LibreTube - Privacy Policy
 LibreTube only stores necessary data such as watch history, settings, and bookmarks. Users have the option to refrain from utilizing data storage features. The application does not gather any information regarding its usage, nor does it create user profiles or track user activity. Additionally, the application avoids implementing tracking mechanisms within third-party libraries that it utilizes.
 
 ### Information Use
-LibreTube doesn't share your data with third parties. If you use the app without being logged in with an account, no relevant data will be shared with the Piped servers at all, it'll only be stored locally on the device. When being logged in with a Piped account, your subscriptions and playlists are saved to your Piped account.
-
-### Open Source Software
-LibreTube is an open source software that is built for learning and research purposes. We welcome and encourage collaboration and contributions from the community to help improve the app.
+LibreTube doesn't share your data with third parties. When using the app without logging in to a Piped account, no data will be shared with any Piped servers. Instead, the data will be stored solely on the device. However, once a user logs in to a Piped account, their subscriptions and playlists will be saved to that account on the corresponding Piped instance.
 
 ### Instance list source
 By default, the app retrieves a list of instances from piped-instances.kavin.rocks, which is considered an official and reliable source. In cases where this source is blocked in certain regions, the app falls back to instances.tokhmi.xyz. This ensures that the app can still function properly and access a list of instances, even in regions where the primary source is not available.
 
 ### Instances & Data handling
-User data is not shared with third parties, including Piped instances. Local playlists are stored on the app and not shared with Piped. There are no logs of user activity or accessed information kept by the app.
+if the user is not logged in to any Piped instances. In such cases, user data remains private and is not shared with any third parties. Local playlists are stored on the app and not shared with Piped. There are no logs of user activity or accessed information kept by the app.
 
 ### Piped account
 Piped accounts can be completely deleted with no history kept, providing increased security for users on the site.
@@ -32,6 +29,9 @@ LibreTube connects to Piped instances instead of directly to YouTube, providing 
 
 ### Disclaimer
 The LibreTube project is not affiliated, authorized, or endorsed by YouTube, Google LLC, or any of its affiliates or subsidiaries. Any intellectual property used is owned by the respective owners.
+
+### Open Source Software
+LibreTube is an open source software that is built for learning and research purposes. We welcome and encourage collaboration and contributions from the community to help improve the app.
 
 ### Changes to Privacy Policy
 By using the LibreTube app, you consent to the handling of your information as outlined in this Privacy Policy. If you have any questions or concerns about our Privacy Policy, you are free to open an issue to ask about it or ask at the official Matrix room of the app.
