@@ -51,7 +51,7 @@
     <string name="instance">Инстанце</string>
     <string name="customization">Подешавања</string>
     <string name="website">Веб сајт</string>
-    <string name="videoCount">%1$s видео снимака</string>
+    <string name="videoCount">%1$d видео снимака</string>
     <string name="noInternet">Прво се повежите на интернет.</string>
     <string name="all">Све</string>
     <string name="playlists">Листе</string>
@@ -470,4 +470,8 @@
     </plurals>
     <string name="playing_next">Следеће се игра за %1$s</string>
     <string name="autoplay_countdown_summary">Прикажите 5с одбројавање пре аутоматског пуштања следећег видеа.</string>
+    <string name="lbry_hls">LBRY HLS</string>
+    <string name="lbry_hls_summary">Користите LBRY HLS за стримовање ако је доступно.</string>
+    <string name="uploaderAndVideoCount">%1$s • %2$d видео снимака</string>
+    <string name="subscriberAndVideoCounts">%1$s претплатника • %2$d видео снимака</string>
 </resources>

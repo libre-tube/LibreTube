@@ -65,7 +65,7 @@
     <string name="startpage">Início</string>
     <string name="customization">Ajustes</string>
     <string name="settings">Configurações</string>
-    <string name="videoCount">%1$s vídeos</string>
+    <string name="videoCount">%1$d vídeos</string>
     <string name="location">Localização</string>
     <string name="instance">Instância</string>
     <string name="website">Website</string>
@@ -472,4 +472,6 @@
     </plurals>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="lbry_hls_summary">Use LBRY HLS para streaming, se disponível.</string>
+    <string name="uploaderAndVideoCount">%1$s • %2$d vídeos</string>
+    <string name="subscriberAndVideoCounts">%1$s inscritos • %2$d vídeos</string>
 </resources>

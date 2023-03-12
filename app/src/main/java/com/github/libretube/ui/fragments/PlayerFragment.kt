@@ -733,8 +733,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                         JsonHelper.json.encodeToString(categories)
                     ).segments
                 if (segments.isEmpty()) return@runCatching
-                playerBinding.exoProgress.setSegments(segments)
+
                 withContext(Dispatchers.Main) {
+                    playerBinding.exoProgress.setSegments(segments)
                     playerBinding.sbToggle.visibility = View.VISIBLE
                     updateDisplayedDuration()
                 }
