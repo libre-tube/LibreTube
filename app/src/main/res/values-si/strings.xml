@@ -48,7 +48,7 @@
     <string name="instance">සේවාදායකය</string>
     <string name="customization">ගැලපීම්</string>
     <string name="website">වෙබ් අඩවිය</string>
-    <string name="videoCount">%1$s වීඩියෝ</string>
+    <string name="videoCount">%1$d වීඩියෝ</string>
     <string name="noInternet">මුලින්ම අන්තර්ජාලයට සම්බන්ධ වෙන්න.</string>
     <string name="retry">නැවත උත්සාහ කරන්න</string>
     <string name="comments">අදහස්</string>
@@ -469,4 +469,6 @@
     <string name="autoplay_countdown">ස්වයංක්‍රීය වාදනය ගණන් කිරීම</string>
     <string name="playing_next">මීළඟ වීඩියෝව %1$s හි වාදනය වේ</string>
     <string name="stats_for_nerds">නර්ඩ්ස් සඳහා සංඛ්‍යාලේඛන</string>
+    <string name="uploaderAndVideoCount">%1$s • %2$d වීඩියෝ</string>
+    <string name="subscriberAndVideoCounts">%1$s ග්‍රාහකයින් • %2$d වීඩියෝ</string>
 </resources>

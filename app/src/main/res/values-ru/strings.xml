@@ -405,7 +405,7 @@
     <string name="proceed">Продолжить</string>
     <string name="theme_monochrome">Минималистичный монохромный</string>
     <string name="captions_size">Размер субтитров</string>
-    <string name="all_caught_up">Вы всё просмотрели</string>
+    <string name="all_caught_up">Вы все просмотрели</string>
     <string name="all_caught_up_summary">Вы видели все новые видео</string>
     <string name="export_playlists">Экспортировать плейлисты</string>
     <string name="app_backup">Резервная копия приложения</string>
