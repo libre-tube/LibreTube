@@ -32,7 +32,7 @@
     <string name="vlcerror">VLC에서 열 수 없습니다. 설치되어 있지 않습니다.</string>
     <string name="import_from_yt">구독 가져오기</string>
     <string name="app_theme">앱 테마</string>
-    <string name="server_error">서버에 문제가 발생했습니다. 다른 인스턴스를 시도할까요\?</string>
+    <string name="server_error">선택한 서버에 문제가 있는 것 같습니다. 다른 인스턴스를 시도하십시오.</string>
     <string name="unknown_error">네트워크 오류.</string>
     <string name="empty">사용자 이름과 암호를 입력해야 합니다.</string>
     <string name="grid">그리드 열</string>
@@ -45,7 +45,7 @@
     <string name="success">완료.</string>
     <string name="fail">실패:(</string>
     <string name="about">정보</string>
-    <string name="dlisinprogress">다른 다운로드가 이미 진행 중입니다. 완료될 때까지 기다려 주십시오.</string>
+    <string name="dlisinprogress">현재 다운로드가 모두 완료될 때까지 기다리십시오.</string>
     <string name="subscribeIsEmpty">먼저 일부 채널을 구독하세요.</string>
     <string name="error">문제가 발생했습니다.</string>
     <string name="notgmail">이것은 Piped 계정을 위한 것입니다.</string>
@@ -66,7 +66,7 @@
     <string name="retry">재시도</string>
     <string name="comments">댓글</string>
     <string name="noInternet">먼저 인터넷에 연결합니다.</string>
-    <string name="videoCount">동영상 %1$s개</string>
+    <string name="videoCount">동영상 %1$d개</string>
     <string name="location">위치</string>
     <string name="customization">조정</string>
     <string name="settings">설정</string>
@@ -121,7 +121,7 @@
     <string name="appearance_summary">원하는 대로 앱을 조정하세요.</string>
     <string name="no_replies">이 댓글에는 답글이 없습니다.</string>
     <string name="update_available">%1$s 버전 사용 가능</string>
-    <string name="update_available_text">GitHub의 릴리스로 이동하여 다운로드하시겠습니까\?</string>
+    <string name="update_available_text">새로운 업데이트를 사용할 수 있습니다. GitHub 릴리스 페이지를 열려면 클릭하세요.</string>
     <string name="app_behavior">동작</string>
     <string name="appearance">모양</string>
     <string name="downloads">다운로드</string>
@@ -155,7 +155,7 @@
     <string name="instance_api_url">인스턴스 API에 대한 URL</string>
     <string name="empty_instance">이름과 API URL을 입력합니다.</string>
     <string name="invalid_url">작동하는 URL을 입력하세요</string>
-    <string name="instance_summary">Piped, 로그인 및 구독</string>
+    <string name="instance_summary">Piped, 로그인 및 계정</string>
     <string name="related_streams">관련된 컨텐츠</string>
     <string name="related_streams_summary">시청하는 내용과 함께 유사한 스트림을 표시합니다.</string>
     <string name="version">버전 %1$s</string>
@@ -164,7 +164,7 @@
     <string name="hide_chapters">챕터 숨기기</string>
     <string name="category_music_offtopic">음악: 비음악 섹션</string>
     <string name="category_preview">미리보기/요약</string>
-    <string name="category_preview_description">이 시리즈 또는 시리즈의 향후 비디오에서 예정된 콘텐츠를 자세히 설명하지만 추가 정보를 제공하지 않는 세그먼트의 경우. 여기에만 나타나는 클립이 포함된 경우 잘못된 범주일 가능성이 높습니다.</string>
+    <string name="category_preview_description">추가 정보 없이 향후 콘텐츠를 자세히 설명하는 세그먼트의 경우. 여기에만 표시되는 클립이 포함된 경우 잘못된 카테고리일 가능성이 큽니다.</string>
     <string name="category_music_offtopic_description">뮤직 비디오에서만 사용합니다. 공식 믹스의 일부가 아닌 비디오의 일부를 다루어야 합니다. 결국 비디오는 Spotify 또는 기타 혼합 버전과 최대한 유사하거나 말이나 기타 방해 요소를 줄여야 합니다.</string>
     <string name="buffering_goal_summary">최대 버퍼링할 비디오의 시간(초)입니다.</string>
     <string name="playerVideoFormat">플레이어의 비디오 형식</string>
@@ -290,7 +290,7 @@
     <string name="trends">트렌드</string>
     <string name="queue_insert_related_videos">관련된 비디오를 삽입하시오</string>
     <string name="pop_up">팝업</string>
-    <string name="no_comments_available">이 비디오에는 이용할 수 있는 댓글이 없습니다.</string>
+    <string name="no_comments_available">이 동영상에는 댓글이 없습니다.</string>
     <string name="all_caught_up_summary">새로운 비디오를 모두 시청함</string>
     <string name="landscape">풍경</string>
     <string name="double_tap_seek">찾으려면 더블 탭</string>
@@ -433,4 +433,38 @@
     <string name="audio_player">오디오 플레이어</string>
     <string name="audio_only_mode">오디오 모드</string>
     <string name="audio_only_mode_summary">LibreTube 를 음악 플에어이로 바꿉니다.</string>
+    <string name="mark_as_watched">시청한 것으로 표시</string>
+    <string name="lbry_hls">LBRY HLS</string>
+    <string name="normal_views">%1$s 조회수%2$s</string>
+    <string name="trending_views">%1$s • %2$s 조회수 • %3$s</string>
+    <string name="unsupported_file_format">지원되지 않는 파일 형식: %1$s</string>
+    <string name="help">돕다</string>
+    <string name="uploaderAndVideoCount">%1$s • 동영상 %2$d개</string>
+    <string name="subscriberAndVideoCounts">구독자 %1$s명 • 동영상 %2$d개</string>
+    <string name="custom_playback_speed">맞춤 속도</string>
+    <string name="stats_for_nerds">전문 통계</string>
+    <string name="video_id">비디오 ID</string>
+    <string name="autoplay_countdown">자동 재생 카운트다운</string>
+    <string name="autoplay_countdown_summary">다음 동영상을 자동 재생하기 전에 5초 카운트다운을 표시합니다.</string>
+    <string name="playing_next">%1$s에서 다음 재생</string>
+    <string name="lbry_hls_summary">가능한 경우 스트리밍에 LBRY HLS를 사용합니다.</string>
+    <string name="download_paused">다운로드가 일시중지됨</string>
+    <string name="no_subtitle">자막 없음</string>
+    <string name="rewind">되감기</string>
+    <string name="alternative_pip_controls">대체 PiP 컨트롤</string>
+    <string name="alternative_pip_controls_summary">앞으로 및 되감기 대신 PiP에서 오디오만 표시하고 컨트롤 건너뛰기</string>
+    <string name="all_caught_up">당신은 모든 것을 보았다</string>
+    <string name="custom_playback_speed_summary">기존 플레이어와 다른 재생 속도를 사용하십시오.</string>
+    <string name="category">범주</string>
+    <string name="codecs">코덱</string>
+    <plurals name="years_ago">
+        <item quantity="other">%d년 전</item>
+    </plurals>
+    <plurals name="months_ago">
+        <item quantity="other">%d개월 전</item>
+    </plurals>
+    <plurals name="weeks_ago">
+        <item quantity="other">%d주 전</item>
+    </plurals>
+    <string name="resume">재개하다</string>
 </resources>

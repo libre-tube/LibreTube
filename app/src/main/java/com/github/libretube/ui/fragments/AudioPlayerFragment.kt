@@ -140,6 +140,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         }
 
         binding.close.setOnClickListener {
+            activity?.unbindService(connection)
             BackgroundHelper.stopBackgroundPlay(requireContext())
             findNavController().popBackStack()
         }
@@ -242,7 +243,9 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     override fun onDestroy() {
         // unregister all listeners and the connected [playerService]
         playerService?.onIsPlayingChanged = null
-        activity?.unbindService(connection)
+        runCatching {
+            activity?.unbindService(connection)
+        }
         PlayingQueue.removeOnTrackChangedListener(onTrackChangeListener)
 
         super.onDestroy()

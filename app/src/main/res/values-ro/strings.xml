@@ -55,7 +55,7 @@
     <string name="instance">Instanță</string>
     <string name="customization">Ajustări</string>
     <string name="website">Pagina web</string>
-    <string name="videoCount">%1$s videoclipuri</string>
+    <string name="videoCount">%1$d videoclipuri</string>
     <string name="noInternet">Conectează-te mai întâi la internet.</string>
     <string name="retry">Reîncearcă</string>
     <string name="comments">Comentarii</string>
@@ -472,4 +472,6 @@
         <item quantity="few">%d ani în urmă</item>
         <item quantity="other">%d ani în urmă</item>
     </plurals>
+    <string name="uploaderAndVideoCount">%1$s • %2$d videoclipuri</string>
+    <string name="subscriberAndVideoCounts">%1$s abonați - %2$d videoclipuri</string>
 </resources>

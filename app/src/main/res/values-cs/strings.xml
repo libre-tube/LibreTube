@@ -69,7 +69,7 @@
     <string name="instance">Instance</string>
     <string name="customization">Přizpůsobení</string>
     <string name="website">Webové stránky</string>
-    <string name="videoCount">%1$s videí</string>
+    <string name="videoCount">%1$d videí</string>
     <string name="noInternet">Nejprve se připojte k internetu.</string>
     <string name="comments">Komentáře</string>
     <string name="defaultTab">Výchozí karta</string>
@@ -472,4 +472,6 @@
     </plurals>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="lbry_hls_summary">Pro streamování použít LBRY HLS, pokud je k dispozici.</string>
+    <string name="uploaderAndVideoCount">%1$s • %2$d videí</string>
+    <string name="subscriberAndVideoCounts">%1$s odběratelů • %2$d videí</string>
 </resources>

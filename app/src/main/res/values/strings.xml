@@ -456,6 +456,7 @@
     <string name="disable_proxy">Disable Piped proxy</string>
     <string name="disable_proxy_summary">Load videos and images directly from YouTube\'s servers. Only enable the option if you use a VPN anyways!</string>
 
+
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
     <string name="download_channel_description">Shows a notification when downloading media.</string>
