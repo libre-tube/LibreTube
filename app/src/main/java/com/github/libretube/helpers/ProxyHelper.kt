@@ -45,6 +45,7 @@ object ProxyHelper {
                 .host(it.queryParameter("host").orEmpty())
                 .removeAllQueryParameters("host")
                 .build()
-        }.toString()
+                .toString()
+        } ?: url
     }
 }
