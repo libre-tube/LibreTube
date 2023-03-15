@@ -19,7 +19,7 @@ LibreTube doesn't share your data with third parties. When using the app without
 By default, the app retrieves a list of instances from [piped-instances.kavin.rocks](piped-instances.kavin.rocks), which is considered an official and reliable source. In cases where this source is blocked in certain regions, the app falls back to [instances.tokhmi.xyz](instances.tokhmi.xyz). This ensures that the app can still function properly and access a list of instances, even in regions where the primary source is not available.
 
 ### Instances & Data handling
-if the user is not logged in to any Piped instances. In such cases, user data remains private and is not shared with any third parties. Local playlists are stored on the app and not shared with Piped. Users have the option to disable the feature that records their browsing history and timestamps. This information is stored only locally and is not shared with any other piped instances.
+In case the user is not logged in to a Piped account on any instance, user data remains private and is not shared with any third parties. Local playlists are stored on the app and not shared with Piped. Users have the option to disable the feature that records their browsing history and timestamps. This information is stored only locally and is not shared with any other piped instances.
 
 ### Piped account
 Piped accounts can be completely deleted with no history kept, providing increased security for users on the site.
