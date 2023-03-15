@@ -399,7 +399,7 @@
     <string name="backup_restore_summary">Импорт и экспорт подписок, плейлистов, …</string>
     <string name="pinch_control">Управление щипком</string>
     <string name="pinch_control_summary">Используйте жест щипка для увеличения/уменьшения.</string>
-    <string name="pop_up">Всплывающее окно</string>
+    <string name="pop_up">В окне</string>
     <string name="comments_disabled">Комментарии отключены загружающим.</string>
     <string name="username_email">Продолжить с адресом электронной почты, который не рекомендуется\?</string>
     <string name="proceed">Продолжить</string>

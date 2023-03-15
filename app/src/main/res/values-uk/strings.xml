@@ -206,7 +206,7 @@
     <string name="landscape">Альбомна</string>
     <string name="portrait">Портретна</string>
     <string name="community">Спільнота</string>
-    <string name="instance_name">Ім\'я екземпляра</string>
+    <string name="instance_name">Назва екземпляра</string>
     <string name="playerVideoFormat">Формат відео для програвача</string>
     <string name="auth_instance">Сервер аутентифікації</string>
     <string name="auth_instance_summary">Використовувати інший сервер для аутентифікації.</string>
