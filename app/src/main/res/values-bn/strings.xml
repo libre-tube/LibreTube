@@ -102,7 +102,7 @@
     <string name="gradientIcon">গ্লিব গ্রেডিয়েন্ট</string>
     <string name="fireIcon">ফ্যাশনেবল আগুন</string>
     <string name="flameIcon">জ্বলন্ত শিখা</string>
-    <string name="instance_summary">পাইপড, লগইন এবং সাবস্ক্রিপশনগুলো</string>
+    <string name="instance_summary">পাইপড, লগইন এবং অ্যাকাউন্ট</string>
     <string name="customInstance_summary">যোগ করুন…</string>
     <string name="instance_name">ইনস্ট্যান্সের নাম</string>
     <string name="instance_api_url">ইনস্ট্যান্স এপিআই লিংক</string>
@@ -137,11 +137,11 @@
     <string name="already_logged_in">ইতিমধ্যে লগ ইন করা হয়েছে। আপনি আপনার অ্যাকাউন্ট থেকে লগ আউট হয়ে যেতে পারেন।</string>
     <string name="subscribeIsEmpty">প্রথমে কিছু চ্যানেল সাবস্ক্রাইব করুন।</string>
     <string name="please_login">অনুগ্রহ করে প্রথমে সেটিংসে লগ ইন অথবা নিবন্ধন করুন।</string>
-    <string name="dlisinprogress">আরেকটি ডাউনলোড ইতোমধ্যে চলমান রয়েছে, অনুগ্রহ করে সকল ডাউনলোড শেষ হওয়া পর্যন্ত অপেক্ষা করুন।</string>
+    <string name="dlisinprogress">সকল ডাউনলোড শেষ হওয়া পর্যন্ত অপেক্ষা করুন।</string>
     <string name="import_from_yt">সাবস্ক্রিপশনগুলো ইমপোর্ট করুন</string>
     <string name="history">ইতিহাস</string>
     <string name="emptyPlaylistName">প্লেলিস্টটির নাম খালি থাকতে পারে না</string>
-    <string name="videoCount">ভিডিও সংখ্যা %1$s</string>
+    <string name="videoCount">%1$টি ভিডিও</string>
     <string name="retry">পুনরায় চেষ্টা করুন</string>
     <string name="choose_filter">প্রথমে অনুসন্ধান ফিল্টার নির্বাচন করুন</string>
     <string name="music_playlists">ইউটিউব মিউজিক প্লেলিস্টগুলো</string>
@@ -392,4 +392,9 @@
     <string name="concurrent_downloads">সর্বোচ্চ সমান্তরাল ডাউনলোড</string>
     <string name="no_subtitle">সাবটাইটেল নেই</string>
     <string name="download_paused">ডাউনলোড থামানো আছে</string>
+    <string name="not_enabled">মেনু আইটেম চালু করা নেই!</string>
+    <string name="unknown">অজানা</string>
+    <string name="pause">থামাও</string>
+    <string name="resume">চালাও</string>
+    <string name="unsupported_file_format">অসমর্থিত ফাইল ফর্ম্যাট: %1$s</string>
 </resources>
