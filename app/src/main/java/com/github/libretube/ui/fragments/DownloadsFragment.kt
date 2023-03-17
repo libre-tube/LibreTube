@@ -24,7 +24,7 @@ import com.github.libretube.receivers.DownloadReceiver
 import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.adapters.DownloadsAdapter
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
-import java.io.File
+import kotlin.io.path.fileSize
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
@@ -84,7 +84,7 @@ class DownloadsFragment : Fragment() {
         binding.downloads.adapter = DownloadsAdapter(requireContext(), downloads) {
             var isDownloading = false
             val ids = it.downloadItems
-                .filter { item -> File(item.path).length() < item.downloadSize }
+                .filter { item -> item.path.fileSize() < item.downloadSize }
                 .map { item -> item.id }
 
             if (!serviceConnection.isBound) {

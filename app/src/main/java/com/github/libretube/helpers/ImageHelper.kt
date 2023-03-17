@@ -13,8 +13,10 @@ import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.extensions.toAndroidUri
+import com.github.libretube.extensions.toAndroidUriOrNull
 import com.github.libretube.util.DataSaverMode
-import java.io.File
+import java.nio.file.Path
 
 object ImageHelper {
     lateinit var imageLoader: ImageLoader
@@ -54,9 +56,9 @@ object ImageHelper {
         if (!DataSaverMode.isEnabled(target.context)) target.load(url, imageLoader)
     }
 
-    fun downloadImage(context: Context, url: String, path: String) {
+    fun downloadImage(context: Context, url: String, path: Path) {
         getAsync(context, url) { bitmap ->
-            saveImage(context, bitmap, Uri.fromFile(File(path)))
+            saveImage(context, bitmap, path.toAndroidUri())
         }
     }
 
@@ -69,10 +71,8 @@ object ImageHelper {
         imageLoader.enqueue(request)
     }
 
-    fun getDownloadedImage(context: Context, path: String): Bitmap? {
-        val file = File(path)
-        if (!file.exists()) return null
-        return getImage(context, Uri.fromFile(file))
+    fun getDownloadedImage(context: Context, path: Path): Bitmap? {
+        return path.toAndroidUriOrNull()?.let { getImage(context, it) }
     }
 
     private fun saveImage(context: Context, bitmapImage: Bitmap, imagePath: Uri) {

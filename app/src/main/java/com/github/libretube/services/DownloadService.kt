@@ -38,7 +38,12 @@ import java.io.File
 import java.net.HttpURLConnection
 import java.net.SocketTimeoutException
 import java.net.URL
+import java.nio.file.Path
+import java.nio.file.StandardOpenOption
 import java.util.concurrent.Executors
+import kotlin.io.path.absolute
+import kotlin.io.path.createFile
+import kotlin.io.path.fileSize
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -48,7 +53,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okio.BufferedSink
 import okio.buffer
 import okio.sink
 import okio.source
@@ -96,7 +100,8 @@ class DownloadService : LifecycleService() {
                     RetrofitInstance.api.getStreams(videoId)
                 }
 
-                val thumbnailTargetFile = getDownloadFile(DownloadHelper.THUMBNAIL_DIR, fileName)
+                val thumbnailTargetPath = getDownloadPath(DownloadHelper.THUMBNAIL_DIR, fileName)
+                    .absolute()
 
                 val download = Download(
                     videoId,
@@ -104,13 +109,13 @@ class DownloadService : LifecycleService() {
                     streams.description,
                     streams.uploader,
                     streams.uploadDate,
-                    thumbnailTargetFile.absolutePath
+                    thumbnailTargetPath
                 )
                 Database.downloadDao().insertDownload(download)
                 ImageHelper.downloadImage(
                     this@DownloadService,
                     streams.thumbnailUrl,
-                    thumbnailTargetFile.absolutePath
+                    thumbnailTargetPath
                 )
 
                 val downloadItems = streams.toDownloadItems(
@@ -136,13 +141,11 @@ class DownloadService : LifecycleService() {
      * for the requested file.
      */
     private fun start(item: DownloadItem) {
-        val file = when (item.type) {
-            FileType.AUDIO -> getDownloadFile(DownloadHelper.AUDIO_DIR, item.fileName)
-            FileType.VIDEO -> getDownloadFile(DownloadHelper.VIDEO_DIR, item.fileName)
-            FileType.SUBTITLE -> getDownloadFile(DownloadHelper.SUBTITLE_DIR, item.fileName)
-        }
-        file.createNewFile()
-        item.path = file.absolutePath
+        item.path = when (item.type) {
+            FileType.AUDIO -> getDownloadPath(DownloadHelper.AUDIO_DIR, item.fileName)
+            FileType.VIDEO -> getDownloadPath(DownloadHelper.VIDEO_DIR, item.fileName)
+            FileType.SUBTITLE -> getDownloadPath(DownloadHelper.SUBTITLE_DIR, item.fileName)
+        }.createFile().absolute()
 
         lifecycleScope.launch(coroutineContext) {
             item.id = Database.downloadDao().insertDownloadItem(item).toInt()
@@ -158,8 +161,8 @@ class DownloadService : LifecycleService() {
         downloadQueue[item.id] = true
         val notificationBuilder = getNotificationBuilder(item)
         setResumeNotification(notificationBuilder, item)
-        val file = File(item.path)
-        var totalRead = file.length()
+        val path = item.path
+        var totalRead = path.fileSize()
         val url = URL(item.url ?: return)
 
         url.getContentLength().let { size ->
@@ -206,7 +209,8 @@ class DownloadService : LifecycleService() {
                 return
             }
 
-            val sink: BufferedSink = file.sink(true).buffer()
+            @Suppress("NewApi") // The StandardOpenOption enum is desugared.
+            val sink = path.sink(StandardOpenOption.APPEND).buffer()
             val sourceByte = con.inputStream.source()
 
             var lastTime = System.currentTimeMillis() / 1000
@@ -437,14 +441,8 @@ class DownloadService : LifecycleService() {
     /**
      * Get a [File] from the corresponding download directory and the file name
      */
-    private fun getDownloadFile(directory: String, fileName: String): File {
-        return File(
-            DownloadHelper.getDownloadDir(
-                this@DownloadService,
-                directory
-            ),
-            fileName
-        )
+    private fun getDownloadPath(directory: String, fileName: String): Path {
+        return DownloadHelper.getDownloadDir(this, directory).resolve(fileName)
     }
 
     override fun onDestroy() {
