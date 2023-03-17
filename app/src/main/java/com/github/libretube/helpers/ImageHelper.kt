@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.widget.ImageView
 import androidx.core.graphics.drawable.toBitmap
-import androidx.core.net.toUri
 import coil.ImageLoader
 import coil.disk.DiskCache
 import coil.load
@@ -15,6 +14,7 @@ import coil.request.ImageRequest
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toAndroidUri
+import com.github.libretube.extensions.toAndroidUriOrNull
 import com.github.libretube.util.DataSaverMode
 import java.nio.file.Path
 
@@ -58,8 +58,7 @@ object ImageHelper {
 
     fun downloadImage(context: Context, url: String, path: Path) {
         getAsync(context, url) { bitmap ->
-            @Suppress("NewApi") // The Path class is desugared.
-            saveImage(context, bitmap, path.toFile().toUri())
+            saveImage(context, bitmap, path.toAndroidUri())
         }
     }
 
@@ -73,7 +72,7 @@ object ImageHelper {
     }
 
     fun getDownloadedImage(context: Context, path: Path): Bitmap? {
-        return path.toAndroidUri()?.let { getImage(context, it) }
+        return path.toAndroidUriOrNull()?.let { getImage(context, it) }
     }
 
     private fun saveImage(context: Context, bitmapImage: Bitmap, imagePath: Uri) {

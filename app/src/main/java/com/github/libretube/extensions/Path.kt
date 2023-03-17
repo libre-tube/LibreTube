@@ -5,7 +5,11 @@ import androidx.core.net.toUri
 import java.nio.file.Path
 import kotlin.io.path.exists
 
-fun Path.toAndroidUri(): Uri? {
+fun Path.toAndroidUriOrNull(): Uri? {
+    return if (exists()) toAndroidUri() else null
+}
+
+fun Path.toAndroidUri(): Uri {
     @Suppress("NewApi") // The Path class is desugared.
-    return if (exists()) toFile().toUri() else null
+    return toFile().toUri()
 }
