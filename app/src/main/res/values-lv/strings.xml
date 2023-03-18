@@ -3,8 +3,8 @@
     <string name="search_hint">Meklēt</string>
     <string name="logout">Izrakstīties</string>
     <string name="importsuccess">Abonēts</string>
-    <string name="dlisinprogress">Vēl viens fails jau tiek lejupielādēts. Lūdzu pagaidiet, līdz visas lejupielādes ir pabeigtas.</string>
-    <string name="server_error">Ar serveri ir problēma. Varbūt varat pamēģināt citu instanci\?</string>
+    <string name="dlisinprogress">Lūdzu, uzgaidiet, līdz tiek pabeigtas visas pašreizējās lejupielādes.</string>
+    <string name="server_error">Šķiet, ka ir problēma ar atlasīto serveri. Izmēģiniet citu gadījumu.</string>
     <string name="password">Parole</string>
     <string name="cannotDownload">Nevar lejupielādēt.</string>
     <string name="import_from_yt_summary">No YouTube vai NewPipe</string>
@@ -13,9 +13,9 @@
     <string name="downloadfailed">Lejupielāde neizdevās.</string>
     <string name="defres">Video izšķirtspēja</string>
     <string name="playlistCreated">Atskaņošanas saraksts izveidots.</string>
-    <string name="already_logged_in">Jūs jau esat pierakstījies. Jūs varat izrakstīties no sava konta.</string>
+    <string name="already_logged_in">Jau esat pierakstījušies. Jūs varat izrakstīties no sava konta.</string>
     <string name="notgmail">Pierakstīties vai reģistrēties Piped kontam.</string>
-    <string name="registered">Jūsu konts ir reģistrēts. Tagad varat abonēt kanālus.</string>
+    <string name="registered">Esat reģistrējušies. Tagad varat abonēt kanālus.</string>
     <string name="startpage">Sākums</string>
     <string name="login_register">Pierakstīties/reģistrēties</string>
     <string name="empty">Jums vajag ievadīt lietotājvārdu un paroli.</string>
@@ -35,7 +35,7 @@
     <string name="instances">Izvēlēties…</string>
     <string name="customInstance">Cita</string>
     <string name="loggedIn">Jūs esat pierakstījies.</string>
-    <string name="login_first">Pierakstieties un mēģiniet vēlreiz.</string>
+    <string name="login_first">Lūdzu pierakstieties un mēģiniet vēlreiz.</string>
     <string name="please_login">Vispirms pierakstieties vai reģistrējieties iestatījumos.</string>
     <string name="dlcomplete">Lejupielāde pabeigta.</string>
     <string name="vlc">Atvērt ar VLC</string>
@@ -66,7 +66,7 @@
     <string name="noInternet">Vispirms savienojieties ar internetu.</string>
     <string name="retry">Mēģināt vēlreiz</string>
     <string name="comments">Komentāri</string>
-    <string name="videoCount">%1$s video</string>
+    <string name="videoCount">%1$d videoklipi</string>
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">Izmanto API no https://sponsor.ajay.app/</string>
     <string name="choose_filter">Izvēlēties meklēšanas filtru</string>
@@ -137,7 +137,7 @@
     <string name="birdIcon">Putna</string>
     <string name="legacyIcon">Vecā</string>
     <string name="update_available">%1$s versija ir pieejama</string>
-    <string name="update_available_text">Pieejama jauna versija. Doties uz GitHub, lai to lejupielādētu\?</string>
+    <string name="update_available_text">Ir pieejams jauns atjauninājums. Noklikšķiniet, lai atvērtu GitHub laidienu lapu.</string>
     <string name="appearance">Izskats</string>
     <string name="app_behavior">Uzvedība</string>
     <string name="downloads">Lejupielādes</string>
@@ -165,8 +165,8 @@
     <string name="category_filler">Novēršanās no tēmas/joki</string>
     <string name="category_music_offtopic">Mūzika: brīži bez mūzikas</string>
     <string name="category_preview">Priekšskatījums/atkārtojums</string>
-    <string name="category_preview_description">Šeit ietilpst brīži, kuros tiek iekļauta informācija par saturu, kas sagaidāms nākotnē, bet nedod papildus informāciju. Brīži, kuros tiek iekļauti klipi, kas nevienā citā mirklī neparādās, visticamāk, neietilpst šajā kategorijā.</string>
-    <string name="instance_summary">Piped, pierakstīšanās un abonementi</string>
+    <string name="category_preview_description">Segmentiem, kuros detalizēti aprakstīts turpmākais saturs bez papildu informācijas. Ja tajā ir iekļauti tikai šeit redzamie klipi, ļoti iespējams, ka tā ir nepareiza kategorija.</string>
+    <string name="instance_summary">Piped, pieteikšanās un konts</string>
     <string name="instance_name">Instances nosaukums</string>
     <string name="instance_api_url">Instances API URL</string>
     <string name="addInstance">Pievienot instanci</string>
@@ -455,7 +455,7 @@
     <string name="concurrent_downloads">Vienlaikus atļautās lejupielādes</string>
     <string name="unknown">Nezināms</string>
     <string name="pause">Pauzēt</string>
-    <string name="playing_queue">Atskaņošanas rinda</string>
+    <string name="playing_queue">Saraksts tiek atskaņots</string>
     <string name="trends">Trendi</string>
     <string name="bookmarks_empty">Nav nevienas grāmatzīmes!</string>
     <string name="double_tap_seek">Pieskarieties divreiz, lai meklētu</string>
@@ -465,4 +465,13 @@
     <string name="download_channel_description">Rādīt paziņojumu, lejupielādējot video.</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d video</string>
     <string name="subscriberAndVideoCounts">%1$s abonenti • %2$d video</string>
+    <string name="failed_fetching_instances">Nevarēja izgūt pieejamos gadījumus.</string>
+    <string name="sb_markers_summary">Atzīmējiet segmentus laika joslā.</string>
+    <string name="audio_track">Audio celiņš</string>
+    <string name="alternative_pip_controls_summary">Rādīt tikai audio un izlaist vadīklas attēlā attēlā, nevis uz priekšu un atpakaļ</string>
+    <string name="autoplay_countdown">Automātiskās atskaņošanas atpakaļskaitīšana</string>
+    <string name="lbry_hls">LBRY HLS</string>
+    <string name="lbry_hls_summary">Straumēšanai izmantojiet LBRY HLS, ja iespējams.</string>
+    <string name="featured">Piedāvātie</string>
+    <string name="alternative_pip_controls">Alternatīvas PiP vadīklas</string>
 </resources>
