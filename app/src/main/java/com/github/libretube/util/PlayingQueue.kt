@@ -46,19 +46,10 @@ object PlayingQueue {
         )
     }
 
-    fun getNext(): String? {
-        try {
-            return queue[currentIndex() + 1].url?.toID()
-        } catch (e: Exception) {
-            Log.e("queue ended", e.toString())
-        }
-        if (repeatQueue) return queue.firstOrNull()?.url?.toID()
-        return null
-    }
+    fun getNext(): String? = queue.getOrNull(currentIndex() + 1)?.url?.toID()
+        ?: queue.firstOrNull()?.url?.toID()?.takeIf { repeatQueue }
 
-    fun getPrev(): String? {
-        return if (currentIndex() > 0) queue[currentIndex() - 1].url?.toID() else null
-    }
+    fun getPrev(): String? = queue.getOrNull(currentIndex() - 1)?.url?.toID()
 
     fun hasPrev(): Boolean {
         return currentIndex() > 0
@@ -84,15 +75,9 @@ object PlayingQueue {
 
     fun size() = queue.size
 
-    fun currentIndex(): Int {
-        return try {
-            queue.indexOf(
-                queue.first { it.url?.toID() == currentStream?.url?.toID() }
-            )
-        } catch (e: Exception) {
-            0
-        }
-    }
+    fun currentIndex(): Int = queue.indexOfFirst {
+        it.url?.toID() == currentStream?.url?.toID()
+    }.takeIf { it >= 0 } ?: 0
 
     fun getCurrent(): StreamItem? = currentStream
 
@@ -131,7 +116,7 @@ object PlayingQueue {
         scope.launch {
             try {
                 val playlist = PlaylistsHelper.getPlaylist(playlistId)
-                add(*playlist.relatedStreams.orEmpty().toTypedArray())
+                add(*playlist.relatedStreams.toTypedArray())
                 updateCurrent(newCurrentStream)
                 if (playlist.nextpage == null) return@launch
                 fetchMoreFromPlaylist(playlistId, playlist.nextpage)
