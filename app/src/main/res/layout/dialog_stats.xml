@@ -1,47 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/CustomDialogTextInputLayout"
-        android:layout_marginTop="10dp"
-        android:hint="@string/video_id">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/video_id"
-            style="@style/DisabledTextInput" />
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/CustomDialogTextInputLayout"
+            android:layout_marginTop="10dp"
+            android:hint="@string/video_id">
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/CustomDialogTextInputLayout"
-        android:layout_marginTop="10dp"
-        android:hint="@string/audio">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/video_id"
+                style="@style/DisabledTextInput" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/audio_info"
-            style="@style/DisabledTextInput" />
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/CustomDialogTextInputLayout"
+            android:layout_marginTop="10dp"
+            android:hint="@string/audio">
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/CustomDialogTextInputLayout"
-        android:layout_marginTop="10dp"
-        android:hint="@string/video">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/audio_info"
+                style="@style/DisabledTextInput" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/video_info"
-            style="@style/DisabledTextInput" />
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/CustomDialogTextInputLayout"
+            android:layout_marginTop="10dp"
+            android:hint="@string/video">
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/CustomDialogTextInputLayout"
-        android:layout_marginTop="10dp"
-        android:hint="@string/quality">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/video_info"
+                style="@style/DisabledTextInput" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/video_quality"
-            style="@style/DisabledTextInput" />
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/CustomDialogTextInputLayout"
+            android:layout_marginTop="10dp"
+            android:hint="@string/quality">
 
-</LinearLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/video_quality"
+                style="@style/DisabledTextInput" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+</ScrollView>

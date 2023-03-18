@@ -463,4 +463,6 @@
     <string name="clear_bookmarks">Dzēst grāmatzīmes</string>
     <string name="sleep_timer">Miega taimeris</string>
     <string name="download_channel_description">Rādīt paziņojumu, lejupielādējot video.</string>
+    <string name="uploaderAndVideoCount">%1$s • %2$d video</string>
+    <string name="subscriberAndVideoCounts">%1$s abonenti • %2$d video</string>
 </resources>

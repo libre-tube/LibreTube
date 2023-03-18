@@ -3,6 +3,7 @@ package com.github.libretube.api.obj
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
 import com.github.libretube.helpers.ProxyHelper
+import java.nio.file.Paths
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
 
@@ -34,6 +35,7 @@ data class Streams(
     val uploaderSubscriberCount: Long = 0,
     val previewFrames: List<PreviewFrames> = emptyList()
 ) {
+    @Suppress("NewApi") // The Paths class is desugared.
     fun toDownloadItems(
         videoId: String,
         fileName: String,
@@ -54,7 +56,7 @@ data class Streams(
                     type = FileType.VIDEO,
                     videoId = videoId,
                     fileName = stream?.getQualityString(fileName).orEmpty(),
-                    path = "",
+                    path = Paths.get(""),
                     url = stream?.url?.let { ProxyHelper.unwrapIfEnabled(it) },
                     format = videoFormat,
                     quality = videoQuality
@@ -71,7 +73,7 @@ data class Streams(
                     type = FileType.AUDIO,
                     videoId = videoId,
                     fileName = stream?.getQualityString(fileName).orEmpty(),
-                    path = "",
+                    path = Paths.get(""),
                     url = stream?.url?.let { ProxyHelper.unwrapIfEnabled(it) },
                     format = audioFormat,
                     quality = audioQuality
@@ -85,7 +87,7 @@ data class Streams(
                     type = FileType.SUBTITLE,
                     videoId = videoId,
                     fileName = "${fileName}_$subtitleCode.srt",
-                    path = "",
+                    path = Paths.get(""),
                     url = subtitles.find {
                         it.code == subtitleCode
                     }?.url?.let { ProxyHelper.unwrapIfEnabled(it) }
