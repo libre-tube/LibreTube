@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="choose_quality_dialog">품질</string>
+    <string name="choose_quality_dialog">화질</string>
     <string name="search_hint">검색</string>
     <string name="subscribe">구독</string>
     <string name="unsubscribe">구독 취소</string>
@@ -467,4 +467,5 @@
         <item quantity="other">%d주 전</item>
     </plurals>
     <string name="resume">재개하다</string>
+    <string name="forward">빨리 감기</string>
 </resources>

@@ -463,4 +463,7 @@
     </plurals>
     <string name="subscriberAndVideoCounts">%1$s 訂閱者 • %2$d 個視頻</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d 個視頻</string>
+    <string name="lbry_hls_summary">如果可用，請使用 LBRY HLS 進行流式傳輸。</string>
+    <string name="lbry_hls">LBRY HLS</string>
+    <string name="replies">回复</string>
 </resources>
