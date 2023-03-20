@@ -64,8 +64,10 @@ object TextUtils {
     }
 
     fun formatRelativeDate(context: Context, unixTime: Long): CharSequence {
+        // TODO: Use LocalDate.ofInstant() when it is available in SDK 34.
         val date = LocalDateTime.ofInstant(Instant.ofEpochMilli(unixTime), ZoneId.systemDefault())
-        val now = LocalDateTime.now()
+            .toLocalDate()
+        val now = java.time.LocalDate.now()
         val weeks = date.until(now, ChronoUnit.WEEKS)
 
         return if (weeks > 0) {
