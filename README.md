@@ -152,6 +152,6 @@ LibreTube is Free Software: You can use, study, share and modify it at your will
 
 <div align="right">
 <table><td>
-<a href="#start-of-content">↥ Scroll to top</a>
+<a href="#start-of-content"> 👆 Scroll to top</a>
 </td></table>
 </div>
