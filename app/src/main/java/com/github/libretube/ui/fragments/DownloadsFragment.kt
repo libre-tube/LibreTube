@@ -181,7 +181,7 @@ class DownloadsFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        if (serviceConnection.isBound) {
+        runCatching {
             context?.unbindService(serviceConnection)
         }
     }
