@@ -373,6 +373,11 @@ internal class CustomExoPlayerView(
         binding.exoTitle.visibility = visibility
         binding.playPauseBTN.visibility = visibility
 
+        if (!PlayerHelper.doubleTapToSeek) {
+            binding.rewindBTN.visibility = visibility
+            binding.forwardBTN.visibility = visibility
+        }
+
         // hide the dimming background overlay if locked
         binding.exoControlsBackground.setBackgroundColor(
             if (isLocked) {
