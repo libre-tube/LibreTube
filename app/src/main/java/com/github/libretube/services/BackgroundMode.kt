@@ -29,6 +29,7 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.checkForSegments
 import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
+import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayingQueue
 import com.google.android.exoplayer2.ExoPlayer
@@ -304,7 +305,7 @@ class BackgroundMode : LifecycleService() {
         }
 
         val mediaItem = MediaItem.Builder()
-            .setUri(uri)
+            .setUri(ProxyHelper.rewriteUrl(uri))
             .build()
         player?.setMediaItem(mediaItem)
     }

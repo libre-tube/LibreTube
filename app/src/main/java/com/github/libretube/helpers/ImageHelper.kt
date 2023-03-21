@@ -53,7 +53,9 @@ object ImageHelper {
      */
     fun loadImage(url: String?, target: ImageView) {
         // only load the image if the data saver mode is disabled
-        if (!DataSaverMode.isEnabled(target.context)) target.load(url, imageLoader)
+        if (DataSaverMode.isEnabled(target.context) || url == null) return
+        val urlToLoad = ProxyHelper.unwrapIfEnabled(url)
+        target.load(urlToLoad, imageLoader)
     }
 
     fun downloadImage(context: Context, url: String, path: Path) {
