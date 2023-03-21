@@ -584,6 +584,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
             saveWatchPosition()
 
+            PlayingQueue.clear()
+
             // release the player
             nowPlayingNotification.destroySelfAndPlayer()
 
@@ -644,18 +646,18 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         // reset the comments to become reloaded later
         commentsViewModel.reset()
 
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launch(Dispatchers.IO) {
             streams = try {
                 RetrofitInstance.api.getStreams(videoId!!)
             } catch (e: IOException) {
                 Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_LONG).show()
-                return@launchWhenCreated
+                return@launch
             } catch (e: HttpException) {
                 val errorMessage = e.response()?.errorBody()?.string()?.runCatching {
                     JsonHelper.json.decodeFromString<Message>(this).message
                 }?.getOrNull() ?: context?.getString(R.string.server_error) ?: ""
                 Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
-                return@launchWhenCreated
+                return@launch
             }
 
             if (PlayingQueue.isEmpty()) {
