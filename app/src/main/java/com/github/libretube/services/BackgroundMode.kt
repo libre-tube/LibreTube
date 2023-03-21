@@ -364,7 +364,8 @@ class BackgroundMode : LifecycleService() {
      * destroy the [BackgroundMode] foreground service
      */
     override fun onDestroy() {
-        // clear the playing queue
+        // clear and reset the playing queue
+        PlayingQueue.clear()
         PlayingQueue.resetToDefaults()
 
         if (this::nowPlayingNotification.isInitialized) nowPlayingNotification.destroySelfAndPlayer()
