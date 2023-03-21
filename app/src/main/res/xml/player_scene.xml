@@ -34,34 +34,6 @@
         <Constraint
             android:id="@+id/player"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            motion:layout_constraintBottom_toBottomOf="@id/main_container"
-            motion:layout_constraintStart_toStartOf="@id/main_container"
-            motion:layout_constraintTop_toTopOf="@id/main_container" />
-        <Constraint
-            android:id="@+id/player"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            motion:layout_constraintBottom_toBottomOf="@id/main_container"
-            motion:layout_constraintStart_toStartOf="@id/main_container"
-            motion:layout_constraintTop_toTopOf="@id/main_container" />
-        <Constraint
-            android:id="@+id/player"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            motion:layout_constraintBottom_toBottomOf="@id/main_container"
-            motion:layout_constraintStart_toStartOf="@id/main_container"
-            motion:layout_constraintTop_toTopOf="@id/main_container" />
-        <Constraint
-            android:id="@+id/player"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            motion:layout_constraintBottom_toBottomOf="@id/main_container"
-            motion:layout_constraintStart_toStartOf="@id/main_container"
-            motion:layout_constraintTop_toTopOf="@id/main_container" />
-        <Constraint
-            android:id="@+id/player"
-            android:layout_width="match_parent"
             android:layout_height="0dp"
             motion:layout_constraintBottom_toBottomOf="@id/main_container"
             motion:layout_constraintStart_toStartOf="@id/main_container"

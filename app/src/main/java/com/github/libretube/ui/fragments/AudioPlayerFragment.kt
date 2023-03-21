@@ -13,7 +13,10 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.commit
 import androidx.navigation.fragment.findNavController
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
@@ -31,14 +34,22 @@ import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.interfaces.AudioPlayerOptions
 import com.github.libretube.ui.listeners.AudioPlayerThumbnailListener
+import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.util.PlayingQueue
+import kotlin.math.abs
 
 class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     private lateinit var binding: FragmentAudioPlayerBinding
     private lateinit var audioHelper: AudioHelper
+    private val mainActivity get() = context as MainActivity
+    private val viewModel: PlayerViewModel by activityViewModels()
+
+    // for the transition
+    private var sId: Int = 0
+    private var eId: Int = 0
 
     private val onTrackChangeListener: (StreamItem) -> Unit = {
         updateStreamInfo()
@@ -57,16 +68,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             handleServiceConnection()
         }
 
-        override fun onServiceDisconnected(arg0: ComponentName) {
-            val mainActivity = activity as MainActivity
-            if (mainActivity.navController.currentDestination?.id == R.id.audioPlayerFragment) {
-                mainActivity.navController.popBackStack()
-            } else {
-                mainActivity.navController.backQueue.removeIf {
-                    it.destination.id == R.id.audioPlayerFragment
-                }
-            }
-        }
+        override fun onServiceDisconnected(arg0: ComponentName) {}
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -90,6 +92,8 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        initializeTransitionLayout()
 
         // select the title TV in order for it to automatically scroll
         binding.title.isSelected = true
@@ -142,7 +146,13 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         binding.close.setOnClickListener {
             activity?.unbindService(connection)
             BackgroundHelper.stopBackgroundPlay(requireContext())
-            findNavController().popBackStack()
+            killFragment()
+        }
+
+        binding.miniPlayerClose.setOnClickListener {
+            activity?.unbindService(connection)
+            BackgroundHelper.stopBackgroundPlay(requireContext())
+            killFragment()
         }
 
         val listener = AudioPlayerThumbnailListener(requireContext(), this)
@@ -155,6 +165,10 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             if (isPaused) playerService?.play() else playerService?.pause()
         }
 
+        binding.miniPlayerPause.setOnClickListener {
+            if (isPaused) playerService?.play() else playerService?.pause()
+        }
+
         // load the stream info into the UI
         updateStreamInfo()
 
@@ -162,6 +176,63 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         binding.volumeProgressBar.let { bar ->
             bar.progress = audioHelper.getVolumeWithScale(bar.max)
         }
+    }
+
+    private fun killFragment() {
+        viewModel.isFullscreen.value = false
+        binding.playerMotionLayout.transitionToEnd()
+        mainActivity.supportFragmentManager.commit {
+            remove(this@AudioPlayerFragment)
+        }
+
+        onDestroy()
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initializeTransitionLayout() {
+        mainActivity.binding.container.visibility = View.VISIBLE
+        val mainMotionLayout = mainActivity.binding.mainMotionLayout
+
+        binding.playerMotionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
+            override fun onTransitionStarted(
+                motionLayout: MotionLayout?,
+                startId: Int,
+                endId: Int
+            ) {
+            }
+
+            override fun onTransitionChange(
+                motionLayout: MotionLayout?,
+                startId: Int,
+                endId: Int,
+                progress: Float
+            ) {
+                mainMotionLayout.progress = abs(progress)
+                eId = endId
+                sId = startId
+            }
+
+            override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
+                if (currentId == eId) {
+                    viewModel.isMiniPlayerVisible.value = true
+                    mainMotionLayout.progress = 1F
+                } else if (currentId == sId) {
+                    viewModel.isMiniPlayerVisible.value = false
+                    mainMotionLayout.progress = 0F
+                }
+            }
+
+            override fun onTransitionTrigger(
+                MotionLayout: MotionLayout?,
+                triggerId: Int,
+                positive: Boolean,
+                progress: Float
+            ) {
+            }
+        })
+
+        binding.playerMotionLayout.progress = 1.toFloat()
+        binding.playerMotionLayout.transitionToStart()
     }
 
     /**
@@ -172,6 +243,8 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         current ?: return
 
         binding.title.text = current.title
+        binding.miniPlayerTitle.text = current.title
+
         binding.uploader.text = current.uploaderName
         binding.uploader.setOnClickListener {
             NavigationHelper.navigateChannel(requireContext(), current.uploaderUrl?.toID())
@@ -188,6 +261,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
 
         ImageHelper.getAsync(requireContext(), thumbnailUrl) {
             binding.thumbnail.setImageBitmap(it)
+            binding.miniPlayerThumbnail.setImageBitmap(it)
             binding.thumbnail.visibility = View.VISIBLE
             binding.progress.visibility = View.GONE
         }
@@ -232,9 +306,9 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
 
     private fun handleServiceConnection() {
         playerService?.onIsPlayingChanged = { isPlaying ->
-            binding.playPause.setIconResource(
-                if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play
-            )
+            val iconResource = if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play
+            binding.playPause.setIconResource(iconResource)
+            binding.miniPlayerPause.setImageResource(iconResource)
             isPaused = !isPlaying
         }
         initializeSeekBar()

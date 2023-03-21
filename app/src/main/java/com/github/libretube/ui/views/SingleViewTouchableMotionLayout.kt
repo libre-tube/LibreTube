@@ -14,7 +14,7 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
     MotionLayout(context, attributeSet) {
 
     private val viewToDetectTouch by lazy {
-        findViewById<View>(R.id.main_container) // TODO move to Attributes
+        findViewById<View>(R.id.main_container) ?: findViewById(R.id.audio_player_container)
     }
     private val viewRect = Rect()
     private var touchStarted = false
