@@ -18,6 +18,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.ui.fragments.AudioPlayerFragment
 import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.views.SingleViewTouchableMotionLayout
 
@@ -117,7 +118,9 @@ object NavigationHelper {
      */
     fun startAudioPlayer(context: Context) {
         val activity = unwrap(context)
-        activity.navController.navigate(R.id.audioPlayerFragment)
+        activity.supportFragmentManager.commitNow {
+            replace<AudioPlayerFragment>(R.id.container)
+        }
     }
 
     /**

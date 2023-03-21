@@ -362,7 +362,7 @@ class MainActivity : BaseActivity() {
                 true
             }
             R.id.action_audio -> {
-                navController.navigate(R.id.audioPlayerFragment)
+                NavigationHelper.startAudioPlayer(this)
                 true
             }
             else -> super.onOptionsItemSelected(item)
