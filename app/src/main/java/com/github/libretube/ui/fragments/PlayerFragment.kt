@@ -478,10 +478,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             keepQueue = true,
             keepVideoPlayerAlive = true
         )
-        handler.postDelayed(500) {
-            NavigationHelper.startAudioPlayer(requireContext())
-            killPlayerFragment()
-        }
+        killPlayerFragment()
+        NavigationHelper.startAudioPlayer(requireContext())
     }
 
     private fun setFullscreen() {
