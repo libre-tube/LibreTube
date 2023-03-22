@@ -55,12 +55,9 @@ class AddToPlaylistDialog(
                 return@launchWhenCreated
             }
             if (response.isEmpty()) return@launchWhenCreated
-            val names = response.map { it.name }
+            val names = response.mapNotNull { it.name }
             val arrayAdapter =
-                ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, names)
-            arrayAdapter.setDropDownViewResource(
-                android.R.layout.simple_spinner_dropdown_item
-            )
+                ArrayAdapter(requireContext(), R.layout.dropdown_item, names)
             binding.playlistsSpinner.adapter = arrayAdapter
 
             // select the last used playlist
