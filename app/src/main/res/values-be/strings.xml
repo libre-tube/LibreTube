@@ -477,4 +477,6 @@
     <string name="all_caught_up">Вы ўсё праглядзелі</string>
     <string name="all_caught_up_summary">Вы бачылі ўсё новыя відэа</string>
     <string name="shuffle">Змяшаць</string>
+    <string name="disable_proxy">Выключыць проксі Piped</string>
+    <string name="disable_proxy_summary">Загружаць відэа і выявы напрамую з сервераў YouTube. Уключайце гэтую наладу толькі калі вы карыстаецеся VPN! Звярніце ўвагу, што гэта можа не спрацаваць з матэрыяламі з YT music.</string>
 </resources>
