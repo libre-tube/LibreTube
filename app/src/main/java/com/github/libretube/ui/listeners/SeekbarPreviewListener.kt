@@ -1,21 +1,22 @@
 package com.github.libretube.ui.listeners
 
 import android.graphics.Bitmap
+import android.text.format.DateUtils
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
-import android.widget.ImageView
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.math.MathUtils
 import androidx.core.view.updateLayoutParams
 import coil.request.ImageRequest
 import com.github.libretube.api.obj.PreviewFrames
+import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.obj.PreviewFrame
 import com.google.android.exoplayer2.ui.TimeBar
 
 class SeekbarPreviewListener(
     private val previewFrames: List<PreviewFrames>,
-    private val previewIv: ImageView,
+    private val playerBinding: ExoStyledPlayerControlViewBinding,
     private val duration: Long
 ) : TimeBar.OnScrubListener {
     private var moving = false
@@ -32,6 +33,7 @@ class SeekbarPreviewListener(
     override fun onScrubMove(timeBar: TimeBar, position: Long) {
         moving = true
 
+        playerBinding.seekbarPreviewPosition.text = DateUtils.formatElapsedTime(position / 1000)
         processPreview(position)
     }
 
@@ -41,14 +43,14 @@ class SeekbarPreviewListener(
     override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {
         moving = false
         // animate the disappearance of the preview image
-        previewIv.animate()
+        playerBinding.seekbarPreview.animate()
             .alpha(0f)
             .translationYBy(30f)
             .setDuration(200)
             .withEndAction {
-                previewIv.visibility = View.GONE
-                previewIv.translationY = previewIv.translationY - 30f
-                previewIv.alpha = 1f
+                playerBinding.seekbarPreview.visibility = View.GONE
+                playerBinding.seekbarPreview.translationY -= 30f
+                playerBinding.seekbarPreview.alpha = 1f
             }
             .start()
     }
@@ -62,13 +64,13 @@ class SeekbarPreviewListener(
         // update the offset of the preview image view
         updatePreviewX(position)
 
-        val request = ImageRequest.Builder(previewIv.context)
+        val request = ImageRequest.Builder(playerBinding.seekbarPreview.context)
             .data(previewFrame.previewUrl)
             .target {
                 if (!moving) return@target
                 val frame = cutOutBitmap(it.toBitmap(), previewFrame)
-                previewIv.setImageBitmap(frame)
-                previewIv.visibility = View.VISIBLE
+                playerBinding.seekbarPreviewImage.setImageBitmap(frame)
+                playerBinding.seekbarPreview.visibility = View.VISIBLE
             }
             .build()
 
@@ -116,13 +118,13 @@ class SeekbarPreviewListener(
      * Update the offset of the preview image to fit the current scrubber position
      */
     private fun updatePreviewX(position: Long) {
-        previewIv.updateLayoutParams<MarginLayoutParams> {
-            val parentWidth = (previewIv.parent as View).width
+        playerBinding.seekbarPreview.updateLayoutParams<MarginLayoutParams> {
+            val parentWidth = (playerBinding.seekbarPreview.parent as View).width
             // calculate the center-offset of the preview image view
             val offset = parentWidth * (position.toFloat() / duration.toFloat()) -
-                previewIv.width / 2
+                playerBinding.seekbarPreview.width / 2
             // normalize the offset to keep a minimum distance at left and right
-            val maxPadding = parentWidth - MIN_PADDING - previewIv.width
+            val maxPadding = parentWidth - MIN_PADDING - playerBinding.seekbarPreview.width
             marginStart = MathUtils.clamp(offset.toInt(), MIN_PADDING, maxPadding)
         }
     }
