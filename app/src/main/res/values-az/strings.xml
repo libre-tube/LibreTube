@@ -471,4 +471,6 @@
     <string name="lbry_hls_summary">Mövcuddursa, yayım üçün LBRY HLS istifadə et.</string>
     <string name="subscriberAndVideoCounts">%1$s abunəçi • %2$d video</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d video</string>
+    <string name="disable_proxy">Piped proksini bağla</string>
+    <string name="disable_proxy_summary">Videoları və şəkilləri birbaşa YouTube serverlərindən yüklə. Yalnız VPN istifadə edirsinizsə, seçimi aktivləşdirin! Qeyd edək ki, bu, YT musiqidəki məzmunla işləməyə bilər.</string>
 </resources>

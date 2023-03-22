@@ -477,4 +477,6 @@
     <string name="lbry_hls_summary">להשתמש ב־LBRY HLS להזרמה אם זמין.</string>
     <string name="subscriberAndVideoCounts">%1$s מנויים • %2$d סרטונים</string>
     <string name="uploaderAndVideoCount">%1$s • ‏%2$d סרטונים</string>
+    <string name="disable_proxy">השבתת המתווך של Piped</string>
+    <string name="disable_proxy_summary">טעינת סרטונים ותמונות ישירות מהשרתים של YouTube. יש להפעיל את האפשרות רק אם כבר יש לך VPN! נא לשים לב שזה עלול שלא לעבוד עם תוכן מ־YT Music.</string>
 </resources>
