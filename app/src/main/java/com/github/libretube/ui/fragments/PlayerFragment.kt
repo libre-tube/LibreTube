@@ -20,7 +20,9 @@ import android.text.format.DateUtils
 import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
 import android.util.Base64
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -36,7 +38,6 @@ import androidx.fragment.app.commit
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.libretube.R
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.JsonHelper
@@ -119,15 +120,13 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
 
-class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
-    val binding by viewBinding(FragmentPlayerBinding::bind)
-    private val playerBinding by viewBinding { it.binding.player.binding }
-    private val doubleTapOverlayBinding by viewBinding {
-        it.binding.doubleTapOverlay.binding
-    }
-    private val playerGestureControlsViewBinding by viewBinding {
-        it.binding.playerGestureControlsView.binding
-    }
+class PlayerFragment : Fragment(), OnlinePlayerOptions {
+    private var _binding: FragmentPlayerBinding? = null
+    val binding get() = _binding!!
+
+    private val playerBinding get() = binding.player.binding
+    private val doubleTapOverlayBinding get() = binding.doubleTapOverlay.binding
+    private val playerGestureControlsViewBinding get() = binding.playerGestureControlsView.binding
 
     private val viewModel: PlayerViewModel by activityViewModels()
     private val commentsViewModel: CommentsViewModel by activityViewModels()
@@ -234,6 +233,15 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             broadcastReceiver,
             IntentFilter(PlayerHelper.getIntentActon(requireContext()))
         )
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentPlayerBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -598,6 +606,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+
+        _binding = null
     }
 
     private fun disableAutoPiP() {
