@@ -17,7 +17,6 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
-import androidx.navigation.fragment.findNavController
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.FragmentAudioPlayerBinding
@@ -123,6 +122,8 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         }
 
         binding.openVideo.setOnClickListener {
+            BackgroundHelper.stopBackgroundPlay(requireContext())
+            killFragment()
             NavigationHelper.navigateVideo(
                 context = requireContext(),
                 videoId = PlayingQueue.getCurrent()?.url?.toID(),
@@ -130,8 +131,6 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
                 keepQueue = true,
                 forceVideo = true
             )
-            BackgroundHelper.stopBackgroundPlay(requireContext())
-            findNavController().popBackStack()
         }
 
         binding.share.setOnClickListener {
