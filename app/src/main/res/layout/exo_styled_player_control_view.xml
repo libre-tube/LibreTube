@@ -201,16 +201,40 @@
         android:layout_marginTop="10dp"
         android:orientation="vertical">
 
-        <com.google.android.material.imageview.ShapeableImageView
+        <LinearLayout
             android:id="@+id/seekbar_preview"
             android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:translationY="27dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:translationY="30dp"
             android:translationZ="1dp"
-            android:visibility="gone"
-            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+            android:visibility="gone">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/seekbar_preview_image"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:padding="5dp"
+                app:strokeWidth="0dp">
+
+                <TextView
+                    android:id="@+id/seekbar_preview_position"
+                    android:layout_width="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

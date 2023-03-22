@@ -1516,7 +1516,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playerBinding.exoProgress.addListener(
             SeekbarPreviewListener(
                 streams.previewFrames,
-                playerBinding.seekbarPreview,
+                playerBinding,
                 streams.duration * 1000
             )
         )
