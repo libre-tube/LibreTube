@@ -474,4 +474,6 @@
     <string name="lbry_hls_summary">Pro streamování použít LBRY HLS, pokud je k dispozici.</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d videí</string>
     <string name="subscriberAndVideoCounts">%1$s odběratelů • %2$d videí</string>
+    <string name="disable_proxy_summary">Načítat videa a obrázky přímo ze serverů YouTube. Tuto možnost povolte pouze v případě, že stejně používáte VPN! Upozorňujeme, že tato funkce nemusí fungovat u obsahu z YT Music.</string>
+    <string name="disable_proxy">Zakázat proxy přes Piped</string>
 </resources>
