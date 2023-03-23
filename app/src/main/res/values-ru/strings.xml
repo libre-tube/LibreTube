@@ -308,7 +308,7 @@
     <string name="push_channel_description">Показывать уведомление, когда появятся новые стримы.</string>
     <string name="sb_skip_manual_summary">Не пропускать отрывки автоматически, всегда спрашивать.</string>
     <string name="new_videos_badge_summary">Показывать значок, если появились новые видео.</string>
-    <string name="download_channel_name">Служба скачивания</string>
+    <string name="download_channel_name">Служба загрузки</string>
     <string name="sb_skip_manual">Ручной пропуск</string>
     <string name="background_channel_description">Показывать уведомление с кнопками для управления аудиоплеером.</string>
     <string name="skip_segment">Пропустить отрывок</string>
@@ -477,6 +477,6 @@
     <string name="lbry_hls_summary">Использовать LBRY HLS для трансляции, если доступно.</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d видео</string>
     <string name="subscriberAndVideoCounts">%1$s подписчиков • %2$d видео</string>
-    <string name="disable_proxy">Выключить прокси Piped</string>
-    <string name="disable_proxy_summary">Загружать видео и изображения напрямую с серверов YouTube. Включайте эту настройку только если вы используете VPN! Обратите внимание, что это может не сработать с материалами из YT music.</string>
+    <string name="disable_proxy">Отключить прокси Piped</string>
+    <string name="disable_proxy_summary">Загружать видео и изображения напрямую с серверов YouTube. Включайте эту опцию только при использовании VPN! Обратите внимание, что это может не сработать с контентом из YouTube Music.</string>
 </resources>
