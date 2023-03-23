@@ -468,4 +468,6 @@
     <string name="lbry_hls_summary">Gunakan LBRY HLS untuk saluran jika tersedia.</string>
     <string name="subscriberAndVideoCounts">%1$s pelanggan • %2$d video</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d video</string>
+    <string name="disable_proxy">Nonaktifkan proksi Piped</string>
+    <string name="disable_proxy_summary">Muat video dan gambar secara langsung dari server YouTube. Hanya aktifkan opsi ini jika Anda menggunakan VPN! Dicatat bahwa ini mungkin tidak bekerja dengan konten dari YT Music.</string>
 </resources>
