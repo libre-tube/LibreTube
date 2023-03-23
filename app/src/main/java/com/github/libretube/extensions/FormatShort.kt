@@ -1,24 +1,14 @@
 package com.github.libretube.extensions
 
-import java.math.BigDecimal
-import java.math.RoundingMode
+import kotlin.math.pow
 
-@Suppress("KotlinConstantConditions")
-fun Long?.formatShort(): String = when {
-    this == null -> (0).toString()
-    this < 1000 -> {
-        this.toString()
+fun Long?.formatShort(): String {
+    this ?: return (0).toString()
+    val units = arrayOf("", "K", "M", "B", "T")
+
+    for (i in units.size downTo 1) {
+        val step = 1000.0.pow(i.toDouble())
+        if (this > step) return String.format("%3.0f%s", this / step, units[i]).trim()
     }
-    this in (1000..999999) -> {
-        val decimal = BigDecimal(this / 1000).setScale(0, RoundingMode.HALF_EVEN)
-        decimal.toString() + "K"
-    }
-    this in (1000000..10000000) -> {
-        val decimal = BigDecimal(this / 1000000).setScale(0, RoundingMode.HALF_EVEN)
-        decimal.toString() + "M"
-    }
-    else -> {
-        val decimal = BigDecimal(this / 1000000).setScale(0, RoundingMode.HALF_EVEN)
-        decimal.toString() + "M"
-    }
+    return this.toString()
 }
