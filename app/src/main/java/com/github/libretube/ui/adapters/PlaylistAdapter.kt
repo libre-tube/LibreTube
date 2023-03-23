@@ -31,7 +31,7 @@ class PlaylistAdapter(
     private val playlistType: PlaylistType
 ) : RecyclerView.Adapter<PlaylistViewHolder>() {
 
-    var visibleCount = minOf(20, videoFeed.size)
+    private var visibleCount = minOf(20, videoFeed.size)
 
     override fun getItemCount(): Int {
         return when (playlistType) {

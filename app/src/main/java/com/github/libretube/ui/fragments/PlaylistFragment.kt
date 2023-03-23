@@ -9,6 +9,7 @@ import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -128,7 +129,9 @@ class PlaylistFragment : Fragment() {
 
             // show playlist options
             binding.optionsMenu.setOnClickListener {
-                PlaylistOptionsBottomSheet(playlistId!!, playlistName ?: "", playlistType).show(
+                PlaylistOptionsBottomSheet(playlistId!!, playlistName.orEmpty(), playlistType) {
+                    findNavController().popBackStack()
+                }.show(
                     childFragmentManager,
                     PlaylistOptionsBottomSheet::class.java.name
                 )
