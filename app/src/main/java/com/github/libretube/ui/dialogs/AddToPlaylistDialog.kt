@@ -6,7 +6,6 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
@@ -66,15 +65,13 @@ class AddToPlaylistDialog(
                     response.indexOfFirst { it.id == id }.takeIf { it >= 0 } ?: 0
                 )
             }
-            runOnUiThread {
-                binding.addToPlaylist.setOnClickListener {
-                    val index = binding.playlistsSpinner.selectedItemPosition
-                    viewModel.lastSelectedPlaylistId = response[index].id!!
-                    dialog?.hide()
-                    lifecycleScope.launch {
-                        addToPlaylist(response[index].id!!)
-                        dialog?.dismiss()
-                    }
+            binding.addToPlaylist.setOnClickListener {
+                val index = binding.playlistsSpinner.selectedItemPosition
+                viewModel.lastSelectedPlaylistId = response[index].id!!
+                dialog?.hide()
+                lifecycleScope.launch {
+                    addToPlaylist(response[index].id!!)
+                    dialog?.dismiss()
                 }
             }
         }
@@ -99,11 +96,5 @@ class AddToPlaylistDialog(
         appContext.toastFromMainThread(
             if (success) R.string.added_to_playlist else R.string.fail
         )
-    }
-
-    private fun Fragment?.runOnUiThread(action: () -> Unit) {
-        this ?: return
-        if (!isAdded) return // Fragment not attached to an Activity
-        activity?.runOnUiThread(action)
     }
 }
