@@ -88,12 +88,6 @@ class PlaylistAdapter(
                 }
             }
 
-            if (playlistType != PlaylistType.PUBLIC) {
-                deleteVideo.visibility = View.VISIBLE
-                deleteVideo.setOnClickListener {
-                    removeFromPlaylist(root.context, position)
-                }
-            }
             watchProgress.setWatchProgressLength(videoId, streamItem.duration)
         }
     }

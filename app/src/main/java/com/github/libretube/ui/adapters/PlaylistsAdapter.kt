@@ -10,7 +10,6 @@ import com.github.libretube.enums.PlaylistType
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.ui.base.BaseActivity
-import com.github.libretube.ui.dialogs.DeletePlaylistDialog
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.ui.viewholders.PlaylistsViewHolder
 
@@ -49,14 +48,6 @@ class PlaylistsAdapter(
 
             videoCount.text = playlist.videos.toString()
 
-            deletePlaylist.setOnClickListener {
-                DeletePlaylistDialog(playlist.id!!, playlistType) {
-                    onDelete(position, root.context as BaseActivity)
-                }.show(
-                    (root.context as BaseActivity).supportFragmentManager,
-                    null
-                )
-            }
             root.setOnClickListener {
                 NavigationHelper.navigatePlaylist(root.context, playlist.id, playlistType)
             }

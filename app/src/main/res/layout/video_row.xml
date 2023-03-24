@@ -76,7 +76,7 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:textAlignment="viewStart"
-        app:layout_constraintEnd_toStartOf="@id/delete_video"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/thumbnail_card"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -119,17 +119,5 @@
             android:maxLines="1" />
 
     </LinearLayout>
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/delete_video"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:padding="8dp"
-        android:src="@drawable/ic_delete"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
