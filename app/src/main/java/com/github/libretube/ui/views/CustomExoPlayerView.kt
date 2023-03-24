@@ -583,8 +583,8 @@ internal class CustomExoPlayerView(
         super.onConfigurationChanged(newConfig)
 
         // add a larger bottom margin to the time bar in landscape mode
-        val offset = when (newConfig?.orientation) {
-            Configuration.ORIENTATION_LANDSCAPE -> 20.dpToPx()
+        val offset = when {
+            playerViewModel?.isFullscreen?.value ?: (newConfig?.orientation == Configuration.ORIENTATION_LANDSCAPE) -> 20.dpToPx()
             else -> 10.dpToPx()
         }
 
