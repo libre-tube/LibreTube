@@ -349,7 +349,7 @@
     <string name="defaultIconLight">Standard hell</string>
     <string name="confirm_unsubscribing_summary">Zeige Bestätigungsdialog vor dem Deabonnieren.</string>
     <string name="confirm_unsubscribe">Bist du sicher, dass du %1$s deabbonieren möchtest\?</string>
-    <string name="local_playlists">Lokale Playlists</string>
+    <string name="local_playlists">Lokale Wiedergabelisten</string>
     <string name="play_all">Alles abspielen</string>
     <string name="playing_queue">Warteschlange wird abgespielt</string>
     <string name="queue">Warteschlange</string>
@@ -400,10 +400,10 @@
     <string name="double_tap_seek">Doppeltippen zum Suchen</string>
     <string name="all_caught_up">Du bist auf dem neuesten Stand</string>
     <string name="double_tap_seek_summary">Tippen Sie zweimal links oder rechts, um die Position des Players zurück- oder vorzuspulen.</string>
-    <string name="import_playlists">Playlists importieren</string>
-    <string name="export_playlists">Playlists exportieren</string>
-    <string name="app_backup">App-Backup</string>
-    <string name="backup_restore_summary">Import &amp; Export von Abonnements, Playlists, …</string>
+    <string name="import_playlists">Wiedergabelisten importieren</string>
+    <string name="export_playlists">Wiedergabelisten exportieren</string>
+    <string name="app_backup">App-Datensicherung</string>
+    <string name="backup_restore_summary">Importieren und Exportieren von Abonnements, Wiedergabelisten …</string>
     <string name="privacy_alert">Datenschutz-Warnung</string>
     <string name="proceed">Fortfahren</string>
     <string name="username_email">Mit einer nicht empfohlenen E-Mail-Adresse fortfahren\?</string>
