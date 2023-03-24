@@ -1,5 +1,6 @@
 package com.github.libretube.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -129,9 +130,18 @@ class PlaylistFragment : Fragment() {
 
             // show playlist options
             binding.optionsMenu.setOnClickListener {
-                PlaylistOptionsBottomSheet(playlistId!!, playlistName.orEmpty(), playlistType) {
-                    findNavController().popBackStack()
-                }.show(
+                PlaylistOptionsBottomSheet(
+                    playlistId = playlistId.orEmpty(),
+                    playlistName = playlistName.orEmpty(),
+                    playlistType = playlistType,
+                    onDelete = {
+                        findNavController().popBackStack()
+                    },
+                    onRename = {
+                        binding.playlistName.text = it
+                        playlistName = it
+                    }
+                ).show(
                     childFragmentManager,
                     PlaylistOptionsBottomSheet::class.java.name
                 )
@@ -258,6 +268,7 @@ class PlaylistFragment : Fragment() {
         }
     }
 
+    @SuppressLint("StringFormatInvalid", "StringFormatMatches")
     private fun getChannelAndVideoString(playlist: Playlist, count: Int): String {
         return playlist.uploader?.let {
             getString(R.string.uploaderAndVideoCount, it, count)
