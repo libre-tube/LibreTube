@@ -20,7 +20,8 @@ import kotlinx.coroutines.withContext
 
 class RenamePlaylistDialog(
     private val playlistId: String,
-    private val currentPlaylistName: String
+    private val currentPlaylistName: String,
+    private val onSuccess: (String) -> Unit
 ) : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogTextPreferenceBinding.inflate(layoutInflater)
@@ -36,20 +37,20 @@ class RenamePlaylistDialog(
             .show()
             .apply {
                 getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
-                    val input = binding.input.text?.toString()
-                    if (input.isNullOrEmpty()) {
+                    val newPlaylistName = binding.input.text?.toString()
+                    if (newPlaylistName.isNullOrEmpty()) {
                         Toast.makeText(context, R.string.emptyPlaylistName, Toast.LENGTH_SHORT)
                             .show()
                         return@setOnClickListener
                     }
-                    if (input == currentPlaylistName) return@setOnClickListener
+                    if (newPlaylistName == currentPlaylistName) return@setOnClickListener
                     val appContext = requireContext().applicationContext
 
                     lifecycleScope.launch {
                         requireDialog().hide()
                         val success = try {
                             withContext(Dispatchers.IO) {
-                                PlaylistsHelper.renamePlaylist(playlistId, input)
+                                PlaylistsHelper.renamePlaylist(playlistId, newPlaylistName)
                             }
                         } catch (e: Exception) {
                             Log.e(TAG(), e.toString())
@@ -58,6 +59,7 @@ class RenamePlaylistDialog(
                         }
                         if (success) {
                             appContext.toastFromMainThread(R.string.success)
+                            onSuccess.invoke(newPlaylistName)
                         } else {
                             appContext.toastFromMainThread(R.string.server_error)
                         }

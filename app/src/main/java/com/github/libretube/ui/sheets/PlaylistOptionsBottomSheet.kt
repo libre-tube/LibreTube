@@ -22,6 +22,7 @@ class PlaylistOptionsBottomSheet(
     private val playlistId: String,
     private val playlistName: String,
     private val playlistType: PlaylistType,
+    private val onRename: (newName: String) -> Unit = {},
     private val onDelete: () -> Unit = {}
 ) : BaseBottomSheet() {
     private val shareData = ShareData(currentPlaylist = playlistName)
@@ -86,7 +87,7 @@ class PlaylistOptionsBottomSheet(
                     }.show(parentFragmentManager, null)
                 }
                 getString(R.string.renamePlaylist) -> {
-                    RenamePlaylistDialog(playlistId, playlistName)
+                    RenamePlaylistDialog(playlistId, playlistName, onRename)
                         .show(parentFragmentManager, null)
                 }
                 else -> {

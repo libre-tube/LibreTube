@@ -68,6 +68,10 @@ class PlaylistsAdapter(
                     playlistType = playlistType,
                     onDelete = {
                         onDelete(position, root.context as BaseActivity)
+                    },
+                    onRename = {
+                        playlistTitle.text = it
+                        playlist.name = it
                     }
                 )
                 playlistOptionsDialog.show(
