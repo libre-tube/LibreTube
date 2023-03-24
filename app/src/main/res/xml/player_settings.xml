@@ -166,6 +166,12 @@
             app:key="autoplay_countdown"
             app:title="@string/autoplay_countdown" />
 
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_fullscreen"
+            android:title="@string/auto_fullscreen_shorts"
+            app:key="auto_fullscreen_shorts" />
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/background_mode">

@@ -25,7 +25,6 @@ import com.google.android.exoplayer2.LoadControl
 import com.google.android.exoplayer2.PlaybackParameters
 import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
-import com.google.android.exoplayer2.video.VideoSize
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 
@@ -152,7 +151,7 @@ object PlayerHelper {
         return categories
     }
 
-    fun getOrientation(videoSize: VideoSize): Int {
+    fun getOrientation(videoWidth: Int, videoHeight: Int): Int {
         val fullscreenOrientationPref = PreferenceHelper.getString(
             PreferenceKeys.FULLSCREEN_ORIENTATION,
             "ratio"
@@ -161,7 +160,7 @@ object PlayerHelper {
         return when (fullscreenOrientationPref) {
             "ratio" -> {
                 // probably a youtube shorts video
-                if (videoSize.height > videoSize.width) {
+                if (videoHeight > videoWidth) {
                     ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
                 } // a video with normal aspect ratio
                 else {

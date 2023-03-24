@@ -455,7 +455,7 @@
     <string name="lbry_hls_summary">Use LBRY HLS for streaming if available.</string>
     <string name="disable_proxy">Disable Piped proxy</string>
     <string name="disable_proxy_summary">Load videos and images directly from YouTube\'s servers. Only enable the option if you use a VPN anyways! Note that this might not work with content from YT music.</string>
-
+    <string name="auto_fullscreen_shorts">Auto fullscreen on short videos</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

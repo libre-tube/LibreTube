@@ -494,8 +494,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playerBinding.exoTitle.visibility = View.VISIBLE
 
         if (!PlayerHelper.autoRotationEnabled) {
+            val height = streams.videoStreams.firstOrNull()?.height ?: exoPlayer.videoSize.height
+            val width = streams.videoStreams.firstOrNull()?.width ?: exoPlayer.videoSize.width
+
             // different orientations of the video are only available when auto rotation is disabled
-            val orientation = PlayerHelper.getOrientation(exoPlayer.videoSize)
+            val orientation = PlayerHelper.getOrientation(width, height)
             mainActivity.requestedOrientation = orientation
         }
 
@@ -683,6 +686,17 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 }
             } else {
                 PlayingQueue.updateCurrent(streams.toStreamItem(videoId!!))
+            }
+
+            if (PreferenceHelper.getBoolean(PreferenceKeys.AUTO_FULLSCREEN_SHORTS, false)) {
+                val videoStream = streams.videoStreams.firstOrNull()
+                if (PlayingQueue.getCurrent()?.isShort == true ||
+                    (videoStream?.height ?: 0) > (videoStream?.width ?: 0)
+                ) {
+                    withContext(Dispatchers.Main) {
+                        setFullscreen()
+                    }
+                }
             }
 
             PlayingQueue.setOnQueueTapListener { streamItem ->

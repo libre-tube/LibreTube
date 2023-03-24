@@ -63,7 +63,10 @@ class OfflinePlayerActivity : BaseActivity() {
         initializePlayer()
         playVideo()
 
-        requestedOrientation = PlayerHelper.getOrientation(player.videoSize)
+        requestedOrientation = PlayerHelper.getOrientation(
+            player.videoSize.width,
+            player.videoSize.height
+        )
     }
 
     private fun initializePlayer() {
