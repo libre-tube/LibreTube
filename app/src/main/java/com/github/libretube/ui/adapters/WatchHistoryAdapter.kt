@@ -1,7 +1,6 @@
 package com.github.libretube.ui.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.VideoRowBinding
@@ -23,7 +22,7 @@ class WatchHistoryAdapter(
 ) :
     RecyclerView.Adapter<WatchHistoryViewHolder>() {
 
-    var visibleCount = minOf(10, watchHistory.size)
+    private var visibleCount = minOf(10, watchHistory.size)
 
     override fun getItemCount(): Int = visibleCount
 
@@ -63,11 +62,6 @@ class WatchHistoryAdapter(
 
             channelImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, video.uploaderUrl)
-            }
-
-            deleteVideo.visibility = View.VISIBLE
-            deleteVideo.setOnClickListener {
-                removeFromWatchHistory(position)
             }
 
             root.setOnClickListener {

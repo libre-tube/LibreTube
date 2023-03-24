@@ -76,10 +76,9 @@ class PlaylistBookmarkAdapter(
             playlistTitle.text = bookmark.playlistName
             playlistDescription.text = bookmark.uploader
 
-            deletePlaylist.setImageResource(R.drawable.ic_bookmark)
-            deletePlaylist.setOnClickListener {
+            bookmarkPlaylist.setOnClickListener {
                 isBookmarked = !isBookmarked
-                deletePlaylist.setImageResource(
+                bookmarkPlaylist.setImageResource(
                     if (isBookmarked) R.drawable.ic_bookmark else R.drawable.ic_bookmark_outlined
                 )
                 CoroutineScope(Dispatchers.IO).launch {
@@ -91,8 +90,7 @@ class PlaylistBookmarkAdapter(
                     }
                 }
             }
-
-            deletePlaylist.visibility = View.VISIBLE
+            bookmarkPlaylist.visibility = View.VISIBLE
 
             root.setOnClickListener {
                 NavigationHelper.navigatePlaylist(

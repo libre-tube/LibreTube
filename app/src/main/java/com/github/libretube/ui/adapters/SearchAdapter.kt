@@ -1,7 +1,6 @@
 package com.github.libretube.ui.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -141,7 +140,7 @@ class SearchAdapter : ListAdapter<ContentItem, SearchViewHolder>(SearchCallback)
             root.setOnClickListener {
                 NavigationHelper.navigatePlaylist(root.context, item.url, PlaylistType.PUBLIC)
             }
-            deletePlaylist.visibility = View.GONE
+
             root.setOnLongClickListener {
                 val playlistId = item.url.toID()
                 val playlistName = item.name!!

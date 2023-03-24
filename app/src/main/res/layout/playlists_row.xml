@@ -67,7 +67,7 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/delete_playlist"
+        app:layout_constraintEnd_toStartOf="@+id/bookmark_playlist"
         app:layout_constraintStart_toEndOf="@+id/card_playlist_thumbnail"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -80,17 +80,18 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@id/delete_playlist"
+        app:layout_constraintEnd_toStartOf="@id/bookmark_playlist"
         app:layout_constraintStart_toEndOf="@+id/card_playlist_thumbnail"
         app:layout_constraintTop_toBottomOf="@+id/playlist_title" />
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/delete_playlist"
+        android:id="@+id/bookmark_playlist"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:padding="8dp"
-        android:src="@drawable/ic_delete"
+        android:src="@drawable/ic_bookmark"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
