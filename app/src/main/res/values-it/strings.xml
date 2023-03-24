@@ -402,13 +402,13 @@
     <string name="all_caught_up_summary">Hai visto tutti i video nuovi</string>
     <string name="export_playlists">Esporta playlist</string>
     <string name="app_backup">Backup dell\'app</string>
-    <string name="backup_restore_summary">Importa ed esporta iscrizioni, playlist, …</string>
+    <string name="backup_restore_summary">Importa ed esporta iscrizioni, playlist…</string>
     <string name="exportsuccess">Esportato.</string>
     <string name="privacy_alert">Avviso sulla privacy</string>
     <string name="pinch_control">Controllo pinch</string>
     <string name="pinch_control_summary">Usa il pinch to zoom per ingrandire.</string>
     <string name="import_playlists">Importa playlist</string>
-    <string name="username_email">Procedere con un indirizzo email che non è consigliato\?</string>
+    <string name="username_email">Procedere con un indirizzo e-mail che non è consigliato\?</string>
     <string name="theme_monochrome">Monocromatico minimalista</string>
     <string name="proceed">Procedi</string>
     <string name="play_latest_videos">Riproduci i video più recenti</string>
