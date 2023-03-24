@@ -1,0 +1,6 @@
+* Audio mini player
+* Option to disable Piped proxy
+* Current time display within the seekbar preview
+* Option for auto fullscreen on shorts
+* Selectable comments text
+* Hide button to delete playlist and playlist videos
