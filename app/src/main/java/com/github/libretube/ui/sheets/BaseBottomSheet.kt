@@ -38,7 +38,9 @@ open class BaseBottomSheet : ExpandedBottomSheet() {
             lifecycleScope.launch {
                 dialog?.hide()
                 listener?.invoke(index)
-                dismiss()
+                runCatching {
+                    dismiss()
+                }
             }
         }
     }
