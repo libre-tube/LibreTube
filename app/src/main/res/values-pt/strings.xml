@@ -476,4 +476,5 @@
     <string name="subscriberAndVideoCounts">%1$s Subscritores • %2$d vídeos</string>
     <string name="disable_proxy">Desativar o Piped proxy</string>
     <string name="disable_proxy_summary">Carregar vídeos e imagens diretamente dos servidores do YouTube. Só ative a opção se utilizar uma VPN de qualquer forma! Note que isto pode não funcionar com conteúdo de música YT.</string>
+    <string name="auto_fullscreen_shorts">Ecrã completo automático em vídeos curtos</string>
 </resources>
