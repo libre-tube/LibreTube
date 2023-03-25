@@ -479,4 +479,5 @@
     <string name="shuffle">Змяшаць</string>
     <string name="disable_proxy">Выключыць проксі Piped</string>
     <string name="disable_proxy_summary">Загружаць відэа і выявы напрамую з сервераў YouTube. Уключайце гэтую наладу толькі калі вы карыстаецеся VPN! Звярніце ўвагу, што гэта можа не спрацаваць з матэрыяламі з YT music.</string>
+    <string name="auto_fullscreen_shorts">Аўтаматычны поўнаэкранны рэжым для кароткіх відэа</string>
 </resources>
