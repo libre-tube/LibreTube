@@ -471,4 +471,7 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d video</string>
     <string name="subscriberAndVideoCounts">%1$s abone • %2$d video</string>
     <string name="lbry_hls_summary">Mevcut ise video akışı için LBRY HLS kullan.</string>
+    <string name="disable_proxy">Piped proxy\'yi devre dışı bırak</string>
+    <string name="auto_fullscreen_shorts">Kısa videolar için otomatik tam ekran</string>
+    <string name="disable_proxy_summary">Videoları ve resimleri doğrudan YouTube sunucularından yükleyin. Seçeneği yalnızca yine de bir VPN kullanıyorsanız etkinleştirin! Bunun YT müzik içeriğiyle çalışmayabileceğini unutmayın.</string>
 </resources>
