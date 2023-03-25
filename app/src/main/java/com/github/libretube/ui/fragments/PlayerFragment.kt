@@ -1183,13 +1183,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         // enable the chapters dialog in the player
         val titles = chapters.map { chapter ->
-            "(${chapter.start?.let { DateUtils.formatElapsedTime(it) }}) ${chapter.title}"
+            "(${DateUtils.formatElapsedTime(chapter.start)}) ${chapter.title}"
         }
         playerBinding.chapterLL.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.chapters)
                 .setItems(titles.toTypedArray()) { _, index ->
-                    exoPlayer.seekTo(chapters[index].start!! * 1000)
+                    exoPlayer.seekTo(chapters[index].start * 1000)
                 }
                 .show()
         }
@@ -1206,7 +1206,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         binding.player.postDelayed(this::setCurrentChapterName, 100)
 
         val chapterIndex = getCurrentChapterIndex() ?: return
-        val chapterName = chapters[chapterIndex].title?.trim()
+        val chapterName = chapters[chapterIndex].title.trim()
 
         // change the chapter name textView text to the chapterName
         if (chapterName != playerBinding.chapterName.text) {
@@ -1222,7 +1222,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      */
     private fun getCurrentChapterIndex(): Int? {
         val currentPosition = exoPlayer.currentPosition / 1000
-        return chapters.indexOfLast { currentPosition >= it.start!! }.takeIf { it >= 0 }
+        return chapters.indexOfLast { currentPosition >= it.start }.takeIf { it >= 0 }
     }
 
     private fun setMediaSource(uri: Uri, mimeType: String) {

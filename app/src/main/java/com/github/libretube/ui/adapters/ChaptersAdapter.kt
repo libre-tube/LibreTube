@@ -29,7 +29,7 @@ class ChaptersAdapter(
         holder.binding.apply {
             ImageHelper.loadImage(chapter.image, chapterImage)
             chapterTitle.text = chapter.title
-            timeStamp.text = chapter.start?.let { DateUtils.formatElapsedTime(it) }
+            timeStamp.text = DateUtils.formatElapsedTime(chapter.start)
 
             val color = if (selectedPosition == position) {
                 ThemeHelper.getThemeColor(root.context, android.R.attr.colorControlHighlight)
@@ -40,7 +40,7 @@ class ChaptersAdapter(
 
             root.setOnClickListener {
                 updateSelectedPosition(position)
-                val chapterStart = chapter.start!! * 1000 // s -> ms
+                val chapterStart = chapter.start * 1000 // s -> ms
                 exoPlayer.seekTo(chapterStart)
             }
         }

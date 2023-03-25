@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ChapterSegment(
-    val title: String? = null,
-    val image: String? = null,
-    val start: Long? = null
+    val title: String,
+    val image: String,
+    val start: Long
 )
