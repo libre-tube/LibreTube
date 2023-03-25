@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.os.postDelayed
 import androidx.core.view.ViewCompat
+import androidx.core.view.isVisible
 import androidx.core.view.marginStart
 import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.LifecycleOwner
@@ -365,18 +366,16 @@ internal class CustomExoPlayerView(
     // lock the player
     private fun lockPlayer(isLocked: Boolean) {
         // isLocked is the current (old) state of the player lock
-        val visibility = if (isLocked) View.VISIBLE else View.GONE
-
-        binding.exoTopBarRight.visibility = visibility
-        binding.exoCenterControls.visibility = visibility
-        binding.bottomBar.visibility = visibility
-        binding.closeImageButton.visibility = visibility
-        binding.exoTitle.visibility = visibility
-        binding.playPauseBTN.visibility = visibility
+        binding.exoTopBarRight.isVisible = isLocked
+        binding.exoCenterControls.isVisible = isLocked
+        binding.bottomBar.isVisible = isLocked
+        binding.closeImageButton.isVisible = isLocked
+        binding.exoTitle.isVisible = isLocked
+        binding.playPauseBTN.isVisible = isLocked
 
         if (!PlayerHelper.doubleTapToSeek) {
-            binding.rewindBTN.visibility = visibility
-            binding.forwardBTN.visibility = visibility
+            binding.rewindBTN.isVisible = isLocked
+            binding.forwardBTN.isVisible = isLocked
         }
 
         // hide the dimming background overlay if locked

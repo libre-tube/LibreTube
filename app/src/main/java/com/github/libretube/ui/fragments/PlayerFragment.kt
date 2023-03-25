@@ -31,6 +31,7 @@ import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import androidx.core.text.parseAsHtml
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -389,8 +390,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         // FullScreen button trigger
         // hide fullscreen button if auto rotation enabled
-        playerBinding.fullscreen.visibility =
-            if (PlayerHelper.autoRotationEnabled) View.INVISIBLE else View.VISIBLE
+        playerBinding.fullscreen.isInvisible = PlayerHelper.autoRotationEnabled
         playerBinding.fullscreen.setOnClickListener {
             // hide player controller
             binding.player.hideController()
@@ -1129,20 +1129,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         if (!PlayerHelper.skipButtonsEnabled) return
 
         // toggle the visibility of next and prev buttons based on queue and whether the player view is locked
-        playerBinding.skipPrev.visibility = if (
-            PlayingQueue.hasPrev() && !binding.player.isPlayerLocked
-        ) {
-            View.VISIBLE
-        } else {
-            View.INVISIBLE
-        }
-        playerBinding.skipNext.visibility = if (
-            PlayingQueue.hasNext() && !binding.player.isPlayerLocked
-        ) {
-            View.VISIBLE
-        } else {
-            View.INVISIBLE
-        }
+        val isPlayerLocked = binding.player.isPlayerLocked
+        playerBinding.skipPrev.isInvisible = !PlayingQueue.hasPrev() || isPlayerLocked
+        playerBinding.skipNext.isInvisible = !PlayingQueue.hasNext() || isPlayerLocked
 
         handler.postDelayed(this::syncQueueButtons, 100)
     }
