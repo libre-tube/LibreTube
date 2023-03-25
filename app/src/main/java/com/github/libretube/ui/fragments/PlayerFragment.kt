@@ -95,6 +95,7 @@ import com.github.libretube.util.LinkHandler
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
+import com.github.libretube.util.TextUtils.toTimeInSeconds
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -1096,7 +1097,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // check if the video is the current video and has a valid time
         if (videoId == this.videoId) {
             // try finding the time stamp of the url and seek to it if found
-            TextUtils.parseTimestamp(uri.getQueryParameter("t") ?: return)?.let {
+            uri.getQueryParameter("t")?.toTimeInSeconds()?.let {
                 exoPlayer.seekTo(it * 1000)
             }
         } else {

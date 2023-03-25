@@ -42,12 +42,11 @@ object TextUtils {
     }
 
     /**
-     * Get time in seconds from a youtube video link
-     * @param t The time string to parse
+     * Get time in seconds from a YouTube video link.
      * @return Time in seconds
      */
-    fun parseTimestamp(t: String): Long? {
-        return t.toLongOrNull() ?: Duration.parseOrNull(t)?.inWholeSeconds
+    fun String.toTimeInSeconds(): Long? {
+        return toLongOrNull() ?: Duration.parseOrNull(this)?.inWholeSeconds
     }
 
     /**
