@@ -125,7 +125,7 @@
     <string name="no_update_available">Rulezi ultima versiune.</string>
     <string name="playback_speed">Viteza de redare</string>
     <string name="advanced">Avansat</string>
-    <string name="player">Player</string>
+    <string name="player">Jucător</string>
     <string name="appearance_summary">Ajustează aplicația după cum dorești.</string>
     <string name="no_replies">Acest comentariu nu are răspunsuri.</string>
     <string name="authors">Autori</string>
@@ -474,4 +474,7 @@
     </plurals>
     <string name="uploaderAndVideoCount">%1$s • %2$d videoclipuri</string>
     <string name="subscriberAndVideoCounts">%1$s abonați - %2$d videoclipuri</string>
+    <string name="disable_proxy">Dezactivați proxy-ul Piped</string>
+    <string name="disable_proxy_summary">Încărcați videoclipuri și imagini direct de pe serverele YouTube. Activați opțiunea doar dacă utilizați oricum un VPN! Rețineți că este posibil să nu funcționeze cu conținut din muzica YT.</string>
+    <string name="auto_fullscreen_shorts">Ecran complet automat pentru videoclipuri scurte</string>
 </resources>
