@@ -479,4 +479,5 @@
     <string name="subscriberAndVideoCounts">%1$s підписників • %2$d відео</string>
     <string name="disable_proxy">Вимкнути транспортний проксі</string>
     <string name="disable_proxy_summary">Завантажуйте відео й зображення безпосередньо з серверів YouTube. Увімкніть цю опцію, якщо ви все одно використовуєте VPN! Зауважте, що це може не спрацювати з матеріалами з YT music.</string>
+    <string name="auto_fullscreen_shorts">Автоматичний повноекранний режим для коротких відео</string>
 </resources>
