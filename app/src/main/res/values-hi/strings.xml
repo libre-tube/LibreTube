@@ -49,7 +49,7 @@
     <string name="please_login">कृपया पहले सेटिंग में लॉग इन या रजिस्टर करें!</string>
     <string name="dlcomplete">डाउनलोड पूरा हो गया है।</string>
     <string name="dlisinprogress">कृपया सभी मौजूदा डाउनलोड पूर्ण होने तक प्रतीक्षा करें।</string>
-    <string name="choose_quality_dialog">गुणवत्ता चुनें:</string>
+    <string name="choose_quality_dialog">गुणवत्ता चुनें</string>
     <string name="about">के बारे में</string>
     <string name="startpage">घर</string>
     <string name="subscriptions">सब्सक्रिप्शनें</string>
@@ -110,7 +110,7 @@
     <string name="category_sponsor_description">पेड प्रमोशन, पेड रेफरल और सीधे विज्ञापन। स्व-प्रचार या कारणों, रचनाकारों, वेबसाइटों और उत्पादों के लिए मुफ्त वास्तविक चिल्लाहट के लिए नहीं।</string>
     <string name="category_selfpromo">अवैतनिक / स्वयं प्रचार</string>
     <string name="category_intro">इंटरमिशन/इंट्रो एनिमेशन</string>
-    <string name="category_outro_description">समाप्ति के बाद की जानकारी। जानकारी के साथ निष्कर्ष के लिए नहीं।</string>
+    <string name="category_outro_description">समाप्ति के बाद की जानकारी। उसके के साथ निष्कर्ष के लिए नहीं।</string>
     <string name="category_segments">खंड</string>
     <string name="category_intro_description">वास्तविक सामग्री के बिना एक अंतराल। एक ठहराव, स्थिर फ्रेम, दोहराए जाने वाला एनीमेशन हो सकता है। जानकारी वाले संक्रमणों के लिए उपयोग नहीं किया जाना चाहिए।</string>
     <string name="internal_storage">आंतरिक स्टोरेज</string>
@@ -121,7 +121,7 @@
     <string name="category_outro">अंत कार्ड और क्रेडिट</string>
     <string name="color_accent">लहजे</string>
     <string name="color_red">आराम लाल</string>
-    <string name="color_yellow">पीला पीला</string>
+    <string name="color_yellow">पीला समारोह</string>
     <string name="app_uptodate">नवीनतम संस्करण चला रहा है।</string>
     <string name="flameIcon">उड़ती हुई लौ</string>
     <string name="shapedIcon">सिली आकार की</string>
@@ -457,7 +457,7 @@
     <string name="category">वर्ग</string>
     <plurals name="years_ago">
         <item quantity="one">%d वर्ष पहले</item>
-        <item quantity="other">%d वर्ष पहले</item>
+        <item quantity="other">%d साल पहले</item>
     </plurals>
     <plurals name="months_ago">
         <item quantity="one">%d महीना पहले</item>
@@ -465,10 +465,13 @@
     </plurals>
     <plurals name="weeks_ago">
         <item quantity="one">%d सप्ताह पहले</item>
-        <item quantity="other">%d सप्ताह पहले</item>
+        <item quantity="other">%d हफ्तों पहले</item>
     </plurals>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="lbry_hls_summary">उपलब्ध होने पर स्ट्रीमिंग के लिए LBRY HLS का प्रयोग करें।</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d वीडियोज</string>
     <string name="subscriberAndVideoCounts">%1$s सब्सक्राइबर • %2$d वीडियोज</string>
+    <string name="disable_proxy">Piped proxy अक्षम करें</string>
+    <string name="disable_proxy_summary">YouTube के सर्वर से सीधे वीडियो और चित्र लोड करें। यदि आप वैसे भी VPN का उपयोग करते हैं तो ही विकल्प को सक्षम करें! ध्यान दें कि यह YT music की सामग्री के साथ काम नहीं कर सकता है।</string>
+    <string name="auto_fullscreen_shorts">शॉर्ट वीडियो पर ऑटो फुलस्क्रीन</string>
 </resources>
