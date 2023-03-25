@@ -147,8 +147,7 @@ class LibraryFragment : Fragment() {
                 playlistsAdapter.registerAdapterDataObserver(object :
                     RecyclerView.AdapterDataObserver() {
                     override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-                        binding.nothingHere.visibility =
-                            if (playlistsAdapter.itemCount == 0) View.VISIBLE else View.GONE
+                        binding.nothingHere.isVisible = playlistsAdapter.itemCount == 0
                         super.onItemRangeRemoved(positionStart, itemCount)
                     }
                 })
