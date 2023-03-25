@@ -467,4 +467,8 @@
     <string name="lbry_hls_summary">可能な場合は、ストリーミングに LBRY HLS を使用します。</string>
     <string name="subscriberAndVideoCounts">%1$s 人のチャンネル登録者 • %2$d 本の動画</string>
     <string name="replies">返信</string>
+    <string name="disable_proxy">パイプ プロキシを無効にする</string>
+    <string name="disable_proxy_summary">動画や画像を YouTube のサーバーから直接読み込みます。 とにかくVPNを使用する場合にのみ、オプションを有効にしてください! これは、YT ミュージックのコンテンツでは機能しない可能性があることに注意してください。</string>
+    <string name="auto_fullscreen_shorts">短いビデオの自動全画面表示</string>
+    <string name="sleep_timer">目覚まし時計</string>
 </resources>

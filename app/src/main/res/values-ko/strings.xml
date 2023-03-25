@@ -468,4 +468,7 @@
     </plurals>
     <string name="resume">재개하다</string>
     <string name="forward">빨리 감기</string>
+    <string name="disable_proxy">Piped 프록시 비활성화</string>
+    <string name="disable_proxy_summary">YouTube 서버에서 직접 비디오와 이미지를 로드합니다. 어쨌든 VPN을 사용하는 경우에만 옵션을 활성화하십시오! YT 음악 콘텐츠에서는 작동하지 않을 수 있습니다.</string>
+    <string name="auto_fullscreen_shorts">짧은 동영상의 자동 전체 화면</string>
 </resources>

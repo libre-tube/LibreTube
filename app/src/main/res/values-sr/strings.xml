@@ -474,4 +474,7 @@
     <string name="lbry_hls_summary">Користите LBRY HLS за стримовање ако је доступно.</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d видео снимака</string>
     <string name="subscriberAndVideoCounts">%1$s претплатника • %2$d видео снимака</string>
+    <string name="disable_proxy">Онемогући прокси Piped</string>
+    <string name="disable_proxy_summary">Преузмите видео записе и слике директно са YouTube сервера. Омогућите ову опцију само ако ионако користите VPN! Имајте на уму да ово можда неће функционисати са садржајем са YT музике.</string>
+    <string name="auto_fullscreen_shorts">Аутоматски преко целог екрана за кратке видео снимке</string>
 </resources>
