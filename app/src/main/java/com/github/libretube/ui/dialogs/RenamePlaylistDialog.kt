@@ -43,7 +43,10 @@ class RenamePlaylistDialog(
                             .show()
                         return@setOnClickListener
                     }
-                    if (newPlaylistName == currentPlaylistName) return@setOnClickListener
+                    if (newPlaylistName == currentPlaylistName) {
+                        dismiss()
+                        return@setOnClickListener
+                    }
                     val appContext = requireContext().applicationContext
 
                     lifecycleScope.launch {
