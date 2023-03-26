@@ -14,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
@@ -192,14 +193,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         mainActivity.binding.container.visibility = View.VISIBLE
         val mainMotionLayout = mainActivity.binding.mainMotionLayout
 
-        binding.playerMotionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
-            override fun onTransitionStarted(
-                motionLayout: MotionLayout?,
-                startId: Int,
-                endId: Int
-            ) {
-            }
-
+        binding.playerMotionLayout.addTransitionListener(object : TransitionAdapter() {
             override fun onTransitionChange(
                 motionLayout: MotionLayout?,
                 startId: Int,
@@ -219,14 +213,6 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
                     viewModel.isMiniPlayerVisible.value = false
                     mainMotionLayout.progress = 0F
                 }
-            }
-
-            override fun onTransitionTrigger(
-                MotionLayout: MotionLayout?,
-                triggerId: Int,
-                positive: Boolean,
-                progress: Float
-            ) {
             }
         })
 
