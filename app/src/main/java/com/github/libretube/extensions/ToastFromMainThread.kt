@@ -21,10 +21,12 @@ fun Context.toastFromMainThread(stringId: Int) {
     toastFromMainThread(getString(stringId))
 }
 
-suspend fun Context.toastFromMainDispatcher(text: String) = withContext(Dispatchers.Main) {
-    Toast.makeText(this@toastFromMainDispatcher, text, Toast.LENGTH_SHORT).show()
+suspend fun Context.toastFromMainDispatcher(text: String, length: Int = Toast.LENGTH_SHORT) = withContext(
+    Dispatchers.Main
+) {
+    Toast.makeText(this@toastFromMainDispatcher, text, length).show()
 }
 
-suspend fun Context.toastFromMainDispatcher(stringId: Int) {
-    toastFromMainDispatcher(getString(stringId))
+suspend fun Context.toastFromMainDispatcher(stringId: Int, length: Int = Toast.LENGTH_SHORT) {
+    toastFromMainDispatcher(getString(stringId), length)
 }

@@ -8,7 +8,7 @@ import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.toID
-import com.github.libretube.extensions.toastFromMainThread
+import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.dialogs.DeletePlaylistDialog
@@ -70,7 +70,7 @@ class PlaylistOptionsBottomSheet(
                     val playlistId = withContext(Dispatchers.IO) {
                         PlaylistsHelper.clonePlaylist(context, playlistId)
                     }
-                    context.toastFromMainThread(
+                    context.toastFromMainDispatcher(
                         if (playlistId != null) R.string.playlistCloned else R.string.server_error
                     )
                 }

@@ -14,7 +14,7 @@ import com.github.libretube.constants.FALLBACK_INSTANCES_URL
 import com.github.libretube.constants.PIPED_INSTANCES_URL
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Database
-import com.github.libretube.extensions.toastFromMainThread
+import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.CustomInstanceDialog
@@ -142,7 +142,7 @@ class InstanceSettings : BasePreferenceFragment() {
                 }.getOrNull() ?: runCatching {
                     RetrofitInstance.externalApi.getInstances(FALLBACK_INSTANCES_URL).toMutableList()
                 }.getOrNull() ?: run {
-                    appContext.toastFromMainThread(R.string.failed_fetching_instances)
+                    appContext.toastFromMainDispatcher(R.string.failed_fetching_instances)
                     val instanceNames = resources.getStringArray(R.array.instances)
                     resources.getStringArray(R.array.instancesValue).mapIndexed { index, instanceValue ->
                         Instances(instanceNames[index], instanceValue)
