@@ -295,6 +295,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 endId: Int,
                 progress: Float
             ) {
+                if (_binding == null) return
+
                 mainMotionLayout.progress = abs(progress)
                 binding.player.hideController()
                 binding.player.useController = false
@@ -303,6 +305,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
 
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
+                if (_binding == null) return
+
                 if (currentId == eId) {
                     viewModel.isMiniPlayerVisible.value = true
                     // disable captions
@@ -662,13 +666,17 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             streams = try {
                 RetrofitInstance.api.getStreams(videoId!!)
             } catch (e: IOException) {
-                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_LONG).show()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_LONG).show()
+                }
                 return@launch
             } catch (e: HttpException) {
                 val errorMessage = e.response()?.errorBody()?.string()?.runCatching {
                     JsonHelper.json.decodeFromString<Message>(this).message
                 }?.getOrNull() ?: context?.getString(R.string.server_error) ?: ""
-                Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+                }
                 return@launch
             }
 
@@ -1200,7 +1208,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     // set the name of the video chapter in the exoPlayerView
     private fun setCurrentChapterName() {
         // return if chapters are empty to avoid crashes
-        if (chapters.isEmpty()) return
+        if (chapters.isEmpty() || _binding == null) return
 
         // call the function again in 100ms
         binding.player.postDelayed(this::setCurrentChapterName, 100)
