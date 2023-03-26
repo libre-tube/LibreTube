@@ -29,7 +29,9 @@ class CreatePlaylistDialog(
                 lifecycleScope.launch {
                     requireDialog().hide()
                     val playlistId = withContext(Dispatchers.IO) {
-                        PlaylistsHelper.clonePlaylist(requireContext(), it)
+                        runCatching {
+                            PlaylistsHelper.clonePlaylist(requireContext(), it)
+                        }.getOrNull()
                     }
                     if (playlistId != null) {
                         onSuccess()
@@ -49,6 +51,7 @@ class CreatePlaylistDialog(
         }
 
         binding.createNewPlaylist.setOnClickListener {
+            val appContext = context?.applicationContext
             // avoid creating the same playlist multiple times by spamming the button
             binding.createNewPlaylist.setOnClickListener(null)
             val listName = binding.playlistName.text?.toString()
@@ -56,11 +59,14 @@ class CreatePlaylistDialog(
                 lifecycleScope.launch {
                     requireDialog().hide()
                     val playlistId = withContext(Dispatchers.IO) {
-                        PlaylistsHelper.createPlaylist(listName, requireContext())
+                        runCatching {
+                            PlaylistsHelper.createPlaylist(listName)
+                        }.getOrNull()
                     }
-                    if (playlistId != null) {
-                        onSuccess()
-                    }
+                    appContext?.toastFromMainDispatcher(
+                        if (playlistId != null) R.string.playlistCreated else R.string.unknown_error
+                    )
+                    playlistId?.let { onSuccess() }
                     dismiss()
                 }
             } else {

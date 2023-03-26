@@ -68,7 +68,9 @@ class PlaylistOptionsBottomSheet(
                 getString(R.string.clonePlaylist) -> {
                     val context = requireContext()
                     val playlistId = withContext(Dispatchers.IO) {
-                        PlaylistsHelper.clonePlaylist(context, playlistId)
+                        runCatching {
+                            PlaylistsHelper.clonePlaylist(context, playlistId)
+                        }.getOrNull()
                     }
                     context.toastFromMainDispatcher(
                         if (playlistId != null) R.string.playlistCloned else R.string.server_error

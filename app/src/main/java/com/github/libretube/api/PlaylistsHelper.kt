@@ -1,9 +1,7 @@
 package com.github.libretube.api
 
 import android.content.Context
-import android.util.Log
 import androidx.core.text.isDigitsOnly
-import com.github.libretube.R
 import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.api.obj.Playlists
@@ -12,18 +10,14 @@ import com.github.libretube.constants.YOUTUBE_FRONTEND_URL
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.LocalPlaylist
 import com.github.libretube.enums.PlaylistType
-import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
-import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.ImportPlaylist
-import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.withContext
-import retrofit2.HttpException
 
 object PlaylistsHelper {
     private val pipedPlaylistRegex =
@@ -67,23 +61,12 @@ object PlaylistsHelper {
         }
     }
 
-    suspend fun createPlaylist(playlistName: String, appContext: Context?): String? {
+    suspend fun createPlaylist(playlistName: String): String? {
         return if (!loggedIn) {
             val playlist = LocalPlaylist(name = playlistName, thumbnailUrl = "")
             DatabaseHolder.Database.localPlaylistsDao().createPlaylist(playlist).toString()
         } else {
-            try {
-                RetrofitInstance.authApi.createPlaylist(token, Playlists(name = playlistName))
-            } catch (e: IOException) {
-                appContext?.toastFromMainDispatcher(R.string.unknown_error)
-                return null
-            } catch (e: HttpException) {
-                Log.e(TAG(), e.toString())
-                appContext?.toastFromMainDispatcher(R.string.server_error)
-                return null
-            }.playlistId
-        }.also {
-            appContext?.toastFromMainDispatcher(R.string.playlistCreated)
+            RetrofitInstance.authApi.createPlaylist(token, Playlists(name = playlistName)).playlistId
         }
     }
 
@@ -153,7 +136,7 @@ object PlaylistsHelper {
 
     suspend fun importPlaylists(playlists: List<ImportPlaylist>) = withContext(Dispatchers.IO) {
         playlists.map { playlist ->
-            val playlistId = createPlaylist(playlist.name!!, null)
+            val playlistId = createPlaylist(playlist.name!!)
             async {
                 playlistId ?: return@async
                 // if logged in, add the playlists by their ID via an api call
@@ -169,11 +152,9 @@ object PlaylistsHelper {
                     runCatching {
                         val streamItems = playlist.videos.map {
                             async {
-                                try {
+                                runCatching {
                                     RetrofitInstance.api.getStreams(it).toStreamItem(it)
-                                } catch (e: Exception) {
-                                    null
-                                }
+                                }.getOrNull()
                             }
                         }
                             .awaitAll()
@@ -201,32 +182,23 @@ object PlaylistsHelper {
     suspend fun clonePlaylist(context: Context, playlistId: String): String? {
         val appContext = context.applicationContext
         if (!loggedIn) {
-            val playlist = try {
-                RetrofitInstance.api.getPlaylist(playlistId)
-            } catch (e: Exception) {
-                appContext.toastFromMainDispatcher(R.string.server_error)
-                return null
-            }
-            val newPlaylist = createPlaylist(playlist.name ?: "Unknown name", appContext) ?: return null
+            val playlist = RetrofitInstance.api.getPlaylist(playlistId)
+            val newPlaylist = createPlaylist(playlist.name ?: "Unknown name") ?: return null
 
             addToPlaylist(newPlaylist, *playlist.relatedStreams.toTypedArray())
 
             var nextPage = playlist.nextpage
             while (nextPage != null) {
-                nextPage = try {
-                    RetrofitInstance.api.getPlaylistNextPage(playlistId, nextPage).apply {
+                nextPage = runCatching {
+                    RetrofitInstance.api.getPlaylistNextPage(playlistId, nextPage!!).apply {
                         addToPlaylist(newPlaylist, *relatedStreams.toTypedArray())
                     }.nextpage
-                } catch (e: Exception) {
-                    break
-                }
+                }.getOrNull()
             }
             return playlistId
         }
 
-        return runCatching {
-            RetrofitInstance.authApi.clonePlaylist(token, PlaylistId(playlistId))
-        }.getOrNull()?.playlistId
+        return RetrofitInstance.authApi.clonePlaylist(token, PlaylistId(playlistId)).playlistId
     }
 
     suspend fun deletePlaylist(playlistId: String, playlistType: PlaylistType): Boolean {
@@ -236,16 +208,12 @@ object PlaylistsHelper {
             return true
         }
 
-        val response = try {
+        return runCatching {
             RetrofitInstance.authApi.deletePlaylist(
                 PreferenceHelper.getToken(),
                 PlaylistId(playlistId)
-            )
-        } catch (e: Exception) {
-            Log.e(TAG(), e.toString())
-            return false
-        }
-        return response.message == "ok"
+            ).message == "ok"
+        }.getOrDefault(false)
     }
 
     fun getPrivatePlaylistType(): PlaylistType {
