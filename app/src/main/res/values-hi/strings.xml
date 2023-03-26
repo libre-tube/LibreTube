@@ -76,7 +76,7 @@
     <string name="confirm_unsubscribe">क्या आप वाकई %1$s को अनसब्सक्राईब करना चाहते हैं\?</string>
     <string name="confirm_unsubscribing">अनसब्सक्राईब करने की पुष्टि करें</string>
     <string name="confirm_unsubscribing_summary">अनसब्सक्राईब करने से पहले एक पुष्टिकरण संवाद दिखाएं।</string>
-    <string name="piped">Piped</string>
+    <string name="piped">पाइप्ड</string>
     <string name="youtube">यूट्यूब</string>
     <string name="play_all">सभी चलाएं</string>
     <string name="category_interaction_description">जब सामग्री के बीच में लाइक, सब्सक्राइब या फॉलो करने का एक छोटा सा रिमाइंडर आता है। यदि लंबा है या किसी विशिष्ट चीज के बारे में है, तो इसके बजाय यह स्वयं प्रचार होना चाहिए।</string>
