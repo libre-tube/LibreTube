@@ -60,6 +60,7 @@ import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.hideKeyboard
 import com.github.libretube.extensions.toID
+import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.DashHelper
@@ -666,17 +667,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             streams = try {
                 RetrofitInstance.api.getStreams(videoId!!)
             } catch (e: IOException) {
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_LONG).show()
-                }
+                context?.toastFromMainDispatcher(R.string.unknown_error, Toast.LENGTH_LONG)
                 return@launch
             } catch (e: HttpException) {
                 val errorMessage = e.response()?.errorBody()?.string()?.runCatching {
                     JsonHelper.json.decodeFromString<Message>(this).message
                 }?.getOrNull() ?: context?.getString(R.string.server_error) ?: ""
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
-                }
+                context?.toastFromMainDispatcher(errorMessage, Toast.LENGTH_LONG)
                 return@launch
             }
 

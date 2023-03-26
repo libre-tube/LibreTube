@@ -13,7 +13,7 @@ import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.DialogAddToPlaylistBinding
 import com.github.libretube.extensions.TAG
-import com.github.libretube.extensions.toastFromMainThread
+import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.ui.models.PlaylistViewModel
 import com.github.libretube.util.PlayingQueue
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -90,10 +90,10 @@ class AddToPlaylistDialog(
             PlaylistsHelper.addToPlaylist(playlistId, *streams.toTypedArray())
         } catch (e: Exception) {
             Log.e(TAG(), e.toString())
-            appContext.toastFromMainThread(R.string.unknown_error)
+            appContext.toastFromMainDispatcher(R.string.unknown_error)
             return
         }
-        appContext.toastFromMainThread(
+        appContext.toastFromMainDispatcher(
             if (success) R.string.added_to_playlist else R.string.fail
         )
     }

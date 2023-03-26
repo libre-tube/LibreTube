@@ -14,7 +14,7 @@ import com.github.libretube.db.obj.LocalPlaylist
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
-import com.github.libretube.extensions.toastFromMainThread
+import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.ImportPlaylist
@@ -68,24 +68,22 @@ object PlaylistsHelper {
     }
 
     suspend fun createPlaylist(playlistName: String, appContext: Context?): String? {
-        if (!loggedIn) {
+        return if (!loggedIn) {
             val playlist = LocalPlaylist(name = playlistName, thumbnailUrl = "")
-            DatabaseHolder.Database.localPlaylistsDao().createPlaylist(playlist)
-            return DatabaseHolder.Database.localPlaylistsDao().getAll()
-                .last().playlist.id.toString()
+            DatabaseHolder.Database.localPlaylistsDao().createPlaylist(playlist).toString()
         } else {
-            return try {
+            try {
                 RetrofitInstance.authApi.createPlaylist(token, Playlists(name = playlistName))
             } catch (e: IOException) {
-                appContext?.toastFromMainThread(R.string.unknown_error)
+                appContext?.toastFromMainDispatcher(R.string.unknown_error)
                 return null
             } catch (e: HttpException) {
                 Log.e(TAG(), e.toString())
-                appContext?.toastFromMainThread(R.string.server_error)
+                appContext?.toastFromMainDispatcher(R.string.server_error)
                 return null
-            }.playlistId.also {
-                appContext?.toastFromMainThread(R.string.playlistCreated)
-            }
+            }.playlistId
+        }.also {
+            appContext?.toastFromMainDispatcher(R.string.playlistCreated)
         }
     }
 
@@ -206,7 +204,7 @@ object PlaylistsHelper {
             val playlist = try {
                 RetrofitInstance.api.getPlaylist(playlistId)
             } catch (e: Exception) {
-                appContext.toastFromMainThread(R.string.server_error)
+                appContext.toastFromMainDispatcher(R.string.server_error)
                 return null
             }
             val newPlaylist = createPlaylist(playlist.name ?: "Unknown name", appContext) ?: return null

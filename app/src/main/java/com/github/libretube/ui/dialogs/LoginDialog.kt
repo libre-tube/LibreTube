@@ -14,8 +14,11 @@ import com.github.libretube.api.obj.Login
 import com.github.libretube.api.obj.Token
 import com.github.libretube.databinding.DialogLoginBinding
 import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.serialization.decodeFromString
 import retrofit2.HttpException
 
@@ -62,7 +65,7 @@ class LoginDialog(
 
     private fun signIn(username: String, password: String, createNewAccount: Boolean = false) {
         val login = Login(username, password)
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launch(Dispatchers.IO) {
             val response = try {
                 if (createNewAccount) {
                     RetrofitInstance.authApi.register(login)
@@ -73,25 +76,23 @@ class LoginDialog(
                 val errorMessage = e.response()?.errorBody()?.string()?.runCatching {
                     JsonHelper.json.decodeFromString<Token>(this).error
                 }?.getOrNull() ?: context?.getString(R.string.server_error) ?: ""
-                Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
-                return@launchWhenCreated
+                context?.toastFromMainDispatcher(errorMessage)
+                return@launch
             } catch (e: Exception) {
                 Log.e(TAG(), e.toString())
-                Toast.makeText(context, e.localizedMessage, Toast.LENGTH_SHORT).show()
-                return@launchWhenCreated
+                context?.toastFromMainDispatcher(e.localizedMessage.orEmpty())
+                return@launch
             }
 
             if (response.error != null) {
-                Toast.makeText(context, response.error, Toast.LENGTH_SHORT).show()
-                return@launchWhenCreated
+                context?.toastFromMainDispatcher(response.error)
+                return@launch
             }
-            if (response.token == null) return@launchWhenCreated
+            if (response.token == null) return@launch
 
-            Toast.makeText(
-                context,
-                if (createNewAccount) R.string.registered else R.string.loggedIn,
-                Toast.LENGTH_SHORT
-            ).show()
+            context?.toastFromMainDispatcher(
+                if (createNewAccount) R.string.registered else R.string.loggedIn
+            )
 
             PreferenceHelper.setToken(response.token)
             PreferenceHelper.setUsername(login.username)

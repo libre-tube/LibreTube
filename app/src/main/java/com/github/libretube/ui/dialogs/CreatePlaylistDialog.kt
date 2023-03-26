@@ -8,7 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.databinding.DialogCreatePlaylistBinding
-import com.github.libretube.extensions.toastFromMainThread
+import com.github.libretube.extensions.toastFromMainDispatcher
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,7 +34,7 @@ class CreatePlaylistDialog(
                     if (playlistId != null) {
                         onSuccess()
                     }
-                    appContext?.toastFromMainThread(
+                    appContext?.toastFromMainDispatcher(
                         if (playlistId != null) R.string.playlistCloned else R.string.server_error
                     )
                     dismiss()

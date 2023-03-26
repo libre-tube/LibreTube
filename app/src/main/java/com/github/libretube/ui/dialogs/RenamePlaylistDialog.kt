@@ -12,7 +12,7 @@ import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.databinding.DialogTextPreferenceBinding
 import com.github.libretube.extensions.TAG
-import com.github.libretube.extensions.toastFromMainThread
+import com.github.libretube.extensions.toastFromMainDispatcher
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -57,14 +57,14 @@ class RenamePlaylistDialog(
                             }
                         } catch (e: Exception) {
                             Log.e(TAG(), e.toString())
-                            e.localizedMessage?.let { appContext.toastFromMainThread(it) }
+                            e.localizedMessage?.let { appContext.toastFromMainDispatcher(it) }
                             return@launch
                         }
                         if (success) {
-                            appContext.toastFromMainThread(R.string.success)
+                            appContext.toastFromMainDispatcher(R.string.success)
                             onSuccess.invoke(newPlaylistName)
                         } else {
-                            appContext.toastFromMainThread(R.string.server_error)
+                            appContext.toastFromMainDispatcher(R.string.server_error)
                         }
                         dismiss()
                     }

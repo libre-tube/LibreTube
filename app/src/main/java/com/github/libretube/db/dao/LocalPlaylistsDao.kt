@@ -17,7 +17,7 @@ interface LocalPlaylistsDao {
     suspend fun getAll(): List<LocalPlaylistWithVideos>
 
     @Insert
-    suspend fun createPlaylist(playlist: LocalPlaylist)
+    suspend fun createPlaylist(playlist: LocalPlaylist): Long
 
     @Update
     suspend fun updatePlaylist(playlist: LocalPlaylist)
