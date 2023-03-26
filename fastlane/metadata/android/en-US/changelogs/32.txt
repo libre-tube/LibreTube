@@ -1,0 +1,5 @@
+* Fix crash when closing mini player
+* Fix crash when watching geo-blocked video
+* Fix duplicated error messages during playlist actions
+* Close playlist rename dialog if name matched
+* Correct Kurdish (Central) native language name
