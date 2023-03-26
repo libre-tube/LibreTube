@@ -19,6 +19,7 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
 import retrofit2.HttpException
 
@@ -97,7 +98,9 @@ class LoginDialog(
             PreferenceHelper.setToken(response.token)
             PreferenceHelper.setUsername(login.username)
 
-            onLogin.invoke()
+            withContext(Dispatchers.Main) {
+                onLogin.invoke()
+            }
             dialog?.dismiss()
         }
     }
