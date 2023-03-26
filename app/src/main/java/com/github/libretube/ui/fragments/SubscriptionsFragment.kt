@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -196,10 +197,10 @@ class SubscriptionsFragment : Fragment() {
         }
 
         binding.subChannelsContainer.visibility = View.GONE
-        binding.subFeedContainer.visibility =
-            if (viewModel.videoFeed.value!!.isEmpty()) View.GONE else View.VISIBLE
-        binding.emptyFeed.visibility =
-            if (viewModel.videoFeed.value!!.isEmpty()) View.VISIBLE else View.GONE
+
+        val notLoaded = viewModel.videoFeed.value.isNullOrEmpty()
+        binding.subFeedContainer.isGone = notLoaded
+        binding.emptyFeed.isVisible = notLoaded
 
         binding.subProgress.visibility = View.GONE
         subscriptionsAdapter = VideosAdapter(
@@ -257,10 +258,10 @@ class SubscriptionsFragment : Fragment() {
         }
 
         binding.subFeedContainer.visibility = View.GONE
-        binding.subChannelsContainer.visibility =
-            if (viewModel.subscriptions.value!!.isEmpty()) View.GONE else View.VISIBLE
-        binding.emptyFeed.visibility =
-            if (viewModel.subscriptions.value!!.isEmpty()) View.VISIBLE else View.GONE
+
+        val notLoaded = viewModel.subscriptions.value.isNullOrEmpty()
+        binding.subChannelsContainer.isGone = notLoaded
+        binding.emptyFeed.isVisible = notLoaded
     }
 
     private fun isShowingFeed(): Boolean {

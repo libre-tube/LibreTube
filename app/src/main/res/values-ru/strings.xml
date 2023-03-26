@@ -479,4 +479,5 @@
     <string name="subscriberAndVideoCounts">%1$s подписчиков • %2$d видео</string>
     <string name="disable_proxy">Отключить прокси Piped</string>
     <string name="disable_proxy_summary">Загружать видео и изображения напрямую с серверов YouTube. Включайте эту опцию только при использовании VPN! Обратите внимание, что это может не сработать с контентом из YouTube Music.</string>
+    <string name="auto_fullscreen_shorts">Автоматический полноэкранный режим для коротких видео</string>
 </resources>
