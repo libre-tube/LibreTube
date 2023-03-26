@@ -63,7 +63,7 @@
     <string name="darkTheme">Sötét</string>
     <string name="library">Könyvtár</string>
     <string name="lightTheme">Világos</string>
-    <string name="videoCount">%1$s videó</string>
+    <string name="videoCount">%1$d videó</string>
     <string name="noInternet">Először kapcsolódjon az internetre.</string>
     <string name="retry">Újra</string>
     <string name="comments">Megjegyzések</string>
@@ -166,7 +166,7 @@
     <string name="skip_buttons_summary">Gombok megjelenítése a következő vagy az előző videóra való ugráshoz.</string>
     <string name="category_filler_description">A felesleges jelenetekhez, amelyek csak időkitöltésre lettek hozzáadva, illetve olyan humorhoz amely nem szükséges a videó fő témájának a megértéséhez.</string>
     <string name="category_music_offtopic_description">Kizárólag zenei videókban való felhasználásra. A videó olyan részeit kell lefednie, amelyek nem részei a hivatalos mixeknek. Végül a videónak a lehető legjobban kell hasonlítania a Spotify vagy bármely más mix változathoz, vagy csökkenteni kell a beszédet vagy más zavaró elemeket.</string>
-    <string name="category_preview_description">A sorozat ezen vagy jövőbeli videóinak közelgő tartalmát részletező szakaszok esetében, amelyek nem nyújtanak további információt. Ha olyan klipeket tartalmaz, amelyek csak itt jelennek meg, akkor nagyon valószínű, hogy nem ez a megfelelő kategória.</string>
+    <string name="category_preview_description">A jövőbeli tartalmakat részletező szakaszokhoz, melyek nem nyújtanak további információt. Ha olyan klipeket tartalmaz, amelyek csak itt jelennek meg, akkor nagyon valószínű, hogy nem ez a megfelelő kategória.</string>
     <string name="background_mode">Háttér mód</string>
     <string name="audio_video">Hang és videó</string>
     <string name="fullscreen_orientation">Teljes képernyős helyzet</string>
@@ -457,4 +457,21 @@
     <string name="subscriberAndVideoCounts">%1$s feliratkozó • %2$d videó</string>
     <string name="playing_next">Következő lejátszása: %1$s múlva</string>
     <string name="lbry_hls_summary">LBRY HLS használata, ha elérhető a streamelés.</string>
+    <string name="disable_proxy">Piped proxy kikapcsolása</string>
+    <string name="disable_proxy_summary">Videók és képek betöltése közvetlenül a YouTube szervereiről. Csak akkor engedélyezze ezt az opciót, ha egyébként is VPN-t használ. Lehet, hogy nem fog működni YT music-ról származó tartalmakkal.</string>
+    <string name="auto_fullscreen_shorts">Automatikus teljes képernyőre váltás rövid videóknál</string>
+    <string name="trending_views">%1$s • %2$s megtekintés • %3$s</string>
+    <string name="normal_views">%1$s megtekintés %2$s</string>
+    <plurals name="years_ago">
+        <item quantity="one">%d éve</item>
+        <item quantity="other">%d éve</item>
+    </plurals>
+    <plurals name="months_ago">
+        <item quantity="one">%d hónapja</item>
+        <item quantity="other">%d hónapja</item>
+    </plurals>
+    <plurals name="weeks_ago">
+        <item quantity="one">%d hete</item>
+        <item quantity="other">%d hete</item>
+    </plurals>
 </resources>
