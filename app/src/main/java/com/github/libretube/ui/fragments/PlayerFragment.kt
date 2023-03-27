@@ -331,8 +331,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         if (PlayerHelper.swipeGestureEnabled) {
             binding.playerMotionLayout.addSwipeUpListener {
-                binding.player.hideController()
-                setFullscreen()
+                if(this::streams.isInitialized) {
+                    binding.player.hideController()
+                    setFullscreen()
+                }
             }
         }
 
