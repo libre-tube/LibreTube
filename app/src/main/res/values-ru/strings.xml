@@ -82,9 +82,9 @@
     <string name="history">История</string>
     <string name="search_history">История поиска</string>
     <string name="sponsorblock">SponsorBlock</string>
-    <string name="sponsorblock_summary">Использует API сервиса https://sponsor.ajay.app/</string>
+    <string name="sponsorblock_summary">На базе API https://sponsor.ajay.app/</string>
     <string name="segment_skipped">Пропущен сегмент</string>
-    <string name="sponsorblock_state">Вкл</string>
+    <string name="sponsorblock_state">Вкл.</string>
     <string name="category_interaction">Напоминание о взаимодействии (лайк и подписка)</string>
     <string name="category_interaction_description">Короткие просьбы поставить лайк, подписаться или добавить в избранное. Если сегмент длинный или о чем-то конкретном, вместо этого он должен быть в разделе саморекламы.</string>
     <string name="category_outro">Конечная заставка и титры</string>
@@ -115,7 +115,7 @@
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Играть в фоне</string>
-    <string name="disabled">Выкл</string>
+    <string name="disabled">Откл.</string>
     <string name="update_available">Версия %1$s доступна</string>
     <string name="authors">Авторы</string>
     <string name="download_folder">Название</string>
@@ -193,7 +193,7 @@
     <string name="player_summary">Настройки и поведение плеера</string>
     <string name="seek_increment">Шаг перемотки</string>
     <string name="pauseOnScreenOff">Автопауза</string>
-    <string name="pauseOnScreenOff_summary">Останавливать воспроизведение, когда экран выключен.</string>
+    <string name="pauseOnScreenOff_summary">Останавливать воспроизведение при отключении экрана.</string>
     <string name="autoplay_summary">Автоматически воспроизводить следующее видео после текущего.</string>
     <string name="clonePlaylist">Клонировать плейлист</string>
     <string name="deleteAccount">Удалить аккаунт</string>
