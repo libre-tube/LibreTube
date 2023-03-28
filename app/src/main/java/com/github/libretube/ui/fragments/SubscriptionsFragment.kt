@@ -1,5 +1,6 @@
 package com.github.libretube.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -162,19 +163,19 @@ class SubscriptionsFragment : Fragment() {
         }
     }
 
+    @SuppressLint("InflateParams")
     private suspend fun initChannelGroups() {
         channelGroups = DatabaseHolder.Database.subscriptionGroupsDao().getAll()
 
-        binding.chipAll.isSelected = true
-        binding.channelGroups.children.forEach { view ->
-            if (view.id != R.id.chip_all) binding.channelGroups.removeView(view)
-        }
+        binding.chipAll.isChecked = true
+        binding.channelGroups.removeAllViews()
 
+        binding.channelGroups.addView(binding.chipAll)
         channelGroups.forEach { group ->
-            val chip = Chip(context, null, R.style.ElevatedFilterChip).apply {
+            val chip = layoutInflater.inflate(R.layout.filter_chip, null) as Chip
+            chip.apply {
                 id = View.generateViewId()
                 isCheckable = true
-                isClickable = true
                 text = group.name
             }
 

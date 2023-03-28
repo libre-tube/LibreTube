@@ -33,12 +33,13 @@ class SubscriptionGroupsAdapter(
         holder.binding.apply {
             groupName.text = subscriptionGroup.name
             deleteGroup.setOnClickListener {
-                groups.remove(subscriptionGroup)
+                groups.removeAt(position)
                 runBlocking(Dispatchers.IO) {
                     DatabaseHolder.Database.subscriptionGroupsDao().deleteGroup(
                         subscriptionGroup.name
                     )
                 }
+                onGroupsChanged(groups)
                 notifyItemRemoved(position)
                 notifyItemRangeChanged(position, itemCount)
             }
@@ -48,7 +49,7 @@ class SubscriptionGroupsAdapter(
                     runBlocking(Dispatchers.IO) {
                         // delete the old one as it might have a different name
                         DatabaseHolder.Database.subscriptionGroupsDao().deleteGroup(
-                            subscriptionGroup.name
+                            groupName.text.toString()
                         )
                         DatabaseHolder.Database.subscriptionGroupsDao().createGroup(it)
                     }
