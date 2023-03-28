@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.children
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
@@ -16,19 +18,25 @@ import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
 import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.obj.SubscriptionGroup
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.LegacySubscriptionAdapter
 import com.github.libretube.ui.adapters.SubscriptionChannelAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
+import com.github.libretube.ui.dialogs.ChannelGroupsDialog
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
+import com.google.android.material.chip.Chip
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class SubscriptionsFragment : Fragment() {
     private lateinit var binding: FragmentSubscriptionsBinding
     private val viewModel: SubscriptionsViewModel by activityViewModels()
+    private var channelGroups: List<SubscriptionGroup> = listOf()
+    private var selectedFilterGroup: Int = 0
 
     var subscriptionsAdapter: VideosAdapter? = null
     private var selectedSortOrder = PreferenceHelper.getInt(PreferenceKeys.FEED_SORT_ORDER, 0)
@@ -82,14 +90,12 @@ class SubscriptionsFragment : Fragment() {
         }
 
         viewModel.videoFeed.observe(viewLifecycleOwner) {
-            if (!isShowingFeed()) return@observe
-            if (it == null) return@observe
+            if (!isShowingFeed() || it == null) return@observe
             showFeed()
         }
 
         viewModel.subscriptions.observe(viewLifecycleOwner) {
-            if (isShowingFeed()) return@observe
-            if (it == null) return@observe
+            if (isShowingFeed() || it == null) return@observe
             showSubscriptions()
         }
 
@@ -150,29 +156,73 @@ class SubscriptionsFragment : Fragment() {
                     binding.subRefresh.isRefreshing = false
                 }
             }
+
+        lifecycleScope.launch {
+            initChannelGroups()
+        }
+    }
+
+    private suspend fun initChannelGroups() {
+        channelGroups = DatabaseHolder.Database.subscriptionGroupsDao().getAll()
+
+        binding.chipAll.isSelected = true
+        binding.channelGroups.children.forEachIndexed { index, view ->
+            if (index != 0) binding.channelGroups.removeView(view)
+        }
+
+        channelGroups.forEachIndexed { index, group ->
+            val chip = Chip(context, null, R.style.ElevatedFilterChip).apply {
+                id = View.generateViewId()
+                isCheckable = true
+                isClickable = true
+                text = group.name
+                setOnClickListener {
+                    selectedFilterGroup = index + 1 // since the first one is "All"
+                    showFeed()
+                }
+            }
+
+            binding.channelGroups.addView(chip)
+        }
+
+        binding.editGroups.setOnClickListener {
+            ChannelGroupsDialog(channelGroups.toMutableList()) {
+                lifecycleScope.launch { initChannelGroups() }
+            }.show(childFragmentManager, null)
+        }
     }
 
     private fun showFeed() {
         if (viewModel.videoFeed.value == null) return
 
         binding.subRefresh.isRefreshing = false
-        val feed = viewModel.videoFeed.value!!.filter {
-            // apply the selected filter
-            when (selectedFilter) {
-                0 -> true
-                1 -> !it.isShort
-                2 -> it.isShort
-                else -> throw IllegalArgumentException()
-            }
-        }.let { streams ->
-            runBlocking {
-                if (!PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)) {
-                    streams
+        val feed = viewModel.videoFeed.value!!
+            .filter { streamItem ->
+                // filter for selected channel groups
+                if (selectedFilterGroup == 0) {
+                    true
                 } else {
-                    removeWatchVideosFromFeed(streams)
+                    val channelId = streamItem.uploaderUrl.orEmpty().toID()
+                    channelGroups.getOrNull(selectedFilterGroup + 1)?.channels?.contains(channelId) != false
                 }
             }
-        }
+            .filter {
+                // apply the selected filter
+                when (selectedFilter) {
+                    0 -> true
+                    1 -> !it.isShort
+                    2 -> it.isShort
+                    else -> throw IllegalArgumentException()
+                }
+            }.let { streams ->
+                runBlocking {
+                    if (!PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)) {
+                        streams
+                    } else {
+                        removeWatchVideosFromFeed(streams)
+                    }
+                }
+            }
 
         // sort the feed
         val sortedFeed = when (selectedSortOrder) {
