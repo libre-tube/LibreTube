@@ -18,8 +18,8 @@ class RouterActivity : BaseActivity() {
             // start processing the given text
             handleSendText(Uri.parse(intent.getStringExtra(Intent.EXTRA_TEXT)!!))
         } else if (intent.data != null) {
-            val uri = intent.data
-            handleSendText(uri!!)
+            // link shared as text to the app
+            handleSendText(intent.data!!)
         } else {
             // start app as normal if unknown action, shouldn't be reachable
             NavigationHelper.restartMainActivity(this)
@@ -30,6 +30,8 @@ class RouterActivity : BaseActivity() {
      * Resolve the uri and return a bundle with the arguments
      */
     private fun resolveType(intent: Intent, uri: Uri): Intent {
+        val channelNamePaths = listOf("/c/", "/user/")
+        val videoPaths = listOf("/shorts/", "/embed/", "/v/", "/live/")
         when {
             uri.path!!.contains("/channel/") -> {
                 val channelId = uri.path!!
@@ -37,10 +39,12 @@ class RouterActivity : BaseActivity() {
 
                 intent.putExtra(IntentData.channelId, channelId)
             }
-            uri.path!!.contains("/c/") || uri.path!!.contains("/user/") -> {
-                val channelName = uri.path!!
-                    .replace("/c/", "")
-                    .replace("/user/", "")
+            channelNamePaths.any { uri.path!!.contains(it) } -> {
+                var channelName = uri.path!!
+
+                channelNamePaths.forEach {
+                    channelName = channelName.replace(it, "")
+                }
 
                 intent.putExtra(IntentData.channelName, channelName)
             }
@@ -49,16 +53,17 @@ class RouterActivity : BaseActivity() {
 
                 intent.putExtra(IntentData.playlistId, playlistId)
             }
-            uri.path!!.contains("/shorts/") ||
-                uri.path!!.contains("/embed/") ||
-                uri.path!!.contains("/v/")
-            -> {
-                val videoId = uri.path!!
-                    .replace("/shorts/", "")
-                    .replace("/v/", "")
-                    .replace("/embed/", "")
+            videoPaths.any { uri.path!!.contains(it) } -> {
+                var videoId = uri.path!!
+
+                videoPaths.forEach {
+                    videoId = videoId.replace(it, "")
+                }
 
                 intent.putExtra(IntentData.videoId, videoId)
+
+                uri.getQueryParameter("t")
+                    ?.let { intent.putExtra(IntentData.timeStamp, it.toTimeInSeconds()) }
             }
             uri.path!!.contains("/watch") && uri.query != null -> {
                 val videoId = uri.getQueryParameter("v")
