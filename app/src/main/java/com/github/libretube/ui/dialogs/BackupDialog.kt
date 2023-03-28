@@ -17,11 +17,11 @@ import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonPrimitive
 
 class BackupDialog(
-    private val createBackupFile: (BackupFile) -> Unit
+    private val createBackupFile: (BackupFile) -> Unit,
 ) : DialogFragment() {
     sealed class BackupOption(
         @StringRes val name: Int,
-        val onSelected: suspend (BackupFile) -> Unit
+        val onSelected: suspend (BackupFile) -> Unit,
     ) {
         object WatchHistory : BackupOption(R.string.watch_history, onSelected = {
             it.watchHistory = Database.watchHistoryDao().getAll()
@@ -51,6 +51,10 @@ class BackupDialog(
             it.localPlaylists = Database.localPlaylistsDao().getAll()
         })
 
+        object SubscriptionGroups : BackupOption(R.string.channel_groups, onSelected = {
+            it.channelGroups = Database.subscriptionGroupsDao().getAll()
+        })
+
         object Preferences : BackupOption(R.string.preferences, onSelected = { file ->
             file.preferences = PreferenceHelper.settings.all.map { (key, value) ->
                 val jsonValue = when (value) {
@@ -73,7 +77,8 @@ class BackupDialog(
             BackupOption.CustomInstances,
             BackupOption.PlaylistBookmarks,
             BackupOption.LocalPlaylists,
-            BackupOption.Preferences
+            BackupOption.SubscriptionGroups,
+            BackupOption.Preferences,
         )
 
         val backupItems = backupOptions.map { context?.getString(it.name)!! }.toTypedArray()
