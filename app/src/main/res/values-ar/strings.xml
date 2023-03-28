@@ -486,4 +486,8 @@
     <string name="disable_proxy">تعطيل وكيل الأنابيب</string>
     <string name="disable_proxy_summary">تحميل الفيديو والصور مباشرة من خادم يوتيوب . تمكين هذا الخيار فقط إذا كنت تستخدم الشبكات الافتراضية الخاصة ! يرجى ملاحظة أن هذا قد لا ينطبق على محتوى YT الموسيقى .</string>
     <string name="auto_fullscreen_shorts">ملء الشاشة تلقائيًا على مقاطع الفيديو القصيرة</string>
+    <string name="new_group">جديد</string>
+    <string name="group_name">أسم المجموعة</string>
+    <string name="channel_groups">مجموعات القنوات</string>
+    <string name="edit_group">تحرير المجموعة</string>
 </resources>
