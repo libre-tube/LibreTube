@@ -480,4 +480,8 @@
     <string name="disable_proxy">Wyłącz proxy Piped</string>
     <string name="disable_proxy_summary">Wczytuj filmy i obrazy bezpośrednio z serwerów YouTube. Włącz tę opcję tylko wtedy, gdy i tak używasz VPN! Zauważ, że może to nie działać z treściami z YT Music.</string>
     <string name="auto_fullscreen_shorts">Automatyczny pełny ekran dla krótkich filmów</string>
+    <string name="channel_groups">Grupy kanałów</string>
+    <string name="new_group">Nowa</string>
+    <string name="group_name">Nazwa grupy</string>
+    <string name="edit_group">Edytuj grupę</string>
 </resources>
