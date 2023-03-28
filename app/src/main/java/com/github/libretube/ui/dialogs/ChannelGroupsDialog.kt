@@ -10,6 +10,7 @@ import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.SubscriptionGroup
 import com.github.libretube.ui.adapters.SubscriptionGroupsAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 
 class ChannelGroupsDialog(
@@ -33,7 +34,7 @@ class ChannelGroupsDialog(
             .setPositiveButton(R.string.okay, null)
             .setNeutralButton(R.string.new_group) { _, _ ->
                 EditChannelGroupDialog(SubscriptionGroup("", mutableListOf())) {
-                    runBlocking {
+                    runBlocking(Dispatchers.IO) {
                         DatabaseHolder.Database.subscriptionGroupsDao().createGroup(it)
                     }
                     groups.add(it)

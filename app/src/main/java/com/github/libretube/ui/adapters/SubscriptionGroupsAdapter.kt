@@ -9,6 +9,7 @@ import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.SubscriptionGroup
 import com.github.libretube.ui.dialogs.EditChannelGroupDialog
 import com.github.libretube.ui.viewholders.SubscriptionGroupsViewHolder
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 
 class SubscriptionGroupsAdapter(
@@ -33,7 +34,7 @@ class SubscriptionGroupsAdapter(
             groupName.text = subscriptionGroup.name
             deleteGroup.setOnClickListener {
                 groups.remove(subscriptionGroup)
-                runBlocking {
+                runBlocking(Dispatchers.IO) {
                     DatabaseHolder.Database.subscriptionGroupsDao().deleteGroup(
                         subscriptionGroup.name
                     )
@@ -44,8 +45,12 @@ class SubscriptionGroupsAdapter(
             editGroup.setOnClickListener {
                 EditChannelGroupDialog(subscriptionGroup) {
                     groups[position] = it
-                    runBlocking {
-                        DatabaseHolder.Database.subscriptionGroupsDao().updateGroup(it)
+                    runBlocking(Dispatchers.IO) {
+                        // delete the old one as it might have a different name
+                        DatabaseHolder.Database.subscriptionGroupsDao().deleteGroup(
+                            subscriptionGroup.name
+                        )
+                        DatabaseHolder.Database.subscriptionGroupsDao().createGroup(it)
                     }
                     notifyItemChanged(position)
                     onGroupsChanged(groups)

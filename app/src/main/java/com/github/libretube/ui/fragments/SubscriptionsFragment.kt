@@ -166,23 +166,24 @@ class SubscriptionsFragment : Fragment() {
         channelGroups = DatabaseHolder.Database.subscriptionGroupsDao().getAll()
 
         binding.chipAll.isSelected = true
-        binding.channelGroups.children.forEachIndexed { index, view ->
-            if (index != 0) binding.channelGroups.removeView(view)
+        binding.channelGroups.children.forEach { view ->
+            if (view.id != R.id.chip_all) binding.channelGroups.removeView(view)
         }
 
-        channelGroups.forEachIndexed { index, group ->
+        channelGroups.forEach { group ->
             val chip = Chip(context, null, R.style.ElevatedFilterChip).apply {
                 id = View.generateViewId()
                 isCheckable = true
                 isClickable = true
                 text = group.name
-                setOnClickListener {
-                    selectedFilterGroup = index + 1 // since the first one is "All"
-                    showFeed()
-                }
             }
 
             binding.channelGroups.addView(chip)
+        }
+
+        binding.channelGroups.setOnCheckedStateChangeListener { group, checkedIds ->
+            selectedFilterGroup = group.children.indexOfFirst { it.id == checkedIds.first() }
+            showFeed()
         }
 
         binding.editGroups.setOnClickListener {
@@ -203,7 +204,8 @@ class SubscriptionsFragment : Fragment() {
                     true
                 } else {
                     val channelId = streamItem.uploaderUrl.orEmpty().toID()
-                    channelGroups.getOrNull(selectedFilterGroup + 1)?.channels?.contains(channelId) != false
+                    val group = channelGroups.getOrNull(selectedFilterGroup - 1)
+                    group?.channels?.contains(channelId) != false
                 }
             }
             .filter {
@@ -216,7 +218,11 @@ class SubscriptionsFragment : Fragment() {
                 }
             }.let { streams ->
                 runBlocking {
-                    if (!PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)) {
+                    if (!PreferenceHelper.getBoolean(
+                            PreferenceKeys.HIDE_WATCHED_FROM_FEED,
+                            false
+                        )
+                    ) {
                         streams
                     } else {
                         removeWatchVideosFromFeed(streams)
