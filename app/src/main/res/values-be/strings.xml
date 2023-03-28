@@ -43,7 +43,7 @@
     <string name="search_history">Гісторыя пошуку</string>
     <string name="music_videos">Відэа YT Music</string>
     <string name="segment_skipped">Прапушчаны сегмент</string>
-    <string name="sponsorblock_state">Укл</string>
+    <string name="sponsorblock_state">Укл.</string>
     <string name="category_segments">Сегменты</string>
     <string name="category_sponsor">Спонсар</string>
     <string name="category_selfpromo">Неаплатнае/Самарэклама</string>
@@ -57,7 +57,7 @@
     <string name="color_green">Завадны зялёны</string>
     <string name="color_purple">Прыемны пурпур</string>
     <string name="sponsorblock_notifications">Апавяшчэнні</string>
-    <string name="disabled">Выкл</string>
+    <string name="disabled">Адкл.</string>
     <string name="appearance">Знешні выгляд</string>
     <string name="app_behavior">Паводзіны</string>
     <string name="video_format_summary">Канвертацыя файлаў, калі спампоўваюцца як аўдыё, так і відэа.</string>
@@ -123,8 +123,8 @@
     <string name="quality">Якасць</string>
     <string name="behavior">Паводзіны</string>
     <string name="player_summary">Па змаўчанні і паводзіны</string>
-    <string name="pauseOnScreenOff">Аўтаматычная паўза</string>
-    <string name="pauseOnScreenOff_summary">Прыпыніце прайграванне, калі экран выключаны.</string>
+    <string name="pauseOnScreenOff">Аўтапаўза</string>
+    <string name="pauseOnScreenOff_summary">Спыняць прайграванне пры адключэнні экрана.</string>
     <string name="autoplay_summary">Аўтаматычнае прайграванне наступнага відэа пасля бягучага.</string>
     <string name="clonePlaylist">Кланаваць плэйліст</string>
     <string name="reset">Аднавіць значэнні па змаўчанні</string>
@@ -216,7 +216,7 @@
     <string name="customization">Карэкціроўкі</string>
     <string name="noInternet">Спачатку падключыцеся да Інтэрнэту.</string>
     <string name="website">Вэб-сайт</string>
-    <string name="sponsorblock_summary">Выкарыстоўвае API https://sponsor.ajay.app</string>
+    <string name="sponsorblock_summary">На аснове API https://sponsor.ajay.app</string>
     <string name="channels">Каналы</string>
     <string name="youtube">YouTube</string>
     <string name="all">Усе</string>
