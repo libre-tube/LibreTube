@@ -122,9 +122,6 @@ dependencies {
     /* Room */
     kapt libs.room.compiler
     implementation libs.room
-
-    /* View binding */
-    implementation libs.viewBindingPropertyDelegate
 }
 
 static def getUnixTime() {

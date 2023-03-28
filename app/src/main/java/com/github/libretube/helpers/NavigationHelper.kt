@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Handler
 import android.os.Looper
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import androidx.fragment.app.commitNow
@@ -31,7 +30,7 @@ object NavigationHelper {
     ) {
         if (channelId == null) return
 
-        val activity = unwrap(context)
+        val activity = unwrapActivity(context)
         val bundle = bundleOf(IntentData.channelId to channelId)
         activity.navController.navigate(R.id.channelFragment, bundle)
         try {
@@ -45,7 +44,7 @@ object NavigationHelper {
         }
     }
 
-    private fun unwrap(context: Context): MainActivity {
+    private fun unwrapActivity(context: Context): MainActivity {
         var correctContext: Context? = context
         while (correctContext !is MainActivity && correctContext is ContextWrapper) {
             correctContext = correctContext.baseContext
@@ -92,7 +91,7 @@ object NavigationHelper {
             IntentData.timeStamp to timeStamp
         )
 
-        val activity = context as AppCompatActivity
+        val activity = unwrapActivity(context)
         activity.supportFragmentManager.commitNow {
             replace<PlayerFragment>(R.id.container, args = bundle)
         }
@@ -105,7 +104,7 @@ object NavigationHelper {
     ) {
         if (playlistId == null) return
 
-        val activity = unwrap(context)
+        val activity = unwrapActivity(context)
         val bundle = bundleOf(
             IntentData.playlistId to playlistId,
             IntentData.playlistType to playlistType
@@ -117,7 +116,7 @@ object NavigationHelper {
      * Start the audio player fragment
      */
     fun startAudioPlayer(context: Context) {
-        val activity = unwrap(context)
+        val activity = unwrapActivity(context)
         activity.supportFragmentManager.commitNow {
             replace<AudioPlayerFragment>(R.id.container)
         }
