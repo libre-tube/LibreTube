@@ -344,13 +344,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         binding.playerMotionLayout.progress = 1.toFloat()
         binding.playerMotionLayout.transitionToStart()
 
+        val activity = requireActivity()
         if (PlayerHelper.pipEnabled) {
-            PictureInPictureCompat.setPictureInPictureParams(requireActivity(), pipParams)
+            PictureInPictureCompat.setPictureInPictureParams(activity, pipParams)
         }
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            binding.relPlayerPip.visibility = View.GONE
-        }
+        binding.relPlayerPip.isVisible = PictureInPictureCompat
+            .isPictureInPictureAvailable(activity)
     }
 
     // actions that don't depend on video information
