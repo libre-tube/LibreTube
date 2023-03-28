@@ -471,4 +471,8 @@
     <string name="disable_proxy">Nonaktifkan proksi Piped</string>
     <string name="disable_proxy_summary">Muat video dan gambar secara langsung dari server YouTube. Hanya aktifkan opsi ini jika Anda menggunakan VPN! Dicatat bahwa ini mungkin tidak bekerja dengan konten dari YT Music.</string>
     <string name="auto_fullscreen_shorts">Penuhi layar secara otomatis pada video pendek</string>
+    <string name="channel_groups">Grup saluran</string>
+    <string name="new_group">Baru</string>
+    <string name="group_name">Nama grup</string>
+    <string name="edit_group">Sunting grup</string>
 </resources>
