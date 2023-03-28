@@ -51,12 +51,14 @@ class RouterActivity : BaseActivity() {
             }
             uri.path!!.contains("/shorts/") ||
                 uri.path!!.contains("/embed/") ||
-                uri.path!!.contains("/v/")
+                uri.path!!.contains("/v/") ||
+                uri.path!!.contains("/live/")
             -> {
                 val videoId = uri.path!!
                     .replace("/shorts/", "")
                     .replace("/v/", "")
                     .replace("/embed/", "")
+                    .replace("/live/", "")
 
                 intent.putExtra(IntentData.videoId, videoId)
             }
