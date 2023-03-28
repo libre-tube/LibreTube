@@ -1565,7 +1565,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             // go to fullscreen mode
             Configuration.ORIENTATION_LANDSCAPE -> setFullscreen()
             // exit fullscreen if not landscape
-            else -> unsetFullscreen()
+            else -> if (_binding != null) unsetFullscreen()
         }
     }
 }
