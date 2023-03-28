@@ -474,4 +474,8 @@
     <string name="disable_proxy">Piped proksini bağla</string>
     <string name="disable_proxy_summary">Videoları və şəkilləri birbaşa YouTube serverlərindən yüklə. Seçimi, ancaq VPN istifadə edirsinizsə aktivləşdirin! Qeyd edək ki, bu, YT musiqidəki məzmunla işləməyə bilər.</string>
     <string name="auto_fullscreen_shorts">Qısa videolarda avtomatik tam ekran</string>
+    <string name="edit_group">Qrupu redaktə et</string>
+    <string name="channel_groups">Kanal qrupları</string>
+    <string name="group_name">Qrup adı</string>
+    <string name="new_group">Yeni</string>
 </resources>
