@@ -64,7 +64,9 @@ object PreferenceHelper {
     }
 
     fun getInt(key: String?, defValue: Int): Int {
-        return settings.getInt(key, defValue)
+        return runCatching {
+            settings.getInt(key, defValue)
+        }.getOrElse { settings.getLong(key, defValue.toLong()).toInt() }
     }
 
     fun getLong(key: String?, defValue: Long): Long {
