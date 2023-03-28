@@ -1,15 +1,15 @@
 package com.github.libretube.ui.activities
 
-import android.app.PictureInPictureParams
 import android.content.pm.ActivityInfo
 import android.media.session.PlaybackState
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.github.libretube.compat.PictureInPictureCompat
+import com.github.libretube.compat.PictureInPictureParamsCompat
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.ActivityOfflinePlayerBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
@@ -21,7 +21,6 @@ import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.ui.base.BaseActivity
-import com.github.libretube.ui.extensions.setAspectRatio
 import com.github.libretube.ui.models.PlayerViewModel
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
@@ -197,18 +196,14 @@ class OfflinePlayerActivity : BaseActivity() {
     }
 
     override fun onUserLeaveHint() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return
-
-        if (!PlayerHelper.pipEnabled) return
-
-        if (player.playbackState == PlaybackState.STATE_PAUSED) return
-
-        enterPictureInPictureMode(
-            PictureInPictureParams.Builder()
-                .setActions(emptyList())
-                .setAspectRatio(player.videoSize.width, player.videoSize.height)
-                .build()
-        )
+        if (PlayerHelper.pipEnabled && player.playbackState != PlaybackState.STATE_PAUSED) {
+            PictureInPictureCompat.enterPictureInPictureMode(
+                this,
+                PictureInPictureParamsCompat.Builder()
+                    .setAspectRatio(player.videoSize)
+                    .build()
+            )
+        }
 
         super.onUserLeaveHint()
     }
