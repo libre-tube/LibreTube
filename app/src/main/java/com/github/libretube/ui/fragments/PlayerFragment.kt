@@ -58,6 +58,9 @@ import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.hideKeyboard
+import com.github.libretube.extensions.isLightTheme
+import com.github.libretube.extensions.setDarkStatusBarIcons
+import com.github.libretube.extensions.setLightStatusBarIcons
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.extensions.updateParameters
@@ -108,10 +111,6 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.util.MimeTypes
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.io.IOException
-import java.util.*
-import java.util.concurrent.Executors
-import kotlin.math.abs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -120,6 +119,10 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
+import java.io.IOException
+import java.util.*
+import java.util.concurrent.Executors
+import kotlin.math.abs
 
 class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private var _binding: FragmentPlayerBinding? = null
@@ -334,7 +337,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         if (PlayerHelper.swipeGestureEnabled) {
             binding.playerMotionLayout.addSwipeUpListener {
-                if(this::streams.isInitialized) {
+                if (this::streams.isInitialized) {
                     binding.player.hideController()
                     setFullscreen()
                 }
@@ -496,6 +499,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             enableTransition(R.id.yt_transition, false)
         }
 
+        // set status bar icon color to white
+        mainActivity.setLightStatusBarIcons()
+
         binding.mainContainer.isClickable = true
         binding.linLayout.visibility = View.GONE
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
@@ -519,6 +525,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         with(binding.playerMotionLayout) {
             getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
             enableTransition(R.id.yt_transition, true)
+        }
+
+        // set status bar icon color back to theme color
+        if (mainActivity.isLightTheme) {
+            mainActivity.setDarkStatusBarIcons()
+        } else {
+            mainActivity.setLightStatusBarIcons()
         }
 
         binding.mainContainer.isClickable = false
@@ -645,13 +658,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         if (segments.isEmpty()) return
 
-        exoPlayer.checkForSegments(requireContext(), segments, PlayerHelper.skipSegmentsManually)?.let { segmentEnd ->
-            binding.sbSkipBtn.visibility = View.VISIBLE
-            binding.sbSkipBtn.setOnClickListener {
-                exoPlayer.seekTo(segmentEnd)
+        exoPlayer.checkForSegments(requireContext(), segments, PlayerHelper.skipSegmentsManually)
+            ?.let { segmentEnd ->
+                binding.sbSkipBtn.visibility = View.VISIBLE
+                binding.sbSkipBtn.setOnClickListener {
+                    exoPlayer.seekTo(segmentEnd)
+                }
+                return
             }
-            return
-        }
 
         if (PlayerHelper.skipSegmentsManually) binding.sbSkipBtn.visibility = View.GONE
     }
@@ -729,7 +743,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 if (binding.playerMotionLayout.progress != 1.0f) {
                     // show controllers when not in picture in picture mode
                     val inPipMode = PlayerHelper.pipEnabled &&
-                        PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
+                            PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
                     if (!inPipMode) {
                         binding.player.useController = true
                     }
@@ -1291,7 +1305,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         when {
             // LBRY HLS
-            PreferenceHelper.getBoolean(PreferenceKeys.LBRY_HLS, false) && streams.videoStreams.any {
+            PreferenceHelper.getBoolean(
+                PreferenceKeys.LBRY_HLS,
+                false
+            ) && streams.videoStreams.any {
                 it.quality.orEmpty().contains("LBRY HLS")
             } -> {
                 val lbryHlsUrl = streams.videoStreams.first {
@@ -1300,7 +1317,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 setMediaSource(lbryHlsUrl.toUri(), MimeTypes.APPLICATION_M3U8)
             }
             // DASH
-            !PreferenceHelper.getBoolean(PreferenceKeys.USE_HLS_OVER_DASH, false) && streams.videoStreams.isNotEmpty() -> {
+            !PreferenceHelper.getBoolean(
+                PreferenceKeys.USE_HLS_OVER_DASH,
+                false
+            ) && streams.videoStreams.isNotEmpty() -> {
                 // only use the dash manifest generated by YT if either it's a livestream or no other source is available
                 val uri = streams.dash?.let { ProxyHelper.unwrapIfEnabled(it) }?.toUri().takeIf {
                     streams.livestream || streams.videoStreams.isEmpty()
