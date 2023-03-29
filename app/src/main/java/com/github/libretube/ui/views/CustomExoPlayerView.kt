@@ -32,6 +32,8 @@ import com.github.libretube.helpers.AudioHelper
 import com.github.libretube.helpers.BrightnessHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.WindowHelper
+import com.github.libretube.helpers.hideSystemBars
+import com.github.libretube.helpers.showSystemBars
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
@@ -201,6 +203,23 @@ internal class CustomExoPlayerView(
 
             override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {}
         })
+
+        setControllerVisibilityListener(
+            ControllerVisibilityListener { visibility ->
+                playerViewModel?.isFullscreen?.value?.let { isFullscreen ->
+                    if (isFullscreen) {
+                        when (visibility) {
+                            View.VISIBLE -> {
+                                activity.showSystemBars()
+                            }
+                            View.GONE -> {
+                                activity.hideSystemBars()
+                            }
+                        }
+                    }
+                }
+            }
+        )
 
         playerViewModel?.isFullscreen?.observe(viewLifecycleOwner!!) { isFullscreen ->
             WindowHelper.toggleFullscreen(activity, isFullscreen)

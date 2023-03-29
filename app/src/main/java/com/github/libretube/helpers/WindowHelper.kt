@@ -20,25 +20,24 @@ object WindowHelper {
 
         WindowCompat.setDecorFitsSystemWindows(window, !isFullscreen)
 
-        val controller = WindowCompat.getInsetsController(window, window.decorView)
-        val flags = WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.navigationBars()
         if (isFullscreen) {
-            controller.hide(flags)
+            activity.hideSystemBars()
         } else {
-            controller.show(flags)
+            activity.showSystemBars()
         }
+    }
+}
 
-        controller.systemBarsBehavior = if (isFullscreen) {
-            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-        } else {
-            WindowInsetsControllerCompat.BEHAVIOR_SHOW_BARS_BY_TOUCH
-        }
+fun Activity.hideSystemBars() {
+    WindowCompat.getInsetsController(window, window.decorView).apply {
+        systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        hide(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.navigationBars())
+    }
+}
 
-        val layoutFlag = WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-        if (isFullscreen) {
-            window.setFlags(layoutFlag, layoutFlag)
-        } else {
-            window.clearFlags(layoutFlag)
-        }
+fun Activity.showSystemBars() {
+    WindowCompat.getInsetsController(window, window.decorView).apply {
+        systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        show(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.navigationBars())
     }
 }
