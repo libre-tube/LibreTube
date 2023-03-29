@@ -58,6 +58,9 @@ import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.hideKeyboard
+import com.github.libretube.extensions.isLightTheme
+import com.github.libretube.extensions.setDarkStatusBarIcons
+import com.github.libretube.extensions.setLightStatusBarIcons
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.extensions.updateParameters
@@ -495,6 +498,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             enableTransition(R.id.yt_transition, false)
         }
 
+        // set status bar icon color to white
+        mainActivity.setLightStatusBarIcons()
+
         binding.mainContainer.isClickable = true
         binding.linLayout.visibility = View.GONE
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
@@ -518,6 +524,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         with(binding.playerMotionLayout) {
             getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
             enableTransition(R.id.yt_transition, true)
+        }
+
+        // set status bar icon color back to theme color
+        if (mainActivity.isLightTheme) {
+            mainActivity.setDarkStatusBarIcons()
+        } else {
+            mainActivity.setLightStatusBarIcons()
         }
 
         binding.mainContainer.isClickable = false
