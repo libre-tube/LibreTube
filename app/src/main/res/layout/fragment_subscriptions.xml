@@ -131,6 +131,47 @@
 
                     </FrameLayout>
 
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="3dp"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.chip.ChipGroup
+                                android:id="@+id/channel_groups"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:checkedChip="@id/chip_all"
+                                android:layout_marginStart="5dp"
+                                app:selectionRequired="true"
+                                app:singleLine="true"
+                                app:singleSelection="true">
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chip_all"
+                                    style="@style/ElevatedFilterChip"
+                                    android:text="@string/all" />
+
+                            </com.google.android.material.chip.ChipGroup>
+
+                            <ImageView
+                                android:id="@+id/edit_groups"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginHorizontal="10dp"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:src="@drawable/ic_edit" />
+
+                        </LinearLayout>
+
+                    </HorizontalScrollView>
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

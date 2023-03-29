@@ -2,12 +2,13 @@ package com.github.libretube.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.PreferenceKeys
@@ -24,8 +25,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
-class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
-    private val binding by viewBinding(FragmentSearchResultBinding::bind)
+class SearchResultFragment : Fragment() {
+    private var _binding: FragmentSearchResultBinding? = null
+    private val binding get() = _binding!!
 
     private var nextPage: String? = null
     private var query: String = ""
@@ -36,6 +38,15 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         query = arguments?.getString("query").toString()
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentSearchResultBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -131,5 +142,11 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
                 DatabaseHelper.addToSearchHistory(SearchHistoryItem(query))
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        _binding = null
     }
 }

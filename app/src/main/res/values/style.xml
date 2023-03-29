@@ -250,4 +250,13 @@
 
     </style>
 
+    <style name="ElevatedFilterChip" parent="Widget.Material3.Chip.Filter.Elevated">
+
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">5dp</item>
+        <item name="android:layout_marginEnd">5dp</item>
+
+    </style>
+
 </resources>

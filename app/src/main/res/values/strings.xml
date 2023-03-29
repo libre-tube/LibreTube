@@ -456,6 +456,10 @@
     <string name="disable_proxy">Disable Piped proxy</string>
     <string name="disable_proxy_summary">Load videos and images directly from YouTube\'s servers. Only enable the option if you use a VPN anyways! Note that this might not work with content from YT music.</string>
     <string name="auto_fullscreen_shorts">Auto fullscreen on short videos</string>
+    <string name="channel_groups">Channel groups</string>
+    <string name="new_group">New</string>
+    <string name="group_name">Group name</string>
+    <string name="edit_group">Edit group</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
