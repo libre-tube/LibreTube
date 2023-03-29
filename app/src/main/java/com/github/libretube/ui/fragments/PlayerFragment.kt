@@ -58,9 +58,6 @@ import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.hideKeyboard
-import com.github.libretube.extensions.isLightTheme
-import com.github.libretube.extensions.setDarkStatusBarIcons
-import com.github.libretube.extensions.setLightStatusBarIcons
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.extensions.updateParameters
@@ -84,6 +81,9 @@ import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.dialogs.StatsDialog
+import com.github.libretube.ui.extensions.isLightTheme
+import com.github.libretube.ui.extensions.setDarkStatusBarIcons
+import com.github.libretube.ui.extensions.setLightStatusBarIcons
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.listeners.SeekbarPreviewListener
