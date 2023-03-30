@@ -28,6 +28,7 @@ import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import androidx.core.text.parseAsHtml
+import androidx.core.view.WindowCompat
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -81,9 +82,6 @@ import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.dialogs.StatsDialog
-import com.github.libretube.ui.extensions.isLightTheme
-import com.github.libretube.ui.extensions.setDarkStatusBarIcons
-import com.github.libretube.ui.extensions.setLightStatusBarIcons
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.listeners.SeekbarPreviewListener
@@ -186,6 +184,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     private val handler = Handler(Looper.getMainLooper())
     private val mainActivity get() = activity as MainActivity
+    private val windowInsetsControllerCompat =  WindowCompat
+        .getInsetsController(mainActivity.window, mainActivity.window.decorView)
 
     /**
      * Receiver for all actions in the PiP mode
@@ -499,7 +499,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         // set status bar icon color to white
-        mainActivity.setLightStatusBarIcons()
+        windowInsetsControllerCompat.isAppearanceLightStatusBars = false
 
         binding.mainContainer.isClickable = true
         binding.linLayout.visibility = View.GONE
@@ -527,11 +527,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         // set status bar icon color back to theme color
-        if (mainActivity.isLightTheme) {
-            mainActivity.setDarkStatusBarIcons()
-        } else {
-            mainActivity.setLightStatusBarIcons()
-        }
+        windowInsetsControllerCompat.isAppearanceLightStatusBars =
+            when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+                Configuration.UI_MODE_NIGHT_YES -> false
+                Configuration.UI_MODE_NIGHT_NO -> true
+                else -> true
+            }
 
         binding.mainContainer.isClickable = false
         binding.linLayout.visibility = View.VISIBLE
