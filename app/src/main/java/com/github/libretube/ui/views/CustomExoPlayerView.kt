@@ -32,10 +32,10 @@ import com.github.libretube.helpers.AudioHelper
 import com.github.libretube.helpers.BrightnessHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.WindowHelper
-import com.github.libretube.helpers.hideSystemBars
-import com.github.libretube.helpers.showSystemBars
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.base.BaseActivity
+import com.github.libretube.ui.extensions.hideSystemBars
+import com.github.libretube.ui.extensions.showSystemBars
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.interfaces.PlayerOptions
