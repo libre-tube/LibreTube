@@ -477,4 +477,8 @@
     <string name="disable_proxy_summary">Načítat videa a obrázky přímo ze serverů YouTube. Tuto možnost povolte pouze v případě, že stejně používáte VPN! Upozorňujeme, že tato funkce nemusí fungovat u obsahu z YT Music.</string>
     <string name="disable_proxy">Zakázat proxy přes Piped</string>
     <string name="auto_fullscreen_shorts">Automatická celá obrazovka u Shorts</string>
+    <string name="new_group">Nová</string>
+    <string name="group_name">Název skupiny</string>
+    <string name="channel_groups">Skupiny kanálů</string>
+    <string name="edit_group">Upravit skupinu</string>
 </resources>

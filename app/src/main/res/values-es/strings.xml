@@ -477,4 +477,8 @@
     <string name="disable_proxy">Deshabilitar el próximo de Piped</string>
     <string name="disable_proxy_summary">Carga vídeos e imágenes directamente desde los servidores de YouTube. Activa esta opción sólo si utilizas una VPN. Ten en cuenta que esto podría no funcionar con contenido de YouTube Música.</string>
     <string name="auto_fullscreen_shorts">Pantalla completa automáticamente en videos cortos</string>
+    <string name="channel_groups">Grupos de canales</string>
+    <string name="new_group">Nuevo</string>
+    <string name="group_name">Nombre del grupo</string>
+    <string name="edit_group">Editar el grupo</string>
 </resources>

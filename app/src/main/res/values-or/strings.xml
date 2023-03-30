@@ -474,4 +474,8 @@
     <string name="disable_proxy">ପାଇପ୍ ପ୍ରକ୍ସି ଅକ୍ଷମ କରନ୍ତୁ</string>
     <string name="disable_proxy_summary">ସିଧାସଳଖ ୟୁଟ୍ୟୁବ୍ ସର୍ଭରରୁ ଭିଡିଓ ଏବଂ ପ୍ରତିଛବି ଲୋଡ୍ କରନ୍ତୁ । ଯଦି ଆପଣ ଯେକୌଣସି ପ୍ରକାରେ ଏକ VPN ବ୍ୟବହାର କରନ୍ତି ତେବେ କେବଳ ଏହି ବିକଳ୍ପକୁ ସକ୍ଷମ କରନ୍ତୁ! ଧ୍ୟାନ ଦିଅନ୍ତୁ ଯେ ଏହା YT ସଙ୍ଗୀତର ବିଷୟବସ୍ତୁ ସହିତ କାମ କରିନପାରେ ।</string>
     <string name="auto_fullscreen_shorts">ଛୋଟ ଭିଡିଓଗୁଡ଼ିକରେ ଅଟୋ ଫୁଲ୍ ସ୍କ୍ରିନ୍</string>
+    <string name="new_group">ନୂତନ</string>
+    <string name="group_name">ଗୋଷ୍ଠୀ ନାମ</string>
+    <string name="edit_group">ଗୋଷ୍ଠୀ ସଂପାଦନ କରନ୍ତୁ</string>
+    <string name="channel_groups">ଚ୍ୟାନେଲ୍ ଗୋଷ୍ଠୀଗୁଡିକ</string>
 </resources>

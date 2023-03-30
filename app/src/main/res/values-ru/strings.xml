@@ -480,4 +480,8 @@
     <string name="disable_proxy">Отключить прокси Piped</string>
     <string name="disable_proxy_summary">Загружать видео и изображения напрямую с серверов YouTube. Включайте эту опцию только при использовании VPN! Обратите внимание, что это может не сработать с контентом из YouTube Music.</string>
     <string name="auto_fullscreen_shorts">Автоматический полноэкранный режим для коротких видео</string>
+    <string name="new_group">Новая</string>
+    <string name="group_name">Название группы</string>
+    <string name="channel_groups">Группы каналов</string>
+    <string name="edit_group">Изменить группу</string>
 </resources>

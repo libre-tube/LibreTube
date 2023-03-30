@@ -368,7 +368,7 @@
     <string name="clear_bookmarks">Ștergeți marcajele</string>
     <string name="volume">Volum</string>
     <string name="swipe_controls_summary">Folosiți gestul de glisare pentru a regla luminozitatea și volumul.</string>
-    <string name="background_channel_description">Afișează o notificare cu butoane pentru a controla playerul audio.</string>
+    <string name="background_channel_description">Afișează o notificare cu butoane pentru a controla player-ul audio.</string>
     <string name="rewind">Înapoi</string>
     <string name="alternative_pip_controls">Controale PiP alternative</string>
     <string name="failed_fetching_instances">Nu s-au putut prelua instanțe disponibile.</string>
@@ -477,4 +477,8 @@
     <string name="disable_proxy">Dezactivați proxy-ul Piped</string>
     <string name="disable_proxy_summary">Încărcați videoclipuri și imagini direct de pe serverele YouTube. Activați opțiunea doar dacă utilizați oricum un VPN! Rețineți că este posibil să nu funcționeze cu conținut din muzica YT.</string>
     <string name="auto_fullscreen_shorts">Ecran complet automat pentru videoclipuri scurte</string>
+    <string name="channel_groups">Grupuri de canale</string>
+    <string name="group_name">Numele grupului</string>
+    <string name="edit_group">Editează grupul</string>
+    <string name="new_group">Nou</string>
 </resources>

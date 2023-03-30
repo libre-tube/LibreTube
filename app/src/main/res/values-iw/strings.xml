@@ -480,4 +480,8 @@
     <string name="disable_proxy">השבתת המתווך של Piped</string>
     <string name="disable_proxy_summary">טעינת סרטונים ותמונות ישירות מהשרתים של YouTube. יש להפעיל את האפשרות רק אם כבר יש לך VPN! נא לשים לב שזה עלול שלא לעבוד עם תוכן מ־YT Music.</string>
     <string name="auto_fullscreen_shorts">מסך מלא אוטומטי בסרטונים קצרים</string>
+    <string name="group_name">שם הקבוצה</string>
+    <string name="edit_group">עריכת קבוצה</string>
+    <string name="channel_groups">קבוצות ערוץ</string>
+    <string name="new_group">חדשה</string>
 </resources>

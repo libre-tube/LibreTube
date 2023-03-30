@@ -474,4 +474,8 @@
     <string name="disable_proxy">Piped Proxy deaktivieren</string>
     <string name="auto_fullscreen_shorts">Automatisches Vollbild bei kurzen Videos</string>
     <string name="disable_proxy_summary">Lade Videos und Bilder direkt von YouTubes Servern. Aktiviere diese Option nur, wenn du ohnehin ein VPN verwendest! Beachte, dass diese Option eventuell nicht mit YT Music funktioniert.</string>
+    <string name="channel_groups">Kanalgruppen</string>
+    <string name="new_group">Neu</string>
+    <string name="group_name">Gruppenname</string>
+    <string name="edit_group">Gruppe bearbeiten</string>
 </resources>

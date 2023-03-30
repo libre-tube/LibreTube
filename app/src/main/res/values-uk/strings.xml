@@ -480,4 +480,8 @@
     <string name="disable_proxy">Вимкнути транспортний проксі</string>
     <string name="disable_proxy_summary">Завантажуйте відео й зображення безпосередньо з серверів YouTube. Увімкніть цю опцію, якщо ви все одно використовуєте VPN! Зауважте, що це може не спрацювати з матеріалами з YT music.</string>
     <string name="auto_fullscreen_shorts">Автоматичний повноекранний режим для коротких відео</string>
+    <string name="new_group">Нова</string>
+    <string name="edit_group">Редагувати групу</string>
+    <string name="channel_groups">Групи каналів</string>
+    <string name="group_name">Назва групи</string>
 </resources>
