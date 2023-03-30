@@ -6,7 +6,6 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.R
 import com.github.libretube.databinding.DialogTextPreferenceBinding
-import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.activities.SettingsActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -32,14 +31,8 @@ abstract class BasePreferenceFragment : PreferenceFragmentCompat() {
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle(preference.title)
                     .setSingleChoiceItems(preference.entries, prefIndex) { dialog, index ->
-
                         // get the new ListPreference value
                         val newValue = preference.entryValues[index].toString()
-
-                        // save the new value and call the onPreferenceChange Method
-                        preference.value = newValue
-                        preference.callChangeListener(newValue)
-
                         // invoke the on change listeners
                         if (preference.callChangeListener(newValue)) {
                             preference.value = newValue
@@ -51,12 +44,7 @@ abstract class BasePreferenceFragment : PreferenceFragmentCompat() {
             }
             is EditTextPreference -> {
                 val binding = DialogTextPreferenceBinding.inflate(layoutInflater)
-                binding.input.setText(
-                    PreferenceHelper.getString(
-                        preference.key,
-                        ""
-                    )
-                )
+                binding.input.setText(preference.text)
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle(preference.title)
                     .setView(binding.root)
@@ -66,7 +54,7 @@ abstract class BasePreferenceFragment : PreferenceFragmentCompat() {
                             preference.text = newValue
                         }
                     }
-                    .setNegativeButton(android.R.string.cancel, null)
+                    .setNegativeButton(R.string.cancel, null)
                     .show()
             }
             /**
