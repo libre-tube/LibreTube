@@ -28,6 +28,7 @@ import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import androidx.core.text.parseAsHtml
+import androidx.core.view.WindowCompat
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -183,6 +184,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     private val handler = Handler(Looper.getMainLooper())
     private val mainActivity get() = activity as MainActivity
+    private val windowInsetsControllerCompat get() =  WindowCompat
+        .getInsetsController(mainActivity.window, mainActivity.window.decorView)
 
     /**
      * Receiver for all actions in the PiP mode
@@ -495,6 +498,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             enableTransition(R.id.yt_transition, false)
         }
 
+        // set status bar icon color to white
+        windowInsetsControllerCompat.isAppearanceLightStatusBars = false
+
         binding.mainContainer.isClickable = true
         binding.linLayout.visibility = View.GONE
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
@@ -519,6 +525,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
             enableTransition(R.id.yt_transition, true)
         }
+
+        // set status bar icon color back to theme color
+        windowInsetsControllerCompat.isAppearanceLightStatusBars =
+            when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+                Configuration.UI_MODE_NIGHT_YES -> false
+                Configuration.UI_MODE_NIGHT_NO -> true
+                else -> true
+            }
 
         binding.mainContainer.isClickable = false
         binding.linLayout.visibility = View.VISIBLE
