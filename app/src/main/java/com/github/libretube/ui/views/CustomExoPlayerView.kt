@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.os.postDelayed
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.marginStart
 import androidx.core.view.updateLayoutParams
@@ -207,15 +208,10 @@ internal class CustomExoPlayerView(
         setControllerVisibilityListener(
             ControllerVisibilityListener { visibility ->
                 playerViewModel?.isFullscreen?.value?.let { isFullscreen ->
-                    if (isFullscreen) {
-                        when (visibility) {
-                            View.VISIBLE -> {
-                                activity.showSystemBars()
-                            }
-                            View.GONE -> {
-                                activity.hideSystemBars()
-                            }
-                        }
+                    if (!isFullscreen) return@let
+                    when (visibility) {
+                        View.VISIBLE -> activity.showSystemBars(WindowInsetsCompat.Type.statusBars())
+                        View.GONE -> activity.hideSystemBars(WindowInsetsCompat.Type.statusBars())
                     }
                 }
             }

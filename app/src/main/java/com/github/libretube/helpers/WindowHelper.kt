@@ -5,7 +5,6 @@ import android.os.Build
 import android.view.WindowManager
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
 import com.github.libretube.ui.extensions.hideSystemBars
 import com.github.libretube.ui.extensions.showSystemBars
 
@@ -23,9 +22,9 @@ object WindowHelper {
         WindowCompat.setDecorFitsSystemWindows(window, !isFullscreen)
 
         if (isFullscreen) {
-            activity.hideSystemBars()
+            activity.hideSystemBars(WindowInsetsCompat.Type.systemBars())
         } else {
-            activity.showSystemBars()
+            activity.showSystemBars(WindowInsetsCompat.Type.systemBars())
         }
     }
 }
