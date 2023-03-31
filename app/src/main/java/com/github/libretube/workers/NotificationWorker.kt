@@ -7,7 +7,7 @@ import android.content.Intent
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.getSystemService
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.github.libretube.R
@@ -32,12 +32,11 @@ import kotlinx.coroutines.withContext
 class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
     CoroutineWorker(appContext, parameters) {
 
-    private val notificationManager = NotificationManagerCompat.from(appContext)
+    private val notificationManager = appContext.getSystemService<NotificationManager>()!!
 
     // the id where notification channels start
     private var notificationId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        val nManager = appContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        nManager.activeNotifications.size + DOWNLOAD_PROGRESS_NOTIFICATION_ID
+        notificationManager.activeNotifications.size + DOWNLOAD_PROGRESS_NOTIFICATION_ID
     } else {
         DOWNLOAD_PROGRESS_NOTIFICATION_ID
     }

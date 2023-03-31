@@ -1,11 +1,10 @@
 package com.github.libretube.extensions
 
-import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.core.content.getSystemService
 
 fun Context.hideKeyboard(view: View) {
-    val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    getSystemService<InputMethodManager>()!!.hideSoftInputFromWindow(view.windowToken, 0)
 }

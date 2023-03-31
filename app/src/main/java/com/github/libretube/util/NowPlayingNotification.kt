@@ -15,6 +15,7 @@ import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
+import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.os.bundleOf
 import coil.request.ImageRequest
@@ -307,10 +308,7 @@ class NowPlayingNotification(
         player.stop()
         player.release()
 
-        val notificationManager = context.getSystemService(
-            Context.NOTIFICATION_SERVICE
-        ) as NotificationManager
-        notificationManager.cancel(PLAYER_NOTIFICATION_ID)
+        context.getSystemService<NotificationManager>()!!.cancel(PLAYER_NOTIFICATION_ID)
     }
 
     companion object {
