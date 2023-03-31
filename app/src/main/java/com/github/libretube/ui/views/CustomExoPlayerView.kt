@@ -210,8 +210,12 @@ internal class CustomExoPlayerView(
                 playerViewModel?.isFullscreen?.value?.let { isFullscreen ->
                     if (!isFullscreen) return@let
                     when (visibility) {
-                        View.VISIBLE -> activity.showSystemBars(WindowInsetsCompat.Type.statusBars())
-                        View.GONE -> activity.hideSystemBars(WindowInsetsCompat.Type.statusBars())
+                        View.VISIBLE -> {
+                            activity.showSystemBars(WindowInsetsCompat.Type.statusBars())
+                        }
+                        View.GONE -> {
+                            activity.hideSystemBars(WindowInsetsCompat.Type.statusBars())
+                        }
                     }
                 }
             }
