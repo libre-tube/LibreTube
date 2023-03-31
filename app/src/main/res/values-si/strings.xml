@@ -472,4 +472,10 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d වීඩියෝ</string>
     <string name="subscriberAndVideoCounts">%1$s ග්‍රාහකයින් • %2$d වීඩියෝ</string>
     <string name="disable_proxy">Piped proxy අක්‍රිය කරන්න</string>
+    <string name="disable_proxy_summary">YouTube හි සේවාදායකයන් වෙතින් සෘජුවම වීඩියෝ සහ පින්තූර පූරණය කරන්න. ඔබ කෙසේ හෝ VPN භාවිතා කරන්නේ නම් පමණක් විකල්පය සබල කරන්න! මෙය YT සංගීතයේ අන්තර්ගතය සමඟ ක්‍රියා නොකරන බව සලකන්න.</string>
+    <string name="auto_fullscreen_shorts">කෙටි වීඩියෝ සඳහා ස්වයංක්‍රීය පූර්ණ තිරය</string>
+    <string name="new_group">අලුත්</string>
+    <string name="group_name">කණ්ඩායමේ නම</string>
+    <string name="edit_group">කණ්ඩායම සංස්කරණය කරන්න</string>
+    <string name="channel_groups">නාලිකා කණ්ඩායම්</string>
 </resources>

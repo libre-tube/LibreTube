@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="registered">Sikeres regisztráció! Mostantól feliratkozhat csatornákra.</string>
+    <string name="registered">Regisztrálva. Mostantól feliratkozhat csatornákra.</string>
     <string name="already_logged_in">Már be van jelentkezve. Kijelentkezhet a fiókjából.</string>
     <string name="search_hint">Keresés</string>
     <string name="unsubscribe">Leiratkozás</string>
@@ -306,7 +306,7 @@
     <string name="auth_instances">Hitelesítési példány kiválasztása</string>
     <string name="history_summary">Megtekintési és keresési előzmények</string>
     <string name="repeat_mode">Ismétlés mód</string>
-    <string name="system_caption_style">Rendszer feliratok stílusa</string>
+    <string name="system_caption_style">Rendszerfeliratok stílusa</string>
     <string name="trending_layout">Alternatív felkapott elrendezés</string>
     <string name="wifi">Wifi</string>
     <string name="mobile_data">Mobiladat</string>
@@ -457,7 +457,7 @@
     <string name="subscriberAndVideoCounts">%1$s feliratkozó • %2$d videó</string>
     <string name="playing_next">Következő lejátszása: %1$s múlva</string>
     <string name="lbry_hls_summary">LBRY HLS használata, ha elérhető a streamelés.</string>
-    <string name="disable_proxy">Piped proxy kikapcsolása</string>
+    <string name="disable_proxy">Piped proxy letiltása</string>
     <string name="disable_proxy_summary">Videók és képek betöltése közvetlenül a YouTube szervereiről. Csak akkor engedélyezze ezt az opciót, ha egyébként is VPN-t használ. Lehet, hogy nem fog működni YT music-ról származó tartalmakkal.</string>
     <string name="auto_fullscreen_shorts">Automatikus teljes képernyőre váltás rövid videóknál</string>
     <string name="trending_views">%1$s • %2$s megtekintés • %3$s</string>
@@ -474,4 +474,8 @@
         <item quantity="one">%d hete</item>
         <item quantity="other">%d hete</item>
     </plurals>
+    <string name="new_group">Új</string>
+    <string name="group_name">Csoportnév</string>
+    <string name="edit_group">Csoport szerkesztése</string>
+    <string name="channel_groups">Csatornacsoportok</string>
 </resources>
