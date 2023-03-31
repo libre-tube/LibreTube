@@ -35,7 +35,6 @@ import com.github.libretube.helpers.NetworkHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ThemeHelper
 import com.github.libretube.helpers.WindowHelper
-import com.github.libretube.services.BackgroundMode
 import com.github.libretube.services.ClosingService
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.ErrorDialog
@@ -256,8 +255,8 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        menu?.findItem(R.id.action_audio)?.isVisible = BackgroundHelper
-            .isServiceRunning(this, BackgroundMode::class.java)
+        menu?.findItem(R.id.action_audio)?.isVisible =
+            BackgroundHelper.isBackgroundServiceRunning(this)
         return super.onPrepareOptionsMenu(menu)
     }
 

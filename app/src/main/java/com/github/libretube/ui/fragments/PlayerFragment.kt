@@ -73,7 +73,6 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.obj.VideoResolution
-import com.github.libretube.services.BackgroundMode
 import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.ChaptersAdapter
@@ -1547,12 +1546,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             return false
         }
 
-        val backgroundModeRunning = BackgroundHelper.isServiceRunning(
-            requireContext(),
-            BackgroundMode::class.java
-        )
-
-        return exoPlayer.isPlaying && !backgroundModeRunning
+        return exoPlayer.isPlaying && !BackgroundHelper.isBackgroundServiceRunning(requireContext())
     }
 
     private fun killPlayerFragment() {
