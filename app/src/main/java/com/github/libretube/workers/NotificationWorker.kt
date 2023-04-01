@@ -54,24 +54,19 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
      * Determine whether the time is valid to notify
      */
     private fun checkTime(): Boolean {
-        if (!PreferenceHelper.getBoolean(
-                PreferenceKeys.NOTIFICATION_TIME_ENABLED,
-                false
-            )
-        ) {
+        if (!PreferenceHelper.getBoolean(PreferenceKeys.NOTIFICATION_TIME_ENABLED, false)) {
             return true
         }
 
         val start = getTimePickerPref(PreferenceKeys.NOTIFICATION_START_TIME)
         val end = getTimePickerPref(PreferenceKeys.NOTIFICATION_END_TIME)
-
         val currentTime = LocalTime.now()
-        val isOverNight = start > end
 
-        val startValid = if (isOverNight) start > currentTime else start < currentTime
-        val endValid = if (isOverNight) end < currentTime else start > currentTime
-
-        return (startValid && endValid)
+        return if (start > end) {
+            currentTime !in end..start
+        } else {
+            currentTime in start..end
+        }
     }
 
     private fun getTimePickerPref(key: String): LocalTime {
