@@ -1,8 +1,6 @@
 package com.github.libretube.services
 
 import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.Intent
 import android.os.Binder
 import android.os.Build
@@ -100,16 +98,8 @@ class BackgroundMode : LifecycleService() {
     override fun onCreate() {
         super.onCreate()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                BACKGROUND_CHANNEL_ID,
-                getString(R.string.background_mode),
-                NotificationManager.IMPORTANCE_DEFAULT
-            )
-            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-
             // see https://developer.android.com/reference/android/app/Service#startForeground(int,%20android.app.Notification)
-            val notification: Notification = Notification.Builder(this, BACKGROUND_CHANNEL_ID)
+            val notification = Notification.Builder(this, BACKGROUND_CHANNEL_ID)
                 .setContentTitle(getString(R.string.app_name))
                 .setContentText(getString(R.string.playingOnBackground))
                 .setSmallIcon(R.drawable.ic_launcher_lockscreen)
