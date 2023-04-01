@@ -83,6 +83,11 @@
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
 
+            <!-- allow being recognized as a music player -->
+            <intent-filter>
+                <action android:name="android.intent.action.MUSIC_PLAYER" />
+                <category android:name="android.intent.category.CATEGORY_APP_MUSIC" />
+            </intent-filter>
         </activity>
 
         <activity-alias
