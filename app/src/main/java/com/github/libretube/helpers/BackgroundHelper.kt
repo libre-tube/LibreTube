@@ -4,6 +4,7 @@ import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
 import androidx.core.content.ContextCompat
+import androidx.core.content.getSystemService
 import androidx.fragment.app.commit
 import com.github.libretube.constants.IntentData
 import com.github.libretube.services.BackgroundMode
@@ -53,24 +54,19 @@ object BackgroundHelper {
      * Stop the [BackgroundMode] service if it is running.
      */
     fun stopBackgroundPlay(context: Context) {
-        if (!isServiceRunning(context, BackgroundMode::class.java)) return
-
-        // Intent to stop background mode service
-        val intent = Intent(context, BackgroundMode::class.java)
-        context.stopService(intent)
+        if (isBackgroundServiceRunning(context)) {
+            // Intent to stop background mode service
+            val intent = Intent(context, BackgroundMode::class.java)
+            context.stopService(intent)
+        }
     }
 
     /**
-     * Check if the given service as [serviceClass] is currently running.
+     * Check if the [BackgroundMode] service is currently running.
      */
-    fun isServiceRunning(context: Context, serviceClass: Class<*>): Boolean {
-        val manager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+    fun isBackgroundServiceRunning(context: Context): Boolean {
         @Suppress("DEPRECATION")
-        for (service in manager.getRunningServices(Int.MAX_VALUE)) {
-            if (serviceClass.name == service.service.className) {
-                return true
-            }
-        }
-        return false
+        return context.getSystemService<ActivityManager>()!!.getRunningServices(Int.MAX_VALUE)
+            .any { BackgroundMode::class.java.name == it.service.className }
     }
 }
