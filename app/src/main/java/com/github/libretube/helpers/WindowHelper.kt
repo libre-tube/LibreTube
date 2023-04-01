@@ -5,8 +5,7 @@ import android.os.Build
 import android.view.WindowManager
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
-import com.github.libretube.ui.extensions.hideSystemBars
-import com.github.libretube.ui.extensions.showSystemBars
+import com.github.libretube.ui.extensions.toggleSystemBars
 
 object WindowHelper {
     fun toggleFullscreen(activity: Activity, isFullscreen: Boolean) {
@@ -21,10 +20,12 @@ object WindowHelper {
 
         WindowCompat.setDecorFitsSystemWindows(window, !isFullscreen)
 
-        if (isFullscreen) {
-            activity.hideSystemBars(WindowInsetsCompat.Type.systemBars())
-        } else {
-            activity.showSystemBars(WindowInsetsCompat.Type.systemBars())
-        }
+        // Show the system bars when it is not fullscreen and hide them when it is fullscreen
+        // System bars means status bar and the navigation bar
+        // See: https://developer.android.com/training/system-ui/immersive#kotlin
+        activity.toggleSystemBars(
+            types = WindowInsetsCompat.Type.systemBars(),
+            showBars = !isFullscreen
+        )
     }
 }
