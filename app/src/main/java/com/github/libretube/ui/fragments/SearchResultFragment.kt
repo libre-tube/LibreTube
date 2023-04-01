@@ -45,7 +45,7 @@ class SearchResultFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSearchResultBinding.inflate(layoutInflater)
+        _binding = FragmentSearchResultBinding.inflate(inflater)
         return binding.root
     }
 
@@ -78,7 +78,7 @@ class SearchResultFragment : Fragment() {
         fetchSearch()
 
         binding.searchRecycler.viewTreeObserver.addOnScrollChangedListener {
-            if (isAdded && !binding.searchRecycler.canScrollVertically(1) &&
+            if (_binding?.searchRecycler?.canScrollVertically(1) == false &&
                 nextPage != null
             ) {
                 fetchNextSearchItems()
@@ -144,9 +144,8 @@ class SearchResultFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }

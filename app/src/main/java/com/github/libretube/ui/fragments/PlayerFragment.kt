@@ -243,7 +243,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPlayerBinding.inflate(layoutInflater)
+        _binding = FragmentPlayerBinding.inflate(inflater)
         return binding.root
     }
 
@@ -271,7 +271,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      * somehow the bottom bar is invisible on low screen resolutions, this fixes it
      */
     private fun showBottomBar() {
-        if (isAdded && !binding.player.isPlayerLocked) {
+        if (_binding?.player?.isPlayerLocked == false) {
             playerBinding.bottomBar.isVisible = true
         }
         handler.postDelayed(this::showBottomBar, 100)
