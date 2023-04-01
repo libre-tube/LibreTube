@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.os.postDelayed
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.marginStart
 import androidx.core.view.updateLayoutParams
@@ -34,6 +35,7 @@ import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.base.BaseActivity
+import com.github.libretube.ui.extensions.toggleSystemBars
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.interfaces.PlayerOptions
@@ -201,6 +203,19 @@ internal class CustomExoPlayerView(
 
             override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {}
         })
+
+        setControllerVisibilityListener(
+            ControllerVisibilityListener { visibility ->
+                playerViewModel?.isFullscreen?.value?.let { isFullscreen ->
+                    if (!isFullscreen) return@let
+                    // Show status bar only not navigation bar if the player controls are visible and hide it otherwise
+                    activity.toggleSystemBars(
+                        types = WindowInsetsCompat.Type.statusBars(),
+                        showBars = visibility == View.VISIBLE
+                    )
+                }
+            }
+        )
 
         playerViewModel?.isFullscreen?.observe(viewLifecycleOwner!!) { isFullscreen ->
             WindowHelper.toggleFullscreen(activity, isFullscreen)
