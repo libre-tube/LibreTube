@@ -723,7 +723,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 trySeekToTimeStamp()
 
                 exoPlayer.prepare()
-                if (!DataSaverMode.isEnabled(requireContext())) exoPlayer.play()
+                if (PreferenceHelper.getBoolean(PreferenceKeys.PLAY_AUTOMATICALLY, true)) {
+                    exoPlayer.play()
+                }
 
                 if (binding.playerMotionLayout.progress != 1.0f) {
                     // show controllers when not in picture in picture mode

@@ -460,6 +460,8 @@
     <string name="new_group">New</string>
     <string name="group_name">Group name</string>
     <string name="edit_group">Edit group</string>
+    <string name="play_automatically">Play automatically</string>
+    <string name="play_automatically_summary">Start playing video automatically when selecting</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

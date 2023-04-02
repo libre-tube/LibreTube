@@ -13,6 +13,13 @@
             app:key="data_saver_mode_key"
             app:title="@string/data_saver_mode" />
 
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_play_circle"
+            android:summary="@string/play_automatically_summary"
+            app:key="play_automatically"
+            app:title="@string/play_automatically" />
+
         <com.github.libretube.ui.views.SliderPreference
             android:icon="@drawable/ic_download"
             android:key="max_concurrent_downloads"
