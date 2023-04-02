@@ -24,6 +24,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
@@ -587,12 +588,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // pauses the player if the screen is turned off
 
         // check whether the screen is on
-        val pm = context?.getSystemService(Context.POWER_SERVICE) as PowerManager
-        val isScreenOn = pm.isInteractive
+        val isInteractive = requireContext().getSystemService<PowerManager>()!!.isInteractive
 
         // pause player if screen off and setting enabled
-        if (
-            this::exoPlayer.isInitialized && !isScreenOn && PlayerHelper.pausePlayerOnScreenOffEnabled
+        if (this::exoPlayer.isInitialized && !isInteractive &&
+            PlayerHelper.pausePlayerOnScreenOffEnabled
         ) {
             exoPlayer.pause()
         }

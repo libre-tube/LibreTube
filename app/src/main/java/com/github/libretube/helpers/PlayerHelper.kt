@@ -9,6 +9,7 @@ import android.view.accessibility.CaptioningManager
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.core.app.RemoteActionCompat
+import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.IconCompat
 import com.github.libretube.R
 import com.github.libretube.api.obj.PipedStream
@@ -75,8 +76,7 @@ object PlayerHelper {
 
     // get the system default caption style
     fun getCaptionStyle(context: Context): CaptionStyleCompat {
-        val captioningManager =
-            context.getSystemService(Context.CAPTIONING_SERVICE) as CaptioningManager
+        val captioningManager = context.getSystemService<CaptioningManager>()!!
         return if (!captioningManager.isEnabled) {
             // system captions are disabled, using android default captions style
             CaptionStyleCompat.DEFAULT

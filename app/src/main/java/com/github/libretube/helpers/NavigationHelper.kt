@@ -4,9 +4,10 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Handler
 import android.os.Looper
+import android.os.Process
+import androidx.core.content.getSystemService
 import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import androidx.fragment.app.commitNow
@@ -127,15 +128,13 @@ object NavigationHelper {
      */
     fun restartMainActivity(context: Context) {
         // kill player notification
-        val nManager = context
-            .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        nManager.cancelAll()
+        context.getSystemService<NotificationManager>()!!.cancelAll()
         // start a new Intent of the app
-        val pm: PackageManager = context.packageManager
+        val pm = context.packageManager
         val intent = pm.getLaunchIntentForPackage(context.packageName)
         intent?.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         context.startActivity(intent)
         // kill the old application
-        android.os.Process.killProcess(android.os.Process.myPid())
+        Process.killProcess(Process.myPid())
     }
 }

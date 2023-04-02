@@ -8,6 +8,7 @@ import android.os.IBinder
 import android.util.SparseBooleanArray
 import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
+import androidx.core.content.getSystemService
 import androidx.core.util.set
 import androidx.core.util.valueIterator
 import androidx.lifecycle.LifecycleService
@@ -341,7 +342,7 @@ class DownloadService : LifecycleService() {
     }
 
     private fun notifyForeground() {
-        notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager = getSystemService()!!
 
         summaryNotificationBuilder = NotificationCompat
             .Builder(this, DOWNLOAD_CHANNEL_ID)
