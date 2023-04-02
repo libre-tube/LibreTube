@@ -32,6 +32,7 @@ class SubscriptionGroupChannelsAdapter(
         holder.binding.apply {
             subscriptionChannelName.text = channel.name
             ImageHelper.loadImage(channel.avatar, subscriptionChannelImage)
+            channelIncluded.setOnCheckedChangeListener(null)
             channelIncluded.isChecked = group.channels.contains(channelId)
             channelIncluded.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) group.channels.add(channelId) else group.channels.remove(channelId)
