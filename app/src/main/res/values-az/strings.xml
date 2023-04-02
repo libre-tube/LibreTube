@@ -478,4 +478,6 @@
     <string name="channel_groups">Kanal qrupları</string>
     <string name="group_name">Qrup adı</string>
     <string name="new_group">Yeni</string>
+    <string name="play_automatically_summary">Seçilən videonu avtomatik oynatmağa başla</string>
+    <string name="play_automatically">Avtomatik oynat</string>
 </resources>
