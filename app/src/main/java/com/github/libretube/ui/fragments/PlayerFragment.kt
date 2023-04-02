@@ -713,7 +713,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     (videoStream?.height ?: 0) > (videoStream?.width ?: 0)
                 ) {
                     withContext(Dispatchers.Main) {
-                        setFullscreen()
+                        if (binding.playerMotionLayout.progress == 0f) setFullscreen()
                     }
                 }
             }
