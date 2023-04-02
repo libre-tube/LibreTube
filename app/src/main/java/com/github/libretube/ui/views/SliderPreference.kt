@@ -47,7 +47,7 @@ class SliderPreference(
     }
 
     override fun getSummary(): CharSequence {
-        return prefValue.toString()
+        return prefValue.round(2).toString()
     }
 
     override fun onClick() {
