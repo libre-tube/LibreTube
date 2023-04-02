@@ -13,6 +13,9 @@ interface SearchHistoryDao {
     suspend fun getAll(): List<SearchHistoryItem>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(searchHistoryItem: SearchHistoryItem)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(searchHistoryItems: List<SearchHistoryItem>)
 
     @Delete

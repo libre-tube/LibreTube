@@ -166,7 +166,7 @@ class PlaylistFragment : Fragment() {
                                 .deleteById(playlistId!!)
                         } else {
                             DatabaseHolder.Database.playlistBookmarkDao()
-                                .insertAll(listOf(response.toPlaylistBookmark(playlistId!!)))
+                                .insert(response.toPlaylistBookmark(playlistId!!))
                         }
                     }
                 }

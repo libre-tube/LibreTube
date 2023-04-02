@@ -13,6 +13,9 @@ interface PlaylistBookmarkDao {
     suspend fun getAll(): List<PlaylistBookmark>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(bookmark: PlaylistBookmark)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(bookmarks: List<PlaylistBookmark>)
 
     @Update

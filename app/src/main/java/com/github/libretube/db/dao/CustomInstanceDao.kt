@@ -12,6 +12,9 @@ interface CustomInstanceDao {
     suspend fun getAll(): List<CustomInstance>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(customInstance: CustomInstance)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(customInstances: List<CustomInstance>)
 
     @Query("DELETE FROM customInstance")
