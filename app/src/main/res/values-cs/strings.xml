@@ -481,4 +481,6 @@
     <string name="group_name">Název skupiny</string>
     <string name="channel_groups">Skupiny kanálů</string>
     <string name="edit_group">Upravit skupinu</string>
+    <string name="play_automatically">Automatické přehrávání</string>
+    <string name="play_automatically_summary">Automatické spuštění přehrávání videa při výběru</string>
 </resources>
