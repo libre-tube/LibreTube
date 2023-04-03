@@ -10,7 +10,7 @@ jobs:
         with:
           fetch-depth: 1
       - name: ktlint
-        uses: ScaCap/action-ktlint@1.5
+        uses: ScaCap/action-ktlint@v1.6
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-check
