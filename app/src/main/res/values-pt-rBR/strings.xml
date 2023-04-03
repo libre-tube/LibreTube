@@ -481,4 +481,6 @@
     <string name="channel_groups">Grupos de canais</string>
     <string name="group_name">Nome do grupo</string>
     <string name="edit_group">Editar grupo</string>
+    <string name="play_automatically">Reproduzir automaticamente</string>
+    <string name="play_automatically_summary">Comece a reproduzir o vídeo automaticamente ao selecionar</string>
 </resources>
