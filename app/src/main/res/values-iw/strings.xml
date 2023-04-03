@@ -484,4 +484,6 @@
     <string name="edit_group">עריכת קבוצה</string>
     <string name="channel_groups">קבוצות ערוץ</string>
     <string name="new_group">חדשה</string>
+    <string name="play_automatically">לנגן אוטומטית</string>
+    <string name="play_automatically_summary">להתחיל לנגן סרטונים אוטומטית בעת בחירה</string>
 </resources>
