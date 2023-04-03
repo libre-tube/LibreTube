@@ -478,4 +478,6 @@
     <string name="group_name">ଗୋଷ୍ଠୀ ନାମ</string>
     <string name="edit_group">ଗୋଷ୍ଠୀ ସଂପାଦନ କରନ୍ତୁ</string>
     <string name="channel_groups">ଚ୍ୟାନେଲ୍ ଗୋଷ୍ଠୀଗୁଡିକ</string>
+    <string name="play_automatically_summary">ଚୟନ କରିବା ସମୟରେ ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଭିଡିଓ ଚାଲିବା ଆରମ୍ଭ କରନ୍ତୁ</string>
+    <string name="play_automatically">ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଚଲାନ୍ତୁ</string>
 </resources>
