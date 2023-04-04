@@ -484,4 +484,6 @@
     <string name="edit_group">Редагувати групу</string>
     <string name="channel_groups">Групи каналів</string>
     <string name="group_name">Назва групи</string>
+    <string name="play_automatically">Автовідтворення</string>
+    <string name="play_automatically_summary">Розпочинати автовідтворення відео після вибору</string>
 </resources>

@@ -478,4 +478,6 @@
     <string name="group_name">Csoportnév</string>
     <string name="edit_group">Csoport szerkesztése</string>
     <string name="channel_groups">Csatornacsoportok</string>
+    <string name="play_automatically_summary">Videó automatikus lejátszása kiválasztá</string>
+    <string name="play_automatically">Automatikus lejátszás</string>
 </resources>

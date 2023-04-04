@@ -490,4 +490,6 @@
     <string name="group_name">أسم المجموعة</string>
     <string name="channel_groups">مجموعات القنوات</string>
     <string name="edit_group">تحرير المجموعة</string>
+    <string name="play_automatically">تشغيل تلقائيا</string>
+    <string name="play_automatically_summary">بدء تشغيل الفيديو تلقائيا عند تحديده</string>
 </resources>

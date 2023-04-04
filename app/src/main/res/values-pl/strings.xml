@@ -484,4 +484,6 @@
     <string name="new_group">Nowa</string>
     <string name="group_name">Nazwa grupy</string>
     <string name="edit_group">Edytuj grupę</string>
+    <string name="play_automatically">Automatyczne odtwarzanie</string>
+    <string name="play_automatically_summary">Automatycznie rozpocznij odtwarzanie wideo po wybraniu</string>
 </resources>
