@@ -14,7 +14,7 @@ data class Streams(
     val uploadDate: LocalDate,
     val uploader: String,
     val uploaderUrl: String,
-    val uploaderAvatar: String,
+    val uploaderAvatar: String? = null,
     val thumbnailUrl: String,
     val category: String,
     val hls: String? = null,
