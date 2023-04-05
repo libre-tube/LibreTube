@@ -31,7 +31,7 @@ class CustomInstanceDialog : DialogFragment() {
                 if (apiUrl.toHttpUrlOrNull() != null && frontendUrl.toHttpUrlOrNull() != null) {
                     lifecycleScope.launch {
                         Database.customInstanceDao()
-                            .insertAll(listOf(CustomInstance(instanceName, apiUrl, frontendUrl)))
+                            .insert(CustomInstance(instanceName, apiUrl, frontendUrl))
                         ActivityCompat.recreate(requireActivity())
                         dismiss()
                     }

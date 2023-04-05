@@ -102,8 +102,7 @@ class PlaylistOptionsBottomSheet(
                             } catch (e: Exception) {
                                 return@withContext
                             }.toPlaylistBookmark(playlistId)
-                            DatabaseHolder.Database.playlistBookmarkDao()
-                                .insertAll(listOf(bookmark))
+                            DatabaseHolder.Database.playlistBookmarkDao().insert(bookmark)
                         }
                     }
                 }

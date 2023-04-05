@@ -13,6 +13,9 @@ interface LocalSubscriptionDao {
     suspend fun getAll(): List<LocalSubscription>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(localSubscription: LocalSubscription)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(localSubscriptions: List<LocalSubscription>)
 
     @Delete

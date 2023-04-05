@@ -13,6 +13,9 @@ interface WatchHistoryDao {
     suspend fun getAll(): List<WatchHistoryItem>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(watchHistoryItem: WatchHistoryItem)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(watchHistoryItems: List<WatchHistoryItem>)
 
     @Delete

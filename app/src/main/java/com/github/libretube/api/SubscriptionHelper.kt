@@ -30,7 +30,7 @@ object SubscriptionHelper {
                 Log.e(TAG(), e.toString())
             }
         } else {
-            Database.localSubscriptionDao().insertAll(listOf(LocalSubscription(channelId)))
+            Database.localSubscriptionDao().insert(LocalSubscription(channelId))
         }
     }
 

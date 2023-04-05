@@ -86,7 +86,7 @@ class PlaylistBookmarkAdapter(
                         DatabaseHolder.Database.playlistBookmarkDao()
                             .deleteById(bookmark.playlistId)
                     } else {
-                        DatabaseHolder.Database.playlistBookmarkDao().insertAll(listOf(bookmark))
+                        DatabaseHolder.Database.playlistBookmarkDao().insert(bookmark)
                     }
                 }
             }
