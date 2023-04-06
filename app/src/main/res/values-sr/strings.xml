@@ -477,4 +477,10 @@
     <string name="disable_proxy">Онемогући прокси Piped</string>
     <string name="disable_proxy_summary">Преузмите видео записе и слике директно са YouTube сервера. Омогућите ову опцију само ако ионако користите VPN! Имајте на уму да ово можда неће функционисати са садржајем са YT музике.</string>
     <string name="auto_fullscreen_shorts">Аутоматски преко целог екрана за кратке видео снимке</string>
+    <string name="new_group">Ново</string>
+    <string name="group_name">Име групе</string>
+    <string name="edit_group">Измени групу</string>
+    <string name="channel_groups">Групе канала</string>
+    <string name="play_automatically">Пусти аутоматски</string>
+    <string name="play_automatically_summary">Почни да репродукујеш видео аутоматски након избора</string>
 </resources>

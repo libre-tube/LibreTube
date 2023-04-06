@@ -484,4 +484,6 @@
     <string name="group_name">Название группы</string>
     <string name="channel_groups">Группы каналов</string>
     <string name="edit_group">Изменить группу</string>
+    <string name="play_automatically">Проигрывать автоматически</string>
+    <string name="play_automatically_summary">Начать воспроизведение видео автоматически при выборе</string>
 </resources>
