@@ -475,4 +475,6 @@
     <string name="new_group">Baru</string>
     <string name="group_name">Nama grup</string>
     <string name="edit_group">Sunting grup</string>
+    <string name="play_automatically">Putar secara otomatis</string>
+    <string name="play_automatically_summary">Mulai memutar video secara otomatis ketika memilih</string>
 </resources>
