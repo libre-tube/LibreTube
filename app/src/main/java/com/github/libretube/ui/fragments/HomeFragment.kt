@@ -28,7 +28,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
-    private lateinit var binding: FragmentHomeBinding
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
     private val subscriptionsViewModel: SubscriptionsViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -36,7 +38,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -67,6 +69,11 @@ class HomeFragment : Fragment() {
         fetchHomeFeed()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun fetchHomeFeed() {
         lifecycleScope.launchWhenCreated {
             loadTrending()
@@ -85,6 +92,7 @@ class HomeFragment : Fragment() {
                 RetrofitInstance.api.getTrending(region).take(10)
             }
         }.getOrNull()?.takeIf { it.isNotEmpty() } ?: return
+        val binding = _binding ?: return
 
         makeVisible(binding.trendingRV, binding.trendingTV)
         binding.trendingRV.layoutManager = GridLayoutManager(context, 2)
@@ -106,6 +114,7 @@ class HomeFragment : Fragment() {
                 }
             }.getOrNull()?.takeIf { it.isNotEmpty() } ?: return
         }.take(20)
+        val binding = _binding ?: return
 
         makeVisible(binding.featuredRV, binding.featuredTV)
         binding.featuredRV.layoutManager = LinearLayoutManager(
@@ -165,6 +174,7 @@ class HomeFragment : Fragment() {
         views.forEach {
             it.visibility = View.VISIBLE
         }
+        val binding = _binding ?: return
         binding.progress.visibility = View.GONE
         binding.scroll.visibility = View.VISIBLE
         binding.refresh.isRefreshing = false

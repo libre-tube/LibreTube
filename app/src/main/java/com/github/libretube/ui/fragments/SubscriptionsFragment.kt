@@ -34,7 +34,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class SubscriptionsFragment : Fragment() {
-    private lateinit var binding: FragmentSubscriptionsBinding
+    private var _binding: FragmentSubscriptionsBinding? = null
+    private val binding get() = _binding!!
+
     private val viewModel: SubscriptionsViewModel by activityViewModels()
     private var channelGroups: List<SubscriptionGroup> = listOf()
     private var selectedFilterGroup: Int = 0
@@ -56,7 +58,7 @@ class SubscriptionsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSubscriptionsBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentSubscriptionsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -147,20 +149,25 @@ class SubscriptionsFragment : Fragment() {
             }
         }
 
-        binding.scrollviewSub.viewTreeObserver
-            .addOnScrollChangedListener {
-                if (!binding.scrollviewSub.canScrollVertically(1)) {
-                    // scroll view is at bottom
-                    if (viewModel.videoFeed.value == null) return@addOnScrollChangedListener
-                    binding.subRefresh.isRefreshing = true
-                    subscriptionsAdapter?.updateItems()
-                    binding.subRefresh.isRefreshing = false
-                }
+        binding.scrollviewSub.viewTreeObserver.addOnScrollChangedListener {
+            val binding = _binding
+            if (binding?.scrollviewSub?.canScrollVertically(1) == false &&
+                viewModel.videoFeed.value != null // scroll view is at bottom
+            ) {
+                binding.subRefresh.isRefreshing = true
+                subscriptionsAdapter?.updateItems()
+                binding.subRefresh.isRefreshing = false
             }
+        }
 
         lifecycleScope.launch {
             initChannelGroups()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     @SuppressLint("InflateParams")

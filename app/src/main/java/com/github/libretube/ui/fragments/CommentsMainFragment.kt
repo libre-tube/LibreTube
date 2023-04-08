@@ -13,7 +13,9 @@ import com.github.libretube.ui.adapters.CommentsAdapter
 import com.github.libretube.ui.models.CommentsViewModel
 
 class CommentsMainFragment : Fragment() {
-    private lateinit var binding: FragmentCommentsBinding
+    private var _binding: FragmentCommentsBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var commentsAdapter: CommentsAdapter
 
     private val viewModel: CommentsViewModel by activityViewModels()
@@ -23,7 +25,7 @@ class CommentsMainFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCommentsBinding.inflate(inflater, container, false)
+        _binding = FragmentCommentsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -33,12 +35,11 @@ class CommentsMainFragment : Fragment() {
         binding.commentsRV.layoutManager = LinearLayoutManager(requireContext())
         binding.commentsRV.setItemViewCacheSize(20)
 
-        binding.commentsRV.viewTreeObserver
-            .addOnScrollChangedListener {
-                if (!binding.commentsRV.canScrollVertically(1)) {
-                    viewModel.fetchNextComments()
-                }
+        binding.commentsRV.viewTreeObserver.addOnScrollChangedListener {
+            if (_binding?.commentsRV?.canScrollVertically(1) == false) {
+                viewModel.fetchNextComments()
             }
+        }
 
         commentsAdapter = CommentsAdapter(
             this,
@@ -73,5 +74,10 @@ class CommentsMainFragment : Fragment() {
                 it.comments.subList(commentsAdapter.itemCount, it.comments.size)
             )
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -39,7 +39,8 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class PlaylistFragment : Fragment() {
-    private lateinit var binding: FragmentPlaylistBinding
+    private var _binding: FragmentPlaylistBinding? = null
+    private val binding get() = _binding!!
 
     // general playlist information
     private var playlistId: String? = null
@@ -69,7 +70,7 @@ class PlaylistFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentPlaylistBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentPlaylistBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -93,6 +94,11 @@ class PlaylistFragment : Fragment() {
         }
 
         fetchPlaylist()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun updateBookmarkRes() {
@@ -211,21 +217,20 @@ class PlaylistFragment : Fragment() {
             })
 
             binding.playlistRecView.adapter = playlistAdapter
-            binding.playlistScrollview.viewTreeObserver
-                .addOnScrollChangedListener {
-                    if (!binding.playlistScrollview.canScrollVertically(1)) {
-                        if (isLoading) return@addOnScrollChangedListener
-
-                        // append more playlists to the recycler view
-                        if (playlistType != PlaylistType.PUBLIC) {
-                            isLoading = true
-                            playlistAdapter?.showMoreItems()
-                            isLoading = false
-                        } else {
-                            fetchNextPage()
-                        }
+            binding.playlistScrollview.viewTreeObserver.addOnScrollChangedListener {
+                if (_binding?.playlistScrollview?.canScrollVertically(1) == false &&
+                    !isLoading
+                ) {
+                    // append more playlists to the recycler view
+                    if (playlistType != PlaylistType.PUBLIC) {
+                        isLoading = true
+                        playlistAdapter?.showMoreItems()
+                        isLoading = false
+                    } else {
+                        fetchNextPage()
                     }
                 }
+            }
 
             // listener for swiping to the left or right
             if (playlistType != PlaylistType.PUBLIC) {

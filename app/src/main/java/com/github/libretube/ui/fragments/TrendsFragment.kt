@@ -23,14 +23,15 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
 class TrendsFragment : Fragment() {
-    private lateinit var binding: FragmentTrendsBinding
+    private var _binding: FragmentTrendsBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentTrendsBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentTrendsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -42,6 +43,11 @@ class TrendsFragment : Fragment() {
         binding.homeRefresh.setOnRefreshListener {
             fetchTrending()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun fetchTrending() {

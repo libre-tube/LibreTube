@@ -41,7 +41,9 @@ import com.github.libretube.util.PlayingQueue
 import kotlin.math.abs
 
 class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
-    private lateinit var binding: FragmentAudioPlayerBinding
+    private var _binding: FragmentAudioPlayerBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var audioHelper: AudioHelper
     private val mainActivity get() = context as MainActivity
     private val viewModel: PlayerViewModel by activityViewModels()
@@ -84,7 +86,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentAudioPlayerBinding.inflate(layoutInflater)
+        _binding = FragmentAudioPlayerBinding.inflate(inflater)
         return binding.root
     }
 
@@ -183,8 +185,6 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         mainActivity.supportFragmentManager.commit {
             remove(this@AudioPlayerFragment)
         }
-
-        onDestroy()
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -277,6 +277,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
      * Update the position, duration and text views belonging to the seek bar
      */
     private fun updateSeekBar() {
+        val binding = _binding ?: return
         val duration = playerService?.getDuration()?.takeIf { it > 0 } ?: let {
             // if there's no duration available, clear everything
             binding.timeBar.value = 0f
@@ -311,6 +312,11 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             isPaused = !isPlaying
         }
         initializeSeekBar()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onDestroy() {

@@ -34,7 +34,8 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
 class ChannelFragment : Fragment() {
-    private lateinit var binding: FragmentChannelBinding
+    private var _binding: FragmentChannelBinding? = null
+    private val binding get() = _binding!!
 
     private var channelId: String? = null
     private var channelName: String? = null
@@ -67,7 +68,7 @@ class ChannelFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentChannelBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentChannelBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -87,16 +88,20 @@ class ChannelFragment : Fragment() {
             refreshChannel()
         }
 
-        binding.channelScrollView.viewTreeObserver
-            .addOnScrollChangedListener {
-                if (!binding.channelScrollView.canScrollVertically(1)) {
-                    try {
-                        onScrollEnd.invoke()
-                    } catch (e: Exception) {
-                        Log.e("tabs failed", e.toString())
-                    }
+        binding.channelScrollView.viewTreeObserver.addOnScrollChangedListener {
+            if (_binding?.channelScrollView?.canScrollVertically(1) == false) {
+                try {
+                    onScrollEnd()
+                } catch (e: Exception) {
+                    Log.e("tabs failed", e.toString())
                 }
             }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun fetchChannel() {
