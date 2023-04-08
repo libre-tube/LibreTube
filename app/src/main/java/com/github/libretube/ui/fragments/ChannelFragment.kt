@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
@@ -105,93 +107,95 @@ class ChannelFragment : Fragment() {
     }
 
     private fun fetchChannel() {
-        lifecycleScope.launchWhenCreated {
-            val response = try {
-                withContext(Dispatchers.IO) {
-                    if (channelId != null) {
-                        RetrofitInstance.api.getChannel(channelId!!)
-                    } else {
-                        RetrofitInstance.api.getChannelByName(channelName!!)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                val response = try {
+                    withContext(Dispatchers.IO) {
+                        if (channelId != null) {
+                            RetrofitInstance.api.getChannel(channelId!!)
+                        } else {
+                            RetrofitInstance.api.getChannelByName(channelName!!)
+                        }
+                    }
+                } catch (e: IOException) {
+                    binding.channelRefresh.isRefreshing = false
+                    Log.e(TAG(), "IOException, you might not have internet connection")
+                    return@repeatOnLifecycle
+                } catch (e: HttpException) {
+                    binding.channelRefresh.isRefreshing = false
+                    Log.e(TAG(), "HttpException, unexpected response")
+                    return@repeatOnLifecycle
+                }
+                // needed if the channel gets loaded by the ID
+                channelId = response.id
+                channelName = response.name
+                val shareData = ShareData(currentChannel = response.name)
+
+                onScrollEnd = {
+                    fetchChannelNextPage()
+                }
+
+                // fetch and update the subscription status
+                isSubscribed = SubscriptionHelper.isSubscribed(channelId!!)
+                if (isSubscribed == null) return@repeatOnLifecycle
+
+                binding.channelSubscribe.setupSubscriptionButton(
+                    channelId,
+                    channelName,
+                    binding.notificationBell
+                )
+
+                binding.channelShare.setOnClickListener {
+                    val shareDialog = ShareDialog(
+                        response.id!!.toID(),
+                        ShareObjectType.CHANNEL,
+                        shareData
+                    )
+                    shareDialog.show(childFragmentManager, ShareDialog::class.java.name)
+                }
+
+                nextPage = response.nextpage
+                isLoading = false
+                binding.channelRefresh.isRefreshing = false
+
+                binding.channelScrollView.visibility = View.VISIBLE
+                binding.channelName.text = response.name
+                if (response.verified) {
+                    binding.channelName.setCompoundDrawablesWithIntrinsicBounds(
+                        0,
+                        0,
+                        R.drawable.ic_verified,
+                        0
+                    )
+                }
+                binding.channelSubs.text = resources.getString(
+                    R.string.subscribers,
+                    response.subscriberCount.formatShort()
+                )
+                if (response.description.isBlank()) {
+                    binding.channelDescription.visibility = View.GONE
+                } else {
+                    binding.channelDescription.text = response.description.trim()
+                }
+
+                binding.channelDescription.setOnClickListener {
+                    (it as TextView).apply {
+                        it.maxLines = if (it.maxLines == Int.MAX_VALUE) 2 else Int.MAX_VALUE
                     }
                 }
-            } catch (e: IOException) {
-                binding.channelRefresh.isRefreshing = false
-                Log.e(TAG(), "IOException, you might not have internet connection")
-                return@launchWhenCreated
-            } catch (e: HttpException) {
-                binding.channelRefresh.isRefreshing = false
-                Log.e(TAG(), "HttpException, unexpected response")
-                return@launchWhenCreated
-            }
-            // needed if the channel gets loaded by the ID
-            channelId = response.id
-            channelName = response.name
-            val shareData = ShareData(currentChannel = response.name)
 
-            onScrollEnd = {
-                fetchChannelNextPage()
-            }
+                ImageHelper.loadImage(response.bannerUrl, binding.channelBanner)
+                ImageHelper.loadImage(response.avatarUrl, binding.channelImage)
 
-            // fetch and update the subscription status
-            isSubscribed = SubscriptionHelper.isSubscribed(channelId!!)
-            if (isSubscribed == null) return@launchWhenCreated
-
-            binding.channelSubscribe.setupSubscriptionButton(
-                channelId,
-                channelName,
-                binding.notificationBell
-            )
-
-            binding.channelShare.setOnClickListener {
-                val shareDialog = ShareDialog(
-                    response.id!!.toID(),
-                    ShareObjectType.CHANNEL,
-                    shareData
+                // recyclerview of the videos by the channel
+                channelAdapter = VideosAdapter(
+                    response.relatedStreams.toMutableList(),
+                    forceMode = VideosAdapter.Companion.ForceMode.CHANNEL
                 )
-                shareDialog.show(childFragmentManager, ShareDialog::class.java.name)
+                binding.channelRecView.adapter = channelAdapter
+
+                setupTabs(response.tabs)
             }
-
-            nextPage = response.nextpage
-            isLoading = false
-            binding.channelRefresh.isRefreshing = false
-
-            binding.channelScrollView.visibility = View.VISIBLE
-            binding.channelName.text = response.name
-            if (response.verified) {
-                binding.channelName.setCompoundDrawablesWithIntrinsicBounds(
-                    0,
-                    0,
-                    R.drawable.ic_verified,
-                    0
-                )
-            }
-            binding.channelSubs.text = resources.getString(
-                R.string.subscribers,
-                response.subscriberCount.formatShort()
-            )
-            if (response.description.isBlank()) {
-                binding.channelDescription.visibility = View.GONE
-            } else {
-                binding.channelDescription.text = response.description.trim()
-            }
-
-            binding.channelDescription.setOnClickListener {
-                (it as TextView).apply {
-                    it.maxLines = if (it.maxLines == Int.MAX_VALUE) 2 else Int.MAX_VALUE
-                }
-            }
-
-            ImageHelper.loadImage(response.bannerUrl, binding.channelBanner)
-            ImageHelper.loadImage(response.avatarUrl, binding.channelImage)
-
-            // recyclerview of the videos by the channel
-            channelAdapter = VideosAdapter(
-                response.relatedStreams.toMutableList(),
-                forceMode = VideosAdapter.Companion.ForceMode.CHANNEL
-            )
-            binding.channelRecView.adapter = channelAdapter
-
-            setupTabs(response.tabs)
         }
     }
 
@@ -253,22 +257,24 @@ class ChannelFragment : Fragment() {
     }
 
     private fun fetchChannelNextPage() {
-        fun run() {
-            if (nextPage == null || isLoading) return
-            isLoading = true
-            binding.channelRefresh.isRefreshing = true
+        if (nextPage == null || isLoading) return
+        isLoading = true
+        binding.channelRefresh.isRefreshing = true
 
-            lifecycleScope.launchWhenCreated {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
                 val response = try {
-                    RetrofitInstance.api.getChannelNextPage(channelId!!, nextPage!!)
+                    withContext(Dispatchers.IO) {
+                        RetrofitInstance.api.getChannelNextPage(channelId!!, nextPage!!)
+                    }
                 } catch (e: IOException) {
                     binding.channelRefresh.isRefreshing = false
                     Log.e(TAG(), "IOException, you might not have internet connection")
-                    return@launchWhenCreated
+                    return@repeatOnLifecycle
                 } catch (e: HttpException) {
                     binding.channelRefresh.isRefreshing = false
                     Log.e(TAG(), "HttpException, unexpected response," + e.response())
-                    return@launchWhenCreated
+                    return@repeatOnLifecycle
                 }
                 nextPage = response.nextpage
                 channelAdapter?.insertItems(response.relatedStreams)
@@ -276,7 +282,6 @@ class ChannelFragment : Fragment() {
                 binding.channelRefresh.isRefreshing = false
             }
         }
-        run()
     }
 
     private fun fetchTabNextPage(

@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.FragmentSearchBinding
@@ -69,20 +71,24 @@ class SearchFragment : Fragment() {
     }
 
     private fun fetchSuggestions(query: String) {
-        lifecycleScope.launchWhenCreated {
-            val response = try {
-                RetrofitInstance.api.getSuggestions(query)
-            } catch (e: Exception) {
-                Log.e(TAG(), e.toString())
-                return@launchWhenCreated
-            }
-            // only load the suggestions if the input field didn't get cleared yet
-            val suggestionsAdapter = SearchSuggestionsAdapter(
-                response.reversed(),
-                (activity as MainActivity).searchView
-            )
-            if (isAdded && !viewModel.searchQuery.value.isNullOrEmpty()) {
-                binding.suggestionsRecycler.adapter = suggestionsAdapter
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                val response = try {
+                    withContext(Dispatchers.IO) {
+                        RetrofitInstance.api.getSuggestions(query)
+                    }
+                } catch (e: Exception) {
+                    Log.e(TAG(), e.toString())
+                    return@repeatOnLifecycle
+                }
+                // only load the suggestions if the input field didn't get cleared yet
+                val suggestionsAdapter = SearchSuggestionsAdapter(
+                    response.reversed(),
+                    (activity as MainActivity).searchView
+                )
+                if (isAdded && !viewModel.searchQuery.value.isNullOrEmpty()) {
+                    binding.suggestionsRecycler.adapter = suggestionsAdapter
+                }
             }
         }
     }
