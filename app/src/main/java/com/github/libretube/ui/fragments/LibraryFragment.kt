@@ -33,7 +33,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class LibraryFragment : Fragment() {
-    private lateinit var binding: FragmentLibraryBinding
+    private var _binding: FragmentLibraryBinding? = null
+    private val binding get() = _binding!!
+
     private val playerViewModel: PlayerViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -41,7 +43,7 @@ class LibraryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentLibraryBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentLibraryBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -90,6 +92,11 @@ class LibraryFragment : Fragment() {
                 fetchPlaylists()
             }.show(childFragmentManager, CreatePlaylistDialog::class.java.name)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun initBookmarks() {

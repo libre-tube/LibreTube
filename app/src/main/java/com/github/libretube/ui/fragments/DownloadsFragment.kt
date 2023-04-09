@@ -32,7 +32,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class DownloadsFragment : Fragment() {
-    private lateinit var binding: FragmentDownloadsBinding
+    private var _binding: FragmentDownloadsBinding? = null
+    private val binding get() = _binding!!
+
     private var binder: DownloadService.LocalBinder? = null
     private val downloads = mutableListOf<DownloadWithItems>()
     private val downloadReceiver = DownloadReceiver()
@@ -63,7 +65,7 @@ class DownloadsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDownloadsBinding.inflate(layoutInflater)
+        _binding = FragmentDownloadsBinding.inflate(inflater)
         return binding.root
     }
 
@@ -184,5 +186,10 @@ class DownloadsFragment : Fragment() {
         runCatching {
             context?.unbindService(serviceConnection)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

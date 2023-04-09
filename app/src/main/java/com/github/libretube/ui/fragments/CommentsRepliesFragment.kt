@@ -25,7 +25,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class CommentsRepliesFragment : Fragment() {
-    private lateinit var binding: FragmentCommentsBinding
+    private var _binding: FragmentCommentsBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var repliesPage: CommentsPage
     private lateinit var repliesAdapter: CommentsAdapter
     private val viewModel: CommentsViewModel by activityViewModels()
@@ -37,7 +39,7 @@ class CommentsRepliesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCommentsBinding.inflate(inflater, container, false)
+        _binding = FragmentCommentsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -63,19 +65,23 @@ class CommentsRepliesFragment : Fragment() {
         binding.commentsRV.layoutManager = LinearLayoutManager(context)
         binding.commentsRV.adapter = repliesAdapter
 
-        binding.commentsRV.viewTreeObserver
-            .addOnScrollChangedListener {
-                if (!binding.commentsRV.canScrollVertically(1) &&
-                    ::repliesPage.isInitialized &&
-                    repliesPage.nextpage != null
-                ) {
-                    fetchReplies(videoId, repliesPage.nextpage!!) {
-                        repliesAdapter.updateItems(repliesPage.comments)
-                    }
+        binding.commentsRV.viewTreeObserver.addOnScrollChangedListener {
+            if (_binding?.commentsRV?.canScrollVertically(1) == false &&
+                ::repliesPage.isInitialized &&
+                repliesPage.nextpage != null
+            ) {
+                fetchReplies(videoId, repliesPage.nextpage!!) {
+                    repliesAdapter.updateItems(repliesPage.comments)
                 }
             }
+        }
 
         loadInitialReplies(videoId, comment.repliesPage ?: "", repliesAdapter)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun loadInitialReplies(
