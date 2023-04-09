@@ -81,6 +81,7 @@ dependencies {
 
     /* Android Core */
     implementation libs.androidx.appcompat
+    implementation libs.androidx.core
     implementation libs.androidx.constraintlayout
     implementation libs.androidx.legacySupport
     implementation libs.androidx.navigation.fragment

@@ -1,5 +1,6 @@
 [versions]
 appcompat = "1.6.1"
+core = "1.10.0"
 lifecycle = "2.6.1"
 constraintlayout = "2.1.4"
 material = "1.8.0"
@@ -23,6 +24,7 @@ kotlinxRetrofit = "0.8.0"
 
 [libraries]
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+androidx-core = { group = "androidx.core", name = "core", version.ref = "core" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation" }
