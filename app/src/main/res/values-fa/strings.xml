@@ -131,4 +131,19 @@
     <string name="app_icon">آیکون</string>
     <string name="no_update_available">شما در حال اجرای آخرین نسخه هستید.</string>
     <string name="update_summary">بررسی برای بروزرسانی</string>
+    <string name="piped">پایپد</string>
+    <string name="uploaderAndVideoCount">%1$s • %2$d ویدیو ها</string>
+    <string name="defaultIcon">پیش فرض</string>
+    <string name="downloads_directory">شاخه بارگیری</string>
+    <string name="video">ویدیو</string>
+    <string name="player_autoplay">پخش خودکار</string>
+    <string name="instance_summary">پایپد، ورود، و حساب کاربری</string>
+    <string name="subscriberAndVideoCounts">%1$s مشترکین • %2$d ویدیو ها</string>
+    <string name="advanced_summary">بارگیری ها، و بازنشانی</string>
+    <string name="version">نسخه %1$s</string>
+    <string name="no_audio">بدون صدا</string>
+    <string name="no_video">بدون ویدیو</string>
+    <string name="audio">صدا</string>
+    <string name="downloading">درحال بارگیری…</string>
+    <string name="replies">پاسخ ها</string>
 </resources>
