@@ -8,13 +8,13 @@ import android.content.pm.ActivityInfo
 import android.view.accessibility.CaptioningManager
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.core.app.PendingIntentCompat
 import androidx.core.app.RemoteActionCompat
 import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.IconCompat
 import com.github.libretube.R
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Segment
-import com.github.libretube.compat.PendingIntentCompat
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.AudioQuality
 import com.github.libretube.enums.PlayerEvent
@@ -378,12 +378,8 @@ object PlayerHelper {
     }
 
     private fun getPendingIntent(activity: Activity, code: Int): PendingIntent {
-        return PendingIntentCompat.getBroadcast(
-            activity,
-            code,
-            Intent(getIntentActon(activity)).putExtra(CONTROL_TYPE, code),
-            0
-        )
+        val intent = Intent(getIntentActon(activity)).putExtra(CONTROL_TYPE, code)
+        return PendingIntentCompat.getBroadcast(activity, code, intent, 0, false)
     }
 
     private fun getRemoteAction(
