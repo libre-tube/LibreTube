@@ -90,7 +90,6 @@ import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.CommentsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
-import com.github.libretube.util.DataSaverMode
 import com.github.libretube.util.HtmlParser
 import com.github.libretube.util.LinkHandler
 import com.github.libretube.util.NowPlayingNotification
@@ -184,7 +183,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     private val handler = Handler(Looper.getMainLooper())
     private val mainActivity get() = activity as MainActivity
-    private val windowInsetsControllerCompat get() =  WindowCompat
+    private val windowInsetsControllerCompat get() = WindowCompat
         .getInsetsController(mainActivity.window, mainActivity.window.decorView)
 
     /**

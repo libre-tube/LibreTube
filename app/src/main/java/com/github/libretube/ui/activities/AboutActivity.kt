@@ -59,7 +59,7 @@ class AboutActivity : BaseActivity() {
 
     private fun setupCard(card: MaterialCardView, link: String) {
         card.setOnClickListener {
-            IntentHelper.openLinkFromHref(this, link)
+            IntentHelper.openLinkFromHref(this, supportFragmentManager, link)
         }
         card.setOnLongClickListener {
             onLongClick(link)
@@ -77,7 +77,7 @@ class AboutActivity : BaseActivity() {
             Snackbar.LENGTH_LONG
         )
             .setAction(R.string.open_copied) {
-                IntentHelper.openLinkFromHref(this, href)
+                IntentHelper.openLinkFromHref(this, supportFragmentManager, href)
             }
             .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
             .show()
