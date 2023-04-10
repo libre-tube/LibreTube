@@ -187,6 +187,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private val windowInsetsControllerCompat get() = WindowCompat
         .getInsetsController(mainActivity.window, mainActivity.window.decorView)
 
+    private var scrubbingTimeBar = false
+
     /**
      * Receiver for all actions in the PiP mode
      */
@@ -1200,14 +1202,17 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     // set the name of the video chapter in the exoPlayerView
-    private fun setCurrentChapterName() {
+    private fun setCurrentChapterName(position: Long? = null) {
         // return if chapters are empty to avoid crashes
         if (chapters.isEmpty() || _binding == null) return
 
         // call the function again in 100ms
         binding.player.postDelayed(this::setCurrentChapterName, 100)
 
-        val chapterIndex = getCurrentChapterIndex() ?: return
+        // if the user is scrubbing the time bar, don't update
+        if (scrubbingTimeBar && position == null) return
+
+        val chapterIndex = getCurrentChapterIndex(position) ?: return
         val chapterName = chapters[chapterIndex].title.trim()
 
         // change the chapter name textView text to the chapterName
@@ -1222,8 +1227,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     /**
      * Get the name of the currently played chapter
      */
-    private fun getCurrentChapterIndex(): Int? {
-        val currentPosition = exoPlayer.currentPosition / 1000
+    private fun getCurrentChapterIndex(position: Long? = null): Int? {
+        val currentPosition = (position ?: exoPlayer.currentPosition) / 1000
         return chapters.indexOfLast { currentPosition >= it.start }.takeIf { it >= 0 }
     }
 
@@ -1523,7 +1528,15 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             SeekbarPreviewListener(
                 streams.previewFrames,
                 playerBinding,
-                streams.duration * 1000
+                streams.duration * 1000,
+                onScrub = {
+                    setCurrentChapterName(it)
+                    scrubbingTimeBar = true
+                },
+                onScrubEnd = {
+                    scrubbingTimeBar = false
+                    setCurrentChapterName(it)
+                }
             )
         )
     }
