@@ -8,6 +8,7 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.motion.widget.TransitionAdapter
 import com.github.libretube.R
 
 class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeSet? = null) :
@@ -22,38 +23,13 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
     private val swipeUpListener = mutableListOf<() -> Unit>()
 
     init {
-        addTransitionListener(object : TransitionListener {
-            override fun onTransitionStarted(
-                motionLayout: MotionLayout?,
-                startId: Int,
-                endId: Int
-            ) {
-            }
-
-            override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
-            }
-
-            override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
+        addTransitionListener(object : TransitionAdapter() {
+            override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                 touchStarted = false
-            }
-
-            override fun onTransitionTrigger(
-                motionLayout: MotionLayout?,
-                triggerId: Int,
-                positive: Boolean,
-                progress: Float
-            ) {
             }
         })
 
-        super.setTransitionListener(object : TransitionListener {
-            override fun onTransitionStarted(
-                motionLayout: MotionLayout?,
-                startId: Int,
-                endId: Int
-            ) {
-            }
-
+        super.setTransitionListener(object : TransitionAdapter() {
             override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
                 transitionListenerList.filterNotNull()
                     .forEach { it.onTransitionChange(p0, p1, p2, p3) }
@@ -62,14 +38,6 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
             override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
                 transitionListenerList.filterNotNull()
                     .forEach { it.onTransitionCompleted(p0, p1) }
-            }
-
-            override fun onTransitionTrigger(
-                motionLayout: MotionLayout?,
-                triggerId: Int,
-                positive: Boolean,
-                progress: Float
-            ) {
             }
         })
     }

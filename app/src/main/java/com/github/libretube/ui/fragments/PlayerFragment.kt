@@ -24,6 +24,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
@@ -90,7 +91,6 @@ import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.CommentsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
-import com.github.libretube.util.DataSaverMode
 import com.github.libretube.util.HtmlParser
 import com.github.libretube.util.LinkHandler
 import com.github.libretube.util.NowPlayingNotification
@@ -283,14 +283,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         mainActivity.binding.container.visibility = View.VISIBLE
         val mainMotionLayout = mainActivity.binding.mainMotionLayout
 
-        binding.playerMotionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
-            override fun onTransitionStarted(
-                motionLayout: MotionLayout?,
-                startId: Int,
-                endId: Int
-            ) {
-            }
-
+        binding.playerMotionLayout.addTransitionListener(object : TransitionAdapter() {
             override fun onTransitionChange(
                 motionLayout: MotionLayout?,
                 startId: Int,
@@ -324,14 +317,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     mainMotionLayout.progress = 0F
                     changeOrientationMode()
                 }
-            }
-
-            override fun onTransitionTrigger(
-                MotionLayout: MotionLayout?,
-                triggerId: Int,
-                positive: Boolean,
-                progress: Float
-            ) {
             }
         })
 
