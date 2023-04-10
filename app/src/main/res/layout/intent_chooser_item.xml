@@ -15,7 +15,6 @@
         android:layout_height="75dp"
         android:layout_gravity="center"
         android:padding="10dp"
-        app:shapeAppearance="@style/CircleImageView"
         tools:src="@mipmap/ic_launcher_round" />
 
     <TextView
