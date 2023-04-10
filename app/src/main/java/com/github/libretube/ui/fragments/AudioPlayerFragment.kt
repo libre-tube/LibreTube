@@ -29,7 +29,7 @@ import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.obj.ShareData
-import com.github.libretube.services.BackgroundMode
+import com.github.libretube.services.OnlinePlayerService
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.interfaces.AudioPlayerOptions
@@ -59,13 +59,13 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     private var handler = Handler(Looper.getMainLooper())
     private var isPaused: Boolean = false
 
-    private var playerService: BackgroundMode? = null
+    private var playerService: OnlinePlayerService? = null
 
     /** Defines callbacks for service binding, passed to bindService()  */
     private val connection = object : ServiceConnection {
         override fun onServiceConnected(className: ComponentName, service: IBinder) {
             // We've bound to LocalService, cast the IBinder and get LocalService instance
-            val binder = service as BackgroundMode.LocalBinder
+            val binder = service as OnlinePlayerService.LocalBinder
             playerService = binder.getService()
             handleServiceConnection()
         }
@@ -77,7 +77,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         super.onCreate(savedInstanceState)
 
         audioHelper = AudioHelper(requireContext())
-        Intent(activity, BackgroundMode::class.java).also { intent ->
+        Intent(activity, OnlinePlayerService::class.java).also { intent ->
             activity?.bindService(intent, connection, Context.BIND_AUTO_CREATE)
         }
     }

@@ -339,7 +339,12 @@
             android:exported="false" />
 
         <service
-            android:name=".services.BackgroundMode"
+            android:name=".services.OnlinePlayerService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <service
+            android:name=".services.OfflinePlayerService"
             android:enabled="true"
             android:exported="false" />
 

@@ -7,17 +7,17 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 import androidx.fragment.app.commit
 import com.github.libretube.constants.IntentData
-import com.github.libretube.services.BackgroundMode
+import com.github.libretube.services.OnlinePlayerService
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.fragments.PlayerFragment
 
 /**
- * Helper for starting a new Instance of the [BackgroundMode]
+ * Helper for starting a new Instance of the [OnlinePlayerService]
  */
 object BackgroundHelper {
 
     /**
-     * Start the foreground service [BackgroundMode] to play in background. [position]
+     * Start the foreground service [OnlinePlayerService] to play in background. [position]
      * is seek to position specified in milliseconds in the current [videoId].
      */
     fun playOnBackground(
@@ -39,7 +39,7 @@ object BackgroundHelper {
         }
 
         // create an intent for the background mode service
-        val intent = Intent(context, BackgroundMode::class.java)
+        val intent = Intent(context, OnlinePlayerService::class.java)
         intent.putExtra(IntentData.videoId, videoId)
         intent.putExtra(IntentData.playlistId, playlistId)
         intent.putExtra(IntentData.channelId, channelId)
@@ -51,22 +51,22 @@ object BackgroundHelper {
     }
 
     /**
-     * Stop the [BackgroundMode] service if it is running.
+     * Stop the [OnlinePlayerService] service if it is running.
      */
     fun stopBackgroundPlay(context: Context) {
         if (isBackgroundServiceRunning(context)) {
             // Intent to stop background mode service
-            val intent = Intent(context, BackgroundMode::class.java)
+            val intent = Intent(context, OnlinePlayerService::class.java)
             context.stopService(intent)
         }
     }
 
     /**
-     * Check if the [BackgroundMode] service is currently running.
+     * Check if the [OnlinePlayerService] service is currently running.
      */
     fun isBackgroundServiceRunning(context: Context): Boolean {
         @Suppress("DEPRECATION")
         return context.getSystemService<ActivityManager>()!!.getRunningServices(Int.MAX_VALUE)
-            .any { BackgroundMode::class.java.name == it.service.className }
+            .any { OnlinePlayerService::class.java.name == it.service.className }
     }
 }

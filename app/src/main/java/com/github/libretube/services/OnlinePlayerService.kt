@@ -3,12 +3,12 @@ package com.github.libretube.services
 import android.app.Notification
 import android.content.Intent
 import android.os.Binder
-import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
 import android.util.Log
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
@@ -28,6 +28,7 @@ import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.checkForSegments
 import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
 import com.github.libretube.helpers.ProxyHelper
+import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayingQueue
 import com.google.android.exoplayer2.ExoPlayer
@@ -44,7 +45,7 @@ import kotlinx.serialization.encodeToString
 /**
  * Loads the selected videos audio in background mode with a notification area.
  */
-class BackgroundMode : LifecycleService() {
+class OnlinePlayerService : LifecycleService() {
     /**
      * VideoId of the video
      */
@@ -97,16 +98,14 @@ class BackgroundMode : LifecycleService() {
      */
     override fun onCreate() {
         super.onCreate()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // see https://developer.android.com/reference/android/app/Service#startForeground(int,%20android.app.Notification)
-            val notification = Notification.Builder(this, BACKGROUND_CHANNEL_ID)
-                .setContentTitle(getString(R.string.app_name))
-                .setContentText(getString(R.string.playingOnBackground))
-                .setSmallIcon(R.drawable.ic_launcher_lockscreen)
-                .build()
 
-            startForeground(PLAYER_NOTIFICATION_ID, notification)
-        }
+        val notification = NotificationCompat.Builder(this, BACKGROUND_CHANNEL_ID)
+            .setContentTitle(getString(R.string.app_name))
+            .setContentText(getString(R.string.playingOnBackground))
+            .setSmallIcon(R.drawable.ic_launcher_lockscreen)
+            .build()
+
+        startForeground(PLAYER_NOTIFICATION_ID, notification)
     }
 
     /**
@@ -189,10 +188,19 @@ class BackgroundMode : LifecycleService() {
         setMediaItem()
 
         // create the notification
-        if (!this@BackgroundMode::nowPlayingNotification.isInitialized) {
-            nowPlayingNotification = NowPlayingNotification(this@BackgroundMode, player!!, true)
+        if (!this@OnlinePlayerService::nowPlayingNotification.isInitialized) {
+            nowPlayingNotification = NowPlayingNotification(
+                this@OnlinePlayerService,
+                player!!,
+                true
+            )
         }
-        nowPlayingNotification.updatePlayerNotification(videoId, streams!!)
+        val playerNotificationData = PlayerNotificationData(
+            streams?.title,
+            streams?.uploader,
+            streams?.thumbnailUrl
+        )
+        nowPlayingNotification.updatePlayerNotification(videoId, playerNotificationData)
 
         player?.apply {
             playWhenReady = playWhenReadyPlayer
@@ -259,7 +267,7 @@ class BackgroundMode : LifecycleService() {
                 // show a toast on errors
                 Handler(Looper.getMainLooper()).post {
                     Toast.makeText(
-                        this@BackgroundMode.applicationContext,
+                        this@OnlinePlayerService.applicationContext,
                         error.localizedMessage,
                         Toast.LENGTH_SHORT
                     ).show()
@@ -351,7 +359,7 @@ class BackgroundMode : LifecycleService() {
     }
 
     /**
-     * destroy the [BackgroundMode] foreground service
+     * destroy the [OnlinePlayerService] foreground service
      */
     override fun onDestroy() {
         // clear and reset the playing queue
@@ -371,7 +379,7 @@ class BackgroundMode : LifecycleService() {
 
     inner class LocalBinder : Binder() {
         // Return this instance of [BackgroundMode] so clients can call public methods
-        fun getService(): BackgroundMode = this@BackgroundMode
+        fun getService(): OnlinePlayerService = this@OnlinePlayerService
     }
 
     override fun onBind(intent: Intent): IBinder {

@@ -77,6 +77,7 @@ class OfflinePlayerActivity : BaseActivity() {
             .setTrackSelector(trackSelector)
             .setLoadControl(PlayerHelper.getLoadControl())
             .setAudioAttributes(PlayerHelper.getAudioAttributes(), true)
+            .setUsePlatformDiagnostics(false)
             .build().apply {
                 addListener(object : Player.Listener {
                     override fun onEvents(player: Player, events: Player.Events) {
