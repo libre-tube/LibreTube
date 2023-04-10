@@ -691,15 +691,14 @@ internal class CustomExoPlayerView(
     }
 
     override fun onSwipeCenterScreen(distanceY: Float) {
-        if (!PlayerHelper.swipeGestureEnabled) return
+        if (!PlayerHelper.fullscreenGesturesEnabled) return
 
         if (isControllerFullyVisible) hideController()
+        if (distanceY >= 0) return
 
-        if (distanceY < 0) {
-            playerGestureController.isMoving = false
-            (context as? AppCompatActivity)?.onBackPressedDispatcher?.onBackPressed()
-            playerViewModel?.isFullscreen?.value = false
-        }
+        playerGestureController.isMoving = false
+        (context as? AppCompatActivity)?.onBackPressedDispatcher?.onBackPressed()
+        playerViewModel?.isFullscreen?.value = false
     }
 
     override fun onSwipeEnd() {

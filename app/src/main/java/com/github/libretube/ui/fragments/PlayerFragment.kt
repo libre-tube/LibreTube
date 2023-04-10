@@ -322,12 +322,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
         })
 
-        if (PlayerHelper.swipeGestureEnabled) {
-            binding.playerMotionLayout.addSwipeUpListener {
-                if (this::streams.isInitialized) {
-                    binding.player.hideController()
-                    setFullscreen()
-                }
+        binding.playerMotionLayout.addSwipeUpListener {
+            if (this::streams.isInitialized && PlayerHelper.fullscreenGesturesEnabled) {
+                binding.player.hideController()
+                setFullscreen()
             }
         }
 

@@ -322,6 +322,12 @@ object PlayerHelper {
             true
         )
 
+    val fullscreenGesturesEnabled: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.FULLSCREEN_GESTURES,
+            false
+        )
+
     val pinchGestureEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.PLAYER_PINCH_CONTROL,

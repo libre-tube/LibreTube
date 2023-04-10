@@ -96,6 +96,7 @@ object PreferenceKeys {
     const val LBRY_HLS = "lbry_hls"
     const val AUTO_FULLSCREEN_SHORTS = "auto_fullscreen_shorts"
     const val PLAY_AUTOMATICALLY = "play_automatically"
+    const val FULLSCREEN_GESTURES = "fullscreen_gestures"
 
     /**
      * Background mode
