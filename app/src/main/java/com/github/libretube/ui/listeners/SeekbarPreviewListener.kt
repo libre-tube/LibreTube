@@ -17,7 +17,9 @@ import com.google.android.exoplayer2.ui.TimeBar
 class SeekbarPreviewListener(
     private val previewFrames: List<PreviewFrames>,
     private val playerBinding: ExoStyledPlayerControlViewBinding,
-    private val duration: Long
+    private val duration: Long,
+    private val onScrub: (position: Long) -> Unit,
+    private val onScrubEnd: (position: Long) -> Unit
 ) : TimeBar.OnScrubListener {
     private var moving = false
 
@@ -35,6 +37,10 @@ class SeekbarPreviewListener(
 
         playerBinding.seekbarPreviewPosition.text = DateUtils.formatElapsedTime(position / 1000)
         processPreview(position)
+
+        runCatching {
+            onScrub.invoke(position)
+        }
     }
 
     /**
