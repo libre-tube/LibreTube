@@ -113,6 +113,7 @@ class DownloadsFragment : Fragment() {
             object : RecyclerView.AdapterDataObserver() {
                 override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
                     super.onItemRangeRemoved(positionStart, itemCount)
+                    val binding = _binding ?: return
                     if (binding.downloads.adapter?.itemCount == 0) {
                         binding.downloads.visibility = View.GONE
                         binding.downloadsEmpty.visibility = View.VISIBLE
@@ -150,7 +151,7 @@ class DownloadsFragment : Fragment() {
         val index = downloads.indexOfFirst {
             it.downloadItems.any { item -> item.id == id }
         }
-        val view = binding.downloads.findViewHolderForAdapterPosition(index) as? DownloadsViewHolder
+        val view = _binding?.downloads?.findViewHolderForAdapterPosition(index) as? DownloadsViewHolder
 
         view?.binding?.apply {
             when (status) {
