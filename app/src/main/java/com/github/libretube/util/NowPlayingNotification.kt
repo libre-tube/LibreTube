@@ -1,8 +1,8 @@
 package com.github.libretube.util
 
-import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -15,13 +15,13 @@ import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
+import androidx.core.app.PendingIntentCompat
 import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.os.bundleOf
 import coil.request.ImageRequest
 import com.github.libretube.R
 import com.github.libretube.api.obj.Streams
-import com.github.libretube.compat.PendingIntentCompat
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
@@ -74,7 +74,6 @@ class NowPlayingNotification(
         /**
          * overrides the action when clicking the notification
          */
-        @SuppressLint("UnspecifiedImmutableFlag")
         override fun createCurrentContentIntent(player: Player): PendingIntent {
             // starts a new MainActivity Intent when the player notification is clicked
             // it doesn't start a completely new MainActivity because the MainActivity's launchMode
@@ -86,12 +85,7 @@ class NowPlayingNotification(
                     addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 }
             }
-            return PendingIntentCompat.getActivity(
-                context,
-                0,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT
-            )
+            return PendingIntentCompat.getActivity(context, 0, intent, FLAG_UPDATE_CURRENT, false)
         }
 
         /**
@@ -163,12 +157,8 @@ class NowPlayingNotification(
 
     private fun createNotificationAction(drawableRes: Int, actionName: String, instanceId: Int): NotificationCompat.Action {
         val intent = Intent(actionName).setPackage(context.packageName)
-        val pendingIntent = PendingIntentCompat.getBroadcast(
-            context,
-            instanceId,
-            intent,
-            PendingIntent.FLAG_CANCEL_CURRENT
-        )
+        val pendingIntent = PendingIntentCompat
+            .getBroadcast(context, instanceId, intent, PendingIntent.FLAG_CANCEL_CURRENT, false)
         return NotificationCompat.Action.Builder(drawableRes, actionName, pendingIntent).build()
     }
 

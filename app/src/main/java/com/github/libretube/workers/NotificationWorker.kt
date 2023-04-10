@@ -1,18 +1,18 @@
 package com.github.libretube.workers
 
 import android.app.NotificationManager
-import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.app.PendingIntentCompat
 import androidx.core.content.getSystemService
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
-import com.github.libretube.compat.PendingIntentCompat
 import com.github.libretube.constants.DOWNLOAD_PROGRESS_NOTIFICATION_ID
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PUSH_CHANNEL_ID
@@ -163,12 +163,8 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             }
         }
 
-        val pendingIntent = PendingIntentCompat.getActivity(
-            applicationContext,
-            notificationId,
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT
-        )
+        val pendingIntent = PendingIntentCompat
+            .getActivity(applicationContext, notificationId, intent, FLAG_UPDATE_CURRENT, false)
 
         val builder = NotificationCompat.Builder(applicationContext, PUSH_CHANNEL_ID)
             .setContentTitle(title)

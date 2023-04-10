@@ -1,12 +1,14 @@
 package com.github.libretube.services
 
 import android.app.NotificationManager
-import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_CANCEL_CURRENT
+import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
 import android.util.SparseBooleanArray
 import androidx.core.app.NotificationCompat
+import androidx.core.app.PendingIntentCompat
 import androidx.core.app.ServiceCompat
 import androidx.core.content.getSystemService
 import androidx.core.util.set
@@ -16,7 +18,6 @@ import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.compat.PendingIntentCompat
 import com.github.libretube.constants.DOWNLOAD_CHANNEL_ID
 import com.github.libretube.constants.DOWNLOAD_PROGRESS_NOTIFICATION_ID
 import com.github.libretube.constants.IntentData
@@ -358,13 +359,10 @@ class DownloadService : LifecycleService() {
     }
 
     private fun getNotificationBuilder(item: DownloadItem): NotificationCompat.Builder {
-        val activityIntent = PendingIntentCompat.getActivity(
-            this@DownloadService,
-            0,
-            Intent(this@DownloadService, MainActivity::class.java)
-                .putExtra("fragmentToOpen", "downloads"),
-            PendingIntent.FLAG_CANCEL_CURRENT
-        )
+        val intent = Intent(this@DownloadService, MainActivity::class.java)
+            .putExtra("fragmentToOpen", "downloads")
+        val activityIntent = PendingIntentCompat
+            .getActivity(this@DownloadService, 0, intent, FLAG_CANCEL_CURRENT, false)
 
         return NotificationCompat
             .Builder(this, DOWNLOAD_CHANNEL_ID)
@@ -415,15 +413,14 @@ class DownloadService : LifecycleService() {
     }
 
     private fun getResumeAction(id: Int): NotificationCompat.Action {
-        val intent = Intent(this, NotificationReceiver::class.java).apply {
-            action = ACTION_DOWNLOAD_RESUME
-            putExtra("id", id)
-        }
+        val intent = Intent(this, NotificationReceiver::class.java)
+            .setAction(ACTION_DOWNLOAD_RESUME)
+            .putExtra("id", id)
 
         return NotificationCompat.Action.Builder(
             R.drawable.ic_play,
             getString(R.string.resume),
-            PendingIntentCompat.getBroadcast(this, id, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntentCompat.getBroadcast(this, id, intent, FLAG_UPDATE_CURRENT, false)
         ).build()
     }
 
@@ -435,7 +432,7 @@ class DownloadService : LifecycleService() {
         return NotificationCompat.Action.Builder(
             R.drawable.ic_pause,
             getString(R.string.pause),
-            PendingIntentCompat.getBroadcast(this, id, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntentCompat.getBroadcast(this, id, intent, FLAG_UPDATE_CURRENT, false)
         ).build()
     }
 
