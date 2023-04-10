@@ -184,7 +184,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     private val handler = Handler(Looper.getMainLooper())
     private val mainActivity get() = activity as MainActivity
-    private val windowInsetsControllerCompat get() =  WindowCompat
+    private val windowInsetsControllerCompat get() = WindowCompat
         .getInsetsController(mainActivity.window, mainActivity.window.decorView)
 
     /**

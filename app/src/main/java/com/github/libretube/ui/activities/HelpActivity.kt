@@ -35,7 +35,7 @@ class HelpActivity : BaseActivity() {
 
     private fun setupCard(card: MaterialCardView, link: String) {
         card.setOnClickListener {
-            IntentHelper.openLinkFromHref(this, link)
+            IntentHelper.openLinkFromHref(this, supportFragmentManager, link)
         }
     }
 }
