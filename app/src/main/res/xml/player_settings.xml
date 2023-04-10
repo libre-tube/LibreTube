@@ -12,6 +12,12 @@
             app:title="@string/swipe_controls" />
 
         <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_fullscreen"
+            app:key="fullscreen_gestures"
+            app:title="@string/fullscreen_gestures" />
+
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:icon="@drawable/ic_pinch_gesture"
             android:summary="@string/pinch_control_summary"

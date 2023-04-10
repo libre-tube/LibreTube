@@ -462,6 +462,7 @@
     <string name="edit_group">Edit group</string>
     <string name="play_automatically">Play automatically</string>
     <string name="play_automatically_summary">Start playing video automatically when selecting</string>
+    <string name="fullscreen_gestures">Enter/exit fullscreen gestures</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
