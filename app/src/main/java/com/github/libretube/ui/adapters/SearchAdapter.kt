@@ -22,6 +22,7 @@ import com.github.libretube.ui.sheets.ChannelOptionsBottomSheet
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.SearchViewHolder
+import com.github.libretube.util.TextUtils
 
 class SearchAdapter : ListAdapter<ContentItem, SearchViewHolder>(SearchCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
@@ -49,7 +50,7 @@ class SearchAdapter : ListAdapter<ContentItem, SearchViewHolder>(SearchCallback)
         val playlistRowBinding = holder.playlistRowBinding
 
         if (videoRowBinding != null) {
-            bindWatch(searchItem, videoRowBinding)
+            bindVideo(searchItem, videoRowBinding)
         } else if (channelRowBinding != null) {
             bindChannel(searchItem, channelRowBinding)
         } else if (playlistRowBinding != null) {
@@ -66,21 +67,23 @@ class SearchAdapter : ListAdapter<ContentItem, SearchViewHolder>(SearchCallback)
         }
     }
 
-    private fun bindWatch(item: ContentItem, binding: VideoRowBinding) {
+    private fun bindVideo(item: ContentItem, binding: VideoRowBinding) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, thumbnail)
             thumbnailDuration.setFormattedDuration(item.duration, item.isShort)
             ImageHelper.loadImage(item.uploaderAvatar, channelImage)
             videoTitle.text = item.title
-            val viewsString = if (item.views != -1L) item.views.formatShort() else ""
-            val uploadDate = item.uploadedDate.orEmpty()
-            videoInfo.text =
-                if (viewsString.isNotEmpty() && uploadDate.isNotEmpty()) {
-                    "$viewsString • $uploadDate"
-                } else {
-                    viewsString + uploadDate
-                }
-            channelName.text = item.uploaderName
+            // only display the additional info if not in a channel tab
+            if (item.isShort != true || item.uploaderAvatar != null) {
+                val viewsString = item.views.takeIf { it != -1L }?.formatShort().orEmpty()
+                val uploadDate = item.uploadedDate?.let { " ${TextUtils.SEPARATOR} $it" }.orEmpty()
+                videoInfo.text = root.context.getString(
+                    R.string.normal_views,
+                    viewsString,
+                    uploadDate
+                )
+                channelName.text = item.uploaderName
+            }
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, item.url)
             }
