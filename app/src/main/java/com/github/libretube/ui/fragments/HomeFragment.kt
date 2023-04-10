@@ -132,6 +132,7 @@ class HomeFragment : Fragment() {
         val bookmarkedPlaylists = withContext(Dispatchers.IO) {
             DatabaseHolder.Database.playlistBookmarkDao().getAll()
         }.takeIf { it.isNotEmpty() } ?: return
+        val binding = _binding ?: return
 
         makeVisible(binding.bookmarksTV, binding.bookmarksRV)
         binding.bookmarksRV.layoutManager = LinearLayoutManager(
@@ -151,6 +152,7 @@ class HomeFragment : Fragment() {
                 PlaylistsHelper.getPlaylists().take(20)
             }
         }.getOrNull()?.takeIf { it.isNotEmpty() } ?: return
+        val binding = _binding ?: return
 
         makeVisible(binding.playlistsRV, binding.playlistsTV)
         binding.playlistsRV.layoutManager = LinearLayoutManager(context)

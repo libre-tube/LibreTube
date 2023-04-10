@@ -33,6 +33,7 @@ class WatchHistoryFragment : Fragment() {
     private var _binding: FragmentWatchHistoryBinding? = null
     private val binding get() = _binding!!
 
+    private val handler = Handler(Looper.getMainLooper())
     private val playerViewModel: PlayerViewModel by activityViewModels()
     private var isLoading = false
 
@@ -49,7 +50,7 @@ class WatchHistoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         playerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
-            binding.watchHistoryRecView.updatePadding(
+            _binding?.watchHistoryRecView?.updatePadding(
                 bottom = if (it) (64).dpToPx().toInt() else 0
             )
         }
@@ -148,7 +149,8 @@ class WatchHistoryFragment : Fragment() {
         })
 
         // add a listener for scroll end, delay needed to prevent loading new ones the first time
-        Handler(Looper.getMainLooper()).postDelayed(200) {
+        handler.postDelayed(200) {
+            if (_binding == null) return@postDelayed
             binding.historyScrollView.viewTreeObserver.addOnScrollChangedListener {
                 if (_binding?.historyScrollView?.canScrollVertically(1) == false &&
                     !isLoading
