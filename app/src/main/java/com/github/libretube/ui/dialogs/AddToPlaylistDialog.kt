@@ -80,13 +80,16 @@ class AddToPlaylistDialog(
     private suspend fun addToPlaylist(playlistId: String) {
         val appContext = context?.applicationContext ?: return
         val streams = when {
-            videoId != null -> listOf(
-                RetrofitInstance.api.getStreams(videoId).toStreamItem(videoId)
+            videoId != null -> listOfNotNull(
+                runCatching {
+                    RetrofitInstance.api.getStreams(videoId!!).toStreamItem(videoId)
+                }.getOrNull()
             )
             else -> PlayingQueue.getStreams()
         }
 
         val success = try {
+            if (streams.isEmpty()) throw IllegalArgumentException()
             PlaylistsHelper.addToPlaylist(playlistId, *streams.toTypedArray())
         } catch (e: Exception) {
             Log.e(TAG(), e.toString())
