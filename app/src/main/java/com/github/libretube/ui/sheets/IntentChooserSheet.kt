@@ -29,7 +29,7 @@ class IntentChooserSheet(
         binding.optionsRecycler.layoutManager = GridLayoutManager(context, 3)
         binding.optionsRecycler.adapter = IntentChooserAdapter(packages, url)
     }
-    
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
