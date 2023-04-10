@@ -13,19 +13,25 @@ class IntentChooserSheet(
     private val packages: List<ResolveInfo>,
     private val url: String
 ) : BaseBottomSheet() {
-    private lateinit var binding: BottomSheetBinding
+    private var _binding: BottomSheetBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = BottomSheetBinding.inflate(inflater)
+        _binding = BottomSheetBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.optionsRecycler.layoutManager = GridLayoutManager(context, 3)
         binding.optionsRecycler.adapter = IntentChooserAdapter(packages, url)
+    }
+    
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
