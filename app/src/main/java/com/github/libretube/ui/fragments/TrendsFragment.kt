@@ -54,9 +54,8 @@ class TrendsFragment : Fragment() {
         lifecycleScope.launchWhenCreated {
             val response = try {
                 withContext(Dispatchers.IO) {
-                    RetrofitInstance.api.getTrending(
-                        LocaleHelper.getTrendingRegion(requireContext())
-                    )
+                    val region = LocaleHelper.getTrendingRegion(requireContext())
+                    RetrofitInstance.api.getTrending(region)
                 }
             } catch (e: IOException) {
                 println(e)
@@ -67,16 +66,18 @@ class TrendsFragment : Fragment() {
                 Log.e(TAG(), "HttpException, unexpected response")
                 Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                 return@launchWhenCreated
-            } finally {
-                binding.homeRefresh.isRefreshing = false
             }
+
+            val binding = _binding ?: return@launchWhenCreated
+            binding.homeRefresh.isRefreshing = false
             binding.progressBar.visibility = View.GONE
 
             // show a [SnackBar] if there are no trending videos available
             if (response.isEmpty()) {
                 Snackbar.make(binding.root, R.string.change_region, Snackbar.LENGTH_LONG)
                     .setAction(R.string.settings) {
-                        startActivity(Intent(context, SettingsActivity::class.java))
+                        val settingsIntent = Intent(context, SettingsActivity::class.java)
+                        startActivity(settingsIntent)
                     }
                     .show()
                 return@launchWhenCreated
