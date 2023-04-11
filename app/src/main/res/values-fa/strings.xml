@@ -146,4 +146,6 @@
     <string name="audio">صدا</string>
     <string name="downloading">درحال بارگیری…</string>
     <string name="replies">پاسخ ها</string>
+    <string name="audio_video">صدا و ویدیو</string>
+    <string name="github">گیت هاب</string>
 </resources>
