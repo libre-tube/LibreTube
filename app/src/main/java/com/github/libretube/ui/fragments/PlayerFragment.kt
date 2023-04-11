@@ -73,6 +73,7 @@ import com.github.libretube.helpers.PlayerHelper.checkForSegments
 import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
+import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.obj.ShareData
 import com.github.libretube.obj.VideoResolution
 import com.github.libretube.services.DownloadService
@@ -1365,7 +1366,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         if (!this::nowPlayingNotification.isInitialized) {
             nowPlayingNotification = NowPlayingNotification(requireContext(), exoPlayer, false)
         }
-        nowPlayingNotification.updatePlayerNotification(videoId!!, streams)
+        val playerNotificationData = PlayerNotificationData(
+            streams.title,
+            streams.uploader,
+            streams.thumbnailUrl
+        )
+        nowPlayingNotification.updatePlayerNotification(videoId!!, playerNotificationData)
     }
 
     /**

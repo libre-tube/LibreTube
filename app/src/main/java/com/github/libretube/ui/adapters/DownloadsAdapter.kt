@@ -6,27 +6,24 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DownloadedMediaRowBinding
-import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.ui.activities.OfflinePlayerActivity
+import com.github.libretube.ui.sheets.DownloadOptionsBottomSheet
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
 import com.github.libretube.util.TextUtils
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlin.io.path.deleteIfExists
 import kotlin.io.path.fileSize
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
 
 class DownloadsAdapter(
     private val context: Context,
     private val downloads: MutableList<DownloadWithItems>,
-    private val toogleDownload: (DownloadWithItems) -> Boolean
+    private val toggleDownload: (DownloadWithItems) -> Boolean
 ) : RecyclerView.Adapter<DownloadsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DownloadsViewHolder {
         val binding = DownloadedMediaRowBinding.inflate(
@@ -75,7 +72,7 @@ class DownloadsAdapter(
             }
 
             progressBar.setOnClickListener {
-                val isDownloading = toogleDownload(downloads[position])
+                val isDownloading = toggleDownload(downloads[position])
 
                 resumePauseBtn.setImageResource(
                     if (isDownloading) {
@@ -93,24 +90,13 @@ class DownloadsAdapter(
             }
 
             root.setOnLongClickListener {
-                MaterialAlertDialogBuilder(root.context)
-                    .setTitle(R.string.delete)
-                    .setMessage(R.string.irreversible)
-                    .setPositiveButton(R.string.okay) { _, _ ->
-                        items.forEach {
-                            it.path.deleteIfExists()
-                        }
-                        download.thumbnailPath?.deleteIfExists()
-
-                        runBlocking(Dispatchers.IO) {
-                            DatabaseHolder.Database.downloadDao().deleteDownload(download)
-                        }
-                        downloads.removeAt(position)
-                        notifyItemRemoved(position)
-                        notifyItemRangeChanged(position, itemCount)
-                    }
-                    .setNegativeButton(R.string.cancel, null)
-                    .show()
+                DownloadOptionsBottomSheet(download, items) {
+                    downloads.removeAt(position)
+                    notifyItemRemoved(position)
+                    notifyItemRangeChanged(position, itemCount)
+                }.show(
+                    (root.context as AppCompatActivity).supportFragmentManager
+                )
                 true
             }
         }
