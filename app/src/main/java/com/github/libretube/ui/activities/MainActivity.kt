@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -24,6 +23,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.compat.PictureInPictureCompat
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.ActivityMainBinding
@@ -370,9 +370,7 @@ class MainActivity : BaseActivity() {
 
     private fun loadIntentData() {
         // If activity is running in PiP mode, then start it in front.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N &&
-            isInPictureInPictureMode
-        ) {
+        if (PictureInPictureCompat.isInPictureInPictureMode(this)) {
             val nIntent = Intent(this, MainActivity::class.java)
             nIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(nIntent)
