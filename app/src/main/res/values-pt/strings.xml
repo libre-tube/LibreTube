@@ -483,4 +483,6 @@
     <string name="edit_group">Editar grupo</string>
     <string name="play_automatically">Reproduzir automaticamente</string>
     <string name="play_automatically_summary">Comece a reproduzir vídeo automaticamente ao selecionar</string>
+    <string name="fullscreen_gestures">Gestos de entrada/saída em ecrã inteiro</string>
+    <string name="go_to_video">Ir para o vídeo</string>
 </resources>
