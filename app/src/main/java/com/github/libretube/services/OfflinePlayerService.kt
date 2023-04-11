@@ -1,9 +1,11 @@
 package com.github.libretube.services
 
-import android.app.Service
 import android.content.Intent
+import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
+import androidx.lifecycle.LifecycleService
+import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.IntentData
@@ -18,7 +20,6 @@ import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.util.NowPlayingNotification
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -26,7 +27,7 @@ import kotlinx.coroutines.withContext
 /**
  * A service to play downloaded audio in the background
  */
-class OfflinePlayerService : Service() {
+class OfflinePlayerService : LifecycleService() {
     private var player: ExoPlayer? = null
     private var nowPlayingNotification: NowPlayingNotification? = null
 
@@ -42,10 +43,10 @@ class OfflinePlayerService : Service() {
         startForeground(PLAYER_NOTIFICATION_ID, notification)
     }
 
-    override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
-        val videoId = intent.getStringExtra(IntentData.videoId)
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        val videoId = intent?.getStringExtra(IntentData.videoId)
 
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             val downloadWithItems = DatabaseHolder.Database.downloadDao().findById(videoId!!)
             withContext(Dispatchers.Main) {
                 if (startAudioPlayer(downloadWithItems)) {
@@ -110,5 +111,8 @@ class OfflinePlayerService : Service() {
         super.onDestroy()
     }
 
-    override fun onBind(intent: Intent?) = null
+    override fun onBind(intent: Intent): IBinder? {
+        super.onBind(intent)
+        return null
+    }
 }
