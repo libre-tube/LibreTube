@@ -492,4 +492,5 @@
     <string name="edit_group">تحرير المجموعة</string>
     <string name="play_automatically">تشغيل تلقائيا</string>
     <string name="play_automatically_summary">بدء تشغيل الفيديو تلقائيا عند تحديده</string>
+    <string name="fullscreen_gestures">الدخول/الخروج من إيماءات ملء الشاشة</string>
 </resources>

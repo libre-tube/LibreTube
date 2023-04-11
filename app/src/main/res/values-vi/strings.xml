@@ -396,4 +396,23 @@
     <string name="download_completed">Tải xuống hoàn tất</string>
     <string name="concurrent_downloads">Tải xuống đồng thời tối đa</string>
     <string name="no_subtitle">Không có phụ đề</string>
+    <string name="concurrent_downloads_limit_reached">Đã đạt đến giới hạn tải xuống đồng thời.</string>
+    <string name="pause">Dừng</string>
+    <string name="pinch_control">Kiểm soát chụm</string>
+    <string name="replies">Phản hồi</string>
+    <string name="uploaderAndVideoCount">%1$s • %2$d videos</string>
+    <string name="subscriberAndVideoCounts">%1$s người đăng kí • %2$d videos</string>
+    <string name="trending_views">%1$s • %2$s lượt xem • %3$s</string>
+    <string name="normal_views">%1$s lượt xem%2$s</string>
+    <string name="unknown">Không xác định</string>
+    <string name="resume">Tiếp tục</string>
+    <string name="unsupported_file_format">Định dạng tệp tin không hỗ trợ: %1$s</string>
+    <string name="pinch_control_summary">Sử dụng cử chỉ chụm để phóng to/thu nhỏ.</string>
+    <string name="pop_up">Pop-up</string>
+    <string name="comments_disabled">Bình luận đã bị tắt bởi người tải lên.</string>
+    <string name="no_comments_available">Video này không có bình luận nào.</string>
+    <string name="theme_monochrome">Đơn sắc tối giản</string>
+    <string name="captions_size">Kích thước phụ đề</string>
+    <string name="double_tap_seek">Nhấn đúp để tua nhanh</string>
+    <string name="double_tap_seek_summary">Nhấn hai lần ở bên trái hoặc bên phải để tua lại hoặc chuyển tiếp vị trí trình phát.</string>
 </resources>

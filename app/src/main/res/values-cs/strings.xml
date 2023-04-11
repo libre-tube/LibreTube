@@ -483,4 +483,5 @@
     <string name="edit_group">Upravit skupinu</string>
     <string name="play_automatically">Automatické přehrávání</string>
     <string name="play_automatically_summary">Automatické spuštění přehrávání videa při výběru</string>
+    <string name="fullscreen_gestures">Gesta vstupu/opuštění režimu celé obrazovky</string>
 </resources>
