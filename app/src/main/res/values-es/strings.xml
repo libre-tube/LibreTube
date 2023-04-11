@@ -484,4 +484,5 @@
     <string name="play_automatically">Reproducción automática</string>
     <string name="play_automatically_summary">Comienza a reproducir los video automáticamente al seleccionarlos</string>
     <string name="fullscreen_gestures">Gestos para entrar y salir de la pantalla completa</string>
+    <string name="go_to_video">Ir al vídeo</string>
 </resources>
