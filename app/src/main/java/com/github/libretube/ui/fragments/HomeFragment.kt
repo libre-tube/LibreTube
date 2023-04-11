@@ -27,6 +27,8 @@ import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -80,10 +82,12 @@ class HomeFragment : Fragment() {
     private fun fetchHomeFeed() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
-                loadTrending()
-                loadBookmarks()
-                loadFeed()
-                loadPlaylists()
+                awaitAll(
+                    async { loadTrending() },
+                    async { loadBookmarks() },
+                    async { loadFeed() },
+                    async { loadPlaylists() }
+                )
             }
         }
     }
