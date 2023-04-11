@@ -384,7 +384,7 @@ class MainActivity : BaseActivity() {
         intent?.getStringExtra(IntentData.channelId)?.let {
             navController.navigate(
                 R.id.channelFragment,
-                bundleOf(IntentData.channelName to it)
+                bundleOf(IntentData.channelId to it)
             )
         }
         intent?.getStringExtra(IntentData.channelName)?.let {
