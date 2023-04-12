@@ -494,4 +494,12 @@
     <string name="play_automatically_summary">بدء تشغيل الفيديو تلقائيا عند تحديده</string>
     <string name="fullscreen_gestures">الدخول/الخروج من إيماءات ملء الشاشة</string>
     <string name="go_to_video">الذهاب إلى الفيديو</string>
+    <plurals name="channel_new_streams">
+        <item quantity="zero">%d تدفق جديد</item>
+        <item quantity="one">%d تدفق جديد</item>
+        <item quantity="two">%d تدفقات جديدة</item>
+        <item quantity="few">%d تدفقات جديدة</item>
+        <item quantity="many">%d تدفقات جديدة</item>
+        <item quantity="other">%d تدفقات جديدة</item>
+    </plurals>
 </resources>
