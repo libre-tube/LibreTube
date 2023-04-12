@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
@@ -87,49 +89,53 @@ class SearchResultFragment : Fragment() {
     }
 
     private fun fetchSearch() {
-        lifecycleScope.launchWhenCreated {
-            view?.let { context?.hideKeyboard(it) }
-            val response = try {
-                withContext(Dispatchers.IO) {
-                    RetrofitInstance.api.getSearchResults(query, apiSearchFilter)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                view?.let { context?.hideKeyboard(it) }
+                val response = try {
+                    withContext(Dispatchers.IO) {
+                        RetrofitInstance.api.getSearchResults(query, apiSearchFilter)
+                    }
+                } catch (e: IOException) {
+                    println(e)
+                    Log.e(TAG(), "IOException, you might not have internet connection $e")
+                    return@repeatOnLifecycle
+                } catch (e: HttpException) {
+                    Log.e(TAG(), "HttpException, unexpected response")
+                    return@repeatOnLifecycle
                 }
-            } catch (e: IOException) {
-                println(e)
-                Log.e(TAG(), "IOException, you might not have internet connection $e")
-                return@launchWhenCreated
-            } catch (e: HttpException) {
-                Log.e(TAG(), "HttpException, unexpected response")
-                return@launchWhenCreated
+                searchAdapter = SearchAdapter()
+                binding.searchRecycler.adapter = searchAdapter
+                searchAdapter.submitList(response.items)
+                binding.noSearchResult.isVisible = response.items.isEmpty()
+                nextPage = response.nextpage
             }
-            searchAdapter = SearchAdapter()
-            binding.searchRecycler.adapter = searchAdapter
-            searchAdapter.submitList(response.items)
-            binding.noSearchResult.isVisible = response.items.isEmpty()
-            nextPage = response.nextpage
         }
     }
 
     private fun fetchNextSearchItems() {
-        lifecycleScope.launchWhenCreated {
-            val response = try {
-                withContext(Dispatchers.IO) {
-                    RetrofitInstance.api.getSearchResultsNextPage(
-                        query,
-                        apiSearchFilter,
-                        nextPage!!
-                    )
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                val response = try {
+                    withContext(Dispatchers.IO) {
+                        RetrofitInstance.api.getSearchResultsNextPage(
+                            query,
+                            apiSearchFilter,
+                            nextPage!!
+                        )
+                    }
+                } catch (e: IOException) {
+                    println(e)
+                    Log.e(TAG(), "IOException, you might not have internet connection")
+                    return@repeatOnLifecycle
+                } catch (e: HttpException) {
+                    Log.e(TAG(), "HttpException, unexpected response," + e.response())
+                    return@repeatOnLifecycle
                 }
-            } catch (e: IOException) {
-                println(e)
-                Log.e(TAG(), "IOException, you might not have internet connection")
-                return@launchWhenCreated
-            } catch (e: HttpException) {
-                Log.e(TAG(), "HttpException, unexpected response," + e.response())
-                return@launchWhenCreated
-            }
-            nextPage = response.nextpage!!
-            if (response.items.isNotEmpty()) {
-                searchAdapter.submitList(searchAdapter.currentList + response.items)
+                nextPage = response.nextpage!!
+                if (response.items.isNotEmpty()) {
+                    searchAdapter.submitList(searchAdapter.currentList + response.items)
+                }
             }
         }
     }

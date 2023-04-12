@@ -7,7 +7,9 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
@@ -45,33 +47,34 @@ class AddToPlaylistDialog(
     }
 
     private fun fetchPlaylists(binding: DialogAddToPlaylistBinding) {
-        lifecycleScope.launchWhenCreated {
-            val response = try {
-                PlaylistsHelper.getPlaylists()
-            } catch (e: Exception) {
-                Log.e(TAG(), e.toString())
-                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                return@launchWhenCreated
-            }
-            if (response.isEmpty()) return@launchWhenCreated
-            val names = response.mapNotNull { it.name }
-            val arrayAdapter =
-                ArrayAdapter(requireContext(), R.layout.dropdown_item, names)
-            binding.playlistsSpinner.adapter = arrayAdapter
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                val response = try {
+                    PlaylistsHelper.getPlaylists()
+                } catch (e: Exception) {
+                    Log.e(TAG(), e.toString())
+                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+                    return@repeatOnLifecycle
+                }
+                if (response.isEmpty()) return@repeatOnLifecycle
+                val names = response.mapNotNull { it.name }
+                val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, names)
+                binding.playlistsSpinner.adapter = arrayAdapter
 
-            // select the last used playlist
-            viewModel.lastSelectedPlaylistId?.let { id ->
-                binding.playlistsSpinner.setSelection(
-                    response.indexOfFirst { it.id == id }.takeIf { it >= 0 } ?: 0
-                )
-            }
-            binding.addToPlaylist.setOnClickListener {
-                val index = binding.playlistsSpinner.selectedItemPosition
-                viewModel.lastSelectedPlaylistId = response[index].id!!
-                dialog?.hide()
-                lifecycleScope.launch {
-                    addToPlaylist(response[index].id!!)
-                    dialog?.dismiss()
+                // select the last used playlist
+                viewModel.lastSelectedPlaylistId?.let { id ->
+                    binding.playlistsSpinner.setSelection(
+                        response.indexOfFirst { it.id == id }.takeIf { it >= 0 } ?: 0
+                    )
+                }
+                binding.addToPlaylist.setOnClickListener {
+                    val index = binding.playlistsSpinner.selectedItemPosition
+                    viewModel.lastSelectedPlaylistId = response[index].id!!
+                    dialog?.hide()
+                    lifecycleScope.launch {
+                        addToPlaylist(response[index].id!!)
+                        dialog?.dismiss()
+                    }
                 }
             }
         }

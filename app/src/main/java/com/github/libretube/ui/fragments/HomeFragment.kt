@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +27,9 @@ import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
@@ -75,13 +80,15 @@ class HomeFragment : Fragment() {
     }
 
     private fun fetchHomeFeed() {
-        lifecycleScope.launchWhenCreated {
-            loadTrending()
-            loadBookmarks()
-        }
-        lifecycleScope.launchWhenCreated {
-            loadFeed()
-            loadPlaylists()
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                awaitAll(
+                    async { loadTrending() },
+                    async { loadBookmarks() },
+                    async { loadFeed() },
+                    async { loadPlaylists() }
+                )
+            }
         }
     }
 

@@ -8,7 +8,9 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.PipedStream
@@ -21,6 +23,9 @@ import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.IOException
 import retrofit2.HttpException
 
@@ -57,20 +62,24 @@ class DownloadDialog(
     }
 
     private fun fetchAvailableSources(binding: DialogDownloadBinding) {
-        lifecycleScope.launchWhenCreated {
-            val response = try {
-                RetrofitInstance.api.getStreams(videoId)
-            } catch (e: IOException) {
-                println(e)
-                Log.e(TAG(), "IOException, you might not have internet connection")
-                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                return@launchWhenCreated
-            } catch (e: HttpException) {
-                Log.e(TAG(), "HttpException, unexpected response")
-                Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
-                return@launchWhenCreated
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                val response = try {
+                    withContext(Dispatchers.IO) {
+                        RetrofitInstance.api.getStreams(videoId)
+                    }
+                } catch (e: IOException) {
+                    println(e)
+                    Log.e(TAG(), "IOException, you might not have internet connection")
+                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+                    return@repeatOnLifecycle
+                } catch (e: HttpException) {
+                    Log.e(TAG(), "HttpException, unexpected response")
+                    Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
+                    return@repeatOnLifecycle
+                }
+                initDownloadOptions(binding, response)
             }
-            initDownloadOptions(binding, response)
         }
     }
 

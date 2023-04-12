@@ -3,7 +3,9 @@ package com.github.libretube.ui.preferences
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.SwitchPreferenceCompat
@@ -123,45 +125,51 @@ class InstanceSettings : BasePreferenceFragment() {
     private fun initInstancesPref(instancePrefs: List<ListPreference>) {
         val appContext = requireContext().applicationContext
 
-        lifecycleScope.launchWhenCreated {
-            val customInstances = withContext(Dispatchers.IO) {
-                Database.customInstanceDao().getAll()
-            }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                val customInstances = withContext(Dispatchers.IO) {
+                    Database.customInstanceDao().getAll()
+                }
 
-            for (instancePref in instancePrefs) {
-                instancePref.summaryProvider =
-                    Preference.SummaryProvider<ListPreference> { preference ->
-                        preference.entry
-                    }
-            }
+                for (instancePref in instancePrefs) {
+                    instancePref.summaryProvider =
+                        Preference.SummaryProvider<ListPreference> { preference ->
+                            preference.entry
+                        }
+                }
 
-            // fetch official public instances from kavin.rocks as well as tokhmi.xyz as fallback
-            val instances = withContext(Dispatchers.IO) {
-                runCatching {
-                    RetrofitInstance.externalApi.getInstances(PIPED_INSTANCES_URL).toMutableList()
-                }.getOrNull() ?: runCatching {
-                    RetrofitInstance.externalApi.getInstances(FALLBACK_INSTANCES_URL).toMutableList()
-                }.getOrNull() ?: run {
-                    appContext.toastFromMainDispatcher(R.string.failed_fetching_instances)
-                    val instanceNames = resources.getStringArray(R.array.instances)
-                    resources.getStringArray(R.array.instancesValue).mapIndexed { index, instanceValue ->
-                        Instances(instanceNames[index], instanceValue)
+                // fetch official public instances from kavin.rocks as well as tokhmi.xyz as
+                // fallback
+                val instances = withContext(Dispatchers.IO) {
+                    runCatching {
+                        RetrofitInstance.externalApi.getInstances(PIPED_INSTANCES_URL)
+                            .toMutableList()
+                    }.getOrNull() ?: runCatching {
+                        RetrofitInstance.externalApi.getInstances(FALLBACK_INSTANCES_URL)
+                            .toMutableList()
+                    }.getOrNull() ?: run {
+                        appContext.toastFromMainDispatcher(R.string.failed_fetching_instances)
+                        val instanceNames = resources.getStringArray(R.array.instances)
+                        resources.getStringArray(R.array.instancesValue)
+                            .mapIndexed { index, instanceValue ->
+                                Instances(instanceNames[index], instanceValue)
+                            }
                     }
                 }
-            }
-                .sortedBy { it.name }
-                .toMutableList()
+                    .sortedBy { it.name }
+                    .toMutableList()
 
-            instances.addAll(customInstances.map { Instances(it.name, it.apiUrl) })
+                instances.addAll(customInstances.map { Instances(it.name, it.apiUrl) })
 
-            for (instancePref in instancePrefs) {
-                // add custom instances to the list preference
-                instancePref.entries = instances.map { it.name }.toTypedArray()
-                instancePref.entryValues = instances.map { it.apiUrl }.toTypedArray()
-                instancePref.summaryProvider =
-                    Preference.SummaryProvider<ListPreference> { preference ->
-                        preference.entry
-                    }
+                for (instancePref in instancePrefs) {
+                    // add custom instances to the list preference
+                    instancePref.entries = instances.map { it.name }.toTypedArray()
+                    instancePref.entryValues = instances.map { it.apiUrl }.toTypedArray()
+                    instancePref.summaryProvider =
+                        Preference.SummaryProvider<ListPreference> { preference ->
+                            preference.entry
+                        }
+                }
             }
         }
     }

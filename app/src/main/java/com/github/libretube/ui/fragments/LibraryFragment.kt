@@ -11,7 +11,9 @@ import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -122,47 +124,49 @@ class LibraryFragment : Fragment() {
 
     private fun fetchPlaylists() {
         binding.playlistRefresh.isRefreshing = true
-        lifecycleScope.launchWhenCreated {
-            var playlists = try {
-                withContext(Dispatchers.IO) {
-                    PlaylistsHelper.getPlaylists()
-                }
-            } catch (e: Exception) {
-                Log.e(TAG(), e.toString())
-                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                return@launchWhenCreated
-            } finally {
-                binding.playlistRefresh.isRefreshing = false
-            }
-            if (playlists.isNotEmpty()) {
-                playlists = when (
-                    PreferenceHelper.getString(PreferenceKeys.PLAYLISTS_ORDER, "recent")
-                ) {
-                    "recent" -> playlists
-                    "recent_reversed" -> playlists.reversed()
-                    "name" -> playlists.sortedBy { it.name?.lowercase() }
-                    "name_reversed" -> playlists.sortedBy { it.name?.lowercase() }.reversed()
-                    else -> playlists
-                }
-
-                val playlistsAdapter = PlaylistsAdapter(
-                    playlists.toMutableList(),
-                    PlaylistsHelper.getPrivatePlaylistType()
-                )
-
-                // listen for playlists to become deleted
-                playlistsAdapter.registerAdapterDataObserver(object :
-                    RecyclerView.AdapterDataObserver() {
-                    override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-                        binding.nothingHere.isVisible = playlistsAdapter.itemCount == 0
-                        super.onItemRangeRemoved(positionStart, itemCount)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                var playlists = try {
+                    withContext(Dispatchers.IO) {
+                        PlaylistsHelper.getPlaylists()
                     }
-                })
+                } catch (e: Exception) {
+                    Log.e(TAG(), e.toString())
+                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+                    return@repeatOnLifecycle
+                } finally {
+                    binding.playlistRefresh.isRefreshing = false
+                }
+                if (playlists.isNotEmpty()) {
+                    playlists = when (
+                        PreferenceHelper.getString(PreferenceKeys.PLAYLISTS_ORDER, "recent")
+                    ) {
+                        "recent" -> playlists
+                        "recent_reversed" -> playlists.reversed()
+                        "name" -> playlists.sortedBy { it.name?.lowercase() }
+                        "name_reversed" -> playlists.sortedBy { it.name?.lowercase() }.reversed()
+                        else -> playlists
+                    }
 
-                binding.nothingHere.visibility = View.GONE
-                binding.playlistRecView.adapter = playlistsAdapter
-            } else {
-                binding.nothingHere.visibility = View.VISIBLE
+                    val playlistsAdapter = PlaylistsAdapter(
+                        playlists.toMutableList(),
+                        PlaylistsHelper.getPrivatePlaylistType()
+                    )
+
+                    // listen for playlists to become deleted
+                    playlistsAdapter.registerAdapterDataObserver(object :
+                        RecyclerView.AdapterDataObserver() {
+                        override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+                            binding.nothingHere.isVisible = playlistsAdapter.itemCount == 0
+                            super.onItemRangeRemoved(positionStart, itemCount)
+                        }
+                    })
+
+                    binding.nothingHere.visibility = View.GONE
+                    binding.playlistRecView.adapter = playlistsAdapter
+                } else {
+                    binding.nothingHere.visibility = View.VISIBLE
+                }
             }
         }
     }
