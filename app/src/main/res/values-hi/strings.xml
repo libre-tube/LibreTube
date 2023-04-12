@@ -474,4 +474,16 @@
     <string name="disable_proxy">Piped proxy अक्षम करें</string>
     <string name="disable_proxy_summary">YouTube के सर्वर से सीधे वीडियो और चित्र लोड करें। यदि आप वैसे भी VPN का उपयोग करते हैं तो ही विकल्प को सक्षम करें! ध्यान दें कि यह YT music की सामग्री के साथ काम नहीं कर सकता है।</string>
     <string name="auto_fullscreen_shorts">शॉर्ट वीडियो पर ऑटो फुलस्क्रीन</string>
+    <string name="fullscreen_gestures">फ़ुलस्क्रीन जेस्चर दर्ज करें/बाहर निकलें</string>
+    <string name="go_to_video">वीडियो पर जाएं</string>
+    <plurals name="channel_new_streams">
+        <item quantity="one">%d नई स्ट्रीम</item>
+        <item quantity="other">%d नई स्ट्रीमें</item>
+    </plurals>
+    <string name="new_group">नया</string>
+    <string name="channel_groups">चैनल समूह</string>
+    <string name="group_name">समूह नाम</string>
+    <string name="edit_group">समूह संपादित करें</string>
+    <string name="play_automatically">स्वचालित रूप से खेलें</string>
+    <string name="play_automatically_summary">चुनते समय स्वचालित रूप से वीडियो चलाना प्रारंभ करें</string>
 </resources>
