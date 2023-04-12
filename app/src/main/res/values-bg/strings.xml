@@ -43,7 +43,7 @@
     <string name="instance">Инстанция</string>
     <string name="customization">Корекции</string>
     <string name="website">Уебсайт</string>
-    <string name="videoCount">%1$s видеа</string>
+    <string name="videoCount">%1$d видеа</string>
     <string name="retry">Опитайте отново</string>
     <string name="comments">Коментари</string>
     <string name="channels">Канали</string>
