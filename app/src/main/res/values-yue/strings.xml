@@ -45,7 +45,7 @@
     <string name="settings">設定</string>
     <string name="location">位置</string>
     <string name="website">網站</string>
-    <string name="videoCount">%1$s 條片</string>
+    <string name="videoCount">%1$d 條片</string>
     <string name="noInternet">連左上網先.</string>
     <string name="retry">試多次</string>
     <string name="comments">留言</string>
