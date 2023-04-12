@@ -86,7 +86,7 @@
     <string name="instance">Instans</string>
     <string name="customization">Tilpasning</string>
     <string name="website">Nettside</string>
-    <string name="videoCount">%1$s videoer</string>
+    <string name="videoCount">%1$d videoer</string>
     <string name="retry">Prøv igjen</string>
     <string name="comments">Kommentarer</string>
     <string name="app_icon">Ikon</string>
@@ -155,7 +155,7 @@
     <string name="playback_speed">Avspillingshastighet</string>
     <string name="advanced">Avansert</string>
     <string name="player">Avspiller</string>
-    <string name="instance_summary">Piped, innlogging, og abonnementer</string>
+    <string name="instance_summary">Piped, innlogging, og konto</string>
     <string name="customInstance_summary">Legg til …</string>
     <string name="instance_name">Navn på instans</string>
     <string name="instance_api_url">Nettadresse for instans-API</string>
@@ -273,7 +273,7 @@
     <string name="system_caption_style">Systemundertekststil</string>
     <string name="captions">Undertekster</string>
     <string name="seekbar_preview">Videoforhåndsvisning</string>
-    <string name="seekbar_preview_summary">Vis bilde av videoen der framdriftsindikatoren trekkes.</string>
+    <string name="seekbar_preview_summary">Vis bilde av videoen når framdriftsindikatoren dras.</string>
     <string name="playingOnBackground">Spiller i bakgrunnen …</string>
     <string name="caption_settings">Undertekster</string>
     <string name="navLabelVisibility">Etikettsynlighet</string>
@@ -473,4 +473,17 @@
     <string name="disable_proxy_summary">Last inn videoer og bilder direkte fra YouTube sine tjenere. Kun skru på dette valget hvis du bruker en VPN uansett. Merk at dette kanskje ikke fungerer for innhold fra YT music.</string>
     <string name="disable_proxy">Skru av Piped-mellomtjener</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d videoer</string>
+    <string name="fullscreen_gestures">Start/avslutt fullskjermshåndvendinger</string>
+    <string name="go_to_video">Gå til video</string>
+    <plurals name="channel_new_streams">
+        <item quantity="one">%d ny strøm</item>
+        <item quantity="other">%d nye strømmer</item>
+    </plurals>
+    <string name="auto_fullscreen_shorts">Automatisk fullskjerm for korte videoer</string>
+    <string name="channel_groups">Kanalgrupper</string>
+    <string name="new_group">Ny</string>
+    <string name="group_name">Gruppenavn</string>
+    <string name="edit_group">Rediger gruppe</string>
+    <string name="play_automatically">Spill automatisk</string>
+    <string name="play_automatically_summary">Spill valgte video automatisk</string>
 </resources>
