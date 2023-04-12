@@ -37,7 +37,7 @@
     <string name="location">Գտնվելու վայրը</string>
     <string name="instance">Նմուշ</string>
     <string name="website">Կայք</string>
-    <string name="videoCount">%1$s տեսանյութ</string>
+    <string name="videoCount">%1$d տեսանյութ</string>
     <string name="noInternet">Սկզբից միացեք համացանցին:</string>
     <string name="startpage">Գլխավոր</string>
     <string name="yes">Այո</string>

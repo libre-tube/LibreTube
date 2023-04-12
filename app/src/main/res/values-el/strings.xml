@@ -71,7 +71,7 @@
     <string name="noInternet">Συνδεθείτε πρώτα στο Διαδίκτυο.</string>
     <string name="retry">Προσπαθήστε ξανά</string>
     <string name="instance">Διακομιστής</string>
-    <string name="videoCount">%1$s βίντεο</string>
+    <string name="videoCount">%1$d βίντεο</string>
     <string name="choose_filter">Επιλέξτε φίλτρο αναζήτησης</string>
     <string name="channels">Κανάλια</string>
     <string name="all">Όλα</string>

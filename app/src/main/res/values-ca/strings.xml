@@ -96,7 +96,7 @@
     <string name="systemLanguage">Sistema</string>
     <string name="subscribers">%1$s subscripcions</string>
     <string name="settings">Configuració</string>
-    <string name="videoCount">%1$s videos</string>
+    <string name="videoCount">%1$d videos</string>
     <string name="noInternet">Conecta\'t a internet primerament.</string>
     <string name="retry">Reintentar</string>
     <string name="comments">Comentaris</string>

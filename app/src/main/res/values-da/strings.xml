@@ -33,7 +33,7 @@
     <string name="location">Lokation</string>
     <string name="instance">Instans</string>
     <string name="website">Hjemmeside</string>
-    <string name="videoCount">%1$s videoer</string>
+    <string name="videoCount">%1$d videoer</string>
     <string name="noInternet">Opret forbindelse til internettet først.</string>
     <string name="retry">Prøv igen</string>
     <string name="comments">Kommentarer</string>

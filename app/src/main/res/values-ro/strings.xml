@@ -483,4 +483,6 @@
     <string name="new_group">Nou</string>
     <string name="play_automatically">Redare automată</string>
     <string name="play_automatically_summary">Redați videoclipul automat când se selectează</string>
+    <string name="fullscreen_gestures">Intrarea/ieșirea din gesturile pe tot ecranul</string>
+    <string name="go_to_video">Accesați videoclipul</string>
 </resources>

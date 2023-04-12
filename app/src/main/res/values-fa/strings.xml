@@ -73,7 +73,7 @@
     <string name="instance">نمونه</string>
     <string name="customization">تنظیمات</string>
     <string name="website">وب‌سایت</string>
-    <string name="videoCount">%1$s ویدیو</string>
+    <string name="videoCount">%1$d ویدیو</string>
     <string name="noInternet">ابتدا به اینترنت متصل شوید</string>
     <string name="retry">تلاش دوباره</string>
     <string name="comments">نظرات</string>

@@ -50,7 +50,7 @@
     <string name="changeLanguage">Ngôn ngữ</string>
     <string name="systemLanguage">Ngôn ngữ hệ thống</string>
     <string name="instance">Server</string>
-    <string name="videoCount">%1$s các video</string>
+    <string name="videoCount">%1$d các video</string>
     <string name="website">Website</string>
     <string name="noInternet">Kết nối với mạng trước.</string>
     <string name="retry">Thử lại</string>

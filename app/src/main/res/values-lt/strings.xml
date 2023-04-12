@@ -285,7 +285,7 @@
     <string name="audio_video_summary">Kokybė ir formatas</string>
     <string name="subscribers">%1$s prenumeratoriai</string>
     <string name="customization">Pritaikymas</string>
-    <string name="videoCount">%1$s vaizdo įrašai</string>
+    <string name="videoCount">%1$d vaizdo įrašai</string>
     <string name="retry">Bandyti dar kartą</string>
     <string name="defaultTab">Numatyta kortelė</string>
     <string name="category_sponsor_description">Apmokama reklama, apmokamos rekomendacijos ir tiesioginė reklama. Ne savireklama ar neapmokamas nuoširdus, kūrėjų, svetainių ir produktų reklamavimas.</string>

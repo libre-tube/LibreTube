@@ -60,7 +60,7 @@
     <string name="instance">Instantzia</string>
     <string name="customization">Ezarpenak</string>
     <string name="website">Webgunea</string>
-    <string name="videoCount">%1$s bideo</string>
+    <string name="videoCount">%1$d bideo</string>
     <string name="noInternet">Konektatu internetera lehenengo.</string>
     <string name="comments">Iruzkinak</string>
     <string name="channels">Kanalak</string>

@@ -277,7 +277,7 @@
     <string name="settings">સુયોજનો</string>
     <string name="instance">નમૂનો</string>
     <string name="website">વેબસાઇટ</string>
-    <string name="videoCount">%1$s વિડિયો</string>
+    <string name="videoCount">%1$d વિડિયો</string>
     <string name="retry">પુન:પ્રયત્ન કરો</string>
     <string name="comments">ટિપ્પણીઓ</string>
     <string name="default_audio_track">મૂળભૂત</string>

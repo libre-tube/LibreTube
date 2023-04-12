@@ -488,4 +488,10 @@
     <string name="play_automatically_summary">Розпочинати автовідтворення відео після вибору</string>
     <string name="fullscreen_gestures">Жести входу/виходу в повноекранний режим</string>
     <string name="go_to_video">Перейти до відео</string>
+    <plurals name="channel_new_streams">
+        <item quantity="one">%d нова трансляція</item>
+        <item quantity="few">%d нові трансляції</item>
+        <item quantity="many">%d нових трансляцій</item>
+        <item quantity="other">%d нових трансляцій</item>
+    </plurals>
 </resources>

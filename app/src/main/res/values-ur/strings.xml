@@ -67,7 +67,7 @@
     <string name="systemLanguage">سسٹم</string>
     <string name="customization">موافقت</string>
     <string name="retry">دوبارہ کوشش کریںدوبارہ کوشش کریں</string>
-    <string name="videoCount">%1$s ویڈیو</string>
+    <string name="videoCount">%1$d ویڈیو</string>
     <string name="noInternet">پہلے انٹرنیٹ سے جڑیں۔</string>
     <string name="search_history">تلاش کی سرگزشت</string>
     <string name="okay">ٹھیک ہے</string>

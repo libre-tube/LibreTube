@@ -42,7 +42,7 @@
     <string name="playlistCreated">പ്ലേലിസ്റ്റ് നിർമ്മിച്ചു!</string>
     <string name="systemLanguage">സിസ്റ്റം ഭാഷ</string>
     <string name="success">വിജയകരം!</string>
-    <string name="videoCount">%1$s വീഡിയോകൾ</string>
+    <string name="videoCount">%1$d വീഡിയോകൾ</string>
     <string name="dlcomplete">ഡൗൺലോഡ് പൂർത്തിയായി.</string>
     <string name="subscribeIsEmpty">കുറച്ച് ചാനലുകൾ ഒക്കെ സബ്സ്ക്രൈബ് ചെയ്യൂ.</string>
     <string name="vlc">വിഎൽസി-യിൽ തുറക്കൂ</string>

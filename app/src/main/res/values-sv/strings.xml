@@ -157,7 +157,7 @@
     <string name="import_from_yt_summary">Frän YouTube eller NewPipe</string>
     <string name="server_error">Problem med servern. Pröva en annan instans\?</string>
     <string name="downloads">Nerladdningar</string>
-    <string name="videoCount">%1$s videor</string>
+    <string name="videoCount">%1$d videor</string>
     <string name="choose_filter">Välj et sökfilter</string>
     <string name="video_format_summary">Konvertering av filar om båda ljud och video har nedladdats.</string>
     <string name="app_uptodate">Körar sista version.</string>

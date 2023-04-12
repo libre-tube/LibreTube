@@ -471,4 +471,19 @@
     <string name="lbry_hls_summary">ਉਪਲਬਧ ਹੋਵੇ ਤਾਂ ਸਟ੍ਰੀਮਿੰਗ ਲਈ ਲੀਬਰ HLS ਵਰਤੋ।</string>
     <string name="subscriberAndVideoCounts">%1$s ਸਬਸਕ੍ਰਾਈਬਰ• %2$d ਵੀਡੀਓ</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d ਵੀਡੀਓ</string>
+    <string name="fullscreen_gestures">ਫੁਲਸਕ੍ਰੀਨ ਸੰਕੇਤਾਂ ਵਿੱਚ ਦਾਖਲ/ਬਾਹਰ ਜਾਓ</string>
+    <string name="go_to_video">ਵੀਡੀਓ \'ਤੇ ਜਾਓ</string>
+    <string name="disable_proxy">ਪਾਈਪਡ ਪਰੌਕਸੀ ਖਾਰਿਜ ਕਰੋ</string>
+    <string name="disable_proxy_summary">YouTube ਦੇ ਸਰਵਰਾਂ ਤੋਂ ਸਿੱਧੇ ਵੀਡੀਓ ਅਤੇ ਚਿੱਤਰ ਲੋਡ ਕਰੋ। ਜੇਕਰ ਤੁਸੀਂ ਫਿਰ ਵੀ VPN ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋ ਤਾਂ ਹੀ ਵਿਕਲਪ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ! ਨੋਟ ਕਰੋ ਕਿ ਹੋ ਸਕਦਾ ਹੈ ਕਿ ਇਹ YT ਸੰਗੀਤ ਦੀ ਸਮੱਗਰੀ ਨਾਲ ਕੰਮ ਨਾ ਕਰੇ।</string>
+    <string name="new_group">ਨਵਾਂ</string>
+    <string name="group_name">ਗਰੁੱਪ ਨਾਮ</string>
+    <plurals name="channel_new_streams">
+        <item quantity="one">%d ਨਵੀਂ ਸਟ੍ਰੀਮ</item>
+        <item quantity="other">%d ਨਵੀਆਂ ਸਟ੍ਰੀਮਾਂ</item>
+    </plurals>
+    <string name="auto_fullscreen_shorts">ਛੋਟੇ ਵੀਡੀਓ \'ਤੇ ਪੂਰੀ ਸਕਰੀਨ ਆਪਣੇ-ਆਪ ਚਲਾਓ</string>
+    <string name="channel_groups">ਚੈਨਲ ਸਮੂਹ</string>
+    <string name="edit_group">ਗਰੁੱਪ ਦਾ ਸੰਪਾਦਨ ਕਰੋ</string>
+    <string name="play_automatically">ਆਪਣੇ-ਆਪ ਚਲਾਓ</string>
+    <string name="play_automatically_summary">ਚੁਣਨ \'ਤੇ ਆਪਣੇ ਆਪ ਵੀਡੀਓ ਚਲਾਉਣਾ ਸ਼ੁਰੂ ਕਰੋ</string>
 </resources>

@@ -5,7 +5,7 @@
     <string name="search_hint">Axtarış</string>
     <string name="videos">Videolar</string>
     <string name="subscribe">Abunə Ol</string>
-    <string name="unsubscribe">Abunə olma</string>
+    <string name="unsubscribe">Abunə Olma</string>
     <string name="share">Paylaş</string>
     <string name="save">Saxla</string>
     <string name="download">Yüklə</string>
@@ -18,7 +18,7 @@
     <string name="loggedIn">Girildi.</string>
     <string name="loggedout">Çıxıldı.</string>
     <string name="registered">Qeydiyyatdan keçilib. Kanallara abunə ola bilərsiniz.</string>
-    <string name="already_logged_in">Artıq daxil olunub.İstəsəniz hesabınızdan çıxa bilərsiniz.</string>
+    <string name="already_logged_in">Artıq daxil olunub.İstəyirsinizsə hesabınızdan çıxa bilərsiniz.</string>
     <string name="login_first">Zəhmət olmasa, daxil ol və təkrar cəhd et.</string>
     <string name="startpage">Ev</string>
     <string name="subscriptions">Abunələr</string>
@@ -73,7 +73,7 @@
     <string name="import_from_yt">Abunəlikləri idxal et</string>
     <string name="import_from_yt_summary">YouTube və ya NewPipe\'dan</string>
     <string name="app_theme">Tema</string>
-    <string name="server_error">Seçilmiş serverlə problem olacaq. Başqa nümunə sına.</string>
+    <string name="server_error">Seçilən serverlə problem olacaq. Başqa nümunə sına.</string>
     <string name="unknown_error">Şəbəkə xətası.</string>
     <string name="error">Nəsə xəta baş verdi.</string>
     <string name="empty">İstifadəçi adı və şifrə daxil etməlisiniz.</string>
@@ -115,7 +115,7 @@
     <string name="app_icon">Nişan</string>
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
-    <string name="playOnBackground">Arxa planda oynat</string>
+    <string name="playOnBackground">Fonda oynat</string>
     <string name="update_available">%1$s Versiyası Mövcuddur</string>
     <string name="update_available_text">Yeni yeniləmə mövcuddur. GitHub buraxılışlar səhifəsin açmaq üçün kliklə.</string>
     <string name="appearance">Xarici Görünüş</string>
@@ -482,4 +482,8 @@
     <string name="play_automatically">Avtomatik oynat</string>
     <string name="fullscreen_gestures">Tam ekran jestlərinə gir/çıx</string>
     <string name="go_to_video">Videoya keç</string>
+    <plurals name="channel_new_streams">
+        <item quantity="one">%d yeni yayım</item>
+        <item quantity="other">%d yeni yayım</item>
+    </plurals>
 </resources>

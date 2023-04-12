@@ -40,7 +40,7 @@
     <string name="settings">Ayos ng App</string>
     <string name="location">Lokasyon</string>
     <string name="customization">Pagsasaayos</string>
-    <string name="videoCount">Mga %1$s video</string>
+    <string name="videoCount">Mga %1$d video</string>
     <string name="retry">Subukan muli</string>
     <string name="comments">Mga Komento</string>
     <string name="choose_filter">Pumili ng isasala sa paghahanap</string>
