@@ -63,7 +63,7 @@
     <string name="instance">Izolaĵo</string>
     <string name="customization">Tajlorado</string>
     <string name="website">Retejo</string>
-    <string name="videoCount">%1$s filmetoj</string>
+    <string name="videoCount">%1$d filmetoj</string>
     <string name="noInternet">Mankas konekto al interreto</string>
     <string name="retry">Reprovi</string>
     <string name="comments">Komentoj</string>
