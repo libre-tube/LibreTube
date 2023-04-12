@@ -487,4 +487,11 @@
     <string name="play_automatically">לנגן אוטומטית</string>
     <string name="play_automatically_summary">להתחיל לנגן סרטונים אוטומטית בעת בחירה</string>
     <string name="fullscreen_gestures">מחוות מילוי מסך/הקטנה</string>
+    <string name="go_to_video">מעבר לסרטון</string>
+    <plurals name="channel_new_streams">
+        <item quantity="one">שידור חדש</item>
+        <item quantity="two">%d שידורים חדשים</item>
+        <item quantity="many">%d שידורים חדשים</item>
+        <item quantity="other"></item>
+    </plurals>
 </resources>
