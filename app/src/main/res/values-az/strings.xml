@@ -481,4 +481,5 @@
     <string name="play_automatically_summary">Seçilən videonu avtomatik oynatmağa başla</string>
     <string name="play_automatically">Avtomatik oynat</string>
     <string name="fullscreen_gestures">Tam ekran jestlərinə gir/çıx</string>
+    <string name="go_to_video">Videoya keç</string>
 </resources>
