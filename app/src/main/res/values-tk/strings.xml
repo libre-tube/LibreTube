@@ -131,7 +131,7 @@
     <string name="instance">Salgylanma</string>
     <string name="customization">Düzedişler</string>
     <string name="website">Websaýt</string>
-    <string name="videoCount">%1$s wideolar</string>
+    <string name="videoCount">%1$d wideolar</string>
     <string name="choose_filter">Gözleg süzgüjini saýlaň</string>
     <string name="channels">Kanallar</string>
     <string name="all">Ählisi</string>
