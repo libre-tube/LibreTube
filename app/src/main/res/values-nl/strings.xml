@@ -107,7 +107,7 @@
     <string name="lightTheme">Licht</string>
     <string name="darkTheme">Donker</string>
     <string name="settings">Instellingen</string>
-    <string name="videoCount">%1$s video\'s</string>
+    <string name="videoCount">%1$d video\'s</string>
     <string name="server_error">Er is een probleem met de server. Probeer een andere instantie\?</string>
     <string name="empty">U moet een gebruikersnaam en een wachtwoord invoeren.</string>
     <string name="addToPlaylist">Toevoegen aan afspeellijst</string>
