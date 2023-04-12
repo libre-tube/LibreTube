@@ -46,7 +46,7 @@
     <string name="instance">Inštancia</string>
     <string name="customization">Úpravy</string>
     <string name="website">Webová stránka</string>
-    <string name="videoCount">%1$s videí</string>
+    <string name="videoCount">%1$d videí</string>
     <string name="noInternet">Najprv sa pripojte k internetu.</string>
     <string name="choose_filter">Vyberte filter vyhľadávania</string>
     <string name="channels">Kanály</string>
