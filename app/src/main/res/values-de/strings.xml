@@ -253,8 +253,8 @@
     <string name="no_search_result">Keine Ergebnisse.</string>
     <string name="copied_to_clipboard">In Zwischenablage kopiert</string>
     <string name="default_subtitle_language">Untertitelsprache</string>
-    <string name="notify_new_streams_summary">Erhalte Benachrichtigungen, wenn abonnierte Kanäle Videos veröffentlichen.</string>
-    <string name="notify_new_streams">Benachrichtigungen bei neuen Videos</string>
+    <string name="notify_new_streams_summary">Benachrichtigungen über neue Streams von Erstellern, denen Sie folgen, anzeigen.</string>
+    <string name="notify_new_streams">Benachrichtigungen bei neuen Streams anzeigen</string>
     <string name="irreversible">Bist du sicher\? Dies kann nicht rückgängig gemacht werden!</string>
     <string name="caption_settings">Untertitel</string>
     <string name="new_streams_by">%1$s haben neue Videos hochgeladen…</string>
@@ -356,8 +356,8 @@
     <string name="time">Zeit</string>
     <string name="start_time">Startzeit</string>
     <string name="end_time">Endzeit</string>
-    <string name="notification_time">Benachrichtigungszeit</string>
-    <string name="notification_time_summary">Zeitspanne, in der Benachrichtigungen angezeigt werden dürfen.</string>
+    <string name="notification_time">Benachrichtigungszeit einschränken</string>
+    <string name="notification_time_summary">Beschränken Sie die Zeitspanne, in der Stream-Benachrichtigungen angezeigt werden.</string>
     <string name="alternative_trending_layout">Alternatives Trending-Layout</string>
     <string name="navbar_order">Anordnung</string>
     <string name="layout">Layout</string>
@@ -480,4 +480,11 @@
     <string name="edit_group">Gruppe bearbeiten</string>
     <string name="play_automatically">Automatisch abspielen</string>
     <string name="play_automatically_summary">Video beim Auswählen automatisch abspielen</string>
+    <string name="fullscreen_gestures">Gesten zum Aufrufen und Verlassen des Vollbilds</string>
+    <plurals name="channel_new_streams">
+        <item quantity="one">%d neuer Stream</item>
+        <item quantity="other">%d neue Streams</item>
+    </plurals>
+    <string name="show_stream_thumbnails_summary">Miniaturansichten von neuen Streams anzeigen. Wenn Sie dies aktivieren, werden zusätzliche Daten verbraucht.</string>
+    <string name="show_stream_thumbnails">Stream-Miniaturansichten anzeigen</string>
 </resources>
