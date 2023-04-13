@@ -485,4 +485,5 @@
     <string name="play_automatically_summary">Riproduci il video automaticamente quando si seleziona</string>
     <string name="fullscreen_gestures">Gesti di entrata/uscita a schermo intero</string>
     <string name="go_to_video">Vai al video</string>
+    <string name="show_stream_thumbnails">Mostra miniature dello stream</string>
 </resources>
