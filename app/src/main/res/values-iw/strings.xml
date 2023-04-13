@@ -256,8 +256,8 @@
     <string name="channel_name_az">שם הערוץ (א-ת)</string>
     <string name="channel_name_za">שם הערוץ (ת-א)</string>
     <string name="sort">מיון</string>
-    <string name="notify_new_streams">התראות על תזרימים חדשים</string>
-    <string name="notify_new_streams_summary">התראות על תוכן חדש מיוצרים שבחרת לעקוב אחריהם.</string>
+    <string name="notify_new_streams">הצגת התראות על תזרימים חדשים</string>
+    <string name="notify_new_streams_summary">הצגת התראות על תזרימים חדשים מיוצרים שבחרת לעקוב אחריהם.</string>
     <string name="new_streams_count">%1$s תזרימים חדשים זמינים</string>
     <string name="notifications">התראות</string>
     <string name="checking_frequency">לבדוק כל…</string>
@@ -360,8 +360,8 @@
     <string name="time">זמן</string>
     <string name="start_time">זמן התחלה</string>
     <string name="end_time">זמן סיום</string>
-    <string name="notification_time">זמן התראה</string>
-    <string name="notification_time_summary">חלון זמן שבו מותר להתראות להופיע.</string>
+    <string name="notification_time">הגבלת זמן התראה</string>
+    <string name="notification_time_summary">הגבלת חלון הזמן שבו תופענה התראות לץ תזרימים.</string>
     <string name="play_all">לנגן הכול</string>
     <string name="alternative_trending_layout">פריסת מובילים חלופית</string>
     <string name="alternative_player_layout_summary">להציג את הסרטונים הקשורים כשורה צריך לתגובות במקום מתחת.</string>
@@ -492,6 +492,8 @@
         <item quantity="one">שידור חדש</item>
         <item quantity="two">%d שידורים חדשים</item>
         <item quantity="many">%d שידורים חדשים</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
+    <string name="show_stream_thumbnails">הצגת תמונות ממוזערות של תזרימים</string>
+    <string name="show_stream_thumbnails_summary">הצגת תמונות ממוזערות של תזרימים חדשים. הפעלת האפשרות תוביל לצריכה של נתונים נוספים.</string>
 </resources>
