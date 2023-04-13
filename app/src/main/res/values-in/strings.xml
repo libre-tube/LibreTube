@@ -477,4 +477,9 @@
     <string name="edit_group">Sunting grup</string>
     <string name="play_automatically">Putar secara otomatis</string>
     <string name="play_automatically_summary">Mulai memutar video secara otomatis ketika memilih</string>
+    <string name="fullscreen_gestures">Gestur masuk/keluar layar penuh</string>
+    <string name="go_to_video">Pergi ke video</string>
+    <plurals name="channel_new_streams">
+        <item quantity="other">%d saluran baru</item>
+    </plurals>
 </resources>
