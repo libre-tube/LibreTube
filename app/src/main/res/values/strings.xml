@@ -266,8 +266,8 @@
     <string name="worst_quality">Worst</string>
     <string name="default_subtitle_language">Subtitle language</string>
     <string name="notifications">Notifications</string>
-    <string name="notify_new_streams">Notifications for new streams</string>
-    <string name="notify_new_streams_summary">Notifications about fresh content from creators you follow.</string>
+    <string name="notify_new_streams">Show notifications for new streams</string>
+    <string name="notify_new_streams_summary">Display notifications for new streams from creators you follow.</string>
     <string name="show_stream_thumbnails">Show stream thumbnails</string>
     <string name="show_stream_thumbnails_summary">Show the thumbnails of new streams. Enabling this will consume additional data.</string>
     <string name="checking_frequency">Checking every …</string>
@@ -370,8 +370,8 @@
     <string name="time">Time</string>
     <string name="start_time">Start time</string>
     <string name="end_time">End time</string>
-    <string name="notification_time">Notification time</string>
-    <string name="notification_time_summary">Time span in which notifications are allowed to show.</string>
+    <string name="notification_time">Restrict notification time</string>
+    <string name="notification_time_summary">Limit the time span in which stream notifications are shown.</string>
     <string name="alternative_trending_layout">Alternative trending layout</string>
     <string name="navbar_order">Order</string>
     <string name="layout">Layout</string>
