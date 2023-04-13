@@ -28,7 +28,7 @@
     <string name="dlisinprogress">Wacht a.u.b. tot alle downloads klaar zijn…</string>
     <string name="downloadfailed">Download mislukt.</string>
     <string name="vlc">Open in VLC</string>
-    <string name="vlcerror">Kan niet openen in VLC. Het is mogelijk niet geïnstalleerd.</string>
+    <string name="vlcerror">Kan niet openen in VLC. VLC is mogelijk niet geïnstalleerd.</string>
     <string name="import_from_yt">Abonnementen importeren</string>
     <string name="import_from_yt_summary">Van YouTube of NewPipe</string>
     <string name="app_theme">Thema</string>
