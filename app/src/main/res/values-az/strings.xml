@@ -486,4 +486,6 @@
         <item quantity="one">%d yeni yayım</item>
         <item quantity="other">%d yeni yayım</item>
     </plurals>
+    <string name="show_stream_thumbnails">Yayım miniatürlərin göstər</string>
+    <string name="show_stream_thumbnails_summary">Yeni yayımların miniatürlərin göstərir. Bu aktivləşdirilsə əlavə məlumat sərf ediləcək.</string>
 </resources>
