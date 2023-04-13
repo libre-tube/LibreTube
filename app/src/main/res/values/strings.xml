@@ -268,6 +268,8 @@
     <string name="notifications">Notifications</string>
     <string name="notify_new_streams">Notifications for new streams</string>
     <string name="notify_new_streams_summary">Notifications about fresh content from creators you follow.</string>
+    <string name="show_stream_thumbnails">Show stream thumbnails</string>
+    <string name="show_stream_thumbnails_summary">Show the thumbnails of new streams. Enabling this will consume additional data.</string>
     <string name="checking_frequency">Checking every …</string>
     <string name="new_streams_count">%1$s new streams available</string>
     <string name="new_streams_by">New streams by %1$s…</string>
