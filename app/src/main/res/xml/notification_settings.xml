@@ -11,6 +11,13 @@
             app:key="notification_toggle"
             app:title="@string/notify_new_streams" />
 
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_image"
+            app:defaultValue="false"
+            app:key="show_stream_thumbnails"
+            app:title="@string/show_stream_thumbnails"
+            app:summary="@string/show_stream_thumbnails_summary" />
+
         <ListPreference
             android:icon="@drawable/ic_time"
             app:defaultValue="60"

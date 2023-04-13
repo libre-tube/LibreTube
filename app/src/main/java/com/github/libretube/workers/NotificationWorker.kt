@@ -26,7 +26,6 @@ import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.views.TimePickerPreference
-import com.github.libretube.util.DataSaverMode
 import java.time.LocalTime
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -156,8 +155,8 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
                 // The intent that will fire when the user taps the notification
                 .setContentIntent(pendingIntent)
 
-            // Load stream thumbnails if data saving mode is disabled.
-            if (!DataSaverMode.isEnabled(applicationContext)) {
+            // Load stream thumbnails if the relevant toggle is enabled.
+            if (PreferenceHelper.getBoolean(PreferenceKeys.SHOW_STREAM_THUMBNAILS, false)) {
                 val thumbnail = withContext(Dispatchers.IO) {
                     ImageHelper.getImage(applicationContext, it.thumbnail).drawable?.toBitmap()
                 }
