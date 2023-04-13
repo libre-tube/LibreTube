@@ -26,6 +26,7 @@ import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.views.TimePickerPreference
+import com.github.libretube.util.DataSaverMode
 import java.time.LocalTime
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -149,23 +150,28 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             val pendingIntent = PendingIntentCompat
                 .getActivity(applicationContext, code, intent, FLAG_UPDATE_CURRENT, false)
 
-            val thumbnail = withContext(Dispatchers.IO) {
-                ImageHelper.getImage(applicationContext, it.thumbnail).drawable?.toBitmap()
-            }
-            val notification = createNotificationBuilder(group)
+            val notificationBuilder = createNotificationBuilder(group)
                 .setContentTitle(it.title)
                 .setContentText(it.uploaderName)
                 // The intent that will fire when the user taps the notification
                 .setContentIntent(pendingIntent)
-                .setLargeIcon(thumbnail)
-                .setStyle(
-                    NotificationCompat.BigPictureStyle()
-                        .bigPicture(thumbnail)
-                        .bigLargeIcon(null as Bitmap?) // Hides the icon when expanding
-                )
-                .build()
 
-            notificationManager.notify(code, notification)
+            // Load stream thumbnails if data saving mode is disabled.
+            if (!DataSaverMode.isEnabled(applicationContext)) {
+                val thumbnail = withContext(Dispatchers.IO) {
+                    ImageHelper.getImage(applicationContext, it.thumbnail).drawable?.toBitmap()
+                }
+
+                notificationBuilder
+                    .setLargeIcon(thumbnail)
+                    .setStyle(
+                        NotificationCompat.BigPictureStyle()
+                            .bigPicture(thumbnail)
+                            .bigLargeIcon(null as Bitmap?) // Hides the icon when expanding
+                    )
+            }
+
+            notificationManager.notify(code, notificationBuilder.build())
         }
 
         val summaryId = ++notificationId
