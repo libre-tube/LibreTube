@@ -485,4 +485,9 @@
     <string name="play_automatically_summary">Comece a reproduzir vídeo automaticamente ao selecionar</string>
     <string name="fullscreen_gestures">Gestos de entrada/saída em ecrã inteiro</string>
     <string name="go_to_video">Ir para o vídeo</string>
+    <plurals name="channel_new_streams">
+        <item quantity="one">%d nova emissão</item>
+        <item quantity="many">%d novas emissões</item>
+        <item quantity="other">%d novas emissões</item>
+    </plurals>
 </resources>

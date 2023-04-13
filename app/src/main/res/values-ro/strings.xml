@@ -72,7 +72,7 @@
     <string name="music_songs">Melodii din YT Music</string>
     <string name="music_playlists">Liste de redare YT Music</string>
     <string name="defaultTab">Fila implicită</string>
-    <string name="sponsorblock">SponsorBlock</string>
+    <string name="sponsorblock">Blocare sponsorizări</string>
     <string name="segment_skipped">Segment omis</string>
     <string name="sponsorblock_state">Activat</string>
     <string name="category_segments">Segmente</string>
@@ -277,7 +277,7 @@
     <string name="worst_quality">Cel mai slab</string>
     <string name="default_subtitle_language">Limba subtitrărilor</string>
     <string name="notifications">Notificări</string>
-    <string name="irreversible">Sunteți sigur\? Această acțiune nu poate fi anulată</string>
+    <string name="irreversible">Eşti sigur\? Acest lucru nu poate fi anulat!</string>
     <string name="history_empty">Fără istoric încă.</string>
     <string name="least_views">Cele mai puține vizualizări</string>
     <string name="channel_name_az">Numele canalului (A-Z)</string>
@@ -485,4 +485,9 @@
     <string name="play_automatically_summary">Redați videoclipul automat când se selectează</string>
     <string name="fullscreen_gestures">Intrarea/ieșirea din gesturile pe tot ecranul</string>
     <string name="go_to_video">Accesați videoclipul</string>
+    <plurals name="channel_new_streams">
+        <item quantity="one">%d flux nou</item>
+        <item quantity="few">%d fluxuri noi</item>
+        <item quantity="other">%d fluxuri noi</item>
+    </plurals>
 </resources>
