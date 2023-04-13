@@ -1,0 +1,9 @@
+* Subscription groups
+* Audio/background player for downloads
+* Support sharing live links to LibreTube
+* Preference to not play videos automatically
+* In-built browser intent chooser
+* Update displayed chapter while scrubbing time bar
+* Separate swipe gestures and fullscreen gestures
+* Improve notification grouping for new streams
+* Allow the app to being found as music player
