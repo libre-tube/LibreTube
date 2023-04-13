@@ -187,7 +187,7 @@
     <string name="change_playback_speed">Velocidade de reprodução</string>
     <string name="require_restart_message">Reinicie o aplicativo para usar as novas mudanças.</string>
     <string name="notifications">Notificações</string>
-    <string name="notify_new_streams_summary">Notificações sobre novo conteúdo de criadores que você segue.</string>
+    <string name="notify_new_streams_summary">Exiba notificações para novas transmissões de criadores que você segue.</string>
     <string name="checking_frequency">Verificando a cada…</string>
     <string name="new_streams_count">%1$s novos vídeos estão disponíveis</string>
     <string name="new_streams_by">Novos vídeos de %1$s…</string>
@@ -206,7 +206,7 @@
     <string name="watch_history_summary">Acompanhar os vídeos assistidos localmente</string>
     <string name="reset_watch_positions">Redefinir</string>
     <string name="autoRotatePlayer">Tela cheia automática</string>
-    <string name="notify_new_streams">Notificações de novos vídeos</string>
+    <string name="notify_new_streams">Mostrar notificações para novas transmissões</string>
     <string name="most_views">Mais visualizações</string>
     <string name="network_wifi">Só no Wi-Fi</string>
     <string name="translate">Tradução</string>
@@ -361,8 +361,8 @@
     <string name="time">Tempo</string>
     <string name="start_time">Tempo inicial</string>
     <string name="end_time">Tempo final</string>
-    <string name="notification_time_summary">Período de tempo em que as notificações podem ser exibidas.</string>
-    <string name="notification_time">Tempo de notificação</string>
+    <string name="notification_time_summary">Limite o intervalo de tempo em que as notificações de transmissões são exibidas.</string>
+    <string name="notification_time">Restringir tempo de notificação</string>
     <string name="alternative_trending_layout">Esquema de tendências alternativo</string>
     <string name="navbar_order">Ordem</string>
     <string name="layout">Esquema</string>
@@ -490,4 +490,6 @@
         <item quantity="many">%d novas transmissões</item>
         <item quantity="other">%d novas transmissões</item>
     </plurals>
+    <string name="show_stream_thumbnails_summary">Mostre as miniaturas de novas transmissões. Ativar isso consumirá dados adicionais.</string>
+    <string name="show_stream_thumbnails">Mostrar miniaturas da transmissão</string>
 </resources>
