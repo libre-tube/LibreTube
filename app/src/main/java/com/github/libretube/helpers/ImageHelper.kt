@@ -11,6 +11,7 @@ import coil.disk.DiskCache
 import coil.load
 import coil.request.CachePolicy
 import coil.request.ImageRequest
+import coil.request.ImageResult
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toAndroidUri
@@ -71,6 +72,14 @@ object ImageHelper {
             .build()
 
         imageLoader.enqueue(request)
+    }
+
+    suspend fun getImage(context: Context, url: String?): ImageResult {
+        val request = ImageRequest.Builder(context)
+            .data(url)
+            .build()
+
+        return imageLoader.execute(request)
     }
 
     fun getDownloadedImage(context: Context, path: Path): Bitmap? {

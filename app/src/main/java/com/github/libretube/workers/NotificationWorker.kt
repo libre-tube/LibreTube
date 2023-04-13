@@ -4,11 +4,13 @@ import android.app.NotificationManager
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.PendingIntentCompat
 import androidx.core.content.getSystemService
+import androidx.core.graphics.drawable.toBitmap
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.github.libretube.R
@@ -20,6 +22,7 @@ import com.github.libretube.constants.PUSH_CHANNEL_ID
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
+import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.views.TimePickerPreference
@@ -133,7 +136,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
      *
      * For more information, see https://developer.android.com/develop/ui/views/notifications/group
      */
-    private fun createNotificationsForChannel(group: String, streams: List<StreamItem>) {
+    private suspend fun createNotificationsForChannel(group: String, streams: List<StreamItem>) {
         val intentFlags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or
             Intent.FLAG_ACTIVITY_CLEAR_TASK
 
@@ -146,11 +149,20 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             val pendingIntent = PendingIntentCompat
                 .getActivity(applicationContext, code, intent, FLAG_UPDATE_CURRENT, false)
 
+            val thumbnail = withContext(Dispatchers.IO) {
+                ImageHelper.getImage(applicationContext, it.thumbnail).drawable?.toBitmap()
+            }
             val notification = createNotificationBuilder(group)
                 .setContentTitle(it.title)
                 .setContentText(it.uploaderName)
                 // The intent that will fire when the user taps the notification
                 .setContentIntent(pendingIntent)
+                .setLargeIcon(thumbnail)
+                .setStyle(
+                    NotificationCompat.BigPictureStyle()
+                        .bigPicture(thumbnail)
+                        .bigLargeIcon(null as Bitmap?) // Hides the icon when expanding
+                )
                 .build()
 
             notificationManager.notify(code, notification)
