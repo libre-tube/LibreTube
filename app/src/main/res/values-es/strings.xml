@@ -259,7 +259,7 @@
     <string name="best_quality">Mejor</string>
     <string name="worst_quality">Peor calidad</string>
     <string name="default_subtitle_language">Idioma subtítulo</string>
-    <string name="notify_new_streams">Notificaciones para nuevos directos</string>
+    <string name="notify_new_streams">Mostrar las notificaciones para nuevos directos</string>
     <string name="checking_frequency">Comprobar cada…</string>
     <string name="new_streams_count">%1$s nuevo directo disponible</string>
     <string name="most_recent">Novedades</string>
@@ -268,7 +268,7 @@
     <string name="network_all">Todos</string>
     <string name="downloading_apk">Descargando APK…</string>
     <string name="seekbar_preview_summary">Mostrar una instantánea al arrastrar el indicador de reproducción.</string>
-    <string name="notify_new_streams_summary">Notificaciones del nuevo contenido de los creadores a los que sigues.</string>
+    <string name="notify_new_streams_summary">Muestra las notificaciones de las nuevas retransmisiones de los creadores que sigues.</string>
     <string name="general">General</string>
     <string name="general_summary">Idioma y región</string>
     <string name="playerAudioFormat">Formato de audio para el reproductor</string>
@@ -361,8 +361,8 @@
     <string name="time">Tiempo</string>
     <string name="start_time">Hora de inicio</string>
     <string name="end_time">Hora de finalización</string>
-    <string name="notification_time">Hora de la notificación</string>
-    <string name="notification_time_summary">Periodo de tiempo en el que se permite mostrar las notificaciones.</string>
+    <string name="notification_time">Restringir el tiempo de la notificación</string>
+    <string name="notification_time_summary">Limitar el intervalo de tiempo en el que se muestran las notificaciones.</string>
     <string name="alternative_player_layout_summary">Mostrar los videos relacionados como una fila encima de los comentarios en lugar de debajo.</string>
     <string name="alternative_trending_layout">Diseño de tendencias alternativas</string>
     <string name="alternative_player_layout">Diseño alternativo del reproductor</string>
@@ -485,4 +485,11 @@
     <string name="play_automatically_summary">Comienza a reproducir los video automáticamente al seleccionarlos</string>
     <string name="fullscreen_gestures">Gestos para entrar y salir de la pantalla completa</string>
     <string name="go_to_video">Ir al vídeo</string>
+    <string name="show_stream_thumbnails">Mostrar miniaturas de la retransmisión</string>
+    <string name="show_stream_thumbnails_summary">Mostrar las miniaturas de los nuevos directos. Activar esta opción consumirá datos adicionales.</string>
+    <plurals name="channel_new_streams">
+        <item quantity="one">%d nueva corriente</item>
+        <item quantity="many">%d nuevas corrientes</item>
+        <item quantity="other">%d nuevas corrientes</item>
+    </plurals>
 </resources>
