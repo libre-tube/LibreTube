@@ -20,6 +20,13 @@ object WindowHelper {
 
         WindowCompat.setDecorFitsSystemWindows(window, !isFullscreen)
 
+        val layoutNoLimitsFlag = WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        if (isFullscreen) {
+            window.setFlags(layoutNoLimitsFlag, layoutNoLimitsFlag)
+        } else {
+            window.clearFlags(layoutNoLimitsFlag)
+        }
+
         // Show the system bars when it is not fullscreen and hide them when it is fullscreen
         // System bars means status bar and the navigation bar
         // See: https://developer.android.com/training/system-ui/immersive#kotlin
