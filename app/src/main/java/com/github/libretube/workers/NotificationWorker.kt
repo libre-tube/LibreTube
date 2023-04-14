@@ -139,17 +139,15 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
     private suspend fun createNotificationsForChannel(group: String, streams: List<StreamItem>) {
         // Create stream notifications. These are automatically grouped on Android 7.0 and later.
         if (streams.size == 1) {
-            showStreamNotification(group, streams[0])
+            showStreamNotification(group, streams[0], true)
         } else {
             streams.forEach {
-                showStreamNotification(group, it)
+                showStreamNotification(group, it, false)
             }
 
             val summaryId = ++notificationId
-            val intentFlags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or
-                    Intent.FLAG_ACTIVITY_CLEAR_TASK
             val intent = Intent(applicationContext, MainActivity::class.java)
-                .setFlags(intentFlags)
+                .setFlags(INTENT_FLAGS)
                 .putExtra(IntentData.channelId, group.toID())
 
             val pendingIntent = PendingIntentCompat
@@ -169,18 +167,20 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
                 .setContentIntent(pendingIntent)
                 .setGroupSummary(true)
                 .setStyle(summary)
+                .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY)
                 .build()
 
             notificationManager.notify(summaryId, summaryNotification)
         }
     }
 
-    private suspend fun showStreamNotification(group: String, stream: StreamItem) {
-        val intentFlags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or
-                Intent.FLAG_ACTIVITY_CLEAR_TASK
-
+    private suspend fun showStreamNotification(
+        group: String,
+        stream: StreamItem,
+        isSingleNotification: Boolean
+    ) {
         val intent = Intent(applicationContext, MainActivity::class.java)
-            .setFlags(intentFlags)
+            .setFlags(INTENT_FLAGS)
             .putExtra(IntentData.videoId, stream.url!!.toID())
         val code = ++notificationId
         val pendingIntent = PendingIntentCompat
@@ -191,6 +191,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             .setContentText(stream.uploaderName)
             // The intent that will fire when the user taps the notification
             .setContentIntent(pendingIntent)
+            .setSilent(!isSingleNotification)
 
         // Load stream thumbnails if the relevant toggle is enabled.
         if (PreferenceHelper.getBoolean(PreferenceKeys.SHOW_STREAM_THUMBNAILS, false)) {
@@ -216,5 +217,10 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setAutoCancel(true)
             .setGroup(group)
+    }
+
+    companion object {
+        private const val INTENT_FLAGS = Intent.FLAG_ACTIVITY_CLEAR_TOP or
+            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     }
 }
