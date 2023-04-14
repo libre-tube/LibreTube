@@ -137,68 +137,78 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
      * For more information, see https://developer.android.com/develop/ui/views/notifications/group
      */
     private suspend fun createNotificationsForChannel(group: String, streams: List<StreamItem>) {
-        val intentFlags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or
-            Intent.FLAG_ACTIVITY_CLEAR_TASK
-
         // Create stream notifications. These are automatically grouped on Android 7.0 and later.
-        streams.forEach {
-            val intent = Intent(applicationContext, MainActivity::class.java)
-                .setFlags(intentFlags)
-                .putExtra(IntentData.videoId, it.url!!.toID())
-            val code = ++notificationId
-            val pendingIntent = PendingIntentCompat
-                .getActivity(applicationContext, code, intent, FLAG_UPDATE_CURRENT, false)
-
-            val notificationBuilder = createNotificationBuilder(group)
-                .setContentTitle(it.title)
-                .setContentText(it.uploaderName)
-                // The intent that will fire when the user taps the notification
-                .setContentIntent(pendingIntent)
-
-            // Load stream thumbnails if the relevant toggle is enabled.
-            if (PreferenceHelper.getBoolean(PreferenceKeys.SHOW_STREAM_THUMBNAILS, false)) {
-                val thumbnail = withContext(Dispatchers.IO) {
-                    ImageHelper.getImage(applicationContext, it.thumbnail).drawable?.toBitmap()
-                }
-
-                notificationBuilder
-                    .setLargeIcon(thumbnail)
-                    .setStyle(
-                        NotificationCompat.BigPictureStyle()
-                            .bigPicture(thumbnail)
-                            .bigLargeIcon(null as Bitmap?) // Hides the icon when expanding
-                    )
+        if (streams.size == 1) {
+            showStreamNotification(group, streams[0], true)
+        } else {
+            streams.forEach {
+                showStreamNotification(group, it, false)
             }
 
-            notificationManager.notify(code, notificationBuilder.build())
+            val summaryId = ++notificationId
+            val intent = Intent(applicationContext, MainActivity::class.java)
+                .setFlags(INTENT_FLAGS)
+                .putExtra(IntentData.channelId, group.toID())
+
+            val pendingIntent = PendingIntentCompat
+                .getActivity(applicationContext, summaryId, intent, FLAG_UPDATE_CURRENT, false)
+
+            // Create summary notification containing new streams for Android versions below 7.0.
+            val newStreams = applicationContext.resources
+                .getQuantityString(R.plurals.channel_new_streams, streams.size, streams.size)
+            val summary = NotificationCompat.InboxStyle()
+            streams.forEach {
+                summary.addLine(it.title)
+            }
+            val summaryNotification = createNotificationBuilder(group)
+                .setContentTitle(streams[0].uploaderName)
+                .setContentText(newStreams)
+                // The intent that will fire when the user taps the notification
+                .setContentIntent(pendingIntent)
+                .setGroupSummary(true)
+                .setStyle(summary)
+                .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY)
+                .build()
+
+            notificationManager.notify(summaryId, summaryNotification)
         }
+    }
 
-        val summaryId = ++notificationId
-
+    private suspend fun showStreamNotification(
+        group: String,
+        stream: StreamItem,
+        isSingleNotification: Boolean
+    ) {
         val intent = Intent(applicationContext, MainActivity::class.java)
-            .setFlags(intentFlags)
-            .putExtra(IntentData.channelId, group.toID())
-
+            .setFlags(INTENT_FLAGS)
+            .putExtra(IntentData.videoId, stream.url!!.toID())
+        val code = ++notificationId
         val pendingIntent = PendingIntentCompat
-            .getActivity(applicationContext, summaryId, intent, FLAG_UPDATE_CURRENT, false)
+            .getActivity(applicationContext, code, intent, FLAG_UPDATE_CURRENT, false)
 
-        // Create summary notification containing new streams for Android versions below 7.0.
-        val newStreams = applicationContext.resources
-            .getQuantityString(R.plurals.channel_new_streams, streams.size, streams.size)
-        val summary = NotificationCompat.InboxStyle()
-        streams.forEach {
-            summary.addLine(it.title)
-        }
-        val summaryNotification = createNotificationBuilder(group)
-            .setContentTitle(streams[0].uploaderName)
-            .setContentText(newStreams)
+        val notificationBuilder = createNotificationBuilder(group)
+            .setContentTitle(stream.title)
+            .setContentText(stream.uploaderName)
             // The intent that will fire when the user taps the notification
             .setContentIntent(pendingIntent)
-            .setGroupSummary(true)
-            .setStyle(summary)
-            .build()
+            .setSilent(!isSingleNotification)
 
-        notificationManager.notify(summaryId, summaryNotification)
+        // Load stream thumbnails if the relevant toggle is enabled.
+        if (PreferenceHelper.getBoolean(PreferenceKeys.SHOW_STREAM_THUMBNAILS, false)) {
+            val thumbnail = withContext(Dispatchers.IO) {
+                ImageHelper.getImage(applicationContext, stream.thumbnail).drawable?.toBitmap()
+            }
+
+            notificationBuilder
+                .setLargeIcon(thumbnail)
+                .setStyle(
+                    NotificationCompat.BigPictureStyle()
+                        .bigPicture(thumbnail)
+                        .bigLargeIcon(null as Bitmap?) // Hides the icon when expanding
+                )
+        }
+
+        notificationManager.notify(code, notificationBuilder.build())
     }
 
     private fun createNotificationBuilder(group: String): NotificationCompat.Builder {
@@ -207,5 +217,10 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setAutoCancel(true)
             .setGroup(group)
+    }
+
+    companion object {
+        private const val INTENT_FLAGS = Intent.FLAG_ACTIVITY_CLEAR_TOP or
+            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     }
 }
