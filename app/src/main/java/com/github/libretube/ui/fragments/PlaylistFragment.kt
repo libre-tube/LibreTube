@@ -215,21 +215,21 @@ class PlaylistFragment : Fragment() {
                     }
                 })
 
-            binding.playlistRecView.adapter = playlistAdapter
-            binding.playlistScrollview.viewTreeObserver.addOnScrollChangedListener {
-                if (_binding?.playlistScrollview?.canScrollVertically(1) == false &&
-                    !isLoading
-                ) {
-                    // append more playlists to the recycler view
-                    if (playlistType != PlaylistType.PUBLIC) {
-                        isLoading = true
-                        playlistAdapter?.showMoreItems()
-                        isLoading = false
-                    } else {
-                        fetchNextPage()
+                binding.playlistRecView.adapter = playlistAdapter
+                binding.playlistScrollview.viewTreeObserver.addOnScrollChangedListener {
+                    if (_binding?.playlistScrollview?.canScrollVertically(1) == false &&
+                        !isLoading
+                    ) {
+                        // append more playlists to the recycler view
+                        if (playlistType != PlaylistType.PUBLIC) {
+                            isLoading = true
+                            playlistAdapter?.showMoreItems()
+                            isLoading = false
+                        } else {
+                            fetchNextPage()
+                        }
                     }
                 }
-            }
 
                 // listener for swiping to the left or right
                 if (playlistType != PlaylistType.PUBLIC) {

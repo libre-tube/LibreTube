@@ -74,9 +74,10 @@ class DownloadsFragment : Fragment() {
 
         val dbDownloads = runBlocking(Dispatchers.IO) {
             Database.downloadDao().getAll()
-        }
+        }.takeIf { it.isNotEmpty() } ?: return
+
+        downloads.clear()
         downloads.addAll(dbDownloads)
-        if (downloads.isEmpty()) return
 
         binding.downloadsEmpty.visibility = View.GONE
         binding.downloads.visibility = View.VISIBLE
