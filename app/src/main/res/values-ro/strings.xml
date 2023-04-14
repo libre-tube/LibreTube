@@ -187,7 +187,7 @@
     <string name="playerAudioQuality">Calitate audio</string>
     <string name="general_summary">Limba și regiunea</string>
     <string name="best_quality">Cel mai bun</string>
-    <string name="notify_new_streams_summary">Notificări despre conținut nou de la canalele la care sunteți abonat.</string>
+    <string name="notify_new_streams_summary">Afișează notificări pentru fluxuri noi de la creatorii pe care îi urmărești.</string>
     <string name="most_views">Cele mai multe vizualizări</string>
     <string name="copied">Copiat</string>
     <string name="take_a_break">Este timpul să luați o pauză</string>
@@ -220,7 +220,7 @@
     <string name="data_saver_mode">Modul de economisire a datelor</string>
     <string name="data_saver_mode_summary">Omiteți miniaturi și alte imagini.</string>
     <string name="general">General</string>
-    <string name="notify_new_streams">Notificări pentru fluxuri noi</string>
+    <string name="notify_new_streams">Afișează notificări pentru fluxuri noi</string>
     <string name="checking_frequency">Se verifică o dată la…</string>
     <string name="new_streams_count">%1$s fluxuri noi disponibile</string>
     <string name="most_recent">Cele mai recente</string>
@@ -350,7 +350,7 @@
     <string name="not_enabled">Elementul de meniu nu este activat!</string>
     <string name="play_all">Redați toate</string>
     <string name="sb_markers">Marcatoare</string>
-    <string name="notification_time_summary">Perioada de timp în care notificările pot fi afișate.</string>
+    <string name="notification_time_summary">Limitați intervalul de timp în care sunt afișate notificările de flux.</string>
     <string name="queue_insert_related_videos">Inserați videoclipuri similare</string>
     <string name="brightness">Luminozitate</string>
     <string name="double_tap_seek_summary">Atingeți de două ori la stânga sau la dreapta pentru a derula înapoi sau înainte poziția player-ului.</string>
@@ -397,7 +397,7 @@
     <string name="confirm_unsubscribing_summary">Afișați un dialog de confirmare înainte de a vă dezabona.</string>
     <string name="start_time">Timpul de începere</string>
     <string name="end_time">Timpul de sfârșit</string>
-    <string name="notification_time">Timp de notificare</string>
+    <string name="notification_time">Restricționați timpul de notificare</string>
     <string name="default_audio_track">Implicit</string>
     <string name="unsupported_file_format">Format de fișier nesuportat: %1$s</string>
     <string name="hls_instead_of_dash">Utilizați HLS</string>
@@ -490,4 +490,6 @@
         <item quantity="few">%d fluxuri noi</item>
         <item quantity="other">%d fluxuri noi</item>
     </plurals>
+    <string name="show_stream_thumbnails">Afișează miniaturile fluxului</string>
+    <string name="show_stream_thumbnails_summary">Afișează miniaturi ale noilor fluxuri. Activarea acestei opțiuni va consuma date suplimentare.</string>
 </resources>
