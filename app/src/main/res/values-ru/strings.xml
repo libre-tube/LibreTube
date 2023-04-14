@@ -264,7 +264,7 @@
     <string name="notify_new_streams">Уведомления о новых видео</string>
     <string name="new_streams_count">%1$s новых видео доступно</string>
     <string name="new_streams_by">Новые видео от %1$s…</string>
-    <string name="notify_new_streams_summary">Уведомления о свежем контенте от авторов, на которых подписаны.</string>
+    <string name="notify_new_streams_summary">Уведомления о новом контенте от авторов, на которых подписаны.</string>
     <string name="checking_frequency">Проверять каждые…</string>
     <string name="history_empty">Истории пока нет.</string>
     <string name="required_network">Используемое подключение</string>
@@ -361,7 +361,7 @@
     <string name="time">Время</string>
     <string name="start_time">Время начала</string>
     <string name="end_time">Время окончания</string>
-    <string name="notification_time">Время уведомления</string>
+    <string name="notification_time">Время получения уведомлений</string>
     <string name="notification_time_summary">Временной интервал, в течение которого разрешено показывать уведомления.</string>
     <string name="navbar_order">Порядок навигации</string>
     <string name="alternative_trending_layout">Альтернативный трендовый макет</string>
@@ -487,4 +487,13 @@
     <string name="play_automatically">Проигрывать автоматически</string>
     <string name="play_automatically_summary">Начинать воспроизведение видео автоматически при выборе</string>
     <string name="fullscreen_gestures">Жесты входа/выхода из полноэкранного режима</string>
+    <string name="go_to_video">Перейти к видео</string>
+    <plurals name="channel_new_streams">
+        <item quantity="one">%d новый стрим</item>
+        <item quantity="few">%d новых стрима</item>
+        <item quantity="many">%d новых стримов</item>
+        <item quantity="other">%d новых стримов</item>
+    </plurals>
+    <string name="show_stream_thumbnails">Показать миниатюры видео</string>
+    <string name="show_stream_thumbnails_summary">Показывать миниатюры новых видео. Включение этой функции будет потреблять дополнительные данные.</string>
 </resources>
