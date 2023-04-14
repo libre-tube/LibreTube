@@ -107,6 +107,8 @@ class LibraryFragment : Fragment() {
                 DatabaseHolder.Database.playlistBookmarkDao().getAll()
             }
 
+            val binding = _binding ?: return@launch
+
             binding.bookmarksCV.isVisible = bookmarks.isNotEmpty()
             if (bookmarks.isNotEmpty()) {
                 binding.bookmarksRecView.adapter = PlaylistBookmarkAdapter(bookmarks)
@@ -134,9 +136,11 @@ class LibraryFragment : Fragment() {
                     Log.e(TAG(), e.toString())
                     Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
                     return@repeatOnLifecycle
-                } finally {
-                    binding.playlistRefresh.isRefreshing = false
                 }
+
+                val binding = _binding ?: return@repeatOnLifecycle
+                binding.playlistRefresh.isRefreshing = false
+
                 if (playlists.isNotEmpty()) {
                     playlists = when (
                         PreferenceHelper.getString(PreferenceKeys.PLAYLISTS_ORDER, "recent")
@@ -157,7 +161,7 @@ class LibraryFragment : Fragment() {
                     playlistsAdapter.registerAdapterDataObserver(object :
                         RecyclerView.AdapterDataObserver() {
                         override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-                            binding.nothingHere.isVisible = playlistsAdapter.itemCount == 0
+                            _binding?.nothingHere?.isVisible = playlistsAdapter.itemCount == 0
                             super.onItemRangeRemoved(positionStart, itemCount)
                         }
                     })
