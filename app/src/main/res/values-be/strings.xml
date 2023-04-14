@@ -263,7 +263,7 @@
     <string name="landscape">Альбомная</string>
     <string name="portrait">Партрэтная</string>
     <string name="notify_new_streams">Апавяшчэнні аб новых стрымах</string>
-    <string name="notify_new_streams_summary">Апавяшчэнні аб свежым кантэнте ад стваральнікаў, за якімі вы сочыце.</string>
+    <string name="notify_new_streams_summary">Апавяшчэнні аб новым кантэнте ад стваральнікаў, за якімі вы сочыце.</string>
     <string name="checking_frequency">Правяраючы кожную…</string>
     <string name="new_streams_count">%1$s новыя стрымы даступныя</string>
     <string name="new_streams_by">Новыя стрымы ад %1$s…</string>
@@ -351,7 +351,7 @@
     <string name="time">Час</string>
     <string name="start_time">Час пачатку</string>
     <string name="end_time">Час заканчэння</string>
-    <string name="notification_time">Час апавяшчэнні</string>
+    <string name="notification_time">Час атрымання апавяшчэнняў</string>
     <string name="confirm_unsubscribing_summary">Паказаць дыялогавае акно пацверджання перад адмовай ад падпіскі.</string>
     <string name="play_all">Гуляць усе</string>
     <string name="notification_time_summary">Прамежак часу, у які дазволена паказваць апавяшчэнні.</string>
@@ -486,4 +486,14 @@
     <string name="group_name">Назва групы</string>
     <string name="play_automatically">Прайграваць аўтаматычна</string>
     <string name="play_automatically_summary">Аўтаматычны запуск прайгравання відэа пры выбары</string>
+    <string name="fullscreen_gestures">Уваход/выход з поўнаэкранных жэстаў</string>
+    <string name="go_to_video">Перайсці да відэа</string>
+    <plurals name="channel_new_streams">
+        <item quantity="one">%d новы стрым</item>
+        <item quantity="few">%d новых стрыму</item>
+        <item quantity="many">%d новых стрымаў</item>
+        <item quantity="other">%d новых стрымаў</item>
+    </plurals>
+    <string name="show_stream_thumbnails_summary">Паказаць мініяцюры новых відэа. Уключэнне гэтага прывядзе да спажывання дадатковых даных.</string>
+    <string name="show_stream_thumbnails">Паказваць мініяцюры відэа</string>
 </resources>
