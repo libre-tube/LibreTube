@@ -468,4 +468,5 @@
     <string name="lbry_hls">LBRY HLS</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d 个视频</string>
     <string name="subscriberAndVideoCounts">%1$s 订阅者 • %2$d 个视频</string>
+    <string name="show_stream_thumbnails">显示缩略图</string>
 </resources>

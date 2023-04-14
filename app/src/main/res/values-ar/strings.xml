@@ -253,7 +253,7 @@
     <string name="worst_quality">أسوأ</string>
     <string name="default_subtitle_language">لغة الترجمة</string>
     <string name="notifications">الإشعارات</string>
-    <string name="notify_new_streams">إشعارات لأحداث البث الجديدة</string>
+    <string name="notify_new_streams">عرض إشعارات لأحداث البث الجديدة</string>
     <string name="notify_new_streams_summary">إشعارات حول المحتوى الجديد من منشئي المحتوى الذين تتابعهم.</string>
     <string name="checking_frequency">تحقق من كل…</string>
     <string name="new_streams_count">%1$s محتوى بث جديد متاح</string>
@@ -358,11 +358,11 @@
     <string name="confirm_unsubscribing">تأكيد إلغاء الاشتراك</string>
     <string name="confirm_unsubscribing_summary">إظهار مربع حوار تأكيد قبل إلغاء الاشتراك.</string>
     <string name="play_all">تشغيل الكل</string>
-    <string name="notification_time_summary">الفترة الزمنية التي يسمح فيها بعرض الإشعارات.</string>
+    <string name="notification_time_summary">حدد الفترة الزمنية التي تظهر فيها إشعارات البث.</string>
     <string name="time">الوقت</string>
     <string name="end_time">وقت الانتهاء</string>
     <string name="start_time">وقت البدء</string>
-    <string name="notification_time">وقت الإشعار</string>
+    <string name="notification_time">تقييد وقت الإشعار</string>
     <string name="alternative_trending_layout">تخطيط الاتجاه البديل</string>
     <string name="navbar_order">ترتيب</string>
     <string name="layout">التَخطِيط</string>
@@ -502,4 +502,6 @@
         <item quantity="many">%d تدفقات جديدة</item>
         <item quantity="other">%d تدفقات جديدة</item>
     </plurals>
+    <string name="show_stream_thumbnails">إظهار الصور المصغرة للبث</string>
+    <string name="show_stream_thumbnails_summary">يعرض صورة مصغرة من تيار جديد . تمكين هذه الميزة سوف تستهلك بيانات إضافية .</string>
 </resources>

@@ -182,7 +182,7 @@
     <string name="restore">Przywróć kopię zapasową</string>
     <string name="require_restart_message">Naciśnij „OK”, aby zastosować zmiany. Aplikacja zostanie zrestartowana.</string>
     <string name="notifications">Powiadomienia</string>
-    <string name="notify_new_streams">Przypomnij o nowych treściach</string>
+    <string name="notify_new_streams">Pokaż powiadomienia o nowych transmisjach</string>
     <string name="notify_new_streams_summary">Informuj o nowych treściach od twórców, których śledzisz.</string>
     <string name="irreversible">Czy na pewno\? Tego nie da się cofnąć!</string>
     <string name="require_restart">Wymagany restart aplikacji</string>

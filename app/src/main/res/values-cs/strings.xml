@@ -253,8 +253,8 @@
     <string name="worst_quality">Nejhorší</string>
     <string name="default_subtitle_language">Jazyk titulků</string>
     <string name="notifications">Upozornění</string>
-    <string name="notify_new_streams">Upozornění na nová videa</string>
-    <string name="notify_new_streams_summary">Upozornění na nový obsah od tvůrců, které sledujete.</string>
+    <string name="notify_new_streams">Zobrazit upozornění na nová videa</string>
+    <string name="notify_new_streams_summary">Zobrazit upozornění na nová videa od tvůrců, které sledujete.</string>
     <string name="checking_frequency">Kontrola každých…</string>
     <string name="new_streams_by">Nová videa od %1$s…</string>
     <string name="most_recent">Nejnovější</string>
@@ -360,9 +360,9 @@
     <string name="confirm_unsubscribing">Potvrdit zrušení odběru</string>
     <string name="time">Čas</string>
     <string name="start_time">Počáteční čas</string>
-    <string name="notification_time">Čas oznámení</string>
+    <string name="notification_time">Omezit čas upozornění</string>
     <string name="end_time">Koncový čas</string>
-    <string name="notification_time_summary">Časový úsek, ve kterém se mohou zobrazovat oznámení.</string>
+    <string name="notification_time_summary">Omezit časové rozmezí, ve kterém budou zobrazována upozornění o videích.</string>
     <string name="navbar_order">Pořadí</string>
     <string name="alternative_player_layout_summary">Zobrazit související videa jako řádek nad komentáři místo pod nimi.</string>
     <string name="alternative_trending_layout">Alternativní rozložení trendů</string>
@@ -490,4 +490,6 @@
         <item quantity="few">%d nová videa</item>
         <item quantity="other">%d nových videí</item>
     </plurals>
+    <string name="show_stream_thumbnails">Zobrazit náhledy videí</string>
+    <string name="show_stream_thumbnails_summary">Zobrazit náhledy nových videí. Povolením této funkce bude spotřebováno více dat.</string>
 </resources>

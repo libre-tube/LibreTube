@@ -18,7 +18,7 @@
     <string name="username">Nome utente</string>
     <string name="password">Password</string>
     <string name="subscribe">Iscriviti</string>
-    <string name="cannotDownload">Impossibile scaricare questo flusso.</string>
+    <string name="cannotDownload">Impossibile scaricare questo video.</string>
     <string name="dlcomplete">Scaricamento completato.</string>
     <string name="downloadfailed">Scaricamento fallito.</string>
     <string name="vlc">Apri in VLC</string>
@@ -165,7 +165,7 @@
     <string name="invalid_url">Si prega di inserire un URL che funzioni</string>
     <string name="version">Versione %1$s</string>
     <string name="about_summary">Conosci il team LibreTube e come tutto accade.</string>
-    <string name="related_streams_summary">Mostra stream simili a fianco di ciò che guardi.</string>
+    <string name="related_streams_summary">Mostra video simili a fianco di ciò che guardi.</string>
     <string name="related_streams">Contenuti correlati</string>
     <string name="hide_chapters">Nascondi capitoli</string>
     <string name="show_chapters">Mostra capitoli</string>
@@ -245,11 +245,11 @@
     <string name="yt_shorts">Short</string>
     <string name="add_to_queue">Aggiungi alla coda</string>
     <string name="notifications">Notifiche</string>
-    <string name="notify_new_streams">Notifiche per nuovi video</string>
-    <string name="notify_new_streams_summary">Notifiche su nuovi contenuti dai creatore che segui.</string>
+    <string name="notify_new_streams">Mostra notifiche per nuovi video</string>
+    <string name="notify_new_streams_summary">Mostra notifiche di nuovi video dagli autori che segui.</string>
     <string name="checking_frequency">Controlla ogni…</string>
     <string name="new_streams_count">%1$s nuovi video disponibili</string>
-    <string name="new_streams_by">Nuova stream di %1$s…</string>
+    <string name="new_streams_by">Nuovi video di %1$s…</string>
     <string name="most_views">Più visti</string>
     <string name="least_views">Meno visti</string>
     <string name="channel_name_az">Nome canale (A-Z)</string>
@@ -359,10 +359,10 @@
     <string name="play_all">Riproduci tutti</string>
     <string name="confirm_unsubscribing_summary">Mostra una finestra di conferma prima di annullare l\'iscrizione.</string>
     <string name="start_time">Ora di inizio</string>
-    <string name="notification_time">Orari di notifica</string>
+    <string name="notification_time">Limita orari di notifica</string>
     <string name="time">Tempo</string>
     <string name="end_time">Ora di fine</string>
-    <string name="notification_time_summary">L\'intervallo di ore in cui le notifiche possono essere mostrate.</string>
+    <string name="notification_time_summary">Limita l\'intervallo di ore in cui le notifiche di video vengono mostrate.</string>
     <string name="local_playlists">Playlist locali</string>
     <string name="not_enabled">Elemento del menu non attivo!</string>
     <string name="brightness">Luminosità</string>
@@ -485,5 +485,11 @@
     <string name="play_automatically_summary">Riproduci il video automaticamente quando si seleziona</string>
     <string name="fullscreen_gestures">Gesti di entrata/uscita a schermo intero</string>
     <string name="go_to_video">Vai al video</string>
-    <string name="show_stream_thumbnails">Mostra miniature dello stream</string>
+    <string name="show_stream_thumbnails">Mostra miniature dei video</string>
+    <string name="show_stream_thumbnails_summary">Mostra le miniature dei nuovi video. L\'attivazione consumerà dati aggiuntivi.</string>
+    <plurals name="channel_new_streams">
+        <item quantity="one">%d nuovo video</item>
+        <item quantity="many">%d nuovi video</item>
+        <item quantity="other">%d nuovi video</item>
+    </plurals>
 </resources>

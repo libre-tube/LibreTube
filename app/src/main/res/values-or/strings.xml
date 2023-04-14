@@ -213,7 +213,7 @@
     <string name="caption_settings">କ୍ୟାପସନ୍</string>
     <string name="default_subtitle_language">ସବ୍ଟାଇଟ୍ଲ ଭାଷା</string>
     <string name="notifications">ବିଜ୍ଞପ୍ତି ଗୁଡ଼ିକ</string>
-    <string name="notify_new_streams">ନୂତନ ଷ୍ଟ୍ରିମ୍ ପାଇଁ ବିଜ୍ଞପ୍ତି</string>
+    <string name="notify_new_streams">ନୂତନ ଷ୍ଟ୍ରିମ୍ ପାଇଁ ବିଜ୍ଞପ୍ତି ଦେଖାନ୍ତୁ</string>
     <string name="irreversible">ଆପଣ ନିଶ୍ଚିତ କି!</string>
     <string name="history_empty">ବର୍ତ୍ତମାନ ସୁଦ୍ଧା କୌଣସି ଇତିହାସ ନାହିଁ ।</string>
     <string name="copied">କପି ହୋଇଛି</string>
@@ -313,7 +313,7 @@
     <string name="playerAudioFormat">ପ୍ଲେୟାର ପାଇଁ ଅଡିଓ ଫର୍ମାଟ୍</string>
     <string name="best_quality">ସର୍ବତ୍ତମ</string>
     <string name="worst_quality">ସବୁଠାରୁ ଖରାପ</string>
-    <string name="notify_new_streams_summary">ଆପଣ ଅନୁସରଣ କରୁଥିବା ସୃଷ୍ଟିକର୍ତ୍ତାଙ୍କ ଠାରୁ ତାଜା ବିଷୟବସ୍ତୁ ବିଷୟରେ ବିଜ୍ଞପ୍ତି ।</string>
+    <string name="notify_new_streams_summary">ଆପଣ ଅନୁସରଣ କରୁଥିବା ସୃଷ୍ଟିକର୍ତ୍ତାଙ୍କ ଠାରୁ ନୂତନ ଷ୍ଟ୍ରିମ୍ ପାଇଁ ବିଜ୍ଞପ୍ତି ପ୍ରଦର୍ଶନ କରନ୍ତୁ ।</string>
     <string name="least_recent">ପୁରୁଣା</string>
     <string name="required_network">ଆବଶ୍ୟକ କନେକ୍ସନ୍</string>
     <string name="no_search_result">ଫଳାଫଳ ନାହିଁ।</string>
@@ -359,9 +359,9 @@
     <string name="confirm_unsubscribing_summary">ସଦସ୍ୟତା ରଦ୍ଦ କରିବା ପୂର୍ବରୁ ଏକ ନିଶ୍ଚିତକରଣ ସଂଳାପ ଦେଖାନ୍ତୁ ।</string>
     <string name="play_all">ସମସ୍ତ ପ୍ଲେ କରନ୍ତୁ</string>
     <string name="end_time">ଶେଷ ସମୟ</string>
-    <string name="notification_time">ବିଜ୍ଞପ୍ତି ସମୟ</string>
+    <string name="notification_time">ବିଜ୍ଞପ୍ତି ସମୟ ସୀମିତ କରନ୍ତୁ</string>
     <string name="time">ସମୟ</string>
-    <string name="notification_time_summary">ସମୟ ସୀମା ଯେଉଁଥିରେ ବିଜ୍ଞପ୍ତି ଦେଖାଇବାକୁ ଅନୁମତି ଦିଆଯାଇଛି ।</string>
+    <string name="notification_time_summary">ଷ୍ଟ୍ରିମ୍ ବିଜ୍ଞପ୍ତିଗୁଡିକ ପ୍ରଦର୍ଶିତ ହେଉଥିବା ସମୟ ସୀମାକୁ ସୀମିତ କରନ୍ତୁ ।</string>
     <string name="start_time">ଆରମ୍ଭ ସମୟ</string>
     <string name="navbar_order">ସଜାନ୍ତୁ</string>
     <string name="layout">ଲେଆଉଟ୍</string>
@@ -482,4 +482,10 @@
     <string name="play_automatically">ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଚଲାନ୍ତୁ</string>
     <string name="fullscreen_gestures">ଫୁଲ୍ ସ୍କ୍ରିନ୍ ଅଙ୍ଗଭଙ୍ଗୀ ପ୍ରବେଶ/ପ୍ରସ୍ଥାନ କରନ୍ତୁ</string>
     <string name="go_to_video">ଭିଡିଓକୁ ଯାଆନ୍ତୁ</string>
+    <plurals name="channel_new_streams">
+        <item quantity="one">%d ନୂତନ ଷ୍ଟ୍ରିମ୍</item>
+        <item quantity="other">%d ଟି ନୂତନ ଷ୍ଟ୍ରିମ୍</item>
+    </plurals>
+    <string name="show_stream_thumbnails">ଷ୍ଟ୍ରିମ୍ ଥମ୍ବନେଲ ଦେଖାନ୍ତୁ</string>
+    <string name="show_stream_thumbnails_summary">ନୂତନ ଧାରଣାଗୁଡ଼ିକର ଥମ୍ବନେଲଗୁଡିକ ଦେଖାନ୍ତୁ । ଏହାକୁ ସକ୍ଷମ କରିବା ଅତିରିକ୍ତ ତଥ୍ୟ ଖର୍ଚ୍ଚ କରିବ ।</string>
 </resources>

@@ -255,8 +255,8 @@
     <string name="worst_quality">ਘਟੀਆ</string>
     <string name="default_subtitle_language">ਉਪਸਿਰਲੇਖ ਭਾਸ਼ਾ</string>
     <string name="notifications">ਨੋਟੀਫਿਕੇਸ਼ਨ</string>
-    <string name="notify_new_streams">ਨਵੀਆਂ ਸਟ੍ਰੀਮਾਂ ਲਈ ਨੋਟੀਫਿਕੇਸ਼ਨ</string>
-    <string name="notify_new_streams_summary">ਤੁਹਾਡੇ ਦੁਆਰਾ ਅਨੁਸਰਣ ਕਰਨ ਵਾਲਿਆਂ ਤੋਂ ਤਾਜ਼ਾ ਸਮੱਗਰੀ ਬਾਰੇ ਨੋਟੀਫਿਕੇਸ਼ਨ।</string>
+    <string name="notify_new_streams">ਨਵੀਆਂ ਸਟ੍ਰੀਮਾਂ ਲਈ ਨੋਟੀਫਿਕੇਸ਼ਨ ਵਿਖਾਓ</string>
+    <string name="notify_new_streams_summary">ਤੁਹਾਡੇ ਦੁਆਰਾ ਅਨੁਸਰਣ ਕਰਨ ਵਾਲਿਆਂ ਤੋਂ ਨਵੀਂ ਸਟ੍ਰੀਮ ਬਾਰੇ ਨੋਟੀਫਿਕੇਸ਼ਨ ਵਿਖਾਓ।</string>
     <string name="checking_frequency">ਹਰ ਜਾਂਚ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ…</string>
     <string name="new_streams_count">%1$s ਨਵੀਆਂ ਸਟ੍ਰੀਮਾਂ ਉਪਲਬਧ ਹਨ</string>
     <string name="new_streams_by">%1$s ਦੁਆਰਾ ਨਵੀਆਂ ਸਟ੍ਰੀਮਾਂ…</string>
@@ -394,9 +394,9 @@
     <string name="alternative_trending_layout">ਵਿਕਲਪਿਕ ਰੁਝਾਨ ਵਾਲਾ ਲੇਆਊਟ</string>
     <string name="background_channel_name">ਬੈਕਗ੍ਰਾਊਂਡ ਮੋਡ</string>
     <string name="open_queue_from_notification">ਸੂਚਨਾ ਤੋਂ ਕਤਾਰ ਖੋਲ੍ਹੋ</string>
-    <string name="notification_time">ਨੋਟੀਫਿਕੇਸ਼ਨ ਸਮਾਂ</string>
+    <string name="notification_time">ਨੋਟੀਫਿਕੇਸ਼ਨ ਸਮਾਂ ਸੀਮਿਤ ਕਰੋ</string>
     <string name="layout">ਲੇਆਊਟ</string>
-    <string name="notification_time_summary">ਸਮਾਂ ਮਿਆਦ ਜਿਸ ਵਿੱਚ ਨੋਟੀਫਿਕੇਸ਼ਨ ਵਿਖਾਉਣ ਦੀ ਇਜਾਜ਼ਤ ਹੈ।</string>
+    <string name="notification_time_summary">ਸਮਾਂ ਸੀਮਤ ਕਰੋ ਜਿਸ ਵਿੱਚ ਸਟ੍ਰੀਮ ਸੂਚਨਾਵਾਂ ਦਿਖਾਈਆਂ ਜਾਂਦੀਆਂ ਹਨ।</string>
     <string name="navbar_order">ਆਰਡਰ</string>
     <string name="default_audio_track">ਡੀਫ਼ਾਲਟ</string>
     <string name="alternative_player_layout">ਵਿਕਲਪਿਕ ਪਲੇਅਰ ਲੇਆਊਟ</string>
@@ -486,4 +486,6 @@
     <string name="edit_group">ਗਰੁੱਪ ਦਾ ਸੰਪਾਦਨ ਕਰੋ</string>
     <string name="play_automatically">ਆਪਣੇ-ਆਪ ਚਲਾਓ</string>
     <string name="play_automatically_summary">ਚੁਣਨ \'ਤੇ ਆਪਣੇ ਆਪ ਵੀਡੀਓ ਚਲਾਉਣਾ ਸ਼ੁਰੂ ਕਰੋ</string>
+    <string name="show_stream_thumbnails">ਸਟ੍ਰੀਮ ਥੰਮਨੇਲ ਦਿਖਾਓ</string>
+    <string name="show_stream_thumbnails_summary">ਨਵੀਆਂ ਸਟ੍ਰੀਮਾਂ ਦੇ ਥੰਮਨੇਲ ਵਿਖਾਓ। ਇਸਨੂੰ ਸਮਰੱਥ ਕਰਨ ਨਾਲ ਵਾਧੂ ਡੇਟਾ ਦੀ ਖਪਤ ਹੋਵੇਗੀ।</string>
 </resources>
