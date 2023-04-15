@@ -8,7 +8,7 @@ data class Channel(
     val name: String? = null,
     val avatarUrl: String? = null,
     val bannerUrl: String? = null,
-    val description: String = "",
+    val description: String? = null,
     val nextpage: String? = null,
     val subscriberCount: Long = 0,
     val verified: Boolean = false,

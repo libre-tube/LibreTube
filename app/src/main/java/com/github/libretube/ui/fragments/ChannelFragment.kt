@@ -172,10 +172,10 @@ class ChannelFragment : Fragment() {
                     R.string.subscribers,
                     response.subscriberCount.formatShort()
                 )
-                if (response.description.isBlank()) {
+                if (response.description.orEmpty().isBlank()) {
                     binding.channelDescription.visibility = View.GONE
                 } else {
-                    binding.channelDescription.text = response.description.trim()
+                    binding.channelDescription.text = response.description.orEmpty().trim()
                 }
 
                 binding.channelDescription.setOnClickListener {
