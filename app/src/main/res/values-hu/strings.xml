@@ -151,8 +151,8 @@
     <string name="default_subtitle_language">Felirat nyelve</string>
     <string name="seekbar_preview_summary">Pillanatkép megjelenítése a lejátszásjelző húzásakor.</string>
     <string name="playingOnBackground">Lejátszás a háttérben…</string>
-    <string name="notify_new_streams">Értesítések az új közvetítésekről</string>
-    <string name="notify_new_streams_summary">Értesítések az Ön által követett alkotók friss tartalmairól.</string>
+    <string name="notify_new_streams">Értesítések megjelenítése az új közvetítésekről</string>
+    <string name="notify_new_streams_summary">Értesítések megjelenítése az Ön által követett alkotók új közvetítéseiről.</string>
     <string name="share_with_time">Megosztás időponttal</string>
     <string name="category_music_offtopic">Zene: nem zenés rész</string>
     <string name="appearance">Megjelenés</string>
@@ -361,8 +361,8 @@
     <string name="time">Idő</string>
     <string name="start_time">Kezdési idő</string>
     <string name="end_time">Befejezési idő</string>
-    <string name="notification_time">Értesítési idő</string>
-    <string name="notification_time_summary">Időtartam ami alatt az értesítések megjelenhetnek.</string>
+    <string name="notification_time">Értesítési idő korlátozása</string>
+    <string name="notification_time_summary">Időtartam korlátozása, amely alatt az értesítések megjelennek.</string>
     <string name="layout">Elrendezés</string>
     <string name="alternative_trending_layout">Alternatív felkapott elrendezés</string>
     <string name="alternative_player_layout">Alternatív lejátszó elrendezés</string>
@@ -482,4 +482,10 @@
     <string name="play_automatically">Automatikus lejátszás</string>
     <string name="fullscreen_gestures">Gesztusok a teljes képernyőbe való belépéshez/kilépéshez</string>
     <string name="go_to_video">Ugrás a videóhoz</string>
+    <plurals name="channel_new_streams">
+        <item quantity="one">%d új közvetítés</item>
+        <item quantity="other">%d új közvetítés</item>
+    </plurals>
+    <string name="show_stream_thumbnails">Közvetítés bélyegképének megjelenítése</string>
+    <string name="show_stream_thumbnails_summary">Megjeleníti az új streamek bélyegképeit Ennek engedélyezése további adatokat fogyaszt.</string>
 </resources>
