@@ -23,7 +23,7 @@
     <string name="importsuccess">Abonniert</string>
     <string name="subscribeIsEmpty">Abonniere erst einige Kanäle.</string>
     <string name="cannotDownload">Video kann nicht heruntergeladen werden.</string>
-    <string name="dlisinprogress">Bitte warten Sie, bis alle aktuellen Downloads abgeschlossen sind.</string>
+    <string name="dlisinprogress">Bitte warten, bis alle aktuellen Downloads abgeschlossen sind.</string>
     <string name="downloadfailed">Herunterladen fehlgeschlagen.</string>
     <string name="vlcerror">Konnte nicht in VLC geöffnet werden, möglicherweise ist es nicht installiert.</string>
     <string name="app_theme">Design</string>
@@ -36,7 +36,7 @@
     <string name="emptyList">Gähnende Leere.</string>
     <string name="success">Fertig.</string>
     <string name="yes">Ja</string>
-    <string name="download">Downloaden</string>
+    <string name="download">Download</string>
     <string name="cancel">Abbrechen</string>
     <string name="createPlaylist">Playlist erstellen</string>
     <string name="playlistCreated">Playlist erstellt.</string>
@@ -96,7 +96,7 @@
     <string name="sponsorblock_state">An</string>
     <string name="category_sponsor_description">Bezahlte Werbung, bezahlte Empfehlungen und Direktwerbung. Nicht für Eigenwerbung, kostenlose Fremdwerbung oder Empfehlungen für Anliegen, Kanäle, Webseiten und Produkte.</string>
     <string name="category_selfpromo">Unbezahlt/Eigenwerbung</string>
-    <string name="category_interaction">Interaktionserinnerung (Liken und Abonnieren)</string>
+    <string name="category_interaction">Interaktionserinnerung (Like/Abo)</string>
     <string name="category_outro_description">Abspann, Endkarten, Credits oder Quellenangaben. Nicht für videobeendende Schlussfolgerungen, die Informationen enthalten.</string>
     <string name="category_interaction_description">Wenn es mitten im Inhalt eine kurze Aufforderung zum Liken, Abonnieren oder Folgen gibt. Falls das Segment lang ist oder sich auf etwas Bestimmtes bezieht, sollte es stattdessen \"Unbezahlt/Eigenwerbung\" sein.</string>
     <string name="category_intro_description">Ein Videosegment ohne eigentlichen Inhalt. Kann eine Pause, ein statisches Bild oder eine sich wiederholende Animation sein. Sollte nicht für Übergänge mit Informationen verwendet werden.</string>
@@ -169,7 +169,7 @@
     <string name="category_preview_description">Segmente, die zukünftig in diesem Video erscheinende Inhalte beschreiben ohne zusätzliche Informationen zu enthalten. Wenn es Clips enthält, die nur hier erscheinen, ist dies sehr wahrscheinlich die falsche Kategorie.</string>
     <string name="player_autoplay">Automatische Wiedergabe</string>
     <string name="related_streams_summary">Zeige ähnliche Inhalte neben dem, was du schaust.</string>
-    <string name="related_streams">Verwandte Inhalte</string>
+    <string name="related_streams">Ähnliche Inhalte</string>
     <string name="no_audio">Kein Ton</string>
     <string name="no_video">Kein Video</string>
     <string name="audio">Audio</string>
@@ -190,7 +190,7 @@
     <string name="watch_history">Wiedergabeverlauf</string>
     <string name="instance_frontend_url">URL zum Instanz-Frontend</string>
     <string name="pauseOnScreenOff_summary">Den Player pausieren, wenn der Bildschirm ausgeschaltet ist.</string>
-    <string name="autoplay_summary">Nächstes Video nach dem aktuellen automatisch abspielen.</string>
+    <string name="autoplay_summary">Spiele nach dem aktuellen Video automatisch das nächste ab.</string>
     <string name="watch_positions">Position merken</string>
     <string name="auth_instance">Authentifizierungsinstanz</string>
     <string name="auth_instance_summary">Verwende für authentifizierte Aufrufe eine andere Instanz.</string>
@@ -206,7 +206,7 @@
     <string name="audio_video">Audio und Video</string>
     <string name="fullscreen_orientation">Ausrichtung im Vollbildmodus</string>
     <string name="aspect_ratio">Video-Seitenverhältnis</string>
-    <string name="auto_rotation">Automatische Drehung</string>
+    <string name="auto_rotation">Automatisch drehen</string>
     <string name="landscape">Landschaft</string>
     <string name="portrait">Porträt</string>
     <string name="community">Community</string>
@@ -228,7 +228,7 @@
     <string name="pure_theme">Reines Farbschema</string>
     <string name="pure_theme_summary">Reines weißes/schwarzes Farbschema</string>
     <string name="data_saver_mode">Datensparmodus</string>
-    <string name="data_saver_mode_summary">Keine Miniaturansichten und andere Bilder laden, um Daten zu sparen.</string>
+    <string name="data_saver_mode_summary">Keine Miniaturansichten und andere Bilder laden, um Datenvolumen zu sparen.</string>
     <string name="search_history_summary">Suchanfragen lokal speichern</string>
     <string name="notifications">Benachrichtigungen</string>
     <string name="checking_frequency">Überprüfe alle …</string>
@@ -253,14 +253,14 @@
     <string name="no_search_result">Keine Ergebnisse.</string>
     <string name="copied_to_clipboard">In Zwischenablage kopiert</string>
     <string name="default_subtitle_language">Untertitelsprache</string>
-    <string name="notify_new_streams_summary">Benachrichtigungen über neue Streams von Erstellern, denen Sie folgen, anzeigen.</string>
-    <string name="notify_new_streams">Benachrichtigungen bei neuen Streams anzeigen</string>
+    <string name="notify_new_streams_summary">Erhalte Benachrichtigungen, wenn abonnierte Kanäle neue Videos veröffentlichen.</string>
+    <string name="notify_new_streams">Benachrichtigungen bei neuen Videos</string>
     <string name="irreversible">Bist du sicher\? Dies kann nicht rückgängig gemacht werden!</string>
     <string name="caption_settings">Untertitel</string>
     <string name="new_streams_by">%1$s haben neue Videos hochgeladen…</string>
     <string name="new_streams_count">Es sind %1$s neue Videos verfügbar</string>
     <string name="history_empty">Kein Verlauf bisher.</string>
-    <string name="network_all">Alles</string>
+    <string name="network_all">Immer</string>
     <string name="misc">Extras</string>
     <string name="no_subtitles_available">Keine Untertitel verfügbar</string>
     <string name="downloading_apk">APK wird heruntergeladen…</string>
@@ -271,7 +271,7 @@
     <string name="yt_shorts">Shorts</string>
     <string name="backup_restore">Sichern &amp; Wiederherstellen</string>
     <string name="backup">Sichern</string>
-    <string name="picture_in_picture">Bild in Bild</string>
+    <string name="picture_in_picture">Bild-in-Bild (PiP)</string>
     <string name="open_copied">Öffnen</string>
     <string name="most_views">Meiste Aufrufe</string>
     <string name="channel_name_az">Kanalnamen (A-Z)</string>
@@ -349,7 +349,7 @@
     <string name="defaultIconLight">Standard hell</string>
     <string name="confirm_unsubscribing_summary">Zeige Bestätigungsdialog vor dem Deabonnieren.</string>
     <string name="confirm_unsubscribe">Bist du sicher, dass du %1$s deabbonieren möchtest\?</string>
-    <string name="local_playlists">Lokale Wiedergabelisten</string>
+    <string name="local_playlists">Lokale Playlists</string>
     <string name="play_all">Alles abspielen</string>
     <string name="playing_queue">Warteschlange wird abgespielt</string>
     <string name="queue">Warteschlange</string>
@@ -357,12 +357,12 @@
     <string name="start_time">Startzeit</string>
     <string name="end_time">Endzeit</string>
     <string name="notification_time">Benachrichtigungszeit einschränken</string>
-    <string name="notification_time_summary">Beschränken Sie die Zeitspanne, in der Stream-Benachrichtigungen angezeigt werden.</string>
+    <string name="notification_time_summary">Beschränke die Zeitspanne, in der Benachrichtigungen zu Videos angezeigt werden.</string>
     <string name="alternative_trending_layout">Alternatives Trending-Layout</string>
     <string name="navbar_order">Anordnung</string>
     <string name="layout">Layout</string>
     <string name="alternative_player_layout">Alternatives Player-Layout</string>
-    <string name="alternative_player_layout_summary">Zeige verwandte Videos über den Kommentaren in einer Reihe an, anstatt darunter.</string>
+    <string name="alternative_player_layout_summary">Zeige ähnliche Videos über den Kommentaren in einer Reihe an anstatt darunter.</string>
     <string name="added_to_playlist">Zur Playlist hinzugefügt</string>
     <string name="sb_markers">Markierungen</string>
     <string name="audio_track">Tonspur</string>
@@ -379,7 +379,7 @@
     <string name="trends">Trends</string>
     <string name="featured">Vorgestellt</string>
     <string name="trending">Was jetzt angesagt ist</string>
-    <string name="queue_insert_related_videos">Verwandte Videos einfügen</string>
+    <string name="queue_insert_related_videos">Ähnliche Videos einfügen</string>
     <string name="bookmarks">Lesezeichen</string>
     <string name="bookmark">Lesezeichen</string>
     <string name="clear_bookmarks">Lesezeichen löschen</string>
@@ -399,11 +399,11 @@
     <string name="captions_size">Untertitelgröße</string>
     <string name="double_tap_seek">Doppeltippen zum Suchen</string>
     <string name="all_caught_up">Du bist auf dem neuesten Stand</string>
-    <string name="double_tap_seek_summary">Tippen Sie zweimal links oder rechts, um die Position des Players zurück- oder vorzuspulen.</string>
-    <string name="import_playlists">Wiedergabelisten importieren</string>
-    <string name="export_playlists">Wiedergabelisten exportieren</string>
+    <string name="double_tap_seek_summary">Tippe zweimal links oder rechts, um zurück- oder vorzuspulen.</string>
+    <string name="import_playlists">Playlists importieren</string>
+    <string name="export_playlists">Playlists exportieren</string>
     <string name="app_backup">App-Datensicherung</string>
-    <string name="backup_restore_summary">Importieren und Exportieren von Abonnements, Wiedergabelisten, …</string>
+    <string name="backup_restore_summary">Importieren und Exportieren von Abos, Playlists, …</string>
     <string name="privacy_alert">Datenschutz-Warnung</string>
     <string name="proceed">Fortfahren</string>
     <string name="username_email">Mit einer nicht empfohlenen E-Mail-Adresse fortfahren\?</string>
@@ -482,9 +482,10 @@
     <string name="play_automatically_summary">Video beim Auswählen automatisch abspielen</string>
     <string name="fullscreen_gestures">Gesten zum Aufrufen und Verlassen des Vollbilds</string>
     <plurals name="channel_new_streams">
-        <item quantity="one">%d neuer Stream</item>
-        <item quantity="other">%d neue Streams</item>
+        <item quantity="one">%d neues Video</item>
+        <item quantity="other">%d neue Videos</item>
     </plurals>
-    <string name="show_stream_thumbnails_summary">Miniaturansichten von neuen Streams anzeigen. Wenn Sie dies aktivieren, werden zusätzliche Daten verbraucht.</string>
-    <string name="show_stream_thumbnails">Stream-Miniaturansichten anzeigen</string>
+    <string name="show_stream_thumbnails_summary">Zeige Miniaturansichten von neuen Videos an. Dadurch wird zusätzliches Datenvolumen verbraucht.</string>
+    <string name="show_stream_thumbnails">Video-Miniaturansichten anzeigen</string>
+    <string name="go_to_video">Zum Video</string>
 </resources>

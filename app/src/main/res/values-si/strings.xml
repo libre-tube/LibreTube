@@ -185,7 +185,7 @@
     <string name="playerAudioQuality">ශ්‍රව්‍ය ගුණත්වය</string>
     <string name="best_quality">විශිෂ්ට</string>
     <string name="worst_quality">නරකම</string>
-    <string name="notify_new_streams">නව ප්‍රවාහ සඳහා දැනුම්දීම්</string>
+    <string name="notify_new_streams">නව ප්‍රවාහ සඳහා දැනුම්දීම් පෙන්වන්න</string>
     <string name="checking_frequency">බලන වාර ගණන…</string>
     <string name="new_streams_count">%1$s නව ප්‍රවාහ තිබේ</string>
     <string name="new_streams_by">%1$s විසින් නව ප්‍රවාහ…</string>
@@ -257,8 +257,8 @@
     <string name="confirm_unsubscribe">ඔබට %1$s ගෙ දායකත්වයෙන් ඉවත් වීමට අවශ්‍ය බව විශ්වාසද\?</string>
     <string name="confirm_unsubscribing">දායකත්වයෙන් ඉවත් වීම තහවුරු කරන්න</string>
     <string name="time">කාලය</string>
-    <string name="notification_time">දැනුම්දීමේ කාලය</string>
-    <string name="notification_time_summary">දැනුම්දීම් පෙන්වීමට අවසර දී ඇති කාල පරාසය.</string>
+    <string name="notification_time">දැනුම්දීමේ කාලය සීමා කරන්න</string>
+    <string name="notification_time_summary">ප්‍රවාහ දැනුම්දීම් පෙන්වන කාල පරාසය සීමා කරන්න.</string>
     <string name="alternative_trending_layout">විකල්ප නැගී එන පිරිසැලසුම</string>
     <string name="navbar_order">පිළිවෙල</string>
     <string name="layout">පිරිසැලසුම</string>
@@ -381,7 +381,7 @@
     <string name="downloading_apk">APK බාගත කරමින්…</string>
     <string name="notifications">දැනුම්දීම්</string>
     <string name="default_subtitle_language">උපසිරැසි භාෂාව</string>
-    <string name="notify_new_streams_summary">ඔබ අනුගමනය කරන නිර්මාණකරුවන්ගෙන් නැවුම් අන්තර්ගත පිළිබඳ දැනුම්දීම්.</string>
+    <string name="notify_new_streams_summary">ඔබ අනුගමනය කරන නිර්මාණකරුවන්ගෙන් නව ප්‍රවාහ සඳහා දැනුම්දීම් පෙන්වන්න.</string>
     <string name="history_empty">තවමත් ඉතිහාසයක් නැත.</string>
     <string name="already_spent_time">ඔබ දැනටමත් යෙදුම තුළ මිනිත්තු %1$s ගත කර ඇත, විවේකයක් ගැනීමට කාලයයි.</string>
     <string name="required_network">සම්බන්ධතාවයක් අවශ්‍ය</string>
@@ -478,4 +478,11 @@
     <string name="group_name">කණ්ඩායමේ නම</string>
     <string name="edit_group">කණ්ඩායම සංස්කරණය කරන්න</string>
     <string name="channel_groups">නාලිකා කණ්ඩායම්</string>
+    <string name="go_to_video">වීඩියෝව වෙත යන්න</string>
+    <plurals name="channel_new_streams">
+        <item quantity="one">%d නව ප්‍රවාහය</item>
+        <item quantity="other">%d නව ප්‍රවාහ</item>
+    </plurals>
+    <string name="play_automatically">ස්වයංක්‍රීයව වාදනය කරන්න</string>
+    <string name="play_automatically_summary">තේරීමේදී වීඩියෝව ස්වයංක්‍රීයව වාදනය කරන්න</string>
 </resources>

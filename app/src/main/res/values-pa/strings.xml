@@ -256,7 +256,7 @@
     <string name="default_subtitle_language">ਉਪਸਿਰਲੇਖ ਭਾਸ਼ਾ</string>
     <string name="notifications">ਨੋਟੀਫਿਕੇਸ਼ਨ</string>
     <string name="notify_new_streams">ਨਵੀਆਂ ਸਟ੍ਰੀਮਾਂ ਲਈ ਨੋਟੀਫਿਕੇਸ਼ਨ ਵਿਖਾਓ</string>
-    <string name="notify_new_streams_summary">ਤੁਹਾਡੇ ਦੁਆਰਾ ਅਨੁਸਰਣ ਕਰਨ ਵਾਲਿਆਂ ਤੋਂ ਨਵੀਂ ਸਟ੍ਰੀਮ ਬਾਰੇ ਨੋਟੀਫਿਕੇਸ਼ਨ ਵਿਖਾਓ।</string>
+    <string name="notify_new_streams_summary">ਤੁਹਾਡੇ ਦੁਆਰਾ ਅਨੁਸਰਣ ਕੀਤੇ ਜਾਣ ਵਾਲਿਆਂ ਤੋਂ ਨਵੀਂਆਂ ਸਟ੍ਰੀਮਾਂ ਬਾਰੇ ਨੋਟੀਫਿਕੇਸ਼ਨ ਵਿਖਾਓ।</string>
     <string name="checking_frequency">ਹਰ ਜਾਂਚ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ…</string>
     <string name="new_streams_count">%1$s ਨਵੀਆਂ ਸਟ੍ਰੀਮਾਂ ਉਪਲਬਧ ਹਨ</string>
     <string name="new_streams_by">%1$s ਦੁਆਰਾ ਨਵੀਆਂ ਸਟ੍ਰੀਮਾਂ…</string>
