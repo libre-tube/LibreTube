@@ -5,6 +5,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.enums.ShareObjectType
@@ -97,6 +98,11 @@ class VideoOptionsBottomSheet(
                     val watchPosition = WatchPosition(videoId, Long.MAX_VALUE)
                     withContext(Dispatchers.IO) {
                         DatabaseHolder.Database.watchPositionDao().insert(watchPosition)
+                        if (!PlayerHelper.watchHistoryEnabled) return@withContext
+                        // add video to watch history
+                        runCatching {
+                            RetrofitInstance.api.getStreams(videoId)
+                        }.getOrNull()?.let { DatabaseHelper.addToWatchHistory(videoId, it) }
                     }
                     if (PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)) {
                         // get the host fragment containing the current fragment
