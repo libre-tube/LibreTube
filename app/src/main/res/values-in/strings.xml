@@ -272,8 +272,8 @@
     <string name="seekbar_preview_summary">Tampilkan cuplikan ketika menggeser indikator pemainan.</string>
     <string name="general">Umum</string>
     <string name="default_subtitle_language">Bahasa takarir</string>
-    <string name="notify_new_streams">Notifikasi untuk saluran baru</string>
-    <string name="notify_new_streams_summary">Notifikasi tentang konten segar dari kreator yang Anda ikuti.</string>
+    <string name="notify_new_streams">Tampilkan notifikasi untuk saluran baru</string>
+    <string name="notify_new_streams_summary">Tampilkan notifikasi untuk saluran baru dari kreator yang Anda ikuti.</string>
     <string name="history_empty">Belum ada riwayat.</string>
     <string name="sort">Urutan</string>
     <string name="required_network">Dibutuhkan koneksi</string>
@@ -361,8 +361,8 @@
     <string name="time">Waktu</string>
     <string name="start_time">Waktu mulai</string>
     <string name="end_time">Waktu akhir</string>
-    <string name="notification_time">Waktu pemberitahuan</string>
-    <string name="notification_time_summary">Rentang waktu di mana notifikasi diizinkan untuk ditampilkan.</string>
+    <string name="notification_time">Batasi waktu pemberitahuan</string>
+    <string name="notification_time_summary">Batas rentang waktu untuk notifikasi saluran ditampilkan.</string>
     <string name="alternative_trending_layout">Tata letak tren alternatif</string>
     <string name="navbar_order">Urutan</string>
     <string name="layout">Tata letak</string>
@@ -482,4 +482,6 @@
     <plurals name="channel_new_streams">
         <item quantity="other">%d saluran baru</item>
     </plurals>
+    <string name="show_stream_thumbnails">Tampilkan gambar kecil saluran</string>
+    <string name="show_stream_thumbnails_summary">Menampilkan gambar kecil saluran baru. Mengaktifkan ini akan membutuhkan lebih banyak data.</string>
 </resources>
