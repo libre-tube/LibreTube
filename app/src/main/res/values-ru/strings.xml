@@ -361,7 +361,7 @@
     <string name="time">Время</string>
     <string name="start_time">Время начала</string>
     <string name="end_time">Время окончания</string>
-    <string name="notification_time">Время получения уведомлений</string>
+    <string name="notification_time">Ограничить время уведомлений</string>
     <string name="notification_time_summary">Временной интервал, в течение которого разрешено показывать уведомления.</string>
     <string name="navbar_order">Порядок навигации</string>
     <string name="alternative_trending_layout">Альтернативный трендовый макет</string>
