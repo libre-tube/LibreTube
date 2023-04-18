@@ -237,8 +237,14 @@ class MainActivity : BaseActivity() {
             if (lastSeenVideoIndex < 1) return@observe
             binding.bottomNav.getOrCreateBadge(R.id.subscriptionsFragment).apply {
                 number = lastSeenVideoIndex
-                backgroundColor = ThemeHelper.getThemeColor(this@MainActivity, R.attr.colorPrimary)
-                badgeTextColor = ThemeHelper.getThemeColor(this@MainActivity, R.attr.colorOnPrimary)
+                backgroundColor = ThemeHelper.getThemeColor(
+                    this@MainActivity,
+                    androidx.appcompat.R.attr.colorPrimary
+                )
+                badgeTextColor = ThemeHelper.getThemeColor(
+                    this@MainActivity,
+                    com.google.android.material.R.attr.colorOnPrimary
+                )
             }
         }
     }

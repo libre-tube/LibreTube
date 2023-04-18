@@ -21,7 +21,7 @@ class ErrorDialog : DialogFragment() {
             .setTitle(R.string.error_occurred)
             .setMessage(errorLog)
             .setNegativeButton(R.string.okay, null)
-            .setPositiveButton(R.string.copy) { _, _ ->
+            .setPositiveButton(androidx.preference.R.string.copy) { _, _ ->
                 ClipboardHelper.save(requireContext(), errorLog)
                 Toast.makeText(context, R.string.copied, Toast.LENGTH_SHORT).show()
             }
