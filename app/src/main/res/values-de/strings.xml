@@ -21,7 +21,7 @@
     <string name="customInstance">Benutzerdefiniert</string>
     <string name="region">Region</string>
     <string name="importsuccess">Abonniert</string>
-    <string name="subscribeIsEmpty">Abonniere erst einige Kanäle.</string>
+    <string name="subscribeIsEmpty">Abonniere zuerst ein paar Kanäle.</string>
     <string name="cannotDownload">Video kann nicht heruntergeladen werden.</string>
     <string name="dlisinprogress">Bitte warten, bis alle aktuellen Downloads abgeschlossen sind.</string>
     <string name="downloadfailed">Herunterladen fehlgeschlagen.</string>
@@ -92,14 +92,14 @@
     <string name="defaultTab">Standardseite</string>
     <string name="sponsorblock">SponsorBlock</string>
     <string name="segment_skipped">Abschnitt übersprungen</string>
-    <string name="category_sponsor">Gesponserte Videosegmente</string>
+    <string name="category_sponsor">Gesponsorte Videosegmente</string>
     <string name="sponsorblock_state">An</string>
     <string name="category_sponsor_description">Bezahlte Werbung, bezahlte Empfehlungen und Direktwerbung. Nicht für Eigenwerbung, kostenlose Fremdwerbung oder Empfehlungen für Anliegen, Kanäle, Webseiten und Produkte.</string>
     <string name="category_selfpromo">Unbezahlt/Eigenwerbung</string>
     <string name="category_interaction">Interaktionserinnerung (Like/Abo)</string>
     <string name="category_outro_description">Abspann, Endkarten, Credits oder Quellenangaben. Nicht für videobeendende Schlussfolgerungen, die Informationen enthalten.</string>
-    <string name="category_interaction_description">Wenn es mitten im Inhalt eine kurze Aufforderung zum Liken, Abonnieren oder Folgen gibt. Falls das Segment lang ist oder sich auf etwas Bestimmtes bezieht, sollte es stattdessen \"Unbezahlt/Eigenwerbung\" sein.</string>
-    <string name="category_intro_description">Ein Videosegment ohne eigentlichen Inhalt. Kann eine Pause, ein statisches Bild oder eine sich wiederholende Animation sein. Sollte nicht für Übergänge mit Informationen verwendet werden.</string>
+    <string name="category_interaction_description">Wenn es mitten im Inhalt eine kurze Aufforderung zum Liken, Abonnieren oder Folgen gibt. Falls der Abschnitt lang ist oder sich auf etwas Bestimmtes bezieht, sollte er stattdessen \"Unbezahlt/Eigenwerbung\" sein.</string>
+    <string name="category_intro_description">Ein Videoabschnitt ohne eigentlichen Inhalt. Kann eine Pause, ein statisches Bild oder eine sich wiederholende Animation sein. Sollte nicht für Übergänge mit Informationen verwendet werden.</string>
     <string name="license">Lizenz</string>
     <string name="color_accent">Akzente</string>
     <string name="color_red">Ruhendes Rot</string>
@@ -166,7 +166,7 @@
     <string name="playerVideoFormat">Videoformat für Player</string>
     <string name="version">Version %1$s</string>
     <string name="about_summary">Lerne das LibreTube-Team kennen und erfahre, wie das alles funktioniert.</string>
-    <string name="category_preview_description">Segmente, die zukünftig in diesem Video erscheinende Inhalte beschreiben ohne zusätzliche Informationen zu enthalten. Wenn es Clips enthält, die nur hier erscheinen, ist dies sehr wahrscheinlich die falsche Kategorie.</string>
+    <string name="category_preview_description">Abschnitte, die zukünftig in diesem Video erscheinende Inhalte beschreiben ohne zusätzliche Informationen zu enthalten. Wenn er Clips enthält, die nur hier erscheinen, ist dies sehr wahrscheinlich die falsche Kategorie.</string>
     <string name="player_autoplay">Automatische Wiedergabe</string>
     <string name="related_streams_summary">Zeige ähnliche Inhalte neben dem, was du schaust.</string>
     <string name="related_streams">Ähnliche Inhalte</string>
@@ -213,7 +213,7 @@
     <string name="legacyIcon">Verlorenes Vermächtnis</string>
     <string name="category_filler">Füller/Witze</string>
     <string name="none">Keine</string>
-    <string name="category_filler_description">Nebensächliche Szenen, die nur als Füller oder für den Humor dienen und für das Verständnis des Hauptinhalts des Videos nicht erforderlich sind. Bezieht sich nicht auf Segmente, die Kontext oder Hintergrunddetails liefern. Dies ist eine sehr aggressive Kategorie, die dafür gedacht ist, wenn du nicht in der Stimmung für \"Spaß und Humor\" bist.</string>
+    <string name="category_filler_description">Nebensächliche Szenen, die nur als Füller oder für den Humor dienen und für das Verständnis des Hauptinhalts des Videos nicht erforderlich sind. Bezieht sich nicht auf Abschnitte, die Kontext oder Hintergrunddetails liefern. Dies ist eine sehr aggressive Kategorie, die dafür gedacht ist, wenn du nicht in der Stimmung für \"Spaß und Humor\" bist.</string>
     <string name="selected">Ausgewählt</string>
     <string name="autoRotatePlayer">Automatischer Vollbildmodus</string>
     <string name="never">Nie</string>
