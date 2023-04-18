@@ -226,8 +226,8 @@
     <string name="pure_theme_summary">Branco/preto puro</string>
     <string name="default_subtitle_language">Idioma das legendas</string>
     <string name="notifications">Notificações</string>
-    <string name="notify_new_streams">Notificação para novos vídeos</string>
-    <string name="notify_new_streams_summary">Notificar se existirem novos vídeos nos canais subscritos.</string>
+    <string name="notify_new_streams">Mostrar notificações para novos vídeos</string>
+    <string name="notify_new_streams_summary">Mostrar notificações para novos vídeos dos criadores que segue.</string>
     <string name="checking_frequency">Verificar a cada…</string>
     <string name="new_streams_count">Estão disponíveis %1$s novo(s) vídeo(s)</string>
     <string name="new_streams_by">Novos vídeos de %1$s…</string>
@@ -364,8 +364,8 @@
     <string name="time">Tempo</string>
     <string name="start_time">Início</string>
     <string name="end_time">Fim</string>
-    <string name="notification_time">Hora de notificação</string>
-    <string name="notification_time_summary">Período de tempo em que é permitida a exibição de notificações.</string>
+    <string name="notification_time">Restringir o tempo de notificação</string>
+    <string name="notification_time_summary">Limitar o período de tempo em que as notificações de fluxo são mostradas.</string>
     <string name="navbar_order">Ordem</string>
     <string name="alternative_trending_layout">Esquema alternativo de tendências</string>
     <string name="layout">Esquema</string>
@@ -490,4 +490,6 @@
         <item quantity="many">%d novas emissões</item>
         <item quantity="other">%d novas emissões</item>
     </plurals>
+    <string name="show_stream_thumbnails">Mostrar miniaturas do vídeo</string>
+    <string name="show_stream_thumbnails_summary">Mostrar as miniaturas de novas streams. A ativação disto irá consumir dados adicionais.</string>
 </resources>
