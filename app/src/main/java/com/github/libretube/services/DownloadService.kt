@@ -440,7 +440,6 @@ class DownloadService : LifecycleService() {
      * Get a [File] from the corresponding download directory and the file name
      */
     private fun getDownloadPath(directory: String, fileName: String): Path {
-        @Suppress("NewApi") // The Path class is desugared.
         return DownloadHelper.getDownloadDir(this, directory).resolve(fileName)
     }
 

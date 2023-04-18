@@ -35,7 +35,6 @@ object DownloadHelper {
     }
 
     fun getDownloadDir(context: Context, path: String): Path {
-        @Suppress("NewApi") // The Path class is desugared.
         return getOfflineStorageDir(context).resolve(path).createDirectories()
     }
 
