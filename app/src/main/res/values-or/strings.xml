@@ -10,7 +10,7 @@
     <string name="download">ଡାଉନଲୋଡ୍</string>
     <string name="save">ତାଲିକା ରେ ଯୋଡ଼ନ୍ତୁ</string>
     <string name="username">ବ୍ୟବହରକାରୀଙ୍କର ନାମ</string>
-    <string name="password">ପାଶୱାର୍ଡ</string>
+    <string name="password">ପାସ୍‍ୱର୍ଡ଼</string>
     <string name="register">ପଞ୍ଜିକରଣ</string>
     <string name="logout">ଲଗ୍ ଆଉଟ୍</string>
     <string name="startpage">ଗୃହ</string>
@@ -476,7 +476,7 @@
     <string name="auto_fullscreen_shorts">ଛୋଟ ଭିଡିଓଗୁଡ଼ିକରେ ଅଟୋ ଫୁଲ୍ ସ୍କ୍ରିନ୍</string>
     <string name="new_group">ନୂତନ</string>
     <string name="group_name">ଗୋଷ୍ଠୀ ନାମ</string>
-    <string name="edit_group">ଗୋଷ୍ଠୀ ସଂପାଦନ କରନ୍ତୁ</string>
+    <string name="edit_group">ଗୋଷ୍ଠୀ ସମ୍ପାଦନା</string>
     <string name="channel_groups">ଚ୍ୟାନେଲ୍ ଗୋଷ୍ଠୀଗୁଡିକ</string>
     <string name="play_automatically_summary">ଚୟନ କରିବା ସମୟରେ ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଭିଡିଓ ଚାଲିବା ଆରମ୍ଭ କରନ୍ତୁ</string>
     <string name="play_automatically">ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଚଲାନ୍ତୁ</string>
