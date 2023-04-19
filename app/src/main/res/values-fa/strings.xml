@@ -334,4 +334,5 @@
     <string name="codecs">رمزینه‌ها</string>
     <string name="resume">از سر گیری</string>
     <string name="pause">مکث</string>
+    <string name="category_preview_description">برای بخش‌هایی که نشان‌دهنده‌ی محتوای زودآینده در این ویدئو یا ویدئوهای بعدی در سری آن هستند، اما اطلاعات اضافه‌ای فراهم نمی‌کنند. اگر شامل کلیپ هایی باشد که فقط در اینجا ظاهر می شوند، به احتمال زیاد این دسته بندی اشتباه است.</string>
 </resources>
