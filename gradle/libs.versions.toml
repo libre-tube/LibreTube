@@ -20,7 +20,7 @@ leakcanary = "2.10"
 room = "2.5.1"
 kotlinxSerialization = "1.5.0"
 kotlinxDatetime = "0.4.0"
-kotlinxRetrofit = "0.8.0"
+kotlinxRetrofit = "1.0.0"
 
 [libraries]
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
