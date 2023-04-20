@@ -230,8 +230,8 @@
     <string name="channel_name_za">채널 이름 (Z-A)</string>
     <string name="channel_name_az">채널 이름 (A-Z)</string>
     <string name="notifications">알림</string>
-    <string name="notify_new_streams">새 스트림에 대한 알림</string>
-    <string name="notify_new_streams_summary">팔로우하는 크리에이터의 새로운 콘텐츠에 대한 알림입니다.</string>
+    <string name="notify_new_streams">새 스트림에 대한 알림 표시</string>
+    <string name="notify_new_streams_summary">팔로우하는 크리에이터의 새 스트림에 대한 알림을 표시합니다.</string>
     <string name="checking_frequency">모든 검사 중…</string>
     <string name="new_streams_count">사용 가능한 새 스트림 %1$s개</string>
     <string name="new_streams_by">%1$s의 새 스트림…</string>
@@ -325,7 +325,7 @@
     <string name="playlistCloned">재생 목록 복제</string>
     <string name="confirm_unsubscribing">구독 취소 확인</string>
     <string name="playing_queue">대기열 재생</string>
-    <string name="notification_time_summary">알림을 표시할 수 있는 시간 범위.</string>
+    <string name="notification_time_summary">스트림 알림이 표시되는 시간 범위를 제한합니다.</string>
     <string name="start_time">시작 시간</string>
     <string name="time">시간</string>
     <string name="local_subscriptions">로컬 구독</string>
@@ -337,7 +337,7 @@
     <string name="preferences">선호</string>
     <string name="default_load_interval">기본값</string>
     <string name="layout">레이아웃</string>
-    <string name="notification_time">대체 시간</string>
+    <string name="notification_time">알림 시간 제한</string>
     <string name="end_time">종료 시간</string>
     <string name="confirm_unsubscribing_summary">구독을 취소하기 전에 확인 대화 상자를 표시합니다.</string>
     <string name="confirm_unsubscribe">정말 구독을 취소하시겠습니까%1$s\?</string>
@@ -471,4 +471,17 @@
     <string name="disable_proxy">Piped 프록시 비활성화</string>
     <string name="disable_proxy_summary">YouTube 서버에서 직접 비디오와 이미지를 로드합니다. 어쨌든 VPN을 사용하는 경우에만 옵션을 활성화하십시오! YT 음악 콘텐츠에서는 작동하지 않을 수 있습니다.</string>
     <string name="auto_fullscreen_shorts">짧은 동영상의 자동 전체 화면</string>
+    <string name="fullscreen_gestures">전체 화면 제스처로 들어가기/나오기</string>
+    <string name="play_automatically">자동 재생</string>
+    <plurals name="channel_new_streams">
+        <item quantity="other">%d 새 스트림</item>
+    </plurals>
+    <string name="channel_groups">채널 그룹</string>
+    <string name="group_name">그룹명</string>
+    <string name="edit_group">그룹 편집</string>
+    <string name="new_group">새로 만들기</string>
+    <string name="go_to_video">비디오로 이동</string>
+    <string name="show_stream_thumbnails_summary">새 스트림의 미리 보기를 표시합니다. 이 옵션을 활성화하면 추가 데이터가 사용됩니다.</string>
+    <string name="show_stream_thumbnails">스트림 미리 보기 표시</string>
+    <string name="play_automatically_summary">선택 시 자동으로 비디오 재생 시작</string>
 </resources>
