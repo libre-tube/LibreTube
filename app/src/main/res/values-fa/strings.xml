@@ -335,4 +335,12 @@
     <string name="resume">از سر گیری</string>
     <string name="pause">مکث</string>
     <string name="category_preview_description">برای بخش‌هایی که نشان‌دهنده‌ی محتوای زودآینده در این ویدئو یا ویدئوهای بعدی در سری آن هستند، اما اطلاعات اضافه‌ای فراهم نمی‌کنند. اگر شامل کلیپ هایی باشد که فقط در اینجا ظاهر می شوند، به احتمال زیاد این دسته بندی اشتباه است.</string>
+    <string name="deleteAccount_summary">حساب پایپد خود را حذف کنید</string>
+    <string name="network_wifi">فقط در وای فای</string>
+    <string name="playingOnBackground">درحال پخش در پس‌زمینه…</string>
+    <string name="download_paused">بارگیری متوقف شد</string>
+    <string name="download_completed">بارگیری کامل شد</string>
+    <string name="require_restart">راه‌اندازی مجدد برنامه نیاز است</string>
+    <string name="channel_name_az">نام کانال (A-Z)</string>
+    <string name="channel_name_za">نام کانال (Z-A)</string>
 </resources>
