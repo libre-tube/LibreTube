@@ -45,6 +45,7 @@ import java.nio.file.StandardOpenOption
 import java.util.concurrent.Executors
 import kotlin.io.path.absolute
 import kotlin.io.path.createFile
+import kotlin.io.path.deleteIfExists
 import kotlin.io.path.fileSize
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
@@ -103,7 +104,6 @@ class DownloadService : LifecycleService() {
                 }
 
                 val thumbnailTargetPath = getDownloadPath(DownloadHelper.THUMBNAIL_DIR, fileName)
-                    .absolute()
 
                 val download = Download(
                     videoId,
@@ -147,7 +147,7 @@ class DownloadService : LifecycleService() {
             FileType.AUDIO -> getDownloadPath(DownloadHelper.AUDIO_DIR, item.fileName)
             FileType.VIDEO -> getDownloadPath(DownloadHelper.VIDEO_DIR, item.fileName)
             FileType.SUBTITLE -> getDownloadPath(DownloadHelper.SUBTITLE_DIR, item.fileName)
-        }.createFile().absolute()
+        }.apply { deleteIfExists() }.createFile()
 
         lifecycleScope.launch(coroutineContext) {
             item.id = Database.downloadDao().insertDownloadItem(item).toInt()
@@ -440,7 +440,7 @@ class DownloadService : LifecycleService() {
      * Get a [File] from the corresponding download directory and the file name
      */
     private fun getDownloadPath(directory: String, fileName: String): Path {
-        return DownloadHelper.getDownloadDir(this, directory).resolve(fileName)
+        return DownloadHelper.getDownloadDir(this, directory).resolve(fileName).absolute()
     }
 
     override fun onDestroy() {
