@@ -161,7 +161,7 @@
     <string name="clear_customInstances">清除已添加</string>
     <string name="invalid_url">请输入有效的URL</string>
     <string name="related_streams">相关内容</string>
-    <string name="related_streams_summary">在您观看的内容旁边显示相似音视频流。</string>
+    <string name="related_streams_summary">在您观看的内容旁边显示相似的影音流。</string>
     <string name="customInstance_summary">添加…</string>
     <string name="instance_name">实例名称</string>
     <string name="version">版本 %1$s</string>
@@ -254,12 +254,12 @@
     <string name="default_subtitle_language">字幕语言</string>
     <string name="irreversible">你确定吗？此操作无法撤销！</string>
     <string name="history_empty">尚无历史记录。</string>
-    <string name="notify_new_streams_summary">你关注的创作者发布新内容时进行通知。</string>
+    <string name="notify_new_streams_summary">当你关注的创作者发布新的影音流时显示通知。</string>
     <string name="checking_frequency">检查频率…</string>
     <string name="notifications">通知</string>
-    <string name="new_streams_count">%1$s 个新音视频流可用</string>
-    <string name="notify_new_streams">新音视频流通知</string>
-    <string name="new_streams_by">%1$s 的新音视频流…</string>
+    <string name="new_streams_count">%1$s 个新影音流可用</string>
+    <string name="notify_new_streams">显示新影音流的通知</string>
+    <string name="new_streams_by">%1$s 的新影音流…</string>
     <string name="least_recent">最久前发布</string>
     <string name="most_views">最多观看</string>
     <string name="least_views">最少观看</string>
@@ -314,7 +314,7 @@
     <string name="wifi">Wi-Fi</string>
     <string name="new_videos_badge">新视频指示器</string>
     <string name="new_videos_badge_summary">显示新视频数量徽标。</string>
-    <string name="push_channel_description">有新音视频内容时显示通知。</string>
+    <string name="push_channel_description">新影音流可用时显示通知。</string>
     <string name="skip_segment">跳过片段</string>
     <string name="sb_skip_manual">手动跳过</string>
     <string name="sb_skip_manual_summary">跳过片段前始终先提示。</string>
@@ -361,8 +361,8 @@
     <string name="time">时间</string>
     <string name="start_time">开始时间</string>
     <string name="end_time">结束时间</string>
-    <string name="notification_time">通知时间</string>
-    <string name="notification_time_summary">允许显示通知的时间跨度。</string>
+    <string name="notification_time">限制通知时间</string>
+    <string name="notification_time_summary">限制显示影音流通知的时间范围。</string>
     <string name="navbar_order">顺序</string>
     <string name="layout">布局</string>
     <string name="alternative_player_layout">备选的播放器布局</string>
@@ -469,4 +469,19 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d 个视频</string>
     <string name="subscriberAndVideoCounts">%1$s 订阅者 • %2$d 个视频</string>
     <string name="show_stream_thumbnails">显示缩略图</string>
+    <string name="fullscreen_gestures">进入/退出全屏的手势</string>
+    <string name="disable_proxy_summary">直接从 YouTube 服务器加载视频与图像。无论如何请仅在使用 VPN 时启用本选项。注意本选项可能不适用于 YouTube Music 内容。</string>
+    <string name="show_stream_thumbnails_summary">显示新影音流的缩略图。启用此选项会产生额外数据消耗。</string>
+    <string name="disable_proxy">禁用 Piped 代理</string>
+    <string name="go_to_video">转到视频</string>
+    <plurals name="channel_new_streams">
+        <item quantity="other">%d 个新影音流</item>
+    </plurals>
+    <string name="channel_groups">频道组</string>
+    <string name="new_group">新建</string>
+    <string name="group_name">频道组名称</string>
+    <string name="edit_group">编辑频道组</string>
+    <string name="play_automatically">自动播放</string>
+    <string name="play_automatically_summary">选择视频时自动开始播放</string>
+    <string name="auto_fullscreen_shorts">观看短视频时自动全屏</string>
 </resources>
