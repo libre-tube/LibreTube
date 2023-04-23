@@ -52,10 +52,10 @@ class CreatePlaylistDialog(
 
         binding.createNewPlaylist.setOnClickListener {
             val appContext = context?.applicationContext
-            // avoid creating the same playlist multiple times by spamming the button
-            binding.createNewPlaylist.setOnClickListener(null)
             val listName = binding.playlistName.text?.toString()
             if (!listName.isNullOrEmpty()) {
+                // avoid creating the same playlist multiple times by spamming the button
+                binding.createNewPlaylist.setOnClickListener(null)
                 lifecycleScope.launch {
                     requireDialog().hide()
                     val playlistId = withContext(Dispatchers.IO) {
