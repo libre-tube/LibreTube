@@ -103,7 +103,7 @@
     <string name="emptyPlaylistName">ପ୍ଲେଲିଷ୍ଟ ନାମ ଖାଲି ରହିପାରିବ ନାହିଁ</string>
     <string name="systemLanguage">ସିଷ୍ଟମ୍</string>
     <string name="darkTheme">ଅନ୍ଧାର</string>
-    <string name="about">ବିଷୟରେ</string>
+    <string name="about">ଵିଷୟରେ</string>
     <string name="subscribers">%1$sସଦସ୍ୟତା ଲୋକମାନେ</string>
     <string name="addToPlaylist">ପ୍ଲେଲିଷ୍ଟ ରେ ଯୋଡ଼ନ୍ତୁ</string>
     <string name="lightTheme">ଉଜ୍ଜଳ</string>
@@ -134,7 +134,7 @@
     <string name="downloads">ଡାଉନଲୋଡ୍</string>
     <string name="update">ନୂଆ ବର୍ଶନ ପାଇଁ ଦେଖ</string>
     <string name="no_update_available">ଆପଣ ସର୍ବଶେଷ ସଂସ୍କରଣ ଚଳାଉଛନ୍ତି ।</string>
-    <string name="player">ପ୍ଲେୟାର</string>
+    <string name="player">ଚାଳକ</string>
     <string name="appearance_summary">ଆପକୁ ନିଜ ଇଚ୍ଛାରେ ଆଡଜଷ୍ଟ କରନ୍ତୁ ।</string>
     <string name="about_summary">ଦଳ LibreTube ଏବଂ ଏହା କିପରି ଘଟେ ଜାଣିବା ।</string>
     <string name="hide_chapters">ଅଧ୍ୟାୟଗୁଡିକ ଲୁଚାନ୍ତୁ</string>
@@ -148,7 +148,7 @@
     <string name="update_summary">ଅପଡେଟ ପାଇଁ ଚେକ୍ କର</string>
     <string name="app_uptodate">ସର୍ବଶେଷ ସଂସ୍କରଣ ଚାଲୁଅଛି ।</string>
     <string name="playback_speed">ପ୍ଲେବେକ୍ ବେଗ</string>
-    <string name="advanced">ଉନ୍ନତ</string>
+    <string name="advanced">ଵିକଶିତ</string>
     <string name="advanced_summary">ଡାଉନଲୋଡ୍ ଆଉ ରିସେଟ୍</string>
     <string name="live">ସିଧା ପ୍ରସାରଣ</string>
     <string name="no_replies">ଏହି ମନ୍ତବ୍ୟର କୌଣସି ଉତ୍ତର ନାହିଁ ।</string>
@@ -172,12 +172,12 @@
     <string name="related_streams_summary">ଆପଣ ଯାହା ଦେଖୁଛନ୍ତି ତାହା ସହିତ ସମାନ ଷ୍ଟ୍ରିମ୍ ଦେଖାନ୍ତୁ ।</string>
     <string name="show_chapters">ଅଧ୍ୟାୟଗୁଡିକ ଦେଖାନ୍ତୁ</string>
     <string name="buffering_goal">ପ୍ରିଲୋଡିଂ</string>
-    <string name="playerVideoFormat">ପ୍ଲେୟାର ପାଇଁ ଭିଡିଓ ଫର୍ମାଟ୍</string>
+    <string name="playerVideoFormat">ଚାଳକ ନିମନ୍ତେ ଵିଡ଼ିଓ ଫର୍ମାଟ୍</string>
     <string name="no_audio">ସ୍ୱର ନାହିଁ</string>
     <string name="no_video">ଭିଡିଓ ନାହିଁ</string>
     <string name="audio">ସ୍ୱର</string>
     <string name="downloading">ଡାଉନଲୋଡ୍ ହେଉଛି …</string>
-    <string name="player_autoplay">ସ୍ଵତଃ ଚଳିତ</string>
+    <string name="player_autoplay">ସ୍ୱତଃଚାଳନ</string>
     <string name="hideTrendingPage">ଟ୍ରେଣ୍ଡିଂ ପୃଷ୍ଠା ଲୁଚାନ୍ତୁ</string>
     <string name="instance_frontend_url">ଫ୍ରଣ୍ଟେଣ୍ଡ୍ ପାଇଁ URL</string>
     <string name="player_summary">ଡିଫଲ୍ଟ ଏବଂ ଆଚରଣ</string>
@@ -299,9 +299,9 @@
     <string name="require_restart_message">ନୂତନ ପରିବର୍ତ୍ତନଗୁଡିକ ବ୍ୟବହାର କରିବାକୁ ଆପ୍ ପୁନଃଆରମ୍ଭ କରନ୍ତୁ ।</string>
     <string name="playerAudioQuality">ସ୍ୱର ଗୁଣବତ୍ତା</string>
     <string name="navLabelVisibility">ଲେବଲ୍ ଦୃଶ୍ୟମାନତା</string>
-    <string name="autoRotatePlayer">ସ୍ଵତଃ-ଫୁଲ୍ ସ୍କ୍ରିନ୍</string>
+    <string name="autoRotatePlayer">ସ୍ୱତଃ-ପୂର୍ଣ୍ଣସ୍କ୍ରୀନ୍</string>
     <string name="search_history_summary">ସନ୍ଧାନଗୁଡିକ ମନେରଖ</string>
-    <string name="no_player_found">କୌଣସି ବାହ୍ୟ ଖେଳାଳି ମିଳିଲା ନାହିଁ । ଦୟାକରି ନିଶ୍ଚିତ କରନ୍ତୁ ଯେ ଆପଣଙ୍କର ଗୋଟିଏ ସଂସ୍ଥାପିତ ହୋଇଛି ।</string>
+    <string name="no_player_found">କୌଣସି ବହିଃ-ଚାଳକ ମିଳିଲା ନାହିଁ। ଦୟାକରି ନିଶ୍ଚିତ କରନ୍ତୁ ଯେ ଆପଣଙ୍କର ଗୋଟିଏ ଚାଳକ ଅଧିସ୍ଥାପିତ ହୋଇଅଛି।</string>
     <string name="data_saver_mode">ଡାଟା-ସେଭର୍ ସ୍ଥିତି</string>
     <string name="data_saver_mode_summary">ଥମ୍ବନେଲ ଏବଂ ଅନ୍ୟାନ୍ୟ ପ୍ରତିଛବିଗୁଡ଼ିକୁ ଏଡ଼ାଇଦିଅ ।</string>
     <string name="watch_positions_title">ପ୍ଲେବ୍ୟାକ୍ ସ୍ଥିତିକୁ ମନେରଖ</string>
@@ -310,7 +310,7 @@
     <string name="captions">କ୍ୟାପସନ୍</string>
     <string name="seekbar_preview_summary">ପ୍ଲେବ୍ୟାକ୍ ସୂଚକକୁ ଟାଣିବାବେଳେ ଏକ ସ୍ନାପସଟ୍ ଦେଖାନ୍ତୁ ।</string>
     <string name="downloading_apk">APK ଡାଉନଲୋଡ ହେଉଛି…</string>
-    <string name="playerAudioFormat">ପ୍ଲେୟାର ପାଇଁ ଅଡିଓ ଫର୍ମାଟ୍</string>
+    <string name="playerAudioFormat">ଚାଳକ ନିମନ୍ତେ ଅଡ଼ିଓ ଫର୍ମାଟ୍</string>
     <string name="best_quality">ସର୍ବତ୍ତମ</string>
     <string name="worst_quality">ସବୁଠାରୁ ଖରାପ</string>
     <string name="notify_new_streams_summary">ଆପଣ ଅନୁସରଣ କରୁଥିବା ସୃଷ୍ଟିକର୍ତ୍ତାଙ୍କ ଠାରୁ ନୂତନ ଷ୍ଟ୍ରିମ୍ ପାଇଁ ବିଜ୍ଞପ୍ତି ପ୍ରଦର୍ଶନ କରନ୍ତୁ ।</string>
