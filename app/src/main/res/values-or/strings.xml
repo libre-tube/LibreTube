@@ -4,8 +4,8 @@
     <string name="library">ପାଠାଗାର</string>
     <string name="yes">ହଁ</string>
     <string name="choose_quality_dialog">ଗୁଣବତ୍ତା</string>
-    <string name="videos">ଭିଡିଓ</string>
-    <string name="subscribe">ସଦସ୍ୟତା ଯୋଡ଼ନ୍ତୁ</string>
+    <string name="videos">ଵିଡ଼ିଓ</string>
+    <string name="subscribe">ସଦସ୍ୟତା ଯୋଡ଼ନ୍ତୁ</string>
     <string name="share">ଅଂଶୀଦାର</string>
     <string name="download">ଡାଉନଲୋଡ୍</string>
     <string name="save">ତାଲିକା ରେ ଯୋଡ଼ନ୍ତୁ</string>
@@ -104,7 +104,7 @@
     <string name="systemLanguage">ସିଷ୍ଟମ୍</string>
     <string name="darkTheme">ଅନ୍ଧାର</string>
     <string name="about">ଵିଷୟରେ</string>
-    <string name="subscribers">%1$sସଦସ୍ୟତା ଲୋକମାନେ</string>
+    <string name="subscribers">%1$s ଜଣ ସଦସ୍ଯ</string>
     <string name="addToPlaylist">ପ୍ଲେଲିଷ୍ଟ ରେ ଯୋଡ଼ନ୍ତୁ</string>
     <string name="lightTheme">ଉଜ୍ଜଳ</string>
     <string name="success">ହୋଇଗଲା ।</string>
@@ -116,7 +116,7 @@
     <string name="clear_history">ଇତିହାସ ଖାଲି କରନ୍ତୁ</string>
     <string name="history">ଇତିହାସ</string>
     <string name="defaultTab">ଡିଫଲ୍ଟ ଟେବ</string>
-    <string name="sponsorblock_summary">ଏହା ବ୍ୟବହାର କରେ https://sponsor.ajay.app</string>
+    <string name="sponsorblock_summary">ଏହା https://sponsor.ajay.app API ଵ୍ୟଵହାର କରେ</string>
     <string name="category_intro">ଅନ୍ତରାଳ</string>
     <string name="category_intro_description">ପ୍ରକୃତ ବିଷୟବସ୍ତୁ ବିନା ଏକ ବ୍ୟବଧାନ । ଏକ ବିରାମ, ଷ୍ଟାଟିକ୍ ଫ୍ରେମ୍, ପୁନରାବୃତ୍ତି ଆନିମେସନ୍ ହୋଇପାରେ । ସୂଚନା ଧାରଣ କରିଥିବା ସ୍ଥାନାନ୍ତରଣ ପାଇଁ ବ୍ୟବହୃତ ହେବା ଉଚିତ୍ ନୁହେଁ ।</string>
     <string name="category_sponsor">ପ୍ରଯୋଜକ</string>
@@ -180,7 +180,7 @@
     <string name="player_autoplay">ସ୍ୱତଃଚାଳନ</string>
     <string name="hideTrendingPage">ଟ୍ରେଣ୍ଡିଂ ପୃଷ୍ଠା ଲୁଚାନ୍ତୁ</string>
     <string name="instance_frontend_url">ଫ୍ରଣ୍ଟେଣ୍ଡ୍ ପାଇଁ URL</string>
-    <string name="player_summary">ଡିଫଲ୍ଟ ଏବଂ ଆଚରଣ</string>
+    <string name="player_summary">ଡିଫଲ୍ଟ ଓ ଆଚରଣ</string>
     <string name="seek_increment">ବୃଦ୍ଧି ଖୋଜ</string>
     <string name="pauseOnScreenOff">ସ୍ଵତଃ-ବିରାମ</string>
     <string name="autoplay_summary">ସାମ୍ପ୍ରତିକ ଭିଡିଓ ପରେ ପରବର୍ତ୍ତୀ ଭିଡିଓକୁ ସ୍ଵତଃ-ଚଲାନ୍ତୁ ।</string>
@@ -342,7 +342,7 @@
     <string name="add_to_queue">ଧାଡିରେ ଯୋଡନ୍ତୁ</string>
     <string name="picture_in_picture">ଛବିରେ ଛବି</string>
     <string name="backup_restore">ନକଲ ଓ ସଂରକ୍ଷଣ</string>
-    <string name="subscriptions">ସଦସ୍ୟତା ଗୁଡ଼ିକ</string>
+    <string name="subscriptions">ସଦସ୍ୟତା</string>
     <string name="livestreams">ସିଧପ୍ରସାରଣ ଷ୍ଟ୍ରୀମ ଗୁଡ଼ିକ</string>
     <string name="alternative_videos_layout">ବିକଳ୍ପ ଭିଡିଓ ଲେଆଉଟ୍</string>
     <string name="defaultIconLight">ଡିଫଲ୍ଟ ଉଜ୍ଜଳ</string>
