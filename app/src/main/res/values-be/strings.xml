@@ -427,12 +427,6 @@
     <string name="codecs">Кодэкі</string>
     <string name="mark_as_watched">Пазначыць як прагледжанае</string>
     <string name="custom_playback_speed">Карыстальніцкая хуткасць</string>
-    <plurals name="weeks_ago">
-        <item quantity="one">%d тыдзень таму</item>
-        <item quantity="few">%d тыдні таму</item>
-        <item quantity="many">%d тыдняў таму</item>
-        <item quantity="other">%d тыдняў таму</item>
-    </plurals>
     <string name="alternative_pip_controls">Альтэрнатыўныя элементы кіравання PiP</string>
     <string name="alternative_pip_controls_summary">Паказваць толькі аўдыя і прапускаць элементы кіравання ў PiP замест перамоткі наперад і назад</string>
     <string name="custom_playback_speed_summary">Выкарыстоўвайце іншую хуткасць прайгравання, чым для звычайнага прайгравальніка.</string>

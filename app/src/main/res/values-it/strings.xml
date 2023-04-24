@@ -460,11 +460,6 @@
         <item quantity="many">%d mesi fa</item>
         <item quantity="other">%d mesi fa</item>
     </plurals>
-    <plurals name="weeks_ago">
-        <item quantity="one">%d settimana fa</item>
-        <item quantity="many">%d settimane fa</item>
-        <item quantity="other">%d settimane fa</item>
-    </plurals>
     <plurals name="years_ago">
         <item quantity="one">%d anno fa</item>
         <item quantity="many">%d anni fa</item>

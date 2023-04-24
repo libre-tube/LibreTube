@@ -460,11 +460,6 @@
         <item quantity="many">%d meses atrás</item>
         <item quantity="other">%d meses atrás</item>
     </plurals>
-    <plurals name="weeks_ago">
-        <item quantity="one">%d semana atrás</item>
-        <item quantity="many">%d semanas atrás</item>
-        <item quantity="other">%d semanas atrás</item>
-    </plurals>
     <plurals name="years_ago">
         <item quantity="one">%d ano atrás</item>
         <item quantity="many">%d anos atrás</item>

@@ -465,10 +465,6 @@
         <item quantity="one">%d महिन्यापूर्वी</item>
         <item quantity="other">%d महिन्यांपूर्वी</item>
     </plurals>
-    <plurals name="weeks_ago">
-        <item quantity="one">%d आठवड्यापूर्वी</item>
-        <item quantity="other">%d आठवड्यांपूर्वी</item>
-    </plurals>
     <plurals name="years_ago">
         <item quantity="one">%d वर्षापूर्वी</item>
         <item quantity="other">%d वर्षांपूर्वी</item>

@@ -327,10 +327,6 @@
     <string name="appearance_summary">تنظیم کاره به سلیقه‌تان.</string>
     <string name="no_replies">این نظر پاسخی ندارد.</string>
     <string name="privacy_alert">هشدار محرمانگی</string>
-    <plurals name="weeks_ago">
-        <item quantity="one">%d هفته پیش</item>
-        <item quantity="other">%d هفته پیش</item>
-    </plurals>
     <string name="codecs">رمزینه‌ها</string>
     <string name="resume">از سر گیری</string>
     <string name="pause">مکث</string>

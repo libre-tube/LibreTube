@@ -461,12 +461,6 @@
         <item quantity="many">לפני %d חודשים</item>
         <item quantity="other"/>
     </plurals>
-    <plurals name="weeks_ago">
-        <item quantity="one">לפני שבוע</item>
-        <item quantity="two">לפני שבועיים</item>
-        <item quantity="many">לפני %d שבועות</item>
-        <item quantity="other"/>
-    </plurals>
     <plurals name="years_ago">
         <item quantity="one">לפני שנה</item>
         <item quantity="two">לפני שנתיים</item>

@@ -458,9 +458,6 @@
     <plurals name="months_ago">
         <item quantity="other">%d bulan yang lalu</item>
     </plurals>
-    <plurals name="weeks_ago">
-        <item quantity="other">%d minggu yang lalu</item>
-    </plurals>
     <plurals name="years_ago">
         <item quantity="other">%d tahun yang lalu</item>
     </plurals>

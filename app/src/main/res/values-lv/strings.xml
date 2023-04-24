@@ -445,11 +445,6 @@
         <item quantity="one">pirms %d gada</item>
         <item quantity="other">pirms %d gadiem</item>
     </plurals>
-    <plurals name="weeks_ago">
-        <item quantity="zero">pirms %d nedēļām</item>
-        <item quantity="one">pirms %d nedēļas</item>
-        <item quantity="other">pirms %d nedēļām</item>
-    </plurals>
     <string name="concurrent_downloads_limit_reached">Sasniegts vienlaikus atļauto lejuipelāžu skaits.</string>
     <string name="resume">Atsākt</string>
     <string name="concurrent_downloads">Vienlaikus atļautās lejupielādes</string>

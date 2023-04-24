@@ -463,9 +463,6 @@
     <plurals name="months_ago">
         <item quantity="other">%d개월 전</item>
     </plurals>
-    <plurals name="weeks_ago">
-        <item quantity="other">%d주 전</item>
-    </plurals>
     <string name="resume">재개하다</string>
     <string name="forward">빨리 감기</string>
     <string name="disable_proxy">Piped 프록시 비활성화</string>
