@@ -8,7 +8,6 @@
     <string name="password">Parole</string>
     <string name="cannotDownload">Nevar lejupielādēt.</string>
     <string name="import_from_yt_summary">No YouTube vai NewPipe</string>
-    <string name="vlcerror">Nevarēja atvērt caur VLC. Iespējams, tas nav ieinstalēts.</string>
     <string name="unknown_error">Tīkla kļūda.</string>
     <string name="downloadfailed">Lejupielāde neizdevās.</string>
     <string name="defres">Video izšķirtspēja</string>
@@ -35,10 +34,6 @@
     <string name="instances">Izvēlēties…</string>
     <string name="customInstance">Cita</string>
     <string name="loggedIn">Jūs esat pierakstījies.</string>
-    <string name="login_first">Lūdzu pierakstieties un mēģiniet vēlreiz.</string>
-    <string name="please_login">Vispirms pierakstieties vai reģistrējieties iestatījumos.</string>
-    <string name="dlcomplete">Lejupielāde pabeigta.</string>
-    <string name="vlc">Atvērt ar VLC</string>
     <string name="import_from_yt">Importēt abonementus</string>
     <string name="app_theme">Motīvs</string>
     <string name="error">Kaut kas nogāja greizi.</string>
@@ -56,8 +51,6 @@
     <string name="systemLanguage">Sistēmas noklusējums</string>
     <string name="systemDefault">Sistēmas noklusējums</string>
     <string name="subscribers">%1$s abonenti</string>
-    <string name="choose_quality_dialog">Kvalitāte</string>
-    <string name="subscribeIsEmpty">Vispirms abonējiet dažus kanālus.</string>
     <string name="success">Izdarīts.</string>
     <string name="darkTheme">Tumšs</string>
     <string name="lightTheme">Gaišs</string>
@@ -69,7 +62,6 @@
     <string name="videoCount">%1$d videoklipi</string>
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">Izmanto API no https://sponsor.ajay.app/</string>
-    <string name="choose_filter">Izvēlēties meklēšanas filtru</string>
     <string name="channels">Kanāli</string>
     <string name="all">Viss</string>
     <string name="playlists">Atskaņošanas saraksti</string>
@@ -82,7 +74,6 @@
     <string name="music_videos">YT Music video</string>
     <string name="music_albums">YT Music albumi</string>
     <string name="music_playlists">YT Music atskaņošanas saraksti</string>
-    <string name="defaultTab">Noklusējuma cilne</string>
     <string name="category_segments">Segmenti</string>
     <string name="category_sponsor">Sponsors</string>
     <string name="category_interaction">Darbības atgādinājums (spiest \"Patīk\" un abonēt)</string>
@@ -90,7 +81,6 @@
     <string name="category_intro">Pārtraukums/intro animācija</string>
     <string name="category_outro_description">Šeit ietilpst viss pēc video beigām. Secinājumi ar informāciju neskaitās.</string>
     <string name="segment_skipped">Izlaida segmentu</string>
-    <string name="sponsorblock_state">Ieslēgts</string>
     <string name="category_sponsor_description">Šeit ietilpst apmaksātas un tiešas reklāmas. Pašreklāmas un neapmaksātas ziņas neskaitās.</string>
     <string name="category_selfpromo_description">Šeit ietilpst neapmaksātas ziņas un pašreklāmas, tai skaitā dažādi ziņojumi par paša precēm vai ziedojumiem, kā arī informācija par to, ar ko viņi sadarbojās.</string>
     <string name="license">Licence</string>
@@ -100,7 +90,6 @@
     <string name="color_yellow">Dzeltens</string>
     <string name="color_green">Zaļš</string>
     <string name="color_purple">Violets</string>
-    <string name="oledTheme">Melns</string>
     <string name="material_you">Material You</string>
     <string name="category_outro">Beigu ekrāns un titri</string>
     <string name="category_intro_description">Šeit ietilpst brīži bez reāla satura, piemēram, pārtraukumi, statisks kadri, atkārtotas animācijas. Brīži, kuros ietilpst kaut kāda informācija, neskaitās.</string>
@@ -116,18 +105,7 @@
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Atskaņot fonā</string>
-    <string name="no_replies">Šim komentāram nav atbilžu.</string>
-    <string name="authors">Autori</string>
-    <string name="download_folder_summary">Nosaukums mapei, kurā tiek saglabāti lejupielādētie faili.</string>
-    <string name="download_directory">Lejupielādēt uz</string>
-    <string name="download_folder">Nosaukums</string>
-    <string name="internal_storage">Iekšējā atmiņa</string>
-    <string name="downloads_directory">Lejupielāžu mape</string>
-    <string name="sdcard">SD karte</string>
-    <string name="music_directory">Mūzikas mape</string>
-    <string name="movies_directory">Filmu mape</string>
     <string name="shareTo">Kopīgot URL ar</string>
-    <string name="download_directory_summary">Atrašanās vieta, kur tiek saglabāti lejupielādētie faili.</string>
     <string name="defaultIcon">Noklusējuma</string>
     <string name="gradientIcon">Gradienta</string>
     <string name="fireIcon">Uguns</string>
@@ -139,16 +117,9 @@
     <string name="update_available">%1$s versija ir pieejama</string>
     <string name="update_available_text">Ir pieejams jauns atjauninājums. Noklikšķiniet, lai atvērtu GitHub laidienu lapu.</string>
     <string name="appearance">Izskats</string>
-    <string name="app_behavior">Uzvedība</string>
     <string name="downloads">Lejupielādes</string>
-    <string name="video_format">Video formāts</string>
-    <string name="video_format_summary">Formāts, uz kuru tiek pārvērsti faili, ja tiek lejupielādēts gan video, gan audio.</string>
-    <string name="contributing">Ieguldīšana</string>
-    <string name="donate">Ziedot</string>
     <string name="update_summary">Pārbaudīt, vai ir pieejams atjauninājums</string>
-    <string name="update">Gaidiet jauno versiju</string>
     <string name="app_uptodate">Šī ir jaunākā versija.</string>
-    <string name="no_update_available">Šī ir jaunākā versija.</string>
     <string name="advanced">Tehniski</string>
     <string name="player">Atskaņotājs</string>
     <string name="appearance_summary">Pielāgojiet aplikāciju tā, kā jūs to vēlaties.</string>
@@ -159,8 +130,6 @@
     <string name="empty_instance">Ierakstiet nosaukumu un API URL.</string>
     <string name="clear_customInstances">Noņemt pievienotās</string>
     <string name="invalid_url">Lūdzu ievadiet derīgu URL</string>
-    <string name="show_chapters">Rādīt nodaļas</string>
-    <string name="hide_chapters">Paslēpt nodaļas</string>
     <string name="category_filler_description">Šeit ietilpst brīži, kuros veidotājs novēršas no video tēmas vai kuros ir iekļauti joki, kas nav svarīgi, lai saprastu video galveno saturu.</string>
     <string name="category_filler">Novēršanās no tēmas/joki</string>
     <string name="category_music_offtopic">Mūzika: brīži bez mūzikas</string>
@@ -171,7 +140,6 @@
     <string name="instance_api_url">Instances API URL</string>
     <string name="addInstance">Pievienot instanci</string>
     <string name="version">Versija %1$s</string>
-    <string name="about_summary">Iepazīstieties ar visiem, kas ir iesaistīti aplikācijas veidošanā un uzlabošanā.</string>
     <string name="related_streams">Saistīts saturs</string>
     <string name="related_streams_summary">Rādīt līdzīgu saturu blakus tam, ko jūs skatāties.</string>
     <string name="buffering_goal">Iepriekš ielādēt</string>
@@ -186,7 +154,6 @@
     <string name="audio">Audio</string>
     <string name="video">Video</string>
     <string name="downloading">Lejupielādē…</string>
-    <string name="hideTrendingPage">Paslēpt tendenču lapu</string>
     <string name="instance_frontend_url">URL instances frontend</string>
     <string name="quality">Kvalitāte</string>
     <string name="behavior">Uzvedība</string>
@@ -207,12 +174,10 @@
     <string name="require_restart">Nepieciešams restartēt aplikāciju</string>
     <string name="require_restart_message">Restartējiet aplikāciju, lai veiktu jaunās izmaiņas.</string>
     <string name="auth_instance">Autentificētā instance</string>
-    <string name="change_playback_speed">Atskaņošanas ātrums</string>
     <string name="watch_positions">Atcerēties skatīšanās vietu</string>
     <string name="watch_positions_summary">Atcerēties vietu, kurā pārtraucāt skatīties video, un automātiski uz to aiztīt.</string>
     <string name="auth_instance_summary">Lietojiet citu instanci priekš autentificētiem pieprasījumiem.</string>
     <string name="auth_instances">Izvēlēties autentificēto instanci</string>
-    <string name="hls">HLS</string>
     <string name="github">GitHub</string>
     <string name="aspect_ratio">Video malu attiecība</string>
     <string name="auto_rotation">Noteikt no ierīces orientācijas</string>
@@ -220,7 +185,6 @@
     <string name="fullscreen_orientation">Pilnekrāna orientācija</string>
     <string name="landscape">Horizontāla</string>
     <string name="portrait">Vertikāla</string>
-    <string name="community">Kopiena</string>
     <string name="navLabelVisibility">Rādīt tekstu navigācijas panelī</string>
     <string name="always">Vienmēr</string>
     <string name="never">Nekad</string>
@@ -237,8 +201,6 @@
     <string name="none">Nav</string>
     <string name="general">Vispārēji</string>
     <string name="general_summary">Valoda un reģions</string>
-    <string name="seekbar_preview">Video priekšskatījums</string>
-    <string name="seekbar_preview_summary">Priekšskatīt video kamēr tas tiek patīts, izmantojot meklēšanas joslu.</string>
     <string name="data_saver_mode">Datu taupīšanas režīms</string>
     <string name="selected">Izvēlēts</string>
     <string name="autoRotatePlayer">Automātiski pāriet pilnekrāna režīmā</string>
@@ -246,7 +208,6 @@
     <string name="system_caption_style">Sistēmas subtitru dizains</string>
     <string name="playingOnBackground">Atskaņo fonā…</string>
     <string name="caption_settings">Subtitri</string>
-    <string name="downloading_apk">Lejupielādē APK…</string>
     <string name="playerAudioQuality">Audio kvalitāte</string>
     <string name="worst_quality">Sliktākā</string>
     <string name="playerAudioFormat">Atskaņotāja audio formāts</string>
@@ -255,15 +216,12 @@
     <string name="notifications">Notifikācijas</string>
     <string name="notify_new_streams">Notifikācijas jaunam saturam</string>
     <string name="notify_new_streams_summary">Sūtīt notifikācijas par jaunu saturu no veidotājiem, kuriem jūs sekojat.</string>
-    <string name="new_streams_count">Pieejami %1$s jauni vienumi</string>
-    <string name="new_streams_by">Jauns saturs no %1$s…</string>
     <string name="irreversible">Vai esat pārliecināts\? Šī darbība ir neatgriezeniska.</string>
     <string name="most_recent">Jaunākie</string>
     <string name="least_recent">Senākie</string>
     <string name="most_views">Skatītākie</string>
     <string name="channel_name_az">Kanāla nosaukums (A-Z)</string>
     <string name="channel_name_za">Kanāla nosaukums (Z-A)</string>
-    <string name="sort">Filtrēšana</string>
     <string name="network_metered">Ierobežots</string>
     <string name="no_search_result">Nav rezultātu.</string>
     <string name="least_views">Neskatītākie</string>
@@ -275,7 +233,6 @@
     <string name="checking_frequency">Pārbaudīt ik pēc…</string>
     <string name="error_occurred">Kļūda</string>
     <string name="copied">Nokopēts</string>
-    <string name="downloadsucceeded">Lejupielāde veiksmīga</string>
     <string name="export_subscriptions">Eksportēt abonementus</string>
     <string name="share_with_time">Kopīgot ar sākšanas laiku</string>
     <string name="skip_buttons">Izlaišanas pogas</string>
@@ -287,8 +244,6 @@
     <string name="misc">Citi</string>
     <string name="take_a_break">Laiks pārtraukumam</string>
     <string name="yt_shorts">Shorts</string>
-    <string name="already_spent_time">Jūs jau lietojat šo lietotni %1$s minūtes, laiks pārtraukumam.</string>
-    <string name="break_reminder">Pārtraukuma atgādinājums</string>
     <string name="resize_mode_fill">Piepildīt</string>
     <string name="no_subtitles_available">Subtitri nav pieejami</string>
     <string name="resize_mode_zoom">Pietuvināt</string>
@@ -308,7 +263,6 @@
     <string name="device_info">Ierīces informācija</string>
     <string name="audio_video_summary">Kvalitāte un formāts</string>
     <string name="delete">Dzēst no lejupielādēm</string>
-    <string name="trending_layout">Citādāks tendenču izkārtojums</string>
     <string name="renamePlaylist">Pārsaukt atskaņošanas sarakstu</string>
     <string name="new_videos_badge">Jauno video indikators</string>
     <string name="skip_segment">Izlaist segmentu</string>
@@ -320,21 +274,15 @@
     <string name="wifi">Wi-Fi</string>
     <string name="new_videos_badge_summary">Parāda jauno video skaitu, ja tādi ir.</string>
     <string name="navigation_bar">Navigācijas panelis</string>
-    <string name="select_at_least_one">Lūdzu, izvēlieties vismaz vienu vienumu</string>
     <string name="backup_customInstances">Pašizveidotas instances</string>
-    <string name="progressive_load_interval">Progresīvs ielādēšanas intervāla izmērs</string>
-    <string name="progressive_load_interval_summary">Zemāka vērtība var paātrināt video sākuma ielādēšanu.</string>
-    <string name="default_load_interval">Noklusējuma</string>
     <string name="playback_pitch">Augstums</string>
     <string name="change_region">Izskatās, ka tendences nav pieejamas jūsu reģionā. Lūdzu, izvēlieties citu iestatījumos.</string>
-    <string name="limit_hls">Ierobežot HLS uz 1080p</string>
     <string name="filename">Faila nosaukums</string>
     <string name="invalid_filename">Nederīgs faila nosaukums!</string>
     <string name="playlists_order">Atskaņošanas sarakstu secība</string>
     <string name="playlistNameReversed">Atskaņošanas saraksta nosaukums (atpakaļgaitā)</string>
     <string name="recentlyUpdated">Nesen atjaunināts</string>
     <string name="recentlyUpdatedReversed">Nesen atjaunināts (atpakaļgaitā)</string>
-    <string name="show_more">Rādīt vairāk</string>
     <string name="save_feed">Ielādēt plūsmu fonā</string>
     <string name="save_feed_summary">Ielādē abonementu plūsmu fonā un neļauj tai automātiski atjaunoties.</string>
     <string name="play_next">Atskaņot nākamo</string>
@@ -344,8 +292,6 @@
     <string name="local_playlists">Lokālie atksņošanas saraksti</string>
     <string name="trending_views">%1$s • %2$s skatījumi • %3$s</string>
     <string name="normal_views">%1$s skatījumi%2$s</string>
-    <string name="not_enabled">Izvēlnes ieraksts nav iespējots!</string>
-    <string name="select_other_start_tab">Lūdzu vispirms izvēlaties citu sākuma cilni!</string>
     <string name="brightness">Spilgtums</string>
     <string name="auto">Automātiski</string>
     <string name="swipe_controls">Žestu kontroles</string>
@@ -393,7 +339,6 @@
     <string name="start_time">Sākuma laiks</string>
     <string name="end_time">Beigu laiks</string>
     <string name="notification_time_summary">Laika posms, kurā atļauti paziņojumi.</string>
-    <string name="alternative_trending_layout">Alternatīvs tendenču izklājums</string>
     <string name="navbar_order">Secība</string>
     <string name="layout">Izklājums</string>
     <string name="alternative_player_layout">Alternatīvs atskaņotāja izklājums</string>
@@ -408,7 +353,6 @@
     <string name="play_all">Atskaņot visus</string>
     <string name="notification_time">Paziņojumu laiks</string>
     <string name="limit_to_runtime">Ierobežot atskaņošanas laiku</string>
-    <string name="open_queue_from_notification">Atvērt rindu no paziņojuma</string>
     <string name="theme_monochrome">Minimālistisks vienkrāsains</string>
     <string name="comments_disabled">Augšupielādētājs ir atspējojis komentārus.</string>
     <string name="import_playlists">Importēt atskaņošanas sarakstus</string>
@@ -450,9 +394,7 @@
     <string name="concurrent_downloads">Vienlaikus atļautās lejupielādes</string>
     <string name="unknown">Nezināms</string>
     <string name="pause">Pauzēt</string>
-    <string name="playing_queue">Saraksts tiek atskaņots</string>
     <string name="trends">Trendi</string>
-    <string name="bookmarks_empty">Nav nevienas grāmatzīmes!</string>
     <string name="double_tap_seek">Pieskarieties divreiz, lai meklētu</string>
     <string name="trending">Kas šobrīd ir tendencēs</string>
     <string name="clear_bookmarks">Dzēst grāmatzīmes</string>

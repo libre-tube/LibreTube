@@ -8,7 +8,6 @@
     <string name="logout">لاگ آؤٹ کریں</string>
     <string name="loggedIn">لاگ ان ہو گیا۔</string>
     <string name="registered">رجسٹر ہو گیا. اب آپ چینل سبسکرائب کر سکتے ہیں۔</string>
-    <string name="login_first">براہ کرم لاگ ان کریں اور دوبارہ کوشش کریں۔</string>
     <string name="instances">منتخب کریں…</string>
     <string name="already_logged_in">پہلے سے لاگ ان ہے۔ آپ اپنے اکاؤنٹ سے لاگ آؤٹ کر سکتے ہیں۔</string>
     <string name="videos">ویڈیوز</string>
@@ -17,7 +16,6 @@
     <string name="search_hint">تلاش کریں</string>
     <string name="startpage">گھر</string>
     <string name="subscriptions">سبسکرپشنز</string>
-    <string name="choose_quality_dialog">معیار</string>
     <string name="yes">ہاں</string>
     <string name="password">پاس ورڈ</string>
     <string name="cancel">منسوخ کریں</string>
@@ -28,21 +26,16 @@
     <string name="settings">ترتیبات</string>
     <string name="comments">تبصرے</string>
     <string name="replies">جوابات</string>
-    <string name="please_login">براہ کرم پہلے سیٹنگز میں لاگ ان یا رجسٹر ہوں۔</string>
     <string name="region">علاقہ</string>
     <string name="login_register">لاگ ان/رجسٹر</string>
-    <string name="subscribeIsEmpty">پہلے کچھ چینل سبسکرائب کریں۔</string>
     <string name="cannotDownload">اس سلسلہ کو ڈاؤن لوڈ نہیں کیا جا سکتا۔</string>
-    <string name="dlcomplete">ڈاؤن لوڈ مکمل ہو گیا۔</string>
     <string name="dlisinprogress">ایک اور ڈاؤن لوڈ پہلے سے جاری ہے، براہ کرم اس کے مکمل ہونے تک انتظار کریں۔</string>
-    <string name="vlc">VLC میں کھولیں</string>
     <string name="app_theme">تھیم</string>
     <string name="unknown_error">نیٹ ورک کی خرابی۔</string>
     <string name="error">کچھ غلط ہو گیا.</string>
     <string name="downloadfailed">ڈاؤن لوڈ ناکام ہو گیا۔</string>
     <string name="import_from_yt">سبسکرپشن درآمد کریں</string>
     <string name="server_error">سرور میں ایک مسئلہ ہے۔ دوسری انسٹنش آزمائیں؟</string>
-    <string name="vlcerror">VLC میں نہیں کھل سکا۔ شاید یہ انسٹال نہیں ہے۔</string>
     <string name="import_from_yt_summary">یوٹیوب یا نیو پائپ سے</string>
     <string name="notgmail">یہ پائپڈ اکاؤنٹ کے لیے ہے۔</string>
     <string name="defres">ویڈیو ریزولوشن</string>
@@ -71,7 +64,6 @@
     <string name="noInternet">پہلے انٹرنیٹ سے جڑیں۔</string>
     <string name="search_history">تلاش کی سرگزشت</string>
     <string name="okay">ٹھیک ہے</string>
-    <string name="choose_filter">تلاش کا فلٹر منتخب کریں</string>
     <string name="channels">چینلز</string>
     <string name="all">تمام</string>
     <string name="playlists">پلے لسٹس</string>
@@ -81,7 +73,6 @@
     <string name="music_songs">YT میوزک گانے</string>
     <string name="music_videos">YT میوزک ویڈیوز</string>
     <string name="music_playlists">YT میوزک پلے لسٹس</string>
-    <string name="defaultTab">ڈیفالٹ ٹیب</string>
     <string name="library">لائبریری</string>
     <string name="unsubscribe">ان سبسکرائب</string>
     <string name="customInstance">حسب ضرورت</string>
@@ -89,7 +80,6 @@
     <string name="sponsorblock">اسپانسر بلاک</string>
     <string name="sponsorblock_summary">https://sponsor.ajay.app API استعمال کرتا ہے</string>
     <string name="segment_skipped">چھوڑا ہوا طبقہ</string>
-    <string name="sponsorblock_state">آن</string>
     <string name="category_segments">طبقات</string>
     <string name="category_sponsor">سپانسر</string>
     <string name="category_sponsor_description">بامعاوضہ پروموشن، بامعاوضہ حوالہ جات اور براہ راست اشتہارات۔ خود کو فروغ دینے یا اسباب، تخلیق کاروں، ویب سائٹس اور پروڈکٹس کے لیے مفت حقیقی شور مچانے کے لیے نہیں۔</string>
@@ -107,7 +97,6 @@
     <string name="color_green">گرووی سبز</string>
     <string name="color_yellow">ییٹنگ پیلا</string>
     <string name="color_purple">خوشگوار جامنی</string>
-    <string name="oledTheme">سیاہ</string>
     <string name="material_you">میٹریل یو</string>
     <string name="sponsorblock_notifications">اطلاعات</string>
     <string name="app_icon">آئیکن</string>
@@ -138,17 +127,8 @@
     <string name="category_filler_description">ٹینجینٹل مناظر کے لیے صرف فلر یا مزاح کے لیے شامل کیے گئے ویڈیو کے مرکزی مواد کو سمجھنے کی ضرورت نہیں ہے۔</string>
     <string name="category_preview_description">اس سیریز میں آنے والے مواد یا مستقبل کے ویڈیوز کی تفصیل دینے والے حصوں کے لیے، لیکن اضافی معلومات فراہم نہ کریں۔ اگر اس میں ایسے کلپس شامل ہیں جو صرف یہاں ظاہر ہوتے ہیں، تو یہ غلط زمرہ ہے۔</string>
     <string name="pause">توقف کریں</string>
-    <string name="hideTrendingPage">رجحان ساز صفحہ چھپائیں</string>
     <string name="pauseOnScreenOff">خودکار توقف</string>
-    <string name="app_behavior">رویہ</string>
     <string name="downloads">ڈاؤن لوڈز</string>
-    <string name="video_format">ویڈیو کی شکل</string>
-    <string name="video_format_summary">فائلوں کی تبدیلی اگر آڈیو اور ویڈیو دونوں ڈاؤن لوڈ ہوں۔</string>
-    <string name="download_directory">پر ڈاؤن لوڈ کریں</string>
-    <string name="download_directory_summary">جہاں ڈاؤن لوڈ کردہ میڈیا کو محفوظ کیا جاتا ہے۔</string>
-    <string name="contributing">تعاون کرنا</string>
-    <string name="donate">عطیہ کریں</string>
-    <string name="update">نیا ورژن تلاش کریں</string>
     <string name="update_summary">اپ ڈیٹ کے لیے چیک کریں</string>
     <string name="app_uptodate">تازہ ترین ورژن چل رہا ہے۔</string>
     <string name="playback_speed">پلے بیک کی رفتار</string>
@@ -156,14 +136,6 @@
     <string name="player">پلیئر</string>
     <string name="advanced_summary">ڈاؤن لوڈز، اور ری سیٹ کریں</string>
     <string name="live">لائیو</string>
-    <string name="no_replies">اس تبصرے کا کوئی جواب نہیں ہے۔</string>
-    <string name="authors">مصنفین</string>
-    <string name="download_folder">نام</string>
-    <string name="internal_storage">اندرونی سٹوریج</string>
-    <string name="downloads_directory">ڈونلوڈ فولڈر</string>
-    <string name="sdcard">SD کارڈ</string>
-    <string name="music_directory">میوزک فولڈر</string>
-    <string name="movies_directory">مووی فولڈر</string>
     <string name="shareTo">اس کے ساتھ URL کا اشتراک کریں</string>
     <string name="defaultIcon">ڈیفالٹ</string>
     <string name="legacyIcon">گم شدہ میراث</string>
@@ -173,9 +145,7 @@
     <string name="shapedIcon">بے وقوف شکل</string>
     <string name="flameIcon">اڑتا ہوا شعلہ</string>
     <string name="customInstance_summary">شامل کریں…</string>
-    <string name="no_update_available">آپ تازہ ترین ورژن چلا رہے ہیں۔</string>
     <string name="appearance_summary">ایپ کو اپنی پسند کے مطابق ایڈجسٹ کریں۔</string>
-    <string name="download_folder_summary">ڈاؤن لوڈ کردہ فولڈر کا نام جہاں میڈیا محفوظ ہے۔</string>
     <string name="instance_summary">پائپ، لاگ ان، اور سبسکرپشنز</string>
     <string name="birdIcon">بڑھا ہوا پرندہ</string>
     <string name="instance_name">انسٹنش کا نام</string>
@@ -183,11 +153,8 @@
     <string name="addInstance">انسٹنش شامل کریں</string>
     <string name="clear_customInstances">صاف شامل کیا گیا</string>
     <string name="version">ورژن %1$s</string>
-    <string name="about_summary">LibreTube کی ٹیم کو جانیں اور یہ سب کیسے ہوتا ہے۔</string>
     <string name="related_streams">متعلقہ مواد</string>
     <string name="related_streams_summary">آپ جو دیکھتے ہیں اس کے ساتھ ملتے جلتے سلسلے دکھائیں۔</string>
-    <string name="show_chapters">ابواب دکھائیں</string>
-    <string name="hide_chapters">ابواب چھپائیں</string>
     <string name="buffering_goal">پہلے سے لوڈ</string>
     <string name="playerVideoFormat">پلیئر کے لیے ویڈیو فارمیٹ</string>
     <string name="no_audio">کوئی آڈیو نہیں</string>
@@ -208,7 +175,6 @@
     <string name="watch_positions_summary">آخری پلے بیک پوزیشن سے جاری رکھیں</string>
     <string name="auth_instance">توثیق کی انسٹنش</string>
     <string name="auth_instances">ایک توثیق انسٹنش منتخب کریں</string>
-    <string name="hls">HLS</string>
     <string name="github">GitHub</string>
     <string name="audio_video">آڈیو اور ویڈیو</string>
     <string name="fullscreen_orientation">پوری اسکرین کی سمت بندی</string>
@@ -225,11 +191,9 @@
     <string name="buffering_goal_summary">زیادہ سے زیادہ بفر کرنے کے لیے ویڈیو کے سیکنڈ کی مقدار۔</string>
     <string name="require_restart">ایپ کو دوبارہ شروع کرنے کی ضرورت ہے</string>
     <string name="notifications">اطلاعات</string>
-    <string name="community">برادری</string>
     <string name="general_summary">زبان، اور علاقہ</string>
     <string name="playingOnBackground">پس منظر میں چل رہا ہے…</string>
     <string name="caption_settings">کیپشنز</string>
-    <string name="downloading_apk">APK ڈاؤن لوڈ ہو رہا ہے…</string>
     <string name="playerAudioFormat">پلیئر کے لیے آڈیو فارمیٹ</string>
     <string name="playerAudioQuality">آڈیو کوالٹی</string>
     <string name="best_quality">بہترین</string>
@@ -237,7 +201,6 @@
     <string name="turnInternetOn">انٹرنیٹ سے منسلک ہونے کے لیے براہ کرم Wi-Fi یا موبائل ڈیٹا آن کریں۔</string>
     <string name="open">کھولیں…</string>
     <string name="chapters">ابواب</string>
-    <string name="change_playback_speed">پلے بیک کی رفتار</string>
     <string name="require_restart_message">نئی تبدیلیاں استعمال کرنے کے لیے ایپ کو دوبارہ شروع کریں۔</string>
     <string name="navLabelVisibility">لیبل کی مرئیت</string>
     <string name="always">ہمیشہ</string>
@@ -258,13 +221,9 @@
     <string name="system_caption_style">سسٹم کیپشن اسٹائل</string>
     <string name="captions">کیپشنز</string>
     <string name="none">کوئی نہیں</string>
-    <string name="seekbar_preview">ویڈیو پیش نظارہ</string>
-    <string name="seekbar_preview_summary">پلے بیک اشارے کو گھسیٹتے وقت اسنیپ شاٹ دکھائیں۔</string>
     <string name="general">جنرل</string>
     <string name="worst_quality">بدترین</string>
     <string name="default_subtitle_language">ذیلی عنوان کی زبان</string>
     <string name="notify_new_streams">نئی اسٹریمز کے لیے اطلاعات</string>
     <string name="checking_frequency">ہر ایک کو چیک کیا جا رہا ہے…</string>
-    <string name="new_streams_count">%1$s نئے سلسلے دستیاب ہیں</string>
-    <string name="new_streams_by">%1$s کے نئے سلسلے…</string>
 </resources>
