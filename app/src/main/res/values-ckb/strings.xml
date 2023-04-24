@@ -111,10 +111,6 @@
     <string name="related_streams_summary">پیشاندانی ناوەڕۆکە هاوشێوەکان لەکاتی سەیرکردندا.</string>
     <string name="player_summary">فرمانە بنەڕەتییەکان</string>
     <string name="instance_frontend_url">ناونیشانی ڕاستەوخۆ</string>
-    <plurals name="weeks_ago">
-        <item quantity="one">%d هەفتە لەمەوپێش</item>
-        <item quantity="other">%d هەفتە لەمەوپێش</item>
-    </plurals>
     <string name="customInstance_summary">زیادکردن…</string>
     <string name="show_chapters">پیشاندانی بەشەکان</string>
     <string name="hide_chapters">شاردنەوەی بەشەکان</string>

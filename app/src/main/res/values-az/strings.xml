@@ -459,10 +459,6 @@
         <item quantity="one">%d ay əvvəl</item>
         <item quantity="other">%d ay əvvəl</item>
     </plurals>
-    <plurals name="weeks_ago">
-        <item quantity="one">%d həftə əvvəl</item>
-        <item quantity="other">%d həftə əvvəl</item>
-    </plurals>
     <plurals name="years_ago">
         <item quantity="one">%d il əvvəl</item>
         <item quantity="other">%d il əvvəl</item>

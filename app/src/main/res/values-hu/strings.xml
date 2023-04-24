@@ -470,10 +470,6 @@
         <item quantity="one">%d hónapja</item>
         <item quantity="other">%d hónapja</item>
     </plurals>
-    <plurals name="weeks_ago">
-        <item quantity="one">%d hete</item>
-        <item quantity="other">%d hete</item>
-    </plurals>
     <string name="new_group">Új</string>
     <string name="group_name">Csoportnév</string>
     <string name="edit_group">Csoport szerkesztése</string>

@@ -448,11 +448,6 @@
         <item quantity="few">acum %d luni</item>
         <item quantity="other">acum %d de luni</item>
     </plurals>
-    <plurals name="weeks_ago">
-        <item quantity="one">acum %d săptămână</item>
-        <item quantity="few">acum %d săptămâni</item>
-        <item quantity="other">acum %d de săptămâni</item>
-    </plurals>
     <string name="color_violet">Violet polivalent</string>
     <string name="auto">Automat</string>
     <string name="playback_pitch">Înălțime</string>

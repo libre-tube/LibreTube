@@ -6,13 +6,14 @@ import android.os.Build
 import android.text.format.DateUtils
 import com.github.libretube.R
 import java.time.Instant
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.time.temporal.ChronoUnit
 import kotlin.time.Duration
-import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalDate as KotlinLocalDate
 import kotlinx.datetime.toJavaLocalDate
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
@@ -37,7 +38,7 @@ object TextUtils {
      * @param date The date to parse
      * @return localized date string
      */
-    fun localizeDate(date: LocalDate): String {
+    fun localizeDate(date: KotlinLocalDate): String {
         return date.toJavaLocalDate().format(MEDIUM_DATE_FORMATTER)
     }
 
@@ -66,31 +67,32 @@ object TextUtils {
         // TODO: Use LocalDate.ofInstant() when it is available in SDK 34.
         val date = LocalDateTime.ofInstant(Instant.ofEpochMilli(unixTime), ZoneId.systemDefault())
             .toLocalDate()
-        val now = java.time.LocalDate.now()
-        val weeks = date.until(now, ChronoUnit.WEEKS)
+        val now = LocalDate.now()
+        val months = date.until(now, ChronoUnit.MONTHS)
 
-        return if (weeks > 0) {
-            val months = date.until(now, ChronoUnit.MONTHS)
+        return if (months > 0) {
             val years = months / 12
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                val (timeFormat, time) = when {
-                    years > 0 -> RelativeDateTimeFormatter.RelativeUnit.YEARS to years
-                    months > 0 -> RelativeDateTimeFormatter.RelativeUnit.MONTHS to months
-                    else -> RelativeDateTimeFormatter.RelativeUnit.WEEKS to weeks
+                val (timeFormat, time) = if (years > 0) {
+                    RelativeDateTimeFormatter.RelativeUnit.YEARS to years
+                } else {
+                    RelativeDateTimeFormatter.RelativeUnit.MONTHS to months
                 }
                 RelativeDateTimeFormatter.getInstance()
                     .format(time.toDouble(), RelativeDateTimeFormatter.Direction.LAST, timeFormat)
             } else {
-                val (timeAgoRes, time) = when {
-                    years > 0 -> R.plurals.years_ago to years
-                    months > 0 -> R.plurals.months_ago to months
-                    else -> R.plurals.weeks_ago to weeks
+                val (timeAgoRes, time) = if (years > 0) {
+                    R.plurals.years_ago to years
+                } else {
+                    R.plurals.months_ago to months
                 }
                 context.resources.getQuantityString(timeAgoRes, time.toInt(), time)
             }
         } else {
-            DateUtils.getRelativeTimeSpanString(unixTime)
+            val weeks = date.until(now, ChronoUnit.WEEKS)
+            val minResolution = if (weeks > 0) DateUtils.WEEK_IN_MILLIS else 0L
+            DateUtils.getRelativeTimeSpanString(unixTime, System.currentTimeMillis(), minResolution)
         }
     }
 

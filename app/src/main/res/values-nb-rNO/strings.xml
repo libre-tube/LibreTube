@@ -461,10 +461,6 @@
         <item quantity="one">%d måned siden</item>
         <item quantity="other">%d måneder siden</item>
     </plurals>
-    <plurals name="weeks_ago">
-        <item quantity="one">%d uke siden</item>
-        <item quantity="other">%d uker siden</item>
-    </plurals>
     <string name="autoplay_countdown_summary">Vis 5 sekunders nedtelling før autospilling av neste video.</string>
     <string name="playing_next">Spiller neste om %1$s</string>
     <string name="lbry_hls_summary">Hent videostrøm i LBRY HLS-format hvis tilgjengelig.</string>

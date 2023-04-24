@@ -471,14 +471,6 @@
         <item quantity="many">%d منذ أشهر</item>
         <item quantity="other">%d منذ أشهر</item>
     </plurals>
-    <plurals name="weeks_ago">
-        <item quantity="zero">%d منذ أسبوع</item>
-        <item quantity="one">%d منذ أسبوع</item>
-        <item quantity="two">%d منذ أسبوعين</item>
-        <item quantity="few">%d منذ أسابيع</item>
-        <item quantity="many">%d منذ أسابيع</item>
-        <item quantity="other">%d منذ أسابيع</item>
-    </plurals>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="lbry_hls_summary">استخدم LBRY HLS للبث إذا كان متاحا.</string>
     <string name="subscriberAndVideoCounts">مشتركون %1$s • فيديوهات %2$d</string>

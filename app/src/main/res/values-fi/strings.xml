@@ -465,8 +465,4 @@
         <item quantity="one">%d kuukausi sitten</item>
         <item quantity="other">%d kuukautta sitten</item>
     </plurals>
-    <plurals name="weeks_ago">
-        <item quantity="one">%d viikko sitten</item>
-        <item quantity="other">%d viikkoa sitten</item>
-    </plurals>
 </resources>

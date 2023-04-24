@@ -201,10 +201,6 @@
     <string name="exportsuccess">കയറ്റുമതി ചെയ്തു.</string>
     <string name="help">സഹായം</string>
     <string name="faq">പതിവുചോദ്യങ്ങൾ</string>
-    <plurals name="weeks_ago">
-        <item quantity="one">%d ആഴ്ച മുമ്പ്</item>
-        <item quantity="other">%d ആഴ്ചകൾ മുമ്പ്</item>
-    </plurals>
     <plurals name="months_ago">
         <item quantity="one">%d മാസം മുമ്പ്</item>
         <item quantity="other">%d മാസങ്ങൾ മുമ്പ്</item>

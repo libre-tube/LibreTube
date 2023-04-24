@@ -469,11 +469,6 @@
         <item quantity="many">il y a %d mois</item>
         <item quantity="other">il y a %d mois</item>
     </plurals>
-    <plurals name="weeks_ago">
-        <item quantity="one">il y a %d semaine</item>
-        <item quantity="many">il y a %d semaines</item>
-        <item quantity="other">il y a %d semaines</item>
-    </plurals>
     <string name="disable_proxy">Désactiver le proxy Piped</string>
     <string name="disable_proxy_summary">Chargez des vidéos et des images directement depuis les serveurs de YouTube. N\'activez cette option que si vous utilisez un VPN ! Notez que cela peut ne pas fonctionner avec le contenu de Youtube music.</string>
     <string name="auto_fullscreen_shorts">Plein écran automatique sur les vidéos courtes</string>
