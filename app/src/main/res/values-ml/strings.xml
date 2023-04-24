@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="yes">അതെ</string>
-    <string name="choose_quality_dialog">നിലവാരം തിരഞ്ഞെടുക്കൂ:</string>
+    <string name="choose_quality_dialog">നിലവാരം:</string>
     <string name="subscriptions">സബ്സ്ക്രിപ്പ്ഷനുകൾ</string>
     <string name="videos">വീഡിയോകൾ</string>
     <string name="subscribe">സബ്സ്ക്രൈബ്</string>
@@ -213,4 +213,21 @@
         <item quantity="one">%d വർഷം മുമ്പ്</item>
         <item quantity="other">%d വർഷങ്ങൾ മുമ്പ്</item>
     </plurals>
+    <string name="mark_as_watched">കണ്ടതായി അടയാളപ്പെടുത്തുക</string>
+    <string name="all_caught_up_summary">നിങ്ങൾ എല്ലാ പുതിയ വീഡിയോകളും കണ്ടു</string>
+    <string name="nothing_selected">ഒന്നും തിരഞ്ഞെടുത്തില്ല!</string>
+    <string name="proceed">തുടരുക</string>
+    <string name="skip_silence">നിശബ്ദത ഒഴിവാക്കുക</string>
+    <string name="forward">മുന്നോട്ട്</string>
+    <string name="custom_playback_speed">ഇഷ്ടാനുസൃത വേഗത</string>
+    <string name="push_channel_name">അറിയിപ്പ് തൊഴിലാളി</string>
+    <string name="no_comments_available">ഈ വീഡിയോയ്ക്ക് അഭിപ്രായങ്ങളൊന്നുമില്ല.</string>
+    <string name="edit_group">സംഘത്തെ തിരുത്തുക</string>
+    <string name="new_group">പുതിയത്</string>
+    <string name="group_name">സംഘത്തിന്റെ പേര്</string>
+    <string name="play_automatically">സ്വയമേവ കളിക്കുക</string>
+    <string name="play_automatically_summary">തിരഞ്ഞെടുക്കുമ്പോൾ സ്വയമേവ വീഡിയോ കളിക്കാൻ ആരംഭിക്കുക</string>
+    <string name="go_to_video">വീഡിയോയിലേക്ക് പോകുക</string>
+    <string name="download_channel_name">ഡൗൺലോഡ് സേവനം</string>
+    <string name="category">തരം</string>
 </resources>
