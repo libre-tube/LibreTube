@@ -158,7 +158,7 @@
     <string name="hls">HLS</string>
     <string name="github">GitHub</string>
     <string name="audio_video">ශ්රව්ය සහ වීඩියෝ</string>
-    <string name="fullscreen_orientation">සම්පූර්ණ තිර නැඹුරුව</string>
+    <string name="fullscreen_orientation">පූර්ණ තිර නැඹුරුව</string>
     <string name="landscape">භූ දර්ශනය</string>
     <string name="community">ප්‍රජාව</string>
     <string name="turnInternetOn">කරුණාකර අන්තර්ජාලයට සම්බන්ධ වීමට Wi-Fi හෝ ජංගම දත්ත ක්‍රියාත්මක කරන්න.</string>
@@ -177,7 +177,7 @@
     <string name="history_summary">නැරඹුම් සහ සෙවුම් ඉතිහාසය</string>
     <string name="reset_watch_positions">ප්‍රත්‍යාරම්භ කරන්න</string>
     <string name="change_playback_speed">වාදන වේගය</string>
-    <string name="autoRotatePlayer_summary">උපාංගය හැරවූ විට සම්පූර්ණ තිර වාදනය.</string>
+    <string name="autoRotatePlayer_summary">උපාංගය හැරවූ විට පූර්ණ තිර වාදනය.</string>
     <string name="watch_positions_title">මතක වාදන ස්ථාන</string>
     <string name="general_summary">භාෂාව සහ ප්‍රදේශය</string>
     <string name="caption_settings">සිරස්තල</string>
@@ -472,7 +472,7 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d වීඩියෝ</string>
     <string name="subscriberAndVideoCounts">%1$s ග්‍රාහකයින් • %2$d වීඩියෝ</string>
     <string name="disable_proxy">Piped proxy අක්‍රිය කරන්න</string>
-    <string name="disable_proxy_summary">YouTube හි සේවාදායකයන් වෙතින් සෘජුවම වීඩියෝ සහ පින්තූර පූරණය කරන්න. ඔබ කෙසේ හෝ VPN භාවිතා කරන්නේ නම් පමණක් විකල්පය සබල කරන්න! මෙය YT සංගීතයේ අන්තර්ගතය සමඟ ක්‍රියා නොකරන බව සලකන්න.</string>
+    <string name="disable_proxy_summary">YouTube හි සේවාදායකයන් වෙතින් සෘජුවම වීඩියෝ සහ පින්තූර ප‍්‍රවේශනය කරන්න. ඔබ කෙසේ හෝ VPN භාවිතා කරන්නේ නම් පමණක් විකල්පය සබල කරන්න! මෙය YT music සමඟ ක්‍රියා නොකරන බව සලකන්න.</string>
     <string name="auto_fullscreen_shorts">කෙටි වීඩියෝ සඳහා ස්වයංක්‍රීය පූර්ණ තිරය</string>
     <string name="new_group">අලුත්</string>
     <string name="group_name">කණ්ඩායමේ නම</string>
@@ -485,4 +485,7 @@
     </plurals>
     <string name="play_automatically">ස්වයංක්‍රීයව වාදනය කරන්න</string>
     <string name="play_automatically_summary">තේරීමේදී වීඩියෝව ස්වයංක්‍රීයව වාදනය කරන්න</string>
+    <string name="show_stream_thumbnails">ප්‍රවාහ සිඟිති රූ පෙන්වන්න</string>
+    <string name="show_stream_thumbnails_summary">නව ප්‍රවාහවල සිඟිති රූ පෙන්වන්න. මෙය සබල කිරීමෙන් අමතර Data වැය වේ.</string>
+    <string name="fullscreen_gestures">පූර්ණ තිර ඇතුළු වන්න / පිටවන්න අභිනයන්</string>
 </resources>
