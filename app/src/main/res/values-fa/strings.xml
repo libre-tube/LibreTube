@@ -340,4 +340,6 @@
     <string name="channel_name_az">نام کانال (A-Z)</string>
     <string name="channel_name_za">نام کانال (Z-A)</string>
     <string name="unsupported_file_format">قالب پرونده پشتیبانی نشده: %1$s</string>
+    <string name="swipe_controls">کنترل های کشیدن</string>
+    <string name="no_comments_available">این ویدیو هیچ نظری ندارد.</string>
 </resources>
