@@ -89,7 +89,7 @@
     <string name="systemLanguage">ସିଷ୍ଟମ୍</string>
     <string name="darkTheme">ଅନ୍ଧାର</string>
     <string name="about">ଵିଷୟରେ</string>
-    <string name="subscribers">%1$sସଦସ୍ୟତା ଲୋକମାନେ</string>
+    <string name="subscribers">%1$s ଜଣ ସଦସ୍ଯ</string>
     <string name="addToPlaylist">ପ୍ଲେଲିଷ୍ଟ ରେ ଯୋଡ଼ନ୍ତୁ</string>
     <string name="lightTheme">ଉଜ୍ଜଳ</string>
     <string name="success">ହୋଇଗଲା ।</string>
@@ -147,7 +147,7 @@
     <string name="downloading">ଡାଉନଲୋଡ୍ ହେଉଛି …</string>
     <string name="player_autoplay">ସ୍ୱତଃଚାଳନ</string>
     <string name="instance_frontend_url">ଫ୍ରଣ୍ଟେଣ୍ଡ୍ ପାଇଁ URL</string>
-    <string name="player_summary">ଡିଫଲ୍ଟ ଏବଂ ଆଚରଣ</string>
+    <string name="player_summary">ଡିଫଲ୍ଟ ଓ ଆଚରଣ</string>
     <string name="seek_increment">ବୃଦ୍ଧି ଖୋଜ</string>
     <string name="pauseOnScreenOff">ସ୍ଵତଃ-ବିରାମ</string>
     <string name="autoplay_summary">ସାମ୍ପ୍ରତିକ ଭିଡିଓ ପରେ ପରବର୍ତ୍ତୀ ଭିଡିଓକୁ ସ୍ଵତଃ-ଚଲାନ୍ତୁ ।</string>
@@ -289,7 +289,7 @@
     <string name="add_to_queue">ଧାଡିରେ ଯୋଡନ୍ତୁ</string>
     <string name="picture_in_picture">ଛବିରେ ଛବି</string>
     <string name="backup_restore">ନକଲ ଓ ସଂରକ୍ଷଣ</string>
-    <string name="subscriptions">ସଦସ୍ୟତା ଗୁଡ଼ିକ</string>
+    <string name="subscriptions">ସଦସ୍ୟତା</string>
     <string name="livestreams">ସିଧପ୍ରସାରଣ ଷ୍ଟ୍ରୀମ ଗୁଡ଼ିକ</string>
     <string name="alternative_videos_layout">ବିକଳ୍ପ ଭିଡିଓ ଲେଆଉଟ୍</string>
     <string name="defaultIconLight">ଡିଫଲ୍ଟ ଉଜ୍ଜଳ</string>
