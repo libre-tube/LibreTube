@@ -90,6 +90,18 @@ class CommentsSheet : ExpandedBottomSheet() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
 
+        // BottomSheetDialogFragment passthrough user outside touch event
+        dialog.setOnShowListener {
+            dialog.findViewById<View>(R.id.touch_outside)?.apply {
+                setOnTouchListener { v, event ->
+                    event.setLocation(event.rawX - v.x, event.rawY - v.y)
+                    activity?.dispatchTouchEvent(event)
+                    v.performClick()
+                    false
+                }
+            }
+        }
+
         dialog.apply {
             setOnKeyListener { _, keyCode, _ ->
                 if (keyCode == KeyEvent.KEYCODE_BACK) {

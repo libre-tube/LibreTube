@@ -29,10 +29,7 @@ open class ExpandedBottomSheet : BottomSheetDialogFragment() {
         return dialog
     }
 
-    fun show(fragmentManager: FragmentManager) = show(
-        fragmentManager,
-        null
-    )
+    fun show(fragmentManager: FragmentManager) = show(fragmentManager, null)
 
     override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode)
