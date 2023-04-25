@@ -30,9 +30,6 @@
     <color name="blue_md_theme_light_inverseOnSurface">#F2F0F4</color>
     <color name="blue_md_theme_light_inverseSurface">#303034</color>
     <color name="blue_md_theme_light_inversePrimary">#B0C6FF</color>
-    <color name="blue_md_theme_light_shadow">#000000</color>
-    <color name="blue_md_theme_light_surfaceTint">#0058CB</color>
-    <color name="blue_md_theme_light_surfaceTintColor">#0058CB</color>
     <color name="blue_md_theme_dark_primary">#B0C6FF</color>
     <color name="blue_md_theme_dark_onPrimary">#002D6F</color>
     <color name="blue_md_theme_dark_primaryContainer">#00429B</color>
@@ -59,9 +56,6 @@
     <color name="blue_md_theme_dark_inverseOnSurface">#1B1B1F</color>
     <color name="blue_md_theme_dark_inverseSurface">#E3E2E6</color>
     <color name="blue_md_theme_dark_inversePrimary">#0058CB</color>
-    <color name="blue_md_theme_dark_shadow">#000000</color>
-    <color name="blue_md_theme_dark_surfaceTint">#B0C6FF</color>
-    <color name="blue_md_theme_dark_surfaceTintColor">#B0C6FF</color>
 
     <color name="red_md_theme_light_primary">#9F4034</color>
     <color name="red_md_theme_light_onPrimary">#FFFFFF</color>
@@ -89,9 +83,6 @@
     <color name="red_md_theme_light_inverseOnSurface">#FBEEEC</color>
     <color name="red_md_theme_light_inverseSurface">#362F2E</color>
     <color name="red_md_theme_light_inversePrimary">#FFB4A9</color>
-    <color name="red_md_theme_light_shadow">#000000</color>
-    <color name="red_md_theme_light_surfaceTint">#9F4034</color>
-    <color name="red_md_theme_light_surfaceTintColor">#9F4034</color>
     <color name="red_md_theme_dark_primary">#FFB4A9</color>
     <color name="red_md_theme_dark_onPrimary">#61120C</color>
     <color name="red_md_theme_dark_primaryContainer">#7F291F</color>
@@ -118,9 +109,6 @@
     <color name="red_md_theme_dark_inverseOnSurface">#201A19</color>
     <color name="red_md_theme_dark_inverseSurface">#EDE0DE</color>
     <color name="red_md_theme_dark_inversePrimary">#9F4034</color>
-    <color name="red_md_theme_dark_shadow">#000000</color>
-    <color name="red_md_theme_dark_surfaceTint">#FFB4A9</color>
-    <color name="red_md_theme_dark_surfaceTintColor">#FFB4A9</color>
 
     <color name="yellow_md_theme_light_primary">#745B00</color>
     <color name="yellow_md_theme_light_onPrimary">#FFFFFF</color>
@@ -148,9 +136,6 @@
     <color name="yellow_md_theme_light_inverseOnSurface">#F7F0E7</color>
     <color name="yellow_md_theme_light_inverseSurface">#33302A</color>
     <color name="yellow_md_theme_light_inversePrimary">#EBC248</color>
-    <color name="yellow_md_theme_light_shadow">#000000</color>
-    <color name="yellow_md_theme_light_surfaceTint">#745B00</color>
-    <color name="yellow_md_theme_light_surfaceTintColor">#745B00</color>
     <color name="yellow_md_theme_dark_primary">#EBC248</color>
     <color name="yellow_md_theme_dark_onPrimary">#3D2F00</color>
     <color name="yellow_md_theme_dark_primaryContainer">#584400</color>
@@ -177,9 +162,6 @@
     <color name="yellow_md_theme_dark_inverseOnSurface">#1E1B16</color>
     <color name="yellow_md_theme_dark_inverseSurface">#E8E1D9</color>
     <color name="yellow_md_theme_dark_inversePrimary">#745B00</color>
-    <color name="yellow_md_theme_dark_shadow">#000000</color>
-    <color name="yellow_md_theme_dark_surfaceTint">#EBC248</color>
-    <color name="yellow_md_theme_dark_surfaceTintColor">#EBC248</color>
 
     <color name="green_md_theme_light_primary">#3E6A00</color>
     <color name="green_md_theme_light_onPrimary">#FFFFFF</color>
@@ -207,9 +189,6 @@
     <color name="green_md_theme_light_inverseOnSurface">#F2F1E9</color>
     <color name="green_md_theme_light_inverseSurface">#30312C</color>
     <color name="green_md_theme_light_inversePrimary">#9ED75B</color>
-    <color name="green_md_theme_light_shadow">#000000</color>
-    <color name="green_md_theme_light_surfaceTint">#3E6A00</color>
-    <color name="green_md_theme_light_surfaceTintColor">#3E6A00</color>
     <color name="green_md_theme_dark_primary">#9ED75B</color>
     <color name="green_md_theme_dark_onPrimary">#1E3700</color>
     <color name="green_md_theme_dark_primaryContainer">#2E4F00</color>
@@ -236,9 +215,6 @@
     <color name="green_md_theme_dark_inverseOnSurface">#1B1C18</color>
     <color name="green_md_theme_dark_inverseSurface">#E3E3DB</color>
     <color name="green_md_theme_dark_inversePrimary">#3E6A00</color>
-    <color name="green_md_theme_dark_shadow">#000000</color>
-    <color name="green_md_theme_dark_surfaceTint">#9ED75B</color>
-    <color name="green_md_theme_dark_surfaceTintColor">#9ED75B</color>
 
     <color name="purple_md_theme_light_primary">#9B3489</color>
     <color name="purple_md_theme_light_onPrimary">#FFFFFF</color>
@@ -266,9 +242,6 @@
     <color name="purple_md_theme_light_inverseOnSurface">#F8EEF1</color>
     <color name="purple_md_theme_light_inverseSurface">#342F32</color>
     <color name="purple_md_theme_light_inversePrimary">#FFACE7</color>
-    <color name="purple_md_theme_light_shadow">#000000</color>
-    <color name="purple_md_theme_light_surfaceTint">#9B3489</color>
-    <color name="purple_md_theme_light_surfaceTintColor">#9B3489</color>
     <color name="purple_md_theme_dark_primary">#FFACE7</color>
     <color name="purple_md_theme_dark_onPrimary">#5E0052</color>
     <color name="purple_md_theme_dark_primaryContainer">#7E186F</color>
@@ -295,9 +268,6 @@
     <color name="purple_md_theme_dark_inverseOnSurface">#1F1A1D</color>
     <color name="purple_md_theme_dark_inverseSurface">#EAE0E3</color>
     <color name="purple_md_theme_dark_inversePrimary">#9B3489</color>
-    <color name="purple_md_theme_dark_shadow">#000000</color>
-    <color name="purple_md_theme_dark_surfaceTint">#FFACE7</color>
-    <color name="purple_md_theme_dark_surfaceTintColor">#FFACE7</color>
 
     // Colors without comments seem to be not used
     <color name="monochrome_theme_light_primary">#616161</color>
@@ -339,9 +309,6 @@
     <color name="monochrome_theme_light_inverseOnSurface">#DCDCDC</color>
     <color name="monochrome_theme_light_inverseSurface">#606060</color>
     <color name="monochrome_theme_light_inversePrimary">#C1C1C1</color>
-    <color name="monochrome_theme_light_shadow">#000000</color>
-    <color name="monochrome_theme_light_surfaceTint">#717171</color>
-    <color name="monochrome_theme_light_surfaceTintColor">#717171</color>
     <color name="monochrome_theme_dark_primary">#959595</color>
     // LibreTube Logo, Hyperlinks and on-off switch (on status: filling) (also influence on the
     navbar colour)
@@ -381,9 +348,6 @@
     <color name="monochrome_theme_dark_inverseOnSurface">#404040</color>
     <color name="monochrome_theme_dark_inverseSurface">#C3C3C3</color>
     <color name="monochrome_theme_dark_inversePrimary">#707070</color>
-    <color name="monochrome_theme_dark_shadow">#000000</color>
-    <color name="monochrome_theme_dark_surfaceTint">#C3C3C3</color>
-    <color name="monochrome_theme_dark_surfaceTintColor">#C3C3C3</color>
 
     <color name="violet_theme_light_primary">#714AAA</color>
     <color name="violet_theme_light_onPrimary">#FFFFFF</color>
@@ -411,9 +375,6 @@
     <color name="violet_theme_light_inverseOnSurface">#F9ECFF</color>
     <color name="violet_theme_light_inverseSurface">#421A6C</color>
     <color name="violet_theme_light_inversePrimary">#D7BAFF</color>
-    <color name="violet_theme_light_shadow">#000000</color>
-    <color name="violet_theme_light_surfaceTint">#714AAA</color>
-    <color name="violet_theme_light_surfaceTintColor">#714AAA</color>
     <color name="violet_theme_dark_primary">#D7BAFF</color>
     <color name="violet_theme_dark_onPrimary">#411478</color>
     <color name="violet_theme_dark_primaryContainer">#593090</color>
@@ -440,8 +401,5 @@
     <color name="violet_theme_dark_inverseOnSurface">#2B0052</color>
     <color name="violet_theme_dark_inverseSurface">#EFDBFF</color>
     <color name="violet_theme_dark_inversePrimary">#714AAA</color>
-    <color name="violet_theme_dark_shadow">#000000</color>
-    <color name="violet_theme_dark_surfaceTint">#D7BAFF</color>
-    <color name="violet_theme_dark_surfaceTintColor">#D7BAFF</color>
 
 </resources>

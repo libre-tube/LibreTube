@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="library">Դարան</string>
-    <string name="choose_quality_dialog">Որակ</string>
     <string name="videos">Տեսանյութեր</string>
     <string name="subscribe">Հետևել</string>
     <string name="share">Տարածել</string>
@@ -14,10 +13,7 @@
     <string name="instances">Ընտրել․․․</string>
     <string name="app_theme">Թեմա</string>
     <string name="cannotDownload">Հնարավոր չէ ներբեռնել:</string>
-    <string name="dlcomplete">Ներբռնումն ավարտվեց:</string>
     <string name="downloadfailed">Ներբեռնել չհաջողվեց:</string>
-    <string name="vlc">Բացել VLC-ում</string>
-    <string name="vlcerror">Չհաջողվեց բացել VLC-ին: Հնարավոր է այն տեղադրված չէ:</string>
     <string name="import_from_yt">Ներմուծել բաժանորդագրություններ</string>
     <string name="import_from_yt_summary">YouTube-ից կամ NewPipe-ից</string>
     <string name="server_error">Սերվերի հետ խնդիր կա: Փորձե՞լ այլ նմուշ:</string>
