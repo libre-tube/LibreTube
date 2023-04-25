@@ -348,24 +348,6 @@
         <item />
     </string-array>
 
-    <string-array name="loadingInterval">
-        <item>1KiB</item>
-        <item>16KiB</item>
-        <item>64KiB</item>
-        <item>128KiB</item>
-        <item>256KiB</item>
-        <item>@string/default_load_interval</item>
-    </string-array>
-
-    <string-array name="loadingIntervalValues">
-        <item>1</item>
-        <item>16</item>
-        <item>64</item>
-        <item>128</item>
-        <item>256</item>
-        <item>default</item>
-    </string-array>
-
     <string-array name="playlistSortingOptions">
         <item>@string/recentlyUpdated</item>
         <item>@string/recentlyUpdatedReversed</item>
