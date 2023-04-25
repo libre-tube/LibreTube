@@ -33,6 +33,10 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
         val adapter = PlayingQueueAdapter()
         binding.optionsRecycler.adapter = adapter
 
+        // scroll to the currently playing video in the queue
+        val currentPlayingIndex = PlayingQueue.currentIndex()
+        if (currentPlayingIndex != -1) binding.optionsRecycler.scrollToPosition(currentPlayingIndex)
+
         binding.shuffle.setOnClickListener {
             val streams = PlayingQueue.getStreams().toMutableList()
             val currentIndex = PlayingQueue.currentIndex()
