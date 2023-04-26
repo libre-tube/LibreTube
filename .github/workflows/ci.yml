@@ -68,7 +68,7 @@ jobs:
         run: |
           mv .github/uploader.py .
           echo "GH_REPO = '${{ github.repository }}'" > tgconfig.py
-          git clone --filter=blob:none https://github.com/LibreTube/NightlyBuilds nightly
+          git clone --filter=blob:none https://github.com/libre-tube/NightlyBuilds nightly
           rm -rf nightly/*.apk
           mv app/build/outputs/apk/debug/*.apk nightly/
           cd nightly
