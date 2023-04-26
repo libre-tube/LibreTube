@@ -110,10 +110,6 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.util.MimeTypes
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.io.IOException
-import java.util.*
-import java.util.concurrent.Executors
-import kotlin.math.abs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -122,6 +118,10 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
+import java.io.IOException
+import java.util.*
+import java.util.concurrent.Executors
+import kotlin.math.abs
 
 class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private var _binding: FragmentPlayerBinding? = null
@@ -185,8 +185,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     private val handler = Handler(Looper.getMainLooper())
     private val mainActivity get() = activity as MainActivity
-    private val windowInsetsControllerCompat get() = WindowCompat
-        .getInsetsController(mainActivity.window, mainActivity.window.decorView)
+    private val windowInsetsControllerCompat
+        get() = WindowCompat
+            .getInsetsController(mainActivity.window, mainActivity.window.decorView)
 
     private var scrubbingTimeBar = false
 
@@ -200,18 +201,23 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 PlayerEvent.Play -> {
                     exoPlayer.play()
                 }
+
                 PlayerEvent.Pause -> {
                     exoPlayer.pause()
                 }
+
                 PlayerEvent.Forward -> {
                     exoPlayer.seekTo(exoPlayer.currentPosition + PlayerHelper.seekIncrement)
                 }
+
                 PlayerEvent.Rewind -> {
                     exoPlayer.seekTo(exoPlayer.currentPosition - PlayerHelper.seekIncrement)
                 }
+
                 PlayerEvent.Next -> {
                     playNextVideo()
                 }
+
                 PlayerEvent.Background -> {
                     playOnBackground()
                     // wait some time in order for the service to get started properly
@@ -219,6 +225,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                         activity?.finish()
                     }
                 }
+
                 else -> {
                 }
             }
@@ -298,6 +305,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 mainMotionLayout.progress = abs(progress)
                 binding.player.hideController()
                 binding.player.useController = false
+                commentsViewModel.setCommentSheetExpand(false)
                 eId = endId
                 sId = startId
             }
@@ -310,6 +318,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     // disable captions
                     updateCaptionsLanguage(null)
                     binding.player.useController = false
+                    commentsViewModel.setCommentSheetExpand(null)
                     mainMotionLayout.progress = 1F
                     (activity as MainActivity).requestOrientationChange()
                 } else if (currentId == sId) {
@@ -317,6 +326,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     // re-enable captions
                     updateCaptionsLanguage(captionLanguage)
                     binding.player.useController = true
+                    commentsViewModel.setCommentSheetExpand(true)
                     mainMotionLayout.progress = 0F
                     changeOrientationMode()
                 }
@@ -360,6 +370,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 !exoPlayer.isPlaying && exoPlayer.playbackState == Player.STATE_ENDED -> {
                     exoPlayer.seekTo(0)
                 }
+
                 !exoPlayer.isPlaying -> exoPlayer.play()
                 else -> exoPlayer.pause()
             }
@@ -643,13 +654,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         if (segments.isEmpty()) return
 
-        exoPlayer.checkForSegments(requireContext(), segments, PlayerHelper.skipSegmentsManually)?.let { segmentEnd ->
-            binding.sbSkipBtn.visibility = View.VISIBLE
-            binding.sbSkipBtn.setOnClickListener {
-                exoPlayer.seekTo(segmentEnd)
+        exoPlayer.checkForSegments(requireContext(), segments, PlayerHelper.skipSegmentsManually)
+            ?.let { segmentEnd ->
+                binding.sbSkipBtn.visibility = View.VISIBLE
+                binding.sbSkipBtn.setOnClickListener {
+                    exoPlayer.seekTo(segmentEnd)
+                }
+                return
             }
-            return
-        }
 
         if (PlayerHelper.skipSegmentsManually) binding.sbSkipBtn.visibility = View.GONE
     }

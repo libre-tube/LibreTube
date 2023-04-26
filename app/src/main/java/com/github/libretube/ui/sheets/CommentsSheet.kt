@@ -65,6 +65,17 @@ class CommentsSheet : ExpandedBottomSheet() {
                 .runOnCommit(this@CommentsSheet::onFragmentChanged)
                 .commit()
         }
+
+        commentsViewModel.setCommentSheetExpand(true)
+        commentsViewModel.commentSheetExpand.observe(viewLifecycleOwner) {
+            if (it == null) {
+                dismiss()
+            } else if (it) {
+                expand()
+            } else {
+                expand(true)
+            }
+        }
     }
 
     private fun onFragmentChanged() {
@@ -74,6 +85,7 @@ class CommentsSheet : ExpandedBottomSheet() {
                     binding.btnBack.visibility = View.VISIBLE
                     binding.commentsTitle.text = getString(R.string.replies)
                 }
+
                 else -> {
                     binding.btnBack.visibility = View.GONE
                     binding.commentsTitle.text = getString(R.string.comments)
