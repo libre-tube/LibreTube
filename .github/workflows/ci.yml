@@ -42,10 +42,10 @@ jobs:
 
       - name: Git Configuraion
         run: |
-          git config --global user.name "alefvanoon"
-          git config --global user.email "53198048+alefvanoon@users.noreply.github.com"
+          git config --global user.name "Bnyro"
+          git config --global user.email "bnyro@tutanota.com"
           git config --global credential.helper store
-          echo "https://alefvanoon:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
+          echo "https://bnyro:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
 
       - name: Compile
         run: |
@@ -68,10 +68,10 @@ jobs:
         run: |
           mv .github/uploader.py .
           echo "GH_REPO = '${{ github.repository }}'" > tgconfig.py
-          git clone --filter=blob:none https://github.com/LibreTubeAlpha/Archive archive
-          rm -rf archive/*.apk
-          mv app/build/outputs/apk/debug/*.apk archive/
-          cd archive
+          git clone --filter=blob:none https://github.com/LibreTube/NightlyBuilds nightly
+          rm -rf nightly/*.apk
+          mv app/build/outputs/apk/debug/*.apk nightly/
+          cd nightly
           python ../uploader.py
       
       - name: Telegram Bot
