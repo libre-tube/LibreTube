@@ -68,12 +68,10 @@ class CommentsSheet : ExpandedBottomSheet() {
 
         commentsViewModel.setCommentSheetExpand(true)
         commentsViewModel.commentSheetExpand.observe(viewLifecycleOwner) {
-            if (it == null) {
-                dismiss()
-            } else if (it) {
-                expand()
-            } else {
-                expand(true)
+            when (it) {
+                true -> expand()
+                false -> expand(true)
+                else -> dismiss()
             }
         }
     }
