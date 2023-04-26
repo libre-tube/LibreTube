@@ -1,4 +1,5 @@
 from os import system as run, listdir, remove
+from json import load
 import tgconfig
 
 with open("../.github/commit.json") as f:
