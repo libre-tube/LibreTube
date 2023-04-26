@@ -77,7 +77,7 @@ jobs:
       - name: Telegram Bot
         continue-on-error: true
         run: |
-          cd archive
+          cd nightly
           mv ../tgconfig.py .
           echo "TG_TOKEN = '${{ secrets.TG_TOKEN }}'" >> tgconfig.py
           echo "TG_API_ID = '${{ secrets.TG_API_ID }}'" >> tgconfig.py
@@ -92,5 +92,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: app
-          path: archive/*.apk
+          path: nightly/*.apk
 
