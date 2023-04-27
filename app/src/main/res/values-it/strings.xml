@@ -429,4 +429,5 @@
         <item quantity="many">%d nuovi video</item>
         <item quantity="other">%d nuovi video</item>
     </plurals>
+    <string name="unlimited_search_history">Cronologia di ricerca infinita</string>
 </resources>

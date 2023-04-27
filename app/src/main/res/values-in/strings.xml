@@ -423,4 +423,5 @@
     </plurals>
     <string name="show_stream_thumbnails">Tampilkan gambar kecil saluran</string>
     <string name="show_stream_thumbnails_summary">Menampilkan gambar kecil saluran baru. Mengaktifkan ini akan membutuhkan lebih banyak data.</string>
+    <string name="unlimited_search_history">Riwayat pencarian tidak terbatas</string>
 </resources>

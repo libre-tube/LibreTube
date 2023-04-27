@@ -426,4 +426,5 @@
     <string name="show_stream_thumbnails">ප්‍රවාහ සිඟිති රූ පෙන්වන්න</string>
     <string name="show_stream_thumbnails_summary">නව ප්‍රවාහවල සිඟිති රූ පෙන්වන්න. මෙය සබල කිරීමෙන් අමතර Data වැය වේ.</string>
     <string name="fullscreen_gestures">පූර්ණ තිර ඇතුළු වන්න / පිටවන්න අභිනයන්</string>
+    <string name="unlimited_search_history">අසීමිත සෙවුම් ඉතිහාසය</string>
 </resources>
