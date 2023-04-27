@@ -104,6 +104,8 @@ class SearchResultFragment : Fragment() {
                     Log.e(TAG(), "HttpException, unexpected response")
                     return@repeatOnLifecycle
                 }
+
+                val binding = _binding ?: return@repeatOnLifecycle
                 searchAdapter = SearchAdapter()
                 binding.searchRecycler.adapter = searchAdapter
                 searchAdapter.submitList(response.items)

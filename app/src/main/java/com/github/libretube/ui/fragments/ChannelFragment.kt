@@ -118,14 +118,16 @@ class ChannelFragment : Fragment() {
                         }
                     }
                 } catch (e: IOException) {
-                    binding.channelRefresh.isRefreshing = false
+                    _binding?.channelRefresh?.isRefreshing = false
                     Log.e(TAG(), "IOException, you might not have internet connection")
                     return@repeatOnLifecycle
                 } catch (e: HttpException) {
-                    binding.channelRefresh.isRefreshing = false
+                    _binding?.channelRefresh?.isRefreshing = false
                     Log.e(TAG(), "HttpException, unexpected response")
                     return@repeatOnLifecycle
                 }
+                val binding = _binding ?: return@repeatOnLifecycle
+
                 // needed if the channel gets loaded by the ID
                 channelId = response.id
                 channelName = response.name
@@ -240,6 +242,7 @@ class ChannelFragment : Fragment() {
             } catch (e: Exception) {
                 return@launch
             }
+            val binding = _binding ?: return@launch
 
             val adapter = SearchAdapter()
             binding.channelRecView.adapter = adapter
@@ -268,14 +271,16 @@ class ChannelFragment : Fragment() {
                         RetrofitInstance.api.getChannelNextPage(channelId!!, nextPage!!)
                     }
                 } catch (e: IOException) {
-                    binding.channelRefresh.isRefreshing = false
+                    _binding?.channelRefresh?.isRefreshing = false
                     Log.e(TAG(), "IOException, you might not have internet connection")
                     return@repeatOnLifecycle
                 } catch (e: HttpException) {
-                    binding.channelRefresh.isRefreshing = false
+                    _binding?.channelRefresh?.isRefreshing = false
                     Log.e(TAG(), "HttpException, unexpected response," + e.response())
                     return@repeatOnLifecycle
                 }
+                val binding = _binding ?: return@repeatOnLifecycle
+
                 nextPage = response.nextpage
                 channelAdapter?.insertItems(response.relatedStreams)
                 isLoading = false

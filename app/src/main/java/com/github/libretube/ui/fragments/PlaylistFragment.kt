@@ -121,6 +121,8 @@ class PlaylistFragment : Fragment() {
                     Log.e(TAG(), e.toString())
                     return@repeatOnLifecycle
                 }
+                val binding = _binding ?: return@repeatOnLifecycle
+
                 playlistFeed = response.relatedStreams.toMutableList()
                 binding.playlistScrollview.visibility = View.VISIBLE
                 nextPage = response.nextpage
