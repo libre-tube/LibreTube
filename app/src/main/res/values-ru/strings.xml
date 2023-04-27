@@ -432,4 +432,5 @@
     </plurals>
     <string name="show_stream_thumbnails">Показать миниатюры видео</string>
     <string name="show_stream_thumbnails_summary">Показывать миниатюры новых видео. Включение этой функции будет потреблять дополнительные данные.</string>
+    <string name="unlimited_search_history">Неограниченная история поиска</string>
 </resources>
