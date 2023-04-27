@@ -429,4 +429,5 @@
         <item quantity="many">%d nuevas corrientes</item>
         <item quantity="other">%d nuevas corrientes</item>
     </plurals>
+    <string name="unlimited_search_history">Historial de búsqueda ilimitado</string>
 </resources>
