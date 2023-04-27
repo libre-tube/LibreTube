@@ -29,8 +29,6 @@ class HelpActivity : BaseActivity() {
         setupCard(binding.matrix, MATRIX_URL)
         setupCard(binding.mastodon, MASTODON_URL)
         setupCard(binding.telegram, TELEGRAM_URL)
-        setupCard(binding.discord, DISCORD_URL)
-        setupCard(binding.reddit, REDDIT_URL)
     }
 
     private fun setupCard(card: MaterialCardView, link: String) {
