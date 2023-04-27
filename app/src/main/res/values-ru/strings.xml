@@ -433,4 +433,8 @@
     <string name="show_stream_thumbnails">Показать миниатюры видео</string>
     <string name="show_stream_thumbnails_summary">Показывать миниатюры новых видео. Включение этой функции будет потреблять дополнительные данные.</string>
     <string name="unlimited_search_history">Неограниченная история поиска</string>
+    <string name="duration_reversed">Продолжительность (обратная)</string>
+    <string name="playlist_name_az">Название плейлиста (А-Я)</string>
+    <string name="playlist_name_za">Название плейлиста (Я-А)</string>
+    <string name="duration">Продолжительность</string>
 </resources>
