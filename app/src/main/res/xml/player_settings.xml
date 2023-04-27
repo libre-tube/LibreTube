@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+                  xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory app:title="@string/behavior">
 
@@ -9,60 +9,63 @@
             android:icon="@drawable/ic_swipe_gesture"
             android:summary="@string/swipe_controls_summary"
             app:key="player_swipe_controls"
-            app:title="@string/swipe_controls" />
+            app:title="@string/swipe_controls"/>
 
         <SwitchPreferenceCompat
             android:defaultValue="false"
             android:icon="@drawable/ic_fullscreen"
             app:key="fullscreen_gestures"
-            app:title="@string/fullscreen_gestures" />
+            app:title="@string/fullscreen_gestures"/>
 
         <SwitchPreferenceCompat
             android:defaultValue="true"
             android:icon="@drawable/ic_pinch_gesture"
             android:summary="@string/pinch_control_summary"
             app:key="player_pinch_control"
-            app:title="@string/pinch_control" />
+            app:title="@string/pinch_control"/>
 
         <SwitchPreferenceCompat
             android:defaultValue="false"
             android:icon="@drawable/ic_next"
             android:summary="@string/skip_buttons_summary"
             app:key="skip_buttons"
-            app:title="@string/skip_buttons" />
+            app:title="@string/skip_buttons"/>
 
         <SwitchPreferenceCompat
             android:defaultValue="true"
             android:icon="@drawable/ic_skip"
             android:summary="@string/double_tap_seek_summary"
             app:key="double_tap_seek"
-            app:title="@string/double_tap_seek" />
+            app:title="@string/double_tap_seek"/>
 
         <SwitchPreferenceCompat
             android:defaultValue="true"
             android:icon="@drawable/ic_window"
             app:key="picture_in_picture"
-            app:title="@string/picture_in_picture" />
+            app:title="@string/picture_in_picture"/>
 
         <SwitchPreferenceCompat
             android:defaultValue="false"
             android:icon="@drawable/ic_headphones"
             android:summary="@string/alternative_pip_controls_summary"
+            android:dependency="picture_in_picture"
             app:key="alternative_pip_controls"
-            app:title="@string/alternative_pip_controls" />
+            app:title="@string/alternative_pip_controls"/>
 
         <SwitchPreferenceCompat
             android:defaultValue="false"
             android:icon="@drawable/ic_pause_filled"
             app:key="pause_on_quit"
-            app:title="@string/pause_on_quit" />
+            android:dependency="picture_in_picture"
+            app:title="@string/pause_on_quit"/>
 
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_rotating_circle"
             android:summary="@string/autoRotatePlayer_summary"
             app:defaultValue="false"
             app:key="auto_fullscreen"
-            app:title="@string/autoRotatePlayer" />
+            android:disableDependentsState="true"
+            app:title="@string/autoRotatePlayer"/>
 
         <ListPreference
             android:icon="@drawable/ic_flip"
@@ -70,8 +73,9 @@
             app:entries="@array/fullscreenOrientation"
             app:entryValues="@array/fullscreenOrientationValues"
             app:key="fullscreen_orientation"
+            android:dependency="auto_fullscreen"
             app:title="@string/fullscreen_orientation"
-            app:useSimpleSummaryProvider="true" />
+            app:useSimpleSummaryProvider="true"/>
 
     </PreferenceCategory>
 
@@ -84,7 +88,7 @@
             app:stepSize="5.0"
             app:title="@string/seek_increment"
             app:valueFrom="5.0"
-            app:valueTo="60.0" />
+            app:valueTo="60.0"/>
 
         <ListPreference
             android:icon="@drawable/ic_time"
@@ -93,7 +97,7 @@
             app:entryValues="@array/bufferingGoalValues"
             app:key="buffering_goal"
             app:summary="@string/buffering_goal_summary"
-            app:title="@string/buffering_goal" />
+            app:title="@string/buffering_goal"/>
 
         <com.github.libretube.ui.views.SliderPreference
             android:icon="@drawable/ic_text"
@@ -102,7 +106,7 @@
             app:defValue="18"
             app:stepSize="1"
             app:valueFrom="8"
-            app:valueTo="30" />
+            app:valueTo="30"/>
 
     </PreferenceCategory>
 
@@ -112,12 +116,13 @@
             android:icon="@drawable/ic_caption"
             app:defaultValue="true"
             app:key="system_caption_style"
-            app:title="@string/system_caption_style" />
+            app:title="@string/system_caption_style"/>
 
         <Preference
             android:icon="@drawable/ic_settings"
             app:key="caption_settings"
-            app:title="@string/caption_settings" />
+            android:dependency="system_caption_style"
+            app:title="@string/caption_settings"/>
 
     </PreferenceCategory>
 
@@ -127,7 +132,7 @@
             android:defaultValue="true"
             android:icon="@drawable/ic_list"
             android:title="@string/queue_insert_related_videos"
-            app:key="queue_insert_related_videos" />
+            app:key="queue_insert_related_videos"/>
 
     </PreferenceCategory>
 
@@ -141,13 +146,13 @@
             app:stepSize="0.1"
             app:title="@string/playback_speed"
             app:valueFrom="0.2"
-            app:valueTo="4.0" />
+            app:valueTo="4.0"/>
 
         <ListPreference
             android:defaultValue=""
             android:icon="@drawable/ic_caption"
             app:key="default_subtitle"
-            app:title="@string/default_subtitle_language" />
+            app:title="@string/default_subtitle_language"/>
 
         <ListPreference
             android:defaultValue="fit"
@@ -156,27 +161,27 @@
             android:icon="@drawable/ic_zoom"
             app:key="player_resize_mode"
             app:title="@string/player_resize_mode"
-            app:useSimpleSummaryProvider="true" />
+            app:useSimpleSummaryProvider="true"/>
 
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_play_filled"
             android:summary="@string/autoplay_summary"
             app:defaultValue="true"
             app:key="autoplay"
-            app:title="@string/player_autoplay" />
+            app:title="@string/player_autoplay"/>
 
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_speed"
             android:summary="@string/autoplay_countdown_summary"
             app:defaultValue="false"
             app:key="autoplay_countdown"
-            app:title="@string/autoplay_countdown" />
+            app:title="@string/autoplay_countdown"/>
 
         <SwitchPreferenceCompat
             android:defaultValue="false"
             android:icon="@drawable/ic_fullscreen"
             android:title="@string/auto_fullscreen_shorts"
-            app:key="auto_fullscreen_shorts" />
+            app:key="auto_fullscreen_shorts"/>
 
     </PreferenceCategory>
 
@@ -187,7 +192,7 @@
             android:summary="@string/custom_playback_speed_summary"
             app:defaultValue="false"
             app:key="custom_playback_speed"
-            app:title="@string/custom_playback_speed" />
+            app:title="@string/custom_playback_speed"/>
 
         <com.github.libretube.ui.views.SliderPreference
             android:icon="@drawable/ic_speed"
@@ -195,8 +200,9 @@
             app:key="background_playback_speed"
             app:stepSize="0.1"
             app:title="@string/playback_speed"
+            android:dependency="custom_playback_speed"
             app:valueFrom="0.2"
-            app:valueTo="4.0" />
+            app:valueTo="4.0"/>
 
     </PreferenceCategory>
 
@@ -207,7 +213,7 @@
             android:summary="@string/pauseOnScreenOff_summary"
             app:defaultValue="false"
             app:key="pause_screen_off"
-            app:title="@string/pauseOnScreenOff" />
+            app:title="@string/pauseOnScreenOff"/>
 
     </PreferenceCategory>
 
