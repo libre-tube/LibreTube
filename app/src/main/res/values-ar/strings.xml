@@ -438,4 +438,9 @@
     </plurals>
     <string name="show_stream_thumbnails">إظهار الصور المصغرة للبث</string>
     <string name="show_stream_thumbnails_summary">يعرض صورة مصغرة من تيار جديد . تمكين هذه الميزة سوف تستهلك بيانات إضافية .</string>
+    <string name="playlist_name_az">اسم قائمة التشغيل (من الألف إلى الياء)</string>
+    <string name="unlimited_search_history">سجل بحث غير محدود</string>
+    <string name="playlist_name_za">اسم قائمة التشغيل (ي-أ)</string>
+    <string name="duration">المدة</string>
+    <string name="duration_reversed">المدة (معكوسة)</string>
 </resources>
