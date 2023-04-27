@@ -174,6 +174,8 @@ class SubscriptionsFragment : Fragment() {
     private suspend fun initChannelGroups() {
         channelGroups = DatabaseHolder.Database.subscriptionGroupsDao().getAll()
 
+        val binding = _binding ?: return
+
         binding.chipAll.isChecked = true
         binding.channelGroups.removeAllViews()
 
