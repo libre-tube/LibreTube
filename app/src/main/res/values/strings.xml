@@ -416,6 +416,7 @@
     <string name="background_channel_description">Shows a notification with buttons to control the audio player.</string>
     <string name="push_channel_name">Notification Worker</string>
     <string name="push_channel_description">Shows a notification when new streams are available.</string>
+    <string name="unlimited_search_history">Unlimited search history</string>
     <!-- Relative time formatting strings (remove when setting the minSdk to 24) -->
     <plurals name="years_ago">
         <item quantity="one">%d year ago</item>

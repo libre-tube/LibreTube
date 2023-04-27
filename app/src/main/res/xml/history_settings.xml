@@ -11,6 +11,13 @@
             app:key="search_history_toggle"
             app:title="@string/search_history" />
 
+        <SwitchPreferenceCompat
+            android:dependency="search_history_toggle"
+            android:defaultValue="false"
+            android:icon="@drawable/ic_search"
+            app:key="unlimited_search_history"
+            app:title="@string/unlimited_search_history" />
+
         <Preference
             android:icon="@drawable/ic_trash"
             app:key="clear_search_history"
