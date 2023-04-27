@@ -63,10 +63,7 @@ class AppearanceSettings : BasePreferenceFragment() {
 
         val navBarOptions = findPreference<Preference>(PreferenceKeys.NAVBAR_ITEMS)
         navBarOptions?.setOnPreferenceClickListener {
-            NavBarOptionsDialog().show(
-                childFragmentManager,
-                null
-            )
+            NavBarOptionsDialog().show(childFragmentManager, null)
             true
         }
 
