@@ -125,7 +125,7 @@ class LibraryFragment : Fragment() {
     }
 
     private fun fetchPlaylists() {
-        binding.playlistRefresh.isRefreshing = true
+        _binding?.playlistRefresh?.isRefreshing = true
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
                 var playlists = try {
