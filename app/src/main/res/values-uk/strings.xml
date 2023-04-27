@@ -432,4 +432,5 @@
     </plurals>
     <string name="show_stream_thumbnails_summary">Показувати мініатюри нових трансляцій. Увімкнення цієї опції споживає додаткові дані.</string>
     <string name="show_stream_thumbnails">Показувати мініатюри трансляцій</string>
+    <string name="unlimited_search_history">Необмежена історія запитів</string>
 </resources>
