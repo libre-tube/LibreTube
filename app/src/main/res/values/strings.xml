@@ -408,6 +408,10 @@
     <string name="play_automatically_summary">Start playing video automatically when selecting</string>
     <string name="fullscreen_gestures">Enter/exit fullscreen gestures</string>
     <string name="go_to_video">Go to video</string>
+    <string name="playlist_name_az">Playlist Name (A-Z)</string>
+    <string name="playlist_name_za">Playlist Name (Z-A)</string>
+    <string name="duration">Duration</string>
+    <string name="duration_reversed">Duration (reversed)</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

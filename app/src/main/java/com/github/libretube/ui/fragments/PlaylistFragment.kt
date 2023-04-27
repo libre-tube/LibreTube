@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -22,6 +23,7 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentPlaylistBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlaylistType
@@ -31,8 +33,10 @@ import com.github.libretube.extensions.serializable
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.PlaylistAdapter
 import com.github.libretube.ui.models.PlayerViewModel
+import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.Dispatchers
@@ -58,6 +62,11 @@ class PlaylistFragment : Fragment() {
 
     // view models
     private val playerViewModel: PlayerViewModel by activityViewModels()
+    private var selectedSortOrder = PreferenceHelper.getInt(PreferenceKeys.PLAYLIST_SORT_ORDER, 0)
+        set(value) {
+            PreferenceHelper.putInt(PreferenceKeys.PLAYLIST_SORT_ORDER, value)
+            field = value
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -139,6 +148,8 @@ class PlaylistFragment : Fragment() {
 
                 binding.playlistInfo.text = getChannelAndVideoString(response, response.videos)
 
+                showPlaylistVideos(response)
+
                 // show playlist options
                 binding.optionsMenu.setOnClickListener {
                     PlaylistOptionsBottomSheet(
@@ -197,67 +208,17 @@ class PlaylistFragment : Fragment() {
                             keepQueue = true
                         )
                     }
-                }
+                    binding.sortMenu.isGone = false
+                    binding.sortMenu.setOnClickListener {
+                        val sortOptions = resources.getStringArray(R.array.playlistSortOptions)
 
-                playlistAdapter = PlaylistAdapter(playlistFeed, playlistId!!, playlistType)
-
-                // listen for playlist items to become deleted
-                playlistAdapter!!.registerAdapterDataObserver(object :
-                    RecyclerView.AdapterDataObserver() {
-                    override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-                        if (positionStart == 0) {
-                            ImageHelper.loadImage(
-                                playlistFeed.firstOrNull()?.thumbnail ?: "",
-                                binding.thumbnail
-                            )
-                        }
-
-                        binding.playlistInfo.text =
-                            getChannelAndVideoString(response, playlistFeed.size)
+                        BaseBottomSheet().apply {
+                            setSimpleItems(sortOptions.toList()) { index ->
+                                selectedSortOrder = index
+                                showPlaylistVideos(response)
+                            }
+                        }.show(childFragmentManager)
                     }
-                })
-
-                binding.playlistRecView.adapter = playlistAdapter
-                binding.playlistScrollview.viewTreeObserver.addOnScrollChangedListener {
-                    if (_binding?.playlistScrollview?.canScrollVertically(1) == false &&
-                        !isLoading
-                    ) {
-                        // append more playlists to the recycler view
-                        if (playlistType != PlaylistType.PUBLIC) {
-                            isLoading = true
-                            playlistAdapter?.showMoreItems()
-                            isLoading = false
-                        } else {
-                            fetchNextPage()
-                        }
-                    }
-                }
-
-                // listener for swiping to the left or right
-                if (playlistType != PlaylistType.PUBLIC) {
-                    val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
-                        0,
-                        ItemTouchHelper.LEFT
-                    ) {
-                        override fun onMove(
-                            recyclerView: RecyclerView,
-                            viewHolder: RecyclerView.ViewHolder,
-                            target: RecyclerView.ViewHolder
-                        ): Boolean {
-                            return false
-                        }
-
-                        override fun onSwiped(
-                            viewHolder: RecyclerView.ViewHolder,
-                            direction: Int
-                        ) {
-                            val position = viewHolder.absoluteAdapterPosition
-                            playlistAdapter!!.removeFromPlaylist(requireContext(), position)
-                        }
-                    }
-
-                    val itemTouchHelper = ItemTouchHelper(itemTouchCallback)
-                    itemTouchHelper.attachToRecyclerView(binding.playlistRecView)
                 }
 
                 withContext(Dispatchers.IO) {
@@ -272,6 +233,88 @@ class PlaylistFragment : Fragment() {
                     }
                 }
             }
+        }
+    }
+
+    private fun showPlaylistVideos(playlist: Playlist) {
+        val videos = if (playlistType == PlaylistType.PUBLIC) playlistFeed
+        else {
+            when (selectedSortOrder) {
+                0, 1 -> {
+                    if (playlistType == PlaylistType.LOCAL) playlistFeed.sortedBy {
+                        it.url.orEmpty().toInt()
+                    } else playlistFeed
+                }
+                2, 3 -> {
+                    playlistFeed.sortedBy { it.duration }
+                }
+                4, 5 -> {
+                    playlistFeed.sortedBy { it.title }
+                }
+                else -> throw IllegalArgumentException()
+            }.let {
+                if (selectedSortOrder % 2 == 0) it else it.reversed()
+            }
+        }
+
+        playlistAdapter = PlaylistAdapter(videos.toMutableList(), playlistId!!, playlistType)
+        binding.playlistRecView.adapter = playlistAdapter
+
+        // listen for playlist items to become deleted
+        playlistAdapter!!.registerAdapterDataObserver(object :
+            RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+                if (positionStart == 0) {
+                    ImageHelper.loadImage(
+                        playlistFeed.firstOrNull()?.thumbnail ?: "",
+                        binding.thumbnail
+                    )
+                }
+
+                binding.playlistInfo.text = getChannelAndVideoString(playlist, playlistFeed.size)
+            }
+        })
+
+        binding.playlistScrollview.viewTreeObserver.addOnScrollChangedListener {
+            if (_binding?.playlistScrollview?.canScrollVertically(1) == false &&
+                !isLoading
+            ) {
+                // append more playlists to the recycler view
+                if (playlistType != PlaylistType.PUBLIC) {
+                    isLoading = true
+                    playlistAdapter?.showMoreItems()
+                    isLoading = false
+                } else {
+                    fetchNextPage()
+                }
+            }
+        }
+
+        // listener for swiping to the left or right
+        if (playlistType != PlaylistType.PUBLIC) {
+            val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
+                0,
+                ItemTouchHelper.LEFT
+            ) {
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+                    return false
+                }
+
+                override fun onSwiped(
+                    viewHolder: RecyclerView.ViewHolder,
+                    direction: Int
+                ) {
+                    val position = viewHolder.absoluteAdapterPosition
+                    playlistAdapter!!.removeFromPlaylist(requireContext(), position)
+                }
+            }
+
+            val itemTouchHelper = ItemTouchHelper(itemTouchCallback)
+            itemTouchHelper.attachToRecyclerView(binding.playlistRecView)
         }
     }
 
