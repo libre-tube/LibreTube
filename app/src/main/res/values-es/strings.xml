@@ -430,4 +430,8 @@
         <item quantity="other">%d nuevas corrientes</item>
     </plurals>
     <string name="unlimited_search_history">Historial de búsqueda ilimitado</string>
+    <string name="duration_reversed">Duración (invertida)</string>
+    <string name="playlist_name_az">Nombre de la lista de reproducción (A-Z)</string>
+    <string name="duration">Duración</string>
+    <string name="playlist_name_za">Nombre de la lista de reproducción (Z-A)</string>
 </resources>
