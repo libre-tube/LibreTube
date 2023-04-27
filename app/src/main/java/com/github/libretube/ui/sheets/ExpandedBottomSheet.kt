@@ -7,6 +7,7 @@ import android.widget.FrameLayout
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.PEEK_HEIGHT_AUTO
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -30,13 +31,15 @@ open class ExpandedBottomSheet : BottomSheetDialogFragment() {
         dialog?.dismiss()
     }
 
-    fun expand(half: Boolean = false) {
+    fun expand(collapse: Boolean = false) {
         bottomSheet?.let { fl ->
             val bottomSheetInfoBehavior = BottomSheetBehavior.from(fl)
-            bottomSheetInfoBehavior.state = if (half) {
-                BottomSheetBehavior.STATE_HALF_EXPANDED
+            if (collapse) {
+                bottomSheetInfoBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                bottomSheetInfoBehavior.setPeekHeight(0, true)
             } else {
-                BottomSheetBehavior.STATE_EXPANDED
+                bottomSheetInfoBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                bottomSheetInfoBehavior.setPeekHeight(PEEK_HEIGHT_AUTO, true)
             }
         }
     }
