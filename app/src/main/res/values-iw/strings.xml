@@ -432,4 +432,5 @@
     </plurals>
     <string name="show_stream_thumbnails">הצגת תמונות ממוזערות של תזרימים</string>
     <string name="show_stream_thumbnails_summary">הצגת תמונות ממוזערות של תזרימים חדשים. הפעלת האפשרות תוביל לצריכה של נתונים נוספים.</string>
+    <string name="unlimited_search_history">היסטוריית חיפושים בלתי מוגבלת</string>
 </resources>
