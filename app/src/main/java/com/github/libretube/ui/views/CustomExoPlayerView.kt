@@ -219,6 +219,7 @@ internal class CustomExoPlayerView(
 
         playerViewModel?.isFullscreen?.observe(viewLifecycleOwner!!) { isFullscreen ->
             WindowHelper.toggleFullscreen(activity, isFullscreen)
+            updateTopBarMargin()
         }
     }
 
@@ -644,11 +645,13 @@ internal class CustomExoPlayerView(
      * Add extra margin to the top bar to not overlap the status bar
      */
     private fun updateTopBarMargin() {
-        val isFullscreen =
-            resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE ||
-                playerViewModel?.isFullscreen?.value == true
+        val margin = when {
+            resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE -> 10
+            playerViewModel?.isFullscreen?.value == true -> 20
+            else -> 0
+        }
         binding.topBar.updateLayoutParams<MarginLayoutParams> {
-            topMargin = (if (isFullscreen) 10 else 0).dpToPx().toInt()
+            topMargin = margin.dpToPx().toInt()
         }
     }
 
