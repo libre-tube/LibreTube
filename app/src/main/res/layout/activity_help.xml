@@ -75,30 +75,6 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/discord"
-            style="@style/AboutCard">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                style="@style/AboutItem"
-                android:text="Discord"
-                app:drawableStartCompat="@drawable/ic_discord"
-                tools:ignore="HardcodedText" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/reddit"
-            style="@style/AboutCard">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                style="@style/AboutItem"
-                android:text="Reddit"
-                app:drawableStartCompat="@drawable/ic_reddit"
-                tools:ignore="HardcodedText" />
-
-        </com.google.android.material.card.MaterialCardView>
-
     </LinearLayout>
 
 </ScrollView>
