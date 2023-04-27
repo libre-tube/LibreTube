@@ -430,4 +430,8 @@
     <string name="show_stream_thumbnails_summary">Mostre as miniaturas de novas transmissões. Ativar isso consumirá dados adicionais.</string>
     <string name="show_stream_thumbnails">Mostrar miniaturas da transmissão</string>
     <string name="unlimited_search_history">Histórico de pesquisa ilimitado</string>
+    <string name="playlist_name_za">Nome da Playlist (Z-A)</string>
+    <string name="playlist_name_az">Nome da Playlist (A-Z)</string>
+    <string name="duration">Duração</string>
+    <string name="duration_reversed">Duração (invertida)</string>
 </resources>
