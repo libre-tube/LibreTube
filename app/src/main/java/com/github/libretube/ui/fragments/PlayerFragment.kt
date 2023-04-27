@@ -396,7 +396,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         // FullScreen button trigger
-        // hide fullscreen button if auto rotation enabled
+        // hide fullscreen button if autorotation enabled
         playerBinding.fullscreen.isInvisible = PlayerHelper.autoRotationEnabled
         playerBinding.fullscreen.setOnClickListener {
             // hide player controller
@@ -508,7 +508,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             val height = streams.videoStreams.firstOrNull()?.height ?: exoPlayer.videoSize.height
             val width = streams.videoStreams.firstOrNull()?.width ?: exoPlayer.videoSize.width
 
-            // different orientations of the video are only available when auto rotation is disabled
+            // different orientations of the video are only available when autorotation is disabled
             val orientation = PlayerHelper.getOrientation(width, height)
             mainActivity.requestedOrientation = orientation
         }
@@ -538,7 +538,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playerBinding.exoTitle.visibility = View.INVISIBLE
 
         if (!PlayerHelper.autoRotationEnabled) {
-            // switch back to portrait mode if auto rotation disabled
+            // switch back to portrait mode if autorotation disabled
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
         }
 

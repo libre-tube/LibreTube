@@ -237,13 +237,18 @@ class PlaylistFragment : Fragment() {
     }
 
     private fun showPlaylistVideos(playlist: Playlist) {
-        val videos = if (playlistType == PlaylistType.PUBLIC) playlistFeed
-        else {
+        val videos = if (playlistType == PlaylistType.PUBLIC) {
+            playlistFeed
+        } else {
             when (selectedSortOrder) {
                 0, 1 -> {
-                    if (playlistType == PlaylistType.LOCAL) playlistFeed.sortedBy {
-                        it.url.orEmpty().toInt()
-                    } else playlistFeed
+                    if (playlistType == PlaylistType.LOCAL) {
+                        playlistFeed.sortedBy {
+                            it.url.orEmpty().toInt()
+                        }
+                    } else {
+                        playlistFeed
+                    }
                 }
                 2, 3 -> {
                     playlistFeed.sortedBy { it.duration }
