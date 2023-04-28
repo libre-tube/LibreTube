@@ -427,4 +427,8 @@
     <string name="show_stream_thumbnails">ଷ୍ଟ୍ରିମ୍ ଥମ୍ବନେଲ ଦେଖାନ୍ତୁ</string>
     <string name="show_stream_thumbnails_summary">ନୂତନ ଧାରଣାଗୁଡ଼ିକର ଥମ୍ବନେଲଗୁଡିକ ଦେଖାନ୍ତୁ । ଏହାକୁ ସକ୍ଷମ କରିବା ଅତିରିକ୍ତ ତଥ୍ୟ ଖର୍ଚ୍ଚ କରିବ ।</string>
     <string name="unlimited_search_history">ଅସୀମିତ ସନ୍ଧାନ ଇତିହାସ</string>
+    <string name="playlist_name_za">ପ୍ଲେଲିଷ୍ଟ ନାମ (Z-A)</string>
+    <string name="duration">ଅବଧି</string>
+    <string name="duration_reversed">ଅବଧି (ଓଲଟା)</string>
+    <string name="playlist_name_az">ପ୍ଲେଲିଷ୍ଟ ନାମ (A-Z)</string>
 </resources>
