@@ -1,6 +1,5 @@
 package com.github.libretube.api
 
-import android.content.Context
 import androidx.core.text.isDigitsOnly
 import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.PlaylistId
@@ -179,8 +178,7 @@ object PlaylistsHelper {
             }
     }
 
-    suspend fun clonePlaylist(context: Context, playlistId: String): String? {
-        val appContext = context.applicationContext
+    suspend fun clonePlaylist(playlistId: String): String? {
         if (!loggedIn) {
             val playlist = RetrofitInstance.api.getPlaylist(playlistId)
             val newPlaylist = createPlaylist(playlist.name ?: "Unknown name") ?: return null

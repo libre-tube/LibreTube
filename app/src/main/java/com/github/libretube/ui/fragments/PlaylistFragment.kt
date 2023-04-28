@@ -237,29 +237,19 @@ class PlaylistFragment : Fragment() {
     }
 
     private fun showPlaylistVideos(playlist: Playlist) {
-        val videos = if (playlistType == PlaylistType.PUBLIC) {
-            playlistFeed
-        } else {
-            when (selectedSortOrder) {
-                0, 1 -> {
-                    if (playlistType == PlaylistType.LOCAL) {
-                        playlistFeed.sortedBy {
-                            it.url.orEmpty().toInt()
-                        }
-                    } else {
-                        playlistFeed
-                    }
-                }
-                2, 3 -> {
-                    playlistFeed.sortedBy { it.duration }
-                }
-                4, 5 -> {
-                    playlistFeed.sortedBy { it.title }
-                }
-                else -> throw IllegalArgumentException()
-            }.let {
-                if (selectedSortOrder % 2 == 0) it else it.reversed()
+        val videos = when {
+            selectedSortOrder in listOf(0, 1) || playlistType == PlaylistType.PUBLIC -> {
+                playlistFeed
             }
+            selectedSortOrder in listOf(2, 3) -> {
+                playlistFeed.sortedBy { it.duration }
+            }
+            selectedSortOrder in listOf(4, 5) -> {
+                playlistFeed.sortedBy { it.title }
+            }
+            else -> throw IllegalArgumentException()
+        }.let {
+            if (selectedSortOrder % 2 == 0) it else it.reversed()
         }
 
         playlistAdapter = PlaylistAdapter(videos.toMutableList(), playlistId!!, playlistType)
