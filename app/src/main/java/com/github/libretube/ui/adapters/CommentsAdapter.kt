@@ -1,8 +1,6 @@
 package com.github.libretube.ui.adapters
 
 import android.annotation.SuppressLint
-import android.os.Handler
-import android.os.Looper
 import android.text.method.LinkMovementMethod
 import android.view.*
 import android.view.ViewGroup.MarginLayoutParams
@@ -78,12 +76,8 @@ class CommentsAdapter(
             commentInfos.text = comment.author + TextUtils.SEPARATOR + comment.commentedTime
 
             commentText.movementMethod = LinkMovementMethod.getInstance()
-            commentText.text = comment.commentText
+            commentText.text = comment.commentText?.replace("</a>", "</a> ")
                 ?.parseAsHtml(tagHandler = HtmlParser(LinkHandler(handleLink ?: {})))
-
-            commentText.setOnClickListener {
-                navigateToReplies(comment)
-            }
 
             ImageHelper.loadImage(comment.thumbnail, commentorImage)
             likesTextView.text = comment.likeCount.formatShort()
@@ -121,6 +115,9 @@ class CommentsAdapter(
 
             if (!isRepliesAdapter && comment.repliesPage != null) {
                 root.setOnClickListener {
+                    navigateToReplies(comment)
+                }
+                commentText.setOnClickListener {
                     navigateToReplies(comment)
                 }
             }
