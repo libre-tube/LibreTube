@@ -79,10 +79,6 @@ class CommentsAdapter(
             commentText.text = comment.commentText?.replace("</a>", "</a> ")
                 ?.parseAsHtml(tagHandler = HtmlParser(LinkHandler(handleLink ?: {})))
 
-            commentText.setOnClickListener {
-                navigateToReplies(comment)
-            }
-
             ImageHelper.loadImage(comment.thumbnail, commentorImage)
             likesTextView.text = comment.likeCount.formatShort()
 
@@ -119,6 +115,9 @@ class CommentsAdapter(
 
             if (!isRepliesAdapter && comment.repliesPage != null) {
                 root.setOnClickListener {
+                    navigateToReplies(comment)
+                }
+                commentText.setOnClickListener {
                     navigateToReplies(comment)
                 }
             }
