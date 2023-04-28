@@ -30,7 +30,7 @@ class CreatePlaylistDialog(
                     requireDialog().hide()
                     val playlistId = withContext(Dispatchers.IO) {
                         runCatching {
-                            PlaylistsHelper.clonePlaylist(requireContext(), it)
+                            PlaylistsHelper.clonePlaylist(it)
                         }.getOrNull()
                     }
                     if (playlistId != null) {
