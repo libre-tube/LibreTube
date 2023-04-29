@@ -424,4 +424,8 @@
     <string name="show_stream_thumbnails">Tampilkan gambar kecil saluran</string>
     <string name="show_stream_thumbnails_summary">Menampilkan gambar kecil saluran baru. Mengaktifkan ini akan membutuhkan lebih banyak data.</string>
     <string name="unlimited_search_history">Riwayat pencarian tidak terbatas</string>
+    <string name="playlist_name_az">Nama Daftar Putar (A-Z)</string>
+    <string name="playlist_name_za">Nama Daftar Putar (Z-A)</string>
+    <string name="duration">Durasi</string>
+    <string name="duration_reversed">Durasi (dibalik)</string>
 </resources>
