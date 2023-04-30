@@ -1,8 +1,6 @@
 package com.github.libretube.ui.adapters
 
 import android.annotation.SuppressLint
-import android.os.Handler
-import android.os.Looper
 import android.text.method.LinkMovementMethod
 import android.view.*
 import android.view.ViewGroup.MarginLayoutParams

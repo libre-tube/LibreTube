@@ -18,6 +18,8 @@ class CommentsViewModel : ViewModel() {
 
     val commentSheetExpand = MutableLiveData<Boolean?>()
 
+    var currentCommentsPosition = 0
+
     fun setCommentSheetExpand(value: Boolean?) {
         if (commentSheetExpand.value != value) {
             commentSheetExpand.value = value
@@ -73,5 +75,6 @@ class CommentsViewModel : ViewModel() {
         commentsPage.value = null
         videoId = null
         setCommentSheetExpand(null)
+        currentCommentsPosition = 0
     }
 }

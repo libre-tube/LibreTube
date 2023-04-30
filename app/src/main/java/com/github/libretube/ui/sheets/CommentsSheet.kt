@@ -17,7 +17,7 @@ import com.github.libretube.ui.fragments.CommentsRepliesFragment
 import com.github.libretube.ui.models.CommentsViewModel
 
 class CommentsSheet : ExpandedBottomSheet() {
-    private lateinit var binding: CommentsSheetBinding
+    lateinit var binding: CommentsSheetBinding
     private val commentsViewModel: CommentsViewModel by activityViewModels()
 
     override fun onCreateView(
