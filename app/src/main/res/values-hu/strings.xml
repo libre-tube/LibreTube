@@ -426,4 +426,9 @@
     </plurals>
     <string name="show_stream_thumbnails">Közvetítés bélyegképének megjelenítése</string>
     <string name="show_stream_thumbnails_summary">Megjeleníti az új streamek bélyegképeit Ennek engedélyezése további adatokat fogyaszt.</string>
+    <string name="duration">Időtartam</string>
+    <string name="playlist_name_az">Lejátszási lista neve (A-Z)</string>
+    <string name="duration_reversed">Időtartam (fordított)</string>
+    <string name="unlimited_search_history">Végtelen keresési előzmények</string>
+    <string name="playlist_name_za">Lejátszási lista neve (Z-A)</string>
 </resources>

@@ -433,4 +433,8 @@
     <string name="show_stream_thumbnails">הצגת תמונות ממוזערות של תזרימים</string>
     <string name="show_stream_thumbnails_summary">הצגת תמונות ממוזערות של תזרימים חדשים. הפעלת האפשרות תוביל לצריכה של נתונים נוספים.</string>
     <string name="unlimited_search_history">היסטוריית חיפושים בלתי מוגבלת</string>
+    <string name="playlist_name_az">שם רשימת נגינה (א-ת)</string>
+    <string name="playlist_name_za">שם רשימת נגינה (ת-א)</string>
+    <string name="duration">משך</string>
+    <string name="duration_reversed">משך (הפוך)</string>
 </resources>

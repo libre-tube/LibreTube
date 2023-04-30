@@ -427,4 +427,8 @@
     <string name="show_stream_thumbnails">Yayım miniatürləri göstər</string>
     <string name="show_stream_thumbnails_summary">Yeni yayımların miniatürlərin göstərir. Bu aktivləşdirilsə əlavə məlumat sərf ediləcək.</string>
     <string name="unlimited_search_history">Qeyri-məhdud axtarış tarixçəsi</string>
+    <string name="duration_reversed">Müddət (əks)</string>
+    <string name="playlist_name_az">Oynatma Siyahısı Adı (A-Z)</string>
+    <string name="playlist_name_za">Oynatma Siyahısı Adı (Z-A)</string>
+    <string name="duration">Müddət</string>
 </resources>
