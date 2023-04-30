@@ -151,7 +151,7 @@
     <string name="require_restart_message">Naciśnij „OK”, aby zastosować zmiany. Aplikacja zostanie zrestartowana.</string>
     <string name="notifications">Powiadomienia</string>
     <string name="notify_new_streams">Pokaż powiadomienia o nowych transmisjach</string>
-    <string name="notify_new_streams_summary">Informuj o nowych treściach od twórców, których śledzisz.</string>
+    <string name="notify_new_streams_summary">Wyświetlaj powiadomienia o nowych treściach od twórców, których śledzisz.</string>
     <string name="irreversible">Czy na pewno\? Tego nie da się cofnąć!</string>
     <string name="require_restart">Wymagany restart aplikacji</string>
     <string name="gradientIcon">Gładki gradient</string>
@@ -182,7 +182,7 @@
     <string name="flameIcon">Latający płomień</string>
     <string name="no_audio">Brak dźwięku</string>
     <string name="no_video">Bez obrazu</string>
-    <string name="audio">W tle</string>
+    <string name="audio">Dźwięk</string>
     <string name="video">Obraz</string>
     <string name="player_autoplay">Autoodtwarzanie</string>
     <string name="instance_frontend_url">Link do front-endu instancji</string>
@@ -368,7 +368,7 @@
     <string name="forward">Do przodu</string>
     <string name="pause">Wstrzymaj</string>
     <string name="alternative_pip_controls">Alternatywne sterowanie PiP</string>
-    <string name="alternative_pip_controls_summary">Wyświetl sterowanie odtwarzaniem dźwięku w tle i pomijania filmu zamiast przycisków przewijania do tyłu i przodu.</string>
+    <string name="alternative_pip_controls_summary">Pokaż elementy sterujące „tylko dźwięk” i pomijanie w PiP zamiast przewijania do przodu i do tyłu</string>
     <string name="audio_player">Odtwarzacz dźwięku</string>
     <string name="download_paused">Pobieranie wstrzymane</string>
     <string name="download_completed">Pobieranie ukończone</string>
@@ -422,4 +422,19 @@
     <string name="edit_group">Edytuj grupę</string>
     <string name="play_automatically">Automatyczne odtwarzanie</string>
     <string name="play_automatically_summary">Automatycznie rozpocznij odtwarzanie wideo po wybraniu</string>
+    <string name="unlimited_search_history">Nieograniczona historia wyszukiwania</string>
+    <string name="playlist_name_za">Nazwa playlisty (Z-A)</string>
+    <string name="duration">Czas trwania</string>
+    <string name="duration_reversed">Czas trwania (odwrócony)</string>
+    <string name="fullscreen_gestures">Pełnoekranowe gesty wejścia/wyjścia</string>
+    <string name="playlist_name_az">Nazwa playlisty (A-Z)</string>
+    <string name="go_to_video">Przejdź do filmu</string>
+    <string name="show_stream_thumbnails">Pokaż miniaturki</string>
+    <string name="show_stream_thumbnails_summary">Wyświetlaj miniaturki nowych treści. Zwiększa użycie danych.</string>
+    <plurals name="channel_new_streams">
+        <item quantity="one">%d nowy film</item>
+        <item quantity="few">%d nowe filmy</item>
+        <item quantity="many">%d nowych filmów</item>
+        <item quantity="other">%d nowych filmów</item>
+    </plurals>
 </resources>
