@@ -429,4 +429,9 @@
     </plurals>
     <string name="show_stream_thumbnails">Mostrar miniaturas do vídeo</string>
     <string name="show_stream_thumbnails_summary">Mostrar as miniaturas de novas streams. A ativação disto irá consumir dados adicionais.</string>
+    <string name="unlimited_search_history">Histórico de pesquisa ilimitado</string>
+    <string name="playlist_name_az">Nome Da Lista De Reprodução (A-Z)</string>
+    <string name="playlist_name_za">Nome Da Lista De Reprodução (Z-A)</string>
+    <string name="duration">Duração</string>
+    <string name="duration_reversed">Duração (invertida)</string>
 </resources>
