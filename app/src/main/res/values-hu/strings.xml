@@ -429,6 +429,6 @@
     <string name="duration">Időtartam</string>
     <string name="playlist_name_az">Lejátszási lista neve (A-Z)</string>
     <string name="duration_reversed">Időtartam (fordított)</string>
-    <string name="unlimited_search_history">Végtelen keresési előzmények</string>
+    <string name="unlimited_search_history">Korlátlan keresési előzmények</string>
     <string name="playlist_name_za">Lejátszási lista neve (Z-A)</string>
 </resources>
