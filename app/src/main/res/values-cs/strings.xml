@@ -395,7 +395,7 @@
     <string name="autoplay_countdown">Odpočítávání automatického přehrávání</string>
     <string name="autoplay_countdown_summary">Před automatickým přehráním dalšího videa zobrazit 5s odpočítávání.</string>
     <string name="playing_next">Přehrávání dalšího videa za %1$s</string>
-    <string name="stats_for_nerds">Statistiky pro nerdy</string>
+    <string name="stats_for_nerds">Statistiky pro experty</string>
     <string name="video_id">ID videa</string>
     <plurals name="years_ago">
         <item quantity="one">Před rokem</item>
@@ -431,7 +431,7 @@
     <string name="show_stream_thumbnails_summary">Zobrazit náhledy nových videí. Povolením této funkce bude spotřebováno více dat.</string>
     <string name="unlimited_search_history">Neomezená historie vyhledávání</string>
     <string name="playlist_name_za">Název playlistu (Z-A)</string>
-    <string name="duration_reversed">Trvání (obráceně)</string>
+    <string name="duration_reversed">Délka (obráceně)</string>
     <string name="playlist_name_az">Název playlistu (A-Z)</string>
-    <string name="duration">Trvání</string>
+    <string name="duration">Délka</string>
 </resources>
