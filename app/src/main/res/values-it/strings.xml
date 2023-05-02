@@ -289,9 +289,9 @@
     <string name="filename">Nome del file</string>
     <string name="invalid_filename">Nome del file non valido!</string>
     <string name="playlists_order">Ordine delle playlist</string>
-    <string name="playlistNameReversed">Nome della playlist (invertito)</string>
+    <string name="playlistNameReversed">Nome playlist (invertito)</string>
     <string name="recentlyUpdated">Aggiornate di recente</string>
-    <string name="recentlyUpdatedReversed">Aggiornate di recente (invertito)</string>
+    <string name="recentlyUpdatedReversed">Aggiornato di recente (invertito)</string>
     <string name="added_to_playlist">Aggiunto alla playlist</string>
     <string name="queue">Coda</string>
     <string name="sb_markers">Marcatori</string>
@@ -430,4 +430,8 @@
         <item quantity="other">%d nuovi video</item>
     </plurals>
     <string name="unlimited_search_history">Cronologia di ricerca infinita</string>
+    <string name="playlist_name_az">Nome playlist (A-Z)</string>
+    <string name="duration">Durata</string>
+    <string name="duration_reversed">Durata (invertito)</string>
+    <string name="playlist_name_za">Nome playlist (Z-A)</string>
 </resources>
