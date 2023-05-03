@@ -255,7 +255,7 @@
     <string name="background_mode">Modo de segundo plano</string>
     <string name="add_to_queue">Añadir a la cola</string>
     <string name="misc">Miscelánea</string>
-    <string name="yt_shorts">Vídeos Cortos</string>
+    <string name="yt_shorts">Shorts</string>
     <string name="no_subtitles_available">No hay subtítulos disponibles</string>
     <string name="player_resize_mode">Modo de redimensión</string>
     <string name="maximum_image_cache">Tamaño máximo de la caché de imágenes</string>
