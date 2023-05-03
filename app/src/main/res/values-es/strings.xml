@@ -18,12 +18,12 @@
     <string name="already_logged_in">Ya ha iniciado sesión. Puede cerrar sesión en su cuenta.</string>
     <string name="instances">Elegir…</string>
     <string name="customInstance">Personalizada</string>
-    <string name="login_register">Iniciar sesión/registrarse</string>
+    <string name="login_register">Iniciar sesión/Registrarse</string>
     <string name="importsuccess">Suscrito</string>
     <string name="loggedout">Desconectado.</string>
     <string name="region">Región</string>
     <string name="cannotDownload">No se puede descargar esta transmisión.</string>
-    <string name="downloadfailed">Error de descarga.</string>
+    <string name="downloadfailed">Descarga fallida.</string>
     <string name="import_from_yt">Importar suscripciones</string>
     <string name="app_theme">Tema</string>
     <string name="error">Algo salió mal.</string>
@@ -37,12 +37,12 @@
     <string name="playlistName">Nombre de la lista de reproducción</string>
     <string name="success">Hecho.</string>
     <string name="fail">Error :(</string>
-    <string name="dlisinprogress">Espere a que finalicen todas las descargas actuales.</string>
+    <string name="dlisinprogress">Espere a que finalicen todas las descargas en curso.</string>
     <string name="server_error">Parece que hay un problema con el servidor seleccionado. Pruebe con otra instancia.</string>
     <string name="unknown_error">Error de red.</string>
     <string name="deletePlaylist">Eliminar lista de reproducción</string>
     <string name="createPlaylist">Crear lista de reproducción</string>
-    <string name="addToPlaylist">Añadir a la lista de reproducción</string>
+    <string name="addToPlaylist">Añadir a lista de reproducción</string>
     <string name="about">Acerca de</string>
     <string name="emptyPlaylistName">El nombre de la lista de reproducción no puede estar vacío</string>
     <string name="startpage">Inicio</string>
@@ -180,7 +180,7 @@
     <string name="portrait">Vertical</string>
     <string name="aspect_ratio">Relación de aspecto del vídeo</string>
     <string name="auto_rotation">Rotación automática</string>
-    <string name="turnInternetOn">Por favor, active la WiFi o los datos móviles para conectarse a Internet.</string>
+    <string name="turnInternetOn">Por favor, activa datos móviles o WiFi para conectarte a Internet.</string>
     <string name="open">Abrir…</string>
     <string name="chapters">Capítulos</string>
     <string name="require_restart_message">Reinicie la aplicación para usar los nuevos cambios.</string>
@@ -411,7 +411,7 @@
     <string name="lbry_hls">LBRY HLS</string>
     <string name="subscriberAndVideoCounts">%1$s suscriptores • %2$d vídeos</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d vídeos</string>
-    <string name="disable_proxy">Deshabilitar el próximo de Piped</string>
+    <string name="disable_proxy">Deshabilitar el proxy de Piped</string>
     <string name="disable_proxy_summary">Carga vídeos e imágenes directamente desde los servidores de YouTube. Activa esta opción sólo si utilizas una VPN. Ten en cuenta que esto podría no funcionar con contenido de YouTube Música.</string>
     <string name="auto_fullscreen_shorts">Pantalla completa automáticamente en videos cortos</string>
     <string name="channel_groups">Grupos de canales</string>
