@@ -423,4 +423,9 @@
     <string name="play_automatically">自动播放</string>
     <string name="play_automatically_summary">选择视频时自动开始播放</string>
     <string name="auto_fullscreen_shorts">观看短视频时自动全屏</string>
+    <string name="unlimited_search_history">无限搜索历史条目</string>
+    <string name="playlist_name_za">播放列表名（Z-A）</string>
+    <string name="duration">持续时长</string>
+    <string name="playlist_name_az">播放列表名（A-Z）</string>
+    <string name="duration_reversed">持续时长（倒序）</string>
 </resources>
