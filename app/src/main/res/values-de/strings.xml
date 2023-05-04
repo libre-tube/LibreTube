@@ -426,9 +426,9 @@
     <string name="show_stream_thumbnails_summary">Zeige Miniaturansichten von neuen Videos an. Dadurch wird zusätzliches Datenvolumen verbraucht.</string>
     <string name="show_stream_thumbnails">Video-Miniaturansichten anzeigen</string>
     <string name="go_to_video">Zum Video</string>
-    <string name="unlimited_search_history">Unendlicher Suchverlauf</string>
-    <string name="playlist_name_az">Playlist Name (A-Z)</string>
-    <string name="playlist_name_za">Playlist Name (Z-A)</string>
-    <string name="duration">Dauer</string>
-    <string name="duration_reversed">Dauer (Rückwärts)</string>
+    <string name="unlimited_search_history">Unbegrenzter Suchverlauf</string>
+    <string name="playlist_name_az">Playlist-Name (A-Z)</string>
+    <string name="playlist_name_za">Playlist-Name (Z-A)</string>
+    <string name="duration">Dauer (aufsteigend)</string>
+    <string name="duration_reversed">Dauer (absteigend)</string>
 </resources>
