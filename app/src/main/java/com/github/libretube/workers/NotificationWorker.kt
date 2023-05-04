@@ -92,28 +92,24 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             return true
         }
 
-        // filter the new videos until the last seen video in the feed
-        val newStreams = videoFeed.takeWhile { it.url!!.toID() != lastSeenStreamId }
-
-        // return if the previous video didn't get found
-        if (newStreams.isEmpty()) return true
-
-        // hide for notifications unsubscribed channels
         val channelsToIgnore = PreferenceHelper.getIgnorableNotificationChannels()
-        val filteredVideos = newStreams.filter {
-            channelsToIgnore.none { channelId ->
-                channelId == it.uploaderUrl?.toID()
-            }
-        }
 
-        // group the new streams by the uploader
-        val channelGroups = filteredVideos.groupBy { it.uploaderUrl!!.toID() }
+        val channelGroups = videoFeed.asSequence()
+            // filter the new videos until the last seen video in the feed
+            .takeWhile { it.url!!.toID() != lastSeenStreamId }
+            // hide for notifications unsubscribed channels
+            .filter { it.uploaderUrl!!.toID() !in channelsToIgnore }
+            // group the new streams by the uploader
+            .groupBy { it.uploaderUrl!!.toID() }
+
+        // return if the previous video didn't get found or all the channels have notifications disabled
+        if (channelGroups.isEmpty()) return true
 
         Log.d(TAG(), "Create notifications for new videos")
 
         // create a notification for each new stream
-        channelGroups.forEach { (uploaderUrl, streams) ->
-            createNotificationsForChannel(uploaderUrl, streams)
+        channelGroups.forEach { (channelId, streams) ->
+            createNotificationsForChannel(channelId, streams)
         }
         // save the latest streams that got notified about
         PreferenceHelper.setLatestVideoId(videoFeed.first().url!!.toID())
