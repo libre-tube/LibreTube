@@ -353,7 +353,7 @@
     <string name="autoplay_countdown">شمارش معکوس پخش خودکار</string>
     <string name="playing_next">پخش بعدی در %1$s</string>
     <string name="lbry_hls">کتابخانه HLS</string>
-    <string name="category_sponsor_description">تبلیغات پولی، ارجاعات پولی و تبلیغات مستقیم. نه برای خود تبلیغی یا فریادهای واقعی رایگان به دلایل، سازندگان، وب سایت ها و محصولات.</string>
+    <string name="category_sponsor_description">تبلیغ‌های مستقیم، ارجاع‌ها و معرّفی‌های پولی. نه برای خودتبلیغی یا اشاره‌های منصفانهٔ رایگان به جنبش‌ها، ایجادکنندگان محتوا، پایگاه‌های وب و محصولات.</string>
     <string name="related_streams_summary">استریم های مشابه را در کنار آنچه تماشا می‌کنید نمایش داده شود.</string>
     <string name="invalid_url">لطفاً آدرس درست ارسال کنید</string>
     <string name="buffering_goal_summary">حداکثر مقدار ثانیه ویدیو به بافر.</string>
@@ -380,4 +380,20 @@
     <string name="autoplay_countdown_summary">قبل از پخش خودکار ویدیوی بعدی، شمارش معکوس 5 ثانیه را نشان دهید.</string>
     <string name="playback_pitch">گام صدا</string>
     <string name="category_filler">پرکننده مماس / شوخی</string>
+    <string name="irreversible">مطمئنید؟ این کار بازگشت‌پذیر نیست!</string>
+    <string name="captions_size">اندازهٔ عنوان</string>
+    <string name="import_playlists">درون‌ریزی سیاهه‌های پخش</string>
+    <string name="export_playlists">برون‌ریزی سیاهه‌های پخش</string>
+    <string name="theme_monochrome">تک‌رنگ کمینه‌گرا</string>
+    <string name="sleep_timer">شمارشگر خواب</string>
+    <string name="skip_silence">پرش از بی‌صدا</string>
+    <string name="alternative_player_layout">چینش جایگزین پخش‌کننده</string>
+    <string name="nothing_selected">هیچ چیزی گزیده نشده!</string>
+    <string name="playlistUrl">نشانی سیاههٔ پخش</string>
+    <string name="audio_player">پخش‌کنندهٔ صدا</string>
+    <string name="color_violet">بنفش</string>
+    <string name="remove_bookmark">برداشتن نشانک</string>
+    <string name="custom_playback_speed">سرعت سفارشی</string>
+    <string name="pinch_control">واپایش نیشگونی</string>
+    <string name="app_backup">پشتیبان کاره</string>
 </resources>
