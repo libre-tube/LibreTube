@@ -396,4 +396,17 @@
     <string name="custom_playback_speed">سرعت سفارشی</string>
     <string name="pinch_control">واپایش نیشگونی</string>
     <string name="app_backup">پشتیبان کاره</string>
+    <string name="fullscreen_gestures">حرکات تمام صفحه را وارد/خارج کنید</string>
+    <string name="hide_watched_from_feed_summary">ویدیوهایی را که بیش از 90 درصد تماشا می‌شوند در برگه اشتراک‌ها نشان ندهید.</string>
+    <string name="hide_watched_from_feed">ویدیوهای تماشا شده را از فید پنهان کنید</string>
+    <string name="disable_proxy">غیر فعال کردن پروکسی لوله ای</string>
+    <string name="auto_fullscreen_shorts">تمام صفحه خودکار در ویدیوهای کوتاه</string>
+    <string name="channel_groups">گروه های کانال</string>
+    <string name="group_name">نام گروه</string>
+    <string name="edit_group">ویرایش گروه</string>
+    <string name="lbry_hls_summary">در صورت وجود از کتابخانه HLS برای استریم استفاده کنید.</string>
+    <string name="disable_proxy_summary">ویدیوها و تصاویر را مستقیماً از سرورهای یوتیوب بارگیری کنید. فقط در صورت استفاده از VPN این گزینه را فعال کنید! توجه داشته باشید که این ممکن است با محتوای موسیقی YT کار نکند.</string>
+    <string name="failed_fetching_instances">نمونه‌های موجود واکشی نشد.</string>
+    <string name="play_automatically">پخش خودکار</string>
+    <string name="play_automatically_summary">هنگام انتخاب، پخش خودکار ویدیو را شروع کنید</string>
 </resources>
