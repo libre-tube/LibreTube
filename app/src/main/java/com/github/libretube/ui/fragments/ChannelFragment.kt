@@ -137,8 +137,9 @@ class ChannelFragment : Fragment() {
                     fetchChannelNextPage()
                 }
 
+                val channelId = channelId ?: return@repeatOnLifecycle
                 // fetch and update the subscription status
-                isSubscribed = SubscriptionHelper.isSubscribed(channelId!!)
+                isSubscribed = SubscriptionHelper.isSubscribed(channelId)
                 if (isSubscribed == null) return@repeatOnLifecycle
 
                 binding.channelSubscribe.setupSubscriptionButton(
@@ -149,7 +150,7 @@ class ChannelFragment : Fragment() {
 
                 binding.channelShare.setOnClickListener {
                     val shareDialog = ShareDialog(
-                        response.id!!.toID(),
+                        channelId.toID(),
                         ShareObjectType.CHANNEL,
                         shareData
                     )
