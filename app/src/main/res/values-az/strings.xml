@@ -62,7 +62,7 @@
     <string name="downloadfailed">Yükləmə uğursuz oldu.</string>
     <string name="import_from_yt">Abunəlikləri idxal et</string>
     <string name="import_from_yt_summary">YouTube və ya NewPipe-dan</string>
-    <string name="app_theme">Tema</string>
+    <string name="app_theme">Görüntü</string>
     <string name="server_error">Seçilən serverlə problem olacaq. Başqa nümunə sına.</string>
     <string name="unknown_error">Şəbəkə xətası.</string>
     <string name="error">Nəsə xəta baş verdi.</string>
@@ -127,8 +127,8 @@
     <string name="birdIcon">Qaldırılmış quş</string>
     <string name="torchIcon">Dəbli məşəl</string>
     <string name="instance_name">Nümunə adı</string>
-    <string name="instance_api_url">Nümunə API\'si üçün URL</string>
-    <string name="addInstance">Nümunə Əlavə Et</string>
+    <string name="instance_api_url">API nümunə üçün URL</string>
+    <string name="addInstance">Nümunə əlavə et</string>
     <string name="invalid_url">Zəhmət olmasa, işləyən URL\'ni daxil et</string>
     <string name="customInstance_summary">Əlavə et…</string>
     <string name="instance_summary">Piped, giriş, hesab</string>
@@ -157,7 +157,7 @@
     <string name="player_summary">Standartlar və davranış</string>
     <string name="seek_increment">Axtarılan artım</string>
     <string name="instance_frontend_url">Nümunə ön çıxış üçün URL</string>
-    <string name="autoplay_summary">Hazırkı videodan sonra növbəti videonu avtomatik oynat.</string>
+    <string name="autoplay_summary">Hazırkı video arxasınca növbəti videonu avtomatik oynat.</string>
     <string name="pauseOnScreenOff">Avtomatik fasilə</string>
     <string name="pauseOnScreenOff_summary">Ekran söndürüldükdə oynatmanı dayandır.</string>
     <string name="clonePlaylist">Oynatma siyahısın klonla</string>
@@ -319,7 +319,7 @@
     <string name="auto_quality">Avtomatik</string>
     <string name="hls_instead_of_dash">HLS istifadə et</string>
     <string name="hls_instead_of_dash_summary">DASH əvəzinə HLS istifadə et (daha yavaş olacaq, tövsiyə edilmədi)</string>
-    <string name="limit_to_runtime">İş vaxtı məhdudiyyət</string>
+    <string name="limit_to_runtime">İş vaxtı ilə məhdudlaşdır</string>
     <string name="trends">Trendlər</string>
     <string name="featured">Seçilmiş</string>
     <string name="trending">İndi nə trenddədir</string>
