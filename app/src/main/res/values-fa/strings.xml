@@ -428,7 +428,7 @@
     <string name="pinch_control_summary">برای بزرگ‌نمایی/کوچک‌نمایی از ژست نیشگون استفاده کنید.</string>
     <string name="play_latest_videos">پخش آخرین ویدیوها</string>
     <string name="alternative_pip_controls_summary">فقط نمایش صدا و به جای جلو و عقب، از کنترل‌ها در PiP استفاده کنید</string>
-    <string name="hls_instead_of_dash_summary">استفاده از HLS به جای DASH (آهسته تر خواهد بود، توصیه نمی شود)</string>
-    <string name="stats_for_nerds">آمار برای محقر‌ها</string>
+    <string name="hls_instead_of_dash_summary">استفاده از HLS به جای DASH (آهسته تر، توصیه نشده)</string>
+    <string name="stats_for_nerds">آمار برای خوره‌ها</string>
     <string name="limit_to_runtime">محدود به زمان اجرا</string>
 </resources>
