@@ -411,4 +411,24 @@
     <string name="play_automatically_summary">هنگام انتخاب، پخش خودکار ویدیو را شروع کنید</string>
     <string name="go_to_video">رفتن به ویدیو</string>
     <string name="alternative_player_layout_summary">نمایش ویدیوهای مربوط به شکل ردیفی بالای دیدگاه‌ها به جای زیرشان.</string>
+    <string name="alternative_pip_controls">کنترل های جایگزین PiP</string>
+    <string name="queue_insert_related_videos">درج فیلم های مرتبط</string>
+    <string name="double_tap_seek_summary">دوبار در سمت چپ یا راست ضربه بزنید تا موقعیت پخش کننده به عقب یا جلو برود.</string>
+    <string name="all_caught_up">همه رو گرفتی</string>
+    <string name="audio_only_mode">حالت فقط صدا</string>
+    <string name="audio_only_mode_summary">LibreTube را به یک پخش کننده موسیقی تبدیل کنید.</string>
+    <string name="all_caught_up_summary">همه ویدیوهای جدید را دیده اید</string>
+    <string name="add_to_bookmarks">به نشانک ها اضافه کنید</string>
+    <string name="mark_as_watched">علامت گذاری به عنوان دیده شده</string>
+    <string name="custom_playback_speed_summary">از سرعت پخش متفاوتی نسبت به پخش کننده معمولی استفاده کنید.</string>
+    <string name="pause_on_quit">مکث هنگام خروج</string>
+    <string name="comments_disabled">نظرات توسط آپلود کننده غیرفعال شده است.</string>
+    <string name="swipe_controls_summary">برای تنظیم روشنایی و صدا از ژست کشیدن انگشت استفاده کنید.</string>
+    <string name="double_tap_seek">دو ضربه برای گشتن</string>
+    <string name="pinch_control_summary">برای بزرگ‌نمایی/کوچک‌نمایی از ژست نیشگون استفاده کنید.</string>
+    <string name="play_latest_videos">پخش آخرین ویدیوها</string>
+    <string name="alternative_pip_controls_summary">فقط نمایش صدا و به جای جلو و عقب، از کنترل‌ها در PiP استفاده کنید</string>
+    <string name="hls_instead_of_dash_summary">استفاده از HLS به جای DASH (آهسته تر خواهد بود، توصیه نمی شود)</string>
+    <string name="stats_for_nerds">آمار برای محقر‌ها</string>
+    <string name="limit_to_runtime">محدود به زمان اجرا</string>
 </resources>
