@@ -309,8 +309,8 @@
     <string name="time">Tempo</string>
     <string name="start_time">Início</string>
     <string name="end_time">Fim</string>
-    <string name="notification_time">Restringir o tempo de notificação</string>
-    <string name="notification_time_summary">Limitar o período de tempo em que as notificações de fluxo são mostradas.</string>
+    <string name="notification_time">Restringir tempo da notificação</string>
+    <string name="notification_time_summary">Limitar período de tempo para o qual as notificações são mostradas.</string>
     <string name="navbar_order">Ordem</string>
     <string name="layout">Esquema</string>
     <string name="alternative_player_layout">Esquema alternativo de reprodução</string>
@@ -410,16 +410,16 @@
     <string name="lbry_hls">LBRY HLS</string>
     <string name="lbry_hls_summary">Usar LBRY HLS para emissão, se disponível.</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d vídeos</string>
-    <string name="subscriberAndVideoCounts">%1$s Subscritores • %2$d vídeos</string>
-    <string name="disable_proxy">Desativar o Piped proxy</string>
-    <string name="disable_proxy_summary">Carregar vídeos e imagens diretamente dos servidores do YouTube. Só ative a opção se utilizar uma VPN de qualquer forma! Note que isto pode não funcionar com conteúdo de música YT.</string>
+    <string name="subscriberAndVideoCounts">%1$s subscritores • %2$d vídeos</string>
+    <string name="disable_proxy">Desativar proxy Piped</string>
+    <string name="disable_proxy_summary">Carregar vídeos e imagens diretamente dos servidores YouTube. Apenas deve ativar está opção se estiver a utilizar uma VPN! Esta opção pode não funcionar com conteúdo de música YT.</string>
     <string name="auto_fullscreen_shorts">Ecrã completo automático em vídeos curtos</string>
     <string name="channel_groups">Grupos de canais</string>
     <string name="new_group">Novo</string>
     <string name="group_name">Nome do grupo</string>
     <string name="edit_group">Editar grupo</string>
     <string name="play_automatically">Reproduzir automaticamente</string>
-    <string name="play_automatically_summary">Comece a reproduzir vídeo automaticamente ao selecionar</string>
+    <string name="play_automatically_summary">Iniciar reprodução dos vídeos ao selecionar</string>
     <string name="fullscreen_gestures">Gestos de entrada/saída em ecrã inteiro</string>
     <string name="go_to_video">Ir para o vídeo</string>
     <plurals name="channel_new_streams">
@@ -428,10 +428,10 @@
         <item quantity="other">%d novas emissões</item>
     </plurals>
     <string name="show_stream_thumbnails">Mostrar miniaturas do vídeo</string>
-    <string name="show_stream_thumbnails_summary">Mostrar as miniaturas de novas streams. A ativação disto irá consumir dados adicionais.</string>
+    <string name="show_stream_thumbnails_summary">Mostrar miniaturas dos novos vídeos. A ativação implica a utilização de dados.</string>
     <string name="unlimited_search_history">Histórico de pesquisa ilimitado</string>
-    <string name="playlist_name_az">Nome Da Lista De Reprodução (A-Z)</string>
-    <string name="playlist_name_za">Nome Da Lista De Reprodução (Z-A)</string>
+    <string name="playlist_name_az">Nome da lista de reprodução (A-Z)</string>
+    <string name="playlist_name_za">Nome da lista de reprodução (Z-A)</string>
     <string name="duration">Duração</string>
     <string name="duration_reversed">Duração (invertida)</string>
 </resources>
