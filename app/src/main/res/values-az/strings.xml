@@ -62,7 +62,7 @@
     <string name="downloadfailed">Yükləmə uğursuz oldu.</string>
     <string name="import_from_yt">Abunəlikləri idxal et</string>
     <string name="import_from_yt_summary">YouTube və ya NewPipe-dan</string>
-    <string name="app_theme">Görüntü</string>
+    <string name="app_theme">Görünüş</string>
     <string name="server_error">Seçilən serverlə problem olacaq. Başqa nümunə sına.</string>
     <string name="unknown_error">Şəbəkə xətası.</string>
     <string name="error">Nəsə xəta baş verdi.</string>
@@ -168,7 +168,7 @@
     <string name="deleteAccount">Hesabı sil</string>
     <string name="deleteAccount_summary">Piped hesabınızı silin</string>
     <string name="watch_history">Baxış Tarixçəsi</string>
-    <string name="watch_positions">Mövqe xatırla</string>
+    <string name="watch_positions">Xatırlanan mövqe</string>
     <string name="watch_positions_summary">Son oynatma mövqeyindən davam etdir</string>
     <string name="auth_instances">Təsdiqləyici nümunə seç</string>
     <string name="auth_instance_summary">Təsdiqlənmiş dəvətlər üçün fərqli nümunə istifadə et.</string>
@@ -192,8 +192,8 @@
     <string name="selected">Seçilən</string>
     <string name="never">Heç vaxt</string>
     <string name="autoRotatePlayer">Avtomatik tam ekran</string>
-    <string name="pure_theme">Təmiz tema</string>
-    <string name="pure_theme_summary">Təmiz ağ/qara tema</string>
+    <string name="pure_theme">Təmiz görünüş</string>
+    <string name="pure_theme_summary">Təmiz ağ/qara görünüş</string>
     <string name="no_player_found">Xarici oynadıcı tapılmadı. Zəhmət olmasa, birinin quraşdırıldığından əmin olun.</string>
     <string name="data_saver_mode">Məlumat qənaətçisi rejimi</string>
     <string name="autoRotatePlayer_summary">Cihaz döndərildikdə tam ekran oynat.</string>
