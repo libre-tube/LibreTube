@@ -63,7 +63,7 @@
     <string name="import_from_yt">Abunəlikləri idxal et</string>
     <string name="import_from_yt_summary">YouTube və ya NewPipe-dan</string>
     <string name="app_theme">Görünüş</string>
-    <string name="server_error">Seçilən serverlə problem olacaq. Başqa nümunə sına.</string>
+    <string name="server_error">Görünür, seçilən serverlə problem var. Başqa nümunə sına.</string>
     <string name="unknown_error">Şəbəkə xətası.</string>
     <string name="error">Nəsə xəta baş verdi.</string>
     <string name="empty">İstifadəçi adı və şifrə daxil etməlisiniz.</string>
@@ -72,7 +72,7 @@
     <string name="grid">Şəbəkə sütunları</string>
     <string name="emptyList">Bura boşdur.</string>
     <string name="deletePlaylist">Oynatma siyahısın sil</string>
-    <string name="areYouSure">Oynatma siyahısı silinsinmi\?</string>
+    <string name="areYouSure">Oynatma siyahısı silinsin\?</string>
     <string name="createPlaylist">Oynatma siyahısı yarat</string>
     <string name="playlistCreated">Oynatma siyahısı yaradıldı.</string>
     <string name="playlistName">Oynatma siyahısı adı</string>
@@ -127,7 +127,7 @@
     <string name="birdIcon">Qaldırılmış quş</string>
     <string name="torchIcon">Dəbli məşəl</string>
     <string name="instance_name">Nümunə adı</string>
-    <string name="instance_api_url">API nümunə üçün URL</string>
+    <string name="instance_api_url">Nümunə API üçün URL</string>
     <string name="addInstance">Nümunə əlavə et</string>
     <string name="invalid_url">Zəhmət olmasa, işləyən URL\'ni daxil et</string>
     <string name="customInstance_summary">Əlavə et…</string>
@@ -411,7 +411,7 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d video</string>
     <string name="disable_proxy">Piped proksini bağla</string>
     <string name="disable_proxy_summary">Videoları və şəkilləri birbaşa YouTube serverlərindən yüklə. Seçimi, ancaq VPN istifadə edirsinizsə aktivləşdirin! Qeyd, bu, YT musiqidəki məzmunla işləməyə bilər.</string>
-    <string name="auto_fullscreen_shorts">Qısa videolarda avtomatik tam ekran</string>
+    <string name="auto_fullscreen_shorts">Qısa videolarda avto tam ekran</string>
     <string name="edit_group">Qrupu redaktə et</string>
     <string name="channel_groups">Kanal qrupları</string>
     <string name="group_name">Qrup adı</string>
