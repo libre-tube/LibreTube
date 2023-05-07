@@ -105,7 +105,7 @@
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Riproduci in sottofondo</string>
-    <string name="downloads">Scaricamenti</string>
+    <string name="downloads">Scaricati</string>
     <string name="advanced_summary">Download e ripristino</string>
     <string name="update_available">La versione %1$s è disponibile</string>
     <string name="update_available_text">Nuovo aggiornamento disponibile. Clicca per aprire la pagina delle pubblicazioni su GitHub.</string>
@@ -261,7 +261,7 @@
     <string name="break_reminder_time">Minuti prima dell\'avviso</string>
     <string name="device_info">Info sul dispositivo</string>
     <string name="audio_video_summary">Qualità e formato</string>
-    <string name="delete">Elimina dagli scaricamenti</string>
+    <string name="delete">Elimina dagli scaricati</string>
     <string name="renamePlaylist">Rinomina la playlist</string>
     <string name="new_videos_badge">Indicatore per i nuovi video</string>
     <string name="new_videos_badge_summary">Mostra una notifica con il numero dei nuovi video, se ce ne sono.</string>
