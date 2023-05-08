@@ -8,6 +8,7 @@ import com.github.libretube.databinding.SubscriptionGroupChannelRowBinding
 import com.github.libretube.db.obj.SubscriptionGroup
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.ui.viewholders.SubscriptionGroupChannelRowViewHolder
 
 class SubscriptionGroupChannelsAdapter(
@@ -30,6 +31,9 @@ class SubscriptionGroupChannelsAdapter(
         val channel = channels[position]
         val channelId = channel.url.toID()
         holder.binding.apply {
+            root.setOnClickListener {
+                NavigationHelper.navigateChannel(root.context, channelId)
+            }
             subscriptionChannelName.text = channel.name
             ImageHelper.loadImage(channel.avatar, subscriptionChannelImage)
             channelIncluded.setOnCheckedChangeListener(null)
