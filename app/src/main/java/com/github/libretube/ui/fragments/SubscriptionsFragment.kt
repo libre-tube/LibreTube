@@ -25,9 +25,9 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.LegacySubscriptionAdapter
 import com.github.libretube.ui.adapters.SubscriptionChannelAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
-import com.github.libretube.ui.dialogs.ChannelGroupsDialog
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
+import com.github.libretube.ui.sheets.ChannelGroupsSheet
 import com.google.android.material.chip.Chip
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -197,7 +197,7 @@ class SubscriptionsFragment : Fragment() {
         }
 
         binding.editGroups.setOnClickListener {
-            ChannelGroupsDialog(channelGroups.toMutableList()) {
+            ChannelGroupsSheet(channelGroups.toMutableList()) {
                 lifecycleScope.launch { initChannelGroups() }
             }.show(childFragmentManager, null)
         }

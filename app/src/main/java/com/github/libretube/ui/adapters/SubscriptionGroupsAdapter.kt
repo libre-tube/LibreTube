@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.SubscriptionGroupRowBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.SubscriptionGroup
-import com.github.libretube.ui.dialogs.EditChannelGroupDialog
+import com.github.libretube.ui.sheets.EditChannelGroupSheet
 import com.github.libretube.ui.viewholders.SubscriptionGroupsViewHolder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -44,7 +44,7 @@ class SubscriptionGroupsAdapter(
                 notifyItemRangeChanged(position, itemCount)
             }
             editGroup.setOnClickListener {
-                EditChannelGroupDialog(subscriptionGroup) {
+                EditChannelGroupSheet(subscriptionGroup) {
                     groups[position] = it
                     runBlocking(Dispatchers.IO) {
                         // delete the old one as it might have a different name

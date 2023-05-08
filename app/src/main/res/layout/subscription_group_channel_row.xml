@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
-    android:paddingHorizontal="20dp" >
+    android:paddingHorizontal="10dp" >
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/subscription_channel_image"
