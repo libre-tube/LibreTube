@@ -81,6 +81,8 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             }
         } catch (e: Exception) {
             return false
+        }.filter {
+            PreferenceHelper.getBoolean(PreferenceKeys.SHORTS_NOTIFICATIONS, false) || !it.isShort
         }
 
         val lastSeenStreamId = PreferenceHelper.getLastSeenVideoId()
