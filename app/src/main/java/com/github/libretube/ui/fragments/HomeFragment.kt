@@ -120,6 +120,12 @@ class HomeFragment : Fragment() {
                     SubscriptionHelper.getFeed()
                 }
             }.getOrNull()?.takeIf { it.isNotEmpty() } ?: return
+        }.filter {
+            when (PreferenceHelper.getInt(PreferenceKeys.SELECTED_FEED_FILTER, 0)) {
+                1 -> !it.isShort
+                2 -> it.isShort
+                else -> true
+            }
         }.take(20)
         val binding = _binding ?: return
 
