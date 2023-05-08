@@ -38,6 +38,7 @@ import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.services.ClosingService
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.ErrorDialog
+import com.github.libretube.ui.fragments.AudioPlayerFragment
 import com.github.libretube.ui.fragments.DownloadsFragment
 import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.models.PlayerViewModel
@@ -444,6 +445,7 @@ class MainActivity : BaseActivity() {
                 getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
                 enableTransition(R.id.yt_transition, true)
             }
+            (fragment as? AudioPlayerFragment)?.binding?.playerMotionLayout?.transitionToEnd()
         }
 
         val playerViewModel = ViewModelProvider(this)[PlayerViewModel::class.java]

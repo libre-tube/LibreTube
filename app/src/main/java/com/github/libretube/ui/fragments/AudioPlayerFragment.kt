@@ -43,7 +43,7 @@ import kotlin.math.abs
 
 class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     private var _binding: FragmentAudioPlayerBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     private lateinit var audioHelper: AudioHelper
     private val mainActivity get() = context as MainActivity
@@ -100,6 +100,16 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         // select the title TV in order for it to automatically scroll
         binding.title.isSelected = true
         binding.uploader.isSelected = true
+
+        binding.minimizePlayer.setOnClickListener {
+            val mainMotionLayout = mainActivity.binding.mainMotionLayout
+            mainMotionLayout.transitionToStart()
+            binding.playerMotionLayout.transitionToEnd()
+        }
+
+        binding.dropdownMenu.setOnClickListener {
+            onLongTap()
+        }
 
         binding.prev.setOnClickListener {
             val currentIndex = PlayingQueue.currentIndex()
