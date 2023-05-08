@@ -431,4 +431,5 @@
     <string name="playlist_name_az">Oynatma Siyahısı Adı (A-Z)</string>
     <string name="playlist_name_za">Oynatma Siyahısı Adı (Z-A)</string>
     <string name="duration">Müddət</string>
+    <string name="shorts_notifications">Qısa videolar üçün bildirişlər</string>
 </resources>
