@@ -148,19 +148,20 @@ object PlaylistsHelper {
                     )
                 } else {
                     // if not logged in, all video information needs to become fetched manually
-                    runCatching {
-                        val streamItems = playlist.videos.map {
-                            async {
-                                runCatching {
-                                    RetrofitInstance.api.getStreams(it).toStreamItem(it)
-                                }.getOrNull()
-                            }
+                    // Only do so with 20 videos at once to prevent performance issues
+                    playlist.videos.mapIndexed { index, id -> id to index }
+                        .groupBy { it.second % 20 }.forEach { (_, videos) ->
+                            videos.map {
+                                async {
+                                    runCatching {
+                                        val stream = RetrofitInstance.api.getStreams(it.first).toStreamItem(
+                                            it.first
+                                        )
+                                        addToPlaylist(playlistId, stream)
+                                    }
+                                }
+                            }.awaitAll()
                         }
-                            .awaitAll()
-                            .filterNotNull()
-
-                        addToPlaylist(playlistId, *streamItems.toTypedArray())
-                    }
                 }
             }
         }.awaitAll()

@@ -105,10 +105,14 @@ object ImportHelper {
                 activity.contentResolver.openInputStream(uri)?.use {
                     val lines = it.bufferedReader().use { reader -> reader.lines().toList() }
                     playlist.name = lines[1].split(",").reversed()[2]
-                    val splitIndex = lines.indexOfFirst { line -> line.isBlank() }
+                    var splitIndex = lines.indexOfFirst { line -> line.isBlank() }
+                    // seek until playlist items table
+                    while (lines.getOrNull(splitIndex + 1).orEmpty().isBlank()) {
+                        splitIndex++
+                    }
                     lines.subList(splitIndex + 2, lines.size).forEach { line ->
                         line.split(",").firstOrNull()?.let { videoId ->
-                            if (videoId.isNotBlank()) playlist.videos = playlist.videos + videoId
+                            if (videoId.isNotBlank()) playlist.videos += videoId.trim()
                         }
                     }
                     importPlaylists.add(playlist)
