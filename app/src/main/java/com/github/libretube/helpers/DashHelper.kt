@@ -24,7 +24,7 @@ object DashHelper {
         val formats: MutableList<PipedStream> = mutableListOf()
     )
 
-    fun createManifest(streams: Streams): String {
+    fun createManifest(streams: Streams, supportsHdr: Boolean): String {
         val builder: DocumentBuilder = builderFactory.newDocumentBuilder()
 
         val doc = builder.newDocument()
@@ -40,17 +40,18 @@ object DashHelper {
         val adapSetInfos = ArrayList<AdapSetInfo>()
 
         val enabledVideoCodecs = PlayerHelper.enabledVideoCodecs
-        for (stream in streams.videoStreams
+        for (
+        stream in streams.videoStreams
             // used to avoid including LBRY HLS inside the streams in the manifest
             .filter { !it.format.orEmpty().contains("HLS") }
             // filter the codecs according to the user's preferences
             .filter {
-                if (enabledVideoCodecs != "all") {
-                    it.codec?.lowercase()?.startsWith(enabledVideoCodecs) ?: true
-                } else {
-                    true
-                }
-            }) {
+                enabledVideoCodecs == "all" || it.codec.orEmpty().lowercase().startsWith(
+                    enabledVideoCodecs
+                )
+            }
+            .filter { supportsHdr || !it.quality.orEmpty().uppercase().contains("HDR") }
+        ) {
             // ignore dual format streams
             if (!stream.videoOnly!!) {
                 continue
