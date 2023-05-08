@@ -19,6 +19,13 @@
             app:title="@string/show_stream_thumbnails"
             app:summary="@string/show_stream_thumbnails_summary"/>
 
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_video"
+            app:defaultValue="false"
+            app:key="shorts_notifications"
+            android:dependency="notification_toggle"
+            app:title="@string/shorts_notifications"/>
+
         <ListPreference
             android:icon="@drawable/ic_time"
             app:defaultValue="60"

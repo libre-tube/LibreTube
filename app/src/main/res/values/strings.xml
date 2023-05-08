@@ -412,6 +412,7 @@
     <string name="playlist_name_za">Playlist Name (Z-A)</string>
     <string name="duration">Duration</string>
     <string name="duration_reversed">Duration (reversed)</string>
+    <string name="shorts_notifications">Notifications for shorts</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
