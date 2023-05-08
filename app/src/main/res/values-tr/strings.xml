@@ -218,12 +218,12 @@
     <string name="channel_name_az">Kanal Adı (A-Z)</string>
     <string name="most_views">En çok görüntüleme</string>
     <string name="history_empty">Henüz geçmiş boş.</string>
-    <string name="notify_new_streams">Yeni akışlar için bildirimler</string>
+    <string name="notify_new_streams">Yeni akışlar için bildirimler göster</string>
     <string name="irreversible">Emin misin\? Bu geri alınamaz!</string>
     <string name="notifications">Bildirimler</string>
     <string name="most_recent">En yeni</string>
     <string name="least_recent">En eski</string>
-    <string name="notify_new_streams_summary">Takip ettiğiniz içerik oluşturuculardan yeni içerik hakkında bildirimler.</string>
+    <string name="notify_new_streams_summary">Takip ettiğiniz yaratıcılardan yeni akışlar için bildirimler görüntüle.</string>
     <string name="channel_name_za">Kanal Adı (Z-A)</string>
     <string name="translate">Çeviri</string>
     <string name="no_search_result">Sonuç yok.</string>
@@ -308,8 +308,8 @@
     <string name="time">Zaman</string>
     <string name="start_time">Başlangıç zamanı</string>
     <string name="end_time">Bitiş zamanı</string>
-    <string name="notification_time">Bildirim zamanı</string>
-    <string name="notification_time_summary">Bildirimlerin gösterilmesine izin verilen zaman aralığı.</string>
+    <string name="notification_time">Bildirim süresini kısıtla</string>
+    <string name="notification_time_summary">Akış bildirimleri gösterilen zaman aralığın sınırla.</string>
     <string name="layout">Düzen</string>
     <string name="alternative_player_layout">Alternatif oynatıcı düzeni</string>
     <string name="alternative_player_layout_summary">İlgili videoları, yorumların altında değil, üstünde bir satır olarak göster.</string>
@@ -424,4 +424,11 @@
         <item quantity="one">%d yeni yayın</item>
         <item quantity="other">%d yeni yayın</item>
     </plurals>
+    <string name="playlist_name_za">Oynatma Listesi Adı (Z-A)</string>
+    <string name="duration">Süre</string>
+    <string name="duration_reversed">Süre (ters)</string>
+    <string name="unlimited_search_history">Sınırsız arama geçmişi</string>
+    <string name="playlist_name_az">Oynatma Listesi Adı (A-Z)</string>
+    <string name="show_stream_thumbnails">Akış küçük resimlerin göster</string>
+    <string name="show_stream_thumbnails_summary">Yeni akışların küçük resimlerin göster. Bu etkinleştirilirse ek veri tüketecektir.</string>
 </resources>
