@@ -26,14 +26,14 @@ class BackupRestoreSettings : BasePreferenceFragment() {
     // backup and restore database
     private val getBackupFile = registerForActivityResult(ActivityResultContracts.GetContent()) {
         it?.let {
-            lifecycleScope.launch(Dispatchers.IO) {
+            CoroutineScope(Dispatchers.IO).launch {
                 BackupHelper.restoreAdvancedBackup(requireContext(), it)
             }
         }
     }
     private val createBackupFile = registerForActivityResult(CreateDocument(JSON)) {
         it?.let {
-            lifecycleScope.launch(Dispatchers.IO) {
+            CoroutineScope(Dispatchers.IO).launch {
                 BackupHelper.createAdvancedBackup(requireContext(), it, backupFile)
             }
         }
