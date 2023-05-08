@@ -13,6 +13,7 @@ import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.BackupDialog
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -63,7 +64,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
      */
     private val getPlaylistsFile = registerForActivityResult(ActivityResultContracts.GetContent()) {
         it?.let {
-            lifecycleScope.launch(Dispatchers.IO) {
+            CoroutineScope(Dispatchers.IO).launch {
                 ImportHelper.importPlaylists(requireActivity(), it)
             }
         }
