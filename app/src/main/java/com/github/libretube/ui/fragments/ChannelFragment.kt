@@ -29,11 +29,11 @@ import com.github.libretube.ui.adapters.SearchAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.setupSubscriptionButton
-import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
+import java.io.IOException
 
 class ChannelFragment : Fragment() {
     private var _binding: FragmentChannelBinding? = null
@@ -52,7 +52,7 @@ class ChannelFragment : Fragment() {
         ChannelTabs.Channels,
         ChannelTabs.Playlists,
         ChannelTabs.Livestreams,
-        ChannelTabs.Shorts
+        ChannelTabs.Shorts,
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,7 +68,7 @@ class ChannelFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentChannelBinding.inflate(inflater, container, false)
         return binding.root
@@ -145,14 +145,14 @@ class ChannelFragment : Fragment() {
                 binding.channelSubscribe.setupSubscriptionButton(
                     channelId,
                     channelName,
-                    binding.notificationBell
+                    binding.notificationBell,
                 )
 
                 binding.channelShare.setOnClickListener {
                     val shareDialog = ShareDialog(
                         channelId.toID(),
                         ShareObjectType.CHANNEL,
-                        shareData
+                        shareData,
                     )
                     shareDialog.show(childFragmentManager, ShareDialog::class.java.name)
                 }
@@ -168,12 +168,12 @@ class ChannelFragment : Fragment() {
                         0,
                         0,
                         R.drawable.ic_verified,
-                        0
+                        0,
                     )
                 }
                 binding.channelSubs.text = resources.getString(
                     R.string.subscribers,
-                    response.subscriberCount.formatShort()
+                    response.subscriberCount.formatShort(),
                 )
                 if (response.description.orEmpty().isBlank()) {
                     binding.channelDescription.visibility = View.GONE
@@ -193,7 +193,7 @@ class ChannelFragment : Fragment() {
                 // recyclerview of the videos by the channel
                 channelAdapter = VideosAdapter(
                     response.relatedStreams.toMutableList(),
-                    forceMode = VideosAdapter.Companion.ForceMode.CHANNEL
+                    forceMode = VideosAdapter.Companion.ForceMode.CHANNEL,
                 )
                 binding.channelRecView.adapter = channelAdapter
 
@@ -294,7 +294,7 @@ class ChannelFragment : Fragment() {
         nextPage: String,
         tab: ChannelTab,
         adapter: SearchAdapter,
-        onNewNextPage: (String?) -> Unit
+        onNewNextPage: (String?) -> Unit,
     ) {
         lifecycleScope.launch {
             val newContent = try {

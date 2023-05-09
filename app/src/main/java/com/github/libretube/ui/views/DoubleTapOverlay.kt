@@ -8,7 +8,7 @@ import com.github.libretube.databinding.DoubleTapOverlayBinding
 
 class DoubleTapOverlay(
     context: Context,
-    attrs: AttributeSet? = null
+    attrs: AttributeSet? = null,
 ) : LinearLayout(context, attrs) {
     var binding: DoubleTapOverlayBinding
 

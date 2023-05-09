@@ -49,7 +49,7 @@ class LibreTubeApp : Application() {
          */
         NotificationHelper.enqueueWork(
             context = this,
-            existingPeriodicWorkPolicy = ExistingPeriodicWorkPolicy.KEEP
+            existingPeriodicWorkPolicy = ExistingPeriodicWorkPolicy.KEEP,
         )
 
         /**
@@ -76,21 +76,21 @@ class LibreTubeApp : Application() {
     private fun initializeNotificationChannels() {
         val downloadChannel = NotificationChannelCompat.Builder(
             DOWNLOAD_CHANNEL_ID,
-            NotificationManagerCompat.IMPORTANCE_LOW
+            NotificationManagerCompat.IMPORTANCE_LOW,
         )
             .setName(getString(R.string.download_channel_name))
             .setDescription(getString(R.string.download_channel_description))
             .build()
         val backgroundChannel = NotificationChannelCompat.Builder(
             BACKGROUND_CHANNEL_ID,
-            NotificationManagerCompat.IMPORTANCE_LOW
+            NotificationManagerCompat.IMPORTANCE_LOW,
         )
             .setName(getString(R.string.background_channel_name))
             .setDescription(getString(R.string.background_channel_description))
             .build()
         val pushChannel = NotificationChannelCompat.Builder(
             PUSH_CHANNEL_ID,
-            NotificationManagerCompat.IMPORTANCE_DEFAULT
+            NotificationManagerCompat.IMPORTANCE_DEFAULT,
         )
             .setName(getString(R.string.push_channel_name))
             .setDescription(getString(R.string.push_channel_description))
@@ -101,8 +101,8 @@ class LibreTubeApp : Application() {
             listOf(
                 downloadChannel,
                 backgroundChannel,
-                pushChannel
-            )
+                pushChannel,
+            ),
         )
     }
 

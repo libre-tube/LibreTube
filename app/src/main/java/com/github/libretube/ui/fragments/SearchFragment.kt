@@ -39,7 +39,7 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentSearchBinding.inflate(inflater)
         return binding.root
@@ -84,7 +84,7 @@ class SearchFragment : Fragment() {
                 // only load the suggestions if the input field didn't get cleared yet
                 val suggestionsAdapter = SearchSuggestionsAdapter(
                     response.reversed(),
-                    (activity as MainActivity).searchView
+                    (activity as MainActivity).searchView,
                 )
                 if (isAdded && !viewModel.searchQuery.value.isNullOrEmpty()) {
                     binding.suggestionsRecycler.adapter = suggestionsAdapter
@@ -101,7 +101,7 @@ class SearchFragment : Fragment() {
             if (historyList.isNotEmpty()) {
                 binding.suggestionsRecycler.adapter = SearchHistoryAdapter(
                     historyList,
-                    (activity as MainActivity).searchView
+                    (activity as MainActivity).searchView,
                 )
             } else {
                 binding.suggestionsRecycler.visibility = View.GONE

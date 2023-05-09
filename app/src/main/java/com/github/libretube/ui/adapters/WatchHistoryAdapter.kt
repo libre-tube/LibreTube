@@ -18,7 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 
 class WatchHistoryAdapter(
-    private val watchHistory: MutableList<WatchHistoryItem>
+    private val watchHistory: MutableList<WatchHistoryItem>,
 ) :
     RecyclerView.Adapter<WatchHistoryViewHolder>() {
 
@@ -71,7 +71,7 @@ class WatchHistoryAdapter(
                 VideoOptionsBottomSheet(video.videoId, video.title!!)
                     .show(
                         (root.context as BaseActivity).supportFragmentManager,
-                        VideoOptionsBottomSheet::class.java.name
+                        VideoOptionsBottomSheet::class.java.name,
                     )
                 true
             }

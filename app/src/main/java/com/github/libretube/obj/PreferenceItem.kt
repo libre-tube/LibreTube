@@ -7,5 +7,5 @@ import kotlinx.serialization.json.JsonPrimitive
 @Serializable
 data class PreferenceItem(
     val key: String? = null,
-    val value: JsonPrimitive = JsonNull
+    val value: JsonPrimitive = JsonNull,
 )

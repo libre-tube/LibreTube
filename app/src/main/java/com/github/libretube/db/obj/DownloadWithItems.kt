@@ -7,7 +7,7 @@ data class DownloadWithItems(
     @Embedded val download: Download,
     @Relation(
         parentColumn = "videoId",
-        entityColumn = "videoId"
+        entityColumn = "videoId",
     )
-    val downloadItems: List<DownloadItem>
+    val downloadItems: List<DownloadItem>,
 )

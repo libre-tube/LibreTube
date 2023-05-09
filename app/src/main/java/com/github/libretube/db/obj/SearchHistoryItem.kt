@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 @Entity(tableName = "searchHistoryItem")
 data class SearchHistoryItem(
-    @PrimaryKey val query: String = ""
+    @PrimaryKey val query: String = "",
 )

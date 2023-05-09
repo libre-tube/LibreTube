@@ -14,15 +14,14 @@ import com.github.libretube.ui.sheets.ChannelOptionsBottomSheet
 import com.github.libretube.ui.viewholders.SubscriptionChannelViewHolder
 
 class SubscriptionChannelAdapter(
-    private val subscriptions: MutableList<Subscription>
+    private val subscriptions: MutableList<Subscription>,
 ) : RecyclerView.Adapter<SubscriptionChannelViewHolder>() {
 
     override fun getItemCount(): Int {
         return subscriptions.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
-        SubscriptionChannelViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubscriptionChannelViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ChannelSubscriptionRowBinding.inflate(layoutInflater, parent, false)
         return SubscriptionChannelViewHolder(binding)
@@ -48,7 +47,7 @@ class SubscriptionChannelAdapter(
                 subscription.url?.toID(),
                 subscription.name,
                 notificationBell,
-                true
+                true,
             )
         }
     }

@@ -17,7 +17,7 @@ class PictureInPictureParamsCompat private constructor(
     private val title: CharSequence?,
     private val subtitle: CharSequence?,
     private val aspectRatio: Rational?,
-    private val expandedAspectRatio: Rational?
+    private val expandedAspectRatio: Rational?,
 ) {
     @RequiresApi(Build.VERSION_CODES.O)
     fun toPictureInPictureParams(): PictureInPictureParams {
@@ -109,7 +109,7 @@ class PictureInPictureParamsCompat private constructor(
                 title,
                 subtitle,
                 aspectRatio,
-                expandedAspectRatio
+                expandedAspectRatio,
             )
         }
     }

@@ -14,7 +14,7 @@ import kotlinx.coroutines.runBlocking
 
 class SearchHistoryAdapter(
     private var historyList: List<String>,
-    private val searchView: SearchView
+    private val searchView: SearchView,
 ) :
     RecyclerView.Adapter<SuggestionsViewHolder>() {
 

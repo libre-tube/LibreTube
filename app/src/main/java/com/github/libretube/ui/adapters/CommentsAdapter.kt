@@ -2,7 +2,9 @@ package com.github.libretube.ui.adapters
 
 import android.annotation.SuppressLint
 import android.text.method.LinkMovementMethod
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
@@ -37,7 +39,7 @@ class CommentsAdapter(
     private val comments: MutableList<Comment>,
     private val isRepliesAdapter: Boolean = false,
     private val handleLink: ((url: String) -> Unit)?,
-    private val dismiss: () -> Unit
+    private val dismiss: () -> Unit,
 ) : RecyclerView.Adapter<CommentsViewHolder>() {
 
     fun clear() {
@@ -61,7 +63,7 @@ class CommentsAdapter(
     private fun navigateToReplies(comment: Comment) {
         val args = bundleOf(
             IntentData.videoId to videoId,
-            IntentData.comment to JsonHelper.json.encodeToString(comment)
+            IntentData.comment to JsonHelper.json.encodeToString(comment),
         )
         fragment!!.parentFragmentManager.commit {
             replace<CommentsRepliesFragment>(R.id.commentFragContainer, args = args)
@@ -101,14 +103,14 @@ class CommentsAdapter(
                 // highlight the comment that is being replied to
                 if (comment == comments.firstOrNull()) {
                     root.setBackgroundColor(
-                        ThemeHelper.getThemeColor(root.context, R.attr.colorSurface)
+                        ThemeHelper.getThemeColor(root.context, R.attr.colorSurface),
                     )
                     root.updatePadding(top = 20)
                     root.updateLayoutParams<MarginLayoutParams> { bottomMargin = 20 }
                 } else {
                     root.background = AppCompatResources.getDrawable(
                         root.context,
-                        R.drawable.rounded_ripple
+                        R.drawable.rounded_ripple,
                     )
                 }
             }
@@ -124,7 +126,7 @@ class CommentsAdapter(
             root.setOnLongClickListener {
                 ClipboardHelper.save(
                     root.context,
-                    comment.commentText.orEmpty().parseAsHtml().toString()
+                    comment.commentText.orEmpty().parseAsHtml().toString(),
                 )
                 Toast.makeText(root.context, R.string.copied, Toast.LENGTH_SHORT).show()
                 true

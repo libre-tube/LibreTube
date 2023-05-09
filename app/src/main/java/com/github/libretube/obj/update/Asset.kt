@@ -20,5 +20,5 @@ data class Asset(
     val state: String,
     @SerialName("updated_at") val updatedAt: Instant,
     val uploader: User,
-    val url: String
+    val url: String,
 )

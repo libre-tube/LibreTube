@@ -20,15 +20,15 @@ import com.github.libretube.ui.extensions.setFormattedDuration
 import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.PlaylistViewHolder
-import java.io.IOException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.IOException
 
 class PlaylistAdapter(
     private val videoFeed: MutableList<StreamItem>,
     private val playlistId: String,
-    private val playlistType: PlaylistType
+    private val playlistType: PlaylistType,
 ) : RecyclerView.Adapter<PlaylistViewHolder>() {
 
     private var visibleCount = minOf(20, videoFeed.size)
@@ -77,7 +77,7 @@ class PlaylistAdapter(
                 VideoOptionsBottomSheet(videoId, videoName)
                     .show(
                         (root.context as BaseActivity).supportFragmentManager,
-                        VideoOptionsBottomSheet::class.java.name
+                        VideoOptionsBottomSheet::class.java.name,
                     )
                 true
             }

@@ -14,12 +14,12 @@ import kotlinx.coroutines.runBlocking
 
 class ChannelGroupsSheet(
     private val groups: MutableList<SubscriptionGroup>,
-    private val onGroupsChanged: (List<SubscriptionGroup>) -> Unit
+    private val onGroupsChanged: (List<SubscriptionGroup>) -> Unit,
 ) : ExpandedBottomSheet() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         val binding = DialogSubscriptionGroupsBinding.inflate(layoutInflater)
 
@@ -27,7 +27,7 @@ class ChannelGroupsSheet(
         val adapter = SubscriptionGroupsAdapter(
             groups.toMutableList(),
             parentFragmentManager,
-            onGroupsChanged
+            onGroupsChanged,
         )
         binding.groupsRV.adapter = adapter
 

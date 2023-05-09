@@ -21,16 +21,16 @@ import kotlinx.coroutines.launch
 
 class PlaylistBookmarkAdapter(
     private val bookmarks: List<PlaylistBookmark>,
-    private val bookmarkMode: BookmarkMode = BookmarkMode.FRAGMENT
+    private val bookmarkMode: BookmarkMode = BookmarkMode.FRAGMENT,
 ) : RecyclerView.Adapter<PlaylistBookmarkViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistBookmarkViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return when (bookmarkMode) {
             BookmarkMode.HOME -> PlaylistBookmarkViewHolder(
-                PlaylistBookmarkRowBinding.inflate(layoutInflater, parent, false)
+                PlaylistBookmarkRowBinding.inflate(layoutInflater, parent, false),
             )
             BookmarkMode.FRAGMENT -> PlaylistBookmarkViewHolder(
-                PlaylistsRowBinding.inflate(layoutInflater, parent, false)
+                PlaylistsRowBinding.inflate(layoutInflater, parent, false),
             )
         }
     }
@@ -50,7 +50,7 @@ class PlaylistBookmarkAdapter(
                 NavigationHelper.navigatePlaylist(
                     root.context,
                     bookmark.playlistId,
-                    PlaylistType.PUBLIC
+                    PlaylistType.PUBLIC,
                 )
             }
 
@@ -58,9 +58,9 @@ class PlaylistBookmarkAdapter(
                 PlaylistOptionsBottomSheet(
                     playlistId = bookmark.playlistId,
                     playlistName = bookmark.playlistName ?: "",
-                    playlistType = PlaylistType.PUBLIC
+                    playlistType = PlaylistType.PUBLIC,
                 ).show(
-                    (root.context as AppCompatActivity).supportFragmentManager
+                    (root.context as AppCompatActivity).supportFragmentManager,
                 )
                 true
             }
@@ -79,7 +79,7 @@ class PlaylistBookmarkAdapter(
             bookmarkPlaylist.setOnClickListener {
                 isBookmarked = !isBookmarked
                 bookmarkPlaylist.setImageResource(
-                    if (isBookmarked) R.drawable.ic_bookmark else R.drawable.ic_bookmark_outlined
+                    if (isBookmarked) R.drawable.ic_bookmark else R.drawable.ic_bookmark_outlined,
                 )
                 CoroutineScope(Dispatchers.IO).launch {
                     if (!isBookmarked) {
@@ -96,7 +96,7 @@ class PlaylistBookmarkAdapter(
                 NavigationHelper.navigatePlaylist(
                     root.context,
                     bookmark.playlistId,
-                    PlaylistType.PUBLIC
+                    PlaylistType.PUBLIC,
                 )
             }
 
@@ -104,9 +104,9 @@ class PlaylistBookmarkAdapter(
                 PlaylistOptionsBottomSheet(
                     playlistId = bookmark.playlistId,
                     playlistName = bookmark.playlistName ?: "",
-                    playlistType = PlaylistType.PUBLIC
+                    playlistType = PlaylistType.PUBLIC,
                 ).show(
-                    (root.context as AppCompatActivity).supportFragmentManager
+                    (root.context as AppCompatActivity).supportFragmentManager,
                 )
                 true
             }
@@ -116,7 +116,7 @@ class PlaylistBookmarkAdapter(
     companion object {
         enum class BookmarkMode {
             HOME,
-            FRAGMENT
+            FRAGMENT,
         }
     }
 }

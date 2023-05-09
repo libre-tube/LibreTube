@@ -21,7 +21,7 @@ import com.google.android.exoplayer2.ui.DefaultTimeBar
  */
 class MarkableTimeBar(
     context: Context,
-    attributeSet: AttributeSet? = null
+    attributeSet: AttributeSet? = null,
 ) : DefaultTimeBar(context, attributeSet) {
 
     private var segments: List<Segment> = listOf()
@@ -53,11 +53,11 @@ class MarkableTimeBar(
                     (it.segment.first() + horizontalOffset).toLength(),
                     marginY,
                     (it.segment.last() + horizontalOffset).toLength(),
-                    canvas.height - marginY
+                    canvas.height - marginY,
                 ),
                 Paint().apply {
                     color = ThemeHelper.getThemeColor(context, R.attr.colorOnSecondary)
-                }
+                },
             )
         }
         canvas.restore()

@@ -14,21 +14,21 @@ import com.github.libretube.obj.ShareData
 import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlin.io.path.deleteIfExists
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import kotlin.io.path.deleteIfExists
 
 class DownloadOptionsBottomSheet(
     private val download: Download,
     private val items: List<DownloadItem>,
-    private val onDelete: () -> Unit
+    private val onDelete: () -> Unit,
 ) : BaseBottomSheet() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val options = listOf(
             R.string.playOnBackground,
             R.string.go_to_video,
             R.string.share,
-            R.string.delete
+            R.string.delete,
         ).map { getString(it) }
         setSimpleItems(options) { selectedIndex ->
             when (selectedIndex) {

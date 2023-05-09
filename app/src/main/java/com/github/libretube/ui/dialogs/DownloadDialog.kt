@@ -23,14 +23,14 @@ import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
+import java.io.IOException
 
 class DownloadDialog(
-    private val videoId: String
+    private val videoId: String,
 ) : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogDownloadBinding.inflate(layoutInflater)
@@ -110,7 +110,7 @@ class DownloadDialog(
             R.layout.dropdown_item,
             videoStreams.map { "${it.quality} ${it.format}" }.toMutableList().also {
                 it.add(0, getString(R.string.no_video))
-            }
+            },
         )
 
         val audioArrayAdapter = ArrayAdapter(
@@ -118,7 +118,7 @@ class DownloadDialog(
             R.layout.dropdown_item,
             audioStreams.map { "${it.quality} ${it.format}" }.toMutableList().also {
                 it.add(0, getString(R.string.no_audio))
-            }
+            },
         )
 
         val subtitleArrayAdapter = ArrayAdapter(
@@ -126,7 +126,7 @@ class DownloadDialog(
             R.layout.dropdown_item,
             subtitles.map { it.name.orEmpty() }.toMutableList().also {
                 it.add(0, getString(R.string.no_subtitle))
-            }
+            },
         )
 
         binding.videoSpinner.adapter = videoArrayAdapter
@@ -164,7 +164,7 @@ class DownloadDialog(
                 videoQuality = videoStream?.quality,
                 audioFormat = audioStream?.format,
                 audioQuality = audioStream?.quality,
-                subtitleCode = subtitle?.code
+                subtitleCode = subtitle?.code,
             )
 
             dismiss()
@@ -177,7 +177,7 @@ class DownloadDialog(
     private fun saveSelections(
         videoStream: PipedStream?,
         audioStream: PipedStream?,
-        subtitle: Subtitle?
+        subtitle: Subtitle?,
     ) {
         PreferenceHelper.putString(SUBTITLE_LANGUAGE, subtitle?.code.orEmpty())
         PreferenceHelper.putString(VIDEO_DOWNLOAD_FORMAT, videoStream?.format.orEmpty())
@@ -195,19 +195,19 @@ class DownloadDialog(
         binding: DialogDownloadBinding,
         videoStreams: List<PipedStream>,
         audioStreams: List<PipedStream>,
-        subtitles: List<Subtitle>
+        subtitles: List<Subtitle>,
     ) {
         getStreamSelection(
             videoStreams,
             getSel(VIDEO_DOWNLOAD_QUALITY),
-            getSel(VIDEO_DOWNLOAD_FORMAT)
+            getSel(VIDEO_DOWNLOAD_FORMAT),
         )?.let {
             binding.videoSpinner.setSelection(it + 1)
         }
         getStreamSelection(
             audioStreams,
             getSel(AUDIO_DOWNLOAD_QUALITY),
-            getSel(AUDIO_DOWNLOAD_FORMAT)
+            getSel(AUDIO_DOWNLOAD_FORMAT),
         )?.let {
             binding.audioSpinner.setSelection(it + 1)
         }

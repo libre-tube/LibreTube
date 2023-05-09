@@ -19,7 +19,7 @@ data class LocalPlaylistItem(
     @ColumnInfo val uploaderUrl: String? = null,
     @ColumnInfo val uploaderAvatar: String? = null,
     @ColumnInfo val thumbnailUrl: String? = null,
-    @ColumnInfo val duration: Long? = null
+    @ColumnInfo val duration: Long? = null,
 ) {
     fun toStreamItem(): StreamItem {
         return StreamItem(
@@ -31,7 +31,7 @@ data class LocalPlaylistItem(
             uploaderAvatar = ProxyHelper.rewriteUrl(uploaderAvatar),
             uploadedDate = uploadDate,
             uploaded = null,
-            duration = duration
+            duration = duration,
         )
     }
 }

@@ -36,7 +36,7 @@ class InstanceSettings : BasePreferenceFragment() {
 
         val instancePref = findPreference<ListPreference>(PreferenceKeys.FETCH_INSTANCE)!!
         val authInstanceToggle = findPreference<SwitchPreferenceCompat>(
-            PreferenceKeys.AUTH_INSTANCE_TOGGLE
+            PreferenceKeys.AUTH_INSTANCE_TOGGLE,
         )!!
         val authInstance = findPreference<ListPreference>(PreferenceKeys.AUTH_INSTANCE)!!
         initInstancesPref(listOf(instancePref, authInstance))

@@ -14,7 +14,7 @@ import com.google.android.exoplayer2.ExoPlayer
 
 class ChaptersAdapter(
     private val chapters: List<ChapterSegment>,
-    private val exoPlayer: ExoPlayer
+    private val exoPlayer: ExoPlayer,
 ) : RecyclerView.Adapter<ChaptersViewHolder>() {
     private var selectedPosition = 0
 

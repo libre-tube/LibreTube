@@ -40,7 +40,7 @@ class WatchHistoryFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentWatchHistoryBinding.inflate(inflater, container, false)
         return binding.root
@@ -51,7 +51,7 @@ class WatchHistoryFragment : Fragment() {
 
         playerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
             _binding?.watchHistoryRecView?.updatePadding(
-                bottom = if (it) (64).dpToPx().toInt() else 0
+                bottom = if (it) (64).dpToPx().toInt() else 0,
             )
         }
 
@@ -93,19 +93,19 @@ class WatchHistoryFragment : Fragment() {
                         uploaderUrl = it.uploaderUrl,
                         uploaderAvatar = it.uploaderAvatar,
                         uploadedDate = it.uploadDate?.toString(),
-                        duration = it.duration
+                        duration = it.duration,
                     )
-                }.toTypedArray()
+                }.toTypedArray(),
             )
             NavigationHelper.navigateVideo(
                 requireContext(),
                 watchHistory.last().videoId,
-                keepQueue = true
+                keepQueue = true,
             )
         }
 
         val watchHistoryAdapter = WatchHistoryAdapter(
-            watchHistory.toMutableList()
+            watchHistory.toMutableList(),
         )
 
         binding.watchHistoryRecView.layoutManager = LinearLayoutManager(context)
@@ -115,19 +115,19 @@ class WatchHistoryFragment : Fragment() {
 
         val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
             0,
-            ItemTouchHelper.LEFT
+            ItemTouchHelper.LEFT,
         ) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
+                target: RecyclerView.ViewHolder,
             ): Boolean {
                 return false
             }
 
             override fun onSwiped(
                 viewHolder: RecyclerView.ViewHolder,
-                direction: Int
+                direction: Int,
             ) {
                 val position = viewHolder.absoluteAdapterPosition
                 watchHistoryAdapter.removeFromWatchHistory(position)
