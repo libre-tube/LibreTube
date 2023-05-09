@@ -36,7 +36,7 @@ object PlaylistsHelper {
                         id = it.playlist.id.toString(),
                         name = it.playlist.name,
                         thumbnail = ProxyHelper.rewriteUrl(it.playlist.thumbnailUrl),
-                        videos = it.videos.size.toLong()
+                        videos = it.videos.size.toLong(),
                     )
                 }
         }
@@ -54,7 +54,7 @@ object PlaylistsHelper {
                     name = relation.playlist.name,
                     thumbnailUrl = ProxyHelper.rewriteUrl(relation.playlist.thumbnailUrl),
                     videos = relation.videos.size,
-                    relatedStreams = relation.videos.map { it.toStreamItem() }
+                    relatedStreams = relation.videos.map { it.toStreamItem() },
                 )
             }
         }
@@ -117,7 +117,7 @@ object PlaylistsHelper {
             val transaction = DatabaseHolder.Database.localPlaylistsDao().getAll()
                 .first { it.playlist.id.toString() == playlistId }
             DatabaseHolder.Database.localPlaylistsDao().removePlaylistVideo(
-                transaction.videos[index]
+                transaction.videos[index],
             )
             // set a new playlist thumbnail if the first video got removed
             if (index == 0) {
@@ -128,7 +128,7 @@ object PlaylistsHelper {
         } else {
             RetrofitInstance.authApi.removeFromPlaylist(
                 PreferenceHelper.getToken(),
-                PlaylistId(playlistId = playlistId, index = index)
+                PlaylistId(playlistId = playlistId, index = index),
             ).message == "ok"
         }
     }
@@ -144,7 +144,7 @@ object PlaylistsHelper {
                         playlistId,
                         *playlist.videos.map {
                             StreamItem(url = it)
-                        }.toTypedArray()
+                        }.toTypedArray(),
                     )
                 } else {
                     // if not logged in, all video information needs to become fetched manually
@@ -155,7 +155,7 @@ object PlaylistsHelper {
                                 async {
                                     runCatching {
                                         val stream = RetrofitInstance.api.getStreams(it.first).toStreamItem(
-                                            it.first
+                                            it.first,
                                         )
                                         addToPlaylist(playlistId, stream)
                                     }
@@ -210,7 +210,7 @@ object PlaylistsHelper {
         return runCatching {
             RetrofitInstance.authApi.deletePlaylist(
                 PreferenceHelper.getToken(),
-                PlaylistId(playlistId)
+                PlaylistId(playlistId),
             ).message == "ok"
         }.getOrDefault(false)
     }

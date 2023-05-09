@@ -11,7 +11,7 @@ import com.github.libretube.ui.adapters.IntentChooserAdapter
 
 class IntentChooserSheet(
     private val packages: List<ResolveInfo>,
-    private val url: String
+    private val url: String,
 ) : BaseBottomSheet() {
     private var _binding: BottomSheetBinding? = null
     private val binding get() = _binding!!
@@ -19,7 +19,7 @@ class IntentChooserSheet(
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = BottomSheetBinding.inflate(inflater)
         return binding.root

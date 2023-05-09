@@ -19,7 +19,7 @@ data class StreamItem(
     val uploaderVerified: Boolean? = null,
     val uploaded: Long? = null,
     val shortDescription: String? = null,
-    val isShort: Boolean = false
+    val isShort: Boolean = false,
 ) {
     fun toLocalPlaylistItem(playlistId: String): LocalPlaylistItem {
         return LocalPlaylistItem(
@@ -31,7 +31,7 @@ data class StreamItem(
             uploaderUrl = uploaderUrl,
             uploaderAvatar = uploaderAvatar,
             uploadDate = uploadedDate,
-            duration = duration
+            duration = duration,
         )
     }
 }

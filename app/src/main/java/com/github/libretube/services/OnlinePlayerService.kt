@@ -160,7 +160,7 @@ class OnlinePlayerService : LifecycleService() {
     private fun loadAudio(
         videoId: String,
         seekToPosition: Long = 0,
-        keepQueue: Boolean = false
+        keepQueue: Boolean = false,
     ) {
         lifecycleScope.launch(Dispatchers.IO) {
             streams = runCatching {
@@ -192,13 +192,13 @@ class OnlinePlayerService : LifecycleService() {
             nowPlayingNotification = NowPlayingNotification(
                 this@OnlinePlayerService,
                 player!!,
-                true
+                true,
             )
         }
         val playerNotificationData = PlayerNotificationData(
             streams?.title,
             streams?.uploader,
-            streams?.thumbnailUrl
+            streams?.thumbnailUrl,
         )
         nowPlayingNotification.updatePlayerNotification(videoId, playerNotificationData)
 
@@ -269,7 +269,7 @@ class OnlinePlayerService : LifecycleService() {
                     Toast.makeText(
                         this@OnlinePlayerService.applicationContext,
                         error.localizedMessage,
-                        Toast.LENGTH_SHORT
+                        Toast.LENGTH_SHORT,
                     ).show()
                 }
             }
@@ -318,7 +318,7 @@ class OnlinePlayerService : LifecycleService() {
                 if (categories.isEmpty()) return@runCatching
                 segments = RetrofitInstance.api.getSegments(
                     videoId,
-                    JsonHelper.json.encodeToString(categories)
+                    JsonHelper.json.encodeToString(categories),
                 ).segments
                 checkForSegments()
             }

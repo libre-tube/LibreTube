@@ -22,12 +22,12 @@ import kotlinx.coroutines.runBlocking
 class ShareDialog(
     private val id: String,
     private val shareObjectType: ShareObjectType,
-    private val shareData: ShareData
+    private val shareData: ShareData,
 ) : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         var shareOptions = arrayOf(
             getString(R.string.piped),
-            getString(R.string.youtube)
+            getString(R.string.youtube),
         )
         val instanceUrl = getCustomInstanceFrontendUrl()
         val shareableTitle = shareData.currentChannel
@@ -77,7 +77,7 @@ class ShareDialog(
     private fun setupTimeStampBinding(binding: DialogShareBinding) {
         binding.timeCodeSwitch.isChecked = PreferenceHelper.getBoolean(
             PreferenceKeys.SHARE_WITH_TIME_CODE,
-            true
+            true,
         )
         binding.timeCodeSwitch.setOnCheckedChangeListener { _, isChecked ->
             binding.timeStampLayout.isVisible = isChecked
@@ -93,7 +93,7 @@ class ShareDialog(
     private fun getCustomInstanceFrontendUrl(): String {
         val instancePref = PreferenceHelper.getString(
             PreferenceKeys.FETCH_INSTANCE,
-            PIPED_FRONTEND_URL
+            PIPED_FRONTEND_URL,
         )
 
         // get the api urls of the other custom instances

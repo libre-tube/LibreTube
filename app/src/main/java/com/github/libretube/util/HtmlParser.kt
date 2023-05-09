@@ -8,7 +8,7 @@ import org.xml.sax.Locator
 import org.xml.sax.XMLReader
 
 class HtmlParser(
-    private val handler: LinkHandler
+    private val handler: LinkHandler,
 ) : Html.TagHandler, ContentHandler {
     private val tagStatus = ArrayDeque<Boolean>()
     private var wrapped: ContentHandler? = null
@@ -30,7 +30,7 @@ class HtmlParser(
         uri: String,
         localName: String,
         qName: String,
-        attributes: Attributes
+        attributes: Attributes,
     ) {
         val isHandled = handler.handleTag(true, localName, text, attributes)
         tagStatus.addLast(isHandled)

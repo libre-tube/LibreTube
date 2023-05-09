@@ -46,8 +46,7 @@ class ResettableLazy<PROPTYPE>(val manager: ResettableLazyManager, val init: () 
     }
 }
 
-fun <PROPTYPE> resettableLazy(manager: ResettableLazyManager, init: () -> PROPTYPE):
-    ResettableLazy<PROPTYPE> {
+fun <PROPTYPE> resettableLazy(manager: ResettableLazyManager, init: () -> PROPTYPE): ResettableLazy<PROPTYPE> {
     return ResettableLazy(manager, init)
 }
 

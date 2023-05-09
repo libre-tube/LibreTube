@@ -8,5 +8,5 @@ data class PlaylistId(
     val videoId: String? = null,
     val videoIds: List<String> = emptyList(),
     val newName: String? = null,
-    val index: Int = -1
+    val index: Int = -1,
 )

@@ -4,5 +4,5 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.IntentChooserItemBinding
 
 class IntentChooserViewHolder(
-    val binding: IntentChooserItemBinding
+    val binding: IntentChooserItemBinding,
 ) : RecyclerView.ViewHolder(binding.root)

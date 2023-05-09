@@ -20,7 +20,7 @@ class CustomSwipeToRefresh(context: Context?, attrs: AttributeSet?) :
     init {
         setColorSchemeColors(ThemeHelper.getThemeColor(this.context, R.attr.colorPrimary))
         setProgressBackgroundColorSchemeColor(
-            SurfaceColors.getColorForElevation(this.context, 20f)
+            SurfaceColors.getColorForElevation(this.context, 20f),
         )
     }
 

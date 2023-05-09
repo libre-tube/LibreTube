@@ -15,9 +15,9 @@ import java.nio.file.Path
             entity = Download::class,
             parentColumns = ["videoId"],
             childColumns = ["videoId"],
-            onDelete = ForeignKey.CASCADE
-        )
-    ]
+            onDelete = ForeignKey.CASCADE,
+        ),
+    ],
 )
 data class DownloadItem(
     @PrimaryKey(autoGenerate = true)
@@ -29,5 +29,5 @@ data class DownloadItem(
     var url: String? = null,
     var format: String? = null,
     var quality: String? = null,
-    var downloadSize: Long = -1L
+    var downloadSize: Long = -1L,
 )

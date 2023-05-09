@@ -27,7 +27,7 @@ object NavigationHelper {
 
     fun navigateChannel(
         context: Context,
-        channelId: String?
+        channelId: String?,
     ) {
         if (channelId == null) return
 
@@ -64,7 +64,7 @@ object NavigationHelper {
         channelId: String? = null,
         keepQueue: Boolean = false,
         timeStamp: Long? = null,
-        forceVideo: Boolean = false
+        forceVideo: Boolean = false,
     ) {
         if (videoId == null) return
 
@@ -76,7 +76,7 @@ object NavigationHelper {
                 timeStamp,
                 playlistId,
                 channelId,
-                keepQueue
+                keepQueue,
             )
             handler.postDelayed(500) {
                 startAudioPlayer(context)
@@ -89,7 +89,7 @@ object NavigationHelper {
             IntentData.playlistId to playlistId,
             IntentData.channelId to channelId,
             IntentData.keepQueue to keepQueue,
-            IntentData.timeStamp to timeStamp
+            IntentData.timeStamp to timeStamp,
         )
 
         val activity = unwrapActivity(context)
@@ -101,14 +101,14 @@ object NavigationHelper {
     fun navigatePlaylist(
         context: Context,
         playlistId: String?,
-        playlistType: PlaylistType
+        playlistType: PlaylistType,
     ) {
         if (playlistId == null) return
 
         val activity = unwrapActivity(context)
         val bundle = bundleOf(
             IntentData.playlistId to playlistId,
-            IntentData.playlistType to playlistType
+            IntentData.playlistType to playlistType,
         )
         activity.navController.navigate(R.id.playlistFragment, bundle)
     }

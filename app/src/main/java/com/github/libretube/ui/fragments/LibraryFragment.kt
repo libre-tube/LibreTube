@@ -43,7 +43,7 @@ class LibraryFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentLibraryBinding.inflate(inflater, container, false)
         return binding.root
@@ -154,7 +154,7 @@ class LibraryFragment : Fragment() {
 
                     val playlistsAdapter = PlaylistsAdapter(
                         playlists.toMutableList(),
-                        PlaylistsHelper.getPrivatePlaylistType()
+                        PlaylistsHelper.getPrivatePlaylistType(),
                     )
 
                     // listen for playlists to become deleted

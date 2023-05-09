@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
  * @param videoId The id of the video to add. If non is provided, insert the whole playing queue
  */
 class AddToPlaylistDialog(
-    private val videoId: String? = null
+    private val videoId: String? = null,
 ) : DialogFragment() {
     private val viewModel: PlaylistViewModel by activityViewModels()
 
@@ -64,7 +64,7 @@ class AddToPlaylistDialog(
                 // select the last used playlist
                 viewModel.lastSelectedPlaylistId?.let { id ->
                     binding.playlistsSpinner.setSelection(
-                        response.indexOfFirst { it.id == id }.takeIf { it >= 0 } ?: 0
+                        response.indexOfFirst { it.id == id }.takeIf { it >= 0 } ?: 0,
                     )
                 }
                 binding.addToPlaylist.setOnClickListener {
@@ -86,7 +86,7 @@ class AddToPlaylistDialog(
             videoId != null -> listOfNotNull(
                 runCatching {
                     RetrofitInstance.api.getStreams(videoId!!).toStreamItem(videoId)
-                }.getOrNull()
+                }.getOrNull(),
             )
             else -> PlayingQueue.getStreams()
         }
@@ -100,7 +100,7 @@ class AddToPlaylistDialog(
             return
         }
         appContext.toastFromMainDispatcher(
-            if (success) R.string.added_to_playlist else R.string.fail
+            if (success) R.string.added_to_playlist else R.string.fail,
         )
     }
 }

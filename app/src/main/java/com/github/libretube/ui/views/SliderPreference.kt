@@ -15,10 +15,10 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
  */
 class SliderPreference(
     context: Context,
-    attributeSet: AttributeSet
+    attributeSet: AttributeSet,
 ) : Preference(
     context,
-    attributeSet
+    attributeSet,
 ) {
     private lateinit var sliderBinding: DialogSliderBinding
     private var defValue = 0f
@@ -26,18 +26,18 @@ class SliderPreference(
     private var prefValue: Float
         get() = PreferenceHelper.getString(
             key,
-            defValue.toString()
+            defValue.toString(),
         ).toFloat()
         set(value) {
             PreferenceHelper.putString(
                 key,
-                value.toString()
+                value.toString(),
             )
         }
 
     private val typedArray = context.obtainStyledAttributes(
         attributeSet,
-        R.styleable.SliderPreference
+        R.styleable.SliderPreference,
     )
 
     override fun onAttached() {
@@ -56,7 +56,7 @@ class SliderPreference(
         val stepSize = typedArray.getFloat(R.styleable.SliderPreference_stepSize, 1.0f)
 
         sliderBinding = DialogSliderBinding.inflate(
-            LayoutInflater.from(context)
+            LayoutInflater.from(context),
         )
 
         sliderBinding.slider.apply {

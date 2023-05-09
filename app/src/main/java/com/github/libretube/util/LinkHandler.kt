@@ -8,7 +8,7 @@ import android.view.View
 import org.xml.sax.Attributes
 
 class LinkHandler(
-    private val clickCallback: (String) -> Unit
+    private val clickCallback: (String) -> Unit,
 ) {
     private var linkTagStartIndex = -1
     private var link: String? = null
@@ -17,7 +17,7 @@ class LinkHandler(
         opening: Boolean,
         tag: String?,
         output: Editable?,
-        attributes: Attributes?
+        attributes: Attributes?,
     ): Boolean {
         // if the tag is not an anchor link, ignore for the default handler
         if (output == null || tag != "a") {
@@ -49,7 +49,7 @@ class LinkHandler(
             },
             start,
             end,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE,
         )
     }
 }

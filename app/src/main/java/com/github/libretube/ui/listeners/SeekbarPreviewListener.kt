@@ -19,7 +19,7 @@ class SeekbarPreviewListener(
     private val playerBinding: ExoStyledPlayerControlViewBinding,
     private val duration: Long,
     private val onScrub: (position: Long) -> Unit,
-    private val onScrubEnd: (position: Long) -> Unit
+    private val onScrubEnd: (position: Long) -> Unit,
 ) : TimeBar.OnScrubListener {
     private var moving = false
 
@@ -116,7 +116,7 @@ class SeekbarPreviewListener(
             previewFrame.positionX * widthPerFrame,
             previewFrame.positionY * heightPerFrame,
             widthPerFrame,
-            heightPerFrame
+            heightPerFrame,
         )
     }
 

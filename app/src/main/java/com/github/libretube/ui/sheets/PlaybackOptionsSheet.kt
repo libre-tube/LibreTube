@@ -12,14 +12,14 @@ import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.PlaybackParameters
 
 class PlaybackOptionsSheet(
-    private val player: ExoPlayer
+    private val player: ExoPlayer,
 ) : ExpandedBottomSheet() {
     private lateinit var binding: PlaybackBottomSheetBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = PlaybackBottomSheetBinding.inflate(layoutInflater)
         return binding.root
@@ -61,7 +61,7 @@ class PlaybackOptionsSheet(
     private fun onChange() {
         player.playbackParameters = PlaybackParameters(
             binding.speed.value.round(2),
-            binding.pitch.value.round(2)
+            binding.pitch.value.round(2),
         )
     }
 }

@@ -14,7 +14,7 @@ import com.github.libretube.R
  */
 class DrawableTextView(
     context: Context,
-    attrs: AttributeSet? = null
+    attrs: AttributeSet? = null,
 ) : AppCompatTextView(context, attrs) {
 
     private var drawableStartDimen = 0F
@@ -32,11 +32,11 @@ class DrawableTextView(
 
             gravity = ta.getInt(
                 R.styleable.DrawableTextView_android_gravity,
-                Gravity.CENTER_VERTICAL
+                Gravity.CENTER_VERTICAL,
             )
             compoundDrawablePadding = ta.getDimensionPixelOffset(
                 R.styleable.DrawableTextView_android_drawablePadding,
-                20
+                20,
             )
         } finally {
             ta.recycle()
@@ -54,7 +54,7 @@ class DrawableTextView(
             relDrawables[0],
             relDrawables[1],
             relDrawables[2],
-            relDrawables[3]
+            relDrawables[3],
         )
     }
 

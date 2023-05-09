@@ -41,7 +41,7 @@ class NotificationSettings : BasePreferenceFragment() {
         NotificationHelper
             .enqueueWork(
                 context = requireContext(),
-                existingPeriodicWorkPolicy = ExistingPeriodicWorkPolicy.REPLACE
+                existingPeriodicWorkPolicy = ExistingPeriodicWorkPolicy.REPLACE,
             )
     }
 }

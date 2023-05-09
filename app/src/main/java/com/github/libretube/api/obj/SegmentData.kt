@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 data class SegmentData(
     val hash: String? = null,
     val segments: List<Segment> = listOf(),
-    val videoID: String? = null
+    val videoID: String? = null,
 )

@@ -12,7 +12,7 @@ fun Context.toastFromMainThread(text: String) {
         Toast.makeText(
             this,
             text,
-            Toast.LENGTH_SHORT
+            Toast.LENGTH_SHORT,
         ).show()
     }
 }

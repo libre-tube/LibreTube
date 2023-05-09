@@ -24,7 +24,7 @@ object SleepTimer {
 
         val breakReminderPref = PreferenceHelper.getString(
             PreferenceKeys.SLEEP_TIMER_DELAY,
-            ""
+            "",
         ).ifEmpty { return }
 
         handler.postDelayed(breakReminderPref.toLong() * 60 * 1000) {
@@ -33,7 +33,7 @@ object SleepTimer {
             val snackBar = Snackbar.make(
                 mainActivity.binding.root,
                 R.string.take_a_break,
-                Snackbar.LENGTH_INDEFINITE
+                Snackbar.LENGTH_INDEFINITE,
             )
                 .setAction(R.string.cancel) {
                     killApp = false

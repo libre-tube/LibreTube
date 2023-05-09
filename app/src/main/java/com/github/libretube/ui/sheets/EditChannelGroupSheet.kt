@@ -21,7 +21,7 @@ import kotlinx.coroutines.withContext
 
 class EditChannelGroupSheet(
     private var group: SubscriptionGroup,
-    private val onGroupChanged: (SubscriptionGroup) -> Unit
+    private val onGroupChanged: (SubscriptionGroup) -> Unit,
 ) : ExpandedBottomSheet() {
     private val subscriptionsModel: SubscriptionsViewModel by activityViewModels()
     private lateinit var binding: DialogEditChannelGroupBinding
@@ -30,7 +30,7 @@ class EditChannelGroupSheet(
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         binding = DialogEditChannelGroupBinding.inflate(layoutInflater)
         binding.groupName.setText(group.name)
@@ -75,7 +75,7 @@ class EditChannelGroupSheet(
     private fun showChannels(channels: List<Subscription>, query: String?) {
         binding.channelsRV.adapter = SubscriptionGroupChannelsAdapter(
             channels.filter { query == null || it.name.lowercase().contains(query.lowercase()) },
-            group
+            group,
         ) {
             group = it
         }

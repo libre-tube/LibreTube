@@ -32,7 +32,7 @@ object WindowHelper {
         // See: https://developer.android.com/training/system-ui/immersive#kotlin
         activity.toggleSystemBars(
             types = WindowInsetsCompat.Type.systemBars(),
-            showBars = !isFullscreen
+            showBars = !isFullscreen,
         )
     }
 }

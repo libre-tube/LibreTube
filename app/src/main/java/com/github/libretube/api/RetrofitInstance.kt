@@ -53,12 +53,12 @@ object RetrofitInstance {
             if (
                 PreferenceHelper.getBoolean(
                     PreferenceKeys.AUTH_INSTANCE_TOGGLE,
-                    false
+                    false,
                 )
             ) {
                 PreferenceHelper.getString(
                     PreferenceKeys.AUTH_INSTANCE,
-                    PIPED_API_URL
+                    PIPED_API_URL,
                 )
             } else {
                 url

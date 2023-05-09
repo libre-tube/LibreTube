@@ -18,13 +18,13 @@ class NavBarOptionsDialog : DialogFragment() {
         val options = NavBarHelper.getNavBarItems(requireContext())
         val adapter = NavBarOptionsAdapter(
             options.toMutableList(),
-            NavBarHelper.getStartFragmentId(requireContext())
+            NavBarHelper.getStartFragmentId(requireContext()),
         )
 
         val itemTouchCallback = object : ItemTouchHelper.Callback() {
             override fun getMovementFlags(
                 recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder
+                viewHolder: RecyclerView.ViewHolder,
             ): Int {
                 val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
                 return makeMovementFlags(dragFlags, 0)
@@ -33,7 +33,7 @@ class NavBarOptionsDialog : DialogFragment() {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
+                target: RecyclerView.ViewHolder,
             ): Boolean {
                 val itemToMove = adapter.items[viewHolder.absoluteAdapterPosition]
                 adapter.items.remove(itemToMove)
@@ -41,7 +41,7 @@ class NavBarOptionsDialog : DialogFragment() {
 
                 adapter.notifyItemMoved(
                     viewHolder.absoluteAdapterPosition,
-                    target.absoluteAdapterPosition
+                    target.absoluteAdapterPosition,
                 )
                 return true
             }

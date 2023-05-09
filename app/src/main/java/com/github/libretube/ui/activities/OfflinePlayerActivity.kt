@@ -64,7 +64,7 @@ class OfflinePlayerActivity : BaseActivity() {
 
         requestedOrientation = PlayerHelper.getOrientation(
             player.videoSize.width,
-            player.videoSize.height
+            player.videoSize.height,
         )
     }
 
@@ -84,7 +84,7 @@ class OfflinePlayerActivity : BaseActivity() {
                         super.onEvents(player, events)
                         // update the displayed duration on changes
                         playerBinding.duration.text = DateUtils.formatElapsedTime(
-                            player.duration / 1000
+                            player.duration / 1000,
                         )
                     }
                 })
@@ -106,7 +106,7 @@ class OfflinePlayerActivity : BaseActivity() {
             null,
             binding.doubleTapOverlay.binding,
             binding.playerGestureControlsView.binding,
-            trackSelector
+            trackSelector,
         )
     }
 
@@ -168,7 +168,7 @@ class OfflinePlayerActivity : BaseActivity() {
                     .apply {
                         if (subtitle != null) setSubtitleConfigurations(listOf(subtitle))
                     }
-                    .build()
+                    .build(),
             )
             audioUri != null -> player.setMediaItem(
                 MediaItem.Builder()
@@ -176,7 +176,7 @@ class OfflinePlayerActivity : BaseActivity() {
                     .apply {
                         if (subtitle != null) setSubtitleConfigurations(listOf(subtitle))
                     }
-                    .build()
+                    .build(),
             )
         }
     }
@@ -202,7 +202,7 @@ class OfflinePlayerActivity : BaseActivity() {
                 this,
                 PictureInPictureParamsCompat.Builder()
                     .setAspectRatio(player.videoSize)
-                    .build()
+                    .build(),
             )
         }
 

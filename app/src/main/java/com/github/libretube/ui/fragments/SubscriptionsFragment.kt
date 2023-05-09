@@ -56,7 +56,7 @@ class SubscriptionsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentSubscriptionsBinding.inflate(inflater, container, false)
         return binding.root
@@ -67,7 +67,7 @@ class SubscriptionsFragment : Fragment() {
 
         val loadFeedInBackground = PreferenceHelper.getBoolean(
             PreferenceKeys.SAVE_FEED,
-            false
+            false,
         )
 
         // update the text according to the current order and filter
@@ -230,7 +230,7 @@ class SubscriptionsFragment : Fragment() {
                 runBlocking {
                     if (!PreferenceHelper.getBoolean(
                             PreferenceKeys.HIDE_WATCHED_FROM_FEED,
-                            false
+                            false,
                         )
                     ) {
                         streams
@@ -271,7 +271,7 @@ class SubscriptionsFragment : Fragment() {
         binding.subProgress.visibility = View.GONE
         subscriptionsAdapter = VideosAdapter(
             sortedFeed.toMutableList(),
-            showAllAtOnce = false
+            showAllAtOnce = false,
         )
         binding.subFeed.adapter = subscriptionsAdapter
 
@@ -299,7 +299,7 @@ class SubscriptionsFragment : Fragment() {
 
         val legacySubscriptions = PreferenceHelper.getBoolean(
             PreferenceKeys.LEGACY_SUBSCRIPTIONS,
-            false
+            false,
         )
 
         binding.subChannels.layoutManager = if (legacySubscriptions) {
@@ -307,8 +307,8 @@ class SubscriptionsFragment : Fragment() {
                 context,
                 PreferenceHelper.getString(
                     PreferenceKeys.LEGACY_SUBSCRIPTIONS_COLUMNS,
-                    "4"
-                ).toInt()
+                    "4",
+                ).toInt(),
             )
         } else {
             LinearLayoutManager(context)
@@ -319,7 +319,7 @@ class SubscriptionsFragment : Fragment() {
             LegacySubscriptionAdapter(viewModel.subscriptions.value!!)
         } else {
             SubscriptionChannelAdapter(
-                viewModel.subscriptions.value!!.toMutableList()
+                viewModel.subscriptions.value!!.toMutableList(),
             )
         }
 

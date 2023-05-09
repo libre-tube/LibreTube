@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 data class CommentsPage(
     var comments: List<Comment> = emptyList(),
     val disabled: Boolean = false,
-    val nextpage: String? = null
+    val nextpage: String? = null,
 )
