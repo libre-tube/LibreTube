@@ -122,19 +122,20 @@ object SubscriptionHelper {
         }
     }
 
-    suspend fun getFeed(): List<StreamItem> {
+    suspend fun getFeed(start: Long?): List<StreamItem> {
         val token = PreferenceHelper.getToken()
         return if (token.isNotEmpty()) {
-            RetrofitInstance.authApi.getFeed(token)
+            RetrofitInstance.authApi.getFeed(token, start)
         } else {
             val subscriptions = Database.localSubscriptionDao().getAll().map { it.channelId }
             when {
                 subscriptions.size > GET_SUBSCRIPTIONS_LIMIT -> RetrofitInstance.authApi.getUnauthenticatedFeed(
-                    subscriptions
+                    subscriptions,
+                    start
                 )
-
                 else -> RetrofitInstance.authApi.getUnauthenticatedFeed(
-                    subscriptions.joinToString(",")
+                    subscriptions.joinToString(","),
+                    start
                 )
             }
         }

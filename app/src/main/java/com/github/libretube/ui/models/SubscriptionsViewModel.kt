@@ -14,32 +14,32 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SubscriptionsViewModel : ViewModel() {
-    var errorResponse = MutableLiveData<Boolean>().apply {
-        value = false
-    }
+    var errorResponse = MutableLiveData<Boolean>()
+    var videoFeed = MutableLiveData<List<StreamItem>?>()
+    var subscriptions = MutableLiveData<List<Subscription>?>()
+    private var loadingSubscriptions: Boolean = false
 
-    var videoFeed = MutableLiveData<List<StreamItem>?>().apply {
-        value = null
-    }
+    fun fetchFeed(start: Long? = null) {
+        if (loadingSubscriptions) return
+        loadingSubscriptions = true
 
-    var subscriptions = MutableLiveData<List<Subscription>?>().apply {
-        value = null
-    }
-
-    fun fetchFeed() {
+        if (start == null) videoFeed.value = null
         viewModelScope.launch(Dispatchers.IO) {
             val videoFeed = try {
-                SubscriptionHelper.getFeed()
+                SubscriptionHelper.getFeed(start)
             } catch (e: Exception) {
                 errorResponse.postValue(true)
                 Log.e(TAG(), e.toString())
                 return@launch
             }
-            this@SubscriptionsViewModel.videoFeed.postValue(videoFeed)
-            if (videoFeed.isNotEmpty()) {
-                // save the last recent video to the prefs for the notification worker
-                PreferenceHelper.setLastSeenVideoId(videoFeed[0].url!!.toID())
+            this@SubscriptionsViewModel.videoFeed.postValue(
+                this@SubscriptionsViewModel.videoFeed.value.orEmpty().plus(videoFeed),
+            )
+            // save the last recent video to the prefs for the notification worker
+            if (start == null) videoFeed.firstOrNull()?.let {
+                PreferenceHelper.setLatestVideoId(it.url!!.toID())
             }
+            loadingSubscriptions = false
         }
     }
 

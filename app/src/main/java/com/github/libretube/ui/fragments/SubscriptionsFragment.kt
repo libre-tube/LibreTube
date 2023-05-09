@@ -75,9 +75,7 @@ class SubscriptionsFragment : Fragment() {
         binding.filterTV.text = resources.getStringArray(R.array.filterOptions)[selectedFilter]
 
         binding.subRefresh.isEnabled = true
-
         binding.subProgress.visibility = View.VISIBLE
-
         binding.subFeed.layoutManager = VideosAdapter.getLayout(requireContext())
 
         if (viewModel.videoFeed.value == null || !loadFeedInBackground) {
@@ -103,6 +101,7 @@ class SubscriptionsFragment : Fragment() {
         }
 
         binding.subRefresh.setOnRefreshListener {
+            subscriptionsAdapter = null
             viewModel.fetchSubscriptions()
             viewModel.fetchFeed()
         }
@@ -152,11 +151,14 @@ class SubscriptionsFragment : Fragment() {
         binding.scrollviewSub.viewTreeObserver.addOnScrollChangedListener {
             val binding = _binding
             if (binding?.scrollviewSub?.canScrollVertically(1) == false &&
-                viewModel.videoFeed.value != null // scroll view is at bottom
+                !viewModel.videoFeed.value.isNullOrEmpty()
             ) {
+                // a start parameter is required for the next page
+                // if there's no other video available to get it from, the feed might be empty in general
+                // and hence shouldn't be updated
+                val start = viewModel.videoFeed.value?.lastOrNull()?.uploaded ?: return@addOnScrollChangedListener
                 binding.subRefresh.isRefreshing = true
-                subscriptionsAdapter?.updateItems()
-                binding.subRefresh.isRefreshing = false
+                viewModel.fetchFeed(start)
             }
         }
 
@@ -260,7 +262,7 @@ class SubscriptionsFragment : Fragment() {
                 (it.uploaded ?: 0L) / 1000 < lastCheckedFeedTime
             }
             if (caughtUpIndex > 0) {
-                sortedFeed.add(caughtUpIndex, StreamItem(type = "caught"))
+                sortedFeed.add(caughtUpIndex, StreamItem(type = StreamItem.CAUGHT_TYPE_KEY))
             }
         }
 
@@ -271,11 +273,14 @@ class SubscriptionsFragment : Fragment() {
         binding.emptyFeed.isVisible = notLoaded
 
         binding.subProgress.visibility = View.GONE
-        subscriptionsAdapter = VideosAdapter(
-            sortedFeed.toMutableList(),
-            showAllAtOnce = false
-        )
-        binding.subFeed.adapter = subscriptionsAdapter
+
+        if (subscriptionsAdapter == null) {
+            subscriptionsAdapter = VideosAdapter(sortedFeed.toMutableList())
+            binding.subFeed.adapter = subscriptionsAdapter
+        } else {
+            val newVideos = sortedFeed.subList(subscriptionsAdapter?.itemCount ?: 0, sortedFeed.size)
+            subscriptionsAdapter?.insertItems(newVideos)
+        }
 
         PreferenceHelper.updateLastFeedWatchedTime()
     }

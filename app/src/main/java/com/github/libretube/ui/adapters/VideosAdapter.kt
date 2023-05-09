@@ -35,24 +35,10 @@ class VideosAdapter(
     private val forceMode: ForceMode = ForceMode.NONE
 ) : RecyclerView.Adapter<VideosViewHolder>() {
 
-    private var visibleCount = minOf(10, streamItems.size)
-
-    override fun getItemCount(): Int {
-        return when {
-            showAllAtOnce -> streamItems.size
-            else -> minOf(streamItems.size, visibleCount)
-        }
-    }
+    override fun getItemCount() = streamItems.size
 
     override fun getItemViewType(position: Int): Int {
-        return if (streamItems[position].type == "caught") CAUGHT_UP_TYPE else NORMAL_TYPE
-    }
-
-    fun updateItems() {
-        val oldSize = visibleCount
-        visibleCount += minOf(10, streamItems.size - oldSize)
-        if (visibleCount == oldSize) return
-        notifyItemRangeInserted(oldSize, visibleCount)
+        return if (streamItems[position].type == StreamItem.CAUGHT_TYPE_KEY) CAUGHT_UP_TYPE else NORMAL_TYPE
     }
 
     fun insertItems(newItems: List<StreamItem>) {
@@ -66,7 +52,6 @@ class VideosAdapter(
             it.url?.toID() == videoId
         }.takeIf { it > 0 } ?: return
         streamItems.removeAt(index)
-        visibleCount -= 1
         notifyItemRemoved(index)
         notifyItemRangeChanged(index, itemCount)
     }

@@ -34,4 +34,8 @@ data class StreamItem(
             duration = duration
         )
     }
+
+    companion object {
+        const val CAUGHT_TYPE_KEY = "caught"
+    }
 }

@@ -132,7 +132,7 @@ class HomeFragment : Fragment() {
         } else {
             runCatching {
                 withContext(Dispatchers.IO) {
-                    SubscriptionHelper.getFeed()
+                    SubscriptionHelper.getFeed(null)
                 }
             }.getOrNull()?.takeIf { it.isNotEmpty() } ?: return
         }.filter {

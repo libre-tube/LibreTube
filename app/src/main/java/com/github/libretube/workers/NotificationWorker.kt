@@ -80,7 +80,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
         // fetch the users feed
         val videoFeed = try {
             withContext(Dispatchers.IO) {
-                SubscriptionHelper.getFeed()
+                SubscriptionHelper.getFeed(null)
             }
         } catch (e: Exception) {
             return false

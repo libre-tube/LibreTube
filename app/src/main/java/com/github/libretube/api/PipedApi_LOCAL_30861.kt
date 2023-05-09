@@ -107,21 +107,16 @@ interface PipedApi {
     )
 
     @GET("feed")
-    suspend fun getFeed(
-        @Query("authToken") token: String?,
-        @Query("start") start: Long?
-    ): List<StreamItem>
+    suspend fun getFeed(@Query("authToken") token: String?): List<StreamItem>
 
     @GET("feed/unauthenticated")
     suspend fun getUnauthenticatedFeed(
-        @Query("channels") channels: String,
-        @Query("start") start: Long?
+        @Query("channels") channels: String
     ): List<StreamItem>
 
     @POST("feed/unauthenticated")
     suspend fun getUnauthenticatedFeed(
-        @Body channels: List<String>,
-        @Query("start") start: Long?
+        @Body channels: List<String>
     ): List<StreamItem>
 
     @GET("subscribed")
