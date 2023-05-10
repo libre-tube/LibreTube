@@ -36,7 +36,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
     private val notificationManager = appContext.getSystemService<NotificationManager>()!!
 
     override suspend fun doWork(): Result {
-        if (!checkTime()) Result.success()
+        if (!checkTime()) return Result.success()
         // check whether there are new streams and notify if there are some
         val result = checkForNewStreams()
         // return success if the API request succeeded
