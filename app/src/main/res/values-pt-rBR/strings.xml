@@ -434,4 +434,5 @@
     <string name="playlist_name_az">Nome da Playlist (A-Z)</string>
     <string name="duration">Duração</string>
     <string name="duration_reversed">Duração (invertida)</string>
+    <string name="shorts_notifications">Notificações de shorts</string>
 </resources>
