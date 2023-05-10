@@ -41,6 +41,8 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: 17
+          distribution: "temurin"
+          cache: "gradle"
 
       - name: Checkout repository
         uses: actions/checkout@v3
