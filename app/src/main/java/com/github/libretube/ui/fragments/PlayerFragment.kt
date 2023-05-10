@@ -1128,7 +1128,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      */
     @SuppressLint("SetTextI18n")
     private fun updateDisplayedDuration() {
-        if (exoPlayer.duration < 0 || streams.livestream) return
+        if (exoPlayer.duration < 0 || streams.livestream || _binding == null) return
 
         playerBinding.duration.text = DateUtils.formatElapsedTime(
             exoPlayer.duration.div(1000),
