@@ -53,6 +53,16 @@
                     tools:text="Title" />
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:visibility="gone"
+                    android:id="@+id/btnScrollToTop"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/ic_arrow_downward"
+                    android:rotationX="180"
+                    android:padding="7dp"
+                    android:background="?selectableItemBackgroundBorderless" />
+
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/btnClose"
                     android:layout_width="35dp"
                     android:layout_height="35dp"

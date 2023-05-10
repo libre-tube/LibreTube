@@ -15,10 +15,10 @@ import com.github.libretube.obj.ImportPlaylist
 import com.github.libretube.obj.ImportPlaylistFile
 import com.github.libretube.obj.NewPipeSubscription
 import com.github.libretube.obj.NewPipeSubscriptions
-import kotlin.streams.toList
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
+import kotlin.streams.toList
 
 object ImportHelper {
     /**
@@ -44,6 +44,7 @@ object ImportHelper {
     /**
      * Get a list of channel IDs from a file [Uri]
      */
+    @OptIn(ExperimentalSerializationApi::class)
     private fun getChannelsFromUri(activity: Activity, uri: Uri): List<String> {
         return when (val fileType = activity.contentResolver.getType(uri)) {
             "application/json", "application/*", "application/octet-stream" -> {
@@ -72,6 +73,7 @@ object ImportHelper {
     /**
      * Write the text to the document
      */
+    @OptIn(ExperimentalSerializationApi::class)
     suspend fun exportSubscriptions(activity: Activity, uri: Uri) {
         val token = PreferenceHelper.getToken()
         val subs = if (token.isNotEmpty()) {
@@ -105,10 +107,14 @@ object ImportHelper {
                 activity.contentResolver.openInputStream(uri)?.use {
                     val lines = it.bufferedReader().use { reader -> reader.lines().toList() }
                     playlist.name = lines[1].split(",").reversed()[2]
-                    val splitIndex = lines.indexOfFirst { line -> line.isBlank() }
+                    var splitIndex = lines.indexOfFirst { line -> line.isBlank() }
+                    // seek until playlist items table
+                    while (lines.getOrNull(splitIndex + 1).orEmpty().isBlank()) {
+                        splitIndex++
+                    }
                     lines.subList(splitIndex + 2, lines.size).forEach { line ->
                         line.split(",").firstOrNull()?.let { videoId ->
-                            if (videoId.isNotBlank()) playlist.videos = playlist.videos + videoId
+                            if (videoId.isNotBlank()) playlist.videos += videoId.trim()
                         }
                     }
                     importPlaylists.add(playlist)
@@ -145,6 +151,7 @@ object ImportHelper {
     /**
      * Export Playlists
      */
+    @OptIn(ExperimentalSerializationApi::class)
     suspend fun exportPlaylists(activity: Activity, uri: Uri) {
         val playlists = PlaylistsHelper.exportPlaylists()
         val playlistFile = ImportPlaylistFile("Piped", 1, playlists)

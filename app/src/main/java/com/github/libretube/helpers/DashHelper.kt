@@ -2,14 +2,14 @@ package com.github.libretube.helpers
 
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Streams
+import org.w3c.dom.Document
+import org.w3c.dom.Element
 import java.io.StringWriter
 import javax.xml.parsers.DocumentBuilder
 import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.transform.TransformerFactory
 import javax.xml.transform.dom.DOMSource
 import javax.xml.transform.stream.StreamResult
-import org.w3c.dom.Document
-import org.w3c.dom.Element
 
 // Based off of https://github.com/TeamPiped/Piped/blob/master/src/utils/DashUtils.js
 
@@ -21,10 +21,10 @@ object DashHelper {
     private data class AdapSetInfo(
         val mimeType: String,
         val audioTrackId: String? = null,
-        val formats: MutableList<PipedStream> = mutableListOf()
+        val formats: MutableList<PipedStream> = mutableListOf(),
     )
 
-    fun createManifest(streams: Streams): String {
+    fun createManifest(streams: Streams, supportsHdr: Boolean): String {
         val builder: DocumentBuilder = builderFactory.newDocumentBuilder()
 
         val doc = builder.newDocument()
@@ -40,17 +40,18 @@ object DashHelper {
         val adapSetInfos = ArrayList<AdapSetInfo>()
 
         val enabledVideoCodecs = PlayerHelper.enabledVideoCodecs
-        for (stream in streams.videoStreams
+        for (
+        stream in streams.videoStreams
             // used to avoid including LBRY HLS inside the streams in the manifest
             .filter { !it.format.orEmpty().contains("HLS") }
             // filter the codecs according to the user's preferences
             .filter {
-                if (enabledVideoCodecs != "all") {
-                    it.codec?.lowercase()?.startsWith(enabledVideoCodecs) ?: true
-                } else {
-                    true
-                }
-            }) {
+                enabledVideoCodecs == "all" || it.codec.orEmpty().lowercase().startsWith(
+                    enabledVideoCodecs,
+                )
+            }
+            .filter { supportsHdr || !it.quality.orEmpty().uppercase().contains("HDR") }
+        ) {
             // ignore dual format streams
             if (!stream.videoOnly!!) {
                 continue
@@ -70,8 +71,8 @@ object DashHelper {
                 AdapSetInfo(
                     stream.mimeType!!,
                     null,
-                    mutableListOf(stream)
-                )
+                    mutableListOf(stream),
+                ),
             )
         }
 
@@ -88,8 +89,8 @@ object DashHelper {
                 AdapSetInfo(
                     stream.mimeType!!,
                     stream.audioTrackId,
-                    mutableListOf(stream)
-                )
+                    mutableListOf(stream),
+                ),
             )
         }
 
@@ -144,7 +145,7 @@ object DashHelper {
         val audioChannelConfiguration = doc.createElement("AudioChannelConfiguration")
         audioChannelConfiguration.setAttribute(
             "schemeIdUri",
-            "urn:mpeg:dash:23003:3:audio_channel_configuration:2011"
+            "urn:mpeg:dash:23003:3:audio_channel_configuration:2011",
         )
         audioChannelConfiguration.setAttribute("value", "2")
 

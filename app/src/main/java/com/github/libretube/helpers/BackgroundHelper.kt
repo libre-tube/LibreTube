@@ -27,7 +27,7 @@ object BackgroundHelper {
         playlistId: String? = null,
         channelId: String? = null,
         keepQueue: Boolean? = null,
-        keepVideoPlayerAlive: Boolean = false
+        keepVideoPlayerAlive: Boolean = false,
     ) {
         // close the previous video player if open
         if (!keepVideoPlayerAlive) {

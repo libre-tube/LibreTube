@@ -10,14 +10,14 @@ import com.github.libretube.ui.viewholders.NavBarOptionsViewHolder
 
 class NavBarOptionsAdapter(
     val items: MutableList<MenuItem>,
-    var selectedHomeTabId: Int
+    var selectedHomeTabId: Int,
 ) : RecyclerView.Adapter<NavBarOptionsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NavBarOptionsViewHolder {
         val binding = NavOptionsItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
-            false
+            false,
         )
         return NavBarOptionsViewHolder(binding)
     }
@@ -32,7 +32,7 @@ class NavBarOptionsAdapter(
             title.text = item.title
             checkbox.isChecked = item.isVisible
             home.setImageResource(
-                if (item.itemId == selectedHomeTabId) R.drawable.ic_home else R.drawable.ic_home_outlined
+                if (item.itemId == selectedHomeTabId) R.drawable.ic_home else R.drawable.ic_home_outlined,
             )
             home.setOnClickListener {
                 if (selectedHomeTabId == item.itemId) {

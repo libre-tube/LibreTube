@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 @Entity(tableName = "localSubscription")
 data class LocalSubscription(
-    @PrimaryKey val channelId: String = ""
+    @PrimaryKey val channelId: String = "",
 )

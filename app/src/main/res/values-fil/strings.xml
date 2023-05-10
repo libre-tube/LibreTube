@@ -3,7 +3,6 @@
     <string name="registered">Nakarehistro ka na. Maari ka nang maka-subscribe sa mga channel.</string>
     <string name="about">Tungkol dito</string>
     <string name="noInternet">Kumunekta muna sa Internet.</string>
-    <string name="choose_quality_dialog">Linaw</string>
     <string name="subscribe">Magsubscribe</string>
     <string name="unsubscribe">Mag-unsubscribe</string>
     <string name="share">Ibahagi</string>
@@ -16,11 +15,8 @@
     <string name="region">Rehiyon</string>
     <string name="login_register">Maglog-in/reghistro</string>
     <string name="importsuccess">Naka-subscribe</string>
-    <string name="subscribeIsEmpty">Magsubscribe muna sa mga channel.</string>
     <string name="cannotDownload">Hindi mai-download ang stream na ito.</string>
     <string name="downloadfailed">Nabigo ang pagdownload.</string>
-    <string name="vlc">Buksan sa VLC</string>
-    <string name="vlcerror">Hindi maibuksan sa VLC. Baka hindi pa ito nainstall.</string>
     <string name="import_from_yt">Mag-angkat ng mga subscription</string>
     <string name="import_from_yt_summary">Mula sa Youtube o NewPipe</string>
     <string name="server_error">May problema sa server. Maaring subukan sa isang instance\?</string>
@@ -43,7 +39,6 @@
     <string name="videoCount">Mga %1$d video</string>
     <string name="retry">Subukan muli</string>
     <string name="comments">Mga Komento</string>
-    <string name="choose_filter">Pumili ng isasala sa paghahanap</string>
     <string name="channels">Mga channel</string>
     <string name="all">Lahat</string>
     <string name="playlists">Mga playlist</string>
@@ -54,18 +49,14 @@
     <string name="music_videos">Mga Video sa YT Music</string>
     <string name="music_albums">Mga Album sa YT Music</string>
     <string name="music_playlists">Mga Playlist sa YT Music</string>
-    <string name="defaultTab">Panimulang Tab</string>
     <string name="sponsorblock_summary">Ginagamit ang API ng https://sponsor.ajay.app</string>
     <string name="segment_skipped">Nilaktawan ang bahagi ng video</string>
-    <string name="sponsorblock_state">Nakabukas</string>
     <string name="category_segments">Mga Bahagi ng Video</string>
     <string name="category_interaction">Paalala sa Interaksyon (paglike at subscribe)</string>
-    <string name="hls">Pakusa</string>
     <string name="landscape">Nakahiga (Landscape)</string>
     <string name="videos">Mga Video</string>
     <string name="search_hint">Maghanap</string>
     <string name="save">I-save</string>
-    <string name="dlcomplete">Natapos na ang pagdownload.</string>
     <string name="app_theme">Tema</string>
     <string name="playlistCreated">Nalikha ang playlist.</string>
     <string name="fail">Nabigo :(</string>

@@ -100,7 +100,7 @@ class MainSettings : BasePreferenceFragment() {
                     // show the UpdateAvailableDialog if there's an update available
                     UpdateAvailableDialog(updateInfo).show(
                         childFragmentManager,
-                        UpdateAvailableDialog::class.java.name
+                        UpdateAvailableDialog::class.java.name,
                     )
                 } else {
                     // otherwise show the no update available snackBar

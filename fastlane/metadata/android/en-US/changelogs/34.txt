@@ -1,0 +1,8 @@
+* Display stream notification thumbnails
+* Ability to interact with player while viewing comments
+* Sort menu for local and private playliss
+* Improvement to links in description and comment texts
+* Remember the comments progress
+* Scroll to top button for comments
+* Unlimited search history preference
+* Automatically scroll to the currently playing video in the queue

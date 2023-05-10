@@ -19,7 +19,7 @@ open class BaseBottomSheet : ExpandedBottomSheet() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = BottomSheetBinding.inflate(layoutInflater)
         return binding.root

@@ -29,7 +29,7 @@ import kotlinx.coroutines.withContext
  */
 class VideoOptionsBottomSheet(
     private val videoId: String,
-    videoName: String
+    videoName: String,
 ) : BaseBottomSheet() {
     private val shareData = ShareData(currentVideo = videoName)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +38,7 @@ class VideoOptionsBottomSheet(
             getString(R.string.playOnBackground),
             getString(R.string.addToPlaylist),
             getString(R.string.download),
-            getString(R.string.share)
+            getString(R.string.share),
         )
 
         // Check whether the player is running and add queue options
@@ -62,7 +62,7 @@ class VideoOptionsBottomSheet(
                 getString(R.string.addToPlaylist) -> {
                     AddToPlaylistDialog(videoId).show(
                         parentFragmentManager,
-                        AddToPlaylistDialog::class.java.name
+                        AddToPlaylistDialog::class.java.name,
                     )
                 }
                 getString(R.string.download) -> {
@@ -112,7 +112,7 @@ class VideoOptionsBottomSheet(
                         // get the current fragment
                         val fragment = navHostFragment?.childFragmentManager?.fragments?.firstOrNull()
                         (fragment as? SubscriptionsFragment)?.subscriptionsAdapter?.removeItemById(
-                            videoId
+                            videoId,
                         )
                     }
                 }

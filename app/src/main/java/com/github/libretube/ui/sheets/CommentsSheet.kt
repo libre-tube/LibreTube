@@ -17,13 +17,13 @@ import com.github.libretube.ui.fragments.CommentsRepliesFragment
 import com.github.libretube.ui.models.CommentsViewModel
 
 class CommentsSheet : ExpandedBottomSheet() {
-    private lateinit var binding: CommentsSheetBinding
+    lateinit var binding: CommentsSheetBinding
     private val commentsViewModel: CommentsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = CommentsSheetBinding.inflate(layoutInflater)
         return binding.root
@@ -65,6 +65,15 @@ class CommentsSheet : ExpandedBottomSheet() {
                 .runOnCommit(this@CommentsSheet::onFragmentChanged)
                 .commit()
         }
+
+        commentsViewModel.setCommentSheetExpand(true)
+        commentsViewModel.commentSheetExpand.observe(viewLifecycleOwner) {
+            when (it) {
+                true -> expand()
+                false -> expand(true)
+                else -> dismiss()
+            }
+        }
     }
 
     private fun onFragmentChanged() {
@@ -74,6 +83,7 @@ class CommentsSheet : ExpandedBottomSheet() {
                     binding.btnBack.visibility = View.VISIBLE
                     binding.commentsTitle.text = getString(R.string.replies)
                 }
+
                 else -> {
                     binding.btnBack.visibility = View.GONE
                     binding.commentsTitle.text = getString(R.string.comments)
@@ -89,6 +99,18 @@ class CommentsSheet : ExpandedBottomSheet() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
+
+        // BottomSheetDialogFragment passthrough user outside touch event
+        dialog.setOnShowListener {
+            dialog.findViewById<View>(com.google.android.material.R.id.touch_outside)?.apply {
+                setOnTouchListener { v, event ->
+                    event.setLocation(event.rawX - v.x, event.rawY - v.y)
+                    activity?.dispatchTouchEvent(event)
+                    v.performClick()
+                    false
+                }
+            }
+        }
 
         dialog.apply {
             setOnKeyListener { _, keyCode, _ ->

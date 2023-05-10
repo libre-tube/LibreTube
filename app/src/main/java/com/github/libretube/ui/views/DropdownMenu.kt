@@ -13,7 +13,7 @@ import com.github.libretube.databinding.DropdownMenuBinding
  */
 class DropdownMenu(
     context: Context,
-    attributeSet: AttributeSet
+    attributeSet: AttributeSet,
 ) : FrameLayout(context, attributeSet) {
     var binding: DropdownMenuBinding
 
@@ -26,7 +26,7 @@ class DropdownMenu(
         }
 
     val selectedItemPosition: Int get() = adapter.getPosition(
-        binding.autoCompleteTextView.text.toString()
+        binding.autoCompleteTextView.text.toString(),
     )
 
     init {
@@ -38,7 +38,7 @@ class DropdownMenu(
         try {
             binding.textInputLayout.hint = ta.getString(R.styleable.DropdownMenu_hint)
             binding.textInputLayout.startIconDrawable = ta.getDrawable(
-                R.styleable.DropdownMenu_icon
+                R.styleable.DropdownMenu_icon,
             )
         } finally {
             ta.recycle()

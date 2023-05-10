@@ -12,5 +12,5 @@ data class Reactions(
     val laugh: Int,
     val rocket: Int,
     @SerialName("total_count") val totalCount: Int,
-    val url: String
+    val url: String,
 )

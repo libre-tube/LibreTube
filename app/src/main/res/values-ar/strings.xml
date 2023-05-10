@@ -2,7 +2,6 @@
 <resources>
     <string name="instances">اختر…</string>
     <string name="customInstance">مخصص</string>
-    <string name="choose_quality_dialog">الجودة</string>
     <string name="registered">تم إنشاء حساب. تستطيع الآن الاشتراك بالقنوات.</string>
     <string name="search_hint">بحث</string>
     <string name="unsubscribe">إلغاء الاشتراك</string>
@@ -12,9 +11,7 @@
     <string name="password">كلمة المرور</string>
     <string name="cancel">إلغاء</string>
     <string name="loggedIn">تم تسجيل الدخول.</string>
-    <string name="login_first">سجل الدخول وحاول مجددا.</string>
     <string name="login_register">تسجيل/إنشاء حساب</string>
-    <string name="please_login">رجاءً سجل دخولك أو أنشئ حساب في الإعدادات أولا!</string>
     <string name="save">حفظ</string>
     <string name="loggedout">تم تسجيل الخروج.</string>
     <string name="yes">نعم</string>
@@ -23,13 +20,10 @@
     <string name="username">اسم المستخدم</string>
     <string name="register">تسجيل جديد</string>
     <string name="already_logged_in">لقد سجلت دخولك من قبل، يمكنك تسجيل الخروج من حسابك.</string>
-    <string name="subscribeIsEmpty">اشترك ببعض القنوات أولا.</string>
     <string name="cannotDownload">لا يمكن تنزيل هذا البث.</string>
     <string name="region">المنطقة</string>
     <string name="importsuccess">مشترك</string>
-    <string name="dlcomplete">اكتمل التنزيل.</string>
     <string name="downloadfailed">فشل التنزيل.</string>
-    <string name="vlcerror">تعذر الفتح في VLC ، ربما لم يتم تثبيته.</string>
     <string name="import_from_yt">استيراد الاشتراكات</string>
     <string name="app_theme">سمة التطبيق</string>
     <string name="empty">لا يمكن أن يكون اسم المستخدم وكلمة المرور فارغين.</string>
@@ -45,7 +39,6 @@
     <string name="success">انتهى.</string>
     <string name="fail">فشل ذريع :(</string>
     <string name="dlisinprogress">الرجاء الانتظار حتى تنتهي كافة التنزيلات الحالية.</string>
-    <string name="vlc">فتح باستخدام VLC</string>
     <string name="unknown_error">خطأ في الشبكة.</string>
     <string name="server_error">يبدو أن هناك مشكلة في هذا الخادم المحدد. جرب خادم أخر.</string>
     <string name="error">حدث خطأ ما.</string>
@@ -81,12 +74,9 @@
     <string name="music_songs">موسيقى يوتيوب</string>
     <string name="music_videos">فيديوهات يوتيوب الموسيقية</string>
     <string name="music_albums">ألبومات يوتيوب الموسيقية</string>
-    <string name="sponsorblock_state">مُفَعَّل</string>
     <string name="category_sponsor">راعي</string>
-    <string name="choose_filter">اختر فلتر البحث</string>
     <string name="music_playlists">قوائم تشغيل موسيقى يوتيوب</string>
     <string name="playlists">قوائم التشغيل</string>
-    <string name="defaultTab">التبويب الافتراضي</string>
     <string name="sponsorblock">حاجب الرعاة</string>
     <string name="sponsorblock_summary">يستخدم واجهة برمجة التطبيقات من https://sponsor.ajay.app/</string>
     <string name="segment_skipped">الجزء الذي تم تخطيه</string>
@@ -105,7 +95,6 @@
     <string name="color_yellow">أصفر</string>
     <string name="color_green">أخضر</string>
     <string name="color_purple">بنفسجي</string>
-    <string name="oledTheme">اسود</string>
     <string name="material_you">المواد أنت</string>
     <string name="category_sponsor_description">ترويج مدفوع وإحالات مدفوعة وإعلانات مباشرة. ليس للترويج الذاتي أو الصيحات المجانية لأسباب / منشىء المحتوى / مواقع الويب / او منتجات يحبونها.</string>
     <string name="category_outro">بطاقات النهاية / الاعتمادات</string>
@@ -116,19 +105,9 @@
     <string name="piped">الأنابيب</string>
     <string name="youtube">يوتيوب</string>
     <string name="playOnBackground">تشغيل في الخلفية</string>
-    <string name="no_replies">هذا التعليق ليس له ردود.</string>
-    <string name="authors">المؤلفون</string>
-    <string name="internal_storage">وحدة التخزين الداخلية</string>
-    <string name="downloads_directory">مجلد التنزيل</string>
-    <string name="sdcard">بطاقة الذاكرة</string>
-    <string name="music_directory">مجلد الموسيقى</string>
     <string name="defaultIcon">الإفتراضي</string>
-    <string name="update">ابحث عن الإصدار الجديد</string>
     <string name="update_summary">التحقق من وجود تحديث</string>
     <string name="app_uptodate">يتم حاليا تشغيل أحدث إصدار.</string>
-    <string name="no_update_available">انت تقوم الان بتشغيل أحدث إصدار.</string>
-    <string name="download_folder">الاسم</string>
-    <string name="download_folder_summary">يتم تخزين اسم المجلد الذي تم تنزيله في الوسائط.</string>
     <string name="fireIcon">حريق عصري</string>
     <string name="torchIcon">الشعلة العصرية</string>
     <string name="shapedIcon">شكل سخيف</string>
@@ -136,11 +115,8 @@
     <string name="birdIcon">الطيور المعززة</string>
     <string name="invalid_url">الرجاء إدخال عنوان URL يعمل</string>
     <string name="version">الإصدار %1$s</string>
-    <string name="about_summary">تعرف على فريق LibreTube وكيف يحدث كل شيء.</string>
     <string name="related_streams">المحتويات ذات الصلة</string>
     <string name="related_streams_summary">اعرض محتوى مشابه إلى جانب ما تشاهده.</string>
-    <string name="show_chapters">عرض الفصول</string>
-    <string name="hide_chapters">إخفاء الفصول</string>
     <string name="category_filler">حشو لاداع له / او النكات</string>
     <string name="category_filler_description">للمشاهد العرضية المضافة فقط للحشو أو الفكاهة غير المطلوبة لفهم المحتوى الرئيسي للفيديو.</string>
     <string name="category_music_offtopic">الموسيقى: قسم غير الموسيقى</string>
@@ -155,8 +131,6 @@
     <string name="buffering_goal_summary">الحد الأقصى لعدد ثواني الفيديو للتخزين المؤقت.</string>
     <string name="update_available">الإصدار %1$s متاح</string>
     <string name="downloads">التنزيلات</string>
-    <string name="contributing">المساهمة</string>
-    <string name="donate">تبرّع</string>
     <string name="legacyIcon">الإرث الضائع</string>
     <string name="gradientIcon">التدرج اللوني</string>
     <string name="instance_summary">الأنابيب وتسجيل الدخول والحساب</string>
@@ -166,25 +140,18 @@
     <string name="player_autoplay">التشغيل التلقائي</string>
     <string name="update_available_text">تحديث جديد متاح. انقر لفتح صفحة إصدارات GitHub.</string>
     <string name="appearance">المظهر</string>
-    <string name="app_behavior">السلوك</string>
-    <string name="video_format">تنسيق الفيديو</string>
-    <string name="download_directory">تنزيل إلى</string>
-    <string name="video_format_summary">تحويل الملفات إذا تم تنزيل كل من الصوت والفيديو.</string>
-    <string name="download_directory_summary">حيث يتم تخزين الوسائط التي تم تنزيلها.</string>
     <string name="advanced">متقدم</string>
     <string name="player">المشغل</string>
     <string name="playback_speed">سرعة التشغيل</string>
     <string name="appearance_summary">اضبط التطبيق حسب رغبتك.</string>
     <string name="advanced_summary">التنزيلات وإعادة التعيين</string>
     <string name="customInstance_summary">أضف…</string>
-    <string name="movies_directory">مجلد الأفلام</string>
     <string name="shareTo">مشاركة الرابط إلى</string>
     <string name="no_audio">لا يوجد صوت</string>
     <string name="no_video">لا يوجد فيديو</string>
     <string name="audio">صوت</string>
     <string name="video">فيديو</string>
     <string name="downloading">تحميل…</string>
-    <string name="hideTrendingPage">إخفاء صفحة المحتوى الشائع</string>
     <string name="instance_frontend_url">عنوان URL لمثيل الواجهة الأمامية</string>
     <string name="quality">الجودة</string>
     <string name="behavior">السلوك</string>
@@ -206,7 +173,6 @@
     <string name="auth_instance">مصادقة المثيل</string>
     <string name="auth_instance_summary">استخدم مثيلا مختلفا للمكالمات المصادق عليها.</string>
     <string name="auth_instances">اختر مثيل المصادقة</string>
-    <string name="hls">تلقائي</string>
     <string name="github">جيت هب</string>
     <string name="audio_video">الصوت والفيديو</string>
     <string name="fullscreen_orientation">اتجاه ملء الشاشة</string>
@@ -214,11 +180,9 @@
     <string name="auto_rotation">التدوير التلقائي</string>
     <string name="landscape">افقي</string>
     <string name="portrait">عمودي</string>
-    <string name="community">المجتمع</string>
     <string name="turnInternetOn">يرجى تشغيل Wi-Fi أو بيانات الجوال للاتصال بالإنترنت.</string>
     <string name="open">فتح …</string>
     <string name="chapters">الفصول</string>
-    <string name="change_playback_speed">سرعة التشغيل</string>
     <string name="require_restart_message">أعد تشغيل التطبيق لاستخدام التغييرات الجديدة.</string>
     <string name="require_restart">إعادة تشغيل التطبيق مطلوبة</string>
     <string name="navLabelVisibility">رؤية الملصق</string>
@@ -240,13 +204,10 @@
     <string name="none">لاشيء</string>
     <string name="data_saver_mode_summary">تخطي الصور المصغرة والصور الأخرى.</string>
     <string name="history_summary">سجل المشاهدة والبحث</string>
-    <string name="seekbar_preview">معاينة الفيديو</string>
-    <string name="seekbar_preview_summary">إظهار معاينة عند سحب مؤشر التشغيل.</string>
     <string name="general">عام</string>
     <string name="general_summary">اللغة والمنطقة</string>
     <string name="playingOnBackground">قيد التشغيل في الخلفية…</string>
     <string name="caption_settings">التسميات التوضيحية</string>
-    <string name="downloading_apk">تحميل APK…</string>
     <string name="playerAudioFormat">تنسيق الصوت للمشغل</string>
     <string name="playerAudioQuality">جودة الصوت</string>
     <string name="best_quality">الأفضل</string>
@@ -256,13 +217,10 @@
     <string name="notify_new_streams">عرض إشعارات لأحداث البث الجديدة</string>
     <string name="notify_new_streams_summary">إشعارات حول المحتوى الجديد من منشئي المحتوى الذين تتابعهم.</string>
     <string name="checking_frequency">تحقق من كل…</string>
-    <string name="new_streams_count">%1$s محتوى بث جديد متاح</string>
-    <string name="new_streams_by">بث جديد من قبل %1$s …</string>
     <string name="irreversible">هل أنت متأكد؟ هذا لا يمكن التراجع عنه!</string>
     <string name="history_empty">لا يوجد سجل حتى الان.</string>
     <string name="most_recent">الأحدث</string>
     <string name="least_recent">الأقدم</string>
-    <string name="sort">الفرز</string>
     <string name="least_views">أقل عدد من المشاهدات</string>
     <string name="channel_name_za">اسم القناة (Z-A)</string>
     <string name="most_views">معظم المشاهدات</string>
@@ -276,7 +234,6 @@
     <string name="error_occurred">خطأ</string>
     <string name="copied">تم النسخ</string>
     <string name="share_with_time">شارك مع رمز الوقت</string>
-    <string name="downloadsucceeded">نجح التحميل</string>
     <string name="export_subscriptions">تصدير الاشتراكات</string>
     <string name="skip_buttons">أزرار التخطي</string>
     <string name="skip_buttons_summary">إظهار الأزرار للتخطي إلى الفيديو التالي أو السابق.</string>
@@ -285,9 +242,7 @@
     <string name="background_mode">وضع الخلفية</string>
     <string name="add_to_queue">إضافة إلى قائمة الانتظار</string>
     <string name="misc">متفرقات</string>
-    <string name="break_reminder">تذكير الاستراحة</string>
     <string name="take_a_break">حان الوقت لأخذ قسط من الراحة</string>
-    <string name="already_spent_time">لقد قضيت بالفعل دقائق %1$s في التطبيق ، والوقت الكافي لأخذ قسط من الراحة.</string>
     <string name="yt_shorts">الفديوهات القصيرة</string>
     <string name="repeat_mode_current">الحالي</string>
     <string name="resize_mode_fill">ملء</string>
@@ -308,7 +263,6 @@
     <string name="device_info">معلومات الجهاز</string>
     <string name="audio_video_summary">الجودة والشكل</string>
     <string name="delete">حذف من التنزيلات</string>
-    <string name="trending_layout">تنسيق بديل للمتصدرة</string>
     <string name="renamePlaylist">إعادة تسمية قائمة التشغيل</string>
     <string name="wifi">واي فاي</string>
     <string name="mobile_data">البيانات الخليوية</string>
@@ -330,23 +284,16 @@
     <string name="save_feed_summary">قم بتحميل خلاصة الاشتراك في الخلفية وامنعها من التحديث التلقائي.</string>
     <string name="play_next">تشغيل التالي</string>
     <string name="navigation_bar">شريط التنقل</string>
-    <string name="select_at_least_one">يرجى اختيار عنصر واحد على الأقل</string>
     <string name="change_region">المتصدرة يبدو أنها غير متاحة في المنطقة الحالية . الرجاء اختيار آخر في الإعداد .</string>
-    <string name="limit_hls">الحد من HLS إلى 1080p</string>
-    <string name="progressive_load_interval">حجم الفاصل الزمني للتحميل التدريجي</string>
-    <string name="default_load_interval">الإفتراضي</string>
     <string name="playback_pitch">الحدة</string>
     <string name="filename">اسم الملف</string>
     <string name="invalid_filename">اسم الملف غير صالح!</string>
-    <string name="progressive_load_interval_summary">قد تؤدي القيمة الأقل إلى تسريع تحميل الفيديو الأولي.</string>
     <string name="playlists_order">ترتيب قوائم التشغيل</string>
     <string name="playlistNameReversed">اسم قائمة التشغيل (معكوس)</string>
     <string name="recentlyUpdated">تم التحديث مؤخرا</string>
     <string name="recentlyUpdatedReversed">تم تحديثه مؤخرًا (معكوس)</string>
-    <string name="show_more">اظهار المزيد</string>
     <string name="time_code">رمز الوقت (بالثواني)</string>
     <string name="added_to_playlist">تمت الإضافة إلى قائمة التشغيل</string>
-    <string name="playing_queue">تشغيل قائمة الانتظار</string>
     <string name="queue">الانتظار</string>
     <string name="sb_markers">العلامات</string>
     <string name="sb_markers_summary">وضع علامة على الأجزاء في شريط الوقت.</string>
@@ -363,7 +310,6 @@
     <string name="end_time">وقت الانتهاء</string>
     <string name="start_time">وقت البدء</string>
     <string name="notification_time">تقييد وقت الإشعار</string>
-    <string name="alternative_trending_layout">تخطيط الاتجاه البديل</string>
     <string name="navbar_order">ترتيب</string>
     <string name="layout">التَخطِيط</string>
     <string name="alternative_player_layout">تخطيط المشغل البديل</string>
@@ -377,15 +323,11 @@
     <string name="trends">المتصدرة</string>
     <string name="featured">متميز</string>
     <string name="trending">ما هو الشائع الآن</string>
-    <string name="open_queue_from_notification">فتح قائمة الانتظار من الإشعار</string>
     <string name="bookmarks">الإشارات المرجعية</string>
     <string name="bookmark">الإشارة المرجعية</string>
     <string name="clear_bookmarks">مسح الإشارات المرجعية</string>
-    <string name="bookmarks_empty">لا توجد إشارات مرجعية حتى الآن!</string>
     <string name="local_playlists">قوائم التشغيل المحلية</string>
     <string name="queue_insert_related_videos">إدراج مقاطع فيديو ذات صلة</string>
-    <string name="not_enabled">لم يتم تمكين عنصر القائمة!</string>
-    <string name="select_other_start_tab">يرجى تحديد علامة تبويب بدء أخرى أولا!</string>
     <string name="brightness">السطوع</string>
     <string name="volume">مستوى الصوت</string>
     <string name="auto">تلقائي</string>
@@ -471,14 +413,6 @@
         <item quantity="many">%d منذ أشهر</item>
         <item quantity="other">%d منذ أشهر</item>
     </plurals>
-    <plurals name="weeks_ago">
-        <item quantity="zero">%d منذ أسبوع</item>
-        <item quantity="one">%d منذ أسبوع</item>
-        <item quantity="two">%d منذ أسبوعين</item>
-        <item quantity="few">%d منذ أسابيع</item>
-        <item quantity="many">%d منذ أسابيع</item>
-        <item quantity="other">%d منذ أسابيع</item>
-    </plurals>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="lbry_hls_summary">استخدم LBRY HLS للبث إذا كان متاحا.</string>
     <string name="subscriberAndVideoCounts">مشتركون %1$s • فيديوهات %2$d</string>
@@ -504,4 +438,9 @@
     </plurals>
     <string name="show_stream_thumbnails">إظهار الصور المصغرة للبث</string>
     <string name="show_stream_thumbnails_summary">يعرض صورة مصغرة من تيار جديد . تمكين هذه الميزة سوف تستهلك بيانات إضافية .</string>
+    <string name="playlist_name_az">اسم قائمة التشغيل (من الألف إلى الياء)</string>
+    <string name="unlimited_search_history">سجل بحث غير محدود</string>
+    <string name="playlist_name_za">اسم قائمة التشغيل (ي-أ)</string>
+    <string name="duration">المدة</string>
+    <string name="duration_reversed">المدة (معكوسة)</string>
 </resources>

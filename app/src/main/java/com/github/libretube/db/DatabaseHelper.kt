@@ -22,7 +22,7 @@ object DatabaseHelper {
             streams.uploaderUrl.toID(),
             streams.uploaderAvatar,
             streams.thumbnailUrl,
-            streams.duration
+            streams.duration,
         )
         Database.watchHistoryDao().insert(watchHistoryItem)
         val maxHistorySize = PreferenceHelper.getString(PreferenceKeys.WATCH_HISTORY_SIZE, "100")
@@ -40,10 +40,14 @@ object DatabaseHelper {
     suspend fun addToSearchHistory(searchHistoryItem: SearchHistoryItem) {
         Database.searchHistoryDao().insert(searchHistoryItem)
 
+        if (PreferenceHelper.getBoolean(PreferenceKeys.UNLIMITED_SEARCH_HISTORY, false)) return
+
         // delete the first watch history entry if the limit is reached
-        val searchHistory = Database.searchHistoryDao().getAll()
-        if (searchHistory.size > MAX_SEARCH_HISTORY_SIZE) {
+        val searchHistory = Database.searchHistoryDao().getAll().toMutableList()
+
+        while (searchHistory.size > MAX_SEARCH_HISTORY_SIZE) {
             Database.searchHistoryDao().delete(searchHistory.first())
+            searchHistory.removeFirst()
         }
     }
 }

@@ -9,5 +9,5 @@ import kotlinx.serialization.Serializable
 @Entity(tableName = "watchPosition")
 data class WatchPosition(
     @PrimaryKey val videoId: String = "",
-    @ColumnInfo val position: Long = 0L
+    @ColumnInfo val position: Long = 0L,
 )

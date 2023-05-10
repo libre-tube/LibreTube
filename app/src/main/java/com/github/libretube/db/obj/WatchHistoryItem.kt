@@ -16,5 +16,5 @@ data class WatchHistoryItem(
     @ColumnInfo val uploaderUrl: String? = null,
     @ColumnInfo var uploaderAvatar: String? = null,
     @ColumnInfo var thumbnailUrl: String? = null,
-    @ColumnInfo val duration: Long? = null
+    @ColumnInfo val duration: Long? = null,
 )

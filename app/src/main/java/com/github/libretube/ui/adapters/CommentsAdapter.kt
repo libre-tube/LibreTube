@@ -39,8 +39,9 @@ class CommentsAdapter(
     private val comments: MutableList<Comment>,
     private val isRepliesAdapter: Boolean = false,
     private val handleLink: ((url: String) -> Unit)?,
-    private val dismiss: () -> Unit
+    private val dismiss: () -> Unit,
 ) : RecyclerView.Adapter<CommentsViewHolder>() {
+
     fun clear() {
         val size: Int = comments.size
         comments.clear()
@@ -59,6 +60,17 @@ class CommentsAdapter(
         return CommentsViewHolder(binding)
     }
 
+    private fun navigateToReplies(comment: Comment) {
+        val args = bundleOf(
+            IntentData.videoId to videoId,
+            IntentData.comment to JsonHelper.json.encodeToString(comment),
+        )
+        fragment!!.parentFragmentManager.commit {
+            replace<CommentsRepliesFragment>(R.id.commentFragContainer, args = args)
+            addToBackStack(null)
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CommentsViewHolder, position: Int) {
         val comment = comments[position]
@@ -66,7 +78,7 @@ class CommentsAdapter(
             commentInfos.text = comment.author + TextUtils.SEPARATOR + comment.commentedTime
 
             commentText.movementMethod = LinkMovementMethod.getInstance()
-            commentText.text = comment.commentText
+            commentText.text = comment.commentText?.replace("</a>", "</a> ")
                 ?.parseAsHtml(tagHandler = HtmlParser(LinkHandler(handleLink ?: {})))
 
             ImageHelper.loadImage(comment.thumbnail, commentorImage)
@@ -91,37 +103,31 @@ class CommentsAdapter(
                 // highlight the comment that is being replied to
                 if (comment == comments.firstOrNull()) {
                     root.setBackgroundColor(
-                        ThemeHelper.getThemeColor(
-                            root.context,
-                            com.google.android.material.R.attr.colorSurface
-                        )
+                        ThemeHelper.getThemeColor(root.context, com.google.android.material.R.attr.colorSurface),
                     )
+
                     root.updatePadding(top = 20)
                     root.updateLayoutParams<MarginLayoutParams> { bottomMargin = 20 }
                 } else {
                     root.background = AppCompatResources.getDrawable(
                         root.context,
-                        R.drawable.rounded_ripple
+                        R.drawable.rounded_ripple,
                     )
                 }
             }
 
             if (!isRepliesAdapter && comment.repliesPage != null) {
                 root.setOnClickListener {
-                    val args = bundleOf(
-                        IntentData.videoId to videoId,
-                        IntentData.comment to JsonHelper.json.encodeToString(comment)
-                    )
-                    fragment!!.parentFragmentManager.commit {
-                        replace<CommentsRepliesFragment>(R.id.commentFragContainer, args = args)
-                        addToBackStack(null)
-                    }
+                    navigateToReplies(comment)
+                }
+                commentText.setOnClickListener {
+                    navigateToReplies(comment)
                 }
             }
             root.setOnLongClickListener {
                 ClipboardHelper.save(
                     root.context,
-                    comment.commentText.orEmpty().parseAsHtml().toString()
+                    comment.commentText.orEmpty().parseAsHtml().toString(),
                 )
                 Toast.makeText(root.context, R.string.copied, Toast.LENGTH_SHORT).show()
                 true

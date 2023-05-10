@@ -38,6 +38,7 @@ object PreferenceKeys {
     const val ALTERNATIVE_VIDEOS_LAYOUT = "alternative_videos_layout"
     const val NEW_VIDEOS_BADGE = "new_videos_badge"
     const val PLAYLISTS_ORDER = "playlists_order"
+    const val PLAYLIST_SORT_ORDER = "playlist_sort_order"
 
     /**
      * Instance
@@ -97,6 +98,7 @@ object PreferenceKeys {
     const val AUTO_FULLSCREEN_SHORTS = "auto_fullscreen_shorts"
     const val PLAY_AUTOMATICALLY = "play_automatically"
     const val FULLSCREEN_GESTURES = "fullscreen_gestures"
+    const val UNLIMITED_SEARCH_HISTORY = "unlimited_search_history"
 
     /**
      * Background mode
@@ -108,6 +110,7 @@ object PreferenceKeys {
      */
     const val NOTIFICATION_ENABLED = "notification_toggle"
     const val SHOW_STREAM_THUMBNAILS = "show_stream_thumbnails"
+    const val SHORTS_NOTIFICATIONS = "shorts_notifications"
     const val CHECKING_FREQUENCY = "checking_frequency"
     const val REQUIRED_NETWORK = "required_network"
     const val IGNORED_NOTIFICATION_CHANNELS = "ignored_notification_channels"

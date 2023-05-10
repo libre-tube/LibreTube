@@ -9,7 +9,7 @@ import com.github.libretube.ui.viewholders.SuggestionsViewHolder
 
 class SearchSuggestionsAdapter(
     private var suggestionsList: List<String>,
-    private val searchView: SearchView
+    private val searchView: SearchView,
 ) :
     RecyclerView.Adapter<SuggestionsViewHolder>() {
 

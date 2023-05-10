@@ -44,7 +44,7 @@ object DownloadHelper {
     fun getMaxConcurrentDownloads(): Int {
         return PreferenceHelper.getString(
             PreferenceKeys.MAX_CONCURRENT_DOWNLOADS,
-            "6"
+            "6",
         ).toFloat().toInt()
     }
 
@@ -56,7 +56,7 @@ object DownloadHelper {
         videoQuality: String? = null,
         audioFormat: String? = null,
         audioQuality: String? = null,
-        subtitleCode: String? = null
+        subtitleCode: String? = null,
     ) {
         val intent = Intent(context, DownloadService::class.java)
 

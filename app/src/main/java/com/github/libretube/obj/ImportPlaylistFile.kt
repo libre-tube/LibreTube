@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 data class ImportPlaylistFile(
     val format: String,
     val version: Int,
-    val playlists: List<ImportPlaylist> = emptyList()
+    val playlists: List<ImportPlaylist> = emptyList(),
 )

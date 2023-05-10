@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+                  xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory app:title="@string/notifications">
 
@@ -9,14 +9,22 @@
             android:summary="@string/notify_new_streams_summary"
             app:defaultValue="true"
             app:key="notification_toggle"
-            app:title="@string/notify_new_streams" />
+            app:title="@string/notify_new_streams"/>
 
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_image"
             app:defaultValue="false"
             app:key="show_stream_thumbnails"
+            android:dependency="notification_toggle"
             app:title="@string/show_stream_thumbnails"
-            app:summary="@string/show_stream_thumbnails_summary" />
+            app:summary="@string/show_stream_thumbnails_summary"/>
+
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_video"
+            app:defaultValue="false"
+            app:key="shorts_notifications"
+            android:dependency="notification_toggle"
+            app:title="@string/shorts_notifications"/>
 
         <ListPreference
             android:icon="@drawable/ic_time"
@@ -24,17 +32,19 @@
             app:entries="@array/checkingFrequency"
             app:entryValues="@array/checkingFrequencyValues"
             app:key="checking_frequency"
+            android:dependency="notification_toggle"
             app:title="@string/checking_frequency"
-            app:useSimpleSummaryProvider="true" />
+            app:useSimpleSummaryProvider="true"/>
 
         <ListPreference
             android:icon="@drawable/ic_signal"
             app:defaultValue="all"
+            android:dependency="notification_toggle"
             app:entries="@array/requiredNetwork"
             app:entryValues="@array/requiredNetworkValues"
             app:key="required_network"
             app:title="@string/required_network"
-            app:useSimpleSummaryProvider="true" />
+            app:useSimpleSummaryProvider="true"/>
 
     </PreferenceCategory>
 
@@ -43,15 +53,17 @@
         <SwitchPreferenceCompat
             android:summary="@string/notification_time_summary"
             app:key="notification_time"
-            app:title="@string/notification_time" />
+            app:title="@string/notification_time"/>
 
         <com.github.libretube.ui.views.TimePickerPreference
             app:key="notification_start_time"
-            app:title="@string/start_time" />
+            android:dependency="notification_time"
+            app:title="@string/start_time"/>
 
         <com.github.libretube.ui.views.TimePickerPreference
             app:key="notification_end_time"
-            app:title="@string/end_time" />
+            android:dependency="notification_time"
+            app:title="@string/end_time"/>
 
     </PreferenceCategory>
 

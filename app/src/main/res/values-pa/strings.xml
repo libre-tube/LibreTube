@@ -2,7 +2,6 @@
 <resources>
     <string name="library">ਲਾਇਬ੍ਰੇਰੀ</string>
     <string name="yes">ਠੀਕ</string>
-    <string name="choose_quality_dialog">ਗੁਣਵੱਤਾ</string>
     <string name="search_hint">ਖੋਜ</string>
     <string name="videos">ਵੀਡੀਓਜ਼</string>
     <string name="subscribe">ਸਬਸਕ੍ਰਾਈਬ</string>
@@ -16,7 +15,6 @@
     <string name="startpage">ਘਰ</string>
     <string name="subscriptions">ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ</string>
     <string name="instances">ਚੁਣੋ…</string>
-    <string name="please_login">ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਲੌਗ ਇਨ ਕਰੋ ਜਾਂ ਪੰਜੀਕਰਣ ਕਰੋ।</string>
     <string name="register">ਪੰਜੀਕਰਣ ਕਰੋ</string>
     <string name="logout">ਲਾਗ ਆਊਟ</string>
     <string name="cancel">ਰੱਦ ਕਰੋ</string>
@@ -24,7 +22,6 @@
     <string name="loggedout">ਲੌਗ ਆਊਟ ਕੀਤਾ।</string>
     <string name="registered">ਪੰਜੀਕਰਣ ਹੋਇਆ। ਹੁਣ ਤੁਸੀਂ ਚੈਨਲਾਂ ਨੂੰ ਸਬਸਕ੍ਰਾਈਬ ਕਰ ਸਕਦੇ ਹੋ।</string>
     <string name="already_logged_in">ਪਹਿਲਾਂ ਹੀ ਲੌਗਇਨ ਕੀਤਾ ਹੋਇਆ ਹੈ। ਤੁਸੀਂ ਆਪਣੇ ਖਾਤੇ ਤੋਂ ਲੌਗ ਆਊਟ ਕਰ ਸਕਦੇ ਹੋ।</string>
-    <string name="login_first">ਕਿਰਪਾ ਕਰਕੇ ਲੌਗ ਇਨ ਕਰੋ ਅਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।</string>
     <string name="customInstance">ਕਸਟਮ</string>
     <string name="region">ਖੇਤਰ</string>
     <string name="login_register">ਲੌਗ ਇਨ/ਪੰਜੀਕਰਣ ਕਰੋ</string>
@@ -37,12 +34,8 @@
     <string name="update_available_text">ਨਵਾਂ ਅੱਪਡੇਟ ਉਪਲਬਧ ਹੈ। GitHub ਰਿਲੀਜ਼ ਪੰਨੇ ਨੂੰ ਖੋਲ੍ਹਣ ਲਈ ਕਲਿੱਕ ਕਰੋ।</string>
     <string name="cannotDownload">ਇਸ ਸਟ੍ਰੀਮ ਨੂੰ ਡਾਊਨਲੋਡ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ।</string>
     <string name="importsuccess">ਸਬਸਕ੍ਰਾਈਬ ਕੀਤਾ</string>
-    <string name="subscribeIsEmpty">ਪਹਿਲਾਂ ਕੁਝ ਚੈਨਲਾਂ ਨੂੰ ਸਬਸਕ੍ਰਾਈਬ ਕਰੋ।</string>
-    <string name="dlcomplete">ਡਾਊਨਲੋਡ ਪੂਰਾ ਹੋਇਆ।</string>
     <string name="dlisinprogress">ਕਿਰਪਾ ਕਰਕੇ ਸਾਰੇ ਮੌਜੂਦਾ ਡਾਊਨਲੋਡਾਂ ਦੇ ਮੁਕੰਮਲ ਹੋਣ ਤੱਕ ਉਡੀਕ ਕਰੋ।</string>
     <string name="downloadfailed">ਡਾਊਨਲੋਡ ਅਸਫਲ ਰਿਹਾ।</string>
-    <string name="vlc">VLC ਵਿੱਚ ਖੋਲ੍ਹੋ</string>
-    <string name="vlcerror">VLC ਵਿੱਚ ਖੋਲ੍ਹਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ। ਹੋ ਸਕਦਾ VLC ਇੰਸਟਾਲ ਨਾਂ ਹੋਵੇ।</string>
     <string name="import_from_yt">ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਆਯਾਤ ਕਰੋ</string>
     <string name="import_from_yt_summary">YouTube ਜਾਂ NewPipe ਤੋਂ</string>
     <string name="app_theme">ਥੀਮ</string>
@@ -77,7 +70,6 @@
     <string name="noInternet">ਪਹਿਲਾਂ ਇੰਟਰਨੈੱਟ ਨਾਲ ਜੁੜੋ।</string>
     <string name="retry">ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
     <string name="comments">ਟਿੱਪਣੀਆਂ</string>
-    <string name="choose_filter">ਖੋਜ ਫਿਲਟਰ ਚੁਣੋ</string>
     <string name="channels">ਚੈਨਲ</string>
     <string name="all">ਸਾਰੇ</string>
     <string name="playlists">ਪਲੇਲਿਸਟਾਂ</string>
@@ -89,11 +81,9 @@
     <string name="music_videos">YT ਸੰਗੀਤ ਵੀਡੀਓਜ਼</string>
     <string name="music_albums">YT ਸੰਗੀਤ ਐਲਬਮਾਂ</string>
     <string name="music_playlists">YT ਸੰਗੀਤ ਪਲੇਲਿਸਟਸ</string>
-    <string name="defaultTab">ਡਿਫ਼ਾਲਟ ਟੈਬ</string>
     <string name="sponsorblock">ਸਪਾਂਸਰਬਲਾਕ</string>
     <string name="sponsorblock_summary">https://sponsor.ajay.app API ਦੀ ਵਰਤੋਂ ਕਰਦਾ ਹੈ</string>
     <string name="segment_skipped">ਛੱਡਿਆ ਖੰਡ</string>
-    <string name="sponsorblock_state">ਚਾਲੂ</string>
     <string name="category_segments">ਸੈਗਮਿੰਟ</string>
     <string name="category_sponsor">ਸਪਾਂਸਰ</string>
     <string name="category_selfpromo">ਅਨਪੇਡ/ਸਵੈ ਪ੍ਰਚਾਰ</string>
@@ -114,7 +104,6 @@
     <string name="color_yellow">ਜ਼ੋਰਦਾਰ ਪੀਲਾ</string>
     <string name="color_green">ਆਕਰਸ਼ਕ ਹਰਾ</string>
     <string name="color_purple">ਅਨੰਦਦਾਇਕ ਜਾਮਣੀ</string>
-    <string name="oledTheme">ਕਾਲ੍ਹਾ</string>
     <string name="material_you">ਮਟੀਰੀਅਲ ਯੂ</string>
     <string name="sponsorblock_notifications">ਨੋਟੀਫਿਕੇਸ਼ਨ</string>
     <string name="app_icon">ਆਈਕੌਨ</string>
@@ -133,33 +122,15 @@
     <string name="pauseOnScreenOff_summary">ਜਦੋਂ ਸਕ੍ਰੀਨ ਬੰਦ ਹੋ ਜਾਵੇ ਤਾਂ ਪਲੇਬੈਕ ਨੂੰ ਰੋਕੋ।</string>
     <string name="autoplay_summary">ਮੌਜੂਦਾ ਵੀਡੀਓ ਤੋਂ ਬਾਅਦ ਅਗਲੀ ਵੀਡੀਓ ਨੂੰ ਆਟੋ-ਪਲੇ ਕਰੋ।</string>
     <string name="reset_message">ਕੀ ਸਾਰੀਆਂ ਸੈਟਿੰਗਾਂ ਰੀਸੈਟ ਕਰਕੇ ਲੌਗ ਆਊਟ ਕਰਨਾ ਹੈ\?</string>
-    <string name="app_behavior">ਵਿਵਹਾਰ</string>
     <string name="downloads">ਡਾਊਨਲੋਡਸ</string>
-    <string name="video_format">ਵੀਡੀਓ ਫਾਰਮੈਟ</string>
-    <string name="video_format_summary">ਫਾਈਲਾਂ ਦਾ ਪਰਿਵਰਤਨ ਜੇਕਰ ਆਡੀਓ ਅਤੇ ਵੀਡੀਓ ਦੋਵੇਂ ਡਾਊਨਲੋਡ ਕੀਤੇ ਗਏ ਹਨ।</string>
-    <string name="download_directory">\'ਤੇ ਡਾਊਨਲੋਡ ਕਰੋ</string>
-    <string name="download_directory_summary">ਜਿੱਥੇ ਡਾਊਨਲੋਡ ਕੀਤਾ ਮੀਡੀਆ ਸਟੋਰ ਕੀਤਾ ਜਾਂਦਾ ਹੈ।</string>
-    <string name="contributing">ਯੋਗਦਾਨ</string>
-    <string name="donate">ਦਾਨ ਕਰੋ</string>
-    <string name="update">ਨਵੇਂ ਸੰਸਕਰਣ ਦੀ ਭਾਲ ਕਰੋ</string>
     <string name="update_summary">ਅੱਪਡੇਟ ਲਈ ਜਾਂਚ ਕਰੋ</string>
     <string name="app_uptodate">ਨਵੀਨਤਮ ਸੰਸਕਰਣ ਚੱਲ ਰਿਹਾ ਹੈ।</string>
-    <string name="no_update_available">ਤੁਸੀਂ ਨਵੀਨਤਮ ਸੰਸਕਰਣ ਚਲਾ ਰਹੇ ਹੋ।</string>
     <string name="playback_speed">ਪਲੇਬੈਕ ਗਤੀ</string>
     <string name="advanced">ਵਿਸ਼ੇਸ਼</string>
     <string name="player">ਪਲੇਅਰ</string>
     <string name="appearance_summary">ਐਪ ਨੂੰ ਆਪਣੀ ਪਸੰਦ ਅਨੁਸਾਰ ਵਿਵਸਥਿਤ ਕਰੋ।</string>
     <string name="advanced_summary">ਡਾਊਨਲੋਡ, ਅਤੇ ਰੀਸੈੱਟ</string>
     <string name="live">ਲਾਈਵ</string>
-    <string name="no_replies">ਇਸ ਟਿੱਪਣੀ ਦਾ ਕੋਈ ਜਵਾਬ ਨਹੀਂ ਹੈ।</string>
-    <string name="authors">ਲੇਖਕ</string>
-    <string name="download_folder">ਨਾਮ</string>
-    <string name="download_folder_summary">ਫੋਲਡਰ ਦਾ ਨਾਮ ਜਿਸ ਵਿੱਚ ਡਾਊਨਲੋਡ ਕੀਤਾ ਮੀਡੀਆ ਸਟੋਰ ਕੀਤਾ ਗਿਆ ਹੈ।</string>
-    <string name="internal_storage">ਅੰਦਰੂਨੀ ਸਟੋਰੇਜ</string>
-    <string name="downloads_directory">ਡਾਊਨਲੋਡ ਫੋਲਡਰ</string>
-    <string name="sdcard">SD ਕਾਰਡ</string>
-    <string name="music_directory">ਸੰਗੀਤ ਫੋਲਡਰ</string>
-    <string name="movies_directory">ਮੂਵੀ ਫੋਲਡਰ</string>
     <string name="shareTo">URL ਨੂੰ ਸਾਂਝਾ ਕਰੋ</string>
     <string name="defaultIcon">ਡੀਫ਼ਾਲਟ</string>
     <string name="legacyIcon">ਗੁਆਚੀ ਵਿਰਾਸਤ</string>
@@ -176,11 +147,8 @@
     <string name="clear_customInstances">ਜੋੜਿਆ ਗਿਆ ਹਟਾਓ</string>
     <string name="invalid_url">ਕਿਰਪਾ ਕਰਕੇ ਕੰਮ ਕਰਨ ਵਾਲਾ URL ਦਾਖਲ ਕਰੋ</string>
     <string name="version">ਸੰਸਕਰਣ %1$s</string>
-    <string name="about_summary">ਟੀਮ LibreTube ਨੂੰ ਜਾਣੋ ਅਤੇ ਇਹ ਸਭ ਕਿਵੇਂ ਹੁੰਦਾ ਹੈ।</string>
     <string name="related_streams">ਸੰਬੰਧਿਤ ਸਮੱਗਰੀ</string>
     <string name="related_streams_summary">ਤੁਸੀਂ ਜੋ ਦੇਖਦੇ ਹੋ ਉਸਦੇ ਨਾਲ ਮਿਲਦੀਆਂ-ਜੁਲਦੀਆਂ ਸਟ੍ਰੀਮਾਂ ਦਿਖਾਓ।</string>
-    <string name="show_chapters">ਚੈਪਟਰ ਵਿਖਾਓ</string>
-    <string name="hide_chapters">ਚੈਪਟਰ ਲੁਕਾਓ</string>
     <string name="buffering_goal">ਪ੍ਰੀਲੋਡਿੰਗ</string>
     <string name="buffering_goal_summary">ਅਧਿਕਤਮ ਬਫਰ ਕਰਨ ਲਈ ਵੀਡੀਓ ਦੇ ਸਕਿੰਟਾਂ ਦੀ ਮਾਤਰਾ।</string>
     <string name="playerVideoFormat">ਪਲੇਅਰ ਲਈ ਵੀਡੀਓ ਫਾਰਮੈਟ</string>
@@ -190,7 +158,6 @@
     <string name="video">ਵੀਡੀਓ</string>
     <string name="downloading">ਡਾਊਨਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…</string>
     <string name="player_autoplay">ਆਟੋ-ਪਲੇਅ</string>
-    <string name="hideTrendingPage">ਪ੍ਰਚਲਿਤ ਪੇਜ ਲੁਕਾਓ</string>
     <string name="instance_frontend_url">URL ਤੋਂ ਇੰਸਟੈਂਸ ਫਰੰਟਐਂਡ</string>
     <string name="quality">ਕੁਆਲਿਟੀ</string>
     <string name="behavior">ਵਿਵਹਾਰ</string>
@@ -209,7 +176,6 @@
     <string name="auth_instance">ਪ੍ਰਮਾਣਿਕਤਾ ਇੰਸਟੈਂਸ</string>
     <string name="auth_instance_summary">ਪ੍ਰਮਾਣਿਤ ਕਾਲਾਂ ਲਈ ਇੱਕ ਵੱਖਰਾ ਇੰਸਟੈਂਸ ਵਰਤੋ।</string>
     <string name="auth_instances">ਇੱਕ ਪ੍ਰਮਾਣਿਕਤਾ ਇੰਸਟੈਂਸ ਚੁਣੋ</string>
-    <string name="hls">ਐਚ.ਐਲ.ਐਸ</string>
     <string name="github">ਗਿਟਹੱਬ</string>
     <string name="audio_video">ਆਡੀਓ ਅਤੇ ਵੀਡੀਓ</string>
     <string name="fullscreen_orientation">ਫੁੱਲ ਸਕਰੀਨ ਸਥਿਤੀ</string>
@@ -217,11 +183,9 @@
     <string name="auto_rotation">ਆਟੋ-ਰੋਟੇਸ਼ਨ</string>
     <string name="landscape">ਲੈਂਡਸਕੇਪ</string>
     <string name="portrait">ਪੋਰਟਰੇਟ</string>
-    <string name="community">ਭਾਈਚਾਰਾ</string>
     <string name="turnInternetOn">ਕਿਰਪਾ ਕਰਕੇ ਇੰਟਰਨੈੱਟ ਨਾਲ ਕਨੈਕਟ ਕਰਨ ਲਈ ਵਾਈ-ਫਾਈ ਜਾਂ ਮੋਬਾਈਲ ਡਾਟਾ ਚਾਲੂ ਕਰੋ।</string>
     <string name="open">ਖੋਲ੍ਹੋ…</string>
     <string name="chapters">ਚੈਪਟਰ</string>
-    <string name="change_playback_speed">ਪਲੇਬੈਕ ਗਤੀ</string>
     <string name="require_restart">ਐਪ ਰੀਸਟਾਰਟ ਦੀ ਲੋੜ ਹੈ</string>
     <string name="require_restart_message">ਨਵੀਆਂ ਤਬਦੀਲੀਆਂ ਦੀ ਵਰਤੋਂ ਕਰਨ ਲਈ ਐਪ ਨੂੰ ਰੀਸਟਾਰਟ ਕਰੋ।</string>
     <string name="navLabelVisibility">ਲੇਬਲ ਦਿਖਣਯੋਗਤਾ</string>
@@ -243,12 +207,10 @@
     <string name="system_caption_style">ਸਿਸਟਮ ਕੈਪਸ਼ਨ ਸ਼ੈਲੀ</string>
     <string name="captions">ਕੈਪਸ਼ਨਾਂ</string>
     <string name="none">ਕੋਈ ਨਹੀਂ</string>
-    <string name="seekbar_preview">ਵੀਡੀਓ ਪ੍ਰੀਵਿਊ</string>
     <string name="general">ਜਨਰਲ</string>
     <string name="general_summary">ਭਾਸ਼ਾ ਅਤੇ ਖੇਤਰ</string>
     <string name="playingOnBackground">ਬੈਕਗ੍ਰਾਊਂਡ ਵਿੱਚ ਚੱਲ ਰਿਹਾ ਹੈ…</string>
     <string name="caption_settings">ਕੈਪਸ਼ਨਾਂ</string>
-    <string name="downloading_apk">APK ਡਾਊਨਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…</string>
     <string name="playerAudioFormat">ਪਲੇਅਰ ਲਈ ਆਡੀਓ ਫਾਰਮੈਟ</string>
     <string name="playerAudioQuality">ਆਡੀਓ ਕੁਆਲਿਟੀ</string>
     <string name="best_quality">ਵਧੀਆ</string>
@@ -258,8 +220,6 @@
     <string name="notify_new_streams">ਨਵੀਆਂ ਸਟ੍ਰੀਮਾਂ ਲਈ ਨੋਟੀਫਿਕੇਸ਼ਨ ਵਿਖਾਓ</string>
     <string name="notify_new_streams_summary">ਤੁਹਾਡੇ ਦੁਆਰਾ ਅਨੁਸਰਣ ਕੀਤੇ ਜਾਣ ਵਾਲਿਆਂ ਤੋਂ ਨਵੀਂਆਂ ਸਟ੍ਰੀਮਾਂ ਬਾਰੇ ਨੋਟੀਫਿਕੇਸ਼ਨ ਵਿਖਾਓ।</string>
     <string name="checking_frequency">ਹਰ ਜਾਂਚ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ…</string>
-    <string name="new_streams_count">%1$s ਨਵੀਆਂ ਸਟ੍ਰੀਮਾਂ ਉਪਲਬਧ ਹਨ</string>
-    <string name="new_streams_by">%1$s ਦੁਆਰਾ ਨਵੀਆਂ ਸਟ੍ਰੀਮਾਂ…</string>
     <string name="history_empty">ਅਜੇ ਤੱਕ ਕੋਈ ਇਤਿਹਾਸ ਨਹੀਂ।</string>
     <string name="most_recent">ਸਭ ਤੋਂ ਨਵਾਂ</string>
     <string name="least_recent">ਸਭ ਤੋਂ ਪੁਰਾਣਾ</string>
@@ -267,7 +227,6 @@
     <string name="least_views">ਸਭ ਤੋਂ ਘੱਟ ਵਿਊਜ਼</string>
     <string name="channel_name_az">ਚੈਨਲ ਦਾ ਨਾਮ (A-Z)</string>
     <string name="channel_name_za">ਚੈਨਲ ਦਾ ਨਾਮ (Z-A)</string>
-    <string name="sort">ਛਾਂਟੀ</string>
     <string name="required_network">ਕੁਨੈਕਸ਼ਨ ਲੋੜੀਂਦਾ</string>
     <string name="network_all">ਸਾਰੇ</string>
     <string name="network_metered">ਮੀਟਰਡ</string>
@@ -276,7 +235,6 @@
     <string name="no_search_result">ਕੋਈ ਨਤੀਜੇ ਨਹੀਂ।</string>
     <string name="error_occurred">ਤਰੁੱਟੀ</string>
     <string name="copied">ਕਾਪੀ ਕੀਤਾ</string>
-    <string name="downloadsucceeded">ਡਾਊਨਲੋਡ ਸਫਲ ਰਿਹਾ</string>
     <string name="share_with_time">ਟਾਈਮ ਕੋਡ ਨਾਲ ਸਾਂਝਾ ਕਰੋ</string>
     <string name="export_subscriptions">ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਨਿਰਯਾਤ ਕਰੋ</string>
     <string name="skip_buttons">ਸਕਿਪ ਬਟਨ</string>
@@ -286,9 +244,7 @@
     <string name="background_mode">ਬੈਕਗ੍ਰਾਊਂਡ ਮੋਡ</string>
     <string name="add_to_queue">ਕਤਾਰ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ</string>
     <string name="misc">ਫੁਟਕਲ</string>
-    <string name="break_reminder">ਬਰੇਕ ਰੀਮਾਈਂਡਰ</string>
     <string name="take_a_break">ਇੱਕ ਬ੍ਰੇਕ ਲੈਣ ਦਾ ਸਮਾਂ</string>
-    <string name="already_spent_time">ਤੁਸੀਂ ਐਪ ਵਿੱਚ ਪਹਿਲਾਂ ਹੀ %1$s ਮਿੰਟ ਬਿਤਾ ਚੁੱਕੇ ਹੋ, ਇੱਕ ਬ੍ਰੇਕ ਲੈਣ ਦਾ ਸਮਾਂ।</string>
     <string name="yt_shorts">ਸ਼ੌਰਟਸ</string>
     <string name="no_subtitles_available">ਕੋਈ ਉਪਸਿਰਲੇਖ ਉਪਲਬਧ ਨਹੀਂ ਹਨ</string>
     <string name="repeat_mode">ਦੁਹਰਾਓ ਮੋਡ</string>
@@ -320,22 +276,15 @@
     <string name="save_feed">ਬੈਕਗ੍ਰਾਊਂਡ ਵਿੱਚ ਫੀਡ ਲੋਡ ਕਰੋ</string>
     <string name="save_feed_summary">ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਫੀਡ ਨੂੰ ਪਿਛੋਕੜ ਵਿੱਚ ਲੋਡ ਕਰੋ ਅਤੇ ਇਸਨੂੰ ਸਵੈ-ਤਾਜ਼ਾ ਹੋਣ ਤੋਂ ਰੋਕੋ।</string>
     <string name="navigation_bar">ਨੈਵੀਗੇਸ਼ਨ ਪੱਟੀ</string>
-    <string name="select_at_least_one">ਕਿਰਪਾ ਕਰਕੇ ਘੱਟੋ-ਘੱਟ ਇੱਕ ਆਈਟਮ ਚੁਣੋ</string>
     <string name="change_region">ਮੌਜੂਦਾ ਖੇਤਰ ਲਈ ਰੁਝਾਨ ਅਣਉਪਲਬਧ ਜਾਪਦਾ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਕੋਈ ਹੋਰ ਚੁਣੋ।</string>
-    <string name="limit_hls">HLS ਨੂੰ 1080p ਤੱਕ ਸੀਮਿਤ ਕਰੋ</string>
-    <string name="progressive_load_interval">ਪ੍ਰਗਤੀਸ਼ੀਲ ਲੋਡ ਅੰਤਰਾਲ ਦਾ ਆਕਾਰ</string>
-    <string name="progressive_load_interval_summary">ਇੱਕ ਘੱਟ ਵੈਲਿਊ ਸ਼ੁਰੂਆਤੀ ਵੀਡੀਓ ਲੋਡਿੰਗ ਨੂੰ ਤੇਜ਼ ਕਰ ਸਕਦੀ ਹੈ।</string>
-    <string name="default_load_interval">ਡੀਫ਼ਾਲਟ</string>
     <string name="playback_pitch">ਪਿੱਚ</string>
     <string name="filename">ਫਾਈਲ ਦਾ ਨਾਂ</string>
     <string name="invalid_filename">ਅਵੈਧ ਫਾਈਲ ਨਾਮ!</string>
     <string name="playlists_order">ਪਲੇਲਿਸਟਸ ਤਰਤੀਬ</string>
     <string name="playlistNameReversed">ਪਲੇਲਿਸਟ ਨਾਮ (ਉਲਟੀ ਤਰਤੀਬ)</string>
     <string name="recentlyUpdated">ਹਾਲ ਹੀ ਵਿੱਚ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ</string>
-    <string name="show_more">ਹੋਰ ਦਿਖਾਓ</string>
     <string name="time_code">ਸਮਾਂ ਕੋਡ (ਸਕਿੰਟ)</string>
     <string name="added_to_playlist">ਪਲੇਲਿਸਟ ਵਿੱਚ ਸ਼ਾਮਲ ਕੀਤਾ ਗਿਆ</string>
-    <string name="playing_queue">ਪਲੇਅ ਕਤਾਰ</string>
     <string name="queue">ਕਤਾਰ</string>
     <string name="sb_markers">ਮਾਰਕਰ</string>
     <string name="sb_markers_summary">ਸਮਾਂ ਪੱਟੀ \'ਤੇ ਹਿੱਸਿਆਂ ਨੂੰ ਚਿੰਨ੍ਹਿਤ ਕਰੋ।</string>
@@ -349,11 +298,8 @@
     <string name="end_time">ਸਮਾਪਤੀ ਸਮਾਂ</string>
     <string name="alternative_player_layout_summary">ਸੰਬੰਧਿਤ ਵੀਡੀਓਜ਼ ਨੂੰ ਹੇਠਾਂ ਦੀ ਬਜਾਏ ਟਿੱਪਣੀਆਂ ਦੇ ਉੱਪਰ ਇੱਕ ਕਤਾਰ ਦੇ ਰੂਪ ਵਿੱਚ ਦਿਖਾਓ।</string>
     <string name="audio_track">ਆਡੀਓ ਟਰੈਕ</string>
-    <string name="bookmarks_empty">ਅਜੇ ਤੱਕ ਕੋਈ ਬੁੱਕਮਾਰਕ ਨਹੀਂ!</string>
     <string name="queue_insert_related_videos">ਸੰਬੰਧਿਤ ਵੀਡੀਓ ਪਾਓ</string>
     <string name="local_playlists">ਸਥਾਨਕ ਪਲੇਲਿਸਟਾਂ</string>
-    <string name="not_enabled">ਮੀਨੂ ਆਈਟਮ ਸਮਰੱਥ ਨਹੀਂ ਹੈ!</string>
-    <string name="select_other_start_tab">ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ ਕੋਈ ਹੋਰ ਸਟਾਰਟ ਟੈਬ ਚੁਣੋ!</string>
     <string name="brightness">ਚਮਕ</string>
     <string name="volume">ਆਵਾਜ਼</string>
     <string name="auto">ਆਟੋ</string>
@@ -377,9 +323,7 @@
     <string name="color_violet">ਬਹੁਮੁਖੀ ਵੈਂਗਣੀ</string>
     <string name="push_channel_name">ਸੂਚਨਾ ਵਰਕਰ</string>
     <string name="push_channel_description">ਨਵੀਆਂ ਸਟ੍ਰੀਮਾਂ ਉਪਲਬਧ ਹੋਣ \'ਤੇ ਇੱਕ ਸੂਚਨਾ ਦਿਖਾਉਂਦਾ ਹੈ।</string>
-    <string name="seekbar_preview_summary">ਪਲੇਬੈਕ ਸੰਕੇਤਕ ਨੂੰ ਖਿੱਚਣ ਵੇਲੇ ਇੱਕ ਸਨੈਪਸ਼ਾਟ ਦਿਖਾਓ।</string>
     <string name="irreversible">ਯਕੀਨਨ ਤੁਸੀਂ ਇਹ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ\? ਇਸਨੂੰ ਅਣਕੀਤਾ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ!</string>
-    <string name="trending_layout">ਵਿਕਲਪਿਕ ਰੁਝਾਨ ਵਾਲਾ ਖਾਕਾ</string>
     <string name="maximum_image_cache">ਅਧਿਕਤਮ ਚਿੱਤਰ ਕੈਸ਼ ਆਕਾਰ</string>
     <string name="legacy_subscriptions">ਲੀਗੇਸੀ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਵਿਊ</string>
     <string name="audio_video_summary">ਕੁਆਲਿਟੀ ਅਤੇ ਫਾਰਮੈਟ</string>
@@ -391,9 +335,7 @@
     <string name="clear_bookmarks">ਬੁੱਕਮਾਰਕਸ ਸਾਫ਼ ਕਰੋ</string>
     <string name="auto_quality">ਆਟੋ</string>
     <string name="hls_instead_of_dash_summary">DASH ਦੀ ਬਜਾਏ HLS ਦੀ ਵਰਤੋਂ ਕਰੋ (ਹੌਲੀ ਹੋਵੇਗੀ, ਸਿਫ਼ਾਰਸ਼ ਨਹੀਂ ਕੀਤੀ ਗਈ)</string>
-    <string name="alternative_trending_layout">ਵਿਕਲਪਿਕ ਰੁਝਾਨ ਵਾਲਾ ਲੇਆਊਟ</string>
     <string name="background_channel_name">ਬੈਕਗ੍ਰਾਊਂਡ ਮੋਡ</string>
-    <string name="open_queue_from_notification">ਸੂਚਨਾ ਤੋਂ ਕਤਾਰ ਖੋਲ੍ਹੋ</string>
     <string name="notification_time">ਨੋਟੀਫਿਕੇਸ਼ਨ ਸਮਾਂ ਸੀਮਿਤ ਕਰੋ</string>
     <string name="layout">ਲੇਆਊਟ</string>
     <string name="notification_time_summary">ਸਮਾਂ ਸੀਮਤ ਕਰੋ ਜਿਸ ਵਿੱਚ ਸਟ੍ਰੀਮ ਸੂਚਨਾਵਾਂ ਦਿਖਾਈਆਂ ਜਾਂਦੀਆਂ ਹਨ।</string>
@@ -462,10 +404,6 @@
     <plurals name="months_ago">
         <item quantity="one">%d ਮਹੀਨਾ ਪਹਿਲਾਂ</item>
         <item quantity="other">%d ਮਹੀਨੇ ਪਹਿਲਾਂ</item>
-    </plurals>
-    <plurals name="weeks_ago">
-        <item quantity="one">%d ਹਫ਼ਤਾ ਪਹਿਲਾਂ</item>
-        <item quantity="other">%d ਹਫ਼ਤੇ ਪਹਿਲਾਂ</item>
     </plurals>
     <string name="lbry_hls">ਲਿਬਰੀ HLS</string>
     <string name="lbry_hls_summary">ਉਪਲਬਧ ਹੋਵੇ ਤਾਂ ਸਟ੍ਰੀਮਿੰਗ ਲਈ ਲੀਬਰ HLS ਵਰਤੋ।</string>

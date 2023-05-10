@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.SubscriptionGroupRowBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.SubscriptionGroup
-import com.github.libretube.ui.dialogs.EditChannelGroupDialog
+import com.github.libretube.ui.sheets.EditChannelGroupSheet
 import com.github.libretube.ui.viewholders.SubscriptionGroupsViewHolder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -15,11 +15,11 @@ import kotlinx.coroutines.runBlocking
 class SubscriptionGroupsAdapter(
     private val groups: MutableList<SubscriptionGroup>,
     private val parentFragmentManager: FragmentManager,
-    private val onGroupsChanged: (List<SubscriptionGroup>) -> Unit
+    private val onGroupsChanged: (List<SubscriptionGroup>) -> Unit,
 ) : RecyclerView.Adapter<SubscriptionGroupsViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): SubscriptionGroupsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = SubscriptionGroupRowBinding.inflate(layoutInflater, parent, false)
@@ -36,7 +36,7 @@ class SubscriptionGroupsAdapter(
                 groups.removeAt(position)
                 runBlocking(Dispatchers.IO) {
                     DatabaseHolder.Database.subscriptionGroupsDao().deleteGroup(
-                        subscriptionGroup.name
+                        subscriptionGroup.name,
                     )
                 }
                 onGroupsChanged(groups)
@@ -44,12 +44,12 @@ class SubscriptionGroupsAdapter(
                 notifyItemRangeChanged(position, itemCount)
             }
             editGroup.setOnClickListener {
-                EditChannelGroupDialog(subscriptionGroup) {
+                EditChannelGroupSheet(subscriptionGroup) {
                     groups[position] = it
                     runBlocking(Dispatchers.IO) {
                         // delete the old one as it might have a different name
                         DatabaseHolder.Database.subscriptionGroupsDao().deleteGroup(
-                            groupName.text.toString()
+                            groupName.text.toString(),
                         )
                         DatabaseHolder.Database.subscriptionGroupsDao().createGroup(it)
                     }

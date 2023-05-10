@@ -25,5 +25,5 @@ data class UpdateInfo(
     @SerialName("target_commitish") val targetCommitish: String,
     @SerialName("upload_url") val uploadUrl: String,
     val url: String,
-    @SerialName("zipball_url") val zipballUrl: String
+    @SerialName("zipball_url") val zipballUrl: String,
 )

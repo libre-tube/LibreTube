@@ -19,7 +19,7 @@ data class PipedStream(
     val height: Int? = null,
     val fps: Int? = null,
     val audioTrackName: String? = null,
-    val audioTrackId: String? = null
+    val audioTrackId: String? = null,
 ) {
     fun getQualityString(fileName: String): String {
         return "${fileName}_${quality?.replace(" ", "_")}_$format." +

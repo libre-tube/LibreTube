@@ -7,5 +7,5 @@ data class DownloadedFile(
     val name: String,
     val size: Long,
     var metadata: Streams? = null,
-    var thumbnail: Bitmap? = null
+    var thumbnail: Bitmap? = null,
 )

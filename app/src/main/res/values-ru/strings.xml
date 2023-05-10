@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="yes">Да</string>
-    <string name="choose_quality_dialog">Качество</string>
     <string name="search_hint">Поиск</string>
     <string name="subscribe">Подписаться</string>
     <string name="unsubscribe">Отписаться</string>
@@ -18,20 +17,14 @@
     <string name="loggedout">Успешный выход.</string>
     <string name="registered">Успешная регистрация. Теперь вы можете подписываться на каналы.</string>
     <string name="already_logged_in">Вы уже вошли. Вы можете выйти из своего аккаунта.</string>
-    <string name="login_first">Пожалуйста, войдите и попробуйте снова.</string>
     <string name="instances">Выбрать…</string>
     <string name="customInstance">Пользовательский</string>
     <string name="region">Регион</string>
     <string name="login_register">Войти/зарегистрироваться</string>
-    <string name="please_login">Пожалуйста, сначала войдите или зарегистрируйтесь в настройках.</string>
     <string name="importsuccess">Подписан</string>
-    <string name="subscribeIsEmpty">Сначала подпишитесь на некоторые каналы.</string>
     <string name="cannotDownload">Невозможно скачать это видео.</string>
-    <string name="dlcomplete">Загрузка завершена.</string>
     <string name="dlisinprogress">Дождитесь завершения всех текущих загрузок.</string>
     <string name="downloadfailed">Загрузка не удалась.</string>
-    <string name="vlc">Открыть в VLC</string>
-    <string name="vlcerror">Не удалось открыть в VLC. Возможно, он не установлен.</string>
     <string name="import_from_yt">Импорт подписок</string>
     <string name="app_theme">Тема</string>
     <string name="server_error">Возникла проблема с выбранным сервером. Попробуйте другой инстанс.</string>
@@ -72,8 +65,6 @@
     <string name="instance">Инстанс</string>
     <string name="customization">Конфигурация</string>
     <string name="website">Веб-сайт</string>
-    <string name="defaultTab">Вкладка по умолчанию</string>
-    <string name="choose_filter">Выберите фильтр поиска</string>
     <string name="channels">Каналы</string>
     <string name="all">Все</string>
     <string name="clear_history">Очистить историю</string>
@@ -84,7 +75,6 @@
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">На базе API https://sponsor.ajay.app/</string>
     <string name="segment_skipped">Пропущен сегмент</string>
-    <string name="sponsorblock_state">Вкл.</string>
     <string name="category_interaction">Напоминание о взаимодействии (лайк и подписка)</string>
     <string name="category_interaction_description">Короткие просьбы поставить лайк, подписаться или добавить в избранное. Если сегмент длинный или о чем-то конкретном, вместо этого он должен быть в разделе саморекламы.</string>
     <string name="category_outro">Конечная заставка и титры</string>
@@ -107,7 +97,6 @@
     <string name="color_yellow">Желейный желтый</string>
     <string name="color_green">Заводной зеленый</string>
     <string name="color_purple">Приятный пурпур</string>
-    <string name="oledTheme">Черная</string>
     <string name="material_you">Material You</string>
     <string name="app_icon">Значок</string>
     <string name="sponsorblock_notifications">Уведомления</string>
@@ -117,40 +106,27 @@
     <string name="playOnBackground">Играть в фоне</string>
     <string name="disabled">Откл.</string>
     <string name="update_available">Версия %1$s доступна</string>
-    <string name="authors">Авторы</string>
-    <string name="download_folder">Название</string>
-    <string name="sdcard">SD-Карта</string>
-    <string name="music_directory">Папка музыки</string>
-    <string name="movies_directory">Папка фильмов</string>
-    <string name="internal_storage">Внутреннее хранилище</string>
-    <string name="downloads_directory">Папка загрузок</string>
     <string name="defaultIcon">По умолчанию</string>
     <string name="shapedIcon">Формальная форма</string>
     <string name="shareTo">Поделиться URL с</string>
     <string name="legacyIcon">Утраченное наследие</string>
     <string name="gradientIcon">Гладкий градиент</string>
     <string name="update_available_text">Выпущено обновление. Нажмите, чтобы открыть страницу релизов на GitHub.</string>
-    <string name="app_behavior">Поведение</string>
-    <string name="download_folder_summary">Имя папки, в которой хранятся загруженные медиафайлы.</string>
     <string name="birdIcon">Прикольная птица</string>
     <string name="fireIcon">Огненный огонь</string>
     <string name="torchIcon">Модный факел</string>
     <string name="flameIcon">Порхающее пламя</string>
     <string name="instance_summary">Piped, вход и аккаунт</string>
     <string name="version">Версия %1$s</string>
-    <string name="about_summary">Познакомьтесь с командой LibreTube и узнайте, как все это происходит.</string>
     <string name="category_filler">Филлер/шутки</string>
     <string name="category_music_offtopic">Музыка: Немузыкальная секция</string>
     <string name="category_preview">Предварительный просмотр/Повтор</string>
     <string name="category_preview_description">Для сегментов с подробным описанием будущего контента без дополнительной информации. Если он включает в себя клипы, которые появляются только здесь, скорее всего, это неправильная категория.</string>
     <string name="appearance">Внешний вид</string>
-    <string name="no_replies">Этот комментарий не имеет ответов.</string>
     <string name="customInstance_summary">Добавить…</string>
     <string name="addInstance">Добавить инстанс</string>
     <string name="empty_instance">Введите название и URL API.</string>
     <string name="related_streams">Связанный контент</string>
-    <string name="show_chapters">Показать главы</string>
-    <string name="hide_chapters">Скрыть главы</string>
     <string name="category_music_offtopic_description">Только для использования в музыкальных клипах. Он должен охватывать части видео, не являющиеся частью официальных миксов. В конечном итоге, видео должно быть максимально похоже на версию Spotify или любую другую микс-версию, или должно быть меньше разговоров и других отвлекающих факторов.</string>
     <string name="category_filler_description">Для пустых сцен, которые были добавлены только для заполнения контентом или юмор, который не требуется для понимания основного контента видео.</string>
     <string name="instance_name">Название инстанса</string>
@@ -161,16 +137,8 @@
     <string name="invalid_url">Пожалуйста, введите рабочий URL</string>
     <string name="buffering_goal">Предзагрузка</string>
     <string name="downloads">Загрузки</string>
-    <string name="video_format">Формат видео</string>
-    <string name="video_format_summary">Преобразование файлов, если и аудио, и видео загружены.</string>
-    <string name="download_directory">Скачать в</string>
-    <string name="download_directory_summary">Где хранятся загруженные медиафайлы.</string>
-    <string name="donate">Пожертвовать</string>
-    <string name="contributing">Внести вклад</string>
-    <string name="update">Найти новую версию</string>
     <string name="update_summary">Проверить наличие обновлений</string>
     <string name="app_uptodate">Используется последняя версия.</string>
-    <string name="no_update_available">Вы используете последнюю версию.</string>
     <string name="playback_speed">Скорость воспроизведения</string>
     <string name="advanced">Расширенные</string>
     <string name="player">Плеер</string>
@@ -182,7 +150,6 @@
     <string name="video">Видео</string>
     <string name="downloading">Загрузка…</string>
     <string name="player_autoplay">Автовоспроизведение</string>
-    <string name="hideTrendingPage">Скрыть вкладку \"тренды\"</string>
     <string name="no_video">Нет видео</string>
     <string name="no_audio">Нет звука</string>
     <string name="reset">Восстановить настройки по умолчанию</string>
@@ -204,7 +171,6 @@
     <string name="watch_positions">Запоминать позицию</string>
     <string name="auth_instance">Инстанс аутентификации</string>
     <string name="auth_instance_summary">Использовать другой инстанс для аутентификации.</string>
-    <string name="hls">HLS</string>
     <string name="github">GitHub</string>
     <string name="audio_video">Аудио и видео</string>
     <string name="fullscreen_orientation">Положение в полном экране</string>
@@ -214,11 +180,9 @@
     <string name="auto_rotation">Автоповорот</string>
     <string name="landscape">Альбомная</string>
     <string name="portrait">Портретная</string>
-    <string name="community">Сообщество</string>
     <string name="turnInternetOn">Пожалуйста, включите Wi-Fi или мобильный интернет для подключения.</string>
     <string name="open">Открыть…</string>
     <string name="chapters">Эпизоды</string>
-    <string name="change_playback_speed">Скорость воспроизведения</string>
     <string name="require_restart">Требуется перезапуск</string>
     <string name="require_restart_message">Перезапустите приложение для применения изменений.</string>
     <string name="never">Никогда</string>
@@ -242,10 +206,7 @@
     <string name="general">Общие</string>
     <string name="general_summary">Язык и регион</string>
     <string name="watch_history_summary">Сохранять история просмотров локально</string>
-    <string name="seekbar_preview">Предпросмотр видео</string>
-    <string name="seekbar_preview_summary">Показывать снимок при перетаскивании индикатора воспроизведения.</string>
     <string name="caption_settings">Субтитры</string>
-    <string name="downloading_apk">Скачивание APK…</string>
     <string name="playerAudioQuality">Качество звука</string>
     <string name="notifications">Уведомления</string>
     <string name="irreversible">Вы уверены\? Это действие нельзя отменить!</string>
@@ -255,15 +216,12 @@
     <string name="most_recent">Сначала новые</string>
     <string name="most_views">Больше просмотров</string>
     <string name="least_views">Меньше просмотров</string>
-    <string name="sort">Сортировка</string>
     <string name="network_metered">Лимитное</string>
     <string name="no_search_result">Нет результатов.</string>
     <string name="error_occurred">Ошибка</string>
     <string name="copied">Скопировано</string>
     <string name="default_subtitle_language">Язык субтитров</string>
     <string name="notify_new_streams">Уведомления о новых видео</string>
-    <string name="new_streams_count">%1$s новых видео доступно</string>
-    <string name="new_streams_by">Новые видео от %1$s…</string>
     <string name="notify_new_streams_summary">Уведомления о новом контенте от авторов, на которых подписаны.</string>
     <string name="checking_frequency">Проверять каждые…</string>
     <string name="history_empty">Истории пока нет.</string>
@@ -271,7 +229,6 @@
     <string name="network_all">Любые сети</string>
     <string name="network_wifi">Только по Wi-Fi</string>
     <string name="translate">Перевод</string>
-    <string name="downloadsucceeded">Загружено успешно</string>
     <string name="share_with_time">Поделиться с тайм-кодом</string>
     <string name="playingOnBackground">Воспроизведение в фоне…</string>
     <string name="playerAudioFormat">Аудио формат для проигрывателя</string>
@@ -285,9 +242,7 @@
     <string name="skip_buttons_summary">Показывать кнопки для перехода к следующему или предыдущему видео.</string>
     <string name="yt_shorts">Shorts</string>
     <string name="misc">Прочее</string>
-    <string name="already_spent_time">Вы уже провели %1$s минут в приложении, пора сделать перерыв.</string>
     <string name="add_to_queue">Добавить в очередь</string>
-    <string name="break_reminder">Напоминание о перерыве</string>
     <string name="take_a_break">Время сделать перерыв</string>
     <string name="no_subtitles_available">Субтитры отсутствуют</string>
     <string name="repeat_mode">Повтор</string>
@@ -319,7 +274,6 @@
     <string name="legacy_subscriptions">Старый вид отображения подписок</string>
     <string name="audio_video_summary">Качество и формат</string>
     <string name="delete">Удалить из загрузок</string>
-    <string name="trending_layout">Альтернативный вид трендов</string>
     <string name="renamePlaylist">Переименовать плейлист</string>
     <string name="wifi">WiFi</string>
     <string name="mobile_data">Мобильная сеть</string>
@@ -330,12 +284,7 @@
     <string name="save_feed_summary">Обновлять страницу \"Подписки\" в фоне вместо принудительного полного обновления.</string>
     <string name="play_next">Проиграть следующий</string>
     <string name="navigation_bar">Панель навигации</string>
-    <string name="select_at_least_one">Выберите как минимум один</string>
     <string name="change_region">Похоже, что тренды не доступны в текущем регионе. Выберите другой регион в настройках.</string>
-    <string name="limit_hls">Ограничить HLS до 1080p</string>
-    <string name="progressive_load_interval">Прогрессивный размер интервала загрузки</string>
-    <string name="progressive_load_interval_summary">Меньшие значения могут увеличить начальную скорость загрузки видео.</string>
-    <string name="default_load_interval">По умолчанию</string>
     <string name="playback_pitch">Скорость</string>
     <string name="filename">Имя файла</string>
     <string name="invalid_filename">Неверное имя файла!</string>
@@ -344,9 +293,7 @@
     <string name="playlistNameReversed">Название плейлиста (перевернутое)</string>
     <string name="recentlyUpdated">Недавно обновленный</string>
     <string name="recentlyUpdatedReversed">Недавно обновлено (перевернутое)</string>
-    <string name="show_more">Показать больше</string>
     <string name="time_code">Временной код (секунды)</string>
-    <string name="playing_queue">Очередь воспроизведения</string>
     <string name="queue">Очередь</string>
     <string name="sb_markers">Маркеры</string>
     <string name="sb_markers_summary">Пометить сегменты на шкале времени.</string>
@@ -364,7 +311,6 @@
     <string name="notification_time">Ограничить время уведомлений</string>
     <string name="notification_time_summary">Временной интервал, в течение которого разрешено показывать уведомления.</string>
     <string name="navbar_order">Порядок навигации</string>
-    <string name="alternative_trending_layout">Альтернативный трендовый макет</string>
     <string name="alternative_player_layout_summary">Показать связанные видео в виде ряда над комментариями, а не под ними.</string>
     <string name="layout">Макет</string>
     <string name="alternative_player_layout">Альтернативный макет плеера</string>
@@ -376,15 +322,11 @@
     <string name="trends">Тренды</string>
     <string name="bookmarks">Закладки</string>
     <string name="limit_to_runtime">Ограничение времени выполнения</string>
-    <string name="open_queue_from_notification">Открыть очередь из уведомления</string>
     <string name="trending">Сейчас в тренде</string>
     <string name="clear_bookmarks">Очистить закладки</string>
-    <string name="bookmarks_empty">Закладок пока нет!</string>
     <string name="featured">Рекомендации</string>
     <string name="bookmark">Закладка</string>
-    <string name="select_other_start_tab">Сначала выберите другую начальную вкладку!</string>
     <string name="local_playlists">Локальные плейлисты</string>
-    <string name="not_enabled">Пункт меню не включен!</string>
     <string name="queue_insert_related_videos">Вставить связанные видео</string>
     <string name="brightness">Яркость</string>
     <string name="volume">Громкость</string>
@@ -467,12 +409,6 @@
         <item quantity="many">%d лет назад</item>
         <item quantity="other">%d лет назад</item>
     </plurals>
-    <plurals name="weeks_ago">
-        <item quantity="one">%d неделю назад</item>
-        <item quantity="few">%d недели назад</item>
-        <item quantity="many">%d недель назад</item>
-        <item quantity="other">%d недель назад</item>
-    </plurals>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="lbry_hls_summary">Использовать LBRY HLS для трансляции, если доступно.</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d видео</string>
@@ -496,4 +432,9 @@
     </plurals>
     <string name="show_stream_thumbnails">Показать миниатюры видео</string>
     <string name="show_stream_thumbnails_summary">Показывать миниатюры новых видео. Включение этой функции будет потреблять дополнительные данные.</string>
+    <string name="unlimited_search_history">Неограниченная история поиска</string>
+    <string name="duration_reversed">Продолжительность (обратная)</string>
+    <string name="playlist_name_az">Название плейлиста (А-Я)</string>
+    <string name="playlist_name_za">Название плейлиста (Я-А)</string>
+    <string name="duration">Продолжительность</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.github.libretube.api
 
-import android.content.Context
 import androidx.core.text.isDigitsOnly
 import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.PlaylistId
@@ -37,7 +36,7 @@ object PlaylistsHelper {
                         id = it.playlist.id.toString(),
                         name = it.playlist.name,
                         thumbnail = ProxyHelper.rewriteUrl(it.playlist.thumbnailUrl),
-                        videos = it.videos.size.toLong()
+                        videos = it.videos.size.toLong(),
                     )
                 }
         }
@@ -55,7 +54,7 @@ object PlaylistsHelper {
                     name = relation.playlist.name,
                     thumbnailUrl = ProxyHelper.rewriteUrl(relation.playlist.thumbnailUrl),
                     videos = relation.videos.size,
-                    relatedStreams = relation.videos.map { it.toStreamItem() }
+                    relatedStreams = relation.videos.map { it.toStreamItem() },
                 )
             }
         }
@@ -118,7 +117,7 @@ object PlaylistsHelper {
             val transaction = DatabaseHolder.Database.localPlaylistsDao().getAll()
                 .first { it.playlist.id.toString() == playlistId }
             DatabaseHolder.Database.localPlaylistsDao().removePlaylistVideo(
-                transaction.videos[index]
+                transaction.videos[index],
             )
             // set a new playlist thumbnail if the first video got removed
             if (index == 0) {
@@ -129,7 +128,7 @@ object PlaylistsHelper {
         } else {
             RetrofitInstance.authApi.removeFromPlaylist(
                 PreferenceHelper.getToken(),
-                PlaylistId(playlistId = playlistId, index = index)
+                PlaylistId(playlistId = playlistId, index = index),
             ).message == "ok"
         }
     }
@@ -145,23 +144,24 @@ object PlaylistsHelper {
                         playlistId,
                         *playlist.videos.map {
                             StreamItem(url = it)
-                        }.toTypedArray()
+                        }.toTypedArray(),
                     )
                 } else {
                     // if not logged in, all video information needs to become fetched manually
-                    runCatching {
-                        val streamItems = playlist.videos.map {
-                            async {
-                                runCatching {
-                                    RetrofitInstance.api.getStreams(it).toStreamItem(it)
-                                }.getOrNull()
-                            }
+                    // Only do so with 20 videos at once to prevent performance issues
+                    playlist.videos.mapIndexed { index, id -> id to index }
+                        .groupBy { it.second % 20 }.forEach { (_, videos) ->
+                            videos.map {
+                                async {
+                                    runCatching {
+                                        val stream = RetrofitInstance.api.getStreams(it.first).toStreamItem(
+                                            it.first,
+                                        )
+                                        addToPlaylist(playlistId, stream)
+                                    }
+                                }
+                            }.awaitAll()
                         }
-                            .awaitAll()
-                            .filterNotNull()
-
-                        addToPlaylist(playlistId, *streamItems.toTypedArray())
-                    }
                 }
             }
         }.awaitAll()
@@ -179,8 +179,7 @@ object PlaylistsHelper {
             }
     }
 
-    suspend fun clonePlaylist(context: Context, playlistId: String): String? {
-        val appContext = context.applicationContext
+    suspend fun clonePlaylist(playlistId: String): String? {
         if (!loggedIn) {
             val playlist = RetrofitInstance.api.getPlaylist(playlistId)
             val newPlaylist = createPlaylist(playlist.name ?: "Unknown name") ?: return null
@@ -211,7 +210,7 @@ object PlaylistsHelper {
         return runCatching {
             RetrofitInstance.authApi.deletePlaylist(
                 PreferenceHelper.getToken(),
-                PlaylistId(playlistId)
+                PlaylistId(playlistId),
             ).message == "ok"
         }.getOrDefault(false)
     }

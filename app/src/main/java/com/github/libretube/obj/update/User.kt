@@ -22,5 +22,5 @@ data class User(
     @SerialName("starred_url") val starredUrl: String,
     @SerialName("subscriptions_url") val subscriptionsUrl: String,
     val type: String,
-    val url: String
+    val url: String,
 )

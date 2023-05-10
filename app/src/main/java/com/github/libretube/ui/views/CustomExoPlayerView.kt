@@ -58,7 +58,7 @@ import com.google.android.exoplayer2.util.RepeatModeUtil
 @SuppressLint("ClickableViewAccessibility")
 internal class CustomExoPlayerView(
     context: Context,
-    attributeSet: AttributeSet? = null
+    attributeSet: AttributeSet? = null,
 ) : StyledPlayerView(context, attributeSet), PlayerOptions, PlayerGestureOptions {
     val binding: ExoStyledPlayerControlViewBinding = ExoStyledPlayerControlViewBinding.bind(this)
 
@@ -105,7 +105,7 @@ internal class CustomExoPlayerView(
         playerGestureControlsViewBinding: PlayerGestureControlsViewBinding,
         trackSelector: TrackSelector?,
         playerViewModel: PlayerViewModel? = null,
-        viewLifecycleOwner: LifecycleOwner? = null
+        viewLifecycleOwner: LifecycleOwner? = null,
     ) {
         this.playerOptionsInterface = playerViewInterface
         this.doubleTapOverlayBinding = doubleTapOverlayBinding
@@ -137,7 +137,7 @@ internal class CustomExoPlayerView(
                     R.drawable.ic_locked
                 } else {
                     R.drawable.ic_unlocked
-                }
+                },
             )
 
             // show/hide all the controls
@@ -175,7 +175,7 @@ internal class CustomExoPlayerView(
                 if (events.containsAny(
                         Player.EVENT_PLAYBACK_STATE_CHANGED,
                         Player.EVENT_IS_PLAYING_CHANGED,
-                        Player.EVENT_PLAY_WHEN_READY_CHANGED
+                        Player.EVENT_PLAY_WHEN_READY_CHANGED,
                     )
                 ) {
                     updatePlayPauseButton()
@@ -201,7 +201,9 @@ internal class CustomExoPlayerView(
                 cancelHideControllerTask()
             }
 
-            override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {}
+            override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {
+                enqueueHideControllerTask()
+            }
         })
 
         setControllerVisibilityListener(
@@ -211,14 +213,15 @@ internal class CustomExoPlayerView(
                     // Show status bar only not navigation bar if the player controls are visible and hide it otherwise
                     activity.toggleSystemBars(
                         types = WindowInsetsCompat.Type.statusBars(),
-                        showBars = visibility == View.VISIBLE
+                        showBars = visibility == View.VISIBLE,
                     )
                 }
-            }
+            },
         )
 
         playerViewModel?.isFullscreen?.observe(viewLifecycleOwner!!) { isFullscreen ->
             WindowHelper.toggleFullscreen(activity, isFullscreen)
+            updateTopBarMargin()
         }
     }
 
@@ -228,8 +231,14 @@ internal class CustomExoPlayerView(
                 player?.isPlaying == true -> R.drawable.ic_pause
                 player?.playbackState == Player.STATE_ENDED -> R.drawable.ic_restart
                 else -> R.drawable.ic_play
-            }
+            },
         )
+    }
+
+    private fun enqueueHideControllerTask() {
+        handler.postDelayed(AUTO_HIDE_CONTROLLER_DELAY, HIDE_CONTROLLER_TOKEN) {
+            hideController()
+        }
     }
 
     private fun cancelHideControllerTask() {
@@ -254,9 +263,7 @@ internal class CustomExoPlayerView(
         // remove the previous callback from the queue to prevent a flashing behavior
         cancelHideControllerTask()
         // automatically hide the controller after 2 seconds
-        handler.postDelayed(AUTO_HIDE_CONTROLLER_DELAY, HIDE_CONTROLLER_TOKEN) {
-            hideController()
-        }
+        enqueueHideControllerTask()
         super.showController()
     }
 
@@ -270,7 +277,7 @@ internal class CustomExoPlayerView(
             doubleTapOverlayBinding?.rewindTV,
             doubleTapOverlayBinding?.forwardTV,
             binding.forwardTV,
-            binding.rewindTV
+            binding.rewindTV,
         ).forEach {
             it?.text = seekIncrementText
         }
@@ -299,7 +306,7 @@ internal class CustomExoPlayerView(
                         } else {
                             context.getString(R.string.repeat_mode_current)
                         }
-                    }
+                    },
                 ) {
                     onRepeatModeClicked()
                 },
@@ -309,14 +316,14 @@ internal class CustomExoPlayerView(
                     {
                         when (resizeMode) {
                             AspectRatioFrameLayout.RESIZE_MODE_FIT -> context.getString(
-                                R.string.resize_mode_fit
+                                R.string.resize_mode_fit,
                             )
                             AspectRatioFrameLayout.RESIZE_MODE_FILL -> context.getString(
-                                R.string.resize_mode_fill
+                                R.string.resize_mode_fill,
                             )
                             else -> context.getString(R.string.resize_mode_zoom)
                         }
-                    }
+                    },
                 ) {
                     onResizeModeClicked()
                 },
@@ -325,10 +332,10 @@ internal class CustomExoPlayerView(
                     R.drawable.ic_speed,
                     {
                         "${player?.playbackParameters?.speed?.round(2)}x"
-                    }
+                    },
                 ) {
                     onPlaybackSpeedClicked()
-                }
+                },
             )
 
             playerOptionsInterface?.let {
@@ -337,7 +344,7 @@ internal class CustomExoPlayerView(
                         BottomSheetItem(
                             context.getString(R.string.quality),
                             R.drawable.ic_hd,
-                            { "${player?.videoSize?.height}p" }
+                            { "${player?.videoSize?.height}p" },
                         ) {
                             it.onQualityClicked()
                         },
@@ -346,7 +353,7 @@ internal class CustomExoPlayerView(
                             R.drawable.ic_audio,
                             {
                                 trackSelector?.parameters?.preferredAudioLanguages?.firstOrNull()
-                            }
+                            },
                         ) {
                             it.onAudioStreamClicked()
                         },
@@ -359,17 +366,17 @@ internal class CustomExoPlayerView(
                                 } else {
                                     context.getString(R.string.none)
                                 }
-                            }
+                            },
                         ) {
                             it.onCaptionsClicked()
                         },
                         BottomSheetItem(
                             context.getString(R.string.stats_for_nerds),
-                            R.drawable.ic_info
+                            R.drawable.ic_info,
                         ) {
                             it.onStatsClicked()
-                        }
-                    )
+                        },
+                    ),
                 )
             }
 
@@ -398,11 +405,11 @@ internal class CustomExoPlayerView(
             if (isLocked) {
                 ContextCompat.getColor(
                     context,
-                    com.google.android.exoplayer2.R.color.exo_black_opacity_60
+                    com.google.android.exoplayer2.R.color.exo_black_opacity_60,
                 )
             } else {
                 Color.TRANSPARENT
-            }
+            },
         )
 
         // disable tap and swipe gesture if the player is locked
@@ -443,7 +450,7 @@ internal class CustomExoPlayerView(
         container: FrameLayout,
         imageView: ImageView,
         textView: TextView,
-        isRewind: Boolean
+        isRewind: Boolean,
     ) {
         container.visibility = View.VISIBLE
         // the direction of the action
@@ -507,7 +514,7 @@ internal class CustomExoPlayerView(
             if (distance <= 0) {
                 brightnessHelper.resetToSystemBrightness()
                 gestureViewBinding.brightnessImageView.setImageResource(
-                    R.drawable.ic_brightness_auto
+                    R.drawable.ic_brightness_auto,
                 )
                 gestureViewBinding.brightnessTextView.text = resources.getString(R.string.auto)
                 return
@@ -536,7 +543,7 @@ internal class CustomExoPlayerView(
                 when {
                     distance > 0 -> R.drawable.ic_volume_up
                     else -> R.drawable.ic_volume_off
-                }
+                },
             )
         }
         bar.incrementProgressBy(distance.toInt())
@@ -559,7 +566,7 @@ internal class CustomExoPlayerView(
         val aspectRatioModes = listOf(
             AspectRatioFrameLayout.RESIZE_MODE_FIT,
             AspectRatioFrameLayout.RESIZE_MODE_ZOOM,
-            AspectRatioFrameLayout.RESIZE_MODE_FILL
+            AspectRatioFrameLayout.RESIZE_MODE_FILL,
         )
 
         BaseBottomSheet()
@@ -573,7 +580,7 @@ internal class CustomExoPlayerView(
         val repeatModeNames = listOf(
             context.getString(R.string.repeat_mode_none),
             context.getString(R.string.repeat_mode_current),
-            context.getString(R.string.all)
+            context.getString(R.string.all),
         )
         // repeat mode options dialog
         BaseBottomSheet()
@@ -644,11 +651,13 @@ internal class CustomExoPlayerView(
      * Add extra margin to the top bar to not overlap the status bar
      */
     private fun updateTopBarMargin() {
-        val isFullscreen =
-            resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE ||
-                playerViewModel?.isFullscreen?.value == true
+        val margin = when {
+            resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE -> 10
+            playerViewModel?.isFullscreen?.value == true -> 20
+            else -> 0
+        }
         binding.topBar.updateLayoutParams<MarginLayoutParams> {
-            topMargin = (if (isFullscreen) 10 else 0).dpToPx().toInt()
+            topMargin = margin.dpToPx().toInt()
         }
     }
 
@@ -742,9 +751,7 @@ internal class CustomExoPlayerView(
         // when a control is clicked, restart the countdown to hide the controller
         if (isControllerFullyVisible) {
             cancelHideControllerTask()
-            handler.postDelayed(AUTO_HIDE_CONTROLLER_DELAY, HIDE_CONTROLLER_TOKEN) {
-                hideController()
-            }
+            enqueueHideControllerTask()
         }
         return super.onInterceptTouchEvent(ev)
     }

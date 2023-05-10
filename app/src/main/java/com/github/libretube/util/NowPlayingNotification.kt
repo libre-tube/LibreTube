@@ -38,7 +38,7 @@ import com.google.android.exoplayer2.ui.PlayerNotificationManager.CustomActionRe
 class NowPlayingNotification(
     private val context: Context,
     private val player: ExoPlayer,
-    private val isBackgroundPlayerNotification: Boolean
+    private val isBackgroundPlayerNotification: Boolean,
 ) {
     private var videoId: String? = null
     private var notificationData: PlayerNotificationData? = null
@@ -100,7 +100,7 @@ class NowPlayingNotification(
          */
         override fun getCurrentLargeIcon(
             player: Player,
-            callback: PlayerNotificationManager.BitmapCallback
+            callback: PlayerNotificationManager.BitmapCallback,
         ): Bitmap? {
             if (DataSaverMode.isEnabled(context)) return null
 
@@ -140,13 +140,13 @@ class NowPlayingNotification(
     private val customActionReceiver = object : CustomActionReceiver {
         override fun createCustomActions(
             context: Context,
-            instanceId: Int
+            instanceId: Int,
         ): MutableMap<String, NotificationCompat.Action> {
             return mutableMapOf(
                 PREV to createNotificationAction(R.drawable.ic_prev_outlined, PREV, instanceId),
                 NEXT to createNotificationAction(R.drawable.ic_next_outlined, NEXT, instanceId),
                 REWIND to createNotificationAction(R.drawable.ic_rewind_md, REWIND, instanceId),
-                FORWARD to createNotificationAction(R.drawable.ic_forward_md, FORWARD, instanceId)
+                FORWARD to createNotificationAction(R.drawable.ic_forward_md, FORWARD, instanceId),
             )
         }
 
@@ -203,16 +203,16 @@ class NowPlayingNotification(
             setQueueNavigator(object : TimelineQueueNavigator(mediaSession) {
                 override fun getMediaDescription(
                     player: Player,
-                    windowIndex: Int
+                    windowIndex: Int,
                 ): MediaDescriptionCompat {
                     val appIcon = BitmapFactory.decodeResource(
                         context.resources,
-                        R.drawable.ic_launcher_monochrome
+                        R.drawable.ic_launcher_monochrome,
                     )
                     val extras = bundleOf(
                         MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON to appIcon,
                         MediaMetadataCompat.METADATA_KEY_TITLE to notificationData?.title,
-                        MediaMetadataCompat.METADATA_KEY_ARTIST to notificationData?.uploaderName
+                        MediaMetadataCompat.METADATA_KEY_ARTIST to notificationData?.uploaderName,
                     )
                     return MediaDescriptionCompat.Builder()
                         .setTitle(notificationData?.title)
@@ -230,7 +230,7 @@ class NowPlayingNotification(
                 createMediaSessionAction(R.drawable.ic_prev_outlined, PREV),
                 createMediaSessionAction(R.drawable.ic_next_outlined, NEXT),
                 createMediaSessionAction(R.drawable.ic_rewind_md, REWIND),
-                createMediaSessionAction(R.drawable.ic_forward_md, FORWARD)
+                createMediaSessionAction(R.drawable.ic_forward_md, FORWARD),
             )
         }
     }
@@ -240,14 +240,14 @@ class NowPlayingNotification(
             NEXT -> {
                 if (PlayingQueue.hasNext()) {
                     PlayingQueue.onQueueItemSelected(
-                        PlayingQueue.currentIndex() + 1
+                        PlayingQueue.currentIndex() + 1,
                     )
                 }
             }
             PREV -> {
                 if (PlayingQueue.hasPrev()) {
                     PlayingQueue.onQueueItemSelected(
-                        PlayingQueue.currentIndex() - 1
+                        PlayingQueue.currentIndex() - 1,
                     )
                 }
             }
@@ -265,7 +265,7 @@ class NowPlayingNotification(
      */
     fun updatePlayerNotification(
         videoId: String,
-        data: PlayerNotificationData
+        data: PlayerNotificationData,
     ) {
         this.videoId = videoId
         this.notificationData = data

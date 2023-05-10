@@ -32,6 +32,7 @@
 
         <ListPreference
             android:icon="@drawable/ic_server"
+            android:dependency="auth_instance_toggle"
             app:defaultValue="https://pipedapi.kavin.rocks"
             app:entries="@array/instances"
             app:entryValues="@array/instancesValue"

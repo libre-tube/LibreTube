@@ -54,6 +54,15 @@
                     android:textStyle="bold" />
 
                 <ImageView
+                    android:id="@+id/sortMenu"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_sort"
+                    android:visibility="gone"/>
+
+                <ImageView
                     android:id="@+id/optionsMenu"
                     android:layout_width="20dp"
                     android:layout_height="20dp"

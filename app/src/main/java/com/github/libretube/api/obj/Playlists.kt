@@ -8,5 +8,5 @@ data class Playlists(
     var name: String? = null,
     val shortDescription: String? = null,
     val thumbnail: String? = null,
-    val videos: Long = 0
+    val videos: Long = 0,
 )

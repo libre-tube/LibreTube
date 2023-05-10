@@ -33,12 +33,12 @@ object ThemeHelper {
      * Update the accent color of the app
      */
     private fun updateAccentColor(
-        activity: AppCompatActivity
+        activity: AppCompatActivity,
     ) {
         val theme = when (
             PreferenceHelper.getString(
                 PreferenceKeys.ACCENT_COLOR,
-                "purple"
+                "purple",
             )
         ) {
             // set the accent color, use the pure black/white theme if enabled
@@ -62,7 +62,7 @@ object ThemeHelper {
         if (
             PreferenceHelper.getString(
                 PreferenceKeys.ACCENT_COLOR,
-                "purple"
+                "purple",
             ) == "my"
         ) {
             DynamicColors.applyToActivityIfAvailable(activity)
@@ -75,7 +75,7 @@ object ThemeHelper {
     private fun applyPureThemeIfEnabled(activity: Activity) {
         val pureThemeEnabled = PreferenceHelper.getBoolean(
             PreferenceKeys.PURE_THEME,
-            false
+            false,
         )
         if (pureThemeEnabled) activity.theme.applyStyle(R.style.Pure, true)
     }
@@ -105,7 +105,7 @@ object ThemeHelper {
             context.packageManager.setComponentEnabledSetting(
                 ComponentName(context.packageName, activityClass),
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                PackageManager.DONT_KILL_APP
+                PackageManager.DONT_KILL_APP,
             )
         }
 
@@ -115,7 +115,7 @@ object ThemeHelper {
         context.packageManager.setComponentEnabledSetting(
             ComponentName(context.packageName, newLogoActivityClass),
             PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-            PackageManager.DONT_KILL_APP
+            PackageManager.DONT_KILL_APP,
         )
     }
 

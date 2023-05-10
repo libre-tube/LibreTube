@@ -38,7 +38,7 @@ class IconsSheetAdapter : RecyclerView.Adapter<IconsSheetViewHolder>() {
         sealed class AppIcon(
             @StringRes val nameResource: Int,
             @DrawableRes val iconResource: Int,
-            val activityAlias: String
+            val activityAlias: String,
         ) {
             object Default :
                 AppIcon(R.string.defaultIcon, R.mipmap.ic_launcher, "ui.activities.MainActivity")
@@ -66,7 +66,7 @@ class IconsSheetAdapter : RecyclerView.Adapter<IconsSheetViewHolder>() {
             AppIcon.Torch,
             AppIcon.Shaped,
             AppIcon.Flame,
-            AppIcon.Bird
+            AppIcon.Bird,
         )
     }
 }

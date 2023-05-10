@@ -23,13 +23,13 @@ class PlaylistOptionsBottomSheet(
     private val playlistName: String,
     private val playlistType: PlaylistType,
     private val onRename: (newName: String) -> Unit = {},
-    private val onDelete: () -> Unit = {}
+    private val onDelete: () -> Unit = {},
 ) : BaseBottomSheet() {
     private val shareData = ShareData(currentPlaylist = playlistName)
     override fun onCreate(savedInstanceState: Bundle?) {
         // options for the dialog
         val optionsList = mutableListOf(
-            getString(R.string.playOnBackground)
+            getString(R.string.playOnBackground),
         )
 
         val isBookmarked = runBlocking(Dispatchers.IO) {
@@ -42,7 +42,7 @@ class PlaylistOptionsBottomSheet(
 
             // only add the bookmark option to the playlist if public
             optionsList.add(
-                getString(if (isBookmarked) R.string.remove_bookmark else R.string.add_to_bookmarks)
+                getString(if (isBookmarked) R.string.remove_bookmark else R.string.add_to_bookmarks),
             )
         } else {
             optionsList.add(context?.getString(R.string.renamePlaylist)!!)
@@ -60,7 +60,7 @@ class PlaylistOptionsBottomSheet(
                         BackgroundHelper.playOnBackground(
                             requireContext(),
                             it.url!!.toID(),
-                            playlistId = playlistId
+                            playlistId = playlistId,
                         )
                     }
                 }
@@ -69,11 +69,11 @@ class PlaylistOptionsBottomSheet(
                     val context = requireContext()
                     val playlistId = withContext(Dispatchers.IO) {
                         runCatching {
-                            PlaylistsHelper.clonePlaylist(context, playlistId)
+                            PlaylistsHelper.clonePlaylist(playlistId)
                         }.getOrNull()
                     }
                     context.toastFromMainDispatcher(
-                        if (playlistId != null) R.string.playlistCloned else R.string.server_error
+                        if (playlistId != null) R.string.playlistCloned else R.string.server_error,
                     )
                 }
                 // share the playlist

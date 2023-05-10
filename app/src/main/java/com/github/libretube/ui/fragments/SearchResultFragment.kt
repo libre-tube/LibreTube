@@ -21,11 +21,11 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.hideKeyboard
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.SearchAdapter
-import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
+import java.io.IOException
 
 class SearchResultFragment : Fragment() {
     private var _binding: FragmentSearchResultBinding? = null
@@ -45,7 +45,7 @@ class SearchResultFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentSearchResultBinding.inflate(inflater)
         return binding.root
@@ -104,6 +104,8 @@ class SearchResultFragment : Fragment() {
                     Log.e(TAG(), "HttpException, unexpected response")
                     return@repeatOnLifecycle
                 }
+
+                val binding = _binding ?: return@repeatOnLifecycle
                 searchAdapter = SearchAdapter()
                 binding.searchRecycler.adapter = searchAdapter
                 searchAdapter.submitList(response.items)
@@ -121,7 +123,7 @@ class SearchResultFragment : Fragment() {
                         RetrofitInstance.api.getSearchResultsNextPage(
                             query,
                             apiSearchFilter,
-                            nextPage!!
+                            nextPage!!,
                         )
                     }
                 } catch (e: IOException) {

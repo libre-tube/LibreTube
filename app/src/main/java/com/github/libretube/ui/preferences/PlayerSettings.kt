@@ -12,9 +12,7 @@ import com.github.libretube.R
 import com.github.libretube.compat.PictureInPictureCompat
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.helpers.LocaleHelper
-import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.base.BasePreferenceFragment
-import com.github.libretube.ui.views.SliderPreference
 
 class PlayerSettings : BasePreferenceFragment() {
     override val titleResourceId: Int = R.string.player
@@ -22,33 +20,10 @@ class PlayerSettings : BasePreferenceFragment() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.player_settings, rootKey)
 
-        val playerOrientation =
-            findPreference<ListPreference>(PreferenceKeys.FULLSCREEN_ORIENTATION)
-        val autoRotateToFullscreen =
-            findPreference<SwitchPreferenceCompat>(PreferenceKeys.AUTO_FULLSCREEN)
-
-        // only show the player orientation option if auto fullscreen is disabled
-        playerOrientation?.isEnabled = autoRotateToFullscreen?.isChecked != true
-
-        autoRotateToFullscreen?.setOnPreferenceChangeListener { _, newValue ->
-            playerOrientation?.isEnabled = newValue != true
-            true
-        }
-
         val defaultSubtitle = findPreference<ListPreference>(PreferenceKeys.DEFAULT_SUBTITLE)
         defaultSubtitle?.let { setupSubtitlePref(it) }
 
-        val systemCaptionStyle =
-            findPreference<SwitchPreferenceCompat>(PreferenceKeys.SYSTEM_CAPTION_STYLE)
         val captionSettings = findPreference<Preference>(PreferenceKeys.CAPTION_SETTINGS)
-
-        captionSettings?.isVisible =
-            PreferenceHelper.getBoolean(PreferenceKeys.SYSTEM_CAPTION_STYLE, true)
-        systemCaptionStyle?.setOnPreferenceChangeListener { _, newValue ->
-            captionSettings?.isVisible = newValue as Boolean
-            true
-        }
-
         captionSettings?.setOnPreferenceClickListener {
             try {
                 val captionSettingsIntent = Intent(Settings.ACTION_CAPTIONING_SETTINGS)
@@ -70,26 +45,6 @@ class PlayerSettings : BasePreferenceFragment() {
         val isPipEnabled = pictureInPicture.isVisible && pictureInPicture.isChecked
         pauseOnQuit?.isVisible = !isPipEnabled
         alternativePipControls?.isVisible = isPipEnabled
-
-        pictureInPicture.setOnPreferenceChangeListener { _, newValue ->
-            val isChecked = newValue as Boolean
-            pauseOnQuit?.isVisible = !isChecked
-            alternativePipControls?.isVisible = isChecked
-            true
-        }
-
-        val customBackgroundSpeed = findPreference<SwitchPreferenceCompat>(
-            PreferenceKeys.CUSTOM_PLAYBACK_SPEED
-        )
-        val backgroundSpeed = findPreference<SliderPreference>(
-            PreferenceKeys.BACKGROUND_PLAYBACK_SPEED
-        )
-        backgroundSpeed?.isEnabled = customBackgroundSpeed?.isChecked == true
-
-        customBackgroundSpeed?.setOnPreferenceChangeListener { _, newValue ->
-            backgroundSpeed?.isEnabled = newValue as Boolean
-            true
-        }
     }
 
     private fun setupSubtitlePref(preference: ListPreference) {

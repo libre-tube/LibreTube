@@ -9,5 +9,4 @@
     <string name="videoCount">%1$d วิดีโอ</string>
     <string name="version">เวอร์ชั่น %1$s</string>
     <string name="subscriptions">การติดตาม</string>
-    <string name="vlc">เปิดใน VLC</string>
 </resources>

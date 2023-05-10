@@ -36,17 +36,6 @@ import com.github.libretube.receivers.NotificationReceiver
 import com.github.libretube.receivers.NotificationReceiver.Companion.ACTION_DOWNLOAD_PAUSE
 import com.github.libretube.receivers.NotificationReceiver.Companion.ACTION_DOWNLOAD_RESUME
 import com.github.libretube.ui.activities.MainActivity
-import java.io.File
-import java.net.HttpURLConnection
-import java.net.SocketTimeoutException
-import java.net.URL
-import java.nio.file.Path
-import java.nio.file.StandardOpenOption
-import java.util.concurrent.Executors
-import kotlin.io.path.absolute
-import kotlin.io.path.createFile
-import kotlin.io.path.deleteIfExists
-import kotlin.io.path.fileSize
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -59,6 +48,17 @@ import kotlinx.coroutines.withContext
 import okio.buffer
 import okio.sink
 import okio.source
+import java.io.File
+import java.net.HttpURLConnection
+import java.net.SocketTimeoutException
+import java.net.URL
+import java.nio.file.Path
+import java.nio.file.StandardOpenOption
+import java.util.concurrent.Executors
+import kotlin.io.path.absolute
+import kotlin.io.path.createFile
+import kotlin.io.path.deleteIfExists
+import kotlin.io.path.fileSize
 
 /**
  * Download service with custom implementation of downloading using [HttpURLConnection].
@@ -111,13 +111,13 @@ class DownloadService : LifecycleService() {
                     streams.description,
                     streams.uploader,
                     streams.uploadDate,
-                    thumbnailTargetPath
+                    thumbnailTargetPath,
                 )
                 Database.downloadDao().insertDownload(download)
                 ImageHelper.downloadImage(
                     this@DownloadService,
                     streams.thumbnailUrl,
-                    thumbnailTargetPath
+                    thumbnailTargetPath,
                 )
 
                 val downloadItems = streams.toDownloadItems(
@@ -127,7 +127,7 @@ class DownloadService : LifecycleService() {
                     videoQuality,
                     audioFormat,
                     audioQuality,
-                    subtitleCode
+                    subtitleCode,
                 )
                 downloadItems.forEach { start(it) }
             } catch (e: Exception) {
@@ -230,8 +230,8 @@ class DownloadService : LifecycleService() {
                         item.id to DownloadStatus.Progress(
                             lastRead,
                             totalRead,
-                            item.downloadSize
-                        )
+                            item.downloadSize,
+                        ),
                     )
                     if (item.downloadSize != -1L &&
                         System.currentTimeMillis() / 1000 > lastTime
@@ -239,16 +239,16 @@ class DownloadService : LifecycleService() {
                         notificationBuilder
                             .setContentText(
                                 totalRead.formatAsFileSize() + " / " +
-                                    item.downloadSize.formatAsFileSize()
+                                    item.downloadSize.formatAsFileSize(),
                             )
                             .setProgress(
                                 item.downloadSize.toInt(),
                                 totalRead.toInt(),
-                                false
+                                false,
                             )
                         notificationManager.notify(
                             item.getNotificationId(),
-                            notificationBuilder.build()
+                            notificationBuilder.build(),
                         )
                         lastTime = System.currentTimeMillis() / 1000
                     }
@@ -377,7 +377,7 @@ class DownloadService : LifecycleService() {
 
     private fun setResumeNotification(
         notificationBuilder: NotificationCompat.Builder,
-        item: DownloadItem
+        item: DownloadItem,
     ) {
         notificationBuilder
             .setSmallIcon(android.R.drawable.stat_sys_download)
@@ -392,7 +392,7 @@ class DownloadService : LifecycleService() {
     private fun setPauseNotification(
         notificationBuilder: NotificationCompat.Builder,
         item: DownloadItem,
-        isCompleted: Boolean = false
+        isCompleted: Boolean = false,
     ) {
         notificationBuilder
             .setProgress(0, 0, false)
@@ -420,7 +420,7 @@ class DownloadService : LifecycleService() {
         return NotificationCompat.Action.Builder(
             R.drawable.ic_play,
             getString(R.string.resume),
-            PendingIntentCompat.getBroadcast(this, id, intent, FLAG_UPDATE_CURRENT, false)
+            PendingIntentCompat.getBroadcast(this, id, intent, FLAG_UPDATE_CURRENT, false),
         ).build()
     }
 
@@ -432,7 +432,7 @@ class DownloadService : LifecycleService() {
         return NotificationCompat.Action.Builder(
             R.drawable.ic_pause,
             getString(R.string.pause),
-            PendingIntentCompat.getBroadcast(this, id, intent, FLAG_UPDATE_CURRENT, false)
+            PendingIntentCompat.getBroadcast(this, id, intent, FLAG_UPDATE_CURRENT, false),
         ).build()
     }
 

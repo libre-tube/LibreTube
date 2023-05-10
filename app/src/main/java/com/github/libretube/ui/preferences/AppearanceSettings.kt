@@ -44,7 +44,7 @@ class AppearanceSettings : BasePreferenceFragment() {
         val changeIcon = findPreference<Preference>(PreferenceKeys.APP_ICON)
         val iconPref = PreferenceHelper.getString(
             PreferenceKeys.APP_ICON,
-            IconsSheetAdapter.Companion.AppIcon.Default.activityAlias
+            IconsSheetAdapter.Companion.AppIcon.Default.activityAlias,
         )
         IconsSheetAdapter.availableIcons.firstOrNull { it.activityAlias == iconPref }?.let {
             changeIcon?.summary = getString(it.nameResource)
@@ -63,10 +63,7 @@ class AppearanceSettings : BasePreferenceFragment() {
 
         val navBarOptions = findPreference<Preference>(PreferenceKeys.NAVBAR_ITEMS)
         navBarOptions?.setOnPreferenceClickListener {
-            NavBarOptionsDialog().show(
-                childFragmentManager,
-                null
-            )
+            NavBarOptionsDialog().show(childFragmentManager, null)
             true
         }
 

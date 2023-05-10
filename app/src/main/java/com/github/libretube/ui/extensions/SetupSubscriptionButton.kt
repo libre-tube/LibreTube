@@ -15,7 +15,7 @@ fun TextView.setupSubscriptionButton(
     channelId: String?,
     channelName: String?,
     notificationBell: MaterialButton? = null,
-    isSubscribed: Boolean? = null
+    isSubscribed: Boolean? = null,
 ) {
     if (channelId == null) return
 

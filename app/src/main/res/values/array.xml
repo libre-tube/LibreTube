@@ -286,6 +286,15 @@
         <item>@string/yt_shorts</item>
     </string-array>
 
+    <string-array name="playlistSortOptions">
+        <item>@string/least_recent</item>
+        <item>@string/most_recent</item>
+        <item>@string/duration</item>
+        <item>@string/duration_reversed</item>
+        <item>@string/playlist_name_az</item>
+        <item>@string/playlist_name_za</item>
+    </string-array>
+
     <string-array name="requiredNetwork">
         <item>@string/network_all</item>
         <item>@string/network_wifi</item>
@@ -346,24 +355,6 @@
         <item>256</item>
         <item>512</item>
         <item />
-    </string-array>
-
-    <string-array name="loadingInterval">
-        <item>1KiB</item>
-        <item>16KiB</item>
-        <item>64KiB</item>
-        <item>128KiB</item>
-        <item>256KiB</item>
-        <item>@string/default_load_interval</item>
-    </string-array>
-
-    <string-array name="loadingIntervalValues">
-        <item>1</item>
-        <item>16</item>
-        <item>64</item>
-        <item>128</item>
-        <item>256</item>
-        <item>default</item>
     </string-array>
 
     <string-array name="playlistSortingOptions">

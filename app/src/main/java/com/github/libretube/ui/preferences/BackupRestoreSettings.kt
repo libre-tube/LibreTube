@@ -11,10 +11,11 @@ import com.github.libretube.helpers.ImportHelper
 import com.github.libretube.obj.BackupFile
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.BackupDialog
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class BackupRestoreSettings : BasePreferenceFragment() {
     private val backupDateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss")
@@ -25,14 +26,14 @@ class BackupRestoreSettings : BasePreferenceFragment() {
     // backup and restore database
     private val getBackupFile = registerForActivityResult(ActivityResultContracts.GetContent()) {
         it?.let {
-            lifecycleScope.launch(Dispatchers.IO) {
+            CoroutineScope(Dispatchers.IO).launch {
                 BackupHelper.restoreAdvancedBackup(requireContext(), it)
             }
         }
     }
     private val createBackupFile = registerForActivityResult(CreateDocument(JSON)) {
         it?.let {
-            lifecycleScope.launch(Dispatchers.IO) {
+            CoroutineScope(Dispatchers.IO).launch {
                 BackupHelper.createAdvancedBackup(requireContext(), it, backupFile)
             }
         }
@@ -42,7 +43,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
      * result listeners for importing and exporting subscriptions
      */
     private val getSubscriptionsFile = registerForActivityResult(
-        ActivityResultContracts.GetContent()
+        ActivityResultContracts.GetContent(),
     ) {
         it?.let {
             lifecycleScope.launch(Dispatchers.IO) {
@@ -63,7 +64,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
      */
     private val getPlaylistsFile = registerForActivityResult(ActivityResultContracts.GetContent()) {
         it?.let {
-            lifecycleScope.launch(Dispatchers.IO) {
+            CoroutineScope(Dispatchers.IO).launch {
                 ImportHelper.importPlaylists(requireActivity(), it)
             }
         }

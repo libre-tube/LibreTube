@@ -10,5 +10,5 @@ data class PreviewFrames(
     val totalCount: Int? = null,
     val durationPerFrame: Int? = null,
     val framesPerPageX: Int? = null,
-    val framesPerPageY: Int? = null
+    val framesPerPageY: Int? = null,
 )

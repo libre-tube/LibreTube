@@ -30,13 +30,13 @@ class SearchAdapter : ListAdapter<ContentItem, SearchViewHolder>(SearchCallback)
 
         return when (viewType) {
             0 -> SearchViewHolder(
-                VideoRowBinding.inflate(layoutInflater, parent, false)
+                VideoRowBinding.inflate(layoutInflater, parent, false),
             )
             1 -> SearchViewHolder(
-                ChannelRowBinding.inflate(layoutInflater, parent, false)
+                ChannelRowBinding.inflate(layoutInflater, parent, false),
             )
             2 -> SearchViewHolder(
-                PlaylistsRowBinding.inflate(layoutInflater, parent, false)
+                PlaylistsRowBinding.inflate(layoutInflater, parent, false),
             )
             else -> throw IllegalArgumentException("Invalid type")
         }
@@ -80,7 +80,7 @@ class SearchAdapter : ListAdapter<ContentItem, SearchViewHolder>(SearchCallback)
                 videoInfo.text = root.context.getString(
                     R.string.normal_views,
                     viewsString,
-                    uploadDate
+                    uploadDate,
                 )
                 channelName.text = item.uploaderName
             }
@@ -93,7 +93,7 @@ class SearchAdapter : ListAdapter<ContentItem, SearchViewHolder>(SearchCallback)
                 VideoOptionsBottomSheet(videoId, videoName)
                     .show(
                         (root.context as BaseActivity).supportFragmentManager,
-                        VideoOptionsBottomSheet::class.java.name
+                        VideoOptionsBottomSheet::class.java.name,
                     )
                 true
             }
@@ -150,7 +150,7 @@ class SearchAdapter : ListAdapter<ContentItem, SearchViewHolder>(SearchCallback)
                 PlaylistOptionsBottomSheet(playlistId, playlistName, PlaylistType.PUBLIC)
                     .show(
                         (root.context as BaseActivity).supportFragmentManager,
-                        PlaylistOptionsBottomSheet::class.java.name
+                        PlaylistOptionsBottomSheet::class.java.name,
                     )
                 true
             }

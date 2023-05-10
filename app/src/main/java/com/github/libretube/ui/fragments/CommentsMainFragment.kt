@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +12,7 @@ import com.github.libretube.R
 import com.github.libretube.databinding.FragmentCommentsBinding
 import com.github.libretube.ui.adapters.CommentsAdapter
 import com.github.libretube.ui.models.CommentsViewModel
+import com.github.libretube.ui.sheets.CommentsSheet
 
 class CommentsMainFragment : Fragment() {
     private var _binding: FragmentCommentsBinding? = null
@@ -23,7 +25,7 @@ class CommentsMainFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentCommentsBinding.inflate(inflater, container, false)
         return binding.root
@@ -32,11 +34,25 @@ class CommentsMainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.commentsRV.layoutManager = LinearLayoutManager(requireContext())
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding.commentsRV.layoutManager = layoutManager
         binding.commentsRV.setItemViewCacheSize(20)
 
         binding.commentsRV.viewTreeObserver.addOnScrollChangedListener {
-            if (_binding?.commentsRV?.canScrollVertically(1) == false) {
+            val binding = _binding ?: return@addOnScrollChangedListener
+            // save the last scroll position to become used next time when the sheet is opened
+            viewModel.currentCommentsPosition = layoutManager.findFirstVisibleItemPosition()
+
+            // hide or show the scroll to top button
+            val commentsSheetBinding = (parentFragment as? CommentsSheet)?.binding
+            commentsSheetBinding?.btnScrollToTop?.isVisible = viewModel.currentCommentsPosition != 0
+            commentsSheetBinding?.btnScrollToTop?.setOnClickListener {
+                // scroll back to the top / first comment
+                binding.commentsRV.smoothScrollToPosition(0)
+                viewModel.currentCommentsPosition = 0
+            }
+
+            if (!binding.commentsRV.canScrollVertically(1)) {
                 viewModel.fetchNextComments()
             }
         }
@@ -45,7 +61,7 @@ class CommentsMainFragment : Fragment() {
             this,
             viewModel.videoId!!,
             viewModel.commentsPage.value?.comments.orEmpty().toMutableList(),
-            handleLink = viewModel.handleLink
+            handleLink = viewModel.handleLink,
         ) {
             viewModel.commentsSheetDismiss?.invoke()
         }
@@ -54,6 +70,8 @@ class CommentsMainFragment : Fragment() {
         if (viewModel.commentsPage.value?.comments.orEmpty().isEmpty()) {
             binding.progress.visibility = View.VISIBLE
             viewModel.fetchComments()
+        } else {
+            binding.commentsRV.scrollToPosition(viewModel.currentCommentsPosition)
         }
 
         // listen for new comments to be loaded
@@ -71,7 +89,7 @@ class CommentsMainFragment : Fragment() {
             }
             commentsAdapter.updateItems(
                 // only add the new comments to the recycler view
-                it.comments.subList(commentsAdapter.itemCount, it.comments.size)
+                it.comments.subList(commentsAdapter.itemCount, it.comments.size),
             )
         }
     }

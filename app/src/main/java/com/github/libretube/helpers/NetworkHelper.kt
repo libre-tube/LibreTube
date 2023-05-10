@@ -10,6 +10,7 @@ object NetworkHelper {
     /**
      * Detect whether network is available
      */
+    @Suppress("DEPRECATION")
     fun isNetworkAvailable(context: Context): Boolean {
         // In case we are using a VPN, we return true since we might be using reverse tethering
         val connectivityManager = context.getSystemService<ConnectivityManager>() ?: return false
@@ -36,6 +37,7 @@ object NetworkHelper {
      * @param context Context of the application
      * @return whether the network is metered or not
      */
+    @Suppress("DEPRECATION")
     fun isNetworkMetered(context: Context): Boolean {
         val connectivityManager = context.getSystemService<ConnectivityManager>()!!
         val activeNetworkInfo = connectivityManager.activeNetworkInfo

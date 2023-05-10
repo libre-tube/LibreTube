@@ -1,6 +1,11 @@
 from os import system as run, listdir, remove
+from json import load
 import tgconfig
 
+with open("../.github/commit.json") as f:
+    data = load(f)
+
+message = f"Commit {data['sha'][0:7]}, signed off by: {data['commit']['author']['name']}"
 
 files, signed_files, unsigned_files = listdir(), [], []
 for file in files:
@@ -15,7 +20,7 @@ if len(signed_files):
 
 if tgconfig.GH_REPO.lower() == "libre-tube/libretube":
     run("git add -f *")
-    run('git commit -m "WORKFLOW: ALPHA BUILDS"')
+    run(f"git commit -m \"{message}\"")
     run("git push -u")
 else:
     print("Official Repo not Detected")

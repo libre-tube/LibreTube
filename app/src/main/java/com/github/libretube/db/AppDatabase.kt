@@ -37,15 +37,15 @@ import com.github.libretube.db.obj.WatchPosition
         LocalPlaylistItem::class,
         Download::class,
         DownloadItem::class,
-        SubscriptionGroup::class
+        SubscriptionGroup::class,
     ],
     version = 11,
     autoMigrations = [
         AutoMigration(from = 7, to = 8),
         AutoMigration(from = 8, to = 9),
         AutoMigration(from = 9, to = 10),
-        AutoMigration(from = 10, to = 11)
-    ]
+        AutoMigration(from = 10, to = 11),
+    ],
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
