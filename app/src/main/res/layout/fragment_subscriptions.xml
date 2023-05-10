@@ -98,36 +98,6 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp">
-
-                        <TextView
-                            android:id="@+id/filterTV"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="start"
-                            android:layout_marginStart="5dp"
-                            android:drawablePadding="5dp"
-                            android:paddingHorizontal="10dp"
-                            android:text="@string/all"
-                            android:textSize="16sp"
-                            app:drawableEndCompat="@drawable/ic_filter" />
-
-                        <TextView
-                            android:id="@+id/sortTV"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end"
-                            android:drawablePadding="5dp"
-                            android:paddingHorizontal="10dp"
-                            android:text="@string/most_recent"
-                            android:textSize="16sp"
-                            app:drawableEndCompat="@drawable/ic_sort" />
-
-                    </FrameLayout>
-
                     <HorizontalScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -138,6 +108,20 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/filterTV"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="5dp"
+                                android:background="@drawable/rounded_ripple"
+                                android:drawablePadding="5dp"
+                                android:paddingHorizontal="10dp"
+                                android:paddingVertical="4dp"
+                                android:text="@string/all"
+                                android:textSize="16sp"
+                                app:drawableEndCompat="@drawable/ic_filter" />
 
                             <ImageView
                                 android:id="@+id/edit_groups"

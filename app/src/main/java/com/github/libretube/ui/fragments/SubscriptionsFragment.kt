@@ -42,11 +42,6 @@ class SubscriptionsFragment : Fragment() {
     private var selectedFilterGroup: Int = 0
 
     var subscriptionsAdapter: VideosAdapter? = null
-    private var selectedSortOrder = PreferenceHelper.getInt(PreferenceKeys.FEED_SORT_ORDER, 0)
-        set(value) {
-            PreferenceHelper.putInt(PreferenceKeys.FEED_SORT_ORDER, value)
-            field = value
-        }
     private var selectedFilter = PreferenceHelper.getInt(PreferenceKeys.SELECTED_FEED_FILTER, 0)
         set(value) {
             PreferenceHelper.putInt(PreferenceKeys.SELECTED_FEED_FILTER, value)
@@ -71,7 +66,6 @@ class SubscriptionsFragment : Fragment() {
         )
 
         // update the text according to the current order and filter
-        binding.sortTV.text = resources.getStringArray(R.array.sortOptions)[selectedSortOrder]
         binding.filterTV.text = resources.getStringArray(R.array.filterOptions)[selectedFilter]
 
         binding.subRefresh.isEnabled = true
@@ -104,18 +98,6 @@ class SubscriptionsFragment : Fragment() {
             subscriptionsAdapter = null
             viewModel.fetchSubscriptions()
             viewModel.fetchFeed()
-        }
-
-        binding.sortTV.setOnClickListener {
-            val sortOptions = resources.getStringArray(R.array.sortOptions)
-
-            BaseBottomSheet().apply {
-                setSimpleItems(sortOptions.toList()) { index ->
-                    binding.sortTV.text = sortOptions[index]
-                    selectedSortOrder = index
-                    showFeed()
-                }
-            }.show(childFragmentManager)
         }
 
         binding.filterTV.setOnClickListener {
@@ -242,28 +224,15 @@ class SubscriptionsFragment : Fragment() {
                         removeWatchVideosFromFeed(streams)
                     }
                 }
-            }
-
-        // sort the feed
-        val sortedFeed = when (selectedSortOrder) {
-            0 -> feed
-            1 -> feed.reversed()
-            2 -> feed.sortedBy { it.views }.reversed()
-            3 -> feed.sortedBy { it.views }
-            4 -> feed.sortedBy { it.uploaderName }
-            5 -> feed.sortedBy { it.uploaderName }.reversed()
-            else -> feed
-        }.toMutableList()
+            }.toMutableList()
 
         // add an "all caught up item"
-        if (selectedSortOrder == 0) {
-            val lastCheckedFeedTime = PreferenceHelper.getLastCheckedFeedTime()
-            val caughtUpIndex = feed.indexOfFirst {
-                (it.uploaded ?: 0L) / 1000 < lastCheckedFeedTime
-            }
-            if (caughtUpIndex > 0) {
-                sortedFeed.add(caughtUpIndex, StreamItem(type = StreamItem.CAUGHT_TYPE_KEY))
-            }
+        val lastCheckedFeedTime = PreferenceHelper.getLastCheckedFeedTime()
+        val caughtUpIndex = feed.indexOfFirst {
+            (it.uploaded ?: 0L) / 1000 < lastCheckedFeedTime
+        }
+        if (caughtUpIndex > 0) {
+            feed.add(caughtUpIndex, StreamItem(type = StreamItem.CAUGHT_TYPE_KEY))
         }
 
         binding.subChannelsContainer.visibility = View.GONE
@@ -275,10 +244,10 @@ class SubscriptionsFragment : Fragment() {
         binding.subProgress.visibility = View.GONE
 
         if (subscriptionsAdapter == null) {
-            subscriptionsAdapter = VideosAdapter(sortedFeed.toMutableList())
+            subscriptionsAdapter = VideosAdapter(feed)
             binding.subFeed.adapter = subscriptionsAdapter
         } else {
-            val newVideos = sortedFeed.subList(subscriptionsAdapter?.itemCount ?: 0, sortedFeed.size)
+            val newVideos = feed.subList(subscriptionsAdapter?.itemCount ?: 0, feed.size)
             subscriptionsAdapter?.insertItems(newVideos)
         }
 
