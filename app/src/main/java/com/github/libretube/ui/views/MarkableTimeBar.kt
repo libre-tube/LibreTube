@@ -7,7 +7,6 @@ import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.view.marginLeft
-import com.github.libretube.R
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.dpToPx
@@ -56,7 +55,10 @@ class MarkableTimeBar(
                     canvas.height - marginY,
                 ),
                 Paint().apply {
-                    color = ThemeHelper.getThemeColor(context, R.attr.colorOnSecondary)
+                    color = ThemeHelper.getThemeColor(
+                        context,
+                        com.google.android.material.R.attr.colorOnSecondary,
+                    )
                 },
             )
         }

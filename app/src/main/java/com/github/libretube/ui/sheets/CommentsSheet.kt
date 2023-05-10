@@ -102,7 +102,7 @@ class CommentsSheet : ExpandedBottomSheet() {
 
         // BottomSheetDialogFragment passthrough user outside touch event
         dialog.setOnShowListener {
-            dialog.findViewById<View>(R.id.touch_outside)?.apply {
+            dialog.findViewById<View>(com.google.android.material.R.id.touch_outside)?.apply {
                 setOnTouchListener { v, event ->
                     event.setLocation(event.rawX - v.x, event.rawY - v.y)
                     activity?.dispatchTouchEvent(event)

@@ -10,6 +10,5 @@ fun Path.toAndroidUriOrNull(): Uri? {
 }
 
 fun Path.toAndroidUri(): Uri {
-    @Suppress("NewApi") // The Path class is desugared.
     return toFile().toUri()
 }

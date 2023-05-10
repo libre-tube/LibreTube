@@ -35,7 +35,6 @@ data class Streams(
     val uploaderSubscriberCount: Long = 0,
     val previewFrames: List<PreviewFrames> = emptyList(),
 ) {
-    @Suppress("NewApi") // The Paths class is desugared.
     fun toDownloadItems(
         videoId: String,
         fileName: String,

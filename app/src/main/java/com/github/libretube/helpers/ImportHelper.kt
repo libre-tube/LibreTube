@@ -44,6 +44,7 @@ object ImportHelper {
     /**
      * Get a list of channel IDs from a file [Uri]
      */
+    @OptIn(ExperimentalSerializationApi::class)
     private fun getChannelsFromUri(activity: Activity, uri: Uri): List<String> {
         return when (val fileType = activity.contentResolver.getType(uri)) {
             "application/json", "application/*", "application/octet-stream" -> {
@@ -72,6 +73,7 @@ object ImportHelper {
     /**
      * Write the text to the document
      */
+    @OptIn(ExperimentalSerializationApi::class)
     suspend fun exportSubscriptions(activity: Activity, uri: Uri) {
         val token = PreferenceHelper.getToken()
         val subs = if (token.isNotEmpty()) {
@@ -149,6 +151,7 @@ object ImportHelper {
     /**
      * Export Playlists
      */
+    @OptIn(ExperimentalSerializationApi::class)
     suspend fun exportPlaylists(activity: Activity, uri: Uri) {
         val playlists = PlaylistsHelper.exportPlaylists()
         val playlistFile = ImportPlaylistFile("Piped", 1, playlists)
