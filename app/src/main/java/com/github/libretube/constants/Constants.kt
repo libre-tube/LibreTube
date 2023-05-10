@@ -57,3 +57,8 @@ const val DATABASE_NAME = "LibreTubeDatabase"
  * New Streams notifications
  */
 const val NOTIFICATION_WORK_NAME = "NotificationService"
+
+/**
+ * Feed pagination limit per page
+ */
+const val FEED_PAGE_ITEMS_LIMIT = 20

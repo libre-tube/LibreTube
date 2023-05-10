@@ -18,6 +18,7 @@ import com.github.libretube.api.obj.Subscribe
 import com.github.libretube.api.obj.Subscribed
 import com.github.libretube.api.obj.Subscription
 import com.github.libretube.api.obj.Token
+import com.github.libretube.constants.FEED_PAGE_ITEMS_LIMIT
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -109,19 +110,22 @@ interface PipedApi {
     @GET("feed")
     suspend fun getFeed(
         @Query("authToken") token: String?,
-        @Query("start") start: Long?
+        @Query("start") start: Long?,
+        @Query("limit") limit: Int? = FEED_PAGE_ITEMS_LIMIT
     ): List<StreamItem>
 
     @GET("feed/unauthenticated")
     suspend fun getUnauthenticatedFeed(
         @Query("channels") channels: String,
-        @Query("start") start: Long?
+        @Query("start") start: Long?,
+        @Query("limit") limit: Int? = FEED_PAGE_ITEMS_LIMIT
     ): List<StreamItem>
 
     @POST("feed/unauthenticated")
     suspend fun getUnauthenticatedFeed(
         @Body channels: List<String>,
-        @Query("start") start: Long?
+        @Query("start") start: Long?,
+        @Query("limit") limit: Int? = FEED_PAGE_ITEMS_LIMIT
     ): List<StreamItem>
 
     @GET("subscribed")
