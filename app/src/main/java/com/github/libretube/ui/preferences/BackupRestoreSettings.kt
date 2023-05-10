@@ -62,8 +62,8 @@ class BackupRestoreSettings : BasePreferenceFragment() {
     /**
      * result listeners for importing and exporting playlists
      */
-    private val getPlaylistsFile = registerForActivityResult(ActivityResultContracts.GetContent()) {
-        it?.let {
+    private val getPlaylistsFile = registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) {
+        it?.forEach {
             CoroutineScope(Dispatchers.IO).launch {
                 ImportHelper.importPlaylists(requireActivity(), it)
             }
@@ -94,7 +94,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
 
         val importPlaylists = findPreference<Preference>("import_playlists")
         importPlaylists?.setOnPreferenceClickListener {
-            getPlaylistsFile.launch("*/*")
+            getPlaylistsFile.launch(arrayOf("*/*"))
             true
         }
 
