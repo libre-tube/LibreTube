@@ -4,11 +4,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PreviewFrames(
-    val urls: List<String>? = null,
-    val frameWidth: Int? = null,
-    val frameHeight: Int? = null,
-    val totalCount: Int? = null,
-    val durationPerFrame: Int? = null,
-    val framesPerPageX: Int? = null,
-    val framesPerPageY: Int? = null,
+    val urls: List<String>,
+    val frameWidth: Int,
+    val frameHeight: Int,
+    val totalCount: Int,
+    val durationPerFrame: Long,
+    val framesPerPageX: Int,
+    val framesPerPageY: Int
 )

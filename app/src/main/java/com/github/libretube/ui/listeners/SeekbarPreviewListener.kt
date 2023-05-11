@@ -93,12 +93,12 @@ class SeekbarPreviewListener(
     private fun getPreviewFrame(position: Long): PreviewFrame? {
         var startPosition: Long = 0
         // get the frames with the best quality
-        val frames = previewFrames.sortedBy { it.frameHeight }.lastOrNull()
+        val frames = previewFrames.maxByOrNull { it.frameHeight }
         frames?.urls?.forEach { url ->
             // iterate over all available positions and find the one matching the current position
-            for (y in 0 until frames.framesPerPageY!!) {
-                for (x in 0 until frames.framesPerPageX!!) {
-                    val endPosition = startPosition + frames.durationPerFrame!!.toLong()
+            for (y in 0 until frames.framesPerPageY) {
+                for (x in 0 until frames.framesPerPageX) {
+                    val endPosition = startPosition + frames.durationPerFrame
                     if (position in startPosition until endPosition) {
                         return PreviewFrame(url, x, y, frames.framesPerPageX, frames.framesPerPageY)
                     }
