@@ -428,4 +428,5 @@
     <string name="duration">时长</string>
     <string name="playlist_name_az">播放列表名（A-Z）</string>
     <string name="duration_reversed">时长（倒序）</string>
+    <string name="shorts_notifications">短视频通知</string>
 </resources>

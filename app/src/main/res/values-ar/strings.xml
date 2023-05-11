@@ -443,4 +443,5 @@
     <string name="playlist_name_za">اسم قائمة التشغيل (ي-أ)</string>
     <string name="duration">المدة</string>
     <string name="duration_reversed">المدة (معكوسة)</string>
+    <string name="shorts_notifications">تنبيهات للفيديوهات القصيرة</string>
 </resources>

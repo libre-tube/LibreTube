@@ -434,4 +434,5 @@
     <string name="playlist_name_za">Numele listei de redare (Z-A)</string>
     <string name="duration">Durată</string>
     <string name="duration_reversed">Durată (inversată)</string>
+    <string name="shorts_notifications">Notificări pentru Shorts</string>
 </resources>

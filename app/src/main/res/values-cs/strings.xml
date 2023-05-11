@@ -434,4 +434,5 @@
     <string name="duration_reversed">Délka (obráceně)</string>
     <string name="playlist_name_az">Název playlistu (A-Z)</string>
     <string name="duration">Délka</string>
+    <string name="shorts_notifications">Oznámení pro Shorts</string>
 </resources>

@@ -437,4 +437,5 @@
     <string name="playlist_name_az">Назва добірки (А-Я)</string>
     <string name="duration">Тривалість</string>
     <string name="duration_reversed">Тривалість (у зворотному порядку)</string>
+    <string name="shorts_notifications">Сповіщення для shorts</string>
 </resources>

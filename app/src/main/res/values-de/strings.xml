@@ -431,4 +431,5 @@
     <string name="playlist_name_za">Playlist-Name (Z-A)</string>
     <string name="duration">Dauer (aufsteigend)</string>
     <string name="duration_reversed">Dauer (absteigend)</string>
+    <string name="shorts_notifications">Benachrichtigungen für Shorts</string>
 </resources>

@@ -279,7 +279,7 @@
     <string name="channel_name_az">ଚ୍ୟାନ୍ନେଲ ନାମ</string>
     <string name="export_subscriptions">ସଦସ୍ୟତା ରପ୍ତାନି କରନ୍ତୁ</string>
     <string name="translate">ଅନୁବାଦ</string>
-    <string name="error_occurred">ଭୁଲ୍</string>
+    <string name="error_occurred">ତ୍ରୁଟି</string>
     <string name="share_with_time">ସମୟ କୋଡ୍ ସହିତ ଅଂଶୀଦାର କରନ୍ତୁ</string>
     <string name="misc">ବିବିଧ</string>
     <string name="background_mode">ପୃଷ୍ଠଭୂମି ସ୍ଥିତି</string>
@@ -431,4 +431,5 @@
     <string name="duration">ଅବଧି</string>
     <string name="duration_reversed">ଅବଧି (ଓଲଟା)</string>
     <string name="playlist_name_az">ପ୍ଲେଲିଷ୍ଟ ନାମ (A-Z)</string>
+    <string name="shorts_notifications">ସର୍ଟସ୍ ପାଇଁ ବିଜ୍ଞପ୍ତି</string>
 </resources>

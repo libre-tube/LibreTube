@@ -437,4 +437,5 @@
     <string name="playlist_name_az">Название плейлиста (А-Я)</string>
     <string name="playlist_name_za">Название плейлиста (Я-А)</string>
     <string name="duration">Продолжительность</string>
+    <string name="shorts_notifications">Уведомления для shorts</string>
 </resources>
