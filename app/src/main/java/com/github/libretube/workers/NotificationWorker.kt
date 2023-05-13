@@ -25,11 +25,11 @@ import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.views.TimePickerPreference
+import java.time.LocalTime
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.withContext
-import java.time.LocalTime
 
 /**
  * The notification worker which checks for new streams in a certain frequency
