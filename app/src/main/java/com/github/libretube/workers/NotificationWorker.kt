@@ -167,7 +167,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
     private suspend fun createStreamNotification(
         group: String,
         stream: StreamItem,
-    ): Triple<Int, Long?, Notification> {
+    ): Triple<Int, Long?, Notification> { // Notification ID, uploaded date and notification object
         val videoId = stream.url!!.toID()
         val intent = Intent(applicationContext, MainActivity::class.java)
             .setFlags(INTENT_FLAGS)
