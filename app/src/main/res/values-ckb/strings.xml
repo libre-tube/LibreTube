@@ -425,4 +425,5 @@
     <string name="audio_player">لێدەری دەنگ</string>
     <string name="download_channel_description">پیشاندانی ئاگادارکردنەوە لەکاتی داگرتنی فایلەکان.</string>
     <string name="play_automatically">لێدان بە خۆکاری</string>
+    <string name="shorts_notifications">ئاگادارکردنەوە بۆ ڤیدیۆ کورتەکان</string>
 </resources>
