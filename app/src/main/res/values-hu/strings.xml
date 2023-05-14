@@ -431,4 +431,5 @@
     <string name="duration_reversed">Időtartam (fordított)</string>
     <string name="unlimited_search_history">Korlátlan keresési előzmények</string>
     <string name="playlist_name_za">Lejátszási lista neve (Z-A)</string>
+    <string name="shorts_notifications">Értesítés a rövidekhez</string>
 </resources>
