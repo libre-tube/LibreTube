@@ -131,6 +131,8 @@ class MainActivity : BaseActivity() {
             false
         }
 
+        if (binding.bottomNav.menu.children.none { it.itemId == startFragmentId }) deselectBottomBarItems()
+
         binding.toolbar.title = ThemeHelper.getStyledAppName(this)
 
         // handle error logs
@@ -177,6 +179,17 @@ class MainActivity : BaseActivity() {
         }
 
         loadIntentData()
+    }
+
+    /**
+     * Deselect all bottom bar items
+     */
+    fun deselectBottomBarItems() {
+        binding.bottomNav.menu.setGroupCheckable(0, true, false)
+        for (child in binding.bottomNav.menu.children) {
+            child.isChecked = false
+        }
+        binding.bottomNav.menu.setGroupCheckable(0, true, true)
     }
 
     /**
