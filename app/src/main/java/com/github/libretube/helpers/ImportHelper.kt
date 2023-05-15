@@ -9,10 +9,15 @@ import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.db.DatabaseHolder.Database
+import com.github.libretube.enums.SupportedClient
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
+import com.github.libretube.obj.FreetubeSubscription
+import com.github.libretube.obj.FreetubeSubscriptions
 import com.github.libretube.obj.ImportPlaylist
 import com.github.libretube.obj.ImportPlaylistFile
+import com.github.libretube.obj.LibreTubeSubscription
+import com.github.libretube.obj.LibreTubeSubscriptions
 import com.github.libretube.obj.NewPipeSubscription
 import com.github.libretube.obj.NewPipeSubscriptions
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -24,9 +29,9 @@ object ImportHelper {
     /**
      * Import subscriptions by a file uri
      */
-    suspend fun importSubscriptions(activity: Activity, uri: Uri) {
+    suspend fun importSubscriptions(activity: Activity, uri: Uri, supportedClient: SupportedClient) {
         try {
-            SubscriptionHelper.importSubscriptions(getChannelsFromUri(activity, uri))
+            SubscriptionHelper.importSubscriptions(getChannelsFromUri(activity, uri, supportedClient))
             activity.toastFromMainDispatcher(R.string.importsuccess)
         } catch (e: IllegalArgumentException) {
             Log.e(TAG(), e.toString())
@@ -45,15 +50,34 @@ object ImportHelper {
      * Get a list of channel IDs from a file [Uri]
      */
     @OptIn(ExperimentalSerializationApi::class)
-    private fun getChannelsFromUri(activity: Activity, uri: Uri): List<String> {
+    private fun getChannelsFromUri(activity: Activity, uri: Uri, supportedClient: SupportedClient): List<String> {
         return when (val fileType = activity.contentResolver.getType(uri)) {
             "application/json", "application/*", "application/octet-stream" -> {
-                // NewPipe subscriptions format
-                val subscriptions = activity.contentResolver.openInputStream(uri)?.use {
-                    JsonHelper.json.decodeFromStream<NewPipeSubscriptions>(it)
-                }
-                subscriptions?.subscriptions.orEmpty().map {
-                    it.url.replace("https://www.youtube.com/channel/", "")
+                when (supportedClient) {
+                    SupportedClient.NEWPIPE -> {
+                        val subscriptions = activity.contentResolver.openInputStream(uri)?.use {
+                            JsonHelper.json.decodeFromStream<NewPipeSubscriptions>(it)
+                        }
+                        subscriptions?.subscriptions.orEmpty().map {
+                            it.url.replace("https://www.youtube.com/channel/", "")
+                        }
+                    }
+                    SupportedClient.LIBRETUBE -> {
+                        val subscriptions = activity.contentResolver.openInputStream(uri)?.use {
+                            JsonHelper.json.decodeFromStream<LibreTubeSubscriptions>(it)
+                        }
+                        subscriptions?.subscriptions.orEmpty().map {
+                            it.url.replace("https://www.youtube.com/channel/", "")
+                        }
+                    }
+                    SupportedClient.FREETUBE -> {
+                        val subscriptions = activity.contentResolver.openInputStream(uri)?.use {
+                            JsonHelper.json.decodeFromStream<FreetubeSubscriptions>(it)
+                        }
+                        subscriptions?.subscriptions.orEmpty().map {
+                            it.url.replace("https://www.youtube.com/channel/", "")
+                        }
+                    }
                 }
             }
             "text/csv", "text/comma-separated-values" -> {
@@ -74,7 +98,7 @@ object ImportHelper {
      * Write the text to the document
      */
     @OptIn(ExperimentalSerializationApi::class)
-    suspend fun exportSubscriptions(activity: Activity, uri: Uri) {
+    suspend fun exportSubscriptions(activity: Activity, uri: Uri, supportedClient: SupportedClient) {
         val token = PreferenceHelper.getToken()
         val subs = if (token.isNotEmpty()) {
             RetrofitInstance.authApi.subscriptions(token)
@@ -82,13 +106,35 @@ object ImportHelper {
             val subscriptions = Database.localSubscriptionDao().getAll().map { it.channelId }
             RetrofitInstance.authApi.unauthenticatedSubscriptions(subscriptions)
         }
-        val newPipeChannels = subs.map {
-            NewPipeSubscription(it.name, 0, "https://www.youtube.com${it.url}")
-        }
-        val newPipeSubscriptions = NewPipeSubscriptions(subscriptions = newPipeChannels)
 
-        activity.contentResolver.openOutputStream(uri)?.use {
-            JsonHelper.json.encodeToStream(newPipeSubscriptions, it)
+        when (supportedClient) {
+            SupportedClient.LIBRETUBE -> {
+                val libreTubeChannels = subs.map {
+                    LibreTubeSubscription(it.name, 0, "https://www.youtube.com${it.url}")
+                }
+                val libreTubeSubscriptions = LibreTubeSubscriptions(subscriptions = libreTubeChannels)
+                activity.contentResolver.openOutputStream(uri)?.use {
+                    JsonHelper.json.encodeToStream(libreTubeSubscriptions, it)
+                }
+            }
+            SupportedClient.NEWPIPE -> {
+                val newPipeChannels = subs.map {
+                    NewPipeSubscription(it.name, 0, "https://www.youtube.com${it.url}")
+                }
+                val newPipeSubscriptions = NewPipeSubscriptions(subscriptions = newPipeChannels)
+                activity.contentResolver.openOutputStream(uri)?.use {
+                    JsonHelper.json.encodeToStream(newPipeSubscriptions, it)
+                }
+            }
+            SupportedClient.FREETUBE -> {
+                val freeTubeChannels = subs.map {
+                    FreetubeSubscription(it.name, "", "https://www.youtube.com${it.url}")
+                }
+                val freeTubeSubscriptions = FreetubeSubscriptions(subscriptions = freeTubeChannels)
+                activity.contentResolver.openOutputStream(uri)?.use {
+                    JsonHelper.json.encodeToStream(freeTubeSubscriptions, it)
+                }
+            }
         }
 
         activity.toastFromMainDispatcher(R.string.exportsuccess)
