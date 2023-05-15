@@ -686,14 +686,20 @@ internal class CustomExoPlayerView(
     }
 
     override fun onSwipeLeftScreen(distanceY: Float) {
-        if (!PlayerHelper.swipeGestureEnabled) return
+        if (!PlayerHelper.swipeGestureEnabled) {
+            if (PlayerHelper.fullscreenGesturesEnabled) onSwipeCenterScreen(distanceY)
+            return
+        }
 
         if (isControllerFullyVisible) hideController()
         updateBrightness(distanceY)
     }
 
     override fun onSwipeRightScreen(distanceY: Float) {
-        if (!PlayerHelper.swipeGestureEnabled) return
+        if (!PlayerHelper.swipeGestureEnabled) {
+            if (PlayerHelper.fullscreenGesturesEnabled) onSwipeCenterScreen(distanceY)
+            return
+        }
 
         if (isControllerFullyVisible) hideController()
         updateVolume(distanceY)
