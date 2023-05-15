@@ -1,5 +1,6 @@
 package com.github.libretube.workers
 
+import android.app.Notification
 import android.app.NotificationManager
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
@@ -24,9 +25,11 @@ import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.views.TimePickerPreference
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import java.time.LocalTime
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.withContext
 
 /**
  * The notification worker which checks for new streams in a certain frequency
@@ -125,47 +128,46 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
      * For more information, see https://developer.android.com/develop/ui/views/notifications/group
      */
     private suspend fun createNotificationsForChannel(group: String, streams: List<StreamItem>) {
+        val summaryId = group.hashCode()
+        val intent = Intent(applicationContext, MainActivity::class.java)
+            .setFlags(INTENT_FLAGS)
+            .putExtra(IntentData.channelId, group)
+        val pendingIntent = PendingIntentCompat
+            .getActivity(applicationContext, summaryId, intent, FLAG_UPDATE_CURRENT, false)
+
+        // Create summary notification containing new streams for Android versions below 7.0.
+        val newStreams = applicationContext.resources
+            .getQuantityString(R.plurals.channel_new_streams, streams.size, streams.size)
+        val summary = NotificationCompat.InboxStyle()
+        streams.forEach {
+            summary.addLine(it.title)
+        }
+        val summaryNotification = createNotificationBuilder(group)
+            .setContentTitle(streams[0].uploaderName)
+            .setContentText(newStreams)
+            // The intent that will fire when the user taps the notification
+            .setContentIntent(pendingIntent)
+            .setGroupSummary(true)
+            .setStyle(summary)
+            .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY)
+            .build()
+
         // Create stream notifications. These are automatically grouped on Android 7.0 and later.
-        if (streams.size == 1) {
-            showStreamNotification(group, streams[0], true)
-        } else {
-            streams.forEach {
-                showStreamNotification(group, it, false)
-            }
-
-            val notificationId = group.hashCode()
-            val intent = Intent(applicationContext, MainActivity::class.java)
-                .setFlags(INTENT_FLAGS)
-                .putExtra(IntentData.channelId, group)
-            val pendingIntent = PendingIntentCompat
-                .getActivity(applicationContext, notificationId, intent, FLAG_UPDATE_CURRENT, false)
-
-            // Create summary notification containing new streams for Android versions below 7.0.
-            val newStreams = applicationContext.resources
-                .getQuantityString(R.plurals.channel_new_streams, streams.size, streams.size)
-            val summary = NotificationCompat.InboxStyle()
-            streams.forEach {
-                summary.addLine(it.title)
-            }
-            val summaryNotification = createNotificationBuilder(group)
-                .setContentTitle(streams[0].uploaderName)
-                .setContentText(newStreams)
-                // The intent that will fire when the user taps the notification
-                .setContentIntent(pendingIntent)
-                .setGroupSummary(true)
-                .setStyle(summary)
-                .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY)
-                .build()
-
-            notificationManager.notify(notificationId, summaryNotification)
+        val notificationsAndIds = withContext(Dispatchers.IO) {
+            streams.map { async { createStreamNotification(group, it) } }
+                .awaitAll()
+                .sortedBy { (_, uploaded, _) -> uploaded }
+                .map { (notificationId, _, notification) -> notificationId to notification }
+        } + (summaryId to summaryNotification)
+        notificationsAndIds.forEach { (notificationId, notification) ->
+            notificationManager.notify(notificationId, notification)
         }
     }
 
-    private suspend fun showStreamNotification(
+    private suspend fun createStreamNotification(
         group: String,
         stream: StreamItem,
-        isSingleNotification: Boolean,
-    ) {
+    ): Triple<Int, Long?, Notification> { // Notification ID, uploaded date and notification object
         val videoId = stream.url!!.toID()
         val intent = Intent(applicationContext, MainActivity::class.java)
             .setFlags(INTENT_FLAGS)
@@ -179,13 +181,12 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             .setContentText(stream.uploaderName)
             // The intent that will fire when the user taps the notification
             .setContentIntent(pendingIntent)
-            .setSilent(!isSingleNotification)
+            .setSilent(true)
 
         // Load stream thumbnails if the relevant toggle is enabled.
         if (PreferenceHelper.getBoolean(PreferenceKeys.SHOW_STREAM_THUMBNAILS, false)) {
-            val thumbnail = withContext(Dispatchers.IO) {
-                ImageHelper.getImage(applicationContext, stream.thumbnail).drawable?.toBitmap()
-            }
+            val thumbnail = ImageHelper.getImage(applicationContext, stream.thumbnail)
+                .drawable?.toBitmap()
 
             notificationBuilder
                 .setLargeIcon(thumbnail)
@@ -196,7 +197,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
                 )
         }
 
-        notificationManager.notify(notificationId, notificationBuilder.build())
+        return Triple(notificationId, stream.uploaded, notificationBuilder.build())
     }
 
     private fun createNotificationBuilder(group: String): NotificationCompat.Builder {
