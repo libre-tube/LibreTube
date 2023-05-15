@@ -243,8 +243,6 @@
     <string name="notify_new_streams">新しい動画を通知する</string>
     <string name="checking_frequency">チェック頻度</string>
     <string name="least_views">再生回数が少ない</string>
-    <string name="channel_name_az">チャンネル名 (A～Z)</string>
-    <string name="channel_name_za">チャンネル名 (Z～A)</string>
     <string name="required_network">インターネット接続が必要</string>
     <string name="translate">翻訳</string>
     <string name="network_all">すべて</string>
@@ -286,8 +284,6 @@
     <string name="invalid_filename">無効なファイル名です！</string>
     <string name="playlistNameReversed">プレイリスト名 (逆順)</string>
     <string name="playlists_order">プレイリストの順序</string>
-    <string name="recentlyUpdated">最近更新</string>
-    <string name="recentlyUpdatedReversed">最近更新 (逆順)</string>
     <string name="sb_markers">マーカー</string>
     <string name="sb_markers_summary">タイムバー上にセグメントを表示します。</string>
     <string name="background_channel_description">音声プレイヤーを操作するボタン付きの通知を表示します。</string>

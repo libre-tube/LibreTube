@@ -30,7 +30,7 @@ object PlaylistsHelper {
         if (loggedIn) {
             RetrofitInstance.authApi.getUserPlaylists(token)
         } else {
-            DatabaseHolder.Database.localPlaylistsDao().getAll()
+            DatabaseHolder.Database.localPlaylistsDao().getAll().reversed()
                 .map {
                     Playlists(
                         id = it.playlist.id.toString(),

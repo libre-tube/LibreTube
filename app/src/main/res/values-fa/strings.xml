@@ -273,7 +273,6 @@
     <string name="sb_skip_manual">پرش دستی</string>
     <string name="playlists_order">ترتیب سیاههٔ پخش</string>
     <string name="category">دسته</string>
-    <string name="recentlyUpdated">به تازگی به‌روز شده</string>
     <string name="defaultIconLight">روشن پیش‌گزیده</string>
     <string name="confirm_unsubscribing">تأیید لغو اشتراک</string>
     <string name="material_you">متریال یو</string>
@@ -293,14 +292,10 @@
     <string name="download_paused">بارگیری متوقف شد</string>
     <string name="download_completed">بارگیری کامل شد</string>
     <string name="require_restart">راه‌اندازی مجدد برنامه نیاز است</string>
-    <string name="channel_name_az">نام کانال (A-Z)</string>
-    <string name="channel_name_za">نام کانال (Z-A)</string>
     <string name="unsupported_file_format">قالب پرونده پشتیبانی نشده: %1$s</string>
     <string name="swipe_controls">کنترل های کشیدن</string>
     <string name="no_comments_available">این ویدیو هیچ نظری ندارد.</string>
     <string name="unlimited_search_history">تاریخچهٔ نامحدود جست‌وجو</string>
-    <string name="playlist_name_az">نام سیاههٔ پخش (آ-ی)</string>
-    <string name="playlist_name_za">نام سیاههٔ پخش (ی-آ)</string>
     <string name="duration">مدت زمان</string>
     <string name="duration_reversed">مدت زمان (برعکس)</string>
     <string name="category_outro">قاب‌های پایانی و اعتبارها</string>
@@ -328,7 +323,6 @@
     <string name="history_empty">هنوز تاریخچه‌ای وجود ندارد.</string>
     <string name="picture_in_picture">تصویر در تصویر</string>
     <string name="save_feed">بارگذاری فید در پس‌زمینه</string>
-    <string name="recentlyUpdatedReversed">به تازگی به‌روز شده (معکوس)</string>
     <string name="playlistNameReversed">نام لیست پخش (برعکس)</string>
     <string name="notification_time_summary">محدود کردن بازه زمانی‌ای که آگاهی‌های جریان نشان داده می‌شوند.</string>
     <plurals name="channel_new_streams">

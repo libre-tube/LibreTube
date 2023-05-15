@@ -115,8 +115,6 @@
     <string name="least_recent">Legrégebbi</string>
     <string name="most_views">Legtöbb megtekintés</string>
     <string name="least_views">Legkevesebb megtekintés</string>
-    <string name="channel_name_az">Csatorna neve (A-Z)</string>
-    <string name="channel_name_za">Csatorna neve (Z-A)</string>
     <string name="shareTo">URL megosztása ide</string>
     <string name="playOnBackground">Lejátszás háttérben</string>
     <string name="defaultIcon">Alapértelmezett</string>
@@ -291,8 +289,6 @@
     <string name="filename">Fájlnév</string>
     <string name="playlistNameReversed">Lejátszási lista neve (fordítva)</string>
     <string name="playlists_order">Lejátszási lista sorrend</string>
-    <string name="recentlyUpdated">Mostanában frissített</string>
-    <string name="recentlyUpdatedReversed">Mostanában frissített (fordítva)</string>
     <string name="time_code">Időkód (másodperc)</string>
     <string name="queue">Sor</string>
     <string name="sb_markers">Jelölők</string>
@@ -427,9 +423,7 @@
     <string name="show_stream_thumbnails">Közvetítés bélyegképének megjelenítése</string>
     <string name="show_stream_thumbnails_summary">Megjeleníti az új streamek bélyegképeit Ennek engedélyezése további adatokat fogyaszt.</string>
     <string name="duration">Időtartam</string>
-    <string name="playlist_name_az">Lejátszási lista neve (A-Z)</string>
     <string name="duration_reversed">Időtartam (fordított)</string>
     <string name="unlimited_search_history">Korlátlan keresési előzmények</string>
-    <string name="playlist_name_za">Lejátszási lista neve (Z-A)</string>
     <string name="shorts_notifications">Értesítés a rövidekhez</string>
 </resources>

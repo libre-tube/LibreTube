@@ -217,8 +217,6 @@
     <string name="least_recent">Najstarsze</string>
     <string name="most_views">Najwięcej wyświetleń</string>
     <string name="least_views">Najmniej wyświetleń</string>
-    <string name="channel_name_az">Nazwa kanału (A-Z)</string>
-    <string name="channel_name_za">Nazwa kanału (Z-A)</string>
     <string name="network_wifi">Tylko na Wi-Fi</string>
     <string name="export_subscriptions">Eksportuj subskrypcje</string>
     <string name="take_a_break">Czas na przerwę</string>
@@ -290,8 +288,6 @@
     <string name="filename">Nazwa pliku</string>
     <string name="invalid_filename">Nieprawidłowa nazwa pliku!</string>
     <string name="playlists_order">Kolejność playlist</string>
-    <string name="recentlyUpdated">Ostatnio zaktualizowane</string>
-    <string name="recentlyUpdatedReversed">Ostatnio zaktualizowane (odwrotnie)</string>
     <string name="playlistNameReversed">Nazwa playlisty (odwrotnie)</string>
     <string name="added_to_playlist">Dodano do playlisty</string>
     <string name="queue">Kolejka</string>
@@ -423,11 +419,9 @@
     <string name="play_automatically">Automatyczne odtwarzanie</string>
     <string name="play_automatically_summary">Automatycznie rozpocznij odtwarzanie wideo po wybraniu</string>
     <string name="unlimited_search_history">Nieograniczona historia wyszukiwania</string>
-    <string name="playlist_name_za">Nazwa playlisty (Z-A)</string>
     <string name="duration">Czas trwania</string>
     <string name="duration_reversed">Czas trwania (odwrócony)</string>
     <string name="fullscreen_gestures">Pełnoekranowe gesty wejścia/wyjścia</string>
-    <string name="playlist_name_az">Nazwa playlisty (A-Z)</string>
     <string name="go_to_video">Przejdź do filmu</string>
     <string name="show_stream_thumbnails">Pokaż miniaturki</string>
     <string name="show_stream_thumbnails_summary">Wyświetlaj miniaturki nowych treści. Zwiększa użycie danych.</string>

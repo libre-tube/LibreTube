@@ -215,7 +215,6 @@
     <string name="worst_quality">Værst</string>
     <string name="history_empty">Ingen historik endnu.</string>
     <string name="least_views">Færreste visninger</string>
-    <string name="channel_name_az">Kanalnavn (A-Å)</string>
     <string name="checking_frequency">Tjekker hver …</string>
     <string name="most_recent">Nyeste</string>
     <string name="notifications">Notifikationer</string>
@@ -224,7 +223,6 @@
     <string name="irreversible">Er du sikker\? Dette kan ikke fortrydes!</string>
     <string name="least_recent">Ældste</string>
     <string name="most_views">Fleste visninger</string>
-    <string name="channel_name_za">Kanalnavn (Å-A)</string>
     <string name="network_all">Alle</string>
     <string name="network_metered">Forbrugsbaseret</string>
     <string name="translate">Oversættelse</string>

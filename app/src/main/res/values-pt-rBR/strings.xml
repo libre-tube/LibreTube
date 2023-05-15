@@ -159,8 +159,6 @@
     <string name="checking_frequency">Verificando a cada…</string>
     <string name="irreversible">Tem certeza\? Isto não pode ser desfeito!</string>
     <string name="least_views">Menos visualizações</string>
-    <string name="channel_name_az">Nome do canal (A-Z)</string>
-    <string name="channel_name_za">Nome do canal (Z-A)</string>
     <string name="require_restart">É preciso reiniciar o aplicativo</string>
     <string name="deleteAccount_summary">Apagar sua conta do Piped</string>
     <string name="no_audio">Sem áudio</string>
@@ -244,7 +242,6 @@
     <string name="save_feed_summary">Carregar feed de inscrições em segundo plano e impedir atualização automática.</string>
     <string name="backup_customInstances">Instâncias customizadas</string>
     <string name="playlistNameReversed">Nome da playlist (invertido)</string>
-    <string name="recentlyUpdatedReversed">Atualizado recentemente (invertido)</string>
     <string name="skip_buttons_summary">Exibir botões para pular para o próximo vídeo ou anterior.</string>
     <string name="skip_buttons">Botões de pular</string>
     <string name="background_mode">Modo de segundo plano</string>
@@ -286,7 +283,6 @@
     <string name="filename">Nome do arquivo</string>
     <string name="invalid_filename">Nome de arquivo inválido!</string>
     <string name="playlists_order">Ordem das playlists</string>
-    <string name="recentlyUpdated">Atualizado recentemente</string>
     <string name="background_channel_description">Exibe uma notificação com botões para controlar o reprodutor de áudio.</string>
     <string name="unlimited">Ilimitado</string>
     <string name="copied_to_clipboard">Copiado para a área de transferência</string>
@@ -430,8 +426,6 @@
     <string name="show_stream_thumbnails_summary">Mostre as miniaturas de novas transmissões. Ativar isso consumirá dados adicionais.</string>
     <string name="show_stream_thumbnails">Mostrar miniaturas da transmissão</string>
     <string name="unlimited_search_history">Histórico de pesquisa ilimitado</string>
-    <string name="playlist_name_za">Nome da Playlist (Z-A)</string>
-    <string name="playlist_name_az">Nome da Playlist (A-Z)</string>
     <string name="duration">Duração</string>
     <string name="duration_reversed">Duração (invertida)</string>
     <string name="shorts_notifications">Notificações de shorts</string>

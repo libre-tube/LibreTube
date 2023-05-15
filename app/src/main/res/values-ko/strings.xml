@@ -192,8 +192,6 @@
     <string name="system_caption_style">시스템 캡션 스타일</string>
     <string name="captions">캡션</string>
     <string name="least_views">최소 조회수</string>
-    <string name="channel_name_za">채널 이름 (Z-A)</string>
-    <string name="channel_name_az">채널 이름 (A-Z)</string>
     <string name="notifications">알림</string>
     <string name="notify_new_streams">새 스트림에 대한 알림 표시</string>
     <string name="notify_new_streams_summary">팔로우하는 크리에이터의 새 스트림에 대한 알림을 표시합니다.</string>
@@ -296,8 +294,6 @@
     <string name="confirm_unsubscribe">정말 구독을 취소하시겠습니까%1$s\?</string>
     <string name="save_feed_summary">헤드라인 등록 피드를 백그라운드로 로드하여 자동으로 새로 고쳐지지 않도록 합니다.</string>
     <string name="save_feed">백그라운드에서 피드 로드</string>
-    <string name="recentlyUpdatedReversed">최근에 업데이트 됨(반전됨)</string>
-    <string name="recentlyUpdated">최근에 업데이트 됨</string>
     <string name="sb_markers_summary">시간 표시줄에 세그먼트를 표시합니다.</string>
     <string name="livestreams">라이브 방송</string>
     <string name="alternative_videos_layout">대체 비디오 레이아웃</string>

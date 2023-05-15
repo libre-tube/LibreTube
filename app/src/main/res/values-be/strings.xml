@@ -231,8 +231,6 @@
     <string name="least_recent">Самы стары</string>
     <string name="most_views">Больш праглядаў</string>
     <string name="least_views">Менш праглядаў</string>
-    <string name="channel_name_az">Назва канала (А-Я)</string>
-    <string name="channel_name_za">Назва канала (Я-А)</string>
     <string name="required_network">Патрабуецца падключэнне</string>
     <string name="network_all">Усе</string>
     <string name="network_metered">Дазаваны</string>
@@ -289,10 +287,8 @@
     <string name="navigation_bar">Панэль навігацыі</string>
     <string name="invalid_filename">Няправільнае імя файла!</string>
     <string name="playlists_order">Парадак плэйлістоў</string>
-    <string name="recentlyUpdated">Нядаўна абноўлены</string>
     <string name="playlistNameReversed">Назва плэйліста (зваротны)</string>
     <string name="time_code">Часавы код (секунды)</string>
-    <string name="recentlyUpdatedReversed">Нядаўна абноўлена (зваротны)</string>
     <string name="added_to_playlist">Дададзена ў плэйліст</string>
     <string name="queue">Чарга</string>
     <string name="livestreams">Жывыя трансляцыі</string>

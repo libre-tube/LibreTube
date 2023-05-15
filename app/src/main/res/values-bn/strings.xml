@@ -203,8 +203,6 @@
     <string name="least_recent">পুরাতন</string>
     <string name="most_views">বেশি দেখা</string>
     <string name="least_views">কম দেখা</string>
-    <string name="channel_name_az">চ্যানেলের নাম অনুসারে (A-Z)</string>
-    <string name="channel_name_za">চ্যানেলের নাম অনুসারে (Z-A)</string>
     <string name="no_search_result">কোনো ফলাফল পাওয়া যায়নি।</string>
     <string name="error_occurred">ত্রুটি</string>
     <string name="copied">কপি করা হয়েছে</string>
@@ -291,8 +289,6 @@
     <string name="invalid_filename">ইনভ্যালিড ফাইলনেম!</string>
     <string name="playlists_order">প্লে-লিস্টের অর্ডার</string>
     <string name="playlistNameReversed">নাম (উল্টো)</string>
-    <string name="recentlyUpdated">সম্প্রতি আপডেট করা হয়েছে</string>
-    <string name="recentlyUpdatedReversed">সম্প্রতি আপডেট করা হয়েছে (উল্টো)</string>
     <string name="time_code">সময় কোড (সেকেন্ড)</string>
     <string name="queue">কিউ</string>
     <string name="sb_markers">মার্কারস</string>

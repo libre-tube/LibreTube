@@ -113,7 +113,6 @@
     <string name="most_recent">નવીનતમ</string>
     <string name="least_recent">જૂની</string>
     <string name="most_views">મોટાભાગનાં દૃશ્યો</string>
-    <string name="channel_name_za">ચેનલ નામ (Z-A)</string>
     <string name="network_all">તમામ</string>
     <string name="network_wifi">ફક્ત વાઇ-ફાઇ પર</string>
     <string name="no_search_result">પરિણામ નથી.</string>
@@ -222,8 +221,6 @@
     <string name="invalid_filename">અયોગ્ય ફાઈલનામ!</string>
     <string name="playlists_order">પ્લેલીસ્ટનો ક્રમ</string>
     <string name="playlistNameReversed">પ્લેલિસ્ટ નામ (ઉલટું)</string>
-    <string name="recentlyUpdated">તાજેતરમાં સુધારેલ</string>
-    <string name="recentlyUpdatedReversed">તાજેતરમાં સુધારાયેલ (ઉલટાવાયેલ)</string>
     <string name="history_size">મહત્તમ ઇતિહાસ માપ</string>
     <string name="unlimited">અમર્યાદિત</string>
     <string name="pinch_control">પિંચ નિયંત્રણ</string>
@@ -316,7 +313,6 @@
     <string name="least_views">ઓછામાં ઓછા દૃશ્યો</string>
     <string name="notify_new_streams_summary">તમે અનુસરો છો તે સર્જકો તરફથી નવી સામગ્રી વિશેની સૂચનાઓ.</string>
     <string name="backup_restore_summary">સબસ્ક્રિપ્શન્સ, પ્લેલિસ્ટ્સ, આયાત અને નિકાસ કરો…</string>
-    <string name="channel_name_az">ચેનલ નામ (A-Z)</string>
     <string name="error_occurred">ભૂલ</string>
     <string name="legacy_subscriptions">વારસાગત સબસ્ક્રિપ્શન્સ દૃશ્ય</string>
     <string name="required_network">આવશ્યક કનેક્શન</string>

@@ -220,9 +220,7 @@
     <string name="translate">Traduction</string>
     <string name="most_recent">Plus récents</string>
     <string name="network_all">Tous</string>
-    <string name="channel_name_za">Nom de chaîne (Z-A)</string>
     <string name="network_wifi">WiFi uniquement</string>
-    <string name="channel_name_az">Nom de chaîne (A-Z)</string>
     <string name="irreversible">Êtes-vous sûr(e) \? Cela ne peut pas être annulé !</string>
     <string name="history_empty">Aucun historique.</string>
     <string name="notify_new_streams">Notifications pour les nouveaux flux</string>
@@ -289,9 +287,7 @@
     <string name="filename">Nom de fichier</string>
     <string name="invalid_filename">Nom de fichier invalide !</string>
     <string name="playlists_order">Ordre des listes de lecture</string>
-    <string name="recentlyUpdated">Récemment mise à jour</string>
     <string name="playlistNameReversed">Nom de la liste de lecture (inversé)</string>
-    <string name="recentlyUpdatedReversed">Récemment mise à jour (inversé)</string>
     <string name="queue">File d\'attente</string>
     <string name="added_to_playlist">Ajouté à la playlist</string>
     <string name="sb_markers">Marqueurs</string>

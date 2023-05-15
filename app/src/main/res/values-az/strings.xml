@@ -222,8 +222,6 @@
     <string name="least_recent">Ən köhnə</string>
     <string name="most_views">Ən çox baxış</string>
     <string name="least_views">Ən az baxış</string>
-    <string name="channel_name_az">Kanal Adı (A-Z)</string>
-    <string name="channel_name_za">Kanal Adı (Z-A)</string>
     <string name="history_empty">Hələ tarixçə boşdur.</string>
     <string name="required_network">Tələb olunan bağlantı</string>
     <string name="network_all">Hamısı</string>
@@ -290,8 +288,6 @@
     <string name="invalid_filename">Yanlış fayl adı!</string>
     <string name="playlistNameReversed">Oynatma siyahısı adı (əks)</string>
     <string name="playlists_order">Oynatma siyahısı sırası</string>
-    <string name="recentlyUpdated">Təzəlikcə yeniləndi</string>
-    <string name="recentlyUpdatedReversed">Təzəlikcə yeniləndi (əks)</string>
     <string name="time_code">Vaxt kodu (saniyə)</string>
     <string name="added_to_playlist">Oynatma siyahısına əlavə edildi</string>
     <string name="queue">Növbə</string>
@@ -428,8 +424,6 @@
     <string name="show_stream_thumbnails_summary">Yeni yayımların miniatürlərin göstər. Bu aktivləşdirilsə əlavə məlumat sərf ediləcək.</string>
     <string name="unlimited_search_history">Qeyri-məhdud axtarış tarixçəsi</string>
     <string name="duration_reversed">Müddət (əks)</string>
-    <string name="playlist_name_az">Oynatma Siyahısı Adı (A-Z)</string>
-    <string name="playlist_name_za">Oynatma Siyahısı Adı (Z-A)</string>
     <string name="duration">Müddət</string>
     <string name="shorts_notifications">Qısa videolar üçün bildirişlər</string>
 </resources>

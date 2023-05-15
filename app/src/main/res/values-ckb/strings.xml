@@ -240,8 +240,6 @@
     <string name="player_resize_mode">شێوازی قەبارەگۆڕین</string>
     <string name="play_next">لێدانی دواتر</string>
     <string name="new_videos_badge">شێوازی ڤیدیۆ نوێیەکان</string>
-    <string name="recentlyUpdated">دوایین نوێکردنەوە</string>
-    <string name="recentlyUpdatedReversed">دوایین نوێکردنەوە (پێچەوانە)</string>
     <string name="queue">دواخراو</string>
     <string name="sb_markers">نیشانەکراوەکان</string>
     <string name="unlimited">بێسنوور</string>
@@ -277,8 +275,6 @@
     <string name="notify_new_streams">پیشاندانی ئاگادارکردنەوە بۆ بڵاوکردنەوە نوێیەکان</string>
     <string name="notify_new_streams_summary">ئاگادارکردنەوە لە نوێترین بابەتی ئەو کەسانەی شوێنیان کەوتویت.</string>
     <string name="least_views">کەمترین بینراو</string>
-    <string name="channel_name_az">ناوی کەناڵ (ئ-ز)</string>
-    <string name="channel_name_za">ناوی کەناڵ (ز-ئ)</string>
     <string name="no_search_result">هیچ ئەنجامێک نەبوو.</string>
     <string name="error_occurred">هەڵە هەیە</string>
     <string name="copied">لەبەریگیرایەوە</string>
@@ -375,7 +371,6 @@
     <string name="download_channel_name">دابەزاندنی فایل</string>
     <string name="codecs">کۆدەکان</string>
     <string name="push_channel_name">شێوازی ئاگادارکردنەوە</string>
-    <string name="playlist_name_za">ناوی لیستی لێدان (ز-ئ)</string>
     <string name="duration_reversed">ماوە (پێچەوانەکراو)</string>
     <string name="shuffle">تێکەڵاوکردن</string>
     <string name="pause_on_quit">ڕاگرتن لەکاتی دەرچوون</string>
@@ -390,7 +385,6 @@
     </plurals>
     <string name="add_to_bookmarks">زیادکردن بۆ نیشانەکراوەکان</string>
     <string name="audio_only_mode_summary">بەکارهێنانی بەرنامەکە وەک لێدەرێکی دەنگی.</string>
-    <string name="playlist_name_az">ناوی لیستی لێدان (ئ-ز)</string>
     <string name="play_automatically_summary">دەستپێکردنی لێدانی خۆکاری ڤیدیۆکان کاتێ دیاریکران</string>
     <string name="duration">ماوە</string>
     <string name="unlimited_search_history">مێژووی گەڕانی بێسنوور</string>

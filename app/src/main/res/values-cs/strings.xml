@@ -224,10 +224,8 @@
     <string name="least_views">Nejméně zhlédnutí</string>
     <string name="required_network">Požadované připojení</string>
     <string name="history_empty">Zatím žádná historie.</string>
-    <string name="channel_name_az">Název kanálu (A-Z)</string>
     <string name="network_wifi">Pouze Wi-Fi</string>
     <string name="irreversible">Opravdu\? Tohle se nedá vrátit!</string>
-    <string name="channel_name_za">Název kanálu (Z-A)</string>
     <string name="network_all">Vše</string>
     <string name="network_metered">Měřené</string>
     <string name="no_search_result">Žádné výsledky.</string>
@@ -290,8 +288,6 @@
     <string name="filename">Název souboru</string>
     <string name="playlists_order">Pořadí playlistů</string>
     <string name="playlistNameReversed">Název playlistu (obráceně)</string>
-    <string name="recentlyUpdated">Nedávno aktualizované</string>
-    <string name="recentlyUpdatedReversed">Nedávno aktualizované (obráceně)</string>
     <string name="time_code">Čas (sekundy)</string>
     <string name="added_to_playlist">Přidáno do playlistu</string>
     <string name="queue">Fronta</string>
@@ -430,9 +426,7 @@
     <string name="show_stream_thumbnails">Zobrazit náhledy videí</string>
     <string name="show_stream_thumbnails_summary">Zobrazit náhledy nových videí. Povolením této funkce bude spotřebováno více dat.</string>
     <string name="unlimited_search_history">Neomezená historie vyhledávání</string>
-    <string name="playlist_name_za">Název playlistu (Z-A)</string>
     <string name="duration_reversed">Délka (obráceně)</string>
-    <string name="playlist_name_az">Název playlistu (A-Z)</string>
     <string name="duration">Délka</string>
     <string name="shorts_notifications">Oznámení pro Shorts</string>
 </resources>

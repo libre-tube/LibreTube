@@ -115,8 +115,6 @@
     <string name="notification_time">अधिसूचना समय सीमित करें</string>
     <string name="notification_time_summary">उस समय अवधि को सीमित करें जिसमें स्ट्रीम सूचनाएं दिखाई जाती हैं।</string>
     <string name="birdIcon">बूसटड पक्षी</string>
-    <string name="channel_name_az">चैनल का नाम (ए-जेड)</string>
-    <string name="channel_name_za">चैनल का नाम (जेड-ए)</string>
     <string name="required_network">कनेक्शन आवश्यक</string>
     <string name="share_with_time">समय कोड के साथ साझा करें</string>
     <string name="export_subscriptions">सब्सक्रिप्शनें निर्यात करें</string>
@@ -194,8 +192,6 @@
     <string name="invalid_filename">अमान्य फ़ाइल नाम!</string>
     <string name="playlists_order">प्लेलिस्ट का क्रम</string>
     <string name="playlistNameReversed">प्लेलिस्ट का नाम (उलट)</string>
-    <string name="recentlyUpdated">हाल ही में अपडेट हुए</string>
-    <string name="recentlyUpdatedReversed">हाल ही में अपडेट हुए (उलट)</string>
     <string name="category_preview_description">अतिरिक्त जानकारी के बिना भविष्य की सामग्री का विवरण देने वाले सेगमेंट के लिए। यदि इसमें क्लिप शामिल हैं जो केवल यहां दिखाई देती हैं, तो बहुत संभव है कि यह गलत श्रेणी हो।</string>
     <string name="category_filler_description">केवल फिलर या हास्य के लिए जोड़े गए स्पर्शरेखा दृश्यों के लिए वीडियो की मुख्य सामग्री को समझने की आवश्यकता नहीं है।</string>
     <string name="sb_markers">मार्करज</string>

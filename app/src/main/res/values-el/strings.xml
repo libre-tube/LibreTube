@@ -207,8 +207,6 @@
     <string name="most_recent">Νεότερα</string>
     <string name="most_views">Περισσότερες προβολές</string>
     <string name="least_views">Λιγότερες προβολές</string>
-    <string name="channel_name_az">Όνομα καναλιού (Α-Ω)</string>
-    <string name="channel_name_za">Όνομα καναλιού (Ω-Α)</string>
     <string name="require_restart">Απαιτείται επανεκκίνηση της εφαρμογής</string>
     <string name="network_all">Όλα</string>
     <string name="network_metered">Μετρημένη</string>
@@ -278,7 +276,6 @@
     <string name="filename">Όνομα αρχείου</string>
     <string name="invalid_filename">Άκυρο όνομα αρχείου!</string>
     <string name="playback_pitch">Τόνος</string>
-    <string name="recentlyUpdatedReversed">Πρόσφατα ενημερώθηκε (αντίστροφα)</string>
     <string name="added_to_playlist">Προστέθηκε στη λίστα αναπαραγωγής</string>
     <string name="defaultIconLight">Προεπιλεγμένο φως</string>
     <string name="confirm_unsubscribe">Είστε βέβαιοι ότι θέλετε να καταργήσετε την εγγραφή %1$s;</string>
@@ -337,7 +334,6 @@
     <string name="sb_skip_manual">Παράβλεψη χειροκίνητα</string>
     <string name="sb_skip_manual_summary">Μην παραλείψεις τμήματα αυτόματα, πάντα ζήτα προτροπή.</string>
     <string name="playlistNameReversed">Όνομα λίστας αναπαραγωγής (αντίστροφο)</string>
-    <string name="recentlyUpdated">Ενημερώθηκε πρόσφατα</string>
     <string name="time_code">Κωδικός χρόνου (δευτερόλεπτα)</string>
     <string name="playlistCloned">Η λίστα αναπαραγωγής κλωνοποιήθηκε</string>
     <string name="limit_to_runtime">Περιορισμός χρόνου εκτέλεσης</string>

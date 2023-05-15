@@ -214,7 +214,6 @@
     <string name="checking_frequency">Controlla ogni…</string>
     <string name="most_views">Più visti</string>
     <string name="least_views">Meno visti</string>
-    <string name="channel_name_az">Nome canale (A-Z)</string>
     <string name="network_all">Tutto</string>
     <string name="network_wifi">Solo su Wi-Fi</string>
     <string name="network_metered">A consumo</string>
@@ -238,7 +237,6 @@
     <string name="default_subtitle_language">Lingua dei sottotitoli</string>
     <string name="irreversible">Sei sicuro\? Non può essere annullato!</string>
     <string name="most_recent">Più recenti</string>
-    <string name="channel_name_za">Nome canale (Z-A)</string>
     <string name="export_subscriptions">Esporta iscrizioni</string>
     <string name="skip_buttons">Pulsanti di skip</string>
     <string name="skip_buttons_summary">Mostra pulsanti per saltare al video successivo o precedente.</string>
@@ -290,8 +288,6 @@
     <string name="invalid_filename">Nome del file non valido!</string>
     <string name="playlists_order">Ordine delle playlist</string>
     <string name="playlistNameReversed">Nome playlist (invertito)</string>
-    <string name="recentlyUpdated">Aggiornate di recente</string>
-    <string name="recentlyUpdatedReversed">Aggiornato di recente (invertito)</string>
     <string name="added_to_playlist">Aggiunto alla playlist</string>
     <string name="queue">Coda</string>
     <string name="sb_markers">Marcatori</string>
@@ -430,9 +426,7 @@
         <item quantity="other">%d nuovi video</item>
     </plurals>
     <string name="unlimited_search_history">Cronologia di ricerca infinita</string>
-    <string name="playlist_name_az">Nome playlist (A-Z)</string>
     <string name="duration">Durata</string>
     <string name="duration_reversed">Durata (invertito)</string>
-    <string name="playlist_name_za">Nome playlist (Z-A)</string>
     <string name="shorts_notifications">Notifiche per gli Short</string>
 </resources>

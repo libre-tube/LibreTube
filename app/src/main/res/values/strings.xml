@@ -238,8 +238,6 @@
     <string name="least_recent">Oldest</string>
     <string name="most_views">Most views</string>
     <string name="least_views">Least views</string>
-    <string name="channel_name_az">Channel Name (A-Z)</string>
-    <string name="channel_name_za">Channel Name (Z-A)</string>
     <string name="required_network">Required connection</string>
     <string name="network_all">All</string>
     <string name="network_metered">Metered</string>
@@ -299,8 +297,6 @@
     <string name="invalid_filename">Invalid filename!</string>
     <string name="playlists_order">Playlists order</string>
     <string name="playlistNameReversed">Playlist name (reversed)</string>
-    <string name="recentlyUpdated">Recently updated</string>
-    <string name="recentlyUpdatedReversed">Recently updated (reversed)</string>
     <string name="time_code">Time code (seconds)</string>
     <string name="added_to_playlist">Added to playlist</string>
     <string name="queue">Queue</string>
@@ -408,11 +404,13 @@
     <string name="play_automatically_summary">Start playing video automatically when selecting</string>
     <string name="fullscreen_gestures">Enter/exit fullscreen gestures</string>
     <string name="go_to_video">Go to video</string>
-    <string name="playlist_name_az">Playlist Name (A-Z)</string>
-    <string name="playlist_name_za">Playlist Name (Z-A)</string>
     <string name="duration">Duration</string>
     <string name="duration_reversed">Duration (reversed)</string>
     <string name="shorts_notifications">Notifications for shorts</string>
+    <string name="creation_date">Creation date</string>
+    <string name="creation_date_reversed">Creation date (reversed)</string>
+    <string name="alphabetic">Alphabetic</string>
+    <string name="alphabetic_reversed">Alphabetic (reversed)</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

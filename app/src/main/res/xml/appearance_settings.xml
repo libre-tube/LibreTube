@@ -98,7 +98,7 @@
     <PreferenceCategory app:title="@string/misc">
 
         <ListPreference
-            android:defaultValue="recent"
+            android:defaultValue="creation_date"
             android:entries="@array/playlistSortingOptions"
             android:entryValues="@array/playlistSortingOptionsValues"
             android:icon="@drawable/ic_filter"

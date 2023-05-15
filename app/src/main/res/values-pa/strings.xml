@@ -225,8 +225,6 @@
     <string name="least_recent">ਸਭ ਤੋਂ ਪੁਰਾਣਾ</string>
     <string name="most_views">ਸਭ ਤੋਂ ਜ਼ਿਆਦਾ ਵਿਊਜ਼</string>
     <string name="least_views">ਸਭ ਤੋਂ ਘੱਟ ਵਿਊਜ਼</string>
-    <string name="channel_name_az">ਚੈਨਲ ਦਾ ਨਾਮ (A-Z)</string>
-    <string name="channel_name_za">ਚੈਨਲ ਦਾ ਨਾਮ (Z-A)</string>
     <string name="required_network">ਕੁਨੈਕਸ਼ਨ ਲੋੜੀਂਦਾ</string>
     <string name="network_all">ਸਾਰੇ</string>
     <string name="network_metered">ਮੀਟਰਡ</string>
@@ -282,7 +280,6 @@
     <string name="invalid_filename">ਅਵੈਧ ਫਾਈਲ ਨਾਮ!</string>
     <string name="playlists_order">ਪਲੇਲਿਸਟਸ ਤਰਤੀਬ</string>
     <string name="playlistNameReversed">ਪਲੇਲਿਸਟ ਨਾਮ (ਉਲਟੀ ਤਰਤੀਬ)</string>
-    <string name="recentlyUpdated">ਹਾਲ ਹੀ ਵਿੱਚ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ</string>
     <string name="time_code">ਸਮਾਂ ਕੋਡ (ਸਕਿੰਟ)</string>
     <string name="added_to_playlist">ਪਲੇਲਿਸਟ ਵਿੱਚ ਸ਼ਾਮਲ ਕੀਤਾ ਗਿਆ</string>
     <string name="queue">ਕਤਾਰ</string>
@@ -327,7 +324,6 @@
     <string name="maximum_image_cache">ਅਧਿਕਤਮ ਚਿੱਤਰ ਕੈਸ਼ ਆਕਾਰ</string>
     <string name="legacy_subscriptions">ਲੀਗੇਸੀ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਵਿਊ</string>
     <string name="audio_video_summary">ਕੁਆਲਿਟੀ ਅਤੇ ਫਾਰਮੈਟ</string>
-    <string name="recentlyUpdatedReversed">ਹਾਲ ਹੀ ਵਿੱਚ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ (ਉਲਟਾ)</string>
     <string name="alternative_videos_layout">ਵਿਕਲਪਿਕ ਵੀਡੀਓ ਲੇਆਊਟ</string>
     <string name="play_next">ਅਗਲਾ ਚਲਾਓ</string>
     <string name="livestreams">ਲਾਈਵ ਸਟ੍ਰੀਮਾਂ</string>
