@@ -26,29 +26,32 @@ import kotlinx.coroutines.launch
 import java.io.IOException
 
 class PlaylistAdapter(
-    private val videoFeed: MutableList<StreamItem>,
+    // original, unsorted feed
+    // needed in order to delete the proper video from playlists
+    private val originalFeed: List<StreamItem>,
+    private val sortedFeed: MutableList<StreamItem>,
     private val playlistId: String,
     private val playlistType: PlaylistType,
 ) : RecyclerView.Adapter<PlaylistViewHolder>() {
 
-    private var visibleCount = minOf(20, videoFeed.size)
+    private var visibleCount = minOf(20, sortedFeed.size)
 
     override fun getItemCount(): Int {
         return when (playlistType) {
-            PlaylistType.PUBLIC -> videoFeed.size
-            else -> minOf(visibleCount, videoFeed.size)
+            PlaylistType.PUBLIC -> sortedFeed.size
+            else -> minOf(visibleCount, sortedFeed.size)
         }
     }
 
     fun updateItems(newItems: List<StreamItem>) {
-        val oldSize = videoFeed.size
-        videoFeed.addAll(newItems)
-        notifyItemRangeInserted(oldSize, videoFeed.size)
+        val oldSize = sortedFeed.size
+        sortedFeed.addAll(newItems)
+        notifyItemRangeInserted(oldSize, sortedFeed.size)
     }
 
     fun showMoreItems() {
         val oldSize = visibleCount
-        visibleCount += minOf(10, videoFeed.size - oldSize)
+        visibleCount += minOf(10, sortedFeed.size - oldSize)
         if (visibleCount == oldSize) return
         notifyItemRangeInserted(oldSize, visibleCount)
     }
@@ -60,7 +63,7 @@ class PlaylistAdapter(
     }
 
     override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) {
-        val streamItem = videoFeed[position]
+        val streamItem = sortedFeed[position]
         holder.binding.apply {
             videoTitle.text = streamItem.title
             videoInfo.text = streamItem.uploaderName
@@ -93,7 +96,13 @@ class PlaylistAdapter(
     }
 
     fun removeFromPlaylist(context: Context, position: Int) {
-        videoFeed.removeAt(position)
+        // get the index of the video in the playlist
+        // could vary due to playlist sorting by the user
+        val playlistIndex = originalFeed.indexOfFirst {
+            it.url == sortedFeed[position].url
+        }.takeIf { it >= 0 } ?: return
+
+        sortedFeed.removeAt(position)
         visibleCount -= 1
         (context as Activity).runOnUiThread {
             notifyItemRemoved(position)
@@ -101,7 +110,7 @@ class PlaylistAdapter(
         }
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                PlaylistsHelper.removeFromPlaylist(playlistId, position)
+                PlaylistsHelper.removeFromPlaylist(playlistId, playlistIndex)
             } catch (e: IOException) {
                 Log.e(TAG(), e.toString())
                 return@launch
