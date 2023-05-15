@@ -28,7 +28,7 @@ import java.io.IOException
 class PlaylistAdapter(
     // original, unsorted feed
     // needed in order to delete the proper video from playlists
-    private val originalFeed: List<StreamItem>,
+    private val originalFeed: MutableList<StreamItem>,
     private val sortedFeed: MutableList<StreamItem>,
     private val playlistId: String,
     private val playlistType: PlaylistType,
@@ -102,6 +102,7 @@ class PlaylistAdapter(
             it.url == sortedFeed[position].url
         }.takeIf { it >= 0 } ?: return
 
+        originalFeed.removeAt(playlistIndex)
         sortedFeed.removeAt(position)
         visibleCount -= 1
         (context as Activity).runOnUiThread {
