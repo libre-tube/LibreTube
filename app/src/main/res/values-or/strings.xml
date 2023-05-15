@@ -426,4 +426,8 @@
     <string name="duration">ଅବଧି</string>
     <string name="duration_reversed">ଅବଧି (ଓଲଟା)</string>
     <string name="shorts_notifications">ସର୍ଟସ୍ ପାଇଁ ବିଜ୍ଞପ୍ତି</string>
+    <string name="creation_date">ସୃଷ୍ଟି ତାରିଖ</string>
+    <string name="alphabetic_reversed">ବର୍ଣ୍ଣାନୁକ୍ରମିକ (ଓଲଟା)</string>
+    <string name="creation_date_reversed">ସୃଷ୍ଟି ତାରିଖ (ଓଲଟା)</string>
+    <string name="alphabetic">ବର୍ଣ୍ଣାନୁକ୍ରମିକ</string>
 </resources>
