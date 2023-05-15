@@ -432,4 +432,8 @@
     <string name="duration_reversed">Продолжительность (обратная)</string>
     <string name="duration">Продолжительность</string>
     <string name="shorts_notifications">Уведомления для shorts</string>
+    <string name="alphabetic">Алфавитный</string>
+    <string name="creation_date">Дата создания</string>
+    <string name="creation_date_reversed">Дата создания (перевернутая)</string>
+    <string name="alphabetic_reversed">Алфавитный (обратный)</string>
 </resources>
