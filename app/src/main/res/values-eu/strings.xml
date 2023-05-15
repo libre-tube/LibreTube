@@ -223,8 +223,6 @@
     <string name="least_views">Gutxien ikusiak</string>
     <string name="most_recent">Berriena</string>
     <string name="most_views">Ikusienak</string>
-    <string name="channel_name_az">Kanalaren izena (A-Z)</string>
-    <string name="channel_name_za">Kanalaren izena (Z-A)</string>
     <string name="network_metered">Neurtua</string>
     <string name="network_wifi">WiFi-arekin bakarrik</string>
     <string name="no_search_result">Ez dago emaitzarik.</string>
@@ -291,8 +289,6 @@
     <string name="invalid_filename">Fitxategi izen baliogabea!</string>
     <string name="playlists_order">Erreprodukzio zerrenden ordena</string>
     <string name="playlistNameReversed">Erreprodukzio zerrendaren izena (alderantzizkatua)</string>
-    <string name="recentlyUpdated">Berriki eguneratua</string>
-    <string name="recentlyUpdatedReversed">Berriki eguneratua (alderantzizkatua)</string>
     <string name="sb_markers">Markagailuak</string>
     <string name="sb_markers_summary">Markatu segmentuak denbora-barran.</string>
     <string name="livestreams">Zuzeneko transmisioak</string>

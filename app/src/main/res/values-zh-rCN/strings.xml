@@ -222,8 +222,6 @@
     <string name="least_recent">最久前发布</string>
     <string name="most_views">最多观看</string>
     <string name="least_views">最少观看</string>
-    <string name="channel_name_az">频道名（A-Z）</string>
-    <string name="channel_name_za">频道名（Z-A）</string>
     <string name="most_recent">最新发布</string>
     <string name="network_all">所有网络</string>
     <string name="required_network">所需连接</string>
@@ -289,8 +287,6 @@
     <string name="filename">文件名</string>
     <string name="invalid_filename">无效的文件名！</string>
     <string name="playlists_order">播放列表顺序</string>
-    <string name="recentlyUpdated">最近更新</string>
-    <string name="recentlyUpdatedReversed">最近更新（倒序）</string>
     <string name="playlistNameReversed">播放列表名称（倒序）</string>
     <string name="time_code">时间码（秒）</string>
     <string name="added_to_playlist">已添加到播放列表</string>
@@ -424,8 +420,6 @@
     <string name="play_automatically_summary">选择视频时自动开始播放</string>
     <string name="auto_fullscreen_shorts">观看短视频时自动全屏</string>
     <string name="unlimited_search_history">无限搜索历史条目</string>
-    <string name="playlist_name_za">播放列表名（Z-A）</string>
     <string name="duration">时长</string>
-    <string name="playlist_name_az">播放列表名（A-Z）</string>
     <string name="duration_reversed">时长（倒序）</string>
 </resources>

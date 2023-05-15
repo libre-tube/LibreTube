@@ -186,7 +186,6 @@
     <string name="notify_new_streams">Täze wideolar üçin bildirişler</string>
     <string name="most_views">Iň köp görülen</string>
     <string name="least_views">Iň az görülen</string>
-    <string name="channel_name_az">Kanalyň Ady (A-Z)</string>
     <string name="share_with_time">Başlangyç wagty bilen paýlaşyň</string>
     <string name="skip_buttons">Geçirme düwmesi</string>
     <string name="history_size">Bellikleriň maksimum ululygy</string>
@@ -201,7 +200,6 @@
     <string name="player_resize_mode">Ölçeg tertibi</string>
     <string name="copied_to_clipboard">Panele göçürildi</string>
     <string name="playerAudioQuality">Sesiň hili</string>
-    <string name="channel_name_za">Kanalyň Ady (Z-A)</string>
     <string name="repeat_mode_none">Hiç hili</string>
     <string name="no_subtitles_available">Subtitrler ýok</string>
     <string name="repeat_mode_current">Häzirki</string>

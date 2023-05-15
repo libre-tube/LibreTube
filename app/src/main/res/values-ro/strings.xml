@@ -166,7 +166,6 @@
     <string name="skip_segment">Omiteți segmentul</string>
     <string name="invalid_filename">Nume invalid!</string>
     <string name="playlists_order">Ordinea playlist-urilor</string>
-    <string name="recentlyUpdatedReversed">Actualizat recent (inversat)</string>
     <string name="network_all">Toate</string>
     <string name="translate">Traducere</string>
     <string name="pause">Întrerupeți</string>
@@ -236,8 +235,6 @@
     <string name="irreversible">Eşti sigur\? Acest lucru nu poate fi anulat!</string>
     <string name="history_empty">Fără istoric încă.</string>
     <string name="least_views">Cele mai puține vizualizări</string>
-    <string name="channel_name_az">Numele canalului (A-Z)</string>
-    <string name="channel_name_za">Numele canalului (Z-A)</string>
     <string name="network_metered">Măsurată</string>
     <string name="error_occurred">Eroare</string>
     <string name="share_with_time">Distribuiți cu codul de timp</string>
@@ -261,7 +258,6 @@
     <string name="navigation_bar">Bară de navigare</string>
     <string name="filename">Nume de fișier</string>
     <string name="playlistNameReversed">Numele playlist-ului (inversat)</string>
-    <string name="recentlyUpdated">Actualizat recent</string>
     <string name="autoplay_summary">Redați automat următorul videoclip după cel actual.</string>
     <string name="playingOnBackground">Se redă în fundal …</string>
     <string name="player_summary">Valori prestabilite și comportament</string>
@@ -430,8 +426,6 @@
     <string name="show_stream_thumbnails">Afișează miniaturile fluxului</string>
     <string name="show_stream_thumbnails_summary">Afișează miniaturi ale noilor fluxuri. Activarea acestei opțiuni va consuma date suplimentare.</string>
     <string name="unlimited_search_history">Istoric de căutare nelimitat</string>
-    <string name="playlist_name_az">Numele listei de redare (A-Z)</string>
-    <string name="playlist_name_za">Numele listei de redare (Z-A)</string>
     <string name="duration">Durată</string>
     <string name="duration_reversed">Durată (inversată)</string>
 </resources>

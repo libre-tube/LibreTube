@@ -166,8 +166,6 @@
     <string name="least_recent">පැරණිම</string>
     <string name="most_views">බොහෝ බැලීම්</string>
     <string name="least_views">අඩුම බැලීම්</string>
-    <string name="channel_name_az">නාලිකාවේ නම (A-Z)</string>
-    <string name="channel_name_za">නාලිකාවේ නම (Z-A)</string>
     <string name="network_all">සියලුම</string>
     <string name="network_metered">සීමිත</string>
     <string name="network_wifi">Wi-Fi මත පමණි</string>
@@ -211,8 +209,6 @@
     <string name="playback_pitch">ස්වරය</string>
     <string name="filename">ගොනු නාමය</string>
     <string name="invalid_filename">වලංගු නොවන ගොනු නාමයකි!</string>
-    <string name="recentlyUpdated">මෑතකදී යාවත්කාලීන කරන ලද</string>
-    <string name="recentlyUpdatedReversed">මෑතකදී යාවත්කාලීන කරන ලද (ප්‍රතිලෝම)</string>
     <string name="play_next">ඊළඟ වීඩියෝව වාදනය කරන්න</string>
     <string name="added_to_playlist">වාදන ලැයිස්තුවට එක් කරන ලදී</string>
     <string name="queue">පෝලිම</string>

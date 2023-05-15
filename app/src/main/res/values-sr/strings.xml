@@ -213,8 +213,6 @@
     <string name="least_recent">Најстарији</string>
     <string name="most_views">Највише прегледа</string>
     <string name="least_views">Најмање прегледа</string>
-    <string name="channel_name_az">Име канала (А-Ш)</string>
-    <string name="channel_name_za">Име канала (Ш-А)</string>
     <string name="translate">Преводи</string>
     <string name="no_search_result">Нема резултата.</string>
     <string name="network_metered">Мобилни подаци</string>
@@ -284,8 +282,6 @@
     <string name="invalid_filename">Непостојеће име фајла!</string>
     <string name="playlists_order">Редослед листи</string>
     <string name="playlistNameReversed">Назив листе (обрнуто)</string>
-    <string name="recentlyUpdated">Недавно ажуриран</string>
-    <string name="recentlyUpdatedReversed">Недавно ажурирано (обрнуто)</string>
     <string name="download_channel_name">Преузми услугу</string>
     <string name="download_channel_description">Приказује обавештење приликом преузимања медија.</string>
     <string name="background_channel_name">Позадински режим</string>

@@ -181,8 +181,6 @@
     <string name="least_recent">Cũ nhất</string>
     <string name="least_views">Ít lượt xem nhất</string>
     <string name="most_views">Lượt xem nhiều nhất</string>
-    <string name="channel_name_az">Tên kênh (A-Z)</string>
-    <string name="channel_name_za">Tên kênh (Z-A)</string>
     <string name="require_restart_message">Khởi động lại ứng dụng để áp dụng các thay đổi.</string>
     <string name="general_summary">Ngôn ngữ và vùng</string>
     <string name="required_network">Yêu cầu kết nối mạng</string>
@@ -309,8 +307,6 @@
     <string name="invalid_filename">Tên tệp không hợp lệ!</string>
     <string name="playlists_order">Thứ tự sắp xếp danh sách phát</string>
     <string name="playlistNameReversed">Tên danh sách phát (đảo ngược)</string>
-    <string name="recentlyUpdated">Được cập nhật gần đây</string>
-    <string name="recentlyUpdatedReversed">Được cập nhật gần đây (đảo ngược)</string>
     <string name="sb_markers_summary">Đánh dấu các phân đoạn trên thanh thời lượng.</string>
     <string name="sb_markers">Đánh dấu</string>
     <string name="audio_track">Track âm thanh</string>

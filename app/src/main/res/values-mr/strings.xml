@@ -262,7 +262,6 @@
     <string name="app_backup">ॲप बॅकअप</string>
     <string name="username_email">शिफारस नसलेल्या ई-मेल पत्त्यासह पुढे जायचे\?</string>
     <string name="proceed">पुढे जा</string>
-    <string name="channel_name_az">चॅनेलचे नाव (A-Z)</string>
     <string name="alternative_player_layout_summary">संबंधित व्हिडिओ खाली ऐवजी टिप्पण्यांच्या वर पंक्ती म्हणून दर्शवा.</string>
     <string name="confirm_unsubscribe">तुमची खात्री आहे की तुम्ही %1$s सदस्यत्व रद्द करू इच्छिता\?</string>
     <string name="custom_playback_speed">सानुकूल गती</string>
@@ -296,7 +295,6 @@
     <string name="play_all">सर्व प्ले करा</string>
     <string name="livestreams">लाइव्हस्ट्रीम्स</string>
     <string name="least_views">किमान व्ह्यूज</string>
-    <string name="channel_name_za">चॅनेलचे नाव (Z-A)</string>
     <string name="required_network">आवश्यक कनेक्शन</string>
     <string name="network_all">सर्व</string>
     <string name="skip_buttons">स्किप बटन</string>
@@ -322,11 +320,9 @@
     <string name="local_subscriptions">स्थानिक सदस्यता</string>
     <string name="change_region">सध्याच्या क्षेत्रासाठी ट्रेंडिंग अनुपलब्ध असल्याचे दिसते. कृपया सेटिंग्जमध्ये दुसरा निवडा.</string>
     <string name="filename">फाईलचे नाव</string>
-    <string name="recentlyUpdated">नुकतेच अद्ययावत केलेले</string>
     <string name="invalid_filename">अवैध फाइलनाव!</string>
     <string name="playlists_order">प्लेलिस्ट ऑर्डर</string>
     <string name="playlistNameReversed">प्लेलिस्ट नाव (उलट)</string>
-    <string name="recentlyUpdatedReversed">अलीकडे अद्यतनित (उलट)</string>
     <string name="time_code">वेळ कोड (सेकंद)</string>
     <string name="sb_markers_summary">टाइम बारवरील सेगमेंट्स चिन्हांकित करा.</string>
     <string name="alternative_videos_layout">पर्यायी व्हिडिओ लेआउट</string>

@@ -200,8 +200,6 @@
     <string name="least_recent">Eldst</string>
     <string name="most_views">Flest visninger</string>
     <string name="least_views">Færrest visninger</string>
-    <string name="channel_name_az">Kanalnavn (A-Å)</string>
-    <string name="channel_name_za">Kanalnavn (Å-A)</string>
     <string name="translate">Oversettelse</string>
     <string name="network_metered">Kvotebasert</string>
     <string name="history_empty">Ingen historikk enda.</string>
@@ -285,9 +283,7 @@
     <string name="wifi">Wi-Fi</string>
     <string name="navigation_bar">Navigasjonsfelt</string>
     <string name="filename">Filnavn</string>
-    <string name="recentlyUpdated">Nylig oppdatert</string>
     <string name="playlistNameReversed">Spillelistenavn (invertert)</string>
-    <string name="recentlyUpdatedReversed">Nylig oppdatert (invertert)</string>
     <string name="playback_pitch">Tonehøyde</string>
     <string name="change_region">På vei opp ser ut til å være utilgjengelig for nåværende region. Velg en annen i innstillingene.</string>
     <string name="invalid_filename">Ugyldig filnavn</string>

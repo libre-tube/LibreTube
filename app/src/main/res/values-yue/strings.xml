@@ -172,7 +172,6 @@
     <string name="most_recent">舊嘢</string>
     <string name="most_views">最多人睇</string>
     <string name="least_views">最少人睇</string>
-    <string name="channel_name_za">Channel 名 (Z-A)</string>
     <string name="error_occurred">Error</string>
     <string name="network_wifi">淨係 Wi-Fi</string>
     <string name="no_search_result">無結果</string>
@@ -187,7 +186,6 @@
     <string name="custom_playback_speed">自訂速度</string>
     <string name="segment_skipped">跳過嘅部分</string>
     <string name="category_segments">分段</string>
-    <string name="channel_name_az">Channel 名 (A-Z)</string>
     <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">電話 data</string>
     <string name="confirm_unsubscribe">你真係要 unsubscribe %1$s\?</string>

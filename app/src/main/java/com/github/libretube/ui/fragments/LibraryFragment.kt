@@ -143,12 +143,12 @@ class LibraryFragment : Fragment() {
 
                 if (playlists.isNotEmpty()) {
                     playlists = when (
-                        PreferenceHelper.getString(PreferenceKeys.PLAYLISTS_ORDER, "recent")
+                        PreferenceHelper.getString(PreferenceKeys.PLAYLISTS_ORDER, "creation_date")
                     ) {
-                        "recent" -> playlists
-                        "recent_reversed" -> playlists.reversed()
-                        "name" -> playlists.sortedBy { it.name?.lowercase() }
-                        "name_reversed" -> playlists.sortedBy { it.name?.lowercase() }.reversed()
+                        "creation_date" -> playlists
+                        "creation_date_reversed" -> playlists.reversed()
+                        "alphabetic" -> playlists.sortedBy { it.name?.lowercase() }
+                        "alphabetic_reversed" -> playlists.sortedBy { it.name?.lowercase() }.reversed()
                         else -> playlists
                     }
 

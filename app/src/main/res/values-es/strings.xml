@@ -209,8 +209,6 @@
     <string name="history_empty">No hay historial todavía.</string>
     <string name="most_views">Más vistos</string>
     <string name="least_views">Menos vistos</string>
-    <string name="channel_name_az">Nombre de canal (A-Z)</string>
-    <string name="channel_name_za">Nombre de canal (Z-A)</string>
     <string name="network_metered">Conexión de uso medido</string>
     <string name="network_wifi">Solo con WiFi</string>
     <string name="translate">Traducción</string>
@@ -288,10 +286,8 @@
     <string name="playback_pitch">Tono</string>
     <string name="filename">Nombre del archivo</string>
     <string name="invalid_filename">¡Nombre de archivo inválido!</string>
-    <string name="recentlyUpdated">Recientes primero</string>
     <string name="playlists_order">Orden de las listas de reproducción</string>
     <string name="playlistNameReversed">Nombre de la lista (Z-A)</string>
-    <string name="recentlyUpdatedReversed">Antiguas primero</string>
     <string name="time_code">Código de tiempo (segundos)</string>
     <string name="added_to_playlist">Añadido a la lista</string>
     <string name="queue">Cola</string>
@@ -431,7 +427,5 @@
     </plurals>
     <string name="unlimited_search_history">Historial de búsqueda ilimitado</string>
     <string name="duration_reversed">Duración (invertida)</string>
-    <string name="playlist_name_az">Nombre de la lista (A-Z)</string>
     <string name="duration">Duración</string>
-    <string name="playlist_name_za">Nombre de la lista (Z-A)</string>
 </resources>

@@ -195,7 +195,6 @@
     <string name="repeat_mode_current">ବର୍ତ୍ତମାନର</string>
     <string name="preferences">ପସନ୍ଦ</string>
     <string name="playlistNameReversed">ପ୍ଲେଲିଷ୍ଟ ନାମ ଓଲଟା</string>
-    <string name="recentlyUpdatedReversed">ସମ୍ପ୍ରତି ଅପଡେଟ୍ ହୋଇଛି (ଓଲଟା)</string>
     <string name="time_code">ଟାଇମ୍ କୋଡ୍ (ସେକେଣ୍ଡରେ)</string>
     <string name="queue">ଧାଡ଼ି</string>
     <string name="sb_markers">ମାର୍କର ଗୁଡ଼ିକ</string>
@@ -230,7 +229,6 @@
     <string name="save_feed_summary">ସବସ୍କ୍ରିପସନ୍ ଫିଡ୍ ପୃଷ୍ଠଭୂମିରେ ଲୋଡ୍ କରନ୍ତୁ ଏବଂ ଏହାକୁ ସ୍ଵତଃ-ସତେଜ ହେବାକୁ ପ୍ରତିରୋଧ କରନ୍ତୁ ।</string>
     <string name="navigation_bar">ନାଭିଗେସନ୍ ବାର୍</string>
     <string name="change_region">ସାମ୍ପ୍ରତିକ ଭାବେ ଟ୍ରେଡିଂ ଏହି ଜାଗାରେ ନାହିଁ ।</string>
-    <string name="recentlyUpdated">ସମ୍ପ୍ରତି ଅଦ୍ୟତନ ହୋଇଛି</string>
     <string name="added_to_playlist">ପ୍ଲେ ଲିଷ୍ଟରେ ଯୋଡା ଯାଇଛି</string>
     <string name="playlists_order">ପ୍ଲେଲିଷ୍ଟ କ୍ରମ</string>
     <string name="reset">ଡିଫଲ୍ଟଗୁଡିକ ପୁନରୁଦ୍ଧାର କରନ୍ତୁ</string>
@@ -271,12 +269,10 @@
     <string name="network_all">ସମସ୍ତ</string>
     <string name="checking_frequency">ପ୍ରତ୍ୟେକ ଯାଞ୍ଚ କରୁଛନ୍ତି…</string>
     <string name="least_views">କମ୍ ଦୃଶ୍ୟ</string>
-    <string name="channel_name_za">ଓଲଟା ସଜାନ୍ତୁ ଚେନେଲ୍ ନାମ</string>
     <string name="most_recent">ନୂତନ</string>
     <string name="most_views">ଅଧିକ ଥର ଦେଖାଯାଇଥିବା</string>
     <string name="network_metered">ମିଟର</string>
     <string name="network_wifi">କେବଳ ୱାଇଫାଇ ରେ</string>
-    <string name="channel_name_az">ଚ୍ୟାନ୍ନେଲ ନାମ</string>
     <string name="export_subscriptions">ସଦସ୍ୟତା ରପ୍ତାନି କରନ୍ତୁ</string>
     <string name="translate">ଅନୁବାଦ</string>
     <string name="error_occurred">ଭୁଲ୍</string>
@@ -427,8 +423,6 @@
     <string name="show_stream_thumbnails">ଷ୍ଟ୍ରିମ୍ ଥମ୍ବନେଲ ଦେଖାନ୍ତୁ</string>
     <string name="show_stream_thumbnails_summary">ନୂତନ ଧାରଣାଗୁଡ଼ିକର ଥମ୍ବନେଲଗୁଡିକ ଦେଖାନ୍ତୁ । ଏହାକୁ ସକ୍ଷମ କରିବା ଅତିରିକ୍ତ ତଥ୍ୟ ଖର୍ଚ୍ଚ କରିବ ।</string>
     <string name="unlimited_search_history">ଅସୀମିତ ସନ୍ଧାନ ଇତିହାସ</string>
-    <string name="playlist_name_za">ପ୍ଲେଲିଷ୍ଟ ନାମ (Z-A)</string>
     <string name="duration">ଅବଧି</string>
     <string name="duration_reversed">ଅବଧି (ଓଲଟା)</string>
-    <string name="playlist_name_az">ପ୍ଲେଲିଷ୍ଟ ନାମ (A-Z)</string>
 </resources>

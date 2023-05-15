@@ -276,8 +276,8 @@
         <item>@string/least_recent</item>
         <item>@string/most_views</item>
         <item>@string/least_views</item>
-        <item>@string/channel_name_az</item>
-        <item>@string/channel_name_za</item>
+        <item>@string/alphabetic</item>
+        <item>@string/alphabetic_reversed</item>
     </string-array>
 
     <string-array name="filterOptions">
@@ -291,8 +291,8 @@
         <item>@string/most_recent</item>
         <item>@string/duration</item>
         <item>@string/duration_reversed</item>
-        <item>@string/playlist_name_az</item>
-        <item>@string/playlist_name_za</item>
+        <item>@string/alphabetic</item>
+        <item>@string/alphabetic_reversed</item>
     </string-array>
 
     <string-array name="requiredNetwork">
@@ -358,17 +358,17 @@
     </string-array>
 
     <string-array name="playlistSortingOptions">
-        <item>@string/recentlyUpdated</item>
-        <item>@string/recentlyUpdatedReversed</item>
-        <item>@string/playlistName</item>
-        <item>@string/playlistNameReversed</item>
+        <item>@string/creation_date</item>
+        <item>@string/creation_date_reversed</item>
+        <item>@string/alphabetic</item>
+        <item>@string/alphabetic_reversed</item>
     </string-array>
 
     <string-array name="playlistSortingOptionsValues">
-        <item>recent</item>
-        <item>recent_reversed</item>
-        <item>name</item>
-        <item>name_reversed</item>
+        <item>creation_date</item>
+        <item>creation_date_reversed</item>
+        <item>alphabetic</item>
+        <item>alphabetic_reversed</item>
     </string-array>
 
     <string-array name="dataSaverModeOptions">

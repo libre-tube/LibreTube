@@ -159,8 +159,6 @@
     <string name="least_recent">Najstaršie</string>
     <string name="most_views">Najsledovanejšie</string>
     <string name="least_views">Posledné prezerané</string>
-    <string name="channel_name_az">Meno kanála (A-Z)</string>
-    <string name="channel_name_za">Meno kanála (Z-A)</string>
     <string name="most_recent">Najnovšie</string>
     <string name="require_restart_message">Reštartovať aplikáciu\?</string>
     <string name="network_metered">Merané</string>

@@ -215,7 +215,6 @@
     <string name="default_subtitle_language">Altyazı dili</string>
     <string name="checking_frequency">Her kontrol…</string>
     <string name="least_views">En az görüntüleme</string>
-    <string name="channel_name_az">Kanal Adı (A-Z)</string>
     <string name="most_views">En çok görüntüleme</string>
     <string name="history_empty">Henüz geçmiş boş.</string>
     <string name="notify_new_streams">Yeni akışlar için bildirimler göster</string>
@@ -224,7 +223,6 @@
     <string name="most_recent">En yeni</string>
     <string name="least_recent">En eski</string>
     <string name="notify_new_streams_summary">Takip ettiğiniz yaratıcılardan yeni akışlar için bildirimler görüntüle.</string>
-    <string name="channel_name_za">Kanal Adı (Z-A)</string>
     <string name="translate">Çeviri</string>
     <string name="no_search_result">Sonuç yok.</string>
     <string name="network_wifi">Yalnızca Wi-Fi\'de</string>
@@ -288,10 +286,8 @@
     <string name="playback_pitch">Ses yüksekliği</string>
     <string name="playlists_order">Oynatma listesi sırası</string>
     <string name="playlistNameReversed">Oynatma listesi adı (ters)</string>
-    <string name="recentlyUpdated">Son güncellenen</string>
     <string name="filename">Dosya adı</string>
     <string name="invalid_filename">Geçersiz dosya adı!</string>
-    <string name="recentlyUpdatedReversed">Son güncellenen (ters)</string>
     <string name="time_code">Zaman kodu (saniye)</string>
     <string name="added_to_playlist">Oynatma listesine eklendi</string>
     <string name="queue">Sıra</string>
@@ -424,11 +420,9 @@
         <item quantity="one">%d yeni yayın</item>
         <item quantity="other">%d yeni yayın</item>
     </plurals>
-    <string name="playlist_name_za">Oynatma Listesi Adı (Z-A)</string>
     <string name="duration">Süre</string>
     <string name="duration_reversed">Süre (ters)</string>
     <string name="unlimited_search_history">Sınırsız arama geçmişi</string>
-    <string name="playlist_name_az">Oynatma Listesi Adı (A-Z)</string>
     <string name="show_stream_thumbnails">Akış küçük resimlerin göster</string>
     <string name="show_stream_thumbnails_summary">Yeni akışların küçük resimlerin göster. Bu etkinleştirilirse ek veri tüketecektir.</string>
 </resources>

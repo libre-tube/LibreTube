@@ -206,8 +206,6 @@
     <string name="background_channel_name">Taustatila</string>
     <string name="navigation_bar">Navigointipalkki</string>
     <string name="most_recent">Uusin</string>
-    <string name="channel_name_az">Kanavan Nimi (A-Z)</string>
-    <string name="channel_name_za">Kanavan Nimi (Z-A)</string>
     <string name="device_info">Laitetieto</string>
     <string name="yt_shorts">Shorts</string>
     <string name="copied_to_clipboard">Kopioitu leikepöydälle</string>
@@ -254,7 +252,6 @@
     <string name="new_videos_badge_summary">Näytä merkki uusien videoiden määrästä, jos niitä on.</string>
     <string name="sb_skip_manual">Ohita manuaalisesti</string>
     <string name="sb_skip_manual_summary">Älä ohita segmenttejä automaattisesti, kysy aina ennen.</string>
-    <string name="recentlyUpdated">Äskettäin päivitetty</string>
     <string name="end_time">Lopetusaika</string>
     <string name="notification_time_summary">Aikaväli, jolloin ilmoitukset voidaan näyttää.</string>
     <string name="layout">Asettelu</string>
@@ -344,7 +341,6 @@
     <string name="invalid_filename">Virheellinen tiedoston nimi!</string>
     <string name="playlists_order">Soittolistojen järjestys</string>
     <string name="playback_pitch">Sävelkorkeus</string>
-    <string name="recentlyUpdatedReversed">Äskettäin päivitetty (päinvastainen)</string>
     <string name="playlistNameReversed">Soittolistan nimi (päinvastainen)</string>
     <string name="queue">Jono</string>
     <string name="sb_markers_summary">Merkitse segmentit aikapalkkiin.</string>

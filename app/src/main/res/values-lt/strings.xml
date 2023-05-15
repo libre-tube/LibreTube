@@ -115,8 +115,6 @@
     <string name="worst_quality">Blogiausia</string>
     <string name="notify_new_streams">Pranešimai apie naujas transliacijas</string>
     <string name="irreversible">Ar tikrai\? To nebus galima atšaukti!</string>
-    <string name="channel_name_az">Kanalo pavadinimas (A-Z)</string>
-    <string name="channel_name_za">Kanalo pavadinimas (Z-A)</string>
     <string name="export_subscriptions">Eksportuoti prenumeratas</string>
     <string name="skip_buttons">Praleidimo mygtukai</string>
     <string name="skip_buttons_summary">Rodyti mygtukus, kad pereitumėte prie kito arba ankstesnio vaizdo įrašo.</string>
@@ -150,7 +148,6 @@
     <string name="invalid_filename">Netinkamas failo pavadinimas!</string>
     <string name="playlists_order">Grojaraščių tvarka</string>
     <string name="playlistNameReversed">Grojaraščio pavadinimas (atvirkštinis)</string>
-    <string name="recentlyUpdated">Neseniai atnaujinta</string>
     <string name="time_code">Laiko kodas (sekundėmis)</string>
     <string name="added_to_playlist">Pridėti į grojaraštį</string>
     <string name="queue">Eilė</string>
@@ -187,7 +184,6 @@
     <string name="server_error">Iškilo serverio problema. Bandyti kitą perdavimo šaltinį\?</string>
     <string name="sb_skip_manual">Praleisti rankiniu būdu</string>
     <string name="navigation_bar">Naršymo juosta</string>
-    <string name="recentlyUpdatedReversed">Neseniai atnaujinta (atvirkštinis)</string>
     <string name="import_from_yt_summary">Iš YouTube arba NewPipe</string>
     <string name="app_theme">Tema</string>
     <string name="importsuccess">Užprenumeruota</string>

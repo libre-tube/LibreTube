@@ -205,7 +205,6 @@
     <string name="playerAudioQuality">Якість звуку</string>
     <string name="notify_new_streams">Показувати сповіщення про нові трансляції</string>
     <string name="notifications">Сповіщення</string>
-    <string name="channel_name_za">Назва каналу (Я-А)</string>
     <string name="take_a_break">Час зробити перерву</string>
     <string name="no_subtitles_available">Субтитри відсутні</string>
     <string name="yt_shorts">Shorts</string>
@@ -262,7 +261,6 @@
     <string name="checking_frequency">Перевірка кожного …</string>
     <string name="most_views">Найбільше переглядів</string>
     <string name="least_views">Найменше переглядів</string>
-    <string name="channel_name_az">Назва каналу (А-Я)</string>
     <string name="skip_buttons">Кнопки пропуску</string>
     <string name="skip_buttons_summary">Показувати кнопки для переходу до наступного або попереднього відео.</string>
     <string name="history_size">Максимальний розмір історії</string>
@@ -288,8 +286,6 @@
     <string name="mobile_data">Мобільні дані</string>
     <string name="filename">Назва файлу</string>
     <string name="invalid_filename">Неприпустима назва файлу!</string>
-    <string name="recentlyUpdated">Нещодавно оновлені</string>
-    <string name="recentlyUpdatedReversed">Нещодавно оновлені (зворотний порядок)</string>
     <string name="playlistNameReversed">Назва добірки (у зворотному порядку)</string>
     <string name="playlists_order">Порядок добірок</string>
     <string name="time_code">Часовий код (секунд)</string>
@@ -433,8 +429,6 @@
     <string name="show_stream_thumbnails_summary">Показувати мініатюри нових трансляцій. Увімкнення цієї опції споживає додаткові дані.</string>
     <string name="show_stream_thumbnails">Показувати мініатюри трансляцій</string>
     <string name="unlimited_search_history">Необмежена історія запитів</string>
-    <string name="playlist_name_za">Назва добірки (Я-А)</string>
-    <string name="playlist_name_az">Назва добірки (А-Я)</string>
     <string name="duration">Тривалість</string>
     <string name="duration_reversed">Тривалість (у зворотному порядку)</string>
 </resources>

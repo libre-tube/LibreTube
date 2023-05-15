@@ -199,8 +199,6 @@
     <string name="least_recent">Antigos</string>
     <string name="most_views">Mais vistos</string>
     <string name="least_views">Menos vistos</string>
-    <string name="channel_name_az">Nome do canal (A-Z)</string>
-    <string name="channel_name_za">Nome do canal (Z-A)</string>
     <string name="translate">Tradução</string>
     <string name="error_occurred">Erro</string>
     <string name="network_all">Todas</string>
@@ -289,8 +287,6 @@
     <string name="invalid_filename">Nome de ficheiro inválido!</string>
     <string name="playlists_order">Ordem das listas de reprodução</string>
     <string name="playlistNameReversed">Nome da lista de reprodução (invertido)</string>
-    <string name="recentlyUpdated">Atualizado recentemente</string>
-    <string name="recentlyUpdatedReversed">Atualizado recentemente (invertido)</string>
     <string name="category_preview_description">Para segmentos detalhando conteúdo futuro sem informações adicionais. Se incluir clipes que aparecem apenas aqui, é muito provável que esta seja a categoria errada.</string>
     <string name="sb_markers">Marcadores</string>
     <string name="sb_markers_summary">Marcar segmentos na barra de tempo.</string>
@@ -430,8 +426,6 @@
     <string name="show_stream_thumbnails">Mostrar miniaturas do vídeo</string>
     <string name="show_stream_thumbnails_summary">Mostrar miniaturas dos novos vídeos. A ativação implica a utilização de dados.</string>
     <string name="unlimited_search_history">Histórico de pesquisa ilimitado</string>
-    <string name="playlist_name_az">Nome da lista de reprodução (A-Z)</string>
-    <string name="playlist_name_za">Nome da lista de reprodução (Z-A)</string>
     <string name="duration">Duração</string>
     <string name="duration_reversed">Duração (invertida)</string>
 </resources>

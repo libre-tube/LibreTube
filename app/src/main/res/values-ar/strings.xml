@@ -222,9 +222,7 @@
     <string name="most_recent">الأحدث</string>
     <string name="least_recent">الأقدم</string>
     <string name="least_views">أقل عدد من المشاهدات</string>
-    <string name="channel_name_za">اسم القناة (Z-A)</string>
     <string name="most_views">معظم المشاهدات</string>
-    <string name="channel_name_az">اسم القناة (من الألف إلى الياء)</string>
     <string name="required_network">اتصال مطلوب</string>
     <string name="network_all">الجميع</string>
     <string name="network_metered">مقننة</string>
@@ -290,8 +288,6 @@
     <string name="invalid_filename">اسم الملف غير صالح!</string>
     <string name="playlists_order">ترتيب قوائم التشغيل</string>
     <string name="playlistNameReversed">اسم قائمة التشغيل (معكوس)</string>
-    <string name="recentlyUpdated">تم التحديث مؤخرا</string>
-    <string name="recentlyUpdatedReversed">تم تحديثه مؤخرًا (معكوس)</string>
     <string name="time_code">رمز الوقت (بالثواني)</string>
     <string name="added_to_playlist">تمت الإضافة إلى قائمة التشغيل</string>
     <string name="queue">الانتظار</string>
@@ -438,9 +434,7 @@
     </plurals>
     <string name="show_stream_thumbnails">إظهار الصور المصغرة للبث</string>
     <string name="show_stream_thumbnails_summary">يعرض صورة مصغرة من تيار جديد . تمكين هذه الميزة سوف تستهلك بيانات إضافية .</string>
-    <string name="playlist_name_az">اسم قائمة التشغيل (من الألف إلى الياء)</string>
     <string name="unlimited_search_history">سجل بحث غير محدود</string>
-    <string name="playlist_name_za">اسم قائمة التشغيل (ي-أ)</string>
     <string name="duration">المدة</string>
     <string name="duration_reversed">المدة (معكوسة)</string>
 </resources>

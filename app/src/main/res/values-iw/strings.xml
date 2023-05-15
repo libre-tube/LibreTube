@@ -214,8 +214,6 @@
     <string name="worst_quality">הנחותה ביותר</string>
     <string name="default_subtitle_language">שפת הכתוביות</string>
     <string name="irreversible">להמשיך\? אי אפשר לבטל את זה!</string>
-    <string name="channel_name_az">שם הערוץ (א-ת)</string>
-    <string name="channel_name_za">שם הערוץ (ת-א)</string>
     <string name="notify_new_streams">הצגת התראות על תזרימים חדשים</string>
     <string name="notify_new_streams_summary">הצגת התראות על תזרימים חדשים מיוצרים שבחרת לעקוב אחריהם.</string>
     <string name="notifications">התראות</string>
@@ -290,8 +288,6 @@
     <string name="invalid_filename">שם הקובץ שגוי!</string>
     <string name="playlists_order">סדר רשימות הנגינה</string>
     <string name="playlistNameReversed">שם רשימת הנגינה (הפוך)</string>
-    <string name="recentlyUpdated">עודכנו לאחרונה</string>
-    <string name="recentlyUpdatedReversed">עודכנו לאחרונה (הפוך)</string>
     <string name="time_code">קוד זמן (שניות)</string>
     <string name="added_to_playlist">נוסף לרשימת נגינה</string>
     <string name="queue">תור</string>
@@ -433,8 +429,6 @@
     <string name="show_stream_thumbnails">הצגת תמונות ממוזערות של תזרימים</string>
     <string name="show_stream_thumbnails_summary">הצגת תמונות ממוזערות של תזרימים חדשים. הפעלת האפשרות תוביל לצריכה של נתונים נוספים.</string>
     <string name="unlimited_search_history">היסטוריית חיפושים בלתי מוגבלת</string>
-    <string name="playlist_name_az">שם רשימת נגינה (א-ת)</string>
-    <string name="playlist_name_za">שם רשימת נגינה (ת-א)</string>
     <string name="duration">משך</string>
     <string name="duration_reversed">משך (הפוך)</string>
 </resources>

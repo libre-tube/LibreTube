@@ -252,7 +252,6 @@
     <string name="save_feed">在背景載入訂閱列表</string>
     <string name="save_feed_summary">在背景載入訂閱列表，並防止自動重新載入。</string>
     <string name="filename">檔案名稱</string>
-    <string name="recentlyUpdatedReversed">最近更新 (反序)</string>
     <string name="added_to_playlist">新增至播放清單</string>
     <string name="confirm_unsubscribe">您確定要取消訂閱 %1$s 嗎？</string>
     <string name="misc">雜項</string>
@@ -271,7 +270,6 @@
     <string name="playback_pitch">音高</string>
     <string name="playlists_order">播放清單順序</string>
     <string name="playlistNameReversed">播放清單名稱 (反序)</string>
-    <string name="recentlyUpdated">最近更新</string>
     <string name="pure_theme_summary">純粹白/黑主題</string>
     <string name="watch_positions_title">記住播放位置</string>
     <string name="reset_watch_positions">重設</string>
@@ -306,10 +304,8 @@
     <string name="network_wifi">僅限Wifi</string>
     <string name="checking_frequency">檢查頻率…</string>
     <string name="most_views">最多觀看</string>
-    <string name="channel_name_az">頻道名稱 (A-Z)</string>
     <string name="most_recent">最新</string>
     <string name="no_subtitles_available">無字幕可用</string>
-    <string name="channel_name_za">頻道名稱 (Z-A)</string>
     <string name="irreversible">您確定嗎？此操作無法撤銷！</string>
     <string name="least_views">最少觀看</string>
     <string name="audio_video_summary">品質與格式</string>

@@ -220,8 +220,6 @@
     <string name="most_recent">Jaunākie</string>
     <string name="least_recent">Senākie</string>
     <string name="most_views">Skatītākie</string>
-    <string name="channel_name_az">Kanāla nosaukums (A-Z)</string>
-    <string name="channel_name_za">Kanāla nosaukums (Z-A)</string>
     <string name="network_metered">Ierobežots</string>
     <string name="no_search_result">Nav rezultātu.</string>
     <string name="least_views">Neskatītākie</string>
@@ -281,8 +279,6 @@
     <string name="invalid_filename">Nederīgs faila nosaukums!</string>
     <string name="playlists_order">Atskaņošanas sarakstu secība</string>
     <string name="playlistNameReversed">Atskaņošanas saraksta nosaukums (atpakaļgaitā)</string>
-    <string name="recentlyUpdated">Nesen atjaunināts</string>
-    <string name="recentlyUpdatedReversed">Nesen atjaunināts (atpakaļgaitā)</string>
     <string name="save_feed">Ielādēt plūsmu fonā</string>
     <string name="save_feed_summary">Ielādē abonementu plūsmu fonā un neļauj tai automātiski atjaunoties.</string>
     <string name="play_next">Atskaņot nākamo</string>
