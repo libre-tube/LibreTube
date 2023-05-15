@@ -432,4 +432,8 @@
     <string name="duration">Тривалість</string>
     <string name="duration_reversed">Тривалість (у зворотному порядку)</string>
     <string name="shorts_notifications">Сповіщення для shorts</string>
+    <string name="alphabetic">Абетковий</string>
+    <string name="alphabetic_reversed">Абетковий (зворотний)</string>
+    <string name="creation_date">Дата створення</string>
+    <string name="creation_date_reversed">Дата створення (зворотна)</string>
 </resources>
