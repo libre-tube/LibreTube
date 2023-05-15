@@ -38,13 +38,13 @@ class SubscriptionChannelAdapter(
                 NavigationHelper.navigateChannel(root.context, subscription.url)
             }
             root.setOnLongClickListener {
-                ChannelOptionsBottomSheet(subscription.url!!.toID(), subscription.name)
+                ChannelOptionsBottomSheet(subscription.url.toID(), subscription.name)
                     .show((root.context as BaseActivity).supportFragmentManager)
                 true
             }
 
             subscriptionSubscribe.setupSubscriptionButton(
-                subscription.url?.toID(),
+                subscription.url.toID(),
                 subscription.name,
                 notificationBell,
                 true,

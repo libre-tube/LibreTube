@@ -428,4 +428,5 @@
     <string name="unlimited_search_history">Cronologia di ricerca infinita</string>
     <string name="duration">Durata</string>
     <string name="duration_reversed">Durata (invertito)</string>
+    <string name="shorts_notifications">Notifiche per gli Short</string>
 </resources>

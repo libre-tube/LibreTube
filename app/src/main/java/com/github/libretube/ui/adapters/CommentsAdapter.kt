@@ -103,8 +103,9 @@ class CommentsAdapter(
                 // highlight the comment that is being replied to
                 if (comment == comments.firstOrNull()) {
                     root.setBackgroundColor(
-                        ThemeHelper.getThemeColor(root.context, R.attr.colorSurface),
+                        ThemeHelper.getThemeColor(root.context, com.google.android.material.R.attr.colorSurface),
                     )
+
                     root.updatePadding(top = 20)
                     root.updateLayoutParams<MarginLayoutParams> { bottomMargin = 20 }
                 } else {

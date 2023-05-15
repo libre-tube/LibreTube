@@ -9,7 +9,6 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.services.DownloadService
 import java.nio.file.Path
-import kotlin.io.path.createDirectories
 
 object DownloadHelper {
     const val VIDEO_DIR = "video"
@@ -35,8 +34,11 @@ object DownloadHelper {
     }
 
     fun getDownloadDir(context: Context, path: String): Path {
-        @Suppress("NewApi") // The Path class is desugared.
-        return getOfflineStorageDir(context).resolve(path).createDirectories()
+        // TODO: Use createDirectories() when https://issuetracker.google.com/issues/279034662 is
+        // fixed.
+        return getOfflineStorageDir(context).resolve(path).apply {
+            toFile().mkdirs()
+        }
     }
 
     fun getMaxConcurrentDownloads(): Int {

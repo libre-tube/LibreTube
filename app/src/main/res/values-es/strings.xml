@@ -72,10 +72,10 @@
     <string name="history">Historial</string>
     <string name="search_history">Historial de búsqueda</string>
     <string name="clear_history">Borrar historial</string>
-    <string name="music_songs">Canciones musicales de YT</string>
-    <string name="music_videos">Vídeos musicales de YT</string>
-    <string name="music_albums">Álbumes musicales de YT</string>
-    <string name="music_playlists">Playlists de música de YT</string>
+    <string name="music_songs">YT Música: Canciones</string>
+    <string name="music_videos">YT Música: Vídeos</string>
+    <string name="music_albums">YT Música: Álbumes</string>
+    <string name="music_playlists">YT Música: Listas</string>
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">Usa la API de https://sponsor.ajay.app</string>
     <string name="segment_skipped">Segmento omitido</string>
@@ -140,7 +140,7 @@
     <string name="buffering_goal">Precarga</string>
     <string name="buffering_goal_summary">Cantidad máxima de segundos de vídeo a almacenar en búfer.</string>
     <string name="category_filler">Clips de relleno</string>
-    <string name="category_music_offtopic">Música: Sección no musical</string>
+    <string name="category_music_offtopic">Música: Sección sin música</string>
     <string name="category_preview">Avance/Resumen</string>
     <string name="category_preview_description">Para segmentos que detallan contenido futuro sin información adicional. Si incluye clips que solo aparecen aquí, es muy probable que ésta sea la categoría incorrecta.</string>
     <string name="category_filler_description">Escenas paralelas que se añaden en tono de humor o de relleno, que no son necesarias para entender el contenido principal del vídeo.</string>
@@ -278,8 +278,8 @@
     <string name="local_subscriptions">Suscripciones locales</string>
     <string name="preferences">Preferencias</string>
     <string name="backup_customInstances">Instancias personalizadas</string>
-    <string name="save_feed">Cargar suscripciones en segundo plano</string>
-    <string name="save_feed_summary">Cargar la lista de suscripciones en segundo plano para evitar que la pestaña se auto-refresque.</string>
+    <string name="save_feed">Cargar contenido en segundo plano</string>
+    <string name="save_feed_summary">Cargar contenido de las suscripciones en segundo plano para evitar que la pestaña se auto-refresque.</string>
     <string name="play_next">Reproducir el siguiente</string>
     <string name="navigation_bar">Barra de navegación</string>
     <string name="change_region">Tendencias parece no estar disponible para la región actual. Selecciona otra en la configuración.</string>
@@ -353,7 +353,7 @@
     <string name="nothing_selected">¡Nada seleccionado!</string>
     <string name="color_violet">Violeta Versátil</string>
     <string name="failed_fetching_instances">No se pudieron obtener las instancias disponibles.</string>
-    <string name="hide_watched_from_feed">Ocultar los videos vistos del feed</string>
+    <string name="hide_watched_from_feed">Ocultar vídeos vistos</string>
     <string name="hide_watched_from_feed_summary">No mostrar los vídeos vistos más de un 90% en la pestaña de suscripciones.</string>
     <string name="playlistUrl">URL de la lista de reproducción</string>
     <string name="pause_on_quit">Pausar al salir</string>
@@ -428,4 +428,5 @@
     <string name="unlimited_search_history">Historial de búsqueda ilimitado</string>
     <string name="duration_reversed">Duración (invertida)</string>
     <string name="duration">Duración</string>
+    <string name="shorts_notifications">Notificaciones de Shorts</string>
 </resources>

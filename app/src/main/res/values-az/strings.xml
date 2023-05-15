@@ -348,7 +348,7 @@
     <string name="proceed">Davam et</string>
     <string name="pinch_control">Çimdik nəzarəti</string>
     <string name="pinch_control_summary">Böyütmək/kiçiltmək üçün çimdik jesti istifadə et.</string>
-    <string name="theme_monochrome">Minimalist Tək Rəngli</string>
+    <string name="theme_monochrome">Minimalist Saya</string>
     <string name="play_latest_videos">Ən son videoları oynat</string>
     <string name="nothing_selected">Heç nə seçilməyib!</string>
     <string name="color_violet">Bütöv Bənövşə</string>
@@ -425,4 +425,5 @@
     <string name="unlimited_search_history">Qeyri-məhdud axtarış tarixçəsi</string>
     <string name="duration_reversed">Müddət (əks)</string>
     <string name="duration">Müddət</string>
+    <string name="shorts_notifications">Qısa videolar üçün bildirişlər</string>
 </resources>

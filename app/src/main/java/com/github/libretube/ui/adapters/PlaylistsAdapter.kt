@@ -40,7 +40,8 @@ class PlaylistsAdapter(
             // set imageview drawable as empty playlist if imageview empty
             if (playlist.thumbnail.orEmpty().split("/").size <= 4) {
                 playlistThumbnail.setImageResource(R.drawable.ic_empty_playlist)
-                playlistThumbnail.setBackgroundColor(R.attr.colorSurface)
+                playlistThumbnail
+                    .setBackgroundColor(com.google.android.material.R.attr.colorSurface)
             } else {
                 ImageHelper.loadImage(playlist.thumbnail, playlistThumbnail)
             }

@@ -188,8 +188,8 @@
     <string name="background_channel_description">在通知欄顯示附有按鈕的音訊播放器。</string>
     <string name="history_empty">尚無歷史紀錄。</string>
     <string name="notifications">通知</string>
-    <string name="notify_new_streams">新串流通知</string>
-    <string name="notify_new_streams_summary">您跟隨的創作者最新串流的通知。</string>
+    <string name="notify_new_streams">顯示新串流通知</string>
+    <string name="notify_new_streams_summary">顯示您跟隨的創作者最新串流的通知。</string>
     <string name="wifi">Wi-Fi</string>
     <string name="pop_up">彈出</string>
     <string name="no_comments_available">此視頻沒有評論。</string>
@@ -213,8 +213,8 @@
     <string name="time">時長</string>
     <string name="start_time">開始時間</string>
     <string name="end_time">結束時間</string>
-    <string name="notification_time">通知時長</string>
-    <string name="notification_time_summary">通知顯示的時長。</string>
+    <string name="notification_time">限制通知時間</string>
+    <string name="notification_time_summary">限制串流通知顯示的時間。</string>
     <string name="download_completed">下載完成</string>
     <string name="failed_fetching_instances">無法取得可用實例。</string>
     <string name="play_next">播放下一部</string>
@@ -401,4 +401,28 @@
     <string name="lbry_hls_summary">如果可用，請使用 LBRY HLS 進行流式傳輸。</string>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="replies">回复</string>
+    <string name="playlist_name_az">播放清單名稱 (A-Z)</string>
+    <string name="playlist_name_za">播放清單名稱 (Z-A)</string>
+    <string name="duration">持續時間</string>
+    <string name="duration_reversed">持續時間（反轉）</string>
+    <string name="unlimited_search_history">無限制搜尋歷史紀錄</string>
+    <string name="fullscreen_gestures">進入/退出全螢幕手勢</string>
+    <string name="show_stream_thumbnails_summary">顯示新串流的縮圖。啟用此選項會消耗更多流量。</string>
+    <string name="stats_for_nerds">詳細統計資料</string>
+    <string name="auto_fullscreen_shorts">短片自動全螢幕</string>
+    <plurals name="channel_new_streams">
+        <item quantity="other">%d 個新串流</item>
+    </plurals>
+    <string name="go_to_video">前往影片</string>
+    <string name="disable_proxy">停用 Piped 代理伺服器</string>
+    <string name="channel_groups">頻道群組</string>
+    <string name="new_group">新</string>
+    <string name="group_name">群組名稱</string>
+    <string name="edit_group">編輯群組</string>
+    <string name="shorts_notifications">短片通知</string>
+    <string name="show_stream_thumbnails">顯示串流縮圖</string>
+    <string name="disable_proxy_summary">直接從 YouTube 的伺服器載入影片與圖片。僅在您使用 VPN 時才啟用此選項！注意，這可能對來自 YouTube 音樂的內容無效。</string>
+    <string name="video_id">視訊 ID</string>
+    <string name="play_automatically">自動播放</string>
+    <string name="play_automatically_summary">選取時自動開始播放影片</string>
 </resources>

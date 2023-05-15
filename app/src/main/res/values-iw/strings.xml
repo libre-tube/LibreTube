@@ -431,4 +431,5 @@
     <string name="unlimited_search_history">היסטוריית חיפושים בלתי מוגבלת</string>
     <string name="duration">משך</string>
     <string name="duration_reversed">משך (הפוך)</string>
+    <string name="shorts_notifications">התראות על קצרצרים</string>
 </resources>

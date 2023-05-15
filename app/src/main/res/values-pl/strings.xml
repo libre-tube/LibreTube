@@ -431,4 +431,5 @@
         <item quantity="many">%d nowych filmów</item>
         <item quantity="other">%d nowych filmów</item>
     </plurals>
+    <string name="shorts_notifications">Powiadomienia dla krótkich wideo</string>
 </resources>

@@ -35,12 +35,12 @@ class LegacySubscriptionAdapter(
             root.setOnClickListener {
                 NavigationHelper.navigateChannel(
                     root.context,
-                    subscription.url!!.toID(),
+                    subscription.url.toID(),
                 )
             }
 
             root.setOnLongClickListener {
-                ChannelOptionsBottomSheet(subscription.url!!.toID(), subscription.name)
+                ChannelOptionsBottomSheet(subscription.url.toID(), subscription.name)
                     .show((root.context as BaseActivity).supportFragmentManager)
                 true
             }

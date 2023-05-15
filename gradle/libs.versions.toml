@@ -1,6 +1,6 @@
 [versions]
 appcompat = "1.6.1"
-core = "1.10.0"
+core = "1.10.1"
 lifecycle = "2.6.1"
 constraintlayout = "2.1.4"
 material = "1.9.0"
@@ -18,7 +18,7 @@ cronetOkHttp = "0.1.0"
 coil = "2.3.0"
 leakcanary = "2.10"
 room = "2.5.1"
-kotlinxSerialization = "1.5.0"
+kotlinxSerialization = "1.5.1"
 kotlinxDatetime = "0.4.0"
 kotlinxRetrofit = "1.0.0"
 

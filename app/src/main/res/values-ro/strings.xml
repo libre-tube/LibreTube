@@ -428,4 +428,5 @@
     <string name="unlimited_search_history">Istoric de căutare nelimitat</string>
     <string name="duration">Durată</string>
     <string name="duration_reversed">Durată (inversată)</string>
+    <string name="shorts_notifications">Notificări pentru Shorts</string>
 </resources>

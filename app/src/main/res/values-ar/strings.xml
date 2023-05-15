@@ -437,4 +437,5 @@
     <string name="unlimited_search_history">سجل بحث غير محدود</string>
     <string name="duration">المدة</string>
     <string name="duration_reversed">المدة (معكوسة)</string>
+    <string name="shorts_notifications">تنبيهات للفيديوهات القصيرة</string>
 </resources>

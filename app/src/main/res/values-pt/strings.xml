@@ -428,4 +428,5 @@
     <string name="unlimited_search_history">Histórico de pesquisa ilimitado</string>
     <string name="duration">Duração</string>
     <string name="duration_reversed">Duração (invertida)</string>
+    <string name="shorts_notifications">Notificação para vídeos curtos</string>
 </resources>

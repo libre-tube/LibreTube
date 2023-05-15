@@ -431,4 +431,5 @@
     <string name="unlimited_search_history">Неограниченная история поиска</string>
     <string name="duration_reversed">Продолжительность (обратная)</string>
     <string name="duration">Продолжительность</string>
+    <string name="shorts_notifications">Уведомления для shorts</string>
 </resources>
