@@ -241,18 +241,26 @@ class PlaylistFragment : Fragment() {
             selectedSortOrder in listOf(0, 1) || playlistType == PlaylistType.PUBLIC -> {
                 playlistFeed
             }
+
             selectedSortOrder in listOf(2, 3) -> {
                 playlistFeed.sortedBy { it.duration }
             }
+
             selectedSortOrder in listOf(4, 5) -> {
                 playlistFeed.sortedBy { it.title }
             }
+
             else -> throw IllegalArgumentException()
         }.let {
             if (selectedSortOrder % 2 == 0) it else it.reversed()
         }
 
-        playlistAdapter = PlaylistAdapter(videos.toMutableList(), playlistId!!, playlistType)
+        playlistAdapter = PlaylistAdapter(
+            playlistFeed,
+            videos.toMutableList(),
+            playlistId!!,
+            playlistType,
+        )
         binding.playlistRecView.adapter = playlistAdapter
 
         // listen for playlist items to become deleted
@@ -303,8 +311,7 @@ class PlaylistFragment : Fragment() {
                     viewHolder: RecyclerView.ViewHolder,
                     direction: Int,
                 ) {
-                    val position = viewHolder.absoluteAdapterPosition
-                    playlistAdapter!!.removeFromPlaylist(requireContext(), position)
+                    playlistAdapter!!.removeFromPlaylist(requireContext(), viewHolder.absoluteAdapterPosition)
                 }
             }
 
