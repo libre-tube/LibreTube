@@ -34,12 +34,13 @@ class CommentsMainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val binding = _binding ?: return
         val layoutManager = LinearLayoutManager(requireContext())
         binding.commentsRV.layoutManager = layoutManager
         binding.commentsRV.setItemViewCacheSize(20)
 
         binding.commentsRV.viewTreeObserver.addOnScrollChangedListener {
-            val binding = _binding ?: return@addOnScrollChangedListener
+            val viewBinding = _binding ?: return@addOnScrollChangedListener
             // save the last scroll position to become used next time when the sheet is opened
             viewModel.currentCommentsPosition = layoutManager.findFirstVisibleItemPosition()
 
@@ -48,11 +49,11 @@ class CommentsMainFragment : Fragment() {
             commentsSheetBinding?.btnScrollToTop?.isVisible = viewModel.currentCommentsPosition != 0
             commentsSheetBinding?.btnScrollToTop?.setOnClickListener {
                 // scroll back to the top / first comment
-                binding.commentsRV.smoothScrollToPosition(0)
+                viewBinding.commentsRV.smoothScrollToPosition(0)
                 viewModel.currentCommentsPosition = 0
             }
 
-            if (!binding.commentsRV.canScrollVertically(1)) {
+            if (!viewBinding.commentsRV.canScrollVertically(1)) {
                 viewModel.fetchNextComments()
             }
         }
