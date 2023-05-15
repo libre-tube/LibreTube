@@ -423,4 +423,8 @@
     <string name="duration">Durasi</string>
     <string name="duration_reversed">Durasi (dibalik)</string>
     <string name="shorts_notifications">Notifikasi untuk video shorts</string>
+    <string name="alphabetic">Abjad</string>
+    <string name="alphabetic_reversed">Abjad (dibalik)</string>
+    <string name="creation_date_reversed">Tanggal pembuatan (dibalik)</string>
+    <string name="creation_date">Tanggal pembuatan</string>
 </resources>

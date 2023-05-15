@@ -432,4 +432,8 @@
         <item quantity="other">%d nowych filmów</item>
     </plurals>
     <string name="shorts_notifications">Powiadomienia dla krótkich wideo</string>
+    <string name="creation_date_reversed">Data utworzenia (odwrotnie)</string>
+    <string name="creation_date">Data utworzenia</string>
+    <string name="alphabetic">Alfabetycznie</string>
+    <string name="alphabetic_reversed">Alfabetycznie (odwrotnie)</string>
 </resources>

@@ -426,7 +426,11 @@
         <item quantity="other">%d nuevas transmisiones</item>
     </plurals>
     <string name="unlimited_search_history">Historial de búsqueda ilimitado</string>
-    <string name="duration_reversed">Duración (invertida)</string>
+    <string name="duration_reversed">Duración (invertido)</string>
     <string name="duration">Duración</string>
     <string name="shorts_notifications">Notificaciones de Shorts</string>
+    <string name="creation_date_reversed">Fecha de creación (invertido)</string>
+    <string name="creation_date">Fecha de creación</string>
+    <string name="alphabetic">Alfabético</string>
+    <string name="alphabetic_reversed">Alfabético (invertido)</string>
 </resources>
