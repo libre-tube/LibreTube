@@ -8,6 +8,17 @@ import android.text.format.DateUtils
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.media3.common.C
+import androidx.media3.common.MediaItem
+import androidx.media3.common.MediaItem.SubtitleConfiguration
+import androidx.media3.common.MimeTypes
+import androidx.media3.common.Player
+import androidx.media3.datasource.FileDataSource
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.source.MergingMediaSource
+import androidx.media3.exoplayer.source.ProgressiveMediaSource
+import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
+import androidx.media3.ui.PlayerView
 import com.github.libretube.compat.PictureInPictureCompat
 import com.github.libretube.compat.PictureInPictureParamsCompat
 import com.github.libretube.constants.IntentData
@@ -22,26 +33,16 @@ import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.models.PlayerViewModel
-import com.google.android.exoplayer2.C
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.MediaItem.SubtitleConfiguration
-import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.source.MergingMediaSource
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
-import com.google.android.exoplayer2.ui.StyledPlayerView
-import com.google.android.exoplayer2.upstream.FileDataSource
-import com.google.android.exoplayer2.util.MimeTypes
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+@androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class OfflinePlayerActivity : BaseActivity() {
     private lateinit var binding: ActivityOfflinePlayerBinding
     private lateinit var videoId: String
     private lateinit var player: ExoPlayer
-    private lateinit var playerView: StyledPlayerView
+    private lateinit var playerView: PlayerView
     private lateinit var trackSelector: DefaultTrackSelector
 
     private lateinit var playerBinding: ExoStyledPlayerControlViewBinding

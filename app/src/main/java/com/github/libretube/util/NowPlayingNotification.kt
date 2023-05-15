@@ -12,13 +12,20 @@ import android.os.Bundle
 import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
-import android.support.v4.media.session.PlaybackStateCompat
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
 import androidx.core.app.PendingIntentCompat
 import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.os.bundleOf
+import androidx.media3.common.Player
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.session.CommandButton
+import androidx.media3.session.DefaultMediaNotificationProvider
+import androidx.media3.session.MediaSession
+import androidx.media3.session.SessionCommand
+import androidx.media3.session.SessionResult
+import androidx.media3.ui.PlayerNotificationManager
 import coil.request.ImageRequest
 import com.github.libretube.R
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
@@ -28,13 +35,10 @@ import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.ui.activities.MainActivity
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
-import com.google.android.exoplayer2.ext.mediasession.TimelineQueueNavigator
-import com.google.android.exoplayer2.ui.PlayerNotificationManager
-import com.google.android.exoplayer2.ui.PlayerNotificationManager.CustomActionReceiver
+import com.google.common.collect.ImmutableList
+import com.google.common.util.concurrent.ListenableFuture
 
+@androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class NowPlayingNotification(
     private val context: Context,
     private val player: ExoPlayer,
@@ -47,12 +51,7 @@ class NowPlayingNotification(
     /**
      * The [MediaSessionCompat] for the [notificationData].
      */
-    private lateinit var mediaSession: MediaSessionCompat
-
-    /**
-     * The [MediaSessionConnector] to connect with the [mediaSession] and implement it with the [player].
-     */
-    private lateinit var mediaSessionConnector: MediaSessionConnector
+    private lateinit var mediaSession: MediaSession
 
     /**
      * The [PlayerNotificationManager] to load the [mediaSession] content on it.
@@ -137,7 +136,7 @@ class NowPlayingNotification(
         ImageHelper.imageLoader.enqueue(request)
     }
 
-    private val customActionReceiver = object : CustomActionReceiver {
+    private val customActionReceiver = object : PlayerNotificationManager.CustomActionReceiver {
         override fun createCustomActions(
             context: Context,
             instanceId: Int,
@@ -170,69 +169,89 @@ class NowPlayingNotification(
         }
     }
 
-    private fun createNotificationAction(drawableRes: Int, actionName: String, instanceId: Int): NotificationCompat.Action {
+    private fun createNotificationAction(
+        drawableRes: Int,
+        actionName: String,
+        instanceId: Int,
+    ): NotificationCompat.Action {
         val intent = Intent(actionName).setPackage(context.packageName)
         val pendingIntent = PendingIntentCompat
             .getBroadcast(context, instanceId, intent, PendingIntent.FLAG_CANCEL_CURRENT, false)
         return NotificationCompat.Action.Builder(drawableRes, actionName, pendingIntent).build()
     }
 
-    private fun createMediaSessionAction(@DrawableRes drawableRes: Int, actionName: String): MediaSessionConnector.CustomActionProvider {
-        return object : MediaSessionConnector.CustomActionProvider {
-            override fun getCustomAction(player: Player): PlaybackStateCompat.CustomAction? {
-                return PlaybackStateCompat.CustomAction.Builder(actionName, actionName, drawableRes).build()
-            }
-
-            override fun onCustomAction(player: Player, action: String, extras: Bundle?) {
-                handlePlayerAction(action)
-            }
-        }
+    private fun createMediaSessionAction(
+        @DrawableRes drawableRes: Int,
+        actionName: String,
+    ): CommandButton {
+        return CommandButton.Builder()
+            .setDisplayName(actionName)
+            .setSessionCommand(SessionCommand(actionName, bundleOf()))
+            .setIconResId(drawableRes)
+            .build()
     }
 
     /**
-     * Creates a [MediaSessionCompat] amd a [MediaSessionConnector] for the player
+     * Creates a [MediaSessionCompat] for the player
      */
     private fun createMediaSession() {
         if (this::mediaSession.isInitialized) return
-        mediaSession = MediaSessionCompat(context, this.javaClass.name).apply {
-            isActive = true
+
+        val sessionCallback = object : MediaSession.Callback {
+            override fun onConnect(
+                session: MediaSession,
+                controller: MediaSession.ControllerInfo,
+            ): MediaSession.ConnectionResult {
+                val connectionResult = super.onConnect(session, controller)
+                val availablePlayerCommands = connectionResult.availablePlayerCommands.buildUpon()
+                    .remove(Player.COMMAND_SEEK_TO_PREVIOUS)
+                    .build()
+                return MediaSession.ConnectionResult.accept(
+                    connectionResult.availableSessionCommands,
+                    availablePlayerCommands,
+                )
+            }
+
+            override fun onCustomCommand(
+                session: MediaSession,
+                controller: MediaSession.ControllerInfo,
+                customCommand: SessionCommand,
+                args: Bundle,
+            ): ListenableFuture<SessionResult> {
+                handlePlayerAction(customCommand.customAction)
+                return super.onCustomCommand(session, controller, customCommand, args)
+            }
         }
 
-        mediaSessionConnector = MediaSessionConnector(mediaSession).apply {
-            setPlayer(player)
-            setQueueNavigator(object : TimelineQueueNavigator(mediaSession) {
-                override fun getMediaDescription(
-                    player: Player,
-                    windowIndex: Int,
-                ): MediaDescriptionCompat {
-                    val appIcon = BitmapFactory.decodeResource(
-                        context.resources,
-                        R.drawable.ic_launcher_monochrome,
-                    )
-                    val extras = bundleOf(
-                        MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON to appIcon,
-                        MediaMetadataCompat.METADATA_KEY_TITLE to notificationData?.title,
-                        MediaMetadataCompat.METADATA_KEY_ARTIST to notificationData?.uploaderName,
-                    )
-                    return MediaDescriptionCompat.Builder()
-                        .setTitle(notificationData?.title)
-                        .setSubtitle(notificationData?.uploaderName)
-                        .setIconBitmap(appIcon)
-                        .setExtras(extras)
-                        .build()
-                }
+        mediaSession = MediaSession.Builder(context, player)
+            .setCallback(sessionCallback)
+            .build()
+        mediaSession.setCustomLayout(getCustomActions())
+    }
 
-                override fun getSupportedQueueNavigatorActions(player: Player): Long {
-                    return PlaybackStateCompat.ACTION_PLAY_PAUSE
-                }
-            })
-            setCustomActionProviders(
-                createMediaSessionAction(R.drawable.ic_prev_outlined, PREV),
-                createMediaSessionAction(R.drawable.ic_next_outlined, NEXT),
-                createMediaSessionAction(R.drawable.ic_rewind_md, REWIND),
-                createMediaSessionAction(R.drawable.ic_forward_md, FORWARD),
-            )
-        }
+    private fun getCustomActions() = mutableListOf(
+        createMediaSessionAction(R.drawable.ic_prev_outlined, PREV),
+        createMediaSessionAction(R.drawable.ic_next_outlined, NEXT),
+        createMediaSessionAction(R.drawable.ic_rewind_md, REWIND),
+        createMediaSessionAction(R.drawable.ic_forward_md, FORWARD),
+    )
+
+    private fun getMediaDescription(): MediaDescriptionCompat {
+        val appIcon = BitmapFactory.decodeResource(
+            context.resources,
+            R.drawable.ic_launcher_monochrome,
+        )
+        val extras = bundleOf(
+            MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON to appIcon,
+            MediaMetadataCompat.METADATA_KEY_TITLE to notificationData?.title,
+            MediaMetadataCompat.METADATA_KEY_ARTIST to notificationData?.uploaderName,
+        )
+        return MediaDescriptionCompat.Builder()
+            .setTitle(notificationData?.title)
+            .setSubtitle(notificationData?.uploaderName)
+            .setIconBitmap(appIcon)
+            .setExtras(extras)
+            .build()
     }
 
     private fun handlePlayerAction(action: String) {
@@ -244,6 +263,7 @@ class NowPlayingNotification(
                     )
                 }
             }
+
             PREV -> {
                 if (PlayingQueue.hasPrev()) {
                     PlayingQueue.onQueueItemSelected(
@@ -251,9 +271,11 @@ class NowPlayingNotification(
                     )
                 }
             }
+
             REWIND -> {
                 player.seekTo(player.currentPosition - PlayerHelper.seekIncrement)
             }
+
             FORWARD -> {
                 player.seekTo(player.currentPosition + PlayerHelper.seekIncrement)
             }
@@ -278,6 +300,19 @@ class NowPlayingNotification(
         }
     }
 
+    class NotificationProvider(val context: Context) : DefaultMediaNotificationProvider(context) {
+        override fun getMediaButtons(
+            session: MediaSession,
+            playerCommands: Player.Commands,
+            customLayout: ImmutableList<CommandButton>,
+            showPauseButton: Boolean,
+        ): ImmutableList<CommandButton> {
+            val buttons = super.getMediaButtons(session, playerCommands, customLayout, showPauseButton)
+            buttons.removeFirst()
+            return buttons
+        }
+    }
+
     /**
      * Initializes the [playerNotification] attached to the [player] and shows it.
      */
@@ -291,7 +326,7 @@ class NowPlayingNotification(
             .build().apply {
                 setPlayer(player)
                 setColorized(true)
-                setMediaSessionToken(mediaSession.sessionToken)
+                setMediaSessionToken(mediaSession.sessionCompatToken)
                 setSmallIcon(R.drawable.ic_launcher_lockscreen)
                 setUseNextAction(false)
                 setUsePreviousAction(false)
@@ -305,7 +340,6 @@ class NowPlayingNotification(
     fun destroySelfAndPlayer() {
         playerNotification?.setPlayer(null)
 
-        mediaSession.isActive = false
         mediaSession.release()
 
         player.stop()

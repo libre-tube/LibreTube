@@ -22,6 +22,16 @@ import androidx.core.view.isVisible
 import androidx.core.view.marginStart
 import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.LifecycleOwner
+import androidx.media3.common.Player
+import androidx.media3.common.text.Cue
+import androidx.media3.common.util.RepeatModeUtil
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.trackselection.TrackSelector
+import androidx.media3.ui.AspectRatioFrameLayout
+import androidx.media3.ui.CaptionStyleCompat
+import androidx.media3.ui.PlayerView
+import androidx.media3.ui.SubtitleView
+import androidx.media3.ui.TimeBar
 import com.github.libretube.R
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
@@ -44,22 +54,13 @@ import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.util.PlayingQueue
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.text.Cue
-import com.google.android.exoplayer2.trackselection.TrackSelector
-import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
-import com.google.android.exoplayer2.ui.CaptionStyleCompat
-import com.google.android.exoplayer2.ui.StyledPlayerView
-import com.google.android.exoplayer2.ui.SubtitleView
-import com.google.android.exoplayer2.ui.TimeBar
-import com.google.android.exoplayer2.util.RepeatModeUtil
 
 @SuppressLint("ClickableViewAccessibility")
+@androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 internal class CustomExoPlayerView(
     context: Context,
     attributeSet: AttributeSet? = null,
-) : StyledPlayerView(context, attributeSet), PlayerOptions, PlayerGestureOptions {
+) : PlayerView(context, attributeSet), PlayerOptions, PlayerGestureOptions {
     val binding: ExoStyledPlayerControlViewBinding = ExoStyledPlayerControlViewBinding.bind(this)
 
     /**
@@ -405,7 +406,7 @@ internal class CustomExoPlayerView(
             if (isLocked) {
                 ContextCompat.getColor(
                     context,
-                    com.google.android.exoplayer2.R.color.exo_black_opacity_60,
+                    androidx.media3.ui.R.color.exo_black_opacity_60,
                 )
             } else {
                 Color.TRANSPARENT
@@ -600,12 +601,12 @@ internal class CustomExoPlayerView(
             .show(supportFragmentManager)
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration?) {
+    override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
 
         // add a larger bottom margin to the time bar in landscape mode
         val offset = when {
-            playerViewModel?.isFullscreen?.value ?: (newConfig?.orientation == Configuration.ORIENTATION_LANDSCAPE) -> 20.dpToPx()
+            playerViewModel?.isFullscreen?.value ?: (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) -> 20.dpToPx()
             else -> 10.dpToPx()
         }
 
@@ -620,7 +621,7 @@ internal class CustomExoPlayerView(
         if (!hasCutout && binding.topBar.marginStart == 0) return
 
         // add a margin to the top and the bottom bar in landscape mode for notches
-        val newMargin = when (newConfig?.orientation) {
+        val newMargin = when (newConfig.orientation) {
             Configuration.ORIENTATION_LANDSCAPE -> LANDSCAPE_MARGIN_HORIZONTAL
             else -> 0
         }

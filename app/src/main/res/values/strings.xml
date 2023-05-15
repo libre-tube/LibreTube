@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name" translatable="false">LibreTube</string>
     <string name="startpage">Home</string>
     <string name="subscriptions">Subscriptions</string>
     <string name="library">Library</string>

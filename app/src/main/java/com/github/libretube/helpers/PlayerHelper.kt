@@ -12,19 +12,19 @@ import androidx.core.app.PendingIntentCompat
 import androidx.core.app.RemoteActionCompat
 import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.IconCompat
+import androidx.media3.common.AudioAttributes
+import androidx.media3.common.C
+import androidx.media3.common.PlaybackParameters
+import androidx.media3.exoplayer.DefaultLoadControl
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.LoadControl
+import androidx.media3.ui.CaptionStyleCompat
 import com.github.libretube.R
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.AudioQuality
 import com.github.libretube.enums.PlayerEvent
-import com.google.android.exoplayer2.C
-import com.google.android.exoplayer2.DefaultLoadControl
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.LoadControl
-import com.google.android.exoplayer2.PlaybackParameters
-import com.google.android.exoplayer2.audio.AudioAttributes
-import com.google.android.exoplayer2.ui.CaptionStyleCompat
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 
@@ -75,6 +75,7 @@ object PlayerHelper {
     }
 
     // get the system default caption style
+    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
     fun getCaptionStyle(context: Context): CaptionStyleCompat {
         val captioningManager = context.getSystemService<CaptioningManager>()!!
         return if (!captioningManager.isEnabled) {
@@ -461,6 +462,7 @@ object PlayerHelper {
     /**
      * Get the load controls for the player (buffering, etc)
      */
+    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
     fun getLoadControl(): LoadControl {
         return DefaultLoadControl.Builder()
             // cache the last three minutes
@@ -477,6 +479,7 @@ object PlayerHelper {
     /**
      * Load playback parameters such as speed and skip silence
      */
+    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
     fun ExoPlayer.loadPlaybackParams(isBackgroundMode: Boolean = false): ExoPlayer {
         skipSilenceEnabled = skipSilence
         val speed = if (isBackgroundMode) backgroundSpeed else playbackSpeed

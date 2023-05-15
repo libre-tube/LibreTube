@@ -12,6 +12,10 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
+import androidx.media3.common.MediaItem
+import androidx.media3.common.PlaybackException
+import androidx.media3.common.Player
+import androidx.media3.exoplayer.ExoPlayer
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
@@ -31,10 +35,6 @@ import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayingQueue
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.PlaybackException
-import com.google.android.exoplayer2.Player
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -45,6 +45,7 @@ import kotlinx.serialization.encodeToString
 /**
  * Loads the selected videos audio in background mode with a notification area.
  */
+@androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class OnlinePlayerService : LifecycleService() {
     /**
      * VideoId of the video

@@ -7,17 +7,20 @@ import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.view.marginLeft
+import androidx.media3.common.Player
+import androidx.media3.common.util.UnstableApi
+import androidx.media3.ui.DefaultTimeBar
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ThemeHelper
-import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.ui.DefaultTimeBar
+import com.google.android.material.R
 
 /**
  * TimeBar that can be marked with SponsorBlock Segments
  */
+@UnstableApi
 class MarkableTimeBar(
     context: Context,
     attributeSet: AttributeSet? = null,
@@ -57,7 +60,7 @@ class MarkableTimeBar(
                 Paint().apply {
                     color = ThemeHelper.getThemeColor(
                         context,
-                        com.google.android.material.R.attr.colorOnSecondary,
+                        R.attr.colorOnSecondary,
                     )
                 },
             )
