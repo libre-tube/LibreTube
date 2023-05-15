@@ -103,7 +103,7 @@
     <string name="color_purple">Приємний фіолетовий</string>
     <string name="material_you">Material You</string>
     <string name="sponsorblock_notifications">Сповіщення</string>
-    <string name="enabled">Ввімкнено</string>
+    <string name="enabled">Увімкнено</string>
     <string name="disabled">Вимкнено</string>
     <string name="shareTo">Поділитися посиланням з</string>
     <string name="update_available">Версія %1$s доступна</string>
@@ -146,7 +146,7 @@
     <string name="video">Відео</string>
     <string name="player_autoplay">Автоматичне відтворення</string>
     <string name="downloading">Завантаження…</string>
-    <string name="turnInternetOn">Будь ласка, ввімкніть Wi-Fi або мобільний дані для підключення до Інтернету.</string>
+    <string name="turnInternetOn">Увімкніть Wi-Fi або мобільні дані для з\'єднання з інтернетом.</string>
     <string name="open">Відкрити…</string>
     <string name="reset">Відновити стандартні налаштування</string>
     <string name="reset_message">Стерти всі налаштування і вийти з облікового запису\?</string>
@@ -330,7 +330,7 @@
     <string name="swipe_controls_summary">Для регулювання яскравості та гучності використовувати жест посування.</string>
     <string name="volume">Гучність</string>
     <string name="defaults">Типові</string>
-    <string name="pop_up">Спливаюче вікно</string>
+    <string name="pop_up">Спливне вікно</string>
     <string name="double_tap_seek">Двічі торкніться, щоб шукати</string>
     <string name="double_tap_seek_summary">Двічі торкніться ліворуч або праворуч, щоб перемотати назад або вперед.</string>
     <string name="no_comments_available">До цього відео немає коментарів.</string>
@@ -410,7 +410,7 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d відео</string>
     <string name="subscriberAndVideoCounts">%1$s підписників • %2$d відео</string>
     <string name="disable_proxy">Вимкнути транспортний проксі</string>
-    <string name="disable_proxy_summary">Завантажуйте відео й зображення безпосередньо з серверів YouTube. Ввімкніть цю опцію, якщо ви все одно використовуєте VPN! Зауважте, що це може не спрацювати з матеріалами з YT music.</string>
+    <string name="disable_proxy_summary">Завантажуйте відео й зображення безпосередньо з серверів YouTube. Увімкніть цю опцію, якщо ви все одно використовуєте VPN! Зауважте, що це може не спрацювати з матеріалами з YT music.</string>
     <string name="auto_fullscreen_shorts">Автоматичний повноекранний режим для коротких відео</string>
     <string name="new_group">Нова</string>
     <string name="edit_group">Редагувати групу</string>
@@ -426,7 +426,7 @@
         <item quantity="many">%d нових трансляцій</item>
         <item quantity="other">%d нових трансляцій</item>
     </plurals>
-    <string name="show_stream_thumbnails_summary">Показувати мініатюри нових трансляцій. Ввімкнення цієї опції споживає додаткові дані.</string>
+    <string name="show_stream_thumbnails_summary">Показувати мініатюри нових трансляцій. Увімкнення цієї опції споживає додаткові дані.</string>
     <string name="show_stream_thumbnails">Показувати мініатюри трансляцій</string>
     <string name="unlimited_search_history">Необмежена історія запитів</string>
     <string name="duration">Тривалість</string>
