@@ -438,4 +438,8 @@
     <string name="duration">المدة</string>
     <string name="duration_reversed">المدة (معكوسة)</string>
     <string name="shorts_notifications">تنبيهات للفيديوهات القصيرة</string>
+    <string name="alphabetic">أبجدي</string>
+    <string name="creation_date">تاريخ الإنشاء</string>
+    <string name="creation_date_reversed">تاريخ الإنشاء (معكوس)</string>
+    <string name="alphabetic_reversed">أبجدي (معكوس)</string>
 </resources>
