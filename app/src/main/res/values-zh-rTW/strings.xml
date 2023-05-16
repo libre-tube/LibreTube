@@ -425,4 +425,8 @@
     <string name="video_id">視訊 ID</string>
     <string name="play_automatically">自動播放</string>
     <string name="play_automatically_summary">選取時自動開始播放影片</string>
+    <string name="creation_date">建立日期</string>
+    <string name="creation_date_reversed">建立日期（反轉）</string>
+    <string name="alphabetic">字母</string>
+    <string name="alphabetic_reversed">字母（反轉）</string>
 </resources>
