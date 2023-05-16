@@ -423,4 +423,8 @@
     <string name="duration">时长</string>
     <string name="duration_reversed">时长（倒序）</string>
     <string name="shorts_notifications">短视频通知</string>
+    <string name="creation_date">创建日期</string>
+    <string name="alphabetic">字母表</string>
+    <string name="creation_date_reversed">创建日期（倒序）</string>
+    <string name="alphabetic_reversed">字母表（倒序）</string>
 </resources>
