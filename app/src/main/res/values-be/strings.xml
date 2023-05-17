@@ -434,4 +434,8 @@
     <string name="duration">Працягласць</string>
     <string name="duration_reversed">Працягласць (перавернута)</string>
     <string name="shorts_notifications">Апавяшчэнні для shorts</string>
+    <string name="creation_date">Дата стварэння</string>
+    <string name="alphabetic">Алфавітны</string>
+    <string name="creation_date_reversed">Дата стварэння (перавернута)</string>
+    <string name="alphabetic_reversed">Алфавітны (перавернуты)</string>
 </resources>

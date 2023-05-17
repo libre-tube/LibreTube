@@ -426,4 +426,8 @@
     <string name="duration_reversed">Müddət (əks)</string>
     <string name="duration">Müddət</string>
     <string name="shorts_notifications">Qısa videolar üçün bildirişlər</string>
+    <string name="alphabetic">Əlifba</string>
+    <string name="alphabetic_reversed">Əlifba (əks)</string>
+    <string name="creation_date">Yaradılma tarixi</string>
+    <string name="creation_date_reversed">Yaradılma tarixi (əks)</string>
 </resources>

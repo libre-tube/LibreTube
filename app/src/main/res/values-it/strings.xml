@@ -429,4 +429,8 @@
     <string name="duration">Durata</string>
     <string name="duration_reversed">Durata (invertito)</string>
     <string name="shorts_notifications">Notifiche per gli Short</string>
+    <string name="creation_date_reversed">Data di creazione (invertito)</string>
+    <string name="alphabetic_reversed">Alfabetico (invertito)</string>
+    <string name="creation_date">Data di creazione</string>
+    <string name="alphabetic">Alfabetico</string>
 </resources>

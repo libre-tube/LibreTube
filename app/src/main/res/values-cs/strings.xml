@@ -429,4 +429,8 @@
     <string name="duration_reversed">Délka (obráceně)</string>
     <string name="duration">Délka</string>
     <string name="shorts_notifications">Oznámení pro Shorts</string>
+    <string name="creation_date">Datum vytvoření</string>
+    <string name="creation_date_reversed">Datum vytvoření (obráceně)</string>
+    <string name="alphabetic">Abecedně</string>
+    <string name="alphabetic_reversed">Abecedně (obráceně)</string>
 </resources>
