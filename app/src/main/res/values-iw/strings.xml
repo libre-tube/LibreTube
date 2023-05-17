@@ -432,4 +432,8 @@
     <string name="duration">משך</string>
     <string name="duration_reversed">משך (הפוך)</string>
     <string name="shorts_notifications">התראות על קצרצרים</string>
+    <string name="creation_date">מועד יצירה</string>
+    <string name="creation_date_reversed">מועד יצירה (הפוך)</string>
+    <string name="alphabetic">אלפביתי</string>
+    <string name="alphabetic_reversed">אלפביתי (הפוך)</string>
 </resources>
