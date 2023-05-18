@@ -121,6 +121,7 @@ import retrofit2.HttpException
 import java.io.IOException
 import java.util.*
 import java.util.concurrent.Executors
+import com.github.libretube.extensions.setMetadata
 import kotlin.math.abs
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
@@ -1246,10 +1247,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private fun setMediaSource(uri: Uri, mimeType: String) {
-        val mediaItem: MediaItem = MediaItem.Builder()
+        val mediaItem = MediaItem.Builder()
             .setUri(uri)
             .setMimeType(mimeType)
             .setSubtitleConfigurations(subtitles)
+            .setMetadata(streams)
             .build()
         exoPlayer.setMediaItem(mediaItem)
     }

@@ -6,13 +6,9 @@ import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.media.MediaDescriptionCompat
-import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
 import androidx.core.app.PendingIntentCompat
@@ -22,7 +18,6 @@ import androidx.core.os.bundleOf
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.session.CommandButton
-import androidx.media3.session.DefaultMediaNotificationProvider
 import androidx.media3.session.MediaSession
 import androidx.media3.session.SessionCommand
 import androidx.media3.session.SessionResult
@@ -36,7 +31,6 @@ import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.ui.activities.MainActivity
-import com.google.common.collect.ImmutableList
 import com.google.common.util.concurrent.ListenableFuture
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
@@ -102,10 +96,10 @@ class NowPlayingNotification(
             player: Player,
             callback: PlayerNotificationManager.BitmapCallback,
         ): Bitmap? {
-            if (DataSaverMode.isEnabled(context)) return null
-
+            // On Android 13 and up, the metadata is responsible for the thumbnail
+            if (DataSaverMode.isEnabled(context) ||
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) return null
             if (bitmap == null) enqueueThumbnailRequest(callback)
-
             return bitmap
         }
 
@@ -119,7 +113,7 @@ class NowPlayingNotification(
         // online image
         notificationData?.thumbnailPath?.let { path ->
             ImageHelper.getDownloadedImage(context, path)?.let {
-                bitmap = processThumbnailBitmap(it)
+                bitmap = ImageHelper.getSquareBitmap(it)
                 callback.onBitmap(bitmap!!)
             }
             return
@@ -128,7 +122,7 @@ class NowPlayingNotification(
         val request = ImageRequest.Builder(context)
             .data(notificationData?.thumbnailUrl)
             .target {
-                bitmap = processThumbnailBitmap(it.toBitmap())
+                bitmap = ImageHelper.getSquareBitmap(it.toBitmap())
                 callback.onBitmap(bitmap!!)
             }
             .build()
@@ -156,17 +150,6 @@ class NowPlayingNotification(
 
         override fun onCustomAction(player: Player, action: String, intent: Intent) {
             handlePlayerAction(action)
-        }
-    }
-
-    /**
-     *  Returns the bitmap on Android 13+, for everything below scaled down to a square
-     */
-    private fun processThumbnailBitmap(bitmap: Bitmap): Bitmap {
-        return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-            ImageHelper.getSquareBitmap(bitmap)
-        } else {
-            bitmap
         }
     }
 
@@ -260,24 +243,6 @@ class NowPlayingNotification(
         createMediaSessionAction(R.drawable.ic_forward_md, FORWARD),
     )
 
-    private fun getMediaDescription(): MediaDescriptionCompat {
-        val appIcon = BitmapFactory.decodeResource(
-            context.resources,
-            R.drawable.ic_launcher_monochrome,
-        )
-        val extras = bundleOf(
-            MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON to appIcon,
-            MediaMetadataCompat.METADATA_KEY_TITLE to notificationData?.title,
-            MediaMetadataCompat.METADATA_KEY_ARTIST to notificationData?.uploaderName,
-        )
-        return MediaDescriptionCompat.Builder()
-            .setTitle(notificationData?.title)
-            .setSubtitle(notificationData?.uploaderName)
-            .setIconBitmap(appIcon)
-            .setExtras(extras)
-            .build()
-    }
-
     private fun handlePlayerAction(action: String) {
         when (action) {
             NEXT -> {
@@ -321,19 +286,6 @@ class NowPlayingNotification(
         if (playerNotification == null) {
             createMediaSession()
             createNotification()
-        }
-    }
-
-    class NotificationProvider(val context: Context) : DefaultMediaNotificationProvider(context) {
-        override fun getMediaButtons(
-            session: MediaSession,
-            playerCommands: Player.Commands,
-            customLayout: ImmutableList<CommandButton>,
-            showPauseButton: Boolean,
-        ): ImmutableList<CommandButton> {
-            val buttons = super.getMediaButtons(session, playerCommands, customLayout, showPauseButton)
-            buttons.removeFirst()
-            return buttons
         }
     }
 

@@ -27,6 +27,7 @@ import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.checkForSegments
@@ -294,8 +295,7 @@ class OnlinePlayerService : LifecycleService() {
      * Sets the [MediaItem] with the [streams] into the [player]
      */
     private fun setMediaItem() {
-        val streams = streams
-        streams ?: return
+        val streams = streams ?: return
 
         val uri = if (streams.audioStreams.isNotEmpty()) {
             PlayerHelper.getAudioSource(this, streams.audioStreams)
@@ -305,6 +305,7 @@ class OnlinePlayerService : LifecycleService() {
 
         val mediaItem = MediaItem.Builder()
             .setUri(ProxyHelper.rewriteUrl(uri))
+            .setMetadata(streams)
             .build()
         player?.setMediaItem(mediaItem)
     }
