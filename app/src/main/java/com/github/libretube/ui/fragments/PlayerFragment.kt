@@ -18,6 +18,7 @@ import android.text.format.DateUtils
 import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
 import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -116,7 +117,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
 import java.io.IOException
@@ -601,20 +601,25 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     override fun onDestroy() {
         super.onDestroy()
 
+        // disable the auto PiP mode for SDK >= 32
+        exoPlayer.pause()
+        PictureInPictureCompat.setPictureInPictureParams(
+            requireActivity(),
+            pipParams,
+        )
+
         handler.removeCallbacksAndMessages(null)
 
-        try {
-            // disable the auto PiP mode for SDK >= 32
-            disableAutoPiP()
-
+        runCatching {
             // unregister the receiver for player actions
             context?.unregisterReceiver(broadcastReceiver)
+        }
 
+        try {
             saveWatchPosition()
 
             PlayingQueue.clear()
 
-            // release the player
             nowPlayingNotification.destroySelfAndPlayer()
 
             activity?.requestedOrientation =
@@ -628,14 +633,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         _binding = null
-    }
-
-    private fun disableAutoPiP() {
-        // autoEnterEnabled is false by default
-        PictureInPictureCompat.setPictureInPictureParams(
-            requireActivity(),
-            PictureInPictureParamsCompat.Builder().build(),
-        )
     }
 
     // save the watch position if video isn't finished and option enabled
@@ -928,8 +925,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 if (isPlaying) {
                     // Stop [BackgroundMode] service if it is running.
                     BackgroundHelper.stopBackgroundPlay(requireContext())
-                } else {
-                    disableAutoPiP()
                 }
 
                 if (isPlaying && PlayerHelper.sponsorBlockEnabled) {
@@ -974,22 +969,17 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     }
                 }
 
-                val activity = requireActivity()
                 if (playbackState == Player.STATE_READY) {
                     // media actually playing
                     transitioning = false
-                    // update the PiP params to use the correct aspect ratio
-                    if (PlayerHelper.pipEnabled) {
-                        PictureInPictureCompat.setPictureInPictureParams(activity, pipParams)
-                    }
                 }
 
                 // listen for the stop button in the notification
                 if (playbackState == PlaybackState.STATE_STOPPED && PlayerHelper.pipEnabled &&
-                    PictureInPictureCompat.isInPictureInPictureMode(activity)
+                    PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
                 ) {
                     // finish PiP by finishing the activity
-                    activity.finish()
+                    activity?.finish()
                 }
                 super.onPlaybackStateChanged(playbackState)
             }
@@ -1541,7 +1531,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private val pipParams
         get() = PictureInPictureParamsCompat.Builder()
             .setActions(PlayerHelper.getPiPModeActions(requireActivity(), exoPlayer.isPlaying))
-            .setAutoEnterEnabled(PlayerHelper.pipEnabled)
+            .setAutoEnterEnabled(PlayerHelper.pipEnabled && exoPlayer.isPlaying)
             .apply {
                 if (exoPlayer.isPlaying) {
                     setAspectRatio(exoPlayer.videoSize)
@@ -1568,12 +1558,15 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         )
     }
 
-    private fun shouldStartPiP(): Boolean {
-        if (!PlayerHelper.pipEnabled || Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            return false
-        }
+    /**
+     * Detect whether PiP is supported and enabled
+     */
+    private fun usePiP(): Boolean {
+        return PictureInPictureCompat.isPictureInPictureAvailable(requireContext()) && PlayerHelper.pipEnabled
+    }
 
-        return exoPlayer.isPlaying && !BackgroundHelper.isBackgroundServiceRunning(requireContext())
+    private fun shouldStartPiP(): Boolean {
+        return usePiP() && exoPlayer.isPlaying && !BackgroundHelper.isBackgroundServiceRunning(requireContext())
     }
 
     private fun killPlayerFragment() {
