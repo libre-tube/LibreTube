@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
+import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
 import androidx.core.app.PendingIntentCompat
@@ -203,11 +204,14 @@ class NowPlayingNotification(
                 controller: MediaSession.ControllerInfo,
             ): MediaSession.ConnectionResult {
                 val connectionResult = super.onConnect(session, controller)
-                val availablePlayerCommands = connectionResult.availablePlayerCommands.buildUpon()
-                    .remove(Player.COMMAND_SEEK_TO_PREVIOUS)
-                    .build()
+                val availableSessionCommands = connectionResult.availableSessionCommands.buildUpon()
+                val availablePlayerCommands = connectionResult.availablePlayerCommands // Player.Commands.Builder().add(Player.COMMAND_PLAY_PAUSE).build()
+                getCustomActions().forEach { button ->
+                    button.sessionCommand?.let { availableSessionCommands.add(it) }
+                }
+                session.setAvailableCommands(controller, availableSessionCommands.build(), availablePlayerCommands)
                 return MediaSession.ConnectionResult.accept(
-                    connectionResult.availableSessionCommands,
+                    availableSessionCommands.build(),
                     availablePlayerCommands,
                 )
             }
@@ -221,6 +225,25 @@ class NowPlayingNotification(
                 handlePlayerAction(customCommand.customAction)
                 return super.onCustomCommand(session, controller, customCommand, args)
             }
+
+            override fun onPlayerCommandRequest(
+                session: MediaSession,
+                controller: MediaSession.ControllerInfo,
+                playerCommand: Int
+            ): Int {
+                if (playerCommand == Player.COMMAND_SEEK_TO_PREVIOUS) {
+                    handlePlayerAction(PREV)
+                    return SessionResult.RESULT_SUCCESS
+                }
+                return super.onPlayerCommandRequest(session, controller, playerCommand)
+            }
+
+            override fun onPostConnect(
+                session: MediaSession,
+                controller: MediaSession.ControllerInfo
+            ) {
+                session.setCustomLayout(getCustomActions())
+            }
         }
 
         mediaSession = MediaSession.Builder(context, player)
@@ -230,7 +253,8 @@ class NowPlayingNotification(
     }
 
     private fun getCustomActions() = mutableListOf(
-        createMediaSessionAction(R.drawable.ic_prev_outlined, PREV),
+        // disabled and overwritten in onPlayerCommandRequest
+        // createMediaSessionAction(R.drawable.ic_prev_outlined, PREV),
         createMediaSessionAction(R.drawable.ic_next_outlined, NEXT),
         createMediaSessionAction(R.drawable.ic_rewind_md, REWIND),
         createMediaSessionAction(R.drawable.ic_forward_md, FORWARD),
@@ -330,6 +354,8 @@ class NowPlayingNotification(
                 setSmallIcon(R.drawable.ic_launcher_lockscreen)
                 setUseNextAction(false)
                 setUsePreviousAction(false)
+                setUseRewindAction(false)
+                setUseFastForwardAction(false)
                 setUseStopAction(true)
             }
     }
