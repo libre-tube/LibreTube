@@ -429,4 +429,8 @@
     <string name="duration">Durată</string>
     <string name="duration_reversed">Durată (inversată)</string>
     <string name="shorts_notifications">Notificări pentru Shorts</string>
+    <string name="creation_date">Data creării</string>
+    <string name="alphabetic">Alfabetic</string>
+    <string name="creation_date_reversed">Data creării (inversată)</string>
+    <string name="alphabetic_reversed">Alfabetic (inversat)</string>
 </resources>
