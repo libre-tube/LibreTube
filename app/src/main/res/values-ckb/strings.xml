@@ -426,4 +426,8 @@
     <string name="download_channel_description">پیشاندانی ئاگادارکردنەوە لەکاتی داگرتنی فایلەکان.</string>
     <string name="play_automatically">لێدان بە خۆکاری</string>
     <string name="shorts_notifications">ئاگادارکردنەوە بۆ ڤیدیۆ کورتەکان</string>
+    <string name="creation_date">بەرواری دروستکردن</string>
+    <string name="creation_date_reversed">بەرواری دروستکردن (پێچەوانە)</string>
+    <string name="alphabetic">ئەلفبێ</string>
+    <string name="alphabetic_reversed">ئەلفبێ (پێچەوانە)</string>
 </resources>
