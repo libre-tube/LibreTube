@@ -9,7 +9,6 @@ import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.media.session.PlaybackState
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -18,7 +17,6 @@ import android.text.format.DateUtils
 import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
 import android.util.Base64
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -616,7 +614,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         try {
-            saveWatchPosition()
+            if (exoPlayer.duration != C.TIME_UNSET) saveWatchPosition()
 
             PlayingQueue.clear()
 
@@ -637,7 +635,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     // save the watch position if video isn't finished and option enabled
     private fun saveWatchPosition() {
-        if (!PlayerHelper.watchPositionsVideo) return
+        if (!PlayerHelper.watchPositionsVideo || exoPlayer.currentPosition == 0L) return
         val watchPosition = WatchPosition(videoId!!, exoPlayer.currentPosition)
         CoroutineScope(Dispatchers.IO).launch {
             Database.watchPositionDao().insert(watchPosition)
@@ -682,7 +680,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             } catch (e: HttpException) {
                 val errorMessage = e.response()?.errorBody()?.string()?.runCatching {
                     JsonHelper.json.decodeFromString<Message>(this).message
-                }?.getOrNull() ?: context?.getString(R.string.server_error) ?: ""
+                }?.getOrNull() ?: context?.getString(R.string.server_error).orEmpty()
                 context?.toastFromMainDispatcher(errorMessage, Toast.LENGTH_LONG)
                 return@launch
             }
@@ -953,7 +951,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 // only called when the position is unequal to 0, otherwise it would become reset
                 // before the player can seek to the saved position from videos of the queue
                 // not called when the video has ended, since it then might save it to the next autoplay video
-                if (exoPlayer.currentPosition != 0L && playbackState != Player.STATE_ENDED) saveWatchPosition()
+                if (playbackState != Player.STATE_ENDED) saveWatchPosition()
 
                 // check if video has ended, next video is available and autoplay is enabled.
                 if (
