@@ -414,6 +414,13 @@
     <string name="duration_reversed">Duration (reversed)</string>
     <string name="shorts_notifications">Notifications for shorts</string>
 
+    <!-- Backup & Restore Settings -->
+    <string name="import_subscriptions_from">Import subscriptions from</string>
+    <string name="export_subscriptions_to">Export subscriptions to</string>
+    <string name="import_format_newpipe">NewPipe</string>
+    <string name="import_format_freetube">FreeTube</string>
+    <string name="import_format_youtube_csv">YouTube (CSV)</string>
+
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
     <string name="download_channel_description">Shows a notification when downloading media.</string>

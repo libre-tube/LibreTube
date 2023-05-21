@@ -1,11 +1,11 @@
 package com.github.libretube.enums
 
-enum class SupportedClient(val value: Int) {
-    LIBRETUBE(0),
-    NEWPIPE(1),
-    FREETUBE(2);
+enum class ImportFormat(val value: Int) {
+    NEWPIPE(0),
+    FREETUBE(1),
+    YOUTUBECSV(2);
 
     companion object {
-        fun fromInt(value: Int) = SupportedClient.values().first { it.value == value }
+        fun fromInt(value: Int) = ImportFormat.values().first { it.value == value }
     }
 }

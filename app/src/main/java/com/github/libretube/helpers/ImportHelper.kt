@@ -9,15 +9,13 @@ import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.db.DatabaseHolder.Database
-import com.github.libretube.enums.SupportedClient
+import com.github.libretube.enums.ImportFormat
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.obj.FreetubeSubscription
 import com.github.libretube.obj.FreetubeSubscriptions
 import com.github.libretube.obj.ImportPlaylist
 import com.github.libretube.obj.ImportPlaylistFile
-import com.github.libretube.obj.LibreTubeSubscription
-import com.github.libretube.obj.LibreTubeSubscriptions
 import com.github.libretube.obj.NewPipeSubscription
 import com.github.libretube.obj.NewPipeSubscriptions
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -29,9 +27,9 @@ object ImportHelper {
     /**
      * Import subscriptions by a file uri
      */
-    suspend fun importSubscriptions(activity: Activity, uri: Uri, supportedClient: SupportedClient) {
+    suspend fun importSubscriptions(activity: Activity, uri: Uri, importFormat: ImportFormat) {
         try {
-            SubscriptionHelper.importSubscriptions(getChannelsFromUri(activity, uri, supportedClient))
+            SubscriptionHelper.importSubscriptions(getChannelsFromUri(activity, uri, importFormat))
             activity.toastFromMainDispatcher(R.string.importsuccess)
         } catch (e: IllegalArgumentException) {
             Log.e(TAG(), e.toString())
@@ -50,11 +48,11 @@ object ImportHelper {
      * Get a list of channel IDs from a file [Uri]
      */
     @OptIn(ExperimentalSerializationApi::class)
-    private fun getChannelsFromUri(activity: Activity, uri: Uri, supportedClient: SupportedClient): List<String> {
+    private fun getChannelsFromUri(activity: Activity, uri: Uri, importFormat: ImportFormat): List<String> {
         return when (val fileType = activity.contentResolver.getType(uri)) {
             "application/json", "application/*", "application/octet-stream" -> {
-                when (supportedClient) {
-                    SupportedClient.NEWPIPE -> {
+                when (importFormat) {
+                    ImportFormat.NEWPIPE -> {
                         val subscriptions = activity.contentResolver.openInputStream(uri)?.use {
                             JsonHelper.json.decodeFromStream<NewPipeSubscriptions>(it)
                         }
@@ -62,15 +60,7 @@ object ImportHelper {
                             it.url.replace("https://www.youtube.com/channel/", "")
                         }
                     }
-                    SupportedClient.LIBRETUBE -> {
-                        val subscriptions = activity.contentResolver.openInputStream(uri)?.use {
-                            JsonHelper.json.decodeFromStream<LibreTubeSubscriptions>(it)
-                        }
-                        subscriptions?.subscriptions.orEmpty().map {
-                            it.url.replace("https://www.youtube.com/channel/", "")
-                        }
-                    }
-                    SupportedClient.FREETUBE -> {
+                    ImportFormat.FREETUBE -> {
                         val subscriptions = activity.contentResolver.openInputStream(uri)?.use {
                             JsonHelper.json.decodeFromStream<FreetubeSubscriptions>(it)
                         }
@@ -78,17 +68,23 @@ object ImportHelper {
                             it.url.replace("https://www.youtube.com/channel/", "")
                         }
                     }
+                    ImportFormat.YOUTUBECSV -> emptyList()
                 }
             }
             "text/csv", "text/comma-separated-values" -> {
-                // import subscriptions from Google/YouTube Takeout
-                activity.contentResolver.openInputStream(uri)?.use {
-                    it.bufferedReader().use { reader ->
-                        reader.lines().map { line -> line.substringBefore(",") }
-                            .filter { channelId -> channelId.length == 24 }
-                            .toList()
+                when (importFormat) {
+                    ImportFormat.YOUTUBECSV -> {
+                        // import subscriptions from Google/YouTube Takeout
+                        activity.contentResolver.openInputStream(uri)?.use {
+                            it.bufferedReader().use { reader ->
+                                reader.lines().map { line -> line.substringBefore(",") }
+                                    .filter { channelId -> channelId.length == 24 }
+                                    .toList()
+                            }
+                        }.orEmpty()
                     }
-                }.orEmpty()
+                    else -> emptyList()
+                }
             }
             else -> throw IllegalArgumentException("Unsupported file type: $fileType")
         }
@@ -98,7 +94,7 @@ object ImportHelper {
      * Write the text to the document
      */
     @OptIn(ExperimentalSerializationApi::class)
-    suspend fun exportSubscriptions(activity: Activity, uri: Uri, supportedClient: SupportedClient) {
+    suspend fun exportSubscriptions(activity: Activity, uri: Uri, importFormat: ImportFormat) {
         val token = PreferenceHelper.getToken()
         val subs = if (token.isNotEmpty()) {
             RetrofitInstance.authApi.subscriptions(token)
@@ -107,17 +103,8 @@ object ImportHelper {
             RetrofitInstance.authApi.unauthenticatedSubscriptions(subscriptions)
         }
 
-        when (supportedClient) {
-            SupportedClient.LIBRETUBE -> {
-                val libreTubeChannels = subs.map {
-                    LibreTubeSubscription(it.name, 0, "https://www.youtube.com${it.url}")
-                }
-                val libreTubeSubscriptions = LibreTubeSubscriptions(subscriptions = libreTubeChannels)
-                activity.contentResolver.openOutputStream(uri)?.use {
-                    JsonHelper.json.encodeToStream(libreTubeSubscriptions, it)
-                }
-            }
-            SupportedClient.NEWPIPE -> {
+        when (importFormat) {
+            ImportFormat.NEWPIPE -> {
                 val newPipeChannels = subs.map {
                     NewPipeSubscription(it.name, 0, "https://www.youtube.com${it.url}")
                 }
@@ -126,7 +113,8 @@ object ImportHelper {
                     JsonHelper.json.encodeToStream(newPipeSubscriptions, it)
                 }
             }
-            SupportedClient.FREETUBE -> {
+
+            ImportFormat.FREETUBE -> {
                 val freeTubeChannels = subs.map {
                     FreetubeSubscription(it.name, "", "https://www.youtube.com${it.url}")
                 }
@@ -135,6 +123,8 @@ object ImportHelper {
                     JsonHelper.json.encodeToStream(freeTubeSubscriptions, it)
                 }
             }
+
+            ImportFormat.YOUTUBECSV -> Unit
         }
 
         activity.toastFromMainDispatcher(R.string.exportsuccess)
