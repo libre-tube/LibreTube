@@ -2,11 +2,9 @@ package com.github.libretube.helpers
 
 import android.app.Activity
 import android.view.WindowManager
-import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.normalize
 
-class BrightnessHelper(private val activity: Activity) {
-
+class BrightnessHelper(activity: Activity) {
     private val window = activity.window
     private val minBrightness = 0.0f
     private val maxBrightness = 1.0f
@@ -17,17 +15,16 @@ class BrightnessHelper(private val activity: Activity) {
     private var brightness: Float
         get() = window.attributes.screenBrightness
         set(value) {
-            val lp = window.attributes
-            lp.screenBrightness = value
-            window.attributes = lp
+            window.attributes = window.attributes.apply {
+                screenBrightness = value
+            }
         }
 
     /**
-     * Wrapper for the brightness persisted in the shared preferences.
+     * Wrapper for the brightness saved per session, set to the current screen brightness of the
+     * beginning of each session / player creation.
      */
-    private var savedBrightness: Float
-        get() = PreferenceHelper.getFloat(PreferenceKeys.PLAYER_SCREEN_BRIGHTNESS, brightness)
-        set(value) = PreferenceHelper.putFloat(PreferenceKeys.PLAYER_SCREEN_BRIGHTNESS, value)
+    private var savedBrightness = window.attributes.screenBrightness
 
     /**
      * Restore screen brightness to device system brightness.
@@ -64,7 +61,7 @@ class BrightnessHelper(private val activity: Activity) {
 
     /**
      * Get scaled brightness with given range. if [saved] is
-     * ture value will be retrived from shared preferences.
+     * true value will be restored from the session (per played queue)
      */
     fun getBrightnessWithScale(
         maxValue: Float,

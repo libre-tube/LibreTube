@@ -85,7 +85,6 @@ object PreferenceKeys {
     const val USE_HLS_OVER_DASH = "use_hls"
     const val QUEUE_AUTO_INSERT_RELATED = "queue_insert_related_videos"
     const val PLAYER_SWIPE_CONTROLS = "player_swipe_controls"
-    const val PLAYER_SCREEN_BRIGHTNESS = "player_screen_brightness"
     const val PLAYER_PINCH_CONTROL = "player_pinch_control"
     const val CAPTIONS_SIZE = "captions_size"
     const val DOUBLE_TAP_TO_SEEK = "double_tap_seek"
