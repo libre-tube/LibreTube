@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
-import android.util.Log
 
 object PictureInPictureCompat {
     fun isPictureInPictureAvailable(context: Context): Boolean {
@@ -18,7 +17,6 @@ object PictureInPictureCompat {
 
     fun setPictureInPictureParams(activity: Activity, params: PictureInPictureParamsCompat) {
         if (isPictureInPictureAvailable(activity)) {
-            if (params.toPictureInPictureParams().actions.isEmpty()) throw IllegalArgumentException()
             activity.setPictureInPictureParams(params.toPictureInPictureParams())
         }
     }
