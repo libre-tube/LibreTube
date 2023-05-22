@@ -179,7 +179,7 @@
     <string name="auto_rotation">Rotation automatique</string>
     <string name="landscape">Paysage</string>
     <string name="portrait">Portrait</string>
-    <string name="aspect_ratio">Rapport d\'aspect vidéo</string>
+    <string name="aspect_ratio">Ratio d\'aspect vidéo</string>
     <string name="open">Ouvrir…</string>
     <string name="turnInternetOn">Veuillez activer le Wi-Fi ou les données mobiles pour vous connecter à internet.</string>
     <string name="chapters">Chapitres</string>
@@ -433,4 +433,9 @@
     <string name="shorts_notifications">Notifications pour les shorts</string>
     <string name="play_automatically">Lancer automatiquement</string>
     <string name="play_automatically_summary">Lance la vidéo automatiquement durant la sélection</string>
+    <string name="import_subscriptions_from">Importer les abonnements depuis</string>
+    <string name="export_subscriptions_to">Exporter les abonnements vers</string>
+    <string name="import_format_newpipe">NewPipe</string>
+    <string name="import_format_freetube">FreeTube</string>
+    <string name="import_format_youtube_csv">YouTube (CSV)</string>
 </resources>
