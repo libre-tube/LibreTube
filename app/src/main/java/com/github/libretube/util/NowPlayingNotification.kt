@@ -1,11 +1,12 @@
 package com.github.libretube.util
 
 import android.annotation.SuppressLint
-import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
@@ -14,7 +15,6 @@ import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.PendingIntentCompat
-import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.os.bundleOf
 import androidx.media3.common.Player
@@ -24,7 +24,6 @@ import androidx.media3.session.MediaSession
 import androidx.media3.session.MediaStyleNotificationHelper
 import androidx.media3.session.SessionCommand
 import androidx.media3.session.SessionResult
-import androidx.media3.ui.PlayerNotificationManager
 import coil.request.ImageRequest
 import com.github.libretube.R
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
@@ -35,10 +34,6 @@ import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.ui.activities.MainActivity
 import com.google.common.util.concurrent.ListenableFuture
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class NowPlayingNotification(
@@ -67,9 +62,7 @@ class NowPlayingNotification(
     private val nManager = NotificationManagerCompat.from(context)
 
     private fun loadCurrentLargeIcon() {
-        // On Android 13 and up, the metadata is responsible for the thumbnail
-        if (DataSaverMode.isEnabled(context) ||
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) return
+        if (DataSaverMode.isEnabled(context)) return
         if (notificationBitmap == null) enqueueThumbnailRequest {
             createOrUpdateNotification()
         }
@@ -94,7 +87,7 @@ class NowPlayingNotification(
         // online image
         notificationData?.thumbnailPath?.let { path ->
             ImageHelper.getDownloadedImage(context, path)?.let {
-                notificationBitmap = ImageHelper.getSquareBitmap(it)
+                notificationBitmap = processBitmap(it)
                 callback.invoke(notificationBitmap!!)
             }
             return
@@ -103,7 +96,7 @@ class NowPlayingNotification(
         val request = ImageRequest.Builder(context)
             .data(notificationData?.thumbnailUrl)
             .target {
-                notificationBitmap = ImageHelper.getSquareBitmap(it.toBitmap())
+                notificationBitmap = processBitmap(it.toBitmap())
                 callback.invoke(notificationBitmap!!)
             }
             .build()
@@ -112,8 +105,15 @@ class NowPlayingNotification(
         ImageHelper.imageLoader.enqueue(request)
     }
 
-    private val customActions = listOf(
+    private fun processBitmap(bitmap: Bitmap): Bitmap {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            bitmap
+        } else ImageHelper.getSquareBitmap(bitmap)
+    }
+
+    private val legacyNotificationButtons get() = listOf(
         createNotificationAction(R.drawable.ic_prev_outlined, PREV, 1),
+        createNotificationAction(if (player.isPlaying) R.drawable.ic_pause else R.drawable.ic_play, PLAY_PAUSE, 1),
         createNotificationAction(R.drawable.ic_next_outlined, NEXT, 1),
         createNotificationAction(R.drawable.ic_rewind_md, REWIND, 1),
         createNotificationAction(R.drawable.ic_forward_md, FORWARD, 1),
@@ -154,11 +154,16 @@ class NowPlayingNotification(
             ): MediaSession.ConnectionResult {
                 val connectionResult = super.onConnect(session, controller)
                 val availableSessionCommands = connectionResult.availableSessionCommands.buildUpon()
-                val availablePlayerCommands = connectionResult.availablePlayerCommands // Player.Commands.Builder().add(Player.COMMAND_PLAY_PAUSE).build()
+                val availablePlayerCommands =
+                    connectionResult.availablePlayerCommands // Player.Commands.Builder().add(Player.COMMAND_PLAY_PAUSE).build()
                 getCustomActions().forEach { button ->
                     button.sessionCommand?.let { availableSessionCommands.add(it) }
                 }
-                session.setAvailableCommands(controller, availableSessionCommands.build(), availablePlayerCommands)
+                session.setAvailableCommands(
+                    controller,
+                    availableSessionCommands.build(),
+                    availablePlayerCommands
+                )
                 return MediaSession.ConnectionResult.accept(
                     availableSessionCommands.build(),
                     availablePlayerCommands,
@@ -234,6 +239,10 @@ class NowPlayingNotification(
             FORWARD -> {
                 player.seekTo(player.currentPosition + PlayerHelper.seekIncrement)
             }
+
+            PLAY_PAUSE -> {
+                if (player.isPlaying) player.pause() else player.play()
+            }
         }
     }
 
@@ -254,6 +263,14 @@ class NowPlayingNotification(
         if (notificationBuilder == null) {
             createMediaSession()
             createNotificationBuilder()
+            createActionReceiver()
+            // update the notification each time the player continues playing or pauses
+            player.addListener(object : Player.Listener {
+                override fun onIsPlayingChanged(isPlaying: Boolean) {
+                    createOrUpdateNotification()
+                    super.onIsPlayingChanged(isPlaying)
+                }
+            })
         }
 
         createOrUpdateNotification()
@@ -264,25 +281,41 @@ class NowPlayingNotification(
      */
     private fun createNotificationBuilder() {
         notificationBuilder = NotificationCompat.Builder(context, BACKGROUND_CHANNEL_ID)
-        .setSmallIcon(R.drawable.ic_launcher_lockscreen)
+            .setSmallIcon(R.drawable.ic_launcher_lockscreen)
             .setContentIntent(createCurrentContentIntent())
-            .setStyle(MediaStyleNotificationHelper.MediaStyle(mediaSession))
-            .setLargeIcon(notificationBitmap)
-            .apply {
-                customActions.forEach {
-                    addAction(it)
-                }
-            }
+            .setStyle(
+                MediaStyleNotificationHelper.MediaStyle(mediaSession)
+                    .setShowActionsInCompactView(1)
+            )
     }
 
     @SuppressLint("MissingPermission")
     private fun createOrUpdateNotification() {
         if (notificationBuilder == null) return
         val notification = notificationBuilder!!
-            .setContentText(notificationData?.title)
+            .setContentTitle(notificationData?.title)
             .setContentText(notificationData?.uploaderName)
+            .setLargeIcon(notificationBitmap)
+            .clearActions()
+            .apply {
+                legacyNotificationButtons.forEach {
+                    addAction(it)
+                }
+            }
             .build()
         nManager.notify(PLAYER_NOTIFICATION_ID, notification)
+    }
+
+    private val notificationActionReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            handlePlayerAction(intent.action ?: return)
+        }
+    }
+
+    private fun createActionReceiver() {
+        listOf(PREV, NEXT, REWIND, FORWARD, PLAY_PAUSE).forEach {
+            context.registerReceiver(notificationActionReceiver, IntentFilter(it))
+        }
     }
 
     /**
@@ -294,7 +327,11 @@ class NowPlayingNotification(
         player.stop()
         player.release()
 
-        context.getSystemService<NotificationManager>()!!.cancel(PLAYER_NOTIFICATION_ID)
+        runCatching {
+            context.unregisterReceiver(notificationActionReceiver)
+        }
+
+        nManager.cancel(PLAYER_NOTIFICATION_ID)
     }
 
     companion object {
@@ -302,5 +339,6 @@ class NowPlayingNotification(
         private const val NEXT = "next"
         private const val REWIND = "rewind"
         private const val FORWARD = "forward"
+        private const val PLAY_PAUSE = "play_pause"
     }
 }
