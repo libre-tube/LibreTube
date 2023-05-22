@@ -426,8 +426,8 @@
     <string name="duration">Dauer (aufsteigend)</string>
     <string name="duration_reversed">Dauer (absteigend)</string>
     <string name="shorts_notifications">Benachrichtigungen für Shorts</string>
-    <string name="alphabetic_reversed">Alphabetisch (umgekehrt)</string>
-    <string name="alphabetic">Alphabetisch</string>
-    <string name="creation_date">Erstellungsdatum</string>
-    <string name="creation_date_reversed">Erstellungsdatum (umgekehrt)</string>
+    <string name="alphabetic_reversed">Alphabetisch Z→A</string>
+    <string name="alphabetic">Alphabetisch A→Z</string>
+    <string name="creation_date">Erstellungsdatum (neueste zuerst)</string>
+    <string name="creation_date_reversed">Erstellungsdatum (älteste zuerst)</string>
 </resources>
