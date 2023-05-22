@@ -7,8 +7,6 @@ import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.drawable.Icon
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.media.session.MediaSessionCompat
@@ -17,10 +15,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.PendingIntentCompat
 import androidx.core.content.getSystemService
-import androidx.core.graphics.drawable.IconCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.os.bundleOf
-import androidx.media.app.NotificationCompat.MediaStyle
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.session.CommandButton
@@ -39,6 +35,10 @@ import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.ui.activities.MainActivity
 import com.google.common.util.concurrent.ListenableFuture
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class NowPlayingNotification(
@@ -48,7 +48,6 @@ class NowPlayingNotification(
 ) {
     private var videoId: String? = null
     private var notificationData: PlayerNotificationData? = null
-    private var bitmap: Bitmap? = null
 
     /**
      * The [MediaSessionCompat] for the [notificationData].
@@ -56,72 +55,47 @@ class NowPlayingNotification(
     private lateinit var mediaSession: MediaSession
 
     /**
-     * The [PlayerNotificationManager] to load the [mediaSession] content on it.
+     * The [NotificationCompat.Builder] to load the [mediaSession] content on it.
      */
-    private var playerNotification: PlayerNotificationManager? = null
+    private var notificationBuilder: NotificationCompat.Builder? = null
 
     /**
-     * The [descriptionAdapter] is used to show title, uploaderName and thumbnail of the video in the notification
-     * Basic example [here](https://github.com/AnthonyMarkD/AudioPlayerSampleTest)
+     * The [Bitmap] which represents the background / thumbnail of the notification
      */
-    private val descriptionAdapter = object : PlayerNotificationManager.MediaDescriptionAdapter {
-        /**
-         * sets the title of the notification
-         */
-        override fun getCurrentContentTitle(player: Player): CharSequence {
-            return notificationData?.title.orEmpty()
-        }
+    private var notificationBitmap: Bitmap? = null
 
-        /**
-         * overrides the action when clicking the notification
-         */
-        override fun createCurrentContentIntent(player: Player): PendingIntent {
-            // starts a new MainActivity Intent when the player notification is clicked
-            // it doesn't start a completely new MainActivity because the MainActivity's launchMode
-            // is set to "singleTop" in the AndroidManifest (important!!!)
-            // that's the only way to launch back into the previous activity (e.g. the player view
-            val intent = Intent(context, MainActivity::class.java).apply {
-                if (isBackgroundPlayerNotification) {
-                    putExtra(IntentData.openAudioPlayer, true)
-                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                }
-            }
-            return PendingIntentCompat.getActivity(context, 0, intent, FLAG_UPDATE_CURRENT, false)
-        }
+    private val nManager = NotificationManagerCompat.from(context)
 
-        /**
-         * the description of the notification (below the title)
-         */
-        override fun getCurrentContentText(player: Player): CharSequence? {
-            return notificationData?.uploaderName
-        }
-
-        /**
-         * return the icon/thumbnail of the video
-         */
-        override fun getCurrentLargeIcon(
-            player: Player,
-            callback: PlayerNotificationManager.BitmapCallback,
-        ): Bitmap? {
-            // On Android 13 and up, the metadata is responsible for the thumbnail
-            if (DataSaverMode.isEnabled(context) ||
-                Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) return null
-            if (bitmap == null) enqueueThumbnailRequest(callback)
-            return bitmap
-        }
-
-        override fun getCurrentSubText(player: Player): CharSequence? {
-            return notificationData?.uploaderName
+    private fun loadCurrentLargeIcon() {
+        // On Android 13 and up, the metadata is responsible for the thumbnail
+        if (DataSaverMode.isEnabled(context) ||
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) return
+        if (notificationBitmap == null) enqueueThumbnailRequest {
+            createOrUpdateNotification()
         }
     }
 
-    private fun enqueueThumbnailRequest(callback: PlayerNotificationManager.BitmapCallback) {
+    private fun createCurrentContentIntent(): PendingIntent {
+        // starts a new MainActivity Intent when the player notification is clicked
+        // it doesn't start a completely new MainActivity because the MainActivity's launchMode
+        // is set to "singleTop" in the AndroidManifest (important!!!)
+        // that's the only way to launch back into the previous activity (e.g. the player view
+        val intent = Intent(context, MainActivity::class.java).apply {
+            if (isBackgroundPlayerNotification) {
+                putExtra(IntentData.openAudioPlayer, true)
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            }
+        }
+        return PendingIntentCompat.getActivity(context, 0, intent, FLAG_UPDATE_CURRENT, false)
+    }
+
+    private fun enqueueThumbnailRequest(callback: (Bitmap) -> Unit) {
         // If playing a downloaded file, show the downloaded thumbnail instead of loading an
         // online image
         notificationData?.thumbnailPath?.let { path ->
             ImageHelper.getDownloadedImage(context, path)?.let {
-                bitmap = ImageHelper.getSquareBitmap(it)
-                callback.onBitmap(bitmap!!)
+                notificationBitmap = ImageHelper.getSquareBitmap(it)
+                callback.invoke(notificationBitmap!!)
             }
             return
         }
@@ -129,8 +103,8 @@ class NowPlayingNotification(
         val request = ImageRequest.Builder(context)
             .data(notificationData?.thumbnailUrl)
             .target {
-                bitmap = ImageHelper.getSquareBitmap(it.toBitmap())
-                callback.onBitmap(bitmap!!)
+                notificationBitmap = ImageHelper.getSquareBitmap(it.toBitmap())
+                callback.invoke(notificationBitmap!!)
             }
             .build()
 
@@ -138,27 +112,12 @@ class NowPlayingNotification(
         ImageHelper.imageLoader.enqueue(request)
     }
 
-    private val customActionReceiver = object : PlayerNotificationManager.CustomActionReceiver {
-        override fun createCustomActions(
-            context: Context,
-            instanceId: Int,
-        ): MutableMap<String, NotificationCompat.Action> {
-            return mutableMapOf(
-                PREV to createNotificationAction(R.drawable.ic_prev_outlined, PREV, instanceId),
-                NEXT to createNotificationAction(R.drawable.ic_next_outlined, NEXT, instanceId),
-                REWIND to createNotificationAction(R.drawable.ic_rewind_md, REWIND, instanceId),
-                FORWARD to createNotificationAction(R.drawable.ic_forward_md, FORWARD, instanceId),
-            )
-        }
-
-        override fun getCustomActions(player: Player): MutableList<String> {
-            return mutableListOf(PREV, NEXT, REWIND, FORWARD)
-        }
-
-        override fun onCustomAction(player: Player, action: String, intent: Intent) {
-            handlePlayerAction(action)
-        }
-    }
+    private val customActions = listOf(
+        createNotificationAction(R.drawable.ic_prev_outlined, PREV, 1),
+        createNotificationAction(R.drawable.ic_next_outlined, NEXT, 1),
+        createNotificationAction(R.drawable.ic_rewind_md, REWIND, 1),
+        createNotificationAction(R.drawable.ic_forward_md, FORWARD, 1),
+    )
 
     private fun createNotificationAction(
         drawableRes: Int,
@@ -279,7 +238,7 @@ class NowPlayingNotification(
     }
 
     /**
-     * Updates or creates the [playerNotification]
+     * Updates or creates the [notificationBuilder]
      */
     fun updatePlayerNotification(
         videoId: String,
@@ -288,61 +247,48 @@ class NowPlayingNotification(
         this.videoId = videoId
         this.notificationData = data
         // reset the thumbnail bitmap in order to become reloaded for the new video
-        this.bitmap = null
+        this.notificationBitmap = null
 
-        if (playerNotification == null) {
+        loadCurrentLargeIcon()
+
+        if (notificationBuilder == null) {
             createMediaSession()
-            createNotification()
+            createNotificationBuilder()
         }
+
+        createOrUpdateNotification()
     }
 
     /**
-     * Initializes the [playerNotification] attached to the [player] and shows it.
+     * Initializes the [notificationBuilder] attached to the [player] and shows it.
      */
-    @SuppressLint("MissingPermission")
-    private fun createNotification() {
-        /**
-        playerNotification = PlayerNotificationManager
-            .Builder(context, PLAYER_NOTIFICATION_ID, BACKGROUND_CHANNEL_ID)
-            // set the description of the notification
-            .setMediaDescriptionAdapter(descriptionAdapter)
-            // register the receiver for custom actions, doesn't seem to change anything
-            .setCustomActionReceiver(customActionReceiver)
-            .build().apply {
-                setPlayer(player)
-                setColorized(true)
-                setMediaSessionToken(mediaSession.sessionCompatToken)
-                setSmallIcon(R.drawable.ic_launcher_lockscreen)
-                setUseNextAction(false)
-                setUsePreviousAction(false)
-                setUseRewindAction(false)
-                setUseFastForwardAction(false)
-                setUseStopAction(true)
-            }
-        **/
-        val notification = NotificationCompat.Builder(context, BACKGROUND_CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_lockscreen)
-            .setContentIntent(descriptionAdapter.createCurrentContentIntent(player))
-            .setStyle(MediaStyle().setMediaSession(mediaSession.sessionCompatToken))
-            .setContentTitle(player.mediaMetadata.title)
-            .setContentText(player.mediaMetadata.artist)
-            .setLargeIcon(BitmapFactory.decodeResource(context.resources, R.mipmap.ic_bird))
+    private fun createNotificationBuilder() {
+        notificationBuilder = NotificationCompat.Builder(context, BACKGROUND_CHANNEL_ID)
+        .setSmallIcon(R.drawable.ic_launcher_lockscreen)
+            .setContentIntent(createCurrentContentIntent())
+            .setStyle(MediaStyleNotificationHelper.MediaStyle(mediaSession))
+            .setLargeIcon(notificationBitmap)
             .apply {
-                customActionReceiver.createCustomActions(context, 0).forEach {
-                    addAction(it.value)
+                customActions.forEach {
+                    addAction(it)
                 }
             }
+    }
 
-        val nManager = NotificationManagerCompat.from(context)
-        nManager.notify(PLAYER_NOTIFICATION_ID, notification.build())
+    @SuppressLint("MissingPermission")
+    private fun createOrUpdateNotification() {
+        if (notificationBuilder == null) return
+        val notification = notificationBuilder!!
+            .setContentText(notificationData?.title)
+            .setContentText(notificationData?.uploaderName)
+            .build()
+        nManager.notify(PLAYER_NOTIFICATION_ID, notification)
     }
 
     /**
      * Destroy the [NowPlayingNotification]
      */
     fun destroySelfAndPlayer() {
-        playerNotification?.setPlayer(null)
-
         mediaSession.release()
 
         player.stop()
