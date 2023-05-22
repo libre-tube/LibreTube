@@ -1,24 +1,31 @@
 package com.github.libretube.util
 
+import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.Icon
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.media.session.MediaSessionCompat
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.PendingIntentCompat
 import androidx.core.content.getSystemService
+import androidx.core.graphics.drawable.IconCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.os.bundleOf
+import androidx.media.app.NotificationCompat.MediaStyle
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.session.CommandButton
 import androidx.media3.session.MediaSession
+import androidx.media3.session.MediaStyleNotificationHelper
 import androidx.media3.session.SessionCommand
 import androidx.media3.session.SessionResult
 import androidx.media3.ui.PlayerNotificationManager
@@ -292,7 +299,9 @@ class NowPlayingNotification(
     /**
      * Initializes the [playerNotification] attached to the [player] and shows it.
      */
+    @SuppressLint("MissingPermission")
     private fun createNotification() {
+        /**
         playerNotification = PlayerNotificationManager
             .Builder(context, PLAYER_NOTIFICATION_ID, BACKGROUND_CHANNEL_ID)
             // set the description of the notification
@@ -310,6 +319,22 @@ class NowPlayingNotification(
                 setUseFastForwardAction(false)
                 setUseStopAction(true)
             }
+        **/
+        val notification = NotificationCompat.Builder(context, BACKGROUND_CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_launcher_lockscreen)
+            .setContentIntent(descriptionAdapter.createCurrentContentIntent(player))
+            .setStyle(MediaStyle().setMediaSession(mediaSession.sessionCompatToken))
+            .setContentTitle(player.mediaMetadata.title)
+            .setContentText(player.mediaMetadata.artist)
+            .setLargeIcon(BitmapFactory.decodeResource(context.resources, R.mipmap.ic_bird))
+            .apply {
+                customActionReceiver.createCustomActions(context, 0).forEach {
+                    addAction(it.value)
+                }
+            }
+
+        val nManager = NotificationManagerCompat.from(context)
+        nManager.notify(PLAYER_NOTIFICATION_ID, notification.build())
     }
 
     /**
