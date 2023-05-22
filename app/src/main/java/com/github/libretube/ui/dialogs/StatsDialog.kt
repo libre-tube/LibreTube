@@ -4,10 +4,10 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
+import androidx.media3.exoplayer.ExoPlayer
 import com.github.libretube.R
 import com.github.libretube.databinding.DialogStatsBinding
 import com.github.libretube.util.TextUtils
-import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class StatsDialog(

@@ -304,6 +304,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/black"
+        app:controller_layout_id="@layout/exo_styled_player_control_view"
         app:layout_constraintBottom_toBottomOf="@id/main_container"
         app:layout_constraintStart_toStartOf="@id/main_container"
         app:layout_constraintTop_toTopOf="@id/main_container"
@@ -349,7 +350,7 @@
                 app:drawableTint="@android:color/white" />
 
         </com.google.android.material.card.MaterialCardView>
-        
+
         <com.github.libretube.ui.views.AutoplayCountdownView
             android:id="@+id/autoplay_countdown"
             android:layout_width="match_parent"

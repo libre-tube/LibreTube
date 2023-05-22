@@ -7,13 +7,15 @@ import android.view.ViewGroup.MarginLayoutParams
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.math.MathUtils
 import androidx.core.view.updateLayoutParams
+import androidx.media3.common.util.UnstableApi
+import androidx.media3.ui.TimeBar
 import coil.request.ImageRequest
 import com.github.libretube.api.obj.PreviewFrames
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.obj.PreviewFrame
-import com.google.android.exoplayer2.ui.TimeBar
 
+@UnstableApi
 class SeekbarPreviewListener(
     private val previewFrames: List<PreviewFrames>,
     private val playerBinding: ExoStyledPlayerControlViewBinding,
@@ -59,6 +61,8 @@ class SeekbarPreviewListener(
                 playerBinding.seekbarPreview.alpha = 1f
             }
             .start()
+
+        onScrubEnd.invoke(position)
     }
 
     /**

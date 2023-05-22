@@ -10,7 +10,6 @@ preference = "1.2.0"
 extJunit = "1.1.5"
 espresso = "3.5.1"
 workRuntime = "2.8.1"
-exoplayer = "2.18.6"
 retrofit = "2.9.0"
 desugaring = "2.0.3"
 cronetEmbedded = "108.5359.79"
@@ -21,6 +20,7 @@ room = "2.5.1"
 kotlinxSerialization = "1.5.1"
 kotlinxDatetime = "0.4.0"
 kotlinxRetrofit = "1.0.0"
+media3 = "1.0.1"
 
 [libraries]
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
@@ -34,12 +34,14 @@ androidx-preference = { group = "androidx.preference", name = "preference-ktx", 
 androidx-test-junit = { group = "androidx.test.ext", name = "junit", version.ref = "extJunit" }
 androidx-test-espressoCore = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
 androidx-work-runtime = { group = "androidx.work", name="work-runtime-ktx", version.ref="workRuntime" }
-exoplayer = { group = "com.google.android.exoplayer", name = "exoplayer", version.ref = "exoplayer" }
-exoplayer-extension-mediasession = { group = "com.google.android.exoplayer", name = "extension-mediasession", version.ref = "exoplayer" }
+androidx-media3-exoplayer = { group = "androidx.media3", name="media3-exoplayer", version.ref="media3" }
+androidx-media3-exoplayer-hls = { group = "androidx.media3", name="media3-exoplayer-hls", version.ref="media3" }
+androidx-media3-exoplayer-dash = { group = "androidx.media3", name="media3-exoplayer-dash", version.ref="media3" }
+androidx-media3-datasource-cronet = { group = "androidx.media3", name = "media3-datasource-cronet", version.ref = "media3" }
+androidx-media3-session = { group="androidx.media3", name="media3-session", version.ref="media3" }
+androidx-media3-ui = { group="androidx.media3", name="media3-ui", version.ref="media3" }
 square-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 desugaring = { group = "com.android.tools", name = "desugar_jdk_libs_nio", version.ref = "desugaring" }
-exoplayer-extension-cronet = { group = "com.google.android.exoplayer", name = "extension-cronet", version.ref = "exoplayer" }
-exoplayer-dash = { group = "com.google.android.exoplayer", name = "exoplayer-dash", version.ref = "exoplayer" }
 cronet-embedded = { group = "org.chromium.net", name = "cronet-embedded", version.ref = "cronetEmbedded" }
 cronet-okhttp = { group = "com.google.net.cronet", name = "cronet-okhttp", version.ref = "cronetOkHttp" }
 coil = { group = "io.coil-kt", name = "coil", version.ref="coil" }

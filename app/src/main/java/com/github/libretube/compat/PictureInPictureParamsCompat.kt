@@ -6,7 +6,7 @@ import android.os.Build
 import android.util.Rational
 import androidx.annotation.RequiresApi
 import androidx.core.app.RemoteActionCompat
-import com.google.android.exoplayer2.video.VideoSize
+import androidx.media3.common.VideoSize
 
 class PictureInPictureParamsCompat private constructor(
     private val autoEnterEnabled: Boolean,
