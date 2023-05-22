@@ -24,12 +24,12 @@ class BackupRestoreSettings : BasePreferenceFragment() {
     private val backupDateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss")
     private var backupFile = BackupFile()
     private var importFormat: ImportFormat = ImportFormat.NEWPIPE
-    private val importFormatList = listOf(
+    private val importFormatList get() = listOf(
         ImportFormat.NEWPIPE,
         ImportFormat.FREETUBE,
         ImportFormat.YOUTUBECSV
     ).map { getString(it.value) }
-    private val exportFormatList = listOf(
+    private val exportFormatList get() = listOf(
         ImportFormat.NEWPIPE,
         ImportFormat.FREETUBE
     ).map { getString(it.value) }
@@ -108,10 +108,6 @@ class BackupRestoreSettings : BasePreferenceFragment() {
             ) { _, _ -> onConfirm(selectedIndex) }
             .setNegativeButton(R.string.cancel, null)
             .show()
-    }
-
-    private fun exportFormatList(): List<String> {
-        return listOf(getString(R.string.import_format_newpipe), getString(R.string.import_format_freetube))
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
