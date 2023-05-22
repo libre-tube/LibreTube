@@ -427,4 +427,9 @@
     <string name="alphabetic_reversed">Abjad (dibalik)</string>
     <string name="creation_date_reversed">Tanggal pembuatan (dibalik)</string>
     <string name="creation_date">Tanggal pembuatan</string>
+    <string name="import_format_freetube">FreeTube</string>
+    <string name="import_subscriptions_from">Import langganan dari</string>
+    <string name="export_subscriptions_to">Ekspor langganan ke</string>
+    <string name="import_format_newpipe">NewPipe</string>
+    <string name="import_format_youtube_csv">YouTube (CSV)</string>
 </resources>
