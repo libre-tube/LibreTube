@@ -442,4 +442,9 @@
     <string name="creation_date">تاريخ الإنشاء</string>
     <string name="creation_date_reversed">تاريخ الإنشاء (معكوس)</string>
     <string name="alphabetic_reversed">أبجدي (معكوس)</string>
+    <string name="import_format_freetube">فري تيوب</string>
+    <string name="export_subscriptions_to">تصدير الاشتراكات إلى</string>
+    <string name="import_format_youtube_csv">يوتيوب (CSV)</string>
+    <string name="import_format_newpipe">نيوبايب</string>
+    <string name="import_subscriptions_from">استيراد الاشتراكات من</string>
 </resources>
