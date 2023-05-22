@@ -1,11 +1,10 @@
 package com.github.libretube.enums
 
-enum class ImportFormat(val value: Int) {
-    NEWPIPE(0),
-    FREETUBE(1),
-    YOUTUBECSV(2);
+import androidx.annotation.StringRes
+import com.github.libretube.R
 
-    companion object {
-        fun fromInt(value: Int) = ImportFormat.values().first { it.value == value }
-    }
+enum class ImportFormat(@StringRes val value: Int) {
+    NEWPIPE(R.string.import_format_newpipe),
+    FREETUBE(R.string.import_format_freetube),
+    YOUTUBECSV(R.string.import_format_youtube_csv);
 }

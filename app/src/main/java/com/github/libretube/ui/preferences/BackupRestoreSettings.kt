@@ -3,6 +3,7 @@ package com.github.libretube.ui.preferences
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
+import androidx.annotation.StringRes
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import com.github.libretube.R
@@ -23,6 +24,15 @@ class BackupRestoreSettings : BasePreferenceFragment() {
     private val backupDateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss")
     private var backupFile = BackupFile()
     private var importFormat: ImportFormat = ImportFormat.NEWPIPE
+    private val importFormatList = listOf(
+        ImportFormat.NEWPIPE,
+        ImportFormat.FREETUBE,
+        ImportFormat.YOUTUBECSV
+    ).map { getString(it.value) }
+    private val exportFormatList = listOf(
+        ImportFormat.NEWPIPE,
+        ImportFormat.FREETUBE
+    ).map { getString(it.value) }
 
     override val titleResourceId: Int = R.string.backup_restore
 
@@ -50,18 +60,15 @@ class BackupRestoreSettings : BasePreferenceFragment() {
     ) {
         it?.let {
             lifecycleScope.launch(Dispatchers.IO) {
-                importFormat.let { format ->
-                    ImportHelper.importSubscriptions(requireActivity(), it, format)
-                }
+                ImportHelper.importSubscriptions(requireActivity(), it, importFormat)
             }
         }
     }
+
     private val createSubscriptionsFile = registerForActivityResult(CreateDocument(JSON)) {
         it?.let {
             lifecycleScope.launch(Dispatchers.IO) {
-                importFormat.let { format ->
-                    ImportHelper.exportSubscriptions(requireActivity(), it, format)
-                }
+                ImportHelper.exportSubscriptions(requireActivity(), it, importFormat)
             }
         }
     }
@@ -85,8 +92,8 @@ class BackupRestoreSettings : BasePreferenceFragment() {
         }
     }
 
-    private fun createDialog(
-        titleStringId: Int,
+    private fun createImportFormatDialog(
+        @StringRes titleStringId: Int,
         items: List<String>,
         onConfirm: (Int) -> Unit
     ) {
@@ -103,16 +110,6 @@ class BackupRestoreSettings : BasePreferenceFragment() {
             .show()
     }
 
-    private fun importFormatList(): List<String> {
-        return ImportFormat.values().map {
-            when (it) {
-                ImportFormat.NEWPIPE -> getString(R.string.import_format_newpipe)
-                ImportFormat.FREETUBE -> getString(R.string.import_format_freetube)
-                ImportFormat.YOUTUBECSV -> getString(R.string.import_format_youtube_csv)
-            }
-        }
-    }
-
     private fun exportFormatList(): List<String> {
         return listOf(getString(R.string.import_format_newpipe), getString(R.string.import_format_freetube))
     }
@@ -122,8 +119,8 @@ class BackupRestoreSettings : BasePreferenceFragment() {
 
         val importSubscriptions = findPreference<Preference>("import_subscriptions")
         importSubscriptions?.setOnPreferenceClickListener {
-            createDialog(R.string.import_subscriptions_from, importFormatList()) {
-                importFormat = ImportFormat.fromInt(it)
+            createImportFormatDialog(R.string.import_subscriptions_from, importFormatList) {
+                importFormat = ImportFormat.values()[it]
                 getSubscriptionsFile.launch("*/*")
             }
             true
@@ -131,8 +128,8 @@ class BackupRestoreSettings : BasePreferenceFragment() {
 
         val exportSubscriptions = findPreference<Preference>("export_subscriptions")
         exportSubscriptions?.setOnPreferenceClickListener {
-            createDialog(R.string.export_subscriptions_to, exportFormatList()) {
-                importFormat = ImportFormat.fromInt(it)
+            createImportFormatDialog(R.string.export_subscriptions_to, exportFormatList) {
+                importFormat = ImportFormat.values()[it]
                 createSubscriptionsFile.launch("subscriptions.json")
             }
             true

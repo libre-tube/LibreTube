@@ -49,44 +49,33 @@ object ImportHelper {
      */
     @OptIn(ExperimentalSerializationApi::class)
     private fun getChannelsFromUri(activity: Activity, uri: Uri, importFormat: ImportFormat): List<String> {
-        return when (val fileType = activity.contentResolver.getType(uri)) {
-            "application/json", "application/*", "application/octet-stream" -> {
-                when (importFormat) {
-                    ImportFormat.NEWPIPE -> {
-                        val subscriptions = activity.contentResolver.openInputStream(uri)?.use {
-                            JsonHelper.json.decodeFromStream<NewPipeSubscriptions>(it)
-                        }
-                        subscriptions?.subscriptions.orEmpty().map {
-                            it.url.replace("https://www.youtube.com/channel/", "")
-                        }
-                    }
-                    ImportFormat.FREETUBE -> {
-                        val subscriptions = activity.contentResolver.openInputStream(uri)?.use {
-                            JsonHelper.json.decodeFromStream<FreetubeSubscriptions>(it)
-                        }
-                        subscriptions?.subscriptions.orEmpty().map {
-                            it.url.replace("https://www.youtube.com/channel/", "")
-                        }
-                    }
-                    ImportFormat.YOUTUBECSV -> emptyList()
+        return when (importFormat) {
+            ImportFormat.NEWPIPE -> {
+                val subscriptions = activity.contentResolver.openInputStream(uri)?.use {
+                    JsonHelper.json.decodeFromStream<NewPipeSubscriptions>(it)
+                }
+                subscriptions?.subscriptions.orEmpty().map {
+                    it.url.replace("https://www.youtube.com/channel/", "")
                 }
             }
-            "text/csv", "text/comma-separated-values" -> {
-                when (importFormat) {
-                    ImportFormat.YOUTUBECSV -> {
-                        // import subscriptions from Google/YouTube Takeout
-                        activity.contentResolver.openInputStream(uri)?.use {
-                            it.bufferedReader().use { reader ->
-                                reader.lines().map { line -> line.substringBefore(",") }
-                                    .filter { channelId -> channelId.length == 24 }
-                                    .toList()
-                            }
-                        }.orEmpty()
-                    }
-                    else -> emptyList()
+            ImportFormat.FREETUBE -> {
+                val subscriptions = activity.contentResolver.openInputStream(uri)?.use {
+                    JsonHelper.json.decodeFromStream<FreetubeSubscriptions>(it)
+                }
+                subscriptions?.subscriptions.orEmpty().map {
+                    it.url.replace("https://www.youtube.com/channel/", "")
                 }
             }
-            else -> throw IllegalArgumentException("Unsupported file type: $fileType")
+            ImportFormat.YOUTUBECSV -> {
+                // import subscriptions from Google/YouTube Takeout
+                activity.contentResolver.openInputStream(uri)?.use {
+                    it.bufferedReader().use { reader ->
+                        reader.lines().map { line -> line.substringBefore(",") }
+                            .filter { channelId -> channelId.length == 24 }
+                            .toList()
+                    }
+                }.orEmpty()
+            }
         }
     }
 
@@ -124,7 +113,7 @@ object ImportHelper {
                 }
             }
 
-            ImportFormat.YOUTUBECSV -> Unit
+            else -> throw IllegalArgumentException()
         }
 
         activity.toastFromMainDispatcher(R.string.exportsuccess)
