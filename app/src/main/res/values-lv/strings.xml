@@ -3,8 +3,8 @@
     <string name="search_hint">Meklēt</string>
     <string name="logout">Izrakstīties</string>
     <string name="importsuccess">Abonēts</string>
-    <string name="dlisinprogress">Lūdzu, uzgaidiet, līdz tiek pabeigtas visas pašreizējās lejupielādes.</string>
-    <string name="server_error">Šķiet, ka ir problēma ar atlasīto serveri. Izmēģiniet citu gadījumu.</string>
+    <string name="dlisinprogress">Lūdzu, pagaidiet, līdz visas pašreizējās lejupielādes ir pabeigtas.</string>
+    <string name="server_error">Ar atlasīto serveri ir problēma. Pamēģiniet citu instanci.</string>
     <string name="password">Parole</string>
     <string name="cannotDownload">Nevar lejupielādēt.</string>
     <string name="import_from_yt_summary">No YouTube vai NewPipe</string>
@@ -19,7 +19,7 @@
     <string name="login_register">Pierakstīties/reģistrēties</string>
     <string name="empty">Jums vajag ievadīt lietotājvārdu un paroli.</string>
     <string name="yes">Jā</string>
-    <string name="videos">Video</string>
+    <string name="videos">Videoklipi</string>
     <string name="subscribe">Abonēt</string>
     <string name="share">Kopīgot</string>
     <string name="download">Lejupielādēt</string>
@@ -32,7 +32,7 @@
     <string name="cancel">Atcelt</string>
     <string name="region">Reģions</string>
     <string name="instances">Izvēlēties…</string>
-    <string name="customInstance">Cita</string>
+    <string name="customInstance">Pielāgota</string>
     <string name="loggedIn">Jūs esat pierakstījies.</string>
     <string name="import_from_yt">Importēt abonementus</string>
     <string name="app_theme">Motīvs</string>
@@ -55,7 +55,7 @@
     <string name="darkTheme">Tumšs</string>
     <string name="lightTheme">Gaišs</string>
     <string name="createPlaylist">Izveidot atskaņošanas sarakstu</string>
-    <string name="loggedout">Jūs neesat pierakstījies.</string>
+    <string name="loggedout">Jūs esat izrakstījies.</string>
     <string name="noInternet">Vispirms savienojieties ar internetu.</string>
     <string name="retry">Mēģināt vēlreiz</string>
     <string name="comments">Komentāri</string>
@@ -145,7 +145,7 @@
     <string name="buffering_goal">Iepriekš ielādēt</string>
     <string name="buffering_goal_summary">Maksimālais ilgums sekundēs, cik tālu video tiek iepriekš ielādēts.</string>
     <string name="playerVideoFormat">Atskaņotāja video formāts</string>
-    <string name="category_music_offtopic_description">Tikai priekš mūzikas video. Šeit ietilpst brīži, kas nav daļas no oficiālās dziesmas. Beigu beigās video vajadzētu līdzināties oficiālajai dziesmas versijai (piemēram, Spotify versijai), cik vien tuvu iespējams.</string>
+    <string name="category_music_offtopic_description">Tikai mūzikas videoklipiem. Šeit ietilpst brīži, kas nav daļas no oficiālās dziesmas. Beigu beigās videoklipam vajadzētu līdzināties oficiālajai dziesmas versijai (piemēram, Spotify versijai), cik vien tuvu iespējams.</string>
     <string name="player_autoplay">Automātiski atskaņot</string>
     <string name="reset">Atjaunot noklusējumu</string>
     <string name="reset_message">Atiestatīt visus iestatījumus un izrakstīties\?</string>
@@ -214,8 +214,8 @@
     <string name="best_quality">Augstākā</string>
     <string name="default_subtitle_language">Subtitru valoda</string>
     <string name="notifications">Notifikācijas</string>
-    <string name="notify_new_streams">Notifikācijas jaunam saturam</string>
-    <string name="notify_new_streams_summary">Sūtīt notifikācijas par jaunu saturu no veidotājiem, kuriem jūs sekojat.</string>
+    <string name="notify_new_streams">Rādīt jauna satura notifikācijas</string>
+    <string name="notify_new_streams_summary">Rādīt notifikācijas par jaunu saturu no veidotājiem, kuriem jūs sekojat.</string>
     <string name="irreversible">Vai esat pārliecināts\? Šī darbība ir neatgriezeniska.</string>
     <string name="most_recent">Jaunākie</string>
     <string name="least_recent">Senākie</string>
@@ -334,7 +334,7 @@
     <string name="time">Laiks</string>
     <string name="start_time">Sākuma laiks</string>
     <string name="end_time">Beigu laiks</string>
-    <string name="notification_time_summary">Laika posms, kurā atļauti paziņojumi.</string>
+    <string name="notification_time_summary">Ierobežot laika posmu, kurā straumju notifikācijas tiek rādītas.</string>
     <string name="navbar_order">Secība</string>
     <string name="layout">Izklājums</string>
     <string name="alternative_player_layout">Alternatīvs atskaņotāja izklājums</string>
@@ -347,7 +347,7 @@
     <string name="confirm_unsubscribing">Apstiprināt atrakstīšanos</string>
     <string name="confirm_unsubscribing_summary">Parādīt apstiprināšanas logu pirms atrakstīšanās.</string>
     <string name="play_all">Atskaņot visus</string>
-    <string name="notification_time">Paziņojumu laiks</string>
+    <string name="notification_time">Ierobežot notifikāciju laiku</string>
     <string name="limit_to_runtime">Ierobežot atskaņošanas laiku</string>
     <string name="theme_monochrome">Minimālistisks vienkrāsains</string>
     <string name="comments_disabled">Augšupielādētājs ir atspējojis komentārus.</string>
@@ -396,8 +396,8 @@
     <string name="clear_bookmarks">Dzēst grāmatzīmes</string>
     <string name="sleep_timer">Miega taimeris</string>
     <string name="download_channel_description">Rādīt paziņojumu, lejupielādējot video.</string>
-    <string name="uploaderAndVideoCount">%1$s • %2$d video</string>
-    <string name="subscriberAndVideoCounts">%1$s abonenti • %2$d video</string>
+    <string name="uploaderAndVideoCount">%1$s • %2$d videoklipi</string>
+    <string name="subscriberAndVideoCounts">%1$s abonenti • %2$d videoklipi</string>
     <string name="failed_fetching_instances">Nevarēja izgūt pieejamos gadījumus.</string>
     <string name="sb_markers_summary">Atzīmējiet segmentus laika joslā.</string>
     <string name="audio_track">Audio celiņš</string>
@@ -407,4 +407,35 @@
     <string name="lbry_hls_summary">Straumēšanai izmantojiet LBRY HLS, ja iespējams.</string>
     <string name="featured">Piedāvātie</string>
     <string name="alternative_pip_controls">Alternatīvas PiP vadīklas</string>
+    <string name="fullscreen_gestures">Pilnekrāna režīma ieslēgšanas/izslēgšanas žesti</string>
+    <string name="show_stream_thumbnails">Rādīt straumju sīktēlus</string>
+    <string name="show_stream_thumbnails_summary">Rādīt jaunu straumju sīktēlus. Patērē vairāk datus.</string>
+    <plurals name="channel_new_streams">
+        <item quantity="zero">%d jaunu straumju</item>
+        <item quantity="one">%d jauna straume</item>
+        <item quantity="other">%d jaunas straumes</item>
+    </plurals>
+    <string name="go_to_video">Doties uz video</string>
+    <string name="disable_proxy">Atspējot Piped starpniekserveri</string>
+    <string name="auto_fullscreen_shorts">Automātisks pilnekrāna režīms īsiem video</string>
+    <string name="new_group">Jauns</string>
+    <string name="group_name">Kopas nosaukums</string>
+    <string name="edit_group">Rediģēt kopu</string>
+    <string name="channel_groups">Kanālu kopas</string>
+    <string name="disable_proxy_summary">Lādēt video un attēlus tieši no YouTube serveriem. Ieslēdziet tikai tad, ja jūs izmantojat VPN! Šī opcija var nestrādāt saturam no YouTube Music.</string>
+    <string name="duration">Ilgums</string>
+    <string name="duration_reversed">Ilgums (apgriezts)</string>
+    <string name="creation_date">Izveidošanas datums</string>
+    <string name="creation_date_reversed">Izveidošanas datums (apgriezts)</string>
+    <string name="alphabetic_reversed">Alfabētisks (apgriezts)</string>
+    <string name="unlimited_search_history">Neierobežota meklēšanas vēsture</string>
+    <string name="shorts_notifications">Notifikācijas īsiem video</string>
+    <string name="alphabetic">Alfabētisks</string>
+    <string name="import_subscriptions_from">Importēt abonementus no</string>
+    <string name="export_subscriptions_to">Eksportēt abonementus uz</string>
+    <string name="import_format_freetube">FreeTube</string>
+    <string name="import_format_newpipe">NewPipe</string>
+    <string name="import_format_youtube_csv">YouTube (CSV)</string>
+    <string name="play_automatically">Atskaņot automātiski</string>
+    <string name="play_automatically_summary">Sākt atskaņot video automātiski, kad to izvēlas</string>
 </resources>
