@@ -147,6 +147,13 @@ class PlaylistFragment : Fragment() {
                 }
 
                 binding.playlistInfo.text = getChannelAndVideoString(response, response.videos)
+                binding.playlistDescription.text = response.description
+
+                binding.playlistDescription.let { textView ->
+                    textView.setOnClickListener {
+                        textView.maxLines = if (textView.maxLines == Int.MAX_VALUE) 3 else Int.MAX_VALUE
+                    }
+                }
 
                 showPlaylistVideos(response)
 
