@@ -419,7 +419,7 @@
         <item quantity="many">%d nouveaux événements</item>
         <item quantity="other">%d nouveaux événements</item>
     </plurals>
-    <string name="show_stream_thumbnails_summary">Afficher les miniature des nouveaux événements. Activer cette option consommera davantage de données.</string>
+    <string name="show_stream_thumbnails_summary">Afficher les miniatures des nouveaux événements. Activer cette option consommera davantage de données.</string>
     <string name="channel_groups">Groupes de chaines</string>
     <string name="new_group">Nouveau</string>
     <string name="group_name">Nom du groupe</string>
