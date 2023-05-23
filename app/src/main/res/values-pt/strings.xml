@@ -433,4 +433,9 @@
     <string name="alphabetic">Alfabético</string>
     <string name="alphabetic_reversed">Alfabética (invertida)</string>
     <string name="creation_date_reversed">Data de criação (invertida)</string>
+    <string name="import_format_freetube">FreeTube</string>
+    <string name="import_format_youtube_csv">YouTube (CSV)</string>
+    <string name="import_format_newpipe">NewPipe</string>
+    <string name="import_subscriptions_from">Importar subscrições de</string>
+    <string name="export_subscriptions_to">Exportar subscrições para</string>
 </resources>
