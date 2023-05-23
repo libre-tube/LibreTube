@@ -1,6 +1,7 @@
 package com.github.libretube.util
 
 import android.annotation.SuppressLint
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.BroadcastReceiver
@@ -11,10 +12,11 @@ import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.media.session.MediaSessionCompat
+import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.PendingIntentCompat
+import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.os.bundleOf
 import androidx.media3.common.Player
@@ -29,6 +31,7 @@ import com.github.libretube.R
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
+import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.obj.PlayerNotificationData
@@ -42,6 +45,11 @@ class NowPlayingNotification(
     private val isBackgroundPlayerNotification: Boolean,
 ) {
     private var videoId: String? = null
+    private val nManager = context.getSystemService<NotificationManager>()!!
+
+    /**
+     * The metadata of the current playing song (thumbnail, title, uploader)
+     */
     private var notificationData: PlayerNotificationData? = null
 
     /**
@@ -58,8 +66,6 @@ class NowPlayingNotification(
      * The [Bitmap] which represents the background / thumbnail of the notification
      */
     private var notificationBitmap: Bitmap? = null
-
-    private val nManager = NotificationManagerCompat.from(context)
 
     private fun loadCurrentLargeIcon() {
         if (DataSaverMode.isEnabled(context)) return
@@ -80,6 +86,12 @@ class NowPlayingNotification(
             }
         }
         return PendingIntentCompat.getActivity(context, 0, intent, FLAG_UPDATE_CURRENT, false)
+    }
+
+    private fun createDeleteIntent(): PendingIntent {
+        val intent = Intent(STOP).setPackage(context.packageName)
+        return PendingIntentCompat
+            .getBroadcast(context, 1, intent, PendingIntent.FLAG_CANCEL_CURRENT, false)
     }
 
     private fun enqueueThumbnailRequest(callback: (Bitmap) -> Unit) {
@@ -111,22 +123,25 @@ class NowPlayingNotification(
         } else ImageHelper.getSquareBitmap(bitmap)
     }
 
-    private val legacyNotificationButtons get() = listOf(
-        createNotificationAction(R.drawable.ic_prev_outlined, PREV, 1),
-        createNotificationAction(if (player.isPlaying) R.drawable.ic_pause else R.drawable.ic_play, PLAY_PAUSE, 1),
-        createNotificationAction(R.drawable.ic_next_outlined, NEXT, 1),
-        createNotificationAction(R.drawable.ic_rewind_md, REWIND, 1),
-        createNotificationAction(R.drawable.ic_forward_md, FORWARD, 1),
-    )
+    private val legacyNotificationButtons
+        get() = listOf(
+            createNotificationAction(R.drawable.ic_prev_outlined, PREV),
+            createNotificationAction(
+                if (player.isPlaying) R.drawable.ic_pause else R.drawable.ic_play,
+                PLAY_PAUSE
+            ),
+            createNotificationAction(R.drawable.ic_next_outlined, NEXT),
+            createNotificationAction(R.drawable.ic_rewind_md, REWIND),
+            createNotificationAction(R.drawable.ic_forward_md, FORWARD),
+        )
 
     private fun createNotificationAction(
         drawableRes: Int,
-        actionName: String,
-        instanceId: Int,
+        actionName: String
     ): NotificationCompat.Action {
         val intent = Intent(actionName).setPackage(context.packageName)
         val pendingIntent = PendingIntentCompat
-            .getBroadcast(context, instanceId, intent, PendingIntent.FLAG_CANCEL_CURRENT, false)
+            .getBroadcast(context, 1, intent, PendingIntent.FLAG_CANCEL_CURRENT, false)
         return NotificationCompat.Action.Builder(drawableRes, actionName, pendingIntent).build()
     }
 
@@ -243,6 +258,13 @@ class NowPlayingNotification(
             PLAY_PAUSE -> {
                 if (player.isPlaying) player.pause() else player.play()
             }
+
+            STOP -> {
+                Log.e("stop", "stop")
+                if (isBackgroundPlayerNotification) {
+                    BackgroundHelper.stopBackgroundPlay(context)
+                }
+            }
         }
     }
 
@@ -283,13 +305,13 @@ class NowPlayingNotification(
         notificationBuilder = NotificationCompat.Builder(context, BACKGROUND_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_lockscreen)
             .setContentIntent(createCurrentContentIntent())
+            .setDeleteIntent(createDeleteIntent())
             .setStyle(
                 MediaStyleNotificationHelper.MediaStyle(mediaSession)
                     .setShowActionsInCompactView(1)
             )
     }
 
-    @SuppressLint("MissingPermission")
     private fun createOrUpdateNotification() {
         if (notificationBuilder == null) return
         val notification = notificationBuilder!!
@@ -313,7 +335,7 @@ class NowPlayingNotification(
     }
 
     private fun createActionReceiver() {
-        listOf(PREV, NEXT, REWIND, FORWARD, PLAY_PAUSE).forEach {
+        listOf(PREV, NEXT, REWIND, FORWARD, PLAY_PAUSE, STOP).forEach {
             context.registerReceiver(notificationActionReceiver, IntentFilter(it))
         }
     }
@@ -340,5 +362,6 @@ class NowPlayingNotification(
         private const val REWIND = "rewind"
         private const val FORWARD = "forward"
         private const val PLAY_PAUSE = "play_pause"
+        private const val STOP = "stop"
     }
 }
