@@ -287,7 +287,7 @@
     <string name="added_to_playlist">Hozzáadva a lejátszási listához</string>
     <string name="invalid_filename">Érvénytelen fájlnév!</string>
     <string name="filename">Fájlnév</string>
-    <string name="playlistNameReversed">Lejátszási lista neve (fordítva)</string>
+    <string name="playlistNameReversed">Lejátszási lista neve (fordított)</string>
     <string name="playlists_order">Lejátszási lista sorrend</string>
     <string name="time_code">Időkód (másodperc)</string>
     <string name="queue">Sor</string>
@@ -426,4 +426,13 @@
     <string name="duration_reversed">Időtartam (fordított)</string>
     <string name="unlimited_search_history">Korlátlan keresési előzmények</string>
     <string name="shorts_notifications">Értesítés a rövidekhez</string>
+    <string name="creation_date">Létrehozás dátuma</string>
+    <string name="creation_date_reversed">Létrehozás dátuma (fordított)</string>
+    <string name="alphabetic">Ábécé</string>
+    <string name="alphabetic_reversed">Ábécé (fordított)</string>
+    <string name="import_subscriptions_from">Feliratkozások importálása innen</string>
+    <string name="export_subscriptions_to">Feliratkozások exportálása ide</string>
+    <string name="import_format_newpipe">NewPipe</string>
+    <string name="import_format_freetube">FreeTube</string>
+    <string name="import_format_youtube_csv">YouTube (CSV)</string>
 </resources>
