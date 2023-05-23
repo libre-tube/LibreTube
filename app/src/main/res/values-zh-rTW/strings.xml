@@ -429,4 +429,9 @@
     <string name="creation_date_reversed">建立日期（反轉）</string>
     <string name="alphabetic">字母</string>
     <string name="alphabetic_reversed">字母（反轉）</string>
+    <string name="import_subscriptions_from">匯入訂閱從</string>
+    <string name="export_subscriptions_to">匯出訂閱至</string>
+    <string name="import_format_freetube">FreeTube</string>
+    <string name="import_format_youtube_csv">YouTube (CSV)</string>
+    <string name="import_format_newpipe">NewPipe</string>
 </resources>
