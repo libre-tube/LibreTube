@@ -77,8 +77,7 @@ object ImportHelper {
                     }
                 }.orEmpty()
             }
-            // Piped case not use for subscriptions
-            ImportFormat.PIPED -> emptyList()
+            else -> throw IllegalArgumentException()
         }
     }
 
@@ -146,7 +145,7 @@ object ImportHelper {
                     JsonHelper.json.decodeFromStream<List<FreeTubeImportPlaylist>>(it)
                 }
                 val playlists = playlistFile?.map { playlist ->
-                    // convert FreeTube videos to listOf string
+                    // convert FreeTube videos to list of string
                     // convert FreeTube playlists to piped playlists
                     PipedImportPlaylist(
                         playlist.name,
@@ -179,7 +178,7 @@ object ImportHelper {
                     importPlaylist.videos = importPlaylist.videos.map { it.takeLast(11) }
                 }
             }
-            ImportFormat.NEWPIPE -> Unit
+            else -> throw IllegalArgumentException()
         }
         try {
             PlaylistsHelper.importPlaylists(importPlaylists)
