@@ -430,4 +430,9 @@
     <string name="alphabetic">Alphabetisch A→Z</string>
     <string name="creation_date">Erstellungsdatum (neueste zuerst)</string>
     <string name="creation_date_reversed">Erstellungsdatum (älteste zuerst)</string>
+    <string name="export_subscriptions_to">Abos exportieren nach</string>
+    <string name="import_format_newpipe">NewPipe</string>
+    <string name="import_format_freetube">FreeTube</string>
+    <string name="import_format_youtube_csv">YouTube (als CSV)</string>
+    <string name="import_subscriptions_from">Abos importieren von</string>
 </resources>

@@ -430,4 +430,9 @@
     <string name="alphabetic_reversed">ବର୍ଣ୍ଣାନୁକ୍ରମିକ (ଓଲଟା)</string>
     <string name="creation_date_reversed">ସୃଷ୍ଟି ତାରିଖ (ଓଲଟା)</string>
     <string name="alphabetic">ବର୍ଣ୍ଣାନୁକ୍ରମିକ</string>
+    <string name="export_subscriptions_to">ସଦସ୍ୟତା ରପ୍ତାନି କରନ୍ତୁ</string>
+    <string name="import_format_newpipe">Newpipe</string>
+    <string name="import_format_freetube">Freetube</string>
+    <string name="import_format_youtube_csv">Youtube(CSV)</string>
+    <string name="import_subscriptions_from">ଏଥିରୁ ସଦସ୍ୟତା ଆମଦାନୀ କରନ୍ତୁ</string>
 </resources>
