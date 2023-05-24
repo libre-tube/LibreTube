@@ -416,6 +416,8 @@
     <!-- Backup & Restore Settings -->
     <string name="import_subscriptions_from">Import subscriptions from</string>
     <string name="export_subscriptions_to">Export subscriptions to</string>
+    <string name="import_playlists_from">Import playlists from</string>
+    <string name="export_playlists_to">Export playlists to</string>
     <string name="import_format_newpipe">NewPipe</string>
     <string name="import_format_freetube">FreeTube</string>
     <string name="import_format_youtube_csv">YouTube (CSV)</string>

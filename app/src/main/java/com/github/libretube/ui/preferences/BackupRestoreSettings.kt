@@ -24,15 +24,24 @@ class BackupRestoreSettings : BasePreferenceFragment() {
     private val backupDateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss")
     private var backupFile = BackupFile()
     private var importFormat: ImportFormat = ImportFormat.NEWPIPE
-    private val importFormatList get() = listOf(
+    private val importSubscriptionFormatList get() = listOf(
         ImportFormat.NEWPIPE,
         ImportFormat.FREETUBE,
         ImportFormat.YOUTUBECSV
-    ).map { getString(it.value) }
-    private val exportFormatList get() = listOf(
+    )
+    private val exportSubscriptionFormatList get() = listOf(
         ImportFormat.NEWPIPE,
         ImportFormat.FREETUBE
-    ).map { getString(it.value) }
+    )
+    private val importPlaylistFormatList get() = listOf(
+        ImportFormat.PIPED,
+        ImportFormat.FREETUBE,
+        ImportFormat.YOUTUBECSV
+    )
+    private val exportPlaylistFormatList get() = listOf(
+        ImportFormat.PIPED,
+        ImportFormat.FREETUBE
+    )
 
     override val titleResourceId: Int = R.string.backup_restore
 
@@ -80,14 +89,14 @@ class BackupRestoreSettings : BasePreferenceFragment() {
         registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) {
             it?.forEach {
                 CoroutineScope(Dispatchers.IO).launch {
-                    ImportHelper.importPlaylists(requireActivity(), it)
+                    ImportHelper.importPlaylists(requireActivity(), it, importFormat)
                 }
             }
         }
     private val createPlaylistsFile = registerForActivityResult(CreateDocument(JSON)) {
         it?.let {
             lifecycleScope.launch(Dispatchers.IO) {
-                ImportHelper.exportPlaylists(requireActivity(), it)
+                ImportHelper.exportPlaylists(requireActivity(), it, importFormat)
             }
         }
     }
@@ -115,8 +124,9 @@ class BackupRestoreSettings : BasePreferenceFragment() {
 
         val importSubscriptions = findPreference<Preference>("import_subscriptions")
         importSubscriptions?.setOnPreferenceClickListener {
-            createImportFormatDialog(R.string.import_subscriptions_from, importFormatList) {
-                importFormat = ImportFormat.values()[it]
+            val list = importSubscriptionFormatList.map { getString(it.value) }
+            createImportFormatDialog(R.string.import_subscriptions_from, list) {
+                importFormat = importSubscriptionFormatList[it]
                 getSubscriptionsFile.launch("*/*")
             }
             true
@@ -124,22 +134,31 @@ class BackupRestoreSettings : BasePreferenceFragment() {
 
         val exportSubscriptions = findPreference<Preference>("export_subscriptions")
         exportSubscriptions?.setOnPreferenceClickListener {
-            createImportFormatDialog(R.string.export_subscriptions_to, exportFormatList) {
-                importFormat = ImportFormat.values()[it]
-                createSubscriptionsFile.launch("subscriptions.json")
+            val list = exportSubscriptionFormatList.map { getString(it.value) }
+            createImportFormatDialog(R.string.export_subscriptions_to, list) {
+                importFormat = exportSubscriptionFormatList[it]
+                createSubscriptionsFile.launch("${getString(importFormat.value).lowercase()}-subscriptions.json")
             }
             true
         }
 
         val importPlaylists = findPreference<Preference>("import_playlists")
         importPlaylists?.setOnPreferenceClickListener {
-            getPlaylistsFile.launch(arrayOf("*/*"))
+            val list = importPlaylistFormatList.map { getString(it.value) }
+            createImportFormatDialog(R.string.import_playlists_from, list) {
+                importFormat = importPlaylistFormatList[it]
+                getPlaylistsFile.launch(arrayOf("*/*"))
+            }
             true
         }
 
         val exportPlaylists = findPreference<Preference>("export_playlists")
         exportPlaylists?.setOnPreferenceClickListener {
-            createPlaylistsFile.launch("playlists.json")
+            val list = exportPlaylistFormatList.map { getString(it.value) }
+            createImportFormatDialog(R.string.export_playlists_to, list) {
+                importFormat = exportPlaylistFormatList[it]
+                createPlaylistsFile.launch("${getString(importFormat.value).lowercase()}-playlists.json")
+            }
             true
         }
 

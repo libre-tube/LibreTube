@@ -12,10 +12,12 @@ import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.enums.ImportFormat
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
+import com.github.libretube.obj.FreeTubeImportPlaylist
+import com.github.libretube.obj.FreeTubeVideo
 import com.github.libretube.obj.FreetubeSubscription
 import com.github.libretube.obj.FreetubeSubscriptions
-import com.github.libretube.obj.ImportPlaylist
-import com.github.libretube.obj.ImportPlaylistFile
+import com.github.libretube.obj.PipedImportPlaylist
+import com.github.libretube.obj.PipedImportPlaylistFile
 import com.github.libretube.obj.NewPipeSubscription
 import com.github.libretube.obj.NewPipeSubscriptions
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -76,6 +78,8 @@ object ImportHelper {
                     }
                 }.orEmpty()
             }
+            // Piped case not use for subscriptions
+            ImportFormat.PIPED -> emptyList()
         }
     }
 
@@ -123,12 +127,53 @@ object ImportHelper {
      * Import Playlists
      */
     @OptIn(ExperimentalSerializationApi::class)
-    suspend fun importPlaylists(activity: Activity, uri: Uri) {
-        val importPlaylists = mutableListOf<ImportPlaylist>()
+    suspend fun importPlaylists(activity: Activity, uri: Uri, importFormat: ImportFormat) {
+        when (importFormat) {
+            ImportFormat.PIPED -> {
+                val importPlaylists = mutableListOf<PipedImportPlaylist>()
+                val playlistFile = activity.contentResolver.openInputStream(uri)?.use {
+                    JsonHelper.json.decodeFromStream<PipedImportPlaylistFile>(it)
+                }
+                importPlaylists.addAll(playlistFile?.playlists.orEmpty())
 
-        when (val fileType = activity.contentResolver.getType(uri)) {
-            "text/csv", "text/comma-separated-values" -> {
-                val playlist = ImportPlaylist()
+                // convert the YouTube URLs to videoIds
+                importPlaylists.forEach { playlist ->
+                    playlist.videos = playlist.videos.map { it.takeLast(11) }
+                }
+                try {
+                    PlaylistsHelper.importNewPipePlaylists(importPlaylists)
+                    activity.toastFromMainDispatcher(R.string.success)
+                } catch (e: Exception) {
+                    Log.e(TAG(), e.toString())
+                    e.localizedMessage?.let {
+                        activity.toastFromMainDispatcher(it)
+                    }
+                }
+            }
+            ImportFormat.FREETUBE -> {
+                val importPlaylists = mutableListOf<FreeTubeImportPlaylist>()
+                val playlistFile = activity.contentResolver.openInputStream(uri)?.use {
+                    JsonHelper.json.decodeFromStream<List<FreeTubeImportPlaylist>>(it)
+                }
+                importPlaylists.addAll(playlistFile.orEmpty())
+
+                // convert the YouTube URLs to videoIds
+                importPlaylists.forEach { playlist ->
+                    playlist.videos = playlist.videos.map { FreeTubeVideo(it.videoId, it.title, it.authorId, it.videoId) }
+                }
+                try {
+                    PlaylistsHelper.importFreeTubePlaylists(importPlaylists)
+                    activity.toastFromMainDispatcher(R.string.success)
+                } catch (e: Exception) {
+                    Log.e(TAG(), e.toString())
+                    e.localizedMessage?.let {
+                        activity.toastFromMainDispatcher(it)
+                    }
+                }
+            }
+            ImportFormat.YOUTUBECSV -> {
+                val importPlaylists = mutableListOf<PipedImportPlaylist>()
+                val playlist = PipedImportPlaylist()
                 activity.contentResolver.openInputStream(uri)?.use {
                     val lines = it.bufferedReader().use { reader -> reader.lines().toList() }
                     playlist.name = lines[1].split(",").reversed()[2]
@@ -144,32 +189,22 @@ object ImportHelper {
                     }
                     importPlaylists.add(playlist)
                 }
-            }
-            "application/json", "application/*", "application/octet-stream" -> {
-                val playlistFile = activity.contentResolver.openInputStream(uri)?.use {
-                    JsonHelper.json.decodeFromStream<ImportPlaylistFile>(it)
-                }
-                importPlaylists.addAll(playlistFile?.playlists.orEmpty())
-            }
-            else -> {
-                val message = activity.getString(R.string.unsupported_file_format, fileType)
-                activity.toastFromMainDispatcher(message)
-                return
-            }
-        }
 
-        // convert the YouTube URLs to videoIds
-        importPlaylists.forEach { playlist ->
-            playlist.videos = playlist.videos.map { it.takeLast(11) }
-        }
-        try {
-            PlaylistsHelper.importPlaylists(importPlaylists)
-            activity.toastFromMainDispatcher(R.string.success)
-        } catch (e: Exception) {
-            Log.e(TAG(), e.toString())
-            e.localizedMessage?.let {
-                activity.toastFromMainDispatcher(it)
+                // convert the YouTube URLs to videoIds
+                importPlaylists.forEach { importPlaylist ->
+                    importPlaylist.videos = importPlaylist.videos.map { it.takeLast(11) }
+                }
+                try {
+                    PlaylistsHelper.importNewPipePlaylists(importPlaylists)
+                    activity.toastFromMainDispatcher(R.string.success)
+                } catch (e: Exception) {
+                    Log.e(TAG(), e.toString())
+                    e.localizedMessage?.let {
+                        activity.toastFromMainDispatcher(it)
+                    }
+                }
             }
+            ImportFormat.NEWPIPE -> Unit
         }
     }
 
@@ -177,14 +212,26 @@ object ImportHelper {
      * Export Playlists
      */
     @OptIn(ExperimentalSerializationApi::class)
-    suspend fun exportPlaylists(activity: Activity, uri: Uri) {
-        val playlists = PlaylistsHelper.exportPlaylists()
-        val playlistFile = ImportPlaylistFile("Piped", 1, playlists)
+    suspend fun exportPlaylists(activity: Activity, uri: Uri, importFormat: ImportFormat) {
+        when (importFormat) {
+            ImportFormat.PIPED -> {
+                val playlists = PlaylistsHelper.exportPipedPlaylists()
+                val playlistFile = PipedImportPlaylistFile("Piped", 1, playlists)
 
-        activity.contentResolver.openOutputStream(uri)?.use {
-            JsonHelper.json.encodeToStream(playlistFile, it)
+                activity.contentResolver.openOutputStream(uri)?.use {
+                    JsonHelper.json.encodeToStream(playlistFile, it)
+                }
+                activity.toastFromMainDispatcher(R.string.exportsuccess)
+            }
+            ImportFormat.FREETUBE -> {
+                val playlists = PlaylistsHelper.exportFreeTubePlaylists()
+
+                activity.contentResolver.openOutputStream(uri)?.use {
+                    JsonHelper.json.encodeToStream(playlists, it)
+                }
+                activity.toastFromMainDispatcher(R.string.exportsuccess)
+            }
+            else -> Unit
         }
-
-        activity.toastFromMainDispatcher(R.string.exportsuccess)
     }
 }
