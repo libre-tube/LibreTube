@@ -354,7 +354,9 @@ class MainActivity : BaseActivity() {
                     this@MainActivity.onBackPressedDispatcher.onBackPressed()
                 }
 
-                return true
+                // Suppress collapsing of search view here.
+                // It will close when search fragment will close, so its safe to return false here
+                return false
             }
         })
         return super.onCreateOptionsMenu(menu)
