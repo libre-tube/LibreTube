@@ -67,7 +67,10 @@ object PlaylistsHelper {
             val playlist = LocalPlaylist(name = playlistName, thumbnailUrl = "")
             DatabaseHolder.Database.localPlaylistsDao().createPlaylist(playlist).toString()
         } else {
-            RetrofitInstance.authApi.createPlaylist(token, Playlists(name = playlistName)).playlistId
+            RetrofitInstance.authApi.createPlaylist(
+                token,
+                Playlists(name = playlistName)
+            ).playlistId
         }
     }
 
@@ -123,7 +126,8 @@ object PlaylistsHelper {
             )
             // set a new playlist thumbnail if the first video got removed
             if (index == 0) {
-                transaction.playlist.thumbnailUrl = transaction.videos.getOrNull(1)?.thumbnailUrl ?: ""
+                transaction.playlist.thumbnailUrl =
+                    transaction.videos.getOrNull(1)?.thumbnailUrl ?: ""
             }
             DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(transaction.playlist)
             true
@@ -135,73 +139,41 @@ object PlaylistsHelper {
         }
     }
 
-    suspend fun importFreeTubePlaylists(playlists: List<FreeTubeImportPlaylist>) = withContext(Dispatchers.IO) {
-        playlists.map { playlist ->
-            val playlistId = createPlaylist(playlist.name)
-            async {
-                playlistId ?: return@async
-                // if logged in, add the playlists by their ID via an api call
-                if (loggedIn) {
-                    addToPlaylist(
-                        playlistId,
-                        *playlist.videos.map {
-                            StreamItem(url = "$YOUTUBE_FRONTEND_URL/watch?v=${it.videoId}")
-                        }.toTypedArray(),
-                    )
-                } else {
-                    // if not logged in, all video information needs to become fetched manually
-                    // Only do so with 20 videos at once to prevent performance issues
-                    playlist.videos.mapIndexed { index, id -> id to index }
-                        .groupBy { it.second % 20 }.forEach { (_, videos) ->
-                            videos.map {
-                                async {
-                                    runCatching {
-                                        val stream = RetrofitInstance.api.getStreams(it.first.videoId).toStreamItem(
-                                            it.first.videoId
-                                        )
-                                        addToPlaylist(playlistId, stream)
+    suspend fun importPlaylists(playlists: List<PipedImportPlaylist>) =
+        withContext(Dispatchers.IO) {
+            playlists.map { playlist ->
+                val playlistId = createPlaylist(playlist.name!!)
+                async {
+                    playlistId ?: return@async
+                    // if logged in, add the playlists by their ID via an api call
+                    if (loggedIn) {
+                        addToPlaylist(
+                            playlistId,
+                            *playlist.videos.map {
+                                StreamItem(url = it)
+                            }.toTypedArray(),
+                        )
+                    } else {
+                        // if not logged in, all video information needs to become fetched manually
+                        // Only do so with 20 videos at once to prevent performance issues
+                        playlist.videos.mapIndexed { index, id -> id to index }
+                            .groupBy { it.second % 20 }.forEach { (_, videos) ->
+                                videos.map {
+                                    async {
+                                        runCatching {
+                                            val stream = RetrofitInstance.api.getStreams(it.first)
+                                                .toStreamItem(
+                                                    it.first,
+                                                )
+                                            addToPlaylist(playlistId, stream)
+                                        }
                                     }
-                                }
-                            }.awaitAll()
-                        }
+                                }.awaitAll()
+                            }
+                    }
                 }
-            }
-        }.awaitAll()
-    }
-
-    suspend fun importNewPipePlaylists(playlists: List<PipedImportPlaylist>) = withContext(Dispatchers.IO) {
-        playlists.map { playlist ->
-            val playlistId = createPlaylist(playlist.name!!)
-            async {
-                playlistId ?: return@async
-                // if logged in, add the playlists by their ID via an api call
-                if (loggedIn) {
-                    addToPlaylist(
-                        playlistId,
-                        *playlist.videos.map {
-                            StreamItem(url = it)
-                        }.toTypedArray(),
-                    )
-                } else {
-                    // if not logged in, all video information needs to become fetched manually
-                    // Only do so with 20 videos at once to prevent performance issues
-                    playlist.videos.mapIndexed { index, id -> id to index }
-                        .groupBy { it.second % 20 }.forEach { (_, videos) ->
-                            videos.map {
-                                async {
-                                    runCatching {
-                                        val stream = RetrofitInstance.api.getStreams(it.first).toStreamItem(
-                                            it.first,
-                                        )
-                                        addToPlaylist(playlistId, stream)
-                                    }
-                                }
-                            }.awaitAll()
-                        }
-                }
-            }
-        }.awaitAll()
-    }
+            }.awaitAll()
+        }
 
     suspend fun exportPipedPlaylists(): List<PipedImportPlaylist> = withContext(Dispatchers.IO) {
         getPlaylists()

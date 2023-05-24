@@ -13,7 +13,6 @@ import com.github.libretube.enums.ImportFormat
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.obj.FreeTubeImportPlaylist
-import com.github.libretube.obj.FreeTubeVideo
 import com.github.libretube.obj.FreetubeSubscription
 import com.github.libretube.obj.FreetubeSubscriptions
 import com.github.libretube.obj.PipedImportPlaylist
@@ -128,9 +127,10 @@ object ImportHelper {
      */
     @OptIn(ExperimentalSerializationApi::class)
     suspend fun importPlaylists(activity: Activity, uri: Uri, importFormat: ImportFormat) {
+        val importPlaylists = mutableListOf<PipedImportPlaylist>()
+
         when (importFormat) {
             ImportFormat.PIPED -> {
-                val importPlaylists = mutableListOf<PipedImportPlaylist>()
                 val playlistFile = activity.contentResolver.openInputStream(uri)?.use {
                     JsonHelper.json.decodeFromStream<PipedImportPlaylistFile>(it)
                 }
@@ -140,39 +140,23 @@ object ImportHelper {
                 importPlaylists.forEach { playlist ->
                     playlist.videos = playlist.videos.map { it.takeLast(11) }
                 }
-                try {
-                    PlaylistsHelper.importNewPipePlaylists(importPlaylists)
-                    activity.toastFromMainDispatcher(R.string.success)
-                } catch (e: Exception) {
-                    Log.e(TAG(), e.toString())
-                    e.localizedMessage?.let {
-                        activity.toastFromMainDispatcher(it)
-                    }
-                }
             }
             ImportFormat.FREETUBE -> {
-                val importPlaylists = mutableListOf<FreeTubeImportPlaylist>()
                 val playlistFile = activity.contentResolver.openInputStream(uri)?.use {
                     JsonHelper.json.decodeFromStream<List<FreeTubeImportPlaylist>>(it)
                 }
-                importPlaylists.addAll(playlistFile.orEmpty())
-
-                // convert the YouTube URLs to videoIds
-                importPlaylists.forEach { playlist ->
-                    playlist.videos = playlist.videos.map { FreeTubeVideo(it.videoId, it.title, it.authorId, it.videoId) }
+                val playlists = playlistFile?.map { playlist ->
+                    // convert FreeTube videos to listOf string
+                    // convert FreeTube playlists to piped playlists
+                    PipedImportPlaylist(
+                        playlist.name,
+                        null,
+                        null,
+                        playlist.videos.map { it.videoId })
                 }
-                try {
-                    PlaylistsHelper.importFreeTubePlaylists(importPlaylists)
-                    activity.toastFromMainDispatcher(R.string.success)
-                } catch (e: Exception) {
-                    Log.e(TAG(), e.toString())
-                    e.localizedMessage?.let {
-                        activity.toastFromMainDispatcher(it)
-                    }
-                }
+                importPlaylists.addAll(playlists.orEmpty())
             }
             ImportFormat.YOUTUBECSV -> {
-                val importPlaylists = mutableListOf<PipedImportPlaylist>()
                 val playlist = PipedImportPlaylist()
                 activity.contentResolver.openInputStream(uri)?.use {
                     val lines = it.bufferedReader().use { reader -> reader.lines().toList() }
@@ -194,17 +178,17 @@ object ImportHelper {
                 importPlaylists.forEach { importPlaylist ->
                     importPlaylist.videos = importPlaylist.videos.map { it.takeLast(11) }
                 }
-                try {
-                    PlaylistsHelper.importNewPipePlaylists(importPlaylists)
-                    activity.toastFromMainDispatcher(R.string.success)
-                } catch (e: Exception) {
-                    Log.e(TAG(), e.toString())
-                    e.localizedMessage?.let {
-                        activity.toastFromMainDispatcher(it)
-                    }
-                }
             }
             ImportFormat.NEWPIPE -> Unit
+        }
+        try {
+            PlaylistsHelper.importPlaylists(importPlaylists)
+            activity.toastFromMainDispatcher(R.string.success)
+        } catch (e: Exception) {
+            Log.e(TAG(), e.toString())
+            e.localizedMessage?.let {
+                activity.toastFromMainDispatcher(it)
+            }
         }
     }
 
