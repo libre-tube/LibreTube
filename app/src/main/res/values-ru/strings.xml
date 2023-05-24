@@ -436,4 +436,9 @@
     <string name="creation_date">Дата создания</string>
     <string name="creation_date_reversed">Дата создания (перевернутая)</string>
     <string name="alphabetic_reversed">Алфавитный (обратный)</string>
+    <string name="import_format_newpipe">NewPipe</string>
+    <string name="import_format_freetube">FreeTube</string>
+    <string name="import_subscriptions_from">Импорт подписок из</string>
+    <string name="export_subscriptions_to">Экспорт подписок в</string>
+    <string name="import_format_youtube_csv">YouTube (CSV)</string>
 </resources>
