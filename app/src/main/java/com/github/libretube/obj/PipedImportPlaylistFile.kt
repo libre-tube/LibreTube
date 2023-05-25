@@ -3,8 +3,8 @@ package com.github.libretube.obj
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ImportPlaylistFile(
+data class PipedImportPlaylistFile(
     val format: String,
     val version: Int,
-    val playlists: List<ImportPlaylist> = emptyList(),
+    val playlists: List<PipedImportPlaylist> = emptyList(),
 )

@@ -12,7 +12,9 @@ import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
-import com.github.libretube.obj.ImportPlaylist
+import com.github.libretube.obj.FreeTubeImportPlaylist
+import com.github.libretube.obj.FreeTubeVideo
+import com.github.libretube.obj.PipedImportPlaylist
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -133,7 +135,7 @@ object PlaylistsHelper {
         }
     }
 
-    suspend fun importPlaylists(playlists: List<ImportPlaylist>) = withContext(Dispatchers.IO) {
+    suspend fun importPlaylists(playlists: List<PipedImportPlaylist>) = withContext(Dispatchers.IO) {
         playlists.map { playlist ->
             val playlistId = createPlaylist(playlist.name!!)
             async {
@@ -167,7 +169,7 @@ object PlaylistsHelper {
         }.awaitAll()
     }
 
-    suspend fun exportPlaylists(): List<ImportPlaylist> = withContext(Dispatchers.IO) {
+    suspend fun exportPipedPlaylists(): List<PipedImportPlaylist> = withContext(Dispatchers.IO) {
         getPlaylists()
             .map { async { getPlaylist(it.id!!) } }
             .awaitAll()
@@ -175,9 +177,24 @@ object PlaylistsHelper {
                 val videos = it.relatedStreams.map { item ->
                     "$YOUTUBE_FRONTEND_URL/watch?v=${item.url!!.toID()}"
                 }
-                ImportPlaylist(it.name, "playlist", "private", videos)
+                PipedImportPlaylist(it.name, "playlist", "private", videos)
             }
     }
+
+    suspend fun exportFreeTubePlaylists(): List<FreeTubeImportPlaylist> =
+        withContext(Dispatchers.IO) {
+            getPlaylists()
+                .map { async { getPlaylist(it.id!!) } }
+                .awaitAll()
+                .map {
+                    val videos = it.relatedStreams.map { item ->
+                        item.url.orEmpty().replace("$YOUTUBE_FRONTEND_URL/watch?v=${item.url}", "")
+                    }.map { id ->
+                        FreeTubeVideo(id, it.name.orEmpty(), "", "")
+                    }
+                    FreeTubeImportPlaylist(it.name.orEmpty(), videos)
+                }
+        }
 
     suspend fun clonePlaylist(playlistId: String): String? {
         if (!loggedIn) {

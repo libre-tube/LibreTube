@@ -12,10 +12,11 @@ import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.enums.ImportFormat
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
+import com.github.libretube.obj.FreeTubeImportPlaylist
 import com.github.libretube.obj.FreetubeSubscription
 import com.github.libretube.obj.FreetubeSubscriptions
-import com.github.libretube.obj.ImportPlaylist
-import com.github.libretube.obj.ImportPlaylistFile
+import com.github.libretube.obj.PipedImportPlaylist
+import com.github.libretube.obj.PipedImportPlaylistFile
 import com.github.libretube.obj.NewPipeSubscription
 import com.github.libretube.obj.NewPipeSubscriptions
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -76,6 +77,7 @@ object ImportHelper {
                     }
                 }.orEmpty()
             }
+            else -> throw IllegalArgumentException()
         }
     }
 
@@ -123,12 +125,38 @@ object ImportHelper {
      * Import Playlists
      */
     @OptIn(ExperimentalSerializationApi::class)
-    suspend fun importPlaylists(activity: Activity, uri: Uri) {
-        val importPlaylists = mutableListOf<ImportPlaylist>()
+    suspend fun importPlaylists(activity: Activity, uri: Uri, importFormat: ImportFormat) {
+        val importPlaylists = mutableListOf<PipedImportPlaylist>()
 
-        when (val fileType = activity.contentResolver.getType(uri)) {
-            "text/csv", "text/comma-separated-values" -> {
-                val playlist = ImportPlaylist()
+        when (importFormat) {
+            ImportFormat.PIPED -> {
+                val playlistFile = activity.contentResolver.openInputStream(uri)?.use {
+                    JsonHelper.json.decodeFromStream<PipedImportPlaylistFile>(it)
+                }
+                importPlaylists.addAll(playlistFile?.playlists.orEmpty())
+
+                // convert the YouTube URLs to videoIds
+                importPlaylists.forEach { playlist ->
+                    playlist.videos = playlist.videos.map { it.takeLast(11) }
+                }
+            }
+            ImportFormat.FREETUBE -> {
+                val playlistFile = activity.contentResolver.openInputStream(uri)?.use {
+                    JsonHelper.json.decodeFromStream<List<FreeTubeImportPlaylist>>(it)
+                }
+                val playlists = playlistFile?.map { playlist ->
+                    // convert FreeTube videos to list of string
+                    // convert FreeTube playlists to piped playlists
+                    PipedImportPlaylist(
+                        playlist.name,
+                        null,
+                        null,
+                        playlist.videos.map { it.videoId })
+                }
+                importPlaylists.addAll(playlists.orEmpty())
+            }
+            ImportFormat.YOUTUBECSV -> {
+                val playlist = PipedImportPlaylist()
                 activity.contentResolver.openInputStream(uri)?.use {
                     val lines = it.bufferedReader().use { reader -> reader.lines().toList() }
                     playlist.name = lines[1].split(",").reversed()[2]
@@ -144,23 +172,13 @@ object ImportHelper {
                     }
                     importPlaylists.add(playlist)
                 }
-            }
-            "application/json", "application/*", "application/octet-stream" -> {
-                val playlistFile = activity.contentResolver.openInputStream(uri)?.use {
-                    JsonHelper.json.decodeFromStream<ImportPlaylistFile>(it)
-                }
-                importPlaylists.addAll(playlistFile?.playlists.orEmpty())
-            }
-            else -> {
-                val message = activity.getString(R.string.unsupported_file_format, fileType)
-                activity.toastFromMainDispatcher(message)
-                return
-            }
-        }
 
-        // convert the YouTube URLs to videoIds
-        importPlaylists.forEach { playlist ->
-            playlist.videos = playlist.videos.map { it.takeLast(11) }
+                // convert the YouTube URLs to videoIds
+                importPlaylists.forEach { importPlaylist ->
+                    importPlaylist.videos = importPlaylist.videos.map { it.takeLast(11) }
+                }
+            }
+            else -> throw IllegalArgumentException()
         }
         try {
             PlaylistsHelper.importPlaylists(importPlaylists)
@@ -177,14 +195,26 @@ object ImportHelper {
      * Export Playlists
      */
     @OptIn(ExperimentalSerializationApi::class)
-    suspend fun exportPlaylists(activity: Activity, uri: Uri) {
-        val playlists = PlaylistsHelper.exportPlaylists()
-        val playlistFile = ImportPlaylistFile("Piped", 1, playlists)
+    suspend fun exportPlaylists(activity: Activity, uri: Uri, importFormat: ImportFormat) {
+        when (importFormat) {
+            ImportFormat.PIPED -> {
+                val playlists = PlaylistsHelper.exportPipedPlaylists()
+                val playlistFile = PipedImportPlaylistFile("Piped", 1, playlists)
 
-        activity.contentResolver.openOutputStream(uri)?.use {
-            JsonHelper.json.encodeToStream(playlistFile, it)
+                activity.contentResolver.openOutputStream(uri)?.use {
+                    JsonHelper.json.encodeToStream(playlistFile, it)
+                }
+                activity.toastFromMainDispatcher(R.string.exportsuccess)
+            }
+            ImportFormat.FREETUBE -> {
+                val playlists = PlaylistsHelper.exportFreeTubePlaylists()
+
+                activity.contentResolver.openOutputStream(uri)?.use {
+                    JsonHelper.json.encodeToStream(playlists, it)
+                }
+                activity.toastFromMainDispatcher(R.string.exportsuccess)
+            }
+            else -> Unit
         }
-
-        activity.toastFromMainDispatcher(R.string.exportsuccess)
     }
 }
