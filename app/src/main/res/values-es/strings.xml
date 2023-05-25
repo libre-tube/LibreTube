@@ -438,4 +438,7 @@
     <string name="export_subscriptions_to">Exportar suscripciones hacia</string>
     <string name="import_format_freetube">FreeTube</string>
     <string name="import_format_youtube_csv">YouTube (CSV)</string>
+    <string name="export_playlists_to">Exportar listas hacia</string>
+    <string name="import_format_piped">Piped / LibreTube</string>
+    <string name="import_playlists_from">Importar listas desde</string>
 </resources>
