@@ -434,5 +434,8 @@
     <string name="import_format_newpipe">NewPipe</string>
     <string name="import_format_freetube">FreeTube</string>
     <string name="import_format_youtube_csv">YouTube (als CSV)</string>
-    <string name="import_subscriptions_from">Abos importieren von</string>
+    <string name="import_subscriptions_from">Abos importieren aus</string>
+    <string name="export_playlists_to">Playlists exportieren nach</string>
+    <string name="import_format_piped">Piped / LibreTube</string>
+    <string name="import_playlists_from">Playlists importieren aus</string>
 </resources>
