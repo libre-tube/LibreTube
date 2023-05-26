@@ -433,4 +433,12 @@
     <string name="alphabetic">Alfabetic</string>
     <string name="creation_date_reversed">Data creării (inversată)</string>
     <string name="alphabetic_reversed">Alfabetic (inversat)</string>
+    <string name="import_subscriptions_from">Importați abonamente din</string>
+    <string name="export_subscriptions_to">Exportați abonamente la</string>
+    <string name="import_playlists_from">Importă playlist-uri din</string>
+    <string name="import_format_newpipe">NewPipe</string>
+    <string name="import_format_freetube">FreeTube</string>
+    <string name="import_format_youtube_csv">YouTube (CSV)</string>
+    <string name="import_format_piped">Piped / LibreTube</string>
+    <string name="export_playlists_to">Exportă playlist-uri la</string>
 </resources>
