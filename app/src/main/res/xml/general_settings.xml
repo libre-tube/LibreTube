@@ -31,7 +31,7 @@
             app:key="audio_only_mode" />
 
         <SwitchPreferenceCompat
-            android:defaultValue="false"
+            android:defaultValue="@bool/config_default_auto_rotation_pref"
             android:icon="@drawable/ic_screen_rotation"
             app:key="auto_rotation"
             app:title="@string/auto_rotation" />

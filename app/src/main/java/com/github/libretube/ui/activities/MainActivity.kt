@@ -54,7 +54,12 @@ class MainActivity : BaseActivity() {
     lateinit var navController: NavController
     private var startFragmentId = R.id.homeFragment
 
-    val autoRotationEnabled = PreferenceHelper.getBoolean(PreferenceKeys.AUTO_ROTATION, false)
+    val autoRotationEnabled: Boolean by lazy {
+        PreferenceHelper.getBoolean(
+            PreferenceKeys.AUTO_ROTATION,
+            resources.getBoolean(R.bool.config_default_auto_rotation_pref)
+        )
+    }
 
     lateinit var searchView: SearchView
     private lateinit var searchItem: MenuItem
