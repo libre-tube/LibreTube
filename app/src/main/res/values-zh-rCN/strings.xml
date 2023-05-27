@@ -432,4 +432,7 @@
     <string name="import_format_freetube">FreeTube</string>
     <string name="export_subscriptions_to">将订阅导出到</string>
     <string name="import_format_youtube_csv">YouTube (CSV)</string>
+    <string name="import_format_piped">Piped / LibreTube</string>
+    <string name="import_playlists_from">自以下位置导入播放列表</string>
+    <string name="export_playlists_to">将播放列表导出到</string>
 </resources>
