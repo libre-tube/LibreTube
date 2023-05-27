@@ -3,6 +3,7 @@ package com.github.libretube.ui.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import android.text.InputFilter
+import android.text.format.Formatter
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
@@ -108,7 +109,10 @@ class DownloadDialog(
         val videoArrayAdapter = ArrayAdapter(
             requireContext(),
             R.layout.dropdown_item,
-            videoStreams.map { "${it.quality} ${it.format}" }.toMutableList().also {
+            videoStreams.map {
+                val fileSize = Formatter.formatShortFileSize(context, it.contentLength)
+                "${it.quality} ${it.format} ($fileSize)"
+            }.toMutableList().also {
                 it.add(0, getString(R.string.no_video))
             },
         )
@@ -116,7 +120,10 @@ class DownloadDialog(
         val audioArrayAdapter = ArrayAdapter(
             requireContext(),
             R.layout.dropdown_item,
-            audioStreams.map { "${it.quality} ${it.format}" }.toMutableList().also {
+            audioStreams.map {
+                val fileSize = Formatter.formatShortFileSize(context, it.contentLength)
+                "${it.quality} ${it.codec} ($fileSize)"
+            }.toMutableList().also {
                 it.add(0, getString(R.string.no_audio))
             },
         )
@@ -217,7 +224,11 @@ class DownloadDialog(
         }
     }
 
-    private fun getStreamSelection(streams: List<PipedStream>, quality: String, format: String): Int? {
+    private fun getStreamSelection(
+        streams: List<PipedStream>,
+        quality: String,
+        format: String
+    ): Int? {
         if (quality.isBlank()) return null
 
         streams.forEachIndexed { index, pipedStream ->
