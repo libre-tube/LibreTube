@@ -438,4 +438,7 @@
     <string name="export_subscriptions_to">Exportovat odběry do</string>
     <string name="import_format_freetube">FreeTube</string>
     <string name="import_format_youtube_csv">YouTube (CSV)</string>
+    <string name="export_playlists_to">Exportovat playlisty do</string>
+    <string name="import_format_piped">Piped / LibreTube</string>
+    <string name="import_playlists_from">Importovat playlisty z</string>
 </resources>

@@ -438,4 +438,7 @@
     <string name="import_format_newpipe">NewPipe</string>
     <string name="import_subscriptions_from">Importar subscrições de</string>
     <string name="export_subscriptions_to">Exportar subscrições para</string>
+    <string name="import_playlists_from">Importar listas de reprodução de</string>
+    <string name="export_playlists_to">Exportar listas de reprodução para</string>
+    <string name="import_format_piped">Piped / LibreTube</string>
 </resources>

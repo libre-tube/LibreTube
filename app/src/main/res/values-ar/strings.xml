@@ -447,4 +447,7 @@
     <string name="import_format_youtube_csv">يوتيوب (CSV)</string>
     <string name="import_format_newpipe">نيوبايب</string>
     <string name="import_subscriptions_from">استيراد الاشتراكات من</string>
+    <string name="import_format_piped">بايبد / ليبري تيوب</string>
+    <string name="import_playlists_from">استيراد قوائم التشغيل من</string>
+    <string name="export_playlists_to">تصدير قوائم التشغيل إلى</string>
 </resources>

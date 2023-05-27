@@ -432,4 +432,7 @@
     <string name="export_subscriptions_to">Ekspor langganan ke</string>
     <string name="import_format_newpipe">NewPipe</string>
     <string name="import_format_youtube_csv">YouTube (CSV)</string>
+    <string name="import_playlists_from">Impor daftar putar dari</string>
+    <string name="export_playlists_to">Ekspor daftar putar ke</string>
+    <string name="import_format_piped">Piped / LibreTube</string>
 </resources>

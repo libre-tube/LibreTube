@@ -435,4 +435,7 @@
     <string name="import_format_newpipe">NewPipe</string>
     <string name="import_format_freetube">FreeTube</string>
     <string name="import_format_youtube_csv">YouTube (CSV)</string>
+    <string name="import_playlists_from">Lejátszási listák importálása innen</string>
+    <string name="export_playlists_to">Lejátszási listák exportálása ide</string>
+    <string name="import_format_piped">Piped / LibreTube</string>
 </resources>

@@ -441,4 +441,7 @@
     <string name="export_subscriptions_to">Експорт підписок із</string>
     <string name="import_subscriptions_from">Імпорт підписок із</string>
     <string name="import_format_freetube">FreeTube</string>
+    <string name="import_playlists_from">Імпорт списків відтворення з</string>
+    <string name="import_format_piped">Piped / LibreTube</string>
+    <string name="export_playlists_to">Експорт списків відтворення в</string>
 </resources>
