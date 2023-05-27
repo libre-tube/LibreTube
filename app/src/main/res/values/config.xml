@@ -1,0 +1,3 @@
+<resources>
+    <bool name="config_default_auto_rotation_pref">false</bool>
+</resources>
