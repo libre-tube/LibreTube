@@ -38,23 +38,20 @@ class MarkableTimeBar(
     }
 
     private fun drawSegments(canvas: Canvas) {
-        if (player == null) return
-
-        if (!PreferenceHelper.getBoolean(PreferenceKeys.SB_SHOW_MARKERS, true)) return
-
-        val horizontalOffset = (parent as View).marginLeft
+        val markersEnabled = PreferenceHelper.getBoolean(PreferenceKeys.SB_SHOW_MARKERS, true)
+        if (player == null || !markersEnabled) return
 
         canvas.save()
-        length = canvas.width - 2 * horizontalOffset
-
+        val horizontalOffset = (parent as View).marginLeft
+        length = canvas.width - horizontalOffset * 2
         val marginY = canvas.height / 2 - progressBarHeight / 2
 
         segments.forEach {
             canvas.drawRect(
                 Rect(
-                    (it.segment.first() + horizontalOffset).toLength(),
+                    it.segment.first().toLength() + horizontalOffset,
                     marginY,
-                    (it.segment.last() + horizontalOffset).toLength(),
+                    it.segment.last().toLength() + horizontalOffset,
                     canvas.height - marginY,
                 ),
                 Paint().apply {
