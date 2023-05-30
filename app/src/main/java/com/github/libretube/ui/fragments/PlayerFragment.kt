@@ -71,6 +71,7 @@ import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.hideKeyboard
+import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.extensions.updateParameters
@@ -110,6 +111,9 @@ import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.io.IOException
+import java.util.*
+import java.util.concurrent.Executors
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -117,11 +121,8 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
-import java.io.IOException
-import java.util.*
-import java.util.concurrent.Executors
-import com.github.libretube.extensions.setMetadata
 import kotlin.math.abs
+
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class PlayerFragment : Fragment(), OnlinePlayerOptions {
@@ -248,6 +249,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             broadcastReceiver,
             IntentFilter(PlayerHelper.getIntentActon(requireContext())),
         )
+
+        // schedule task to save the watch position each second
+        Timer().scheduleAtFixedRate(object : TimerTask() {
+            override fun run() {
+                handler.post(this@PlayerFragment::saveWatchPosition)
+            }
+        }, 1000, 1000)
+
     }
 
     override fun onCreateView(
@@ -616,7 +625,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         try {
-            if (exoPlayer.duration != C.TIME_UNSET) saveWatchPosition()
+            saveWatchPosition()
 
             PlayingQueue.clear()
 
@@ -637,7 +646,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     // save the watch position if video isn't finished and option enabled
     private fun saveWatchPosition() {
-        if (!PlayerHelper.watchPositionsVideo || exoPlayer.currentPosition == 0L) return
+        if (!this::exoPlayer.isInitialized || !PlayerHelper.watchPositionsVideo
+            || exoPlayer.duration == C.TIME_UNSET || exoPlayer.currentPosition in listOf(
+                0L,
+                C.TIME_UNSET
+            )
+        ) return
         val watchPosition = WatchPosition(videoId!!, exoPlayer.currentPosition)
         CoroutineScope(Dispatchers.IO).launch {
             Database.watchPositionDao().insert(watchPosition)
@@ -740,7 +754,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 if (binding.playerMotionLayout.progress != 1.0f) {
                     // show controllers when not in picture in picture mode
                     val inPipMode = PlayerHelper.pipEnabled &&
-                        PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
+                            PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
                     if (!inPipMode) {
                         binding.player.useController = true
                     }
@@ -949,11 +963,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
 
             override fun onPlaybackStateChanged(playbackState: Int) {
-                // save the watch position to the database
-                // only called when the position is unequal to 0, otherwise it would become reset
-                // before the player can seek to the saved position from videos of the queue
-                // not called when the video has ended, since it then might save it to the next autoplay video
-                if (playbackState != Player.STATE_ENDED) saveWatchPosition()
+                saveWatchPosition()
 
                 // check if video has ended, next video is available and autoplay is enabled.
                 if (
@@ -1567,7 +1577,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private fun shouldStartPiP(): Boolean {
-        return usePiP() && exoPlayer.isPlaying && !BackgroundHelper.isBackgroundServiceRunning(requireContext())
+        return usePiP() && exoPlayer.isPlaying && !BackgroundHelper.isBackgroundServiceRunning(
+            requireContext()
+        )
     }
 
     private fun killPlayerFragment() {
