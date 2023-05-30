@@ -39,9 +39,6 @@ class ShareDialog(
         }
 
         val binding = DialogShareBinding.inflate(layoutInflater)
-        if (shareObjectType == ShareObjectType.VIDEO) {
-            setupTimeStampBinding(binding)
-        }
 
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(R.string.share))
@@ -70,7 +67,12 @@ class ShareDialog(
                 val shareIntent = Intent.createChooser(intent, getString(R.string.shareTo))
                 requireContext().startActivity(shareIntent)
             }
-            .setView(binding.root)
+            .apply {
+                if (shareObjectType == ShareObjectType.VIDEO) {
+                    setupTimeStampBinding(binding)
+                    setView(binding.root)
+                }
+            }
             .show()
     }
 
