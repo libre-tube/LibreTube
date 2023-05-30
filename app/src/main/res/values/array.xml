@@ -284,6 +284,7 @@
         <item>@string/all</item>
         <item>@string/videos</item>
         <item>@string/yt_shorts</item>
+        <item>@string/livestreams</item>
     </string-array>
 
     <string-array name="playlistSortOptions">

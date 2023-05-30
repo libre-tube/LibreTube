@@ -220,10 +220,12 @@ class SubscriptionsFragment : Fragment() {
             }
             .filter {
                 // apply the selected filter
+                val isLive = (it.duration ?: -1L) < 0L
                 when (selectedFilter) {
                     0 -> true
-                    1 -> !it.isShort
+                    1 -> !it.isShort && !isLive
                     2 -> it.isShort
+                    3 -> isLive
                     else -> throw IllegalArgumentException()
                 }
             }.let { streams ->
