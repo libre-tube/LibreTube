@@ -221,8 +221,8 @@
     <string name="time">時間</string>
     <string name="start_time">開始時間</string>
     <string name="end_time">終了時間</string>
-    <string name="notification_time">通知時間</string>
-    <string name="notify_new_streams_summary">あなたがフォローしたクリエイターの新しいコンテンツを通知します。</string>
+    <string name="notification_time">通知時間を制限する</string>
+    <string name="notify_new_streams_summary">フォローしているクリエイターからの新しい動画の通知を表示します。</string>
     <string name="notifications">通知</string>
     <string name="add_to_queue">キューに追加</string>
     <string name="irreversible">本当に続けますか？この操作は取り消せません！</string>
@@ -239,7 +239,7 @@
     <string name="new_videos_badge_summary">新しい動画の数をバッジに表示します。</string>
     <string name="confirm_unsubscribing">登録解除の確認</string>
     <string name="play_all">すべて再生</string>
-    <string name="notification_time_summary">通知の表示を許可する時間帯。</string>
+    <string name="notification_time_summary">ストリーム通知が表示される期間を制限します。</string>
     <string name="notify_new_streams">新しい動画を通知する</string>
     <string name="checking_frequency">チェック頻度</string>
     <string name="least_views">再生回数が少ない</string>
@@ -406,4 +406,33 @@
     <string name="disable_proxy_summary">動画や画像を YouTube のサーバーから直接読み込みます。 とにかくVPNを使用する場合にのみ、オプションを有効にしてください! これは、YT ミュージックのコンテンツでは機能しない可能性があることに注意してください。</string>
     <string name="auto_fullscreen_shorts">短いビデオの自動全画面表示</string>
     <string name="sleep_timer">目覚まし時計</string>
+    <string name="fullscreen_gestures">全画面ジェスチャを開始/終了する</string>
+    <string name="play_automatically">自動再生</string>
+    <string name="go_to_video">ビデオに移動</string>
+    <plurals name="channel_new_streams">
+        <item quantity="other">%d 個の新しいストリーム</item>
+    </plurals>
+    <string name="show_stream_thumbnails">ビデオのサムネイルを表示する</string>
+    <string name="show_stream_thumbnails_summary">新しいビデオのサムネイルを表示します。 これを有効にすると、追加のデータが消費されます。</string>
+    <string name="channel_groups">チャンネルグループ</string>
+    <string name="new_group">新しい</string>
+    <string name="group_name">グループ名</string>
+    <string name="edit_group">グループの編集</string>
+    <string name="play_automatically_summary">選択するとビデオの再生が自動的に開始されます</string>
+    <string name="duration_reversed">持続時間（反転）</string>
+    <string name="duration">持続時間</string>
+    <string name="shorts_notifications">ショートパンツの通知</string>
+    <string name="creation_date">作成日</string>
+    <string name="creation_date_reversed">作成日（逆順）</string>
+    <string name="alphabetic">アルファベット</string>
+    <string name="alphabetic_reversed">アルファベット（反転）</string>
+    <string name="import_subscriptions_from">からサブスクリプションをインポートします</string>
+    <string name="export_subscriptions_to">サブスクリプションをエクスポートする</string>
+    <string name="import_playlists_from">プレイリストをインポートする</string>
+    <string name="export_playlists_to">プレイリストをエクスポートする</string>
+    <string name="import_format_piped">Piped / LibreTube</string>
+    <string name="import_format_newpipe">NewPipe</string>
+    <string name="import_format_freetube">FreeTube</string>
+    <string name="import_format_youtube_csv">YouTube (CSV)</string>
+    <string name="unlimited_search_history">無制限の検索履歴</string>
 </resources>
