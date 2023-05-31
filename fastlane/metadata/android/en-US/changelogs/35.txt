@@ -1,0 +1,11 @@
+* Support for playlist descriptions
+* Support import/export for FreeTube subscriptions
+* Support FreeTube playlists import/export
+* Show file size in download dialog
+* Add feed filter for livestreams
+* Option to disable new video notifications for shorts videos
+* Convert subscription groups dialogs to bottom sheets
+* Navigate to channel when selected in channel groups dialog
+* Allow importing multiple playlists at once
+* Enter/Exit fullscreen gesture on whole screen if swipe gestures disabled
+* Add button to close audio player
