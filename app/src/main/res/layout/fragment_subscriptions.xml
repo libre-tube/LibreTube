@@ -142,6 +142,16 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
+                            <ImageView
+                                android:id="@+id/edit_groups"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="6dp"
+                                android:layout_marginStart="12dp"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:src="@drawable/ic_edit" />
+
                             <com.google.android.material.chip.ChipGroup
                                 android:id="@+id/channel_groups"
                                 android:layout_width="wrap_content"
@@ -158,15 +168,6 @@
                                     android:text="@string/all" />
 
                             </com.google.android.material.chip.ChipGroup>
-
-                            <ImageView
-                                android:id="@+id/edit_groups"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginHorizontal="10dp"
-                                android:background="?attr/selectableItemBackgroundBorderless"
-                                android:src="@drawable/ic_edit" />
 
                         </LinearLayout>
 
