@@ -82,11 +82,14 @@ class HomeFragment : Fragment() {
     private fun fetchHomeFeed() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
+                val defaultItems = resources.getStringArray(R.array.homeTabItemsValues)
+                val visibleItems = PreferenceHelper
+                    .getStringSet(PreferenceKeys.HOME_TAB_CONTENT, defaultItems.toSet())
                 awaitAll(
-                    async { loadTrending() },
-                    async { loadBookmarks() },
-                    async { loadFeed() },
-                    async { loadPlaylists() },
+                    async { if (visibleItems.contains(TRENDING)) loadTrending() },
+                    async { if (visibleItems.contains(BOOKMARKS)) loadBookmarks() },
+                    async { if (visibleItems.contains(FEATURED)) loadFeed() },
+                    async { if (visibleItems.contains(PLAYLISTS)) loadPlaylists() },
                 )
             }
         }
@@ -193,5 +196,13 @@ class HomeFragment : Fragment() {
         binding.progress.visibility = View.GONE
         binding.scroll.visibility = View.VISIBLE
         binding.refresh.isRefreshing = false
+    }
+
+    companion object {
+        // The values of the preference entries for the home tab content
+        private const val FEATURED = "featured"
+        private const val TRENDING = "trending"
+        private const val BOOKMARKS = "bookmarks"
+        private const val PLAYLISTS = "playlists"
     }
 }

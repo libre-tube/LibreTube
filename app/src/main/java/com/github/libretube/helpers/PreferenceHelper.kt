@@ -77,6 +77,10 @@ object PreferenceHelper {
         return settings.getFloat(key, defValue)
     }
 
+    fun getStringSet(key: String?, defValue: Set<String>): Set<String> {
+        return settings.getStringSet(key, defValue).orEmpty()
+    }
+
     fun clearPreferences() {
         editor.clear().apply()
     }

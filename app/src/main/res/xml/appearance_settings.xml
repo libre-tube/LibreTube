@@ -56,6 +56,14 @@
 
     <PreferenceCategory app:title="@string/layout">
 
+        <MultiSelectListPreference
+            android:icon="@drawable/ic_awesome"
+            app:defaultValue="@array/homeTabItemsValues"
+            android:title="@string/home_tab_content"
+            android:key="home_tab_content"
+            android:entryValues="@array/homeTabItemsValues"
+            android:entries="@array/homeTabItems" />
+
         <SwitchPreferenceCompat
             app:defaultValue="false"
             app:icon="@drawable/ic_list"

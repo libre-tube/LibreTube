@@ -422,6 +422,7 @@
     <string name="import_format_newpipe">NewPipe</string>
     <string name="import_format_freetube">FreeTube</string>
     <string name="import_format_youtube_csv">YouTube (CSV)</string>
+    <string name="home_tab_content">Home tab content</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
