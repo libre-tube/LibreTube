@@ -1,44 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
-        android:text="@string/channel_groups"
-        android:textStyle="bold"
-        android:textSize="24sp"
-        android:layout_marginTop="18dp"
-        android:layout_marginStart="18dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="18dp"
+        android:text="@string/channel_groups"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/groupsRV"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"/>
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1" />
 
     <LinearLayout
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:paddingVertical="10dp"
-        android:layout_height="wrap_content">
+        android:paddingVertical="10dp">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/new_group"
-            android:layout_width="wrap_content"
-            android:text="@string/new_group"
             style="@style/Widget.Material3.Button.OutlinedButton"
-            android:layout_height="wrap_content"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_group" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/confirm"
             style="@style/Widget.Material3.Button.ElevatedButton"
             android:layout_width="wrap_content"
-            android:text="@string/okay"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:layout_height="wrap_content"/>
+            android:text="@string/okay" />
 
     </LinearLayout>
 
