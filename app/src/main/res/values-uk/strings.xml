@@ -444,4 +444,5 @@
     <string name="import_playlists_from">Імпорт списків відтворення з</string>
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="export_playlists_to">Експорт списків відтворення в</string>
+    <string name="home_tab_content">Вміст головної вкладки</string>
 </resources>
