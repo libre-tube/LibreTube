@@ -408,4 +408,18 @@
         <item>never</item>
     </string-array>
 
+    <string-array name="homeTabItems">
+        <item>@string/featured</item>
+        <item>@string/trending</item>
+        <item>@string/bookmarks</item>
+        <item>@string/playlists</item>
+    </string-array>
+
+    <string-array name="homeTabItemsValues">
+        <item>featured</item>
+        <item>trending</item>
+        <item>bookmarks</item>
+        <item>playlists</item>
+    </string-array>
+
 </resources>
