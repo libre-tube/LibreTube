@@ -361,7 +361,7 @@
     <string name="rewind">Отмотать назад</string>
     <string name="forward">Отмотать вперед</string>
     <string name="alternative_pip_controls">Альтернативные элементы управления PiP</string>
-    <string name="alternative_pip_controls_summary">Показывать только аудио и пропускать элементы управления в PiP вместо перемотки вперед и назад</string>
+    <string name="alternative_pip_controls_summary">В окне PiP показывать кнопку только аудио и кнопки перехода, вместо перемотки вперед и назад.</string>
     <string name="pause">Пауза</string>
     <string name="add_to_bookmarks">Добавить в закладки</string>
     <string name="remove_bookmark">Удалить закладку</string>
