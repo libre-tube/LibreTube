@@ -1584,6 +1584,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     private fun killPlayerFragment() {
         viewModel.isFullscreen.value = false
+        viewModel.isMiniPlayerVisible.value = false
         binding.playerMotionLayout.transitionToEnd()
         mainActivity.supportFragmentManager.commit {
             remove(this@PlayerFragment)
