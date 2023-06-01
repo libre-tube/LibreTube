@@ -435,4 +435,5 @@
     <string name="import_playlists_from">Impor daftar putar dari</string>
     <string name="export_playlists_to">Ekspor daftar putar ke</string>
     <string name="import_format_piped">Piped / LibreTube</string>
+    <string name="home_tab_content">Konten tab beranda</string>
 </resources>
