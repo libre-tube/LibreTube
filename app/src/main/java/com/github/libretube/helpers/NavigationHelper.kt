@@ -31,7 +31,7 @@ object NavigationHelper {
     ) {
         if (channelId == null) return
 
-        val activity = unwrapActivity(context)
+        val activity = ContextHelper.unwrapActivity(context)
         val bundle = bundleOf(IntentData.channelId to channelId)
         activity.navController.navigate(R.id.channelFragment, bundle)
         try {
@@ -43,14 +43,6 @@ object NavigationHelper {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    }
-
-    private fun unwrapActivity(context: Context): MainActivity {
-        var correctContext: Context? = context
-        while (correctContext !is MainActivity && correctContext is ContextWrapper) {
-            correctContext = correctContext.baseContext
-        }
-        return correctContext as MainActivity
     }
 
     /**
@@ -67,9 +59,9 @@ object NavigationHelper {
         forceVideo: Boolean = false,
     ) {
         if (videoId == null) return
+        BackgroundHelper.stopBackgroundPlay(context)
 
         if (PreferenceHelper.getBoolean(PreferenceKeys.AUDIO_ONLY_MODE, false) && !forceVideo) {
-            BackgroundHelper.stopBackgroundPlay(context)
             BackgroundHelper.playOnBackground(
                 context,
                 videoId.toID(),
@@ -92,7 +84,7 @@ object NavigationHelper {
             IntentData.timeStamp to timeStamp,
         )
 
-        val activity = unwrapActivity(context)
+        val activity = ContextHelper.unwrapActivity(context)
         activity.supportFragmentManager.commitNow {
             replace<PlayerFragment>(R.id.container, args = bundle)
         }
@@ -105,7 +97,7 @@ object NavigationHelper {
     ) {
         if (playlistId == null) return
 
-        val activity = unwrapActivity(context)
+        val activity = ContextHelper.unwrapActivity(context)
         val bundle = bundleOf(
             IntentData.playlistId to playlistId,
             IntentData.playlistType to playlistType,
@@ -117,7 +109,7 @@ object NavigationHelper {
      * Start the audio player fragment
      */
     fun startAudioPlayer(context: Context) {
-        val activity = unwrapActivity(context)
+        val activity = ContextHelper.unwrapActivity(context)
         activity.supportFragmentManager.commitNow {
             replace<AudioPlayerFragment>(R.id.container)
         }
