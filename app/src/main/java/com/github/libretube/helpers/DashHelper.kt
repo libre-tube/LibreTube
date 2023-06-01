@@ -24,8 +24,8 @@ object DashHelper {
         val formats: MutableList<PipedStream> = mutableListOf(),
     )
 
-    fun createManifest(streams: Streams, supportsHdr: Boolean): String {
-        val builder: DocumentBuilder = builderFactory.newDocumentBuilder()
+    fun createManifest(streams: Streams, supportsHdr: Boolean, audioOnly: Boolean = false): String {
+        val builder = builderFactory.newDocumentBuilder()
 
         val doc = builder.newDocument()
         val mpd = doc.createElement("MPD")
@@ -39,41 +39,43 @@ object DashHelper {
 
         val adapSetInfos = ArrayList<AdapSetInfo>()
 
-        val enabledVideoCodecs = PlayerHelper.enabledVideoCodecs
-        for (
-        stream in streams.videoStreams
-            // used to avoid including LBRY HLS inside the streams in the manifest
-            .filter { !it.format.orEmpty().contains("HLS") }
-            // filter the codecs according to the user's preferences
-            .filter {
-                enabledVideoCodecs == "all" || it.codec.orEmpty().lowercase().startsWith(
-                    enabledVideoCodecs,
+        if (!audioOnly) {
+            val enabledVideoCodecs = PlayerHelper.enabledVideoCodecs
+            for (
+            stream in streams.videoStreams
+                // used to avoid including LBRY HLS inside the streams in the manifest
+                .filter { !it.format.orEmpty().contains("HLS") }
+                // filter the codecs according to the user's preferences
+                .filter {
+                    enabledVideoCodecs == "all" || it.codec.orEmpty().lowercase().startsWith(
+                        enabledVideoCodecs,
+                    )
+                }
+                .filter { supportsHdr || !it.quality.orEmpty().uppercase().contains("HDR") }
+            ) {
+                // ignore dual format streams
+                if (!stream.videoOnly!!) {
+                    continue
+                }
+
+                // ignore streams which might be OTF
+                if (stream.indexEnd!! <= 0) {
+                    continue
+                }
+
+                val adapSetInfo = adapSetInfos.find { it.mimeType == stream.mimeType }
+                if (adapSetInfo != null) {
+                    adapSetInfo.formats.add(stream)
+                    continue
+                }
+                adapSetInfos.add(
+                    AdapSetInfo(
+                        stream.mimeType!!,
+                        null,
+                        mutableListOf(stream),
+                    ),
                 )
             }
-            .filter { supportsHdr || !it.quality.orEmpty().uppercase().contains("HDR") }
-        ) {
-            // ignore dual format streams
-            if (!stream.videoOnly!!) {
-                continue
-            }
-
-            // ignore streams which might be OTF
-            if (stream.indexEnd!! <= 0) {
-                continue
-            }
-
-            val adapSetInfo = adapSetInfos.find { it.mimeType == stream.mimeType }
-            if (adapSetInfo != null) {
-                adapSetInfo.formats.add(stream)
-                continue
-            }
-            adapSetInfos.add(
-                AdapSetInfo(
-                    stream.mimeType!!,
-                    null,
-                    mutableListOf(stream),
-                ),
-            )
         }
 
         for (stream in streams.audioStreams) {
