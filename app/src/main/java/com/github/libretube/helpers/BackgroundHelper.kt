@@ -31,20 +31,19 @@ object BackgroundHelper {
     ) {
         // close the previous video player if open
         if (!keepVideoPlayerAlive) {
-            (context as? MainActivity)?.supportFragmentManager?.let { fragmentManager ->
-                fragmentManager.fragments.firstOrNull { it is PlayerFragment }?.let {
-                    fragmentManager.commit { remove(it) }
-                }
+            val fragmentManager = ContextHelper.unwrapActivity(context).supportFragmentManager
+            fragmentManager.fragments.firstOrNull { it is PlayerFragment }?.let {
+                fragmentManager.commit { remove(it) }
             }
         }
 
         // create an intent for the background mode service
         val intent = Intent(context, OnlinePlayerService::class.java)
-        intent.putExtra(IntentData.videoId, videoId)
-        intent.putExtra(IntentData.playlistId, playlistId)
-        intent.putExtra(IntentData.channelId, channelId)
-        intent.putExtra(IntentData.position, position)
-        intent.putExtra(IntentData.keepQueue, keepQueue)
+            .putExtra(IntentData.videoId, videoId)
+            .putExtra(IntentData.playlistId, playlistId)
+            .putExtra(IntentData.channelId, channelId)
+            .putExtra(IntentData.position, position)
+            .putExtra(IntentData.keepQueue, keepQueue)
 
         // start the background mode as foreground service
         ContextCompat.startForegroundService(context, intent)
