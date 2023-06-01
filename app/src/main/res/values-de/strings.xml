@@ -438,4 +438,5 @@
     <string name="export_playlists_to">Playlists exportieren nach</string>
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="import_playlists_from">Playlists importieren aus</string>
+    <string name="home_tab_content">Inhalt der Startseite</string>
 </resources>
