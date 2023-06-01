@@ -20,10 +20,6 @@ object PlayingQueue {
      */
     private var onQueueTapListener: (StreamItem) -> Unit = {}
 
-    /**
-     * Listener that gets called when the current playing video changes
-     */
-    private val onTrackChangedListeners: MutableList<(StreamItem) -> Unit> = mutableListOf()
     var repeatQueue: Boolean = false
 
     fun clear() = queue.clear()
@@ -61,11 +57,6 @@ object PlayingQueue {
 
     fun updateCurrent(streamItem: StreamItem) {
         currentStream = streamItem
-        onTrackChangedListeners.forEach {
-            runCatching {
-                it.invoke(streamItem)
-            }
-        }
         if (!contains(streamItem)) queue.add(0, streamItem)
     }
 
@@ -173,17 +164,8 @@ object PlayingQueue {
         onQueueTapListener = listener
     }
 
-    fun addOnTrackChangedListener(listener: (StreamItem) -> Unit) {
-        onTrackChangedListeners.add(listener)
-    }
-
-    fun removeOnTrackChangedListener(listener: (StreamItem) -> Unit) {
-        onTrackChangedListeners.remove(listener)
-    }
-
     fun resetToDefaults() {
         repeatQueue = false
         onQueueTapListener = {}
-        onTrackChangedListeners.clear()
     }
 }

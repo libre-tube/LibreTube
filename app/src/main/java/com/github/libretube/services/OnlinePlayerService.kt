@@ -94,6 +94,7 @@ class OnlinePlayerService : LifecycleService() {
      * Listener for passing playback state changes to the AudioPlayerFragment
      */
     var onIsPlayingChanged: ((isPlaying: Boolean) -> Unit)? = null
+    var onNewVideo: ((streams: Streams, videoId: String) -> Unit)? = null
 
     /**
      * Setting the required [Notification] for running as a foreground service
@@ -203,6 +204,7 @@ class OnlinePlayerService : LifecycleService() {
             streams?.thumbnailUrl,
         )
         nowPlayingNotification.updatePlayerNotification(videoId, playerNotificationData)
+        streams?.let { onNewVideo?.invoke(it, videoId) }
 
         player?.apply {
             playWhenReady = playWhenReadyPlayer

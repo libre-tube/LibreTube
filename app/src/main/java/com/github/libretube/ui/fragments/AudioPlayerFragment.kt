@@ -53,9 +53,6 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     private var sId: Int = 0
     private var eId: Int = 0
 
-    private val onTrackChangeListener: (StreamItem) -> Unit = {
-        updateStreamInfo()
-    }
     private var handler = Handler(Looper.getMainLooper())
     private var isPaused: Boolean = false
 
@@ -170,9 +167,6 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         val listener = AudioPlayerThumbnailListener(requireContext(), this)
         binding.thumbnail.setOnTouchListener(listener)
 
-        // Listen for track changes due to autoplay or the notification
-        PlayingQueue.addOnTrackChangedListener(onTrackChangeListener)
-
         binding.playPause.setOnClickListener {
             if (isPaused) playerService?.play() else playerService?.pause()
         }
@@ -233,9 +227,8 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     /**
      * Load the information from a new stream into the UI
      */
-    private fun updateStreamInfo() {
-        val current = PlayingQueue.getCurrent()
-        current ?: return
+    private fun updateStreamInfo(stream: StreamItem? = null) {
+        val current = stream ?: PlayingQueue.getCurrent() ?: return
 
         binding.title.text = current.title
         binding.miniPlayerTitle.text = current.title
@@ -307,6 +300,9 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             binding.miniPlayerPause.setImageResource(iconResource)
             isPaused = !isPlaying
         }
+        playerService?.onNewVideo = { streams, videoId ->
+            updateStreamInfo(streams.toStreamItem(videoId))
+        }
         initializeSeekBar()
     }
 
@@ -321,7 +317,6 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         runCatching {
             activity?.unbindService(connection)
         }
-        PlayingQueue.removeOnTrackChangedListener(onTrackChangeListener)
 
         super.onDestroy()
     }
