@@ -5,6 +5,8 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.net.Uri
+import android.util.Base64
 import android.view.accessibility.CaptioningManager
 import android.widget.Toast
 import androidx.annotation.StringRes
@@ -12,6 +14,7 @@ import androidx.core.app.PendingIntentCompat
 import androidx.core.app.RemoteActionCompat
 import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.IconCompat
+import androidx.core.net.toUri
 import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
 import androidx.media3.common.PlaybackParameters
@@ -22,6 +25,7 @@ import androidx.media3.ui.CaptionStyleCompat
 import com.github.libretube.R
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Segment
+import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.AudioQuality
 import com.github.libretube.enums.PlayerEvent
@@ -33,48 +37,23 @@ object PlayerHelper {
     const val CONTROL_TYPE = "control_type"
 
     /**
-     * Get the audio source following the users preferences
+     * Create a base64 encoded DASH stream manifest
      */
-    fun getAudioSource(context: Context, audios: List<PipedStream>): String {
-        val audioFormat = PreferenceHelper.getString(PreferenceKeys.PLAYER_AUDIO_FORMAT, "all")
-        val audioPrefKey = if (NetworkHelper.isNetworkMetered(context)) {
-            PreferenceKeys.PLAYER_AUDIO_QUALITY_MOBILE
-        } else {
-            PreferenceKeys.PLAYER_AUDIO_QUALITY
-        }
-
-        val audioQuality = PreferenceHelper.getString(audioPrefKey, "best")
-
-        val filteredAudios = audios.filter {
-            val audioMimeType = "audio/$audioFormat"
-            it.mimeType != audioMimeType || audioFormat == "all"
-        }
-
-        return getBitRate(
-            filteredAudios,
-            if (audioQuality == "best") AudioQuality.BEST else AudioQuality.WORST,
+    fun createDashSource(streams: Streams, context: Context, audioOnly: Boolean = false): Uri {
+        val manifest = DashHelper.createManifest(
+            streams,
+            DisplayHelper.supportsHdr(context),
+            audioOnly
         )
+
+        // encode to base64
+        val encoded = Base64.encodeToString(manifest.toByteArray(), Base64.DEFAULT)
+        return "data:application/dash+xml;charset=utf-8;base64,$encoded".toUri()
     }
 
     /**
-     * Get the best or worst bitrate from a list of audio streams
-     * @param audios list of the audio streams
-     * @param quality Whether to use the best or worst quality available
-     * @return Url of the audio source
+     * Get the system's default captions style
      */
-    private fun getBitRate(audios: List<PipedStream>, quality: AudioQuality): String {
-        val filteredAudios = audios.filter {
-            it.bitrate != null
-        }.sortedBy {
-            it.bitrate
-        }
-        return when (quality) {
-            AudioQuality.BEST -> filteredAudios.last()
-            AudioQuality.WORST -> filteredAudios.first()
-        }.url!!
-    }
-
-    // get the system default caption style
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
     fun getCaptionStyle(context: Context): CaptionStyleCompat {
         val captioningManager = context.getSystemService<CaptioningManager>()!!

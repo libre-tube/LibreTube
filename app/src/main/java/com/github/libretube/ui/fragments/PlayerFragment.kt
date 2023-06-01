@@ -1329,15 +1329,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 val uri = streams.dash?.let { ProxyHelper.unwrapIfEnabled(it) }?.toUri().takeIf {
                     streams.livestream || streams.videoStreams.isEmpty()
                 } ?: let {
-                    val manifest = DashHelper.createManifest(
-                        streams,
-                        DisplayHelper.supportsHdr(requireContext()),
-                    )
-
-                    // encode to base64
-                    val encoded = Base64.encodeToString(manifest.toByteArray(), Base64.DEFAULT)
-
-                    "data:application/dash+xml;charset=utf-8;base64,$encoded".toUri()
+                    PlayerHelper.createDashSource(streams, requireContext())
                 }
 
                 this.setMediaSource(uri, MimeTypes.APPLICATION_MPD)

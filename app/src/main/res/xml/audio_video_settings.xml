@@ -13,6 +13,7 @@
             app:title="@string/defres"
             app:useSimpleSummaryProvider="true" />
 
+        <!--
         <ListPreference
             android:icon="@drawable/ic_headphones"
             app:defaultValue="best"
@@ -21,6 +22,7 @@
             app:key="player_audio_quality"
             app:title="@string/playerAudioQuality"
             app:useSimpleSummaryProvider="true" />
+        -->
 
     </PreferenceCategory>
 
@@ -35,6 +37,7 @@
             app:title="@string/defres"
             app:useSimpleSummaryProvider="true" />
 
+        <!--
         <ListPreference
             android:icon="@drawable/ic_headphones"
             app:defaultValue="best"
@@ -43,6 +46,7 @@
             app:key="player_audio_quality_mobile"
             app:title="@string/playerAudioQuality"
             app:useSimpleSummaryProvider="true" />
+        -->
 
     </PreferenceCategory>
 
