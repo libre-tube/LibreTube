@@ -170,6 +170,8 @@ class VideosAdapter(
                 channelContainer.setOnClickListener {
                     NavigationHelper.navigateChannel(root.context, video.uploaderUrl)
                 }
+            } else {
+                videoInfo.maxLines = 2
             }
 
             root.setOnClickListener {
