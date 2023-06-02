@@ -79,6 +79,7 @@ import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.DashHelper
 import com.github.libretube.helpers.DisplayHelper
 import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.checkForSegments
@@ -1360,7 +1361,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         trackSelector.updateParameters {
             setPreferredAudioLanguage(
-                Locale.getDefault().language.lowercase().substring(0, 2),
+                LocaleHelper.getAppLocale().language.lowercase().substring(0, 2),
             )
         }
 
