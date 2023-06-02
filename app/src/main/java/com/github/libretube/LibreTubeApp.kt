@@ -1,8 +1,6 @@
 package com.github.libretube
 
 import android.app.Application
-import android.os.StrictMode
-import android.os.StrictMode.VmPolicy
 import androidx.core.app.NotificationChannelCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.ExistingPeriodicWorkPolicy
@@ -31,12 +29,6 @@ class LibreTubeApp : Application() {
          * Initialize the [PreferenceHelper]
          */
         PreferenceHelper.initialize(applicationContext)
-
-        /**
-         * Bypassing fileUriExposedException, see https://stackoverflow.com/questions/38200282/android-os-fileuriexposedexception-file-storage-emulated-0-test-txt-exposed
-         */
-        val builder = VmPolicy.Builder()
-        StrictMode.setVmPolicy(builder.build())
 
         /**
          * Set the api and the auth api url
