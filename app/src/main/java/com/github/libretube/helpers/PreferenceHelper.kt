@@ -101,7 +101,7 @@ object PreferenceHelper {
         authEditor.putString(PreferenceKeys.USERNAME, newValue).apply()
     }
 
-    fun setLatestVideoId(videoId: String) {
+    fun setLastSeenVideoId(videoId: String) {
         editor.putString(PreferenceKeys.LAST_STREAM_VIDEO_ID, videoId).commit()
     }
 

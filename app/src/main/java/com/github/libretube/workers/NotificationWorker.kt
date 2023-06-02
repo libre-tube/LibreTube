@@ -84,24 +84,24 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             }
         } catch (e: Exception) {
             return false
-        }.filter {
-            PreferenceHelper.getBoolean(PreferenceKeys.SHORTS_NOTIFICATIONS, false) || !it.isShort
         }
 
-        val lastSeenStreamId = PreferenceHelper.getLastSeenVideoId()
-        val latestFeedStreamId = videoFeed.firstOrNull()?.url?.toID() ?: return true
+        val lastUserSeenVideoId = PreferenceHelper.getLastSeenVideoId()
+        val mostRecentStreamId = videoFeed.firstOrNull()?.url?.toID() ?: return true
+        // save the latest streams that got notified about
+        PreferenceHelper.setLastSeenVideoId(mostRecentStreamId)
 
         // first time notifications are enabled or no new video available
-        if (lastSeenStreamId.isEmpty() || lastSeenStreamId == latestFeedStreamId) {
-            PreferenceHelper.setLatestVideoId(lastSeenStreamId)
-            return true
-        }
+        if (lastUserSeenVideoId.isEmpty() || lastUserSeenVideoId == mostRecentStreamId) return true
 
         val channelsToIgnore = PreferenceHelper.getIgnorableNotificationChannels()
+        val enableShortsNotification = PreferenceHelper.getBoolean(PreferenceKeys.SHORTS_NOTIFICATIONS, false)
 
         val channelGroups = videoFeed.asSequence()
             // filter the new videos until the last seen video in the feed
-            .takeWhile { it.url!!.toID() != lastSeenStreamId }
+            .takeWhile { it.url!!.toID() != lastUserSeenVideoId }
+            // don't show notifications for shorts videos if not enabled
+            .filter { enableShortsNotification || !it.isShort }
             // hide for notifications unsubscribed channels
             .filter { it.uploaderUrl!!.toID() !in channelsToIgnore }
             // group the new streams by the uploader
@@ -116,8 +116,6 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
         channelGroups.forEach { (channelId, streams) ->
             createNotificationsForChannel(channelId, streams)
         }
-        // save the latest streams that got notified about
-        PreferenceHelper.setLatestVideoId(videoFeed.first().url!!.toID())
         // return whether the work succeeded
         return true
     }
