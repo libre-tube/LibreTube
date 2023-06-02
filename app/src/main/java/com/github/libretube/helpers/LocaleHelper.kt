@@ -11,10 +11,9 @@ import com.github.libretube.obj.Country
 import java.util.*
 
 object LocaleHelper {
-
-    fun updateLanguage(context: Context) {
+    fun getAppLocale(): Locale {
         val languageName = PreferenceHelper.getString(PreferenceKeys.LANGUAGE, "sys")
-        val locale = when {
+        return when {
             languageName == "sys" -> Locale.getDefault()
             languageName.contains("-") -> {
                 val languageParts = languageName.split("-")
@@ -25,6 +24,10 @@ object LocaleHelper {
             }
             else -> Locale(languageName)
         }
+    }
+
+    fun updateLanguage(context: Context) {
+        val locale = getAppLocale()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) updateResources(context, locale)
         updateResourcesLegacy(context, locale)
     }
