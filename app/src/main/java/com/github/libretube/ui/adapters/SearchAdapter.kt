@@ -76,7 +76,9 @@ class SearchAdapter : ListAdapter<ContentItem, SearchViewHolder>(SearchCallback)
             // only display the additional info if not in a channel tab
             if (item.isShort != true || item.uploaderAvatar != null) {
                 val viewsString = item.views.takeIf { it != -1L }?.formatShort().orEmpty()
-                val uploadDate = item.uploadedDate?.let { " ${TextUtils.SEPARATOR} $it" }.orEmpty()
+                val uploadDate = item.uploaded?.let {
+                    " ${TextUtils.SEPARATOR} ${TextUtils.formatRelativeDate(root.context, it)}"
+                }.orEmpty()
                 videoInfo.text = root.context.getString(
                     R.string.normal_views,
                     viewsString,
