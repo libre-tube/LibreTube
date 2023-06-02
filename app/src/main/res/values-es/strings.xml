@@ -136,7 +136,7 @@
     <string name="player">Reproductor</string>
     <string name="appearance_summary">Ajusta la aplicación a tu gusto.</string>
     <string name="playback_speed">Velocidad de reproducción</string>
-    <string name="live">En vivo</string>
+    <string name="live">En directo</string>
     <string name="buffering_goal">Precarga</string>
     <string name="buffering_goal_summary">Cantidad máxima de segundos de vídeo a almacenar en búfer.</string>
     <string name="category_filler">Clips de relleno</string>
