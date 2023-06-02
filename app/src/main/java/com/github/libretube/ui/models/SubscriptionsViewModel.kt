@@ -38,7 +38,7 @@ class SubscriptionsViewModel : ViewModel() {
             this@SubscriptionsViewModel.videoFeed.postValue(videoFeed)
             if (videoFeed.isNotEmpty()) {
                 // save the last recent video to the prefs for the notification worker
-                PreferenceHelper.setLatestVideoId(videoFeed[0].url!!.toID())
+                PreferenceHelper.setLastSeenVideoId(videoFeed[0].url!!.toID())
             }
         }
     }
