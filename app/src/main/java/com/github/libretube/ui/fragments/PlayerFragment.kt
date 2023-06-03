@@ -448,7 +448,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         binding.relPlayerShare.setOnLongClickListener {
-            streams.hls ?: return@setOnLongClickListener true
+            if (!this::streams.isInitialized || streams.hls == null)
+                return@setOnLongClickListener true
 
             // start an intent with video as mimetype using the hls stream
             val uri = Uri.parse(ProxyHelper.unwrapIfEnabled(streams.hls!!))
