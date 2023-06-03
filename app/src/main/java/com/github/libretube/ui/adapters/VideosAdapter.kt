@@ -77,6 +77,7 @@ class VideosAdapter(
             viewType == CAUGHT_UP_TYPE -> VideosViewHolder(
                 AllCaughtUpRowBinding.inflate(layoutInflater, parent, false),
             )
+
             forceMode in listOf(
                 ForceMode.TRENDING,
                 ForceMode.RELATED,
@@ -84,13 +85,16 @@ class VideosAdapter(
             ) -> VideosViewHolder(
                 TrendingRowBinding.inflate(layoutInflater, parent, false),
             )
+
             forceMode == ForceMode.CHANNEL -> VideosViewHolder(
                 VideoRowBinding.inflate(layoutInflater, parent, false),
             )
+
             PreferenceHelper.getBoolean(
                 PreferenceKeys.ALTERNATIVE_VIDEOS_LAYOUT,
                 false,
             ) -> VideosViewHolder(VideoRowBinding.inflate(layoutInflater, parent, false))
+
             else -> VideosViewHolder(TrendingRowBinding.inflate(layoutInflater, parent, false))
         }
     }
@@ -106,6 +110,12 @@ class VideosAdapter(
             (holder.trendingRowBinding?.watchProgress ?: holder.videoRowBinding!!.watchProgress)
                 .setWatchProgressLength(it, video.duration ?: 0L)
         }
+
+        val context = (holder.videoRowBinding ?: holder.trendingRowBinding
+        ?: holder.allCaughtUpBinding)!!.root.context
+        val uploadDate =
+            video.uploaded?.takeIf { it > 0 }?.let { TextUtils.formatRelativeDate(context, it) }
+                ?.toString().orEmpty()
 
         // Trending layout
         holder.trendingRowBinding?.apply {
@@ -123,7 +133,7 @@ class VideosAdapter(
                 R.string.trending_views,
                 video.uploaderName,
                 video.views.formatShort(),
-                video.uploaded?.let { TextUtils.formatRelativeDate(root.context, it) },
+                uploadDate,
             )
             video.duration?.let { thumbnailDuration.setFormattedDuration(it, video.isShort) }
             channelImage.setOnClickListener {
@@ -154,9 +164,7 @@ class VideosAdapter(
             videoInfo.text = root.context.getString(
                 R.string.normal_views,
                 video.views.formatShort(),
-                video.uploaded?.let {
-                    TextUtils.SEPARATOR + TextUtils.formatRelativeDate(root.context, it)
-                },
+                uploadDate,
             )
 
             thumbnailDuration.text = video.duration?.let { DateUtils.formatElapsedTime(it) }
