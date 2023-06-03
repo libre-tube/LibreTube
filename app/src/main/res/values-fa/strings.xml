@@ -425,4 +425,18 @@
     <string name="hls_instead_of_dash_summary">استفاده از HLS به جای DASH (آهسته تر، توصیه نشده)</string>
     <string name="stats_for_nerds">آمار برای خوره‌ها</string>
     <string name="limit_to_runtime">محدود به زمان اجرا</string>
+    <string name="home_tab_content">محتوای تب خانه</string>
+    <string name="import_format_freetube">FreeTube</string>
+    <string name="export_playlists_to">خروجی گرفتن لیست های پخش به</string>
+    <string name="import_format_piped">Piped / LibreTube</string>
+    <string name="import_format_newpipe">NewPipe</string>
+    <string name="shorts_notifications">اطلاع رسانی برای ویدیوهای کوتاه</string>
+    <string name="creation_date">تاریخ ساخت</string>
+    <string name="creation_date_reversed">تاریخ ساخت (معکوس)</string>
+    <string name="alphabetic">الفبایی</string>
+    <string name="alphabetic_reversed">الفبایی (معکوس)</string>
+    <string name="import_subscriptions_from">وارد کردن اشتراک ها از</string>
+    <string name="export_subscriptions_to">خروجی گرفتن اشتراک ها به</string>
+    <string name="import_playlists_from">وارد کردن لیست پخش از</string>
+    <string name="import_format_youtube_csv">YouTube (CSV)</string>
 </resources>

@@ -262,7 +262,7 @@
     <string name="delete">ダウンロードから削除</string>
     <string name="renamePlaylist">プレイリストの名前を変更</string>
     <string name="mobile_data">モバイルデータ通信</string>
-    <string name="skip_segment">セグメントをスキップ</string>
+    <string name="skip_segment">この部分をスキップ</string>
     <string name="sb_skip_manual">手動でスキップ</string>
     <string name="sb_skip_manual_summary">該当部分を自動でスキップせず問い合わせを表示します。</string>
     <string name="preferences">設定</string>
