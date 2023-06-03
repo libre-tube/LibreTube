@@ -67,6 +67,7 @@ class PlaylistFragment : Fragment() {
             PreferenceHelper.putInt(PreferenceKeys.PLAYLIST_SORT_ORDER, value)
             field = value
         }
+    private val sortOptions by lazy { resources.getStringArray(R.array.playlistSortOptions) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -215,13 +216,13 @@ class PlaylistFragment : Fragment() {
                             keepQueue = true,
                         )
                     }
-                    binding.sortMenu.isGone = false
-                    binding.sortMenu.setOnClickListener {
-                        val sortOptions = resources.getStringArray(R.array.playlistSortOptions)
-
+                    binding.sortContainer.isGone = false
+                    binding.sortTV.text = sortOptions[selectedSortOrder]
+                    binding.sortContainer.setOnClickListener {
                         BaseBottomSheet().apply {
                             setSimpleItems(sortOptions.toList()) { index ->
                                 selectedSortOrder = index
+                                binding.sortTV.text = sortOptions[index]
                                 showPlaylistVideos(response)
                             }
                         }.show(childFragmentManager)
