@@ -83,6 +83,11 @@ class MainActivity : BaseActivity() {
             startActivity(noInternetIntent)
             finish()
             return
+        } else if (PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, "").isEmpty()) {
+            val welcomeIntent = Intent(this, WelcomeActivity::class.java)
+            startActivity(welcomeIntent)
+            finish()
+            return
         }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -189,7 +194,7 @@ class MainActivity : BaseActivity() {
     /**
      * Deselect all bottom bar items
      */
-    fun deselectBottomBarItems() {
+    private fun deselectBottomBarItems() {
         binding.bottomNav.menu.setGroupCheckable(0, true, false)
         for (child in binding.bottomNav.menu.children) {
             child.isChecked = false

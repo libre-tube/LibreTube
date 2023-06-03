@@ -32,6 +32,10 @@
         tools:targetApi="n">
 
         <activity
+            android:name=".ui.activities.WelcomeActivity"
+            android:label="@string/welcome" />
+
+        <activity
             android:name=".ui.activities.NoInternetActivity"
             android:label="@string/noInternet" />
 

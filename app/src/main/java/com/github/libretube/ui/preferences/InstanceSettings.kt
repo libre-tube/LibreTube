@@ -10,10 +10,9 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
+import com.github.libretube.api.InstanceHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Instances
-import com.github.libretube.constants.FALLBACK_INSTANCES_URL
-import com.github.libretube.constants.PIPED_INSTANCES_URL
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.extensions.toastFromMainDispatcher
@@ -23,6 +22,7 @@ import com.github.libretube.ui.dialogs.CustomInstanceDialog
 import com.github.libretube.ui.dialogs.DeleteAccountDialog
 import com.github.libretube.ui.dialogs.LoginDialog
 import com.github.libretube.ui.dialogs.LogoutDialog
+import java.lang.Exception
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -135,26 +135,12 @@ class InstanceSettings : BasePreferenceFragment() {
                         }
                 }
 
-                // fetch official public instances from kavin.rocks as well as tokhmi.xyz as
-                // fallback
-                val instances = withContext(Dispatchers.IO) {
-                    runCatching {
-                        RetrofitInstance.externalApi.getInstances(PIPED_INSTANCES_URL)
-                            .toMutableList()
-                    }.getOrNull() ?: runCatching {
-                        RetrofitInstance.externalApi.getInstances(FALLBACK_INSTANCES_URL)
-                            .toMutableList()
-                    }.getOrNull() ?: run {
-                        appContext.toastFromMainDispatcher(R.string.failed_fetching_instances)
-                        val instanceNames = resources.getStringArray(R.array.instances)
-                        resources.getStringArray(R.array.instancesValue)
-                            .mapIndexed { index, instanceValue ->
-                                Instances(instanceNames[index], instanceValue)
-                            }
-                    }
-                }
-                    .sortedBy { it.name }
-                    .toMutableList()
+                val instances = try {
+                    InstanceHelper.getInstances(appContext)
+                } catch (e: Exception) {
+                    appContext.toastFromMainDispatcher(e.message.orEmpty())
+                    InstanceHelper.getInstancesFallback(requireContext())
+                }.toMutableList()
 
                 instances.addAll(customInstances.map { Instances(it.name, it.apiUrl) })
 

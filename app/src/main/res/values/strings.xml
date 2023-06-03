@@ -412,6 +412,8 @@
     <string name="creation_date_reversed">Creation date (reversed)</string>
     <string name="alphabetic">Alphabetic</string>
     <string name="alphabetic_reversed">Alphabetic (reversed)</string>
+    <string name="welcome">Welcome to LibreTube</string>
+    <string name="choose_instance">Please choose a Piped instance to use below. The Piped instance will act as a middle man between you and YouTube. You can still change it later in the instance settings.</string>
 
     <!-- Backup & Restore Settings -->
     <string name="import_subscriptions_from">Import subscriptions from</string>
