@@ -412,6 +412,7 @@
     <string name="creation_date_reversed">Creation date (reversed)</string>
     <string name="alphabetic">Alphabetic</string>
     <string name="alphabetic_reversed">Alphabetic (reversed)</string>
+    <string name="mark_as_unwatched">Mark as unwatched</string>
 
     <!-- Backup & Restore Settings -->
     <string name="import_subscriptions_from">Import subscriptions from</string>
