@@ -445,4 +445,5 @@
     <string name="export_playlists_to">Экспартаваць плэйлісты ў</string>
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="home_tab_content">Змесціва ўкладкі \"Галоўная старонка\"</string>
+    <string name="mark_as_unwatched">Пазначыць як непрагледжанае</string>
 </resources>
