@@ -394,14 +394,14 @@
     <string name="autoplay_countdown_summary">Muestra una cuenta atrás de 5 segundos antes de reproducir automáticamente el siguiente vídeo.</string>
     <string name="playing_next">Siguiente vídeo en %1$s</string>
     <plurals name="years_ago">
-        <item quantity="one">hace %d año</item>
-        <item quantity="many">hace %d años</item>
-        <item quantity="other">hace %d años</item>
+        <item quantity="one">Hace %d año</item>
+        <item quantity="many">Hace %d años</item>
+        <item quantity="other">Hace %d años</item>
     </plurals>
     <plurals name="months_ago">
-        <item quantity="one">hace %d mes</item>
-        <item quantity="many">hace %d meses</item>
-        <item quantity="other">hace %d meses</item>
+        <item quantity="one">Hace %d mes</item>
+        <item quantity="many">Hace %d meses</item>
+        <item quantity="other">Hace %d meses</item>
     </plurals>
     <string name="lbry_hls_summary">Usar LBRY HLS para la transmisión si está disponible.</string>
     <string name="lbry_hls">LBRY HLS</string>
@@ -442,4 +442,5 @@
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="import_playlists_from">Importar listas desde</string>
     <string name="home_tab_content">Contenido de pestaña \"Inicio\"</string>
+    <string name="mark_as_unwatched">Marcar como no visto</string>
 </resources>
