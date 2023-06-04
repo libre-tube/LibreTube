@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="20dp"
-        android:text="@string/choose_instance" />
+        android:text="@string/choose_instance_long" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -42,7 +42,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/instances_recycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:fadeScrollbars="false"
+            android:scrollbars="vertical" />
 
         <ProgressBar
             android:id="@+id/progress"

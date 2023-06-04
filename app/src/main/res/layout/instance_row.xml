@@ -4,12 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingHorizontal="10dp">
+    android:paddingHorizontal="12dp">
 
     <com.google.android.material.radiobutton.MaterialRadioButton
         android:id="@+id/radio_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        tools:ignore="RtlSymmetry"
         tools:text="kavin.rocks" />
 
 </LinearLayout>

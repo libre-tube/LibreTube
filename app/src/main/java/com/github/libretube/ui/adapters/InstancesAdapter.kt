@@ -26,7 +26,8 @@ class InstancesAdapter(
     override fun onBindViewHolder(holder: InstancesViewHolder, position: Int) {
         val instance = instances[position]
         holder.binding.apply {
-            radioButton.text = "${instance.name}   ${instance.locations}"
+            val cdnText = if (instance.cdn) "   (\uD83C\uDF10 CDN)" else ""
+            radioButton.text = "${instance.name}   ${instance.locations} $cdnText"
             radioButton.setOnCheckedChangeListener(null)
             radioButton.isChecked = selectedInstanceIndex == position
             radioButton.setOnCheckedChangeListener { _, isChecked ->
