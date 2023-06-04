@@ -438,4 +438,5 @@
     <string name="import_playlists_from">Oynatma siyahısın buradan idxal et</string>
     <string name="export_playlists_to">Oynatma siyahısın ixrac et</string>
     <string name="import_format_piped">Piped / LibreTube</string>
+    <string name="home_tab_content">Əsas panel məzmunu</string>
 </resources>
