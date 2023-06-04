@@ -441,4 +441,5 @@
     <string name="import_playlists_from">Importer des playlists depuis</string>
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="export_playlists_to">Exporter les playlists vers</string>
+    <string name="home_tab_content">Contenu de la page d\'accueil</string>
 </resources>
