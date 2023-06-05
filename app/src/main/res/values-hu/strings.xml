@@ -440,4 +440,6 @@
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="mark_as_unwatched">Meg nem nézettként jelölés</string>
     <string name="home_tab_content">Kezdőlap tartalma</string>
+    <string name="choose_instance">Először</string>
+    <string name="welcome">Üdvözli a LibreTube</string>
 </resources>
