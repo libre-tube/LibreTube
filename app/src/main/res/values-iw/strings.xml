@@ -446,4 +446,6 @@
     <string name="import_format_piped">Piped / LibreTube‎</string>
     <string name="home_tab_content">תוכן לשונית בית</string>
     <string name="mark_as_unwatched">סימון כלא נצפה</string>
+    <string name="welcome">ברוך בואך ל־LibreTube</string>
+    <string name="choose_instance">נא לבחור עותק תחילה!</string>
 </resources>
