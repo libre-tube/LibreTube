@@ -446,4 +446,7 @@
     <string name="export_playlists_to">Експорт списків відтворення в</string>
     <string name="home_tab_content">Вміст головної вкладки</string>
     <string name="mark_as_unwatched">Позначити як непереглянуте</string>
+    <string name="welcome">Ласкаво просимо до LibreTube</string>
+    <string name="choose_instance">Спочатку виберіть сервер!</string>
+    <string name="choose_instance_long">Виберіть сервер Piped для використання нижче. Сервер Piped буде посередником між вами та YouTube. Ці сервери розташовані в різних фізичних місцях, позначених прапорами відповідних країн. Фізично ближчі до вас сервери, швидше за все, працюють швидше, ніж віддалені. Ви можете будь-коли змінити використовуваний сервер у налаштуваннях.</string>
 </resources>
