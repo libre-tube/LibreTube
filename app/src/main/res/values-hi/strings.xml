@@ -408,7 +408,7 @@
     <string name="disable_proxy">Piped proxy अक्षम करें</string>
     <string name="disable_proxy_summary">YouTube के सर्वर से सीधे वीडियो और चित्र लोड करें। यदि आप वैसे भी VPN का उपयोग करते हैं तो ही विकल्प को सक्षम करें! ध्यान दें कि यह YT music की सामग्री के साथ काम नहीं कर सकता है।</string>
     <string name="auto_fullscreen_shorts">शॉर्ट वीडियो पर ऑटो फुलस्क्रीन</string>
-    <string name="fullscreen_gestures">फ़ुलस्क्रीन जेस्चर दर्ज करें/बाहर निकलें</string>
+    <string name="fullscreen_gestures">फ़ुलस्क्रीन में वीडियो देखने/उससे बाहर निकलने के जेस्चर</string>
     <string name="go_to_video">वीडियो पर जाएं</string>
     <plurals name="channel_new_streams">
         <item quantity="one">%d नई स्ट्रीम</item>
@@ -422,4 +422,21 @@
     <string name="play_automatically_summary">चुनते समय स्वचालित रूप से वीडियो चलाना प्रारंभ करें</string>
     <string name="show_stream_thumbnails">स्ट्रीम थंमनेल दिखाएं</string>
     <string name="show_stream_thumbnails_summary">नई स्ट्रीमों के थंमनेल दिखाएं। इसे सक्षम करने से अतिरिक्त डेटा की खपत होगी।</string>
+    <string name="home_tab_content">होम टैब कॉन्टेंट</string>
+    <string name="mark_as_unwatched">\'नहीं देखा गया\' के तौर पर मार्क करें</string>
+    <string name="duration">अवधि</string>
+    <string name="duration_reversed">अवधि (रिवर्स)</string>
+    <string name="alphabetic">अंग्रेज़ी वर्णमाला के क्रम में</string>
+    <string name="alphabetic_reversed">अंग्रेज़ी वर्णमाला के क्रम में (रिवर्स)</string>
+    <string name="shorts_notifications">शॉर्ट वीडियो के लिए सूचनाएं</string>
+    <string name="creation_date">बनाने की तारीख</string>
+    <string name="creation_date_reversed">बनाने की तारीख (रिवर्स)</string>
+    <string name="import_subscriptions_from">सदस्यताएं इससे इंपोर्ट करें</string>
+    <string name="export_subscriptions_to">सदस्यताएं यहां एक्सपोर्ट करें</string>
+    <string name="import_format_piped">Piped / LibreTube</string>
+    <string name="import_format_newpipe">NewPipe</string>
+    <string name="import_playlists_from">प्लेलिस्ट इससे इंपोर्ट करें</string>
+    <string name="export_playlists_to">प्लेलिस्ट यहां एक्सपोर्ट करें</string>
+    <string name="import_format_freetube">FreeTube</string>
+    <string name="import_format_youtube_csv">YouTube (CSV)</string>
 </resources>

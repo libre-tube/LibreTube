@@ -445,4 +445,5 @@
     <string name="export_playlists_to">Экспорт плейлистов в</string>
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="home_tab_content">Содержимое домашней вкладки</string>
+    <string name="mark_as_unwatched">Пометить как непросмотренное</string>
 </resources>
