@@ -443,4 +443,7 @@
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="home_tab_content">Conteúdo do separador inicial</string>
     <string name="mark_as_unwatched">Marcar como não visto</string>
+    <string name="welcome">Bem-vindo ao LibreTube</string>
+    <string name="choose_instance">Escolha primeiro uma instância!</string>
+    <string name="choose_instance_long">Escolha uma instância do Piped para utilizar a partir de baixo. A instância do Piped actuará como intermediário entre si e o YouTube. Essas instâncias estão localizadas em locais físicos diferentes, indicados pela(s) bandeira(s) do país. As instâncias fisicamente mais próximas de si são provavelmente mais rápidas do que as instâncias que não estão. Pode alterar a instância que utiliza nas definições em qualquer altura.</string>
 </resources>
