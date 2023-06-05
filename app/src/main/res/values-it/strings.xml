@@ -442,4 +442,8 @@
     <string name="export_playlists_to">Esporta playlist su</string>
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="home_tab_content">Contenuto della scheda principale</string>
+    <string name="mark_as_unwatched">Segna come non visto</string>
+    <string name="welcome">Benvenuti in LibreTube</string>
+    <string name="choose_instance">Per prima cosa scegli un\'istanza!</string>
+    <string name="choose_instance_long">Scegli un\'istanza di Piped da usare da qua sotto. L\'istanza di Piped fungerà da intermediaria tra te e YouTube. Queste istanze si trovano in luoghi fisici diversi, indicati dalla/e bandiera/e del Paese. Le istanze fisicamente più vicine a te sono probabilmente più veloci delle istanze che non lo sono. Puoi cambiare l\'istanza che usi nelle impostazioni in qualsiasi momento.</string>
 </resources>
