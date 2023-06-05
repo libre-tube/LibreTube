@@ -115,7 +115,6 @@ class VideosAdapter(
         ?: holder.allCaughtUpBinding)!!.root.context
         val uploadDate =
             video.uploaded?.takeIf { it > 0 }?.let { TextUtils.formatRelativeDate(context, it) }
-                ?.toString().orEmpty()
 
         // Trending layout
         holder.trendingRowBinding?.apply {
@@ -133,7 +132,7 @@ class VideosAdapter(
                 R.string.trending_views,
                 video.uploaderName,
                 video.views.formatShort(),
-                uploadDate,
+                uploadDate?.toString().orEmpty(),
             )
             video.duration?.let { thumbnailDuration.setFormattedDuration(it, video.isShort) }
             channelImage.setOnClickListener {
@@ -164,7 +163,7 @@ class VideosAdapter(
             videoInfo.text = root.context.getString(
                 R.string.normal_views,
                 video.views.formatShort(),
-                uploadDate,
+                uploadDate?.let { " ${TextUtils.SEPARATOR} $it" },
             )
 
             thumbnailDuration.text = video.duration?.let { DateUtils.formatElapsedTime(it) }

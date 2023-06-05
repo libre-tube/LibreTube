@@ -20,6 +20,9 @@ interface WatchPositionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(watchPositions: List<WatchPosition>)
 
+    @Query("DELETE FROM watchPosition WHERE videoId = :id")
+    fun deleteByVideoId(id: String)
+
     @Query("DELETE FROM watchPosition")
     suspend fun deleteAll()
 }

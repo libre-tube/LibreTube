@@ -20,6 +20,7 @@ import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.fragments.SubscriptionsFragment
 import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 /**
@@ -47,9 +48,17 @@ class VideoOptionsBottomSheet(
             optionsList += getString(R.string.add_to_queue)
         }
 
-        // show the mark as watched option if watch positions are enabled
-        if (PlayerHelper.watchPositionsVideo) {
-            optionsList += getString(R.string.mark_as_watched)
+        // show the mark as watched or unwatched option if watch positions are enabled
+        if (PlayerHelper.watchPositionsVideo || PlayerHelper.watchHistoryEnabled) {
+            val watchPositionEntry = runBlocking(Dispatchers.IO) {
+                DatabaseHolder.Database.watchPositionDao().findById(videoId)
+            }
+            val watchHistoryEntry = runBlocking(Dispatchers.IO) {
+                DatabaseHolder.Database.watchHistoryDao().findById(videoId)
+            }
+            optionsList += if (watchHistoryEntry != null || watchPositionEntry != null) {
+                getString(R.string.mark_as_unwatched)
+            } else getString(R.string.mark_as_watched)
         }
 
         setSimpleItems(optionsList) { which ->
@@ -114,6 +123,12 @@ class VideoOptionsBottomSheet(
                         (fragment as? SubscriptionsFragment)?.subscriptionsAdapter?.removeItemById(
                             videoId,
                         )
+                    }
+                }
+                getString(R.string.mark_as_unwatched) -> {
+                    withContext(Dispatchers.IO) {
+                        DatabaseHolder.Database.watchPositionDao().deleteByVideoId(videoId)
+                        DatabaseHolder.Database.watchHistoryDao().deleteByVideoId(videoId)
                     }
                 }
             }

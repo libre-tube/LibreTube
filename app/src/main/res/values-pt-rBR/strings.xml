@@ -429,4 +429,17 @@
     <string name="duration">Duração</string>
     <string name="duration_reversed">Duração (invertida)</string>
     <string name="shorts_notifications">Notificações de shorts</string>
+    <string name="creation_date">Data de criação</string>
+    <string name="alphabetic">Alfabética</string>
+    <string name="creation_date_reversed">Data de criação (invertida)</string>
+    <string name="alphabetic_reversed">Alfabética (invertida)</string>
+    <string name="import_subscriptions_from">Importar inscrições de</string>
+    <string name="export_subscriptions_to">Exportar inscrições para</string>
+    <string name="import_format_freetube">FreeTube</string>
+    <string name="import_format_youtube_csv">YouTube (CSV)</string>
+    <string name="import_playlists_from">Importar playlists de</string>
+    <string name="export_playlists_to">Exportar playlists para</string>
+    <string name="import_format_piped">Piped / LibreTube</string>
+    <string name="import_format_newpipe">NewPipe</string>
+    <string name="home_tab_content">Conteúdo da aba inicial</string>
 </resources>

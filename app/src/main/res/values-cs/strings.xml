@@ -441,4 +441,5 @@
     <string name="export_playlists_to">Exportovat playlisty do</string>
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="import_playlists_from">Importovat playlisty z</string>
+    <string name="home_tab_content">Obsah domovské stránky</string>
 </resources>

@@ -100,7 +100,7 @@
     <string name="material_you">Material You</string>
     <string name="app_icon">Значок</string>
     <string name="sponsorblock_notifications">Уведомления</string>
-    <string name="enabled">Вкл</string>
+    <string name="enabled">Вкл.</string>
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Играть в фоне</string>
@@ -233,7 +233,7 @@
     <string name="best_quality">Лучшее</string>
     <string name="worst_quality">Худшее</string>
     <string name="export_subscriptions">Экспорт подписок</string>
-    <string name="skip_buttons">Кнопки пропуска</string>
+    <string name="skip_buttons">Кнопки перехода</string>
     <string name="background_mode">Фоновый режим</string>
     <string name="history_size">Максимальный размер истории</string>
     <string name="unlimited">Неограниченно</string>
@@ -273,7 +273,7 @@
     <string name="audio_video_summary">Качество и формат</string>
     <string name="delete">Удалить из загрузок</string>
     <string name="renamePlaylist">Переименовать плейлист</string>
-    <string name="wifi">WiFi</string>
+    <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">Мобильная сеть</string>
     <string name="preferences">Настройки</string>
     <string name="local_subscriptions">Локальные подписки</string>
@@ -331,7 +331,7 @@
     <string name="swipe_controls">Управление прокруткой</string>
     <string name="defaults">По умолчанию</string>
     <string name="no_comments_available">Это видео не имеет комментариев.</string>
-    <string name="double_tap_seek">Двойное нажатие для поиска</string>
+    <string name="double_tap_seek">Двойное нажатие для перемотки</string>
     <string name="double_tap_seek_summary">Нажмите дважды слева или справа, чтобы перемотать назад или вперед позицию плеера.</string>
     <string name="import_playlists">Импортировать плейлисты</string>
     <string name="backup_restore_summary">Импорт и экспорт подписок, плейлистов, …</string>
@@ -361,7 +361,7 @@
     <string name="rewind">Отмотать назад</string>
     <string name="forward">Отмотать вперед</string>
     <string name="alternative_pip_controls">Альтернативные элементы управления PiP</string>
-    <string name="alternative_pip_controls_summary">Показывать только аудио и пропускать элементы управления в PiP вместо перемотки вперед и назад</string>
+    <string name="alternative_pip_controls_summary">В окне PiP показывать кнопку только аудио и кнопки перехода, вместо перемотки вперед и назад.</string>
     <string name="pause">Пауза</string>
     <string name="add_to_bookmarks">Добавить в закладки</string>
     <string name="remove_bookmark">Удалить закладку</string>
@@ -444,4 +444,5 @@
     <string name="import_playlists_from">Импорт плейлистов из</string>
     <string name="export_playlists_to">Экспорт плейлистов в</string>
     <string name="import_format_piped">Piped / LibreTube</string>
+    <string name="home_tab_content">Содержимое домашней вкладки</string>
 </resources>
