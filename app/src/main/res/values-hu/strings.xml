@@ -438,4 +438,6 @@
     <string name="import_playlists_from">Lejátszási listák importálása innen</string>
     <string name="export_playlists_to">Lejátszási listák exportálása ide</string>
     <string name="import_format_piped">Piped / LibreTube</string>
+    <string name="mark_as_unwatched">Meg nem nézettként jelölés</string>
+    <string name="home_tab_content">Kezdőlap tartalma</string>
 </resources>
