@@ -436,4 +436,5 @@
     <string name="export_playlists_to">導出播放列表</string>
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="home_tab_content">家分頁內容</string>
+    <string name="mark_as_unwatched">標記為尚未觀看</string>
 </resources>
