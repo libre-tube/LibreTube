@@ -412,6 +412,9 @@
     <string name="creation_date_reversed">Creation date (reversed)</string>
     <string name="alphabetic">Alphabetic</string>
     <string name="alphabetic_reversed">Alphabetic (reversed)</string>
+    <string name="welcome">Welcome to LibreTube</string>
+    <string name="choose_instance">Please choose an instance first!</string>
+    <string name="choose_instance_long">Please choose a Piped instance to use from below. The Piped instance will act as the middleman between you and YouTube. These instances are located at different physical locations - indicated by their country flag(s). Instances physically closer to you are likely faster than instances that are not. You can change the instance you use in the settings at any time.</string>
     <string name="mark_as_unwatched">Mark as unwatched</string>
 
     <!-- Backup & Restore Settings -->
