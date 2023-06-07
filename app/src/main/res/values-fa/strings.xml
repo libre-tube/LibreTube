@@ -426,9 +426,9 @@
     <string name="stats_for_nerds">آمار برای خوره‌ها</string>
     <string name="limit_to_runtime">محدود به زمان اجرا</string>
     <string name="home_tab_content">محتوای تب خانه</string>
-    <string name="import_format_freetube">FreeTube</string>
+    <string name="import_format_freetube">فری‌تیوب</string>
     <string name="export_playlists_to">برون‌ریزی سیاهه‌های پخش به</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
+    <string name="import_format_piped">پایپد / لیبره‌تیوب</string>
     <string name="import_format_newpipe">نیوپایپ</string>
     <string name="shorts_notifications">اطلاع رسانی برای ویدیوهای کوتاه</string>
     <string name="creation_date">تاریخ ساخت</string>
@@ -438,8 +438,9 @@
     <string name="import_subscriptions_from">وارد کردن اشتراک ها از</string>
     <string name="export_subscriptions_to">خروجی گرفتن اشتراک ها به</string>
     <string name="import_playlists_from">درون‌ریزی سیاههٔ پخش از</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
+    <string name="import_format_youtube_csv">یوتیوب (CSV)</string>
     <string name="mark_as_unwatched">علامت به تماشا نشده</string>
     <string name="welcome">به لیبره‌توب خوش‌آمدید</string>
     <string name="choose_instance">لطفاً نخست نمونه‌ای برگزینید!</string>
+    <string name="choose_instance_long">لطفا برای استفاده یک نمونه پایپد از پایین انتخاب کنید. نمونه پایپد به‌عنوان واسطه بین شما و یوتیوب عمل خواهد کرد. این نمونه‌ها در مکان‌های فیزیکی مختلفی قرار دارند - که با پرچم(های) کشورشان مشخص شده‌اند. نمونه‌هایی که از لحاظ فیزیکی به شما نزدیک‌تر هستند احتمالا سریع‌تر از نمونه‌هایی هستند که از شما دور‌ترند. می‌توانید نمونه‌ای را که در تنظیمات استفاده می‌کنید در هر زمان تغییر دهید.</string>
 </resources>
