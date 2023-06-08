@@ -5,7 +5,7 @@ import kotlinx.coroutines.withContext
 import java.net.HttpURLConnection
 import java.net.URL
 
-suspend fun URL.getContentLength(def: Long = -1): Long {
+suspend fun URL.getContentLength(): Long? {
     try {
         return withContext(Dispatchers.IO) {
             val connection = openConnection() as HttpURLConnection
@@ -20,5 +20,5 @@ suspend fun URL.getContentLength(def: Long = -1): Long {
         }
     } catch (e: Exception) { e.printStackTrace() }
 
-    return def
+    return null
 }

@@ -50,34 +50,14 @@ data class Streams(
             val stream = videoStreams.find {
                 it.quality == videoQuality && it.format == videoFormat
             }
-            items.add(
-                DownloadItem(
-                    type = FileType.VIDEO,
-                    videoId = videoId,
-                    fileName = stream?.getQualityString(fileName).orEmpty(),
-                    path = Paths.get(""),
-                    url = stream?.url?.let { ProxyHelper.unwrapIfEnabled(it) },
-                    format = videoFormat,
-                    quality = videoQuality,
-                ),
-            )
+            stream?.toDownloadItem(FileType.VIDEO, videoId, fileName)?.let { items.add(it) }
         }
 
         if (!audioQuality.isNullOrEmpty() && !audioFormat.isNullOrEmpty()) {
             val stream = audioStreams.find {
                 it.quality == audioQuality && it.format == audioFormat
             }
-            items.add(
-                DownloadItem(
-                    type = FileType.AUDIO,
-                    videoId = videoId,
-                    fileName = stream?.getQualityString(fileName).orEmpty(),
-                    path = Paths.get(""),
-                    url = stream?.url?.let { ProxyHelper.unwrapIfEnabled(it) },
-                    format = audioFormat,
-                    quality = audioQuality,
-                ),
-            )
+            stream?.toDownloadItem(FileType.AUDIO, videoId, fileName)?.let { items.add(it) }
         }
 
         if (!subtitleCode.isNullOrEmpty()) {
