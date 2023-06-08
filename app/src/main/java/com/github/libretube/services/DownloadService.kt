@@ -167,8 +167,9 @@ class DownloadService : LifecycleService() {
         var totalRead = path.fileSize()
         val url = URL(item.url ?: return)
 
-        url.getContentLength().let { size ->
-            if (size > 0 && size != item.downloadSize) {
+        // only fetch the content length if it's not been returned by the API
+        if (item.downloadSize == 0L) {
+            url.getContentLength()?.takeIf { it != item.downloadSize }?.let { size ->
                 item.downloadSize = size
                 Database.downloadDao().updateDownloadItem(item)
             }
