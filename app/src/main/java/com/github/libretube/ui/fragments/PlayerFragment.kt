@@ -563,7 +563,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             streams.views.formatShort()
         } else {
             // show exact view count
-            String.format("%,d", streams.views)
+            "%,d".format(streams.views)
         }
         val viewInfo = getString(R.string.normal_views, views, localizeDate(streams))
         if (binding.descLinLayout.isVisible) {
@@ -586,9 +586,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         if (this::chapters.isInitialized && chapters.isNotEmpty()) {
             val chapterIndex = getCurrentChapterIndex() ?: return
             // scroll to the current chapter in the chapterRecView in the description
-            val layoutManager = binding.chaptersRecView.layoutManager as LinearLayoutManager
-            layoutManager.scrollToPositionWithOffset(chapterIndex, 0)
-            // set selected
+            binding.chaptersRecView.scrollToPosition(chapterIndex)
+            // set selected item, that should be highlighted
             val chaptersAdapter = binding.chaptersRecView.adapter as ChaptersAdapter
             chaptersAdapter.updateSelectedPosition(chapterIndex)
         }

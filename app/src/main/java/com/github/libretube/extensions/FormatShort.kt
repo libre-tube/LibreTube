@@ -16,7 +16,7 @@ fun Long?.formatShort(): String {
         val units = arrayOf("", "K", "M", "B", "T")
         for (i in units.size downTo 1) {
             val step = 1000.0.pow(i.toDouble())
-            if (value > step) return String.format("%3.0f%s", value / step, units[i]).trim()
+            if (value > step) return "%3.0f%s".format(value / step, units[i]).trim()
         }
         value.toString()
     }

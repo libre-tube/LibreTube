@@ -53,7 +53,5 @@ class ChaptersAdapter(
         notifyItemChanged(newPosition)
     }
 
-    override fun getItemCount(): Int {
-        return chapters.size
-    }
+    override fun getItemCount() = chapters.size
 }
