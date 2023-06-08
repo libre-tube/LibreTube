@@ -59,6 +59,7 @@ import kotlin.io.path.absolute
 import kotlin.io.path.createFile
 import kotlin.io.path.deleteIfExists
 import kotlin.io.path.fileSize
+import kotlin.math.min
 
 /**
  * Download service with custom implementation of downloading using [HttpURLConnection].
@@ -159,6 +160,7 @@ class DownloadService : LifecycleService() {
      * Download file and emit [DownloadStatus] to the collectors of [downloadFlow]
      * and notification.
      */
+    @Suppress("KotlinConstantConditions")
     private suspend fun downloadFile(item: DownloadItem) {
         downloadQueue[item.id] = true
         val notificationBuilder = getNotificationBuilder(item)
@@ -169,104 +171,71 @@ class DownloadService : LifecycleService() {
 
         // only fetch the content length if it's not been returned by the API
         if (item.downloadSize == 0L) {
-            url.getContentLength()?.takeIf { it != item.downloadSize }?.let { size ->
+            url.getContentLength()?.let { size ->
                 item.downloadSize = size
                 Database.downloadDao().updateDownloadItem(item)
             }
         }
 
-        try {
-            // Set start range where last downloading was held.
-            val con = CronetHelper.cronetEngine.openConnection(url) as HttpURLConnection
-            con.requestMethod = "GET"
-            con.setRequestProperty("Range", "bytes=$totalRead-")
-            con.connectTimeout = DownloadHelper.DEFAULT_TIMEOUT
-            con.readTimeout = DownloadHelper.DEFAULT_TIMEOUT
-
-            withContext(Dispatchers.IO) {
-                // Retry connecting to server for n times.
-                for (i in 1..DownloadHelper.DEFAULT_RETRY) {
-                    try {
-                        con.connect()
-                        break
-                    } catch (_: SocketTimeoutException) {
-                        val message = getString(R.string.downloadfailed) + " " + i
-                        _downloadFlow.emit(item.id to DownloadStatus.Error(message))
-                        toastFromMainThread(message)
-                    }
-                }
-            }
-
-            // If link is expired try to regenerate using available info.
-            if (con.responseCode == 403) {
-                regenerateLink(item)
-                con.disconnect()
-                downloadFile(item)
-                return
-            } else if (con.responseCode !in 200..299) {
-                val message = getString(R.string.downloadfailed) + ": " + con.responseMessage
-                _downloadFlow.emit(item.id to DownloadStatus.Error(message))
-                toastFromMainThread(message)
-                con.disconnect()
-                pause(item.id)
-                return
-            }
-
-            @Suppress("NewApi") // The StandardOpenOption enum is desugared.
-            val sink = path.sink(StandardOpenOption.APPEND).buffer()
-            val sourceByte = con.inputStream.source()
-
-            var lastTime = System.currentTimeMillis() / 1000
-            var lastRead: Long = 0
-
+        while (totalRead < item.downloadSize) {
             try {
-                // Check if downloading is still active and read next bytes.
-                while (downloadQueue[item.id] && sourceByte
-                        .read(sink.buffer, DownloadHelper.DOWNLOAD_CHUNK_SIZE)
-                        .also { lastRead = it } != -1L
-                ) {
-                    sink.emit()
-                    totalRead += lastRead
-                    _downloadFlow.emit(
-                        item.id to DownloadStatus.Progress(
-                            lastRead,
-                            totalRead,
-                            item.downloadSize,
-                        ),
-                    )
-                    if (item.downloadSize != -1L &&
-                        System.currentTimeMillis() / 1000 > lastTime
-                    ) {
-                        notificationBuilder
-                            .setContentText(
-                                totalRead.formatAsFileSize() + " / " +
-                                    item.downloadSize.formatAsFileSize(),
-                            )
-                            .setProgress(
-                                item.downloadSize.toInt(),
-                                totalRead.toInt(),
-                                false,
-                            )
-                        notificationManager.notify(
-                            item.getNotificationId(),
-                            notificationBuilder.build(),
-                        )
-                        lastTime = System.currentTimeMillis() / 1000
-                    }
-                }
-            } catch (_: CancellationException) {
-            } catch (e: Exception) {
-                toastFromMainThread("${getString(R.string.download)}: ${e.message}")
-                _downloadFlow.emit(item.id to DownloadStatus.Error(e.message.toString(), e))
-            }
+                val con = startConnection(item, url, totalRead, item.downloadSize) ?: return
 
-            withContext(Dispatchers.IO) {
-                sink.flush()
-                sink.close()
-                sourceByte.close()
-                con.disconnect()
-            }
-        } catch (_: Exception) {
+                @Suppress("NewApi") // The StandardOpenOption enum is desugared.
+                val sink = path.sink(StandardOpenOption.APPEND).buffer()
+                val sourceByte = con.inputStream.source()
+
+                var lastTime = System.currentTimeMillis() / 1000
+                var lastRead: Long = 0
+
+                try {
+                    // Check if downloading is still active and read next bytes.
+                    while (downloadQueue[item.id] && sourceByte
+                            .read(sink.buffer, DownloadHelper.DOWNLOAD_CHUNK_SIZE)
+                            .also { lastRead = it } != -1L
+                    ) {
+                        sink.emit()
+                        totalRead += lastRead
+                        _downloadFlow.emit(
+                            item.id to DownloadStatus.Progress(
+                                lastRead,
+                                totalRead,
+                                item.downloadSize,
+                            ),
+                        )
+                        if (item.downloadSize != -1L &&
+                            System.currentTimeMillis() / 1000 > lastTime
+                        ) {
+                            notificationBuilder
+                                .setContentText(
+                                    totalRead.formatAsFileSize() + " / " +
+                                            item.downloadSize.formatAsFileSize(),
+                                )
+                                .setProgress(
+                                    item.downloadSize.toInt(),
+                                    totalRead.toInt(),
+                                    false,
+                                )
+                            notificationManager.notify(
+                                item.getNotificationId(),
+                                notificationBuilder.build(),
+                            )
+                            lastTime = System.currentTimeMillis() / 1000
+                        }
+                    }
+                } catch (_: CancellationException) {
+                } catch (e: Exception) {
+                    toastFromMainThread("${getString(R.string.download)}: ${e.message}")
+                    _downloadFlow.emit(item.id to DownloadStatus.Error(e.message.toString(), e))
+                }
+
+                withContext(Dispatchers.IO) {
+                    sink.flush()
+                    sink.close()
+                    sourceByte.close()
+                    con.disconnect()
+                }
+            } catch (_: Exception) {}
         }
 
         val completed = when {
@@ -281,6 +250,56 @@ class DownloadService : LifecycleService() {
         }
         setPauseNotification(notificationBuilder, item, completed)
         pause(item.id)
+    }
+
+    private suspend fun startConnection(
+        item: DownloadItem,
+        url: URL,
+        alreadyRead: Long,
+        readLimit: Long?
+    ): HttpURLConnection? {
+        // Set start range where last downloading was held.
+        val con = CronetHelper.cronetEngine.openConnection(url) as HttpURLConnection
+        con.requestMethod = "GET"
+        val limit = if (readLimit == null) {
+            ""
+        } else {
+            min(readLimit, alreadyRead + BYTES_PER_REQUEST)
+        }
+        con.setRequestProperty("Range", "bytes=$alreadyRead-$limit")
+        con.connectTimeout = DownloadHelper.DEFAULT_TIMEOUT
+        con.readTimeout = DownloadHelper.DEFAULT_TIMEOUT
+
+        withContext(Dispatchers.IO) {
+            // Retry connecting to server for n times.
+            for (i in 1..DownloadHelper.DEFAULT_RETRY) {
+                try {
+                    con.connect()
+                    break
+                } catch (_: SocketTimeoutException) {
+                    val message = getString(R.string.downloadfailed) + " " + i
+                    _downloadFlow.emit(item.id to DownloadStatus.Error(message))
+                    toastFromMainThread(message)
+                }
+            }
+        }
+
+        // If link is expired try to regenerate using available info.
+        if (con.responseCode == 403) {
+            regenerateLink(item)
+            con.disconnect()
+            downloadFile(item)
+            return null
+        } else if (con.responseCode !in 200..299) {
+            val message = getString(R.string.downloadfailed) + ": " + con.responseMessage
+            _downloadFlow.emit(item.id to DownloadStatus.Error(message))
+            toastFromMainThread(message)
+            con.disconnect()
+            pause(item.id)
+            return null
+        }
+
+        return con
     }
 
     /**
@@ -468,5 +487,6 @@ class DownloadService : LifecycleService() {
         const val ACTION_SERVICE_STOPPED =
             "com.github.libretube.services.DownloadService.ACTION_SERVICE_STOPPED"
         var IS_DOWNLOAD_RUNNING = false
+        private const val BYTES_PER_REQUEST = 10000000L
     }
 }
