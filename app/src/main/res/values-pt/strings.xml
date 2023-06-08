@@ -39,7 +39,7 @@
     <string name="password">Palavra-passe</string>
     <string name="registered">Registo efetuado. Agora já pode subscrever canais.</string>
     <string name="login_register">Entrar/registar</string>
-    <string name="dlisinprogress">Aguarde até que todas as descargas sejam concluídas.</string>
+    <string name="dlisinprogress">Aguarde até todas as descargas estarem concluídas.</string>
     <string name="import_from_yt">Importar subscrições</string>
     <string name="empty">Não indicou o nome de utilizador ou a palavra-passe.</string>
     <string name="fail">Falha :(</string>
@@ -306,7 +306,7 @@
     <string name="start_time">Início</string>
     <string name="end_time">Fim</string>
     <string name="notification_time">Restringir tempo da notificação</string>
-    <string name="notification_time_summary">Limitar período de tempo para o qual as notificações são mostradas.</string>
+    <string name="notification_time_summary">Limitar o intervalo de tempo em que as notificações são mostradas.</string>
     <string name="navbar_order">Ordem</string>
     <string name="layout">Esquema</string>
     <string name="alternative_player_layout">Esquema alternativo de reprodução</string>
@@ -370,7 +370,7 @@
     <string name="download_paused">Descarga em pausa</string>
     <string name="audio_only_mode">Apenas áudio</string>
     <string name="audio_only_mode_summary">Transforme LibreTube num reprodutor de músicas.</string>
-    <string name="concurrent_downloads">Número de transferências simultâneas</string>
+    <string name="concurrent_downloads">Número de descarregamentos simultâneos</string>
     <string name="unknown">Desconhecido</string>
     <string name="resume">Continuar</string>
     <string name="download_completed">Descarga terminada</string>
@@ -416,7 +416,7 @@
     <string name="edit_group">Editar grupo</string>
     <string name="play_automatically">Reproduzir automaticamente</string>
     <string name="play_automatically_summary">Iniciar reprodução dos vídeos ao selecionar</string>
-    <string name="fullscreen_gestures">Gestos de entrada/saída em ecrã inteiro</string>
+    <string name="fullscreen_gestures">Gestos de ativar/desativar ecrã inteiro</string>
     <string name="go_to_video">Ir para o vídeo</string>
     <plurals name="channel_new_streams">
         <item quantity="one">%d nova emissão</item>
@@ -443,4 +443,7 @@
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="home_tab_content">Conteúdo do separador inicial</string>
     <string name="mark_as_unwatched">Marcar como não visto</string>
+    <string name="welcome">Bem-vindo ao LibreTube</string>
+    <string name="choose_instance">Escolha primeiro uma instância!</string>
+    <string name="choose_instance_long">Escolha uma instância do Piped para utilizar a partir de baixo. A instância do Piped actuará como intermediário entre si e o YouTube. Essas instâncias estão localizadas em locais físicos diferentes, indicados pela(s) bandeira(s) do país. As instâncias fisicamente mais próximas de si são provavelmente mais rápidas do que as instâncias que não estão. Pode alterar a instância que utiliza nas definições em qualquer altura.</string>
 </resources>

@@ -435,4 +435,9 @@
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="import_playlists_from">自以下位置导入播放列表</string>
     <string name="export_playlists_to">将播放列表导出到</string>
+    <string name="choose_instance">请先选择一个实例！</string>
+    <string name="home_tab_content">首页内容</string>
+    <string name="welcome">欢迎使用 LibreTube</string>
+    <string name="choose_instance_long">请在下方选择一个 Piped 实例来使用。Piped 实例将充当您与 YouTube 之间的中间人。这些实例位于不同的物理位置——由相应的国旗表示。离您的地理位置较近的实例相对其他实例可能更快。您可以在设置中随时修改使用的实例。</string>
+    <string name="mark_as_unwatched">标记为尚未观看</string>
 </resources>

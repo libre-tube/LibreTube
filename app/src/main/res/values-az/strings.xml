@@ -439,4 +439,8 @@
     <string name="export_playlists_to">Oynatma siyahısın ixrac et</string>
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="home_tab_content">Əsas panel məzmunu</string>
+    <string name="welcome">LibreTube-a Xoş Gəlmisiniz</string>
+    <string name="choose_instance">Xahiş olunur, əvvəlcə instansiya seçin!</string>
+    <string name="mark_as_unwatched">Baxılmamış kimi işarələ</string>
+    <string name="choose_instance_long">Xahiş olunur, aşağıdan işlətmək üçün Piped instansiyası seçin. Piped instansiyası siz və YouTube arasında vasitəçi kimi fəaliyyət göstərəcək. Bu instansiyalar fərqli fiziki yerlərdə yerləşir - ölkə bayraqları ilə göstərilib. Fiziki olaraq sizə daha yaxın olan instansiyalar, olmayan instansiyalardan daha sürətlidir. İstənilən vaxt istifadə etdiyiniz instansiyanı tənzimləmələrdə dəyişə bilərsiniz.</string>
 </resources>

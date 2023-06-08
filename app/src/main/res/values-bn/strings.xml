@@ -336,4 +336,18 @@
     <string name="pause">থামাও</string>
     <string name="resume">চালাও</string>
     <string name="unsupported_file_format">অসমর্থিত ফাইল ফর্ম্যাট: %1$s</string>
+    <string name="pinch_control_summary">পিঞ্চ জেস্টার ব্যবহার করে জুম করুন।</string>
+    <string name="all_caught_up_summary">আপনি সকল নতুন ভিডিও দেখে ফেলেছেন</string>
+    <string name="app_backup">অ্যাপ ব্যাক-আপ</string>
+    <string name="pinch_control">পিচ কন্ট্রোল</string>
+    <string name="defaults">ডিফল্টস</string>
+    <string name="comments_disabled">আপলোডারের দ্বারা মন্তব্য বন্ধ রাখা হয়েছে।</string>
+    <string name="theme_monochrome">মিনিমালিস্টিক মনোক্রোম</string>
+    <string name="captions_size">ক্যাপশনের আকার</string>
+    <string name="double_tap_seek">ডাবল ট্যাপ করে আগান/পিছান</string>
+    <string name="brightness">উজ্বলতা</string>
+    <string name="volume">আওয়াজ</string>
+    <string name="auto">অটো</string>
+    <string name="no_comments_available">এই ভিডিওতে কোনো কমেন্ট নেই।</string>
+    <string name="import_playlists">প্লেলিস্টগুলো ইম্পোর্ট করুন</string>
 </resources>

@@ -446,4 +446,7 @@
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="home_tab_content">Содержимое домашней вкладки</string>
     <string name="mark_as_unwatched">Пометить как непросмотренное</string>
+    <string name="welcome">Добро пожаловать в LibreTube</string>
+    <string name="choose_instance">Пожалуйста, для начала выберите инстанс!</string>
+    <string name="choose_instance_long">Пожалуйста, выберите внизу инстанс Piped для использования. Инстанс Piped будет выступать в качестве посредника между вами и YouTube. Эти инстансы расположны в различных географических местах - обозначенных флагами их стран. Инстансы, физически находящиеся ближе к вам вероятнее всего будут быстрее инстансов, которые находятся дальше. Вы в любое время можете сменить используемый инстанс в настройках.</string>
 </resources>

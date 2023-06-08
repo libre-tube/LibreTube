@@ -271,7 +271,7 @@
     <string name="error_occurred">エラー</string>
     <string name="copied">コピーしました</string>
     <string name="change_region">急上昇は現在の地域では利用できないようです。設定で他の地域を選択してください。</string>
-    <string name="share_with_time">タイムコード付きで共有</string>
+    <string name="share_with_time">時間指定で共有</string>
     <string name="legacy_subscriptions">古い登録チャンネル表示</string>
     <string name="device_info">端末情報</string>
     <string name="history_empty">まだ履歴がありません。</string>
@@ -304,7 +304,7 @@
     <string name="open_copied">開く</string>
     <string name="repeat_mode_current">現在の動画</string>
     <string name="audio_video_summary">画質と形式</string>
-    <string name="time_code">タイムコード (秒)</string>
+    <string name="time_code">時間指定用のタイムコード (秒)</string>
     <string name="download_channel_description">メディアのダウンロード中に通知を表示します。</string>
     <string name="navbar_order">並べ替え</string>
     <string name="layout">レイアウト</string>

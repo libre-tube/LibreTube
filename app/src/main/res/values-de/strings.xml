@@ -439,4 +439,7 @@
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="import_playlists_from">Playlists importieren aus</string>
     <string name="home_tab_content">Inhalt der Startseite</string>
+    <string name="welcome">Willkommen bei LibreTube</string>
+    <string name="mark_as_unwatched">Als ungesehen markieren</string>
+    <string name="choose_instance">Bitte wählen Sie zuerst eine Instanz aus!</string>
 </resources>

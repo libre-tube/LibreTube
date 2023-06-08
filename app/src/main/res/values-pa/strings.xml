@@ -422,4 +422,25 @@
     <string name="play_automatically_summary">ਚੁਣਨ \'ਤੇ ਆਪਣੇ ਆਪ ਵੀਡੀਓ ਚਲਾਉਣਾ ਸ਼ੁਰੂ ਕਰੋ</string>
     <string name="show_stream_thumbnails">ਸਟ੍ਰੀਮ ਥੰਮਨੇਲ ਦਿਖਾਓ</string>
     <string name="show_stream_thumbnails_summary">ਨਵੀਆਂ ਸਟ੍ਰੀਮਾਂ ਦੇ ਥੰਮਨੇਲ ਵਿਖਾਓ। ਇਸਨੂੰ ਸਮਰੱਥ ਕਰਨ ਨਾਲ ਵਾਧੂ ਡੇਟਾ ਦੀ ਖਪਤ ਹੋਵੇਗੀ।</string>
+    <string name="import_format_freetube">ਫਰੀਟਿਊਬ</string>
+    <string name="home_tab_content">ਹੋਮ ਟੈਬ ਸਮੱਗਰੀ</string>
+    <string name="choose_instance">ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ ਇੰਸਟੈਂਸ ਚੁਣੋ!</string>
+    <string name="mark_as_unwatched">ਅਣਡਿੱਠੀ ਵਜੋਂ ਨਿਸ਼ਾਨਦੇਹ ਕਰੋ</string>
+    <string name="export_playlists_to">ਪਲੇਲਿਸਟ ਨਿਰਯਾਤ ਕਰੋ</string>
+    <string name="import_playlists_from">ਪਲੇਲਿਸਟ ਆਯਾਤ ਕਰੋ</string>
+    <string name="import_format_piped">ਪਾਈਪਡ / ਲੀਬਰਟਿਊਬ</string>
+    <string name="import_format_newpipe">ਨਿਊਪਾਈਪ</string>
+    <string name="unlimited_search_history">ਅਸੀਮਤ ਖੋਜ ਅਤੀਤ</string>
+    <string name="duration_reversed">ਮਿਆਦ (ਲੰਬੀ ਤੋਂ ਛੋਟੀ)</string>
+    <string name="creation_date">ਸੰਰਚਨਾ ਮਿਤੀ</string>
+    <string name="creation_date_reversed">ਸੰਰਚਨਾ ਮਿਤੀ (ਉਲਟੇ ਕ੍ਰਮ \'ਚ)</string>
+    <string name="alphabetic">ਵਰਣਮਾਲਾ ਅਨੁਸਾਰ</string>
+    <string name="shorts_notifications">ਸ਼ਾਰਟਸ ਲਈ ਸੂਚਨਾਵਾਂ</string>
+    <string name="welcome">ਲੀਬਰਟਿਊਬ \'ਤੇ ਜੀ ਆਇਆਂ ਨੂੰ</string>
+    <string name="import_format_youtube_csv">ਯੂਟਿਊਬ (CSV)</string>
+    <string name="choose_instance_long">ਕਿਰਪਾ ਕਰਕੇ ਹੇਠਾਂ ਤੋਂ ਵਰਤਣ ਲਈ ਕਿਸੇ ਪਾਈਪ ਰਾਹੀਂ ਦਿੱਤੀ ਉਦਾਹਰਨ ਦੀ ਚੋਣ ਕਰੋ। ਪਾਈਪਡ ਉਦਾਹਰਣ ਤੁਹਾਡੇ ਅਤੇ ਯੂਟਿਊਬ ਦੇ ਵਿਚਕਾਰ ਵਿਚੋਲੇ ਵਜੋਂ ਕੰਮ ਕਰੇਗੀ। ਇਹ ਉਦਾਹਰਨਾਂ ਵੱਖ-ਵੱਖ ਭੌਤਿਕ ਟਿਕਾਣਿਆਂ \'ਤੇ ਸਥਿਤ ਹਨ – ਜੋ ਉਹਨਾਂ ਦੇ ਦੇਸ਼ ਦੇ ਝੰਡੇ(ਨਾਂ) ਦੁਆਰਾ ਦਰਸਾਈਆਂ ਗਈਆਂ ਹਨ। ਸਰੀਰਕ ਤੌਰ \'ਤੇ ਤੁਹਾਡੇ ਨੇੜੇ ਦੀਆਂ ਉਦਾਹਰਣਾਂ ਸੰਭਾਵਤ ਤੌਰ\' ਤੇ ਉਨ੍ਹਾਂ ਉਦਾਹਰਣਾਂ ਨਾਲੋਂ ਤੇਜ਼ ਹੁੰਦੀਆਂ ਹਨ ਜੋ ਨਹੀਂ ਹਨ। ਤੁਸੀਂ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਵਰਤੇ ਜਾਂਦੇ ਉਦਾਹਰਣ ਨੂੰ ਕਿਸੇ ਵੀ ਸਮੇਂ ਬਦਲ ਸਕਦੇ ਹੋ।</string>
+    <string name="duration">ਮਿਆਦ</string>
+    <string name="alphabetic_reversed">ਵਰਣਮਾਲਾ (ਉਲਟੇ ਕ੍ਰਮ)</string>
+    <string name="import_subscriptions_from">ਤੋਂ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਆਯਾਤ ਕਰੋ</string>
+    <string name="export_subscriptions_to">ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਨਿਰਯਾਤ ਕਰੋ</string>
 </resources>
