@@ -20,8 +20,7 @@ class GeneralSettings : BasePreferenceFragment() {
 
         val language = findPreference<ListPreference>("language")
         language?.setOnPreferenceChangeListener { _, _ ->
-            val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, RequireRestartDialog::class.java.name)
+            RequireRestartDialog().show(childFragmentManager, RequireRestartDialog::class.java.name)
             true
         }
 

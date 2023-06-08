@@ -13,12 +13,14 @@ import com.github.libretube.helpers.ImportHelper
 import com.github.libretube.obj.BackupFile
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.BackupDialog
+import com.github.libretube.ui.dialogs.RequireRestartDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import kotlinx.coroutines.withContext
 
 class BackupRestoreSettings : BasePreferenceFragment() {
     private val backupDateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss")
@@ -50,6 +52,12 @@ class BackupRestoreSettings : BasePreferenceFragment() {
         it?.let {
             CoroutineScope(Dispatchers.IO).launch {
                 BackupHelper.restoreAdvancedBackup(requireContext(), it)
+                withContext(Dispatchers.Main) {
+                    // could fail if fragment is already closed
+                    runCatching {
+                        RequireRestartDialog().show(childFragmentManager, this::class.java.name)
+                    }
+                }
             }
         }
     }
@@ -162,8 +170,8 @@ class BackupRestoreSettings : BasePreferenceFragment() {
             true
         }
 
-        val advancesBackup = findPreference<Preference>("backup")
-        advancesBackup?.setOnPreferenceClickListener {
+        val advancedBackup = findPreference<Preference>("backup")
+        advancedBackup?.setOnPreferenceClickListener {
             BackupDialog {
                 backupFile = it
                 val timestamp = backupDateTimeFormatter.format(LocalDateTime.now())
