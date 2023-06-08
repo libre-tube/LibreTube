@@ -26,7 +26,7 @@ interface WatchHistoryDao {
     suspend fun delete(watchHistoryItem: WatchHistoryItem)
 
     @Query("DELETE FROM watchHistoryItem WHERE videoId = :id")
-    fun deleteByVideoId(id: String)
+    suspend fun deleteByVideoId(id: String)
 
     @Query("DELETE FROM watchHistoryItem")
     suspend fun deleteAll()
