@@ -441,4 +441,9 @@
     <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="export_playlists_to">Exportă playlist-uri la</string>
+    <string name="choose_instance">Mai întâi alegeți o instanță!</string>
+    <string name="mark_as_unwatched">Marcați ca nevăzut</string>
+    <string name="welcome">Bun venit la LibreTube</string>
+    <string name="choose_instance_long">Vă rugăm să alegeți o instanță Piped pe care să o utilizați de mai jos. Instanța Piped va acționa ca intermediar între dvs. și YouTube. Aceste instanțe sunt situate în diferite locații fizice - indicate de steagurile țării lor. Instanțele mai apropiate fizic de tine sunt probabil mai rapide decât cazurile care nu sunt. Puteți schimba oricând instanța pe care o utilizați în setări.</string>
+    <string name="home_tab_content">Conținutul filei Acasă</string>
 </resources>
