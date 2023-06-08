@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="?attr/selectableItemBackground"
     android:backgroundTint="@android:color/transparent"
+    android:layout_marginHorizontal="1dp"
     app:strokeWidth="0dp">
 
     <LinearLayout
@@ -13,7 +14,7 @@
         android:layout_width="100dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingHorizontal="5dp">
+        android:padding="5dp">
 
         <FrameLayout
             android:layout_width="match_parent"
