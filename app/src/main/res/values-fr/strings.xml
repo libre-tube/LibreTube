@@ -442,4 +442,8 @@
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="export_playlists_to">Exporter les playlists vers</string>
     <string name="home_tab_content">Contenu de la page d\'accueil</string>
+    <string name="welcome">Bienvenue sur LibreTube</string>
+    <string name="mark_as_unwatched">Marquer comme non-vu</string>
+    <string name="choose_instance">Merci de choisir une instance pour continuer!</string>
+    <string name="choose_instance_long">Merci de choisir une instance Piped ci dessous. Il agira comme passerelle entre YouTube et vous. Ces instances sont localisés dans différentes régions du monde, indiquées par leur drapeau. Les instances proches de chez vous sont probablement plus rapides que les autres. Vous pouvez changer l\'instance à tout moment dans les paramètres.</string>
 </resources>

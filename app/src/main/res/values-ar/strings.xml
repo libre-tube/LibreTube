@@ -452,4 +452,7 @@
     <string name="export_playlists_to">تصدير قوائم التشغيل إلى</string>
     <string name="home_tab_content">محتوى تبويب \"الصفحة الرئيسية\"</string>
     <string name="mark_as_unwatched">وضع علامة على أنه لم تتم مشاهدته</string>
+    <string name="welcome">مرحبا بك في ليبري تيوب</string>
+    <string name="choose_instance">الرجاء اختيار مثيل أولا!</string>
+    <string name="choose_instance_long">الرجاء اختيار مثيل Piped لاستخدامه من أدناه. سيعمل مثيل Piped كوسيط بينك وبين YouTube. توجد هذه الأمثلة في مواقع مادية مختلفة - يشار إليها بعلم (أعلام) الدولة الخاصة بهم. من المحتمل أن تكون المثيلات الأقرب إليك فعليًا أسرع من المثيلات التي ليست كذلك. يمكنك تغيير المثيل الذي تستخدمه في الإعدادات في أي وقت.</string>
 </resources>
