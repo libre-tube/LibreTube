@@ -21,23 +21,20 @@ class AppearanceSettings : BasePreferenceFragment() {
 
         val themeToggle = findPreference<ListPreference>(PreferenceKeys.THEME_MODE)
         themeToggle?.setOnPreferenceChangeListener { _, _ ->
-            val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, RequireRestartDialog::class.java.name)
+            RequireRestartDialog().show(childFragmentManager, RequireRestartDialog::class.java.name)
             true
         }
 
         val pureTheme = findPreference<SwitchPreferenceCompat>(PreferenceKeys.PURE_THEME)
         pureTheme?.setOnPreferenceChangeListener { _, _ ->
-            val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, RequireRestartDialog::class.java.name)
+            RequireRestartDialog().show(childFragmentManager, RequireRestartDialog::class.java.name)
             true
         }
 
         val accentColor = findPreference<ListPreference>(PreferenceKeys.ACCENT_COLOR)
         updateAccentColorValues(accentColor!!)
         accentColor.setOnPreferenceChangeListener { _, _ ->
-            val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, RequireRestartDialog::class.java.name)
+            RequireRestartDialog().show(childFragmentManager, RequireRestartDialog::class.java.name)
             true
         }
 
@@ -56,8 +53,7 @@ class AppearanceSettings : BasePreferenceFragment() {
 
         val labelVisibilityMode = findPreference<ListPreference>(PreferenceKeys.LABEL_VISIBILITY)
         labelVisibilityMode?.setOnPreferenceChangeListener { _, _ ->
-            val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, RequireRestartDialog::class.java.name)
+            RequireRestartDialog().show(childFragmentManager, RequireRestartDialog::class.java.name)
             true
         }
 
