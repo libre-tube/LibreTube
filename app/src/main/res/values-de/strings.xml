@@ -441,5 +441,6 @@
     <string name="home_tab_content">Inhalt der Startseite</string>
     <string name="welcome">Willkommen bei LibreTube</string>
     <string name="mark_as_unwatched">Als ungesehen markieren</string>
-    <string name="choose_instance">Bitte wählen Sie zuerst eine Instanz aus!</string>
+    <string name="choose_instance">Bitte wähle zuerst eine Instanz aus!</string>
+    <string name="choose_instance_long">Bitte wähle unten eine Piped-Instanz aus. Die Piped-Instanz fungiert als Vermittler (Proxy) zwischen deinem Gerät und YouTube. Diese Instanzen befinden sich an verschiedenen physischen Standorten - erkennbar an den jeweiligen Landesflaggen. Instanzen in deiner Nähe sind wahrscheinlich schneller als Instanzen, die sich weiter weg befinden. Du kannst die verwendete Instanz jederzeit in den Einstellungen ändern.</string>
 </resources>
