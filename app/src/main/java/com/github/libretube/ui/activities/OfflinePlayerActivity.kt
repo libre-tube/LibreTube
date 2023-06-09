@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.C
 import androidx.media3.common.MediaItem
@@ -25,6 +26,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.ActivityOfflinePlayerBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.db.DatabaseHolder.Database
+import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
 import com.github.libretube.extensions.toAndroidUri
 import com.github.libretube.extensions.updateParameters
@@ -113,9 +115,12 @@ class OfflinePlayerActivity : BaseActivity() {
 
     private fun playVideo() {
         lifecycleScope.launch {
-            val downloadFiles = withContext(Dispatchers.IO) {
-                Database.downloadDao().findById(videoId).downloadItems
+            val downloadInfo = withContext(Dispatchers.IO) {
+                Database.downloadDao().findById(videoId)
             }
+            val downloadFiles = downloadInfo.downloadItems
+            playerBinding.exoTitle.text = downloadInfo.download.title
+            playerBinding.exoTitle.isVisible = true
 
             val video = downloadFiles.firstOrNull { it.type == FileType.VIDEO }
             val audio = downloadFiles.firstOrNull { it.type == FileType.AUDIO }
