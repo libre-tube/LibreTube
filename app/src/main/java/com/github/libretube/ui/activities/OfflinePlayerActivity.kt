@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.C
@@ -96,11 +97,11 @@ class OfflinePlayerActivity : BaseActivity() {
 
         playerView = binding.player
         playerView.setShowSubtitleButton(true)
-        playerView.subtitleView?.visibility = View.VISIBLE
+        playerView.subtitleView?.isVisible = true
         playerView.player = player
         playerBinding = binding.player.binding
 
-        playerBinding.fullscreen.visibility = View.GONE
+        playerBinding.fullscreen.isInvisible = true
         playerBinding.closeImageButton.setOnClickListener {
             finish()
         }
