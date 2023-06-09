@@ -22,6 +22,7 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.getWhileDigit
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.services.DownloadData
 import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
@@ -163,16 +164,16 @@ class DownloadDialog(
 
             saveSelections(videoStream, audioStream, subtitle)
 
-            DownloadHelper.startDownloadService(
-                context = requireContext(),
+            val downloadData = DownloadData(
                 videoId = videoId,
-                fileName = binding.fileName.text.toString(),
+                fileName = binding.fileName.text?.toString(),
                 videoFormat = videoStream?.format,
                 videoQuality = videoStream?.quality,
                 audioFormat = audioStream?.format,
                 audioQuality = audioStream?.quality,
-                subtitleCode = subtitle?.code,
+                subtitleCode = subtitle?.code
             )
+            DownloadHelper.startDownloadService(requireContext(), downloadData)
 
             dismiss()
         }
