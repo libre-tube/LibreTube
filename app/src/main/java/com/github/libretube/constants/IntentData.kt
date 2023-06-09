@@ -1,6 +1,7 @@
 package com.github.libretube.constants
 
 object IntentData {
+    const val downloadData = "downloadData"
     const val videoId = "videoId"
     const val channelId = "channelId"
     const val channelName = "channelName"

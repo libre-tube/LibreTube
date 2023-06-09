@@ -27,6 +27,7 @@ import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
 import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.extensions.getContentLength
+import com.github.libretube.extensions.parcelableExtra
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.DownloadHelper.getNotificationId
@@ -90,13 +91,10 @@ class DownloadService : LifecycleService() {
             ACTION_DOWNLOAD_PAUSE -> pause(intent.getIntExtra("id", -1))
         }
 
-        val videoId = intent?.getStringExtra(IntentData.videoId) ?: return START_NOT_STICKY
-        val fileName = intent.getStringExtra(IntentData.fileName) ?: videoId
-        val videoFormat = intent.getStringExtra(IntentData.videoFormat)
-        val videoQuality = intent.getStringExtra(IntentData.videoQuality)
-        val audioFormat = intent.getStringExtra(IntentData.audioFormat)
-        val audioQuality = intent.getStringExtra(IntentData.audioQuality)
-        val subtitleCode = intent.getStringExtra(IntentData.subtitleCode)
+        val (videoId, name, videoFormat, videoQuality, audioFormat, audioQuality, subtitleCode) =
+            intent?.parcelableExtra<DownloadData>(IntentData.downloadData)
+                ?: return START_NOT_STICKY
+        val fileName = name ?: videoId
 
         lifecycleScope.launch(coroutineContext) {
             try {

@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.obj.DownloadItem
+import com.github.libretube.services.DownloadData
 import com.github.libretube.services.DownloadService
 import java.nio.file.Path
 
@@ -48,25 +49,9 @@ object DownloadHelper {
         ).toFloat().toInt()
     }
 
-    fun startDownloadService(
-        context: Context,
-        videoId: String? = null,
-        fileName: String? = null,
-        videoFormat: String? = null,
-        videoQuality: String? = null,
-        audioFormat: String? = null,
-        audioQuality: String? = null,
-        subtitleCode: String? = null,
-    ) {
+    fun startDownloadService(context: Context, downloadData: DownloadData? = null) {
         val intent = Intent(context, DownloadService::class.java)
-
-        intent.putExtra(IntentData.videoId, videoId)
-        intent.putExtra(IntentData.fileName, fileName)
-        intent.putExtra(IntentData.videoFormat, videoFormat)
-        intent.putExtra(IntentData.videoQuality, videoQuality)
-        intent.putExtra(IntentData.audioFormat, audioFormat)
-        intent.putExtra(IntentData.audioQuality, audioQuality)
-        intent.putExtra(IntentData.subtitleCode, subtitleCode)
+            .putExtra(IntentData.downloadData, downloadData)
 
         ContextCompat.startForegroundService(context, intent)
     }
