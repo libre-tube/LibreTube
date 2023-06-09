@@ -251,12 +251,14 @@ internal class CustomExoPlayerView(
         cancelHideControllerTask()
         super.hideController()
 
-        // hide system bars if in fullscreen
-        playerViewModel?.let {
-            if (it.isFullscreen.value == true) {
+        // hide system bars if in fullscreen or offline player
+        if (playerViewModel != null) {
+            if (playerViewModel!!.isFullscreen.value == true) {
                 WindowHelper.toggleFullscreen(activity, true)
             }
             updateTopBarMargin()
+        } else {
+            activity.toggleSystemBars(WindowInsetsCompat.Type.systemBars(), false)
         }
     }
 
@@ -266,11 +268,14 @@ internal class CustomExoPlayerView(
         // automatically hide the controller after 2 seconds
         enqueueHideControllerTask()
         super.showController()
+
+        // show the system bars when in offline player
+        if (playerViewModel == null) {
+            activity.toggleSystemBars(WindowInsetsCompat.Type.statusBars(), true)
+        }
     }
 
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        return false
-    }
+    override fun onTouchEvent(event: MotionEvent) = false
 
     private fun initRewindAndForward() {
         val seekIncrementText = (PlayerHelper.seekIncrement / 1000).toString()
