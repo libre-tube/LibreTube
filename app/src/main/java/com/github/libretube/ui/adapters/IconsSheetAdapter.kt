@@ -41,7 +41,7 @@ class IconsSheetAdapter : RecyclerView.Adapter<IconsSheetViewHolder>() {
             val activityAlias: String,
         ) {
             object Default :
-                AppIcon(R.string.defaultIcon, R.mipmap.ic_launcher, "ui.activities.MainActivity")
+                AppIcon(R.string.defaultIcon, R.mipmap.ic_launcher, "Default")
 
             object DefaultLight :
                 AppIcon(R.string.defaultIconLight, R.mipmap.ic_launcher_light, "DefaultLight")

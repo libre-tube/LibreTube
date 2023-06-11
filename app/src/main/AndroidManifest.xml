@@ -80,19 +80,30 @@
             android:screenOrientation="user"
             android:supportsPictureInPicture="true"
             android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
-            </intent-filter>
-
             <!-- allow being recognized as a music player -->
             <intent-filter>
                 <action android:name="android.intent.action.MUSIC_PLAYER" />
                 <category android:name="android.intent.category.CATEGORY_APP_MUSIC" />
             </intent-filter>
         </activity>
+
+        <activity-alias
+            android:name=".Default"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsPictureInPicture="true"
+            android:targetActivity=".ui.activities.MainActivity"
+            android:windowSoftInputMode="adjustPan" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+            <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+        </intent-filter>
+        </activity-alias>
 
         <activity-alias
             android:name=".IconGradient"
