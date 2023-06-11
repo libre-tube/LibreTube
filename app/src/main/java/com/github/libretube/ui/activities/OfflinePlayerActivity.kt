@@ -5,13 +5,9 @@ import android.media.session.PlaybackState
 import android.net.Uri
 import android.os.Bundle
 import android.text.format.DateUtils
-import android.view.View
-import android.view.ViewGroup.MarginLayoutParams
 import androidx.activity.viewModels
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
-import androidx.core.view.marginTop
-import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.C
 import androidx.media3.common.MediaItem
@@ -30,9 +26,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.ActivityOfflinePlayerBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.db.DatabaseHolder.Database
-import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
-import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.toAndroidUri
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
@@ -105,24 +99,14 @@ class OfflinePlayerActivity : BaseActivity() {
         playerView.player = player
         playerBinding = binding.player.binding
 
-        // increase the margin to the status bar
-        playerBinding.topBar.setPadding(
-            playerBinding.topBar.paddingLeft,
-            playerBinding.topBar.paddingTop * 2,
-            playerBinding.topBar.paddingRight,
-            playerBinding.topBar.paddingBottom
-        )
-
         playerBinding.fullscreen.isInvisible = true
         playerBinding.closeImageButton.setOnClickListener {
             finish()
         }
 
         binding.player.initialize(
-            null,
             binding.doubleTapOverlay.binding,
             binding.playerGestureControlsView.binding,
-            trackSelector,
         )
     }
 
@@ -181,6 +165,7 @@ class OfflinePlayerActivity : BaseActivity() {
 
                 player.setMediaSource(mediaSource)
             }
+
             videoUri != null -> player.setMediaItem(
                 MediaItem.Builder()
                     .setUri(videoUri)
@@ -189,6 +174,7 @@ class OfflinePlayerActivity : BaseActivity() {
                     }
                     .build(),
             )
+
             audioUri != null -> player.setMediaItem(
                 MediaItem.Builder()
                     .setUri(audioUri)
