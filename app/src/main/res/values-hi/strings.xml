@@ -443,4 +443,7 @@
     <string name="choose_instance">कृपया पहले एक इंस्टेंस चुनें!</string>
     <string name="unlimited_search_history">असीमित खोज इतिहास</string>
     <string name="choose_instance_long">कृपया नीचे से उपयोग करने के लिए एक पाइप ्ड इंस्टेंस चुनें। पाइप्ड इंस्टेंस आपके और यूट्यूब के बीच बिचौलिये के रूप में कार्य करेगा। ये उदाहरण विभिन्न भौतिक स्थानों पर स्थित हैं - उनके देश के ध्वज (ओं) द्वारा इंगित किया गया है। शारीरिक रूप से आपके करीब के उदाहरण उन उदाहरणों की तुलना में तेज होते हैं जो नहीं हैं। आप किसी भी समय सेटिंग्स में उपयोग किए जाने वाले इंस्टेंस को बदल सकते हैं।</string>
+    <string name="change_playlist_description">प्लेलिस्ट विवरण बदलें</string>
+    <string name="playlist_description">प्लेलिस्ट विवरण</string>
+    <string name="emptyPlaylistDescription">प्लेलिस्ट विवरण रिक्त नहीं हो सकता</string>
 </resources>
