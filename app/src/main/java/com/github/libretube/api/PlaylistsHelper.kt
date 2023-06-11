@@ -2,7 +2,7 @@ package com.github.libretube.api
 
 import androidx.core.text.isDigitsOnly
 import com.github.libretube.api.obj.Playlist
-import com.github.libretube.api.obj.PlaylistId
+import com.github.libretube.api.obj.EditPlaylistBody
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.YOUTUBE_FRONTEND_URL
@@ -99,7 +99,7 @@ object PlaylistsHelper {
             return true
         }
 
-        val playlist = PlaylistId(playlistId, videoIds = videos.map { it.url!!.toID() })
+        val playlist = EditPlaylistBody(playlistId, videoIds = videos.map { it.url!!.toID() })
         return RetrofitInstance.authApi.addToPlaylist(token, playlist).message == "ok"
     }
 
@@ -111,8 +111,21 @@ object PlaylistsHelper {
             DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(playlist)
             true
         } else {
-            val playlist = PlaylistId(playlistId, newName = newName)
+            val playlist = EditPlaylistBody(playlistId, newName = newName)
             RetrofitInstance.authApi.renamePlaylist(token, playlist).message == "ok"
+        }
+    }
+
+    suspend fun changePlaylistDescription(playlistId: String, newDescription: String): Boolean {
+        return if (!loggedIn) {
+            val playlist = DatabaseHolder.Database.localPlaylistsDao().getAll()
+                .first { it.playlist.id.toString() == playlistId }.playlist
+            playlist.description = newDescription
+            DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(playlist)
+            true
+        } else {
+            val playlist = EditPlaylistBody(playlistId, description = newDescription)
+            RetrofitInstance.authApi.changePlaylistDescription(token, playlist).message == "ok"
         }
     }
 
@@ -132,7 +145,7 @@ object PlaylistsHelper {
         } else {
             RetrofitInstance.authApi.removeFromPlaylist(
                 PreferenceHelper.getToken(),
-                PlaylistId(playlistId = playlistId, index = index),
+                EditPlaylistBody(playlistId = playlistId, index = index),
             ).message == "ok"
         }
     }
@@ -216,7 +229,7 @@ object PlaylistsHelper {
             return playlistId
         }
 
-        return RetrofitInstance.authApi.clonePlaylist(token, PlaylistId(playlistId)).playlistId
+        return RetrofitInstance.authApi.clonePlaylist(token, EditPlaylistBody(playlistId)).playlistId
     }
 
     suspend fun deletePlaylist(playlistId: String, playlistType: PlaylistType): Boolean {
@@ -229,7 +242,7 @@ object PlaylistsHelper {
         return runCatching {
             RetrofitInstance.authApi.deletePlaylist(
                 PreferenceHelper.getToken(),
-                PlaylistId(playlistId),
+                EditPlaylistBody(playlistId),
             ).message == "ok"
         }.getOrDefault(false)
     }
