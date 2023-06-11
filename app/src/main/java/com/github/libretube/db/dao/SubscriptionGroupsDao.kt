@@ -14,7 +14,7 @@ interface SubscriptionGroupsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun createGroup(subscriptionGroup: SubscriptionGroup)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(subscriptionGroups: List<SubscriptionGroup>)
 
     @Query("DELETE FROM subscriptionGroups WHERE name = :name")
