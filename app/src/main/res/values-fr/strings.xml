@@ -446,4 +446,7 @@
     <string name="mark_as_unwatched">Marquer comme non-vu</string>
     <string name="choose_instance">Merci de choisir une instance pour continuer!</string>
     <string name="choose_instance_long">Merci de choisir une instance Piped ci dessous. Il agira comme passerelle entre YouTube et vous. Ces instances sont localisés dans différentes régions du monde, indiquées par leur drapeau. Les instances proches de chez vous sont probablement plus rapides que les autres. Vous pouvez changer l\'instance à tout moment dans les paramètres.</string>
+    <string name="playlist_description">Description de la playlist</string>
+    <string name="emptyPlaylistDescription">La description des playlists ne peut être vide</string>
+    <string name="change_playlist_description">Changer la description de la playlist</string>
 </resources>
