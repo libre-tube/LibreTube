@@ -17,16 +17,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.os.postDelayed
 import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.marginStart
 import androidx.core.view.updateLayoutParams
-import androidx.lifecycle.LifecycleOwner
 import androidx.media3.common.Player
 import androidx.media3.common.text.Cue
 import androidx.media3.common.util.RepeatModeUtil
 import androidx.media3.exoplayer.ExoPlayer
-import androidx.media3.exoplayer.trackselection.TrackSelector
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.CaptionStyleCompat
 import androidx.media3.ui.PlayerView
@@ -42,26 +39,23 @@ import com.github.libretube.extensions.round
 import com.github.libretube.helpers.AudioHelper
 import com.github.libretube.helpers.BrightnessHelper
 import com.github.libretube.helpers.PlayerHelper
-import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.base.BaseActivity
-import com.github.libretube.ui.extensions.toggleSystemBars
-import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.interfaces.PlayerOptions
 import com.github.libretube.ui.listeners.PlayerGestureController
-import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.util.PlayingQueue
 
 @SuppressLint("ClickableViewAccessibility")
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
-internal class CustomExoPlayerView(
+open class CustomExoPlayerView(
     context: Context,
     attributeSet: AttributeSet? = null,
 ) : PlayerView(context, attributeSet), PlayerOptions, PlayerGestureOptions {
-    val binding: ExoStyledPlayerControlViewBinding = ExoStyledPlayerControlViewBinding.bind(this)
+    @Suppress("LeakingThis")
+    val binding = ExoStyledPlayerControlViewBinding.bind(this)
 
     /**
      * Objects for player tap and swipe gesture
@@ -71,27 +65,20 @@ internal class CustomExoPlayerView(
     private lateinit var brightnessHelper: BrightnessHelper
     private lateinit var audioHelper: AudioHelper
     private var doubleTapOverlayBinding: DoubleTapOverlayBinding? = null
-    private var playerViewModel: PlayerViewModel? = null
 
     /**
      * Objects from the parent fragment
      */
-    private var playerOptionsInterface: OnlinePlayerOptions? = null
-    private var trackSelector: TrackSelector? = null
 
     private val runnableHandler = Handler(Looper.getMainLooper())
-
     var isPlayerLocked: Boolean = false
 
     /**
      * Preferences
      */
-    var autoplayEnabled = PlayerHelper.autoPlayEnabled
-
     private var resizeModePref = PlayerHelper.resizeModePref
 
-    private val activity
-        get() = context as BaseActivity
+    val activity get() = context as BaseActivity
 
     private val supportFragmentManager
         get() = activity.supportFragmentManager
@@ -101,18 +88,11 @@ internal class CustomExoPlayerView(
     }
 
     fun initialize(
-        playerViewInterface: OnlinePlayerOptions?,
         doubleTapOverlayBinding: DoubleTapOverlayBinding,
         playerGestureControlsViewBinding: PlayerGestureControlsViewBinding,
-        trackSelector: TrackSelector?,
-        playerViewModel: PlayerViewModel? = null,
-        viewLifecycleOwner: LifecycleOwner? = null,
     ) {
-        this.playerOptionsInterface = playerViewInterface
         this.doubleTapOverlayBinding = doubleTapOverlayBinding
-        this.trackSelector = trackSelector
         this.gestureViewBinding = playerGestureControlsViewBinding
-        this.playerViewModel = playerViewModel
         this.playerGestureController = PlayerGestureController(context as BaseActivity, this)
         this.brightnessHelper = BrightnessHelper(context as Activity)
         this.audioHelper = AudioHelper(context)
@@ -123,7 +103,7 @@ internal class CustomExoPlayerView(
 
         initRewindAndForward()
         applyCaptionsStyle()
-        initializeAdvancedOptions(context)
+        initializeAdvancedOptions()
 
         // don't let the player view hide its controls automatically
         controllerShowTimeoutMs = -1
@@ -146,12 +126,6 @@ internal class CustomExoPlayerView(
 
             // change locked status
             isPlayerLocked = !isPlayerLocked
-        }
-
-        binding.autoPlay.isChecked = autoplayEnabled
-
-        binding.autoPlay.setOnCheckedChangeListener { _, isChecked ->
-            autoplayEnabled = isChecked
         }
 
         resizeMode = when (resizeModePref) {
@@ -183,11 +157,7 @@ internal class CustomExoPlayerView(
 
                     // keep screen on if the video is playing
                     keepScreenOn = player.isPlaying == true
-
-                    if (player.playbackState == Player.STATE_ENDED && !autoplayEnabled) {
-                        showController()
-                        cancelHideControllerTask()
-                    }
+                    onPlayerEvent(player, events)
                 }
             }
         })
@@ -206,25 +176,9 @@ internal class CustomExoPlayerView(
                 enqueueHideControllerTask()
             }
         })
-
-        setControllerVisibilityListener(
-            ControllerVisibilityListener { visibility ->
-                playerViewModel?.isFullscreen?.value?.let { isFullscreen ->
-                    if (!isFullscreen) return@let
-                    // Show status bar only not navigation bar if the player controls are visible and hide it otherwise
-                    activity.toggleSystemBars(
-                        types = WindowInsetsCompat.Type.statusBars(),
-                        showBars = visibility == View.VISIBLE,
-                    )
-                }
-            },
-        )
-
-        playerViewModel?.isFullscreen?.observe(viewLifecycleOwner!!) { isFullscreen ->
-            WindowHelper.toggleFullscreen(activity, isFullscreen)
-            updateTopBarMargin()
-        }
     }
+
+    open fun onPlayerEvent(player: Player, playerEvents: Player.Events) = Unit
 
     private fun updatePlayPauseButton() {
         binding.playPauseBTN.setImageResource(
@@ -250,16 +204,6 @@ internal class CustomExoPlayerView(
         // remove the callback to hide the controller
         cancelHideControllerTask()
         super.hideController()
-
-        // hide system bars if in fullscreen or offline player
-        if (playerViewModel != null) {
-            if (playerViewModel!!.isFullscreen.value == true) {
-                WindowHelper.toggleFullscreen(activity, true)
-            }
-            updateTopBarMargin()
-        } else {
-            activity.toggleSystemBars(WindowInsetsCompat.Type.systemBars(), false)
-        }
     }
 
     override fun showController() {
@@ -268,11 +212,6 @@ internal class CustomExoPlayerView(
         // automatically hide the controller after 2 seconds
         enqueueHideControllerTask()
         super.showController()
-
-        // show the system bars when in offline player
-        if (playerViewModel == null) {
-            activity.toggleSystemBars(WindowInsetsCompat.Type.statusBars(), true)
-        }
     }
 
     override fun onTouchEvent(event: MotionEvent) = false
@@ -300,96 +239,55 @@ internal class CustomExoPlayerView(
         }
     }
 
-    private fun initializeAdvancedOptions(context: Context) {
+    private fun initializeAdvancedOptions() {
         binding.toggleOptions.setOnClickListener {
-            val items = mutableListOf(
-                BottomSheetItem(
-                    context.getString(R.string.repeat_mode),
-                    R.drawable.ic_repeat,
-                    {
-                        if (player?.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE) {
-                            context.getString(R.string.repeat_mode_none)
-                        } else {
-                            context.getString(R.string.repeat_mode_current)
-                        }
-                    },
-                ) {
-                    onRepeatModeClicked()
-                },
-                BottomSheetItem(
-                    context.getString(R.string.player_resize_mode),
-                    R.drawable.ic_aspect_ratio,
-                    {
-                        when (resizeMode) {
-                            AspectRatioFrameLayout.RESIZE_MODE_FIT -> context.getString(
-                                R.string.resize_mode_fit,
-                            )
-                            AspectRatioFrameLayout.RESIZE_MODE_FILL -> context.getString(
-                                R.string.resize_mode_fill,
-                            )
-                            else -> context.getString(R.string.resize_mode_zoom)
-                        }
-                    },
-                ) {
-                    onResizeModeClicked()
-                },
-                BottomSheetItem(
-                    context.getString(R.string.playback_speed),
-                    R.drawable.ic_speed,
-                    {
-                        "${player?.playbackParameters?.speed?.round(2)}x"
-                    },
-                ) {
-                    onPlaybackSpeedClicked()
-                },
-            )
-
-            playerOptionsInterface?.let {
-                items.addAll(
-                    listOf(
-                        BottomSheetItem(
-                            context.getString(R.string.quality),
-                            R.drawable.ic_hd,
-                            { "${player?.videoSize?.height}p" },
-                        ) {
-                            it.onQualityClicked()
-                        },
-                        BottomSheetItem(
-                            context.getString(R.string.audio_track),
-                            R.drawable.ic_audio,
-                            {
-                                trackSelector?.parameters?.preferredAudioLanguages?.firstOrNull()
-                            },
-                        ) {
-                            it.onAudioStreamClicked()
-                        },
-                        BottomSheetItem(
-                            context.getString(R.string.captions),
-                            R.drawable.ic_caption,
-                            {
-                                if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
-                                    trackSelector!!.parameters.preferredTextLanguages[0]
-                                } else {
-                                    context.getString(R.string.none)
-                                }
-                            },
-                        ) {
-                            it.onCaptionsClicked()
-                        },
-                        BottomSheetItem(
-                            context.getString(R.string.stats_for_nerds),
-                            R.drawable.ic_info,
-                        ) {
-                            it.onStatsClicked()
-                        },
-                    ),
-                )
-            }
-
+            val items = getOptionsMenuItems()
             val bottomSheetFragment = BaseBottomSheet().setItems(items, null)
             bottomSheetFragment.show(supportFragmentManager, null)
         }
     }
+
+    open fun getOptionsMenuItems(): List<BottomSheetItem> = listOf(
+            BottomSheetItem(
+                context.getString(R.string.repeat_mode),
+                R.drawable.ic_repeat,
+                {
+                    if (player?.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE) {
+                        context.getString(R.string.repeat_mode_none)
+                    } else {
+                        context.getString(R.string.repeat_mode_current)
+                    }
+                },
+            ) {
+                onRepeatModeClicked()
+            },
+            BottomSheetItem(
+                context.getString(R.string.player_resize_mode),
+                R.drawable.ic_aspect_ratio,
+                {
+                    when (resizeMode) {
+                        AspectRatioFrameLayout.RESIZE_MODE_FIT -> context.getString(
+                            R.string.resize_mode_fit,
+                        )
+                        AspectRatioFrameLayout.RESIZE_MODE_FILL -> context.getString(
+                            R.string.resize_mode_fill,
+                        )
+                        else -> context.getString(R.string.resize_mode_zoom)
+                    }
+                },
+            ) {
+                onResizeModeClicked()
+            },
+            BottomSheetItem(
+                context.getString(R.string.playback_speed),
+                R.drawable.ic_speed,
+                {
+                    "${player?.playbackParameters?.speed?.round(2)}x"
+                },
+            ) {
+                onPlaybackSpeedClicked()
+            },
+        )
 
     // lock the player
     private fun lockPlayer(isLocked: Boolean) {
@@ -606,12 +504,14 @@ internal class CustomExoPlayerView(
             .show(supportFragmentManager)
     }
 
+    open fun isFullscreen() = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
 
         // add a larger bottom margin to the time bar in landscape mode
         val offset = when {
-            playerViewModel?.isFullscreen?.value ?: (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) -> 20.dpToPx()
+            isFullscreen() -> 20.dpToPx()
             else -> 10.dpToPx()
         }
 
@@ -656,15 +556,14 @@ internal class CustomExoPlayerView(
     /**
      * Add extra margin to the top bar to not overlap the status bar
      */
-    private fun updateTopBarMargin() {
-        val margin = when {
-            resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE -> 10
-            playerViewModel?.isFullscreen?.value == true -> 20
-            else -> 0
-        }
+    fun updateTopBarMargin() {
         binding.topBar.updateLayoutParams<MarginLayoutParams> {
-            topMargin = margin.dpToPx().toInt()
+            topMargin = getTopBarMarginDp().dpToPx().toInt()
         }
+    }
+
+    open fun getTopBarMarginDp(): Int {
+        return if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) 10 else 0
     }
 
     override fun onSingleTap() {
@@ -719,7 +618,6 @@ internal class CustomExoPlayerView(
 
         playerGestureController.isMoving = false
         (context as? AppCompatActivity)?.onBackPressedDispatcher?.onBackPressed()
-        playerViewModel?.isFullscreen?.value = false
     }
 
     override fun onSwipeEnd() {
