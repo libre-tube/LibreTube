@@ -455,4 +455,7 @@
     <string name="welcome">مرحبا بك في ليبري تيوب</string>
     <string name="choose_instance">الرجاء اختيار مثيل أولا!</string>
     <string name="choose_instance_long">الرجاء اختيار مثيل Piped لاستخدامه من أدناه. سيعمل مثيل Piped كوسيط بينك وبين YouTube. توجد هذه الأمثلة في مواقع مادية مختلفة - يشار إليها بعلم (أعلام) الدولة الخاصة بهم. من المحتمل أن تكون المثيلات الأقرب إليك فعليًا أسرع من المثيلات التي ليست كذلك. يمكنك تغيير المثيل الذي تستخدمه في الإعدادات في أي وقت.</string>
+    <string name="emptyPlaylistDescription">لا يمكن أن يكون وصف قائمة التشغيل فارغا</string>
+    <string name="playlist_description">وصف قائمة التشغيل</string>
+    <string name="change_playlist_description">تغيير وصف قائمة التشغيل</string>
 </resources>
