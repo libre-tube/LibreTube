@@ -1054,6 +1054,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private fun showAutoPlayCountdown() {
+        if (!PlayingQueue.hasNext()) return
+
         binding.player.useController = false
         binding.player.hideController()
         binding.autoplayCountdown.setHideSelfListener {
