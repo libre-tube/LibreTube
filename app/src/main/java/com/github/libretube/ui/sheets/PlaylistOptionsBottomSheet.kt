@@ -12,6 +12,7 @@ import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.dialogs.DeletePlaylistDialog
+import com.github.libretube.ui.dialogs.PlaylistDescriptionDialog
 import com.github.libretube.ui.dialogs.RenamePlaylistDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +24,7 @@ class PlaylistOptionsBottomSheet(
     private val playlistName: String,
     private val playlistType: PlaylistType,
     private val onRename: (newName: String) -> Unit = {},
+    private val onChangeDescription: (newDescription: String) -> Unit = {},
     private val onDelete: () -> Unit = {},
 ) : BaseBottomSheet() {
     private val shareData = ShareData(currentPlaylist = playlistName)
@@ -45,8 +47,9 @@ class PlaylistOptionsBottomSheet(
                 getString(if (isBookmarked) R.string.remove_bookmark else R.string.add_to_bookmarks),
             )
         } else {
-            optionsList.add(context?.getString(R.string.renamePlaylist)!!)
-            optionsList.add(context?.getString(R.string.deletePlaylist)!!)
+            optionsList.add(getString(R.string.renamePlaylist))
+            optionsList.add(getString(R.string.change_playlist_description))
+            optionsList.add(getString(R.string.deletePlaylist))
         }
 
         setSimpleItems(optionsList) { which ->
@@ -90,6 +93,10 @@ class PlaylistOptionsBottomSheet(
                 }
                 getString(R.string.renamePlaylist) -> {
                     RenamePlaylistDialog(playlistId, playlistName, onRename)
+                        .show(parentFragmentManager, null)
+                }
+                getString(R.string.change_playlist_description) -> {
+                    PlaylistDescriptionDialog(playlistId, "", onChangeDescription)
                         .show(parentFragmentManager, null)
                 }
                 else -> {

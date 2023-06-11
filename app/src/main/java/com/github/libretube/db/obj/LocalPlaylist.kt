@@ -11,4 +11,5 @@ data class LocalPlaylist(
     val id: Int = 0,
     var name: String = "",
     var thumbnailUrl: String = "",
+    var description: String? = ""
 )

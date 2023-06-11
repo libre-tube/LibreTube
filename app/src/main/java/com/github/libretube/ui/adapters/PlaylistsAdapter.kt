@@ -65,6 +65,10 @@ class PlaylistsAdapter(
                         playlistTitle.text = it
                         playlist.name = it
                     },
+                    onChangeDescription = {
+                        playlistDescription.text = it
+                        playlist.shortDescription = it
+                    }
                 )
                 playlistOptionsDialog.show(
                     (root.context as BaseActivity).supportFragmentManager,

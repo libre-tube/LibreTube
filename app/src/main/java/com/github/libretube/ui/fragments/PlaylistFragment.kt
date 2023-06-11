@@ -173,6 +173,9 @@ class PlaylistFragment : Fragment() {
                             binding.playlistName.text = it
                             playlistName = it
                         },
+                        onChangeDescription = {
+                            binding.playlistDescription.text = it
+                        }
                     ).show(
                         childFragmentManager,
                         PlaylistOptionsBottomSheet::class.java.name,

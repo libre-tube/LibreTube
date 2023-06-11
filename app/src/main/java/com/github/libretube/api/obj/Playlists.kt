@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 data class Playlists(
     val id: String? = null,
     var name: String? = null,
-    val shortDescription: String? = null,
+    var shortDescription: String? = null,
     val thumbnail: String? = null,
     val videos: Long = 0,
 )
