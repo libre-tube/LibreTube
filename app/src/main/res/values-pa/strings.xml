@@ -443,4 +443,7 @@
     <string name="alphabetic_reversed">ਵਰਣਮਾਲਾ (ਉਲਟੇ ਕ੍ਰਮ)</string>
     <string name="import_subscriptions_from">ਤੋਂ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਆਯਾਤ ਕਰੋ</string>
     <string name="export_subscriptions_to">ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਨਿਰਯਾਤ ਕਰੋ</string>
+    <string name="emptyPlaylistDescription">ਪਲੇਅ-ਲਿਸਟ ਵੇਰਵਾ ਖਾਲੀ ਨਹੀਂ ਹੋ ਸਕਦਾ</string>
+    <string name="change_playlist_description">ਪਲੇਅ-ਲਿਸਟ ਵੇਰਵਾ ਬਦਲੋ</string>
+    <string name="playlist_description">ਪਲੇਅ-ਲਿਸਟ ਵੇਰਵਾ</string>
 </resources>
