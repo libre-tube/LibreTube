@@ -625,8 +625,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         try {
             saveWatchPosition()
 
-            PlayingQueue.clear()
-
             nowPlayingNotification.destroySelfAndPlayer()
 
             activity?.requestedOrientation =

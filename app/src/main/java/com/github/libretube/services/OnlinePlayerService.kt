@@ -369,8 +369,7 @@ class OnlinePlayerService : LifecycleService() {
      * destroy the [OnlinePlayerService] foreground service
      */
     override fun onDestroy() {
-        // clear and reset the playing queue
-        PlayingQueue.clear()
+        // reset the playing queue
         PlayingQueue.resetToDefaults()
 
         if (this::nowPlayingNotification.isInitialized) nowPlayingNotification.destroySelfAndPlayer()
