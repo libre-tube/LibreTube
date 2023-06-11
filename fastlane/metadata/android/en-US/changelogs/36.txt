@@ -1,0 +1,9 @@
+* Welcome Activity to choose instance on first app startup
+* Significantly increase download speed using range requests
+* Support for editing the playlist description
+* Much faster audio only/background player with less buffering (using DASH)
+* Show currently applied playlist sort order
+* Preference to edit the home tab content
+* Show 'mark as unwatched' in video options sheet if already watched
+* Improve offline player appearance and behavior
+* Improve autoplay switch (show pause icon if disabled)
