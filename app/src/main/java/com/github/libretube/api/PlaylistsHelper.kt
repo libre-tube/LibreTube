@@ -37,6 +37,7 @@ object PlaylistsHelper {
                     Playlists(
                         id = it.playlist.id.toString(),
                         name = it.playlist.name,
+                        shortDescription = it.playlist.description,
                         thumbnail = ProxyHelper.rewriteUrl(it.playlist.thumbnailUrl),
                         videos = it.videos.size.toLong(),
                     )
@@ -54,6 +55,7 @@ object PlaylistsHelper {
                     .first { it.playlist.id.toString() == playlistId }
                 return Playlist(
                     name = relation.playlist.name,
+                    description = relation.playlist.description,
                     thumbnailUrl = ProxyHelper.rewriteUrl(relation.playlist.thumbnailUrl),
                     videos = relation.videos.size,
                     relatedStreams = relation.videos.map { it.toStreamItem() },
