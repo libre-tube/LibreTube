@@ -95,7 +95,8 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
         if (lastUserSeenVideoId.isEmpty() || lastUserSeenVideoId == mostRecentStreamId) return true
 
         val channelsToIgnore = PreferenceHelper.getIgnorableNotificationChannels()
-        val enableShortsNotification = PreferenceHelper.getBoolean(PreferenceKeys.SHORTS_NOTIFICATIONS, false)
+        val enableShortsNotification =
+            PreferenceHelper.getBoolean(PreferenceKeys.SHORTS_NOTIFICATIONS, false)
 
         val channelGroups = videoFeed.asSequence()
             // filter the new videos until the last seen video in the feed
