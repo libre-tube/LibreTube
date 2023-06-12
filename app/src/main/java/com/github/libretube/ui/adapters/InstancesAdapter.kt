@@ -6,13 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.api.obj.Instances
 import com.github.libretube.databinding.InstanceRowBinding
+import com.github.libretube.ui.models.WelcomeModel
 import com.github.libretube.ui.viewholders.InstancesViewHolder
 
 class InstancesAdapter(
     private val instances: List<Instances>,
+    viewModel: WelcomeModel,
     private val onSelectInstance: (index: Int) -> Unit
 ): RecyclerView.Adapter<InstancesViewHolder>() {
-    private var selectedInstanceIndex: Int? = null
+    private var selectedInstanceIndex = viewModel.selectedInstanceIndex.value
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InstancesViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -34,7 +36,7 @@ class InstancesAdapter(
                 val oldIndex = selectedInstanceIndex
                 selectedInstanceIndex = holder.absoluteAdapterPosition
                 if (isChecked) onSelectInstance(position)
-                oldIndex?.let { notifyItemChanged(it) }
+                oldIndex?.let { notifyItemChanged(oldIndex) }
                 notifyItemChanged(position)
             }
         }
