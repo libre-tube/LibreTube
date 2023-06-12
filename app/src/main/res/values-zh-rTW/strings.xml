@@ -440,4 +440,7 @@
     <string name="welcome">歡迎使用 LibreTube</string>
     <string name="choose_instance">請先選擇站台！</string>
     <string name="choose_instance_long">請從下方選擇一個要使用的 Piped 站台。Piped 站台將會充當您與 YouTube 之間的中間人。這些站台位於不同的實際位置，由其國旗表示。離您較近的站台可能會比離您較遠的站台要快。您隨時都可以在設定中變更您使用的站台。</string>
+    <string name="playlist_description">播放清單描述</string>
+    <string name="change_playlist_description">變更播放清單描述</string>
+    <string name="emptyPlaylistDescription">播放清單描述不能為空</string>
 </resources>
