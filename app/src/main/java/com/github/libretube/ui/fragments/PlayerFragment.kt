@@ -642,7 +642,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     // save the watch position if video isn't finished and option enabled
     private fun saveWatchPosition() {
-        if (!this::exoPlayer.isInitialized || !PlayerHelper.watchPositionsVideo
+        if (!this::exoPlayer.isInitialized || !PlayerHelper.watchPositionsVideo || transitioning
             || exoPlayer.duration == C.TIME_UNSET || exoPlayer.currentPosition in listOf(
                 0L,
                 C.TIME_UNSET
