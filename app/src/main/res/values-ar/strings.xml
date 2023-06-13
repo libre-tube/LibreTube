@@ -458,4 +458,5 @@
     <string name="emptyPlaylistDescription">لا يمكن أن يكون وصف قائمة التشغيل فارغا</string>
     <string name="playlist_description">وصف قائمة التشغيل</string>
     <string name="change_playlist_description">تغيير وصف قائمة التشغيل</string>
+    <string name="show_search_suggestions">عرض اقتراحات البحث</string>
 </resources>
