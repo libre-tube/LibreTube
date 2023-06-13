@@ -440,4 +440,7 @@
     <string name="choose_instance">Silakan pilih sebuah server terlebih dahulu!</string>
     <string name="welcome">Selamat datang di LibreTube</string>
     <string name="choose_instance_long">Silakan pilih sebuah server Piped untuk digunakan dari daftar bawah. Server Piped akan menjadi perantara antara Anda dan YouTube. Server yang ada di bawah terletak di lokasi fisik yang berbeda, ditandai oleh bendera negaranya. Server yang terletak lebih dekat dengan Anda kemunginkan lebih cepat daripada yang server yang terletak jauh. Anda dapat mengubah server yang digunakan dalam pengaturan kapan saja.</string>
+    <string name="playlist_description">Deskripsi daftar putar</string>
+    <string name="emptyPlaylistDescription">Deskripsi daftar putar tidak bisa kosong</string>
+    <string name="change_playlist_description">Ubah deskripsi daftar putar</string>
 </resources>

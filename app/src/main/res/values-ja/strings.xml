@@ -436,4 +436,11 @@
     <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="unlimited_search_history">無制限の検索履歴</string>
     <string name="home_tab_content">ホームタブに表示するコンテンツ</string>
+    <string name="mark_as_unwatched">未視聴にする</string>
+    <string name="welcome">LibreTube へようこそ</string>
+    <string name="choose_instance">最初にインスタンスを選択！</string>
+    <string name="choose_instance_long">使用する Piped のインスタンスを以下から選択します。Piped のインスタンスは、あなたと YouTube との間の仲介役です。これらインスタンスは物理的に様々な場所にあり、国旗で示されています。物理的にあなたと近いインスタンスはそうでないより高速な可能性が高いです。インスタンスの選択はいつでも設定から変更できます。</string>
+    <string name="change_playlist_description">プレイリストの説明を変更</string>
+    <string name="playlist_description">プレイリストの説明</string>
+    <string name="emptyPlaylistDescription">プレイリストの説明は空にできません</string>
 </resources>

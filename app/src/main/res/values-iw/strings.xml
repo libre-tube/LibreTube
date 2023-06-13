@@ -449,4 +449,7 @@
     <string name="welcome">ברוך בואך ל־LibreTube</string>
     <string name="choose_instance">נא לבחור עותק תחילה!</string>
     <string name="choose_instance_long">נא לבחור עותק של Piped לשימוש מאלו שלהלן. עותק ה־Piped יכהן כתווך בינך לבין YouTube. העותקים האלו ממוקמים במקומות פיזיים שונים - בציון דגל המדינה/ות. עותקים שנמצאים קרוב אליך פיזית יהיו כנראה מהירים יותר מעותקים שאינם. אפשר לשנות את העותק הפעיל בהגדרות בכל עת.</string>
+    <string name="change_playlist_description">עריכת תיאור רשימת נגינה</string>
+    <string name="playlist_description">תיאור רשימת נגינה</string>
+    <string name="emptyPlaylistDescription">תיאור רשימת הנגינה לא יכול להיות ריק</string>
 </resources>

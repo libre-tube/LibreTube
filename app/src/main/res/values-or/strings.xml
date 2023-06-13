@@ -3,10 +3,10 @@
     <string name="unsubscribe">ସଦସ୍ୟତା ରଦ୍ଦ କରନ୍ତୁ</string>
     <string name="library">ପାଠାଗାର</string>
     <string name="yes">ହଁ</string>
-    <string name="videos">ଭିଡିଓ</string>
+    <string name="videos">ଭିଡିଓ ଗୁଡିକ</string>
     <string name="subscribe">ସଦସ୍ୟତା ଯୋଡ଼ନ୍ତୁ</string>
     <string name="share">ଅଂଶୀଦାର</string>
-    <string name="download">ଡାଉନଲୋଡ୍</string>
+    <string name="download">ଡାଉନଲୋଡ୍ କରନ୍ତୁ</string>
     <string name="save">ତାଲିକା ରେ ଯୋଡ଼ନ୍ତୁ</string>
     <string name="username">ବ୍ୟବହରକାରୀଙ୍କର ନାମ</string>
     <string name="password">ପାସ୍‍ୱର୍ଡ଼</string>
@@ -24,7 +24,7 @@
     <string name="region">ଜାଗା</string>
     <string name="login_register">ସଂଶ୍ଳିଷ୍ଟ/ପଞ୍ଜିକରଣ</string>
     <string name="registered">ପଞ୍ଜୀକୃତ । ଏବେ ଆପଣ ନୂଆ ଧାରାବାହିକ କୁ ଅନୁସରଣ କରିପାରିବେ ।</string>
-    <string name="importsuccess">ସଦସ୍ୟତା</string>
+    <string name="importsuccess">ସଦସ୍ୟତା ଅଛି</string>
     <string name="cannotDownload">ଏହି ଷ୍ଟ୍ରିମ୍ ଟି ଡାଉନଲୋଡ୍ କରିହେବ ନାହିଁ।</string>
     <string name="downloadfailed">ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା ।</string>
     <string name="import_from_yt_summary">ୟୁ ଟିଉବ କିମ୍ବା ନିଉପାଇପ ରୁ</string>
@@ -113,7 +113,7 @@
     <string name="category_preview_description">ଅତିରିକ୍ତ ସୂଚନା ବିନା ଭବିଷ୍ୟତର ବିଷୟବସ୍ତୁକୁ ବିସ୍ତୃତ ବିଭାଗଗୁଡିକ ପାଇଁ | ଯଦି ଏଥିରେ କ୍ଲିପ୍ ଅନ୍ତର୍ଭୂକ୍ତ ହୁଏ ଯାହା କେବଳ ଏଠାରେ ଦେଖାଯାଏ, ଏହା ସମ୍ଭବତଃ ଭୁଲ ବର୍ଗ ଅଟେ ।</string>
     <string name="sponsorblock_notifications">ବିଜ୍ଞପ୍ତି ଗୁଡ଼ିକ</string>
     <string name="update_available">ବର୍ଶନ %1$s ଉପଲବ୍ଧ</string>
-    <string name="downloads">ଡାଉନଲୋଡ୍</string>
+    <string name="downloads">ଡାଉନଲୋଡ୍ ଗୁଡିକ</string>
     <string name="player">ଚାଳକ</string>
     <string name="appearance_summary">ଆପକୁ ନିଜ ଇଚ୍ଛାରେ ଆଡଜଷ୍ଟ କରନ୍ତୁ ।</string>
     <string name="gradientIcon">ଗ୍ଲିବ୍ ଗ୍ରେଡିଏଣ୍ଟ୍</string>
@@ -285,7 +285,7 @@
     <string name="add_to_queue">ଧାଡିରେ ଯୋଡନ୍ତୁ</string>
     <string name="picture_in_picture">ଛବିରେ ଛବି</string>
     <string name="backup_restore">ନକଲ ଓ ସଂରକ୍ଷଣ</string>
-    <string name="subscriptions">ସଦସ୍ୟତା</string>
+    <string name="subscriptions">ସଦସ୍ୟତା ଗୁଡ଼ିକ</string>
     <string name="livestreams">ସିଧପ୍ରସାରଣ ଷ୍ଟ୍ରୀମ ଗୁଡ଼ିକ</string>
     <string name="alternative_videos_layout">ବିକଳ୍ପ ଭିଡିଓ ଲେଆଉଟ୍</string>
     <string name="defaultIconLight">ଡିଫଲ୍ଟ ଉଜ୍ଜଳ</string>
@@ -443,4 +443,7 @@
     <string name="choose_instance_long">ନିମ୍ନରୁ ବ୍ୟବହାର କରିବାକୁ ଦୟାକରି ଏକ ପାଇପ୍ ଉଦାହରଣ ବାଛନ୍ତୁ। ପାଇପ୍ ଇନଷ୍ଟାଣ୍ଟ ତୁମ ଏବଂ ୟୁଟ୍ୟୁବ୍ ମଧ୍ୟରେ ମଧ୍ୟସ୍ଥି ଭାବରେ କାର୍ଯ୍ୟ କରିବ । ଏହି ଉଦାହରଣଗୁଡିକ ବିଭିନ୍ନ ଭୌତିକ ସ୍ଥାନରେ ଅବସ୍ଥିତ - ସେମାନଙ୍କ ଦେଶ ପତାକା (ଗୁଡିକ) ଦ୍ୱାରା ସୂଚିତ। ଶାରୀରିକ ଭାବରେ ତୁମର ନିକଟତର ଥିବା ଘଟଣାଗୁଡ଼ିକ ସମ୍ଭବତଃ ତୀବ୍ର ଅଟେ । ଆପଣ ଯେକୌଣସି ସମୟରେ ସେଟିଙ୍ଗରେ ବ୍ୟବହାର କରୁଥିବା ଉଦାହରଣକୁ ପରିବର୍ତ୍ତନ କରିପାରିବେ ।</string>
     <string name="welcome">LibreTube କୁ ସ୍ୱାଗତ</string>
     <string name="choose_instance">ଦୟାକରି ପ୍ରଥମେ ଏକ ଉଦାହରଣ ବାଛନ୍ତୁ!</string>
+    <string name="emptyPlaylistDescription">ପ୍ଲେଲିଷ୍ଟ ବର୍ଣ୍ଣନା ଖାଲି ହୋଇପାରିବ ନାହିଁ</string>
+    <string name="change_playlist_description">ପ୍ଲେଲିଷ୍ଟ ବର୍ଣ୍ଣନା ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
+    <string name="playlist_description">ପ୍ଲେଲିଷ୍ଟ ବର୍ଣ୍ଣନା</string>
 </resources>

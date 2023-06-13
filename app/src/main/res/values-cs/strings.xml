@@ -446,4 +446,7 @@
     <string name="choose_instance">Nejprve prosím vyberte instanci!</string>
     <string name="choose_instance_long">Níže si vyberte instanci Piped, kterou chcete použít. Instance Piped bude fungovat jako prostředník mezi vámi a službou YouTube. Tyto instance se nacházejí na různých fyzických místech - jsou označeny vlajkou (vlajkami) své země. Instance, které jsou fyzicky blíže k vám, budou pravděpodobně rychlejší než instance, které jsou dále. Používanou instanci můžete kdykoli změnit v nastavení.</string>
     <string name="mark_as_unwatched">Označit jako nezhlédnuté</string>
+    <string name="playlist_description">Popis playlistu</string>
+    <string name="emptyPlaylistDescription">Popis playlistu nemůže být prázdný</string>
+    <string name="change_playlist_description">Změnit popis playlistu</string>
 </resources>
