@@ -449,4 +449,5 @@
     <string name="playlist_description">Popis playlistu</string>
     <string name="emptyPlaylistDescription">Popis playlistu nemůže být prázdný</string>
     <string name="change_playlist_description">Změnit popis playlistu</string>
+    <string name="show_search_suggestions">Zobrazit návrhy vyhledávání</string>
 </resources>
