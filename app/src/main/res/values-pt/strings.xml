@@ -288,7 +288,7 @@
     <string name="playlists_order">Ordem das listas de reprodução</string>
     <string name="playlistNameReversed">Nome da lista de reprodução (invertido)</string>
     <string name="category_preview_description">Para segmentos detalhando conteúdo futuro sem informações adicionais. Se incluir clipes que aparecem apenas aqui, é muito provável que esta seja a categoria errada.</string>
-    <string name="sb_markers">Marcadores</string>
+    <string name="sb_markers">Marcas</string>
     <string name="sb_markers_summary">Marcar segmentos na barra de tempo.</string>
     <string name="livestreams">Emissões em direto</string>
     <string name="alternative_videos_layout">Esquema alternativo de vídeos</string>
@@ -322,7 +322,7 @@
     <string name="trending">O que está nas tendências agora</string>
     <string name="queue_insert_related_videos">Inserir vídeos relacionados</string>
     <string name="bookmarks">Marcadores</string>
-    <string name="bookmark">Marcadores</string>
+    <string name="bookmark">Marcador</string>
     <string name="clear_bookmarks">Limpar marcadores</string>
     <string name="brightness">Brilho</string>
     <string name="volume">Volume</string>
@@ -342,7 +342,7 @@
     <string name="double_tap_seek_summary">Toque duas vezes à esquerda ou à direita para recuar ou avançar o vídeo.</string>
     <string name="import_playlists">Importar listas de reprodução</string>
     <string name="export_playlists">Exportar listas de reprodução</string>
-    <string name="app_backup">Backup</string>
+    <string name="app_backup">Backup de aplicações</string>
     <string name="backup_restore_summary">Importar e exportar subscrições, listas de reprodução…</string>
     <string name="exportsuccess">Exportado.</string>
     <string name="privacy_alert">Alerta de privacidade</string>
@@ -372,7 +372,7 @@
     <string name="audio_only_mode_summary">Transforme LibreTube num reprodutor de músicas.</string>
     <string name="concurrent_downloads">Número de descarregamentos simultâneos</string>
     <string name="unknown">Desconhecido</string>
-    <string name="resume">Continuar</string>
+    <string name="resume">Retomar</string>
     <string name="download_completed">Descarga terminada</string>
     <string name="concurrent_downloads_limit_reached">Atingiu o limite máximo de descargas em simultâneo.</string>
     <string name="help">Ajuda</string>
@@ -446,4 +446,8 @@
     <string name="welcome">Bem-vindo ao LibreTube</string>
     <string name="choose_instance">Escolha primeiro uma instância!</string>
     <string name="choose_instance_long">Escolha uma instância do Piped para utilizar a partir de baixo. A instância do Piped actuará como intermediário entre si e o YouTube. Essas instâncias estão localizadas em locais físicos diferentes, indicados pela(s) bandeira(s) do país. As instâncias fisicamente mais próximas de si são provavelmente mais rápidas do que as instâncias que não estão. Pode alterar a instância que utiliza nas definições em qualquer altura.</string>
+    <string name="show_search_suggestions">Mostrar sugestões de pesquisa</string>
+    <string name="change_playlist_description">Alterar descrição da lista de reprodução</string>
+    <string name="playlist_description">Descrição da lista de reprodução</string>
+    <string name="emptyPlaylistDescription">A descrição da lista de reprodução não pode estar vazia</string>
 </resources>
