@@ -446,4 +446,5 @@
     <string name="emptyPlaylistDescription">ପ୍ଲେଲିଷ୍ଟ ବର୍ଣ୍ଣନା ଖାଲି ହୋଇପାରିବ ନାହିଁ</string>
     <string name="change_playlist_description">ପ୍ଲେଲିଷ୍ଟ ବର୍ଣ୍ଣନା ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
     <string name="playlist_description">ପ୍ଲେଲିଷ୍ଟ ବର୍ଣ୍ଣନା</string>
+    <string name="show_search_suggestions">ସନ୍ଧାନ ପରାମର୍ଶଗୁଡିକ ଦେଖାନ୍ତୁ</string>
 </resources>
