@@ -40,6 +40,7 @@ object PreferenceKeys {
     const val PLAYLISTS_ORDER = "playlists_order"
     const val PLAYLIST_SORT_ORDER = "playlist_sort_order"
     const val HOME_TAB_CONTENT = "home_tab_content"
+    const val SEARCH_SUGGESTIONS = "search_suggestions"
 
     /**
      * Instance

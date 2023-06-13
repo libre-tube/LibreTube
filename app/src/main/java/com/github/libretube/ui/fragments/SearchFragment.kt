@@ -12,9 +12,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSearchBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.extensions.TAG
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.SearchHistoryAdapter
 import com.github.libretube.ui.adapters.SearchSuggestionsAdapter
@@ -60,12 +62,12 @@ class SearchFragment : Fragment() {
     }
 
     private fun showData(query: String?) {
-        // fetch the search or history
+        // fetch search suggestions if enabled or show the search history
         binding.historyEmpty.visibility = View.GONE
         binding.suggestionsRecycler.visibility = View.VISIBLE
         if (query.isNullOrEmpty()) {
             showHistory()
-        } else {
+        } else if (PreferenceHelper.getBoolean(PreferenceKeys.SEARCH_SUGGESTIONS, true)) {
             fetchSuggestions(query)
         }
     }
