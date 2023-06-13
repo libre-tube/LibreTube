@@ -452,4 +452,5 @@
     <string name="change_playlist_description">עריכת תיאור רשימת נגינה</string>
     <string name="playlist_description">תיאור רשימת נגינה</string>
     <string name="emptyPlaylistDescription">תיאור רשימת הנגינה לא יכול להיות ריק</string>
+    <string name="show_search_suggestions">הצגת הצעות חיפוש</string>
 </resources>
