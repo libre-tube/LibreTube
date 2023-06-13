@@ -449,4 +449,8 @@
     <string name="welcome">Ласкаво просимо до LibreTube</string>
     <string name="choose_instance">Спочатку виберіть сервер!</string>
     <string name="choose_instance_long">Виберіть сервер Piped для використання нижче. Сервер Piped буде посередником між вами та YouTube. Ці сервери розташовані в різних фізичних місцях, позначених прапорами відповідних країн. Фізично ближчі до вас сервери, швидше за все, працюють швидше, ніж віддалені. Ви можете будь-коли змінити використовуваний сервер у налаштуваннях.</string>
+    <string name="change_playlist_description">Змінити опис добірки</string>
+    <string name="emptyPlaylistDescription">Опис добірки обов\'язковий</string>
+    <string name="playlist_description">Опис добірки</string>
+    <string name="show_search_suggestions">Показати пропозиції пошуку</string>
 </resources>
