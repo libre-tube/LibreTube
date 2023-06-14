@@ -443,4 +443,5 @@
     <string name="playlist_description">Deskripsi daftar putar</string>
     <string name="emptyPlaylistDescription">Deskripsi daftar putar tidak bisa kosong</string>
     <string name="change_playlist_description">Ubah deskripsi daftar putar</string>
+    <string name="show_search_suggestions">Tampilkan saran pencarian</string>
 </resources>
