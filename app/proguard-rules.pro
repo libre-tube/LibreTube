@@ -106,3 +106,7 @@
 -dontwarn org.conscrypt.**
 -dontwarn org.bouncycastle.**
 -dontwarn org.openjsse.**
+
+# Fix for miniplayer placing issue in release build
+-keep class androidx.constraintlayout.motion.widget.** { *; }
+-keepclassmembers class androidx.constraintlayout.motion.widget.** { *; }
