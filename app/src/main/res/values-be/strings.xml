@@ -449,4 +449,8 @@
     <string name="welcome">Сардэчна запрашаем на LibreTube</string>
     <string name="choose_instance">Калі ласка, спачатку абярыце асобнік!</string>
     <string name="choose_instance_long">Калі ласка, абярыце асобнік Piped для выкарыстання знізу. Экземпляр Piped будзе дзейнічаць як пасярэднік паміж вамі і YouTube. Гэтыя экзэмпляры размешчаны ў розных фізічных месцах - пазначана сцягам(-амі) іх краіны. Экземпляры, якія фізічна бліжэй да вас, хутчэй за ўсё, хутчэй, чым асобнікі, якія не. Вы можаце змяніць асобнік, які вы выкарыстоўваеце, у наладах у любы час.</string>
+    <string name="change_playlist_description">Змяніць апісанне плэйліста</string>
+    <string name="playlist_description">Апісанне плэйліста</string>
+    <string name="emptyPlaylistDescription">Апісанне плэйліста не можа быць пустым</string>
+    <string name="show_search_suggestions">Паказаць прапановы пошуку</string>
 </resources>
