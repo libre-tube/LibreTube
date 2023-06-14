@@ -35,6 +35,7 @@ class DownloadOptionsBottomSheet(
                 0 -> {
                     val playerIntent = Intent(requireContext(), OfflinePlayerService::class.java)
                         .putExtra(IntentData.videoId, download.videoId)
+                    context?.stopService(playerIntent)
                     ContextCompat.startForegroundService(requireContext(), playerIntent)
                 }
                 1 -> {
