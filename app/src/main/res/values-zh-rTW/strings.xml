@@ -443,4 +443,5 @@
     <string name="playlist_description">播放清單描述</string>
     <string name="change_playlist_description">變更播放清單描述</string>
     <string name="emptyPlaylistDescription">播放清單描述不能為空</string>
+    <string name="show_search_suggestions">顯示搜尋建議</string>
 </resources>
