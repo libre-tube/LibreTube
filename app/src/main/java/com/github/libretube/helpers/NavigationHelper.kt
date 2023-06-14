@@ -2,7 +2,6 @@ package com.github.libretube.helpers
 
 import android.app.NotificationManager
 import android.content.Context
-import android.content.ContextWrapper
 import android.content.Intent
 import android.os.Handler
 import android.os.Looper
@@ -17,7 +16,6 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.toID
-import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.fragments.AudioPlayerFragment
 import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.views.SingleViewTouchableMotionLayout

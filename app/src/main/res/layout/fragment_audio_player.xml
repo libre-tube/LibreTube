@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.github.libretube.ui.views.SingleViewTouchableMotionLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.github.libretube.ui.views.SingleViewTouchableMotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/playerMotionLayout"
@@ -15,7 +14,7 @@
         android:background="?android:attr/colorBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/audio_player_main"
@@ -33,20 +32,22 @@
             android:padding="20dp">
 
             <ImageView
-                android:layout_gravity="center|start"
                 android:id="@+id/minimize_player"
-                android:src="@drawable/ic_arrow_down"
-                android:background="?selectableItemBackgroundBorderless"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|start"
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_arrow_down" />
 
             <ImageView
                 android:id="@+id/dropdown_menu"
-                android:src="@drawable/ic_three_dots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center|end"
                 android:background="?selectableItemBackgroundBorderless"
-                android:layout_width="20dp"
-                android:layout_height="20dp"/>
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:src="@drawable/ic_three_dots" />
 
         </FrameLayout>
 
@@ -65,7 +66,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small"
-                tools:src="@tools:sample/backgrounds/scenic"/>
+                tools:src="@tools:sample/backgrounds/scenic" />
 
             <LinearLayout
                 android:id="@+id/volumeControls"
@@ -81,7 +82,7 @@
                     android:id="@+id/volume_textView"
                     style="@style/SwipeControlString"
                     android:layout_gravity="center"
-                    app:autoSizeTextType="uniform"/>
+                    app:autoSizeTextType="uniform" />
 
                 <ProgressBar
                     android:id="@+id/volume_progressBar"
@@ -90,7 +91,7 @@
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_marginVertical="4dp"
-                    android:progressDrawable="@drawable/vertical_progressbar"/>
+                    android:progressDrawable="@drawable/vertical_progressbar" />
 
                 <ImageView
                     android:id="@+id/volume_imageView"
@@ -98,7 +99,7 @@
                     android:layout_height="24dp"
                     android:layout_gravity="center"
                     android:contentDescription="@string/volume"
-                    android:src="@drawable/ic_volume_up"/>
+                    android:src="@drawable/ic_volume_up" />
 
             </LinearLayout>
 
@@ -106,7 +107,7 @@
                 android:id="@+id/progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center" />
 
         </FrameLayout>
 
@@ -121,7 +122,7 @@
                 style="@style/TextViewMarquee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="24sp"/>
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/uploader"
@@ -129,7 +130,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -138,7 +139,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            app:labelBehavior="gone"/>
+            app:labelBehavior="gone" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -150,14 +151,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center"
-                tools:text="00:00"/>
+                tools:text="00:00" />
 
             <TextView
                 android:id="@+id/duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|center"
-                tools:text="10:15"/>
+                tools:text="10:15" />
 
         </FrameLayout>
 
@@ -175,7 +176,7 @@
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="20dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_prev"/>
+                android:src="@drawable/ic_prev" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/play_pause"
@@ -187,7 +188,7 @@
                 android:insetBottom="0dp"
                 app:icon="@drawable/ic_pause"
                 app:iconSize="24dp"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"/>
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
 
             <ImageView
                 android:id="@+id/next"
@@ -196,7 +197,7 @@
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="20dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_next"/>
+                android:src="@drawable/ic_next" />
 
         </LinearLayout>
 
@@ -217,29 +218,29 @@
                 <ImageView
                     android:id="@+id/open_queue"
                     style="@style/AudioPlayerButton"
-                    android:src="@drawable/ic_queue"/>
+                    android:src="@drawable/ic_queue" />
 
                 <ImageView
                     android:id="@+id/playback_options"
                     style="@style/AudioPlayerButton"
                     android:layout_width="27dp"
                     android:layout_height="27dp"
-                    android:src="@drawable/ic_speed"/>
+                    android:src="@drawable/ic_speed" />
 
                 <ImageView
                     android:id="@+id/open_video"
                     style="@style/AudioPlayerButton"
-                    android:src="@drawable/ic_video"/>
+                    android:src="@drawable/ic_video" />
 
                 <ImageView
                     android:id="@+id/share"
                     style="@style/AudioPlayerButton"
-                    android:src="@drawable/ic_share"/>
+                    android:src="@drawable/ic_share" />
 
                 <ImageView
                     android:id="@+id/close"
                     style="@style/AudioPlayerButton"
-                    android:src="@drawable/ic_close"/>
+                    android:src="@drawable/ic_close" />
 
             </LinearLayout>
 
@@ -263,7 +264,7 @@
             android:layout_width="96dp"
             android:layout_height="match_parent"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="8dp"/>
+            android:padding="8dp" />
 
         <TextView
             android:id="@+id/miniPlayerTitle"
@@ -274,7 +275,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:paddingHorizontal="8dp"
-            android:paddingVertical="15dp"/>
+            android:paddingVertical="15dp" />
 
         <ImageView
             android:id="@+id/miniPlayerPause"
@@ -283,7 +284,7 @@
             android:layout_gravity="center"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="8dp"
-            android:src="@drawable/ic_pause"/>
+            android:src="@drawable/ic_pause" />
 
         <ImageView
             android:id="@+id/miniPlayerClose"
@@ -292,7 +293,7 @@
             android:layout_gravity="center"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="8dp"
-            android:src="@drawable/ic_close"/>
+            android:src="@drawable/ic_close" />
 
     </LinearLayout>
 
