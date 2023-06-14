@@ -443,4 +443,5 @@
     <string name="change_playlist_description">プレイリストの説明を変更</string>
     <string name="playlist_description">プレイリストの説明</string>
     <string name="emptyPlaylistDescription">プレイリストの説明は空にできません</string>
+    <string name="show_search_suggestions">検索語句の候補を表示</string>
 </resources>
