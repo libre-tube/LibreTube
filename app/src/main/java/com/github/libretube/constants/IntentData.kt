@@ -15,4 +15,5 @@ object IntentData {
     const val openAudioPlayer = "openAudioPlayer"
     const val fragmentToOpen = "fragmentToOpen"
     const val comment = "comment"
+    const val minimizeByDefault = "minimizeByDefault"
 }

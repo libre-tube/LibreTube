@@ -81,7 +81,9 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
     override fun onTouchEvent(event: MotionEvent): Boolean {
         gestureDetector.onTouchEvent(event)
 
-        // gestureDetector.onTouchEvent(event)
+        // don't react when trying to minimize audio player with gestures
+        if (viewToDetectTouch.id == R.id.audio_player_container && progress != 1f) return true
+
         when (event.actionMasked) {
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 touchStarted = false
