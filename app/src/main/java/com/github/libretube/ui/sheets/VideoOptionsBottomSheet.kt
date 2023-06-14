@@ -1,6 +1,8 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.navigation.fragment.NavHostFragment
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
@@ -10,6 +12,7 @@ import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.helpers.BackgroundHelper
+import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.ShareData
@@ -66,6 +69,7 @@ class VideoOptionsBottomSheet(
                 // Start the background mode
                 getString(R.string.playOnBackground) -> {
                     BackgroundHelper.playOnBackground(requireContext(), videoId)
+                    NavigationHelper.startAudioPlayer(requireContext(), true)
                 }
                 // Add Video to Playlist Dialog
                 getString(R.string.addToPlaylist) -> {

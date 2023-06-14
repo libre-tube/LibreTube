@@ -284,12 +284,6 @@ class MainActivity : BaseActivity() {
         searchView.onActionViewCollapsed()
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        menu?.findItem(R.id.action_audio)?.isVisible =
-            BackgroundHelper.isBackgroundServiceRunning(this)
-        return super.onPrepareOptionsMenu(menu)
-    }
-
     private fun isSearchInProgress(): Boolean {
         if (!::navController.isInitialized) return false
         val id = navController.currentDestination?.id ?: return false
@@ -405,10 +399,6 @@ class MainActivity : BaseActivity() {
             R.id.action_help -> {
                 val helpIntent = Intent(this, HelpActivity::class.java)
                 startActivity(helpIntent)
-                true
-            }
-            R.id.action_audio -> {
-                NavigationHelper.startAudioPlayer(this)
                 true
             }
             else -> super.onOptionsItemSelected(item)

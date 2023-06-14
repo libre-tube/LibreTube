@@ -20,6 +20,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentAudioPlayerBinding
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.normalize
@@ -220,8 +221,13 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             }
         })
 
-        binding.playerMotionLayout.progress = 1.toFloat()
-        binding.playerMotionLayout.transitionToStart()
+        if (arguments?.getBoolean(IntentData.minimizeByDefault, false) != true) {
+            binding.playerMotionLayout.progress = 1f
+            binding.playerMotionLayout.transitionToStart()
+        } else {
+            binding.playerMotionLayout.progress = 0f
+            binding.playerMotionLayout.transitionToEnd()
+        }
     }
 
     /**
