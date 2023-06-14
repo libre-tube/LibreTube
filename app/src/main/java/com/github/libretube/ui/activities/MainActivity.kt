@@ -481,17 +481,15 @@ class MainActivity : BaseActivity() {
             (fragment as? PlayerFragment)?.binding?.apply {
                 mainContainer.isClickable = false
                 linLayout.visibility = View.VISIBLE
+                playerMotionLayout.setTransitionDuration(250)
+                playerMotionLayout.transitionToEnd()
+                playerMotionLayout.getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
+                playerMotionLayout.enableTransition(R.id.yt_transition, true)
             }
-        }
-        supportFragmentManager.fragments.forEach { fragment ->
-            (fragment as? PlayerFragment)?.binding?.playerMotionLayout?.apply {
-                // set the animation duration
-                setTransitionDuration(250)
-                transitionToEnd()
-                getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
-                enableTransition(R.id.yt_transition, true)
+            (fragment as? AudioPlayerFragment)?.binding?.apply {
+                audioPlayerContainer.isClickable = false
+                playerMotionLayout.transitionToEnd()
             }
-            (fragment as? AudioPlayerFragment)?.binding?.playerMotionLayout?.transitionToEnd()
         }
 
         val playerViewModel = ViewModelProvider(this)[PlayerViewModel::class.java]
