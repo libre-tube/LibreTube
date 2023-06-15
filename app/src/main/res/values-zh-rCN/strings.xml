@@ -152,7 +152,7 @@
     <string name="player_autoplay">自动播放</string>
     <string name="instance_frontend_url">实例前端的URL</string>
     <string name="quality">清晰度</string>
-    <string name="behavior">布局</string>
+    <string name="behavior">行为</string>
     <string name="player_summary">默认和行为</string>
     <string name="seek_increment">跳转时长</string>
     <string name="pauseOnScreenOff">自动暂停</string>
@@ -440,4 +440,8 @@
     <string name="welcome">欢迎使用 LibreTube</string>
     <string name="choose_instance_long">请在下方选择一个 Piped 实例来使用。Piped 实例将充当您与 YouTube 之间的中间人。这些实例位于不同的物理位置——由相应的国旗表示。离您的地理位置较近的实例相对其他实例可能更快。您可以在设置中随时修改使用的实例。</string>
     <string name="mark_as_unwatched">标记为尚未观看</string>
+    <string name="change_playlist_description">更改播放列表描述</string>
+    <string name="playlist_description">播放列表描述</string>
+    <string name="emptyPlaylistDescription">播放列表描述不能为空</string>
+    <string name="show_search_suggestions">显示搜索建议</string>
 </resources>
