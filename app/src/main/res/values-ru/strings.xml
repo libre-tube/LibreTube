@@ -51,7 +51,7 @@
     <string name="systemLanguage">Системный</string>
     <string name="systemDefault">Системная</string>
     <string name="lightTheme">Светлая</string>
-    <string name="darkTheme">Темная</string>
+    <string name="darkTheme">Тёмная</string>
     <string name="subscribers">%1$s подписчиков</string>
     <string name="startpage">Главная</string>
     <string name="import_from_yt_summary">Из YouTube или NewPipe</string>
@@ -188,7 +188,7 @@
     <string name="never">Никогда</string>
     <string name="autoRotatePlayer">Автоматический полноэкранный режим</string>
     <string name="pure_theme">Чистая тема</string>
-    <string name="pure_theme_summary">Чистая белая/черная тема</string>
+    <string name="pure_theme_summary">Чистая белая/чёрная тема</string>
     <string name="no_player_found">Внешний проигрыватель не найден. Убедитесь, что он у вас установлен.</string>
     <string name="data_saver_mode">Режим экономии трафика</string>
     <string name="search_history_summary">Запоминать историю поисков</string>
@@ -361,7 +361,7 @@
     <string name="rewind">Отмотать назад</string>
     <string name="forward">Отмотать вперед</string>
     <string name="alternative_pip_controls">Альтернативные элементы управления PiP</string>
-    <string name="alternative_pip_controls_summary">В окне PiP показывать кнопку только аудио и кнопки перехода, вместо перемотки вперед и назад.</string>
+    <string name="alternative_pip_controls_summary">Показывать только кнопки контроля звука и пропуска в окне PiP вместо кнопок перемотки</string>
     <string name="pause">Пауза</string>
     <string name="add_to_bookmarks">Добавить в закладки</string>
     <string name="remove_bookmark">Удалить закладку</string>
@@ -388,7 +388,7 @@
     <string name="category">Категория</string>
     <string name="normal_views">%1$s просмотров%2$s</string>
     <string name="trending_views">%1$s • %2$s просмотров • %3$s</string>
-    <string name="autoplay_countdown_summary">Показывать 5-секундный обратный отсчет перед автовоспроизведением следующего видео.</string>
+    <string name="autoplay_countdown_summary">Показывать 5-секундный обратный отсчёт перед автовоспроизведением следующего видео.</string>
     <string name="autoplay_countdown">Таймер автовоспроизведения</string>
     <string name="playing_next">Следующее воспроизведение за %1$s</string>
     <string name="stats_for_nerds">Статистика для любознательных</string>
@@ -449,4 +449,8 @@
     <string name="welcome">Добро пожаловать в LibreTube</string>
     <string name="choose_instance">Пожалуйста, для начала выберите инстанс!</string>
     <string name="choose_instance_long">Пожалуйста, выберите внизу инстанс Piped для использования. Инстанс Piped будет выступать в качестве посредника между вами и YouTube. Эти инстансы расположны в различных географических местах - обозначенных флагами их стран. Инстансы, физически находящиеся ближе к вам вероятнее всего будут быстрее инстансов, которые находятся дальше. Вы в любое время можете сменить используемый инстанс в настройках.</string>
+    <string name="change_playlist_description">Изменить описание плейлиста</string>
+    <string name="playlist_description">Описание плейлиста</string>
+    <string name="emptyPlaylistDescription">Описание плейлиста не может быть пустым</string>
+    <string name="show_search_suggestions">Показать поисковые подсказки</string>
 </resources>

@@ -449,4 +449,5 @@
     <string name="change_playlist_description">Modifica descrizione playlist</string>
     <string name="playlist_description">Descrizione playlist</string>
     <string name="emptyPlaylistDescription">La descrizione della playlist non può essere vuota</string>
+    <string name="show_search_suggestions">Mostra suggerimenti di ricerca</string>
 </resources>

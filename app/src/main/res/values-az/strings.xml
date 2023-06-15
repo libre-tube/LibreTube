@@ -446,4 +446,5 @@
     <string name="playlist_description">Oynatma siyahısı təsviri</string>
     <string name="emptyPlaylistDescription">Oynatma siyahısı təsviri boş ola bilməz</string>
     <string name="change_playlist_description">Oynatma siyahısı təsvirin dəyiş</string>
+    <string name="show_search_suggestions">Axtarış təkliflərin göstər</string>
 </resources>
