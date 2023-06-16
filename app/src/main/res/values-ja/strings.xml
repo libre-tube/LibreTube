@@ -72,7 +72,7 @@
     <string name="settings">設定</string>
     <string name="noInternet">インターネットに接続してください。</string>
     <string name="music_videos">YT Musicの動画</string>
-    <string name="location">位置</string>
+    <string name="location">場所</string>
     <string name="retry">再試行</string>
     <string name="comments">コメント</string>
     <string name="all">すべて</string>
@@ -270,7 +270,7 @@
     <string name="playback_pitch">ピッチ</string>
     <string name="error_occurred">エラー</string>
     <string name="copied">コピーしました</string>
-    <string name="change_region">急上昇は現在の地域では利用できないようです。設定で他の地域を選択してください。</string>
+    <string name="change_region">急上昇は現在の地域で利用できません。設定で他の地域を選択してください。</string>
     <string name="share_with_time">時間指定で共有</string>
     <string name="legacy_subscriptions">古い登録チャンネル表示</string>
     <string name="device_info">端末情報</string>
