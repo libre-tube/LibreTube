@@ -27,7 +27,7 @@
 
     <PreferenceCategory app:title="@string/category_segments">
 
-        <DropDownPreference
+        <com.github.libretube.ui.views.SpinnerPreference
             app:key="sponsor_category_key"
             app:summary="@string/category_sponsor_description"
             app:title="@string/category_sponsor"
