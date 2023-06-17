@@ -422,4 +422,11 @@
         <item>playlists</item>
     </string-array>
 
+    <string-array name="category_sponsor_skip_choices">
+        <item>Off</item>
+        <item>Manual</item>
+        <item>Automatic</item>
+    </string-array>
+
+
 </resources>

@@ -23,11 +23,9 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.LoadControl
 import androidx.media3.ui.CaptionStyleCompat
 import com.github.libretube.R
-import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.enums.AudioQuality
 import com.github.libretube.enums.PlayerEvent
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
@@ -35,6 +33,7 @@ import kotlin.math.roundToInt
 object PlayerHelper {
     private const val ACTION_MEDIA_CONTROL = "media_control"
     const val CONTROL_TYPE = "control_type"
+    private val SPONSOR_CATEGORIES: Array<String> = arrayOf("intro", "selfpromo", "interaction", "sponsor", "outro", "filler",  "music_offtopic", "preview")
 
     /**
      * Create a base64 encoded DASH stream manifest
@@ -69,65 +68,18 @@ object PlayerHelper {
     /**
      * get the categories for sponsorBlock
      */
-    fun getSponsorBlockCategories(): ArrayList<String> {
-        val categories: ArrayList<String> = arrayListOf()
-        if (PreferenceHelper.getBoolean(
-                "intro_category_key",
-                false,
-            )
-        ) {
-            categories.add("intro")
-        }
-        if (PreferenceHelper.getBoolean(
-                "selfpromo_category_key",
-                false,
-            )
-        ) {
-            categories.add("selfpromo")
-        }
-        if (PreferenceHelper.getBoolean(
-                "interaction_category_key",
-                false,
-            )
-        ) {
-            categories.add("interaction")
-        }
-        if (PreferenceHelper.getBoolean(
-                "sponsors_category_key",
-                true,
-            )
-        ) {
-            categories.add("sponsor")
-        }
-        if (PreferenceHelper.getBoolean(
-                "outro_category_key",
-                false,
-            )
-        ) {
-            categories.add("outro")
-        }
-        if (PreferenceHelper.getBoolean(
-                "filler_category_key",
-                false,
-            )
-        ) {
-            categories.add("filler")
-        }
-        if (PreferenceHelper.getBoolean(
-                "music_offtopic_category_key",
-                false,
-            )
-        ) {
-            categories.add("music_offtopic")
-        }
-        if (PreferenceHelper.getBoolean(
-                "preview_category_key",
-                false,
-            )
-        ) {
-            categories.add("preview")
+    //TODO: This should probably be done with Enums to avoid magic string anti pattern
+    fun getSponsorBlockCategories(): MutableMap<String, String> {
+        val categories: MutableMap<String, String> = mutableMapOf()
+
+        for (cat in SPONSOR_CATEGORIES){
+            val state = PreferenceHelper.getString(cat + "_category_key", "Off")
+            if (state != "Off"){
+                categories[cat] = state
+            }
         }
         return categories
+
     }
 
     fun getOrientation(videoWidth: Int, videoHeight: Int): Int {
@@ -238,12 +190,6 @@ object PlayerHelper {
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.PICTURE_IN_PICTURE,
             true,
-        )
-
-    val skipSegmentsManually: Boolean
-        get() = PreferenceHelper.getBoolean(
-            PreferenceKeys.SB_SKIP_MANUALLY,
-            false,
         )
 
     val autoPlayEnabled: Boolean
@@ -476,7 +422,7 @@ object PlayerHelper {
     fun ExoPlayer.checkForSegments(
         context: Context,
         segments: List<Segment>,
-        skipManually: Boolean = false,
+        category_config: MutableMap<String, String>,
     ): Long? {
         for (segment in segments) {
             val segmentStart = (segment.segment[0] * 1000f).toLong()
@@ -486,7 +432,7 @@ object PlayerHelper {
             if ((duration - currentPosition).absoluteValue < 500) continue
 
             if (currentPosition in segmentStart until segmentEnd) {
-                if (!skipManually) {
+                if (category_config.get(segment.category) == "Automatic") {
                     if (sponsorBlockNotifications) {
                         runCatching {
                             Toast.makeText(context, R.string.segment_skipped, Toast.LENGTH_SHORT)

@@ -76,6 +76,7 @@ class OnlinePlayerService : LifecycleService() {
      * SponsorBlock Segment data
      */
     private var segments: List<Segment> = listOf()
+    private var catConfig: MutableMap<String, String> = PlayerHelper.getSponsorBlockCategories()
 
     /**
      * [Notification] for the player
@@ -321,11 +322,10 @@ class OnlinePlayerService : LifecycleService() {
     private fun fetchSponsorBlockSegments() {
         lifecycleScope.launch(Dispatchers.IO) {
             runCatching {
-                val categories = PlayerHelper.getSponsorBlockCategories()
-                if (categories.isEmpty()) return@runCatching
+                if (catConfig.isEmpty()) return@runCatching
                 segments = RetrofitInstance.api.getSegments(
                     videoId,
-                    JsonHelper.json.encodeToString(categories),
+                    JsonHelper.json.encodeToString(catConfig.keys),
                 ).segments
                 checkForSegments()
             }
@@ -338,7 +338,7 @@ class OnlinePlayerService : LifecycleService() {
     private fun checkForSegments() {
         handler.postDelayed(this::checkForSegments, 100)
 
-        player?.checkForSegments(this, segments)
+        player?.checkForSegments(this, segments, catConfig)
     }
 
     private fun updateQueue() {
