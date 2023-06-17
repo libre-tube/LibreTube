@@ -34,7 +34,15 @@ import kotlin.math.roundToInt
 object PlayerHelper {
     private const val ACTION_MEDIA_CONTROL = "media_control"
     const val CONTROL_TYPE = "control_type"
-    private val SPONSOR_CATEGORIES: Array<String> = arrayOf("intro", "selfpromo", "interaction", "sponsor", "outro", "filler",  "music_offtopic", "preview")
+    private val SPONSOR_CATEGORIES: Array<String> =
+        arrayOf("intro",
+                "selfpromo",
+                "interaction",
+                "sponsor",
+                "outro",
+                "filler",
+                "music_offtopic",
+                "preview")
 
     /**
      * Create a base64 encoded DASH stream manifest
