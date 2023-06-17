@@ -443,4 +443,11 @@
     <string name="import_format_newpipe">NewPipe</string>
     <string name="home_tab_content">Conteúdo da aba inicial</string>
     <string name="mark_as_unwatched">Marcar como não visto</string>
+    <string name="choose_instance_long">Escolha uma instância do Piped para usar abaixo. A instância do Piped atuará como intermediária entre você e o YouTube. Essas instâncias estão localizadas em locais físicos diferentes - indicados pela(s) bandeira(s) de seu país. Instâncias fisicamente mais próximas de você provavelmente são mais rápidas do que instâncias que não estão. Você pode alterar a instância que usa nas configurações a qualquer momento.</string>
+    <string name="choose_instance">Escolha uma instância primeiro!</string>
+    <string name="welcome">Bem-vindo ao LibreTube</string>
+    <string name="change_playlist_description">Alterar descrição da playlist</string>
+    <string name="playlist_description">Descrição da playlist</string>
+    <string name="emptyPlaylistDescription">A descrição da playlist não pode estar vazia</string>
+    <string name="show_search_suggestions">Mostrar sugestões de pesquisa</string>
 </resources>
