@@ -181,8 +181,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      * SponsorBlock
      */
     private var segments = listOf<Segment>()
-    private var catConfig = PlayerHelper.getSponsorBlockCategories()
     private var sponsorBlockEnabled = PlayerHelper.sponsorBlockEnabled
+    private var sponsorBlockConfig = PlayerHelper.getSponsorBlockCategories()
 
     private val handler = Handler(Looper.getMainLooper())
     private val mainActivity get() = activity as MainActivity
@@ -664,7 +664,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         if (segments.isEmpty()) return
 
-        exoPlayer.checkForSegments(requireContext(), segments, catConfig)
+        exoPlayer.checkForSegments(requireContext(), segments, sponsorBlockConfig)
             ?.let { segmentEnd ->
                 binding.sbSkipBtn.visibility = View.VISIBLE
                 binding.sbSkipBtn.setOnClickListener {
@@ -774,11 +774,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private fun fetchSponsorBlockSegments() {
         lifecycleScope.launch(Dispatchers.IO) {
             runCatching {
-                if (catConfig.isEmpty()) return@runCatching
+                if (sponsorBlockConfig.isEmpty()) return@runCatching
                 segments =
                     RetrofitInstance.api.getSegments(
                         videoId!!,
-                        JsonHelper.json.encodeToString(catConfig.keys),
+                        JsonHelper.json.encodeToString(sponsorBlockConfig.keys),
                     ).segments
                 if (segments.isEmpty()) return@runCatching
 

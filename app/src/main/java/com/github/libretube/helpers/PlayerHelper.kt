@@ -27,6 +27,7 @@ import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.PlayerEvent
+import com.github.libretube.enums.SbSkipOptions
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 
@@ -68,18 +69,16 @@ object PlayerHelper {
     /**
      * get the categories for sponsorBlock
      */
-    //TODO: This should probably be done with Enums to avoid magic string anti pattern
-    fun getSponsorBlockCategories(): MutableMap<String, String> {
-        val categories: MutableMap<String, String> = mutableMapOf()
+    fun getSponsorBlockCategories(): MutableMap<String, SbSkipOptions> {
+        val categories: MutableMap<String, SbSkipOptions> = mutableMapOf()
 
         for (cat in SPONSOR_CATEGORIES){
-            val state = PreferenceHelper.getString(cat + "_category_key", "Off")
-            if (state != "Off"){
-                categories[cat] = state
+            val state = PreferenceHelper.getString(cat + "_category_key", "off").uppercase()
+            if (SbSkipOptions.valueOf(state) != SbSkipOptions.OFF){
+                categories[cat] = SbSkipOptions.valueOf(state)
             }
         }
         return categories
-
     }
 
     fun getOrientation(videoWidth: Int, videoHeight: Int): Int {
@@ -422,7 +421,7 @@ object PlayerHelper {
     fun ExoPlayer.checkForSegments(
         context: Context,
         segments: List<Segment>,
-        category_config: MutableMap<String, String>,
+        sponsorBlockConfig: MutableMap<String, SbSkipOptions>,
     ): Long? {
         for (segment in segments) {
             val segmentStart = (segment.segment[0] * 1000f).toLong()
@@ -432,7 +431,7 @@ object PlayerHelper {
             if ((duration - currentPosition).absoluteValue < 500) continue
 
             if (currentPosition in segmentStart until segmentEnd) {
-                if (category_config.get(segment.category) == "Automatic") {
+                if (sponsorBlockConfig.get(segment.category) == SbSkipOptions.AUTOMATIC) {
                     if (sponsorBlockNotifications) {
                         runCatching {
                             Toast.makeText(context, R.string.segment_skipped, Toast.LENGTH_SHORT)

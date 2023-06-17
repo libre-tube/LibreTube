@@ -31,66 +31,66 @@
             app:key="sponsor_category_key"
             app:summary="@string/category_sponsor_description"
             app:title="@string/category_sponsor"
-            app:entries="@array/category_sponsor_skip_choices"
-            app:entryValues="@array/category_sponsor_skip_choices"
-            app:defaultValue="Automatic"/>
+            app:entries="@array/sb_skip_options"
+            app:entryValues="@array/sb_skip_options_values"
+            app:defaultValue="automatic"/>
 
 
         <DropDownPreference
             app:key="selfpromo_category_key"
             app:summary="@string/category_selfpromo_description"
             app:title="@string/category_selfpromo"
-            app:entries="@array/category_sponsor_skip_choices"
-            app:entryValues="@array/category_sponsor_skip_choices"
-            app:defaultValue="Manual"/>
+            app:entries="@array/sb_skip_options"
+            app:entryValues="@array/sb_skip_options_values"
+            app:defaultValue="manual"/>
 
         <DropDownPreference
             app:key="interaction_category_key"
             app:summary="@string/category_interaction_description"
             app:title="@string/category_interaction"
-            app:entries="@array/category_sponsor_skip_choices"
-            app:entryValues="@array/category_sponsor_skip_choices"
-            app:defaultValue="Off"/>
+            app:entries="@array/sb_skip_options"
+            app:entryValues="@array/sb_skip_options_values"
+            app:defaultValue="off"/>
 
         <DropDownPreference
             app:key="intro_category_key"
             app:summary="@string/category_intro_description"
             app:title="@string/category_intro"
-            app:entries="@array/category_sponsor_skip_choices"
-            app:entryValues="@array/category_sponsor_skip_choices"
-            app:defaultValue="Off"/>
+            app:entries="@array/sb_skip_options"
+            app:entryValues="@array/sb_skip_options_values"
+            app:defaultValue="off"/>
 
         <DropDownPreference
             app:key="outro_category_key"
             app:summary="@string/category_outro_description"
             app:title="@string/category_outro"
-            app:entries="@array/category_sponsor_skip_choices"
-            app:entryValues="@array/category_sponsor_skip_choices"
-            app:defaultValue="Off"/>
+            app:entries="@array/sb_skip_options"
+            app:entryValues="@array/sb_skip_options_values"
+            app:defaultValue="off"/>
 
         <DropDownPreference
             app:key="filler_category_key"
             app:summary="@string/category_filler_description"
             app:title="@string/category_filler"
-            app:entries="@array/category_sponsor_skip_choices"
-            app:entryValues="@array/category_sponsor_skip_choices"
-            app:defaultValue="Off"/>
+            app:entries="@array/sb_skip_options"
+            app:entryValues="@array/sb_skip_options_values"
+            app:defaultValue="off"/>
 
         <DropDownPreference
             app:key="music_offtopic_category_key"
             app:summary="@string/category_music_offtopic_description"
             app:title="@string/category_music_offtopic"
-            app:entries="@array/category_sponsor_skip_choices"
-            app:entryValues="@array/category_sponsor_skip_choices"
-            app:defaultValue="Off"/>
+            app:entries="@array/sb_skip_options"
+            app:entryValues="@array/sb_skip_options_values"
+            app:defaultValue="off"/>
 
         <DropDownPreference
             app:key="preview_category_key"
             app:summary="@string/category_preview_description"
             app:title="@string/category_preview"
-            app:entries="@array/category_sponsor_skip_choices"
-            app:entryValues="@array/category_sponsor_skip_choices"
-            app:defaultValue="Off"/>
+            app:entries="@array/sb_skip_options"
+            app:entryValues="@array/sb_skip_options_values"
+            app:defaultValue="off"/>
 
     </PreferenceCategory>
 
