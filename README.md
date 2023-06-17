@@ -137,6 +137,9 @@ If the NewPipeExtractor breaks, it only requires an update of Piped and not Libr
 While LibreTube only supports YouTube, NewPipe also allows the use of other platforms like SoundCloud, PeerTube, Bandcamp and media.ccc.de.<br>
 Both are great clients for watching YouTube videos. It depends on the individual's use case which one fits their needs better.
 
+### Important
+It is worth noting that you can always disable the Piped Proxy to load videos directly from YouTube if you encounter any problems, for example when the instances are down for some reason, this will make LibreTube work like NewPipe, it is RECOMMANDED TO USE A VPN if you want to do this, also note that this might not work with content from YT Music.
+
 <h2 align="left">
 <sub>
 <img  src="fastlane/metadata/android/en-US/images/readme/privacy.svg"
