@@ -6,7 +6,6 @@ import android.os.Binder
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
@@ -28,7 +27,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.WatchPosition
-import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.parcelableExtra
 import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PlayerHelper
@@ -36,6 +35,7 @@ import com.github.libretube.helpers.PlayerHelper.checkForSegments
 import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.PlayerNotificationData
+import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.CoroutineScope
@@ -117,27 +117,24 @@ class OnlinePlayerService : LifecycleService() {
      * Initializes the [player] with the [MediaItem].
      */
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        try {
-            // reset the playing queue listeners
-            PlayingQueue.resetToDefaults()
+        // reset the playing queue listeners
+        PlayingQueue.resetToDefaults()
 
+        intent?.parcelableExtra<PlayerData>(IntentData.playerData)?.let { playerData ->
             // get the intent arguments
-            videoId = intent?.getStringExtra(IntentData.videoId)!!
-            playlistId = intent.getStringExtra(IntentData.playlistId)
-            val position = intent.getLongExtra(IntentData.position, 0L)
-            val keepQueue = intent.getBooleanExtra(IntentData.keepQueue, false)
+            videoId = playerData.videoId
+            playlistId = playerData.playlistId
 
             // play the audio in the background
-            loadAudio(videoId, position, keepQueue)
+            loadAudio(playerData)
 
             PlayingQueue.setOnQueueTapListener { streamItem ->
                 streamItem.url?.toID()?.let { playNextVideo(it) }
             }
 
-            if (PlayerHelper.watchPositionsAudio) updateWatchPosition()
-        } catch (e: Exception) {
-            Log.e(TAG(), e.toString())
-            onDestroy()
+            if (PlayerHelper.watchPositionsAudio) {
+                updateWatchPosition()
+            }
         }
         return super.onStartCommand(intent, flags, startId)
     }
@@ -158,15 +155,10 @@ class OnlinePlayerService : LifecycleService() {
 
     /**
      * Gets the video data and prepares the [player].
-     * @param videoId The id of the video to play
-     * @param seekToPosition The position of the video to seek to
-     * @param keepQueue Whether to keep the queue or clear it instead
      */
-    private fun loadAudio(
-        videoId: String,
-        seekToPosition: Long = 0,
-        keepQueue: Boolean = false,
-    ) {
+    private fun loadAudio(playerData: PlayerData) {
+        val (videoId, _, _, keepQueue, timestamp) = playerData
+
         lifecycleScope.launch(Dispatchers.IO) {
             streams = runCatching {
                 RetrofitInstance.api.getStreams(videoId)
@@ -183,7 +175,7 @@ class OnlinePlayerService : LifecycleService() {
             }
 
             withContext(Dispatchers.Main) {
-                playAudio(seekToPosition)
+                playAudio(timestamp)
             }
         }
     }
@@ -292,7 +284,7 @@ class OnlinePlayerService : LifecycleService() {
         this.videoId = nextVideo
         this.streams = null
         this.segments = emptyList()
-        loadAudio(videoId, keepQueue = true)
+        loadAudio(PlayerData(videoId, keepQueue = true))
     }
 
     /**

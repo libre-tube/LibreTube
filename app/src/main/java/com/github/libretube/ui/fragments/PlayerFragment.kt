@@ -70,6 +70,7 @@ import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.hideKeyboard
+import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
@@ -86,6 +87,7 @@ import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.obj.ShareData
 import com.github.libretube.obj.VideoResolution
+import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.ChaptersAdapter
@@ -137,11 +139,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     /**
      * Video information passed by the intent
      */
-    private var videoId: String? = null
+    private lateinit var playerData: PlayerData
+    private lateinit var videoId: String
     private var playlistId: String? = null
     private var channelId: String? = null
     private var keepQueue: Boolean = false
-    private var timeStamp: Long? = null
+    private var timeStamp: Long = 0
 
     /**
      * Video information fetched at runtime
@@ -234,13 +237,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            videoId = it.getString(IntentData.videoId)!!.toID()
-            playlistId = it.getString(IntentData.playlistId)
-            channelId = it.getString(IntentData.channelId)
-            keepQueue = it.getBoolean(IntentData.keepQueue, false)
-            timeStamp = it.getLong(IntentData.timeStamp, 0L)
-        }
+        val playerData = requireArguments().parcelable<PlayerData>(IntentData.playerData)!!
+        videoId = playerData.videoId
+        playlistId = playerData.playlistId
+        channelId = playerData.channelId
+        keepQueue = playerData.keepQueue
+        timeStamp = playerData.timestamp
 
         // broadcast receiver for PiP actions
         context?.registerReceiver(
@@ -390,11 +392,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         binding.commentsToggle.setOnClickListener {
-            videoId ?: return@setOnClickListener
             // set the max height to not cover the currently playing video
             commentsViewModel.handleLink = this::handleLink
             commentsViewModel.maxHeight = binding.root.height - binding.player.height
-            commentsViewModel.videoId = videoId
+            commentsViewModel.videoId = playerData.videoId
             CommentsSheet().show(childFragmentManager)
         }
 
@@ -434,7 +435,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             if (!this::streams.isInitialized) return@setOnClickListener
             val shareDialog =
                 ShareDialog(
-                    videoId!!,
+                    videoId,
                     ShareObjectType.VIDEO,
                     ShareData(
                         currentVideo = streams.title,
@@ -487,7 +488,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         BackgroundHelper.stopBackgroundPlay(requireContext())
         BackgroundHelper.playOnBackground(
             requireContext(),
-            videoId!!,
+            videoId,
             exoPlayer.currentPosition,
             playlistId,
             channelId,
@@ -648,7 +649,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 C.TIME_UNSET
             )
         ) return
-        val watchPosition = WatchPosition(videoId!!, exoPlayer.currentPosition)
+        val watchPosition = WatchPosition(videoId, exoPlayer.currentPosition)
         CoroutineScope(Dispatchers.IO).launch {
             Database.watchPositionDao().insert(watchPosition)
         }
@@ -685,7 +686,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         lifecycleScope.launch(Dispatchers.IO) {
             streams = try {
-                RetrofitInstance.api.getStreams(videoId!!)
+                RetrofitInstance.api.getStreams(videoId)
             } catch (e: IOException) {
                 context?.toastFromMainDispatcher(R.string.unknown_error, Toast.LENGTH_LONG)
                 return@launch
@@ -700,18 +701,18 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             if (PlayingQueue.isEmpty()) {
                 lifecycleScope.launch(Dispatchers.IO) {
                     if (playlistId != null) {
-                        PlayingQueue.insertPlaylist(playlistId!!, streams.toStreamItem(videoId!!))
+                        PlayingQueue.insertPlaylist(playlistId!!, streams.toStreamItem(videoId))
                     } else if (channelId != null) {
-                        PlayingQueue.insertChannel(channelId!!, streams.toStreamItem(videoId!!))
+                        PlayingQueue.insertChannel(channelId!!, streams.toStreamItem(videoId))
                     } else {
-                        PlayingQueue.updateCurrent(streams.toStreamItem(videoId!!))
+                        PlayingQueue.updateCurrent(streams.toStreamItem(videoId))
                         if (PlayerHelper.autoInsertRelatedVideos) {
                             PlayingQueue.add(*streams.relatedStreams.toTypedArray())
                         }
                     }
                 }
             } else {
-                PlayingQueue.updateCurrent(streams.toStreamItem(videoId!!))
+                PlayingQueue.updateCurrent(streams.toStreamItem(videoId))
             }
 
             if (PreferenceHelper.getBoolean(PreferenceKeys.AUTO_FULLSCREEN_SHORTS, false)) {
@@ -761,7 +762,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
                 // add the video to the watch history
                 if (PlayerHelper.watchHistoryEnabled) {
-                    DatabaseHelper.addToWatchHistory(videoId!!, streams)
+                    DatabaseHelper.addToWatchHistory(videoId, streams)
                 }
             }
         }
@@ -777,7 +778,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 if (categories.isEmpty()) return@runCatching
                 segments =
                     RetrofitInstance.api.getSegments(
-                        videoId!!,
+                        videoId,
                         JsonHelper.json.encodeToString(categories),
                     ).segments
                 if (segments.isEmpty()) return@runCatching
@@ -816,7 +817,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // browse the watch positions
         val position = try {
             runBlocking {
-                Database.watchPositionDao().findById(videoId!!)?.position
+                Database.watchPositionDao().findById(videoId)?.position
             }
         } catch (e: Exception) {
             return
@@ -832,11 +833,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      */
     private fun trySeekToTimeStamp() {
         // support for time stamped links
-        timeStamp?.let {
-            if (it != 0L) exoPlayer.seekTo(it * 1000)
+        if (timeStamp != 0L) {
+            exoPlayer.seekTo(timeStamp * 1000)
         }
         // delete the time stamp because it already got consumed
-        timeStamp = null
+        timeStamp = 0
     }
 
     // used for autoplay and skipping to next video
@@ -1001,7 +1002,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             if (streams.duration <= 0) {
                 Toast.makeText(context, R.string.cannotDownload, Toast.LENGTH_SHORT).show()
             } else if (!DownloadService.IS_DOWNLOAD_RUNNING) {
-                val newFragment = DownloadDialog(videoId!!)
+                val newFragment = DownloadDialog(videoId)
                 newFragment.show(childFragmentManager, DownloadDialog::class.java.name)
             } else {
                 Toast.makeText(context, R.string.dlisinprogress, Toast.LENGTH_SHORT)
@@ -1034,7 +1035,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         )
 
         binding.relPlayerSave.setOnClickListener {
-            AddToPlaylistDialog(videoId!!).show(
+            AddToPlaylistDialog(videoId).show(
                 childFragmentManager,
                 AddToPlaylistDialog::class.java.name,
             )
@@ -1379,7 +1380,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             streams.uploader,
             streams.thumbnailUrl,
         )
-        nowPlayingNotification.updatePlayerNotification(videoId!!, playerNotificationData)
+        nowPlayingNotification.updatePlayerNotification(videoId, playerNotificationData)
     }
 
     /**
@@ -1458,7 +1459,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     override fun onStatsClicked() {
         if (!this::streams.isInitialized) return
-        StatsDialog(exoPlayer, videoId ?: return)
+        StatsDialog(exoPlayer, videoId)
             .show(childFragmentManager, null)
     }
 

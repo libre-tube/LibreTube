@@ -28,7 +28,6 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.extensions.toID
-import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.NetworkHelper
@@ -440,7 +439,7 @@ class MainActivity : BaseActivity() {
             NavigationHelper.navigateVideo(
                 context = this,
                 videoId = it,
-                timeStamp = intent?.getLongExtra(IntentData.timeStamp, 0L),
+                timestamp = intent.getLongExtra(IntentData.timeStamp, 0L),
             )
         }
 
