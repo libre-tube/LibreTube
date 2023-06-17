@@ -11,12 +11,8 @@ object DisplayHelper {
      * Returns false on and below SDK 24
      */
     fun supportsHdr(context: Context): Boolean {
-        val displayManager = context.getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
-        val display = displayManager.getDisplay(Display.DEFAULT_DISPLAY)
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            display.hdrCapabilities.supportedHdrTypes.isNotEmpty()
-        } else {
-            false
-        }
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N &&
+            context.getSystemService(DisplayManager::class.java).getDisplay(Display.DEFAULT_DISPLAY)
+                .hdrCapabilities.supportedHdrTypes.isNotEmpty()
     }
 }
