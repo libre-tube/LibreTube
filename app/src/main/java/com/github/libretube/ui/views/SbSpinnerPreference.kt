@@ -1,5 +1,4 @@
 package com.github.libretube.ui.views
-
 import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
@@ -12,7 +11,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import com.github.libretube.R
 
-class SpinnerPreference(context: Context, attrs: AttributeSet) : Preference(context, attrs) {
+class SbSpinnerPreference(context: Context, attrs: AttributeSet) : Preference(context, attrs) {
     private lateinit var spinner: Spinner
     private lateinit var adapter: ArrayAdapter<CharSequence>
     private var selectedItem: CharSequence? = null

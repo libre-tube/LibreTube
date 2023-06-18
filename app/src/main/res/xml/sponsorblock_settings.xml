@@ -27,69 +27,53 @@
 
     <PreferenceCategory app:title="@string/category_segments">
 
-        <com.github.libretube.ui.views.SpinnerPreference
+        <com.github.libretube.ui.views.SbSpinnerPreference
             app:key="sponsor_category_key"
             app:summary="@string/category_sponsor_description"
             app:title="@string/category_sponsor"
-            app:entries="@array/sb_skip_options"
-            app:entryValues="@array/sb_skip_options_values"
-            app:defaultValue="@string/automatic"/>
+            app:defaultValue="automatic"/>
 
 
-        <com.github.libretube.ui.views.SpinnerPreference
+        <com.github.libretube.ui.views.SbSpinnerPreference
             app:key="selfpromo_category_key"
             app:summary="@string/category_selfpromo_description"
             app:title="@string/category_selfpromo"
-            app:entries="@array/sb_skip_options"
-            app:entryValues="@array/sb_skip_options_values"
-            app:defaultValue="@string/manual"/>
+            app:defaultValue="@string/automatic"/>
 
-        <com.github.libretube.ui.views.SpinnerPreference
+        <com.github.libretube.ui.views.SbSpinnerPreference
             app:key="interaction_category_key"
             app:summary="@string/category_interaction_description"
             app:title="@string/category_interaction"
-            app:entries="@array/sb_skip_options"
-            app:entryValues="@array/sb_skip_options_values"
             app:defaultValue="@string/off"/>
 
-        <com.github.libretube.ui.views.SpinnerPreference
+        <com.github.libretube.ui.views.SbSpinnerPreference
             app:key="intro_category_key"
             app:summary="@string/category_intro_description"
             app:title="@string/category_intro"
-            app:entries="@array/sb_skip_options"
-            app:entryValues="@array/sb_skip_options_values"
             app:defaultValue="@string/off"/>
 
-        <com.github.libretube.ui.views.SpinnerPreference
+        <com.github.libretube.ui.views.SbSpinnerPreference
             app:key="outro_category_key"
             app:summary="@string/category_outro_description"
             app:title="@string/category_outro"
-            app:entries="@array/sb_skip_options"
-            app:entryValues="@array/sb_skip_options_values"
             app:defaultValue="@string/off"/>
 
-        <com.github.libretube.ui.views.SpinnerPreference
+        <com.github.libretube.ui.views.SbSpinnerPreference
             app:key="filler_category_key"
             app:summary="@string/category_filler_description"
             app:title="@string/category_filler"
-            app:entries="@array/sb_skip_options"
-            app:entryValues="@array/sb_skip_options_values"
             app:defaultValue="@string/off"/>
 
-        <com.github.libretube.ui.views.SpinnerPreference
+        <com.github.libretube.ui.views.SbSpinnerPreference
             app:key="music_offtopic_category_key"
             app:summary="@string/category_music_offtopic_description"
             app:title="@string/category_music_offtopic"
-            app:entries="@array/sb_skip_options"
-            app:entryValues="@array/sb_skip_options_values"
             app:defaultValue="@string/off"/>
 
-        <com.github.libretube.ui.views.SpinnerPreference
+        <com.github.libretube.ui.views.SbSpinnerPreference
             app:key="preview_category_key"
             app:summary="@string/category_preview_description"
             app:title="@string/category_preview"
-            app:entries="@array/sb_skip_options"
-            app:entryValues="@array/sb_skip_options_values"
             app:defaultValue="@string/off"/>
 
     </PreferenceCategory>
