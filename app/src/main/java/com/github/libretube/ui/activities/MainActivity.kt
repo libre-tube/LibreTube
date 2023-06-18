@@ -28,7 +28,6 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.extensions.toID
-import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.NetworkHelper
@@ -421,26 +420,26 @@ class MainActivity : BaseActivity() {
         intent?.getStringExtra(IntentData.channelId)?.let {
             navController.navigate(
                 R.id.channelFragment,
-                bundleOf(IntentData.channelId to it),
+                bundleOf(IntentData.channelId to it)
             )
         }
         intent?.getStringExtra(IntentData.channelName)?.let {
             navController.navigate(
                 R.id.channelFragment,
-                bundleOf(IntentData.channelName to it),
+                bundleOf(IntentData.channelName to it)
             )
         }
         intent?.getStringExtra(IntentData.playlistId)?.let {
             navController.navigate(
                 R.id.playlistFragment,
-                bundleOf(IntentData.playlistId to it),
+                bundleOf(IntentData.playlistId to it)
             )
         }
         intent?.getStringExtra(IntentData.videoId)?.let {
             NavigationHelper.navigateVideo(
                 context = this,
                 videoId = it,
-                timeStamp = intent?.getLongExtra(IntentData.timeStamp, 0L),
+                timestamp = intent.getLongExtra(IntentData.timeStamp, 0L)
             )
         }
 

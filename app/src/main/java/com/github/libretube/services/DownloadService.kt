@@ -33,6 +33,7 @@ import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.DownloadHelper.getNotificationId
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.obj.DownloadStatus
+import com.github.libretube.parcelable.DownloadData
 import com.github.libretube.receivers.NotificationReceiver
 import com.github.libretube.receivers.NotificationReceiver.Companion.ACTION_DOWNLOAD_PAUSE
 import com.github.libretube.receivers.NotificationReceiver.Companion.ACTION_DOWNLOAD_RESUME

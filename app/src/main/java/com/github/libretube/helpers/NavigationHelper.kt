@@ -16,6 +16,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.toID
+import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.fragments.AudioPlayerFragment
 import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.views.SingleViewTouchableMotionLayout
@@ -53,7 +54,7 @@ object NavigationHelper {
         playlistId: String? = null,
         channelId: String? = null,
         keepQueue: Boolean = false,
-        timeStamp: Long? = null,
+        timestamp: Long = 0,
         forceVideo: Boolean = false,
     ) {
         if (videoId == null) return
@@ -63,7 +64,7 @@ object NavigationHelper {
             BackgroundHelper.playOnBackground(
                 context,
                 videoId.toID(),
-                timeStamp,
+                timestamp,
                 playlistId,
                 channelId,
                 keepQueue,
@@ -74,13 +75,8 @@ object NavigationHelper {
             return
         }
 
-        val bundle = bundleOf(
-            IntentData.videoId to videoId.toID(),
-            IntentData.playlistId to playlistId,
-            IntentData.channelId to channelId,
-            IntentData.keepQueue to keepQueue,
-            IntentData.timeStamp to timeStamp,
-        )
+        val playerData = PlayerData(videoId.toID(), playlistId, channelId, keepQueue, timestamp)
+        val bundle = bundleOf(IntentData.playerData to playerData)
 
         val activity = ContextHelper.unwrapActivity(context)
         activity.supportFragmentManager.commitNow {

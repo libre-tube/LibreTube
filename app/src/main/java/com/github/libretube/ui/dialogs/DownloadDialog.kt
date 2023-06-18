@@ -22,7 +22,7 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.getWhileDigit
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.PreferenceHelper
-import com.github.libretube.services.DownloadData
+import com.github.libretube.parcelable.DownloadData
 import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
