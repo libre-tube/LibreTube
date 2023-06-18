@@ -777,7 +777,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 if (sponsorBlockConfig.isEmpty()) return@runCatching
                 segments =
                     RetrofitInstance.api.getSegments(
-                        videoId!!,
+                        videoId,
                         JsonHelper.json.encodeToString(sponsorBlockConfig.keys),
                     ).segments
                 if (segments.isEmpty()) return@runCatching
