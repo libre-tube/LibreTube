@@ -31,50 +31,50 @@
             app:key="sponsor_category_key"
             app:summary="@string/category_sponsor_description"
             app:title="@string/category_sponsor"
-            app:defaultValue="automatic"/>
+            app:defaultValue="Automatic"/>
 
 
         <com.github.libretube.ui.views.SbSpinnerPreference
             app:key="selfpromo_category_key"
             app:summary="@string/category_selfpromo_description"
             app:title="@string/category_selfpromo"
-            app:defaultValue="@string/automatic"/>
+            app:defaultValue="Manual"/>
 
         <com.github.libretube.ui.views.SbSpinnerPreference
             app:key="interaction_category_key"
             app:summary="@string/category_interaction_description"
             app:title="@string/category_interaction"
-            app:defaultValue="@string/off"/>
+            app:defaultValue="Off"/>
 
         <com.github.libretube.ui.views.SbSpinnerPreference
             app:key="intro_category_key"
             app:summary="@string/category_intro_description"
             app:title="@string/category_intro"
-            app:defaultValue="@string/off"/>
+            app:defaultValue="Off"/>
 
         <com.github.libretube.ui.views.SbSpinnerPreference
             app:key="outro_category_key"
             app:summary="@string/category_outro_description"
             app:title="@string/category_outro"
-            app:defaultValue="@string/off"/>
+            app:defaultValue="Off"/>
 
         <com.github.libretube.ui.views.SbSpinnerPreference
             app:key="filler_category_key"
             app:summary="@string/category_filler_description"
             app:title="@string/category_filler"
-            app:defaultValue="@string/off"/>
+            app:defaultValue="Off"/>
 
         <com.github.libretube.ui.views.SbSpinnerPreference
             app:key="music_offtopic_category_key"
             app:summary="@string/category_music_offtopic_description"
             app:title="@string/category_music_offtopic"
-            app:defaultValue="@string/off"/>
+            app:defaultValue="Off"/>
 
         <com.github.libretube.ui.views.SbSpinnerPreference
             app:key="preview_category_key"
             app:summary="@string/category_preview_description"
             app:title="@string/category_preview"
-            app:defaultValue="@string/off"/>
+            app:defaultValue="Off"/>
 
     </PreferenceCategory>
 
