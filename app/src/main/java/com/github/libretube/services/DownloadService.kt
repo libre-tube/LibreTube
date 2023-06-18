@@ -92,10 +92,10 @@ class DownloadService : LifecycleService() {
             ACTION_DOWNLOAD_PAUSE -> pause(intent.getIntExtra("id", -1))
         }
 
-        val (videoId, name, videoFormat, videoQuality, audioFormat, audioQuality, subtitleCode) =
-            intent?.parcelableExtra<DownloadData>(IntentData.downloadData)
-                ?: return START_NOT_STICKY
-        val fileName = name ?: videoId
+        val downloadData = intent?.parcelableExtra<DownloadData>(IntentData.downloadData)
+            ?: return START_NOT_STICKY
+        val (videoId, name) = downloadData
+        val fileName = name.ifEmpty { videoId }
 
         lifecycleScope.launch(coroutineContext) {
             try {
@@ -120,15 +120,7 @@ class DownloadService : LifecycleService() {
                     thumbnailTargetPath
                 )
 
-                val downloadItems = streams.toDownloadItems(
-                    videoId,
-                    fileName,
-                    videoFormat,
-                    videoQuality,
-                    audioFormat,
-                    audioQuality,
-                    subtitleCode
-                )
+                val downloadItems = streams.toDownloadItems(downloadData.copy(fileName = fileName))
                 downloadItems.forEach { start(it) }
             } catch (e: Exception) {
                 return@launch
