@@ -139,7 +139,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     /**
      * Video information passed by the intent
      */
-    private lateinit var playerData: PlayerData
     private lateinit var videoId: String
     private var playlistId: String? = null
     private var channelId: String? = null
@@ -395,7 +394,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             // set the max height to not cover the currently playing video
             commentsViewModel.handleLink = this::handleLink
             commentsViewModel.maxHeight = binding.root.height - binding.player.height
-            commentsViewModel.videoId = playerData.videoId
+            commentsViewModel.videoId = videoId
             CommentsSheet().show(childFragmentManager)
         }
 
