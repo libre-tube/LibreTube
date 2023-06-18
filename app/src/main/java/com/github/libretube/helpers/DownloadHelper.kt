@@ -7,7 +7,7 @@ import androidx.core.content.ContextCompat
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.obj.DownloadItem
-import com.github.libretube.services.DownloadData
+import com.github.libretube.parcelable.DownloadData
 import com.github.libretube.services.DownloadService
 import java.nio.file.Path
 
