@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
+    android:paddingTop="10dp"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:paddingBottom="10dp">
 
     <LinearLayout
         android:id="@+id/left_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="55dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="55dp"
         android:orientation="vertical">
 
         <TextView
@@ -25,10 +26,10 @@
             android:fadingEdge="horizontal"
             android:gravity="center"
             android:singleLine="true"
-            android:text="Title"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="Title" />
 
         <TextView
             android:id="@android:id/summary"
@@ -36,12 +37,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textSize="14sp"
             android:ellipsize="marquee"
             android:fadingEdge="horizontal"
+            android:lineSpacingExtra="4dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Summary"
-            android:lineSpacingExtra="4dp"/>
+            android:textSize="14sp"
+            tools:text="Summary" />
 
     </LinearLayout>
 
@@ -51,6 +52,11 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@android:id/title"
         android:layout_alignBottom="@android:id/title"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-2dp"
+        android:textAlignment="textEnd"
+        android:layout_marginEnd="-10dp"
+        android:paddingStart="0dp"
+        android:paddingEnd="35dp" />
 
 </RelativeLayout>

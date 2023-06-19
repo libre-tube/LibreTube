@@ -12,7 +12,6 @@ import android.widget.TextView
 import com.github.libretube.R
 
 class SbSpinnerPreference(context: Context, attrs: AttributeSet) : Preference(context, attrs) {
-    private lateinit var spinner: Spinner
     private lateinit var adapter: ArrayAdapter<CharSequence>
     private var selectedItem: CharSequence? = null
 
@@ -22,13 +21,10 @@ class SbSpinnerPreference(context: Context, attrs: AttributeSet) : Preference(co
 
     override fun onBindViewHolder(holder: PreferenceViewHolder) {
         super.onBindViewHolder(holder)
-        spinner = holder.itemView.findViewById(R.id.spinner)
+        val spinner: Spinner = holder.itemView.findViewById(R.id.spinner)
 
-        val titleView = holder.itemView.findViewById<TextView>(android.R.id.title)
-        titleView?.text = super.getTitle()
-
-        val summaryView = holder.itemView.findViewById<TextView>(android.R.id.summary)
-        summaryView?.text = super.getSummary()
+        holder.itemView.findViewById<TextView>(android.R.id.title)?.text = super.getTitle()
+        holder.itemView.findViewById<TextView>(android.R.id.summary)?.text = super.getSummary()
 
         // Set the spinner adapter
         adapter = ArrayAdapter.createFromResource(
@@ -40,8 +36,8 @@ class SbSpinnerPreference(context: Context, attrs: AttributeSet) : Preference(co
         spinner.adapter = adapter
 
         // Set the initial selected item
-        if (selectedItem != null) {
-            val position = adapter.getPosition(selectedItem!!)
+        selectedItem?.let { selectedItem ->
+            val position = getEntryValues().indexOf(selectedItem)
             spinner.setSelection(position)
         }
 
@@ -53,21 +49,22 @@ class SbSpinnerPreference(context: Context, attrs: AttributeSet) : Preference(co
                 position: Int,
                 id: Long
             ) {
-                selectedItem = adapter.getItem(position)
-                persistString(selectedItem?.toString())
+                persistString(getEntryValues()[position])
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {}
+            override fun onNothingSelected(parent: AdapterView<*>) = Unit
         }
     }
 
-    override fun onGetDefaultValue(a: TypedArray, index: Int): Any {
+    override fun onGetDefaultValue(ta: TypedArray, index: Int): Any {
         // Get the default value from the XML attribute, if specified
-        return a.getString(index) ?: ""
+        return ta.getString(index).orEmpty()
     }
 
     override fun onSetInitialValue(defaultValue: Any?) {
         // Set the initial selected item from the persisted value, if available
         selectedItem = getPersistedString(defaultValue?.toString())
     }
+
+    private fun getEntryValues() = context.resources.getStringArray(R.array.sb_skip_options_values)
 }
