@@ -2,6 +2,7 @@ package com.github.libretube.ui.views
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
 import android.util.AttributeSet
@@ -39,6 +40,17 @@ class MarkableTimeBar(
 
     private fun drawSegments(canvas: Canvas) {
         val markersEnabled = PreferenceHelper.getBoolean(PreferenceKeys.SB_SHOW_MARKERS, true)
+        //TODO Add ability to change these colors via settings
+        val segmentColors = mapOf(
+            "intro" to "#00ffff",
+            "selfpromo" to "#ffff00",
+            "interaction" to "#cc00ff",
+            "sponsor" to "#00d400",
+            "outro" to "#0202ED",
+            "filler" to "#7300ff",
+            "music_offtopic" to "#ff9900",
+            "preview" to "#008fd6"
+        )
         if (player == null || !markersEnabled) return
 
         canvas.save()
@@ -55,10 +67,7 @@ class MarkableTimeBar(
                     canvas.height - marginY,
                 ),
                 Paint().apply {
-                    color = ThemeHelper.getThemeColor(
-                        context,
-                        R.attr.colorOnSecondary,
-                    )
+                    color =  Color.parseColor(segmentColors[it.category])
                 },
             )
         }
