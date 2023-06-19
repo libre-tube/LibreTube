@@ -1,8 +1,11 @@
 package com.github.libretube.api.obj
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 
 @Serializable
+@Parcelize
 data class Comment(
     val author: String,
     val commentId: String,
@@ -16,4 +19,4 @@ data class Comment(
     val thumbnail: String,
     val verified: Boolean,
     val replyCount: Long,
-)
+) : Parcelable
