@@ -84,10 +84,10 @@ object PlayerHelper {
     fun getSponsorBlockCategories(): MutableMap<String, SbSkipOptions> {
         val categories: MutableMap<String, SbSkipOptions> = mutableMapOf()
 
-        for (cat in SPONSOR_CATEGORIES){
-            val state = PreferenceHelper.getString(cat + "_category_key", "off").uppercase()
+        for (category in SPONSOR_CATEGORIES){
+            val state = PreferenceHelper.getString(category + "_category", "off").uppercase()
             if (SbSkipOptions.valueOf(state) != SbSkipOptions.OFF){
-                categories[cat] = SbSkipOptions.valueOf(state)
+                categories[category] = SbSkipOptions.valueOf(state)
             }
         }
         return categories
