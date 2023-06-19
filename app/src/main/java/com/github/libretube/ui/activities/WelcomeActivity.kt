@@ -25,7 +25,6 @@ import kotlinx.coroutines.withContext
 
 class WelcomeActivity: BaseActivity() {
     private lateinit var binding: ActivityWelcomeBinding
-    private var selectedInstance: Instances? = null
     private var viewModel: WelcomeModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,16 +38,17 @@ class WelcomeActivity: BaseActivity() {
             binding.instancesRecycler?.layoutManager = LinearLayoutManager(this@WelcomeActivity)
             binding.instancesRecycler?.adapter = InstancesAdapter(instances, viewModel!!) { index ->
                 viewModel!!.selectedInstanceIndex.value = index
-                selectedInstance = instances[index]
                 binding.okay?.alpha = 1f
             }
             binding.progress?.isGone = true
         }
         viewModel!!.fetchInstances(this)
 
+        binding.okay?.alpha = if (viewModel!!.selectedInstanceIndex.value != null) 1f else 0.5f
         binding.okay?.setOnClickListener {
-            if (selectedInstance != null) {
-                PreferenceHelper.putString(PreferenceKeys.FETCH_INSTANCE, selectedInstance!!.apiUrl)
+            if (viewModel!!.selectedInstanceIndex.value != null) {
+                val selectedInstance = viewModel!!.instances.value!![viewModel!!.selectedInstanceIndex.value!!]
+                PreferenceHelper.putString(PreferenceKeys.FETCH_INSTANCE, selectedInstance.apiUrl)
                 val mainActivityIntent = Intent(this@WelcomeActivity, MainActivity::class.java)
                 startActivity(mainActivityIntent)
                 finish()
