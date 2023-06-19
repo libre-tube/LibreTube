@@ -131,24 +131,24 @@
                         android:visibility="visible" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/playlists"
-                        style="@style/channelChip"
-                        android:text="@string/playlists" />
-
-                    <com.google.android.material.chip.Chip
                         android:id="@+id/shorts"
                         style="@style/channelChip"
                         android:text="@string/yt_shorts" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/channels"
-                        style="@style/channelChip"
-                        android:text="@string/channels" />
-
-                    <com.google.android.material.chip.Chip
                         android:id="@+id/livestreams"
                         style="@style/channelChip"
                         android:text="@string/livestreams" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/playlists"
+                        style="@style/channelChip"
+                        android:text="@string/playlists" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/channels"
+                        style="@style/channelChip"
+                        android:text="@string/channels" />
 
                 </com.google.android.material.chip.ChipGroup>
 
