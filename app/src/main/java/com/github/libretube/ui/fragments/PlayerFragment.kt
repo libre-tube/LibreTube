@@ -110,7 +110,6 @@ import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.IOException
 import java.util.*
 import java.util.concurrent.Executors

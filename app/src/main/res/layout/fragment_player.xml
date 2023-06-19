@@ -239,9 +239,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/subscribe"
-                    android:textColor="?android:attr/textColorPrimary"
+                    android:textColor="?colorControlNormal"
                     android:textSize="12sp"
-                    app:cornerRadius="11dp" />
+                    app:cornerRadius="16dp" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
