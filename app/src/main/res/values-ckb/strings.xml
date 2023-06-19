@@ -430,4 +430,21 @@
     <string name="creation_date_reversed">بەرواری دروستکردن (پێچەوانە)</string>
     <string name="alphabetic">ئەلفبێ</string>
     <string name="alphabetic_reversed">ئەلفبێ (پێچەوانە)</string>
+    <string name="welcome">LibreTube بەخێربێی بۆ</string>
+    <string name="choose_instance">تکایە سەرەتا سەرچاوەیەک هەڵبژێرە!</string>
+    <string name="mark_as_unwatched">نیشانەکردن وەک نەبینراو</string>
+    <string name="import_format_newpipe">NewPipe</string>
+    <string name="import_format_freetube">FreeTube</string>
+    <string name="import_format_youtube_csv">یوتوب (CSV)</string>
+    <string name="choose_instance_long">تکایە سەرچاوەیەکی Piped هەڵبژێرە بۆ بەکارهێنان لە خوارەوە, سەرچاوەی Piped وەک ناوەندێک لە نێوان تۆ و یوتوبدا کاردەکات ئەم سەرچاوانە لە شوێنە فیزیکییە جیاوازەکاندا هەڵکەوتوون - کە بە ئاڵای وڵاتەکەیان ئاماژەی پێکراوە, ئەو سەرچاوانەی کە لە ڕووی فیزیکییەوە لە تۆ نزیکترن ئەگەری زۆرە خێراتر بن لەوانەی تر، دەتوانیت لە هەر کاتێکدا ئەو سەرچاوەیەی کە لە ڕێکخستنەکاندا بەکاری دەهێنیت بیگۆڕیت.</string>
+    <string name="home_tab_content">بابەتەکانی سەرەتا</string>
+    <string name="change_playlist_description">گۆڕینی زانیاری لیستی لێدان</string>
+    <string name="playlist_description">زانیاری لیستی لێدان</string>
+    <string name="emptyPlaylistDescription">زانیاری لیستی لێدان نابێ بەتاڵ بێت</string>
+    <string name="import_playlists_from">هێنانی لیستی لێدان لە</string>
+    <string name="export_playlists_to">ناردنی لیستی لێدان بۆ</string>
+    <string name="import_format_piped">Piped / LibreTube</string>
+    <string name="import_subscriptions_from">هێنانی هاوبەشییەکان لە</string>
+    <string name="export_subscriptions_to">ناردنی هابەشییەکان بۆ</string>
+    <string name="show_search_suggestions">پیشاندانی پێشنیارەکانی گەڕان</string>
 </resources>
