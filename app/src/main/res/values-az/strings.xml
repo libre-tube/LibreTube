@@ -53,7 +53,7 @@
     <string name="retry">Təkrar Cəhd Et</string>
     <string name="segment_skipped">Bölüm ötürüldü</string>
     <string name="category_sponsor_description">Ödənilmiş reklam, tövsiyələr və birbaşa reklamlar.Öz reklamı və ya səbəblərə, müəlliflərə, veb saytlara və məhsullara pulsuz həqiqi elanlar üçün deyil.</string>
-    <string name="category_interaction">Əlaqələndirmə xatırladıcı(bəyən və abunə ol)</string>
+    <string name="category_interaction">Əlaqələndirmə xatırladıcı</string>
     <string name="category_intro">Fasilə/Giriş Animasiyası</string>
     <string name="login_register">Daxil ol/qeydiyyatdan keç</string>
     <string name="importsuccess">Abunə olundu</string>
@@ -447,4 +447,7 @@
     <string name="emptyPlaylistDescription">Oynatma siyahısı təsviri boş ola bilməz</string>
     <string name="change_playlist_description">Oynatma siyahısı təsvirin dəyiş</string>
     <string name="show_search_suggestions">Axtarış təkliflərin göstər</string>
+    <string name="manual">Əl ilə</string>
+    <string name="automatic">Avtomatik</string>
+    <string name="off">Bağla</string>
 </resources>
