@@ -58,9 +58,18 @@ object PlayerHelper {
     /**
      * Create a base64 encoded DASH stream manifest
      */
-    fun createDashSource(streams: Streams, context: Context, audioOnly: Boolean = false): Uri {
-        val supportsHdr = DisplayHelper.supportsHdr(context)
-        val manifest = DashHelper.createManifest(streams, supportsHdr, audioOnly)
+    fun createDashSource(
+        streams: Streams,
+        context: Context,
+        audioOnly: Boolean = false,
+        disableProxy: Boolean
+    ): Uri {
+        val manifest = DashHelper.createManifest(
+            streams,
+            DisplayHelper.supportsHdr(context),
+            audioOnly,
+            disableProxy
+        )
 
         // encode to base64
         val encoded = Base64.encodeToString(manifest.toByteArray(), Base64.DEFAULT)
