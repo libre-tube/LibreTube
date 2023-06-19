@@ -30,6 +30,7 @@ import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.extensions.parcelableExtra
 import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toID
+import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.checkForSegments
 import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
@@ -76,6 +77,7 @@ class OnlinePlayerService : LifecycleService() {
      * SponsorBlock Segment data
      */
     private var segments: List<Segment> = listOf()
+    private var sponsorBlockConfig: MutableMap<String, SbSkipOptions> = PlayerHelper.getSponsorBlockCategories()
 
     /**
      * [Notification] for the player
@@ -313,11 +315,10 @@ class OnlinePlayerService : LifecycleService() {
     private fun fetchSponsorBlockSegments() {
         lifecycleScope.launch(Dispatchers.IO) {
             runCatching {
-                val categories = PlayerHelper.getSponsorBlockCategories()
-                if (categories.isEmpty()) return@runCatching
+                if (sponsorBlockConfig.isEmpty()) return@runCatching
                 segments = RetrofitInstance.api.getSegments(
                     videoId,
-                    JsonHelper.json.encodeToString(categories),
+                    JsonHelper.json.encodeToString(sponsorBlockConfig.keys),
                 ).segments
                 checkForSegments()
             }
@@ -330,7 +331,7 @@ class OnlinePlayerService : LifecycleService() {
     private fun checkForSegments() {
         handler.postDelayed(this::checkForSegments, 100)
 
-        player?.checkForSegments(this, segments)
+        player?.checkForSegments(this, segments, sponsorBlockConfig)
     }
 
     private fun updateQueue() {
