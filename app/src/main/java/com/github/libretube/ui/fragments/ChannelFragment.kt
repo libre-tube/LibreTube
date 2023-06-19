@@ -245,7 +245,7 @@ class ChannelFragment : Fragment() {
             }
             val binding = _binding ?: return@launch
 
-            val adapter = SearchAdapter()
+            val adapter = SearchAdapter(true)
             binding.channelRecView.adapter = adapter
             adapter.submitList(response.content)
 

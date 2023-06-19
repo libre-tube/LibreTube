@@ -24,7 +24,9 @@ import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.SearchViewHolder
 import com.github.libretube.util.TextUtils
 
-class SearchAdapter : ListAdapter<ContentItem, SearchViewHolder>(SearchCallback) {
+class SearchAdapter(
+    private val isChannelAdapter: Boolean = false
+) : ListAdapter<ContentItem, SearchViewHolder>(SearchCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 
@@ -71,20 +73,20 @@ class SearchAdapter : ListAdapter<ContentItem, SearchViewHolder>(SearchCallback)
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, thumbnail)
             thumbnailDuration.setFormattedDuration(item.duration, item.isShort)
-            ImageHelper.loadImage(item.uploaderAvatar, channelImage)
             videoTitle.text = item.title
-            // only display the additional info if not in a channel tab
-            if (item.isShort != true || item.uploaderAvatar != null) {
-                val viewsString = item.views.takeIf { it != -1L }?.formatShort().orEmpty()
-                val uploadDate = item.uploaded?.takeIf { it > 0 }?.let {
-                    " ${TextUtils.SEPARATOR} ${TextUtils.formatRelativeDate(root.context, it)}"
-                }.orEmpty()
-                videoInfo.text = root.context.getString(
-                    R.string.normal_views,
-                    viewsString,
-                    uploadDate,
-                )
+            val viewsString = item.views.takeIf { it != -1L }?.formatShort().orEmpty()
+            val uploadDate = item.uploaded?.takeIf { it > 0 }?.let {
+                " ${TextUtils.SEPARATOR} ${TextUtils.formatRelativeDate(root.context, it)}"
+            }.orEmpty()
+            videoInfo.text = root.context.getString(
+                R.string.normal_views,
+                viewsString,
+                uploadDate,
+            )
+            // only display channel related info if not in a channel tab
+            if (!isChannelAdapter) {
                 channelName.text = item.uploaderName
+                ImageHelper.loadImage(item.uploaderAvatar, channelImage)
             }
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, item.url)
