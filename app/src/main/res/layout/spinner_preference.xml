@@ -1,62 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
     android:paddingTop="10dp"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:paddingBottom="10dp">
 
     <LinearLayout
-        android:id="@+id/left_container"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_marginStart="55dp"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <TextView
             android:id="@android:id/title"
             style="?android:attr/preferenceStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:ellipsize="marquee"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
             android:fadingEdge="horizontal"
-            android:gravity="center"
             android:singleLine="true"
+            android:textAlignment="textStart"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="14sp"
             android:textStyle="bold"
             tools:text="Title" />
 
-        <TextView
-            android:id="@android:id/summary"
-            style="?android:attr/preferenceStyle"
+        <Spinner
+            android:id="@+id/spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ellipsize="marquee"
-            android:fadingEdge="horizontal"
-            android:lineSpacingExtra="4dp"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textSize="14sp"
-            tools:text="Summary" />
+            android:layout_marginEnd="-10dp"
+            android:paddingStart="0dp"
+            android:paddingEnd="35dp"
+            android:textAlignment="textEnd" />
 
     </LinearLayout>
 
-    <Spinner
-        android:id="@+id/spinner"
+    <TextView
+        android:id="@android:id/summary"
+        style="?android:attr/preferenceStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@android:id/title"
-        android:layout_alignBottom="@android:id/title"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="-2dp"
-        android:textAlignment="textEnd"
-        android:layout_marginEnd="-10dp"
-        android:paddingStart="0dp"
-        android:paddingEnd="35dp" />
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="marquee"
+        android:fadingEdge="horizontal"
+        android:lineSpacingExtra="4dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="14sp"
+        tools:text="Summary" />
 
-</RelativeLayout>
+</LinearLayout>
