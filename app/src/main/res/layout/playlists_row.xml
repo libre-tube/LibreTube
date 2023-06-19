@@ -33,27 +33,29 @@
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <LinearLayout
-            android:layout_width="90dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:background="#CC000000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="?colorPrimaryContainer"
             android:gravity="center"
-            android:orientation="vertical">
+            android:paddingVertical="2dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_playlist"
+                app:tint="?colorControlNormal" />
 
             <TextView
                 android:id="@+id/video_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:textColor="#ECE4E4" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:paddingStart="5dp"
-                app:srcCompat="@drawable/ic_playlist"
+                android:textColor="?colorControlNormal"
+                tools:text="20"
                 tools:ignore="RtlSymmetry" />
 
         </LinearLayout>
