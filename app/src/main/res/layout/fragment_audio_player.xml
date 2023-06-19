@@ -238,9 +238,9 @@
                     android:src="@drawable/ic_share" />
 
                 <ImageView
-                    android:id="@+id/close"
+                    android:id="@+id/chapters"
                     style="@style/AudioPlayerButton"
-                    android:src="@drawable/ic_close" />
+                    android:src="@drawable/ic_frame" />
 
             </LinearLayout>
 

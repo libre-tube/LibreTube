@@ -13,6 +13,7 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.fragment.app.Fragment
@@ -29,6 +30,7 @@ import com.github.libretube.helpers.AudioHelper
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.services.OnlinePlayerService
 import com.github.libretube.ui.activities.MainActivity
@@ -153,10 +155,20 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             ).show(childFragmentManager, null)
         }
 
-        binding.close.setOnClickListener {
-            activity?.unbindService(connection)
-            BackgroundHelper.stopBackgroundPlay(requireContext())
-            killFragment()
+        binding.chapters.setOnClickListener {
+            val playerService = playerService ?: return@setOnClickListener
+            if (playerService.streams == null || playerService.player == null) return@setOnClickListener
+
+            if (playerService.streams!!.chapters.isEmpty()) {
+                Toast.makeText(context, R.string.emptyList, Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            PlayerHelper.showChaptersDialog(
+                requireContext(),
+                playerService.streams!!.chapters,
+                playerService.player!!
+            )
         }
 
         binding.miniPlayerClose.setOnClickListener {

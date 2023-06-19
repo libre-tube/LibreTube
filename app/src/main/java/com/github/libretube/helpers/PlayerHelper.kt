@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.net.Uri
+import android.text.format.DateUtils
 import android.util.Base64
 import android.view.accessibility.CaptioningManager
 import android.widget.Toast
@@ -23,11 +24,13 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.LoadControl
 import androidx.media3.ui.CaptionStyleCompat
 import com.github.libretube.R
+import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 
@@ -440,7 +443,7 @@ object PlayerHelper {
             if ((duration - currentPosition).absoluteValue < 500) continue
 
             if (currentPosition in segmentStart until segmentEnd) {
-                if (sponsorBlockConfig.get(segment.category) == SbSkipOptions.AUTOMATIC) {
+                if (sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC) {
                     if (sponsorBlockNotifications) {
                         runCatching {
                             Toast.makeText(context, R.string.segment_skipped, Toast.LENGTH_SHORT)
@@ -454,5 +457,20 @@ object PlayerHelper {
             }
         }
         return null
+    }
+
+    /**
+     * Show a dialog with the chapters provided, even if the list is empty
+     */
+    fun showChaptersDialog(context: Context, chapters: List<ChapterSegment>, player: ExoPlayer) {
+        val titles = chapters.map { chapter ->
+            "(${DateUtils.formatElapsedTime(chapter.start)}) ${chapter.title}"
+        }
+        MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.chapters)
+            .setItems(titles.toTypedArray()) { _, index ->
+                player.seekTo(chapters[index].start * 1000)
+            }
+            .show()
     }
 }

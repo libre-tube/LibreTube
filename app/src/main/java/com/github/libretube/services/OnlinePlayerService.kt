@@ -65,7 +65,8 @@ class OnlinePlayerService : LifecycleService() {
     /**
      * The response that gets when called the Api.
      */
-    private var streams: Streams? = null
+    var streams: Streams? = null
+        private set
 
     /**
      * The [ExoPlayer] player. Followed tutorial [here](https://developer.android.com/codelabs/exoplayer-intro)

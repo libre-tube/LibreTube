@@ -1191,16 +1191,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         binding.chaptersRecView.adapter = ChaptersAdapter(chapters, exoPlayer)
 
         // enable the chapters dialog in the player
-        val titles = chapters.map { chapter ->
-            "(${DateUtils.formatElapsedTime(chapter.start)}) ${chapter.title}"
-        }
         playerBinding.chapterLL.setOnClickListener {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.chapters)
-                .setItems(titles.toTypedArray()) { _, index ->
-                    exoPlayer.seekTo(chapters[index].start * 1000)
-                }
-                .show()
+            PlayerHelper.showChaptersDialog(requireContext(), chapters, exoPlayer)
         }
 
         setCurrentChapterName()
