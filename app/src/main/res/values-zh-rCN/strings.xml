@@ -89,7 +89,7 @@
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">使用 https://sponsor.ajay.app 的 API</string>
     <string name="category_sponsor">赞助商</string>
-    <string name="category_interaction">交互提醒（点赞和订阅）</string>
+    <string name="category_interaction">交互提醒</string>
     <string name="category_interaction_description">内容中求点赞、订阅或关注的简短提示算作交互。如果是长篇大论或关于某些特定的内容，则应属于自我推广。</string>
     <string name="color_accent">强调色</string>
     <string name="color_purple">紫</string>
@@ -444,4 +444,7 @@
     <string name="playlist_description">播放列表描述</string>
     <string name="emptyPlaylistDescription">播放列表描述不能为空</string>
     <string name="show_search_suggestions">显示搜索建议</string>
+    <string name="off">关</string>
+    <string name="manual">手动</string>
+    <string name="automatic">自动</string>
 </resources>
