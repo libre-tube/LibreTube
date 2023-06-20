@@ -1217,6 +1217,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playerBinding.chapterLL.setOnClickListener {
             PlayerHelper.showChaptersDialog(requireContext(), chapters, exoPlayer)
         }
+
+        handler.post {
+            setCurrentChapterName()
+        }
     }
 
     // set the name of the video chapter in the exoPlayerView
