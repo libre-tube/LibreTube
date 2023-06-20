@@ -53,9 +53,7 @@ class ColorPreference(context: Context, attrs: AttributeSet) : Preference(contex
 
     private fun updateColorView() {
         (if (currentColor is Int) currentColor else Color.WHITE)?.let {
-            circleView.setBackgroundColor(
-                it
-            )
+            circleView.setBackgroundColor(it)
         }
     }
 
