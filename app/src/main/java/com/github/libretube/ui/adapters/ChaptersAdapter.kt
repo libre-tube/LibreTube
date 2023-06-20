@@ -4,9 +4,12 @@ import android.graphics.Color
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.graphics.ColorUtils
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.api.obj.ChapterSegment
+import com.github.libretube.api.obj.ChapterSegmentType
+import com.github.libretube.api.obj.Segment
 import com.github.libretube.databinding.ChapterColumnBinding
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.ThemeHelper
@@ -31,10 +34,15 @@ class ChaptersAdapter(
             chapterTitle.text = chapter.title
             timeStamp.text = DateUtils.formatElapsedTime(chapter.start)
 
-            val color = if (selectedPosition == position) {
-                ThemeHelper.getThemeColor(root.context, android.R.attr.colorControlHighlight)
-            } else {
-                Color.TRANSPARENT
+            val color = when {
+                selectedPosition == position -> {
+                    ThemeHelper.getThemeColor(root.context, android.R.attr.colorControlHighlight)
+                }
+                chapter.type == ChapterSegmentType.VideoHighlight -> ColorUtils.setAlphaComponent(ThemeHelper.getThemeColor(
+                    root.context,
+                    android.R.attr.colorPrimary
+                ), 50)
+                else -> Color.TRANSPARENT
             }
             chapterLL.setBackgroundColor(color)
 

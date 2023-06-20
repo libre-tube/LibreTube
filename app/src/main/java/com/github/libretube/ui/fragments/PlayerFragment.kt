@@ -53,6 +53,7 @@ import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.ChapterSegment
+import com.github.libretube.api.obj.ChapterSegmentType
 import com.github.libretube.api.obj.Message
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Segment
@@ -166,7 +167,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     /**
      * Chapters and comments
      */
-    private lateinit var chapters: List<ChapterSegment>
+    private lateinit var chapters: MutableList<ChapterSegment>
 
     /**
      * for the player view
@@ -757,7 +758,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 }
                 // show the player notification
                 initializePlayerNotification()
-                if (PlayerHelper.sponsorBlockEnabled) fetchSponsorBlockSegments()
+
+                // Since the highlight is also a chapter, we need to fetch the other segments
+                // first
+                if (PlayerHelper.sponsorBlockEnabled) {
+                    fetchSponsorBlockSegments()
+                } else {
+                    initializeChapters()
+                }
 
                 // add the video to the watch history
                 if (PlayerHelper.watchHistoryEnabled) {
@@ -772,20 +780,22 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      */
     private fun fetchSponsorBlockSegments() {
         lifecycleScope.launch(Dispatchers.IO) {
-            runCatching {
-                if (sponsorBlockConfig.isEmpty()) return@runCatching
+            try {
+                if (sponsorBlockConfig.isEmpty()) return@launch
                 segments =
                     RetrofitInstance.api.getSegments(
                         videoId,
                         JsonHelper.json.encodeToString(sponsorBlockConfig.keys),
                     ).segments
-                if (segments.isEmpty()) return@runCatching
+                if (segments.isEmpty()) return@launch
 
                 withContext(Dispatchers.Main) {
                     playerBinding.exoProgress.setSegments(segments)
                     playerBinding.sbToggle.visibility = View.VISIBLE
                     updateDisplayedDuration()
                 }
+            } finally {
+                initializeChapters()
             }
         }
     }
@@ -915,8 +925,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playerBinding.exoTitle.text = streams.title
 
         // init the chapters recyclerview
-        chapters = streams.chapters
-        initializeChapters()
+        chapters = streams.chapters.toMutableList()
 
         // Listener for play and pause icon change
         exoPlayer.addListener(object : Player.Listener {
@@ -1187,14 +1196,27 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 LinearLayoutManager.HORIZONTAL,
                 false,
             )
+
+        val highlightSegment = segments.find { it.category == "poi_highlight" }
+
+        // Insert highlight chapter to the correct position
+        if (highlightSegment != null) {
+            val highlightChapter = ChapterSegment(
+                title = getString(R.string.chapters_videoHighlight),
+                image = "",
+                start = highlightSegment.segment[0].toLong(),
+                type = ChapterSegmentType.VideoHighlight,
+            )
+            chapters.add(highlightChapter)
+            chapters.sortBy { it.start }
+        }
+
         binding.chaptersRecView.adapter = ChaptersAdapter(chapters, exoPlayer)
 
         // enable the chapters dialog in the player
         playerBinding.chapterLL.setOnClickListener {
             PlayerHelper.showChaptersDialog(requireContext(), chapters, exoPlayer)
         }
-
-        setCurrentChapterName()
     }
 
     // set the name of the video chapter in the exoPlayerView
