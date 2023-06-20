@@ -46,7 +46,10 @@ object PlayerHelper {
             "outro",
             "filler",
             "music_offtopic",
-            "preview")
+            "preview",
+            "poi_highlight",
+        )
+    private var hasJumpedToHighlight = false
 
     /**
      * Create a base64 encoded DASH stream manifest
@@ -435,6 +438,27 @@ object PlayerHelper {
         segments: List<Segment>,
         sponsorBlockConfig: MutableMap<String, SbSkipOptions>,
     ): Long? {
+        // Check if is at begin and highlight is available - We only want to skip to the highlight
+        // if the user is at the beginning of the video (meaning that they have not watched it yet)
+        if (!hasJumpedToHighlight) {
+            hasJumpedToHighlight = true
+            val highlightSegment = segments.find { it.category == "poi_highlight"}
+
+            if (highlightSegment != null) {
+                if (sponsorBlockConfig[highlightSegment.category] == SbSkipOptions.AUTOMATIC) {
+                    if (sponsorBlockNotifications) {
+                        runCatching {
+                            Toast.makeText(context, R.string.jumped_to_highlight, Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
+                    seekTo((highlightSegment.segment[1] * 1000f).toLong())
+                } else {
+                    return (highlightSegment.segment[1] * 1000f).toLong()
+                }
+            }
+        }
+
         for (segment in segments) {
             val segmentStart = (segment.segment[0] * 1000f).toLong()
             val segmentEnd = (segment.segment[1] * 1000f).toLong()
