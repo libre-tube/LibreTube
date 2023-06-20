@@ -86,7 +86,7 @@
     <string name="category_sponsor">Gesponsorte Videosegmente</string>
     <string name="category_sponsor_description">Bezahlte Werbung, bezahlte Empfehlungen und Direktwerbung. Nicht für Eigenwerbung, kostenlose Fremdwerbung oder Empfehlungen für Anliegen, Kanäle, Webseiten und Produkte.</string>
     <string name="category_selfpromo">Unbezahlt/Eigenwerbung</string>
-    <string name="category_interaction">Interaktionserinnerung (Like/Abo)</string>
+    <string name="category_interaction">Interaktionserinnerung</string>
     <string name="category_outro_description">Abspann, Endkarten, Credits oder Quellenangaben. Nicht für videobeendende Schlussfolgerungen, die Informationen enthalten.</string>
     <string name="category_interaction_description">Wenn es mitten im Inhalt eine kurze Aufforderung zum Liken, Abonnieren oder Folgen gibt. Falls der Abschnitt lang ist oder sich auf etwas Bestimmtes bezieht, sollte er stattdessen \"Unbezahlt/Eigenwerbung\" sein.</string>
     <string name="category_intro_description">Ein Videoabschnitt ohne eigentlichen Inhalt. Kann eine Pause, ein statisches Bild oder eine sich wiederholende Animation sein. Sollte nicht für Übergänge mit Informationen verwendet werden.</string>
@@ -447,4 +447,7 @@
     <string name="playlist_description">Playlist-Beschreibung</string>
     <string name="emptyPlaylistDescription">Die Playlist-Beschreibung darf nicht leer sein</string>
     <string name="show_search_suggestions">Suchvorschläge anzeigen</string>
+    <string name="off">Aus</string>
+    <string name="manual">Manuell</string>
+    <string name="automatic">Automatisch</string>
 </resources>
