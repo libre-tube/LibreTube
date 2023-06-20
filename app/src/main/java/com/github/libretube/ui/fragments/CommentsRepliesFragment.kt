@@ -10,13 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Comment
 import com.github.libretube.api.obj.CommentsPage
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentCommentsBinding
 import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.parcelable
 import com.github.libretube.ui.adapters.CommentsAdapter
 import com.github.libretube.ui.extensions.filterNonEmptyComments
 import com.github.libretube.ui.models.CommentsViewModel
@@ -45,11 +45,9 @@ class CommentsRepliesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val videoId = arguments?.getString(IntentData.videoId) ?: ""
-        val comment = JsonHelper.json.decodeFromString(
-            Comment.serializer(),
-            arguments?.getString(IntentData.comment)!!,
-        )
+        val arguments = requireArguments()
+        val videoId = arguments.getString(IntentData.videoId, "")
+        val comment = arguments.parcelable<Comment>(IntentData.comment)!!
 
         repliesAdapter = CommentsAdapter(
             null,
