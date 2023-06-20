@@ -440,22 +440,19 @@ object PlayerHelper {
     ): Long? {
         // Check if is at begin and highlight is available - We only want to skip to the highlight
         // if the user is at the beginning of the video (meaning that they have not watched it yet)
-        if (!hasJumpedToHighlight) {
+        if (!hasJumpedToHighlight && sponsorBlockConfig["poi_highlight"] == SbSkipOptions.AUTOMATIC) {
             hasJumpedToHighlight = true
             val highlightSegment = segments.find { it.category == "poi_highlight"}
 
             if (highlightSegment != null) {
-                if (sponsorBlockConfig[highlightSegment.category] == SbSkipOptions.AUTOMATIC) {
-                    if (sponsorBlockNotifications) {
-                        runCatching {
-                            Toast.makeText(context, R.string.jumped_to_highlight, Toast.LENGTH_SHORT)
-                                .show()
-                        }
+                if (sponsorBlockNotifications) {
+                    runCatching {
+                        Toast.makeText(context, R.string.jumped_to_highlight, Toast.LENGTH_SHORT)
+                            .show()
                     }
-                    seekTo((highlightSegment.segment[1] * 1000f).toLong())
-                } else {
-                    return (highlightSegment.segment[1] * 1000f).toLong()
                 }
+
+                seekTo((highlightSegment.segment[1] * 1000f).toLong())
             }
         }
 
