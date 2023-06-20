@@ -83,7 +83,7 @@
             app:defaultValue="off"/>
 
         <com.github.libretube.ui.views.SbSpinnerPreference
-            app:key="highlight_category"
+            app:key="poi_highlight_category"
             app:summary="@string/category_highlight_description"
             app:title="@string/category_highlight"
             app:defaultValue="manual"/>
