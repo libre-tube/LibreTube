@@ -303,6 +303,9 @@
     <string name="queue">Queue</string>
     <string name="sb_markers">Markers</string>
     <string name="sb_markers_summary">Mark the segments on the time bar.</string>
+    <string name="sb_color_enable">Toggles custom color segments for sponsor block segments</string>
+    <string name="sb_color">Segment Colors</string>
+    <string name="color">Color</string>
     <string name="livestreams">Livestreams</string>
     <string name="alternative_videos_layout">Alternative videos layout</string>
     <string name="defaultIconLight">Default light</string>
