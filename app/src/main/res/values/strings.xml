@@ -306,6 +306,8 @@
     <string name="sb_color_enable">Toggles custom color segments for sponsor block segments</string>
     <string name="sb_color">Segment Colors</string>
     <string name="color">Color</string>
+    <string name="invalid_color">Invalid color value entered!</string>
+    <string name="enter_hex_value">Enter Color Hex Value</string>
     <string name="livestreams">Livestreams</string>
     <string name="alternative_videos_layout">Alternative videos layout</string>
     <string name="defaultIconLight">Default light</string>

@@ -62,9 +62,9 @@ class ColorPreference(context: Context, attrs: AttributeSet) : Preference(contex
     private fun showColorPickerDialog() {
         val colorEditText = EditText(context)
         val dialog = android.app.AlertDialog.Builder(context)
-            .setTitle("Enter Color Hex Value")
+            .setTitle(R.string.enter_hex_value)
             .setView(colorEditText)
-            .setPositiveButton("OK") { _, _ ->
+            .setPositiveButton(R.string.okay) { _, _ ->
                 var hexValue = colorEditText.text.toString().trim()
                 if (!hexValue.startsWith('#')) {
                     hexValue = "#$hexValue"
@@ -81,7 +81,7 @@ class ColorPreference(context: Context, attrs: AttributeSet) : Preference(contex
 
                 }
             }
-            .setNegativeButton("Cancel") { dialog, _ ->
+            .setNegativeButton(R.string.cancel) { dialog, _ ->
                 dialog.dismiss()
             }
             .create()
@@ -90,7 +90,7 @@ class ColorPreference(context: Context, attrs: AttributeSet) : Preference(contex
     }
 
     private fun showInvalidColorMessage() {
-        val invalidColorMessage = "Invalid color value entered!"
+        val invalidColorMessage = R.string.invalid_color
         Toast.makeText(context, invalidColorMessage, Toast.LENGTH_SHORT).show()
     }
 
