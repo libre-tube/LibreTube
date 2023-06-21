@@ -85,7 +85,7 @@
     <string name="category_selfpromo_description">Simile a sponsor, tranne che per la promozione personale o non retribuita. Sono incluse le sezioni relative al merchandising, alle donazioni o alle informazioni sulle persone con cui hanno collaborato.</string>
     <string name="category_intro">Intervallo/Animazione</string>
     <string name="category_intro_description">Un intervallo senza contenuto effettivo. Può essere una pausa, un fotogramma statico, un\'animazione ripetuta. Non deve essere utilizzato per transizioni contenenti informazioni.</string>
-    <string name="category_interaction">Promemoria di interazione (mi piace e iscriviti)</string>
+    <string name="category_interaction">Promemoria di interazione</string>
     <string name="category_interaction_description">Quando c\'è un breve promemoria per mettere mi piace, iscriversi o seguire nel mezzo del contenuto. Se è lungo o riguarda qualcosa di specifico, dovrebbe essere invece autopromozione.</string>
     <string name="license">Licenza</string>
     <string name="color_accent">Accenti</string>
@@ -450,4 +450,7 @@
     <string name="playlist_description">Descrizione playlist</string>
     <string name="emptyPlaylistDescription">La descrizione della playlist non può essere vuota</string>
     <string name="show_search_suggestions">Mostra suggerimenti di ricerca</string>
+    <string name="manual">Manuale</string>
+    <string name="automatic">Automatico</string>
+    <string name="off">Disattivato</string>
 </resources>

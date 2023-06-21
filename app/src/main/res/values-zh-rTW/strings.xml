@@ -70,7 +70,7 @@
     <string name="category_selfpromo">無贊助/自我推薦</string>
     <string name="category_sponsor">贊助商廣告</string>
     <string name="category_selfpromo_description">跟「贊助商廣告」很類似，但並非廠商付費或自我推薦。此區域包含頻道主所提供的週邊連接、捐款選項，以及合作對象。</string>
-    <string name="category_interaction">互動提醒 (喜歡和訂閱)</string>
+    <string name="category_interaction">互動提醒</string>
     <string name="category_interaction_description">影片中出現叫觀眾按讚或訂閱的畫面，時間過長即視為自我推薦。</string>
     <string name="category_intro">中場休息/片頭動畫</string>
     <string name="category_intro_description">無內容的中間片段。可能為影片暫停，停止畫面，重複性的動畫。沒有任何資訊的轉場。</string>
@@ -444,4 +444,7 @@
     <string name="change_playlist_description">變更播放清單描述</string>
     <string name="emptyPlaylistDescription">播放清單描述不能為空</string>
     <string name="show_search_suggestions">顯示搜尋建議</string>
+    <string name="off">關閉</string>
+    <string name="manual">手動</string>
+    <string name="automatic">自動</string>
 </resources>
