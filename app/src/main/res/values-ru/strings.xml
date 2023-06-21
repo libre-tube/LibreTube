@@ -75,7 +75,7 @@
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">На базе API https://sponsor.ajay.app/</string>
     <string name="segment_skipped">Пропущен сегмент</string>
-    <string name="category_interaction">Напоминание о взаимодействии (лайк и подписка)</string>
+    <string name="category_interaction">Напоминание о реакции</string>
     <string name="category_interaction_description">Короткие просьбы поставить лайк, подписаться или добавить в избранное. Если сегмент длинный или о чем-то конкретном, вместо этого он должен быть в разделе саморекламы.</string>
     <string name="category_outro">Конечная заставка и титры</string>
     <string name="category_segments">Сегменты</string>
@@ -453,4 +453,7 @@
     <string name="playlist_description">Описание плейлиста</string>
     <string name="emptyPlaylistDescription">Описание плейлиста не может быть пустым</string>
     <string name="show_search_suggestions">Показать поисковые подсказки</string>
+    <string name="off">Выкл</string>
+    <string name="manual">Вручную</string>
+    <string name="automatic">Автоматически</string>
 </resources>
