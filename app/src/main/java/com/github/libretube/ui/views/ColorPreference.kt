@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.util.AttributeSet
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
 import com.github.libretube.R
@@ -66,15 +67,12 @@ class ColorPreference(context: Context, attrs: AttributeSet) : Preference(contex
                         setColor(color)
                     }
                 })
-
-            dialog.show()
+            dialog.show((context as AppCompatActivity).supportFragmentManager, this::class.java.name)
         }
     }
-
 
     override fun getTitle(): CharSequence? {
         return "${super.getTitle()}:"
     }
-
 
 }
