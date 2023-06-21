@@ -451,7 +451,7 @@ object PlayerHelper {
                         }
                     }
                     seekTo(segmentEnd)
-                } else {
+                } else if (sponsorBlockConfig[segment.category] == SbSkipOptions.MANUAL) {
                     return segmentEnd
                 }
             }
