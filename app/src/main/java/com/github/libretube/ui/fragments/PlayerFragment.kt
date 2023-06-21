@@ -669,7 +669,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 binding.sbSkipBtn.setOnClickListener {
                     exoPlayer.seekTo(segmentEnd)
                     binding.sbSkipBtn.visibility = View.GONE
-                    Toast.makeText(context, R.string.segment_skipped, Toast.LENGTH_SHORT).show()
                 }
                 return
             }
