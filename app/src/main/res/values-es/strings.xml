@@ -450,4 +450,7 @@
     <string name="change_playlist_description">Cambiar descripción de lista de reproducción</string>
     <string name="emptyPlaylistDescription">La descripción no puede estar vacía</string>
     <string name="show_search_suggestions">Mostrar sugerencias al buscar</string>
+    <string name="manual">Manual</string>
+    <string name="off">Deshabilitado</string>
+    <string name="automatic">Automático</string>
 </resources>
