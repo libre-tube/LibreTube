@@ -5,12 +5,11 @@ import android.content.res.TypedArray
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.View
-import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
 import com.github.libretube.R
+import com.github.libretube.ui.dialogs.ColorPickerDialog
 
 class ColorPreference(context: Context, attrs: AttributeSet) : Preference(context, attrs) {
     private lateinit var circleView: View
@@ -46,7 +45,7 @@ class ColorPreference(context: Context, attrs: AttributeSet) : Preference(contex
     override fun onSetInitialValue(defaultValue: Any?) {
         currentColor = if (defaultValue is Int) {
             getPersistedInt(defaultValue)
-        } else{
+        } else {
             getPersistedInt(Color.WHITE)
         }
     }
@@ -58,39 +57,20 @@ class ColorPreference(context: Context, attrs: AttributeSet) : Preference(contex
     }
 
     private fun showColorPickerDialog() {
-        val colorEditText = EditText(context)
-        val dialog = android.app.AlertDialog.Builder(context)
-            .setTitle(R.string.enter_hex_value)
-            .setView(colorEditText)
-            .setPositiveButton(R.string.okay) { _, _ ->
-                var hexValue = colorEditText.text.toString().trim()
-                if (!hexValue.startsWith('#')) {
-                    hexValue = "#$hexValue"
-                }
-
-                if (hexValue.isNotEmpty()) {
-                    try {
-                        val color = Color.parseColor(hexValue)
+        (if (currentColor is Int) currentColor else Color.BLACK)?.let {
+            val dialog = ColorPickerDialog(
+                context,
+                it,
+                object : ColorPickerDialog.OnColorSelectedListener {
+                    override fun onColorSelected(color: Int) {
                         setColor(color)
                     }
-                    catch (e: IllegalArgumentException){
-                        showInvalidColorMessage()
-                    }
+                })
 
-                }
-            }
-            .setNegativeButton(R.string.cancel) { dialog, _ ->
-                dialog.dismiss()
-            }
-            .create()
-
-        dialog.show()
+            dialog.show()
+        }
     }
 
-    private fun showInvalidColorMessage() {
-        val invalidColorMessage = R.string.invalid_color
-        Toast.makeText(context, invalidColorMessage, Toast.LENGTH_SHORT).show()
-    }
 
     override fun getTitle(): CharSequence? {
         return "${super.getTitle()}:"
