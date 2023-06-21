@@ -2,9 +2,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="15dp"
+    android:paddingLeft="20dp"
     android:paddingTop="30dp"
-    android:paddingRight="15dp"
+    android:paddingRight="20dp"
     android:paddingBottom="30dp">
 
     <View
@@ -12,6 +12,8 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:background="#000000" />
 
     <TextView
@@ -23,6 +25,8 @@
         android:id="@+id/alphaSeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:max="255"
         android:progress="255" />
 
@@ -35,6 +39,8 @@
         android:id="@+id/redSeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:max="255"
         android:progress="0" />
 
@@ -47,6 +53,8 @@
         android:id="@+id/greenSeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:max="255"
         android:progress="0" />
 
@@ -59,6 +67,8 @@
         android:id="@+id/blueSeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:max="255"
         android:progress="0" />
 
@@ -67,11 +77,15 @@
         android:id="@+id/colorHexInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:hint="#00000000" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
         android:layout_gravity="center">
 
         <Button
