@@ -100,8 +100,7 @@ class ColorPickerDialog(
     }
 
     override fun onStopTrackingTouch(seekBar: SeekBar?) {
-        val currentColor = getColor()
-        val newColorString = colorToString(currentColor)
+        val newColorString = colorToString(getColor())
 
         if (newColorString != colorHexInput.text.toString()) {
             colorHexInput.setText(newColorString)
