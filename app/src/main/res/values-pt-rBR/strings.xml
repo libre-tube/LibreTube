@@ -88,7 +88,7 @@
     <string name="license">Licença</string>
     <string name="category_selfpromo">Não paga/Auto-promoção</string>
     <string name="category_selfpromo_description">Semelhante a \"patrocinador\", exceto para promoção não paga ou autopromoção. Isso inclui seções sobre mercadorias, doações ou informações sobre com quem eles colaboraram.</string>
-    <string name="category_interaction">Lembrete de interação (curtir e se inscrever)</string>
+    <string name="category_interaction">Lembrete de interação</string>
     <string name="category_interaction_description">Quando há um pequeno lembrete para curtir, inscrever-se ou seguir no meio do conteúdo. Deveria ser autopromoção se for longo ou sobre algo específico.</string>
     <string name="category_outro_description">Informações após o final. Não para conclusões com informações.</string>
     <string name="color_accent">Realces</string>
@@ -450,4 +450,7 @@
     <string name="playlist_description">Descrição da playlist</string>
     <string name="emptyPlaylistDescription">A descrição da playlist não pode estar vazia</string>
     <string name="show_search_suggestions">Mostrar sugestões de pesquisa</string>
+    <string name="off">Desligado</string>
+    <string name="manual">Manual</string>
+    <string name="automatic">Automático</string>
 </resources>
