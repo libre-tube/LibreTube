@@ -23,7 +23,7 @@ class ColorPreference(context: Context, attrs: AttributeSet) : Preference(contex
     override fun onBindViewHolder(holder: PreferenceViewHolder) {
         super.onBindViewHolder(holder)
 
-        holder.itemView.findViewById<TextView>(android.R.id.title)?.text = getTitle()
+        holder.itemView.findViewById<TextView>(android.R.id.title)?.text = title
         circleView = holder.itemView.findViewById(R.id.circle)
         updateColorView()
 
@@ -44,11 +44,13 @@ class ColorPreference(context: Context, attrs: AttributeSet) : Preference(contex
     }
 
     override fun onSetInitialValue(defaultValue: Any?) {
-        currentColor = if (defaultValue is Int) {
+        val color = if (defaultValue is Int) {
             getPersistedInt(defaultValue)
         } else {
             getPersistedInt(Color.WHITE)
         }
+        currentColor = color
+        persistInt(color)
     }
 
     private fun updateColorView() {
@@ -59,14 +61,7 @@ class ColorPreference(context: Context, attrs: AttributeSet) : Preference(contex
 
     private fun showColorPickerDialog() {
         (if (currentColor is Int) currentColor else Color.BLACK)?.let {
-            val dialog = ColorPickerDialog(
-                context,
-                it,
-                object : ColorPickerDialog.OnColorSelectedListener {
-                    override fun onColorSelected(color: Int) {
-                        setColor(color)
-                    }
-                })
+            val dialog = ColorPickerDialog(context, it) { color -> setColor(color) }
             dialog.show((context as AppCompatActivity).supportFragmentManager, this::class.java.name)
         }
     }

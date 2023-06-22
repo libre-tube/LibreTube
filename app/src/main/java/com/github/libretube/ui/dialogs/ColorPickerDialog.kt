@@ -20,10 +20,11 @@ class ColorPickerDialog(
     private val onColorSelectedListener: OnColorSelectedListener
 ) : DialogFragment(), SeekBar.OnSeekBarChangeListener, View.OnClickListener {
 
-    private lateinit var binding: DialogColorPickerBinding
+    private var _binding: DialogColorPickerBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        binding = DialogColorPickerBinding.inflate(layoutInflater)
+        _binding = DialogColorPickerBinding.inflate(layoutInflater)
 
         // Set initial color
         setColor(initialColor)
@@ -68,6 +69,11 @@ class ColorPickerDialog(
         return MaterialAlertDialogBuilder(requireContext())
             .setView(binding.root)
             .show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -127,7 +133,7 @@ class ColorPickerDialog(
         return String.format("#%08X", color)
     }
 
-    interface OnColorSelectedListener {
+    fun interface OnColorSelectedListener {
         fun onColorSelected(color: Int)
     }
 }
