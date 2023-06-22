@@ -76,7 +76,7 @@
     <string name="music_playlists">YT Music atskaņošanas saraksti</string>
     <string name="category_segments">Segmenti</string>
     <string name="category_sponsor">Sponsors</string>
-    <string name="category_interaction">Darbības atgādinājums (spiest \"Patīk\" un abonēt)</string>
+    <string name="category_interaction">Darbības atgādinājums</string>
     <string name="category_interaction_description">Šeit ietilpst īsi atgādinājumi spiest \"Patīk\", abonēt vai sekot kādam satura vidū. Gari un specifiski atgādinājumi neskaitās, tie skaitās kā pašreklamēšanās.</string>
     <string name="category_intro">Pārtraukums/intro animācija</string>
     <string name="category_outro_description">Šeit ietilpst viss pēc video beigām. Secinājumi ar informāciju neskaitās.</string>
@@ -438,4 +438,19 @@
     <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="play_automatically">Atskaņot automātiski</string>
     <string name="play_automatically_summary">Sākt atskaņot video automātiski, kad to izvēlas</string>
+    <string name="home_tab_content">Sākumlapas saturs</string>
+    <string name="welcome">Laipni lūgti LibreTube</string>
+    <string name="choose_instance">Vispirms izvēlieties instanci!</string>
+    <string name="off">Izslēgts</string>
+    <string name="manual">Manuāli</string>
+    <string name="automatic">Automātiski</string>
+    <string name="import_playlists_from">Importēt atskaņošanas sarakstus no</string>
+    <string name="show_search_suggestions">Rādīt meklēšanas ieteikumus</string>
+    <string name="change_playlist_description">Mainīt atskaņošanas saraksta aprakstu</string>
+    <string name="playlist_description">Atskaņošanas saraksta apraksts</string>
+    <string name="emptyPlaylistDescription">Atskaņošanas saraksta apraksts nevar būt tukšs!</string>
+    <string name="mark_as_unwatched">Atzīmēt kā neskatītu</string>
+    <string name="export_playlists_to">Eksportēt atskaņošanas sarakstus uz</string>
+    <string name="import_format_piped">Piped / LibreTube</string>
+    <string name="choose_instance_long">Izvēlieties Piped instanci, ko izmantot. Piped instance darbosies kā starpnieks starp jums un YouTube. Šīs instances fiziski atrodas dažādās vietās, uz ko norāda to valstu karogi. Instances, kas ir tuvāk jums, visticamāk strādās ātrāk nekā instances, kas ir tālāk. Jūs jebkurā mirklī varat izmainīt instanci iestatījumos.</string>
 </resources>
