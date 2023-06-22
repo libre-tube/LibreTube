@@ -56,7 +56,7 @@
     <string name="segment_skipped">ଛଡାଯାଇଥିଲା ଖଣ୍ଡ ଗୁଡିକ</string>
     <string name="category_segments">ଖଣ୍ଡଗୁଡ଼ିକ</string>
     <string name="category_selfpromo">ଅନାଦେୟ / ଆତ୍ମ ପଦୋନ୍ନତି</string>
-    <string name="category_interaction">ପାରସ୍ପରିକ କ୍ରିୟା ମନେ ପକାନ୍ତୁ</string>
+    <string name="category_interaction">ପାରସ୍ପରିକ ସ୍ମାରକ</string>
     <string name="category_interaction_description">ଯେତେବେଳେ ବିଷୟବସ୍ତୁ ମଝିରେ ପସନ୍ଦ, ସଦସ୍ୟତା କିମ୍ବା ଅନୁସରଣ କରିବାକୁ ଏକ ସଂକ୍ଷିପ୍ତ ସ୍ମାରକ ଅଛି ।ଯଦି ଲମ୍ବା କିମ୍ବା କିଛି ନିର୍ଦ୍ଦିଷ୍ଟ ବିଷୟରେ ହୋଇଥାଏ, ଏହା ପରିବର୍ତ୍ତେ ଆତ୍ମ ପ୍ରୋତ୍ସାହନ ହେବା ଉଚିତ୍ ।</string>
     <string name="category_outro">ଶେଷ କାର୍ଡ</string>
     <string name="category_outro_description">ସମାପ୍ତି ପରେ ଥିବା ସୂଚନା ପାଇଁ। ସୂଚନା ସହିତ ସିଦ୍ଧାନ୍ତ ପାଇଁ ନୁହେଁ ।</string>
@@ -447,4 +447,7 @@
     <string name="change_playlist_description">ପ୍ଲେଲିଷ୍ଟ ବର୍ଣ୍ଣନା ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
     <string name="playlist_description">ପ୍ଲେଲିଷ୍ଟ ବର୍ଣ୍ଣନା</string>
     <string name="show_search_suggestions">ସନ୍ଧାନ ପରାମର୍ଶଗୁଡିକ ଦେଖାନ୍ତୁ</string>
+    <string name="manual">ମାନୁଆଲ୍</string>
+    <string name="automatic">ସ୍ୱୟଂଚାଳିତ</string>
+    <string name="off">ବନ୍ଦ</string>
 </resources>

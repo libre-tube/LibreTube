@@ -87,7 +87,7 @@
     <string name="category_segments">الاجزاء</string>
     <string name="category_selfpromo">الترويج غير المدفوع / الذاتي</string>
     <string name="category_selfpromo_description">على غرار \"الراعي\" باستثناء الترويج غير المدفوع أو الذاتي. يتضمن ذلك أقساما حول البضائع أو التبرعات أو المعلومات حول من تعاونوا معه.</string>
-    <string name="category_interaction">تذكير التفاعل (إعجاب واشتراك)</string>
+    <string name="category_interaction">تذكير التفاعل</string>
     <string name="license">الترخيص</string>
     <string name="color_accent">اللون الثانوي</string>
     <string name="color_red">أحمر</string>
@@ -459,4 +459,7 @@
     <string name="playlist_description">وصف قائمة التشغيل</string>
     <string name="change_playlist_description">تغيير وصف قائمة التشغيل</string>
     <string name="show_search_suggestions">عرض اقتراحات البحث</string>
+    <string name="off">ايقاف</string>
+    <string name="manual">يدوي</string>
+    <string name="automatic">تلقائي</string>
 </resources>

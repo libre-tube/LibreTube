@@ -73,7 +73,7 @@
     <string name="category_sponsor_description">Placená propagace, placená doporučení a přímé reklamy. Nezahrnuje sebepropagaci nebo shout-outy uživatelů/tvůrců/webů/produktů, které se tvůrcovi líbí.</string>
     <string name="category_selfpromo">Neplacená/vlastní propagace</string>
     <string name="category_selfpromo_description">Podobné jako „sponzor“, ale pro neplacenou nebo vlastní propagaci. Zahrnuje sekce o zboží, darech nebo informace o tom, s kým spolupracují.</string>
-    <string name="category_interaction">Připomenutí interakce (like a odběr)</string>
+    <string name="category_interaction">Připomenutí interakce</string>
     <string name="category_interaction_description">Krátká připomínka, abyste dali like, odběr nebo jste sledovali tvůrce uprostřed obsahu. Pokud je segment dlouhý nebo zahrnuje něco specifického, mělo by být místo toho zařazeno do vlastní propagace.</string>
     <string name="category_intro">Přestávka/Intro</string>
     <string name="category_intro_description">Interval bez skutečného obsahu. Může to být pauza, statický obrázek nebo opakující se animace. Nemělo by být použito pro přechody obsahující informace.</string>
@@ -450,4 +450,7 @@
     <string name="emptyPlaylistDescription">Popis playlistu nemůže být prázdný</string>
     <string name="change_playlist_description">Změnit popis playlistu</string>
     <string name="show_search_suggestions">Zobrazit návrhy vyhledávání</string>
+    <string name="off">Vypnuto</string>
+    <string name="manual">Ručně</string>
+    <string name="automatic">Automaticky</string>
 </resources>

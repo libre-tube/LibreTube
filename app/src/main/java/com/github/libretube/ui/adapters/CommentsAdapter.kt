@@ -17,7 +17,6 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
-import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.obj.Comment
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.CommentsRowBinding
@@ -31,7 +30,6 @@ import com.github.libretube.ui.viewholders.CommentsViewHolder
 import com.github.libretube.util.HtmlParser
 import com.github.libretube.util.LinkHandler
 import com.github.libretube.util.TextUtils
-import kotlinx.serialization.encodeToString
 
 class CommentsAdapter(
     private val fragment: Fragment?,
@@ -61,10 +59,7 @@ class CommentsAdapter(
     }
 
     private fun navigateToReplies(comment: Comment) {
-        val args = bundleOf(
-            IntentData.videoId to videoId,
-            IntentData.comment to JsonHelper.json.encodeToString(comment),
-        )
+        val args = bundleOf(IntentData.videoId to videoId, IntentData.comment to comment)
         fragment!!.parentFragmentManager.commit {
             replace<CommentsRepliesFragment>(R.id.commentFragContainer, args = args)
             addToBackStack(null)
