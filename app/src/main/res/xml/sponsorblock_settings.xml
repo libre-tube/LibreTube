@@ -29,8 +29,7 @@
         app:defaultValue="false"
         android:dependency="sb_enabled_key"
         app:key="sb_enable_custom_colors"
-        app:title="@string/sb_color" />
-
+        app:title="@string/sb_custom_colors" />
 
     <PreferenceCategory app:title="@string/category_segments">
 

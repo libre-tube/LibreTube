@@ -18,7 +18,7 @@ class ColorPickerDialog(
     private val context: Context,
     private val initialColor: Int,
     private val onColorSelectedListener: OnColorSelectedListener
-) : DialogFragment(), SeekBar.OnSeekBarChangeListener, View.OnClickListener {
+) : DialogFragment(), SeekBar.OnSeekBarChangeListener {
 
     private var _binding: DialogColorPickerBinding? = null
     private val binding get() = _binding!!
@@ -33,10 +33,8 @@ class ColorPickerDialog(
         binding.redSeekBar.setOnSeekBarChangeListener(this)
         binding.greenSeekBar.setOnSeekBarChangeListener(this)
         binding.blueSeekBar.setOnSeekBarChangeListener(this)
-        binding.okay.setOnClickListener(this)
-        binding.cancel.setOnClickListener(this)
 
-        //Add listener to textbox
+        // Add listener to text input
         binding.colorHexInput.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int,
                                            after: Int) = Unit
@@ -68,6 +66,10 @@ class ColorPickerDialog(
 
         return MaterialAlertDialogBuilder(requireContext())
             .setView(binding.root)
+            .setPositiveButton(R.string.okay) { _, _ ->
+                onColorSelectedListener.onColorSelected(getColor())
+            }
+            .setNegativeButton(R.string.cancel, null)
             .show()
     }
 
@@ -95,20 +97,9 @@ class ColorPickerDialog(
         Toast.makeText(context, R.string.invalid_color, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onClick(v: View?) {
-        if (v?.id == R.id.okay) {
-            onColorSelectedListener.onColorSelected(getColor())
-            dismiss()
-        } else if (v?.id == R.id.cancel) {
-            dismiss()
-        }
-    }
-
-    private fun getColor(): Int {
-        // Get the color from the SeekBar progress values
-        return Color.argb(binding.alphaSeekBar.progress, binding.redSeekBar.progress,
-            binding.greenSeekBar.progress, binding.blueSeekBar.progress)
-    }
+    // Get the color from the SeekBar progress values
+    private fun getColor() = Color.argb(binding.alphaSeekBar.progress, binding.redSeekBar.progress,
+        binding.greenSeekBar.progress, binding.blueSeekBar.progress)
 
     private fun setColor(color: Int, textUpdate: Boolean = false) {
         // Set the SeekBar progress values based on the color

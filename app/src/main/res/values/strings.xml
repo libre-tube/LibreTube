@@ -304,7 +304,7 @@
     <string name="sb_markers">Markers</string>
     <string name="sb_markers_summary">Mark the segments on the time bar.</string>
     <string name="sb_color_enable">Toggles custom color segments for sponsor block segments</string>
-    <string name="sb_color">Segment Colors</string>
+    <string name="sb_custom_colors">Custom segment colors</string>
     <string name="color">Color</string>
     <string name="invalid_color">Invalid color value entered!</string>
     <string name="enter_hex_value">Enter Color Hex Value</string>

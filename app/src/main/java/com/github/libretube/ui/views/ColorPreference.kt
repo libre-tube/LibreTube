@@ -5,6 +5,7 @@ import android.content.res.TypedArray
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
@@ -27,7 +28,7 @@ class ColorPreference(context: Context, attrs: AttributeSet) : Preference(contex
         circleView = holder.itemView.findViewById(R.id.circle)
         updateColorView()
 
-        circleView.setOnClickListener {
+        holder.itemView.setOnClickListener {
             showColorPickerDialog()
         }
     }
