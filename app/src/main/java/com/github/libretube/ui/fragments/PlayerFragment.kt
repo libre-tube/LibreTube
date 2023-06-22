@@ -672,7 +672,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 }
                 return
             }
-
     }
 
     private fun playVideo() {
