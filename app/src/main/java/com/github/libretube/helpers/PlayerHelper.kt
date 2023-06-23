@@ -460,12 +460,12 @@ object PlayerHelper {
     }
 
     fun ExoPlayer.isInSegment(
-        segments: List<Segment>,
+        segments: List<Segment>
     ): Boolean {
         for (segment in segments) {
             val segmentStart = (segment.segment[0] * 1000f).toLong()
             val segmentEnd = (segment.segment[1] * 1000f).toLong()
-            if (currentPosition in segmentStart..segmentEnd){ return true }
+            if (currentPosition in segmentStart..segmentEnd) { return true }
         }
         return false
     }
