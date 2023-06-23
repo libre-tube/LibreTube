@@ -669,7 +669,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 binding.sbSkipBtn.visibility = View.VISIBLE
                 binding.sbSkipBtn.setOnClickListener {
                     exoPlayer.seekTo(segmentEnd)
-                    binding.sbSkipBtn.visibility = View.GONE
                 }
                 return
             }
