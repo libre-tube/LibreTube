@@ -20,7 +20,7 @@
     <string name="search_hint">Ara</string>
     <string name="share">Paylaş</string>
     <string name="username">Kullanıcı adı</string>
-    <string name="subscribe">Abone Ol</string>
+    <string name="subscribe">Abone ol</string>
     <string name="save">Kaydet</string>
     <string name="login">Giriş yap</string>
     <string name="logout">Çıkış yap</string>
@@ -31,7 +31,7 @@
     <string name="login_register">Giriş yap/kaydol</string>
     <string name="importsuccess">Abone olundu</string>
     <string name="cannotDownload">Bu görüntü indirilemiyor.</string>
-    <string name="import_from_yt">Abonelikleri İçe Aktar</string>
+    <string name="import_from_yt">Abonelikleri içe aktar</string>
     <string name="error">Bir şeyler ters gitti.</string>
     <string name="emptyList">Burada hiçbir şey yok.</string>
     <string name="playlistCreated">Oynatma listesi oluşturuldu.</string>
@@ -58,8 +58,8 @@
     <string name="systemLanguage">Sistem</string>
     <string name="comments">Yorumlar</string>
     <string name="videoCount">%1$d video</string>
-    <string name="noInternet">Önce internete bağlanın.</string>
-    <string name="retry">Yeniden Dene</string>
+    <string name="noInternet">Öncelikle internete bağlanın.</string>
+    <string name="retry">Yeniden dene</string>
     <string name="location">Konum</string>
     <string name="settings">Ayarlar</string>
     <string name="instance">Oluşum</string>
