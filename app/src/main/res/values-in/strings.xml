@@ -23,7 +23,7 @@
     <string name="already_logged_in">Anda sudah masuk, Anda dapat keluar dari akun anda.</string>
     <string name="instances">Pilih…</string>
     <string name="customInstance">Kustom</string>
-    <string name="region">Lokasi</string>
+    <string name="region">Wilayah</string>
     <string name="login_register">Masuk/daftar</string>
     <string name="cannotDownload">Tidak dapat mengunduh, ini adalah aliran.</string>
     <string name="dlisinprogress">Harap tunggu hingga semua unduhan saat ini selesai.</string>
@@ -444,7 +444,13 @@
     <string name="emptyPlaylistDescription">Deskripsi daftar putar tidak bisa kosong</string>
     <string name="change_playlist_description">Ubah deskripsi daftar putar</string>
     <string name="show_search_suggestions">Tampilkan saran pencarian</string>
-    <string name="manual">Manual</string>
-    <string name="off">Nonaktif</string>
-    <string name="automatic">Otomatis</string>
+    <string name="manual">Lewati secara manual</string>
+    <string name="off">Nonaktifkan</string>
+    <string name="automatic">Lewati secara otomatis</string>
+    <string name="sb_color_enable">Mengaktifkan segmen warna kustom untuk segmen pemblokiran sponsor</string>
+    <string name="invalid_color">Nilai warna yang dimasukkan tidak valid!</string>
+    <string name="visible">Tampilkan dalam bilah seek</string>
+    <string name="color">Warna</string>
+    <string name="sb_custom_colors">Warna segmen kustom</string>
+    <string name="enter_hex_value">Masukkan Nilai Hex Warna</string>
 </resources>
