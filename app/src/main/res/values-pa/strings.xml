@@ -88,7 +88,7 @@
     <string name="category_sponsor">ਸਪਾਂਸਰ</string>
     <string name="category_selfpromo">ਅਨਪੇਡ/ਸਵੈ ਪ੍ਰਚਾਰ</string>
     <string name="category_selfpromo_description">ਅਨਪੇਡ ਕੀਤੇ ਜਾਂ ਸਵੈ-ਪ੍ਰਚਾਰ ਨੂੰ ਛੱਡ ਕੇ \"ਪ੍ਰਾਯੋਜਕ\" ਦੇ ਸਮਾਨ। ਇਸ ਵਿੱਚ ਵਪਾਰਕ ਮਾਲ, ਦਾਨ, ਜਾਂ ਉਹਨਾਂ ਨੇ ਕਿਸ ਨਾਲ ਸਹਿਯੋਗ ਕੀਤਾ ਇਸ ਬਾਰੇ ਜਾਣਕਾਰੀ ਦੇ ਭਾਗ ਸ਼ਾਮਲ ਹਨ।</string>
-    <string name="category_interaction">ਇੰਟਰਐਕਸ਼ਨ ਰੀਮਾਈਂਡਰ (ਲਾਈਕ ਅਤੇ ਸਬਸਕ੍ਰਾਈਬ )</string>
+    <string name="category_interaction">ਇੰਟਰਐਕਸ਼ਨ ਰੀਮਾਈਂਡਰ</string>
     <string name="category_intro">ਇੰਟਰਮਿਸ਼ਨ/ਇੰਟਰੋ ਐਨੀਮੇਸ਼ਨ</string>
     <string name="category_intro_description">ਅਸਲ ਸਮੱਗਰੀ ਤੋਂ ਬਿਨਾਂ ਇੱਕ ਅੰਤਰਾਲ। ਇੱਕ ਵਿਰਾਮ, ਸਥਿਰ ਫਰੇਮ, ਦੁਹਰਾਉਣ ਵਾਲਾ ਐਨੀਮੇਸ਼ਨ ਹੋ ਸਕਦਾ ਹੈ। ਜਾਣਕਾਰੀ ਰੱਖਣ ਵਾਲੇ ਪਰਿਵਰਤਨ ਲਈ ਨਹੀਂ ਵਰਤਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ।</string>
     <string name="category_outro">ਅੰਤਮ ਕਾਰਡ ਅਤੇ ਕ੍ਰੈਡਿਟਸ</string>
@@ -446,4 +446,14 @@
     <string name="emptyPlaylistDescription">ਪਲੇਅ-ਲਿਸਟ ਵੇਰਵਾ ਖਾਲੀ ਨਹੀਂ ਹੋ ਸਕਦਾ</string>
     <string name="change_playlist_description">ਪਲੇਅ-ਲਿਸਟ ਵੇਰਵਾ ਬਦਲੋ</string>
     <string name="playlist_description">ਪਲੇਅ-ਲਿਸਟ ਵੇਰਵਾ</string>
+    <string name="sb_color_enable">ਸਪਾਂਸਰ ਬਲਾਕ ਸੈਗਮੈਂਟਾਂ ਲਈ ਪਸੰਦੀਦਾ ਰੰਗਦਾਰ ਹਿੱਸਿਆਂ ਨੂੰ ਟੌਗਲ ਕਰਦਾ ਹੈ</string>
+    <string name="sb_custom_colors">ਕਸਟਮ ਸੈਗਮੈਂਟ ਰੰਗ</string>
+    <string name="invalid_color">ਅਵੈਧ ਰੰਗ ਵੈਲਿਯੂ ਦਾਖਲ ਕੀਤੀ ਗਈ!</string>
+    <string name="off">ਅਸਮਰੱਥ ਕਰੋ</string>
+    <string name="manual">ਹੱਥਾਂ ਨਾਲ ਸਕਿੱਪ</string>
+    <string name="automatic">ਆਟੋ ਸਕਿੱਪ</string>
+    <string name="color">ਰੰਗ</string>
+    <string name="enter_hex_value">ਰੰਗ ਹੈਕਸ ਵੈਲਿਯੂ ਦਰਜ਼ ਕਰੋ</string>
+    <string name="visible">ਸੀਕ ਬਾਰ ਵਿੱਚ ਵਿਖਾਓ</string>
+    <string name="show_search_suggestions">ਖੋਜ ਸੁਝਾਅ ਵਿਖਾਓ</string>
 </resources>
