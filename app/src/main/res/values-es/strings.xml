@@ -450,7 +450,13 @@
     <string name="change_playlist_description">Cambiar descripción de lista de reproducción</string>
     <string name="emptyPlaylistDescription">La descripción no puede estar vacía</string>
     <string name="show_search_suggestions">Mostrar sugerencias al buscar</string>
-    <string name="manual">Manual</string>
-    <string name="off">Deshabilitado</string>
-    <string name="automatic">Automático</string>
+    <string name="manual">Omitir manualmente</string>
+    <string name="off">Deshabilitar</string>
+    <string name="automatic">Omitir automáticamente</string>
+    <string name="invalid_color">¡Se ha introducido un código de color inválido!</string>
+    <string name="visible">Mostrar en la barra de tiempo</string>
+    <string name="sb_color_enable">Establece colores personalizados para los segmentos de SponsorBlock</string>
+    <string name="sb_custom_colors">Colores de segmentos personalizados</string>
+    <string name="color">Color</string>
+    <string name="enter_hex_value">Introduce un valor Color Hex</string>
 </resources>
