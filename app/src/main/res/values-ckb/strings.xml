@@ -74,7 +74,7 @@
     <string name="customization">دەستکاریکردن</string>
     <string name="noInternet">سەرەتا پێویستە پەیوەستی ئینتەرنێت بیت.</string>
     <string name="category_selfpromo_description">هاوشێوەی \"سپۆنسەر\" بەڵام بەبێ پارەدان بۆ خۆ بەرزکردنەوە، ئەمەش بەشەکانی کاڵا، بەخشین، یان زانیاری دەربارەی ئەوەی کە کێ هاوکاری کردوون دەگرێتەوە.</string>
-    <string name="category_interaction">بیرخەرەوەی فرمان (بەدڵبون و هاوبەشیکردن)</string>
+    <string name="category_interaction">بیرخستنەوەی کاردانەوە</string>
     <string name="category_interaction_description">کاتێک بیرخستنەوەیەکی کورت هەیە بۆ بەدڵبوون، سەبسکرایب یان شوێنکەوتن لە ناوەڕاستی ڤیدیۆکەدا، ئەگەر درێژ بێت یان دەربارەی شتێکی تایبەت، لەبری ئەوە دەبێت خۆ بەرزکردنەوە بێت.</string>
     <string name="category_intro_description">ناوبڕێک کە ناوەڕۆکی ڕاستەقینەی ڤیدیۆکە نەبێت، وەستانێکی کاتی، چوارچێوەیەکی جێگیر، کورتەی جوڵاوی دووبارە، نابێت بۆ ئەو گواستنەوەیانە بەکاربهێنرێت کە زانیارییان تێدایە.</string>
     <string name="category_outro">کارتەکانی کۆتایی و دانەر</string>
@@ -447,4 +447,13 @@
     <string name="import_subscriptions_from">هێنانی هاوبەشییەکان لە</string>
     <string name="export_subscriptions_to">ناردنی هابەشییەکان بۆ</string>
     <string name="show_search_suggestions">پیشاندانی پێشنیارەکانی گەڕان</string>
+    <string name="sb_custom_colors">ڕەنگی تایبەت نیشانەکردن</string>
+    <string name="color">ڕەنگ</string>
+    <string name="enter_hex_value">بەهای تایبەتی ڕەنگ بنوسە</string>
+    <string name="manual">پەڕاندنی دەستی</string>
+    <string name="sb_color_enable">پیشاندانی ڕەنگی تایبەت بۆ بەشە باندکراوەکانی سپۆنسەر</string>
+    <string name="invalid_color">بەهایەکی نادروستی ڕەنگ نوسراوە!</string>
+    <string name="off">نا چالاک</string>
+    <string name="visible">پیشاندان لەبەشی خوارەوە</string>
+    <string name="automatic">پەڕاندنی خۆکار</string>
 </resources>
