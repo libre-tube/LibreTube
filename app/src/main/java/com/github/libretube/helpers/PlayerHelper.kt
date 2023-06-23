@@ -459,6 +459,17 @@ object PlayerHelper {
         return null
     }
 
+    fun ExoPlayer.isInSegment(
+        segments: List<Segment>
+    ): Boolean {
+        for (segment in segments) {
+            val segmentStart = (segment.segment[0] * 1000f).toLong()
+            val segmentEnd = (segment.segment[1] * 1000f).toLong()
+            if (currentPosition in segmentStart..segmentEnd) { return true }
+        }
+        return false
+    }
+
     /**
      * Show a dialog with the chapters provided, even if the list is empty
      */
