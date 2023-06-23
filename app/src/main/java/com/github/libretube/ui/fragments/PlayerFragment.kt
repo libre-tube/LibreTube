@@ -81,6 +81,7 @@ import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.checkForSegments
+import com.github.libretube.helpers.PlayerHelper.isInSegment
 import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
@@ -672,6 +673,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 }
                 return
             }
+        if (!exoPlayer.isInSegment(segments)) binding.sbSkipBtn.visibility = View.GONE
     }
 
     private fun playVideo() {
