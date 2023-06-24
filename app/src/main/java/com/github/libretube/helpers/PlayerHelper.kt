@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.net.Uri
+import android.os.Handler
+import android.os.Looper
 import android.text.format.DateUtils
 import android.util.Base64
 import android.view.accessibility.CaptioningManager
@@ -16,6 +18,7 @@ import androidx.core.app.RemoteActionCompat
 import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.IconCompat
 import androidx.core.net.toUri
+import androidx.core.view.children
 import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
 import androidx.media3.common.PlaybackParameters
@@ -46,7 +49,8 @@ object PlayerHelper {
             "outro",
             "filler",
             "music_offtopic",
-            "preview")
+            "preview"
+        )
 
     /**
      * Create a base64 encoded DASH stream manifest
@@ -84,9 +88,9 @@ object PlayerHelper {
     fun getSponsorBlockCategories(): MutableMap<String, SbSkipOptions> {
         val categories: MutableMap<String, SbSkipOptions> = mutableMapOf()
 
-        for (category in SPONSOR_CATEGORIES){
+        for (category in SPONSOR_CATEGORIES) {
             val state = PreferenceHelper.getString(category + "_category", "off").uppercase()
-            if (SbSkipOptions.valueOf(state) != SbSkipOptions.OFF){
+            if (SbSkipOptions.valueOf(state) != SbSkipOptions.OFF) {
                 categories[category] = SbSkipOptions.valueOf(state)
             }
         }
@@ -109,6 +113,7 @@ object PlayerHelper {
                     ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
                 }
             }
+
             "auto" -> ActivityInfo.SCREEN_ORIENTATION_SENSOR
             "landscape" -> ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
             "portrait" -> ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
@@ -231,7 +236,9 @@ object PlayerHelper {
 
     private val backgroundSpeed: Float
         get() = when (PreferenceHelper.getBoolean(PreferenceKeys.CUSTOM_PLAYBACK_SPEED, false)) {
-            true -> PreferenceHelper.getString(PreferenceKeys.BACKGROUND_PLAYBACK_SPEED, "1").toFloat()
+            true -> PreferenceHelper.getString(PreferenceKeys.BACKGROUND_PLAYBACK_SPEED, "1")
+                .toFloat()
+
             else -> playbackSpeed
         }
 
@@ -427,8 +434,7 @@ object PlayerHelper {
      * Check for SponsorBlock segments matching the current player position
      * @param context A main dispatcher context
      * @param segments List of the SponsorBlock segments
-     * @param skipManually Whether the event gets handled by the function caller
-     * @return If segment found and [skipManually] is true, the end position of the segment in ms, otherwise null
+     * @return If segment found and should skip manually, the end position of the segment in ms, otherwise null
      */
     fun ExoPlayer.checkForSegments(
         context: Context,
@@ -465,9 +471,17 @@ object PlayerHelper {
         for (segment in segments) {
             val segmentStart = (segment.segment[0] * 1000f).toLong()
             val segmentEnd = (segment.segment[1] * 1000f).toLong()
-            if (currentPosition in segmentStart..segmentEnd) { return true }
+            if (currentPosition in segmentStart..segmentEnd) return true
         }
         return false
+    }
+
+    /**
+     * Get the name of the currently played chapter
+     */
+    fun getCurrentChapterIndex(exoPlayer: ExoPlayer, chapters: List<ChapterSegment>): Int? {
+        val currentPosition = exoPlayer.currentPosition / 1000
+        return chapters.indexOfLast { currentPosition >= it.start }.takeIf { it >= 0 }
     }
 
     /**
@@ -477,11 +491,31 @@ object PlayerHelper {
         val titles = chapters.map { chapter ->
             "(${DateUtils.formatElapsedTime(chapter.start)}) ${chapter.title}"
         }
-        MaterialAlertDialogBuilder(context)
+        val dialog = MaterialAlertDialogBuilder(context)
             .setTitle(R.string.chapters)
             .setItems(titles.toTypedArray()) { _, index ->
                 player.seekTo(chapters[index].start * 1000)
             }
-            .show()
+            .create()
+        val handler = Handler(Looper.getMainLooper())
+
+        val updatePosition = Runnable {
+            // scroll to the current playing index in the chapter
+            val currentPosition =
+                getCurrentChapterIndex(player, chapters) ?: return@Runnable
+            dialog.listView.smoothScrollToPosition(currentPosition)
+            val current = dialog.listView.children.toList()[currentPosition]
+            val highlightColor =
+                ThemeHelper.getThemeColor(context, android.R.attr.colorControlHighlight)
+            current.setBackgroundColor(highlightColor)
+        }
+
+        dialog.setOnShowListener {
+            updatePosition.run()
+            // update the position after a short delay
+            if (dialog.isShowing) handler.postDelayed(updatePosition, 200)
+        }
+
+        dialog.show()
     }
 }
