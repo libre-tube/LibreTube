@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.net.Uri
+import android.os.Handler
+import android.os.Looper
 import android.text.format.DateUtils
 import android.util.Base64
 import android.view.accessibility.CaptioningManager
@@ -16,6 +18,7 @@ import androidx.core.app.RemoteActionCompat
 import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.IconCompat
 import androidx.core.net.toUri
+import androidx.core.view.children
 import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
 import androidx.media3.common.PlaybackParameters
@@ -464,8 +467,7 @@ object PlayerHelper {
      * Check for SponsorBlock segments matching the current player position
      * @param context A main dispatcher context
      * @param segments List of the SponsorBlock segments
-     * @param skipManually Whether the event gets handled by the function caller
-     * @return If segment found and [skipManually] is true, the end position of the segment in ms, otherwise null
+     * @return If segment found and should skip manually, the end position of the segment in ms, otherwise null
      */
     fun ExoPlayer.checkForSegments(
         context: Context,
@@ -488,12 +490,31 @@ object PlayerHelper {
                         }
                     }
                     seekTo(segmentEnd)
-                } else {
+                } else if (sponsorBlockConfig[segment.category] == SbSkipOptions.MANUAL) {
                     return segmentEnd
                 }
             }
         }
         return null
+    }
+
+    fun ExoPlayer.isInSegment(
+        segments: List<Segment>
+    ): Boolean {
+        for (segment in segments) {
+            val segmentStart = (segment.segment[0] * 1000f).toLong()
+            val segmentEnd = (segment.segment[1] * 1000f).toLong()
+            if (currentPosition in segmentStart..segmentEnd) return true
+        }
+        return false
+    }
+
+    /**
+     * Get the name of the currently played chapter
+     */
+    fun getCurrentChapterIndex(exoPlayer: ExoPlayer, chapters: List<ChapterSegment>): Int? {
+        val currentPosition = exoPlayer.currentPosition / 1000
+        return chapters.indexOfLast { currentPosition >= it.start }.takeIf { it >= 0 }
     }
 
     /**
@@ -503,11 +524,31 @@ object PlayerHelper {
         val titles = chapters.map { chapter ->
             "(${DateUtils.formatElapsedTime(chapter.start)}) ${chapter.title}"
         }
-        MaterialAlertDialogBuilder(context)
+        val dialog = MaterialAlertDialogBuilder(context)
             .setTitle(R.string.chapters)
             .setItems(titles.toTypedArray()) { _, index ->
                 player.seekTo(chapters[index].start * 1000)
             }
-            .show()
+            .create()
+        val handler = Handler(Looper.getMainLooper())
+
+        val updatePosition = Runnable {
+            // scroll to the current playing index in the chapter
+            val currentPosition =
+                getCurrentChapterIndex(player, chapters) ?: return@Runnable
+            dialog.listView.smoothScrollToPosition(currentPosition)
+            val current = dialog.listView.children.toList()[currentPosition]
+            val highlightColor =
+                ThemeHelper.getThemeColor(context, android.R.attr.colorControlHighlight)
+            current.setBackgroundColor(highlightColor)
+        }
+
+        dialog.setOnShowListener {
+            updatePosition.run()
+            // update the position after a short delay
+            if (dialog.isShowing) handler.postDelayed(updatePosition, 200)
+        }
+
+        dialog.show()
     }
 }

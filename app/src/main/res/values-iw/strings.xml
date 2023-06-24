@@ -42,7 +42,7 @@
     <string name="music_albums">אלבומים מ־YT Music</string>
     <string name="music_playlists">רשימות נגינה מ־YT Music</string>
     <string name="category_sponsor_description">קידום ממומן, הפניות בתשלום ופרסום ישיר. לא למטרות קידום עצמי או הוקרה כנה של מטרות/יוצרים/אתרים/מוצרים.</string>
-    <string name="category_interaction">תזכורת אינטראקציה (לייק ומינוי)</string>
+    <string name="category_interaction">תזכורת אינטראקציה</string>
     <string name="category_outro">כרטיסי סיום וקרדיטים</string>
     <string name="category_outro_description">מידע לאחר הסיום. לא למסקנות עם מידע.</string>
     <string name="license">רישיון</string>
@@ -453,4 +453,7 @@
     <string name="playlist_description">תיאור רשימת נגינה</string>
     <string name="emptyPlaylistDescription">תיאור רשימת הנגינה לא יכול להיות ריק</string>
     <string name="show_search_suggestions">הצגת הצעות חיפוש</string>
+    <string name="automatic">אוטומטי</string>
+    <string name="off">כבוי</string>
+    <string name="manual">ידני</string>
 </resources>

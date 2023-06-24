@@ -22,7 +22,7 @@
     <string name="music_songs">YT Musicの曲</string>
     <string name="sponsorblock_summary">このAPIを使用 https://sponsor.ajay.app/</string>
     <string name="category_selfpromo">無償/自己宣伝</string>
-    <string name="category_interaction">操作のお願い (いいねや登録)</string>
+    <string name="category_interaction">操作のお願い</string>
     <string name="category_intro">合間/導入アニメ</string>
     <string name="category_outro">終了シーンとクレジット</string>
     <string name="color_blue">群青色</string>
@@ -444,4 +444,7 @@
     <string name="playlist_description">プレイリストの説明</string>
     <string name="emptyPlaylistDescription">プレイリストの説明は空にできません</string>
     <string name="show_search_suggestions">検索語句の候補を表示</string>
+    <string name="off">オフ</string>
+    <string name="manual">手動</string>
+    <string name="automatic">自動</string>
 </resources>

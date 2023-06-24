@@ -89,4 +89,28 @@
 
     </com.github.libretube.ui.views.CustomSwipeToRefresh>
 
+    <LinearLayout
+        android:id="@+id/nothing_here"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/listIV"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_list" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/emptyList"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
 </FrameLayout>

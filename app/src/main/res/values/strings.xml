@@ -306,6 +306,11 @@
     <string name="queue">Queue</string>
     <string name="sb_markers">Markers</string>
     <string name="sb_markers_summary">Mark the segments on the time bar.</string>
+    <string name="sb_color_enable">Toggles custom color segments for sponsor block segments</string>
+    <string name="sb_custom_colors">Custom segment colors</string>
+    <string name="color">Color</string>
+    <string name="invalid_color">Invalid color value entered!</string>
+    <string name="enter_hex_value">Enter Color Hex Value</string>
     <string name="livestreams">Livestreams</string>
     <string name="alternative_videos_layout">Alternative videos layout</string>
     <string name="defaultIconLight">Default light</string>
@@ -422,9 +427,10 @@
     <string name="change_playlist_description">Change playlist description</string>
     <string name="playlist_description">Playlist description</string>
     <string name="emptyPlaylistDescription">The playlist description can\'t be empty</string>
-    <string name="off">Off</string>
-    <string name="manual">Manual</string>
-    <string name="automatic">Automatic</string>
+    <string name="off">Disable</string>
+    <string name="visible">Show in seek bar</string>
+    <string name="manual">Manual skip</string>
+    <string name="automatic">Auto skip</string>
 
     <!-- Backup & Restore Settings -->
     <string name="import_subscriptions_from">Import subscriptions from</string>

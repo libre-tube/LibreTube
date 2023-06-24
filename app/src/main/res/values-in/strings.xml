@@ -86,7 +86,7 @@
     <string name="app_icon">Ikon</string>
     <string name="youtube">Youtube</string>
     <string name="category_selfpromo_description">Mirip dengan \"sponsor\" kecuali ini tidak dibayar atau promosi diri sendiri. Ini termasuk merchandise, donasi, atau informasi tentang siapa yang berkolaborasi dengan mereka.</string>
-    <string name="category_interaction">Pengingat interaksi (suka dan berlangganan)</string>
+    <string name="category_interaction">Pengingat interaksi</string>
     <string name="category_intro">Jeda/Animasi Intro</string>
     <string name="category_intro_description">Bagian yang bukan konten sebenarnya. Dapat berupa jeda, gambar statik, atau animasi berulang. Ini tidak boleh digunakan untuk transisi yang berisi informasi.</string>
     <string name="category_outro">Kartu akhir dan kredit</string>
@@ -444,4 +444,7 @@
     <string name="emptyPlaylistDescription">Deskripsi daftar putar tidak bisa kosong</string>
     <string name="change_playlist_description">Ubah deskripsi daftar putar</string>
     <string name="show_search_suggestions">Tampilkan saran pencarian</string>
+    <string name="manual">Manual</string>
+    <string name="off">Nonaktif</string>
+    <string name="automatic">Otomatis</string>
 </resources>

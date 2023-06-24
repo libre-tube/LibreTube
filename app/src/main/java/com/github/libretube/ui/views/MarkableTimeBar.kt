@@ -45,6 +45,7 @@ class MarkableTimeBar(
         val horizontalOffset = (parent as View).marginLeft
         length = canvas.width - horizontalOffset * 2
         val marginY = canvas.height / 2 - progressBarHeight / 2
+        val themeColor = ThemeHelper.getThemeColor(context, R.attr.colorOnSecondary,)
 
         segments.forEach {
             canvas.drawRect(
@@ -55,10 +56,11 @@ class MarkableTimeBar(
                     canvas.height - marginY,
                 ),
                 Paint().apply {
-                    color = ThemeHelper.getThemeColor(
-                        context,
-                        R.attr.colorOnSecondary,
-                    )
+                    color = if (PreferenceHelper.getBoolean("sb_enable_custom_colors", false)) {
+                        PreferenceHelper.getInt(it.category + "_color", themeColor)
+                    } else {
+                        themeColor
+                    }
                 },
             )
         }

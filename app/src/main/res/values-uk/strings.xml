@@ -90,7 +90,7 @@
     <string name="category_sponsor">Спонсор</string>
     <string name="category_sponsor_description">Платні промоції, платні реферали та пряма реклама. Не для самореклами або чесних відгуків про творців, вебсайти та продукти які їм подобаються.</string>
     <string name="category_selfpromo">Неоплачена/Самореклама</string>
-    <string name="category_interaction">Нагадування про взаємодію (вподобайка і підписка)</string>
+    <string name="category_interaction">Нагадування про взаємодію</string>
     <string name="category_interaction_description">Там де є коротке нагадування про те, щоб поставити вподобайку, підписатися або слідувати посеред контенту. Якщо це є довгим або про щось специфічне, воно тоді має бути саморекламою.</string>
     <string name="category_intro">Антракт/Вступна Анімація</string>
     <string name="category_intro_description">Певний інтервал без самого контенту. Може бути паузою, статичне зображення, повторювальна анімація. Не слід використовувати для переходів, що містять інформацію.</string>
@@ -453,4 +453,13 @@
     <string name="emptyPlaylistDescription">Опис добірки обов\'язковий</string>
     <string name="playlist_description">Опис добірки</string>
     <string name="show_search_suggestions">Показати пропозиції пошуку</string>
+    <string name="manual">Пропуск вручну</string>
+    <string name="off">Вимкнути</string>
+    <string name="automatic">Автопропуск</string>
+    <string name="invalid_color">Введено недійсне значення кольору!</string>
+    <string name="color">Колір</string>
+    <string name="sb_color_enable">Перемикає користувацькі колірні сегменти для сегментів спонсорських блоків</string>
+    <string name="sb_custom_colors">Користувацькі кольори сегментів</string>
+    <string name="enter_hex_value">Введіть Hex значення кольору</string>
+    <string name="visible">Показати на панелі прокручування</string>
 </resources>

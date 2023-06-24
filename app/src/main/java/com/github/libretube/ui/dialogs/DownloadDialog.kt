@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -34,6 +35,7 @@ import java.io.IOException
 class DownloadDialog(
     private val videoId: String,
 ) : DialogFragment() {
+    private var onDownloadConfirm = {}
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogDownloadBinding.inflate(layoutInflater)
 
@@ -60,7 +62,13 @@ class DownloadDialog(
 
         return MaterialAlertDialogBuilder(requireContext())
             .setView(binding.root)
+            .setPositiveButton(R.string.download, null)
             .show()
+            .apply {
+                getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+                    onDownloadConfirm.invoke()
+                }
+            }
     }
 
     private fun fetchAvailableSources(binding: DialogDownloadBinding) {
@@ -143,10 +151,10 @@ class DownloadDialog(
 
         restorePreviousSelections(binding, videoStreams, audioStreams, subtitles)
 
-        binding.download.setOnClickListener {
+        onDownloadConfirm = onDownloadConfirm@ {
             if (binding.fileName.text.toString().isEmpty()) {
                 Toast.makeText(context, R.string.invalid_filename, Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+                return@onDownloadConfirm
             }
 
             val videoPosition = binding.videoSpinner.selectedItemPosition - 1
@@ -155,7 +163,7 @@ class DownloadDialog(
 
             if (listOf(videoPosition, audioPosition, subtitlePosition).all { it == -1 }) {
                 Toast.makeText(context, R.string.nothing_selected, Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+                return@onDownloadConfirm
             }
 
             val videoStream = videoStreams.getOrNull(videoPosition)

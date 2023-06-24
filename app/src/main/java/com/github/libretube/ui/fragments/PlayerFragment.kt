@@ -82,6 +82,7 @@ import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.SPONSOR_HIGHLIGHT_CATEGORY
 import com.github.libretube.helpers.PlayerHelper.checkForSegments
+import com.github.libretube.helpers.PlayerHelper.isInSegment
 import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
@@ -582,12 +583,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         binding.playerViewsInfo.text = viewInfo
 
         if (this::chapters.isInitialized && chapters.isNotEmpty()) {
-            val chapterIndex = getCurrentChapterIndex() ?: return
-            // scroll to the current chapter in the chapterRecView in the description
-            binding.chaptersRecView.scrollToPosition(chapterIndex)
-            // set selected item, that should be highlighted
-            val chaptersAdapter = binding.chaptersRecView.adapter as ChaptersAdapter
-            chaptersAdapter.updateSelectedPosition(chapterIndex)
+            setCurrentChapterName(true, false)
         }
     }
 
@@ -669,11 +665,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 binding.sbSkipBtn.visibility = View.VISIBLE
                 binding.sbSkipBtn.setOnClickListener {
                     exoPlayer.seekTo(segmentEnd)
-                    binding.sbSkipBtn.visibility = View.GONE
                 }
                 return
             }
-
+        if (!exoPlayer.isInSegment(segments)) binding.sbSkipBtn.visibility = View.GONE
     }
 
     private fun playVideo() {
@@ -1227,17 +1222,17 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     // set the name of the video chapter in the exoPlayerView
-    private fun setCurrentChapterName(position: Long? = null) {
+    private fun setCurrentChapterName(forceUpdate: Boolean = false, enqueueNew: Boolean = true) {
         // return if chapters are empty to avoid crashes
         if (chapters.isEmpty() || _binding == null) return
 
         // call the function again in 100ms
-        binding.player.postDelayed(this::setCurrentChapterName, 100)
+        if (enqueueNew) binding.player.postDelayed(this::setCurrentChapterName, 100)
 
         // if the user is scrubbing the time bar, don't update
-        if (scrubbingTimeBar && position == null) return
+        if (scrubbingTimeBar && !forceUpdate) return
 
-        val chapterIndex = getCurrentChapterIndex(position) ?: return
+        val chapterIndex = PlayerHelper.getCurrentChapterIndex(exoPlayer, chapters) ?: return
         val chapterName = chapters[chapterIndex].title.trim()
 
         // change the chapter name textView text to the chapterName
@@ -1247,14 +1242,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             val chaptersAdapter = binding.chaptersRecView.adapter as ChaptersAdapter
             chaptersAdapter.updateSelectedPosition(chapterIndex)
         }
-    }
-
-    /**
-     * Get the name of the currently played chapter
-     */
-    private fun getCurrentChapterIndex(position: Long? = null): Int? {
-        val currentPosition = (position ?: exoPlayer.currentPosition) / 1000
-        return chapters.indexOfLast { currentPosition >= it.start }.takeIf { it >= 0 }
     }
 
     private fun setMediaSource(uri: Uri, mimeType: String) {
@@ -1562,12 +1549,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 playerBinding,
                 streams.duration * 1000,
                 onScrub = {
-                    setCurrentChapterName(it)
+                    setCurrentChapterName(forceUpdate = true, enqueueNew = false)
                     scrubbingTimeBar = true
                 },
                 onScrubEnd = {
                     scrubbingTimeBar = false
-                    setCurrentChapterName(it)
+                    setCurrentChapterName(forceUpdate = true, enqueueNew = false)
                 },
             ),
         )

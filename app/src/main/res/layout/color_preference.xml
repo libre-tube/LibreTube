@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:paddingTop="10dp"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:paddingBottom="10dp">
+
+
+    <TextView
+        android:id="@android:id/title"
+        style="?android:attr/preferenceStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:fadingEdge="horizontal"
+        android:singleLine="true"
+        android:text="Title"
+        android:textAlignment="textEnd"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="14sp"
+        android:textStyle="italic" />
+
+    <View
+        android:id="@+id/circle"
+        android:layout_width="20sp"
+        android:layout_height="20sp"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/circle"
+        android:layout_marginStart="16dp"/>
+
+</LinearLayout>

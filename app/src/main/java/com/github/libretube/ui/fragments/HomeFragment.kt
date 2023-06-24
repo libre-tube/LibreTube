@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -91,6 +93,13 @@ class HomeFragment : Fragment() {
                     async { if (visibleItems.contains(FEATURED)) loadFeed() },
                     async { if (visibleItems.contains(PLAYLISTS)) loadPlaylists() },
                 )
+
+                val binding = _binding ?: return@repeatOnLifecycle
+                // No category is shown because they are either empty or disabled
+                if (binding.progress.isVisible) {
+                    binding.progress.isGone = true
+                    binding.nothingHere.isVisible = true
+                }
             }
         }
     }
@@ -190,11 +199,11 @@ class HomeFragment : Fragment() {
 
     private fun makeVisible(vararg views: View) {
         views.forEach {
-            it.visibility = View.VISIBLE
+            it.isVisible = true
         }
         val binding = _binding ?: return
-        binding.progress.visibility = View.GONE
-        binding.scroll.visibility = View.VISIBLE
+        binding.progress.isGone = true
+        binding.scroll.isVisible = true
         binding.refresh.isRefreshing = false
     }
 
