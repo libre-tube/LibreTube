@@ -99,6 +99,7 @@ object PreferenceKeys {
     const val PLAY_AUTOMATICALLY = "play_automatically"
     const val FULLSCREEN_GESTURES = "fullscreen_gestures"
     const val UNLIMITED_SEARCH_HISTORY = "unlimited_search_history"
+    const val SB_HIGHLIGHTS = "sb_highlights"
 
     /**
      * Background mode

@@ -80,6 +80,7 @@ import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.helpers.PlayerHelper.SPONSOR_HIGHLIGHT_CATEGORY
 import com.github.libretube.helpers.PlayerHelper.checkForSegments
 import com.github.libretube.helpers.PlayerHelper.isInSegment
 import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
@@ -167,7 +168,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     /**
      * Chapters and comments
      */
-    private lateinit var chapters: List<ChapterSegment>
+    private lateinit var chapters: MutableList<ChapterSegment>
 
     /**
      * for the player view
@@ -752,7 +753,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 }
                 // show the player notification
                 initializePlayerNotification()
-                if (PlayerHelper.sponsorBlockEnabled) fetchSponsorBlockSegments()
+
+                // Since the highlight is also a chapter, we need to fetch the other segments
+                // first
+                fetchSponsorBlockSegments()
+
+                initializeChapters()
 
                 // add the video to the watch history
                 if (PlayerHelper.watchHistoryEnabled) {
@@ -768,18 +774,21 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private fun fetchSponsorBlockSegments() {
         lifecycleScope.launch(Dispatchers.IO) {
             runCatching {
-                if (sponsorBlockConfig.isEmpty()) return@runCatching
+                if (sponsorBlockConfig.isEmpty()) return@launch
                 segments =
                     RetrofitInstance.api.getSegments(
                         videoId,
                         JsonHelper.json.encodeToString(sponsorBlockConfig.keys),
                     ).segments
-                if (segments.isEmpty()) return@runCatching
+                if (segments.isEmpty()) return@launch
 
                 withContext(Dispatchers.Main) {
                     playerBinding.exoProgress.setSegments(segments)
                     playerBinding.sbToggle.visibility = View.VISIBLE
                     updateDisplayedDuration()
+                }
+                segments.firstOrNull { it.category == SPONSOR_HIGHLIGHT_CATEGORY }?.let {
+                    initializeHighlight(it)
                 }
             }
         }
@@ -910,8 +919,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playerBinding.exoTitle.text = streams.title
 
         // init the chapters recyclerview
-        chapters = streams.chapters
-        initializeChapters()
+        chapters = streams.chapters.toMutableList()
 
         // Listener for play and pause icon change
         exoPlayer.addListener(object : Player.Listener {
@@ -1182,6 +1190,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 LinearLayoutManager.HORIZONTAL,
                 false,
             )
+
         binding.chaptersRecView.adapter = ChaptersAdapter(chapters, exoPlayer)
 
         // enable the chapters dialog in the player
@@ -1190,6 +1199,26 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         setCurrentChapterName()
+    }
+
+    private suspend fun initializeHighlight(highlight: Segment) {
+        val frame =
+            PlayerHelper.getPreviewFrame(streams.previewFrames, exoPlayer.currentPosition) ?: return
+        val drawable = withContext(Dispatchers.IO) {
+            ImageHelper.getImage(requireContext(), frame.previewUrl)
+        }.drawable ?: return
+        val highlightChapter = ChapterSegment(
+            title = getString(R.string.chapters_videoHighlight),
+            image = "",
+            start = highlight.segment[0].toLong(),
+            drawable = drawable
+        )
+        chapters.add(highlightChapter)
+        chapters.sortBy { it.start }
+
+        withContext(Dispatchers.Main) {
+            initializeChapters()
+        }
     }
 
     // set the name of the video chapter in the exoPlayerView

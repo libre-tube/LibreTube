@@ -25,6 +25,12 @@
         app:title="@string/sb_markers" />
 
     <SwitchPreferenceCompat
+        app:key="sb_highlights"
+        app:summary="@string/category_highlight_description"
+        app:title="@string/category_highlight"
+        app:defaultValue="true"/>
+
+    <SwitchPreferenceCompat
         android:summary="@string/sb_color_enable"
         app:defaultValue="false"
         android:dependency="sb_enabled_key"

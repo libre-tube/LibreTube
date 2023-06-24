@@ -83,6 +83,7 @@
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">Uses the https://sponsor.ajay.app API</string>
     <string name="segment_skipped">Skipped segment</string>
+    <string name="jumped_to_highlight">Jumped to Video Highlight</string>
     <string name="category_segments">Segments</string>
     <string name="category_sponsor">Sponsor</string>
     <string name="category_sponsor_description">Paid promotion, paid referrals and direct advertisements. Not for self-promotion or free genuine shoutouts to causes, creators, websites, and products.</string>
@@ -100,6 +101,8 @@
     <string name="category_music_offtopic_description">Only for use in music videos. It should cover parts of the video not part of official mixes. In the end, the video should resemble the Spotify or any other mixed version as closely as possible, or reduce talking or other distractions.</string>
     <string name="category_preview">Preview/Recap</string>
     <string name="category_preview_description">For segments detailing future content without additional info. If it includes clips that only appear here, this is very likely the wrong category.</string>
+    <string name="category_highlight">Show video highlight</string>
+    <string name="category_highlight_description">Could either be the advertised title, the thumbnail or the most interesting part of the video. You can skip to it by tapping on it in the chapters section.</string>
     <string name="license">License</string>
     <string name="color_accent">Accents</string>
     <string name="color_red">Resting red</string>
@@ -449,6 +452,7 @@
     <string name="push_channel_name">Notification Worker</string>
     <string name="push_channel_description">Shows a notification when new streams are available.</string>
     <string name="unlimited_search_history">Unlimited search history</string>
+    <string name="chapters_videoHighlight">Video Highlight</string>
     <!-- Relative time formatting strings (remove when setting the minSdk to 24) -->
     <plurals name="years_ago">
         <item quantity="one">%d year ago</item>
