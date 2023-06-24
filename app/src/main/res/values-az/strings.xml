@@ -88,7 +88,7 @@
     <string name="videoCount">%1$d video</string>
     <string name="settings">Tənzimləmələr</string>
     <string name="location">Məkan</string>
-    <string name="instance">Nümunə</string>
+    <string name="instance">İnstansiya</string>
     <string name="customization">Nizamlamalar</string>
     <string name="website">Veb Sayt</string>
     <string name="color_accent">Çalarlar</string>
@@ -126,9 +126,9 @@
     <string name="flameIcon">Uçan alov</string>
     <string name="birdIcon">Qaldırılan quş</string>
     <string name="torchIcon">Dəbli məşəl</string>
-    <string name="instance_name">Nümunə adı</string>
-    <string name="instance_api_url">Nümunə API üçün URL</string>
-    <string name="addInstance">Nümunə əlavə et</string>
+    <string name="instance_name">İnstansiya adı</string>
+    <string name="instance_api_url">İnstansiya API üçün URL</string>
+    <string name="addInstance">İnstansiya əlavə et</string>
     <string name="invalid_url">Zəhmət olmasa, işləyən URL\'ni daxil et</string>
     <string name="customInstance_summary">Əlavə et…</string>
     <string name="instance_summary">Piped, giriş, hesab</string>
@@ -156,7 +156,7 @@
     <string name="behavior">Davranış</string>
     <string name="player_summary">Standartlar və davranış</string>
     <string name="seek_increment">Axtarılan artım</string>
-    <string name="instance_frontend_url">Nümunə ön çıxış üçün URL</string>
+    <string name="instance_frontend_url">İnstansiya ön çıxış üçün URL</string>
     <string name="autoplay_summary">Hazırkı video arxasınca növbəti videonu avtomatik oynat.</string>
     <string name="pauseOnScreenOff">Avtomatik fasilə</string>
     <string name="pauseOnScreenOff_summary">Ekran söndürüldükdə oynatmanı dayandır.</string>
@@ -170,9 +170,9 @@
     <string name="watch_history">Baxış Tarixçəsi</string>
     <string name="watch_positions">Xatırlanan mövqe</string>
     <string name="watch_positions_summary">Son oynatma mövqeyindən davam etdir</string>
-    <string name="auth_instances">Təsdiqləyici nümunə seç</string>
-    <string name="auth_instance_summary">Təsdiqlənmiş dəvətlər üçün fərqli nümunə istifadə et.</string>
-    <string name="auth_instance">Təsdiqləyici nümunə</string>
+    <string name="auth_instances">Təsdiqləyici instansiya seç</string>
+    <string name="auth_instance_summary">Təsdiqlənmiş dəvətlər üçün fərqli instansiya istifadə et.</string>
+    <string name="auth_instance">Təsdiqləyici instansiya</string>
     <string name="github">GitHub</string>
     <string name="audio_video">Səs və video</string>
     <string name="fullscreen_orientation">Tam ekran istiqamətləndirmə</string>
@@ -271,7 +271,7 @@
     <string name="sb_skip_manual_summary">Bölümləri avtomatik olaraq ötürmə, həmişə əvvəlcə icazə istə.</string>
     <string name="local_subscriptions">Yerli abunəlikər</string>
     <string name="preferences">Üstünlüklər</string>
-    <string name="backup_customInstances">Şəxsi Nümunələr</string>
+    <string name="backup_customInstances">Şəxsi İnstansiyalar</string>
     <string name="save_feed">Axını fonda yüklə</string>
     <string name="save_feed_summary">Abunəlik axınını fonda yükləməsin və avtomatik yeniləməsin dayandır.</string>
     <string name="download_channel_name">Yükləmə Xidməti</string>
@@ -456,4 +456,8 @@
     <string name="color">Rəng</string>
     <string name="enter_hex_value">Rəng Hex Dəyəri Daxil Et</string>
     <string name="visible">Axtarış çubuğunda göstər</string>
+    <string name="jumped_to_highlight">Video Vurğulanmasına Keçdi</string>
+    <string name="category_highlight">Video vurğulaması göstər</string>
+    <string name="category_highlight_description">Ya reklam olunan başlıq, miniatür və ya videonun ən maraqlı hissəsi ola bilər. Bölümlər bölməsində üzərinə toxunaraq ona keçə bilərsiniz.</string>
+    <string name="chapters_videoHighlight">Video Vurğulama</string>
 </resources>
