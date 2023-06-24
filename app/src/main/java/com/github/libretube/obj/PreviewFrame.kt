@@ -4,6 +4,6 @@ data class PreviewFrame(
     val previewUrl: String,
     val positionX: Int,
     val positionY: Int,
-    val framesPerPageX: Int,
-    val framesPerPageY: Int,
+    val frameWidth: Int,
+    val frameHeight: Int,
 )

@@ -437,7 +437,7 @@ object PlayerHelper {
                 for (x in 0 until frames.framesPerPageX) {
                     val endPosition = startPosition + frames.durationPerFrame
                     if (position in startPosition until endPosition) {
-                        return PreviewFrame(url, x, y, frames.framesPerPageX, frames.framesPerPageY)
+                        return PreviewFrame(url, x, y, frames.frameWidth, frames.frameHeight)
                     }
                     startPosition = endPosition
                 }
