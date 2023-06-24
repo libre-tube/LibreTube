@@ -28,7 +28,7 @@ object ImageHelper {
     fun initializeImageLoader(context: Context) {
         val maxImageCacheSize = PreferenceHelper.getString(
             PreferenceKeys.MAX_IMAGE_CACHE,
-            "",
+            ""
         )
 
         imageLoader = ImageLoader.Builder(context)
@@ -38,11 +38,12 @@ object ImageHelper {
                     "" -> {
                         diskCachePolicy(CachePolicy.DISABLED)
                     }
+
                     else -> diskCache(
                         DiskCache.Builder()
                             .directory(context.cacheDir.resolve("coil"))
                             .maxSizeBytes(maxImageCacheSize.toInt() * 1024 * 1024L)
-                            .build(),
+                            .build()
                     )
                 }
             }
@@ -109,7 +110,7 @@ object ImageHelper {
             (bitmap.width - newSize) / 2,
             (bitmap.height - newSize) / 2,
             newSize,
-            newSize,
+            newSize
         )
     }
 }

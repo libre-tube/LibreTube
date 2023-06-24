@@ -229,8 +229,8 @@
                 <TextView
                     android:id="@+id/seekbar_preview_position"
                     android:layout_width="wrap_content"
-                    android:layout_marginHorizontal="5dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp" />
 
             </com.google.android.material.card.MaterialCardView>
 

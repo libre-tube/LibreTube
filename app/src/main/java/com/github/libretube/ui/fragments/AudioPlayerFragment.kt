@@ -85,7 +85,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAudioPlayerBinding.inflate(inflater)
         return binding.root
@@ -142,7 +142,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
                 videoId = PlayingQueue.getCurrent()?.url?.toID(),
                 timestamp = playerService?.player?.currentPosition?.div(1000) ?: 0,
                 keepQueue = true,
-                forceVideo = true,
+                forceVideo = true
             )
         }
 
@@ -151,7 +151,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             ShareDialog(
                 id = currentVideo.url!!.toID(),
                 shareObjectType = ShareObjectType.VIDEO,
-                shareData = ShareData(currentVideo = currentVideo.title),
+                shareData = ShareData(currentVideo = currentVideo.title)
             ).show(childFragmentManager, null)
         }
 
@@ -215,7 +215,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
                 motionLayout: MotionLayout?,
                 startId: Int,
                 endId: Int,
-                progress: Float,
+                progress: Float
             ) {
                 mainMotionLayout.progress = abs(progress)
                 eId = endId
@@ -298,14 +298,14 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         // set the text for the indicators
         binding.duration.text = DateUtils.formatElapsedTime(duration / 1000)
         binding.currentPosition.text = DateUtils.formatElapsedTime(
-            (currentPosition / 1000).toLong(),
+            (currentPosition / 1000).toLong()
         )
 
         // update the time bar current value and maximum value
         binding.timeBar.valueTo = (duration / 1000).toFloat()
         binding.timeBar.value = minOf(
             currentPosition / 1000,
-            binding.timeBar.valueTo,
+            binding.timeBar.valueTo
         )
 
         handler.postDelayed(this::updateSeekBar, 200)
@@ -374,7 +374,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
                 when {
                     distance > 0 -> R.drawable.ic_volume_up
                     else -> R.drawable.ic_volume_off
-                },
+                }
             )
         }
         bar.incrementProgressBy(distance.toInt() / 3)

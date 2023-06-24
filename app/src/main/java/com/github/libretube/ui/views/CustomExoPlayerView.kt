@@ -52,7 +52,7 @@ import com.github.libretube.util.PlayingQueue
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 open class CustomExoPlayerView(
     context: Context,
-    attributeSet: AttributeSet? = null,
+    attributeSet: AttributeSet? = null
 ) : PlayerView(context, attributeSet), PlayerOptions, PlayerGestureOptions {
     @Suppress("LeakingThis")
     val binding = ExoStyledPlayerControlViewBinding.bind(this)
@@ -89,7 +89,7 @@ open class CustomExoPlayerView(
 
     fun initialize(
         doubleTapOverlayBinding: DoubleTapOverlayBinding,
-        playerGestureControlsViewBinding: PlayerGestureControlsViewBinding,
+        playerGestureControlsViewBinding: PlayerGestureControlsViewBinding
     ) {
         this.doubleTapOverlayBinding = doubleTapOverlayBinding
         this.gestureViewBinding = playerGestureControlsViewBinding
@@ -118,7 +118,7 @@ open class CustomExoPlayerView(
                     R.drawable.ic_locked
                 } else {
                     R.drawable.ic_unlocked
-                },
+                }
             )
 
             // show/hide all the controls
@@ -139,6 +139,7 @@ open class CustomExoPlayerView(
                 player?.isPlaying == false && player?.playbackState == Player.STATE_ENDED -> {
                     player?.seekTo(0)
                 }
+
                 player?.isPlaying == false -> player?.play()
                 else -> player?.pause()
             }
@@ -150,7 +151,7 @@ open class CustomExoPlayerView(
                 if (events.containsAny(
                         Player.EVENT_PLAYBACK_STATE_CHANGED,
                         Player.EVENT_IS_PLAYING_CHANGED,
-                        Player.EVENT_PLAY_WHEN_READY_CHANGED,
+                        Player.EVENT_PLAY_WHEN_READY_CHANGED
                     )
                 ) {
                     updatePlayPauseButton()
@@ -186,7 +187,7 @@ open class CustomExoPlayerView(
                 player?.isPlaying == true -> R.drawable.ic_pause
                 player?.playbackState == Player.STATE_ENDED -> R.drawable.ic_restart
                 else -> R.drawable.ic_play
-            },
+            }
         )
     }
 
@@ -222,7 +223,7 @@ open class CustomExoPlayerView(
             doubleTapOverlayBinding?.rewindTV,
             doubleTapOverlayBinding?.forwardTV,
             binding.forwardTV,
-            binding.rewindTV,
+            binding.rewindTV
         ).forEach {
             it?.text = seekIncrementText
         }
@@ -248,46 +249,48 @@ open class CustomExoPlayerView(
     }
 
     open fun getOptionsMenuItems(): List<BottomSheetItem> = listOf(
-            BottomSheetItem(
-                context.getString(R.string.repeat_mode),
-                R.drawable.ic_repeat,
-                {
-                    if (player?.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE) {
-                        context.getString(R.string.repeat_mode_none)
-                    } else {
-                        context.getString(R.string.repeat_mode_current)
-                    }
-                },
-            ) {
-                onRepeatModeClicked()
-            },
-            BottomSheetItem(
-                context.getString(R.string.player_resize_mode),
-                R.drawable.ic_aspect_ratio,
-                {
-                    when (resizeMode) {
-                        AspectRatioFrameLayout.RESIZE_MODE_FIT -> context.getString(
-                            R.string.resize_mode_fit,
-                        )
-                        AspectRatioFrameLayout.RESIZE_MODE_FILL -> context.getString(
-                            R.string.resize_mode_fill,
-                        )
-                        else -> context.getString(R.string.resize_mode_zoom)
-                    }
-                },
-            ) {
-                onResizeModeClicked()
-            },
-            BottomSheetItem(
-                context.getString(R.string.playback_speed),
-                R.drawable.ic_speed,
-                {
-                    "${player?.playbackParameters?.speed?.round(2)}x"
-                },
-            ) {
-                onPlaybackSpeedClicked()
-            },
-        )
+        BottomSheetItem(
+            context.getString(R.string.repeat_mode),
+            R.drawable.ic_repeat,
+            {
+                if (player?.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE) {
+                    context.getString(R.string.repeat_mode_none)
+                } else {
+                    context.getString(R.string.repeat_mode_current)
+                }
+            }
+        ) {
+            onRepeatModeClicked()
+        },
+        BottomSheetItem(
+            context.getString(R.string.player_resize_mode),
+            R.drawable.ic_aspect_ratio,
+            {
+                when (resizeMode) {
+                    AspectRatioFrameLayout.RESIZE_MODE_FIT -> context.getString(
+                        R.string.resize_mode_fit
+                    )
+
+                    AspectRatioFrameLayout.RESIZE_MODE_FILL -> context.getString(
+                        R.string.resize_mode_fill
+                    )
+
+                    else -> context.getString(R.string.resize_mode_zoom)
+                }
+            }
+        ) {
+            onResizeModeClicked()
+        },
+        BottomSheetItem(
+            context.getString(R.string.playback_speed),
+            R.drawable.ic_speed,
+            {
+                "${player?.playbackParameters?.speed?.round(2)}x"
+            }
+        ) {
+            onPlaybackSpeedClicked()
+        }
+    )
 
     // lock the player
     private fun lockPlayer(isLocked: Boolean) {
@@ -309,11 +312,11 @@ open class CustomExoPlayerView(
             if (isLocked) {
                 ContextCompat.getColor(
                     context,
-                    androidx.media3.ui.R.color.exo_black_opacity_60,
+                    androidx.media3.ui.R.color.exo_black_opacity_60
                 )
             } else {
                 Color.TRANSPARENT
-            },
+            }
         )
 
         // disable tap and swipe gesture if the player is locked
@@ -354,7 +357,7 @@ open class CustomExoPlayerView(
         container: FrameLayout,
         imageView: ImageView,
         textView: TextView,
-        isRewind: Boolean,
+        isRewind: Boolean
     ) {
         container.visibility = View.VISIBLE
         // the direction of the action
@@ -418,7 +421,7 @@ open class CustomExoPlayerView(
             if (distance <= 0) {
                 brightnessHelper.resetToSystemBrightness()
                 gestureViewBinding.brightnessImageView.setImageResource(
-                    R.drawable.ic_brightness_auto,
+                    R.drawable.ic_brightness_auto
                 )
                 gestureViewBinding.brightnessTextView.text = resources.getString(R.string.auto)
                 return
@@ -447,7 +450,7 @@ open class CustomExoPlayerView(
                 when {
                     distance > 0 -> R.drawable.ic_volume_up
                     else -> R.drawable.ic_volume_off
-                },
+                }
             )
         }
         bar.incrementProgressBy(distance.toInt())
@@ -470,7 +473,7 @@ open class CustomExoPlayerView(
         val aspectRatioModes = listOf(
             AspectRatioFrameLayout.RESIZE_MODE_FIT,
             AspectRatioFrameLayout.RESIZE_MODE_ZOOM,
-            AspectRatioFrameLayout.RESIZE_MODE_FILL,
+            AspectRatioFrameLayout.RESIZE_MODE_FILL
         )
 
         BaseBottomSheet()
@@ -484,7 +487,7 @@ open class CustomExoPlayerView(
         val repeatModeNames = listOf(
             context.getString(R.string.repeat_mode_none),
             context.getString(R.string.repeat_mode_current),
-            context.getString(R.string.all),
+            context.getString(R.string.all)
         )
         // repeat mode options dialog
         BaseBottomSheet()
@@ -494,17 +497,20 @@ open class CustomExoPlayerView(
                         player?.repeatMode = Player.REPEAT_MODE_OFF
                         false
                     }
+
                     1 -> {
                         player?.repeatMode = Player.REPEAT_MODE_ONE
                         false
                     }
+
                     else -> true
                 }
             }
             .show(supportFragmentManager)
     }
 
-    open fun isFullscreen() = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+    open fun isFullscreen() =
+        resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)

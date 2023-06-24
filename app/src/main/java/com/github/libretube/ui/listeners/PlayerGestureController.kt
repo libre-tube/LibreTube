@@ -138,7 +138,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
             e1: MotionEvent,
             e2: MotionEvent,
             distanceX: Float,
-            distanceY: Float,
+            distanceY: Float
         ): Boolean {
             if (!isEnabled || scaleGestureDetector.isInProgress) return false
 

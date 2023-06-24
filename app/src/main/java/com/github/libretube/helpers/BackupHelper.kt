@@ -95,6 +95,7 @@ object BackupHelper {
                             else -> putLong(key, value.toLong())
                         }
                     }
+
                     is String -> putString(key, value)
                 }
             }

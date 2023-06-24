@@ -20,5 +20,5 @@ data class BackupFile(
     var playlistBookmarks: List<PlaylistBookmark>? = emptyList(),
     var localPlaylists: List<LocalPlaylistWithVideos>? = emptyList(),
     var preferences: List<PreferenceItem>? = emptyList(),
-    var channelGroups: List<SubscriptionGroup>? = emptyList(),
+    var channelGroups: List<SubscriptionGroup>? = emptyList()
 )

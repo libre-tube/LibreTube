@@ -38,7 +38,7 @@ object PlayingQueue {
         if (queue.contains(streamItem)) queue.remove(streamItem)
         queue.add(
             currentIndex() + 1,
-            streamItem,
+            streamItem
         )
     }
 
@@ -91,10 +91,10 @@ object PlayingQueue {
             while (playlistNextPage != null) {
                 RetrofitInstance.authApi.getPlaylistNextPage(
                     playlistId,
-                    playlistNextPage!!,
+                    playlistNextPage!!
                 ).apply {
                     add(
-                        *this.relatedStreams.toTypedArray(),
+                        *this.relatedStreams.toTypedArray()
                     )
                     playlistNextPage = this.nextpage
                 }

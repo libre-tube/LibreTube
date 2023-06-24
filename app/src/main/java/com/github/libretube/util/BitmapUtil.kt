@@ -13,7 +13,7 @@ object BitmapUtil {
             previewFrame.positionX * previewFrame.frameWidth,
             previewFrame.positionY * previewFrame.frameHeight,
             previewFrame.frameWidth,
-            previewFrame.frameHeight,
+            previewFrame.frameHeight
         )
     }
 }

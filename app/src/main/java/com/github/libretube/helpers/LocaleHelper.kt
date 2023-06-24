@@ -19,9 +19,10 @@ object LocaleHelper {
                 val languageParts = languageName.split("-")
                 Locale(
                     languageParts[0],
-                    languageParts[1].replace("r", ""),
+                    languageParts[1].replace("r", "")
                 )
             }
+
             else -> Locale(languageName)
         }
     }

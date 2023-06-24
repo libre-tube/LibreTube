@@ -13,5 +13,5 @@ data class PlaylistBookmark(
     var thumbnailUrl: String? = null,
     var uploader: String? = null,
     var uploaderUrl: String? = null,
-    var uploaderAvatar: String? = null,
+    var uploaderAvatar: String? = null
 )

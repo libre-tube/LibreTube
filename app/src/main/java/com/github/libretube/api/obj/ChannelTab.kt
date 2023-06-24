@@ -5,5 +5,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ChannelTab(
     val name: String,
-    val data: String,
+    val data: String
 )

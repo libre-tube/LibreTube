@@ -21,7 +21,7 @@ class SeekbarPreviewListener(
     private val playerBinding: ExoStyledPlayerControlViewBinding,
     private val duration: Long,
     private val onScrub: (position: Long) -> Unit,
-    private val onScrubEnd: (position: Long) -> Unit,
+    private val onScrubEnd: (position: Long) -> Unit
 ) : TimeBar.OnScrubListener {
     private var scrubInProgress = false
 
@@ -95,7 +95,7 @@ class SeekbarPreviewListener(
             val parentWidth = (playerBinding.seekbarPreview.parent as View).width
             // calculate the center-offset of the preview image view
             val offset = parentWidth * (position.toFloat() / duration.toFloat()) -
-                    playerBinding.seekbarPreview.width / 2
+                playerBinding.seekbarPreview.width / 2
             // normalize the offset to keep a minimum distance at left and right
             val maxPadding = parentWidth - MIN_PADDING - playerBinding.seekbarPreview.width
             marginStart = MathUtils.clamp(offset.toInt(), MIN_PADDING, maxPadding)

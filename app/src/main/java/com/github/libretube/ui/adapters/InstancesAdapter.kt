@@ -13,7 +13,7 @@ class InstancesAdapter(
     private val instances: List<Instances>,
     viewModel: WelcomeModel,
     private val onSelectInstance: (index: Int) -> Unit
-): RecyclerView.Adapter<InstancesViewHolder>() {
+) : RecyclerView.Adapter<InstancesViewHolder>() {
     private var selectedInstanceIndex = viewModel.selectedInstanceIndex.value
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InstancesViewHolder {

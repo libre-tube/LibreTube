@@ -12,12 +12,12 @@ import com.github.libretube.ui.sheets.ChannelOptionsBottomSheet
 import com.github.libretube.ui.viewholders.LegacySubscriptionViewHolder
 
 class LegacySubscriptionAdapter(
-    private val subscriptions: List<com.github.libretube.api.obj.Subscription>,
+    private val subscriptions: List<com.github.libretube.api.obj.Subscription>
 ) : RecyclerView.Adapter<LegacySubscriptionViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int,
+        viewType: Int
     ): LegacySubscriptionViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = LegacySubscriptionChannelBinding.inflate(layoutInflater, parent, false)
@@ -30,12 +30,12 @@ class LegacySubscriptionAdapter(
             channelName.text = subscription.name
             ImageHelper.loadImage(
                 subscription.avatar,
-                channelAvatar,
+                channelAvatar
             )
             root.setOnClickListener {
                 NavigationHelper.navigateChannel(
                     root.context,
-                    subscription.url.toID(),
+                    subscription.url.toID()
                 )
             }
 

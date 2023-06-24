@@ -15,14 +15,14 @@ import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.obj.FreeTubeImportPlaylist
 import com.github.libretube.obj.FreetubeSubscription
 import com.github.libretube.obj.FreetubeSubscriptions
-import com.github.libretube.obj.PipedImportPlaylist
-import com.github.libretube.obj.PipedImportPlaylistFile
 import com.github.libretube.obj.NewPipeSubscription
 import com.github.libretube.obj.NewPipeSubscriptions
+import com.github.libretube.obj.PipedImportPlaylist
+import com.github.libretube.obj.PipedImportPlaylistFile
+import kotlin.streams.toList
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
-import kotlin.streams.toList
 
 object ImportHelper {
     /**
@@ -49,7 +49,11 @@ object ImportHelper {
      * Get a list of channel IDs from a file [Uri]
      */
     @OptIn(ExperimentalSerializationApi::class)
-    private fun getChannelsFromUri(activity: Activity, uri: Uri, importFormat: ImportFormat): List<String> {
+    private fun getChannelsFromUri(
+        activity: Activity,
+        uri: Uri,
+        importFormat: ImportFormat
+    ): List<String> {
         return when (importFormat) {
             ImportFormat.NEWPIPE -> {
                 val subscriptions = activity.contentResolver.openInputStream(uri)?.use {
@@ -59,6 +63,7 @@ object ImportHelper {
                     it.url.replace("https://www.youtube.com/channel/", "")
                 }
             }
+
             ImportFormat.FREETUBE -> {
                 val subscriptions = activity.contentResolver.openInputStream(uri)?.use {
                     JsonHelper.json.decodeFromStream<FreetubeSubscriptions>(it)
@@ -67,6 +72,7 @@ object ImportHelper {
                     it.url.replace("https://www.youtube.com/channel/", "")
                 }
             }
+
             ImportFormat.YOUTUBECSV -> {
                 // import subscriptions from Google/YouTube Takeout
                 activity.contentResolver.openInputStream(uri)?.use {
@@ -77,6 +83,7 @@ object ImportHelper {
                     }
                 }.orEmpty()
             }
+
             else -> throw IllegalArgumentException()
         }
     }
@@ -140,6 +147,7 @@ object ImportHelper {
                     playlist.videos = playlist.videos.map { it.takeLast(11) }
                 }
             }
+
             ImportFormat.FREETUBE -> {
                 val playlistFile = activity.contentResolver.openInputStream(uri)?.use {
                     JsonHelper.json.decodeFromStream<List<FreeTubeImportPlaylist>>(it)
@@ -151,10 +159,12 @@ object ImportHelper {
                         playlist.name,
                         null,
                         null,
-                        playlist.videos.map { it.videoId })
+                        playlist.videos.map { it.videoId }
+                    )
                 }
                 importPlaylists.addAll(playlists.orEmpty())
             }
+
             ImportFormat.YOUTUBECSV -> {
                 val playlist = PipedImportPlaylist()
                 activity.contentResolver.openInputStream(uri)?.use {
@@ -178,6 +188,7 @@ object ImportHelper {
                     importPlaylist.videos = importPlaylist.videos.map { it.takeLast(11) }
                 }
             }
+
             else -> throw IllegalArgumentException()
         }
         try {
@@ -206,6 +217,7 @@ object ImportHelper {
                 }
                 activity.toastFromMainDispatcher(R.string.exportsuccess)
             }
+
             ImportFormat.FREETUBE -> {
                 val playlists = PlaylistsHelper.exportFreeTubePlaylists()
 
@@ -214,6 +226,7 @@ object ImportHelper {
                 }
                 activity.toastFromMainDispatcher(R.string.exportsuccess)
             }
+
             else -> Unit
         }
     }

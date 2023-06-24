@@ -23,7 +23,7 @@ object NavBarHelper {
         val prefItems = try {
             PreferenceHelper.getString(
                 PreferenceKeys.NAVBAR_ITEMS,
-                "",
+                ""
             ).split(SEPARATOR)
         } catch (e: Exception) {
             Log.e("fail to parse nav items", e.toString())
@@ -38,7 +38,7 @@ object NavBarHelper {
                 navBarItems.add(
                     p.menu[it.replace("-", "").toInt()].apply {
                         this.isVisible = !it.contains("-")
-                    },
+                    }
                 )
             }
             return navBarItems
@@ -65,7 +65,7 @@ object NavBarHelper {
         }
         PreferenceHelper.putString(
             PreferenceKeys.NAVBAR_ITEMS,
-            prefString.joinToString(SEPARATOR),
+            prefString.joinToString(SEPARATOR)
         )
     }
 
@@ -90,7 +90,7 @@ object NavBarHelper {
         // remove the old items
         navBarItems.forEach {
             menuItems.add(
-                bottomNav.menu.findItem(it.itemId),
+                bottomNav.menu.findItem(it.itemId)
             )
             bottomNav.menu.removeItem(it.itemId)
         }
@@ -103,7 +103,7 @@ object NavBarHelper {
                     menuItem.groupId,
                     menuItem.itemId,
                     Menu.NONE,
-                    menuItem.title,
+                    menuItem.title
                 ).icon = menuItem.icon
             }
         }

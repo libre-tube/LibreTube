@@ -12,5 +12,5 @@ data class Instances(
     @SerialName("up_to_date") val upToDate: Boolean = true,
     val cdn: Boolean = false,
     val registered: Long = 0,
-    @SerialName("last_checked") val lastChecked: Long = 0,
+    @SerialName("last_checked") val lastChecked: Long = 0
 )

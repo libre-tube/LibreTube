@@ -13,7 +13,9 @@
 
         <item name="snackbarStyle">@style/snackBarStyle</item>
 
-        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/splash_anim</item>
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">
+            @drawable/splash_anim
+        </item>
 
     </style>
 

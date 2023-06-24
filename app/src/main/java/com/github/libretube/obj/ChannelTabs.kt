@@ -5,7 +5,7 @@ import com.github.libretube.R
 
 sealed class ChannelTabs(
     val identifierName: String,
-    @IdRes val chipId: Int,
+    @IdRes val chipId: Int
 ) {
     object Playlists : ChannelTabs("playlists", R.id.playlists)
     object Shorts : ChannelTabs("shorts", R.id.shorts)

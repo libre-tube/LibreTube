@@ -15,7 +15,7 @@ import com.github.libretube.ui.viewholders.ChaptersViewHolder
 
 class ChaptersAdapter(
     private val chapters: List<ChapterSegment>,
-    private val exoPlayer: ExoPlayer,
+    private val exoPlayer: ExoPlayer
 ) : RecyclerView.Adapter<ChaptersViewHolder>() {
     private var selectedPosition = 0
 
@@ -45,7 +45,8 @@ class ChaptersAdapter(
                     ThemeHelper.getThemeColor(
                         root.context,
                         android.R.attr.colorPrimary
-                    ), 50
+                    ),
+                    50
                 )
 
                 else -> Color.TRANSPARENT

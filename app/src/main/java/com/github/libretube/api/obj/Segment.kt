@@ -12,5 +12,5 @@ data class Segment(
     val segment: List<Double> = listOf(),
     val userID: String? = null,
     val videoDuration: Double? = null,
-    val votes: Int? = null,
+    val votes: Int? = null
 )

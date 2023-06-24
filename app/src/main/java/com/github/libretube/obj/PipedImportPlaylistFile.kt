@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 data class PipedImportPlaylistFile(
     val format: String,
     val version: Int,
-    val playlists: List<PipedImportPlaylist> = emptyList(),
+    val playlists: List<PipedImportPlaylist> = emptyList()
 )

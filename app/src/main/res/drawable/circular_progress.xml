@@ -11,7 +11,8 @@
     </item>
 
     <item android:id="@android:id/progress">
-        <rotate android:fromDegrees="270"
+        <rotate
+            android:fromDegrees="270"
             android:toDegrees="270">
             <shape
                 android:shape="ring"

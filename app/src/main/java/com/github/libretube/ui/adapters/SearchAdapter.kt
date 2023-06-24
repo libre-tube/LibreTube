@@ -32,14 +32,17 @@ class SearchAdapter(
 
         return when (viewType) {
             0 -> SearchViewHolder(
-                VideoRowBinding.inflate(layoutInflater, parent, false),
+                VideoRowBinding.inflate(layoutInflater, parent, false)
             )
+
             1 -> SearchViewHolder(
-                ChannelRowBinding.inflate(layoutInflater, parent, false),
+                ChannelRowBinding.inflate(layoutInflater, parent, false)
             )
+
             2 -> SearchViewHolder(
-                PlaylistsRowBinding.inflate(layoutInflater, parent, false),
+                PlaylistsRowBinding.inflate(layoutInflater, parent, false)
             )
+
             else -> throw IllegalArgumentException("Invalid type")
         }
     }
@@ -81,7 +84,7 @@ class SearchAdapter(
             videoInfo.text = root.context.getString(
                 R.string.normal_views,
                 viewsString,
-                uploadDate,
+                uploadDate
             )
             // only display channel related info if not in a channel tab
             if (!isChannelAdapter) {
@@ -97,7 +100,7 @@ class SearchAdapter(
                 VideoOptionsBottomSheet(videoId, videoName)
                     .show(
                         (root.context as BaseActivity).supportFragmentManager,
-                        VideoOptionsBottomSheet::class.java.name,
+                        VideoOptionsBottomSheet::class.java.name
                     )
                 true
             }
@@ -154,7 +157,7 @@ class SearchAdapter(
                 PlaylistOptionsBottomSheet(playlistId, playlistName, PlaylistType.PUBLIC)
                     .show(
                         (root.context as BaseActivity).supportFragmentManager,
-                        PlaylistOptionsBottomSheet::class.java.name,
+                        PlaylistOptionsBottomSheet::class.java.name
                     )
                 true
             }

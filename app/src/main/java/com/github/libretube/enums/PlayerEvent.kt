@@ -7,7 +7,7 @@ enum class PlayerEvent(val value: Int) {
     Rewind(3),
     Next(5),
     Prev(6),
-    Background(7),
+    Background(7)
     ;
 
     companion object {

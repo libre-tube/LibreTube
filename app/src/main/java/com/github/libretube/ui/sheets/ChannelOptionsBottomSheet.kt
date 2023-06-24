@@ -21,7 +21,7 @@ import kotlinx.coroutines.withContext
  */
 class ChannelOptionsBottomSheet(
     private val channelId: String,
-    channelName: String?,
+    channelName: String?
 ) : BaseBottomSheet() {
     private val shareData = ShareData(currentChannel = channelName)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +31,7 @@ class ChannelOptionsBottomSheet(
         val optionsList = mutableListOf(
             getString(R.string.share),
             getString(R.string.play_latest_videos),
-            getString(R.string.playOnBackground),
+            getString(R.string.playOnBackground)
         )
 
         setSimpleItems(optionsList) { which ->
@@ -40,6 +40,7 @@ class ChannelOptionsBottomSheet(
                     ShareDialog(channelId, ShareObjectType.CHANNEL, shareData)
                         .show(parentFragmentManager, null)
                 }
+
                 getString(R.string.play_latest_videos) -> {
                     try {
                         val channel = withContext(Dispatchers.IO) {
@@ -49,13 +50,14 @@ class ChannelOptionsBottomSheet(
                             NavigationHelper.navigateVideo(
                                 requireContext(),
                                 it,
-                                channelId = channelId,
+                                channelId = channelId
                             )
                         }
                     } catch (e: Exception) {
                         Log.e(TAG(), e.toString())
                     }
                 }
+
                 getString(R.string.playOnBackground) -> {
                     try {
                         val channel = withContext(Dispatchers.IO) {
@@ -65,7 +67,7 @@ class ChannelOptionsBottomSheet(
                             BackgroundHelper.playOnBackground(
                                 requireContext(),
                                 videoId = it,
-                                channelId = channelId,
+                                channelId = channelId
                             )
                         }
                     } catch (e: Exception) {

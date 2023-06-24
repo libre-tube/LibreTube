@@ -3,7 +3,7 @@ package com.github.libretube.util
 import com.github.libretube.helpers.PreferenceHelper
 
 class ExceptionHandler(
-    private val defaultExceptionHandler: Thread.UncaughtExceptionHandler?,
+    private val defaultExceptionHandler: Thread.UncaughtExceptionHandler?
 ) : Thread.UncaughtExceptionHandler {
     override fun uncaughtException(thread: Thread, exc: Throwable) {
         // save the error log

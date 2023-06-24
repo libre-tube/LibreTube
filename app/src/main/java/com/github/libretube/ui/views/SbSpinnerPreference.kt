@@ -1,14 +1,15 @@
 package com.github.libretube.ui.views
+
 import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.View
 import android.widget.AdapterView
-import androidx.preference.Preference
-import androidx.preference.PreferenceViewHolder
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.preference.Preference
+import androidx.preference.PreferenceViewHolder
 import com.github.libretube.R
 
 class SbSpinnerPreference(context: Context, attrs: AttributeSet) : Preference(context, attrs) {

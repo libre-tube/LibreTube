@@ -12,4 +12,3 @@ data class ChapterSegment(
     // Used only for video highlights
     @Transient var drawable: Drawable? = null
 )
-

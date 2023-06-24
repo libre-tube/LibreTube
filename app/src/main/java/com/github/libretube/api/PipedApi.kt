@@ -4,11 +4,11 @@ import com.github.libretube.api.obj.Channel
 import com.github.libretube.api.obj.ChannelTabResponse
 import com.github.libretube.api.obj.CommentsPage
 import com.github.libretube.api.obj.DeleteUserRequest
+import com.github.libretube.api.obj.EditPlaylistBody
 import com.github.libretube.api.obj.Login
 import com.github.libretube.api.obj.Message
 import com.github.libretube.api.obj.PipedConfig
 import com.github.libretube.api.obj.Playlist
-import com.github.libretube.api.obj.EditPlaylistBody
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.SearchResult
 import com.github.libretube.api.obj.SegmentData
@@ -42,26 +42,26 @@ interface PipedApi {
     @GET("sponsors/{videoId}")
     suspend fun getSegments(
         @Path("videoId") videoId: String,
-        @Query("category") category: String,
+        @Query("category") category: String
     ): SegmentData
 
     @GET("nextpage/comments/{videoId}")
     suspend fun getCommentsNextPage(
         @Path("videoId") videoId: String,
-        @Query("nextpage") nextPage: String,
+        @Query("nextpage") nextPage: String
     ): CommentsPage
 
     @GET("search")
     suspend fun getSearchResults(
         @Query("q") searchQuery: String,
-        @Query("filter") filter: String,
+        @Query("filter") filter: String
     ): SearchResult
 
     @GET("nextpage/search")
     suspend fun getSearchResultsNextPage(
         @Query("q") searchQuery: String,
         @Query("filter") filter: String,
-        @Query("nextpage") nextPage: String,
+        @Query("nextpage") nextPage: String
     ): SearchResult
 
     @GET("suggestions")
@@ -73,7 +73,7 @@ interface PipedApi {
     @GET("channels/tabs")
     suspend fun getChannelTab(
         @Query("data") data: String,
-        @Query("nextpage") nextPage: String? = null,
+        @Query("nextpage") nextPage: String? = null
     ): ChannelTabResponse
 
     @GET("user/{name}")
@@ -82,7 +82,7 @@ interface PipedApi {
     @GET("nextpage/channel/{channelId}")
     suspend fun getChannelNextPage(
         @Path("channelId") channelId: String,
-        @Query("nextpage") nextPage: String,
+        @Query("nextpage") nextPage: String
     ): Channel
 
     @GET("playlists/{playlistId}")
@@ -91,7 +91,7 @@ interface PipedApi {
     @GET("nextpage/playlists/{playlistId}")
     suspend fun getPlaylistNextPage(
         @Path("playlistId") playlistId: String,
-        @Query("nextpage") nextPage: String,
+        @Query("nextpage") nextPage: String
     ): Playlist
 
     @POST("login")
@@ -103,7 +103,7 @@ interface PipedApi {
     @POST("user/delete")
     suspend fun deleteAccount(
         @Header("Authorization") token: String,
-        @Body password: DeleteUserRequest,
+        @Body password: DeleteUserRequest
     )
 
     @GET("feed")
@@ -111,18 +111,18 @@ interface PipedApi {
 
     @GET("feed/unauthenticated")
     suspend fun getUnauthenticatedFeed(
-        @Query("channels") channels: String,
+        @Query("channels") channels: String
     ): List<StreamItem>
 
     @POST("feed/unauthenticated")
     suspend fun getUnauthenticatedFeed(
-        @Body channels: List<String>,
+        @Body channels: List<String>
     ): List<StreamItem>
 
     @GET("subscribed")
     suspend fun isSubscribed(
         @Query("channelId") channelId: String,
-        @Header("Authorization") token: String,
+        @Header("Authorization") token: String
     ): Subscribed
 
     @GET("subscriptions")
@@ -130,37 +130,37 @@ interface PipedApi {
 
     @GET("subscriptions/unauthenticated")
     suspend fun unauthenticatedSubscriptions(
-        @Query("channels") channels: String,
+        @Query("channels") channels: String
     ): List<Subscription>
 
     @POST("subscriptions/unauthenticated")
     suspend fun unauthenticatedSubscriptions(
-        @Body channels: List<String>,
+        @Body channels: List<String>
     ): List<Subscription>
 
     @POST("subscribe")
     suspend fun subscribe(
         @Header("Authorization") token: String,
-        @Body subscribe: Subscribe,
+        @Body subscribe: Subscribe
     ): Message
 
     @POST("unsubscribe")
     suspend fun unsubscribe(
         @Header("Authorization") token: String,
-        @Body subscribe: Subscribe,
+        @Body subscribe: Subscribe
     ): Message
 
     @POST("import")
     suspend fun importSubscriptions(
         @Query("override") override: Boolean,
         @Header("Authorization") token: String,
-        @Body channels: List<String>,
+        @Body channels: List<String>
     ): Message
 
     @POST("import/playlist")
     suspend fun clonePlaylist(
         @Header("Authorization") token: String,
-        @Body editPlaylistBody: EditPlaylistBody,
+        @Body editPlaylistBody: EditPlaylistBody
     ): EditPlaylistBody
 
     @GET("user/playlists")
@@ -169,36 +169,36 @@ interface PipedApi {
     @POST("user/playlists/rename")
     suspend fun renamePlaylist(
         @Header("Authorization") token: String,
-        @Body editPlaylistBody: EditPlaylistBody,
+        @Body editPlaylistBody: EditPlaylistBody
     ): Message
 
     @PATCH("user/playlists/description")
     suspend fun changePlaylistDescription(
         @Header("Authorization") token: String,
-        @Body editPlaylistBody: EditPlaylistBody,
+        @Body editPlaylistBody: EditPlaylistBody
     ): Message
 
     @POST("user/playlists/delete")
     suspend fun deletePlaylist(
         @Header("Authorization") token: String,
-        @Body editPlaylistBody: EditPlaylistBody,
+        @Body editPlaylistBody: EditPlaylistBody
     ): Message
 
     @POST("user/playlists/create")
     suspend fun createPlaylist(
         @Header("Authorization") token: String,
-        @Body name: Playlists,
+        @Body name: Playlists
     ): EditPlaylistBody
 
     @POST("user/playlists/add")
     suspend fun addToPlaylist(
         @Header("Authorization") token: String,
-        @Body editPlaylistBody: EditPlaylistBody,
+        @Body editPlaylistBody: EditPlaylistBody
     ): Message
 
     @POST("user/playlists/remove")
     suspend fun removeFromPlaylist(
         @Header("Authorization") token: String,
-        @Body editPlaylistBody: EditPlaylistBody,
+        @Body editPlaylistBody: EditPlaylistBody
     ): Message
 }

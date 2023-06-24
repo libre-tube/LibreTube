@@ -1,9 +1,9 @@
 package com.github.libretube.api
 
 import androidx.core.text.isDigitsOnly
-import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.EditPlaylistBody
 import com.github.libretube.api.obj.Message
+import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.YOUTUBE_FRONTEND_URL
@@ -42,7 +42,7 @@ object PlaylistsHelper {
                         name = it.playlist.name,
                         shortDescription = it.playlist.description,
                         thumbnail = ProxyHelper.rewriteUrl(it.playlist.thumbnailUrl),
-                        videos = it.videos.size.toLong(),
+                        videos = it.videos.size.toLong()
                     )
                 }
         }
@@ -61,7 +61,7 @@ object PlaylistsHelper {
                     description = relation.playlist.description,
                     thumbnailUrl = ProxyHelper.rewriteUrl(relation.playlist.thumbnailUrl),
                     videos = relation.videos.size,
-                    relatedStreams = relation.videos.map { it.toStreamItem() },
+                    relatedStreams = relation.videos.map { it.toStreamItem() }
                 )
             }
         }
@@ -72,7 +72,10 @@ object PlaylistsHelper {
             val playlist = LocalPlaylist(name = playlistName, thumbnailUrl = "")
             DatabaseHolder.Database.localPlaylistsDao().createPlaylist(playlist).toString()
         } else {
-            RetrofitInstance.authApi.createPlaylist(token, Playlists(name = playlistName)).playlistId
+            RetrofitInstance.authApi.createPlaylist(
+                token,
+                Playlists(name = playlistName)
+            ).playlistId
         }
     }
 
@@ -137,55 +140,58 @@ object PlaylistsHelper {
             val transaction = DatabaseHolder.Database.localPlaylistsDao().getAll()
                 .first { it.playlist.id.toString() == playlistId }
             DatabaseHolder.Database.localPlaylistsDao().removePlaylistVideo(
-                transaction.videos[index],
+                transaction.videos[index]
             )
             // set a new playlist thumbnail if the first video got removed
             if (index == 0) {
-                transaction.playlist.thumbnailUrl = transaction.videos.getOrNull(1)?.thumbnailUrl ?: ""
+                transaction.playlist.thumbnailUrl =
+                    transaction.videos.getOrNull(1)?.thumbnailUrl ?: ""
             }
             DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(transaction.playlist)
             true
         } else {
             RetrofitInstance.authApi.removeFromPlaylist(
                 PreferenceHelper.getToken(),
-                EditPlaylistBody(playlistId = playlistId, index = index),
+                EditPlaylistBody(playlistId = playlistId, index = index)
             ).isOk()
         }
     }
 
-    suspend fun importPlaylists(playlists: List<PipedImportPlaylist>) = withContext(Dispatchers.IO) {
-        playlists.map { playlist ->
-            val playlistId = createPlaylist(playlist.name!!)
-            async {
-                playlistId ?: return@async
-                // if logged in, add the playlists by their ID via an api call
-                if (loggedIn) {
-                    addToPlaylist(
-                        playlistId,
-                        *playlist.videos.map {
-                            StreamItem(url = it)
-                        }.toTypedArray(),
-                    )
-                } else {
-                    // if not logged in, all video information needs to become fetched manually
-                    // Only do so with 20 videos at once to prevent performance issues
-                    playlist.videos.mapIndexed { index, id -> id to index }
-                        .groupBy { it.second % 20 }.forEach { (_, videos) ->
-                            videos.map {
-                                async {
-                                    runCatching {
-                                        val stream = RetrofitInstance.api.getStreams(it.first).toStreamItem(
-                                            it.first,
-                                        )
-                                        addToPlaylist(playlistId, stream)
+    suspend fun importPlaylists(playlists: List<PipedImportPlaylist>) =
+        withContext(Dispatchers.IO) {
+            playlists.map { playlist ->
+                val playlistId = createPlaylist(playlist.name!!)
+                async {
+                    playlistId ?: return@async
+                    // if logged in, add the playlists by their ID via an api call
+                    if (loggedIn) {
+                        addToPlaylist(
+                            playlistId,
+                            *playlist.videos.map {
+                                StreamItem(url = it)
+                            }.toTypedArray()
+                        )
+                    } else {
+                        // if not logged in, all video information needs to become fetched manually
+                        // Only do so with 20 videos at once to prevent performance issues
+                        playlist.videos.mapIndexed { index, id -> id to index }
+                            .groupBy { it.second % 20 }.forEach { (_, videos) ->
+                                videos.map {
+                                    async {
+                                        runCatching {
+                                            val stream = RetrofitInstance.api.getStreams(it.first)
+                                                .toStreamItem(
+                                                    it.first
+                                                )
+                                            addToPlaylist(playlistId, stream)
+                                        }
                                     }
-                                }
-                            }.awaitAll()
-                        }
+                                }.awaitAll()
+                            }
+                    }
                 }
-            }
-        }.awaitAll()
-    }
+            }.awaitAll()
+        }
 
     suspend fun exportPipedPlaylists(): List<PipedImportPlaylist> = withContext(Dispatchers.IO) {
         getPlaylists()
@@ -232,7 +238,10 @@ object PlaylistsHelper {
             return playlistId
         }
 
-        return RetrofitInstance.authApi.clonePlaylist(token, EditPlaylistBody(playlistId)).playlistId
+        return RetrofitInstance.authApi.clonePlaylist(
+            token,
+            EditPlaylistBody(playlistId)
+        ).playlistId
     }
 
     suspend fun deletePlaylist(playlistId: String, playlistType: PlaylistType): Boolean {
@@ -245,7 +254,7 @@ object PlaylistsHelper {
         return runCatching {
             RetrofitInstance.authApi.deletePlaylist(
                 PreferenceHelper.getToken(),
-                EditPlaylistBody(playlistId),
+                EditPlaylistBody(playlistId)
             ).isOk()
         }.getOrDefault(false)
     }

@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -91,7 +91,7 @@ class HomeFragment : Fragment() {
                     async { if (visibleItems.contains(TRENDING)) loadTrending() },
                     async { if (visibleItems.contains(BOOKMARKS)) loadBookmarks() },
                     async { if (visibleItems.contains(FEATURED)) loadFeed() },
-                    async { if (visibleItems.contains(PLAYLISTS)) loadPlaylists() },
+                    async { if (visibleItems.contains(PLAYLISTS)) loadPlaylists() }
                 )
 
                 val binding = _binding ?: return@repeatOnLifecycle
@@ -117,7 +117,7 @@ class HomeFragment : Fragment() {
         binding.trendingRV.layoutManager = GridLayoutManager(context, 2)
         binding.trendingRV.adapter = VideosAdapter(
             trending.toMutableList(),
-            forceMode = VideosAdapter.Companion.ForceMode.TRENDING,
+            forceMode = VideosAdapter.Companion.ForceMode.TRENDING
         )
     }
 
@@ -126,7 +126,9 @@ class HomeFragment : Fragment() {
         val feed = if (
             PreferenceHelper.getBoolean(PreferenceKeys.SAVE_FEED, false) &&
             !savedFeed.isNullOrEmpty()
-        ) { savedFeed } else {
+        ) {
+            savedFeed
+        } else {
             runCatching {
                 withContext(Dispatchers.IO) {
                     SubscriptionHelper.getFeed()
@@ -145,11 +147,11 @@ class HomeFragment : Fragment() {
         binding.featuredRV.layoutManager = LinearLayoutManager(
             context,
             LinearLayoutManager.HORIZONTAL,
-            false,
+            false
         )
         binding.featuredRV.adapter = VideosAdapter(
             feed.toMutableList(),
-            forceMode = VideosAdapter.Companion.ForceMode.HOME,
+            forceMode = VideosAdapter.Companion.ForceMode.HOME
         )
     }
 
@@ -163,11 +165,11 @@ class HomeFragment : Fragment() {
         binding.bookmarksRV.layoutManager = LinearLayoutManager(
             context,
             LinearLayoutManager.HORIZONTAL,
-            false,
+            false
         )
         binding.bookmarksRV.adapter = PlaylistBookmarkAdapter(
             bookmarkedPlaylists,
-            PlaylistBookmarkAdapter.Companion.BookmarkMode.HOME,
+            PlaylistBookmarkAdapter.Companion.BookmarkMode.HOME
         )
     }
 
@@ -183,7 +185,7 @@ class HomeFragment : Fragment() {
         binding.playlistsRV.layoutManager = LinearLayoutManager(context)
         binding.playlistsRV.adapter = PlaylistsAdapter(
             playlists.toMutableList(),
-            PlaylistsHelper.getPrivatePlaylistType(),
+            PlaylistsHelper.getPrivatePlaylistType()
         )
         binding.playlistsRV.adapter?.registerAdapterDataObserver(object :
             RecyclerView.AdapterDataObserver() {

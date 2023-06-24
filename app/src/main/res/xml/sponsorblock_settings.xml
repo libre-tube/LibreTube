@@ -10,122 +10,122 @@
         app:title="@string/sponsorblock" />
 
     <SwitchPreferenceCompat
+        android:dependency="sb_enabled_key"
         android:summaryOff="@string/disabled"
         android:summaryOn="@string/enabled"
-        android:dependency="sb_enabled_key"
         app:defaultValue="true"
         app:key="sb_notifications_key"
         app:title="@string/sponsorblock_notifications" />
 
     <SwitchPreferenceCompat
+        android:dependency="sb_enabled_key"
         android:summary="@string/sb_markers_summary"
         app:defaultValue="true"
-        android:dependency="sb_enabled_key"
         app:key="sb_show_markers"
         app:title="@string/sb_markers" />
 
     <SwitchPreferenceCompat
+        app:defaultValue="true"
         app:key="sb_highlights"
         app:summary="@string/category_highlight_description"
-        app:title="@string/category_highlight"
-        app:defaultValue="true"/>
+        app:title="@string/category_highlight" />
 
     <SwitchPreferenceCompat
+        android:dependency="sb_enabled_key"
         android:summary="@string/sb_color_enable"
         app:defaultValue="false"
-        android:dependency="sb_enabled_key"
         app:key="sb_enable_custom_colors"
         app:title="@string/sb_custom_colors" />
 
     <PreferenceCategory app:title="@string/category_segments">
 
         <com.github.libretube.ui.views.SbSpinnerPreference
+            app:defaultValue="automatic"
             app:key="sponsor_category"
             app:summary="@string/category_sponsor_description"
-            app:title="@string/category_sponsor"
-            app:defaultValue="automatic"/>
+            app:title="@string/category_sponsor" />
 
         <com.github.libretube.ui.views.ColorPreference
+            app:defaultValue="#00d400"
             app:key="sponsor_color"
-            app:title="@string/color"
-            app:defaultValue="#00d400" />
+            app:title="@string/color" />
 
         <com.github.libretube.ui.views.SbSpinnerPreference
+            app:defaultValue="automatic"
             app:key="selfpromo_category"
             app:summary="@string/category_selfpromo_description"
-            app:title="@string/category_selfpromo"
-            app:defaultValue="automatic"/>
+            app:title="@string/category_selfpromo" />
 
         <com.github.libretube.ui.views.ColorPreference
+            app:defaultValue="#ffff00"
             app:key="selfpromo_color"
-            app:title="@string/color"
-            app:defaultValue="#ffff00" />
+            app:title="@string/color" />
 
         <com.github.libretube.ui.views.SbSpinnerPreference
+            app:defaultValue="off"
             app:key="interaction_category"
             app:summary="@string/category_interaction_description"
-            app:title="@string/category_interaction"
-            app:defaultValue="off"/>
+            app:title="@string/category_interaction" />
 
         <com.github.libretube.ui.views.ColorPreference
+            app:defaultValue="#cc00ff"
             app:key="interaction_color"
-            app:title="@string/color"
-            app:defaultValue="#cc00ff" />
+            app:title="@string/color" />
 
         <com.github.libretube.ui.views.SbSpinnerPreference
+            app:defaultValue="off"
             app:key="intro_category"
             app:summary="@string/category_intro_description"
-            app:title="@string/category_intro"
-            app:defaultValue="off"/>
+            app:title="@string/category_intro" />
 
         <com.github.libretube.ui.views.ColorPreference
+            app:defaultValue="#00ffff"
             app:key="intro_color"
-            app:title="@string/color"
-            app:defaultValue="#00ffff" />
+            app:title="@string/color" />
 
         <com.github.libretube.ui.views.SbSpinnerPreference
+            app:defaultValue="off"
             app:key="outro_category"
             app:summary="@string/category_outro_description"
-            app:title="@string/category_outro"
-            app:defaultValue="off"/>
+            app:title="@string/category_outro" />
 
         <com.github.libretube.ui.views.ColorPreference
+            app:defaultValue="#0202ED"
             app:key="outro_color"
-            app:title="@string/color"
-            app:defaultValue="#0202ED" />
+            app:title="@string/color" />
 
         <com.github.libretube.ui.views.SbSpinnerPreference
+            app:defaultValue="off"
             app:key="filler_category"
             app:summary="@string/category_filler_description"
-            app:title="@string/category_filler"
-            app:defaultValue="off"/>
+            app:title="@string/category_filler" />
 
         <com.github.libretube.ui.views.ColorPreference
+            app:defaultValue="#7300ff"
             app:key="filler_color"
-            app:title="@string/color"
-            app:defaultValue="#7300ff" />
+            app:title="@string/color" />
 
         <com.github.libretube.ui.views.SbSpinnerPreference
+            app:defaultValue="off"
             app:key="music_offtopic_category"
             app:summary="@string/category_music_offtopic_description"
-            app:title="@string/category_music_offtopic"
-            app:defaultValue="off"/>
+            app:title="@string/category_music_offtopic" />
 
         <com.github.libretube.ui.views.ColorPreference
+            app:defaultValue="#ff9900"
             app:key="music_offtopic_color"
-            app:title="@string/color"
-            app:defaultValue="#ff9900" />
+            app:title="@string/color" />
 
         <com.github.libretube.ui.views.SbSpinnerPreference
+            app:defaultValue="off"
             app:key="preview_category"
             app:summary="@string/category_preview_description"
-            app:title="@string/category_preview"
-            app:defaultValue="off"/>
+            app:title="@string/category_preview" />
 
         <com.github.libretube.ui.views.ColorPreference
+            app:defaultValue="#008fd6"
             app:key="preview_color"
-            app:title="@string/color"
-            app:defaultValue="#008fd6" />
+            app:title="@string/color" />
 
     </PreferenceCategory>
 

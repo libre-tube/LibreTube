@@ -31,8 +31,8 @@
             app:title="@string/auth_instance" />
 
         <ListPreference
-            android:icon="@drawable/ic_server"
             android:dependency="auth_instance_toggle"
+            android:icon="@drawable/ic_server"
             app:defaultValue="https://pipedapi.kavin.rocks"
             app:entries="@array/instances"
             app:entryValues="@array/instancesValue"

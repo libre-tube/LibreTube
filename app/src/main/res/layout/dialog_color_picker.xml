@@ -1,8 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingHorizontal="20dp"
     android:paddingTop="30dp">
@@ -32,9 +32,9 @@
         android:id="@+id/redSeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:max="255"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:max="255"
         android:progress="0" />
 
     <TextView
@@ -47,9 +47,9 @@
         android:id="@+id/greenSeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:max="255"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:max="255"
         android:progress="0" />
 
     <TextView
@@ -62,9 +62,9 @@
         android:id="@+id/blueSeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:max="255"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:max="255"
         android:progress="0" />
 
     <TextView
@@ -77,8 +77,8 @@
         android:id="@+id/alphaSeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="5dp"
         android:max="255"
+        android:paddingVertical="5dp"
         android:progress="255" />
 
     <EditText

@@ -9,7 +9,7 @@ import com.github.libretube.extensions.normalize
 
 class PlayerGestureControlsView(
     context: Context,
-    attrs: AttributeSet? = null,
+    attrs: AttributeSet? = null
 ) : ConstraintLayout(context, attrs) {
     var binding: PlayerGestureControlsViewBinding
 

@@ -7,8 +7,8 @@
         android:id="@+id/commentsRV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="15dp"
-        android:clipToPadding="false" />
+        android:clipToPadding="false"
+        android:paddingVertical="15dp" />
 
     <ProgressBar
         android:id="@+id/progress"

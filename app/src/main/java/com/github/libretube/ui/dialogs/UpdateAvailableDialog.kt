@@ -10,7 +10,7 @@ import com.github.libretube.obj.update.UpdateInfo
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class UpdateAvailableDialog(
-    private val updateInfo: UpdateInfo,
+    private val updateInfo: UpdateInfo
 ) : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

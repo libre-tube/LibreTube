@@ -88,7 +88,7 @@ object PlayerHelper {
     fun getOrientation(videoWidth: Int, videoHeight: Int): Int {
         val fullscreenOrientationPref = PreferenceHelper.getString(
             PreferenceKeys.FULLSCREEN_ORIENTATION,
-            "ratio",
+            "ratio"
         )
 
         return when (fullscreenOrientationPref) {
@@ -112,25 +112,25 @@ object PlayerHelper {
     val autoRotationEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.AUTO_FULLSCREEN,
-            false,
+            false
         )
 
     val relatedStreamsEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.RELATED_STREAMS,
-            true,
+            true
         )
 
     val pausePlayerOnScreenOffEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.PAUSE_ON_SCREEN_OFF,
-            false,
+            false
         )
 
     private val watchPositionsPref: String
         get() = PreferenceHelper.getString(
             PreferenceKeys.WATCH_POSITIONS,
-            "always",
+            "always"
         )
 
     val watchPositionsVideo: Boolean
@@ -142,31 +142,31 @@ object PlayerHelper {
     val watchHistoryEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.WATCH_HISTORY_TOGGLE,
-            true,
+            true
         )
 
     val useSystemCaptionStyle: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.SYSTEM_CAPTION_STYLE,
-            true,
+            true
         )
 
     private val bufferingGoal: Int
         get() = PreferenceHelper.getString(
             PreferenceKeys.BUFFERING_GOAL,
-            "50",
+            "50"
         ).toInt() * 1000
 
     val sponsorBlockEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             "sb_enabled_key",
-            true,
+            true
         )
 
     private val sponsorBlockNotifications: Boolean
         get() = PreferenceHelper.getBoolean(
             "sb_notifications_key",
-            true,
+            true
         )
 
     private val sponsorBlockHighlights: Boolean
@@ -179,7 +179,7 @@ object PlayerHelper {
         get() {
             val code = PreferenceHelper.getString(
                 PreferenceKeys.DEFAULT_SUBTITLE,
-                "",
+                ""
             )
 
             if (code == "") return null
@@ -193,31 +193,31 @@ object PlayerHelper {
     val skipButtonsEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.SKIP_BUTTONS,
-            false,
+            false
         )
 
     val pipEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.PICTURE_IN_PICTURE,
-            true,
+            true
         )
 
     val autoPlayEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.AUTO_PLAY,
-            true,
+            true
         )
 
     val autoPlayCountdown: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.AUTOPLAY_COUNTDOWN,
-            false,
+            false
         )
 
     val seekIncrement: Long
         get() = PreferenceHelper.getString(
             PreferenceKeys.SEEK_INCREMENT,
-            "10.0",
+            "10.0"
         ).toFloat()
             .roundToInt()
             .toLong() * 1000
@@ -225,7 +225,7 @@ object PlayerHelper {
     private val playbackSpeed: Float
         get() = PreferenceHelper.getString(
             PreferenceKeys.PLAYBACK_SPEED,
-            "1",
+            "1"
         ).replace("F", "").toFloat()
 
     private val backgroundSpeed: Float
@@ -239,73 +239,73 @@ object PlayerHelper {
     val resizeModePref: String
         get() = PreferenceHelper.getString(
             PreferenceKeys.PLAYER_RESIZE_MODE,
-            "fit",
+            "fit"
         )
 
     val alternativeVideoLayout: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.ALTERNATIVE_PLAYER_LAYOUT,
-            false,
+            false
         )
 
     val autoInsertRelatedVideos: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.QUEUE_AUTO_INSERT_RELATED,
-            true,
+            true
         )
 
     val swipeGestureEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.PLAYER_SWIPE_CONTROLS,
-            true,
+            true
         )
 
     val fullscreenGesturesEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.FULLSCREEN_GESTURES,
-            false,
+            false
         )
 
     val pinchGestureEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.PLAYER_PINCH_CONTROL,
-            true,
+            true
         )
 
     val captionsTextSize: Float
         get() = PreferenceHelper.getString(
             PreferenceKeys.CAPTIONS_SIZE,
-            "18",
+            "18"
         ).toFloat()
 
     val doubleTapToSeek: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.DOUBLE_TAP_TO_SEEK,
-            true,
+            true
         )
 
     val pauseOnQuit: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.PAUSE_ON_QUIT,
-            false,
+            false
         )
 
     private val alternativePiPControls: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.ALTERNATIVE_PIP_CONTROLS,
-            false,
+            false
         )
 
     private val skipSilence: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.SKIP_SILENCE,
-            false,
+            false
         )
 
     val enabledVideoCodecs: String
         get() = PreferenceHelper.getString(
             PreferenceKeys.ENABLED_VIDEO_CODECS,
-            "all",
+            "all"
         )
 
     fun getDefaultResolution(context: Context): String {
@@ -330,14 +330,14 @@ object PlayerHelper {
         activity: Activity,
         id: Int,
         @StringRes title: Int,
-        event: PlayerEvent,
+        event: PlayerEvent
     ): RemoteActionCompat {
         val text = activity.getString(title)
         return RemoteActionCompat(
             IconCompat.createWithResource(activity, id),
             text,
             text,
-            getPendingIntent(activity, event.value),
+            getPendingIntent(activity, event.value)
         )
     }
 
@@ -349,35 +349,35 @@ object PlayerHelper {
             activity,
             R.drawable.ic_headphones,
             R.string.background_mode,
-            PlayerEvent.Background,
+            PlayerEvent.Background
         )
 
         val rewindAction = getRemoteAction(
             activity,
             R.drawable.ic_rewind,
             R.string.rewind,
-            PlayerEvent.Rewind,
+            PlayerEvent.Rewind
         )
 
         val playPauseAction = getRemoteAction(
             activity,
             if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play,
             R.string.pause,
-            if (isPlaying) PlayerEvent.Pause else PlayerEvent.Play,
+            if (isPlaying) PlayerEvent.Pause else PlayerEvent.Play
         )
 
         val skipNextAction = getRemoteAction(
             activity,
             R.drawable.ic_next,
             R.string.play_next,
-            PlayerEvent.Next,
+            PlayerEvent.Next
         )
 
         val forwardAction = getRemoteAction(
             activity,
             R.drawable.ic_forward,
             R.string.forward,
-            PlayerEvent.Forward,
+            PlayerEvent.Forward
         )
         return if (alternativePiPControls) {
             listOf(audioModeAction, playPauseAction, skipNextAction)
@@ -408,7 +408,7 @@ object PlayerHelper {
                 1000 * 10, // exo default is 50s
                 bufferingGoal,
                 DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_MS,
-                DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS,
+                DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS
             )
             .build()
     }
@@ -472,7 +472,7 @@ object PlayerHelper {
     fun ExoPlayer.checkForSegments(
         context: Context,
         segments: List<Segment>,
-        sponsorBlockConfig: MutableMap<String, SbSkipOptions>,
+        sponsorBlockConfig: MutableMap<String, SbSkipOptions>
     ): Long? {
         for (segment in segments.filter { it.category != SPONSOR_HIGHLIGHT_CATEGORY }) {
             val segmentStart = (segment.segment[0] * 1000f).toLong()

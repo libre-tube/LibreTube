@@ -11,7 +11,7 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class LogoutDialog(
-    private val onLogout: () -> Unit,
+    private val onLogout: () -> Unit
 ) : DialogFragment() {
     @SuppressLint("SetTextI18n")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

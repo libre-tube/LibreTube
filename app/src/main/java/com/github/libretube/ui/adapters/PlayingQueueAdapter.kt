@@ -19,7 +19,7 @@ class PlayingQueueAdapter : RecyclerView.Adapter<PlayingQueueViewHolder>() {
         val binding = QueueRowBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
-            false,
+            false
         )
         return PlayingQueueViewHolder(binding)
     }
@@ -43,7 +43,7 @@ class PlayingQueueAdapter : RecyclerView.Adapter<PlayingQueueViewHolder>() {
                     ThemeHelper.getThemeColor(root.context, android.R.attr.colorControlHighlight)
                 } else {
                     Color.TRANSPARENT
-                },
+                }
             )
 
             root.setOnClickListener {

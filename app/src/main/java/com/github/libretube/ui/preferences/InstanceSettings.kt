@@ -22,7 +22,6 @@ import com.github.libretube.ui.dialogs.CustomInstanceDialog
 import com.github.libretube.ui.dialogs.DeleteAccountDialog
 import com.github.libretube.ui.dialogs.LoginDialog
 import com.github.libretube.ui.dialogs.LogoutDialog
-import java.lang.Exception
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -36,7 +35,7 @@ class InstanceSettings : BasePreferenceFragment() {
 
         val instancePref = findPreference<ListPreference>(PreferenceKeys.FETCH_INSTANCE)!!
         val authInstanceToggle = findPreference<SwitchPreferenceCompat>(
-            PreferenceKeys.AUTH_INSTANCE_TOGGLE,
+            PreferenceKeys.AUTH_INSTANCE_TOGGLE
         )!!
         val authInstance = findPreference<ListPreference>(PreferenceKeys.AUTH_INSTANCE)!!
         initInstancesPref(listOf(instancePref, authInstance))

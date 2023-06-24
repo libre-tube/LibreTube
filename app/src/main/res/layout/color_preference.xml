@@ -30,7 +30,7 @@
         android:layout_width="20sp"
         android:layout_height="20sp"
         android:layout_alignParentEnd="true"
-        android:background="@drawable/circle"
-        android:layout_marginStart="16dp"/>
+        android:layout_marginStart="16dp"
+        android:background="@drawable/circle" />
 
 </LinearLayout>

@@ -43,7 +43,7 @@ class LibraryFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLibraryBinding.inflate(inflater, container, false)
         return binding.root
@@ -148,13 +148,15 @@ class LibraryFragment : Fragment() {
                         "creation_date" -> playlists
                         "creation_date_reversed" -> playlists.reversed()
                         "alphabetic" -> playlists.sortedBy { it.name?.lowercase() }
-                        "alphabetic_reversed" -> playlists.sortedBy { it.name?.lowercase() }.reversed()
+                        "alphabetic_reversed" -> playlists.sortedBy { it.name?.lowercase() }
+                            .reversed()
+
                         else -> playlists
                     }
 
                     val playlistsAdapter = PlaylistsAdapter(
                         playlists.toMutableList(),
-                        PlaylistsHelper.getPrivatePlaylistType(),
+                        PlaylistsHelper.getPrivatePlaylistType()
                     )
 
                     // listen for playlists to become deleted
