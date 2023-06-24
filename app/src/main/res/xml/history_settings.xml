@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory app:title="@string/search_history">
 
@@ -9,19 +9,19 @@
             android:icon="@drawable/ic_history_filled"
             android:summary="@string/search_history_summary"
             app:key="search_history_toggle"
-            app:title="@string/search_history"/>
+            app:title="@string/search_history" />
 
         <SwitchPreferenceCompat
-            android:dependency="search_history_toggle"
             android:defaultValue="false"
+            android:dependency="search_history_toggle"
             android:icon="@drawable/ic_search"
             app:key="unlimited_search_history"
-            app:title="@string/unlimited_search_history"/>
+            app:title="@string/unlimited_search_history" />
 
         <Preference
             android:icon="@drawable/ic_trash"
             app:key="clear_search_history"
-            app:title="@string/clear_history"/>
+            app:title="@string/clear_history" />
 
     </PreferenceCategory>
 
@@ -32,22 +32,22 @@
             android:icon="@drawable/ic_time_outlined"
             android:summary="@string/watch_history_summary"
             app:key="watch_history_toggle"
-            app:title="@string/watch_history"/>
+            app:title="@string/watch_history" />
 
         <ListPreference
             android:defaultValue="100"
+            android:dependency="watch_history_toggle"
             android:entries="@array/historySize"
             android:entryValues="@array/historySizeValues"
             android:icon="@drawable/ic_list"
             app:key="watch_history_size"
-            android:dependency="watch_history_toggle"
             app:title="@string/history_size"
-            app:useSimpleSummaryProvider="true"/>
+            app:useSimpleSummaryProvider="true" />
 
         <Preference
             android:icon="@drawable/ic_trash"
             app:key="clear_watch_history"
-            app:title="@string/clear_history"/>
+            app:title="@string/clear_history" />
 
     </PreferenceCategory>
 
@@ -60,12 +60,12 @@
             android:icon="@drawable/ic_play_filled"
             app:key="watch_positions"
             app:summary="@string/watch_positions_summary"
-            app:title="@string/watch_positions"/>
+            app:title="@string/watch_positions" />
 
         <Preference
             android:icon="@drawable/ic_reset"
             app:key="clear_watch_positions"
-            app:title="@string/reset_watch_positions"/>
+            app:title="@string/reset_watch_positions" />
 
     </PreferenceCategory>
 
@@ -74,7 +74,7 @@
         <Preference
             android:title="@string/clear_bookmarks"
             app:icon="@drawable/ic_bookmark"
-            app:key="clear_bookmarks"/>
+            app:key="clear_bookmarks" />
 
     </PreferenceCategory>
 

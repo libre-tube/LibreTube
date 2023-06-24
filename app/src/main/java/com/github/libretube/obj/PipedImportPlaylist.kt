@@ -7,5 +7,5 @@ data class PipedImportPlaylist(
     var name: String? = null,
     val type: String? = null,
     val visibility: String? = null,
-    var videos: List<String> = listOf(),
+    var videos: List<String> = listOf()
 )

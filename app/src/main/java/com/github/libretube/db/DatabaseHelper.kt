@@ -22,7 +22,7 @@ object DatabaseHelper {
             streams.uploaderUrl.toID(),
             streams.uploaderAvatar,
             streams.thumbnailUrl,
-            streams.duration,
+            streams.duration
         )
         Database.watchHistoryDao().insert(watchHistoryItem)
         val maxHistorySize = PreferenceHelper.getString(PreferenceKeys.WATCH_HISTORY_SIZE, "100")

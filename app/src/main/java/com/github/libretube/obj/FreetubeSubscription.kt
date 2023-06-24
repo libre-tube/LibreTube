@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 data class FreetubeSubscription(
     val name: String,
     @SerialName("id") val serviceId: String,
-    val url: String = "https://www.youtube.com/channel/$serviceId",
+    val url: String = "https://www.youtube.com/channel/$serviceId"
 )

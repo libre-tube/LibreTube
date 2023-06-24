@@ -5,8 +5,6 @@ import android.icu.text.RelativeDateTimeFormatter
 import android.os.Build
 import android.text.format.DateUtils
 import com.github.libretube.R
-import kotlinx.datetime.toJavaLocalDate
-import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -16,6 +14,8 @@ import java.time.format.FormatStyle
 import java.time.temporal.ChronoUnit
 import kotlin.time.Duration
 import kotlinx.datetime.LocalDate as KotlinLocalDate
+import kotlinx.datetime.toJavaLocalDate
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 object TextUtils {
     /**

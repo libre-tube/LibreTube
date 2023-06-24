@@ -5,4 +5,4 @@ import com.github.libretube.databinding.InstanceRowBinding
 
 class InstancesViewHolder(
     val binding: InstanceRowBinding
-): RecyclerView.ViewHolder(binding.root)
+) : RecyclerView.ViewHolder(binding.root)

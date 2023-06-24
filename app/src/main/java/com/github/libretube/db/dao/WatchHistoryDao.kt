@@ -6,7 +6,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.github.libretube.db.obj.WatchHistoryItem
-import com.github.libretube.db.obj.WatchPosition
 
 @Dao
 interface WatchHistoryDao {

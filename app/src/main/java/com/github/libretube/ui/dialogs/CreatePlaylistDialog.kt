@@ -16,7 +16,7 @@ import kotlinx.coroutines.withContext
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 class CreatePlaylistDialog(
-    private val onSuccess: () -> Unit = {},
+    private val onSuccess: () -> Unit = {}
 ) : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogCreatePlaylistBinding.inflate(layoutInflater)
@@ -37,7 +37,7 @@ class CreatePlaylistDialog(
                         onSuccess()
                     }
                     appContext?.toastFromMainDispatcher(
-                        if (playlistId != null) R.string.playlistCloned else R.string.server_error,
+                        if (playlistId != null) R.string.playlistCloned else R.string.server_error
                     )
                     dismiss()
                 }
@@ -64,7 +64,7 @@ class CreatePlaylistDialog(
                         }.getOrNull()
                     }
                     appContext?.toastFromMainDispatcher(
-                        if (playlistId != null) R.string.playlistCreated else R.string.unknown_error,
+                        if (playlistId != null) R.string.playlistCreated else R.string.unknown_error
                     )
                     playlistId?.let { onSuccess() }
                     dismiss()

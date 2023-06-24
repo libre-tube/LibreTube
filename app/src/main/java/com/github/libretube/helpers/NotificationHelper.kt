@@ -17,18 +17,18 @@ object NotificationHelper {
      */
     fun enqueueWork(
         context: Context,
-        existingPeriodicWorkPolicy: ExistingPeriodicWorkPolicy,
+        existingPeriodicWorkPolicy: ExistingPeriodicWorkPolicy
     ) {
         // get the notification preferences
         PreferenceHelper.initialize(context)
         val notificationsEnabled = PreferenceHelper.getBoolean(
             PreferenceKeys.NOTIFICATION_ENABLED,
-            true,
+            true
         )
 
         val checkingFrequency = PreferenceHelper.getString(
             PreferenceKeys.CHECKING_FREQUENCY,
-            "60",
+            "60"
         ).toLong()
 
         // schedule the work manager request if logged in and notifications enabled
@@ -58,7 +58,7 @@ object NotificationHelper {
         // create the worker
         val notificationWorker = PeriodicWorkRequestBuilder<NotificationWorker>(
             checkingFrequency,
-            TimeUnit.MINUTES,
+            TimeUnit.MINUTES
         )
             .setConstraints(constraints)
             .build()
@@ -68,7 +68,7 @@ object NotificationHelper {
             .enqueueUniquePeriodicWork(
                 NOTIFICATION_WORK_NAME,
                 existingPeriodicWorkPolicy,
-                notificationWorker,
+                notificationWorker
             )
 
         // for testing the notifications by the work manager

@@ -1,9 +1,9 @@
 package com.github.libretube.extensions
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import java.net.HttpURLConnection
 import java.net.URL
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 suspend fun URL.getContentLength(): Long? {
     try {
@@ -18,7 +18,9 @@ suspend fun URL.getContentLength(): Long? {
             connection.disconnect()
             value.toLong()
         }
-    } catch (e: Exception) { e.printStackTrace() }
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
 
     return null
 }

@@ -61,8 +61,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginEnd="8dp"
-                    android:padding="5dp"
                     android:background="@drawable/rounded_ripple"
+                    android:padding="5dp"
                     android:visibility="gone"
                     tools:visibility="visible">
 

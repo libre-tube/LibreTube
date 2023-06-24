@@ -50,7 +50,7 @@ class AudioPlayerThumbnailListener(context: Context, private val listener: Audio
             e1: MotionEvent,
             e2: MotionEvent,
             distanceX: Float,
-            distanceY: Float,
+            distanceY: Float
         ): Boolean {
             val insideThreshHold = abs(e2.y - e1.y) <= MOVEMENT_THRESHOLD
 

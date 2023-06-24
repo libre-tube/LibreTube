@@ -16,7 +16,7 @@ import kotlinx.coroutines.withContext
 class DeletePlaylistDialog(
     private val playlistId: String,
     private val playlistType: PlaylistType,
-    private val onSuccess: () -> Unit,
+    private val onSuccess: () -> Unit
 ) : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return MaterialAlertDialogBuilder(requireContext())
@@ -27,7 +27,7 @@ class DeletePlaylistDialog(
                 CoroutineScope(Dispatchers.IO).launch {
                     val success = PlaylistsHelper.deletePlaylist(playlistId, playlistType)
                     appContext?.toastFromMainDispatcher(
-                        if (success) R.string.success else R.string.fail,
+                        if (success) R.string.success else R.string.fail
                     )
                     withContext(Dispatchers.Main) {
                         runCatching {

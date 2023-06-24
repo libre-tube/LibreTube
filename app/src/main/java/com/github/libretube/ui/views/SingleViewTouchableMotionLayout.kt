@@ -61,7 +61,7 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
             e1: MotionEvent,
             e2: MotionEvent,
             distanceX: Float,
-            distanceY: Float,
+            distanceY: Float
         ): Boolean {
             if (progress != 0F || distanceY < 30F) return false
             swipeUpListener.forEach {

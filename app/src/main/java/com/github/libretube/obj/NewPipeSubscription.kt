@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 data class NewPipeSubscription(
     val name: String,
     @SerialName("service_id") val serviceId: Int,
-    val url: String,
+    val url: String
 )

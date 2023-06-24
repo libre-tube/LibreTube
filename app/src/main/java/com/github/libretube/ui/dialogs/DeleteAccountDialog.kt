@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class DeleteAccountDialog(
-    private val onLogout: () -> Unit,
+    private val onLogout: () -> Unit
 ) : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogDeleteAccountBinding.inflate(layoutInflater)

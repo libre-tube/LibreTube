@@ -1,6 +1,5 @@
 package com.github.libretube.util
 
-import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
@@ -42,7 +41,7 @@ import com.google.common.util.concurrent.ListenableFuture
 class NowPlayingNotification(
     private val context: Context,
     private val player: ExoPlayer,
-    private val isBackgroundPlayerNotification: Boolean,
+    private val isBackgroundPlayerNotification: Boolean
 ) {
     private var videoId: String? = null
     private val nManager = context.getSystemService<NotificationManager>()!!
@@ -69,8 +68,10 @@ class NowPlayingNotification(
 
     private fun loadCurrentLargeIcon() {
         if (DataSaverMode.isEnabled(context)) return
-        if (notificationBitmap == null) enqueueThumbnailRequest {
-            createOrUpdateNotification()
+        if (notificationBitmap == null) {
+            enqueueThumbnailRequest {
+                createOrUpdateNotification()
+            }
         }
     }
 
@@ -132,7 +133,7 @@ class NowPlayingNotification(
             ),
             createNotificationAction(R.drawable.ic_next_outlined, NEXT),
             createNotificationAction(R.drawable.ic_rewind_md, REWIND),
-            createNotificationAction(R.drawable.ic_forward_md, FORWARD),
+            createNotificationAction(R.drawable.ic_forward_md, FORWARD)
         )
 
     private fun createNotificationAction(
@@ -147,7 +148,7 @@ class NowPlayingNotification(
 
     private fun createMediaSessionAction(
         @DrawableRes drawableRes: Int,
-        actionName: String,
+        actionName: String
     ): CommandButton {
         return CommandButton.Builder()
             .setDisplayName(actionName)
@@ -165,7 +166,7 @@ class NowPlayingNotification(
         val sessionCallback = object : MediaSession.Callback {
             override fun onConnect(
                 session: MediaSession,
-                controller: MediaSession.ControllerInfo,
+                controller: MediaSession.ControllerInfo
             ): MediaSession.ConnectionResult {
                 val connectionResult = super.onConnect(session, controller)
                 val availableSessionCommands = connectionResult.availableSessionCommands.buildUpon()
@@ -181,7 +182,7 @@ class NowPlayingNotification(
                 )
                 return MediaSession.ConnectionResult.accept(
                     availableSessionCommands.build(),
-                    availablePlayerCommands,
+                    availablePlayerCommands
                 )
             }
 
@@ -189,7 +190,7 @@ class NowPlayingNotification(
                 session: MediaSession,
                 controller: MediaSession.ControllerInfo,
                 customCommand: SessionCommand,
-                args: Bundle,
+                args: Bundle
             ): ListenableFuture<SessionResult> {
                 handlePlayerAction(customCommand.customAction)
                 return super.onCustomCommand(session, controller, customCommand, args)
@@ -226,7 +227,7 @@ class NowPlayingNotification(
         // createMediaSessionAction(R.drawable.ic_prev_outlined, PREV),
         createMediaSessionAction(R.drawable.ic_next_outlined, NEXT),
         createMediaSessionAction(R.drawable.ic_rewind_md, REWIND),
-        createMediaSessionAction(R.drawable.ic_forward_md, FORWARD),
+        createMediaSessionAction(R.drawable.ic_forward_md, FORWARD)
     )
 
     private fun handlePlayerAction(action: String) {
@@ -234,7 +235,7 @@ class NowPlayingNotification(
             NEXT -> {
                 if (PlayingQueue.hasNext()) {
                     PlayingQueue.onQueueItemSelected(
-                        PlayingQueue.currentIndex() + 1,
+                        PlayingQueue.currentIndex() + 1
                     )
                 }
             }
@@ -242,7 +243,7 @@ class NowPlayingNotification(
             PREV -> {
                 if (PlayingQueue.hasPrev()) {
                     PlayingQueue.onQueueItemSelected(
-                        PlayingQueue.currentIndex() - 1,
+                        PlayingQueue.currentIndex() - 1
                     )
                 }
             }
@@ -273,7 +274,7 @@ class NowPlayingNotification(
      */
     fun updatePlayerNotification(
         videoId: String,
-        data: PlayerNotificationData,
+        data: PlayerNotificationData
     ) {
         this.videoId = videoId
         this.notificationData = data

@@ -15,6 +15,7 @@ class DownloadReceiver : BroadcastReceiver() {
             DownloadService.ACTION_SERVICE_STARTED -> {
                 activityIntent.putExtra(IntentData.downloading, true)
             }
+
             DownloadService.ACTION_SERVICE_STOPPED -> {
                 activityIntent.putExtra(IntentData.downloading, false)
             }

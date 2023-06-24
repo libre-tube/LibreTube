@@ -89,6 +89,6 @@
         android:layout_width="64dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:textSize="13sp"/>
+        android:textSize="13sp" />
 
 </LinearLayout>

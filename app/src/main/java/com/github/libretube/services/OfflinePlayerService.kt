@@ -53,12 +53,12 @@ class OfflinePlayerService : LifecycleService() {
                     nowPlayingNotification = NowPlayingNotification(
                         this@OfflinePlayerService,
                         player!!,
-                        true,
+                        true
                     )
                     val notificationData = PlayerNotificationData(
                         title = downloadWithItems.download.title,
                         uploaderName = downloadWithItems.download.uploader,
-                        thumbnailPath = downloadWithItems.download.thumbnailPath,
+                        thumbnailPath = downloadWithItems.download.thumbnailPath
                     )
                     nowPlayingNotification?.updatePlayerNotification(videoId, notificationData)
                 } else {

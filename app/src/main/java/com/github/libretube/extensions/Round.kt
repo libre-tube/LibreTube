@@ -5,7 +5,7 @@ import kotlin.math.roundToInt
 
 fun Float.round(decimalPlaces: Int): Float {
     return (this * 10.0.pow(decimalPlaces.toDouble())).roundToInt() / 10.0.pow(
-        decimalPlaces.toDouble(),
+        decimalPlaces.toDouble()
     )
         .toFloat()
 }

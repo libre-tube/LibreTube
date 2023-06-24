@@ -39,6 +39,7 @@ class RouterActivity : BaseActivity() {
 
                 intent.putExtra(IntentData.channelId, channelId)
             }
+
             channelNamePaths.any { uri.path!!.contains(it) } -> {
                 var channelName = uri.path!!
 
@@ -48,11 +49,13 @@ class RouterActivity : BaseActivity() {
 
                 intent.putExtra(IntentData.channelName, channelName)
             }
+
             uri.path!!.contains("/playlist") -> {
                 val playlistId = uri.getQueryParameter("list")
 
                 intent.putExtra(IntentData.playlistId, playlistId)
             }
+
             videoPaths.any { uri.path!!.contains(it) } -> {
                 var videoId = uri.path!!
 
@@ -65,6 +68,7 @@ class RouterActivity : BaseActivity() {
                 uri.getQueryParameter("t")
                     ?.let { intent.putExtra(IntentData.timeStamp, it.toTimeInSeconds()) }
             }
+
             uri.path!!.contains("/watch") && uri.query != null -> {
                 val videoId = uri.getQueryParameter("v")
 
@@ -72,6 +76,7 @@ class RouterActivity : BaseActivity() {
                 uri.getQueryParameter("t")
                     ?.let { intent.putExtra(IntentData.timeStamp, it.toTimeInSeconds()) }
             }
+
             else -> {
                 val videoId = uri.path!!.replace("/", "")
 

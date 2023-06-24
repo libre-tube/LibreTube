@@ -23,5 +23,5 @@ data class ContentItem(
     val description: String? = null,
     val subscribers: Long = -1,
     val videos: Long = -1,
-    val verified: Boolean? = null,
+    val verified: Boolean? = null
 )

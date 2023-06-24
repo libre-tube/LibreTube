@@ -43,6 +43,7 @@ abstract class BasePreferenceFragment : PreferenceFragmentCompat() {
                     .setNegativeButton(R.string.cancel, null)
                     .show()
             }
+
             is MultiSelectListPreference -> {
                 val selectedItems = preference.entryValues.map {
                     preference.values.contains(it)
@@ -61,6 +62,7 @@ abstract class BasePreferenceFragment : PreferenceFragmentCompat() {
                     .setNegativeButton(R.string.cancel, null)
                     .show()
             }
+
             is EditTextPreference -> {
                 val binding = DialogTextPreferenceBinding.inflate(layoutInflater)
                 binding.input.setText(preference.text)

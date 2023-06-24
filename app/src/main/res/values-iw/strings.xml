@@ -397,13 +397,13 @@
         <item quantity="one">לפני חודש</item>
         <item quantity="two">לפני חודשיים</item>
         <item quantity="many">לפני %d חודשים</item>
-        <item quantity="other"/>
+        <item quantity="other" />
     </plurals>
     <plurals name="years_ago">
         <item quantity="one">לפני שנה</item>
         <item quantity="two">לפני שנתיים</item>
         <item quantity="many">לפני %d שנים</item>
-        <item quantity="other"/>
+        <item quantity="other" />
     </plurals>
     <string name="lbry_hls">LBRY HLS‎</string>
     <string name="lbry_hls_summary">להשתמש ב־LBRY HLS להזרמה אם זמין.</string>
@@ -424,7 +424,7 @@
         <item quantity="one">שידור חדש</item>
         <item quantity="two">%d שידורים חדשים</item>
         <item quantity="many">%d שידורים חדשים</item>
-        <item quantity="other"/>
+        <item quantity="other" />
     </plurals>
     <string name="show_stream_thumbnails">הצגת תמונות ממוזערות של תזרימים</string>
     <string name="show_stream_thumbnails_summary">הצגת תמונות ממוזערות של תזרימים חדשים. הפעלת האפשרות תוביל לצריכה של נתונים נוספים.</string>

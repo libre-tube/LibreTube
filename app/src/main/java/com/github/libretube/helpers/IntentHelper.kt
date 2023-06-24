@@ -21,7 +21,7 @@ object IntentHelper {
             context.packageManager
                 .queryIntentActivities(
                     intent,
-                    PackageManager.ResolveInfoFlags.of(PackageManager.MATCH_ALL.toLong()),
+                    PackageManager.ResolveInfoFlags.of(PackageManager.MATCH_ALL.toLong())
                 )
         } else {
             context.packageManager

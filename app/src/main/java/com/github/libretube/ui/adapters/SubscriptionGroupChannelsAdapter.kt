@@ -14,11 +14,11 @@ import com.github.libretube.ui.viewholders.SubscriptionGroupChannelRowViewHolder
 class SubscriptionGroupChannelsAdapter(
     private val channels: List<Subscription>,
     private val group: SubscriptionGroup,
-    private val onGroupChanged: (SubscriptionGroup) -> Unit,
+    private val onGroupChanged: (SubscriptionGroup) -> Unit
 ) : RecyclerView.Adapter<SubscriptionGroupChannelRowViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int,
+        viewType: Int
     ): SubscriptionGroupChannelRowViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = SubscriptionGroupChannelRowBinding.inflate(layoutInflater, parent, false)

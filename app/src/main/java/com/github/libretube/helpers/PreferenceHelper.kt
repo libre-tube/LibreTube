@@ -134,12 +134,12 @@ object PreferenceHelper {
             ignorableChannels.remove(channelId)
         } else {
             ignorableChannels.add(
-                channelId,
+                channelId
             )
         }
         editor.putString(
             PreferenceKeys.IGNORED_NOTIFICATION_CHANNELS,
-            ignorableChannels.joinToString(","),
+            ignorableChannels.joinToString(",")
         ).apply()
     }
 

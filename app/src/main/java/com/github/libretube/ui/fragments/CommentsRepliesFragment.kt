@@ -37,7 +37,7 @@ class CommentsRepliesFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCommentsBinding.inflate(inflater, container, false)
         return binding.root
@@ -54,7 +54,7 @@ class CommentsRepliesFragment : Fragment() {
             videoId,
             mutableListOf(comment),
             true,
-            viewModel.handleLink,
+            viewModel.handleLink
         ) {
             viewModel.commentsSheetDismiss?.invoke()
         }
@@ -85,7 +85,7 @@ class CommentsRepliesFragment : Fragment() {
     private fun loadInitialReplies(
         videoId: String,
         nextPage: String,
-        repliesAdapter: CommentsAdapter,
+        repliesAdapter: CommentsAdapter
     ) {
         binding.progress.visibility = View.VISIBLE
         fetchReplies(videoId, nextPage) {
@@ -97,7 +97,7 @@ class CommentsRepliesFragment : Fragment() {
     private fun fetchReplies(
         videoId: String,
         nextPage: String,
-        onFinished: (CommentsPage) -> Unit,
+        onFinished: (CommentsPage) -> Unit
     ) {
         lifecycleScope.launch(Dispatchers.IO) {
             if (isLoading) return@launch

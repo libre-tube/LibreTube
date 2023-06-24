@@ -13,12 +13,12 @@ import com.github.libretube.api.obj.Streams
 fun MediaItem.Builder.setMetadata(streams: Streams) = apply {
     val appIcon = BitmapFactory.decodeResource(
         Resources.getSystem(),
-        R.drawable.ic_launcher_monochrome,
+        R.drawable.ic_launcher_monochrome
     )
     val extras = bundleOf(
         MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON to appIcon,
         MediaMetadataCompat.METADATA_KEY_TITLE to streams.title,
-        MediaMetadataCompat.METADATA_KEY_ARTIST to streams.uploader,
+        MediaMetadataCompat.METADATA_KEY_ARTIST to streams.uploader
     )
     setMediaMetadata(
         MediaMetadata.Builder()

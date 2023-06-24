@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
@@ -36,11 +35,19 @@ class ColorPickerDialog(
 
         // Add listener to text input
         binding.colorHexInput.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int,
-                                           after: Int) = Unit
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) = Unit
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int,
-                                       count: Int) = Unit
+            override fun onTextChanged(
+                s: CharSequence?,
+                start: Int,
+                before: Int,
+                count: Int
+            ) = Unit
 
             var isValid = true
             var oldHex = ""
@@ -98,8 +105,12 @@ class ColorPickerDialog(
     }
 
     // Get the color from the SeekBar progress values
-    private fun getColor() = Color.argb(binding.alphaSeekBar.progress, binding.redSeekBar.progress,
-        binding.greenSeekBar.progress, binding.blueSeekBar.progress)
+    private fun getColor() = Color.argb(
+        binding.alphaSeekBar.progress,
+        binding.redSeekBar.progress,
+        binding.greenSeekBar.progress,
+        binding.blueSeekBar.progress
+    )
 
     private fun setColor(color: Int, textUpdate: Boolean = false) {
         // Set the SeekBar progress values based on the color

@@ -6,5 +6,5 @@ data class PlayerNotificationData(
     val title: String? = null,
     val uploaderName: String? = null,
     val thumbnailUrl: String? = null,
-    val thumbnailPath: Path? = null,
+    val thumbnailPath: Path? = null
 )

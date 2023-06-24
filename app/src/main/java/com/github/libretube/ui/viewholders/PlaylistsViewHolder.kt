@@ -4,5 +4,5 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.PlaylistsRowBinding
 
 class PlaylistsViewHolder(
-    val binding: PlaylistsRowBinding,
+    val binding: PlaylistsRowBinding
 ) : RecyclerView.ViewHolder(binding.root)

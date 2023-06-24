@@ -12,7 +12,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class StatsDialog(
     private val player: ExoPlayer,
-    private val videoId: String,
+    private val videoId: String
 ) : DialogFragment() {
 
     @SuppressLint("SetTextI18n")
@@ -20,17 +20,21 @@ class StatsDialog(
         val binding = DialogStatsBinding.inflate(layoutInflater)
         binding.videoId.setText(videoId)
         binding.videoInfo.setText(
-            "${player.videoFormat?.codecs.orEmpty()} ${TextUtils.formatBitrate(
-                player.videoFormat?.bitrate,
-            )}",
+            "${player.videoFormat?.codecs.orEmpty()} ${
+                TextUtils.formatBitrate(
+                    player.videoFormat?.bitrate
+                )
+            }"
         )
         binding.audioInfo.setText(
-            "${player.audioFormat?.codecs.orEmpty()} ${TextUtils.formatBitrate(
-                player.audioFormat?.bitrate,
-            )}",
+            "${player.audioFormat?.codecs.orEmpty()} ${
+                TextUtils.formatBitrate(
+                    player.audioFormat?.bitrate
+                )
+            }"
         )
         binding.videoQuality.setText(
-            "${player.videoFormat?.width}x${player.videoFormat?.height} ${player.videoFormat?.frameRate?.toInt()}fps",
+            "${player.videoFormat?.width}x${player.videoFormat?.height} ${player.videoFormat?.frameRate?.toInt()}fps"
         )
 
         return MaterialAlertDialogBuilder(requireContext())

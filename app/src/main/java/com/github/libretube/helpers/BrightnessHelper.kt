@@ -53,7 +53,7 @@ class BrightnessHelper(activity: Activity) {
         value: Float,
         maxValue: Float,
         minValue: Float = 0.0f,
-        shouldSave: Boolean = false,
+        shouldSave: Boolean = false
     ) {
         brightness = value.normalize(minValue, maxValue, minBrightness, maxBrightness)
         if (shouldSave) savedBrightness = brightness
@@ -66,7 +66,7 @@ class BrightnessHelper(activity: Activity) {
     fun getBrightnessWithScale(
         maxValue: Float,
         minValue: Float = 0.0f,
-        saved: Boolean = false,
+        saved: Boolean = false
     ): Float {
         return if (saved) {
             savedBrightness.normalize(minBrightness, maxBrightness, minValue, maxValue)

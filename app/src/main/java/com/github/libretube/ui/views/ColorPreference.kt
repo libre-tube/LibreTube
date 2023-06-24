@@ -5,7 +5,6 @@ import android.content.res.TypedArray
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
@@ -39,7 +38,6 @@ class ColorPreference(context: Context, attrs: AttributeSet) : Preference(contex
         updateColorView()
     }
 
-
     override fun onGetDefaultValue(ta: TypedArray, index: Int): Any {
         return Color.parseColor(ta.getString(index))
     }
@@ -63,12 +61,14 @@ class ColorPreference(context: Context, attrs: AttributeSet) : Preference(contex
     private fun showColorPickerDialog() {
         (if (currentColor is Int) currentColor else Color.BLACK)?.let {
             val dialog = ColorPickerDialog(context, it) { color -> setColor(color) }
-            dialog.show((context as AppCompatActivity).supportFragmentManager, this::class.java.name)
+            dialog.show(
+                (context as AppCompatActivity).supportFragmentManager,
+                this::class.java.name
+            )
         }
     }
 
     override fun getTitle(): CharSequence? {
         return "${super.getTitle()}:"
     }
-
 }

@@ -23,7 +23,7 @@ class CommentsSheet : ExpandedBottomSheet() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View {
         binding = CommentsSheetBinding.inflate(layoutInflater)
         return binding.root

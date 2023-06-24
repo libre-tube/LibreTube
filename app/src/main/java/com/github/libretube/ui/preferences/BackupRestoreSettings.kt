@@ -15,35 +15,39 @@ import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.BackupDialog
 import com.github.libretube.ui.dialogs.RequireRestartDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import kotlinx.coroutines.withContext
 
 class BackupRestoreSettings : BasePreferenceFragment() {
     private val backupDateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss")
     private var backupFile = BackupFile()
     private var importFormat: ImportFormat = ImportFormat.NEWPIPE
-    private val importSubscriptionFormatList get() = listOf(
-        ImportFormat.NEWPIPE,
-        ImportFormat.FREETUBE,
-        ImportFormat.YOUTUBECSV
-    )
-    private val exportSubscriptionFormatList get() = listOf(
-        ImportFormat.NEWPIPE,
-        ImportFormat.FREETUBE
-    )
-    private val importPlaylistFormatList get() = listOf(
-        ImportFormat.PIPED,
-        ImportFormat.FREETUBE,
-        ImportFormat.YOUTUBECSV
-    )
-    private val exportPlaylistFormatList get() = listOf(
-        ImportFormat.PIPED,
-        ImportFormat.FREETUBE
-    )
+    private val importSubscriptionFormatList
+        get() = listOf(
+            ImportFormat.NEWPIPE,
+            ImportFormat.FREETUBE,
+            ImportFormat.YOUTUBECSV
+        )
+    private val exportSubscriptionFormatList
+        get() = listOf(
+            ImportFormat.NEWPIPE,
+            ImportFormat.FREETUBE
+        )
+    private val importPlaylistFormatList
+        get() = listOf(
+            ImportFormat.PIPED,
+            ImportFormat.FREETUBE,
+            ImportFormat.YOUTUBECSV
+        )
+    private val exportPlaylistFormatList
+        get() = listOf(
+            ImportFormat.PIPED,
+            ImportFormat.FREETUBE
+        )
 
     override val titleResourceId: Int = R.string.backup_restore
 
@@ -73,7 +77,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
      * result listeners for importing and exporting subscriptions
      */
     private val getSubscriptionsFile = registerForActivityResult(
-        ActivityResultContracts.GetContent(),
+        ActivityResultContracts.GetContent()
     ) {
         it?.let {
             lifecycleScope.launch(Dispatchers.IO) {
@@ -145,7 +149,9 @@ class BackupRestoreSettings : BasePreferenceFragment() {
             val list = exportSubscriptionFormatList.map { getString(it.value) }
             createImportFormatDialog(R.string.export_subscriptions_to, list) {
                 importFormat = exportSubscriptionFormatList[it]
-                createSubscriptionsFile.launch("${getString(importFormat.value).lowercase()}-subscriptions.json")
+                createSubscriptionsFile.launch(
+                    "${getString(importFormat.value).lowercase()}-subscriptions.json"
+                )
             }
             true
         }
@@ -165,7 +171,9 @@ class BackupRestoreSettings : BasePreferenceFragment() {
             val list = exportPlaylistFormatList.map { getString(it.value) }
             createImportFormatDialog(R.string.export_playlists_to, list) {
                 importFormat = exportPlaylistFormatList[it]
-                createPlaylistsFile.launch("${getString(importFormat.value).lowercase()}-playlists.json")
+                createPlaylistsFile.launch(
+                    "${getString(importFormat.value).lowercase()}-playlists.json"
+                )
             }
             true
         }

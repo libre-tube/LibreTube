@@ -20,11 +20,10 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.decodeFromString
 import retrofit2.HttpException
 
 class LoginDialog(
-    private val onLogin: () -> Unit,
+    private val onLogin: () -> Unit
 ) : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogLoginBinding.inflate(layoutInflater)
@@ -92,7 +91,7 @@ class LoginDialog(
             if (response.token == null) return@launch
 
             context?.toastFromMainDispatcher(
-                if (createNewAccount) R.string.registered else R.string.loggedIn,
+                if (createNewAccount) R.string.registered else R.string.loggedIn
             )
 
             PreferenceHelper.setToken(response.token)

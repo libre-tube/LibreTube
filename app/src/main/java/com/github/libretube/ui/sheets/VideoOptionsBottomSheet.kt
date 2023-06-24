@@ -1,8 +1,6 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.navigation.fragment.NavHostFragment
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
@@ -33,7 +31,7 @@ import kotlinx.coroutines.withContext
  */
 class VideoOptionsBottomSheet(
     private val videoId: String,
-    videoName: String,
+    videoName: String
 ) : BaseBottomSheet() {
     private val shareData = ShareData(currentVideo = videoName)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +40,7 @@ class VideoOptionsBottomSheet(
             getString(R.string.playOnBackground),
             getString(R.string.addToPlaylist),
             getString(R.string.download),
-            getString(R.string.share),
+            getString(R.string.share)
         )
 
         // Check whether the player is running and add queue options
@@ -61,7 +59,9 @@ class VideoOptionsBottomSheet(
             }
             optionsList += if (watchHistoryEntry != null || watchPositionEntry != null) {
                 getString(R.string.mark_as_unwatched)
-            } else getString(R.string.mark_as_watched)
+            } else {
+                getString(R.string.mark_as_watched)
+            }
         }
 
         setSimpleItems(optionsList) { which ->
@@ -75,18 +75,21 @@ class VideoOptionsBottomSheet(
                 getString(R.string.addToPlaylist) -> {
                     AddToPlaylistDialog(videoId).show(
                         parentFragmentManager,
-                        AddToPlaylistDialog::class.java.name,
+                        AddToPlaylistDialog::class.java.name
                     )
                 }
+
                 getString(R.string.download) -> {
                     val downloadDialog = DownloadDialog(videoId)
                     downloadDialog.show(parentFragmentManager, DownloadDialog::class.java.name)
                 }
+
                 getString(R.string.share) -> {
                     val shareDialog = ShareDialog(videoId, ShareObjectType.VIDEO, shareData)
                     // using parentFragmentManager is important here
                     shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
+
                 getString(R.string.play_next) -> {
                     try {
                         val streamItem = withContext(Dispatchers.IO) {
@@ -97,6 +100,7 @@ class VideoOptionsBottomSheet(
                         e.printStackTrace()
                     }
                 }
+
                 getString(R.string.add_to_queue) -> {
                     try {
                         val streamItem = withContext(Dispatchers.IO) {
@@ -107,6 +111,7 @@ class VideoOptionsBottomSheet(
                         e.printStackTrace()
                     }
                 }
+
                 getString(R.string.mark_as_watched) -> {
                     val watchPosition = WatchPosition(videoId, Long.MAX_VALUE)
                     withContext(Dispatchers.IO) {
@@ -123,12 +128,14 @@ class VideoOptionsBottomSheet(
                             (context as MainActivity).supportFragmentManager
                                 .findFragmentById(R.id.fragment) as NavHostFragment?
                         // get the current fragment
-                        val fragment = navHostFragment?.childFragmentManager?.fragments?.firstOrNull()
+                        val fragment =
+                            navHostFragment?.childFragmentManager?.fragments?.firstOrNull()
                         (fragment as? SubscriptionsFragment)?.subscriptionsAdapter?.removeItemById(
-                            videoId,
+                            videoId
                         )
                     }
                 }
+
                 getString(R.string.mark_as_unwatched) -> {
                     withContext(Dispatchers.IO) {
                         DatabaseHolder.Database.watchPositionDao().deleteByVideoId(videoId)

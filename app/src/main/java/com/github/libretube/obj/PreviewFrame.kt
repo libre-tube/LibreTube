@@ -5,5 +5,5 @@ data class PreviewFrame(
     val positionX: Int,
     val positionY: Int,
     val frameWidth: Int,
-    val frameHeight: Int,
+    val frameHeight: Int
 )

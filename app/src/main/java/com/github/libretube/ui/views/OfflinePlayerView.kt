@@ -7,8 +7,8 @@ import com.github.libretube.ui.extensions.toggleSystemBars
 
 class OfflinePlayerView(
     context: Context,
-    attributeSet: AttributeSet? = null,
-): CustomExoPlayerView(context, attributeSet) {
+    attributeSet: AttributeSet? = null
+) : CustomExoPlayerView(context, attributeSet) {
     override fun hideController() {
         super.hideController()
         // hide the status bars when continuing to watch video

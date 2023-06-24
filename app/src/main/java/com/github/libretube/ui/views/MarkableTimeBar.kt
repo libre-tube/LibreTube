@@ -23,7 +23,7 @@ import com.google.android.material.R
 @UnstableApi
 class MarkableTimeBar(
     context: Context,
-    attributeSet: AttributeSet? = null,
+    attributeSet: AttributeSet? = null
 ) : DefaultTimeBar(context, attributeSet) {
 
     private var segments: List<Segment> = listOf()
@@ -45,7 +45,7 @@ class MarkableTimeBar(
         val horizontalOffset = (parent as View).marginLeft
         length = canvas.width - horizontalOffset * 2
         val marginY = canvas.height / 2 - progressBarHeight / 2
-        val themeColor = ThemeHelper.getThemeColor(context, R.attr.colorOnSecondary,)
+        val themeColor = ThemeHelper.getThemeColor(context, R.attr.colorOnSecondary)
 
         segments.forEach {
             canvas.drawRect(
@@ -53,7 +53,7 @@ class MarkableTimeBar(
                     it.segment.first().toLength() + horizontalOffset,
                     marginY,
                     it.segment.last().toLength() + horizontalOffset,
-                    canvas.height - marginY,
+                    canvas.height - marginY
                 ),
                 Paint().apply {
                     color = if (PreferenceHelper.getBoolean("sb_enable_custom_colors", false)) {
@@ -61,7 +61,7 @@ class MarkableTimeBar(
                     } else {
                         themeColor
                     }
-                },
+                }
             )
         }
         canvas.restore()

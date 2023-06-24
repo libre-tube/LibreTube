@@ -25,7 +25,7 @@ class CommentsMainFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCommentsBinding.inflate(inflater, container, false)
         return binding.root
@@ -62,7 +62,7 @@ class CommentsMainFragment : Fragment() {
             this,
             viewModel.videoId!!,
             viewModel.commentsPage.value?.comments.orEmpty().toMutableList(),
-            handleLink = viewModel.handleLink,
+            handleLink = viewModel.handleLink
         ) {
             viewModel.commentsSheetDismiss?.invoke()
         }
@@ -90,7 +90,7 @@ class CommentsMainFragment : Fragment() {
             }
             commentsAdapter.updateItems(
                 // only add the new comments to the recycler view
-                it.comments.subList(commentsAdapter.itemCount, it.comments.size),
+                it.comments.subList(commentsAdapter.itemCount, it.comments.size)
             )
         }
     }

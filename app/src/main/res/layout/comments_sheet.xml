@@ -28,47 +28,47 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:paddingHorizontal="10dp"
-                android:paddingBottom="7dp"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:layout_height="wrap_content">
+                android:paddingHorizontal="10dp"
+                android:paddingBottom="7dp">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/btnBack"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:visibility="gone"
-                    android:src="?homeAsUpIndicator"
+                    android:background="?selectableItemBackgroundBorderless"
                     android:padding="7dp"
-                    android:background="?selectableItemBackgroundBorderless" />
+                    android:src="?homeAsUpIndicator"
+                    android:visibility="gone" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/commentsTitle"
                     style="@style/TextAppearance.Material3.ActionBar.Title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
                     android:textAlignment="viewStart"
                     tools:text="Title" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:visibility="gone"
                     android:id="@+id/btnScrollToTop"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:src="@drawable/ic_arrow_downward"
-                    android:rotationX="180"
+                    android:background="?selectableItemBackgroundBorderless"
                     android:padding="7dp"
-                    android:background="?selectableItemBackgroundBorderless" />
+                    android:rotationX="180"
+                    android:src="@drawable/ic_arrow_downward"
+                    android:visibility="gone" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/btnClose"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:src="@drawable/ic_close"
+                    android:background="?selectableItemBackgroundBorderless"
                     android:padding="7dp"
-                    android:background="?selectableItemBackgroundBorderless" />
+                    android:src="@drawable/ic_close" />
 
             </LinearLayout>
 

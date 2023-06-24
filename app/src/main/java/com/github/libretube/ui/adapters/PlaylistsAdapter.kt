@@ -15,7 +15,7 @@ import com.github.libretube.ui.viewholders.PlaylistsViewHolder
 
 class PlaylistsAdapter(
     private val playlists: MutableList<Playlists>,
-    private val playlistType: PlaylistType,
+    private val playlistType: PlaylistType
 ) : RecyclerView.Adapter<PlaylistsViewHolder>() {
 
     override fun getItemCount(): Int {
@@ -72,7 +72,7 @@ class PlaylistsAdapter(
                 )
                 playlistOptionsDialog.show(
                     (root.context as BaseActivity).supportFragmentManager,
-                    PlaylistOptionsBottomSheet::class.java.name,
+                    PlaylistOptionsBottomSheet::class.java.name
                 )
                 true
             }

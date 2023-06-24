@@ -67,7 +67,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
 
     private fun getTimePickerPref(key: String): LocalTime {
         return LocalTime.parse(
-            PreferenceHelper.getString(key, TimePickerPreference.DEFAULT_VALUE),
+            PreferenceHelper.getString(key, TimePickerPreference.DEFAULT_VALUE)
         )
     }
 
@@ -165,7 +165,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
 
     private suspend fun createStreamNotification(
         group: String,
-        stream: StreamItem,
+        stream: StreamItem
     ): Triple<Int, Long?, Notification> { // Notification ID, uploaded date and notification object
         val videoId = stream.url!!.toID()
         val intent = Intent(applicationContext, MainActivity::class.java)
@@ -192,7 +192,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
                 .setStyle(
                     NotificationCompat.BigPictureStyle()
                         .bigPicture(thumbnail)
-                        .bigLargeIcon(null as Bitmap?), // Hides the icon when expanding
+                        .bigLargeIcon(null as Bitmap?) // Hides the icon when expanding
                 )
         }
 

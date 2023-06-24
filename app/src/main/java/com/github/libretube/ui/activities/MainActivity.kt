@@ -177,10 +177,12 @@ class MainActivity : BaseActivity() {
                 startFragmentId -> {
                     moveTaskToBack(true)
                 }
+
                 R.id.searchResultFragment -> {
                     navController.popBackStack(R.id.searchFragment, true) ||
                         navController.popBackStack()
                 }
+
                 else -> {
                     navController.popBackStack()
                 }
@@ -243,7 +245,7 @@ class MainActivity : BaseActivity() {
     private fun setupSubscriptionsBadge() {
         if (!PreferenceHelper.getBoolean(
                 PreferenceKeys.NEW_VIDEOS_BADGE,
-                false,
+                false
             )
         ) {
             return
@@ -262,11 +264,11 @@ class MainActivity : BaseActivity() {
                 number = lastSeenVideoIndex
                 backgroundColor = ThemeHelper.getThemeColor(
                     this@MainActivity,
-                    androidx.appcompat.R.attr.colorPrimary,
+                    androidx.appcompat.R.attr.colorPrimary
                 )
                 badgeTextColor = ThemeHelper.getThemeColor(
                     this@MainActivity,
-                    com.google.android.material.R.attr.colorOnPrimary,
+                    com.google.android.material.R.attr.colorOnPrimary
                 )
             }
         }
@@ -331,7 +333,7 @@ class MainActivity : BaseActivity() {
                 val destIds = listOf(
                     R.id.searchResultFragment,
                     R.id.channelFragment,
-                    R.id.playlistFragment,
+                    R.id.playlistFragment
                 )
                 if (navController.currentDestination?.id in destIds && newText.isNullOrEmpty()) {
                     return false
@@ -354,7 +356,7 @@ class MainActivity : BaseActivity() {
                     navController.navigate(R.id.searchFragment)
                 }
                 item.setShowAsAction(
-                    MenuItem.SHOW_AS_ACTION_ALWAYS or MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW,
+                    MenuItem.SHOW_AS_ACTION_ALWAYS or MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW
                 )
                 return true
             }
@@ -390,16 +392,19 @@ class MainActivity : BaseActivity() {
                 startActivity(settingsIntent)
                 true
             }
+
             R.id.action_about -> {
                 val aboutIntent = Intent(this, AboutActivity::class.java)
                 startActivity(aboutIntent)
                 true
             }
+
             R.id.action_help -> {
                 val helpIntent = Intent(this, HelpActivity::class.java)
                 startActivity(helpIntent)
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }

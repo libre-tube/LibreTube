@@ -23,13 +23,13 @@ import kotlin.io.path.fileSize
 class DownloadsAdapter(
     private val context: Context,
     private val downloads: MutableList<DownloadWithItems>,
-    private val toggleDownload: (DownloadWithItems) -> Boolean,
+    private val toggleDownload: (DownloadWithItems) -> Boolean
 ) : RecyclerView.Adapter<DownloadsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DownloadsViewHolder {
         val binding = DownloadedMediaRowBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
-            false,
+            false
         )
         return DownloadsViewHolder(binding)
     }
@@ -79,7 +79,7 @@ class DownloadsAdapter(
                         R.drawable.ic_pause
                     } else {
                         R.drawable.ic_download
-                    },
+                    }
                 )
             }
 
@@ -95,7 +95,7 @@ class DownloadsAdapter(
                     notifyItemRemoved(position)
                     notifyItemRangeChanged(position, itemCount)
                 }.show(
-                    (root.context as AppCompatActivity).supportFragmentManager,
+                    (root.context as AppCompatActivity).supportFragmentManager
                 )
                 true
             }

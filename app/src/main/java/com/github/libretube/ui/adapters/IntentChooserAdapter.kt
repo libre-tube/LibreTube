@@ -15,7 +15,7 @@ import com.github.libretube.ui.viewholders.IntentChooserViewHolder
  */
 class IntentChooserAdapter(
     private val packages: List<ResolveInfo>,
-    private val queryUrl: String,
+    private val queryUrl: String
 ) : RecyclerView.Adapter<IntentChooserViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IntentChooserViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

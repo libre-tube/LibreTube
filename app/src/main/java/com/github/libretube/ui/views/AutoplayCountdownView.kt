@@ -13,7 +13,7 @@ import com.github.libretube.databinding.AutoplayCountdownBinding
 
 class AutoplayCountdownView(
     context: Context,
-    attributeSet: AttributeSet?,
+    attributeSet: AttributeSet?
 ) : FrameLayout(context, attributeSet) {
     private val layoutInflater = LayoutInflater.from(context)
     val binding = AutoplayCountdownBinding.inflate(layoutInflater, this, true)
@@ -55,7 +55,7 @@ class AutoplayCountdownView(
 
         binding.currentState.text = context.getString(
             R.string.playing_next,
-            currentTimerState.toString(),
+            currentTimerState.toString()
         )
         currentTimerState -= 1
         handler.postDelayed(1000, TIMER_RUNNABLE_TOKEN, this::updateCountdown)

@@ -80,7 +80,7 @@ class PlaylistFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View {
         _binding = FragmentPlaylistBinding.inflate(inflater, container, false)
         return binding.root
@@ -101,7 +101,7 @@ class PlaylistFragment : Fragment() {
 
         playerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
             binding.playlistRecView.updatePadding(
-                bottom = if (it) (64).dpToPx().toInt() else 0,
+                bottom = if (it) (64).dpToPx().toInt() else 0
             )
         }
 
@@ -115,7 +115,7 @@ class PlaylistFragment : Fragment() {
 
     private fun updateBookmarkRes() {
         binding.bookmark.setIconResource(
-            if (isBookmarked) R.drawable.ic_bookmark else R.drawable.ic_bookmark_outlined,
+            if (isBookmarked) R.drawable.ic_bookmark else R.drawable.ic_bookmark_outlined
         )
     }
 
@@ -154,7 +154,8 @@ class PlaylistFragment : Fragment() {
 
                 binding.playlistDescription.let { textView ->
                     textView.setOnClickListener {
-                        textView.maxLines = if (textView.maxLines == Int.MAX_VALUE) 3 else Int.MAX_VALUE
+                        textView.maxLines =
+                            if (textView.maxLines == Int.MAX_VALUE) 3 else Int.MAX_VALUE
                     }
                 }
 
@@ -178,7 +179,7 @@ class PlaylistFragment : Fragment() {
                         }
                     ).show(
                         childFragmentManager,
-                        PlaylistOptionsBottomSheet::class.java.name,
+                        PlaylistOptionsBottomSheet::class.java.name
                     )
                 }
 
@@ -187,7 +188,7 @@ class PlaylistFragment : Fragment() {
                     NavigationHelper.navigateVideo(
                         requireContext(),
                         response.relatedStreams.first().url?.toID(),
-                        playlistId,
+                        playlistId
                     )
                 }
 
@@ -218,7 +219,7 @@ class PlaylistFragment : Fragment() {
                             requireContext(),
                             queue.first().url?.toID(),
                             playlistId = playlistId,
-                            keepQueue = true,
+                            keepQueue = true
                         )
                     }
                     binding.sortContainer.isGone = false
@@ -272,7 +273,7 @@ class PlaylistFragment : Fragment() {
             playlistFeed,
             videos.toMutableList(),
             playlistId!!,
-            playlistType,
+            playlistType
         )
         binding.playlistRecView.adapter = playlistAdapter
 
@@ -283,7 +284,7 @@ class PlaylistFragment : Fragment() {
                 if (positionStart == 0) {
                     ImageHelper.loadImage(
                         playlistFeed.firstOrNull()?.thumbnail ?: "",
-                        binding.thumbnail,
+                        binding.thumbnail
                     )
                 }
 
@@ -310,21 +311,24 @@ class PlaylistFragment : Fragment() {
         if (playlistType != PlaylistType.PUBLIC) {
             val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
                 0,
-                ItemTouchHelper.LEFT,
+                ItemTouchHelper.LEFT
             ) {
                 override fun onMove(
                     recyclerView: RecyclerView,
                     viewHolder: RecyclerView.ViewHolder,
-                    target: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
                 ): Boolean {
                     return false
                 }
 
                 override fun onSwiped(
                     viewHolder: RecyclerView.ViewHolder,
-                    direction: Int,
+                    direction: Int
                 ) {
-                    playlistAdapter!!.removeFromPlaylist(requireContext(), viewHolder.absoluteAdapterPosition)
+                    playlistAdapter!!.removeFromPlaylist(
+                        requireContext(),
+                        viewHolder.absoluteAdapterPosition
+                    )
                 }
             }
 

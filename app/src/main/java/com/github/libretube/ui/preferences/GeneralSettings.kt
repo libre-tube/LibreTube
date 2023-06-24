@@ -38,7 +38,7 @@ class GeneralSettings : BasePreferenceFragment() {
         val breakReminderTime = findPreference<EditTextPreference>(PreferenceKeys.SLEEP_TIMER_DELAY)
         breakReminderTime?.isEnabled = PreferenceHelper.getBoolean(
             PreferenceKeys.SLEEP_TIMER,
-            false,
+            false
         )
 
         breakReminder?.setOnPreferenceChangeListener { _, newValue ->

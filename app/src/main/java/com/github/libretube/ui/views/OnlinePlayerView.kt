@@ -7,6 +7,7 @@ import android.view.View
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.media3.exoplayer.trackselection.TrackSelector
+import androidx.media3.ui.PlayerView.ControllerVisibilityListener
 import com.github.libretube.R
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.WindowHelper
@@ -17,7 +18,7 @@ import com.github.libretube.ui.models.PlayerViewModel
 
 class OnlinePlayerView(
     context: Context,
-    attributeSet: AttributeSet? = null,
+    attributeSet: AttributeSet? = null
 ) : CustomExoPlayerView(context, attributeSet) {
     private var playerOptions: OnlinePlayerOptions? = null
     private var playerViewModel: PlayerViewModel? = null
@@ -28,44 +29,43 @@ class OnlinePlayerView(
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
     override fun getOptionsMenuItems(): List<BottomSheetItem> {
         return super.getOptionsMenuItems() +
-                listOf(
-                    BottomSheetItem(
-                        context.getString(R.string.quality),
-                        R.drawable.ic_hd,
-                        { "${player?.videoSize?.height}p" },
-                    ) {
-                        playerOptions?.onQualityClicked()
-                    },
-                    BottomSheetItem(
-                        context.getString(R.string.audio_track),
-                        R.drawable.ic_audio,
-                        {
-                            trackSelector?.parameters?.preferredAudioLanguages?.firstOrNull()
-                        },
-                    ) {
-                        playerOptions?.onAudioStreamClicked()
-                    },
-                    BottomSheetItem(
-                        context.getString(R.string.captions),
-                        R.drawable.ic_caption,
-                        {
-                            if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
-                                trackSelector!!.parameters.preferredTextLanguages[0]
-                            } else {
-                                context.getString(R.string.none)
-                            }
-                        },
-                    ) {
-                        playerOptions?.onCaptionsClicked()
-                    },
-                    BottomSheetItem(
-                        context.getString(R.string.stats_for_nerds),
-                        R.drawable.ic_info,
-                    ) {
-                        playerOptions?.onStatsClicked()
-                    },
-                )
-
+            listOf(
+                BottomSheetItem(
+                    context.getString(R.string.quality),
+                    R.drawable.ic_hd,
+                    { "${player?.videoSize?.height}p" }
+                ) {
+                    playerOptions?.onQualityClicked()
+                },
+                BottomSheetItem(
+                    context.getString(R.string.audio_track),
+                    R.drawable.ic_audio,
+                    {
+                        trackSelector?.parameters?.preferredAudioLanguages?.firstOrNull()
+                    }
+                ) {
+                    playerOptions?.onAudioStreamClicked()
+                },
+                BottomSheetItem(
+                    context.getString(R.string.captions),
+                    R.drawable.ic_caption,
+                    {
+                        if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
+                            trackSelector!!.parameters.preferredTextLanguages[0]
+                        } else {
+                            context.getString(R.string.none)
+                        }
+                    }
+                ) {
+                    playerOptions?.onCaptionsClicked()
+                },
+                BottomSheetItem(
+                    context.getString(R.string.stats_for_nerds),
+                    R.drawable.ic_info
+                ) {
+                    playerOptions?.onStatsClicked()
+                }
+            )
     }
 
     fun initPlayerOptions(
@@ -91,10 +91,10 @@ class OnlinePlayerView(
                     // Show status bar only not navigation bar if the player controls are visible and hide it otherwise
                     activity.toggleSystemBars(
                         types = WindowInsetsCompat.Type.statusBars(),
-                        showBars = visibility == View.VISIBLE,
+                        showBars = visibility == View.VISIBLE
                     )
                 }
-            },
+            }
         )
 
         binding.autoPlay.isChecked = autoplayEnabled

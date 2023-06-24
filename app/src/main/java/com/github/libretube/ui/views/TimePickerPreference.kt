@@ -12,7 +12,7 @@ import java.time.LocalTime
 
 class TimePickerPreference(
     context: Context,
-    attributeSet: AttributeSet,
+    attributeSet: AttributeSet
 ) : Preference(context, attributeSet) {
     override fun getSummary(): CharSequence {
         return PreferenceHelper.getString(key, DEFAULT_VALUE)

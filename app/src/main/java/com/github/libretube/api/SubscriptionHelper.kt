@@ -53,7 +53,7 @@ object SubscriptionHelper {
         context: Context,
         channelId: String,
         channelName: String?,
-        onUnsubscribe: () -> Unit,
+        onUnsubscribe: () -> Unit
     ) {
         if (!PreferenceHelper.getBoolean(PreferenceKeys.CONFIRM_UNSUBSCRIBE, false)) {
             runBlocking {
@@ -112,10 +112,11 @@ object SubscriptionHelper {
             val subscriptions = Database.localSubscriptionDao().getAll().map { it.channelId }
             when {
                 subscriptions.size > GET_SUBSCRIPTIONS_LIMIT -> RetrofitInstance.authApi.unauthenticatedSubscriptions(
-                    subscriptions,
+                    subscriptions
                 )
+
                 else -> RetrofitInstance.authApi.unauthenticatedSubscriptions(
-                    subscriptions.joinToString(","),
+                    subscriptions.joinToString(",")
                 )
             }
         }
@@ -129,10 +130,11 @@ object SubscriptionHelper {
             val subscriptions = Database.localSubscriptionDao().getAll().map { it.channelId }
             when {
                 subscriptions.size > GET_SUBSCRIPTIONS_LIMIT -> RetrofitInstance.authApi.getUnauthenticatedFeed(
-                    subscriptions,
+                    subscriptions
                 )
+
                 else -> RetrofitInstance.authApi.getUnauthenticatedFeed(
-                    subscriptions.joinToString(","),
+                    subscriptions.joinToString(",")
                 )
             }
         }

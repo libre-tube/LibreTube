@@ -37,7 +37,7 @@ class CommentsAdapter(
     private val comments: MutableList<Comment>,
     private val isRepliesAdapter: Boolean = false,
     private val handleLink: ((url: String) -> Unit)?,
-    private val dismiss: () -> Unit,
+    private val dismiss: () -> Unit
 ) : RecyclerView.Adapter<CommentsViewHolder>() {
 
     fun clear() {
@@ -98,7 +98,10 @@ class CommentsAdapter(
                 // highlight the comment that is being replied to
                 if (comment == comments.firstOrNull()) {
                     root.setBackgroundColor(
-                        ThemeHelper.getThemeColor(root.context, com.google.android.material.R.attr.colorSurface),
+                        ThemeHelper.getThemeColor(
+                            root.context,
+                            com.google.android.material.R.attr.colorSurface
+                        )
                     )
 
                     root.updatePadding(top = 20)
@@ -106,7 +109,7 @@ class CommentsAdapter(
                 } else {
                     root.background = AppCompatResources.getDrawable(
                         root.context,
-                        R.drawable.rounded_ripple,
+                        R.drawable.rounded_ripple
                     )
                 }
             }
@@ -122,7 +125,7 @@ class CommentsAdapter(
             root.setOnLongClickListener {
                 ClipboardHelper.save(
                     root.context,
-                    comment.commentText.orEmpty().parseAsHtml().toString(),
+                    comment.commentText.orEmpty().parseAsHtml().toString()
                 )
                 Toast.makeText(root.context, R.string.copied, Toast.LENGTH_SHORT).show()
                 true

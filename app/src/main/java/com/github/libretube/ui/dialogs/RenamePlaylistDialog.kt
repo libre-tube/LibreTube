@@ -21,7 +21,7 @@ import kotlinx.coroutines.withContext
 class RenamePlaylistDialog(
     private val playlistId: String,
     private val currentPlaylistName: String,
-    private val onSuccess: (String) -> Unit,
+    private val onSuccess: (String) -> Unit
 ) : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogTextPreferenceBinding.inflate(layoutInflater)

@@ -21,7 +21,7 @@ import kotlinx.coroutines.withContext
 class PlaylistDescriptionDialog(
     private val playlistId: String,
     private val currentPlaylistDescription: String,
-    private val onSuccess: (String) -> Unit,
+    private val onSuccess: (String) -> Unit
 ) : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogTextPreferenceBinding.inflate(layoutInflater)
@@ -40,7 +40,8 @@ class PlaylistDescriptionDialog(
                     val newDescription = binding.input.text?.toString()
                     if (newDescription.isNullOrEmpty()) {
                         Toast.makeText(
-                            context, R.string.emptyPlaylistDescription,
+                            context,
+                            R.string.emptyPlaylistDescription,
                             Toast.LENGTH_SHORT
                         ).show()
                         return@setOnClickListener
@@ -55,7 +56,10 @@ class PlaylistDescriptionDialog(
                         requireDialog().hide()
                         val success = try {
                             withContext(Dispatchers.IO) {
-                                PlaylistsHelper.changePlaylistDescription(playlistId, newDescription)
+                                PlaylistsHelper.changePlaylistDescription(
+                                    playlistId,
+                                    newDescription
+                                )
                             }
                         } catch (e: Exception) {
                             Log.e(TAG(), e.toString())

@@ -25,13 +25,13 @@ class PlaylistOptionsBottomSheet(
     private val playlistType: PlaylistType,
     private val onRename: (newName: String) -> Unit = {},
     private val onChangeDescription: (newDescription: String) -> Unit = {},
-    private val onDelete: () -> Unit = {},
+    private val onDelete: () -> Unit = {}
 ) : BaseBottomSheet() {
     private val shareData = ShareData(currentPlaylist = playlistName)
     override fun onCreate(savedInstanceState: Bundle?) {
         // options for the dialog
         val optionsList = mutableListOf(
-            getString(R.string.playOnBackground),
+            getString(R.string.playOnBackground)
         )
 
         val isBookmarked = runBlocking(Dispatchers.IO) {
@@ -44,7 +44,7 @@ class PlaylistOptionsBottomSheet(
 
             // only add the bookmark option to the playlist if public
             optionsList.add(
-                getString(if (isBookmarked) R.string.remove_bookmark else R.string.add_to_bookmarks),
+                getString(if (isBookmarked) R.string.remove_bookmark else R.string.add_to_bookmarks)
             )
         } else {
             optionsList.add(getString(R.string.renamePlaylist))
@@ -63,7 +63,7 @@ class PlaylistOptionsBottomSheet(
                         BackgroundHelper.playOnBackground(
                             requireContext(),
                             it.url!!.toID(),
-                            playlistId = playlistId,
+                            playlistId = playlistId
                         )
                     }
                 }
@@ -76,7 +76,7 @@ class PlaylistOptionsBottomSheet(
                         }.getOrNull()
                     }
                     context.toastFromMainDispatcher(
-                        if (playlistId != null) R.string.playlistCloned else R.string.server_error,
+                        if (playlistId != null) R.string.playlistCloned else R.string.server_error
                     )
                 }
                 // share the playlist
@@ -85,20 +85,24 @@ class PlaylistOptionsBottomSheet(
                     // using parentFragmentManager, childFragmentManager doesn't work here
                     shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
+
                 getString(R.string.deletePlaylist) -> {
                     DeletePlaylistDialog(playlistId, playlistType) {
                         // try to refresh the playlists in the library on deletion success
                         onDelete()
                     }.show(parentFragmentManager, null)
                 }
+
                 getString(R.string.renamePlaylist) -> {
                     RenamePlaylistDialog(playlistId, playlistName, onRename)
                         .show(parentFragmentManager, null)
                 }
+
                 getString(R.string.change_playlist_description) -> {
                     PlaylistDescriptionDialog(playlistId, "", onChangeDescription)
                         .show(parentFragmentManager, null)
                 }
+
                 else -> {
                     withContext(Dispatchers.IO) {
                         if (isBookmarked) {

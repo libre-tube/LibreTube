@@ -54,9 +54,9 @@
         <activity
             android:name=".ui.activities.AddToQueueActivity"
             android:enabled="true"
-            android:launchMode="singleTop"
             android:exported="true"
-            android:label="@string/add_to_queue">
+            android:label="@string/add_to_queue"
+            android:launchMode="singleTop">
 
             <intent-filter android:label="@string/add_to_queue">
                 <action android:name="android.intent.action.SEND" />
@@ -96,13 +96,13 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsPictureInPicture="true"
             android:targetActivity=".ui.activities.MainActivity"
-            android:windowSoftInputMode="adjustPan" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-            <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+            </intent-filter>
         </activity-alias>
 
         <activity-alias

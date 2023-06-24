@@ -34,7 +34,7 @@ object ProxyHelper {
     fun unwrapIfEnabled(url: String): String {
         if (!PreferenceHelper.getBoolean(
                 PreferenceKeys.DISABLE_VIDEO_IMAGE_PROXY,
-                false,
+                false
             )
         ) {
             return url

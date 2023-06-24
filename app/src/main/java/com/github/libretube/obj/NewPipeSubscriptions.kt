@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 data class NewPipeSubscriptions(
     @SerialName("app_version") val appVersion: String = "",
     @SerialName("app_version_int") val appVersionInt: Int = 0,
-    val subscriptions: List<NewPipeSubscription> = emptyList(),
+    val subscriptions: List<NewPipeSubscription> = emptyList()
 )

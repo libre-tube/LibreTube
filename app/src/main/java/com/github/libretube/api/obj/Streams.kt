@@ -3,9 +3,9 @@ package com.github.libretube.api.obj
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
 import com.github.libretube.helpers.ProxyHelper
+import java.nio.file.Paths
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
-import java.nio.file.Paths
 
 @Serializable
 data class Streams(
@@ -33,7 +33,7 @@ data class Streams(
     val proxyUrl: String? = null,
     val chapters: List<ChapterSegment> = emptyList(),
     val uploaderSubscriberCount: Long = 0,
-    val previewFrames: List<PreviewFrames> = emptyList(),
+    val previewFrames: List<PreviewFrames> = emptyList()
 ) {
     fun toDownloadItems(
         videoId: String,
@@ -42,7 +42,7 @@ data class Streams(
         videoQuality: String?,
         audioFormat: String?,
         audioQuality: String?,
-        subtitleCode: String?,
+        subtitleCode: String?
     ): List<DownloadItem> {
         val items = mutableListOf<DownloadItem>()
 
@@ -69,8 +69,8 @@ data class Streams(
                     path = Paths.get(""),
                     url = subtitles.find {
                         it.code == subtitleCode
-                    }?.url?.let { ProxyHelper.unwrapIfEnabled(it) },
-                ),
+                    }?.url?.let { ProxyHelper.unwrapIfEnabled(it) }
+                )
             )
         }
 
@@ -90,7 +90,7 @@ data class Streams(
             duration = duration,
             views = views,
             uploaderVerified = uploaderVerified,
-            shortDescription = description,
+            shortDescription = description
         )
     }
 }

@@ -74,7 +74,7 @@ class AboutActivity : BaseActivity() {
         Snackbar.make(
             binding.root,
             R.string.copied_to_clipboard,
-            Snackbar.LENGTH_LONG,
+            Snackbar.LENGTH_LONG
         )
             .setAction(R.string.open_copied) {
                 IntentHelper.openLinkFromHref(this, supportFragmentManager, href)

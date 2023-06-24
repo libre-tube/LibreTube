@@ -10,13 +10,13 @@ import com.github.libretube.ui.viewholders.BottomSheetViewHolder
 
 class BottomSheetAdapter(
     private val items: List<BottomSheetItem>,
-    private val listener: (index: Int) -> Unit,
+    private val listener: (index: Int) -> Unit
 ) : RecyclerView.Adapter<BottomSheetViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BottomSheetViewHolder {
         val binding = BottomSheetItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
-            false,
+            false
         )
         return BottomSheetViewHolder(binding)
     }
