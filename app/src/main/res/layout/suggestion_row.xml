@@ -32,7 +32,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
+        app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
     <ImageView
         android:id="@+id/arrow"
@@ -43,5 +43,5 @@
         android:src="@drawable/ic_arrow_up_left"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
+        app:shapeAppearanceOverlay="@style/RoundedImageView" />
 </LinearLayout>

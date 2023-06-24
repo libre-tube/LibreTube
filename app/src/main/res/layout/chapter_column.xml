@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    android:layout_marginHorizontal="1dp"
     android:background="?attr/selectableItemBackground"
     android:backgroundTint="@android:color/transparent"
-    android:layout_marginHorizontal="1dp"
     app:strokeWidth="0dp">
 
     <LinearLayout
@@ -24,7 +24,7 @@
                 android:id="@+id/chapter_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+                app:shapeAppearanceOverlay="@style/RoundedImageView"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
             <androidx.cardview.widget.CardView
@@ -33,16 +33,17 @@
                 android:layout_gravity="bottom|end"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
-                app:cardBackgroundColor="@color/duration_background_color"
-                app:cardCornerRadius="8dp"
+                app:cardBackgroundColor="?colorPrimary"
+                app:cardCornerRadius="4dp"
                 app:cardElevation="0dp">
 
                 <TextView
                     android:id="@+id/timeStamp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="2dp"
-                    android:textColor="@color/duration_text_color"
+                    android:paddingHorizontal="3dp"
+                    android:paddingVertical="1dp"
+                    android:textColor="?colorOnPrimary"
                     android:textSize="10sp"
                     tools:ignore="SmallSp"
                     tools:text="05:36" />

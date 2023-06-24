@@ -38,8 +38,8 @@
             android:layout_gravity="bottom"
             android:background="?colorPrimaryContainer"
             android:gravity="center"
-            android:paddingVertical="2dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingVertical="2dp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -55,8 +55,8 @@
                 android:layout_gravity="center"
                 android:paddingStart="5dp"
                 android:textColor="?colorControlNormal"
-                tools:text="20"
-                tools:ignore="RtlSymmetry" />
+                tools:ignore="RtlSymmetry"
+                tools:text="20" />
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -96,5 +96,5 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
+        app:shapeAppearanceOverlay="@style/RoundedImageView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
