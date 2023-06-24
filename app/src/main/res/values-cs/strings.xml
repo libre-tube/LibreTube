@@ -450,7 +450,13 @@
     <string name="emptyPlaylistDescription">Popis playlistu nemůže být prázdný</string>
     <string name="change_playlist_description">Změnit popis playlistu</string>
     <string name="show_search_suggestions">Zobrazit návrhy vyhledávání</string>
-    <string name="off">Vypnuto</string>
-    <string name="manual">Ručně</string>
-    <string name="automatic">Automaticky</string>
+    <string name="off">Zakázat</string>
+    <string name="manual">Ruční přeskočení</string>
+    <string name="automatic">Automatické přeskočení</string>
+    <string name="sb_color_enable">Přepne vlastní barvu segmentů pro segmenty SponsorBlock</string>
+    <string name="sb_custom_colors">Vlastní barvy segmentů</string>
+    <string name="color">Barva</string>
+    <string name="visible">Zobrazit v liště</string>
+    <string name="invalid_color">Zadána neplatná hodnota barvy!</string>
+    <string name="enter_hex_value">Zadejte Hex hodnotu barvy</string>
 </resources>

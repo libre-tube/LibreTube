@@ -453,7 +453,13 @@
     <string name="playlist_description">תיאור רשימת נגינה</string>
     <string name="emptyPlaylistDescription">תיאור רשימת הנגינה לא יכול להיות ריק</string>
     <string name="show_search_suggestions">הצגת הצעות חיפוש</string>
-    <string name="automatic">אוטומטי</string>
-    <string name="off">כבוי</string>
-    <string name="manual">ידני</string>
+    <string name="automatic">דילוג אוטומטי</string>
+    <string name="off">השבתה</string>
+    <string name="manual">דילוג ידני</string>
+    <string name="visible">הצגה בפס האיתור</string>
+    <string name="enter_hex_value">נא למלא ערך הקסדצימלי של הצבע</string>
+    <string name="invalid_color">ערך הצבע שנבחר שגוי!</string>
+    <string name="color">צבע</string>
+    <string name="sb_custom_colors">צבעי מקטעים מותאמים</string>
+    <string name="sb_color_enable">מחליף מקטעי צבע מותאמים במקטעי מימון</string>
 </resources>

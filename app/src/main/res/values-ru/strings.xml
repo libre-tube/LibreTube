@@ -454,6 +454,12 @@
     <string name="emptyPlaylistDescription">Описание плейлиста не может быть пустым</string>
     <string name="show_search_suggestions">Показать поисковые подсказки</string>
     <string name="off">Выкл</string>
-    <string name="manual">Вручную</string>
-    <string name="automatic">Автоматически</string>
+    <string name="manual">Ручной пропуск</string>
+    <string name="automatic">Автоматический пропуск</string>
+    <string name="sb_color_enable">Вкл/выкл цветовую маркировку для спонсорских блокировок</string>
+    <string name="visible">Показать в строке поиска</string>
+    <string name="color">Цвет</string>
+    <string name="invalid_color">Введено неверное значение цвета!</string>
+    <string name="enter_hex_value">Введите шестнадцатеричное значение цвета</string>
+    <string name="sb_custom_colors">Цвета сегментов</string>
 </resources>

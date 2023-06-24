@@ -459,7 +459,13 @@
     <string name="playlist_description">وصف قائمة التشغيل</string>
     <string name="change_playlist_description">تغيير وصف قائمة التشغيل</string>
     <string name="show_search_suggestions">عرض اقتراحات البحث</string>
-    <string name="off">ايقاف</string>
-    <string name="manual">يدوي</string>
-    <string name="automatic">تلقائي</string>
+    <string name="off">معطل</string>
+    <string name="manual">تخطي يدوي</string>
+    <string name="automatic">تخطي تلقائي</string>
+    <string name="sb_color_enable">تبديل شرائح الألوان المخصصة لشرائح كتلة الراعي</string>
+    <string name="sb_custom_colors">ألوان شرائح مخصصة</string>
+    <string name="invalid_color">تم إدخال قيمة لون غير صالحة!</string>
+    <string name="enter_hex_value">أدخل قيمة لون سداسي عشري</string>
+    <string name="visible">عرض في شريط التمرير</string>
+    <string name="color">اللون</string>
 </resources>
