@@ -447,7 +447,13 @@
     <string name="emptyPlaylistDescription">Oynatma siyahısı təsviri boş ola bilməz</string>
     <string name="change_playlist_description">Oynatma siyahısı təsvirin dəyiş</string>
     <string name="show_search_suggestions">Axtarış təkliflərin göstər</string>
-    <string name="manual">Əl ilə</string>
-    <string name="automatic">Avtomatik</string>
-    <string name="off">Bağla</string>
+    <string name="manual">Əl ilə ötür</string>
+    <string name="automatic">Avtomatik ötür</string>
+    <string name="off">Qeyri-aktiv et</string>
+    <string name="sb_color_enable">SponsorBlock bölümləri üçün xüsusi rəng bölümlərin dəyişdirir</string>
+    <string name="invalid_color">Yanlış rəng dəyəri daxil edildi!</string>
+    <string name="sb_custom_colors">Xüsusi bölüm rəngləri</string>
+    <string name="color">Rəng</string>
+    <string name="enter_hex_value">Rəng Hex Dəyəri Daxil Et</string>
+    <string name="visible">Axtarış çubuğunda göstər</string>
 </resources>
