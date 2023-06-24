@@ -53,7 +53,6 @@ import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.ChapterSegment
-import com.github.libretube.api.obj.ChapterSegmentType
 import com.github.libretube.api.obj.Message
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Segment
@@ -81,6 +80,7 @@ import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.helpers.PlayerHelper.SPONSOR_HIGHLIGHT_CATEGORY
 import com.github.libretube.helpers.PlayerHelper.checkForSegments
 import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
 import com.github.libretube.helpers.PreferenceHelper
@@ -761,11 +761,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
                 // Since the highlight is also a chapter, we need to fetch the other segments
                 // first
-                if (PlayerHelper.sponsorBlockEnabled) {
-                    fetchSponsorBlockSegments()
-                } else {
-                    initializeChapters()
-                }
+                fetchSponsorBlockSegments()
+
+                initializeChapters()
 
                 // add the video to the watch history
                 if (PlayerHelper.watchHistoryEnabled) {
@@ -780,7 +778,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      */
     private fun fetchSponsorBlockSegments() {
         lifecycleScope.launch(Dispatchers.IO) {
-            try {
+            runCatching {
                 if (sponsorBlockConfig.isEmpty()) return@launch
                 segments =
                     RetrofitInstance.api.getSegments(
@@ -794,8 +792,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     playerBinding.sbToggle.visibility = View.VISIBLE
                     updateDisplayedDuration()
                 }
-            } finally {
-                initializeChapters()
+                segments.firstOrNull { it.category == SPONSOR_HIGHLIGHT_CATEGORY }?.let {
+                    initializeHighlight(it)
+                }
             }
         }
     }
@@ -1197,20 +1196,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 false,
             )
 
-        val highlightSegment = segments.find { it.category == "poi_highlight" }
-
-        // Insert highlight chapter to the correct position
-        if (highlightSegment != null) {
-            val highlightChapter = ChapterSegment(
-                title = getString(R.string.chapters_videoHighlight),
-                image = "",
-                start = highlightSegment.segment[0].toLong(),
-                type = ChapterSegmentType.VideoHighlight,
-            )
-            chapters.add(highlightChapter)
-            chapters.sortBy { it.start }
-        }
-
         binding.chaptersRecView.adapter = ChaptersAdapter(chapters, exoPlayer)
 
         // enable the chapters dialog in the player
@@ -1218,8 +1203,26 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             PlayerHelper.showChaptersDialog(requireContext(), chapters, exoPlayer)
         }
 
-        handler.post {
-            setCurrentChapterName()
+        setCurrentChapterName()
+    }
+
+    private suspend fun initializeHighlight(highlight: Segment) {
+        val frame =
+            PlayerHelper.getPreviewFrame(streams.previewFrames, exoPlayer.currentPosition) ?: return
+        val drawable = withContext(Dispatchers.IO) {
+            ImageHelper.getImage(requireContext(), frame.previewUrl)
+        }.drawable ?: return
+        val highlightChapter = ChapterSegment(
+            title = getString(R.string.chapters_videoHighlight),
+            image = "",
+            start = highlight.segment[0].toLong(),
+            drawable = drawable
+        )
+        chapters.add(highlightChapter)
+        chapters.sortBy { it.start }
+
+        withContext(Dispatchers.Main) {
+            initializeChapters()
         }
     }
 

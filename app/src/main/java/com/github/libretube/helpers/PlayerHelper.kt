@@ -25,11 +25,13 @@ import androidx.media3.exoplayer.LoadControl
 import androidx.media3.ui.CaptionStyleCompat
 import com.github.libretube.R
 import com.github.libretube.api.obj.ChapterSegment
+import com.github.libretube.api.obj.PreviewFrames
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
+import com.github.libretube.obj.PreviewFrame
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
@@ -37,7 +39,7 @@ import kotlin.math.roundToInt
 object PlayerHelper {
     private const val ACTION_MEDIA_CONTROL = "media_control"
     const val CONTROL_TYPE = "control_type"
-    private val SPONSOR_CATEGORIES: Array<String> =
+    private val SPONSOR_CATEGORIES =
         arrayOf(
             "intro",
             "selfpromo",
@@ -46,10 +48,9 @@ object PlayerHelper {
             "outro",
             "filler",
             "music_offtopic",
-            "preview",
-            "poi_highlight",
+            "preview"
         )
-    private var hasJumpedToHighlight = false
+    const val SPONSOR_HIGHLIGHT_CATEGORY = "poi_highlight"
 
     /**
      * Create a base64 encoded DASH stream manifest
@@ -81,21 +82,6 @@ object PlayerHelper {
         }
     }
 
-    /**
-     * get the categories for sponsorBlock
-     */
-    fun getSponsorBlockCategories(): MutableMap<String, SbSkipOptions> {
-        val categories: MutableMap<String, SbSkipOptions> = mutableMapOf()
-
-        for (category in SPONSOR_CATEGORIES){
-            val state = PreferenceHelper.getString(category + "_category", "off").uppercase()
-            if (SbSkipOptions.valueOf(state) != SbSkipOptions.OFF){
-                categories[category] = SbSkipOptions.valueOf(state)
-            }
-        }
-        return categories
-    }
-
     fun getOrientation(videoWidth: Int, videoHeight: Int): Int {
         val fullscreenOrientationPref = PreferenceHelper.getString(
             PreferenceKeys.FULLSCREEN_ORIENTATION,
@@ -112,6 +98,7 @@ object PlayerHelper {
                     ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
                 }
             }
+
             "auto" -> ActivityInfo.SCREEN_ORIENTATION_SENSOR
             "landscape" -> ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
             "portrait" -> ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
@@ -179,6 +166,12 @@ object PlayerHelper {
             true,
         )
 
+    private val sponsorBlockHighlights: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.SB_HIGHLIGHTS,
+            true
+        )
+
     val defaultSubtitleCode: String?
         get() {
             val code = PreferenceHelper.getString(
@@ -234,7 +227,9 @@ object PlayerHelper {
 
     private val backgroundSpeed: Float
         get() = when (PreferenceHelper.getBoolean(PreferenceKeys.CUSTOM_PLAYBACK_SPEED, false)) {
-            true -> PreferenceHelper.getString(PreferenceKeys.BACKGROUND_PLAYBACK_SPEED, "1").toFloat()
+            true -> PreferenceHelper.getString(PreferenceKeys.BACKGROUND_PLAYBACK_SPEED, "1")
+                .toFloat()
+
             else -> playbackSpeed
         }
 
@@ -427,6 +422,45 @@ object PlayerHelper {
     }
 
     /**
+     * Get the preview frame according to the current position
+     */
+    fun getPreviewFrame(previewFrames: List<PreviewFrames>, position: Long): PreviewFrame? {
+        var startPosition: Long = 0
+        // get the frames with the best quality
+        val frames = previewFrames.maxByOrNull { it.frameHeight }
+        frames?.urls?.forEach { url ->
+            // iterate over all available positions and find the one matching the current position
+            for (y in 0 until frames.framesPerPageY) {
+                for (x in 0 until frames.framesPerPageX) {
+                    val endPosition = startPosition + frames.durationPerFrame
+                    if (position in startPosition until endPosition) {
+                        return PreviewFrame(url, x, y, frames.framesPerPageX, frames.framesPerPageY)
+                    }
+                    startPosition = endPosition
+                }
+            }
+        }
+        return null
+    }
+
+    /**
+     * get the categories for sponsorBlock
+     */
+    fun getSponsorBlockCategories(): MutableMap<String, SbSkipOptions> {
+        val categories: MutableMap<String, SbSkipOptions> = mutableMapOf()
+
+        for (category in SPONSOR_CATEGORIES) {
+            val state = PreferenceHelper.getString(category + "_category", "off").uppercase()
+            if (SbSkipOptions.valueOf(state) != SbSkipOptions.OFF) {
+                categories[category] = SbSkipOptions.valueOf(state)
+            }
+        }
+        // Add the highlights category to display in the chapters
+        if (sponsorBlockHighlights) categories[SPONSOR_HIGHLIGHT_CATEGORY] = SbSkipOptions.OFF
+        return categories
+    }
+
+    /**
      * Check for SponsorBlock segments matching the current player position
      * @param context A main dispatcher context
      * @param segments List of the SponsorBlock segments
@@ -438,25 +472,7 @@ object PlayerHelper {
         segments: List<Segment>,
         sponsorBlockConfig: MutableMap<String, SbSkipOptions>,
     ): Long? {
-        // Check if is at begin and highlight is available - We only want to skip to the highlight
-        // if the user is at the beginning of the video (meaning that they have not watched it yet)
-        if (!hasJumpedToHighlight && sponsorBlockConfig["poi_highlight"] == SbSkipOptions.AUTOMATIC) {
-            hasJumpedToHighlight = true
-            val highlightSegment = segments.find { it.category == "poi_highlight"}
-
-            if (highlightSegment != null) {
-                if (sponsorBlockNotifications) {
-                    runCatching {
-                        Toast.makeText(context, R.string.jumped_to_highlight, Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                }
-
-                seekTo((highlightSegment.segment[1] * 1000f).toLong())
-            }
-        }
-
-        for (segment in segments) {
+        for (segment in segments.filter { it.category != SPONSOR_HIGHLIGHT_CATEGORY }) {
             val segmentStart = (segment.segment[0] * 1000f).toLong()
             val segmentEnd = (segment.segment[1] * 1000f).toLong()
 

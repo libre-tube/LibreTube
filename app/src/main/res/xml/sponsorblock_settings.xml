@@ -24,6 +24,11 @@
         app:key="sb_show_markers"
         app:title="@string/sb_markers" />
 
+    <SwitchPreferenceCompat
+        app:key="sb_highlights"
+        app:summary="@string/category_highlight_description"
+        app:title="@string/category_highlight"
+        app:defaultValue="true"/>
 
     <PreferenceCategory app:title="@string/category_segments">
 
@@ -75,18 +80,6 @@
             app:summary="@string/category_preview_description"
             app:title="@string/category_preview"
             app:defaultValue="off"/>
-
-        <com.github.libretube.ui.views.SbSpinnerPreference
-            app:key="preview_category"
-            app:summary="@string/category_preview_description"
-            app:title="@string/category_preview"
-            app:defaultValue="off"/>
-
-        <com.github.libretube.ui.views.SbSpinnerPreference
-            app:key="poi_highlight_category"
-            app:summary="@string/category_highlight_description"
-            app:title="@string/category_highlight"
-            app:defaultValue="manual"/>
 
     </PreferenceCategory>
 
