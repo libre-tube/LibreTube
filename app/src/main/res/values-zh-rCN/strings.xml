@@ -353,7 +353,7 @@
     <string name="nothing_selected">什么也没选中！</string>
     <string name="color_violet">Versatile Violet</string>
     <string name="failed_fetching_instances">无法获取可用实例。</string>
-    <string name="hide_watched_from_feed_summary">不要在订阅选项卡中显示观看比例超过 25% 的视频。</string>
+    <string name="hide_watched_from_feed_summary">不要在订阅选项卡中显示观看比例超过 90% 的视频。</string>
     <string name="hide_watched_from_feed">隐藏订阅源中看过的视频</string>
     <string name="playlistUrl">播放列表 URL</string>
     <string name="pause_on_quit">退出时暂停</string>

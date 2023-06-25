@@ -350,7 +350,7 @@
     <string name="color_violet">화려한 보라색</string>
     <string name="failed_fetching_instances">사용가능한 인스턴스를 불러올 수 없습니다.</string>
     <string name="hide_watched_from_feed">시청한 영상 피드에서 숨기기</string>
-    <string name="hide_watched_from_feed_summary">구독 탭에 25% 이상 시청한 비디오를 보여주지 않습니다.</string>
+    <string name="hide_watched_from_feed_summary">구독 탭에 90% 이상 시청한 비디오를 보여주지 않습니다.</string>
     <string name="sb_markers">마커</string>
     <string name="pinch_control">핀치 컨트롤</string>
     <string name="misc">기타</string>

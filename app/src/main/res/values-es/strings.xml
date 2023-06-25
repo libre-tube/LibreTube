@@ -354,7 +354,7 @@
     <string name="color_violet">Violeta Versátil</string>
     <string name="failed_fetching_instances">No se pudieron obtener las instancias disponibles.</string>
     <string name="hide_watched_from_feed">Ocultar vídeos vistos</string>
-    <string name="hide_watched_from_feed_summary">No mostrar los vídeos vistos más de un 25% en la pestaña de suscripciones.</string>
+    <string name="hide_watched_from_feed_summary">No mostrar los vídeos vistos más de un 90% en la pestaña de suscripciones.</string>
     <string name="playlistUrl">URL de la lista de reproducción</string>
     <string name="pause_on_quit">Pausar al salir</string>
     <string name="shuffle">Aleatorio</string>

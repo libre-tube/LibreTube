@@ -353,7 +353,7 @@
     <string name="color_violet">Lårkort lilla</string>
     <string name="hide_watched_from_feed">Skjul sette videoer i informasjonsstrøm</string>
     <string name="failed_fetching_instances">Klarte ikke å hente tilgjengelige instanser.</string>
-    <string name="hide_watched_from_feed_summary">Ikke vis videoer du har sett mer enn 25% av i informasjonsstrømsfanen.</string>
+    <string name="hide_watched_from_feed_summary">Ikke vis videoer du har sett mer enn 90% av i informasjonsstrømsfanen.</string>
     <string name="nothing_selected">Ingenting valgt.</string>
     <string name="playlistUrl">Spilleliste-nettadresse</string>
     <string name="pause_on_quit">Pause ved avslutning</string>

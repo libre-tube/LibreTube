@@ -353,7 +353,7 @@
     <string name="nothing_selected">Nada selecionado!</string>
     <string name="color_violet">Violeta</string>
     <string name="failed_fetching_instances">Não foi possível obter as instâncias disponíveis.</string>
-    <string name="hide_watched_from_feed_summary">Não mostrar vídeos a serem vistos mais de 25% no separador das subscrições.</string>
+    <string name="hide_watched_from_feed_summary">Não mostrar vídeos a serem vistos mais de 90% no separador das subscrições.</string>
     <string name="hide_watched_from_feed">Ocultar da fonte os vídeos assistidos</string>
     <string name="playlistUrl">URL da lista de reprodução</string>
     <string name="pause_on_quit">Pausa ao sair</string>

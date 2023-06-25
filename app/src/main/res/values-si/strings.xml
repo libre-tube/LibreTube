@@ -257,7 +257,7 @@
     <string name="playlistUrl">වාදන ලැයිස්තු URL</string>
     <string name="audio_player">ශ්‍රව්‍ය වාදකය</string>
     <string name="audio_only_mode_summary">LibreTube සංගීත වාදකයක් බවට පත් කරන්න.</string>
-    <string name="hide_watched_from_feed_summary">දායකත්ව පිම්මෙහි 25%කට වඩා නරඹන වීඩියෝ නොපෙන්වන්න.</string>
+    <string name="hide_watched_from_feed_summary">දායකත්ව පිම්මෙහි 90%කට වඩා නරඹන වීඩියෝ නොපෙන්වන්න.</string>
     <string name="pause_on_quit">ඉවත් වීමේදී නවත්වන්න</string>
     <string name="shuffle">කලවම් කරන්න</string>
     <string name="add_to_bookmarks">පොත් සලකුණු වලට එකතු කරන්න</string>

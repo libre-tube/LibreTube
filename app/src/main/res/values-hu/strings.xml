@@ -354,7 +354,7 @@
     <string name="play_latest_videos">Legújabb videók lejátszása</string>
     <string name="failed_fetching_instances">Nem sikerült lekérni az elérhető példányokat.</string>
     <string name="hide_watched_from_feed">Megnézett videó elrejtése a videófolyamból</string>
-    <string name="hide_watched_from_feed_summary">Ne mutassa a már 25%-ig megnézett videókat a feliratkozások lapon.</string>
+    <string name="hide_watched_from_feed_summary">Ne mutassa a már 90%-ig megnézett videókat a feliratkozások lapon.</string>
     <string name="playlistUrl">Lejátszási lista URL</string>
     <string name="pause_on_quit">Szüneteltet bezárásnál</string>
     <string name="shuffle">Keverés</string>
