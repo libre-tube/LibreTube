@@ -462,4 +462,8 @@
     <string name="sb_custom_colors">Користувацькі кольори сегментів</string>
     <string name="enter_hex_value">Введіть Hex значення кольору</string>
     <string name="visible">Показати на панелі прокручування</string>
+    <string name="category_highlight_description">Це може бути рекламований заголовок, мініатюра або найцікавіша частина відео. Ви можете перейти до нього, натиснувши на нього в секції розділів.</string>
+    <string name="jumped_to_highlight">Перехід до виділеного у відео</string>
+    <string name="category_highlight">Показати виділене у відео</string>
+    <string name="chapters_videoHighlight">Виділене у відео</string>
 </resources>
