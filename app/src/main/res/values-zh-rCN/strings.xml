@@ -453,4 +453,8 @@
     <string name="invalid_color">输入的颜色值无效！</string>
     <string name="enter_hex_value">输入 16 进制颜色值</string>
     <string name="visible">显示在拖动条中</string>
+    <string name="jumped_to_highlight">跳到精彩集锦</string>
+    <string name="category_highlight_description">可能是视频广告、缩略图或最有趣的部分。你可以在章节部分轻按它来跳到这部分。</string>
+    <string name="chapters_videoHighlight">精彩集锦</string>
+    <string name="category_highlight">显示精彩集锦</string>
 </resources>
