@@ -354,7 +354,7 @@
     <string name="color_violet">Bütöv Bənövşə</string>
     <string name="failed_fetching_instances">Mövcud nümunələri əldə etmək mümkün olmadı.</string>
     <string name="hide_watched_from_feed">Baxılan videoları axından gizlət</string>
-    <string name="hide_watched_from_feed_summary">Abunəliklər panelində 90% daha çox baxılan videoları göstərmə.</string>
+    <string name="hide_watched_from_feed_summary">Abunəliklər panelində 25% daha çox baxılan videoları göstərmə.</string>
     <string name="playlistUrl">Oynatma Siyahısı URL\'si</string>
     <string name="pause_on_quit">Çıxanda dayandır</string>
     <string name="shuffle">Qarışdır</string>

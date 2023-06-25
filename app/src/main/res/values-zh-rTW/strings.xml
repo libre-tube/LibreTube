@@ -262,7 +262,7 @@
     <string name="repeat_mode_none">無</string>
     <string name="new_videos_badge_summary">如果有新影片，顯示數量徽章。</string>
     <string name="hide_watched_from_feed">從訂閱列表隱藏觀看過的影片</string>
-    <string name="hide_watched_from_feed_summary">不要在訂閱列表頁籤顯示觀看進度90%以上的影片。</string>
+    <string name="hide_watched_from_feed_summary">不要在訂閱列表頁籤顯示觀看進度25%以上的影片。</string>
     <string name="download_channel_name">下載服務</string>
     <string name="confirm_unsubscribing_summary">在取消訂閱前顯示確認對話框。</string>
     <string name="livestreams">直播</string>

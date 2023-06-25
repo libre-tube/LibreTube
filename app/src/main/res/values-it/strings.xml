@@ -354,7 +354,7 @@
     <string name="color_violet">Violetto versatile</string>
     <string name="failed_fetching_instances">Impossibile recuperare le istanze disponibili.</string>
     <string name="hide_watched_from_feed">Nascondi i video guardati dal feed</string>
-    <string name="hide_watched_from_feed_summary">Non mostrare i video guardati oltre il 90% nella scheda delle iscrizioni.</string>
+    <string name="hide_watched_from_feed_summary">Non mostrare i video guardati oltre il 25% nella scheda delle iscrizioni.</string>
     <string name="playlistUrl">URL della playlist</string>
     <string name="pause_on_quit">Pausa all\'uscita</string>
     <string name="shuffle">Mischia</string>

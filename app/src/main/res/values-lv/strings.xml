@@ -299,7 +299,7 @@
     <string name="all_caught_up_summary">Jūs esat redzējuši visus jaunos video</string>
     <string name="all_caught_up">Jūs esat visu redzējuši</string>
     <string name="hide_watched_from_feed">Paslēpt noskatītos video no plūsmas</string>
-    <string name="hide_watched_from_feed_summary">Nerādīt video abonomentu cilnē, kurus esat noskatījuši vismaz līdz 90% atzīmei.</string>
+    <string name="hide_watched_from_feed_summary">Nerādīt video abonomentu cilnē, kurus esat noskatījuši vismaz līdz 25% atzīmei.</string>
     <string name="added_to_playlist">Pievienots atskaņošanas sarakstam</string>
     <string name="nothing_selected">Nekas nav izvēlēts!</string>
     <string name="autoplay_countdown_summary">Parādīt 5 sekunžu atskaiti pirms automātiski atskaņo nākamo video.</string>

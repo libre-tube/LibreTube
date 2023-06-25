@@ -193,7 +193,7 @@
     <string name="time">Aika</string>
     <string name="start_time">Aloitusaika</string>
     <string name="hide_watched_from_feed">Piilota katsotut videot syötteestä</string>
-    <string name="hide_watched_from_feed_summary">Älä näytä tilaukset-välilehdellä videoita, joita katsotaan yli 90%.</string>
+    <string name="hide_watched_from_feed_summary">Älä näytä tilaukset-välilehdellä videoita, joita katsotaan yli 25%.</string>
     <string name="push_channel_description">Näyttää ilmoituksen, kun uusia striimejä on saatavilla.</string>
     <string name="unlimited">Rajoittamaton</string>
     <string name="picture_in_picture">Kuva kuvassa</string>
