@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.media3.common.PlaybackParameters
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.recyclerview.widget.GridLayoutManager
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.PlaybackBottomSheetBinding
 import com.github.libretube.extensions.round
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.ui.adapters.SliderLabelsAdapter
 
 class PlaybackOptionsSheet(
     private val player: ExoPlayer
@@ -25,8 +27,18 @@ class PlaybackOptionsSheet(
         return binding.root
     }
 
+    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.speedShortcuts.layoutManager = GridLayoutManager(context, SUGGESTED_SPEEDS.size)
+        binding.pitchShortcuts.layoutManager = GridLayoutManager(context, SUGGESTED_PITCHES.size)
+
+        binding.speedShortcuts.adapter = SliderLabelsAdapter(SUGGESTED_SPEEDS) {
+            binding.speed.value = it
+        }
+        binding.pitchShortcuts.adapter = SliderLabelsAdapter(SUGGESTED_PITCHES) {
+            binding.pitch.value = it
+        }
 
         binding.speed.value = player.playbackParameters.speed
         binding.pitch.value = player.playbackParameters.pitch
@@ -43,7 +55,7 @@ class PlaybackOptionsSheet(
         }
 
         binding.resetSpeed.setOnClickListener {
-            binding.speed.value = 1f
+            binding.speed.value = PreferenceHelper.getFloat(PreferenceKeys.PLAYBACK_SPEED, 1f)
             onChange()
         }
 
@@ -63,5 +75,10 @@ class PlaybackOptionsSheet(
             binding.speed.value.round(2),
             binding.pitch.value.round(2)
         )
+    }
+
+    companion object {
+        private val SUGGESTED_SPEEDS = listOf(0.5f, 1f, 1.5f, 2f, 4f)
+        private val SUGGESTED_PITCHES = listOf(0.5f, 1f, 1.25f, 1.5f, 2f)
     }
 }
