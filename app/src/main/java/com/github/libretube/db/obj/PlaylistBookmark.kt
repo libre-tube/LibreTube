@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 data class PlaylistBookmark(
     @PrimaryKey
     val playlistId: String = "",
-    val playlistName: String? = null,
+    var playlistName: String? = null,
     var thumbnailUrl: String? = null,
     var uploader: String? = null,
     var uploaderUrl: String? = null,

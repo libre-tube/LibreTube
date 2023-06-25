@@ -72,7 +72,7 @@ class PlaylistFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            playlistId = it.getString(IntentData.playlistId)
+            playlistId = it.getString(IntentData.playlistId)!!.toID()
             playlistType = it.serializable(IntentData.playlistType) ?: PlaylistType.PUBLIC
         }
     }
@@ -89,9 +89,7 @@ class PlaylistFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        playlistId = playlistId!!.toID()
         binding.playlistRecView.layoutManager = LinearLayoutManager(context)
-
         binding.playlistProgress.visibility = View.VISIBLE
 
         isBookmarked = runBlocking(Dispatchers.IO) {
@@ -235,17 +233,23 @@ class PlaylistFragment : Fragment() {
                     }
                 }
 
-                withContext(Dispatchers.IO) {
-                    // update the playlist thumbnail if bookmarked
-                    val playlistBookmark = DatabaseHolder.Database.playlistBookmarkDao().getAll()
-                        .firstOrNull { it.playlistId == playlistId }
-                    playlistBookmark?.let {
-                        if (it.thumbnailUrl != response.thumbnailUrl) {
-                            it.thumbnailUrl = response.thumbnailUrl
-                            DatabaseHolder.Database.playlistBookmarkDao().update(it)
-                        }
-                    }
-                }
+                updatePlaylistBookmark(response)
+            }
+        }
+    }
+
+    /**
+     * If the playlist is bookmarked, update its content if modified by the uploader
+     */
+    private suspend fun updatePlaylistBookmark(playlist: Playlist) {
+        if (!isBookmarked) return
+        withContext(Dispatchers.IO) {
+            // update the playlist thumbnail and title if bookmarked
+            val playlistBookmark = DatabaseHolder.Database.playlistBookmarkDao().getAll()
+                .firstOrNull { it.playlistId == playlistId } ?: return@withContext
+            if (playlistBookmark.thumbnailUrl != playlist.thumbnailUrl || playlistBookmark.playlistName != playlist.name) {
+                DatabaseHolder.Database.playlistBookmarkDao()
+                    .update(playlist.toPlaylistBookmark(playlistBookmark.playlistId))
             }
         }
     }
