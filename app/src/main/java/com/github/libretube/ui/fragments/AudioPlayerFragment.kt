@@ -111,6 +111,11 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             onLongTap()
         }
 
+        binding.autoPlay.isChecked = PlayerHelper.autoPlayEnabled
+        binding.autoPlay.setOnCheckedChangeListener { _, isChecked ->
+            PlayerHelper.autoPlayEnabled = isChecked
+        }
+
         binding.prev.setOnClickListener {
             val currentIndex = PlayingQueue.currentIndex()
             if (!PlayingQueue.hasPrev()) return@setOnClickListener
