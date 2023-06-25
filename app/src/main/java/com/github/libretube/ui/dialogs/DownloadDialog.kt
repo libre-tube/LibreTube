@@ -174,7 +174,7 @@ class DownloadDialog(
 
             val downloadData = DownloadData(
                 videoId = videoId,
-                fileName = binding.fileName.text?.toString(),
+                fileName = binding.fileName.text?.toString().orEmpty(),
                 videoFormat = videoStream?.format,
                 videoQuality = videoStream?.quality,
                 audioFormat = audioStream?.format,
