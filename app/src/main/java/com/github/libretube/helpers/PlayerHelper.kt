@@ -202,11 +202,14 @@ object PlayerHelper {
             true
         )
 
-    val autoPlayEnabled: Boolean
+    var autoPlayEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
-            PreferenceKeys.AUTO_PLAY,
+            PreferenceKeys.AUTOPLAY,
             true
         )
+        set(value) {
+            PreferenceHelper.putBoolean(PreferenceKeys.AUTOPLAY, value)
+        }
 
     val autoPlayCountdown: Boolean
         get() = PreferenceHelper.getBoolean(

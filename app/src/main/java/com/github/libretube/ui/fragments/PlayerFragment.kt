@@ -115,7 +115,6 @@ import com.github.libretube.util.TextUtils.toTimeInSeconds
 import java.io.IOException
 import java.util.*
 import java.util.concurrent.Executors
-import kotlin.math.abs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -123,6 +122,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
+import kotlin.math.abs
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class PlayerFragment : Fragment(), OnlinePlayerOptions {
@@ -586,7 +586,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         binding.playerViewsInfo.text = viewInfo
 
         if (this::chapters.isInitialized && chapters.isNotEmpty()) {
-            setCurrentChapterName(true, false)
+            setCurrentChapterName(forceUpdate = true, enqueueNew = false)
         }
     }
 
@@ -751,7 +751,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 if (binding.playerMotionLayout.progress != 1.0f) {
                     // show controllers when not in picture in picture mode
                     val inPipMode = PlayerHelper.pipEnabled &&
-                        PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
+                            PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
                     if (!inPipMode) {
                         binding.player.useController = true
                     }
@@ -966,7 +966,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 if (
                     playbackState == Player.STATE_ENDED &&
                     !transitioning &&
-                    binding.player.autoplayEnabled
+                    PlayerHelper.autoPlayEnabled
                 ) {
                     transitioning = true
                     if (PlayerHelper.autoPlayCountdown) {

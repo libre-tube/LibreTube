@@ -26,7 +26,7 @@
         app:layout_constraintStart_toStartOf="@id/audio_player_container"
         app:layout_constraintTop_toTopOf="@id/audio_player_container">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp">
@@ -35,21 +35,38 @@
                 android:id="@+id/minimize_player"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center|start"
+                android:layout_gravity="center"
                 android:background="?selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_arrow_down" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/autoPlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:thumb="@drawable/player_switch_thumb"
+                app:thumbTint="?colorPrimary"
+                app:track="@drawable/player_switch_track"
+                app:trackTint="?colorControlNormal" />
 
             <ImageView
                 android:id="@+id/dropdown_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center|end"
+                android:layout_gravity="center"
                 android:background="?selectableItemBackgroundBorderless"
                 android:scaleX="0.8"
                 android:scaleY="0.8"
                 android:src="@drawable/ic_three_dots" />
 
-        </FrameLayout>
+        </LinearLayout>
 
         <FrameLayout
             android:layout_width="match_parent"

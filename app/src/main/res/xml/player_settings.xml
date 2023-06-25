@@ -164,13 +164,6 @@
             app:useSimpleSummaryProvider="true" />
 
         <SwitchPreferenceCompat
-            android:icon="@drawable/ic_play_filled"
-            android:summary="@string/autoplay_summary"
-            app:defaultValue="true"
-            app:key="autoplay"
-            app:title="@string/player_autoplay" />
-
-        <SwitchPreferenceCompat
             android:icon="@drawable/ic_speed"
             android:summary="@string/autoplay_countdown_summary"
             app:defaultValue="false"
