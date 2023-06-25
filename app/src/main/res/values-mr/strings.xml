@@ -354,7 +354,7 @@
     <string name="exportsuccess">निर्यात केले.</string>
     <string name="play_latest_videos">नवीनतम व्हिडिओ प्ले करा</string>
     <string name="nothing_selected">काहीही निवडले नाही!</string>
-    <string name="hide_watched_from_feed_summary">सदस्यत्व टॅबमध्ये 90% पेक्षा जास्त पाहिलेले व्हिडिओ दर्शवू नका.</string>
+    <string name="hide_watched_from_feed_summary">सदस्यत्व टॅबमध्ये 25% पेक्षा जास्त पाहिलेले व्हिडिओ दर्शवू नका.</string>
     <string name="shuffle">शफल</string>
     <string name="add_to_bookmarks">बुकमार्कमध्ये जोडा</string>
     <string name="download_channel_name">डाउनलोड सेवा</string>

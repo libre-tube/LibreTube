@@ -321,7 +321,7 @@
     <string name="double_tap_seek">Πατήστε δύο φορές για αναζήτηση</string>
     <string name="all_caught_up_summary">Έχετε δει όλα τα νέα βίντεο</string>
     <string name="hide_watched_from_feed">Απόκρυψη βίντεο που παρακολουθήσατε από τη ροή</string>
-    <string name="hide_watched_from_feed_summary">Μην εμφανίζεις βίντεο που παρακολουθούνται περισσότερο από το 90% στην καρτέλα συνδρομές.</string>
+    <string name="hide_watched_from_feed_summary">Μην εμφανίζεις βίντεο που παρακολουθούνται περισσότερο από το 25% στην καρτέλα συνδρομές.</string>
     <string name="local_subscriptions">Τοπικές συνδρομές</string>
     <string name="download_channel_name">Υπηρεσία λήψης</string>
     <string name="navbar_order">Σειρά</string>
