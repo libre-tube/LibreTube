@@ -354,7 +354,7 @@
     <string name="color_violet">Універсальний фіолетовий</string>
     <string name="failed_fetching_instances">Неможливо отримати доступні екземпляри.</string>
     <string name="hide_watched_from_feed">Сховати зі стрічки переглянуті відео</string>
-    <string name="hide_watched_from_feed_summary">Не показувати у вкладці підписок відео, переглянуті більше ніж на 25%.</string>
+    <string name="hide_watched_from_feed_summary">Не показувати у вкладці підписок відео, переглянуті більше ніж на 90%.</string>
     <string name="playlistUrl">URL добірки</string>
     <string name="pause_on_quit">Пауза під час виходу</string>
     <string name="shuffle">Перетасувати</string>

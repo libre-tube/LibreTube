@@ -353,7 +353,7 @@
     <string name="nothing_selected">Tidak ada yang dipilih!</string>
     <string name="color_violet">Ungu Serbaguna</string>
     <string name="failed_fetching_instances">Tidak bisa mendapatkan instansi tersedia.</string>
-    <string name="hide_watched_from_feed_summary">Jangan tampilkan video yang ditonton lebih dari 25% dalam tab langganan.</string>
+    <string name="hide_watched_from_feed_summary">Jangan tampilkan video yang ditonton lebih dari 90% dalam tab langganan.</string>
     <string name="hide_watched_from_feed">Sembunyikan video yang telah ditonton dari umpan</string>
     <string name="playlistUrl">URL Daftar Putar</string>
     <string name="pause_on_quit">Jeda ketika keluar</string>

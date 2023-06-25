@@ -353,7 +353,7 @@
     <string name="all_caught_up_summary">ਤੁਸੀਂ ਸਾਰੇ ਨਵੇਂ ਵੀਡੀਓ ਦੇਖੇ ਹਨ</string>
     <string name="proceed">ਅੱਗੇ ਵਧੋ</string>
     <string name="download_channel_description">ਮੀਡੀਆ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨ ਵੇਲੇ ਇੱਕ ਸੂਚਨਾ ਦਿਖਾਉਂਦਾ ਹੈ।</string>
-    <string name="hide_watched_from_feed_summary">ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਟੈਬ ਵਿੱਚ 25% ਤੋਂ ਵੱਧ ਦੇਖੇ ਜਾ ਰਹੇ ਵੀਡੀਓ ਨਾ ਦਿਖਾਓ।</string>
+    <string name="hide_watched_from_feed_summary">ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਟੈਬ ਵਿੱਚ 90% ਤੋਂ ਵੱਧ ਦੇਖੇ ਜਾ ਰਹੇ ਵੀਡੀਓ ਨਾ ਦਿਖਾਓ।</string>
     <string name="download_channel_name">ਸੇਵਾ ਡਾਊਨਲੋਡ ਕਰੋ</string>
     <string name="playlistUrl">ਪਲੇਲਿਸਟ URL</string>
     <string name="pause_on_quit">ਛੱਡਣ \'ਤੇ ਰੁਕੋ</string>

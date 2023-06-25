@@ -362,7 +362,7 @@
     <string name="layout">Макет</string>
     <string name="brightness">Яркасць</string>
     <string name="proceed">Працягвайце</string>
-    <string name="hide_watched_from_feed_summary">Не паказвайце на ўкладцы \"Падпіскі\" відэа, якія праглядаюць больш за 25%.</string>
+    <string name="hide_watched_from_feed_summary">Не паказвайце на ўкладцы \"Падпіскі\" відэа, якія праглядаюць больш за 90%.</string>
     <string name="playlistUrl">URL-адрас плэйліста</string>
     <string name="pause_on_quit">Паўза пры выхадзе</string>
     <string name="forward">Перамотка наперад</string>

@@ -355,7 +355,7 @@
     <string name="failed_fetching_instances">利用可能なインスタンスを取得できませんでした。</string>
     <string name="hide_watched_from_feed">視聴済みの動画をフィードから非表示</string>
     <string name="playlistUrl">プレイリストのURL</string>
-    <string name="hide_watched_from_feed_summary">25%以上再生した動画を、登録チャンネルタブに表示しない。</string>
+    <string name="hide_watched_from_feed_summary">90%以上再生した動画を、登録チャンネルタブに表示しない。</string>
     <string name="pause_on_quit">終了時に一時停止</string>
     <string name="shuffle">シャッフル再生</string>
     <string name="add_to_bookmarks">ブックマークに追加</string>

@@ -288,7 +288,7 @@ class SubscriptionsFragment : Fragment() {
                 val progress = historyItem.position / 1000
                 val duration = it.duration ?: 0
                 // show video only in feed when watched less than 1/4
-                progress < 0.25f * duration
+                progress < 0.9f * duration
             }
         }
     }
