@@ -281,15 +281,14 @@ class SubscriptionsFragment : Fragment() {
     }
 
     private fun removeWatchVideosFromFeed(streams: List<StreamItem>): List<StreamItem> {
-        return runBlocking {
-            streams.filter {
-                runBlocking(Dispatchers.IO) {
-                    runCatching {
-                        val watchPosition = DatabaseHolder.Database.watchPositionDao()
-                            .findById(it.url.orEmpty().toID())?.position?.div(1000)
-                        (watchPosition ?: 0) < 0.9 * (it.duration ?: 1L)
-                    }.getOrDefault(false)
-                }
+        return streams.filter {
+            runBlocking(Dispatchers.IO) {
+                val historyItem = DatabaseHolder.Database.watchPositionDao()
+                    .findById(it.url.orEmpty().toID()) ?: return@runBlocking true
+                val progress = historyItem.position / 1000
+                val duration = it.duration ?: 0
+                // show video only in feed when watched less than 1/4
+                progress < 0.25f * duration
             }
         }
     }
