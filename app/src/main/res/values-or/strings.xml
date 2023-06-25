@@ -447,7 +447,17 @@
     <string name="change_playlist_description">ପ୍ଲେଲିଷ୍ଟ ବର୍ଣ୍ଣନା ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
     <string name="playlist_description">ପ୍ଲେଲିଷ୍ଟ ବର୍ଣ୍ଣନା</string>
     <string name="show_search_suggestions">ସନ୍ଧାନ ପରାମର୍ଶଗୁଡିକ ଦେଖାନ୍ତୁ</string>
-    <string name="manual">ମାନୁଆଲ୍</string>
-    <string name="automatic">ସ୍ୱୟଂଚାଳିତ</string>
-    <string name="off">ବନ୍ଦ</string>
+    <string name="manual">ମାନୁଆଲ୍ ସ୍କିପ୍</string>
+    <string name="automatic">ସ୍ୱୟଂଚାଳିତ ଭାବେ ଛାଡିଦିଅ</string>
+    <string name="off">ଅକ୍ଷମ କରନ୍ତୁ</string>
+    <string name="color">ରଙ୍ଗ</string>
+    <string name="sb_custom_colors">କଷ୍ଟମ୍ ସେଗମେଣ୍ଟ୍ ରଙ୍ଗ</string>
+    <string name="enter_hex_value">ରଙ୍ଗ ହେକ୍ସ ମୂଲ୍ୟ ପ୍ରବେଶ କରନ୍ତୁ</string>
+    <string name="sb_color_enable">ପ୍ରାୟୋଜକ ବ୍ଲକ୍ ସେଗମେଣ୍ଟଗୁଡିକ ପାଇଁ କଷ୍ଟମ୍ ରଙ୍ଗ ସେଗମେଣ୍ଟଗୁଡିକ ଟୋଗଲ୍ କରନ୍ତୁ</string>
+    <string name="jumped_to_highlight">ଭିଡିଓ ହାଇଲାଇଟ୍ କୁ ଡେଇଁଲେ</string>
+    <string name="category_highlight">ଭିଡିଓ ହାଇଲାଇଟ୍ ଦେଖନ୍ତୁ</string>
+    <string name="category_highlight_description">ବିଜ୍ଞାପନର ଟାଇଟଲ୍, ଥମ୍ବନେଲ କିମ୍ବା ଭିଡିଓର ସବୁଠାରୁ ଆକର୍ଷଣୀୟ ଅଂଶ ହୋଇପାରେ । ଆପଣ ଏହାକୁ ଅଧ୍ୟାୟ ବିଭାଗରେ ଟ୍ୟାପ୍ କରି ଏହାକୁ ଛାଡି ପାରିବେ ।</string>
+    <string name="invalid_color">ଅବୈଧ ରଙ୍ଗ ମୂଲ୍ୟ ପ୍ରବେଶ!</string>
+    <string name="visible">ସନ୍ଧାନ ବାର୍ ରେ ଦେଖାନ୍ତୁ</string>
+    <string name="chapters_videoHighlight">ଭିଡିଓ ହାଇଲାଇଟ୍</string>
 </resources>
