@@ -168,6 +168,7 @@
     <string name="unknown">Unknown</string>
     <string name="pause">Pause</string>
     <string name="resume">Resume</string>
+    <string name="stop">Stop</string>
     <string name="player_autoplay">Autoplay</string>
     <string name="instance_frontend_url">URL to instance frontend</string>
     <string name="quality">Quality</string>

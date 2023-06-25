@@ -24,12 +24,12 @@ import com.github.libretube.receivers.DownloadReceiver
 import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.adapters.DownloadsAdapter
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
-import kotlin.io.path.fileSize
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlin.io.path.fileSize
 
 class DownloadsFragment : Fragment() {
     private var _binding: FragmentDownloadsBinding? = null
@@ -165,13 +165,15 @@ class DownloadsFragment : Fragment() {
                     downloadOverlay.visibility = View.GONE
                 }
 
+                DownloadStatus.Stopped -> Unit
+
                 is DownloadStatus.Progress -> {
                     downloadOverlay.visibility = View.VISIBLE
                     resumePauseBtn.setImageResource(R.drawable.ic_pause)
                     if (progressBar.isIndeterminate) return
                     progressBar.incrementProgressBy(status.progress.toInt())
                     val progressInfo = progressBar.progress.formatAsFileSize() +
-                        " /\n" + progressBar.max.formatAsFileSize()
+                            " /\n" + progressBar.max.formatAsFileSize()
                     fileSize.text = progressInfo
                 }
 
