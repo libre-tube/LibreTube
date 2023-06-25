@@ -11,6 +11,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.PendingIntentCompat
 import androidx.core.app.ServiceCompat
 import androidx.core.content.getSystemService
+import androidx.core.util.remove
 import androidx.core.util.set
 import androidx.core.util.valueIterator
 import androidx.lifecycle.LifecycleService
@@ -37,6 +38,7 @@ import com.github.libretube.parcelable.DownloadData
 import com.github.libretube.receivers.NotificationReceiver
 import com.github.libretube.receivers.NotificationReceiver.Companion.ACTION_DOWNLOAD_PAUSE
 import com.github.libretube.receivers.NotificationReceiver.Companion.ACTION_DOWNLOAD_RESUME
+import com.github.libretube.receivers.NotificationReceiver.Companion.ACTION_DOWNLOAD_STOP
 import com.github.libretube.ui.activities.MainActivity
 import java.io.File
 import java.net.HttpURLConnection
@@ -45,23 +47,25 @@ import java.net.URL
 import java.nio.file.Path
 import java.nio.file.StandardOpenOption
 import java.util.concurrent.Executors
-import kotlin.io.path.absolute
-import kotlin.io.path.createFile
-import kotlin.io.path.deleteIfExists
-import kotlin.io.path.fileSize
-import kotlin.math.min
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okio.buffer
 import okio.sink
 import okio.source
+import kotlin.io.path.absolute
+import kotlin.io.path.createFile
+import kotlin.io.path.deleteIfExists
+import kotlin.io.path.fileSize
+import kotlin.math.min
 
 /**
  * Download service with custom implementation of downloading using [HttpURLConnection].
@@ -87,9 +91,11 @@ class DownloadService : LifecycleService() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
+        val downloadId = intent?.getIntExtra("id", -1)
         when (intent?.action) {
-            ACTION_DOWNLOAD_RESUME -> resume(intent.getIntExtra("id", -1))
-            ACTION_DOWNLOAD_PAUSE -> pause(intent.getIntExtra("id", -1))
+            ACTION_DOWNLOAD_RESUME -> resume(downloadId!!)
+            ACTION_DOWNLOAD_PAUSE -> pause(downloadId!!)
+            ACTION_DOWNLOAD_STOP -> stop(downloadId!!)
         }
 
         val downloadData = intent?.parcelableExtra<DownloadData>(IntentData.downloadData)
@@ -200,7 +206,7 @@ class DownloadService : LifecycleService() {
                             notificationBuilder
                                 .setContentText(
                                     totalRead.formatAsFileSize() + " / " +
-                                        item.downloadSize.formatAsFileSize()
+                                            item.downloadSize.formatAsFileSize()
                                 )
                                 .setProgress(
                                     item.downloadSize.toInt(),
@@ -228,6 +234,11 @@ class DownloadService : LifecycleService() {
                 }
             } catch (_: Exception) {
             }
+        }
+
+        if (_downloadFlow.firstOrNull { it.first == item.id }?.second == DownloadStatus.Stopped) {
+            downloadQueue.remove(item.id, false)
+            return
         }
 
         val completed = when {
@@ -324,9 +335,30 @@ class DownloadService : LifecycleService() {
     fun pause(id: Int) {
         downloadQueue[id] = false
 
-        // Stop the service if no downloads are active.
+        stopServiceIfDone()
+    }
+
+    /**
+     * Stop downloading job for given [id]. If no downloads are active, stop the service.
+     */
+    private fun stop(id: Int) = CoroutineScope(Dispatchers.IO).launch {
+        downloadQueue[id] = false
+        _downloadFlow.emit(id to DownloadStatus.Stopped)
+
+        lifecycleScope.launch {
+            val item = Database.downloadDao().findDownloadItemById(id)
+            notificationManager.cancel(item.getNotificationId())
+            Database.downloadDao().deleteDownloadItemById(id)
+            stopServiceIfDone()
+        }
+    }
+
+    /**
+     * Stop service if no downloads are active
+     */
+    private fun stopServiceIfDone() {
         if (downloadQueue.valueIterator().asSequence().none { it }) {
-            ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_DETACH)
+            ServiceCompat.stopForeground(this@DownloadService, ServiceCompat.STOP_FOREGROUND_DETACH)
             sendBroadcast(Intent(ACTION_SERVICE_STOPPED))
             stopSelf()
         }
@@ -398,6 +430,7 @@ class DownloadService : LifecycleService() {
             .setOngoing(true)
             .clearActions()
             .addAction(getPauseAction(item.id))
+            .addAction(getStopAction(item.id))
 
         notificationManager.notify(item.getNotificationId(), notificationBuilder.build())
     }
@@ -421,6 +454,7 @@ class DownloadService : LifecycleService() {
                 .setSmallIcon(R.drawable.ic_pause)
                 .setContentText(getString(R.string.download_paused))
                 .addAction(getResumeAction(item.id))
+                .addAction(getStopAction(item.id))
         }
         notificationManager.notify(item.getNotificationId(), notificationBuilder.build())
     }
@@ -434,6 +468,21 @@ class DownloadService : LifecycleService() {
             R.drawable.ic_play,
             getString(R.string.resume),
             PendingIntentCompat.getBroadcast(this, id, intent, FLAG_UPDATE_CURRENT, false)
+        ).build()
+    }
+
+    private fun getStopAction(id: Int): NotificationCompat.Action {
+        val intent = Intent(this, NotificationReceiver::class.java).apply {
+            action = ACTION_DOWNLOAD_STOP
+            putExtra("id", id)
+        }
+
+        // the request code must differ from the one of the pause/resume action
+        val requestCode = Int.MAX_VALUE / 2 - id
+        return NotificationCompat.Action.Builder(
+            R.drawable.ic_stop,
+            getString(R.string.stop),
+            PendingIntentCompat.getBroadcast(this, requestCode, intent, FLAG_UPDATE_CURRENT, false)
         ).build()
     }
 

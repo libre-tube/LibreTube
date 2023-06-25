@@ -24,6 +24,9 @@ interface DownloadDao {
     @Query("SELECT * FROM downloaditem WHERE id = :id")
     suspend fun findDownloadItemById(id: Int): DownloadItem
 
+    @Query("DELETE FROM downloaditem WHERE id = :id")
+    suspend fun deleteDownloadItemById(id: Int)
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertDownload(download: Download)
 

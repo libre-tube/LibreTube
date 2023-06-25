@@ -25,5 +25,7 @@ class NotificationReceiver : BroadcastReceiver() {
             "com.github.libretube.receivers.NotificationReceiver.ACTION_DOWNLOAD_RESUME"
         const val ACTION_DOWNLOAD_PAUSE =
             "com.github.libretube.receivers.NotificationReceiver.ACTION_DOWNLOAD_PAUSE"
+        const val ACTION_DOWNLOAD_STOP =
+            "com.github.libretube.receivers.NotificationReceiver.ACTION_DOWNLOAD_STOP"
     }
 }

@@ -6,6 +6,8 @@ sealed class DownloadStatus {
 
     object Paused : DownloadStatus()
 
+    object Stopped : DownloadStatus()
+
     data class Progress(
         val progress: Long,
         val downloaded: Long,
