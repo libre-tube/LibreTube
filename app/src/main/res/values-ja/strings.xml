@@ -453,4 +453,8 @@
     <string name="invalid_color">この色の値は無効です！</string>
     <string name="enter_hex_value">16進数の色の値を入力</string>
     <string name="visible">シークバーに表示</string>
+    <string name="jumped_to_highlight">動画のハイライトに飛ぶ</string>
+    <string name="category_highlight">動画のハイライトを表示</string>
+    <string name="chapters_videoHighlight">動画のハイライト</string>
+    <string name="category_highlight_description">その動画の宣伝的な題、サムネイル、または最も興味を引く部分です。チャプター欄からタップするとそこに飛びます。</string>
 </resources>
