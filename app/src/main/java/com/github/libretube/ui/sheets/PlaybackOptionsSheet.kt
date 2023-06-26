@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.PlaybackBottomSheetBinding
 import com.github.libretube.extensions.round
+import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.SliderLabelsAdapter
 
@@ -55,8 +56,7 @@ class PlaybackOptionsSheet(
         }
 
         binding.resetSpeed.setOnClickListener {
-            binding.speed.value = PreferenceHelper.getFloat(PreferenceKeys.PLAYBACK_SPEED, 1f)
-            onChange()
+            binding.speed.value = PlayerHelper.playbackSpeed
         }
 
         binding.resetPitch.setOnClickListener {
