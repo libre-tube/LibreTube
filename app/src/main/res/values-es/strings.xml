@@ -463,4 +463,5 @@
     <string name="category_highlight_description">Puede ser tanto lo que anuncia el título, la vista previa o el momento más interesante del vídeo. Puedes avanzar hasta ahí tocando en el capítulo resaltado.</string>
     <string name="category_highlight">Resaltar momentos destacados</string>
     <string name="chapters_videoHighlight">Momento Destacado</string>
+    <string name="stop">Detener</string>
 </resources>
