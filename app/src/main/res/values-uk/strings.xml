@@ -466,4 +466,5 @@
     <string name="jumped_to_highlight">Перехід до виділеного у відео</string>
     <string name="category_highlight">Показати виділене у відео</string>
     <string name="chapters_videoHighlight">Виділене у відео</string>
+    <string name="stop">Зупинити</string>
 </resources>
