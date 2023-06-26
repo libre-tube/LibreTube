@@ -459,4 +459,9 @@
     <string name="visible">Zobrazit v liště</string>
     <string name="invalid_color">Zadána neplatná hodnota barvy!</string>
     <string name="enter_hex_value">Zadejte Hex hodnotu barvy</string>
+    <string name="category_highlight">Zobrazit zvýraznění videa</string>
+    <string name="stop">Zastavit</string>
+    <string name="chapters_videoHighlight">Zvýraznění videa</string>
+    <string name="jumped_to_highlight">Přeskočeno na zvýraznění videa</string>
+    <string name="category_highlight_description">Může to být inzerovaný název, miniatura nebo nejzajímavější část videa. Můžete na ni přejít klepnutím v sekci kapitol.</string>
 </resources>
