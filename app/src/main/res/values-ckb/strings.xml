@@ -447,7 +447,7 @@
     <string name="import_subscriptions_from">هێنانی هاوبەشییەکان لە</string>
     <string name="export_subscriptions_to">ناردنی هابەشییەکان بۆ</string>
     <string name="show_search_suggestions">پیشاندانی پێشنیارەکانی گەڕان</string>
-    <string name="sb_custom_colors">ڕەنگی تایبەت نیشانەکردن</string>
+    <string name="sb_custom_colors">ڕەنگی تایبەتی نیشانەکردن</string>
     <string name="color">ڕەنگ</string>
     <string name="enter_hex_value">بەهای تایبەتی ڕەنگ بنوسە</string>
     <string name="manual">پەڕاندنی دەستی</string>
@@ -456,4 +456,8 @@
     <string name="off">نا چالاک</string>
     <string name="visible">پیشاندان لەبەشی خوارەوە</string>
     <string name="automatic">پەڕاندنی خۆکار</string>
+    <string name="chapters_videoHighlight">بەشەکانی ڤیدیۆ</string>
+    <string name="jumped_to_highlight">چوون بۆ بەشە دیاریکراوەکان</string>
+    <string name="category_highlight">پیشاندانی بەشە دیاریکراوەکان</string>
+    <string name="category_highlight_description">دەکرێت یان ناونیشانی ڕیکلامکراو بێت، وێنە بچووکەکە یان سەرنجڕاکێشترین بەش لە ڤیدیۆکەدا. دەتوانیت بەسەریدا تێپەڕیت بە لێدانی لەسەری لە بەشی بابەتەکاندا.</string>
 </resources>
