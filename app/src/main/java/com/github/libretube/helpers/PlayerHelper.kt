@@ -222,7 +222,7 @@ object PlayerHelper {
             .roundToInt()
             .toLong() * 1000
 
-    private val playbackSpeed: Float
+    val playbackSpeed: Float
         get() = PreferenceHelper.getString(
             PreferenceKeys.PLAYBACK_SPEED,
             "1"
