@@ -52,10 +52,11 @@ class BackupRestoreSettings : BasePreferenceFragment() {
     override val titleResourceId: Int = R.string.backup_restore
 
     // backup and restore database
-    private val getBackupFile = registerForActivityResult(ActivityResultContracts.GetContent()) {
-        it?.let {
+    private val getBackupFile =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            if (uri == null) return@registerForActivityResult
             CoroutineScope(Dispatchers.IO).launch {
-                BackupHelper.restoreAdvancedBackup(requireContext(), it)
+                BackupHelper.restoreAdvancedBackup(requireContext(), uri)
                 withContext(Dispatchers.Main) {
                     // could fail if fragment is already closed
                     runCatching {
@@ -64,12 +65,10 @@ class BackupRestoreSettings : BasePreferenceFragment() {
                 }
             }
         }
-    }
-    private val createBackupFile = registerForActivityResult(CreateDocument(JSON)) {
-        it?.let {
-            CoroutineScope(Dispatchers.IO).launch {
-                BackupHelper.createAdvancedBackup(requireContext(), it, backupFile)
-            }
+    private val createBackupFile = registerForActivityResult(CreateDocument(JSON)) { uri ->
+        if (uri == null) return@registerForActivityResult
+        CoroutineScope(Dispatchers.IO).launch {
+            BackupHelper.createAdvancedBackup(requireContext(), uri, backupFile)
         }
     }
 
@@ -78,19 +77,17 @@ class BackupRestoreSettings : BasePreferenceFragment() {
      */
     private val getSubscriptionsFile = registerForActivityResult(
         ActivityResultContracts.GetContent()
-    ) {
-        it?.let {
-            lifecycleScope.launch(Dispatchers.IO) {
-                ImportHelper.importSubscriptions(requireActivity(), it, importFormat)
-            }
+    ) { uri ->
+        if (uri == null) return@registerForActivityResult
+        lifecycleScope.launch(Dispatchers.IO) {
+            ImportHelper.importSubscriptions(requireActivity(), uri, importFormat)
         }
     }
 
-    private val createSubscriptionsFile = registerForActivityResult(CreateDocument(JSON)) {
-        it?.let {
-            lifecycleScope.launch(Dispatchers.IO) {
-                ImportHelper.exportSubscriptions(requireActivity(), it, importFormat)
-            }
+    private val createSubscriptionsFile = registerForActivityResult(CreateDocument(JSON)) { uri ->
+        if (uri == null) return@registerForActivityResult
+        lifecycleScope.launch(Dispatchers.IO) {
+            ImportHelper.exportSubscriptions(requireActivity(), uri, importFormat)
         }
     }
 
@@ -197,6 +194,6 @@ class BackupRestoreSettings : BasePreferenceFragment() {
     }
 
     companion object {
-        private const val JSON = "application/json"
+        const val JSON = "application/json"
     }
 }
