@@ -84,6 +84,7 @@ class HomeFragment : Fragment() {
     private fun fetchHomeFeed() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
+                binding.nothingHere.isGone = true
                 val defaultItems = resources.getStringArray(R.array.homeTabItemsValues)
                 val visibleItems = PreferenceHelper
                     .getStringSet(PreferenceKeys.HOME_TAB_CONTENT, defaultItems.toSet())
