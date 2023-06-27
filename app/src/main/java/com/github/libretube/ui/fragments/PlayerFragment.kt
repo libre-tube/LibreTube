@@ -799,25 +799,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun refreshLiveStatus() {
-        // switch back to normal speed when on the end of live stream
-        if (exoPlayer.duration - exoPlayer.currentPosition < 7000) {
-            exoPlayer.setPlaybackSpeed(1F)
-            playerBinding.timeSeparator.visibility = View.GONE
-            playerBinding.liveDiff.text = ""
-        } else {
-            // live stream but not watching at the end/live position
-            playerBinding.timeSeparator.visibility = View.VISIBLE
-            val diffText = DateUtils.formatElapsedTime(
-                (exoPlayer.duration - exoPlayer.currentPosition) / 1000
-            )
-            playerBinding.liveDiff.text = "-$diffText"
-        }
-        // call the function again after 100ms
-        handler.postDelayed(this@PlayerFragment::refreshLiveStatus, 100)
-    }
-
     /**
      *  Seek to saved watch position if available */
     private fun seekToWatchPosition() {
@@ -882,16 +863,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
     }
 
-    private fun handleLiveVideo() {
-        playerBinding.exoPosition.visibility = View.GONE
-        playerBinding.liveDiff.visibility = View.VISIBLE
-        playerBinding.duration.text = getString(R.string.live)
-        playerBinding.exoTime.setOnClickListener {
-            exoPlayer.seekTo(exoPlayer.duration)
-        }
-        refreshLiveStatus()
-    }
-
     @SuppressLint("SetTextI18n")
     private fun initializePlayerView() {
         // initialize the player view actions
@@ -916,11 +887,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 R.string.subscribers,
                 streams.uploaderSubscriberCount.formatShort()
             )
+
+            player.isLive = streams.livestream
         }
-
-        // duration that's not greater than 0 indicates that the video is live
-        if (streams.livestream) handleLiveVideo()
-
         playerBinding.exoTitle.text = streams.title
 
         // init the chapters recyclerview
@@ -961,6 +930,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             override fun onPlaybackStateChanged(playbackState: Int) {
                 saveWatchPosition()
+
+                // set the playback speed to one if having reached the end of a livestream
+                if (playbackState == Player.STATE_BUFFERING && binding.player.isLive &&
+                    exoPlayer.duration - exoPlayer.currentPosition < 700
+                ) {
+                    exoPlayer.setPlaybackSpeed(1f)
+                }
 
                 // check if video has ended, next video is available and autoplay is enabled.
                 if (

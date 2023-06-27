@@ -7,6 +7,7 @@ import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Handler
 import android.os.Looper
+import android.text.format.DateUtils
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -17,9 +18,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.os.postDelayed
 import androidx.core.view.ViewCompat
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.marginStart
 import androidx.core.view.updateLayoutParams
+import androidx.media3.common.C
 import androidx.media3.common.Player
 import androidx.media3.common.text.Cue
 import androidx.media3.common.util.RepeatModeUtil
@@ -30,6 +33,7 @@ import androidx.media3.ui.PlayerView
 import androidx.media3.ui.SubtitleView
 import androidx.media3.ui.TimeBar
 import com.github.libretube.R
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.PlayerGestureControlsViewBinding
@@ -39,6 +43,7 @@ import com.github.libretube.extensions.round
 import com.github.libretube.helpers.AudioHelper
 import com.github.libretube.helpers.BrightnessHelper
 import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
@@ -72,6 +77,13 @@ open class CustomExoPlayerView(
 
     private val runnableHandler = Handler(Looper.getMainLooper())
     var isPlayerLocked: Boolean = false
+    var isLive: Boolean = false
+        set(value) {
+            field = value
+            updateDisplayedDurationType()
+            updateCurrentPosition()
+        }
+
 
     /**
      * Preferences
@@ -177,6 +189,21 @@ open class CustomExoPlayerView(
                 enqueueHideControllerTask()
             }
         })
+
+        // restore the duration type from the previous session
+        updateDisplayedDurationType()
+
+        binding.duration.setOnClickListener {
+            updateDisplayedDurationType(true)
+        }
+        binding.timeLeft.setOnClickListener {
+            updateDisplayedDurationType(false)
+        }
+        binding.position.setOnClickListener {
+            if (isLive) player?.let { it.seekTo(it.duration) }
+        }
+
+        updateCurrentPosition()
     }
 
     open fun onPlayerEvent(player: Player, playerEvents: Player.Events) = Unit
@@ -189,6 +216,19 @@ open class CustomExoPlayerView(
                 else -> R.drawable.ic_play
             }
         )
+    }
+
+    private fun updateDisplayedDurationType(showTimeLeft: Boolean? = null) {
+        var shouldShowTimeLeft = showTimeLeft ?: PreferenceHelper
+            .getBoolean(PreferenceKeys.SHOW_TIME_LEFT, false)
+        // always show the time left only if it's a livestream
+        if (isLive) shouldShowTimeLeft = true
+        if (showTimeLeft != null) {
+            // save whether to show time left or duration for next session
+            PreferenceHelper.putBoolean(PreferenceKeys.SHOW_TIME_LEFT, shouldShowTimeLeft)
+        }
+        binding.timeLeft.isVisible = shouldShowTimeLeft
+        binding.duration.isGone = shouldShowTimeLeft
     }
 
     private fun enqueueHideControllerTask() {
@@ -568,6 +608,19 @@ open class CustomExoPlayerView(
         }
     }
 
+    @SuppressLint("SetTextI18n")
+    private fun updateCurrentPosition() {
+        val position = player?.currentPosition?.div(1000) ?: 0
+        val duration = player?.duration?.takeIf { it != C.TIME_UNSET }?.div(1000) ?: 0
+        val timeLeft = duration - position
+
+        binding.position.text =
+            if (isLive) context.getString(R.string.live) else DateUtils.formatElapsedTime(position)
+        binding.timeLeft.text = "-${DateUtils.formatElapsedTime(timeLeft)}"
+
+        runnableHandler.postDelayed(100, UPDATE_POSITION_TOKEN, this::updateCurrentPosition)
+    }
+
     open fun getTopBarMarginDp(): Int {
         return if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) 10 else 0
     }
@@ -676,6 +729,7 @@ open class CustomExoPlayerView(
         private const val HIDE_CONTROLLER_TOKEN = "hideController"
         private const val HIDE_FORWARD_BUTTON_TOKEN = "hideForwardButton"
         private const val HIDE_REWIND_BUTTON_TOKEN = "hideRewindButton"
+        private const val UPDATE_POSITION_TOKEN = "updatePosition"
 
         private const val SUBTITLE_BOTTOM_PADDING_FRACTION = 0.158f
         private const val ANIMATION_DURATION = 100L
