@@ -456,4 +456,9 @@
     <string name="sb_color_enable">Benutzerdefinierte Farbabschnitte für Sponsor-Blockabschnitte umschalten</string>
     <string name="color">Farbe</string>
     <string name="visible">In Suchleiste anzeigen</string>
+    <string name="chapters_videoHighlight">Video-Highlight</string>
+    <string name="stop">Stopp</string>
+    <string name="jumped_to_highlight">Zum Video-Highlight gesprungen</string>
+    <string name="category_highlight">Video-Highlight anzeigen</string>
+    <string name="category_highlight_description">Kann entweder das im Titel oder Vorschaubild Beworbene oder der interessanteste Teil des Videos sein. Zu diesem Abschnitt springen, indem du ihn im Kapitelbereich antippst.</string>
 </resources>
