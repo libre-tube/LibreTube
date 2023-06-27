@@ -251,7 +251,7 @@
                 android:layout_marginStart="10dp">
 
                 <TextView
-                    android:id="@id/exo_position"
+                    android:id="@+id/position"
                     style="@style/TimeString"
                     android:text="00:00"
                     tools:ignore="HardcodedText" />

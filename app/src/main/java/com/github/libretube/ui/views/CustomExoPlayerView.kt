@@ -7,6 +7,7 @@ import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Handler
 import android.os.Looper
+import android.text.format.DateUtils
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -177,6 +178,8 @@ open class CustomExoPlayerView(
                 enqueueHideControllerTask()
             }
         })
+
+        updateCurrentPosition()
     }
 
     open fun onPlayerEvent(player: Player, playerEvents: Player.Events) = Unit
@@ -567,6 +570,12 @@ open class CustomExoPlayerView(
             topMargin = getTopBarMarginDp().dpToPx().toInt()
         }
     }
+    
+    private fun updateCurrentPosition() {
+        val position = player?.currentPosition?.div(1000) ?: 0
+        binding.position.text = DateUtils.formatElapsedTime(position)
+        handler.postDelayed(100, UPDATE_POSITION_TOKEN, this::updateCurrentPosition)
+    }
 
     open fun getTopBarMarginDp(): Int {
         return if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) 10 else 0
@@ -676,6 +685,7 @@ open class CustomExoPlayerView(
         private const val HIDE_CONTROLLER_TOKEN = "hideController"
         private const val HIDE_FORWARD_BUTTON_TOKEN = "hideForwardButton"
         private const val HIDE_REWIND_BUTTON_TOKEN = "hideRewindButton"
+        private const val UPDATE_POSITION_TOKEN = "updatePosition"
 
         private const val SUBTITLE_BOTTOM_PADDING_FRACTION = 0.158f
         private const val ANIMATION_DURATION = 100L

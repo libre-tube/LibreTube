@@ -883,7 +883,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private fun handleLiveVideo() {
-        playerBinding.exoPosition.visibility = View.GONE
+        playerBinding.position.visibility = View.GONE
         playerBinding.liveDiff.visibility = View.VISIBLE
         playerBinding.duration.text = getString(R.string.live)
         playerBinding.exoTime.setOnClickListener {
