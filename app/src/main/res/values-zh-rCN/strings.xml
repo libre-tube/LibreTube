@@ -457,4 +457,5 @@
     <string name="category_highlight_description">可能是视频广告、缩略图或最有趣的部分。你可以在章节部分轻按它来跳到这部分。</string>
     <string name="chapters_videoHighlight">精彩集锦</string>
     <string name="category_highlight">显示精彩集锦</string>
+    <string name="stop">停止</string>
 </resources>
