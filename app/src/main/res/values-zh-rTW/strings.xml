@@ -444,7 +444,18 @@
     <string name="change_playlist_description">變更播放清單描述</string>
     <string name="emptyPlaylistDescription">播放清單描述不能為空</string>
     <string name="show_search_suggestions">顯示搜尋建議</string>
-    <string name="off">關閉</string>
-    <string name="manual">手動</string>
-    <string name="automatic">自動</string>
+    <string name="off">停用</string>
+    <string name="manual">手動略過</string>
+    <string name="automatic">自動略過</string>
+    <string name="stop">停止</string>
+    <string name="sb_color_enable">切換贊助者封鎖區塊的自訂色彩</string>
+    <string name="sb_custom_colors">自訂區塊色彩</string>
+    <string name="invalid_color">輸入了無效色彩值！</string>
+    <string name="enter_hex_value">輸入顏色的十六進位值</string>
+    <string name="chapters_videoHighlight">影片精彩片段</string>
+    <string name="jumped_to_highlight">跳到影片的精彩片段</string>
+    <string name="color">色彩</string>
+    <string name="visible">在進度列中顯示</string>
+    <string name="category_highlight">顯示影片的精彩片段</string>
+    <string name="category_highlight_description">可以是廣告標題、縮圖或影片中最有趣的部分。您可以透過在章節部分點擊它來跳到該處。</string>
 </resources>
