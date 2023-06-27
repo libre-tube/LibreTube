@@ -10,16 +10,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Comment
 import com.github.libretube.api.obj.CommentsPage
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentCommentsBinding
 import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.ui.adapters.CommentsAdapter
 import com.github.libretube.ui.extensions.filterNonEmptyComments
 import com.github.libretube.ui.models.CommentsViewModel
+import com.github.libretube.ui.sheets.CommentsSheet
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -58,6 +61,10 @@ class CommentsRepliesFragment : Fragment() {
         ) {
             viewModel.commentsSheetDismiss?.invoke()
         }
+        (parentFragment as CommentsSheet).updateFragmentInfo(
+            true,
+            "${getString(R.string.replies)} (${comment.replyCount.formatShort()})"
+        )
 
         binding.commentsRV.updatePadding(top = 0)
         binding.commentsRV.layoutManager = LinearLayoutManager(context)
