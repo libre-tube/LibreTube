@@ -9,11 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.view.WindowManager
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import com.github.libretube.R
 import com.github.libretube.databinding.CommentsSheetBinding
 import com.github.libretube.ui.fragments.CommentsMainFragment
-import com.github.libretube.ui.fragments.CommentsRepliesFragment
 import com.github.libretube.ui.models.CommentsViewModel
 
 class CommentsSheet : ExpandedBottomSheet() {
@@ -58,11 +58,8 @@ class CommentsSheet : ExpandedBottomSheet() {
         }
 
         childFragmentManager.apply {
-            addOnBackStackChangedListener(this@CommentsSheet::onFragmentChanged)
-
             beginTransaction()
                 .replace(R.id.commentFragContainer, CommentsMainFragment())
-                .runOnCommit(this@CommentsSheet::onFragmentChanged)
                 .commit()
         }
 
@@ -76,20 +73,9 @@ class CommentsSheet : ExpandedBottomSheet() {
         }
     }
 
-    private fun onFragmentChanged() {
-        childFragmentManager.findFragmentById(R.id.commentFragContainer)?.let {
-            when (it) {
-                is CommentsRepliesFragment -> {
-                    binding.btnBack.visibility = View.VISIBLE
-                    binding.commentsTitle.text = getString(R.string.replies)
-                }
-
-                else -> {
-                    binding.btnBack.visibility = View.GONE
-                    binding.commentsTitle.text = getString(R.string.comments)
-                }
-            }
-        }
+    fun updateFragmentInfo(showBackButton: Boolean, title: String) {
+        binding.btnBack.isVisible = showBackButton
+        binding.commentsTitle.text = title
     }
 
     override fun onDismiss(dialog: DialogInterface) {
