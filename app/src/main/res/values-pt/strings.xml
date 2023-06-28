@@ -457,4 +457,11 @@
     <string name="enter_hex_value">Indique o valor Hex da cor</string>
     <string name="color">Cor</string>
     <string name="visible">Mostrar na barra de progresso</string>
+    <string name="stop">Parar</string>
+    <string name="sb_custom_colors">Cores de segmento personalizadas</string>
+    <string name="chapters_videoHighlight">Vídeo em destaque</string>
+    <string name="jumped_to_highlight">Saltou para o vídeo em destaque</string>
+    <string name="category_highlight">Mostrar vídeo de destaque</string>
+    <string name="category_highlight_description">Pode ser o título anunciado, a miniatura ou a parte mais interessante do vídeo. Pode saltar para essa parte tocando nela na secção de capítulos.</string>
+    <string name="sb_color_enable">Alterna segmentos de cores personalizadas para segmentos de blocos de patrocinadores</string>
 </resources>
