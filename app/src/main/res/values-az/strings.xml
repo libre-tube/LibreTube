@@ -460,4 +460,5 @@
     <string name="category_highlight">Video vurğulaması göstər</string>
     <string name="category_highlight_description">Ya reklam olunan başlıq, miniatür və ya videonun ən maraqlı hissəsi ola bilər. Bölümlər bölməsində üzərinə toxunaraq ona keçə bilərsiniz.</string>
     <string name="chapters_videoHighlight">Video Vurğulama</string>
+    <string name="stop">Dayandır</string>
 </resources>

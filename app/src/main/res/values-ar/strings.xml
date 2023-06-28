@@ -472,4 +472,5 @@
     <string name="category_highlight">إظهار تمييز الفيديو</string>
     <string name="category_highlight_description">يمكن أن يكون العنوان المعلن عنه أو الصورة المصغرة أو الجزء الأكثر إثارة للاهتمام من الفيديو. يمكنك التخطي إليه من خلال النقر عليه في قسم الفصول.</string>
     <string name="chapters_videoHighlight">ملخصات الفيديو</string>
+    <string name="stop">إيقاف</string>
 </resources>

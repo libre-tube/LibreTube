@@ -457,4 +457,5 @@
     <string name="category_highlight">動画のハイライトを表示</string>
     <string name="chapters_videoHighlight">動画のハイライト</string>
     <string name="category_highlight_description">その動画の宣伝的な題、サムネイル、または最も興味を引く部分です。チャプター欄からタップするとそこに飛びます。</string>
+    <string name="stop">停止</string>
 </resources>

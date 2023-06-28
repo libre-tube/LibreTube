@@ -453,4 +453,9 @@
     <string name="color">Warna</string>
     <string name="sb_custom_colors">Warna segmen kustom</string>
     <string name="enter_hex_value">Masukkan Nilai Hex Warna</string>
+    <string name="jumped_to_highlight">Dilompati ke Sorotan Video</string>
+    <string name="category_highlight">Tampilkan sorotan video</string>
+    <string name="category_highlight_description">Dapat berupa judul yang ditampilkan, gambar kecil atau bagian video yang paling menarik. Anda dapat melompati ke bagiannya dengan mengetuk pada bagian bab.</string>
+    <string name="stop">Berhenti</string>
+    <string name="chapters_videoHighlight">Sorotan Video</string>
 </resources>
