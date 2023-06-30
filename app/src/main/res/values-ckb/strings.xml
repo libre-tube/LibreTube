@@ -460,4 +460,5 @@
     <string name="jumped_to_highlight">چوون بۆ بەشە دیاریکراوەکان</string>
     <string name="category_highlight">پیشاندانی بەشە دیاریکراوەکان</string>
     <string name="category_highlight_description">دەکرێت یان ناونیشانی ڕیکلامکراو بێت، وێنە بچووکەکە یان سەرنجڕاکێشترین بەش لە ڤیدیۆکەدا. دەتوانیت بەسەریدا تێپەڕیت بە لێدانی لەسەری لە بەشی بابەتەکاندا.</string>
+    <string name="stop">وەستاندن</string>
 </resources>
