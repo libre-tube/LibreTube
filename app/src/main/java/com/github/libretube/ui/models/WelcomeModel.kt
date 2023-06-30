@@ -1,8 +1,8 @@
 package com.github.libretube.ui.models
 
-import android.content.Context
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.libretube.api.InstanceHelper
 import com.github.libretube.api.obj.Instances
@@ -10,19 +10,19 @@ import com.github.libretube.extensions.toastFromMainDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class WelcomeModel : ViewModel() {
+class WelcomeModel(private val application: Application) : AndroidViewModel(application) {
     val selectedInstanceIndex = MutableLiveData<Int>()
 
     var instances = MutableLiveData<List<Instances>>()
 
-    fun fetchInstances(context: Context) {
+    fun fetchInstances() {
         if (!instances.value.isNullOrEmpty()) return
         viewModelScope.launch(Dispatchers.IO) {
             val instances = try {
-                InstanceHelper.getInstances(context)
+                InstanceHelper.getInstances(application)
             } catch (e: Exception) {
-                context.applicationContext.toastFromMainDispatcher(e.message.orEmpty())
-                InstanceHelper.getInstancesFallback(context)
+                application.toastFromMainDispatcher(e.message.orEmpty())
+                InstanceHelper.getInstancesFallback(application)
             }
             this@WelcomeModel.instances.postValue(instances)
         }
