@@ -23,7 +23,12 @@ object DashHelper {
         val formats: MutableList<PipedStream> = mutableListOf()
     )
 
-    fun createManifest(streams: Streams, supportsHdr: Boolean, audioOnly: Boolean = false, rewriteUrls: Boolean): String {
+    fun createManifest(
+        streams: Streams,
+        supportsHdr: Boolean,
+        audioOnly: Boolean = false,
+        rewriteUrls: Boolean
+    ): String {
         val builder = builderFactory.newDocumentBuilder()
 
         val doc = builder.newDocument()
@@ -137,7 +142,11 @@ object DashHelper {
         return writer.toString()
     }
 
-    private fun createAudioRepresentation(doc: Document, stream: PipedStream, rewriteUrls: Boolean): Element {
+    private fun createAudioRepresentation(
+        doc: Document,
+        stream: PipedStream,
+        rewriteUrls: Boolean
+    ): Element {
         val representation = doc.createElement("Representation")
         representation.setAttribute("bandwidth", stream.bitrate.toString())
         representation.setAttribute("codecs", stream.codec!!)
@@ -167,7 +176,11 @@ object DashHelper {
         return representation
     }
 
-    private fun createVideoRepresentation(doc: Document, stream: PipedStream, rewriteUrls: Boolean): Element {
+    private fun createVideoRepresentation(
+        doc: Document,
+        stream: PipedStream,
+        rewriteUrls: Boolean
+    ): Element {
         val representation = doc.createElement("Representation")
         representation.setAttribute("codecs", stream.codec!!)
         representation.setAttribute("bandwidth", stream.bitrate.toString())

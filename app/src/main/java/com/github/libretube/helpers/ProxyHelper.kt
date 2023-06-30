@@ -48,9 +48,13 @@ object ProxyHelper {
         else -> true
     }
 
-    fun unwrapImageUrl(url: String): String = if (
+    fun unwrapImageUrl(url: String) = if (
         !PreferenceHelper.getBoolean(PreferenceKeys.DISABLE_VIDEO_IMAGE_PROXY, false)
-    ) url else unwrapUrl(url)
+    ) {
+        url
+    } else {
+        unwrapUrl(url)
+    }
 
     /**
      * Convert a proxied Piped url to a YouTube url that's not proxied
