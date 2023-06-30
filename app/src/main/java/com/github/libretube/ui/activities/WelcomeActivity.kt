@@ -4,9 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.core.view.isGone
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
@@ -24,7 +23,7 @@ import kotlinx.coroutines.withContext
 
 class WelcomeActivity : BaseActivity() {
     private lateinit var binding: ActivityWelcomeBinding
-    private var viewModel: WelcomeModel? = null
+    private val viewModel: WelcomeModel by viewModels()
 
     private val restoreFilePicker =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
@@ -41,27 +40,26 @@ class WelcomeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get()
 
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // ALl the binding values are optional due to two different possible layouts (normal, landscape)
-        viewModel!!.instances.observe(this) { instances ->
+        viewModel.instances.observe(this) { instances ->
             binding.instancesRecycler?.layoutManager = LinearLayoutManager(this@WelcomeActivity)
-            binding.instancesRecycler?.adapter = InstancesAdapter(instances, viewModel!!) { index ->
-                viewModel!!.selectedInstanceIndex.value = index
+            binding.instancesRecycler?.adapter = InstancesAdapter(instances, viewModel) { index ->
+                viewModel.selectedInstanceIndex.value = index
                 binding.okay?.alpha = 1f
             }
             binding.progress?.isGone = true
         }
-        viewModel!!.fetchInstances(this)
+        viewModel.fetchInstances()
 
-        binding.okay?.alpha = if (viewModel!!.selectedInstanceIndex.value != null) 1f else 0.5f
+        binding.okay?.alpha = if (viewModel.selectedInstanceIndex.value != null) 1f else 0.5f
         binding.okay?.setOnClickListener {
-            if (viewModel!!.selectedInstanceIndex.value != null) {
+            if (viewModel.selectedInstanceIndex.value != null) {
                 val selectedInstance =
-                    viewModel!!.instances.value!![viewModel!!.selectedInstanceIndex.value!!]
+                    viewModel.instances.value!![viewModel.selectedInstanceIndex.value!!]
                 PreferenceHelper.putString(PreferenceKeys.FETCH_INSTANCE, selectedInstance.apiUrl)
                 startMainActivity()
             } else {
