@@ -1,13 +1,15 @@
 package com.github.libretube.helpers
 
+import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.PreferenceKeys
+import java.net.HttpURLConnection
+import java.net.URL
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
-import okhttp3.OkHttpClient
-import okhttp3.Request
 
 object ProxyHelper {
     fun fetchProxyUrl() {
@@ -33,15 +35,16 @@ object ProxyHelper {
     /**
      * Detect whether the proxy should be used or not for a given stream URL based on user preferences
      */
-    fun unwrapStreamUrl(url: String): String {
+    suspend fun unwrapStreamUrl(url: String): String {
         return if (shouldDisableProxy(url)) unwrapUrl(url) else url
     }
 
-    fun shouldDisableProxy(url: String) = when {
+    suspend fun shouldDisableProxy(url: String) = when {
         !PreferenceHelper.getBoolean(PreferenceKeys.DISABLE_VIDEO_IMAGE_PROXY, false) -> false
         PreferenceHelper.getBoolean(PreferenceKeys.FALLBACK_PIPED_PROXY, true) -> isUrlUsable(
             unwrapUrl(url)
         )
+
         else -> true
     }
 
@@ -64,11 +67,13 @@ object ProxyHelper {
     /**
      * Parse the Piped url to a YouTube url (or not) based on preferences
      */
-    private fun isUrlUsable(url: String): Boolean {
-        val client = OkHttpClient.Builder().build()
-        val request = Request.Builder().url(url).method("HEAD", null).build()
-        return runCatching {
-            client.newCall(request).execute().code == 200
+    private suspend fun isUrlUsable(url: String): Boolean = withContext(Dispatchers.IO) {
+        return@withContext runCatching {
+            val connection = CronetHelper.cronetEngine.openConnection(URL(url)) as HttpURLConnection
+            connection.requestMethod = "HEAD"
+            val isSuccess = connection.responseCode == 200
+            connection.disconnect()
+            return@runCatching isSuccess
         }.getOrDefault(false)
     }
 }
