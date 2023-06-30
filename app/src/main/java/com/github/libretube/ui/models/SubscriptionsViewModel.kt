@@ -23,6 +23,7 @@ class SubscriptionsViewModel : ViewModel() {
         if (loadingSubscriptions) return
         loadingSubscriptions = true
 
+        // fetching the first / initial page
         if (start == null) videoFeed.value = null
         viewModelScope.launch(Dispatchers.IO) {
             val videoFeed = try {

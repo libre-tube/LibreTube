@@ -2,6 +2,7 @@ package com.github.libretube.ui.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,6 +60,8 @@ class SubscriptionsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        subscriptionsAdapter = null
 
         val loadFeedInBackground = PreferenceHelper.getBoolean(
             PreferenceKeys.SAVE_FEED,
@@ -154,7 +157,6 @@ class SubscriptionsFragment : Fragment() {
         _binding = null
     }
 
-    @SuppressLint("InflateParams")
     private suspend fun initChannelGroups() {
         channelGroups = DatabaseHolder.Database.subscriptionGroupsDao().getAll()
 
@@ -187,10 +189,11 @@ class SubscriptionsFragment : Fragment() {
         }
     }
 
-    private fun showFeed() {
-        if (viewModel.videoFeed.value == null) return
+    private fun showFeed() = lifecycleScope.launch {
+        Log.e("show feed", viewModel.videoFeed.value.orEmpty().size.toString())
 
         binding.subRefresh.isRefreshing = false
+        binding.subProgress.isGone = true
         val feed = viewModel.videoFeed.value!!
             .filter { streamItem ->
                 // filter for selected channel groups
@@ -241,9 +244,8 @@ class SubscriptionsFragment : Fragment() {
         binding.subFeedContainer.isGone = notLoaded
         binding.emptyFeed.isVisible = notLoaded
 
-        binding.subProgress.visibility = View.GONE
-
         if (subscriptionsAdapter == null) {
+            Log.e("new", "new")
             subscriptionsAdapter = VideosAdapter(feed)
             binding.subFeed.adapter = subscriptionsAdapter
         } else {
@@ -267,8 +269,8 @@ class SubscriptionsFragment : Fragment() {
         }
     }
 
-    private fun showSubscriptions() {
-        if (viewModel.subscriptions.value == null) return
+    private fun showSubscriptions() = lifecycleScope.launch {
+        if (viewModel.subscriptions.value == null) return@launch
 
         binding.subRefresh.isRefreshing = false
 
