@@ -466,4 +466,5 @@
     <string name="category_highlight">הצגת הקטע הבולט בסרטון</string>
     <string name="jumped_to_highlight">קפצנו לקטע הבולט בסרטון</string>
     <string name="category_highlight_description">יכול להיות שזה הכותרת שפורסמה, התמונה הייצוגית או החלק המעניין ביותר של הסרטון. אפשר לדלג אליו בנגיעה בו בסעיף הפרקים.</string>
+    <string name="stop">עצירה</string>
 </resources>
