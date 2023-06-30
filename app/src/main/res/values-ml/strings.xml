@@ -38,7 +38,7 @@
     <string name="deletePlaylist">പ്ലേലിസ്റ്റ് ഇല്ലാതാകുക</string>
     <string name="createPlaylist">പ്ലേലിസ്റ്റ് നിർമ്മിക്കുക</string>
     <string name="playlistCreated">പ്ലേലിസ്റ്റ് നിർമ്മിച്ചു!</string>
-    <string name="systemLanguage">സിസ്റ്റം ഭാഷ</string>
+    <string name="systemLanguage">വ്യവസ്ഥ</string>
     <string name="success">വിജയകരം!</string>
     <string name="videoCount">%1$d വീഡിയോകൾ</string>
     <string name="app_theme">തീം</string>
@@ -82,7 +82,7 @@
     <string name="empty">നിങ്ങൾ ഒരു ഉപയോക്തൃനാമവും പാസ്‌വേഡും നൽകണം.</string>
     <string name="defres">ഡിഫോൾട്ട് വീഡിയോ റെസല്യൂഷൻ</string>
     <string name="grid">ഗ്രിഡ് നിരകൾ</string>
-    <string name="systemDefault">സിസ്റ്റം ഡിഫോൾട്ട്</string>
+    <string name="systemDefault">വ്യവസ്ഥ</string>
     <string name="lightTheme">വെളിച്ചം</string>
     <string name="customization">കസ്റ്റമൈസേഷനുകൾ</string>
     <string name="comments">അഭിപ്രായങ്ങൾ</string>
@@ -192,4 +192,17 @@
     <string name="go_to_video">വീഡിയോയിലേക്ക് പോകുക</string>
     <string name="download_channel_name">ഡൗൺലോഡ് സേവനം</string>
     <string name="category">തരം</string>
+    <string name="off">പ്രവർത്തനരഹിതമാക്കുക</string>
+    <string name="mark_as_unwatched">കണ്ടിട്ടില്ലെന്ന് അടയാളപ്പെടുത്തുക</string>
+    <string name="choose_instance">ദയവായി ആദ്യം ഒരു ഉദാഹരണം തിരഞ്ഞെടുക്കുക!</string>
+    <string name="welcome">LibreTube-ലേക്ക് സ്വാഗതം</string>
+    <string name="alphabetic">അക്ഷരമാലാക്രമം</string>
+    <string name="creation_date">സൃഷ്ടിച്ച തീയതി</string>
+    <string name="duration_reversed">ദൈർഘ്യം (വിപരീതമായി)</string>
+    <string name="duration">ദൈർഘ്യം</string>
+    <string name="show_search_suggestions">തിരയൽ നിർദ്ദേശങ്ങൾ കാണിക്കുക</string>
+    <string name="pause_on_quit">നിർത്തുമ്പോൾ താൽക്കാലികമായി നിർത്തുക</string>
+    <string name="unlimited_search_history">പരിധിയില്ലാത്ത തിരയൽ ചരിത്രം</string>
+    <string name="alphabetic_reversed">അക്ഷരമാലാക്രമം (വിപരീതമായി)</string>
+    <string name="creation_date_reversed">സൃഷ്‌ടിച്ച തീയതി (വിപരീതമായി)</string>
 </resources>
