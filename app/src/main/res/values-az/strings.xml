@@ -406,7 +406,7 @@
     <string name="subscriberAndVideoCounts">%1$s abunəçi • %2$d video</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d video</string>
     <string name="disable_proxy">Piped proksini bağla</string>
-    <string name="disable_proxy_summary">Videoları və şəkilləri birbaşa YouTube serverlərindən yüklə. Seçimi, ancaq VPN istifadə edirsinizsə aktivləşdirin! Qeyd, bu, YT musiqidəki məzmunla işləməyə bilər.</string>
+    <string name="disable_proxy_summary">Videoları və şəkilləri birbaşa YouTube serverlərindən yüklə. Seçimi, ancaq VPN istifadə edirsinizsə aktivləşdirin!</string>
     <string name="auto_fullscreen_shorts">Qısa videolarda avto tam ekran</string>
     <string name="edit_group">Qrupu redaktə et</string>
     <string name="channel_groups">Kanal qrupları</string>
@@ -447,9 +447,9 @@
     <string name="emptyPlaylistDescription">Oynatma siyahısı təsviri boş ola bilməz</string>
     <string name="change_playlist_description">Oynatma siyahısı təsvirin dəyiş</string>
     <string name="show_search_suggestions">Axtarış təkliflərin göstər</string>
-    <string name="manual">Əl ilə ötür</string>
-    <string name="automatic">Avtomatik ötür</string>
-    <string name="off">Qeyri-aktiv et</string>
+    <string name="manual">Əl ilə</string>
+    <string name="automatic">Avtomatik</string>
+    <string name="off">Bağla</string>
     <string name="sb_color_enable">SponsorBlock bölümləri üçün xüsusi rəng bölümlərin dəyişdirir</string>
     <string name="invalid_color">Yanlış rəng dəyəri daxil edildi!</string>
     <string name="sb_custom_colors">Xüsusi bölüm rəngləri</string>
@@ -461,4 +461,6 @@
     <string name="category_highlight_description">Ya reklam olunan başlıq, miniatür və ya videonun ən maraqlı hissəsi ola bilər. Bölümlər bölməsində üzərinə toxunaraq ona keçə bilərsiniz.</string>
     <string name="chapters_videoHighlight">Video Vurğulama</string>
     <string name="stop">Dayandır</string>
+    <string name="fallback_piped_proxy">Piped proksiyə qayıdış</string>
+    <string name="fallback_piped_proxy_desc">YouTube-a birbaşa qoşulma cari video üçün işləmirsə, videoları proksidən yükləyir (ilkin yükləmə vaxtların artırır). Qeyri-aktiv edilibsə, YouTube musiqi məzmunu YT məhdudiyyətlərinə görə çox güman ki, oynadılmayacaq.</string>
 </resources>
