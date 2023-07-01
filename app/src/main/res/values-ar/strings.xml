@@ -414,7 +414,7 @@
     <string name="subscriberAndVideoCounts">مشتركون %1$s • فيديوهات %2$d</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d مقاطع فيديو</string>
     <string name="disable_proxy">تعطيل وكيل الأنابيب</string>
-    <string name="disable_proxy_summary">تحميل الفيديو والصور مباشرة من خادم يوتيوب . تمكين هذا الخيار فقط إذا كنت تستخدم الشبكات الافتراضية الخاصة ! يرجى ملاحظة أن هذا قد لا ينطبق على محتوى YT الموسيقى .</string>
+    <string name="disable_proxy_summary">تجهيز الفيديو والصور بشكل مباشر من خادم يوتيوب . تمكين هذا الخيار فقط إذا كنت تستخدم الشبكات الافتراضية الخاصة !</string>
     <string name="auto_fullscreen_shorts">ملء الشاشة تلقائيًا على مقاطع الفيديو القصيرة</string>
     <string name="new_group">جديد</string>
     <string name="group_name">أسم المجموعة</string>
@@ -460,8 +460,8 @@
     <string name="change_playlist_description">تغيير وصف قائمة التشغيل</string>
     <string name="show_search_suggestions">عرض اقتراحات البحث</string>
     <string name="off">معطل</string>
-    <string name="manual">تخطي يدوي</string>
-    <string name="automatic">تخطي تلقائي</string>
+    <string name="manual">يدوي</string>
+    <string name="automatic">تلقائي</string>
     <string name="sb_color_enable">تبديل شرائح الألوان المخصصة لشرائح كتلة الراعي</string>
     <string name="sb_custom_colors">ألوان شرائح مخصصة</string>
     <string name="invalid_color">تم إدخال قيمة لون غير صالحة!</string>
@@ -473,4 +473,6 @@
     <string name="category_highlight_description">يمكن أن يكون العنوان المعلن عنه أو الصورة المصغرة أو الجزء الأكثر إثارة للاهتمام من الفيديو. يمكنك التخطي إليه من خلال النقر عليه في قسم الفصول.</string>
     <string name="chapters_videoHighlight">ملخصات الفيديو</string>
     <string name="stop">إيقاف</string>
+    <string name="fallback_piped_proxy">الرجوع إلى الوكيل Piped</string>
+    <string name="fallback_piped_proxy_desc">قم بتحميل مقاطع الفيديو عبر الخادم الوكيل إذا كان الاتصال ب YouTube مباشرة لا يعمل مع الفيديو الحالي (يزيد من أوقات التحميل الأولية). إذا تم تعطيله ، فمن المحتمل ألا يتم تشغيل محتوى موسيقى YouTube بسبب قيود YT.</string>
 </resources>
