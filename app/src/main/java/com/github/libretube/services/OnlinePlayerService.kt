@@ -186,7 +186,7 @@ class OnlinePlayerService : LifecycleService() {
 
     private fun playAudio(seekToPosition: Long) {
         initializePlayer()
-        setMediaItem()
+        lifecycleScope.launch(Dispatchers.IO) { setMediaItem() }
 
         // create the notification
         if (!this@OnlinePlayerService::nowPlayingNotification.isInitialized) {
@@ -296,13 +296,19 @@ class OnlinePlayerService : LifecycleService() {
     /**
      * Sets the [MediaItem] with the [streams] into the [player]
      */
-    private fun setMediaItem() {
+    private suspend fun setMediaItem() {
         val streams = streams ?: return
 
         val (uri, mimeType) = if (streams.audioStreams.isNotEmpty()) {
-            PlayerHelper.createDashSource(streams, this, true) to MimeTypes.APPLICATION_MPD
+            val disableProxy = ProxyHelper.shouldDisableProxy(streams.videoStreams.first().url!!)
+            PlayerHelper.createDashSource(
+                streams,
+                this,
+                true,
+                disableProxy
+            ) to MimeTypes.APPLICATION_MPD
         } else {
-            ProxyHelper.rewriteUrl(streams.hls)?.toUri() to MimeTypes.APPLICATION_M3U8
+            ProxyHelper.unwrapStreamUrl(streams.hls.orEmpty()).toUri() to MimeTypes.APPLICATION_M3U8
         }
 
         val mediaItem = MediaItem.Builder()
@@ -310,7 +316,7 @@ class OnlinePlayerService : LifecycleService() {
             .setMimeType(mimeType)
             .setMetadata(streams)
             .build()
-        player?.setMediaItem(mediaItem)
+        withContext(Dispatchers.Main) { player?.setMediaItem(mediaItem) }
     }
 
     /**

@@ -63,7 +63,7 @@ data class Streams(
                     path = Paths.get(""),
                     url = subtitles.find {
                         it.code == subCode
-                    }?.url?.let { ProxyHelper.unwrapIfEnabled(it) }
+                    }?.url?.let { ProxyHelper.unwrapUrl(it) }
                 )
             )
         }

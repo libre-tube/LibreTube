@@ -36,7 +36,7 @@ data class PipedStream(
         videoId = videoId,
         fileName = getQualityString(fileName),
         path = Paths.get(""),
-        url = url?.let { ProxyHelper.unwrapIfEnabled(it) },
+        url = url?.let { ProxyHelper.unwrapUrl(it) },
         format = format,
         quality = quality,
         downloadSize = contentLength

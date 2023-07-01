@@ -23,7 +23,12 @@ object DashHelper {
         val formats: MutableList<PipedStream> = mutableListOf()
     )
 
-    fun createManifest(streams: Streams, supportsHdr: Boolean, audioOnly: Boolean = false): String {
+    fun createManifest(
+        streams: Streams,
+        supportsHdr: Boolean,
+        audioOnly: Boolean = false,
+        rewriteUrls: Boolean
+    ): String {
         val builder = builderFactory.newDocumentBuilder()
 
         val doc = builder.newDocument()
@@ -113,9 +118,9 @@ object DashHelper {
             for (stream in adapSet.formats) {
                 val rep = let {
                     if (isVideo) {
-                        createVideoRepresentation(doc, stream)
+                        createVideoRepresentation(doc, stream, rewriteUrls)
                     } else {
-                        createAudioRepresentation(doc, stream)
+                        createAudioRepresentation(doc, stream, rewriteUrls)
                     }
                 }
                 adapSetElement.appendChild(rep)
@@ -137,7 +142,11 @@ object DashHelper {
         return writer.toString()
     }
 
-    private fun createAudioRepresentation(doc: Document, stream: PipedStream): Element {
+    private fun createAudioRepresentation(
+        doc: Document,
+        stream: PipedStream,
+        rewriteUrls: Boolean
+    ): Element {
         val representation = doc.createElement("Representation")
         representation.setAttribute("bandwidth", stream.bitrate.toString())
         representation.setAttribute("codecs", stream.codec!!)
@@ -151,7 +160,7 @@ object DashHelper {
         audioChannelConfiguration.setAttribute("value", "2")
 
         val baseUrl = doc.createElement("BaseURL")
-        baseUrl.appendChild(doc.createTextNode(ProxyHelper.unwrapIfEnabled(stream.url!!)))
+        baseUrl.appendChild(doc.createTextNode(ProxyHelper.unwrapUrl(stream.url!!, rewriteUrls)))
 
         val segmentBase = doc.createElement("SegmentBase")
         segmentBase.setAttribute("indexRange", "${stream.indexStart}-${stream.indexEnd}")
@@ -167,7 +176,11 @@ object DashHelper {
         return representation
     }
 
-    private fun createVideoRepresentation(doc: Document, stream: PipedStream): Element {
+    private fun createVideoRepresentation(
+        doc: Document,
+        stream: PipedStream,
+        rewriteUrls: Boolean
+    ): Element {
         val representation = doc.createElement("Representation")
         representation.setAttribute("codecs", stream.codec!!)
         representation.setAttribute("bandwidth", stream.bitrate.toString())
@@ -177,7 +190,7 @@ object DashHelper {
         representation.setAttribute("frameRate", stream.fps.toString())
 
         val baseUrl = doc.createElement("BaseURL")
-        baseUrl.appendChild(doc.createTextNode(ProxyHelper.unwrapIfEnabled(stream.url!!)))
+        baseUrl.appendChild(doc.createTextNode(ProxyHelper.unwrapUrl(stream.url!!, rewriteUrls)))
 
         val segmentBase = doc.createElement("SegmentBase")
         segmentBase.setAttribute("indexRange", "${stream.indexStart}-${stream.indexEnd}")
