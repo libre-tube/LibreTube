@@ -147,10 +147,10 @@
     <string name="buffering_goal_summary">La quantità massima di secondi che viene bufferizzata nei video.</string>
     <string name="playerVideoFormat">Formato video del lettore</string>
     <string name="player_autoplay">Riproduzione automatica</string>
-    <string name="audio">Con audio</string>
+    <string name="audio">Audio</string>
     <string name="no_audio">Senza audio</string>
     <string name="no_video">Senza video</string>
-    <string name="video">Con video</string>
+    <string name="video">Video</string>
     <string name="downloading">Download in corso…</string>
     <string name="instance_frontend_url">URL del frontend dell\'istanza</string>
     <string name="quality">Qualità</string>
@@ -408,7 +408,7 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d video</string>
     <string name="subscriberAndVideoCounts">%1$s iscritti • %2$d video</string>
     <string name="disable_proxy">Disabilita il proxy Piped</string>
-    <string name="disable_proxy_summary">Carica video e immagini direttamente dai server di YouTube. Abilita l\'opzione solo se usi comunque una VPN! Tieni presente che questo potrebbe non funzionare con i contenuti di YT Music.</string>
+    <string name="disable_proxy_summary">Carica video e immagini direttamente dai server di YouTube. Abilita l\'opzione solo se usi una VPN!</string>
     <string name="auto_fullscreen_shorts">Schermo intero automatico su video brevi</string>
     <string name="channel_groups">Gruppi di canali</string>
     <string name="new_group">Nuovo</string>
@@ -450,8 +450,8 @@
     <string name="playlist_description">Descrizione playlist</string>
     <string name="emptyPlaylistDescription">La descrizione della playlist non può essere vuota</string>
     <string name="show_search_suggestions">Mostra suggerimenti di ricerca</string>
-    <string name="manual">Salto manuale</string>
-    <string name="automatic">Salto automatico</string>
+    <string name="manual">Manuale</string>
+    <string name="automatic">Automatico</string>
     <string name="off">Disattiva</string>
     <string name="visible">Mostra nella barra di ricerca</string>
     <string name="stop">Ferma</string>
@@ -464,4 +464,5 @@
     <string name="color">Colore</string>
     <string name="invalid_color">Valore del colore inserito non valido!</string>
     <string name="enter_hex_value">Inserisci il valore esadecimale del colore</string>
+    <string name="fallback_piped_proxy_desc">Carica i video tramite il proxy se la connessione diretta a YouTube non funziona per il video corrente (aumenta i tempi di caricamento iniziale). Se disattivato, è probabile che i contenuti musicali di YouTube non vengano riprodotti a causa delle restrizioni di YT.</string>
 </resources>
