@@ -22,7 +22,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class WelcomeActivity : BaseActivity() {
-    private lateinit var binding: ActivityWelcomeBinding
     private val viewModel: WelcomeModel by viewModels()
 
     private val restoreFilePicker =
@@ -41,7 +40,7 @@ class WelcomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityWelcomeBinding.inflate(layoutInflater)
+        val binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // ALl the binding values are optional due to two different possible layouts (normal, landscape)
