@@ -403,7 +403,7 @@
     <string name="subscriberAndVideoCounts">%1$s 人のチャンネル登録者 • %2$d 本の動画</string>
     <string name="replies">返信</string>
     <string name="disable_proxy">Pipedのプロキシを無効化</string>
-    <string name="disable_proxy_summary">動画や画像を YouTube のサーバーから直接読み込みます。VPN を併用する場合にのみ有効化してください！YT Music のコンテンツには適用できない可能性があることに注意してください。</string>
+    <string name="disable_proxy_summary">動画や画像を YouTube のサーバーから直接読み込みます。VPN を併用する場合にのみ有効化してください！</string>
     <string name="auto_fullscreen_shorts">ショート動画を自動で全画面表示</string>
     <string name="sleep_timer">スリープタイマー</string>
     <string name="fullscreen_gestures">ジェスチャで全画面を開始/終了</string>
