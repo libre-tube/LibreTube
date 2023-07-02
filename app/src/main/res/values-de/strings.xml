@@ -115,7 +115,7 @@
     <string name="playback_speed">Wiedergabegeschwindigkeit</string>
     <string name="advanced">Optionen für Fortgeschrittene</string>
     <string name="player">Player</string>
-    <string name="appearance_summary">Passe die Anwendung nach deinen Wünschen an.</string>
+    <string name="appearance_summary">Aussehen, Anordnung und Layout</string>
     <string name="live">Live</string>
     <string name="shareTo">URL teilen an</string>
     <string name="defaultIcon">Standard</string>
@@ -253,7 +253,7 @@
     <string name="history_size">Maximale Verlaufsgröße</string>
     <string name="resize_mode_fill">Ausfüllen</string>
     <string name="audio_video_summary">Qualität und Format</string>
-    <string name="repeat_mode_current">Aktuell</string>
+    <string name="repeat_mode_current">Aktuelles Video</string>
     <string name="mobile_data">Mobile Daten</string>
     <string name="new_videos_badge_summary">Zeigt ein Abzeichen mit der Anzahl neuer Videos an, falls vorhanden.</string>
     <string name="sb_skip_manual_summary">Abschnitte nicht automatisch überspringen, immer vorher fragen.</string>
@@ -273,7 +273,7 @@
     <string name="resize_mode_zoom">Vergrößern</string>
     <string name="repeat_mode">Endlosschleife</string>
     <string name="resize_mode_fit">Anpassen</string>
-    <string name="repeat_mode_none">Keine</string>
+    <string name="repeat_mode_none">Aus</string>
     <string name="new_videos_badge">Indikator für neue Videos</string>
     <string name="preferences">Einstellungen</string>
     <string name="backup_customInstances">Benutzerdefinierte Instanzen</string>
@@ -312,7 +312,7 @@
     <string name="default_audio_track">Standard</string>
     <string name="livestreams">Livestreams</string>
     <string name="alternative_videos_layout">Alternatives Video-Layout</string>
-    <string name="hls_instead_of_dash">Verwende HLS</string>
+    <string name="hls_instead_of_dash">HLS verwenden</string>
     <string name="hls_instead_of_dash_summary">Verwende HLS statt DASH (wird langsamer sein, nicht empfohlen)</string>
     <string name="auto_quality">Automatisch</string>
     <string name="limit_to_runtime">Auf Laufzeit beschränken</string>
@@ -353,8 +353,8 @@
     <string name="color_violet">Vielseitiges Violett</string>
     <string name="nothing_selected">Nichts ausgewählt!</string>
     <string name="failed_fetching_instances">Verfügbare Instanzen konnten nicht abgerufen werden.</string>
-    <string name="hide_watched_from_feed">Angesehene Videos aus dem Feed ausblenden</string>
-    <string name="hide_watched_from_feed_summary">Zeige auf dem Tab \"Abos\" keine Videos an, welche bereits zu mehr als 90% angesehen worden sind.</string>
+    <string name="hide_watched_from_feed">Angesehene Videos ausblenden</string>
+    <string name="hide_watched_from_feed_summary">Im Abo-Tab keine Videos anzeigen, welche bereits zu mehr als 90% angesehen worden sind.</string>
     <string name="playlistUrl">Wiedergabelisten-URL</string>
     <string name="pause_on_quit">Beim Beenden pausieren</string>
     <string name="shuffle">Zufallswiedergabe</string>
@@ -405,9 +405,9 @@
     <string name="lbry_hls">LBRY HLS</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d Videos</string>
     <string name="subscriberAndVideoCounts">%1$s Abonnenten • %2$d Videos</string>
-    <string name="disable_proxy">Piped Proxy deaktivieren</string>
+    <string name="disable_proxy">Piped-Proxy deaktivieren</string>
     <string name="auto_fullscreen_shorts">Automatisches Vollbild bei Shorts</string>
-    <string name="disable_proxy_summary">Videos und Bilder direkt von den Servern von YouTube laden. Aktiviere diese Option nur, wenn du ohnehin ein VPN verwendest!</string>
+    <string name="disable_proxy_summary">Videos und Vorschaubilder direkt von den YouTube-Servern laden. Aktiviere diese Option nur, wenn du ohnehin ein VPN verwendest!</string>
     <string name="channel_groups">Kanal-Gruppen</string>
     <string name="new_group">Neu</string>
     <string name="group_name">Gruppenname</string>
@@ -461,6 +461,6 @@
     <string name="jumped_to_highlight">Zum Video-Highlight gesprungen</string>
     <string name="category_highlight">Video-Highlight anzeigen</string>
     <string name="category_highlight_description">Kann entweder das im Titel oder Vorschaubild Beworbene oder der interessanteste Teil des Videos sein. Zu diesem Abschnitt springen, indem du ihn im Kapitelbereich antippst.</string>
-    <string name="fallback_piped_proxy">Rückgriff auf Piped Proxy</string>
+    <string name="fallback_piped_proxy">Fallback zum Piped-Proxy</string>
     <string name="fallback_piped_proxy_desc">Videos über den Proxy laden, wenn die direkte Verbindung zu YouTube für das aktuelle Video nicht funktioniert (erhöht die anfänglichen Ladezeiten). Wenn deaktiviert, werden YouTube-Musikinhalte aufgrund von YT-Einschränkungen wahrscheinlich nicht abgespielt.</string>
 </resources>
