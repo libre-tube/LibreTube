@@ -253,7 +253,7 @@
     <string name="history_size">Maximale Verlaufsgröße</string>
     <string name="resize_mode_fill">Ausfüllen</string>
     <string name="audio_video_summary">Qualität und Format</string>
-    <string name="repeat_mode_current">Aktuelles Video</string>
+    <string name="repeat_mode_current">Aktuell</string>
     <string name="mobile_data">Mobile Daten</string>
     <string name="new_videos_badge_summary">Zeigt ein Abzeichen mit der Anzahl neuer Videos an, falls vorhanden.</string>
     <string name="sb_skip_manual_summary">Abschnitte nicht automatisch überspringen, immer vorher fragen.</string>
@@ -273,7 +273,7 @@
     <string name="resize_mode_zoom">Vergrößern</string>
     <string name="repeat_mode">Endlosschleife</string>
     <string name="resize_mode_fit">Anpassen</string>
-    <string name="repeat_mode_none">Aus</string>
+    <string name="repeat_mode_none">Keine</string>
     <string name="new_videos_badge">Indikator für neue Videos</string>
     <string name="preferences">Einstellungen</string>
     <string name="backup_customInstances">Benutzerdefinierte Instanzen</string>
@@ -407,7 +407,7 @@
     <string name="subscriberAndVideoCounts">%1$s Abonnenten • %2$d Videos</string>
     <string name="disable_proxy">Piped Proxy deaktivieren</string>
     <string name="auto_fullscreen_shorts">Automatisches Vollbild bei Shorts</string>
-    <string name="disable_proxy_summary">Videos und Vorschaubilder direkt von den YouTube-Servern laden. Aktiviere diese Option nur, wenn du ohnehin einen VPN verwendest! Beachte, dass diese Option eventuell nicht mit YT Music funktioniert.</string>
+    <string name="disable_proxy_summary">Videos und Bilder direkt von den Servern von YouTube laden. Aktiviere diese Option nur, wenn du ohnehin ein VPN verwendest!</string>
     <string name="channel_groups">Kanal-Gruppen</string>
     <string name="new_group">Neu</string>
     <string name="group_name">Gruppenname</string>
@@ -447,9 +447,9 @@
     <string name="playlist_description">Wiedergabelistenbeschreibung</string>
     <string name="emptyPlaylistDescription">Die Wiedergabelistenbeschreibung darf nicht leer sein</string>
     <string name="show_search_suggestions">Suchvorschläge anzeigen</string>
-    <string name="off">Deaktivieren</string>
-    <string name="manual">Manuelles Überspringen</string>
-    <string name="automatic">Automatisches Überspringen</string>
+    <string name="off">Aus</string>
+    <string name="manual">Manuell</string>
+    <string name="automatic">Automatisch</string>
     <string name="enter_hex_value">Farb-Hex-Wert eingeben</string>
     <string name="invalid_color">Ungültiger Farbwert eingegeben!</string>
     <string name="sb_custom_colors">Benutzerdefinierte Abschnittsfarben</string>
@@ -461,4 +461,6 @@
     <string name="jumped_to_highlight">Zum Video-Highlight gesprungen</string>
     <string name="category_highlight">Video-Highlight anzeigen</string>
     <string name="category_highlight_description">Kann entweder das im Titel oder Vorschaubild Beworbene oder der interessanteste Teil des Videos sein. Zu diesem Abschnitt springen, indem du ihn im Kapitelbereich antippst.</string>
+    <string name="fallback_piped_proxy">Rückgriff auf Piped Proxy</string>
+    <string name="fallback_piped_proxy_desc">Videos über den Proxy laden, wenn die direkte Verbindung zu YouTube für das aktuelle Video nicht funktioniert (erhöht die anfänglichen Ladezeiten). Wenn deaktiviert, werden YouTube-Musikinhalte aufgrund von YT-Einschränkungen wahrscheinlich nicht abgespielt.</string>
 </resources>
