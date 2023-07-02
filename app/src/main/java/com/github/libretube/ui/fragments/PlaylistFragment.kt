@@ -247,7 +247,10 @@ class PlaylistFragment : Fragment() {
             // update the playlist thumbnail and title if bookmarked
             val playlistBookmark = DatabaseHolder.Database.playlistBookmarkDao().getAll()
                 .firstOrNull { it.playlistId == playlistId } ?: return@withContext
-            if (playlistBookmark.thumbnailUrl != playlist.thumbnailUrl || playlistBookmark.playlistName != playlist.name) {
+            if (playlistBookmark.thumbnailUrl != playlist.thumbnailUrl ||
+                playlistBookmark.playlistName != playlist.name ||
+                playlistBookmark.videos != playlist.videos
+            ) {
                 DatabaseHolder.Database.playlistBookmarkDao()
                     .update(playlist.toPlaylistBookmark(playlistBookmark.playlistId))
             }
