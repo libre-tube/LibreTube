@@ -36,9 +36,7 @@ class PlaylistBookmarkAdapter(
         }
     }
 
-    override fun getItemCount(): Int {
-        return bookmarks.size
-    }
+    override fun getItemCount() = bookmarks.size
 
     override fun onBindViewHolder(holder: PlaylistBookmarkViewHolder, position: Int) {
         val bookmark = bookmarks[position]
@@ -68,14 +66,12 @@ class PlaylistBookmarkAdapter(
         }
 
         holder.playlistsBinding?.apply {
-            // hide the count of videos inside the playlist as it's not stored in the database
-            videoCount.visibility = View.GONE
-
             var isBookmarked = true
 
             ImageHelper.loadImage(bookmark.thumbnailUrl, playlistThumbnail)
             playlistTitle.text = bookmark.playlistName
             playlistDescription.text = bookmark.uploader
+            videoCount.text = bookmark.videos.toString()
 
             bookmarkPlaylist.setOnClickListener {
                 isBookmarked = !isBookmarked

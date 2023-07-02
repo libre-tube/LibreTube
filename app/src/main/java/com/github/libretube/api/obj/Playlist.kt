@@ -23,7 +23,8 @@ data class Playlist(
             thumbnailUrl = thumbnailUrl,
             uploader = uploader,
             uploaderAvatar = uploaderAvatar,
-            uploaderUrl = uploaderUrl
+            uploaderUrl = uploaderUrl,
+            videos = videos
         )
     }
 }
