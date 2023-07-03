@@ -404,7 +404,7 @@
     <string name="subscriberAndVideoCounts">%1$s pelanggan • %2$d video</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d video</string>
     <string name="disable_proxy">Nonaktifkan proksi Piped</string>
-    <string name="disable_proxy_summary">Muat video dan gambar secara langsung dari server YouTube. Hanya aktifkan opsi ini jika Anda menggunakan VPN! Dicatat bahwa ini mungkin tidak bekerja dengan konten dari YT Music.</string>
+    <string name="disable_proxy_summary">Muat video dan gambar secara langsung dari server YouTube. Hanya aktifkan opsi ini jika Anda menggunakan VPN!</string>
     <string name="auto_fullscreen_shorts">Penuhi layar secara otomatis pada video pendek</string>
     <string name="channel_groups">Grup saluran</string>
     <string name="new_group">Baru</string>
@@ -444,9 +444,9 @@
     <string name="emptyPlaylistDescription">Deskripsi daftar putar tidak bisa kosong</string>
     <string name="change_playlist_description">Ubah deskripsi daftar putar</string>
     <string name="show_search_suggestions">Tampilkan saran pencarian</string>
-    <string name="manual">Lewati secara manual</string>
-    <string name="off">Nonaktifkan</string>
-    <string name="automatic">Lewati secara otomatis</string>
+    <string name="manual">Manual</string>
+    <string name="off">Mati</string>
+    <string name="automatic">Otomatis</string>
     <string name="sb_color_enable">Mengaktifkan segmen warna kustom untuk segmen pemblokiran sponsor</string>
     <string name="invalid_color">Nilai warna yang dimasukkan tidak valid!</string>
     <string name="visible">Tampilkan dalam bilah seek</string>
@@ -458,4 +458,6 @@
     <string name="category_highlight_description">Dapat berupa judul yang ditampilkan, gambar kecil atau bagian video yang paling menarik. Anda dapat melompati ke bagiannya dengan mengetuk pada bagian bab.</string>
     <string name="stop">Berhenti</string>
     <string name="chapters_videoHighlight">Sorotan Video</string>
+    <string name="fallback_piped_proxy">Proksi Piped sebagai cadangan</string>
+    <string name="fallback_piped_proxy_desc">Muat video melalui proksi jika menghubungkan ke YouTube secara langsung tidak berfungsi untuk video saat ini (meningkatkan waktu pemuatan awal). Jika dinonaktifkan, konten musik YouTube kemungkinan tidak akan diputar karena pembatasan YouTube.</string>
 </resources>
