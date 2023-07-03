@@ -406,7 +406,7 @@
     <string name="subscriberAndVideoCounts">%1$s ଗ୍ରାହକ • %2$d ଭିଡିଓ</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d ଭିଡିଓ</string>
     <string name="disable_proxy">ପାଇପ୍ ପ୍ରକ୍ସି ଅକ୍ଷମ କରନ୍ତୁ</string>
-    <string name="disable_proxy_summary">ସିଧାସଳଖ ୟୁଟ୍ୟୁବ୍ ସର୍ଭରରୁ ଭିଡିଓ ଏବଂ ପ୍ରତିଛବି ଲୋଡ୍ କରନ୍ତୁ । ଯଦି ଆପଣ ଯେକୌଣସି ପ୍ରକାରେ ଏକ VPN ବ୍ୟବହାର କରନ୍ତି ତେବେ କେବଳ ଏହି ବିକଳ୍ପକୁ ସକ୍ଷମ କରନ୍ତୁ! ଧ୍ୟାନ ଦିଅନ୍ତୁ ଯେ ଏହା YT ସଙ୍ଗୀତର ବିଷୟବସ୍ତୁ ସହିତ କାମ କରିନପାରେ ।</string>
+    <string name="disable_proxy_summary">ସିଧାସଳଖ ୟୁଟ୍ୟୁବ୍ ସର୍ଭରରୁ ଭିଡିଓ ଏବଂ ପ୍ରତିଛବି ଲୋଡ୍ କରନ୍ତୁ । ଯଦି ଆପଣ ଯେକୌଣସି ପ୍ରକାରେ ଏକ VPN ବ୍ୟବହାର କରନ୍ତି ତେବେ କେବଳ ଏହି ବିକଳ୍ପକୁ ସକ୍ଷମ କରନ୍ତୁ!</string>
     <string name="auto_fullscreen_shorts">ଛୋଟ ଭିଡିଓଗୁଡ଼ିକରେ ଅଟୋ ଫୁଲ୍ ସ୍କ୍ରିନ୍</string>
     <string name="new_group">ନୂତନ</string>
     <string name="group_name">ଗୋଷ୍ଠୀ ନାମ</string>
@@ -447,9 +447,9 @@
     <string name="change_playlist_description">ପ୍ଲେଲିଷ୍ଟ ବର୍ଣ୍ଣନା ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
     <string name="playlist_description">ପ୍ଲେଲିଷ୍ଟ ବର୍ଣ୍ଣନା</string>
     <string name="show_search_suggestions">ସନ୍ଧାନ ପରାମର୍ଶଗୁଡିକ ଦେଖାନ୍ତୁ</string>
-    <string name="manual">ମାନୁଆଲ୍ ସ୍କିପ୍</string>
-    <string name="automatic">ସ୍ୱୟଂଚାଳିତ ଭାବେ ଛାଡିଦିଅ</string>
-    <string name="off">ଅକ୍ଷମ କରନ୍ତୁ</string>
+    <string name="manual">ମାନୁଆଲ୍</string>
+    <string name="automatic">ସ୍ୱୟଂଚାଳିତ</string>
+    <string name="off">ବନ୍ଦ</string>
     <string name="color">ରଙ୍ଗ</string>
     <string name="sb_custom_colors">କଷ୍ଟମ୍ ସେଗମେଣ୍ଟ୍ ରଙ୍ଗ</string>
     <string name="enter_hex_value">ରଙ୍ଗ ହେକ୍ସ ମୂଲ୍ୟ ପ୍ରବେଶ କରନ୍ତୁ</string>
@@ -461,4 +461,6 @@
     <string name="visible">ସନ୍ଧାନ ବାର୍ ରେ ଦେଖାନ୍ତୁ</string>
     <string name="chapters_videoHighlight">ଭିଡିଓ ହାଇଲାଇଟ୍</string>
     <string name="stop">ବନ୍ଦ କର</string>
+    <string name="fallback_piped_proxy">ପାଇପ୍ ପ୍ରକ୍ସି କୁ ଫେରନ୍ତୁ</string>
+    <string name="fallback_piped_proxy_desc">ଯଦି YouTube କୁ ସିଧାସଳଖ ସଂଯୋଗ କରିବା ସମ୍ପ୍ରତି ଭିଡିଓ ପାଇଁ କାମ କରେ ନାହିଁ (ପ୍ରାରମ୍ଭିକ ଲୋଡିଂ ସମୟ ବୃଦ୍ଧି କରେ) ତେବେ ପ୍ରୋକ୍ସି ମାଧ୍ୟମରେ ଭିଡିଓ ଲୋଡ୍ କରନ୍ତୁ। ଯଦି ଅକ୍ଷମ ହୋଇଛି, YT ପ୍ରତିବନ୍ଧକ କାରଣରୁ YouTube ସଙ୍ଗୀତ ବିଷୟବସ୍ତୁ ସମ୍ଭବତଃ ଚାଳନ ହେବ ନାହିଁ।</string>
 </resources>

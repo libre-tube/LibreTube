@@ -410,7 +410,7 @@
     <string name="subscriberAndVideoCounts">%1$s מנויים • %2$d סרטונים</string>
     <string name="uploaderAndVideoCount">%1$s • ‏%2$d סרטונים</string>
     <string name="disable_proxy">השבתת המתווך של Piped</string>
-    <string name="disable_proxy_summary">טעינת סרטונים ותמונות ישירות מהשרתים של YouTube. יש להפעיל את האפשרות רק אם כבר יש לך VPN! נא לשים לב שזה עלול שלא לעבוד עם תוכן מ־YT Music.</string>
+    <string name="disable_proxy_summary">טעינת סרטונים ותמונות ישירות מהשרתים של YouTube. יש להפעיל את האפשרות רק אם כבר יש לך VPN!</string>
     <string name="auto_fullscreen_shorts">מסך מלא אוטומטי בסרטונים קצרים</string>
     <string name="group_name">שם הקבוצה</string>
     <string name="edit_group">עריכת קבוצה</string>
@@ -453,9 +453,9 @@
     <string name="playlist_description">תיאור רשימת נגינה</string>
     <string name="emptyPlaylistDescription">תיאור רשימת הנגינה לא יכול להיות ריק</string>
     <string name="show_search_suggestions">הצגת הצעות חיפוש</string>
-    <string name="automatic">דילוג אוטומטי</string>
-    <string name="off">השבתה</string>
-    <string name="manual">דילוג ידני</string>
+    <string name="automatic">אוטומטי</string>
+    <string name="off">כבוי</string>
+    <string name="manual">ידני</string>
     <string name="visible">הצגה בפס האיתור</string>
     <string name="enter_hex_value">נא למלא ערך הקסדצימלי של הצבע</string>
     <string name="invalid_color">ערך הצבע שנבחר שגוי!</string>
@@ -467,4 +467,5 @@
     <string name="jumped_to_highlight">קפצנו לקטע הבולט בסרטון</string>
     <string name="category_highlight_description">יכול להיות שזה הכותרת שפורסמה, התמונה הייצוגית או החלק המעניין ביותר של הסרטון. אפשר לדלג אליו בנגיעה בו בסעיף הפרקים.</string>
     <string name="stop">עצירה</string>
+    <string name="fallback_piped_proxy">נסיגה למתווך של Piped</string>
 </resources>

@@ -408,7 +408,7 @@
     <string name="subscriberAndVideoCounts">%1$s suscriptores • %2$d vídeos</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d vídeos</string>
     <string name="disable_proxy">Deshabilitar el proxy de Piped</string>
-    <string name="disable_proxy_summary">Carga vídeos e imágenes directamente desde los servidores de YouTube. Sólo activa esta opción si de todos modos utilizas una VPN. Ten en cuenta que esto podría no funcionar con contenido de YouTube Música.</string>
+    <string name="disable_proxy_summary">Carga vídeos e imágenes directamente desde los servidores de YouTube. Sólo activa esta opción si de todos modos utilizas una VPN!</string>
     <string name="auto_fullscreen_shorts">Shorts en pantalla completa</string>
     <string name="channel_groups">Grupos de canales</string>
     <string name="new_group">Nuevo</string>
@@ -450,9 +450,9 @@
     <string name="change_playlist_description">Cambiar descripción de lista de reproducción</string>
     <string name="emptyPlaylistDescription">La descripción no puede estar vacía</string>
     <string name="show_search_suggestions">Mostrar sugerencias al buscar</string>
-    <string name="manual">Omitir manual</string>
+    <string name="manual">Manual</string>
     <string name="off">Deshabilitar</string>
-    <string name="automatic">Omitir auto</string>
+    <string name="automatic">Automático</string>
     <string name="invalid_color">¡Se ha introducido un código de color inválido!</string>
     <string name="visible">Señalador</string>
     <string name="sb_color_enable">Usa los colores personalizados para los señaladores de la barra de tiempo</string>
@@ -464,4 +464,6 @@
     <string name="category_highlight">Resaltar momentos destacados</string>
     <string name="chapters_videoHighlight">Momento Destacado</string>
     <string name="stop">Detener</string>
+    <string name="fallback_piped_proxy">Regresar al proxy de Piped</string>
+    <string name="fallback_piped_proxy_desc">Cargar vídeos a través del proxy si al conectar directamente a YouTube no funciona el video en curso (aumenta el tiempo de carga inicial). Si lo deshabilitas, el contenido de YT Music probablemente no se reproduzca debido a restricciones de YouTube.</string>
 </resources>

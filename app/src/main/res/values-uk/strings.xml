@@ -410,7 +410,7 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d відео</string>
     <string name="subscriberAndVideoCounts">%1$s підписників • %2$d відео</string>
     <string name="disable_proxy">Вимкнути транспортний проксі</string>
-    <string name="disable_proxy_summary">Завантажуйте відео й зображення безпосередньо з серверів YouTube. Увімкніть цю опцію, якщо ви все одно використовуєте VPN! Зауважте, що це може не спрацювати з матеріалами з YT music.</string>
+    <string name="disable_proxy_summary">Завантажуйте відео й зображення безпосередньо з серверів YouTube. Увімкніть цю опцію, якщо ви все одно використовуєте VPN!</string>
     <string name="auto_fullscreen_shorts">Автоматичний повноекранний режим для коротких відео</string>
     <string name="new_group">Нова</string>
     <string name="edit_group">Редагувати групу</string>
@@ -453,9 +453,9 @@
     <string name="emptyPlaylistDescription">Опис добірки обов\'язковий</string>
     <string name="playlist_description">Опис добірки</string>
     <string name="show_search_suggestions">Показати пропозиції пошуку</string>
-    <string name="manual">Пропуск вручну</string>
-    <string name="off">Вимкнути</string>
-    <string name="automatic">Автопропуск</string>
+    <string name="manual">Вручну</string>
+    <string name="off">Вимкнено</string>
+    <string name="automatic">Автоматично</string>
     <string name="invalid_color">Введено недійсне значення кольору!</string>
     <string name="color">Колір</string>
     <string name="sb_color_enable">Перемикає користувацькі колірні сегменти для сегментів спонсорських блоків</string>
@@ -467,4 +467,6 @@
     <string name="category_highlight">Показати виділене у відео</string>
     <string name="chapters_videoHighlight">Виділене у відео</string>
     <string name="stop">Зупинити</string>
+    <string name="fallback_piped_proxy">Запасний варіант для Piped проксі-сервера</string>
+    <string name="fallback_piped_proxy_desc">Завантажувати відео через проксі, якщо пряме під\'єднання до YouTube не працює для поточного відео (збільшує початковий час завантаження). Якщо цю функцію вимкнено, музичний контент YouTube, ймовірно, не відтворюватиметься через обмеження YT.</string>
 </resources>
