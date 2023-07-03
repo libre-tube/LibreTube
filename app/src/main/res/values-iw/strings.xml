@@ -468,4 +468,5 @@
     <string name="category_highlight_description">יכול להיות שזה הכותרת שפורסמה, התמונה הייצוגית או החלק המעניין ביותר של הסרטון. אפשר לדלג אליו בנגיעה בו בסעיף הפרקים.</string>
     <string name="stop">עצירה</string>
     <string name="fallback_piped_proxy">נסיגה למתווך של Piped</string>
+    <string name="fallback_piped_proxy_desc">לטעון סרטונים דרך המתווך אם התחברות ישירה ל־YouTube לא עובדת לסרטון הנוכחי (מגדיל את זמני הטעינה הראשונית). אם מושבת, תוכן המוזיקה של YouTube כנראה לא ינוגן עקב מגבלות של YT.</string>
 </resources>
