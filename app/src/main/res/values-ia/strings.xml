@@ -1,2 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="library">Bibliotheca</string>
+    <string name="yes">Si</string>
+    <string name="logout">Clauder le session</string>
+    <string name="instances">Seliger…</string>
+    <string name="startpage">Initio</string>
+    <string name="subscriptions">Subscriptiones</string>
+    <string name="download">Discargar</string>
+    <string name="save">Salvar</string>
+    <string name="username">Nomine de usator</string>
+    <string name="password">Contrasigno</string>
+    <string name="login">Initiar le session</string>
+</resources>

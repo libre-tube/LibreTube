@@ -465,4 +465,5 @@
     <string name="invalid_color">Valore del colore inserito non valido!</string>
     <string name="enter_hex_value">Inserisci il valore esadecimale del colore</string>
     <string name="fallback_piped_proxy_desc">Carica i video tramite il proxy se la connessione diretta a YouTube non funziona per il video corrente (aumenta i tempi di caricamento iniziale). Se disattivato, è probabile che i contenuti musicali di YouTube non vengano riprodotti a causa delle restrizioni di YT.</string>
+    <string name="fallback_piped_proxy">Ripiega ad un proxy Piped</string>
 </resources>

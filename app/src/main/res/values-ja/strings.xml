@@ -458,4 +458,6 @@
     <string name="chapters_videoHighlight">動画のハイライト</string>
     <string name="category_highlight_description">その動画の宣伝的な題、サムネイル、または最も興味を引く部分です。チャプター欄からタップするとそこに飛びます。</string>
     <string name="stop">停止</string>
+    <string name="fallback_piped_proxy_desc">YouTubeに直接接続しても現在の動画が再生できない際に、プロキシ経由で動画を読み込みます（最初の読み込み時間は増加）。無効にすると、YTの制限によりYouTubeの音楽コンテンツが再生されないことがあります。</string>
+    <string name="fallback_piped_proxy">失敗時に Piped プロキシに接続</string>
 </resources>
