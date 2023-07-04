@@ -1100,21 +1100,21 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     /**
      * Update the displayed duration of the video
      */
-    @SuppressLint("SetTextI18n")
     private fun updateDisplayedDuration() {
-        if (exoPlayer.duration < 0 || streams.livestream || _binding == null) return
+        val duration = exoPlayer.duration / 1000
+        if (duration < 0 || streams.livestream || _binding == null) return
 
-        playerBinding.duration.text =
-            DateUtils.formatElapsedTime(exoPlayer.duration / 1000)
-        if (segments.isEmpty()) return
+        val durationWithoutSegments = duration - segments.sumOf {
+            val (start, end) = it.segmentStartAndEnd
+            end - start
+        }.toLong()
+        val durationString = DateUtils.formatElapsedTime(duration)
 
-        val durationWithSb = DateUtils.formatElapsedTime(
-            (exoPlayer.duration / 1000) - segments.sumOf {
-                val (start, end) = it.segmentStartAndEnd
-                end - start
-            }.toInt()
-        )
-        playerBinding.duration.text = playerBinding.duration.text.toString() + " ($durationWithSb)"
+        playerBinding.duration.text = if (durationWithoutSegments < duration) {
+            "$durationString (${DateUtils.formatElapsedTime(durationWithoutSegments)})"
+        } else {
+            durationString
+        }
     }
 
     private fun syncQueueButtons() {
