@@ -1104,14 +1104,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private fun updateDisplayedDuration() {
         if (exoPlayer.duration < 0 || streams.livestream || _binding == null) return
 
-        playerBinding.duration.text = DateUtils.formatElapsedTime(
-            exoPlayer.duration.div(1000)
-        )
+        playerBinding.duration.text =
+            DateUtils.formatElapsedTime(exoPlayer.duration / 1000)
         if (segments.isEmpty()) return
 
         val durationWithSb = DateUtils.formatElapsedTime(
-            exoPlayer.duration.div(1000) - segments.sumOf {
-                it.segment[1] - it.segment[0]
+            (exoPlayer.duration / 1000) - segments.sumOf {
+                val (start, end) = it.segmentStartAndEnd
+                end - start
             }.toInt()
         )
         playerBinding.duration.text = playerBinding.duration.text.toString() + " ($durationWithSb)"
@@ -1190,7 +1190,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         val highlightChapter = ChapterSegment(
             title = getString(R.string.chapters_videoHighlight),
             image = "",
-            start = highlight.segment[0].toLong(),
+            start = highlight.segmentStartAndEnd.first.toLong(),
             drawable = drawable
         )
         chapters.add(highlightChapter)

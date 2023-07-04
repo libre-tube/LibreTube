@@ -484,8 +484,8 @@ object PlayerHelper {
         sponsorBlockConfig: MutableMap<String, SbSkipOptions>
     ): Long? {
         for (segment in segments.filter { it.category != SPONSOR_HIGHLIGHT_CATEGORY }) {
-            val segmentStart = (segment.segment[0] * 1000f).toLong()
-            val segmentEnd = (segment.segment[1] * 1000f).toLong()
+            val (start, end) = segment.segmentStartAndEnd
+            val (segmentStart, segmentEnd) = (start * 1000f).toLong() to (end * 1000f).toLong()
 
             // avoid seeking to the same segment multiple times, e.g. when the SB segment is at the end of the video
             if ((duration - currentPosition).absoluteValue < 500) continue
@@ -507,15 +507,12 @@ object PlayerHelper {
         return null
     }
 
-    fun ExoPlayer.isInSegment(
-        segments: List<Segment>
-    ): Boolean {
-        for (segment in segments) {
-            val segmentStart = (segment.segment[0] * 1000f).toLong()
-            val segmentEnd = (segment.segment[1] * 1000f).toLong()
-            if (currentPosition in segmentStart..segmentEnd) return true
+    fun ExoPlayer.isInSegment(segments: List<Segment>): Boolean {
+        return segments.any {
+            val (start, end) = it.segmentStartAndEnd
+            val (segmentStart, segmentEnd) = (start * 1000f).toLong() to (end * 1000f).toLong()
+            currentPosition in segmentStart..segmentEnd
         }
-        return false
     }
 
     /**
