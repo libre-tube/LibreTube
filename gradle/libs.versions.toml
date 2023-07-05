@@ -20,7 +20,7 @@ room = "2.5.2"
 kotlinxSerialization = "1.5.1"
 kotlinxDatetime = "0.4.0"
 kotlinxRetrofit = "1.0.0"
-media3 = "1.0.2"
+media3 = "1.1.0"
 
 [libraries]
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
