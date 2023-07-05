@@ -408,7 +408,7 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d vídeos</string>
     <string name="subscriberAndVideoCounts">%1$s subscritores • %2$d vídeos</string>
     <string name="disable_proxy">Desativar proxy Piped</string>
-    <string name="disable_proxy_summary">Carregar vídeos e imagens diretamente dos servidores YouTube. Apenas deve ativar está opção se estiver a utilizar uma VPN! Esta opção pode não funcionar com conteúdo de música YT.</string>
+    <string name="disable_proxy_summary">Carregue vídeos e imagens diretamente dos servidores do YouTube. Só active a opção se utilizar uma VPN!</string>
     <string name="auto_fullscreen_shorts">Ecrã completo automático em vídeos curtos</string>
     <string name="channel_groups">Grupos de canais</string>
     <string name="new_group">Novo</string>
@@ -450,9 +450,9 @@
     <string name="change_playlist_description">Alterar descrição da lista de reprodução</string>
     <string name="playlist_description">Descrição da lista de reprodução</string>
     <string name="emptyPlaylistDescription">A descrição da lista de reprodução não pode estar vazia</string>
-    <string name="off">Desativar</string>
-    <string name="manual">Ignorar manualmente</string>
-    <string name="automatic">Ignorar automaticamente</string>
+    <string name="off">Desligado</string>
+    <string name="manual">Manual</string>
+    <string name="automatic">Automático</string>
     <string name="invalid_color">Indicou um código de cor inválido!</string>
     <string name="enter_hex_value">Indique o valor Hex da cor</string>
     <string name="color">Cor</string>
@@ -464,4 +464,6 @@
     <string name="category_highlight">Mostrar vídeo de destaque</string>
     <string name="category_highlight_description">Pode ser o título anunciado, a miniatura ou a parte mais interessante do vídeo. Pode saltar para essa parte tocando nela na secção de capítulos.</string>
     <string name="sb_color_enable">Alterna segmentos de cores personalizadas para segmentos de blocos de patrocinadores</string>
+    <string name="fallback_piped_proxy">Retornar para Piped proxy</string>
+    <string name="fallback_piped_proxy_desc">Carrega vídeos através do proxy se a ligação ao YouTube diretamente não funcionar para o vídeo atual (aumenta o tempo de carregamento inicial). Se estiver desativado, é provável que o conteúdo musical do YouTube não seja reproduzido devido a restrições do YT.</string>
 </resources>
