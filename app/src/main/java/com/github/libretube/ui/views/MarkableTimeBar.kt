@@ -48,11 +48,13 @@ class MarkableTimeBar(
         val themeColor = ThemeHelper.getThemeColor(context, R.attr.colorOnSecondary)
 
         segments.forEach {
+            val (start, end) = it.segmentStartAndEnd
+
             canvas.drawRect(
                 Rect(
-                    it.segment.first().toLength() + horizontalOffset,
+                    start.toLength() + horizontalOffset,
                     marginY,
-                    it.segment.last().toLength() + horizontalOffset,
+                    end.toLength() + horizontalOffset,
                     canvas.height - marginY
                 ),
                 Paint().apply {

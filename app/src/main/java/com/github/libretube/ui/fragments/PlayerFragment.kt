@@ -1100,21 +1100,21 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     /**
      * Update the displayed duration of the video
      */
-    @SuppressLint("SetTextI18n")
     private fun updateDisplayedDuration() {
-        if (exoPlayer.duration < 0 || streams.livestream || _binding == null) return
+        val duration = exoPlayer.duration / 1000
+        if (duration < 0 || streams.livestream || _binding == null) return
 
-        playerBinding.duration.text = DateUtils.formatElapsedTime(
-            exoPlayer.duration.div(1000)
-        )
-        if (segments.isEmpty()) return
+        val durationWithoutSegments = duration - segments.sumOf {
+            val (start, end) = it.segmentStartAndEnd
+            end - start
+        }.toLong()
+        val durationString = DateUtils.formatElapsedTime(duration)
 
-        val durationWithSb = DateUtils.formatElapsedTime(
-            exoPlayer.duration.div(1000) - segments.sumOf {
-                it.segment[1] - it.segment[0]
-            }.toInt()
-        )
-        playerBinding.duration.text = playerBinding.duration.text.toString() + " ($durationWithSb)"
+        playerBinding.duration.text = if (durationWithoutSegments < duration) {
+            "$durationString (${DateUtils.formatElapsedTime(durationWithoutSegments)})"
+        } else {
+            durationString
+        }
     }
 
     private fun syncQueueButtons() {
@@ -1190,7 +1190,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         val highlightChapter = ChapterSegment(
             title = getString(R.string.chapters_videoHighlight),
             image = "",
-            start = highlight.segment[0].toLong(),
+            start = highlight.segmentStartAndEnd.first.toLong(),
             drawable = drawable
         )
         chapters.add(highlightChapter)
