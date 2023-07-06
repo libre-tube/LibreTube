@@ -55,10 +55,8 @@ class InstanceSettings : BasePreferenceFragment() {
             }
         }
 
-        instancePref.setOnPreferenceChangeListener { _, newValue ->
-            RetrofitInstance.url = newValue.toString()
+        instancePref.setOnPreferenceChangeListener { _, _ ->
             if (!authInstanceToggle.isChecked) {
-                RetrofitInstance.authUrl = newValue.toString()
                 logoutAndUpdateUI()
             }
             RetrofitInstance.lazyMgr.reset()
@@ -66,21 +64,13 @@ class InstanceSettings : BasePreferenceFragment() {
             true
         }
 
-        authInstance.setOnPreferenceChangeListener { _, newValue ->
-            // save new auth url
-            RetrofitInstance.authUrl = newValue.toString()
+        authInstance.setOnPreferenceChangeListener { _, _ ->
             RetrofitInstance.lazyMgr.reset()
             logoutAndUpdateUI()
             true
         }
 
-        authInstanceToggle.setOnPreferenceChangeListener { _, newValue ->
-            // either use new auth url or the normal api url if auth instance disabled
-            RetrofitInstance.authUrl = if (newValue == false) {
-                RetrofitInstance.url
-            } else {
-                authInstance.value
-            }
+        authInstanceToggle.setOnPreferenceChangeListener { _, _ ->
             RetrofitInstance.lazyMgr.reset()
             logoutAndUpdateUI()
             true

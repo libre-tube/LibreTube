@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.core.view.isGone
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
+import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.ActivityWelcomeBinding
 import com.github.libretube.helpers.BackupHelper
@@ -31,7 +32,8 @@ class WelcomeActivity : BaseActivity() {
                 BackupHelper.restoreAdvancedBackup(this@WelcomeActivity, uri)
 
                 // only skip the welcome activity if the restored backup contains an instance
-                if (PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, "").isNotEmpty()) {
+                val instancePref = PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, "")
+                if (instancePref.isNotEmpty()) {
                     withContext(Dispatchers.Main) { startMainActivity() }
                 }
             }
@@ -72,6 +74,8 @@ class WelcomeActivity : BaseActivity() {
     }
 
     private fun startMainActivity() {
+        // refresh the api urls since they have changed likely
+        RetrofitInstance.lazyMgr.reset()
         val mainActivityIntent = Intent(this@WelcomeActivity, MainActivity::class.java)
         startActivity(mainActivityIntent)
         finish()

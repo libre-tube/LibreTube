@@ -9,8 +9,19 @@ import retrofit2.Retrofit
 import retrofit2.create
 
 object RetrofitInstance {
-    lateinit var url: String
-    lateinit var authUrl: String
+    private val url get() = PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, PIPED_API_URL)
+    private val authUrl
+        get() = when (PreferenceHelper.getBoolean(
+            PreferenceKeys.AUTH_INSTANCE_TOGGLE,
+            false
+        )) {
+            true -> PreferenceHelper.getString(
+                PreferenceKeys.AUTH_INSTANCE,
+                PIPED_API_URL
+            )
+            false -> url
+        }
+
     val lazyMgr = resettableManager()
     private val kotlinxConverterFactory = JsonHelper.json
         .asConverterFactory("application/json".toMediaType())
@@ -40,28 +51,5 @@ object RetrofitInstance {
             .addConverterFactory(kotlinxConverterFactory)
             .build()
             .create<ExternalApi>()
-    }
-
-    /**
-     * Set the api urls needed for the [RetrofitInstance]
-     */
-    fun initialize() {
-        url =
-            PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, PIPED_API_URL)
-        // set auth instance
-        authUrl =
-            if (
-                PreferenceHelper.getBoolean(
-                    PreferenceKeys.AUTH_INSTANCE_TOGGLE,
-                    false
-                )
-            ) {
-                PreferenceHelper.getString(
-                    PreferenceKeys.AUTH_INSTANCE,
-                    PIPED_API_URL
-                )
-            } else {
-                url
-            }
     }
 }
