@@ -65,6 +65,7 @@ class LoginDialog(
 
     private fun signIn(username: String, password: String, createNewAccount: Boolean = false) {
         val login = Login(username, password)
+        Log.e("url", RetrofitInstance.authUrl)
         lifecycleScope.launch(Dispatchers.IO) {
             val response = try {
                 if (createNewAccount) {
