@@ -33,7 +33,6 @@ class LibreTubeApp : Application() {
         /**
          * Set the api and the auth api url
          */
-        RetrofitInstance.initialize()
         ImageHelper.initializeImageLoader(this)
 
         /**

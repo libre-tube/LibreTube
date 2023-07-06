@@ -75,7 +75,6 @@ class WelcomeActivity : BaseActivity() {
 
     private fun startMainActivity() {
         // refresh the api urls since they have changed likely
-        RetrofitInstance.initialize()
         RetrofitInstance.lazyMgr.reset()
         val mainActivityIntent = Intent(this@WelcomeActivity, MainActivity::class.java)
         startActivity(mainActivityIntent)
