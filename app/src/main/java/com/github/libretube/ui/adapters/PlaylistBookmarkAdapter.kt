@@ -56,7 +56,7 @@ class PlaylistBookmarkAdapter(
             root.setOnLongClickListener {
                 PlaylistOptionsBottomSheet(
                     playlistId = bookmark.playlistId,
-                    playlistName = bookmark.playlistName ?: "",
+                    playlistName = bookmark.playlistName.orEmpty(),
                     playlistType = PlaylistType.PUBLIC
                 ).show(
                     (root.context as AppCompatActivity).supportFragmentManager
@@ -100,7 +100,7 @@ class PlaylistBookmarkAdapter(
             root.setOnLongClickListener {
                 PlaylistOptionsBottomSheet(
                     playlistId = bookmark.playlistId,
-                    playlistName = bookmark.playlistName ?: "",
+                    playlistName = bookmark.playlistName.orEmpty(),
                     playlistType = PlaylistType.PUBLIC
                 ).show(
                     (root.context as AppCompatActivity).supportFragmentManager

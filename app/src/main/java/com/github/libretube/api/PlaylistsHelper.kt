@@ -145,7 +145,7 @@ object PlaylistsHelper {
             // set a new playlist thumbnail if the first video got removed
             if (index == 0) {
                 transaction.playlist.thumbnailUrl =
-                    transaction.videos.getOrNull(1)?.thumbnailUrl ?: ""
+                    transaction.videos.getOrNull(1)?.thumbnailUrl.orEmpty()
             }
             DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(transaction.playlist)
             true

@@ -290,7 +290,7 @@ class PlaylistFragment : Fragment() {
             override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
                 if (positionStart == 0) {
                     ImageHelper.loadImage(
-                        playlistFeed.firstOrNull()?.thumbnail ?: "",
+                        playlistFeed.firstOrNull()?.thumbnail.orEmpty(),
                         binding.thumbnail
                     )
                 }

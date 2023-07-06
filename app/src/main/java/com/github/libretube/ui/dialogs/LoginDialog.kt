@@ -75,7 +75,7 @@ class LoginDialog(
             } catch (e: HttpException) {
                 val errorMessage = e.response()?.errorBody()?.string()?.runCatching {
                     JsonHelper.json.decodeFromString<Token>(this).error
-                }?.getOrNull() ?: context?.getString(R.string.server_error) ?: ""
+                }?.getOrNull() ?: context?.getString(R.string.server_error).orEmpty()
                 context?.toastFromMainDispatcher(errorMessage)
                 return@launch
             } catch (e: Exception) {

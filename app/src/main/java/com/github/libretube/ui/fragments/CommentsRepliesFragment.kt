@@ -81,7 +81,7 @@ class CommentsRepliesFragment : Fragment() {
             }
         }
 
-        loadInitialReplies(videoId, comment.repliesPage ?: "", repliesAdapter)
+        loadInitialReplies(videoId, comment.repliesPage.orEmpty(), repliesAdapter)
     }
 
     override fun onDestroyView() {
