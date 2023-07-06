@@ -72,7 +72,7 @@ class OnlinePlayerService : LifecycleService() {
      * The [ExoPlayer] player. Followed tutorial [here](https://developer.android.com/codelabs/exoplayer-intro)
      */
     var player: ExoPlayer? = null
-    private var playWhenReadyPlayer = true
+    private var isTransitioning = true
 
     /**
      * SponsorBlock Segment data
@@ -162,6 +162,7 @@ class OnlinePlayerService : LifecycleService() {
      */
     private fun loadAudio(playerData: PlayerData) {
         val (videoId, _, _, keepQueue, timestamp) = playerData
+        isTransitioning = true
 
         lifecycleScope.launch(Dispatchers.IO) {
             streams = runCatching {
@@ -205,7 +206,7 @@ class OnlinePlayerService : LifecycleService() {
         streams?.let { onNewVideo?.invoke(it, videoId) }
 
         player?.apply {
-            playWhenReady = playWhenReadyPlayer
+            playWhenReady = true
             prepare()
         }
 
@@ -255,7 +256,7 @@ class OnlinePlayerService : LifecycleService() {
             override fun onPlaybackStateChanged(state: Int) {
                 when (state) {
                     Player.STATE_ENDED -> {
-                        if (PlayerHelper.autoPlayEnabled) playNextVideo()
+                        if (PlayerHelper.autoPlayEnabled && !isTransitioning) playNextVideo()
                     }
 
                     Player.STATE_IDLE -> {
@@ -263,7 +264,9 @@ class OnlinePlayerService : LifecycleService() {
                     }
 
                     Player.STATE_BUFFERING -> {}
-                    Player.STATE_READY -> {}
+                    Player.STATE_READY -> {
+                        isTransitioning = false
+                    }
                 }
             }
 
