@@ -257,7 +257,8 @@
                 <ImageView
                     android:id="@+id/chapters"
                     style="@style/AudioPlayerButton"
-                    android:src="@drawable/ic_frame" />
+                    android:src="@drawable/ic_frame"
+                    android:visibility="gone"/>
 
             </LinearLayout>
 

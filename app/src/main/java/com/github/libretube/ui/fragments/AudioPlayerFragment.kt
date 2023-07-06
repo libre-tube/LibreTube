@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
@@ -162,18 +163,10 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
 
         binding.chapters.setOnClickListener {
             val playerService = playerService ?: return@setOnClickListener
-            if (playerService.streams == null || playerService.player == null) return@setOnClickListener
+            val streams = playerService.streams ?: return@setOnClickListener
+            val player = playerService.player ?: return@setOnClickListener
 
-            if (playerService.streams!!.chapters.isEmpty()) {
-                Toast.makeText(context, R.string.emptyList, Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            PlayerHelper.showChaptersDialog(
-                requireContext(),
-                playerService.streams!!.chapters,
-                playerService.player!!
-            )
+            PlayerHelper.showChaptersDialog(requireContext(), streams.chapters, player)
         }
 
         binding.miniPlayerClose.setOnClickListener {
@@ -325,6 +318,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         }
         playerService?.onNewVideo = { streams, videoId ->
             updateStreamInfo(streams.toStreamItem(videoId))
+            _binding?.chapters?.isVisible = streams.chapters.isNotEmpty()
         }
         initializeSeekBar()
     }
