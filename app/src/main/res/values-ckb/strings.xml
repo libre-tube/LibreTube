@@ -378,7 +378,7 @@
     <string name="background_channel_name">دۆخی لێدان لە پشت شاشە</string>
     <string name="go_to_video">چوون بۆ ڤیدیۆ</string>
     <string name="disable_proxy">ناچالاککردنی پرۆکسی Pipe</string>
-    <string name="disable_proxy_summary">هێنانی ڤیدیۆ و وێنەکان ڕاستەوخۆ لە سێرڤەرەکانی یوتوبەوە، تەنها کاتێ ئەمە کارابکە کە VPN بەکاربهێنیت! تێبینی بکە کە ڕەنگە ئەمە لەگەڵ ناوەڕۆکی مۆسیقای یوتوب YT کار نەکات.</string>
+    <string name="disable_proxy_summary">هێنانی ڤیدیۆ و وێنەکان ڕاستەوخۆ لە سێرڤەرەکانی یوتوبەوە، تەنها کاتێ ئەمە کارابکە کە VPN بەکاربهێنیت!</string>
     <plurals name="years_ago">
         <item quantity="one">%d ساڵ لەمەوپێس</item>
         <item quantity="other">%d ساڵ لەمەوپێش</item>
@@ -450,15 +450,17 @@
     <string name="sb_custom_colors">ڕەنگی تایبەتی نیشانەکردن</string>
     <string name="color">ڕەنگ</string>
     <string name="enter_hex_value">بەهای تایبەتی ڕەنگ بنوسە</string>
-    <string name="manual">پەڕاندنی دەستی</string>
+    <string name="manual">دەستی</string>
     <string name="sb_color_enable">پیشاندانی ڕەنگی تایبەت بۆ بەشە باندکراوەکانی سپۆنسەر</string>
     <string name="invalid_color">بەهایەکی نادروستی ڕەنگ نوسراوە!</string>
     <string name="off">نا چالاک</string>
     <string name="visible">پیشاندان لەبەشی خوارەوە</string>
-    <string name="automatic">پەڕاندنی خۆکار</string>
+    <string name="automatic">خۆکاری</string>
     <string name="chapters_videoHighlight">بەشەکانی ڤیدیۆ</string>
     <string name="jumped_to_highlight">چوون بۆ بەشە دیاریکراوەکان</string>
     <string name="category_highlight">پیشاندانی بەشە دیاریکراوەکان</string>
     <string name="category_highlight_description">دەکرێت یان ناونیشانی ڕیکلامکراو بێت، وێنە بچووکەکە یان سەرنجڕاکێشترین بەش لە ڤیدیۆکەدا. دەتوانیت بەسەریدا تێپەڕیت بە لێدانی لەسەری لە بەشی بابەتەکاندا.</string>
     <string name="stop">وەستاندن</string>
+    <string name="fallback_piped_proxy">گەڕانەوە بۆ پرۆکسی Piped</string>
+    <string name="fallback_piped_proxy_desc">هێنانی ڤیدیۆکان لە ڕێی پرۆکسیەوە ئەگەر پەیوەندیکردن بە یوتوب ڕاستەوخۆ بۆ ڤیدیۆی ئێستا کارنەکات (کاتەکانی بارکردنی سەرەتایی زیاد دەکات)، ئەگەر لەکاربخرێت، پێدەچێت ناوەڕۆکی مۆسیقای یوتوب بەهۆی سنووردارکردنی YTەوە لێنەدرێت.</string>
 </resources>
