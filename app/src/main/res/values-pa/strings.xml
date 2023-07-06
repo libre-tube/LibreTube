@@ -408,7 +408,7 @@
     <string name="fullscreen_gestures">ਫੁਲਸਕ੍ਰੀਨ ਸੰਕੇਤਾਂ ਵਿੱਚ ਦਾਖਲ/ਬਾਹਰ ਜਾਓ</string>
     <string name="go_to_video">ਵੀਡੀਓ \'ਤੇ ਜਾਓ</string>
     <string name="disable_proxy">ਪਾਈਪਡ ਪਰੌਕਸੀ ਖਾਰਿਜ ਕਰੋ</string>
-    <string name="disable_proxy_summary">YouTube ਦੇ ਸਰਵਰਾਂ ਤੋਂ ਸਿੱਧੇ ਵੀਡੀਓ ਅਤੇ ਚਿੱਤਰ ਲੋਡ ਕਰੋ। ਜੇਕਰ ਤੁਸੀਂ ਫਿਰ ਵੀ VPN ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋ ਤਾਂ ਹੀ ਵਿਕਲਪ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ! ਨੋਟ ਕਰੋ ਕਿ ਹੋ ਸਕਦਾ ਹੈ ਕਿ ਇਹ YT ਸੰਗੀਤ ਦੀ ਸਮੱਗਰੀ ਨਾਲ ਕੰਮ ਨਾ ਕਰੇ।</string>
+    <string name="disable_proxy_summary">YouTube ਦੇ ਸਰਵਰਾਂ ਤੋਂ ਸਿੱਧੇ ਵੀਡੀਓ ਅਤੇ ਚਿੱਤਰ ਲੋਡ ਕਰੋ। ਜੇਕਰ ਤੁਸੀਂ ਫਿਰ ਵੀ VPN ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋ ਤਾਂ ਹੀ ਵਿਕਲਪ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ!</string>
     <string name="new_group">ਨਵਾਂ</string>
     <string name="group_name">ਗਰੁੱਪ ਨਾਮ</string>
     <plurals name="channel_new_streams">
@@ -449,11 +449,18 @@
     <string name="sb_color_enable">ਸਪਾਂਸਰ ਬਲਾਕ ਸੈਗਮੈਂਟਾਂ ਲਈ ਪਸੰਦੀਦਾ ਰੰਗਦਾਰ ਹਿੱਸਿਆਂ ਨੂੰ ਟੌਗਲ ਕਰਦਾ ਹੈ</string>
     <string name="sb_custom_colors">ਕਸਟਮ ਸੈਗਮੈਂਟ ਰੰਗ</string>
     <string name="invalid_color">ਅਵੈਧ ਰੰਗ ਵੈਲਿਯੂ ਦਾਖਲ ਕੀਤੀ ਗਈ!</string>
-    <string name="off">ਅਸਮਰੱਥ ਕਰੋ</string>
-    <string name="manual">ਹੱਥਾਂ ਨਾਲ ਸਕਿੱਪ</string>
-    <string name="automatic">ਆਟੋ ਸਕਿੱਪ</string>
+    <string name="off">ਆਫ</string>
+    <string name="manual">ਮੈਨੂਅਲ</string>
+    <string name="automatic">ਆਟੋਮੈਟਿਕ</string>
     <string name="color">ਰੰਗ</string>
     <string name="enter_hex_value">ਰੰਗ ਹੈਕਸ ਵੈਲਿਯੂ ਦਰਜ਼ ਕਰੋ</string>
     <string name="visible">ਸੀਕ ਬਾਰ ਵਿੱਚ ਵਿਖਾਓ</string>
     <string name="show_search_suggestions">ਖੋਜ ਸੁਝਾਅ ਵਿਖਾਓ</string>
+    <string name="chapters_videoHighlight">ਵੀਡੀਓ ਹਾਈਲਾਈਟ</string>
+    <string name="fallback_piped_proxy">ਪਾਈਪਡ ਪਰਾਕਸੀ ਤੇ ਫਾਲਬੈਕ ਕਰੋ</string>
+    <string name="fallback_piped_proxy_desc">ਪਰਾਕਸੀ ਰਾਹੀਂ ਵੀਡੀਓ ਲੋਡ ਕਰੋ ਜੇਕਰ YouTube ਨਾਲ ਸਿੱਧੇ ਤੌਰ \'ਤੇ ਕਨੈਕਟ ਕਰਨਾ ਵਰਤਮਾਨ ਵੀਡੀਓ ਲਈ ਕੰਮ ਨਹੀਂ ਕਰਦਾ (ਸ਼ੁਰੂਆਤੀ ਲੋਡਿੰਗ ਸਮੇਂ ਨੂੰ ਵਧਾਉਂਦਾ ਹੈ)। ਜੇਕਰ ਅਸਮਰੱਥ ਕੀਤਾ ਗਿਆ ਹੋਵੇ, ਤਾਂ YT ਪਾਬੰਦੀਆਂ ਕਰਕੇ YouTube ਸੰਗੀਤ ਸਮੱਗਰੀ ਦੇ ਚੱਲਣ ਦੀ ਸੰਭਾਵਨਾ ਨਹੀਂ ਹੈ।</string>
+    <string name="stop">ਰੁਕੋ</string>
+    <string name="jumped_to_highlight">ਵੀਡੀਓ ਹਾਈਲਾਈਟ \'ਤੇ ਜੰਪ ਕੀਤਾ</string>
+    <string name="category_highlight">ਵੀਡੀਓ ਹਾਈਲਾਈਟ ਵੇਖੋ</string>
+    <string name="category_highlight_description">ਜਾਂ ਤਾਂ ਵਿਗਿਆਪਨ ਕੀਤਾ ਸਿਰਲੇਖ, ਥੰਮਨੇਲ ਜਾਂ ਵੀਡੀਓ ਦਾ ਸਭ ਤੋਂ ਦਿਲਚਸਪ ਭਾਗ ਹੋ ਸਕਦਾ ਹੈ। ਤੁਸੀਂ ਚੈਪਟਰ ਭਾਗ ਵਿੱਚ ਇਸ \'ਤੇ ਟੈਪ ਕਰਕੇ ਇਸ \'ਤੇ ਜਾ ਸਕਦੇ ਹੋ।</string>
 </resources>

@@ -407,7 +407,7 @@
     <string name="lbry_hls_summary">Pro streamování použít LBRY HLS, pokud je k dispozici.</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d videí</string>
     <string name="subscriberAndVideoCounts">%1$s odběratelů • %2$d videí</string>
-    <string name="disable_proxy_summary">Načítat videa a obrázky přímo ze serverů YouTube. Tuto možnost povolte pouze v případě, že stejně používáte VPN! Upozorňujeme, že tato funkce nemusí fungovat u obsahu z YT Music.</string>
+    <string name="disable_proxy_summary">Načítat videa a obrázky přímo ze serverů YouTube. Tuto možnost povolte pouze v případě, že stejně používáte VPN!</string>
     <string name="disable_proxy">Zakázat proxy přes Piped</string>
     <string name="auto_fullscreen_shorts">Automatická celá obrazovka u Shorts</string>
     <string name="new_group">Nová</string>
@@ -450,9 +450,9 @@
     <string name="emptyPlaylistDescription">Popis playlistu nemůže být prázdný</string>
     <string name="change_playlist_description">Změnit popis playlistu</string>
     <string name="show_search_suggestions">Zobrazit návrhy vyhledávání</string>
-    <string name="off">Zakázat</string>
-    <string name="manual">Ruční přeskočení</string>
-    <string name="automatic">Automatické přeskočení</string>
+    <string name="off">Vypnuto</string>
+    <string name="manual">Ruční</string>
+    <string name="automatic">Automatické</string>
     <string name="sb_color_enable">Přepne vlastní barvu segmentů pro segmenty SponsorBlock</string>
     <string name="sb_custom_colors">Vlastní barvy segmentů</string>
     <string name="color">Barva</string>
@@ -464,4 +464,6 @@
     <string name="chapters_videoHighlight">Zvýraznění videa</string>
     <string name="jumped_to_highlight">Přeskočeno na zvýraznění videa</string>
     <string name="category_highlight_description">Může to být inzerovaný název, miniatura nebo nejzajímavější část videa. Můžete na ni přejít klepnutím v sekci kapitol.</string>
+    <string name="fallback_piped_proxy">Fallback na proxy Piped</string>
+    <string name="fallback_piped_proxy_desc">Načítat videa přes proxy server, pokud přímé připojení k YouTube nefunguje pro aktuální video (zvyšuje počáteční dobu načítání). Pokud je vypnuto, hudební obsah YouTube se pravděpodobně nebude přehrávat kvůli omezením YT.</string>
 </resources>

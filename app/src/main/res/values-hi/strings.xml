@@ -77,7 +77,7 @@
     <string name="music_playlists">वाईटी संगीत पलेलिसटें</string>
     <string name="music_songs">वाईटी संगीत गानें</string>
     <string name="category_selfpromo_description">अवैतनिक या स्वयं प्रचार को छोड़कर \"प्रायोजक\" के समान। इसमें मर्चेंडाइज, दान या उन लोगों के बारे में जानकारी शामिल है जिनके साथ उन्होंने सहयोग किया है।</string>
-    <string name="category_interaction">इंटरेक्शन रिमाइंडर (लाइक और सब्सक्राइब)</string>
+    <string name="category_interaction">इंटरेक्शन रिमाइंडर</string>
     <string name="category_music_offtopic_description">केवल संगीत वीडियो में उपयोग के लिए। इसमें वीडियो के कुछ हिस्से शामिल होने चाहिए जो आधिकारिक मिक्स का हिस्सा नहीं हैं। अंत में, वीडियो को Spotify या किसी अन्य मिश्रित संस्करण के जितना संभव हो उतना करीब से मिलना चाहिए, या बात करने या अन्य विकर्षणों को कम करना चाहिए।</string>
     <string name="network_metered">मीटर किए गए</string>
     <string name="play_next">अगला चलाएं</string>
@@ -120,7 +120,7 @@
     <string name="export_subscriptions">सब्सक्रिप्शनें निर्यात करें</string>
     <string name="history_size">अधिकतम इतिहास आकार</string>
     <string name="unlimited">असीमित</string>
-    <string name="background_mode">पृष्ठभूमि मोड</string>
+    <string name="background_mode">बैकग्राउंड मोड</string>
     <string name="add_to_queue">क़तार में जोड़ें</string>
     <string name="misc">विविध</string>
     <string name="take_a_break">ब्रेक लेने का समय</string>
@@ -225,7 +225,7 @@
     <string name="bookmark">बुकमार्क</string>
     <string name="bookmarks">बुकमार्कस</string>
     <string name="clear_bookmarks">बुकमार्कस मिटाएं</string>
-    <string name="background_channel_name">पृष्ठभूमि मोड</string>
+    <string name="background_channel_name">बैकग्राउंड मोड</string>
     <string name="local_playlists">स्थानीय प्लेलिस्ट</string>
     <string name="volume">ध्वनि</string>
     <string name="auto">ऑटो</string>
@@ -406,7 +406,7 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d वीडियोज</string>
     <string name="subscriberAndVideoCounts">%1$s सब्सक्राइबर • %2$d वीडियोज</string>
     <string name="disable_proxy">Piped proxy अक्षम करें</string>
-    <string name="disable_proxy_summary">YouTube के सर्वर से सीधे वीडियो और चित्र लोड करें। यदि आप वैसे भी VPN का उपयोग करते हैं तो ही विकल्प को सक्षम करें! ध्यान दें कि यह YT music की सामग्री के साथ काम नहीं कर सकता है।</string>
+    <string name="disable_proxy_summary">YouTube के सर्वर से सीधे वीडियो और चित्र लोड करें। यदि आप वैसे भी VPN का उपयोग करते हैं तो ही विकल्प को सक्षम करें!</string>
     <string name="auto_fullscreen_shorts">शॉर्ट वीडियो पर ऑटो फुलस्क्रीन</string>
     <string name="fullscreen_gestures">फ़ुलस्क्रीन में वीडियो देखने/उससे बाहर निकलने के जेस्चर</string>
     <string name="go_to_video">वीडियो पर जाएं</string>
@@ -446,4 +446,21 @@
     <string name="change_playlist_description">प्लेलिस्ट विवरण बदलें</string>
     <string name="playlist_description">प्लेलिस्ट विवरण</string>
     <string name="emptyPlaylistDescription">प्लेलिस्ट विवरण रिक्त नहीं हो सकता</string>
+    <string name="manual">हस्तचालित</string>
+    <string name="automatic">स्वचालित</string>
+    <string name="off">बंद</string>
+    <string name="sb_color_enable">स्पांसर ब्लॉक सेगमेंट के लिए कस्टम रंग सेगमेंट टॉगल</string>
+    <string name="sb_custom_colors">कस्टम सेगमेंट रंग</string>
+    <string name="enter_hex_value">रंग हेक्स मान दर्ज करें</string>
+    <string name="visible">सीक बार में दिखाएँ</string>
+    <string name="fallback_piped_proxy">पाइप्ड प्रॉक्सी पर फॉलबैक</string>
+    <string name="fallback_piped_proxy_desc">प्रॉक्सी के माध्यम से वीडियो लोड करें यदि सीधे YouTube से कनेक्ट करना वर्तमान वीडियो के लिए काम नहीं करता है (प्रारंभिक लोडिंग समय बढ़ाता है)। यदि अक्षम किया जाता है, तो YT प्रतिबंधों के कारण YouTube संगीत सामग्री नहीं चलेगी।</string>
+    <string name="chapters_videoHighlight">वीडियो हाइलाइट</string>
+    <string name="stop">रुको</string>
+    <string name="color">रंग</string>
+    <string name="jumped_to_highlight">वीडियो हाइलाइट पर आ चुके</string>
+    <string name="category_highlight">वीडियो हाइलाइट दिखाएँ</string>
+    <string name="category_highlight_description">या तो विज्ञापित शीर्षक, थंबनेल या वीडियो का सबसे दिलचस्प हिस्सा हो सकता है। आप अध्याय अनुभाग में इस पर टैप करके इसे छोड़ सकते हैं।</string>
+    <string name="invalid_color">अमान्य रंग मान दर्ज किया गया!</string>
+    <string name="show_search_suggestions">खोज सुझाव दिखाएं</string>
 </resources>
