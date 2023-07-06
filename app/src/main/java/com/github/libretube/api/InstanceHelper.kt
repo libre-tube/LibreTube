@@ -22,8 +22,6 @@ object InstanceHelper {
                 throw Exception(context.getString(R.string.failed_fetching_instances))
             }
         }
-            .sortedBy { it.name }
-            .toMutableList()
     }
 
     fun getInstancesFallback(context: Context): List<Instances> {
