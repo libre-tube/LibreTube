@@ -81,7 +81,7 @@
     <string name="category_sponsor_description">Fizetett promóciók, fizetett ajánlások és közvetlen hirdetések. Nem önreklámozás, vagy ingyenes elismerés ügyek, alkotók, honlapok, vagy termékek számára.</string>
     <string name="category_selfpromo">Nem fizetett/önpromóció</string>
     <string name="category_selfpromo_description">Hasonló a szponzorhoz, kivéve, hogy nem fizetett vagy önpromóció. Ide tartoznak az árucikkekről, adományokról szóló részek, vagy információk arról, hogy kivel működtek együtt.</string>
-    <string name="category_interaction">Interakció emlékeztető (lájk és feliratkozás)</string>
+    <string name="category_interaction">Interakció emlékeztető</string>
     <string name="category_interaction_description">Amikor a tartalom közepén egy rövid emlékeztető van a lájkolásról, követésről vagy feliratkozásról. Ha hosszú vagy valami konkrét dologról szól, akkor az inkább önpromóció.</string>
     <string name="category_intro">Szünet/bevezető animáció</string>
     <string name="category_intro_description">Egy tényleges tartalom nélküli rész. Lehet szünet, statikus képkocka, ismétlődő animáció. Nem szabad információt tartalmazó átmenetekhez használni.</string>
@@ -117,7 +117,7 @@
     <string name="least_views">Legkevesebb megtekintés</string>
     <string name="shareTo">URL megosztása ide</string>
     <string name="playOnBackground">Lejátszás háttérben</string>
-    <string name="defaultIcon">Alapértelmezett</string>
+    <string name="defaultIcon">Alapérték</string>
     <string name="gradientIcon">Sima átmenet</string>
     <string name="fireIcon">Divatos tűz</string>
     <string name="torchIcon">Trendi fáklya</string>
@@ -221,7 +221,7 @@
     <string name="watch_positions_summary">Folytatás az utolsó lejátszási pozícióból</string>
     <string name="navLabelVisibility">Címke láthatósága</string>
     <string name="search_history_summary">Keresések megjegyzése</string>
-    <string name="reset_watch_positions">Visszaállítás</string>
+    <string name="reset_watch_positions">Alaphelyzet</string>
     <string name="none">Egyik sem</string>
     <string name="watch_history_summary">A megtekintett videók nyomon követése helyben</string>
     <string name="watch_positions_title">Lejátszási pozíció megjegyzése</string>
@@ -310,7 +310,7 @@
     <string name="alternative_player_layout">Alternatív lejátszó elrendezés</string>
     <string name="navbar_order">Sorrend</string>
     <string name="alternative_player_layout_summary">A kapcsolódó videók megjelenítése egy sorban a hozzászólások felett, nem pedig alattuk.</string>
-    <string name="default_audio_track">Alapértelmezett</string>
+    <string name="default_audio_track">Alapérték</string>
     <string name="audio_track">Hangsáv</string>
     <string name="hls_instead_of_dash">HLS használata</string>
     <string name="auto_quality">Automatikus</string>
@@ -329,7 +329,7 @@
     <string name="brightness">Fényerő</string>
     <string name="swipe_controls_summary">Húzási gesztusok használata a hangerő és a fényerő beállításához.</string>
     <string name="swipe_controls">Húzási vezérlők</string>
-    <string name="defaults">Alapértelmezett</string>
+    <string name="defaults">Alapértékek</string>
     <string name="pop_up">Felugró</string>
     <string name="no_comments_available">A videóhoz nincs hozzászólás.</string>
     <string name="comments_disabled">A hozzászólásokat a feltöltő letiltotta.</string>
@@ -396,7 +396,7 @@
     <string name="playing_next">Következő lejátszása: %1$s múlva</string>
     <string name="lbry_hls_summary">LBRY HLS használata, ha elérhető a streamelés.</string>
     <string name="disable_proxy">Piped proxy letiltása</string>
-    <string name="disable_proxy_summary">Videók és képek betöltése közvetlenül a YouTube szervereiről. Csak akkor engedélyezze ezt az opciót, ha egyébként is VPN-t használ. Lehet, hogy nem fog működni a YT music-ról származó tartalmakkal.</string>
+    <string name="disable_proxy_summary">Videók és képek betöltése közvetlenül a YouTube szervereiről. Csak akkor engedélyezze ezt az opciót, ha egyébként is VPN-t használ.</string>
     <string name="auto_fullscreen_shorts">Automatikus teljes képernyőre váltás rövid videóknál</string>
     <string name="trending_views">%1$s • %2$s megtekintés • %3$s</string>
     <string name="normal_views">%1$s megtekintés %2$s</string>
@@ -440,6 +440,27 @@
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="mark_as_unwatched">Meg nem nézettként jelölés</string>
     <string name="home_tab_content">Kezdőlap tartalma</string>
-    <string name="choose_instance">Először</string>
+    <string name="choose_instance">Először válasszon egy példányt!</string>
     <string name="welcome">Üdvözli a LibreTube</string>
+    <string name="visible">Megjelenítés a keresési sávban</string>
+    <string name="stop">Stop</string>
+    <string name="change_playlist_description">Lejátszólista leírásának módosítása</string>
+    <string name="playlist_description">Lejátszólista leírása</string>
+    <string name="emptyPlaylistDescription">A lejátszólista leírása nem lehet üres</string>
+    <string name="category_highlight">Videó kiemelés megjelenítése</string>
+    <string name="sb_custom_colors">Egyedi szegmens színek</string>
+    <string name="color">Szín</string>
+    <string name="invalid_color">Érvénytelen a megadott érték!</string>
+    <string name="enter_hex_value">Szín Hex érték megadása</string>
+    <string name="jumped_to_highlight">Ugrás a videó kiemeléshez</string>
+    <string name="sb_color_enable">Egyéni színszegmensek bekapcsolása a szponzorblokk szegmensekhez</string>
+    <string name="category_highlight_description">Lehet a meghirdetett cím, a miniatűr vagy a videó legérdekesebb része. A fejezetek részben a rákoppintással ugorhatsz oda.</string>
+    <string name="choose_instance_long">Kérjük, válasszon ki az alább felsoroltak közül egy Piped példányt. A Piped példány közvetítőként fog működni Ön és a YouTube között. Ezek a példányok különböző fizikai helyszíneken találhatók - ezeket az országzászló jelzi. A fizikailag közelebbi példányok valószínűleg gyorsabbak, mint a távoli példányok. A beállításokban bármikor megváltoztatható a használt példány.</string>
+    <string name="off">Ki</string>
+    <string name="fallback_piped_proxy_desc">Videók betöltése proxy-n keresztül, ha a YouTube-hoz való közvetlen csatlakozás nem működik az aktuális videóhoz (növeli a kezdeti betöltési időt). Ha letiltja, a YouTube zenei tartalma valószínűleg nem fog lejátszódni a YT korlátozások miatt.</string>
+    <string name="manual">Manuális</string>
+    <string name="fallback_piped_proxy">Visszalépés a Piped proxyra</string>
+    <string name="chapters_videoHighlight">Videó kiemelés</string>
+    <string name="automatic">Automatikus</string>
+    <string name="show_search_suggestions">Keresési javaslatok megjelenítése</string>
 </resources>
