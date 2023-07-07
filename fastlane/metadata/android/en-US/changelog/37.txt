@@ -1,0 +1,10 @@
+* SponsorBlock color segments depending on what type they are
+* Add highlight from SponsorBlock to chapters
+* Ability to choose what SponsorBlock categories are skipped automatically
+* Add presets/shortcuts for playback speed/pitch
+* Notification action to stop download
+* Show time left when clicking player duration
+* Show the comment and reply count in the comments sheet
+* Preference to disable search suggestions
+* Chapters support in audio player
+* Refreshed playlist row design
