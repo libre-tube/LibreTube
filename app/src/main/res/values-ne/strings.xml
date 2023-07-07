@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="subscriptions">सदस्यताहरू</string>
+    <string name="library">पुस्तकालय</string>
+    <string name="yes">हो</string>
+    <string name="search_hint">खोज्नुहोस्</string>
+    <string name="subscribe">सदस्यता लिनुहोस्</string>
+    <string name="share">सेयर गर्नुहोस्</string>
+    <string name="download">डाउनलोड गर्नुहोस्</string>
+    <string name="save">बचत गर्नुहोस्</string>
+    <string name="username">प्रयोगकर्ता नाम</string>
+    <string name="password">पासवर्ड</string>
+    <string name="login">लग - इन</string>
+    <string name="logout">बाहिर निस्कनु</string>
+    <string name="cancel">रद्द गर्नुहोस्</string>
+    <string name="loggedout">लग आउट भयो।</string>
+    <string name="already_logged_in">पहिले नै लग इन भइसकेको छ। तपाईं आफ्नो खाताबाट लग आउट गर्न सक्नुहुन्छ।</string>
+    <string name="startpage">घर</string>
+    <string name="videos">भिडियोहरू</string>
+    <string name="unsubscribe">सदस्यता रद्द गर्नुहोस्</string>
+    <string name="register">दर्ता गर्नुहोस्</string>
+    <string name="registered">दर्ता। अब तपाईं च्यानल सदस्यता लिन सक्नुहुन्छ।</string>
+    <string name="loggedIn">लग इन।</string>
+    <string name="instances">छान्नुहोस्…</string>
+</resources>
