@@ -271,7 +271,7 @@
     <string name="repeat_mode_current">Current</string>
     <string name="backup_restore">Backup &amp; restore</string>
     <string name="backup">Backup</string>
-    <string name="picture_in_picture">Picture in Picture</string>
+    <string name="picture_in_picture">Picture-in-Picture</string>
     <string name="player_resize_mode">Resize mode</string>
     <string name="maximum_image_cache">Max image cache size</string>
     <string name="copied_to_clipboard">Copied to clipboard</string>
@@ -307,7 +307,7 @@
     <string name="queue">Queue</string>
     <string name="sb_markers">Markers</string>
     <string name="sb_markers_summary">Mark the segments on the time bar.</string>
-    <string name="sb_color_enable">Toggles custom color segments for sponsor block segments.</string>
+    <string name="sb_color_enable">Toggles custom color segments for SponsorBlock segments.</string>
     <string name="sb_custom_colors">Custom segment colors</string>
     <string name="color">Color</string>
     <string name="invalid_color">Invalid color value entered!</string>
