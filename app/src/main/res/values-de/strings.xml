@@ -290,7 +290,7 @@
     <string name="playlistNameReversed">Wiedergabelistenname (umgekehrt)</string>
     <string name="playlistCloned">Wiedergabeliste dupliziert</string>
     <string name="confirm_unsubscribing">Deabonnieren bestätigen</string>
-    <string name="sb_markers_summary">Markiere die Abschnitte auf der Zeitleiste.</string>
+    <string name="sb_markers_summary">Abschnitte auf der Zeitleiste markieren.</string>
     <string name="defaultIconLight">Standard hell</string>
     <string name="confirm_unsubscribing_summary">Zeige Bestätigungsdialog vor dem Deabonnieren.</string>
     <string name="confirm_unsubscribe">Bist du sicher, dass du %1$s deabbonieren möchtest\?</string>
@@ -452,8 +452,8 @@
     <string name="automatic">Automatisch</string>
     <string name="enter_hex_value">Farb-Hex-Wert eingeben</string>
     <string name="invalid_color">Ungültiger Farbwert eingegeben!</string>
-    <string name="sb_custom_colors">Benutzerdefinierte Abschnittsfarben</string>
-    <string name="sb_color_enable">Benutzerdefinierte Farbabschnitte für Sponsor-Blockabschnitte umschalten</string>
+    <string name="sb_custom_colors">Abschnittsfarben</string>
+    <string name="sb_color_enable">Abschnitte je nach SponsorBlock-Kategorie farblich markieren.</string>
     <string name="color">Farbe</string>
     <string name="visible">In Suchleiste anzeigen</string>
     <string name="chapters_videoHighlight">Video-Highlight</string>
