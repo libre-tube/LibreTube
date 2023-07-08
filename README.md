@@ -104,7 +104,12 @@ Contributing
 
 Whether you have ideas, translations, design changes, code cleaning or really heavy code changes, help is always welcome. The more is done, the better it gets! Please respect our [Code of Conduct](https://github.com/libre-tube/LibreTube/blob/master/CODE_OF_CONDUCT.md) in order to keep all interactions and dicussions healthy.
 
-If creating a pull request, please make sure to format your code (preferred ktlint) before.
+You can open and build the project like any other normal Android project by using Android Studio.
+If creating a pull request containing code changes, please make sure to format your code with Android Studio before.
+
+Please make sure the title of your pull request follows the [conventional commit types](https://github.com/commitizen/conventional-commit-types/blob/master/index.json) (e.g. `feat: support for xy`).
+The most common commit types are "feat", "fix", "refactor", "ci" and "chore".
+The commit messages however shouldn't contain any commit type, but only a short description of the change.
 
 > **Note** <br>
 > Any issue avoiding the issue template will be ignored and forced to be closed.
