@@ -11,12 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ScrollView
 import androidx.activity.addCallback
+import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.children
 import androidx.core.widget.NestedScrollView
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -47,11 +47,16 @@ import com.github.libretube.ui.tools.SleepTimer
 import com.google.android.material.elevation.SurfaceColors
 
 class MainActivity : BaseActivity() {
-
     lateinit var binding: ActivityMainBinding
-
     lateinit var navController: NavController
+    lateinit var searchView: SearchView
+    private lateinit var searchItem: MenuItem
+
     private var startFragmentId = R.id.homeFragment
+
+    private val playerViewModel: PlayerViewModel by viewModels()
+    private val searchViewModel: SearchViewModel by viewModels()
+    private val subscriptionsViewModel: SubscriptionsViewModel by viewModels()
 
     val autoRotationEnabled: Boolean by lazy {
         PreferenceHelper.getBoolean(
@@ -59,9 +64,6 @@ class MainActivity : BaseActivity() {
             resources.getBoolean(R.bool.config_default_auto_rotation_pref)
         )
     }
-
-    lateinit var searchView: SearchView
-    private lateinit var searchItem: MenuItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -152,8 +154,6 @@ class MainActivity : BaseActivity() {
         SleepTimer.setup(this)
 
         setupSubscriptionsBadge()
-
-        val playerViewModel = ViewModelProvider(this)[PlayerViewModel::class.java]
 
         // new way of handling back presses
         onBackPressedDispatcher.addCallback {
@@ -251,14 +251,11 @@ class MainActivity : BaseActivity() {
             return
         }
 
-        val subscriptionsViewModel = ViewModelProvider(this)[SubscriptionsViewModel::class.java]
         subscriptionsViewModel.fetchSubscriptions()
 
-        subscriptionsViewModel.videoFeed.observe(this) {
-            val lastSeenVideoId = PreferenceHelper.getLastSeenVideoId()
-            val lastSeenVideoIndex = subscriptionsViewModel.videoFeed.value?.indexOfFirst {
-                lastSeenVideoId == it.url?.toID()
-            } ?: return@observe
+        subscriptionsViewModel.videoFeed.observe(this) { feed ->
+            val lastSeenVideoIndex = feed.orEmpty()
+                .indexOfFirst { PreferenceHelper.getLastSeenVideoId() == it.url?.toID() }
             if (lastSeenVideoIndex < 1) return@observe
             binding.bottomNav.getOrCreateBadge(R.id.subscriptionsFragment).apply {
                 number = lastSeenVideoIndex
@@ -309,8 +306,6 @@ class MainActivity : BaseActivity() {
         val searchItem = menu.findItem(R.id.action_search)
         this.searchItem = searchItem
         searchView = searchItem.actionView as SearchView
-
-        val searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -486,7 +481,6 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        val playerViewModel = ViewModelProvider(this)[PlayerViewModel::class.java]
         playerViewModel.isFullscreen.value = false
         requestedOrientation = if (autoRotationEnabled) {
             ActivityInfo.SCREEN_ORIENTATION_USER
