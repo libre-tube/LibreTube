@@ -447,4 +447,20 @@
     <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="unlimited_search_history">Ubegrenset søkehistorikk</string>
     <string name="show_search_suggestions">Vis søkeforslag</string>
+    <string name="fallback_piped_proxy">Fall tilbake til Piped-mellomtjener</string>
+    <string name="stop">Stopp</string>
+    <string name="sb_color_enable">Veksler egendefinerte fargesegmenter for SponsorBlock-segmenter.</string>
+    <string name="sb_custom_colors">Egendefinerte segmentfarger</string>
+    <string name="color">Farge</string>
+    <string name="invalid_color">Ugyldig farge angitt.</string>
+    <string name="enter_hex_value">Skriv inn heksadesimal fargeverdi</string>
+    <string name="automatic">Automatisk</string>
+    <string name="chapters_videoHighlight">Videohøydepunkt</string>
+    <string name="jumped_to_highlight">Hoppet til videohøydepunkt</string>
+    <string name="off">Av</string>
+    <string name="visible">Vis i blafringsfelt</string>
+    <string name="manual">Manuell</string>
+    <string name="category_highlight_description">Kan enten være publisert navn, miniatyrbildet, eller den mest interessante delen av videoen. Du kan hoppe til det ved å trykke det i kapitteldelen.</string>
+    <string name="category_highlight">Vis videohøydepunkt</string>
+    <string name="fallback_piped_proxy_desc">Last inn videoer via mellomtjener hvis tilkobling til YouTube direkte ikke virker for nåværende video (noe som øker innlastingstiden). Ellers vil du antagelig ikke kunne spille YouTube musikk-innhold som følge av begrensninger.</string>
 </resources>
