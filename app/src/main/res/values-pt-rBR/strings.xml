@@ -70,7 +70,7 @@
     <string name="channels">Canais</string>
     <string name="clear_history">Limpar histórico</string>
     <string name="all">Todos</string>
-    <string name="playlists">Playlists</string>
+    <string name="playlists">Listas de reprodução</string>
     <string name="music_songs">Músicas do YT Music</string>
     <string name="okay">Aceitar</string>
     <string name="history">Histórico</string>
@@ -408,7 +408,7 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d vídeos</string>
     <string name="subscriberAndVideoCounts">%1$s inscritos • %2$d vídeos</string>
     <string name="disable_proxy">Desativar proxy do Piped</string>
-    <string name="disable_proxy_summary">Carrega vídeos e imagens diretamente dos servidores do YouTube. Ative a opção apenas se você usar uma VPN de qualquer maneira! Observe que isso pode não funcionar com o conteúdo do YT music.</string>
+    <string name="disable_proxy_summary">Carregue vídeos e imagens diretamente dos servidores do YouTube. Ative a opção apenas se você usar VPN!</string>
     <string name="auto_fullscreen_shorts">Tela cheia automática em shorts</string>
     <string name="new_group">Novo</string>
     <string name="channel_groups">Grupos de canais</string>
@@ -453,4 +453,17 @@
     <string name="off">Desligado</string>
     <string name="manual">Manual</string>
     <string name="automatic">Automático</string>
+    <string name="fallback_piped_proxy">Fallback para proxy Piped</string>
+    <string name="visible">Mostrar na barra de busca</string>
+    <string name="jumped_to_highlight">Pulou para o destaque do vídeo</string>
+    <string name="category_highlight">Mostrar destaque do vídeo</string>
+    <string name="category_highlight_description">Pode ser o título anunciado, a miniatura ou a parte mais interessante do vídeo. Você pode pular para ele tocando nele na seção de capítulos.</string>
+    <string name="chapters_videoHighlight">Destaque do vídeo</string>
+    <string name="stop">Parar</string>
+    <string name="fallback_piped_proxy_desc">Carregue vídeos por meio do proxy se a conexão direta com o YouTube não funcionar para o vídeo atual (aumenta o tempo de carregamento inicial). Se desativado, o conteúdo de música do YouTube provavelmente não será reproduzido devido a restrições.</string>
+    <string name="sb_custom_colors">Cores de segmento personalizadas</string>
+    <string name="sb_color_enable">Trocar cores do bloqueio de segmentos de patrocinio.</string>
+    <string name="color">Cor</string>
+    <string name="invalid_color">Valor de cor inválido inserido!</string>
+    <string name="enter_hex_value">Digite o valor hexadecimal da cor</string>
 </resources>

@@ -444,12 +444,12 @@
     <string name="playlist_description">プレイリストの説明</string>
     <string name="emptyPlaylistDescription">プレイリストの説明は空にできません</string>
     <string name="show_search_suggestions">検索語句の候補を表示</string>
-    <string name="off">無効</string>
+    <string name="off">オフ</string>
     <string name="manual">手動でスキップ</string>
     <string name="automatic">自動でスキップ</string>
     <string name="sb_custom_colors">シーン部分の色を指定</string>
     <string name="color">色</string>
-    <string name="sb_color_enable">広告シーンの部分の色の指定を切り替え</string>
+    <string name="sb_color_enable">広告シーンの部分の色の指定を切り替える。</string>
     <string name="invalid_color">この色の値は無効です！</string>
     <string name="enter_hex_value">16進数の色の値を入力</string>
     <string name="visible">シークバーに表示</string>

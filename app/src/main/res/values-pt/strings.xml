@@ -463,7 +463,7 @@
     <string name="jumped_to_highlight">Saltou para o vídeo em destaque</string>
     <string name="category_highlight">Mostrar vídeo de destaque</string>
     <string name="category_highlight_description">Pode ser o título anunciado, a miniatura ou a parte mais interessante do vídeo. Pode saltar para essa parte tocando nela na secção de capítulos.</string>
-    <string name="sb_color_enable">Alterna segmentos de cores personalizadas para segmentos de blocos de patrocinadores</string>
+    <string name="sb_color_enable">Mostra cores personalizadas para segmentos de blocos de patrocinadores.</string>
     <string name="fallback_piped_proxy">Retornar para Piped proxy</string>
     <string name="fallback_piped_proxy_desc">Carrega vídeos através do proxy se a ligação ao YouTube diretamente não funcionar para o vídeo atual (aumenta o tempo de carregamento inicial). Se estiver desativado, é provável que o conteúdo musical do YouTube não seja reproduzido devido a restrições do YT.</string>
 </resources>
