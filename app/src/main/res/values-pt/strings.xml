@@ -184,7 +184,7 @@
     <string name="selected">Seleção</string>
     <string name="require_restart_message">Reinicie a aplicação para aplicar as alterações.</string>
     <string name="require_restart">Tem que reiniciar a aplicação</string>
-    <string name="navLabelVisibility">Texto na barra de navegação</string>
+    <string name="navLabelVisibility">Visibilidade dos textos</string>
     <string name="autoRotatePlayer_summary">Ativar modo de ecrã completo ao ligar o ecrã.</string>
     <string name="pure_theme">Tema</string>
     <string name="pure_theme_summary">Branco/preto puro</string>
@@ -202,7 +202,7 @@
     <string name="translate">Tradução</string>
     <string name="error_occurred">Erro</string>
     <string name="network_all">Todas</string>
-    <string name="required_network">Conexão necessária</string>
+    <string name="required_network">Requer uma ligação</string>
     <string name="network_metered">Móvel</string>
     <string name="network_wifi">Apenas Wi-Fi</string>
     <string name="no_search_result">Não há resultados.</string>
@@ -279,7 +279,7 @@
     <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">Dados móveis</string>
     <string name="category_outro_description">Informação após o final. Não para conclusões com informações.</string>
-    <string name="queue">Fila de espera</string>
+    <string name="queue">Fila</string>
     <string name="playback_pitch">Passo</string>
     <string name="added_to_playlist">Adicionado à lista de reprodução</string>
     <string name="category_filler">Tangente/Piadas</string>
@@ -316,10 +316,10 @@
     <string name="hls_instead_of_dash">Usar HLS</string>
     <string name="hls_instead_of_dash_summary">Usar HLS em vez de DASH (será mais lento, não recomendado)</string>
     <string name="auto_quality">Automático</string>
-    <string name="limit_to_runtime">Limite de tempo de execução</string>
+    <string name="limit_to_runtime">Limite de tempo para execução</string>
     <string name="trends">Tendências</string>
-    <string name="featured">Em destaque</string>
-    <string name="trending">O que está nas tendências agora</string>
+    <string name="featured">Destaques</string>
+    <string name="trending">Tendências atuais</string>
     <string name="queue_insert_related_videos">Inserir vídeos relacionados</string>
     <string name="bookmarks">Marcadores</string>
     <string name="bookmark">Marcador</string>
@@ -353,14 +353,14 @@
     <string name="nothing_selected">Nada selecionado!</string>
     <string name="color_violet">Violeta</string>
     <string name="failed_fetching_instances">Não foi possível obter as instâncias disponíveis.</string>
-    <string name="hide_watched_from_feed_summary">Não mostrar vídeos a serem vistos mais de 90% no separador das subscrições.</string>
-    <string name="hide_watched_from_feed">Ocultar da fonte os vídeos assistidos</string>
+    <string name="hide_watched_from_feed_summary">No separador Subscrições, não mostrar vídeos que foram vistos mais do que 90%.</string>
+    <string name="hide_watched_from_feed">Ocultar, da fonte, os vídeos assistidos</string>
     <string name="playlistUrl">URL da lista de reprodução</string>
     <string name="pause_on_quit">Pausa ao sair</string>
     <string name="shuffle">Baralhar</string>
     <string name="add_to_bookmarks">Adicionar aos marcadores</string>
     <string name="remove_bookmark">Remover marcador</string>
-    <string name="rewind">Rebobinar</string>
+    <string name="rewind">Recuar</string>
     <string name="forward">Avançar</string>
     <string name="pause">Pausa</string>
     <string name="alternative_pip_controls">Controlos PiP alternativos</string>
@@ -369,8 +369,8 @@
     <string name="no_subtitle">Sem legendas</string>
     <string name="download_paused">Descarga em pausa</string>
     <string name="audio_only_mode">Apenas áudio</string>
-    <string name="audio_only_mode_summary">Transforme LibreTube num reprodutor de músicas.</string>
-    <string name="concurrent_downloads">Número de descarregamentos simultâneos</string>
+    <string name="audio_only_mode_summary">Utilizar LibreTube como reprodutor de músicas.</string>
+    <string name="concurrent_downloads">Número de descargas simultâneas</string>
     <string name="unknown">Desconhecido</string>
     <string name="resume">Retomar</string>
     <string name="download_completed">Descarga terminada</string>
@@ -392,7 +392,7 @@
     <string name="stats_for_nerds">Estatísticas para totós</string>
     <string name="video_id">ID do vídeo</string>
     <string name="autoplay_countdown">Contagem para reprodução automática</string>
-    <string name="autoplay_countdown_summary">Mostrar contagem decrescente de 5 seg. antes de reproduzir automaticamente o vídeo seguinte.</string>
+    <string name="autoplay_countdown_summary">Mostrar contagem decrescente de 5 segundos antes de reproduzir o vídeo seguinte.</string>
     <plurals name="months_ago">
         <item quantity="one">%d mês atrás</item>
         <item quantity="many">%d meses atrás</item>
@@ -408,7 +408,7 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d vídeos</string>
     <string name="subscriberAndVideoCounts">%1$s subscritores • %2$d vídeos</string>
     <string name="disable_proxy">Desativar proxy Piped</string>
-    <string name="disable_proxy_summary">Carregue vídeos e imagens diretamente dos servidores do YouTube. Só active a opção se utilizar uma VPN!</string>
+    <string name="disable_proxy_summary">Carregue vídeos e imagens diretamente dos servidores YouTube. Apenas deve ativar a opção se utilizar uma VPN!</string>
     <string name="auto_fullscreen_shorts">Ecrã completo automático em vídeos curtos</string>
     <string name="channel_groups">Grupos de canais</string>
     <string name="new_group">Novo</string>
@@ -416,7 +416,7 @@
     <string name="edit_group">Editar grupo</string>
     <string name="play_automatically">Reproduzir automaticamente</string>
     <string name="play_automatically_summary">Iniciar reprodução dos vídeos ao selecionar</string>
-    <string name="fullscreen_gestures">Gestos de ativar/desativar ecrã inteiro</string>
+    <string name="fullscreen_gestures">Gestos para ativar/desativar ecrã completo</string>
     <string name="go_to_video">Ir para o vídeo</string>
     <plurals name="channel_new_streams">
         <item quantity="one">%d nova emissão</item>
@@ -440,12 +440,12 @@
     <string name="export_subscriptions_to">Exportar subscrições para</string>
     <string name="import_playlists_from">Importar listas de reprodução de</string>
     <string name="export_playlists_to">Exportar listas de reprodução para</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
+    <string name="import_format_piped">Piped/LibreTube</string>
     <string name="home_tab_content">Conteúdo do separador inicial</string>
     <string name="mark_as_unwatched">Marcar como não visto</string>
     <string name="welcome">Bem-vindo ao LibreTube</string>
-    <string name="choose_instance">Escolha primeiro uma instância!</string>
-    <string name="choose_instance_long">Escolha uma instância do Piped para utilizar a partir de baixo. A instância do Piped actuará como intermediário entre si e o YouTube. Essas instâncias estão localizadas em locais físicos diferentes, indicados pela(s) bandeira(s) do país. As instâncias fisicamente mais próximas de si são provavelmente mais rápidas do que as instâncias que não estão. Pode alterar a instância que utiliza nas definições em qualquer altura.</string>
+    <string name="choose_instance">Escolha uma instância!</string>
+    <string name="choose_instance_long">Escolha uma instância Piped das indicadas abaixo. A instância Piped atuará como intermediário entre si e o YouTube. Estas instâncias estão localizadas em locais físicos diferentes, indicados pelas bandeiras dos paises. As instâncias mais próximas de si serão, provavelmente, mais rápidas do que as instâncias que não estão. Pode alterar a instância nas definições, sempre que quiser.</string>
     <string name="show_search_suggestions">Mostrar sugestões de pesquisa</string>
     <string name="change_playlist_description">Alterar descrição da lista de reprodução</string>
     <string name="playlist_description">Descrição da lista de reprodução</string>
@@ -464,6 +464,6 @@
     <string name="category_highlight">Mostrar vídeo de destaque</string>
     <string name="category_highlight_description">Pode ser o título anunciado, a miniatura ou a parte mais interessante do vídeo. Pode saltar para essa parte tocando nela na secção de capítulos.</string>
     <string name="sb_color_enable">Mostra cores personalizadas para segmentos de blocos de patrocinadores.</string>
-    <string name="fallback_piped_proxy">Retornar para Piped proxy</string>
-    <string name="fallback_piped_proxy_desc">Carrega vídeos através do proxy se a ligação ao YouTube diretamente não funcionar para o vídeo atual (aumenta o tempo de carregamento inicial). Se estiver desativado, é provável que o conteúdo musical do YouTube não seja reproduzido devido a restrições do YT.</string>
+    <string name="fallback_piped_proxy">Usar Piped proxy como recurso</string>
+    <string name="fallback_piped_proxy_desc">Carregar vídeos através do proxy Piper se a ligação ao YouTube não funcionar para o vídeo em reprodução (aumenta o tempo de carregamento inicial). Se estiver desativado, é provável que o conteúdo musical do YouTube não seja reproduzido devido a restrições do YT.</string>
 </resources>
