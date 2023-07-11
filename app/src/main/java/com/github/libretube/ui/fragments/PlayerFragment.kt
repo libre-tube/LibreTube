@@ -118,7 +118,6 @@ import java.util.concurrent.Executors
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
@@ -155,7 +154,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      */
     private var sId: Int = 0
     private var eId: Int = 0
-    private var transitioning = true
+    private var isTransitioning = true
 
     /**
      * for the player
@@ -641,7 +640,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     // save the watch position if video isn't finished and option enabled
     private fun saveWatchPosition() {
-        if (!this::exoPlayer.isInitialized || !PlayerHelper.watchPositionsVideo || transitioning ||
+        if (!this::exoPlayer.isInitialized || !PlayerHelper.watchPositionsVideo || isTransitioning ||
             exoPlayer.duration == C.TIME_UNSET || exoPlayer.currentPosition in listOf(
                 0L,
                 C.TIME_UNSET
@@ -739,9 +738,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 initializePlayerView()
                 setupSeekbarPreview()
 
-                if (!streams.livestream) seekToWatchPosition()
-                trySeekToTimeStamp()
-
                 exoPlayer.prepare()
                 if (PreferenceHelper.getBoolean(PreferenceKeys.PLAY_AUTOMATICALLY, true)) {
                     exoPlayer.play()
@@ -796,35 +792,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 }
             }
         }
-    }
-
-    /**
-     *  Seek to saved watch position if available */
-    private fun seekToWatchPosition() {
-        // browse the watch positions
-        val position = try {
-            runBlocking {
-                Database.watchPositionDao().findById(videoId)?.position
-            }
-        } catch (e: Exception) {
-            return
-        }
-        // position is almost the end of the video => don't seek, start from beginning
-        if (position != null && position < streams.duration * 1000 * 0.9) {
-            exoPlayer.seekTo(position)
-        }
-    }
-
-    /**
-     * Seek to the time stamp passed by the intent arguments if available
-     */
-    private fun trySeekToTimeStamp() {
-        // support for time stamped links
-        if (timeStamp != 0L) {
-            exoPlayer.seekTo(timeStamp * 1000)
-        }
-        // delete the time stamp because it already got consumed
-        timeStamp = 0
     }
 
     // used for autoplay and skipping to next video
@@ -940,10 +907,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 // check if video has ended, next video is available and autoplay is enabled.
                 if (
                     playbackState == Player.STATE_ENDED &&
-                    !transitioning &&
+                    !isTransitioning &&
                     PlayerHelper.autoPlayEnabled
                 ) {
-                    transitioning = true
+                    isTransitioning = true
                     if (PlayerHelper.autoPlayCountdown) {
                         showAutoPlayCountdown()
                     } else {
@@ -953,7 +920,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
                 if (playbackState == Player.STATE_READY) {
                     // media actually playing
-                    transitioning = false
+                    isTransitioning = false
                 }
 
                 // listen for the stop button in the notification
@@ -1272,7 +1239,23 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         updateCaptionsLanguage(captionLanguage)
 
         // set media source and resolution in the beginning
-        lifecycleScope.launch(Dispatchers.IO) { setStreamSource() }
+        lifecycleScope.launch(Dispatchers.IO) {
+            setStreamSource()
+
+            withContext(Dispatchers.Main) {
+                // support for time stamped links
+                if (timeStamp != 0L) {
+                    exoPlayer.seekTo(timeStamp * 1000)
+                    // delete the time stamp because it already got consumed
+                    timeStamp = 0L
+                } else if (!streams.livestream) {
+                    // seek to the saved watch position
+                    PlayerHelper.getPosition(videoId, streams.duration)?.let {
+                        exoPlayer.seekTo(it)
+                    }
+                }
+            }
+        }
     }
 
     private fun setPlayerResolution(resolution: Int) {
