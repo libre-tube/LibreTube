@@ -245,7 +245,7 @@
     <string name="resize_mode_fill">Riempi</string>
     <string name="resize_mode_zoom">Ingrandisci</string>
     <string name="repeat_mode_current">Attuale</string>
-    <string name="picture_in_picture">Picture in Picture</string>
+    <string name="picture_in_picture">Picture-in-Picture</string>
     <string name="player_resize_mode">Modalità ridimensionamento</string>
     <string name="maximum_image_cache">Dimensione massima cache immagini</string>
     <string name="open_copied">Apri</string>
@@ -455,7 +455,7 @@
     <string name="off">Disattiva</string>
     <string name="visible">Mostra nella barra di ricerca</string>
     <string name="stop">Ferma</string>
-    <string name="sb_color_enable">Alterna i segmenti di colore personalizzati per i segmenti di blocco dello sponsor</string>
+    <string name="sb_color_enable">Alterna i segmenti di colore personalizzati per i segmenti di SponsorBlock.</string>
     <string name="sb_custom_colors">Colori dei segmenti personalizzati</string>
     <string name="chapters_videoHighlight">Momento saliente</string>
     <string name="jumped_to_highlight">Passato al momento saliente</string>
