@@ -29,6 +29,7 @@ import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import androidx.core.text.parseAsHtml
 import androidx.core.view.WindowCompat
+import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -327,10 +328,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
                 if (currentId == eId) {
                     viewModel.isMiniPlayerVisible.value = true
-                    // disable captions
+                    // disable captions temporarily
                     updateCaptionsLanguage(null)
                     binding.player.useController = false
                     commentsViewModel.setCommentSheetExpand(null)
+                    binding.sbSkipBtn.isGone = true
                     mainMotionLayout.progress = 1F
                     (activity as MainActivity).requestOrientationChange()
                 } else if (currentId == sId) {
@@ -665,13 +667,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         exoPlayer.checkForSegments(requireContext(), segments, sponsorBlockConfig)
             ?.let { segmentEnd ->
-                binding.sbSkipBtn.visibility = View.VISIBLE
+                if (viewModel.isMiniPlayerVisible.value == true) return@let
+                binding.sbSkipBtn.isVisible = true
                 binding.sbSkipBtn.setOnClickListener {
                     exoPlayer.seekTo(segmentEnd)
                 }
                 return
             }
-        if (!exoPlayer.isInSegment(segments)) binding.sbSkipBtn.visibility = View.GONE
+        if (!exoPlayer.isInSegment(segments)) binding.sbSkipBtn.isGone = true
     }
 
     private fun playVideo() {
