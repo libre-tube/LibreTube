@@ -33,11 +33,11 @@
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="-10dp"
+            android:layout_marginEnd="-15dp"
             android:paddingStart="0dp"
-            android:paddingEnd="35dp"
+            android:paddingEnd="30dp"
             android:textAlignment="textEnd" />
 
     </LinearLayout>
