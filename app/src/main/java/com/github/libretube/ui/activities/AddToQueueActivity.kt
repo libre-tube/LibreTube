@@ -1,8 +1,8 @@
 package com.github.libretube.ui.activities
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
+import androidx.core.net.toUri
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.util.PlayingQueue
 
@@ -14,7 +14,7 @@ class AddToQueueActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val uri = Uri.parse(intent.getStringExtra(Intent.EXTRA_TEXT)!!)
+        val uri = intent.getStringExtra(Intent.EXTRA_TEXT)!!.toUri()
         var videoId: String? = null
         listOf("/shorts/", "/v/", "/embed/").forEach {
             if (uri.path!!.contains(it)) {
