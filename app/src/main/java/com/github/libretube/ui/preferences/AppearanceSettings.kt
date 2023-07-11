@@ -1,6 +1,5 @@
 package com.github.libretube.ui.preferences
 
-import android.os.Build
 import android.os.Bundle
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -13,6 +12,7 @@ import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.NavBarOptionsDialog
 import com.github.libretube.ui.dialogs.RequireRestartDialog
 import com.github.libretube.ui.sheets.IconsBottomSheet
+import com.google.android.material.color.DynamicColors
 
 class AppearanceSettings : BasePreferenceFragment() {
     override val titleResourceId: Int = R.string.appearance
@@ -78,13 +78,9 @@ class AppearanceSettings : BasePreferenceFragment() {
      * Remove material you from accent color option if not available
      */
     private fun updateAccentColorValues(pref: ListPreference) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
-            pref.entries = pref.entries.toMutableList().apply {
-                removeFirst()
-            }.toTypedArray()
-            pref.entryValues = pref.entryValues.toMutableList().apply {
-                removeFirst()
-            }.toTypedArray()
+        if (!DynamicColors.isDynamicColorAvailable()) {
+            pref.entries = pref.entries.toList().subList(1, pref.entries.size).toTypedArray()
+            pref.entryValues = pref.entryValues.toList().subList(1, pref.entryValues.size).toTypedArray()
         }
     }
 }

@@ -14,6 +14,7 @@ import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.ui.adapters.IconsSheetAdapter
 import com.google.android.material.color.DynamicColors
+import java.lang.IllegalArgumentException
 
 object ThemeHelper {
 
@@ -24,23 +25,28 @@ object ThemeHelper {
         val themeMode = PreferenceHelper.getString(PreferenceKeys.THEME_MODE, "A")
 
         updateAccentColor(activity)
-        applyDynamicColorsIfEnabled(activity)
         applyPureThemeIfEnabled(activity)
         updateThemeMode(themeMode)
     }
 
     /**
-     * Update the accent color of the app
+     * Update the accent color of the app and apply dynamic colors if needed
      */
     private fun updateAccentColor(
         activity: AppCompatActivity
     ) {
-        val theme = when (
-            PreferenceHelper.getString(
-                PreferenceKeys.ACCENT_COLOR,
-                "purple"
-            )
-        ) {
+        var accentColor = PreferenceHelper.getString(PreferenceKeys.ACCENT_COLOR, "")
+
+        // automatically choose an accent color on the first app startup
+        if (accentColor.isEmpty()) {
+            accentColor = when (DynamicColors.isDynamicColorAvailable()) {
+                true -> "my"
+                else -> "blue"
+            }
+            PreferenceHelper.putString(PreferenceKeys.ACCENT_COLOR, accentColor)
+        }
+
+        val theme = when (accentColor) {
             // set the accent color, use the pure black/white theme if enabled
             "my" -> R.style.BaseTheme
             "red" -> R.style.Theme_Red
@@ -50,23 +56,11 @@ object ThemeHelper {
             "purple" -> R.style.Theme_Purple
             "monochrome" -> R.style.Theme_Monochrome
             "violet" -> R.style.Theme_Violet
-            else -> R.style.Theme_Purple
+            else -> throw IllegalArgumentException()
         }
         activity.setTheme(theme)
-    }
-
-    /**
-     * apply dynamic colors to the activity
-     */
-    private fun applyDynamicColorsIfEnabled(activity: AppCompatActivity) {
-        if (
-            PreferenceHelper.getString(
-                PreferenceKeys.ACCENT_COLOR,
-                "purple"
-            ) == "my"
-        ) {
-            DynamicColors.applyToActivityIfAvailable(activity)
-        }
+        // apply dynamic wallpaper based colors
+        if (accentColor == "my") DynamicColors.applyToActivityIfAvailable(activity)
     }
 
     /**
@@ -110,7 +104,7 @@ object ThemeHelper {
         }
 
         // set the class name for the activity alias
-        val newLogoActivityClass = "com.github.libretube." + newLogoActivityAlias
+        val newLogoActivityClass = "com.github.libretube.$newLogoActivityAlias"
         // Enable New Icon
         context.packageManager.setComponentEnabledSetting(
             ComponentName(context.packageName, newLogoActivityClass),
