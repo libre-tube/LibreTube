@@ -64,13 +64,13 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/telegram"
+            android:id="@+id/lemmy"
             style="@style/AboutCard">
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/AboutItem"
-                android:text="Telegram"
-                app:drawableStartCompat="@drawable/ic_telegram"
+                android:text="Lemmy"
+                app:drawableStartCompat="@drawable/ic_lemmy"
                 tools:ignore="HardcodedText" />
 
         </com.google.android.material.card.MaterialCardView>

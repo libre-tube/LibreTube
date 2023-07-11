@@ -16,11 +16,11 @@ const val LICENSE_URL = "https://gnu.org/"
 const val FAQ_URL = "https://libre-tube.github.io/#faq"
 
 /**
- * Social media links for the community fragment
+ * Social media links for the help activity
  */
 const val MATRIX_URL = "https://matrix.to/#/#LibreTube:matrix.org"
 const val MASTODON_URL = "https://fosstodon.org/@libretube"
-const val TELEGRAM_URL = "https://t.me/libretube"
+const val LEMMY_URL = "https://feddit.rocks/c/libretube"
 
 /**
  * Share Dialog
