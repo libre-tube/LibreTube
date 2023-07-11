@@ -2,8 +2,8 @@ package com.github.libretube.ui.dialogs
 
 import android.app.Dialog
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
+import androidx.core.net.toUri
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.obj.update.UpdateInfo
@@ -19,8 +19,7 @@ class UpdateAvailableDialog(
             .setMessage(context?.getString(R.string.update_available_text))
             .setNegativeButton(R.string.cancel, null)
             .setPositiveButton(context?.getString(R.string.okay)) { _, _ ->
-                val uri = Uri.parse(updateInfo.htmlUrl)
-                val intent = Intent(Intent.ACTION_VIEW).setData(uri)
+                val intent = Intent(Intent.ACTION_VIEW).setData(updateInfo.htmlUrl.toUri())
                 startActivity(intent)
             }
             .show()

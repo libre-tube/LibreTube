@@ -660,10 +660,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         if (!exoPlayer.isPlaying || !PlayerHelper.sponsorBlockEnabled) return
 
         handler.postDelayed(this::checkForSegments, 100)
-
-        if (!sponsorBlockEnabled) return
-
-        if (segments.isEmpty()) return
+        if (!sponsorBlockEnabled || segments.isEmpty()) return
 
         exoPlayer.checkForSegments(requireContext(), segments, sponsorBlockConfig)
             ?.let { segmentEnd ->
@@ -1045,12 +1042,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      * Handle a link clicked in the description
      */
     private fun handleLink(link: String) {
-        val uri = Uri.parse(link)
         // get video id if the link is a valid youtube video link
         val videoId = TextUtils.getVideoIdFromUri(link)
         if (videoId.isNullOrEmpty()) {
             // not a YouTube video link, thus handle normally
-            val intent = Intent(Intent.ACTION_VIEW, uri)
+            val intent = Intent(Intent.ACTION_VIEW, link.toUri())
             startActivity(intent)
             return
         }
@@ -1058,7 +1054,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // check if the video is the current video and has a valid time
         if (videoId == this.videoId) {
             // try finding the time stamp of the url and seek to it if found
-            uri.getQueryParameter("t")?.toTimeInSeconds()?.let {
+            link.toUri().getQueryParameter("t")?.toTimeInSeconds()?.let {
                 exoPlayer.seekTo(it * 1000)
             }
         } else {
@@ -1159,7 +1155,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }.drawable ?: return
         val highlightChapter = ChapterSegment(
             title = getString(R.string.chapters_videoHighlight),
-            image = "",
             start = highlight.segmentStartAndEnd.first.toLong(),
             drawable = drawable
         )

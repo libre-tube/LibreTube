@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import androidx.core.net.toUri
 import com.github.libretube.constants.IntentData
 import com.github.libretube.extensions.TAG
 import com.github.libretube.helpers.NavigationHelper
@@ -16,7 +17,7 @@ class RouterActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         if (intent.getStringExtra(Intent.EXTRA_TEXT) != null) {
             // start processing the given text
-            handleSendText(Uri.parse(intent.getStringExtra(Intent.EXTRA_TEXT)!!))
+            handleSendText(intent.getStringExtra(Intent.EXTRA_TEXT)!!.toUri())
         } else if (intent.data != null) {
             // link shared as text to the app
             handleSendText(intent.data!!)
