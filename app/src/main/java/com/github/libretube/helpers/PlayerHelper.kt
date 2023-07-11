@@ -32,10 +32,12 @@ import com.github.libretube.api.obj.PreviewFrames
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.obj.PreviewFrame
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.runBlocking
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 
@@ -556,5 +558,19 @@ object PlayerHelper {
         }
 
         dialog.show()
+    }
+
+    fun getPosition(videoId: String, duration: Long?): Long? {
+        if (duration == null) return null
+
+        runCatching {
+            val watchPosition = runBlocking {
+                DatabaseHolder.Database.watchPositionDao().findById(videoId)
+            }
+            if (watchPosition != null && watchPosition.position < duration * 1000 * 0.9) {
+                return watchPosition.position
+            }
+        }
+        return null
     }
 }

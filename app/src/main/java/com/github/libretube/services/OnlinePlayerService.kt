@@ -145,10 +145,9 @@ class OnlinePlayerService : LifecycleService() {
 
     private fun updateWatchPosition() {
         player?.currentPosition?.let {
-            val watchPosition = WatchPosition(videoId, it)
+            if (isTransitioning) return@let
 
-            // indicator that a new video is getting loaded
-            this.streams ?: return@let
+            val watchPosition = WatchPosition(videoId, it)
 
             CoroutineScope(Dispatchers.IO).launch {
                 Database.watchPositionDao().insert(watchPosition)
@@ -187,7 +186,20 @@ class OnlinePlayerService : LifecycleService() {
 
     private fun playAudio(seekToPosition: Long) {
         initializePlayer()
-        lifecycleScope.launch(Dispatchers.IO) { setMediaItem() }
+        lifecycleScope.launch(Dispatchers.IO) {
+            setMediaItem()
+
+            withContext(Dispatchers.Main) {
+                // seek to the previous position if available
+                if (seekToPosition != 0L) {
+                    player?.seekTo(seekToPosition)
+                } else if (PlayerHelper.watchPositionsAudio) {
+                    PlayerHelper.getPosition(videoId, streams?.duration)?.let {
+                        player?.seekTo(it)
+                    }
+                }
+            }
+        }
 
         // create the notification
         if (!this@OnlinePlayerService::nowPlayingNotification.isInitialized) {
@@ -208,22 +220,6 @@ class OnlinePlayerService : LifecycleService() {
         player?.apply {
             playWhenReady = true
             prepare()
-        }
-
-        // seek to the previous position if available
-        if (seekToPosition != 0L) {
-            player?.seekTo(seekToPosition)
-        } else if (PlayerHelper.watchPositionsAudio) {
-            runCatching {
-                val watchPosition = runBlocking {
-                    Database.watchPositionDao().findById(videoId)
-                }
-                streams?.duration?.let {
-                    if (watchPosition != null && watchPosition.position < it * 1000 * 0.9) {
-                        player?.seekTo(watchPosition.position)
-                    }
-                }
-            }
         }
 
         if (PlayerHelper.sponsorBlockEnabled) fetchSponsorBlockSegments()
