@@ -4,7 +4,6 @@ import android.text.format.DateUtils
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.core.graphics.drawable.toBitmap
-import androidx.core.math.MathUtils
 import androidx.core.view.updateLayoutParams
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.ui.TimeBar
@@ -98,7 +97,7 @@ class SeekbarPreviewListener(
                 playerBinding.seekbarPreview.width / 2
             // normalize the offset to keep a minimum distance at left and right
             val maxPadding = parentWidth - MIN_PADDING - playerBinding.seekbarPreview.width
-            marginStart = MathUtils.clamp(offset.toInt(), MIN_PADDING, maxPadding)
+            marginStart = offset.toInt().coerceIn(MIN_PADDING, maxPadding)
         }
     }
 

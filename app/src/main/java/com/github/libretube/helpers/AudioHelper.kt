@@ -3,7 +3,6 @@ package com.github.libretube.helpers
 import android.content.Context
 import android.media.AudioManager
 import androidx.core.content.getSystemService
-import androidx.core.math.MathUtils
 import androidx.media.AudioManagerCompat
 import com.github.libretube.extensions.normalize
 
@@ -16,7 +15,7 @@ class AudioHelper(context: Context) {
     var volume: Int
         get() = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) - minimumVolumeIndex
         set(value) {
-            val vol = MathUtils.clamp(value, minimumVolumeIndex, maximumVolumeIndex)
+            val vol = value.coerceIn(minimumVolumeIndex, maximumVolumeIndex)
             audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, vol, 0)
         }
 
