@@ -81,9 +81,11 @@ dependencies {
     //debugImplementation libs.square.leakcanary
 
     /* Android Core */
+    implementation libs.androidx.activity
     implementation libs.androidx.appcompat
     implementation libs.androidx.core
     implementation libs.androidx.constraintlayout
+    implementation libs.androidx.fragment
     implementation libs.androidx.legacySupport
     implementation libs.androidx.navigation.fragment
     implementation libs.androidx.navigation.ui

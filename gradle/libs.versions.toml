@@ -21,11 +21,15 @@ kotlinxSerialization = "1.5.1"
 kotlinxDatetime = "0.4.0"
 kotlinxRetrofit = "1.0.0"
 media3 = "1.1.0"
+activity = "1.7.2"
+fragment = "1.6.0"
 
 [libraries]
+androidx-activity = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-core = { group = "androidx.core", name = "core", version.ref = "core" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation" }
 androidx-navigation-ui = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation" }
