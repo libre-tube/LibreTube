@@ -69,7 +69,7 @@
     <string name="category_segments">Segmente</string>
     <string name="category_sponsor">Sponsor</string>
     <string name="category_selfpromo">Neplătit/Autopromovare</string>
-    <string name="category_interaction">Reamintire de interacțiune („like și subscribe”)</string>
+    <string name="category_interaction">Reamintire de interacțiune</string>
     <string name="category_intro">Intervale de pauză / Animațiile de introducere</string>
     <string name="license">Licență</string>
     <string name="color_accent">Accente</string>
@@ -408,7 +408,7 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d videoclipuri</string>
     <string name="subscriberAndVideoCounts">%1$s abonați • %2$d videoclipuri</string>
     <string name="disable_proxy">Dezactivați proxy-ul Piped</string>
-    <string name="disable_proxy_summary">Încărcați videoclipuri și imagini direct de pe serverele YouTube. Activați această opțiune doar dacă utilizați un VPN! Rețineți că este posibil ca această opțiune să nu funcționeze cu conținut de pe YT music.</string>
+    <string name="disable_proxy_summary">Încărcați videoclipuri și imagini direct de pe serverele YouTube. Activați opțiunea numai dacă utilizați un VPN oricum!</string>
     <string name="auto_fullscreen_shorts">Ecran complet automat pentru videoclipuri scurte</string>
     <string name="channel_groups">Grupuri de canale</string>
     <string name="group_name">Numele grupului</string>
@@ -446,4 +446,24 @@
     <string name="welcome">Bun venit la LibreTube</string>
     <string name="choose_instance_long">Vă rugăm să alegeți o instanță Piped pe care să o utilizați de mai jos. Instanța Piped va acționa ca intermediar între dvs. și YouTube. Aceste instanțe sunt situate în diferite locații fizice - indicate de steagurile țării lor. Instanțele mai apropiate fizic de tine sunt probabil mai rapide decât cazurile care nu sunt. Puteți schimba oricând instanța pe care o utilizați în setări.</string>
     <string name="home_tab_content">Conținutul filei Acasă</string>
+    <string name="fallback_piped_proxy">Rezervă la proxy Piped</string>
+    <string name="fallback_piped_proxy_desc">Încărcați videoclipuri prin proxy dacă conectarea directă la YouTube nu funcționează pentru videoclipul curent (crește timpul inițial de încărcare). Dacă este dezactivat, conținutul muzical YouTube nu va fi redat probabil din cauza restricțiilor YT.</string>
+    <string name="off">Oprit</string>
+    <string name="automatic">Automat</string>
+    <string name="stop">Opreşte</string>
+    <string name="enter_hex_value">Introduceți valoarea hexagonală a culorii</string>
+    <string name="sb_custom_colors">Culori personalizate pentru segmente</string>
+    <string name="change_playlist_description">Schimbă descrierea playlistului</string>
+    <string name="chapters_videoHighlight">Evidențiere video</string>
+    <string name="jumped_to_highlight">Sărit la evidențierea video</string>
+    <string name="category_highlight_description">Ar putea fi fie titlul promovat, miniatura sau partea cea mai interesantă a videoclipului. Puteți sări la el atingând-o în secțiunea capitole.</string>
+    <string name="category_highlight">Afișați evidențierea videoclipului</string>
+    <string name="sb_color_enable">Comută segmentele de culoare personalizate pentru segmentele SponsorBlock.</string>
+    <string name="invalid_color">A fost introdusă o valoare de culoare nevalidă!</string>
+    <string name="color">Culoare</string>
+    <string name="emptyPlaylistDescription">Descrierea playlistului nu poate fi goală</string>
+    <string name="visible">Afișați în bara de căutare</string>
+    <string name="manual">Manual</string>
+    <string name="playlist_description">Descrierea playlist-ului</string>
+    <string name="show_search_suggestions">Afișați sugestii de căutare</string>
 </resources>
