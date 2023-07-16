@@ -56,7 +56,6 @@ import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.Message
-import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
@@ -115,15 +114,15 @@ import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
 import com.github.libretube.util.YoutubeHlsPlaylistParser
-import java.io.IOException
-import java.util.*
-import java.util.concurrent.Executors
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
+import java.io.IOException
+import java.util.*
+import java.util.concurrent.Executors
 import kotlin.math.abs
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
@@ -1430,63 +1429,47 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
             .show(childFragmentManager)
     }
-
-    private fun getDisplayTrackType(trackType: String?): String {
-        if (trackType == null) {
-            return getString(R.string.unknown_audio_track_type)
-        }
-
-        return when (trackType.lowercase()) {
-            "descriptive" -> getString(R.string.descriptive_audio_track)
-            "dubbed" -> getString(R.string.dubbed_audio_track)
-            "original" -> getString(R.string.original_or_main_audio_track)
-            else -> getString(R.string.unknown_audio_track_type)
-        }
-    }
-
-    private fun getKeyByAudioStreamGroup(audioStream: PipedStream): String {
-        val nullAudioLocale = audioStream.audioTrackLocale == null
-        if (nullAudioLocale && audioStream.audioTrackType == null) {
-            // A track without a locale set and a track type should be a default track
-            return getString(R.string.default_audio_track)
-        }
-
-        return getString(R.string.audio_track_format).format(
-            if (nullAudioLocale) getString(R.string.unknown_audio_language)
-            else Locale.forLanguageTag(audioStream.audioTrackLocale!!)
-                .getDisplayLanguage(LocaleHelper.getAppLocale())
-                .ifEmpty { getString(R.string.unknown_audio_language) },
-            getDisplayTrackType(audioStream.audioTrackType))
-    }
-
-    private fun getAudioStreamGroups(audioStreams: List<PipedStream>?): Map<String, List<PipedStream>> {
-        return audioStreams.orEmpty()
-            .groupBy { getKeyByAudioStreamGroup(it) }
-    }
-
+    
     override fun onAudioStreamClicked() {
-        val audioGroups = getAudioStreamGroups(streams.audioStreams)
-        val audioLanguages = audioGroups.map { it.key }
+        val context = requireContext()
+        val audioLanguagesAndRoleFlags = PlayerHelper.getAudioLanguagesAndRoleFlagsFromTrackGroups(
+            exoPlayer.currentTracks.groups, false
+        )
+        val audioLanguages = audioLanguagesAndRoleFlags.map {
+            PlayerHelper.getAudioTrackNameFromFormat(context, it)
+        }
+        val baseBottomSheet = BaseBottomSheet()
 
-        BaseBottomSheet()
-            .setSimpleItems(audioLanguages) { index ->
-                val audioStreams = audioGroups.values.elementAt(index)
-                val firstAudioStream = audioStreams.firstOrNull()
+        if (audioLanguagesAndRoleFlags.isEmpty()) {
+            baseBottomSheet.setSimpleItems(
+                listOf(context.getString(R.string.unknown_or_no_audio)),
+                null
+            )
+        } else if (audioLanguagesAndRoleFlags.size == 1
+            && audioLanguagesAndRoleFlags[0].first == null
+            && !PlayerHelper.haveAudioTrackRoleFlagSet(
+                audioLanguagesAndRoleFlags[0].second
+            )
+        ) {
+            // Regardless of audio format or quality, if there is only one audio stream which has
+            // no language and no role flags, it should mean that there is only a single audio
+            // track which has no language or track type set in the video played
+            // Consider it as the default audio track (or unknown)
+            baseBottomSheet.setSimpleItems(
+                listOf(context.getString(R.string.default_or_unknown_audio_track)),
+                null
+            )
+        } else {
+            baseBottomSheet.setSimpleItems(audioLanguages) { index ->
+                val selectedAudioFormat = audioLanguagesAndRoleFlags[index]
                 trackSelector.updateParameters {
-                    setPreferredAudioLanguage(firstAudioStream?.audioTrackLocale)
-                    setPreferredAudioRoleFlags(
-                        if (firstAudioStream?.audioTrackType == null) {
-                            C.ROLE_FLAG_MAIN
-                        } else when (firstAudioStream.audioTrackType.lowercase()) {
-                            "descriptive" -> C.ROLE_FLAG_DESCRIBES_VIDEO
-                            "dubbed" -> C.ROLE_FLAG_DUB
-                            "original" -> C.ROLE_FLAG_MAIN
-                            else -> C.ROLE_FLAG_ALTERNATE
-                        }
-                    )
+                    setPreferredAudioLanguage(selectedAudioFormat.first)
+                    setPreferredAudioRoleFlags(selectedAudioFormat.second)
                 }
             }
-            .show(childFragmentManager)
+        }
+
+        baseBottomSheet.show(childFragmentManager)
     }
 
     override fun onStatsClicked() {
