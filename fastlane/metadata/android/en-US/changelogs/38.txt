@@ -1,0 +1,8 @@
+* Automatically use Material You accent on first app startup when supported
+* Include playlist name in toast after succesfully adding video
+* fix: too many chapters highlighted in dialog, crash on selection
+* fix: disabled proxy when lbry stream available
+* fix: watch positions don't retain
+* fix: Restoring SponsorBlock preferences from backup
+* fix: Appearance of SponsorBlock preference on small screens
+* fix: hide SponsorBlock skip button in miniplayer
