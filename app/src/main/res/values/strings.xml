@@ -445,6 +445,15 @@
     <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="home_tab_content">Home tab content</string>
     <string name="show_search_suggestions">Show search suggestions</string>
+    <string name="audio_track_format">%1$s - %2$s</string>
+    <string name="unknown_audio_language">Unknown audio language</string>
+    <string name="unknown_audio_track_type">Unknown audio track type</string>
+    <string name="original_or_main_audio_track">original or main</string>
+    <string name="dubbed_audio_track">dubbed</string>
+    <string name="descriptive_audio_track">descriptive</string>
+    <string name="default_or_unknown_audio_track">default or unknown</string>
+    <string name="unknown_or_no_audio">unknown or no audio</string>
+
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
     <string name="download_channel_description">Shows a notification when downloading media.</string>

@@ -1348,9 +1348,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         trackSelector = DefaultTrackSelector(requireContext())
 
         trackSelector.updateParameters {
-            setPreferredAudioLanguage(
-                LocaleHelper.getAppLocale().language.lowercase().substring(0, 2)
-            )
+            setPreferredAudioLanguage(LocaleHelper.getAppLocale().isO3Language)
         }
 
         exoPlayer = ExoPlayer.Builder(requireContext())
@@ -1433,21 +1431,59 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             .show(childFragmentManager)
     }
 
-    private fun getAudioStreamGroups(audioStreams: List<PipedStream>?): Map<String?, List<PipedStream>> {
+    private fun getDisplayTrackType(trackType: String?): String {
+        if (trackType == null) {
+            return getString(R.string.unknown_audio_track_type)
+        }
+
+        return when (trackType.lowercase()) {
+            "descriptive" -> getString(R.string.descriptive_audio_track)
+            "dubbed" -> getString(R.string.dubbed_audio_track)
+            "original" -> getString(R.string.original_or_main_audio_track)
+            else -> getString(R.string.unknown_audio_track_type)
+        }
+    }
+
+    private fun getKeyByAudioStreamGroup(audioStream: PipedStream): String {
+        val nullAudioLocale = audioStream.audioTrackLocale == null
+        if (nullAudioLocale && audioStream.audioTrackType == null) {
+            // A track without a locale set and a track type should be a default track
+            return getString(R.string.default_audio_track)
+        }
+
+        return getString(R.string.audio_track_format).format(
+            if (nullAudioLocale) getString(R.string.unknown_audio_language)
+            else Locale.forLanguageTag(audioStream.audioTrackLocale!!)
+                .getDisplayLanguage(LocaleHelper.getAppLocale())
+                .ifEmpty { getString(R.string.unknown_audio_language) },
+            getDisplayTrackType(audioStream.audioTrackType))
+    }
+
+    private fun getAudioStreamGroups(audioStreams: List<PipedStream>?): Map<String, List<PipedStream>> {
         return audioStreams.orEmpty()
-            .groupBy { it.audioTrackName }
+            .groupBy { getKeyByAudioStreamGroup(it) }
     }
 
     override fun onAudioStreamClicked() {
         val audioGroups = getAudioStreamGroups(streams.audioStreams)
-        val audioLanguages = audioGroups.map { it.key ?: getString(R.string.default_audio_track) }
+        val audioLanguages = audioGroups.map { it.key }
 
         BaseBottomSheet()
             .setSimpleItems(audioLanguages) { index ->
                 val audioStreams = audioGroups.values.elementAt(index)
-                val lang = audioStreams.firstOrNull()?.audioTrackId?.substring(0, 2)
+                val firstAudioStream = audioStreams.firstOrNull()
                 trackSelector.updateParameters {
-                    setPreferredAudioLanguage(lang)
+                    setPreferredAudioLanguage(firstAudioStream?.audioTrackLocale)
+                    setPreferredAudioRoleFlags(
+                        if (firstAudioStream?.audioTrackType == null) {
+                            C.ROLE_FLAG_MAIN
+                        } else when (firstAudioStream.audioTrackType.lowercase()) {
+                            "descriptive" -> C.ROLE_FLAG_DESCRIBES_VIDEO
+                            "dubbed" -> C.ROLE_FLAG_DUB
+                            "original" -> C.ROLE_FLAG_MAIN
+                            else -> C.ROLE_FLAG_ALTERNATE
+                        }
+                    )
                 }
             }
             .show(childFragmentManager)
