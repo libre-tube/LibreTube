@@ -311,7 +311,6 @@
     <string name="alternative_player_layout">تخطيط المشغل البديل</string>
     <string name="alternative_player_layout_summary">وتظهر أشرطة الفيديو ذات الصلة كصف أعلى من التعليقات بدلا من التعليقات الواردة أدناه.</string>
     <string name="audio_track">مسار صوتي</string>
-    <string name="default_audio_track">الإفتراضي</string>
     <string name="hls_instead_of_dash">استخدام HLS</string>
     <string name="hls_instead_of_dash_summary">استخدم HLS بدلا من DASH (سيكون أبطأ ، غير مستحسن)</string>
     <string name="auto_quality">تلقائي</string>

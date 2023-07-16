@@ -308,7 +308,6 @@
     <string name="sb_markers">Маркери</string>
     <string name="sb_markers_summary">Означите сегменте на временској траци.</string>
     <string name="audio_track">Аудио запис</string>
-    <string name="default_audio_track">Подразумевано</string>
     <string name="livestreams">Стримови уживо</string>
     <string name="alternative_videos_layout">Алтернативни изглед видео записа</string>
     <string name="defaultIconLight">Подразумевано светло</string>

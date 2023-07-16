@@ -223,7 +223,6 @@
     <string name="navbar_order">පිළිවෙල</string>
     <string name="layout">පිරිසැලසුම</string>
     <string name="audio_track">ශ්‍රව්‍ය පථය</string>
-    <string name="default_audio_track">පෙරනිමිය</string>
     <string name="hls_instead_of_dash">HLS භාවිතා කරන්න</string>
     <string name="auto_quality">ස්වයං</string>
     <string name="limit_to_runtime">ධාවන කාලයට සීමා කරන්න</string>

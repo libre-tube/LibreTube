@@ -240,7 +240,6 @@
     <string name="import_playlists">재생목록 가져오기</string>
     <string name="export_playlists">재생목록 내보내기</string>
     <string name="audio_track">오디오 트랙</string>
-    <string name="default_audio_track">기본값</string>
     <string name="hls_instead_of_dash">HLS를 사용하세요</string>
     <string name="limit_to_runtime">런타임으로 제한</string>
     <string name="trends">트렌드</string>

@@ -19,8 +19,10 @@ object DashHelper {
 
     private data class AdapSetInfo(
         val mimeType: String,
+        val formats: MutableList<PipedStream> = mutableListOf(),
         val audioTrackId: String? = null,
-        val formats: MutableList<PipedStream> = mutableListOf()
+        val audioTrackType: String? = null,
+        val audioLocale: String? = null
     )
 
     fun createManifest(
@@ -75,7 +77,6 @@ object DashHelper {
                 adapSetInfos.add(
                     AdapSetInfo(
                         stream.mimeType!!,
-                        null,
                         mutableListOf(stream)
                     )
                 )
@@ -94,8 +95,10 @@ object DashHelper {
             adapSetInfos.add(
                 AdapSetInfo(
                     stream.mimeType!!,
+                    mutableListOf(stream),
                     stream.audioTrackId,
-                    mutableListOf(stream)
+                    stream.audioTrackType,
+                    stream.audioTrackLocale
                 )
             )
         }
@@ -105,8 +108,24 @@ object DashHelper {
             adapSetElement.setAttribute("mimeType", adapSet.mimeType)
             adapSetElement.setAttribute("startWithSAP", "1")
             adapSetElement.setAttribute("subsegmentAlignment", "true")
+
             if (adapSet.audioTrackId != null) {
                 adapSetElement.setAttribute("lang", adapSet.audioTrackId.substring(0, 2))
+            } else if (adapSet.audioLocale != null) {
+                adapSetElement.setAttribute("lang", adapSet.audioLocale)
+            }
+
+            // Only add the Role element if there is a track type set
+            // This allows distinction between formats marked as original on YouTube and
+            // formats without track type info set
+            if (adapSet.audioTrackType != null) {
+                val roleElement = doc.createElement("Role")
+                roleElement.setAttribute("schemeIdUri", "urn:mpeg:dash:role:2011")
+                roleElement.setAttribute(
+                    "value",
+                    getRoleValueFromAudioTrackType(adapSet.audioTrackType)
+                )
+                adapSetElement.appendChild(roleElement)
             }
 
             val isVideo = adapSet.mimeType.contains("video")
@@ -162,18 +181,34 @@ object DashHelper {
         val baseUrl = doc.createElement("BaseURL")
         baseUrl.appendChild(doc.createTextNode(ProxyHelper.unwrapUrl(stream.url!!, rewriteUrls)))
 
-        val segmentBase = doc.createElement("SegmentBase")
+        representation.appendChild(audioChannelConfiguration)
+        representation.appendChild(baseUrl)
+        representation.appendChild(createSegmentBaseElement(doc, stream))
+
+        return representation
+    }
+
+    private fun createSegmentBaseElement(
+        document: Document,
+        stream: PipedStream
+    ): Element {
+        val segmentBase = document.createElement("SegmentBase")
         segmentBase.setAttribute("indexRange", "${stream.indexStart}-${stream.indexEnd}")
 
-        val initialization = doc.createElement("Initialization")
+        val initialization = document.createElement("Initialization")
         initialization.setAttribute("range", "${stream.initStart}-${stream.initEnd}")
         segmentBase.appendChild(initialization)
 
-        representation.appendChild(audioChannelConfiguration)
-        representation.appendChild(baseUrl)
-        representation.appendChild(segmentBase)
+        return segmentBase
+    }
 
-        return representation
+    private fun getRoleValueFromAudioTrackType(audioTrackType: String): String {
+        return when (audioTrackType.lowercase()) {
+            "descriptive" -> "description"
+            "dubbed" -> "dub"
+            "original" -> "main"
+            else -> "alternate"
+        }
     }
 
     private fun createVideoRepresentation(

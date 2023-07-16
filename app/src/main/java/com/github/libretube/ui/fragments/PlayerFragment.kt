@@ -46,6 +46,7 @@ import androidx.media3.common.Player
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.datasource.cronet.CronetDataSource
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.hls.HlsMediaSource
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -55,7 +56,6 @@ import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.Message
-import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
@@ -113,15 +113,16 @@ import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
-import java.io.IOException
-import java.util.*
-import java.util.concurrent.Executors
+import com.github.libretube.util.YoutubeHlsPlaylistParser
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
+import java.io.IOException
+import java.util.*
+import java.util.concurrent.Executors
 import kotlin.math.abs
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
@@ -163,6 +164,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var trackSelector: DefaultTrackSelector
     private var captionLanguage: String? = PlayerHelper.defaultSubtitleCode
+
+    private val cronetDataSourceFactory = CronetDataSource.Factory(
+        CronetHelper.cronetEngine,
+        Executors.newCachedThreadPool()
+    )
 
     /**
      * Chapters and comments
@@ -1189,13 +1195,15 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
     }
 
+    private fun createMediaItem(uri: Uri, mimeType: String) = MediaItem.Builder()
+        .setUri(uri)
+        .setMimeType(mimeType)
+        .setSubtitleConfigurations(subtitles)
+        .setMetadata(streams)
+        .build()
+
     private fun setMediaSource(uri: Uri, mimeType: String) {
-        val mediaItem = MediaItem.Builder()
-            .setUri(uri)
-            .setMimeType(mimeType)
-            .setSubtitleConfigurations(subtitles)
-            .setMetadata(streams)
-            .build()
+        val mediaItem = createMediaItem(uri, mimeType)
         exoPlayer.setMediaItem(mediaItem)
     }
 
@@ -1307,6 +1315,16 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
             // HLS
             streams.hls != null -> {
+                val hlsMediaSourceFactory = HlsMediaSource.Factory(cronetDataSourceFactory)
+                    .setPlaylistParserFactory(YoutubeHlsPlaylistParser.Factory())
+
+                val mediaSource = hlsMediaSourceFactory.createMediaSource(
+                    createMediaItem(
+                        ProxyHelper.unwrapStreamUrl(streams.hls!!).toUri(),
+                        MimeTypes.APPLICATION_M3U8,
+                    )
+                )
+                exoPlayer.setMediaSource(mediaSource)
                 ProxyHelper.unwrapStreamUrl(streams.hls!!).toUri() to MimeTypes.APPLICATION_M3U8
             }
             // NO STREAM FOUND
@@ -1329,9 +1347,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         trackSelector = DefaultTrackSelector(requireContext())
 
         trackSelector.updateParameters {
-            setPreferredAudioLanguage(
-                LocaleHelper.getAppLocale().language.lowercase().substring(0, 2)
-            )
+            setPreferredAudioLanguage(LocaleHelper.getAppLocale().isO3Language)
         }
 
         exoPlayer = ExoPlayer.Builder(requireContext())
@@ -1414,24 +1430,46 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             .show(childFragmentManager)
     }
 
-    private fun getAudioStreamGroups(audioStreams: List<PipedStream>?): Map<String?, List<PipedStream>> {
-        return audioStreams.orEmpty()
-            .groupBy { it.audioTrackName }
-    }
-
     override fun onAudioStreamClicked() {
-        val audioGroups = getAudioStreamGroups(streams.audioStreams)
-        val audioLanguages = audioGroups.map { it.key ?: getString(R.string.default_audio_track) }
+        val context = requireContext()
+        val audioLanguagesAndRoleFlags = PlayerHelper.getAudioLanguagesAndRoleFlagsFromTrackGroups(
+            exoPlayer.currentTracks.groups, false
+        )
+        val audioLanguages = audioLanguagesAndRoleFlags.map {
+            PlayerHelper.getAudioTrackNameFromFormat(context, it)
+        }
+        val baseBottomSheet = BaseBottomSheet()
 
-        BaseBottomSheet()
-            .setSimpleItems(audioLanguages) { index ->
-                val audioStreams = audioGroups.values.elementAt(index)
-                val lang = audioStreams.firstOrNull()?.audioTrackId?.substring(0, 2)
+        if (audioLanguagesAndRoleFlags.isEmpty()) {
+            baseBottomSheet.setSimpleItems(
+                listOf(context.getString(R.string.unknown_or_no_audio)),
+                null
+            )
+        } else if (audioLanguagesAndRoleFlags.size == 1
+            && audioLanguagesAndRoleFlags[0].first == null
+            && !PlayerHelper.haveAudioTrackRoleFlagSet(
+                audioLanguagesAndRoleFlags[0].second
+            )
+        ) {
+            // Regardless of audio format or quality, if there is only one audio stream which has
+            // no language and no role flags, it should mean that there is only a single audio
+            // track which has no language or track type set in the video played
+            // Consider it as the default audio track (or unknown)
+            baseBottomSheet.setSimpleItems(
+                listOf(context.getString(R.string.default_or_unknown_audio_track)),
+                null
+            )
+        } else {
+            baseBottomSheet.setSimpleItems(audioLanguages) { index ->
+                val selectedAudioFormat = audioLanguagesAndRoleFlags[index]
                 trackSelector.updateParameters {
-                    setPreferredAudioLanguage(lang)
+                    setPreferredAudioLanguage(selectedAudioFormat.first)
+                    setPreferredAudioRoleFlags(selectedAudioFormat.second)
                 }
             }
-            .show(childFragmentManager)
+        }
+
+        baseBottomSheet.show(childFragmentManager)
     }
 
     override fun onStatsClicked() {

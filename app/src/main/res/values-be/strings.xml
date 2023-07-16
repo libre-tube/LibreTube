@@ -304,7 +304,6 @@
     <string name="notification_time_summary">Прамежак часу, у які дазволена паказваць апавяшчэнні.</string>
     <string name="alternative_player_layout_summary">Паказваць звязаныя відэа ў радку над каментарыямі, а не ўнізе.</string>
     <string name="audio_track">Гукавая дарожка</string>
-    <string name="default_audio_track">Па змаўчанні</string>
     <string name="hls_instead_of_dash">Выкарыстоўвайце HLS</string>
     <string name="auto_quality">Аўто</string>
     <string name="unsupported_file_format">Фармат файла не падтрымліваецца: %1$s</string>

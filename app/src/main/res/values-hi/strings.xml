@@ -198,7 +198,6 @@
     <string name="sb_markers_summary">समय पट्टी पर खंडों को चिह्नित करें।</string>
     <string name="update_available">संस्करण %1$s उपलब्ध है</string>
     <string name="audio_track">ऑडियो ट्रैक</string>
-    <string name="default_audio_track">डिफ़ॉल्ट</string>
     <string name="downloads">डाउनलोडस</string>
     <string name="livestreams">लाइव स्ट्रीम</string>
     <string name="alternative_videos_layout">वैकल्पिक वीडियो लेआउट</string>

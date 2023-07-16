@@ -308,7 +308,6 @@
     <string name="notification_time_summary">Tidsperiode merknadene kan vises.</string>
     <string name="navbar_order">Rekkefølge</string>
     <string name="alternative_player_layout_summary">Vis relaterte videoer som rad over kommentarene istedenfor under.</string>
-    <string name="default_audio_track">Forvalg</string>
     <string name="audio_track">Lydspor</string>
     <string name="hls_instead_of_dash">Bruk HLS</string>
     <string name="hls_instead_of_dash_summary">Bruk HLS istedenfor DASH (tregere og ikke anbefalt)</string>

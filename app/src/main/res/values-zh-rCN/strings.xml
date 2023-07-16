@@ -311,7 +311,6 @@
     <string name="alternative_player_layout">备选的播放器布局</string>
     <string name="alternative_player_layout_summary">将相关视频显示为评论上方而不是下方的一行。</string>
     <string name="audio_track">音轨</string>
-    <string name="default_audio_track">默认</string>
     <string name="hls_instead_of_dash">使用 HLS</string>
     <string name="hls_instead_of_dash_summary">使用 HLS 而不是 DASH（会更慢，不推荐）</string>
     <string name="auto_quality">自动</string>

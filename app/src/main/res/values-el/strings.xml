@@ -367,7 +367,6 @@
     <string name="import_playlists">Εισαγωγή λιστών αναπαραγωγής</string>
     <string name="export_playlists">Εξαγωγή λιστών αναπαραγωγής</string>
     <string name="audio_track">Ηχητικό κομμάτι</string>
-    <string name="default_audio_track">Προεπιλογή</string>
     <string name="audio_player">Αναπαραγωγή ήχου</string>
     <string name="renamePlaylist">Μετονομασία λίστας αναπαραγωγής</string>
     <string name="queue_insert_related_videos">Εισαγάγετε σχετικά βίντεο</string>

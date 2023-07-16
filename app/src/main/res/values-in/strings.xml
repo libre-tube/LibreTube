@@ -311,7 +311,6 @@
     <string name="alternative_player_layout">Tata letak pemutar alternatif</string>
     <string name="alternative_player_layout_summary">Tampilkan video terkait sebagai baris di atas komentar, bukan di bawah.</string>
     <string name="audio_track">Trek audio</string>
-    <string name="default_audio_track">Bawaan</string>
     <string name="hls_instead_of_dash">Gunakan HLS</string>
     <string name="auto_quality">Otomatis</string>
     <string name="hls_instead_of_dash_summary">Gunakan HLS daripada DASH (akan lebih lambat, tidak disarankan)</string>

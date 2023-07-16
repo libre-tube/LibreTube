@@ -327,7 +327,6 @@
     <string name="pinch_control">調整音高</string>
     <string name="play_latest_videos">播放最新影片</string>
     <string name="audio_track">音訊曲目</string>
-    <string name="default_audio_track">預設</string>
     <string name="export_subscriptions">匯出訂閱列表</string>
     <string name="skip_buttons">跳過按鈕</string>
     <string name="no_search_result">無結果。</string>

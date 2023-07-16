@@ -309,7 +309,6 @@
     <string name="layout">লেয়াউট</string>
     <string name="alternative_player_layout">বিকল্প প্লেয়ার লেয়াউট</string>
     <string name="audio_track">অডিও ট্র্যাক</string>
-    <string name="default_audio_track">ডিফল্ট</string>
     <string name="hls_instead_of_dash">HLS ব্যাবহার করুন</string>
     <string name="hls_instead_of_dash_summary">DASH এর বদলে HLS ব্যাবহার করুন (ধীরগতিসম্পন্ন হতে পারে, সুপারিশকৃত নয়)</string>
     <string name="auto_quality">স্বয়ংক্রিয়</string>

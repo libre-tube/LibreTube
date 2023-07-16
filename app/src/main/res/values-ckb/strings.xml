@@ -331,7 +331,6 @@
     <string name="notification_time_summary">دیاریکردنی مەودای کاتی ئاگادارکردنەوەکان بۆ پیشاندانی بڵاوکراوە.</string>
     <string name="alternative_player_layout_summary">پیشاندانی ڤیدیۆ هاوشێوەکان لەسەرووی بەشی لێدوانەکان.</string>
     <string name="audio_track">تراکی دەنگی</string>
-    <string name="default_audio_track">بنەڕەتی</string>
     <string name="limit_to_runtime">سنوردارکردن بۆ لێدان</string>
     <string name="trends">پێشنیارکراوەکان</string>
     <string name="featured">هەڵبژێردراوەکان</string>
