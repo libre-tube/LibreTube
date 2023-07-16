@@ -319,7 +319,6 @@
     <string name="pinch_control_summary">Erabil atximur egiteko keinua, hurbiltzeko/ urruntzeko.</string>
     <string name="playback_pitch">Tonua</string>
     <string name="audio_track">Audio pista</string>
-    <string name="default_audio_track">Lehenetsia</string>
     <string name="defaults">Lehenetsia</string>
     <string name="alternative_player_layout_summary">Bistaratu erlazionatutako bideoak errenkada gisa iruzkinen gainetik, behean agertu beharrean.</string>
     <string name="hls_instead_of_dash">HLS erabili</string>

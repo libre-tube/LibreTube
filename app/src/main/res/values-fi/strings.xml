@@ -348,7 +348,6 @@
     <string name="notification_time">Ilmoitusaika</string>
     <string name="navbar_order">Järjestys</string>
     <string name="audio_track">Ääniraita</string>
-    <string name="default_audio_track">Oletus</string>
     <string name="hls_instead_of_dash_summary">Käytä HLS:ää DASHin sijaan (on hitaampi, ei suositella)</string>
     <string name="auto_quality">Auto</string>
     <string name="limit_to_runtime">Rajoita suoritusaikaa</string>

@@ -311,7 +311,6 @@
     <string name="layout">Rozložení</string>
     <string name="alternative_player_layout">Alternativní rozložení přehrávače</string>
     <string name="audio_track">Zvuková stopa</string>
-    <string name="default_audio_track">Výchozí</string>
     <string name="auto_quality">Auto</string>
     <string name="hls_instead_of_dash">Použít HLS</string>
     <string name="hls_instead_of_dash_summary">Použít HLS místo DASH (bude pomalejší, nedoporučuje se)</string>

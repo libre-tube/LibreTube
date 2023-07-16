@@ -340,7 +340,6 @@
     <string name="proceed">続ける</string>
     <string name="play_latest_videos">最新の動画を再生</string>
     <string name="audio_track">音声トラック</string>
-    <string name="default_audio_track">標準</string>
     <string name="hls_instead_of_dash_summary">DASHの代わりにHLSを使用します (より低速、非推奨)</string>
     <string name="hls_instead_of_dash">HLSを使う</string>
     <string name="auto_quality">自動</string>

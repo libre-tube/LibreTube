@@ -311,7 +311,6 @@
     <string name="navbar_order">Ordenar</string>
     <string name="layout">Diseño</string>
     <string name="audio_track">Pista de audio</string>
-    <string name="default_audio_track">Predeterminada</string>
     <string name="auto_quality">Automatico</string>
     <string name="hls_instead_of_dash_summary">Usar HLS en vez de DASH (podría ser lento, no recomendado)</string>
     <string name="hls_instead_of_dash">Usar HLS</string>

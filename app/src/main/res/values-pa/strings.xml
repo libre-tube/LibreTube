@@ -336,7 +336,6 @@
     <string name="layout">ਲੇਆਊਟ</string>
     <string name="notification_time_summary">ਸਮਾਂ ਸੀਮਤ ਕਰੋ ਜਿਸ ਵਿੱਚ ਸਟ੍ਰੀਮ ਸੂਚਨਾਵਾਂ ਦਿਖਾਈਆਂ ਜਾਂਦੀਆਂ ਹਨ।</string>
     <string name="navbar_order">ਆਰਡਰ</string>
-    <string name="default_audio_track">ਡੀਫ਼ਾਲਟ</string>
     <string name="alternative_player_layout">ਵਿਕਲਪਿਕ ਪਲੇਅਰ ਲੇਆਊਟ</string>
     <string name="trending">ਹੁਣ ਕੀ ਰੁਝਾਨ ਹੈ</string>
     <string name="hls_instead_of_dash">HLS ਦੀ ਵਰਤੋਂ ਕਰੋ</string>

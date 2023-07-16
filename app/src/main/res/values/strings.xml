@@ -330,7 +330,6 @@
     <string name="alternative_player_layout">Alternative player layout</string>
     <string name="alternative_player_layout_summary">Show the related videos as a row above the comments instead of below.</string>
     <string name="audio_track">Audio track</string>
-    <string name="default_audio_track">Default</string>
     <string name="unsupported_file_format">Unsupported file format: %1$s</string>
     <string name="hls_instead_of_dash">Use HLS</string>
     <string name="hls_instead_of_dash_summary">Use HLS instead of DASH (will be slower, not recommended)</string>

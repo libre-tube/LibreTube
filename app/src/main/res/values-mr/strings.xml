@@ -336,7 +336,6 @@
     <string name="layout">मांडणी</string>
     <string name="alternative_player_layout">पर्यायी प्लेअर लेआउट</string>
     <string name="audio_track">ऑडिओ ट्रॅक</string>
-    <string name="default_audio_track">डीफॉल्ट</string>
     <string name="limit_to_runtime">रनटाइमची मर्यादा</string>
     <string name="queue_insert_related_videos">संबंधित व्हिडिओ समाविष्ट करा</string>
     <string name="brightness">ब्राईटनेस</string>

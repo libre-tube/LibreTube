@@ -339,7 +339,6 @@
     <string name="layout">Izklājums</string>
     <string name="alternative_player_layout">Alternatīvs atskaņotāja izklājums</string>
     <string name="alternative_player_layout_summary">Rādīt saistītos video rindā virs komentāriem nevis zem tiem.</string>
-    <string name="default_audio_track">Noklusējumaa</string>
     <string name="unsupported_file_format">Neatbalstīts faila formāts: %1$s</string>
     <string name="hls_instead_of_dash">Izmantot HLS</string>
     <string name="auto_quality">Automātiski</string>

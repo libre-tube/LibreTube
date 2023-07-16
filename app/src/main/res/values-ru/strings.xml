@@ -311,7 +311,6 @@
     <string name="layout">Макет</string>
     <string name="alternative_player_layout">Альтернативный макет плеера</string>
     <string name="audio_track">Аудио трек</string>
-    <string name="default_audio_track">По умолчанию</string>
     <string name="hls_instead_of_dash">Использовать HLS</string>
     <string name="hls_instead_of_dash_summary">Использовать HLS вместо DASH (будет медленнее, не рекомендуется)</string>
     <string name="auto_quality">Авто</string>

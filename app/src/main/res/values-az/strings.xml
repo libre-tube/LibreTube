@@ -311,7 +311,6 @@
     <string name="alternative_player_layout">Alternativ oynadıcı tərtibatı</string>
     <string name="alternative_player_layout_summary">Əlaqəli videoları aşağı əvəzinə, şərhlər üzərində cərgə kimi göstər.</string>
     <string name="audio_track">Səs axını</string>
-    <string name="default_audio_track">Standart</string>
     <string name="auto_quality">Avtomatik</string>
     <string name="hls_instead_of_dash">HLS istifadə et</string>
     <string name="hls_instead_of_dash_summary">DASH əvəzinə HLS istifadə et (daha yavaş olacaq, tövsiyə edilmədi)</string>

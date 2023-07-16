@@ -311,7 +311,6 @@
     <string name="layout">Вигляд</string>
     <string name="alternative_player_layout">Альтернативний вигляд програвача</string>
     <string name="audio_track">Звукова доріжка</string>
-    <string name="default_audio_track">Типово</string>
     <string name="hls_instead_of_dash">Використовувати HLS</string>
     <string name="hls_instead_of_dash_summary">Використовувати HLS замість DASH (працюватиме повільніше, не рекомендується)</string>
     <string name="auto_quality">Авто</string>

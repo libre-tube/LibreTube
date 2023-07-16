@@ -318,7 +318,6 @@
     <string name="layout">Disposizione</string>
     <string name="alternative_player_layout">Layout alternativo del player</string>
     <string name="audio_track">Traccia audio</string>
-    <string name="default_audio_track">Predefinita</string>
     <string name="hls_instead_of_dash">Usa HLS</string>
     <string name="hls_instead_of_dash_summary">Usa HLS invece di DASH (sarà più lento, non consigliato)</string>
     <string name="auto_quality">Automatica</string>

@@ -311,7 +311,6 @@
     <string name="alternative_player_layout">ବିକଳ୍ପ ପ୍ଲେୟାର୍ ଲେଆଉଟ୍</string>
     <string name="alternative_player_layout_summary">ନିମ୍ନୋକ୍ତ ମନ୍ତବ୍ୟଗୁଡିକ ଉପରେ ସଂପୃକ୍ତ ଭିଡିଓଗୁଡିକ ଧାଡି ଭାବରେ ଦେଖାନ୍ତୁ ।</string>
     <string name="audio_track">ଅଡିଓ ଟ୍ରାକ୍</string>
-    <string name="default_audio_track">ଡିଫଲ୍ଟ</string>
     <string name="hls_instead_of_dash">HLS ବ୍ୟବହାର କରନ୍ତୁ</string>
     <string name="hls_instead_of_dash_summary">DASH ପରିବର୍ତ୍ତେ HLS ବ୍ୟବହାର କରନ୍ତୁ (ଧୀର ହେବ, ସୁପାରିଶ ହେବ ନାହିଁ)</string>
     <string name="auto_quality">ସ୍ଵତଃ</string>

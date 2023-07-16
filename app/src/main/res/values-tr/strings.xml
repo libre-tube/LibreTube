@@ -311,7 +311,6 @@
     <string name="alternative_player_layout_summary">İlgili videoları, yorumların altında değil, üstünde bir satır olarak göster.</string>
     <string name="navbar_order">Sıra</string>
     <string name="audio_track">Müzik parçası</string>
-    <string name="default_audio_track">Varsayılan</string>
     <string name="auto_quality">Otomatik</string>
     <string name="hls_instead_of_dash">HLS\'yi kullan</string>
     <string name="hls_instead_of_dash_summary">DASH yerine HLS kullan (daha yavaş olacaktır, önerilmez)</string>

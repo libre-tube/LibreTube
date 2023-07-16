@@ -339,7 +339,6 @@
     <string name="start_time">Timpul de începere</string>
     <string name="end_time">Timpul de sfârșit</string>
     <string name="notification_time">Restricționați timpul de notificare</string>
-    <string name="default_audio_track">Implicit</string>
     <string name="unsupported_file_format">Format de fișier nesuportat: %1$s</string>
     <string name="hls_instead_of_dash">Utilizați HLS</string>
     <string name="hls_instead_of_dash_summary">Utilizați HLS în loc de DASH (va fi mai lent, nu este recomandat)</string>

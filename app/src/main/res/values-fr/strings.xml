@@ -311,7 +311,6 @@
     <string name="layout">Mise en page</string>
     <string name="alternative_player_layout_summary">Afficher les vidéos connexes en une ligne au-dessus des commentaires, à la place d\'au-dessous.</string>
     <string name="audio_track">Piste audio</string>
-    <string name="default_audio_track">Par défaut</string>
     <string name="hls_instead_of_dash">Utiliser HLS</string>
     <string name="hls_instead_of_dash_summary">Utiliser HLS à la place de DASH (sera plus lent, non recommandé)</string>
     <string name="auto_quality">Automatique</string>

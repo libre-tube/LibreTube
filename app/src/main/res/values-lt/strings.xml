@@ -311,7 +311,6 @@
     <string name="alternative_player_layout_summary">Rodyti susijusius vaizdo įrašus kaip eilutę virš komentarų, o ne kaip įprasta po jais.</string>
     <string name="alternative_player_layout">Alternatyvus grotuvo išdėstymas</string>
     <string name="audio_track">Garso takelis</string>
-    <string name="default_audio_track">Numatytas</string>
     <string name="auto_quality">Automatinė</string>
     <string name="hls_instead_of_dash">Naudoti HLS</string>
     <string name="hls_instead_of_dash_summary">Vietoj DASH naudoti HLS (veiks lėčiau, nerekomenduojama)</string>

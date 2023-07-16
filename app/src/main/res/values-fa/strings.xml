@@ -242,7 +242,6 @@
     <string name="preferences">ترجیحات</string>
     <string name="queue">صف</string>
     <string name="navigation_bar">نوار ناوبری</string>
-    <string name="default_audio_track">پیش‌گزیده</string>
     <string name="hls_instead_of_dash">استفاده از HLS</string>
     <string name="auto_quality">خودکار</string>
     <string name="trending">آن‌چه اکنون داغ است</string>
