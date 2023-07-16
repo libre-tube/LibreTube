@@ -289,7 +289,7 @@
     <string name="playlistNameReversed">Oynatma siyahısı adı (əks)</string>
     <string name="playlists_order">Oynatma siyahısı sırası</string>
     <string name="time_code">Vaxt kodu (saniyə)</string>
-    <string name="added_to_playlist">Oynatma siyahısına əlavə edildi</string>
+    <string name="added_to_playlist">Oynatma siyahısına əlavə edildi %1$s</string>
     <string name="queue">Növbə</string>
     <string name="sb_markers">Göstəricilər</string>
     <string name="sb_markers_summary">Vaxt çubuğunda bölümləri işarələ.</string>

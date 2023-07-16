@@ -281,7 +281,7 @@
     <string name="category_outro_description">Informação após o final. Não para conclusões com informações.</string>
     <string name="queue">Fila</string>
     <string name="playback_pitch">Passo</string>
-    <string name="added_to_playlist">Adicionado à lista de reprodução</string>
+    <string name="added_to_playlist">Adicionado à lista de reprodução %1$s</string>
     <string name="category_filler">Tangente/Piadas</string>
     <string name="filename">Nome do ficheiro</string>
     <string name="invalid_filename">Nome de ficheiro inválido!</string>

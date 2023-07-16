@@ -289,7 +289,7 @@
     <string name="playlists_order">Pořadí playlistů</string>
     <string name="playlistNameReversed">Název playlistu (obráceně)</string>
     <string name="time_code">Čas (sekundy)</string>
-    <string name="added_to_playlist">Přidáno do playlistu</string>
+    <string name="added_to_playlist">Přidáno do playlistu %1$s</string>
     <string name="queue">Fronta</string>
     <string name="livestreams">Živé přenosy</string>
     <string name="alternative_videos_layout">Alternativní rozvržení videí</string>

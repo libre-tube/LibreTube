@@ -284,7 +284,7 @@
     <string name="mobile_data">Datu mugikorrak</string>
     <string name="change_region">Badirudi \'Joerak\' ez dagoela eskuragarri eskualde honetan. Mesedez, hautatu beste bat ezarpenetan.</string>
     <string name="queue">Ilara</string>
-    <string name="added_to_playlist">Gehitu erreprodukzio zerrendara</string>
+    <string name="added_to_playlist">Gehitu erreprodukzio zerrendara %1$s</string>
     <string name="filename">Fitxategi izena</string>
     <string name="invalid_filename">Fitxategi izen baliogabea!</string>
     <string name="playlists_order">Erreprodukzio zerrenden ordena</string>

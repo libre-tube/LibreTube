@@ -1,5 +1,6 @@
 package com.github.libretube.ui.dialogs
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
@@ -56,23 +57,25 @@ class AddToPlaylistDialog(
                     Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
                     return@repeatOnLifecycle
                 }
-                if (response.isEmpty()) return@repeatOnLifecycle
-                val names = response.mapNotNull { it.name }
-                val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, names)
-                binding.playlistsSpinner.adapter = arrayAdapter
+
+                val playlists = response.filter { !it.name.isNullOrEmpty() }
+                if (playlists.isEmpty()) return@repeatOnLifecycle
+
+                binding.playlistsSpinner.adapter =
+                    ArrayAdapter(requireContext(), R.layout.dropdown_item, playlists.map { it.name!! })
 
                 // select the last used playlist
                 viewModel.lastSelectedPlaylistId?.let { id ->
-                    binding.playlistsSpinner.setSelection(
-                        response.indexOfFirst { it.id == id }.takeIf { it >= 0 } ?: 0
-                    )
+                    val latestIndex = response.indexOfFirst { it.id == id }.takeIf { it >= 0 } ?: 0
+                    binding.playlistsSpinner.setSelection(latestIndex)
                 }
                 binding.addToPlaylist.setOnClickListener {
                     val index = binding.playlistsSpinner.selectedItemPosition
-                    viewModel.lastSelectedPlaylistId = response[index].id!!
+                    val playlist = playlists[index]
+                    viewModel.lastSelectedPlaylistId = playlist.id!!
                     dialog?.hide()
                     lifecycleScope.launch {
-                        addToPlaylist(response[index].id!!)
+                        addToPlaylist(playlist.id, playlist.name!!)
                         dialog?.dismiss()
                     }
                 }
@@ -80,7 +83,8 @@ class AddToPlaylistDialog(
         }
     }
 
-    private suspend fun addToPlaylist(playlistId: String) {
+    @SuppressLint("StringFormatInvalid")
+    private suspend fun addToPlaylist(playlistId: String, playlistName: String) {
         val appContext = context?.applicationContext ?: return
         val streams = when {
             videoId != null -> listOfNotNull(
@@ -100,8 +104,8 @@ class AddToPlaylistDialog(
             appContext.toastFromMainDispatcher(R.string.unknown_error)
             return
         }
-        appContext.toastFromMainDispatcher(
-            if (success) R.string.added_to_playlist else R.string.fail
-        )
+        if (success) appContext.toastFromMainDispatcher(
+            appContext.getString(R.string.added_to_playlist, playlistName)
+        ) else appContext.toastFromMainDispatcher(R.string.fail)
     }
 }

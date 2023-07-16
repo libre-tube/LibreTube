@@ -149,7 +149,7 @@
     <string name="playlists_order">Grojaraščių tvarka</string>
     <string name="playlistNameReversed">Grojaraščio pavadinimas (atvirkštinis)</string>
     <string name="time_code">Laiko kodas (sekundėmis)</string>
-    <string name="added_to_playlist">Pridėti į grojaraštį</string>
+    <string name="added_to_playlist">Pridėti į grojaraštį %1$s</string>
     <string name="queue">Eilė</string>
     <string name="download_channel_name">Atsisiuntimo paslauga</string>
     <string name="download_channel_description">Rodomas pranešimas, kai atsisiunčiama medija.</string>

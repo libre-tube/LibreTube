@@ -289,7 +289,7 @@
     <string name="playlists_order">Orden de las listas de reproducción</string>
     <string name="playlistNameReversed">Nombre de la lista (Z-A)</string>
     <string name="time_code">Código de tiempo (segundos)</string>
-    <string name="added_to_playlist">Añadido a la lista</string>
+    <string name="added_to_playlist">Añadido a la lista %1$s</string>
     <string name="queue">Cola</string>
     <string name="sb_markers">Señaladores</string>
     <string name="sb_markers_summary">Señala los segmentos en la barra de tiempo.</string>

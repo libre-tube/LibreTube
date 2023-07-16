@@ -284,7 +284,7 @@
     <string name="playback_pitch">Hangmagasság</string>
     <string name="save_feed">Videófolyam betöltése a háttérben</string>
     <string name="change_region">A felkapott úgy tűnik, hogy nem elérhető a jelenlegi régió számára. Válasszon egy másikat a beállításokban.</string>
-    <string name="added_to_playlist">Hozzáadva a lejátszási listához</string>
+    <string name="added_to_playlist">Hozzáadva a lejátszási listához %1$s</string>
     <string name="invalid_filename">Érvénytelen fájlnév!</string>
     <string name="filename">Fájlnév</string>
     <string name="playlistNameReversed">Lejátszási lista neve (fordított)</string>

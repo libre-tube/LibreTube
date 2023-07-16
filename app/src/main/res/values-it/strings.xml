@@ -288,7 +288,7 @@
     <string name="invalid_filename">Nome del file non valido!</string>
     <string name="playlists_order">Ordine delle playlist</string>
     <string name="playlistNameReversed">Nome playlist (invertito)</string>
-    <string name="added_to_playlist">Aggiunto alla playlist</string>
+    <string name="added_to_playlist">Aggiunto alla playlist %1$s</string>
     <string name="queue">Coda</string>
     <string name="sb_markers">Marcatori</string>
     <string name="sb_markers_summary">Segna i segmenti sulla barra del tempo.</string>

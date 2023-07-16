@@ -276,7 +276,7 @@
     <string name="filename">Όνομα αρχείου</string>
     <string name="invalid_filename">Άκυρο όνομα αρχείου!</string>
     <string name="playback_pitch">Τόνος</string>
-    <string name="added_to_playlist">Προστέθηκε στη λίστα αναπαραγωγής</string>
+    <string name="added_to_playlist">Προστέθηκε στη λίστα αναπαραγωγής %1$s</string>
     <string name="defaultIconLight">Προεπιλεγμένο φως</string>
     <string name="confirm_unsubscribe">Είστε βέβαιοι ότι θέλετε να καταργήσετε την εγγραφή %1$s;</string>
     <string name="confirm_unsubscribing_summary">Εμφάνιση διαλόγου επιβεβαίωσης πριν από την κατάργηση της εγγραφής.</string>
