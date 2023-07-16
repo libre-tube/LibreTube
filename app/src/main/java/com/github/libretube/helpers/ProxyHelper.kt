@@ -1,5 +1,6 @@
 package com.github.libretube.helpers
 
+import android.util.Log
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.PreferenceKeys
@@ -36,15 +37,15 @@ object ProxyHelper {
      * Detect whether the proxy should be used or not for a given stream URL based on user preferences
      */
     suspend fun unwrapStreamUrl(url: String): String {
-        return if (shouldDisableProxy(url)) unwrapUrl(url) else url
+        return if (useYouTubeSourceWithoutProxy(url)) unwrapUrl(url) else url
     }
 
-    suspend fun shouldDisableProxy(url: String) = when {
+    suspend fun useYouTubeSourceWithoutProxy(url: String) = when {
         !PreferenceHelper.getBoolean(PreferenceKeys.DISABLE_VIDEO_IMAGE_PROXY, false) -> false
-        PreferenceHelper.getBoolean(PreferenceKeys.FALLBACK_PIPED_PROXY, true) -> isUrlUsable(
-            unwrapUrl(url)
-        )
-
+        PreferenceHelper.getBoolean(PreferenceKeys.FALLBACK_PIPED_PROXY, true) -> {
+            // check whether the URL has content available, and disable proxy if that's the case
+            isUrlUsable(unwrapUrl(url))
+        }
         else -> true
     }
 
@@ -61,8 +62,12 @@ object ProxyHelper {
      */
     fun unwrapUrl(url: String, unwrap: Boolean = true) = url.toHttpUrlOrNull()
         ?.takeIf { unwrap }?.let {
+            val host = it.queryParameter("host")
+            // if there's no host parameter specified, there's no way to unwrap the URL
+            // and the proxied one must be used. That's the case if using LBRY.
+            if (host.isNullOrEmpty()) return@let url
             it.newBuilder()
-                .host(it.queryParameter("host").orEmpty())
+                .host(host)
                 .removeAllQueryParameters("host")
                 .build()
                 .toString()

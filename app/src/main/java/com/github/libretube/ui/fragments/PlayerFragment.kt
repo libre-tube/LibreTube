@@ -1290,8 +1290,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     if (streams.livestream && streams.dash != null) ProxyHelper.unwrapStreamUrl(
                         streams.dash!!
                     ).toUri() else {
+                        // skip LBRY urls when checking whether the stream source is usable
+                        val urlToTest = streams.videoStreams.firstOrNull {
+                            !it.quality.orEmpty().contains("LBRY")
+                        }?.url.orEmpty()
                         val shouldDisableProxy =
-                            ProxyHelper.shouldDisableProxy(streams.videoStreams.first().url!!)
+                            ProxyHelper.useYouTubeSourceWithoutProxy(urlToTest)
                         PlayerHelper.createDashSource(
                             streams,
                             requireContext(),
