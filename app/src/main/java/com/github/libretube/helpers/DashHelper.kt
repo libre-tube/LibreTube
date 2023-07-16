@@ -115,14 +115,18 @@ object DashHelper {
                 adapSetElement.setAttribute("lang", adapSet.audioLocale)
             }
 
-            val roleElement = doc.createElement("Role")
-            roleElement.setAttribute("schemeIdUri", "urn:mpeg:dash:role:2011")
-            roleElement.setAttribute(
-                "value",
-                getRoleValueFromAudioTrackType(adapSet.audioTrackType)
-            )
-
-            adapSetElement.appendChild(roleElement)
+            // Only add the Role element if there is a track type set
+            // This allows distinction between formats marked as original on YouTube and
+            // formats without track type info set
+            if (adapSet.audioTrackType != null) {
+                val roleElement = doc.createElement("Role")
+                roleElement.setAttribute("schemeIdUri", "urn:mpeg:dash:role:2011")
+                roleElement.setAttribute(
+                    "value",
+                    getRoleValueFromAudioTrackType(adapSet.audioTrackType)
+                )
+                adapSetElement.appendChild(roleElement)
+            }
 
             val isVideo = adapSet.mimeType.contains("video")
 
@@ -198,11 +202,7 @@ object DashHelper {
         return segmentBase
     }
 
-    private fun getRoleValueFromAudioTrackType(audioTrackType: String?): String {
-        if (audioTrackType == null) {
-            return "main"
-        }
-
+    private fun getRoleValueFromAudioTrackType(audioTrackType: String): String {
         return when (audioTrackType.lowercase()) {
             "descriptive" -> "description"
             "dubbed" -> "dub"

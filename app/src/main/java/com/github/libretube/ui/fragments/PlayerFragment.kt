@@ -1429,7 +1429,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
             .show(childFragmentManager)
     }
-    
+
     override fun onAudioStreamClicked() {
         val context = requireContext()
         val audioLanguagesAndRoleFlags = PlayerHelper.getAudioLanguagesAndRoleFlagsFromTrackGroups(
