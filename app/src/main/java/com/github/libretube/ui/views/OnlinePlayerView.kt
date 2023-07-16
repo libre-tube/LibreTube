@@ -39,9 +39,7 @@ class OnlinePlayerView(
                     BottomSheetItem(
                         context.getString(R.string.audio_track),
                         R.drawable.ic_audio,
-                        {
-                            trackSelector?.parameters?.preferredAudioLanguages?.firstOrNull()
-                        }
+                        { getCurrentAudioTrackTitle() }
                     ) {
                         playerOptions?.onAudioStreamClicked()
                     },
@@ -65,6 +63,47 @@ class OnlinePlayerView(
                         playerOptions?.onStatsClicked()
                     }
                 )
+    }
+
+    private fun getCurrentAudioTrackTitle(): String {
+        if (player == null) {
+            return context.getString(R.string.unknown_or_no_audio)
+        }
+
+        // The player reference should be not changed between the null check
+        // and its access, so a non null assertion should be safe here
+        val selectedAudioLanguagesAndRoleFlags =
+            PlayerHelper.getAudioLanguagesAndRoleFlagsFromTrackGroups(
+                player!!.currentTracks.groups,
+                true
+            )
+
+        if (selectedAudioLanguagesAndRoleFlags.isEmpty()) {
+            return context.getString(R.string.unknown_or_no_audio)
+        }
+
+        // At most one audio track should be selected regardless of audio
+        // format or quality
+        val firstSelectedAudioFormat = selectedAudioLanguagesAndRoleFlags[0]
+
+        if (selectedAudioLanguagesAndRoleFlags.size == 1
+            && firstSelectedAudioFormat.first == null
+            && !PlayerHelper.haveAudioTrackRoleFlagSet(
+                firstSelectedAudioFormat.second
+            )
+        ) {
+            // Regardless of audio format or quality, if there is only one
+            // audio stream which has no language and no role flags, it
+            // should mean that there is only a single audio track which
+            // has no language or track type set in the video played
+            // Consider it as the default audio track (or unknown)
+            return context.getString(R.string.default_or_unknown_audio_track)
+        }
+
+        return PlayerHelper.getAudioTrackNameFromFormat(
+            context,
+            firstSelectedAudioFormat
+        )
     }
 
     fun initPlayerOptions(
