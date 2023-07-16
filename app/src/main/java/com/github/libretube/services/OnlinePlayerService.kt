@@ -42,7 +42,6 @@ import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 
@@ -299,7 +298,7 @@ class OnlinePlayerService : LifecycleService() {
         val streams = streams ?: return
 
         val (uri, mimeType) = if (streams.audioStreams.isNotEmpty()) {
-            val disableProxy = ProxyHelper.shouldDisableProxy(streams.videoStreams.first().url!!)
+            val disableProxy = ProxyHelper.useYouTubeSourceWithoutProxy(streams.videoStreams.first().url!!)
             PlayerHelper.createDashSource(
                 streams,
                 this,
