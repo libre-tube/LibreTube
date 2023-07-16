@@ -474,4 +474,12 @@
     <string name="stop">إيقاف</string>
     <string name="fallback_piped_proxy">الرجوع إلى الوكيل Piped</string>
     <string name="fallback_piped_proxy_desc">قم بتحميل مقاطع الفيديو عبر الخادم الوكيل إذا كان الاتصال ب YouTube مباشرة لا يعمل مع الفيديو الحالي (يزيد من أوقات التحميل الأولية). إذا تم تعطيله ، فمن المحتمل ألا يتم تشغيل محتوى موسيقى YouTube بسبب قيود YT.</string>
+    <string name="unknown_audio_track_type">نوع مسار صوتي غير معروف</string>
+    <string name="original_or_main_audio_track">أصلي أو رئيسي</string>
+    <string name="dubbed_audio_track">مدبلجة</string>
+    <string name="descriptive_audio_track">وصفي</string>
+    <string name="default_or_unknown_audio_track">افتراضي أو غير معروف</string>
+    <string name="unknown_or_no_audio">غير معروف أو لا يوجد صوت</string>
+    <string name="audio_track_format">%1$s - %2$s</string>
+    <string name="unknown_audio_language">لغة صوت غير معروفة</string>
 </resources>
