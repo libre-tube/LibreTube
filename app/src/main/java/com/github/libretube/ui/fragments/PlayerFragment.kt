@@ -46,6 +46,7 @@ import androidx.media3.common.Player
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.datasource.cronet.CronetDataSource
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.hls.HlsMediaSource
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -113,6 +114,7 @@ import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
+import com.github.libretube.util.YoutubeHlsPlaylistParser
 import java.io.IOException
 import java.util.*
 import java.util.concurrent.Executors
@@ -163,6 +165,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var trackSelector: DefaultTrackSelector
     private var captionLanguage: String? = PlayerHelper.defaultSubtitleCode
+
+    private val cronetDataSourceFactory = CronetDataSource.Factory(
+        CronetHelper.cronetEngine,
+        Executors.newCachedThreadPool()
+    )
 
     /**
      * Chapters and comments
@@ -1189,13 +1196,15 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
     }
 
+    private fun createMediaItem(uri: Uri, mimeType: String) = MediaItem.Builder()
+        .setUri(uri)
+        .setMimeType(mimeType)
+        .setSubtitleConfigurations(subtitles)
+        .setMetadata(streams)
+        .build()
+
     private fun setMediaSource(uri: Uri, mimeType: String) {
-        val mediaItem = MediaItem.Builder()
-            .setUri(uri)
-            .setMimeType(mimeType)
-            .setSubtitleConfigurations(subtitles)
-            .setMetadata(streams)
-            .build()
+        val mediaItem = createMediaItem(uri, mimeType)
         exoPlayer.setMediaItem(mediaItem)
     }
 
@@ -1307,6 +1316,16 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
             // HLS
             streams.hls != null -> {
+                val hlsMediaSourceFactory = HlsMediaSource.Factory(cronetDataSourceFactory)
+                    .setPlaylistParserFactory(YoutubeHlsPlaylistParser.Factory())
+
+                val mediaSource = hlsMediaSourceFactory.createMediaSource(
+                    createMediaItem(
+                        ProxyHelper.unwrapStreamUrl(streams.hls!!).toUri(),
+                        MimeTypes.APPLICATION_M3U8,
+                    )
+                )
+                exoPlayer.setMediaSource(mediaSource)
                 ProxyHelper.unwrapStreamUrl(streams.hls!!).toUri() to MimeTypes.APPLICATION_M3U8
             }
             // NO STREAM FOUND
