@@ -176,7 +176,7 @@
     <string name="github">GitHub</string>
     <string name="fullscreen_orientation">Tam ekran yönü</string>
     <string name="aspect_ratio">Video en boy oranı</string>
-    <string name="auto_rotation">Otomatik döndürme</string>
+    <string name="auto_rotation">Otomatik döndür</string>
     <string name="portrait">Dikey</string>
     <string name="landscape">Yatay</string>
     <string name="audio_video">Ses ve video</string>
@@ -195,7 +195,7 @@
     <string name="selected">Seçilen</string>
     <string name="never">Hiçbir zaman</string>
     <string name="autoRotatePlayer">Otomatik tam ekran</string>
-    <string name="autoRotatePlayer_summary">Cihaz döndüğünde tam ekran oynatma.</string>
+    <string name="autoRotatePlayer_summary">Cihaz yan döndürüldüğünde tam ekran oynat.</string>
     <string name="pure_theme">Saf tema</string>
     <string name="pure_theme_summary">Saf beyaz/siyah tema</string>
     <string name="no_player_found">Harici oynatıcı bulunamadı. Lütfen, bir tane yüklediğinizden emin olun.</string>
