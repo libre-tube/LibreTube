@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.graphics.Color
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
@@ -535,20 +536,25 @@ object PlayerHelper {
         val dialog = MaterialAlertDialogBuilder(context)
             .setTitle(R.string.chapters)
             .setItems(titles.toTypedArray()) { _, index ->
-                player.seekTo(chapters[index].start * 1000)
+                val chapter = chapters.getOrNull(index) ?: return@setItems
+                player.seekTo(chapter.start * 1000)
             }
             .create()
         val handler = Handler(Looper.getMainLooper())
+        val highlightColor =
+            ThemeHelper.getThemeColor(context, android.R.attr.colorControlHighlight)
 
         val updatePosition = Runnable {
             // scroll to the current playing index in the chapter
             val currentPosition =
                 getCurrentChapterIndex(player, chapters) ?: return@Runnable
             dialog.listView.smoothScrollToPosition(currentPosition)
-            val current = dialog.listView.children.toList()[currentPosition]
-            val highlightColor =
-                ThemeHelper.getThemeColor(context, android.R.attr.colorControlHighlight)
-            current.setBackgroundColor(highlightColor)
+
+            val children = dialog.listView.children.toList()
+            // reset the background colors of all chapters
+            children.forEach { it.setBackgroundColor(Color.TRANSPARENT) }
+            // highlight the current chapter
+            children.getOrNull(currentPosition)?.setBackgroundColor(highlightColor)
         }
 
         dialog.setOnShowListener {
