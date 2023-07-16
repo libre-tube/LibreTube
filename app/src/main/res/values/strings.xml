@@ -303,7 +303,7 @@
     <string name="playlists_order">Playlists order</string>
     <string name="playlistNameReversed">Playlist name (reversed)</string>
     <string name="time_code">Time code (seconds)</string>
-    <string name="added_to_playlist">Added to playlist</string>
+    <string name="added_to_playlist">Added to playlist %1$s</string>
     <string name="queue">Queue</string>
     <string name="sb_markers">Markers</string>
     <string name="sb_markers_summary">Mark the segments on the time bar.</string>

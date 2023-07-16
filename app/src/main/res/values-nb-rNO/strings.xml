@@ -289,7 +289,7 @@
     <string name="invalid_filename">Ugyldig filnavn</string>
     <string name="playlists_order">Spillelisterekkefølge</string>
     <string name="queue">Kø</string>
-    <string name="added_to_playlist">Lagt til på spillelisten</string>
+    <string name="added_to_playlist">Lagt til på spillelisten %1$s</string>
     <string name="time_code">Tidskode</string>
     <string name="sb_markers">Markører</string>
     <string name="sb_markers_summary">Marker segmenter i forløpsindikatoren.</string>

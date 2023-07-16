@@ -333,7 +333,7 @@
     <string name="app_backup">Backup aplicație</string>
     <string name="backup_restore_summary">Importați și exportați abonamente, liste de redare, …</string>
     <string name="time_code">Cod de timp (secunde)</string>
-    <string name="added_to_playlist">Adăugat la playlist</string>
+    <string name="added_to_playlist">Adăugat la playlist %1$s</string>
     <string name="confirm_unsubscribing">Confirmați dezabonarea</string>
     <string name="confirm_unsubscribing_summary">Afișați un dialog de confirmare înainte de a vă dezabona.</string>
     <string name="start_time">Timpul de începere</string>

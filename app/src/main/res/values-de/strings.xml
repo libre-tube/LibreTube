@@ -306,7 +306,7 @@
     <string name="layout">Layout</string>
     <string name="alternative_player_layout">Alternatives Player-Layout</string>
     <string name="alternative_player_layout_summary">Zeige ähnliche Videos über den Kommentaren in einer Reihe an anstatt darunter.</string>
-    <string name="added_to_playlist">Zur Playlist hinzugefügt</string>
+    <string name="added_to_playlist">Zur Playlist %1$s hinzugefügt</string>
     <string name="sb_markers">Markierungen</string>
     <string name="audio_track">Tonspur</string>
     <string name="default_audio_track">Standard</string>

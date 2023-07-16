@@ -289,7 +289,7 @@
     <string name="invalid_filename">Nieprawidłowa nazwa pliku!</string>
     <string name="playlists_order">Kolejność playlist</string>
     <string name="playlistNameReversed">Nazwa playlisty (odwrotnie)</string>
-    <string name="added_to_playlist">Dodano do playlisty</string>
+    <string name="added_to_playlist">Dodano do playlisty %1$s</string>
     <string name="queue">Kolejka</string>
     <string name="sb_markers">Oznaczenia</string>
     <string name="livestreams">Na żywo</string>

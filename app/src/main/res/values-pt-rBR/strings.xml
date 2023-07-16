@@ -289,7 +289,7 @@
     <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">Dados móveis</string>
     <string name="queue">Fila</string>
-    <string name="added_to_playlist">Adicionado à playlist</string>
+    <string name="added_to_playlist">Adicionado à playlist %1$s</string>
     <string name="sb_markers">Marcadores</string>
     <string name="livestreams">Transmissões ao vivo</string>
     <string name="sb_markers_summary">Marque os segmentos na barra de tempo.</string>
