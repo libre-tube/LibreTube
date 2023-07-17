@@ -321,25 +321,25 @@
                 <data android:scheme="https" />
                 <data android:pathPrefix="/" />
 
-                <data android:host="piped.video" />
-                <data android:host="piped.kavin.rocks" />
-                <data android:host="piped.syncpundit.io" />
-                <data android:host="piped.mha.fi" />
-                <data android:host="watch.whatever.social" />
-                <data android:host="piped.garudalinux.org" />
-                <data android:host="piped.aeong.one" />
-                <data android:host="watch.leptons.xyz" />
-                <data android:host="yt.jae.fi" />
-                <data android:host="il.ax" />
-                <data android:host="piped.esmailelbob.xyz" />
-                <data android:host="piped.adminforge.de" />
-                <data android:host="piped.qdi.fi" />
-                <data android:host="piped.hostux.net" />
                 <data android:host="pd.vern.cc" />
-                <data android:host="piped.chauvet.pro" />
-                <data android:host="piped.privacydev.net" />
+                <data android:host="piped.adminforge.de" />
+                <data android:host="piped.frontendfriendly.xyz" />
+                <data android:host="piped.hostux.net" />
+                <data android:host="piped.in.projectsegfau.lt" />
+                <data android:host="piped.lunar.icu" />
+                <data android:host="piped.mha.fi" />
+                <data android:host="piped.osphost.fi" />
                 <data android:host="piped.palveluntarjoaja.eu" />
+                <data android:host="piped.privacydev.net" />
+                <data android:host="piped.projectsegfau.lt" />
+                <data android:host="piped.qdi.fi" />
+                <data android:host="piped.simpleprivacy.fr" />
                 <data android:host="piped.smnz.de" />
+                <data android:host="piped.tokhmi.xyz" />
+                <data android:host="piped.video" />
+                <data android:host="piped.yt" />
+                <data android:host="watch.leptons.xyz" />
+                <data android:host="watch.whatever.social" />
             </intent-filter>
         </activity>
 
