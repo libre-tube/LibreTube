@@ -459,4 +459,8 @@
     <string name="chapters_videoHighlight">Sorotan Video</string>
     <string name="fallback_piped_proxy">Proksi Piped sebagai cadangan</string>
     <string name="fallback_piped_proxy_desc">Muat video melalui proksi jika menghubungkan ke YouTube secara langsung tidak berfungsi untuk video saat ini (meningkatkan waktu pemuatan awal). Jika dinonaktifkan, konten musik YouTube kemungkinan tidak akan diputar karena pembatasan YouTube.</string>
+    <string name="unknown_audio_track_type">Jenis trek audio tidak diketahui</string>
+    <string name="audio_track_format">%1$s - %2$s</string>
+    <string name="original_or_main_audio_track">asli atau utama</string>
+    <string name="unknown_audio_language">Bahasa audio tidak diketahui</string>
 </resources>
