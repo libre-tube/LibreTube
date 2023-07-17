@@ -467,7 +467,7 @@
     <string name="fallback_piped_proxy_desc">Cargar vídeos a través del proxy si al conectar directamente a YouTube no funciona el video en curso (aumenta el tiempo de carga inicial). Si lo deshabilitas, el contenido de YT Music probablemente no se reproduzca debido a restricciones de YouTube.</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_or_no_audio">desconocido o sin audio</string>
-    <string name="dubbed_audio_track">Doblado</string>
+    <string name="dubbed_audio_track">doblado</string>
     <string name="descriptive_audio_track">descriptivo</string>
     <string name="default_or_unknown_audio_track">predeterminado o desconocido</string>
     <string name="unknown_audio_language">Idioma del audio desconocido</string>
