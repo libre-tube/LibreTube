@@ -278,7 +278,7 @@
     <string name="most_recent">最新</string>
     <string name="least_recent">最古</string>
     <string name="no_search_result">結果がありません。</string>
-    <string name="added_to_playlist">プレイリストに追加しました</string>
+    <string name="added_to_playlist">プレイリスト %1$s に追加しました</string>
     <string name="skip_buttons">スキップボタン</string>
     <string name="filename">ファイル名</string>
     <string name="invalid_filename">無効なファイル名です！</string>
@@ -459,4 +459,12 @@
     <string name="stop">停止</string>
     <string name="fallback_piped_proxy_desc">YouTubeに直接接続しても現在の動画が再生できない際に、プロキシ経由で動画を読み込みます（最初の読み込み時間は増加）。無効にすると、YTの制限によりYouTubeの音楽コンテンツが再生されないことがあります。</string>
     <string name="fallback_piped_proxy">失敗時に Piped プロキシに接続</string>
+    <string name="unknown_or_no_audio">不明または音声なし</string>
+    <string name="default_or_unknown_audio_track">標準または不明</string>
+    <string name="original_or_main_audio_track">そのまま、または主音声</string>
+    <string name="unknown_audio_track_type">音声トラックの種類は不明</string>
+    <string name="unknown_audio_language">音声の言語は不明</string>
+    <string name="audio_track_format">%1$s - %2$s</string>
+    <string name="dubbed_audio_track">吹き替え</string>
+    <string name="descriptive_audio_track">解説</string>
 </resources>
