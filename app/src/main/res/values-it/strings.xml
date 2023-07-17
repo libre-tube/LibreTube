@@ -465,4 +465,12 @@
     <string name="enter_hex_value">Inserisci il valore esadecimale del colore</string>
     <string name="fallback_piped_proxy_desc">Carica i video tramite il proxy se la connessione diretta a YouTube non funziona per il video corrente (aumenta i tempi di caricamento iniziale). Se disattivato, è probabile che i contenuti musicali di YouTube non vengano riprodotti a causa delle restrizioni di YT.</string>
     <string name="fallback_piped_proxy">Ripiega ad un proxy Piped</string>
+    <string name="unknown_audio_language">Lingua audio sconosciuta</string>
+    <string name="unknown_audio_track_type">Tipo di traccia audio sconosciuta</string>
+    <string name="audio_track_format">%1$s - %2$s</string>
+    <string name="descriptive_audio_track">descrittivo</string>
+    <string name="default_or_unknown_audio_track">predefinito o sconosciuto</string>
+    <string name="unknown_or_no_audio">sconosciuto o senza audio</string>
+    <string name="dubbed_audio_track">doppiato</string>
+    <string name="original_or_main_audio_track">originale o principale</string>
 </resources>

@@ -289,7 +289,7 @@
     <string name="playlistNameReversed">Назва добірки (у зворотному порядку)</string>
     <string name="playlists_order">Порядок добірок</string>
     <string name="time_code">Часовий код (секунд)</string>
-    <string name="added_to_playlist">Додано в добірку</string>
+    <string name="added_to_playlist">Додано в добірку %1$s</string>
     <string name="queue">Черга</string>
     <string name="sb_markers">Маркери</string>
     <string name="sb_markers_summary">Позначте сегменти на панелі часу.</string>
@@ -457,7 +457,7 @@
     <string name="automatic">Автоматично</string>
     <string name="invalid_color">Введено недійсне значення кольору!</string>
     <string name="color">Колір</string>
-    <string name="sb_color_enable">Перемикає користувацькі колірні сегменти для сегментів спонсорських блоків.</string>
+    <string name="sb_color_enable">Перемикає власні колірні сегменти для сегментів SponsorBlock.</string>
     <string name="sb_custom_colors">Користувацькі кольори сегментів</string>
     <string name="enter_hex_value">Введіть Hex значення кольору</string>
     <string name="visible">Показати на панелі прокручування</string>
@@ -468,4 +468,12 @@
     <string name="stop">Зупинити</string>
     <string name="fallback_piped_proxy">Запасний варіант для Piped проксі-сервера</string>
     <string name="fallback_piped_proxy_desc">Завантажувати відео через проксі, якщо пряме під\'єднання до YouTube не працює для поточного відео (збільшує початковий час завантаження). Якщо цю функцію вимкнено, музичний контент YouTube, ймовірно, не відтворюватиметься через обмеження YT.</string>
+    <string name="unknown_audio_language">Невідома мова звукової доріжки</string>
+    <string name="original_or_main_audio_track">оригінальний або основний</string>
+    <string name="dubbed_audio_track">дубльований</string>
+    <string name="unknown_or_no_audio">невідомий або відсутній звук</string>
+    <string name="descriptive_audio_track">описовий</string>
+    <string name="default_or_unknown_audio_track">за замовчуванням або невідомо</string>
+    <string name="audio_track_format">%1$s - %2$s</string>
+    <string name="unknown_audio_track_type">Невідомий тип звукової доріжки</string>
 </resources>
