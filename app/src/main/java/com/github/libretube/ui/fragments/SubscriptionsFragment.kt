@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
 import androidx.core.view.children
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -20,11 +22,13 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.SubscriptionGroup
+import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.LegacySubscriptionAdapter
 import com.github.libretube.ui.adapters.SubscriptionChannelAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
+import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.ChannelGroupsSheet
@@ -38,6 +42,7 @@ class SubscriptionsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: SubscriptionsViewModel by activityViewModels()
+    private val playerModel: PlayerViewModel by activityViewModels()
     private var channelGroups: List<SubscriptionGroup> = listOf()
     private var selectedFilterGroup: Int = 0
 
@@ -157,6 +162,15 @@ class SubscriptionsFragment : Fragment() {
                 binding.subRefresh.isRefreshing = true
                 subscriptionsAdapter?.updateItems()
                 binding.subRefresh.isRefreshing = false
+            }
+        }
+
+        // add some extra margin to the subscribed channels while the mini player is visible
+        // otherwise the last channel would be invisible
+        playerModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
+            binding.subChannelsContainer.updateLayoutParams<MarginLayoutParams> {
+                val newMargin = if (it) 64 else 0
+                bottomMargin = newMargin.dpToPx().toInt()
             }
         }
 
