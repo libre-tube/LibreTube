@@ -208,7 +208,7 @@
     <string name="repeat_mode_current">Jelenlegi</string>
     <string name="backup_restore">Biztonsági mentés és visszaállítás</string>
     <string name="backup">Biztonsági mentés</string>
-    <string name="picture_in_picture">Kép a képben</string>
+    <string name="picture_in_picture">Kép-a-képben</string>
     <string name="maximum_image_cache">Maximális képgyorsítótár méret</string>
     <string name="copied_to_clipboard">Másolva a vágólapra</string>
     <string name="open_copied">Megnyitás</string>
@@ -272,8 +272,8 @@
     <string name="play_next">Lejátszás következőként</string>
     <string name="download_channel_name">Letöltő szolgáltatás</string>
     <string name="background_channel_name">Háttér mód</string>
-    <string name="push_channel_name">Értesítés dolgozó</string>
-    <string name="push_channel_description">Értesítés megjelenítése, amikor új közvetítések elérhetők.</string>
+    <string name="push_channel_name">Értesítési munkatárs</string>
+    <string name="push_channel_description">Értesítés megjelenítése, amikor új közvetítések érhetők el.</string>
     <string name="navigation_bar">Navigációs sáv</string>
     <string name="download_channel_description">Értesítés megjelenítése média letöltésekor.</string>
     <string name="save_feed_summary">Töltse be az feliratkozott videófolyamot a háttérben, és akadályozza meg az automatikus frissítést.</string>
@@ -452,7 +452,7 @@
     <string name="invalid_color">Érvénytelen a megadott érték!</string>
     <string name="enter_hex_value">Szín Hex érték megadása</string>
     <string name="jumped_to_highlight">Ugrás a videó kiemeléshez</string>
-    <string name="sb_color_enable">Egyéni színszegmensek bekapcsolása a szponzorblokk szegmensekhez</string>
+    <string name="sb_color_enable">Egyéni színszegmensek bekapcsolása a szponzorblokk szegmentjeihez</string>
     <string name="category_highlight_description">Lehet a meghirdetett cím, a miniatűr vagy a videó legérdekesebb része. A fejezetek részben a rákoppintással ugorhatsz oda.</string>
     <string name="choose_instance_long">Kérjük, válasszon ki az alább felsoroltak közül egy Piped példányt. A Piped példány közvetítőként fog működni Ön és a YouTube között. Ezek a példányok különböző fizikai helyszíneken találhatók - ezeket az országzászló jelzi. A fizikailag közelebbi példányok valószínűleg gyorsabbak, mint a távoli példányok. A beállításokban bármikor megváltoztatható a használt példány.</string>
     <string name="off">Ki</string>
@@ -462,4 +462,12 @@
     <string name="chapters_videoHighlight">Videó kiemelés</string>
     <string name="automatic">Automatikus</string>
     <string name="show_search_suggestions">Keresési javaslatok megjelenítése</string>
+    <string name="descriptive_audio_track">leíró</string>
+    <string name="default_or_unknown_audio_track">alapérték vagy ismeretlen</string>
+    <string name="audio_track_format">%1$s - %2$s</string>
+    <string name="unknown_audio_track_type">Ismeretlen típusú hangsáv</string>
+    <string name="unknown_audio_language">Ismeretlen hang nyelv</string>
+    <string name="original_or_main_audio_track">eredeti vagy fő</string>
+    <string name="dubbed_audio_track">szinkronizált</string>
+    <string name="unknown_or_no_audio">ismeretlen vagy nincs hang</string>
 </resources>
