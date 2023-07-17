@@ -289,7 +289,7 @@
     <string name="playlists_order">播放列表顺序</string>
     <string name="playlistNameReversed">播放列表名称（倒序）</string>
     <string name="time_code">时间码（秒）</string>
-    <string name="added_to_playlist">已添加到播放列表</string>
+    <string name="added_to_playlist">已添加到播放列表 %1$s</string>
     <string name="queue">队列</string>
     <string name="sb_markers">标记</string>
     <string name="sb_markers_summary">在时间栏上标记段。</string>
@@ -459,4 +459,12 @@
     <string name="stop">停止</string>
     <string name="fallback_piped_proxy">退回到 Piped 代理</string>
     <string name="fallback_piped_proxy_desc">如果直连 YouTube 对当前视频没用则通过代理加载视频（这会增加初始加载时间）。若禁用，由于 YouTube Music 限制，YT 内容可能不会播放。</string>
+    <string name="audio_track_format">%1$s - %2$s</string>
+    <string name="unknown_audio_track_type">未知音轨类型</string>
+    <string name="unknown_audio_language">未知音频语言</string>
+    <string name="original_or_main_audio_track">原始或主音轨</string>
+    <string name="dubbed_audio_track">配音的</string>
+    <string name="descriptive_audio_track">描述性</string>
+    <string name="default_or_unknown_audio_track">默认或未知</string>
+    <string name="unknown_or_no_audio">未知或无音频</string>
 </resources>
