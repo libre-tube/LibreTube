@@ -3,26 +3,43 @@
     <string-array name="instances">
         <item>kavin.rocks (Official)</item>
         <item>tokhmi.xyz</item>
-        <item>moomoo.me</item>
-        <item>mint.lgbt</item>
-        <item>il.ax</item>
-        <item>syncpundit.com</item>
         <item>mha.fi</item>
-        <item>shimul.me</item>
-        <item>jae.fi</item>
-        <item>privacy.com.de</item>
+        <item>leptons.xyz</item>
+        <item>lunar.icu</item>
+        <item>kavin.rocks libre (Official)</item>
+        <item>projectsegfau.lt</item>
+        <item>projectsegfau.lt in</item>
+        <item>whatever.social</item>
+        <item>privacydev.net</item>
+        <item>palveluntarjoaja.eu</item>
+        <item>smnz.de</item>
+        <item>adminforge.de</item>
+        <item>qdi.fi</item>
+        <item>hostux.net</item>
+        <item>vern.cc</item>
+        <item>frontendfriendly.xyz</item>
+        <item>piped.yt</item>
+        <item>osphost.fi</item>
+        <item>simpleprivacy.fr</item>
     </string-array>
+
     <string-array name="instancesValue">
         <item>https://pipedapi.kavin.rocks</item>
-        <item>https://pipedapi.tokhmi.xyz</item>
-        <item>https://pipedapi.moomoo.me</item>
-        <item>https://pa.mint.lgbt</item>
-        <item>https://pa.il.ax</item>
-        <item>https://pipedapi.syncpundit.com</item>
-        <item>https://api-piped.mha.fi</item>
-        <item>https://api-piped.shimul.me</item>
-        <item>https://api.yt.jae.fi</item>
-        <item>https://piped-api.privacy.com.de</item>
+        <item>https://pipedapi.leptons.xyz</item>
+        <item>https://piped-api.lunar.icu</item>
+        <item>https://pipedapi-libre.kavin.rocks</item>
+        <item>https://api.piped.projectsegfau.lt</item>
+        <item>https://pipedapi.in.projectsegfau.lt</item>
+        <item>https://watchapi.whatever.social</item>
+        <item>https://api.piped.privacydev.net</item>
+        <item>https://pipedapi.palveluntarjoaja.eu</item>
+        <item>https://pipedapi.smnz.de</item>
+        <item>https://pipedapi.adminforge.de</item>
+        <item>https://pipedapi.qdi.fi</item>
+        <item>https://piped-api.hostux.net</item>
+        <item>https://pdapi.vern.cc</item>
+        <item>https://pipedapi.frontendfriendly.xyz</item>
+        <item>https://pipedapi.simpleprivacy.fr</item>
     </string-array>
 
     <string-array name="languages">
