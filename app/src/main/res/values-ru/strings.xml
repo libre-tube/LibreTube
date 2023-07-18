@@ -287,7 +287,7 @@
     <string name="filename">Имя файла</string>
     <string name="invalid_filename">Неверное имя файла!</string>
     <string name="playlists_order">Порядок плейлистов</string>
-    <string name="added_to_playlist">Добавлено в плейлист</string>
+    <string name="added_to_playlist">Добавлено в плейлист %1$s</string>
     <string name="playlistNameReversed">Название плейлиста (перевернутое)</string>
     <string name="time_code">Временной код (секунды)</string>
     <string name="queue">Очередь</string>
@@ -468,4 +468,12 @@
     <string name="stop">Остановить</string>
     <string name="fallback_piped_proxy">Запасной вариант для Piped прокси</string>
     <string name="fallback_piped_proxy_desc">Загружать видео через прокси, если подключение к YouTube не работает напрямую для текущего видео (увеличивает время первичной загрузки). Если отключить эту функцию, музыкальный контент YouTube, скорее всего, не будет воспроизводиться из-за ограничений.</string>
+    <string name="unknown_audio_language">Неизвестный язык аудиодорожки</string>
+    <string name="audio_track_format">%1$s - %2$s</string>
+    <string name="unknown_audio_track_type">Неизвестный тип звуковой дорожки</string>
+    <string name="descriptive_audio_track">описательная</string>
+    <string name="dubbed_audio_track">дублированная</string>
+    <string name="default_or_unknown_audio_track">стандартная или неизвестная</string>
+    <string name="original_or_main_audio_track">оригинальная или основная</string>
+    <string name="unknown_or_no_audio">неизвестная или без звука</string>
 </resources>
