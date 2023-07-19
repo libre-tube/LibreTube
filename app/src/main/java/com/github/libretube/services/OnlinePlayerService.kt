@@ -17,6 +17,7 @@ import androidx.media3.common.MimeTypes
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
@@ -230,11 +231,15 @@ class OnlinePlayerService : LifecycleService() {
     private fun initializePlayer() {
         if (player != null) return
 
+        val trackSelector = DefaultTrackSelector(this)
+        PlayerHelper.applyPreferredAudioQuality(this, trackSelector)
+
         player = ExoPlayer.Builder(this)
             .setUsePlatformDiagnostics(false)
             .setHandleAudioBecomingNoisy(true)
             .setAudioAttributes(PlayerHelper.getAudioAttributes(), true)
             .setLoadControl(PlayerHelper.getLoadControl())
+            .setTrackSelector(trackSelector)
             .build()
             .loadPlaybackParams(isBackgroundMode = true)
 

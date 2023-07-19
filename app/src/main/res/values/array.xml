@@ -259,12 +259,12 @@
     </string-array>
 
     <string-array name="audioQuality">
-        <item>@string/best_quality</item>
+        <item>@string/auto</item>
         <item>@string/worst_quality</item>
     </string-array>
 
     <string-array name="audioQualityValues">
-        <item>best</item>
+        <item>auto</item>
         <item>worst</item>
     </string-array>
 

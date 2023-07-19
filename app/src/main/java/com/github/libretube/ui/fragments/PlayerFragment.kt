@@ -1360,6 +1360,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
         }
 
+        PlayerHelper.applyPreferredAudioQuality(requireContext(), trackSelector)
+
         exoPlayer = ExoPlayer.Builder(requireContext())
             .setUsePlatformDiagnostics(false)
             .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
