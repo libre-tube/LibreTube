@@ -289,7 +289,7 @@
     <string name="playlists_order">סדר רשימות הנגינה</string>
     <string name="playlistNameReversed">שם רשימת הנגינה (הפוך)</string>
     <string name="time_code">קוד זמן (שניות)</string>
-    <string name="added_to_playlist">נוסף לרשימת נגינה</string>
+    <string name="added_to_playlist">נוסף לרשימת הנגינה %1$s</string>
     <string name="queue">תור</string>
     <string name="sb_markers">סמנים</string>
     <string name="sb_markers_summary">סימון המקטעים בציר הזמן.</string>
@@ -460,7 +460,7 @@
     <string name="invalid_color">ערך הצבע שנבחר שגוי!</string>
     <string name="color">צבע</string>
     <string name="sb_custom_colors">צבעי מקטעים מותאמים</string>
-    <string name="sb_color_enable">מחליף מקטעי צבע מותאמים במקטעי מימון ולהפך.</string>
+    <string name="sb_color_enable">מחליף מקטעי צבע מותאמים במקטעים ממומנים ולהפך.</string>
     <string name="chapters_videoHighlight">קטע בולט בסרטון</string>
     <string name="category_highlight">הצגת הקטע הבולט בסרטון</string>
     <string name="jumped_to_highlight">קפצנו לקטע הבולט בסרטון</string>
@@ -468,4 +468,12 @@
     <string name="stop">עצירה</string>
     <string name="fallback_piped_proxy">נסיגה למתווך של Piped</string>
     <string name="fallback_piped_proxy_desc">לטעון סרטונים דרך המתווך אם התחברות ישירה ל־YouTube לא עובדת לסרטון הנוכחי (מגדיל את זמני הטעינה הראשונית). אם מושבת, תוכן המוזיקה של YouTube כנראה לא ינוגן עקב מגבלות של YT.</string>
+    <string name="audio_track_format">%1$s - %2$s</string>
+    <string name="unknown_audio_language">שפת השמע לא מוכרת</string>
+    <string name="unknown_audio_track_type">סוג רצועת השמע לא ידוע</string>
+    <string name="default_or_unknown_audio_track">ברירת מחדל או לא ידוע</string>
+    <string name="original_or_main_audio_track">מקורי או ראשי</string>
+    <string name="dubbed_audio_track">מדובב</string>
+    <string name="descriptive_audio_track">מפורט</string>
+    <string name="unknown_or_no_audio">לא ידוע או שאין שמע</string>
 </resources>

@@ -193,7 +193,7 @@
     <string name="playlists">Плэйлісты</string>
     <string name="music_songs">Песні YT Music</string>
     <string name="sponsorblock">SponsorBlock</string>
-    <string name="category_interaction">Напамін аб узаемадзеянні (падабаецца і падпісваецца)</string>
+    <string name="category_interaction">Напамін аб узаемадзеянні</string>
     <string name="category_sponsor_description">Платнае прасоўванне, платныя рэфералы і прамая рэклама. Не для самарэкламы або бясплатнай шчырай хвалы справам, стваральнікам, вэб-сайтам і прадуктам.</string>
     <string name="category_selfpromo_description">Падобна «спонсару», за выключэннем неаплатнага або самарэкламы. Гэта ўключае ў сябе раздзелы пра тавары, ахвяраванні або інфармацыю аб тым, з кім яны супрацоўнічалі.</string>
     <string name="category_interaction_description">Калі ёсць кароткі напамін паставіць лайкі, падпісацца або падпісацца ў сярэдзіне кантэнту. Калі доўга або пра нешта канкрэтнае, гэта павінна быць самарэклама.</string>
@@ -289,7 +289,7 @@
     <string name="playlists_order">Парадак плэйлістоў</string>
     <string name="playlistNameReversed">Назва плэйліста (зваротны)</string>
     <string name="time_code">Часавы код (секунды)</string>
-    <string name="added_to_playlist">Дададзена ў плэйліст</string>
+    <string name="added_to_playlist">Дададзена ў плэйліст %1$s</string>
     <string name="queue">Чарга</string>
     <string name="livestreams">Жывыя трансляцыі</string>
     <string name="alternative_videos_layout">Альтэрнатыўная кампаноўка відэа</string>
@@ -409,7 +409,7 @@
     <string name="all_caught_up_summary">Вы бачылі ўсё новыя відэа</string>
     <string name="shuffle">Змяшаць</string>
     <string name="disable_proxy">Выключыць проксі Piped</string>
-    <string name="disable_proxy_summary">Загружаць відэа і выявы напрамую з сервераў YouTube. Уключайце гэтую наладу толькі калі вы карыстаецеся VPN! Звярніце ўвагу, што гэта можа не спрацаваць з матэрыяламі з YT music.</string>
+    <string name="disable_proxy_summary">Загружайце відэа і выявы непасрэдна з сервераў YouTube. Уключайце опцыю, толькі калі вы ўсё роўна карыстаецеся VPN!</string>
     <string name="auto_fullscreen_shorts">Аўтаматычны поўнаэкранны рэжым для кароткіх відэа</string>
     <string name="new_group">Новы</string>
     <string name="edit_group">Рэдагаваць групу</string>
@@ -452,4 +452,19 @@
     <string name="playlist_description">Апісанне плэйліста</string>
     <string name="emptyPlaylistDescription">Апісанне плэйліста не можа быць пустым</string>
     <string name="show_search_suggestions">Паказаць прапановы пошуку</string>
+    <string name="fallback_piped_proxy">Зварот да проксі Piped</string>
+    <string name="fallback_piped_proxy_desc">Загружайце відэа праз проксі-сервер, калі непасрэднае падключэнне да YouTube не працуе для бягучага відэа (павялічвае пачатковы час загрузкі). Калі гэта адключана, музычны кантэнт YouTube, хутчэй за ўсё, не будзе прайгравацца з-за абмежаванняў YT.</string>
+    <string name="unknown_audio_language">Невядомая мова гуку</string>
+    <string name="category_highlight_description">Гэта можа быць рэкламуемая назва, мініяцюра або самая цікавая частка відэа. Вы можаце перайсці да яго, націснуўшы на яго ў раздзеле раздзелаў.</string>
+    <string name="unknown_audio_track_type">Невядомы тып гукавой дарожкі</string>
+    <string name="audio_track_format">%1$s - %2$s</string>
+    <string name="sb_custom_colors">Карыстальніцкія колеры сегментаў</string>
+    <string name="invalid_color">Уведзена няправільнае значэнне колеру!</string>
+    <string name="enter_hex_value">Увядзіце Hex-значэнне колеру</string>
+    <string name="color">Колер</string>
+    <string name="manual">Уручную</string>
+    <string name="automatic">Аўтаматычны</string>
+    <string name="visible">Паказаць у панэлі пошуку</string>
+    <string name="sb_color_enable">Пераключае карыстальніцкія каляровыя сегменты для сегментаў SponsorBlock.</string>
+    <string name="off">Выкл</string>
 </resources>

@@ -446,7 +446,7 @@
     <string name="manual">Manual</string>
     <string name="off">Mati</string>
     <string name="automatic">Otomatis</string>
-    <string name="sb_color_enable">Mengaktifkan segmen warna kustom untuk segmen pemblokiran sponsor</string>
+    <string name="sb_color_enable">Mengaktifkan segmen warna kustom untuk segmen pemblokiran sponsor.</string>
     <string name="invalid_color">Nilai warna yang dimasukkan tidak valid!</string>
     <string name="visible">Tampilkan dalam bilah seek</string>
     <string name="color">Warna</string>
@@ -463,4 +463,8 @@
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="original_or_main_audio_track">asli atau utama</string>
     <string name="unknown_audio_language">Bahasa audio tidak diketahui</string>
+    <string name="dubbed_audio_track">disulih suara</string>
+    <string name="descriptive_audio_track">deskriptif</string>
+    <string name="default_or_unknown_audio_track">bawaan atau tidak diketahui</string>
+    <string name="unknown_or_no_audio">tidak diketahui atau tidak ada audio</string>
 </resources>
