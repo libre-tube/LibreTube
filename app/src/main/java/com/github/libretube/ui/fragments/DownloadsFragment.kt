@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
@@ -84,7 +85,7 @@ class DownloadsFragment : Fragment() {
 
         binding.downloads.layoutManager = LinearLayoutManager(context)
 
-        binding.downloads.adapter = DownloadsAdapter(requireContext(), downloads) {
+        val adapter = DownloadsAdapter(requireContext(), downloads) {
             var isDownloading = false
             val ids = it.downloadItems
                 .filter { item -> item.path.fileSize() < item.downloadSize }
@@ -109,6 +110,28 @@ class DownloadsFragment : Fragment() {
             }
             return@DownloadsAdapter isDownloading.not()
         }
+
+        binding.downloads.adapter = adapter
+
+        val itemTouchCallback = object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            override fun getMovementFlags(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder
+            ): Int = makeMovementFlags(0, ItemTouchHelper.LEFT)
+
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean = false
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                adapter.showDeleteDialog(requireContext(), viewHolder.absoluteAdapterPosition)
+                // put the item back to the center, as it's currently out of the screen
+                adapter.restoreItem(viewHolder.absoluteAdapterPosition)
+            }
+        }
+        ItemTouchHelper(itemTouchCallback).attachToRecyclerView(binding.downloads)
 
         binding.downloads.adapter?.registerAdapterDataObserver(
             object : RecyclerView.AdapterDataObserver() {
