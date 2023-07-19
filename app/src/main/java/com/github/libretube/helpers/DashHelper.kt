@@ -46,26 +46,14 @@ object DashHelper {
         val adapSetInfos = ArrayList<AdapSetInfo>()
 
         if (!audioOnly) {
-            val enabledVideoCodecs = PlayerHelper.enabledVideoCodecs
             for (
             stream in streams.videoStreams
                 // used to avoid including LBRY HLS inside the streams in the manifest
                 .filter { !it.format.orEmpty().contains("HLS") }
-                // filter the codecs according to the user's preferences
-                .filter {
-                    enabledVideoCodecs == "all" || it.codec.orEmpty().lowercase().startsWith(
-                        enabledVideoCodecs
-                    )
-                }
                 .filter { supportsHdr || !it.quality.orEmpty().uppercase().contains("HDR") }
             ) {
-                // ignore dual format streams
-                if (!stream.videoOnly!!) {
-                    continue
-                }
-
-                // ignore streams which might be OTF
-                if (stream.indexEnd!! <= 0) {
+                // ignore dual format and OTF streams
+                if (!stream.videoOnly!! || stream.indexEnd!! <= 0) {
                     continue
                 }
 

@@ -1348,6 +1348,16 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         trackSelector.updateParameters {
             setPreferredAudioLanguage(LocaleHelper.getAppLocale().isO3Language)
+            val enabledVideoCodecs = PlayerHelper.enabledVideoCodecs
+            if (enabledVideoCodecs != "all") {
+                // map the codecs to their corresponding mimetypes
+                val mimeType = when (enabledVideoCodecs) {
+                    "vp9" -> "video/webm"
+                    "avc" -> "video/mp4"
+                    else -> throw IllegalArgumentException()
+                }
+                this.setPreferredVideoMimeType(mimeType)
+            }
         }
 
         exoPlayer = ExoPlayer.Builder(requireContext())
