@@ -473,4 +473,5 @@
     <string name="unknown_or_no_audio">sconosciuto o senza audio</string>
     <string name="dubbed_audio_track">doppiato</string>
     <string name="original_or_main_audio_track">originale o principale</string>
+    <string name="continue_watching">Continua a guardare</string>
 </resources>
