@@ -27,6 +27,7 @@ import androidx.media3.common.Tracks
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.LoadControl
+import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.media3.ui.CaptionStyleCompat
 import com.github.libretube.R
 import com.github.libretube.api.obj.ChapterSegment
@@ -37,6 +38,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
+import com.github.libretube.extensions.updateParameters
 import com.github.libretube.obj.PreviewFrame
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.runBlocking
@@ -329,6 +331,23 @@ object PlayerHelper {
             PreferenceKeys.DEFAULT_RESOLUTION
         }
         return PreferenceHelper.getString(prefKey, "")
+    }
+
+    /**
+     * Apply the preferred audio quality: auto or worst
+     */
+    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
+    fun applyPreferredAudioQuality(context: Context, trackSelector: DefaultTrackSelector) {
+        val prefKey = if (NetworkHelper.isNetworkMetered(context)) {
+            PreferenceKeys.PLAYER_AUDIO_QUALITY_MOBILE
+        } else {
+            PreferenceKeys.PLAYER_AUDIO_QUALITY
+        }
+        when (PreferenceHelper.getString(prefKey, "auto")) {
+            "worst" -> trackSelector.updateParameters {
+                setMaxAudioBitrate(1)
+            }
+        }
     }
 
     fun getIntentActon(context: Context): String {
@@ -659,7 +678,7 @@ object PlayerHelper {
      *
      * Duplicate audio languages with their role flags are removed.
      *
-     * @param groups                 the list of [Group]s of the current tracks played by the player
+     * @param groups                 the list of [Tracks.Group]s of the current tracks played by the player
      * @param keepOnlySelectedTracks whether to get only the selected audio languages with their
      *                               role flags among the supported ones
      * @return a list of distinct audio languages with their role flags from the supported formats
@@ -697,9 +716,7 @@ object PlayerHelper {
      * @param flag     a flag to check its presence in the given bitfield
      * @return whether the given flag is set in the given bitfield
      */
-    private fun isFlagSet(bitField: Int, flag: Int): Boolean {
-        return bitField and flag == flag;
-    }
+    private fun isFlagSet(bitField: Int, flag: Int) = bitField and flag == flag
 
     /**
      * Check whether the given ExoPlayer role flags contain at least one flag used for audio

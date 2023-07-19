@@ -13,16 +13,14 @@
             app:title="@string/defres"
             app:useSimpleSummaryProvider="true" />
 
-        <!--
         <ListPreference
             android:icon="@drawable/ic_headphones"
-            app:defaultValue="best"
+            app:defaultValue="auto"
             app:entries="@array/audioQuality"
             app:entryValues="@array/audioQualityValues"
             app:key="player_audio_quality"
             app:title="@string/playerAudioQuality"
             app:useSimpleSummaryProvider="true" />
-        -->
 
     </PreferenceCategory>
 
@@ -37,19 +35,16 @@
             app:title="@string/defres"
             app:useSimpleSummaryProvider="true" />
 
-        <!--
         <ListPreference
             android:icon="@drawable/ic_headphones"
-            app:defaultValue="best"
+            app:defaultValue="auto"
             app:entries="@array/audioQuality"
             app:entryValues="@array/audioQualityValues"
             app:key="player_audio_quality_mobile"
             app:title="@string/playerAudioQuality"
             app:useSimpleSummaryProvider="true" />
-        -->
 
     </PreferenceCategory>
-
 
     <PreferenceCategory app:title="@string/quality">
 
