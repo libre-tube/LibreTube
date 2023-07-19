@@ -1,5 +1,6 @@
 package com.github.libretube.db
 
+import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Database
@@ -48,6 +49,19 @@ object DatabaseHelper {
         while (searchHistory.size > MAX_SEARCH_HISTORY_SIZE) {
             Database.searchHistoryDao().delete(searchHistory.first())
             searchHistory.removeFirst()
+        }
+    }
+
+    suspend fun filterUnwatched(streams: List<StreamItem>): List<StreamItem> {
+        return streams.filter {
+            withContext(Dispatchers.IO) {
+                val historyItem = Database.watchPositionDao()
+                    .findById(it.url.orEmpty().toID()) ?: return@withContext true
+                val progress = historyItem.position / 1000
+                val duration = it.duration ?: 0
+                // show video only in feed when watched less than 90%
+                progress < 0.9f * duration
+            }
         }
     }
 }

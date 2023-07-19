@@ -21,8 +21,10 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentHomeBinding
+import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.helpers.LocaleHelper
+import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.PlaylistBookmarkAdapter
 import com.github.libretube.ui.adapters.PlaylistsAdapter
@@ -54,6 +56,10 @@ class HomeFragment : Fragment() {
 
         binding.featuredTV.setOnClickListener {
             findNavController().navigate(R.id.subscriptionsFragment)
+        }
+
+        binding.watchingTV.setOnClickListener {
+            findNavController().navigate(R.id.watchHistoryFragment)
         }
 
         binding.trendingTV.setOnClickListener {
@@ -90,6 +96,7 @@ class HomeFragment : Fragment() {
                     .getStringSet(PreferenceKeys.HOME_TAB_CONTENT, defaultItems.toSet())
                 awaitAll(
                     async { if (visibleItems.contains(TRENDING)) loadTrending() },
+                    async { if (visibleItems.contains(WATCHING)) loadVideosToContinueWatching() },
                     async { if (visibleItems.contains(BOOKMARKS)) loadBookmarks() },
                     async { if (visibleItems.contains(FEATURED)) loadFeed() },
                     async { if (visibleItems.contains(PLAYLISTS)) loadPlaylists() }
@@ -200,6 +207,30 @@ class HomeFragment : Fragment() {
         })
     }
 
+    private suspend fun loadVideosToContinueWatching() {
+        if (!PlayerHelper.watchHistoryEnabled) return
+
+        val videos = withContext(Dispatchers.IO) {
+            DatabaseHolder.Database.watchHistoryDao().getAll()
+        }
+        val unwatchedVideos = DatabaseHelper.filterUnwatched(videos.map { it.toStreamItem() })
+            .reversed()
+            .take(20)
+        if (unwatchedVideos.isEmpty()) return
+        val binding = _binding ?: return
+
+        makeVisible(binding.watchingRV, binding.watchingTV)
+        binding.watchingRV.layoutManager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
+        binding.watchingRV.adapter = VideosAdapter(
+            unwatchedVideos.toMutableList(),
+            forceMode = VideosAdapter.Companion.ForceMode.HOME
+        )
+    }
+
     private fun makeVisible(vararg views: View) {
         views.forEach {
             it.isVisible = true
@@ -213,6 +244,7 @@ class HomeFragment : Fragment() {
     companion object {
         // The values of the preference entries for the home tab content
         private const val FEATURED = "featured"
+        private const val WATCHING = "watching"
         private const val TRENDING = "trending"
         private const val BOOKMARKS = "bookmarks"
         private const val PLAYLISTS = "playlists"

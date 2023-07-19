@@ -20,6 +20,7 @@ import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
+import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.SubscriptionGroup
 import com.github.libretube.extensions.dpToPx
@@ -33,7 +34,6 @@ import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.ChannelGroupsSheet
 import com.google.android.material.chip.Chip
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -243,15 +243,16 @@ class SubscriptionsFragment : Fragment() {
                     else -> throw IllegalArgumentException()
                 }
             }.let { streams ->
-                runBlocking {
-                    if (!PreferenceHelper.getBoolean(
-                            PreferenceKeys.HIDE_WATCHED_FROM_FEED,
-                            false
-                        )
-                    ) {
-                        streams
-                    } else {
-                        removeWatchVideosFromFeed(streams)
+
+                if (!PreferenceHelper.getBoolean(
+                        PreferenceKeys.HIDE_WATCHED_FROM_FEED,
+                        false
+                    )
+                ) {
+                    streams
+                } else {
+                    runBlocking {
+                        DatabaseHelper.filterUnwatched(streams)
                     }
                 }
             }
@@ -292,19 +293,6 @@ class SubscriptionsFragment : Fragment() {
         binding.subFeed.adapter = subscriptionsAdapter
 
         PreferenceHelper.updateLastFeedWatchedTime()
-    }
-
-    private fun removeWatchVideosFromFeed(streams: List<StreamItem>): List<StreamItem> {
-        return streams.filter {
-            runBlocking(Dispatchers.IO) {
-                val historyItem = DatabaseHolder.Database.watchPositionDao()
-                    .findById(it.url.orEmpty().toID()) ?: return@runBlocking true
-                val progress = historyItem.position / 1000
-                val duration = it.duration ?: 0
-                // show video only in feed when watched less than 1/4
-                progress < 0.9f * duration
-            }
-        }
     }
 
     private fun showSubscriptions() {
