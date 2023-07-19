@@ -40,6 +40,19 @@
                     android:visibility="gone" />
 
                 <TextView
+                    android:id="@+id/watchingTV"
+                    style="@style/HomeCategoryTitle"
+                    android:text="@string/continue_watching" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/watchingRV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:nestedScrollingEnabled="false"
+                    android:visibility="gone" />
+
+                <TextView
                     android:id="@+id/trendingTV"
                     style="@style/HomeCategoryTitle"
                     android:text="@string/trending" />

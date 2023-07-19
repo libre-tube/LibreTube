@@ -427,6 +427,7 @@
 
     <string-array name="homeTabItems">
         <item>@string/featured</item>
+        <item>@string/continue_watching</item>
         <item>@string/trending</item>
         <item>@string/bookmarks</item>
         <item>@string/playlists</item>
@@ -434,6 +435,7 @@
 
     <string-array name="homeTabItemsValues">
         <item>featured</item>
+        <item>watching</item>
         <item>trending</item>
         <item>bookmarks</item>
         <item>playlists</item>
