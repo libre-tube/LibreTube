@@ -236,24 +236,19 @@ class DownloadService : LifecycleService() {
             }
         }
 
-        if (_downloadFlow.firstOrNull { it.first == item.id }?.second == DownloadStatus.Stopped) {
-            downloadQueue.remove(item.id, false)
-            return
+        val completed = totalRead < item.downloadSize
+        if (completed) {
+            _downloadFlow.emit(item.id to DownloadStatus.Paused)
+        } else {
+            _downloadFlow.emit(item.id to DownloadStatus.Completed)
         }
 
-        val completed = when {
-            totalRead < item.downloadSize -> {
-                _downloadFlow.emit(item.id to DownloadStatus.Paused)
-                false
-            }
-
-            else -> {
-                _downloadFlow.emit(item.id to DownloadStatus.Completed)
-                true
-            }
-        }
         setPauseNotification(notificationBuilder, item, completed)
         pause(item.id)
+
+        if (_downloadFlow.firstOrNull { it.first == item.id }?.second == DownloadStatus.Stopped) {
+            downloadQueue.remove(item.id, false)
+        }
     }
 
     private suspend fun startConnection(
