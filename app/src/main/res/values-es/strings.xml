@@ -473,4 +473,5 @@
     <string name="unknown_audio_language">Idioma del audio desconocido</string>
     <string name="unknown_audio_track_type">Tipo de pista de audio desconocido</string>
     <string name="original_or_main_audio_track">original o principal</string>
+    <string name="continue_watching">Continuar viendo</string>
 </resources>
