@@ -470,4 +470,5 @@
     <string name="default_or_unknown_audio_track">standart və ya naməlum</string>
     <string name="unknown_or_no_audio">naməlum və ya səs yoxdur</string>
     <string name="unknown_audio_language">Naməlum səs dili</string>
+    <string name="continue_watching">Baxmağa davam et</string>
 </resources>
