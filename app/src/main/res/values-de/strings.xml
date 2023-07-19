@@ -470,4 +470,5 @@
     <string name="descriptive_audio_track">Deskriptiv</string>
     <string name="default_or_unknown_audio_track">Standard oder unbekannt</string>
     <string name="unknown_or_no_audio">Unbekannt oder kein Ton</string>
+    <string name="continue_watching">Weiterschauen</string>
 </resources>
