@@ -296,7 +296,7 @@
     <string name="invalid_filename">ناوی فایل نادروستە!</string>
     <string name="playlists_order">ڕیزکردنی لیستی لێدان</string>
     <string name="playlistNameReversed">ناوی لیستی لێدان (پێچەوانە)</string>
-    <string name="added_to_playlist">زیادکرا بۆ لیستی لێدان</string>
+    <string name="added_to_playlist">زیادکرا بۆ لیستی لێدانی %1$s</string>
     <string name="pop_up">بچووککراوە</string>
     <string name="worst_quality">خراپترین</string>
     <string name="time_code">مەودای کات (چرکە)</string>
@@ -462,4 +462,13 @@
     <string name="stop">وەستاندن</string>
     <string name="fallback_piped_proxy">گەڕانەوە بۆ پرۆکسی Piped</string>
     <string name="fallback_piped_proxy_desc">هێنانی ڤیدیۆکان لە ڕێی پرۆکسیەوە ئەگەر پەیوەندیکردن بە یوتوب ڕاستەوخۆ بۆ ڤیدیۆی ئێستا کارنەکات (کاتەکانی بارکردنی سەرەتایی زیاد دەکات)، ئەگەر لەکاربخرێت، پێدەچێت ناوەڕۆکی مۆسیقای یوتوب بەهۆی سنووردارکردنی YTەوە لێنەدرێت.</string>
+    <string name="descriptive_audio_track">پێناسە</string>
+    <string name="continue_watching">بەردەوامبون لە سەیرکردن</string>
+    <string name="audio_track_format">%1$s - %2$s</string>
+    <string name="unknown_audio_language">زمانی دەنگ نەناسراوە</string>
+    <string name="unknown_audio_track_type">جۆری فایلی دەنگ نەزانراوە</string>
+    <string name="original_or_main_audio_track">بنەڕەتی یان سەرەکی</string>
+    <string name="dubbed_audio_track">دۆبلاژ</string>
+    <string name="default_or_unknown_audio_track">سەرەکی یان نەزانراو</string>
+    <string name="unknown_or_no_audio">نەزانراوە یان بێ دەنگە</string>
 </resources>
