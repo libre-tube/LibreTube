@@ -1,6 +1,5 @@
 package com.github.libretube.helpers
 
-import android.util.Log
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.PreferenceKeys

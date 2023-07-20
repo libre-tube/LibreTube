@@ -11,7 +11,6 @@ import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.ui.dialogs.ShareDialog
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class DownloadOptionsBottomSheet(
     private val download: Download,

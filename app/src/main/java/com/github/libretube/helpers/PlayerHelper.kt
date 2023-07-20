@@ -41,10 +41,10 @@ import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.obj.PreviewFrame
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.runBlocking
 import java.util.Locale
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
+import kotlinx.coroutines.runBlocking
 
 object PlayerHelper {
     private const val ACTION_MEDIA_CONTROL = "media_control"
@@ -662,12 +662,15 @@ object PlayerHelper {
         val audioLanguage = audioLanguageAndRoleFlags.first
         return context.getString(R.string.audio_track_format)
             .format(
-                if (audioLanguage == null) context.getString(R.string.unknown_audio_language)
-                else Locale.forLanguageTag(audioLanguage)
-                    .getDisplayLanguage(
-                        LocaleHelper.getAppLocale()
-                    )
-                    .ifEmpty { context.getString(R.string.unknown_audio_language) },
+                if (audioLanguage == null) {
+                    context.getString(R.string.unknown_audio_language)
+                } else {
+                    Locale.forLanguageTag(audioLanguage)
+                        .getDisplayLanguage(
+                            LocaleHelper.getAppLocale()
+                        )
+                        .ifEmpty { context.getString(R.string.unknown_audio_language) }
+                },
                 getDisplayAudioTrackTypeFromFormat(context, audioLanguageAndRoleFlags.second)
             )
     }
@@ -691,12 +694,15 @@ object PlayerHelper {
         // Filter unsupported tracks and keep only selected tracks if requested
         // Use a lambda expression to avoid checking on each audio format if we keep only selected
         // tracks or not
-        val trackFilter = if (keepOnlySelectedTracks)
+        val trackFilter = if (keepOnlySelectedTracks) {
             { group: Tracks.Group, trackIndex: Int ->
                 group.isTrackSupported(trackIndex) && group.isTrackSelected(
                     trackIndex
                 )
-            } else { group: Tracks.Group, trackIndex: Int -> group.isTrackSupported(trackIndex) }
+            }
+        } else {
+            { group: Tracks.Group, trackIndex: Int -> group.isTrackSupported(trackIndex) }
+        }
 
         return groups.filter {
             it.type == C.TRACK_TYPE_AUDIO
@@ -729,9 +735,9 @@ object PlayerHelper {
      * @return whether the provided ExoPlayer flags contain a flag used for audio track types
      */
     fun haveAudioTrackRoleFlagSet(@C.RoleFlags roleFlags: Int): Boolean {
-        return isFlagSet(roleFlags, C.ROLE_FLAG_DESCRIBES_VIDEO)
-                || isFlagSet(roleFlags, C.ROLE_FLAG_DUB)
-                || isFlagSet(roleFlags, C.ROLE_FLAG_MAIN)
-                || isFlagSet(roleFlags, C.ROLE_FLAG_ALTERNATE)
+        return isFlagSet(roleFlags, C.ROLE_FLAG_DESCRIBES_VIDEO) ||
+            isFlagSet(roleFlags, C.ROLE_FLAG_DUB) ||
+            isFlagSet(roleFlags, C.ROLE_FLAG_MAIN) ||
+            isFlagSet(roleFlags, C.ROLE_FLAG_ALTERNATE)
     }
 }

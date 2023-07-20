@@ -92,7 +92,10 @@ object BackupHelper {
                     is Int -> {
                         when {
                             // we only use integers for SponsorBlock colors and the start fragment
-                            key == PreferenceKeys.START_FRAGMENT || key.orEmpty().contains("_color") -> putInt(key, value)
+                            key == PreferenceKeys.START_FRAGMENT || key.orEmpty().contains("_color") -> putInt(
+                                key,
+                                value
+                            )
                             else -> putLong(key, value.toLong())
                         }
                     }

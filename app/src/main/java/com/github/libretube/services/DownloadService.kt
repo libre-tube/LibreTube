@@ -47,6 +47,11 @@ import java.net.URL
 import java.nio.file.Path
 import java.nio.file.StandardOpenOption
 import java.util.concurrent.Executors
+import kotlin.io.path.absolute
+import kotlin.io.path.createFile
+import kotlin.io.path.deleteIfExists
+import kotlin.io.path.fileSize
+import kotlin.math.min
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -61,11 +66,6 @@ import kotlinx.coroutines.withContext
 import okio.buffer
 import okio.sink
 import okio.source
-import kotlin.io.path.absolute
-import kotlin.io.path.createFile
-import kotlin.io.path.deleteIfExists
-import kotlin.io.path.fileSize
-import kotlin.math.min
 
 /**
  * Download service with custom implementation of downloading using [HttpURLConnection].
@@ -206,7 +206,7 @@ class DownloadService : LifecycleService() {
                             notificationBuilder
                                 .setContentText(
                                     totalRead.formatAsFileSize() + " / " +
-                                            item.downloadSize.formatAsFileSize()
+                                        item.downloadSize.formatAsFileSize()
                                 )
                                 .setProgress(
                                     item.downloadSize.toInt(),

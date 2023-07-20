@@ -11,10 +11,12 @@ import retrofit2.create
 object RetrofitInstance {
     private val url get() = PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, PIPED_API_URL)
     private val authUrl
-        get() = when (PreferenceHelper.getBoolean(
-            PreferenceKeys.AUTH_INSTANCE_TOGGLE,
-            false
-        )) {
+        get() = when (
+            PreferenceHelper.getBoolean(
+                PreferenceKeys.AUTH_INSTANCE_TOGGLE,
+                false
+            )
+        ) {
             true -> PreferenceHelper.getString(
                 PreferenceKeys.AUTH_INSTANCE,
                 PIPED_API_URL

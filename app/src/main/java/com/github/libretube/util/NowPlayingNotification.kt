@@ -121,7 +121,9 @@ class NowPlayingNotification(
     private fun processBitmap(bitmap: Bitmap): Bitmap {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             bitmap
-        } else ImageHelper.getSquareBitmap(bitmap)
+        } else {
+            ImageHelper.getSquareBitmap(bitmap)
+        }
     }
 
     private val legacyNotificationButtons
