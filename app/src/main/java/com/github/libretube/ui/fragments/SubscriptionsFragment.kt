@@ -2,6 +2,7 @@ package com.github.libretube.ui.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,7 +45,8 @@ class SubscriptionsFragment : Fragment() {
     private val viewModel: SubscriptionsViewModel by activityViewModels()
     private val playerModel: PlayerViewModel by activityViewModels()
     private var channelGroups: List<SubscriptionGroup> = listOf()
-    private var selectedFilterGroup: Int = 0
+    private var selectedFilterGroup = 0
+    private var isCurrentTabSubChannels = false
 
     var subscriptionsAdapter: VideosAdapter? = null
     private var selectedSortOrder = PreferenceHelper.getInt(PreferenceKeys.FEED_SORT_ORDER, 0)
@@ -85,7 +87,7 @@ class SubscriptionsFragment : Fragment() {
 
         binding.subFeed.layoutManager = VideosAdapter.getLayout(requireContext())
 
-        if (viewModel.videoFeed.value == null || !loadFeedInBackground) {
+        if (!isCurrentTabSubChannels && (viewModel.videoFeed.value == null || !loadFeedInBackground)) {
             viewModel.videoFeed.value = null
             viewModel.fetchFeed()
         }
@@ -98,13 +100,11 @@ class SubscriptionsFragment : Fragment() {
         }
 
         viewModel.videoFeed.observe(viewLifecycleOwner) {
-            if (!isShowingFeed() || it == null) return@observe
-            showFeed()
+            if (!isCurrentTabSubChannels && it != null) showFeed()
         }
 
         viewModel.subscriptions.observe(viewLifecycleOwner) {
-            if (isShowingFeed() || it == null) return@observe
-            showSubscriptions()
+            if (isCurrentTabSubChannels && it != null) showSubscriptions()
         }
 
         binding.subRefresh.setOnRefreshListener {
@@ -139,7 +139,9 @@ class SubscriptionsFragment : Fragment() {
         binding.toggleSubs.visibility = View.VISIBLE
 
         binding.toggleSubs.setOnClickListener {
-            if (isShowingFeed()) {
+            binding.subProgress.isVisible = true
+            binding.subRefresh.isRefreshing = true
+            if (!isCurrentTabSubChannels) {
                 if (viewModel.subscriptions.value == null) {
                     viewModel.fetchSubscriptions()
                 } else {
@@ -152,6 +154,7 @@ class SubscriptionsFragment : Fragment() {
                 binding.subChannelsContainer.visibility = View.GONE
                 binding.subFeedContainer.visibility = View.VISIBLE
             }
+            isCurrentTabSubChannels = !isCurrentTabSubChannels
         }
 
         binding.scrollviewSub.viewTreeObserver.addOnScrollChangedListener {
@@ -298,8 +301,6 @@ class SubscriptionsFragment : Fragment() {
     private fun showSubscriptions() {
         if (viewModel.subscriptions.value == null) return
 
-        binding.subRefresh.isRefreshing = false
-
         val legacySubscriptions = PreferenceHelper.getBoolean(
             PreferenceKeys.LEGACY_SUBSCRIPTIONS,
             false
@@ -326,14 +327,12 @@ class SubscriptionsFragment : Fragment() {
             )
         }
 
+        binding.subRefresh.isRefreshing = false
+        binding.subProgress.isGone = true
         binding.subFeedContainer.visibility = View.GONE
 
         val notLoaded = viewModel.subscriptions.value.isNullOrEmpty()
         binding.subChannelsContainer.isGone = notLoaded
         binding.emptyFeed.isVisible = notLoaded
-    }
-
-    private fun isShowingFeed(): Boolean {
-        return !binding.subChannelsContainer.isVisible
     }
 }
