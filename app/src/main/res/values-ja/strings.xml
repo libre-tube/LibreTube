@@ -467,4 +467,7 @@
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="dubbed_audio_track">吹き替え</string>
     <string name="descriptive_audio_track">解説</string>
+    <string name="continue_watching">視聴を続ける</string>
+    <string name="dearrow_summary">大げさでなくより正確な題名とサムネイルを表示します。読み込み時間が増えます。</string>
+    <string name="dearrow">DeArrow を使用</string>
 </resources>
