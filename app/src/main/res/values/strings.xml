@@ -433,6 +433,9 @@
     <string name="visible">Show in seek bar</string>
     <string name="fallback_piped_proxy">Fallback to Piped proxy</string>
     <string name="fallback_piped_proxy_desc">Load videos via the proxy if connecting to YouTube directly doesn\'t work for the current video (increases the initial loading times). If disabled, YouTube music content likely won\'t play due to YT restrictions.</string>
+    <string name="dearrow">Enable DeArrow</string>
+    <string name="dearrow_summary">Show more accurate and less sensationalist titles and thumbnails. Increases loading times.</string>
+
     <!-- Backup & Restore Settings -->
     <string name="import_subscriptions_from">Import subscriptions from</string>
     <string name="export_subscriptions_to">Export subscriptions to</string>

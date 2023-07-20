@@ -21,6 +21,7 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.hideKeyboard
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.SearchAdapter
+import com.github.libretube.util.deArrow
 import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -94,7 +95,9 @@ class SearchResultFragment : Fragment() {
                 view?.let { context?.hideKeyboard(it) }
                 val response = try {
                     withContext(Dispatchers.IO) {
-                        RetrofitInstance.api.getSearchResults(query, apiSearchFilter)
+                        RetrofitInstance.api.getSearchResults(query, apiSearchFilter).apply {
+                            items = items.deArrow()
+                        }
                     }
                 } catch (e: IOException) {
                     println(e)
@@ -124,7 +127,9 @@ class SearchResultFragment : Fragment() {
                             query,
                             apiSearchFilter,
                             nextPage!!
-                        )
+                        ).apply {
+                            items = items.deArrow()
+                        }
                     }
                 } catch (e: IOException) {
                     println(e)

@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ChannelTabResponse(
-    val content: List<ContentItem> = emptyList(),
+    var content: List<ContentItem> = emptyList(),
     val nextpage: String? = null
 )

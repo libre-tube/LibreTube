@@ -30,6 +30,7 @@ import com.github.libretube.ui.adapters.PlaylistBookmarkAdapter
 import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.models.SubscriptionsViewModel
+import com.github.libretube.util.deArrow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -116,7 +117,7 @@ class HomeFragment : Fragment() {
         val region = LocaleHelper.getTrendingRegion(requireContext())
         val trending = runCatching {
             withContext(Dispatchers.IO) {
-                RetrofitInstance.api.getTrending(region).take(10)
+                RetrofitInstance.api.getTrending(region).deArrow().take(10)
             }
         }.getOrNull()?.takeIf { it.isNotEmpty() } ?: return
         val binding = _binding ?: return

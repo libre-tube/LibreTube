@@ -25,6 +25,12 @@
         app:title="@string/sb_markers" />
 
     <SwitchPreferenceCompat
+        app:defaultValue="false"
+        app:key="dearrow"
+        app:summary="@string/dearrow_summary"
+        app:title="@string/dearrow" />
+
+    <SwitchPreferenceCompat
         app:defaultValue="true"
         app:key="sb_highlights"
         app:summary="@string/category_highlight_description"

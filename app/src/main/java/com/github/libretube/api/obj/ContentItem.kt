@@ -6,9 +6,9 @@ import kotlinx.serialization.Serializable
 data class ContentItem(
     val url: String,
     val type: String,
-    val thumbnail: String,
+    var thumbnail: String,
     // Video only attributes
-    val title: String? = null,
+    var title: String? = null,
     val uploaderUrl: String? = null,
     val uploaderAvatar: String? = null,
     val duration: Long = -1,

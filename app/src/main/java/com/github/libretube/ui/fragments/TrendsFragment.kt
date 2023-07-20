@@ -18,6 +18,7 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.adapters.VideosAdapter
+import com.github.libretube.util.deArrow
 import com.google.android.material.snackbar.Snackbar
 import java.io.IOException
 import kotlinx.coroutines.Dispatchers
@@ -59,7 +60,7 @@ class TrendsFragment : Fragment() {
                 val response = try {
                     withContext(Dispatchers.IO) {
                         val region = LocaleHelper.getTrendingRegion(requireContext())
-                        RetrofitInstance.api.getTrending(region)
+                        RetrofitInstance.api.getTrending(region).deArrow()
                     }
                 } catch (e: IOException) {
                     println(e)
