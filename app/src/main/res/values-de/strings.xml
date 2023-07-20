@@ -471,4 +471,6 @@
     <string name="default_or_unknown_audio_track">Standard oder unbekannt</string>
     <string name="unknown_or_no_audio">Unbekannt oder kein Ton</string>
     <string name="continue_watching">Weiterschauen</string>
+    <string name="dearrow_summary">Präzisere und weniger sensationslüsterne Titel und Miniaturansichten (Thumbnails) anzeigen. Erhöht die Ladezeiten.</string>
+    <string name="dearrow">DeArrow verwenden</string>
 </resources>
