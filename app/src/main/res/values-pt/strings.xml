@@ -247,7 +247,7 @@
     <string name="repeat_mode_current">Atual</string>
     <string name="backup_restore">Backup e restauro</string>
     <string name="backup">Backup</string>
-    <string name="picture_in_picture">Imagem em imagem (PIP)</string>
+    <string name="picture_in_picture">Imagem-em-imagem</string>
     <string name="maximum_image_cache">Máximo de imagens em cache</string>
     <string name="copied_to_clipboard">Copiado para a área de transferência</string>
     <string name="open_copied">Abrir</string>
@@ -462,7 +462,16 @@
     <string name="jumped_to_highlight">Saltou para o vídeo em destaque</string>
     <string name="category_highlight">Mostrar vídeo de destaque</string>
     <string name="category_highlight_description">Pode ser o título anunciado, a miniatura ou a parte mais interessante do vídeo. Pode saltar para essa parte tocando nela na secção de capítulos.</string>
-    <string name="sb_color_enable">Mostra cores personalizadas para segmentos de blocos de patrocinadores.</string>
+    <string name="sb_color_enable">Alterna segmentos de cores personalizadas para segmentos SponsorBlock.</string>
     <string name="fallback_piped_proxy">Usar Piped proxy como recurso</string>
     <string name="fallback_piped_proxy_desc">Carregar vídeos através do proxy Piper se a ligação ao YouTube não funcionar para o vídeo em reprodução (aumenta o tempo de carregamento inicial). Se estiver desativado, é provável que o conteúdo musical do YouTube não seja reproduzido devido a restrições do YT.</string>
+    <string name="continue_watching">Continuar a ver</string>
+    <string name="audio_track_format">%1$s - %2$s</string>
+    <string name="unknown_audio_language">Idioma de áudio desconhecido</string>
+    <string name="unknown_audio_track_type">Tipo de faixa de áudio desconhecido</string>
+    <string name="original_or_main_audio_track">original ou principal</string>
+    <string name="dubbed_audio_track">Traduzido</string>
+    <string name="descriptive_audio_track">descritivo</string>
+    <string name="default_or_unknown_audio_track">predefinido ou desconhecido</string>
+    <string name="unknown_or_no_audio">desconhecido ou sem áudio</string>
 </resources>
