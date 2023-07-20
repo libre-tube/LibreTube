@@ -251,7 +251,7 @@ class MainActivity : BaseActivity() {
             return
         }
 
-        subscriptionsViewModel.fetchSubscriptions()
+        subscriptionsViewModel.fetchSubscriptions(this)
 
         subscriptionsViewModel.videoFeed.observe(this) { feed ->
             val lastSeenVideoIndex = feed.orEmpty()
