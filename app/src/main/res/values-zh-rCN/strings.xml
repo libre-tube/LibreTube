@@ -467,4 +467,5 @@
     <string name="descriptive_audio_track">描述性</string>
     <string name="default_or_unknown_audio_track">默认或未知</string>
     <string name="unknown_or_no_audio">未知或无音频</string>
+    <string name="continue_watching">继续观看</string>
 </resources>

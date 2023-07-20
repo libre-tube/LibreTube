@@ -476,4 +476,5 @@
     <string name="default_or_unknown_audio_track">за замовчуванням або невідомо</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_track_type">Невідомий тип звукової доріжки</string>
+    <string name="continue_watching">Продовжити перегляд</string>
 </resources>

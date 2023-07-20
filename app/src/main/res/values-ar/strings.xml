@@ -482,4 +482,5 @@
     <string name="unknown_or_no_audio">غير معروف أو لا يوجد صوت</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">لغة صوت غير معروفة</string>
+    <string name="continue_watching">مواصلة المشاهدة</string>
 </resources>

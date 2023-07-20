@@ -476,4 +476,5 @@
     <string name="default_or_unknown_audio_track">стандартная или неизвестная</string>
     <string name="original_or_main_audio_track">оригинальная или основная</string>
     <string name="unknown_or_no_audio">неизвестная или без звука</string>
+    <string name="continue_watching">Продолжить просмотр</string>
 </resources>
