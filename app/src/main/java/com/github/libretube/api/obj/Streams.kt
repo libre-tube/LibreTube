@@ -28,7 +28,7 @@ data class Streams(
     val dislikes: Long = 0,
     val audioStreams: List<PipedStream> = emptyList(),
     val videoStreams: List<PipedStream> = emptyList(),
-    val relatedStreams: List<StreamItem> = emptyList(),
+    var relatedStreams: List<StreamItem> = emptyList(),
     val subtitles: List<Subtitle> = emptyList(),
     val livestream: Boolean = false,
     val proxyUrl: String? = null,

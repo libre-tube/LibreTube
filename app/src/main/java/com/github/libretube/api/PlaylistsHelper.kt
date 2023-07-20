@@ -16,6 +16,7 @@ import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.FreeTubeImportPlaylist
 import com.github.libretube.obj.FreeTubeVideo
 import com.github.libretube.obj.PipedImportPlaylist
+import com.github.libretube.util.deArrow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -26,9 +27,7 @@ object PlaylistsHelper {
         "[\\da-fA-F]{8}-[\\da-fA-F]{4}-[\\da-fA-F]{4}-[\\da-fA-F]{4}-[\\da-fA-F]{12}".toRegex()
 
     private val token get() = PreferenceHelper.getToken()
-
     val loggedIn: Boolean get() = token.isNotEmpty()
-
     private fun Message.isOk() = this.message == "ok"
 
     suspend fun getPlaylists(): List<Playlists> = withContext(Dispatchers.IO) {
@@ -64,6 +63,8 @@ object PlaylistsHelper {
                     relatedStreams = relation.videos.map { it.toStreamItem() }
                 )
             }
+        }.apply {
+            relatedStreams = relatedStreams.deArrow()
         }
     }
 

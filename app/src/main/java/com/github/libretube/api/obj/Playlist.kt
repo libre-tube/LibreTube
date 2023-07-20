@@ -14,7 +14,7 @@ data class Playlist(
     val uploaderUrl: String? = null,
     val uploaderAvatar: String? = null,
     val videos: Int = 0,
-    val relatedStreams: List<StreamItem> = emptyList()
+    var relatedStreams: List<StreamItem> = emptyList()
 ) {
     fun toPlaylistBookmark(playlistId: String): PlaylistBookmark {
         return PlaylistBookmark(

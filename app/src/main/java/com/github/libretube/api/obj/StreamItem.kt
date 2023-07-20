@@ -8,8 +8,8 @@ import kotlinx.serialization.Serializable
 data class StreamItem(
     val url: String? = null,
     val type: String? = null,
-    val title: String? = null,
-    val thumbnail: String? = null,
+    var title: String? = null,
+    var thumbnail: String? = null,
     val uploaderName: String? = null,
     val uploaderUrl: String? = null,
     val uploaderAvatar: String? = null,

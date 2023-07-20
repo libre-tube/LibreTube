@@ -29,6 +29,7 @@ import com.github.libretube.ui.adapters.SearchAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.setupSubscriptionButton
+import com.github.libretube.util.deArrow
 import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -115,6 +116,8 @@ class ChannelFragment : Fragment() {
                             RetrofitInstance.api.getChannel(channelId!!)
                         } else {
                             RetrofitInstance.api.getChannelByName(channelName!!)
+                        }.apply {
+                            relatedStreams = relatedStreams.deArrow()
                         }
                     }
                 } catch (e: IOException) {
@@ -240,6 +243,8 @@ class ChannelFragment : Fragment() {
             val response = try {
                 withContext(Dispatchers.IO) {
                     RetrofitInstance.api.getChannelTab(tab.data)
+                }.apply {
+                    content = content.deArrow()
                 }
             } catch (e: Exception) {
                 return@launch
@@ -270,7 +275,9 @@ class ChannelFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
                 val response = try {
                     withContext(Dispatchers.IO) {
-                        RetrofitInstance.api.getChannelNextPage(channelId!!, nextPage!!)
+                        RetrofitInstance.api.getChannelNextPage(channelId!!, nextPage!!).apply {
+                            relatedStreams = relatedStreams.deArrow()
+                        }
                     }
                 } catch (e: IOException) {
                     _binding?.channelRefresh?.isRefreshing = false
@@ -301,6 +308,8 @@ class ChannelFragment : Fragment() {
             val newContent = try {
                 withContext(Dispatchers.IO) {
                     RetrofitInstance.api.getChannelTab(tab.data, nextPage)
+                }.apply {
+                    content = content.deArrow()
                 }
             } catch (e: Exception) {
                 Log.e(TAG(), "Exception: $e")

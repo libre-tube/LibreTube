@@ -18,6 +18,7 @@ import com.github.libretube.api.obj.Subscribe
 import com.github.libretube.api.obj.Subscribed
 import com.github.libretube.api.obj.Subscription
 import com.github.libretube.api.obj.Token
+import kotlinx.serialization.json.JsonObject
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -44,6 +45,11 @@ interface PipedApi {
         @Path("videoId") videoId: String,
         @Query("category") category: String
     ): SegmentData
+
+    @GET("dearrow")
+    suspend fun getDeArrowContent(
+        @Query("videoIds") videoIds: String
+    ): JsonObject
 
     @GET("nextpage/comments/{videoId}")
     suspend fun getCommentsNextPage(

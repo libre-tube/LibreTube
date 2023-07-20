@@ -114,6 +114,7 @@ import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
 import com.github.libretube.util.YoutubeHlsPlaylistParser
+import com.github.libretube.util.deArrow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -690,7 +691,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         lifecycleScope.launch(Dispatchers.IO) {
             streams = try {
-                RetrofitInstance.api.getStreams(videoId)
+                RetrofitInstance.api.getStreams(videoId).apply {
+                    relatedStreams = relatedStreams.deArrow()
+                }
             } catch (e: IOException) {
                 context?.toastFromMainDispatcher(R.string.unknown_error, Toast.LENGTH_LONG)
                 return@launch
