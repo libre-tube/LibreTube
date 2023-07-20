@@ -104,8 +104,12 @@ class AddToPlaylistDialog(
             appContext.toastFromMainDispatcher(R.string.unknown_error)
             return
         }
-        if (success) appContext.toastFromMainDispatcher(
-            appContext.getString(R.string.added_to_playlist, playlistName)
-        ) else appContext.toastFromMainDispatcher(R.string.fail)
+        if (success) {
+            appContext.toastFromMainDispatcher(
+                appContext.getString(R.string.added_to_playlist, playlistName)
+            )
+        } else {
+            appContext.toastFromMainDispatcher(R.string.fail)
+        }
     }
 }

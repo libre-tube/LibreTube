@@ -303,7 +303,9 @@ class OnlinePlayerService : LifecycleService() {
         val streams = streams ?: return
 
         val (uri, mimeType) = if (streams.audioStreams.isNotEmpty()) {
-            val disableProxy = ProxyHelper.useYouTubeSourceWithoutProxy(streams.videoStreams.first().url!!)
+            val disableProxy = ProxyHelper.useYouTubeSourceWithoutProxy(
+                streams.videoStreams.first().url!!
+            )
             PlayerHelper.createDashSource(
                 streams,
                 this,

@@ -28,41 +28,41 @@ class OnlinePlayerView(
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
     override fun getOptionsMenuItems(): List<BottomSheetItem> {
         return super.getOptionsMenuItems() +
-                listOf(
-                    BottomSheetItem(
-                        context.getString(R.string.quality),
-                        R.drawable.ic_hd,
-                        { "${player?.videoSize?.height}p" }
-                    ) {
-                        playerOptions?.onQualityClicked()
-                    },
-                    BottomSheetItem(
-                        context.getString(R.string.audio_track),
-                        R.drawable.ic_audio,
-                        { getCurrentAudioTrackTitle() }
-                    ) {
-                        playerOptions?.onAudioStreamClicked()
-                    },
-                    BottomSheetItem(
-                        context.getString(R.string.captions),
-                        R.drawable.ic_caption,
-                        {
-                            if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
-                                trackSelector!!.parameters.preferredTextLanguages[0]
-                            } else {
-                                context.getString(R.string.none)
-                            }
+            listOf(
+                BottomSheetItem(
+                    context.getString(R.string.quality),
+                    R.drawable.ic_hd,
+                    { "${player?.videoSize?.height}p" }
+                ) {
+                    playerOptions?.onQualityClicked()
+                },
+                BottomSheetItem(
+                    context.getString(R.string.audio_track),
+                    R.drawable.ic_audio,
+                    { getCurrentAudioTrackTitle() }
+                ) {
+                    playerOptions?.onAudioStreamClicked()
+                },
+                BottomSheetItem(
+                    context.getString(R.string.captions),
+                    R.drawable.ic_caption,
+                    {
+                        if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
+                            trackSelector!!.parameters.preferredTextLanguages[0]
+                        } else {
+                            context.getString(R.string.none)
                         }
-                    ) {
-                        playerOptions?.onCaptionsClicked()
-                    },
-                    BottomSheetItem(
-                        context.getString(R.string.stats_for_nerds),
-                        R.drawable.ic_info
-                    ) {
-                        playerOptions?.onStatsClicked()
                     }
-                )
+                ) {
+                    playerOptions?.onCaptionsClicked()
+                },
+                BottomSheetItem(
+                    context.getString(R.string.stats_for_nerds),
+                    R.drawable.ic_info
+                ) {
+                    playerOptions?.onStatsClicked()
+                }
+            )
     }
 
     private fun getCurrentAudioTrackTitle(): String {
@@ -86,9 +86,9 @@ class OnlinePlayerView(
         // format or quality
         val firstSelectedAudioFormat = selectedAudioLanguagesAndRoleFlags[0]
 
-        if (selectedAudioLanguagesAndRoleFlags.size == 1
-            && firstSelectedAudioFormat.first == null
-            && !PlayerHelper.haveAudioTrackRoleFlagSet(
+        if (selectedAudioLanguagesAndRoleFlags.size == 1 &&
+            firstSelectedAudioFormat.first == null &&
+            !PlayerHelper.haveAudioTrackRoleFlagSet(
                 firstSelectedAudioFormat.second
             )
         ) {

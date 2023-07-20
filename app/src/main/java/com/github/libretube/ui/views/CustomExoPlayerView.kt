@@ -84,7 +84,6 @@ open class CustomExoPlayerView(
             updateCurrentPosition()
         }
 
-
     /**
      * Preferences
      */

@@ -20,15 +20,15 @@ data class WatchHistoryItem(
     @ColumnInfo var thumbnailUrl: String? = null,
     @ColumnInfo val duration: Long? = null
 ) {
-   fun toStreamItem() = StreamItem(
-       url = videoId,
-       type = "stream",
-       title = title,
-       thumbnail = thumbnailUrl,
-       uploaderName = uploader,
-       uploaded = uploadDate?.toMillis(),
-       uploaderAvatar = uploaderAvatar,
-       uploaderUrl = uploaderUrl,
-       duration = duration
-   )
+    fun toStreamItem() = StreamItem(
+        url = videoId,
+        type = "stream",
+        title = title,
+        thumbnail = thumbnailUrl,
+        uploaderName = uploader,
+        uploaded = uploadDate?.toMillis(),
+        uploaderAvatar = uploaderAvatar,
+        uploaderUrl = uploaderUrl,
+        duration = duration
+    )
 }
