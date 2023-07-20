@@ -471,4 +471,6 @@
     <string name="unknown_or_no_audio">naməlum və ya səs yoxdur</string>
     <string name="unknown_audio_language">Naməlum səs dili</string>
     <string name="continue_watching">Baxmağa davam et</string>
+    <string name="dearrow">DeArrow\'u Aktivləşdir</string>
+    <string name="dearrow_summary">Daha dəqiq və daha az sensasiyalı başlıqlar və miniatürlər göstər. Yüklənilmə müddətin artırır.</string>
 </resources>
