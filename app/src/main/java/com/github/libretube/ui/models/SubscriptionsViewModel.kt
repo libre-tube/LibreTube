@@ -1,23 +1,22 @@
 package com.github.libretube.ui.models
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Subscription
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
+import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.PreferenceHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SubscriptionsViewModel : ViewModel() {
-    var errorResponse = MutableLiveData<Boolean>().apply {
-        value = false
-    }
-
     var videoFeed = MutableLiveData<List<StreamItem>?>().apply {
         value = null
     }
@@ -26,12 +25,12 @@ class SubscriptionsViewModel : ViewModel() {
         value = null
     }
 
-    fun fetchFeed() {
+    fun fetchFeed(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             val videoFeed = try {
                 SubscriptionHelper.getFeed()
             } catch (e: Exception) {
-                errorResponse.postValue(true)
+                context.toastFromMainDispatcher(R.string.server_error)
                 Log.e(TAG(), e.toString())
                 return@launch
             }
@@ -43,12 +42,12 @@ class SubscriptionsViewModel : ViewModel() {
         }
     }
 
-    fun fetchSubscriptions() {
+    fun fetchSubscriptions(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             val subscriptions = try {
                 SubscriptionHelper.getSubscriptions()
             } catch (e: Exception) {
-                errorResponse.postValue(true)
+                context.toastFromMainDispatcher(R.string.server_error)
                 Log.e(TAG(), e.toString())
                 return@launch
             }
