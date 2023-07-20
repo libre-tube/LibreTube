@@ -252,7 +252,7 @@
     <string name="save_feed">在背景載入訂閱列表</string>
     <string name="save_feed_summary">在背景載入訂閱列表，並防止自動重新載入。</string>
     <string name="filename">檔案名稱</string>
-    <string name="added_to_playlist">新增至播放清單</string>
+    <string name="added_to_playlist">新增至播放清單 %1$s</string>
     <string name="confirm_unsubscribe">您確定要取消訂閱 %1$s 嗎？</string>
     <string name="misc">雜項</string>
     <string name="player_resize_mode">重新調整大小模式</string>
@@ -459,4 +459,13 @@
     <string name="category_highlight_description">可以是廣告標題、縮圖或影片中最有趣的部分。您可以透過在章節部分點擊它來跳到該處。</string>
     <string name="fallback_piped_proxy">汰退回 Piped 代理伺服器</string>
     <string name="fallback_piped_proxy_desc">若目前影片直接連線到 YouTube 無法運作，則透過代理伺服器載入影片（增加初始載入時間）。若停用，YouTube 音樂內容可能會因 YouTube 限制而無法播放。</string>
+    <string name="continue_watching">繼續觀看</string>
+    <string name="unknown_or_no_audio">未知或無音訊</string>
+    <string name="original_or_main_audio_track">原始或主要</string>
+    <string name="default_or_unknown_audio_track">預設或未知</string>
+    <string name="dubbed_audio_track">配音</string>
+    <string name="descriptive_audio_track">描述性</string>
+    <string name="audio_track_format">%1$s - %2$s</string>
+    <string name="unknown_audio_language">未知的音訊語言</string>
+    <string name="unknown_audio_track_type">未知的音訊軌類型</string>
 </resources>
