@@ -19,10 +19,10 @@ object DeArrowUtil {
         } catch (e: Exception) {
             return null to null
         }
-        val newTitle = content.titles.maxByOrNull { it.votes }?.title
-        val newThumbnail =
-            content.thumbnails.filter { it.thumbnail != null }.maxByOrNull { it.votes }
-                ?.takeIf { !it.original }?.thumbnail
+        val newTitle = content.titles.firstOrNull { it.votes >= 0 || it.locked }?.title
+        val newThumbnail = content.thumbnails.firstOrNull {
+            it.thumbnail != null && !it.original && (it.votes >= 0 || it.locked)
+        }?.thumbnail
         return newTitle to newThumbnail
     }
 
