@@ -239,7 +239,7 @@
     <string name="skip_buttons_summary">ਅਗਲੇ ਜਾਂ ਪਿਛਲੇ ਵੀਡੀਓ \'ਤੇ ਜਾਣ ਲਈ ਬਟਨ ਦਿਖਾਓ।</string>
     <string name="history_size">ਇਤਿਹਾਸ ਦਾ ਅਧਿਕਤਮ ਆਕਾਰ</string>
     <string name="unlimited">ਅਸੀਮਤ</string>
-    <string name="background_mode">ਬੈਕਗ੍ਰਾਊਂਡ ਮੋਡ</string>
+    <string name="background_mode">ਬੈਕਗਰਾਊਂਡ ਮੋਡ</string>
     <string name="add_to_queue">ਕਤਾਰ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ</string>
     <string name="misc">ਫੁਟਕਲ</string>
     <string name="take_a_break">ਇੱਕ ਬ੍ਰੇਕ ਲੈਣ ਦਾ ਸਮਾਂ</string>
@@ -253,7 +253,7 @@
     <string name="repeat_mode_current">ਵਰਤਮਾਨ</string>
     <string name="backup_restore">ਬੈਕਅੱਪ ਅਤੇ ਰੀਸਟੋਰ</string>
     <string name="backup">ਬੈਕਅੱਪ</string>
-    <string name="picture_in_picture">ਤਸਵੀਰ ਵਿੱਚ ਤਸਵੀਰ</string>
+    <string name="picture_in_picture">ਪਿਕਚਰ ਇਨ ਪਿਕਚਰ PIP</string>
     <string name="player_resize_mode">ਰੀਸਾਈਜ਼ ਮੋਡ</string>
     <string name="copied_to_clipboard">ਕਲਿੱਪਬੋਰਡ \'ਤੇ ਕਾਪੀ ਕੀਤਾ ਗਿਆ</string>
     <string name="open_copied">ਖੋਲ੍ਹੋ</string>
@@ -281,7 +281,7 @@
     <string name="playlists_order">ਪਲੇਲਿਸਟਸ ਤਰਤੀਬ</string>
     <string name="playlistNameReversed">ਪਲੇਲਿਸਟ ਨਾਮ (ਉਲਟੀ ਤਰਤੀਬ)</string>
     <string name="time_code">ਸਮਾਂ ਕੋਡ (ਸਕਿੰਟ)</string>
-    <string name="added_to_playlist">ਪਲੇਲਿਸਟ ਵਿੱਚ ਸ਼ਾਮਲ ਕੀਤਾ ਗਿਆ</string>
+    <string name="added_to_playlist">%1$s ਪਲੇਲਿਸਟ ਵਿੱਚ ਜੋੜਿਆ</string>
     <string name="queue">ਕਤਾਰ</string>
     <string name="sb_markers">ਮਾਰਕਰ</string>
     <string name="sb_markers_summary">ਸਮਾਂ ਪੱਟੀ \'ਤੇ ਹਿੱਸਿਆਂ ਨੂੰ ਚਿੰਨ੍ਹਿਤ ਕਰੋ।</string>
@@ -331,7 +331,7 @@
     <string name="clear_bookmarks">ਬੁੱਕਮਾਰਕਸ ਸਾਫ਼ ਕਰੋ</string>
     <string name="auto_quality">ਆਟੋ</string>
     <string name="hls_instead_of_dash_summary">DASH ਦੀ ਬਜਾਏ HLS ਦੀ ਵਰਤੋਂ ਕਰੋ (ਹੌਲੀ ਹੋਵੇਗੀ, ਸਿਫ਼ਾਰਸ਼ ਨਹੀਂ ਕੀਤੀ ਗਈ)</string>
-    <string name="background_channel_name">ਬੈਕਗ੍ਰਾਊਂਡ ਮੋਡ</string>
+    <string name="background_channel_name">ਬੈਕਗਰਾਊਂਡ ਮੋਡ</string>
     <string name="notification_time">ਨੋਟੀਫਿਕੇਸ਼ਨ ਸਮਾਂ ਸੀਮਿਤ ਕਰੋ</string>
     <string name="layout">ਲੇਆਊਟ</string>
     <string name="notification_time_summary">ਸਮਾਂ ਸੀਮਤ ਕਰੋ ਜਿਸ ਵਿੱਚ ਸਟ੍ਰੀਮ ਸੂਚਨਾਵਾਂ ਦਿਖਾਈਆਂ ਜਾਂਦੀਆਂ ਹਨ।</string>
@@ -445,7 +445,7 @@
     <string name="emptyPlaylistDescription">ਪਲੇਅ-ਲਿਸਟ ਵੇਰਵਾ ਖਾਲੀ ਨਹੀਂ ਹੋ ਸਕਦਾ</string>
     <string name="change_playlist_description">ਪਲੇਅ-ਲਿਸਟ ਵੇਰਵਾ ਬਦਲੋ</string>
     <string name="playlist_description">ਪਲੇਅ-ਲਿਸਟ ਵੇਰਵਾ</string>
-    <string name="sb_color_enable">ਸਪਾਂਸਰ ਬਲਾਕ ਸੈਗਮੈਂਟਾਂ ਲਈ ਪਸੰਦੀਦਾ ਰੰਗਦਾਰ ਹਿੱਸਿਆਂ ਨੂੰ ਟੌਗਲ ਕਰਦਾ ਹੈ</string>
+    <string name="sb_color_enable">ਸਪਾਂਸਰ ਬਲਾਕ ਸੈਗਮੈਂਟਾਂ ਲਈ ਪਸੰਦੀਦਾ ਰੰਗਦਾਰ ਹਿੱਸਿਆਂ ਨੂੰ ਟੌਗਲ ਕਰਦਾ ਹੈ।</string>
     <string name="sb_custom_colors">ਕਸਟਮ ਸੈਗਮੈਂਟ ਰੰਗ</string>
     <string name="invalid_color">ਅਵੈਧ ਰੰਗ ਵੈਲਿਯੂ ਦਾਖਲ ਕੀਤੀ ਗਈ!</string>
     <string name="off">ਆਫ</string>
@@ -462,4 +462,15 @@
     <string name="jumped_to_highlight">ਵੀਡੀਓ ਹਾਈਲਾਈਟ \'ਤੇ ਜੰਪ ਕੀਤਾ</string>
     <string name="category_highlight">ਵੀਡੀਓ ਹਾਈਲਾਈਟ ਵੇਖੋ</string>
     <string name="category_highlight_description">ਜਾਂ ਤਾਂ ਵਿਗਿਆਪਨ ਕੀਤਾ ਸਿਰਲੇਖ, ਥੰਮਨੇਲ ਜਾਂ ਵੀਡੀਓ ਦਾ ਸਭ ਤੋਂ ਦਿਲਚਸਪ ਭਾਗ ਹੋ ਸਕਦਾ ਹੈ। ਤੁਸੀਂ ਚੈਪਟਰ ਭਾਗ ਵਿੱਚ ਇਸ \'ਤੇ ਟੈਪ ਕਰਕੇ ਇਸ \'ਤੇ ਜਾ ਸਕਦੇ ਹੋ।</string>
+    <string name="original_or_main_audio_track">ਅਸਲੀ ਜਾਂ ਮੁੱਖ</string>
+    <string name="continue_watching">ਵੇਖਣਾ ਜਾਰੀ ਰੱਖੋ</string>
+    <string name="dearrow">DeArrow ਇਨੇਬਲ ਕਰੋ</string>
+    <string name="dearrow_summary">ਵਧੇਰੇ ਸਟੀਕ ਅਤੇ ਘੱਟ ਸਨਸਨੀਖੇਜ਼ ਸਿਰਲੇਖ ਅਤੇ ਥੰਮਨੇਲ ਦਿਖਾਓ। ਲੋਡ ਹੋਣ ਦਾ ਸਮਾਂ ਵਧਾਉਂਦਾ ਹੈ।</string>
+    <string name="unknown_audio_track_type">ਅਗਿਆਤ ਆਡੀਓ ਟਰੈਕ ਕਿਸਮ</string>
+    <string name="dubbed_audio_track">ਡੱਬ ਕੀਤਾ</string>
+    <string name="unknown_audio_language">ਅਗਿਆਤ ਆਡੀਓ ਭਾਸ਼ਾ</string>
+    <string name="descriptive_audio_track">ਡਿਸਕਰਿਪਟਵ</string>
+    <string name="audio_track_format">%1$s - %2$s</string>
+    <string name="default_or_unknown_audio_track">ਡਿਫੌਲਟ ਜਾਂ ਅਗਿਆਤ</string>
+    <string name="unknown_or_no_audio">ਅਗਿਆਤ ਜਾਂ ਕੋਈ ਆਡੀਓ ਨਹੀਂ</string>
 </resources>
