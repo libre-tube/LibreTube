@@ -477,4 +477,6 @@
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_track_type">Невідомий тип звукової доріжки</string>
     <string name="continue_watching">Продовжити перегляд</string>
+    <string name="dearrow">Увімкнути DeArrow</string>
+    <string name="dearrow_summary">Показувати точніші та менш сенсаційні заголовки та мініатюри. Збільшує час завантаження.</string>
 </resources>
