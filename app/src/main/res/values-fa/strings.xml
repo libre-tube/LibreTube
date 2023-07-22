@@ -80,12 +80,12 @@
     <string name="music_playlists">سیاهه‌های پخش آهنگ‌های یوتوب</string>
     <string name="segment_skipped">بخش رد شده</string>
     <string name="category_segments">بخش ها</string>
-    <string name="category_interaction">یادآوری تعامل (پسند و اشتراک)</string>
+    <string name="category_interaction">یادآوری تعامل</string>
     <string name="color_accent">لهجه‌ها</string>
     <string name="color_blue">ابی شاد</string>
     <string name="color_green">سبز</string>
     <string name="color_yellow">زرد</string>
-    <string name="color_purple">بنفش</string>
+    <string name="color_purple">ارغوانی فرح‌بخش</string>
     <string name="color_red">قرمز</string>
     <string name="enabled">روشن</string>
     <string name="disabled">خاموش</string>
@@ -186,11 +186,11 @@
     <string name="audio_track">قطعهٔ صوتی</string>
     <string name="shuffle">بر زدن</string>
     <plurals name="years_ago">
-        <item quantity="one">۱ سال پیش</item>
+        <item quantity="one">%d سال پیش</item>
         <item quantity="other">%d سال پیش</item>
     </plurals>
     <plurals name="months_ago">
-        <item quantity="one">۱ ماه پیش</item>
+        <item quantity="one">%d ماه پیش</item>
         <item quantity="other">%d ماه پیش</item>
     </plurals>
     <string name="update_available_text">به‌روز رسانی جدیدی موجود است. برای گشودن صفحهٔ ارائه‌های گیت‌هاب بزنید.</string>
@@ -305,7 +305,7 @@
     <string name="maximum_image_cache">بیشینهٔ اندازهٔ انبارهٔ تصویر</string>
     <string name="skip_segment">رد شدن از بخش</string>
     <string name="sb_skip_manual_summary">از بخش‌ها به‌طور خودکار رد نشوید، همیشه قبل از آن درخواست کنید.</string>
-    <string name="added_to_playlist">افزوده به سیاههٔ پخش</string>
+    <string name="added_to_playlist">افزوده به سیاههٔ پخش %1$s</string>
     <string name="delete">حذف از دانلودها</string>
     <string name="change_region">به نظر می رسد پرطرفدار ها برای منطقه فعلی در دسترس نیست. لطفاً یکی دیگر را در تنظیمات انتخاب کنید.</string>
     <string name="pauseOnScreenOff_summary">مکث پخش هنگام خاموش بودن صفحه.</string>
@@ -320,12 +320,12 @@
     <string name="playerAudioFormat">قالب صوتی برای پخش‌کننده</string>
     <string name="confirm_unsubscribing_summary">قبل از لغو اشتراک، یک گفتگوی تأیید را نشان دهید.</string>
     <string name="history_empty">هنوز تاریخچه‌ای وجود ندارد.</string>
-    <string name="picture_in_picture">تصویر در تصویر</string>
+    <string name="picture_in_picture">تصویر-در-تصویر</string>
     <string name="save_feed">بارگذاری فید در پس‌زمینه</string>
     <string name="playlistNameReversed">نام سیاههٔ پخش (واژگون)</string>
     <string name="notification_time_summary">محدود کردن بازه زمانی‌ای که آگاهی‌های جریان نشان داده می‌شوند.</string>
     <plurals name="channel_new_streams">
-        <item quantity="one">۱ جریان جدید</item>
+        <item quantity="one">%d جریان جدید</item>
         <item quantity="other">%d جریان جدید</item>
     </plurals>
     <string name="legacy_subscriptions">نمای اشتراک‌های قدیمی</string>
@@ -384,7 +384,7 @@
     <string name="nothing_selected">هیچ چیزی گزیده نشده!</string>
     <string name="playlistUrl">نشانی سیاههٔ پخش</string>
     <string name="audio_player">پخش‌کنندهٔ صدا</string>
-    <string name="color_violet">بنفش</string>
+    <string name="color_violet">بنفش چندمنظوره</string>
     <string name="remove_bookmark">برداشتن نشانک</string>
     <string name="custom_playback_speed">سرعت سفارشی</string>
     <string name="pinch_control">واپایش نیشگونی</string>
@@ -398,7 +398,7 @@
     <string name="group_name">نام گروه</string>
     <string name="edit_group">ویرایش گروه</string>
     <string name="lbry_hls_summary">استفاده از کتابخانهٔ LBRY HSL برای جریان‌ها در صورت وجود.</string>
-    <string name="disable_proxy_summary">بار کردن مستقیم ویدیوها و تصاویر از کارسازهای یوتوب. این گزینه را تنها در صورت استفاده از وی‌پی‌ان به مار بیندازید! توجه داشته باشید که ممکن است با محتوای آهنگ‌های یوتوب کار نکند.</string>
+    <string name="disable_proxy_summary">ویدیوها و تصاویر را مستقیما از سرورهای یوتیوب بارگیری کنید. فقط در صورت استفاده از وی‌پی‌ان این گزینه را فعال کنید!</string>
     <string name="failed_fetching_instances">نمونه‌های موجود واکشی نشد.</string>
     <string name="play_automatically">پخش خودکار</string>
     <string name="play_automatically_summary">هنگام انتخاب، پخش خودکار ویدیو را شروع کنید</string>
@@ -442,4 +442,35 @@
     <string name="welcome">به لیبره‌توب خوش‌آمدید</string>
     <string name="choose_instance">لطفاً نخست نمونه‌ای برگزینید!</string>
     <string name="choose_instance_long">لطفاً نمونه‌ای از پایپد را برای استفاده برگزینید. نمونه پایپد به‌عنوان مرد میانی بین شما و یوتوب عمل خواهد کرد. این نمونه‌ها در مکان‌های فیزیکی مختلفی قرار دارند - که با پرچم(های) کشورشان مشخص شده‌اند. نمونه‌هایی که از لحاظ فیزیکی به شما نزدیک‌تر هستند احتمالا سریع‌تر از نمونه‌هایی هستند که از شما دور‌ترند. می‌توانید در هر زمانی نمونه‌تان را تغییر دهید.</string>
+    <string name="dearrow">فعال‌سازی DeArrow</string>
+    <string name="unknown_audio_track_type">نوع آهنگ صوتی نامشخص است</string>
+    <string name="dubbed_audio_track">دوبله شده</string>
+    <string name="descriptive_audio_track">توصیفی</string>
+    <string name="default_or_unknown_audio_track">پیش‌فرض یا ناشناخته</string>
+    <string name="unknown_or_no_audio">ناشناخته یا بدون صوت</string>
+    <string name="original_or_main_audio_track">اولیه یا اصلی</string>
+    <string name="chapters_videoHighlight">بخش برجسته ویدئو</string>
+    <string name="off">خاموش</string>
+    <string name="manual">دستی</string>
+    <string name="automatic">خودکار</string>
+    <string name="continue_watching">ادامه تماشا</string>
+    <string name="fallback_piped_proxy_desc">اگر اتصال مستقیم به یوتیوب برای ویدیوی فعلی کار نمی‌کند (زمان بارگذاری اولیه را افزایش می دهد) ، ویدیوها را از طریق پروکسی بارگذاری کنید. اگر غیرفعال شود، محتوای موسیقی یوتیوب به دلیل محدودیت‌های یوتیوب پخش نخواهد شد.</string>
+    <string name="dearrow_summary">عناوین و تصاویر کوچک دقیق‌تر و کم اغراق آمیز را نشان دهید. این کار زمان بارگذاری را افزایش می‌دهد.</string>
+    <string name="stop">توقف</string>
+    <string name="sb_color_enable">بخش‌های رنگی سفارشی را برای بخش‌های SponsorBlock تغییر می‌دهد.</string>
+    <string name="color">رنگ</string>
+    <string name="invalid_color">مقدار رنگ نامعتبر وارد شده است!</string>
+    <string name="enter_hex_value">مقدار کد رنگ HEX را وارد نمایید</string>
+    <string name="jumped_to_highlight">پرش به بخش مهم ویدیو</string>
+    <string name="category_highlight">نمایش بخش مهم ویدئو</string>
+    <string name="category_highlight_description">هم می‌تواند نام تبلیغاتی، تصویر کوچک یا جالب‌ترین قسمت ویدئو باشد. می‌توانید با لمس آن در بخش فصل‌ها به آن پرش کنید.</string>
+    <string name="sb_custom_colors">رنگ‌های بخش سفارشی</string>
+    <string name="change_playlist_description">تغییر توضیح فهرست پخش</string>
+    <string name="playlist_description">توضیح فهرست پخش</string>
+    <string name="emptyPlaylistDescription">توضیح فهرست پخش نمی‌تواند خالی باشد</string>
+    <string name="visible">نمایش در نوار جستجو</string>
+    <string name="fallback_piped_proxy">بازگشت به پروکسی پایپد</string>
+    <string name="audio_track_format">%1$s - %2$s</string>
+    <string name="unknown_audio_language">زبان صوتی ناشناخته</string>
+    <string name="show_search_suggestions">نمایش پیشنهادات جستجو</string>
 </resources>
