@@ -32,7 +32,11 @@ object DeArrowUtil {
     suspend fun deArrowStreamItems(streamItems: List<StreamItem>): List<StreamItem> {
         if (!PreferenceHelper.getBoolean(PreferenceKeys.DEARROW, false)) return streamItems
 
-        val videoIds = streamItems.mapNotNull { it.url?.toID() }.joinToString(",")
+        val videoIds = streamItems.mapNotNull { it.url?.toID() }
+            .sorted()
+            .toSet()
+            .joinToString(",")
+
         val response = try {
             RetrofitInstance.api.getDeArrowContent(videoIds)
         } catch (e: Exception) {
@@ -55,7 +59,11 @@ object DeArrowUtil {
         if (!PreferenceHelper.getBoolean(PreferenceKeys.DEARROW, false)) return contentItems
 
         val videoIds = contentItems.filter { it.type == "stream" }
-            .joinToString(",") { it.url.toID() }
+            .map { it.url.toID() }
+            .sorted()
+            .toSet()
+            .joinToString(",")
+
         if (videoIds.isEmpty()) return contentItems
 
         val response = try {
