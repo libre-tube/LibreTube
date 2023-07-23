@@ -398,7 +398,7 @@
     <string name="group_name">نام گروه</string>
     <string name="edit_group">ویرایش گروه</string>
     <string name="lbry_hls_summary">استفاده از کتابخانهٔ LBRY HSL برای جریان‌ها در صورت وجود.</string>
-    <string name="disable_proxy_summary">ویدیوها و تصاویر را مستقیما از سرورهای یوتیوب بارگیری کنید. فقط در صورت استفاده از وی‌پی‌ان این گزینه را فعال کنید!</string>
+    <string name="disable_proxy_summary">بار کردن مستقیم ویدیوها و تصاویر از کارسازهای یوتوب. این گزینه را تنها در صورت استفاده از وی‌پی‌ان به مار بیندازید! توجه داشته باشید که ممکن است با محتوای آهنگ‌های یوتوب کار نکند.</string>
     <string name="failed_fetching_instances">نمونه‌های موجود واکشی نشد.</string>
     <string name="play_automatically">پخش خودکار</string>
     <string name="play_automatically_summary">هنگام انتخاب، پخش خودکار ویدیو را شروع کنید</string>
