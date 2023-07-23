@@ -468,4 +468,6 @@
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">未知的音訊語言</string>
     <string name="unknown_audio_track_type">未知的音訊軌類型</string>
+    <string name="dearrow">啟用 DeArrow</string>
+    <string name="dearrow_summary">顯示更準確、更不聳動的標題與縮圖。增加載入時間。</string>
 </resources>

@@ -474,4 +474,6 @@
     <string name="unknown_audio_track_type">Tipo de pista de audio desconocido</string>
     <string name="original_or_main_audio_track">original o principal</string>
     <string name="continue_watching">Continuar viendo</string>
+    <string name="dearrow">Habilitar DeArrow</string>
+    <string name="dearrow_summary">Muestra miniaturas y títulos y más precisos y menos sensacionalistas. Incrementa los tiempos de carga.</string>
 </resources>

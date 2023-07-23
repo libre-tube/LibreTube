@@ -465,4 +465,15 @@
     <string name="category_highlight_description">Může to být inzerovaný název, miniatura nebo nejzajímavější část videa. Můžete na ni přejít klepnutím v sekci kapitol.</string>
     <string name="fallback_piped_proxy">Fallback na proxy Piped</string>
     <string name="fallback_piped_proxy_desc">Načítat videa přes proxy server, pokud přímé připojení k YouTube nefunguje pro aktuální video (zvyšuje počáteční dobu načítání). Pokud je vypnuto, hudební obsah YouTube se pravděpodobně nebude přehrávat kvůli omezením YT.</string>
+    <string name="continue_watching">Pokračovat ve sledování</string>
+    <string name="dearrow">Povolit DeArrow</string>
+    <string name="original_or_main_audio_track">původní nebo hlavní</string>
+    <string name="dubbed_audio_track">dabing</string>
+    <string name="descriptive_audio_track">popisný</string>
+    <string name="dearrow_summary">Zobrazit přesnější a méně senzační názvy a náhledy. Zvyšuje dobu načítání.</string>
+    <string name="default_or_unknown_audio_track">výchozí nebo neznámý</string>
+    <string name="unknown_or_no_audio">neznámý nebo bez zvuku</string>
+    <string name="audio_track_format">%1$s - %2$s</string>
+    <string name="unknown_audio_language">Neznámý jazyk zvuku</string>
+    <string name="unknown_audio_track_type">Neznámý typ stopy zvuku</string>
 </resources>

@@ -134,7 +134,7 @@
     <string name="repeat_mode_current">मौजूदा</string>
     <string name="backup_restore">बैकअप और बहाली</string>
     <string name="backup">बैकअप</string>
-    <string name="picture_in_picture">चित्र में चित्र</string>
+    <string name="picture_in_picture">पिक्चर इन पिक्चर</string>
     <string name="player_resize_mode">आकार बदलें मोड</string>
     <string name="maximum_image_cache">अधिकतम इमेज कैश आकार</string>
     <string name="copied_to_clipboard">क्लिपबोर्ड पर कापी हुआ</string>
@@ -167,7 +167,7 @@
     <string name="change_region">वर्तमान क्षेत्र के लिए रुझान अनुपलब्ध प्रतीत होता है। कृपया सेटिंग में दूसरे का चयन करें।</string>
     <string name="device_info">डिवाइस की जानकारी</string>
     <string name="disabled">आफ</string>
-    <string name="added_to_playlist">प्लेलिस्ट में जोड़ा गया</string>
+    <string name="added_to_playlist">%1$s प्लेलिस्ट में जोड़ा गया</string>
     <string name="category_filler">भराव स्पर्शरेखा/चुटकुले</string>
     <string name="category_music_offtopic">संगीत: गैर-संगीत अनुभाग</string>
     <string name="category_preview">पूर्वावलोकन/रिकैप</string>
@@ -462,4 +462,15 @@
     <string name="category_highlight_description">या तो विज्ञापित शीर्षक, थंबनेल या वीडियो का सबसे दिलचस्प हिस्सा हो सकता है। आप अध्याय अनुभाग में इस पर टैप करके इसे छोड़ सकते हैं।</string>
     <string name="invalid_color">अमान्य रंग मान दर्ज किया गया!</string>
     <string name="show_search_suggestions">खोज सुझाव दिखाएं</string>
+    <string name="dearrow">डीएरो सक्षम करें</string>
+    <string name="dearrow_summary">अधिक सटीक और कम सनसनीखेज शीर्षक और थंमनेल दिखाएँ। लोडिंग समय बढ़ाता है।</string>
+    <string name="continue_watching">देखना जारी रखें</string>
+    <string name="default_or_unknown_audio_track">डिफ़ॉल्ट या अज्ञात</string>
+    <string name="unknown_or_no_audio">अज्ञात या कोई ऑडियो नहीं</string>
+    <string name="descriptive_audio_track">डिस्क्रिपटव</string>
+    <string name="audio_track_format">%1$s - %2$s</string>
+    <string name="unknown_audio_language">अज्ञात ऑडियो भाषा</string>
+    <string name="unknown_audio_track_type">अज्ञात ऑडियो ट्रैक प्रकार</string>
+    <string name="original_or_main_audio_track">मूल या मुख्य</string>
+    <string name="dubbed_audio_track">डब किया हुआ</string>
 </resources>

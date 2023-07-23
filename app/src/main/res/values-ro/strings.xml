@@ -465,4 +465,15 @@
     <string name="manual">Manual</string>
     <string name="playlist_description">Descrierea playlist-ului</string>
     <string name="show_search_suggestions">Afișați sugestii de căutare</string>
+    <string name="dearrow">Activați DeArrow</string>
+    <string name="unknown_audio_language">Limbă audio necunoscută</string>
+    <string name="unknown_audio_track_type">Tip de pistă audio necunoscut</string>
+    <string name="original_or_main_audio_track">original sau principal</string>
+    <string name="dubbed_audio_track">dublat</string>
+    <string name="descriptive_audio_track">descriptiv</string>
+    <string name="continue_watching">Continuați să urmăriți</string>
+    <string name="dearrow_summary">Afișați titluri și miniaturi mai precise și mai puțin senzaționaliste. Mărește timpii de încărcare.</string>
+    <string name="audio_track_format">%1$s - %2$s</string>
+    <string name="unknown_or_no_audio">necunoscut sau fără sunet</string>
+    <string name="default_or_unknown_audio_track">implicit sau necunoscut</string>
 </resources>

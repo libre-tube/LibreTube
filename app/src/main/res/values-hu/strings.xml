@@ -395,7 +395,7 @@
     <string name="playing_next">Következő lejátszása: %1$s múlva</string>
     <string name="lbry_hls_summary">LBRY HLS használata, ha elérhető a streamelés.</string>
     <string name="disable_proxy">Piped proxy letiltása</string>
-    <string name="disable_proxy_summary">Videók és képek betöltése közvetlenül a YouTube szervereiről. Csak akkor engedélyezze ezt az opciót, ha egyébként is VPN-t használ.</string>
+    <string name="disable_proxy_summary">Videók és képek betöltése közvetlenül a YouTube szervereiről. Csak akkor engedélyezze ezt az opciót, ha egyébként is VPN-t használ!</string>
     <string name="auto_fullscreen_shorts">Automatikus teljes képernyőre váltás rövid videóknál</string>
     <string name="trending_views">%1$s • %2$s megtekintés • %3$s</string>
     <string name="normal_views">%1$s megtekintés %2$s</string>
@@ -447,16 +447,16 @@
     <string name="playlist_description">Lejátszólista leírása</string>
     <string name="emptyPlaylistDescription">A lejátszólista leírása nem lehet üres</string>
     <string name="category_highlight">Videó kiemelés megjelenítése</string>
-    <string name="sb_custom_colors">Egyedi szegmens színek</string>
+    <string name="sb_custom_colors">Egyéni szakaszszínek</string>
     <string name="color">Szín</string>
-    <string name="invalid_color">Érvénytelen a megadott érték!</string>
-    <string name="enter_hex_value">Szín Hex érték megadása</string>
+    <string name="invalid_color">Érvénytelen a megadott színérték!</string>
+    <string name="enter_hex_value">Hexadecimális színérték megadása</string>
     <string name="jumped_to_highlight">Ugrás a videó kiemeléshez</string>
-    <string name="sb_color_enable">Egyéni színszegmensek bekapcsolása a szponzorblokk szegmentjeihez</string>
-    <string name="category_highlight_description">Lehet a meghirdetett cím, a miniatűr vagy a videó legérdekesebb része. A fejezetek részben a rákoppintással ugorhatsz oda.</string>
+    <string name="sb_color_enable">Egyéni színek bekapcsolása a SponsorBlock-szakaszokhoz.</string>
+    <string name="category_highlight_description">Lehet a meghirdetett cím, a bélyegkép vagy a videó legérdekesebb része. A fejezetek részben a rákoppintással ugorhat oda.</string>
     <string name="choose_instance_long">Kérjük, válasszon ki az alább felsoroltak közül egy Piped példányt. A Piped példány közvetítőként fog működni Ön és a YouTube között. Ezek a példányok különböző fizikai helyszíneken találhatók - ezeket az országzászló jelzi. A fizikailag közelebbi példányok valószínűleg gyorsabbak, mint a távoli példányok. A beállításokban bármikor megváltoztatható a használt példány.</string>
     <string name="off">Ki</string>
-    <string name="fallback_piped_proxy_desc">Videók betöltése proxy-n keresztül, ha a YouTube-hoz való közvetlen csatlakozás nem működik az aktuális videóhoz (növeli a kezdeti betöltési időt). Ha letiltja, a YouTube zenei tartalma valószínűleg nem fog lejátszódni a YT korlátozások miatt.</string>
+    <string name="fallback_piped_proxy_desc">Videók betöltése proxy-n keresztül, ha a YouTube-hoz való közvetlen csatlakozás nem működik az aktuális videóhoz (növeli a kezdeti betöltési időt). Ha ki van kapcsolva, a YouTube zenei tartalma valószínűleg nem fog lejátszódni a YT korlátozások miatt.</string>
     <string name="manual">Manuális</string>
     <string name="fallback_piped_proxy">Visszalépés a Piped proxyra</string>
     <string name="chapters_videoHighlight">Videó kiemelés</string>
@@ -470,4 +470,7 @@
     <string name="original_or_main_audio_track">eredeti vagy fő</string>
     <string name="dubbed_audio_track">szinkronizált</string>
     <string name="unknown_or_no_audio">ismeretlen vagy nincs hang</string>
+    <string name="continue_watching">Nézés folytatása</string>
+    <string name="dearrow">DeArrow engedélyezése</string>
+    <string name="dearrow_summary">Pontosabb és kevésbé szenzációhajhász címek és bélyegképek megjelenítése. Növeli a betöltési időt.</string>
 </resources>

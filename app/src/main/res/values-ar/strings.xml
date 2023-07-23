@@ -483,4 +483,6 @@
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">لغة صوت غير معروفة</string>
     <string name="continue_watching">مواصلة المشاهدة</string>
+    <string name="dearrow_summary">اعرض عناوين وصورا مصغرة أكثر دقة وأقل إثارة. يزيد من أوقات التحميل.</string>
+    <string name="dearrow">تمكين دي ارو</string>
 </resources>

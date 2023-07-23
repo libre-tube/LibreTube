@@ -477,4 +477,6 @@
     <string name="descriptive_audio_track">מפורט</string>
     <string name="unknown_or_no_audio">לא ידוע או שאין שמע</string>
     <string name="continue_watching">להמשיך בצפייה</string>
+    <string name="dearrow">הפעלת DeArrow</string>
+    <string name="dearrow_summary">להציג כותרות ותמונות ממוזערות מדויקות יותר ופחות מפוצצות. תוך שיפור זמני הטעינה.</string>
 </resources>

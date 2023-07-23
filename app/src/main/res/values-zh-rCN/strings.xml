@@ -468,4 +468,6 @@
     <string name="default_or_unknown_audio_track">默认或未知</string>
     <string name="unknown_or_no_audio">未知或无音频</string>
     <string name="continue_watching">继续观看</string>
+    <string name="dearrow">启用 DeArrow</string>
+    <string name="dearrow_summary">显示更精确和不那么“标题党”的视频名称和缩略图。会增加加载时间。</string>
 </resources>
