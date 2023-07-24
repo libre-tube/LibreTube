@@ -541,7 +541,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playerBinding.exoTitle.visibility = View.VISIBLE
 
         updateFullscreenOrientation()
-
         viewModel.isFullscreen.value = true
     }
 
@@ -754,7 +753,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 prepareExoPlayerView()
                 initializePlayerView()
                 setupSeekbarPreview()
-                updateFullscreenOrientation()
+
+                if (viewModel.isFullscreen.value == true) updateFullscreenOrientation()
 
                 exoPlayer.prepare()
                 if (PreferenceHelper.getBoolean(PreferenceKeys.PLAY_AUTOMATICALLY, true)) {
