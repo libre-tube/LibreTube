@@ -71,7 +71,7 @@
     <string name="retry">تلاش دوباره</string>
     <string name="comments">نظرات</string>
     <string name="sponsorblock">اسپانسربلاک</string>
-    <string name="category_sponsor">اسپانسر</string>
+    <string name="category_sponsor">حامی</string>
     <string name="location">مکان</string>
     <string name="playlists">سیاههٔ پخش</string>
     <string name="music_albums">آلبوم‌های موسیقی</string>
@@ -79,7 +79,7 @@
     <string name="youtube">یوتوب</string>
     <string name="music_playlists">سیاهه‌های پخش آهنگ‌های یوتوب</string>
     <string name="segment_skipped">بخش رد شده</string>
-    <string name="category_segments">بخش ها</string>
+    <string name="category_segments">بخش‌ها</string>
     <string name="category_interaction">یادآوری تعامل</string>
     <string name="color_accent">لهجه‌ها</string>
     <string name="color_blue">ابی شاد</string>
@@ -398,7 +398,7 @@
     <string name="group_name">نام گروه</string>
     <string name="edit_group">ویرایش گروه</string>
     <string name="lbry_hls_summary">استفاده از کتابخانهٔ LBRY HSL برای جریان‌ها در صورت وجود.</string>
-    <string name="disable_proxy_summary">بار کردن مستقیم ویدیوها و تصاویر از کارسازهای یوتوب. این گزینه را تنها در صورت استفاده از وی‌پی‌ان به مار بیندازید! توجه داشته باشید که ممکن است با محتوای آهنگ‌های یوتوب کار نکند.</string>
+    <string name="disable_proxy_summary">بار کردن مستقیم ویدیوها و تصاویر از کارسازهای یوتوب. این گزینه را تنها در صورت استفاده از وی‌پی‌ان به کار بیندازید! توجه داشته باشید که ممکن است با محتوای آهنگ‌های یوتوب کار نکند.</string>
     <string name="failed_fetching_instances">نمونه‌های موجود واکشی نشد.</string>
     <string name="play_automatically">پخش خودکار</string>
     <string name="play_automatically_summary">هنگام انتخاب، پخش خودکار ویدیو را شروع کنید</string>
@@ -434,16 +434,16 @@
     <string name="creation_date_reversed">تاریخ ساخت (معکوس)</string>
     <string name="alphabetic">الفبایی</string>
     <string name="alphabetic_reversed">الفبایی (معکوس)</string>
-    <string name="import_subscriptions_from">وارد کردن اشتراک ها از</string>
-    <string name="export_subscriptions_to">خروجی گرفتن اشتراک ها به</string>
+    <string name="import_subscriptions_from">درون‌ریزی اشتراک‌ها از</string>
+    <string name="export_subscriptions_to">برون‌ریزی اشتراک‌ها به</string>
     <string name="import_playlists_from">درون‌ریزی سیاههٔ پخش از</string>
     <string name="import_format_youtube_csv">یوتوب (CSV)</string>
     <string name="mark_as_unwatched">علامت به تماشا نشده</string>
     <string name="welcome">به لیبره‌توب خوش‌آمدید</string>
     <string name="choose_instance">لطفاً نخست نمونه‌ای برگزینید!</string>
     <string name="choose_instance_long">لطفاً نمونه‌ای از پایپد را برای استفاده برگزینید. نمونه پایپد به‌عنوان مرد میانی بین شما و یوتوب عمل خواهد کرد. این نمونه‌ها در مکان‌های فیزیکی مختلفی قرار دارند - که با پرچم(های) کشورشان مشخص شده‌اند. نمونه‌هایی که از لحاظ فیزیکی به شما نزدیک‌تر هستند احتمالا سریع‌تر از نمونه‌هایی هستند که از شما دور‌ترند. می‌توانید در هر زمانی نمونه‌تان را تغییر دهید.</string>
-    <string name="dearrow">فعال‌سازی DeArrow</string>
-    <string name="unknown_audio_track_type">نوع آهنگ صوتی نامشخص است</string>
+    <string name="dearrow">به کار انداختن DeArrow</string>
+    <string name="unknown_audio_track_type">گونهٔ قطعهٔ صوتی ناشناخته</string>
     <string name="dubbed_audio_track">دوبله شده</string>
     <string name="descriptive_audio_track">توصیفی</string>
     <string name="default_or_unknown_audio_track">پیش‌فرض یا ناشناخته</string>
@@ -454,8 +454,8 @@
     <string name="manual">دستی</string>
     <string name="automatic">خودکار</string>
     <string name="continue_watching">ادامه تماشا</string>
-    <string name="fallback_piped_proxy_desc">اگر اتصال مستقیم به یوتیوب برای ویدیوی فعلی کار نمی‌کند (زمان بارگذاری اولیه را افزایش می دهد) ، ویدیوها را از طریق پروکسی بارگذاری کنید. اگر غیرفعال شود، محتوای موسیقی یوتیوب به دلیل محدودیت‌های یوتیوب پخش نخواهد شد.</string>
-    <string name="dearrow_summary">عناوین و تصاویر کوچک دقیق‌تر و کم اغراق آمیز را نشان دهید. این کار زمان بارگذاری را افزایش می‌دهد.</string>
+    <string name="fallback_piped_proxy_desc">بار کردن ویدیوها با پیشکار در صورن کار نکردن اتّصال مستقیم به یوتوب برای ویدیوی جاری (زمان بار کردن نخستین را افزایش می دهد). اگر از کار بیفتد احتمالاً محتوای آهنگ‌های یوتوب به دلیل محدودیت‌های یوتوب پخش نخواهد شد.</string>
+    <string name="dearrow_summary">عنوان‌ها و بندانگشتی‌های دقیق‌تر و کم اغراق آمیز را نشان دهید. زمان بار کردن را افزایش می‌دهد.</string>
     <string name="stop">توقف</string>
     <string name="sb_color_enable">بخش‌های رنگی سفارشی را برای بخش‌های SponsorBlock تغییر می‌دهد.</string>
     <string name="color">رنگ</string>
@@ -469,7 +469,7 @@
     <string name="playlist_description">توضیح فهرست پخش</string>
     <string name="emptyPlaylistDescription">توضیح فهرست پخش نمی‌تواند خالی باشد</string>
     <string name="visible">نمایش در نوار جستجو</string>
-    <string name="fallback_piped_proxy">بازگشت به پروکسی پایپد</string>
+    <string name="fallback_piped_proxy">بازگشت به پیشکار پایپد</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">زبان صوتی ناشناخته</string>
     <string name="show_search_suggestions">نمایش پیشنهادات جستجو</string>
