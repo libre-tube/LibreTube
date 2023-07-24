@@ -510,6 +510,21 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         NavigationHelper.startAudioPlayer(requireContext())
     }
 
+    /**
+     * If enabled, determine the orientation o use based on the video's aspect ratio
+     * Expected behavior: Portrait for shorts, Landscape for normal videos
+     */
+    private fun updateFullscreenOrientation() {
+        if (!PlayerHelper.autoRotationEnabled) {
+            val height = streams.videoStreams.firstOrNull()?.height ?: exoPlayer.videoSize.height
+            val width = streams.videoStreams.firstOrNull()?.width ?: exoPlayer.videoSize.width
+
+            // different orientations of the video are only available when autorotation is disabled
+            val orientation = PlayerHelper.getOrientation(width, height)
+            mainActivity.requestedOrientation = orientation
+        }
+    }
+
     private fun setFullscreen() {
         with(binding.playerMotionLayout) {
             getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
@@ -525,14 +540,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
         playerBinding.exoTitle.visibility = View.VISIBLE
 
-        if (!PlayerHelper.autoRotationEnabled) {
-            val height = streams.videoStreams.firstOrNull()?.height ?: exoPlayer.videoSize.height
-            val width = streams.videoStreams.firstOrNull()?.width ?: exoPlayer.videoSize.width
-
-            // different orientations of the video are only available when autorotation is disabled
-            val orientation = PlayerHelper.getOrientation(width, height)
-            mainActivity.requestedOrientation = orientation
-        }
+        updateFullscreenOrientation()
 
         viewModel.isFullscreen.value = true
     }
@@ -746,6 +754,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 prepareExoPlayerView()
                 initializePlayerView()
                 setupSeekbarPreview()
+                updateFullscreenOrientation()
 
                 exoPlayer.prepare()
                 if (PreferenceHelper.getBoolean(PreferenceKeys.PLAY_AUTOMATICALLY, true)) {
