@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.text.Spanned
 import android.util.TypedValue
 import androidx.appcompat.app.AppCompatActivity
@@ -130,5 +131,10 @@ object ThemeHelper {
         val hexColor = "#%06X".format(0xFFFFFF and colorPrimary)
         return "Libre<span  style='color:$hexColor';>Tube</span>"
             .parseAsHtml(HtmlCompat.FROM_HTML_MODE_COMPACT)
+    }
+
+    fun isDarkMode(context: Context): Boolean {
+        val darkModeFlag = context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        return darkModeFlag == Configuration.UI_MODE_NIGHT_YES
     }
 }
