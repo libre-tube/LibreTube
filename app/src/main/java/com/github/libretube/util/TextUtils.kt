@@ -64,9 +64,7 @@ object TextUtils {
     }
 
     fun formatRelativeDate(context: Context, unixTime: Long): CharSequence {
-        // TODO: Use LocalDate.ofInstant() when it is available in SDK 34.
-        val date = LocalDateTime.ofInstant(Instant.ofEpochMilli(unixTime), ZoneId.systemDefault())
-            .toLocalDate()
+        val date = LocalDate.ofInstant(Instant.ofEpochMilli(unixTime), ZoneId.systemDefault())
         val now = LocalDate.now()
         val months = date.until(now, ChronoUnit.MONTHS)
 
