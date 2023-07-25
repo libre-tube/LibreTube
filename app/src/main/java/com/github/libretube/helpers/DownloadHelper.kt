@@ -10,6 +10,7 @@ import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.parcelable.DownloadData
 import com.github.libretube.services.DownloadService
 import java.nio.file.Path
+import kotlin.io.path.createDirectories
 
 object DownloadHelper {
     const val VIDEO_DIR = "video"
@@ -21,8 +22,8 @@ object DownloadHelper {
     const val DEFAULT_TIMEOUT = 15 * 1000
     const val DEFAULT_RETRY = 3
 
-    private fun getOfflineStorageDir(context: Context): Path {
-        val file = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+    fun getDownloadDir(context: Context, path: String): Path {
+        val storageDir = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             context.filesDir
         } else {
             try {
@@ -31,15 +32,7 @@ object DownloadHelper {
                 context.filesDir
             }
         }
-        return file.toPath()
-    }
-
-    fun getDownloadDir(context: Context, path: String): Path {
-        // TODO: Use createDirectories() when https://issuetracker.google.com/issues/279034662 is
-        // fixed.
-        return getOfflineStorageDir(context).resolve(path).apply {
-            toFile().mkdirs()
-        }
+        return storageDir.toPath().resolve(path).createDirectories()
     }
 
     fun getMaxConcurrentDownloads(): Int {
