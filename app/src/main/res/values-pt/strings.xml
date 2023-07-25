@@ -474,4 +474,6 @@
     <string name="descriptive_audio_track">descritivo</string>
     <string name="default_or_unknown_audio_track">predefinido ou desconhecido</string>
     <string name="unknown_or_no_audio">desconhecido ou sem áudio</string>
+    <string name="dearrow">Ativar \'DeArrow\'</string>
+    <string name="dearrow_summary">Mostra títulos e miniaturas mais precisas e menos sensacionalistas. Pode aumentar o tempo de carregamento dos vídeos.</string>
 </resources>
