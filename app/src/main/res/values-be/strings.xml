@@ -467,4 +467,16 @@
     <string name="visible">Паказаць у панэлі пошуку</string>
     <string name="sb_color_enable">Пераключае карыстальніцкія каляровыя сегменты для сегментаў SponsorBlock.</string>
     <string name="off">Выкл</string>
+    <string name="continue_watching">Працягнуць прагляд</string>
+    <string name="dearrow">Уключыць DeArrow</string>
+    <string name="dearrow_summary">Паказвайце больш дакладныя і менш сенсацыйныя назвы і мініяцюры. Павялічвае час загрузкі.</string>
+    <string name="default_or_unknown_audio_track">па змаўчанні або невядома</string>
+    <string name="unknown_or_no_audio">невядома або няма гуку</string>
+    <string name="stop">Спыніць</string>
+    <string name="chapters_videoHighlight">Асноўныя моманты відэа</string>
+    <string name="jumped_to_highlight">Пераход да асноўнага моманту ў відэа</string>
+    <string name="category_highlight">Вылучыць асноўныя моманты</string>
+    <string name="dubbed_audio_track">дубляваная</string>
+    <string name="original_or_main_audio_track">арыгінальны або асноўны</string>
+    <string name="descriptive_audio_track">апісальная</string>
 </resources>
