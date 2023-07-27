@@ -500,9 +500,6 @@ class MainActivity : BaseActivity() {
     }
 
     private fun navigateToBottomSelectedItem(item: MenuItem) {
-        // clear backstack if it's the start fragment
-        if (startFragmentId == item.itemId) navController.backQueue.clear()
-
         if (item.itemId == R.id.subscriptionsFragment) {
             binding.bottomNav.removeBadge(R.id.subscriptionsFragment)
         }
