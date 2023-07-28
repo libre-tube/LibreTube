@@ -163,4 +163,5 @@
     <string name="pauseOnScreenOff_summary">Pauzeer media wanneer het scherm wordt uitgeschakeld.</string>
     <string name="autoplay_summary">Automatisch de volgende video afspelen na de huidige.</string>
     <string name="clonePlaylist">Afspeellijst klonen</string>
+    <string name="uploaderAndVideoCount">video\'s</string>
 </resources>
