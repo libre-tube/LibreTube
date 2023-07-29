@@ -3,20 +3,20 @@ package com.github.libretube.ui.listeners
 import android.text.format.DateUtils
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
-import androidx.core.graphics.drawable.toBitmap
+import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.ui.TimeBar
-import coil.request.ImageRequest
-import com.github.libretube.api.obj.PreviewFrames
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
-import com.github.libretube.helpers.ImageHelper
-import com.github.libretube.helpers.PlayerHelper
-import com.github.libretube.util.BitmapUtil
+import com.github.libretube.ui.interfaces.TimeFrameReceiver
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @UnstableApi
 class SeekbarPreviewListener(
-    private val previewFrames: List<PreviewFrames>,
+    private val timeFrameReceiver: TimeFrameReceiver,
     private val playerBinding: ExoStyledPlayerControlViewBinding,
     private val duration: Long,
     private val onScrub: (position: Long) -> Unit,
@@ -27,7 +27,9 @@ class SeekbarPreviewListener(
     override fun onScrubStart(timeBar: TimeBar, position: Long) {
         scrubInProgress = true
 
-        processPreview(position)
+        CoroutineScope(Dispatchers.IO).launch {
+            processPreview(position)
+        }
     }
 
     /**
@@ -37,7 +39,9 @@ class SeekbarPreviewListener(
         scrubInProgress = true
 
         playerBinding.seekbarPreviewPosition.text = DateUtils.formatElapsedTime(position / 1000)
-        processPreview(position)
+        CoroutineScope(Dispatchers.IO).launch {
+            processPreview(position)
+        }
 
         runCatching {
             onScrub.invoke(position)
@@ -67,23 +71,19 @@ class SeekbarPreviewListener(
     /**
      * Make a request to get the image frame and update its position
      */
-    private fun processPreview(position: Long) {
-        val previewFrame = PlayerHelper.getPreviewFrame(previewFrames, position) ?: return
-
+    private suspend fun processPreview(position: Long) {
         // update the offset of the preview image view
-        updatePreviewX(position)
+        withContext(Dispatchers.Main) {
+            updatePreviewX(position)
+        }
 
-        val request = ImageRequest.Builder(playerBinding.seekbarPreview.context)
-            .data(previewFrame.previewUrl)
-            .target {
-                if (!scrubInProgress) return@target
-                val frame = BitmapUtil.cutBitmapFromPreviewFrame(it.toBitmap(), previewFrame)
-                playerBinding.seekbarPreviewImage.setImageBitmap(frame)
-                playerBinding.seekbarPreview.visibility = View.VISIBLE
-            }
-            .build()
+        val frame = timeFrameReceiver.getFrameAtTime(position)
+        if (!scrubInProgress) return
 
-        ImageHelper.imageLoader.enqueue(request)
+        withContext(Dispatchers.Main) {
+            playerBinding.seekbarPreviewImage.setImageBitmap(frame)
+            playerBinding.seekbarPreview.isVisible = true
+        }
     }
 
     /**

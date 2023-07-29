@@ -24,6 +24,7 @@ import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.content.getSystemService
+import androidx.core.graphics.drawable.toDrawable
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
@@ -102,6 +103,7 @@ import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.dialogs.StatsDialog
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
+import com.github.libretube.ui.interfaces.TimeFrameReceiver
 import com.github.libretube.ui.listeners.SeekbarPreviewListener
 import com.github.libretube.ui.models.CommentsViewModel
 import com.github.libretube.ui.models.PlayerViewModel
@@ -111,6 +113,7 @@ import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.util.HtmlParser
 import com.github.libretube.util.LinkHandler
 import com.github.libretube.util.NowPlayingNotification
+import com.github.libretube.util.OnlineTimeFrameReceiver
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
@@ -1183,15 +1186,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private suspend fun initializeHighlight(highlight: Segment) {
-        val frame =
-            PlayerHelper.getPreviewFrame(streams.previewFrames, exoPlayer.currentPosition) ?: return
-        val drawable = withContext(Dispatchers.IO) {
-            ImageHelper.getImage(requireContext(), frame.previewUrl)
-        }.drawable ?: return
+        val frameReceiver = OnlineTimeFrameReceiver(requireContext(), streams.previewFrames)
+        val frame = withContext(Dispatchers.IO) {
+            frameReceiver.getFrameAtTime(highlight.segmentStartAndEnd.first.toLong() * 1000)
+        }
         val highlightChapter = ChapterSegment(
             title = getString(R.string.chapters_videoHighlight),
             start = highlight.segmentStartAndEnd.first.toLong(),
-            drawable = drawable
+            drawable = frame?.toDrawable(requireContext().resources)
         )
         chapters.add(highlightChapter)
         chapters.sortBy { it.start }
@@ -1598,7 +1600,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playerBinding.seekbarPreview.visibility = View.GONE
         playerBinding.exoProgress.addListener(
             SeekbarPreviewListener(
-                streams.previewFrames,
+                OnlineTimeFrameReceiver(requireContext(), streams.previewFrames),
                 playerBinding,
                 streams.duration * 1000,
                 onScrub = {
