@@ -125,7 +125,7 @@
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/video_category"
+                    android:id="@+id/additional_video_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
