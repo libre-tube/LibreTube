@@ -1,105 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.fragments.SearchFragment">
-
-    <HorizontalScrollView
-        android:id="@+id/filter_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="10dp"
-        android:scrollbars="none"
-        app:layout_constraintBottom_toTopOf="@id/recycler_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/filter_chip_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:checkedChip="@id/chip_all"
-            app:selectionRequired="true"
-            app:singleLine="true"
-            app:singleSelection="true">
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_all"
-                style="@style/Chip"
-                android:text="@string/all" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_videos"
-                style="@style/Chip"
-                android:text="@string/videos" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_channels"
-                style="@style/Chip"
-                android:text="@string/channels" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_playlists"
-                style="@style/Chip"
-                android:text="@string/playlists" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_music_songs"
-                style="@style/Chip"
-                android:text="@string/music_songs" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_music_videos"
-                style="@style/Chip"
-                android:text="@string/music_videos" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_music_albums"
-                style="@style/Chip"
-                android:text="@string/music_albums" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_music_playlists"
-                style="@style/Chip"
-                android:text="@string/music_playlists" />
-        </com.google.android.material.chip.ChipGroup>
-    </HorizontalScrollView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/search_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp" />
+    tools:context=".ui.fragments.SearchResultFragment">
 
     <LinearLayout
-        android:id="@+id/no_search_result"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:paddingTop="150dp"
-        android:visibility="gone">
+        android:id="@+id/search_results_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_marginVertical="10dp"
-            android:src="@drawable/ic_search" />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <HorizontalScrollView
+            android:id="@+id/filter_bar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/no_search_result"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:paddingHorizontal="10dp"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toTopOf="@id/recycler_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/filter_chip_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:checkedChip="@id/chip_all"
+                app:selectionRequired="true"
+                app:singleLine="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_all"
+                    style="@style/Chip"
+                    android:text="@string/all" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_videos"
+                    style="@style/Chip"
+                    android:text="@string/videos" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_channels"
+                    style="@style/Chip"
+                    android:text="@string/channels" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_playlists"
+                    style="@style/Chip"
+                    android:text="@string/playlists" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_music_songs"
+                    style="@style/Chip"
+                    android:text="@string/music_songs" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_music_videos"
+                    style="@style/Chip"
+                    android:text="@string/music_videos" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_music_albums"
+                    style="@style/Chip"
+                    android:text="@string/music_albums" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_music_playlists"
+                    style="@style/Chip"
+                    android:text="@string/music_playlists" />
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp" />
+
+        <LinearLayout
+            android:id="@+id/no_search_result"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingTop="150dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginVertical="10dp"
+                android:src="@drawable/ic_search" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_search_result"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+</FrameLayout>
