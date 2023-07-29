@@ -471,4 +471,7 @@
     <string name="continue_watching">Weiterschauen</string>
     <string name="dearrow_summary">Präzisere und weniger sensationslüsterne Titel und Miniaturansichten (Thumbnails) anzeigen. Erhöht die Ladezeiten.</string>
     <string name="dearrow">DeArrow verwenden</string>
+    <string name="visibility">Sichtbarkeit</string>
+    <string name="visibility_public">Öffentlich</string>
+    <string name="visibility_unlisted">Nicht gelistet</string>
 </resources>
