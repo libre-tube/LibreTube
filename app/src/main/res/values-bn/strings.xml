@@ -218,7 +218,7 @@
     <string name="no_subtitles_available">কোনো সাবটাইটেল পাওয়া যায় নি</string>
     <string name="resize_mode_fit">ফিট</string>
     <string name="resize_mode_fill">ফিল</string>
-    <string name="repeat_mode_none">None</string>
+    <string name="repeat_mode_none">নাই</string>
     <string name="repeat_mode">পুনরাবৃত্তি মোড</string>
     <string name="repeat_mode_current">বর্তমান</string>
     <string name="background_mode">ব্যাকগ্রাউন্ড মোড</string>
@@ -349,4 +349,21 @@
     <string name="auto">অটো</string>
     <string name="no_comments_available">এই ভিডিওতে কোনো কমেন্ট নেই।</string>
     <string name="import_playlists">প্লেলিস্টগুলো ইম্পোর্ট করুন</string>
+    <string name="concurrent_downloads_limit_reached">সর্বোচ্চ ডাউনলোড লিমিটে পৌঁছেছেন ।</string>
+    <string name="remove_bookmark">বুকমার্ক সরাও</string>
+    <string name="rewind">রিওয়াইন্ড</string>
+    <string name="forward">সামনে আগাও</string>
+    <string name="add_to_bookmarks">বুকমার্কে বসাও</string>
+    <string name="proceed">এগিয়ে যাও</string>
+    <string name="nothing_selected">কোনকিছুই সিলেক্ট করা হয়নি !</string>
+    <string name="skip_silence">শান্ত অংশ বাদ দেও</string>
+    <string name="stop">বন্ধ কর</string>
+    <string name="play_latest_videos">সর্বশেষ ভিডিওগুলো চালাও</string>
+    <string name="faq">সচরাচর জিজ্ঞাসিত প্রশ্নোত্তর</string>
+    <string name="audio_only_mode">শুধু অডিও মোড</string>
+    <string name="audio_only_mode_summary">লিব্রেটেউবকে অডিও প্লেয়ার বানাও ।</string>
+    <string name="help">সাহায্য</string>
+    <string name="all_caught_up">তুমি সবকিছু সম্পন্ন করেছ</string>
+    <string name="alternative_pip_controls">অন্যান্য পিপ কন্ট্রোলগুলো</string>
+    <string name="color_violet">বহুমুখী বেগুনি</string>
 </resources>
