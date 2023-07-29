@@ -465,4 +465,14 @@
     <string name="color">Cor</string>
     <string name="invalid_color">Valor de cor inválido inserido!</string>
     <string name="enter_hex_value">Digite o valor hexadecimal da cor</string>
+    <string name="dearrow">Habilite o DeArrow</string>
+    <string name="dearrow_summary">Miniaturas e títulos selecionados pela comunidade para descrever os vídeos de forma objetiva, sem sensacionalismo e sem truques para ganhar cliques.</string>
+    <string name="continue_watching">Continue assistindo</string>
+    <string name="descriptive_audio_track">Audio descritivo (Acessibilidade)</string>
+    <string name="default_or_unknown_audio_track">padrão ou desconhecido</string>
+    <string name="unknown_or_no_audio">desconhecido ou sem audio</string>
+    <string name="original_or_main_audio_track">Original ou principal</string>
+    <string name="unknown_audio_track_type">Faixa de áudio desconhecida</string>
+    <string name="dubbed_audio_track">Faixa de áudio apelidada</string>
+    <string name="unknown_audio_language">Linguagem do áudio desconhecida</string>
 </resources>
