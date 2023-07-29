@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSearchBinding
 import com.github.libretube.db.DatabaseHolder.Database
@@ -35,7 +36,7 @@ class SearchFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        query = arguments?.getString("query")
+        query = arguments?.getString(IntentData.query)
     }
 
     override fun onCreateView(

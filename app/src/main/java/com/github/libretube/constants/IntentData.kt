@@ -14,4 +14,5 @@ object IntentData {
     const val fragmentToOpen = "fragmentToOpen"
     const val comment = "comment"
     const val minimizeByDefault = "minimizeByDefault"
+    const val query = "query"
 }

@@ -309,7 +309,7 @@ class MainActivity : BaseActivity() {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                navController.navigate(R.id.searchResultFragment, bundleOf("query" to query))
+                navController.navigate(R.id.searchResultFragment, bundleOf(IntentData.query to query))
                 searchView.clearFocus()
                 return true
             }
@@ -335,7 +335,7 @@ class MainActivity : BaseActivity() {
                 }
 
                 if (navController.currentDestination?.id != R.id.searchFragment) {
-                    navController.navigate(R.id.searchFragment, bundleOf("query" to newText))
+                    navController.navigate(R.id.searchFragment, bundleOf(IntentData.query to newText))
                 } else {
                     searchViewModel.setQuery(newText)
                 }
