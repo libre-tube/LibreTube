@@ -18,7 +18,7 @@ data class Streams(
     val uploaderAvatar: String? = null,
     val thumbnailUrl: String,
     val category: String,
-   val license: String? = null,
+    val license: String? = null,
     val visibility: String? = null,
     val tags: List<String> = emptyList(),
     val hls: String? = null,
