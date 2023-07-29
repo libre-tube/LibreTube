@@ -984,7 +984,17 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         val description = streams.description
 
         setupDescription(binding.playerDescription, description)
-        binding.videoCategory.text = "${context?.getString(R.string.category)}: ${streams.category}"
+        val visibility = when (streams.visibility) {
+            "public" -> context?.getString(R.string.visibility_public)
+            "unlisted" -> context?.getString(R.string.visibility_unlisted)
+            // currently no other visibility could be returned, might change in the future however
+            else -> streams.visibility.replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+            }
+        }.orEmpty()
+        binding.additionalVideoInfo.text = "${context?.getString(R.string.category)}: ${streams.category}\n" +
+                "${context?.getString(R.string.license)}: ${streams.license}\n" +
+                "${context?.getString(R.string.visibility)}: $visibility"
 
         binding.playerChannel.setOnClickListener {
             val activity = view?.context as MainActivity
