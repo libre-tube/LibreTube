@@ -989,7 +989,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             "public" -> context?.getString(R.string.visibility_public)
             "unlisted" -> context?.getString(R.string.visibility_unlisted)
             // currently no other visibility could be returned, might change in the future however
-            else -> streams.visibility.replaceFirstChar {
+            else -> streams.visibility?.replaceFirstChar {
                 if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
             }
         }.orEmpty()
