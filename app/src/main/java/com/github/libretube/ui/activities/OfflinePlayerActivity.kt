@@ -33,7 +33,10 @@ import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.ui.base.BaseActivity
+import com.github.libretube.ui.interfaces.TimeFrameReceiver
+import com.github.libretube.ui.listeners.SeekbarPreviewListener
 import com.github.libretube.ui.models.PlayerViewModel
+import com.github.libretube.util.OfflineTimeFrameReceiver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -45,6 +48,7 @@ class OfflinePlayerActivity : BaseActivity() {
     private lateinit var player: ExoPlayer
     private lateinit var playerView: PlayerView
     private lateinit var trackSelector: DefaultTrackSelector
+    private var timeFrameReceiver: TimeFrameReceiver? = null
 
     private lateinit var playerBinding: ExoStyledPlayerControlViewBinding
     private val playerViewModel: PlayerViewModel by viewModels()
@@ -89,6 +93,20 @@ class OfflinePlayerActivity : BaseActivity() {
                             player.duration / 1000
                         )
                     }
+
+                    override fun onPlaybackStateChanged(playbackState: Int) {
+                        super.onPlaybackStateChanged(playbackState)
+                        // setup seekbar preview
+                        if (playbackState == Player.STATE_READY) {
+                            binding.player.binding.exoProgress.addListener(
+                                SeekbarPreviewListener(
+                                    timeFrameReceiver ?: return,
+                                    binding.player.binding,
+                                    player.duration
+                                )
+                            )
+                        }
+                    }
                 })
             }
             .loadPlaybackParams()
@@ -132,6 +150,10 @@ class OfflinePlayerActivity : BaseActivity() {
             trackSelector.updateParameters {
                 setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
                 setPreferredTextLanguage("en")
+            }
+
+            timeFrameReceiver = video?.path?.let {
+                OfflineTimeFrameReceiver(this@OfflinePlayerActivity, it)
             }
 
             player.prepare()

@@ -1,6 +1,7 @@
 package com.github.libretube.ui.listeners
 
 import android.text.format.DateUtils
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.core.view.isVisible
@@ -13,16 +14,18 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.math.absoluteValue
 
 @UnstableApi
 class SeekbarPreviewListener(
     private val timeFrameReceiver: TimeFrameReceiver,
     private val playerBinding: ExoStyledPlayerControlViewBinding,
     private val duration: Long,
-    private val onScrub: (position: Long) -> Unit,
-    private val onScrubEnd: (position: Long) -> Unit
+    private val onScrub: (position: Long) -> Unit = {},
+    private val onScrubEnd: (position: Long) -> Unit = {}
 ) : TimeBar.OnScrubListener {
     private var scrubInProgress = false
+    private var lastPreviewPosition = Long.MAX_VALUE
 
     override fun onScrubStart(timeBar: TimeBar, position: Long) {
         scrubInProgress = true
@@ -39,6 +42,13 @@ class SeekbarPreviewListener(
         scrubInProgress = true
 
         playerBinding.seekbarPreviewPosition.text = DateUtils.formatElapsedTime(position / 1000)
+
+        // minimum of five seconds of additional seeking in order to show a preview
+        if ((lastPreviewPosition - position).absoluteValue < 5000) {
+            updatePreviewX(position)
+            return
+        }
+
         CoroutineScope(Dispatchers.IO).launch {
             processPreview(position)
         }
@@ -72,10 +82,7 @@ class SeekbarPreviewListener(
      * Make a request to get the image frame and update its position
      */
     private suspend fun processPreview(position: Long) {
-        // update the offset of the preview image view
-        withContext(Dispatchers.Main) {
-            updatePreviewX(position)
-        }
+        lastPreviewPosition = position
 
         val frame = timeFrameReceiver.getFrameAtTime(position)
         if (!scrubInProgress) return
@@ -83,6 +90,7 @@ class SeekbarPreviewListener(
         withContext(Dispatchers.Main) {
             playerBinding.seekbarPreviewImage.setImageBitmap(frame)
             playerBinding.seekbarPreview.isVisible = true
+            updatePreviewX(position)
         }
     }
 

@@ -5,7 +5,6 @@ import android.graphics.Bitmap
 import androidx.core.graphics.drawable.toBitmap
 import com.github.libretube.api.obj.PreviewFrames
 import com.github.libretube.helpers.ImageHelper
-import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.obj.PreviewFrame
 import com.github.libretube.ui.interfaces.TimeFrameReceiver
 
