@@ -132,6 +132,11 @@
                     android:textIsSelectable="true"
                     android:textSize="14sp" />
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/tags_recycler"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
             </LinearLayout>
 
             <com.google.android.material.card.MaterialCardView

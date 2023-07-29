@@ -93,6 +93,7 @@ import com.github.libretube.obj.VideoResolution
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.ui.activities.VideoTagsAdapter
 import com.github.libretube.ui.adapters.ChaptersAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
@@ -995,6 +996,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         binding.additionalVideoInfo.text = "${context?.getString(R.string.category)}: ${streams.category}\n" +
                 "${context?.getString(R.string.license)}: ${streams.license}\n" +
                 "${context?.getString(R.string.visibility)}: $visibility"
+
+        if (streams.tags.isNotEmpty()) {
+            binding.tagsRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            binding.tagsRecycler.adapter = VideoTagsAdapter(streams.tags)
+        }
+        binding.tagsRecycler.isVisible = streams.tags.isNotEmpty()
 
         binding.playerChannel.setOnClickListener {
             val activity = view?.context as MainActivity
