@@ -483,4 +483,7 @@
     <string name="continue_watching">مواصلة المشاهدة</string>
     <string name="dearrow_summary">اعرض عناوين وصورا مصغرة أكثر دقة وأقل إثارة. يزيد من أوقات التحميل.</string>
     <string name="dearrow">تمكين دي ارو</string>
+    <string name="visibility_public">عام</string>
+    <string name="visibility">رؤية</string>
+    <string name="visibility_unlisted">غير مدرج</string>
 </resources>
