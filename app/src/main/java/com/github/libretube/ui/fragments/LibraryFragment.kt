@@ -128,7 +128,7 @@ class LibraryFragment : Fragment() {
         _binding?.playlistRefresh?.isRefreshing = true
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
-                var playlists = try {
+                val playlists = try {
                     withContext(Dispatchers.IO) {
                         PlaylistsHelper.getPlaylists()
                     }
@@ -142,18 +142,6 @@ class LibraryFragment : Fragment() {
                 binding.playlistRefresh.isRefreshing = false
 
                 if (playlists.isNotEmpty()) {
-                    playlists = when (
-                        PreferenceHelper.getString(PreferenceKeys.PLAYLISTS_ORDER, "creation_date")
-                    ) {
-                        "creation_date" -> playlists
-                        "creation_date_reversed" -> playlists.reversed()
-                        "alphabetic" -> playlists.sortedBy { it.name?.lowercase() }
-                        "alphabetic_reversed" -> playlists.sortedBy { it.name?.lowercase() }
-                            .reversed()
-
-                        else -> playlists
-                    }
-
                     val playlistsAdapter = PlaylistsAdapter(
                         playlists.toMutableList(),
                         PlaylistsHelper.getPrivatePlaylistType()
