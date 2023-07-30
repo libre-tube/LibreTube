@@ -474,4 +474,7 @@
     <string name="unknown_or_no_audio">desconhecido ou sem áudio</string>
     <string name="dearrow">Ativar \'DeArrow\'</string>
     <string name="dearrow_summary">Mostra títulos e miniaturas mais precisas e menos sensacionalistas. Pode aumentar o tempo de carregamento dos vídeos.</string>
+    <string name="visibility">Visibilidade</string>
+    <string name="visibility_public">Público</string>
+    <string name="visibility_unlisted">Não listado</string>
 </resources>
