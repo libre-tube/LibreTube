@@ -471,4 +471,7 @@
     <string name="continue_watching">Baxmağa davam et</string>
     <string name="dearrow">DeArrow\'u Aktivləşdir</string>
     <string name="dearrow_summary">Daha dəqiq və daha az sensasiyalı başlıqlar və miniatürlər göstər. Yüklənilmə müddətin artırır.</string>
+    <string name="visibility">Görünmə</string>
+    <string name="visibility_public">Ümumi</string>
+    <string name="visibility_unlisted">Siyahıdan kənar</string>
 </resources>
