@@ -52,6 +52,7 @@
             app:title="@string/category_sponsor" />
 
         <com.github.libretube.ui.views.ColorPreference
+            android:dependency="sb_enable_custom_colors"
             app:defaultValue="#00d400"
             app:key="sponsor_color"
             app:title="@string/color" />
@@ -63,6 +64,7 @@
             app:title="@string/category_selfpromo" />
 
         <com.github.libretube.ui.views.ColorPreference
+            android:dependency="sb_enable_custom_colors"
             app:defaultValue="#ffff00"
             app:key="selfpromo_color"
             app:title="@string/color" />
@@ -74,6 +76,7 @@
             app:title="@string/category_interaction" />
 
         <com.github.libretube.ui.views.ColorPreference
+            android:dependency="sb_enable_custom_colors"
             app:defaultValue="#cc00ff"
             app:key="interaction_color"
             app:title="@string/color" />
@@ -85,6 +88,7 @@
             app:title="@string/category_intro" />
 
         <com.github.libretube.ui.views.ColorPreference
+            android:dependency="sb_enable_custom_colors"
             app:defaultValue="#00ffff"
             app:key="intro_color"
             app:title="@string/color" />
@@ -96,6 +100,7 @@
             app:title="@string/category_outro" />
 
         <com.github.libretube.ui.views.ColorPreference
+            android:dependency="sb_enable_custom_colors"
             app:defaultValue="#0202ED"
             app:key="outro_color"
             app:title="@string/color" />
@@ -107,6 +112,7 @@
             app:title="@string/category_filler" />
 
         <com.github.libretube.ui.views.ColorPreference
+            android:dependency="sb_enable_custom_colors"
             app:defaultValue="#7300ff"
             app:key="filler_color"
             app:title="@string/color" />
@@ -118,6 +124,7 @@
             app:title="@string/category_music_offtopic" />
 
         <com.github.libretube.ui.views.ColorPreference
+            android:dependency="sb_enable_custom_colors"
             app:defaultValue="#ff9900"
             app:key="music_offtopic_color"
             app:title="@string/color" />
@@ -129,6 +136,7 @@
             app:title="@string/category_preview" />
 
         <com.github.libretube.ui.views.ColorPreference
+            android:dependency="sb_enable_custom_colors"
             app:defaultValue="#008fd6"
             app:key="preview_color"
             app:title="@string/color" />
