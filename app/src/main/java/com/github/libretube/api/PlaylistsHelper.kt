@@ -11,6 +11,7 @@ import com.github.libretube.constants.YOUTUBE_FRONTEND_URL
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.LocalPlaylist
 import com.github.libretube.enums.PlaylistType
+import com.github.libretube.extensions.parallelMap
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
@@ -188,20 +189,16 @@ object PlaylistsHelper {
                     } else {
                         // if not logged in, all video information needs to become fetched manually
                         // Only do so with 20 videos at once to prevent performance issues
-                        playlist.videos.mapIndexed { index, id -> id to index }
-                            .groupBy { it.second % 20 }.forEach { (_, videos) ->
-                                videos.map {
-                                    async {
-                                        runCatching {
-                                            val stream = RetrofitInstance.api.getStreams(it.first)
-                                                .toStreamItem(
-                                                    it.first
-                                                )
-                                            addToPlaylist(playlistId, stream)
-                                        }
+                        val streams = playlist.videos.mapIndexed { index, id -> id to index }
+                            .groupBy { it.second % 20 }.map { (_, videos) ->
+                                videos.parallelMap {
+                                    runCatching {
+                                        RetrofitInstance.api.getStreams(it.first)
+                                            .toStreamItem(it.first)
                                     }
-                                }.awaitAll()
+                                }.mapNotNull { it.getOrNull() }
                             }
+                        addToPlaylist(playlistId, *streams.flatten().toTypedArray())
                     }
                 }
             }.awaitAll()
