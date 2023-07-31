@@ -12,26 +12,22 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CommentsViewModel : ViewModel() {
-    private var isLoading = false
-
     val commentsPage = MutableLiveData<CommentsPage?>()
-
     val commentSheetExpand = MutableLiveData<Boolean?>()
 
+    var videoId: String? = null
+    private var nextPage: String? = null
+    private var isLoading = false
+    var maxHeight = 0
     var currentCommentsPosition = 0
+    var commentsSheetDismiss: (() -> Unit)? = null
+    var handleLink: ((url: String) -> Unit)? = null
 
     fun setCommentSheetExpand(value: Boolean?) {
         if (commentSheetExpand.value != value) {
             commentSheetExpand.value = value
         }
     }
-
-    private var nextPage: String? = null
-
-    var videoId: String? = null
-    var maxHeight: Int = 0
-    var commentsSheetDismiss: (() -> Unit)? = null
-    var handleLink: ((url: String) -> Unit)? = null
 
     fun fetchComments() {
         videoId ?: return
