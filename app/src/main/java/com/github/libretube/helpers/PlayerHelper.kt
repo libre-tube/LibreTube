@@ -458,28 +458,6 @@ object PlayerHelper {
     }
 
     /**
-     * Get the preview frame according to the current position
-     */
-    fun getPreviewFrame(previewFrames: List<PreviewFrames>, position: Long): PreviewFrame? {
-        var startPosition: Long = 0
-        // get the frames with the best quality
-        val frames = previewFrames.maxByOrNull { it.frameHeight }
-        frames?.urls?.forEach { url ->
-            // iterate over all available positions and find the one matching the current position
-            for (y in 0 until frames.framesPerPageY) {
-                for (x in 0 until frames.framesPerPageX) {
-                    val endPosition = startPosition + frames.durationPerFrame
-                    if (position in startPosition until endPosition) {
-                        return PreviewFrame(url, x, y, frames.frameWidth, frames.frameHeight)
-                    }
-                    startPosition = endPosition
-                }
-            }
-        }
-        return null
-    }
-
-    /**
      * get the categories for sponsorBlock
      */
     fun getSponsorBlockCategories(): MutableMap<String, SbSkipOptions> {
