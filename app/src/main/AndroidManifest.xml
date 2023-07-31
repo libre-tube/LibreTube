@@ -291,6 +291,8 @@
                 <data android:pathPrefix="/c/" />
                 <!-- playlist prefix -->
                 <data android:pathPrefix="/playlist" />
+                <!-- search prefix -->
+                <data android:pathPrefix="/results" />
             </intent-filter>
 
             <!-- Support being detected as media player -->
