@@ -307,7 +307,7 @@
     <string name="play_all">لێدانی هەمووی</string>
     <string name="brightness">ڕووناکی</string>
     <string name="volume">ئاستی دەنگ</string>
-    <string name="auto">خۆکاری</string>
+    <string name="auto">خۆکار</string>
     <string name="start_time">کاتی دەستپێک</string>
     <string name="audio_only_mode">تەنیا دەنگ</string>
     <string name="sleep_timer">کاتی وەستاندن</string>
@@ -345,7 +345,7 @@
     <string name="alternative_player_layout">خشتەی لێدەری هاوشێوە</string>
     <string name="unsupported_file_format">جۆری فایل نەگونجاوە: %1$s</string>
     <string name="hls_instead_of_dash">بەکارهێنانی HLS</string>
-    <string name="auto_quality">خۆکاری</string>
+    <string name="auto_quality">خۆکار</string>
     <string name="bookmarks">نیشانەکراوەکان</string>
     <string name="comments_disabled">لێدوان نووسین نا چالاککراوە لەلایەن خاوەن ڤیدیۆوە.</string>
     <string name="double_tap_seek">دووجار دەسلێدان بۆ پێشخستن</string>
@@ -448,7 +448,7 @@
     <string name="color">ڕەنگ</string>
     <string name="enter_hex_value">بەهای تایبەتی ڕەنگ بنوسە</string>
     <string name="manual">دەستی</string>
-    <string name="sb_color_enable">پیشاندانی ڕەنگی تایبەت بۆ بەشە باندکراوەکانی سپۆنسەر</string>
+    <string name="sb_color_enable">پیشاندانی ڕەنگی تایبەت بۆ بەشە پەڕێنراوەکانی سپۆنسەرەکان</string>
     <string name="invalid_color">بەهایەکی نادروستی ڕەنگ نوسراوە!</string>
     <string name="off">نا چالاک</string>
     <string name="visible">پیشاندان لەبەشی خوارەوە</string>
@@ -469,4 +469,9 @@
     <string name="dubbed_audio_track">دۆبلاژ</string>
     <string name="default_or_unknown_audio_track">سەرەکی یان نەزانراو</string>
     <string name="unknown_or_no_audio">نەزانراوە یان بێ دەنگە</string>
+    <string name="dearrow">چالاککردنی DeArrow</string>
+    <string name="dearrow_summary">پیشاندانی ناونیشان و وێنەی بچووکی ووردتر و کەمتر هەستیار، کاتەکانی بارکردن زیاد دەکات.</string>
+    <string name="visibility">دەرکەوتن</string>
+    <string name="visibility_public">گشتی</string>
+    <string name="visibility_unlisted">دیارینەکراو</string>
 </resources>
