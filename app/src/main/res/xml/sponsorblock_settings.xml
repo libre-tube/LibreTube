@@ -18,13 +18,6 @@
         app:title="@string/sponsorblock_notifications" />
 
     <SwitchPreferenceCompat
-        android:dependency="sb_enabled_key"
-        android:summary="@string/sb_markers_summary"
-        app:defaultValue="true"
-        app:key="sb_show_markers"
-        app:title="@string/sb_markers" />
-
-    <SwitchPreferenceCompat
         app:defaultValue="false"
         app:key="dearrow"
         app:summary="@string/dearrow_summary"

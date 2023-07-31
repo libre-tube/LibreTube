@@ -38,8 +38,7 @@ class MarkableTimeBar(
     }
 
     private fun drawSegments(canvas: Canvas) {
-        val markersEnabled = PreferenceHelper.getBoolean(PreferenceKeys.SB_SHOW_MARKERS, true)
-        if (player == null || !markersEnabled) return
+        if (player == null) return
 
         canvas.save()
         val horizontalOffset = (parent as View).marginLeft

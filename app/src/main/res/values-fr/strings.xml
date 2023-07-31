@@ -290,8 +290,6 @@
     <string name="playlistNameReversed">Nom de la playlist (inversé)</string>
     <string name="queue">File</string>
     <string name="added_to_playlist">Ajouté à la playlist %1$s</string>
-    <string name="sb_markers">Marqueurs</string>
-    <string name="sb_markers_summary">Marquez les segments sur la barre de temps.</string>
     <string name="alternative_videos_layout">Disposition alternative des vidéos</string>
     <string name="defaultIconLight">Par défaut clair</string>
     <string name="time_code">Temps (secondes)</string>

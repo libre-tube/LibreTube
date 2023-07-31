@@ -291,8 +291,6 @@
     <string name="time_code">Kode waktu (detik)</string>
     <string name="added_to_playlist">Ditambahkan ke daftar putar %1$s</string>
     <string name="queue">Antrean</string>
-    <string name="sb_markers_summary">Tandai segmen pada bilah waktu.</string>
-    <string name="sb_markers">Penanda</string>
     <string name="livestreams">Siaran Langsung</string>
     <string name="alternative_videos_layout">Tata letak video alternatif</string>
     <string name="defaultIconLight">Terang bawaan</string>

@@ -149,6 +149,5 @@
     <string name="add_to_bookmarks">Добавяне към отметките</string>
     <string name="general">Общо</string>
     <string name="swipe_controls">Плъзнете за контролите</string>
-    <string name="sb_markers">Маркери</string>
     <string name="playerAudioQuality">Качество на звука</string>
 </resources>

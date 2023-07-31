@@ -197,7 +197,6 @@
     <string name="playlistNameReversed">ପ୍ଲେଲିଷ୍ଟ ନାମ ଓଲଟା</string>
     <string name="time_code">ଟାଇମ୍ କୋଡ୍ (ସେକେଣ୍ଡରେ)</string>
     <string name="queue">ଧାଡ଼ି</string>
-    <string name="sb_markers">ମାର୍କର ଗୁଡ଼ିକ</string>
     <string name="instance_summary">ପାଇପ୍, ଲଗଇନ୍, ଏବଂ ଆକାଉଣ୍ଟ୍</string>
     <string name="clear_customInstances">ଯୋଡ଼ାଯାଇଥିବା ଗୁଡ଼ିକୁ ବିଲୋପ କରନ୍ତୁ</string>
     <string name="related_streams">ସମ୍ବନ୍ଧିତ ବିଷୟବସ୍ତୁ</string>
@@ -295,7 +294,6 @@
     <string name="background_channel_description">ଅଡିଓ ପ୍ଲେୟାରକୁ ନିୟନ୍ତ୍ରଣ କରିବା ପାଇଁ ବଟନ୍ ସହିତ ଏକ ବିଜ୍ଞପ୍ତି ଦେଖାଏ ।</string>
     <string name="push_channel_name">ବିଜ୍ଞପ୍ତି କର୍ମୀ</string>
     <string name="push_channel_description">ନୂତନ ଷ୍ଟ୍ରିମ୍ ଉପଲବ୍ଧ ହେଲେ ଏକ ବିଜ୍ଞପ୍ତି ଦେଖାଏ ।</string>
-    <string name="sb_markers_summary">ଟାଇମ୍ ବାର୍ ରେ ସେଗମେଣ୍ଟଗୁଡିକ ଚିହ୍ନିତ କରନ୍ତୁ ।</string>
     <string name="playlistCloned">ପ୍ଲେଲିଷ୍ଟ କ୍ଲୋନ ହୋଇଛି</string>
     <string name="confirm_unsubscribe">ଆପଣ %1$s ର ସଦସ୍ୟତା ରଦ୍ଦ କରିବାକୁ ଚାହୁଁଛନ୍ତି ବୋଲି ଆପଣ ନିଶ୍ଚିତ କି\?</string>
     <string name="confirm_unsubscribing">ସଦସ୍ୟତା ରୁ ନିବୃତ୍ତ ହେବାକୁ ନିଶ୍ଚିତ କରନ୍ତୁ</string>

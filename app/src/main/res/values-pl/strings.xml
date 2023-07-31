@@ -291,11 +291,9 @@
     <string name="playlistNameReversed">Nazwa playlisty (odwrotnie)</string>
     <string name="added_to_playlist">Dodano do playlisty %1$s</string>
     <string name="queue">Kolejka</string>
-    <string name="sb_markers">Oznaczenia</string>
     <string name="livestreams">Na żywo</string>
     <string name="alternative_videos_layout">Alternatywny układ filmów</string>
     <string name="defaultIconLight">Jasna (domyślnie)</string>
-    <string name="sb_markers_summary">Oznacz segmenty na pasku czasu.</string>
     <string name="playlistCloned">Sklonowano playlistę</string>
     <string name="confirm_unsubscribing">Potwierdzenie odsubskrybowania</string>
     <string name="confirm_unsubscribing_summary">Pokaż okno potwierdzenia przed odsubskrybowaniem.</string>

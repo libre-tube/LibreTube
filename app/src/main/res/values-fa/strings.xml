@@ -267,7 +267,6 @@
     <string name="exportsuccess">برون‌ریزی شد.</string>
     <string name="forward">پیش‌روی</string>
     <string name="featured">پیشنهادی</string>
-    <string name="sb_markers">سازندگان</string>
     <string name="auto">خودکار</string>
     <string name="sb_skip_manual">پرش دستی</string>
     <string name="playlists_order">ترتیب سیاههٔ پخش</string>
@@ -365,7 +364,6 @@
     <string name="no_subtitles_available">زیرنویس موجود نیست</string>
     <string name="new_videos_badge_summary">در صورت وجود، نشانی با تعداد ویدیوهای جدید نشان دهید.</string>
     <string name="time_code">کد زمان (ثانیه)</string>
-    <string name="sb_markers_summary">بخش ها را در نوار زمان علامت گذاری کنید.</string>
     <string name="alternative_videos_layout">طرح بندی ویدیوهای متداول</string>
     <string name="confirm_unsubscribe">آیا مطمئنید که می خواهید اشتراک %1$s را لغو کنید؟</string>
     <string name="notification_time">محدود کردن زمان اطلاع رسانی</string>

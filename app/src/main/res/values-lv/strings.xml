@@ -304,7 +304,6 @@
     <string name="nothing_selected">Nekas nav izvēlēts!</string>
     <string name="autoplay_countdown_summary">Parādīt 5 sekunžu atskaiti pirms automātiski atskaņo nākamo video.</string>
     <string name="playing_next">Nākamo atskaņos pēc %1$s</string>
-    <string name="sb_markers">Atzīmes</string>
     <string name="pinch_control_summary">Izmantojiet divu pirkstu kniebšanas žestu, lai pietuvinātu vai attālinātu attēlu.</string>
     <string name="pinch_control">Divu pirkstu kniebšanas žesta kontrole</string>
     <string name="defaults">Noklusējuma iestatījumi</string>
@@ -398,7 +397,6 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d videoklipi</string>
     <string name="subscriberAndVideoCounts">%1$s abonenti • %2$d videoklipi</string>
     <string name="failed_fetching_instances">Nevarēja izgūt pieejamos gadījumus.</string>
-    <string name="sb_markers_summary">Atzīmējiet segmentus laika joslā.</string>
     <string name="audio_track">Audio celiņš</string>
     <string name="alternative_pip_controls_summary">Rādīt tikai audio un izlaist vadīklas attēlā attēlā, nevis uz priekšu un atpakaļ</string>
     <string name="autoplay_countdown">Automātiskās atskaņošanas atpakaļskaitīšana</string>

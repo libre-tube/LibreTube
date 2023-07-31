@@ -290,7 +290,6 @@
     <string name="playlistNameReversed">Name der Playlist (umgekehrt)</string>
     <string name="playlistCloned">Playlist dupliziert</string>
     <string name="confirm_unsubscribing">Deabonnieren bestätigen</string>
-    <string name="sb_markers_summary">Abschnitte auf der Zeitleiste markieren.</string>
     <string name="defaultIconLight">Standard hell</string>
     <string name="confirm_unsubscribing_summary">Zeige Bestätigungsdialog vor dem Deabonnieren.</string>
     <string name="confirm_unsubscribe">Bist du sicher, dass du %1$s deabbonieren möchtest\?</string>
@@ -307,7 +306,6 @@
     <string name="alternative_player_layout">Alternatives Player-Layout</string>
     <string name="alternative_player_layout_summary">Zeige ähnliche Videos über den Kommentaren in einer Reihe an anstatt darunter.</string>
     <string name="added_to_playlist">Zur Playlist %1$s hinzugefügt</string>
-    <string name="sb_markers">Markierungen</string>
     <string name="audio_track">Tonspur</string>
     <string name="livestreams">Livestreams</string>
     <string name="alternative_videos_layout">Alternatives Video-Layout</string>

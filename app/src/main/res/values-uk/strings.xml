@@ -291,8 +291,6 @@
     <string name="time_code">Часовий код (секунд)</string>
     <string name="added_to_playlist">Додано в добірку %1$s</string>
     <string name="queue">Черга</string>
-    <string name="sb_markers">Маркери</string>
-    <string name="sb_markers_summary">Позначте сегменти на панелі часу.</string>
     <string name="livestreams">Трансляції наживо</string>
     <string name="alternative_videos_layout">Альтернативні макети відео</string>
     <string name="defaultIconLight">Типова світла</string>

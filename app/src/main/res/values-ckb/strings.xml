@@ -241,7 +241,6 @@
     <string name="play_next">لێدانی دواتر</string>
     <string name="new_videos_badge">شێوازی ڤیدیۆ نوێیەکان</string>
     <string name="queue">دواخراو</string>
-    <string name="sb_markers">نیشانەکراوەکان</string>
     <string name="unlimited">بێسنوور</string>
     <string name="search_history_summary">بیرخستنەوەی گەڕان</string>
     <string name="watch_history_summary">تۆمارکردنی ئەو ڤیدیۆییانەی سەیرت کردوون</string>
@@ -343,7 +342,6 @@
     <string name="save_feed">کردنەوەی شتەکان لە پشت شاشە</string>
     <string name="save_feed_summary">کردنەوەی زانیاری هاوبەشییەکان لە پشت شاشەو ڕێگریکردن لە نوێبونەوەی خۆکاری.</string>
     <string name="change_region">ڤیدیۆ پێشنیارکراوەکان بەردەست نییە لەم شوێنەدا، تکایە شوێنێکی تر هەڵبژێرە لەبەشی ڕێکخستندا.</string>
-    <string name="sb_markers_summary">نیشانەکردنی بەش لەسەر کاتی پیشاندان.</string>
     <string name="alternative_player_layout">خشتەی لێدەری هاوشێوە</string>
     <string name="unsupported_file_format">جۆری فایل نەگونجاوە: %1$s</string>
     <string name="hls_instead_of_dash">بەکارهێنانی HLS</string>

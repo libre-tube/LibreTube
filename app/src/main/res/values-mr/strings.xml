@@ -272,7 +272,6 @@
     <string name="custom_playback_speed_summary">सामान्य प्लेअरपेक्षा वेगळा प्लेबॅक वेग वापरा.</string>
     <string name="auto_fullscreen_shorts">शॉर्ट्स व्हिडिओवर ऑटो फुलस्क्रीन</string>
     <string name="background_channel_name">पार्श्वभूमी मोड</string>
-    <string name="sb_markers">मार्करस्</string>
     <string name="pinch_control">पिंच कंट्रोल</string>
     <string name="privacy_alert">गोपनीयता सूचना</string>
     <string name="stats_for_nerds">गीक्ससाठी आकडेवारी</string>
@@ -324,7 +323,6 @@
     <string name="playlists_order">प्लेलिस्ट ऑर्डर</string>
     <string name="playlistNameReversed">प्लेलिस्ट नाव (उलट)</string>
     <string name="time_code">वेळ कोड (सेकंद)</string>
-    <string name="sb_markers_summary">टाइम बारवरील सेगमेंट्स चिन्हांकित करा.</string>
     <string name="alternative_videos_layout">पर्यायी व्हिडिओ लेआउट</string>
     <string name="defaultIconLight">डीफॉल्ट प्रकाश</string>
     <string name="confirm_unsubscribing">सदस्यत्व रद्द केल्याची पुष्टी करा</string>

@@ -318,8 +318,6 @@
     <string name="privacy_alert">隱私警告</string>
     <string name="username_email">使用不推薦的電子郵件繼續嗎？</string>
     <string name="proceed">繼續</string>
-    <string name="sb_markers">標記</string>
-    <string name="sb_markers_summary">在時間軸上標記片段。</string>
     <string name="fullscreen_orientation">全螢幕方向</string>
     <string name="aspect_ratio">影片比例</string>
     <string name="auto_rotation">自動旋轉</string>

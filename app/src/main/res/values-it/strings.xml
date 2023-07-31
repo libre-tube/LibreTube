@@ -290,8 +290,6 @@
     <string name="playlistNameReversed">Nome playlist (invertito)</string>
     <string name="added_to_playlist">Aggiunto alla playlist %1$s</string>
     <string name="queue">Coda</string>
-    <string name="sb_markers">Marcatori</string>
-    <string name="sb_markers_summary">Segna i segmenti sulla barra del tempo.</string>
     <string name="livestreams">Trasmissioni in diretta</string>
     <string name="alternative_videos_layout">Layout alternativo per i video</string>
     <string name="defaultIconLight">Chiara predefinita</string>

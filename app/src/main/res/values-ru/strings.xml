@@ -291,8 +291,6 @@
     <string name="playlistNameReversed">Название плейлиста (перевернутое)</string>
     <string name="time_code">Временной код (секунды)</string>
     <string name="queue">Очередь</string>
-    <string name="sb_markers">Маркеры</string>
-    <string name="sb_markers_summary">Пометить сегменты на шкале времени.</string>
     <string name="livestreams">Прямые трансляции</string>
     <string name="alternative_videos_layout">Альтернативное размещение видео</string>
     <string name="defaultIconLight">Светлый по умолчанию</string>

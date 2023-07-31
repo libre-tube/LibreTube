@@ -194,8 +194,6 @@
     <string name="playlistNameReversed">प्लेलिस्ट का नाम (उलट)</string>
     <string name="category_preview_description">अतिरिक्त जानकारी के बिना भविष्य की सामग्री का विवरण देने वाले सेगमेंट के लिए। यदि इसमें क्लिप शामिल हैं जो केवल यहां दिखाई देती हैं, तो बहुत संभव है कि यह गलत श्रेणी हो।</string>
     <string name="category_filler_description">केवल फिलर या हास्य के लिए जोड़े गए स्पर्शरेखा दृश्यों के लिए वीडियो की मुख्य सामग्री को समझने की आवश्यकता नहीं है।</string>
-    <string name="sb_markers">मार्करज</string>
-    <string name="sb_markers_summary">समय पट्टी पर खंडों को चिह्नित करें।</string>
     <string name="update_available">संस्करण %1$s उपलब्ध है</string>
     <string name="audio_track">ऑडियो ट्रैक</string>
     <string name="downloads">डाउनलोडस</string>

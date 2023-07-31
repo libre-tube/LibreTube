@@ -289,8 +289,6 @@
     <string name="invalid_filename">Fitxategi izen baliogabea!</string>
     <string name="playlists_order">Erreprodukzio zerrenden ordena</string>
     <string name="playlistNameReversed">Erreprodukzio zerrendaren izena (alderantzizkatua)</string>
-    <string name="sb_markers">Markagailuak</string>
-    <string name="sb_markers_summary">Markatu segmentuak denbora-barran.</string>
     <string name="livestreams">Zuzeneko transmisioak</string>
     <string name="alternative_videos_layout">Bideo alternatiboen diseinua</string>
     <string name="defaultIconLight">Lehenetsitako argia</string>
