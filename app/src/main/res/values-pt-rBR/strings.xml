@@ -290,9 +290,7 @@
     <string name="mobile_data">Dados móveis</string>
     <string name="queue">Fila</string>
     <string name="added_to_playlist">Adicionado à playlist %1$s</string>
-    <string name="sb_markers">Marcadores</string>
     <string name="livestreams">Transmissões ao vivo</string>
-    <string name="sb_markers_summary">Marque os segmentos na barra de tempo.</string>
     <string name="time_code">Código de tempo (segundos)</string>
     <string name="alternative_videos_layout">Esquema alternativo de vídeos</string>
     <string name="defaultIconLight">Claro padrão</string>

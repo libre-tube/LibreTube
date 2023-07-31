@@ -291,8 +291,6 @@
     <string name="playlists_order">Lejátszási lista sorrend</string>
     <string name="time_code">Időkód (másodperc)</string>
     <string name="queue">Sor</string>
-    <string name="sb_markers">Jelölők</string>
-    <string name="sb_markers_summary">Szakaszok megjelölése az idősávon.</string>
     <string name="livestreams">Élő közvetítések</string>
     <string name="alternative_videos_layout">Alternatív videók elrendezés</string>
     <string name="defaultIconLight">Alapértelmezett világos</string>

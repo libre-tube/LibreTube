@@ -291,8 +291,6 @@
     <string name="time_code">קוד זמן (שניות)</string>
     <string name="added_to_playlist">נוסף לרשימת הנגינה %1$s</string>
     <string name="queue">תור</string>
-    <string name="sb_markers">סמנים</string>
-    <string name="sb_markers_summary">סימון המקטעים בציר הזמן.</string>
     <string name="livestreams">שידורים חיים</string>
     <string name="alternative_videos_layout">פריסת סרטונים חלופית</string>
     <string name="defaultIconLight">בהיר כברירת מחדל</string>

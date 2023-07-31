@@ -355,7 +355,6 @@
     <string name="push_channel_name">Работнік апавяшчэнняў</string>
     <string name="push_channel_description">Паказвае апавяшчэнне, калі з\'яўляюцца новыя стрымы.</string>
     <string name="subscriberAndVideoCounts">%1$s падпісчыкаў • %2$d відэа</string>
-    <string name="sb_markers">Маркеры</string>
     <string name="defaultIconLight">Святло па змаўчанні</string>
     <string name="playlistCloned">Плэйліст кланаваны</string>
     <string name="layout">Макет</string>
@@ -376,7 +375,6 @@
     <string name="new_videos_badge_summary">Паказаць значок з колькасцю новых відэа, калі яны ёсць.</string>
     <string name="change_region">\"Трэнды\" недаступныя для бягучага рэгіёну. Калі ласка, абярыце іншы ў наладах.</string>
     <string name="filename">Імя файла</string>
-    <string name="sb_markers_summary">Адзначце адрэзкі на панэлі часу.</string>
     <string name="autoplay_countdown_summary">Паказваць 5-секундны зваротны адлік перад аўтаматычным прайграваннем наступнага відэа.</string>
     <string name="lbry_hls_summary">Выкарыстоўвайце LBRY HLS для трансляцыі, калі гэта магчыма.</string>
     <plurals name="months_ago">

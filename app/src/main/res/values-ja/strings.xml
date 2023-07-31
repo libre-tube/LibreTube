@@ -284,8 +284,6 @@
     <string name="invalid_filename">無効なファイル名です！</string>
     <string name="playlistNameReversed">プレイリスト名 (逆順)</string>
     <string name="playlists_order">プレイリストの表示順</string>
-    <string name="sb_markers">マーカー</string>
-    <string name="sb_markers_summary">再生時間のバー上で該当部分を色分け。</string>
     <string name="background_channel_description">音声プレイヤーを操作するボタン付きの通知を表示します。</string>
     <string name="livestreams">ライブ配信</string>
     <string name="alternative_videos_layout">別の動画レイアウト</string>

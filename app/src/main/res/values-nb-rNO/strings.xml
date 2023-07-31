@@ -291,8 +291,6 @@
     <string name="queue">Kø</string>
     <string name="added_to_playlist">Lagt til på spillelisten %1$s</string>
     <string name="time_code">Tidskode</string>
-    <string name="sb_markers">Markører</string>
-    <string name="sb_markers_summary">Marker segmenter i forløpsindikatoren.</string>
     <string name="playlistCloned">Spilleliste klonet</string>
     <string name="confirm_unsubscribe">Opphev abonnement på %1$s\?</string>
     <string name="confirm_unsubscribing_summary">Vis bekreftelsesdialog før opphevelse av abonnement</string>

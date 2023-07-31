@@ -283,8 +283,6 @@
     <string name="time_code">ਸਮਾਂ ਕੋਡ (ਸਕਿੰਟ)</string>
     <string name="added_to_playlist">%1$s ਪਲੇਲਿਸਟ ਵਿੱਚ ਜੋੜਿਆ</string>
     <string name="queue">ਕਤਾਰ</string>
-    <string name="sb_markers">ਮਾਰਕਰ</string>
-    <string name="sb_markers_summary">ਸਮਾਂ ਪੱਟੀ \'ਤੇ ਹਿੱਸਿਆਂ ਨੂੰ ਚਿੰਨ੍ਹਿਤ ਕਰੋ।</string>
     <string name="playlistCloned">ਪਲੇਲਿਸਟ ਕਲੋਨ ਕੀਤੀ ਗਈ</string>
     <string name="confirm_unsubscribe">ਕੀ ਤੁਸੀਂ ਯਕੀਨੀ ਤੌਰ \'ਤੇ %1$s ਦੀ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਰੱਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ\?</string>
     <string name="confirm_unsubscribing">ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਰੱਦ ਕਰਨ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ</string>

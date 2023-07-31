@@ -297,7 +297,6 @@
     <string name="playOnBackground">පසුබිමේ වාදනය කරන්න</string>
     <string name="invalid_url">කරුණාකර වැඩ කරන URL එකක් ඇතුළු කරන්න</string>
     <string name="related_streams_summary">ඔබ නරඹන දේ හා සමාන ප්‍රවාහ පෙන්වන්න.</string>
-    <string name="sb_markers">සලකුණු</string>
     <string name="video">වීඩියෝ</string>
     <string name="buffering_goal_summary">වීඩියෝව බෆර කිරීමට දෙන උපරිම තත්පර ගණන.</string>
     <string name="no_video">වීඩියෝ නැත</string>
@@ -342,7 +341,6 @@
     <string name="sb_skip_manual_summary">කොටස් ස්වයංක්‍රීයව මඟ නොහරින්න, සෑම විටම පෙර විමසන්න.</string>
     <string name="playlists_order">වාදන ලැයිස්තු අනුපිළිවෙල</string>
     <string name="time_code">කාල කේතය (තත්පර)</string>
-    <string name="sb_markers_summary">කාල තීරුවේ කොටස් සලකුණු කරන්න.</string>
     <string name="confirm_unsubscribing_summary">දායකත්වයෙන් ඉවත් වීමට පෙර තහවුරු කිරීමේ සංවාදයක් පෙන්වන්න.</string>
     <string name="playlistCloned">වාදන ලැයිස්තුව ක්ලෝන කරන ලදී</string>
     <string name="alternative_player_layout">විකල්ප වාදක පිරිසැලසුම</string>

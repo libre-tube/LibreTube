@@ -305,8 +305,6 @@
     <string name="navbar_order">Редослед</string>
     <string name="layout">Изглед</string>
     <string name="alternative_player_layout">Алтернативни распоред плејера</string>
-    <string name="sb_markers">Маркери</string>
-    <string name="sb_markers_summary">Означите сегменте на временској траци.</string>
     <string name="audio_track">Аудио запис</string>
     <string name="livestreams">Стримови уживо</string>
     <string name="alternative_videos_layout">Алтернативни изглед видео записа</string>

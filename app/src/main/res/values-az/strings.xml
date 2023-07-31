@@ -291,8 +291,6 @@
     <string name="time_code">Vaxt kodu (saniyə)</string>
     <string name="added_to_playlist">%1$s oynatma siyahısına əlavə edildi</string>
     <string name="queue">Növbə</string>
-    <string name="sb_markers">Göstəricilər</string>
-    <string name="sb_markers_summary">Vaxt çubuğunda bölümləri işarələ.</string>
     <string name="livestreams">Canlı yayımlar</string>
     <string name="alternative_videos_layout">Alternativ video tərtibatı</string>
     <string name="defaultIconLight">Standart işıqlı</string>

@@ -291,8 +291,6 @@
     <string name="category_preview_description">Segmentams, kuriuose išsamiai nupasakojamas būsimas šio ar būsimų serijos vaizdo įrašų turinys, bet nepateikiama papildomos informacijos. Jei joje yra klipų, kurie rodomi tik čia, labai tikėtina, kad tai netinkama kategorija.</string>
     <string name="color_purple">Viliojanti violetinė</string>
     <string name="aspect_ratio">Vaizdo įrašo rezoliucija</string>
-    <string name="sb_markers">Žymekliai</string>
-    <string name="sb_markers_summary">Žymėti segmentus laiko juostoje.</string>
     <string name="livestreams">Tiesioginės transliacijos</string>
     <string name="alternative_videos_layout">Alternatyvus vaizdo įrašų išdėstymas</string>
     <string name="defaultIconLight">Numatyta šviesi</string>

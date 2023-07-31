@@ -291,8 +291,6 @@
     <string name="time_code">时间码（秒）</string>
     <string name="added_to_playlist">已添加到播放列表 %1$s</string>
     <string name="queue">队列</string>
-    <string name="sb_markers">标记</string>
-    <string name="sb_markers_summary">在时间栏上标记段。</string>
     <string name="livestreams">直播</string>
     <string name="alternative_videos_layout">备选视频布局</string>
     <string name="defaultIconLight">默认浅色</string>

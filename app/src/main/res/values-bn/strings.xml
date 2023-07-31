@@ -291,8 +291,6 @@
     <string name="playlistNameReversed">নাম (উল্টো)</string>
     <string name="time_code">সময় কোড (সেকেন্ড)</string>
     <string name="queue">কিউ</string>
-    <string name="sb_markers">মার্কারস</string>
-    <string name="sb_markers_summary">সেগমেন্টগুলোকে টাইমবারে চিহ্নিত করুন।</string>
     <string name="livestreams">লাইভস্ট্রিমগুলো</string>
     <string name="alternative_videos_layout">বিকল্প ভিডিও লেয়াউট</string>
     <string name="defaultIconLight">ডিফল্ট লাইট</string>

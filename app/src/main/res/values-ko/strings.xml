@@ -293,7 +293,6 @@
     <string name="confirm_unsubscribe">정말 구독을 취소하시겠습니까%1$s\?</string>
     <string name="save_feed_summary">헤드라인 등록 피드를 백그라운드로 로드하여 자동으로 새로 고쳐지지 않도록 합니다.</string>
     <string name="save_feed">백그라운드에서 피드 로드</string>
-    <string name="sb_markers_summary">시간 표시줄에 세그먼트를 표시합니다.</string>
     <string name="livestreams">라이브 방송</string>
     <string name="alternative_videos_layout">대체 비디오 레이아웃</string>
     <string name="defaultIconLight">기본 조명</string>
@@ -350,7 +349,6 @@
     <string name="failed_fetching_instances">사용가능한 인스턴스를 불러올 수 없습니다.</string>
     <string name="hide_watched_from_feed">시청한 영상 피드에서 숨기기</string>
     <string name="hide_watched_from_feed_summary">구독 탭에 90% 이상 시청한 비디오를 보여주지 않습니다.</string>
-    <string name="sb_markers">마커</string>
     <string name="pinch_control">핀치 컨트롤</string>
     <string name="misc">기타</string>
     <string name="playlistUrl">재생목록 URL</string>

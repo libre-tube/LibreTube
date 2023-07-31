@@ -326,8 +326,6 @@
     <string name="repeat_mode_none">કંઇ નહિં</string>
     <string name="audio_video_summary">ગુણવત્તા અને બંધારણ</string>
     <string name="new_videos_badge_summary">જો કેટલાક હોય તો નવી વિડિઓઝની માત્રા સાથેનો બેજ બતાવો.</string>
-    <string name="sb_markers">માર્કર્સ</string>
-    <string name="sb_markers_summary">સમય પટ્ટી પર વિભાગોને ચિહ્નિત કરો.</string>
     <string name="start_time">પ્રારંભ સમય</string>
     <string name="new_videos_badge">નવી વિડિયો માટે સૂચક</string>
     <string name="play_next">આગળનું વગાડો</string>

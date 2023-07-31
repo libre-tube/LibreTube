@@ -306,8 +306,6 @@
     <string name="invalid_filename">Tên tệp không hợp lệ!</string>
     <string name="playlists_order">Thứ tự sắp xếp danh sách phát</string>
     <string name="playlistNameReversed">Tên danh sách phát (đảo ngược)</string>
-    <string name="sb_markers_summary">Đánh dấu các phân đoạn trên thanh thời lượng.</string>
-    <string name="sb_markers">Đánh dấu</string>
     <string name="audio_track">Track âm thanh</string>
     <string name="livestreams">Trực tiếp</string>
     <string name="alternative_videos_layout">Bố cục thay thế cho videos</string>

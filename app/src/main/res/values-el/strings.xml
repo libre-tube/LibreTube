@@ -349,8 +349,6 @@
     <string name="playlists_order">Σειρά λιστών αναπαραγωγής</string>
     <string name="username_email">Συνέχιση με μια διεύθυνση e-mail που δεν συνιστάται;</string>
     <string name="exportsuccess">Εξήχθη.</string>
-    <string name="sb_markers">Σημάδι</string>
-    <string name="sb_markers_summary">Σημειώστε τα τμήματα στη γραμμή χρόνου.</string>
     <string name="preferences">Προτιμήσεις</string>
     <string name="backup_customInstances">Προσαρμοσμένες περιπτώσεις</string>
     <string name="save_feed">Φόρτωση ροής στο παρασκήνιο</string>

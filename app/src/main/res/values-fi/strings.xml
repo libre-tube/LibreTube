@@ -220,7 +220,6 @@
     <string name="autoplay_countdown_summary">Näytä 5 sekunnin lähtölaskenta ennen seuraavan videon automaattista toistoa.</string>
     <string name="background_channel_description">Näyttää ilmoituksen, jossa on painikkeita audiosoittimen ohjaamiseksi.</string>
     <string name="exportsuccess">Vietiin.</string>
-    <string name="sb_markers">Merkit</string>
     <string name="pinch_control">Nipistysohjaus</string>
     <string name="pinch_control_summary">Käytä nipistyselettä lähentääksesi/loitontaaksesi.</string>
     <string name="replies">Vastaukset</string>
@@ -343,7 +342,6 @@
     <string name="playback_pitch">Sävelkorkeus</string>
     <string name="playlistNameReversed">Soittolistan nimi (päinvastainen)</string>
     <string name="queue">Jono</string>
-    <string name="sb_markers_summary">Merkitse segmentit aikapalkkiin.</string>
     <string name="play_all">Toista kaikki</string>
     <string name="notification_time">Ilmoitusaika</string>
     <string name="navbar_order">Järjestys</string>

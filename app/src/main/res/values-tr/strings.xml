@@ -291,8 +291,6 @@
     <string name="time_code">Zaman kodu (saniye)</string>
     <string name="added_to_playlist">Oynatma listesine eklendi %1$s</string>
     <string name="queue">Sıra</string>
-    <string name="sb_markers">İşaretleyiciler</string>
-    <string name="sb_markers_summary">Bölümleri zaman çubuğunda işaretleyin.</string>
     <string name="livestreams">Canlı yayınlar</string>
     <string name="alternative_videos_layout">Alternatif video düzeni</string>
     <string name="defaultIconLight">Varsayılan ışık</string>
