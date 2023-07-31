@@ -477,4 +477,7 @@
     <string name="continue_watching">Продолжить просмотр</string>
     <string name="dearrow">Включить DeArrow</string>
     <string name="dearrow_summary">Показывайте более точные и менее сенсационные заголовки и миниатюры. Увеличивает время загрузки.</string>
+    <string name="visibility">Видимость</string>
+    <string name="visibility_public">Общественная</string>
+    <string name="visibility_unlisted">Не показывается</string>
 </resources>

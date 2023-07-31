@@ -477,4 +477,7 @@
     <string name="dubbed_audio_track">дубляваная</string>
     <string name="original_or_main_audio_track">арыгінальны або асноўны</string>
     <string name="descriptive_audio_track">апісальная</string>
+    <string name="visibility">Бачнасць</string>
+    <string name="visibility_public">Грамадская</string>
+    <string name="visibility_unlisted">Не паказваецца</string>
 </resources>

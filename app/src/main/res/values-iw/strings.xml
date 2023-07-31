@@ -477,4 +477,7 @@
     <string name="continue_watching">להמשיך בצפייה</string>
     <string name="dearrow">הפעלת DeArrow</string>
     <string name="dearrow_summary">להציג כותרות ותמונות ממוזערות מדויקות יותר ופחות מפוצצות. תוך שיפור זמני הטעינה.</string>
+    <string name="visibility">חשיפה</string>
+    <string name="visibility_public">ציבורית</string>
+    <string name="visibility_unlisted">לא מופיעה</string>
 </resources>

@@ -474,4 +474,7 @@
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">Neznámý jazyk zvuku</string>
     <string name="unknown_audio_track_type">Neznámý typ stopy zvuku</string>
+    <string name="visibility_public">Veřejná</string>
+    <string name="visibility_unlisted">Neuvedená</string>
+    <string name="visibility">Viditelnost</string>
 </resources>

@@ -474,4 +474,7 @@
     <string name="continue_watching">Continuar viendo</string>
     <string name="dearrow">Habilitar DeArrow</string>
     <string name="dearrow_summary">Muestra miniaturas y títulos y más precisos y menos sensacionalistas. Incrementa los tiempos de carga.</string>
+    <string name="visibility_public">Público</string>
+    <string name="visibility">Visibilidad</string>
+    <string name="visibility_unlisted">No listado</string>
 </resources>

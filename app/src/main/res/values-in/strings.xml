@@ -468,4 +468,7 @@
     <string name="continue_watching">Lanjut menonton</string>
     <string name="dearrow">Aktifkan DeArrow</string>
     <string name="dearrow_summary">Tampilkan judul dan thumbnail yang lebih akurat dan tidak terlalu sensasional. Meningkatkan waktu pemuatan.</string>
+    <string name="visibility">Visibilitas</string>
+    <string name="visibility_unlisted">Tidak terdaftar</string>
+    <string name="visibility_public">Publik</string>
 </resources>
