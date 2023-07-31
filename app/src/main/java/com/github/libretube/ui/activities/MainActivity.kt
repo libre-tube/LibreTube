@@ -58,6 +58,8 @@ class MainActivity : BaseActivity() {
     private val searchViewModel: SearchViewModel by viewModels()
     private val subscriptionsViewModel: SubscriptionsViewModel by viewModels()
 
+    private var savedSearchQuery: String? = null
+
     val autoRotationEnabled: Boolean by lazy {
         PreferenceHelper.getBoolean(
             PreferenceKeys.AUTO_ROTATION,
@@ -374,6 +376,14 @@ class MainActivity : BaseActivity() {
                 return !isSearchInProgress()
             }
         })
+
+        // handle search queries passed by the intent
+        if (savedSearchQuery != null) {
+            searchItem.expandActionView()
+            searchView.setQuery(savedSearchQuery, true)
+            savedSearchQuery = null
+        }
+
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -441,6 +451,9 @@ class MainActivity : BaseActivity() {
                 videoId = it,
                 timestamp = intent.getLongExtra(IntentData.timeStamp, 0L)
             )
+        }
+        intent?.getStringExtra(IntentData.query)?.let {
+            savedSearchQuery = it
         }
 
         intent?.getStringExtra("fragmentToOpen")?.let {

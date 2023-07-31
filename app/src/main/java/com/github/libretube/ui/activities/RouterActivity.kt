@@ -30,15 +30,21 @@ class RouterActivity : BaseActivity() {
     /**
      * Resolve the uri and return a bundle with the arguments
      */
-    private fun resolveType(intent: Intent, uri: Uri): Intent {
+    private fun Intent.resolveType(uri: Uri) = apply {
         val channelNamePaths = listOf("/c/", "/user/")
         val videoPaths = listOf("/shorts/", "/embed/", "/v/", "/live/")
         when {
+            uri.path!!.contains("/results") -> {
+                val searchQuery = uri.getQueryParameter("search_query")
+
+                putExtra(IntentData.query, searchQuery)
+            }
+
             uri.path!!.contains("/channel/") -> {
                 val channelId = uri.path!!
                     .replace("/channel/", "")
 
-                intent.putExtra(IntentData.channelId, channelId)
+                putExtra(IntentData.channelId, channelId)
             }
 
             channelNamePaths.any { uri.path!!.contains(it) } -> {
@@ -48,13 +54,13 @@ class RouterActivity : BaseActivity() {
                     channelName = channelName.replace(it, "")
                 }
 
-                intent.putExtra(IntentData.channelName, channelName)
+                putExtra(IntentData.channelName, channelName)
             }
 
             uri.path!!.contains("/playlist") -> {
                 val playlistId = uri.getQueryParameter("list")
 
-                intent.putExtra(IntentData.playlistId, playlistId)
+                putExtra(IntentData.playlistId, playlistId)
             }
 
             videoPaths.any { uri.path!!.contains(it) } -> {
@@ -64,38 +70,36 @@ class RouterActivity : BaseActivity() {
                     videoId = videoId.replace(it, "")
                 }
 
-                intent.putExtra(IntentData.videoId, videoId)
+                putExtra(IntentData.videoId, videoId)
 
                 uri.getQueryParameter("t")
-                    ?.let { intent.putExtra(IntentData.timeStamp, it.toTimeInSeconds()) }
+                    ?.let { putExtra(IntentData.timeStamp, it.toTimeInSeconds()) }
             }
 
             uri.path!!.contains("/watch") && uri.query != null -> {
                 val videoId = uri.getQueryParameter("v")
 
-                intent.putExtra(IntentData.videoId, videoId)
+                putExtra(IntentData.videoId, videoId)
                 uri.getQueryParameter("t")
-                    ?.let { intent.putExtra(IntentData.timeStamp, it.toTimeInSeconds()) }
+                    ?.let { putExtra(IntentData.timeStamp, it.toTimeInSeconds()) }
             }
 
             else -> {
                 val videoId = uri.path!!.replace("/", "")
 
-                intent.putExtra(IntentData.videoId, videoId)
+                putExtra(IntentData.videoId, videoId)
                 uri.getQueryParameter("t")
-                    ?.let { intent.putExtra(IntentData.timeStamp, it.toTimeInSeconds()) }
+                    ?.let { putExtra(IntentData.timeStamp, it.toTimeInSeconds()) }
             }
         }
-        return intent
     }
 
     private fun handleSendText(uri: Uri) {
         Log.i(TAG(), uri.toString())
 
-        val pm: PackageManager = this.packageManager
-        val intent = pm.getLaunchIntentForPackage(this.packageName)
-        intent?.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(resolveType(intent!!, uri))
+        val intent = this.packageManager.getLaunchIntentForPackage(this.packageName)!!.resolveType(uri)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
         finishAndRemoveTask()
     }
 }
