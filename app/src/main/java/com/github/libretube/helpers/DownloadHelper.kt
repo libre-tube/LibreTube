@@ -11,6 +11,7 @@ import com.github.libretube.parcelable.DownloadData
 import com.github.libretube.services.DownloadService
 import java.nio.file.Path
 import kotlin.io.path.createDirectories
+import kotlin.io.path.div
 
 object DownloadHelper {
     const val VIDEO_DIR = "video"
@@ -32,7 +33,7 @@ object DownloadHelper {
                 context.filesDir
             }
         }
-        return storageDir.toPath().resolve(path).createDirectories()
+        return (storageDir.toPath() / path).createDirectories()
     }
 
     fun getMaxConcurrentDownloads(): Int {

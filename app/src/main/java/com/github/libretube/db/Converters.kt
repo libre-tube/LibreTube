@@ -3,7 +3,7 @@ package com.github.libretube.db
 import androidx.room.TypeConverter
 import com.github.libretube.api.JsonHelper
 import java.nio.file.Path
-import java.nio.file.Paths
+import kotlin.io.path.Path
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.toLocalDate
 import kotlinx.serialization.encodeToString
@@ -19,7 +19,7 @@ object Converters {
     fun pathToString(path: Path?) = path?.toString()
 
     @TypeConverter
-    fun stringToPath(string: String?) = string?.let { Paths.get(it) }
+    fun stringToPath(string: String?) = string?.let { Path(it) }
 
     @TypeConverter
     fun stringListToJson(value: List<String>) = JsonHelper.json.encodeToString(value)

@@ -4,7 +4,7 @@ import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.parcelable.DownloadData
-import java.nio.file.Paths
+import kotlin.io.path.Path
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
 
@@ -64,7 +64,7 @@ data class Streams(
                     type = FileType.SUBTITLE,
                     videoId = id,
                     fileName = "${name}_$subCode.srt",
-                    path = Paths.get(""),
+                    path = Path(""),
                     url = subtitles.find {
                         it.code == subCode
                     }?.url?.let { ProxyHelper.unwrapUrl(it) }
