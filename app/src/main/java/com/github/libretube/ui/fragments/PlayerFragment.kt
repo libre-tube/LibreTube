@@ -79,7 +79,6 @@ import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ImageHelper
-import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.SPONSOR_HIGHLIGHT_CATEGORY
@@ -103,7 +102,6 @@ import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.dialogs.StatsDialog
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
-import com.github.libretube.ui.interfaces.TimeFrameReceiver
 import com.github.libretube.ui.listeners.SeekbarPreviewListener
 import com.github.libretube.ui.models.CommentsViewModel
 import com.github.libretube.ui.models.PlayerViewModel
@@ -753,7 +751,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 binding.sbSkipBtn.visibility = View.GONE
 
                 // set media sources for the player
-                setResolutionAndSubtitles()
+                initStreamSources()
                 prepareExoPlayerView()
                 initializePlayerView()
                 setupSeekbarPreview()
@@ -1256,7 +1254,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         return resolutions.toList()
     }
 
-    private fun setResolutionAndSubtitles() {
+    private fun initStreamSources() {
+        // use the video's default audio track when starting playback
+        trackSelector.updateParameters {
+            setPreferredAudioRoleFlags(C.ROLE_FLAG_MAIN)
+        }
+
         // create a list of subtitles
         subtitles = mutableListOf()
         val subtitlesNamesList = mutableListOf(getString(R.string.none))
@@ -1380,7 +1383,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         trackSelector = DefaultTrackSelector(requireContext())
 
         trackSelector.updateParameters {
-            setPreferredAudioLanguage(LocaleHelper.getAppLocale().isO3Language)
             val enabledVideoCodecs = PlayerHelper.enabledVideoCodecs
             if (enabledVideoCodecs != "all") {
                 // map the codecs to their corresponding mimetypes
