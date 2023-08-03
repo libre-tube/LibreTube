@@ -68,8 +68,14 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
             PlayingQueue.repeatQueue = !PlayingQueue.repeatQueue
             it.alpha = if (PlayingQueue.repeatQueue) 1f else 0.5f
         }
-
         binding.repeat.alpha = if (PlayingQueue.repeatQueue) 1f else 0.5f
+
+        binding.clearQueue.setOnClickListener {
+            val currentIndex = PlayingQueue.currentIndex()
+            PlayingQueue.setStreams(PlayingQueue.getStreams()
+                .filterIndexed { index, _ -> index == currentIndex })
+            adapter.notifyDataSetChanged()
+        }
 
         binding.bottomControls.setOnClickListener {
             dialog?.dismiss()
