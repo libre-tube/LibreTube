@@ -179,11 +179,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private lateinit var chapters: MutableList<ChapterSegment>
 
     /**
-     * for the player view
-     */
-    private var subtitles = mutableListOf<SubtitleConfiguration>()
-
-    /**
      * for the player notification
      */
     private lateinit var nowPlayingNotification: NowPlayingNotification
@@ -766,7 +761,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 if (binding.playerMotionLayout.progress != 1.0f) {
                     // show controllers when not in picture in picture mode
                     val inPipMode = PlayerHelper.pipEnabled &&
-                        PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
+                            PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
                     if (!inPipMode) {
                         binding.player.useController = true
                     }
@@ -994,12 +989,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
             }
         }.orEmpty()
-        binding.additionalVideoInfo.text = "${context?.getString(R.string.category)}: ${streams.category}\n" +
-                "${context?.getString(R.string.license)}: ${streams.license}\n" +
-                "${context?.getString(R.string.visibility)}: $visibility"
+        binding.additionalVideoInfo.text =
+            "${context?.getString(R.string.category)}: ${streams.category}\n" +
+                    "${context?.getString(R.string.license)}: ${streams.license}\n" +
+                    "${context?.getString(R.string.visibility)}: $visibility"
 
         if (streams.tags.isNotEmpty()) {
-            binding.tagsRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            binding.tagsRecycler.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             binding.tagsRecycler.adapter = VideoTagsAdapter(streams.tags)
         }
         binding.tagsRecycler.isVisible = streams.tags.isNotEmpty()
@@ -1224,10 +1221,15 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
     }
 
+    private fun getSubtitleConfigs(): List<SubtitleConfiguration> = streams.subtitles.map {
+        SubtitleConfiguration.Builder(it.url!!.toUri()).setLanguage(it.code)
+            .setMimeType(it.mimeType).build()
+    }
+
     private fun createMediaItem(uri: Uri, mimeType: String) = MediaItem.Builder()
         .setUri(uri)
         .setMimeType(mimeType)
-        .setSubtitleConfigurations(subtitles)
+        .setSubtitleConfigurations(getSubtitleConfigs())
         .setMetadata(streams)
         .build()
 
@@ -1258,21 +1260,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // use the video's default audio track when starting playback
         trackSelector.updateParameters {
             setPreferredAudioRoleFlags(C.ROLE_FLAG_MAIN)
-        }
-
-        // create a list of subtitles
-        subtitles = mutableListOf()
-        val subtitlesNamesList = mutableListOf(getString(R.string.none))
-        val subtitleCodesList = mutableListOf("")
-        streams.subtitles.forEach {
-            subtitles.add(
-                SubtitleConfiguration.Builder(it.url!!.toUri())
-                    .setMimeType(it.mimeType!!) // The correct MIME type (required).
-                    .setLanguage(it.code) // The subtitle language (optional).
-                    .build()
-            )
-            subtitlesNamesList += it.name!!
-            subtitleCodesList += it.code!!
         }
 
         // set the default subtitle if available
@@ -1444,18 +1431,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             return
         }
 
-        val subtitlesNamesList = mutableListOf(getString(R.string.none))
-        val subtitleCodesList = mutableListOf("")
-        streams.subtitles.forEach {
-            subtitlesNamesList += it.name!!
-            subtitleCodesList += it.code!!
-        }
+        val subtitles = streams.subtitles.map { it.name!! to it.code!! }
+        val subtitleOptions = listOf(getString(R.string.none) to "").plus(subtitles)
 
         BaseBottomSheet()
-            .setSimpleItems(subtitlesNamesList) { index ->
-                val language = subtitleCodesList.getOrNull(index)
-                updateCaptionsLanguage(language)
-                this.captionLanguage = language
+            .setSimpleItems(subtitleOptions.map { it.first }) { index ->
+                val subtitleLanguage = subtitleOptions.getOrNull(index)?.second
+                updateCaptionsLanguage(subtitleLanguage)
+                this.captionLanguage = subtitleLanguage
             }
             .show(childFragmentManager)
     }
