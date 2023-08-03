@@ -164,4 +164,7 @@
     <string name="autoplay_summary">Automatisch de volgende video afspelen na de huidige.</string>
     <string name="clonePlaylist">Afspeellijst klonen</string>
     <string name="uploaderAndVideoCount">video\'s</string>
+    <string name="jumped_to_highlight">Naar hoogtepunt gesprongen</string>
+    <string name="subscriberAndVideoCounts">%1$s abonnees • %2$d video\'s</string>
+    <string name="replies">Antwoorden</string>
 </resources>

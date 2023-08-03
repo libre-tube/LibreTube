@@ -471,4 +471,7 @@
     <string name="unknown_audio_track_type">अज्ञात ऑडियो ट्रैक प्रकार</string>
     <string name="original_or_main_audio_track">मूल या मुख्य</string>
     <string name="dubbed_audio_track">डब किया हुआ</string>
+    <string name="visibility">दृश्यता</string>
+    <string name="visibility_unlisted">गैर-सूचीबद्ध</string>
+    <string name="visibility_public">सार्वजनिक</string>
 </resources>

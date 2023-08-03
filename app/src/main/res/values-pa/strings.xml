@@ -471,4 +471,7 @@
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="default_or_unknown_audio_track">ਡਿਫੌਲਟ ਜਾਂ ਅਗਿਆਤ</string>
     <string name="unknown_or_no_audio">ਅਗਿਆਤ ਜਾਂ ਕੋਈ ਆਡੀਓ ਨਹੀਂ</string>
+    <string name="visibility">ਵੇਖਣਯੋਗਤਾ</string>
+    <string name="visibility_public">ਜਨਤਕ</string>
+    <string name="visibility_unlisted">ਗੈਰ-ਸੂਚੀਬੱਧ</string>
 </resources>
