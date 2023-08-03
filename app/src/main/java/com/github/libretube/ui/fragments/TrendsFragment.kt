@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -75,7 +76,7 @@ class TrendsFragment : Fragment() {
 
                 val binding = _binding ?: return@repeatOnLifecycle
                 binding.homeRefresh.isRefreshing = false
-                binding.progressBar.visibility = View.GONE
+                binding.progressBar.isGone = true
 
                 // show a [SnackBar] if there are no trending videos available
                 if (response.isEmpty()) {

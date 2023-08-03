@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -65,7 +66,7 @@ class CommentsMainFragment : Fragment() {
 
         commentsAdapter = CommentsAdapter(
             this,
-            viewModel.videoId!!,
+            viewModel.videoId ?: return,
             viewModel.commentsPage.value?.comments.orEmpty().toMutableList(),
             handleLink = viewModel.handleLink
         ) {
@@ -74,7 +75,7 @@ class CommentsMainFragment : Fragment() {
         binding.commentsRV.adapter = commentsAdapter
 
         if (viewModel.commentsPage.value?.comments.orEmpty().isEmpty()) {
-            binding.progress.visibility = View.VISIBLE
+            binding.progress.isVisible = true
             viewModel.fetchComments()
         } else {
             binding.commentsRV.scrollToPosition(viewModel.currentCommentsPosition)
@@ -83,9 +84,9 @@ class CommentsMainFragment : Fragment() {
         // listen for new comments to be loaded
         viewModel.commentsPage.observe(viewLifecycleOwner) {
             if (it == null) return@observe
-            binding.progress.visibility = View.GONE
+            binding.progress.isGone = true
             if (it.disabled) {
-                binding.errorTV.visibility = View.VISIBLE
+                binding.errorTV.isVisible = true
                 return@observe
             }
             (parentFragment as CommentsSheet).updateFragmentInfo(
@@ -94,7 +95,7 @@ class CommentsMainFragment : Fragment() {
             )
             if (it.comments.isEmpty()) {
                 binding.errorTV.text = getString(R.string.no_comments_available)
-                binding.errorTV.visibility = View.VISIBLE
+                binding.errorTV.isVisible = true
                 return@observe
             }
             commentsAdapter.updateItems(

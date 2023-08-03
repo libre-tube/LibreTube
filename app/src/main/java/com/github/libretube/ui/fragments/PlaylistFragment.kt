@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -90,7 +91,7 @@ class PlaylistFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.playlistRecView.layoutManager = LinearLayoutManager(context)
-        binding.playlistProgress.visibility = View.VISIBLE
+        binding.playlistProgress.isVisible = true
 
         isBookmarked = runBlocking(Dispatchers.IO) {
             DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId!!)
@@ -118,7 +119,7 @@ class PlaylistFragment : Fragment() {
     }
 
     private fun fetchPlaylist() {
-        binding.playlistScrollview.visibility = View.GONE
+        binding.playlistScrollview.isGone = true
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
                 val response = try {
@@ -132,12 +133,12 @@ class PlaylistFragment : Fragment() {
                 val binding = _binding ?: return@repeatOnLifecycle
 
                 playlistFeed = response.relatedStreams.toMutableList()
-                binding.playlistScrollview.visibility = View.VISIBLE
+                binding.playlistScrollview.isVisible = true
                 nextPage = response.nextpage
                 playlistName = response.name
                 isLoading = false
                 ImageHelper.loadImage(response.thumbnailUrl, binding.thumbnail)
-                binding.playlistProgress.visibility = View.GONE
+                binding.playlistProgress.isGone = true
                 binding.playlistName.text = response.name
 
                 binding.playlistName.setOnClickListener {

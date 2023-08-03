@@ -3,13 +3,14 @@ package com.github.libretube.ui.adapters
 import android.annotation.SuppressLint
 import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
@@ -79,10 +80,10 @@ class CommentsAdapter(
             ImageHelper.loadImage(comment.thumbnail, commentorImage)
             likesTextView.text = comment.likeCount.formatShort()
 
-            if (comment.verified) verifiedImageView.visibility = View.VISIBLE
-            if (comment.pinned) pinnedImageView.visibility = View.VISIBLE
-            if (comment.hearted) heartedImageView.visibility = View.VISIBLE
-            if (comment.repliesPage != null) repliesCount.visibility = View.VISIBLE
+            if (comment.verified) verifiedImageView.isVisible = true
+            if (comment.pinned) pinnedImageView.isVisible = true
+            if (comment.hearted) heartedImageView.isVisible = true
+            if (comment.repliesPage != null) repliesCount.isVisible = true
             if (comment.replyCount > 0L) {
                 repliesCount.text = comment.replyCount.formatShort()
             }
@@ -93,7 +94,7 @@ class CommentsAdapter(
             }
 
             if (isRepliesAdapter) {
-                repliesCount.visibility = View.GONE
+                repliesCount.isGone = true
 
                 // highlight the comment that is being replied to
                 if (comment == comments.firstOrNull()) {

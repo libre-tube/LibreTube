@@ -2,10 +2,7 @@ package com.github.libretube.ui.activities
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.R
-import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.VideoTagRowBinding
 import com.github.libretube.ui.viewholders.VideoTagsViewHolder
 

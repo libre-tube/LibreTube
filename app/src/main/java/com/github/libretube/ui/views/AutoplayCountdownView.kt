@@ -5,9 +5,9 @@ import android.os.Handler
 import android.os.Looper
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.FrameLayout
 import androidx.core.os.postDelayed
+import androidx.core.view.isVisible
 import com.github.libretube.R
 import com.github.libretube.databinding.AutoplayCountdownBinding
 
@@ -34,7 +34,7 @@ class AutoplayCountdownView(
     }
 
     fun startCountdown(onEnd: () -> Unit) {
-        this.visibility = View.VISIBLE
+        this.isVisible = true
         onCountdownEnd = {
             hideSelf.invoke()
             onEnd.invoke()

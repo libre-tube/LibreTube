@@ -1,7 +1,8 @@
 package com.github.libretube.ui.extensions
 
-import android.view.View
 import android.widget.TextView
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
 import com.google.android.material.button.MaterialButton
@@ -28,9 +29,9 @@ fun TextView.setupSubscriptionButton(
             if (subscribed == true) {
                 this@setupSubscriptionButton.text = context.getString(R.string.unsubscribe)
             } else {
-                notificationBell?.visibility = View.GONE
+                notificationBell?.isGone = true
             }
-            this@setupSubscriptionButton.visibility = View.VISIBLE
+            this@setupSubscriptionButton.isVisible = true
         }
     }
 
@@ -39,14 +40,14 @@ fun TextView.setupSubscriptionButton(
         if (subscribed == true) {
             SubscriptionHelper.handleUnsubscribe(context, channelId, channelName) {
                 this.text = context.getString(R.string.subscribe)
-                notificationBell?.visibility = View.GONE
+                notificationBell?.isGone = true
                 subscribed = false
             }
         } else {
             runBlocking {
                 SubscriptionHelper.subscribe(channelId)
                 text = context.getString(R.string.unsubscribe)
-                notificationBell?.visibility = View.VISIBLE
+                notificationBell?.isVisible = true
                 subscribed = true
             }
         }

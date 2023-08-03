@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.children
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -164,7 +166,7 @@ class ChannelFragment : Fragment() {
                 isLoading = false
                 binding.channelRefresh.isRefreshing = false
 
-                binding.channelScrollView.visibility = View.VISIBLE
+                binding.channelScrollView.isVisible = true
                 binding.channelName.text = response.name
                 if (response.verified) {
                     binding.channelName.setCompoundDrawablesWithIntrinsicBounds(
@@ -179,7 +181,7 @@ class ChannelFragment : Fragment() {
                     response.subscriberCount.formatShort()
                 )
                 if (response.description.orEmpty().isBlank()) {
-                    binding.channelDescription.visibility = View.GONE
+                    binding.channelDescription.isGone = true
                 } else {
                     binding.channelDescription.text = response.description.orEmpty().trim()
                 }
@@ -209,7 +211,7 @@ class ChannelFragment : Fragment() {
         binding.tabChips.children.forEach { chip ->
             val resourceTab = possibleTabs.firstOrNull { it.chipId == chip.id }
             resourceTab?.let { resTab ->
-                if (tabs.any { it.name == resTab.identifierName }) chip.visibility = View.VISIBLE
+                if (tabs.any { it.name == resTab.identifierName }) chip.isVisible = true
             }
         }
 

@@ -4,6 +4,8 @@ import android.graphics.Color
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.ColorUtils
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.helpers.ThemeHelper
@@ -19,11 +21,19 @@ fun View.setWatchProgressLength(videoId: String, duration: Long) {
     updateLayoutParams<ConstraintLayout.LayoutParams> {
         matchConstraintPercentWidth = 0f
     }
-    var backgroundColor = MaterialColors.getColor(this, com.google.android.material.R.attr.colorPrimaryDark)
+    var backgroundColor = MaterialColors.getColor(
+        this,
+        com.google.android.material.R.attr.colorPrimaryDark
+    )
     // increase the brightness for better contrast in light mode
-    if (!ThemeHelper.isDarkMode(context)) backgroundColor = ColorUtils.blendARGB(backgroundColor, Color.WHITE, 0.4f)
+    if (!ThemeHelper.isDarkMode(
+            context
+        )
+    ) {
+        backgroundColor = ColorUtils.blendARGB(backgroundColor, Color.WHITE, 0.4f)
+    }
     setBackgroundColor(backgroundColor)
-    visibility = View.GONE
+    isGone = true
 
     val progress = try {
         runBlocking {
@@ -41,5 +51,5 @@ fun View.setWatchProgressLength(videoId: String, duration: Long) {
     updateLayoutParams<ConstraintLayout.LayoutParams> {
         matchConstraintPercentWidth = progress / duration.toFloat()
     }
-    visibility = View.VISIBLE
+    isVisible = true
 }

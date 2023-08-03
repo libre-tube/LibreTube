@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -94,10 +96,10 @@ class CommentsRepliesFragment : Fragment() {
         nextPage: String,
         repliesAdapter: CommentsAdapter
     ) {
-        binding.progress.visibility = View.VISIBLE
+        binding.progress.isVisible = true
         fetchReplies(videoId, nextPage) {
             repliesAdapter.updateItems(it.comments)
-            binding.progress.visibility = View.GONE
+            binding.progress.isGone = true
         }
     }
 

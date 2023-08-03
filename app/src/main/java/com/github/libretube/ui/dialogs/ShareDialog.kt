@@ -3,7 +3,6 @@ package com.github.libretube.ui.dialogs
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
@@ -87,7 +86,7 @@ class ShareDialog(
         }
         binding.timeStamp.setText((shareData.currentPosition ?: 0L).toString())
         if (binding.timeCodeSwitch.isChecked) {
-            binding.timeStampLayout.visibility = View.VISIBLE
+            binding.timeStampLayout.isVisible = true
         }
     }
 

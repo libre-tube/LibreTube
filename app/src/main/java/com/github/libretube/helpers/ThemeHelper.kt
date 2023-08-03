@@ -15,7 +15,6 @@ import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.ui.adapters.IconsSheetAdapter
 import com.google.android.material.color.DynamicColors
-import java.lang.IllegalArgumentException
 
 object ThemeHelper {
 

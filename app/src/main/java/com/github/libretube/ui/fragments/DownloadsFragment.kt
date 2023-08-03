@@ -9,6 +9,8 @@ import android.os.IBinder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -80,8 +82,8 @@ class DownloadsFragment : Fragment() {
         downloads.clear()
         downloads.addAll(dbDownloads)
 
-        binding.downloadsEmpty.visibility = View.GONE
-        binding.downloads.visibility = View.VISIBLE
+        binding.downloadsEmpty.isGone = true
+        binding.downloads.isVisible = true
 
         binding.downloads.layoutManager = LinearLayoutManager(context)
 
@@ -139,8 +141,8 @@ class DownloadsFragment : Fragment() {
                     super.onItemRangeRemoved(positionStart, itemCount)
                     val binding = _binding ?: return
                     if (binding.downloads.adapter?.itemCount == 0) {
-                        binding.downloads.visibility = View.GONE
-                        binding.downloadsEmpty.visibility = View.VISIBLE
+                        binding.downloads.isGone = true
+                        binding.downloadsEmpty.isVisible = true
                     }
                 }
             }
@@ -185,13 +187,13 @@ class DownloadsFragment : Fragment() {
                 }
 
                 DownloadStatus.Completed -> {
-                    downloadOverlay.visibility = View.GONE
+                    downloadOverlay.isGone = true
                 }
 
                 DownloadStatus.Stopped -> Unit
 
                 is DownloadStatus.Progress -> {
-                    downloadOverlay.visibility = View.VISIBLE
+                    downloadOverlay.isVisible = true
                     resumePauseBtn.setImageResource(R.drawable.ic_pause)
                     if (progressBar.isIndeterminate) return
                     progressBar.incrementProgressBy(status.progress.toInt())

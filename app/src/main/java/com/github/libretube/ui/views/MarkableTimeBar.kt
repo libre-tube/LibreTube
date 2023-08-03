@@ -11,7 +11,6 @@ import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.ui.DefaultTimeBar
 import com.github.libretube.api.obj.Segment
-import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ThemeHelper

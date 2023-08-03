@@ -7,7 +7,6 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ScrollView
 import androidx.activity.addCallback
@@ -16,6 +15,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.children
+import androidx.core.view.isVisible
 import androidx.core.widget.NestedScrollView
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -311,7 +311,10 @@ class MainActivity : BaseActivity() {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                navController.navigate(R.id.searchResultFragment, bundleOf(IntentData.query to query))
+                navController.navigate(
+                    R.id.searchResultFragment,
+                    bundleOf(IntentData.query to query)
+                )
                 searchView.clearFocus()
                 return true
             }
@@ -337,7 +340,10 @@ class MainActivity : BaseActivity() {
                 }
 
                 if (navController.currentDestination?.id != R.id.searchFragment) {
-                    navController.navigate(R.id.searchFragment, bundleOf(IntentData.query to newText))
+                    navController.navigate(
+                        R.id.searchFragment,
+                        bundleOf(IntentData.query to newText)
+                    )
                 } else {
                     searchViewModel.setQuery(newText)
                 }
@@ -482,7 +488,7 @@ class MainActivity : BaseActivity() {
         supportFragmentManager.fragments.forEach { fragment ->
             (fragment as? PlayerFragment)?.binding?.apply {
                 mainContainer.isClickable = false
-                linLayout.visibility = View.VISIBLE
+                linLayout.isVisible = true
                 playerMotionLayout.setTransitionDuration(250)
                 playerMotionLayout.transitionToEnd()
                 playerMotionLayout.getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)

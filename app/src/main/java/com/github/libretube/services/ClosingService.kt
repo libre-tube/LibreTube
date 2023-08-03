@@ -3,7 +3,6 @@ package com.github.libretube.services
 import android.app.NotificationManager
 import android.app.Service
 import android.content.Intent
-import android.os.IBinder
 import androidx.core.content.getSystemService
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 

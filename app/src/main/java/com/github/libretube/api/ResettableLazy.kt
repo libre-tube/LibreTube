@@ -1,6 +1,6 @@
 package com.github.libretube.api
 
-import java.util.*
+import java.util.LinkedList
 import kotlin.reflect.KProperty
 
 class ResettableLazyManager {

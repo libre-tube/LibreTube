@@ -275,7 +275,7 @@ open class CustomExoPlayerView(
         if (PlayerHelper.doubleTapToSeek) return
 
         listOf(binding.forwardBTN, binding.rewindBTN).forEach {
-            it.visibility = View.VISIBLE
+            it.isVisible = true
         }
     }
 
@@ -372,7 +372,7 @@ open class CustomExoPlayerView(
             // start callback to hide the button
             runnableHandler.removeCallbacksAndMessages(HIDE_REWIND_BUTTON_TOKEN)
             runnableHandler.postDelayed(700, HIDE_REWIND_BUTTON_TOKEN) {
-                rewindBTN.visibility = View.GONE
+                rewindBTN.isGone = true
             }
         }
     }
@@ -387,7 +387,7 @@ open class CustomExoPlayerView(
             // start callback to hide the button
             runnableHandler.removeCallbacksAndMessages(HIDE_FORWARD_BUTTON_TOKEN)
             runnableHandler.postDelayed(700, HIDE_FORWARD_BUTTON_TOKEN) {
-                forwardBTN.visibility = View.GONE
+                forwardBTN.isGone = true
             }
         }
     }
@@ -398,7 +398,7 @@ open class CustomExoPlayerView(
         textView: TextView,
         isRewind: Boolean
     ) {
-        container.visibility = View.VISIBLE
+        container.isVisible = true
         // the direction of the action
         val direction = if (isRewind) -1 else 1
 
@@ -452,7 +452,7 @@ open class CustomExoPlayerView(
     }
 
     private fun updateBrightness(distance: Float) {
-        gestureViewBinding.brightnessControlView.visibility = View.VISIBLE
+        gestureViewBinding.brightnessControlView.isVisible = true
         val bar = gestureViewBinding.brightnessProgressBar
 
         if (bar.progress == 0) {
@@ -477,7 +477,7 @@ open class CustomExoPlayerView(
         val bar = gestureViewBinding.volumeProgressBar
         gestureViewBinding.volumeControlView.apply {
             if (visibility == View.GONE) {
-                visibility = View.VISIBLE
+                isVisible = true
                 // Volume could be changed using other mediums, sync progress
                 // bar with new value.
                 bar.progress = audioHelper.getVolumeWithScale(bar.max)
@@ -679,8 +679,8 @@ open class CustomExoPlayerView(
     }
 
     override fun onSwipeEnd() {
-        gestureViewBinding.brightnessControlView.visibility = View.GONE
-        gestureViewBinding.volumeControlView.visibility = View.GONE
+        gestureViewBinding.brightnessControlView.isGone = true
+        gestureViewBinding.volumeControlView.isGone = true
     }
 
     override fun onZoom() {

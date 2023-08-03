@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.postDelayed
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -71,8 +73,8 @@ class WatchHistoryFragment : Fragment() {
                 .setTitle(R.string.clear_history)
                 .setMessage(R.string.irreversible)
                 .setPositiveButton(R.string.okay) { _, _ ->
-                    binding.historyScrollView.visibility = View.GONE
-                    binding.historyEmpty.visibility = View.VISIBLE
+                    binding.historyScrollView.isGone = true
+                    binding.historyEmpty.isVisible = true
                     lifecycleScope.launch(Dispatchers.IO) {
                         Database.watchHistoryDao().deleteAll()
                     }
@@ -110,8 +112,8 @@ class WatchHistoryFragment : Fragment() {
 
         binding.watchHistoryRecView.layoutManager = LinearLayoutManager(context)
         binding.watchHistoryRecView.adapter = watchHistoryAdapter
-        binding.historyEmpty.visibility = View.GONE
-        binding.historyScrollView.visibility = View.VISIBLE
+        binding.historyEmpty.isGone = true
+        binding.historyScrollView.isVisible = true
 
         val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
             0,
@@ -142,8 +144,8 @@ class WatchHistoryFragment : Fragment() {
             RecyclerView.AdapterDataObserver() {
             override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
                 if (watchHistoryAdapter.itemCount == 0) {
-                    binding.historyScrollView.visibility = View.GONE
-                    binding.historyEmpty.visibility = View.VISIBLE
+                    binding.historyScrollView.isGone = true
+                    binding.historyEmpty.isVisible = true
                 }
             }
         })
