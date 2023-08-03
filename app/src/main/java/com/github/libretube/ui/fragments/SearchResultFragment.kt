@@ -34,10 +34,10 @@ class SearchResultFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var nextPage: String? = null
-    private var query: String = ""
+    private var query = ""
 
     private lateinit var searchAdapter: SearchAdapter
-    private var apiSearchFilter: String = "all"
+    private var apiSearchFilter = "all"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

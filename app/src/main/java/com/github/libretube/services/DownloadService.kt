@@ -183,7 +183,7 @@ class DownloadService : LifecycleService() {
                 val sourceByte = con.inputStream.source()
 
                 var lastTime = System.currentTimeMillis() / 1000
-                var lastRead: Long = 0
+                var lastRead = 0L
 
                 try {
                     // Check if downloading is still active and read next bytes.

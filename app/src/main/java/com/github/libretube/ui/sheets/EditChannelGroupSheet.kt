@@ -25,7 +25,7 @@ class EditChannelGroupSheet(
 ) : ExpandedBottomSheet() {
     private val subscriptionsModel: SubscriptionsViewModel by activityViewModels()
     private lateinit var binding: DialogEditChannelGroupBinding
-    private var channels: List<Subscription> = listOf()
+    private var channels = listOf<Subscription>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

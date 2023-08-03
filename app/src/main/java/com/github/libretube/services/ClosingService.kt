@@ -9,9 +9,7 @@ import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 
 class ClosingService : Service() {
 
-    override fun onBind(intent: Intent?): IBinder? {
-        return null
-    }
+    override fun onBind(intent: Intent?) = null
 
     // Handle application closing
     override fun onTaskRemoved(rootIntent: Intent?) {

@@ -17,13 +17,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SubscriptionsViewModel : ViewModel() {
-    var videoFeed = MutableLiveData<List<StreamItem>?>().apply {
-        value = null
-    }
+    var videoFeed = MutableLiveData<List<StreamItem>?>()
 
-    var subscriptions = MutableLiveData<List<Subscription>?>().apply {
-        value = null
-    }
+    var subscriptions = MutableLiveData<List<Subscription>?>()
 
     fun fetchFeed(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {

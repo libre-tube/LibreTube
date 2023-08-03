@@ -42,7 +42,7 @@ class SubscriptionsFragment : Fragment() {
 
     private val viewModel: SubscriptionsViewModel by activityViewModels()
     private val playerModel: PlayerViewModel by activityViewModels()
-    private var channelGroups: List<SubscriptionGroup> = listOf()
+    private var channelGroups = listOf<SubscriptionGroup>()
     private var selectedFilterGroup = 0
     private var isCurrentTabSubChannels = false
 

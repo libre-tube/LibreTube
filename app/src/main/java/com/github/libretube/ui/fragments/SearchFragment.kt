@@ -29,7 +29,6 @@ import kotlinx.coroutines.withContext
 class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
-
     private val viewModel: SearchViewModel by activityViewModels()
 
     private var query: String? = null
