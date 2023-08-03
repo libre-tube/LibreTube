@@ -228,7 +228,7 @@
     <string name="save_feed_summary">ସବସ୍କ୍ରିପସନ୍ ଫିଡ୍ ପୃଷ୍ଠଭୂମିରେ ଲୋଡ୍ କରନ୍ତୁ ଏବଂ ଏହାକୁ ସ୍ଵତଃ-ସତେଜ ହେବାକୁ ପ୍ରତିରୋଧ କରନ୍ତୁ ।</string>
     <string name="navigation_bar">ନାଭିଗେସନ୍ ବାର୍</string>
     <string name="change_region">ସାମ୍ପ୍ରତିକ ଭାବେ ଟ୍ରେଡିଂ ଏହି ଜାଗାରେ ନାହିଁ ।</string>
-    <string name="added_to_playlist">ପ୍ଲେ ଲିଷ୍ଟରେ ଯୋଡା ଯାଇଛି</string>
+    <string name="added_to_playlist">%1$s ପ୍ଲେ ଲିଷ୍ଟରେ ଯୋଡା ଯାଇଛି</string>
     <string name="playlists_order">ପ୍ଲେଲିଷ୍ଟ କ୍ରମ</string>
     <string name="reset">ଡିଫଲ୍ଟଗୁଡିକ ପୁନରୁଦ୍ଧାର କରନ୍ତୁ</string>
     <string name="reset_message">ସମସ୍ତ ସେଟିଂସମୂହ ପୁନ ରିସେଟ୍ କରନ୍ତୁ ଏବଂ ଲଗ୍ ଆଉଟ୍ କରନ୍ତୁ \?</string>
@@ -282,7 +282,7 @@
     <string name="skip_buttons_summary">ପରବର୍ତ୍ତୀ କିମ୍ବା ପୂର୍ବ ଭିଡିଓକୁ ଯିବାକୁ ବଟନ୍ ଦେଖାନ୍ତୁ ।</string>
     <string name="take_a_break">ବିରତି ପାଇଁ ସମୟ</string>
     <string name="add_to_queue">ଧାଡିରେ ଯୋଡନ୍ତୁ</string>
-    <string name="picture_in_picture">ଛବିରେ ଛବି</string>
+    <string name="picture_in_picture">ଛବି ରେ ଛବି</string>
     <string name="backup_restore">ନକଲ ଓ ସଂରକ୍ଷଣ</string>
     <string name="subscriptions">ସଦସ୍ୟତା ଗୁଡ଼ିକ</string>
     <string name="livestreams">ସିଧପ୍ରସାରଣ ଷ୍ଟ୍ରୀମ ଗୁଡ଼ିକ</string>
@@ -450,7 +450,7 @@
     <string name="color">ରଙ୍ଗ</string>
     <string name="sb_custom_colors">କଷ୍ଟମ୍ ସେଗମେଣ୍ଟ୍ ରଙ୍ଗ</string>
     <string name="enter_hex_value">ରଙ୍ଗ ହେକ୍ସ ମୂଲ୍ୟ ପ୍ରବେଶ କରନ୍ତୁ</string>
-    <string name="sb_color_enable">ପ୍ରାୟୋଜକ ବ୍ଲକ୍ ସେଗମେଣ୍ଟଗୁଡିକ ପାଇଁ କଷ୍ଟମ୍ ରଙ୍ଗ ସେଗମେଣ୍ଟଗୁଡିକ ଟୋଗଲ୍ କରନ୍ତୁ</string>
+    <string name="sb_color_enable">ପ୍ରାୟୋଜକ ବ୍ଲକ୍ ସେଗମେଣ୍ଟଗୁଡିକ ପାଇଁ କଷ୍ଟମ୍ ରଙ୍ଗ ସେଗମେଣ୍ଟଗୁଡିକ ଟୋଗଲ୍ କରନ୍ତୁ ।</string>
     <string name="jumped_to_highlight">ଭିଡିଓ ହାଇଲାଇଟ୍ କୁ ଡେଇଁଲେ</string>
     <string name="category_highlight">ଭିଡିଓ ହାଇଲାଇଟ୍ ଦେଖନ୍ତୁ</string>
     <string name="category_highlight_description">ବିଜ୍ଞାପନର ଟାଇଟଲ୍, ଥମ୍ବନେଲ କିମ୍ବା ଭିଡିଓର ସବୁଠାରୁ ଆକର୍ଷଣୀୟ ଅଂଶ ହୋଇପାରେ । ଆପଣ ଏହାକୁ ଅଧ୍ୟାୟ ବିଭାଗରେ ଟ୍ୟାପ୍ କରି ଏହାକୁ ଛାଡି ପାରିବେ ।</string>
@@ -460,4 +460,18 @@
     <string name="stop">ବନ୍ଦ କର</string>
     <string name="fallback_piped_proxy">ପାଇପ୍ ପ୍ରକ୍ସି କୁ ଫେରନ୍ତୁ</string>
     <string name="fallback_piped_proxy_desc">ଯଦି YouTube କୁ ସିଧାସଳଖ ସଂଯୋଗ କରିବା ସମ୍ପ୍ରତି ଭିଡିଓ ପାଇଁ କାମ କରେ ନାହିଁ (ପ୍ରାରମ୍ଭିକ ଲୋଡିଂ ସମୟ ବୃଦ୍ଧି କରେ) ତେବେ ପ୍ରୋକ୍ସି ମାଧ୍ୟମରେ ଭିଡିଓ ଲୋଡ୍ କରନ୍ତୁ। ଯଦି ଅକ୍ଷମ ହୋଇଛି, YT ପ୍ରତିବନ୍ଧକ କାରଣରୁ YouTube ସଙ୍ଗୀତ ବିଷୟବସ୍ତୁ ସମ୍ଭବତଃ ଚାଳନ ହେବ ନାହିଁ।</string>
+    <string name="dearrow">DeArrow କୁ ସକ୍ରିୟ କରନ୍ତୁ</string>
+    <string name="dearrow_summary">ଅଧିକ ସଠିକ ଏବଂ କମ୍ ସମ୍ବେଦନଶୀଳତା ବିଶିଷ୍ଟ ଶୀର୍ଷକ ଏବଂ ଅକ୍ଷରଗୁଡ଼ିକୁ ଦର୍ଶାନ୍ତୁ । ଲୋଡିଂ ସମୟ ବଢାଇଥାଏ ।</string>
+    <string name="audio_track_format">%1$s ଠାରୁ %2$s</string>
+    <string name="unknown_audio_track_type">ଅଜଣା ଧ୍ୱନି ଟ୍ରାକ୍ ର ପ୍ରକାର</string>
+    <string name="original_or_main_audio_track">ମୂଳ କିମ୍ବା ମୁଖ୍ୟ</string>
+    <string name="dubbed_audio_track">ଡବିଙ୍ଗ୍ ହୋଇଛି</string>
+    <string name="descriptive_audio_track">ବର୍ଣ୍ଣନାତ୍ମକ</string>
+    <string name="continue_watching">ଦେଖିବା ଜାରି ରଖନ୍ତୁ</string>
+    <string name="visibility">ଦୃଶ୍ୟମାନତା</string>
+    <string name="visibility_public">ସାର୍ବଜନୀନ</string>
+    <string name="default_or_unknown_audio_track">ପୂର୍ବନିର୍ଦ୍ଧାରିତ କିମ୍ବା ଅଜଣା</string>
+    <string name="unknown_audio_language">ଅଜଣା ଧ୍ୱନି ଭାଷା</string>
+    <string name="unknown_or_no_audio">ଅଜଣା କିମ୍ବା କୌଣସି ଧ୍ୱନି ନାହିଁ</string>
+    <string name="visibility_unlisted">ତାଲିକାହୀନ</string>
 </resources>
