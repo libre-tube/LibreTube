@@ -5,10 +5,10 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
 import android.widget.PopupMenu
 import androidx.core.view.forEach
 import androidx.core.view.get
+import androidx.core.view.isGone
 import androidx.core.view.size
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
@@ -107,7 +107,7 @@ object NavBarHelper {
                 ).icon = menuItem.icon
             }
         }
-        if (navBarItems.filter { it.isVisible }.isEmpty()) bottomNav.visibility = View.GONE
+        if (navBarItems.none { it.isVisible }) bottomNav.isGone = true
 
         return getStartFragmentId(bottomNav.context)
     }

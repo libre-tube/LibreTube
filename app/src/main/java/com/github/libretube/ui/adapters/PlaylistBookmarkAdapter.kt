@@ -1,9 +1,9 @@
 package com.github.libretube.ui.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.databinding.PlaylistBookmarkRowBinding
@@ -87,7 +87,7 @@ class PlaylistBookmarkAdapter(
                     }
                 }
             }
-            bookmarkPlaylist.visibility = View.VISIBLE
+            bookmarkPlaylist.isVisible = true
 
             root.setOnClickListener {
                 NavigationHelper.navigatePlaylist(

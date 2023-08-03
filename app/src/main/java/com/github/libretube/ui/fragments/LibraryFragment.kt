@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
@@ -65,7 +66,7 @@ class LibraryFragment : Fragment() {
         val watchHistoryEnabled =
             PreferenceHelper.getBoolean(PreferenceKeys.WATCH_HISTORY_TOGGLE, true)
         if (!watchHistoryEnabled) {
-            binding.watchHistory.visibility = View.GONE
+            binding.watchHistory.isGone = true
         } else {
             binding.watchHistory.setOnClickListener {
                 findNavController().navigate(R.id.watchHistoryFragment)
@@ -78,7 +79,7 @@ class LibraryFragment : Fragment() {
 
         val navBarItems = NavBarHelper.getNavBarItems(requireContext())
         if (navBarItems.filter { it.isVisible }.any { it.itemId == R.id.downloadsFragment }) {
-            binding.downloads.visibility = View.GONE
+            binding.downloads.isGone = true
         }
 
         fetchPlaylists()
@@ -156,10 +157,10 @@ class LibraryFragment : Fragment() {
                         }
                     })
 
-                    binding.nothingHere.visibility = View.GONE
+                    binding.nothingHere.isGone = true
                     binding.playlistRecView.adapter = playlistsAdapter
                 } else {
-                    binding.nothingHere.visibility = View.VISIBLE
+                    binding.nothingHere.isVisible = true
                 }
             }
         }

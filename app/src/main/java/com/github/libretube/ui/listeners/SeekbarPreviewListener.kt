@@ -1,20 +1,20 @@
 package com.github.libretube.ui.listeners
 
 import android.text.format.DateUtils
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.ui.TimeBar
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.ui.interfaces.TimeFrameReceiver
+import kotlin.math.absoluteValue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.math.absoluteValue
 
 @UnstableApi
 class SeekbarPreviewListener(
@@ -69,7 +69,7 @@ class SeekbarPreviewListener(
             .translationYBy(30f)
             .setDuration(200)
             .withEndAction {
-                playerBinding.seekbarPreview.visibility = View.GONE
+                playerBinding.seekbarPreview.isGone = true
                 playerBinding.seekbarPreview.translationY -= 30f
                 playerBinding.seekbarPreview.alpha = 1f
             }

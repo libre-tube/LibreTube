@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.text.InputFilter
 import android.text.format.Formatter
 import android.util.Log
-import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isGone
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -112,7 +112,7 @@ class DownloadDialog(
             .filter { !it.url.isNullOrEmpty() && !it.name.isNullOrEmpty() }
             .sortedBy { it.name }
 
-        if (subtitles.isEmpty()) binding.subtitleSpinner.visibility = View.GONE
+        if (subtitles.isEmpty()) binding.subtitleSpinner.isGone = true
 
         // initialize the video sources
         val videoArrayAdapter = ArrayAdapter(

@@ -201,8 +201,8 @@ class HomeFragment : Fragment() {
             override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
                 super.onItemRangeRemoved(positionStart, itemCount)
                 if (itemCount == 0) {
-                    binding.playlistsRV.visibility = View.GONE
-                    binding.playlistsTV.visibility = View.GONE
+                    binding.playlistsRV.isGone = true
+                    binding.playlistsTV.isGone = true
                 }
             }
         })

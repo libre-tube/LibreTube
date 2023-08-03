@@ -307,7 +307,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initializeTransitionLayout() {
-        mainActivity.binding.container.visibility = View.VISIBLE
+        mainActivity.binding.container.isVisible = true
         val mainMotionLayout = mainActivity.binding.mainMotionLayout
 
         binding.playerMotionLayout.addTransitionListener(object : TransitionAdapter() {
@@ -381,7 +381,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             BackgroundHelper.stopBackgroundPlay(requireContext())
             killPlayerFragment()
         }
-        playerBinding.autoPlay.visibility = View.VISIBLE
+        playerBinding.autoPlay.isVisible = true
 
         binding.playImageView.setOnClickListener {
             when {
@@ -407,7 +407,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             CommentsSheet().show(childFragmentManager)
         }
 
-        playerBinding.queueToggle.visibility = View.VISIBLE
+        playerBinding.queueToggle.isVisible = true
         playerBinding.queueToggle.setOnClickListener {
             PlayingQueueSheet().show(childFragmentManager, null)
         }
@@ -532,10 +532,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         windowInsetsControllerCompat.isAppearanceLightStatusBars = false
 
         binding.mainContainer.isClickable = true
-        binding.linLayout.visibility = View.GONE
+        binding.linLayout.isGone = true
         commentsViewModel.setCommentSheetExpand(null)
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
-        playerBinding.exoTitle.visibility = View.VISIBLE
+        playerBinding.exoTitle.isVisible = true
 
         updateFullscreenOrientation()
         viewModel.isFullscreen.value = true
@@ -558,9 +558,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
 
         binding.mainContainer.isClickable = false
-        binding.linLayout.visibility = View.VISIBLE
+        binding.linLayout.isVisible = true
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
-        playerBinding.exoTitle.visibility = View.INVISIBLE
+        playerBinding.exoTitle.isInvisible = true
 
         if (!PlayerHelper.autoRotationEnabled) {
             // switch back to portrait mode if autorotation disabled
@@ -582,14 +582,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         if (binding.descLinLayout.isVisible) {
             // hide the description and chapters
             binding.playerDescriptionArrow.animate().rotation(0F).setDuration(250).start()
-            binding.descLinLayout.visibility = View.GONE
+            binding.descLinLayout.isGone = true
 
             // limit the title height to two lines
             binding.playerTitle.maxLines = 2
         } else {
             // show the description and chapters
             binding.playerDescriptionArrow.animate().rotation(180F).setDuration(250).start()
-            binding.descLinLayout.visibility = View.VISIBLE
+            binding.descLinLayout.isVisible = true
 
             // show the whole title
             binding.playerTitle.maxLines = Int.MAX_VALUE
@@ -688,7 +688,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private fun playVideo() {
         // reset the player view
         playerBinding.exoProgress.clearSegments()
-        playerBinding.sbToggle.visibility = View.GONE
+        playerBinding.sbToggle.isGone = true
 
         // reset the comments to become reloaded later
         commentsViewModel.reset()
@@ -743,7 +743,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             withContext(Dispatchers.Main) {
                 // hide the button to skip SponsorBlock segments manually
-                binding.sbSkipBtn.visibility = View.GONE
+                binding.sbSkipBtn.isGone = true
 
                 // set media sources for the player
                 initStreamSources()
@@ -761,7 +761,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 if (binding.playerMotionLayout.progress != 1.0f) {
                     // show controllers when not in picture in picture mode
                     val inPipMode = PlayerHelper.pipEnabled &&
-                            PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
+                        PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
                     if (!inPipMode) {
                         binding.player.useController = true
                     }
@@ -799,7 +799,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
                 withContext(Dispatchers.Main) {
                     playerBinding.exoProgress.setSegments(segments)
-                    playerBinding.sbToggle.visibility = View.VISIBLE
+                    playerBinding.sbToggle.isVisible = true
                     updateDisplayedDuration()
                 }
                 segments.firstOrNull { it.category == SPONSOR_HIGHLIGHT_CATEGORY }?.let {
@@ -991,8 +991,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }.orEmpty()
         binding.additionalVideoInfo.text =
             "${context?.getString(R.string.category)}: ${streams.category}\n" +
-                    "${context?.getString(R.string.license)}: ${streams.license}\n" +
-                    "${context?.getString(R.string.visibility)}: $visibility"
+            "${context?.getString(R.string.license)}: ${streams.license}\n" +
+            "${context?.getString(R.string.visibility)}: $visibility"
 
         if (streams.tags.isNotEmpty()) {
             binding.tagsRecycler.layoutManager =
@@ -1041,7 +1041,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         binding.autoplayCountdown.setHideSelfListener {
             // could fail if the video already got closed before
             runCatching {
-                binding.autoplayCountdown.visibility = View.GONE
+                binding.autoplayCountdown.isGone = true
                 binding.player.useController = true
             }
         }
@@ -1154,13 +1154,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     private fun initializeChapters() {
         if (chapters.isEmpty()) {
-            binding.chaptersRecView.visibility = View.GONE
-            playerBinding.chapterLL.visibility = View.INVISIBLE
+            binding.chaptersRecView.isGone = true
+            playerBinding.chapterLL.isInvisible = true
             return
         }
         // show the chapter layouts
-        binding.chaptersRecView.visibility = View.VISIBLE
-        playerBinding.chapterLL.visibility = View.VISIBLE
+        binding.chaptersRecView.isVisible = true
+        playerBinding.chapterLL.isVisible = true
 
         // enable chapters in the video description
         binding.chaptersRecView.layoutManager =
@@ -1525,7 +1525,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
                 enableTransition(R.id.yt_transition, false)
             }
-            binding.linLayout.visibility = View.GONE
+            binding.linLayout.isGone = true
 
             updateCaptionsLanguage(null)
         } else {
@@ -1542,7 +1542,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
                     enableTransition(R.id.yt_transition, true)
                 }
-                binding.linLayout.visibility = View.VISIBLE
+                binding.linLayout.isVisible = true
             }
 
             updateCaptionsLanguage(captionLanguage)
@@ -1582,7 +1582,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             .build()
 
     private fun setupSeekbarPreview() {
-        playerBinding.seekbarPreview.visibility = View.GONE
+        playerBinding.seekbarPreview.isGone = true
         playerBinding.exoProgress.addListener(
             SeekbarPreviewListener(
                 OnlineTimeFrameReceiver(requireContext(), streams.previewFrames),

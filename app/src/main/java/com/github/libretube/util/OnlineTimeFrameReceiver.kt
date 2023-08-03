@@ -11,7 +11,7 @@ import com.github.libretube.ui.interfaces.TimeFrameReceiver
 class OnlineTimeFrameReceiver(
     private val context: Context,
     private val previewFrames: List<PreviewFrames>
-): TimeFrameReceiver() {
+) : TimeFrameReceiver() {
     override suspend fun getFrameAtTime(position: Long): Bitmap? {
         val previewFrame = getPreviewFrame(previewFrames, position) ?: return null
         val drawable = ImageHelper.getImage(context, previewFrame.previewUrl).drawable ?: return null

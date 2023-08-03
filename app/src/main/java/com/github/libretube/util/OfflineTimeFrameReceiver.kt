@@ -10,7 +10,7 @@ import java.nio.file.Path
 class OfflineTimeFrameReceiver(
     private val context: Context,
     private val videoSource: Path
-): TimeFrameReceiver() {
+) : TimeFrameReceiver() {
     private val metadataRetriever = MediaMetadataRetriever().apply {
         setDataSource(context, videoSource.toAndroidUri())
     }

@@ -1,7 +1,6 @@
 package com.github.libretube.ui.activities
 
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -97,7 +96,9 @@ class RouterActivity : BaseActivity() {
     private fun handleSendText(uri: Uri) {
         Log.i(TAG(), uri.toString())
 
-        val intent = this.packageManager.getLaunchIntentForPackage(this.packageName)!!.resolveType(uri)
+        val intent = this.packageManager.getLaunchIntentForPackage(
+            this.packageName
+        )!!.resolveType(uri)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finishAndRemoveTask()

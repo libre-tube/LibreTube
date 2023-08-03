@@ -15,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -204,7 +205,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initializeTransitionLayout() {
-        mainActivity.binding.container.visibility = View.VISIBLE
+        mainActivity.binding.container.isVisible = true
         val mainMotionLayout = mainActivity.binding.mainMotionLayout
 
         binding.playerMotionLayout.addTransitionListener(object : TransitionAdapter() {
@@ -259,14 +260,14 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     }
 
     private fun updateThumbnailAsync(thumbnailUrl: String) {
-        binding.progress.visibility = View.VISIBLE
-        binding.thumbnail.visibility = View.GONE
+        binding.progress.isVisible = true
+        binding.thumbnail.isGone = true
 
         ImageHelper.getAsync(requireContext(), thumbnailUrl) {
             binding.thumbnail.setImageBitmap(it)
             binding.miniPlayerThumbnail.setImageBitmap(it)
-            binding.thumbnail.visibility = View.VISIBLE
-            binding.progress.visibility = View.GONE
+            binding.thumbnail.isVisible = true
+            binding.progress.isGone = true
         }
     }
 
@@ -348,19 +349,19 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     }
 
     override fun onSwipe(distanceY: Float) {
-        binding.volumeControls.visibility = View.VISIBLE
+        binding.volumeControls.isVisible = true
         updateVolume(distanceY)
     }
 
     override fun onSwipeEnd() {
-        binding.volumeControls.visibility = View.GONE
+        binding.volumeControls.isGone = true
     }
 
     private fun updateVolume(distance: Float) {
         val bar = binding.volumeProgressBar
         binding.volumeControls.apply {
             if (visibility == View.GONE) {
-                visibility = View.VISIBLE
+                isVisible = true
                 // Volume could be changed using other mediums, sync progress
                 // bar with new value.
                 bar.progress = audioHelper.getVolumeWithScale(bar.max)

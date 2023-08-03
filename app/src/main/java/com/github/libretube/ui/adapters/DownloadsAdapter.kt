@@ -4,9 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
@@ -64,11 +65,11 @@ class DownloadsAdapter(
                 context.getString(R.string.unknown)
             }
             if (downloadSize > currentSize) {
-                downloadOverlay.visibility = View.VISIBLE
+                downloadOverlay.isVisible = true
                 resumePauseBtn.setImageResource(R.drawable.ic_download)
                 fileSize.text = "${currentSize.formatAsFileSize()} / $totalSizeInfo"
             } else {
-                downloadOverlay.visibility = View.GONE
+                downloadOverlay.isGone = true
                 fileSize.text = totalSizeInfo
             }
 

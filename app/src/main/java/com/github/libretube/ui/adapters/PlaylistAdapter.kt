@@ -4,8 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.obj.StreamItem
@@ -67,7 +67,7 @@ class PlaylistAdapter(
         holder.binding.apply {
             videoTitle.text = streamItem.title
             videoInfo.text = streamItem.uploaderName
-            channelImage.visibility = View.GONE
+            channelImage.isGone = true
 
             thumbnailDuration.setFormattedDuration(streamItem.duration!!, streamItem.isShort)
             ImageHelper.loadImage(streamItem.thumbnail, thumbnail)
