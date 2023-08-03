@@ -56,14 +56,6 @@
                     android:src="@drawable/ic_reverse" />
 
                 <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/ic_arrow_down" />
-
-                <ImageView
                     android:id="@+id/repeat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -80,6 +72,24 @@
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:padding="5dp"
                     android:src="@drawable/ic_playlist_add" />
+
+                <ImageView
+                    android:id="@+id/clear_queue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_close" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="10dp"
+                    android:paddingVertical="5dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_arrow_down" />
 
             </LinearLayout>
 
