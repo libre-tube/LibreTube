@@ -146,8 +146,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private lateinit var videoId: String
     private var playlistId: String? = null
     private var channelId: String? = null
-    private var keepQueue: Boolean = false
-    private var timeStamp: Long = 0
+    private var keepQueue = false
+    private var timeStamp = 0L
 
     /**
      * Video information fetched at runtime
@@ -157,8 +157,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     /**
      * for the transition
      */
-    private var sId: Int = 0
-    private var eId: Int = 0
+    private var transitionStartId = 0
+    private var transitionEndId = 0
     private var isTransitioning = true
 
     /**
@@ -166,7 +166,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      */
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var trackSelector: DefaultTrackSelector
-    private var captionLanguage: String? = PlayerHelper.defaultSubtitleCode
+    private var captionLanguage = PlayerHelper.defaultSubtitleCode
 
     private val cronetDataSourceFactory = CronetDataSource.Factory(
         CronetHelper.cronetEngine,
@@ -323,14 +323,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 binding.player.hideController()
                 binding.player.useController = false
                 commentsViewModel.setCommentSheetExpand(false)
-                eId = endId
-                sId = startId
+                transitionEndId = endId
+                transitionStartId = startId
             }
 
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                 if (_binding == null) return
 
-                if (currentId == eId) {
+                if (currentId == transitionEndId) {
                     viewModel.isMiniPlayerVisible.value = true
                     // disable captions temporarily
                     updateCaptionsLanguage(null)
@@ -339,7 +339,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     binding.sbSkipBtn.isGone = true
                     mainMotionLayout.progress = 1F
                     (activity as MainActivity).requestOrientationChange()
-                } else if (currentId == sId) {
+                } else if (currentId == transitionStartId) {
                     viewModel.isMiniPlayerVisible.value = false
                     // re-enable captions
                     updateCaptionsLanguage(captionLanguage)

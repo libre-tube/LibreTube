@@ -51,7 +51,7 @@ class PlaylistFragment : Fragment() {
     // general playlist information
     private var playlistId: String? = null
     private var playlistName: String? = null
-    private var playlistType: PlaylistType = PlaylistType.PUBLIC
+    private var playlistType = PlaylistType.PUBLIC
 
     // runtime variables
     private var playlistFeed = mutableListOf<StreamItem>()

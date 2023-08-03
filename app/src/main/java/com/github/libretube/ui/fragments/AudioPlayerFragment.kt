@@ -53,11 +53,11 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     private val viewModel: PlayerViewModel by activityViewModels()
 
     // for the transition
-    private var sId: Int = 0
-    private var eId: Int = 0
+    private var transitionStartId = 0
+    private var transitionEndId = 0
 
     private var handler = Handler(Looper.getMainLooper())
-    private var isPaused: Boolean = false
+    private var isPaused = false
 
     private var playerService: OnlinePlayerService? = null
 
@@ -215,15 +215,15 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
                 progress: Float
             ) {
                 mainMotionLayout.progress = abs(progress)
-                eId = endId
-                sId = startId
+                transitionEndId = endId
+                transitionStartId = startId
             }
 
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
-                if (currentId == eId) {
+                if (currentId == transitionEndId) {
                     viewModel.isMiniPlayerVisible.value = true
                     mainMotionLayout.progress = 1F
-                } else if (currentId == sId) {
+                } else if (currentId == transitionStartId) {
                     viewModel.isMiniPlayerVisible.value = false
                     mainMotionLayout.progress = 0F
                 }

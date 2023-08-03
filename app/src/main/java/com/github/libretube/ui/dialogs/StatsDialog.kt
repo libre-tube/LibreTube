@@ -16,6 +16,7 @@ class StatsDialog(
 ) : DialogFragment() {
 
     @SuppressLint("SetTextI18n")
+    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogStatsBinding.inflate(layoutInflater)
         binding.videoId.setText(videoId)

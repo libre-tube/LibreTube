@@ -77,9 +77,8 @@ class OnlinePlayerService : LifecycleService() {
     /**
      * SponsorBlock Segment data
      */
-    private var segments: List<Segment> = listOf()
-    private var sponsorBlockConfig: MutableMap<String, SbSkipOptions> =
-        PlayerHelper.getSponsorBlockCategories()
+    private var segments = listOf<Segment>()
+    private var sponsorBlockConfig = PlayerHelper.getSponsorBlockCategories()
 
     /**
      * [Notification] for the player

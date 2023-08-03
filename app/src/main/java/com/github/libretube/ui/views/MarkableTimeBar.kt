@@ -26,7 +26,7 @@ class MarkableTimeBar(
     attributeSet: AttributeSet? = null
 ) : DefaultTimeBar(context, attributeSet) {
 
-    private var segments: List<Segment> = listOf()
+    private var segments = listOf<Segment>()
     private var player: Player? = null
     private var length: Int = 0
 

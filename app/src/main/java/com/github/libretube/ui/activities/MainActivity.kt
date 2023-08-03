@@ -60,7 +60,7 @@ class MainActivity : BaseActivity() {
 
     private var savedSearchQuery: String? = null
 
-    val autoRotationEnabled: Boolean by lazy {
+    val autoRotationEnabled by lazy {
         PreferenceHelper.getBoolean(
             PreferenceKeys.AUTO_ROTATION,
             resources.getBoolean(R.bool.config_default_auto_rotation_pref)

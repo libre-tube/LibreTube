@@ -19,8 +19,7 @@ class LogoutDialog(
 
         val user = PreferenceHelper.getUsername()
 
-        binding.user.text =
-            binding.user.text.toString() + " (" + user + ")"
+        binding.user.text = binding.user.text.toString() + " ($user)"
         binding.logout.setOnClickListener {
             Toast.makeText(context, R.string.loggedout, Toast.LENGTH_SHORT).show()
 
