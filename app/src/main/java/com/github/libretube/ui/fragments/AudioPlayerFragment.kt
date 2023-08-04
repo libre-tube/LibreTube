@@ -26,6 +26,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentAudioPlayerBinding
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.normalize
+import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.AudioHelper
 import com.github.libretube.helpers.BackgroundHelper
@@ -127,6 +128,16 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             val currentIndex = PlayingQueue.currentIndex()
             if (!PlayingQueue.hasNext()) return@setOnClickListener
             PlayingQueue.onQueueItemSelected(currentIndex + 1)
+        }
+
+        listOf(binding.forwardTV, binding.rewindTV).forEach {
+            it.text = (PlayerHelper.seekIncrement / 1000).toString()
+        }
+        binding.rewindFL.setOnClickListener {
+            playerService?.player?.seekBy(-PlayerHelper.seekIncrement)
+        }
+        binding.forwardFL.setOnClickListener {
+            playerService?.player?.seekBy(PlayerHelper.seekIncrement)
         }
 
         binding.openQueue.setOnClickListener {

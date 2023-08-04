@@ -30,6 +30,7 @@ import com.github.libretube.R
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
+import com.github.libretube.extensions.seekBy
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.PlayerHelper
@@ -251,11 +252,11 @@ class NowPlayingNotification(
             }
 
             REWIND -> {
-                player.seekTo(player.currentPosition - PlayerHelper.seekIncrement)
+                player.seekBy(-PlayerHelper.seekIncrement)
             }
 
             FORWARD -> {
-                player.seekTo(player.currentPosition + PlayerHelper.seekIncrement)
+                player.seekBy(PlayerHelper.seekIncrement)
             }
 
             PLAY_PAUSE -> {
