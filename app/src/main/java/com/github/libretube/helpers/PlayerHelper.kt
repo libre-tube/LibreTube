@@ -322,6 +322,13 @@ object PlayerHelper {
             "all"
         )
 
+    val playAutomatically: Boolean
+        get() = PreferenceHelper
+            .getBoolean(
+                PreferenceKeys.PLAY_AUTOMATICALLY,
+                true
+            )
+
     fun getDefaultResolution(context: Context): String {
         val prefKey = if (NetworkHelper.isNetworkMetered(context)) {
             PreferenceKeys.DEFAULT_RESOLUTION_MOBILE

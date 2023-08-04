@@ -216,7 +216,7 @@ class OnlinePlayerService : LifecycleService() {
         streams?.let { onNewVideo?.invoke(it, videoId) }
 
         player?.apply {
-            playWhenReady = true
+            playWhenReady = PlayerHelper.playAutomatically
             prepare()
         }
 

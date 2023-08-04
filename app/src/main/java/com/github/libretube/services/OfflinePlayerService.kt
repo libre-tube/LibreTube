@@ -83,9 +83,7 @@ class OfflinePlayerService : LifecycleService() {
             .setAudioAttributes(PlayerHelper.getAudioAttributes(), true)
             .setLoadControl(PlayerHelper.getLoadControl())
             .build()
-            .loadPlaybackParams(isBackgroundMode = true).apply {
-                playWhenReady = true
-            }
+            .loadPlaybackParams(isBackgroundMode = true)
 
         val audioItem = downloadWithItem.downloadItems.firstOrNull { it.type == FileType.AUDIO }
             ?: // in some rare cases, video files can contain audio
@@ -96,6 +94,7 @@ class OfflinePlayerService : LifecycleService() {
             .build()
 
         player?.setMediaItem(mediaItem)
+        player?.playWhenReady = PlayerHelper.playAutomatically
         player?.prepare()
         return true
     }

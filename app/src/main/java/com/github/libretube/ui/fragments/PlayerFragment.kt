@@ -754,10 +754,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
                 if (viewModel.isFullscreen.value == true) updateFullscreenOrientation()
 
+                exoPlayer.playWhenReady = PlayerHelper.playAutomatically
                 exoPlayer.prepare()
-                if (PreferenceHelper.getBoolean(PreferenceKeys.PLAY_AUTOMATICALLY, true)) {
-                    exoPlayer.play()
-                }
 
                 if (binding.playerMotionLayout.progress != 1.0f) {
                     // show controllers when not in picture in picture mode

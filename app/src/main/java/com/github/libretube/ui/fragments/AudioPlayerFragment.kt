@@ -59,7 +59,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     private var transitionEndId = 0
 
     private var handler = Handler(Looper.getMainLooper())
-    private var isPaused = false
+    private var isPaused = !PlayerHelper.playAutomatically
 
     private var playerService: OnlinePlayerService? = null
 
@@ -204,6 +204,8 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         binding.volumeProgressBar.let { bar ->
             bar.progress = audioHelper.getVolumeWithScale(bar.max)
         }
+
+        if (!PlayerHelper.playAutomatically) updatePlayPauseButton(false)
     }
 
     private fun killFragment() {
@@ -320,11 +322,15 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         handler.postDelayed(this::updateSeekBar, 200)
     }
 
+    private fun updatePlayPauseButton(isPlaying: Boolean) {
+        val iconResource = if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play
+        binding.playPause.setIconResource(iconResource)
+        binding.miniPlayerPause.setImageResource(iconResource)
+    }
+
     private fun handleServiceConnection() {
         playerService?.onIsPlayingChanged = { isPlaying ->
-            val iconResource = if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play
-            binding.playPause.setIconResource(iconResource)
-            binding.miniPlayerPause.setImageResource(iconResource)
+            updatePlayPauseButton(isPlaying)
             isPaused = !isPlaying
         }
         playerService?.onNewVideo = { streams, videoId ->
