@@ -774,11 +774,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 fetchSponsorBlockSegments()
 
                 initializeChapters()
-
-                // add the video to the watch history
-                if (PlayerHelper.watchHistoryEnabled) {
-                    DatabaseHelper.addToWatchHistory(videoId, streams)
-                }
             }
         }
     }
@@ -886,6 +881,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 if (isPlaying) {
                     // Stop [BackgroundMode] service if it is running.
                     BackgroundHelper.stopBackgroundPlay(requireContext())
+                }
+
+                // add the video to the watch history when starting to play the video
+                if (isPlaying && PlayerHelper.watchHistoryEnabled) {
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        DatabaseHelper.addToWatchHistory(videoId, streams)
+                    }
                 }
 
                 if (isPlaying && PlayerHelper.sponsorBlockEnabled) {
