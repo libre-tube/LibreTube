@@ -156,8 +156,8 @@ class OfflinePlayerActivity : BaseActivity() {
                 OfflineTimeFrameReceiver(this@OfflinePlayerActivity, it)
             }
 
+            player.playWhenReady = PlayerHelper.playAutomatically
             player.prepare()
-            player.play()
         }
     }
 
