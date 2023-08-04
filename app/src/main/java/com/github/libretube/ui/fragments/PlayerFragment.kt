@@ -73,6 +73,7 @@ import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.hideKeyboard
 import com.github.libretube.extensions.parcelable
+import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
@@ -214,11 +215,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 }
 
                 PlayerEvent.Forward -> {
-                    exoPlayer.seekTo(exoPlayer.currentPosition + PlayerHelper.seekIncrement)
+                    exoPlayer.seekBy(PlayerHelper.seekIncrement)
                 }
 
                 PlayerEvent.Rewind -> {
-                    exoPlayer.seekTo(exoPlayer.currentPosition - PlayerHelper.seekIncrement)
+                    exoPlayer.seekBy(-PlayerHelper.seekIncrement)
                 }
 
                 PlayerEvent.Next -> {

@@ -40,6 +40,7 @@ import com.github.libretube.databinding.PlayerGestureControlsViewBinding
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.normalize
 import com.github.libretube.extensions.round
+import com.github.libretube.extensions.seekBy
 import com.github.libretube.helpers.AudioHelper
 import com.github.libretube.helpers.BrightnessHelper
 import com.github.libretube.helpers.PlayerHelper
@@ -267,10 +268,10 @@ open class CustomExoPlayerView(
             it?.text = seekIncrementText
         }
         binding.forwardBTN.setOnClickListener {
-            player?.seekTo(player!!.currentPosition + PlayerHelper.seekIncrement)
+            player?.seekBy(PlayerHelper.seekIncrement)
         }
         binding.rewindBTN.setOnClickListener {
-            player?.seekTo(player!!.currentPosition - PlayerHelper.seekIncrement)
+            player?.seekBy(-PlayerHelper.seekIncrement)
         }
         if (PlayerHelper.doubleTapToSeek) return
 
@@ -363,7 +364,7 @@ open class CustomExoPlayerView(
     }
 
     private fun rewind() {
-        player?.seekTo((player?.currentPosition ?: 0L) - PlayerHelper.seekIncrement)
+        player?.seekBy(-PlayerHelper.seekIncrement)
 
         // show the rewind button
         doubleTapOverlayBinding?.apply {
@@ -378,7 +379,7 @@ open class CustomExoPlayerView(
     }
 
     private fun forward() {
-        player?.seekTo(player!!.currentPosition + PlayerHelper.seekIncrement)
+        player?.seekBy(PlayerHelper.seekIncrement)
 
         // show the forward button
         doubleTapOverlayBinding?.apply {
