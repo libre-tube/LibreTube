@@ -107,15 +107,6 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/chapters_recView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="3dp"
-                    android:layout_marginTop="20dp"
-                    android:nestedScrollingEnabled="false"
-                    android:visibility="gone" />
-
                 <TextView
                     android:id="@+id/player_description"
                     android:layout_width="match_parent"
