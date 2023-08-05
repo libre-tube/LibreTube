@@ -8,10 +8,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.R
 import com.github.libretube.databinding.QueueBottomSheetBinding
 import com.github.libretube.ui.adapters.PlayingQueueAdapter
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.util.PlayingQueue
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.lang.IllegalArgumentException
 
 class PlayingQueueSheet : ExpandedBottomSheet() {
     private lateinit var binding: QueueBottomSheetBinding
@@ -76,6 +79,9 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
                 .filterIndexed { index, _ -> index == currentIndex })
             adapter.notifyDataSetChanged()
         }
+        binding.sort.setOnClickListener {
+            showSortDialog()
+        }
 
         binding.bottomControls.setOnClickListener {
             dialog?.dismiss()
@@ -112,5 +118,25 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
 
         val itemTouchHelper = ItemTouchHelper(callback)
         itemTouchHelper.attachToRecyclerView(binding.optionsRecycler)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun showSortDialog() {
+        val sortOptions = listOf(R.string.creation_date, R.string.most_views, R.string.uploader_name)
+            .map { requireContext().getString(it) }
+            .toTypedArray()
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.sort_by)
+            .setItems(sortOptions) { _, index ->
+                val newQueue = when (index) {
+                    0 -> PlayingQueue.getStreams().sortedBy { it.uploaded }
+                    1 -> PlayingQueue.getStreams().sortedBy { it.views }.reversed()
+                    2 -> PlayingQueue.getStreams().sortedBy { it.uploaderName }
+                    else -> throw IllegalArgumentException()
+                }
+                PlayingQueue.setStreams(newQueue)
+                binding.optionsRecycler.adapter?.notifyDataSetChanged()
+            }
+            .show()
     }
 }
