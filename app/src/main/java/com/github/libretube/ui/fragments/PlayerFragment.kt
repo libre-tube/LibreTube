@@ -777,7 +777,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 // enable the chapters dialog in the player
                 playerBinding.chapterLL.setOnClickListener {
                     ChaptersBottomSheet(chapters, exoPlayer)
-                        .show(requireActivity().supportFragmentManager)
+                        .show(childFragmentManager)
                 }
 
                 setCurrentChapterName()
@@ -1181,10 +1181,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     // set the name of the video chapter in the exoPlayerView
     private fun setCurrentChapterName(forceUpdate: Boolean = false, enqueueNew: Boolean = true) {
-        playerBinding.chapterLL.isVisible = chapters.isNotEmpty()
+        // return if fragment view got killed already to avoid crashes
+        if (_binding == null) return
 
-        // return if chapters are empty to avoid crashes
-        if (chapters.isEmpty() || _binding == null) return
+        // only show the chapters layout if there are some chapters available
+        playerBinding.chapterLL.isInvisible = chapters.isEmpty()
+
+        // the following logic to set the chapter title can be skipped if no chapters are available
+        if (chapters.isEmpty()) return
 
         // call the function again in 100ms
         if (enqueueNew) binding.player.postDelayed(this::setCurrentChapterName, 100)
@@ -1192,8 +1196,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // if the user is scrubbing the time bar, don't update
         if (scrubbingTimeBar && !forceUpdate) return
 
-        val chapterIndex = PlayerHelper.getCurrentChapterIndex(exoPlayer, chapters) ?: return
-        val chapterName = chapters[chapterIndex].title.trim()
+        val chapterName = PlayerHelper.getCurrentChapterIndex(exoPlayer, chapters)?.let {
+            chapters[it].title.trim()
+        } ?: getString(R.string.no_chapter)
 
         // change the chapter name textView text to the chapterName
         if (chapterName != playerBinding.chapterName.text) {
@@ -1453,7 +1458,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         if (audioLanguagesAndRoleFlags.isEmpty()) {
             baseBottomSheet.setSimpleItems(
-                listOf(context.getString(R.string.unknown_or_no_audio)),
+                listOf(getString(R.string.unknown_or_no_audio)),
                 null
             )
         } else if (audioLanguagesAndRoleFlags.size == 1 &&
@@ -1467,7 +1472,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             // track which has no language or track type set in the video played
             // Consider it as the default audio track (or unknown)
             baseBottomSheet.setSimpleItems(
-                listOf(context.getString(R.string.default_or_unknown_audio_track)),
+                listOf(getString(R.string.default_or_unknown_audio_track)),
                 null
             )
         } else {

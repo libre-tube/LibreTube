@@ -37,27 +37,18 @@ class ChaptersAdapter(
             chapterTitle.text = chapter.title
             timeStamp.text = DateUtils.formatElapsedTime(chapter.start)
 
-            val chapterEnd = chapters.getOrNull(position + 1)?.start ?: (exoPlayer.duration / 1000)
+            val chapterEnd = chapters.getOrNull(position + 1)?.start
+                ?: (exoPlayer.duration / 1000)
             val durationSpan = chapterEnd - chapter.start
             duration.text = root.context.getString(
                 R.string.duration_span,
                 DateUtils.formatElapsedTime(durationSpan)
             )
 
-            val color = when {
-                selectedPosition == position -> {
-                    ThemeHelper.getThemeColor(root.context, android.R.attr.colorControlHighlight)
-                }
-
-                chapter.drawable != null -> ColorUtils.setAlphaComponent(
-                    ThemeHelper.getThemeColor(
-                        root.context,
-                        android.R.attr.colorPrimary
-                    ),
-                    50
-                )
-
-                else -> Color.TRANSPARENT
+            val color = if (selectedPosition == position) {
+                ThemeHelper.getThemeColor(root.context, android.R.attr.colorControlHighlight)
+            } else {
+                Color.TRANSPARENT
             }
             root.setBackgroundColor(color)
 
@@ -70,6 +61,8 @@ class ChaptersAdapter(
     }
 
     fun updateSelectedPosition(newPosition: Int) {
+        if (selectedPosition == newPosition) return
+
         val oldPosition = selectedPosition
         selectedPosition = newPosition
         notifyItemChanged(oldPosition)
