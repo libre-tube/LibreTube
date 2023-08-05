@@ -474,4 +474,7 @@
     <string name="visibility">Sichtbarkeit</string>
     <string name="visibility_public">Öffentlich</string>
     <string name="visibility_unlisted">Nicht gelistet</string>
+    <string name="sort_by">Sortieren nach</string>
+    <string name="duration_span">Dauer: %1$s</string>
+    <string name="uploader_name">Name des Uploaders</string>
 </resources>
