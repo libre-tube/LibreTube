@@ -134,7 +134,5 @@ class CommentsAdapter(
         }
     }
 
-    override fun getItemCount(): Int {
-        return comments.size
-    }
+    override fun getItemCount() = comments.size
 }

@@ -18,9 +18,7 @@ class SearchHistoryAdapter(
 ) :
     RecyclerView.Adapter<SuggestionsViewHolder>() {
 
-    override fun getItemCount(): Int {
-        return historyList.size
-    }
+    override fun getItemCount() = historyList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuggestionsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

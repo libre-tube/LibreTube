@@ -18,9 +18,7 @@ class IconsSheetAdapter : RecyclerView.Adapter<IconsSheetViewHolder>() {
         return IconsSheetViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return availableIcons.size
-    }
+    override fun getItemCount() = availableIcons.size
 
     override fun onBindViewHolder(holder: IconsSheetViewHolder, position: Int) {
         val appIcon = availableIcons[position]

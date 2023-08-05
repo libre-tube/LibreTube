@@ -17,9 +17,7 @@ class SubscriptionChannelAdapter(
     private val subscriptions: MutableList<Subscription>
 ) : RecyclerView.Adapter<SubscriptionChannelViewHolder>() {
 
-    override fun getItemCount(): Int {
-        return subscriptions.size
-    }
+    override fun getItemCount() = subscriptions.size
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

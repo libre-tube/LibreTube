@@ -24,9 +24,7 @@ class PlayingQueueAdapter : RecyclerView.Adapter<PlayingQueueViewHolder>() {
         return PlayingQueueViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return PlayingQueue.size()
-    }
+    override fun getItemCount() = PlayingQueue.size()
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: PlayingQueueViewHolder, position: Int) {

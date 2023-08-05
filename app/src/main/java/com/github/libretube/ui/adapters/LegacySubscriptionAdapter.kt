@@ -47,7 +47,5 @@ class LegacySubscriptionAdapter(
         }
     }
 
-    override fun getItemCount(): Int {
-        return subscriptions.size
-    }
+    override fun getItemCount() = subscriptions.size
 }

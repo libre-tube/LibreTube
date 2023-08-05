@@ -22,9 +22,7 @@ class NavBarOptionsAdapter(
         return NavBarOptionsViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
+    override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: NavBarOptionsViewHolder, position: Int) {
         val item = items[position]
