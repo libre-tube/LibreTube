@@ -14,6 +14,7 @@ import android.util.Base64
 import android.view.accessibility.CaptioningManager
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.PendingIntentCompat
 import androidx.core.app.RemoteActionCompat
 import androidx.core.content.getSystemService
@@ -38,6 +39,9 @@ import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.extensions.updateParameters
+import com.github.libretube.ui.sheets.BaseBottomSheet
+import com.github.libretube.ui.sheets.ChaptersBottomSheet
+import com.github.libretube.ui.sheets.ExpandedBottomSheet
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.Locale
 import kotlin.math.absoluteValue
@@ -528,46 +532,6 @@ object PlayerHelper {
     fun getCurrentChapterIndex(exoPlayer: ExoPlayer, chapters: List<ChapterSegment>): Int? {
         val currentPosition = exoPlayer.currentPosition / 1000
         return chapters.indexOfLast { currentPosition >= it.start }.takeIf { it >= 0 }
-    }
-
-    /**
-     * Show a dialog with the chapters provided, even if the list is empty
-     */
-    fun showChaptersDialog(context: Context, chapters: List<ChapterSegment>, player: ExoPlayer) {
-        val titles = chapters.map { chapter ->
-            "(${DateUtils.formatElapsedTime(chapter.start)}) ${chapter.title}"
-        }
-        val dialog = MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.chapters)
-            .setItems(titles.toTypedArray()) { _, index ->
-                val chapter = chapters.getOrNull(index) ?: return@setItems
-                player.seekTo(chapter.start * 1000)
-            }
-            .create()
-        val handler = Handler(Looper.getMainLooper())
-        val highlightColor =
-            ThemeHelper.getThemeColor(context, android.R.attr.colorControlHighlight)
-
-        val updatePosition = Runnable {
-            // scroll to the current playing index in the chapter
-            val currentPosition =
-                getCurrentChapterIndex(player, chapters) ?: return@Runnable
-            dialog.listView.smoothScrollToPosition(currentPosition)
-
-            val children = dialog.listView.children.toList()
-            // reset the background colors of all chapters
-            children.forEach { it.setBackgroundColor(Color.TRANSPARENT) }
-            // highlight the current chapter
-            children.getOrNull(currentPosition)?.setBackgroundColor(highlightColor)
-        }
-
-        dialog.setOnShowListener {
-            updatePosition.run()
-            // update the position after a short delay
-            if (dialog.isShowing) handler.postDelayed(updatePosition, 200)
-        }
-
-        dialog.show()
     }
 
     fun getPosition(videoId: String, duration: Long?): Long? {

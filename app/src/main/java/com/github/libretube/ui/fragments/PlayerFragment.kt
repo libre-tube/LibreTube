@@ -95,7 +95,6 @@ import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.activities.VideoTagsAdapter
-import com.github.libretube.ui.adapters.ChaptersAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
@@ -107,6 +106,7 @@ import com.github.libretube.ui.listeners.SeekbarPreviewListener
 import com.github.libretube.ui.models.CommentsViewModel
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
+import com.github.libretube.ui.sheets.ChaptersBottomSheet
 import com.github.libretube.ui.sheets.CommentsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.util.HtmlParser
@@ -774,7 +774,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 // first
                 fetchSponsorBlockSegments()
 
-                initializeChapters()
+                // enable the chapters dialog in the player
+                playerBinding.chapterLL.setOnClickListener {
+                    ChaptersBottomSheet(chapters, exoPlayer)
+                        .show(requireActivity().supportFragmentManager)
+                }
+
+                setCurrentChapterName()
             }
         }
     }
@@ -1155,34 +1161,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
     }
 
-    private fun initializeChapters() {
-        if (chapters.isEmpty()) {
-            binding.chaptersRecView.isGone = true
-            playerBinding.chapterLL.isInvisible = true
-            return
-        }
-        // show the chapter layouts
-        binding.chaptersRecView.isVisible = true
-        playerBinding.chapterLL.isVisible = true
-
-        // enable chapters in the video description
-        binding.chaptersRecView.layoutManager =
-            LinearLayoutManager(
-                context,
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
-
-        binding.chaptersRecView.adapter = ChaptersAdapter(chapters, exoPlayer)
-
-        // enable the chapters dialog in the player
-        playerBinding.chapterLL.setOnClickListener {
-            PlayerHelper.showChaptersDialog(requireContext(), chapters, exoPlayer)
-        }
-
-        setCurrentChapterName()
-    }
-
     private suspend fun initializeHighlight(highlight: Segment) {
         val frameReceiver = OnlineTimeFrameReceiver(requireContext(), streams.previewFrames)
         val frame = withContext(Dispatchers.IO) {
@@ -1197,12 +1175,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         chapters.sortBy { it.start }
 
         withContext(Dispatchers.Main) {
-            initializeChapters()
+            setCurrentChapterName()
         }
     }
 
     // set the name of the video chapter in the exoPlayerView
     private fun setCurrentChapterName(forceUpdate: Boolean = false, enqueueNew: Boolean = true) {
+        playerBinding.chapterLL.isVisible = chapters.isNotEmpty()
+
         // return if chapters are empty to avoid crashes
         if (chapters.isEmpty() || _binding == null) return
 
@@ -1218,9 +1198,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // change the chapter name textView text to the chapterName
         if (chapterName != playerBinding.chapterName.text) {
             playerBinding.chapterName.text = chapterName
-            // update the selected item
-            val chaptersAdapter = binding.chaptersRecView.adapter as ChaptersAdapter
-            chaptersAdapter.updateSelectedPosition(chapterIndex)
         }
     }
 

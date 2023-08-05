@@ -7,14 +7,14 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
-import com.github.libretube.databinding.DialogNavbarOptionsBinding
+import com.github.libretube.databinding.SimpleOptionsRecyclerBinding
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.ui.adapters.NavBarOptionsAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class NavBarOptionsDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val binding = DialogNavbarOptionsBinding.inflate(layoutInflater)
+        val binding = SimpleOptionsRecyclerBinding.inflate(layoutInflater)
         val options = NavBarHelper.getNavBarItems(requireContext())
         val adapter = NavBarOptionsAdapter(
             options.toMutableList(),

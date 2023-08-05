@@ -13,6 +13,7 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.view.isGone
@@ -40,6 +41,7 @@ import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.interfaces.AudioPlayerOptions
 import com.github.libretube.ui.listeners.AudioPlayerThumbnailListener
 import com.github.libretube.ui.models.PlayerViewModel
+import com.github.libretube.ui.sheets.ChaptersBottomSheet
 import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
@@ -177,7 +179,8 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             val streams = playerService.streams ?: return@setOnClickListener
             val player = playerService.player ?: return@setOnClickListener
 
-            PlayerHelper.showChaptersDialog(requireContext(), streams.chapters, player)
+            ChaptersBottomSheet(streams.chapters, player)
+                .show(requireActivity().supportFragmentManager)
         }
 
         binding.miniPlayerClose.setOnClickListener {
