@@ -23,6 +23,7 @@ import com.github.libretube.util.NowPlayingNotification
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.io.path.exists
 
 /**
  * A service to play downloaded audio in the background
@@ -85,9 +86,11 @@ class OfflinePlayerService : LifecycleService() {
             .build()
             .loadPlaybackParams(isBackgroundMode = true)
 
-        val audioItem = downloadWithItem.downloadItems.firstOrNull { it.type == FileType.AUDIO }
+        val audioItem = downloadWithItem.downloadItems.filter { it.path.exists() }
+            .firstOrNull { it.type == FileType.AUDIO }
             ?: // in some rare cases, video files can contain audio
-            downloadWithItem.downloadItems.firstOrNull { it.type == FileType.VIDEO } ?: return false
+            downloadWithItem.downloadItems.firstOrNull { it.type == FileType.VIDEO }
+            ?: return false
 
         val mediaItem = MediaItem.Builder()
             .setUri(audioItem.path.toAndroidUri())

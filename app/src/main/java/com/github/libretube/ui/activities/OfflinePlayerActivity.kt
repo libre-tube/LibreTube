@@ -40,6 +40,7 @@ import com.github.libretube.util.OfflineTimeFrameReceiver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.io.path.exists
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class OfflinePlayerActivity : BaseActivity() {
@@ -133,7 +134,7 @@ class OfflinePlayerActivity : BaseActivity() {
             val downloadInfo = withContext(Dispatchers.IO) {
                 Database.downloadDao().findById(videoId)
             }
-            val downloadFiles = downloadInfo.downloadItems
+            val downloadFiles = downloadInfo.downloadItems.filter { it.path.exists() }
             playerBinding.exoTitle.text = downloadInfo.download.title
             playerBinding.exoTitle.isVisible = true
 

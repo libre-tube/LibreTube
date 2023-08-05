@@ -25,6 +25,7 @@ import kotlin.io.path.deleteIfExists
 import kotlin.io.path.fileSize
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import kotlin.io.path.exists
 
 class DownloadsAdapter(
     private val context: Context,
@@ -50,7 +51,7 @@ class DownloadsAdapter(
             videoInfo.text = download.uploadDate?.let { TextUtils.localizeDate(it) }
 
             val downloadSize = items.sumOf { it.downloadSize }
-            val currentSize = items.sumOf { it.path.fileSize() }
+            val currentSize = items.filter { it.path.exists() }.sumOf { it.path.fileSize() }
 
             if (downloadSize == -1L) {
                 progressBar.isIndeterminate = true
