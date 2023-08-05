@@ -480,4 +480,5 @@
     <string name="duration_span">Délka: %1$s</string>
     <string name="sort_by">Řazení</string>
     <string name="uploader_name">Jméno autora</string>
+    <string name="no_chapter">Žádná kapitola</string>
 </resources>
