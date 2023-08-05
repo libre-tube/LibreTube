@@ -22,10 +22,10 @@ import com.github.libretube.ui.viewholders.DownloadsViewHolder
 import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlin.io.path.deleteIfExists
+import kotlin.io.path.exists
 import kotlin.io.path.fileSize
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import kotlin.io.path.exists
 
 class DownloadsAdapter(
     private val context: Context,
