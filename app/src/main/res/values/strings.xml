@@ -460,6 +460,7 @@
     <string name="default_or_unknown_audio_track">default or unknown</string>
     <string name="unknown_or_no_audio">unknown or no audio</string>
     <string name="continue_watching">Continue watching</string>
+    <string name="no_chapter">No chapter</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

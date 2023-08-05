@@ -180,7 +180,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             val player = playerService.player ?: return@setOnClickListener
 
             ChaptersBottomSheet(streams.chapters, player)
-                .show(requireActivity().supportFragmentManager)
+                .show(childFragmentManager)
         }
 
         binding.miniPlayerClose.setOnClickListener {
