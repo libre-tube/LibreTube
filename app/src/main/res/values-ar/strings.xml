@@ -486,4 +486,7 @@
     <string name="visibility_public">عام</string>
     <string name="visibility">رؤية</string>
     <string name="visibility_unlisted">غير مدرج</string>
+    <string name="sort_by">ترتيب حسب</string>
+    <string name="duration_span">المدة: %1$s</string>
+    <string name="uploader_name">اسم رافع المحتوى</string>
 </resources>
