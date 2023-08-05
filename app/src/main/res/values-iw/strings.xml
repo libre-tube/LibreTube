@@ -480,4 +480,7 @@
     <string name="visibility">חשיפה</string>
     <string name="visibility_public">ציבורית</string>
     <string name="visibility_unlisted">לא מופיעה</string>
+    <string name="sort_by">מיון לפי</string>
+    <string name="duration_span">משך: %1$s</string>
+    <string name="uploader_name">שם המעלה</string>
 </resources>
