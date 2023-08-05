@@ -477,4 +477,6 @@
     <string name="visibility_public">Público</string>
     <string name="visibility">Visibilidad</string>
     <string name="visibility_unlisted">No listado</string>
+    <string name="sort_by">Ordenar por</string>
+    <string name="uploader_name">Nombre del canal</string>
 </resources>

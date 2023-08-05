@@ -477,4 +477,6 @@
     <string name="visibility">Visibilità</string>
     <string name="visibility_public">Pubblico</string>
     <string name="visibility_unlisted">Non elencato</string>
+    <string name="sort_by">Ordina per</string>
+    <string name="uploader_name">Nome autore</string>
 </resources>
