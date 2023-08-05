@@ -38,6 +38,15 @@
                 android:padding="10dp">
 
                 <ImageView
+                    android:id="@+id/repeat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_repeat" />
+
+                <ImageView
                     android:id="@+id/shuffle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -56,15 +65,6 @@
                     android:src="@drawable/ic_reverse" />
 
                 <ImageView
-                    android:id="@+id/repeat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="5dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:padding="5dp"
-                    android:src="@drawable/ic_repeat" />
-
-                <ImageView
                     android:id="@+id/add_to_playlist"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -72,6 +72,15 @@
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:padding="5dp"
                     android:src="@drawable/ic_playlist_add" />
+
+                <ImageView
+                    android:id="@+id/sort"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_sort" />
 
                 <ImageView
                     android:id="@+id/clear_queue"
