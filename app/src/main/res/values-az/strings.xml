@@ -474,4 +474,7 @@
     <string name="visibility">Görünmə</string>
     <string name="visibility_public">Ümumi</string>
     <string name="visibility_unlisted">Siyahıdan kənar</string>
+    <string name="sort_by">Çeşidlə</string>
+    <string name="uploader_name">Yükləyicinin adı</string>
+    <string name="duration_span">Müddət: %1$s</string>
 </resources>
