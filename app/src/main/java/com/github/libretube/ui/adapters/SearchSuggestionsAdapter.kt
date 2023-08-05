@@ -13,9 +13,7 @@ class SearchSuggestionsAdapter(
 ) :
     RecyclerView.Adapter<SuggestionsViewHolder>() {
 
-    override fun getItemCount(): Int {
-        return suggestionsList.size
-    }
+    override fun getItemCount() = suggestionsList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuggestionsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

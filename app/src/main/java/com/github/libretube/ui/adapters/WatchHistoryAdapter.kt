@@ -24,7 +24,7 @@ class WatchHistoryAdapter(
 
     private var visibleCount = minOf(10, watchHistory.size)
 
-    override fun getItemCount(): Int = visibleCount
+    override fun getItemCount() = visibleCount
 
     fun removeFromWatchHistory(position: Int) {
         val history = watchHistory[position]

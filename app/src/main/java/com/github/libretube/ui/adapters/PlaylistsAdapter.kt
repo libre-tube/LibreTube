@@ -18,9 +18,7 @@ class PlaylistsAdapter(
     private val playlistType: PlaylistType
 ) : RecyclerView.Adapter<PlaylistsViewHolder>() {
 
-    override fun getItemCount(): Int {
-        return playlists.size
-    }
+    override fun getItemCount() = playlists.size
 
     fun updateItems(newItems: List<Playlists>) {
         val oldSize = playlists.size

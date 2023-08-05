@@ -141,7 +141,5 @@ class DownloadsAdapter(
         notifyItemInserted(position)
     }
 
-    override fun getItemCount(): Int {
-        return downloads.size
-    }
+    override fun getItemCount() = downloads.size
 }
