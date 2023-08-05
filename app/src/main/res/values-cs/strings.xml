@@ -477,4 +477,7 @@
     <string name="visibility_public">Veřejná</string>
     <string name="visibility_unlisted">Neuvedená</string>
     <string name="visibility">Viditelnost</string>
+    <string name="duration_span">Délka: %1$s</string>
+    <string name="sort_by">Řazení</string>
+    <string name="uploader_name">Jméno autora</string>
 </resources>
