@@ -479,4 +479,6 @@
     <string name="visibility_unlisted">No listado</string>
     <string name="sort_by">Ordenar por</string>
     <string name="uploader_name">Nombre del canal</string>
+    <string name="duration_span">Duración: %1$s</string>
+    <string name="no_chapter">Sin capítulos</string>
 </resources>
