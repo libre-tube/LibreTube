@@ -18,7 +18,7 @@ import com.github.libretube.ui.adapters.ChaptersAdapter
 class ChaptersBottomSheet(
     private val chapters: List<ChapterSegment>,
     private val exoPlayer: ExoPlayer
-): ExpandedBottomSheet() {
+) : ExpandedBottomSheet() {
     private var _binding: BottomSheetBinding? = null
     private val binding get() = _binding!!
 
@@ -41,7 +41,7 @@ class ChaptersBottomSheet(
 
         val handler = Handler(Looper.getMainLooper())
 
-        val updatePosition = object: Runnable {
+        val updatePosition = object : Runnable {
             override fun run() {
                 if (_binding == null) return
                 handler.postDelayed(this, 200)

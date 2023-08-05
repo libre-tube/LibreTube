@@ -1612,7 +1612,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
 
-        if (!PlayerHelper.autoRotationEnabled ||
+        if (!PlayerHelper.autoRotationEnabled || _binding == null ||
             // If in PiP mode, orientation is given as landscape.
             PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
         ) {
@@ -1623,7 +1623,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             // go to fullscreen mode
             Configuration.ORIENTATION_LANDSCAPE -> setFullscreen()
             // exit fullscreen if not landscape
-            else -> if (_binding != null) unsetFullscreen()
+            else -> unsetFullscreen()
         }
     }
 }

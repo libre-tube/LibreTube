@@ -9,7 +9,7 @@ import android.view.WindowManager
 /**
  * A bottom sheet that allows touches on its top/background
  */
-open class UndimmedBottomSheet: ExpandedBottomSheet() {
+open class UndimmedBottomSheet : ExpandedBottomSheet() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
 

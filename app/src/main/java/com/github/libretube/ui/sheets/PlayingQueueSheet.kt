@@ -75,8 +75,10 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
 
         binding.clearQueue.setOnClickListener {
             val currentIndex = PlayingQueue.currentIndex()
-            PlayingQueue.setStreams(PlayingQueue.getStreams()
-                .filterIndexed { index, _ -> index == currentIndex })
+            PlayingQueue.setStreams(
+                PlayingQueue.getStreams()
+                    .filterIndexed { index, _ -> index == currentIndex }
+            )
             adapter.notifyDataSetChanged()
         }
         binding.sort.setOnClickListener {
@@ -122,7 +124,11 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun showSortDialog() {
-        val sortOptions = listOf(R.string.creation_date, R.string.most_views, R.string.uploader_name)
+        val sortOptions = listOf(
+            R.string.creation_date,
+            R.string.most_views,
+            R.string.uploader_name
+        )
             .map { requireContext().getString(it) }
             .toTypedArray()
         MaterialAlertDialogBuilder(requireContext())

@@ -1,14 +1,11 @@
 package com.github.libretube.ui.sheets
 
-import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
-import android.view.WindowManager
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import com.github.libretube.R

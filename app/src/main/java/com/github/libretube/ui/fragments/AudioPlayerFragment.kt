@@ -13,7 +13,6 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.view.isGone

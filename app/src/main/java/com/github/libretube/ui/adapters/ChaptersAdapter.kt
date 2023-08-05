@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.graphics.ColorUtils
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R

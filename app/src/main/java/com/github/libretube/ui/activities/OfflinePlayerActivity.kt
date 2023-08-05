@@ -37,10 +37,10 @@ import com.github.libretube.ui.interfaces.TimeFrameReceiver
 import com.github.libretube.ui.listeners.SeekbarPreviewListener
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.util.OfflineTimeFrameReceiver
+import kotlin.io.path.exists
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.io.path.exists
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class OfflinePlayerActivity : BaseActivity() {
