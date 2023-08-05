@@ -471,4 +471,10 @@
     <string name="continue_watching">Nézés folytatása</string>
     <string name="dearrow">DeArrow engedélyezése</string>
     <string name="dearrow_summary">Pontosabb és kevésbé szenzációhajhász címek és bélyegképek megjelenítése. Növeli a betöltési időt.</string>
+    <string name="visibility_unlisted">Listázatlan</string>
+    <string name="duration_span">Időtartam: %1$s</string>
+    <string name="uploader_name">Feltöltő neve</string>
+    <string name="sort_by">Rendezés</string>
+    <string name="visibility_public">Nyilvános</string>
+    <string name="visibility">Láthatóság</string>
 </resources>
