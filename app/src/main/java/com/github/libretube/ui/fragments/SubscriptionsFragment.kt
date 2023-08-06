@@ -284,6 +284,7 @@ class SubscriptionsFragment : Fragment() {
             showAllAtOnce = false
         )
         binding.subFeed.adapter = subscriptionsAdapter
+        binding.toggleSubsText.text = getString(R.string.subscriptions)
 
         PreferenceHelper.updateLastFeedWatchedTime()
     }
