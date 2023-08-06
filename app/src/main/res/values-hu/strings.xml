@@ -477,4 +477,5 @@
     <string name="sort_by">Rendezés</string>
     <string name="visibility_public">Nyilvános</string>
     <string name="visibility">Láthatóság</string>
+    <string name="no_chapter">Nincs fejezet</string>
 </resources>

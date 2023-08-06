@@ -489,4 +489,5 @@
     <string name="sort_by">ترتيب حسب</string>
     <string name="duration_span">المدة: %1$s</string>
     <string name="uploader_name">اسم رافع المحتوى</string>
+    <string name="no_chapter">لا يوجد فصل</string>
 </resources>

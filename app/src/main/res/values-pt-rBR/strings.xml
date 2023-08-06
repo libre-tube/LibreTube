@@ -251,7 +251,7 @@
     <string name="take_a_break">Hora de tirar uma pausa</string>
     <string name="resize_mode_fill">Preencher</string>
     <string name="repeat_mode_none">Nenhum</string>
-    <string name="picture_in_picture">Imagem em imagem (PiP)</string>
+    <string name="picture_in_picture">Imagem na imagem (PiP)</string>
     <string name="break_reminder_time">Minutos antes de ser lembrado</string>
     <string name="yt_shorts">Vídeos curtos</string>
     <string name="no_subtitles_available">Legendas não disponíveis</string>
@@ -311,7 +311,7 @@
     <string name="audio_track">Faixa de áudio</string>
     <string name="hls_instead_of_dash">Usar HLS</string>
     <string name="hls_instead_of_dash_summary">Usar HLS em vez de DASH (será mais lento, não recomendado)</string>
-    <string name="auto_quality">Automático</string>
+    <string name="auto_quality">Auto</string>
     <string name="limit_to_runtime">Limitar ao tempo de execução</string>
     <string name="trends">Tendências</string>
     <string name="featured">Destaque</string>
@@ -321,7 +321,7 @@
     <string name="clear_bookmarks">Limpar favoritos</string>
     <string name="local_playlists">Playlist locais</string>
     <string name="queue_insert_related_videos">Inserir vídeos relacionados</string>
-    <string name="auto">Automático</string>
+    <string name="auto">Auto</string>
     <string name="swipe_controls">Controles de deslize</string>
     <string name="swipe_controls_summary">Usar o gesto de deslizar para ajustar o brilho e o volume.</string>
     <string name="brightness">Brilho</string>
@@ -473,4 +473,12 @@
     <string name="unknown_audio_track_type">Faixa de áudio desconhecida</string>
     <string name="dubbed_audio_track">Faixa de áudio apelidada</string>
     <string name="unknown_audio_language">Linguagem do áudio desconhecida</string>
+    <string name="no_chapter">Sem capítulo</string>
+    <string name="visibility">Visibilidade</string>
+    <string name="visibility_unlisted">Não listado</string>
+    <string name="visibility_public">Público</string>
+    <string name="sort_by">Ordenar por</string>
+    <string name="uploader_name">Nome do enviador</string>
+    <string name="duration_span">Duração: %1$s</string>
+    <string name="audio_track_format">%1$s - %2$s</string>
 </resources>

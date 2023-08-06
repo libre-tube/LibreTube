@@ -480,4 +480,8 @@
     <string name="visibility">Видимість</string>
     <string name="visibility_public">Загальнодоступно</string>
     <string name="visibility_unlisted">Не показується</string>
+    <string name="no_chapter">Немає розділу</string>
+    <string name="sort_by">Сортувати за</string>
+    <string name="uploader_name">Назва завантажувача</string>
+    <string name="duration_span">Тривалість: %1$s</string>
 </resources>

@@ -474,4 +474,8 @@
     <string name="unknown_audio_language">ଅଜଣା ଧ୍ୱନି ଭାଷା</string>
     <string name="unknown_or_no_audio">ଅଜଣା କିମ୍ବା କୌଣସି ଧ୍ୱନି ନାହିଁ</string>
     <string name="visibility_unlisted">ତାଲିକାହୀନ</string>
+    <string name="no_chapter">କୌଣସି ଅଧ୍ୟାୟ ନାହିଁ</string>
+    <string name="uploader_name">ଅପଲୋଡର ନାମ</string>
+    <string name="sort_by">ସଜାଡ଼ନ୍ତୁ</string>
+    <string name="duration_span">ଅବଧି: %1$s</string>
 </resources>
