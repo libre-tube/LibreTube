@@ -475,4 +475,5 @@
     <string name="uploader_name">Nama pengunggah</string>
     <string name="no_chapter">Tidak ada bab</string>
     <string name="duration_span">Durasi: %1$s</string>
+    <string name="screen_orientation">Orientasi layar</string>
 </resources>
