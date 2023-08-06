@@ -415,7 +415,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         // FullScreen button trigger
         // hide fullscreen button if autorotation enabled
-        playerBinding.fullscreen.isInvisible = PlayerHelper.autoRotationEnabled
+        playerBinding.fullscreen.isInvisible = PlayerHelper.autoFullscreenEnabled
         playerBinding.fullscreen.setOnClickListener {
             // hide player controller
             binding.player.hideController()
@@ -513,7 +513,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      * Expected behavior: Portrait for shorts, Landscape for normal videos
      */
     private fun updateFullscreenOrientation() {
-        if (!PlayerHelper.autoRotationEnabled) {
+        if (!PlayerHelper.autoFullscreenEnabled) {
             val height = streams.videoStreams.firstOrNull()?.height ?: exoPlayer.videoSize.height
             val width = streams.videoStreams.firstOrNull()?.width ?: exoPlayer.videoSize.width
 
@@ -563,7 +563,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
         playerBinding.exoTitle.isInvisible = true
 
-        if (!PlayerHelper.autoRotationEnabled) {
+        if (!PlayerHelper.autoFullscreenEnabled) {
             // switch back to portrait mode if autorotation disabled
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
         }
@@ -641,12 +641,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             nowPlayingNotification.destroySelfAndPlayer()
 
-            activity?.requestedOrientation =
-                if ((activity as MainActivity).autoRotationEnabled) {
-                    ActivityInfo.SCREEN_ORIENTATION_USER
-                } else {
-                    ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-                }
+            (context as MainActivity).requestOrientationChange()
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -1400,7 +1395,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      */
     @SuppressLint("SourceLockedOrientationActivity")
     private fun changeOrientationMode() {
-        if (PlayerHelper.autoRotationEnabled) {
+        if (PlayerHelper.autoFullscreenEnabled) {
             // enable auto rotation
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
             onConfigurationChanged(resources.configuration)
@@ -1612,7 +1607,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
 
-        if (!PlayerHelper.autoRotationEnabled || _binding == null ||
+        if (!PlayerHelper.autoFullscreenEnabled || _binding == null ||
             // If in PiP mode, orientation is given as landscape.
             PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
         ) {

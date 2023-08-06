@@ -27,7 +27,7 @@ class GeneralSettings : BasePreferenceFragment() {
         val region = findPreference<ListPreference>("region")
         region?.let { setupRegionPref(it) }
 
-        val autoRotation = findPreference<SwitchPreferenceCompat>(PreferenceKeys.AUTO_ROTATION)
+        val autoRotation = findPreference<ListPreference>(PreferenceKeys.ORIENTATION)
         autoRotation?.setOnPreferenceChangeListener { _, _ ->
             RequireRestartDialog().show(childFragmentManager, RequireRestartDialog::class.java.name)
             true

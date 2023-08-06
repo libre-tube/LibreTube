@@ -30,11 +30,14 @@
             android:title="@string/audio_only_mode"
             app:key="audio_only_mode" />
 
-        <SwitchPreferenceCompat
-            android:defaultValue="@bool/config_default_auto_rotation_pref"
+        <ListPreference
+            android:defaultValue="@string/config_default_orientation_pref"
+            android:entries="@array/orientation"
+            android:entryValues="@array/orientation_values"
             android:icon="@drawable/ic_screen_rotation"
-            app:key="auto_rotation"
-            app:title="@string/auto_rotation" />
+            app:key="orientation"
+            app:title="@string/screen_orientation"
+            app:useSimpleSummaryProvider="true" />
 
         <SwitchPreferenceCompat
             android:defaultValue="true"

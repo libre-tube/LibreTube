@@ -461,6 +461,7 @@
     <string name="unknown_or_no_audio">unknown or no audio</string>
     <string name="continue_watching">Continue watching</string>
     <string name="no_chapter">No chapter</string>
+    <string name="screen_orientation">Screen orientation</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
