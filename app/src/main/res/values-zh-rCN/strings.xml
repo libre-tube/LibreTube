@@ -471,4 +471,8 @@
     <string name="visibility">可见性</string>
     <string name="visibility_public">公开</string>
     <string name="visibility_unlisted">不公开</string>
+    <string name="no_chapter">无章节</string>
+    <string name="sort_by">排序依据</string>
+    <string name="uploader_name">上传方名称</string>
+    <string name="duration_span">时长：%1$s</string>
 </resources>
