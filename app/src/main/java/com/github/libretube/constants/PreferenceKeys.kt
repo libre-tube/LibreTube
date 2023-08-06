@@ -17,7 +17,7 @@ object PreferenceKeys {
      */
     const val LANGUAGE = "language"
     const val REGION = "region"
-    const val AUTO_ROTATION = "auto_rotation"
+    const val ORIENTATION = "orientation"
     const val SLEEP_TIMER = "sleep_timer_toggle"
     const val SLEEP_TIMER_DELAY = "sleep_timer_delay"
     const val SAVE_FEED = "save_feed"

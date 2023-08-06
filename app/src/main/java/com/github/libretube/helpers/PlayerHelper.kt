@@ -114,7 +114,7 @@ object PlayerHelper {
         }
     }
 
-    val autoRotationEnabled: Boolean
+    val autoFullscreenEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.AUTO_FULLSCREEN,
             false

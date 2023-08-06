@@ -60,13 +60,6 @@ class MainActivity : BaseActivity() {
 
     private var savedSearchQuery: String? = null
 
-    val autoRotationEnabled by lazy {
-        PreferenceHelper.getBoolean(
-            PreferenceKeys.AUTO_ROTATION,
-            resources.getBoolean(R.bool.config_default_auto_rotation_pref)
-        )
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -227,17 +220,6 @@ class MainActivity : BaseActivity() {
                 return
             }
             tryScrollToTop(it as? ViewGroup)
-        }
-    }
-
-    /**
-     * Rotate according to the preference
-     */
-    fun requestOrientationChange() {
-        requestedOrientation = if (autoRotationEnabled) {
-            ActivityInfo.SCREEN_ORIENTATION_USER
-        } else {
-            ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
         }
     }
 
@@ -501,11 +483,7 @@ class MainActivity : BaseActivity() {
         }
 
         playerViewModel.isFullscreen.value = false
-        requestedOrientation = if (autoRotationEnabled) {
-            ActivityInfo.SCREEN_ORIENTATION_USER
-        } else {
-            ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-        }
+        requestOrientationChange()
     }
 
     @SuppressLint("SwitchIntDef")
