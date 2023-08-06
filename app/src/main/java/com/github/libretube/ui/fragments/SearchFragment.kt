@@ -33,11 +33,9 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: SearchViewModel by activityViewModels()
 
-    private var query: String? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        query = arguments?.getString(IntentData.query)
+        viewModel.searchQuery.value = arguments?.getString(IntentData.query)
     }
 
     override fun onCreateView(

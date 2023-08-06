@@ -335,7 +335,7 @@ class MainActivity : BaseActivity() {
                     R.id.channelFragment,
                     R.id.playlistFragment
                 )
-                if (navController.currentDestination?.id in destIds && newText.isNullOrEmpty()) {
+                if (navController.currentDestination?.id in destIds && newText == null) {
                     return false
                 }
 
