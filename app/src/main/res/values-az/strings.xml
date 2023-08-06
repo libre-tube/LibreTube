@@ -477,4 +477,5 @@
     <string name="sort_by">Çeşidlə</string>
     <string name="uploader_name">Yükləyicinin adı</string>
     <string name="duration_span">Müddət: %1$s</string>
+    <string name="no_chapter">Bölmə yoxdur</string>
 </resources>

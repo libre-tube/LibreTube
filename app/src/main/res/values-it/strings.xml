@@ -479,4 +479,6 @@
     <string name="visibility_unlisted">Non elencato</string>
     <string name="sort_by">Ordina per</string>
     <string name="uploader_name">Nome autore</string>
+    <string name="no_chapter">Nessun capitolo</string>
+    <string name="duration_span">Durata: %1$s</string>
 </resources>
