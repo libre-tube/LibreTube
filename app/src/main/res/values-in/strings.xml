@@ -471,4 +471,8 @@
     <string name="visibility">Visibilitas</string>
     <string name="visibility_unlisted">Tidak terdaftar</string>
     <string name="visibility_public">Publik</string>
+    <string name="sort_by">Urutkan berdasarkan</string>
+    <string name="uploader_name">Nama pengunggah</string>
+    <string name="no_chapter">Tidak ada bab</string>
+    <string name="duration_span">Durasi: %1$s</string>
 </resources>
