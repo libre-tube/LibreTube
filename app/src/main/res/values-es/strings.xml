@@ -481,4 +481,5 @@
     <string name="uploader_name">Nombre del canal</string>
     <string name="duration_span">Duración: %1$s</string>
     <string name="no_chapter">Sin capítulos</string>
+    <string name="screen_orientation">Orientación de pantalla</string>
 </resources>

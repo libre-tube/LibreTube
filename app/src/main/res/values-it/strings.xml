@@ -116,7 +116,7 @@
     <string name="advanced">Avanzate</string>
     <string name="player">Riproduttore</string>
     <string name="appearance_summary">Regola l\'app a tuo piacimento.</string>
-    <string name="live">Dal vivo</string>
+    <string name="live">In diretta</string>
     <string name="shareTo">Condividi l\'URL a</string>
     <string name="torchIcon">Torcia di tendenza</string>
     <string name="legacyIcon">Eredità perduta</string>
@@ -481,4 +481,5 @@
     <string name="uploader_name">Nome autore</string>
     <string name="no_chapter">Nessun capitolo</string>
     <string name="duration_span">Durata: %1$s</string>
+    <string name="screen_orientation">Orientamento dello schermo</string>
 </resources>

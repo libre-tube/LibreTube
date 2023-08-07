@@ -478,4 +478,5 @@
     <string name="uploader_name">ଅପଲୋଡର ନାମ</string>
     <string name="sort_by">ସଜାଡ଼ନ୍ତୁ</string>
     <string name="duration_span">ଅବଧି: %1$s</string>
+    <string name="screen_orientation">ପରଦା ଆଭିମୁଖ୍ୟ</string>
 </resources>

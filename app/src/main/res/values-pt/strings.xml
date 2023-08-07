@@ -477,4 +477,9 @@
     <string name="visibility">Visibilidade</string>
     <string name="visibility_public">Público</string>
     <string name="visibility_unlisted">Não listado</string>
+    <string name="screen_orientation">Orientação do ecrã</string>
+    <string name="no_chapter">Sem capítulo</string>
+    <string name="sort_by">Ordenar por</string>
+    <string name="uploader_name">Nome de quem carrega</string>
+    <string name="duration_span">Duração: %1$s</string>
 </resources>

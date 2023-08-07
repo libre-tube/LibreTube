@@ -477,4 +477,6 @@
     <string name="sort_by">Sortieren nach</string>
     <string name="duration_span">Dauer: %1$s</string>
     <string name="uploader_name">Name des Uploaders</string>
+    <string name="screen_orientation">Bildschirmausrichtung</string>
+    <string name="no_chapter">Kein Kapitel</string>
 </resources>
