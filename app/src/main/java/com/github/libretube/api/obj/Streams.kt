@@ -21,6 +21,7 @@ data class Streams(
     val license: String,
     val visibility: String,
     val tags: List<String>,
+    val metaInfo: List<MetaInfo>,
     val hls: String? = null,
     val dash: String? = null,
     val lbryId: String? = null,
