@@ -16,7 +16,6 @@ import android.os.PowerManager
 import android.text.format.DateUtils
 import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
