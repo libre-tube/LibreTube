@@ -1339,8 +1339,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                         MimeTypes.APPLICATION_M3U8
                     )
                 )
-                exoPlayer.setMediaSource(mediaSource)
-                ProxyHelper.unwrapStreamUrl(streams.hls!!).toUri() to MimeTypes.APPLICATION_M3U8
+                withContext(Dispatchers.Main) { exoPlayer.setMediaSource(mediaSource) }
+                return
             }
             // NO STREAM FOUND
             else -> {
