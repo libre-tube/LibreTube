@@ -16,6 +16,7 @@ import android.os.PowerManager
 import android.text.format.DateUtils
 import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -860,6 +861,17 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             playerTitle.text = streams.title
             playerDescription.text = streams.description
+
+            metaInfo.isVisible = streams.metaInfo.isNotEmpty()
+            // generate a meta info text with clickable links using html
+            val metaInfoText = streams.metaInfo.joinToString("\n\n") { info ->
+                val text = info.description.takeIf { it.isNotBlank() } ?: info.title
+                val links = info.urls.mapIndexed { index, url ->
+                    "<a href=\"$url\">${info.urlTexts.getOrNull(index).orEmpty()}</a>"
+                }.joinToString(", ")
+                "$text $links"
+            }
+            metaInfo.text = metaInfoText.parseAsHtml()
 
             playerChannelSubCount.text = context?.getString(
                 R.string.subscribers,
