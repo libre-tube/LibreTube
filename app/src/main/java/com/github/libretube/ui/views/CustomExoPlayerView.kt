@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.os.postDelayed
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.marginStart
@@ -47,6 +48,7 @@ import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.base.BaseActivity
+import com.github.libretube.ui.extensions.toggleSystemBars
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.interfaces.PlayerOptions
 import com.github.libretube.ui.listeners.PlayerGestureController
@@ -138,6 +140,11 @@ open class CustomExoPlayerView(
 
             // change locked status
             isPlayerLocked = !isPlayerLocked
+
+            activity.toggleSystemBars(
+                types = WindowInsetsCompat.Type.statusBars(),
+                showBars = !isPlayerLocked
+            )
         }
 
         resizeMode = when (resizeModePref) {
