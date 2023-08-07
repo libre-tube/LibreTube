@@ -129,7 +129,7 @@ class OnlinePlayerView(
                     // Show status bar only not navigation bar if the player controls are visible and hide it otherwise
                     activity.toggleSystemBars(
                         types = WindowInsetsCompat.Type.statusBars(),
-                        showBars = visibility == View.VISIBLE
+                        showBars = visibility == View.VISIBLE && !isPlayerLocked
                     )
                 }
             }
