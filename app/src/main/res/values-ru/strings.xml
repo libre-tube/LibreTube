@@ -480,4 +480,7 @@
     <string name="visibility">Видимость</string>
     <string name="visibility_public">Общественная</string>
     <string name="visibility_unlisted">Не показывается</string>
+    <string name="screen_orientation">Ориентация экрана</string>
+    <string name="sort_by">Сортировать по</string>
+    <string name="duration_span">Продолжительность: %1$s</string>
 </resources>
