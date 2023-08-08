@@ -471,4 +471,9 @@
     <string name="visibility">能見度</string>
     <string name="visibility_public">公開</string>
     <string name="visibility_unlisted">未列出</string>
+    <string name="screen_orientation">螢幕方向</string>
+    <string name="no_chapter">無章節</string>
+    <string name="sort_by">排序方式</string>
+    <string name="uploader_name">上傳者名稱</string>
+    <string name="duration_span">持續時間：%1$s</string>
 </resources>
