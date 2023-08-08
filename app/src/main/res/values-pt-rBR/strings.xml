@@ -114,7 +114,7 @@
     <string name="torchIcon">Tocha da moda</string>
     <string name="customInstance_summary">Adicionar…</string>
     <string name="version">Versão %1$s</string>
-    <string name="category_filler">Tangente/Piadas</string>
+    <string name="category_filler">Enrolação/Piadas</string>
     <string name="category_music_offtopic">Música: seção não musical</string>
     <string name="category_music_offtopic_description">Só para uso em vídeos musicais. Deveria abranger partes do vídeo que não fazem parte das mixagens oficiais. No final, o vídeo deve se assemelhar ao Spotify ou qualquer outra versão mista o mais perto possível, ou reduzir a fala ou outras distrações.</string>
     <string name="category_preview">Pré-visualização/Recapitulação</string>
@@ -481,4 +481,5 @@
     <string name="uploader_name">Nome do enviador</string>
     <string name="duration_span">Duração: %1$s</string>
     <string name="audio_track_format">%1$s - %2$s</string>
+    <string name="screen_orientation">Orientação de Tela</string>
 </resources>
