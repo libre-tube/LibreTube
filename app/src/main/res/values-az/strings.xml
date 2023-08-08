@@ -39,7 +39,7 @@
     <string name="sponsorblock_summary">https://sponsor.ajay.app API İşlədir</string>
     <string name="category_intro_description">Həqiqi məzmunsuz aralıq. Fasilə, sabit çərçivə, təkrarlanan animasiya ola bilər. Məlumat ehtiva edən keçidlər üçün işlədilməməlidir.</string>
     <string name="category_outro">Son kartlar və kreditlər</string>
-    <string name="category_outro_description">Bitişdən sonra məlumat. Məlumatla nəticələr üçün deyil.</string>
+    <string name="category_outro_description">Sonda növbəti məlumat. Məlumatla nəticələr üçün deyil.</string>
     <string name="category_segments">Bölümlər</string>
     <string name="category_sponsor">Himayədar</string>
     <string name="category_selfpromo">Ödənilməmiş/Özünü Reklam</string>
@@ -104,7 +104,7 @@
     <string name="app_icon">Simvol</string>
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
-    <string name="playOnBackground">Fonda oynat</string>
+    <string name="playOnBackground">Arxa planda oynat</string>
     <string name="update_available">%1$s versiyası mövcuddur</string>
     <string name="update_available_text">Yeni yeniləmə mövcuddur. GitHub buraxılışlar səhifəsin açmaq üçün kliklə.</string>
     <string name="appearance">Görünüş</string>
@@ -117,7 +117,7 @@
     <string name="advanced_summary">Yüklənənlər və sıfırla</string>
     <string name="update_summary">Yeniləmə üçün yoxla</string>
     <string name="live">Canlı</string>
-    <string name="shareTo">URL\'ni Paylaş</string>
+    <string name="shareTo">URL-ni Paylaş</string>
     <string name="defaultIcon">Standart</string>
     <string name="legacyIcon">İtmiş miras</string>
     <string name="fireIcon">Şıq od</string>
@@ -140,9 +140,9 @@
     <string name="category_filler">Əlaqəsiz/Zarafatlar</string>
     <string name="category_music_offtopic">Musiqi: Musiqisiz Bölmə</string>
     <string name="category_preview">Önbaxış/Anons</string>
-    <string name="category_preview_description">Əlavə məlumatsız gələcək məzmunu təfərrüatlandıran bölümlər üçün. Əgər o, yalnız burada görünən bölümləri ehtiva edirsə, bu, çox güman ki, yanlış kateqoriyadır.</string>
+    <string name="category_preview_description">Əlavə məlumatsız gələcək məzmunu təfərrüatlandıran bölümlər üçün. Əgər bu, yalnız burada görünən bölümləri ehtiva edirsə, bu, çox güman ki, yanlış kateqoriyadır.</string>
     <string name="category_filler_description">Videonun əsas məzmunun başa düşmək tələb edilməyən, yalnız əlaqəsiz və ya yumor üçün əlavə edilmiş əlaqəsiz səhnələr üçün.</string>
-    <string name="category_music_offtopic_description">Yalnız musiqi videolarında istifadə üçün. O, rəsmi mikslərin bir hissəsi deyil, video hissələri əhatə etməlidir. Nəticədə, video Spotify və ya hər hansı digər miks versiyaya mümkün qədər bənzəməlidir və ya danışıq yaxud digər diqqəti yayındıran amilləri azaltmalıdır.</string>
+    <string name="category_music_offtopic_description">Yalnız musiqi videolarında istifadə etmək üçün. Bu, rəsmi mikslərin bir hissəsi deyil, video hissələri əhatə etməlidir. Nəticədə, video Spotify və ya hər hansı digər miks versiyaya mümkün qədər bənzəməlidir və ya danışıq yaxud digər diqqəti yayındıran amilləri azaltmalıdır.</string>
     <string name="playerVideoFormat">Oynadıcı üçün video format</string>
     <string name="buffering_goal_summary">Bufer üçün maksimum video saniyə miqdarı.</string>
     <string name="buffering_goal">Ön yükləmə</string>
@@ -168,7 +168,7 @@
     <string name="deleteAccount">Hesabı sil</string>
     <string name="deleteAccount_summary">Piped hesabınızı silin</string>
     <string name="watch_history">Baxış Tarixçəsi</string>
-    <string name="watch_positions">Xatırlanan mövqe</string>
+    <string name="watch_positions">Mövqeyi xatırla</string>
     <string name="watch_positions_summary">Son oynatma mövqeyindən davam etdir</string>
     <string name="auth_instances">Təsdiqləyici instansiya seç</string>
     <string name="auth_instance_summary">Təsdiqlənmiş dəvətlər üçün fərqli instansiya istifadə et.</string>
@@ -181,7 +181,7 @@
     <string name="portrait">Portret</string>
     <string name="landscape">Landşaft</string>
     <string name="open">Aç…</string>
-    <string name="turnInternetOn">Xahiş edilir, İnternetə qoşulmaq üçün Wi-Fi və ya mobil məlumatı açın.</string>
+    <string name="turnInternetOn">Xahiş olunur, İnternetə qoşulmaq üçün Wi-Fi və ya mobil məlumatı açın.</string>
     <string name="chapters">Bölmələr</string>
     <string name="require_restart_message">Yeni dəyişiklikləri işlətmək üçün tətbiqi yenidən başlat.</string>
     <string name="require_restart">Tətbiqi yenidən başlatmaq tələb olundu</string>
@@ -206,7 +206,7 @@
     <string name="watch_positions_title">Xatırlanan oynatma mövqeləri</string>
     <string name="general_summary">Dil və ölkə</string>
     <string name="general">Ümumi</string>
-    <string name="playingOnBackground">Fonda oynadılır…</string>
+    <string name="playingOnBackground">Arxa planda oynadılır…</string>
     <string name="caption_settings">Titrlər</string>
     <string name="playerAudioFormat">Oynadıcı üçün səs formatı</string>
     <string name="playerAudioQuality">Səs keyfiyyəti</string>
@@ -237,7 +237,7 @@
     <string name="skip_buttons_summary">Növbəti və ya əvvəlki videoya ötürmək üçün düymələr göstər.</string>
     <string name="history_size">Maksimum tarixçə həcmi</string>
     <string name="unlimited">Qeyri-məhdud</string>
-    <string name="background_mode">Fon rejimi</string>
+    <string name="background_mode">Arxa plan rejimi</string>
     <string name="add_to_queue">Növbəyə əlavə et</string>
     <string name="misc">Müxtəlif</string>
     <string name="yt_shorts">Qısa</string>
@@ -272,8 +272,8 @@
     <string name="local_subscriptions">Yerli abunəlikər</string>
     <string name="preferences">Üstünlüklər</string>
     <string name="backup_customInstances">Şəxsi İnstansiyalar</string>
-    <string name="save_feed">Axını fonda yüklə</string>
-    <string name="save_feed_summary">Abunəlik axınını fonda yükləməsin və avtomatik yeniləməsin dayandır.</string>
+    <string name="save_feed">Axını arxa planda yüklə</string>
+    <string name="save_feed_summary">Abunəlik axının arxa planda yükləməsin və avtomatik yeniləməsin dayandır.</string>
     <string name="download_channel_name">Yükləmə Xidməti</string>
     <string name="download_channel_description">Media yükləyərkən bildiriş göstərir.</string>
     <string name="background_channel_name">Fon Rejimi</string>
@@ -282,7 +282,7 @@
     <string name="background_channel_description">Səs oynadıcını idarə etmək üçün düymələrlə bildiriş göstərir.</string>
     <string name="play_next">Sonra oynat</string>
     <string name="navigation_bar">Naviqasiya çubuğu</string>
-    <string name="change_region">Görünür, trendlər hazırkı ölkə üçün əlçatan deyil. Xahiş edirik, tənzimləmələrdə başqasın seç.</string>
+    <string name="change_region">Görünür, trendlər hazırkı ölkə üçün əlçatan deyil. Xahiş olunur, tənzimləmələrdə başqasın seç.</string>
     <string name="playback_pitch">Ucalıq</string>
     <string name="filename">Fayl adı</string>
     <string name="invalid_filename">Yanlış fayl adı!</string>
@@ -349,7 +349,7 @@
     <string name="play_latest_videos">Ən son videoları oynat</string>
     <string name="nothing_selected">Heç nə seçilməyib!</string>
     <string name="color_violet">Bütöv Bənövşə</string>
-    <string name="failed_fetching_instances">Mövcud nümunələri əldə etmək mümkün olmadı.</string>
+    <string name="failed_fetching_instances">Mövcud instansiyaları əldə etmək mümkün olmadı.</string>
     <string name="hide_watched_from_feed">Baxılan videoları axından gizlət</string>
     <string name="hide_watched_from_feed_summary">Abunəliklər panelində 90% daha çox baxılan videoları göstərmə.</string>
     <string name="playlistUrl">Oynatma Siyahısı URL\'si</string>
@@ -375,7 +375,7 @@
     <string name="sleep_timer">Yuxu taymeri</string>
     <string name="skip_silence">Səssizliyi ötür</string>
     <string name="help">Kömək</string>
-    <string name="faq">TTSS</string>
+    <string name="faq">FAQ</string>
     <string name="replies">Cavablar</string>
     <string name="codecs">Kodlayıcılar</string>
     <string name="unsupported_file_format">Dəstəklənməyən fayl format: %1$s</string>
@@ -455,7 +455,7 @@
     <string name="visible">Axtarış çubuğunda göstər</string>
     <string name="jumped_to_highlight">Video Vurğulanmasına Keçdi</string>
     <string name="category_highlight">Video vurğulaması göstər</string>
-    <string name="category_highlight_description">Ya reklam olunan başlıq, miniatür və ya videonun ən maraqlı hissəsi ola bilər. Bölümlər bölməsində üzərinə toxunaraq ona keçə bilərsiniz.</string>
+    <string name="category_highlight_description">Ya reklam olunan başlıq, miniatür və ya videonun ən maraqlı hissəsi ola bilər. Bölümlər bölməsində üzərinə toxunaraq buna keçə bilərsiniz.</string>
     <string name="chapters_videoHighlight">Video Vurğulama</string>
     <string name="stop">Dayandır</string>
     <string name="fallback_piped_proxy">Piped proksiyə qayıdış</string>
