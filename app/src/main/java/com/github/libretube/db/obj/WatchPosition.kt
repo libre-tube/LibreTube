@@ -5,6 +5,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.serialization.Serializable
 
+/**
+ * @param position: Position in milliseconds
+ */
 @Serializable
 @Entity(tableName = "watchPosition")
 data class WatchPosition(
