@@ -491,4 +491,5 @@
     <string name="uploader_name">اسم رافع المحتوى</string>
     <string name="no_chapter">لا يوجد فصل</string>
     <string name="screen_orientation">اتجاه الشاشة</string>
+    <string name="remove_watched_videos">إزالة مقاطع الفيديو التي تمت مشاهدتها</string>
 </resources>
