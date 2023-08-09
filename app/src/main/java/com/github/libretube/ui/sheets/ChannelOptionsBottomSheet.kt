@@ -17,7 +17,7 @@ import kotlinx.coroutines.withContext
 /**
  * Dialog with different options for a selected video.
  *
- * Needs the [videoId] to load the content from the right video.
+ * Needs the [channelId] to load the content from the right video.
  */
 class ChannelOptionsBottomSheet(
     private val channelId: String,
