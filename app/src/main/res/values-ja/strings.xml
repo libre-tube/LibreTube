@@ -475,4 +475,6 @@
     <string name="remove_watched_videos">視聴済みの動画を除去</string>
     <string name="no_chapter">チャプターなし</string>
     <string name="uploader_name">公開者の名前</string>
+    <string name="sort_by">並び替え</string>
+    <string name="duration_span">期間: %1$s</string>
 </resources>
