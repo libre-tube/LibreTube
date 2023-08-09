@@ -485,4 +485,5 @@
     <string name="no_chapter">Няма раздзела</string>
     <string name="sort_by">Сартаваць па</string>
     <string name="duration_span">Працягласць: %1$s</string>
+    <string name="remove_watched_videos">Выдаліць прагледжаныя відэа</string>
 </resources>
