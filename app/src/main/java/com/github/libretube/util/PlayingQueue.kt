@@ -88,7 +88,21 @@ object PlayingQueue {
 
     fun move(from: Int, to: Int) = queue.move(from, to)
 
-    private fun addToQueueAsync(streams: List<StreamItem>, currentStreamItem: StreamItem? = null) {
+    /**
+     * Adds a list of videos to the current queue while updating the position of the current stream
+     * @param isMainList: whether the videos are part of the list, that initially has been used to
+     * start the queue, either from a channel or playlist. If it's false, the current stream won't
+     * be touched, since it's an independent list.
+     */
+    private fun addToQueueAsync(
+        streams: List<StreamItem>,
+        currentStreamItem: StreamItem? = null,
+        isMainList: Boolean = true
+    ) {
+        if (!isMainList) {
+            add(*streams.toTypedArray())
+            return
+        }
         val currentStream = currentStreamItem ?: this.currentStream
         // if the stream already got added to the queue earlier, although it's not yet
         // been found in the playlist, remove it and re-add it later
@@ -109,25 +123,26 @@ object PlayingQueue {
         }
     }
 
-    private fun fetchMoreFromPlaylist(playlistId: String, nextPage: String?) {
+    private fun fetchMoreFromPlaylist(playlistId: String, nextPage: String?, isMainList: Boolean) {
         var playlistNextPage = nextPage
         scope.launch(Dispatchers.IO) {
             while (playlistNextPage != null) {
                 RetrofitInstance.authApi.getPlaylistNextPage(playlistId, playlistNextPage!!).run {
-                    addToQueueAsync(relatedStreams)
+                    addToQueueAsync(relatedStreams, isMainList = isMainList)
                     playlistNextPage = this.nextpage
                 }
             }
         }
     }
 
-    fun insertPlaylist(playlistId: String, newCurrentStream: StreamItem) {
+    fun insertPlaylist(playlistId: String, newCurrentStream: StreamItem?) {
         scope.launch(Dispatchers.IO) {
             runCatching {
                 val playlist = PlaylistsHelper.getPlaylist(playlistId)
-                addToQueueAsync(playlist.relatedStreams, newCurrentStream)
+                val isMainList = newCurrentStream != null
+                addToQueueAsync(playlist.relatedStreams, newCurrentStream, isMainList)
                 if (playlist.nextpage == null) return@launch
-                fetchMoreFromPlaylist(playlistId, playlist.nextpage)
+                fetchMoreFromPlaylist(playlistId, playlist.nextpage, isMainList)
             }
         }
     }

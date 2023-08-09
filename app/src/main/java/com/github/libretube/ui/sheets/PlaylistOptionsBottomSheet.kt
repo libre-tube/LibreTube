@@ -15,6 +15,7 @@ import com.github.libretube.ui.dialogs.DeletePlaylistDialog
 import com.github.libretube.ui.dialogs.PlaylistDescriptionDialog
 import com.github.libretube.ui.dialogs.RenamePlaylistDialog
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -31,7 +32,8 @@ class PlaylistOptionsBottomSheet(
     override fun onCreate(savedInstanceState: Bundle?) {
         // options for the dialog
         val optionsList = mutableListOf(
-            getString(R.string.playOnBackground)
+            getString(R.string.playOnBackground),
+            getString(R.string.add_to_queue)
         )
 
         val isBookmarked = runBlocking(Dispatchers.IO) {
@@ -66,6 +68,9 @@ class PlaylistOptionsBottomSheet(
                             playlistId = playlistId
                         )
                     }
+                }
+                getString(R.string.add_to_queue) -> {
+                    PlayingQueue.insertPlaylist(playlistId, null)
                 }
                 // Clone the playlist to the users Piped account
                 getString(R.string.clonePlaylist) -> {
