@@ -480,4 +480,9 @@
     <string name="visibility">Бачнасць</string>
     <string name="visibility_public">Грамадская</string>
     <string name="visibility_unlisted">Не паказваецца</string>
+    <string name="screen_orientation">Арыентацыя экрана</string>
+    <string name="uploader_name">Імя загрузніка</string>
+    <string name="no_chapter">Няма раздзела</string>
+    <string name="sort_by">Сартаваць па</string>
+    <string name="duration_span">Працягласць: %1$s</string>
 </resources>
