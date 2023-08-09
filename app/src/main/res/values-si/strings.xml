@@ -265,7 +265,6 @@
     <string name="alternative_pip_controls">විකල්ප PiP පාලන</string>
     <string name="audio_only_mode">ශ්‍රව්‍ය පමණක් ප්‍රකාරය</string>
     <string name="download_channel_description">මාධ්‍ය බාගත කිරීමේදී දැනුම්දීමක් පෙන්වයි.</string>
-    <string name="background_channel_name">පසුබිම් ප්‍රකාරය</string>
     <string name="push_channel_description">නව ප්‍රවාහ පවතින විට දැනුම්දීමක් පෙන්වයි.</string>
     <string name="all_caught_up">ඹබ සියල්ල බලා ඇත</string>
     <string name="startpage">මුල්</string>
@@ -365,7 +364,6 @@
     <string name="playlistNameReversed">වාදන ලැයිස්තුවේ නම (ප්‍රතිලෝම)</string>
     <string name="playlistCreated">වාදන ලැයිස්තුව සාදන ලදී.</string>
     <string name="addToPlaylist">වාදන ලැයිස්තුවට එක් කරන්න</string>
-    <string name="background_channel_description">ශ්‍රව්‍ය ධාවකය පාලනය කිරීමට බොත්තම් සහිත දැනුම්දීමක් පෙන්වයි.</string>
     <string name="remove_bookmark">පොත් සලකුණ ඉවත් කරන්න</string>
     <string name="download_channel_name">බාගත කිරීමේ සේවාව</string>
     <string name="push_channel_name">දැනුම්දීම් සේවකයා</string>

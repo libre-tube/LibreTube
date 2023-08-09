@@ -260,8 +260,6 @@
     <string name="exportsuccess">내보내기 완료.</string>
     <string name="app_backup">앱 백업</string>
     <string name="double_tap_seek_summary">왼쪽이나 오른쪽을 두 번 눌러 플레이어 위치를 되감거나 앞으로 이동합니다.</string>
-    <string name="background_channel_name">백그라운드 모드</string>
-    <string name="background_channel_description">오디오 플레이어 제어 버튼이 있는 알림을 표시한다.</string>
     <string name="wifi">와이파이</string>
     <string name="play_all">모두 재생</string>
     <string name="auto">자동</string>

@@ -268,7 +268,6 @@
     <string name="skip_segment">Hopp over</string>
     <string name="sb_skip_manual">Hopp over manuelt</string>
     <string name="sb_skip_manual_summary">Ikke hopp over automatisk, alltid spør.</string>
-    <string name="background_channel_name">Bakgrunnsmodus</string>
     <string name="local_subscriptions">Lokale abonnementer</string>
     <string name="preferences">Innstillinger</string>
     <string name="backup_customInstances">Egendefinerte instanser</string>
@@ -278,7 +277,6 @@
     <string name="download_channel_name">Nedlastingstjeneste</string>
     <string name="download_channel_description">Vis en merknad ved nedlasting av media.</string>
     <string name="push_channel_name">Merknadsarbeider</string>
-    <string name="background_channel_description">Viser en merknad uten knapper for å kontrollere lydspilleren.</string>
     <string name="push_channel_description">Viser en merknad når nye strømmer er tilgjengelige.</string>
     <string name="wifi">Wi-Fi</string>
     <string name="navigation_bar">Navigasjonsfelt</string>

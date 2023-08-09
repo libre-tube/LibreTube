@@ -281,10 +281,8 @@
     <string name="backup_customInstances">কাস্টম ইন্সটেন্সগুলো</string>
     <string name="playback_pitch">পিচ</string>
     <string name="download_channel_name">ডাউনলোড সার্ভিস</string>
-    <string name="background_channel_description">অডিও প্লেয়ার নিয়ন্ত্রণের জন্য নোটিফিকেশনে বাটন দেখান।</string>
     <string name="change_region">বর্তমান এলাকায় ট্রেডিং অ্যাভেলেবল নেই। সেটিংসে গিয়ে অন্যটি বাছুন।</string>
     <string name="download_channel_description">ডাউনলোডের সময় নোটিফিকেশন দেখান।</string>
-    <string name="background_channel_name">ব্যাকগ্রাউন্ড মোড</string>
     <string name="filename">ফাইলের নাম</string>
     <string name="invalid_filename">ইনভ্যালিড ফাইলনেম!</string>
     <string name="playlists_order">প্লে-লিস্টের অর্ডার</string>

@@ -262,7 +262,6 @@
     <string name="push_channel_description">Exibe uma notificação quando novos vídeos estão disponíveis.</string>
     <string name="push_channel_name">Serviço de notificações</string>
     <string name="play_next">Reproduzir a seguir</string>
-    <string name="background_channel_name">Modo de segundo plano</string>
     <string name="navigation_bar">Barra de navegação</string>
     <string name="download_channel_description">Exibe uma notificação ao baixar mídia.</string>
     <string name="export_subscriptions">Exportar inscrições</string>
@@ -283,7 +282,6 @@
     <string name="filename">Nome do arquivo</string>
     <string name="invalid_filename">Nome de arquivo inválido!</string>
     <string name="playlists_order">Ordem das playlists</string>
-    <string name="background_channel_description">Exibe uma notificação com botões para controlar o reprodutor de áudio.</string>
     <string name="unlimited">Ilimitado</string>
     <string name="copied_to_clipboard">Copiado para a área de transferência</string>
     <string name="wifi">Wi-Fi</string>

@@ -276,10 +276,8 @@
     <string name="save_feed_summary">Abunəlik axınını fonda yükləməsin və avtomatik yeniləməsin dayandır.</string>
     <string name="download_channel_name">Yükləmə Xidməti</string>
     <string name="download_channel_description">Media yükləyərkən bildiriş göstərir.</string>
-    <string name="background_channel_name">Fon Rejimi</string>
     <string name="push_channel_name">Bildiriş İşçisi</string>
     <string name="push_channel_description">Yeni yayımlar mövcuddursa bildiriş göstərir.</string>
-    <string name="background_channel_description">Səs oynadıcını idarə etmək üçün düymələrlə bildiriş göstərir.</string>
     <string name="play_next">Sonra oynat</string>
     <string name="navigation_bar">Naviqasiya çubuğu</string>
     <string name="change_region">Görünür, trendlər hazırkı ölkə üçün əlçatan deyil. Xahiş edirik, tənzimləmələrdə başqasın seç.</string>

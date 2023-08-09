@@ -273,8 +273,6 @@
     <string name="preferences">Ustawienia</string>
     <string name="backup_customInstances">Instancje niestandardowe</string>
     <string name="download_channel_name">Usługa pobierania</string>
-    <string name="background_channel_name">Tryb w tle</string>
-    <string name="background_channel_description">Pokazuje powiadomienie z przyciskami do sterowania odtwarzaczem audio.</string>
     <string name="push_channel_description">Pokazuje powiadomienie, gdy dostępne są nowe filmy.</string>
     <string name="push_channel_name">Powiadomienie Push</string>
     <string name="download_channel_description">Pokazuje powiadomienie podczas pobierania mediów.</string>

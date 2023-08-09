@@ -311,7 +311,6 @@
     <string name="help">Βοήθεια</string>
     <string name="faq">FAQ</string>
     <string name="download_channel_description">Εμφανίζει μια ειδοποίηση κατά τη λήψη πολυμέσων.</string>
-    <string name="background_channel_name">Λειτουργία φόντου</string>
     <string name="push_channel_description">Εμφανίζει μια ειδοποίηση όταν είναι διαθέσιμες νέες ροές.</string>
     <string name="no_comments_available">Αυτό το βίντεο δεν έχει σχόλια.</string>
     <string name="comments_disabled">Τα σχόλια είναι απενεργοποιημένα από τον χρήστη.</string>
@@ -344,7 +343,6 @@
     <string name="play_latest_videos">Αναπαραγωγή των πιο πρόσφατων βίντεο</string>
     <string name="proceed">Συνέχιση</string>
     <string name="add_to_bookmarks">Προσθήκη στους σελιδοδείκτες</string>
-    <string name="background_channel_description">Εμφανίζει μια ειδοποίηση με κουμπιά για τον έλεγχο του προγράμματος αναπαραγωγής ήχου.</string>
     <string name="delete">Διαγραφή από λήψεις</string>
     <string name="playlists_order">Σειρά λιστών αναπαραγωγής</string>
     <string name="username_email">Συνέχιση με μια διεύθυνση e-mail που δεν συνιστάται;</string>

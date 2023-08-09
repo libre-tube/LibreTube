@@ -263,10 +263,8 @@
     <string name="new_videos_badge_summary">Показывать значок, если появились новые видео.</string>
     <string name="download_channel_name">Служба загрузки</string>
     <string name="sb_skip_manual">Ручной пропуск</string>
-    <string name="background_channel_description">Показывать уведомление с кнопками для управления аудиоплеером.</string>
     <string name="skip_segment">Пропустить отрывок</string>
     <string name="download_channel_description">Показывать уведомление при загрузке медиа.</string>
-    <string name="background_channel_name">Фоновый режим</string>
     <string name="push_channel_name">Агент уведомлениий</string>
     <string name="break_reminder_time">Минут до напоминания</string>
     <string name="legacy_subscriptions">Старый вид отображения подписок</string>

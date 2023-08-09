@@ -272,8 +272,6 @@
     <string name="sb_skip_manual_summary">跳过片段前始终先提示。</string>
     <string name="download_channel_name">下载服务</string>
     <string name="download_channel_description">下载媒体文件时显示通知。</string>
-    <string name="background_channel_name">后台模式</string>
-    <string name="background_channel_description">显示控制音频播放器按钮的通知。</string>
     <string name="push_channel_name">通知 Worker</string>
     <string name="local_subscriptions">本地订阅</string>
     <string name="backup_customInstances">自定义实例</string>

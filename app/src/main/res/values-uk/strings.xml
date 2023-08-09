@@ -228,8 +228,6 @@
     <string name="play_next">Відтворити наступне</string>
     <string name="download_channel_name">Служба завантаження</string>
     <string name="download_channel_description">Показує сповіщення під час завантаження медіа.</string>
-    <string name="background_channel_name">Фоновий режим</string>
-    <string name="background_channel_description">Показує сповіщення з кнопками для керування аудіопрогравачем.</string>
     <string name="navigation_bar">Панель навігації</string>
     <string name="push_channel_name">Обробник сповіщень</string>
     <string name="error_occurred">Помилка</string>

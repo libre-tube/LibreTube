@@ -247,7 +247,6 @@
     <string name="sb_skip_manual">Manuell überspringen</string>
     <string name="navigation_bar">Navigationsleiste</string>
     <string name="download_channel_name">Download-Service</string>
-    <string name="background_channel_description">Zeigt eine Benachrichtigung mit Schaltflächen zur Steuerung des Audioplayers an.</string>
     <string name="push_channel_name">Benachrichtigungsdienst</string>
     <string name="skip_buttons">Überspringen-Buttons</string>
     <string name="history_size">Maximale Verlaufsgröße</string>
@@ -279,7 +278,6 @@
     <string name="backup_customInstances">Benutzerdefinierte Instanzen</string>
     <string name="save_feed">Feed im Hintergrund laden</string>
     <string name="play_next">Als nächstes abspielen</string>
-    <string name="background_channel_name">Hintergrundmodus</string>
     <string name="break_reminder_time">Minuten bis zur Benachrichtigung</string>
     <string name="player_resize_mode">Skalierungsmodus</string>
     <string name="maximum_image_cache">Maximale Bild-Cache-Größe</string>

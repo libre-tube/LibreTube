@@ -154,8 +154,6 @@
     <string name="download_channel_name">Atsisiuntimo paslauga</string>
     <string name="download_channel_description">Rodomas pranešimas, kai atsisiunčiama medija.</string>
     <string name="loggedout">Atsijungta.</string>
-    <string name="background_channel_name">Fono režimas</string>
-    <string name="background_channel_description">Rodomas pranešimas su garso grotuvo valdymo mygtukais.</string>
     <string name="push_channel_description">Rodo pranešimą, kai pasiekiamos naujos transliacijos.</string>
     <string name="videos">Vaizdo įrašai</string>
     <string name="subscribe">Prenumeruoti</string>

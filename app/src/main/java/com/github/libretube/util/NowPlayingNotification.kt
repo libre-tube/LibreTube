@@ -10,33 +10,33 @@ import android.content.IntentFilter
 import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
+import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
+import android.support.v4.media.session.PlaybackStateCompat
 import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
 import androidx.core.app.PendingIntentCompat
 import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.toBitmap
-import androidx.core.os.bundleOf
+import androidx.media.app.NotificationCompat.MediaStyle
+import androidx.media3.common.C
+import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
-import androidx.media3.session.CommandButton
-import androidx.media3.session.MediaSession
-import androidx.media3.session.MediaStyleNotificationHelper
-import androidx.media3.session.SessionCommand
-import androidx.media3.session.SessionResult
+import androidx.media3.session.MediaConstants
 import coil.request.ImageRequest
 import com.github.libretube.R
-import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.IntentData
+import com.github.libretube.constants.PLAYER_CHANNEL_ID
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
+import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.seekBy
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.ui.activities.MainActivity
-import com.google.common.util.concurrent.ListenableFuture
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class NowPlayingNotification(
@@ -55,7 +55,7 @@ class NowPlayingNotification(
     /**
      * The [MediaSessionCompat] for the [notificationData].
      */
-    private lateinit var mediaSession: MediaSession
+    private lateinit var mediaSession: MediaSessionCompat
 
     /**
      * The [NotificationCompat.Builder] to load the [mediaSession] content on it.
@@ -152,12 +152,8 @@ class NowPlayingNotification(
     private fun createMediaSessionAction(
         @DrawableRes drawableRes: Int,
         actionName: String
-    ): CommandButton {
-        return CommandButton.Builder()
-            .setDisplayName(actionName)
-            .setSessionCommand(SessionCommand(actionName, bundleOf()))
-            .setIconResId(drawableRes)
-            .build()
+    ): PlaybackStateCompat.CustomAction {
+        return PlaybackStateCompat.CustomAction.Builder(actionName, actionName, drawableRes).build()
     }
 
     /**
@@ -166,72 +162,161 @@ class NowPlayingNotification(
     private fun createMediaSession() {
         if (this::mediaSession.isInitialized) return
 
-        val sessionCallback = object : MediaSession.Callback {
-            override fun onConnect(
-                session: MediaSession,
-                controller: MediaSession.ControllerInfo
-            ): MediaSession.ConnectionResult {
-                val connectionResult = super.onConnect(session, controller)
-                val availableSessionCommands = connectionResult.availableSessionCommands.buildUpon()
-                val availablePlayerCommands =
-                    connectionResult.availablePlayerCommands // Player.Commands.Builder().add(Player.COMMAND_PLAY_PAUSE).build()
-                getCustomActions().forEach { button ->
-                    button.sessionCommand?.let { availableSessionCommands.add(it) }
-                }
-                session.setAvailableCommands(
-                    controller,
-                    availableSessionCommands.build(),
-                    availablePlayerCommands
-                )
-                return MediaSession.ConnectionResult.accept(
-                    availableSessionCommands.build(),
-                    availablePlayerCommands
-                )
+        val sessionCallback = object : MediaSessionCompat.Callback() {
+            override fun onSkipToNext() {
+                handlePlayerAction(NEXT)
+                super.onSkipToNext()
             }
 
-            override fun onCustomCommand(
-                session: MediaSession,
-                controller: MediaSession.ControllerInfo,
-                customCommand: SessionCommand,
-                args: Bundle
-            ): ListenableFuture<SessionResult> {
-                handlePlayerAction(customCommand.customAction)
-                return super.onCustomCommand(session, controller, customCommand, args)
+            override fun onSkipToPrevious() {
+                handlePlayerAction(PREV)
+                super.onSkipToPrevious()
             }
 
-            override fun onPlayerCommandRequest(
-                session: MediaSession,
-                controller: MediaSession.ControllerInfo,
-                playerCommand: Int
-            ): Int {
-                if (playerCommand == Player.COMMAND_SEEK_TO_PREVIOUS) {
-                    handlePlayerAction(PREV)
-                    return SessionResult.RESULT_SUCCESS
-                }
-                return super.onPlayerCommandRequest(session, controller, playerCommand)
+            override fun onRewind() {
+                handlePlayerAction(REWIND)
+                super.onRewind()
             }
 
-            override fun onPostConnect(
-                session: MediaSession,
-                controller: MediaSession.ControllerInfo
-            ) {
-                session.setCustomLayout(getCustomActions())
+            override fun onFastForward() {
+                handlePlayerAction(FORWARD)
+                super.onFastForward()
+            }
+
+            override fun onPlay() {
+                handlePlayerAction(PLAY_PAUSE)
+                super.onPlay()
+            }
+
+            override fun onPause() {
+                handlePlayerAction(PLAY_PAUSE)
+                super.onPause()
+            }
+
+            override fun onStop() {
+                handlePlayerAction(STOP)
+                super.onStop()
+            }
+
+            override fun onSeekTo(pos: Long) {
+                player.seekTo(pos)
+                super.onSeekTo(pos)
+            }
+
+            override fun onCustomAction(action: String, extras: Bundle?) {
+                handlePlayerAction(action)
+                super.onCustomAction(action, extras)
             }
         }
 
-        mediaSession = MediaSession.Builder(context, player)
-            .setCallback(sessionCallback)
-            .build()
-        mediaSession.setCustomLayout(getCustomActions())
+        val playbackState = if (player.isPlaying) {
+            createPlaybackState(PlaybackStateCompat.STATE_PLAYING)
+        } else {
+            createPlaybackState(PlaybackStateCompat.STATE_PAUSED)
+        }
+
+        mediaSession = MediaSessionCompat(context, TAG())
+        mediaSession.setCallback(sessionCallback)
+        mediaSession.setPlaybackState(playbackState)
+        mediaSession.setMetadata(getMetadataFromPlayer(player.mediaMetadata))
+
+        val playerStateListener = object : Player.Listener {
+            override fun onIsPlayingChanged(isPlaying: Boolean) {
+                super.onIsPlayingChanged(isPlaying)
+
+                val newPlaybackState = if (isPlaying) {
+                    createPlaybackState(PlaybackStateCompat.STATE_PLAYING)
+                } else {
+                    createPlaybackState(PlaybackStateCompat.STATE_PAUSED)
+                }
+
+                mediaSession.setPlaybackState(newPlaybackState)
+                mediaSession.setMetadata(getMetadataFromPlayer(player.mediaMetadata))
+            }
+
+            override fun onIsLoadingChanged(isLoading: Boolean) {
+                super.onIsLoadingChanged(isLoading)
+
+                if (!isLoading) {
+                    mediaSession.setMetadata(getMetadataFromPlayer(player.mediaMetadata))
+                }
+            }
+
+            override fun onMediaMetadataChanged(mediaMetadata: MediaMetadata) {
+                super.onMediaMetadataChanged(mediaMetadata)
+                mediaSession.setMetadata(getMetadataFromPlayer(mediaMetadata))
+            }
+        }
+
+        player.addListener(playerStateListener)
     }
 
-    private fun getCustomActions() = mutableListOf(
-        // disabled and overwritten in onPlayerCommandRequest
-        // createMediaSessionAction(R.drawable.ic_prev_outlined, PREV),
-        createMediaSessionAction(R.drawable.ic_next_outlined, NEXT),
-        createMediaSessionAction(R.drawable.ic_rewind_md, REWIND),
-        createMediaSessionAction(R.drawable.ic_forward_md, FORWARD)
-    )
+    private fun getMetadataFromPlayer(metadata: MediaMetadata): MediaMetadataCompat {
+        val builder = MediaMetadataCompat.Builder()
+
+        metadata.title?.let {
+            builder.putText(MediaMetadataCompat.METADATA_KEY_TITLE, it)
+            builder.putText(MediaMetadataCompat.METADATA_KEY_DISPLAY_TITLE, it)
+        }
+
+        metadata.subtitle?.let {
+            builder.putText(MediaMetadataCompat.METADATA_KEY_DISPLAY_SUBTITLE, it)
+        }
+
+        metadata.description?.let {
+            builder.putText(MediaMetadataCompat.METADATA_KEY_DISPLAY_DESCRIPTION, it)
+        }
+
+        metadata.artist?.let {
+            builder.putText(MediaMetadataCompat.METADATA_KEY_ARTIST, it)
+        }
+
+        metadata.albumTitle?.let {
+            builder.putText(MediaMetadataCompat.METADATA_KEY_ALBUM, it)
+        }
+
+        metadata.albumArtist?.let {
+            builder.putText(MediaMetadataCompat.METADATA_KEY_ALBUM_ARTIST, it)
+        }
+
+        metadata.recordingYear?.toLong()?.let {
+            builder.putLong(MediaMetadataCompat.METADATA_KEY_YEAR, it)
+        }
+
+        metadata.artworkUri?.toString()?.let {
+            builder.putString(MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON_URI, it)
+            builder.putString(MediaMetadataCompat.METADATA_KEY_ALBUM_ART_URI, it)
+        }
+
+        val playerDuration = player.duration
+
+        if (playerDuration != C.TIME_UNSET) {
+            builder.putLong(MediaMetadataCompat.METADATA_KEY_DURATION, playerDuration)
+        }
+
+        metadata.mediaType?.toLong()?.let {
+            builder.putLong(MediaConstants.EXTRAS_KEY_MEDIA_TYPE_COMPAT, it)
+        }
+
+        return builder.build()
+    }
+
+    private fun createPlaybackState(@PlaybackStateCompat.State state: Int): PlaybackStateCompat {
+        val stateActions = PlaybackStateCompat.ACTION_SKIP_TO_NEXT or
+            PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS or
+            PlaybackStateCompat.ACTION_REWIND or
+            PlaybackStateCompat.ACTION_FAST_FORWARD or
+            PlaybackStateCompat.ACTION_PLAY_PAUSE or
+            PlaybackStateCompat.ACTION_PAUSE or
+            PlaybackStateCompat.ACTION_SEEK_TO
+
+        return PlaybackStateCompat.Builder()
+            .setActions(stateActions)
+            .addCustomAction(createMediaSessionAction(R.drawable.ic_rewind_md, REWIND))
+            .addCustomAction(createMediaSessionAction(R.drawable.ic_forward_md, FORWARD))
+            .setState(state, player.currentPosition, player.playbackParameters.speed)
+            .build()
+    }
 
     private fun handlePlayerAction(action: String) {
         when (action) {
@@ -306,12 +391,13 @@ class NowPlayingNotification(
      * Initializes the [notificationBuilder] attached to the [player] and shows it.
      */
     private fun createNotificationBuilder() {
-        notificationBuilder = NotificationCompat.Builder(context, BACKGROUND_CHANNEL_ID)
+        notificationBuilder = NotificationCompat.Builder(context, PLAYER_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_lockscreen)
             .setContentIntent(createCurrentContentIntent())
             .setDeleteIntent(createDeleteIntent())
             .setStyle(
-                MediaStyleNotificationHelper.MediaStyle(mediaSession)
+                MediaStyle()
+                    .setMediaSession(mediaSession.sessionToken)
                     .setShowActionsInCompactView(1)
             )
     }

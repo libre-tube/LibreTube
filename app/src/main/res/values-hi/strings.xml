@@ -222,7 +222,6 @@
     <string name="bookmark">बुकमार्क</string>
     <string name="bookmarks">बुकमार्कस</string>
     <string name="clear_bookmarks">बुकमार्कस मिटाएं</string>
-    <string name="background_channel_name">बैकग्राउंड मोड</string>
     <string name="local_playlists">स्थानीय प्लेलिस्ट</string>
     <string name="volume">ध्वनि</string>
     <string name="auto">ऑटो</string>
@@ -230,7 +229,6 @@
     <string name="brightness">चमक</string>
     <string name="swipe_controls">स्वाइप नियंत्रण</string>
     <string name="swipe_controls_summary">चमक और ध्वनि को समायोजित करने के लिए स्वाइप जेस्चर का उपयोग करें।</string>
-    <string name="background_channel_description">ऑडियो प्लेयर को नियंत्रित करने के लिए बटनों के साथ सूचना दिखाता है।</string>
     <string name="download_channel_name">डाउनलोड सेवा</string>
     <string name="download_channel_description">मीडिया डाउनलोड करते समय एक सूचना दिखाता है।</string>
     <string name="queue_insert_related_videos">संबंधित वीडियो डालें</string>

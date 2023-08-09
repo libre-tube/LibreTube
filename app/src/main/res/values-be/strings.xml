@@ -350,8 +350,6 @@
     <string name="stats_for_nerds">Статыстыка для батанікаў</string>
     <string name="playing_next">Наступнае прайграванне праз %1$s</string>
     <string name="download_channel_description">Паказвае апавяшчэнне пры спампоўцы мультымедыя.</string>
-    <string name="background_channel_name">Фонавы рэжым</string>
-    <string name="background_channel_description">Паказвае апавяшчэнне з кнопкамі для кіравання аўдыяплэерам.</string>
     <string name="push_channel_name">Работнік апавяшчэнняў</string>
     <string name="push_channel_description">Паказвае апавяшчэнне, калі з\'яўляюцца новыя стрымы.</string>
     <string name="subscriberAndVideoCounts">%1$s падпісчыкаў • %2$d відэа</string>

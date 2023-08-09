@@ -272,7 +272,6 @@
     <string name="backup_customInstances">Instances personnalisées</string>
     <string name="local_subscriptions">Abonnements locaux</string>
     <string name="preferences">Préférences</string>
-    <string name="background_channel_description">Affiche une notification avec des boutons pour contrôler le lecteur audio.</string>
     <string name="push_channel_name">Agent de notification</string>
     <string name="save_feed">Charger le flux en arrière-plan</string>
     <string name="save_feed_summary">Charger le flux d\'abonnement en arrière-plan et empêcher son rafraîchissement automatique.</string>
@@ -281,7 +280,6 @@
     <string name="download_channel_name">Service de Téléchargement</string>
     <string name="download_channel_description">Affiche une notification lors du téléchargement de médias.</string>
     <string name="change_region">La section Populaires semble être indisponible pour la région actuelle. Veuillez en sélectionner une autre dans les paramètres.</string>
-    <string name="background_channel_name">Mode arrière-plan</string>
     <string name="push_channel_description">Affiche une notification lorsque de nouveaux événements sont disponibles.</string>
     <string name="playback_pitch">Hauteur</string>
     <string name="filename">Nom de fichier</string>

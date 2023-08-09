@@ -267,8 +267,6 @@
     <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">Mobilní data</string>
     <string name="sb_skip_manual">Přeskočit ručně</string>
-    <string name="background_channel_name">Režim na pozadí</string>
-    <string name="background_channel_description">Zobrazí oznámení s tlačítky pro ovládání přehrávače zvuku.</string>
     <string name="push_channel_name">Pracovník oznámení</string>
     <string name="download_channel_name">Služba stahování</string>
     <string name="skip_segment">Přeskočit segment</string>

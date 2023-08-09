@@ -328,7 +328,6 @@
     <string name="alternative_videos_layout">Alternatīvs video izklājums</string>
     <string name="hls_instead_of_dash_summary">Izmantot HLS, nevis DASH (lēnak, nav ieteicams)</string>
     <string name="audio_player">Audio atskaņotājs</string>
-    <string name="background_channel_description">Parāda paziņojumu ar pogām, lai kontrolētu audio atskaņotāju.</string>
     <string name="push_channel_name">Paziņojumu strādnieks</string>
     <string name="time">Laiks</string>
     <string name="start_time">Sākuma laiks</string>
@@ -366,7 +365,6 @@
     <string name="export_playlists">Eksportēt atskaņošanas sarakstus</string>
     <string name="pause_on_quit">Pauzēt aizverot applikāciju</string>
     <string name="category">Kategorija</string>
-    <string name="background_channel_name">Fona režīms</string>
     <string name="bookmarks">Grāmatzīmes</string>
     <string name="bookmark">Grāmatzīme</string>
     <string name="codecs">Kodeksi</string>

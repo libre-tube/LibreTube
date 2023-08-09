@@ -257,7 +257,6 @@
     <string name="disable_proxy">पाइप्ड प्रॉक्सी अक्षम करा</string>
     <string name="disable_proxy_summary">YouTube च्या सर्व्हरवरून थेट व्हिडिओ आणि प्रतिमा लोड करा. तुम्ही VPN वापरत असाल तरच पर्याय सक्षम करा! लक्षात ठेवा की हे YT संगीतातील सामग्रीसह कार्य करू शकत नाही.</string>
     <string name="push_channel_description">नवीन प्रवाह उपलब्ध असताना सूचना दाखवते.</string>
-    <string name="background_channel_description">सूचनेत ऑडिओ प्लेअर नियंत्रित करण्यासाठी बटणे दाखवते.</string>
     <string name="added_to_playlist">प्लेलिस्टमध्ये जोडले</string>
     <string name="app_backup">ॲप बॅकअप</string>
     <string name="username_email">शिफारस नसलेल्या ई-मेल पत्त्यासह पुढे जायचे\?</string>
@@ -271,7 +270,6 @@
     <string name="lbry_hls_summary">उपलब्ध असल्यास प्रवाहासाठी LBRY HLS वापरा.</string>
     <string name="custom_playback_speed_summary">सामान्य प्लेअरपेक्षा वेगळा प्लेबॅक वेग वापरा.</string>
     <string name="auto_fullscreen_shorts">शॉर्ट्स व्हिडिओवर ऑटो फुलस्क्रीन</string>
-    <string name="background_channel_name">पार्श्वभूमी मोड</string>
     <string name="pinch_control">पिंच कंट्रोल</string>
     <string name="privacy_alert">गोपनीयता सूचना</string>
     <string name="stats_for_nerds">गीक्ससाठी आकडेवारी</string>

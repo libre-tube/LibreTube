@@ -290,8 +290,6 @@
     <string name="defaultIconLight">ଡିଫଲ୍ଟ ଉଜ୍ଜଳ</string>
     <string name="download_channel_name">ଡାଉନଲୋଡ୍ ସେବା</string>
     <string name="download_channel_description">ମିଡିଆ ଡାଉନଲୋଡ୍ କରିବା ସମୟରେ ଏକ ବିଜ୍ଞପ୍ତି ଦେଖାଏ ।</string>
-    <string name="background_channel_name">ପୃଷ୍ଠଭୂମି ଧାରା</string>
-    <string name="background_channel_description">ଅଡିଓ ପ୍ଲେୟାରକୁ ନିୟନ୍ତ୍ରଣ କରିବା ପାଇଁ ବଟନ୍ ସହିତ ଏକ ବିଜ୍ଞପ୍ତି ଦେଖାଏ ।</string>
     <string name="push_channel_name">ବିଜ୍ଞପ୍ତି କର୍ମୀ</string>
     <string name="push_channel_description">ନୂତନ ଷ୍ଟ୍ରିମ୍ ଉପଲବ୍ଧ ହେଲେ ଏକ ବିଜ୍ଞପ୍ତି ଦେଖାଏ ।</string>
     <string name="playlistCloned">ପ୍ଲେଲିଷ୍ଟ କ୍ଲୋନ ହୋଇଛି</string>
