@@ -98,7 +98,7 @@
                 <ImageButton
                     android:id="@+id/toggle_options"
                     style="@style/PlayerControlTop"
-                    android:src="@drawable/playersetting"
+                    android:src="@drawable/ic_player_settings"
                     app:tint="@android:color/white" />
 
             </LinearLayout>
