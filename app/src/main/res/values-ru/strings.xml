@@ -483,4 +483,6 @@
     <string name="screen_orientation">Ориентация экрана</string>
     <string name="sort_by">Сортировать по</string>
     <string name="duration_span">Продолжительность: %1$s</string>
+    <string name="no_chapter">Нет раздела</string>
+    <string name="uploader_name">Имя загрузчика</string>
 </resources>
