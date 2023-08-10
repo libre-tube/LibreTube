@@ -479,4 +479,5 @@
     <string name="uploader_name">Name des Uploaders</string>
     <string name="screen_orientation">Bildschirmausrichtung</string>
     <string name="no_chapter">Kein Kapitel</string>
+    <string name="remove_watched_videos">Angesehene Videos entfernen</string>
 </resources>
