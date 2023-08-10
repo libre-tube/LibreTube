@@ -476,4 +476,5 @@
     <string name="sort_by">排序方式</string>
     <string name="uploader_name">上傳者名稱</string>
     <string name="duration_span">持續時間：%1$s</string>
+    <string name="remove_watched_videos">移除觀看過的影片</string>
 </resources>
