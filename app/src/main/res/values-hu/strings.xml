@@ -478,4 +478,6 @@
     <string name="visibility_public">Nyilvános</string>
     <string name="visibility">Láthatóság</string>
     <string name="no_chapter">Nincs fejezet</string>
+    <string name="screen_orientation">Képernyő tájolás</string>
+    <string name="remove_watched_videos">Megnézett videók eltávolítása</string>
 </resources>
