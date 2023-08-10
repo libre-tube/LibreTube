@@ -485,4 +485,5 @@
     <string name="uploader_name">שם המעלה</string>
     <string name="screen_orientation">כיוון המסך</string>
     <string name="no_chapter">אין פרק</string>
+    <string name="remove_watched_videos">הסרת סרטונים שנצפו</string>
 </resources>
