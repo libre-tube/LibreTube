@@ -482,4 +482,5 @@
     <string name="no_chapter">Nessun capitolo</string>
     <string name="duration_span">Durata: %1$s</string>
     <string name="screen_orientation">Orientamento dello schermo</string>
+    <string name="remove_watched_videos">Rimuovi i video visti</string>
 </resources>
