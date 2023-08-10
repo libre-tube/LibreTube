@@ -476,4 +476,5 @@
     <string name="uploader_name">上传方名称</string>
     <string name="duration_span">时长：%1$s</string>
     <string name="screen_orientation">屏幕方向</string>
+    <string name="remove_watched_videos">移除已观看的视频</string>
 </resources>
