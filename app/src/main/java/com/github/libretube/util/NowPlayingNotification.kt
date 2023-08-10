@@ -10,7 +10,6 @@ import android.content.IntentFilter
 import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import android.util.Log
@@ -20,11 +19,9 @@ import androidx.core.app.PendingIntentCompat
 import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.toBitmap
 import androidx.media.app.NotificationCompat.MediaStyle
-import androidx.media3.common.C
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
-import androidx.media3.session.MediaConstants
 import coil.request.ImageRequest
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
@@ -32,6 +29,7 @@ import com.github.libretube.constants.PLAYER_CHANNEL_ID
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.seekBy
+import com.github.libretube.extensions.toMediaMetadataCompat
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.PlayerHelper
@@ -218,89 +216,60 @@ class NowPlayingNotification(
         mediaSession = MediaSessionCompat(context, TAG())
         mediaSession.setCallback(sessionCallback)
         mediaSession.setPlaybackState(playbackState)
-        mediaSession.setMetadata(getMetadataFromPlayer(player.mediaMetadata))
+
+        updateSessionMetadata()
 
         val playerStateListener = object : Player.Listener {
             override fun onIsPlayingChanged(isPlaying: Boolean) {
                 super.onIsPlayingChanged(isPlaying)
 
-                val newPlaybackState = if (isPlaying) {
-                    createPlaybackState(PlaybackStateCompat.STATE_PLAYING)
-                } else {
-                    createPlaybackState(PlaybackStateCompat.STATE_PAUSED)
+                updateIsPlaying(isPlaying)
+            }
+
+            override fun onPlaybackStateChanged(playbackState: Int) {
+                super.onPlaybackStateChanged(playbackState)
+
+                if (playbackState == Player.STATE_BUFFERING) {
+                    val newPlaybackState = createPlaybackState(PlaybackStateCompat.STATE_BUFFERING)
+                    mediaSession.setPlaybackState(newPlaybackState)
                 }
 
-                mediaSession.setPlaybackState(newPlaybackState)
-                mediaSession.setMetadata(getMetadataFromPlayer(player.mediaMetadata))
+                if (playbackState == Player.STATE_READY) {
+                    updateSessionMetadata()
+                    updateIsPlaying(player.isPlaying)
+                }
             }
 
             override fun onIsLoadingChanged(isLoading: Boolean) {
                 super.onIsLoadingChanged(isLoading)
 
                 if (!isLoading) {
-                    mediaSession.setMetadata(getMetadataFromPlayer(player.mediaMetadata))
+                    updateSessionMetadata()
                 }
             }
 
             override fun onMediaMetadataChanged(mediaMetadata: MediaMetadata) {
                 super.onMediaMetadataChanged(mediaMetadata)
-                mediaSession.setMetadata(getMetadataFromPlayer(mediaMetadata))
+                updateSessionMetadata(mediaMetadata)
             }
         }
 
         player.addListener(playerStateListener)
     }
 
-    private fun getMetadataFromPlayer(metadata: MediaMetadata): MediaMetadataCompat {
-        val builder = MediaMetadataCompat.Builder()
+    private fun updateSessionMetadata(metadata: MediaMetadata? = null) {
+        val data = metadata ?: player.mediaMetadata
+        val newMetadata = data.toMediaMetadataCompat(player.duration, notificationBitmap)
+        mediaSession.setMetadata(newMetadata)
+    }
 
-        metadata.title?.let {
-            builder.putText(MediaMetadataCompat.METADATA_KEY_TITLE, it)
-            builder.putText(MediaMetadataCompat.METADATA_KEY_DISPLAY_TITLE, it)
+    private fun updateIsPlaying(isPlaying: Boolean) {
+        val newPlaybackState = if (isPlaying) {
+            createPlaybackState(PlaybackStateCompat.STATE_PLAYING)
+        } else {
+            createPlaybackState(PlaybackStateCompat.STATE_PAUSED)
         }
-
-        metadata.subtitle?.let {
-            builder.putText(MediaMetadataCompat.METADATA_KEY_DISPLAY_SUBTITLE, it)
-        }
-
-        metadata.description?.let {
-            builder.putText(MediaMetadataCompat.METADATA_KEY_DISPLAY_DESCRIPTION, it)
-        }
-
-        metadata.artist?.let {
-            builder.putText(MediaMetadataCompat.METADATA_KEY_ARTIST, it)
-        }
-
-        metadata.albumTitle?.let {
-            builder.putText(MediaMetadataCompat.METADATA_KEY_ALBUM, it)
-        }
-
-        metadata.albumArtist?.let {
-            builder.putText(MediaMetadataCompat.METADATA_KEY_ALBUM_ARTIST, it)
-        }
-
-        metadata.recordingYear?.toLong()?.let {
-            builder.putLong(MediaMetadataCompat.METADATA_KEY_YEAR, it)
-        }
-
-        metadata.artworkUri?.toString()?.let {
-            builder.putString(MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON_URI, it)
-            builder.putString(MediaMetadataCompat.METADATA_KEY_ALBUM_ART_URI, it)
-        }
-
-        builder.putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, notificationBitmap)
-
-        val playerDuration = player.duration
-
-        if (playerDuration != C.TIME_UNSET) {
-            builder.putLong(MediaMetadataCompat.METADATA_KEY_DURATION, playerDuration)
-        }
-
-        metadata.mediaType?.toLong()?.let {
-            builder.putLong(MediaConstants.EXTRAS_KEY_MEDIA_TYPE_COMPAT, it)
-        }
-
-        return builder.build()
+        mediaSession.setPlaybackState(newPlaybackState)
     }
 
     private fun createPlaybackState(@PlaybackStateCompat.State state: Int): PlaybackStateCompat {
@@ -417,7 +386,7 @@ class NowPlayingNotification(
                 }
             }
             .build()
-        mediaSession.setMetadata(getMetadataFromPlayer(player.mediaMetadata))
+        updateSessionMetadata()
         nManager.notify(PLAYER_NOTIFICATION_ID, notification)
     }
 
