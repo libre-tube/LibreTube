@@ -111,7 +111,7 @@
     <string name="music_playlists">YT Musikk-spillelister</string>
     <string name="category_outro">Sluttinfo og rulletekst</string>
     <string name="sponsorblock_summary">Bruker https://sponsor.ajay.app-API-et</string>
-    <string name="category_interaction">Interaksjonspåminnelse (lik og abonner)</string>
+    <string name="category_interaction">Interaksjonspåminnelse</string>
     <string name="category_outro_description">Info etter slutten av videoen. Ikke for oppsummeringer med info.</string>
     <string name="playOnBackground">Spill i bakgrunnen</string>
     <string name="update_available_text">Gå til utgivelser på GitHub for å laste ned\?</string>
@@ -478,4 +478,6 @@
     <string name="audio_track_format">%1$s — %2$s</string>
     <string name="continue_watching">Fortsett å se</string>
     <string name="visibility">Synlighet</string>
+    <string name="screen_orientation">Skjermretning</string>
+    <string name="remove_watched_videos">Fjern sette videoer</string>
 </resources>
