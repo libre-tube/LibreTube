@@ -288,6 +288,8 @@ class NowPlayingNotification(
             builder.putString(MediaMetadataCompat.METADATA_KEY_ALBUM_ART_URI, it)
         }
 
+        builder.putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, notificationBitmap)
+
         val playerDuration = player.duration
 
         if (playerDuration != C.TIME_UNSET) {
@@ -415,6 +417,7 @@ class NowPlayingNotification(
                 }
             }
             .build()
+        mediaSession.setMetadata(getMetadataFromPlayer(player.mediaMetadata))
         nManager.notify(PLAYER_NOTIFICATION_ID, notification)
     }
 
