@@ -81,7 +81,6 @@ class CommentsMainFragment : Fragment() {
             binding.commentsRV.scrollToPosition(viewModel.currentCommentsPosition)
         }
 
-
         // listen for new comments to be loaded
         viewModel.commentsPage.observe(viewLifecycleOwner) {
             if (it == null) return@observe
