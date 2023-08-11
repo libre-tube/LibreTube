@@ -252,7 +252,7 @@
     <string name="error_occurred">Error</string>
     <string name="copied">Copied</string>
     <string name="share_with_time">Share with time code</string>
-    <string name="export_subscriptions">Export Subscriptions</string>
+    <string name="export_subscriptions">Export subscriptions</string>
     <string name="skip_buttons">Skip buttons</string>
     <string name="skip_buttons_summary">Show buttons to skip to the next or previous video.</string>
     <string name="history_size">Maximum history size</string>
