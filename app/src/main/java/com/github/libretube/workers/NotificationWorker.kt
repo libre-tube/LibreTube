@@ -149,6 +149,8 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             .setGroupSummary(true)
             .setStyle(summary)
             .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY)
+            // Show channel avatar on Android versions below 7.0.
+            .setLargeIcon(downloadImage(streams[0].uploaderAvatar))
             .build()
 
         // Create stream notifications. These are automatically grouped on Android 7.0 and later.
@@ -175,28 +177,31 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
         val pendingIntent = PendingIntentCompat
             .getActivity(applicationContext, notificationId, intent, FLAG_UPDATE_CURRENT, false)
 
+        // Load stream thumbnails if the relevant toggle is enabled.
+        val thumbnail = downloadImage(stream.thumbnail)
+
         val notificationBuilder = createNotificationBuilder(group)
             .setContentTitle(stream.title)
             .setContentText(stream.uploaderName)
             // The intent that will fire when the user taps the notification
             .setContentIntent(pendingIntent)
             .setSilent(true)
-
-        // Load stream thumbnails if the relevant toggle is enabled.
-        if (PreferenceHelper.getBoolean(PreferenceKeys.SHOW_STREAM_THUMBNAILS, false)) {
-            val thumbnail = ImageHelper.getImage(applicationContext, stream.thumbnail)
-                .drawable?.toBitmap()
-
-            notificationBuilder
-                .setLargeIcon(thumbnail)
-                .setStyle(
-                    NotificationCompat.BigPictureStyle()
-                        .bigPicture(thumbnail)
-                        .bigLargeIcon(null as Bitmap?) // Hides the icon when expanding
-                )
-        }
+            .setLargeIcon(thumbnail)
+            .setStyle(
+                NotificationCompat.BigPictureStyle()
+                    .bigPicture(thumbnail)
+                    .bigLargeIcon(null as Bitmap?) // Hides the icon when expanding
+            )
 
         return Triple(notificationId, stream.uploaded, notificationBuilder.build())
+    }
+
+    private suspend fun downloadImage(url: String?): Bitmap? {
+        return if (PreferenceHelper.getBoolean(PreferenceKeys.SHOW_STREAM_THUMBNAILS, false)) {
+            ImageHelper.getImage(applicationContext, url).drawable?.toBitmap()
+        } else {
+            null
+        }
     }
 
     private fun createNotificationBuilder(group: String): NotificationCompat.Builder {
