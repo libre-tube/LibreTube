@@ -190,7 +190,7 @@
     <string name="no_player_found">外部プレイヤーが見つかりません。インストールしてください。</string>
     <string name="data_saver_mode">データ節約モード</string>
     <string name="search_history_summary">検索履歴を保存</string>
-    <string name="watch_history_summary">視聴した動画を端末に保持</string>
+    <string name="watch_history_summary">視聴した動画の履歴を端末に保持</string>
     <string name="history_summary">再生と検索の履歴</string>
     <string name="watch_positions_title">再生位置を記憶</string>
     <string name="reset_watch_positions">リセット</string>
@@ -471,4 +471,8 @@
     <string name="visibility">公開状態</string>
     <string name="visibility_public">公開</string>
     <string name="visibility_unlisted">限定公開</string>
+    <string name="screen_orientation">画面の向き</string>
+    <string name="remove_watched_videos">視聴済みの動画を除去</string>
+    <string name="no_chapter">チャプターなし</string>
+    <string name="uploader_name">公開者の名前</string>
 </resources>
