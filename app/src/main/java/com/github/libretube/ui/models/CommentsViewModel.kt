@@ -58,12 +58,9 @@ class CommentsViewModel : ViewModel() {
             }
 
             val updatedPage = commentsPage.value?.apply {
-                val combinedComments = this.comments + response.comments.filterNonEmptyComments()
-
-                // filtering out the comments that have the same id (duplicated)
-                this.comments = combinedComments.groupBy { it.commentId }
-                    .filter { it.value.size == 1 }
-                    .flatMap { it.value }
+                comments += response.comments
+                    .filterNonEmptyComments()
+                    .filter { comment -> comments.none { it.commentId == comment.commentId } }
             }
 
             nextPage = response.nextpage
