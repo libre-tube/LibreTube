@@ -98,6 +98,11 @@ class CommentsMainFragment : Fragment() {
                 binding.errorTV.isVisible = true
                 return@observe
             }
+
+            // sometimes the received comments have the same size as the existing ones
+            // which causes comments.subList to throw InvalidArgumentException
+            if (commentsAdapter.itemCount > it.comments.size) return@observe
+
             commentsAdapter.updateItems(
                 // only add the new comments to the recycler view
                 it.comments.subList(commentsAdapter.itemCount, it.comments.size)

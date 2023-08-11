@@ -56,9 +56,13 @@ class CommentsViewModel : ViewModel() {
                 Log.e(TAG(), e.toString())
                 return@launch
             }
+
             val updatedPage = commentsPage.value?.apply {
-                comments += response.comments.filterNonEmptyComments()
+                comments += response.comments
+                    .filterNonEmptyComments()
+                    .filter { comment -> comments.none { it.commentId == comment.commentId } }
             }
+
             nextPage = response.nextpage
             commentsPage.postValue(updatedPage)
             isLoading = false
