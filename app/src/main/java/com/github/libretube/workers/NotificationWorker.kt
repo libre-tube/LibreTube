@@ -205,6 +205,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setAutoCancel(true)
             .setGroup(group)
+            .setCategory(Notification.CATEGORY_SOCIAL)
     }
 
     companion object {
