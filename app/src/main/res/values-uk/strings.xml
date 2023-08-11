@@ -485,4 +485,5 @@
     <string name="uploader_name">Назва завантажувача</string>
     <string name="duration_span">Тривалість: %1$s</string>
     <string name="screen_orientation">Орієнтація екрана</string>
+    <string name="remove_watched_videos">Видалити переглянуті відео</string>
 </resources>

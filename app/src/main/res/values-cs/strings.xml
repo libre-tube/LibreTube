@@ -482,4 +482,5 @@
     <string name="uploader_name">Jméno autora</string>
     <string name="no_chapter">Žádná kapitola</string>
     <string name="screen_orientation">Otočení obrazovky</string>
+    <string name="remove_watched_videos">Odebrat zhlédnutá videa</string>
 </resources>
