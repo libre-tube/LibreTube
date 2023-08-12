@@ -115,7 +115,6 @@
     <string name="update_available">ਸੰਸਕਰਣ %1$s ਉਪਲਬਧ ਹੈ</string>
     <string name="appearance">ਦਿੱਖ</string>
     <string name="failed_fetching_instances">ਉਪਲੱਬਧ ਉਦਾਹਰਨਾਂ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕਰ ਸਕਿਆ।</string>
-    <string name="background_channel_description">ਆਡੀਓ ਪਲੇਅਰ ਨੂੰ ਨਿਯੰਤਰਿਤ ਕਰਨ ਲਈ ਬਟਨਾਂ ਨਾਲ ਇੱਕ ਸੂਚਨਾ ਦਿਖਾਉਂਦਾ ਹੈ।</string>
     <string name="hide_watched_from_feed">ਫੀਡ ਤੋਂ ਦੇਖੇ ਗਏ ਵੀਡੀਓ ਨੂੰ ਲੁਕਾਓ</string>
     <string name="shapedIcon">ਮੂਰਖ ਆਕਾਰ</string>
     <string name="flameIcon">ਉੱਡਦੀ ਲਾਟ</string>
@@ -329,7 +328,6 @@
     <string name="clear_bookmarks">ਬੁੱਕਮਾਰਕਸ ਸਾਫ਼ ਕਰੋ</string>
     <string name="auto_quality">ਆਟੋ</string>
     <string name="hls_instead_of_dash_summary">DASH ਦੀ ਬਜਾਏ HLS ਦੀ ਵਰਤੋਂ ਕਰੋ (ਹੌਲੀ ਹੋਵੇਗੀ, ਸਿਫ਼ਾਰਸ਼ ਨਹੀਂ ਕੀਤੀ ਗਈ)</string>
-    <string name="background_channel_name">ਬੈਕਗਰਾਊਂਡ ਮੋਡ</string>
     <string name="notification_time">ਨੋਟੀਫਿਕੇਸ਼ਨ ਸਮਾਂ ਸੀਮਿਤ ਕਰੋ</string>
     <string name="layout">ਲੇਆਊਟ</string>
     <string name="notification_time_summary">ਸਮਾਂ ਸੀਮਤ ਕਰੋ ਜਿਸ ਵਿੱਚ ਸਟ੍ਰੀਮ ਸੂਚਨਾਵਾਂ ਦਿਖਾਈਆਂ ਜਾਂਦੀਆਂ ਹਨ।</string>

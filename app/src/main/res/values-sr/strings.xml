@@ -261,7 +261,6 @@
     <string name="save_feed">Учитај фид у позадини</string>
     <string name="save_feed_summary">Учитај фид претплате у позадини и спречи његово аутоматско освежавање.</string>
     <string name="navigation_bar">Трака за навигацију</string>
-    <string name="background_channel_description">Приказује обавештење са дугмадима за контролу аудио плејера.</string>
     <string name="push_channel_description">Приказује обавештење када су нови стримови доступни.</string>
     <string name="push_channel_name">Нотификацијски радник</string>
     <string name="device_info">О уређају</string>
@@ -284,7 +283,6 @@
     <string name="playlistNameReversed">Назив листе (обрнуто)</string>
     <string name="download_channel_name">Преузми услугу</string>
     <string name="download_channel_description">Приказује обавештење приликом преузимања медија.</string>
-    <string name="background_channel_name">Позадински режим</string>
     <string name="renamePlaylist">Преименујте плејлисту</string>
     <string name="legacy_subscriptions">Застарели приказ претплата</string>
     <string name="audio_video_summary">Квалитет и формат</string>

@@ -259,8 +259,6 @@
     <string name="new_videos_badge">Indicador para novos vídeos</string>
     <string name="new_videos_badge_summary">Mostrar indicador com o número de novos vídeos, se existentes.</string>
     <string name="download_channel_description">Mostrar notificação ao descarregar dados.</string>
-    <string name="background_channel_name">Modo de segundo plano</string>
-    <string name="background_channel_description">Mostrar notificação com botões para controlar a reprodução.</string>
     <string name="push_channel_name">Serviço de notificações</string>
     <string name="push_channel_description">Mostrar notificação se existirem novos fluxos multimédia.</string>
     <string name="skip_segment">Ignorar segmento</string>

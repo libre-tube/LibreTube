@@ -274,8 +274,6 @@
     <string name="local_subscriptions">الاشتراكات المحلية</string>
     <string name="preferences">التفضيلات</string>
     <string name="backup_customInstances">مثيلات مخصصة</string>
-    <string name="background_channel_name">وضع الخلفية</string>
-    <string name="background_channel_description">يعرض إشعارا يحتوي على أزرار للتحكم في مشغل الصوت.</string>
     <string name="push_channel_name">عامل الإخطار</string>
     <string name="push_channel_description">يظهر إشعارًا عند توفر تدفقات جديدة.</string>
     <string name="save_feed">تحميل التغذية في الخلفية</string>

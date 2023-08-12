@@ -272,8 +272,6 @@
     <string name="local_subscriptions">Yerel abonelikler</string>
     <string name="preferences">Tercihler</string>
     <string name="backup_customInstances">Özel Oluşumlar</string>
-    <string name="background_channel_name">Arka Plan Modu</string>
-    <string name="background_channel_description">Müzik çaları kontrol etmek için düğmeleri olan bir bildirim gösterir.</string>
     <string name="save_feed">Akışı arka planda yükle</string>
     <string name="save_feed_summary">Abonelik akışının arka planda yüklenmesini ve otomatik olarak yenilenmesini önleyin.</string>
     <string name="download_channel_name">İndirme Hizmeti</string>

@@ -45,7 +45,7 @@ const val DOWNLOAD_PROGRESS_NOTIFICATION_ID = 2
  * Notification Channel IDs
  */
 const val DOWNLOAD_CHANNEL_ID = "download_service"
-const val BACKGROUND_CHANNEL_ID = "background_mode"
+const val PLAYER_CHANNEL_ID = "player_mode"
 const val PUSH_CHANNEL_ID = "notification_worker"
 
 /**

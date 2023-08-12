@@ -66,7 +66,6 @@
     <string name="notification_time">સૂચના સમય</string>
     <string name="notification_time_summary">સમયગાળો જેમાં સૂચનાઓ બતાવવાની મંજૂરી છે.</string>
     <string name="download_channel_description">જ્યારે મીડિયાને ડાઉનલોડ કરી રહ્યા હોય ત્યારે સૂચના બતાવે છે.</string>
-    <string name="background_channel_name">પાશ્વભાગ સ્થિતિ</string>
     <string name="push_channel_description">જ્યારે નવી સ્ટ્રીમો ઉપલબ્ધ હોય ત્યારે સૂચનને બતાવે છે.</string>
     <string name="legacyIcon">ગુમ થયેલ વારસો</string>
     <string name="gradientIcon">ગ્લિબ ઢાળ</string>
@@ -233,7 +232,6 @@
     <string name="app_backup">એપ્લિકેશન બેકઅપ</string>
     <string name="exportsuccess">નિકાસ કરેલ છે.</string>
     <string name="username_email">ઇ-મેઇલ સરનામાં સાથે આગળ વધવું કે જેની ભલામણ કરવામાં આવતી નથી\?</string>
-    <string name="background_channel_description">ઓડિયો પ્લેયરને નિયંત્રિત કરવા માટે બટનો સાથે સૂચન બતાવે છે.</string>
     <string name="play_latest_videos">તાજેતરની વિડિયોને વગાડો</string>
     <string name="settings">સુયોજનો</string>
     <string name="instance">નમૂનો</string>

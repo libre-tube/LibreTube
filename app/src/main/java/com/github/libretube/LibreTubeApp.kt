@@ -4,8 +4,8 @@ import android.app.Application
 import androidx.core.app.NotificationChannelCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.ExistingPeriodicWorkPolicy
-import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.DOWNLOAD_CHANNEL_ID
+import com.github.libretube.constants.PLAYER_CHANNEL_ID
 import com.github.libretube.constants.PUSH_CHANNEL_ID
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NotificationHelper
@@ -71,12 +71,12 @@ class LibreTubeApp : Application() {
             .setName(getString(R.string.download_channel_name))
             .setDescription(getString(R.string.download_channel_description))
             .build()
-        val backgroundChannel = NotificationChannelCompat.Builder(
-            BACKGROUND_CHANNEL_ID,
+        val playerChannel = NotificationChannelCompat.Builder(
+            PLAYER_CHANNEL_ID,
             NotificationManagerCompat.IMPORTANCE_LOW
         )
-            .setName(getString(R.string.background_channel_name))
-            .setDescription(getString(R.string.background_channel_description))
+            .setName(getString(R.string.player_channel_name))
+            .setDescription(getString(R.string.player_channel_description))
             .build()
         val pushChannel = NotificationChannelCompat.Builder(
             PUSH_CHANNEL_ID,
@@ -90,8 +90,8 @@ class LibreTubeApp : Application() {
         notificationManager.createNotificationChannelsCompat(
             listOf(
                 downloadChannel,
-                backgroundChannel,
-                pushChannel
+                pushChannel,
+                playerChannel
             )
         )
     }

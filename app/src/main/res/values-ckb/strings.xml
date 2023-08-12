@@ -372,7 +372,6 @@
     <string name="shuffle">تێکەڵاوکردن</string>
     <string name="pause_on_quit">ڕاگرتن لەکاتی دەرچوون</string>
     <string name="fullscreen_gestures">کردن/لابردنی ئاماژەکانی دۆخی پڕ بەشاشە</string>
-    <string name="background_channel_name">دۆخی لێدان لە پشت شاشە</string>
     <string name="go_to_video">چوون بۆ ڤیدیۆ</string>
     <string name="disable_proxy">ناچالاککردنی پرۆکسی Pipe</string>
     <string name="disable_proxy_summary">هێنانی ڤیدیۆ و وێنەکان ڕاستەوخۆ لە سێرڤەرەکانی یوتوبەوە، تەنها کاتێ ئەمە کارابکە کە VPN بەکاربهێنیت!</string>
@@ -398,7 +397,6 @@
     <string name="remove_bookmark">لابردنی نیشانەکراو</string>
     <string name="rewind">داوخستن</string>
     <string name="forward">پێشخستن</string>
-    <string name="background_channel_description">پیشاندانی ئاگادارکردنەوە لەگەڵ دوگمەکانی کۆنترۆڵکردنی لێدەری دەنگ.</string>
     <plurals name="months_ago">
         <item quantity="one">%d مانگ لەمەوپێش</item>
         <item quantity="other">%d مانگ لەمەوپێش</item>

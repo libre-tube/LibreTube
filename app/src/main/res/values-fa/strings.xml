@@ -171,7 +171,6 @@
     <string name="help">راهنما</string>
     <string name="faq">پرسش‌های پرتکرار</string>
     <string name="download_channel_name">خدمت بارگیری</string>
-    <string name="background_channel_name">حالت پس‌زمینه</string>
     <string name="most_recent">جدیدترین</string>
     <string name="least_recent">قدیمی‌ترین</string>
     <string name="player_resize_mode">حالت تغییر اندازه</string>
@@ -341,7 +340,6 @@
     <string name="break_reminder_time">دقیقه‌های پیش از یادآوری</string>
     <string name="new_videos_badge">نشانگر ویدئوهای جدید</string>
     <string name="save_feed_summary">فید اشتراک را در پس‌زمینه بارگیری و از بازخوانی خودکار آن جلوگیری کنید.</string>
-    <string name="background_channel_description">یک اعلان با دکمه هایی برای کنترل پخش کننده صدا نشان می دهد.</string>
     <string name="autoplay_countdown">شمارش معکوس پخش خودکار</string>
     <string name="playing_next">پخش بعدی در %1$s</string>
     <string name="lbry_hls">کتابخانه HLS</string>

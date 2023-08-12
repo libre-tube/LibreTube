@@ -268,8 +268,6 @@
     <string name="sb_skip_manual_summary">Ez saltatu segmentuak automatikoki, galdetu beti aurretik.</string>
     <string name="download_channel_name">Deskarga zerbitzua</string>
     <string name="download_channel_description">Multimedia deskargatzean jakinarazpen bat erakusten du.</string>
-    <string name="background_channel_name">Atzeko planoko modua</string>
-    <string name="background_channel_description">Audio-erreproduzitzailea maneiatzeko botoiekin jakinarazpen bat erakusten du.</string>
     <string name="push_channel_name">Jakinarazpenen egilea</string>
     <string name="local_subscriptions">Tokiko harpidetzak</string>
     <string name="preferences">Hobespenak</string>

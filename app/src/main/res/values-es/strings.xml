@@ -270,11 +270,9 @@
     <string name="download_channel_name">Servicio de descarga</string>
     <string name="skip_segment">Omitir</string>
     <string name="download_channel_description">Mostrar una notificación al descargar medios.</string>
-    <string name="background_channel_name">Modo de fondo</string>
     <string name="push_channel_name">Notificador de novedades</string>
     <string name="sb_skip_manual_summary">No omitir segmentos automáticamente, siempre preguntar antes.</string>
     <string name="push_channel_description">Mostrar una notificación cuando hay nuevas transmisiones disponibles.</string>
-    <string name="background_channel_description">Mostrar una notificación con botones para controlar el reproductor de audio.</string>
     <string name="local_subscriptions">Suscripciones locales</string>
     <string name="preferences">Preferencias</string>
     <string name="backup_customInstances">Instancias personalizadas</string>

@@ -284,11 +284,9 @@
     <string name="invalid_filename">無効なファイル名です！</string>
     <string name="playlistNameReversed">プレイリスト名 (逆順)</string>
     <string name="playlists_order">プレイリストの表示順</string>
-    <string name="background_channel_description">音声プレイヤーを操作するボタン付きの通知を表示します。</string>
     <string name="livestreams">ライブ配信</string>
     <string name="alternative_videos_layout">別の動画レイアウト</string>
     <string name="download_channel_name">ダウンロードサービス</string>
-    <string name="background_channel_name">バックグラウンドモード</string>
     <string name="push_channel_name">通知の実行</string>
     <string name="push_channel_description">新着動画があれば通知を表示します。</string>
     <string name="defaultIconLight">標準 (ライト)</string>

@@ -232,8 +232,6 @@
     <string name="sb_skip_manual">Bỏ qua thủ công</string>
     <string name="sb_skip_manual_summary">Đừng tự động bỏ qua các phân đoạn, hãy luôn nhắc trước đó.</string>
     <string name="download_channel_description">Hiển thị thông báo khi tải xuống phương tiện.</string>
-    <string name="background_channel_name">Chế độ background</string>
-    <string name="background_channel_description">Hiển thị thông báo với các nút để điều khiển trình phát âm thanh.</string>
     <string name="push_channel_description">Hiển thị thông báo khi có luồng phát mới.</string>
     <string name="push_channel_name">Nguồn cấp thông báo</string>
     <string name="local_subscriptions">Đăng ký cục bộ</string>

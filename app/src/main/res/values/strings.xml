@@ -467,12 +467,12 @@
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
     <string name="download_channel_description">Shows a notification when downloading media.</string>
-    <string name="background_channel_name">Background Mode</string>
-    <string name="background_channel_description">Shows a notification with buttons to control the audio player.</string>
     <string name="push_channel_name">Notification Worker</string>
     <string name="push_channel_description">Shows a notification when new streams are available.</string>
     <string name="unlimited_search_history">Unlimited search history</string>
     <string name="chapters_videoHighlight">Video Highlight</string>
+    <string name="player_channel_name">Player Service</string>
+    <string name="player_channel_description">Shows a notification when playing</string>
     <!-- Relative time formatting strings (remove when setting the minSdk to 24) -->
     <plurals name="years_ago">
         <item quantity="one">%d year ago</item>

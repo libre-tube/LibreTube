@@ -203,7 +203,6 @@
     <string name="mobile_data">Mobiilidata</string>
     <string name="disable_proxy">Poista Piped välityspalvelin käytöstä</string>
     <string name="disable_proxy_summary">Lataa videot ja kuvat suoraan YouTuben palvelimilta. Ota vaihtoehto käyttöön vain, jos käytät VPN:ää! Huomaa, että tämä ei välttämättä toimi YT-musiikin sisällön kanssa.</string>
-    <string name="background_channel_name">Taustatila</string>
     <string name="navigation_bar">Navigointipalkki</string>
     <string name="most_recent">Uusin</string>
     <string name="device_info">Laitetieto</string>
@@ -218,7 +217,6 @@
     <string name="added_to_playlist">Lisätty soittolistaan</string>
     <string name="pause_on_quit">Tauko lopettamisen yhteydessä</string>
     <string name="autoplay_countdown_summary">Näytä 5 sekunnin lähtölaskenta ennen seuraavan videon automaattista toistoa.</string>
-    <string name="background_channel_description">Näyttää ilmoituksen, jossa on painikkeita audiosoittimen ohjaamiseksi.</string>
     <string name="exportsuccess">Vietiin.</string>
     <string name="pinch_control">Nipistysohjaus</string>
     <string name="pinch_control_summary">Käytä nipistyselettä lähentääksesi/loitontaaksesi.</string>
