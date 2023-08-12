@@ -207,37 +207,16 @@ class NowPlayingNotification(
             }
         }
 
-        val playbackState = if (player.isPlaying) {
-            createPlaybackState(PlaybackStateCompat.STATE_PLAYING)
-        } else {
-            createPlaybackState(PlaybackStateCompat.STATE_PAUSED)
-        }
-
         mediaSession = MediaSessionCompat(context, TAG())
         mediaSession.setCallback(sessionCallback)
-        mediaSession.setPlaybackState(playbackState)
 
         updateSessionMetadata()
+        updateSessionPlaybackState()
 
         val playerStateListener = object : Player.Listener {
             override fun onIsPlayingChanged(isPlaying: Boolean) {
                 super.onIsPlayingChanged(isPlaying)
-
-                updateIsPlaying(isPlaying)
-            }
-
-            override fun onPlaybackStateChanged(playbackState: Int) {
-                super.onPlaybackStateChanged(playbackState)
-
-                if (playbackState == Player.STATE_BUFFERING) {
-                    val newPlaybackState = createPlaybackState(PlaybackStateCompat.STATE_BUFFERING)
-                    mediaSession.setPlaybackState(newPlaybackState)
-                }
-
-                if (playbackState == Player.STATE_READY) {
-                    updateSessionMetadata()
-                    updateIsPlaying(player.isPlaying)
-                }
+                updateSessionPlaybackState(isPlaying = isPlaying)
             }
 
             override fun onIsLoadingChanged(isLoading: Boolean) {
@@ -246,6 +225,8 @@ class NowPlayingNotification(
                 if (!isLoading) {
                     updateSessionMetadata()
                 }
+
+                updateSessionPlaybackState(isLoading = isLoading)
             }
 
             override fun onMediaMetadataChanged(mediaMetadata: MediaMetadata) {
@@ -263,12 +244,17 @@ class NowPlayingNotification(
         mediaSession.setMetadata(newMetadata)
     }
 
-    private fun updateIsPlaying(isPlaying: Boolean) {
-        val newPlaybackState = if (isPlaying) {
+    private fun updateSessionPlaybackState(isPlaying: Boolean? = null, isLoading: Boolean? = null) {
+        val loading = isLoading == true || (isPlaying == false && player.isLoading)
+
+        val newPlaybackState = if (loading) {
+            createPlaybackState(PlaybackStateCompat.STATE_BUFFERING)
+        } else if (isPlaying ?: player.isPlaying) {
             createPlaybackState(PlaybackStateCompat.STATE_PLAYING)
         } else {
             createPlaybackState(PlaybackStateCompat.STATE_PAUSED)
         }
+
         mediaSession.setPlaybackState(newPlaybackState)
     }
 
