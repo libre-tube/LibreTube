@@ -32,9 +32,10 @@ class PlaylistOptionsBottomSheet(
     override fun onCreate(savedInstanceState: Bundle?) {
         // options for the dialog
         val optionsList = mutableListOf(
-            getString(R.string.playOnBackground),
-            getString(R.string.add_to_queue)
+            getString(R.string.playOnBackground)
         )
+
+        if (PlayingQueue.isNotEmpty()) optionsList.add(getString(R.string.add_to_queue))
 
         val isBookmarked = runBlocking(Dispatchers.IO) {
             DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId)
