@@ -44,6 +44,7 @@ import com.github.libretube.ui.sheets.ChaptersBottomSheet
 import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
+import com.github.libretube.util.DataSaverMode
 import com.github.libretube.util.PlayingQueue
 import kotlin.math.abs
 
@@ -275,10 +276,16 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     }
 
     private fun updateThumbnailAsync(thumbnailUrl: String) {
+        if (DataSaverMode.isEnabled(requireContext())) {
+            binding.progress.isVisible = false
+            return
+        }
+
         binding.progress.isVisible = true
         binding.thumbnail.isGone = true
 
         ImageHelper.getAsync(requireContext(), thumbnailUrl) {
+            val binding = _binding ?: return@getAsync
             binding.thumbnail.setImageBitmap(it)
             binding.miniPlayerThumbnail.setImageBitmap(it)
             binding.thumbnail.isVisible = true
