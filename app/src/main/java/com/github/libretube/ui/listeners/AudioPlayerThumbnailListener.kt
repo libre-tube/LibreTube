@@ -47,12 +47,12 @@ class AudioPlayerThumbnailListener(context: Context, private val listener: Audio
         }
 
         override fun onScroll(
-            e1: MotionEvent,
+            e1: MotionEvent?,
             e2: MotionEvent,
             distanceX: Float,
             distanceY: Float
         ): Boolean {
-            val insideThreshHold = abs(e2.y - e1.y) <= MOVEMENT_THRESHOLD
+            val insideThreshHold = abs(e2.y - e1!!.y) <= MOVEMENT_THRESHOLD
 
             // If the movement is inside threshold or scroll is horizontal then return false
             if (!isMoving && (insideThreshHold || abs(distanceX) > abs(distanceY))) {
