@@ -484,4 +484,6 @@
     <string name="screen_orientation">כיוון המסך</string>
     <string name="no_chapter">אין פרק</string>
     <string name="remove_watched_videos">הסרת סרטונים שנצפו</string>
+    <string name="player_channel_description">מציג התראה בזמן הנגינה</string>
+    <string name="player_channel_name">שירות נגן</string>
 </resources>
