@@ -481,4 +481,6 @@
     <string name="no_chapter">Sin capítulos</string>
     <string name="screen_orientation">Orientación de pantalla</string>
     <string name="remove_watched_videos">Eliminar los videos ya vistos</string>
+    <string name="player_channel_name">Servicios del reproductor</string>
+    <string name="player_channel_description">Aparece una notificación cuando se está reproduciendo</string>
 </resources>
