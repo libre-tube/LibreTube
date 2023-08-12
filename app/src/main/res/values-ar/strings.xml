@@ -490,4 +490,6 @@
     <string name="no_chapter">لا يوجد فصل</string>
     <string name="screen_orientation">اتجاه الشاشة</string>
     <string name="remove_watched_videos">إزالة مقاطع الفيديو التي تمت مشاهدتها</string>
+    <string name="player_channel_name">خدمة المشغل</string>
+    <string name="player_channel_description">يُظهر اشعار عند التشغيل</string>
 </resources>
