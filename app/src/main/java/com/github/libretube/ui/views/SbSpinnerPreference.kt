@@ -11,10 +11,11 @@ import android.widget.TextView
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
 import com.github.libretube.R
+import com.github.libretube.helpers.PreferenceHelper
 
 class SbSpinnerPreference(context: Context, attrs: AttributeSet) : Preference(context, attrs) {
     private lateinit var adapter: ArrayAdapter<CharSequence>
-    private var selectedItem: CharSequence? = null
+    private lateinit var initialValue: String
 
     init {
         layoutResource = R.layout.spinner_preference
@@ -36,8 +37,10 @@ class SbSpinnerPreference(context: Context, attrs: AttributeSet) : Preference(co
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
 
+        spinner.onItemSelectedListener = null
+
         // Set the initial selected item
-        selectedItem?.let { selectedItem ->
+        PreferenceHelper.getString(key, initialValue).let { selectedItem ->
             val position = getEntryValues().indexOf(selectedItem)
             spinner.setSelection(position)
         }
@@ -50,7 +53,8 @@ class SbSpinnerPreference(context: Context, attrs: AttributeSet) : Preference(co
                 position: Int,
                 id: Long
             ) {
-                persistString(getEntryValues()[position])
+                val newValue = getEntryValues()[position]
+                persistString(newValue)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) = Unit
@@ -59,12 +63,9 @@ class SbSpinnerPreference(context: Context, attrs: AttributeSet) : Preference(co
 
     override fun onGetDefaultValue(ta: TypedArray, index: Int): Any {
         // Get the default value from the XML attribute, if specified
-        return ta.getString(index).orEmpty()
-    }
-
-    override fun onSetInitialValue(defaultValue: Any?) {
-        // Set the initial selected item from the persisted value, if available
-        selectedItem = getPersistedString(defaultValue?.toString())
+        val defaultValue = ta.getString(index).orEmpty()
+        this.initialValue = defaultValue
+        return defaultValue
     }
 
     private fun getEntryValues() = context.resources.getStringArray(R.array.sb_skip_options_values)
