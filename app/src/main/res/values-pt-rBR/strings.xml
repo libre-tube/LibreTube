@@ -23,7 +23,7 @@
     <string name="server_error">Parece haver um problema com o servidor selecionado. Tente outra instância.</string>
     <string name="unknown_error">Erro de rede.</string>
     <string name="error">Algo deu errado.</string>
-    <string name="empty">Você deve pôr um nome de usuário e senha.</string>
+    <string name="empty">Você deve inserir um nome de usuário e senha.</string>
     <string name="notgmail">Isto é para uma conta Piped.</string>
     <string name="defres">Resolução de vídeo</string>
     <string name="grid">Colunas de grade</string>
@@ -33,7 +33,7 @@
     <string name="playlistCreated">Playlist criada.</string>
     <string name="playlistName">Nome da playlist</string>
     <string name="addToPlaylist">Adicionar à playlist</string>
-    <string name="success">Feito.</string>
+    <string name="success">Pronto.</string>
     <string name="fail">Falhou :(</string>
     <string name="about">Sobre</string>
     <string name="subscribe">Inscrever-se</string>
@@ -64,7 +64,7 @@
     <string name="website">Website</string>
     <string name="comments">Comentários</string>
     <string name="noInternet">Conecte-se à Internet primeiro.</string>
-    <string name="retry">Tentar de novo</string>
+    <string name="retry">Tentar novamente</string>
     <string name="sponsorblock">Bloqueador de Patrocinadores</string>
     <string name="sponsorblock_summary">Usa a API https://sponsor.ajay.app</string>
     <string name="channels">Canais</string>
