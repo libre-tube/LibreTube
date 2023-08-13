@@ -1,0 +1,8 @@
+* feat: support for DeArrow
+* feat: support hardware/bluetooth keys for playback control
+* feat: Video chapters redesign
+* feat: Support for different audio track types
+* feat: seekbar preview for downloaded videos
+* feat: support for video meta info
+* feat: add 'Continue watching' section to home tab
+* feat(queue): options to mark as (un)watched, and remove watched videos
