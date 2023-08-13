@@ -36,6 +36,7 @@ import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.services.OnlinePlayerService
 import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.interfaces.AudioPlayerOptions
 import com.github.libretube.ui.listeners.AudioPlayerThumbnailListener
@@ -111,10 +112,6 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             binding.playerMotionLayout.transitionToEnd()
         }
 
-        binding.dropdownMenu.setOnClickListener {
-            onLongTap()
-        }
-
         binding.autoPlay.isChecked = PlayerHelper.autoPlayEnabled
         binding.autoPlay.setOnCheckedChangeListener { _, isChecked ->
             PlayerHelper.autoPlayEnabled = isChecked
@@ -163,6 +160,12 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
                 keepQueue = true,
                 forceVideo = true
             )
+        }
+
+        binding.download.setOnClickListener {
+            val videoId = PlayingQueue.getCurrent()?.url?.toID() ?: return@setOnClickListener
+            val downloadDialog = DownloadDialog(videoId)
+            downloadDialog.show(childFragmentManager, DownloadDialog::class.java.name)
         }
 
         binding.share.setOnClickListener {

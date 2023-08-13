@@ -56,16 +56,6 @@
                 app:track="@drawable/player_switch_track"
                 app:trackTint="?colorControlNormal" />
 
-            <ImageView
-                android:id="@+id/dropdown_menu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="?selectableItemBackgroundBorderless"
-                android:scaleX="0.8"
-                android:scaleY="0.8"
-                android:src="@drawable/ic_three_dots" />
-
         </LinearLayout>
 
         <FrameLayout
@@ -297,6 +287,11 @@
                     android:id="@+id/open_video"
                     style="@style/AudioPlayerButton"
                     android:src="@drawable/ic_video" />
+
+                <ImageView
+                    android:id="@+id/download"
+                    style="@style/AudioPlayerButton"
+                    android:src="@drawable/ic_download" />
 
                 <ImageView
                     android:id="@+id/share"
