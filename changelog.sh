@@ -1,8 +1,6 @@
-# check whether there's a file passed as argument
-! [ -f "$1" ] && echo "File doesn't exist" && exit 1
+## Usage: ./changelog.sh <text>
 
-# read the file
-TEXT=$(<"$1")
+TEXT="$1"
 
 # the link containing the full commit history
 FULLCHANGELOG=$(echo "$TEXT{@}" | tail -n 1)
