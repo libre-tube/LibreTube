@@ -157,7 +157,6 @@ class DownloadService : LifecycleService() {
      * Download file and emit [DownloadStatus] to the collectors of [downloadFlow]
      * and notification.
      */
-    @Suppress("KotlinConstantConditions")
     private suspend fun downloadFile(item: DownloadItem) {
         downloadQueue[item.id] = true
         val notificationBuilder = getNotificationBuilder(item)
@@ -221,9 +220,11 @@ class DownloadService : LifecycleService() {
                         }
                     }
                 } catch (_: CancellationException) {
+                    break
                 } catch (e: Exception) {
                     toastFromMainThread("${getString(R.string.download)}: ${e.message}")
                     _downloadFlow.emit(item.id to DownloadStatus.Error(e.message.toString(), e))
+                    break
                 }
 
                 withContext(Dispatchers.IO) {
@@ -233,14 +234,15 @@ class DownloadService : LifecycleService() {
                     con.disconnect()
                 }
             } catch (_: Exception) {
+                break
             }
         }
 
         val completed = totalRead < item.downloadSize
         if (completed) {
-            _downloadFlow.emit(item.id to DownloadStatus.Paused)
-        } else {
             _downloadFlow.emit(item.id to DownloadStatus.Completed)
+        } else {
+            _downloadFlow.emit(item.id to DownloadStatus.Paused)
         }
 
         setPauseNotification(notificationBuilder, item, completed)
@@ -466,6 +468,18 @@ class DownloadService : LifecycleService() {
         ).build()
     }
 
+    private fun getPauseAction(id: Int): NotificationCompat.Action {
+        val intent = Intent(this, NotificationReceiver::class.java)
+            .setAction(ACTION_DOWNLOAD_PAUSE)
+            .putExtra("id", id)
+
+        return NotificationCompat.Action.Builder(
+            R.drawable.ic_pause,
+            getString(R.string.pause),
+            PendingIntentCompat.getBroadcast(this, id, intent, FLAG_UPDATE_CURRENT, false)
+        ).build()
+    }
+
     private fun getStopAction(id: Int): NotificationCompat.Action {
         val intent = Intent(this, NotificationReceiver::class.java).apply {
             action = ACTION_DOWNLOAD_STOP
@@ -478,18 +492,6 @@ class DownloadService : LifecycleService() {
             R.drawable.ic_stop,
             getString(R.string.stop),
             PendingIntentCompat.getBroadcast(this, requestCode, intent, FLAG_UPDATE_CURRENT, false)
-        ).build()
-    }
-
-    private fun getPauseAction(id: Int): NotificationCompat.Action {
-        val intent = Intent(this, NotificationReceiver::class.java)
-            .setAction(ACTION_DOWNLOAD_PAUSE)
-            .putExtra("id", id)
-
-        return NotificationCompat.Action.Builder(
-            R.drawable.ic_pause,
-            getString(R.string.pause),
-            PendingIntentCompat.getBroadcast(this, id, intent, FLAG_UPDATE_CURRENT, false)
         ).build()
     }
 
