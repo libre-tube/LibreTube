@@ -15,7 +15,7 @@
     <string name="loggedIn">Sesión iniciada.</string>
     <string name="yes">Si</string>
     <string name="registered">Registrado. Ahora puedes suscribirte a canales.</string>
-    <string name="already_logged_in">Ya has iniciado sesión. Debes cerrar la sesión de tu cuenta.</string>
+    <string name="already_logged_in">Sesión ya iniciada. Vas a cerrar la sesión de tu cuenta.</string>
     <string name="instances">Elegir…</string>
     <string name="customInstance">Personalizada</string>
     <string name="login_register">Iniciar sesión/Registrarse</string>
