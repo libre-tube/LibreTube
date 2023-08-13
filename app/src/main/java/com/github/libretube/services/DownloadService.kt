@@ -238,7 +238,7 @@ class DownloadService : LifecycleService() {
             }
         }
 
-        val completed = totalRead < item.downloadSize
+        val completed = totalRead >= item.downloadSize
         if (completed) {
             _downloadFlow.emit(item.id to DownloadStatus.Completed)
         } else {
