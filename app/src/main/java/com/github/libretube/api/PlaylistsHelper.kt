@@ -47,8 +47,11 @@ object PlaylistsHelper {
                     )
                 }
         }
+        sortPlaylists(playlists)
+    }
 
-        when (
+    private fun sortPlaylists(playlists: List<Playlists>): List<Playlists> {
+        return when (
             PreferenceHelper.getString(PreferenceKeys.PLAYLISTS_ORDER, "creation_date")
         ) {
             "creation_date" -> playlists
@@ -56,7 +59,6 @@ object PlaylistsHelper {
             "alphabetic" -> playlists.sortedBy { it.name?.lowercase() }
             "alphabetic_reversed" -> playlists.sortedBy { it.name?.lowercase() }
                 .reversed()
-
             else -> playlists
         }
     }

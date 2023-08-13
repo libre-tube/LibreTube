@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
+import com.github.libretube.api.obj.Playlists
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentLibraryBinding
 import com.github.libretube.db.DatabaseHolder
@@ -31,6 +32,7 @@ import com.github.libretube.ui.adapters.PlaylistBookmarkAdapter
 import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.dialogs.CreatePlaylistDialog
 import com.github.libretube.ui.models.PlayerViewModel
+import com.github.libretube.ui.sheets.BaseBottomSheet
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -95,6 +97,20 @@ class LibraryFragment : Fragment() {
                 fetchPlaylists()
             }.show(childFragmentManager, CreatePlaylistDialog::class.java.name)
         }
+
+        binding.sortTV.setOnClickListener {
+            val sortOptions = resources.getStringArray(R.array.playlistSortingOptions)
+            val sortOptionValues = resources.getStringArray(R.array.playlistSortingOptionsValues)
+
+            BaseBottomSheet().apply {
+                setSimpleItems(sortOptions.toList()) { index ->
+                    binding.sortTV.text = sortOptions[index]
+                    val value = sortOptionValues[index]
+                    PreferenceHelper.putString(PreferenceKeys.PLAYLISTS_ORDER, value)
+                    fetchPlaylists()
+                }
+            }.show(childFragmentManager)
+        }
     }
 
     override fun onDestroyView() {
@@ -143,26 +159,32 @@ class LibraryFragment : Fragment() {
                 binding.playlistRefresh.isRefreshing = false
 
                 if (playlists.isNotEmpty()) {
-                    val playlistsAdapter = PlaylistsAdapter(
-                        playlists.toMutableList(),
-                        PlaylistsHelper.getPrivatePlaylistType()
-                    )
-
-                    // listen for playlists to become deleted
-                    playlistsAdapter.registerAdapterDataObserver(object :
-                        RecyclerView.AdapterDataObserver() {
-                        override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-                            _binding?.nothingHere?.isVisible = playlistsAdapter.itemCount == 0
-                            super.onItemRangeRemoved(positionStart, itemCount)
-                        }
-                    })
-
-                    binding.nothingHere.isGone = true
-                    binding.playlistRecView.adapter = playlistsAdapter
+                    showPlaylists(playlists)
                 } else {
                     binding.nothingHere.isVisible = true
                 }
             }
         }
+    }
+
+    private fun showPlaylists(playlists: List<Playlists>) {
+        val binding = _binding ?: return
+
+        val playlistsAdapter = PlaylistsAdapter(
+            playlists.toMutableList(),
+            PlaylistsHelper.getPrivatePlaylistType()
+        )
+
+        // listen for playlists to become deleted
+        playlistsAdapter.registerAdapterDataObserver(object :
+            RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+                _binding?.nothingHere?.isVisible = playlistsAdapter.itemCount == 0
+                super.onItemRangeRemoved(positionStart, itemCount)
+            }
+        })
+
+        binding.nothingHere.isGone = true
+        binding.playlistRecView.adapter = playlistsAdapter
     }
 }

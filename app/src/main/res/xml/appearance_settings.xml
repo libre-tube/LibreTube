@@ -103,16 +103,4 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/misc">
-
-        <ListPreference
-            android:defaultValue="creation_date"
-            android:entries="@array/playlistSortingOptions"
-            android:entryValues="@array/playlistSortingOptionsValues"
-            android:icon="@drawable/ic_filter"
-            app:key="playlists_order"
-            app:title="@string/playlists_order" />
-
-    </PreferenceCategory>
-
 </PreferenceScreen>
