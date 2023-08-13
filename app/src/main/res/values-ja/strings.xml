@@ -270,7 +270,7 @@
     <string name="playback_pitch">ピッチ</string>
     <string name="error_occurred">エラー</string>
     <string name="copied">コピーしました</string>
-    <string name="change_region">急上昇は現在の地域で利用できません。設定で他の地域を選択してください。</string>
+    <string name="change_region">急上昇ランキングは現在の地域にはありません。設定で他の地域を選択してください。</string>
     <string name="share_with_time">時間指定で共有</string>
     <string name="legacy_subscriptions">古い登録チャンネル表示</string>
     <string name="device_info">端末情報</string>
@@ -342,7 +342,7 @@
     <string name="limit_to_runtime">ランタイムの上限</string>
     <string name="trends">急上昇</string>
     <string name="featured">注目</string>
-    <string name="trending">いま急上昇</string>
+    <string name="trending">いま急上昇中</string>
     <string name="queue_insert_related_videos">関連動画を挿入する</string>
     <string name="bookmarks">ブックマーク</string>
     <string name="bookmark">ブックマーク</string>
@@ -475,4 +475,6 @@
     <string name="uploader_name">公開者の名前</string>
     <string name="sort_by">並び替え</string>
     <string name="duration_span">期間: %1$s</string>
+    <string name="player_channel_name">プレイヤーのサービス</string>
+    <string name="player_channel_description">再生中に通知を表示</string>
 </resources>
