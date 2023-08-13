@@ -152,7 +152,7 @@ class SearchResultFragment : Fragment() {
             PreferenceHelper.getBoolean(PreferenceKeys.SEARCH_HISTORY_TOGGLE, true)
         if (searchHistoryEnabled && query.isNotEmpty()) {
             lifecycleScope.launch(Dispatchers.IO) {
-                DatabaseHelper.addToSearchHistory(SearchHistoryItem(query))
+                DatabaseHelper.addToSearchHistory(SearchHistoryItem(query.trim()))
             }
         }
     }
