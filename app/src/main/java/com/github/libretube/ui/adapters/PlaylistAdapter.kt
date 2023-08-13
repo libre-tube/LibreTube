@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
+import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.ui.base.BaseActivity
@@ -20,14 +22,15 @@ import com.github.libretube.ui.extensions.setFormattedDuration
 import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.PlaylistViewHolder
-import java.io.IOException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**
+ * @param originalFeed original, unsorted feed, needed in order to delete the proper video from
+ * playlists
+ */
 class PlaylistAdapter(
-    // original, unsorted feed
-    // needed in order to delete the proper video from playlists
     private val originalFeed: MutableList<StreamItem>,
     private val sortedFeed: MutableList<StreamItem>,
     private val playlistId: String,
@@ -109,12 +112,14 @@ class PlaylistAdapter(
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, itemCount)
         }
+        val appContext = context.applicationContext
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 PlaylistsHelper.removeFromPlaylist(playlistId, playlistIndex)
-            } catch (e: IOException) {
+            } catch (e: Exception) {
                 Log.e(TAG(), e.toString())
-                return@launch
+                appContext.toastFromMainDispatcher(R.string.unknown_error)
             }
         }
     }
