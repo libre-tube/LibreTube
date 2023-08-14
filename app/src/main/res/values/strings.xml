@@ -487,15 +487,13 @@
         <item quantity="other">%d new streams</item>
     </plurals>
 
-    <!--Tooltips for queue options-->
+    <!--Tooltips -->
     <string name="tooltip_repeat">Repeat</string>
     <string name="tooltip_reverse">Reverse</string>
     <string name="tooltip_sort">Sort</string>
     <string name="tooltip_watch_position">Watch position</string>
     <string name="tooltip_clear_queue">Clear queue</string>
     <string name="tooltip_dismiss">Dismiss</string>
-
-    <!--Tooltips for player-->
     <string name="tooltip_locked">Lock player</string>
     <string name="tooltip_unlocked">Unlock player</string>
     <string name="tooltip_sponsorblock">Toggle Sponsorblock</string>
