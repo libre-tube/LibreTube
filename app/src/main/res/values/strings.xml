@@ -502,4 +502,6 @@
     <string name="tooltip_fullscreen">Fullscreen</string>
     <string name="tooltip_close">Close</string>
     <string name="tooltip_play">Play</string>
+    <string name="tooltip_filter">Filter</string>
+    <string name="tooltip_edit_groups">Edit groups</string>
 </resources>

@@ -106,6 +106,7 @@
 
                         <TextView
                             android:id="@+id/filterTV"
+                            android:tooltipText="@string/tooltip_filter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start"
@@ -118,6 +119,7 @@
 
                         <TextView
                             android:id="@+id/sortTV"
+                            android:tooltipText="@string/tooltip_sort"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
@@ -142,6 +144,7 @@
 
                             <ImageView
                                 android:id="@+id/edit_groups"
+                                android:tooltipText="@string/tooltip_edit_groups"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
