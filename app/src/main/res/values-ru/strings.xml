@@ -72,7 +72,7 @@
     <string name="okay">ОК</string>
     <string name="history">История</string>
     <string name="search_history">История поиска</string>
-    <string name="sponsorblock">SponsorBlock</string>
+    <string name="sponsorblock">Спонсорская блокировка</string>
     <string name="sponsorblock_summary">На базе API https://sponsor.ajay.app/</string>
     <string name="segment_skipped">Пропущен сегмент</string>
     <string name="category_interaction">Напоминание о реакции</string>
@@ -104,7 +104,7 @@
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Играть в фоне</string>
-    <string name="disabled">Откл.</string>
+    <string name="disabled">Отключены</string>
     <string name="update_available">Версия %1$s доступна</string>
     <string name="defaultIcon">По умолчанию</string>
     <string name="shapedIcon">Формальная форма</string>
@@ -124,7 +124,7 @@
     <string name="category_preview_description">Для сегментов с подробным описанием будущего контента без дополнительной информации. Если он включает в себя клипы, которые появляются только здесь, скорее всего, это неправильная категория.</string>
     <string name="appearance">Внешний вид</string>
     <string name="customInstance_summary">Добавить…</string>
-    <string name="addInstance">Добавить инстанс</string>
+    <string name="addInstance">Добавить</string>
     <string name="empty_instance">Введите название и URL API.</string>
     <string name="related_streams">Связанный контент</string>
     <string name="category_music_offtopic_description">Только для использования в музыкальных клипах. Он должен охватывать части видео, не являющиеся частью официальных миксов. В конечном итоге, видео должно быть максимально похоже на версию Spotify или любую другую микс-версию, или должно быть меньше разговоров и других отвлекающих факторов.</string>
@@ -159,12 +159,12 @@
     <string name="behavior">Поведение</string>
     <string name="player_summary">Настройки и поведение плеера</string>
     <string name="seek_increment">Шаг перемотки</string>
-    <string name="pauseOnScreenOff">Автопауза</string>
+    <string name="pauseOnScreenOff">Автоматическая пауза</string>
     <string name="pauseOnScreenOff_summary">Останавливать воспроизведение при отключении экрана.</string>
     <string name="autoplay_summary">Автоматически воспроизводить следующее видео после текущего.</string>
     <string name="clonePlaylist">Клонировать плейлист</string>
     <string name="deleteAccount">Удалить аккаунт</string>
-    <string name="deleteAccount_summary">Удалить аккаунт Piped</string>
+    <string name="deleteAccount_summary">Удалить свою учетную запись Piped</string>
     <string name="account">Аккаунт</string>
     <string name="restore">Восстановить</string>
     <string name="watch_history">История просмотра</string>
@@ -231,7 +231,7 @@
     <string name="playingOnBackground">Воспроизведение в фоне…</string>
     <string name="playerAudioFormat">Аудио формат для проигрывателя</string>
     <string name="best_quality">Лучшее</string>
-    <string name="worst_quality">Худшее</string>
+    <string name="worst_quality">Низкое</string>
     <string name="export_subscriptions">Экспорт подписок</string>
     <string name="skip_buttons">Кнопки перехода</string>
     <string name="background_mode">Фоновый режим</string>
@@ -247,13 +247,13 @@
     <string name="backup_restore">Резервное копирование и восстановление</string>
     <string name="backup">Резервное копирование</string>
     <string name="picture_in_picture">Картинка в картинке (PiP)</string>
-    <string name="resize_mode_fit">Уместить</string>
-    <string name="resize_mode_fill">Заполнить</string>
-    <string name="resize_mode_zoom">Увеличить</string>
-    <string name="repeat_mode_none">Без</string>
+    <string name="resize_mode_fit">Исходный</string>
+    <string name="resize_mode_fill">Заполненный</string>
+    <string name="resize_mode_zoom">Увеличенный</string>
+    <string name="repeat_mode_none">Отключен</string>
     <string name="repeat_mode_current">Текущий</string>
-    <string name="player_resize_mode">Масштаб видео</string>
-    <string name="maximum_image_cache">Макс. размер кэша изображений</string>
+    <string name="player_resize_mode">Размер изображения</string>
+    <string name="maximum_image_cache">Максимальный размер кэша изображений</string>
     <string name="copied_to_clipboard">Скопировано в буфер обмена</string>
     <string name="open_copied">Открыть</string>
     <string name="device_info">Об устройстве</string>
@@ -309,7 +309,7 @@
     <string name="audio_track">Аудио трек</string>
     <string name="hls_instead_of_dash">Использовать HLS</string>
     <string name="hls_instead_of_dash_summary">Использовать HLS вместо DASH (будет медленнее, не рекомендуется)</string>
-    <string name="auto_quality">Авто</string>
+    <string name="auto_quality">Автоматическое</string>
     <string name="trends">Тренды</string>
     <string name="bookmarks">Закладки</string>
     <string name="limit_to_runtime">Ограничение времени выполнения</string>
@@ -386,7 +386,7 @@
     <string name="autoplay_countdown_summary">Показывать 5-секундный обратный отсчёт перед автовоспроизведением следующего видео.</string>
     <string name="autoplay_countdown">Таймер автовоспроизведения</string>
     <string name="playing_next">Следующее воспроизведение за %1$s</string>
-    <string name="stats_for_nerds">Статистика для любознательных</string>
+    <string name="stats_for_nerds">Статистика</string>
     <string name="video_id">ID видео</string>
     <plurals name="months_ago">
         <item quantity="one">%d месяц назад</item>
@@ -411,7 +411,7 @@
     <string name="group_name">Название группы</string>
     <string name="channel_groups">Группы каналов</string>
     <string name="edit_group">Изменить группу</string>
-    <string name="play_automatically">Проигрывать автоматически</string>
+    <string name="play_automatically">Автоматическое воспроизведение</string>
     <string name="play_automatically_summary">Начинать воспроизведение видео автоматически при выборе</string>
     <string name="fullscreen_gestures">Жесты входа/выхода из полноэкранного режима</string>
     <string name="go_to_video">Перейти к видео</string>
@@ -470,8 +470,8 @@
     <string name="descriptive_audio_track">описательная</string>
     <string name="dubbed_audio_track">дублированная</string>
     <string name="default_or_unknown_audio_track">стандартная или неизвестная</string>
-    <string name="original_or_main_audio_track">оригинальная или основная</string>
-    <string name="unknown_or_no_audio">неизвестная или без звука</string>
+    <string name="original_or_main_audio_track">оригинальный или основной</string>
+    <string name="unknown_or_no_audio">неизвестно или звук отсутствует</string>
     <string name="continue_watching">Продолжить просмотр</string>
     <string name="dearrow">Включить DeArrow</string>
     <string name="dearrow_summary">Показывайте более точные и менее сенсационные заголовки и миниатюры. Увеличивает время загрузки.</string>
@@ -484,4 +484,6 @@
     <string name="no_chapter">Нет раздела</string>
     <string name="uploader_name">Имя загрузчика</string>
     <string name="remove_watched_videos">Удалить просмотренные видео</string>
+    <string name="player_channel_name">Проигрыватель</string>
+    <string name="player_channel_description">Показывать уведомление при воспроизведении</string>
 </resources>
