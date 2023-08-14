@@ -505,4 +505,5 @@
     <string name="tooltip_filter">Filter</string>
     <string name="tooltip_edit_groups">Edit groups</string>
     <string name="tooltip_create_playlist">Create playlist</string>
+    <string name="tooltip_scroll_to_top">Scroll to top</string>
 </resources>
