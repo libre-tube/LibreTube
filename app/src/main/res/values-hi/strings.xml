@@ -472,4 +472,12 @@
     <string name="visibility">दृश्यता</string>
     <string name="visibility_unlisted">गैर-सूचीबद्ध</string>
     <string name="visibility_public">सार्वजनिक</string>
+    <string name="remove_watched_videos">देखे गए वीडियो हटाएँ</string>
+    <string name="no_chapter">कोई अध्याय नहीं</string>
+    <string name="sort_by">के अनुसार क्रमबद्ध करें</string>
+    <string name="uploader_name">अपलोडर का नाम</string>
+    <string name="player_channel_name">प्लेयर सेवा</string>
+    <string name="screen_orientation">स्क्रीन ओरिएंटेशन</string>
+    <string name="player_channel_description">चलते समय एक सूचना दिखाता है</string>
+    <string name="duration_span">अवधि: %1$s</string>
 </resources>

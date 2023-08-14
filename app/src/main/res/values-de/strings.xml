@@ -478,4 +478,6 @@
     <string name="screen_orientation">Bildschirmausrichtung</string>
     <string name="no_chapter">Kein Kapitel</string>
     <string name="remove_watched_videos">Angesehene Videos entfernen</string>
+    <string name="player_channel_name">Player-Service</string>
+    <string name="player_channel_description">Benachrichtigung beim Abspielen anzeigen</string>
 </resources>

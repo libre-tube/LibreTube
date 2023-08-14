@@ -475,4 +475,6 @@
     <string name="duration_span">时长：%1$s</string>
     <string name="screen_orientation">屏幕方向</string>
     <string name="remove_watched_videos">移除已观看的视频</string>
+    <string name="player_channel_name">播放器服务</string>
+    <string name="player_channel_description">播放时显示通知</string>
 </resources>

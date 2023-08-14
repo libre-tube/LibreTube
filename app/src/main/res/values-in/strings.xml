@@ -230,7 +230,7 @@
     <string name="notify_new_streams_summary">Tampilkan notifikasi untuk saluran baru dari kreator yang Anda ikuti.</string>
     <string name="history_empty">Belum ada riwayat.</string>
     <string name="required_network">Dibutuhkan koneksi</string>
-    <string name="export_subscriptions">Ekspor Langganan</string>
+    <string name="export_subscriptions">Ekspor langganan</string>
     <string name="skip_buttons">Tombol lewat</string>
     <string name="skip_buttons_summary">Tampilkan tombol untuk melewati ke video berikutnya atau sebelumnya.</string>
     <string name="history_size">Ukuran riwayat maksimum</string>
@@ -474,4 +474,7 @@
     <string name="no_chapter">Tidak ada bab</string>
     <string name="duration_span">Durasi: %1$s</string>
     <string name="screen_orientation">Orientasi layar</string>
+    <string name="remove_watched_videos">Hapus video yang sudah ditonton</string>
+    <string name="player_channel_name">Layanan Pemutar</string>
+    <string name="player_channel_description">Menampilkan notifikasi saat memutar</string>
 </resources>

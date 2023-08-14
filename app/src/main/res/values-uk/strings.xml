@@ -484,4 +484,6 @@
     <string name="duration_span">Тривалість: %1$s</string>
     <string name="screen_orientation">Орієнтація екрана</string>
     <string name="remove_watched_videos">Видалити переглянуті відео</string>
+    <string name="player_channel_name">Служби програвача</string>
+    <string name="player_channel_description">Показує сповіщення під час відтворення</string>
 </resources>

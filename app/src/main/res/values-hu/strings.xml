@@ -197,7 +197,7 @@
     <string name="data_saver_mode_summary">Bélyegképek és egyéb képek kihagyása.</string>
     <string name="no_player_found">Nem található külső lejátszó. Kérjük, győződjön meg, hogy van telepítve.</string>
     <string name="no_search_result">Nincs eredmény.</string>
-    <string name="export_subscriptions">Feliratkozások exportálása</string>
+    <string name="export_subscriptions">Előfizetések exportálása</string>
     <string name="history_size">Előzmények maximális mérete</string>
     <string name="unlimited">Végtelen</string>
     <string name="take_a_break">Itt az idő szünetet tartani</string>
@@ -478,4 +478,6 @@
     <string name="no_chapter">Nincs fejezet</string>
     <string name="screen_orientation">Képernyő tájolás</string>
     <string name="remove_watched_videos">Megnézett videók eltávolítása</string>
+    <string name="player_channel_name">Lejátszó szolgáltatás</string>
+    <string name="player_channel_description">Értesítést jelenít meg lejátszás közben</string>
 </resources>

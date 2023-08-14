@@ -481,4 +481,6 @@
     <string name="no_chapter">Žádná kapitola</string>
     <string name="screen_orientation">Otočení obrazovky</string>
     <string name="remove_watched_videos">Odebrat zhlédnutá videa</string>
+    <string name="player_channel_name">Služba přehrávače</string>
+    <string name="player_channel_description">Zobrazí oznámení při přehrávání</string>
 </resources>
