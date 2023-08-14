@@ -32,6 +32,7 @@
 
                 <ImageView
                     android:id="@+id/close_imageButton"
+                    android:tooltipText="@string/tooltip_minimize"
                     style="@style/PlayerControlTop"
                     android:layout_marginEnd="-10dp"
                     android:src="@drawable/ic_close"
@@ -68,6 +69,7 @@
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/autoPlay"
+                    android:tooltipText="@string/player_autoplayyy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="2dp"
@@ -81,6 +83,7 @@
 
                 <ImageButton
                     android:id="@+id/sb_toggle"
+                    android:tooltipText="@string/tooltip_sponsorblock"
                     style="@style/PlayerControlTop"
                     android:layout_marginEnd="2dp"
                     android:src="@drawable/ic_sb_enabled"
@@ -89,6 +92,7 @@
 
                 <ImageButton
                     android:id="@+id/queue_toggle"
+                    android:tooltipText="@string/queue"
                     style="@style/PlayerControlTop"
                     android:layout_marginEnd="2dp"
                     android:src="@drawable/ic_queue"
@@ -97,6 +101,7 @@
 
                 <ImageButton
                     android:id="@+id/toggle_options"
+                    android:tooltipText="@string/tooltip_options"
                     style="@style/PlayerControlTop"
                     android:src="@drawable/ic_player_settings"
                     app:tint="@android:color/white" />
@@ -311,6 +316,7 @@
 
                 <ImageButton
                     android:id="@+id/fullscreen"
+                    android:tooltipText="@string/tooltip_fullscreen"
                     style="@style/PlayerControlBottom"
                     android:src="@drawable/ic_fullscreen"
                     app:tint="@android:color/white" />

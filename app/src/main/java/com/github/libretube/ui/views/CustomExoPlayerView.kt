@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.text.format.DateUtils
@@ -127,13 +128,11 @@ open class CustomExoPlayerView(
         // locking the player
         binding.lockPlayer.setOnClickListener {
             // change the locked/unlocked icon
-            binding.lockPlayer.setImageResource(
-                if (!isPlayerLocked) {
-                    R.drawable.ic_locked
-                } else {
-                    R.drawable.ic_unlocked
-                }
-            )
+            val icon = if (!isPlayerLocked)  R.drawable.ic_locked else  R.drawable.ic_unlocked;
+            val tooltip = if (!isPlayerLocked)  R.string.tooltip_unlocked else  R.string.tooltip_locked;
+            binding.lockPlayer.setImageResource(icon)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                binding.lockPlayer.tooltipText = context.getString(tooltip)
 
             // show/hide all the controls
             lockPlayer(isPlayerLocked)
