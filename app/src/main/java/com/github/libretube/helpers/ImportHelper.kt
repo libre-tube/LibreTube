@@ -23,6 +23,7 @@ import kotlin.streams.toList
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
+import java.util.stream.Collectors
 
 object ImportHelper {
     /**
@@ -79,7 +80,7 @@ object ImportHelper {
                     it.bufferedReader().use { reader ->
                         reader.lines().map { line -> line.substringBefore(",") }
                             .filter { channelId -> channelId.length == 24 }
-                            .toList()
+                            .collect(Collectors.toList())
                     }
                 }.orEmpty()
             }
