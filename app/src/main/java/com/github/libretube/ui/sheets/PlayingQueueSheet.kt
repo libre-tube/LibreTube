@@ -1,6 +1,7 @@
 package com.github.libretube.ui.sheets
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -48,6 +49,18 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
         // scroll to the currently playing video in the queue
         val currentPlayingIndex = PlayingQueue.currentIndex()
         if (currentPlayingIndex != -1) binding.optionsRecycler.scrollToPosition(currentPlayingIndex)
+
+        // tooltips are only supported since API 26
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            binding.repeat.tooltipText = getString(R.string.repeat)
+            binding.shuffle.tooltipText = getString(R.string.shuffle)
+            binding.reverse.tooltipText = getString(R.string.reverse)
+            binding.addToPlaylist.tooltipText = getString(R.string.addToPlaylist)
+            binding.sort.tooltipText = getString(R.string.sort)
+            binding.watchPositionsOptions.tooltipText = getString(R.string.watch_position)
+            binding.clearQueue.tooltipText = getString(R.string.clear_queue)
+            binding.dismiss?.tooltipText = getString(R.string.dismiss)
+        }
 
         binding.shuffle.setOnClickListener {
             val streams = PlayingQueue.getStreams().toMutableList()

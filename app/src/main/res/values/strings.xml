@@ -486,4 +486,12 @@
         <item quantity="one">%d new stream</item>
         <item quantity="other">%d new streams</item>
     </plurals>
+
+    <!--Tooltips for queue options-->
+    <string name="repeat">Repeat</string>
+    <string name="reverse">Reverse</string>
+    <string name="sort">Sort</string>
+    <string name="watch_position">Watch position</string>
+    <string name="clear_queue">Clear queue</string>
+    <string name="dismiss">Dismiss</string>
 </resources>

@@ -73,6 +73,7 @@
                     android:src="@drawable/ic_close" />
 
                 <ImageView
+                    android:id="@+id/dismiss"
                     style="@style/QueueSheetOption"
                     android:layout_width="0dp"
                     android:layout_weight="1"
