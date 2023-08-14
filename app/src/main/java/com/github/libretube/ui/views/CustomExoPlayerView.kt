@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
-import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.text.format.DateUtils
@@ -50,6 +49,7 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.toggleSystemBars
+import com.github.libretube.ui.extensions.trySetTooltip
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.interfaces.PlayerOptions
 import com.github.libretube.ui.listeners.PlayerGestureController
@@ -128,11 +128,15 @@ open class CustomExoPlayerView(
         // locking the player
         binding.lockPlayer.setOnClickListener {
             // change the locked/unlocked icon
-            val icon = if (!isPlayerLocked)  R.drawable.ic_locked else  R.drawable.ic_unlocked;
-            val tooltip = if (!isPlayerLocked)  R.string.tooltip_unlocked else  R.string.tooltip_locked;
+            val icon = if (!isPlayerLocked) R.drawable.ic_locked else R.drawable.ic_unlocked
+            val tooltip = if (!isPlayerLocked) {
+                R.string.tooltip_unlocked
+            } else {
+                R.string.tooltip_locked
+            }
+
             binding.lockPlayer.setImageResource(icon)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-                binding.lockPlayer.tooltipText = context.getString(tooltip)
+            binding.lockPlayer.trySetTooltip(context.getString(tooltip))
 
             // show/hide all the controls
             lockPlayer(isPlayerLocked)
