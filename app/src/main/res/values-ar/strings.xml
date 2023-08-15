@@ -492,4 +492,22 @@
     <string name="remove_watched_videos">إزالة مقاطع الفيديو التي تمت مشاهدتها</string>
     <string name="player_channel_name">خدمة المشغل</string>
     <string name="player_channel_description">يُظهر اشعار عند التشغيل</string>
+    <string name="tooltip_locked">قفل المشغل</string>
+    <string name="tooltip_unlocked">الغاء قفل المشغل</string>
+    <string name="tooltip_sponsorblock">تمكين حاجب الرعاة</string>
+    <string name="tooltip_options">الخيارات</string>
+    <string name="tooltip_minimize">تصغير</string>
+    <string name="tooltip_fullscreen">شاشة الكاملة</string>
+    <string name="tooltip_close">اغلاق</string>
+    <string name="tooltip_filter">المرشح</string>
+    <string name="tooltip_clear_queue">مسح قائمة الانتظار</string>
+    <string name="tooltip_dismiss">تجاهل</string>
+    <string name="tooltip_play">تشغيل</string>
+    <string name="tooltip_edit_groups">تعديل المجموعات</string>
+    <string name="tooltip_create_playlist">إنشاء قائمة تشغيل</string>
+    <string name="tooltip_scroll_to_top">اسحب الى الاعلى</string>
+    <string name="tooltip_repeat">تكرار</string>
+    <string name="tooltip_reverse">عكس</string>
+    <string name="tooltip_sort">فرز</string>
+    <string name="tooltip_watch_position">اماكن المراقبة</string>
 </resources>
