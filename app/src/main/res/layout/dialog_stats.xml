@@ -33,75 +33,56 @@
                 android:orientation="vertical"
                 android:paddingVertical="7dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="marquee"
-                        android:layout_gravity="center"
-                        android:textColor="?android:textColorPrimary"
-                        android:fadingEdge="horizontal"
-                        android:textSize="24sp"
-                        android:text="@string/stats_for_nerds"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:layout_gravity="center"
+                    android:textColor="?android:textColorPrimary"
+                    android:fadingEdge="horizontal"
+                    android:textSize="24sp"
+                    android:text="@string/stats_for_nerds"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="marquee"
-                        android:textColor="?android:textColorPrimary"
-                        android:fadingEdge="horizontal"
-                        android:text="Video ID"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/CustomDialogTextInputLayout"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/video_id">
 
-                    <TextView android:id="@+id/videoId"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="?android:textColorSecondary"
-                        android:paddingBottom="7dp"
-                        android:textSize="16sp" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/video_id"
+                        style="@style/DisabledTextInput" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="marquee"
-                        android:textColor="?android:textColorPrimary"
-                        android:fadingEdge="horizontal"
-                        android:text="Audio"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/CustomDialogTextInputLayout"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/audio">
 
-                    <TextView android:id="@+id/audioInfo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="?android:textColorSecondary"
-                        android:paddingBottom="7dp"
-                        android:textSize="16sp" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/audio_info"
+                        style="@style/DisabledTextInput" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="marquee"
-                        android:textColor="?android:textColorPrimary"
-                        android:fadingEdge="horizontal"
-                        android:text="Video"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/CustomDialogTextInputLayout"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/video">
 
-                    <TextView android:id="@+id/videoInfo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="?android:textColorSecondary"
-                        android:paddingBottom="7dp"
-                        android:textSize="16sp" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/video_info"
+                        style="@style/DisabledTextInput" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="marquee"
-                        android:textColor="?android:textColorPrimary"
-                        android:fadingEdge="horizontal"
-                        android:text="Quality"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/CustomDialogTextInputLayout"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/quality">
 
-                    <TextView android:id="@+id/videoQuality"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="?android:textColorSecondary"
-                        android:paddingBottom="7dp"
-                        android:textSize="16sp" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/video_quality"
+                        style="@style/DisabledTextInput" />
+                </com.google.android.material.textfield.TextInputLayout>
+
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>
