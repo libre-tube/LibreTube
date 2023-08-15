@@ -483,4 +483,22 @@
     <string name="remove_watched_videos">Odebrat zhlédnutá videa</string>
     <string name="player_channel_name">Služba přehrávače</string>
     <string name="player_channel_description">Zobrazí oznámení při přehrávání</string>
+    <string name="tooltip_repeat">Opakování</string>
+    <string name="tooltip_reverse">Opačně</string>
+    <string name="tooltip_sort">Řazení</string>
+    <string name="tooltip_watch_position">Pozice sledování</string>
+    <string name="tooltip_unlocked">Odemknout přehrávač</string>
+    <string name="tooltip_sponsorblock">Přepnout SponsorBlock</string>
+    <string name="tooltip_options">Možnosti</string>
+    <string name="tooltip_minimize">Minimalizovat</string>
+    <string name="tooltip_fullscreen">Celá obrazovka</string>
+    <string name="tooltip_edit_groups">Upravit skupiny</string>
+    <string name="tooltip_create_playlist">Vytvořit playlist</string>
+    <string name="tooltip_scroll_to_top">Posunout nahoru</string>
+    <string name="tooltip_clear_queue">Vymazat frontu</string>
+    <string name="tooltip_dismiss">Zavřít</string>
+    <string name="tooltip_locked">Uzamknout přehrávač</string>
+    <string name="tooltip_play">Přehrát</string>
+    <string name="tooltip_close">Zavřít</string>
+    <string name="tooltip_filter">Filtr</string>
 </resources>
