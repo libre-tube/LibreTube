@@ -169,7 +169,9 @@ object ImportHelper {
             ImportFormat.YOUTUBECSV -> {
                 val playlist = PipedImportPlaylist()
                 activity.contentResolver.openInputStream(uri)?.use {
-                    val lines = it.bufferedReader().use { reader -> reader.lines().toList() }
+                    val lines = it.bufferedReader().use { reader ->
+                        reader.lines().collect(Collectors.toList())
+                    }
                     playlist.name = lines[1].split(",").reversed()[2]
                     var splitIndex = lines.indexOfFirst { line -> line.isBlank() }
                     // seek until playlist items table
