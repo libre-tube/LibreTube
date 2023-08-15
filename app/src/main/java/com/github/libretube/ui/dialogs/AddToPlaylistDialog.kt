@@ -62,7 +62,11 @@ class AddToPlaylistDialog(
                 if (playlists.isEmpty()) return@repeatOnLifecycle
 
                 binding.playlistsSpinner.adapter =
-                    ArrayAdapter(requireContext(), R.layout.dropdown_item, playlists.map { it.name!! })
+                    ArrayAdapter(
+                        requireContext(),
+                        R.layout.dropdown_item,
+                        playlists.map { it.name!! }
+                    )
 
                 // select the last used playlist
                 viewModel.lastSelectedPlaylistId?.let { id ->

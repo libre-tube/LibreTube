@@ -54,6 +54,7 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/btnScrollToTop"
+                    android:tooltipText="@string/tooltip_scroll_to_top"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:background="?selectableItemBackgroundBorderless"
@@ -64,6 +65,7 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/btnClose"
+                    android:tooltipText="@string/tooltip_close"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:background="?selectableItemBackgroundBorderless"

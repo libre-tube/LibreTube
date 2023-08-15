@@ -39,40 +39,49 @@
 
                 <ImageView
                     android:id="@+id/repeat"
+                    android:tooltipText="@string/tooltip_repeat"
                     style="@style/QueueSheetOption"
                     android:src="@drawable/ic_repeat" />
 
                 <ImageView
                     android:id="@+id/shuffle"
+                    android:tooltipText="@string/shuffle"
                     style="@style/QueueSheetOption"
                     android:src="@drawable/ic_shuffle" />
 
                 <ImageView
                     android:id="@+id/reverse"
+                    android:tooltipText="@string/tooltip_reverse"
                     style="@style/QueueSheetOption"
                     android:src="@drawable/ic_reverse" />
 
                 <ImageView
                     android:id="@+id/add_to_playlist"
+                    android:tooltipText="@string/addToPlaylist"
                     style="@style/QueueSheetOption"
                     android:src="@drawable/ic_playlist_add" />
 
                 <ImageView
                     android:id="@+id/sort"
+                    android:tooltipText="@string/tooltip_sort"
                     style="@style/QueueSheetOption"
                     android:src="@drawable/ic_sort" />
 
                 <ImageView
                     android:id="@+id/watch_positions_options"
+                    android:tooltipText="@string/tooltip_watch_position"
                     style="@style/QueueSheetOption"
                     android:src="@drawable/ic_eye" />
 
                 <ImageView
                     android:id="@+id/clear_queue"
+                    android:tooltipText="@string/tooltip_clear_queue"
                     style="@style/QueueSheetOption"
                     android:src="@drawable/ic_close" />
 
                 <ImageView
+                    android:id="@+id/dismiss"
+                    android:tooltipText="@string/tooltip_dismiss"
                     style="@style/QueueSheetOption"
                     android:layout_width="0dp"
                     android:layout_weight="1"

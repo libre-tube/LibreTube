@@ -30,6 +30,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/notification_bell"
+        android:tooltipText="@string/notifications"
         style="@style/ElevatedIconButton"
         android:layout_gravity="center"
         app:icon="@drawable/ic_notification"

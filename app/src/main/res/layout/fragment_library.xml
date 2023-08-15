@@ -96,6 +96,7 @@
                             <TextView
                                 android:id="@+id/sortTV"
                                 android:layout_width="0dp"
+                                android:tooltipText="@string/tooltip_sort"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:drawablePadding="5dp"
@@ -182,6 +183,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/create_playlist"
+        android:tooltipText="@string/tooltip_create_playlist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

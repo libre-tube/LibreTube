@@ -367,6 +367,7 @@
 
     <ImageView
         android:id="@+id/close_imageView"
+        android:tooltipText="@string/tooltip_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:alpha="0"
@@ -380,6 +381,7 @@
 
     <ImageView
         android:id="@+id/play_imageView"
+        android:tooltipText="@string/tooltip_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:alpha="0"

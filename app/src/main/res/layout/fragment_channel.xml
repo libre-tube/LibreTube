@@ -72,12 +72,14 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/channel_share"
+                    android:tooltipText="@string/share"
                     style="@style/ElevatedIconButton"
                     app:icon="@drawable/ic_share"
                     tools:targetApi="m" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/notification_bell"
+                    android:tooltipText="@string/notifications"
                     style="@style/ElevatedIconButton"
                     app:icon="@drawable/ic_notification"
                     tools:targetApi="m" />

@@ -57,6 +57,7 @@
 
                     <ImageView
                         android:id="@+id/reset_speed"
+                        android:tooltipText="@string/reset"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -95,6 +96,7 @@
 
                     <ImageView
                         android:id="@+id/reset_pitch"
+                        android:tooltipText="@string/reset"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

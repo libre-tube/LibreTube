@@ -486,4 +486,24 @@
         <item quantity="one">%d new stream</item>
         <item quantity="other">%d new streams</item>
     </plurals>
+
+    <!--Tooltips -->
+    <string name="tooltip_repeat">Repeat</string>
+    <string name="tooltip_reverse">Reverse</string>
+    <string name="tooltip_sort">Sort</string>
+    <string name="tooltip_watch_position">Watch position</string>
+    <string name="tooltip_clear_queue">Clear queue</string>
+    <string name="tooltip_dismiss">Dismiss</string>
+    <string name="tooltip_locked">Lock player</string>
+    <string name="tooltip_unlocked">Unlock player</string>
+    <string name="tooltip_sponsorblock">Toggle Sponsorblock</string>
+    <string name="tooltip_options">Options</string>
+    <string name="tooltip_minimize">Minimze</string>
+    <string name="tooltip_fullscreen">Fullscreen</string>
+    <string name="tooltip_close">Close</string>
+    <string name="tooltip_play">Play</string>
+    <string name="tooltip_filter">Filter</string>
+    <string name="tooltip_edit_groups">Edit groups</string>
+    <string name="tooltip_create_playlist">Create playlist</string>
+    <string name="tooltip_scroll_to_top">Scroll to top</string>
 </resources>
