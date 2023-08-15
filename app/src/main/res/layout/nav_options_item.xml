@@ -51,7 +51,7 @@
         android:focusable="false"
         android:padding="16dp"
         android:tintMode="src_in"
-        app:srcCompat="@drawable/ic_drag"
+        app:srcCompat="@drawable/ic_drag_handle"
         app:tint="?attr/colorControlNormal"
         tools:ignore="ContentDescription" />
 
