@@ -84,9 +84,9 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:maxLines="1"
                                 android:padding="8dp"
                                 android:text="@string/playlists"
                                 android:textAlignment="viewStart"
@@ -95,11 +95,15 @@
 
                             <TextView
                                 android:id="@+id/sortTV"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:drawablePadding="5dp"
+                                android:ellipsize="end"
+                                android:maxLines="1"
                                 android:paddingHorizontal="10dp"
                                 android:text="@string/creation_date"
+                                android:textAlignment="textEnd"
                                 android:textSize="16sp"
                                 app:drawableEndCompat="@drawable/ic_sort" />
 
