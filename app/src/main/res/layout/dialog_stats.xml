@@ -1,53 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/standard_bottom_sheet"
+        style="@style/Widget.Material3.BottomSheet"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/CustomDialogTextInputLayout"
-            android:layout_marginTop="10dp"
-            android:hint="@string/video_id">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/video_id"
-                style="@style/DisabledTextInput" />
-        </com.google.android.material.textfield.TextInputLayout>
+            <!-- Drag handle for accessibility -->
+            <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+                android:id="@+id/drag_handle"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="0dp"
+                app:tint="?android:attr/textColorSecondaryInverse" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/CustomDialogTextInputLayout"
-            android:layout_marginTop="10dp"
-            android:hint="@string/audio">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="20dp"
+                android:orientation="vertical"
+                android:paddingVertical="7dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/audio_info"
-                style="@style/DisabledTextInput" />
-        </com.google.android.material.textfield.TextInputLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="marquee"
+                        android:textColor="?android:textColorPrimary"
+                        android:fadingEdge="horizontal"
+                        android:text="Video ID"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/CustomDialogTextInputLayout"
-            android:layout_marginTop="10dp"
-            android:hint="@string/video">
+                    <TextView android:id="@+id/videoId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="?android:textColorSecondary"
+                        android:paddingBottom="7dp"
+                        android:textSize="16sp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/video_info"
-                style="@style/DisabledTextInput" />
-        </com.google.android.material.textfield.TextInputLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="marquee"
+                        android:textColor="?android:textColorPrimary"
+                        android:fadingEdge="horizontal"
+                        android:text="Audio"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/CustomDialogTextInputLayout"
-            android:layout_marginTop="10dp"
-            android:hint="@string/quality">
+                    <TextView android:id="@+id/audioInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="?android:textColorSecondary"
+                        android:paddingBottom="7dp"
+                        android:textSize="16sp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/video_quality"
-                style="@style/DisabledTextInput" />
-        </com.google.android.material.textfield.TextInputLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="marquee"
+                        android:textColor="?android:textColorPrimary"
+                        android:fadingEdge="horizontal"
+                        android:text="Video"/>
 
-    </LinearLayout>
+                    <TextView android:id="@+id/videoInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="?android:textColorSecondary"
+                        android:paddingBottom="7dp"
+                        android:textSize="16sp" />
 
-</ScrollView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="marquee"
+                        android:textColor="?android:textColorPrimary"
+                        android:fadingEdge="horizontal"
+                        android:text="Quality"/>
+
+                    <TextView android:id="@+id/videoQuality"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="?android:textColorSecondary"
+                        android:paddingBottom="7dp"
+                        android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
