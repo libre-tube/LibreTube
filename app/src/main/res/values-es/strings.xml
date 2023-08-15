@@ -483,4 +483,22 @@
     <string name="remove_watched_videos">Eliminar los videos ya vistos</string>
     <string name="player_channel_name">Servicios del reproductor</string>
     <string name="player_channel_description">Aparece una notificación cuando se está reproduciendo</string>
+    <string name="tooltip_sort">Ordenar</string>
+    <string name="tooltip_dismiss">Descartar</string>
+    <string name="tooltip_fullscreen">Pantalla completa</string>
+    <string name="tooltip_close">Cerrar</string>
+    <string name="tooltip_play">Reproducir</string>
+    <string name="tooltip_filter">Filtrar</string>
+    <string name="tooltip_edit_groups">Editar grupos</string>
+    <string name="tooltip_repeat">Repetir</string>
+    <string name="tooltip_reverse">Retroceder</string>
+    <string name="tooltip_clear_queue">Vaciar cola</string>
+    <string name="tooltip_locked">Bloquear reproductor</string>
+    <string name="tooltip_watch_position">Posición de visionado</string>
+    <string name="tooltip_unlocked">Desbloquear reproductor</string>
+    <string name="tooltip_sponsorblock">Alternar SponsorBlock</string>
+    <string name="tooltip_options">Opciones</string>
+    <string name="tooltip_minimize">Minimizar</string>
+    <string name="tooltip_create_playlist">Crear lista de reproducción</string>
+    <string name="tooltip_scroll_to_top">Volver al principio</string>
 </resources>
