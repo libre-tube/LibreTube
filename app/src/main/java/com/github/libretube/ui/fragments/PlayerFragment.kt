@@ -813,15 +813,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         saveWatchPosition()
 
         // save the id of the next stream as videoId and load the next video
-        if (nextVideoId != null) {
-            videoId = nextVideoId
+        if (nextVideoId == null) return
 
-            // play the next video
-            playVideo()
-
-            // close comment bottom-sheet for next video
-            commentsViewModel.commentsSheetDismiss?.invoke()
-        }
+        isTransitioning = true
+        videoId = nextVideoId
+        // start to play the next video
+        playVideo()
+        // close comment bottom sheet for next video
+        commentsViewModel.commentsSheetDismiss?.invoke()
     }
 
     private fun prepareExoPlayerView() {
