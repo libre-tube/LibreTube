@@ -37,6 +37,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ellipsize="marquee"
+                        android:layout_gravity="center"
+                        android:textColor="?android:textColorPrimary"
+                        android:fadingEdge="horizontal"
+                        android:textSize="24sp"
+                        android:text="@string/stats_for_nerds"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="marquee"
                         android:textColor="?android:textColorPrimary"
                         android:fadingEdge="horizontal"
                         android:text="Video ID"/>
