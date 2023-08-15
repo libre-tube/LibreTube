@@ -28,7 +28,6 @@ class StatsSheet(
     @SuppressLint("SetTextI18n")
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         binding.videoId.text = videoId
         binding.videoInfo.text = "${player.videoFormat?.codecs.orEmpty()} ${
             TextUtils.formatBitrate(
@@ -40,7 +39,7 @@ class StatsSheet(
                 player.audioFormat?.bitrate
             )
         }"
-        binding.videoQuality.text = "${player.videoFormat?.width}x${player.videoFormat?.height} " +
-                "${player.videoFormat?.frameRate?.toInt()}fps"
+        binding.videoQuality.text = "${player.videoFormat?.width}x${player.videoFormat?.height}" +
+            " ${player.videoFormat?.frameRate?.toInt()}fps"
     }
 }
