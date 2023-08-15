@@ -98,10 +98,13 @@ class LibraryFragment : Fragment() {
             }.show(childFragmentManager, CreatePlaylistDialog::class.java.name)
         }
 
-        binding.sortTV.setOnClickListener {
-            val sortOptions = resources.getStringArray(R.array.playlistSortingOptions)
-            val sortOptionValues = resources.getStringArray(R.array.playlistSortingOptionsValues)
+        val sortOptions = resources.getStringArray(R.array.playlistSortingOptions)
+        val sortOptionValues = resources.getStringArray(R.array.playlistSortingOptionsValues)
+        val order = PreferenceHelper.getString(PreferenceKeys.PLAYLISTS_ORDER, sortOptionValues.first())
+        val orderIndex = sortOptionValues.indexOf(order)
+        binding.sortTV.text = sortOptions[orderIndex]
 
+        binding.sortTV.setOnClickListener {
             BaseBottomSheet().apply {
                 setSimpleItems(sortOptions.toList()) { index ->
                     binding.sortTV.text = sortOptions[index]
