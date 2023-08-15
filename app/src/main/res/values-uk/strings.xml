@@ -486,4 +486,22 @@
     <string name="remove_watched_videos">Видалити переглянуті відео</string>
     <string name="player_channel_name">Служби програвача</string>
     <string name="player_channel_description">Показує сповіщення під час відтворення</string>
+    <string name="tooltip_repeat">Повторювати</string>
+    <string name="tooltip_reverse">Зворотний порядок</string>
+    <string name="tooltip_sort">Сортувати</string>
+    <string name="tooltip_watch_position">Позиція перегляду</string>
+    <string name="tooltip_clear_queue">Очистити чергу</string>
+    <string name="tooltip_dismiss">Відхилити</string>
+    <string name="tooltip_locked">Заблокувати програвач</string>
+    <string name="tooltip_unlocked">Розблокувати програвач</string>
+    <string name="tooltip_sponsorblock">Перемкнути Sponsorblock</string>
+    <string name="tooltip_options">Опції</string>
+    <string name="tooltip_minimize">Згорнути</string>
+    <string name="tooltip_fullscreen">На весь екран</string>
+    <string name="tooltip_play">Відтворити</string>
+    <string name="tooltip_close">Закрити</string>
+    <string name="tooltip_filter">Фільтр</string>
+    <string name="tooltip_edit_groups">Редагувати групи</string>
+    <string name="tooltip_create_playlist">Створити добірку</string>
+    <string name="tooltip_scroll_to_top">Перейти вгору</string>
 </resources>
