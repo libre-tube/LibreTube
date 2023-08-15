@@ -30,7 +30,7 @@ class NavBarOptionsAdapter(
             title.text = item.title
             checkbox.isChecked = item.isVisible
             home.setImageResource(
-                if (item.itemId == selectedHomeTabId) R.drawable.ic_home else R.drawable.ic_home_outlined
+                if (item.itemId == selectedHomeTabId) R.drawable.ic_home_dark else R.drawable.ic_home_outlined
             )
             home.setOnClickListener {
                 if (selectedHomeTabId == item.itemId) {
