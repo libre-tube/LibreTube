@@ -494,7 +494,7 @@
     <string name="tooltip_dismiss">Відхилити</string>
     <string name="tooltip_locked">Заблокувати програвач</string>
     <string name="tooltip_unlocked">Розблокувати програвач</string>
-    <string name="tooltip_sponsorblock">Перемкнути Sponsorblock</string>
+    <string name="tooltip_sponsorblock">Перемкнути SponsorBlock</string>
     <string name="tooltip_options">Опції</string>
     <string name="tooltip_minimize">Згорнути</string>
     <string name="tooltip_fullscreen">На весь екран</string>

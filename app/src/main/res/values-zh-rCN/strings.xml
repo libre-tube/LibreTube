@@ -490,7 +490,7 @@
     <string name="tooltip_dismiss">不理睬</string>
     <string name="tooltip_locked">锁定播放器</string>
     <string name="tooltip_unlocked">解锁播放器</string>
-    <string name="tooltip_sponsorblock">开/关 Sponsorblock</string>
+    <string name="tooltip_sponsorblock">开/关 SponsorBlock</string>
     <string name="tooltip_options">选项</string>
     <string name="tooltip_fullscreen">全屏</string>
     <string name="tooltip_minimize">最小化</string>
