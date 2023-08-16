@@ -162,7 +162,7 @@ open class CustomExoPlayerView(
                     player?.seekTo(0)
                 }
 
-                player?.isPlaying == false -> player?.play()
+                player?.isPlaying == false && player?.isLoading == false -> player?.play()
                 else -> player?.pause()
             }
         }
