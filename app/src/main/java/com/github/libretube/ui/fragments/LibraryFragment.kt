@@ -100,7 +100,10 @@ class LibraryFragment : Fragment() {
 
         val sortOptions = resources.getStringArray(R.array.playlistSortingOptions)
         val sortOptionValues = resources.getStringArray(R.array.playlistSortingOptionsValues)
-        val order = PreferenceHelper.getString(PreferenceKeys.PLAYLISTS_ORDER, sortOptionValues.first())
+        val order = PreferenceHelper.getString(
+            PreferenceKeys.PLAYLISTS_ORDER,
+            sortOptionValues.first()
+        )
         val orderIndex = sortOptionValues.indexOf(order)
         binding.sortTV.text = sortOptions.getOrNull(orderIndex)
 
