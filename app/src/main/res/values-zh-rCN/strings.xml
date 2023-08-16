@@ -477,4 +477,22 @@
     <string name="remove_watched_videos">移除已观看的视频</string>
     <string name="player_channel_name">播放器服务</string>
     <string name="player_channel_description">播放时显示通知</string>
+    <string name="tooltip_play">播放</string>
+    <string name="tooltip_filter">筛选器</string>
+    <string name="tooltip_edit_groups">编辑群组</string>
+    <string name="tooltip_reverse">颠倒</string>
+    <string name="tooltip_repeat">重复</string>
+    <string name="tooltip_sort">排序</string>
+    <string name="tooltip_create_playlist">创建播放列表</string>
+    <string name="tooltip_watch_position">观看位置</string>
+    <string name="tooltip_scroll_to_top">滚动到顶部</string>
+    <string name="tooltip_clear_queue">清除队列</string>
+    <string name="tooltip_dismiss">不理睬</string>
+    <string name="tooltip_locked">锁定播放器</string>
+    <string name="tooltip_unlocked">解锁播放器</string>
+    <string name="tooltip_sponsorblock">开/关 Sponsorblock</string>
+    <string name="tooltip_options">选项</string>
+    <string name="tooltip_fullscreen">全屏</string>
+    <string name="tooltip_minimize">最小化</string>
+    <string name="tooltip_close">关闭</string>
 </resources>

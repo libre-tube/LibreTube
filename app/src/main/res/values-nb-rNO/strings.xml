@@ -478,4 +478,23 @@
     <string name="visibility">Synlighet</string>
     <string name="screen_orientation">Skjermretning</string>
     <string name="remove_watched_videos">Fjern sette videoer</string>
+    <string name="tooltip_repeat">Gjentagelse</string>
+    <string name="player_channel_name">Avspillertjeneste</string>
+    <string name="player_channel_description">Viser merknad under avspilling</string>
+    <string name="tooltip_clear_queue">Tøm kø</string>
+    <string name="tooltip_dismiss">Avslå</string>
+    <string name="tooltip_sort">Sortering</string>
+    <string name="tooltip_reverse">Omvendt</string>
+    <string name="tooltip_locked">Lås avspiller</string>
+    <string name="tooltip_unlocked">Lås opp avspiller</string>
+    <string name="tooltip_play">Spill av</string>
+    <string name="tooltip_create_playlist">Opprett spilleliste</string>
+    <string name="tooltip_options">Alternativer</string>
+    <string name="tooltip_minimize">Minimer</string>
+    <string name="tooltip_fullscreen">Fullskjerm</string>
+    <string name="tooltip_close">Lukk</string>
+    <string name="tooltip_filter">Filter</string>
+    <string name="tooltip_edit_groups">Rediger grupper</string>
+    <string name="tooltip_scroll_to_top">Rull til toppen</string>
+    <string name="tooltip_sponsorblock">Veksle SponsorBlock</string>
 </resources>
