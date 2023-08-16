@@ -169,7 +169,6 @@
     <string name="deleteAccount_summary">حذف حساب Piped الخاص بك</string>
     <string name="watch_history">سجل المشاهدة</string>
     <string name="watch_positions">تذكر مكان التوقف</string>
-    <string name="watch_positions_summary">المتابعة من موضع التشغيل الأخير</string>
     <string name="auth_instance">مصادقة المثيل</string>
     <string name="auth_instance_summary">استخدم مثيلا مختلفا للمكالمات المصادق عليها.</string>
     <string name="auth_instances">اختر مثيل المصادقة</string>

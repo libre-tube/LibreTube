@@ -136,7 +136,6 @@
     <string name="color_blue">आनंदी निळा</string>
     <string name="replies">प्रत्युत्तरे</string>
     <string name="watch_positions">प्लेबॅक स्थिती लक्षात ठेवा</string>
-    <string name="watch_positions_summary">शेवटच्या प्लेबॅक स्थितीतून सुरू ठेवा</string>
     <string name="reset_message">सर्व सेटिंग्ज रीसेट करून लॉग आउट करायचे\?</string>
     <string name="deleteAccount">खाते हटवा</string>
     <string name="deleteAccount_summary">तुमचे Piped खाते हटवा</string>

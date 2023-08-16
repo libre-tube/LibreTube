@@ -166,7 +166,6 @@
     <string name="restore">복원</string>
     <string name="watch_history">시청 기록</string>
     <string name="watch_positions">위치 기억</string>
-    <string name="watch_positions_summary">마지막 재생 위치부터 계속</string>
     <string name="auth_instance">인증 인스턴스</string>
     <string name="auth_instance_summary">인증된 호출에 다른 인스턴스를 사용합니다.</string>
     <string name="audio_video">오디오 및 비디오</string>

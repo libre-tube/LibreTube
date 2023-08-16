@@ -169,7 +169,6 @@
     <string name="deleteAccount_summary">Piped hesabınızı silin</string>
     <string name="watch_history">Baxış Tarixçəsi</string>
     <string name="watch_positions">Mövqeyi xatırla</string>
-    <string name="watch_positions_summary">Son oynatma mövqeyindən davam etdir</string>
     <string name="auth_instances">Təsdiqləyici instansiya seç</string>
     <string name="auth_instance_summary">Təsdiqlənmiş dəvətlər üçün fərqli instansiya istifadə et.</string>
     <string name="auth_instance">Təsdiqləyici instansiya</string>

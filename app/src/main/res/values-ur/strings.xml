@@ -172,7 +172,6 @@
     <string name="restore">بحال کریں</string>
     <string name="watch_history">دیکھے گیۓ سرگزشت</string>
     <string name="watch_positions">پوزیشن یاد رکھیں</string>
-    <string name="watch_positions_summary">آخری پلے بیک پوزیشن سے جاری رکھیں</string>
     <string name="auth_instance">توثیق کی انسٹنش</string>
     <string name="auth_instances">ایک توثیق انسٹنش منتخب کریں</string>
     <string name="github">GitHub</string>

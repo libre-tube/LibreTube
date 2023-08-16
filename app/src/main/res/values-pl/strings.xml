@@ -173,7 +173,6 @@
     <string name="skip_buttons">Przyciski pomijania</string>
     <string name="skip_buttons_summary">Pokaż przyciski umożliwiające przejście do następnego lub poprzedniego filmu.</string>
     <string name="watch_positions">Zapamiętaj pozycje</string>
-    <string name="watch_positions_summary">Kontynuuj odtwarzanie od ostatnio zapamiętanej pozycji</string>
     <string name="github">GitHub</string>
     <string name="landscape">Wymuś tryb poziomy</string>
     <string name="add_to_queue">Dodaj do kolejki</string>

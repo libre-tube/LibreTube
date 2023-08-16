@@ -162,7 +162,6 @@
     <string name="require_restart">É preciso reiniciar o aplicativo</string>
     <string name="deleteAccount_summary">Apagar sua conta do Piped</string>
     <string name="no_audio">Sem áudio</string>
-    <string name="watch_positions_summary">Reproduzir donde parou</string>
     <string name="always">Sempre</string>
     <string name="selected">Selecionado</string>
     <string name="watch_history_summary">Acompanhar os vídeos assistidos localmente</string>

@@ -168,7 +168,6 @@
     <string name="restore">恢复</string>
     <string name="deleteAccount">删除账户</string>
     <string name="watch_history">观看历史</string>
-    <string name="watch_positions_summary">从上次播放位置继续</string>
     <string name="watch_positions">记住观看位置</string>
     <string name="auth_instance_summary">对认证指令(call)使用不同实例。</string>
     <string name="auth_instances">选择认证实例</string>

@@ -262,7 +262,6 @@
     <string name="downloading">دادەبەزێت…</string>
     <string name="download_paused">داگرتن ڕاگیرا</string>
     <string name="watch_positions">بیرخستنەوەی شوێن</string>
-    <string name="watch_positions_summary">بەردەوامبون لەدوایین شوێنی لێدراو</string>
     <string name="auth_instance">هاوکاتکردنی سێرڤەر</string>
     <string name="auth_instance_summary">بەکارهێنانی سێرڤەری جیاواز بۆ هاوکاتکردنی پەیوەندی.</string>
     <string name="auth_instances">سێرڤەری هاوکاتکەر هەڵبژێرە</string>

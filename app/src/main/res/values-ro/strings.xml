@@ -213,7 +213,6 @@
     <string name="deleteAccount_summary">Ștergeți contul Piped</string>
     <string name="restore">Restaurați</string>
     <string name="watch_positions">Rețineți poziția</string>
-    <string name="watch_positions_summary">Continuați din ultima poziție de redare</string>
     <string name="auth_instance">Instanță de autentificare</string>
     <string name="auth_instances">Alegeți o instanță de autentificare</string>
     <string name="github">GitHub</string>

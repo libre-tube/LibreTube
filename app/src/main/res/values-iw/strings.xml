@@ -169,7 +169,6 @@
     <string name="deleteAccount_summary">מחיקת חשבון ה־Piped</string>
     <string name="watch_history">היסטוריית צפייה</string>
     <string name="watch_positions">שמירת המיקום</string>
-    <string name="watch_positions_summary">להמשיך מנקודת הנגינה האחרונה</string>
     <string name="auth_instance">עותק אימות</string>
     <string name="auth_instance_summary">להשתמש בעותק אחר לשיחות מאומתות.</string>
     <string name="auth_instances">בחירת עותק אימות</string>

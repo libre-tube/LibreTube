@@ -168,7 +168,6 @@
     <string name="restore">Sıfırla</string>
     <string name="deleteAccount">Hesabı sil</string>
     <string name="watch_history">İzleme Geçmişi</string>
-    <string name="watch_positions_summary">Son oynatma konumundan devam et</string>
     <string name="watch_positions">Konumu hatırla</string>
     <string name="auth_instance_summary">Doğrulanmış davetiyeler için farklı bir oluşum kullanın.</string>
     <string name="auth_instances">Yetkilendirme örneği seçin</string>

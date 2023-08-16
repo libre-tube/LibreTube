@@ -175,7 +175,6 @@
     <string name="require_restart_message">Restartējiet aplikāciju, lai veiktu jaunās izmaiņas.</string>
     <string name="auth_instance">Autentificētā instance</string>
     <string name="watch_positions">Atcerēties skatīšanās vietu</string>
-    <string name="watch_positions_summary">Atcerēties vietu, kurā pārtraucāt skatīties video, un automātiski uz to aiztīt.</string>
     <string name="auth_instance_summary">Lietojiet citu instanci priekš autentificētiem pieprasījumiem.</string>
     <string name="auth_instances">Izvēlēties autentificēto instanci</string>
     <string name="github">GitHub</string>

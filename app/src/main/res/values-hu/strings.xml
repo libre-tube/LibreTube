@@ -218,7 +218,6 @@
     <string name="always">Mindig</string>
     <string name="autoRotatePlayer">Automatikus teljes képernyő</string>
     <string name="pure_theme">Tiszta téma</string>
-    <string name="watch_positions_summary">Folytatás az utolsó lejátszási pozícióból</string>
     <string name="navLabelVisibility">Címke láthatósága</string>
     <string name="search_history_summary">Keresések megjegyzése</string>
     <string name="reset_watch_positions">Alaphelyzet</string>

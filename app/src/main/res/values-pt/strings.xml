@@ -165,7 +165,6 @@
     <string name="audio">Áudio</string>
     <string name="video">Vídeo</string>
     <string name="player_autoplay">Reprodução automática</string>
-    <string name="watch_positions_summary">Continuar da última posição de reprodução</string>
     <string name="turnInternetOn">Ative uma ligação Wi-Fi ou de dados móveis para estabelecer ligação à Internet.</string>
     <string name="instance_frontend_url">URL para a instância</string>
     <string name="quality">Qualidade</string>

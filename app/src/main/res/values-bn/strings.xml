@@ -177,7 +177,6 @@
     <string name="auto_rotation">স্বয়ংক্রিয়-রোটেশন</string>
     <string name="landscape">ল্যান্ডস্কেপ</string>
     <string name="portrait">পোর্টেইট</string>
-    <string name="watch_positions_summary">শেষ প্লেব্যাক পজিশন থেকে শুরু করুন</string>
     <string name="auth_instances">অথেনটিকেশনের জন্য ইন্সটেন্স বাছাই করুন</string>
     <string name="github">গিটহাব</string>
     <string name="audio_video">অডিও এবং ভিডিও</string>

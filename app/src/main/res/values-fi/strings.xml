@@ -276,7 +276,6 @@
     <string name="unknown">Tuntematon</string>
     <string name="resume">Jatka</string>
     <string name="watch_positions">Muista positio</string>
-    <string name="watch_positions_summary">Jatka viimeisestä toistopaikasta</string>
     <string name="auth_instance_summary">Käytä eri instanssia todentamiskutsuille.</string>
     <string name="auth_instance">Todentamisinstanssi</string>
     <string name="auth_instances">Valitse todentamisinstanssi</string>

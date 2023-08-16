@@ -187,7 +187,6 @@
     <string name="restore">Restore</string>
     <string name="watch_history">Watch History</string>
     <string name="watch_positions">Remember position</string>
-    <string name="watch_positions_summary">Continue from last playback position</string>
     <string name="auth_instance">Authentication instance</string>
     <string name="auth_instance_summary">Use a different instance for authenticated calls.</string>
     <string name="auth_instances">Choose an auth instance</string>

@@ -312,7 +312,6 @@
     <string name="playerVideoFormat">قالب ویدیویی پخش‌کننده</string>
     <string name="instance_frontend_url">نشانی پیشانهٔ نمونه</string>
     <string name="seek_increment">پیشروی جویش</string>
-    <string name="watch_positions_summary">ادامه از آخرین موقعیت پخش</string>
     <string name="auth_instances">گزینش نمونه‌ای برای هویت‌سنجی</string>
     <string name="turnInternetOn">لطفاً وای‌فای یا دادهٔ همراه ر بارای وصل شدن به اینترنت روشن کنید.</string>
     <string name="playerAudioFormat">قالب صوتی برای پخش‌کننده</string>

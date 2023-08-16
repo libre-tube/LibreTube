@@ -169,7 +169,6 @@
     <string name="deleteAccount">Eliminar cuenta</string>
     <string name="watch_history">Historial de reproducciones</string>
     <string name="watch_positions">Recordar posición</string>
-    <string name="watch_positions_summary">Continúa desde donde lo has dejado</string>
     <string name="auth_instance">Instancia de autenticación</string>
     <string name="auth_instance_summary">Usa una instancia diferente para las llamadas autenticadas.</string>
     <string name="auth_instances">Elige una instancia de autenticación</string>

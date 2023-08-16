@@ -181,7 +181,6 @@
     <string name="no_audio">Немає аудіо</string>
     <string name="audio">Аудіо</string>
     <string name="autoRotatePlayer_summary">Поноекранний режим при обертанні пристрою.</string>
-    <string name="watch_positions_summary">Продовжувати з останньої позиції відео</string>
     <string name="require_restart">Застосунку потрібен перезапуск</string>
     <string name="navLabelVisibility">Видимість міток</string>
     <string name="always">Завжди</string>

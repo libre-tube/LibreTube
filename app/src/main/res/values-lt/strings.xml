@@ -89,7 +89,6 @@
     <string name="autoplay_summary">Automatiškai paleisti kitą vaizdo įrašą po dabartinio.</string>
     <string name="reset">Atkurti numatytus nustatymus</string>
     <string name="account">Paskyra</string>
-    <string name="watch_positions_summary">Tęsti nuo paskutinės buvusios atkūrimo pozicijos</string>
     <string name="auth_instance">Autentifikavimo perdavimo šaltinis</string>
     <string name="github">GitHub</string>
     <string name="audio_video">Garsas ir vaizdas</string>

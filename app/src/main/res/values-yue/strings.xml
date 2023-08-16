@@ -121,7 +121,6 @@
     <string name="restore">復原</string>
     <string name="watch_history">睇片記錄</string>
     <string name="watch_positions">記住上次睇到邊</string>
-    <string name="watch_positions_summary">繼續返上次播嘅位</string>
     <string name="github">Github</string>
     <string name="audio_video">聲同片</string>
     <string name="auto_rotation">自動轉角度</string>

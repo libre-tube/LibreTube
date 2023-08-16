@@ -235,7 +235,6 @@
     <string name="deleteAccount_summary">ଆପଣଙ୍କର ପାଇପ୍ ଆକାଉଣ୍ଟ୍ ଡିଲିଟ୍ କରନ୍ତୁ</string>
     <string name="playback_pitch">ପିଚ୍</string>
     <string name="filename">ଫାଇଲ୍ ର ନାମ</string>
-    <string name="watch_positions_summary">ଶେଷ ପ୍ଲେକ୍ ସ୍ଥିତିରୁ ଜାରି ରଖନ୍ତୁ</string>
     <string name="invalid_filename">Invalid ନାମ!</string>
     <string name="auth_instances">ଏକ auth ଉଦାହରଣ ବାଛନ୍ତୁ</string>
     <string name="fullscreen_orientation">ଫୁଲ୍ ସ୍କ୍ରିନ୍ ଆରିଏଣ୍ଟେସନ୍</string>

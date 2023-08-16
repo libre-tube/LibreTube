@@ -200,7 +200,6 @@
     <string name="general">Allgemein</string>
     <string name="general_summary">Sprache und Region</string>
     <string name="best_quality">Beste Qualität</string>
-    <string name="watch_positions_summary">Von letzter Position weiter abspielen</string>
     <string name="navLabelVisibility">Sichtbare Beschriftungen</string>
     <string name="watch_history_summary">Angesehene Videos lokal speichern</string>
     <string name="history_summary">Wiedergabe- und Suchverlauf</string>

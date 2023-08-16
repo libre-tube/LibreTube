@@ -184,7 +184,6 @@
     <string name="selected">Valgte</string>
     <string name="never">Aldrig</string>
     <string name="autoRotatePlayer">Auto fuldskærm</string>
-    <string name="watch_positions_summary">Fortsæt fra sidste afspilningsposition</string>
     <string name="autoRotatePlayer_summary">Afspilning i fuld skærm, når enheden vendes.</string>
     <string name="pure_theme">Rent tema</string>
     <string name="pure_theme_summary">Rent sort/hvid tema</string>

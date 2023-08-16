@@ -178,7 +178,6 @@
     <string name="video">映像</string>
     <string name="player_autoplay">自動再生</string>
     <string name="data_saver_mode_summary">サムネイルや他の画像を読み込まない。</string>
-    <string name="watch_positions_summary">最後の再生位置から続きを見る</string>
     <string name="navLabelVisibility">ラベルの表示</string>
     <string name="always">常に表示</string>
     <string name="selected">選択中のみ</string>
