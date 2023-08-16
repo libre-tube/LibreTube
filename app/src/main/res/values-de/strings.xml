@@ -479,4 +479,22 @@
     <string name="remove_watched_videos">Angesehene Videos entfernen</string>
     <string name="player_channel_name">Player-Service</string>
     <string name="player_channel_description">Benachrichtigung beim Abspielen anzeigen</string>
+    <string name="tooltip_repeat">Erneut ansehen</string>
+    <string name="tooltip_clear_queue">Warteschlange leeren</string>
+    <string name="tooltip_dismiss">Ablehnen</string>
+    <string name="tooltip_scroll_to_top">Nach oben scrollen</string>
+    <string name="tooltip_sponsorblock">SponsorBlock umschalten</string>
+    <string name="tooltip_reverse">Zurück</string>
+    <string name="tooltip_sort">Sortieren</string>
+    <string name="tooltip_options">Einstellungen</string>
+    <string name="tooltip_watch_position">Abspielposition</string>
+    <string name="tooltip_locked">Player sperren</string>
+    <string name="tooltip_unlocked">Player entsperren</string>
+    <string name="tooltip_minimize">Minimieren</string>
+    <string name="tooltip_fullscreen">Vollbild</string>
+    <string name="tooltip_close">Schließen</string>
+    <string name="tooltip_play">Abspielen</string>
+    <string name="tooltip_filter">Filtern</string>
+    <string name="tooltip_edit_groups">Gruppen bearbeiten</string>
+    <string name="tooltip_create_playlist">Playlist erstellen</string>
 </resources>

@@ -16,8 +16,8 @@
     <string name="yes">Si</string>
     <string name="registered">Registrado. Ahora puedes suscribirte a canales.</string>
     <string name="already_logged_in">Sesión ya iniciada. Vas a cerrar la sesión de tu cuenta.</string>
-    <string name="instances">Elegir…</string>
-    <string name="customInstance">Personalizada</string>
+    <string name="instances">Instancias disponibles…</string>
+    <string name="customInstance">Añadir instancia...</string>
     <string name="login_register">Iniciar sesión/Registrarse</string>
     <string name="importsuccess">Suscrito</string>
     <string name="loggedout">Sesión cerrada.</string>
@@ -130,7 +130,7 @@
     <string name="gradientIcon">Difuminado</string>
     <string name="fireIcon">Fuego moderno</string>
     <string name="torchIcon">Antorcha</string>
-    <string name="customInstance_summary">Añadir…</string>
+    <string name="customInstance_summary">Añade una instancia personalizada.</string>
     <string name="downloads">Descargas</string>
     <string name="advanced">Avanzado</string>
     <string name="player">Reproductor</string>
@@ -170,7 +170,7 @@
     <string name="watch_history">Historial de reproducciones</string>
     <string name="watch_positions">Recordar posición</string>
     <string name="auth_instance">Instancia de autenticación</string>
-    <string name="auth_instance_summary">Usa una instancia diferente para las llamadas autenticadas.</string>
+    <string name="auth_instance_summary">Usa otra instancia distinta para hacer solicitudes con autenticación.</string>
     <string name="auth_instances">Elige una instancia de autenticación</string>
     <string name="github">GitHub</string>
     <string name="audio_video">Audio y vídeo</string>
@@ -185,7 +185,7 @@
     <string name="require_restart_message">Reinicia la aplicación para aplicar los cambios.</string>
     <string name="require_restart">Es necesario reiniciar la aplicación</string>
     <string name="selected">Seleccionada</string>
-    <string name="search_history_summary">Recordar las búsquedas</string>
+    <string name="search_history_summary">Recordar las búsquedas realizadas</string>
     <string name="reset_watch_positions">Restablecer</string>
     <string name="navLabelVisibility">Mostrar nombre de pestaña</string>
     <string name="always">Siempre</string>
@@ -237,8 +237,8 @@
     <string name="backup_restore">Copia de seguridad y restauración</string>
     <string name="backup">Copia de seguridad</string>
     <string name="picture_in_picture">Reproductor flotante</string>
-    <string name="break_reminder_time">Minutos hasta ser avisado</string>
-    <string name="legacy_subscriptions">Diseño antiguo de canales suscritos</string>
+    <string name="break_reminder_time">Minutos transcurridos hasta que LibreTube se cierre:</string>
+    <string name="legacy_subscriptions">Ver suscripciones en una cuadrícula</string>
     <string name="device_info">Información del dispositivo</string>
     <string name="share_with_time">Compartir con marca de tiempo</string>
     <string name="export_subscriptions">Exportar suscripciones</string>
@@ -263,14 +263,14 @@
     <string name="new_videos_badge">Indicador para nuevos vídeos</string>
     <string name="delete">Eliminar de las descargas</string>
     <string name="renamePlaylist">Renombrar lista de reproducción</string>
-    <string name="wifi">WiFi</string>
-    <string name="mobile_data">Datos móviles</string>
+    <string name="wifi">En conexiones WiFi</string>
+    <string name="mobile_data">En conexiones móviles</string>
     <string name="sb_skip_manual">Omitir manual</string>
     <string name="download_channel_name">Servicio de descarga</string>
     <string name="skip_segment">Omitir</string>
     <string name="download_channel_description">Mostrar una notificación al descargar medios.</string>
     <string name="push_channel_name">Notificador de novedades</string>
-    <string name="sb_skip_manual_summary">No omitir segmentos automáticamente, siempre preguntar antes.</string>
+    <string name="sb_skip_manual_summary">No omitir segmentos automáticamente, preguntarme siempre.</string>
     <string name="push_channel_description">Mostrar una notificación cuando hay nuevas transmisiones disponibles.</string>
     <string name="local_subscriptions">Suscripciones locales</string>
     <string name="preferences">Preferencias</string>
@@ -289,10 +289,10 @@
     <string name="added_to_playlist">Añadido a la lista %1$s</string>
     <string name="queue">Cola</string>
     <string name="livestreams">Directos</string>
-    <string name="alternative_videos_layout">Lista de vídeos más pequeña</string>
+    <string name="alternative_videos_layout">Compactar Tendencias y Suscripciones</string>
     <string name="defaultIconLight">Predeterminado claro</string>
     <string name="confirm_unsubscribe">¿Seguro que quieres anular tu suscripción a %1$s\?</string>
-    <string name="confirm_unsubscribing">Confirmar cancelación de suscripciones</string>
+    <string name="confirm_unsubscribing">Confirmar anulaciones de suscripción</string>
     <string name="confirm_unsubscribing_summary">Mostrar un aviso para confirmar antes de anular la suscripción.</string>
     <string name="playlistCloned">Lista clonada</string>
     <string name="play_all">Reproducir todo</string>
@@ -301,12 +301,12 @@
     <string name="end_time">Hora de finalización</string>
     <string name="notification_time">Restringir horario de notificación</string>
     <string name="notification_time_summary">Limitar el intervalo de tiempo en el que se muestran las notificaciones.</string>
-    <string name="alternative_player_layout_summary">Mostrar los videos relacionados en una fila encima de los comentarios en lugar de una lista debajo.</string>
+    <string name="alternative_player_layout_summary">Mostrar los vídeos relacionados en una fila sobre los comentarios en vez de al final.</string>
     <string name="alternative_player_layout">Diseño alternativo del reproductor</string>
     <string name="navbar_order">Ordenar</string>
     <string name="layout">Diseño</string>
     <string name="audio_track">Pista de audio</string>
-    <string name="auto_quality">Automatico</string>
+    <string name="auto_quality">Automática</string>
     <string name="hls_instead_of_dash_summary">Usar HLS en vez de DASH (podría ser lento, no recomendado)</string>
     <string name="hls_instead_of_dash">Usar HLS</string>
     <string name="limit_to_runtime">Limitar al tiempo de ejecución</string>
@@ -319,7 +319,7 @@
     <string name="queue_insert_related_videos">Insertar videos relacionados</string>
     <string name="local_playlists">Listas de reproducción locales</string>
     <string name="volume">Volumen</string>
-    <string name="auto">Auto</string>
+    <string name="auto">Automática</string>
     <string name="swipe_controls">Controles de deslizamiento</string>
     <string name="brightness">Brillo</string>
     <string name="swipe_controls_summary">Deslizar en los laterales de la pantalla para ajustar el brillo y el volumen.</string>
@@ -348,7 +348,7 @@
     <string name="color_violet">Violeta Versátil</string>
     <string name="failed_fetching_instances">No se pudieron obtener las instancias disponibles.</string>
     <string name="hide_watched_from_feed">Ocultar vídeos vistos</string>
-    <string name="hide_watched_from_feed_summary">No mostrar los vídeos vistos más de un 90% en la pestaña de suscripciones.</string>
+    <string name="hide_watched_from_feed_summary">No mostrar los vídeos vistos más del 90% en la pestaña de suscripciones.</string>
     <string name="playlistUrl">URL de la lista de reproducción</string>
     <string name="pause_on_quit">Pausar al salir</string>
     <string name="shuffle">Aleatorio</string>
@@ -369,7 +369,7 @@
     <string name="resume">Reanudar</string>
     <string name="audio_only_mode">Modo sólo audio</string>
     <string name="unknown">Desconocido</string>
-    <string name="sleep_timer">Temporizador de apagado</string>
+    <string name="sleep_timer">Temporizador de descanso</string>
     <string name="skip_silence">Omitir silencio</string>
     <string name="help">Ayuda</string>
     <string name="faq">Preguntas frecuentes</string>
@@ -384,7 +384,7 @@
     <string name="trending_views">%1$s • %2$s reproducciones • %3$s</string>
     <string name="stats_for_nerds">Estadísticas para frikis</string>
     <string name="video_id">Identificación del vídeo</string>
-    <string name="autoplay_countdown">Cuenta atrás</string>
+    <string name="autoplay_countdown">Cuenta regresiva</string>
     <string name="autoplay_countdown_summary">Muestra una cuenta atrás de 5 segundos antes de reproducir automáticamente el siguiente vídeo.</string>
     <string name="playing_next">Siguiente vídeo en %1$s</string>
     <plurals name="years_ago">
@@ -419,7 +419,7 @@
         <item quantity="many">%d nuevas transmisiones</item>
         <item quantity="other">%d nuevas transmisiones</item>
     </plurals>
-    <string name="unlimited_search_history">Historial de búsqueda ilimitado</string>
+    <string name="unlimited_search_history">Historial de búsqueda infinito</string>
     <string name="duration_reversed">Duración (invertido)</string>
     <string name="duration">Duración</string>
     <string name="shorts_notifications">Notificaciones de Shorts</string>
@@ -429,7 +429,7 @@
     <string name="alphabetic_reversed">Alfabético (invertido)</string>
     <string name="import_format_newpipe">NewPipe</string>
     <string name="import_subscriptions_from">Importar suscripciones desde</string>
-    <string name="export_subscriptions_to">Exportar suscripciones hacia</string>
+    <string name="export_subscriptions_to">Exportar suscripciones para</string>
     <string name="import_format_freetube">FreeTube</string>
     <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="export_playlists_to">Exportar listas hacia</string>

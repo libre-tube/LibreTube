@@ -142,7 +142,7 @@
     <string name="playback_speed">Скорость воспроизведения</string>
     <string name="advanced">Расширенные</string>
     <string name="player">Плеер</string>
-    <string name="appearance_summary">Настройте приложение по своему вкусу.</string>
+    <string name="appearance_summary">Настройте приложение по своему вкусу</string>
     <string name="advanced_summary">Загрузки и сброс</string>
     <string name="live">Прямой эфир</string>
     <string name="playerVideoFormat">Формат видео для плеера</string>
@@ -155,7 +155,7 @@
     <string name="reset">Восстановить настройки по умолчанию</string>
     <string name="reset_message">Сбросить все настройки и выйти из аккаунта\?</string>
     <string name="instance_frontend_url">URL для фронтенда инстанса</string>
-    <string name="quality">Качество</string>
+    <string name="quality">Качество изображения</string>
     <string name="behavior">Поведение</string>
     <string name="player_summary">Настройки и поведение плеера</string>
     <string name="seek_increment">Шаг перемотки</string>
@@ -194,7 +194,7 @@
     <string name="selected">Выбранное</string>
     <string name="watch_positions_title">Запомненные позиции воспроизведения</string>
     <string name="system_caption_style">Системный стиль субтитров</string>
-    <string name="none">Откл.</string>
+    <string name="none">Отключены</string>
     <string name="autoRotatePlayer_summary">Полноэкранный режим при повороте устройства.</string>
     <string name="navLabelVisibility">Видимость меток</string>
     <string name="always">Всегда</string>
@@ -246,11 +246,11 @@
     <string name="backup_restore">Резервное копирование и восстановление</string>
     <string name="backup">Резервное копирование</string>
     <string name="picture_in_picture">Картинка в картинке (PiP)</string>
-    <string name="resize_mode_fit">Исходный</string>
-    <string name="resize_mode_fill">Заполненный</string>
-    <string name="resize_mode_zoom">Увеличенный</string>
-    <string name="repeat_mode_none">Отключен</string>
-    <string name="repeat_mode_current">Текущий</string>
+    <string name="resize_mode_fit">исходный</string>
+    <string name="resize_mode_fill">растянутый</string>
+    <string name="resize_mode_zoom">увеличенный</string>
+    <string name="repeat_mode_none">отключен</string>
+    <string name="repeat_mode_current">текущий</string>
     <string name="player_resize_mode">Размер изображения</string>
     <string name="maximum_image_cache">Максимальный размер кэша изображений</string>
     <string name="copied_to_clipboard">Скопировано в буфер обмена</string>
@@ -267,7 +267,7 @@
     <string name="push_channel_name">Агент уведомлениий</string>
     <string name="break_reminder_time">Минут до напоминания</string>
     <string name="legacy_subscriptions">Старый вид отображения подписок</string>
-    <string name="audio_video_summary">Качество и формат</string>
+    <string name="audio_video_summary">Качество изображения и формат</string>
     <string name="delete">Удалить из загрузок</string>
     <string name="renamePlaylist">Переименовать плейлист</string>
     <string name="wifi">Wi-Fi</string>
@@ -305,7 +305,7 @@
     <string name="alternative_player_layout_summary">Показать связанные видео в виде ряда над комментариями, а не под ними.</string>
     <string name="layout">Макет</string>
     <string name="alternative_player_layout">Альтернативный макет плеера</string>
-    <string name="audio_track">Аудио трек</string>
+    <string name="audio_track">Звуковая дорожка</string>
     <string name="hls_instead_of_dash">Использовать HLS</string>
     <string name="hls_instead_of_dash_summary">Использовать HLS вместо DASH (будет медленнее, не рекомендуется)</string>
     <string name="auto_quality">Автоматическое</string>
@@ -320,7 +320,7 @@
     <string name="queue_insert_related_videos">Вставить связанные видео</string>
     <string name="brightness">Яркость</string>
     <string name="volume">Громкость</string>
-    <string name="auto">Авто</string>
+    <string name="auto">Автоматическое</string>
     <string name="swipe_controls_summary">Используйте жест прокрутки, чтобы отрегулировать яркость и громкость.</string>
     <string name="swipe_controls">Управление прокруткой</string>
     <string name="defaults">По умолчанию</string>
@@ -355,7 +355,7 @@
     <string name="rewind">Отмотать назад</string>
     <string name="forward">Отмотать вперед</string>
     <string name="alternative_pip_controls">Альтернативные элементы управления PiP</string>
-    <string name="alternative_pip_controls_summary">Показывать только кнопки контроля звука и пропуска в окне PiP вместо кнопок перемотки</string>
+    <string name="alternative_pip_controls_summary">Показывать только кнопки контроля звука и пропуска в окне PiP вместо кнопок перемотки.</string>
     <string name="pause">Пауза</string>
     <string name="add_to_bookmarks">Добавить в закладки</string>
     <string name="remove_bookmark">Удалить закладку</string>
@@ -411,7 +411,7 @@
     <string name="channel_groups">Группы каналов</string>
     <string name="edit_group">Изменить группу</string>
     <string name="play_automatically">Автоматическое воспроизведение</string>
-    <string name="play_automatically_summary">Начинать воспроизведение видео автоматически при выборе</string>
+    <string name="play_automatically_summary">Начинать воспроизведение видео автоматически при выборе.</string>
     <string name="fullscreen_gestures">Жесты входа/выхода из полноэкранного режима</string>
     <string name="go_to_video">Перейти к видео</string>
     <plurals name="channel_new_streams">
@@ -447,7 +447,7 @@
     <string name="playlist_description">Описание плейлиста</string>
     <string name="emptyPlaylistDescription">Описание плейлиста не может быть пустым</string>
     <string name="show_search_suggestions">Показать поисковые подсказки</string>
-    <string name="off">Выкл</string>
+    <string name="off">Выключено</string>
     <string name="manual">Вручную</string>
     <string name="automatic">Автоматически</string>
     <string name="sb_color_enable">Вкл/выкл цветовую маркировку для сегментов спонсорских блокировок.</string>
@@ -485,4 +485,22 @@
     <string name="remove_watched_videos">Удалить просмотренные видео</string>
     <string name="player_channel_name">Проигрыватель</string>
     <string name="player_channel_description">Показывать уведомление при воспроизведении</string>
+    <string name="tooltip_repeat">Повтор</string>
+    <string name="tooltip_filter">Фильтр</string>
+    <string name="tooltip_sponsorblock">Переключить спонсорскую блокировку</string>
+    <string name="tooltip_reverse">Вернуть</string>
+    <string name="tooltip_sort">Сортировать</string>
+    <string name="tooltip_watch_position">Положение часов</string>
+    <string name="tooltip_clear_queue">Очистить очередь</string>
+    <string name="tooltip_dismiss">Отклонить</string>
+    <string name="tooltip_locked">Заблокировать проигрыватель</string>
+    <string name="tooltip_unlocked">Разблокировать проигрыватель</string>
+    <string name="tooltip_fullscreen">Полный экран</string>
+    <string name="tooltip_options">Параметры</string>
+    <string name="tooltip_close">Закрыть</string>
+    <string name="tooltip_play">Воспроизвести</string>
+    <string name="tooltip_minimize">Свернуть</string>
+    <string name="tooltip_edit_groups">Редактирование групп</string>
+    <string name="tooltip_create_playlist">Создать плейлист</string>
+    <string name="tooltip_scroll_to_top">Пролистать наверх</string>
 </resources>
