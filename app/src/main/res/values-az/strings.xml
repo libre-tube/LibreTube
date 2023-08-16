@@ -477,4 +477,25 @@
     <string name="duration_span">Müddət: %1$s</string>
     <string name="no_chapter">Bölmə yoxdur</string>
     <string name="screen_orientation">Ekran istiqamətləndirmə</string>
+    <string name="remove_watched_videos">Baxılan videoları təmizlə</string>
+    <string name="player_channel_name">Oynadıcı Xidməti</string>
+    <string name="tooltip_clear_queue">Növbəni təmizlə</string>
+    <string name="tooltip_dismiss">Rədd et</string>
+    <string name="tooltip_locked">Oynadıcı kilidlə</string>
+    <string name="tooltip_unlocked">Oynadıcı kilidin aç</string>
+    <string name="tooltip_sponsorblock">SponsorBlock-u Dəyiş</string>
+    <string name="tooltip_options">Seçimlər</string>
+    <string name="tooltip_reverse">Əkslik</string>
+    <string name="tooltip_sort">Çeşid</string>
+    <string name="tooltip_watch_position">Baxış mövqeyi</string>
+    <string name="player_channel_description">Oynadılanda bildiriş göstərir</string>
+    <string name="tooltip_repeat">Təkrarla</string>
+    <string name="tooltip_minimize">Kiçilt</string>
+    <string name="tooltip_close">Bağla</string>
+    <string name="tooltip_fullscreen">Tam ekran</string>
+    <string name="tooltip_edit_groups">Qrupları redaktə et</string>
+    <string name="tooltip_play">Oynat</string>
+    <string name="tooltip_filter">Filtr</string>
+    <string name="tooltip_create_playlist">Oynatma siyahısı yarat</string>
+    <string name="tooltip_scroll_to_top">Yuxarıya sürüşdür</string>
 </resources>
