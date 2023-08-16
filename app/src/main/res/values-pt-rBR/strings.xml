@@ -483,4 +483,6 @@
     <string name="remove_watched_videos">Remover videos assistidos</string>
     <string name="player_channel_name">Serviços do Player</string>
     <string name="player_channel_description">Mostrar uma notificação quando estiver Reproduzindo</string>
+    <string name="tooltip_create_playlist">Criar playlist</string>
+    <string name="tooltip_repeat">Repetir</string>
 </resources>
