@@ -504,4 +504,5 @@
     <string name="tooltip_create_playlist">Створити добірку</string>
     <string name="tooltip_scroll_to_top">Перейти вгору</string>
     <string name="auto_generated">автоматично згенеровано</string>
+    <string name="resolution_limited">обмежена</string>
 </resources>
