@@ -29,7 +29,7 @@
     <string name="logout">Logg ut</string>
     <string name="cancel">Avbryt</string>
     <string name="loggedIn">Innlogget</string>
-    <string name="app_theme">Programdrakt</string>
+    <string name="app_theme">Drakt</string>
     <string name="share">Del</string>
     <string name="emptyList">Ingenting her</string>
     <string name="createPlaylist">Opprett spilleliste</string>
@@ -497,4 +497,5 @@
     <string name="tooltip_edit_groups">Rediger grupper</string>
     <string name="tooltip_scroll_to_top">Rull til toppen</string>
     <string name="tooltip_sponsorblock">Veksle SponsorBlock</string>
+    <string name="tooltip_watch_position">Husket framdrift</string>
 </resources>
