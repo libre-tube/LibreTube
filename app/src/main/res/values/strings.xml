@@ -440,7 +440,6 @@
     <string name="uploader_name">Uploader name</string>
     <string name="duration_span">Duration: %1$s</string>
     <string name="remove_watched_videos">Remove watched videos</string>
-
     <!-- Backup & Restore Settings -->
     <string name="import_subscriptions_from">Import subscriptions from</string>
     <string name="export_subscriptions_to">Export subscriptions to</string>
@@ -463,7 +462,6 @@
     <string name="continue_watching">Continue watching</string>
     <string name="no_chapter">No chapter</string>
     <string name="screen_orientation">Screen orientation</string>
-
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
     <string name="download_channel_description">Shows a notification when downloading media.</string>
@@ -486,7 +484,6 @@
         <item quantity="one">%d new stream</item>
         <item quantity="other">%d new streams</item>
     </plurals>
-
     <!--Tooltips -->
     <string name="tooltip_repeat">Repeat</string>
     <string name="tooltip_reverse">Reverse</string>
@@ -496,7 +493,7 @@
     <string name="tooltip_dismiss">Dismiss</string>
     <string name="tooltip_locked">Lock player</string>
     <string name="tooltip_unlocked">Unlock player</string>
-    <string name="tooltip_sponsorblock">Toggle Sponsorblock</string>
+    <string name="tooltip_sponsorblock">Toggle SponsorBlock</string>
     <string name="tooltip_options">Options</string>
     <string name="tooltip_minimize">Minimze</string>
     <string name="tooltip_fullscreen">Fullscreen</string>
