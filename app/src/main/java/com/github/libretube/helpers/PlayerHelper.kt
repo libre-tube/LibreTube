@@ -53,6 +53,7 @@ object PlayerHelper {
             "preview"
         )
     const val SPONSOR_HIGHLIGHT_CATEGORY = "poi_highlight"
+    const val ROLE_FLAG_AUTO_GEN_SUBTITLE = C.ROLE_FLAG_SUPPLEMENTARY
 
     /**
      * Create a base64 encoded DASH stream manifest

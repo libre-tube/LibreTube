@@ -462,6 +462,8 @@
     <string name="continue_watching">Continue watching</string>
     <string name="no_chapter">No chapter</string>
     <string name="screen_orientation">Screen orientation</string>
+    <string name="auto_generated">auto-generated</string>
+
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
     <string name="download_channel_description">Shows a notification when downloading media.</string>
