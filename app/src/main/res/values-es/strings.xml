@@ -229,7 +229,7 @@
     <string name="playerAudioFormat">Formato de audio para el reproductor</string>
     <string name="playerAudioQuality">Calidad de audio</string>
     <string name="resize_mode_zoom">Ampliar</string>
-    <string name="repeat_mode">Modo repetir</string>
+    <string name="repeat_mode">Modo de repetición</string>
     <string name="resize_mode_fit">Ajustar</string>
     <string name="resize_mode_fill">Rellenar</string>
     <string name="repeat_mode_none">Ninguno</string>
