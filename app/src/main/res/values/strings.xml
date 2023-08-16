@@ -462,6 +462,7 @@
     <string name="no_chapter">No chapter</string>
     <string name="screen_orientation">Screen orientation</string>
     <string name="auto_generated">auto-generated</string>
+    <string name="resolution_limited">limited</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

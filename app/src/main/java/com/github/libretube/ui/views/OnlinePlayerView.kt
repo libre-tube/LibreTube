@@ -32,27 +32,21 @@ class OnlinePlayerView(
                 BottomSheetItem(
                     context.getString(R.string.quality),
                     R.drawable.ic_hd,
-                    { "${player?.videoSize?.height}p" }
+                    this::getCurrentResolutionSummary
                 ) {
                     playerOptions?.onQualityClicked()
                 },
                 BottomSheetItem(
                     context.getString(R.string.audio_track),
                     R.drawable.ic_audio,
-                    { getCurrentAudioTrackTitle() }
+                    this::getCurrentAudioTrackTitle
                 ) {
                     playerOptions?.onAudioStreamClicked()
                 },
                 BottomSheetItem(
                     context.getString(R.string.captions),
                     R.drawable.ic_caption,
-                    {
-                        if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
-                            trackSelector!!.parameters.preferredTextLanguages[0]
-                        } else {
-                            context.getString(R.string.none)
-                        }
-                    }
+                    this::getCurrentCaptionLanguage
                 ) {
                     playerOptions?.onCaptionsClicked()
                 },
@@ -63,6 +57,29 @@ class OnlinePlayerView(
                     playerOptions?.onStatsClicked()
                 }
             )
+    }
+
+    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
+    private fun getCurrentResolutionSummary(): String {
+        val currentQuality = player?.videoSize?.height ?: 0
+        var summary = "${currentQuality}p"
+        val trackSelector = trackSelector ?: return summary
+        val selectedQuality = trackSelector.parameters.maxVideoHeight
+        if (selectedQuality == Int.MAX_VALUE) {
+            summary += " - ${context.getString(R.string.auto)}"
+        } else if (selectedQuality > currentQuality) {
+            summary += " - ${context.getString(R.string.resolution_limited)}"
+        }
+        return summary
+    }
+
+    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
+    private fun getCurrentCaptionLanguage(): String {
+        return if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
+            trackSelector!!.parameters.preferredTextLanguages[0]
+        } else {
+            context.getString(R.string.none)
+        }
     }
 
     private fun getCurrentAudioTrackTitle(): String {
