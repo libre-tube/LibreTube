@@ -500,4 +500,6 @@
     <string name="tooltip_minimize">Minimizar</string>
     <string name="tooltip_create_playlist">Crear lista de reproducción</string>
     <string name="tooltip_scroll_to_top">Volver al principio</string>
+    <string name="resolution_limited">limitada</string>
+    <string name="auto_generated">autogenerados</string>
 </resources>
