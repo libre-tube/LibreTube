@@ -485,4 +485,24 @@
     <string name="remove_watched_videos">הסרת סרטונים שנצפו</string>
     <string name="player_channel_description">מציג התראה בזמן הנגינה</string>
     <string name="player_channel_name">שירות נגן</string>
+    <string name="tooltip_dismiss">התעלמות</string>
+    <string name="tooltip_locked">נעילת הנגן</string>
+    <string name="tooltip_sort">מיון</string>
+    <string name="tooltip_watch_position">מיקום צפייה</string>
+    <string name="tooltip_clear_queue">מחיקת תור</string>
+    <string name="resolution_limited">מוגבלת</string>
+    <string name="tooltip_reverse">היפוך</string>
+    <string name="tooltip_unlocked">שחרור הנגן</string>
+    <string name="auto_generated">נוצר אוטומטית</string>
+    <string name="tooltip_sponsorblock">מתג SponsorBlock</string>
+    <string name="tooltip_edit_groups">עריכת קבוצות</string>
+    <string name="tooltip_create_playlist">יצירת רשימת נגינה</string>
+    <string name="tooltip_scroll_to_top">גלילה לראש</string>
+    <string name="tooltip_repeat">חזרה</string>
+    <string name="tooltip_options">אפשרויות</string>
+    <string name="tooltip_minimize">מזעור</string>
+    <string name="tooltip_fullscreen">מסך מלא</string>
+    <string name="tooltip_close">סגירה</string>
+    <string name="tooltip_play">נגינה</string>
+    <string name="tooltip_filter">מסנן</string>
 </resources>
