@@ -129,7 +129,6 @@
     <string name="restore">Вратити</string>
     <string name="watch_history">Историја прегледа</string>
     <string name="watch_positions">Запамти позицију репродукције</string>
-    <string name="watch_positions_summary">Настави од последње позиције репродукције</string>
     <string name="auth_instance">Аутентификација инстанце</string>
     <string name="auth_instance_summary">Користи другу инстанцу за аутентификоване позиве.</string>
     <string name="auth_instances">Изабери инстанцу аутентификације</string>

@@ -246,7 +246,6 @@
     <string name="maximum_image_cache">Ukuran cache gambar maks</string>
     <string name="copied_to_clipboard">Disalin ke papan klip</string>
     <string name="open_copied">Buka</string>
-    <string name="watch_positions_summary">Lanjutkan dari posisi pemutaran terakhir</string>
     <string name="require_restart">Pemulaian ulang aplikasi dibutuhkan</string>
     <string name="navLabelVisibility">Keterlihatan label</string>
     <string name="always">Selalu</string>

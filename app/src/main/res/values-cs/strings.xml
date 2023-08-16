@@ -135,7 +135,6 @@
     <string name="clear_customInstances">Vymazat přidané</string>
     <string name="watch_history">Historie sledování</string>
     <string name="watch_positions">Pamatovat si pozici</string>
-    <string name="watch_positions_summary">Pokračovat z poslední pozice přehrávání</string>
     <string name="playerVideoFormat">Formát videa pro přehrávač</string>
     <string name="auth_instance">Autentifikační instance</string>
     <string name="auth_instance_summary">Použít jinou instanci pro autentifikační volání.</string>

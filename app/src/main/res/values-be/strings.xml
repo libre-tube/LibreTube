@@ -111,7 +111,6 @@
     <string name="restore">Аднавіць</string>
     <string name="watch_history">Гісторыя прагляду</string>
     <string name="watch_positions">Запомніць пазіцыю</string>
-    <string name="watch_positions_summary">Працягнуць з апошняга месца прайгравання</string>
     <string name="auth_instance">Асобнік аўтэнтыфікацыі</string>
     <string name="auth_instances">Выберыце асобнік аўтарызацыі</string>
     <string name="github">GitHub</string>

@@ -169,7 +169,6 @@
     <string name="restore">Επαναφορά</string>
     <string name="watch_history">Ιστορικό παρακολούθησης</string>
     <string name="watch_positions">Αποθήκευση θέσης</string>
-    <string name="watch_positions_summary">Επαναφορά στην τελευταία θέση παρακολούθησης</string>
     <string name="auth_instance">Διακομιστής αυθεντικοποίησης</string>
     <string name="auth_instance_summary">Χρησιμοποιήστε ένα διαφορετικό διακομιστή για αυθεντικοποιημένες κλήσεις.</string>
     <string name="auth_instances">Επιλέξτε ενα διακομιστή αυθεντικοποίησης</string>

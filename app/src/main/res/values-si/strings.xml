@@ -307,7 +307,6 @@
     <string name="autoplay_summary">වත්මන් වීඩියෝවෙන් පසුව ඊළඟ වීඩියෝව ස්වයංක්‍රීයව වාදනය කරන්න.</string>
     <string name="reset_message">සියලු සැකසුම් යළි සකසා වරනය වන්නද\?</string>
     <string name="require_restart_message">නව වෙනස්කම් භාවිතා කිරීමට යෙදුම නැවත පටන් ගන්න.</string>
-    <string name="watch_positions_summary">අවසාන වාදන ස්ථානයෙන් ඉදිරියට යන්න</string>
     <string name="watch_positions">ස්ථානය මතක තබා ගන්න</string>
     <string name="auth_instance_summary">සත්‍යතාව තහවුරු කිරීම සඳහා වෙනත් සේවාදායකයක් භාවිතා කරන්න.</string>
     <string name="aspect_ratio">වීඩියෝ දර්ශන අනුපාතය</string>

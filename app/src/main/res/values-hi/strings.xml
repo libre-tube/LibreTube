@@ -275,7 +275,6 @@
     <string name="deleteAccount_summary">अपना पाइप्ड खाता डिलीट करें</string>
     <string name="restore">पुनर्स्थापित</string>
     <string name="watch_positions">पोजीशन याद रखें</string>
-    <string name="watch_positions_summary">पिछली प्लेबैक स्थिति से जारी रखें</string>
     <string name="auth_instance">प्रमाणीकरण इंस्टेंस</string>
     <string name="auth_instance_summary">प्रमाणीकृत कॉल के लिए एक अलग इंस्टेंस का उपयोग करें।</string>
     <string name="auth_instances">एक प्रमाणीकरण इंस्टेंस चुनें</string>

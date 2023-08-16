@@ -169,7 +169,6 @@
     <string name="account">Account</string>
     <string name="watch_history">Cronologia delle visualizzazioni</string>
     <string name="watch_positions">Posizioni da ricordare</string>
-    <string name="watch_positions_summary">Continua dall\'ultima posizione di riproduzione</string>
     <string name="auth_instance">Istanza di autenticazione</string>
     <string name="auth_instance_summary">Usa un\'istanza diversa per le chiamate di autenticazione.</string>
     <string name="auth_instances">Scegli un\'istanza di autenticazione</string>

@@ -175,7 +175,6 @@
     <string name="audio_video">Аудио и видео</string>
     <string name="fullscreen_orientation">Положение в полном экране</string>
     <string name="aspect_ratio">Соотношение сторон</string>
-    <string name="watch_positions_summary">Продолжать с последней позиции видео</string>
     <string name="auth_instances">Выбрать инстанс аутентификации</string>
     <string name="auto_rotation">Автоповорот</string>
     <string name="landscape">Альбомная</string>

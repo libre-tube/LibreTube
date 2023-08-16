@@ -210,7 +210,6 @@
     <string name="video">Video</string>
     <string name="player_autoplay">Automatické spustenie</string>
     <string name="pure_theme_summary">Čistá biela/čierna téma</string>
-    <string name="watch_positions_summary">Pokračovať z poslednej prehrávanej pozície</string>
     <string name="require_restart">Potrebné reštartovať aplikáciu</string>
     <string name="always">Vždy</string>
     <string name="selected">Vybrané</string>

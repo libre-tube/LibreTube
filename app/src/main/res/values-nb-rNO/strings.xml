@@ -173,7 +173,6 @@
     <string name="github">GitHub</string>
     <string name="auth_instance">Instans for identitetsbekreftelse</string>
     <string name="auth_instance_summary">Bruk en annen instans for identitetsbekreftede kall.</string>
-    <string name="watch_positions_summary">Fortsett fra tidligere visningsposisjon</string>
     <string name="chapters">Kapitler</string>
     <string name="require_restart">Programomstart kreves</string>
     <string name="turnInternetOn">Skru på Wi-Fi eller mobildata for å koble deg til Internett.</string>

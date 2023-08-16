@@ -85,7 +85,6 @@
     <string name="reset_message">શું બધા સુયોજનોને પુન:સુયોજિત કરવા છે અને બહાર નીકળવા માંગો છો\?</string>
     <string name="account">એકાઉન્ટ</string>
     <string name="restore">પુન:સંગ્રહ કરો</string>
-    <string name="watch_positions_summary">છેલ્લા પ્લેબેક સ્થાનમાંથી ચાલુ રાખો</string>
     <string name="auth_instance">સત્તાધિકરણ નમૂનો</string>
     <string name="github">GitHub</string>
     <string name="audio_video">ઓડિયો અને વિડિયો</string>

@@ -169,7 +169,6 @@
     <string name="restore">Berreskuratu</string>
     <string name="watch_history">Ikusitakoen historia</string>
     <string name="watch_positions">Gogoratu posizioa</string>
-    <string name="watch_positions_summary">Jarraitu azken erreprodukzioaren kokapenean</string>
     <string name="auth_instance_summary">Autentifikaziorako erabili beste instantzia bat.</string>
     <string name="auth_instance">Autentifikaziorako instantzia</string>
     <string name="auth_instances">Hautatu autentifikaziorako instantzia</string>

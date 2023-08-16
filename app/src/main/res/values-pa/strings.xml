@@ -171,7 +171,6 @@
     <string name="restore">ਰੀਸਟੋਰ</string>
     <string name="watch_history">ਵੇਖਿਆ ਇਤਿਹਾਸ</string>
     <string name="watch_positions">ਸਥਿਤੀ ਨੂੰ ਯਾਦ ਰੱਖੋ</string>
-    <string name="watch_positions_summary">ਆਖਰੀ ਪਲੇਬੈਕ ਸਥਿਤੀ ਤੋਂ ਜਾਰੀ ਰੱਖੋ</string>
     <string name="auth_instance">ਪ੍ਰਮਾਣਿਕਤਾ ਇੰਸਟੈਂਸ</string>
     <string name="auth_instance_summary">ਪ੍ਰਮਾਣਿਤ ਕਾਲਾਂ ਲਈ ਇੱਕ ਵੱਖਰਾ ਇੰਸਟੈਂਸ ਵਰਤੋ।</string>
     <string name="auth_instances">ਇੱਕ ਪ੍ਰਮਾਣਿਕਤਾ ਇੰਸਟੈਂਸ ਚੁਣੋ</string>

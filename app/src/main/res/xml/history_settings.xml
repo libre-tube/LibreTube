@@ -59,8 +59,8 @@
             android:entryValues="@array/watchPositionValues"
             android:icon="@drawable/ic_play_filled"
             app:key="watch_positions"
-            app:summary="@string/watch_positions_summary"
-            app:title="@string/watch_positions" />
+            app:title="@string/watch_positions"
+            app:useSimpleSummaryProvider="true" />
 
         <Preference
             android:icon="@drawable/ic_reset"

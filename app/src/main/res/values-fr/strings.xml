@@ -169,7 +169,6 @@
     <string name="restore">Restaurer</string>
     <string name="watch_history">Historique</string>
     <string name="watch_positions">Se souvenir de la position</string>
-    <string name="watch_positions_summary">Reprendre de la dernière position de lecture</string>
     <string name="auth_instance">Instance d\'authentification</string>
     <string name="github">GitHub</string>
     <string name="auth_instance_summary">Utiliser une instance différente pour les appels authentifiés.</string>

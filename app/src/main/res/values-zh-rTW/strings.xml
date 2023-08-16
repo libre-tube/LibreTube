@@ -166,7 +166,6 @@
     <string name="pauseOnScreenOff_summary">當熒幕關閉時暫停播放.</string>
     <string name="autoplay_summary">在當前的視頻播放完成後自動播放下一則.</string>
     <string name="watch_positions">記錄上次播放的位置</string>
-    <string name="watch_positions_summary">從上一次播放的位置繼續</string>
     <string name="audio_video">音視頻</string>
     <string name="no_audio">無音頻</string>
     <string name="no_video">無視訊</string>

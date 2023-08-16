@@ -207,7 +207,6 @@
     <string name="open_copied">Mở</string>
     <string name="audio_video">Âm thanh và video</string>
     <string name="autoRotatePlayer_summary">Phát toàn màn hình khi thiết bị xoay.</string>
-    <string name="watch_positions_summary">Tiếp tục từ vị trí phát lại cuối cùng</string>
     <string name="navLabelVisibility">Hiển thị nhãn</string>
     <string name="always">Luôn luôn</string>
     <string name="selected">Được chọn</string>
