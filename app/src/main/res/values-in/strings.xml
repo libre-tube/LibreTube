@@ -477,4 +477,22 @@
     <string name="remove_watched_videos">Hapus video yang sudah ditonton</string>
     <string name="player_channel_name">Layanan Pemutar</string>
     <string name="player_channel_description">Menampilkan notifikasi saat memutar</string>
+    <string name="tooltip_repeat">Ulangi</string>
+    <string name="tooltip_clear_queue">Hapus antrean</string>
+    <string name="tooltip_dismiss">Abaikan</string>
+    <string name="tooltip_locked">Kunci pemutar</string>
+    <string name="tooltip_unlocked">Buka kunci pemutar</string>
+    <string name="tooltip_close">Tutup</string>
+    <string name="tooltip_play">Putar</string>
+    <string name="tooltip_reverse">Balik</string>
+    <string name="tooltip_sort">Urutkan</string>
+    <string name="tooltip_watch_position">Posisi tontonan</string>
+    <string name="tooltip_sponsorblock">Saklar SponsorBlock</string>
+    <string name="tooltip_create_playlist">Buat daftar putar</string>
+    <string name="tooltip_scroll_to_top">Gulir ke atas</string>
+    <string name="tooltip_options">Opsi</string>
+    <string name="tooltip_fullscreen">Layar penuh</string>
+    <string name="tooltip_minimize">Kecilkan</string>
+    <string name="tooltip_filter">Saring</string>
+    <string name="tooltip_edit_groups">Sunting kelompok</string>
 </resources>
