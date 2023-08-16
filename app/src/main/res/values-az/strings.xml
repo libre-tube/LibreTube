@@ -481,7 +481,7 @@
     <string name="player_channel_name">Oynadıcı Xidməti</string>
     <string name="tooltip_clear_queue">Növbəni təmizlə</string>
     <string name="tooltip_dismiss">Rədd et</string>
-    <string name="tooltip_locked">Oynadıcı kilidlə</string>
+    <string name="tooltip_locked">Oynadıcını kilidlə</string>
     <string name="tooltip_unlocked">Oynadıcı kilidin aç</string>
     <string name="tooltip_sponsorblock">SponsorBlock-u Dəyiş</string>
     <string name="tooltip_options">Seçimlər</string>
