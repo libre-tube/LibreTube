@@ -497,4 +497,5 @@
     <string name="tooltip_filter">Filtr</string>
     <string name="tooltip_create_playlist">Oynatma siyahısı yarat</string>
     <string name="tooltip_scroll_to_top">Yuxarıya sürüşdür</string>
+    <string name="auto_generated">avtomatik yaradılıb</string>
 </resources>
