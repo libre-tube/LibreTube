@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
@@ -35,6 +36,7 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.PlaylistAdapter
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
@@ -147,6 +149,13 @@ class PlaylistFragment : Fragment() {
                 }
 
                 binding.playlistInfo.text = getChannelAndVideoString(response, response.videos)
+                binding.playlistInfo.setOnClickListener {
+                    (context as MainActivity).navController.navigate(
+                        R.id.channelFragment,
+                        bundleOf(IntentData.channelId to response.uploaderUrl?.toID())
+                    )
+                }
+
                 binding.playlistDescription.text = response.description
                 // hide playlist description text view if not provided
                 binding.playlistDescription.isGone = response.description.orEmpty().isBlank()
