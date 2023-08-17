@@ -463,7 +463,6 @@
     <string name="screen_orientation">Screen orientation</string>
     <string name="auto_generated">auto-generated</string>
     <string name="resolution_limited">limited</string>
-
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
     <string name="download_channel_description">Shows a notification when downloading media.</string>
@@ -497,7 +496,7 @@
     <string name="tooltip_unlocked">Unlock player</string>
     <string name="tooltip_sponsorblock">Toggle SponsorBlock</string>
     <string name="tooltip_options">Options</string>
-    <string name="tooltip_minimize">Minimze</string>
+    <string name="tooltip_minimize">Minimize</string>
     <string name="tooltip_fullscreen">Fullscreen</string>
     <string name="tooltip_close">Close</string>
     <string name="tooltip_play">Play</string>
