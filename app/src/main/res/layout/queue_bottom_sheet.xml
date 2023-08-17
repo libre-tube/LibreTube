@@ -83,6 +83,7 @@
                     android:id="@+id/dismiss"
                     android:tooltipText="@string/tooltip_dismiss"
                     style="@style/QueueSheetOption"
+                    android:layout_width="0dp"
                     android:layout_weight="1"
                     android:src="@drawable/ic_arrow_down" />
 
