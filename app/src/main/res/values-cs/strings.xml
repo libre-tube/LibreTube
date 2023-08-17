@@ -500,4 +500,6 @@
     <string name="tooltip_play">Přehrát</string>
     <string name="tooltip_close">Zavřít</string>
     <string name="tooltip_filter">Filtr</string>
+    <string name="auto_generated">automaticky vygenerováno</string>
+    <string name="resolution_limited">omezeno</string>
 </resources>
