@@ -94,7 +94,7 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
             showSortDialog()
         }
 
-        binding.bottomControls.setOnClickListener {
+        binding.dismiss.setOnClickListener {
             dialog?.dismiss()
         }
 
