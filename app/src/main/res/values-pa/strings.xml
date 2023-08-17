@@ -479,4 +479,24 @@
     <string name="uploader_name">ਅੱਪਲੋਡ ਕਰਨ ਵਾਲੇ ਦਾ ਨਾਮ</string>
     <string name="player_channel_description">ਚਲਦੇ ਸਮੇਂ ਇੱਕ ਨੋਟੀਫਿਕੇਸ਼ਨ ਵਿਖਾਉਂਦਾ ਹੈ</string>
     <string name="duration_span">ਮਿਆਦ: %1$s</string>
+    <string name="auto_generated">ਆਪ-ਮੁਖ਼ਤਾਰ ਤਿਆਰ ਕੀਤਾ</string>
+    <string name="tooltip_repeat">ਦੁਹਰਾਓ</string>
+    <string name="tooltip_options">ਵਿਕਲਪ</string>
+    <string name="tooltip_minimize">ਛੋਟਾ ਕਰੋ</string>
+    <string name="tooltip_fullscreen">ਪੂਰਾ ਸਕਰੀਨ</string>
+    <string name="tooltip_close">ਬੰਦ ਕਰੋ</string>
+    <string name="tooltip_sort">ਕ੍ਰਮਬੱਧ</string>
+    <string name="tooltip_watch_position">ਵੇਖਣ ਦੀ ਸਥਿਤੀ</string>
+    <string name="tooltip_clear_queue">ਕਤਾਰ ਸਾਫ਼ ਕਰੋ</string>
+    <string name="tooltip_dismiss">ਖਾਰਿਜ ਕਰੋ</string>
+    <string name="tooltip_locked">ਪਲੇਅਰ ਲਾਕ ਕਰੋ</string>
+    <string name="tooltip_unlocked">ਪਲੇਅਰ ਅਨਲਾਕ ਕਰੋ</string>
+    <string name="resolution_limited">ਸੀਮਿਤ</string>
+    <string name="tooltip_reverse">ਉਲਟਾ</string>
+    <string name="tooltip_sponsorblock">ਸਪਾਂਸਰਬਲਾਕ ਟੌਗਲ ਕਰੋ</string>
+    <string name="tooltip_play">ਚਲਾਓ</string>
+    <string name="tooltip_filter">ਫਿਲਟਰ</string>
+    <string name="tooltip_edit_groups">ਗਰੁੱਪਾਂ ਦਾ ਸੰਪਾਦਨ</string>
+    <string name="tooltip_create_playlist">ਪਲੇਲਿਸਟ ਬਣਾਓ</string>
+    <string name="tooltip_scroll_to_top">ਸਿਖਰ ਤੱਕ ਸਕ੍ਰੋਲ ਕਰੋ</string>
 </resources>
