@@ -497,4 +497,6 @@
     <string name="tooltip_scroll_to_top">Rull til toppen</string>
     <string name="tooltip_sponsorblock">Veksle SponsorBlock</string>
     <string name="tooltip_watch_position">Husket framdrift</string>
+    <string name="auto_generated">auto-generert</string>
+    <string name="resolution_limited">begrenset</string>
 </resources>
