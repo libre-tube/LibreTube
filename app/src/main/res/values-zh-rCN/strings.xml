@@ -494,4 +494,6 @@
     <string name="tooltip_fullscreen">全屏</string>
     <string name="tooltip_minimize">最小化</string>
     <string name="tooltip_close">关闭</string>
+    <string name="auto_generated">自动生成的</string>
+    <string name="resolution_limited">受限</string>
 </resources>
