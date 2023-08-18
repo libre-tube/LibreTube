@@ -474,4 +474,26 @@
     <string name="uploader_name">上傳者名稱</string>
     <string name="duration_span">持續時間：%1$s</string>
     <string name="remove_watched_videos">移除觀看過的影片</string>
+    <string name="tooltip_sort">排序</string>
+    <string name="tooltip_dismiss">忽略</string>
+    <string name="tooltip_options">選項</string>
+    <string name="tooltip_minimize">最小化</string>
+    <string name="tooltip_locked">鎖定播放器</string>
+    <string name="tooltip_fullscreen">全螢幕</string>
+    <string name="tooltip_play">播放</string>
+    <string name="tooltip_edit_groups">編輯群組</string>
+    <string name="tooltip_unlocked">解鎖播放器</string>
+    <string name="resolution_limited">限制</string>
+    <string name="tooltip_clear_queue">清除佇列</string>
+    <string name="tooltip_sponsorblock">切換 SponsorBlock</string>
+    <string name="tooltip_close">關閉</string>
+    <string name="tooltip_filter">過濾</string>
+    <string name="tooltip_create_playlist">建立播放清單</string>
+    <string name="tooltip_scroll_to_top">捲動至頂部</string>
+    <string name="auto_generated">自動產生</string>
+    <string name="player_channel_name">播放器服務</string>
+    <string name="player_channel_description">播放時顯示通知</string>
+    <string name="tooltip_watch_position">觀看位置</string>
+    <string name="tooltip_repeat">重複</string>
+    <string name="tooltip_reverse">反向</string>
 </resources>
