@@ -104,7 +104,7 @@
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Играть в фоне</string>
-    <string name="disabled">Отключены</string>
+    <string name="disabled">Откл.</string>
     <string name="update_available">Версия %1$s доступна</string>
     <string name="defaultIcon">По умолчанию</string>
     <string name="shapedIcon">Формальная форма</string>
@@ -124,7 +124,7 @@
     <string name="category_preview_description">Для сегментов с подробным описанием будущего контента без дополнительной информации. Если он включает в себя клипы, которые появляются только здесь, скорее всего, это неправильная категория.</string>
     <string name="appearance">Внешний вид</string>
     <string name="customInstance_summary">Добавить…</string>
-    <string name="addInstance">Добавить</string>
+    <string name="addInstance">Добавить инстанс</string>
     <string name="empty_instance">Введите название и URL API.</string>
     <string name="related_streams">Связанный контент</string>
     <string name="category_music_offtopic_description">Только для использования в музыкальных клипах. Он должен охватывать части видео, не являющиеся частью официальных миксов. В конечном итоге, видео должно быть максимально похоже на версию Spotify или любую другую микс-версию, или должно быть меньше разговоров и других отвлекающих факторов.</string>
@@ -194,7 +194,7 @@
     <string name="selected">Выбранное</string>
     <string name="watch_positions_title">Запомненные позиции воспроизведения</string>
     <string name="system_caption_style">Системный стиль субтитров</string>
-    <string name="none">Отключены</string>
+    <string name="none">Откл.</string>
     <string name="autoRotatePlayer_summary">Полноэкранный режим при повороте устройства.</string>
     <string name="navLabelVisibility">Видимость меток</string>
     <string name="always">Всегда</string>
@@ -230,7 +230,7 @@
     <string name="playingOnBackground">Воспроизведение в фоне…</string>
     <string name="playerAudioFormat">Аудио формат для проигрывателя</string>
     <string name="best_quality">Лучшее</string>
-    <string name="worst_quality">Низкое</string>
+    <string name="worst_quality">Худшее</string>
     <string name="export_subscriptions">Экспорт подписок</string>
     <string name="skip_buttons">Кнопки перехода</string>
     <string name="background_mode">Фоновый режим</string>
@@ -385,7 +385,7 @@
     <string name="autoplay_countdown_summary">Показывать 5-секундный обратный отсчёт перед автовоспроизведением следующего видео.</string>
     <string name="autoplay_countdown">Таймер автовоспроизведения</string>
     <string name="playing_next">Следующее воспроизведение за %1$s</string>
-    <string name="stats_for_nerds">Статистика</string>
+    <string name="stats_for_nerds">Статистика для ботаников</string>
     <string name="video_id">ID видео</string>
     <plurals name="months_ago">
         <item quantity="one">%d месяц назад</item>
@@ -447,7 +447,7 @@
     <string name="playlist_description">Описание плейлиста</string>
     <string name="emptyPlaylistDescription">Описание плейлиста не может быть пустым</string>
     <string name="show_search_suggestions">Показать поисковые подсказки</string>
-    <string name="off">Выключено</string>
+    <string name="off">Выкл.</string>
     <string name="manual">Вручную</string>
     <string name="automatic">Автоматически</string>
     <string name="sb_color_enable">Вкл/выкл цветовую маркировку для сегментов спонсорских блокировок.</string>
