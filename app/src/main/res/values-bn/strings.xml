@@ -327,7 +327,7 @@
     <string name="no_subtitle">সাবটাইটেল নেই</string>
     <string name="download_paused">ডাউনলোড থামানো আছে</string>
     <string name="unknown">অজানা</string>
-    <string name="pause">থামাও</string>
+    <string name="pause">বিরতি</string>
     <string name="resume">চালাও</string>
     <string name="unsupported_file_format">অসমর্থিত ফাইল ফর্ম্যাট: %1$s</string>
     <string name="pinch_control_summary">পিঞ্চ জেস্টার ব্যবহার করে জুম করুন।</string>
