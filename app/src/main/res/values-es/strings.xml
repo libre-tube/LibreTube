@@ -351,7 +351,7 @@
     <string name="hide_watched_from_feed_summary">No mostrar los vídeos vistos más del 90% en la pestaña de suscripciones.</string>
     <string name="playlistUrl">URL de la lista de reproducción</string>
     <string name="pause_on_quit">Pausar al salir</string>
-    <string name="shuffle">Aleatorio</string>
+    <string name="shuffle">Mezclar</string>
     <string name="add_to_bookmarks">Añadir a Marcadores</string>
     <string name="remove_bookmark">Quitar marcador</string>
     <string name="forward">Avanzar</string>
@@ -383,7 +383,7 @@
     <string name="normal_views">%1$s reproducciones%2$s</string>
     <string name="trending_views">%1$s • %2$s reproducciones • %3$s</string>
     <string name="stats_for_nerds">Estadísticas para frikis</string>
-    <string name="video_id">Identificación del vídeo</string>
+    <string name="video_id">ID del vídeo</string>
     <string name="autoplay_countdown">Cuenta regresiva</string>
     <string name="autoplay_countdown_summary">Muestra una cuenta atrás de 5 segundos antes de reproducir automáticamente el siguiente vídeo.</string>
     <string name="playing_next">Siguiente vídeo en %1$s</string>
@@ -432,7 +432,7 @@
     <string name="export_subscriptions_to">Exportar suscripciones para</string>
     <string name="import_format_freetube">FreeTube</string>
     <string name="import_format_youtube_csv">YouTube (CSV)</string>
-    <string name="export_playlists_to">Exportar listas hacia</string>
+    <string name="export_playlists_to">Exportar listas para</string>
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="import_playlists_from">Importar listas desde</string>
     <string name="home_tab_content">Contenido de pestaña \"Inicio\"</string>
@@ -461,10 +461,10 @@
     <string name="fallback_piped_proxy">Regresar al proxy de Piped</string>
     <string name="fallback_piped_proxy_desc">Cargar vídeos a través del proxy si al conectar directamente a YouTube no funciona el video en curso (aumenta el tiempo de carga inicial). Si lo deshabilitas, el contenido de YT Music probablemente no se reproduzca debido a restricciones de YouTube.</string>
     <string name="audio_track_format">%1$s - %2$s</string>
-    <string name="unknown_or_no_audio">desconocido o sin audio</string>
+    <string name="unknown_or_no_audio">Desconocido/Sin audio</string>
     <string name="dubbed_audio_track">doblado</string>
     <string name="descriptive_audio_track">descriptivo</string>
-    <string name="default_or_unknown_audio_track">predeterminado o desconocido</string>
+    <string name="default_or_unknown_audio_track">Predeterminado/Desconocido</string>
     <string name="unknown_audio_language">Idioma del audio desconocido</string>
     <string name="unknown_audio_track_type">Tipo de pista de audio desconocido</string>
     <string name="original_or_main_audio_track">original o principal</string>
@@ -479,7 +479,7 @@
     <string name="duration_span">Duración: %1$s</string>
     <string name="no_chapter">Sin capítulos</string>
     <string name="screen_orientation">Orientación de pantalla</string>
-    <string name="remove_watched_videos">Eliminar los videos ya vistos</string>
+    <string name="remove_watched_videos">Quitar los videos ya vistos</string>
     <string name="player_channel_name">Servicios del reproductor</string>
     <string name="player_channel_description">Aparece una notificación cuando se está reproduciendo</string>
     <string name="tooltip_sort">Ordenar</string>
@@ -490,7 +490,7 @@
     <string name="tooltip_filter">Filtrar</string>
     <string name="tooltip_edit_groups">Editar grupos</string>
     <string name="tooltip_repeat">Repetir</string>
-    <string name="tooltip_reverse">Retroceder</string>
+    <string name="tooltip_reverse">Invertir</string>
     <string name="tooltip_clear_queue">Vaciar cola</string>
     <string name="tooltip_locked">Bloquear reproductor</string>
     <string name="tooltip_watch_position">Posición de visionado</string>
