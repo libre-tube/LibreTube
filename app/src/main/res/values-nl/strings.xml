@@ -32,7 +32,7 @@
     <string name="grid">Rasterkolommen</string>
     <string name="playlistName">Afspeellijstnaam</string>
     <string name="systemLanguage">Systeem</string>
-    <string name="startpage">Start</string>
+    <string name="startpage">Thuis</string>
     <string name="library">Bibliotheek</string>
     <string name="loggedout">Uitgelogd.</string>
     <string name="defres">Video resolutie</string>
@@ -167,4 +167,12 @@
     <string name="jumped_to_highlight">Naar hoogtepunt gesprongen</string>
     <string name="subscriberAndVideoCounts">%1$s abonnees • %2$d video\'s</string>
     <string name="replies">Antwoorden</string>
+    <string name="normal_views">%1$s weergaven%2$s</string>
+    <string name="concurrent_downloads">Maximale tegelijke downloads</string>
+    <string name="trending_views">%1$s • %2$s weergaven• %3$s</string>
+    <string name="category_highlight">Videohoogtepunt laten zien</string>
+    <string name="category_highlight_description">Kan de geadverteerde titel zijn, de thumbnail of het meest interessante deel van de video. Je kan het overslaan door er op te tikken in het hoofdstuk deel.</string>
+    <string name="download_completed">Download voltooid</string>
+    <string name="download_paused">Download gepauzeerd</string>
+    <string name="no_subtitle">Geen ondertiteling</string>
 </resources>
