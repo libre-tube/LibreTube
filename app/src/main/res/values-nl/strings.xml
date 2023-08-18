@@ -175,4 +175,22 @@
     <string name="download_completed">Download voltooid</string>
     <string name="download_paused">Download gepauzeerd</string>
     <string name="no_subtitle">Geen ondertiteling</string>
+    <string name="landscape">Landschap</string>
+    <string name="least_recent">Oudste</string>
+    <string name="account">Account</string>
+    <string name="most_recent">Nieuwste</string>
+    <string name="translate">Vertaling</string>
+    <string name="error_occurred">Fout</string>
+    <string name="copied">Gekopieerd</string>
+    <string name="notifications">Meldingen</string>
+    <string name="github">GitHub</string>
+    <string name="auto_rotation">Auto­rotatie</string>
+    <string name="chapters">Hoofdstukken</string>
+    <string name="always">Altijd</string>
+    <string name="worst_quality">Slechtst</string>
+    <string name="restore">Herstellen</string>
+    <string name="portrait">Portret</string>
+    <string name="open">Openen…</string>
+    <string name="unlimited">Ongelimiteerd</string>
+    <string name="network_all">Alles</string>
 </resources>
