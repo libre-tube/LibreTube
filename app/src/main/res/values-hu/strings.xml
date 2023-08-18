@@ -479,4 +479,24 @@
     <string name="remove_watched_videos">Megnézett videók eltávolítása</string>
     <string name="player_channel_name">Lejátszó szolgáltatás</string>
     <string name="player_channel_description">Értesítést jelenít meg lejátszás közben</string>
+    <string name="tooltip_repeat">Ismétlés</string>
+    <string name="tooltip_reverse">Fordított</string>
+    <string name="tooltip_sort">Rendez</string>
+    <string name="tooltip_clear_queue">Várósor ürítése</string>
+    <string name="tooltip_dismiss">Elvetés</string>
+    <string name="tooltip_unlocked">Lejátszó feloldása</string>
+    <string name="tooltip_locked">Lejátszó lezárása</string>
+    <string name="tooltip_play">Lejátszás</string>
+    <string name="tooltip_fullscreen">Teljes képernyő</string>
+    <string name="tooltip_close">Bezár</string>
+    <string name="tooltip_filter">Szűrő</string>
+    <string name="tooltip_edit_groups">Csoportok szerkesztése</string>
+    <string name="tooltip_create_playlist">Lejátszólista létrehozás</string>
+    <string name="auto_generated">auto-létrehozott</string>
+    <string name="tooltip_sponsorblock">Szponzorblokk váltás</string>
+    <string name="tooltip_options">Lehetőségek</string>
+    <string name="resolution_limited">korlátozott</string>
+    <string name="tooltip_watch_position">Pozíció figyelés</string>
+    <string name="tooltip_scroll_to_top">Görgetés a tetejére</string>
+    <string name="tooltip_minimize">Minimalizál</string>
 </resources>
