@@ -223,7 +223,7 @@
     <string name="notification_time">通知する時間帯を制限</string>
     <string name="notify_new_streams_summary">フォローしている配信者の新着動画の通知を表示します。</string>
     <string name="notifications">通知</string>
-    <string name="add_to_queue">再生待ちのキューに追加</string>
+    <string name="add_to_queue">再生キューに追加</string>
     <string name="irreversible">続けますか？この操作は取り消せません！</string>
     <string name="export_subscriptions">登録チャンネルをエクスポート</string>
     <string name="unlimited">無制限</string>
@@ -476,4 +476,24 @@
     <string name="duration_span">期間: %1$s</string>
     <string name="player_channel_name">プレイヤーのサービス</string>
     <string name="player_channel_description">再生中に通知を表示</string>
+    <string name="tooltip_create_playlist">再生リストの作成</string>
+    <string name="tooltip_sort">並び替え</string>
+    <string name="tooltip_repeat">リピート</string>
+    <string name="tooltip_reverse">逆順</string>
+    <string name="tooltip_watch_position">視聴位置</string>
+    <string name="resolution_limited">選択</string>
+    <string name="tooltip_minimize">最小化</string>
+    <string name="tooltip_fullscreen">全画面</string>
+    <string name="tooltip_close">閉じる</string>
+    <string name="tooltip_play">再生</string>
+    <string name="tooltip_filter">絞り込み</string>
+    <string name="tooltip_edit_groups">グループの編集</string>
+    <string name="tooltip_scroll_to_top">先頭までスクロール</string>
+    <string name="tooltip_options">オプション</string>
+    <string name="tooltip_sponsorblock">SponsorBlock を切り替え</string>
+    <string name="tooltip_locked">プレイヤーをロック</string>
+    <string name="tooltip_unlocked">プレイヤーのロック解除</string>
+    <string name="tooltip_clear_queue">再生キューを初期化</string>
+    <string name="tooltip_dismiss">非表示</string>
+    <string name="auto_generated">自動生成</string>
 </resources>
