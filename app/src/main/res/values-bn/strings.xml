@@ -317,7 +317,7 @@
     <string name="exportsuccess">রপ্তানি করা।</string>
     <string name="alternative_player_layout_summary">নীচের পরিবর্তে মন্তব্যের উপরে একটি সারি হিসাবে সম্পর্কযুক্ত ভিডিওগুলি দেখান৷</string>
     <string name="queue_insert_related_videos">সম্পর্কিত ভিডিও ঢোকান</string>
-    <string name="bookmarks">বুকমার্ক</string>
+    <string name="bookmarks">বুকমার্কগুলো</string>
     <string name="bookmark">বুকমার্ক</string>
     <string name="clear_bookmarks">বুকমার্ক মুছে দিন</string>
     <string name="pop_up">পপ-আপ</string>
@@ -344,7 +344,7 @@
     <string name="auto">অটো</string>
     <string name="no_comments_available">এই ভিডিওতে কোনো কমেন্ট নেই।</string>
     <string name="import_playlists">প্লেলিস্টগুলো ইম্পোর্ট করুন</string>
-    <string name="concurrent_downloads_limit_reached">সর্বোচ্চ ডাউনলোড লিমিটে পৌঁছেছেন ।</string>
+    <string name="concurrent_downloads_limit_reached">একই সঙ্গে সংঘটিত ডাউনলোডের সংখ্যা সর্বোচ্চ হয়েছে।</string>
     <string name="remove_bookmark">বুকমার্ক সরাও</string>
     <string name="rewind">রিওয়াইন্ড</string>
     <string name="forward">সামনে আগাও</string>
@@ -361,4 +361,10 @@
     <string name="all_caught_up">তুমি সবকিছু সম্পন্ন করেছ</string>
     <string name="alternative_pip_controls">অন্যান্য পিপ কন্ট্রোলগুলো</string>
     <string name="color_violet">বহুমুখী বেগুনি</string>
+    <string name="uploaderAndVideoCount">%1$s • %2$dটি ভিডিও</string>
+    <string name="subscriberAndVideoCounts">%1$s জন‌ সাবস্ক্রাইবার • %2$dটি ভিডিও</string>
+    <string name="normal_views">%1$s বার দেখা হয়েছে %2$s</string>
+    <string name="show_stream_thumbnails">থাম্বনেইলগুলো দেখান</string>
+    <string name="show_stream_thumbnails_summary">নতুন স্ট্রিমগুলোর জন্য থাম্বনেইল প্রদর্শন করুন। এই অপশনটা চালু করা হলে অতিরিক্ত ডাটা খরচ হবে।</string>
+    <string name="trending_views">%1$s • %2$s বার দেখা হয়েছে • %3$s</string>
 </resources>
