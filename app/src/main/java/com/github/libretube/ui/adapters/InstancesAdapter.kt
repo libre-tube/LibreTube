@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.R
 import com.github.libretube.api.obj.Instances
 import com.github.libretube.databinding.InstanceRowBinding
 import com.github.libretube.ui.models.WelcomeModel
@@ -28,8 +29,11 @@ class InstancesAdapter(
     override fun onBindViewHolder(holder: InstancesViewHolder, position: Int) {
         val instance = instances[position]
         holder.binding.apply {
-            val cdnText = if (instance.cdn) "   (\uD83C\uDF10 CDN)" else ""
-            radioButton.text = "${instance.name}   ${instance.locations} $cdnText"
+            var instanceText = "${instance.name}   ${instance.locations}"
+            if (instance.cdn) instanceText += "   (\uD83C\uDF10 CDN)"
+            if (instance.registrationDisabled) instanceText +=
+                "   (${root.context.getString(R.string.registration_disabled)})"
+            radioButton.text = instanceText
             radioButton.setOnCheckedChangeListener(null)
             radioButton.isChecked = selectedInstanceIndex == position
             radioButton.setOnCheckedChangeListener { _, isChecked ->
