@@ -502,4 +502,5 @@
     <string name="tooltip_scroll_to_top">Volver al principio</string>
     <string name="resolution_limited">limitada</string>
     <string name="auto_generated">autogenerados</string>
+    <string name="registration_disabled">Registro deshabilitado</string>
 </resources>
