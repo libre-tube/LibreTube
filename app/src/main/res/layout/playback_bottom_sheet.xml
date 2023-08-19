@@ -41,31 +41,14 @@
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal" />
 
-                <LinearLayout
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/speed"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.slider.Slider
-                        android:id="@+id/speed"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:stepSize="0.1"
-                        android:value="1.0"
-                        android:valueFrom="0.2"
-                        android:valueTo="4.0" />
-
-                    <ImageView
-                        android:id="@+id/reset_speed"
-                        android:tooltipText="@string/reset"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="5dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:src="@drawable/ic_history" />
-
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:stepSize="0.1"
+                    android:value="1.0"
+                    android:valueFrom="0.2"
+                    android:valueTo="4.0" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -79,32 +62,14 @@
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal" />
 
-                <LinearLayout
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/pitch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <com.google.android.material.slider.Slider
-                        android:id="@+id/pitch"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:stepSize="0.1"
-                        android:value="1.0"
-                        android:valueFrom="0.5"
-                        android:valueTo="2.0" />
-
-                    <ImageView
-                        android:id="@+id/reset_pitch"
-                        android:tooltipText="@string/reset"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="5dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:src="@drawable/ic_history" />
-
-                </LinearLayout>
+                    android:stepSize="0.1"
+                    android:value="1.0"
+                    android:valueFrom="0.5"
+                    android:valueTo="2.0" />
 
             </LinearLayout>
 
