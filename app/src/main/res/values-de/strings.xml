@@ -499,4 +499,5 @@
     <string name="tooltip_create_playlist">Playlist erstellen</string>
     <string name="resolution_limited">begrenzt</string>
     <string name="auto_generated">automatisch generiert</string>
+    <string name="registration_disabled">Registrierung ist deaktiviert</string>
 </resources>
