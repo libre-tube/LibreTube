@@ -23,9 +23,17 @@ object DatabaseHolder {
         }
     }
 
+    private val MIGRATION_13_14 = object : Migration(13, 14) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL(
+                "ALTER TABLE 'subscriptionGroups' ADD COLUMN 'index' INTEGER NOT NULL DEFAULT 0"
+            )
+        }
+    }
+
     val Database by lazy {
         Room.databaseBuilder(LibreTubeApp.instance, AppDatabase::class.java, DATABASE_NAME)
-            .addMigrations(MIGRATION_11_12, MIGRATION_12_13)
+            .addMigrations(MIGRATION_11_12, MIGRATION_12_13, MIGRATION_13_14)
             .fallbackToDestructiveMigration()
             .build()
     }
