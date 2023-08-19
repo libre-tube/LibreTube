@@ -505,4 +505,5 @@
     <string name="tooltip_close">סגירה</string>
     <string name="tooltip_play">נגינה</string>
     <string name="tooltip_filter">מסנן</string>
+    <string name="registration_disabled">ההרשמה מושבתת</string>
 </resources>
