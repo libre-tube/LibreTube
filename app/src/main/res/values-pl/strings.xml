@@ -109,7 +109,7 @@
     <string name="update_available">Dostępna jest wersja %1$s</string>
     <string name="defaultIcon">Domyślna</string>
     <string name="app_uptodate">Uruchomiona jest najnowsza wersja.</string>
-    <string name="appearance_summary">Dostosuj aplikację do swoich potrzeb</string>
+    <string name="appearance_summary">Dostosuj aplikację do swoich potrzeb.</string>
     <string name="advanced_summary">Pobieranie i resetowanie</string>
     <string name="shareTo">Udostępnij link do</string>
     <string name="instance_summary">Piped, logowanie i konto</string>
@@ -156,7 +156,7 @@
     <string name="require_restart">Wymagany restart aplikacji</string>
     <string name="gradientIcon">Gładki gradient</string>
     <string name="birdIcon">Wzmocniony ptak</string>
-    <string name="network_metered">Dane mobilne</string>
+    <string name="network_metered">Taryfowe</string>
     <string name="translate">Tłumaczenie</string>
     <string name="error_occurred">Błąd</string>
     <string name="copied">Skopiowano</string>
@@ -269,7 +269,7 @@
     <string name="sb_skip_manual">Pomiń ręcznie</string>
     <string name="sb_skip_manual_summary">Nie pomijaj segmentów automatycznie, zawsze informuj przed ich pominięciem.</string>
     <string name="local_subscriptions">Lokalne subskrypcje</string>
-    <string name="preferences">Ustawienia</string>
+    <string name="preferences">Preferencje</string>
     <string name="backup_customInstances">Instancje niestandardowe</string>
     <string name="download_channel_name">Usługa pobierania</string>
     <string name="push_channel_description">Pokazuje powiadomienie, kiedy dostępne są nowe filmy.</string>
@@ -489,4 +489,21 @@
     <string name="resolution_limited">ograniczona</string>
     <string name="sb_color_enable">Włącza możliwość ustawiania niestandardowych kolorów segmentów dla segmentów SponsorBlock.</string>
     <string name="registration_disabled">Rejestracja wyłączona</string>
+    <string name="tooltip_reverse">Odwrotnie</string>
+    <string name="tooltip_sort">Sortuj</string>
+    <string name="tooltip_clear_queue">Wyczyść kolejkę</string>
+    <string name="tooltip_dismiss">Odrzuć</string>
+    <string name="tooltip_watch_position">Pozycja oglądania</string>
+    <string name="tooltip_unlocked">Odblokuj odtwarzacz</string>
+    <string name="tooltip_sponsorblock">Włącz SponsorBlock</string>
+    <string name="tooltip_locked">Zablokuj odtwarzacz</string>
+    <string name="tooltip_options">Opcje</string>
+    <string name="tooltip_minimize">Minimalizuj</string>
+    <string name="tooltip_create_playlist">Utwórz playlistę</string>
+    <string name="tooltip_fullscreen">Pełny ekran</string>
+    <string name="tooltip_close">Zamknij</string>
+    <string name="tooltip_filter">Filtr</string>
+    <string name="tooltip_scroll_to_top">Przewiń na górę</string>
+    <string name="tooltip_play">Odtwórz</string>
+    <string name="tooltip_edit_groups">Edytuj grupy</string>
 </resources>
