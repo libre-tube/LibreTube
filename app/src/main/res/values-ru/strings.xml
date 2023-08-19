@@ -505,4 +505,5 @@
     <string name="tooltip_scroll_to_top">Пролистать наверх</string>
     <string name="auto_generated">авто-сгенерировано</string>
     <string name="resolution_limited">ограничено</string>
+    <string name="registration_disabled">Регистрация отключена</string>
 </resources>
