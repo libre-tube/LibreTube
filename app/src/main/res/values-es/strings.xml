@@ -17,7 +17,7 @@
     <string name="registered">Registrado. Ahora puedes suscribirte a canales.</string>
     <string name="already_logged_in">Sesión ya iniciada. Vas a cerrar la sesión de tu cuenta.</string>
     <string name="instances">Instancias disponibles…</string>
-    <string name="customInstance">Añadir instancia...</string>
+    <string name="customInstance">Personalizada</string>
     <string name="login_register">Iniciar sesión/Registrarse</string>
     <string name="importsuccess">Suscrito</string>
     <string name="loggedout">Sesión cerrada.</string>
@@ -130,7 +130,7 @@
     <string name="gradientIcon">Difuminado</string>
     <string name="fireIcon">Fuego moderno</string>
     <string name="torchIcon">Antorcha</string>
-    <string name="customInstance_summary">Añade una instancia personalizada.</string>
+    <string name="customInstance_summary">Añadir…</string>
     <string name="downloads">Descargas</string>
     <string name="advanced">Avanzado</string>
     <string name="player">Reproductor</string>
@@ -237,7 +237,7 @@
     <string name="backup_restore">Copia de seguridad y restauración</string>
     <string name="backup">Copia de seguridad</string>
     <string name="picture_in_picture">Reproductor flotante</string>
-    <string name="break_reminder_time">Minutos transcurridos hasta que LibreTube se cierre:</string>
+    <string name="break_reminder_time">Minutos antes de ser notificado</string>
     <string name="legacy_subscriptions">Ver suscripciones en una cuadrícula</string>
     <string name="device_info">Información del dispositivo</string>
     <string name="share_with_time">Compartir con marca de tiempo</string>
@@ -252,7 +252,7 @@
     <string name="background_mode">Modo segundo plano</string>
     <string name="add_to_queue">Añadir a la cola</string>
     <string name="misc">Miscelánea</string>
-    <string name="yt_shorts">Shorts</string>
+    <string name="yt_shorts">Cortos</string>
     <string name="no_subtitles_available">No hay subtítulos disponibles</string>
     <string name="player_resize_mode">Modo de encuadre</string>
     <string name="maximum_image_cache">Tamaño máximo de la caché de imágenes</string>
@@ -503,4 +503,7 @@
     <string name="resolution_limited">limitada</string>
     <string name="auto_generated">autogenerados</string>
     <string name="registration_disabled">Registro deshabilitado</string>
+    <string name="proxy">Proxy</string>
+    <string name="group_name_error_empty">Por favor, introduce un nombre</string>
+    <string name="group_name_error_exists">Por favor, elije un nombre que sea único</string>
 </resources>
