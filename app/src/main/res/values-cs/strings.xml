@@ -502,4 +502,8 @@
     <string name="tooltip_filter">Filtr</string>
     <string name="auto_generated">automaticky vygenerováno</string>
     <string name="resolution_limited">omezeno</string>
+    <string name="proxy">Proxy</string>
+    <string name="group_name_error_empty">Zadejte nový název</string>
+    <string name="group_name_error_exists">Zvolte prosím jméno, které je unikátní</string>
+    <string name="registration_disabled">Registrace zakázány</string>
 </resources>
