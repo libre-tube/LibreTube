@@ -499,4 +499,5 @@
     <string name="tooltip_watch_position">Pozíció figyelés</string>
     <string name="tooltip_scroll_to_top">Görgetés a tetejére</string>
     <string name="tooltip_minimize">Minimalizál</string>
+    <string name="registration_disabled">Regisztráció letiltva</string>
 </resources>
