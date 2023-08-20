@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 13,
-    "identityHash": "a07f3a23fa32cba2d80830e903c145c4",
+    "version": 14,
+    "identityHash": "4b4658954c6632e2aa1ebd25a9d7c731",
     "entities": [
       {
         "tableName": "watchHistoryItem",
@@ -474,7 +474,7 @@
       },
       {
         "tableName": "subscriptionGroups",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `channels` TEXT NOT NULL, `index` INTEGER, PRIMARY KEY(`name`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `channels` TEXT NOT NULL, `index` INTEGER NOT NULL, PRIMARY KEY(`name`))",
         "fields": [
           {
             "fieldPath": "name",
@@ -492,7 +492,7 @@
             "fieldPath": "index",
             "columnName": "index",
             "affinity": "INTEGER",
-            "notNull": false
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -508,7 +508,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a07f3a23fa32cba2d80830e903c145c4')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4b4658954c6632e2aa1ebd25a9d7c731')"
     ]
   }
 }
