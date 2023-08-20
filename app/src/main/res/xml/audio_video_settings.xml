@@ -95,22 +95,6 @@
             app:title="@string/codecs"
             app:useSimpleSummaryProvider="true" />
 
-        <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:icon="@drawable/ic_server"
-            android:summary="@string/disable_proxy_summary"
-            android:title="@string/disable_proxy"
-            app:key="disable_video_image_proxy" />
-
-        <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:dependency="disable_video_image_proxy"
-            android:icon="@drawable/ic_music"
-            android:summary="@string/fallback_piped_proxy_desc"
-            android:title="@string/fallback_piped_proxy"
-            app:defaultValue="true"
-            app:key="fallback_piped_proxy" />
-
     </PreferenceCategory>
 
 </PreferenceScreen>
