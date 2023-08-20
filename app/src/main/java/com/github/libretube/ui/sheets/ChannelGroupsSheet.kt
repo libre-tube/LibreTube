@@ -64,7 +64,7 @@ class ChannelGroupsSheet(
                 groups.move(from, to)
                 adapter.notifyItemMoved(from, to)
 
-                groups.mapIndexed { index, subscriptionGroup -> subscriptionGroup.index = index }
+                groups.forEachIndexed { index, subscriptionGroup -> subscriptionGroup.index = index }
                 runBlocking(Dispatchers.IO) {
                     DatabaseHolder.Database.subscriptionGroupsDao().updateAll(groups)
                 }

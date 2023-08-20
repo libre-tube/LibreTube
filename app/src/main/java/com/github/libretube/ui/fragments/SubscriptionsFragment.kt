@@ -187,7 +187,7 @@ class SubscriptionsFragment : Fragment() {
         binding.channelGroups.removeAllViews()
 
         binding.channelGroups.addView(binding.chipAll)
-        channelGroups = channelGroups.sortedBy { subscriptionGroup -> subscriptionGroup.index }
+        channelGroups = channelGroups.sortedBy { it.index }
         channelGroups.forEach { group ->
             val chip = layoutInflater.inflate(R.layout.filter_chip, null) as Chip
             chip.apply {
