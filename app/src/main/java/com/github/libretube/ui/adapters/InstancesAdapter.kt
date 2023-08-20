@@ -31,8 +31,10 @@ class InstancesAdapter(
         holder.binding.apply {
             var instanceText = "${instance.name}   ${instance.locations}"
             if (instance.cdn) instanceText += "   (\uD83C\uDF10 CDN)"
-            if (instance.registrationDisabled) instanceText +=
-                "   (${root.context.getString(R.string.registration_disabled)})"
+            if (instance.registrationDisabled) {
+                instanceText +=
+                    "   (${root.context.getString(R.string.registration_disabled)})"
+            }
             radioButton.text = instanceText
             radioButton.setOnCheckedChangeListener(null)
             radioButton.isChecked = selectedInstanceIndex == position

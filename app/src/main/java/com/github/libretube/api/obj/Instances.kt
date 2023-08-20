@@ -16,5 +16,5 @@ data class Instances(
     @SerialName("cache") val chache: Boolean = false,
     @SerialName("s3_enabled") val s3Enabled: Boolean = false,
     @SerialName("image_proxy_url") val imageProxyUrl: String = "",
-    @SerialName("registration_disabled") val registrationDisabled: Boolean = false,
+    @SerialName("registration_disabled") val registrationDisabled: Boolean = false
 )
