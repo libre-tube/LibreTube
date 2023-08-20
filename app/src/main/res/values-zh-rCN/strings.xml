@@ -496,4 +496,5 @@
     <string name="tooltip_close">关闭</string>
     <string name="auto_generated">自动生成的</string>
     <string name="resolution_limited">受限</string>
+    <string name="registration_disabled">禁止注册</string>
 </resources>
