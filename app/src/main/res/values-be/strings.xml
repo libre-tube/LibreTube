@@ -483,4 +483,27 @@
     <string name="sort_by">Сартаваць па</string>
     <string name="duration_span">Працягласць: %1$s</string>
     <string name="remove_watched_videos">Выдаліць прагледжаныя відэа</string>
+    <string name="tooltip_repeat">Паўтор</string>
+    <string name="tooltip_sort">Сартаванне</string>
+    <string name="tooltip_sponsorblock">Пераключыць SponsorBlock</string>
+    <string name="resolution_limited">абмежаваны</string>
+    <string name="player_channel_description">Паказвае апавяшчэнне падчас прайгравання</string>
+    <string name="tooltip_fullscreen">На ўвесь экран</string>
+    <string name="tooltip_close">Закрыць</string>
+    <string name="tooltip_play">Прайграць</string>
+    <string name="auto_generated">аўтаматычна згенераваны</string>
+    <string name="tooltip_reverse">Зваротны парадак</string>
+    <string name="tooltip_watch_position">Пазіцыя прагляду</string>
+    <string name="tooltip_clear_queue">Ачысціць чаргу</string>
+    <string name="tooltip_dismiss">Адхіліць</string>
+    <string name="tooltip_edit_groups">Рэдагаваць групы</string>
+    <string name="tooltip_create_playlist">Стварыць плэйліст</string>
+    <string name="tooltip_minimize">Згарнуць</string>
+    <string name="registration_disabled">Рэгістрацыя адключана</string>
+    <string name="player_channel_name">Служба плэера</string>
+    <string name="tooltip_locked">Заблакаваць плэер</string>
+    <string name="tooltip_unlocked">Разблакаваць плэер</string>
+    <string name="tooltip_options">Параметры</string>
+    <string name="tooltip_filter">Фільтр</string>
+    <string name="tooltip_scroll_to_top">Пракруціце ўверх</string>
 </resources>

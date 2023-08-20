@@ -511,4 +511,5 @@
     <string name="tooltip_watch_position">اماكن المراقبة</string>
     <string name="resolution_limited">محدود</string>
     <string name="auto_generated">الإنشاء-التلقائي</string>
+    <string name="registration_disabled">تم تعطيل التسجيل</string>
 </resources>

@@ -271,7 +271,7 @@
     <string name="most_views">ଅଧିକ ଥର ଦେଖାଯାଇଥିବା</string>
     <string name="network_metered">ମିଟର</string>
     <string name="network_wifi">କେବଳ ୱାଇଫାଇ ରେ</string>
-    <string name="export_subscriptions">ସଦସ୍ୟତା ରପ୍ତାନି କରନ୍ତୁ</string>
+    <string name="export_subscriptions">ସଦସ୍ୟତା ଗୁଡିକୁ ରପ୍ତାନି କରନ୍ତୁ</string>
     <string name="translate">ଅନୁବାଦ</string>
     <string name="error_occurred">ତ୍ରୁଟି</string>
     <string name="share_with_time">ସମୟ କୋଡ୍ ସହିତ ଅଂଶୀଦାର କରନ୍ତୁ</string>
@@ -476,4 +476,28 @@
     <string name="sort_by">ସଜାଡ଼ନ୍ତୁ</string>
     <string name="duration_span">ଅବଧି: %1$s</string>
     <string name="screen_orientation">ପରଦା ଆଭିମୁଖ୍ୟ</string>
+    <string name="player_channel_name">ପ୍ଲେୟାର ସର୍ଭିସ୍</string>
+    <string name="player_channel_description">ଚଲାଇବା ସମୟରେ ଗୋଟିଏ ବିଜ୍ଞପ୍ତିକୁ ଦର୍ଶାନ୍ତୁ</string>
+    <string name="tooltip_filter">ଛାଣନ୍ତୁ</string>
+    <string name="tooltip_fullscreen">ସମ୍ପୂର୍ଣ୍ଣ ପରଦା</string>
+    <string name="tooltip_close">ବନ୍ଦ କରନ୍ତୁ</string>
+    <string name="tooltip_play">ଚଲାନ୍ତୁ</string>
+    <string name="remove_watched_videos">ଦେଖାଯାଇଥିବା ଭିଡିଓଗୁଡ଼ିକୁ କାଢ଼ନ୍ତୁ</string>
+    <string name="auto_generated">ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଉତ୍ପନ୍ନ</string>
+    <string name="tooltip_create_playlist">ନାଟକ ତାଲିକା ନିର୍ମାଣ କରନ୍ତୁ</string>
+    <string name="tooltip_scroll_to_top">ଉପରକୁ ସ୍କ୍ରୋଲ କରନ୍ତୁ</string>
+    <string name="resolution_limited">ସୀମିତ</string>
+    <string name="tooltip_repeat">ପୁନରାବୃତ୍ତି କରନ୍ତୁ</string>
+    <string name="tooltip_reverse">ବିପରୀତ</string>
+    <string name="tooltip_sort">ସର୍ଟ କରନ୍ତୁ</string>
+    <string name="tooltip_watch_position">ଅବସ୍ଥାନ ଦେଖନ୍ତୁ</string>
+    <string name="tooltip_clear_queue">ଧାଡ଼ି ସଫା କରନ୍ତୁ</string>
+    <string name="tooltip_dismiss">ପ୍ରତ୍ୟାଖ୍ୟାନ କରନ୍ତୁ</string>
+    <string name="tooltip_options">ବିକଳ୍ପଗୁଡ଼ିକ</string>
+    <string name="tooltip_locked">ଚାଳକକୁ ଅପରିବର୍ତ୍ତନୀୟ କରନ୍ତୁ</string>
+    <string name="tooltip_minimize">ସର୍ବନିମ୍ନ କରନ୍ତୁ</string>
+    <string name="tooltip_unlocked">ଚାଳକକୁ ଖୋଲନ୍ତୁ</string>
+    <string name="registration_disabled">ପଞ୍ଜିକରଣ ନିଷ୍କ୍ରିୟ ହୋଇଛି</string>
+    <string name="tooltip_sponsorblock">SponsorBlock କୁ ଟୋଗଲ କରନ୍ତୁ</string>
+    <string name="tooltip_edit_groups">ସମୂହଗୁଡ଼ିକୁ ସମ୍ପାଦନ କରନ୍ତୁ</string>
 </resources>
