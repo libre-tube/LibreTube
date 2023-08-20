@@ -350,13 +350,13 @@ object PlayerHelper {
         }
     }
 
-    fun getIntentActon(context: Context): String {
+    fun getIntentAction(context: Context): String {
         return context.packageName + "." + ACTION_MEDIA_CONTROL
     }
 
-    private fun getPendingIntent(activity: Activity, code: Int): PendingIntent {
-        val intent = Intent(getIntentActon(activity)).putExtra(CONTROL_TYPE, code)
-        return PendingIntentCompat.getBroadcast(activity, code, intent, 0, false)
+    private fun getPendingIntent(activity: Activity, event: PlayerEvent): PendingIntent {
+        val intent = Intent(getIntentAction(activity)).putExtra(CONTROL_TYPE, event)
+        return PendingIntentCompat.getBroadcast(activity, event.ordinal, intent, 0, false)
     }
 
     private fun getRemoteAction(
@@ -370,7 +370,7 @@ object PlayerHelper {
             IconCompat.createWithResource(activity, id),
             text,
             text,
-            getPendingIntent(activity, event.value)
+            getPendingIntent(activity, event)
         )
     }
 
