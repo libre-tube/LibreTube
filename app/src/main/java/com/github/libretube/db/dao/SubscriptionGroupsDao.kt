@@ -11,6 +11,9 @@ interface SubscriptionGroupsDao {
     @Query("SELECT * FROM subscriptionGroups")
     suspend fun getAll(): List<SubscriptionGroup>
 
+    @Query("SELECT EXISTS(SELECT * FROM subscriptionGroups WHERE name = :name)")
+    suspend fun exists(name: String): Boolean
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun createGroup(subscriptionGroup: SubscriptionGroup)
 

@@ -9,14 +9,17 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.Subscription
 import com.github.libretube.databinding.DialogEditChannelGroupBinding
+import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.SubscriptionGroup
 import com.github.libretube.ui.adapters.SubscriptionGroupChannelsAdapter
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class EditChannelGroupSheet(
@@ -31,12 +34,16 @@ class EditChannelGroupSheet(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DialogEditChannelGroupBinding.inflate(layoutInflater)
         binding.groupName.setText(group.name)
 
         binding.channelsRV.layoutManager = LinearLayoutManager(context)
         fetchSubscriptions()
+
+        binding.groupName.addTextChangedListener {
+            updateConfirmStatus()
+        }
 
         binding.searchInput.addTextChangedListener {
             showChannels(channels, it?.toString())
@@ -46,6 +53,7 @@ class EditChannelGroupSheet(
             dismiss()
         }
 
+        updateConfirmStatus()
         binding.confirm.setOnClickListener {
             group.name = binding.groupName.text.toString()
             if (group.name.isBlank()) return@setOnClickListener
@@ -78,8 +86,33 @@ class EditChannelGroupSheet(
             group
         ) {
             group = it
+            updateConfirmStatus()
         }
         binding.subscriptionsContainer.isVisible = true
         binding.progress.isVisible = false
+    }
+
+    private fun updateConfirmStatus() {
+        with(binding) {
+            val name = groupName.text.toString()
+            groupName.error = getGroupNameError(name)
+
+            confirm.isEnabled = groupName.error == null && group.channels.isNotEmpty()
+        }
+    }
+
+    private fun getGroupNameError(name: String): String? {
+        if (name.isBlank()) {
+            return getString(R.string.group_name_error_empty)
+        }
+
+        val groupExists = runBlocking(Dispatchers.IO) {
+            DatabaseHolder.Database.subscriptionGroupsDao().exists(name)
+        }
+        if (groupExists) {
+            return getString(R.string.group_name_error_exists)
+        }
+
+        return null
     }
 }
