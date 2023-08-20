@@ -6,6 +6,13 @@
     android:paddingHorizontal="5dp"
     android:paddingVertical="10dp">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="10dp"
+        android:src="@drawable/ic_drag" />
+
     <TextView
         android:id="@+id/group_name"
         android:layout_width="0dp"
@@ -31,12 +38,5 @@
         android:layout_marginHorizontal="10dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_delete" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginHorizontal="10dp"
-        android:src="@drawable/ic_drag" />
 
 </LinearLayout>
