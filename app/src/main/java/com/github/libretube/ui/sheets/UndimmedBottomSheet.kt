@@ -4,12 +4,31 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
+import android.view.ViewTreeObserver
 import android.view.WindowManager
+import android.widget.FrameLayout
+import androidx.core.view.updateLayoutParams
 
 /**
  * A bottom sheet that allows touches on its top/background
  */
-open class UndimmedBottomSheet : ExpandedBottomSheet() {
+abstract class UndimmedBottomSheet : ExpandedBottomSheet() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        getDragHandle().viewTreeObserver.addOnGlobalLayoutListener(object :
+            ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                getDragHandle().viewTreeObserver.removeOnGlobalLayoutListener(this)
+
+                // limit the recyclerview height to not cover the video
+                getBottomSheet().updateLayoutParams {
+                    height = getSheetMaxHeightPx()
+                }
+            }
+        })
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
 
@@ -46,4 +65,8 @@ open class UndimmedBottomSheet : ExpandedBottomSheet() {
 
         return dialog
     }
+
+    abstract fun getSheetMaxHeightPx(): Int
+    abstract fun getDragHandle(): View
+    abstract fun getBottomSheet(): FrameLayout
 }

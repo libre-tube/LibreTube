@@ -403,7 +403,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         binding.commentsToggle.setOnClickListener {
             // set the max height to not cover the currently playing video
             commentsViewModel.handleLink = this::handleLink
-            commentsViewModel.maxHeight = binding.root.height - binding.player.height
+            updateMaxSheetHeight()
             commentsViewModel.videoId = videoId
             CommentsSheet().show(childFragmentManager)
         }
@@ -491,6 +491,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             LinearLayoutManager.HORIZONTAL,
             false
         )
+    }
+
+    private fun updateMaxSheetHeight() {
+        viewModel.maxSheetHeightPx = binding.root.height - binding.player.height
     }
 
     private fun playOnBackground() {
@@ -771,6 +775,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
                 // enable the chapters dialog in the player
                 playerBinding.chapterLL.setOnClickListener {
+                    updateMaxSheetHeight()
                     ChaptersBottomSheet(chapters, exoPlayer)
                         .show(childFragmentManager)
                 }

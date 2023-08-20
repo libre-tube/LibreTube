@@ -12,9 +12,11 @@ import com.github.libretube.R
 import com.github.libretube.databinding.CommentsSheetBinding
 import com.github.libretube.ui.fragments.CommentsMainFragment
 import com.github.libretube.ui.models.CommentsViewModel
+import com.github.libretube.ui.models.PlayerViewModel
 
 class CommentsSheet : UndimmedBottomSheet() {
     lateinit var binding: CommentsSheetBinding
+    private val playerViewModel: PlayerViewModel by activityViewModels()
     private val commentsViewModel: CommentsViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -40,7 +42,7 @@ class CommentsSheet : UndimmedBottomSheet() {
                     // limit the recyclerview height to not cover the video
                     binding.standardBottomSheet.layoutParams =
                         binding.commentFragContainer.layoutParams.apply {
-                            height = commentsViewModel.maxHeight
+                            height = playerViewModel.maxSheetHeightPx
                         }
                 }
             })
@@ -69,6 +71,12 @@ class CommentsSheet : UndimmedBottomSheet() {
             }
         }
     }
+
+    override fun getSheetMaxHeightPx() = playerViewModel.maxSheetHeightPx
+
+    override fun getDragHandle() = binding.dragHandle
+
+    override fun getBottomSheet() = binding.standardBottomSheet
 
     fun updateFragmentInfo(showBackButton: Boolean, title: String) {
         binding.btnBack.isVisible = showBackButton

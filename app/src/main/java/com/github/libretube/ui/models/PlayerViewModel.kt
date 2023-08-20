@@ -10,4 +10,6 @@ class PlayerViewModel : ViewModel() {
     val isFullscreen = MutableLiveData<Boolean>().apply {
         value = false
     }
+
+    var maxSheetHeightPx = 0
 }
