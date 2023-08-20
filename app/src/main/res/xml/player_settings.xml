@@ -54,7 +54,6 @@
 
         <SwitchPreferenceCompat
             android:defaultValue="false"
-            android:dependency="picture_in_picture"
             android:icon="@drawable/ic_pause_filled"
             app:key="pause_on_quit"
             app:title="@string/pause_on_quit" />

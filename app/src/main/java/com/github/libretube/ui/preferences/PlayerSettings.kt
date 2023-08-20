@@ -36,15 +36,19 @@ class PlayerSettings : BasePreferenceFragment() {
 
         val pictureInPicture =
             findPreference<SwitchPreferenceCompat>(PreferenceKeys.PICTURE_IN_PICTURE)!!
-        pictureInPicture.isVisible =
-            PictureInPictureCompat.isPictureInPictureAvailable(requireContext())
-
-        val pauseOnQuit = findPreference<SwitchPreferenceCompat>(PreferenceKeys.PAUSE_ON_QUIT)
         val alternativePipControls =
             findPreference<SwitchPreferenceCompat>(PreferenceKeys.ALTERNATIVE_PIP_CONTROLS)
-        val isPipEnabled = pictureInPicture.isVisible && pictureInPicture.isChecked
-        pauseOnQuit?.isVisible = !isPipEnabled
-        alternativePipControls?.isVisible = isPipEnabled
+        val pauseOnQuit = findPreference<SwitchPreferenceCompat>(PreferenceKeys.PAUSE_ON_QUIT)
+
+        val pipAvailable = PictureInPictureCompat.isPictureInPictureAvailable(requireContext())
+        pictureInPicture.isVisible = pipAvailable
+        alternativePipControls?.isVisible = pipAvailable
+
+        pauseOnQuit?.isEnabled = !pictureInPicture.isChecked
+        pictureInPicture.setOnPreferenceChangeListener { _, newValue ->
+            pauseOnQuit?.isEnabled = !(newValue as Boolean)
+            true
+        }
     }
 
     private fun setupSubtitlePref(preference: ListPreference) {
