@@ -18,7 +18,6 @@ class CommentsViewModel : ViewModel() {
     var videoId: String? = null
     private var nextPage: String? = null
     private var isLoading = false
-    var maxHeight = 0
     var currentCommentsPosition = 0
     var commentsSheetDismiss: (() -> Unit)? = null
     var handleLink: ((url: String) -> Unit)? = null
