@@ -39,7 +39,7 @@ class SubscriptionGroupChannelsAdapter(
             channelIncluded.setOnCheckedChangeListener(null)
             channelIncluded.isChecked = group.channels.contains(channelId)
             channelIncluded.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) group.channels.add(channelId) else group.channels.remove(channelId)
+                if (isChecked) group.channels += channelId else group.channels -= channelId
                 onGroupChanged(group)
             }
         }
