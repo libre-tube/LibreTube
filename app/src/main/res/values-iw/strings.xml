@@ -506,4 +506,7 @@
     <string name="tooltip_play">נגינה</string>
     <string name="tooltip_filter">מסנן</string>
     <string name="registration_disabled">ההרשמה מושבתת</string>
+    <string name="proxy">מתווך</string>
+    <string name="group_name_error_empty">נא למלא שם</string>
+    <string name="group_name_error_exists">נא לבחור שם ייחודי</string>
 </resources>
