@@ -13,11 +13,13 @@ import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.Subscription
 import com.github.libretube.databinding.DialogEditChannelGroupBinding
+import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.SubscriptionGroup
 import com.github.libretube.ui.adapters.SubscriptionGroupChannelsAdapter
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class EditChannelGroupSheet(
@@ -32,7 +34,7 @@ class EditChannelGroupSheet(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DialogEditChannelGroupBinding.inflate(layoutInflater)
         binding.groupName.setText(group.name)
 
@@ -92,15 +94,25 @@ class EditChannelGroupSheet(
 
     private fun updateConfirmStatus() {
         with(binding) {
-            val isGroupNameBlank = groupName.text?.isBlank() == true
+            val name = groupName.text.toString()
+            groupName.error = getGroupNameError(name)
 
-            groupName.error = if (isGroupNameBlank) {
-                requireContext().getString(R.string.group_name_error)
-            } else {
-                null
-            }
-
-            confirm.isEnabled = !isGroupNameBlank && group.channels.isNotEmpty()
+            confirm.isEnabled = groupName.error == null && group.channels.isNotEmpty()
         }
+    }
+
+    private fun getGroupNameError(name: String): String? {
+        if (name.isBlank()) {
+            return getString(R.string.group_name_error_empty)
+        }
+
+        val groupExists = runBlocking(Dispatchers.IO) {
+            DatabaseHolder.Database.subscriptionGroupsDao().exists(name)
+        }
+        if (groupExists) {
+            return getString(R.string.group_name_error_exists)
+        }
+
+        return null
     }
 }
