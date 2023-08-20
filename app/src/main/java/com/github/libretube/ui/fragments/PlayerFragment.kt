@@ -934,16 +934,16 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 }
 
                 // check if video has ended, next video is available and autoplay is enabled.
-                if (
-                    playbackState == Player.STATE_ENDED &&
-                    !isTransitioning &&
-                    PlayerHelper.autoPlayEnabled
-                ) {
-                    isTransitioning = true
-                    if (PlayerHelper.autoPlayCountdown) {
-                        showAutoPlayCountdown()
+                if (playbackState == Player.STATE_ENDED) {
+                    if (!isTransitioning && PlayerHelper.autoPlayEnabled) {
+                        isTransitioning = true
+                        if (PlayerHelper.autoPlayCountdown) {
+                            showAutoPlayCountdown()
+                        } else {
+                            playNextVideo()
+                        }
                     } else {
-                        playNextVideo()
+                        binding.player.showController()
                     }
                 }
 
