@@ -500,4 +500,7 @@
     <string name="registration_disabled">ପଞ୍ଜିକରଣ ନିଷ୍କ୍ରିୟ ହୋଇଛି</string>
     <string name="tooltip_sponsorblock">SponsorBlock କୁ ଟୋଗଲ କରନ୍ତୁ</string>
     <string name="tooltip_edit_groups">ସମୂହଗୁଡ଼ିକୁ ସମ୍ପାଦନ କରନ୍ତୁ</string>
+    <string name="proxy">ପ୍ରକ୍ସି</string>
+    <string name="group_name_error_empty">ଦୟାକରି ଗୋଟିଏ ନାମ ଭରଣ କରନ୍ତୁ</string>
+    <string name="group_name_error_exists">ଦୟାକରି ଗୋଟିଏ ନାମ ବାଛନ୍ତୁ ଯାହାକି ଅନନ୍ୟ ଅଟେ</string>
 </resources>
