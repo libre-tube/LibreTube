@@ -6,7 +6,7 @@
     <string name="library">Bibliotheek</string>
     <string name="yes">Ja</string>
     <string name="search_hint">Zoeken</string>
-    <string name="videos">Video's</string>
+    <string name="videos">Video\'s</string>
     <string name="subscribe">Abonneren</string>
     <string name="unsubscribe">Afmelden</string>
     <string name="share">Delen</string>
@@ -214,7 +214,7 @@
     <string name="data_saver_mode">Gegevensbesparingsmodus</string>
     <string name="data_saver_mode_summary">Sla miniaturen en andere afbeeldingen over.</string>
     <string name="search_history_summary">Zoekopdrachten onthouden</string>
-    <string name="watch_history_summary">Lokaal bijhouden welke video's je hebt bekeken</string>
+    <string name="watch_history_summary">Lokaal bijhouden welke video\'s je hebt bekeken</string>
     <string name="history_summary">Kijk- en zoekgeschiedenis</string>
     <string name="watch_positions_title">Onthouden afspeelposities</string>
     <string name="reset_watch_positions">Resetten</string>
@@ -325,7 +325,7 @@
     <string name="navbar_order">Volgorde</string>
     <string name="layout">Layout</string>
     <string name="alternative_player_layout">Alternatieve spelerindeling</string>
-    <string name="alternative_player_layout_summary">Toon de gerelateerde video's als een rij boven de opmerkingen in plaats van eronder.</string>
+    <string name="alternative_player_layout_summary">Toon de gerelateerde video\'s als een rij boven de opmerkingen in plaats van eronder.</string>
     <string name="audio_track">Audiotrack</string>
     <string name="unsupported_file_format">Niet-ondersteund bestandsformaat: %1$s</string>
     <string name="hls_instead_of_dash">Gebruik HLS</string>
@@ -338,7 +338,7 @@
     <string name="bookmarks">Bladwijzers</string>
     <string name="bookmark">Bladwijzer</string>
     <string name="clear_bookmarks">Bladwijzers wissen</string>
-    <string name="queue_insert_related_videos">Gerelateerde video's invoegen</string>
+    <string name="queue_insert_related_videos">Gerelateerde video\'s invoegen</string>
     <string name="local_playlists">Lokale afspeellijsten</string>
     <string name="brightness">Helderheid</string>
     <string name="volume">Volume</string>
@@ -356,7 +356,7 @@
     <string name="double_tap_seek">Dubbeltikken om te zoeken</string>
     <string name="double_tap_seek_summary">Tik twee keer links of rechts om de speler terug of vooruit te spoelen.</string>
     <string name="all_caught_up">Je bent helemaal bij</string>
-    <string name="all_caught_up_summary">Je hebt alle nieuwe video's gezien</string>
+    <string name="all_caught_up_summary">Je hebt alle nieuwe video\'s gezien</string>
     <string name="import_playlists">Afspeellijsten importeren</string>
     <string name="export_playlists">Afspeellijsten exporteren</string>
     <string name="app_backup">App Backup</string>
@@ -365,11 +365,11 @@
     <string name="privacy_alert">Privacywaarschuwing</string>
     <string name="username_email">Doorgaan met een e-mailadres dat niet wordt aanbevolen?</string>
     <string name="proceed">Doorgaan</string>
-    <string name="play_latest_videos">Nieuwste video's afspelen</string>
+    <string name="play_latest_videos">Nieuwste video\'s afspelen</string>
     <string name="nothing_selected">Niets geselecteerd!</string>
     <string name="color_violet">Veelzijdig Violet</string>
     <string name="failed_fetching_instances">Kan beschikbare instanties niet ophalen.</string>
-    <string name="hide_watched_from_feed">Verberg bekeken video's uit feed</string>
+    <string name="hide_watched_from_feed">Verberg bekeken video\'s uit feed</string>
     <string name="hide_watched_from_feed_summary">Laat video\'s die meer dan 90% worden bekeken niet zien in het tabblad abonnementen.</string>
     <string name="playlistUrl">Afspeellijst URL</string>
     <string name="pause_on_quit">Pauzeer bij sluiten</string>
@@ -400,7 +400,7 @@
     <string name="lbry_hls">LBRY HLS</string>
     <string name="lbry_hls_summary">Gebruik LBRY HLS voor streaming indien beschikbaar.</string>
     <string name="disable_proxy">Piped proxy uitschakelen</string>
-    <string name="disable_proxy_summary">Laad video's en afbeeldingen rechtstreeks van de servers van YouTube. Schakel de optie alleen in als je een VPN gebruikt!</string>
+    <string name="disable_proxy_summary">Laad video\'s en afbeeldingen rechtstreeks van de servers van YouTube. Schakel de optie alleen in als je een VPN gebruikt!</string>
     <string name="auto_fullscreen_shorts">Automatisch volledig scherm bij korte video\'s</string>
     <string name="channel_groups">Kanaalgroepen</string>
     <string name="new_group">Nieuw</string>
@@ -438,7 +438,7 @@
     <string name="sort_by">Sorteren op</string>
     <string name="uploader_name">Naam uploader</string>
     <string name="duration_span">Duur: %1$s</string>
-    <string name="remove_watched_videos">Bekeken video's verwijderen</string>
+    <string name="remove_watched_videos">Bekeken video\'s verwijderen</string>
     <!-- Backup & Restore Settings -->
     <string name="import_subscriptions_from">Abonnementen importeren vanuit</string>
     <string name="export_subscriptions_to">Abonnementen exporteren naar</string>
