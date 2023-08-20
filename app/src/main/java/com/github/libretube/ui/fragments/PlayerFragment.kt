@@ -75,6 +75,7 @@ import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.hideKeyboard
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.seekBy
+import com.github.libretube.extensions.serializableExtra
 import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
@@ -204,9 +205,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      * Receiver for all actions in the PiP mode
      */
     private val broadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            val action = intent?.getIntExtra(PlayerHelper.CONTROL_TYPE, 0) ?: return
-            when (PlayerEvent.fromInt(action)) {
+        override fun onReceive(context: Context, intent: Intent) {
+            when (intent.serializableExtra<PlayerEvent>(PlayerHelper.CONTROL_TYPE) ?: return) {
                 PlayerEvent.Play -> {
                     exoPlayer.play()
                 }
@@ -252,7 +252,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // broadcast receiver for PiP actions
         context?.registerReceiver(
             broadcastReceiver,
-            IntentFilter(PlayerHelper.getIntentActon(requireContext()))
+            IntentFilter(PlayerHelper.getIntentAction(requireContext()))
         )
 
         // schedule task to save the watch position each second
