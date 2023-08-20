@@ -711,21 +711,16 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 return@launch
             }
 
-            if (PlayingQueue.isEmpty()) {
-                lifecycleScope.launch(Dispatchers.IO) {
-                    if (playlistId != null) {
-                        PlayingQueue.insertPlaylist(playlistId!!, streams.toStreamItem(videoId))
-                    } else if (channelId != null) {
-                        PlayingQueue.insertChannel(channelId!!, streams.toStreamItem(videoId))
-                    } else {
-                        PlayingQueue.updateCurrent(streams.toStreamItem(videoId))
-                        if (PlayerHelper.autoInsertRelatedVideos) {
-                            PlayingQueue.add(*streams.relatedStreams.toTypedArray())
-                        }
-                    }
-                }
+            val isFirstVideo = PlayingQueue.isEmpty()
+            if (isFirstVideo) {
+                PlayingQueue.updateQueue(streams.toStreamItem(videoId), playlistId, channelId)
             } else {
                 PlayingQueue.updateCurrent(streams.toStreamItem(videoId))
+            }
+            val isLastVideo = !isFirstVideo && PlayingQueue.isLast()
+            val isAutoQueue = playlistId == null && channelId == null
+            if (PlayerHelper.autoInsertRelatedVideos && (isFirstVideo || isLastVideo) && isAutoQueue) {
+                PlayingQueue.add(*streams.relatedStreams.toTypedArray(), skipExisting = true)
             }
 
             if (PreferenceHelper.getBoolean(PreferenceKeys.AUTO_FULLSCREEN_SHORTS, false)) {

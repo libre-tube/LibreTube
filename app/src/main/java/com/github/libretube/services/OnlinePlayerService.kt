@@ -169,7 +169,13 @@ class OnlinePlayerService : LifecycleService() {
             // clear the queue if it shouldn't be kept explicitly
             if (!keepQueue) PlayingQueue.clear()
 
-            if (PlayingQueue.isEmpty()) updateQueue()
+            if (PlayingQueue.isEmpty()) {
+                PlayingQueue.updateQueue(streams!!.toStreamItem(videoId), playlistId, channelId)
+                insertRelatedStreamsToQueue()
+            }
+            else if (PlayingQueue.isLast() && playlistId == null && channelId == null) {
+                insertRelatedStreamsToQueue()
+            }
 
             // save the current stream to the queue
             streams?.toStreamItem(videoId)?.let {
@@ -347,19 +353,10 @@ class OnlinePlayerService : LifecycleService() {
         player?.checkForSegments(this, segments, sponsorBlockConfig)
     }
 
-    private fun updateQueue() {
-        if (playlistId != null) {
-            streams?.toStreamItem(videoId)?.let {
-                PlayingQueue.insertPlaylist(playlistId!!, it)
-            }
-        } else if (channelId != null) {
-            streams?.toStreamItem(videoId)?.let {
-                PlayingQueue.insertChannel(channelId!!, it)
-            }
-        } else {
-            streams?.relatedStreams?.toTypedArray()?.let {
-                if (PlayerHelper.autoInsertRelatedVideos) PlayingQueue.add(*it)
-            }
+    private fun insertRelatedStreamsToQueue() {
+        if (!PlayerHelper.autoInsertRelatedVideos) return
+        streams?.relatedStreams?.toTypedArray()?.let {
+            PlayingQueue.add(*it, skipExisting = true)
         }
     }
 
