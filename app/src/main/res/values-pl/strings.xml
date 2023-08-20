@@ -506,4 +506,7 @@
     <string name="tooltip_scroll_to_top">Przewiń na górę</string>
     <string name="tooltip_play">Odtwórz</string>
     <string name="tooltip_edit_groups">Edytuj grupy</string>
+    <string name="proxy">Proxy</string>
+    <string name="group_name_error_exists">Prosimy o wybranie unikalnej nazwy</string>
+    <string name="group_name_error_empty">Prosimy o wybranie nazwy</string>
 </resources>
