@@ -496,4 +496,8 @@
     <string name="tooltip_watch_position">觀看位置</string>
     <string name="tooltip_repeat">重複</string>
     <string name="tooltip_reverse">反向</string>
+    <string name="proxy">代理伺服器</string>
+    <string name="group_name_error_empty">請輸入名稱</string>
+    <string name="group_name_error_exists">請選擇獨一無二的名稱</string>
+    <string name="registration_disabled">已停用註冊</string>
 </resources>
