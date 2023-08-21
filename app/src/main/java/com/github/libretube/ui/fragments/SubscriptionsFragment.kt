@@ -25,6 +25,7 @@ import com.github.libretube.db.obj.SubscriptionGroup
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
+import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.LegacySubscriptionAdapter
 import com.github.libretube.ui.adapters.SubscriptionChannelAdapter
@@ -33,6 +34,7 @@ import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.ChannelGroupsSheet
+import com.github.libretube.util.PlayingQueue
 import com.google.android.material.chip.Chip
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -177,6 +179,17 @@ class SubscriptionsFragment : Fragment() {
         _binding = null
     }
 
+    private fun playByGroup(groupIndex: Int) {
+        val streams = viewModel.videoFeed.value.orEmpty().filterByGroup(groupIndex)
+        if (streams.isEmpty()) return
+
+        PlayingQueue.clear()
+        PlayingQueue.add(*streams.toTypedArray())
+
+        val videoId = streams.first().url.orEmpty().toID()
+        NavigationHelper.navigateVideo(requireContext(), videoId = videoId, keepQueue = true)
+    }
+
     @SuppressLint("InflateParams")
     private suspend fun initChannelGroups() {
         channelGroups = DatabaseHolder.Database.subscriptionGroupsDao().getAll()
@@ -184,16 +197,27 @@ class SubscriptionsFragment : Fragment() {
         val binding = _binding ?: return
 
         binding.chipAll.isChecked = true
-        binding.channelGroups.removeAllViews()
+        binding.chipAll.setOnLongClickListener {
+            playByGroup(0)
+            true
+        }
 
+        binding.channelGroups.removeAllViews()
         binding.channelGroups.addView(binding.chipAll)
+
         channelGroups = channelGroups.sortedBy { it.index }
-        channelGroups.forEach { group ->
+        channelGroups.forEachIndexed { index, group ->
             val chip = layoutInflater.inflate(R.layout.filter_chip, null) as Chip
             chip.apply {
                 id = View.generateViewId()
                 isCheckable = true
                 text = group.name
+                setOnLongClickListener {
+                    // the index must be increased by one to skip the "all channels" group button
+                    playByGroup(index + 1)
+
+                    true
+                }
             }
 
             binding.channelGroups.addView(chip)
@@ -211,21 +235,22 @@ class SubscriptionsFragment : Fragment() {
         }
     }
 
+    private fun List<StreamItem>.filterByGroup(groupIndex: Int): List<StreamItem> {
+        if (groupIndex == 0) return this
+
+        val group = channelGroups.getOrNull(selectedFilterGroup - 1)
+        return filter {
+            val channelId = it.uploaderUrl.orEmpty().toID()
+            group?.channels?.contains(channelId) != false
+        }
+    }
+
     private fun showFeed() {
         val videoFeed = viewModel.videoFeed.value ?: return
 
         binding.subRefresh.isRefreshing = false
         val feed = videoFeed
-            .filter { streamItem ->
-                // filter for selected channel groups
-                if (selectedFilterGroup == 0) {
-                    true
-                } else {
-                    val channelId = streamItem.uploaderUrl.orEmpty().toID()
-                    val group = channelGroups.getOrNull(selectedFilterGroup - 1)
-                    group?.channels?.contains(channelId) != false
-                }
-            }
+            .filterByGroup(selectedFilterGroup)
             .filter {
                 // apply the selected filter
                 val isLive = (it.duration ?: -1L) < 0L
