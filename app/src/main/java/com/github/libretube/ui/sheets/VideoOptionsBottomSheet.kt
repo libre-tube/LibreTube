@@ -31,7 +31,8 @@ import kotlinx.coroutines.withContext
  */
 class VideoOptionsBottomSheet(
     private val videoId: String,
-    videoName: String
+    videoName: String,
+    private val onVideoChanged: () -> Unit = {}
 ) : BaseBottomSheet() {
     private val shareData = ShareData(currentVideo = videoName)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -130,6 +131,7 @@ class VideoOptionsBottomSheet(
                             ?.firstOrNull() as? SubscriptionsFragment
                         fragment?.subscriptionsAdapter?.removeItemById(videoId)
                     }
+                    onVideoChanged()
                 }
 
                 getString(R.string.mark_as_unwatched) -> {
@@ -137,6 +139,7 @@ class VideoOptionsBottomSheet(
                         DatabaseHolder.Database.watchPositionDao().deleteByVideoId(videoId)
                         DatabaseHolder.Database.watchHistoryDao().deleteByVideoId(videoId)
                     }
+                    onVideoChanged()
                 }
             }
         }

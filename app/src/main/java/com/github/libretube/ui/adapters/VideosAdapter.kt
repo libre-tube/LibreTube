@@ -148,7 +148,9 @@ class VideosAdapter(
             root.setOnLongClickListener {
                 if (videoId == null || videoName == null) return@setOnLongClickListener true
 
-                VideoOptionsBottomSheet(videoId, videoName)
+                VideoOptionsBottomSheet(videoId, videoName) {
+                    notifyItemChanged(position)
+                }
                     .show(
                         (root.context as BaseActivity).supportFragmentManager,
                         VideoOptionsBottomSheet::class.java.name
@@ -187,7 +189,9 @@ class VideosAdapter(
 
             root.setOnLongClickListener {
                 if (videoId == null || videoName == null) return@setOnLongClickListener true
-                VideoOptionsBottomSheet(videoId, videoName)
+                VideoOptionsBottomSheet(videoId, videoName) {
+                    notifyItemChanged(position)
+                }
                     .show(
                         (root.context as BaseActivity).supportFragmentManager,
                         VideoOptionsBottomSheet::class.java.name
