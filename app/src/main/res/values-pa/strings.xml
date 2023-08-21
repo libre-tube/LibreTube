@@ -499,4 +499,8 @@
     <string name="tooltip_edit_groups">ਗਰੁੱਪਾਂ ਦਾ ਸੰਪਾਦਨ</string>
     <string name="tooltip_create_playlist">ਪਲੇਲਿਸਟ ਬਣਾਓ</string>
     <string name="tooltip_scroll_to_top">ਸਿਖਰ ਤੱਕ ਸਕ੍ਰੋਲ ਕਰੋ</string>
+    <string name="proxy">ਪ੍ਰੌਕਸੀ</string>
+    <string name="group_name_error_empty">ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਨਾਮ ਦਰਜ ਕਰੋ</string>
+    <string name="registration_disabled">ਰਜਿਸਟ੍ਰੇਸ਼ਨ ਅਸਮਰੱਥ ਕੀਤੀ ਗਈ</string>
+    <string name="group_name_error_exists">ਕਿਰਪਾ ਕਰਕੇ ਅਜਿਹਾ ਨਾਮ ਚੁਣੋ ਜੋ ਵਿਲੱਖਣ ਹੋਵੇ</string>
 </resources>
