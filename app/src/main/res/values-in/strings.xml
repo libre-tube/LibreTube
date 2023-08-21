@@ -494,4 +494,10 @@
     <string name="tooltip_minimize">Kecilkan</string>
     <string name="tooltip_filter">Saring</string>
     <string name="tooltip_edit_groups">Sunting kelompok</string>
+    <string name="resolution_limited">terbatas</string>
+    <string name="proxy">Proksi</string>
+    <string name="group_name_error_empty">Silakan masukkan nama</string>
+    <string name="group_name_error_exists">Silakan pilih nama yang berbeda</string>
+    <string name="auto_generated">dibuat secara otomatis</string>
+    <string name="registration_disabled">Pendaftaran dinonaktifkan</string>
 </resources>
