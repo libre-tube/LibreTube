@@ -82,7 +82,9 @@ class PlaylistAdapter(
             val videoId = streamItem.url!!.toID()
             val videoName = streamItem.title!!
             root.setOnLongClickListener {
-                VideoOptionsBottomSheet(videoId, videoName)
+                VideoOptionsBottomSheet(videoId, videoName) {
+                    notifyItemChanged(position)
+                }
                     .show(
                         (root.context as BaseActivity).supportFragmentManager,
                         VideoOptionsBottomSheet::class.java.name

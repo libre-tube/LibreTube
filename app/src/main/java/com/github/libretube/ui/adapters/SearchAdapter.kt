@@ -55,7 +55,7 @@ class SearchAdapter(
         val playlistRowBinding = holder.playlistRowBinding
 
         if (videoRowBinding != null) {
-            bindVideo(searchItem, videoRowBinding)
+            bindVideo(searchItem, videoRowBinding, position)
         } else if (channelRowBinding != null) {
             bindChannel(searchItem, channelRowBinding)
         } else if (playlistRowBinding != null) {
@@ -72,7 +72,7 @@ class SearchAdapter(
         }
     }
 
-    private fun bindVideo(item: ContentItem, binding: VideoRowBinding) {
+    private fun bindVideo(item: ContentItem, binding: VideoRowBinding, position: Int) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, thumbnail)
             thumbnailDuration.setFormattedDuration(item.duration, item.isShort)
@@ -97,7 +97,9 @@ class SearchAdapter(
             val videoId = item.url.toID()
             val videoName = item.title!!
             root.setOnLongClickListener {
-                VideoOptionsBottomSheet(videoId, videoName)
+                VideoOptionsBottomSheet(videoId, videoName) {
+                    notifyItemChanged(position)
+                }
                     .show(
                         (root.context as BaseActivity).supportFragmentManager,
                         VideoOptionsBottomSheet::class.java.name
