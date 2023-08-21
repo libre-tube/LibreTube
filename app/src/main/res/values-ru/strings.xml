@@ -27,7 +27,7 @@
     <string name="downloadfailed">Загрузка не удалась.</string>
     <string name="import_from_yt">Импорт подписок</string>
     <string name="app_theme">Тема</string>
-    <string name="server_error">Возникла проблема с выбранным сервером. Попробуйте другой инстанс.</string>
+    <string name="server_error">Возникла проблема с выбранным сервером. Попробуйте другой.</string>
     <string name="unknown_error">Сетевая ошибка.</string>
     <string name="error">Что-то пошло не так.</string>
     <string name="empty">Введите имя пользователя и пароль.</string>
@@ -62,7 +62,7 @@
     <string name="retry">Попробовать снова</string>
     <string name="settings">Настройки</string>
     <string name="location">Местоположение</string>
-    <string name="instance">Инстанс</string>
+    <string name="instance">Сервер</string>
     <string name="customization">Конфигурация</string>
     <string name="website">Веб-сайт</string>
     <string name="channels">Каналы</string>
@@ -124,13 +124,13 @@
     <string name="category_preview_description">Для сегментов с подробным описанием будущего контента без дополнительной информации. Если он включает в себя клипы, которые появляются только здесь, скорее всего, это неправильная категория.</string>
     <string name="appearance">Внешний вид</string>
     <string name="customInstance_summary">Добавить…</string>
-    <string name="addInstance">Добавить инстанс</string>
+    <string name="addInstance">Добавить сервер</string>
     <string name="empty_instance">Введите название и URL API.</string>
     <string name="related_streams">Связанный контент</string>
     <string name="category_music_offtopic_description">Только для использования в музыкальных клипах. Он должен охватывать части видео, не являющиеся частью официальных миксов. В конечном итоге, видео должно быть максимально похоже на версию Spotify или любую другую микс-версию, или должно быть меньше разговоров и других отвлекающих факторов.</string>
     <string name="category_filler_description">Для пустых сцен, которые были добавлены только для заполнения контентом или юмор, который не требуется для понимания основного контента видео.</string>
-    <string name="instance_name">Название инстанса</string>
-    <string name="instance_api_url">URL API инстанса</string>
+    <string name="instance_name">Название сервера</string>
+    <string name="instance_api_url">URL для API сервера</string>
     <string name="buffering_goal_summary">Макс. количество секунд видео для буферизации.</string>
     <string name="clear_customInstances">Очистить добавленные</string>
     <string name="related_streams_summary">Показывать связанные видео рядом с тем, что вы смотрите.</string>
@@ -154,7 +154,7 @@
     <string name="no_audio">Нет звука</string>
     <string name="reset">Восстановить настройки по умолчанию</string>
     <string name="reset_message">Сбросить все настройки и выйти из аккаунта\?</string>
-    <string name="instance_frontend_url">URL для фронтенда инстанса</string>
+    <string name="instance_frontend_url">URL для фронтенда сервера</string>
     <string name="quality">Качество изображения</string>
     <string name="behavior">Поведение</string>
     <string name="player_summary">Настройки и поведение плеера</string>
@@ -169,13 +169,13 @@
     <string name="restore">Восстановить</string>
     <string name="watch_history">История просмотра</string>
     <string name="watch_positions">Запоминать позицию</string>
-    <string name="auth_instance">Инстанс аутентификации</string>
-    <string name="auth_instance_summary">Использовать другой инстанс для аутентификации.</string>
+    <string name="auth_instance">Сервер аутентификации</string>
+    <string name="auth_instance_summary">Использовать другой сервер для аутентификации.</string>
     <string name="github">GitHub</string>
     <string name="audio_video">Аудио и видео</string>
     <string name="fullscreen_orientation">Положение в полном экране</string>
     <string name="aspect_ratio">Соотношение сторон</string>
-    <string name="auth_instances">Выбрать инстанс аутентификации</string>
+    <string name="auth_instances">Выбрать сервер аутентификации</string>
     <string name="auto_rotation">Автоповорот</string>
     <string name="landscape">Альбомная</string>
     <string name="portrait">Портретная</string>
@@ -274,7 +274,7 @@
     <string name="mobile_data">Мобильная сеть</string>
     <string name="preferences">Настройки</string>
     <string name="local_subscriptions">Локальные подписки</string>
-    <string name="backup_customInstances">Пользовательские инстансы</string>
+    <string name="backup_customInstances">Свои серверы</string>
     <string name="save_feed">Загружать подписки в фоне</string>
     <string name="save_feed_summary">Обновлять страницу \"Подписки\" в фоне вместо принудительного полного обновления.</string>
     <string name="play_next">Проиграть следующий</string>
@@ -346,7 +346,7 @@
     <string name="play_latest_videos">Воспроизвести последние видео</string>
     <string name="color_violet">Универсальный фиолетовый</string>
     <string name="nothing_selected">Ничего не выбрано!</string>
-    <string name="failed_fetching_instances">Не удалось получить доступные инстансы.</string>
+    <string name="failed_fetching_instances">Не удалось получить доступные серверы.</string>
     <string name="hide_watched_from_feed">Скрыть просмотренные видео из ленты</string>
     <string name="hide_watched_from_feed_summary">Не показывайте видео, которые просматривают более 90%, на вкладке подписки.</string>
     <string name="playlistUrl">URL плейлиста</string>
@@ -441,8 +441,8 @@
     <string name="home_tab_content">Содержимое главной вкладки</string>
     <string name="mark_as_unwatched">Пометить как непросмотренное</string>
     <string name="welcome">Добро пожаловать в LibreTube</string>
-    <string name="choose_instance">Пожалуйста, для начала выберите инстанс!</string>
-    <string name="choose_instance_long">Пожалуйста, выберите внизу инстанс Piped для использования. Инстанс Piped будет выступать в качестве посредника между вами и YouTube. Эти инстансы расположны в различных географических местах - обозначенных флагами их стран. Инстансы, физически находящиеся ближе к вам вероятнее всего будут быстрее инстансов, которые находятся дальше. Вы в любое время можете сменить используемый инстанс в настройках.</string>
+    <string name="choose_instance">Пожалуйста, сперва выберите сервер!</string>
+    <string name="choose_instance_long">Пожалуйста, выберите сервер Piped, который будет использован, снизу. Сервер Piped будет выступать в роли посредника между Вами и YouTube. Эти серверы расположены в разных частях мира, обозначенных флагами их стран. Серверы, физически находящиеся ближе к Вам, вероятно, будут быстрее серверов, расположенных дальше. Вы можете сменить сервер в настройках в любое время.</string>
     <string name="change_playlist_description">Изменить описание плейлиста</string>
     <string name="playlist_description">Описание плейлиста</string>
     <string name="emptyPlaylistDescription">Описание плейлиста не может быть пустым</string>
@@ -461,7 +461,7 @@
     <string name="category_highlight">Выделить основные моменты</string>
     <string name="category_highlight_description">Это может быть анонсированный заголовок, миниатюра или самая интересная часть видео. Вы можете перейти к нему, нажав на него в блоке разделов.</string>
     <string name="stop">Остановить</string>
-    <string name="fallback_piped_proxy">Запасной вариант для Piped прокси</string>
+    <string name="fallback_piped_proxy">Запасной вариант через прокси Piped</string>
     <string name="fallback_piped_proxy_desc">Загружать видео через прокси, если подключение к YouTube не работает напрямую для текущего видео (увеличивает время первичной загрузки). Если отключить эту функцию, музыкальный контент YouTube, скорее всего, не будет воспроизводиться из-за ограничений.</string>
     <string name="unknown_audio_language">Неизвестный язык аудиодорожки</string>
     <string name="audio_track_format">%1$s - %2$s</string>
@@ -503,7 +503,10 @@
     <string name="tooltip_edit_groups">Редактирование групп</string>
     <string name="tooltip_create_playlist">Создать плейлист</string>
     <string name="tooltip_scroll_to_top">Пролистать наверх</string>
-    <string name="auto_generated">авто-сгенерировано</string>
+    <string name="auto_generated">созданные автоматически</string>
     <string name="resolution_limited">ограничено</string>
     <string name="registration_disabled">Регистрация отключена</string>
+    <string name="proxy">Прокси</string>
+    <string name="group_name_error_empty">Пожалуйста, введите название</string>
+    <string name="group_name_error_exists">Пожалуйста, выберите уникальное имя</string>
 </resources>
