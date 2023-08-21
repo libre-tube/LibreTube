@@ -64,7 +64,8 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="14dp"
                     android:layout_marginBottom="12dp"
-                    app:cardCornerRadius="18dp">
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="10dp">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/toggle_subs_text"
