@@ -31,7 +31,10 @@ object PlayingQueue {
         for (stream in streamItem) {
             if (skipExisting && contains(stream)) continue
             if (currentStream?.url?.toID() == stream.url?.toID() ||
-                stream.title.isNullOrBlank()) continue
+                stream.title.isNullOrBlank()
+            ) {
+                continue
+            }
             // remove if already present
             queue.remove(stream)
             queue.add(stream)
@@ -187,9 +190,13 @@ object PlayingQueue {
     }
 
     fun updateQueue(streamItem: StreamItem, playlistId: String?, channelId: String?) {
-        if (playlistId != null) insertPlaylist(playlistId, streamItem)
-        else if (channelId != null) insertChannel(channelId, streamItem)
-        else updateCurrent(streamItem)
+        if (playlistId != null) {
+            insertPlaylist(playlistId, streamItem)
+        } else if (channelId != null) {
+            insertChannel(channelId, streamItem)
+        } else {
+            updateCurrent(streamItem)
+        }
     }
 
     fun onQueueItemSelected(index: Int) {
