@@ -30,9 +30,9 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/notification_bell"
-        android:tooltipText="@string/notifications"
         style="@style/ElevatedIconButton"
         android:layout_gravity="center"
+        android:tooltipText="@string/notifications"
         app:icon="@drawable/ic_notification"
         tools:targetApi="m" />
 
@@ -47,5 +47,6 @@
         android:text="@string/unsubscribe"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="12sp"
-        app:cornerRadius="20dp" />
+        app:cornerRadius="20dp"
+        app:elevation="10dp" />
 </LinearLayout>
