@@ -224,7 +224,7 @@
     <string name="notify_new_streams_summary">フォローしている配信者の新着動画の通知を表示します。</string>
     <string name="notifications">通知</string>
     <string name="add_to_queue">再生キューに追加</string>
-    <string name="irreversible">続けますか？この操作は取り消せません！</string>
+    <string name="irreversible">続けますか？この操作は元に戻せません！</string>
     <string name="export_subscriptions">登録チャンネルをエクスポート</string>
     <string name="unlimited">無制限</string>
     <string name="resize_mode_fit">フィット</string>
@@ -480,7 +480,7 @@
     <string name="tooltip_sort">並び替え</string>
     <string name="tooltip_repeat">リピート</string>
     <string name="tooltip_reverse">逆順</string>
-    <string name="tooltip_watch_position">視聴位置</string>
+    <string name="tooltip_watch_position">視聴済みの位置</string>
     <string name="resolution_limited">選択</string>
     <string name="tooltip_minimize">最小化</string>
     <string name="tooltip_fullscreen">全画面</string>
@@ -496,4 +496,8 @@
     <string name="tooltip_clear_queue">再生キューを初期化</string>
     <string name="tooltip_dismiss">非表示</string>
     <string name="auto_generated">自動生成</string>
+    <string name="proxy">プロキシ</string>
+    <string name="group_name_error_empty">名前を入力</string>
+    <string name="group_name_error_exists">重複しない名前を使用してください</string>
+    <string name="registration_disabled">登録機能なし</string>
 </resources>
