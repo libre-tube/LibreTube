@@ -512,4 +512,7 @@
     <string name="resolution_limited">محدود</string>
     <string name="auto_generated">الإنشاء-التلقائي</string>
     <string name="registration_disabled">تم تعطيل التسجيل</string>
+    <string name="proxy">بروكسي</string>
+    <string name="group_name_error_empty">رجاءً إدخلْ اسماً</string>
+    <string name="group_name_error_exists">الرجاء اختيار اسم فريد</string>
 </resources>

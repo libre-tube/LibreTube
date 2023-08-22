@@ -506,4 +506,7 @@
     <string name="auto_generated">автоматично згенеровано</string>
     <string name="resolution_limited">обмежено</string>
     <string name="registration_disabled">Реєстрація вимкнена</string>
+    <string name="proxy">Проксі</string>
+    <string name="group_name_error_empty">Введіть назву</string>
+    <string name="group_name_error_exists">Оберіть унікальну назву</string>
 </resources>
