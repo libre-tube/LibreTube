@@ -11,5 +11,6 @@ data class DownloadData(
     val videoQuality: String?,
     val audioFormat: String?,
     val audioQuality: String?,
+    val audioLanguage: String?,
     val subtitleCode: String?
 ) : Parcelable

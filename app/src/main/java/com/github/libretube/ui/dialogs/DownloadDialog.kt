@@ -120,7 +120,7 @@ class DownloadDialog(
             R.layout.dropdown_item,
             videoStreams.map {
                 val fileSize = Formatter.formatShortFileSize(context, it.contentLength)
-                "${it.quality} ${it.format} ($fileSize)"
+                "${it.quality} ${it.codec} ($fileSize)"
             }.toMutableList().also {
                 it.add(0, getString(R.string.no_video))
             }
@@ -130,8 +130,12 @@ class DownloadDialog(
             requireContext(),
             R.layout.dropdown_item,
             audioStreams.map {
-                val fileSize = Formatter.formatShortFileSize(context, it.contentLength)
-                "${it.quality} ${it.codec} ($fileSize)"
+                val fileSize = it.contentLength
+                    .takeIf { l -> l > 0 }
+                    ?.let { cl -> Formatter.formatShortFileSize(context, cl) }
+                val infoStr = listOfNotNull(it.audioTrackLocale, fileSize)
+                    .joinToString(", ")
+                "${it.quality} ${it.format} ($infoStr)"
             }.toMutableList().also {
                 it.add(0, getString(R.string.no_audio))
             }
@@ -179,6 +183,7 @@ class DownloadDialog(
                 videoQuality = videoStream?.quality,
                 audioFormat = audioStream?.format,
                 audioQuality = audioStream?.quality,
+                audioLanguage = audioStream?.audioTrackLocale,
                 subtitleCode = subtitle?.code
             )
             DownloadHelper.startDownloadService(requireContext(), downloadData)
