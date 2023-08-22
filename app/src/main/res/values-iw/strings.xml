@@ -224,7 +224,7 @@
     <string name="least_views">הכי פחות צפיות</string>
     <string name="required_network">חיבור נדרש</string>
     <string name="network_all">הכול</string>
-    <string name="network_metered">מוגבלת</string>
+    <string name="network_metered">מדודה</string>
     <string name="network_wifi">ברשת אלחוטית בלבד</string>
     <string name="translate">תרגום</string>
     <string name="no_search_result">אין תוצאות.</string>
@@ -509,4 +509,5 @@
     <string name="proxy">מתווך</string>
     <string name="group_name_error_empty">נא למלא שם</string>
     <string name="group_name_error_exists">נא לבחור שם ייחודי</string>
+    <string name="automatic_once">אוטומטית פעם אחת</string>
 </resources>
