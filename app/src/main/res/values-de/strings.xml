@@ -503,4 +503,5 @@
     <string name="proxy">Proxy</string>
     <string name="group_name_error_empty">Bitte gib einen Namen ein</string>
     <string name="group_name_error_exists">Bitte wähle einen Namen aus, der nicht bereits exisitiert</string>
+    <string name="automatic_once">Automatisch (einmalig)</string>
 </resources>
