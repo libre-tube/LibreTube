@@ -29,5 +29,6 @@ data class DownloadItem(
     var url: String? = null,
     var format: String? = null,
     var quality: String? = null,
+    var language: String? = null,
     var downloadSize: Long = -1L
 )

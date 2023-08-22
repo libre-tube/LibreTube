@@ -41,7 +41,7 @@ data class Streams(
     val previewFrames: List<PreviewFrames> = emptyList()
 ) {
     fun toDownloadItems(downloadData: DownloadData): List<DownloadItem> {
-        val (id, name, videoFormat, videoQuality, audioFormat, audioQuality, subCode) = downloadData
+        val (id, name, videoFormat, videoQuality, audioFormat, audioQuality, audioTrackLocale, subCode) = downloadData
         val items = mutableListOf<DownloadItem>()
 
         if (!videoQuality.isNullOrEmpty() && !videoFormat.isNullOrEmpty()) {
@@ -53,7 +53,7 @@ data class Streams(
 
         if (!audioQuality.isNullOrEmpty() && !audioFormat.isNullOrEmpty()) {
             val stream = audioStreams.find {
-                it.quality == audioQuality && it.format == audioFormat
+                it.quality == audioQuality && it.format == audioFormat && it.audioTrackLocale == audioTrackLocale
             }
             stream?.toDownloadItem(FileType.AUDIO, id, name)?.let { items.add(it) }
         }

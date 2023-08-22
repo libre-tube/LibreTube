@@ -41,6 +41,7 @@ data class PipedStream(
         url = url?.let { ProxyHelper.unwrapUrl(it) },
         format = format,
         quality = quality,
+        language = audioTrackLocale,
         downloadSize = contentLength
     )
 }
