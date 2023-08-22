@@ -24,6 +24,7 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.LoadControl
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.media3.ui.CaptionStyleCompat
+import com.github.libretube.LibreTubeApp
 import com.github.libretube.R
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.Segment
@@ -41,17 +42,6 @@ import kotlinx.coroutines.runBlocking
 object PlayerHelper {
     private const val ACTION_MEDIA_CONTROL = "media_control"
     const val CONTROL_TYPE = "control_type"
-    private val SPONSOR_CATEGORIES =
-        arrayOf(
-            "intro",
-            "selfpromo",
-            "interaction",
-            "sponsor",
-            "outro",
-            "filler",
-            "music_offtopic",
-            "preview"
-        )
     const val SPONSOR_HIGHLIGHT_CATEGORY = "poi_highlight"
     const val ROLE_FLAG_AUTO_GEN_SUBTITLE = C.ROLE_FLAG_SUPPLEMENTARY
 
@@ -463,7 +453,9 @@ object PlayerHelper {
     fun getSponsorBlockCategories(): MutableMap<String, SbSkipOptions> {
         val categories: MutableMap<String, SbSkipOptions> = mutableMapOf()
 
-        for (category in SPONSOR_CATEGORIES) {
+        for (category in LibreTubeApp.instance.resources.getStringArray(
+            R.array.sponsorBlockSegments
+        )) {
             val state = PreferenceHelper.getString(category + "_category", "off").uppercase()
             if (SbSkipOptions.valueOf(state) != SbSkipOptions.OFF) {
                 categories[category] = SbSkipOptions.valueOf(state)
@@ -496,7 +488,7 @@ object PlayerHelper {
                 if (sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC ||
                     (
                         sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE &&
-                            segment.skipped == false
+                            !segment.skipped
                         )
                 ) {
                     if (sponsorBlockNotifications) {
@@ -510,7 +502,7 @@ object PlayerHelper {
                 } else if (sponsorBlockConfig[segment.category] == SbSkipOptions.MANUAL ||
                     (
                         sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE &&
-                            segment.skipped == true
+                            segment.skipped
                         )
                 ) {
                     return segment

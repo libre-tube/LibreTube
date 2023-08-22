@@ -4,6 +4,7 @@ package com.github.libretube.constants
  * API link for the update checker
  */
 const val GITHUB_API_URL = "https://api.github.com/repos/libre-tube/LibreTube/releases/latest"
+const val SB_SUBMIT_API_URL = "https://sponsor.ajay.app/api/skipSegments"
 
 /**
  * Links for the about fragment

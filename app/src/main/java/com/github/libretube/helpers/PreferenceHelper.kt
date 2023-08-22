@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 import com.github.libretube.constants.PreferenceKeys
 import java.time.Instant
+import java.util.UUID
 
 object PreferenceHelper {
     /**
@@ -18,6 +19,11 @@ object PreferenceHelper {
      */
     private lateinit var authSettings: SharedPreferences
     private lateinit var authEditor: SharedPreferences.Editor
+
+    /**
+     * Possible chars to use for the SB User ID
+     */
+    private const val USER_ID_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 
     /**
      * set the context that is being used to access the shared preferences
@@ -141,6 +147,16 @@ object PreferenceHelper {
             PreferenceKeys.IGNORED_NOTIFICATION_CHANNELS,
             ignorableChannels.joinToString(",")
         ).apply()
+    }
+
+    fun getSponsorBlockUserID(): String {
+        var uuid = getString(PreferenceKeys.SB_USER_ID, "")
+        if (uuid.isEmpty()) {
+            // generate a new user id to use for submitting SponsorBlock segments
+            uuid = (0 until 30).map { USER_ID_CHARS.random() }.joinToString("")
+            putString(PreferenceKeys.SB_USER_ID, uuid)
+        }
+        return uuid
     }
 
     private fun getDefaultSharedPreferences(context: Context): SharedPreferences {

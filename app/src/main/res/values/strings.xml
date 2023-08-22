@@ -468,6 +468,10 @@
     <string name="auto_generated">auto-generated</string>
     <string name="resolution_limited">limited</string>
     <string name="registration_disabled">Registration disabled</string>
+    <string name="sb_create_segment">Create segment</string>
+    <string name="segment_type">Segment type</string>
+    <string name="sb_invalid_segment">Invalid segment start or end</string>
+
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
     <string name="download_channel_description">Shows a notification when downloading media.</string>

@@ -469,4 +469,25 @@
         <item>auto</item>
     </string-array>
 
+    <string-array name="sponsorBlockSegments">
+        <item>sponsor</item>
+        <item>intro</item>
+        <item>selfpromo</item>
+        <item>interaction</item>
+        <item>outro</item>
+        <item>filler</item>
+        <item>music_offtopic</item>
+        <item>preview</item>
+    </string-array>
+
+    <string-array name="sponsorBlockSegmentNames">
+        <item>@string/category_sponsor</item>
+        <item>@string/category_intro</item>
+        <item>@string/category_selfpromo</item>
+        <item>@string/category_interaction</item>
+        <item>@string/category_outro</item>
+        <item>@string/category_filler</item>
+        <item>@string/category_music_offtopic</item>
+        <item>@string/category_preview</item>
+    </string-array>
 </resources>
