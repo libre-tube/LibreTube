@@ -500,4 +500,5 @@
     <string name="proxy">代理</string>
     <string name="group_name_error_empty">请输入名称</string>
     <string name="group_name_error_exists">请选择唯一名称</string>
+    <string name="automatic_once">仅自动拦截一次</string>
 </resources>
