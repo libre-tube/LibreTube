@@ -509,4 +509,5 @@
     <string name="proxy">Proxy</string>
     <string name="group_name_error_exists">Prosimy o wybranie unikalnej nazwy</string>
     <string name="group_name_error_empty">Prosimy o wybranie nazwy</string>
+    <string name="automatic_once">Automatycznie jeden raz</string>
 </resources>
