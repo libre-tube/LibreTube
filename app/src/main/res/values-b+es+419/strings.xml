@@ -503,4 +503,8 @@
     <string name="resolution_limited">limitada</string>
     <string name="auto_generated">autogenerados</string>
     <string name="registration_disabled">Registro deshabilitado</string>
+    <string name="automatic_once">Automático una vez</string>
+    <string name="proxy">Proxy</string>
+    <string name="group_name_error_empty">Por favor, introduce un nombre</string>
+    <string name="group_name_error_exists">Por favor, introduce un nombre que sea único</string>
 </resources>
