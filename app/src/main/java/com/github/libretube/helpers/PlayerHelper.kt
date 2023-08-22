@@ -493,9 +493,12 @@ object PlayerHelper {
             if ((duration - currentPosition).absoluteValue < 500) continue
 
             if (currentPosition in segmentStart until segmentEnd) {
-                if (sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC
-                    || (sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE
-                            && segment.skipped == false)) {
+                if (sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC ||
+                    (
+                        sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE &&
+                            segment.skipped == false
+                        )
+                ) {
                     if (sponsorBlockNotifications) {
                         runCatching {
                             Toast.makeText(context, R.string.segment_skipped, Toast.LENGTH_SHORT)
