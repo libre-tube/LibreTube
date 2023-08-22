@@ -109,7 +109,7 @@ class EditChannelGroupSheet(
         val groupExists = runBlocking(Dispatchers.IO) {
             DatabaseHolder.Database.subscriptionGroupsDao().exists(name)
         }
-        if (groupExists) {
+        if (groupExists && group.name != name) {
             return getString(R.string.group_name_error_exists)
         }
 
