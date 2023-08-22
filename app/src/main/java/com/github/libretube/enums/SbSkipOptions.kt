@@ -4,5 +4,6 @@ enum class SbSkipOptions {
     OFF,
     VISIBLE,
     MANUAL,
-    AUTOMATIC
+    AUTOMATIC,
+    AUTOMATIC_ONCE
 }
