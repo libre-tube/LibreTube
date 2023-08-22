@@ -507,7 +507,12 @@ object PlayerHelper {
                     }
                     seekTo(segmentEnd)
                     segment.skipped = true
-                } else if (sponsorBlockConfig[segment.category] == SbSkipOptions.MANUAL) {
+                } else if (sponsorBlockConfig[segment.category] == SbSkipOptions.MANUAL ||
+                    (
+                        sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE &&
+                            segment.skipped == true
+                        )
+                ) {
                     return segment
                 }
             }
