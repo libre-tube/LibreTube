@@ -484,4 +484,23 @@
     </plurals>
     <string name="creation_date_reversed">Aanmaak­datum (omgekeerd)</string>
     <string name="remove_watched_videos">Bekeken video\'s verwijderen</string>
+    <string name="autoplay_countdown_summary">Een aftelling van 5 seconden tonen voordat de volgende video automatisch wordt afgespeeld.</string>
+    <string name="fallback_piped_proxy_desc">Laadt video\'s via de proxy als rechtstreeks verbinden met YouTube niet werkt voor de huidige video (verhoogt de initiële laadtijd). Als deze optie is uitgeschakeld, wordt YouTube-muziek waarschijnlijk niet afgespeeld vanwege YT-beperkingen.</string>
+    <string name="dearrow_summary">Meer accurate en minder sensationele titels en miniaturen weergeven. Verhoogt de laadtijden.</string>
+    <string name="notification_time_summary">Beperk de tijdspanne waarin streammeldingen worden weergegeven.</string>
+    <string name="alternative_pip_controls_summary">Toon alleen audio en overslaan in PiP in plaats van vooruit- en terugspoelen</string>
+    <string name="disable_proxy_summary">Laad video\'s en afbeeldingen rechtstreeks van de servers van YouTube. Schakel de optie alleen in als je toch al een VPN gebruikt!</string>
+    <string name="play_automatically_summary">Start het afspelen van video automatisch bij het selecteren van</string>
+    <string name="emptyPlaylistDescription">De afspeellijstbeschrijving kan niet leeg zijn</string>
+    <string name="swipe_controls_summary">Gebruik een veegbeweging om de helderheid en het volume aan te passen.</string>
+    <string name="alternative_player_layout_summary">Toon de gerelateerde video\'s als een rij boven de opmerkingen in plaats van eronder.</string>
+    <string name="hls_instead_of_dash_summary">Gebruik HLS in plaats van DASH (zal langzamer zijn, niet aanbevolen)</string>
+    <string name="double_tap_seek_summary">Tik twee keer links of rechts om de speler terug of vooruit te spoelen.</string>
+    <string name="username_email">Doorgaan met een e-mailadres dat niet wordt aanbevolen\?</string>
+    <string name="hide_watched_from_feed_summary">Laat video\'s die meer dan 90% worden bekeken niet zien op het tabblad Abonnementen.</string>
+    <string name="custom_playback_speed_summary">Gebruik een andere afspeelsnelheid dan voor de normale speler.</string>
+    <string name="lbry_hls_summary">Gebruik LBRY HLS voor streaming indien beschikbaar.</string>
+    <string name="choose_instance_long">Kies hieronder een Piped-instantie die je wilt gebruiken. De Piped-instantie fungeert als tussenpersoon tussen jou en YouTube. Deze instanties bevinden zich op verschillende fysieke locaties - aangegeven door hun vlag(gen). Instanties die fysiek dichter bij jou in de buurt zijn, zijn waarschijnlijk sneller dan instanties die dat niet zijn. Je kunt de instantie die je gebruikt op elk moment wijzigen in de instellingen.</string>
+    <string name="group_name_error_exists">Kies een naam die uniek is</string>
+    <string name="push_channel_description">Toont een melding wanneer er nieuwe streams beschikbaar zijn.</string>
 </resources>
