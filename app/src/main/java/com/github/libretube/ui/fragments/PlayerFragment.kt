@@ -676,11 +676,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         if (!sponsorBlockEnabled || segments.isEmpty()) return
 
         exoPlayer.checkForSegments(requireContext(), segments, sponsorBlockConfig)
-            ?.let { segmentEnd ->
+            ?.let { segment->
                 if (viewModel.isMiniPlayerVisible.value == true) return@let
                 binding.sbSkipBtn.isVisible = true
                 binding.sbSkipBtn.setOnClickListener {
-                    exoPlayer.seekTo(segmentEnd)
+                    exoPlayer.seekTo((segment.segmentStartAndEnd.second * 1000f).toLong())
+                    segment.skipped = true
                 }
                 return
             }

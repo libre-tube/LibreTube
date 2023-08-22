@@ -446,6 +446,7 @@
         <item>@string/visible</item>
         <item>@string/manual</item>
         <item>@string/automatic</item>
+        <item>@string/automatic_once</item>
     </string-array>
 
     <string-array name="sb_skip_options_values">
@@ -453,6 +454,7 @@
         <item>visible</item>
         <item>manual</item>
         <item>automatic</item>
+        <item>automatic_once</item>
     </string-array>
 
     <string-array name="orientation">

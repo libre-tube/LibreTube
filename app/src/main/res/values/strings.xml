@@ -430,6 +430,7 @@
     <string name="off">Off</string>
     <string name="manual">Manual</string>
     <string name="automatic">Automatic</string>
+    <string name="automatic_once">Automatic once</string>
     <string name="visible">Show in seek bar</string>
     <string name="fallback_piped_proxy">Fallback to Piped proxy</string>
     <string name="fallback_piped_proxy_desc">Load videos via the proxy if connecting to YouTube directly doesn\'t work for the current video (increases the initial loading times). If disabled, YouTube music content likely won\'t play due to YT restrictions.</string>

@@ -12,7 +12,8 @@ data class Segment(
     val segment: List<Double> = listOf(),
     val userID: String? = null,
     val videoDuration: Double? = null,
-    val votes: Int? = null
+    val votes: Int? = null,
+    var skipped: Boolean? = false
 ) {
     val segmentStartAndEnd = segment[0] to segment[1]
 }

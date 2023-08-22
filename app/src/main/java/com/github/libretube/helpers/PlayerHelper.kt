@@ -484,7 +484,7 @@ object PlayerHelper {
         context: Context,
         segments: List<Segment>,
         sponsorBlockConfig: MutableMap<String, SbSkipOptions>
-    ): Long? {
+    ): Segment? {
         for (segment in segments.filter { it.category != SPONSOR_HIGHLIGHT_CATEGORY }) {
             val (start, end) = segment.segmentStartAndEnd
             val (segmentStart, segmentEnd) = (start * 1000f).toLong() to (end * 1000f).toLong()
@@ -493,7 +493,9 @@ object PlayerHelper {
             if ((duration - currentPosition).absoluteValue < 500) continue
 
             if (currentPosition in segmentStart until segmentEnd) {
-                if (sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC) {
+                if (sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC
+                    || (sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE
+                            && segment.skipped == false)) {
                     if (sponsorBlockNotifications) {
                         runCatching {
                             Toast.makeText(context, R.string.segment_skipped, Toast.LENGTH_SHORT)
@@ -501,8 +503,9 @@ object PlayerHelper {
                         }
                     }
                     seekTo(segmentEnd)
+                    segment.skipped = true
                 } else if (sponsorBlockConfig[segment.category] == SbSkipOptions.MANUAL) {
-                    return segmentEnd
+                    return segment
                 }
             }
         }
