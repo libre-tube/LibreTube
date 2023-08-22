@@ -16,20 +16,22 @@ import com.github.libretube.ui.adapters.SliderLabelsAdapter
 class PlaybackOptionsSheet(
     private val player: ExoPlayer
 ) : ExpandedBottomSheet() {
-    private lateinit var binding: PlaybackBottomSheetBinding
+    private var _binding: PlaybackBottomSheetBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = PlaybackBottomSheetBinding.inflate(layoutInflater)
+        _binding = PlaybackBottomSheetBinding.inflate(layoutInflater)
         return binding.root
     }
 
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        val binding = binding
+
         binding.speedShortcuts.layoutManager = GridLayoutManager(context, SUGGESTED_SPEEDS.size)
         binding.pitchShortcuts.layoutManager = GridLayoutManager(context, SUGGESTED_PITCHES.size)
 
@@ -58,6 +60,11 @@ class PlaybackOptionsSheet(
             player.skipSilenceEnabled = isChecked
             PreferenceHelper.putBoolean(PreferenceKeys.SKIP_SILENCE, isChecked)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun onChange() {
