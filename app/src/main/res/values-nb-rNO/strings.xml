@@ -299,7 +299,7 @@
     <string name="time">Tid</string>
     <string name="end_time">Slutt-tid</string>
     <string name="start_time">Start-tid</string>
-    <string name="notification_time">Merknadstid</string>
+    <string name="notification_time">Begrens merknadstid</string>
     <string name="notification_time_summary">Tidsperiode merknadene kan vises.</string>
     <string name="navbar_order">Rekkefølge</string>
     <string name="alternative_player_layout_summary">Vis relaterte videoer som rad over kommentarene istedenfor under.</string>
@@ -499,4 +499,9 @@
     <string name="tooltip_watch_position">Husket framdrift</string>
     <string name="auto_generated">auto-generert</string>
     <string name="resolution_limited">begrenset</string>
+    <string name="automatic_once">Automatisk én gang</string>
+    <string name="registration_disabled">Registrering avskrudd</string>
+    <string name="proxy">Mellomtjener</string>
+    <string name="group_name_error_empty">Skriv inn et navn</string>
+    <string name="group_name_error_exists">Velg et unikt navn</string>
 </resources>
