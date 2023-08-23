@@ -138,6 +138,10 @@ class InstanceSettings : BasePreferenceFragment() {
             .plus(customInstances)
             .sortedBy { it.name }
 
+        // If any preference dialog is visible in this fragment, it's one of the instance selection
+        // dialogs. In order to prevent UX issues, we don't update the instances list then.
+        if (isDialogVisible) return@runCatching
+
         for (instancePref in instancePrefs) {
             // add custom instances to the list preference
             instancePref.entries = instances.map { it.name }.toTypedArray()
