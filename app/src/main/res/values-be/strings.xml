@@ -506,4 +506,8 @@
     <string name="tooltip_options">Параметры</string>
     <string name="tooltip_filter">Фільтр</string>
     <string name="tooltip_scroll_to_top">Пракруціце ўверх</string>
+    <string name="automatic_once">Адзін раз аўтаматычна</string>
+    <string name="proxy">Проксі</string>
+    <string name="group_name_error_empty">Увядзіце імя</string>
+    <string name="group_name_error_exists">Выберыце унікальнае імя</string>
 </resources>
