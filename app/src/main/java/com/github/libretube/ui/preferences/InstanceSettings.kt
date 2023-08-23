@@ -39,19 +39,19 @@ class InstanceSettings : BasePreferenceFragment() {
         val instancePrefs = listOf(instancePref, authInstance)
 
         val appContext = requireContext().applicationContext
-        lifecycleScope.launch(Dispatchers.IO) {
+
+        lifecycleScope.launch {
             // update the instances to also show custom ones
             initInstancesPref(instancePrefs, InstanceHelper.getInstancesFallback(appContext))
 
             // try to fetch the public list of instances async
-            val instances = try {
-                InstanceHelper.getInstances(appContext)
+            try {
+                val instances = withContext(Dispatchers.IO) {
+                    InstanceHelper.getInstances(appContext)
+                }
+                initInstancesPref(instancePrefs, instances)
             } catch (e: Exception) {
                 appContext.toastFromMainDispatcher(e.message.orEmpty())
-                InstanceHelper.getInstancesFallback(requireContext())
-            }
-            withContext(Dispatchers.Main) {
-                initInstancesPref(instancePrefs, instances)
             }
         }
 
@@ -126,19 +126,16 @@ class InstanceSettings : BasePreferenceFragment() {
     private suspend fun initInstancesPref(
         instancePrefs: List<ListPreference>,
         publicInstances: List<Instances>
-    ) {
-        val customInstances = withContext(Dispatchers.IO) {
+    ) = runCatching {
+        val customInstanceList = withContext(Dispatchers.IO) {
             Database.customInstanceDao().getAll()
         }
 
-        for (instancePref in instancePrefs) {
-            instancePref.summaryProvider =
-                Preference.SummaryProvider<ListPreference> { preference ->
-                    preference.entry
-                }
-        }
+        val customInstances = customInstanceList
+            .map { Instances(it.name, it.apiUrl) }
 
-        val instances = (publicInstances + customInstances.map { Instances(it.name, it.apiUrl) })
+        val instances = publicInstances
+            .plus(customInstances)
             .sortedBy { it.name }
 
         for (instancePref in instancePrefs) {
