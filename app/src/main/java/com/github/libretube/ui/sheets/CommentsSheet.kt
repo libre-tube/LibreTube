@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.github.libretube.R
 import com.github.libretube.databinding.CommentsSheetBinding
 import com.github.libretube.ui.fragments.CommentsMainFragment
@@ -56,10 +58,8 @@ class CommentsSheet : UndimmedBottomSheet() {
             btnClose.setOnClickListener { dismiss() }
         }
 
-        childFragmentManager.apply {
-            beginTransaction()
-                .replace(R.id.commentFragContainer, CommentsMainFragment())
-                .commit()
+        childFragmentManager.commit {
+            replace<CommentsMainFragment>(R.id.commentFragContainer)
         }
 
         commentsViewModel.setCommentSheetExpand(true)
