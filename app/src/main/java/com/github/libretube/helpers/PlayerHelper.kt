@@ -536,9 +536,9 @@ object PlayerHelper {
         return chapters
             .filter {
                 it.highlightDrawable == null ||
-                // remove the video highlight if it's already longer ago than [ChapterSegment.HIGHLIGHT_LENGTH],
-                // otherwise the SponsorBlock highlight would be shown from its starting point to the end
-                (currentPosition - it.start) < ChapterSegment.HIGHLIGHT_LENGTH
+                    // remove the video highlight if it's already longer ago than [ChapterSegment.HIGHLIGHT_LENGTH],
+                    // otherwise the SponsorBlock highlight would be shown from its starting point to the end
+                    (currentPosition - it.start) < ChapterSegment.HIGHLIGHT_LENGTH
             }
             .sortedBy { it.start }
             .indexOfLast { currentPosition >= it.start }

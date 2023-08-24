@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.res.Configuration
 import android.util.AttributeSet
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.media3.exoplayer.trackselection.TrackSelector
