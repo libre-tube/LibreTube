@@ -28,16 +28,21 @@ class ChaptersAdapter(
     override fun onBindViewHolder(holder: ChaptersViewHolder, position: Int) {
         val chapter = chapters[position]
         holder.binding.apply {
-            if (chapter.drawable != null) {
-                chapterImage.setImageDrawable(chapter.drawable)
+            if (chapter.highlightDrawable != null) {
+                chapterImage.setImageDrawable(chapter.highlightDrawable)
             } else {
                 ImageHelper.loadImage(chapter.image, chapterImage)
             }
             chapterTitle.text = chapter.title
             timeStamp.text = DateUtils.formatElapsedTime(chapter.start)
 
-            val chapterEnd = chapters.getOrNull(position + 1)?.start
-                ?: (exoPlayer.duration / 1000)
+            val playerDurationSeconds = exoPlayer.duration / 1000
+            val chapterEnd = if (chapter.highlightDrawable == null) {
+                chapters.getOrNull(position + 1)?.start ?: playerDurationSeconds
+            } else {
+                // the duration for chapters is hardcoded, since it's not provided by the SB API
+                minOf(chapter.start + ChapterSegment.HIGHLIGHT_LENGTH, playerDurationSeconds)
+            }
             val durationSpan = chapterEnd - chapter.start
             duration.text = root.context.getString(
                 R.string.duration_span,

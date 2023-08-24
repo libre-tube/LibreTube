@@ -10,5 +10,12 @@ data class ChapterSegment(
     val image: String = "",
     val start: Long,
     // Used only for video highlights
-    @Transient var drawable: Drawable? = null
-)
+    @Transient var highlightDrawable: Drawable? = null
+) {
+    companion object {
+        /**
+         * Length to show for a highlight in seconds
+         */
+        const val HIGHLIGHT_LENGTH = 10L
+    }
+}
