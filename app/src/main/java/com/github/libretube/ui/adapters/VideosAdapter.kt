@@ -45,7 +45,7 @@ class VideosAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (streamItems[position].type == "caught") CAUGHT_UP_TYPE else NORMAL_TYPE
+        return if (streamItems[position].type == CAUGHT_UP_STREAM_TYPE) CAUGHT_UP_TYPE else NORMAL_TYPE
     }
 
     fun updateItems() {
@@ -231,5 +231,7 @@ class VideosAdapter(
 
         private const val NORMAL_TYPE = 0
         private const val CAUGHT_UP_TYPE = 1
+
+        const val CAUGHT_UP_STREAM_TYPE = "caught"
     }
 }
