@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.R
 import com.github.libretube.api.obj.ContentItem
+import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.ChannelRowBinding
 import com.github.libretube.databinding.PlaylistsRowBinding
 import com.github.libretube.databinding.VideoRowBinding
@@ -65,9 +66,9 @@ class SearchAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return when (currentList[position].type) {
-            "stream" -> 0
-            "channel" -> 1
-            "playlist" -> 2
+            StreamItem.TYPE_STREAM -> 0
+            StreamItem.TYPE_CHANNEL -> 1
+            StreamItem.TYPE_PLAYLIST -> 2
             else -> 3
         }
     }

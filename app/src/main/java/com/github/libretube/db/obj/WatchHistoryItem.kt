@@ -22,7 +22,7 @@ data class WatchHistoryItem(
 ) {
     fun toStreamItem() = StreamItem(
         url = videoId,
-        type = "stream",
+        type = StreamItem.TYPE_STREAM,
         title = title,
         thumbnail = thumbnailUrl,
         uploaderName = uploader,

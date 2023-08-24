@@ -299,7 +299,7 @@ class SubscriptionsFragment : Fragment() {
                 (it.uploaded ?: 0L) / 1000 < lastCheckedFeedTime
             }
             if (caughtUpIndex > 0) {
-                sortedFeed.add(caughtUpIndex, StreamItem(type = "caught"))
+                sortedFeed.add(caughtUpIndex, StreamItem(type = VideosAdapter.CAUGHT_UP_STREAM_TYPE))
             }
         }
 
