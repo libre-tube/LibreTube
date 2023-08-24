@@ -1,78 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
-    android:backgroundTint="@android:color/transparent"
-    android:orientation="horizontal"
-    android:paddingHorizontal="10dp"
-    android:paddingVertical="5dp">
-
-    <FrameLayout
-        android:layout_width="100dp"
-        android:layout_height="55dp"
-        android:layout_gravity="center">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/chapter_image"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:shapeAppearanceOverlay="@style/RoundedImageView"
-            tools:src="@tools:sample/backgrounds/scenic" />
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            app:cardBackgroundColor="?colorPrimary"
-            app:cardCornerRadius="4dp"
-            app:cardElevation="0dp">
-
-            <TextView
-                android:id="@+id/timeStamp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="3dp"
-                android:paddingVertical="1dp"
-                android:textColor="?colorOnPrimary"
-                android:textSize="10sp"
-                tools:ignore="SmallSp"
-                tools:text="05:36" />
-
-        </androidx.cardview.widget.CardView>
-
-    </FrameLayout>
+    android:layout_marginHorizontal="5dp"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardCornerRadius="10dp">
 
     <LinearLayout
+        android:id="@+id/chaptersLL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="10dp"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp">
 
-        <TextView
-            android:id="@+id/chapter_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:ellipsize="end"
-            android:maxLines="3"
-            tools:text="Chapter title" />
+        <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center">
 
-        <TextView
-            android:id="@+id/duration"
-            android:layout_width="wrap_content"
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/chapter_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:shapeAppearanceOverlay="@style/RoundedImageView"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                app:cardBackgroundColor="?colorPrimary"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="0dp">
+
+                <TextView
+                    android:id="@+id/timeStamp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="3dp"
+                    android:paddingVertical="1dp"
+                    android:textColor="?colorOnPrimary"
+                    android:textSize="10sp"
+                    tools:ignore="SmallSp"
+                    tools:text="05:36" />
+
+            </androidx.cardview.widget.CardView>
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:ellipsize="end"
-            android:maxLines="3"
-            android:textSize="12sp"
-            tools:text="Duration: 5s" />
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/chapter_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:ellipsize="end"
+                android:maxLines="3"
+                tools:text="Chapter title" />
+
+            <TextView
+                android:id="@+id/duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:textSize="12sp"
+                tools:text="Duration: 5s" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>
