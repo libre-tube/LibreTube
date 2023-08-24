@@ -506,4 +506,5 @@
     <string name="group_name_error_empty">Zadejte nový název</string>
     <string name="group_name_error_exists">Zvolte prosím jméno, které je unikátní</string>
     <string name="registration_disabled">Registrace zakázány</string>
+    <string name="automatic_once">Automaticky jednou</string>
 </resources>
