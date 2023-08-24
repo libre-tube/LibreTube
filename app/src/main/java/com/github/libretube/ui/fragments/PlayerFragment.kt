@@ -359,7 +359,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
         }
 
-        binding.playerMotionLayout.progress = 1.toFloat()
+        binding.playerMotionLayout.progress = 1F
         binding.playerMotionLayout.transitionToStart()
 
         val activity = requireActivity()
