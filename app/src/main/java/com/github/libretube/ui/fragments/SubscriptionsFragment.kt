@@ -180,7 +180,11 @@ class SubscriptionsFragment : Fragment() {
     }
 
     private fun playByGroup(groupIndex: Int) {
-        val streams = viewModel.videoFeed.value.orEmpty().filterByGroup(groupIndex)
+        val streams = viewModel.videoFeed.value.orEmpty()
+            .filterByGroup(groupIndex)
+            .filterByStatusAndWatchPosition()
+            .sortedBySelectedOrder()
+
         if (streams.isEmpty()) return
 
         PlayingQueue.clear()
@@ -245,47 +249,48 @@ class SubscriptionsFragment : Fragment() {
         }
     }
 
+    private fun List<StreamItem>.filterByStatusAndWatchPosition(): List<StreamItem> {
+        val streamItems = this.filter {
+            val isLive = (it.duration ?: -1L) < 0L
+            when (selectedFilter) {
+                0 -> true
+                1 -> !it.isShort && !isLive
+                2 -> it.isShort
+                3 -> isLive
+                else -> throw IllegalArgumentException()
+            }
+        }
+
+        if (!PreferenceHelper.getBoolean(
+                PreferenceKeys.HIDE_WATCHED_FROM_FEED,
+                false
+            )
+        ) return streamItems
+
+        return runBlocking { DatabaseHelper.filterUnwatched(streamItems) }
+    }
+
+    private fun List<StreamItem>.sortedBySelectedOrder() = when (selectedSortOrder) {
+        0 -> this
+        1 -> this.reversed()
+        2 -> this.sortedBy { it.views }.reversed()
+        3 -> this.sortedBy { it.views }
+        4 -> this.sortedBy { it.uploaderName }
+        5 -> this.sortedBy { it.uploaderName }.reversed()
+        else -> this
+    }
+
     private fun showFeed() {
         val videoFeed = viewModel.videoFeed.value ?: return
 
         binding.subRefresh.isRefreshing = false
         val feed = videoFeed
             .filterByGroup(selectedFilterGroup)
-            .filter {
-                // apply the selected filter
-                val isLive = (it.duration ?: -1L) < 0L
-                when (selectedFilter) {
-                    0 -> true
-                    1 -> !it.isShort && !isLive
-                    2 -> it.isShort
-                    3 -> isLive
-                    else -> throw IllegalArgumentException()
-                }
-            }.let { streams ->
+            .filterByStatusAndWatchPosition()
 
-                if (!PreferenceHelper.getBoolean(
-                        PreferenceKeys.HIDE_WATCHED_FROM_FEED,
-                        false
-                    )
-                ) {
-                    streams
-                } else {
-                    runBlocking {
-                        DatabaseHelper.filterUnwatched(streams)
-                    }
-                }
-            }
-
-        // sort the feed
-        val sortedFeed = when (selectedSortOrder) {
-            0 -> feed
-            1 -> feed.reversed()
-            2 -> feed.sortedBy { it.views }.reversed()
-            3 -> feed.sortedBy { it.views }
-            4 -> feed.sortedBy { it.uploaderName }
-            5 -> feed.sortedBy { it.uploaderName }.reversed()
-            else -> feed
-        }.toMutableList()
+        val sortedFeed = feed
+            .sortedBySelectedOrder()
+            .toMutableList()
 
         // add an "all caught up item"
         if (selectedSortOrder == 0) {
