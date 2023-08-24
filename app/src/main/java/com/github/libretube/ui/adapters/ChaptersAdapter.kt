@@ -49,7 +49,7 @@ class ChaptersAdapter(
             } else {
                 Color.TRANSPARENT
             }
-            root.setBackgroundColor(color)
+            chaptersLL.setBackgroundColor(color)
 
             root.setOnClickListener {
                 updateSelectedPosition(position)
