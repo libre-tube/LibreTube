@@ -2,6 +2,7 @@ package com.github.libretube.ui.views
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsCompat
 import com.github.libretube.ui.extensions.toggleSystemBars
 
@@ -24,5 +25,9 @@ class OfflinePlayerView(
     override fun getTopBarMarginDp(): Int {
         // the offline player requires a bigger top bar margin
         return if (isFullscreen()) 18 else super.getTopBarMarginDp()
+    }
+
+    override fun minimizeOrExitPlayer() {
+        (context as AppCompatActivity).onBackPressedDispatcher.onBackPressed()
     }
 }

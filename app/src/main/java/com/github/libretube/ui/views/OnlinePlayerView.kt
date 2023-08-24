@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.Configuration
 import android.util.AttributeSet
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.media3.exoplayer.trackselection.TrackSelector
@@ -168,11 +169,6 @@ class OnlinePlayerView(
         updateTopBarMargin()
     }
 
-    override fun onSwipeCenterScreen(distanceY: Float) {
-        super.onSwipeCenterScreen(distanceY)
-        playerViewModel?.isFullscreen?.value = false
-    }
-
     override fun getTopBarMarginDp(): Int {
         return when {
             resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE -> 15
@@ -183,5 +179,10 @@ class OnlinePlayerView(
 
     override fun isFullscreen(): Boolean {
         return playerViewModel?.isFullscreen?.value ?: super.isFullscreen()
+    }
+
+    override fun minimizeOrExitPlayer() {
+        (context as? AppCompatActivity)?.onBackPressedDispatcher?.onBackPressed()
+        playerViewModel?.isFullscreen?.value = false
     }
 }

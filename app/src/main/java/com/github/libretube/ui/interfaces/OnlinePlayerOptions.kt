@@ -8,4 +8,6 @@ interface OnlinePlayerOptions {
     fun onAudioStreamClicked()
 
     fun onStatsClicked()
+
+    fun exitFullscreen()
 }
