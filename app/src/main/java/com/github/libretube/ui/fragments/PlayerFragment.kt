@@ -200,6 +200,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             .getInsetsController(mainActivity.window, mainActivity.window.decorView)
 
     private var scrubbingTimeBar = false
+    private var chaptersBottomSheet: ChaptersBottomSheet? = null
 
     /**
      * Receiver for all actions in the PiP mode
@@ -772,8 +773,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 // enable the chapters dialog in the player
                 playerBinding.chapterLL.setOnClickListener {
                     updateMaxSheetHeight()
-                    ChaptersBottomSheet(chapters, exoPlayer)
-                        .show(childFragmentManager)
+                    val sheet = chaptersBottomSheet ?: ChaptersBottomSheet(chapters, exoPlayer).also {
+                        chaptersBottomSheet = it
+                    }
+                    if (sheet.isVisible) {
+                        sheet.dismiss()
+                    } else {
+                        sheet.show(childFragmentManager)
+                    }
                 }
 
                 setCurrentChapterName()
