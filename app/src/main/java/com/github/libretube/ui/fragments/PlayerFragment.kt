@@ -829,6 +829,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playVideo()
         // close comment bottom sheet for next video
         commentsViewModel.commentsSheetDismiss?.invoke()
+        // kill the chapters bottom sheet
+        chaptersBottomSheet?.dismiss()
+        chaptersBottomSheet = null
     }
 
     private fun prepareExoPlayerView() {
