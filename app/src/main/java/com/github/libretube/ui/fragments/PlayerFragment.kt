@@ -1175,7 +1175,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         val highlightChapter = ChapterSegment(
             title = getString(R.string.chapters_videoHighlight),
             start = highlight.segmentStartAndEnd.first.toLong(),
-            drawable = frame?.toDrawable(requireContext().resources)
+            highlightDrawable = frame?.toDrawable(requireContext().resources)
         )
         chapters.add(highlightChapter)
         chapters.sortBy { it.start }
