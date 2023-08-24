@@ -182,7 +182,6 @@ class OnlinePlayerView(
     }
 
     override fun minimizeOrExitPlayer() {
-        (context as? AppCompatActivity)?.onBackPressedDispatcher?.onBackPressed()
-        playerViewModel?.isFullscreen?.value = false
+        playerOptions?.exitFullscreen()
     }
 }
