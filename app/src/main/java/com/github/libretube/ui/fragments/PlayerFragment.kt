@@ -1512,6 +1512,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         baseBottomSheet.show(childFragmentManager)
     }
 
+    override fun exitFullscreen() {
+        unsetFullscreen()
+    }
+
     override fun onStatsClicked() {
         if (!this::streams.isInitialized) return
         StatsSheet(exoPlayer, videoId)

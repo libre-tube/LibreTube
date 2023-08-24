@@ -14,7 +14,6 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.os.postDelayed
 import androidx.core.view.ViewCompat
@@ -686,7 +685,7 @@ open class CustomExoPlayerView(
         if (distanceY >= 0) return
 
         playerGestureController.isMoving = false
-        (context as? AppCompatActivity)?.onBackPressedDispatcher?.onBackPressed()
+        minimizeOrExitPlayer()
     }
 
     override fun onSwipeEnd() {
@@ -734,6 +733,8 @@ open class CustomExoPlayerView(
         }
         return super.onInterceptTouchEvent(ev)
     }
+
+    open fun minimizeOrExitPlayer() = Unit
 
     companion object {
         private const val HIDE_CONTROLLER_TOKEN = "hideController"
