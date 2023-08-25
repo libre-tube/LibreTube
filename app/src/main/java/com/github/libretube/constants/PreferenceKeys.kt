@@ -154,4 +154,9 @@ object PreferenceKeys {
      * Error logs
      */
     const val ERROR_LOG = "error_log"
+
+    /**
+     * SponsorBlock UUID
+     */
+    const val SB_USER_ID = "sb_user_id"
 }

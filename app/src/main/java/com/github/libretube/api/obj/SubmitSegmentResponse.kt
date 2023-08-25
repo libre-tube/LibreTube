@@ -4,10 +4,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class DeArrowTitle(
+data class SubmitSegmentResponse(
     @SerialName("UUID") val uuid: String,
-    val locked: Boolean,
-    val original: Boolean,
-    val title: String,
-    val votes: Int
+    val category: String,
+    val segment: List<Float>
 )

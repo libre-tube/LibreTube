@@ -82,6 +82,15 @@
                     app:trackTint="#88ffffff" />
 
                 <ImageButton
+                    android:id="@+id/sb_submit"
+                    android:tooltipText="@string/sb_create_segment"
+                    style="@style/PlayerControlTop"
+                    android:layout_marginEnd="2dp"
+                    android:src="@drawable/ic_upload_segment"
+                    android:visibility="gone"
+                    app:tint="@android:color/white" />
+
+                <ImageButton
                     android:id="@+id/sb_toggle"
                     android:tooltipText="@string/tooltip_sponsorblock"
                     style="@style/PlayerControlTop"
