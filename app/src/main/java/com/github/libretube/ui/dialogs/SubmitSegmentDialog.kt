@@ -25,11 +25,8 @@ class SubmitSegmentDialog(
     private val currentPosition: Long,
     private val duration: Long?
 ) : DialogFragment() {
-    private var _binding: DialogSubmitSegmentBinding? = null
-    private val binding = _binding!!
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        _binding = DialogSubmitSegmentBinding.inflate(layoutInflater)
+        val binding = DialogSubmitSegmentBinding.inflate(layoutInflater)
 
         binding.startTime.setText((currentPosition.toFloat() / 1000).toString())
 
@@ -51,14 +48,14 @@ class SubmitSegmentDialog(
                     requireDialog().hide()
 
                     lifecycleScope.launch {
-                        submitSegment()
+                        submitSegment(binding)
                         dismiss()
                     }
                 }
             }
     }
 
-    private suspend fun submitSegment() {
+    private suspend fun submitSegment(binding: DialogSubmitSegmentBinding) {
         val context = requireContext().applicationContext
 
         val startTime = binding.startTime.text.toString().toFloatOrNull()
@@ -88,10 +85,5 @@ class SubmitSegmentDialog(
             Log.e(TAG(), e.toString())
             context.toastFromMainDispatcher(e.localizedMessage.orEmpty())
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
