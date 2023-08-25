@@ -325,6 +325,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 binding.player.hideController()
                 binding.player.useController = false
                 commentsViewModel.setCommentSheetExpand(false)
+                chaptersBottomSheet?.dismiss()
                 transitionEndId = endId
                 transitionStartId = startId
             }
