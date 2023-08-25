@@ -5,6 +5,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.IBinder
@@ -33,6 +34,7 @@ import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.helpers.ThemeHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.services.OnlinePlayerService
 import com.github.libretube.ui.activities.MainActivity
@@ -281,11 +283,16 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     private fun updateThumbnailAsync(thumbnailUrl: String) {
         if (DataSaverMode.isEnabled(requireContext())) {
             binding.progress.isVisible = false
+            binding.thumbnail.setImageResource(R.drawable.ic_launcher_monochrome)
+            val primaryColor = ThemeHelper.getThemeColor(requireContext(), androidx.appcompat.R.attr.colorPrimary)
+            binding.thumbnail.setColorFilter(primaryColor)
             return
         }
 
         binding.progress.isVisible = true
         binding.thumbnail.isGone = true
+        // reset color filter if data saver mode got toggled or conditions for it changed
+        binding.thumbnail.setColorFilter(Color.TRANSPARENT)
 
         ImageHelper.getAsync(requireContext(), thumbnailUrl) {
             val binding = _binding ?: return@getAsync
