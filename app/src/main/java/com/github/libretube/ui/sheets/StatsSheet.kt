@@ -1,4 +1,4 @@
-package com.github.libretube.ui.dialogs
+package com.github.libretube.ui.sheets
 
 import android.annotation.SuppressLint
 import android.os.Bundle
