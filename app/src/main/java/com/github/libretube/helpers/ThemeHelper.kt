@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.Color
 import android.text.Spanned
-import android.util.TypedValue
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.text.HtmlCompat
@@ -118,7 +117,10 @@ object ThemeHelper {
     /**
      * Get a color by a color resource attr
      */
-    fun getThemeColor(context: Context, colorCode: Int) = MaterialColors.getColor(context, colorCode, Color.TRANSPARENT)
+    fun getThemeColor(
+        context: Context,
+        colorCode: Int
+    ) = MaterialColors.getColor(context, colorCode, Color.TRANSPARENT)
 
     /**
      * Get the styled app name

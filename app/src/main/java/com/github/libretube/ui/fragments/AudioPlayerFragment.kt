@@ -284,7 +284,10 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         if (DataSaverMode.isEnabled(requireContext())) {
             binding.progress.isVisible = false
             binding.thumbnail.setImageResource(R.drawable.ic_launcher_monochrome)
-            val primaryColor = ThemeHelper.getThemeColor(requireContext(), androidx.appcompat.R.attr.colorPrimary)
+            val primaryColor = ThemeHelper.getThemeColor(
+                requireContext(),
+                androidx.appcompat.R.attr.colorPrimary
+            )
             binding.thumbnail.setColorFilter(primaryColor)
             return
         }

@@ -265,7 +265,9 @@ class SubscriptionsFragment : Fragment() {
                 PreferenceKeys.HIDE_WATCHED_FROM_FEED,
                 false
             )
-        ) return streamItems
+        ) {
+            return streamItems
+        }
 
         return runBlocking { DatabaseHelper.filterUnwatched(streamItems) }
     }
@@ -299,7 +301,10 @@ class SubscriptionsFragment : Fragment() {
                 (it.uploaded ?: 0L) / 1000 < lastCheckedFeedTime
             }
             if (caughtUpIndex > 0) {
-                sortedFeed.add(caughtUpIndex, StreamItem(type = VideosAdapter.CAUGHT_UP_STREAM_TYPE))
+                sortedFeed.add(
+                    caughtUpIndex,
+                    StreamItem(type = VideosAdapter.CAUGHT_UP_STREAM_TYPE)
+                )
             }
         }
 
