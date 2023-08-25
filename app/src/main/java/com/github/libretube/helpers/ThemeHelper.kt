@@ -5,8 +5,8 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Configuration
+import android.graphics.Color
 import android.text.Spanned
-import android.util.TypedValue
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.text.HtmlCompat
@@ -15,6 +15,7 @@ import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.ui.adapters.IconsSheetAdapter
 import com.google.android.material.color.DynamicColors
+import com.google.android.material.color.MaterialColors
 
 object ThemeHelper {
 
@@ -114,13 +115,12 @@ object ThemeHelper {
     }
 
     /**
-     * Get a color by a resource code
+     * Get a color by a color resource attr
      */
-    fun getThemeColor(context: Context, colorCode: Int): Int {
-        val value = TypedValue()
-        context.theme.resolveAttribute(colorCode, value, true)
-        return value.data
-    }
+    fun getThemeColor(
+        context: Context,
+        colorCode: Int
+    ) = MaterialColors.getColor(context, colorCode, Color.TRANSPARENT)
 
     /**
      * Get the styled app name

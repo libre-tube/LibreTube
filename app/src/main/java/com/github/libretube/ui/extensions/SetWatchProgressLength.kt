@@ -9,7 +9,6 @@ import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.helpers.ThemeHelper
-import com.google.android.material.color.MaterialColors
 import kotlinx.coroutines.runBlocking
 
 /**
@@ -21,15 +20,12 @@ fun View.setWatchProgressLength(videoId: String, duration: Long) {
     updateLayoutParams<ConstraintLayout.LayoutParams> {
         matchConstraintPercentWidth = 0f
     }
-    var backgroundColor = MaterialColors.getColor(
-        this,
+    var backgroundColor = ThemeHelper.getThemeColor(
+        context,
         com.google.android.material.R.attr.colorPrimaryDark
     )
     // increase the brightness for better contrast in light mode
-    if (!ThemeHelper.isDarkMode(
-            context
-        )
-    ) {
+    if (!ThemeHelper.isDarkMode(context)) {
         backgroundColor = ColorUtils.blendARGB(backgroundColor, Color.WHITE, 0.4f)
     }
     setBackgroundColor(backgroundColor)
