@@ -26,8 +26,10 @@ class EditChannelGroupSheet(
     private var group: SubscriptionGroup,
     private val onGroupChanged: (SubscriptionGroup) -> Unit
 ) : ExpandedBottomSheet() {
+    private var _binding: DialogEditChannelGroupBinding? = null
+    private val binding get() = _binding!!
+
     private val subscriptionsModel: SubscriptionsViewModel by activityViewModels()
-    private lateinit var binding: DialogEditChannelGroupBinding
     private var channels = listOf<Subscription>()
 
     override fun onCreateView(
@@ -35,7 +37,13 @@ class EditChannelGroupSheet(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DialogEditChannelGroupBinding.inflate(layoutInflater)
+        _binding = DialogEditChannelGroupBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val binding = binding
+
         binding.groupName.setText(group.name)
 
         binding.channelsRV.layoutManager = LinearLayoutManager(context)
@@ -60,8 +68,11 @@ class EditChannelGroupSheet(
             onGroupChanged(group)
             dismiss()
         }
+    }
 
-        return binding.root
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun fetchSubscriptions() {
@@ -81,6 +92,7 @@ class EditChannelGroupSheet(
     }
 
     private fun showChannels(channels: List<Subscription>, query: String?) {
+        val binding = binding
         binding.channelsRV.adapter = SubscriptionGroupChannelsAdapter(
             channels.filter { query == null || it.name.lowercase().contains(query.lowercase()) },
             group

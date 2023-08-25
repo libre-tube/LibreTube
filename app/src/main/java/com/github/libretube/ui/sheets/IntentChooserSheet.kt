@@ -26,6 +26,7 @@ class IntentChooserSheet(
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val binding = binding
         binding.optionsRecycler.layoutManager = GridLayoutManager(context, 3)
         binding.optionsRecycler.adapter = IntentChooserAdapter(packages, url)
     }
