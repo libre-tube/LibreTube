@@ -500,4 +500,5 @@
     <string name="group_name_error_empty">請輸入名稱</string>
     <string name="group_name_error_exists">請選擇獨一無二的名稱</string>
     <string name="registration_disabled">已停用註冊</string>
+    <string name="automatic_once">自動一次</string>
 </resources>

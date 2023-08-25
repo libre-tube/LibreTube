@@ -503,4 +503,5 @@
     <string name="choose_instance_long">Kies hieronder een Piped-instantie die je wilt gebruiken. De Piped-instantie fungeert als tussenpersoon tussen jou en YouTube. Deze instanties bevinden zich op verschillende fysieke locaties - aangegeven door hun vlag(gen). Instanties die fysiek dichter bij jou in de buurt zijn, zijn waarschijnlijk sneller dan instanties die dat niet zijn. Je kunt de instantie die je gebruikt op elk moment wijzigen in de instellingen.</string>
     <string name="group_name_error_exists">Kies een naam die uniek is</string>
     <string name="push_channel_description">Toont een melding wanneer er nieuwe streams beschikbaar zijn.</string>
+    <string name="automatic_once">Eén keer automatisch</string>
 </resources>

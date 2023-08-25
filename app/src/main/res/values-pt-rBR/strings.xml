@@ -503,4 +503,7 @@
     <string name="tooltip_reverse">Reveso</string>
     <string name="resolution_limited">Resolução limitada</string>
     <string name="registration_disabled">Registro desabilitado</string>
+    <string name="automatic_once">Automático uma vez</string>
+    <string name="group_name_error_empty">Por favor insira um nome</string>
+    <string name="group_name_error_exists">Escolha um nome que seja único</string>
 </resources>

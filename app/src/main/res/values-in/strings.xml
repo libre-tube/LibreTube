@@ -500,4 +500,5 @@
     <string name="group_name_error_exists">Silakan pilih nama yang berbeda</string>
     <string name="auto_generated">dibuat secara otomatis</string>
     <string name="registration_disabled">Pendaftaran dinonaktifkan</string>
+    <string name="automatic_once">Otomatis sekali</string>
 </resources>

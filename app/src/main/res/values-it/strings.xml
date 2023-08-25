@@ -506,4 +506,5 @@
     <string name="tooltip_edit_groups">Modifica gruppi</string>
     <string name="tooltip_create_playlist">Crea playlist</string>
     <string name="tooltip_scroll_to_top">Scorri in cima</string>
+    <string name="automatic_once">Automatico una volta</string>
 </resources>

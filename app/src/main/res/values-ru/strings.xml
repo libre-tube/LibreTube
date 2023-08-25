@@ -509,4 +509,5 @@
     <string name="proxy">Прокси</string>
     <string name="group_name_error_empty">Пожалуйста, введите название</string>
     <string name="group_name_error_exists">Пожалуйста, выберите уникальное имя</string>
+    <string name="automatic_once">Автоматически один раз</string>
 </resources>
