@@ -3,7 +3,7 @@ package com.github.libretube.api.obj
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
 import com.github.libretube.helpers.ProxyHelper
-import java.nio.file.Paths
+import kotlin.io.path.Path
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -37,7 +37,7 @@ data class PipedStream(
         type = fileType,
         videoId = videoId,
         fileName = getQualityString(fileName),
-        path = Paths.get(""),
+        path = Path(""),
         url = url?.let { ProxyHelper.unwrapUrl(it) },
         format = format,
         quality = quality,
