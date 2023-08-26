@@ -516,4 +516,7 @@
     <string name="group_name_error_empty">رجاءً إدخلْ اسماً</string>
     <string name="group_name_error_exists">الرجاء اختيار اسم فريد</string>
     <string name="automatic_once">تلقائي مرة واحدة</string>
+    <string name="sb_create_segment">إنشاء مقطع</string>
+    <string name="segment_type">نوع المقطع</string>
+    <string name="sb_invalid_segment">بداية المقطع أو نهايته غير صالحة</string>
 </resources>
