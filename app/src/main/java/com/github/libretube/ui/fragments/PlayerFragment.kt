@@ -938,6 +938,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             override fun onPlaybackStateChanged(playbackState: Int) {
                 saveWatchPosition()
 
+                if (playbackState == Player.STATE_READY) {
+                    if (streams.category == "Music")
+                        exoPlayer.setPlaybackSpeed(1f)
+                }
+
                 // set the playback speed to one if having reached the end of a livestream
                 if (playbackState == Player.STATE_BUFFERING && binding.player.isLive &&
                     exoPlayer.duration - exoPlayer.currentPosition < 700
