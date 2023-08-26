@@ -939,7 +939,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 saveWatchPosition()
 
                 if (playbackState == Player.STATE_READY) {
-                    if (streams.category == "Music") {
+                    if (streams.category == Streams.categoryMusic) {
                         exoPlayer.setPlaybackSpeed(1f)
                     }
                 }
