@@ -93,6 +93,6 @@ data class Streams(
     }
 
     companion object {
-        var categoryMusic = "Music"
+        const val categoryMusic = "Music"
     }
 }
