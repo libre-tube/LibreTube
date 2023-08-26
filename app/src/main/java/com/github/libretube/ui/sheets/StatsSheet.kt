@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.media3.exoplayer.ExoPlayer
 import com.github.libretube.databinding.DialogStatsBinding
-import com.github.libretube.ui.sheets.ExpandedBottomSheet
 import com.github.libretube.util.TextUtils
 
 class StatsSheet(

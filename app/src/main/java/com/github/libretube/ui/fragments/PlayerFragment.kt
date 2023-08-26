@@ -101,7 +101,6 @@ import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
-import com.github.libretube.ui.sheets.StatsSheet
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.listeners.SeekbarPreviewListener
@@ -111,6 +110,7 @@ import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.ChaptersBottomSheet
 import com.github.libretube.ui.sheets.CommentsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
+import com.github.libretube.ui.sheets.StatsSheet
 import com.github.libretube.util.HtmlParser
 import com.github.libretube.util.LinkHandler
 import com.github.libretube.util.NowPlayingNotification
@@ -939,8 +939,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 saveWatchPosition()
 
                 if (playbackState == Player.STATE_READY) {
-                    if (streams.category == "Music")
+                    if (streams.category == "Music") {
                         exoPlayer.setPlaybackSpeed(1f)
+                    }
                 }
 
                 // set the playback speed to one if having reached the end of a livestream
