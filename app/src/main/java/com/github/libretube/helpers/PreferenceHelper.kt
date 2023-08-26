@@ -6,7 +6,6 @@ import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.github.libretube.constants.PreferenceKeys
 import java.time.Instant
-import java.util.UUID
 
 object PreferenceHelper {
     /**

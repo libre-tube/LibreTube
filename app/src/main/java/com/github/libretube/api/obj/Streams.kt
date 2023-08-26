@@ -91,4 +91,8 @@ data class Streams(
             shortDescription = description
         )
     }
+
+    companion object {
+        const val categoryMusic = "Music"
+    }
 }
