@@ -507,4 +507,7 @@
     <string name="group_name_error_exists">Zvolte prosím jméno, které je unikátní</string>
     <string name="registration_disabled">Registrace zakázány</string>
     <string name="automatic_once">Automaticky jednou</string>
+    <string name="sb_create_segment">Vytvořit segment</string>
+    <string name="segment_type">Typ segmentu</string>
+    <string name="sb_invalid_segment">Neplatný začátek nebo konec segmentu</string>
 </resources>
