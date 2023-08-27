@@ -510,4 +510,7 @@
     <string name="group_name_error_empty">Пожалуйста, введите название</string>
     <string name="group_name_error_exists">Пожалуйста, выберите уникальное имя</string>
     <string name="automatic_once">Автоматически один раз</string>
+    <string name="sb_create_segment">Создать сегмент</string>
+    <string name="segment_type">Тип сегмента</string>
+    <string name="sb_invalid_segment">Некорректные начало или конец сегмента</string>
 </resources>
