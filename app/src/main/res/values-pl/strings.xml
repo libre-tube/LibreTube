@@ -510,4 +510,7 @@
     <string name="group_name_error_exists">Prosimy o wybranie unikalnej nazwy</string>
     <string name="group_name_error_empty">Prosimy o wybranie nazwy</string>
     <string name="automatic_once">Automatycznie jeden raz</string>
+    <string name="sb_invalid_segment">Nieprawidłowy początek lub koniec segmentu</string>
+    <string name="segment_type">Rodzaj segmentu</string>
+    <string name="sb_create_segment">Stwórz segment</string>
 </resources>
