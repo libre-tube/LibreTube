@@ -114,6 +114,16 @@ The most common commit types are "feat", "fix", "refactor", "ci" and "chore".
 > Any issue avoiding the issue template will be ignored and forced to be closed.
 
 <h2 align="left">
+Donations
+</h2>
+
+Donations can be made at:
+* <https://github.com/sponsors/Bnyro>
+* <https://liberapay.com/Bnyro>
+
+Contributions in any form are welcome!
+
+<h2 align="left">
 📝 Translations
 </h2>
 
