@@ -98,7 +98,7 @@ class SearchAdapter(
             val videoId = item.url.toID()
             val videoName = item.title!!
             root.setOnLongClickListener {
-                VideoOptionsBottomSheet(videoId, videoName) {
+                VideoOptionsBottomSheet(videoId, videoName, item.duration) {
                     notifyItemChanged(position)
                 }
                     .show(

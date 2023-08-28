@@ -82,7 +82,7 @@ class PlaylistAdapter(
             val videoId = streamItem.url!!.toID()
             val videoName = streamItem.title!!
             root.setOnLongClickListener {
-                VideoOptionsBottomSheet(videoId, videoName) {
+                VideoOptionsBottomSheet(videoId, videoName, streamItem.duration) {
                     notifyItemChanged(position)
                 }
                     .show(

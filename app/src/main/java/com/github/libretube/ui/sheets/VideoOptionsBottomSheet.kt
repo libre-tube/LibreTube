@@ -32,6 +32,7 @@ import kotlinx.coroutines.withContext
 class VideoOptionsBottomSheet(
     private val videoId: String,
     videoName: String,
+    val duration: Long?,
     private val onVideoChanged: () -> Unit = {}
 ) : BaseBottomSheet() {
     private val shareData = ShareData(currentVideo = videoName)
@@ -52,13 +53,20 @@ class VideoOptionsBottomSheet(
 
         // show the mark as watched or unwatched option if watch positions are enabled
         if (PlayerHelper.watchPositionsVideo || PlayerHelper.watchHistoryEnabled) {
-            optionsList += getString(R.string.mark_as_watched)
             val watchPositionEntry = runBlocking(Dispatchers.IO) {
                 DatabaseHolder.Database.watchPositionDao().findById(videoId)
             }
             val watchHistoryEntry = runBlocking(Dispatchers.IO) {
                 DatabaseHolder.Database.watchHistoryDao().findById(videoId)
             }
+
+            if (duration == null ||
+                watchPositionEntry == null ||
+                watchPositionEntry.position < duration * 1000 * 0.9
+            ) {
+                optionsList += getString(R.string.mark_as_watched)
+            }
+
             if (watchHistoryEntry != null || watchPositionEntry != null) {
                 optionsList += getString(R.string.mark_as_unwatched)
             }
