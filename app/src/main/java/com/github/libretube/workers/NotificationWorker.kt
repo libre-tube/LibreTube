@@ -138,6 +138,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
         val newStreams = applicationContext.resources
             .getQuantityString(R.plurals.channel_new_streams, streams.size, streams.size)
         val summary = NotificationCompat.InboxStyle()
+            .setSummaryText(newStreams)
         streams.forEach {
             summary.addLine(it.title)
         }
