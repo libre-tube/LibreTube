@@ -24,4 +24,20 @@ data class ContentItem(
     val subscribers: Long = -1,
     val videos: Long = -1,
     val verified: Boolean? = null
-)
+) {
+    fun toStreamItem() = StreamItem(
+        url = url,
+        type = StreamItem.TYPE_STREAM,
+        title = title,
+        thumbnail = thumbnail,
+        uploaderName = uploaderName,
+        uploaded = uploaded,
+        uploaderAvatar = uploaderAvatar,
+        uploaderUrl = uploaderUrl,
+        duration = duration,
+        uploaderVerified = uploaderVerified,
+        shortDescription = shortDescription,
+        views = views,
+        isShort = isShort == true
+    )
+}

@@ -3,12 +3,13 @@ package com.github.libretube.ui.sheets
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import com.github.libretube.R
-import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.enums.ShareObjectType
+import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
@@ -27,16 +28,15 @@ import kotlinx.coroutines.withContext
 /**
  * Dialog with different options for a selected video.
  *
- * Needs the [videoId] to load the content from the right video.
+ * Needs the [streamItem] to load the content from the right video.
  */
 class VideoOptionsBottomSheet(
-    private val videoId: String,
-    videoName: String,
-    val duration: Long?,
+    private val streamItem: StreamItem,
     private val onVideoChanged: () -> Unit = {}
 ) : BaseBottomSheet() {
-    private val shareData = ShareData(currentVideo = videoName)
+    private val shareData = ShareData(currentVideo = streamItem.title)
     override fun onCreate(savedInstanceState: Bundle?) {
+        val videoId = streamItem.url?.toID() ?: return
         // List that stores the different menu options. In the future could be add more options here.
         val optionsList = mutableListOf(
             getString(R.string.playOnBackground),
@@ -60,9 +60,9 @@ class VideoOptionsBottomSheet(
                 DatabaseHolder.Database.watchHistoryDao().findById(videoId)
             }
 
-            if (duration == null ||
+            if (streamItem.duration == null ||
                 watchPositionEntry == null ||
-                watchPositionEntry.position < duration * 1000 * 0.9
+                watchPositionEntry.position < streamItem.duration * 1000 * 0.9
             ) {
                 optionsList += getString(R.string.mark_as_watched)
             }
@@ -99,25 +99,11 @@ class VideoOptionsBottomSheet(
                 }
 
                 getString(R.string.play_next) -> {
-                    try {
-                        val streamItem = withContext(Dispatchers.IO) {
-                            RetrofitInstance.api.getStreams(videoId).toStreamItem(videoId)
-                        }
-                        PlayingQueue.addAsNext(streamItem)
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
+                    PlayingQueue.addAsNext(streamItem)
                 }
 
                 getString(R.string.add_to_queue) -> {
-                    try {
-                        val streamItem = withContext(Dispatchers.IO) {
-                            RetrofitInstance.api.getStreams(videoId).toStreamItem(videoId)
-                        }
-                        PlayingQueue.add(streamItem)
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
+                    PlayingQueue.add(streamItem)
                 }
 
                 getString(R.string.mark_as_watched) -> {
@@ -126,9 +112,7 @@ class VideoOptionsBottomSheet(
                         DatabaseHolder.Database.watchPositionDao().insert(watchPosition)
                         if (!PlayerHelper.watchHistoryEnabled) return@withContext
                         // add video to watch history
-                        runCatching {
-                            RetrofitInstance.api.getStreams(videoId)
-                        }.getOrNull()?.let { DatabaseHelper.addToWatchHistory(videoId, it) }
+                        DatabaseHelper.addToWatchHistory(videoId, streamItem)
                     }
                     if (PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)) {
                         // get the host fragment containing the current fragment

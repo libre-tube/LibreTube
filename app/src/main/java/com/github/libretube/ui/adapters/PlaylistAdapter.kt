@@ -80,9 +80,8 @@ class PlaylistAdapter(
                 NavigationHelper.navigateVideo(root.context, streamItem.url, playlistId)
             }
             val videoId = streamItem.url!!.toID()
-            val videoName = streamItem.title!!
             root.setOnLongClickListener {
-                VideoOptionsBottomSheet(videoId, videoName, streamItem.duration) {
+                VideoOptionsBottomSheet(streamItem) {
                     notifyItemChanged(position)
                 }
                     .show(

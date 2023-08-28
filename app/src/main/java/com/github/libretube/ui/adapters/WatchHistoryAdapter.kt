@@ -68,7 +68,7 @@ class WatchHistoryAdapter(
                 NavigationHelper.navigateVideo(root.context, video.videoId)
             }
             root.setOnLongClickListener {
-                VideoOptionsBottomSheet(video.videoId, video.title!!, video.duration) {
+                VideoOptionsBottomSheet(video.toStreamItem()) {
                     notifyItemChanged(position)
                 }
                     .show(
