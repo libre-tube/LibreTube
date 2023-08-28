@@ -148,7 +148,7 @@ class VideosAdapter(
             root.setOnLongClickListener {
                 if (videoId == null || videoName == null) return@setOnLongClickListener true
 
-                VideoOptionsBottomSheet(videoId, videoName) {
+                VideoOptionsBottomSheet(video) {
                     notifyItemChanged(position)
                 }
                     .show(
@@ -189,7 +189,7 @@ class VideosAdapter(
 
             root.setOnLongClickListener {
                 if (videoId == null || videoName == null) return@setOnLongClickListener true
-                VideoOptionsBottomSheet(videoId, videoName) {
+                VideoOptionsBottomSheet(video) {
                     notifyItemChanged(position)
                 }
                     .show(

@@ -8,22 +8,36 @@ import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PreferenceHelper
+import java.time.Instant
+import java.time.ZoneId
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlinx.datetime.toKotlinLocalDate
 
 object DatabaseHelper {
     private const val MAX_SEARCH_HISTORY_SIZE = 20
 
-    suspend fun addToWatchHistory(videoId: String, streams: Streams) = withContext(Dispatchers.IO) {
+    suspend fun addToWatchHistory(videoId: String, streams: Streams) = addToWatchHistory(
+        videoId,
+        streams.toStreamItem(videoId)
+    )
+    suspend fun addToWatchHistory(
+        videoId: String,
+        stream: StreamItem
+    ) = withContext(Dispatchers.IO) {
         val watchHistoryItem = WatchHistoryItem(
             videoId,
-            streams.title,
-            streams.uploadDate,
-            streams.uploader,
-            streams.uploaderUrl.toID(),
-            streams.uploaderAvatar,
-            streams.thumbnailUrl,
-            streams.duration
+            stream.title,
+            stream.uploaded?.let {
+                Instant.ofEpochMilli(
+                    it
+                ).atZone(ZoneId.systemDefault()).toLocalDate().toKotlinLocalDate()
+            },
+            stream.uploaderName,
+            stream.uploaderUrl?.toID(),
+            stream.uploaderAvatar,
+            stream.thumbnail,
+            stream.duration
         )
         Database.watchHistoryDao().insert(watchHistoryItem)
         val maxHistorySize = PreferenceHelper.getString(PreferenceKeys.WATCH_HISTORY_SIZE, "100")

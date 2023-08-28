@@ -96,9 +96,8 @@ class SearchAdapter(
                 NavigationHelper.navigateVideo(root.context, item.url)
             }
             val videoId = item.url.toID()
-            val videoName = item.title!!
             root.setOnLongClickListener {
-                VideoOptionsBottomSheet(videoId, videoName) {
+                VideoOptionsBottomSheet(item.toStreamItem()) {
                     notifyItemChanged(position)
                 }
                     .show(
