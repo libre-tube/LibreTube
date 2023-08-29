@@ -125,6 +125,7 @@
     <string name="update_summary">Check for update</string>
     <string name="app_uptodate">Running the latest version.</string>
     <string name="playback_speed">Playback speed</string>
+    <string name="save_playback_speed">Save playback speed</string>
     <string name="advanced">Advanced</string>
     <string name="player">Player</string>
     <string name="appearance_summary">Adjust the app to your liking.</string>
