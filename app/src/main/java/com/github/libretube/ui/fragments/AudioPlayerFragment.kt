@@ -21,6 +21,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
+import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
@@ -49,6 +50,7 @@ import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.util.DataSaverMode
 import com.github.libretube.util.PlayingQueue
+import kotlinx.coroutines.launch
 import kotlin.math.abs
 
 class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
@@ -297,10 +299,11 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         // reset color filter if data saver mode got toggled or conditions for it changed
         binding.thumbnail.setColorFilter(Color.TRANSPARENT)
 
-        ImageHelper.getAsync(requireContext(), thumbnailUrl) {
-            val binding = _binding ?: return@getAsync
-            binding.thumbnail.setImageBitmap(it)
-            binding.miniPlayerThumbnail.setImageBitmap(it)
+        lifecycleScope.launch {
+            val binding = _binding ?: return@launch
+            val bitmap = ImageHelper.getImage(requireContext(), thumbnailUrl)
+            binding.thumbnail.setImageBitmap(bitmap)
+            binding.miniPlayerThumbnail.setImageBitmap(bitmap)
             binding.thumbnail.isVisible = true
             binding.progress.isGone = true
         }

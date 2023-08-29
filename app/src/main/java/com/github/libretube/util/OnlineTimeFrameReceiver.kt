@@ -2,7 +2,6 @@ package com.github.libretube.util
 
 import android.content.Context
 import android.graphics.Bitmap
-import androidx.core.graphics.drawable.toBitmap
 import com.github.libretube.api.obj.PreviewFrames
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.obj.PreviewFrame
@@ -14,8 +13,8 @@ class OnlineTimeFrameReceiver(
 ) : TimeFrameReceiver() {
     override suspend fun getFrameAtTime(position: Long): Bitmap? {
         val previewFrame = getPreviewFrame(previewFrames, position) ?: return null
-        val drawable = ImageHelper.getImage(context, previewFrame.previewUrl).drawable ?: return null
-        return cutBitmapFromPreviewFrame(drawable.toBitmap(), previewFrame)
+        val bitmap = ImageHelper.getImage(context, previewFrame.previewUrl) ?: return null
+        return cutBitmapFromPreviewFrame(bitmap, previewFrame)
     }
 
     /**

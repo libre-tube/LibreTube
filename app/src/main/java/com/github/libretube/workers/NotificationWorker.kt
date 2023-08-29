@@ -10,7 +10,6 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.PendingIntentCompat
 import androidx.core.content.getSystemService
-import androidx.core.graphics.drawable.toBitmap
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.github.libretube.R
@@ -199,7 +198,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
 
     private suspend fun downloadImage(url: String?): Bitmap? {
         return if (PreferenceHelper.getBoolean(PreferenceKeys.SHOW_STREAM_THUMBNAILS, false)) {
-            ImageHelper.getImage(applicationContext, url).drawable?.toBitmap()
+            ImageHelper.getImage(applicationContext, url)
         } else {
             null
         }

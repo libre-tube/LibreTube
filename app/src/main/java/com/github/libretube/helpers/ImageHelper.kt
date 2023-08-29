@@ -5,18 +5,19 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.widget.ImageView
-import androidx.core.graphics.drawable.toBitmap
+import androidx.core.graphics.drawable.toBitmapOrNull
 import coil.ImageLoader
 import coil.disk.DiskCache
 import coil.load
 import coil.request.CachePolicy
 import coil.request.ImageRequest
-import coil.request.ImageResult
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toAndroidUri
 import com.github.libretube.extensions.toAndroidUriOrNull
 import com.github.libretube.util.DataSaverMode
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.nio.file.Path
 
 object ImageHelper {
@@ -60,37 +61,25 @@ object ImageHelper {
         target.load(urlToLoad, imageLoader)
     }
 
-    fun downloadImage(context: Context, url: String, path: Path) {
-        getAsync(context, url) { bitmap ->
-            saveImage(context, bitmap, path.toAndroidUri())
+    suspend fun downloadImage(context: Context, url: String, path: Path) {
+        val bitmap = getImage(context, url) ?: return
+        withContext(Dispatchers.IO) {
+            context.contentResolver.openOutputStream(path.toAndroidUri())?.use {
+                bitmap.compress(Bitmap.CompressFormat.PNG, 25, it)
+            }
         }
     }
 
-    fun getAsync(context: Context, url: String?, onSuccess: (Bitmap) -> Unit) {
-        val request = ImageRequest.Builder(context)
-            .data(url)
-            .target { onSuccess(it.toBitmap()) }
-            .build()
-
-        imageLoader.enqueue(request)
-    }
-
-    suspend fun getImage(context: Context, url: String?): ImageResult {
+    suspend fun getImage(context: Context, url: String?): Bitmap? {
         val request = ImageRequest.Builder(context)
             .data(url)
             .build()
 
-        return imageLoader.execute(request)
+        return imageLoader.execute(request).drawable?.toBitmapOrNull()
     }
 
     fun getDownloadedImage(context: Context, path: Path): Bitmap? {
         return path.toAndroidUriOrNull()?.let { getImage(context, it) }
-    }
-
-    private fun saveImage(context: Context, bitmapImage: Bitmap, imagePath: Uri) {
-        context.contentResolver.openOutputStream(imagePath)?.use {
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 25, it)
-        }
     }
 
     private fun getImage(context: Context, imagePath: Uri): Bitmap? {
