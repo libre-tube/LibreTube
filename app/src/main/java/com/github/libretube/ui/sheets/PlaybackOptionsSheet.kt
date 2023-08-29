@@ -73,12 +73,10 @@ class PlaybackOptionsSheet(
             binding.pitch.value.round(2)
         )
 
-        if (PreferenceHelper.getBoolean(PreferenceKeys.SAVE_PLAYBACK_SPEED, false)) {
-            PreferenceHelper.putString(
-                PreferenceKeys.PLAYBACK_SPEED,
-                player.playbackParameters.speed.toString()
-            )
-        }
+        PreferenceHelper.putString(
+            PreferenceKeys.PLAYBACK_SPEED,
+            player.playbackParameters.speed.toString()
+        )
     }
 
     companion object {

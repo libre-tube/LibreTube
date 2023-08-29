@@ -147,12 +147,6 @@
             app:valueFrom="0.2"
             app:valueTo="4.0" />
 
-        <SwitchPreferenceCompat
-            android:icon="@drawable/ic_baseline_save"
-            app:defaultValue="false"
-            app:key="save_playback_speed"
-            app:title="@string/save_playback_speed" />
-
         <ListPreference
             android:defaultValue=""
             android:icon="@drawable/ic_caption"

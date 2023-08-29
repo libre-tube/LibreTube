@@ -62,7 +62,6 @@ object PreferenceKeys {
     const val RELATED_STREAMS = "related_streams_toggle"
     const val CUSTOM_PLAYBACK_SPEED = "custom_playback_speed"
     const val PLAYBACK_SPEED = "playback_speed"
-    const val SAVE_PLAYBACK_SPEED = "save_playback_speed"
     const val BACKGROUND_PLAYBACK_SPEED = "background_playback_speed"
     const val FULLSCREEN_ORIENTATION = "fullscreen_orientation"
     const val PAUSE_ON_SCREEN_OFF = "pause_screen_off"
