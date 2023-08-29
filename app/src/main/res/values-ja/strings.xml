@@ -500,4 +500,8 @@
     <string name="group_name_error_empty">名前を入力</string>
     <string name="group_name_error_exists">重複しない名前を使用してください</string>
     <string name="registration_disabled">登録機能なし</string>
+    <string name="automatic_once">一回自動</string>
+    <string name="sb_create_segment">セグメントを作成</string>
+    <string name="segment_type">セグメントの種類</string>
+    <string name="sb_invalid_segment">セグメントの開始と終了が正しくないです</string>
 </resources>
