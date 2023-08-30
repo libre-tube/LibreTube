@@ -1,0 +1,17 @@
+name: Merge Weblate translations
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: AutoMerge Weblate translations
+        if: github.event.pull_request.user.login == 'weblate'
+        run: gh pr merge --auto --delete-branch --merge "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
