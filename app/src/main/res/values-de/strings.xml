@@ -504,4 +504,7 @@
     <string name="group_name_error_empty">Bitte gib einen Namen ein</string>
     <string name="group_name_error_exists">Bitte wähle einen Namen aus, der nicht bereits exisitiert</string>
     <string name="automatic_once">Automatisch (einmalig)</string>
+    <string name="sb_create_segment">Neuen Abschnitt erstellen</string>
+    <string name="sb_invalid_segment">Ungültiger Start/Ende des Abschnitts</string>
+    <string name="segment_type">Abschnitts-Kategorie</string>
 </resources>

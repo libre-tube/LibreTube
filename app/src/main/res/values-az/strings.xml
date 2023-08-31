@@ -499,4 +499,12 @@
     <string name="tooltip_scroll_to_top">Yuxarıya sürüşdür</string>
     <string name="auto_generated">avtomatik yaradılıb</string>
     <string name="resolution_limited">məhduddur</string>
+    <string name="registration_disabled">Qeydiyyat qeyri-aktiv edilib</string>
+    <string name="automatic_once">Bir dəfə avtomatik</string>
+    <string name="sb_create_segment">Bölüm yarat</string>
+    <string name="segment_type">Bölüm növü</string>
+    <string name="sb_invalid_segment">Yanlış bölüm başlanğıcı və ya sonu</string>
+    <string name="proxy">Proksi</string>
+    <string name="group_name_error_empty">Xahiş olunur ad daxil et</string>
+    <string name="group_name_error_exists">Xahiş olunur nadir ad seç</string>
 </resources>

@@ -503,4 +503,8 @@
     <string name="group_name_error_empty">ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਨਾਮ ਦਰਜ ਕਰੋ</string>
     <string name="registration_disabled">ਰਜਿਸਟ੍ਰੇਸ਼ਨ ਅਸਮਰੱਥ ਕੀਤੀ ਗਈ</string>
     <string name="group_name_error_exists">ਕਿਰਪਾ ਕਰਕੇ ਅਜਿਹਾ ਨਾਮ ਚੁਣੋ ਜੋ ਵਿਲੱਖਣ ਹੋਵੇ</string>
+    <string name="sb_create_segment">ਸੈਗਮੈਂਟ ਬਣਾਓ</string>
+    <string name="automatic_once">ਆਟੋਮੈਟਿਕ ਇੱਕ ਵਾਰ</string>
+    <string name="segment_type">ਸੈਗਮੈਂਟ ਕਿਸਮ</string>
+    <string name="sb_invalid_segment">ਸੈਗਮੈਂਟ ਦਾ ਅਵੈਧ ਮੁੱਢ ਜਾਂ ਅੰਤ</string>
 </resources>

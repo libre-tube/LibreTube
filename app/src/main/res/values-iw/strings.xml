@@ -510,4 +510,7 @@
     <string name="group_name_error_empty">נא למלא שם</string>
     <string name="group_name_error_exists">נא לבחור שם ייחודי</string>
     <string name="automatic_once">אוטומטית פעם אחת</string>
+    <string name="segment_type">סוג מקטע</string>
+    <string name="sb_create_segment">יצירת מקטע</string>
+    <string name="sb_invalid_segment">התחלת או סיום המקטע שגוי</string>
 </resources>

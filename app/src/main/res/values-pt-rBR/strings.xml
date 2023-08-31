@@ -506,4 +506,8 @@
     <string name="automatic_once">Automático uma vez</string>
     <string name="group_name_error_empty">Por favor insira um nome</string>
     <string name="group_name_error_exists">Escolha um nome que seja único</string>
+    <string name="sb_create_segment">Criar segmento</string>
+    <string name="segment_type">Tipo de segmento</string>
+    <string name="sb_invalid_segment">Início ou fim do segmento inválido</string>
+    <string name="proxy">Proxy</string>
 </resources>

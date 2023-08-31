@@ -501,4 +501,7 @@
     <string name="group_name_error_empty">请输入名称</string>
     <string name="group_name_error_exists">请选择唯一名称</string>
     <string name="automatic_once">仅自动拦截一次</string>
+    <string name="sb_create_segment">创建分段</string>
+    <string name="segment_type">分段类型</string>
+    <string name="sb_invalid_segment">无效的分段开头或结尾</string>
 </resources>

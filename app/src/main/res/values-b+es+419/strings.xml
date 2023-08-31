@@ -507,4 +507,7 @@
     <string name="proxy">Proxy</string>
     <string name="group_name_error_empty">Por favor, introduce un nombre</string>
     <string name="group_name_error_exists">Por favor, introduce un nombre que sea único</string>
+    <string name="sb_create_segment">Crear segmento</string>
+    <string name="segment_type">Tipo de segmento</string>
+    <string name="sb_invalid_segment">Inicio o final de segmento inválido</string>
 </resources>

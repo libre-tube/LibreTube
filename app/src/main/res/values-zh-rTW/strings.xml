@@ -501,4 +501,7 @@
     <string name="group_name_error_exists">請選擇獨一無二的名稱</string>
     <string name="registration_disabled">已停用註冊</string>
     <string name="automatic_once">自動一次</string>
+    <string name="sb_create_segment">建立片段</string>
+    <string name="segment_type">片段類型</string>
+    <string name="sb_invalid_segment">無效的片段開始或結束</string>
 </resources>

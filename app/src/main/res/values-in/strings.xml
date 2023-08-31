@@ -501,4 +501,7 @@
     <string name="auto_generated">dibuat secara otomatis</string>
     <string name="registration_disabled">Pendaftaran dinonaktifkan</string>
     <string name="automatic_once">Otomatis sekali</string>
+    <string name="sb_create_segment">Buat segmen</string>
+    <string name="segment_type">Jenis segmen</string>
+    <string name="sb_invalid_segment">Segmen awal atau akhir tidak valid</string>
 </resources>

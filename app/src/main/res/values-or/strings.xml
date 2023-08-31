@@ -503,4 +503,8 @@
     <string name="proxy">ପ୍ରକ୍ସି</string>
     <string name="group_name_error_empty">ଦୟାକରି ଗୋଟିଏ ନାମ ଭରଣ କରନ୍ତୁ</string>
     <string name="group_name_error_exists">ଦୟାକରି ଗୋଟିଏ ନାମ ବାଛନ୍ତୁ ଯାହାକି ଅନନ୍ୟ ଅଟେ</string>
+    <string name="automatic_once">ଥରେ ସ୍ୱୟଂଚାଳିତ</string>
+    <string name="sb_create_segment">ସେଗମେଣ୍ଟ ନିର୍ମାଣ କରନ୍ତୁ</string>
+    <string name="segment_type">ସେଗମେଣ୍ଟର ପ୍ରକାର</string>
+    <string name="sb_invalid_segment">ଅବୈଧ ସେଗମେଣ୍ଟ ଆରମ୍ଭ କିମ୍ବା ସମାପ୍ତି</string>
 </resources>

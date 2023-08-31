@@ -507,4 +507,7 @@
     <string name="tooltip_create_playlist">Crea playlist</string>
     <string name="tooltip_scroll_to_top">Scorri in cima</string>
     <string name="automatic_once">Automatico una volta</string>
+    <string name="sb_invalid_segment">Inizio o fine del segmento non valido</string>
+    <string name="sb_create_segment">Crea segmento</string>
+    <string name="segment_type">Tipo di segmento</string>
 </resources>
