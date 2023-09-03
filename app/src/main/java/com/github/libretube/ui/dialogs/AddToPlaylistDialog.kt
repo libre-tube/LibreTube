@@ -24,12 +24,18 @@ import kotlinx.coroutines.launch
 
 /**
  * Dialog to insert new videos to a playlist
- * @param videoId The id of the video to add. If non is provided, insert the whole playing queue
+ * videoId: The id of the video to add. If non is provided, insert the whole playing queue
  */
-class AddToPlaylistDialog(
-    private val videoId: String? = null
-) : DialogFragment() {
+class AddToPlaylistDialog : DialogFragment() {
+    private var videoId: String? = null
     private val viewModel: PlaylistViewModel by activityViewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            videoId = it.getString("videoId")!!
+        }
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogAddToPlaylistBinding.inflate(layoutInflater)
@@ -93,7 +99,7 @@ class AddToPlaylistDialog(
         val streams = when {
             videoId != null -> listOfNotNull(
                 runCatching {
-                    RetrofitInstance.api.getStreams(videoId!!).toStreamItem(videoId)
+                    RetrofitInstance.api.getStreams(videoId!!).toStreamItem(videoId!!)
                 }.getOrNull()
             )
 

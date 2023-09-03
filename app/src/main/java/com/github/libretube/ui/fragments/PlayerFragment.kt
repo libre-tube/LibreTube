@@ -444,16 +444,20 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // share button
         binding.relPlayerShare.setOnClickListener {
             if (!this::streams.isInitialized) return@setOnClickListener
-            val shareDialog =
-                ShareDialog(
-                    videoId,
-                    ShareObjectType.VIDEO,
+            val bundle = Bundle().apply {
+                putString("id", videoId)
+                putSerializable("shareObjectType", ShareObjectType.VIDEO)
+                putParcelable(
+                    "shareData",
                     ShareData(
                         currentVideo = streams.title,
                         currentPosition = exoPlayer.currentPosition / 1000
                     )
                 )
-            shareDialog.show(childFragmentManager, ShareDialog::class.java.name)
+            }
+            val newShareDialog = ShareDialog()
+            newShareDialog.arguments = bundle
+            newShareDialog.show(childFragmentManager, ShareDialog::class.java.name)
         }
 
         binding.relPlayerShare.setOnLongClickListener {
@@ -774,9 +778,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 // enable the chapters dialog in the player
                 playerBinding.chapterLL.setOnClickListener {
                     updateMaxSheetHeight()
-                    val sheet = chaptersBottomSheet ?: ChaptersBottomSheet(chapters, exoPlayer).also {
-                        chaptersBottomSheet = it
-                    }
+                    val sheet =
+                        chaptersBottomSheet ?: ChaptersBottomSheet(chapters, exoPlayer).also {
+                            chaptersBottomSheet = it
+                        }
                     if (sheet.isVisible) {
                         sheet.dismiss()
                     } else {
@@ -997,7 +1002,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             if (streams.duration <= 0) {
                 Toast.makeText(context, R.string.cannotDownload, Toast.LENGTH_SHORT).show()
             } else if (!DownloadService.IS_DOWNLOAD_RUNNING) {
-                val newFragment = DownloadDialog(videoId)
+                val bundle = Bundle().apply {
+                    putString("videoId", videoId)
+                }
+                val newFragment = DownloadDialog()
+                newFragment.arguments = bundle
                 newFragment.show(childFragmentManager, DownloadDialog::class.java.name)
             } else {
                 Toast.makeText(context, R.string.dlisinprogress, Toast.LENGTH_SHORT)
@@ -1048,10 +1057,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         )
 
         binding.relPlayerSave.setOnClickListener {
-            AddToPlaylistDialog(videoId).show(
-                childFragmentManager,
-                AddToPlaylistDialog::class.java.name
-            )
+            val bundle = Bundle().apply {
+                putString("videoId", videoId)
+            }
+            val newAddToPlaylistDialog = AddToPlaylistDialog()
+            newAddToPlaylistDialog.arguments = bundle
+            newAddToPlaylistDialog.show(childFragmentManager, AddToPlaylistDialog::class.java.name)
         }
 
         syncQueueButtons()

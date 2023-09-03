@@ -168,17 +168,26 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
 
         binding.download.setOnClickListener {
             val videoId = PlayingQueue.getCurrent()?.url?.toID() ?: return@setOnClickListener
-            val downloadDialog = DownloadDialog(videoId)
-            downloadDialog.show(childFragmentManager, DownloadDialog::class.java.name)
+
+            val bundle = Bundle().apply {
+                putString("videoId", videoId)
+            }
+            val newFragment = DownloadDialog()
+            newFragment.arguments = bundle
+            newFragment.show(childFragmentManager, DownloadDialog::class.java.name)
         }
 
         binding.share.setOnClickListener {
             val currentVideo = PlayingQueue.getCurrent() ?: return@setOnClickListener
-            ShareDialog(
-                id = currentVideo.url!!.toID(),
-                shareObjectType = ShareObjectType.VIDEO,
-                shareData = ShareData(currentVideo = currentVideo.title)
-            ).show(childFragmentManager, null)
+
+            val bundle = Bundle().apply {
+                putString("id", currentVideo.url!!.toID())
+                putSerializable("shareObjectType", ShareObjectType.VIDEO)
+                putParcelable("shareData", ShareData(currentVideo = currentVideo.title))
+            }
+            val newShareDialog = ShareDialog()
+            newShareDialog.arguments = bundle
+            newShareDialog.show(childFragmentManager, null)
         }
 
         binding.chapters.setOnClickListener {

@@ -2,6 +2,7 @@ package com.github.libretube.ui.dialogs
 
 import android.app.Dialog
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
@@ -18,11 +19,26 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 
-class ShareDialog(
-    private val id: String,
-    private val shareObjectType: ShareObjectType,
-    private val shareData: ShareData
-) : DialogFragment() {
+class ShareDialog : DialogFragment() {
+    private lateinit var id: String
+    private lateinit var shareObjectType: ShareObjectType
+    private lateinit var shareData: ShareData
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            id = it.getString("id")!!
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                shareObjectType =
+                    it.getSerializable("shareObjectType", ShareObjectType::class.java)!!
+                shareData = it.getParcelable("shareData", ShareData::class.java)!!
+            } else {
+                shareObjectType = it.getSerializable("shareObjectType") as ShareObjectType
+                shareData = it.getParcelable("shareData")!!
+            }
+        }
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         var shareOptions = arrayOf(
             getString(R.string.piped),

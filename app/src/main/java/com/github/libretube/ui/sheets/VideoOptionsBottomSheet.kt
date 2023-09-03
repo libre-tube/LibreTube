@@ -81,21 +81,36 @@ class VideoOptionsBottomSheet(
                 }
                 // Add Video to Playlist Dialog
                 getString(R.string.addToPlaylist) -> {
-                    AddToPlaylistDialog(videoId).show(
+                    val bundle = Bundle().apply {
+                        putString("videoId", videoId)
+                    }
+                    val newAddToPlaylistDialog = AddToPlaylistDialog()
+                    newAddToPlaylistDialog.arguments = bundle
+                    newAddToPlaylistDialog.show(
                         parentFragmentManager,
                         AddToPlaylistDialog::class.java.name
                     )
                 }
 
                 getString(R.string.download) -> {
-                    val downloadDialog = DownloadDialog(videoId)
-                    downloadDialog.show(parentFragmentManager, DownloadDialog::class.java.name)
+                    val bundle = Bundle().apply {
+                        putString("videoId", videoId)
+                    }
+                    val newFragment = DownloadDialog()
+                    newFragment.arguments = bundle
+                    newFragment.show(parentFragmentManager, DownloadDialog::class.java.name)
                 }
 
                 getString(R.string.share) -> {
-                    val shareDialog = ShareDialog(videoId, ShareObjectType.VIDEO, shareData)
+                    val bundle = Bundle().apply {
+                        putString("id", videoId)
+                        putSerializable("shareObjectType", ShareObjectType.VIDEO)
+                        putParcelable("shareData", shareData)
+                    }
+                    val newShareDialog = ShareDialog()
+                    newShareDialog.arguments = bundle
                     // using parentFragmentManager is important here
-                    shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
+                    newShareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
 
                 getString(R.string.play_next) -> {

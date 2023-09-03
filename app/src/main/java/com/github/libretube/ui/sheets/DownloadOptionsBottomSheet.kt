@@ -38,8 +38,14 @@ class DownloadOptionsBottomSheet(
 
                 2 -> {
                     val shareData = ShareData(currentVideo = download.uploader)
-                    ShareDialog(download.videoId, ShareObjectType.VIDEO, shareData)
-                        .show(parentFragmentManager, null)
+                    val bundle = Bundle().apply {
+                        putString("id", download.videoId)
+                        putSerializable("shareObjectType", ShareObjectType.CHANNEL)
+                        putParcelable("shareData", shareData)
+                    }
+                    val newShareDialog = ShareDialog()
+                    newShareDialog.arguments = bundle
+                    newShareDialog.show(parentFragmentManager, null)
                 }
 
                 3 -> {

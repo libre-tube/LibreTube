@@ -154,12 +154,14 @@ class ChannelFragment : Fragment() {
                 )
 
                 binding.channelShare.setOnClickListener {
-                    val shareDialog = ShareDialog(
-                        channelId.toID(),
-                        ShareObjectType.CHANNEL,
-                        shareData
-                    )
-                    shareDialog.show(childFragmentManager, ShareDialog::class.java.name)
+                    val bundle = Bundle().apply {
+                        putString("id", channelId.toID())
+                        putSerializable("shareObjectType", ShareObjectType.CHANNEL)
+                        putParcelable("shareData", shareData)
+                    }
+                    val newShareDialog = ShareDialog()
+                    newShareDialog.arguments = bundle
+                    newShareDialog.show(childFragmentManager, ShareDialog::class.java.name)
                 }
 
                 nextPage = response.nextpage

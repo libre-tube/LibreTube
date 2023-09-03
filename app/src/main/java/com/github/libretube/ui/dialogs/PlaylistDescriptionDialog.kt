@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.text.InputType
 import android.util.Log
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
@@ -18,11 +20,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class PlaylistDescriptionDialog(
-    private val playlistId: String,
-    private val currentPlaylistDescription: String,
-    private val onSuccess: (String) -> Unit
-) : DialogFragment() {
+class PlaylistDescriptionDialog : DialogFragment() {
+    private lateinit var playlistId: String
+    private lateinit var currentPlaylistDescription: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            playlistId = it.getString("playlistId")!!
+            currentPlaylistDescription = it.getString("currentPlaylistDescription")!!
+        }
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogTextPreferenceBinding.inflate(layoutInflater)
         binding.input.inputType = InputType.TYPE_CLASS_TEXT
@@ -68,7 +77,7 @@ class PlaylistDescriptionDialog(
                         }
                         if (success) {
                             appContext.toastFromMainDispatcher(R.string.success)
-                            onSuccess.invoke(newDescription)
+                            setFragmentResult("requestKey", bundleOf("bundleKey" to newDescription))
                         } else {
                             appContext.toastFromMainDispatcher(R.string.server_error)
                         }

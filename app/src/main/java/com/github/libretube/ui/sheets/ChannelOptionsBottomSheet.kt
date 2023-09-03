@@ -37,8 +37,14 @@ class ChannelOptionsBottomSheet(
         setSimpleItems(optionsList) { which ->
             when (optionsList[which]) {
                 getString(R.string.share) -> {
-                    ShareDialog(channelId, ShareObjectType.CHANNEL, shareData)
-                        .show(parentFragmentManager, null)
+                    val bundle = Bundle().apply {
+                        putString("id", channelId)
+                        putSerializable("shareObjectType", ShareObjectType.CHANNEL)
+                        putParcelable("shareData", shareData)
+                    }
+                    val newShareDialog = ShareDialog()
+                    newShareDialog.arguments = bundle
+                    newShareDialog.show(parentFragmentManager, null)
                 }
 
                 getString(R.string.play_latest_videos) -> {

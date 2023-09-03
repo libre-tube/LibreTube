@@ -2,6 +2,7 @@ package com.github.libretube.ui.views
 
 import android.content.Context
 import android.content.res.Configuration
+import android.os.Bundle
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.view.WindowInsetsCompat
@@ -166,11 +167,18 @@ class OnlinePlayerView(
 
         binding.sbSubmit.isVisible = PlayerHelper.sponsorBlockEnabled
         binding.sbSubmit.setOnClickListener {
-            val currentPosition = player?.currentPosition?.takeIf { it != C.TIME_UNSET }
+            val currentPosition = player?.currentPosition?.takeIf { it != C.TIME_UNSET } ?: 0
             val duration = player?.duration?.takeIf { it != C.TIME_UNSET }
             val videoId = PlayingQueue.getCurrent()?.url?.toID() ?: return@setOnClickListener
-            SubmitSegmentDialog(videoId, currentPosition ?: 0, duration)
-                .show((context as BaseActivity).supportFragmentManager, null)
+
+            val bundle = Bundle().apply {
+                putLong("currentPosition", currentPosition)
+                putLong("duration", duration!!)
+                putString("videoId", videoId)
+            }
+            val newSubmitSegmentDialog = SubmitSegmentDialog()
+            newSubmitSegmentDialog.arguments = bundle
+            newSubmitSegmentDialog.show((context as BaseActivity).supportFragmentManager, null)
         }
     }
 

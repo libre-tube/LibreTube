@@ -32,10 +32,17 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
-class DownloadDialog(
-    private val videoId: String
-) : DialogFragment() {
+class DownloadDialog : DialogFragment() {
+    private lateinit var videoId: String
     private var onDownloadConfirm = {}
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            videoId = it.getString("videoId")!!
+        }
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogDownloadBinding.inflate(layoutInflater)
 

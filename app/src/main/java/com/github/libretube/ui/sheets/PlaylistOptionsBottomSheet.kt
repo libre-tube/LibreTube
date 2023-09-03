@@ -70,6 +70,7 @@ class PlaylistOptionsBottomSheet(
                         )
                     }
                 }
+
                 getString(R.string.add_to_queue) -> {
                     PlayingQueue.insertPlaylist(playlistId, null)
                 }
@@ -87,9 +88,15 @@ class PlaylistOptionsBottomSheet(
                 }
                 // share the playlist
                 getString(R.string.share) -> {
-                    val shareDialog = ShareDialog(playlistId, ShareObjectType.PLAYLIST, shareData)
+                    val bundle = Bundle().apply {
+                        putString("id", playlistId)
+                        putSerializable("shareObjectType", ShareObjectType.PLAYLIST)
+                        putParcelable("shareData", shareData)
+                    }
+                    val newShareDialog = ShareDialog()
+                    newShareDialog.arguments = bundle
                     // using parentFragmentManager, childFragmentManager doesn't work here
-                    shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
+                    newShareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
 
                 getString(R.string.deletePlaylist) -> {
@@ -105,8 +112,20 @@ class PlaylistOptionsBottomSheet(
                 }
 
                 getString(R.string.change_playlist_description) -> {
-                    PlaylistDescriptionDialog(playlistId, "", onChangeDescription)
-                        .show(parentFragmentManager, null)
+                    val bundle = Bundle().apply {
+                        putString("playlistId", playlistId)
+                        putString("currentPlaylistDescription", "")
+                    }
+                    val newShareDialog = PlaylistDescriptionDialog()
+                    newShareDialog.arguments = bundle
+                    newShareDialog.show(parentFragmentManager, null)
+                    parentFragmentManager.setFragmentResultListener(
+                        "requestKey",
+                        this
+                    ) { _, resultBundle ->
+                        val newDescription = resultBundle.getString("bundleKey")!!
+                        onChangeDescription.invoke(newDescription)
+                    }
                 }
 
                 else -> {

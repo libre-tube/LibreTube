@@ -14,6 +14,8 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 class MainSettings : BasePreferenceFragment() {
     override val titleResourceId: Int = R.string.settings
@@ -46,7 +48,13 @@ class MainSettings : BasePreferenceFragment() {
 
                 if (BuildConfig.VERSION_NAME != updateInfo.name) {
                     // show the UpdateAvailableDialog if there's an update available
-                    UpdateAvailableDialog(updateInfo).show(
+                    val encodedUpdateInfo = Json.encodeToString(updateInfo)
+                    val bundle = Bundle().apply {
+                        putString("updateInfo", encodedUpdateInfo)
+                    }
+                    val newUpdateAvailableDialog = UpdateAvailableDialog()
+                    newUpdateAvailableDialog.arguments = bundle
+                    newUpdateAvailableDialog.show(
                         childFragmentManager,
                         UpdateAvailableDialog::class.java.name
                     )
