@@ -510,4 +510,7 @@
     <string name="proxy">Проксі</string>
     <string name="group_name_error_empty">Увядзіце імя</string>
     <string name="group_name_error_exists">Выберыце унікальнае імя</string>
+    <string name="sb_create_segment">Стварыць сегмент</string>
+    <string name="segment_type">Тып сегмента</string>
+    <string name="sb_invalid_segment">Няправільны пачатак або канец сегмента</string>
 </resources>
