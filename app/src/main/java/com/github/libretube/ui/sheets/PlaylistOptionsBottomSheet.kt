@@ -1,9 +1,11 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
+import androidx.core.os.bundleOf
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.enums.ShareObjectType
@@ -88,11 +90,11 @@ class PlaylistOptionsBottomSheet(
                 }
                 // share the playlist
                 getString(R.string.share) -> {
-                    val bundle = Bundle().apply {
-                        putString("id", playlistId)
-                        putSerializable("shareObjectType", ShareObjectType.PLAYLIST)
-                        putParcelable("shareData", shareData)
-                    }
+                    val bundle = bundleOf(
+                        IntentData.id to playlistId,
+                        IntentData.shareObjectType to ShareObjectType.PLAYLIST,
+                        IntentData.shareData to shareData
+                    )
                     val newShareDialog = ShareDialog()
                     newShareDialog.arguments = bundle
                     // using parentFragmentManager, childFragmentManager doesn't work here
@@ -112,10 +114,10 @@ class PlaylistOptionsBottomSheet(
                 }
 
                 getString(R.string.change_playlist_description) -> {
-                    val bundle = Bundle().apply {
-                        putString("playlistId", playlistId)
-                        putString("currentPlaylistDescription", "")
-                    }
+                    val bundle = bundleOf(
+                        IntentData.playlistId to playlistId,
+                        IntentData.currentPlaylistDescription to ""
+                    )
                     val newShareDialog = PlaylistDescriptionDialog()
                     newShareDialog.arguments = bundle
                     newShareDialog.show(parentFragmentManager, null)

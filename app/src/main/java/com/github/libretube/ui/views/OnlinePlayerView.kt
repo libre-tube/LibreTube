@@ -2,9 +2,9 @@ package com.github.libretube.ui.views
 
 import android.content.Context
 import android.content.res.Configuration
-import android.os.Bundle
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.LifecycleOwner
@@ -12,6 +12,7 @@ import androidx.media3.common.C
 import androidx.media3.exoplayer.trackselection.TrackSelector
 import androidx.media3.ui.PlayerView.ControllerVisibilityListener
 import com.github.libretube.R
+import com.github.libretube.constants.IntentData
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.WindowHelper
@@ -171,11 +172,11 @@ class OnlinePlayerView(
             val duration = player?.duration?.takeIf { it != C.TIME_UNSET }
             val videoId = PlayingQueue.getCurrent()?.url?.toID() ?: return@setOnClickListener
 
-            val bundle = Bundle().apply {
-                putLong("currentPosition", currentPosition)
-                putLong("duration", duration!!)
-                putString("videoId", videoId)
-            }
+            val bundle = bundleOf(
+                IntentData.currentPosition to currentPosition,
+                IntentData.duration to duration,
+                IntentData.videoId to videoId
+            )
             val newSubmitSegmentDialog = SubmitSegmentDialog()
             newSubmitSegmentDialog.arguments = bundle
             newSubmitSegmentDialog.show((context as BaseActivity).supportFragmentManager, null)

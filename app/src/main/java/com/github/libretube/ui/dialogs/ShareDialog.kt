@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
+import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PIPED_FRONTEND_URL
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.constants.YOUTUBE_FRONTEND_URL
@@ -27,14 +28,14 @@ class ShareDialog : DialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            id = it.getString("id")!!
+            id = it.getString(IntentData.id)!!
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 shareObjectType =
-                    it.getSerializable("shareObjectType", ShareObjectType::class.java)!!
-                shareData = it.getParcelable("shareData", ShareData::class.java)!!
+                    it.getSerializable(IntentData.shareObjectType, ShareObjectType::class.java)!!
+                shareData = it.getParcelable(IntentData.shareData, ShareData::class.java)!!
             } else {
-                shareObjectType = it.getSerializable("shareObjectType") as ShareObjectType
-                shareData = it.getParcelable("shareData")!!
+                shareObjectType = it.getSerializable(IntentData.shareObjectType) as ShareObjectType
+                shareData = it.getParcelable(IntentData.shareData)!!
             }
         }
     }

@@ -3,6 +3,7 @@ package com.github.libretube.constants
 object IntentData {
     const val downloadData = "downloadData"
     const val playerData = "playerData"
+    const val id = "id"
     const val videoId = "videoId"
     const val channelId = "channelId"
     const val channelName = "channelName"
@@ -15,4 +16,10 @@ object IntentData {
     const val comment = "comment"
     const val minimizeByDefault = "minimizeByDefault"
     const val query = "query"
+    const val currentPlaylistDescription = "currentPlaylistDescription"
+    const val shareObjectType = "shareObjectType"
+    const val shareData = "shareData"
+    const val currentPosition = "currentPosition"
+    const val duration = "duration"
+    const val updateInfo = "updateInfo"
 }

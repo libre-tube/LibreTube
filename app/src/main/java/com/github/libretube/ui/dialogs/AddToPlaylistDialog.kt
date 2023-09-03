@@ -14,6 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogAddToPlaylistBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
@@ -33,7 +34,7 @@ class AddToPlaylistDialog : DialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            videoId = it.getString("videoId")!!
+            videoId = it.getString(IntentData.videoId)
         }
     }
 

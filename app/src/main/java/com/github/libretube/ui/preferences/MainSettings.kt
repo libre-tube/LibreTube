@@ -2,11 +2,15 @@ package com.github.libretube.ui.preferences
 
 import android.os.Bundle
 import androidx.annotation.StringRes
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.commitNow
+import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.constants.IntentData
 import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.UpdateAvailableDialog
@@ -49,11 +53,9 @@ class MainSettings : BasePreferenceFragment() {
                 if (BuildConfig.VERSION_NAME != updateInfo.name) {
                     // show the UpdateAvailableDialog if there's an update available
                     val encodedUpdateInfo = Json.encodeToString(updateInfo)
-                    val bundle = Bundle().apply {
-                        putString("updateInfo", encodedUpdateInfo)
-                    }
                     val newUpdateAvailableDialog = UpdateAvailableDialog()
-                    newUpdateAvailableDialog.arguments = bundle
+                    newUpdateAvailableDialog.arguments =
+                        bundleOf(IntentData.updateInfo to encodedUpdateInfo)
                     newUpdateAvailableDialog.show(
                         childFragmentManager,
                         UpdateAvailableDialog::class.java.name

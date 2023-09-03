@@ -12,6 +12,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogTextPreferenceBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
@@ -27,8 +28,8 @@ class PlaylistDescriptionDialog : DialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            playlistId = it.getString("playlistId")!!
-            currentPlaylistDescription = it.getString("currentPlaylistDescription")!!
+            playlistId = it.getString(IntentData.playlistId)!!
+            currentPlaylistDescription = it.getString(IntentData.currentPlaylistDescription)!!
         }
     }
 

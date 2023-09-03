@@ -16,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
+import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -169,22 +170,19 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         binding.download.setOnClickListener {
             val videoId = PlayingQueue.getCurrent()?.url?.toID() ?: return@setOnClickListener
 
-            val bundle = Bundle().apply {
-                putString("videoId", videoId)
-            }
             val newFragment = DownloadDialog()
-            newFragment.arguments = bundle
+            newFragment.arguments = bundleOf(IntentData.videoId to videoId)
             newFragment.show(childFragmentManager, DownloadDialog::class.java.name)
         }
 
         binding.share.setOnClickListener {
             val currentVideo = PlayingQueue.getCurrent() ?: return@setOnClickListener
 
-            val bundle = Bundle().apply {
-                putString("id", currentVideo.url!!.toID())
-                putSerializable("shareObjectType", ShareObjectType.VIDEO)
-                putParcelable("shareData", ShareData(currentVideo = currentVideo.title))
-            }
+            val bundle = bundleOf(
+                IntentData.id to currentVideo.url!!.toID(),
+                IntentData.shareObjectType to ShareObjectType.VIDEO,
+                IntentData.shareData to ShareData(currentVideo = currentVideo.title)
+            )
             val newShareDialog = ShareDialog()
             newShareDialog.arguments = bundle
             newShareDialog.show(childFragmentManager, null)

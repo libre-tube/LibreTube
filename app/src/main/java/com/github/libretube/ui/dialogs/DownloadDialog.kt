@@ -18,6 +18,7 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.api.obj.Subtitle
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogDownloadBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.getWhileDigit
@@ -38,9 +39,7 @@ class DownloadDialog : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            videoId = it.getString("videoId")!!
-        }
+        videoId = arguments?.getString(IntentData.videoId)!!
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

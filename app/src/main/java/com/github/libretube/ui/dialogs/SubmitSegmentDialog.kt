@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogSubmitSegmentBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
@@ -28,9 +29,9 @@ class SubmitSegmentDialog : DialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            videoId = it.getString("videoId")!!
-            currentPosition = it.getLong("currentPosition")
-            duration = it.getLong("duration")
+            videoId = it.getString(IntentData.videoId)!!
+            currentPosition = it.getLong(IntentData.currentPosition)
+            duration = it.getLong(IntentData.duration)
         }
     }
 
