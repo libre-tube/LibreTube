@@ -14,12 +14,10 @@ import com.github.libretube.ui.fragments.DownloadsFragment
 import com.google.android.material.snackbar.Snackbar
 
 class NoInternetActivity : BaseActivity() {
-    private lateinit var binding: ActivityNointernetBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityNointernetBinding.inflate(layoutInflater)
+        val binding = ActivityNointernetBinding.inflate(layoutInflater)
         // retry button
         binding.retryButton.setOnClickListener {
             if (NetworkHelper.isNetworkAvailable(this)) {
