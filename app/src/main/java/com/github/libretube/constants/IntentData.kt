@@ -16,10 +16,11 @@ object IntentData {
     const val comment = "comment"
     const val minimizeByDefault = "minimizeByDefault"
     const val query = "query"
-    const val currentPlaylistDescription = "currentPlaylistDescription"
+    const val playlistDescription = "playlistDescription"
     const val shareObjectType = "shareObjectType"
     const val shareData = "shareData"
     const val currentPosition = "currentPosition"
     const val duration = "duration"
     const val updateInfo = "updateInfo"
+    const val requestKey = "requestKey"
 }

@@ -29,7 +29,7 @@ class PlaylistDescriptionDialog : DialogFragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             playlistId = it.getString(IntentData.playlistId)!!
-            currentPlaylistDescription = it.getString(IntentData.currentPlaylistDescription)!!
+            currentPlaylistDescription = it.getString(IntentData.playlistDescription)!!
         }
     }
 
@@ -78,7 +78,10 @@ class PlaylistDescriptionDialog : DialogFragment() {
                         }
                         if (success) {
                             appContext.toastFromMainDispatcher(R.string.success)
-                            setFragmentResult("requestKey", bundleOf("bundleKey" to newDescription))
+                            setFragmentResult(
+                                IntentData.requestKey,
+                                bundleOf(IntentData.playlistDescription to newDescription)
+                            )
                         } else {
                             appContext.toastFromMainDispatcher(R.string.server_error)
                         }

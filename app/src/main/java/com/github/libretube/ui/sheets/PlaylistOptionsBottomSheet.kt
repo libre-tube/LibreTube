@@ -116,16 +116,16 @@ class PlaylistOptionsBottomSheet(
                 getString(R.string.change_playlist_description) -> {
                     val bundle = bundleOf(
                         IntentData.playlistId to playlistId,
-                        IntentData.currentPlaylistDescription to ""
+                        IntentData.playlistDescription to ""
                     )
                     val newShareDialog = PlaylistDescriptionDialog()
                     newShareDialog.arguments = bundle
                     newShareDialog.show(parentFragmentManager, null)
                     parentFragmentManager.setFragmentResultListener(
-                        "requestKey",
+                        IntentData.requestKey,
                         this
                     ) { _, resultBundle ->
-                        val newDescription = resultBundle.getString("bundleKey")!!
+                        val newDescription = resultBundle.getString(IntentData.playlistDescription)!!
                         onChangeDescription.invoke(newDescription)
                     }
                 }
