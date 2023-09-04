@@ -10,7 +10,7 @@ jobs:
   merge:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: AutoMerge Weblate translations
         if: github.event.pull_request.user.login == 'weblate'
         run: gh pr merge --auto --delete-branch --merge "$PR_URL"
