@@ -396,12 +396,12 @@
         <item quantity="other">%d il əvvəl</item>
     </plurals>
     <string name="lbry_hls">LBRY HLS</string>
-    <string name="lbry_hls_summary">Mövcuddursa, yayım üçün LBRY HLS istifadə et.</string>
+    <string name="lbry_hls_summary">Mövcuddursa, yayımlama üçün LBRY HLS istifadə et.</string>
     <string name="subscriberAndVideoCounts">%1$s abunəçi • %2$d video</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d video</string>
     <string name="disable_proxy">Piped proksini bağla</string>
     <string name="disable_proxy_summary">Videoları və şəkilləri birbaşa YouTube serverlərindən yüklə. Seçimi, ancaq VPN istifadə edirsinizsə aktivləşdirin!</string>
-    <string name="auto_fullscreen_shorts">Qısa videolarda avto tam ekran</string>
+    <string name="auto_fullscreen_shorts">Qısa videolarda avtomatik tam ekran</string>
     <string name="edit_group">Qrupu redaktə et</string>
     <string name="channel_groups">Kanal qrupları</string>
     <string name="group_name">Qrup adı</string>
@@ -417,13 +417,13 @@
     <string name="show_stream_thumbnails">Yayım miniatürləri göstər</string>
     <string name="show_stream_thumbnails_summary">Yeni yayımların miniatürlərin göstər. Bu aktivləşdirilsə əlavə məlumat sərf ediləcək.</string>
     <string name="unlimited_search_history">Qeyri-məhdud axtarış tarixçəsi</string>
-    <string name="duration_reversed">Müddət (əks)</string>
+    <string name="duration_reversed">Müddət (çevrilib)</string>
     <string name="duration">Müddət</string>
     <string name="shorts_notifications">Qısa videolar üçün bildirişlər</string>
     <string name="alphabetic">Əlifba</string>
-    <string name="alphabetic_reversed">Əlifba (əks)</string>
+    <string name="alphabetic_reversed">Əlifba (çevrilib)</string>
     <string name="creation_date">Yaradılma tarixi</string>
-    <string name="creation_date_reversed">Yaradılma tarixi (əks)</string>
+    <string name="creation_date_reversed">Yaradılma tarixi (çevrilib)</string>
     <string name="export_subscriptions_to">Abunəlikləri bura ixrac et</string>
     <string name="import_format_newpipe">NewPipe</string>
     <string name="import_format_freetube">FreeTube</string>
@@ -432,7 +432,7 @@
     <string name="import_playlists_from">Oynatma siyahısın buradan idxal et</string>
     <string name="export_playlists_to">Oynatma siyahısın ixrac et</string>
     <string name="import_format_piped">Piped / LibreTube</string>
-    <string name="home_tab_content">Əsas panel məzmunu</string>
+    <string name="home_tab_content">Əsas səhifə məzmunu</string>
     <string name="welcome">LibreTube-a Xoş Gəlmisiniz</string>
     <string name="choose_instance">Xahiş olunur, əvvəlcə instansiya seçin!</string>
     <string name="mark_as_unwatched">Baxılmamış kimi işarələ</string>
@@ -505,6 +505,6 @@
     <string name="segment_type">Bölüm növü</string>
     <string name="sb_invalid_segment">Yanlış bölüm başlanğıcı və ya sonu</string>
     <string name="proxy">Proksi</string>
-    <string name="group_name_error_empty">Xahiş olunur ad daxil et</string>
-    <string name="group_name_error_exists">Xahiş olunur nadir ad seç</string>
+    <string name="group_name_error_empty">Xahiş olunur, ad daxil et</string>
+    <string name="group_name_error_exists">Xahiş olunur, nadir ad seç</string>
 </resources>
