@@ -125,7 +125,8 @@ class PlaylistOptionsBottomSheet(
                         IntentData.requestKey,
                         this
                     ) { _, resultBundle ->
-                        val newDescription = resultBundle.getString(IntentData.playlistDescription)!!
+                        val newDescription =
+                            resultBundle.getString(IntentData.playlistDescription)!!
                         onChangeDescription.invoke(newDescription)
                     }
                 }

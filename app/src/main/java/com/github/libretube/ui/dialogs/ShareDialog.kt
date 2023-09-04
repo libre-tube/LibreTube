@@ -2,7 +2,6 @@ package com.github.libretube.ui.dialogs
 
 import android.app.Dialog
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
@@ -14,6 +13,8 @@ import com.github.libretube.constants.YOUTUBE_FRONTEND_URL
 import com.github.libretube.databinding.DialogShareBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.enums.ShareObjectType
+import com.github.libretube.extensions.parcelable
+import com.github.libretube.extensions.serializable
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.ShareData
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -29,14 +30,8 @@ class ShareDialog : DialogFragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             id = it.getString(IntentData.id)!!
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                shareObjectType =
-                    it.getSerializable(IntentData.shareObjectType, ShareObjectType::class.java)!!
-                shareData = it.getParcelable(IntentData.shareData, ShareData::class.java)!!
-            } else {
-                shareObjectType = it.getSerializable(IntentData.shareObjectType) as ShareObjectType
-                shareData = it.getParcelable(IntentData.shareData)!!
-            }
+            shareObjectType = it.serializable(IntentData.shareObjectType)!!
+            shareData = it.parcelable(IntentData.shareData)!!
         }
     }
 
