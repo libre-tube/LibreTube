@@ -2,8 +2,6 @@ package com.github.libretube.ui.preferences
 
 import android.os.Bundle
 import androidx.annotation.StringRes
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.commitNow
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import com.github.libretube.BuildConfig
@@ -22,56 +20,6 @@ class MainSettings : BasePreferenceFragment() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.settings, rootKey)
-
-        val general = findPreference<Preference>("general")
-        general?.setOnPreferenceClickListener {
-            navigateToSettingsFragment(GeneralSettings())
-        }
-
-        val instance = findPreference<Preference>("instance")
-        instance?.setOnPreferenceClickListener {
-            navigateToSettingsFragment(InstanceSettings())
-        }
-
-        val appearance = findPreference<Preference>("appearance")
-        appearance?.setOnPreferenceClickListener {
-            navigateToSettingsFragment(AppearanceSettings())
-        }
-
-        val sponsorBlock = findPreference<Preference>("sponsorblock")
-        sponsorBlock?.setOnPreferenceClickListener {
-            navigateToSettingsFragment(SponsorBlockSettings())
-        }
-
-        val player = findPreference<Preference>("player")
-        player?.setOnPreferenceClickListener {
-            navigateToSettingsFragment(PlayerSettings())
-        }
-
-        val audioVideo = findPreference<Preference>("audio_video")
-        audioVideo?.setOnPreferenceClickListener {
-            navigateToSettingsFragment(AudioVideoSettings())
-        }
-
-        val history = findPreference<Preference>("history")
-        history?.setOnPreferenceClickListener {
-            navigateToSettingsFragment(HistorySettings())
-        }
-
-        val notifications = findPreference<Preference>("notifications")
-        notifications?.setOnPreferenceClickListener {
-            navigateToSettingsFragment(NotificationSettings())
-        }
-
-        val backupRestore = findPreference<Preference>("backup_restore")
-        backupRestore?.setOnPreferenceClickListener {
-            navigateToSettingsFragment(BackupRestoreSettings())
-        }
-
-        val advanced = findPreference<Preference>("advanced")
-        advanced?.setOnPreferenceClickListener {
-            navigateToSettingsFragment(AdvancedSettings())
-        }
 
         val update = findPreference<Preference>("update")
 
@@ -116,12 +64,5 @@ class MainSettings : BasePreferenceFragment() {
             Snackbar.make(it.root, text, Snackbar.LENGTH_SHORT)
                 .show()
         }
-    }
-
-    private fun navigateToSettingsFragment(newFragment: Fragment): Boolean {
-        parentFragmentManager.commitNow {
-            replace(R.id.settings, newFragment)
-        }
-        return true
     }
 }
