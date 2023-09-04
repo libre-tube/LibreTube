@@ -3,9 +3,12 @@ package com.github.libretube.ui.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import androidx.annotation.StringRes
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
+import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.BackupFile
@@ -13,12 +16,13 @@ import com.github.libretube.obj.PreferenceItem
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonPrimitive
 
-class BackupDialog(
-    private val createBackupFile: (BackupFile) -> Unit
-) : DialogFragment() {
+class BackupDialog : DialogFragment() {
     sealed class BackupOption(
         @StringRes val name: Int,
         val onSelected: suspend (BackupFile) -> Unit
@@ -97,7 +101,13 @@ class BackupDialog(
                     backupOptions.forEachIndexed { index, option ->
                         if (selected[index]) option.onSelected(backupFile)
                     }
-                    createBackupFile(backupFile)
+                    val encodedBackupFile = Json.encodeToString(backupFile)
+                    withContext(Dispatchers.Main) {
+                        setFragmentResult(
+                            IntentData.requestKey,
+                            bundleOf(IntentData.backupFile to encodedBackupFile)
+                        )
+                    }
                 }
             }
             .create()

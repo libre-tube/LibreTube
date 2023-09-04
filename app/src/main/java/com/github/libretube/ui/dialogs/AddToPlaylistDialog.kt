@@ -39,10 +39,17 @@ class AddToPlaylistDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogAddToPlaylistBinding.inflate(layoutInflater)
 
-        binding.createPlaylist.setOnClickListener {
-            CreatePlaylistDialog {
+        childFragmentManager.setFragmentResultListener(
+            IntentData.requestKey,
+            this
+        ) { _, resultBundle ->
+            val addedToPlaylist = resultBundle.getBoolean(IntentData.playlistTask)
+            if (addedToPlaylist) {
                 fetchPlaylists(binding)
-            }.show(childFragmentManager, null)
+            }
+        }
+        binding.createPlaylist.setOnClickListener {
+            CreatePlaylistDialog().show(childFragmentManager, null)
         }
 
         fetchPlaylists(binding)

@@ -3,10 +3,13 @@ package com.github.libretube.ui.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogCreatePlaylistBinding
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -15,9 +18,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
-class CreatePlaylistDialog(
-    private val onSuccess: () -> Unit = {}
-) : DialogFragment() {
+class CreatePlaylistDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogCreatePlaylistBinding.inflate(layoutInflater)
 
@@ -34,7 +35,10 @@ class CreatePlaylistDialog(
                         }.getOrNull()
                     }
                     if (playlistId != null) {
-                        onSuccess()
+                        setFragmentResult(
+                            IntentData.requestKey,
+                            bundleOf(IntentData.playlistTask to true)
+                        )
                     }
                     appContext?.toastFromMainDispatcher(
                         if (playlistId != null) R.string.playlistCloned else R.string.server_error
@@ -66,7 +70,12 @@ class CreatePlaylistDialog(
                     appContext?.toastFromMainDispatcher(
                         if (playlistId != null) R.string.playlistCreated else R.string.unknown_error
                     )
-                    playlistId?.let { onSuccess() }
+                    playlistId?.let {
+                        setFragmentResult(
+                            IntentData.requestKey,
+                            bundleOf(IntentData.playlistTask to true)
+                        )
+                    }
                     dismiss()
                 }
             } else {

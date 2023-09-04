@@ -5,13 +5,16 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Login
 import com.github.libretube.api.obj.Token
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogLoginBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
@@ -22,9 +25,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
-class LoginDialog(
-    private val onLogin: () -> Unit
-) : DialogFragment() {
+class LoginDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogLoginBinding.inflate(layoutInflater)
 
@@ -98,7 +99,10 @@ class LoginDialog(
             PreferenceHelper.setUsername(login.username)
 
             withContext(Dispatchers.Main) {
-                onLogin.invoke()
+                setFragmentResult(
+                    IntentData.requestKey,
+                    bundleOf(IntentData.loginTask to true)
+                )
             }
             dialog?.dismiss()
         }

@@ -11,6 +11,7 @@ import com.github.libretube.R
 import com.github.libretube.api.InstanceHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Instances
+import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.extensions.toastFromMainDispatcher
@@ -100,24 +101,33 @@ class InstanceSettings : BasePreferenceFragment() {
         logout?.isVisible = token.isNotEmpty()
         deleteAccount?.isEnabled = token.isNotEmpty()
 
-        login?.setOnPreferenceClickListener {
-            LoginDialog {
-                login.isVisible = false
+        childFragmentManager.setFragmentResultListener(
+            IntentData.requestKey,
+            this
+        ) { _, resultBundle ->
+            val isLoggedIn = resultBundle.getBoolean(IntentData.loginTask)
+            val isLoggedOut = resultBundle.getBoolean(IntentData.logoutTask)
+            if (isLoggedIn) {
+                login?.isVisible = false
                 logout?.isVisible = true
                 deleteAccount?.isEnabled = true
+            } else if (isLoggedOut) {
+                logoutAndUpdateUI()
             }
-                .show(childFragmentManager, LoginDialog::class.java.name)
+        }
+
+        login?.setOnPreferenceClickListener {
+            LoginDialog().show(childFragmentManager, LoginDialog::class.java.name)
             true
         }
 
         logout?.setOnPreferenceClickListener {
-            LogoutDialog(this::logoutAndUpdateUI)
-                .show(childFragmentManager, LogoutDialog::class.java.name)
+            LogoutDialog().show(childFragmentManager, LogoutDialog::class.java.name)
             true
         }
 
         deleteAccount?.setOnPreferenceClickListener {
-            DeleteAccountDialog(this::logoutAndUpdateUI)
+            DeleteAccountDialog()
                 .show(childFragmentManager, DeleteAccountDialog::class.java.name)
             true
         }

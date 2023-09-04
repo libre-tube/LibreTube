@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.obj.Playlists
+import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentLibraryBinding
 import com.github.libretube.db.DatabaseHolder
@@ -92,10 +93,19 @@ class LibraryFragment : Fragment() {
             fetchPlaylists()
             initBookmarks()
         }
-        binding.createPlaylist.setOnClickListener {
-            CreatePlaylistDialog {
+
+        childFragmentManager.setFragmentResultListener(
+            IntentData.requestKey,
+            this
+        ) { _, resultBundle ->
+            val isPlaylistCreated = resultBundle.getBoolean(IntentData.playlistTask)
+            if (isPlaylistCreated) {
                 fetchPlaylists()
-            }.show(childFragmentManager, CreatePlaylistDialog::class.java.name)
+            }
+        }
+        binding.createPlaylist.setOnClickListener {
+            CreatePlaylistDialog()
+                .show(childFragmentManager, CreatePlaylistDialog::class.java.name)
         }
 
         val sortOptions = resources.getStringArray(R.array.playlistSortingOptions)
