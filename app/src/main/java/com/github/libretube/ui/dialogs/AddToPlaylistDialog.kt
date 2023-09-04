@@ -33,9 +33,7 @@ class AddToPlaylistDialog : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            videoId = it.getString(IntentData.videoId)
-        }
+        videoId = arguments?.getString(IntentData.videoId)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
