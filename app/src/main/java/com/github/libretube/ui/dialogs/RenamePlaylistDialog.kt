@@ -6,10 +6,13 @@ import android.os.Bundle
 import android.text.InputType
 import android.util.Log
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogTextPreferenceBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
@@ -18,11 +21,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class RenamePlaylistDialog(
-    private val playlistId: String,
-    private val currentPlaylistName: String,
-    private val onSuccess: (String) -> Unit
-) : DialogFragment() {
+class RenamePlaylistDialog : DialogFragment() {
+    private lateinit var playlistId: String
+    private lateinit var currentPlaylistName: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            playlistId = it.getString(IntentData.playlistId)!!
+            currentPlaylistName = it.getString(IntentData.playlistName)!!
+        }
+    }
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogTextPreferenceBinding.inflate(layoutInflater)
         binding.input.inputType = InputType.TYPE_CLASS_TEXT
@@ -62,7 +71,10 @@ class RenamePlaylistDialog(
                         }
                         if (success) {
                             appContext.toastFromMainDispatcher(R.string.success)
-                            onSuccess.invoke(newPlaylistName)
+                            setFragmentResult(
+                                IntentData.requestKey,
+                                bundleOf(IntentData.playlistName to newPlaylistName)
+                            )
                         } else {
                             appContext.toastFromMainDispatcher(R.string.server_error)
                         }

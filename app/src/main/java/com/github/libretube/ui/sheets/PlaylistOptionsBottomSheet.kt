@@ -102,15 +102,23 @@ class PlaylistOptionsBottomSheet(
                 }
 
                 getString(R.string.deletePlaylist) -> {
-                    DeletePlaylistDialog(playlistId, playlistType) {
-                        // try to refresh the playlists in the library on deletion success
-                        onDelete()
-                    }.show(parentFragmentManager, null)
+                    val bundle = bundleOf(
+                        IntentData.playlistId to playlistId,
+                        IntentData.playlistType to playlistType
+                    )
+                    val newDeletePlaylistDialog = DeletePlaylistDialog()
+                    newDeletePlaylistDialog.arguments = bundle
+                    newDeletePlaylistDialog.show(parentFragmentManager, null)
                 }
 
                 getString(R.string.renamePlaylist) -> {
-                    RenamePlaylistDialog(playlistId, playlistName, onRename)
-                        .show(parentFragmentManager, null)
+                    val bundle = bundleOf(
+                        IntentData.playlistId to playlistId,
+                        IntentData.playlistName to playlistName
+                    )
+                    val newRenamePlaylistDialog = RenamePlaylistDialog()
+                    newRenamePlaylistDialog.arguments = bundle
+                    newRenamePlaylistDialog.show(parentFragmentManager, null)
                 }
 
                 getString(R.string.change_playlist_description) -> {
@@ -118,17 +126,9 @@ class PlaylistOptionsBottomSheet(
                         IntentData.playlistId to playlistId,
                         IntentData.playlistDescription to ""
                     )
-                    val newShareDialog = PlaylistDescriptionDialog()
-                    newShareDialog.arguments = bundle
-                    newShareDialog.show(parentFragmentManager, null)
-                    parentFragmentManager.setFragmentResultListener(
-                        IntentData.requestKey,
-                        this
-                    ) { _, resultBundle ->
-                        val newDescription =
-                            resultBundle.getString(IntentData.playlistDescription)!!
-                        onChangeDescription.invoke(newDescription)
-                    }
+                    val newPlaylistDescriptionDialog = PlaylistDescriptionDialog()
+                    newPlaylistDescriptionDialog.arguments = bundle
+                    newPlaylistDescriptionDialog.show(parentFragmentManager, null)
                 }
 
                 else -> {

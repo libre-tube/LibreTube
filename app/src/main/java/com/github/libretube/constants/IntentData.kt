@@ -17,6 +17,7 @@ object IntentData {
     const val minimizeByDefault = "minimizeByDefault"
     const val query = "query"
     const val playlistDescription = "playlistDescription"
+    const val playlistName = "playlistName"
     const val shareObjectType = "shareObjectType"
     const val shareData = "shareData"
     const val currentPosition = "currentPosition"
@@ -27,4 +28,5 @@ object IntentData {
     const val playlistTask = "playlistTask"
     const val loginTask = "loginTask"
     const val logoutTask = "logoutTask"
+    const val color = "color"
 }
