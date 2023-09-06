@@ -14,12 +14,11 @@ import com.github.libretube.util.TextUtils.toTimeInSeconds
 class RouterActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (intent.getStringExtra(Intent.EXTRA_TEXT) != null) {
-            // start processing the given text
-            handleSendText(intent.getStringExtra(Intent.EXTRA_TEXT)!!.toUri())
-        } else if (intent.data != null) {
-            // link shared as text to the app
-            handleSendText(intent.data!!)
+        val uri = intent.getStringExtra(Intent.EXTRA_TEXT)?.toUri() ?: intent.data
+        if (uri != null) {
+            // Start processing the given text, if available. Otherwise use the link shared as text
+            // to the app.
+            handleSendText(uri)
         } else {
             // start app as normal if unknown action, shouldn't be reachable
             NavigationHelper.restartMainActivity(this)
@@ -30,65 +29,25 @@ class RouterActivity : BaseActivity() {
      * Resolve the uri and return a bundle with the arguments
      */
     private fun Intent.resolveType(uri: Uri) = apply {
-        val channelNamePaths = listOf("/c/", "/user/")
-        val videoPaths = listOf("/shorts/", "/embed/", "/v/", "/live/")
+        val lastSegment = uri.lastPathSegment
+        val secondLastSegment = uri.pathSegments.getOrNull(uri.pathSegments.size - 2)
         when {
-            uri.path!!.contains("/results") -> {
-                val searchQuery = uri.getQueryParameter("search_query")
-
-                putExtra(IntentData.query, searchQuery)
+            lastSegment == "results" -> {
+                putExtra(IntentData.query, uri.getQueryParameter("search_query"))
             }
-
-            uri.path!!.contains("/channel/") -> {
-                val channelId = uri.path!!
-                    .replace("/channel/", "")
-
-                putExtra(IntentData.channelId, channelId)
+            secondLastSegment == "channel" -> {
+                putExtra(IntentData.channelId, lastSegment)
             }
-
-            channelNamePaths.any { uri.path!!.contains(it) } -> {
-                var channelName = uri.path!!
-
-                channelNamePaths.forEach {
-                    channelName = channelName.replace(it, "")
-                }
-
-                putExtra(IntentData.channelName, channelName)
+            secondLastSegment == "c" || secondLastSegment == "user" -> {
+                putExtra(IntentData.channelName, lastSegment)
             }
-
-            uri.path!!.contains("/playlist") -> {
-                val playlistId = uri.getQueryParameter("list")
-
-                putExtra(IntentData.playlistId, playlistId)
+            lastSegment == "playlist" -> {
+                putExtra(IntentData.playlistId, uri.getQueryParameter("list"))
             }
-
-            videoPaths.any { uri.path!!.contains(it) } -> {
-                var videoId = uri.path!!
-
-                videoPaths.forEach {
-                    videoId = videoId.replace(it, "")
-                }
-
-                putExtra(IntentData.videoId, videoId)
-
-                uri.getQueryParameter("t")
-                    ?.let { putExtra(IntentData.timeStamp, it.toTimeInSeconds()) }
-            }
-
-            uri.path!!.contains("/watch") && uri.query != null -> {
-                val videoId = uri.getQueryParameter("v")
-
-                putExtra(IntentData.videoId, videoId)
-                uri.getQueryParameter("t")
-                    ?.let { putExtra(IntentData.timeStamp, it.toTimeInSeconds()) }
-            }
-
             else -> {
-                val videoId = uri.path!!.replace("/", "")
-
-                putExtra(IntentData.videoId, videoId)
-                uri.getQueryParameter("t")
-                    ?.let { putExtra(IntentData.timeStamp, it.toTimeInSeconds()) }
+                val id = if (lastSegment == "watch") uri.getQueryParameter("v") else lastSegment
+                putExtra(IntentData.videoId, id)
+                putExtra(IntentData.timeStamp, uri.getQueryParameter("t")?.toTimeInSeconds())
             }
         }
     }
@@ -96,9 +55,7 @@ class RouterActivity : BaseActivity() {
     private fun handleSendText(uri: Uri) {
         Log.i(TAG(), uri.toString())
 
-        val intent = this.packageManager.getLaunchIntentForPackage(
-            this.packageName
-        )!!.resolveType(uri)
+        val intent = packageManager.getLaunchIntentForPackage(packageName)!!.resolveType(uri)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finishAndRemoveTask()
