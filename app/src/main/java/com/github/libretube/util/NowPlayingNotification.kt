@@ -2,7 +2,6 @@ package com.github.libretube.util
 
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -74,7 +73,7 @@ class NowPlayingNotification(
         }
     }
 
-    private fun createCurrentContentIntent(): PendingIntent {
+    private fun createCurrentContentIntent(): PendingIntent? {
         // starts a new MainActivity Intent when the player notification is clicked
         // it doesn't start a completely new MainActivity because the MainActivity's launchMode
         // is set to "singleTop" in the AndroidManifest (important!!!)
@@ -85,11 +84,12 @@ class NowPlayingNotification(
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             }
         }
-        return PendingIntentCompat.getActivity(context, 0, intent, FLAG_UPDATE_CURRENT, false)
+        return PendingIntentCompat
+            .getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT, false)
     }
 
-    private fun createDeleteIntent(): PendingIntent {
-        val intent = Intent(STOP).setPackage(context.packageName)
+    private fun createIntent(action: String): PendingIntent? {
+        val intent = Intent(action).setPackage(context.packageName)
         return PendingIntentCompat
             .getBroadcast(context, 1, intent, PendingIntent.FLAG_CANCEL_CURRENT, false)
     }
@@ -141,10 +141,8 @@ class NowPlayingNotification(
         drawableRes: Int,
         actionName: String
     ): NotificationCompat.Action {
-        val intent = Intent(actionName).setPackage(context.packageName)
-        val pendingIntent = PendingIntentCompat
-            .getBroadcast(context, 1, intent, PendingIntent.FLAG_CANCEL_CURRENT, false)
-        return NotificationCompat.Action.Builder(drawableRes, actionName, pendingIntent).build()
+        return NotificationCompat.Action.Builder(drawableRes, actionName, createIntent(actionName))
+            .build()
     }
 
     private fun createMediaSessionAction(
@@ -351,7 +349,7 @@ class NowPlayingNotification(
         notificationBuilder = NotificationCompat.Builder(context, PLAYER_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_lockscreen)
             .setContentIntent(createCurrentContentIntent())
-            .setDeleteIntent(createDeleteIntent())
+            .setDeleteIntent(createIntent(STOP))
             .setStyle(
                 MediaStyle()
                     .setMediaSession(mediaSession.sessionToken)
