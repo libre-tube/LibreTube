@@ -26,7 +26,6 @@ import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_CHANNEL_ID
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
-import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.toMediaMetadataCompat
 import com.github.libretube.helpers.BackgroundHelper
@@ -34,6 +33,7 @@ import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.ui.activities.MainActivity
+import java.util.UUID
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class NowPlayingNotification(
@@ -205,7 +205,7 @@ class NowPlayingNotification(
             }
         }
 
-        mediaSession = MediaSessionCompat(context, TAG())
+        mediaSession = MediaSessionCompat(context, UUID.randomUUID().toString())
         mediaSession.setCallback(sessionCallback)
 
         updateSessionMetadata()
