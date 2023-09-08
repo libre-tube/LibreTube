@@ -513,4 +513,5 @@
     <string name="sb_create_segment">Створити сегмент</string>
     <string name="segment_type">Тип сегмента</string>
     <string name="sb_invalid_segment">Недійсний початок або кінець сегмента</string>
+    <string name="contribute_to_sponsorblock">Зробити внесок до SponsorBlock</string>
 </resources>
