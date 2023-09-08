@@ -471,6 +471,7 @@
     <string name="sb_create_segment">Create segment</string>
     <string name="segment_type">Segment type</string>
     <string name="sb_invalid_segment">Invalid segment start or end</string>
+    <string name="contribute_to_sponsorblock">Contribute to SponsorBlock</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

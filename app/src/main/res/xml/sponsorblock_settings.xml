@@ -18,6 +18,14 @@
         app:title="@string/sponsorblock_notifications" />
 
     <SwitchPreferenceCompat
+        android:dependency="sb_contribute_key"
+        android:summaryOff="@string/disabled"
+        android:summaryOn="@string/enabled"
+        app:defaultValue="false"
+        app:key="sb_contribute_key"
+        app:title="@string/contribute_to_sponsorblock" />
+
+    <SwitchPreferenceCompat
         app:defaultValue="false"
         app:key="dearrow"
         app:summary="@string/dearrow_summary"
