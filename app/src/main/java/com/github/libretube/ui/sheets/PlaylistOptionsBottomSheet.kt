@@ -13,6 +13,7 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.obj.ShareData
+import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.DeletePlaylistDialog
 import com.github.libretube.ui.dialogs.PlaylistDescriptionDialog
 import com.github.libretube.ui.dialogs.RenamePlaylistDialog
@@ -58,6 +59,8 @@ class PlaylistOptionsBottomSheet(
         }
 
         setSimpleItems(optionsList) { which ->
+            val mFragmentManager = (context as BaseActivity).supportFragmentManager
+
             when (optionsList[which]) {
                 // play the playlist in the background
                 getString(R.string.playOnBackground) -> {
@@ -102,33 +105,39 @@ class PlaylistOptionsBottomSheet(
                 }
 
                 getString(R.string.deletePlaylist) -> {
-                    val bundle = bundleOf(
+                    mFragmentManager.setFragmentResultListener(IntentData.requestKey, context as BaseActivity) { _, bundle ->
+                        if (bundle.getBoolean(IntentData.playlistTask, true)) onDelete()
+                    }
+                    val newDeletePlaylistDialog = DeletePlaylistDialog()
+                    newDeletePlaylistDialog.arguments = bundleOf(
                         IntentData.playlistId to playlistId,
                         IntentData.playlistType to playlistType
                     )
-                    val newDeletePlaylistDialog = DeletePlaylistDialog()
-                    newDeletePlaylistDialog.arguments = bundle
-                    newDeletePlaylistDialog.show(parentFragmentManager, null)
+                    newDeletePlaylistDialog.show(mFragmentManager, null)
                 }
 
                 getString(R.string.renamePlaylist) -> {
-                    val bundle = bundleOf(
+                    mFragmentManager.setFragmentResultListener(IntentData.requestKey, context as BaseActivity) { _, bundle ->
+                        onRename(bundle.getString(IntentData.playlistName, ""))
+                    }
+                    val newRenamePlaylistDialog = RenamePlaylistDialog()
+                    newRenamePlaylistDialog.arguments = bundleOf(
                         IntentData.playlistId to playlistId,
                         IntentData.playlistName to playlistName
                     )
-                    val newRenamePlaylistDialog = RenamePlaylistDialog()
-                    newRenamePlaylistDialog.arguments = bundle
-                    newRenamePlaylistDialog.show(parentFragmentManager, null)
+                    newRenamePlaylistDialog.show(mFragmentManager, null)
                 }
 
                 getString(R.string.change_playlist_description) -> {
-                    val bundle = bundleOf(
+                    mFragmentManager.setFragmentResultListener(IntentData.requestKey, context as BaseActivity) { _, bundle ->
+                        onChangeDescription(bundle.getString(IntentData.playlistName, ""))
+                    }
+                    val newPlaylistDescriptionDialog = PlaylistDescriptionDialog()
+                    newPlaylistDescriptionDialog.arguments = bundleOf(
                         IntentData.playlistId to playlistId,
                         IntentData.playlistDescription to ""
                     )
-                    val newPlaylistDescriptionDialog = PlaylistDescriptionDialog()
-                    newPlaylistDescriptionDialog.arguments = bundle
-                    newPlaylistDescriptionDialog.show(parentFragmentManager, null)
+                    newPlaylistDescriptionDialog.show(mFragmentManager, null)
                 }
 
                 else -> {
