@@ -51,6 +51,7 @@ import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.util.DataSaverMode
 import com.github.libretube.util.PlayingQueue
+import com.google.android.material.elevation.SurfaceColors
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 
@@ -237,6 +238,9 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     private fun initializeTransitionLayout() {
         mainActivity.binding.container.isVisible = true
         val mainMotionLayout = mainActivity.binding.mainMotionLayout
+
+        val surfaceColor = SurfaceColors.getColorForElevation(requireContext(), 3f)
+        binding.audioPlayerContainer.setBackgroundColor(surfaceColor)
 
         binding.playerMotionLayout.addTransitionListener(object : TransitionAdapter() {
             override fun onTransitionChange(
