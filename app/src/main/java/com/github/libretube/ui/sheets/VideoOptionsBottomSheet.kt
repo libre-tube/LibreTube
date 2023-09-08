@@ -132,7 +132,7 @@ class VideoOptionsBottomSheet(
                         // get the current fragment
                         val fragment = navHostFragment?.childFragmentManager?.fragments
                             ?.firstOrNull() as? SubscriptionsFragment
-                        fragment?.subscriptionsAdapter?.removeItemById(videoId)
+                        fragment?.feedAdapter?.removeItemById(videoId)
                     }
                     onVideoChanged()
                 }

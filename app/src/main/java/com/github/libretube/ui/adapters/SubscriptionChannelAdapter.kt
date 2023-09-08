@@ -16,8 +16,9 @@ import com.github.libretube.ui.viewholders.SubscriptionChannelViewHolder
 class SubscriptionChannelAdapter(
     private val subscriptions: MutableList<Subscription>
 ) : RecyclerView.Adapter<SubscriptionChannelViewHolder>() {
+    private var visibleCount = 20
 
-    override fun getItemCount() = subscriptions.size
+    override fun getItemCount() = minOf(visibleCount, subscriptions.size)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -26,6 +27,13 @@ class SubscriptionChannelAdapter(
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ChannelSubscriptionRowBinding.inflate(layoutInflater, parent, false)
         return SubscriptionChannelViewHolder(binding)
+    }
+
+    fun updateItems() {
+        val oldSize = visibleCount
+        visibleCount += minOf(10, subscriptions.size - oldSize)
+        if (visibleCount == oldSize) return
+        notifyItemRangeInserted(oldSize, visibleCount)
     }
 
     override fun onBindViewHolder(holder: SubscriptionChannelViewHolder, position: Int) {
