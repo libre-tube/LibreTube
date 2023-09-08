@@ -144,6 +144,7 @@ object PreferenceKeys {
     const val CLEAR_BOOKMARKS = "clear_bookmarks"
     const val MAX_CONCURRENT_DOWNLOADS = "max_concurrent_downloads"
     const val DISABLE_VIDEO_IMAGE_PROXY = "disable_video_image_proxy"
+    const val CONTRIBUTE_TO_SB = "sb_contribute_key"
 
     /**
      * History

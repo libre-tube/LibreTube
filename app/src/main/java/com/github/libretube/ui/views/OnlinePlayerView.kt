@@ -13,8 +13,10 @@ import androidx.media3.exoplayer.trackselection.TrackSelector
 import androidx.media3.ui.PlayerView.ControllerVisibilityListener
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.base.BaseActivity
@@ -166,7 +168,7 @@ class OnlinePlayerView(
             PlayerHelper.autoPlayEnabled = isChecked
         }
 
-        binding.sbSubmit.isVisible = PlayerHelper.sponsorBlockEnabled
+        binding.sbSubmit.isVisible = PreferenceHelper.getBoolean(PreferenceKeys.CONTRIBUTE_TO_SB, false)
         binding.sbSubmit.setOnClickListener {
             val currentPosition = player?.currentPosition?.takeIf { it != C.TIME_UNSET } ?: 0
             val duration = player?.duration?.takeIf { it != C.TIME_UNSET }
