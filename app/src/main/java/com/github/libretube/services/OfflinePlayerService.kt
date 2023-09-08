@@ -6,8 +6,10 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
+import androidx.media3.common.C
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_CHANNEL_ID
@@ -16,6 +18,7 @@ import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.enums.FileType
 import com.github.libretube.extensions.toAndroidUri
+import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
 import com.github.libretube.obj.PlayerNotificationData
@@ -78,10 +81,16 @@ class OfflinePlayerService : LifecycleService() {
      */
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
     private fun startAudioPlayer(downloadWithItem: DownloadWithItems): Boolean {
+        val trackSelector = DefaultTrackSelector(this)
+        trackSelector.updateParameters {
+            setTrackTypeDisabled(C.TRACK_TYPE_VIDEO, true)
+        }
+
         player = ExoPlayer.Builder(this)
             .setUsePlatformDiagnostics(false)
             .setHandleAudioBecomingNoisy(true)
             .setAudioAttributes(PlayerHelper.getAudioAttributes(), true)
+            .setTrackSelector(trackSelector)
             .setLoadControl(PlayerHelper.getLoadControl())
             .build()
             .loadPlaybackParams(isBackgroundMode = true)

@@ -51,13 +51,11 @@ object PlayerHelper {
     fun createDashSource(
         streams: Streams,
         context: Context,
-        audioOnly: Boolean = false,
         disableProxy: Boolean
     ): Uri {
         val manifest = DashHelper.createManifest(
             streams,
             DisplayHelper.supportsHdr(context),
-            audioOnly,
             disableProxy
         )
 

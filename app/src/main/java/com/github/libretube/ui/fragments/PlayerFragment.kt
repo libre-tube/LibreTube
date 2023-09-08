@@ -610,10 +610,15 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     override fun onPause() {
-        // pauses the player if the screen is turned off
-
         // check whether the screen is on
         val isInteractive = requireContext().getSystemService<PowerManager>()!!.isInteractive
+
+        // disable video stream since it's not needed when screen off
+        if (!isInteractive && this::trackSelector.isInitialized) {
+            trackSelector.updateParameters {
+                setTrackTypeDisabled(C.TRACK_TYPE_VIDEO, true)
+            }
+        }
 
         // pause player if screen off and setting enabled
         if (this::exoPlayer.isInitialized && !isInteractive &&
@@ -622,6 +627,17 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             exoPlayer.pause()
         }
         super.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // re-enable and load video stream
+        if (this::trackSelector.isInitialized) {
+            trackSelector.updateParameters {
+                setTrackTypeDisabled(C.TRACK_TYPE_VIDEO, false)
+            }
+        }
     }
 
     override fun onDestroy() {
