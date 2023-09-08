@@ -14,7 +14,6 @@ import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
 import android.text.format.DateUtils
-import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +27,7 @@ import androidx.core.graphics.drawable.toDrawable
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
+import androidx.core.text.method.LinkMovementMethodCompat
 import androidx.core.text.parseAsHtml
 import androidx.core.view.WindowCompat
 import androidx.core.view.isGone
@@ -120,16 +120,16 @@ import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
 import com.github.libretube.util.YoutubeHlsPlaylistParser
 import com.github.libretube.util.deArrow
-import java.io.IOException
-import java.util.*
-import java.util.concurrent.Executors
-import kotlin.math.abs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
+import java.io.IOException
+import java.util.*
+import java.util.concurrent.Executors
+import kotlin.math.abs
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class PlayerFragment : Fragment(), OnlinePlayerOptions {
@@ -1093,7 +1093,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     ) {
         // detect whether the description is html formatted
         if (description.contains("<") && description.contains(">")) {
-            descTextView.movementMethod = LinkMovementMethod.getInstance()
+            descTextView.movementMethod = LinkMovementMethodCompat.getInstance()
             descTextView.text = description.replace("</a>", "</a> ")
                 .parseAsHtml(tagHandler = HtmlParser(LinkHandler(this::handleLink)))
         } else {

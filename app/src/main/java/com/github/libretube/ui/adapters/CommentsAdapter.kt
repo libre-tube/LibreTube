@@ -1,13 +1,13 @@
 package com.github.libretube.ui.adapters
 
 import android.annotation.SuppressLint
-import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.os.bundleOf
+import androidx.core.text.method.LinkMovementMethodCompat
 import androidx.core.text.parseAsHtml
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -73,7 +73,7 @@ class CommentsAdapter(
         holder.binding.apply {
             commentInfos.text = comment.author + TextUtils.SEPARATOR + comment.commentedTime
 
-            commentText.movementMethod = LinkMovementMethod.getInstance()
+            commentText.movementMethod = LinkMovementMethodCompat.getInstance()
             commentText.text = comment.commentText?.replace("</a>", "</a> ")
                 ?.parseAsHtml(tagHandler = HtmlParser(LinkHandler(handleLink ?: {})))
 
