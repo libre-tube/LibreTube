@@ -12,6 +12,7 @@ import androidx.core.app.ServiceCompat
 import androidx.core.net.toUri
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
+import androidx.media3.common.C
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MimeTypes
 import androidx.media3.common.PlaybackException
@@ -31,6 +32,7 @@ import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.extensions.parcelableExtra
 import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toID
+import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.checkForSegments
 import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
@@ -236,6 +238,9 @@ class OnlinePlayerService : LifecycleService() {
 
         val trackSelector = DefaultTrackSelector(this)
         PlayerHelper.applyPreferredAudioQuality(this, trackSelector)
+        trackSelector.updateParameters {
+            setTrackTypeDisabled(C.TRACK_TYPE_VIDEO, true)
+        }
 
         player = ExoPlayer.Builder(this)
             .setUsePlatformDiagnostics(false)
@@ -312,7 +317,6 @@ class OnlinePlayerService : LifecycleService() {
             PlayerHelper.createDashSource(
                 streams,
                 this,
-                true,
                 disableProxy
             ) to MimeTypes.APPLICATION_MPD
         } else {

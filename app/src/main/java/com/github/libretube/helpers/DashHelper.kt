@@ -2,13 +2,13 @@ package com.github.libretube.helpers
 
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Streams
+import org.w3c.dom.Document
+import org.w3c.dom.Element
 import java.io.StringWriter
 import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.transform.TransformerFactory
 import javax.xml.transform.dom.DOMSource
 import javax.xml.transform.stream.StreamResult
-import org.w3c.dom.Document
-import org.w3c.dom.Element
 
 // Based off of https://github.com/TeamPiped/Piped/blob/master/src/utils/DashUtils.js
 
@@ -28,7 +28,6 @@ object DashHelper {
     fun createManifest(
         streams: Streams,
         supportsHdr: Boolean,
-        audioOnly: Boolean = false,
         rewriteUrls: Boolean
     ): String {
         val builder = builderFactory.newDocumentBuilder()
@@ -45,30 +44,28 @@ object DashHelper {
 
         val adapSetInfos = ArrayList<AdapSetInfo>()
 
-        if (!audioOnly) {
-            for (
-            stream in streams.videoStreams
-                // used to avoid including LBRY HLS inside the streams in the manifest
-                .filter { !it.format.orEmpty().contains("HLS") }
-                .filter { supportsHdr || !it.quality.orEmpty().uppercase().contains("HDR") }
-            ) {
-                // ignore dual format and OTF streams
-                if (!stream.videoOnly!! || stream.indexEnd!! <= 0) {
-                    continue
-                }
-
-                val adapSetInfo = adapSetInfos.find { it.mimeType == stream.mimeType }
-                if (adapSetInfo != null) {
-                    adapSetInfo.formats.add(stream)
-                    continue
-                }
-                adapSetInfos.add(
-                    AdapSetInfo(
-                        stream.mimeType!!,
-                        mutableListOf(stream)
-                    )
-                )
+        for (
+        stream in streams.videoStreams
+            // used to avoid including LBRY HLS inside the streams in the manifest
+            .filter { !it.format.orEmpty().contains("HLS") }
+            .filter { supportsHdr || !it.quality.orEmpty().uppercase().contains("HDR") }
+        ) {
+            // ignore dual format and OTF streams
+            if (!stream.videoOnly!! || stream.indexEnd!! <= 0) {
+                continue
             }
+
+            val adapSetInfo = adapSetInfos.find { it.mimeType == stream.mimeType }
+            if (adapSetInfo != null) {
+                adapSetInfo.formats.add(stream)
+                continue
+            }
+            adapSetInfos.add(
+                AdapSetInfo(
+                    stream.mimeType!!,
+                    mutableListOf(stream)
+                )
+            )
         }
 
         for (stream in streams.audioStreams) {
