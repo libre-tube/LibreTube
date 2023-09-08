@@ -49,7 +49,8 @@ class SubscriptionsFragment : Fragment() {
     private var selectedFilterGroup = 0
     private var isCurrentTabSubChannels = false
 
-    var subscriptionsAdapter: VideosAdapter? = null
+    var feedAdapter: VideosAdapter? = null
+    private var channelsAdapter: SubscriptionChannelAdapter? = null
     private var selectedSortOrder = PreferenceHelper.getInt(PreferenceKeys.FEED_SORT_ORDER, 0)
         set(value) {
             PreferenceHelper.putInt(PreferenceKeys.FEED_SORT_ORDER, value)
@@ -155,7 +156,11 @@ class SubscriptionsFragment : Fragment() {
                 viewModel.videoFeed.value != null // scroll view is at bottom
             ) {
                 binding.subRefresh.isRefreshing = true
-                subscriptionsAdapter?.updateItems()
+                if (isCurrentTabSubChannels) {
+                    channelsAdapter?.updateItems()
+                } else {
+                    feedAdapter?.updateItems()
+                }
                 binding.subRefresh.isRefreshing = false
             }
         }
@@ -315,11 +320,11 @@ class SubscriptionsFragment : Fragment() {
         binding.subFeedContainer.isGone = notLoaded
         binding.emptyFeed.isVisible = notLoaded
 
-        subscriptionsAdapter = VideosAdapter(
+        feedAdapter = VideosAdapter(
             sortedFeed.toMutableList(),
             showAllAtOnce = false
         )
-        binding.subFeed.adapter = subscriptionsAdapter
+        binding.subFeed.adapter = feedAdapter
         binding.toggleSubsText.text = getString(R.string.subscriptions)
 
         PreferenceHelper.updateLastFeedWatchedTime()
@@ -345,7 +350,8 @@ class SubscriptionsFragment : Fragment() {
             binding.subChannels.adapter = LegacySubscriptionAdapter(subscriptions)
         } else {
             binding.subChannels.layoutManager = LinearLayoutManager(context)
-            binding.subChannels.adapter = SubscriptionChannelAdapter(subscriptions.toMutableList())
+            channelsAdapter = SubscriptionChannelAdapter(subscriptions.toMutableList())
+            binding.subChannels.adapter = channelsAdapter
         }
 
         binding.subRefresh.isRefreshing = false
