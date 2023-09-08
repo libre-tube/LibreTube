@@ -28,10 +28,9 @@ class PlaylistDescriptionDialog : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            playlistId = it.getString(IntentData.playlistId)!!
-            currentPlaylistDescription = it.getString(IntentData.playlistDescription)!!
-        }
+        val arguments = requireArguments()
+        playlistId = arguments.getString(IntentData.playlistId)!!
+        currentPlaylistDescription = arguments.getString(IntentData.playlistDescription)!!
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

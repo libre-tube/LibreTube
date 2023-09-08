@@ -16,21 +16,21 @@ import com.github.libretube.databinding.DialogColorPickerBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ColorPickerDialog : DialogFragment(), SeekBar.OnSeekBarChangeListener {
-    private var initialColor: Int? = null
+    private var initialColor = 0
 
     private var _binding: DialogColorPickerBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initialColor = arguments?.getInt(IntentData.color)!!
+        initialColor = requireArguments().getInt(IntentData.color)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         _binding = DialogColorPickerBinding.inflate(layoutInflater)
 
         // Set initial color
-        setColor(initialColor!!)
+        setColor(initialColor)
 
         binding.alphaSeekBar.setOnSeekBarChangeListener(this)
         binding.redSeekBar.setOnSeekBarChangeListener(this)

@@ -18,8 +18,9 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
     private lateinit var uploader: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        videoId = arguments?.getString(IntentData.videoId)!!
-        uploader = arguments?.getString(IntentData.channelName)!!
+        val arguments = requireArguments()
+        videoId = arguments.getString(IntentData.videoId)!!
+        uploader = arguments.getString(IntentData.channelName)!!
 
         val options = listOf(
             R.string.playOnBackground,

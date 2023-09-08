@@ -30,11 +30,10 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
     private lateinit var playlistType: PlaylistType
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        arguments?.let {
-            playlistName = it.getString(IntentData.playlistName)!!
-            playlistId = it.getString(IntentData.playlistId)!!
-            playlistType = it.serializable(IntentData.playlistType)!!
-        }
+        val arguments = requireArguments()
+        playlistName = arguments.getString(IntentData.playlistName)!!
+        playlistId = arguments.getString(IntentData.playlistId)!!
+        playlistType = arguments.serializable(IntentData.playlistType)!!
 
         setTitle(playlistName)
 

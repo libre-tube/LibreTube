@@ -17,8 +17,7 @@ class IntentChooserSheet : BaseBottomSheet() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        url = arguments?.getString(IntentData.url)!!
+        url = requireArguments().getString(IntentData.url)!!
     }
 
     override fun onCreateView(

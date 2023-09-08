@@ -37,7 +37,7 @@ class DownloadDialog : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        videoId = arguments?.getString(IntentData.videoId)!!
+        videoId = requireArguments().getString(IntentData.videoId)!!
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

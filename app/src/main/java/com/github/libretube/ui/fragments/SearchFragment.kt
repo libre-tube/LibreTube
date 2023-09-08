@@ -33,7 +33,7 @@ class SearchFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.searchQuery.value = arguments?.getString(IntentData.query)
+        viewModel.searchQuery.value = requireArguments().getString(IntentData.query)
     }
 
     override fun onCreateView(

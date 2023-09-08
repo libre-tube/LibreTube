@@ -74,10 +74,9 @@ class PlaylistFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            playlistId = it.getString(IntentData.playlistId)!!.toID()
-            playlistType = it.serializable(IntentData.playlistType) ?: PlaylistType.PUBLIC
-        }
+        val arguments = requireArguments()
+        playlistId = arguments.getString(IntentData.playlistId)!!.toID()
+        playlistType = arguments.serializable(IntentData.playlistType) ?: PlaylistType.PUBLIC
     }
 
     override fun onCreateView(

@@ -28,8 +28,9 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        channelId = arguments?.getString(IntentData.channelId)!!
-        channelName = arguments?.getString(IntentData.channelName)
+        val arguments = requireArguments()
+        channelId = arguments.getString(IntentData.channelId)!!
+        channelName = arguments.getString(IntentData.channelName)
 
         setTitle(channelName)
 

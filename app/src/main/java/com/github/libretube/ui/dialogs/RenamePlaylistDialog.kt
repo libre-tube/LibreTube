@@ -28,11 +28,11 @@ class RenamePlaylistDialog : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            playlistId = it.getString(IntentData.playlistId)!!
-            currentPlaylistName = it.getString(IntentData.playlistName)!!
-        }
+        val arguments = requireArguments()
+        playlistId = arguments.getString(IntentData.playlistId)!!
+        currentPlaylistName = arguments.getString(IntentData.playlistName)!!
     }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogTextPreferenceBinding.inflate(layoutInflater)
         binding.input.inputType = InputType.TYPE_CLASS_TEXT

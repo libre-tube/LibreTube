@@ -23,17 +23,16 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SubmitSegmentDialog : DialogFragment() {
-    private var videoId: String = ""
-    private var currentPosition: Long = 0
-    private var duration: Long? = null
+    private var videoId = ""
+    private var currentPosition = 0L
+    private var duration = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            videoId = it.getString(IntentData.videoId)!!
-            currentPosition = it.getLong(IntentData.currentPosition)
-            duration = it.getLong(IntentData.duration)
-        }
+        val arguments = requireArguments()
+        videoId = arguments.getString(IntentData.videoId)!!
+        currentPosition = arguments.getLong(IntentData.currentPosition)
+        duration = arguments.getLong(IntentData.duration)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -81,21 +80,22 @@ class SubmitSegmentDialog : DialogFragment() {
             return
         }
 
-        if (duration != null) {
+        if (duration != 0L) {
             // the end time can't be greater than the video duration
-            endTime = minOf(endTime, duration!!.toFloat())
+            endTime = minOf(endTime, duration.toFloat())
         }
 
         val categories = resources.getStringArray(R.array.sponsorBlockSegments)
         val category = categories[binding.segmentCategory.selectedItemPosition]
         val userAgent = "${context.packageName}/${BuildConfig.VERSION_NAME}"
         val uuid = PreferenceHelper.getSponsorBlockUserID()
-        val duration = duration?.let { it.toFloat() / 1000 }
 
         try {
             withContext(Dispatchers.IO) {
                 RetrofitInstance.externalApi
-                    .submitSegment(videoId, startTime, endTime, category, userAgent, uuid, duration)
+                    .submitSegment(
+                        videoId, startTime, endTime, category, userAgent, uuid, duration.toFloat()
+                    )
             }
             context.toastFromMainDispatcher(R.string.segment_submitted)
         } catch (e: Exception) {

@@ -26,11 +26,10 @@ class ShareDialog : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            id = it.getString(IntentData.id)!!
-            shareObjectType = it.serializable(IntentData.shareObjectType)!!
-            shareData = it.parcelable(IntentData.shareData)!!
-        }
+        val arguments = requireArguments()
+        id = arguments.getString(IntentData.id)!!
+        shareObjectType = arguments.serializable(IntentData.shareObjectType)!!
+        shareData = arguments.parcelable(IntentData.shareData)!!
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

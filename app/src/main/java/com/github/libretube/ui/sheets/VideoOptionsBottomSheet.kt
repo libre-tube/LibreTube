@@ -39,8 +39,9 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
     private var isCurrentlyPlaying = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        streamItem = arguments?.parcelable(IntentData.streamItem)!!
-        isCurrentlyPlaying = arguments?.getBoolean(IntentData.isCurrentlyPlaying) ?: false
+        val arguments = requireArguments()
+        streamItem = arguments.parcelable(IntentData.streamItem)!!
+        isCurrentlyPlaying = arguments.getBoolean(IntentData.isCurrentlyPlaying)
 
         val videoId = streamItem.url?.toID() ?: return
 

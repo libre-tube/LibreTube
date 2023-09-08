@@ -243,7 +243,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             }
         })
 
-        if (arguments?.getBoolean(IntentData.minimizeByDefault, false) != true) {
+        if (!requireArguments().getBoolean(IntentData.minimizeByDefault, false)) {
             binding.playerMotionLayout.progress = 1f
             binding.playerMotionLayout.transitionToStart()
         } else {

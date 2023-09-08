@@ -22,13 +22,14 @@ import kotlinx.coroutines.withContext
 class DeletePlaylistDialog : DialogFragment() {
     private lateinit var playlistId: String
     private lateinit var playlistType: PlaylistType
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            playlistId = it.getString(IntentData.playlistId)!!
-            playlistType = it.serializable(IntentData.playlistType)!!
-        }
+        val arguments = requireArguments()
+        playlistId = arguments.getString(IntentData.playlistId)!!
+        playlistType = arguments.serializable(IntentData.playlistType)!!
     }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.deletePlaylist)

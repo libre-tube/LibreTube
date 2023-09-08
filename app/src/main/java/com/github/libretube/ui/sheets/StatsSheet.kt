@@ -26,7 +26,7 @@ class StatsSheet : ExpandedBottomSheet() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        stats = arguments?.parcelable(IntentData.videoStats)!!
+        stats = requireArguments().parcelable(IntentData.videoStats)!!
     }
 
     @SuppressLint("SetTextI18n")

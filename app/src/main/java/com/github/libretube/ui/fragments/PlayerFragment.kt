@@ -992,10 +992,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         videoId = nextVideoId
 
         // fix: if the fragment is recreated, play the current video, and not the initial one
-        arguments?.run {
-            val playerData = parcelable<PlayerData>(IntentData.playerData)!!.copy(videoId = videoId)
-            putParcelable(IntentData.playerData, playerData)
-        }
+        val arguments = requireArguments()
+        val playerData = arguments.parcelable<PlayerData>(IntentData.playerData)!!
+            .copy(videoId = videoId)
+        arguments.putParcelable(IntentData.playerData, playerData)
 
         // start to play the next video
         playVideo()

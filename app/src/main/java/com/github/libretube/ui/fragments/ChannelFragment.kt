@@ -59,12 +59,11 @@ class ChannelFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            channelId = it.getString(IntentData.channelId)?.toID()
-            channelName = it.getString(IntentData.channelName)
-                ?.replace("/c/", "")
-                ?.replace("/user/", "")
-        }
+        val arguments = requireArguments()
+        channelId = arguments.getString(IntentData.channelId)?.toID()
+        channelName = arguments.getString(IntentData.channelName)
+            ?.replace("/c/", "")
+            ?.replace("/user/", "")
     }
 
     override fun onCreateView(

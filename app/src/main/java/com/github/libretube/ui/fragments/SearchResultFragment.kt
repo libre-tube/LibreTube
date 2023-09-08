@@ -44,7 +44,7 @@ class SearchResultFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        query = arguments?.getString(IntentData.query).toString()
+        query = requireArguments().getString(IntentData.query, "")
     }
 
     override fun onCreateView(
