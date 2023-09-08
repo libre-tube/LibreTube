@@ -104,6 +104,7 @@
         app:layout_constraintTop_toBottomOf="@id/video_info">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/channel_image_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardCornerRadius="13.5dp">
