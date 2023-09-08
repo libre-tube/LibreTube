@@ -68,7 +68,7 @@ abstract class BasePreferenceFragment : PreferenceFragmentCompat() {
                             preference.values = newValues
                         }
                     }
-                    .setNegativeButton(R.string.cancel, null)
+                    .setPositiveButton(R.string.okay, null)
                     .setOnDismissListener { isDialogVisible = false }
                     .show()
             }
