@@ -49,10 +49,10 @@ object BackgroundHelper {
     /**
      * Stop the [OnlinePlayerService] service if it is running.
      */
-    fun stopBackgroundPlay(context: Context) {
-        if (isBackgroundServiceRunning(context)) {
+    fun stopBackgroundPlay(context: Context, serviceClass: Class<*> = OnlinePlayerService::class.java) {
+        if (isBackgroundServiceRunning(context, serviceClass)) {
             // Intent to stop background mode service
-            val intent = Intent(context, OnlinePlayerService::class.java)
+            val intent = Intent(context, serviceClass)
             context.stopService(intent)
         }
     }
@@ -60,9 +60,9 @@ object BackgroundHelper {
     /**
      * Check if the [OnlinePlayerService] service is currently running.
      */
-    fun isBackgroundServiceRunning(context: Context): Boolean {
+    fun isBackgroundServiceRunning(context: Context, serviceClass: Class<*> = OnlinePlayerService::class.java): Boolean {
         @Suppress("DEPRECATION")
         return context.getSystemService<ActivityManager>()!!.getRunningServices(Int.MAX_VALUE)
-            .any { OnlinePlayerService::class.java.name == it.service.className }
+            .any { serviceClass.name == it.service.className }
     }
 }
