@@ -13,7 +13,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:elevation="10dp"
         app:cardCornerRadius="8dp"
         app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,7 +76,7 @@
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/thumbnailcard"
-        app:layout_constraintStart_toEndOf="@+id/channel_image"
+        app:layout_constraintStart_toEndOf="@+id/channel_image_container"
         app:layout_constraintTop_toBottomOf="@+id/thumbnailcard"
         tools:text="Title" />
 
@@ -94,15 +93,22 @@
         app:layout_constraintTop_toBottomOf="@+id/textView_title"
         tools:text="Channel Name" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/channel_image"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/channel_image_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        app:cardCornerRadius="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/thumbnailcard"
-        app:shapeAppearance="@style/CircleImageView"
-        tools:srcCompat="@mipmap/ic_launcher" />
+        app:layout_constraintTop_toBottomOf="@+id/thumbnailcard">
+
+        <ImageView
+            android:id="@+id/channel_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            tools:srcCompat="@mipmap/ic_launcher" />
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
