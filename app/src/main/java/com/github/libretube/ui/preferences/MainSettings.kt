@@ -52,10 +52,9 @@ class MainSettings : BasePreferenceFragment() {
 
                 if (BuildConfig.VERSION_NAME != updateInfo.name) {
                     // show the UpdateAvailableDialog if there's an update available
-                    val encodedUpdateInfo = Json.encodeToString(updateInfo)
                     val newUpdateAvailableDialog = UpdateAvailableDialog()
                     newUpdateAvailableDialog.arguments =
-                        bundleOf(IntentData.updateInfo to encodedUpdateInfo)
+                        bundleOf(IntentData.updateInfo to updateInfo)
                     newUpdateAvailableDialog.show(
                         childFragmentManager,
                         UpdateAvailableDialog::class.java.name

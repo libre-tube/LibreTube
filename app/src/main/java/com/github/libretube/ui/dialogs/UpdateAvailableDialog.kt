@@ -7,19 +7,16 @@ import androidx.core.net.toUri
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
+import com.github.libretube.extensions.parcelable
 import com.github.libretube.obj.update.UpdateInfo
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.serialization.json.Json
 
 class UpdateAvailableDialog : DialogFragment() {
     private lateinit var updateInfo: UpdateInfo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            val encodedString = it.getString(IntentData.updateInfo)!!
-            updateInfo = Json.decodeFromString(encodedString)
-        }
+        updateInfo = requireArguments().parcelable(IntentData.updateInfo)!!
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
