@@ -103,11 +103,17 @@
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@id/video_info">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/channel_image"
-            android:layout_width="27dp"
-            android:layout_height="27dp"
-            app:shapeAppearance="@style/CircleImageView" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="13.5dp">
+
+            <ImageView
+                android:id="@+id/channel_image"
+                android:layout_width="27dp"
+                android:layout_height="27dp" />
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/channel_name"
