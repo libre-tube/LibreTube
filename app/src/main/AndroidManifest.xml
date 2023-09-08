@@ -351,11 +351,6 @@
             android:exported="false" />
 
         <service
-            android:name=".services.ClosingService"
-            android:enabled="true"
-            android:exported="false" />
-
-        <service
             android:name=".services.OnlinePlayerService"
             android:enabled="true"
             android:exported="false" />

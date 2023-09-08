@@ -33,7 +33,6 @@ import com.github.libretube.helpers.NetworkHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ThemeHelper
 import com.github.libretube.helpers.WindowHelper
-import com.github.libretube.services.ClosingService
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.ErrorDialog
 import com.github.libretube.ui.fragments.AudioPlayerFragment
@@ -64,13 +63,6 @@ class MainActivity : BaseActivity() {
 
         // enable auto rotation if turned on
         requestOrientationChange()
-
-        // start service that gets called on closure
-        try {
-            startService(Intent(this, ClosingService::class.java))
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
 
         // show noInternet Activity if no internet available on app startup
         if (!NetworkHelper.isNetworkAvailable(this)) {

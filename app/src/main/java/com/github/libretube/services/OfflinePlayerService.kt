@@ -118,4 +118,12 @@ class OfflinePlayerService : LifecycleService() {
         super.onBind(intent)
         return null
     }
+
+    /**
+     * Stop the service when app is removed from the task manager.
+     */
+    override fun onTaskRemoved(rootIntent: Intent?) {
+        super.onTaskRemoved(rootIntent)
+        onDestroy()
+    }
 }
