@@ -242,7 +242,7 @@ class SubscriptionsFragment : Fragment() {
     private fun List<StreamItem>.filterByGroup(groupIndex: Int): List<StreamItem> {
         if (groupIndex == 0) return this
 
-        val group = channelGroups.getOrNull(selectedFilterGroup - 1)
+        val group = channelGroups.getOrNull(groupIndex - 1)
         return filter {
             val channelId = it.uploaderUrl.orEmpty().toID()
             group?.channels?.contains(channelId) != false
