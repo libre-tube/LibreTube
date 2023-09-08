@@ -1,9 +1,11 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.NavHostFragment
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
@@ -81,21 +83,30 @@ class VideoOptionsBottomSheet(
                 }
                 // Add Video to Playlist Dialog
                 getString(R.string.addToPlaylist) -> {
-                    AddToPlaylistDialog(videoId).show(
+                    val newAddToPlaylistDialog = AddToPlaylistDialog()
+                    newAddToPlaylistDialog.arguments = bundleOf(IntentData.videoId to videoId)
+                    newAddToPlaylistDialog.show(
                         parentFragmentManager,
                         AddToPlaylistDialog::class.java.name
                     )
                 }
 
                 getString(R.string.download) -> {
-                    val downloadDialog = DownloadDialog(videoId)
-                    downloadDialog.show(parentFragmentManager, DownloadDialog::class.java.name)
+                    val newFragment = DownloadDialog()
+                    newFragment.arguments = bundleOf(IntentData.videoId to videoId)
+                    newFragment.show(parentFragmentManager, DownloadDialog::class.java.name)
                 }
 
                 getString(R.string.share) -> {
-                    val shareDialog = ShareDialog(videoId, ShareObjectType.VIDEO, shareData)
+                    val bundle = bundleOf(
+                        IntentData.id to videoId,
+                        IntentData.shareObjectType to ShareObjectType.VIDEO,
+                        IntentData.shareData to shareData
+                    )
+                    val newShareDialog = ShareDialog()
+                    newShareDialog.arguments = bundle
                     // using parentFragmentManager is important here
-                    shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
+                    newShareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
 
                 getString(R.string.play_next) -> {

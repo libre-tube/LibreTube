@@ -4,13 +4,16 @@ import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.DeleteUserRequest
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogDeleteAccountBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.helpers.PreferenceHelper
@@ -19,9 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class DeleteAccountDialog(
-    private val onLogout: () -> Unit
-) : DialogFragment() {
+class DeleteAccountDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogDeleteAccountBinding.inflate(layoutInflater)
 
@@ -59,7 +60,10 @@ class DeleteAccountDialog(
                 }
                 Toast.makeText(context, R.string.success, Toast.LENGTH_SHORT).show()
 
-                onLogout.invoke()
+                setFragmentResult(
+                    IntentData.requestKey,
+                    bundleOf(IntentData.logoutTask to true)
+                )
                 dialog?.dismiss()
             }
         }

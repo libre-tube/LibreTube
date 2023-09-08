@@ -18,6 +18,7 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.api.obj.Subtitle
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogDownloadBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.getWhileDigit
@@ -32,10 +33,15 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
-class DownloadDialog(
-    private val videoId: String
-) : DialogFragment() {
+class DownloadDialog : DialogFragment() {
+    private lateinit var videoId: String
     private var onDownloadConfirm = {}
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        videoId = arguments?.getString(IntentData.videoId)!!
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogDownloadBinding.inflate(layoutInflater)
 

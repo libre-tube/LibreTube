@@ -1,32 +1,36 @@
 package com.github.libretube.ui.dialogs
 
 import android.app.Dialog
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.SeekBar
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.setFragmentResult
 import com.github.libretube.R
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogColorPickerBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class ColorPickerDialog(
-    private val context: Context,
-    private val initialColor: Int,
-    private val onColorSelectedListener: OnColorSelectedListener
-) : DialogFragment(), SeekBar.OnSeekBarChangeListener {
+class ColorPickerDialog : DialogFragment(), SeekBar.OnSeekBarChangeListener {
+    private var initialColor: Int? = null
 
     private var _binding: DialogColorPickerBinding? = null
     private val binding get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initialColor = arguments?.getInt(IntentData.color)!!
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         _binding = DialogColorPickerBinding.inflate(layoutInflater)
 
         // Set initial color
-        setColor(initialColor)
+        setColor(initialColor!!)
 
         binding.alphaSeekBar.setOnSeekBarChangeListener(this)
         binding.redSeekBar.setOnSeekBarChangeListener(this)
@@ -74,7 +78,11 @@ class ColorPickerDialog(
         return MaterialAlertDialogBuilder(requireContext())
             .setView(binding.root)
             .setPositiveButton(R.string.okay) { _, _ ->
-                onColorSelectedListener.onColorSelected(getColor())
+                val color = getColor()
+                setFragmentResult(
+                    IntentData.requestKey,
+                    bundleOf(IntentData.color to color)
+                )
             }
             .setNegativeButton(R.string.cancel, null)
             .show()
@@ -133,9 +141,5 @@ class ColorPickerDialog(
 
     private fun colorToString(color: Int): String {
         return String.format("#%08X", color)
-    }
-
-    fun interface OnColorSelectedListener {
-        fun onColorSelected(color: Int)
     }
 }

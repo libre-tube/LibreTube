@@ -7,9 +7,11 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
 import com.github.libretube.R
+import com.github.libretube.constants.IntentData
 import com.github.libretube.ui.dialogs.ColorPickerDialog
 
 class ColorPreference(context: Context, attrs: AttributeSet) : Preference(context, attrs) {
@@ -60,11 +62,18 @@ class ColorPreference(context: Context, attrs: AttributeSet) : Preference(contex
 
     private fun showColorPickerDialog() {
         (if (currentColor is Int) currentColor else Color.BLACK)?.let {
-            val dialog = ColorPickerDialog(context, it) { color -> setColor(color) }
-            dialog.show(
-                (context as AppCompatActivity).supportFragmentManager,
-                this::class.java.name
-            )
+            val bundle = bundleOf(IntentData.color to it)
+            val dialog = ColorPickerDialog()
+            val fragmentManager = (context as AppCompatActivity).supportFragmentManager
+            fragmentManager.setFragmentResultListener(
+                IntentData.requestKey,
+                context as AppCompatActivity
+            ) { _, resultBundle ->
+                val newColor = resultBundle.getInt(IntentData.color)
+                setColor(newColor)
+            }
+            dialog.arguments = bundle
+            dialog.show(fragmentManager, this::class.java.name)
         }
     }
 

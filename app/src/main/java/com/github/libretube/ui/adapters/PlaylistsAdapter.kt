@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.obj.Playlists
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.PlaylistsRowBinding
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.helpers.ImageHelper
@@ -51,25 +52,42 @@ class PlaylistsAdapter(
                 NavigationHelper.navigatePlaylist(root.context, playlist.id, playlistType)
             }
 
+            val fragmentManager = (root.context as BaseActivity).supportFragmentManager
+            fragmentManager.setFragmentResultListener(
+                IntentData.requestKey,
+                (root.context as BaseActivity)
+            ) { _, resultBundle ->
+                val newPlaylistDescription =
+                    resultBundle.getString(IntentData.playlistDescription)
+                val newPlaylistName =
+                    resultBundle.getString(IntentData.playlistName)
+                val isPlaylistToBeDeleted =
+                    resultBundle.getBoolean(IntentData.playlistTask)
+
+                newPlaylistDescription?.let {
+                    playlistDescription.text = it
+                    playlist.shortDescription = it
+                }
+
+                newPlaylistName?.let {
+                    playlistTitle.text = it
+                    playlist.name = it
+                }
+
+                if (isPlaylistToBeDeleted) {
+                    // try to refresh the playlists in the library on deletion success
+                    onDelete(position, root.context as BaseActivity)
+                }
+            }
+
             root.setOnLongClickListener {
                 val playlistOptionsDialog = PlaylistOptionsBottomSheet(
                     playlistId = playlist.id!!,
                     playlistName = playlist.name!!,
-                    playlistType = playlistType,
-                    onDelete = {
-                        onDelete(position, root.context as BaseActivity)
-                    },
-                    onRename = {
-                        playlistTitle.text = it
-                        playlist.name = it
-                    },
-                    onChangeDescription = {
-                        playlistDescription.text = it
-                        playlist.shortDescription = it
-                    }
+                    playlistType = playlistType
                 )
                 playlistOptionsDialog.show(
-                    (root.context as BaseActivity).supportFragmentManager,
+                    fragmentManager,
                     PlaylistOptionsBottomSheet::class.java.name
                 )
                 true

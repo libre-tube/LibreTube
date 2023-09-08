@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.core.view.children
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -154,12 +155,14 @@ class ChannelFragment : Fragment() {
                 )
 
                 binding.channelShare.setOnClickListener {
-                    val shareDialog = ShareDialog(
-                        channelId.toID(),
-                        ShareObjectType.CHANNEL,
-                        shareData
+                    val bundle = bundleOf(
+                        IntentData.id to channelId.toID(),
+                        IntentData.shareObjectType to ShareObjectType.CHANNEL,
+                        IntentData.shareData to shareData
                     )
-                    shareDialog.show(childFragmentManager, ShareDialog::class.java.name)
+                    val newShareDialog = ShareDialog()
+                    newShareDialog.arguments = bundle
+                    newShareDialog.show(childFragmentManager, ShareDialog::class.java.name)
                 }
 
                 nextPage = response.nextpage

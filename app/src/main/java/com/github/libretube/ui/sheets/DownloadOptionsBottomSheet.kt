@@ -3,6 +3,7 @@ package com.github.libretube.ui.sheets
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.db.obj.Download
@@ -38,8 +39,14 @@ class DownloadOptionsBottomSheet(
 
                 2 -> {
                     val shareData = ShareData(currentVideo = download.uploader)
-                    ShareDialog(download.videoId, ShareObjectType.VIDEO, shareData)
-                        .show(parentFragmentManager, null)
+                    val bundle = bundleOf(
+                        IntentData.id to download.videoId,
+                        IntentData.shareObjectType to ShareObjectType.CHANNEL,
+                        IntentData.shareData to shareData
+                    )
+                    val newShareDialog = ShareDialog()
+                    newShareDialog.arguments = bundle
+                    newShareDialog.show(parentFragmentManager, null)
                 }
 
                 3 -> {

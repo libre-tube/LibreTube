@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.Configuration
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.LifecycleOwner
@@ -11,6 +12,7 @@ import androidx.media3.common.C
 import androidx.media3.exoplayer.trackselection.TrackSelector
 import androidx.media3.ui.PlayerView.ControllerVisibilityListener
 import com.github.libretube.R
+import com.github.libretube.constants.IntentData
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.WindowHelper
@@ -166,11 +168,18 @@ class OnlinePlayerView(
 
         binding.sbSubmit.isVisible = PlayerHelper.sponsorBlockEnabled
         binding.sbSubmit.setOnClickListener {
-            val currentPosition = player?.currentPosition?.takeIf { it != C.TIME_UNSET }
+            val currentPosition = player?.currentPosition?.takeIf { it != C.TIME_UNSET } ?: 0
             val duration = player?.duration?.takeIf { it != C.TIME_UNSET }
             val videoId = PlayingQueue.getCurrent()?.url?.toID() ?: return@setOnClickListener
-            SubmitSegmentDialog(videoId, currentPosition ?: 0, duration)
-                .show((context as BaseActivity).supportFragmentManager, null)
+
+            val bundle = bundleOf(
+                IntentData.currentPosition to currentPosition,
+                IntentData.duration to duration,
+                IntentData.videoId to videoId
+            )
+            val newSubmitSegmentDialog = SubmitSegmentDialog()
+            newSubmitSegmentDialog.arguments = bundle
+            newSubmitSegmentDialog.show((context as BaseActivity).supportFragmentManager, null)
         }
     }
 

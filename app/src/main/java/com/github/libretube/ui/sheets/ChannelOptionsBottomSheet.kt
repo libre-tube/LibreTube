@@ -2,8 +2,10 @@ package com.github.libretube.ui.sheets
 
 import android.os.Bundle
 import android.util.Log
+import androidx.core.os.bundleOf
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.constants.IntentData
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
@@ -37,8 +39,14 @@ class ChannelOptionsBottomSheet(
         setSimpleItems(optionsList) { which ->
             when (optionsList[which]) {
                 getString(R.string.share) -> {
-                    ShareDialog(channelId, ShareObjectType.CHANNEL, shareData)
-                        .show(parentFragmentManager, null)
+                    val bundle = bundleOf(
+                        IntentData.id to channelId,
+                        IntentData.shareObjectType to ShareObjectType.CHANNEL,
+                        IntentData.shareData to shareData
+                    )
+                    val newShareDialog = ShareDialog()
+                    newShareDialog.arguments = bundle
+                    newShareDialog.show(parentFragmentManager, null)
                 }
 
                 getString(R.string.play_latest_videos) -> {

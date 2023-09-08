@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogSubmitSegmentBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
@@ -20,11 +21,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class SubmitSegmentDialog(
-    private val videoId: String,
-    private val currentPosition: Long,
-    private val duration: Long?
-) : DialogFragment() {
+class SubmitSegmentDialog : DialogFragment() {
+    private var videoId: String = ""
+    private var currentPosition: Long = 0
+    private var duration: Long? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            videoId = it.getString(IntentData.videoId)!!
+            currentPosition = it.getLong(IntentData.currentPosition)
+            duration = it.getLong(IntentData.duration)
+        }
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogSubmitSegmentBinding.inflate(layoutInflater)
 
@@ -67,7 +77,7 @@ class SubmitSegmentDialog(
 
         if (duration != null) {
             // the end time can't be greater than the video duration
-            endTime = minOf(endTime, duration.toFloat())
+            endTime = minOf(endTime, duration!!.toFloat())
         }
 
         val categories = resources.getStringArray(R.array.sponsorBlockSegments)
