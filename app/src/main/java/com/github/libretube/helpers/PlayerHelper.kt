@@ -346,7 +346,7 @@ object PlayerHelper {
 
     private fun getPendingIntent(activity: Activity, event: PlayerEvent): PendingIntent {
         val intent = Intent(getIntentAction(activity)).putExtra(CONTROL_TYPE, event)
-        return PendingIntentCompat.getBroadcast(activity, event.ordinal, intent, 0, false)
+        return PendingIntentCompat.getBroadcast(activity, event.ordinal, intent, 0, false)!!
     }
 
     private fun getRemoteAction(
