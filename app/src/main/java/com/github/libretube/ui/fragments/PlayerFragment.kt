@@ -998,13 +998,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         binding.relPlayerDownload.setOnClickListener {
             if (streams.duration <= 0) {
                 Toast.makeText(context, R.string.cannotDownload, Toast.LENGTH_SHORT).show()
-            } else if (!DownloadService.IS_DOWNLOAD_RUNNING) {
+            } else  {
                 val newFragment = DownloadDialog()
                 newFragment.arguments = bundleOf(IntentData.videoId to videoId)
                 newFragment.show(childFragmentManager, DownloadDialog::class.java.name)
-            } else {
-                Toast.makeText(context, R.string.dlisinprogress, Toast.LENGTH_SHORT)
-                    .show()
             }
         }
 
