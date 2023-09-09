@@ -11,10 +11,5 @@ inline fun <reified T : Parcelable> Intent.parcelableExtra(name: String?): T? {
 }
 
 inline fun <reified T : Serializable> Intent.serializableExtra(name: String?): T? {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-        getSerializableExtra(name, T::class.java)
-    } else {
-        @Suppress("DEPRECATION")
-        getSerializableExtra(name) as? T
-    }
+    return extras?.serializable(name)
 }
