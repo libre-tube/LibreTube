@@ -507,4 +507,5 @@
     <string name="sb_create_segment">Segment aanmaken</string>
     <string name="segment_type">Segment­type</string>
     <string name="sb_invalid_segment">Ongeldig segment­begin of -einde</string>
+    <string name="contribute_to_sponsorblock">Bijdragen aan SponsorBlock</string>
 </resources>
