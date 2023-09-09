@@ -510,4 +510,5 @@
     <string name="sb_create_segment">Vytvořit segment</string>
     <string name="segment_type">Typ segmentu</string>
     <string name="sb_invalid_segment">Neplatný začátek nebo konec segmentu</string>
+    <string name="contribute_to_sponsorblock">Přispějte do služby SponsorBlock</string>
 </resources>
