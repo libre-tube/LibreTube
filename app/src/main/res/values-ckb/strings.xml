@@ -507,4 +507,5 @@
     <string name="segment_type">جۆری بەش</string>
     <string name="sb_create_segment">دروستکردنی بەش</string>
     <string name="sb_invalid_segment">سەرەتا و کۆتایی بەش نادروستە</string>
+    <string name="contribute_to_sponsorblock">بەشداربوون لە SponsorBlock</string>
 </resources>
