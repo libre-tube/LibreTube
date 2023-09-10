@@ -20,13 +20,13 @@ class OnlineTimeFrameReceiver(
     /**
      * Cut off a new bitmap from the image that contains multiple preview thumbnails
      */
-    private fun cutBitmapFromPreviewFrame(bitmap: Bitmap, previewFrame: PreviewFrame): Bitmap {
-        val positionX = previewFrame.positionX * previewFrame.frameWidth
-        val positionY = previewFrame.positionY * previewFrame.frameHeight
-        val width = minOf(previewFrame.frameWidth, bitmap.width - positionX)
-        val height = minOf(previewFrame.frameHeight, bitmap.height - positionY)
+    private fun cutBitmapFromPreviewFrame(bitmap: Bitmap, previewFrame: PreviewFrame): Bitmap? {
+        val offsetX = previewFrame.positionX * previewFrame.frameWidth
+        val offsetY = previewFrame.positionY * previewFrame.frameHeight
 
-        return Bitmap.createBitmap(bitmap, positionX, positionY, width, height)
+        return runCatching {
+            Bitmap.createBitmap(bitmap, offsetX, offsetY, previewFrame.frameWidth, previewFrame.frameHeight)
+        }.getOrNull()
     }
 
     /**
