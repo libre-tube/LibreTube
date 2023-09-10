@@ -76,7 +76,7 @@
     <string name="music_videos">YT Music videók</string>
     <string name="music_albums">YT Music albumok</string>
     <string name="music_playlists">YT Music lejátszási listák</string>
-    <string name="sponsorblock">SponsorBlock</string>
+    <string name="sponsorblock">SzponzorBlokk</string>
     <string name="category_sponsor">Szponzor</string>
     <string name="category_sponsor_description">Fizetett promóciók, fizetett ajánlások és közvetlen hirdetések. Nem önreklámozás, vagy ingyenes elismerés ügyek, alkotók, honlapok, vagy termékek számára.</string>
     <string name="category_selfpromo">Nem fizetett/önpromóció</string>
@@ -447,7 +447,7 @@
     <string name="invalid_color">Érvénytelen a megadott színérték!</string>
     <string name="enter_hex_value">Hexadecimális színérték megadása</string>
     <string name="jumped_to_highlight">Ugrás a videó kiemeléshez</string>
-    <string name="sb_color_enable">Egyéni színek bekapcsolása a SponsorBlock-szakaszokhoz.</string>
+    <string name="sb_color_enable">Egyéni színek bekapcsolása a SzponzorBlokk-szakaszokhoz.</string>
     <string name="category_highlight_description">Lehet a meghirdetett cím, a bélyegkép vagy a videó legérdekesebb része. A fejezetek részben a rákoppintással ugorhat oda.</string>
     <string name="choose_instance_long">Válasszon ki az alább felsoroltak közül egy Piped példányt. A Piped példány közvetítőként fog működni Ön és a YouTube között. Ezek a példányok különböző fizikai helyszíneken találhatók - ezeket az országzászló jelzi. A fizikailag közelebbi példányok valószínűleg gyorsabbak, mint a távoli példányok. A beállításokban bármikor megváltoztatható a használt példány.</string>
     <string name="off">Ki</string>
@@ -493,7 +493,7 @@
     <string name="tooltip_edit_groups">Csoportok szerkesztése</string>
     <string name="tooltip_create_playlist">Lejátszólista létrehozása</string>
     <string name="auto_generated">automatikusan generált</string>
-    <string name="tooltip_sponsorblock">Szponzorblokk váltása</string>
+    <string name="tooltip_sponsorblock">SzponzorBlokk váltása</string>
     <string name="tooltip_options">Lehetőségek</string>
     <string name="resolution_limited">korlátozott</string>
     <string name="tooltip_watch_position">Pozíció figyelése</string>
@@ -507,4 +507,6 @@
     <string name="proxy">Proxy</string>
     <string name="group_name_error_empty">Adjon meg egy nevet</string>
     <string name="group_name_error_exists">Válasszon egyedi nevet</string>
+    <string name="filename_too_long">A fájlnév túl hosszú!</string>
+    <string name="contribute_to_sponsorblock">Hozzájárulás a SzponzorBlokkhoz</string>
 </resources>

@@ -513,4 +513,6 @@
     <string name="sb_invalid_segment">Nieprawidłowy początek lub koniec segmentu</string>
     <string name="segment_type">Rodzaj segmentu</string>
     <string name="sb_create_segment">Stwórz segment</string>
+    <string name="filename_too_long">Nazwa pliku jest za długa!</string>
+    <string name="contribute_to_sponsorblock">Wspomóż rozwój SponsorBlock</string>
 </resources>
