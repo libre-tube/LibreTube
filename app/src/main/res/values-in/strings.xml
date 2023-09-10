@@ -504,4 +504,6 @@
     <string name="sb_create_segment">Buat segmen</string>
     <string name="segment_type">Jenis segmen</string>
     <string name="sb_invalid_segment">Segmen awal atau akhir tidak valid</string>
+    <string name="filename_too_long">Nama berkas terlalu panjang!</string>
+    <string name="contribute_to_sponsorblock">Berkontribusi ke SponsorBlock</string>
 </resources>
