@@ -25,7 +25,13 @@ class OnlineTimeFrameReceiver(
         val offsetY = previewFrame.positionY * previewFrame.frameHeight
 
         return runCatching {
-            Bitmap.createBitmap(bitmap, offsetX, offsetY, previewFrame.frameWidth, previewFrame.frameHeight)
+            Bitmap.createBitmap(
+                bitmap,
+                offsetX,
+                offsetY,
+                previewFrame.frameWidth,
+                previewFrame.frameHeight
+            )
         }.getOrNull()
     }
 

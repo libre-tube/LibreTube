@@ -23,7 +23,7 @@ data class StreamItem(
     val uploaded: Long? = null,
     val shortDescription: String? = null,
     val isShort: Boolean = false
-): Parcelable {
+) : Parcelable {
     fun toLocalPlaylistItem(playlistId: String): LocalPlaylistItem {
         return LocalPlaylistItem(
             playlistId = playlistId.toInt(),

@@ -87,7 +87,10 @@ class PlaylistAdapter(
             val activity = (root.context as BaseActivity)
             val fragmentManager = activity.supportFragmentManager
             root.setOnLongClickListener {
-                fragmentManager.setFragmentResultListener(VIDEO_OPTIONS_SHEET_REQUEST_KEY, activity) { _, _ ->
+                fragmentManager.setFragmentResultListener(
+                    VIDEO_OPTIONS_SHEET_REQUEST_KEY,
+                    activity
+                ) { _, _ ->
                     notifyItemChanged(position)
                 }
                 val sheet = VideoOptionsBottomSheet()

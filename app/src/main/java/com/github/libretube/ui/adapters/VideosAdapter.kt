@@ -151,7 +151,10 @@ class VideosAdapter(
             }
 
             root.setOnLongClickListener {
-                fragmentManager.setFragmentResultListener(VideoOptionsBottomSheet.VIDEO_OPTIONS_SHEET_REQUEST_KEY, activity) { _, _ ->
+                fragmentManager.setFragmentResultListener(
+                    VideoOptionsBottomSheet.VIDEO_OPTIONS_SHEET_REQUEST_KEY,
+                    activity
+                ) { _, _ ->
                     notifyItemChanged(position)
                 }
                 val sheet = VideoOptionsBottomSheet()
@@ -191,7 +194,10 @@ class VideosAdapter(
             }
 
             root.setOnLongClickListener {
-                fragmentManager.setFragmentResultListener(VideoOptionsBottomSheet.VIDEO_OPTIONS_SHEET_REQUEST_KEY, activity) { _, _ ->
+                fragmentManager.setFragmentResultListener(
+                    VideoOptionsBottomSheet.VIDEO_OPTIONS_SHEET_REQUEST_KEY,
+                    activity
+                ) { _, _ ->
                     notifyItemChanged(position)
                 }
                 val sheet = VideoOptionsBottomSheet()

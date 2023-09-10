@@ -13,7 +13,6 @@ import androidx.lifecycle.get
 import com.github.libretube.R
 import com.github.libretube.databinding.AutoplayCountdownBinding
 import com.github.libretube.ui.activities.MainActivity
-import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.models.PlayerViewModel
 
 class AutoplayCountdownView(
@@ -21,7 +20,9 @@ class AutoplayCountdownView(
     attributeSet: AttributeSet?
 ) : FrameLayout(context, attributeSet) {
     private val layoutInflater = LayoutInflater.from(context)
-    private val playerViewModel: PlayerViewModel get() = ViewModelProvider(context as MainActivity).get()
+    private val playerViewModel: PlayerViewModel get() = ViewModelProvider(
+        context as MainActivity
+    ).get()
 
     val binding = AutoplayCountdownBinding.inflate(layoutInflater, this, true)
     private var onCountdownEnd: () -> Unit = {}
