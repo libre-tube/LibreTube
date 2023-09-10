@@ -2,6 +2,7 @@ package com.github.libretube.api.obj
 
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
+import com.github.libretube.extensions.toMillis
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.parcelable.DownloadData
 import kotlin.io.path.Path
@@ -84,7 +85,7 @@ data class Streams(
             uploaderUrl = uploaderUrl,
             uploaderAvatar = uploaderAvatar,
             uploadedDate = uploadDate.toString(),
-            uploaded = null,
+            uploaded = uploadDate.toMillis(),
             duration = duration,
             views = views,
             uploaderVerified = uploaderVerified,

@@ -27,6 +27,7 @@ import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_CHANNEL_ID
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
+import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.extensions.parcelableExtra
