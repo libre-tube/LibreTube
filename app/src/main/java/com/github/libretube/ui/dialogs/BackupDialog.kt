@@ -102,14 +102,16 @@ class BackupDialog : DialogFragment() {
                         if (selected[index]) option.onSelected(backupFile)
                     }
                     val encodedBackupFile = Json.encodeToString(backupFile)
-                    withContext(Dispatchers.Main) {
-                        setFragmentResult(
-                            IntentData.requestKey,
-                            bundleOf(IntentData.backupFile to encodedBackupFile)
-                        )
-                    }
+                    setFragmentResult(
+                        BACKUP_DIALOG_REQUEST_KEY,
+                        bundleOf(IntentData.backupFile to encodedBackupFile)
+                    )
                 }
             }
             .create()
+    }
+
+    companion object {
+        const val BACKUP_DIALOG_REQUEST_KEY = "backup_dialog_request_key"
     }
 }

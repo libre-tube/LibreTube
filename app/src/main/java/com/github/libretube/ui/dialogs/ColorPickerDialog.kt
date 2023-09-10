@@ -80,7 +80,7 @@ class ColorPickerDialog : DialogFragment(), SeekBar.OnSeekBarChangeListener {
             .setPositiveButton(R.string.okay) { _, _ ->
                 val color = getColor()
                 setFragmentResult(
-                    IntentData.requestKey,
+                    COLOR_PICKER_REQUEST_KEY,
                     bundleOf(IntentData.color to color)
                 )
             }
@@ -141,5 +141,9 @@ class ColorPickerDialog : DialogFragment(), SeekBar.OnSeekBarChangeListener {
 
     private fun colorToString(color: Int): String {
         return String.format("#%08X", color)
+    }
+
+    companion object {
+        const val COLOR_PICKER_REQUEST_KEY = "color_picker_request_key"
     }
 }

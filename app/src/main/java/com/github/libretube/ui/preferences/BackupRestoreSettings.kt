@@ -14,6 +14,7 @@ import com.github.libretube.helpers.ImportHelper
 import com.github.libretube.obj.BackupFile
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.BackupDialog
+import com.github.libretube.ui.dialogs.BackupDialog.Companion.BACKUP_DIALOG_REQUEST_KEY
 import com.github.libretube.ui.dialogs.RequireRestartDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.time.LocalDateTime
@@ -178,7 +179,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
         }
 
         childFragmentManager.setFragmentResultListener(
-            IntentData.requestKey,
+            BACKUP_DIALOG_REQUEST_KEY,
             this
         ) { _, resultBundle ->
             val encodedBackupFile = resultBundle.getString(IntentData.backupFile)!!

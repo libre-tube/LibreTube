@@ -36,7 +36,7 @@ class CreatePlaylistDialog : DialogFragment() {
                     }
                     if (playlistId != null) {
                         setFragmentResult(
-                            IntentData.requestKey,
+                            CREATE_PLAYLIST_DIALOG_REQUEST_KEY,
                             bundleOf(IntentData.playlistTask to true)
                         )
                     }
@@ -72,7 +72,7 @@ class CreatePlaylistDialog : DialogFragment() {
                     )
                     playlistId?.let {
                         setFragmentResult(
-                            IntentData.requestKey,
+                            CREATE_PLAYLIST_DIALOG_REQUEST_KEY,
                             bundleOf(IntentData.playlistTask to true)
                         )
                     }
@@ -86,5 +86,9 @@ class CreatePlaylistDialog : DialogFragment() {
         return MaterialAlertDialogBuilder(requireContext())
             .setView(binding.root)
             .show()
+    }
+
+    companion object {
+        const val CREATE_PLAYLIST_DIALOG_REQUEST_KEY = "create_playlist_dialog_request_key"
     }
 }

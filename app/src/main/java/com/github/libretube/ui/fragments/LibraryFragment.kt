@@ -32,6 +32,7 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.PlaylistBookmarkAdapter
 import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.dialogs.CreatePlaylistDialog
+import com.github.libretube.ui.dialogs.CreatePlaylistDialog.Companion.CREATE_PLAYLIST_DIALOG_REQUEST_KEY
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import kotlinx.coroutines.Dispatchers
@@ -95,7 +96,7 @@ class LibraryFragment : Fragment() {
         }
 
         childFragmentManager.setFragmentResultListener(
-            IntentData.requestKey,
+            CREATE_PLAYLIST_DIALOG_REQUEST_KEY,
             this
         ) { _, resultBundle ->
             val isPlaylistCreated = resultBundle.getBoolean(IntentData.playlistTask)

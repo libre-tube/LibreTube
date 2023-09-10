@@ -13,6 +13,7 @@ import androidx.preference.PreferenceViewHolder
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.ui.dialogs.ColorPickerDialog
+import com.github.libretube.ui.dialogs.ColorPickerDialog.Companion.COLOR_PICKER_REQUEST_KEY
 
 class ColorPreference(context: Context, attrs: AttributeSet) : Preference(context, attrs) {
     private lateinit var circleView: View
@@ -66,7 +67,7 @@ class ColorPreference(context: Context, attrs: AttributeSet) : Preference(contex
             val dialog = ColorPickerDialog()
             val fragmentManager = (context as AppCompatActivity).supportFragmentManager
             fragmentManager.setFragmentResultListener(
-                IntentData.requestKey,
+                COLOR_PICKER_REQUEST_KEY,
                 context as AppCompatActivity
             ) { _, resultBundle ->
                 val newColor = resultBundle.getInt(IntentData.color)

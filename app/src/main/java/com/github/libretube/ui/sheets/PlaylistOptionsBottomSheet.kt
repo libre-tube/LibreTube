@@ -13,6 +13,7 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.obj.ShareData
+import com.github.libretube.ui.adapters.PlaylistsAdapter.Companion.PLAYLISTS_ADAPTER_REQUEST_KEY
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.DeletePlaylistDialog
 import com.github.libretube.ui.dialogs.PlaylistDescriptionDialog
@@ -93,20 +94,21 @@ class PlaylistOptionsBottomSheet(
                 }
                 // share the playlist
                 getString(R.string.share) -> {
-                    val bundle = bundleOf(
+                    val newShareDialog = ShareDialog()
+                    newShareDialog.arguments = bundleOf(
                         IntentData.id to playlistId,
                         IntentData.shareObjectType to ShareObjectType.PLAYLIST,
                         IntentData.shareData to shareData
                     )
-                    val newShareDialog = ShareDialog()
-                    newShareDialog.arguments = bundle
                     // using parentFragmentManager, childFragmentManager doesn't work here
                     newShareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
 
                 getString(R.string.deletePlaylist) -> {
-                    mFragmentManager.setFragmentResultListener(IntentData.requestKey, context as BaseActivity) { _, bundle ->
+                    mFragmentManager.setFragmentResultListener(PLAYLIST_OPTIONS_REQUEST_KEY, context as BaseActivity) { _, bundle ->
                         if (bundle.getBoolean(IntentData.playlistTask, true)) onDelete()
+                        // forward the result the playlists adapter if visible
+                        mFragmentManager.setFragmentResult(PLAYLISTS_ADAPTER_REQUEST_KEY, bundle)
                     }
                     val newDeletePlaylistDialog = DeletePlaylistDialog()
                     newDeletePlaylistDialog.arguments = bundleOf(
@@ -117,8 +119,10 @@ class PlaylistOptionsBottomSheet(
                 }
 
                 getString(R.string.renamePlaylist) -> {
-                    mFragmentManager.setFragmentResultListener(IntentData.requestKey, context as BaseActivity) { _, bundle ->
+                    mFragmentManager.setFragmentResultListener(PLAYLIST_OPTIONS_REQUEST_KEY, context as BaseActivity) { _, bundle ->
                         onRename(bundle.getString(IntentData.playlistName, ""))
+                        // forward the result the playlists adapter if visible
+                        mFragmentManager.setFragmentResult(PLAYLISTS_ADAPTER_REQUEST_KEY, bundle)
                     }
                     val newRenamePlaylistDialog = RenamePlaylistDialog()
                     newRenamePlaylistDialog.arguments = bundleOf(
@@ -129,8 +133,10 @@ class PlaylistOptionsBottomSheet(
                 }
 
                 getString(R.string.change_playlist_description) -> {
-                    mFragmentManager.setFragmentResultListener(IntentData.requestKey, context as BaseActivity) { _, bundle ->
+                    mFragmentManager.setFragmentResultListener(PLAYLIST_OPTIONS_REQUEST_KEY, context as BaseActivity) { _, bundle ->
                         onChangeDescription(bundle.getString(IntentData.playlistName, ""))
+                        // forward the result the playlists adapter if visible
+                        mFragmentManager.setFragmentResult(PLAYLISTS_ADAPTER_REQUEST_KEY, bundle)
                     }
                     val newPlaylistDescriptionDialog = PlaylistDescriptionDialog()
                     newPlaylistDescriptionDialog.arguments = bundleOf(
@@ -157,5 +163,9 @@ class PlaylistOptionsBottomSheet(
             }
         }
         super.onCreate(savedInstanceState)
+    }
+
+    companion object {
+        const val PLAYLIST_OPTIONS_REQUEST_KEY = "playlist_options_request_key"
     }
 }

@@ -102,7 +102,7 @@ class InstanceSettings : BasePreferenceFragment() {
         deleteAccount?.isEnabled = token.isNotEmpty()
 
         childFragmentManager.setFragmentResultListener(
-            IntentData.requestKey,
+            INSTANCE_DIALOG_REQUEST_KEY,
             this
         ) { _, resultBundle ->
             val isLoggedIn = resultBundle.getBoolean(IntentData.loginTask)
@@ -169,5 +169,9 @@ class InstanceSettings : BasePreferenceFragment() {
         findPreference<Preference>(PreferenceKeys.LOGIN_REGISTER)?.isVisible = true
         findPreference<Preference>(PreferenceKeys.LOGOUT)?.isVisible = false
         findPreference<Preference>(PreferenceKeys.DELETE_ACCOUNT)?.isEnabled = false
+    }
+
+    companion object {
+        const val INSTANCE_DIALOG_REQUEST_KEY = "instance_dialog_request_key"
     }
 }

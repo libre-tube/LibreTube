@@ -23,7 +23,6 @@ object IntentData {
     const val currentPosition = "currentPosition"
     const val duration = "duration"
     const val updateInfo = "updateInfo"
-    const val requestKey = "requestKey"
     const val backupFile = "backupFile"
     const val playlistTask = "playlistTask"
     const val loginTask = "loginTask"

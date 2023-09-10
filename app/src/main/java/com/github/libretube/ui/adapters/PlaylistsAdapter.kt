@@ -54,7 +54,7 @@ class PlaylistsAdapter(
 
             val fragmentManager = (root.context as BaseActivity).supportFragmentManager
             fragmentManager.setFragmentResultListener(
-                IntentData.requestKey,
+                PLAYLISTS_ADAPTER_REQUEST_KEY,
                 (root.context as BaseActivity)
             ) { _, resultBundle ->
                 val newPlaylistDescription =
@@ -101,5 +101,9 @@ class PlaylistsAdapter(
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, itemCount)
         }
+    }
+
+    companion object {
+        const val PLAYLISTS_ADAPTER_REQUEST_KEY = "playlists_adapter_request_key"
     }
 }
