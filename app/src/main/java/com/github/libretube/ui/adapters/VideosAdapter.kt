@@ -5,6 +5,7 @@ import android.content.Context
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.GridLayoutManager
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.AllCaughtUpRowBinding
 import com.github.libretube.databinding.TrendingRowBinding
@@ -103,9 +105,7 @@ class VideosAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: VideosViewHolder, position: Int) {
         val video = streamItems[position]
-
         val videoId = video.url?.toID()
-        val videoName = video.title
 
         videoId?.let {
             (holder.trendingRowBinding?.watchProgress ?: holder.videoRowBinding!!.watchProgress)
@@ -116,6 +116,9 @@ class VideosAdapter(
             holder.videoRowBinding ?: holder.trendingRowBinding
                 ?: holder.allCaughtUpBinding
             )!!.root.context
+        val activity = (context as BaseActivity)
+        val fragmentManager = activity.supportFragmentManager
+
         val uploadDate =
             video.uploaded?.takeIf { it > 0 }?.let { TextUtils.formatRelativeDate(context, it) }
 
@@ -146,17 +149,14 @@ class VideosAdapter(
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, video.url)
             }
-            root.setOnLongClickListener {
-                if (videoId == null || videoName == null) return@setOnLongClickListener true
 
-                VideoOptionsBottomSheet(video) {
+            root.setOnLongClickListener {
+                fragmentManager.setFragmentResultListener(VideoOptionsBottomSheet.VIDEO_OPTIONS_SHEET_REQUEST_KEY, activity) { _, _ ->
                     notifyItemChanged(position)
                 }
-                    .show(
-                        (root.context as BaseActivity).supportFragmentManager,
-                        VideoOptionsBottomSheet::class.java.name
-                    )
-
+                val sheet = VideoOptionsBottomSheet()
+                sheet.arguments = bundleOf(IntentData.streamItem to video)
+                sheet.show(fragmentManager, VideosAdapter::class.java.name)
                 true
             }
         }
@@ -191,14 +191,12 @@ class VideosAdapter(
             }
 
             root.setOnLongClickListener {
-                if (videoId == null || videoName == null) return@setOnLongClickListener true
-                VideoOptionsBottomSheet(video) {
+                fragmentManager.setFragmentResultListener(VideoOptionsBottomSheet.VIDEO_OPTIONS_SHEET_REQUEST_KEY, activity) { _, _ ->
                     notifyItemChanged(position)
                 }
-                    .show(
-                        (root.context as BaseActivity).supportFragmentManager,
-                        VideoOptionsBottomSheet::class.java.name
-                    )
+                val sheet = VideoOptionsBottomSheet()
+                sheet.arguments = bundleOf(IntentData.streamItem to video)
+                sheet.show(fragmentManager, VideosAdapter::class.java.name)
                 true
             }
         }

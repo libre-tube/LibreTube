@@ -2,7 +2,9 @@ package com.github.libretube.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchHistoryItem
@@ -67,14 +69,16 @@ class WatchHistoryAdapter(
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, video.videoId)
             }
+
+            val activity = (root.context as BaseActivity)
+            val fragmentManager = activity.supportFragmentManager
             root.setOnLongClickListener {
-                VideoOptionsBottomSheet(video.toStreamItem()) {
+                fragmentManager.setFragmentResultListener(VideoOptionsBottomSheet.VIDEO_OPTIONS_SHEET_REQUEST_KEY, activity) { _, _ ->
                     notifyItemChanged(position)
                 }
-                    .show(
-                        (root.context as BaseActivity).supportFragmentManager,
-                        VideoOptionsBottomSheet::class.java.name
-                    )
+                val sheet = VideoOptionsBottomSheet()
+                sheet.arguments = bundleOf(IntentData.streamItem to video)
+                sheet.show(fragmentManager, WatchHistoryAdapter::class.java.name)
                 true
             }
 

@@ -21,13 +21,15 @@ import kotlinx.coroutines.withContext
  *
  * Needs the [channelId] to load the content from the right video.
  */
-class ChannelOptionsBottomSheet(
-    private val channelId: String,
-    channelName: String?
-) : BaseBottomSheet() {
-    private val shareData = ShareData(currentChannel = channelName)
+class ChannelOptionsBottomSheet : BaseBottomSheet() {
+    private lateinit var channelId: String
+    private var channelName: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        channelId = arguments?.getString(IntentData.channelId)!!
+        channelName = arguments?.getString(IntentData.channelName)
 
         // List that stores the different menu options. In the future could be add more options here.
         val optionsList = mutableListOf(
@@ -42,7 +44,7 @@ class ChannelOptionsBottomSheet(
                     val bundle = bundleOf(
                         IntentData.id to channelId,
                         IntentData.shareObjectType to ShareObjectType.CHANNEL,
-                        IntentData.shareData to shareData
+                        IntentData.shareData to ShareData(currentChannel = channelName)
                     )
                     val newShareDialog = ShareDialog()
                     newShareDialog.arguments = bundle

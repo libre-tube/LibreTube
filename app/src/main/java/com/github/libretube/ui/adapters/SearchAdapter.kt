@@ -2,11 +2,13 @@ package com.github.libretube.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.R
 import com.github.libretube.api.obj.ContentItem
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.ChannelRowBinding
 import com.github.libretube.databinding.PlaylistsRowBinding
 import com.github.libretube.databinding.VideoRowBinding
@@ -96,14 +98,16 @@ class SearchAdapter(
                 NavigationHelper.navigateVideo(root.context, item.url)
             }
             val videoId = item.url.toID()
+
+            val activity = (root.context as BaseActivity)
+            val fragmentManager = activity.supportFragmentManager
             root.setOnLongClickListener {
-                VideoOptionsBottomSheet(item.toStreamItem()) {
+                fragmentManager.setFragmentResultListener(VideoOptionsBottomSheet.VIDEO_OPTIONS_SHEET_REQUEST_KEY, activity) { _, _ ->
                     notifyItemChanged(position)
                 }
-                    .show(
-                        (root.context as BaseActivity).supportFragmentManager,
-                        VideoOptionsBottomSheet::class.java.name
-                    )
+                val sheet = VideoOptionsBottomSheet()
+                sheet.arguments = bundleOf(IntentData.streamItem to item)
+                sheet.show(fragmentManager, SearchAdapter::class.java.name)
                 true
             }
             channelContainer.setOnClickListener {
@@ -134,8 +138,12 @@ class SearchAdapter(
             }
 
             root.setOnLongClickListener {
-                ChannelOptionsBottomSheet(item.url.toID(), item.name)
-                    .show((root.context as BaseActivity).supportFragmentManager)
+                val channelOptionsSheet = ChannelOptionsBottomSheet()
+                channelOptionsSheet.arguments = bundleOf(
+                    IntentData.channelId to item.url.toID(),
+                    IntentData.channelName to item.name
+                )
+                channelOptionsSheet.show((root.context as BaseActivity).supportFragmentManager)
                 true
             }
 

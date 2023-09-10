@@ -40,9 +40,7 @@ class StatsSheet(
         )
         binding.audioInfo.setText(
             "${player.audioFormat?.codecs.orEmpty()} ${
-                TextUtils.formatBitrate(
-                    player.audioFormat?.bitrate
-                )
+                TextUtils.formatBitrate(player.audioFormat?.bitrate)
             }"
         )
         binding.videoQuality.setText(

@@ -2,8 +2,10 @@ package com.github.libretube.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.api.obj.Subscription
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.ChannelSubscriptionRowBinding
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ImageHelper
@@ -47,8 +49,12 @@ class SubscriptionChannelAdapter(
                 NavigationHelper.navigateChannel(root.context, subscription.url)
             }
             root.setOnLongClickListener {
-                ChannelOptionsBottomSheet(subscription.url.toID(), subscription.name)
-                    .show((root.context as BaseActivity).supportFragmentManager)
+                val channelOptionsSheet = ChannelOptionsBottomSheet()
+                channelOptionsSheet.arguments = bundleOf(
+                    IntentData.channelId to subscription.url.toID(),
+                    IntentData.channelName to subscription.name
+                )
+                channelOptionsSheet.show((root.context as BaseActivity).supportFragmentManager)
                 true
             }
 
