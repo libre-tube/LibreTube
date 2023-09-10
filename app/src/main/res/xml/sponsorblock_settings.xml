@@ -25,6 +25,11 @@
         app:key="sb_contribute_key"
         app:title="@string/contribute_to_sponsorblock" />
 
+    <EditTextPreference
+        android:dependency="sb_contribute_key"
+        app:key="sb_user_id"
+        app:title="@string/sponsorblock_user_id" />
+
     <SwitchPreferenceCompat
         app:defaultValue="false"
         app:key="dearrow"
