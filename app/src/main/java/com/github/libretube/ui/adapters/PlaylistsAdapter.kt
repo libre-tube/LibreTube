@@ -45,6 +45,7 @@ class PlaylistsAdapter(
                 ImageHelper.loadImage(playlist.thumbnail, playlistThumbnail)
             }
             playlistTitle.text = playlist.name
+            playlistDescription.text = playlist.shortDescription
 
             videoCount.text = playlist.videos.toString()
 
