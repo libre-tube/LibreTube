@@ -299,6 +299,7 @@ class NowPlayingNotification(
             }
 
             PLAY_PAUSE -> {
+                if (player.playerError != null) player.prepare()
                 if (player.isPlaying) player.pause() else player.play()
             }
 
