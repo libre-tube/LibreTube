@@ -52,8 +52,8 @@ import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.util.DataSaverMode
 import com.github.libretube.util.PlayingQueue
 import com.google.android.material.elevation.SurfaceColors
-import kotlinx.coroutines.launch
 import kotlin.math.abs
+import kotlinx.coroutines.launch
 
 class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     private var _binding: FragmentAudioPlayerBinding? = null

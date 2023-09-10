@@ -105,7 +105,10 @@ class PlaylistOptionsBottomSheet(
                 }
 
                 getString(R.string.deletePlaylist) -> {
-                    mFragmentManager.setFragmentResultListener(PLAYLIST_OPTIONS_REQUEST_KEY, context as BaseActivity) { _, bundle ->
+                    mFragmentManager.setFragmentResultListener(
+                        PLAYLIST_OPTIONS_REQUEST_KEY,
+                        context as BaseActivity
+                    ) { _, bundle ->
                         if (bundle.getBoolean(IntentData.playlistTask, true)) onDelete()
                         // forward the result the playlists adapter if visible
                         mFragmentManager.setFragmentResult(PLAYLISTS_ADAPTER_REQUEST_KEY, bundle)
@@ -119,7 +122,10 @@ class PlaylistOptionsBottomSheet(
                 }
 
                 getString(R.string.renamePlaylist) -> {
-                    mFragmentManager.setFragmentResultListener(PLAYLIST_OPTIONS_REQUEST_KEY, context as BaseActivity) { _, bundle ->
+                    mFragmentManager.setFragmentResultListener(
+                        PLAYLIST_OPTIONS_REQUEST_KEY,
+                        context as BaseActivity
+                    ) { _, bundle ->
                         onRename(bundle.getString(IntentData.playlistName, ""))
                         // forward the result the playlists adapter if visible
                         mFragmentManager.setFragmentResult(PLAYLISTS_ADAPTER_REQUEST_KEY, bundle)
@@ -133,7 +139,10 @@ class PlaylistOptionsBottomSheet(
                 }
 
                 getString(R.string.change_playlist_description) -> {
-                    mFragmentManager.setFragmentResultListener(PLAYLIST_OPTIONS_REQUEST_KEY, context as BaseActivity) { _, bundle ->
+                    mFragmentManager.setFragmentResultListener(
+                        PLAYLIST_OPTIONS_REQUEST_KEY,
+                        context as BaseActivity
+                    ) { _, bundle ->
                         onChangeDescription(bundle.getString(IntentData.playlistName, ""))
                         // forward the result the playlists adapter if visible
                         mFragmentManager.setFragmentResult(PLAYLISTS_ADAPTER_REQUEST_KEY, bundle)

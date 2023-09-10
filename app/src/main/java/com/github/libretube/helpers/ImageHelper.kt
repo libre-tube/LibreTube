@@ -16,9 +16,9 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toAndroidUri
 import com.github.libretube.extensions.toAndroidUriOrNull
 import com.github.libretube.util.DataSaverMode
+import java.nio.file.Path
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.nio.file.Path
 
 object ImageHelper {
     lateinit var imageLoader: ImageLoader

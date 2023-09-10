@@ -2,13 +2,13 @@ package com.github.libretube.helpers
 
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Streams
-import org.w3c.dom.Document
-import org.w3c.dom.Element
 import java.io.StringWriter
 import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.transform.TransformerFactory
 import javax.xml.transform.dom.DOMSource
 import javax.xml.transform.stream.StreamResult
+import org.w3c.dom.Document
+import org.w3c.dom.Element
 
 // Based off of https://github.com/TeamPiped/Piped/blob/master/src/utils/DashUtils.js
 

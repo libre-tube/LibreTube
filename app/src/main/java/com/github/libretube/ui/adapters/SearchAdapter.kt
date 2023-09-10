@@ -102,7 +102,10 @@ class SearchAdapter(
             val activity = (root.context as BaseActivity)
             val fragmentManager = activity.supportFragmentManager
             root.setOnLongClickListener {
-                fragmentManager.setFragmentResultListener(VideoOptionsBottomSheet.VIDEO_OPTIONS_SHEET_REQUEST_KEY, activity) { _, _ ->
+                fragmentManager.setFragmentResultListener(
+                    VideoOptionsBottomSheet.VIDEO_OPTIONS_SHEET_REQUEST_KEY,
+                    activity
+                ) { _, _ ->
                     notifyItemChanged(position)
                 }
                 val sheet = VideoOptionsBottomSheet()

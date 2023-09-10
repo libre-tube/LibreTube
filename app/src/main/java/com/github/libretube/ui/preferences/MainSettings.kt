@@ -2,8 +2,6 @@ package com.github.libretube.ui.preferences
 
 import android.os.Bundle
 import androidx.annotation.StringRes
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.commitNow
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
@@ -18,8 +16,6 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 
 class MainSettings : BasePreferenceFragment() {
     override val titleResourceId: Int = R.string.settings
