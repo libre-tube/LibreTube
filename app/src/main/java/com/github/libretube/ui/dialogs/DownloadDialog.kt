@@ -162,8 +162,14 @@ class DownloadDialog : DialogFragment() {
         restorePreviousSelections(binding, videoStreams, audioStreams, subtitles)
 
         onDownloadConfirm = onDownloadConfirm@{
-            if (binding.fileName.text.toString().isEmpty()) {
+            val fileName = binding.fileName.text.toString()
+            if (fileName.isBlank()) {
                 Toast.makeText(context, R.string.invalid_filename, Toast.LENGTH_SHORT).show()
+                return@onDownloadConfirm
+            }
+
+            if (fileName.length > MAX_FILE_NAME_LENGTH - 20) { // reserve 20 chars for quality and extension
+                Toast.makeText(context, R.string.filename_too_long, Toast.LENGTH_SHORT).show()
                 return@onDownloadConfirm
             }
 
@@ -269,6 +275,11 @@ class DownloadDialog : DialogFragment() {
     }
 
     companion object {
+        /**
+         * Max file name length at Android systems
+         */
+        private const val MAX_FILE_NAME_LENGTH = 255
+
         private const val VIDEO_DOWNLOAD_QUALITY = "video_download_quality"
         private const val VIDEO_DOWNLOAD_FORMAT = "video_download_format"
         private const val AUDIO_DOWNLOAD_QUALITY = "audio_download_quality"
