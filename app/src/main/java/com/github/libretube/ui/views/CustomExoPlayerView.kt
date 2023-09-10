@@ -41,6 +41,7 @@ import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.normalize
 import com.github.libretube.extensions.round
 import com.github.libretube.extensions.seekBy
+import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.helpers.AudioHelper
 import com.github.libretube.helpers.BrightnessHelper
 import com.github.libretube.helpers.PlayerHelper
@@ -156,14 +157,7 @@ open class CustomExoPlayerView(
         }
 
         binding.playPauseBTN.setOnClickListener {
-            when {
-                player?.isPlaying == false && player?.playbackState == Player.STATE_ENDED -> {
-                    player?.seekTo(0)
-                }
-
-                player?.isPlaying == false && player?.isLoading == false -> player?.play()
-                else -> player?.pause()
-            }
+            player?.togglePlayPauseState()
         }
 
         player?.addListener(object : Player.Listener {

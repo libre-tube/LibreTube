@@ -79,6 +79,7 @@ import com.github.libretube.extensions.serializableExtra
 import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
+import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ImageHelper
@@ -391,14 +392,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playerBinding.autoPlay.isVisible = true
 
         binding.playImageView.setOnClickListener {
-            when {
-                !exoPlayer.isPlaying && exoPlayer.playbackState == Player.STATE_ENDED -> {
-                    exoPlayer.seekTo(0)
-                }
-
-                !exoPlayer.isPlaying -> exoPlayer.play()
-                else -> exoPlayer.pause()
-            }
+            exoPlayer.togglePlayPauseState()
         }
 
         // video description and chapters toggle
