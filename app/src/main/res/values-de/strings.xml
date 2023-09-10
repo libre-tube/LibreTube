@@ -507,4 +507,5 @@
     <string name="sb_create_segment">Neuen Abschnitt erstellen</string>
     <string name="sb_invalid_segment">Ungültiger Start/Ende des Abschnitts</string>
     <string name="segment_type">Abschnitts-Kategorie</string>
+    <string name="contribute_to_sponsorblock">Zu SponsorBlock beitragen</string>
 </resources>
