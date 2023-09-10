@@ -7,9 +7,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
-import com.github.libretube.constants.PIPED_FRONTEND_URL
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.constants.YOUTUBE_FRONTEND_URL
 import com.github.libretube.databinding.DialogShareBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.enums.ShareObjectType
@@ -116,5 +114,10 @@ class ShareDialog : DialogFragment() {
 
         // return the custom instance frontend url if available
         return customInstances.firstOrNull { it.apiUrl == instancePref }?.frontendUrl.orEmpty()
+    }
+
+    companion object {
+        const val YOUTUBE_FRONTEND_URL = "https://www.youtube.com"
+        private const val PIPED_FRONTEND_URL = "https://piped.video"
     }
 }

@@ -7,7 +7,6 @@ import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.constants.YOUTUBE_FRONTEND_URL
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.LocalPlaylist
 import com.github.libretube.enums.PlaylistType
@@ -18,6 +17,7 @@ import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.FreeTubeImportPlaylist
 import com.github.libretube.obj.FreeTubeVideo
 import com.github.libretube.obj.PipedImportPlaylist
+import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_URL
 import com.github.libretube.util.deArrow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

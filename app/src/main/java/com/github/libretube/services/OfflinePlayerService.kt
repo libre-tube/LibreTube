@@ -10,10 +10,9 @@ import androidx.media3.common.C
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
+import com.github.libretube.LibreTubeApp.Companion.PLAYER_CHANNEL_NAME
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
-import com.github.libretube.constants.PLAYER_CHANNEL_ID
-import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.enums.FileType
@@ -23,6 +22,7 @@ import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.util.NowPlayingNotification
+import com.github.libretube.util.NowPlayingNotification.Companion.PLAYER_NOTIFICATION_ID
 import kotlin.io.path.exists
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -38,7 +38,7 @@ class OfflinePlayerService : LifecycleService() {
     override fun onCreate() {
         super.onCreate()
 
-        val notification = NotificationCompat.Builder(this, PLAYER_CHANNEL_ID)
+        val notification = NotificationCompat.Builder(this, PLAYER_CHANNEL_NAME)
             .setContentTitle(getString(R.string.app_name))
             .setContentText(getString(R.string.playingOnBackground))
             .setSmallIcon(R.drawable.ic_launcher_lockscreen)

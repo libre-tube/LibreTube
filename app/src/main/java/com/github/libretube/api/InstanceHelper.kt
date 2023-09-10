@@ -3,12 +3,13 @@ package com.github.libretube.api
 import android.content.Context
 import com.github.libretube.R
 import com.github.libretube.api.obj.Instances
-import com.github.libretube.constants.FALLBACK_INSTANCES_URL
-import com.github.libretube.constants.PIPED_INSTANCES_URL
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 object InstanceHelper {
+    private const val PIPED_INSTANCES_URL = "https://piped-instances.kavin.rocks"
+    private const val FALLBACK_INSTANCES_URL = "https://instances.tokhmi.xyz"
+
     /**
      * fetch official public instances from kavin.rocks as well as tokhmi.xyz as fallback
      */

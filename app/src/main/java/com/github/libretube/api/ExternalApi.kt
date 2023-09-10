@@ -2,13 +2,14 @@ package com.github.libretube.api
 
 import com.github.libretube.api.obj.Instances
 import com.github.libretube.api.obj.SubmitSegmentResponse
-import com.github.libretube.constants.GITHUB_API_URL
-import com.github.libretube.constants.SB_SUBMIT_API_URL
 import com.github.libretube.obj.update.UpdateInfo
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
 import retrofit2.http.Url
+
+private const val GITHUB_API_URL = "https://api.github.com/repos/libre-tube/LibreTube/releases/latest"
+private const val SB_SUBMIT_API_URL = "https://sponsor.ajay.app/api/skipSegments"
 
 interface ExternalApi {
     // only for fetching servers list

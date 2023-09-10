@@ -4,9 +4,10 @@ import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.github.libretube.LibreTubeApp
-import com.github.libretube.constants.DATABASE_NAME
 
 object DatabaseHolder {
+    private const val DATABASE_NAME = "LibreTubeDatabase"
+
     private val MIGRATION_11_12 = object : Migration(11, 12) {
         override fun migrate(database: SupportSQLiteDatabase) {
             database.execSQL(

@@ -19,14 +19,13 @@ import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
+import com.github.libretube.LibreTubeApp.Companion.PLAYER_CHANNEL_NAME
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
-import com.github.libretube.constants.PLAYER_CHANNEL_ID
-import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.WatchPosition
@@ -41,6 +40,7 @@ import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.util.NowPlayingNotification
+import com.github.libretube.util.NowPlayingNotification.Companion.PLAYER_NOTIFICATION_ID
 import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -109,7 +109,7 @@ class OnlinePlayerService : LifecycleService() {
     override fun onCreate() {
         super.onCreate()
 
-        val notification = NotificationCompat.Builder(this, PLAYER_CHANNEL_ID)
+        val notification = NotificationCompat.Builder(this, PLAYER_CHANNEL_NAME)
             .setContentTitle(getString(R.string.app_name))
             .setContentText(getString(R.string.playingOnBackground))
             .setSmallIcon(R.drawable.ic_launcher_lockscreen)
