@@ -11,6 +11,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.serializable
 import com.github.libretube.extensions.toastFromMainDispatcher
+import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -38,12 +39,10 @@ class DeletePlaylistDialog : DialogFragment() {
                     appContext?.toastFromMainDispatcher(
                         if (success) R.string.success else R.string.fail
                     )
-                    withContext(Dispatchers.Main) {
-                        setFragmentResult(
-                            IntentData.requestKey,
-                            bundleOf(IntentData.playlistTask to true)
-                        )
-                    }
+                    setFragmentResult(
+                        PlaylistOptionsBottomSheet.PLAYLIST_OPTIONS_REQUEST_KEY,
+                        bundleOf(IntentData.playlistTask to true)
+                    )
                 }
             }
             .setNegativeButton(R.string.cancel, null)

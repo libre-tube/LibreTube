@@ -16,6 +16,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogTextPreferenceBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
+import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet.Companion.PLAYLIST_OPTIONS_REQUEST_KEY
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -79,7 +80,7 @@ class PlaylistDescriptionDialog : DialogFragment() {
                         if (success) {
                             appContext.toastFromMainDispatcher(R.string.success)
                             setFragmentResult(
-                                IntentData.requestKey,
+                                PLAYLIST_OPTIONS_REQUEST_KEY,
                                 bundleOf(IntentData.playlistDescription to newDescription)
                             )
                         } else {
