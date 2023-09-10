@@ -22,10 +22,9 @@ import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import coil.request.ImageRequest
+import com.github.libretube.LibreTubeApp.Companion.PLAYER_CHANNEL_NAME
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
-import com.github.libretube.constants.PLAYER_CHANNEL_ID
-import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.toMediaMetadataCompat
 import com.github.libretube.helpers.BackgroundHelper
@@ -346,7 +345,7 @@ class NowPlayingNotification(
      * Initializes the [notificationBuilder] attached to the [player] and shows it.
      */
     private fun createNotificationBuilder() {
-        notificationBuilder = NotificationCompat.Builder(context, PLAYER_CHANNEL_ID)
+        notificationBuilder = NotificationCompat.Builder(context, PLAYER_CHANNEL_NAME)
             .setSmallIcon(R.drawable.ic_launcher_lockscreen)
             .setContentIntent(createCurrentContentIntent())
             .setDeleteIntent(createIntent(STOP))
@@ -403,6 +402,7 @@ class NowPlayingNotification(
     }
 
     companion object {
+        const val PLAYER_NOTIFICATION_ID = 1
         private const val PREV = "prev"
         private const val NEXT = "next"
         private const val REWIND = "rewind"

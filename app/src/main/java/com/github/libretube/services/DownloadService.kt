@@ -16,11 +16,10 @@ import androidx.core.util.set
 import androidx.core.util.valueIterator
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
+import com.github.libretube.LibreTubeApp.Companion.DOWNLOAD_CHANNEL_NAME
 import com.github.libretube.R
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.constants.DOWNLOAD_CHANNEL_ID
-import com.github.libretube.constants.DOWNLOAD_PROGRESS_NOTIFICATION_ID
 import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.Download
@@ -390,7 +389,7 @@ class DownloadService : LifecycleService() {
         notificationManager = getSystemService()!!
 
         summaryNotificationBuilder = NotificationCompat
-            .Builder(this, DOWNLOAD_CHANNEL_ID)
+            .Builder(this, DOWNLOAD_CHANNEL_NAME)
             .setSmallIcon(R.drawable.ic_launcher_lockscreen)
             .setContentTitle(getString(R.string.downloading))
             .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
@@ -409,7 +408,7 @@ class DownloadService : LifecycleService() {
             .getActivity(this@DownloadService, 0, intent, FLAG_CANCEL_CURRENT, false)
 
         return NotificationCompat
-            .Builder(this, DOWNLOAD_CHANNEL_ID)
+            .Builder(this, DOWNLOAD_CHANNEL_NAME)
             .setContentTitle("[${item.type}] ${item.fileName}")
             .setProgress(0, 0, true)
             .setOngoing(true)
@@ -522,6 +521,7 @@ class DownloadService : LifecycleService() {
     }
 
     companion object {
+        private const val DOWNLOAD_PROGRESS_NOTIFICATION_ID = 2
         private const val DOWNLOAD_NOTIFICATION_GROUP = "download_notification_group"
         const val ACTION_SERVICE_STARTED =
             "com.github.libretube.services.DownloadService.ACTION_SERVICE_STARTED"

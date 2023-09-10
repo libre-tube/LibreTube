@@ -4,9 +4,6 @@ import android.app.Application
 import androidx.core.app.NotificationChannelCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.ExistingPeriodicWorkPolicy
-import com.github.libretube.constants.DOWNLOAD_CHANNEL_ID
-import com.github.libretube.constants.PLAYER_CHANNEL_ID
-import com.github.libretube.constants.PUSH_CHANNEL_ID
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NotificationHelper
 import com.github.libretube.helpers.PreferenceHelper
@@ -65,21 +62,21 @@ class LibreTubeApp : Application() {
      */
     private fun initializeNotificationChannels() {
         val downloadChannel = NotificationChannelCompat.Builder(
-            DOWNLOAD_CHANNEL_ID,
+            DOWNLOAD_CHANNEL_NAME,
             NotificationManagerCompat.IMPORTANCE_LOW
         )
             .setName(getString(R.string.download_channel_name))
             .setDescription(getString(R.string.download_channel_description))
             .build()
         val playerChannel = NotificationChannelCompat.Builder(
-            PLAYER_CHANNEL_ID,
+            PLAYER_CHANNEL_NAME,
             NotificationManagerCompat.IMPORTANCE_LOW
         )
             .setName(getString(R.string.player_channel_name))
             .setDescription(getString(R.string.player_channel_description))
             .build()
         val pushChannel = NotificationChannelCompat.Builder(
-            PUSH_CHANNEL_ID,
+            PUSH_CHANNEL_NAME,
             NotificationManagerCompat.IMPORTANCE_DEFAULT
         )
             .setName(getString(R.string.push_channel_name))
@@ -98,5 +95,9 @@ class LibreTubeApp : Application() {
 
     companion object {
         lateinit var instance: LibreTubeApp
+
+        const val DOWNLOAD_CHANNEL_NAME = "download_service"
+        const val PLAYER_CHANNEL_NAME = "player_mode"
+        const val PUSH_CHANNEL_NAME = "notification_worker"
     }
 }

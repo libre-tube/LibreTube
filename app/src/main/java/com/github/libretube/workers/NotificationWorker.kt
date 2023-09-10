@@ -12,11 +12,11 @@ import androidx.core.app.PendingIntentCompat
 import androidx.core.content.getSystemService
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import com.github.libretube.LibreTubeApp.Companion.PUSH_CHANNEL_NAME
 import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
-import com.github.libretube.constants.PUSH_CHANNEL_ID
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
@@ -205,7 +205,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
     }
 
     private fun createNotificationBuilder(group: String): NotificationCompat.Builder {
-        return NotificationCompat.Builder(applicationContext, PUSH_CHANNEL_ID)
+        return NotificationCompat.Builder(applicationContext, PUSH_CHANNEL_NAME)
             .setSmallIcon(R.drawable.ic_launcher_lockscreen)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setAutoCancel(true)
