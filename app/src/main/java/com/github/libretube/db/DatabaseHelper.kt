@@ -29,9 +29,10 @@ object DatabaseHelper {
             videoId,
             stream.title,
             stream.uploaded?.let {
-                Instant.ofEpochMilli(
-                    it
-                ).atZone(ZoneId.systemDefault()).toLocalDate().toKotlinLocalDate()
+                Instant.ofEpochMilli(it)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate()
+                    .toKotlinLocalDate()
             },
             stream.uploaderName,
             stream.uploaderUrl?.toID(),
