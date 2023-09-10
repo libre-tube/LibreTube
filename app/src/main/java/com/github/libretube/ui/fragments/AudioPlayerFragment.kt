@@ -397,9 +397,8 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
 
     override fun onLongTap() {
         val current = PlayingQueue.getCurrent() ?: return
-        VideoOptionsBottomSheet(
-            current
-        )
+        VideoOptionsBottomSheet()
+            .apply { arguments = bundleOf(IntentData.shareData to current) }
             .show(childFragmentManager)
     }
 

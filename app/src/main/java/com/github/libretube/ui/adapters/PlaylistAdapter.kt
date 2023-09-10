@@ -5,12 +5,14 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
@@ -23,6 +25,7 @@ import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setFormattedDuration
 import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
+import com.github.libretube.ui.sheets.VideoOptionsBottomSheet.Companion.VIDEO_OPTIONS_SHEET_REQUEST_KEY
 import com.github.libretube.ui.viewholders.PlaylistViewHolder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -80,14 +83,16 @@ class PlaylistAdapter(
                 NavigationHelper.navigateVideo(root.context, streamItem.url, playlistId)
             }
             val videoId = streamItem.url!!.toID()
+
+            val activity = (root.context as BaseActivity)
+            val fragmentManager = activity.supportFragmentManager
             root.setOnLongClickListener {
-                VideoOptionsBottomSheet(streamItem) {
+                fragmentManager.setFragmentResultListener(VIDEO_OPTIONS_SHEET_REQUEST_KEY, activity) { _, _ ->
                     notifyItemChanged(position)
                 }
-                    .show(
-                        (root.context as BaseActivity).supportFragmentManager,
-                        VideoOptionsBottomSheet::class.java.name
-                    )
+                val sheet = VideoOptionsBottomSheet()
+                sheet.arguments = bundleOf(IntentData.streamItem to streamItem)
+                sheet.show(fragmentManager, VideoOptionsBottomSheet::class.java.name)
                 true
             }
 

@@ -53,34 +53,34 @@ class PlaylistsAdapter(
             }
 
             val fragmentManager = (root.context as BaseActivity).supportFragmentManager
-            fragmentManager.setFragmentResultListener(
-                PLAYLISTS_ADAPTER_REQUEST_KEY,
-                (root.context as BaseActivity)
-            ) { _, resultBundle ->
-                val newPlaylistDescription =
-                    resultBundle.getString(IntentData.playlistDescription)
-                val newPlaylistName =
-                    resultBundle.getString(IntentData.playlistName)
-                val isPlaylistToBeDeleted =
-                    resultBundle.getBoolean(IntentData.playlistTask)
-
-                newPlaylistDescription?.let {
-                    playlistDescription.text = it
-                    playlist.shortDescription = it
-                }
-
-                newPlaylistName?.let {
-                    playlistTitle.text = it
-                    playlist.name = it
-                }
-
-                if (isPlaylistToBeDeleted) {
-                    // try to refresh the playlists in the library on deletion success
-                    onDelete(position, root.context as BaseActivity)
-                }
-            }
-
             root.setOnLongClickListener {
+                fragmentManager.setFragmentResultListener(
+                    PLAYLISTS_ADAPTER_REQUEST_KEY,
+                    (root.context as BaseActivity)
+                ) { _, resultBundle ->
+                    val newPlaylistDescription =
+                        resultBundle.getString(IntentData.playlistDescription)
+                    val newPlaylistName =
+                        resultBundle.getString(IntentData.playlistName)
+                    val isPlaylistToBeDeleted =
+                        resultBundle.getBoolean(IntentData.playlistTask)
+
+                    newPlaylistDescription?.let {
+                        playlistDescription.text = it
+                        playlist.shortDescription = it
+                    }
+
+                    newPlaylistName?.let {
+                        playlistTitle.text = it
+                        playlist.name = it
+                    }
+
+                    if (isPlaylistToBeDeleted) {
+                        // try to refresh the playlists in the library on deletion success
+                        onDelete(position, root.context as BaseActivity)
+                    }
+                }
+
                 val playlistOptionsDialog = PlaylistOptionsBottomSheet(
                     playlistId = playlist.id!!,
                     playlistName = playlist.name!!,
