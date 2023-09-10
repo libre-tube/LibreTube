@@ -275,6 +275,13 @@ class OnlinePlayerService : LifecycleService() {
                     Player.STATE_BUFFERING -> {}
                     Player.STATE_READY -> {
                         isTransitioning = false
+
+                        // save video to watch history when the video starts playing or is being resumed
+                        // waiting for the player to be ready since the video can't be claimed to be watched
+                        // while it did not yet start actually, but did buffer only so far
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            streams?.let { DatabaseHelper.addToWatchHistory(videoId, it) }
+                        }
                     }
                 }
             }
