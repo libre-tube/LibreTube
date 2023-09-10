@@ -6,13 +6,14 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.ViewGroup
+import android.view.View
 import android.widget.ScrollView
 import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.allViews
 import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.core.widget.NestedScrollView
@@ -116,10 +117,10 @@ class MainActivity : BaseActivity() {
             } else {
                 // get the host fragment containing the current fragment
                 val navHostFragment =
-                    supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment?
+                    supportFragmentManager.findFragmentById(R.id.fragment) as? NavHostFragment
                 // get the current fragment
-                val fragment = navHostFragment?.childFragmentManager?.fragments?.getOrNull(0)
-                tryScrollToTop(fragment?.requireView() as? ViewGroup)
+                val fragment = navHostFragment?.childFragmentManager?.fragments?.firstOrNull()
+                tryScrollToTop(fragment?.requireView())
             }
         }
 
@@ -193,25 +194,13 @@ class MainActivity : BaseActivity() {
     /**
      * Try to find a scroll or recycler view and scroll it back to the top
      */
-    private fun tryScrollToTop(viewGroup: ViewGroup?) {
-        (viewGroup as? ScrollView)?.scrollTo(0, 0)
-
-        if (viewGroup == null || viewGroup.childCount == 0) return
-
-        viewGroup.children.forEach {
-            (it as? ScrollView)?.let { scrollView ->
-                scrollView.smoothScrollTo(0, 0)
-                return
-            }
-            (it as? NestedScrollView)?.let { scrollView ->
-                scrollView.smoothScrollTo(0, 0)
-                return
-            }
-            (it as? RecyclerView)?.let { recyclerView ->
-                recyclerView.smoothScrollToPosition(0)
-                return
-            }
-            tryScrollToTop(it as? ViewGroup)
+    private fun tryScrollToTop(view: View?) {
+        val scrollView = view?.allViews
+            ?.firstOrNull { it is ScrollView || it is NestedScrollView || it is RecyclerView }
+        when (scrollView) {
+            is ScrollView -> scrollView.smoothScrollTo(0, 0)
+            is NestedScrollView -> scrollView.smoothScrollTo(0, 0)
+            is RecyclerView -> scrollView.smoothScrollToPosition(0)
         }
     }
 
