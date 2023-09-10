@@ -20,10 +20,10 @@ import com.github.libretube.obj.NewPipeSubscriptions
 import com.github.libretube.obj.PipedImportPlaylist
 import com.github.libretube.obj.PipedImportPlaylistFile
 import java.util.stream.Collectors
-import kotlin.streams.toList
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
+import java.util.Date
 
 object ImportHelper {
     /**
@@ -168,20 +168,36 @@ object ImportHelper {
 
             ImportFormat.YOUTUBECSV -> {
                 val playlist = PipedImportPlaylist()
-                activity.contentResolver.openInputStream(uri)?.use {
-                    val lines = it.bufferedReader().use { reader ->
+                activity.contentResolver.openInputStream(uri)?.use { inputStream ->
+                    val lines = inputStream.bufferedReader().use { reader ->
                         reader.lines().collect(Collectors.toList())
                     }
-                    playlist.name = lines[1].split(",").reversed()[2]
-                    var splitIndex = lines.indexOfFirst { line -> line.isBlank() }
-                    // seek until playlist items table
-                    while (lines.getOrNull(splitIndex + 1).orEmpty().isBlank()) {
-                        splitIndex++
+                    // invalid playlist file, hence returning
+                    if (lines.size < 2) return
+
+                    val playlistName = lines[1].split(",").reversed().getOrNull(2)
+                    // the playlist name can be undefined in some cases, e.g. watch later lists
+                    playlist.name = playlistName ?: Date().toString()
+
+                    // start directly at the beginning if header playlist info such as name is missing
+                    val startIndex = if (playlistName == null) {
+                        1
+                    } else {
+                        // seek to the first blank line
+                        var splitIndex = lines.indexOfFirst { line -> line.isBlank() }
+                        while (lines.getOrElse(splitIndex) { return }.isBlank()) splitIndex++
+                        // skip the line containing the names of the columns
+                        splitIndex + 2
                     }
-                    lines.subList(splitIndex + 2, lines.size).forEach { line ->
-                        line.split(",").firstOrNull()?.let { videoId ->
-                            if (videoId.isNotBlank()) playlist.videos += videoId.trim()
-                        }
+                    for (line in lines.subList(startIndex, lines.size)) {
+                        if (line.isBlank()) continue
+
+                        line.split(",")
+                            .firstOrNull()
+                            ?.takeIf { it.isNotBlank() }
+                            ?.let { videoId ->
+                                playlist.videos += videoId.trim()
+                            }
                     }
                     importPlaylists.add(playlist)
                 }
