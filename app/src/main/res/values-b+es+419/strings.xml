@@ -511,4 +511,5 @@
     <string name="segment_type">Tipo de segmento</string>
     <string name="sb_invalid_segment">Inicio o final de segmento inválido</string>
     <string name="contribute_to_sponsorblock">Contribuir con SponsorBlock</string>
+    <string name="filename_too_long">¡El nombre es demasiado largo!</string>
 </resources>
