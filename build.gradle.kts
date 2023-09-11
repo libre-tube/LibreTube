@@ -1,7 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-
     val kotlinversion = ("1.8.22")
     repositories {
         google()
