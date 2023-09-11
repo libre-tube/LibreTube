@@ -29,4 +29,5 @@ object IntentData {
     const val logoutTask = "logoutTask"
     const val color = "color"
     const val streamItem = "streamItem"
+    const val url = "url"
 }
