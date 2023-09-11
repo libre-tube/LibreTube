@@ -6,6 +6,7 @@ import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.R
+import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.obj.ContentItem
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
@@ -26,6 +27,7 @@ import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.SearchViewHolder
 import com.github.libretube.util.TextUtils
+import kotlinx.serialization.encodeToString
 
 class SearchAdapter(
     private val isChannelAdapter: Boolean = false
@@ -109,7 +111,9 @@ class SearchAdapter(
                     notifyItemChanged(position)
                 }
                 val sheet = VideoOptionsBottomSheet()
-                sheet.arguments = bundleOf(IntentData.streamItem to item)
+                val contentItemString = JsonHelper.json.encodeToString(item)
+                val streamItem: StreamItem = JsonHelper.json.decodeFromString(contentItemString)
+                sheet.arguments = bundleOf(IntentData.streamItem to streamItem)
                 sheet.show(fragmentManager, SearchAdapter::class.java.name)
                 true
             }
