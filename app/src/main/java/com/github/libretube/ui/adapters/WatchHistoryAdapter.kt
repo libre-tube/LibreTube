@@ -80,7 +80,7 @@ class WatchHistoryAdapter(
                     notifyItemChanged(position)
                 }
                 val sheet = VideoOptionsBottomSheet()
-                sheet.arguments = bundleOf(IntentData.streamItem to video)
+                sheet.arguments = bundleOf(IntentData.streamItem to video.toStreamItem())
                 sheet.show(fragmentManager, WatchHistoryAdapter::class.java.name)
                 true
             }
