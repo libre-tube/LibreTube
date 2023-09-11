@@ -505,4 +505,6 @@
     <string name="segment_type">分段类型</string>
     <string name="sb_invalid_segment">无效的分段开头或结尾</string>
     <string name="contribute_to_sponsorblock">给 SponsorBlock 出力</string>
+    <string name="filename_too_long">文件名过长！</string>
+    <string name="sponsorblock_user_id">SponsorBlock 用户名</string>
 </resources>
