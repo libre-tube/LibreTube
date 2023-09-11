@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +17,9 @@ import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.ui.activities.OfflinePlayerActivity
+import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.sheets.DownloadOptionsBottomSheet
+import com.github.libretube.ui.sheets.DownloadOptionsBottomSheet.Companion.DELETE_DOWNLOAD_REQUEST_KEY
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
 import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -97,11 +99,19 @@ class DownloadsAdapter(
             }
 
             root.setOnLongClickListener {
-                DownloadOptionsBottomSheet(download) {
+                val activity = root.context as BaseActivity
+                val fragmentManager = activity.supportFragmentManager
+                fragmentManager.setFragmentResultListener(DELETE_DOWNLOAD_REQUEST_KEY, activity) { _, _ ->
                     showDeleteDialog(root.context, position)
-                }.show(
-                    (root.context as AppCompatActivity).supportFragmentManager
-                )
+                }
+                DownloadOptionsBottomSheet()
+                    .apply {
+                        arguments = bundleOf(
+                            IntentData.videoId to download.videoId,
+                            IntentData.channelName to download.uploader
+                        )
+                    }
+                    .show(fragmentManager)
                 true
             }
         }
