@@ -1,11 +1,11 @@
 import java.time.Instant
 
 plugins {
-    id ("com.android.application")
-    id ("com.google.devtools.ksp")
-    id ("kotlin-android")
-    id ("kotlinx-serialization")
-    id ("kotlin-parcelize")
+    id("com.android.application")
+    id("com.google.devtools.ksp")
+    id("kotlin-android")
+    id("kotlinx-serialization")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -18,7 +18,7 @@ android {
         versionCode = 40
         versionName = "0.17.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        resValue ("string", "app_name", "LibreTube")
+        resValue("string", "app_name", "LibreTube")
 
         ksp {
             arg("room.schemaLocation", "$projectDir/schemas")
@@ -30,7 +30,7 @@ android {
         enable = true
     }
 
-        buildTypes {
+    buildTypes {
         getByName("release") {
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
@@ -57,16 +57,15 @@ android {
         abi {
             isEnable = true
             reset()
-            include ("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
+            include("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
             isUniversalApk = true
         }
     }
 
-    android {
-        packagingOptions {
-            exclude("lib/armeabi-v7a/*_neon.so")
-        }
+    packagingOptions {
+        exclude("lib/armeabi-v7a/*_neon.so")
     }
+
     namespace = "com.github.libretube"
 }
 
