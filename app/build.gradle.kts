@@ -33,7 +33,10 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
 
         getByName("debug") {
@@ -70,7 +73,7 @@ android {
 }
 
 dependencies {
-    //debugImplementation libs.square.leakcanary
+    // debugImplementation libs.square.leakcanary
     /* Android Core */
     implementation(libs.androidx.activity)
     implementation(libs.androidx.appcompat)
