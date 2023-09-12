@@ -179,8 +179,8 @@
     <string name="portrait">Dikey</string>
     <string name="landscape">Yatay</string>
     <string name="audio_video">Ses ve video</string>
-    <string name="open">Açın…</string>
-    <string name="turnInternetOn">İnternete bağlanmak için lütfen Wi-Fi veya mobil verileri açın.</string>
+    <string name="open">Aç…</string>
+    <string name="turnInternetOn">İnternete bağlanmak için lütfen Wi-Fi veya mobil veriyi açın.</string>
     <string name="chapters">Bölümler</string>
     <string name="require_restart_message">Yeni değişiklikleri kullanmak için uygulamayı yeniden başlat.</string>
     <string name="require_restart">Uygulamanın yeniden başlatılması gerekiyor</string>
@@ -495,7 +495,7 @@
     <string name="original_or_main_audio_track">orijinal veya ana</string>
     <string name="tooltip_repeat">Tekrarla</string>
     <string name="tooltip_fullscreen">Tam ekran</string>
-    <string name="tooltip_sponsorblock">SponsorBlock\'u aç kapa</string>
+    <string name="tooltip_sponsorblock">SponsorBlock\'u aç/kapa</string>
     <string name="automatic_once">Bir kez otomatik</string>
     <string name="tooltip_reverse">Tersi</string>
     <string name="tooltip_create_playlist">Oynatma listesi oluştur</string>
@@ -506,5 +506,8 @@
     <string name="chapters_videoHighlight">Video vurgusu</string>
     <string name="tooltip_sort">Çeşit</string>
     <string name="tooltip_watch_position">İzleme pozisyonu</string>
-    <string name="proxy">Vekil Sunucu</string>
+    <string name="proxy">Proxy</string>
+    <string name="filename_too_long">Dosya adı çok uzun!</string>
+    <string name="sponsorblock_user_id">SponsorBlock Kullanıcı Adı</string>
+    <string name="contribute_to_sponsorblock">SponsorBlock\'a katkıda bulun</string>
 </resources>
