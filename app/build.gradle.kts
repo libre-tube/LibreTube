@@ -72,7 +72,8 @@ android {
     namespace = "com.github.libretube"
 
     tasks.register("testClasses") {
-        dependsOn("compileTestKotlin", "compileTestJava")
+        dependsOn(":app:compileDebugUnitTestKotlin")
+        dependsOn(":app:compileDebugUnitTestJava")
     }
 }
 
