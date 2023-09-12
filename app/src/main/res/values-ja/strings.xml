@@ -504,4 +504,7 @@
     <string name="sb_create_segment">セグメントを作成</string>
     <string name="segment_type">セグメントの種類</string>
     <string name="sb_invalid_segment">セグメントの開始と終了が正しくないです</string>
+    <string name="filename_too_long">ファイル名が長すぎます！</string>
+    <string name="sponsorblock_user_id">SponsorBlock ユーザー名</string>
+    <string name="contribute_to_sponsorblock">SponsorBlock に貢献</string>
 </resources>
