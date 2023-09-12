@@ -520,4 +520,6 @@
     <string name="segment_type">نوع المقطع</string>
     <string name="sb_invalid_segment">بداية المقطع أو نهايته غير صالحة</string>
     <string name="contribute_to_sponsorblock">المساهمة في حاجب الرعاة</string>
+    <string name="filename_too_long">اسم الملف طويل جدًا!</string>
+    <string name="sponsorblock_user_id">اسم مستخدم حاجب الرعاة</string>
 </resources>

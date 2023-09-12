@@ -510,4 +510,7 @@
     <string name="proxy">Proxy</string>
     <string name="group_name_error_empty">Por favor, introduza um nome</string>
     <string name="group_name_error_exists">Escolha um nome que seja único</string>
+    <string name="filename_too_long">Nome demasiado comprido!</string>
+    <string name="sponsorblock_user_id">Nome de utilizador SponsorBlock</string>
+    <string name="contribute_to_sponsorblock">Contribuir para SponsorBlock</string>
 </resources>

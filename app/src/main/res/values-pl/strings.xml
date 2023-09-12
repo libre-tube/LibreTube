@@ -515,4 +515,5 @@
     <string name="sb_create_segment">Stwórz segment</string>
     <string name="filename_too_long">Nazwa pliku jest za długa!</string>
     <string name="contribute_to_sponsorblock">Wspomóż rozwój SponsorBlock</string>
+    <string name="sponsorblock_user_id">Nazwa użytkownika SponsorBlock</string>
 </resources>
