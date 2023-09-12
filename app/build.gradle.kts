@@ -1,5 +1,3 @@
-import java.time.Instant
-
 plugins {
     id("com.android.application")
     id("com.google.devtools.ksp")
@@ -65,8 +63,8 @@ android {
         }
     }
 
-    packagingOptions {
-        exclude("lib/armeabi-v7a/*_neon.so")
+    packaging {
+        jniLibs.excludes.add("lib/armeabi-v7a/*_neon.so")
     }
 
     namespace = "com.github.libretube"
@@ -127,5 +125,3 @@ dependencies {
     ksp(libs.room.compiler)
     implementation(libs.room)
 }
-
-fun getUnixTime() = Instant.now().epochSecond
