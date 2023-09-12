@@ -71,13 +71,7 @@ android {
 
     namespace = "com.github.libretube"
 
-    tasks.named("check") {
-        enabled = false
-    }
-
-    tasks.named("assemble") {
-        dependsOn("build")
-    }
+    tasks.register("testClasses")
 }
 
 dependencies {
