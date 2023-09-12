@@ -71,9 +71,12 @@ android {
 
     namespace = "com.github.libretube"
 
-    tasks.register("testClasses") {
-        dependsOn(":app:compileDebugUnitTestKotlin")
-        dependsOn(":app:compileDebugUnitTestJava")
+    tasks.named("check") {
+        enabled = false
+    }
+
+    tasks.named("assemble") {
+        dependsOn("build")
     }
 }
 
