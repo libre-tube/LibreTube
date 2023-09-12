@@ -32,7 +32,7 @@
     <string name="videos">動画</string>
     <string name="customInstance">カスタム</string>
     <string name="dlisinprogress">現在のすべてのダウンロードが完了するまでお待ちください。</string>
-    <string name="error">不明のエラーが発生しました。</string>
+    <string name="error">不明なエラーが発生しました。</string>
     <string name="subscriptions">登録チャンネル</string>
     <string name="region">地域</string>
     <string name="library">ライブラリ</string>
@@ -67,8 +67,8 @@
     <string name="emptyList">何もありません。</string>
     <string name="addToPlaylist">プレイリストに追加</string>
     <string name="changeLanguage">言語</string>
-    <string name="darkTheme">ダークテーマ</string>
-    <string name="subscribers">登録者 %1$s人</string>
+    <string name="darkTheme">ダーク</string>
+    <string name="subscribers">登録者数 %1$s人</string>
     <string name="settings">設定</string>
     <string name="noInternet">インターネットに接続してください。</string>
     <string name="music_videos">YT Musicの動画</string>
@@ -100,7 +100,7 @@
     <string name="material_you">Material You</string>
     <string name="sponsorblock_notifications">通知</string>
     <string name="require_restart">アプリの再起動が必要です</string>
-    <string name="update_summary">タップして更新確認</string>
+    <string name="update_summary">タップして更新を確認</string>
     <string name="turnInternetOn">WiFiまたはモバイルデータ通信を有効にして、インターネットに接続してください。</string>
     <string name="open">開く…</string>
     <string name="reset">初期設定に戻す</string>
@@ -120,10 +120,10 @@
     <string name="restore">復元</string>
     <string name="require_restart_message">アプリを再起動して変更を反映します。</string>
     <string name="playOnBackground">バックグラウンドで再生</string>
-    <string name="defaultIcon">標準</string>
+    <string name="defaultIcon">デフォルト</string>
     <string name="app_icon">アイコン</string>
     <string name="disabled">オフ</string>
-    <string name="instance_summary">Piped、ログインおよびアカウント</string>
+    <string name="instance_summary">Piped、ログイン、アカウント</string>
     <string name="customInstance_summary">追加…</string>
     <string name="invalid_url">有効なURLを入力してください</string>
     <string name="version">バージョン %1$s</string>
@@ -133,10 +133,10 @@
     <string name="category_music_offtopic">音楽: 非音楽部分</string>
     <string name="category_preview">予告/あらすじ</string>
     <string name="enabled">オン</string>
-    <string name="update_available_text">最新版があります。クリックで GitHub のリリースページを開きます。</string>
+    <string name="update_available_text">最新版があります。クリックして GitHub のリリースページを開きます。</string>
     <string name="appearance">外観</string>
     <string name="app_uptodate">最新版を使用中です。</string>
-    <string name="live">ライブ配信</string>
+    <string name="live">ライブ</string>
     <string name="shareTo">URLを共有</string>
     <string name="legacyIcon">自由</string>
     <string name="gradientIcon">階調</string>
@@ -158,7 +158,7 @@
     <string name="category_filler_description">動画の主な内容を理解するのに必要ない穴埋めや、ユーモアのためだけに追加された余分なシーン。</string>
     <string name="category_music_offtopic_description">ミュージックビデオ専用です。公式の音楽には含まれないシーン。ここがないと、その動画はSpotifyやその他のリミックス版になるべく近くなったり、話し声など邪魔なものが減ります。</string>
     <string name="category_preview_description">追加情報なく将来の内容を詳述する部分です。ここにしかないシーンが含まれていれば、分類を間違えている可能性が高いです。</string>
-    <string name="buffering_goal">先読み</string>
+    <string name="buffering_goal">プリロード</string>
     <string name="playerVideoFormat">プレイヤーの動画形式</string>
     <string name="audio_video">音声と映像</string>
     <string name="fullscreen_orientation">全画面時の向き</string>
@@ -168,7 +168,7 @@
     <string name="portrait">縦</string>
     <string name="downloads">ダウンロード</string>
     <string name="playback_speed">再生速度</string>
-    <string name="advanced">高度</string>
+    <string name="advanced">高度な設定</string>
     <string name="player">プレイヤー</string>
     <string name="appearance_summary">アプリを自分好みにしてください。</string>
     <string name="advanced_summary">ダウンロードおよび初期化</string>
@@ -354,8 +354,8 @@
     <string name="shuffle">シャッフル再生</string>
     <string name="add_to_bookmarks">ブックマークに追加</string>
     <string name="remove_bookmark">ブックマークを削除</string>
-    <string name="trending_views">%1$s • %2$s回視聴 • %3$s</string>
-    <string name="normal_views">%1$s回視聴%2$s</string>
+    <string name="trending_views">%1$s • %2$s 回視聴 • %3$s</string>
+    <string name="normal_views">%1$s 回視聴%2$s</string>
     <string name="pause">一時停止</string>
     <string name="autoplay_countdown">自動再生の秒読み</string>
     <string name="playing_next">%1$s秒で次の動画</string>
@@ -394,7 +394,7 @@
     <string name="lbry_hls">LBRY HLS</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d 本の動画</string>
     <string name="lbry_hls_summary">可能な場合は、ストリーミングに LBRY HLS を使用します。</string>
-    <string name="subscriberAndVideoCounts">%1$s 人の登録者 • %2$d 本の動画</string>
+    <string name="subscriberAndVideoCounts">登録者数 %1$s人 • %2$d 本の動画</string>
     <string name="replies">返信</string>
     <string name="disable_proxy">Pipedのプロキシを無効化</string>
     <string name="disable_proxy_summary">動画や画像を YouTube のサーバーから直接読み込みます。VPN を併用する場合にのみ有効化してください！</string>
