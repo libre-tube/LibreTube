@@ -511,4 +511,5 @@
     <string name="sb_invalid_segment">Início ou fim do segmento inválido</string>
     <string name="proxy">Proxy</string>
     <string name="contribute_to_sponsorblock">Contribua para o SponsorBlock</string>
+    <string name="filename_too_long">Nome do arquivo muito longo!</string>
 </resources>
