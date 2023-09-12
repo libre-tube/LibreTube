@@ -508,4 +508,6 @@
     <string name="segment_type">Segment­type</string>
     <string name="sb_invalid_segment">Ongeldig segment­begin of -einde</string>
     <string name="contribute_to_sponsorblock">Bijdragen aan SponsorBlock</string>
+    <string name="filename_too_long">Bestandsnaam te lang!</string>
+    <string name="sponsorblock_user_id">SponsorBlock-gebruikersnaam</string>
 </resources>
