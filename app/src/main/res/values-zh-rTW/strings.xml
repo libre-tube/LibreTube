@@ -504,4 +504,7 @@
     <string name="sb_create_segment">建立片段</string>
     <string name="segment_type">片段類型</string>
     <string name="sb_invalid_segment">無效的片段開始或結束</string>
+    <string name="filename_too_long">檔案名稱太長了！</string>
+    <string name="sponsorblock_user_id">SponsorBlock 使用者名稱</string>
+    <string name="contribute_to_sponsorblock">貢獻給 SponsorBlock</string>
 </resources>
