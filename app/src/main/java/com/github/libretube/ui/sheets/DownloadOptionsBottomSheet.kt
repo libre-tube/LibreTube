@@ -7,7 +7,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
-import com.github.libretube.db.obj.Download
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.obj.ShareData

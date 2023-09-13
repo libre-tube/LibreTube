@@ -101,7 +101,10 @@ class DownloadsAdapter(
             root.setOnLongClickListener {
                 val activity = root.context as BaseActivity
                 val fragmentManager = activity.supportFragmentManager
-                fragmentManager.setFragmentResultListener(DELETE_DOWNLOAD_REQUEST_KEY, activity) { _, _ ->
+                fragmentManager.setFragmentResultListener(
+                    DELETE_DOWNLOAD_REQUEST_KEY,
+                    activity
+                ) { _, _ ->
                     showDeleteDialog(root.context, position)
                 }
                 DownloadOptionsBottomSheet()

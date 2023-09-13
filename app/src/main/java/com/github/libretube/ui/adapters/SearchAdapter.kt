@@ -178,9 +178,9 @@ class SearchAdapter(
                     IntentData.playlistType to PlaylistType.PUBLIC
                 )
                 sheet.show(
-                        (root.context as BaseActivity).supportFragmentManager,
-                        PlaylistOptionsBottomSheet::class.java.name
-                    )
+                    (root.context as BaseActivity).supportFragmentManager,
+                    PlaylistOptionsBottomSheet::class.java.name
+                )
                 true
             }
         }
