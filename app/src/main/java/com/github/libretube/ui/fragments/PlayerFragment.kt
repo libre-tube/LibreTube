@@ -179,11 +179,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     )
 
     /**
-     * Chapters and comments
-     */
-    private lateinit var chapters: MutableList<ChapterSegment>
-
-    /**
      * for the player notification
      */
     private lateinit var nowPlayingNotification: NowPlayingNotification
@@ -603,7 +598,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
         binding.playerViewsInfo.text = viewInfo
 
-        if (this::chapters.isInitialized && chapters.isNotEmpty()) {
+        if (viewModel.chapters.isNotEmpty()) {
             setCurrentChapterName(forceUpdate = true, enqueueNew = false)
         }
     }
@@ -641,6 +636,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     override fun onDestroy() {
         super.onDestroy()
+
+        viewModel.player = null
 
         // disable the auto PiP mode for SDK >= 32
         exoPlayer.pause()
@@ -791,7 +788,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 playerBinding.chapterLL.setOnClickListener {
                     updateMaxSheetHeight()
                     val sheet =
-                        chaptersBottomSheet ?: ChaptersBottomSheet(chapters, exoPlayer).also {
+                        chaptersBottomSheet ?: ChaptersBottomSheet().also {
                             chaptersBottomSheet = it
                         }
                     if (sheet.isVisible) {
@@ -910,7 +907,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playerBinding.exoTitle.text = streams.title
 
         // init the chapters recyclerview
-        chapters = streams.chapters.toMutableList()
+        viewModel.chapters = streams.chapters.toMutableList()
 
         // Listener for play and pause icon change
         exoPlayer.addListener(object : Player.Listener {
@@ -1208,8 +1205,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             start = highlight.segmentStartAndEnd.first.toLong(),
             highlightDrawable = frame?.toDrawable(requireContext().resources)
         )
-        chapters.add(highlightChapter)
-        chapters.sortBy { it.start }
+        viewModel.chapters.add(highlightChapter)
+        viewModel.chapters.sortBy { it.start }
 
         withContext(Dispatchers.Main) {
             setCurrentChapterName()
@@ -1222,10 +1219,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         if (_binding == null) return
 
         // only show the chapters layout if there are some chapters available
-        playerBinding.chapterLL.isInvisible = chapters.isEmpty()
+        playerBinding.chapterLL.isInvisible = viewModel.chapters.isEmpty()
 
         // the following logic to set the chapter title can be skipped if no chapters are available
-        if (chapters.isEmpty()) return
+        if (viewModel.chapters.isEmpty()) return
 
         // call the function again in 100ms
         if (enqueueNew) binding.player.postDelayed(this::setCurrentChapterName, 100)
@@ -1233,8 +1230,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // if the user is scrubbing the time bar, don't update
         if (scrubbingTimeBar && !forceUpdate) return
 
-        val chapterName = PlayerHelper.getCurrentChapterIndex(exoPlayer, chapters)?.let {
-            chapters[it].title.trim()
+        val chapterName = PlayerHelper.getCurrentChapterIndex(exoPlayer.currentPosition, viewModel.chapters)?.let {
+            viewModel.chapters[it].title.trim()
         } ?: getString(R.string.no_chapter)
 
         // change the chapter name textView text to the chapterName
@@ -1418,6 +1415,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             .setAudioAttributes(PlayerHelper.getAudioAttributes(), true)
             .build()
             .loadPlaybackParams()
+        viewModel.player = exoPlayer
     }
 
     /**

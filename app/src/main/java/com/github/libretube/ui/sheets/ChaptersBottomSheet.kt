@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import androidx.media3.exoplayer.ExoPlayer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.api.obj.ChapterSegment
@@ -17,14 +16,17 @@ import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.ui.adapters.ChaptersAdapter
 import com.github.libretube.ui.models.PlayerViewModel
 
-class ChaptersBottomSheet(
-    private val chapters: List<ChapterSegment>,
-    private val exoPlayer: ExoPlayer
-) : UndimmedBottomSheet() {
+class ChaptersBottomSheet : UndimmedBottomSheet() {
     private var _binding: BottomSheetBinding? = null
     private val binding get() = _binding!!
 
     private val playerViewModel: PlayerViewModel by activityViewModels()
+    private lateinit var chapters: List<ChapterSegment>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        chapters = playerViewModel.chapters
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +41,9 @@ class ChaptersBottomSheet(
         super.onViewCreated(view, savedInstanceState)
 
         binding.optionsRecycler.layoutManager = LinearLayoutManager(context)
-        val adapter = ChaptersAdapter(chapters, exoPlayer)
+        val adapter = ChaptersAdapter(chapters, playerViewModel.player?.duration ?: 0) {
+            playerViewModel.player?.seekTo(it)
+        }
         binding.optionsRecycler.adapter = adapter
 
         binding.bottomSheetTitle.text = context?.getString(R.string.chapters)
@@ -51,7 +55,8 @@ class ChaptersBottomSheet(
             override fun run() {
                 if (_binding == null) return
                 handler.postDelayed(this, 200)
-                val currentIndex = PlayerHelper.getCurrentChapterIndex(exoPlayer, chapters) ?: return
+                val player = playerViewModel.player ?: return
+                val currentIndex = PlayerHelper.getCurrentChapterIndex(player.currentPosition, chapters) ?: return
                 adapter.updateSelectedPosition(currentIndex)
             }
         }

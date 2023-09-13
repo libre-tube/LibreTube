@@ -523,17 +523,17 @@ object PlayerHelper {
     /**
      * Get the name of the currently played chapter
      */
-    fun getCurrentChapterIndex(exoPlayer: ExoPlayer, chapters: List<ChapterSegment>): Int? {
-        val currentPosition = exoPlayer.currentPosition / 1000
+    fun getCurrentChapterIndex(currentPositionMs: Long, chapters: List<ChapterSegment>): Int? {
+        val currentPositionSeconds = currentPositionMs / 1000
         return chapters
             .filter {
                 it.highlightDrawable == null ||
                     // remove the video highlight if it's already longer ago than [ChapterSegment.HIGHLIGHT_LENGTH],
                     // otherwise the SponsorBlock highlight would be shown from its starting point to the end
-                    (currentPosition - it.start) < ChapterSegment.HIGHLIGHT_LENGTH
+                    (currentPositionSeconds - it.start) < ChapterSegment.HIGHLIGHT_LENGTH
             }
             .sortedBy { it.start }
-            .indexOfLast { currentPosition >= it.start }
+            .indexOfLast { currentPositionSeconds >= it.start }
             .takeIf { it >= 0 }
     }
 

@@ -191,10 +191,9 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
 
         binding.chapters.setOnClickListener {
             val playerService = playerService ?: return@setOnClickListener
-            val streams = playerService.streams ?: return@setOnClickListener
-            val player = playerService.player ?: return@setOnClickListener
+            viewModel.chapters = playerService.streams?.chapters.orEmpty().toMutableList()
 
-            ChaptersBottomSheet(streams.chapters, player)
+            ChaptersBottomSheet()
                 .show(childFragmentManager)
         }
 
@@ -365,6 +364,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     }
 
     private fun handleServiceConnection() {
+        viewModel.player = playerService?.player
         playerService?.onIsPlayingChanged = { isPlaying ->
             updatePlayPauseButton(isPlaying)
             isPaused = !isPlaying
@@ -387,6 +387,8 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         runCatching {
             activity?.unbindService(connection)
         }
+
+        viewModel.player = null
 
         super.onDestroy()
     }

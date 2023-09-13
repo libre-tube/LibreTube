@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.media3.exoplayer.ExoPlayer
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.obj.ChapterSegment
@@ -15,7 +14,8 @@ import com.github.libretube.ui.viewholders.ChaptersViewHolder
 
 class ChaptersAdapter(
     private val chapters: List<ChapterSegment>,
-    private val exoPlayer: ExoPlayer
+    private val videoDuration: Long,
+    private val seekTo: (Long) -> Unit
 ) : RecyclerView.Adapter<ChaptersViewHolder>() {
     private var selectedPosition = 0
 
@@ -36,7 +36,7 @@ class ChaptersAdapter(
             chapterTitle.text = chapter.title
             timeStamp.text = DateUtils.formatElapsedTime(chapter.start)
 
-            val playerDurationSeconds = exoPlayer.duration / 1000
+            val playerDurationSeconds = videoDuration / 1000
             val chapterEnd = if (chapter.highlightDrawable == null) {
                 chapters.getOrNull(position + 1)?.start ?: playerDurationSeconds
             } else {
@@ -59,7 +59,7 @@ class ChaptersAdapter(
             root.setOnClickListener {
                 updateSelectedPosition(position)
                 val chapterStart = chapter.start * 1000 // s -> ms
-                exoPlayer.seekTo(chapterStart)
+                seekTo(chapterStart)
             }
         }
     }
