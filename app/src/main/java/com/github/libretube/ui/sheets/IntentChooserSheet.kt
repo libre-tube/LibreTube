@@ -1,6 +1,5 @@
 package com.github.libretube.ui.sheets
 
-import android.content.pm.ResolveInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

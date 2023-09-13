@@ -13,7 +13,6 @@ import com.github.libretube.ui.viewholders.SubscriptionGroupsViewHolder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class SubscriptionGroupsAdapter(
     var groups: MutableList<SubscriptionGroup>,
