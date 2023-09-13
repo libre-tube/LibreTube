@@ -87,6 +87,7 @@ import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.SPONSOR_HIGHLIGHT_CATEGORY
 import com.github.libretube.helpers.PlayerHelper.checkForSegments
+import com.github.libretube.helpers.PlayerHelper.getVideoStats
 import com.github.libretube.helpers.PlayerHelper.isInSegment
 import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
 import com.github.libretube.helpers.PreferenceHelper
@@ -1548,7 +1549,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     override fun onStatsClicked() {
         if (!this::streams.isInitialized) return
-        StatsSheet(exoPlayer, videoId)
+        val videoStats = getVideoStats(exoPlayer, videoId)
+        StatsSheet()
+            .apply { arguments = bundleOf(IntentData.videoStats to videoStats) }
             .show(childFragmentManager)
     }
 

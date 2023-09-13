@@ -5,16 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.media3.exoplayer.ExoPlayer
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogStatsBinding
-import com.github.libretube.util.TextUtils
+import com.github.libretube.extensions.parcelable
+import com.github.libretube.obj.VideoStats
 
-class StatsSheet(
-    private val player: ExoPlayer,
-    private val videoId: String
-) : ExpandedBottomSheet() {
+class StatsSheet : ExpandedBottomSheet() {
     private var _binding: DialogStatsBinding? = null
     private val binding get() = _binding!!
+    private lateinit var stats: VideoStats
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,27 +24,19 @@ class StatsSheet(
         return binding.root
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        stats = arguments?.parcelable(IntentData.videoStats)!!
+    }
+
     @SuppressLint("SetTextI18n")
-    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = binding
 
-        binding.videoId.setText(videoId)
-        binding.videoInfo.setText(
-            "${player.videoFormat?.codecs.orEmpty()} ${
-                TextUtils.formatBitrate(
-                    player.videoFormat?.bitrate
-                )
-            }"
-        )
-        binding.audioInfo.setText(
-            "${player.audioFormat?.codecs.orEmpty()} ${
-                TextUtils.formatBitrate(player.audioFormat?.bitrate)
-            }"
-        )
-        binding.videoQuality.setText(
-            "${player.videoFormat?.width}x${player.videoFormat?.height} ${player.videoFormat?.frameRate?.toInt()}fps"
-        )
+        binding.videoId.setText(stats.videoId)
+        binding.videoInfo.setText(stats.videoInfo)
+        binding.audioInfo.setText(stats.audioInfo)
+        binding.videoQuality.setText(stats.videoQuality)
     }
 
     override fun onDestroyView() {

@@ -34,6 +34,8 @@ import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.extensions.updateParameters
+import com.github.libretube.obj.VideoStats
+import com.github.libretube.util.TextUtils
 import java.util.Locale
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
@@ -687,5 +689,19 @@ object PlayerHelper {
             isFlagSet(roleFlags, C.ROLE_FLAG_DUB) ||
             isFlagSet(roleFlags, C.ROLE_FLAG_MAIN) ||
             isFlagSet(roleFlags, C.ROLE_FLAG_ALTERNATE)
+    }
+
+    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
+    fun getVideoStats(player: ExoPlayer, videoId: String): VideoStats {
+        val videoInfo = "${player.videoFormat?.codecs.orEmpty()} ${
+            TextUtils.formatBitrate(
+                player.videoFormat?.bitrate
+            )
+        }"
+        val audioInfo = "${player.audioFormat?.codecs.orEmpty()} ${
+            TextUtils.formatBitrate(player.audioFormat?.bitrate)
+        }"
+        val videoQuality = "${player.videoFormat?.width}x${player.videoFormat?.height} ${player.videoFormat?.frameRate?.toInt()}fps"
+        return VideoStats(videoId, videoInfo, videoQuality, audioInfo)
     }
 }

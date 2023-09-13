@@ -30,4 +30,5 @@ object IntentData {
     const val color = "color"
     const val streamItem = "streamItem"
     const val url = "url"
+    const val videoStats = "videoStats"
 }
