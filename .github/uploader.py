@@ -1,6 +1,7 @@
 from os import system as run, listdir, remove
 from json import load
 import tgconfig
+import hashlib
 
 with open("../.github/commit.json") as f:
     data = load(f)
@@ -17,6 +18,13 @@ for file in files:
 if len(signed_files):
     for file in unsigned_files:
         remove(file)
+
+with open("checksums", "w") as checksums:
+    for file in signed_files or unsigned_files:
+        with open(file, "rb") as apk:
+            bytes = apk.read()
+            sha256hash = hashlib.sha256(bytes).hexdigest()
+            checksums.write(sha256hash + "  " + apk.name + "\n")
 
 if tgconfig.GH_REPO.lower() == "libre-tube/libretube":
     run("git add -f *")
