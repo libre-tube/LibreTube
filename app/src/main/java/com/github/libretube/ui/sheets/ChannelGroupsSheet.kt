@@ -1,9 +1,13 @@
 package com.github.libretube.ui.sheets
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,13 +16,15 @@ import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.SubscriptionGroup
 import com.github.libretube.extensions.move
 import com.github.libretube.ui.adapters.SubscriptionGroupsAdapter
+import com.github.libretube.ui.models.EditChannelGroupsModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.launch
 
-class ChannelGroupsSheet(
-    private val groups: MutableList<SubscriptionGroup>,
-    private val onGroupsChanged: (List<SubscriptionGroup>) -> Unit
-) : ExpandedBottomSheet() {
+class ChannelGroupsSheet : ExpandedBottomSheet() {
+    private val channelGroupsModel: EditChannelGroupsModel by activityViewModels()
+
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,22 +33,18 @@ class ChannelGroupsSheet(
         val binding = DialogSubscriptionGroupsBinding.inflate(layoutInflater)
 
         binding.groupsRV.layoutManager = LinearLayoutManager(context)
-        val adapter = SubscriptionGroupsAdapter(
-            groups.toMutableList(),
-            parentFragmentManager,
-            onGroupsChanged
-        )
+        val groups = channelGroupsModel.groups.value.orEmpty().toMutableList()
+        val adapter = SubscriptionGroupsAdapter(groups, channelGroupsModel, parentFragmentManager)
         binding.groupsRV.adapter = adapter
 
         binding.newGroup.setOnClickListener {
-            EditChannelGroupSheet(SubscriptionGroup("", mutableListOf(), 0)) {
-                runBlocking(Dispatchers.IO) {
-                    DatabaseHolder.Database.subscriptionGroupsDao().createGroup(it)
-                }
-                groups.add(it)
-                adapter.insertItem(it)
-                onGroupsChanged(groups)
-            }.show(parentFragmentManager, null)
+            channelGroupsModel.groupToEdit = SubscriptionGroup("", mutableListOf(), 0)
+            EditChannelGroupSheet().show(parentFragmentManager, null)
+        }
+
+        channelGroupsModel.groups.observe(viewLifecycleOwner) {
+            adapter.groups = channelGroupsModel.groups.value.orEmpty().toMutableList()
+            lifecycleScope.launch { adapter.notifyDataSetChanged() }
         }
 
         binding.confirm.setOnClickListener {
@@ -61,14 +63,19 @@ class ChannelGroupsSheet(
                 val from = viewHolder.absoluteAdapterPosition
                 val to = target.absoluteAdapterPosition
 
-                groups.move(from, to)
+                Log.e("move", "move")
+
+                channelGroupsModel.groups.value = channelGroupsModel.groups.value.orEmpty()
+                    .toMutableList()
+                    .also { it.move(from, to) }
                 adapter.notifyItemMoved(from, to)
 
-                groups.forEachIndexed { index, group -> group.index = index }
-                runBlocking(Dispatchers.IO) {
-                    DatabaseHolder.Database.subscriptionGroupsDao().updateAll(groups)
+                channelGroupsModel.groups.value?.forEachIndexed { index, group -> group.index = index }
+                CoroutineScope(Dispatchers.IO).launch {
+                    DatabaseHolder.Database.subscriptionGroupsDao()
+                        .updateAll(channelGroupsModel.groups.value.orEmpty())
                 }
-                onGroupsChanged(groups)
+
                 return true
             }
 

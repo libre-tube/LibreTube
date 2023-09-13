@@ -21,7 +21,6 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
-import com.github.libretube.db.obj.SubscriptionGroup
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
@@ -30,14 +29,17 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.LegacySubscriptionAdapter
 import com.github.libretube.ui.adapters.SubscriptionChannelAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
+import com.github.libretube.ui.models.EditChannelGroupsModel
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.ChannelGroupsSheet
 import com.github.libretube.util.PlayingQueue
 import com.google.android.material.chip.Chip
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 class SubscriptionsFragment : Fragment() {
     private var _binding: FragmentSubscriptionsBinding? = null
@@ -45,7 +47,7 @@ class SubscriptionsFragment : Fragment() {
 
     private val viewModel: SubscriptionsViewModel by activityViewModels()
     private val playerModel: PlayerViewModel by activityViewModels()
-    private var channelGroups = listOf<SubscriptionGroup>()
+    private val channelGroupsModel: EditChannelGroupsModel by activityViewModels()
     private var selectedFilterGroup = 0
     private var isCurrentTabSubChannels = false
 
@@ -174,8 +176,26 @@ class SubscriptionsFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launch {
-            initChannelGroups()
+        binding.channelGroups.setOnCheckedStateChangeListener { group, checkedIds ->
+            selectedFilterGroup = group.children.indexOfFirst { it.id == checkedIds.first() }
+            showFeed()
+        }
+
+        channelGroupsModel.groups.observe(viewLifecycleOwner) {
+            lifecycleScope.launch { initChannelGroups() }
+        }
+
+        binding.editGroups.setOnClickListener {
+            ChannelGroupsSheet().show(childFragmentManager, null)
+        }
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            val groups = DatabaseHolder.Database.subscriptionGroupsDao().getAll()
+                .sortedBy { it.index }
+            channelGroupsModel.groups.postValue(groups)
+            withContext(Dispatchers.Main) {
+                initChannelGroups()
+            }
         }
     }
 
@@ -200,9 +220,7 @@ class SubscriptionsFragment : Fragment() {
     }
 
     @SuppressLint("InflateParams")
-    private suspend fun initChannelGroups() {
-        channelGroups = DatabaseHolder.Database.subscriptionGroupsDao().getAll()
-
+    private fun initChannelGroups() {
         val binding = _binding ?: return
 
         binding.chipAll.isChecked = true
@@ -214,8 +232,7 @@ class SubscriptionsFragment : Fragment() {
         binding.channelGroups.removeAllViews()
         binding.channelGroups.addView(binding.chipAll)
 
-        channelGroups = channelGroups.sortedBy { it.index }
-        channelGroups.forEachIndexed { index, group ->
+        channelGroupsModel.groups.value?.forEachIndexed { index, group ->
             val chip = layoutInflater.inflate(R.layout.filter_chip, null) as Chip
             chip.apply {
                 id = View.generateViewId()
@@ -231,23 +248,12 @@ class SubscriptionsFragment : Fragment() {
 
             binding.channelGroups.addView(chip)
         }
-
-        binding.channelGroups.setOnCheckedStateChangeListener { group, checkedIds ->
-            selectedFilterGroup = group.children.indexOfFirst { it.id == checkedIds.first() }
-            showFeed()
-        }
-
-        binding.editGroups.setOnClickListener {
-            ChannelGroupsSheet(channelGroups.toMutableList()) {
-                lifecycleScope.launch { initChannelGroups() }
-            }.show(childFragmentManager, null)
-        }
     }
 
     private fun List<StreamItem>.filterByGroup(groupIndex: Int): List<StreamItem> {
         if (groupIndex == 0) return this
 
-        val group = channelGroups.getOrNull(groupIndex - 1)
+        val group = channelGroupsModel.groups.value?.getOrNull(groupIndex - 1)
         return filter {
             val channelId = it.uploaderUrl.orEmpty().toID()
             group?.channels?.contains(channelId) != false
