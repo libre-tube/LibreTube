@@ -16,20 +16,20 @@ import com.github.libretube.databinding.DialogEditChannelGroupBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.SubscriptionGroup
 import com.github.libretube.ui.adapters.SubscriptionGroupChannelsAdapter
+import com.github.libretube.ui.models.EditChannelGroupsModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
-class EditChannelGroupSheet(
-    private var group: SubscriptionGroup,
-    private val onGroupChanged: (SubscriptionGroup) -> Unit
-) : ExpandedBottomSheet() {
+class EditChannelGroupSheet : ExpandedBottomSheet() {
     private var _binding: DialogEditChannelGroupBinding? = null
     private val binding get() = _binding!!
 
     private val subscriptionsModel: SubscriptionsViewModel by activityViewModels()
+    private val channelGroupsModel: EditChannelGroupsModel by activityViewModels()
     private var channels = listOf<Subscription>()
 
     override fun onCreateView(
@@ -44,7 +44,8 @@ class EditChannelGroupSheet(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = binding
 
-        binding.groupName.setText(group.name)
+        binding.groupName.setText(channelGroupsModel.groupToEdit?.name)
+        val oldGroupName = channelGroupsModel.groupToEdit?.name.orEmpty()
 
         binding.channelsRV.layoutManager = LinearLayoutManager(context)
         fetchSubscriptions()
@@ -63,10 +64,21 @@ class EditChannelGroupSheet(
 
         updateConfirmStatus()
         binding.confirm.setOnClickListener {
-            group.name = binding.groupName.text.toString()
-            if (group.name.isBlank()) return@setOnClickListener
-            onGroupChanged(group)
+            channelGroupsModel.groupToEdit?.name = binding.groupName.text.toString()
+            if (channelGroupsModel.groupToEdit?.name.isNullOrBlank()) return@setOnClickListener
+            saveGroup(channelGroupsModel.groupToEdit!!, oldGroupName)
             dismiss()
+        }
+    }
+
+    private fun saveGroup(group: SubscriptionGroup, oldGroupName: String) {
+        channelGroupsModel.groups.value = channelGroupsModel.groups.value?.plus(group)
+        CoroutineScope(Dispatchers.IO).launch {
+            runCatching {
+                // delete the old one as it might have a different name
+                DatabaseHolder.Database.subscriptionGroupsDao().deleteGroup(oldGroupName)
+            }
+            DatabaseHolder.Database.subscriptionGroupsDao().createGroup(group)
         }
     }
 
@@ -95,9 +107,9 @@ class EditChannelGroupSheet(
         val binding = binding
         binding.channelsRV.adapter = SubscriptionGroupChannelsAdapter(
             channels.filter { query == null || it.name.lowercase().contains(query.lowercase()) },
-            group
+            channelGroupsModel.groupToEdit!!
         ) {
-            group = it
+            channelGroupsModel.groupToEdit = it
             updateConfirmStatus()
         }
         binding.subscriptionsContainer.isVisible = true
@@ -109,7 +121,7 @@ class EditChannelGroupSheet(
             val name = groupName.text.toString()
             groupName.error = getGroupNameError(name)
 
-            confirm.isEnabled = groupName.error == null && group.channels.isNotEmpty()
+            confirm.isEnabled = groupName.error == null && !channelGroupsModel.groupToEdit?.channels.isNullOrEmpty()
         }
     }
 
@@ -121,7 +133,7 @@ class EditChannelGroupSheet(
         val groupExists = runBlocking(Dispatchers.IO) {
             DatabaseHolder.Database.subscriptionGroupsDao().exists(name)
         }
-        if (groupExists && group.name != name) {
+        if (groupExists && channelGroupsModel.groupToEdit?.name != name) {
             return getString(R.string.group_name_error_exists)
         }
 

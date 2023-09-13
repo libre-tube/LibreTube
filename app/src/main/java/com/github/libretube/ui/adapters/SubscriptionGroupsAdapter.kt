@@ -7,15 +7,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.SubscriptionGroupRowBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.SubscriptionGroup
+import com.github.libretube.ui.models.EditChannelGroupsModel
 import com.github.libretube.ui.sheets.EditChannelGroupSheet
 import com.github.libretube.ui.viewholders.SubscriptionGroupsViewHolder
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SubscriptionGroupsAdapter(
-    private val groups: MutableList<SubscriptionGroup>,
-    private val parentFragmentManager: FragmentManager,
-    private val onGroupsChanged: (List<SubscriptionGroup>) -> Unit
+    var groups: MutableList<SubscriptionGroup>,
+    private val viewModel: EditChannelGroupsModel,
+    private val parentFragmentManager: FragmentManager
 ) : RecyclerView.Adapter<SubscriptionGroupsViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -32,36 +35,21 @@ class SubscriptionGroupsAdapter(
         val subscriptionGroup = groups[position]
         holder.binding.apply {
             groupName.text = subscriptionGroup.name
+
             deleteGroup.setOnClickListener {
-                groups.removeAt(position)
-                runBlocking(Dispatchers.IO) {
-                    DatabaseHolder.Database.subscriptionGroupsDao().deleteGroup(
-                        subscriptionGroup.name
-                    )
+                CoroutineScope(Dispatchers.IO).launch {
+                    DatabaseHolder.Database.subscriptionGroupsDao()
+                        .deleteGroup(subscriptionGroup.name)
+
+                    groups.removeAt(position)
+                    viewModel.groups.postValue(groups)
                 }
-                onGroupsChanged(groups)
-                notifyItemRemoved(position)
-                notifyItemRangeChanged(position, itemCount)
             }
+
             editGroup.setOnClickListener {
-                EditChannelGroupSheet(subscriptionGroup) {
-                    groups[position] = it
-                    runBlocking(Dispatchers.IO) {
-                        // delete the old one as it might have a different name
-                        DatabaseHolder.Database.subscriptionGroupsDao().deleteGroup(
-                            groupName.text.toString()
-                        )
-                        DatabaseHolder.Database.subscriptionGroupsDao().createGroup(it)
-                    }
-                    notifyItemChanged(position)
-                    onGroupsChanged(groups)
-                }.show(parentFragmentManager, null)
+                viewModel.groupToEdit = subscriptionGroup
+                EditChannelGroupSheet().show(parentFragmentManager, null)
             }
         }
-    }
-
-    fun insertItem(subscriptionsGroup: SubscriptionGroup) {
-        groups.add(subscriptionsGroup)
-        notifyItemInserted(itemCount - 1)
     }
 }
