@@ -1,18 +1,17 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    val kotlinVersion = "1.9.10"
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
         classpath(libs.gradle)
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
-        classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion")
+        classpath(libs.kotlin.gradle.plugin)
+        classpath(libs.kotlin.serialization)
 
         // NOTE: Do not place your application dependencies here, they belong
-        // to the individual module build.gradle files
+        // in the individual module build.gradle.kts files
     }
 }
 
