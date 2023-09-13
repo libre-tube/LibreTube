@@ -38,6 +38,7 @@ import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.PlaylistAdapter
+import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
@@ -171,24 +172,42 @@ class PlaylistFragment : Fragment() {
 
                 // show playlist options
                 binding.optionsMenu.setOnClickListener {
-                    PlaylistOptionsBottomSheet(
-                        playlistId = playlistId.orEmpty(),
-                        playlistName = playlistName.orEmpty(),
-                        playlistType = playlistType,
-                        onDelete = {
-                            findNavController().popBackStack()
-                        },
-                        onRename = {
+                    val sheet = PlaylistOptionsBottomSheet()
+                    sheet.arguments = bundleOf(
+                        IntentData.playlistId to playlistId.orEmpty(),
+                        IntentData.playlistName to playlistName.orEmpty(),
+                        IntentData.playlistType to playlistType
+                    )
+
+                    val fragmentManager = (context as BaseActivity).supportFragmentManager
+                    fragmentManager.setFragmentResultListener(
+                        PlaylistOptionsBottomSheet.PLAYLIST_OPTIONS_REQUEST_KEY,
+                        (context as BaseActivity)
+                    ) { _, resultBundle ->
+                        val newPlaylistDescription =
+                            resultBundle.getString(IntentData.playlistDescription)
+                        val newPlaylistName =
+                            resultBundle.getString(IntentData.playlistName)
+                        val isPlaylistToBeDeleted =
+                            resultBundle.getBoolean(IntentData.playlistTask)
+
+                        newPlaylistDescription?.let {
+                            binding.playlistDescription.text = it
+                            response.description = it
+                        }
+
+                        newPlaylistName?.let {
                             binding.playlistName.text = it
                             playlistName = it
-                        },
-                        onChangeDescription = {
-                            binding.playlistDescription.text = it
                         }
-                    ).show(
-                        childFragmentManager,
-                        PlaylistOptionsBottomSheet::class.java.name
-                    )
+
+                        if (isPlaylistToBeDeleted) {
+                            // TODO move back: navController().popBackStack() crashes
+                            return@setFragmentResultListener
+                        }
+                    }
+
+                    sheet.show(fragmentManager)
                 }
 
                 binding.playAll.setOnClickListener {

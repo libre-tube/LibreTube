@@ -34,6 +34,8 @@ import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.extensions.updateParameters
+import com.github.libretube.obj.VideoStats
+import com.github.libretube.util.TextUtils
 import java.util.Locale
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
@@ -521,17 +523,17 @@ object PlayerHelper {
     /**
      * Get the name of the currently played chapter
      */
-    fun getCurrentChapterIndex(exoPlayer: ExoPlayer, chapters: List<ChapterSegment>): Int? {
-        val currentPosition = exoPlayer.currentPosition / 1000
+    fun getCurrentChapterIndex(currentPositionMs: Long, chapters: List<ChapterSegment>): Int? {
+        val currentPositionSeconds = currentPositionMs / 1000
         return chapters
             .filter {
                 it.highlightDrawable == null ||
                     // remove the video highlight if it's already longer ago than [ChapterSegment.HIGHLIGHT_LENGTH],
                     // otherwise the SponsorBlock highlight would be shown from its starting point to the end
-                    (currentPosition - it.start) < ChapterSegment.HIGHLIGHT_LENGTH
+                    (currentPositionSeconds - it.start) < ChapterSegment.HIGHLIGHT_LENGTH
             }
             .sortedBy { it.start }
-            .indexOfLast { currentPosition >= it.start }
+            .indexOfLast { currentPositionSeconds >= it.start }
             .takeIf { it >= 0 }
     }
 
@@ -687,5 +689,19 @@ object PlayerHelper {
             isFlagSet(roleFlags, C.ROLE_FLAG_DUB) ||
             isFlagSet(roleFlags, C.ROLE_FLAG_MAIN) ||
             isFlagSet(roleFlags, C.ROLE_FLAG_ALTERNATE)
+    }
+
+    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
+    fun getVideoStats(player: ExoPlayer, videoId: String): VideoStats {
+        val videoInfo = "${player.videoFormat?.codecs.orEmpty()} ${
+            TextUtils.formatBitrate(
+                player.videoFormat?.bitrate
+            )
+        }"
+        val audioInfo = "${player.audioFormat?.codecs.orEmpty()} ${
+            TextUtils.formatBitrate(player.audioFormat?.bitrate)
+        }"
+        val videoQuality = "${player.videoFormat?.width}x${player.videoFormat?.height} ${player.videoFormat?.frameRate?.toInt()}fps"
+        return VideoStats(videoId, videoInfo, videoQuality, audioInfo)
     }
 }

@@ -2,6 +2,7 @@ package com.github.libretube.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.obj.Playlists
@@ -12,6 +13,7 @@ import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
+import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet.Companion.PLAYLIST_OPTIONS_REQUEST_KEY
 import com.github.libretube.ui.viewholders.PlaylistsViewHolder
 
 class PlaylistsAdapter(
@@ -56,7 +58,7 @@ class PlaylistsAdapter(
             val fragmentManager = (root.context as BaseActivity).supportFragmentManager
             root.setOnLongClickListener {
                 fragmentManager.setFragmentResultListener(
-                    PLAYLISTS_ADAPTER_REQUEST_KEY,
+                    PLAYLIST_OPTIONS_REQUEST_KEY,
                     (root.context as BaseActivity)
                 ) { _, resultBundle ->
                     val newPlaylistDescription =
@@ -82,10 +84,11 @@ class PlaylistsAdapter(
                     }
                 }
 
-                val playlistOptionsDialog = PlaylistOptionsBottomSheet(
-                    playlistId = playlist.id!!,
-                    playlistName = playlist.name!!,
-                    playlistType = playlistType
+                val playlistOptionsDialog = PlaylistOptionsBottomSheet()
+                playlistOptionsDialog.arguments = bundleOf(
+                    IntentData.playlistId to playlist.id!!,
+                    IntentData.playlistName to playlist.name!!,
+                    IntentData.playlistType to playlistType
                 )
                 playlistOptionsDialog.show(
                     fragmentManager,
@@ -102,9 +105,5 @@ class PlaylistsAdapter(
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, itemCount)
         }
-    }
-
-    companion object {
-        const val PLAYLISTS_ADAPTER_REQUEST_KEY = "playlists_adapter_request_key"
     }
 }
