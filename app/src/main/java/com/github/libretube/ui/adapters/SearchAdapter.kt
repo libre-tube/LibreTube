@@ -171,8 +171,13 @@ class SearchAdapter(
             root.setOnLongClickListener {
                 val playlistId = item.url.toID()
                 val playlistName = item.name!!
-                PlaylistOptionsBottomSheet(playlistId, playlistName, PlaylistType.PUBLIC)
-                    .show(
+                val sheet = PlaylistOptionsBottomSheet()
+                sheet.arguments = bundleOf(
+                    IntentData.playlistId to playlistId,
+                    IntentData.playlistName to playlistName,
+                    IntentData.playlistType to PlaylistType.PUBLIC
+                )
+                sheet.show(
                         (root.context as BaseActivity).supportFragmentManager,
                         PlaylistOptionsBottomSheet::class.java.name
                     )
