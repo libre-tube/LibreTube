@@ -511,4 +511,6 @@
     <string name="sb_create_segment">Crea segmento</string>
     <string name="segment_type">Tipo di segmento</string>
     <string name="contribute_to_sponsorblock">Contribuisci a SponsorBlock</string>
+    <string name="filename_too_long">Nome del file troppo lungo!</string>
+    <string name="sponsorblock_user_id">Nome utente SponsorBlock</string>
 </resources>

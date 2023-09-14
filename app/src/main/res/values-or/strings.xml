@@ -509,4 +509,5 @@
     <string name="sb_invalid_segment">ଅବୈଧ ସେଗମେଣ୍ଟ ଆରମ୍ଭ କିମ୍ବା ସମାପ୍ତି</string>
     <string name="filename_too_long">ଫାଇଲ୍ ନାମ ବହୁତ ଲମ୍ବା!</string>
     <string name="contribute_to_sponsorblock">SponsorBlock ରେ ଯୋଗଦାନ କରନ୍ତୁ</string>
+    <string name="sponsorblock_user_id">ପ୍ରଯୋଜକ ବ୍ଲକ୍ ଉପଯୋଗକର୍ତ୍ତା ନାମ</string>
 </resources>
