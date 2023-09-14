@@ -20,7 +20,7 @@ data class StreamItem(
     val duration: Long? = null,
     val views: Long? = null,
     val uploaderVerified: Boolean? = null,
-    val uploaded: Long? = null,
+    val uploaded: Long = 0,
     val shortDescription: String? = null,
     val isShort: Boolean = false
 ) : Parcelable {

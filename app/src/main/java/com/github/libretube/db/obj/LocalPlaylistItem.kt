@@ -30,7 +30,6 @@ data class LocalPlaylistItem(
             uploaderUrl = uploaderUrl,
             uploaderAvatar = ProxyHelper.rewriteUrl(uploaderAvatar),
             uploadedDate = uploadDate,
-            uploaded = null,
             duration = duration
         )
     }

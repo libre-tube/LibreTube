@@ -120,7 +120,7 @@ class VideosAdapter(
         val fragmentManager = activity.supportFragmentManager
 
         val uploadDate =
-            video.uploaded?.takeIf { it > 0 }?.let { TextUtils.formatRelativeDate(context, it) }
+            video.uploaded.takeIf { it > 0 }?.let { TextUtils.formatRelativeDate(context, it) }
 
         // Trending layout
         holder.trendingRowBinding?.apply {

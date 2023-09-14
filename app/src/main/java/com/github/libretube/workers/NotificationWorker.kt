@@ -168,7 +168,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
     private suspend fun createStreamNotification(
         group: String,
         stream: StreamItem
-    ): Triple<Int, Long?, Notification> { // Notification ID, uploaded date and notification object
+    ): Triple<Int, Long, Notification> { // Notification ID, uploaded date and notification object
         val videoId = stream.url!!.toID()
         val intent = Intent(applicationContext, MainActivity::class.java)
             .setFlags(INTENT_FLAGS)
@@ -192,6 +192,8 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
                     .bigPicture(thumbnail)
                     .bigLargeIcon(null as Bitmap?) // Hides the icon when expanding
             )
+            .setWhen(stream.uploaded)
+            .setShowWhen(true)
 
         return Triple(notificationId, stream.uploaded, notificationBuilder.build())
     }
