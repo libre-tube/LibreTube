@@ -110,3 +110,6 @@
 # Fix for miniplayer placing issue in release build
 -keep class androidx.constraintlayout.motion.widget.** { *; }
 -keepclassmembers class androidx.constraintlayout.motion.widget.** { *; }
+
+# Settings fragments are loaded through reflection
+-keep class com.github.libretube.ui.preferences.** { *; }
