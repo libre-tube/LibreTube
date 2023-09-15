@@ -2,7 +2,6 @@ package com.github.libretube.ui.sheets
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,6 +47,12 @@ class ChannelGroupsSheet : ExpandedBottomSheet() {
         }
 
         binding.confirm.setOnClickListener {
+            channelGroupsModel.groups.value = adapter.groups
+            channelGroupsModel.groups.value?.forEachIndexed { index, group -> group.index = index }
+            CoroutineScope(Dispatchers.IO).launch {
+                DatabaseHolder.Database.subscriptionGroupsDao()
+                    .updateAll(channelGroupsModel.groups.value.orEmpty())
+            }
             dismiss()
         }
 
@@ -62,20 +67,8 @@ class ChannelGroupsSheet : ExpandedBottomSheet() {
             ): Boolean {
                 val from = viewHolder.absoluteAdapterPosition
                 val to = target.absoluteAdapterPosition
-
-                Log.e("move", "move")
-
-                channelGroupsModel.groups.value = channelGroupsModel.groups.value.orEmpty()
-                    .toMutableList()
-                    .also { it.move(from, to) }
+                adapter.groups.move(from, to)
                 adapter.notifyItemMoved(from, to)
-
-                channelGroupsModel.groups.value?.forEachIndexed { index, group -> group.index = index }
-                CoroutineScope(Dispatchers.IO).launch {
-                    DatabaseHolder.Database.subscriptionGroupsDao()
-                        .updateAll(channelGroupsModel.groups.value.orEmpty())
-                }
-
                 return true
             }
 
