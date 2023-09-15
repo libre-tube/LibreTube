@@ -1,0 +1,9 @@
+* support for submitting SponsorBlock segments
+* add sponsorblock option to skip only once
+* allow downloading audio tracks based on their language
+* allow resuming playback after disconnect
+* allow re-ordering of channel groups
+* disable video track loading while screen off
+* play all videos
+* show placeholders for all images
+* support for selecting auto-generated captions
