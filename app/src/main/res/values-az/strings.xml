@@ -507,4 +507,7 @@
     <string name="proxy">Proksi</string>
     <string name="group_name_error_empty">Xahiş olunur, ad daxil et</string>
     <string name="group_name_error_exists">Xahiş olunur, nadir ad seç</string>
+    <string name="filename_too_long">Çox uzun fayl adı!</string>
+    <string name="sponsorblock_user_id">SponsorBlock İstifadəçi Adı</string>
+    <string name="contribute_to_sponsorblock">SponsorBlock-a Töhfə Ver</string>
 </resources>
