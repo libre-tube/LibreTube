@@ -6,7 +6,7 @@
     <string name="share">分享</string>
     <string name="username">用户名</string>
     <string name="cannotDownload">我们无法下载这个视频。</string>
-    <string name="startpage">首页</string>
+    <string name="startpage">首页\t  『–</string>
     <string name="subscriptions">订阅内容</string>
     <string name="yes">是</string>
     <string name="library">媒体库</string>
