@@ -472,7 +472,7 @@
     <string name="segment_type">Segment type</string>
     <string name="sb_invalid_segment">Invalid segment start or end</string>
     <string name="contribute_to_sponsorblock">Contribute to SponsorBlock</string>
-    <string name="sponsorblock_user_id">SponsorBlock Username</string>
+    <string name="sponsorblock_user_id">SponsorBlock UserID</string>
     <string name="filename_too_long">Filename too long!</string>
 
     <!-- Notification channel strings -->
