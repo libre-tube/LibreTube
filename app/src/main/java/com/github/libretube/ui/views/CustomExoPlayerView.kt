@@ -235,13 +235,13 @@ open class CustomExoPlayerView(
     }
 
     private fun enqueueHideControllerTask() {
-        handler.postDelayed(AUTO_HIDE_CONTROLLER_DELAY, HIDE_CONTROLLER_TOKEN) {
+        runnableHandler.postDelayed(AUTO_HIDE_CONTROLLER_DELAY, HIDE_CONTROLLER_TOKEN) {
             hideController()
         }
     }
 
     private fun cancelHideControllerTask() {
-        handler?.removeCallbacksAndMessages(HIDE_CONTROLLER_TOKEN)
+        runnableHandler.removeCallbacksAndMessages(HIDE_CONTROLLER_TOKEN)
     }
 
     override fun hideController() {
@@ -436,7 +436,7 @@ open class CustomExoPlayerView(
             .setDuration((ANIMATION_DURATION * 1.5).toLong())
             .withEndAction {
                 // move the text back into the button
-                handler.postDelayed(100) {
+                runnableHandler.postDelayed(100) {
                     textView.animate()
                         .setDuration(ANIMATION_DURATION / 2)
                         .translationX(0f)
