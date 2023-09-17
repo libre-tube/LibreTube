@@ -1,6 +1,7 @@
 package com.github.libretube.ui.dialogs
 
 import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.core.os.bundleOf
@@ -26,39 +27,39 @@ class BackupDialog : DialogFragment() {
         @StringRes val name: Int,
         val onSelected: suspend (BackupFile) -> Unit
     ) {
-        object WatchHistory : BackupOption(R.string.watch_history, onSelected = {
+        data object WatchHistory : BackupOption(R.string.watch_history, onSelected = {
             it.watchHistory = Database.watchHistoryDao().getAll()
         })
 
-        object WatchPositions : BackupOption(R.string.watch_positions, onSelected = {
+        data object WatchPositions : BackupOption(R.string.watch_positions, onSelected = {
             it.watchPositions = Database.watchPositionDao().getAll()
         })
 
-        object SearchHistory : BackupOption(R.string.search_history, onSelected = {
+        data object SearchHistory : BackupOption(R.string.search_history, onSelected = {
             it.searchHistory = Database.searchHistoryDao().getAll()
         })
 
-        object LocalSubscriptions : BackupOption(R.string.local_subscriptions, onSelected = {
+        data object LocalSubscriptions : BackupOption(R.string.local_subscriptions, onSelected = {
             it.localSubscriptions = Database.localSubscriptionDao().getAll()
         })
 
-        object CustomInstances : BackupOption(R.string.backup_customInstances, onSelected = {
+        data object CustomInstances : BackupOption(R.string.backup_customInstances, onSelected = {
             it.customInstances = Database.customInstanceDao().getAll()
         })
 
-        object PlaylistBookmarks : BackupOption(R.string.bookmarks, onSelected = {
+        data object PlaylistBookmarks : BackupOption(R.string.bookmarks, onSelected = {
             it.playlistBookmarks = Database.playlistBookmarkDao().getAll()
         })
 
-        object LocalPlaylists : BackupOption(R.string.local_playlists, onSelected = {
+        data object LocalPlaylists : BackupOption(R.string.local_playlists, onSelected = {
             it.localPlaylists = Database.localPlaylistsDao().getAll()
         })
 
-        object SubscriptionGroups : BackupOption(R.string.channel_groups, onSelected = {
+        data object SubscriptionGroups : BackupOption(R.string.channel_groups, onSelected = {
             it.channelGroups = Database.subscriptionGroupsDao().getAll()
         })
 
-        object Preferences : BackupOption(R.string.preferences, onSelected = { file ->
+        data object Preferences : BackupOption(R.string.preferences, onSelected = { file ->
             file.preferences = PreferenceHelper.settings.all.map { (key, value) ->
                 val jsonValue = when (value) {
                     is Number -> JsonPrimitive(value)
@@ -94,20 +95,29 @@ class BackupDialog : DialogFragment() {
                 selected[index] = newValue
             }
             .setNegativeButton(R.string.cancel, null)
-            .setPositiveButton(R.string.backup) { _, _ ->
-                val backupFile = BackupFile()
-                lifecycleScope.launch(Dispatchers.IO) {
-                    backupOptions.forEachIndexed { index, option ->
-                        if (selected[index]) option.onSelected(backupFile)
+            .setPositiveButton(R.string.backup, null)
+            .show()
+            .apply {
+                getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
+                    requireDialog().hide()
+
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        val backupFile = BackupFile()
+
+                        backupOptions.forEachIndexed { index, option ->
+                            if (selected[index]) option.onSelected(backupFile)
+                        }
+
+                        val encodedBackupFile = Json.encodeToString(backupFile)
+                        setFragmentResult(
+                            BACKUP_DIALOG_REQUEST_KEY,
+                            bundleOf(IntentData.backupFile to encodedBackupFile)
+                        )
+
+                        dialog?.dismiss()
                     }
-                    val encodedBackupFile = Json.encodeToString(backupFile)
-                    setFragmentResult(
-                        BACKUP_DIALOG_REQUEST_KEY,
-                        bundleOf(IntentData.backupFile to encodedBackupFile)
-                    )
                 }
             }
-            .create()
     }
 
     companion object {
