@@ -19,7 +19,7 @@
     <string name="cannotDownload">Não é possível descarregar a emissão.</string>
     <string name="downloadfailed">Falha ao descarregar.</string>
     <string name="app_theme">Tema</string>
-    <string name="server_error">Parece que existe um problema com o servidor selecionado. Tente com outra instância.</string>
+    <string name="server_error">Parece que existe um problema com o servidor selecionado. Tente outra instância.</string>
     <string name="unknown_error">Erro de rede.</string>
     <string name="error">Ocorreu um erro.</string>
     <string name="notgmail">Apenas com uma conta Piped.</string>
@@ -511,6 +511,6 @@
     <string name="group_name_error_empty">Por favor, introduza um nome</string>
     <string name="group_name_error_exists">Escolha um nome que seja único</string>
     <string name="filename_too_long">Nome demasiado comprido!</string>
-    <string name="sponsorblock_user_id">Nome de utilizador SponsorBlock</string>
+    <string name="sponsorblock_user_id">ID de utilizador SponsorBlock</string>
     <string name="contribute_to_sponsorblock">Contribuir para SponsorBlock</string>
 </resources>
