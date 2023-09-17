@@ -506,7 +506,7 @@
     <string name="sb_create_segment">सेगमेंट बनाएं</string>
     <string name="sb_invalid_segment">अमान्य सेगमेंट आरंभ या समाप्ती</string>
     <string name="filename_too_long">फ़ाइल नाम बहुत लंबा है!</string>
-    <string name="sponsorblock_user_id">स्पांसर-ब्लॉक यूज़र का नाम</string>
+    <string name="sponsorblock_user_id">स्पांसर-ब्लॉक यूज़र आई डी</string>
     <string name="segment_type">सेगमेंट प्रकार</string>
     <string name="automatic_once">एक बार स्वचालित</string>
     <string name="contribute_to_sponsorblock">स्पांसर-ब्लॉक में योगदान करें</string>
