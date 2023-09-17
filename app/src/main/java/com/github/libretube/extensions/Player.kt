@@ -13,7 +13,7 @@ fun Player.togglePlayPauseState() {
             seekTo(0)
         }
 
-        !isPlaying && !isLoading -> play()
+        !isPlaying && totalBufferedDuration > 0 -> play()
         else -> pause()
     }
 }
