@@ -639,8 +639,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         viewModel.player = null
 
+        if (this::exoPlayer.isInitialized) exoPlayer.pause()
+
         // disable the auto PiP mode for SDK >= 32
-        exoPlayer.pause()
         if (PlayerHelper.pipEnabled) {
             PictureInPictureCompat.setPictureInPictureParams(
                 requireActivity(),
