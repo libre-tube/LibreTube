@@ -2,7 +2,7 @@
 appcompat = "1.6.1"
 core = "1.12.0"
 gradle = "8.1.1"
-kotlinVersion = "1.9.10"
+kotlin = "1.9.10"
 lifecycle = "2.6.2"
 constraintlayout = "2.1.4"
 material = "1.9.0"
@@ -33,8 +33,8 @@ androidx-core = { group = "androidx.core", name = "core", version.ref = "core" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
 gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
-kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinVersion" }
-kotlin-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlinVersion" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation" }
 androidx-navigation-ui = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation" }
