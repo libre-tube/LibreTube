@@ -508,6 +508,6 @@
     <string name="segment_type">ਸੈਗਮੈਂਟ ਕਿਸਮ</string>
     <string name="sb_invalid_segment">ਸੈਗਮੈਂਟ ਦਾ ਅਵੈਧ ਮੁੱਢ ਜਾਂ ਅੰਤ</string>
     <string name="filename_too_long">ਫਾਈਲ ਨਾਮ ਬਹੁਤ ਲੰਮਾ ਹੈ!</string>
-    <string name="sponsorblock_user_id">ਸਪਾਂਸਰਬਲਾਕ ਯੂਜ਼ਰਨੇਮ</string>
+    <string name="sponsorblock_user_id">ਸਪਾਂਸਰਬਲਾਕ ਯੂਜ਼ਰ ਆਈਡੀ</string>
     <string name="contribute_to_sponsorblock">ਸਪਾਂਸਰਬਲਾਕ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾਓ</string>
 </resources>
