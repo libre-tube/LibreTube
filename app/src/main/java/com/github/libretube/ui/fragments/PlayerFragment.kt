@@ -841,6 +841,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         isTransitioning = true
         videoId = nextVideoId
+
+        // fix: if the fragment is recreated, play the current video, and not the initial one
+        arguments?.run {
+            val playerData = parcelable<PlayerData>(IntentData.playerData)!!.copy(videoId = videoId)
+            putParcelable(IntentData.playerData, playerData)
+        }
+
         // start to play the next video
         playVideo()
         // close comment bottom sheet for next video
