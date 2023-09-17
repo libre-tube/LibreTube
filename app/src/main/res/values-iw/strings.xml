@@ -515,4 +515,5 @@
     <string name="sb_invalid_segment">התחלת או סיום המקטע שגוי</string>
     <string name="filename_too_long">שם הקובץ ארוך מדי!</string>
     <string name="contribute_to_sponsorblock">תרומה ל־SponsorBlock</string>
+    <string name="sponsorblock_user_id">מזהה משתמש לחסימת מפרסמים</string>
 </resources>
