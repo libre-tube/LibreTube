@@ -512,4 +512,5 @@
     <string name="proxy">Proxy</string>
     <string name="contribute_to_sponsorblock">Contribua para o SponsorBlock</string>
     <string name="filename_too_long">Nome do arquivo muito longo!</string>
+    <string name="sponsorblock_user_id">Nome de Usuário do SponsorBlock</string>
 </resources>
