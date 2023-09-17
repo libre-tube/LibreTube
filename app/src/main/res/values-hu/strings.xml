@@ -509,5 +509,5 @@
     <string name="group_name_error_exists">Válasszon egyedi nevet</string>
     <string name="filename_too_long">A fájlnév túl hosszú!</string>
     <string name="contribute_to_sponsorblock">Hozzájárulás a SzponzorBlokkhoz</string>
-    <string name="sponsorblock_user_id">SzponzorBlokk felhásználónév</string>
+    <string name="sponsorblock_user_id">SzponzorBlokk felhasználói azonosító</string>
 </resources>
