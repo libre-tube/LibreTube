@@ -16,7 +16,7 @@ data class ContentItem(
     val isShort: Boolean? = null,
     val uploaderVerified: Boolean? = null,
     val uploaderName: String? = null,
-    val uploaded: Long? = null,
+    val uploaded: Long = 0,
     val shortDescription: String? = null,
     // Channel and Playlist attributes
     val name: String? = null,

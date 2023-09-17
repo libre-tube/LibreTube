@@ -83,7 +83,7 @@ class SearchAdapter(
             thumbnailDuration.setFormattedDuration(item.duration, item.isShort)
             videoTitle.text = item.title
             val viewsString = item.views.takeIf { it != -1L }?.formatShort().orEmpty()
-            val uploadDate = item.uploaded?.takeIf { it > 0 }?.let {
+            val uploadDate = item.uploaded.takeIf { it > 0 }?.let {
                 " ${TextUtils.SEPARATOR} ${TextUtils.formatRelativeDate(root.context, it)}"
             }.orEmpty()
             videoInfo.text = root.context.getString(
