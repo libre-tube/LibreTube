@@ -885,10 +885,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             playerViewsInfo.text = getString(R.string.normal_views, views, localizeDate(streams))
 
             textLike.text = streams.likes.formatShort()
-            if (streams.dislikes >= 0) {
-                textDislike.isVisible = true
-                textDislike.text = streams.dislikes.formatShort()
-            }
+            textDislike.isVisible = streams.dislikes >= 0
+            textDislike.text = streams.dislikes.formatShort()
 
             ImageHelper.loadImage(streams.uploaderAvatar, binding.playerChannelImage)
             playerChannelName.text = streams.uploader
