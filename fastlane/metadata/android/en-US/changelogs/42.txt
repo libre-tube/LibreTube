@@ -1,0 +1,9 @@
+* fix(channelgroups): update values on confirm
+* fix(player): allow pausing while loading
+* fix(player): rename SB Username to SB UserID
+* fix: crash when restoring backups
+* fix: crash when the app was closed for a while
+* fix: don't resume initial video on fragment recreation
+* fix: crash when view handler got destroyed
+* fix: default SponsorBlock categories are not being respected
+* fix: wrong channel group shown as selected
