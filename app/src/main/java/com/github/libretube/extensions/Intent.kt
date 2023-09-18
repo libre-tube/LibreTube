@@ -1,7 +1,6 @@
 package com.github.libretube.extensions
 
 import android.content.Intent
-import android.os.Build
 import android.os.Parcelable
 import androidx.core.content.IntentCompat
 import java.io.Serializable
