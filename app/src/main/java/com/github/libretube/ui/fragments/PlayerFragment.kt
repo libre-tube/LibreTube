@@ -886,7 +886,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             textLike.text = streams.likes.formatShort()
             if (streams.dislikes >= 0) {
-                textDislike.visibility = View.VISIBLE
+                textDislike.isVisible = true
                 textDislike.text = streams.dislikes.formatShort()
             }
 
