@@ -6,7 +6,7 @@
     <string name="share">分享</string>
     <string name="username">用户名</string>
     <string name="cannotDownload">我们无法下载这个视频。</string>
-    <string name="startpage">首页\t  『–</string>
+    <string name="startpage">首页</string>
     <string name="subscriptions">订阅内容</string>
     <string name="yes">是</string>
     <string name="library">媒体库</string>
@@ -194,8 +194,8 @@
     <string name="pure_theme_summary">纯白/黑主题</string>
     <string name="no_player_found">未找到外部播放器。 请确保你安装了一个。</string>
     <string name="data_saver_mode">省流量模式</string>
-    <string name="search_history_summary">记忆搜索</string>
-    <string name="watch_history_summary">本地跟踪已观看的视频</string>
+    <string name="search_history_summary">记住搜索词</string>
+    <string name="watch_history_summary">在本地追踪已观看的视频</string>
     <string name="history_summary">观看和搜索记录</string>
     <string name="watch_positions_title">记住观看位置</string>
     <string name="reset_watch_positions">重置</string>
@@ -413,7 +413,7 @@
     <string name="play_automatically">自动播放</string>
     <string name="play_automatically_summary">选择视频时自动开始播放</string>
     <string name="auto_fullscreen_shorts">观看短视频时自动全屏</string>
-    <string name="unlimited_search_history">无限搜索历史条目</string>
+    <string name="unlimited_search_history">不限制搜索历史记录数量</string>
     <string name="duration">时长</string>
     <string name="duration_reversed">时长（倒序）</string>
     <string name="shorts_notifications">短视频通知</string>
@@ -506,5 +506,5 @@
     <string name="sb_invalid_segment">无效的分段开头或结尾</string>
     <string name="contribute_to_sponsorblock">给 SponsorBlock 出力</string>
     <string name="filename_too_long">文件名过长！</string>
-    <string name="sponsorblock_user_id">SponsorBlock 用户名</string>
+    <string name="sponsorblock_user_id">SponsorBlock UserID</string>
 </resources>

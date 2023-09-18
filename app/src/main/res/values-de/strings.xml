@@ -509,5 +509,5 @@
     <string name="segment_type">Abschnitts-Kategorie</string>
     <string name="contribute_to_sponsorblock">Zu SponsorBlock beitragen</string>
     <string name="filename_too_long">Dateiname ist zu lang!</string>
-    <string name="sponsorblock_user_id">SponsorBlock Anmeldename</string>
+    <string name="sponsorblock_user_id">SponsorBlock Anmelde-ID</string>
 </resources>
