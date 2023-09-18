@@ -93,6 +93,7 @@
                         android:drawablePadding="5dp"
                         app:drawableStartCompat="@drawable/ic_dislike"
                         app:drawableStartDimen="12dp"
+                        android:visibility="gone"
                         tools:text="1.3K" />
 
                 </LinearLayout>
