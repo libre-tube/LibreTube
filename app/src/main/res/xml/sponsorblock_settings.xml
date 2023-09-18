@@ -50,6 +50,8 @@
 
     <PreferenceCategory app:title="@string/category_segments">
 
+        <!-- When changing default values, they must also be changed in the PlayerHelper.kt file! -->
+
         <com.github.libretube.ui.views.SbSpinnerPreference
             app:defaultValue="automatic"
             app:key="sponsor_category"

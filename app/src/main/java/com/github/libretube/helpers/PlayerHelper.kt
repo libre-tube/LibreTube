@@ -48,6 +48,15 @@ object PlayerHelper {
     const val ROLE_FLAG_AUTO_GEN_SUBTITLE = C.ROLE_FLAG_SUPPLEMENTARY
 
     /**
+     * A list of all categories that are not disabled by default
+     * Also update `sponsorblock_settings.xml` when modifying this!
+     */
+    private val sbDefaultValues = mapOf(
+        "sponsor" to SbSkipOptions.AUTOMATIC,
+        "selfpromo" to SbSkipOptions.AUTOMATIC
+    )
+
+    /**
      * Create a base64 encoded DASH stream manifest
      */
     fun createDashSource(
@@ -221,7 +230,7 @@ object PlayerHelper {
             .roundToInt()
             .toLong() * 1000
 
-    val playbackSpeed: Float
+    private val playbackSpeed: Float
         get() = PreferenceHelper.getString(
             PreferenceKeys.PLAYBACK_SPEED,
             "1"
@@ -456,11 +465,16 @@ object PlayerHelper {
         for (category in LibreTubeApp.instance.resources.getStringArray(
             R.array.sponsorBlockSegments
         )) {
-            val state = PreferenceHelper.getString(category + "_category", "off").uppercase()
-            if (SbSkipOptions.valueOf(state) != SbSkipOptions.OFF) {
-                categories[category] = SbSkipOptions.valueOf(state)
+            val defaultCategoryValue = sbDefaultValues.getOrDefault(category, SbSkipOptions.OFF)
+            val skipOption = PreferenceHelper
+                .getString("${category}_category", defaultCategoryValue.name)
+                .let { SbSkipOptions.valueOf(it.uppercase()) }
+
+            if (skipOption != SbSkipOptions.OFF) {
+                categories[category] = skipOption
             }
         }
+
         // Add the highlights category to display in the chapters
         if (sponsorBlockHighlights) categories[SPONSOR_HIGHLIGHT_CATEGORY] = SbSkipOptions.OFF
         return categories
