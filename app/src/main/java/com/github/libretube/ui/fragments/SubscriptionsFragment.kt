@@ -39,7 +39,6 @@ import com.google.android.material.chip.Chip
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 
 class SubscriptionsFragment : Fragment() {
     private var _binding: FragmentSubscriptionsBinding? = null
