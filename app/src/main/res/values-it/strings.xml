@@ -296,10 +296,10 @@
     <string name="confirm_unsubscribing">Conferma la disiscrizione</string>
     <string name="play_all">Riproduci tutti</string>
     <string name="confirm_unsubscribing_summary">Mostra una finestra di conferma prima di annullare l\'iscrizione.</string>
-    <string name="start_time">Ora di inizio</string>
+    <string name="start_time">Tempo iniziale</string>
     <string name="notification_time">Limita orari di notifica</string>
     <string name="time">Tempo</string>
-    <string name="end_time">Ora di fine</string>
+    <string name="end_time">Tempo finale</string>
     <string name="notification_time_summary">Limita l\'intervallo di ore in cui le notifiche di video vengono mostrate.</string>
     <string name="local_playlists">Playlist locali</string>
     <string name="brightness">Luminosità</string>
@@ -512,5 +512,5 @@
     <string name="segment_type">Tipo di segmento</string>
     <string name="contribute_to_sponsorblock">Contribuisci a SponsorBlock</string>
     <string name="filename_too_long">Nome del file troppo lungo!</string>
-    <string name="sponsorblock_user_id">Nome utente SponsorBlock</string>
+    <string name="sponsorblock_user_id">ID utente SponsorBlock</string>
 </resources>
