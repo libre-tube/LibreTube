@@ -193,9 +193,6 @@ class SubscriptionsFragment : Fragment() {
             val groups = DatabaseHolder.Database.subscriptionGroupsDao().getAll()
                 .sortedBy { it.index }
             channelGroupsModel.groups.postValue(groups)
-            withContext(Dispatchers.Main) {
-                initChannelGroups()
-            }
         }
     }
 
@@ -241,12 +238,13 @@ class SubscriptionsFragment : Fragment() {
                 setOnLongClickListener {
                     // the index must be increased by one to skip the "all channels" group button
                     playByGroup(index + 1)
-
                     true
                 }
             }
 
             binding.channelGroups.addView(chip)
+
+            if (index + 1 == selectedFilterGroup) binding.channelGroups.check(chip.id)
         }
     }
 
