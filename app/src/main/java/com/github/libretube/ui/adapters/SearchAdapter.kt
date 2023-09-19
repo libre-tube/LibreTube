@@ -30,7 +30,8 @@ import com.github.libretube.util.TextUtils
 import kotlinx.serialization.encodeToString
 
 class SearchAdapter(
-    private val isChannelAdapter: Boolean = false
+    private val isChannelAdapter: Boolean = false,
+    private val timeStamp: Long = 0,
 ) : ListAdapter<ContentItem, SearchViewHolder>(SearchCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -97,7 +98,7 @@ class SearchAdapter(
                 ImageHelper.loadImage(item.uploaderAvatar, channelImage)
             }
             root.setOnClickListener {
-                NavigationHelper.navigateVideo(root.context, item.url)
+                NavigationHelper.navigateVideo(root.context, item.url, timestamp = timeStamp)
             }
             val videoId = item.url.toID()
 
