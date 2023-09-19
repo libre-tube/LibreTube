@@ -5,6 +5,7 @@ import android.icu.text.RelativeDateTimeFormatter
 import android.os.Build
 import android.text.format.DateUtils
 import com.github.libretube.R
+import com.github.libretube.ui.dialogs.ShareDialog
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
@@ -14,6 +15,7 @@ import java.time.temporal.ChronoUnit
 import kotlin.time.Duration
 import kotlinx.datetime.LocalDate as KotlinLocalDate
 import kotlinx.datetime.toJavaLocalDate
+import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 object TextUtils {
@@ -53,9 +55,12 @@ object TextUtils {
      * Get video id if the link is a valid youtube video link
      */
     fun getVideoIdFromUrl(link: String): String? {
+        val mainPipedFrontendUrl = ShareDialog.PIPED_FRONTEND_URL.toHttpUrl().host
+        val unShortenedHosts = listOf("www.youtube.com", "m.youtube.com", mainPipedFrontendUrl)
+
         return link.toHttpUrlOrNull()?.let {
             when (it.host) {
-                "www.youtube.com", "m.youtube.com" -> it.queryParameter("v")
+                in unShortenedHosts -> it.queryParameter("v")
                 "youtu.be" -> it.pathSegments.lastOrNull()
                 else -> null
             }
