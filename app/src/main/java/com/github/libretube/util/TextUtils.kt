@@ -52,10 +52,10 @@ object TextUtils {
     /**
      * Get video id if the link is a valid youtube video link
      */
-    fun getVideoIdFromUri(link: String): String? {
+    fun getVideoIdFromUrl(link: String): String? {
         return link.toHttpUrlOrNull()?.let {
             when (it.host) {
-                "www.youtube.com" -> it.queryParameter("v")
+                "www.youtube.com", "m.youtube.com" -> it.queryParameter("v")
                 "youtu.be" -> it.pathSegments.lastOrNull()
                 else -> null
             }

@@ -1127,7 +1127,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      */
     private fun handleLink(link: String) {
         // get video id if the link is a valid youtube video link
-        val videoId = TextUtils.getVideoIdFromUri(link)
+        val videoId = TextUtils.getVideoIdFromUrl(link)
         if (videoId.isNullOrEmpty()) {
             // not a YouTube video link, thus handle normally
             val intent = Intent(Intent.ACTION_VIEW, link.toUri())
