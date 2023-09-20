@@ -506,5 +506,5 @@
     <string name="sb_invalid_segment">Awal atau akhir segmen tidak valid</string>
     <string name="filename_too_long">Nama berkas terlalu panjang!</string>
     <string name="contribute_to_sponsorblock">Berkontribusi ke SponsorBlock</string>
-    <string name="sponsorblock_user_id">Nama pengguna SponsorBlock</string>
+    <string name="sponsorblock_user_id">ID pengguna SponsorBlock</string>
 </resources>
