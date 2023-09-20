@@ -169,7 +169,7 @@
     <string name="replies">Reacties</string>
     <string name="normal_views">%1$s weergaven%2$s</string>
     <string name="concurrent_downloads">Maximale tegelijke downloads</string>
-    <string name="trending_views">%1$s • %2$s weergaven• %3$s</string>
+    <string name="trending_views">%1$s • %2$s weergaven • %3$s</string>
     <string name="category_highlight">Videohoogtepunt laten zien</string>
     <string name="category_highlight_description">Kan de geadverteerde titel zijn, de thumbnail of het meest interessante deel van de video. Je kan het overslaan door er op te tikken in het hoofdstuk deel.</string>
     <string name="download_completed">Download voltooid</string>
@@ -509,5 +509,6 @@
     <string name="sb_invalid_segment">Ongeldig segment­begin of -einde</string>
     <string name="contribute_to_sponsorblock">Bijdragen aan SponsorBlock</string>
     <string name="filename_too_long">Bestandsnaam te lang!</string>
-    <string name="sponsorblock_user_id">SponsorBlock-gebruikersnaam</string>
+    <string name="sponsorblock_user_id">SponsorBlock-gebruikers-ID</string>
+    <string name="donate">Doneren</string>
 </resources>
