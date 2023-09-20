@@ -79,19 +79,17 @@ Screenshots
 Features
 </h2>
 
-
-| Feature           |     |
-| ----------------- | --- |
-| User Accounts     | ✅ |
-| Subscriptions     | ✅ |
-| User Playlists    | ✅ |
-| Playlist Bookmarks| ✅ |
-| Channel Tabs      | ✅ |
-| Search Filters    | ✅ |
-| Player Gestures   | ✅ |
-| SponsorBlock      | ✅ |
-| Comments          | ✅ |
-| Captions          | ✅ |
+- [x] No Ads
+- [x] User Accounts
+- [x] Subscriptions
+- [x] Subscription Groups
+- [x] User Playlists
+- [x] Playlist Bookmarks
+- [x] Watch/Search History
+- [x] SponsorBlock
+- [x] DeArrow
+- [x] ReturnYouTubeDislike
+- [x] Downloads
 
 <h2 align="left">
 <sub>
@@ -114,7 +112,7 @@ The most common commit types are "feat", "fix", "refactor", "ci" and "chore".
 > Any issue avoiding the issue template will be ignored and forced to be closed.
 
 <h2 align="left">
-Donations
+Donate
 </h2>
 
 Donations can be made at:
