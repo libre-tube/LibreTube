@@ -6,7 +6,7 @@
 
 [![Matrix](https://libre-tube.github.io/assets/widgets/mat-widget.svg)](https://matrix.to/#/#LibreTube:matrix.org)
 [![Mastodon](https://libre-tube.github.io/assets/widgets/mast-widget.svg)](https://fosstodon.org/@libretube)
-[![Telegram](https://libre-tube.github.io/assets/widgets/tg-widget.svg)](https://t.me/libretube)
+[![Lemmy](https://libre-tube.github.io/assets/widgets/lemmy-widget.svg)](https://feddit.rocks/c/libretube)
 
 </div>
 
