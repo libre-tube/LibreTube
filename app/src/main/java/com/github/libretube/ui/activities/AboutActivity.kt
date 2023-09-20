@@ -108,7 +108,7 @@ class AboutActivity : BaseActivity() {
     }
 
     companion object {
-        private const val WEBSITE_URL = "https://libre-tube.github.io/"
+        private const val WEBSITE_URL = "https://libretube.dev"
         private const val GITHUB_URL = "https://github.com/libre-tube/LibreTube"
         private const val PIPED_GITHUB_URL = "https://github.com/TeamPiped/Piped"
         private const val WEBLATE_URL = "https://hosted.weblate.org/projects/libretube/libretube/"
