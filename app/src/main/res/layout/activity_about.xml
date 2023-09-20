@@ -37,6 +37,17 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
+         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/donate"
+            style="@style/AboutCard">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/AboutItem"
+                android:text="@string/donate"
+                app:drawableStartCompat="@drawable/ic_donate" />
+
+        </com.google.android.material.card.MaterialCardView>
+
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/website"
             style="@style/AboutCard">

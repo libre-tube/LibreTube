@@ -34,6 +34,7 @@ class AboutActivity : BaseActivity() {
             startActivity(Intent.createChooser(sendIntent, null))
         }
 
+        setupCard(binding.donate, DONATE_URL)
         setupCard(binding.website, WEBSITE_URL)
         setupCard(binding.piped, PIPED_GITHUB_URL)
         setupCard(binding.translate, WEBLATE_URL)
@@ -108,6 +109,7 @@ class AboutActivity : BaseActivity() {
     }
 
     companion object {
+        private const val DONATE_URL = "https://github.com/libre-tube/LibreTube#donate"
         private const val WEBSITE_URL = "https://libretube.dev"
         private const val GITHUB_URL = "https://github.com/libre-tube/LibreTube"
         private const val PIPED_GITHUB_URL = "https://github.com/TeamPiped/Piped"
