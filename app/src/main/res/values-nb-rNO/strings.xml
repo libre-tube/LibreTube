@@ -504,4 +504,11 @@
     <string name="proxy">Mellomtjener</string>
     <string name="group_name_error_empty">Skriv inn et navn</string>
     <string name="group_name_error_exists">Velg et unikt navn</string>
+    <string name="sb_create_segment">Opprett segment</string>
+    <string name="sb_invalid_segment">Ugyldig segmentsstart eller -slutt</string>
+    <string name="filename_too_long">Filnavnet er for langt.</string>
+    <string name="sponsorblock_user_id">SponsorBlock-bruker-ID</string>
+    <string name="segment_type">Segmenttype</string>
+    <string name="contribute_to_sponsorblock">Bidra til SponsorBlock</string>
+    <string name="donate">Doner</string>
 </resources>
