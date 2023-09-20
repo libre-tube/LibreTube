@@ -32,7 +32,7 @@ class HelpActivity : BaseActivity() {
     }
 
     companion object {
-        private const val FAQ_URL = "https://libre-tube.github.io/#faq"
+        private const val FAQ_URL = "https://libretube.dev/#faq"
         private const val MATRIX_URL = "https://matrix.to/#/#LibreTube:matrix.org"
         private const val MASTODON_URL = "https://fosstodon.org/@libretube"
         private const val LEMMY_URL = "https://feddit.rocks/c/libretube"
