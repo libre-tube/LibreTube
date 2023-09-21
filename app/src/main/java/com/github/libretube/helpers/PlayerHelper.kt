@@ -46,6 +46,7 @@ object PlayerHelper {
     const val CONTROL_TYPE = "control_type"
     const val SPONSOR_HIGHLIGHT_CATEGORY = "poi_highlight"
     const val ROLE_FLAG_AUTO_GEN_SUBTITLE = C.ROLE_FLAG_SUPPLEMENTARY
+    const val MINIMUM_BUFFER_DURATION = 1000 * 10 // exo default is 50s
 
     /**
      * A list of all categories that are not disabled by default
@@ -437,7 +438,7 @@ object PlayerHelper {
             // cache the last three minutes
             .setBackBuffer(1000 * 60 * 3, true)
             .setBufferDurationsMs(
-                1000 * 10, // exo default is 50s
+                MINIMUM_BUFFER_DURATION,
                 bufferingGoal,
                 DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_MS,
                 DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS

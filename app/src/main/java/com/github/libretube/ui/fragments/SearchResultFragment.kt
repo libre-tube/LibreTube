@@ -21,7 +21,6 @@ import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.hideKeyboard
-import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.SearchAdapter
@@ -106,7 +105,7 @@ class SearchResultFragment : Fragment() {
             val searchQuery = query.toHttpUrlOrNull()?.let {
                 val videoId = TextUtils.getVideoIdFromUrl(it.toString()) ?: query
                 timeStamp = it.queryParameter("t")?.toTimeInSeconds()
-                "${ShareDialog.YOUTUBE_FRONTEND_URL}/watch?v=${videoId}"
+                "${ShareDialog.YOUTUBE_FRONTEND_URL}/watch?v=$videoId"
             } ?: query
 
             repeatOnLifecycle(Lifecycle.State.CREATED) {
