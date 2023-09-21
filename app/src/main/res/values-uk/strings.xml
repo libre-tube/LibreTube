@@ -516,4 +516,5 @@
     <string name="contribute_to_sponsorblock">Зробити внесок до SponsorBlock</string>
     <string name="filename_too_long">Назва файлу задовга!</string>
     <string name="sponsorblock_user_id">UserID у SponsorBlock</string>
+    <string name="donate">Підтримати</string>
 </resources>

@@ -507,4 +507,5 @@
     <string name="contribute_to_sponsorblock">给 SponsorBlock 出力</string>
     <string name="filename_too_long">文件名过长！</string>
     <string name="sponsorblock_user_id">SponsorBlock UserID</string>
+    <string name="donate">捐赠</string>
 </resources>

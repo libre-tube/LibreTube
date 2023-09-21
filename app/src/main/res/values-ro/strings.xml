@@ -471,4 +471,22 @@
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_or_no_audio">necunoscut sau fără sunet</string>
     <string name="default_or_unknown_audio_track">implicit sau necunoscut</string>
+    <string name="group_name_error_exists">Te rugăm să alegi un nume care să fie unic</string>
+    <string name="resolution_limited">limitat</string>
+    <string name="auto_generated">generată automat</string>
+    <string name="sb_create_segment">Creați un segment</string>
+    <string name="visibility_unlisted">Nelistat</string>
+    <string name="visibility">Vizibilitate</string>
+    <string name="remove_watched_videos">Eliminați videoclipurile vizionate</string>
+    <string name="no_chapter">Fără capitol</string>
+    <string name="uploader_name">Numele uploader-ului</string>
+    <string name="registration_disabled">Înregistrare dezactivată</string>
+    <string name="sort_by">Sortează după</string>
+    <string name="segment_type">Tipul de segment</string>
+    <string name="visibility_public">Public</string>
+    <string name="group_name_error_empty">Te rugăm să introduci un nume</string>
+    <string name="donate">Donaţi</string>
+    <string name="screen_orientation">Orientarea ecranului</string>
+    <string name="duration_span">Durata</string>
+    <string name="proxy">Proxy</string>
 </resources>
