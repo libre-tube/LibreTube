@@ -516,4 +516,5 @@
     <string name="filename_too_long">Имя файла слишком длинное!</string>
     <string name="sponsorblock_user_id">ID пользователя в SponsorBlock</string>
     <string name="contribute_to_sponsorblock">Внести свой вклад в SponsorBlock</string>
+    <string name="donate">Поддержать</string>
 </resources>
