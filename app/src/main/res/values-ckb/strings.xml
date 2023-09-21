@@ -508,4 +508,7 @@
     <string name="sb_create_segment">دروستکردنی بەش</string>
     <string name="sb_invalid_segment">سەرەتا و کۆتایی بەش نادروستە</string>
     <string name="contribute_to_sponsorblock">بەشداربوون لە SponsorBlock</string>
+    <string name="filename_too_long">ناوی فایلەکە زۆۆۆر درێژە!</string>
+    <string name="sponsorblock_user_id">زانیاری بەکارهێنەری SponsorBlock</string>
+    <string name="donate">بەخشین</string>
 </resources>
