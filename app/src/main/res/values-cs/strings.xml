@@ -512,5 +512,6 @@
     <string name="sb_invalid_segment">Neplatný začátek nebo konec segmentu</string>
     <string name="contribute_to_sponsorblock">Přispějte do služby SponsorBlock</string>
     <string name="filename_too_long">Název souboru je příliš dlouhý!</string>
-    <string name="sponsorblock_user_id">Uživatelské jméno ve službě SponsorBlock</string>
+    <string name="sponsorblock_user_id">SponsorBlock UserID</string>
+    <string name="donate">Přispět</string>
 </resources>
