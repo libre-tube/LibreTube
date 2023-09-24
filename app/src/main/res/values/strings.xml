@@ -80,6 +80,7 @@
     <string name="music_videos">YT Music Videos</string>
     <string name="music_albums">YT Music Albums</string>
     <string name="music_playlists">YT Music Playlists</string>
+    <string name="music_artists">YT Music Artists</string>
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">Uses the https://sponsor.ajay.app API</string>
     <string name="segment_skipped">Skipped segment</string>
