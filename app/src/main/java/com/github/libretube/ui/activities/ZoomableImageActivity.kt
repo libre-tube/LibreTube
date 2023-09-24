@@ -4,9 +4,16 @@ import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.ActivityZoomableImageBinding
 import com.github.libretube.extensions.parcelableExtra
+import com.github.libretube.helpers.ImageHelper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * An activity that allows you to zoom and rotate an image
@@ -19,7 +26,15 @@ class ZoomableImageActivity : AppCompatActivity() {
         val binding = ActivityZoomableImageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val bitmap: Bitmap = intent.parcelableExtra(IntentData.bitmap)!!
-        binding.imageView.setImageBitmap(bitmap)
+        lifecycleScope.launch(Dispatchers.IO) {
+            val bitmapUrl = intent.getStringExtra(IntentData.bitmapUrl)!!
+            val bitmap = ImageHelper.getImage(this@ZoomableImageActivity, bitmapUrl) ?: return@launch
+
+            withContext(Dispatchers.Main) {
+                binding.imageView.setImageBitmap(bitmap)
+                binding.progress.isGone = true
+                binding.imageView.isVisible = true
+            }
+        }
     }
 }

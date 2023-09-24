@@ -17,6 +17,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.toID
 import com.github.libretube.parcelable.PlayerData
+import com.github.libretube.ui.activities.ZoomableImageActivity
 import com.github.libretube.ui.fragments.AudioPlayerFragment
 import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.views.SingleViewTouchableMotionLayout
@@ -108,6 +109,15 @@ object NavigationHelper {
             val args = bundleOf(IntentData.minimizeByDefault to minimizeByDefault)
             replace<AudioPlayerFragment>(R.id.container, args = args)
         }
+    }
+
+    /**
+     * Open a large, zoomable image preview
+     */
+    fun openImagePreview(context: Context, url: String) {
+        val intent = Intent(context, ZoomableImageActivity::class.java)
+        intent.putExtra(IntentData.bitmapUrl, url)
+        context.startActivity(intent)
     }
 
     /**

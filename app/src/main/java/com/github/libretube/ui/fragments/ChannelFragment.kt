@@ -27,6 +27,7 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.obj.ChannelTabs
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.activities.ZoomableImageActivity
@@ -201,12 +202,11 @@ class ChannelFragment : Fragment() {
                 ImageHelper.loadImage(response.avatarUrl, binding.channelImage)
 
                 binding.channelImage.setOnClickListener {
-                    lifecycleScope.launch(Dispatchers.IO) onclick@ {
-                        val image = ImageHelper.getImage(requireContext(), response.avatarUrl) ?: return@onclick
-                        val intent = Intent(context, ZoomableImageActivity::class.java)
-                        intent.putExtra(IntentData.bitmap, image)
-                        context?.startActivity(intent)
-                    }
+                    NavigationHelper.openImagePreview(requireContext(), response.avatarUrl ?: return@setOnClickListener)
+                }
+
+                binding.channelBanner.setOnClickListener {
+                    NavigationHelper.openImagePreview(requireContext(), response.bannerUrl ?: return@setOnClickListener)
                 }
 
                 // recyclerview of the videos by the channel
