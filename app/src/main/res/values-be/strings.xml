@@ -514,6 +514,7 @@
     <string name="segment_type">Тып сегмента</string>
     <string name="sb_invalid_segment">Няправільны пачатак або канец сегмента</string>
     <string name="filename_too_long">Назва файла занадта доўгая!</string>
-    <string name="sponsorblock_user_id">Імя карыстальніка ў SponsorBlock</string>
+    <string name="sponsorblock_user_id">UserID ў SponsorBlock</string>
     <string name="contribute_to_sponsorblock">Унесці свой уклад у SponsorBlock</string>
+    <string name="donate">Падтрымліваць</string>
 </resources>

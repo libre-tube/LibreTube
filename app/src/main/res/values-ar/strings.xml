@@ -522,4 +522,5 @@
     <string name="contribute_to_sponsorblock">المساهمة في حاجب الرعاة</string>
     <string name="filename_too_long">اسم الملف طويل جدًا!</string>
     <string name="sponsorblock_user_id">معرف مستخدم حاجب الرعاة</string>
+    <string name="donate">التبرع</string>
 </resources>

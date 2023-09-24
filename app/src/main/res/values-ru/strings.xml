@@ -27,7 +27,7 @@
     <string name="downloadfailed">Загрузка не удалась.</string>
     <string name="import_from_yt">Импортировать подписки</string>
     <string name="app_theme">Тема</string>
-    <string name="server_error">Похоже, возникла проблема с выбранным сервером. Попробуйте другой инстанс.</string>
+    <string name="server_error">Возникла проблема с выбранным сервером. Попробуйте другой.</string>
     <string name="unknown_error">Сетевая ошибка.</string>
     <string name="error">Что-то пошло не так.</string>
     <string name="empty">Вы должны ввести имя пользователя и пароль.</string>
@@ -73,7 +73,7 @@
     <string name="history">История</string>
     <string name="search_history">История поиска</string>
     <string name="sponsorblock">SponsorBlock</string>
-    <string name="sponsorblock_summary">Использовать API https://sponsor.ajay.app</string>
+    <string name="sponsorblock_summary">На базе API https://sponsor.ajay.app/</string>
     <string name="segment_skipped">Пропущен сегмент</string>
     <string name="category_interaction">Напоминание о реакции</string>
     <string name="category_interaction_description">Короткие просьбы поставить лайк, подписаться или добавить в избранное. Если сегмент длинный или о чем-то конкретном, вместо этого он должен быть в разделе саморекламы.</string>
@@ -257,7 +257,7 @@
     <string name="open_copied">Открыть</string>
     <string name="device_info">Об устройстве</string>
     <string name="new_videos_badge">Индикация новых роликов</string>
-    <string name="push_channel_description">Показывать уведомление о появлении новых стримов.</string>
+    <string name="push_channel_description">Показывать уведомления о появлении новых видео.</string>
     <string name="sb_skip_manual_summary">Не пропускать отрывки автоматически, всегда спрашивать.</string>
     <string name="new_videos_badge_summary">Показывать значок, если появились новые видео.</string>
     <string name="download_channel_name">Служба загрузки</string>
@@ -265,7 +265,7 @@
     <string name="skip_segment">Пропустить отрывок</string>
     <string name="download_channel_description">Показывать уведомление при загрузке медиа.</string>
     <string name="push_channel_name">Агент уведомлениий</string>
-    <string name="break_reminder_time">За несколько минут до напоминания</string>
+    <string name="break_reminder_time">Минут до напоминания</string>
     <string name="legacy_subscriptions">Старый вид отображения подписок</string>
     <string name="audio_video_summary">Качество изображения и формат</string>
     <string name="delete">Удалить из загрузок</string>
@@ -274,7 +274,7 @@
     <string name="mobile_data">Мобильная сеть</string>
     <string name="preferences">Настройки</string>
     <string name="local_subscriptions">Локальные подписки</string>
-    <string name="backup_customInstances">Пользовательские инстансы</string>
+    <string name="backup_customInstances">Свои серверы</string>
     <string name="save_feed">Загружать ленту в фоновом режиме</string>
     <string name="save_feed_summary">Загружать ленту подписок в фоновом режиме, предотвращая её автоматическое обновление.</string>
     <string name="play_next">Проиграть следующий</string>
@@ -295,7 +295,7 @@
     <string name="confirm_unsubscribe">Вы уверены, что хотите отписаться от %1$s\?</string>
     <string name="confirm_unsubscribing">Подтверждать отписку</string>
     <string name="confirm_unsubscribing_summary">Спрашивать подтверждение перед отпиской.</string>
-    <string name="play_all">Играть всё</string>
+    <string name="play_all">Играть все</string>
     <string name="time">Время</string>
     <string name="start_time">Время начала</string>
     <string name="end_time">Время окончания</string>
@@ -516,4 +516,5 @@
     <string name="filename_too_long">Имя файла слишком длинное!</string>
     <string name="sponsorblock_user_id">ID пользователя в SponsorBlock</string>
     <string name="contribute_to_sponsorblock">Внести свой вклад в SponsorBlock</string>
+    <string name="donate">Поддержать</string>
 </resources>

@@ -513,4 +513,5 @@
     <string name="filename_too_long">Nome demasiado comprido!</string>
     <string name="sponsorblock_user_id">ID de utilizador SponsorBlock</string>
     <string name="contribute_to_sponsorblock">Contribuir para SponsorBlock</string>
+    <string name="donate">Doar</string>
 </resources>
