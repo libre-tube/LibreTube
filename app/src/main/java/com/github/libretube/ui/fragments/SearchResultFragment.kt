@@ -78,6 +78,7 @@ class SearchResultFragment : Fragment() {
                 R.id.chip_music_videos -> "music_videos"
                 R.id.chip_music_albums -> "music_albums"
                 R.id.chip_music_playlists -> "music_playlists"
+                R.id.chip_music_artists -> "music_artists"
                 else -> throw IllegalArgumentException("Filter out of range")
             }
             fetchSearch()
