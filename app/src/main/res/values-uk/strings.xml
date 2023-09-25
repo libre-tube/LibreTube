@@ -518,4 +518,6 @@
     <string name="sponsorblock_user_id">UserID у SponsorBlock</string>
     <string name="donate">Підтримати</string>
     <string name="music_artists">Виконавці YT Music</string>
+    <string name="no_fullscreen_resolution">Роздільність для не повноекранного режиму</string>
+    <string name="same_as_fullscreen">Така ж як для повноекранного режиму</string>
 </resources>
