@@ -159,33 +159,32 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      */
     private lateinit var streams: Streams
 
-    /**
-     * for the transition
-     */
+    // progress state of the motion layout transition
     private var transitionStartId = 0
     private var transitionEndId = 0
     private var isTransitioning = true
 
-    /**
-     * for the player
-     */
+    // data and objects stored for the player
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var trackSelector: DefaultTrackSelector
     private var currentSubtitle = Subtitle(code = PlayerHelper.defaultSubtitleCode)
+
+    // if null, it's been set to automatic
+    private var fullscreenResolution: Int? = null
+
+    // the resolution to use when the video is not played in fullscreen
+    // if null, use same quality as fullscreen
+    private var noFullscreenResolution: Int? = null
 
     private val cronetDataSourceFactory = CronetDataSource.Factory(
         CronetHelper.cronetEngine,
         Executors.newCachedThreadPool()
     )
 
-    /**
-     * for the player notification
-     */
+    // for the player notification
     private lateinit var nowPlayingNotification: NowPlayingNotification
 
-    /**
-     * SponsorBlock
-     */
+    // SponsorBlock
     private var segments = listOf<Segment>()
     private var sponsorBlockEnabled = PlayerHelper.sponsorBlockEnabled
     private var sponsorBlockConfig = PlayerHelper.getSponsorBlockCategories()
@@ -263,6 +262,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             1000,
             1000
         )
+
+        fullscreenResolution = PlayerHelper.getDefaultResolution(requireContext(), true)
+        noFullscreenResolution = PlayerHelper.getDefaultResolution(requireContext(), false)
     }
 
     override fun onCreateView(
@@ -541,6 +543,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         updateFullscreenOrientation()
         viewModel.isFullscreen.value = true
+
+        updateResolutionOnFullscreenChange(true)
     }
 
     @SuppressLint("SourceLockedOrientationActivity")
@@ -570,6 +574,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         viewModel.isFullscreen.value = false
+
+        updateResolutionOnFullscreenChange(false)
     }
 
     private fun toggleDescription() {
@@ -1324,9 +1330,16 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
     }
 
+    private fun updateResolutionOnFullscreenChange(isFullscreen: Boolean) {
+        if (!isFullscreen && noFullscreenResolution != null) {
+            setPlayerResolution(noFullscreenResolution!!)
+        } else {
+            setPlayerResolution(fullscreenResolution ?: Int.MAX_VALUE)
+        }
+    }
+
     private suspend fun setStreamSource() {
-        val defaultResolution = PlayerHelper.getDefaultResolution(requireContext()).replace("p", "")
-        if (defaultResolution.isNotEmpty()) setPlayerResolution(defaultResolution.toInt())
+        updateResolutionOnFullscreenChange(viewModel.isFullscreen.value == true)
 
         val (uri, mimeType) = when {
             // LBRY HLS
@@ -1503,7 +1516,15 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     if (currentQuality == it.resolution) "${it.name} ✓" else it.name
                 }
             ) { which ->
-                setPlayerResolution(resolutions[which].resolution)
+                val newResolution = resolutions[which].resolution
+                setPlayerResolution(newResolution)
+
+                // save the selected resolution to update on fullscreen change
+                if (noFullscreenResolution != null && viewModel.isFullscreen.value != true) {
+                    noFullscreenResolution = newResolution
+                } else {
+                    fullscreenResolution = newResolution
+                }
             }
             .show(childFragmentManager)
     }
