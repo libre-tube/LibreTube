@@ -524,4 +524,6 @@
     <string name="sponsorblock_user_id">معرف مستخدم حاجب الرعاة</string>
     <string name="donate">التبرع</string>
     <string name="music_artists">YT الموسيقى: الفنانين</string>
+    <string name="no_fullscreen_resolution">لاتوجد دقة لشاشة الكاملة</string>
+    <string name="same_as_fullscreen">مطابق لإعداد الشاشة الكاملة</string>
 </resources>
