@@ -52,6 +52,9 @@
             android:label="@string/settings" />
 
         <activity
+            android:name=".ui.activities.ZoomableImageActivity" />
+
+        <activity
             android:name=".ui.activities.AddToQueueActivity"
             android:enabled="true"
             android:exported="true"
