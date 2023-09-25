@@ -64,8 +64,8 @@ class ZoomableImageView(context: Context, attr: AttributeSet?) : AppCompatImageV
                     mode = ZOOM
                 }
 
-                MotionEvent.ACTION_MOVE ->                         //if the mode is ZOOM or
-                    //if the mode is DRAG and already zoomed
+                MotionEvent.ACTION_MOVE -> // if the mode is ZOOM or
+                    // if the mode is DRAG and already zoomed
                     if (mode == ZOOM || mode == DRAG && saveScale > minScale) {
                         var deltaX = curr.x - last.x // x difference
                         var deltaY = curr.y - last.y // y difference
@@ -73,26 +73,42 @@ class ZoomableImageView(context: Context, attr: AttributeSet?) : AppCompatImageV
                             .toFloat() // width after applying current scale
                         val scaleHeight = (origHeight * saveScale).roundToInt()
                             .toFloat() // height after applying current scale
-                        //if scaleWidth is smaller than the views width
-                        //in other words if the image width fits in the view
-                        //limit left and right movement
+                        // if scaleWidth is smaller than the views width
+                        // in other words if the image width fits in the view
+                        // limit left and right movement
                         if (scaleWidth < width) {
                             deltaX = 0f
-                            if (y + deltaY > 0) deltaY = -y else if (y + deltaY < -bottom) deltaY =
-                                -(y + bottom)
+                            if (y + deltaY > 0) {
+                                deltaY = -y
+                            } else if (y + deltaY < -bottom) {
+                                deltaY =
+                                    -(y + bottom)
+                            }
                         } else if (scaleHeight < height) {
                             deltaY = 0f
-                            if (x + deltaX > 0) deltaX = -x else if (x + deltaX < -right) deltaX =
-                                -(x + right)
+                            if (x + deltaX > 0) {
+                                deltaX = -x
+                            } else if (x + deltaX < -right) {
+                                deltaX =
+                                    -(x + right)
+                            }
                         } else {
-                            if (x + deltaX > 0) deltaX = -x else if (x + deltaX < -right) deltaX =
-                                -(x + right)
-                            if (y + deltaY > 0) deltaY = -y else if (y + deltaY < -bottom) deltaY =
-                                -(y + bottom)
+                            if (x + deltaX > 0) {
+                                deltaX = -x
+                            } else if (x + deltaX < -right) {
+                                deltaX =
+                                    -(x + right)
+                            }
+                            if (y + deltaY > 0) {
+                                deltaY = -y
+                            } else if (y + deltaY < -bottom) {
+                                deltaY =
+                                    -(y + bottom)
+                            }
                         }
-                        //move the image with the matrix
+                        // move the image with the matrix
                         bitmapMatrix.postTranslate(deltaX, deltaY)
-                        //set the last touch location to the current
+                        // set the last touch location to the current
                         last[curr.x] = curr.y
                     }
 
@@ -169,15 +185,19 @@ class ZoomableImageView(context: Context, attr: AttributeSet?) : AppCompatImageV
                     val y = m[Matrix.MTRANS_Y]
 
                     if ((origWidth * saveScale).roundToInt() < width) {
-                        if (y < -bottom) bitmapMatrix.postTranslate(
-                            0f,
-                            -(y + bottom)
-                        ) else if (y > 0) bitmapMatrix.postTranslate(0f, -y)
+                        if (y < -bottom) {
+                            bitmapMatrix.postTranslate(
+                                0f,
+                                -(y + bottom)
+                            )
+                        } else if (y > 0) bitmapMatrix.postTranslate(0f, -y)
                     } else {
-                        if (x < -right) bitmapMatrix.postTranslate(
-                            -(x + right),
-                            0f
-                        ) else if (x > 0) bitmapMatrix.postTranslate(-x, 0f)
+                        if (x < -right) {
+                            bitmapMatrix.postTranslate(
+                                -(x + right),
+                                0f
+                            )
+                        } else if (x > 0) bitmapMatrix.postTranslate(-x, 0f)
                     }
                 }
             } else {
@@ -187,14 +207,18 @@ class ZoomableImageView(context: Context, attr: AttributeSet?) : AppCompatImageV
                 val y = m[Matrix.MTRANS_Y]
 
                 if (mScaleFactor < 1) {
-                    if (x < -right) bitmapMatrix.postTranslate(
-                        -(x + right),
-                        0f
-                    ) else if (x > 0) bitmapMatrix.postTranslate(-x, 0f)
-                    if (y < -bottom) bitmapMatrix.postTranslate(
-                        0f,
-                        -(y + bottom)
-                    ) else if (y > 0) bitmapMatrix.postTranslate(0f, -y)
+                    if (x < -right) {
+                        bitmapMatrix.postTranslate(
+                            -(x + right),
+                            0f
+                        )
+                    } else if (x > 0) bitmapMatrix.postTranslate(-x, 0f)
+                    if (y < -bottom) {
+                        bitmapMatrix.postTranslate(
+                            0f,
+                            -(y + bottom)
+                        )
+                    } else if (y > 0) bitmapMatrix.postTranslate(0f, -y)
                 }
             }
             return true
