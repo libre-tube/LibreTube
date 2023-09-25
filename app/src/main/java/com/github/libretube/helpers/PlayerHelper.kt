@@ -323,6 +323,10 @@ object PlayerHelper {
                 true
             )
 
+    fun shouldPlayNextVideo(playlistId: String?): Boolean {
+        return autoPlayEnabled || (PreferenceHelper.getBoolean(PreferenceKeys.AUTOPLAY_PLAYLISTS, true) && playlistId != null)
+    }
+
     fun getDefaultResolution(context: Context): String {
         val prefKey = if (NetworkHelper.isNetworkMetered(context)) {
             PreferenceKeys.DEFAULT_RESOLUTION_MOBILE

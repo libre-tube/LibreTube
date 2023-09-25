@@ -85,6 +85,7 @@ object PreferenceKeys {
     const val ALTERNATIVE_PLAYER_LAYOUT = "alternative_player_layout"
     const val USE_HLS_OVER_DASH = "use_hls"
     const val QUEUE_AUTO_INSERT_RELATED = "queue_insert_related_videos"
+    const val AUTOPLAY_PLAYLISTS = "autoplay_playlists"
     const val PLAYER_SWIPE_CONTROLS = "player_swipe_controls"
     const val PLAYER_PINCH_CONTROL = "player_pinch_control"
     const val CAPTIONS_SIZE = "captions_size"

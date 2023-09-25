@@ -977,7 +977,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
                 // check if video has ended, next video is available and autoplay is enabled/the video is part of a played playlist.
                 if (playbackState == Player.STATE_ENDED) {
-                    if (!isTransitioning && (PlayerHelper.autoPlayEnabled || playlistId != null)) {
+                    if (!isTransitioning && PlayerHelper.shouldPlayNextVideo(playlistId)) {
                         isTransitioning = true
                         if (PlayerHelper.autoPlayCountdown) {
                             showAutoPlayCountdown()
