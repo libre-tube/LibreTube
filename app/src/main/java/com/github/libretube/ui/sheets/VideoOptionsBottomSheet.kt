@@ -44,9 +44,6 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
         // List that stores the different menu options. In the future could be add more options here.
         val optionsList = mutableListOf(
             getString(R.string.playOnBackground),
-            getString(R.string.addToPlaylist),
-            getString(R.string.download),
-            getString(R.string.share)
         )
 
         // Check whether the player is running and add queue options
@@ -75,6 +72,12 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                 optionsList += getString(R.string.mark_as_unwatched)
             }
         }
+
+        optionsList += listOf(
+            getString(R.string.addToPlaylist),
+            getString(R.string.download),
+            getString(R.string.share)
+        )
 
         setSimpleItems(optionsList) { which ->
             when (optionsList[which]) {
