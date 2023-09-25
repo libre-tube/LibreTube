@@ -265,7 +265,7 @@ class OnlinePlayerService : LifecycleService() {
             override fun onPlaybackStateChanged(state: Int) {
                 when (state) {
                     Player.STATE_ENDED -> {
-                        if (PlayerHelper.shouldPlayNextVideo(playlistId) && !isTransitioning) playNextVideo()
+                        if (PlayerHelper.shouldPlayNextVideo(playlistId != null) && !isTransitioning) playNextVideo()
                     }
 
                     Player.STATE_IDLE -> {

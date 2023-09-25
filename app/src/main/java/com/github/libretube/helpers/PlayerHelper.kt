@@ -323,8 +323,8 @@ object PlayerHelper {
                 true
             )
 
-    fun shouldPlayNextVideo(playlistId: String?): Boolean {
-        return autoPlayEnabled || (PreferenceHelper.getBoolean(PreferenceKeys.AUTOPLAY_PLAYLISTS, true) && playlistId != null)
+    fun shouldPlayNextVideo(isPlaylist: Boolean = false): Boolean {
+        return autoPlayEnabled || (PreferenceHelper.getBoolean(PreferenceKeys.AUTOPLAY_PLAYLISTS, true) && isPlaylist)
     }
 
     fun getDefaultResolution(context: Context): String {
