@@ -509,4 +509,6 @@
     <string name="sponsorblock_user_id">SponsorBlock UserID</string>
     <string name="donate">捐赠</string>
     <string name="music_artists">YT Music 艺人</string>
+    <string name="no_fullscreen_resolution">非全屏分辨率</string>
+    <string name="same_as_fullscreen">与全屏一致</string>
 </resources>

@@ -512,4 +512,6 @@
     <string name="contribute_to_sponsorblock">ਸਪਾਂਸਰਬਲਾਕ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾਓ</string>
     <string name="donate">ਦਾਨ ਕਰੋ</string>
     <string name="music_artists">YT ਮਿਊਜ਼ਿਕ ਕਲਾਕਾਰ</string>
+    <string name="no_fullscreen_resolution">ਬਗੈਰ-ਫੁਲਸਕ੍ਰੀਨ ਰੈਜ਼ੋਲਿਊਸ਼ਨ</string>
+    <string name="same_as_fullscreen">ਪੂਰੀ ਸਕਰੀਨ ਦੇ ਵਾਂਗ ਹੀ</string>
 </resources>

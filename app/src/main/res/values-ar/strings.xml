@@ -40,7 +40,7 @@
     <string name="fail">فشل ذريع :(</string>
     <string name="dlisinprogress">الرجاء الانتظار حتى تنتهي كافة التنزيلات الحالية.</string>
     <string name="unknown_error">خطأ في الشبكة.</string>
-    <string name="server_error">يبدو أن هناك مشكلة في هذا المخدم المحدد. جرب مخدم أخر.</string>
+    <string name="server_error">يبدو أن هناك مشكلة في هذا الخادم المحدد. جرب خادم أخر.</string>
     <string name="error">حدث خطأ ما.</string>
     <string name="addToPlaylist">إضافة إلى قائمة التشغيل</string>
     <string name="about">حول</string>
@@ -408,7 +408,7 @@
     <string name="subscriberAndVideoCounts">مشتركون %1$s • فيديوهات %2$d</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d مقاطع فيديو</string>
     <string name="disable_proxy">تعطيل وكيل الأنابيب</string>
-    <string name="disable_proxy_summary">تجهيز الفيديو والصور بشكل مباشر من خادم يوتيوب . تمكين هذا الخيار فقط إذا كنت تستخدم الشبكات الافتراضية الخاصة !</string>
+    <string name="disable_proxy_summary">تجهيز الفيديو والصور بشكل مباشر من خوادم يوتيوب . تمكين هذا الخيار فقط إذا كنت تستخدم الشبكات الافتراضية الخاصة (VPN)!</string>
     <string name="auto_fullscreen_shorts">ملء الشاشة تلقائيًا على مقاطع الفيديو القصيرة</string>
     <string name="new_group">جديد</string>
     <string name="group_name">أسم المجموعة</string>

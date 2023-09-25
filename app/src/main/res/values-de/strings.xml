@@ -512,4 +512,6 @@
     <string name="sponsorblock_user_id">SponsorBlock Anmelde-ID</string>
     <string name="donate">Spenden</string>
     <string name="music_artists">YT Music-Künstler:innen</string>
+    <string name="no_fullscreen_resolution">Auflösung außerhalb des Vollbildmodus</string>
+    <string name="same_as_fullscreen">Gleich wie im Vollbild</string>
 </resources>

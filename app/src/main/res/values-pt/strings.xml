@@ -514,4 +514,7 @@
     <string name="sponsorblock_user_id">ID de utilizador SponsorBlock</string>
     <string name="contribute_to_sponsorblock">Contribuir para SponsorBlock</string>
     <string name="donate">Doar</string>
+    <string name="no_fullscreen_resolution">Resolução sem ecrã completo</string>
+    <string name="music_artists">Artistas do YT Music</string>
+    <string name="same_as_fullscreen">O mesmo que em ecrã total</string>
 </resources>
