@@ -508,4 +508,5 @@
     <string name="filename_too_long">文件名过长！</string>
     <string name="sponsorblock_user_id">SponsorBlock UserID</string>
     <string name="donate">捐赠</string>
+    <string name="music_artists">YT Music 艺人</string>
 </resources>

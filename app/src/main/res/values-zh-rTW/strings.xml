@@ -508,4 +508,5 @@
     <string name="sponsorblock_user_id">SponsorBlock 使用者 ID</string>
     <string name="contribute_to_sponsorblock">貢獻給 SponsorBlock</string>
     <string name="donate">捐款</string>
+    <string name="music_artists">YouTube Music 藝人</string>
 </resources>

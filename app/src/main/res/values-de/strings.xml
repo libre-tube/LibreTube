@@ -38,7 +38,7 @@
     <string name="createPlaylist">Playlist erstellen</string>
     <string name="playlistCreated">Playlist erstellt.</string>
     <string name="playlistName">Name der Playlist</string>
-    <string name="addToPlaylist">Zu Playlist hinzufügen</string>
+    <string name="addToPlaylist">Zur Playlist hinzufügen</string>
     <string name="fail">Fehlgeschlagen :(</string>
     <string name="login_register">Anmelden/registrieren</string>
     <string name="save">Speichern</string>
@@ -511,4 +511,5 @@
     <string name="filename_too_long">Dateiname ist zu lang!</string>
     <string name="sponsorblock_user_id">SponsorBlock Anmelde-ID</string>
     <string name="donate">Spenden</string>
+    <string name="music_artists">YT Music-Künstler:innen</string>
 </resources>
