@@ -36,10 +36,10 @@ import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.obj.VideoStats
 import com.github.libretube.util.TextUtils
+import kotlinx.coroutines.runBlocking
 import java.util.Locale
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
-import kotlinx.coroutines.runBlocking
 
 object PlayerHelper {
     private const val ACTION_MEDIA_CONTROL = "media_control"
@@ -324,13 +324,17 @@ object PlayerHelper {
                 true
             )
 
-    fun getDefaultResolution(context: Context): String {
-        val prefKey = if (NetworkHelper.isNetworkMetered(context)) {
+    fun getDefaultResolution(context: Context, isFullscreen: Boolean): Int? {
+        var prefKey = if (NetworkHelper.isNetworkMetered(context)) {
             PreferenceKeys.DEFAULT_RESOLUTION_MOBILE
         } else {
             PreferenceKeys.DEFAULT_RESOLUTION
         }
+        if (!isFullscreen) prefKey += "_no_fullscreen"
+
         return PreferenceHelper.getString(prefKey, "")
+            .replace("p", "")
+            .toIntOrNull()
     }
 
     /**
@@ -502,9 +506,9 @@ object PlayerHelper {
             if (currentPosition in segmentStart until segmentEnd) {
                 if (sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC ||
                     (
-                        sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE &&
-                            !segment.skipped
-                        )
+                            sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE &&
+                                    !segment.skipped
+                            )
                 ) {
                     if (sponsorBlockNotifications) {
                         runCatching {
@@ -516,9 +520,9 @@ object PlayerHelper {
                     segment.skipped = true
                 } else if (sponsorBlockConfig[segment.category] == SbSkipOptions.MANUAL ||
                     (
-                        sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE &&
-                            segment.skipped
-                        )
+                            sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE &&
+                                    segment.skipped
+                            )
                 ) {
                     return segment
                 }
@@ -543,9 +547,9 @@ object PlayerHelper {
         return chapters
             .filter {
                 it.highlightDrawable == null ||
-                    // remove the video highlight if it's already longer ago than [ChapterSegment.HIGHLIGHT_LENGTH],
-                    // otherwise the SponsorBlock highlight would be shown from its starting point to the end
-                    (currentPositionSeconds - it.start) < ChapterSegment.HIGHLIGHT_LENGTH
+                        // remove the video highlight if it's already longer ago than [ChapterSegment.HIGHLIGHT_LENGTH],
+                        // otherwise the SponsorBlock highlight would be shown from its starting point to the end
+                        (currentPositionSeconds - it.start) < ChapterSegment.HIGHLIGHT_LENGTH
             }
             .sortedBy { it.start }
             .indexOfLast { currentPositionSeconds >= it.start }
@@ -701,9 +705,9 @@ object PlayerHelper {
      */
     fun haveAudioTrackRoleFlagSet(@C.RoleFlags roleFlags: Int): Boolean {
         return isFlagSet(roleFlags, C.ROLE_FLAG_DESCRIBES_VIDEO) ||
-            isFlagSet(roleFlags, C.ROLE_FLAG_DUB) ||
-            isFlagSet(roleFlags, C.ROLE_FLAG_MAIN) ||
-            isFlagSet(roleFlags, C.ROLE_FLAG_ALTERNATE)
+                isFlagSet(roleFlags, C.ROLE_FLAG_DUB) ||
+                isFlagSet(roleFlags, C.ROLE_FLAG_MAIN) ||
+                isFlagSet(roleFlags, C.ROLE_FLAG_ALTERNATE)
     }
 
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
@@ -716,7 +720,8 @@ object PlayerHelper {
         val audioInfo = "${player.audioFormat?.codecs.orEmpty()} ${
             TextUtils.formatBitrate(player.audioFormat?.bitrate)
         }"
-        val videoQuality = "${player.videoFormat?.width}x${player.videoFormat?.height} ${player.videoFormat?.frameRate?.toInt()}fps"
+        val videoQuality =
+            "${player.videoFormat?.width}x${player.videoFormat?.height} ${player.videoFormat?.frameRate?.toInt()}fps"
         return VideoStats(videoId, videoInfo, videoQuality, audioInfo)
     }
 }
