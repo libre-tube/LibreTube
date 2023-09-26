@@ -514,4 +514,6 @@
     <string name="music_artists">YT Music-Künstler:innen</string>
     <string name="no_fullscreen_resolution">Auflösung außerhalb des Vollbildmodus</string>
     <string name="same_as_fullscreen">Gleich wie im Vollbild</string>
+    <string name="playback_during_call_summary">Bitte beachten, dass die App mit dieser Einstellung keinen Audio-Fokus mehr ändern kann.</string>
+    <string name="playback_during_call">Wiedergabe beim Telefonieren fortsetzen</string>
 </resources>
