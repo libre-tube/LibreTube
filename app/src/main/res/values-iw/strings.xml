@@ -517,4 +517,9 @@
     <string name="contribute_to_sponsorblock">תרומה ל־SponsorBlock</string>
     <string name="sponsorblock_user_id">מזהה משתמש לחסימת מפרסמים</string>
     <string name="donate">תרומה</string>
+    <string name="no_fullscreen_resolution">רזולוציה למסך לא מלא</string>
+    <string name="playback_during_call_summary">נא לשים לב שזה משפיע על היישומון כך שלא יטפל יותר במיקוד שמע.</string>
+    <string name="music_artists">אומנים ב־YT Music</string>
+    <string name="playback_during_call">להמשיך נגינה במהלך שיחת טלפון</string>
+    <string name="same_as_fullscreen">כמו מסך מלא</string>
 </resources>
