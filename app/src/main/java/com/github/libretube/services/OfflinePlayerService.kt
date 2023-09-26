@@ -86,14 +86,7 @@ class OfflinePlayerService : LifecycleService() {
             setTrackTypeDisabled(C.TRACK_TYPE_VIDEO, true)
         }
 
-        player = ExoPlayer.Builder(this)
-            .setUsePlatformDiagnostics(false)
-            .setHandleAudioBecomingNoisy(true)
-            .setAudioAttributes(PlayerHelper.getAudioAttributes(), true)
-            .setTrackSelector(trackSelector)
-            .setLoadControl(PlayerHelper.getLoadControl())
-            .build()
-            .loadPlaybackParams(isBackgroundMode = true)
+        player = PlayerHelper.createPlayer(this, trackSelector, true)
 
         val audioItem = downloadWithItem.downloadItems.filter { it.path.exists() }
             .firstOrNull { it.type == FileType.AUDIO }

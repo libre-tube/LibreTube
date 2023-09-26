@@ -1405,12 +1405,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private fun createExoPlayer() {
-        val cronetDataSourceFactory = CronetDataSource.Factory(
-            CronetHelper.cronetEngine,
-            Executors.newCachedThreadPool()
-        )
-        val dataSourceFactory = DefaultDataSource.Factory(requireContext(), cronetDataSourceFactory)
-
         // control for the track sources like subtitles and audio source
         trackSelector = DefaultTrackSelector(requireContext())
 
@@ -1429,15 +1423,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         PlayerHelper.applyPreferredAudioQuality(requireContext(), trackSelector)
 
-        exoPlayer = ExoPlayer.Builder(requireContext())
-            .setUsePlatformDiagnostics(false)
-            .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
-            .setLoadControl(PlayerHelper.getLoadControl())
-            .setTrackSelector(trackSelector)
-            .setHandleAudioBecomingNoisy(true)
-            .setAudioAttributes(PlayerHelper.getAudioAttributes(), true)
-            .build()
-            .loadPlaybackParams()
+        exoPlayer = PlayerHelper.createPlayer(requireContext(), trackSelector, false)
         viewModel.player = exoPlayer
     }
 

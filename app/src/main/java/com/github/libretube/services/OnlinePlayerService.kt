@@ -243,14 +243,7 @@ class OnlinePlayerService : LifecycleService() {
             setTrackTypeDisabled(C.TRACK_TYPE_VIDEO, true)
         }
 
-        player = ExoPlayer.Builder(this)
-            .setUsePlatformDiagnostics(false)
-            .setHandleAudioBecomingNoisy(true)
-            .setAudioAttributes(PlayerHelper.getAudioAttributes(), true)
-            .setLoadControl(PlayerHelper.getLoadControl())
-            .setTrackSelector(trackSelector)
-            .build()
-            .loadPlaybackParams(isBackgroundMode = true)
+        player = PlayerHelper.createPlayer(this, trackSelector, true)
 
         /**
          * Listens for changed playbackStates (e.g. pause, end)
