@@ -517,4 +517,6 @@
     <string name="no_fullscreen_resolution">Nessuna risoluzione a schermo intero</string>
     <string name="music_artists">Artisti YT Music</string>
     <string name="same_as_fullscreen">Uguale allo schermo intero</string>
+    <string name="playback_during_call_summary">Nota che ciò provoca anche la perdita di gestione di qualsiasi tipo di focus audio dell\'app.</string>
+    <string name="playback_during_call">Continua la riproduzione durante una telefonata</string>
 </resources>
