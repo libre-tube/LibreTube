@@ -102,6 +102,7 @@ object PreferenceKeys {
     const val SB_HIGHLIGHTS = "sb_highlights"
     const val SHOW_TIME_LEFT = "show_time_left"
     const val FALLBACK_PIPED_PROXY = "fallback_piped_proxy"
+    const val ALLOW_PLAYBACK_DURING_CALL = "playback_during_call"
 
     /**
      * Background mode

@@ -329,6 +329,12 @@ object PlayerHelper {
                 true
             )
 
+    private val handleAudioFocus
+        get() = !PreferenceHelper.getBoolean(
+            PreferenceKeys.ALLOW_PLAYBACK_DURING_CALL,
+            false
+        )
+
     fun getDefaultResolution(context: Context, isFullscreen: Boolean): Int? {
         var prefKey = if (NetworkHelper.isNetworkMetered(context)) {
             PreferenceKeys.DEFAULT_RESOLUTION_MOBILE
@@ -429,16 +435,6 @@ object PlayerHelper {
     }
 
     /**
-     * Get the audio attributes to use for the player
-     */
-    fun getAudioAttributes(): AudioAttributes {
-        return AudioAttributes.Builder()
-            .setUsage(C.USAGE_MEDIA)
-            .setContentType(C.AUDIO_CONTENT_TYPE_MOVIE)
-            .build()
-    }
-
-    /**
      * Create a basic player, that is used for all types of playback situations inside the app
      */
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
@@ -448,6 +444,10 @@ object PlayerHelper {
             Executors.newCachedThreadPool()
         )
         val dataSourceFactory = DefaultDataSource.Factory(context, cronetDataSourceFactory)
+        val audioAttributes = AudioAttributes.Builder()
+            .setUsage(C.USAGE_MEDIA)
+            .setContentType(C.AUDIO_CONTENT_TYPE_MOVIE)
+            .build()
 
         return ExoPlayer.Builder(context)
             .setUsePlatformDiagnostics(false)
@@ -455,7 +455,7 @@ object PlayerHelper {
             .setTrackSelector(trackSelector)
             .setHandleAudioBecomingNoisy(true)
             .setLoadControl(getLoadControl())
-            .setAudioAttributes(getAudioAttributes(), true)
+            .setAudioAttributes(audioAttributes, handleAudioFocus)
             .setUsePlatformDiagnostics(false)
             .build()
             .apply {
