@@ -19,13 +19,17 @@ import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
 import androidx.media3.common.PlaybackParameters
 import androidx.media3.common.Tracks
+import androidx.media3.datasource.DefaultDataSource
+import androidx.media3.datasource.cronet.CronetDataSource
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.LoadControl
+import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.media3.ui.CaptionStyleCompat
 import com.github.libretube.LibreTubeApp
 import com.github.libretube.R
+import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
@@ -38,6 +42,7 @@ import com.github.libretube.obj.VideoStats
 import com.github.libretube.util.TextUtils
 import kotlinx.coroutines.runBlocking
 import java.util.Locale
+import java.util.concurrent.Executors
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 
@@ -431,6 +436,31 @@ object PlayerHelper {
             .setUsage(C.USAGE_MEDIA)
             .setContentType(C.AUDIO_CONTENT_TYPE_MOVIE)
             .build()
+    }
+
+    /**
+     * Create a basic player, that is used for all types of playback situations inside the app
+     */
+    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
+    fun createPlayer(context: Context, trackSelector: DefaultTrackSelector, isBackgroundMode: Boolean): ExoPlayer {
+        val cronetDataSourceFactory = CronetDataSource.Factory(
+            CronetHelper.cronetEngine,
+            Executors.newCachedThreadPool()
+        )
+        val dataSourceFactory = DefaultDataSource.Factory(context, cronetDataSourceFactory)
+
+        return ExoPlayer.Builder(context)
+            .setUsePlatformDiagnostics(false)
+            .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
+            .setTrackSelector(trackSelector)
+            .setHandleAudioBecomingNoisy(true)
+            .setLoadControl(getLoadControl())
+            .setAudioAttributes(getAudioAttributes(), true)
+            .setUsePlatformDiagnostics(false)
+            .build()
+            .apply {
+                loadPlaybackParams(isBackgroundMode)
+            }
     }
 
     /**
