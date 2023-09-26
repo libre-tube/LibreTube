@@ -509,4 +509,6 @@
     <string name="contribute_to_sponsorblock">貢獻給 SponsorBlock</string>
     <string name="donate">捐款</string>
     <string name="music_artists">YouTube Music 藝人</string>
+    <string name="no_fullscreen_resolution">非全螢幕解析度</string>
+    <string name="same_as_fullscreen">與全螢幕相同</string>
 </resources>
