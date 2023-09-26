@@ -514,4 +514,6 @@
     <string name="music_artists">YT ਮਿਊਜ਼ਿਕ ਕਲਾਕਾਰ</string>
     <string name="no_fullscreen_resolution">ਬਗੈਰ-ਫੁਲਸਕ੍ਰੀਨ ਰੈਜ਼ੋਲਿਊਸ਼ਨ</string>
     <string name="same_as_fullscreen">ਪੂਰੀ ਸਕਰੀਨ ਦੇ ਵਾਂਗ ਹੀ</string>
+    <string name="playback_during_call_summary">ਨੋਟ ਕਰੋ ਕਿ ਇਹ ਐਪ ਨੂੰ ਕਿਸੇ ਵੀ ਤਰ੍ਹਾਂ ਦੇ ਆਡੀਓ ਫੋਕਸ ਨੂੰ ਸੰਭਾਲਣ ਤੋਂ ਰੋਕਣ ਲਈ ਵੀ ਪ੍ਰਭਾਵਿਤ ਕਰਦਾ ਹੈ।</string>
+    <string name="playback_during_call">ਫ਼ੋਨ ਕਾਲ ਦੌਰਾਨ ਪਲੇਬੈਕ ਜਾਰੀ ਰੱਖੋ</string>
 </resources>
