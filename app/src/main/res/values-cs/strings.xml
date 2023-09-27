@@ -314,7 +314,7 @@
     <string name="featured">Doporučené</string>
     <string name="trending">Co je právě v trendech</string>
     <string name="bookmarks">Záložky</string>
-    <string name="bookmark">Záložka</string>
+    <string name="bookmark">Uložit</string>
     <string name="clear_bookmarks">Vymazat záložky</string>
     <string name="queue_insert_related_videos">Vložit související videa</string>
     <string name="local_playlists">Místní playlisty</string>
