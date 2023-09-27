@@ -526,4 +526,6 @@
     <string name="music_artists">YT الموسيقى: الفنانين</string>
     <string name="no_fullscreen_resolution">لاتوجد دقة لشاشة الكاملة</string>
     <string name="same_as_fullscreen">مطابق لإعداد الشاشة الكاملة</string>
+    <string name="playback_during_call_summary">لاحظ أن هذا يؤثر أيضًا على التطبيق بحيث لا يتعامل مع أي نوع من التركيز الصوتي بعد الآن.</string>
+    <string name="playback_during_call">متابعة التشغيل أثناء المكالمة الهاتفية</string>
 </resources>
