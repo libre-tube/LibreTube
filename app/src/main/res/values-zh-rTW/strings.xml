@@ -511,4 +511,6 @@
     <string name="music_artists">YouTube Music 藝人</string>
     <string name="no_fullscreen_resolution">非全螢幕解析度</string>
     <string name="same_as_fullscreen">與全螢幕相同</string>
+    <string name="playback_during_call_summary">請注意，這也會影響應用程式，使其不再處理任何種類的音訊焦點。</string>
+    <string name="playback_during_call">電話通話中持續播放</string>
 </resources>
