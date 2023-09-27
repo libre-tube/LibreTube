@@ -514,4 +514,6 @@
     <string name="donate">ଦାନ କରନ୍ତୁ</string>
     <string name="music_artists">YT ସଂଗୀତ କଳାକାର</string>
     <string name="same_as_fullscreen">ସମ୍ପୂର୍ଣ୍ଣ ପରଦା ପରି ସମାନ</string>
+    <string name="playback_during_call_summary">ଧ୍ୟାନ ଦିଅନ୍ତୁ ଯେ ଏହା କୌଣସି ପ୍ରକାରର ଅଡିଓ ଫୋକସକୁ ଆଉ ପରିଚାଳନା ନକରିବା ପାଇଁ ଆପ୍ କୁ ମଧ୍ୟ ପ୍ରଭାବିତ କରିଥାଏ ।</string>
+    <string name="playback_during_call">ଫୋନ କଲ୍ ସମୟରେ ଚଲାବୁଲା ଜାରି ରଖନ୍ତୁ</string>
 </resources>
