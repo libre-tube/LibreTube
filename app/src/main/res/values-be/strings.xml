@@ -517,4 +517,9 @@
     <string name="sponsorblock_user_id">UserID ў SponsorBlock</string>
     <string name="contribute_to_sponsorblock">Унесці свой уклад у SponsorBlock</string>
     <string name="donate">Падтрымліваць</string>
+    <string name="no_fullscreen_resolution">Дазвол для не поўнаэкраннага рэжыму</string>
+    <string name="playback_during_call_summary">Звярніце ўвагу, што гэта таксама прыводзіць да таго, што праграма больш не будзе працаваць з любым тыпам аўдыяфокусу.</string>
+    <string name="music_artists">Выканаўцы музыкі YT</string>
+    <string name="playback_during_call">Працягвайце прайграванне падчас тэлефоннага званка</string>
+    <string name="same_as_fullscreen">Такая ж як для поўнаэкраннага рэжыму</string>
 </resources>
