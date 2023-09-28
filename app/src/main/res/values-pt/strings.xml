@@ -517,4 +517,6 @@
     <string name="no_fullscreen_resolution">Resolução sem ecrã completo</string>
     <string name="music_artists">Artistas do YT Music</string>
     <string name="same_as_fullscreen">O mesmo que em ecrã total</string>
+    <string name="playback_during_call_summary">Tenha em atenção que isto implica que a aplicação não posa gerir o foco de áudio.</string>
+    <string name="playback_during_call">Continuar reprodução durante uma chamada</string>
 </resources>
