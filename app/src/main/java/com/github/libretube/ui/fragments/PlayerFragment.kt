@@ -1331,6 +1331,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private fun updateResolutionOnFullscreenChange(isFullscreen: Boolean) {
+        // this occurs when the user has the phone in landscape mode and it thus rotates when
+        // opening a new video
+        if (!this::trackSelector.isInitialized) return
+
         if (!isFullscreen && noFullscreenResolution != null) {
             setPlayerResolution(noFullscreenResolution!!)
         } else {
