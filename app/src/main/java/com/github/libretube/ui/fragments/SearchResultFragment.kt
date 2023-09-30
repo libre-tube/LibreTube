@@ -23,6 +23,7 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.hideKeyboard
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.SearchAdapter
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.util.TextUtils
@@ -59,6 +60,10 @@ class SearchResultFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // fixes a bug that the search query will stay the old one when searching for multiple
+        // different queries in a row and navigating to the previous ones through back presses
+        (context as MainActivity).setQuerySilent(query)
 
         binding.searchRecycler.layoutManager = LinearLayoutManager(requireContext())
 

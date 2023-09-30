@@ -58,6 +58,7 @@ class MainActivity : BaseActivity() {
     private val subscriptionsViewModel: SubscriptionsViewModel by viewModels()
 
     private var savedSearchQuery: String? = null
+    private var shouldOpenSuggestions = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -283,6 +284,8 @@ class MainActivity : BaseActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                if (!shouldOpenSuggestions) return true
+
                 // Prevent navigation when search view is collapsed
                 if (searchView.isIconified ||
                     binding.bottomNav.menu.children.any {
@@ -354,6 +357,15 @@ class MainActivity : BaseActivity() {
         }
 
         return super.onCreateOptionsMenu(menu)
+    }
+
+    /**
+     * Update the query text in the search bar without opening the search suggestions
+     */
+    fun setQuerySilent(query: String) {
+        shouldOpenSuggestions = false
+        searchView.setQuery(query, false)
+        shouldOpenSuggestions = true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
