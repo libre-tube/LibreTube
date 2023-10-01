@@ -508,6 +508,12 @@
     <string name="group_name_error_empty">Xahiş olunur, ad daxil et</string>
     <string name="group_name_error_exists">Xahiş olunur, nadir ad seç</string>
     <string name="filename_too_long">Çox uzun fayl adı!</string>
-    <string name="sponsorblock_user_id">SponsorBlock İstifadəçi Adı</string>
+    <string name="sponsorblock_user_id">SponsorBlock İstifadəçi ID</string>
     <string name="contribute_to_sponsorblock">SponsorBlock-a Töhfə Ver</string>
+    <string name="no_fullscreen_resolution">Tam ekransız görüntü imkanı</string>
+    <string name="playback_during_call_summary">Nəzərə alın ki, bu, daha hər növ səs fokusun idarə etməməsi üçün tətbiqə də təsir edir.</string>
+    <string name="donate">İanə Ver</string>
+    <string name="music_artists">YT Musiqi Sənətçiləri</string>
+    <string name="playback_during_call">Telefon zəngi əsnasında oynatmaya davam et</string>
+    <string name="same_as_fullscreen">Tam ekran kimi</string>
 </resources>

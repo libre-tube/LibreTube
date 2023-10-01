@@ -508,4 +508,9 @@
     <string name="contribute_to_sponsorblock">Berkontribusi ke SponsorBlock</string>
     <string name="sponsorblock_user_id">ID pengguna SponsorBlock</string>
     <string name="donate">Donasi</string>
+    <string name="no_fullscreen_resolution">Resolusi tanpa layar penuh</string>
+    <string name="playback_during_call_summary">Hal ini juga memengaruhi aplikasi untuk tidak lagi menangani fokus audio apa pun.</string>
+    <string name="music_artists">Artis YT Music</string>
+    <string name="playback_during_call">Lanjutkan pemutar</string>
+    <string name="same_as_fullscreen">Sama seperti layar penuh</string>
 </resources>

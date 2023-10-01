@@ -521,5 +521,5 @@
     <string name="no_fullscreen_resolution">Роздільність для не повноекранного режиму</string>
     <string name="same_as_fullscreen">Така ж як для повноекранного режиму</string>
     <string name="playback_during_call_summary">Зауважте, що це також впливає на те, що застосунок більше не працюватиме з будь-яким типом аудіофокусу.</string>
-    <string name="playback_during_call">Продовжити відтворення під час телефонного дзвінка</string>
+    <string name="playback_during_call">Продовжити відтворення під час телефонного виклику</string>
 </resources>
