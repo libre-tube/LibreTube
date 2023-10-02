@@ -11,4 +11,17 @@
     <string name="username">Nomine de usator</string>
     <string name="password">Contrasigno</string>
     <string name="login">Initiar le session</string>
+    <string name="subscribe">Subscriber se</string>
+    <string name="region">Region</string>
+    <string name="videos">Videos</string>
+    <string name="search_hint">Cercar</string>
+    <string name="register">Registra te</string>
+    <string name="loggedIn">Session aperte.</string>
+    <string name="cancel">Cancellar</string>
+    <string name="already_logged_in">Jam authenticate. Tu pote clauder le session de tu conto.</string>
+    <string name="registered">Registrate. Ora tu pote subscriber te a canales.</string>
+    <string name="loggedout">Disconnectite.</string>
+    <string name="share">Compartir</string>
+    <string name="unsubscribe">Cancellar le subscription</string>
+    <string name="customInstance">Personalisate</string>
 </resources>
