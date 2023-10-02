@@ -472,4 +472,5 @@
     <string name="new_videos_badge_summary">Visa en bricka med antalet nya videor om det finns några.</string>
     <string name="backup_restore_summary">Importera &amp; exportera prenumerationer, spellistor, …</string>
     <string name="repeat_mode">Upprepning</string>
+    <string name="no_chapter">Inga kapitel</string>
 </resources>
