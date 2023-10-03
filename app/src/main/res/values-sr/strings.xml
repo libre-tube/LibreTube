@@ -60,8 +60,8 @@
     <string name="category_segments">Сегменти</string>
     <string name="category_sponsor">Спонзор</string>
     <string name="category_sponsor_description">Плаћене промоције, плаћене препоруке и директне рекламе. Није за самопромоције или бесплатно искрено позивања на циљеве, креаторе, веб-сајтове и производе.</string>
-    <string name="category_selfpromo">Неплаћена/Самопромоција</string>
-    <string name="category_selfpromo_description">Слично као „спонзор“, осим за неплаћену промоцију или самопромоцију. Ово укључује одељке о роби, донацијама или информацијама о томе са ким су сарађивали.</string>
+    <string name="category_selfpromo">Неплаћена промоција/Самопромоција</string>
+    <string name="category_selfpromo_description">Слично као „спонзор“, осим за неплаћену промоцију или самопромоцију. Ово укључује сегменте о роби, донацијама или информацијама о томе с ким су сарађивали.</string>
     <string name="category_interaction">Подсетник за интеракцију</string>
     <string name="category_interaction_description">Када постоји кратак подсетник да лајкујете, претплатите се или запратите усред садржаја. Ако је дугачак или о нечему конкретном, требало би да буде под самопромоцијом.</string>
     <string name="category_intro">Пауза/Уводна анимација</string>
@@ -69,7 +69,7 @@
     <string name="category_outro">Завршне картице и кредити</string>
     <string name="category_outro_description">Информације након завршетка. Није за закључке са информацијама.</string>
     <string name="category_filler">Попуњавање/Шале</string>
-    <string name="category_music_offtopic">Музика: Одељак без музике</string>
+    <string name="category_music_offtopic">Музика: Сегмент без музике</string>
     <string name="category_preview">Преглед/Рекапитулација</string>
     <string name="category_preview_description">За сегменте са детаљима будућег садржаја без додатних информација. Ако укључује клипове који се појављују само овде, ово је врло вероватно погрешна категорија.</string>
     <string name="color_accent">Боја за акценте</string>
@@ -161,7 +161,7 @@
     <string name="none">Ниједан</string>
     <string name="subscriptions">Праћења</string>
     <string name="share">Дели</string>
-    <string name="unsubscribe">Отпрати</string>
+    <string name="unsubscribe">Прекини праћење</string>
     <string name="download">Преузми</string>
     <string name="save">Сачувај</string>
     <string name="dlisinprogress">Сачекајте док се сва тренутна преузимања не заврше.</string>
@@ -412,7 +412,7 @@
     <string name="play_automatically_summary">Почните да пуштате видео снимак аутоматски када изаберете</string>
     <string name="jumped_to_highlight">Прескочено на истакнути део видео снимка</string>
     <string name="category_highlight">Прикажи истакнути део видео снимка</string>
-    <string name="category_highlight_description">Може бити рекламни наслов, сличица или најзанимљивији део видео снимка. Можете прескочити на њега тако што ћете га додирнути у одељку за поглавља.</string>
+    <string name="category_highlight_description">Може бити рекламни наслов, сличица или најзанимљивији део видео снимка. Можете прескочити на њега тако што ћете га додирнути у сегменту за поглавља.</string>
     <string name="show_stream_thumbnails">Прикажи сличице стрима</string>
     <string name="stop">Заустави</string>
     <string name="show_stream_thumbnails_summary">Прикажите сличице нових стримова. Ако ово омогућите, потрошиће се додатни подаци.</string>
@@ -440,7 +440,7 @@
     <string name="import_playlists_from">Увоз плејлиста из</string>
     <string name="tooltip_minimize">Минимизирај</string>
     <string name="sb_create_segment">Направи сегмент</string>
-    <string name="visibility_unlisted">Видео снимак по позиву</string>
+    <string name="visibility_unlisted">По позиву</string>
     <string name="sb_invalid_segment">Неважећи почетак или крај сегмента</string>
     <string name="visibility">Видљивост</string>
     <string name="continue_watching">Наставите да гледате</string>
