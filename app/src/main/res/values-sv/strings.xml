@@ -473,4 +473,47 @@
     <string name="backup_restore_summary">Importera &amp; exportera prenumerationer, spellistor, …</string>
     <string name="repeat_mode">Upprepning</string>
     <string name="no_chapter">Inga kapitel</string>
+    <plurals name="years_ago">
+        <item quantity="one">%d år sedan</item>
+        <item quantity="other">%d år sedan</item>
+    </plurals>
+    <string name="resolution_limited">begränsad</string>
+    <string name="tooltip_close">Stäng</string>
+    <string name="auto_generated">autogenererad</string>
+    <string name="tooltip_minimize">Minimera</string>
+    <string name="sb_create_segment">Skapa segment</string>
+    <string name="push_channel_name">Notification Worker</string>
+    <string name="sb_invalid_segment">Ogiltig start eller slut på segmentet</string>
+    <string name="tooltip_options">Alternativ</string>
+    <string name="tooltip_locked">Lås spelaren</string>
+    <string name="tooltip_play">Spela</string>
+    <string name="tooltip_filter">Filter</string>
+    <string name="tooltip_unlocked">Lås upp spelaren</string>
+    <string name="filename_too_long">Filnamnet är för långt!</string>
+    <string name="registration_disabled">Registrering inaktiverad</string>
+    <string name="tooltip_clear_queue">Töm kö</string>
+    <string name="player_channel_description">Visar en notifikation vid uppspelning</string>
+    <string name="tooltip_scroll_to_top">Scrolla till toppen</string>
+    <string name="sponsorblock_user_id">SponsorBlock UserID</string>
+    <string name="unlimited_search_history">Obegränsad sökhistorik</string>
+    <string name="segment_type">Typ av segment</string>
+    <string name="tooltip_repeat">Upprepa</string>
+    <string name="tooltip_fullscreen">Fullskärm</string>
+    <string name="tooltip_sponsorblock">Växla SponsorBlock</string>
+    <string name="tooltip_reverse">Omvänd</string>
+    <string name="tooltip_create_playlist">Skapa spellista</string>
+    <string name="contribute_to_sponsorblock">Bidra till SponsorBlock</string>
+    <string name="player_channel_name">Player Service</string>
+    <string name="tooltip_dismiss">Avfärda</string>
+    <string name="download_channel_description">Visar en notifikation vid nedladdning av media.</string>
+    <plurals name="months_ago">
+        <item quantity="one">%d månad sedan</item>
+        <item quantity="other">%d månader sedan</item>
+    </plurals>
+    <string name="tooltip_edit_groups">Redigera grupper</string>
+    <string name="chapters_videoHighlight">Videohöjdpunkt</string>
+    <string name="screen_orientation">Skärmens orientering</string>
+    <string name="download_channel_name">Download Service</string>
+    <string name="tooltip_sort">Sortera</string>
+    <string name="tooltip_watch_position">Uppspelningspunkt</string>
 </resources>
