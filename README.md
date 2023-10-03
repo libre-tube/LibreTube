@@ -112,6 +112,11 @@ The most common commit types are "feat", "fix", "refactor", "ci" and "chore".
 > Any issue avoiding the issue template will be ignored and forced to be closed.
 
 <h2 align="left">
+<sub>
+<img  src="fastlane/metadata/android/en-US/images/readme/donate.svg"
+      height="30"
+      width="30">
+</sub>
 Donate
 </h2>
 
