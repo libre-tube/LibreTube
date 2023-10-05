@@ -330,7 +330,7 @@ object PlayerHelper {
             )
 
     fun shouldPlayNextVideo(isPlaylist: Boolean = false): Boolean {
-        return autoPlayEnabled || (PreferenceHelper.getBoolean(PreferenceKeys.AUTOPLAY_PLAYLISTS, true) && isPlaylist)
+        return autoPlayEnabled || (isPlaylist && PreferenceHelper.getBoolean(PreferenceKeys.AUTOPLAY_PLAYLISTS, false))
     }
 
     private val handleAudioFocus
