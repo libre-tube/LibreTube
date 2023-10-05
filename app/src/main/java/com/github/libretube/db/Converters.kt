@@ -2,18 +2,18 @@ package com.github.libretube.db
 
 import androidx.room.TypeConverter
 import com.github.libretube.api.JsonHelper
+import com.github.libretube.extensions.toLocalDateSafe
+import kotlinx.datetime.LocalDate
+import kotlinx.serialization.encodeToString
 import java.nio.file.Path
 import kotlin.io.path.Path
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.toLocalDate
-import kotlinx.serialization.encodeToString
 
 object Converters {
     @TypeConverter
     fun localDateToString(localDate: LocalDate?) = localDate?.toString()
 
     @TypeConverter
-    fun stringToLocalDate(string: String?) = string?.toLocalDate()
+    fun stringToLocalDate(string: String?) = string?.toLocalDateSafe()
 
     @TypeConverter
     fun pathToString(path: Path?) = path?.toString()
