@@ -133,6 +133,12 @@
             android:title="@string/queue_insert_related_videos"
             app:key="queue_insert_related_videos" />
 
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:title="@string/autoplay_playlists"
+            android:summary="@string/autoplay_playlists_summary"
+            app:key="autoplay_playlists" />
+
     </PreferenceCategory>
 
 
