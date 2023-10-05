@@ -519,4 +519,7 @@
     <string name="same_as_fullscreen">Uguale allo schermo intero</string>
     <string name="playback_during_call_summary">Nota che ciò provoca anche la perdita di gestione di qualsiasi tipo di focus audio dell\'app.</string>
     <string name="playback_during_call">Continua la riproduzione durante una telefonata</string>
+    <string name="autoplay_playlists_summary">Riproduci automaticamente il video seguente in playlist indipendentemente dall\'impostazione di autoriproduzione selezionata</string>
+    <string name="autoplay_playlists">Autoriproduci le playlist</string>
+    <string name="remember_playback_speed">Ricorda la velocità di riproduzione</string>
 </resources>
