@@ -519,4 +519,7 @@
     <string name="music_artists">Umělci YT Music</string>
     <string name="playback_during_call">Pokračovat v přehrávání při hovoru</string>
     <string name="same_as_fullscreen">Stejné jako při celé obrazovce</string>
+    <string name="autoplay_playlists_summary">Automaticky přehrát další video v playlistu nezávisle na zvoleném nastavení automatického přehrávání</string>
+    <string name="autoplay_playlists">Automatické přehrávání playlistů</string>
+    <string name="remember_playback_speed">Zapamatovat rychlost přehrávání</string>
 </resources>
