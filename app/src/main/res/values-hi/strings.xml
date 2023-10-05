@@ -516,4 +516,7 @@
     <string name="same_as_fullscreen">फ़ुलस्क्रीन के समान</string>
     <string name="playback_during_call_summary">ध्यान दें कि इससे ऐप पर भी प्रभाव पड़ेगा और वह अब किसी भी प्रकार के ऑडियो फोकस को संभाल नहीं पाएगा।</string>
     <string name="playback_during_call">फ़ोन कॉल के दौरान प्लेबैक जारी रखें</string>
+    <string name="autoplay_playlists_summary">चयनित ऑटोप्ले सेटिंग की परवाह किए बिना प्लेलिस्ट में स्वचालित रूप से अगला वीडियो चलाएं</string>
+    <string name="autoplay_playlists">ऑटोप्ले प्लेलिस्ट</string>
+    <string name="remember_playback_speed">प्लेबैक गति याद रखें</string>
 </resources>
