@@ -516,4 +516,7 @@
     <string name="same_as_fullscreen">ਪੂਰੀ ਸਕਰੀਨ ਦੇ ਵਾਂਗ ਹੀ</string>
     <string name="playback_during_call_summary">ਨੋਟ ਕਰੋ ਕਿ ਇਹ ਐਪ ਨੂੰ ਕਿਸੇ ਵੀ ਤਰ੍ਹਾਂ ਦੇ ਆਡੀਓ ਫੋਕਸ ਨੂੰ ਸੰਭਾਲਣ ਤੋਂ ਰੋਕਣ ਲਈ ਵੀ ਪ੍ਰਭਾਵਿਤ ਕਰਦਾ ਹੈ।</string>
     <string name="playback_during_call">ਫ਼ੋਨ ਕਾਲ ਦੌਰਾਨ ਪਲੇਬੈਕ ਜਾਰੀ ਰੱਖੋ</string>
+    <string name="autoplay_playlists_summary">ਚੁਣੀ ਹੋਈ ਆਟੋਪਲੇ ਸੈਟਿੰਗ ਦੀ ਪਰਵਾਹ ਕੀਤੇ ਬਿਨਾਂ ਪਲੇਲਿਸਟਾਂ ਵਿੱਚ ਅਗਲੀ ਵੀਡੀਓ ਨੂੰ ਆਟੋਮੈਟਿਕਲੀ ਚਲਾਓ</string>
+    <string name="autoplay_playlists">ਪਲੇਲਿਸਟਾਂ ਨੂੰ ਆਟੋਪਲੇ ਕਰੋ</string>
+    <string name="remember_playback_speed">ਪਲੇਬੈਕ ਸਪੀਡ ਯਾਦ ਰੱਖੋ</string>
 </resources>
