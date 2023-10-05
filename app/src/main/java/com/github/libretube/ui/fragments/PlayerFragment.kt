@@ -78,6 +78,7 @@ import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.serializableExtra
 import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toID
+import com.github.libretube.extensions.toLocalDateSafe
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateParameters
@@ -873,11 +874,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private fun localizeDate(streams: Streams): String {
-        return if (!streams.livestream) {
-            TextUtils.SEPARATOR + TextUtils.localizeDate(streams.uploadDate)
-        } else {
-            ""
-        }
+        if (streams.livestream) return ""
+
+        return TextUtils.SEPARATOR + TextUtils.localizeDate(streams.uploadDate.toLocalDateSafe())
     }
 
     @SuppressLint("SetTextI18n")
