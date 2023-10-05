@@ -483,6 +483,7 @@
     <string name="contribute_to_sponsorblock">Contribute to SponsorBlock</string>
     <string name="sponsorblock_user_id">SponsorBlock UserID</string>
     <string name="filename_too_long">Filename too long!</string>
+    <string name="remember_playback_speed">Remember playback speed</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
