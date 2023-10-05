@@ -14,6 +14,15 @@
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
+            android:icon="@drawable/ic_fullscreen"
+            app:defaultValue=""
+            app:entries="@array/defresNoPortrait"
+            app:entryValues="@array/defresValue"
+            app:key="default_res_no_fullscreen"
+            app:title="@string/no_fullscreen_resolution"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
             android:icon="@drawable/ic_headphones"
             app:defaultValue="auto"
             app:entries="@array/audioQuality"
@@ -33,6 +42,15 @@
             app:entryValues="@array/defresValue"
             app:key="default_res_mobile"
             app:title="@string/defres"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            android:icon="@drawable/ic_fullscreen"
+            app:defaultValue=""
+            app:entries="@array/defresNoPortrait"
+            app:entryValues="@array/defresValue"
+            app:key="default_res_mobile_no_fullscreen"
+            app:title="@string/no_fullscreen_resolution"
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference

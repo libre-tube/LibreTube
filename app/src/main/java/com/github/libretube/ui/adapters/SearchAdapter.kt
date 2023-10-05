@@ -31,7 +31,7 @@ import kotlinx.serialization.encodeToString
 
 class SearchAdapter(
     private val isChannelAdapter: Boolean = false,
-    private val timeStamp: Long = 0,
+    private val timeStamp: Long = 0
 ) : ListAdapter<ContentItem, SearchViewHolder>(SearchCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

@@ -479,7 +479,7 @@
     <string name="sort_by">Trier par</string>
     <string name="player_channel_description">Affiche une notification lors de la lecture</string>
     <string name="tooltip_scroll_to_top">Défiler vers le haut</string>
-    <string name="sponsorblock_user_id">Nom d\'utilisateur SponsorBlock</string>
+    <string name="sponsorblock_user_id">SponsorBlock Identifiant</string>
     <string name="dearrow">Activer DeArrow</string>
     <string name="segment_type">Type de segment</string>
     <string name="visibility_public">Public</string>
@@ -513,4 +513,10 @@
     <string name="color">Couleur</string>
     <string name="show_search_suggestions">Afficher les suggestions de recherche</string>
     <string name="proxy">Proxy</string>
+    <string name="no_fullscreen_resolution">Résolution sans plein écran</string>
+    <string name="playback_during_call_summary">Notez que cela affecte également l\'application pour qu\'elle ne gère plus aucun type de focus audio.</string>
+    <string name="donate">Faire un don</string>
+    <string name="music_artists">Artistes YT Music</string>
+    <string name="playback_during_call">Continuer la lecture pendant un appel téléphonique</string>
+    <string name="same_as_fullscreen">Identique au plein écran</string>
 </resources>

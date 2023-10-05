@@ -71,6 +71,11 @@
                     android:id="@+id/chip_music_playlists"
                     style="@style/Chip"
                     android:text="@string/music_playlists" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_music_artists"
+                    style="@style/Chip"
+                    android:text="@string/music_artists" />
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
 

@@ -314,7 +314,7 @@
     <string name="featured">Doporučené</string>
     <string name="trending">Co je právě v trendech</string>
     <string name="bookmarks">Záložky</string>
-    <string name="bookmark">Záložka</string>
+    <string name="bookmark">Uložit</string>
     <string name="clear_bookmarks">Vymazat záložky</string>
     <string name="queue_insert_related_videos">Vložit související videa</string>
     <string name="local_playlists">Místní playlisty</string>
@@ -512,5 +512,11 @@
     <string name="sb_invalid_segment">Neplatný začátek nebo konec segmentu</string>
     <string name="contribute_to_sponsorblock">Přispějte do služby SponsorBlock</string>
     <string name="filename_too_long">Název souboru je příliš dlouhý!</string>
-    <string name="sponsorblock_user_id">Uživatelské jméno ve službě SponsorBlock</string>
+    <string name="sponsorblock_user_id">SponsorBlock UserID</string>
+    <string name="donate">Přispět</string>
+    <string name="no_fullscreen_resolution">Rozlišení bez celé obrazovky</string>
+    <string name="playback_during_call_summary">Má to také vliv na to, že aplikace již nezpracovává žádný druh zaměření zvuku.</string>
+    <string name="music_artists">Umělci YT Music</string>
+    <string name="playback_during_call">Pokračovat v přehrávání při hovoru</string>
+    <string name="same_as_fullscreen">Stejné jako při celé obrazovce</string>
 </resources>

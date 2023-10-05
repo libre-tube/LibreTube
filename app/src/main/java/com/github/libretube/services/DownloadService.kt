@@ -245,11 +245,14 @@ class DownloadService : LifecycleService() {
         }
 
         setPauseNotification(notificationBuilder, item, completed)
-        pause(item.id)
+
+        downloadQueue[item.id] = false
 
         if (_downloadFlow.firstOrNull { it.first == item.id }?.second == DownloadStatus.Stopped) {
             downloadQueue.remove(item.id, false)
         }
+
+        stopServiceIfDone()
     }
 
     private suspend fun startConnection(
@@ -330,6 +333,10 @@ class DownloadService : LifecycleService() {
      */
     fun pause(id: Int) {
         downloadQueue[id] = false
+
+        lifecycleScope.launch(coroutineContext) {
+            _downloadFlow.emit(id to DownloadStatus.Paused)
+        }
 
         stopServiceIfDone()
     }

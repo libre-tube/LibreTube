@@ -21,9 +21,9 @@ import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.hideKeyboard
-import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.SearchAdapter
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.util.TextUtils
@@ -61,6 +61,10 @@ class SearchResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // fixes a bug that the search query will stay the old one when searching for multiple
+        // different queries in a row and navigating to the previous ones through back presses
+        (context as MainActivity).setQuerySilent(query)
+
         binding.searchRecycler.layoutManager = LinearLayoutManager(requireContext())
 
         // add the query to the history
@@ -79,6 +83,7 @@ class SearchResultFragment : Fragment() {
                 R.id.chip_music_videos -> "music_videos"
                 R.id.chip_music_albums -> "music_albums"
                 R.id.chip_music_playlists -> "music_playlists"
+                R.id.chip_music_artists -> "music_artists"
                 else -> throw IllegalArgumentException("Filter out of range")
             }
             fetchSearch()
@@ -106,7 +111,7 @@ class SearchResultFragment : Fragment() {
             val searchQuery = query.toHttpUrlOrNull()?.let {
                 val videoId = TextUtils.getVideoIdFromUrl(it.toString()) ?: query
                 timeStamp = it.queryParameter("t")?.toTimeInSeconds()
-                "${ShareDialog.YOUTUBE_FRONTEND_URL}/watch?v=${videoId}"
+                "${ShareDialog.YOUTUBE_FRONTEND_URL}/watch?v=$videoId"
             } ?: query
 
             repeatOnLifecycle(Lifecycle.State.CREATED) {

@@ -507,4 +507,10 @@
     <string name="filename_too_long">檔案名稱太長了！</string>
     <string name="sponsorblock_user_id">SponsorBlock 使用者 ID</string>
     <string name="contribute_to_sponsorblock">貢獻給 SponsorBlock</string>
+    <string name="donate">捐款</string>
+    <string name="music_artists">YouTube Music 藝人</string>
+    <string name="no_fullscreen_resolution">非全螢幕解析度</string>
+    <string name="same_as_fullscreen">與全螢幕相同</string>
+    <string name="playback_during_call_summary">請注意，這也會影響應用程式，使其不再處理任何種類的音訊焦點。</string>
+    <string name="playback_during_call">電話通話中持續播放</string>
 </resources>

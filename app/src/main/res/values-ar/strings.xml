@@ -408,7 +408,7 @@
     <string name="subscriberAndVideoCounts">مشتركون %1$s • فيديوهات %2$d</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d مقاطع فيديو</string>
     <string name="disable_proxy">تعطيل وكيل الأنابيب</string>
-    <string name="disable_proxy_summary">تجهيز الفيديو والصور بشكل مباشر من خادم يوتيوب . تمكين هذا الخيار فقط إذا كنت تستخدم الشبكات الافتراضية الخاصة !</string>
+    <string name="disable_proxy_summary">تجهيز الفيديو والصور بشكل مباشر من خوادم يوتيوب . تمكين هذا الخيار فقط إذا كنت تستخدم الشبكات الافتراضية الخاصة (VPN)!</string>
     <string name="auto_fullscreen_shorts">ملء الشاشة تلقائيًا على مقاطع الفيديو القصيرة</string>
     <string name="new_group">جديد</string>
     <string name="group_name">أسم المجموعة</string>
@@ -522,4 +522,10 @@
     <string name="contribute_to_sponsorblock">المساهمة في حاجب الرعاة</string>
     <string name="filename_too_long">اسم الملف طويل جدًا!</string>
     <string name="sponsorblock_user_id">معرف مستخدم حاجب الرعاة</string>
+    <string name="donate">التبرع</string>
+    <string name="music_artists">YT الموسيقى: الفنانين</string>
+    <string name="no_fullscreen_resolution">لاتوجد دقة لشاشة الكاملة</string>
+    <string name="same_as_fullscreen">مطابق لإعداد الشاشة الكاملة</string>
+    <string name="playback_during_call_summary">لاحظ أن هذا يؤثر أيضًا على التطبيق بحيث لا يتعامل مع أي نوع من التركيز الصوتي بعد الآن.</string>
+    <string name="playback_during_call">متابعة التشغيل أثناء المكالمة الهاتفية</string>
 </resources>

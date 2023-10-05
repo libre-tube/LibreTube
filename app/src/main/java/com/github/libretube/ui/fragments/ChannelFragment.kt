@@ -26,6 +26,7 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.obj.ChannelTabs
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.adapters.SearchAdapter
@@ -197,6 +198,20 @@ class ChannelFragment : Fragment() {
 
                 ImageHelper.loadImage(response.bannerUrl, binding.channelBanner)
                 ImageHelper.loadImage(response.avatarUrl, binding.channelImage)
+
+                binding.channelImage.setOnClickListener {
+                    NavigationHelper.openImagePreview(
+                        requireContext(),
+                        response.avatarUrl ?: return@setOnClickListener
+                    )
+                }
+
+                binding.channelBanner.setOnClickListener {
+                    NavigationHelper.openImagePreview(
+                        requireContext(),
+                        response.bannerUrl ?: return@setOnClickListener
+                    )
+                }
 
                 // recyclerview of the videos by the channel
                 channelAdapter = VideosAdapter(

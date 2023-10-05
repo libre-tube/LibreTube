@@ -30,17 +30,16 @@ import com.github.libretube.enums.FileType
 import com.github.libretube.extensions.toAndroidUri
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
-import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.interfaces.TimeFrameReceiver
 import com.github.libretube.ui.listeners.SeekbarPreviewListener
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.util.OfflineTimeFrameReceiver
-import kotlin.io.path.exists
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.io.path.exists
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class OfflinePlayerActivity : BaseActivity() {
@@ -78,39 +77,31 @@ class OfflinePlayerActivity : BaseActivity() {
     private fun initializePlayer() {
         trackSelector = DefaultTrackSelector(this)
 
-        player = ExoPlayer.Builder(this)
-            .setUsePlatformDiagnostics(false)
-            .setHandleAudioBecomingNoisy(true)
-            .setTrackSelector(trackSelector)
-            .setLoadControl(PlayerHelper.getLoadControl())
-            .setAudioAttributes(PlayerHelper.getAudioAttributes(), true)
-            .setUsePlatformDiagnostics(false)
-            .build().apply {
-                addListener(object : Player.Listener {
-                    override fun onEvents(player: Player, events: Player.Events) {
-                        super.onEvents(player, events)
-                        // update the displayed duration on changes
-                        playerBinding.duration.text = DateUtils.formatElapsedTime(
-                            player.duration / 1000
-                        )
-                    }
+        player = PlayerHelper.createPlayer(this, trackSelector, false)
 
-                    override fun onPlaybackStateChanged(playbackState: Int) {
-                        super.onPlaybackStateChanged(playbackState)
-                        // setup seekbar preview
-                        if (playbackState == Player.STATE_READY) {
-                            binding.player.binding.exoProgress.addListener(
-                                SeekbarPreviewListener(
-                                    timeFrameReceiver ?: return,
-                                    binding.player.binding,
-                                    player.duration
-                                )
-                            )
-                        }
-                    }
-                })
+        player.addListener(object : Player.Listener {
+            override fun onEvents(player: Player, events: Player.Events) {
+                super.onEvents(player, events)
+                // update the displayed duration on changes
+                playerBinding.duration.text = DateUtils.formatElapsedTime(
+                    player.duration / 1000
+                )
             }
-            .loadPlaybackParams()
+
+            override fun onPlaybackStateChanged(playbackState: Int) {
+                super.onPlaybackStateChanged(playbackState)
+                // setup seekbar preview
+                if (playbackState == Player.STATE_READY) {
+                    binding.player.binding.exoProgress.addListener(
+                        SeekbarPreviewListener(
+                            timeFrameReceiver ?: return,
+                            binding.player.binding,
+                            player.duration
+                        )
+                    )
+                }
+            }
+        })
 
         playerView = binding.player
         playerView.setShowSubtitleButton(true)

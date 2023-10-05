@@ -443,7 +443,7 @@
     <string name="manual">हस्तचालित</string>
     <string name="automatic">स्वचालित</string>
     <string name="off">बंद</string>
-    <string name="sb_color_enable">स्पांसर ब्लॉक सेगमेंट के लिए कस्टम रंग सेगमेंट टॉगल</string>
+    <string name="sb_color_enable">स्पांसर ब्लॉक सेगमेंट के लिए कस्टम रंग सेगमेंट टॉगल।</string>
     <string name="sb_custom_colors">कस्टम सेगमेंट रंग</string>
     <string name="enter_hex_value">रंग हेक्स मान दर्ज करें</string>
     <string name="visible">सीक बार में दिखाएँ</string>
@@ -510,4 +510,10 @@
     <string name="segment_type">सेगमेंट प्रकार</string>
     <string name="automatic_once">एक बार स्वचालित</string>
     <string name="contribute_to_sponsorblock">स्पांसर-ब्लॉक में योगदान करें</string>
+    <string name="donate">दान करें</string>
+    <string name="music_artists">YT म्युजिक कलाकार</string>
+    <string name="no_fullscreen_resolution">बगैर-फ़ुलस्क्रीन रिज़ॉल्यूशन</string>
+    <string name="same_as_fullscreen">फ़ुलस्क्रीन के समान</string>
+    <string name="playback_during_call_summary">ध्यान दें कि इससे ऐप पर भी प्रभाव पड़ेगा और वह अब किसी भी प्रकार के ऑडियो फोकस को संभाल नहीं पाएगा।</string>
+    <string name="playback_during_call">फ़ोन कॉल के दौरान प्लेबैक जारी रखें</string>
 </resources>

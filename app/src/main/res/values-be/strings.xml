@@ -166,7 +166,7 @@
     <string name="playOnBackground">Гуляць у фонавым рэжыме</string>
     <string name="server_error">Здаецца, узнікла праблема з абраным серверам. Паспрабуйце іншы асобнік.</string>
     <string name="emptyPlaylistName">Назва плэйліста не можа быць пустой</string>
-    <string name="defres">Дазвол відэа</string>
+    <string name="defres">Разрозненне відэа</string>
     <string name="areYouSure">Выдаліць плэйліст\?</string>
     <string name="playlistCreated">Плэйліст створаны.</string>
     <string name="playlistName">Назва плэйліста</string>
@@ -486,7 +486,7 @@
     <string name="tooltip_repeat">Паўтор</string>
     <string name="tooltip_sort">Сартаванне</string>
     <string name="tooltip_sponsorblock">Пераключыць SponsorBlock</string>
-    <string name="resolution_limited">абмежаваны</string>
+    <string name="resolution_limited">абмежавано</string>
     <string name="player_channel_description">Паказвае апавяшчэнне падчас прайгравання</string>
     <string name="tooltip_fullscreen">На ўвесь экран</string>
     <string name="tooltip_close">Закрыць</string>
@@ -514,6 +514,12 @@
     <string name="segment_type">Тып сегмента</string>
     <string name="sb_invalid_segment">Няправільны пачатак або канец сегмента</string>
     <string name="filename_too_long">Назва файла занадта доўгая!</string>
-    <string name="sponsorblock_user_id">Імя карыстальніка ў SponsorBlock</string>
+    <string name="sponsorblock_user_id">UserID ў SponsorBlock</string>
     <string name="contribute_to_sponsorblock">Унесці свой уклад у SponsorBlock</string>
+    <string name="donate">Падтрымліваць</string>
+    <string name="no_fullscreen_resolution">Разрозненне для не поўнаэкраннага рэжыму</string>
+    <string name="playback_during_call_summary">Звярніце ўвагу, што гэта таксама прыводзіць да таго, што праграма больш не будзе працаваць з любым тыпам аўдыяфокусу.</string>
+    <string name="music_artists">Выканаўцы музыкі YT</string>
+    <string name="playback_during_call">Працягвайце прайграванне падчас тэлефоннага званка</string>
+    <string name="same_as_fullscreen">Такая ж як для поўнаэкраннага рэжыму</string>
 </resources>

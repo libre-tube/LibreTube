@@ -513,4 +513,10 @@
     <string name="contribute_to_sponsorblock">Contribuir con SponsorBlock</string>
     <string name="filename_too_long">¡El nombre es demasiado largo!</string>
     <string name="sponsorblock_user_id">ID de usuario SponsorBlock</string>
+    <string name="donate">Donar</string>
+    <string name="music_artists">Artistas de YouTube Música</string>
+    <string name="no_fullscreen_resolution">Resolución cuando no estás a pantalla completa</string>
+    <string name="same_as_fullscreen">Igual que a pantalla completa</string>
+    <string name="playback_during_call_summary">Ten en cuenta que esto también afecta a la aplicación para no manejar ningún tipo de enfoque de audio más.</string>
+    <string name="playback_during_call">Continuar la reproducción durante una llamada de teléfono</string>
 </resources>

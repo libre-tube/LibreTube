@@ -18,7 +18,6 @@ import com.github.libretube.ui.sheets.CommentsSheet
 
 class CommentsMainFragment : Fragment() {
     private var _binding: FragmentCommentsBinding? = null
-    private val binding get() = _binding!!
 
     private lateinit var commentsAdapter: CommentsAdapter
 
@@ -30,7 +29,7 @@ class CommentsMainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCommentsBinding.inflate(inflater, container, false)
-        return binding.root
+        return _binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,28 +40,26 @@ class CommentsMainFragment : Fragment() {
         binding.commentsRV.layoutManager = layoutManager
         binding.commentsRV.setItemViewCacheSize(20)
 
+        val commentsSheet = parentFragment as? CommentsSheet
+        commentsSheet?.binding?.btnScrollToTop?.setOnClickListener {
+            // scroll back to the top / first comment
+            _binding?.commentsRV?.smoothScrollToPosition(0)
+            viewModel.currentCommentsPosition = 0
+        }
+
         binding.commentsRV.viewTreeObserver.addOnScrollChangedListener {
             val viewBinding = _binding ?: return@addOnScrollChangedListener
             // save the last scroll position to become used next time when the sheet is opened
             viewModel.currentCommentsPosition = layoutManager.findFirstVisibleItemPosition()
 
             // hide or show the scroll to top button
-            val commentsSheetBinding = (parentFragment as? CommentsSheet)?.binding
-            commentsSheetBinding?.btnScrollToTop?.isVisible = viewModel.currentCommentsPosition != 0
-            commentsSheetBinding?.btnScrollToTop?.setOnClickListener {
-                // scroll back to the top / first comment
-                viewBinding.commentsRV.smoothScrollToPosition(0)
-                viewModel.currentCommentsPosition = 0
-            }
+            commentsSheet?.binding?.btnScrollToTop?.isVisible = viewModel.currentCommentsPosition != 0
 
             if (!viewBinding.commentsRV.canScrollVertically(1)) {
                 viewModel.fetchNextComments()
             }
         }
-        (parentFragment as CommentsSheet).updateFragmentInfo(
-            false,
-            getString(R.string.comments)
-        )
+        commentsSheet?.updateFragmentInfo(false, getString(R.string.comments))
 
         commentsAdapter = CommentsAdapter(
             this,
@@ -83,19 +80,21 @@ class CommentsMainFragment : Fragment() {
 
         // listen for new comments to be loaded
         viewModel.commentsPage.observe(viewLifecycleOwner) {
+            val viewBinding = _binding ?: return@observe
+
             if (it == null) return@observe
-            binding.progress.isGone = true
+            viewBinding.progress.isGone = true
             if (it.disabled) {
-                binding.errorTV.isVisible = true
+                viewBinding.errorTV.isVisible = true
                 return@observe
             }
-            (parentFragment as CommentsSheet).updateFragmentInfo(
+            commentsSheet?.updateFragmentInfo(
                 false,
                 "${getString(R.string.comments)} (${it.commentCount.formatShort()})"
             )
             if (it.comments.isEmpty()) {
-                binding.errorTV.text = getString(R.string.no_comments_available)
-                binding.errorTV.isVisible = true
+                viewBinding.errorTV.text = getString(R.string.no_comments_available)
+                viewBinding.errorTV.isVisible = true
                 return@observe
             }
 

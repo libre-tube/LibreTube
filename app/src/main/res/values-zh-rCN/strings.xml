@@ -507,4 +507,10 @@
     <string name="contribute_to_sponsorblock">给 SponsorBlock 出力</string>
     <string name="filename_too_long">文件名过长！</string>
     <string name="sponsorblock_user_id">SponsorBlock UserID</string>
+    <string name="donate">捐赠</string>
+    <string name="music_artists">YT Music 艺人</string>
+    <string name="no_fullscreen_resolution">非全屏分辨率</string>
+    <string name="same_as_fullscreen">与全屏一致</string>
+    <string name="playback_during_call_summary">请注意这会使得应用不再处理任何类型的音频聚焦。</string>
+    <string name="playback_during_call">通话期间继续播放</string>
 </resources>

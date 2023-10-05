@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="registered">Geregistreerd. Nu kunt u zich abonneren op kanalen.</string>
+    <string name="registered">U bent geregistreerd. U kunt zich nu abonneren op kanalen.</string>
     <string name="search_hint">Zoeken</string>
     <string name="videos">Video\'s</string>
     <string name="subscribe">Abonneren</string>
-    <string name="unsubscribe">Afmelden</string>
+    <string name="unsubscribe">Deabonneren</string>
     <string name="share">Delen</string>
     <string name="download">Downloaden</string>
     <string name="save">Opslaan</string>
@@ -14,7 +14,7 @@
     <string name="register">Registreren</string>
     <string name="logout">Uitloggen</string>
     <string name="cancel">Annuleren</string>
-    <string name="already_logged_in">Al ingelogd. U mag uitloggen uit uw account.</string>
+    <string name="already_logged_in">U bent al ingelogd.</string>
     <string name="instances">Kiezen…</string>
     <string name="customInstance">Aangepast</string>
     <string name="region">Regio</string>
@@ -34,24 +34,24 @@
     <string name="systemLanguage">Systeem</string>
     <string name="startpage">Thuis</string>
     <string name="library">Bibliotheek</string>
-    <string name="loggedout">Uitgelogd.</string>
+    <string name="loggedout">Uitgelogd</string>
     <string name="defres">Video­resolutie</string>
     <string name="noInternet">Maak eerst verbinding met het internet.</string>
     <string name="retry">Opnieuw proberen</string>
     <string name="comments">Opmerkingen</string>
     <string name="channels">Kanalen</string>
-    <string name="all">Alle</string>
+    <string name="all">Alles</string>
     <string name="playlists">Afspeellijsten</string>
     <string name="okay">Oké</string>
     <string name="history">Geschiedenis</string>
     <string name="search_history">Zoekgeschiedenis</string>
     <string name="clear_history">Geschiedenis wissen</string>
-    <string name="music_songs">YT-muzieknummers</string>
-    <string name="music_videos">YT-muziekvideo\'s</string>
-    <string name="music_albums">YT-muziekalbums</string>
-    <string name="music_playlists">YT-muziekafspeellijsten</string>
+    <string name="music_songs">YouTube Music - Nummers</string>
+    <string name="music_videos">YouTube Music - Video\'s</string>
+    <string name="music_albums">YouTube Music - Albums</string>
+    <string name="music_playlists">YouTube Music - Afspeellijsten</string>
     <string name="sponsorblock">SponsorBlock</string>
-    <string name="sponsorblock_summary">Gebruikt de API van https://sponsor.ajay.app</string>
+    <string name="sponsorblock_summary">Overslaan van video-reclames</string>
     <string name="segment_skipped">Segment overgeslagen</string>
     <string name="category_segments">Segmenten</string>
     <string name="category_sponsor">Sponsor</string>
@@ -62,7 +62,7 @@
     <string name="category_interaction_description">Als er een korte herinnering is om te liken, abonneren of volgen in het midden van de inhoud. Als het lang is of over iets specifieks gaat, moet het in plaats daarvan zelfpromotie zijn.</string>
     <string name="category_intro">Pauze-/intro-animatie</string>
     <string name="youtube">YouTube</string>
-    <string name="playOnBackground">Op de achtergrond afspelen</string>
+    <string name="playOnBackground">Afspelen op achtergrond</string>
     <string name="subscriptions">Abonnementen</string>
     <string name="yes">Ja</string>
     <string name="category_intro_description">Een interval zonder eigenlijke inhoud. Kan een pauze zijn, een statisch frame, een herhalende animatie. Mag niet worden gebruikt voor overgangen die informatie bevatten.</string>
@@ -83,15 +83,15 @@
     <string name="piped">Piped</string>
     <string name="update_available">Versie %1$s is beschikbaar</string>
     <string name="update_available_text">Nieuwe versie beschikbaar. Druk om de GitHub-uitgaven­pagina te openen.</string>
-    <string name="createPlaylist">Afspeellijst maken</string>
-    <string name="loggedIn">Ingelogd.</string>
+    <string name="createPlaylist">Afspeellijst aanmaken</string>
+    <string name="loggedIn">Ingelogd</string>
     <string name="emptyPlaylistName">De naam van de afspeellijst mag niet leeg zijn</string>
     <string name="fail">Mislukt :(</string>
     <string name="customization">Aanpassingen</string>
     <string name="emptyList">Niets te zien hier</string>
     <string name="deletePlaylist">Afspeellijst verwijderen</string>
     <string name="areYouSure">De afspeellijst verwijderen\?</string>
-    <string name="playlistCreated">Afspeellijst gemaakt</string>
+    <string name="playlistCreated">Afspeellijst aangemaakt</string>
     <string name="about">Over</string>
     <string name="lightTheme">Licht</string>
     <string name="darkTheme">Donker</string>
@@ -124,12 +124,12 @@
     <string name="category_music_offtopic">Muziek: Niet-muziek-sectie</string>
     <string name="category_preview">Voorbeschouwing/samenvatting</string>
     <string name="appearance">Uiterlijk</string>
-    <string name="update_summary">Controleren op update</string>
+    <string name="update_summary">Controleren op nieuwe versies</string>
     <string name="app_uptodate">U heeft al de nieuwste versie.</string>
     <string name="playback_speed">Afspeelsnelheid</string>
     <string name="advanced">Geavanceerd</string>
     <string name="player">Speler</string>
-    <string name="appearance_summary">Pas de app aan naar uw wens.</string>
+    <string name="appearance_summary">Persoonlijke app-aanpassingen</string>
     <string name="live">Live</string>
     <string name="flameIcon">Vliegende vlam</string>
     <string name="birdIcon">Verhoogde vogel</string>
@@ -168,8 +168,8 @@
     <string name="subscriberAndVideoCounts">%1$s abonnees • %2$d video\'s</string>
     <string name="replies">Reacties</string>
     <string name="normal_views">%1$s weergaven%2$s</string>
-    <string name="concurrent_downloads">Maximale tegelijke downloads</string>
-    <string name="trending_views">%1$s • %2$s weergaven• %3$s</string>
+    <string name="concurrent_downloads">Maximaal aantal gelijktijdige downloads</string>
+    <string name="trending_views">%1$s • %2$s weergaven • %3$s</string>
     <string name="category_highlight">Videohoogtepunt laten zien</string>
     <string name="category_highlight_description">Kan de geadverteerde titel zijn, de thumbnail of het meest interessante deel van de video. Je kan het overslaan door er op te tikken in het hoofdstuk deel.</string>
     <string name="download_completed">Download voltooid</string>
@@ -268,9 +268,9 @@
     <string name="manual">Handmatig</string>
     <string name="automatic">Automatisch</string>
     <string name="resize_mode_fit">Passend</string>
-    <string name="resize_mode_fill">Vullend</string>
+    <string name="resize_mode_fill">Uitgerekt</string>
     <string name="picture_in_picture">Picture-in-picture</string>
-    <string name="resize_mode_zoom">Zoomend</string>
+    <string name="resize_mode_zoom">Vullend</string>
     <string name="auto_quality">Automatisch</string>
     <string name="trends">Trends</string>
     <string name="bookmarks">Bladwijzers</string>
@@ -332,7 +332,7 @@
     <string name="system_caption_style">Ondertitelstijl van systeem</string>
     <string name="export_subscriptions">Abonnementen exporteren</string>
     <string name="skip_buttons">Knoppen voor volgende/vorige</string>
-    <string name="player_resize_mode">Vergrotings-/verkleinings­modus</string>
+    <string name="player_resize_mode">Beeldformaat</string>
     <string name="device_info">Apparaat­info</string>
     <string name="mobile_data">Mobiele gegevens</string>
     <string name="skip_segment">Segment overslaan</string>
@@ -403,7 +403,7 @@
     <string name="turnInternetOn">Schakel wifi of mobiele data in om verbinding te maken met het internet.</string>
     <string name="autoRotatePlayer_summary">Speel af in volledig scherm wanneer het apparaat wordt gedraaid.</string>
     <string name="import_subscriptions_from">Abonnementen importeren uit</string>
-    <string name="show_search_suggestions">Zoek­suggesties tonen</string>
+    <string name="show_search_suggestions">Zoek­suggesties</string>
     <string name="export_subscriptions_to">Abonnementen exporteren naar</string>
     <string name="import_format_piped">Piped/LibreTube</string>
     <string name="default_or_unknown_audio_track">standaard of onbekend</string>
@@ -412,10 +412,10 @@
     <string name="save_feed_summary">Laad de abonnementen-feed op de achtergrond en voorkom dat deze automatisch verversd wordt.</string>
     <string name="trending">Nu trending</string>
     <string name="pause_on_quit">Pauzeren bij afsluiten</string>
-    <string name="playingOnBackground">Op de achtergrond spelen…</string>
+    <string name="playingOnBackground">Afspelen op achtergrond…</string>
     <string name="enter_hex_value">Voer hex-waarde van kleur in</string>
     <string name="no_comments_available">Deze video heeft geen opmerkingen.</string>
-    <string name="backup_restore_summary">Importeer en exporteer abonnementen, afspeellijsten, …</string>
+    <string name="backup_restore_summary">Importeren en exporteren van gegevens</string>
     <string name="add_to_bookmarks">Toevoegen aan bladwijzers</string>
     <string name="auto_fullscreen_shorts">Automatisch volledig scherm bij korte video\'s</string>
     <string name="change_playlist_description">Beschrijving van afspeellijst aanpassen</string>
@@ -434,7 +434,7 @@
     </plurals>
     <string name="player_channel_description">Toont een melding tijdens het afspelen</string>
     <string name="data_saver_mode_summary">Sla miniaturen en andere afbeeldingen over.</string>
-    <string name="notify_new_streams">Meldingen tonen voor nieuwe streams</string>
+    <string name="notify_new_streams">Meldingen voor nieuwe streams</string>
     <string name="notify_new_streams_summary">Toon meldingen voor nieuwe streams van makers die u volgt.</string>
     <string name="limit_to_runtime">Limiteren tot runtime</string>
     <string name="maximum_image_cache">Maximale grootte van afbeeldings­cache</string>
@@ -459,7 +459,7 @@
     <string name="auth_instance_summary">Gebruik een andere instantie voor geauthenticeerde verzoeken.</string>
     <string name="auth_instances">Kies een authenticatie­instantie</string>
     <string name="no_player_found">Geen externe speler gevonden, zorg ervoor dat u er één heeft geïnstalleerd.</string>
-    <string name="show_stream_thumbnails">Stream-miniaturen tonen</string>
+    <string name="show_stream_thumbnails">Stream-miniaturen</string>
     <string name="watch_history_summary">Houd bekeken video\'s lokaal bij</string>
     <string name="history_summary">Kijk- en zoek­geschiedenis</string>
     <string name="skip_buttons_summary">Toon knoppen om naar de volgende of vorige video te gaan.</string>
@@ -509,5 +509,11 @@
     <string name="sb_invalid_segment">Ongeldig segment­begin of -einde</string>
     <string name="contribute_to_sponsorblock">Bijdragen aan SponsorBlock</string>
     <string name="filename_too_long">Bestandsnaam te lang!</string>
-    <string name="sponsorblock_user_id">SponsorBlock-gebruikersnaam</string>
+    <string name="sponsorblock_user_id">SponsorBlock-gebruikers-ID</string>
+    <string name="donate">Doneren</string>
+    <string name="no_fullscreen_resolution">Resolutie in kleine speler</string>
+    <string name="music_artists">Youtube Music - Artiesten</string>
+    <string name="same_as_fullscreen">Zelfde als in volledig scherm</string>
+    <string name="playback_during_call_summary">Dit zorgt er voor dat de app geen enkele audio-focus meer afhandelt</string>
+    <string name="playback_during_call">Blijven afspelen tijdens oproepen</string>
 </resources>

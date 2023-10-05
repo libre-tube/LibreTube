@@ -1,6 +1,7 @@
 package com.github.libretube.extensions
 
 import androidx.media3.common.Player
+import com.github.libretube.helpers.PlayerHelper
 
 fun Player.togglePlayPauseState() {
     when {
@@ -13,7 +14,7 @@ fun Player.togglePlayPauseState() {
             seekTo(0)
         }
 
-        !isPlaying && totalBufferedDuration > 0 -> play()
+        !isPlaying && totalBufferedDuration > PlayerHelper.MINIMUM_BUFFER_DURATION -> play()
         else -> pause()
     }
 }

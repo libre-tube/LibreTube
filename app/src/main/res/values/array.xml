@@ -177,6 +177,17 @@
         <item>240p</item>
         <item>144p</item>
     </string-array>
+    <string-array name="defresNoPortrait">
+        <item>@string/same_as_fullscreen</item>
+        <item>2160p</item>
+        <item>1440p</item>
+        <item>1080p</item>
+        <item>720p</item>
+        <item>480p</item>
+        <item>360p</item>
+        <item>240p</item>
+        <item>144p</item>
+    </string-array>
     <string-array name="defresValue">
         <item />
         <item>2160p</item>

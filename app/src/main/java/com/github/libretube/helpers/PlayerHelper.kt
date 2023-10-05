@@ -19,13 +19,17 @@ import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
 import androidx.media3.common.PlaybackParameters
 import androidx.media3.common.Tracks
+import androidx.media3.datasource.DefaultDataSource
+import androidx.media3.datasource.cronet.CronetDataSource
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.LoadControl
+import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.media3.ui.CaptionStyleCompat
 import com.github.libretube.LibreTubeApp
 import com.github.libretube.R
+import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
@@ -36,16 +40,18 @@ import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.obj.VideoStats
 import com.github.libretube.util.TextUtils
+import kotlinx.coroutines.runBlocking
 import java.util.Locale
+import java.util.concurrent.Executors
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
-import kotlinx.coroutines.runBlocking
 
 object PlayerHelper {
     private const val ACTION_MEDIA_CONTROL = "media_control"
     const val CONTROL_TYPE = "control_type"
     const val SPONSOR_HIGHLIGHT_CATEGORY = "poi_highlight"
     const val ROLE_FLAG_AUTO_GEN_SUBTITLE = C.ROLE_FLAG_SUPPLEMENTARY
+    const val MINIMUM_BUFFER_DURATION = 1000 * 10 // exo default is 50s
 
     /**
      * A list of all categories that are not disabled by default
@@ -327,13 +333,23 @@ object PlayerHelper {
         return autoPlayEnabled || (PreferenceHelper.getBoolean(PreferenceKeys.AUTOPLAY_PLAYLISTS, true) && isPlaylist)
     }
 
-    fun getDefaultResolution(context: Context): String {
-        val prefKey = if (NetworkHelper.isNetworkMetered(context)) {
+    private val handleAudioFocus
+        get() = !PreferenceHelper.getBoolean(
+            PreferenceKeys.ALLOW_PLAYBACK_DURING_CALL,
+            false
+        )
+
+    fun getDefaultResolution(context: Context, isFullscreen: Boolean): Int? {
+        var prefKey = if (NetworkHelper.isNetworkMetered(context)) {
             PreferenceKeys.DEFAULT_RESOLUTION_MOBILE
         } else {
             PreferenceKeys.DEFAULT_RESOLUTION
         }
+        if (!isFullscreen) prefKey += "_no_fullscreen"
+
         return PreferenceHelper.getString(prefKey, "")
+            .replace("p", "")
+            .toIntOrNull()
     }
 
     /**
@@ -423,13 +439,32 @@ object PlayerHelper {
     }
 
     /**
-     * Get the audio attributes to use for the player
+     * Create a basic player, that is used for all types of playback situations inside the app
      */
-    fun getAudioAttributes(): AudioAttributes {
-        return AudioAttributes.Builder()
+    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
+    fun createPlayer(context: Context, trackSelector: DefaultTrackSelector, isBackgroundMode: Boolean): ExoPlayer {
+        val cronetDataSourceFactory = CronetDataSource.Factory(
+            CronetHelper.cronetEngine,
+            Executors.newCachedThreadPool()
+        )
+        val dataSourceFactory = DefaultDataSource.Factory(context, cronetDataSourceFactory)
+        val audioAttributes = AudioAttributes.Builder()
             .setUsage(C.USAGE_MEDIA)
             .setContentType(C.AUDIO_CONTENT_TYPE_MOVIE)
             .build()
+
+        return ExoPlayer.Builder(context)
+            .setUsePlatformDiagnostics(false)
+            .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
+            .setTrackSelector(trackSelector)
+            .setHandleAudioBecomingNoisy(true)
+            .setLoadControl(getLoadControl())
+            .setAudioAttributes(audioAttributes, handleAudioFocus)
+            .setUsePlatformDiagnostics(false)
+            .build()
+            .apply {
+                loadPlaybackParams(isBackgroundMode)
+            }
     }
 
     /**
@@ -441,7 +476,7 @@ object PlayerHelper {
             // cache the last three minutes
             .setBackBuffer(1000 * 60 * 3, true)
             .setBufferDurationsMs(
-                1000 * 10, // exo default is 50s
+                MINIMUM_BUFFER_DURATION,
                 bufferingGoal,
                 DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_MS,
                 DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS
@@ -505,9 +540,9 @@ object PlayerHelper {
             if (currentPosition in segmentStart until segmentEnd) {
                 if (sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC ||
                     (
-                        sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE &&
-                            !segment.skipped
-                        )
+                            sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE &&
+                                    !segment.skipped
+                            )
                 ) {
                     if (sponsorBlockNotifications) {
                         runCatching {
@@ -519,9 +554,9 @@ object PlayerHelper {
                     segment.skipped = true
                 } else if (sponsorBlockConfig[segment.category] == SbSkipOptions.MANUAL ||
                     (
-                        sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE &&
-                            segment.skipped
-                        )
+                            sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE &&
+                                    segment.skipped
+                            )
                 ) {
                     return segment
                 }
@@ -546,9 +581,9 @@ object PlayerHelper {
         return chapters
             .filter {
                 it.highlightDrawable == null ||
-                    // remove the video highlight if it's already longer ago than [ChapterSegment.HIGHLIGHT_LENGTH],
-                    // otherwise the SponsorBlock highlight would be shown from its starting point to the end
-                    (currentPositionSeconds - it.start) < ChapterSegment.HIGHLIGHT_LENGTH
+                        // remove the video highlight if it's already longer ago than [ChapterSegment.HIGHLIGHT_LENGTH],
+                        // otherwise the SponsorBlock highlight would be shown from its starting point to the end
+                        (currentPositionSeconds - it.start) < ChapterSegment.HIGHLIGHT_LENGTH
             }
             .sortedBy { it.start }
             .indexOfLast { currentPositionSeconds >= it.start }
@@ -704,9 +739,9 @@ object PlayerHelper {
      */
     fun haveAudioTrackRoleFlagSet(@C.RoleFlags roleFlags: Int): Boolean {
         return isFlagSet(roleFlags, C.ROLE_FLAG_DESCRIBES_VIDEO) ||
-            isFlagSet(roleFlags, C.ROLE_FLAG_DUB) ||
-            isFlagSet(roleFlags, C.ROLE_FLAG_MAIN) ||
-            isFlagSet(roleFlags, C.ROLE_FLAG_ALTERNATE)
+                isFlagSet(roleFlags, C.ROLE_FLAG_DUB) ||
+                isFlagSet(roleFlags, C.ROLE_FLAG_MAIN) ||
+                isFlagSet(roleFlags, C.ROLE_FLAG_ALTERNATE)
     }
 
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
@@ -719,7 +754,8 @@ object PlayerHelper {
         val audioInfo = "${player.audioFormat?.codecs.orEmpty()} ${
             TextUtils.formatBitrate(player.audioFormat?.bitrate)
         }"
-        val videoQuality = "${player.videoFormat?.width}x${player.videoFormat?.height} ${player.videoFormat?.frameRate?.toInt()}fps"
+        val videoQuality =
+            "${player.videoFormat?.width}x${player.videoFormat?.height} ${player.videoFormat?.frameRate?.toInt()}fps"
         return VideoStats(videoId, videoInfo, videoQuality, audioInfo)
     }
 }

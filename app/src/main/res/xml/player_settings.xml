@@ -204,6 +204,13 @@
             app:key="pause_screen_off"
             app:title="@string/pauseOnScreenOff" />
 
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_call"
+            android:summary="@string/playback_during_call_summary"
+            app:defaultValue="false"
+            app:key="playback_during_call"
+            app:title="@string/playback_during_call" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

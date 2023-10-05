@@ -58,8 +58,8 @@
     <string name="changeLanguage">ਭਾਸ਼ਾ</string>
     <string name="systemLanguage">ਸਿਸਟਮ</string>
     <string name="systemDefault">ਸਿਸਟਮ</string>
-    <string name="lightTheme">ਲਾਈਟ</string>
-    <string name="darkTheme">ਡਾਰਕ</string>
+    <string name="lightTheme">ਸਫ਼ੈਦ</string>
+    <string name="darkTheme">ਗੂੜ੍ਹਾ</string>
     <string name="subscribers">%1$s ਗਾਹਕ</string>
     <string name="settings">ਸੈਟਿੰਗਾਂ</string>
     <string name="location">ਲੋਕੇਸ਼ਨ</string>
@@ -323,7 +323,7 @@
     <string name="alternative_videos_layout">ਵਿਕਲਪਿਕ ਵੀਡੀਓ ਲੇਆਊਟ</string>
     <string name="play_next">ਅਗਲਾ ਚਲਾਓ</string>
     <string name="livestreams">ਲਾਈਵ ਸਟ੍ਰੀਮਾਂ</string>
-    <string name="defaultIconLight">ਡਿਫ਼ਾਲਟ ਲਾਈਟ</string>
+    <string name="defaultIconLight">ਡਿਫ਼ਾਲਟ ਸਫ਼ੈਦ</string>
     <string name="clear_bookmarks">ਬੁੱਕਮਾਰਕਸ ਸਾਫ਼ ਕਰੋ</string>
     <string name="auto_quality">ਆਟੋ</string>
     <string name="hls_instead_of_dash_summary">DASH ਦੀ ਬਜਾਏ HLS ਦੀ ਵਰਤੋਂ ਕਰੋ (ਹੌਲੀ ਹੋਵੇਗੀ, ਸਿਫ਼ਾਰਸ਼ ਨਹੀਂ ਕੀਤੀ ਗਈ)</string>
@@ -454,7 +454,7 @@
     <string name="fallback_piped_proxy">ਪਾਈਪਡ ਪਰਾਕਸੀ ਤੇ ਫਾਲਬੈਕ ਕਰੋ</string>
     <string name="fallback_piped_proxy_desc">ਪਰਾਕਸੀ ਰਾਹੀਂ ਵੀਡੀਓ ਲੋਡ ਕਰੋ ਜੇਕਰ YouTube ਨਾਲ ਸਿੱਧੇ ਤੌਰ \'ਤੇ ਕਨੈਕਟ ਕਰਨਾ ਵਰਤਮਾਨ ਵੀਡੀਓ ਲਈ ਕੰਮ ਨਹੀਂ ਕਰਦਾ (ਸ਼ੁਰੂਆਤੀ ਲੋਡਿੰਗ ਸਮੇਂ ਨੂੰ ਵਧਾਉਂਦਾ ਹੈ)। ਜੇਕਰ ਅਸਮਰੱਥ ਕੀਤਾ ਗਿਆ ਹੋਵੇ, ਤਾਂ YT ਪਾਬੰਦੀਆਂ ਕਰਕੇ YouTube ਸੰਗੀਤ ਸਮੱਗਰੀ ਦੇ ਚੱਲਣ ਦੀ ਸੰਭਾਵਨਾ ਨਹੀਂ ਹੈ।</string>
     <string name="stop">ਰੁਕੋ</string>
-    <string name="jumped_to_highlight">ਵੀਡੀਓ ਹਾਈਲਾਈਟ \'ਤੇ ਜੰਪ ਕੀਤਾ</string>
+    <string name="jumped_to_highlight">ਵੀਡੀਓ ਹਾਈਲਾਈਟ \'ਤੇ ਗਿਆ</string>
     <string name="category_highlight">ਵੀਡੀਓ ਹਾਈਲਾਈਟ ਵੇਖੋ</string>
     <string name="category_highlight_description">ਜਾਂ ਤਾਂ ਵਿਗਿਆਪਨ ਕੀਤਾ ਸਿਰਲੇਖ, ਥੰਮਨੇਲ ਜਾਂ ਵੀਡੀਓ ਦਾ ਸਭ ਤੋਂ ਦਿਲਚਸਪ ਭਾਗ ਹੋ ਸਕਦਾ ਹੈ। ਤੁਸੀਂ ਚੈਪਟਰ ਭਾਗ ਵਿੱਚ ਇਸ \'ਤੇ ਟੈਪ ਕਰਕੇ ਇਸ \'ਤੇ ਜਾ ਸਕਦੇ ਹੋ।</string>
     <string name="original_or_main_audio_track">ਅਸਲੀ ਜਾਂ ਮੁੱਖ</string>
@@ -510,4 +510,10 @@
     <string name="filename_too_long">ਫਾਈਲ ਨਾਮ ਬਹੁਤ ਲੰਮਾ ਹੈ!</string>
     <string name="sponsorblock_user_id">ਸਪਾਂਸਰਬਲਾਕ ਯੂਜ਼ਰ ਆਈਡੀ</string>
     <string name="contribute_to_sponsorblock">ਸਪਾਂਸਰਬਲਾਕ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾਓ</string>
+    <string name="donate">ਦਾਨ ਕਰੋ</string>
+    <string name="music_artists">YT ਮਿਊਜ਼ਿਕ ਕਲਾਕਾਰ</string>
+    <string name="no_fullscreen_resolution">ਬਗੈਰ-ਫੁਲਸਕ੍ਰੀਨ ਰੈਜ਼ੋਲਿਊਸ਼ਨ</string>
+    <string name="same_as_fullscreen">ਪੂਰੀ ਸਕਰੀਨ ਦੇ ਵਾਂਗ ਹੀ</string>
+    <string name="playback_during_call_summary">ਨੋਟ ਕਰੋ ਕਿ ਇਹ ਐਪ ਨੂੰ ਕਿਸੇ ਵੀ ਤਰ੍ਹਾਂ ਦੇ ਆਡੀਓ ਫੋਕਸ ਨੂੰ ਸੰਭਾਲਣ ਤੋਂ ਰੋਕਣ ਲਈ ਵੀ ਪ੍ਰਭਾਵਿਤ ਕਰਦਾ ਹੈ।</string>
+    <string name="playback_during_call">ਫ਼ੋਨ ਕਾਲ ਦੌਰਾਨ ਪਲੇਬੈਕ ਜਾਰੀ ਰੱਖੋ</string>
 </resources>

@@ -510,4 +510,6 @@
     <string name="filename_too_long">A fájlnév túl hosszú!</string>
     <string name="contribute_to_sponsorblock">Hozzájárulás a SzponzorBlokkhoz</string>
     <string name="sponsorblock_user_id">SzponzorBlokk felhasználói azonosító</string>
+    <string name="donate">Ádományozás</string>
+    <string name="music_artists">YT Music előadók</string>
 </resources>
