@@ -362,7 +362,7 @@
     <string name="pinch_control_summary">Користите покрет штипања да бисте увећали/умањили приказ.</string>
     <string name="unknown">Непознато</string>
     <string name="resume">Настави</string>
-    <string name="comments_disabled">Креатор је онемогућио коментаре.</string>
+    <string name="comments_disabled">Аутор је онемогућио коментаре.</string>
     <string name="pause_on_quit">Паузирај при изласку</string>
     <string name="queue_insert_related_videos">Убацивање повезаних видео снимака</string>
     <string name="clear_bookmarks">Очисти обележиваче</string>
