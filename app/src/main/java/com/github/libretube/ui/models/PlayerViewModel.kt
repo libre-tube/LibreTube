@@ -17,5 +17,7 @@ class PlayerViewModel : ViewModel() {
 
     var maxSheetHeightPx = 0
 
-    var chapters: MutableList<ChapterSegment> = mutableListOf()
+    val chaptersLiveData = MutableLiveData<List<ChapterSegment>>()
+
+    val chapters get() = chaptersLiveData.value.orEmpty()
 }
