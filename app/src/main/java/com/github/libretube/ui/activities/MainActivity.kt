@@ -363,6 +363,8 @@ class MainActivity : BaseActivity() {
      * Update the query text in the search bar without opening the search suggestions
      */
     fun setQuerySilent(query: String) {
+        if (!this::searchView.isInitialized) return
+
         shouldOpenSuggestions = false
         searchView.setQuery(query, false)
         shouldOpenSuggestions = true
