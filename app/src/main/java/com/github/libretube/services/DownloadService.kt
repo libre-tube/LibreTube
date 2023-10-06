@@ -28,7 +28,6 @@ import com.github.libretube.enums.FileType
 import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.extensions.getContentLength
 import com.github.libretube.extensions.parcelableExtra
-import com.github.libretube.extensions.toLocalDateSafe
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.DownloadHelper.getNotificationId
@@ -116,7 +115,7 @@ class DownloadService : LifecycleService() {
                     streams.title,
                     streams.description,
                     streams.uploader,
-                    streams.uploadDate.toLocalDateSafe(),
+                    streams.uploadDate,
                     thumbnailTargetPath
                 )
                 Database.downloadDao().insertDownload(download)

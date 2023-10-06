@@ -2,18 +2,19 @@ package com.github.libretube.api.obj
 
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
-import com.github.libretube.extensions.toLocalDateSafe
 import com.github.libretube.extensions.toMillis
 import com.github.libretube.helpers.ProxyHelper
+import com.github.libretube.json.SafeLocalDateSerializer
 import com.github.libretube.parcelable.DownloadData
-import kotlin.io.path.Path
+import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
+import kotlin.io.path.Path
 
 @Serializable
 data class Streams(
     val title: String,
     val description: String,
-    val uploadDate: String,
+    @Serializable(SafeLocalDateSerializer::class) val uploadDate: LocalDate,
     val uploader: String,
     val uploaderUrl: String,
     val uploaderAvatar: String? = null,
@@ -84,8 +85,8 @@ data class Streams(
             uploaderName = uploader,
             uploaderUrl = uploaderUrl,
             uploaderAvatar = uploaderAvatar,
-            uploadedDate = uploadDate,
-            uploaded = uploadDate.toLocalDateSafe().toMillis(),
+            uploadedDate = uploadDate.toString(),
+            uploaded = uploadDate.toMillis(),
             duration = duration,
             views = views,
             uploaderVerified = uploaderVerified,
