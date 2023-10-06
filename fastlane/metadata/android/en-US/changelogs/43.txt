@@ -1,0 +1,7 @@
+* feat: support for YouTube music artists as search filter
+* feat: zoomable preview of channel avatar and banner
+* feat: parse YouTube links in the search bar
+* feat: option to allow playback during call
+* feat: option to set a different default resolution when not in fullscreen
+* feat: option to autoplay videos in playlist
+* feat: option to set default playback speed manually
