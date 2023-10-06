@@ -522,4 +522,7 @@
     <string name="music_artists">Выканаўцы музыкі YT</string>
     <string name="playback_during_call">Працягвайце прайграванне падчас тэлефоннага званка</string>
     <string name="same_as_fullscreen">Такая ж як для поўнаэкраннага рэжыму</string>
+    <string name="autoplay_playlists_summary">Аўтаматычнае прайграванне наступнага відэа у падборках незалежна ад выбранай налады аўтапрайгравання</string>
+    <string name="autoplay_playlists">Аўтапрайграванне падборак</string>
+    <string name="remember_playback_speed">Запамінаць хуткасць прайгравання</string>
 </resources>
