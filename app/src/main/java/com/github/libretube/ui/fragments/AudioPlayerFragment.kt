@@ -191,7 +191,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
 
         binding.chapters.setOnClickListener {
             val playerService = playerService ?: return@setOnClickListener
-            viewModel.chapters = playerService.streams?.chapters.orEmpty().toMutableList()
+            viewModel.chaptersLiveData.value = playerService.streams?.chapters.orEmpty()
 
             ChaptersBottomSheet()
                 .show(childFragmentManager)

@@ -13,7 +13,7 @@ import com.github.libretube.helpers.ThemeHelper
 import com.github.libretube.ui.viewholders.ChaptersViewHolder
 
 class ChaptersAdapter(
-    private val chapters: List<ChapterSegment>,
+    var chapters: List<ChapterSegment>,
     private val videoDuration: Long,
     private val seekTo: (Long) -> Unit
 ) : RecyclerView.Adapter<ChaptersViewHolder>() {

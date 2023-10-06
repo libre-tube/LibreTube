@@ -330,7 +330,10 @@ object PlayerHelper {
             )
 
     fun shouldPlayNextVideo(isPlaylist: Boolean = false): Boolean {
-        return autoPlayEnabled || (isPlaylist && PreferenceHelper.getBoolean(PreferenceKeys.AUTOPLAY_PLAYLISTS, false))
+        return autoPlayEnabled || (isPlaylist && PreferenceHelper.getBoolean(
+            PreferenceKeys.AUTOPLAY_PLAYLISTS,
+            false
+        ))
     }
 
     private val handleAudioFocus
@@ -442,7 +445,11 @@ object PlayerHelper {
      * Create a basic player, that is used for all types of playback situations inside the app
      */
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
-    fun createPlayer(context: Context, trackSelector: DefaultTrackSelector, isBackgroundMode: Boolean): ExoPlayer {
+    fun createPlayer(
+        context: Context,
+        trackSelector: DefaultTrackSelector,
+        isBackgroundMode: Boolean
+    ): ExoPlayer {
         val cronetDataSourceFactory = CronetDataSource.Factory(
             CronetHelper.cronetEngine,
             Executors.newCachedThreadPool()
@@ -579,15 +586,16 @@ object PlayerHelper {
     fun getCurrentChapterIndex(currentPositionMs: Long, chapters: List<ChapterSegment>): Int? {
         val currentPositionSeconds = currentPositionMs / 1000
         return chapters
-            .filter {
-                it.highlightDrawable == null ||
-                        // remove the video highlight if it's already longer ago than [ChapterSegment.HIGHLIGHT_LENGTH],
-                        // otherwise the SponsorBlock highlight would be shown from its starting point to the end
-                        (currentPositionSeconds - it.start) < ChapterSegment.HIGHLIGHT_LENGTH
-            }
             .sortedBy { it.start }
             .indexOfLast { currentPositionSeconds >= it.start }
             .takeIf { it >= 0 }
+            ?.takeIf { index ->
+                val chapter = chapters[index]
+                // remove the video highlight if it's already longer ago than [ChapterSegment.HIGHLIGHT_LENGTH],
+                // otherwise the SponsorBlock highlight would be shown from its starting point to the end
+                val isWithinMaxHighlightDuration = (currentPositionSeconds - chapter.start) < ChapterSegment.HIGHLIGHT_LENGTH
+                chapter.highlightDrawable == null || isWithinMaxHighlightDuration
+            }
     }
 
     fun getPosition(videoId: String, duration: Long?): Long? {

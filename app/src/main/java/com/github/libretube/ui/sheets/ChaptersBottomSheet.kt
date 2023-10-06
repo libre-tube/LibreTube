@@ -1,5 +1,6 @@
 package com.github.libretube.ui.sheets
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -10,7 +11,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
-import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.databinding.BottomSheetBinding
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.ui.adapters.ChaptersAdapter
@@ -19,14 +19,9 @@ import com.github.libretube.ui.models.PlayerViewModel
 class ChaptersBottomSheet : UndimmedBottomSheet() {
     private var _binding: BottomSheetBinding? = null
     private val binding get() = _binding!!
+    private val handler = Handler(Looper.getMainLooper())
 
     private val playerViewModel: PlayerViewModel by activityViewModels()
-    private lateinit var chapters: List<ChapterSegment>
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        chapters = playerViewModel.chapters
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,11 +32,28 @@ class ChaptersBottomSheet : UndimmedBottomSheet() {
         return binding.root
     }
 
+    private val updatePosition = object : Runnable {
+        override fun run() {
+            val binding = _binding ?: return
+            handler.postDelayed(this, 200)
+
+            val player = playerViewModel.player ?: return
+            val currentIndex = PlayerHelper.getCurrentChapterIndex(
+                player.currentPosition,
+                playerViewModel.chapters
+            ) ?: return
+
+            val adapter = binding.optionsRecycler.adapter as ChaptersAdapter
+            adapter.updateSelectedPosition(currentIndex)
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.optionsRecycler.layoutManager = LinearLayoutManager(context)
-        val adapter = ChaptersAdapter(chapters, playerViewModel.player?.duration ?: 0) {
+        val adapter = ChaptersAdapter(playerViewModel.chapters, playerViewModel.player?.duration ?: 0) {
             playerViewModel.player?.seekTo(it)
         }
         binding.optionsRecycler.adapter = adapter
@@ -49,17 +61,11 @@ class ChaptersBottomSheet : UndimmedBottomSheet() {
         binding.bottomSheetTitle.text = context?.getString(R.string.chapters)
         binding.bottomSheetTitleLayout.isVisible = true
 
-        val handler = Handler(Looper.getMainLooper())
-
-        val updatePosition = object : Runnable {
-            override fun run() {
-                if (_binding == null) return
-                handler.postDelayed(this, 200)
-                val player = playerViewModel.player ?: return
-                val currentIndex = PlayerHelper.getCurrentChapterIndex(player.currentPosition, chapters) ?: return
-                adapter.updateSelectedPosition(currentIndex)
-            }
+        playerViewModel.chaptersLiveData.observe(viewLifecycleOwner) {
+            adapter.chapters = it
+            adapter.notifyDataSetChanged()
         }
+
         updatePosition.run()
     }
 

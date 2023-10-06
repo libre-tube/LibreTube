@@ -15,6 +15,7 @@ import android.os.Looper
 import android.os.PowerManager
 import android.text.format.DateUtils
 import android.text.util.Linkify
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,11 +45,9 @@ import androidx.media3.common.MediaItem.SubtitleConfiguration
 import androidx.media3.common.MimeTypes
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
-import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.datasource.cronet.CronetDataSource
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.hls.HlsMediaSource
-import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
@@ -90,7 +89,6 @@ import com.github.libretube.helpers.PlayerHelper.SPONSOR_HIGHLIGHT_CATEGORY
 import com.github.libretube.helpers.PlayerHelper.checkForSegments
 import com.github.libretube.helpers.PlayerHelper.getVideoStats
 import com.github.libretube.helpers.PlayerHelper.isInSegment
-import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.PlayerNotificationData
@@ -922,7 +920,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playerBinding.exoTitle.text = streams.title
 
         // init the chapters recyclerview
-        viewModel.chapters = streams.chapters.toMutableList()
+        viewModel.chaptersLiveData.value = streams.chapters
 
         // Listener for play and pause icon change
         exoPlayer.addListener(object : Player.Listener {
@@ -1212,16 +1210,18 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     private suspend fun initializeHighlight(highlight: Segment) {
         val frameReceiver = OnlineTimeFrameReceiver(requireContext(), streams.previewFrames)
+        val highlightStart = highlight.segmentStartAndEnd.first.toLong()
         val frame = withContext(Dispatchers.IO) {
-            frameReceiver.getFrameAtTime(highlight.segmentStartAndEnd.first.toLong() * 1000)
+            frameReceiver.getFrameAtTime(highlightStart * 1000)
         }
         val highlightChapter = ChapterSegment(
             title = getString(R.string.chapters_videoHighlight),
-            start = highlight.segmentStartAndEnd.first.toLong(),
+            start = highlightStart,
             highlightDrawable = frame?.toDrawable(requireContext().resources)
         )
-        viewModel.chapters.add(highlightChapter)
-        viewModel.chapters.sortBy { it.start }
+        viewModel.chaptersLiveData.postValue(
+            viewModel.chapters.plus(highlightChapter).sortedBy { it.start }
+        )
 
         withContext(Dispatchers.Main) {
             setCurrentChapterName()
