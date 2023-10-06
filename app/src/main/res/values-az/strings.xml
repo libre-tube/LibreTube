@@ -516,4 +516,7 @@
     <string name="music_artists">YT Musiqi Sənətçiləri</string>
     <string name="playback_during_call">Telefon zəngi əsnasında oynatmaya davam et</string>
     <string name="same_as_fullscreen">Tam ekran kimi</string>
+    <string name="autoplay_playlists_summary">Seçilən avtomatik oynatma tənzimləməsindən asılı olmayaraq pleylistlərdəki növbəti videonu avtomatik oynat</string>
+    <string name="autoplay_playlists">Oynatma siyahısın avtomatik oynatmaq</string>
+    <string name="remember_playback_speed">Oynatma sürətin xatırla</string>
 </resources>
