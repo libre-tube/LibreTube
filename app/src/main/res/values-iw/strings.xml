@@ -522,4 +522,7 @@
     <string name="music_artists">אומנים ב־YT Music</string>
     <string name="playback_during_call">להמשיך נגינה במהלך שיחת טלפון</string>
     <string name="same_as_fullscreen">כמו מסך מלא</string>
+    <string name="autoplay_playlists_summary">לנגן את הסרטון הבא ברשימת הנגינה ללא תלות בהגדרות הנגינה האוטומטית</string>
+    <string name="autoplay_playlists">ניגון רשימות נגינה אוטומטית</string>
+    <string name="remember_playback_speed">לזכור את מהירות הנגינה</string>
 </resources>

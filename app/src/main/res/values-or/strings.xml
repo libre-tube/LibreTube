@@ -518,4 +518,5 @@
     <string name="playback_during_call">ଫୋନ କଲ୍ ସମୟରେ ଚଲାବୁଲା ଜାରି ରଖନ୍ତୁ</string>
     <string name="autoplay_playlists_summary">ମନୋନୀତ ଅଟୋ ପ୍ଲେ ସେଟିଂକୁ ଖାତିର ନକରି ପ୍ଲେଲିଷ୍ଟରେ ପରବର୍ତ୍ତୀ ଭିଡିଓକୁ ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଚଲାନ୍ତୁ</string>
     <string name="autoplay_playlists">ପ୍ଲେ ତାଲିକାଗୁଡ଼ିକୁ ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଚଲାନ୍ତୁ</string>
+    <string name="remember_playback_speed">ପ୍ଲେବେକ୍ ବେଗ ମନେରଖ</string>
 </resources>

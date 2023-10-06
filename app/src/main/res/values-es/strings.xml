@@ -517,6 +517,9 @@
     <string name="music_artists">Artistas de YouTube Música</string>
     <string name="no_fullscreen_resolution">Resolución cuando no estás a pantalla completa</string>
     <string name="same_as_fullscreen">Igual que a pantalla completa</string>
-    <string name="playback_during_call_summary">Ten en cuenta que esto también afecta a la aplicación para no manejar ningún tipo de enfoque de audio más.</string>
-    <string name="playback_during_call">Continuar la reproducción durante una llamada de teléfono</string>
+    <string name="playback_during_call_summary">Esto también hará que la app ya no pueda manejar ningún foco de audio.</string>
+    <string name="playback_during_call">Continuar durante una llamada</string>
+    <string name="autoplay_playlists_summary">Reproduzce automáticamente el siguiente video en las listas de reproducción independientemente de la configuración de la reproducción automática seleccionada</string>
+    <string name="autoplay_playlists">Reproducir automáticamente las listas de reproducción</string>
+    <string name="remember_playback_speed">Recordar la velocidad de reproducción</string>
 </resources>

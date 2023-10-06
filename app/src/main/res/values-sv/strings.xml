@@ -518,4 +518,5 @@
     <string name="tooltip_watch_position">Uppspelningspunkt</string>
     <string name="autoplay_playlists_summary">Spela automatiskt upp nästa video i spellistor oavsett vald inställning för automatisk uppspelning</string>
     <string name="autoplay_playlists">Automatisk uppspelning av spellistor</string>
+    <string name="remember_playback_speed">Kom ihåg uppspelningshastighet</string>
 </resources>
