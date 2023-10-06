@@ -528,4 +528,7 @@
     <string name="same_as_fullscreen">مطابق لإعداد الشاشة الكاملة</string>
     <string name="playback_during_call_summary">لاحظ أن هذا يؤثر أيضًا على التطبيق بحيث لا يتعامل مع أي نوع من التركيز الصوتي بعد الآن.</string>
     <string name="playback_during_call">متابعة التشغيل أثناء المكالمة الهاتفية</string>
+    <string name="autoplay_playlists_summary">تشغيل الفيديو التالي تلقائيًا في قوائم التشغيل بغض النظر عن إعداد التشغيل التلقائي المحدد</string>
+    <string name="autoplay_playlists">شغّل قوائم التشغيل تلقائيًا</string>
+    <string name="remember_playback_speed">تذكر سرعة التشغيل</string>
 </resources>

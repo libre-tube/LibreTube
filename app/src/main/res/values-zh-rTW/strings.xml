@@ -513,4 +513,7 @@
     <string name="same_as_fullscreen">與全螢幕相同</string>
     <string name="playback_during_call_summary">請注意，這也會影響應用程式，使其不再處理任何種類的音訊焦點。</string>
     <string name="playback_during_call">電話通話中持續播放</string>
+    <string name="autoplay_playlists_summary">無論選定的自動播放設定如何，都會自動播放在播放清單上的下一部影片</string>
+    <string name="autoplay_playlists">自動播放播放清單</string>
+    <string name="remember_playback_speed">記住播放速度</string>
 </resources>

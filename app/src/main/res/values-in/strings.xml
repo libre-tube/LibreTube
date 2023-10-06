@@ -513,4 +513,7 @@
     <string name="music_artists">Artis YT Music</string>
     <string name="playback_during_call">Lanjutkan pemutar</string>
     <string name="same_as_fullscreen">Sama seperti layar penuh</string>
+    <string name="autoplay_playlists_summary">Putar video berikutnya dalam daftar putar secara otomatis terlepas dari pengaturan pemutaran otomatis yang dipilih</string>
+    <string name="autoplay_playlists">Putar daftar putar secara otomatis</string>
+    <string name="remember_playback_speed">Ingat kecepatan pemutaran</string>
 </resources>

@@ -267,7 +267,7 @@
     <string name="push_channel_name">Агент уведомлениий</string>
     <string name="break_reminder_time">Минут до напоминания</string>
     <string name="legacy_subscriptions">Старый вид отображения подписок</string>
-    <string name="audio_video_summary">Качество изображения и формат</string>
+    <string name="audio_video_summary">Качество и формат</string>
     <string name="delete">Удалить из загрузок</string>
     <string name="renamePlaylist">Переименовать плейлист</string>
     <string name="wifi">Wi-Fi</string>
@@ -320,7 +320,7 @@
     <string name="queue_insert_related_videos">Вставить связанные видео</string>
     <string name="brightness">Яркость</string>
     <string name="volume">Громкость</string>
-    <string name="auto">Автоматический</string>
+    <string name="auto">Авто</string>
     <string name="swipe_controls_summary">Используйте жест прокрутки, чтобы отрегулировать яркость и громкость.</string>
     <string name="swipe_controls">Управление прокруткой</string>
     <string name="defaults">По умолчанию</string>
@@ -428,7 +428,7 @@
     <string name="shorts_notifications">Уведомления для shorts</string>
     <string name="alphabetic">Алфавитный</string>
     <string name="creation_date">Дата создания</string>
-    <string name="creation_date_reversed">Дата создания (перевернутая)</string>
+    <string name="creation_date_reversed">Дата создания (перевёрнутая)</string>
     <string name="alphabetic_reversed">Алфавитный (обратный)</string>
     <string name="import_format_newpipe">NewPipe</string>
     <string name="import_format_freetube">FreeTube</string>
@@ -518,10 +518,10 @@
     <string name="contribute_to_sponsorblock">Внести свой вклад в SponsorBlock</string>
     <string name="donate">Поддержать</string>
     <string name="music_artists">Исполнители YT Music</string>
-    <string name="no_fullscreen_resolution">Разрешение не в полном экране</string>
+    <string name="no_fullscreen_resolution">Разрешение для не полноэкранного режима</string>
     <string name="playback_during_call_summary">Приложение также будет игнорировать другие источники звука. Например, проигрывание музыки.</string>
     <string name="playback_during_call">Не прерывать воспроизведение при вызове</string>
-    <string name="same_as_fullscreen">Как в полноэкранном</string>
+    <string name="same_as_fullscreen">Такое же как для полноэкранного режима</string>
     <string name="autoplay_playlists_summary">Автоматически воспроизводить следующее видео плейлиста вне зависимости от настроек автовоспроизведения</string>
     <string name="autoplay_playlists">Автовоспроизведение в плейлистах</string>
     <string name="remember_playback_speed">Сохранение скорости воспроизведения</string>
