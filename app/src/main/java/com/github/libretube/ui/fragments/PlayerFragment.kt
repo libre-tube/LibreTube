@@ -642,7 +642,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     override fun onDestroy() {
         super.onDestroy()
 
-        viewModel.player = null
+        if (viewModel.player == exoPlayer) viewModel.player = null
 
         if (this::exoPlayer.isInitialized) exoPlayer.pause()
 
