@@ -519,4 +519,7 @@
     <string name="show_search_suggestions">Прикажи предлоге за претрагу</string>
     <string name="proxy">Прокси</string>
     <string name="duration_reversed">Трајање (обрнуто)</string>
+    <string name="autoplay_playlists_summary">Аутоматски пуштајте следећи видео снимак на плејлистама, без обзира на изабрано подешавање аутоматског пуштања</string>
+    <string name="autoplay_playlists">Аутоматски пусти плејлисте</string>
+    <string name="remember_playback_speed">Запамти брзину репродукције</string>
 </resources>
