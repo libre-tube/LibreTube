@@ -273,4 +273,11 @@
     <string name="no_player_found">Nulle reproductor externe trovate. Assecura te que tu ha un installate.</string>
     <string name="picture_in_picture">Imagine-in-imagine</string>
     <string name="play_next">Reproducer le sequente</string>
+    <string name="no_subtitles_available">Necun subtitulos disponibile</string>
+    <string name="new_videos_badge">Indicator de nove videos</string>
+    <string name="sb_skip_manual_summary">Non saltar segmentos automaticamente, sempre demandar avante.</string>
+    <string name="save_feed">Cargar fluxo in secunde plano</string>
+    <string name="yt_shorts">Shorts</string>
+    <string name="resize_mode_fit">Adjustar</string>
+    <string name="repeat_mode">Modo de repetition</string>
 </resources>
