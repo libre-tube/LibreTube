@@ -514,4 +514,12 @@
     <string name="filename_too_long">Nome do arquivo muito longo!</string>
     <string name="sponsorblock_user_id">ID de usuário do SponsorBlock</string>
     <string name="donate">Doar</string>
+    <string name="autoplay_playlists_summary">Reproduzir automaticamente o próximo vídeo nas playlists, independentemente da configuração de reprodução automática selecionada</string>
+    <string name="no_fullscreen_resolution">Resolução sem tela cheia</string>
+    <string name="playback_during_call_summary">Observe que isso também afeta o aplicativo para não lidar mais com nenhum tipo de foco de áudio.</string>
+    <string name="music_artists">Artistas do YT Music</string>
+    <string name="playback_during_call">Continuar a reprodução durante uma chamada</string>
+    <string name="autoplay_playlists">Playlists de reprodução automática</string>
+    <string name="same_as_fullscreen">O mesmo que tela cheia</string>
+    <string name="remember_playback_speed">Lembre-se da velocidade de reprodução</string>
 </resources>
