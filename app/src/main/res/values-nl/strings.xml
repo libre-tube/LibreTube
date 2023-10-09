@@ -516,4 +516,7 @@
     <string name="same_as_fullscreen">Zelfde als in volledig scherm</string>
     <string name="playback_during_call_summary">Dit zorgt er voor dat de app geen enkele audio-focus meer afhandelt</string>
     <string name="playback_during_call">Blijven afspelen tijdens oproepen</string>
+    <string name="autoplay_playlists_summary">Volgende video in afspeellijsten automatisch afspelen onafhankelijk van de geselecteerde instelling voor automatisch afspelen</string>
+    <string name="autoplay_playlists">Afspeel­lijsten automatisch afspelen</string>
+    <string name="remember_playback_speed">Afspeel­snelheid onthouden</string>
 </resources>
