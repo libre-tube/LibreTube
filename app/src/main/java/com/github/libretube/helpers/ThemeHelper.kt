@@ -33,9 +33,7 @@ object ThemeHelper {
     /**
      * Update the accent color of the app and apply dynamic colors if needed
      */
-    private fun updateAccentColor(
-        activity: AppCompatActivity
-    ) {
+    private fun updateAccentColor(activity: AppCompatActivity) {
         var accentColor = PreferenceHelper.getString(PreferenceKeys.ACCENT_COLOR, "")
 
         // automatically choose an accent color on the first app startup
@@ -117,10 +115,8 @@ object ThemeHelper {
     /**
      * Get a color by a color resource attr
      */
-    fun getThemeColor(
-        context: Context,
-        colorCode: Int
-    ) = MaterialColors.getColor(context, colorCode, Color.TRANSPARENT)
+    fun getThemeColor(context: Context, colorCode: Int) =
+        MaterialColors.getColor(context, colorCode, Color.TRANSPARENT)
 
     /**
      * Get the styled app name

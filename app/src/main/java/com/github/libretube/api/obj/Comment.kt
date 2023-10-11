@@ -19,5 +19,5 @@ data class Comment(
     val thumbnail: String,
     val verified: Boolean,
     val replyCount: Long,
-    val creatorReplied: Boolean = false,
+    val creatorReplied: Boolean = false
 ) : Parcelable

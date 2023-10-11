@@ -113,9 +113,9 @@ class VideosAdapter(
         }
 
         val context = (
-                holder.videoRowBinding ?: holder.trendingRowBinding
+            holder.videoRowBinding ?: holder.trendingRowBinding
                 ?: holder.allCaughtUpBinding
-                )!!.root.context
+            )!!.root.context
         val activity = (context as BaseActivity)
         val fragmentManager = activity.supportFragmentManager
 

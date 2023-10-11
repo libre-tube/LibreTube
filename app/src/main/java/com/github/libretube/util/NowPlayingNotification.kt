@@ -315,10 +315,7 @@ class NowPlayingNotification(
     /**
      * Updates or creates the [notificationBuilder]
      */
-    fun updatePlayerNotification(
-        videoId: String,
-        data: PlayerNotificationData
-    ) {
+    fun updatePlayerNotification(videoId: String, data: PlayerNotificationData) {
         this.videoId = videoId
         this.notificationData = data
         // reset the thumbnail bitmap in order to become reloaded for the new video

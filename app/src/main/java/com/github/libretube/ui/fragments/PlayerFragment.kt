@@ -15,7 +15,6 @@ import android.os.Looper
 import android.os.PowerManager
 import android.text.format.DateUtils
 import android.text.util.Linkify
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -1112,10 +1111,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     /**
      * Set up the description text with video links and timestamps
      */
-    private fun setupDescription(
-        descTextView: TextView,
-        description: String
-    ) {
+    private fun setupDescription(descTextView: TextView, description: String) {
         // detect whether the description is html formatted
         if (description.contains("<") && description.contains(">")) {
             descTextView.movementMethod = LinkMovementMethodCompat.getInstance()

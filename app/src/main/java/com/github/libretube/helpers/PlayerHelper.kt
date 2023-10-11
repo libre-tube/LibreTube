@@ -40,11 +40,11 @@ import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.obj.VideoStats
 import com.github.libretube.util.TextUtils
-import kotlinx.coroutines.runBlocking
 import java.util.Locale
 import java.util.concurrent.Executors
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
+import kotlinx.coroutines.runBlocking
 
 object PlayerHelper {
     private const val ACTION_MEDIA_CONTROL = "media_control"
@@ -65,11 +65,7 @@ object PlayerHelper {
     /**
      * Create a base64 encoded DASH stream manifest
      */
-    fun createDashSource(
-        streams: Streams,
-        context: Context,
-        disableProxy: Boolean
-    ): Uri {
+    fun createDashSource(streams: Streams, context: Context, disableProxy: Boolean): Uri {
         val manifest = DashHelper.createManifest(
             streams,
             DisplayHelper.supportsHdr(context),
@@ -330,10 +326,12 @@ object PlayerHelper {
             )
 
     fun shouldPlayNextVideo(isPlaylist: Boolean = false): Boolean {
-        return autoPlayEnabled || (isPlaylist && PreferenceHelper.getBoolean(
-            PreferenceKeys.AUTOPLAY_PLAYLISTS,
-            false
-        ))
+        return autoPlayEnabled || (
+            isPlaylist && PreferenceHelper.getBoolean(
+                PreferenceKeys.AUTOPLAY_PLAYLISTS,
+                false
+            )
+            )
     }
 
     private val handleAudioFocus
@@ -547,9 +545,9 @@ object PlayerHelper {
             if (currentPosition in segmentStart until segmentEnd) {
                 if (sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC ||
                     (
-                            sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE &&
-                                    !segment.skipped
-                            )
+                        sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE &&
+                            !segment.skipped
+                        )
                 ) {
                     if (sponsorBlockNotifications) {
                         runCatching {
@@ -561,9 +559,9 @@ object PlayerHelper {
                     segment.skipped = true
                 } else if (sponsorBlockConfig[segment.category] == SbSkipOptions.MANUAL ||
                     (
-                            sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE &&
-                                    segment.skipped
-                            )
+                        sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE &&
+                            segment.skipped
+                        )
                 ) {
                     return segment
                 }
@@ -747,9 +745,9 @@ object PlayerHelper {
      */
     fun haveAudioTrackRoleFlagSet(@C.RoleFlags roleFlags: Int): Boolean {
         return isFlagSet(roleFlags, C.ROLE_FLAG_DESCRIBES_VIDEO) ||
-                isFlagSet(roleFlags, C.ROLE_FLAG_DUB) ||
-                isFlagSet(roleFlags, C.ROLE_FLAG_MAIN) ||
-                isFlagSet(roleFlags, C.ROLE_FLAG_ALTERNATE)
+            isFlagSet(roleFlags, C.ROLE_FLAG_DUB) ||
+            isFlagSet(roleFlags, C.ROLE_FLAG_MAIN) ||
+            isFlagSet(roleFlags, C.ROLE_FLAG_ALTERNATE)
     }
 
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)

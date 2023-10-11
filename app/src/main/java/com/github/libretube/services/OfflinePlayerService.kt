@@ -19,7 +19,6 @@ import com.github.libretube.enums.FileType
 import com.github.libretube.extensions.toAndroidUri
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
-import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.NowPlayingNotification.Companion.PLAYER_NOTIFICATION_ID

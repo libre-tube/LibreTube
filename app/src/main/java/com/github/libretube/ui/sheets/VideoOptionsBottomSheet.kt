@@ -43,7 +43,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
         val videoId = streamItem.url?.toID() ?: return
         // List that stores the different menu options. In the future could be add more options here.
         val optionsList = mutableListOf(
-            getString(R.string.playOnBackground),
+            getString(R.string.playOnBackground)
         )
 
         // Check whether the player is running and add queue options
