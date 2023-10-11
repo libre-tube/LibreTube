@@ -35,6 +35,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
@@ -143,13 +144,17 @@ class HomeFragment : Fragment() {
                     SubscriptionHelper.getFeed()
                 }
             }.getOrNull()?.takeIf { it.isNotEmpty() } ?: return
-        }.filter {
+        }
+        var filteredFeed = feed.filter {
             when (PreferenceHelper.getInt(PreferenceKeys.SELECTED_FEED_FILTER, 0)) {
                 1 -> !it.isShort
                 2 -> it.isShort
                 else -> true
             }
-        }.take(20)
+        }
+        if (PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)) {
+            filteredFeed = runBlocking { DatabaseHelper.filterUnwatched(filteredFeed) }
+        }
         val binding = _binding ?: return
 
         makeVisible(binding.featuredRV, binding.featuredTV)
@@ -159,7 +164,7 @@ class HomeFragment : Fragment() {
             false
         )
         binding.featuredRV.adapter = VideosAdapter(
-            feed.toMutableList(),
+            filteredFeed.take(20).toMutableList(),
             forceMode = VideosAdapter.Companion.ForceMode.HOME
         )
     }
