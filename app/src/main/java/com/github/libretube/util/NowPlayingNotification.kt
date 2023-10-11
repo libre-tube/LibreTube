@@ -262,6 +262,7 @@ class NowPlayingNotification(
                 PlaybackStateCompat.ACTION_FAST_FORWARD or
                 PlaybackStateCompat.ACTION_PLAY_PAUSE or
                 PlaybackStateCompat.ACTION_PAUSE or
+                PlaybackStateCompat.ACTION_PLAY or
                 PlaybackStateCompat.ACTION_SEEK_TO
 
         return PlaybackStateCompat.Builder()
