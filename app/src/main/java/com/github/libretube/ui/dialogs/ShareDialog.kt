@@ -58,12 +58,12 @@ class ShareDialog : DialogFragment() {
                     // only available for custom instances
                     else -> instanceUrl
                 }
-                val path = when (shareObjectType) {
-                    ShareObjectType.VIDEO -> "/watch?v=$id"
-                    ShareObjectType.PLAYLIST -> "/playlist?list=$id"
-                    else -> "/channel/$id"
+                var url = when {
+                    shareObjectType == ShareObjectType.VIDEO && host == YOUTUBE_SHORT_URL -> "$YOUTUBE_SHORT_URL/$id"
+                    shareObjectType == ShareObjectType.VIDEO -> "$host/watch?v=$id"
+                    shareObjectType == ShareObjectType.PLAYLIST -> "${host}/playlist?list=$id"
+                    else -> "${host}/channel/$id"
                 }
-                var url = "$host$path"
 
                 if (shareObjectType == ShareObjectType.VIDEO && binding.timeCodeSwitch.isChecked) {
                     url += "&t=${binding.timeStamp.text}"
@@ -118,6 +118,7 @@ class ShareDialog : DialogFragment() {
 
     companion object {
         const val YOUTUBE_FRONTEND_URL = "https://www.youtube.com"
+        const val YOUTUBE_SHORT_URL = "https://youtu.be"
         const val PIPED_FRONTEND_URL = "https://piped.video"
     }
 }
