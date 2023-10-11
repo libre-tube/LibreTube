@@ -113,14 +113,15 @@ class VideosAdapter(
         }
 
         val context = (
-            holder.videoRowBinding ?: holder.trendingRowBinding
+                holder.videoRowBinding ?: holder.trendingRowBinding
                 ?: holder.allCaughtUpBinding
-            )!!.root.context
+                )!!.root.context
         val activity = (context as BaseActivity)
         val fragmentManager = activity.supportFragmentManager
 
-        val uploadDate =
-            video.uploaded.takeIf { it > 0 }?.let { TextUtils.formatRelativeDate(context, it) }
+        val uploadDateStr = video.uploaded.takeIf { it > 0 }
+            ?.let { TextUtils.formatRelativeDate(context, it) }
+            ?.toString()
 
         // Trending layout
         holder.trendingRowBinding?.apply {
@@ -134,12 +135,16 @@ class VideosAdapter(
             }
 
             textViewTitle.text = video.title
-            textViewChannel.text = root.context.getString(
-                R.string.trending_views,
-                video.uploaderName,
-                video.views.formatShort(),
-                uploadDate?.toString().orEmpty()
-            )
+            textViewChannel.text = if ((video.views ?: 0L) > 0L) {
+                root.context.getString(
+                    R.string.trending_views,
+                    video.uploaderName,
+                    video.views.formatShort(),
+                    uploadDateStr
+                )
+            } else {
+                "${video.uploaderName} ${TextUtils.SEPARATOR} $uploadDateStr"
+            }
             video.duration?.let { thumbnailDuration.setFormattedDuration(it, video.isShort) }
             channelImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, video.uploaderUrl)
@@ -171,7 +176,7 @@ class VideosAdapter(
             videoInfo.text = root.context.getString(
                 R.string.normal_views,
                 video.views.formatShort(),
-                uploadDate?.let { " ${TextUtils.SEPARATOR} $it" }
+                uploadDateStr?.let { " ${TextUtils.SEPARATOR} $it" }
             )
 
             thumbnailDuration.text = video.duration?.let { DateUtils.formatElapsedTime(it) }
