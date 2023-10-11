@@ -104,6 +104,15 @@
                     app:srcCompat="@drawable/ic_hearted"
                     tools:visibility="visible" />
 
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/creator_reply_imageView"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="gone"
+                    tools:visibility="gone"
+                    app:shapeAppearance="@style/CircleImageView" />
+
                 <com.github.libretube.ui.views.DrawableTextView
                     android:id="@+id/replies_count"
                     android:layout_width="wrap_content"

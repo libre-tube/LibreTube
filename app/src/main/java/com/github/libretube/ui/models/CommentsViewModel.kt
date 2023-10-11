@@ -16,6 +16,7 @@ class CommentsViewModel : ViewModel() {
     val commentSheetExpand = MutableLiveData<Boolean?>()
 
     var videoId: String? = null
+    var channelAvatar: String? = null
     private var nextPage: String? = null
     private var isLoading = false
     var currentCommentsPosition = 0

@@ -58,6 +58,7 @@ class CommentsRepliesFragment : Fragment() {
         repliesAdapter = CommentsAdapter(
             null,
             videoId,
+            viewModel.channelAvatar,
             mutableListOf(comment),
             true,
             viewModel.handleLink

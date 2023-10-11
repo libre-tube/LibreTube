@@ -402,6 +402,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             commentsViewModel.handleLink = this::handleLink
             updateMaxSheetHeight()
             commentsViewModel.videoId = videoId
+            commentsViewModel.channelAvatar = streams.uploaderAvatar
             CommentsSheet().show(childFragmentManager)
         }
 

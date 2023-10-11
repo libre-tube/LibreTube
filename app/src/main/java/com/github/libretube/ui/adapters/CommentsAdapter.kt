@@ -35,6 +35,7 @@ import com.github.libretube.util.TextUtils
 class CommentsAdapter(
     private val fragment: Fragment?,
     private val videoId: String,
+    private val channelAvatar: String?,
     private val comments: MutableList<Comment>,
     private val isRepliesAdapter: Boolean = false,
     private val handleLink: ((url: String) -> Unit)?,
@@ -79,6 +80,11 @@ class CommentsAdapter(
 
             ImageHelper.loadImage(comment.thumbnail, commentorImage)
             likesTextView.text = comment.likeCount.formatShort()
+
+            if (comment.creatorReplied && !channelAvatar.isNullOrBlank()) {
+                ImageHelper.loadImage(channelAvatar, creatorReplyImageView)
+                creatorReplyImageView.isVisible = true
+            }
 
             if (comment.verified) verifiedImageView.isVisible = true
             if (comment.pinned) pinnedImageView.isVisible = true
