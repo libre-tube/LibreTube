@@ -30,7 +30,6 @@ jobs:
         run: |
           cd .github
           curl https://api.github.com/repos/${{ github.repository }}/commits/${{ github.sha }} > commit.json
-          python checkrun.py
           cd ..
 
       - name: Set up JDK 17
@@ -62,7 +61,6 @@ jobs:
           keyStorePassword: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
 
-
       - name: Upload to Archive
         continue-on-error: true
         run: |
@@ -74,20 +72,6 @@ jobs:
           cd nightly
           python ../uploader.py
       
-      - name: Telegram Bot
-        continue-on-error: true
-        run: |
-          cd nightly
-          mv ../tgconfig.py .
-          echo "TG_TOKEN = '${{ secrets.TG_TOKEN }}'" >> tgconfig.py
-          echo "TG_API_ID = '${{ secrets.TG_API_ID }}'" >> tgconfig.py
-          echo "TG_POST_ID = '${{ secrets.TG_POST_ID }}'" >> tgconfig.py
-          echo "TG_API_HASH = '${{ secrets.TG_API_HASH }}'" >> tgconfig.py
-          python -m pip install --upgrade pip TgCrypto Pyrogram
-          mv ../.github/tg.py .
-          mv ../.github/commit.json .
-          python tg.py
-
       - name: Upload APK
         uses: actions/upload-artifact@v3
         with:
