@@ -522,4 +522,5 @@
     <string name="autoplay_playlists_summary">Reproduce el siguiente vídeo en las listas aunque desactives la opción \"Reproducción automática\"</string>
     <string name="autoplay_playlists">Reproducción automática en listas</string>
     <string name="remember_playback_speed">Recordar la velocidad de reproducción</string>
+    <string name="segment_submitted">Segmento enviado</string>
 </resources>
