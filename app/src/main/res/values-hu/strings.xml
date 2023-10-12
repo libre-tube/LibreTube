@@ -512,4 +512,17 @@
     <string name="sponsorblock_user_id">SzponzorBlokk felhasználói azonosító</string>
     <string name="donate">Ádományozás</string>
     <string name="music_artists">YT Music előadók</string>
+    <string name="autoplay_playlists_summary">Automatikusan lejátssza a következő videót egy lejátszási listában az automatikus lejátszási adatoktól függetlenül</string>
+    <string name="vote_for_segment">Szavazás szakaszra</string>
+    <string name="upvote">Fel</string>
+    <string name="segment">Szakasz</string>
+    <string name="no_fullscreen_resolution">Nem teljes képernyős felbontás</string>
+    <string name="undo">Vissza</string>
+    <string name="playback_during_call_summary">Vegye figyelembe, hogy ez azt is befolyásolja, hogy az alkalmazás így nem kezel semmilyen hangfókuszt.</string>
+    <string name="segment_submitted">Szakasz beküldve</string>
+    <string name="playback_during_call">Lejátszás folytatása telefonhívás közben</string>
+    <string name="autoplay_playlists">Lejátszási listák automatikus lejátszása</string>
+    <string name="same_as_fullscreen">Ugyanaz, mint teljes képernyőnél</string>
+    <string name="remember_playback_speed">Lejátszási sebesség megjegyzése</string>
+    <string name="downvote">Le</string>
 </resources>
