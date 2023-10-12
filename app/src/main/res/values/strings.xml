@@ -451,6 +451,7 @@
     <string name="same_as_fullscreen">Same as fullscreen</string>
     <string name="playback_during_call">Continue playback during phone call</string>
     <string name="playback_during_call_summary">Note that this also affects the app to not handle any kind of audio focus anymore.</string>
+    <string name="segment_submitted">Segment submitted</string>
 
     <!-- Backup & Restore Settings -->
     <string name="import_subscriptions_from">Import subscriptions from</string>

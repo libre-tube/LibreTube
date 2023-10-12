@@ -91,6 +91,7 @@ class SubmitSegmentDialog : DialogFragment() {
                 RetrofitInstance.externalApi
                     .submitSegment(videoId, startTime, endTime, category, userAgent, uuid, duration)
             }
+            context.toastFromMainDispatcher(R.string.segment_submitted)
         } catch (e: Exception) {
             Log.e(TAG(), e.toString())
             context.toastFromMainDispatcher(e.localizedMessage.orEmpty())
