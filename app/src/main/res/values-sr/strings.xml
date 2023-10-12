@@ -522,4 +522,10 @@
     <string name="autoplay_playlists_summary">Аутоматски пуштајте следећи видео снимак на плејлистама, без обзира на изабрано подешавање аутоматског пуштања</string>
     <string name="autoplay_playlists">Аутоматски пусти плејлисте</string>
     <string name="remember_playback_speed">Запамти брзину репродукције</string>
+    <string name="vote_for_segment">Гласај за сегмент</string>
+    <string name="upvote">Гласај за</string>
+    <string name="segment">Сегмент</string>
+    <string name="undo">Опозови</string>
+    <string name="segment_submitted">Сегмент је послат</string>
+    <string name="downvote">Гласај против</string>
 </resources>
