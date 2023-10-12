@@ -75,6 +75,7 @@
                 android:textAlignment="viewStart"
                 android:textIsSelectable="true"
                 android:textSize="15sp"
+                android:focusable="false"
                 tools:text="Comment Text" />
 
             <LinearLayout
