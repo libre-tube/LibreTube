@@ -1,10 +1,11 @@
 package com.github.libretube.api.obj
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Segment(
-    val UUID: String? = null,
+    @SerialName("UUID") val uuid: String? = null,
     val actionType: String? = null,
     val category: String? = null,
     val description: String? = null,

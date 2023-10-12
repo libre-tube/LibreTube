@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.BuildConfig
@@ -52,6 +53,11 @@ class SubmitSegmentDialog : DialogFragment() {
             .setView(binding.root)
             .setPositiveButton(R.string.okay, null)
             .setNegativeButton(R.string.cancel, null)
+            .setNeutralButton(R.string.vote_for_segment) { _, _ ->
+                VoteForSegmentDialog().apply {
+                    arguments = bundleOf(IntentData.videoId to videoId)
+                }.show(parentFragmentManager, null)
+            }
             .show()
             .apply {
                 getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
