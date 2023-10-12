@@ -28,6 +28,7 @@
 
 # Keep data classes used for Retrofit
 -keep class com.github.libretube.obj.** { *; }
+-keep class com.github.libretube.api.obj.** { *; }
 -keep class com.github.libretube.obj.update.** { *; }
 
 # Keep rules required by Kotlinx Serialization
