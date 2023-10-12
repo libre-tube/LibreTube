@@ -26,7 +26,7 @@ class ChaptersAdapter(
     }
 
     override fun onBindViewHolder(holder: ChaptersViewHolder, position: Int) {
-        val chapter = chapters[position]
+        val chapter = chapters[holder.absoluteAdapterPosition]
         holder.binding.apply {
             if (chapter.highlightDrawable != null) {
                 chapterImage.setImageDrawable(chapter.highlightDrawable)
@@ -74,4 +74,6 @@ class ChaptersAdapter(
     }
 
     override fun getItemCount() = chapters.size
+
+    override fun getItemViewType(position: Int) = position
 }
