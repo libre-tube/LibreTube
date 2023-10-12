@@ -452,6 +452,11 @@
     <string name="playback_during_call">Continue playback during phone call</string>
     <string name="playback_during_call_summary">Note that this also affects the app to not handle any kind of audio focus anymore.</string>
     <string name="segment_submitted">Segment submitted</string>
+    <string name="vote_for_segment">Vote for segment</string>
+    <string name="upvote">Up</string>
+    <string name="downvote">Down</string>
+    <string name="undo">Undo</string>
+    <string name="segment">Segment</string>
 
     <!-- Backup & Restore Settings -->
     <string name="import_subscriptions_from">Import subscriptions from</string>
