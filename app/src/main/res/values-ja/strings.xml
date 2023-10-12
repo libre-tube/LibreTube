@@ -57,7 +57,7 @@
     <string name="empty">ユーザー名とパスワードを入力してください。</string>
     <string name="import_from_yt">登録チャンネルをインポート</string>
     <string name="defres">動画の解像度</string>
-    <string name="grid">グリッドのカラム数</string>
+    <string name="grid">一覧での1行あたりの表示数</string>
     <string name="deletePlaylist">再生リストを削除</string>
     <string name="areYouSure">この再生リストを削除しますか？</string>
     <string name="about">アプリについて</string>
@@ -284,7 +284,7 @@
     <string name="playlistNameReversed">再生リスト名 (逆順)</string>
     <string name="playlists_order">再生リストの表示順</string>
     <string name="livestreams">ライブ配信</string>
-    <string name="alternative_videos_layout">別の動画レイアウト</string>
+    <string name="alternative_videos_layout">動画配置の変更</string>
     <string name="download_channel_name">ダウンロードサービス</string>
     <string name="push_channel_name">通知の実行</string>
     <string name="push_channel_description">新着動画があれば通知を表示します。</string>
@@ -303,7 +303,7 @@
     <string name="download_channel_description">メディアのダウンロード中に通知を表示します。</string>
     <string name="navbar_order">並べ替え</string>
     <string name="layout">配置</string>
-    <string name="alternative_player_layout">レイヤーの配置変更</string>
+    <string name="alternative_player_layout">プレイヤーの配置変更</string>
     <string name="alternative_player_layout_summary">関連動画をコメントの下ではなく上に並べて表示します。</string>
     <string name="local_playlists">端末内の再生リスト</string>
     <string name="color_violet">深紫色</string>
@@ -463,7 +463,7 @@
     <string name="dubbed_audio_track">吹き替え</string>
     <string name="descriptive_audio_track">解説</string>
     <string name="continue_watching">視聴を続ける</string>
-    <string name="dearrow_summary">大げさでなくより正確な題名とサムネイルを表示します。読み込み時間が増えます。</string>
+    <string name="dearrow_summary">大げさでなくより正確な題名とサムネイルを表示します。読み込み時間は増加します。</string>
     <string name="dearrow">DeArrow を使用</string>
     <string name="visibility">公開状態</string>
     <string name="visibility_public">公開</string>
@@ -513,6 +513,7 @@
     <string name="music_artists">YT Musicアーティスト</string>
     <string name="playback_during_call">通話中に再生を続ける</string>
     <string name="autoplay_playlists">再生リストを自動再生</string>
-    <string name="same_as_fullscreen">全画面と同じ</string>
+    <string name="same_as_fullscreen">全画面用 (上記) と同じ</string>
     <string name="remember_playback_speed">再生速度を記憶</string>
+    <string name="no_fullscreen_resolution">全画面表示でない時の解像度</string>
 </resources>
