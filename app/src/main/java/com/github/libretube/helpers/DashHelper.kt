@@ -25,11 +25,7 @@ object DashHelper {
         val audioLocale: String? = null
     )
 
-    fun createManifest(
-        streams: Streams,
-        supportsHdr: Boolean,
-        rewriteUrls: Boolean
-    ): String {
+    fun createManifest(streams: Streams, supportsHdr: Boolean, rewriteUrls: Boolean): String {
         val builder = builderFactory.newDocumentBuilder()
 
         val doc = builder.newDocument()
@@ -173,10 +169,7 @@ object DashHelper {
         return representation
     }
 
-    private fun createSegmentBaseElement(
-        document: Document,
-        stream: PipedStream
-    ): Element {
+    private fun createSegmentBaseElement(document: Document, stream: PipedStream): Element {
         val segmentBase = document.createElement("SegmentBase")
         segmentBase.setAttribute("indexRange", "${stream.indexStart}-${stream.indexEnd}")
 

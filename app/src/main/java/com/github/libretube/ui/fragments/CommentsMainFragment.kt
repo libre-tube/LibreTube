@@ -64,6 +64,7 @@ class CommentsMainFragment : Fragment() {
         commentsAdapter = CommentsAdapter(
             this,
             viewModel.videoId ?: return,
+            viewModel.channelAvatar ?: return,
             viewModel.commentsPage.value?.comments.orEmpty().toMutableList(),
             handleLink = viewModel.handleLink
         ) {

@@ -53,9 +53,10 @@ class ChaptersBottomSheet : UndimmedBottomSheet() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.optionsRecycler.layoutManager = LinearLayoutManager(context)
-        val adapter = ChaptersAdapter(playerViewModel.chapters, playerViewModel.player?.duration ?: 0) {
-            playerViewModel.player?.seekTo(it)
-        }
+        val adapter =
+            ChaptersAdapter(playerViewModel.chapters, playerViewModel.player?.duration ?: 0) {
+                playerViewModel.player?.seekTo(it)
+            }
         binding.optionsRecycler.adapter = adapter
 
         binding.bottomSheetTitle.text = context?.getString(R.string.chapters)

@@ -16,10 +16,7 @@ object NotificationHelper {
     /**
      * Enqueue the work manager task
      */
-    fun enqueueWork(
-        context: Context,
-        existingPeriodicWorkPolicy: ExistingPeriodicWorkPolicy
-    ) {
+    fun enqueueWork(context: Context, existingPeriodicWorkPolicy: ExistingPeriodicWorkPolicy) {
         // get the notification preferences
         PreferenceHelper.initialize(context)
         val notificationsEnabled = PreferenceHelper.getBoolean(

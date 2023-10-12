@@ -356,10 +356,7 @@ class PlaylistFragment : Fragment() {
                     return false
                 }
 
-                override fun onSwiped(
-                    viewHolder: RecyclerView.ViewHolder,
-                    direction: Int
-                ) {
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     playlistAdapter!!.removeFromPlaylist(
                         requireContext(),
                         viewHolder.absoluteAdapterPosition

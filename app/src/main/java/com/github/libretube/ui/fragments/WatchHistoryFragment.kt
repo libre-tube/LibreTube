@@ -127,10 +127,7 @@ class WatchHistoryFragment : Fragment() {
                 return false
             }
 
-            override fun onSwiped(
-                viewHolder: RecyclerView.ViewHolder,
-                direction: Int
-            ) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.absoluteAdapterPosition
                 watchHistoryAdapter.removeFromWatchHistory(position)
             }

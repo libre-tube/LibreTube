@@ -213,10 +213,7 @@ class YoutubeHlsPlaylistParser : ParsingLoadable.Parser<HlsPlaylist> {
      * @param acontValue the value of the `acont` property
      * @return the full audio role flags of the audio track like described above
      */
-    private fun getFullAudioRoleFlags(
-        roleFlags: Int,
-        acontValue: String
-    ): Int {
+    private fun getFullAudioRoleFlags(roleFlags: Int, acontValue: String): Int {
         val acontRoleFlags = when (acontValue.lowercase()) {
             "dubbed" -> C.ROLE_FLAG_DUB
             "descriptive" -> C.ROLE_FLAG_DESCRIBES_VIDEO

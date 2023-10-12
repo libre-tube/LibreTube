@@ -25,10 +25,7 @@ import com.github.libretube.ui.views.SingleViewTouchableMotionLayout
 object NavigationHelper {
     private val handler = Handler(Looper.getMainLooper())
 
-    fun navigateChannel(
-        context: Context,
-        channelId: String?
-    ) {
+    fun navigateChannel(context: Context, channelId: String?) {
         if (channelId == null) return
 
         val activity = ContextHelper.unwrapActivity(context)
@@ -85,11 +82,7 @@ object NavigationHelper {
         }
     }
 
-    fun navigatePlaylist(
-        context: Context,
-        playlistId: String?,
-        playlistType: PlaylistType
-    ) {
+    fun navigatePlaylist(context: Context, playlistId: String?, playlistType: PlaylistType) {
         if (playlistId == null) return
 
         val activity = ContextHelper.unwrapActivity(context)

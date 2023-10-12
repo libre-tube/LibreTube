@@ -6,8 +6,8 @@ import com.github.libretube.extensions.toLocalDateSafe
 import com.github.libretube.extensions.toMillis
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.parcelable.DownloadData
-import kotlinx.serialization.Serializable
 import kotlin.io.path.Path
+import kotlinx.serialization.Serializable
 
 @Serializable
 data class Streams(

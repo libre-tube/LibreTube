@@ -47,9 +47,7 @@ interface PipedApi {
     ): SegmentData
 
     @GET("dearrow")
-    suspend fun getDeArrowContent(
-        @Query("videoIds") videoIds: String
-    ): JsonObject
+    suspend fun getDeArrowContent(@Query("videoIds") videoIds: String): JsonObject
 
     @GET("nextpage/comments/{videoId}")
     suspend fun getCommentsNextPage(
@@ -116,14 +114,10 @@ interface PipedApi {
     suspend fun getFeed(@Query("authToken") token: String?): List<StreamItem>
 
     @GET("feed/unauthenticated")
-    suspend fun getUnauthenticatedFeed(
-        @Query("channels") channels: String
-    ): List<StreamItem>
+    suspend fun getUnauthenticatedFeed(@Query("channels") channels: String): List<StreamItem>
 
     @POST("feed/unauthenticated")
-    suspend fun getUnauthenticatedFeed(
-        @Body channels: List<String>
-    ): List<StreamItem>
+    suspend fun getUnauthenticatedFeed(@Body channels: List<String>): List<StreamItem>
 
     @GET("subscribed")
     suspend fun isSubscribed(
@@ -140,9 +134,7 @@ interface PipedApi {
     ): List<Subscription>
 
     @POST("subscriptions/unauthenticated")
-    suspend fun unauthenticatedSubscriptions(
-        @Body channels: List<String>
-    ): List<Subscription>
+    suspend fun unauthenticatedSubscriptions(@Body channels: List<String>): List<Subscription>
 
     @POST("subscribe")
     suspend fun subscribe(

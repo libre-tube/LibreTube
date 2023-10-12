@@ -61,8 +61,8 @@ class ShareDialog : DialogFragment() {
                 var url = when {
                     shareObjectType == ShareObjectType.VIDEO && host == YOUTUBE_SHORT_URL -> "$YOUTUBE_SHORT_URL/$id"
                     shareObjectType == ShareObjectType.VIDEO -> "$host/watch?v=$id"
-                    shareObjectType == ShareObjectType.PLAYLIST -> "${host}/playlist?list=$id"
-                    else -> "${host}/channel/$id"
+                    shareObjectType == ShareObjectType.PLAYLIST -> "$host/playlist?list=$id"
+                    else -> "$host/channel/$id"
                 }
 
                 if (shareObjectType == ShareObjectType.VIDEO && binding.timeCodeSwitch.isChecked) {
