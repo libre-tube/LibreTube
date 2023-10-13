@@ -519,4 +519,10 @@
     <string name="autoplay_playlists_summary">Das nächste Video in einer Playlist automatisch abspielen, unabhängig von der Autoplay-Einstellung</string>
     <string name="autoplay_playlists">Automatische Playlist-Wiedergabe</string>
     <string name="remember_playback_speed">Wiedergabegeschwindigkeit merken</string>
+    <string name="vote_for_segment">Für diesen Abschnitt abstimmen</string>
+    <string name="upvote">Daumen hoch</string>
+    <string name="segment">Abschnitt</string>
+    <string name="undo">Rückgängig</string>
+    <string name="segment_submitted">Abschnitt wurde eingereicht</string>
+    <string name="downvote">Daumen runter</string>
 </resources>
