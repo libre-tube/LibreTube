@@ -525,4 +525,10 @@
     <string name="autoplay_playlists_summary">Автоматически воспроизводить следующее видео в плейлисте вне зависимости от настроек автовоспроизведения</string>
     <string name="autoplay_playlists">Автовоспроизведение в плейлистах</string>
     <string name="remember_playback_speed">Сохранение скорости воспроизведения</string>
+    <string name="vote_for_segment">Проголосуйте за сегмент</string>
+    <string name="upvote">Хороший</string>
+    <string name="segment">Сегмент</string>
+    <string name="undo">Отмена</string>
+    <string name="segment_submitted">Сегмент отправлен</string>
+    <string name="downvote">Плохой</string>
 </resources>

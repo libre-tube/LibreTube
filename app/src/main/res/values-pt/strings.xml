@@ -522,4 +522,10 @@
     <string name="autoplay_playlists_summary">Reproduzir o vídeo seguinte da lista de reprodução, independentemente do modo de reprodução automática</string>
     <string name="autoplay_playlists">Listas de reprodução automáticas</string>
     <string name="remember_playback_speed">Memorizar velocidade de reprodução</string>
+    <string name="vote_for_segment">Votar no segmento</string>
+    <string name="upvote">Gosto</string>
+    <string name="segment">Segmento</string>
+    <string name="undo">Desfazer</string>
+    <string name="segment_submitted">Segmento submetido</string>
+    <string name="downvote">Não gosto</string>
 </resources>

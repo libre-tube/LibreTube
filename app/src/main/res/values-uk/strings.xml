@@ -525,4 +525,10 @@
     <string name="autoplay_playlists_summary">Автоматично відтворювати наступне відео в добірках незалежно від обраних налаштувань автовідтворення</string>
     <string name="autoplay_playlists">Автовідтворення добірок</string>
     <string name="remember_playback_speed">Пам\'ятати швидкість відтворення</string>
+    <string name="vote_for_segment">Проголосувати за сегмент</string>
+    <string name="upvote">Підняти</string>
+    <string name="segment">Сегмент</string>
+    <string name="undo">Скасувати</string>
+    <string name="segment_submitted">Сегмент надіслано</string>
+    <string name="downvote">Понизити</string>
 </resources>

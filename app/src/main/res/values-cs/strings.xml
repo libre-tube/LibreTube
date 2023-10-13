@@ -523,4 +523,9 @@
     <string name="autoplay_playlists">Automatické přehrávání playlistů</string>
     <string name="remember_playback_speed">Zapamatovat rychlost přehrávání</string>
     <string name="segment_submitted">Segment odeslán</string>
+    <string name="vote_for_segment">Hlasovat pro segment</string>
+    <string name="upvote">Pro</string>
+    <string name="segment">Segment</string>
+    <string name="undo">Zrušit</string>
+    <string name="downvote">Proti</string>
 </resources>
