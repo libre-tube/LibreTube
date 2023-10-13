@@ -516,4 +516,10 @@
     <string name="autoplay_playlists_summary">不论选中了什么自动播放设置都自动播放播放列表中的下一个视频</string>
     <string name="autoplay_playlists">自动播放播放列表</string>
     <string name="remember_playback_speed">记住播放速度</string>
+    <string name="vote_for_segment">为分段投票</string>
+    <string name="upvote">赞</string>
+    <string name="segment">分段</string>
+    <string name="undo">撤销</string>
+    <string name="segment_submitted">已提交分段</string>
+    <string name="downvote">踩</string>
 </resources>
