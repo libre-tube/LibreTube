@@ -523,4 +523,9 @@
     <string name="autoplay_playlists">Reproducción automática en listas</string>
     <string name="remember_playback_speed">Recordar la velocidad de reproducción</string>
     <string name="segment_submitted">Segmento enviado</string>
+    <string name="vote_for_segment">Votar por la sección</string>
+    <string name="upvote">Me gusta</string>
+    <string name="segment">Sección</string>
+    <string name="undo">Deshacer</string>
+    <string name="downvote">No me gusta</string>
 </resources>
