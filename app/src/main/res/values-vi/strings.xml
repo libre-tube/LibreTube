@@ -60,7 +60,7 @@
     <string name="music_videos">Videos ca nhạc trên YT Music</string>
     <string name="music_albums">Albums ca nhạc trên YT Music</string>
     <string name="music_playlists">Danh sách nhạc trên YT Music</string>
-    <string name="sponsorblock">Chặn Nhà tài trợ</string>
+    <string name="sponsorblock">Chặn Quảng Cáo Tài Trợ</string>
     <string name="segment_skipped">Đã bỏ qua phân đoạn</string>
     <string name="category_sponsor">Nhà tài trợ</string>
     <string name="category_selfpromo">Không trả tiền/Tự quảng cáo</string>
@@ -114,7 +114,7 @@
     <string name="enabled">Kích hoạt</string>
     <string name="disabled">Tắt</string>
     <string name="playOnBackground">Chơi trong nền</string>
-    <string name="update_available_text">Đã có cập nhật mới. Nhấp để mở trang phát hành GitHub.</string>
+    <string name="update_available_text">Có cập nhật mới. Nhấn để mở trang phát hành GitHub.</string>
     <string name="addInstance">Thêm sever</string>
     <string name="version">Phiên bản %1$s</string>
     <string name="buffering_goal_summary">Số giây video được tải trước ở mức tối đa.</string>
@@ -123,7 +123,7 @@
     <string name="loggedIn">Đã đăng nhập.</string>
     <string name="loggedout">Đã đăng xuất.</string>
     <string name="downloadfailed">Tải xuống thất bại.</string>
-    <string name="server_error">Có vẻ có một sự cố với máy chủ đã chọn. Hãy thử một thực thể khác.</string>
+    <string name="server_error">Có một vấn đề với máy chủ được chọn. Hãy thử lại với một máy chủ khác</string>
     <string name="category_segments">Các phân đoạn</string>
     <string name="category_sponsor_description">Quảng cáo có trả tiền, giới thiệu có trả tiền và quảng cáo trực tiếp. Không phải để tự quảng cáo hoặc gửi lời cảm ơn miễn phí tới các hoạt động chính nghĩa / người sáng tạo / trang web / sản phẩm mà họ thích.</string>
     <string name="category_intro_description">Khoảng thời gian không có chứa nội dung của video. Có thể là tạm dừng, khung tĩnh, hoạt ảnh lặp lại. Không nên được sử dụng cho các phân cảnh chuyển có chứa thông tin.</string>
@@ -337,11 +337,11 @@
     <string name="normal_views">%1$s lượt xem%2$s</string>
     <string name="unknown">Không xác định</string>
     <string name="resume">Tiếp tục</string>
-    <string name="unsupported_file_format">Định dạng tệp tin không hỗ trợ: %1$s</string>
+    <string name="unsupported_file_format">Định dạng tập tin không được hỗ trợ: %1$s</string>
     <string name="pinch_control_summary">Sử dụng cử chỉ chụm để phóng to/thu nhỏ.</string>
     <string name="pop_up">Pop-up</string>
-    <string name="comments_disabled">Bình luận đã bị tắt bởi người tải lên.</string>
-    <string name="no_comments_available">Video này không có bình luận nào.</string>
+    <string name="comments_disabled">Bình luận bị tắt bởi người đăng.</string>
+    <string name="no_comments_available">Video này chưa có bình luận nào.</string>
     <string name="theme_monochrome">Đơn sắc tối giản</string>
     <string name="captions_size">Kích thước phụ đề</string>
     <string name="double_tap_seek">Nhấn đúp để tua</string>
@@ -405,8 +405,8 @@
     <string name="show_stream_thumbnails">Hiển thị hình thu nhỏ của luồng</string>
     <string name="show_stream_thumbnails_summary">Hiển thị hình thu nhỏ của luồng mới. Kích hoạt tính năng này sẽ tiêu tốn thêm dữ liệu.</string>
     <string name="all_caught_up_summary">Bạn đã xem tất cả các video mới</string>
-    <string name="import_playlists">Nhập danh sách phát</string>
-    <string name="export_playlists">Xuất danh sách phát</string>
+    <string name="import_playlists">Nhập vào danh sách phát</string>
+    <string name="export_playlists">Xuất ra danh sách phát</string>
     <string name="exportsuccess">Đã xuất.</string>
     <string name="proceed">Tiếp tục</string>
     <string name="play_latest_videos">Phát video mới nhất</string>
@@ -430,7 +430,7 @@
         <item quantity="other">%d luồng mới</item>
     </plurals>
     <string name="audio_player">Máy nghe nhạc</string>
-    <string name="hide_watched_from_feed_summary">Không hiển thị video đã xem hơn 90% trong thẻ đăng ký.</string>
+    <string name="hide_watched_from_feed_summary">Không hiển thị những video đã xem hơn 90% trong thẻ đăng ký.</string>
     <string name="nothing_selected">Không chọn gì!</string>
     <string name="add_to_bookmarks">Thêm vào dấu trang</string>
     <string name="remove_bookmark">Xóa dấu trang</string>
@@ -516,4 +516,10 @@
     <string name="tooltip_sort">Xếp</string>
     <string name="tooltip_watch_position">Vị trí xem</string>
     <string name="proxy">Proxy</string>
+    <string name="vote_for_segment">Bình chọn cho phân đoạn</string>
+    <string name="upvote">Lên</string>
+    <string name="segment">Phân đoạn</string>
+    <string name="undo">Hoàn tác</string>
+    <string name="segment_submitted">Đã gửi phân đoạn</string>
+    <string name="downvote">Xuống</string>
 </resources>
