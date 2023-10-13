@@ -522,4 +522,10 @@
     <string name="autoplay_playlists_summary">Riproduci automaticamente il video seguente in playlist indipendentemente dall\'impostazione di autoriproduzione selezionata</string>
     <string name="autoplay_playlists">Autoriproduci le playlist</string>
     <string name="remember_playback_speed">Ricorda la velocità di riproduzione</string>
+    <string name="vote_for_segment">Valuta il segmento</string>
+    <string name="upvote">Positivo</string>
+    <string name="segment">Segmento</string>
+    <string name="undo">Annulla</string>
+    <string name="segment_submitted">Segmento inviato</string>
+    <string name="downvote">Negativo</string>
 </resources>
