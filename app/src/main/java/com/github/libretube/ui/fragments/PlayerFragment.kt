@@ -14,11 +14,9 @@ import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
 import android.text.format.DateUtils
-import android.text.util.Linkify
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
@@ -27,8 +25,6 @@ import androidx.core.graphics.drawable.toDrawable
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
-import androidx.core.text.method.LinkMovementMethodCompat
-import androidx.core.text.parseAsHtml
 import androidx.core.view.WindowCompat
 import androidx.core.view.isGone
 import androidx.core.view.isInvisible
@@ -76,7 +72,6 @@ import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.serializableExtra
 import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toID
-import com.github.libretube.extensions.toLocalDateSafe
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateParameters
@@ -95,7 +90,6 @@ import com.github.libretube.obj.ShareData
 import com.github.libretube.obj.VideoResolution
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.activities.MainActivity
-import com.github.libretube.ui.activities.VideoTagsAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
@@ -110,8 +104,6 @@ import com.github.libretube.ui.sheets.ChaptersBottomSheet
 import com.github.libretube.ui.sheets.CommentsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.sheets.StatsSheet
-import com.github.libretube.util.HtmlParser
-import com.github.libretube.util.LinkHandler
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.OnlineTimeFrameReceiver
 import com.github.libretube.util.PlayingQueue
@@ -391,11 +383,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             exoPlayer.togglePlayPauseState()
         }
 
-        // video description and chapters toggle
-        binding.playerTitleLayout.setOnClickListener {
-            if (this::streams.isInitialized) toggleDescription()
-        }
-
         binding.commentsToggle.setOnClickListener {
             // set the max height to not cover the currently playing video
             commentsViewModel.handleLink = this::handleLink
@@ -489,6 +476,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             LinearLayoutManager.HORIZONTAL,
             false
         )
+
+        binding.descriptionLayout.handleLink = this::handleLink
     }
 
     private fun updateMaxSheetHeight() {
@@ -575,37 +564,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         viewModel.isFullscreen.value = false
 
         updateResolutionOnFullscreenChange(false)
-    }
-
-    private fun toggleDescription() {
-        val views = if (binding.descLinLayout.isVisible) {
-            // show formatted short view count
-            streams.views.formatShort()
-        } else {
-            // show exact view count
-            "%,d".format(streams.views)
-        }
-        val viewInfo = getString(R.string.normal_views, views, localizeDate(streams))
-        if (binding.descLinLayout.isVisible) {
-            // hide the description and chapters
-            binding.playerDescriptionArrow.animate().rotation(0F).setDuration(250).start()
-            binding.descLinLayout.isGone = true
-
-            // limit the title height to two lines
-            binding.playerTitle.maxLines = 2
-        } else {
-            // show the description and chapters
-            binding.playerDescriptionArrow.animate().rotation(180F).setDuration(250).start()
-            binding.descLinLayout.isVisible = true
-
-            // show the whole title
-            binding.playerTitle.maxLines = Int.MAX_VALUE
-        }
-        binding.playerViewsInfo.text = viewInfo
-
-        if (viewModel.chapters.isNotEmpty()) {
-            setCurrentChapterName(forceUpdate = true, enqueueNew = false)
-        }
     }
 
     override fun onPause() {
@@ -766,7 +724,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
                 // set media sources for the player
                 initStreamSources()
-                prepareExoPlayerView()
+
+                binding.player.apply {
+                    useController = false
+                    player = exoPlayer
+                }
+
+                playerBinding.exoProgress.setPlayer(exoPlayer)
+
                 initializePlayerView()
                 setupSeekbarPreview()
 
@@ -862,59 +827,21 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         chaptersBottomSheet = null
     }
 
-    private fun prepareExoPlayerView() {
-        binding.player.apply {
-            useController = false
-            player = exoPlayer
-        }
-
-        playerBinding.exoProgress.setPlayer(exoPlayer)
-    }
-
-    private fun localizeDate(streams: Streams): String {
-        if (streams.livestream) return ""
-
-        return TextUtils.SEPARATOR + TextUtils.localizeDate(streams.uploadDate.toLocalDateSafe())
-    }
-
     @SuppressLint("SetTextI18n")
     private fun initializePlayerView() {
         // initialize the player view actions
         binding.player.initialize(doubleTapOverlayBinding, playerGestureControlsViewBinding)
         binding.player.initPlayerOptions(viewModel, viewLifecycleOwner, trackSelector, this)
+        binding.descriptionLayout.setStreams(streams)
 
         binding.apply {
-            val views = streams.views.formatShort()
-            playerViewsInfo.text = getString(R.string.normal_views, views, localizeDate(streams))
-
-            textLike.text = streams.likes.formatShort()
-            textDislike.isVisible = streams.dislikes >= 0
-            textDislike.text = streams.dislikes.formatShort()
-
             ImageHelper.loadImage(streams.uploaderAvatar, binding.playerChannelImage)
             playerChannelName.text = streams.uploader
-
             titleTextView.text = streams.title
-
-            playerTitle.text = streams.title
-            playerDescription.text = streams.description
-
-            metaInfo.isVisible = streams.metaInfo.isNotEmpty()
-            // generate a meta info text with clickable links using html
-            val metaInfoText = streams.metaInfo.joinToString("\n\n") { info ->
-                val text = info.description.takeIf { it.isNotBlank() } ?: info.title
-                val links = info.urls.mapIndexed { index, url ->
-                    "<a href=\"$url\">${info.urlTexts.getOrNull(index).orEmpty()}</a>"
-                }.joinToString(", ")
-                "$text $links"
-            }
-            metaInfo.text = metaInfoText.parseAsHtml()
-
             playerChannelSubCount.text = context?.getString(
                 R.string.subscribers,
                 streams.uploaderSubscriberCount.formatShort()
             )
-
             player.isLive = streams.livestream
         }
         playerBinding.exoTitle.text = streams.title
@@ -1034,29 +961,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             PictureInPictureCompat.enterPictureInPictureMode(requireActivity(), pipParams)
         }
         initializeRelatedVideos(streams.relatedStreams.filter { !it.title.isNullOrBlank() })
-        // set video description
-        val description = streams.description
-
-        setupDescription(binding.playerDescription, description)
-        val visibility = when (streams.visibility) {
-            "public" -> context?.getString(R.string.visibility_public)
-            "unlisted" -> context?.getString(R.string.visibility_unlisted)
-            // currently no other visibility could be returned, might change in the future however
-            else -> streams.visibility.replaceFirstChar {
-                if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
-            }
-        }.orEmpty()
-        binding.additionalVideoInfo.text =
-            "${context?.getString(R.string.category)}: ${streams.category}\n" +
-            "${context?.getString(R.string.license)}: ${streams.license}\n" +
-            "${context?.getString(R.string.visibility)}: $visibility"
-
-        if (streams.tags.isNotEmpty()) {
-            binding.tagsRecycler.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            binding.tagsRecycler.adapter = VideoTagsAdapter(streams.tags)
-        }
-        binding.tagsRecycler.isVisible = streams.tags.isNotEmpty()
 
         binding.playerChannel.setOnClickListener {
             val activity = view?.context as MainActivity
@@ -1105,22 +1009,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             runCatching {
                 playNextVideo()
             }
-        }
-    }
-
-    /**
-     * Set up the description text with video links and timestamps
-     */
-    private fun setupDescription(descTextView: TextView, description: String) {
-        // detect whether the description is html formatted
-        if (description.contains("<") && description.contains(">")) {
-            descTextView.movementMethod = LinkMovementMethodCompat.getInstance()
-            descTextView.text = description.replace("</a>", "</a> ")
-                .parseAsHtml(tagHandler = HtmlParser(LinkHandler(this::handleLink)))
-        } else {
-            // Links can be present as plain text
-            descTextView.autoLinkMask = Linkify.WEB_URLS
-            descTextView.text = description
         }
     }
 
