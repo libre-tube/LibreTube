@@ -528,4 +528,5 @@
     <string name="segment">Sección</string>
     <string name="undo">Deshacer</string>
     <string name="downvote">No me gusta</string>
+    <string name="repeat_mode_all">Repetir todo</string>
 </resources>
