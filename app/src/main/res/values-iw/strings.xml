@@ -525,4 +525,11 @@
     <string name="autoplay_playlists_summary">לנגן את הסרטון הבא ברשימת הנגינה ללא תלות בהגדרות הנגינה האוטומטית</string>
     <string name="autoplay_playlists">ניגון רשימות נגינה אוטומטית</string>
     <string name="remember_playback_speed">לזכור את מהירות הנגינה</string>
+    <string name="vote_for_segment">הצבעה על מקטע</string>
+    <string name="upvote">למעלה</string>
+    <string name="segment">מקטע</string>
+    <string name="undo">החזרה</string>
+    <string name="repeat_mode_all">לחזור על הכול</string>
+    <string name="segment_submitted">מקטע הוגש</string>
+    <string name="downvote">למטה</string>
 </resources>
