@@ -18,6 +18,7 @@ import androidx.core.net.toUri
 import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
 import androidx.media3.common.PlaybackParameters
+import androidx.media3.common.Player
 import androidx.media3.common.Tracks
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.datasource.cronet.CronetDataSource
@@ -52,6 +53,12 @@ object PlayerHelper {
     const val SPONSOR_HIGHLIGHT_CATEGORY = "poi_highlight"
     const val ROLE_FLAG_AUTO_GEN_SUBTITLE = C.ROLE_FLAG_SUPPLEMENTARY
     const val MINIMUM_BUFFER_DURATION = 1000 * 10 // exo default is 50s
+
+    val repeatModes = listOf(
+        Player.REPEAT_MODE_OFF to R.string.repeat_mode_none,
+        Player.REPEAT_MODE_ONE to R.string.repeat_mode_current,
+        Player.REPEAT_MODE_ALL to R.string.repeat_mode_all
+    )
 
     /**
      * A list of all categories that are not disabled by default

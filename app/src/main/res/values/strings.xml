@@ -270,6 +270,7 @@
     <string name="resize_mode_zoom">Zoom</string>
     <string name="repeat_mode_none">None</string>
     <string name="repeat_mode_current">Current</string>
+    <string name="repeat_mode_all">Repeat all</string>
     <string name="backup_restore">Backup &amp; restore</string>
     <string name="backup">Backup</string>
     <string name="picture_in_picture">Picture-in-Picture</string>
