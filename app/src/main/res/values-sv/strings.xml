@@ -519,4 +519,10 @@
     <string name="autoplay_playlists_summary">Spela automatiskt upp nästa video i spellistor oavsett vald inställning för automatisk uppspelning</string>
     <string name="autoplay_playlists">Automatisk uppspelning av spellistor</string>
     <string name="remember_playback_speed">Kom ihåg uppspelningshastighet</string>
+    <string name="vote_for_segment">Rösta på segment</string>
+    <string name="upvote">Upp</string>
+    <string name="segment">Segment</string>
+    <string name="undo">Ångra</string>
+    <string name="segment_submitted">Segment inlämnat</string>
+    <string name="downvote">Ner</string>
 </resources>
