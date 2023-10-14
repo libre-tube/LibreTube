@@ -8,7 +8,7 @@
     <string name="password">Пароль</string>
     <string name="login">Увайсці</string>
     <string name="logout">Выйсці</string>
-    <string name="cancel">Адмяніць</string>
+    <string name="cancel">Адмена</string>
     <string name="loggedIn">Увайсці ў.</string>
     <string name="loggedout">Выйсці з.</string>
     <string name="instances">Абярыце…</string>
@@ -525,4 +525,10 @@
     <string name="autoplay_playlists_summary">Аўтаматычнае прайграванне наступнага відэа у падборках незалежна ад выбранай налады аўтапрайгравання</string>
     <string name="autoplay_playlists">Аўтапрайграванне падборак</string>
     <string name="remember_playback_speed">Запамінаць хуткасць прайгравання</string>
+    <string name="vote_for_segment">Прагаласаваць за сегмент</string>
+    <string name="upvote">Падняць</string>
+    <string name="segment">Сегмент</string>
+    <string name="undo">Адмяніць</string>
+    <string name="segment_submitted">Сегмент адпраўлены</string>
+    <string name="downvote">Зняважыць</string>
 </resources>

@@ -519,4 +519,10 @@
     <string name="autoplay_playlists_summary">Seçilən avtomatik oynatma tənzimləməsindən asılı olmayaraq pleylistlərdəki növbəti videonu avtomatik oynat</string>
     <string name="autoplay_playlists">Oynatma siyahısın avtomatik oynatmaq</string>
     <string name="remember_playback_speed">Oynatma sürətin xatırla</string>
+    <string name="vote_for_segment">Seqmentə səsvermə</string>
+    <string name="upvote">Yuxarı</string>
+    <string name="segment">Bölüm</string>
+    <string name="undo">Geri al</string>
+    <string name="segment_submitted">Bölüm təqdim edildi</string>
+    <string name="downvote">Aşağı</string>
 </resources>

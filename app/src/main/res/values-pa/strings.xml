@@ -519,4 +519,10 @@
     <string name="autoplay_playlists_summary">ਚੁਣੀ ਹੋਈ ਆਟੋਪਲੇ ਸੈਟਿੰਗ ਦੀ ਪਰਵਾਹ ਕੀਤੇ ਬਿਨਾਂ ਪਲੇਲਿਸਟਾਂ ਵਿੱਚ ਅਗਲੀ ਵੀਡੀਓ ਨੂੰ ਆਟੋਮੈਟਿਕਲੀ ਚਲਾਓ</string>
     <string name="autoplay_playlists">ਪਲੇਲਿਸਟਾਂ ਨੂੰ ਆਟੋਪਲੇ ਕਰੋ</string>
     <string name="remember_playback_speed">ਪਲੇਬੈਕ ਸਪੀਡ ਯਾਦ ਰੱਖੋ</string>
+    <string name="vote_for_segment">ਸੈਗਮੈਂਟ ਲਈ ਵੋਟ ਕਰੋ</string>
+    <string name="upvote">ਅੱਪਵੋਟ ਕਰੋ</string>
+    <string name="segment">ਸੈਗਮੈਂਟ</string>
+    <string name="undo">ਅਣ-ਕੀਤਾ ਕਰੋ</string>
+    <string name="segment_submitted">ਸੈਗਮੈਂਟ ਸਬਮਿੱਟ ਹੋਇਆ</string>
+    <string name="downvote">ਡਾਊਨਵੋਟ ਕਰੋ</string>
 </resources>

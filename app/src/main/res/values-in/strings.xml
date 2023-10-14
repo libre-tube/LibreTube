@@ -516,4 +516,10 @@
     <string name="autoplay_playlists_summary">Putar video berikutnya dalam daftar putar secara otomatis terlepas dari pengaturan pemutaran otomatis yang dipilih</string>
     <string name="autoplay_playlists">Putar daftar putar secara otomatis</string>
     <string name="remember_playback_speed">Ingat kecepatan pemutaran</string>
+    <string name="vote_for_segment">Pilih segmen</string>
+    <string name="upvote">Naikkan</string>
+    <string name="segment">Segmen</string>
+    <string name="undo">Urungkan</string>
+    <string name="segment_submitted">Segmen telah dikirim</string>
+    <string name="downvote">Turunkan</string>
 </resources>
