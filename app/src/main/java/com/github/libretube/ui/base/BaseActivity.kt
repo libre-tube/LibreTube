@@ -13,7 +13,7 @@ import com.github.libretube.helpers.ThemeHelper
  * Activity that applies the LibreTube theme and the in-app language
  */
 open class BaseActivity : AppCompatActivity() {
-    private val screenOrientationPref by lazy {
+    val screenOrientationPref by lazy {
         val orientationPref = PreferenceHelper.getString(
             PreferenceKeys.ORIENTATION,
             resources.getString(R.string.config_default_orientation_pref)

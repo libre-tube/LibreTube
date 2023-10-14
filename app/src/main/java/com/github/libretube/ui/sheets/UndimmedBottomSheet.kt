@@ -1,6 +1,7 @@
 package com.github.libretube.ui.sheets
 
 import android.app.Dialog
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
@@ -21,9 +22,11 @@ abstract class UndimmedBottomSheet : ExpandedBottomSheet() {
             override fun onGlobalLayout() {
                 getDragHandle().viewTreeObserver.removeOnGlobalLayoutListener(this)
 
-                // limit the recyclerview height to not cover the video
-                getBottomSheet().updateLayoutParams {
-                    height = getSheetMaxHeightPx()
+                if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    // limit the recyclerview height to not cover the video
+                    getBottomSheet().updateLayoutParams {
+                        height = getSheetMaxHeightPx()
+                    }
                 }
             }
         })
