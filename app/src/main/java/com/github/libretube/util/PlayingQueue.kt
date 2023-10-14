@@ -7,6 +7,7 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.extensions.move
 import com.github.libretube.extensions.toID
+import com.github.libretube.helpers.PlayerHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,13 +31,8 @@ object PlayingQueue {
      */
     fun add(vararg streamItem: StreamItem, skipExisting: Boolean = false) {
         for (stream in streamItem) {
-            if (skipExisting && contains(stream)) continue
-            if (currentStream?.url?.toID() == stream.url?.toID() ||
-                stream.title.isNullOrBlank()
-            ) {
-                continue
-            }
-            // remove if already present
+            if ((skipExisting && contains(stream)) || stream.title.isNullOrBlank()) continue
+
             queue.remove(stream)
             queue.add(stream)
         }
@@ -119,7 +115,7 @@ object PlayingQueue {
 
     /**
      * Adds a list of videos to the current queue while updating the position of the current stream
-     * @param isMainList: whether the videos are part of the list, that initially has been used to
+     * @param isMainList whether the videos are part of the list that initially has been used to
      * start the queue, either from a channel or playlist. If it's false, the current stream won't
      * be touched, since it's an independent list.
      */
@@ -135,20 +131,17 @@ object PlayingQueue {
         val currentStream = currentStreamItem ?: this.currentStream
         // if the stream already got added to the queue earlier, although it's not yet
         // been found in the playlist, remove it and re-add it later
-        currentStream?.let { stream ->
-            if (streams.includes(stream)) {
-                queue.removeAll {
-                    it.url?.toID() == currentStream.url?.toID()
-                }
-            }
+        var reAddStream = true
+        if (currentStream != null && streams.includes(currentStream)) {
+            queue.removeAll { it.url?.toID() == currentStream.url?.toID() }
+            reAddStream = false
         }
-        // whether the current stream is not yet part of the list and should be added later
-        val reAddStream = currentStream?.let { !queue.includes(it) } ?: false
         // add all new stream items to the queue
         add(*streams.toTypedArray())
-        currentStream?.let {
-            // re-add the stream to the end of the queue,
-            if (reAddStream) updateCurrent(it, false)
+
+        if (currentStream != null && reAddStream) {
+            // re-add the stream to the end of the queue
+            updateCurrent(currentStream, false)
         }
     }
 
@@ -179,10 +172,12 @@ object PlayingQueue {
     private fun fetchMoreFromChannel(channelId: String, nextPage: String?) {
         var channelNextPage = nextPage
         scope.launch(Dispatchers.IO) {
-            while (channelNextPage != null) {
-                RetrofitInstance.api.getChannelNextPage(channelId, nextPage!!).run {
-                    addToQueueAsync(relatedStreams)
-                    channelNextPage = this.nextpage
+            runCatching {
+                while (channelNextPage != null) {
+                    RetrofitInstance.api.getChannelNextPage(channelId, nextPage!!).run {
+                        addToQueueAsync(relatedStreams)
+                        channelNextPage = this.nextpage
+                    }
                 }
             }
         }
@@ -208,14 +203,20 @@ object PlayingQueue {
         }
     }
 
-    fun updateQueue(streamItem: StreamItem, playlistId: String?, channelId: String?) {
+    fun updateQueue(streamItem: StreamItem, playlistId: String?, channelId: String?, relatedStreams: List<StreamItem> = emptyList()) {
         if (playlistId != null) {
             insertPlaylist(playlistId, streamItem)
         } else if (channelId != null) {
             insertChannel(channelId, streamItem)
-        } else {
-            updateCurrent(streamItem)
+        } else if (relatedStreams.isNotEmpty()) {
+            insertRelatedStreams(relatedStreams)
         }
+        updateCurrent(streamItem)
+    }
+
+    fun insertRelatedStreams(streams: List<StreamItem>) {
+        if (!PlayerHelper.autoInsertRelatedVideos) return
+        add(*streams.toTypedArray(), skipExisting = true)
     }
 
     fun onQueueItemSelected(index: Int) {
