@@ -519,4 +519,10 @@
     <string name="autoplay_playlists_summary">चयनित ऑटोप्ले सेटिंग की परवाह किए बिना प्लेलिस्ट में स्वचालित रूप से अगला वीडियो चलाएं</string>
     <string name="autoplay_playlists">ऑटोप्ले प्लेलिस्ट</string>
     <string name="remember_playback_speed">प्लेबैक गति याद रखें</string>
+    <string name="vote_for_segment">सेगमेंट के लिए वोट करें</string>
+    <string name="upvote">अपवोट करें</string>
+    <string name="segment">सेगमेंट</string>
+    <string name="undo">अन-डू करें</string>
+    <string name="segment_submitted">सेगमेंट सबमिट किया गया</string>
+    <string name="downvote">डाउनवोट करें</string>
 </resources>
