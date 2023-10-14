@@ -516,4 +516,10 @@
     <string name="same_as_fullscreen">全画面用 (上記) と同じ</string>
     <string name="remember_playback_speed">再生速度を記憶</string>
     <string name="no_fullscreen_resolution">全画面表示でない時の解像度</string>
+    <string name="vote_for_segment">シーンを評価</string>
+    <string name="upvote">賛成</string>
+    <string name="segment">シーン</string>
+    <string name="undo">元に戻す</string>
+    <string name="segment_submitted">シーンを送信しました</string>
+    <string name="downvote">反対</string>
 </resources>
