@@ -531,4 +531,10 @@
     <string name="autoplay_playlists_summary">تشغيل الفيديو التالي تلقائيًا في قوائم التشغيل بغض النظر عن إعداد التشغيل التلقائي المحدد</string>
     <string name="autoplay_playlists">شغّل قوائم التشغيل تلقائيًا</string>
     <string name="remember_playback_speed">تذكر سرعة التشغيل</string>
+    <string name="vote_for_segment">التصويت للجزء</string>
+    <string name="upvote">فوق</string>
+    <string name="segment">الجزء</string>
+    <string name="undo">تراجع</string>
+    <string name="segment_submitted">تم إرسال الجزء</string>
+    <string name="downvote">أسفل</string>
 </resources>
