@@ -25,7 +25,6 @@ import androidx.core.view.updateLayoutParams
 import androidx.media3.common.C
 import androidx.media3.common.Player
 import androidx.media3.common.text.Cue
-import androidx.media3.common.util.RepeatModeUtil
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.CaptionStyleCompat
@@ -296,10 +295,11 @@ open class CustomExoPlayerView(
             context.getString(R.string.repeat_mode),
             R.drawable.ic_repeat,
             {
-                if (player?.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE) {
-                    context.getString(R.string.repeat_mode_none)
-                } else {
-                    context.getString(R.string.repeat_mode_current)
+                when (PlayingQueue.repeatMode) {
+                    Player.REPEAT_MODE_OFF -> context.getString(R.string.repeat_mode_none)
+                    Player.REPEAT_MODE_ONE -> context.getString(R.string.repeat_mode_current)
+                    Player.REPEAT_MODE_ALL -> context.getString(R.string.repeat_mode_all)
+                    else -> throw IllegalArgumentException()
                 }
             }
         ) {
@@ -527,27 +527,10 @@ open class CustomExoPlayerView(
     }
 
     override fun onRepeatModeClicked() {
-        val repeatModeNames = listOf(
-            context.getString(R.string.repeat_mode_none),
-            context.getString(R.string.repeat_mode_current),
-            context.getString(R.string.all)
-        )
         // repeat mode options dialog
         BaseBottomSheet()
-            .setSimpleItems(repeatModeNames) { index ->
-                PlayingQueue.repeatQueue = when (index) {
-                    0 -> {
-                        player?.repeatMode = Player.REPEAT_MODE_OFF
-                        false
-                    }
-
-                    1 -> {
-                        player?.repeatMode = Player.REPEAT_MODE_ONE
-                        false
-                    }
-
-                    else -> true
-                }
+            .setSimpleItems(PlayerHelper.repeatModes.map { context.getString(it.second) }) { index ->
+                PlayingQueue.repeatMode = PlayerHelper.repeatModes[index].first
             }
             .show(supportFragmentManager)
     }

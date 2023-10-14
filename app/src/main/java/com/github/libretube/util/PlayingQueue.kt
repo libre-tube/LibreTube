@@ -1,6 +1,7 @@
 package com.github.libretube.util
 
 import android.util.Log
+import androidx.media3.common.Player
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.StreamItem
@@ -20,7 +21,7 @@ object PlayingQueue {
      */
     private var onQueueTapListener: (StreamItem) -> Unit = {}
 
-    var repeatQueue: Boolean = false
+    var repeatMode: Int = Player.REPEAT_MODE_OFF
 
     fun clear() = queue.clear()
 
@@ -51,12 +52,30 @@ object PlayingQueue {
     }
 
     // return the next item, or if repeating enabled, the first one of the queue
-    fun getNext(): String? = queue.getOrNull(currentIndex() + 1)?.url?.toID()
-        ?: queue.firstOrNull()?.url?.toID()?.takeIf { repeatQueue }
+    fun getNext(): String? {
+        if (repeatMode != Player.REPEAT_MODE_ONE) {
+            queue.getOrNull(currentIndex() + 1)?.url?.toID()?.let { return it }
+        }
+
+        return when (repeatMode) {
+            Player.REPEAT_MODE_ALL -> queue.firstOrNull()?.url?.toID()
+            Player.REPEAT_MODE_ONE -> currentStream?.url?.toID()
+            else -> null
+        }
+    }
 
     // return the previous item, or if repeating enabled, the last one of the queue
-    fun getPrev(): String? = queue.getOrNull(currentIndex() - 1)?.url?.toID()
-        ?: queue.lastOrNull()?.url?.toID()?.takeIf { repeatQueue }
+    fun getPrev(): String? {
+        if (repeatMode != Player.REPEAT_MODE_ONE) {
+            queue.getOrNull(currentIndex() - 1)?.url?.toID()?.let { return it }
+        }
+
+        return when (repeatMode) {
+            Player.REPEAT_MODE_ALL -> queue.lastOrNull()?.url?.toID()
+            Player.REPEAT_MODE_ONE -> currentStream?.url?.toID()
+            else -> null
+        }
+    }
 
     fun hasPrev() = getPrev() != null
 
@@ -214,7 +233,7 @@ object PlayingQueue {
     }
 
     fun resetToDefaults() {
-        repeatQueue = false
+        repeatMode = Player.REPEAT_MODE_OFF
         onQueueTapListener = {}
     }
 

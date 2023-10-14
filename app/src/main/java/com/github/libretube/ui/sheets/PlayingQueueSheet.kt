@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.media3.common.Player
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -77,10 +78,15 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
         }
 
         binding.repeat.setOnClickListener {
-            PlayingQueue.repeatQueue = !PlayingQueue.repeatQueue
-            it.alpha = if (PlayingQueue.repeatQueue) 1f else 0.5f
+            // select the next available repeat mode
+            PlayingQueue.repeatMode = when (PlayingQueue.repeatMode) {
+                Player.REPEAT_MODE_OFF -> Player.REPEAT_MODE_ONE
+                Player.REPEAT_MODE_ONE -> Player.REPEAT_MODE_ALL
+                else -> Player.REPEAT_MODE_OFF
+            }
+            updateRepeatButton()
         }
-        binding.repeat.alpha = if (PlayingQueue.repeatQueue) 1f else 0.5f
+        updateRepeatButton()
 
         binding.clearQueue.setOnClickListener {
             val currentIndex = PlayingQueue.currentIndex()
@@ -133,6 +139,12 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
 
         val itemTouchHelper = ItemTouchHelper(callback)
         itemTouchHelper.attachToRecyclerView(binding.optionsRecycler)
+    }
+
+    private fun updateRepeatButton() {
+        binding.repeat.alpha = if (PlayingQueue.repeatMode == Player.REPEAT_MODE_OFF) 0.5f else 1f
+        val drawableResource = if (PlayingQueue.repeatMode == Player.REPEAT_MODE_ONE) R.drawable.ic_repeat_one else R.drawable.ic_repeat
+        binding.repeat.setImageResource(drawableResource)
     }
 
     @SuppressLint("NotifyDataSetChanged")
