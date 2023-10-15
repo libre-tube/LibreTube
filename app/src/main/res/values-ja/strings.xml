@@ -522,4 +522,5 @@
     <string name="undo">元に戻す</string>
     <string name="segment_submitted">セグメントを送信しました</string>
     <string name="downvote">反対</string>
+    <string name="repeat_mode_all">すべてリピート</string>
 </resources>
