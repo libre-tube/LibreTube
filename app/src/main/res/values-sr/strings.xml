@@ -528,4 +528,5 @@
     <string name="undo">Опозови</string>
     <string name="segment_submitted">Сегмент је послат</string>
     <string name="downvote">Гласај против</string>
+    <string name="repeat_mode_all">Понављај све</string>
 </resources>
