@@ -525,4 +525,5 @@
     <string name="undo">Geri al</string>
     <string name="segment_submitted">Bölüm təqdim edildi</string>
     <string name="downvote">Aşağı</string>
+    <string name="repeat_mode_all">Hamısın təkrarla</string>
 </resources>
