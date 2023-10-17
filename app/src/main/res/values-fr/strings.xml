@@ -519,4 +519,14 @@
     <string name="music_artists">Artistes YT Music</string>
     <string name="playback_during_call">Continuer la lecture pendant un appel téléphonique</string>
     <string name="same_as_fullscreen">Identique au plein écran</string>
+    <string name="autoplay_playlists_summary">Lecture automatique de la vidéo suivante dans les listes de lecture, quel que soit le paramètre de lecture automatique sélectionné</string>
+    <string name="vote_for_segment">Voter pour le segment</string>
+    <string name="upvote">En haut</string>
+    <string name="segment">Segment</string>
+    <string name="undo">Annuler</string>
+    <string name="repeat_mode_all">Répéter tout</string>
+    <string name="segment_submitted">Segment soumis</string>
+    <string name="autoplay_playlists">Listes de lecture automatiques</string>
+    <string name="remember_playback_speed">Mémoriser la vitesse de lecture</string>
+    <string name="downvote">En bas</string>
 </resources>
