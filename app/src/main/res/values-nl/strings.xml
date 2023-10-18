@@ -519,4 +519,11 @@
     <string name="autoplay_playlists_summary">Volgende video in afspeellijsten automatisch afspelen onafhankelijk van de geselecteerde instelling voor automatisch afspelen</string>
     <string name="autoplay_playlists">Afspeel­lijsten automatisch afspelen</string>
     <string name="remember_playback_speed">Afspeel­snelheid onthouden</string>
+    <string name="vote_for_segment">Stem voor segment</string>
+    <string name="upvote">Omhoog</string>
+    <string name="segment">Segment</string>
+    <string name="undo">Ongedaan maken</string>
+    <string name="repeat_mode_all">Herhaal alles</string>
+    <string name="segment_submitted">Segment verzonden</string>
+    <string name="downvote">Omlaag</string>
 </resources>
