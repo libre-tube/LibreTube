@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Gravity
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.res.use
 import com.github.libretube.R
 
 /**
@@ -16,30 +17,26 @@ class DrawableTextView(
     context: Context,
     attrs: AttributeSet? = null
 ) : AppCompatTextView(context, attrs) {
-
     private var drawableStartDimen = 0F
     private var drawableTopDimen = 0F
     private var drawableEndDimen = 0F
     private var drawableBottomDimen = 0F
 
     init {
-        val ta = getContext().obtainStyledAttributes(attrs, R.styleable.DrawableTextView, 0, 0)
-        try {
-            drawableStartDimen = getDimen(ta, R.styleable.DrawableTextView_drawableStartDimen)
-            drawableTopDimen = getDimen(ta, R.styleable.DrawableTextView_drawableTopDimen)
-            drawableEndDimen = getDimen(ta, R.styleable.DrawableTextView_drawableEndDimen)
-            drawableBottomDimen = getDimen(ta, R.styleable.DrawableTextView_drawableBottomDimen)
+        context.obtainStyledAttributes(attrs, R.styleable.DrawableTextView).use {
+            drawableStartDimen = getDimen(it, R.styleable.DrawableTextView_drawableStartDimen)
+            drawableTopDimen = getDimen(it, R.styleable.DrawableTextView_drawableTopDimen)
+            drawableEndDimen = getDimen(it, R.styleable.DrawableTextView_drawableEndDimen)
+            drawableBottomDimen = getDimen(it, R.styleable.DrawableTextView_drawableBottomDimen)
 
-            gravity = ta.getInt(
+            gravity = it.getInt(
                 R.styleable.DrawableTextView_android_gravity,
                 Gravity.CENTER_VERTICAL
             )
-            compoundDrawablePadding = ta.getDimensionPixelOffset(
+            compoundDrawablePadding = it.getDimensionPixelOffset(
                 R.styleable.DrawableTextView_android_drawablePadding,
                 20
             )
-        } finally {
-            ta.recycle()
         }
     }
 
