@@ -511,4 +511,19 @@
     <string name="tooltip_sort">چیدن</string>
     <string name="tooltip_watch_position">موقعیت دیدن</string>
     <string name="proxy">پیشکار</string>
+    <string name="autoplay_playlists_summary">پخش‌خودکار ویدیوی بعدی در سیاههٔ پخش بدون توجّه به تنظیمات پخش خودکار گزیده</string>
+    <string name="vote_for_segment">رأی برای بخش</string>
+    <string name="upvote">بالا</string>
+    <string name="segment">بخش</string>
+    <string name="no_fullscreen_resolution">تفکیک غیر تمام‌صفحه</string>
+    <string name="undo">برگردان</string>
+    <string name="repeat_mode_all">تکرار همه</string>
+    <string name="playback_during_call_summary">توجّه داشته باشید که این کار باعث می‌شوذ کاره دیگر هیچ گونه تمرکز صوتی‌ای را مدیریت نکند.</string>
+    <string name="segment_submitted">بخش ثبت شد</string>
+    <string name="music_artists">هنرمندان آهنگ‌های یوتوب</string>
+    <string name="playback_during_call">ادامهٔ پخش در طول تماس تلفنی</string>
+    <string name="autoplay_playlists">پخش خودکار سیاههٔ پخش</string>
+    <string name="same_as_fullscreen">همانند تمام‌صفحه</string>
+    <string name="remember_playback_speed">به یاد سپردن سرعت پخش</string>
+    <string name="downvote">پایین</string>
 </resources>

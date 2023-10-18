@@ -528,4 +528,5 @@
     <string name="undo">Desfazer</string>
     <string name="segment_submitted">Segmento submetido</string>
     <string name="downvote">Não gosto</string>
+    <string name="repeat_mode_all">Repetir tudo</string>
 </resources>

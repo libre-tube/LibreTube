@@ -525,4 +525,5 @@
     <string name="undo">अन-डू करें</string>
     <string name="segment_submitted">सेगमेंट सबमिट किया गया</string>
     <string name="downvote">डाउनवोट करें</string>
+    <string name="repeat_mode_all">सभी को दोहराएँ</string>
 </resources>

@@ -516,4 +516,14 @@
     <string name="music_artists">YT-musikkartister</string>
     <string name="playback_during_call">Fortsett avspilling under telefonsamtale</string>
     <string name="same_as_fullscreen">Samme som fullskjermsvisning</string>
+    <string name="autoplay_playlists_summary">Spill neste video i spillelisten automatisk uavhengig av valgt innstilling</string>
+    <string name="vote_for_segment">Stem på segment</string>
+    <string name="upvote">Oppover</string>
+    <string name="segment">Segment</string>
+    <string name="undo">Angre</string>
+    <string name="repeat_mode_all">Gjenta alle</string>
+    <string name="segment_submitted">Segment innsendt</string>
+    <string name="autoplay_playlists">Autospill spillelister</string>
+    <string name="remember_playback_speed">Husk avspillingshastighet</string>
+    <string name="downvote">Nedover</string>
 </resources>

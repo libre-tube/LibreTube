@@ -522,4 +522,5 @@
     <string name="undo">撤销</string>
     <string name="segment_submitted">已提交分段</string>
     <string name="downvote">踩</string>
+    <string name="repeat_mode_all">重复全部</string>
 </resources>

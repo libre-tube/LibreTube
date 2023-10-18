@@ -135,7 +135,7 @@
     <string name="clear_customInstances">Удалить добавленные</string>
     <string name="related_streams_summary">Показывать связанные видео рядом с тем, что вы смотрите.</string>
     <string name="invalid_url">Пожалуйста, введите рабочий URL</string>
-    <string name="buffering_goal">Предварительная загрузка</string>
+    <string name="buffering_goal">Предзагрузка</string>
     <string name="downloads">Загрузки</string>
     <string name="update_summary">Проверить наличие обновлений</string>
     <string name="app_uptodate">Используется последняя версия.</string>
@@ -166,7 +166,7 @@
     <string name="deleteAccount">Удалить аккаунт</string>
     <string name="deleteAccount_summary">Удалить свой аккаунт Piped</string>
     <string name="account">Аккаунт</string>
-    <string name="restore">Восстановить из резервной копии</string>
+    <string name="restore">Восстановить из копии</string>
     <string name="watch_history">История просмотра</string>
     <string name="watch_positions">Сохранить позицию</string>
     <string name="auth_instance">Сервер аутентификации</string>
@@ -244,13 +244,13 @@
     <string name="no_subtitles_available">Субтитры отсутствуют</string>
     <string name="repeat_mode">Повтор</string>
     <string name="backup_restore">Резервное копирование и восстановление</string>
-    <string name="backup">Создать резервную копию</string>
-    <string name="picture_in_picture">Картинка в картинке</string>
-    <string name="resize_mode_fit">исходный</string>
-    <string name="resize_mode_fill">растянутый</string>
-    <string name="resize_mode_zoom">увеличенный</string>
-    <string name="repeat_mode_none">отключен</string>
-    <string name="repeat_mode_current">текущий</string>
+    <string name="backup">Создать копию</string>
+    <string name="picture_in_picture">Картинка в картинке (PiP)</string>
+    <string name="resize_mode_fit">Исходный</string>
+    <string name="resize_mode_fill">Заполнение</string>
+    <string name="resize_mode_zoom">Приближенный</string>
+    <string name="repeat_mode_none">Нет</string>
+    <string name="repeat_mode_current">Текущий</string>
     <string name="player_resize_mode">Размер изображения</string>
     <string name="maximum_image_cache">Максимальный размер кэша изображений</string>
     <string name="copied_to_clipboard">Скопировано в буфер обмена</string>
@@ -531,4 +531,5 @@
     <string name="undo">Отмена</string>
     <string name="segment_submitted">Сегмент отправлен</string>
     <string name="downvote">Понизить</string>
+    <string name="repeat_mode_all">Все</string>
 </resources>

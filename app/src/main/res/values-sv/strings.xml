@@ -525,4 +525,5 @@
     <string name="undo">Ångra</string>
     <string name="segment_submitted">Segment inlämnat</string>
     <string name="downvote">Ner</string>
+    <string name="repeat_mode_all">Repetera alla</string>
 </resources>

@@ -528,4 +528,5 @@
     <string name="segment">Segment</string>
     <string name="undo">Zrušit</string>
     <string name="downvote">Proti</string>
+    <string name="repeat_mode_all">Opakovat vše</string>
 </resources>
