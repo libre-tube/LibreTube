@@ -62,6 +62,8 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import okio.buffer
 import okio.sink
 import okio.source
@@ -115,7 +117,7 @@ class DownloadService : LifecycleService() {
                     streams.title,
                     streams.description,
                     streams.uploader,
-                    streams.uploadDate,
+                    streams.uploadTimestamp.toLocalDateTime(TimeZone.currentSystemDefault()).date,
                     thumbnailTargetPath
                 )
                 Database.downloadDao().insertDownload(download)
