@@ -15,11 +15,12 @@ import com.github.libretube.R
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.databinding.DescriptionLayoutBinding
 import com.github.libretube.extensions.formatShort
-import com.github.libretube.extensions.toLocalDateSafe
 import com.github.libretube.ui.activities.VideoTagsAdapter
 import com.github.libretube.util.HtmlParser
 import com.github.libretube.util.LinkHandler
 import com.github.libretube.util.TextUtils
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import java.util.Locale
 
 class DescriptionLayout(
@@ -135,7 +136,8 @@ class DescriptionLayout(
     private fun localizeDate(streams: Streams): String {
         if (streams.livestream) return ""
 
-        return TextUtils.SEPARATOR + TextUtils.localizeDate(streams.uploadDate.toLocalDateSafe())
+        val date = streams.uploadTimestamp.toLocalDateTime(TimeZone.currentSystemDefault()).date
+        return TextUtils.SEPARATOR + TextUtils.localizeDate(date)
     }
 
     companion object {
