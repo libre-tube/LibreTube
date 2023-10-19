@@ -183,7 +183,7 @@ class OfflinePlayerActivity : BaseActivity() {
                     val subtitleSource = SingleSampleMediaSource.Factory(FileDataSource.Factory())
                         .createMediaSource(subtitle, C.TIME_UNSET)
 
-                    mediaSource = MergingMediaSource(subtitleSource, mediaSource)
+                    mediaSource = MergingMediaSource(mediaSource, subtitleSource)
                 }
 
                 player.setMediaSource(mediaSource)
