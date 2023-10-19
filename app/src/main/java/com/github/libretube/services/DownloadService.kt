@@ -167,7 +167,7 @@ class DownloadService : LifecycleService() {
         val url = URL(item.url ?: return)
 
         // only fetch the content length if it's not been returned by the API
-        if (item.downloadSize == 0L) {
+        if (item.downloadSize <= 0L) {
             url.getContentLength()?.let { size ->
                 item.downloadSize = size
                 Database.downloadDao().updateDownloadItem(item)

@@ -18,6 +18,7 @@ import androidx.media3.datasource.FileDataSource
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.source.MergingMediaSource
 import androidx.media3.exoplayer.source.ProgressiveMediaSource
+import androidx.media3.exoplayer.source.SingleSampleMediaSource
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.media3.ui.PlayerView
 import com.github.libretube.compat.PictureInPictureCompat
@@ -36,10 +37,11 @@ import com.github.libretube.ui.interfaces.TimeFrameReceiver
 import com.github.libretube.ui.listeners.SeekbarPreviewListener
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.util.OfflineTimeFrameReceiver
-import kotlin.io.path.exists
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.io.path.exists
+
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class OfflinePlayerActivity : BaseActivity() {
@@ -156,7 +158,8 @@ class OfflinePlayerActivity : BaseActivity() {
     private fun setMediaSource(videoUri: Uri?, audioUri: Uri?, subtitleUri: Uri?) {
         val subtitle = subtitleUri?.let {
             SubtitleConfiguration.Builder(it)
-                .setMimeType(MimeTypes.APPLICATION_SUBRIP)
+                .setMimeType(MimeTypes.APPLICATION_TTML)
+                .setLanguage("en")
                 .build()
         }
 
@@ -175,7 +178,13 @@ class OfflinePlayerActivity : BaseActivity() {
                 val audioSource = ProgressiveMediaSource.Factory(FileDataSource.Factory())
                     .createMediaSource(MediaItem.fromUri(audioUri))
 
-                val mediaSource = MergingMediaSource(audioSource, videoSource)
+                var mediaSource = MergingMediaSource(audioSource, videoSource)
+                if (subtitle != null) {
+                    val subtitleSource = SingleSampleMediaSource.Factory(FileDataSource.Factory())
+                        .createMediaSource(subtitle, C.TIME_UNSET)
+
+                    mediaSource = MergingMediaSource(subtitleSource, mediaSource)
+                }
 
                 player.setMediaSource(mediaSource)
             }
