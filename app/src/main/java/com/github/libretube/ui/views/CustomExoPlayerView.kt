@@ -144,7 +144,7 @@ open class CustomExoPlayerView(
             // change locked status
             isPlayerLocked = !isPlayerLocked
 
-            activity.toggleSystemBars(
+            activity.window.toggleSystemBars(
                 types = WindowInsetsCompat.Type.statusBars(),
                 showBars = !isPlayerLocked
             )

@@ -1,6 +1,7 @@
 package com.github.libretube.ui.fragments
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -18,6 +19,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
@@ -29,6 +31,7 @@ import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
@@ -89,6 +92,7 @@ import com.github.libretube.helpers.PlayerHelper.getVideoStats
 import com.github.libretube.helpers.PlayerHelper.isInSegment
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
+import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.obj.ShareData
 import com.github.libretube.obj.VideoResolution
@@ -100,6 +104,7 @@ import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.setupSubscriptionButton
+import com.github.libretube.ui.extensions.toggleSystemBars
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.listeners.SeekbarPreviewListener
 import com.github.libretube.ui.models.CommentsViewModel
@@ -192,6 +197,15 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     private var scrubbingTimeBar = false
     private var chaptersBottomSheet: ChaptersBottomSheet? = null
+
+    private val fullscreenDialog by lazy {
+        object: Dialog(requireContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen) {
+            override fun onBackPressed() {
+                super.onBackPressed()
+                unsetFullscreen()
+            }
+        }
+    }
 
     /**
      * Receiver for all actions in the PiP mode
@@ -513,13 +527,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // set status bar icon color to white
         windowInsetsControllerCompat.isAppearanceLightStatusBars = false
 
-        binding.mainContainer.isClickable = true
-        binding.linLayout.isGone = true
-
-        binding.player.updateLayoutParams<ConstraintLayout.LayoutParams> {
-            endToEnd = binding.playerMotionLayout.id
-        }
-
         if (mainActivity.screenOrientationPref == ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT) {
             val height = streams.videoStreams.firstOrNull()?.height ?: exoPlayer.videoSize.height
             val width = streams.videoStreams.firstOrNull()?.width ?: exoPlayer.videoSize.width
@@ -534,11 +541,16 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         viewModel.isFullscreen.value = true
 
         updateResolutionOnFullscreenChange(true)
+
+        val playerView = binding.player
+        (binding.player.parent as ViewGroup).removeView(playerView)
+        fullscreenDialog.addContentView(binding.player, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
+        fullscreenDialog.show()
+        WindowHelper.toggleFullscreen(fullscreenDialog.window!!, true)
     }
 
     @SuppressLint("SourceLockedOrientationActivity")
     fun unsetFullscreen() {
-        // leave fullscreen mode
         with(binding.playerMotionLayout) {
             getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
             enableTransition(R.id.yt_transition, true)
@@ -552,10 +564,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 else -> true
             }
 
-        binding.mainContainer.isClickable = false
-        binding.linLayout.isVisible = true
-        binding.relatedContainer?.isVisible = true
-
         if (mainActivity.screenOrientationPref == ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT) {
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
         }
@@ -565,6 +573,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         viewModel.isFullscreen.value = false
         updateResolutionOnFullscreenChange(false)
+
+        val playerView = binding.player
+        (playerView.parent as ViewGroup).removeView(playerView)
+        binding.playerMotionLayout.addView(playerView)
+        fullscreenDialog.dismiss()
     }
 
     override fun onPause() {

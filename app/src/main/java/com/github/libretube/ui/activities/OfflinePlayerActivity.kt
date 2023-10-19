@@ -54,7 +54,7 @@ class OfflinePlayerActivity : BaseActivity() {
     private val playerViewModel: PlayerViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        WindowHelper.toggleFullscreen(this, true)
+        WindowHelper.toggleFullscreen(window, true)
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
 
