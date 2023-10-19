@@ -45,7 +45,7 @@
                     android:id="@+id/speed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:stepSize="0.1"
+                    android:stepSize="0.05"
                     android:value="1.0"
                     android:valueFrom="0.2"
                     android:valueTo="4.0" />
