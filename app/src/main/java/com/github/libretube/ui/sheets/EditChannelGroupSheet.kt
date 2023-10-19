@@ -72,7 +72,11 @@ class EditChannelGroupSheet : ExpandedBottomSheet() {
     }
 
     private fun saveGroup(group: SubscriptionGroup, oldGroupName: String) {
-        channelGroupsModel.groups.value = channelGroupsModel.groups.value?.plus(group)
+        // delete the old instance if the group already existed and add the updated/new one
+        channelGroupsModel.groups.value = channelGroupsModel.groups.value
+            ?.filter { it.name != oldGroupName }
+            ?.plus(group)
+
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
                 // delete the old one as it might have a different name
