@@ -11,6 +11,7 @@ import android.text.format.DateUtils
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.view.Window
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -89,6 +90,12 @@ open class CustomExoPlayerView(
         }
 
     /**
+     * The window that needs to be addressed for showing and hiding the system bars
+     * If null, the activity's default/main window will be used
+     */
+    var currentWindow: Window? = null
+
+    /**
      * Preferences
      */
     private var resizeModePref = PlayerHelper.resizeModePref
@@ -144,7 +151,7 @@ open class CustomExoPlayerView(
             // change locked status
             isPlayerLocked = !isPlayerLocked
 
-            activity.window.toggleSystemBars(
+            (currentWindow ?: activity.window).toggleSystemBars(
                 types = WindowInsetsCompat.Type.statusBars(),
                 showBars = !isPlayerLocked
             )

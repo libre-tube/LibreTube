@@ -15,7 +15,6 @@ import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
 import android.text.format.DateUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,19 +22,15 @@ import android.view.ViewGroup.LayoutParams
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.toDrawable
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
-import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
@@ -104,7 +99,6 @@ import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.setupSubscriptionButton
-import com.github.libretube.ui.extensions.toggleSystemBars
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.listeners.SeekbarPreviewListener
 import com.github.libretube.ui.models.CommentsViewModel
@@ -519,11 +513,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private fun setFullscreen() {
-        with(binding.playerMotionLayout) {
-            getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
-            enableTransition(R.id.yt_transition, false)
-        }
-
         // set status bar icon color to white
         windowInsetsControllerCompat.isAppearanceLightStatusBars = false
 
@@ -542,20 +531,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         updateResolutionOnFullscreenChange(true)
 
-        val playerView = binding.player
-        (binding.player.parent as ViewGroup).removeView(playerView)
-        fullscreenDialog.addContentView(binding.player, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
-        fullscreenDialog.show()
-        WindowHelper.toggleFullscreen(fullscreenDialog.window!!, true)
+        openOrCloseFullscreenDialog(true)
     }
 
     @SuppressLint("SourceLockedOrientationActivity")
     fun unsetFullscreen() {
-        with(binding.playerMotionLayout) {
-            getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
-            enableTransition(R.id.yt_transition, true)
-        }
-
         // set status bar icon color back to theme color
         windowInsetsControllerCompat.isAppearanceLightStatusBars =
             when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
@@ -574,10 +554,27 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         viewModel.isFullscreen.value = false
         updateResolutionOnFullscreenChange(false)
 
+        openOrCloseFullscreenDialog(false)
+    }
+
+    private fun openOrCloseFullscreenDialog(open: Boolean) {
         val playerView = binding.player
         (playerView.parent as ViewGroup).removeView(playerView)
-        binding.playerMotionLayout.addView(playerView)
-        fullscreenDialog.dismiss()
+
+        if (open) {
+            fullscreenDialog.addContentView(
+                binding.player,
+                LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+            )
+            fullscreenDialog.show()
+            playerView.currentWindow = fullscreenDialog.window
+        } else {
+            binding.playerMotionLayout.addView(playerView)
+            playerView.currentWindow = null
+            fullscreenDialog.dismiss()
+        }
+
+        WindowHelper.toggleFullscreen(fullscreenDialog.window!!, open)
     }
 
     override fun onPause() {
@@ -1482,13 +1479,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 viewModel.isMiniPlayerVisible.value = false
             }
 
-            with(binding.playerMotionLayout) {
-                getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
-                enableTransition(R.id.yt_transition, false)
-            }
-            binding.linLayout.isGone = true
-
             updateCurrentSubtitle(null)
+
+            openOrCloseFullscreenDialog(true)
         } else {
             // close button got clicked in PiP mode
             // pause the video and keep the app alive
@@ -1497,20 +1490,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             // enable exoPlayer controls again
             binding.player.useController = true
 
-            // set back to portrait mode
-            if (viewModel.isFullscreen.value != true) {
-                with(binding.playerMotionLayout) {
-                    getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
-                    enableTransition(R.id.yt_transition, true)
-                }
-                binding.linLayout.isVisible = true
-            }
-
             updateCurrentSubtitle(currentSubtitle)
 
             binding.optionsLL.post {
                 binding.optionsLL.requestLayout()
             }
+
+            openOrCloseFullscreenDialog(false)
         }
     }
 
