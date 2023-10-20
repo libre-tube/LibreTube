@@ -525,4 +525,11 @@
     <string name="autoplay_playlists">Automatyczne odtwarzanie list odtwarzania</string>
     <string name="same_as_fullscreen">Tak samo jak w trybie pełnoekranowym</string>
     <string name="remember_playback_speed">Zapamiętaj prędkość odtwarzania</string>
+    <string name="vote_for_segment">Zagłosuj na segment</string>
+    <string name="upvote">W górę</string>
+    <string name="segment">Segment</string>
+    <string name="undo">Cofnij</string>
+    <string name="repeat_mode_all">Powtarzaj wszystkie</string>
+    <string name="segment_submitted">Przesłano segment</string>
+    <string name="downvote">W dół</string>
 </resources>

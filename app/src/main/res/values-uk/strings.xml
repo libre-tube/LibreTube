@@ -531,4 +531,5 @@
     <string name="undo">Скасувати</string>
     <string name="segment_submitted">Сегмент надіслано</string>
     <string name="downvote">Понизити</string>
+    <string name="repeat_mode_all">Повторити все</string>
 </resources>
