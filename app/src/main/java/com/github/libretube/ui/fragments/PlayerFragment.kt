@@ -20,6 +20,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import android.widget.Toast
+import android.window.OnBackInvokedDispatcher
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.content.getSystemService
@@ -192,6 +193,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private var scrubbingTimeBar = false
     private var chaptersBottomSheet: ChaptersBottomSheet? = null
 
+    /**
+     * The orientation of the `fragment_player.xml` that's currently used
+     * This is needed in order to figure out if the current layout is the landscape one or not.
+     */
+    private var playerLayoutOrientation = Int.MIN_VALUE
+
     private val fullscreenDialog by lazy {
         object: Dialog(requireContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen) {
             override fun onBackPressed() {
@@ -248,6 +255,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         channelId = playerData.channelId
         keepQueue = playerData.keepQueue
         timeStamp = playerData.timestamp
+
+        playerLayoutOrientation = resources.configuration.orientation
 
         // broadcast receiver for PiP actions
         context?.registerReceiver(
@@ -518,6 +527,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // set status bar icon color to white
         windowInsetsControllerCompat.isAppearanceLightStatusBars = false
 
+        viewModel.isFullscreen.value = true
+
         if (mainActivity.screenOrientationPref == ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT) {
             val height = streams.videoStreams.firstOrNull()?.height ?: exoPlayer.videoSize.height
             val width = streams.videoStreams.firstOrNull()?.width ?: exoPlayer.videoSize.width
@@ -528,8 +539,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         commentsViewModel.setCommentSheetExpand(null)
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
         playerBinding.exoTitle.isVisible = true
-
-        viewModel.isFullscreen.value = true
 
         updateResolutionOnFullscreenChange(true)
 
@@ -546,6 +555,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 else -> true
             }
 
+        viewModel.isFullscreen.value = false
+
         if (mainActivity.screenOrientationPref == ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT) {
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
         }
@@ -553,10 +564,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
         playerBinding.exoTitle.isInvisible = true
 
-        viewModel.isFullscreen.value = false
         updateResolutionOnFullscreenChange(false)
 
         openOrCloseFullscreenDialog(false)
+
+        checkForNecessaryOrientationRestart()
     }
 
     private fun openOrCloseFullscreenDialog(open: Boolean) {
@@ -1578,6 +1590,24 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         onDestroy()
     }
 
+    /**
+     * Check if the activity needs to be recreated due to an orientation change
+     * If true, the activity will be automatically restarted
+     */
+    private fun checkForNecessaryOrientationRestart() {
+        val lockedOrientations = listOf(ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
+        if (mainActivity.screenOrientationPref in lockedOrientations) return
+
+        val orientation = resources.configuration.orientation
+        if (viewModel.isFullscreen.value != true && orientation != playerLayoutOrientation) {
+            if (this::exoPlayer.isInitialized) {
+                arguments?.putLong(IntentData.timeStamp, exoPlayer.currentPosition / 1000)
+            }
+            playerLayoutOrientation = orientation
+            activity?.recreate()
+        }
+    }
+
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
 
@@ -1595,11 +1625,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 // exit fullscreen if not landscape
                 else -> unsetFullscreen()
             }
-        } else if (viewModel.isFullscreen.value != true) {
-            if (this::exoPlayer.isInitialized) {
-                arguments?.putLong(IntentData.timeStamp, exoPlayer.currentPosition / 1000)
-            }
-            activity?.recreate()
+        } else {
+            checkForNecessaryOrientationRestart()
         }
     }
 }
