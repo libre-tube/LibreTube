@@ -33,9 +33,10 @@
     <ConstraintSet android:id="@+id/start">
         <Constraint
             android:id="@+id/player"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             motion:layout_constraintBottom_toBottomOf="@id/main_container"
+            motion:layout_constraintEnd_toEndOf="@id/main_container"
             motion:layout_constraintStart_toStartOf="@id/main_container"
             motion:layout_constraintTop_toTopOf="@id/main_container" />
         <Constraint android:id="@+id/doubleTapOverlay" />

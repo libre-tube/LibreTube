@@ -145,7 +145,7 @@ class OnlinePlayerView(
         this.playerOptions = playerOptions
 
         playerViewModel.isFullscreen.observe(viewLifecycleOwner) { isFullscreen ->
-            WindowHelper.toggleFullscreen(activity, isFullscreen)
+            WindowHelper.toggleFullscreen(activity.window, isFullscreen)
             updateTopBarMargin()
         }
 
@@ -154,7 +154,7 @@ class OnlinePlayerView(
                 playerViewModel.isFullscreen.value?.let { isFullscreen ->
                     if (!isFullscreen) return@let
                     // Show status bar only not navigation bar if the player controls are visible and hide it otherwise
-                    activity.toggleSystemBars(
+                    activity.window.toggleSystemBars(
                         types = WindowInsetsCompat.Type.statusBars(),
                         showBars = visibility == View.VISIBLE && !isPlayerLocked
                     )
@@ -189,7 +189,7 @@ class OnlinePlayerView(
         super.hideController()
 
         if (playerViewModel?.isFullscreen?.value == true) {
-            WindowHelper.toggleFullscreen(activity, true)
+            WindowHelper.toggleFullscreen(activity.window, true)
         }
         updateTopBarMargin()
     }

@@ -13,13 +13,13 @@ class OfflinePlayerView(
     override fun hideController() {
         super.hideController()
         // hide the status bars when continuing to watch video
-        activity.toggleSystemBars(WindowInsetsCompat.Type.systemBars(), false)
+        activity.window.toggleSystemBars(WindowInsetsCompat.Type.systemBars(), false)
     }
 
     override fun showController() {
         super.showController()
         // show status bar when showing player options
-        activity.toggleSystemBars(WindowInsetsCompat.Type.statusBars(), true)
+        activity.window.toggleSystemBars(WindowInsetsCompat.Type.statusBars(), true)
     }
 
     override fun getTopBarMarginDp(): Int {

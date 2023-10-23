@@ -486,8 +486,8 @@ class MainActivity : BaseActivity() {
         super.onConfigurationChanged(newConfig)
 
         when (newConfig.orientation) {
-            Configuration.ORIENTATION_PORTRAIT -> WindowHelper.toggleFullscreen(this, false)
-            Configuration.ORIENTATION_LANDSCAPE -> WindowHelper.toggleFullscreen(this, true)
+            Configuration.ORIENTATION_PORTRAIT -> WindowHelper.toggleFullscreen(window, false)
+            Configuration.ORIENTATION_LANDSCAPE -> WindowHelper.toggleFullscreen(window, true)
         }
     }
 

@@ -1,6 +1,7 @@
 package com.github.libretube.ui.fragments
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -17,7 +18,9 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams
 import android.widget.Toast
+import android.window.OnBackInvokedDispatcher
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.content.getSystemService
@@ -85,12 +88,14 @@ import com.github.libretube.helpers.PlayerHelper.getVideoStats
 import com.github.libretube.helpers.PlayerHelper.isInSegment
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
+import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.obj.ShareData
 import com.github.libretube.obj.VideoResolution
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.VideosAdapter
+import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
@@ -189,6 +194,21 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private var chaptersBottomSheet: ChaptersBottomSheet? = null
 
     /**
+     * The orientation of the `fragment_player.xml` that's currently used
+     * This is needed in order to figure out if the current layout is the landscape one or not.
+     */
+    private var playerLayoutOrientation = Int.MIN_VALUE
+
+    private val fullscreenDialog by lazy {
+        object: Dialog(requireContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen) {
+            override fun onBackPressed() {
+                super.onBackPressed()
+                unsetFullscreen()
+            }
+        }
+    }
+
+    /**
      * Receiver for all actions in the PiP mode
      */
     private val broadcastReceiver = object : BroadcastReceiver() {
@@ -235,6 +255,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         channelId = playerData.channelId
         keepQueue = playerData.keepQueue
         timeStamp = playerData.timestamp
+
+        playerLayoutOrientation = resources.configuration.orientation
 
         // broadcast receiver for PiP actions
         context?.registerReceiver(
@@ -365,17 +387,19 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             .isPictureInPictureAvailable(activity)
     }
 
+    private fun onManualPlayerClose() {
+        PlayingQueue.clear()
+        BackgroundHelper.stopBackgroundPlay(requireContext())
+        killPlayerFragment()
+    }
+
     // actions that don't depend on video information
     private fun initializeOnClickActions() {
         binding.closeImageView.setOnClickListener {
-            PlayingQueue.clear()
-            BackgroundHelper.stopBackgroundPlay(requireContext())
-            killPlayerFragment()
+            onManualPlayerClose()
         }
         playerBinding.closeImageButton.setOnClickListener {
-            PlayingQueue.clear()
-            BackgroundHelper.stopBackgroundPlay(requireContext())
-            killPlayerFragment()
+            onManualPlayerClose()
         }
         playerBinding.autoPlay.isVisible = true
 
@@ -499,50 +523,30 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         NavigationHelper.startAudioPlayer(requireContext())
     }
 
-    /**
-     * If enabled, determine the orientation o use based on the video's aspect ratio
-     * Expected behavior: Portrait for shorts, Landscape for normal videos
-     */
-    private fun updateFullscreenOrientation() {
-        if (!PlayerHelper.autoFullscreenEnabled) {
-            val height = streams.videoStreams.firstOrNull()?.height ?: exoPlayer.videoSize.height
-            val width = streams.videoStreams.firstOrNull()?.width ?: exoPlayer.videoSize.width
-
-            // different orientations of the video are only available when autorotation is disabled
-            val orientation = PlayerHelper.getOrientation(width, height)
-            mainActivity.requestedOrientation = orientation
-        }
-    }
-
     private fun setFullscreen() {
-        with(binding.playerMotionLayout) {
-            getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
-            enableTransition(R.id.yt_transition, false)
-        }
-
         // set status bar icon color to white
         windowInsetsControllerCompat.isAppearanceLightStatusBars = false
 
-        binding.mainContainer.isClickable = true
-        binding.linLayout.isGone = true
+        viewModel.isFullscreen.value = true
+
+        if (mainActivity.screenOrientationPref == ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT) {
+            val height = streams.videoStreams.firstOrNull()?.height ?: exoPlayer.videoSize.height
+            val width = streams.videoStreams.firstOrNull()?.width ?: exoPlayer.videoSize.width
+
+            mainActivity.requestedOrientation = PlayerHelper.getOrientation(width, height)
+        }
+
         commentsViewModel.setCommentSheetExpand(null)
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
         playerBinding.exoTitle.isVisible = true
 
-        updateFullscreenOrientation()
-        viewModel.isFullscreen.value = true
-
         updateResolutionOnFullscreenChange(true)
+
+        openOrCloseFullscreenDialog(true)
     }
 
     @SuppressLint("SourceLockedOrientationActivity")
     fun unsetFullscreen() {
-        // leave fullscreen mode
-        with(binding.playerMotionLayout) {
-            getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
-            enableTransition(R.id.yt_transition, true)
-        }
-
         // set status bar icon color back to theme color
         windowInsetsControllerCompat.isAppearanceLightStatusBars =
             when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
@@ -551,19 +555,40 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 else -> true
             }
 
-        binding.mainContainer.isClickable = false
-        binding.linLayout.isVisible = true
-        playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
-        playerBinding.exoTitle.isInvisible = true
+        viewModel.isFullscreen.value = false
 
-        if (!PlayerHelper.autoFullscreenEnabled) {
-            // switch back to portrait mode if autorotation disabled
+        if (mainActivity.screenOrientationPref == ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT) {
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
         }
 
-        viewModel.isFullscreen.value = false
+        playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
+        playerBinding.exoTitle.isInvisible = true
 
         updateResolutionOnFullscreenChange(false)
+
+        openOrCloseFullscreenDialog(false)
+
+        checkForNecessaryOrientationRestart()
+    }
+
+    private fun openOrCloseFullscreenDialog(open: Boolean) {
+        val playerView = binding.player
+        (playerView.parent as ViewGroup).removeView(playerView)
+
+        if (open) {
+            fullscreenDialog.addContentView(
+                binding.player,
+                LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+            )
+            fullscreenDialog.show()
+            playerView.currentWindow = fullscreenDialog.window
+        } else {
+            binding.playerMotionLayout.addView(playerView)
+            playerView.currentWindow = null
+            fullscreenDialog.dismiss()
+        }
+
+        WindowHelper.toggleFullscreen(fullscreenDialog.window!!, open)
     }
 
     override fun onPause() {
@@ -734,8 +759,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
                 initializePlayerView()
                 setupSeekbarPreview()
-
-                if (viewModel.isFullscreen.value == true) updateFullscreenOrientation()
 
                 exoPlayer.playWhenReady = PlayerHelper.playAutomatically
                 exoPlayer.prepare()
@@ -1341,7 +1364,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             onConfigurationChanged(resources.configuration)
         } else {
             // go to portrait mode
-            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+            mainActivity.requestedOrientation = (requireActivity() as BaseActivity).screenOrientationPref
         }
     }
 
@@ -1470,13 +1493,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 viewModel.isMiniPlayerVisible.value = false
             }
 
-            with(binding.playerMotionLayout) {
-                getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
-                enableTransition(R.id.yt_transition, false)
-            }
-            binding.linLayout.isGone = true
-
             updateCurrentSubtitle(null)
+
+            openOrCloseFullscreenDialog(true)
         } else {
             // close button got clicked in PiP mode
             // pause the video and keep the app alive
@@ -1485,20 +1504,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             // enable exoPlayer controls again
             binding.player.useController = true
 
-            // set back to portrait mode
-            if (viewModel.isFullscreen.value != true) {
-                with(binding.playerMotionLayout) {
-                    getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
-                    enableTransition(R.id.yt_transition, true)
-                }
-                binding.linLayout.isVisible = true
-            }
-
             updateCurrentSubtitle(currentSubtitle)
 
             binding.optionsLL.post {
                 binding.optionsLL.requestLayout()
             }
+
+            openOrCloseFullscreenDialog(false)
         }
     }
 
@@ -1564,6 +1576,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private fun killPlayerFragment() {
         viewModel.isFullscreen.value = false
         viewModel.isMiniPlayerVisible.value = false
+
+        // dismiss the fullscreen dialog if it's currently visible
+        // otherwise it would stay alive while being detached from this fragment
+        fullscreenDialog.dismiss()
+        binding.player.currentWindow = null
+
         binding.playerMotionLayout.transitionToEnd()
         mainActivity.supportFragmentManager.commit {
             remove(this@PlayerFragment)
@@ -1572,21 +1590,43 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         onDestroy()
     }
 
+    /**
+     * Check if the activity needs to be recreated due to an orientation change
+     * If true, the activity will be automatically restarted
+     */
+    private fun checkForNecessaryOrientationRestart() {
+        val lockedOrientations = listOf(ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
+        if (mainActivity.screenOrientationPref in lockedOrientations) return
+
+        val orientation = resources.configuration.orientation
+        if (viewModel.isFullscreen.value != true && orientation != playerLayoutOrientation) {
+            if (this::exoPlayer.isInitialized) {
+                arguments?.putLong(IntentData.timeStamp, exoPlayer.currentPosition / 1000)
+            }
+            playerLayoutOrientation = orientation
+            activity?.recreate()
+        }
+    }
+
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
 
-        if (!PlayerHelper.autoFullscreenEnabled || _binding == null ||
+        if (_binding == null ||
             // If in PiP mode, orientation is given as landscape.
             PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
         ) {
             return
         }
 
-        when (newConfig.orientation) {
-            // go to fullscreen mode
-            Configuration.ORIENTATION_LANDSCAPE -> setFullscreen()
-            // exit fullscreen if not landscape
-            else -> unsetFullscreen()
+        if (PlayerHelper.autoFullscreenEnabled) {
+            when (newConfig.orientation) {
+                // go to fullscreen mode
+                Configuration.ORIENTATION_LANDSCAPE -> setFullscreen()
+                // exit fullscreen if not landscape
+                else -> unsetFullscreen()
+            }
+        } else {
+            checkForNecessaryOrientationRestart()
         }
     }
 }
