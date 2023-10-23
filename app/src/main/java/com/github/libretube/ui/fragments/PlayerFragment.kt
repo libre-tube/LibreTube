@@ -378,17 +378,19 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             .isPictureInPictureAvailable(activity)
     }
 
+    private fun onManualPlayerClose() {
+        PlayingQueue.clear()
+        BackgroundHelper.stopBackgroundPlay(requireContext())
+        killPlayerFragment()
+    }
+
     // actions that don't depend on video information
     private fun initializeOnClickActions() {
         binding.closeImageView.setOnClickListener {
-            PlayingQueue.clear()
-            BackgroundHelper.stopBackgroundPlay(requireContext())
-            killPlayerFragment()
+            onManualPlayerClose()
         }
         playerBinding.closeImageButton.setOnClickListener {
-            PlayingQueue.clear()
-            BackgroundHelper.stopBackgroundPlay(requireContext())
-            killPlayerFragment()
+            onManualPlayerClose()
         }
         playerBinding.autoPlay.isVisible = true
 
@@ -1562,6 +1564,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private fun killPlayerFragment() {
         viewModel.isFullscreen.value = false
         viewModel.isMiniPlayerVisible.value = false
+
+        // dismiss the fullscreen dialog if it's currently visible
+        // otherwise it would stay alive while being detached from this fragment
+        fullscreenDialog.dismiss()
+        binding.player.currentWindow = null
+
         binding.playerMotionLayout.transitionToEnd()
         mainActivity.supportFragmentManager.commit {
             remove(this@PlayerFragment)
