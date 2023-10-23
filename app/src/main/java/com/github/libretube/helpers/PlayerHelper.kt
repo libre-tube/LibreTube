@@ -259,12 +259,6 @@ object PlayerHelper {
             "fit"
         )
 
-    val alternativeVideoLayout: Boolean
-        get() = PreferenceHelper.getBoolean(
-            PreferenceKeys.ALTERNATIVE_PLAYER_LAYOUT,
-            false
-        )
-
     val autoInsertRelatedVideos: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.QUEUE_AUTO_INSERT_RELATED,

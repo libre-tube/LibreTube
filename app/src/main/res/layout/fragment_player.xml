@@ -140,12 +140,6 @@
                     app:cornerRadius="16dp" />
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/alternativeTrendingRec"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="12dp" />
-
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/comments_toggle"
                 style="@style/Widget.Material3.CardView.Elevated"
@@ -166,22 +160,11 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/related_rec_view"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:animateLayoutChanges="true"
-                android:descendantFocusability="blocksDescendants">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/related_rec_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:nestedScrollingEnabled="false" />
-            </RelativeLayout>
+                android:layout_marginHorizontal="12dp" />
 
         </LinearLayout>
 
