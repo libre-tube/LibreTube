@@ -83,7 +83,6 @@ object PreferenceKeys {
     const val PICTURE_IN_PICTURE = "picture_in_picture"
     const val PLAYER_RESIZE_MODE = "player_resize_mode"
     const val DEARROW = "dearrow"
-    const val ALTERNATIVE_PLAYER_LAYOUT = "alternative_player_layout"
     const val USE_HLS_OVER_DASH = "use_hls"
     const val QUEUE_AUTO_INSERT_RELATED = "queue_insert_related_videos"
     const val AUTOPLAY_PLAYLISTS = "autoplay_playlists"

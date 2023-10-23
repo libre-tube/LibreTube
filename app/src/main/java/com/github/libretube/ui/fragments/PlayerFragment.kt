@@ -54,7 +54,6 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.Message
 import com.github.libretube.api.obj.Segment
-import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.api.obj.Subtitle
 import com.github.libretube.compat.PictureInPictureCompat
@@ -492,9 +491,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             playOnBackground()
         }
 
-        binding.relatedRecView.layoutManager = VideosAdapter.getLayout(requireContext())
-
-        binding.alternativeTrendingRec.layoutManager = LinearLayoutManager(
+        binding.relatedRecView.layoutManager = LinearLayoutManager(
             context,
             LinearLayoutManager.HORIZONTAL,
             false
@@ -982,7 +979,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         binding.relPlayerPip.setOnClickListener {
             PictureInPictureCompat.enterPictureInPictureMode(requireActivity(), pipParams)
         }
-        initializeRelatedVideos(streams.relatedStreams.filter { !it.title.isNullOrBlank() })
+
+        if (PlayerHelper.relatedStreamsEnabled) {
+            binding.relatedRecView.adapter = VideosAdapter(
+                streams.relatedStreams.filter { !it.title.isNullOrBlank() }.toMutableList(),
+                forceMode = VideosAdapter.Companion.ForceMode.RELATED
+            )
+        }
 
         binding.playerChannel.setOnClickListener {
             val activity = view?.context as MainActivity
@@ -1098,21 +1101,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 else -> R.drawable.ic_play
             }
         )
-    }
-
-    private fun initializeRelatedVideos(relatedStreams: List<StreamItem>?) {
-        if (!PlayerHelper.relatedStreamsEnabled) return
-
-        if (PlayerHelper.alternativeVideoLayout) {
-            binding.alternativeTrendingRec.adapter = VideosAdapter(
-                relatedStreams.orEmpty().toMutableList(),
-                forceMode = VideosAdapter.Companion.ForceMode.RELATED
-            )
-        } else {
-            binding.relatedRecView.adapter = VideosAdapter(
-                relatedStreams.orEmpty().toMutableList()
-            )
-        }
     }
 
     private suspend fun initializeHighlight(highlight: Segment) {
