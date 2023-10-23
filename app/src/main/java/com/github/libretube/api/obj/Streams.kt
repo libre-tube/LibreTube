@@ -5,12 +5,12 @@ import com.github.libretube.enums.FileType
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.json.SafeInstantSerializer
 import com.github.libretube.parcelable.DownloadData
+import kotlin.io.path.Path
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlin.io.path.Path
 
 @Serializable
 data class Streams(

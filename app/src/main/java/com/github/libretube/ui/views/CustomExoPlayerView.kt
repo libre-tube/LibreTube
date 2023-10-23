@@ -536,7 +536,9 @@ open class CustomExoPlayerView(
     override fun onRepeatModeClicked() {
         // repeat mode options dialog
         BaseBottomSheet()
-            .setSimpleItems(PlayerHelper.repeatModes.map { context.getString(it.second) }) { index ->
+            .setSimpleItems(
+                PlayerHelper.repeatModes.map { context.getString(it.second) }
+            ) { index ->
                 PlayingQueue.repeatMode = PlayerHelper.repeatModes[index].first
             }
             .show(supportFragmentManager)

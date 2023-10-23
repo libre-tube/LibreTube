@@ -19,14 +19,14 @@ import com.github.libretube.ui.activities.VideoTagsAdapter
 import com.github.libretube.util.HtmlParser
 import com.github.libretube.util.LinkHandler
 import com.github.libretube.util.TextUtils
+import java.util.Locale
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
-import java.util.Locale
 
 class DescriptionLayout(
     context: Context,
     attributeSet: AttributeSet?
-): LinearLayout(context, attributeSet) {
+) : LinearLayout(context, attributeSet) {
     val binding = DescriptionLayoutBinding.inflate(LayoutInflater.from(context), this, true)
     private var streams: Streams? = null
     var handleLink: (link: String) -> Unit = {}
@@ -73,8 +73,8 @@ class DescriptionLayout(
             }.orEmpty()
             additionalVideoInfo.text =
                 "${context?.getString(R.string.category)}: ${streams.category}\n" +
-                        "${context?.getString(R.string.license)}: ${streams.license}\n" +
-                        "${context?.getString(R.string.visibility)}: $visibility"
+                "${context?.getString(R.string.license)}: ${streams.license}\n" +
+                "${context?.getString(R.string.visibility)}: $visibility"
 
             if (streams.tags.isNotEmpty()) {
                 binding.tagsRecycler.layoutManager =
@@ -117,14 +117,18 @@ class DescriptionLayout(
         val viewInfo = context.getString(R.string.normal_views, views, localizeDate(streams))
         if (binding.descLinLayout.isVisible) {
             // hide the description and chapters
-            binding.playerDescriptionArrow.animate().rotation(0F).setDuration(ANIMATION_DURATION).start()
+            binding.playerDescriptionArrow.animate().rotation(
+                0F
+            ).setDuration(ANIMATION_DURATION).start()
             binding.descLinLayout.isGone = true
 
             // limit the title height to two lines
             binding.playerTitle.maxLines = 2
         } else {
             // show the description and chapters
-            binding.playerDescriptionArrow.animate().rotation(180F).setDuration(ANIMATION_DURATION).start()
+            binding.playerDescriptionArrow.animate().rotation(
+                180F
+            ).setDuration(ANIMATION_DURATION).start()
             binding.descLinLayout.isVisible = true
 
             // show the whole title

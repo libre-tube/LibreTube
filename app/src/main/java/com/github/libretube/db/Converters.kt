@@ -2,11 +2,11 @@ package com.github.libretube.db
 
 import androidx.room.TypeConverter
 import com.github.libretube.api.JsonHelper
+import java.nio.file.Path
+import kotlin.io.path.Path
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.toLocalDate
 import kotlinx.serialization.encodeToString
-import java.nio.file.Path
-import kotlin.io.path.Path
 
 object Converters {
     @TypeConverter

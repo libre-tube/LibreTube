@@ -54,9 +54,13 @@ class VoteForSegmentDialog : DialogFragment() {
                         ?.uuid ?: return@setOnClickListener
 
                     // see https://wiki.sponsor.ajay.app/w/API_Docs#POST_/api/voteOnSponsorTime
-                    val score = if (binding.upvote.isChecked) 1
-                    else if (binding.downvote.isChecked) 0
-                    else 20
+                    val score = if (binding.upvote.isChecked) {
+                        1
+                    } else if (binding.downvote.isChecked) {
+                        0
+                    } else {
+                        20
+                    }
 
                     dialog?.hide()
                     lifecycleScope.launch(Dispatchers.IO) {
