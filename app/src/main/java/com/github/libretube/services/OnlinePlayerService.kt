@@ -172,7 +172,12 @@ class OnlinePlayerService : LifecycleService() {
             if (!keepQueue) PlayingQueue.clear()
 
             if (PlayingQueue.isEmpty()) {
-                PlayingQueue.updateQueue(streams!!.toStreamItem(videoId), playlistId, channelId, streams!!.relatedStreams)
+                PlayingQueue.updateQueue(
+                    streams!!.toStreamItem(videoId),
+                    playlistId,
+                    channelId,
+                    streams!!.relatedStreams
+                )
             } else if (PlayingQueue.isLast() && playlistId == null && channelId == null) {
                 PlayingQueue.insertRelatedStreams(streams!!.relatedStreams)
             }

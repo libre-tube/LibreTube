@@ -20,7 +20,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import android.widget.Toast
-import android.window.OnBackInvokedDispatcher
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.content.getSystemService
@@ -200,7 +199,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private var playerLayoutOrientation = Int.MIN_VALUE
 
     private val fullscreenDialog by lazy {
-        object: Dialog(requireContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen) {
+        object : Dialog(requireContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen) {
             override fun onBackPressed() {
                 super.onBackPressed()
                 unsetFullscreen()
@@ -1595,7 +1594,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      * If true, the activity will be automatically restarted
      */
     private fun checkForNecessaryOrientationRestart() {
-        val lockedOrientations = listOf(ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
+        val lockedOrientations =
+            listOf(
+                ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT,
+                ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+            )
         if (mainActivity.screenOrientationPref in lockedOrientations) return
 
         val orientation = resources.configuration.orientation

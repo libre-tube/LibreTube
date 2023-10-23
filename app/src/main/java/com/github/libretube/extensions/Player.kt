@@ -4,8 +4,8 @@ import androidx.media3.common.Player
 import com.github.libretube.helpers.PlayerHelper
 
 fun Player.togglePlayPauseState() {
-    val minBufferingReached = totalBufferedDuration >= PlayerHelper.MINIMUM_BUFFER_DURATION
-            || currentPosition + PlayerHelper.MINIMUM_BUFFER_DURATION >= duration
+    val minBufferingReached = totalBufferedDuration >= PlayerHelper.MINIMUM_BUFFER_DURATION ||
+        currentPosition + PlayerHelper.MINIMUM_BUFFER_DURATION >= duration
     when {
         playerError != null -> {
             prepare()
