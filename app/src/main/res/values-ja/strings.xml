@@ -32,7 +32,7 @@
     <string name="videos">動画</string>
     <string name="customInstance">カスタム</string>
     <string name="dlisinprogress">現在のすべてのダウンロードが完了するまでお待ちください。</string>
-    <string name="error">不明なエラーが発生しました。</string>
+    <string name="error">エラーが発生しました。</string>
     <string name="subscriptions">登録チャンネル</string>
     <string name="region">地域</string>
     <string name="library">ライブラリ</string>
@@ -60,7 +60,7 @@
     <string name="grid">一覧での1行あたりの表示数</string>
     <string name="deletePlaylist">再生リストを削除</string>
     <string name="areYouSure">この再生リストを削除しますか？</string>
-    <string name="about">アプリについて</string>
+    <string name="about">このアプリについて</string>
     <string name="systemDefault">システム</string>
     <string name="lightTheme">ライト</string>
     <string name="notgmail">Piped のアカウント用です。</string>
@@ -158,8 +158,8 @@
     <string name="category_filler_description">動画の主な内容を理解するのに必要ない穴埋めや、ユーモアのためだけに追加された余分なシーン。</string>
     <string name="category_music_offtopic_description">ミュージックビデオ専用です。公式の音楽には含まれないシーン。ここがないと、その動画はSpotifyやその他のリミックス版になるべく近くなったり、話し声など邪魔なものが減ります。</string>
     <string name="category_preview_description">追加情報のない、将来のコンテンツの詳細を示すセグメント。ここにしか表示されないクリップが含まれている場合、これは間違ったカテゴリーである可能性が高いです。</string>
-    <string name="buffering_goal">先読み</string>
-    <string name="playerVideoFormat">プレイヤーの動画形式</string>
+    <string name="buffering_goal">事前読み込み</string>
+    <string name="playerVideoFormat">プレーヤーの動画形式</string>
     <string name="audio_video">音声と映像</string>
     <string name="fullscreen_orientation">全画面時の向き</string>
     <string name="aspect_ratio">動画の縦横比</string>
@@ -183,13 +183,13 @@
     <string name="selected">選択中のみ</string>
     <string name="never">表示しない</string>
     <string name="autoRotatePlayer">自動で全画面</string>
-    <string name="autoRotatePlayer_summary">端末を回転させるとプレイヤーを全画面にします。</string>
+    <string name="autoRotatePlayer_summary">デバイスを回転させるとプレーヤーを全画面にします。</string>
     <string name="pure_theme">ピュアテーマ</string>
     <string name="pure_theme_summary">ピュアホワイト/ピュアブラック</string>
-    <string name="no_player_found">外部プレイヤーが見つかりません。インストールしてください。</string>
+    <string name="no_player_found">外部プレーヤーが見つかりません。インストールしてください。</string>
     <string name="data_saver_mode">データ節約モード</string>
     <string name="search_history_summary">検索履歴を保存</string>
-    <string name="watch_history_summary">視聴した動画の履歴を端末に保持</string>
+    <string name="watch_history_summary">視聴した動画の履歴をデバイスに保持</string>
     <string name="history_summary">再生と検索の履歴</string>
     <string name="watch_positions_title">再生位置を記憶</string>
     <string name="reset_watch_positions">リセット</string>
@@ -208,7 +208,7 @@
     <string name="clonePlaylist">再生リストを複製</string>
     <string name="downloading">ダウンロード中…</string>
     <string name="caption_settings">字幕</string>
-    <string name="playerAudioFormat">プレイヤーの音声形式</string>
+    <string name="playerAudioFormat">プレーヤーの音声形式</string>
     <string name="playerAudioQuality">音声の品質</string>
     <string name="best_quality">最高</string>
     <string name="worst_quality">最低</string>
@@ -231,7 +231,7 @@
     <string name="resize_mode_fill">フィル</string>
     <string name="wifi">Wi-Fi</string>
     <string name="navigation_bar">ナビゲーションバー</string>
-    <string name="local_subscriptions">端末内の登録チャンネル</string>
+    <string name="local_subscriptions">デバイス内の登録チャンネル</string>
     <string name="backup_customInstances">カスタムインスタンス</string>
     <string name="save_feed">バックグラウンドでフィードを読み込み</string>
     <string name="play_next">次の動画</string>
@@ -272,7 +272,7 @@
     <string name="change_region">急上昇ランキングは現在の地域にはありません。設定で他の地域を選択してください。</string>
     <string name="share_with_time">時間指定で共有</string>
     <string name="legacy_subscriptions">古い登録チャンネル表示</string>
-    <string name="device_info">端末情報</string>
+    <string name="device_info">デバイス情報</string>
     <string name="history_empty">まだ履歴がありません。</string>
     <string name="most_recent">最新</string>
     <string name="least_recent">最古</string>
@@ -303,9 +303,9 @@
     <string name="download_channel_description">メディアのダウンロード中に通知を表示します。</string>
     <string name="navbar_order">並べ替え</string>
     <string name="layout">配置</string>
-    <string name="alternative_player_layout">プレイヤーの配置変更</string>
+    <string name="alternative_player_layout">プレーヤーの配置変更</string>
     <string name="alternative_player_layout_summary">関連動画をコメントの下ではなく上に並べて表示します。</string>
-    <string name="local_playlists">端末内の再生リスト</string>
+    <string name="local_playlists">デバイス内の再生リスト</string>
     <string name="color_violet">深紫色</string>
     <string name="volume">音量</string>
     <string name="brightness">輝度</string>
@@ -324,7 +324,7 @@
     <string name="defaults">デフォルト</string>
     <string name="comments_disabled">コメントは投稿者によって無効化されています。</string>
     <string name="theme_monochrome">無彩色</string>
-    <string name="double_tap_seek_summary">プレイヤーの左または右を2回タップして、動画を早送りしたり巻き戻したりできます。</string>
+    <string name="double_tap_seek_summary">プレーヤーの左または右を2回タップして、動画を早送りしたり巻き戻したりできます。</string>
     <string name="import_playlists">再生リストをインポート</string>
     <string name="export_playlists">再生リストをエクスポート</string>
     <string name="app_backup">アプリのバックアップ</string>
@@ -369,10 +369,10 @@
     <string name="alternative_pip_controls">PiP 制御方法を変更</string>
     <string name="alternative_pip_controls_summary">PiP では、早送りと巻き戻しの代わりに、音声のみモードとスキップを表示</string>
     <string name="audio_only_mode">音声のみモード</string>
-    <string name="audio_only_mode_summary">LibreTube を音楽プレイヤーに変えます。</string>
+    <string name="audio_only_mode_summary">LibreTube を音楽プレーヤーに変えます。</string>
     <string name="mark_as_watched">視聴済みにする</string>
     <string name="custom_playback_speed">速度を変更</string>
-    <string name="custom_playback_speed_summary">通常のプレイヤーとは異なる再生速度を使います。</string>
+    <string name="custom_playback_speed_summary">通常のプレーヤーとは異なる再生速度を使います。</string>
     <string name="category">カテゴリー</string>
     <string name="codecs">コーデック</string>
     <plurals name="years_ago">
@@ -389,7 +389,7 @@
     <string name="unknown">不明</string>
     <string name="resume">再開</string>
     <string name="autoplay_countdown_summary">次の動画を自動再生する前に5秒間の秒読みを表示します。</string>
-    <string name="audio_player">オーディオプレイヤー</string>
+    <string name="audio_player">オーディオプレーヤー</string>
     <string name="unsupported_file_format">未対応のファイル形式: %1$s</string>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d 本の動画</string>
@@ -474,7 +474,7 @@
     <string name="uploader_name">公開者の名前</string>
     <string name="sort_by">並び替え</string>
     <string name="duration_span">期間: %1$s</string>
-    <string name="player_channel_name">プレイヤーのサービス</string>
+    <string name="player_channel_name">プレーヤーのサービス</string>
     <string name="player_channel_description">再生中に通知を表示</string>
     <string name="tooltip_create_playlist">再生リストの作成</string>
     <string name="tooltip_sort">並び替え</string>
@@ -491,8 +491,8 @@
     <string name="tooltip_scroll_to_top">先頭までスクロール</string>
     <string name="tooltip_options">オプション</string>
     <string name="tooltip_sponsorblock">SponsorBlock を切り替え</string>
-    <string name="tooltip_locked">プレイヤーをロック</string>
-    <string name="tooltip_unlocked">プレイヤーのロック解除</string>
+    <string name="tooltip_locked">プレーヤーをロック</string>
+    <string name="tooltip_unlocked">プレーヤーのロック解除</string>
     <string name="tooltip_clear_queue">再生キューを初期化</string>
     <string name="tooltip_dismiss">非表示</string>
     <string name="auto_generated">自動生成</string>
