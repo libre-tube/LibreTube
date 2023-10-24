@@ -525,4 +525,5 @@
     <string name="same_as_fullscreen">Ugyanaz, mint teljes képernyőnél</string>
     <string name="remember_playback_speed">Lejátszási sebesség megjegyzése</string>
     <string name="downvote">Le</string>
+    <string name="repeat_mode_all">Összes ismétlése</string>
 </resources>

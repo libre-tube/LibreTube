@@ -63,7 +63,7 @@
     <string name="location">الموقع</string>
     <string name="website">موقع الإنترنت</string>
     <string name="videoCount">%1$d فيديوهات</string>
-    <string name="instance">سيرفر</string>
+    <string name="instance">المثيل</string>
     <string name="customization">تخصيصات</string>
     <string name="history">السجل</string>
     <string name="channels">القنوات</string>
@@ -96,7 +96,7 @@
     <string name="color_green">أخضر</string>
     <string name="color_purple">بنفسجي</string>
     <string name="material_you">المواد أنت</string>
-    <string name="category_sponsor_description">ترويج مدفوع وإحالات مدفوعة وإعلانات مباشرة. ليس للترويج الذاتي أو الصيحات المجانية لأسباب / منشىء المحتوى / مواقع الويب / او منتجات يحبونها.</string>
+    <string name="category_sponsor_description">ترويج مدفوع و إحالات مدفوعة و إعلانات مباشرة. ليس للترويج الذاتي أو الترويج المجاني لأهداف أو منشئي محتوى أو مواقع ويب أو منتجات.</string>
     <string name="category_outro">بطاقات النهاية / الاعتمادات</string>
     <string name="sponsorblock_notifications">الإشعارات</string>
     <string name="app_icon">أيقونة</string>
@@ -126,7 +126,7 @@
     <string name="addInstance">إضافة مثيل</string>
     <string name="empty_instance">املأ الاسم وعنوان URL لواجهة برمجة التطبيقات.</string>
     <string name="playerVideoFormat">تنسيق الفيديو لمشغل</string>
-    <string name="category_music_offtopic_description">فقط للاستخدام في مقاطع الفيديو الموسيقية. يجب أن تغطي أجزاء من الفيديو وليس جزءا من الخلطات الرسمية. في النهاية ، يجب أن يشبه الفيديو Spotify أو أي إصدار مختلط آخر قدر الإمكان ، أو يقلل من التحدث أو الانحرافات الأخرى.</string>
+    <string name="category_music_offtopic_description">فقط للاستخدام في مقاطع الفيديو الموسيقية. يجب أن تغطي أجزاء من الفيديو وليس جزءا من الخلطات الرسمية. في النهاية ، يجب أن يشبه الفيديو Spotify أو أي إصدار مختلط آخر قدر الإمكان ، أو يقلل من التحدث أو تشتيت الانتباه.</string>
     <string name="buffering_goal">التحميل المسبق</string>
     <string name="buffering_goal_summary">الحد الأقصى لعدد ثواني الفيديو للتخزين المؤقت.</string>
     <string name="update_available">الإصدار %1$s متاح</string>

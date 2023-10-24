@@ -9,7 +9,7 @@
     <string name="save">Saxla</string>
     <string name="download">Yüklə</string>
     <string name="username">İstifadəçi adı</string>
-    <string name="password">Şifrə</string>
+    <string name="password">Parol</string>
     <string name="login">Daxil ol</string>
     <string name="register">Qeydiyyatdan keç</string>
     <string name="logout">Çıx</string>
@@ -23,7 +23,7 @@
     <string name="library">Kitabxana</string>
     <string name="instances">Seç…</string>
     <string name="customInstance">Fərdi</string>
-    <string name="region">Ölkə</string>
+    <string name="region">Region</string>
     <string name="all">Hamısı</string>
     <string name="channels">Kanallar</string>
     <string name="playlists">Oynatma Siyahıları</string>

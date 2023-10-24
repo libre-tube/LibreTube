@@ -525,4 +525,5 @@
     <string name="undo">Rückgängig</string>
     <string name="segment_submitted">Abschnitt wurde eingereicht</string>
     <string name="downvote">Daumen runter</string>
+    <string name="repeat_mode_all">Alle wiederholen</string>
 </resources>
