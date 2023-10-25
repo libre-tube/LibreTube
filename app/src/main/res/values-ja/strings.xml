@@ -183,13 +183,13 @@
     <string name="selected">選択中のみ</string>
     <string name="never">表示しない</string>
     <string name="autoRotatePlayer">自動で全画面</string>
-    <string name="autoRotatePlayer_summary">デバイスを回転させるとプレーヤーを全画面にします。</string>
+    <string name="autoRotatePlayer_summary">端末を回転させるとプレーヤーを全画面にします。</string>
     <string name="pure_theme">ピュアテーマ</string>
     <string name="pure_theme_summary">ピュアホワイト/ピュアブラック</string>
     <string name="no_player_found">外部プレーヤーが見つかりません。インストールしてください。</string>
     <string name="data_saver_mode">データ節約モード</string>
     <string name="search_history_summary">検索履歴を保存</string>
-    <string name="watch_history_summary">視聴した動画の履歴をデバイスに保持</string>
+    <string name="watch_history_summary">視聴した動画の履歴を端末に保持</string>
     <string name="history_summary">再生と検索の履歴</string>
     <string name="watch_positions_title">再生位置を記憶</string>
     <string name="reset_watch_positions">リセット</string>
@@ -231,7 +231,7 @@
     <string name="resize_mode_fill">フィル</string>
     <string name="wifi">Wi-Fi</string>
     <string name="navigation_bar">ナビゲーションバー</string>
-    <string name="local_subscriptions">デバイス内の登録チャンネル</string>
+    <string name="local_subscriptions">端末内の登録チャンネル</string>
     <string name="backup_customInstances">カスタムインスタンス</string>
     <string name="save_feed">バックグラウンドでフィードを読み込み</string>
     <string name="play_next">次の動画</string>
@@ -272,7 +272,7 @@
     <string name="change_region">急上昇は現在の地域で利用できません。設定で他の地域を選択してください。</string>
     <string name="share_with_time">時間指定で共有</string>
     <string name="legacy_subscriptions">古い登録チャンネル表示</string>
-    <string name="device_info">デバイス情報</string>
+    <string name="device_info">端末情報</string>
     <string name="history_empty">まだ履歴がありません。</string>
     <string name="most_recent">最新</string>
     <string name="least_recent">最古</string>
@@ -305,7 +305,7 @@
     <string name="layout">配置</string>
     <string name="alternative_player_layout">プレーヤーの配置変更</string>
     <string name="alternative_player_layout_summary">関連動画をコメントの下ではなく上に並べて表示します。</string>
-    <string name="local_playlists">デバイス内の再生リスト</string>
+    <string name="local_playlists">端末内の再生リスト</string>
     <string name="color_violet">深紫色</string>
     <string name="volume">音量</string>
     <string name="brightness">輝度</string>
