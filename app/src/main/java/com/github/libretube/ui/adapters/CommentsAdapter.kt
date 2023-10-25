@@ -72,7 +72,11 @@ class CommentsAdapter(
     override fun onBindViewHolder(holder: CommentsViewHolder, position: Int) {
         val comment = comments[position]
         holder.binding.apply {
-            commentInfos.text = comment.author + TextUtils.SEPARATOR + comment.commentedTime
+            commentAuthor.text = comment.author
+            if (comment.channelOwner) {
+                commentAuthor.setBackgroundResource(R.drawable.comment_channel_owner_bg)
+            }
+            commentInfos.text = TextUtils.SEPARATOR + comment.commentedTime
 
             commentText.movementMethod = LinkMovementMethodCompat.getInstance()
             commentText.text = comment.commentText?.replace("</a>", "</a> ")
