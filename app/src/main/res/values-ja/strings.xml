@@ -269,7 +269,7 @@
     <string name="playback_pitch">ピッチ</string>
     <string name="error_occurred">エラー</string>
     <string name="copied">コピーしました</string>
-    <string name="change_region">急上昇ランキングは現在の地域にはありません。設定で他の地域を選択してください。</string>
+    <string name="change_region">急上昇は現在の地域で利用できません。設定で他の地域を選択してください。</string>
     <string name="share_with_time">時間指定で共有</string>
     <string name="legacy_subscriptions">古い登録チャンネル表示</string>
     <string name="device_info">デバイス情報</string>
