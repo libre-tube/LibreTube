@@ -23,7 +23,7 @@
     <string name="importsuccess">सफलतापूर्वक सब्सक्राइब हो गया</string>
     <string name="cannotDownload">इस स्ट्रीम को डाउनलोड नहीं कर सकते।</string>
     <string name="downloadfailed">डाउनलोड विफल।</string>
-    <string name="import_from_yt">सब्सक्रिप्शन आयात करें</string>
+    <string name="import_from_yt">सब्सक्रिप्शनस आयात करें</string>
     <string name="app_theme">ऐप थीम</string>
     <string name="server_error">चुने हुए सर्वर में समस्या लगती है। कोई और इंस्टेंस चुनकर प्रयास करें।</string>
     <string name="error">कुछ गलत हो गया।</string>
@@ -45,7 +45,7 @@
     <string name="dlisinprogress">कृपया सभी मौजूदा डाउनलोड पूर्ण होने तक प्रतीक्षा करें।</string>
     <string name="about">के बारे में</string>
     <string name="startpage">घर</string>
-    <string name="subscriptions">सब्सक्रिप्शनें</string>
+    <string name="subscriptions">सब्सक्रिप्शनस</string>
     <string name="library">लायब्रेरी</string>
     <string name="videos">वीडियो</string>
     <string name="import_from_yt_summary">यूट्यूब या न्यूपाइप से</string>
@@ -55,7 +55,7 @@
     <string name="changeLanguage">भाषा</string>
     <string name="systemLanguage">सिस्टम</string>
     <string name="systemDefault">सिस्टम डिफ़ॉल्ट</string>
-    <string name="lightTheme">हलका</string>
+    <string name="lightTheme">सफेद</string>
     <string name="darkTheme">गहरा</string>
     <string name="subscribers">%1$s सब्सक्राइब्रस</string>
     <string name="settings">सेटिंग्स</string>
@@ -76,10 +76,10 @@
     <string name="enabled">आन</string>
     <string name="music_playlists">वाईटी संगीत पलेलिसटें</string>
     <string name="music_songs">वाईटी संगीत गानें</string>
-    <string name="category_selfpromo_description">अवैतनिक या स्वयं प्रचार को छोड़कर \"प्रायोजक\" के समान। इसमें मर्चेंडाइज, दान या उन लोगों के बारे में जानकारी शामिल है जिनके साथ उन्होंने सहयोग किया है।</string>
+    <string name="category_selfpromo_description">अवैतनिक या स्वयं प्रचार को छोड़कर \"स्पांसर\" के समान। इसमें मर्चेंडाइज, दान या उन लोगों के बारे में जानकारी शामिल है जिनके साथ उन्होंने सहयोग किया है।</string>
     <string name="category_interaction">इंटरेक्शन रिमाइंडर</string>
     <string name="category_music_offtopic_description">केवल संगीत वीडियो में उपयोग के लिए। इसमें वीडियो के कुछ हिस्से शामिल होने चाहिए जो आधिकारिक मिक्स का हिस्सा नहीं हैं। अंत में, वीडियो को Spotify या किसी अन्य मिश्रित संस्करण के जितना संभव हो उतना करीब से मिलना चाहिए, या बात करने या अन्य विकर्षणों को कम करना चाहिए।</string>
-    <string name="network_metered">मीटर किए गए</string>
+    <string name="network_metered">मीटर किया हुआ</string>
     <string name="play_next">अगला चलाएं</string>
     <string name="channels">चैनल</string>
     <string name="all">सभी</string>
@@ -90,9 +90,9 @@
     <string name="clear_history">इतिहास को मिटाएं</string>
     <string name="music_videos">वाईटी संगीत वीडियोज</string>
     <string name="music_albums">वाईटी संगीत एलबमें</string>
-    <string name="sponsorblock">प्रायोजक ब्लॉक</string>
+    <string name="sponsorblock">स्पांसर-ब्लॉक</string>
     <string name="segment_skipped">छोड़ा गया खंड</string>
-    <string name="category_sponsor">प्रायोजक</string>
+    <string name="category_sponsor">स्पांसर</string>
     <string name="category_sponsor_description">पेड प्रमोशन, पेड रेफरल और सीधे विज्ञापन। स्व-प्रचार या कारणों, रचनाकारों, वेबसाइटों और उत्पादों के लिए मुफ्त वास्तविक चिल्लाहट के लिए नहीं।</string>
     <string name="category_selfpromo">अवैतनिक / स्वयं प्रचार</string>
     <string name="category_intro">इंटरमिशन/इंट्रो एनिमेशन</string>
@@ -117,7 +117,7 @@
     <string name="birdIcon">बूसटड पक्षी</string>
     <string name="required_network">कनेक्शन आवश्यक</string>
     <string name="share_with_time">समय कोड के साथ साझा करें</string>
-    <string name="export_subscriptions">सब्सक्रिप्शनें निर्यात करें</string>
+    <string name="export_subscriptions">सब्सक्रिप्शनस निर्यात करें</string>
     <string name="history_size">अधिकतम इतिहास आकार</string>
     <string name="unlimited">असीमित</string>
     <string name="background_mode">बैकग्राउंड मोड</string>
@@ -140,9 +140,9 @@
     <string name="copied_to_clipboard">क्लिपबोर्ड पर कापी हुआ</string>
     <string name="open_copied">खोलें</string>
     <string name="break_reminder_time">याद दिलाने से पहले मिनट</string>
-    <string name="legacy_subscriptions">लीगेसी सब्सक्रिप्शन दृश्य</string>
+    <string name="legacy_subscriptions">लीगेसी सब्सक्रिप्शनस दृश्य</string>
     <string name="audio_video_summary">गुणवत्ता और प्रारूप</string>
-    <string name="delete">डाउनलोडस से हटाएं</string>
+    <string name="delete">डाउनलोडस से डिलीट करें</string>
     <string name="renamePlaylist">प्लेलिस्ट का नाम बदलें</string>
     <string name="wifi">वाई - फाई</string>
     <string name="mobile_data">मोबाइल डाटा</string>
@@ -164,7 +164,7 @@
     <string name="layout">लेआउट</string>
     <string name="alternative_player_layout">वैकल्पिक प्लेयर लेआउट</string>
     <string name="alternative_player_layout_summary">संबंधित वीडियो को नीचे की बजाय टिप्पणियों के ऊपर एक पंक्ति के रूप में दिखाएं।</string>
-    <string name="change_region">वर्तमान क्षेत्र के लिए रुझान अनुपलब्ध प्रतीत होता है। कृपया सेटिंग में दूसरे का चयन करें।</string>
+    <string name="change_region">वर्तमान क्षेत्र के लिए चलन में अनुपलब्ध प्रतीत होता है। कृपया सेटिंग्स में दूसरे का चयन करें।</string>
     <string name="device_info">डिवाइस की जानकारी</string>
     <string name="disabled">आफ</string>
     <string name="added_to_playlist">%1$s प्लेलिस्ट में जोड़ा गया</string>
@@ -205,7 +205,7 @@
     <string name="advanced">विकसित</string>
     <string name="player">पलेयर</string>
     <string name="appearance_summary">अपनी पसंद के हिसाब से ऐप को एडजस्ट करें।</string>
-    <string name="advanced_summary">डाउनलोडस, और रीसेट</string>
+    <string name="advanced_summary">डाउनलोडस और रीसेट</string>
     <string name="live">लाईव्ह</string>
     <string name="network_all">सभी</string>
     <string name="network_wifi">केवल वाई-फाई पर</string>
@@ -215,8 +215,8 @@
     <string name="hls_instead_of_dash_summary">डीएएसएच के बजाय एचएलएस का प्रयोग करें (धीमा होगा, अनुशंसित नहीं)</string>
     <string name="auto_quality">ऑटो</string>
     <string name="limit_to_runtime">रनटाइम तक सीमित करें</string>
-    <string name="trends">प्रवृत्तियां</string>
-    <string name="featured">विशेष रुप से प्रदर्शित</string>
+    <string name="trends">चलन में</string>
+    <string name="featured">फीचर्ड</string>
     <string name="trending">अभी क्या चलन में है</string>
     <string name="time_code">समय कोड (सेकंडस)</string>
     <string name="bookmark">बुकमार्क</string>
@@ -286,7 +286,7 @@
     <string name="require_restart">ऐप को पुनरारंभ करना आवश्यक है</string>
     <string name="navLabelVisibility">लेबल दृश्यता</string>
     <string name="always">हमेशा</string>
-    <string name="selected">सिलेक्टिड</string>
+    <string name="selected">चयनित</string>
     <string name="never">कभी नहीँ</string>
     <string name="data_saver_mode">डेटा-सेवर मोड</string>
     <string name="data_saver_mode_summary">थंमनेल और अन्य छवियों को छोड़ें।</string>
