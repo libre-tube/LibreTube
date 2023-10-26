@@ -529,4 +529,5 @@
     <string name="undo">Deshacer</string>
     <string name="downvote">No me gusta</string>
     <string name="repeat_mode_all">Repetir todo</string>
+    <string name="successfully_removed_from_playlist">Eliminado con éxito \"%1$s\" de la lista de reproducción.</string>
 </resources>
