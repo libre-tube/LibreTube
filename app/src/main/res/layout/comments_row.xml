@@ -37,6 +37,17 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/comment_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textAlignment="viewStart"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="14sp"
+                    tools:text="Octacat" />
+
+                <TextView
                     android:id="@+id/comment_infos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -45,7 +56,7 @@
                     android:textAlignment="viewStart"
                     android:textColor="?android:attr/textColorSecondary"
                     android:textSize="14sp"
-                    tools:text="Octacat • 10h" />
+                    tools:text="• 10h" />
 
                 <ImageView
                     android:id="@+id/verified_imageView"

@@ -203,7 +203,12 @@ object PlayingQueue {
         }
     }
 
-    fun updateQueue(streamItem: StreamItem, playlistId: String?, channelId: String?, relatedStreams: List<StreamItem> = emptyList()) {
+    fun updateQueue(
+        streamItem: StreamItem,
+        playlistId: String?,
+        channelId: String?,
+        relatedStreams: List<StreamItem> = emptyList()
+    ) {
         if (playlistId != null) {
             insertPlaylist(playlistId, streamItem)
         } else if (channelId != null) {
