@@ -491,6 +491,7 @@
     <string name="sponsorblock_user_id">SponsorBlock UserID</string>
     <string name="filename_too_long">Filename too long!</string>
     <string name="remember_playback_speed">Remember playback speed</string>
+    <string name="successfully_removed_from_playlist">Successfully removed \"%1$s\" from the playlist.</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
@@ -27,9 +28,12 @@ import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet.Companion.VIDEO_OPTIONS_SHEET_REQUEST_KEY
 import com.github.libretube.ui.viewholders.PlaylistViewHolder
+import com.github.libretube.util.TextUtils
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * @param originalFeed original, unsorted feed, needed in order to delete the proper video from
@@ -112,28 +116,66 @@ class PlaylistAdapter(
         }
     }
 
-    fun removeFromPlaylist(context: Context, position: Int) {
+    fun removeFromPlaylist(rootView: View, sortedFeedPosition: Int) {
+        val video = sortedFeed[sortedFeedPosition]
+
         // get the index of the video in the playlist
         // could vary due to playlist sorting by the user
-        val playlistIndex = originalFeed.indexOfFirst {
-            it.url == sortedFeed[position].url
-        }.takeIf { it >= 0 } ?: return
+        val originalPlaylistPosition = originalFeed
+            .indexOfFirst { it.url == video.url }
+            .takeIf { it >= 0 } ?: return
 
-        originalFeed.removeAt(playlistIndex)
-        sortedFeed.removeAt(position)
-        visibleCount -= 1
-        (context as Activity).runOnUiThread {
-            notifyItemRemoved(position)
-            notifyItemRangeChanged(position, itemCount)
+        sortedFeed.removeAt(sortedFeedPosition)
+        originalFeed.removeAt(originalPlaylistPosition)
+        visibleCount--
+
+        (rootView.context as Activity).runOnUiThread {
+            notifyItemRemoved(sortedFeedPosition)
+            notifyItemRangeChanged(sortedFeedPosition, itemCount)
         }
-        val appContext = context.applicationContext
+        val appContext = rootView.context.applicationContext
 
-        CoroutineScope(Dispatchers.IO).launch {
+        // try to remove the video from the playlist and show an undo snackbar if successful
+        CoroutineScope(Dispatchers.Main).launch {
             try {
-                PlaylistsHelper.removeFromPlaylist(playlistId, playlistIndex)
+                withContext(Dispatchers.IO) {
+                    PlaylistsHelper.removeFromPlaylist(playlistId, originalPlaylistPosition)
+                }
+
+                val shortTitle = TextUtils.limitTextToLength(video.title.orEmpty(), 50)
+                val snackBarText = rootView.context.getString(R.string.successfully_removed_from_playlist, shortTitle)
+                Snackbar.make(rootView, snackBarText, Snackbar.LENGTH_LONG)
+                    .setTextMaxLines(3)
+                    .setAction(R.string.undo) {
+                        reAddToPlaylist(appContext, video, sortedFeedPosition, originalPlaylistPosition)
+                    }
+                    .show()
             } catch (e: Exception) {
                 Log.e(TAG(), e.toString())
                 appContext.toastFromMainDispatcher(R.string.unknown_error)
+            }
+        }
+    }
+
+    private fun reAddToPlaylist(
+        context: Context,
+        streamItem: StreamItem,
+        sortedFeedPosition: Int,
+        originalPlaylistPosition: Int
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                PlaylistsHelper.addToPlaylist(playlistId, streamItem)
+                sortedFeed.add(sortedFeedPosition, streamItem)
+                originalFeed.add(originalPlaylistPosition, streamItem)
+                visibleCount++
+
+                withContext(Dispatchers.Main) {
+                    notifyItemInserted(sortedFeedPosition)
+                }
+            } catch (e: Exception) {
+                Log.e(TAG(), e.toString())
+                context.toastFromMainDispatcher(R.string.unknown_error)
             }
         }
     }
