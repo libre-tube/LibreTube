@@ -102,4 +102,9 @@ object TextUtils {
         bitrate ?: return ""
         return "${bitrate / 1024}kbps"
     }
+
+    fun limitTextToLength(text: String, maxLength: Int): String {
+        if (text.length <= maxLength) return text
+        return text.take(maxLength) + "…"
+    }
 }
