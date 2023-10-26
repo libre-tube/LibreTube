@@ -69,7 +69,7 @@ class VideosAdapter(
             it.url?.toID() == videoId
         }.takeIf { it > 0 } ?: return
         streamItems.removeAt(index)
-        visibleCount -= 1
+        visibleCount--
         notifyItemRemoved(index)
         notifyItemRangeChanged(index, itemCount)
     }
