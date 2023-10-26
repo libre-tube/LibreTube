@@ -66,7 +66,7 @@ class AutoplayCountdownView(
             R.string.playing_next,
             currentTimerState.toString()
         )
-        currentTimerState -= 1
+        currentTimerState--
         handler.postDelayed(1000, TIMER_RUNNABLE_TOKEN, this::updateCountdown)
     }
 
