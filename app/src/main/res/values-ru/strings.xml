@@ -532,4 +532,5 @@
     <string name="segment_submitted">Сегмент отправлен</string>
     <string name="downvote">Понизить</string>
     <string name="repeat_mode_all">Все</string>
+    <string name="successfully_removed_from_playlist">\"%1$s\" было успешно удалено из плейлиста.</string>
 </resources>
