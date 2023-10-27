@@ -522,4 +522,6 @@
     <string name="undo">Urungkan</string>
     <string name="segment_submitted">Segmen telah dikirim</string>
     <string name="downvote">Turunkan</string>
+    <string name="repeat_mode_all">Ulangi semua</string>
+    <string name="successfully_removed_from_playlist">Berhasil dihapus \"%1$s\" dari daftar putar.</string>
 </resources>
