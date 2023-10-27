@@ -80,13 +80,13 @@
     <string name="sponsorblock">حاجب الرعاة</string>
     <string name="sponsorblock_summary">يستخدم واجهة برمجة التطبيقات من https://sponsor.ajay.app/</string>
     <string name="segment_skipped">الجزء الذي تم تخطيه</string>
-    <string name="category_interaction_description">عندما يكون هناك تذكير قصير لإبداء الإعجاب أو الاشتراك أو متابعته في منتصف المحتوى. إذا كانت طويلة أو تتعلق بشيء محدد ، فيجب أن تكون تحت الترويج الذاتي بدلاً من ذلك.</string>
+    <string name="category_interaction_description">عندما يكون هناك تذكير قصير لإبداء الإعجاب أو الاشتراك أو المتابعة في منتصف الفيديو. إذا كان التذكير طويلاً أو متعلقاً بشيء محدد ، فيجب أن يكون ترويجاً ذاتياً.</string>
     <string name="category_intro">استراحة/مقدمة رسوم متحركة</string>
-    <string name="category_intro_description">فاصل زمني بدون محتوى فعلي. يمكن أن يكون وقفة ، إطار ثابت ، تكرار الرسوم المتحركة. لا ينبغي استخدام هذا للانتقالات التي تحتوي على معلومات.</string>
-    <string name="category_outro_description">الاعتمادات أو عند ظهور بطاقات النهاية على YouTube. ليس للاستنتاجات مع المعلومات.</string>
+    <string name="category_intro_description">فاصل زمني بدون محتوى فعلي. يمكن أن يكون وقفة ، صورة ثابتة ، صورة متحركة مكررة. لا ينبغي استخدام هذا للانتقالات التي تحتوي على معلومات.</string>
+    <string name="category_outro_description">معلومات تلي عرض أسماء المساهمين في العمل. ليس للاستنتاجات التي تحتوي على المعلومات.</string>
     <string name="category_segments">الاجزاء</string>
-    <string name="category_selfpromo">الترويج غير المدفوع / الذاتي</string>
-    <string name="category_selfpromo_description">على غرار \"الراعي\" باستثناء الترويج غير المدفوع أو الذاتي. يتضمن ذلك أقساما حول البضائع أو التبرعات أو المعلومات حول من تعاونوا معه.</string>
+    <string name="category_selfpromo">الترويج غير المدفوع للغير أو الترويج الذاتي</string>
+    <string name="category_selfpromo_description">على غرار \"الراعي\" باستثناء الترويج غير المدفوع أو الذاتي. يتضمن ذلك أقساما حول البضائع أو التبرعات أو معلومات حول من تعاونوا معه.</string>
     <string name="category_interaction">تذكير التفاعل</string>
     <string name="license">الترخيص</string>
     <string name="color_accent">اللون الثانوي</string>
@@ -97,7 +97,7 @@
     <string name="color_purple">بنفسجي</string>
     <string name="material_you">المواد أنت</string>
     <string name="category_sponsor_description">ترويج مدفوع و إحالات مدفوعة و إعلانات مباشرة. ليس للترويج الذاتي أو الترويج المجاني لأهداف أو منشئي محتوى أو مواقع ويب أو منتجات.</string>
-    <string name="category_outro">بطاقات النهاية / الاعتمادات</string>
+    <string name="category_outro">شارة النهاية / أسماء المساهمين في العمل</string>
     <string name="sponsorblock_notifications">الإشعارات</string>
     <string name="app_icon">أيقونة</string>
     <string name="enabled">مفعل</string>
@@ -117,9 +117,9 @@
     <string name="version">الإصدار %1$s</string>
     <string name="related_streams">المحتويات ذات الصلة</string>
     <string name="related_streams_summary">اعرض محتوى مشابه إلى جانب ما تشاهده.</string>
-    <string name="category_filler">حشو لاداع له / او النكات</string>
-    <string name="category_filler_description">للمشاهد العرضية المضافة فقط للحشو أو الفكاهة غير المطلوبة لفهم المحتوى الرئيسي للفيديو.</string>
-    <string name="category_music_offtopic">الموسيقى: قسم غير الموسيقى</string>
+    <string name="category_filler">حشو لاداع له / او نكات</string>
+    <string name="category_filler_description">للمشاهد العرضية المضافة فقط للحشو أو الفكاهة و غير المطلوبة لفهم المحتوى الرئيسي للفيديو.</string>
+    <string name="category_music_offtopic">الموسيقى: قسم غير متعلق بالموسيقى</string>
     <string name="category_preview">معاينة / خلاصة</string>
     <string name="category_preview_description">للأجزاء التي توضح بالتفصيل المحتوى المستقبلي بدون معلومات إضافية. إذا كانت تتضمن مقاطع تظهر هنا فقط ، فمن المحتمل جدًا أن تكون هذه الفئة الخطأ.</string>
     <string name="instance_api_url">عنوان URL لمثيل واجهة برمجة التطبيقات</string>
@@ -538,4 +538,5 @@
     <string name="segment_submitted">تم إرسال الجزء</string>
     <string name="downvote">أسفل</string>
     <string name="repeat_mode_all">تكرار الكل</string>
+    <string name="successfully_removed_from_playlist">تمت إزالة \"%1$s\" من قائمة التشغيل بنجاح.</string>
 </resources>
