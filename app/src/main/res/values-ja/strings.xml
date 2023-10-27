@@ -503,7 +503,7 @@
     <string name="automatic_once">一回自動</string>
     <string name="sb_create_segment">セグメントを作成</string>
     <string name="segment_type">セグメントの種類</string>
-    <string name="sb_invalid_segment">シーンの開始または終了が正しくないです</string>
+    <string name="sb_invalid_segment">シーンの開始または終了が無効です</string>
     <string name="filename_too_long">ファイル名が長すぎます！</string>
     <string name="sponsorblock_user_id">SponsorBlock ユーザー名</string>
     <string name="contribute_to_sponsorblock">SponsorBlock に貢献</string>
