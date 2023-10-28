@@ -438,9 +438,9 @@
     <string name="welcome">Üdvözli a LibreTube</string>
     <string name="visible">Megjelenítés a keresési sávban</string>
     <string name="stop">Stop</string>
-    <string name="change_playlist_description">Lejátszólista leírásának módosítása</string>
-    <string name="playlist_description">Lejátszólista leírása</string>
-    <string name="emptyPlaylistDescription">A lejátszólista leírása nem lehet üres</string>
+    <string name="change_playlist_description">Lejátszási lista leírásának módosítása</string>
+    <string name="playlist_description">Lejátszási lista leírása</string>
+    <string name="emptyPlaylistDescription">A lejátszási lista leírása nem lehet üres</string>
     <string name="category_highlight">Videó kiemelés megjelenítése</string>
     <string name="sb_custom_colors">Egyéni szakaszszínek</string>
     <string name="color">Szín</string>
@@ -491,7 +491,7 @@
     <string name="tooltip_close">Bezárás</string>
     <string name="tooltip_filter">Szűrő</string>
     <string name="tooltip_edit_groups">Csoportok szerkesztése</string>
-    <string name="tooltip_create_playlist">Lejátszólista létrehozása</string>
+    <string name="tooltip_create_playlist">Lejátszási lista létrehozása</string>
     <string name="auto_generated">automatikusan generált</string>
     <string name="tooltip_sponsorblock">SzponzorBlokk váltása</string>
     <string name="tooltip_options">Lehetőségek</string>
@@ -526,4 +526,5 @@
     <string name="remember_playback_speed">Lejátszási sebesség megjegyzése</string>
     <string name="downvote">Le</string>
     <string name="repeat_mode_all">Összes ismétlése</string>
+    <string name="successfully_removed_from_playlist">\"%1$s\" sikeresen eltávolítva a lejátszási listáról.</string>
 </resources>
