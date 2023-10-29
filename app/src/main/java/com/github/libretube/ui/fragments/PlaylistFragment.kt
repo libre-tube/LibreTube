@@ -101,9 +101,7 @@ class PlaylistFragment : Fragment() {
         updateBookmarkRes()
 
         playerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
-            binding.playlistRecView.updatePadding(
-                bottom = if (it) (64).dpToPx().toInt() else 0
-            )
+            binding.playlistRecView.updatePadding(bottom = if (it) 64f.dpToPx() else 0)
         }
 
         fetchPlaylist()

@@ -29,7 +29,7 @@ class MarkableTimeBar(
     private var player: Player? = null
     private var length: Int = 0
 
-    private val progressBarHeight = (2).dpToPx().toInt()
+    private val progressBarHeight = 2f.dpToPx()
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)

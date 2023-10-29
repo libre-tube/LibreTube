@@ -152,9 +152,8 @@ class LibraryFragment : Fragment() {
 
     private fun updateFABMargin(isMiniPlayerVisible: Boolean) {
         // optimize CreatePlaylistFab bottom margin if miniPlayer active
-        val bottomMargin = if (isMiniPlayerVisible) 64 else 16
         binding.createPlaylist.updateLayoutParams<MarginLayoutParams> {
-            this.bottomMargin = bottomMargin.dpToPx().toInt()
+            bottomMargin = (if (isMiniPlayerVisible) 64f else 16f).dpToPx()
         }
     }
 

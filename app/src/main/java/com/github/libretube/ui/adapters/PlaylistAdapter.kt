@@ -108,7 +108,7 @@ class PlaylistAdapter(
                     NavigationHelper.navigateChannel(root.context, streamItem.uploaderUrl.toID())
                 }
                 // add some extra padding to make it easier to click
-                val extraPadding = (3).dpToPx().toInt()
+                val extraPadding = 3f.dpToPx()
                 videoInfo.updatePadding(top = extraPadding, bottom = extraPadding)
             }
 
