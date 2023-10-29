@@ -55,6 +55,9 @@ class CommentsRepliesFragment : Fragment() {
 
         val binding = _binding ?: return
 
+        val commentsSheet = parentFragment as? CommentsSheet
+        commentsSheet?.binding?.btnScrollToTop?.isGone = true
+
         repliesAdapter = CommentsAdapter(
             null,
             videoId,
