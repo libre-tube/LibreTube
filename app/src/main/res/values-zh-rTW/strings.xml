@@ -523,4 +523,5 @@
     <string name="segment_submitted">已遞交分節</string>
     <string name="downvote">下</string>
     <string name="repeat_mode_all">重播全部</string>
+    <string name="successfully_removed_from_playlist">已成功從播放清單中移除「%1$s」。</string>
 </resources>

@@ -529,4 +529,5 @@
     <string name="segment_submitted">Segmento inviato</string>
     <string name="downvote">Negativo</string>
     <string name="repeat_mode_all">Ripeti tutto</string>
+    <string name="successfully_removed_from_playlist">\"%1$s\" rimosso correttamente dalla playlist.</string>
 </resources>

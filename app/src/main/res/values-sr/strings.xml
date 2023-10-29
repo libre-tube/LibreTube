@@ -529,4 +529,5 @@
     <string name="segment_submitted">Сегмент је послат</string>
     <string name="downvote">Гласај против</string>
     <string name="repeat_mode_all">Понављај све</string>
+    <string name="successfully_removed_from_playlist">Успешно уклоњено са плејлисте: „%1$s“.</string>
 </resources>

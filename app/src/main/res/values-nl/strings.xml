@@ -526,4 +526,5 @@
     <string name="repeat_mode_all">Herhaal alles</string>
     <string name="segment_submitted">Segment verzonden</string>
     <string name="downvote">Omlaag</string>
+    <string name="successfully_removed_from_playlist">‘%1$s’ succesvol uit afspeellijst verwijderd</string>
 </resources>
