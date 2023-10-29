@@ -6,6 +6,7 @@ import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.extensions.move
+import com.github.libretube.extensions.runCatchingIO
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PlayerHelper
 import kotlinx.coroutines.CoroutineScope
@@ -15,7 +16,6 @@ import kotlinx.coroutines.launch
 object PlayingQueue {
     private val queue = mutableListOf<StreamItem>()
     private var currentStream: StreamItem? = null
-    private val scope = CoroutineScope(Dispatchers.IO)
 
     /**
      * Listener that gets called when the user selects an item from the queue
@@ -145,57 +145,43 @@ object PlayingQueue {
         }
     }
 
-    private fun fetchMoreFromPlaylist(playlistId: String, nextPage: String?, isMainList: Boolean) {
+    private fun fetchMoreFromPlaylist(playlistId: String, nextPage: String?, isMainList: Boolean) = runCatchingIO {
         var playlistNextPage = nextPage
-        scope.launch(Dispatchers.IO) {
-            while (playlistNextPage != null) {
-                RetrofitInstance.authApi.getPlaylistNextPage(playlistId, playlistNextPage!!).run {
-                    addToQueueAsync(relatedStreams, isMainList = isMainList)
-                    playlistNextPage = this.nextpage
-                }
+        while (playlistNextPage != null) {
+            RetrofitInstance.authApi.getPlaylistNextPage(playlistId, playlistNextPage).run {
+                addToQueueAsync(relatedStreams, isMainList = isMainList)
+                playlistNextPage = this.nextpage
             }
         }
     }
 
-    fun insertPlaylist(playlistId: String, newCurrentStream: StreamItem?) {
-        scope.launch(Dispatchers.IO) {
-            runCatching {
-                val playlist = PlaylistsHelper.getPlaylist(playlistId)
-                val isMainList = newCurrentStream != null
-                addToQueueAsync(playlist.relatedStreams, newCurrentStream, isMainList)
-                if (playlist.nextpage == null) return@launch
-                fetchMoreFromPlaylist(playlistId, playlist.nextpage, isMainList)
-            }
-        }
+    fun insertPlaylist(playlistId: String, newCurrentStream: StreamItem?) = runCatchingIO {
+        val playlist = PlaylistsHelper.getPlaylist(playlistId)
+        val isMainList = newCurrentStream != null
+        addToQueueAsync(playlist.relatedStreams, newCurrentStream, isMainList)
+        if (playlist.nextpage == null) return@runCatchingIO
+        fetchMoreFromPlaylist(playlistId, playlist.nextpage, isMainList)
     }
 
-    private fun fetchMoreFromChannel(channelId: String, nextPage: String?) {
+    private fun fetchMoreFromChannel(channelId: String, nextPage: String?) = runCatchingIO {
         var channelNextPage = nextPage
-        scope.launch(Dispatchers.IO) {
-            runCatching {
-                while (channelNextPage != null) {
-                    RetrofitInstance.api.getChannelNextPage(channelId, nextPage!!).run {
-                        addToQueueAsync(relatedStreams)
-                        channelNextPage = this.nextpage
-                    }
-                }
+        while (channelNextPage != null) {
+            RetrofitInstance.api.getChannelNextPage(channelId, nextPage!!).run {
+                addToQueueAsync(relatedStreams)
+                channelNextPage = this.nextpage
             }
         }
     }
 
-    private fun insertChannel(channelId: String, newCurrentStream: StreamItem) {
-        scope.launch(Dispatchers.IO) {
-            runCatching {
-                val channel = RetrofitInstance.api.getChannel(channelId)
-                addToQueueAsync(channel.relatedStreams, newCurrentStream)
-                if (channel.nextpage == null) return@launch
-                fetchMoreFromChannel(channelId, channel.nextpage)
-            }
-        }
+    private fun insertChannel(channelId: String, newCurrentStream: StreamItem) = runCatchingIO {
+        val channel = RetrofitInstance.api.getChannel(channelId)
+        addToQueueAsync(channel.relatedStreams, newCurrentStream)
+        if (channel.nextpage == null) return@runCatchingIO
+        fetchMoreFromChannel(channelId, channel.nextpage)
     }
 
     fun insertByVideoId(videoId: String) {
-        scope.launch {
+        CoroutineScope(Dispatchers.IO).launch {
             runCatching {
                 val streams = RetrofitInstance.api.getStreams(videoId.toID())
                 add(streams.toStreamItem(videoId))
