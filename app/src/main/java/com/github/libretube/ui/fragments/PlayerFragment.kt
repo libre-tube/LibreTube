@@ -519,18 +519,22 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         NavigationHelper.startAudioPlayer(requireContext())
     }
 
+    private fun updateFullscreenOrientation() {
+        if (PlayerHelper.autoFullscreenEnabled || this::streams.isInitialized) return
+
+        val height = streams.videoStreams.firstOrNull()?.height ?: exoPlayer.videoSize.height
+        val width = streams.videoStreams.firstOrNull()?.width ?: exoPlayer.videoSize.width
+
+        mainActivity.requestedOrientation = PlayerHelper.getOrientation(width, height)
+    }
+
     private fun setFullscreen() {
         // set status bar icon color to white
         windowInsetsControllerCompat.isAppearanceLightStatusBars = false
 
         viewModel.isFullscreen.value = true
 
-        if (mainActivity.screenOrientationPref == ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT) {
-            val height = streams.videoStreams.firstOrNull()?.height ?: exoPlayer.videoSize.height
-            val width = streams.videoStreams.firstOrNull()?.width ?: exoPlayer.videoSize.width
-
-            mainActivity.requestedOrientation = PlayerHelper.getOrientation(width, height)
-        }
+        updateFullscreenOrientation()
 
         commentsViewModel.setCommentSheetExpand(null)
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
@@ -1348,7 +1352,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         if (PlayerHelper.autoFullscreenEnabled) {
             // enable auto rotation
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
-            onConfigurationChanged(resources.configuration)
         } else {
             // go to portrait mode
             mainActivity.requestedOrientation = (requireActivity() as BaseActivity).screenOrientationPref
