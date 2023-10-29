@@ -3,6 +3,7 @@ package com.github.libretube.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isGone
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.R
@@ -83,6 +84,7 @@ class SearchAdapter(
             ImageHelper.loadImage(item.thumbnail, thumbnail)
             thumbnailDuration.setFormattedDuration(item.duration, item.isShort)
             videoTitle.text = item.title
+
             val viewsString = item.views.takeIf { it != -1L }?.formatShort().orEmpty()
             val uploadDate = item.uploaded.takeIf { it > 0 }?.let {
                 " ${TextUtils.SEPARATOR} ${TextUtils.formatRelativeDate(root.context, it)}"
@@ -92,16 +94,20 @@ class SearchAdapter(
                 viewsString,
                 uploadDate
             )
+
             // only display channel related info if not in a channel tab
             if (!isChannelAdapter) {
                 channelName.text = item.uploaderName
                 ImageHelper.loadImage(item.uploaderAvatar, channelImage)
+            } else {
+                channelContainer.isGone = true
             }
+
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, item.url, timestamp = timeStamp)
             }
-            val videoId = item.url.toID()
 
+            val videoId = item.url.toID()
             val activity = (root.context as BaseActivity)
             val fragmentManager = activity.supportFragmentManager
             root.setOnLongClickListener {
