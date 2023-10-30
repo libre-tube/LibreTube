@@ -44,18 +44,6 @@
                     android:src="@drawable/ic_repeat" />
 
                 <ImageView
-                    android:id="@+id/shuffle"
-                    android:tooltipText="@string/shuffle"
-                    style="@style/QueueSheetOption"
-                    android:src="@drawable/ic_shuffle" />
-
-                <ImageView
-                    android:id="@+id/reverse"
-                    android:tooltipText="@string/tooltip_reverse"
-                    style="@style/QueueSheetOption"
-                    android:src="@drawable/ic_reverse" />
-
-                <ImageView
                     android:id="@+id/add_to_playlist"
                     android:tooltipText="@string/addToPlaylist"
                     style="@style/QueueSheetOption"
