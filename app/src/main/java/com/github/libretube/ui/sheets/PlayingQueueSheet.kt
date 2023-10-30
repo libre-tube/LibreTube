@@ -54,11 +54,6 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
             AddToPlaylistDialog().show(childFragmentManager, null)
         }
 
-        binding.reverse.setOnClickListener {
-            PlayingQueue.setStreams(PlayingQueue.getStreams().reversed())
-            adapter.notifyDataSetChanged()
-        }
-
         binding.repeat.setOnClickListener {
             // select the next available repeat mode
             PlayingQueue.repeatMode = when (PlayingQueue.repeatMode) {
@@ -135,7 +130,8 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
             R.string.creation_date,
             R.string.most_views,
             R.string.uploader_name,
-            R.string.shuffle
+            R.string.shuffle,
+            R.string.tooltip_reverse
         )
             .map { requireContext().getString(it) }
             .toTypedArray()
@@ -160,6 +156,7 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
                             .filter { it !in toShuffle }
                             .plus(toShuffle.shuffled())
                     }
+                    4 -> PlayingQueue.getStreams().reversed()
                     else -> throw IllegalArgumentException()
                 }
                 PlayingQueue.setStreams(newQueue)
