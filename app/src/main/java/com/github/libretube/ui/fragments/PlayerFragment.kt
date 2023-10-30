@@ -406,6 +406,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         binding.commentsToggle.setOnClickListener {
+            if (!this::streams.isInitialized) return@setOnClickListener
             // set the max height to not cover the currently playing video
             commentsViewModel.handleLink = this::handleLink
             updateMaxSheetHeight()
