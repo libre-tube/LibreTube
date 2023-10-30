@@ -521,7 +521,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private fun updateFullscreenOrientation() {
-        if (PlayerHelper.autoFullscreenEnabled || this::streams.isInitialized) return
+        if (PlayerHelper.autoFullscreenEnabled || !this::streams.isInitialized) return
 
         val height = streams.videoStreams.firstOrNull()?.height ?: exoPlayer.videoSize.height
         val width = streams.videoStreams.firstOrNull()?.width ?: exoPlayer.videoSize.width
