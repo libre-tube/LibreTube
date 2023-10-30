@@ -50,24 +50,6 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
         val currentPlayingIndex = PlayingQueue.currentIndex()
         if (currentPlayingIndex != -1) binding.optionsRecycler.scrollToPosition(currentPlayingIndex)
 
-        binding.shuffle.setOnClickListener {
-            val streams = PlayingQueue.getStreams().toMutableList()
-            val currentIndex = PlayingQueue.currentIndex()
-
-            // save all streams that need to be shuffled to a copy of the list
-            val toShuffle = streams.filterIndexed { index, _ ->
-                index > currentIndex
-            }
-
-            // re-add all streams in the new, shuffled order after removing them
-            streams.removeAll(toShuffle)
-            streams.addAll(toShuffle.shuffled())
-
-            PlayingQueue.setStreams(streams)
-
-            adapter.notifyDataSetChanged()
-        }
-
         binding.addToPlaylist.setOnClickListener {
             AddToPlaylistDialog().show(childFragmentManager, null)
         }
@@ -152,7 +134,8 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
         val sortOptions = listOf(
             R.string.creation_date,
             R.string.most_views,
-            R.string.uploader_name
+            R.string.uploader_name,
+            R.string.shuffle
         )
             .map { requireContext().getString(it) }
             .toTypedArray()
@@ -163,6 +146,20 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
                     0 -> PlayingQueue.getStreams().sortedBy { it.uploaded }
                     1 -> PlayingQueue.getStreams().sortedBy { it.views }.reversed()
                     2 -> PlayingQueue.getStreams().sortedBy { it.uploaderName }
+                    3 -> {
+                        val streams = PlayingQueue.getStreams()
+                        val currentIndex = PlayingQueue.currentIndex()
+
+                        // save all streams that need to be shuffled to a copy of the list
+                        val toShuffle = streams.filterIndexed { queueIndex, _ ->
+                            queueIndex > currentIndex
+                        }
+
+                        // create a new list by replacing the old queue-end with the new, shuffled one
+                        streams
+                            .filter { it !in toShuffle }
+                            .plus(toShuffle.shuffled())
+                    }
                     else -> throw IllegalArgumentException()
                 }
                 PlayingQueue.setStreams(newQueue)
