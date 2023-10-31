@@ -551,13 +551,8 @@ open class CustomExoPlayerView(
         super.onConfigurationChanged(newConfig)
 
         // add a larger bottom margin to the time bar in landscape mode
-        val offset = when {
-            isFullscreen() -> 20.dpToPx()
-            else -> 10.dpToPx()
-        }
-
         binding.progressBar.updateLayoutParams<MarginLayoutParams> {
-            bottomMargin = offset.toInt()
+            bottomMargin = (if (isFullscreen()) 20f else 10f).dpToPx()
         }
 
         updateTopBarMargin()
@@ -599,7 +594,7 @@ open class CustomExoPlayerView(
      */
     fun updateTopBarMargin() {
         binding.topBar.updateLayoutParams<MarginLayoutParams> {
-            topMargin = getTopBarMarginDp().dpToPx().toInt()
+            topMargin = getTopBarMarginDp().toFloat().dpToPx()
         }
     }
 
@@ -731,6 +726,6 @@ open class CustomExoPlayerView(
         private const val SUBTITLE_BOTTOM_PADDING_FRACTION = 0.158f
         private const val ANIMATION_DURATION = 100L
         private const val AUTO_HIDE_CONTROLLER_DELAY = 2000L
-        private val LANDSCAPE_MARGIN_HORIZONTAL = (20).dpToPx().toInt()
+        private val LANDSCAPE_MARGIN_HORIZONTAL = 20f.dpToPx()
     }
 }

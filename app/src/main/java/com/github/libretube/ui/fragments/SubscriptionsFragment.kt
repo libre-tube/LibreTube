@@ -170,8 +170,7 @@ class SubscriptionsFragment : Fragment() {
         // otherwise the last channel would be invisible
         playerModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
             binding.subChannelsContainer.updateLayoutParams<MarginLayoutParams> {
-                val newMargin = if (it) 64 else 0
-                bottomMargin = newMargin.dpToPx().toInt()
+                bottomMargin = (if (it) 64f else 0f).dpToPx()
             }
         }
 

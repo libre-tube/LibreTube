@@ -128,8 +128,8 @@ class VideosAdapter(
             // set a fixed width for better visuals
             root.updateLayoutParams {
                 when (forceMode) {
-                    ForceMode.RELATED -> width = 210.dpToPx().toInt()
-                    ForceMode.HOME -> width = 250.dpToPx().toInt()
+                    ForceMode.RELATED -> width = 210f.dpToPx()
+                    ForceMode.HOME -> width = 250f.dpToPx()
                     else -> {}
                 }
             }
