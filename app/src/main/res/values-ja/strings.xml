@@ -523,4 +523,5 @@
     <string name="segment_submitted">シーンを送信しました</string>
     <string name="downvote">反対</string>
     <string name="repeat_mode_all">すべてリピート</string>
+    <string name="successfully_removed_from_playlist">再生リストから以下を削除しました: %1$s</string>
 </resources>
