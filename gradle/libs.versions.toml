@@ -24,7 +24,7 @@ kotlinxDatetime = "0.4.1"
 kotlinxRetrofit = "1.0.0"
 media3 = "1.1.1"
 activity = "1.8.0"
-fragment = "1.6.1"
+fragment = "1.6.2"
 
 [libraries]
 androidx-activity = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity" }
