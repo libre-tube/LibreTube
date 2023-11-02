@@ -526,4 +526,5 @@
     <string name="segment_submitted">Bölüm təqdim edildi</string>
     <string name="downvote">Aşağı</string>
     <string name="repeat_mode_all">Hamısın təkrarla</string>
+    <string name="successfully_removed_from_playlist">\"%1$s\" oynatma siyahısından uğurla silindi.</string>
 </resources>
