@@ -40,7 +40,7 @@ class AddToPlaylistDialog : DialogFragment() {
         val binding = DialogAddToPlaylistBinding.inflate(layoutInflater)
 
         childFragmentManager.setFragmentResultListener(
-            ADD_TO_PLAYLIST_DIALOG_REQUEST_KEY,
+            CreatePlaylistDialog.CREATE_PLAYLIST_DIALOG_REQUEST_KEY,
             this
         ) { _, resultBundle ->
             val addedToPlaylist = resultBundle.getBoolean(IntentData.playlistTask)
@@ -127,9 +127,5 @@ class AddToPlaylistDialog : DialogFragment() {
         } else {
             appContext.toastFromMainDispatcher(R.string.fail)
         }
-    }
-
-    companion object {
-        const val ADD_TO_PLAYLIST_DIALOG_REQUEST_KEY = "add_to_playlist_dialog_request_key"
     }
 }
