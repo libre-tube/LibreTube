@@ -443,7 +443,7 @@
     <string name="automatic">自動でスキップ</string>
     <string name="sb_custom_colors">シーン部分の色を指定</string>
     <string name="color">色</string>
-    <string name="sb_color_enable">広告シーンの部分の色の指定を切り替える。</string>
+    <string name="sb_color_enable">該当シーンの部分の色を替える。</string>
     <string name="invalid_color">この色の値は無効です！</string>
     <string name="enter_hex_value">16進数の色の値を入力</string>
     <string name="visible">シークバーに表示</string>
@@ -523,4 +523,5 @@
     <string name="segment_submitted">シーンを送信しました</string>
     <string name="downvote">反対</string>
     <string name="repeat_mode_all">すべてリピート</string>
+    <string name="successfully_removed_from_playlist">再生リストから以下を削除しました: %1$s</string>
 </resources>
