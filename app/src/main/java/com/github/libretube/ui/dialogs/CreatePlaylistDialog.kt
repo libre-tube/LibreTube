@@ -50,10 +50,6 @@ class CreatePlaylistDialog : DialogFragment() {
             }
         }
 
-        binding.cancelButton.setOnClickListener {
-            dismiss()
-        }
-
         binding.createNewPlaylist.setOnClickListener {
             val appContext = context?.applicationContext
             val listName = binding.playlistName.text?.toString()
@@ -84,7 +80,9 @@ class CreatePlaylistDialog : DialogFragment() {
         }
 
         return MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.createPlaylist)
             .setView(binding.root)
+            .setNegativeButton(R.string.cancel, null)
             .show()
     }
 

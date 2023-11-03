@@ -43,16 +43,6 @@
         <item name="android:paddingBottom">15dp</item>
     </style>
 
-    <style name="CustomDialogButton" parent="@style/Widget.Material3.Button.TextButton">
-
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">end</item>
-        <item name="android:layout_marginBottom">8dp</item>
-        <item name="android:padding">8dp</item>
-
-    </style>
-
     <style name="CustomDialogTextInputLayout" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <item name="android:layout_width">match_parent</item>

@@ -18,35 +18,32 @@ class CustomInstanceDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogCustomInstanceBinding.inflate(layoutInflater)
 
-        binding.cancel.setOnClickListener {
-            dismiss()
-        }
+        return MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.customInstance)
+            .setView(binding.root)
+            .setPositiveButton(R.string.addInstance) { _, _ ->
+                val instanceName = binding.instanceName.text.toString()
+                val apiUrl = binding.instanceApiUrl.text.toString()
+                val frontendUrl = binding.instanceFrontendUrl.text.toString()
 
-        binding.addInstance.setOnClickListener {
-            val instanceName = binding.instanceName.text.toString()
-            val apiUrl = binding.instanceApiUrl.text.toString()
-            val frontendUrl = binding.instanceFrontendUrl.text.toString()
-
-            if (instanceName.isNotEmpty() && apiUrl.isNotEmpty() && frontendUrl.isNotEmpty()) {
-                if (apiUrl.toHttpUrlOrNull() != null && frontendUrl.toHttpUrlOrNull() != null) {
-                    lifecycleScope.launch {
-                        Database.customInstanceDao()
-                            .insert(CustomInstance(instanceName, apiUrl, frontendUrl))
-                        ActivityCompat.recreate(requireActivity())
-                        dismiss()
+                if (instanceName.isNotEmpty() && apiUrl.isNotEmpty() && frontendUrl.isNotEmpty()) {
+                    if (apiUrl.toHttpUrlOrNull() != null && frontendUrl.toHttpUrlOrNull() != null) {
+                        lifecycleScope.launch {
+                            Database.customInstanceDao()
+                                .insert(CustomInstance(instanceName, apiUrl, frontendUrl))
+                            ActivityCompat.recreate(requireActivity())
+                            dismiss()
+                        }
+                    } else {
+                        Toast.makeText(requireContext(), R.string.invalid_url, Toast.LENGTH_SHORT)
+                            .show()
                     }
                 } else {
-                    Toast.makeText(requireContext(), R.string.invalid_url, Toast.LENGTH_SHORT)
-                        .show()
+                    // at least one empty input
+                    Toast.makeText(requireContext(), R.string.empty_instance, Toast.LENGTH_SHORT).show()
                 }
-            } else {
-                // at least one empty input
-                Toast.makeText(requireContext(), R.string.empty_instance, Toast.LENGTH_SHORT).show()
             }
-        }
-
-        return MaterialAlertDialogBuilder(requireContext())
-            .setView(binding.root)
+            .setNegativeButton(R.string.cancel, null)
             .show()
     }
 }
