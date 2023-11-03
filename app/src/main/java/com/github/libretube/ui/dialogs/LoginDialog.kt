@@ -61,6 +61,7 @@ class LoginDialog : DialogFragment() {
         }
 
         return MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.login)
             .setView(binding.root)
             .show()
     }

@@ -33,6 +33,7 @@ class LogoutDialog : DialogFragment() {
         }
 
         return MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.logout)
             .setView(binding.root)
             .show()
     }

@@ -84,6 +84,7 @@ class CreatePlaylistDialog : DialogFragment() {
         }
 
         return MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.createPlaylist)
             .setView(binding.root)
             .show()
     }

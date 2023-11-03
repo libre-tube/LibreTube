@@ -55,6 +55,7 @@ class AddToPlaylistDialog : DialogFragment() {
         fetchPlaylists(binding)
 
         return MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.addToPlaylist)
             .setView(binding.root)
             .show()
     }

@@ -46,6 +46,7 @@ class CustomInstanceDialog : DialogFragment() {
         }
 
         return MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.customInstance)
             .setView(binding.root)
             .show()
     }

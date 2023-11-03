@@ -67,6 +67,7 @@ class DownloadDialog : DialogFragment() {
         }
 
         return MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.download)
             .setView(binding.root)
             .setPositiveButton(R.string.download, null)
             .show()

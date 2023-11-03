@@ -2,13 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <com.github.libretube.ui.views.AppNameTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:gravity="center" />
+    android:orientation="vertical"
+    android:paddingTop="8dp">
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/CustomDialogTextInputLayout"
@@ -48,7 +43,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
         android:drawableStart="@drawable/ic_copy"
         android:text="@string/createPlaylist" />
 
@@ -56,7 +50,7 @@
         android:id="@+id/cancel_button"
         style="@style/CustomDialogButton"
         android:layout_gravity="end"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:text="@string/cancel" />
 
