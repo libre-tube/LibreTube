@@ -38,23 +38,4 @@
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/cancel"
-            style="@style/CustomDialogButton"
-            android:text="@string/cancel" />
-
-        <Button
-            android:id="@+id/addInstance"
-            style="@style/CustomDialogButton"
-            android:layout_marginEnd="16dp"
-            android:text="@string/addInstance" />
-
-    </LinearLayout>
-
 </LinearLayout>

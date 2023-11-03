@@ -11,27 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginVertical="8dp"
+        android:layout_marginTop="8dp"
         app:icon="@drawable/ic_playlist_add"
         tools:ignore="RtlSymmetry" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="end"
-        android:layout_marginEnd="16dp">
-
-        <Button
-            android:id="@+id/create_playlist"
-            style="@style/CustomDialogButton"
-            android:layout_marginEnd="8dp"
-            android:text="@string/createPlaylist" />
-
-        <Button
-            android:id="@+id/addToPlaylist"
-            style="@style/CustomDialogButton"
-            android:text="@string/addToPlaylist" />
-
-    </LinearLayout>
 
 </LinearLayout>

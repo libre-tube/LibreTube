@@ -46,12 +46,4 @@
         android:drawableStart="@drawable/ic_copy"
         android:text="@string/createPlaylist" />
 
-    <Button
-        android:id="@+id/cancel_button"
-        style="@style/CustomDialogButton"
-        android:layout_gravity="end"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/cancel" />
-
 </LinearLayout>

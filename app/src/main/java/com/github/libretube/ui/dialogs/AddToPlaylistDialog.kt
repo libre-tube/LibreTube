@@ -2,6 +2,7 @@ package com.github.libretube.ui.dialogs
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
@@ -14,6 +15,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.obj.Playlists
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogAddToPlaylistBinding
 import com.github.libretube.extensions.TAG
@@ -30,6 +32,8 @@ import kotlinx.coroutines.launch
 class AddToPlaylistDialog : DialogFragment() {
     private var videoId: String? = null
     private val viewModel: PlaylistViewModel by activityViewModels()
+
+    var playlists = emptyList<Playlists>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,16 +52,30 @@ class AddToPlaylistDialog : DialogFragment() {
                 fetchPlaylists(binding)
             }
         }
-        binding.createPlaylist.setOnClickListener {
-            CreatePlaylistDialog().show(childFragmentManager, null)
-        }
 
         fetchPlaylists(binding)
 
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.addToPlaylist)
+            .setNegativeButton(R.string.createPlaylist, null)
+            .setPositiveButton(R.string.addToPlaylist, null)
             .setView(binding.root)
             .show()
+            .apply {
+                getButton(DialogInterface.BUTTON_NEGATIVE).setOnClickListener {
+                    CreatePlaylistDialog().show(childFragmentManager, null)
+                }
+                getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {val index = binding.playlistsSpinner.selectedItemPosition
+                    val playlist = playlists[index]
+                    viewModel.lastSelectedPlaylistId = playlist.id!!
+                    dialog?.hide()
+                    lifecycleScope.launch {
+                        addToPlaylist(playlist.id, playlist.name!!)
+                        dialog?.dismiss()
+                    }
+
+                }
+            }
     }
 
     private fun fetchPlaylists(binding: DialogAddToPlaylistBinding) {
@@ -71,7 +89,7 @@ class AddToPlaylistDialog : DialogFragment() {
                     return@repeatOnLifecycle
                 }
 
-                val playlists = response.filter { !it.name.isNullOrEmpty() }
+                playlists = response.filter { !it.name.isNullOrEmpty() }
                 if (playlists.isEmpty()) return@repeatOnLifecycle
 
                 binding.playlistsSpinner.adapter =
@@ -85,16 +103,6 @@ class AddToPlaylistDialog : DialogFragment() {
                 viewModel.lastSelectedPlaylistId?.let { id ->
                     val latestIndex = response.indexOfFirst { it.id == id }.takeIf { it >= 0 } ?: 0
                     binding.playlistsSpinner.setSelection(latestIndex)
-                }
-                binding.addToPlaylist.setOnClickListener {
-                    val index = binding.playlistsSpinner.selectedItemPosition
-                    val playlist = playlists[index]
-                    viewModel.lastSelectedPlaylistId = playlist.id!!
-                    dialog?.hide()
-                    lifecycleScope.launch {
-                        addToPlaylist(playlist.id, playlist.name!!)
-                        dialog?.dismiss()
-                    }
                 }
             }
         }

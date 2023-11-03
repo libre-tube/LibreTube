@@ -18,24 +18,4 @@
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/cancel_button"
-            style="@style/CustomDialogButton"
-            android:text="@string/cancel" />
-
-        <Button
-            android:id="@+id/delete_account_confirm"
-            style="@style/CustomDialogButton"
-            android:layout_marginEnd="16dp"
-            android:text="@string/deleteAccount" />
-
-    </LinearLayout>
-
 </LinearLayout>

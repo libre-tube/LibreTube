@@ -1,6 +1,7 @@
 package com.github.libretube.ui.dialogs
 
 import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -30,40 +31,36 @@ class LoginDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogLoginBinding.inflate(layoutInflater)
 
-        binding.login.setOnClickListener {
-            val email = binding.username.text?.toString()
-            val password = binding.password.text?.toString()
-
-            if (!email.isNullOrEmpty() && !password.isNullOrEmpty()) {
-                signIn(email, password)
-            } else {
-                Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
-            }
-        }
-        binding.register.setOnClickListener {
-            val email = binding.username.text?.toString().orEmpty()
-            val password = binding.password.text?.toString().orEmpty()
-
-            if (isEmail(email)) {
-                MaterialAlertDialogBuilder(requireContext())
-                    .setTitle(R.string.privacy_alert)
-                    .setMessage(R.string.username_email)
-                    .setNegativeButton(R.string.proceed) { _, _ ->
-                        signIn(email, password, true)
-                    }
-                    .setPositiveButton(R.string.cancel, null)
-                    .show()
-            } else if (email.isNotEmpty() && password.isNotEmpty()) {
-                signIn(email, password, true)
-            } else {
-                Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
-            }
-        }
-
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.login)
+            .setPositiveButton(R.string.login, null)
+            .setNegativeButton(R.string.register, null)
             .setView(binding.root)
             .show()
+            .apply {
+                getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
+                    val email = binding.username.text?.toString()
+                    val password = binding.password.text?.toString()
+
+                    if (!email.isNullOrEmpty() && !password.isNullOrEmpty()) {
+                        signIn(email, password)
+                    } else {
+                        Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
+                    }
+                }
+                getButton(DialogInterface.BUTTON_NEGATIVE).setOnClickListener {
+                    val email = binding.username.text?.toString().orEmpty()
+                    val password = binding.password.text?.toString().orEmpty()
+
+                    if (isEmail(email)) {
+                        showPrivacyAlertDialog(email, password)
+                    } else if (email.isNotEmpty() && password.isNotEmpty()) {
+                        signIn(email, password, true)
+                    } else {
+                        Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
     }
 
     private fun signIn(username: String, password: String, createNewAccount: Boolean = false) {
@@ -108,6 +105,17 @@ class LoginDialog : DialogFragment() {
             }
             dialog?.dismiss()
         }
+    }
+
+    private fun showPrivacyAlertDialog(email: String, password: String) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.privacy_alert)
+            .setMessage(R.string.username_email)
+            .setNegativeButton(R.string.proceed) { _, _ ->
+                signIn(email, password, true)
+            }
+            .setPositiveButton(R.string.cancel, null)
+            .show()
     }
 
     private fun isEmail(text: String): Boolean {
