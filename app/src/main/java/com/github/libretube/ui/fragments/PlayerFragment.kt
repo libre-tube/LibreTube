@@ -183,11 +183,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private var sponsorBlockConfig = PlayerHelper.getSponsorBlockCategories()
 
     private val handler = Handler(Looper.getMainLooper())
-    private val mainActivity get() = activity as MainActivity
-    private val windowInsetsControllerCompat
-        get() = WindowCompat
-            .getInsetsController(mainActivity.window, mainActivity.window.decorView)
 
+    private var seekBarPreviewListener: SeekbarPreviewListener? = null
     private var scrubbingTimeBar = false
     private var chaptersBottomSheet: ChaptersBottomSheet? = null
 
@@ -196,6 +193,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      * This is needed in order to figure out if the current layout is the landscape one or not.
      */
     private var playerLayoutOrientation = Int.MIN_VALUE
+
+    private val mainActivity get() = activity as MainActivity
+    private val windowInsetsControllerCompat
+        get() = WindowCompat
+            .getInsetsController(mainActivity.window, mainActivity.window.decorView)
 
     private val fullscreenDialog by lazy {
         object : Dialog(requireContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen) {
@@ -758,7 +760,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 playerBinding.exoProgress.setPlayer(exoPlayer)
 
                 initializePlayerView()
-                setupSeekbarPreview()
 
                 exoPlayer.playWhenReady = PlayerHelper.playAutomatically
                 exoPlayer.prepare()
@@ -1019,6 +1020,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         playerBinding.skipNext.setOnClickListener {
             playNextVideo()
+        }
+
+        // seekbar preview setup
+        playerBinding.seekbarPreview.isGone = true
+        seekBarPreviewListener?.let { playerBinding.exoProgress.removeListener(it) }
+        seekBarPreviewListener = createSeekbarPreviewListener().also {
+            playerBinding.exoProgress.addListener(it)
         }
     }
 
@@ -1531,22 +1539,19 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
             .build()
 
-    private fun setupSeekbarPreview() {
-        playerBinding.seekbarPreview.isGone = true
-        playerBinding.exoProgress.addListener(
-            SeekbarPreviewListener(
-                OnlineTimeFrameReceiver(requireContext(), streams.previewFrames),
-                playerBinding,
-                streams.duration * 1000,
-                onScrub = {
-                    setCurrentChapterName(forceUpdate = true, enqueueNew = false)
-                    scrubbingTimeBar = true
-                },
-                onScrubEnd = {
-                    scrubbingTimeBar = false
-                    setCurrentChapterName(forceUpdate = true, enqueueNew = false)
-                }
-            )
+    private fun createSeekbarPreviewListener(): SeekbarPreviewListener {
+        return SeekbarPreviewListener(
+            OnlineTimeFrameReceiver(requireContext(), streams.previewFrames),
+            playerBinding,
+            streams.duration * 1000,
+            onScrub = {
+                setCurrentChapterName(forceUpdate = true, enqueueNew = false)
+                scrubbingTimeBar = true
+            },
+            onScrubEnd = {
+                scrubbingTimeBar = false
+                setCurrentChapterName(forceUpdate = true, enqueueNew = false)
+            }
         )
     }
 
