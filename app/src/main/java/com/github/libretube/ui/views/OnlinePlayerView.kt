@@ -3,14 +3,12 @@ package com.github.libretube.ui.views
 import android.content.Context
 import android.content.res.Configuration
 import android.util.AttributeSet
-import android.view.View
+import android.view.Window
 import androidx.core.os.bundleOf
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.LifecycleOwner
 import androidx.media3.common.C
 import androidx.media3.exoplayer.trackselection.TrackSelector
-import androidx.media3.ui.PlayerView.ControllerVisibilityListener
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
@@ -21,7 +19,6 @@ import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.SubmitSegmentDialog
-import com.github.libretube.ui.extensions.toggleSystemBars
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.util.PlayingQueue
@@ -34,6 +31,12 @@ class OnlinePlayerView(
     private var playerViewModel: PlayerViewModel? = null
     private var trackSelector: TrackSelector? = null
     private var viewLifecycleOwner: LifecycleOwner? = null
+
+    /**
+     * The window that needs to be addressed for showing and hiding the system bars
+     * If null, the activity's default/main window will be used
+     */
+    var currentWindow: Window? = null
 
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
     override fun getOptionsMenuItems(): List<BottomSheetItem> {
@@ -149,19 +152,6 @@ class OnlinePlayerView(
             updateTopBarMargin()
         }
 
-        setControllerVisibilityListener(
-            ControllerVisibilityListener { visibility ->
-                playerViewModel.isFullscreen.value?.let { isFullscreen ->
-                    if (!isFullscreen) return@let
-                    // Show status bar only not navigation bar if the player controls are visible and hide it otherwise
-                    activity.window.toggleSystemBars(
-                        types = WindowInsetsCompat.Type.statusBars(),
-                        showBars = visibility == View.VISIBLE && !isPlayerLocked
-                    )
-                }
-            }
-        )
-
         binding.autoPlay.isChecked = PlayerHelper.autoPlayEnabled
 
         binding.autoPlay.setOnCheckedChangeListener { _, isChecked ->
@@ -185,13 +175,23 @@ class OnlinePlayerView(
         }
     }
 
+    override fun getWindow(): Window = currentWindow ?: activity.window
+
     override fun hideController() {
         super.hideController()
 
         if (playerViewModel?.isFullscreen?.value == true) {
-            WindowHelper.toggleFullscreen(activity.window, true)
+            toggleSystemBars(true)
         }
         updateTopBarMargin()
+    }
+
+    override fun showController() {
+        super.showController()
+
+        if (playerViewModel?.isFullscreen?.value == true && !isPlayerLocked) {
+            toggleSystemBars(true)
+        }
     }
 
     override fun getTopBarMarginDp(): Int {

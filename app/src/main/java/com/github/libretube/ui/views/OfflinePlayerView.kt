@@ -3,8 +3,6 @@ package com.github.libretube.ui.views
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowInsetsCompat
-import com.github.libretube.ui.extensions.toggleSystemBars
 
 class OfflinePlayerView(
     context: Context,
@@ -13,13 +11,13 @@ class OfflinePlayerView(
     override fun hideController() {
         super.hideController()
         // hide the status bars when continuing to watch video
-        activity.window.toggleSystemBars(WindowInsetsCompat.Type.systemBars(), false)
+        toggleSystemBars(false)
     }
 
     override fun showController() {
         super.showController()
         // show status bar when showing player options
-        activity.window.toggleSystemBars(WindowInsetsCompat.Type.statusBars(), true)
+        toggleSystemBars(true)
     }
 
     override fun getTopBarMarginDp(): Int {

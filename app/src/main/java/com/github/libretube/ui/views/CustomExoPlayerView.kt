@@ -17,7 +17,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.os.postDelayed
-import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -46,6 +45,7 @@ import com.github.libretube.helpers.AudioHelper
 import com.github.libretube.helpers.BrightnessHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.toggleSystemBars
@@ -89,12 +89,6 @@ open class CustomExoPlayerView(
         }
 
     /**
-     * The window that needs to be addressed for showing and hiding the system bars
-     * If null, the activity's default/main window will be used
-     */
-    var currentWindow: Window? = null
-
-    /**
      * Preferences
      */
     private var resizeModePref = PlayerHelper.resizeModePref
@@ -103,6 +97,10 @@ open class CustomExoPlayerView(
 
     private val supportFragmentManager
         get() = activity.supportFragmentManager
+
+    private val hasCutout by lazy {
+        WindowHelper.hasCutout(this)
+    }
 
     private fun toggleController() {
         if (isControllerFullyVisible) hideController() else showController()
@@ -150,10 +148,7 @@ open class CustomExoPlayerView(
             // change locked status
             isPlayerLocked = !isPlayerLocked
 
-            (currentWindow ?: activity.window).toggleSystemBars(
-                types = WindowInsetsCompat.Type.statusBars(),
-                showBars = !isPlayerLocked
-            )
+            toggleSystemBars(!isPlayerLocked)
         }
 
         resizeMode = when (resizeModePref) {
@@ -213,6 +208,14 @@ open class CustomExoPlayerView(
         }
 
         updateCurrentPosition()
+    }
+
+    fun toggleSystemBars(showBars: Boolean) {
+        getWindow().toggleSystemBars(
+            types = if (showBars) WindowHelper.getGestureControlledBars(context)
+            else WindowInsetsCompat.Type.systemBars(),
+            showBars = showBars
+        )
     }
 
     open fun onPlayerEvent(player: Player, playerEvents: Player.Events) = Unit
@@ -563,7 +566,6 @@ open class CustomExoPlayerView(
         updateTopBarMargin()
 
         // don't add extra padding if there's no cutout
-        val hasCutout = ViewCompat.getRootWindowInsets(this)?.displayCutout != null
         if (!hasCutout && binding.topBar.marginStart == 0) return
 
         // add a margin to the top and the bottom bar in landscape mode for notches
@@ -595,7 +597,7 @@ open class CustomExoPlayerView(
     }
 
     /**
-     * Add extra margin to the top bar to not overlap the status bar
+     * Add extra margin to the top bar to not overlap the status bar.
      */
     fun updateTopBarMargin() {
         binding.topBar.updateLayoutParams<MarginLayoutParams> {
@@ -721,6 +723,8 @@ open class CustomExoPlayerView(
     }
 
     open fun minimizeOrExitPlayer() = Unit
+
+    open fun getWindow(): Window = activity.window
 
     companion object {
         private const val HIDE_CONTROLLER_TOKEN = "hideController"
