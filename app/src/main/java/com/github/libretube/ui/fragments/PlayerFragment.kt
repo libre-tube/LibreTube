@@ -247,6 +247,103 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
     }
 
+    private val playerListener = object : Player.Listener {
+        override fun onIsPlayingChanged(isPlaying: Boolean) {
+            if (PlayerHelper.pipEnabled) {
+                PictureInPictureCompat.setPictureInPictureParams(requireActivity(), pipParams)
+            }
+
+            if (isPlaying) {
+                // Stop [BackgroundMode] service if it is running.
+                BackgroundHelper.stopBackgroundPlay(requireContext())
+            }
+
+            // add the video to the watch history when starting to play the video
+            if (isPlaying && PlayerHelper.watchHistoryEnabled) {
+                lifecycleScope.launch(Dispatchers.IO) {
+                    DatabaseHelper.addToWatchHistory(videoId, streams)
+                }
+            }
+
+            if (isPlaying && PlayerHelper.sponsorBlockEnabled) {
+                handler.postDelayed(
+                    this@PlayerFragment::checkForSegments,
+                    100
+                )
+            }
+        }
+
+        override fun onEvents(player: Player, events: Player.Events) {
+            updateDisplayedDuration()
+            super.onEvents(player, events)
+            if (events.containsAny(
+                    Player.EVENT_PLAYBACK_STATE_CHANGED,
+                    Player.EVENT_IS_PLAYING_CHANGED,
+                    Player.EVENT_PLAY_WHEN_READY_CHANGED
+                )
+            ) {
+                updatePlayPauseButton()
+            }
+        }
+
+        override fun onPlaybackStateChanged(playbackState: Int) {
+            saveWatchPosition()
+
+            if (playbackState == Player.STATE_READY) {
+                if (streams.category == Streams.categoryMusic) {
+                    exoPlayer.setPlaybackSpeed(1f)
+                }
+            }
+
+            // set the playback speed to one if having reached the end of a livestream
+            if (playbackState == Player.STATE_BUFFERING && binding.player.isLive &&
+                exoPlayer.duration - exoPlayer.currentPosition < 700
+            ) {
+                exoPlayer.setPlaybackSpeed(1f)
+            }
+
+            // check if video has ended, next video is available and autoplay is enabled/the video is part of a played playlist.
+            if (playbackState == Player.STATE_ENDED) {
+                if (!isTransitioning && PlayerHelper.shouldPlayNextVideo(playlistId != null)) {
+                    isTransitioning = true
+                    if (PlayerHelper.autoPlayCountdown) {
+                        showAutoPlayCountdown()
+                    } else {
+                        playNextVideo()
+                    }
+                } else {
+                    binding.player.showController()
+                }
+            }
+
+            if (playbackState == Player.STATE_READY) {
+                // media actually playing
+                isTransitioning = false
+            }
+
+            // listen for the stop button in the notification
+            if (playbackState == PlaybackState.STATE_STOPPED && PlayerHelper.pipEnabled &&
+                PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
+            ) {
+                // finish PiP by finishing the activity
+                activity?.finish()
+            }
+            super.onPlaybackStateChanged(playbackState)
+        }
+
+        /**
+         * Catch player errors to prevent the app from stopping
+         */
+        override fun onPlayerError(error: PlaybackException) {
+            super.onPlayerError(error)
+            try {
+                exoPlayer.play()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val playerData = requireArguments().parcelable<PlayerData>(IntentData.playerData)!!
@@ -499,6 +596,46 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             LinearLayoutManager.HORIZONTAL,
             false
         )
+
+        binding.relPlayerSave.setOnClickListener {
+            val newAddToPlaylistDialog = AddToPlaylistDialog()
+            newAddToPlaylistDialog.arguments = bundleOf(IntentData.videoId to videoId)
+            newAddToPlaylistDialog.show(childFragmentManager, AddToPlaylistDialog::class.java.name)
+        }
+
+        playerBinding.skipPrev.setOnClickListener {
+            playNextVideo(PlayingQueue.getPrev())
+        }
+
+        playerBinding.skipNext.setOnClickListener {
+            playNextVideo()
+        }
+
+        binding.relPlayerDownload.setOnClickListener {
+            if (!this::streams.isInitialized) return@setOnClickListener
+
+            if (streams.duration <= 0) {
+                Toast.makeText(context, R.string.cannotDownload, Toast.LENGTH_SHORT).show()
+            } else {
+                val newFragment = DownloadDialog()
+                newFragment.arguments = bundleOf(IntentData.videoId to videoId)
+                newFragment.show(childFragmentManager, DownloadDialog::class.java.name)
+            }
+        }
+
+        binding.relPlayerPip.setOnClickListener {
+            PictureInPictureCompat.enterPictureInPictureMode(requireActivity(), pipParams)
+        }
+
+        binding.playerChannel.setOnClickListener {
+            if (!this::streams.isInitialized) return@setOnClickListener
+
+            val activity = view?.context as MainActivity
+            val bundle = bundleOf(IntentData.channelId to streams.uploaderUrl)
+            activity.navController.navigate(R.id.channelFragment, bundle)
+            activity.binding.mainMotionLayout.transitionToEnd()
+            binding.playerMotionLayout.transitionToEnd()
+        }
 
         binding.descriptionLayout.handleLink = this::handleLink
     }
@@ -857,6 +994,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // initialize the player view actions
         binding.player.initialize(doubleTapOverlayBinding, playerGestureControlsViewBinding)
         binding.player.initPlayerOptions(viewModel, viewLifecycleOwner, trackSelector, this)
+
         binding.descriptionLayout.setStreams(streams)
 
         binding.apply {
@@ -874,131 +1012,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // init the chapters recyclerview
         viewModel.chaptersLiveData.value = streams.chapters
 
-        // Listener for play and pause icon change
-        exoPlayer.addListener(object : Player.Listener {
-            override fun onIsPlayingChanged(isPlaying: Boolean) {
-                if (PlayerHelper.pipEnabled) {
-                    PictureInPictureCompat.setPictureInPictureParams(requireActivity(), pipParams)
-                }
-
-                if (isPlaying) {
-                    // Stop [BackgroundMode] service if it is running.
-                    BackgroundHelper.stopBackgroundPlay(requireContext())
-                }
-
-                // add the video to the watch history when starting to play the video
-                if (isPlaying && PlayerHelper.watchHistoryEnabled) {
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        DatabaseHelper.addToWatchHistory(videoId, streams)
-                    }
-                }
-
-                if (isPlaying && PlayerHelper.sponsorBlockEnabled) {
-                    handler.postDelayed(
-                        this@PlayerFragment::checkForSegments,
-                        100
-                    )
-                }
-            }
-
-            override fun onEvents(player: Player, events: Player.Events) {
-                updateDisplayedDuration()
-                super.onEvents(player, events)
-                if (events.containsAny(
-                        Player.EVENT_PLAYBACK_STATE_CHANGED,
-                        Player.EVENT_IS_PLAYING_CHANGED,
-                        Player.EVENT_PLAY_WHEN_READY_CHANGED
-                    )
-                ) {
-                    updatePlayPauseButton()
-                }
-            }
-
-            override fun onPlaybackStateChanged(playbackState: Int) {
-                saveWatchPosition()
-
-                if (playbackState == Player.STATE_READY) {
-                    if (streams.category == Streams.categoryMusic) {
-                        exoPlayer.setPlaybackSpeed(1f)
-                    }
-                }
-
-                // set the playback speed to one if having reached the end of a livestream
-                if (playbackState == Player.STATE_BUFFERING && binding.player.isLive &&
-                    exoPlayer.duration - exoPlayer.currentPosition < 700
-                ) {
-                    exoPlayer.setPlaybackSpeed(1f)
-                }
-
-                // check if video has ended, next video is available and autoplay is enabled/the video is part of a played playlist.
-                if (playbackState == Player.STATE_ENDED) {
-                    if (!isTransitioning && PlayerHelper.shouldPlayNextVideo(playlistId != null)) {
-                        isTransitioning = true
-                        if (PlayerHelper.autoPlayCountdown) {
-                            showAutoPlayCountdown()
-                        } else {
-                            playNextVideo()
-                        }
-                    } else {
-                        binding.player.showController()
-                    }
-                }
-
-                if (playbackState == Player.STATE_READY) {
-                    // media actually playing
-                    isTransitioning = false
-                }
-
-                // listen for the stop button in the notification
-                if (playbackState == PlaybackState.STATE_STOPPED && PlayerHelper.pipEnabled &&
-                    PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
-                ) {
-                    // finish PiP by finishing the activity
-                    activity?.finish()
-                }
-                super.onPlaybackStateChanged(playbackState)
-            }
-
-            /**
-             * Catch player errors to prevent the app from stopping
-             */
-            override fun onPlayerError(error: PlaybackException) {
-                super.onPlayerError(error)
-                try {
-                    exoPlayer.play()
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
-        })
-
-        binding.relPlayerDownload.setOnClickListener {
-            if (streams.duration <= 0) {
-                Toast.makeText(context, R.string.cannotDownload, Toast.LENGTH_SHORT).show()
-            } else {
-                val newFragment = DownloadDialog()
-                newFragment.arguments = bundleOf(IntentData.videoId to videoId)
-                newFragment.show(childFragmentManager, DownloadDialog::class.java.name)
-            }
-        }
-
-        binding.relPlayerPip.setOnClickListener {
-            PictureInPictureCompat.enterPictureInPictureMode(requireActivity(), pipParams)
-        }
-
         if (PlayerHelper.relatedStreamsEnabled) {
             binding.relatedRecView.adapter = VideosAdapter(
                 streams.relatedStreams.filter { !it.title.isNullOrBlank() }.toMutableList(),
                 forceMode = VideosAdapter.Companion.ForceMode.RELATED
             )
-        }
-
-        binding.playerChannel.setOnClickListener {
-            val activity = view?.context as MainActivity
-            val bundle = bundleOf(IntentData.channelId to streams.uploaderUrl)
-            activity.navController.navigate(R.id.channelFragment, bundle)
-            activity.binding.mainMotionLayout.transitionToEnd()
-            binding.playerMotionLayout.transitionToEnd()
         }
 
         // update the subscribed state
@@ -1007,21 +1025,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             this.streams.uploader
         )
 
-        binding.relPlayerSave.setOnClickListener {
-            val newAddToPlaylistDialog = AddToPlaylistDialog()
-            newAddToPlaylistDialog.arguments = bundleOf(IntentData.videoId to videoId)
-            newAddToPlaylistDialog.show(childFragmentManager, AddToPlaylistDialog::class.java.name)
-        }
-
         syncQueueButtons()
-
-        playerBinding.skipPrev.setOnClickListener {
-            playNextVideo(PlayingQueue.getPrev())
-        }
-
-        playerBinding.skipNext.setOnClickListener {
-            playNextVideo()
-        }
 
         // seekbar preview setup
         playerBinding.seekbarPreview.isGone = true
@@ -1335,6 +1339,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         PlayerHelper.applyPreferredAudioQuality(requireContext(), trackSelector)
 
         exoPlayer = PlayerHelper.createPlayer(requireContext(), trackSelector, false)
+        exoPlayer.addListener(playerListener)
         viewModel.player = exoPlayer
     }
 
