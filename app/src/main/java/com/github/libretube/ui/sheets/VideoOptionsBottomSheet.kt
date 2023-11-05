@@ -44,6 +44,8 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
 
         val videoId = streamItem.url?.toID() ?: return
 
+        setTitle(streamItem.title)
+
         val optionsList = mutableListOf<String>()
         if (!isCurrentlyPlaying) {
             optionsList += getOptionsForNotActivePlayback(videoId)
