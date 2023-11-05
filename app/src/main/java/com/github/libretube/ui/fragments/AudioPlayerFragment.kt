@@ -27,7 +27,6 @@ import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentAudioPlayerBinding
-import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.normalize
 import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.toID
@@ -37,11 +36,8 @@ import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.ThemeHelper
-import com.github.libretube.obj.ShareData
 import com.github.libretube.services.OnlinePlayerService
 import com.github.libretube.ui.activities.MainActivity
-import com.github.libretube.ui.dialogs.DownloadDialog
-import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.interfaces.AudioPlayerOptions
 import com.github.libretube.ui.listeners.AudioPlayerThumbnailListener
 import com.github.libretube.ui.models.PlayerViewModel
@@ -168,33 +164,18 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             )
         }
 
-        binding.download.setOnClickListener {
-            val videoId = PlayingQueue.getCurrent()?.url?.toID() ?: return@setOnClickListener
-
-            val newFragment = DownloadDialog()
-            newFragment.arguments = bundleOf(IntentData.videoId to videoId)
-            newFragment.show(childFragmentManager, DownloadDialog::class.java.name)
-        }
-
-        binding.share.setOnClickListener {
-            val currentVideo = PlayingQueue.getCurrent() ?: return@setOnClickListener
-
-            val bundle = bundleOf(
-                IntentData.id to currentVideo.url!!.toID(),
-                IntentData.shareObjectType to ShareObjectType.VIDEO,
-                IntentData.shareData to ShareData(currentVideo = currentVideo.title)
-            )
-            val newShareDialog = ShareDialog()
-            newShareDialog.arguments = bundle
-            newShareDialog.show(childFragmentManager, null)
-        }
-
-        binding.chapters.setOnClickListener {
+        binding.openChapters.setOnClickListener {
             val playerService = playerService ?: return@setOnClickListener
             viewModel.chaptersLiveData.value = playerService.streams?.chapters.orEmpty()
 
             ChaptersBottomSheet()
                 .show(childFragmentManager)
+        }
+
+        binding.close.setOnClickListener {
+            activity?.unbindService(connection)
+            BackgroundHelper.stopBackgroundPlay(requireContext())
+            killFragment()
         }
 
         binding.miniPlayerClose.setOnClickListener {
@@ -212,6 +193,10 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
 
         binding.miniPlayerPause.setOnClickListener {
             if (isPaused) playerService?.play() else playerService?.pause()
+        }
+
+        binding.showMore.setOnClickListener {
+            onLongTap()
         }
 
         // load the stream info into the UI
@@ -371,7 +356,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         }
         playerService?.onNewVideo = { streams, videoId ->
             updateStreamInfo(streams.toStreamItem(videoId))
-            _binding?.chapters?.isVisible = streams.chapters.isNotEmpty()
+            _binding?.openChapters?.isVisible = streams.chapters.isNotEmpty()
         }
         initializeSeekBar()
     }
@@ -400,7 +385,12 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     override fun onLongTap() {
         val current = PlayingQueue.getCurrent() ?: return
         VideoOptionsBottomSheet()
-            .apply { arguments = bundleOf(IntentData.shareData to current) }
+            .apply {
+                arguments = bundleOf(
+                    IntentData.streamItem to current,
+                    IntentData.isCurrentlyPlaying to true
+                )
+            }
             .show(childFragmentManager)
     }
 

@@ -196,6 +196,14 @@
         <item name="android:drawableTint" tools:targetApi="m">?android:attr/textColorPrimary</item>
     </style>
 
+    <style name="CardOnlyBottomCorners">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeBottomRight">18dp</item>
+        <item name="cornerSizeBottomLeft">18dp</item>
+    </style>
+
     <style name="HomeCategoryTitle">
 
         <item name="android:layout_width">match_parent</item>
@@ -206,16 +214,6 @@
         <item name="android:padding">15dp</item>
         <item name="android:background">?attr/selectableItemBackground</item>
         <item name="android:visibility">gone</item>
-
-    </style>
-
-    <style name="AudioPlayerButton">
-
-        <item name="android:layout_width">30dp</item>
-        <item name="android:layout_height">30dp</item>
-        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
-        <item name="android:layout_marginStart">10dp</item>
-        <item name="android:layout_marginEnd">10dp</item>
 
     </style>
 

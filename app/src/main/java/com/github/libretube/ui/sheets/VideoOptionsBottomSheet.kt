@@ -36,41 +36,17 @@ import kotlinx.coroutines.withContext
  */
 class VideoOptionsBottomSheet : BaseBottomSheet() {
     private lateinit var streamItem: StreamItem
+    private var isCurrentlyPlaying = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         streamItem = arguments?.parcelable(IntentData.streamItem)!!
+        isCurrentlyPlaying = arguments?.getBoolean(IntentData.isCurrentlyPlaying) ?: false
 
         val videoId = streamItem.url?.toID() ?: return
-        // List that stores the different menu options. In the future could be add more options here.
-        val optionsList = mutableListOf(
-            getString(R.string.playOnBackground)
-        )
 
-        // Check whether the player is running and add queue options
-        if (PlayingQueue.isNotEmpty()) {
-            optionsList += getString(R.string.play_next)
-            optionsList += getString(R.string.add_to_queue)
-        }
-
-        // show the mark as watched or unwatched option if watch positions are enabled
-        if (PlayerHelper.watchPositionsVideo || PlayerHelper.watchHistoryEnabled) {
-            val watchPositionEntry = runBlocking(Dispatchers.IO) {
-                DatabaseHolder.Database.watchPositionDao().findById(videoId)
-            }
-            val watchHistoryEntry = runBlocking(Dispatchers.IO) {
-                DatabaseHolder.Database.watchHistoryDao().findById(videoId)
-            }
-
-            if (streamItem.duration == null ||
-                watchPositionEntry == null ||
-                watchPositionEntry.position < streamItem.duration!! * 1000 * 0.9
-            ) {
-                optionsList += getString(R.string.mark_as_watched)
-            }
-
-            if (watchHistoryEntry != null || watchPositionEntry != null) {
-                optionsList += getString(R.string.mark_as_unwatched)
-            }
+        val optionsList = mutableListOf<String>()
+        if (!isCurrentlyPlaying) {
+            optionsList += getOptionsForNotActivePlayback(videoId)
         }
 
         optionsList += listOf(
@@ -153,6 +129,42 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
         }
 
         super.onCreate(savedInstanceState)
+    }
+
+    private fun getOptionsForNotActivePlayback(videoId: String): List<String> {
+        // List that stores the different menu options. In the future could be add more options here.
+        val optionsList = mutableListOf(
+            getString(R.string.playOnBackground)
+        )
+
+        // Check whether the player is running and add queue options
+        if (PlayingQueue.isNotEmpty()) {
+            optionsList += getString(R.string.play_next)
+            optionsList += getString(R.string.add_to_queue)
+        }
+
+        // show the mark as watched or unwatched option if watch positions are enabled
+        if (PlayerHelper.watchPositionsVideo || PlayerHelper.watchHistoryEnabled) {
+            val watchPositionEntry = runBlocking(Dispatchers.IO) {
+                DatabaseHolder.Database.watchPositionDao().findById(videoId)
+            }
+            val watchHistoryEntry = runBlocking(Dispatchers.IO) {
+                DatabaseHolder.Database.watchHistoryDao().findById(videoId)
+            }
+
+            if (streamItem.duration == null ||
+                watchPositionEntry == null ||
+                watchPositionEntry.position < streamItem.duration!! * 1000 * 0.9
+            ) {
+                optionsList += getString(R.string.mark_as_watched)
+            }
+
+            if (watchHistoryEntry != null || watchPositionEntry != null) {
+                optionsList += getString(R.string.mark_as_unwatched)
+            }
+        }
+
+        return optionsList
     }
 
     companion object {

@@ -32,4 +32,5 @@ object IntentData {
     const val url = "url"
     const val videoStats = "videoStats"
     const val bitmapUrl = "bitmapUrl"
+    const val isCurrentlyPlaying = "isCurrentlyPlaying"
 }
