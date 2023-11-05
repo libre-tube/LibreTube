@@ -115,16 +115,16 @@ import com.github.libretube.util.TextUtils.toTimeInSeconds
 import com.github.libretube.util.YoutubeHlsPlaylistParser
 import com.github.libretube.util.deArrow
 import com.google.android.material.elevation.SurfaceColors
-import java.io.IOException
-import java.util.*
-import java.util.concurrent.Executors
-import kotlin.math.abs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
+import java.io.IOException
+import java.util.*
+import java.util.concurrent.Executors
+import kotlin.math.abs
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class PlayerFragment : Fragment(), OnlinePlayerOptions {
@@ -521,7 +521,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         // FullScreen button trigger
         // hide fullscreen button if autorotation enabled
-        playerBinding.fullscreen.isInvisible = PlayerHelper.autoFullscreenEnabled
         playerBinding.fullscreen.setOnClickListener {
             // hide player controller
             binding.player.hideController()
@@ -531,6 +530,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             } else {
                 // exit fullscreen mode
                 unsetFullscreen()
+
+                // disable the fullscreen button for auto fullscreen
+                // this is necessary to hide the button after an auto fullscreen for shorts
+                playerBinding.fullscreen.isVisible = !PlayerHelper.autoFullscreenEnabled
             }
         }
 
@@ -868,16 +871,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 PlayingQueue.insertRelatedStreams(streams.relatedStreams)
             }
 
-            if (PreferenceHelper.getBoolean(PreferenceKeys.AUTO_FULLSCREEN_SHORTS, false)) {
-                val videoStream = streams.videoStreams.firstOrNull()
-                if (PlayingQueue.getCurrent()?.isShort == true ||
+            val videoStream = streams.videoStreams.firstOrNull()
+            val isShort = PlayingQueue.getCurrent()?.isShort == true ||
                     (videoStream?.height ?: 0) > (videoStream?.width ?: 0)
-                ) {
-                    withContext(Dispatchers.Main) {
-                        if (binding.playerMotionLayout.progress == 0f) setFullscreen()
-                    }
-                }
-            }
 
             PlayingQueue.setOnQueueTapListener { streamItem ->
                 streamItem.url?.toID()?.let { playNextVideo(it) }
@@ -889,6 +885,16 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
                 // set media sources for the player
                 initStreamSources()
+
+                if (PreferenceHelper.getBoolean(PreferenceKeys.AUTO_FULLSCREEN_SHORTS, false)
+                    && isShort && binding.playerMotionLayout.progress == 0f
+                ) {
+                    setFullscreen()
+                    playerBinding.fullscreen.isVisible = true
+                } else {
+                    // disable the fullscreen button for auto fullscreen
+                    playerBinding.fullscreen.isVisible = !PlayerHelper.autoFullscreenEnabled
+                }
 
                 binding.player.apply {
                     useController = false
@@ -905,7 +911,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 if (binding.playerMotionLayout.progress != 1.0f) {
                     // show controllers when not in picture in picture mode
                     val inPipMode = PlayerHelper.pipEnabled &&
-                        PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
+                            PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
                     if (!inPipMode) {
                         binding.player.useController = true
                     }
@@ -1157,9 +1163,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // if the user is scrubbing the time bar, don't update
         if (scrubbingTimeBar && !forceUpdate) return
 
-        val chapterName = PlayerHelper.getCurrentChapterIndex(exoPlayer.currentPosition, viewModel.chapters)?.let {
-            viewModel.chapters[it].title.trim()
-        } ?: getString(R.string.no_chapter)
+        val chapterName =
+            PlayerHelper.getCurrentChapterIndex(exoPlayer.currentPosition, viewModel.chapters)
+                ?.let {
+                    viewModel.chapters[it].title.trim()
+                } ?: getString(R.string.no_chapter)
 
         // change the chapter name textView text to the chapterName
         if (chapterName != playerBinding.chapterName.text) {
@@ -1368,7 +1376,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
         } else {
             // go to portrait mode
-            mainActivity.requestedOrientation = (requireActivity() as BaseActivity).screenOrientationPref
+            mainActivity.requestedOrientation =
+                (requireActivity() as BaseActivity).screenOrientationPref
         }
     }
 
