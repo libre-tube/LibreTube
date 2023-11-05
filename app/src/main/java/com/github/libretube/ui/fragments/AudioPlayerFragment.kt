@@ -168,33 +168,18 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             )
         }
 
-        binding.download.setOnClickListener {
-            val videoId = PlayingQueue.getCurrent()?.url?.toID() ?: return@setOnClickListener
-
-            val newFragment = DownloadDialog()
-            newFragment.arguments = bundleOf(IntentData.videoId to videoId)
-            newFragment.show(childFragmentManager, DownloadDialog::class.java.name)
-        }
-
-        binding.share.setOnClickListener {
-            val currentVideo = PlayingQueue.getCurrent() ?: return@setOnClickListener
-
-            val bundle = bundleOf(
-                IntentData.id to currentVideo.url!!.toID(),
-                IntentData.shareObjectType to ShareObjectType.VIDEO,
-                IntentData.shareData to ShareData(currentVideo = currentVideo.title)
-            )
-            val newShareDialog = ShareDialog()
-            newShareDialog.arguments = bundle
-            newShareDialog.show(childFragmentManager, null)
-        }
-
-        binding.chapters.setOnClickListener {
+        binding.openChapters.setOnClickListener {
             val playerService = playerService ?: return@setOnClickListener
             viewModel.chaptersLiveData.value = playerService.streams?.chapters.orEmpty()
 
             ChaptersBottomSheet()
                 .show(childFragmentManager)
+        }
+
+        binding.close.setOnClickListener {
+            activity?.unbindService(connection)
+            BackgroundHelper.stopBackgroundPlay(requireContext())
+            killFragment()
         }
 
         binding.miniPlayerClose.setOnClickListener {
@@ -212,6 +197,10 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
 
         binding.miniPlayerPause.setOnClickListener {
             if (isPaused) playerService?.play() else playerService?.pause()
+        }
+
+        binding.showMore.setOnClickListener {
+            onLongTap()
         }
 
         // load the stream info into the UI
@@ -371,7 +360,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         }
         playerService?.onNewVideo = { streams, videoId ->
             updateStreamInfo(streams.toStreamItem(videoId))
-            _binding?.chapters?.isVisible = streams.chapters.isNotEmpty()
+            _binding?.openChapters?.isVisible = streams.chapters.isNotEmpty()
         }
         initializeSeekBar()
     }
@@ -400,7 +389,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     override fun onLongTap() {
         val current = PlayingQueue.getCurrent() ?: return
         VideoOptionsBottomSheet()
-            .apply { arguments = bundleOf(IntentData.shareData to current) }
+            .apply { arguments = bundleOf(IntentData.streamItem to current) }
             .show(childFragmentManager)
     }
 
