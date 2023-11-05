@@ -1492,11 +1492,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             binding.player.hideController()
             binding.player.useController = false
 
-            if (viewModel.isMiniPlayerVisible.value == true) {
-                binding.playerMotionLayout.transitionToStart()
-                viewModel.isMiniPlayerVisible.value = false
-            }
-
             updateCurrentSubtitle(null)
 
             openOrCloseFullscreenDialog(true)
@@ -1510,11 +1505,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             updateCurrentSubtitle(currentSubtitle)
 
-            binding.optionsLL.post {
-                binding.optionsLL.requestLayout()
+            // unset fullscreen if it's not been enabled before the start of PiP
+            if (viewModel.isFullscreen.value != true) {
+                openOrCloseFullscreenDialog(false)
             }
-
-            openOrCloseFullscreenDialog(false)
         }
     }
 
