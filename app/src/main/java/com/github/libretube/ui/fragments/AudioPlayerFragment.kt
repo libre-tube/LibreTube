@@ -27,7 +27,6 @@ import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentAudioPlayerBinding
-import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.normalize
 import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.toID
@@ -37,11 +36,8 @@ import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.ThemeHelper
-import com.github.libretube.obj.ShareData
 import com.github.libretube.services.OnlinePlayerService
 import com.github.libretube.ui.activities.MainActivity
-import com.github.libretube.ui.dialogs.DownloadDialog
-import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.interfaces.AudioPlayerOptions
 import com.github.libretube.ui.listeners.AudioPlayerThumbnailListener
 import com.github.libretube.ui.models.PlayerViewModel
@@ -389,7 +385,12 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     override fun onLongTap() {
         val current = PlayingQueue.getCurrent() ?: return
         VideoOptionsBottomSheet()
-            .apply { arguments = bundleOf(IntentData.streamItem to current) }
+            .apply {
+                arguments = bundleOf(
+                    IntentData.streamItem to current,
+                    IntentData.isCurrentlyPlaying to true
+                )
+            }
             .show(childFragmentManager)
     }
 
