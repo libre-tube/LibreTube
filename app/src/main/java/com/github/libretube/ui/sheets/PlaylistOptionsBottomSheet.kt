@@ -36,6 +36,8 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
             playlistType = it.serializable(IntentData.playlistType)!!
         }
 
+        setTitle(playlistName)
+
         // options for the dialog
         val optionsList = mutableListOf(
             getString(R.string.playOnBackground)

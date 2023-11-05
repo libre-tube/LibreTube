@@ -31,6 +31,8 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
         channelId = arguments?.getString(IntentData.channelId)!!
         channelName = arguments?.getString(IntentData.channelName)
 
+        setTitle(channelName)
+
         // List that stores the different menu options. In the future could be add more options here.
         val optionsList = mutableListOf(
             getString(R.string.share),
