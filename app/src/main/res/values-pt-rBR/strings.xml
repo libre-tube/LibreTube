@@ -522,4 +522,12 @@
     <string name="autoplay_playlists">Playlists de reprodução automática</string>
     <string name="same_as_fullscreen">O mesmo que tela cheia</string>
     <string name="remember_playback_speed">Lembre-se da velocidade de reprodução</string>
+    <string name="vote_for_segment">Vote no segmento</string>
+    <string name="upvote">Acima</string>
+    <string name="segment">Segmento</string>
+    <string name="undo">Desfazer</string>
+    <string name="repeat_mode_all">Repetir tudo</string>
+    <string name="segment_submitted">Segmento enviado</string>
+    <string name="successfully_removed_from_playlist">Removido com sucesso \"%1$s\" da lista de reprodução.</string>
+    <string name="downvote">Baixo</string>
 </resources>

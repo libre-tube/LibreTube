@@ -130,7 +130,7 @@
     <string name="device_info">Eszközinformáció</string>
     <string name="general_summary">Nyelv és régió</string>
     <string name="worst_quality">Legrosszabb</string>
-    <string name="default_subtitle_language">Felirat nyelve</string>
+    <string name="default_subtitle_language">Feliratok nyelve</string>
     <string name="playingOnBackground">Lejátszás a háttérben…</string>
     <string name="notify_new_streams">Értesítések megjelenítése az új közvetítésekről</string>
     <string name="notify_new_streams_summary">Értesítések megjelenítése az Ön által követett alkotók új közvetítéseiről.</string>
@@ -148,7 +148,7 @@
     <string name="category_preview_description">A jövőbeli tartalmakat részletező szakaszokhoz, melyek nem nyújtanak további információt. Ha olyan klipeket tartalmaz, amelyek csak itt jelennek meg, akkor nagyon valószínű, hogy nem ez a megfelelő kategória.</string>
     <string name="background_mode">Háttér mód</string>
     <string name="audio_video">Hang és videó</string>
-    <string name="fullscreen_orientation">Teljes képernyős helyzet</string>
+    <string name="fullscreen_orientation">Teljes képernyős tájolás</string>
     <string name="auto_rotation">Automatikus elforgatás</string>
     <string name="landscape">Felvő</string>
     <string name="portrait">Álló</string>
@@ -197,7 +197,7 @@
     <string name="data_saver_mode_summary">Bélyegképek és egyéb képek kihagyása.</string>
     <string name="no_player_found">Nem található külső lejátszó. Győződjön meg, hogy van telepítve.</string>
     <string name="no_search_result">Nincs eredmény.</string>
-    <string name="export_subscriptions">Előfizetések exportálása</string>
+    <string name="export_subscriptions">Feliratkozások exportálása</string>
     <string name="history_size">Előzmények maximális mérete</string>
     <string name="unlimited">Végtelen</string>
     <string name="take_a_break">Itt az idő szünetet tartani</string>
@@ -379,7 +379,7 @@
     <string name="custom_playback_speed_summary">A normális lejátszótól való különböző sebesség használata.</string>
     <string name="unsupported_file_format">Nem támogatott fájlformátum: %1$s</string>
     <string name="codecs">Kodekek</string>
-    <string name="autoplay_countdown">Automatikus visszaszámolás</string>
+    <string name="autoplay_countdown">Automatikus visszaszámlálás</string>
     <string name="autoplay_countdown_summary">5 másodperces visszaszámlálás megjelenítése a következő videó automatikus lejátszása előtt.</string>
     <string name="stats_for_nerds">Statisztikák a kockáknak</string>
     <string name="video_id">Videóazonosító</string>
@@ -388,7 +388,7 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d videó</string>
     <string name="subscriberAndVideoCounts">%1$s feliratkozó • %2$d videó</string>
     <string name="playing_next">Következő lejátszása: %1$s múlva</string>
-    <string name="lbry_hls_summary">LBRY HLS használata, ha elérhető a streamelés.</string>
+    <string name="lbry_hls_summary">LBRY HLS használata a streameléshez, ha elérhető.</string>
     <string name="disable_proxy">Piped proxy letiltása</string>
     <string name="disable_proxy_summary">Videók és képek betöltése közvetlenül a YouTube szervereiről. Csak akkor engedélyezze ezt az opciót, ha egyébként is VPN-t használ!</string>
     <string name="auto_fullscreen_shorts">Automatikus teljes képernyőre váltás rövid videóknál</string>
@@ -451,7 +451,7 @@
     <string name="category_highlight_description">Lehet a meghirdetett cím, a bélyegkép vagy a videó legérdekesebb része. A fejezetek részben a rákoppintással ugorhat oda.</string>
     <string name="choose_instance_long">Válasszon ki az alább felsoroltak közül egy Piped példányt. A Piped példány közvetítőként fog működni Ön és a YouTube között. Ezek a példányok különböző fizikai helyszíneken találhatók - ezeket az országzászló jelzi. A fizikailag közelebbi példányok valószínűleg gyorsabbak, mint a távoli példányok. A beállításokban bármikor megváltoztatható a használt példány.</string>
     <string name="off">Ki</string>
-    <string name="fallback_piped_proxy_desc">Videók betöltése proxy-n keresztül, ha a YouTube-hoz való közvetlen csatlakozás nem működik az aktuális videóhoz (növeli a kezdeti betöltési időt). Ha ki van kapcsolva, a YouTube zenei tartalma valószínűleg nem fog lejátszódni a YT korlátozások miatt.</string>
+    <string name="fallback_piped_proxy_desc">Videók betöltése proxy-n keresztül, ha a YouTube-hoz való közvetlen csatlakozás nem működik az aktuális videónál (növeli a kezdeti betöltési időt). Ha ki van kapcsolva, a YouTube zenei tartalma valószínűleg nem fog lejátszódni a YT korlátozások miatt.</string>
     <string name="manual">Manuális</string>
     <string name="fallback_piped_proxy">Visszalépés a Piped proxyra</string>
     <string name="chapters_videoHighlight">Videó kiemelés</string>
@@ -475,7 +475,7 @@
     <string name="visibility_public">Nyilvános</string>
     <string name="visibility">Láthatóság</string>
     <string name="no_chapter">Nincs fejezet</string>
-    <string name="screen_orientation">Képernyő tájolás</string>
+    <string name="screen_orientation">Képernyőtájolás</string>
     <string name="remove_watched_videos">Megnézett videók eltávolítása</string>
     <string name="player_channel_name">Lejátszó szolgáltatás</string>
     <string name="player_channel_description">Értesítést jelenít meg lejátszás közben</string>

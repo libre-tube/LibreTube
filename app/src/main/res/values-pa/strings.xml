@@ -526,4 +526,5 @@
     <string name="segment_submitted">ਸੈਗਮੈਂਟ ਸਬਮਿੱਟ ਹੋਇਆ</string>
     <string name="downvote">ਡਾਊਨਵੋਟ ਕਰੋ</string>
     <string name="repeat_mode_all">ਸਾਰੇ ਦੁਹਰਾਓ</string>
+    <string name="successfully_removed_from_playlist">ਪਲੇਲਿਸਟ ਵਿੱਚੋਂ \"%1$s\" ਨੂੰ ਸਫਲਤਾਪੂਰਵਕ ਹਟਾਇਆ ਗਿਆ।</string>
 </resources>
