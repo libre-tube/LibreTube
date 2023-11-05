@@ -864,8 +864,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
             val isLastVideo = !isFirstVideo && PlayingQueue.isLast()
             val isAutoQueue = playlistId == null && channelId == null
-            if (PlayerHelper.autoInsertRelatedVideos && (isFirstVideo || isLastVideo) && isAutoQueue) {
-                PlayingQueue.add(*streams.relatedStreams.toTypedArray(), skipExisting = true)
+            if ((isFirstVideo || isLastVideo) && isAutoQueue) {
+                PlayingQueue.insertRelatedStreams(streams.relatedStreams)
             }
 
             if (PreferenceHelper.getBoolean(PreferenceKeys.AUTO_FULLSCREEN_SHORTS, false)) {
