@@ -181,7 +181,7 @@ class OnlinePlayerView(
         super.hideController()
 
         if (playerViewModel?.isFullscreen?.value == true) {
-            toggleSystemBars(true)
+            toggleSystemBars(false)
         }
         updateTopBarMargin()
     }
