@@ -32,10 +32,10 @@
 
                 <ImageView
                     android:id="@+id/close_imageButton"
-                    android:tooltipText="@string/tooltip_minimize"
                     style="@style/PlayerControlTop"
                     android:layout_marginEnd="-10dp"
                     android:src="@drawable/ic_close"
+                    android:tooltipText="@string/tooltip_minimize"
                     app:tint="@android:color/white" />
 
                 <ImageView
@@ -69,13 +69,13 @@
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/autoPlay"
-                    android:tooltipText="@string/player_autoplay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="2dp"
                     android:scaleX="0.8"
                     android:scaleY="0.8"
                     android:thumb="@drawable/player_switch_thumb"
+                    android:tooltipText="@string/player_autoplay"
                     android:visibility="gone"
                     app:thumbTint="@android:color/white"
                     app:track="@drawable/player_switch_track"
@@ -83,36 +83,36 @@
 
                 <ImageButton
                     android:id="@+id/sb_submit"
-                    android:tooltipText="@string/sb_create_segment"
                     style="@style/PlayerControlTop"
                     android:layout_marginEnd="2dp"
                     android:src="@drawable/ic_upload_segment"
+                    android:tooltipText="@string/sb_create_segment"
                     android:visibility="gone"
                     app:tint="@android:color/white" />
 
                 <ImageButton
                     android:id="@+id/sb_toggle"
-                    android:tooltipText="@string/tooltip_sponsorblock"
                     style="@style/PlayerControlTop"
                     android:layout_marginEnd="2dp"
                     android:src="@drawable/ic_sb_enabled"
+                    android:tooltipText="@string/tooltip_sponsorblock"
                     android:visibility="gone"
                     app:tint="@android:color/white" />
 
                 <ImageButton
                     android:id="@+id/queue_toggle"
-                    android:tooltipText="@string/queue"
                     style="@style/PlayerControlTop"
                     android:layout_marginEnd="2dp"
                     android:src="@drawable/ic_queue"
+                    android:tooltipText="@string/queue"
                     android:visibility="gone"
                     app:tint="@android:color/white" />
 
                 <ImageButton
                     android:id="@+id/toggle_options"
-                    android:tooltipText="@string/tooltip_options"
                     style="@style/PlayerControlTop"
                     android:src="@drawable/ic_player_settings"
+                    android:tooltipText="@string/tooltip_options"
                     app:tint="@android:color/white" />
 
             </LinearLayout>
@@ -290,33 +290,31 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/chapterLL"
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:layout_weight="1"
-                android:visibility="invisible">
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1">
 
                 <TextView
                     android:id="@+id/chapter_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:visibility="gone"
+                    app:drawableEndCompat="@drawable/ic_arrow_right"
+                    app:drawableTint="@android:color/white"
+                    tools:drawableTint="?colorControlNormal"
+                    tools:text="some overflowing text that takes too much space"
+                    tools:textColor="@android:color/black"
+                    tools:visibility="visible" />
 
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="3dp"
-                    android:src="@drawable/ic_arrow_right" />
-
-            </LinearLayout>
+            </FrameLayout>
 
             <LinearLayout
                 android:id="@id/exo_basic_controls"
@@ -325,9 +323,9 @@
 
                 <ImageButton
                     android:id="@+id/fullscreen"
-                    android:tooltipText="@string/tooltip_fullscreen"
                     style="@style/PlayerControlBottom"
                     android:src="@drawable/ic_fullscreen"
+                    android:tooltipText="@string/tooltip_fullscreen"
                     app:tint="@android:color/white" />
 
             </LinearLayout>

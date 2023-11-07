@@ -172,12 +172,6 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
                 .show(childFragmentManager)
         }
 
-        binding.close.setOnClickListener {
-            activity?.unbindService(connection)
-            BackgroundHelper.stopBackgroundPlay(requireContext())
-            killFragment()
-        }
-
         binding.miniPlayerClose.setOnClickListener {
             activity?.unbindService(connection)
             BackgroundHelper.stopBackgroundPlay(requireContext())
