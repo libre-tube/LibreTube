@@ -32,6 +32,7 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.serializable
 import com.github.libretube.extensions.toID
+import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
@@ -390,6 +391,7 @@ class PlaylistFragment : Fragment() {
                         }
                     }
                 } catch (e: Exception) {
+                    context?.toastFromMainDispatcher(e.localizedMessage.orEmpty())
                     Log.e(TAG(), e.toString())
                     return@repeatOnLifecycle
                 }
