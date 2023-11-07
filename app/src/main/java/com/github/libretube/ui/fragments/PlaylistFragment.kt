@@ -12,9 +12,7 @@ import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -122,146 +120,144 @@ class PlaylistFragment : Fragment() {
     private fun fetchPlaylist() {
         binding.playlistScrollview.isGone = true
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.CREATED) {
-                val response = try {
-                    withContext(Dispatchers.IO) {
-                        PlaylistsHelper.getPlaylist(playlistId!!)
-                    }
-                } catch (e: Exception) {
-                    Log.e(TAG(), e.toString())
-                    return@repeatOnLifecycle
+            val response = try {
+                withContext(Dispatchers.IO) {
+                    PlaylistsHelper.getPlaylist(playlistId!!)
                 }
-                val binding = _binding ?: return@repeatOnLifecycle
+            } catch (e: Exception) {
+                Log.e(TAG(), e.toString())
+                return@launch
+            }
+            val binding = _binding ?: return@launch
 
-                playlistFeed = response.relatedStreams.toMutableList()
-                binding.playlistScrollview.isVisible = true
-                nextPage = response.nextpage
-                playlistName = response.name
-                isLoading = false
-                ImageHelper.loadImage(response.thumbnailUrl, binding.thumbnail)
-                binding.playlistProgress.isGone = true
-                binding.playlistName.text = response.name
+            playlistFeed = response.relatedStreams.toMutableList()
+            binding.playlistScrollview.isVisible = true
+            nextPage = response.nextpage
+            playlistName = response.name
+            isLoading = false
+            ImageHelper.loadImage(response.thumbnailUrl, binding.thumbnail)
+            binding.playlistProgress.isGone = true
+            binding.playlistName.text = response.name
 
-                binding.playlistName.setOnClickListener {
-                    binding.playlistName.maxLines =
-                        if (binding.playlistName.maxLines == 2) Int.MAX_VALUE else 2
+            binding.playlistName.setOnClickListener {
+                binding.playlistName.maxLines =
+                    if (binding.playlistName.maxLines == 2) Int.MAX_VALUE else 2
+            }
+
+            binding.playlistInfo.text = getChannelAndVideoString(response, response.videos)
+            binding.playlistInfo.setOnClickListener {
+                (context as MainActivity).navController.navigate(
+                    R.id.channelFragment,
+                    bundleOf(IntentData.channelId to response.uploaderUrl?.toID())
+                )
+            }
+
+            binding.playlistDescription.text = response.description
+            // hide playlist description text view if not provided
+            binding.playlistDescription.isGone = response.description.orEmpty().isBlank()
+
+            binding.playlistDescription.let { textView ->
+                textView.setOnClickListener {
+                    textView.maxLines =
+                        if (textView.maxLines == Int.MAX_VALUE) 3 else Int.MAX_VALUE
                 }
+            }
 
-                binding.playlistInfo.text = getChannelAndVideoString(response, response.videos)
-                binding.playlistInfo.setOnClickListener {
-                    (context as MainActivity).navController.navigate(
-                        R.id.channelFragment,
-                        bundleOf(IntentData.channelId to response.uploaderUrl?.toID())
-                    )
-                }
+            showPlaylistVideos(response)
 
-                binding.playlistDescription.text = response.description
-                // hide playlist description text view if not provided
-                binding.playlistDescription.isGone = response.description.orEmpty().isBlank()
+            // show playlist options
+            binding.optionsMenu.setOnClickListener {
+                val sheet = PlaylistOptionsBottomSheet()
+                sheet.arguments = bundleOf(
+                    IntentData.playlistId to playlistId.orEmpty(),
+                    IntentData.playlistName to playlistName.orEmpty(),
+                    IntentData.playlistType to playlistType
+                )
 
-                binding.playlistDescription.let { textView ->
-                    textView.setOnClickListener {
-                        textView.maxLines =
-                            if (textView.maxLines == Int.MAX_VALUE) 3 else Int.MAX_VALUE
-                    }
-                }
+                val fragmentManager = (context as BaseActivity).supportFragmentManager
+                fragmentManager.setFragmentResultListener(
+                    PlaylistOptionsBottomSheet.PLAYLIST_OPTIONS_REQUEST_KEY,
+                    (context as BaseActivity)
+                ) { _, resultBundle ->
+                    val newPlaylistDescription =
+                        resultBundle.getString(IntentData.playlistDescription)
+                    val newPlaylistName =
+                        resultBundle.getString(IntentData.playlistName)
+                    val isPlaylistToBeDeleted =
+                        resultBundle.getBoolean(IntentData.playlistTask)
 
-                showPlaylistVideos(response)
-
-                // show playlist options
-                binding.optionsMenu.setOnClickListener {
-                    val sheet = PlaylistOptionsBottomSheet()
-                    sheet.arguments = bundleOf(
-                        IntentData.playlistId to playlistId.orEmpty(),
-                        IntentData.playlistName to playlistName.orEmpty(),
-                        IntentData.playlistType to playlistType
-                    )
-
-                    val fragmentManager = (context as BaseActivity).supportFragmentManager
-                    fragmentManager.setFragmentResultListener(
-                        PlaylistOptionsBottomSheet.PLAYLIST_OPTIONS_REQUEST_KEY,
-                        (context as BaseActivity)
-                    ) { _, resultBundle ->
-                        val newPlaylistDescription =
-                            resultBundle.getString(IntentData.playlistDescription)
-                        val newPlaylistName =
-                            resultBundle.getString(IntentData.playlistName)
-                        val isPlaylistToBeDeleted =
-                            resultBundle.getBoolean(IntentData.playlistTask)
-
-                        newPlaylistDescription?.let {
-                            binding.playlistDescription.text = it
-                            response.description = it
-                        }
-
-                        newPlaylistName?.let {
-                            binding.playlistName.text = it
-                            playlistName = it
-                        }
-
-                        if (isPlaylistToBeDeleted) {
-                            // TODO move back: navController().popBackStack() crashes
-                            return@setFragmentResultListener
-                        }
+                    newPlaylistDescription?.let {
+                        binding.playlistDescription.text = it
+                        response.description = it
                     }
 
-                    sheet.show(fragmentManager)
+                    newPlaylistName?.let {
+                        binding.playlistName.text = it
+                        playlistName = it
+                    }
+
+                    if (isPlaylistToBeDeleted) {
+                        // TODO move back: navController().popBackStack() crashes
+                        return@setFragmentResultListener
+                    }
                 }
 
-                binding.playAll.setOnClickListener {
+                sheet.show(fragmentManager)
+            }
+
+            binding.playAll.setOnClickListener {
+                if (playlistFeed.isEmpty()) return@setOnClickListener
+                NavigationHelper.navigateVideo(
+                    requireContext(),
+                    response.relatedStreams.first().url?.toID(),
+                    playlistId
+                )
+            }
+
+            if (playlistType == PlaylistType.PUBLIC) {
+                binding.bookmark.setOnClickListener {
+                    isBookmarked = !isBookmarked
+                    updateBookmarkRes()
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        if (!isBookmarked) {
+                            DatabaseHolder.Database.playlistBookmarkDao()
+                                .deleteById(playlistId!!)
+                        } else {
+                            DatabaseHolder.Database.playlistBookmarkDao()
+                                .insert(response.toPlaylistBookmark(playlistId!!))
+                        }
+                    }
+                }
+            } else {
+                // private playlist, means shuffle is possible because all videos are received at once
+                binding.bookmark.setIconResource(R.drawable.ic_shuffle)
+                binding.bookmark.text = getString(R.string.shuffle)
+                binding.bookmark.setOnClickListener {
                     if (playlistFeed.isEmpty()) return@setOnClickListener
+                    val queue = playlistFeed.shuffled()
+                    PlayingQueue.resetToDefaults()
+                    PlayingQueue.add(*queue.toTypedArray())
                     NavigationHelper.navigateVideo(
                         requireContext(),
-                        response.relatedStreams.first().url?.toID(),
-                        playlistId
+                        queue.first().url?.toID(),
+                        playlistId = playlistId,
+                        keepQueue = true
                     )
                 }
-
-                if (playlistType == PlaylistType.PUBLIC) {
-                    binding.bookmark.setOnClickListener {
-                        isBookmarked = !isBookmarked
-                        updateBookmarkRes()
-                        lifecycleScope.launch(Dispatchers.IO) {
-                            if (!isBookmarked) {
-                                DatabaseHolder.Database.playlistBookmarkDao()
-                                    .deleteById(playlistId!!)
-                            } else {
-                                DatabaseHolder.Database.playlistBookmarkDao()
-                                    .insert(response.toPlaylistBookmark(playlistId!!))
-                            }
+                binding.sortContainer.isGone = false
+                binding.sortTV.text = sortOptions[selectedSortOrder]
+                binding.sortContainer.setOnClickListener {
+                    BaseBottomSheet().apply {
+                        setSimpleItems(sortOptions.toList()) { index ->
+                            selectedSortOrder = index
+                            binding.sortTV.text = sortOptions[index]
+                            showPlaylistVideos(response)
                         }
-                    }
-                } else {
-                    // private playlist, means shuffle is possible because all videos are received at once
-                    binding.bookmark.setIconResource(R.drawable.ic_shuffle)
-                    binding.bookmark.text = getString(R.string.shuffle)
-                    binding.bookmark.setOnClickListener {
-                        if (playlistFeed.isEmpty()) return@setOnClickListener
-                        val queue = playlistFeed.shuffled()
-                        PlayingQueue.resetToDefaults()
-                        PlayingQueue.add(*queue.toTypedArray())
-                        NavigationHelper.navigateVideo(
-                            requireContext(),
-                            queue.first().url?.toID(),
-                            playlistId = playlistId,
-                            keepQueue = true
-                        )
-                    }
-                    binding.sortContainer.isGone = false
-                    binding.sortTV.text = sortOptions[selectedSortOrder]
-                    binding.sortContainer.setOnClickListener {
-                        BaseBottomSheet().apply {
-                            setSimpleItems(sortOptions.toList()) { index ->
-                                selectedSortOrder = index
-                                binding.sortTV.text = sortOptions[index]
-                                showPlaylistVideos(response)
-                            }
-                        }.show(childFragmentManager)
-                    }
+                    }.show(childFragmentManager)
                 }
-
-                updatePlaylistBookmark(response)
             }
+
+            updatePlaylistBookmark(response)
         }
     }
 
@@ -380,26 +376,24 @@ class PlaylistFragment : Fragment() {
         isLoading = true
 
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.CREATED) {
-                val response = try {
-                    withContext(Dispatchers.IO) {
-                        // load locally stored playlists with the auth api
-                        if (playlistType == PlaylistType.PRIVATE) {
-                            RetrofitInstance.authApi.getPlaylistNextPage(playlistId!!, nextPage!!)
-                        } else {
-                            RetrofitInstance.api.getPlaylistNextPage(playlistId!!, nextPage!!)
-                        }
+            val response = try {
+                withContext(Dispatchers.IO) {
+                    // load locally stored playlists with the auth api
+                    if (playlistType == PlaylistType.PRIVATE) {
+                        RetrofitInstance.authApi.getPlaylistNextPage(playlistId!!, nextPage!!)
+                    } else {
+                        RetrofitInstance.api.getPlaylistNextPage(playlistId!!, nextPage!!)
                     }
-                } catch (e: Exception) {
-                    context?.toastFromMainDispatcher(e.localizedMessage.orEmpty())
-                    Log.e(TAG(), e.toString())
-                    return@repeatOnLifecycle
                 }
-
-                nextPage = response.nextpage
-                playlistAdapter?.updateItems(response.relatedStreams)
-                isLoading = false
+            } catch (e: Exception) {
+                context?.toastFromMainDispatcher(e.localizedMessage.orEmpty())
+                Log.e(TAG(), e.toString())
+                return@launch
             }
+
+            nextPage = response.nextpage
+            playlistAdapter?.updateItems(response.relatedStreams)
+            isLoading = false
         }
     }
 }
