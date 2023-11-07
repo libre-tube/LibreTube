@@ -100,15 +100,12 @@
 
             </LinearLayout>
 
-            <TextView
+            <com.github.libretube.ui.views.ExpandableTextView
                 android:id="@+id/channel_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
                 android:autoLink="web"
-                android:background="@drawable/rounded_ripple"
-                android:ellipsize="end"
-                android:maxLines="2"
                 android:padding="10dp" />
 
             <HorizontalScrollView

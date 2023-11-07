@@ -41,15 +41,12 @@
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.github.libretube.ui.views.ExpandableTextView
                     android:id="@+id/playlist_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_weight="1"
-                    android:background="@drawable/rounded_ripple"
-                    android:ellipsize="end"
-                    android:maxLines="2"
                     android:paddingHorizontal="5dp"
                     android:paddingVertical="2dp"
                     android:textSize="20sp"
@@ -100,15 +97,12 @@
                 android:paddingBottom="5dp"
                 android:textStyle="bold" />
 
-            <TextView
+            <com.github.libretube.ui.views.ExpandableTextView
                 android:id="@+id/playlistDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
                 android:autoLink="web"
-                android:background="@drawable/rounded_ripple"
-                android:ellipsize="end"
-                android:maxLines="3"
                 android:paddingHorizontal="10dp"
                 android:paddingTop="5dp"
                 android:paddingBottom="10dp" />

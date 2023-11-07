@@ -187,12 +187,6 @@ class ChannelFragment : Fragment() {
                 binding.channelDescription.text = response.description.orEmpty().trim()
             }
 
-            binding.channelDescription.setOnClickListener {
-                (it as TextView).apply {
-                    it.maxLines = if (it.maxLines == Int.MAX_VALUE) 2 else Int.MAX_VALUE
-                }
-            }
-
             ImageHelper.loadImage(response.bannerUrl, binding.channelBanner)
             ImageHelper.loadImage(response.avatarUrl, binding.channelImage)
 
