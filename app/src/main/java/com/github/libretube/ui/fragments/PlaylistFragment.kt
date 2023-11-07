@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.text.parseAsHtml
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
@@ -139,11 +140,6 @@ class PlaylistFragment : Fragment() {
             binding.playlistProgress.isGone = true
             binding.playlistName.text = response.name
 
-            binding.playlistName.setOnClickListener {
-                binding.playlistName.maxLines =
-                    if (binding.playlistName.maxLines == 2) Int.MAX_VALUE else 2
-            }
-
             binding.playlistInfo.text = getChannelAndVideoString(response, response.videos)
             binding.playlistInfo.setOnClickListener {
                 (context as MainActivity).navController.navigate(
@@ -155,13 +151,6 @@ class PlaylistFragment : Fragment() {
             binding.playlistDescription.text = response.description
             // hide playlist description text view if not provided
             binding.playlistDescription.isGone = response.description.orEmpty().isBlank()
-
-            binding.playlistDescription.let { textView ->
-                textView.setOnClickListener {
-                    textView.maxLines =
-                        if (textView.maxLines == Int.MAX_VALUE) 3 else Int.MAX_VALUE
-                }
-            }
 
             showPlaylistVideos(response)
 
