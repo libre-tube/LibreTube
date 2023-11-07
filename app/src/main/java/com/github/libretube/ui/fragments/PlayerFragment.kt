@@ -924,7 +924,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 fetchSponsorBlockSegments()
 
                 // enable the chapters dialog in the player
-                playerBinding.chapterLL.setOnClickListener {
+                playerBinding.chapterName.setOnClickListener {
                     updateMaxSheetHeight()
                     val sheet =
                         chaptersBottomSheet ?: ChaptersBottomSheet().also {
@@ -1152,7 +1152,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         if (_binding == null) return
 
         // only show the chapters layout if there are some chapters available
-        playerBinding.chapterLL.isInvisible = viewModel.chapters.isEmpty()
+        playerBinding.chapterName.isInvisible = viewModel.chapters.isEmpty()
 
         // the following logic to set the chapter title can be skipped if no chapters are available
         if (viewModel.chapters.isEmpty()) return
