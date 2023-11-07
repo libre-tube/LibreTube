@@ -148,7 +148,7 @@ class PlaylistFragment : Fragment() {
                 )
             }
 
-            binding.playlistDescription.text = response.description
+            binding.playlistDescription.text = response.description?.parseAsHtml()
             // hide playlist description text view if not provided
             binding.playlistDescription.isGone = response.description.orEmpty().isBlank()
 
