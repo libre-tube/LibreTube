@@ -64,14 +64,6 @@
                 android:layout_marginHorizontal="6dp"
                 android:src="@drawable/ic_video" />
 
-            <ImageView
-                android:id="@+id/close"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="6dp"
-                android:src="@drawable/ic_close" />
-
         </LinearLayout>
 
         <FrameLayout
