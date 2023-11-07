@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
@@ -114,55 +112,51 @@ class SearchResultFragment : Fragment() {
                 "${ShareDialog.YOUTUBE_FRONTEND_URL}/watch?v=$videoId"
             } ?: query
 
-            repeatOnLifecycle(Lifecycle.State.CREATED) {
-                view?.let { context?.hideKeyboard(it) }
-                val response = try {
-                    withContext(Dispatchers.IO) {
-                        RetrofitInstance.api.getSearchResults(searchQuery, searchFilter).apply {
-                            items = items.deArrow()
-                        }
+            view?.let { context?.hideKeyboard(it) }
+            val response = try {
+                withContext(Dispatchers.IO) {
+                    RetrofitInstance.api.getSearchResults(searchQuery, searchFilter).apply {
+                        items = items.deArrow()
                     }
-                } catch (e: Exception) {
-                    Log.e(TAG(), e.toString())
-                    context?.toastFromMainDispatcher(R.string.unknown_error)
-                    return@repeatOnLifecycle
                 }
-
-                val binding = _binding ?: return@repeatOnLifecycle
-                searchAdapter = SearchAdapter(timeStamp = timeStamp ?: 0)
-                binding.searchRecycler.adapter = searchAdapter
-                searchAdapter.submitList(response.items)
-
-                binding.searchResultsLayout.isVisible = true
-                binding.progress.isGone = true
-                binding.noSearchResult.isVisible = response.items.isEmpty()
-
-                nextPage = response.nextpage
+            } catch (e: Exception) {
+                Log.e(TAG(), e.toString())
+                context?.toastFromMainDispatcher(R.string.unknown_error)
+                return@launch
             }
+
+            val binding = _binding ?: return@launch
+            searchAdapter = SearchAdapter(timeStamp = timeStamp ?: 0)
+            binding.searchRecycler.adapter = searchAdapter
+            searchAdapter.submitList(response.items)
+
+            binding.searchResultsLayout.isVisible = true
+            binding.progress.isGone = true
+            binding.noSearchResult.isVisible = response.items.isEmpty()
+
+            nextPage = response.nextpage
         }
     }
 
     private fun fetchNextSearchItems() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.CREATED) {
-                val response = try {
-                    withContext(Dispatchers.IO) {
-                        RetrofitInstance.api.getSearchResultsNextPage(
-                            query,
-                            searchFilter,
-                            nextPage!!
-                        ).apply {
-                            items = items.deArrow()
-                        }
+            val response = try {
+                withContext(Dispatchers.IO) {
+                    RetrofitInstance.api.getSearchResultsNextPage(
+                        query,
+                        searchFilter,
+                        nextPage!!
+                    ).apply {
+                        items = items.deArrow()
                     }
-                } catch (e: Exception) {
-                    Log.e(TAG(), e.toString())
-                    return@repeatOnLifecycle
                 }
-                nextPage = response.nextpage
-                if (response.items.isNotEmpty()) {
-                    searchAdapter.submitList(searchAdapter.currentList + response.items)
-                }
+            } catch (e: Exception) {
+                Log.e(TAG(), e.toString())
+                return@launch
+            }
+            nextPage = response.nextpage
+            if (response.items.isNotEmpty()) {
+                searchAdapter.submitList(searchAdapter.currentList + response.items)
             }
         }
     }
