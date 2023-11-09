@@ -185,7 +185,7 @@
     <RelativeLayout
         android:id="@+id/related_container"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:animateLayoutChanges="true"
         android:descendantFocusability="blocksDescendants"
         app:layout_constraintTop_toTopOf="parent"
