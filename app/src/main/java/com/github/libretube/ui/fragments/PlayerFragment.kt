@@ -596,7 +596,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         binding.relatedRecView.layoutManager = LinearLayoutManager(
             context,
-            LinearLayoutManager.HORIZONTAL,
+            if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+                LinearLayoutManager.HORIZONTAL else LinearLayoutManager.VERTICAL,
             false
         )
 
@@ -1021,7 +1022,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         if (PlayerHelper.relatedStreamsEnabled) {
             binding.relatedRecView.adapter = VideosAdapter(
                 streams.relatedStreams.filter { !it.title.isNullOrBlank() }.toMutableList(),
-                forceMode = VideosAdapter.Companion.ForceMode.RELATED
+                forceMode = if (
+                    resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+                ) VideosAdapter.Companion.ForceMode.RELATED else VideosAdapter.Companion.ForceMode.TRENDING
             )
         }
 
