@@ -76,4 +76,30 @@ object DatabaseHelper {
             }
         }
     }
+
+    suspend fun filterUnwatchedHistory(streams: List<WatchHistoryItem>): List<WatchHistoryItem> {
+        return streams.filter {
+            withContext(Dispatchers.IO) {
+                val historyItem = Database.watchPositionDao()
+                    .findById(it.videoId) ?: return@withContext true
+                val progress = historyItem.position / 1000
+                val duration = it.duration ?: 0
+                // show video only in feed when watched less than 90%
+                progress < 0.9f * duration
+            }
+        }
+    }
+
+    suspend fun filterWatchedHistory(streams: List<WatchHistoryItem>): List<WatchHistoryItem> {
+        return streams.filter {
+            withContext(Dispatchers.IO) {
+                val historyItem = Database.watchPositionDao()
+                    .findById(it.videoId) ?: return@withContext true
+                val progress = historyItem.position / 1000
+                val duration = it.duration ?: 0
+                // show video only in feed when watched less than 90%
+                progress > 0.9f * duration
+            }
+        }
+    }
 }

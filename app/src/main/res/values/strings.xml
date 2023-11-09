@@ -74,6 +74,8 @@
     <string name="all">All</string>
     <string name="playlists">Playlists</string>
     <string name="okay">OK</string>
+    <string name="both">Both</string>
+    <string name="finished">Finished</string>
     <string name="history">History</string>
     <string name="search_history">Search History</string>
     <string name="clear_history">Clear history</string>

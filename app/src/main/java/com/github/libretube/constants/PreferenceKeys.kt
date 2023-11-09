@@ -4,6 +4,7 @@ package com.github.libretube.constants
  * keys for the shared preferences
  */
 object PreferenceKeys {
+
     /**
      * Authentication
      */
@@ -152,6 +153,8 @@ object PreferenceKeys {
      * History
      */
     const val WATCH_HISTORY_SIZE = "watch_history_size"
+    const val SELECTED_HISTORY_TYPE_FILTER = "filter_history_type"
+    const val SELECTED_HISTORY_STATUS_FILTER = "filter_history_status"
 
     /**
      * Error logs

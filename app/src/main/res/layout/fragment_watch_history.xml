@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <ImageView
             android:layout_width="100dp"
@@ -68,6 +69,39 @@
                     app:icon="@drawable/ic_delete" />
 
             </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:id="@+id/filterTypeTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginStart="5dp"
+                    android:drawablePadding="5dp"
+                    android:paddingHorizontal="10dp"
+                    android:text="@string/all"
+                    android:textSize="16sp"
+                    android:tooltipText="@string/tooltip_filter"
+                    app:drawableEndCompat="@drawable/ic_filter" />
+
+                <TextView
+                    android:id="@+id/filterStatusTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="5dp"
+                    android:drawablePadding="5dp"
+                    android:paddingHorizontal="10dp"
+                    android:text="@string/both"
+                    android:textSize="16sp"
+                    android:tooltipText="@string/tooltip_sort"
+                    app:drawableEndCompat="@drawable/ic_sort" />
+
+            </FrameLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/watchHistoryRecView"
