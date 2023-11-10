@@ -526,4 +526,5 @@
     <string name="repeat_mode_all">ସବୁକୁ ପୁନରାବୃତ୍ତି କରନ୍ତୁ</string>
     <string name="segment_submitted">ସେଗମେଣ୍ଟ ଦାଖଲ କରାଯାଇଛି</string>
     <string name="downvote">ତଳକୁ</string>
+    <string name="successfully_removed_from_playlist">\"%1$s\" କୁ ପ୍ଲେ ତାଲିକାରୁ ସଫଳ ଭାବରେ ଅପସାରଣ କରାଯାଇଛି ।</string>
 </resources>
