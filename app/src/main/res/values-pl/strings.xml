@@ -532,4 +532,5 @@
     <string name="repeat_mode_all">Powtarzaj wszystkie</string>
     <string name="segment_submitted">Przesłano segment</string>
     <string name="downvote">W dół</string>
+    <string name="successfully_removed_from_playlist">„%1$s” zostało usunięte z zaznaczenia.</string>
 </resources>
