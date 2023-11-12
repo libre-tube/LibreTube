@@ -86,6 +86,8 @@ class OfflinePlayerService : LifecycleService() {
         }
 
         player = PlayerHelper.createPlayer(this, trackSelector, true)
+        // prevent android from putting LibreTube to sleep when locked
+        player!!.setWakeMode(C.WAKE_MODE_LOCAL)
 
         val audioItem = downloadWithItem.downloadItems.filter { it.path.exists() }
             .firstOrNull { it.type == FileType.AUDIO }
