@@ -100,8 +100,9 @@ object SubscriptionHelper {
         } else {
             val subscriptions = Database.localSubscriptionDao().getAll().map { it.channelId }
             when {
-                subscriptions.size > GET_SUBSCRIPTIONS_LIMIT -> RetrofitInstance.authApi
-                    .unauthenticatedSubscriptions(subscriptions)
+                subscriptions.size > GET_SUBSCRIPTIONS_LIMIT ->
+                    RetrofitInstance.authApi
+                        .unauthenticatedSubscriptions(subscriptions)
 
                 else -> RetrofitInstance.authApi.unauthenticatedSubscriptions(
                     subscriptions.joinToString(",")
@@ -116,8 +117,9 @@ object SubscriptionHelper {
         } else {
             val subscriptions = Database.localSubscriptionDao().getAll().map { it.channelId }
             when {
-                subscriptions.size > GET_SUBSCRIPTIONS_LIMIT -> RetrofitInstance.authApi
-                    .getUnauthenticatedFeed(subscriptions)
+                subscriptions.size > GET_SUBSCRIPTIONS_LIMIT ->
+                    RetrofitInstance.authApi
+                        .getUnauthenticatedFeed(subscriptions)
 
                 else -> RetrofitInstance.authApi.getUnauthenticatedFeed(
                     subscriptions.joinToString(",")

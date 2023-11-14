@@ -65,7 +65,8 @@ class AddToPlaylistDialog : DialogFragment() {
                 getButton(DialogInterface.BUTTON_NEGATIVE).setOnClickListener {
                     CreatePlaylistDialog().show(childFragmentManager, null)
                 }
-                getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {val index = binding.playlistsSpinner.selectedItemPosition
+                getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
+                    val index = binding.playlistsSpinner.selectedItemPosition
                     val playlist = playlists[index]
                     viewModel.lastSelectedPlaylistId = playlist.id!!
                     dialog?.hide()
@@ -73,7 +74,6 @@ class AddToPlaylistDialog : DialogFragment() {
                         addToPlaylist(playlist.id, playlist.name!!)
                         dialog?.dismiss()
                     }
-
                 }
             }
     }

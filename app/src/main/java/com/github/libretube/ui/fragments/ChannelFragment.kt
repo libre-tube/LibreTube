@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.core.view.children
 import androidx.core.view.isGone
@@ -32,11 +31,11 @@ import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.util.deArrow
+import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
-import java.io.IOException
 
 class ChannelFragment : Fragment() {
     private var _binding: FragmentChannelBinding? = null
