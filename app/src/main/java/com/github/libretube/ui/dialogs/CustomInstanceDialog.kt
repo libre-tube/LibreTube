@@ -40,7 +40,11 @@ class CustomInstanceDialog : DialogFragment() {
                     }
                 } else {
                     // at least one empty input
-                    Toast.makeText(requireContext(), R.string.empty_instance, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        R.string.empty_instance,
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
             .setNegativeButton(R.string.cancel, null)
