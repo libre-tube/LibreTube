@@ -13,6 +13,7 @@ import androidx.core.net.toUri
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.C
+import androidx.media3.common.C.WAKE_MODE_NETWORK
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MimeTypes
 import androidx.media3.common.PlaybackException
@@ -247,6 +248,8 @@ class OnlinePlayerService : LifecycleService() {
         }
 
         player = PlayerHelper.createPlayer(this, trackSelector, true)
+        // prevent android from putting LibreTube to sleep when locked
+        player!!.setWakeMode(WAKE_MODE_NETWORK)
 
         /**
          * Listens for changed playbackStates (e.g. pause, end)
