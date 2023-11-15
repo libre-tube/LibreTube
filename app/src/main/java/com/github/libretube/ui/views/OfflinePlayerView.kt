@@ -20,11 +20,6 @@ class OfflinePlayerView(
         toggleSystemBars(true)
     }
 
-    override fun getTopBarMarginDp(): Int {
-        // the offline player requires a bigger top bar margin
-        return if (isFullscreen()) 18 else super.getTopBarMarginDp()
-    }
-
     override fun minimizeOrExitPlayer() {
         (context as AppCompatActivity).onBackPressedDispatcher.onBackPressed()
     }
