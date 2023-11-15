@@ -24,6 +24,9 @@ In case the user is not logged in to a Piped account on any instance, user data 
 ### Piped account
 Piped accounts can be completely deleted with no history kept, providing increased security for users on the site.
 
+## Contributing to SponsorBlock
+If you decide to contribute to SponsorBlock via LibreTube (this is disabled by default), please acknowledge their [Privacy Policy](https://gist.github.com/ajayyy/aa9f8ded2b573d4f73a3ffa0ef74f796) and [Terms of Use](https://gist.github.com/ajayyy/9e8100f069348e0bc062641f34d6af12).
+
 ### Data Security
 LibreTube connects to Piped instances instead of directly to YouTube, providing an additional layer of privacy. However, trust is shifted to the instance owner. Piped instances do not log user-specific data, but there is no guarantee regarding the actions of the instance owner. In the event that logging occurs on LibreTube, the amount of data collected would be lower than what is typically gathered by YouTube's official app. This is because LibreTube does not send user behavior or other telemetry data to the server of the instance being used.
 
