@@ -1,0 +1,7 @@
+* feat: landscape layout for player page
+* feat(comments): highlight creator comments
+* feat(comments): show if creator replied
+* feat: filter options for Watch History Tab
+* feat: add undo action after removing video from playlist
+* feat: support for up/downvoting SponsorBlock segments
+* feat: filter options for Watch History Tab
