@@ -103,6 +103,48 @@ class OnlinePlayerService : LifecycleService() {
     var onIsPlayingChanged: ((isPlaying: Boolean) -> Unit)? = null
     var onNewVideo: ((streams: Streams, videoId: String) -> Unit)? = null
 
+    private val playerListener = object : Player.Listener {
+        override fun onIsPlayingChanged(isPlaying: Boolean) {
+            super.onIsPlayingChanged(isPlaying)
+            onIsPlayingChanged?.invoke(isPlaying)
+        }
+
+        override fun onPlaybackStateChanged(state: Int) {
+            when (state) {
+                Player.STATE_ENDED -> {
+                    if (PlayerHelper.shouldPlayNextVideo(playlistId != null) && !isTransitioning) playNextVideo()
+                }
+
+                Player.STATE_IDLE -> {
+                    onDestroy()
+                }
+
+                Player.STATE_BUFFERING -> {}
+                Player.STATE_READY -> {
+                    isTransitioning = false
+
+                    // save video to watch history when the video starts playing or is being resumed
+                    // waiting for the player to be ready since the video can't be claimed to be watched
+                    // while it did not yet start actually, but did buffer only so far
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        streams?.let { DatabaseHelper.addToWatchHistory(videoId, it) }
+                    }
+                }
+            }
+        }
+
+        override fun onPlayerError(error: PlaybackException) {
+            // show a toast on errors
+            Handler(Looper.getMainLooper()).post {
+                Toast.makeText(
+                    this@OnlinePlayerService.applicationContext,
+                    error.localizedMessage,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
     /**
      * Setting the required [Notification] for running as a foreground service
      */
@@ -255,47 +297,7 @@ class OnlinePlayerService : LifecycleService() {
          * Listens for changed playbackStates (e.g. pause, end)
          * Plays the next video when the current one ended
          */
-        player?.addListener(object : Player.Listener {
-            override fun onIsPlayingChanged(isPlaying: Boolean) {
-                super.onIsPlayingChanged(isPlaying)
-                onIsPlayingChanged?.invoke(isPlaying)
-            }
-
-            override fun onPlaybackStateChanged(state: Int) {
-                when (state) {
-                    Player.STATE_ENDED -> {
-                        if (PlayerHelper.shouldPlayNextVideo(playlistId != null) && !isTransitioning) playNextVideo()
-                    }
-
-                    Player.STATE_IDLE -> {
-                        onDestroy()
-                    }
-
-                    Player.STATE_BUFFERING -> {}
-                    Player.STATE_READY -> {
-                        isTransitioning = false
-
-                        // save video to watch history when the video starts playing or is being resumed
-                        // waiting for the player to be ready since the video can't be claimed to be watched
-                        // while it did not yet start actually, but did buffer only so far
-                        lifecycleScope.launch(Dispatchers.IO) {
-                            streams?.let { DatabaseHelper.addToWatchHistory(videoId, it) }
-                        }
-                    }
-                }
-            }
-
-            override fun onPlayerError(error: PlaybackException) {
-                // show a toast on errors
-                Handler(Looper.getMainLooper()).post {
-                    Toast.makeText(
-                        this@OnlinePlayerService.applicationContext,
-                        error.localizedMessage,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        })
+        player?.addListener(playerListener)
     }
 
     /**
