@@ -37,6 +37,7 @@ import androidx.fragment.app.commit
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.C
+import androidx.media3.common.C.WakeMode
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaItem.SubtitleConfiguration
 import androidx.media3.common.MimeTypes
@@ -1361,6 +1362,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         PlayerHelper.applyPreferredAudioQuality(requireContext(), trackSelector)
 
         exoPlayer = PlayerHelper.createPlayer(requireContext(), trackSelector, false)
+        exoPlayer.setWakeMode(C.WAKE_MODE_NETWORK)
         exoPlayer.addListener(playerListener)
         viewModel.player = exoPlayer
     }
