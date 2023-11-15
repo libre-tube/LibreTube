@@ -44,12 +44,18 @@ class WatchHistoryFragment : Fragment() {
     private val playerViewModel: PlayerViewModel by activityViewModels()
     private var isLoading = false
 
-    private var selectedStatusFilter = PreferenceHelper.getInt(PreferenceKeys.SELECTED_HISTORY_STATUS_FILTER, 0)
+    private var selectedStatusFilter = PreferenceHelper.getInt(
+        PreferenceKeys.SELECTED_HISTORY_STATUS_FILTER,
+        0
+    )
         set(value) {
             PreferenceHelper.putInt(PreferenceKeys.SELECTED_HISTORY_STATUS_FILTER, value)
             field = value
         }
-    private var selectedTypeFilter = PreferenceHelper.getInt(PreferenceKeys.SELECTED_HISTORY_TYPE_FILTER, 0)
+    private var selectedTypeFilter = PreferenceHelper.getInt(
+        PreferenceKeys.SELECTED_HISTORY_TYPE_FILTER,
+        0
+    )
         set(value) {
             PreferenceHelper.putInt(PreferenceKeys.SELECTED_HISTORY_TYPE_FILTER, value)
             field = value
@@ -76,7 +82,6 @@ class WatchHistoryFragment : Fragment() {
         }
 
         if (allHistory.isEmpty()) return
-
 
         binding.filterTypeTV.text = resources.getStringArray(R.array.filterOptions)[selectedTypeFilter]
         binding.filterStatusTV.text = resources.getStringArray(R.array.filterStatusOptions)[selectedStatusFilter]
@@ -123,8 +128,7 @@ class WatchHistoryFragment : Fragment() {
         showWatchHistory(allHistory)
     }
 
-    private fun showWatchHistory( allHistory: List<WatchHistoryItem> ) {
-
+    private fun showWatchHistory(allHistory: List<WatchHistoryItem>) {
         val watchHistory = allHistory.filterByStatusAndWatchPosition()
 
         watchHistory.forEach {
@@ -232,7 +236,8 @@ class WatchHistoryFragment : Fragment() {
                 1 -> DatabaseHelper.filterByWatchStatus(watchHistoryItem)
                 2 -> DatabaseHelper.filterByWatchStatus(watchHistoryItem, false)
                 else -> throw IllegalArgumentException()
-            } }
+            }
+        }
     }
 
     override fun onDestroyView() {

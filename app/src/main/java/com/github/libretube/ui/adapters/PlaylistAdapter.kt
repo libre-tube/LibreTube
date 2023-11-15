@@ -143,11 +143,19 @@ class PlaylistAdapter(
                 }
 
                 val shortTitle = TextUtils.limitTextToLength(video.title.orEmpty(), 50)
-                val snackBarText = rootView.context.getString(R.string.successfully_removed_from_playlist, shortTitle)
+                val snackBarText = rootView.context.getString(
+                    R.string.successfully_removed_from_playlist,
+                    shortTitle
+                )
                 Snackbar.make(rootView, snackBarText, Snackbar.LENGTH_LONG)
                     .setTextMaxLines(3)
                     .setAction(R.string.undo) {
-                        reAddToPlaylist(appContext, video, sortedFeedPosition, originalPlaylistPosition)
+                        reAddToPlaylist(
+                            appContext,
+                            video,
+                            sortedFeedPosition,
+                            originalPlaylistPosition
+                        )
                     }
                     .show()
             } catch (e: Exception) {

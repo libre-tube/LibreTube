@@ -19,11 +19,11 @@ import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.util.deArrow
 import com.google.android.material.snackbar.Snackbar
+import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
-import java.io.IOException
 
 class TrendsFragment : Fragment() {
     private var _binding: FragmentTrendsBinding? = null

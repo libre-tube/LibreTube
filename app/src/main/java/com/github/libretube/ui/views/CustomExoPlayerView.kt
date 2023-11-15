@@ -212,8 +212,11 @@ open class CustomExoPlayerView(
 
     fun toggleSystemBars(showBars: Boolean) {
         getWindow().toggleSystemBars(
-            types = if (showBars) WindowHelper.getGestureControlledBars(context)
-            else WindowInsetsCompat.Type.systemBars(),
+            types = if (showBars) {
+                WindowHelper.getGestureControlledBars(context)
+            } else {
+                WindowInsetsCompat.Type.systemBars()
+            },
             showBars = showBars
         )
     }
