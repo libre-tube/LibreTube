@@ -39,7 +39,7 @@ import com.github.libretube.db.obj.WatchPosition
         DownloadItem::class,
         SubscriptionGroup::class
     ],
-    version = 15,
+    version = 16,
     autoMigrations = [
         AutoMigration(from = 7, to = 8),
         AutoMigration(from = 8, to = 9),
