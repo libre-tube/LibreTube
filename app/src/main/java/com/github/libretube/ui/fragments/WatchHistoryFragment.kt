@@ -119,6 +119,7 @@ class WatchHistoryFragment : Fragment() {
                 }
             }.show(childFragmentManager)
         }
+
         showWatchHistory(allHistory)
     }
 
@@ -228,8 +229,8 @@ class WatchHistoryFragment : Fragment() {
 
         return runBlocking {
             when (selectedStatusFilter) {
-                1 -> DatabaseHelper.filterUnwatchedHistory(watchHistoryItem)
-                2 -> DatabaseHelper.filterWatchedHistory(watchHistoryItem)
+                1 -> DatabaseHelper.filterByWatchStatus(watchHistoryItem)
+                2 -> DatabaseHelper.filterByWatchStatus(watchHistoryItem, false)
                 else -> throw IllegalArgumentException()
             } }
     }

@@ -74,7 +74,6 @@
     <string name="all">All</string>
     <string name="playlists">Playlists</string>
     <string name="okay">OK</string>
-    <string name="both">Both</string>
     <string name="finished">Finished</string>
     <string name="history">History</string>
     <string name="search_history">Search History</string>
@@ -494,6 +493,7 @@
     <string name="filename_too_long">Filename too long!</string>
     <string name="remember_playback_speed">Remember playback speed</string>
     <string name="successfully_removed_from_playlist">Successfully removed \"%1$s\" from the playlist.</string>
+    <string name="watched">Watched</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

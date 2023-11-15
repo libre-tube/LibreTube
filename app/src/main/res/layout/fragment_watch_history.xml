@@ -96,10 +96,10 @@
                     android:layout_marginEnd="5dp"
                     android:drawablePadding="5dp"
                     android:paddingHorizontal="10dp"
-                    android:text="@string/both"
+                    android:text="@string/watched"
                     android:textSize="16sp"
-                    android:tooltipText="@string/tooltip_sort"
-                    app:drawableEndCompat="@drawable/ic_sort" />
+                    android:tooltipText="@string/tooltip_filter"
+                    app:drawableEndCompat="@drawable/ic_filter" />
 
             </FrameLayout>
 

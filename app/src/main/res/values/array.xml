@@ -316,8 +316,8 @@
     </string-array>
 
     <string-array name="filterStatusOptions">
-        <item>@string/both</item>
-        <item>@string/resume</item>
+        <item>@string/watched</item>
+        <item>@string/continue_watching</item>
         <item>@string/finished</item>
     </string-array>
 
