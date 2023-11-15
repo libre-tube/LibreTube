@@ -625,13 +625,7 @@ open class CustomExoPlayerView(
     }
 
     override fun onDoubleTapCenterScreen() {
-        player?.let { player ->
-            if (player.isPlaying) {
-                player.pause()
-            } else {
-                player.play()
-            }
-        }
+        player?.togglePlayPauseState()
     }
 
     override fun onDoubleTapLeftScreen() {
