@@ -73,7 +73,9 @@ class CommentsAdapter(
         val comment = comments[position]
         holder.binding.apply {
             commentAuthor.text = comment.author
-            commentAuthor.setBackgroundResource(if (comment.channelOwner) R.drawable.comment_channel_owner_bg else 0)
+            commentAuthor.setBackgroundResource(
+                if (comment.channelOwner) R.drawable.comment_channel_owner_bg else 0
+            )
             commentInfos.text = TextUtils.SEPARATOR + comment.commentedTime
 
             commentText.movementMethod = LinkMovementMethodCompat.getInstance()

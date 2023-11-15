@@ -77,7 +77,10 @@ object DatabaseHelper {
         }
     }
 
-    suspend fun filterByWatchStatus(streams: List<WatchHistoryItem>, unfinished: Boolean = true): List<WatchHistoryItem> {
+    suspend fun filterByWatchStatus(
+        streams: List<WatchHistoryItem>,
+        unfinished: Boolean = true
+    ): List<WatchHistoryItem> {
         return streams.filter {
             withContext(Dispatchers.IO) {
                 val historyItem = Database.watchPositionDao()

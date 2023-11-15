@@ -145,15 +145,16 @@ object PlayingQueue {
         }
     }
 
-    private fun fetchMoreFromPlaylist(playlistId: String, nextPage: String?, isMainList: Boolean) = runCatchingIO {
-        var playlistNextPage = nextPage
-        while (playlistNextPage != null) {
-            RetrofitInstance.authApi.getPlaylistNextPage(playlistId, playlistNextPage).run {
-                addToQueueAsync(relatedStreams, isMainList = isMainList)
-                playlistNextPage = this.nextpage
+    private fun fetchMoreFromPlaylist(playlistId: String, nextPage: String?, isMainList: Boolean) =
+        runCatchingIO {
+            var playlistNextPage = nextPage
+            while (playlistNextPage != null) {
+                RetrofitInstance.authApi.getPlaylistNextPage(playlistId, playlistNextPage).run {
+                    addToQueueAsync(relatedStreams, isMainList = isMainList)
+                    playlistNextPage = this.nextpage
+                }
             }
         }
-    }
 
     fun insertPlaylist(playlistId: String, newCurrentStream: StreamItem?) = runCatchingIO {
         val playlist = PlaylistsHelper.getPlaylist(playlistId)
