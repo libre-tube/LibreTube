@@ -21,7 +21,7 @@
     <string name="login_register">Пријава/регистрација</string>
     <string name="importsuccess">Пратите</string>
     <string name="cannotDownload">Није могуће преузети овај стрим.</string>
-    <string name="import_from_yt">Увоз праћења</string>
+    <string name="import_from_yt">Увези праћења</string>
     <string name="import_from_yt_summary">Из YouTube-а или NewPipe-а</string>
     <string name="app_theme">Тема</string>
     <string name="server_error">Изгледа да постоји проблем са изабраним сервером. Покушајте са другом инстанцом.</string>
@@ -443,7 +443,7 @@
     <string name="visibility_unlisted">По позиву</string>
     <string name="sb_invalid_segment">Неважећи почетак или крај сегмента</string>
     <string name="visibility">Видљивост</string>
-    <string name="continue_watching">Наставите да гледате</string>
+    <string name="continue_watching">Наставак гледања</string>
     <string name="tooltip_options">Опције</string>
     <string name="tooltip_locked">Закључај плејер</string>
     <string name="remove_watched_videos">Уклони одгледане видео снимке</string>
@@ -496,7 +496,7 @@
     <string name="fullscreen_gestures">Покрети за улазак/излазак из целог екрана</string>
     <string name="creation_date">Датум прављења</string>
     <string name="unknown_audio_track_type">Непознати тип аудио снимка</string>
-    <string name="choose_instance_long">Изаберите Piped инстанцу коју ћете користити испод. Piped инстанца ће деловати као посредник између вас и YouTube-а. Ове инстанце се налазе на различитим физичким локацијама – означене заставом(aма) њихове земље. Инстанце који су вам физичке ближе вероватно су брже од инстанца које нису. Инстанцу коју користите можете променити у подешавањима у било ком тренутку.</string>
+    <string name="choose_instance_long">Изаберите Piped инстанцу коју ћете користити. Piped инстанца ће деловати као посредник између вас и YouTube-а. Ове инстанце се налазе на различитим физичким локацијама – означене су заставом те земље. Инстанце које су вам физичке ближе вероватно су брже од инстанца које нису. Инстанцу коју користите можете променити у подешавањима у било ком тренутку.</string>
     <string name="group_name_error_empty">Унесите назив</string>
     <string name="tooltip_edit_groups">Измени групе</string>
     <string name="visible">Прикажи у траци за премотавање</string>
@@ -530,4 +530,6 @@
     <string name="downvote">Гласај против</string>
     <string name="repeat_mode_all">Понављај све</string>
     <string name="successfully_removed_from_playlist">Успешно уклоњено са плејлисте: „%1$s“.</string>
+    <string name="watched">Одгледано</string>
+    <string name="finished">Завршено</string>
 </resources>
