@@ -690,6 +690,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         updateResolutionOnFullscreenChange(true)
 
         openOrCloseFullscreenDialog(true)
+
+        binding.player.updateMarginsByFullscreenMode()
     }
 
     @SuppressLint("SourceLockedOrientationActivity")
@@ -716,6 +718,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         openOrCloseFullscreenDialog(false)
 
         checkForNecessaryOrientationRestart()
+
+        binding.player.updateMarginsByFullscreenMode()
     }
 
     private fun openOrCloseFullscreenDialog(open: Boolean) {

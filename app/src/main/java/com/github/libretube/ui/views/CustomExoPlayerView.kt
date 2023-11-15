@@ -3,6 +3,7 @@ package com.github.libretube.ui.views
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Handler
@@ -97,10 +98,6 @@ open class CustomExoPlayerView(
 
     private val supportFragmentManager
         get() = activity.supportFragmentManager
-
-    private val hasCutout by lazy {
-        WindowHelper.hasCutout(this)
-    }
 
     private fun toggleController() {
         if (isControllerFullyVisible) hideController() else showController()
@@ -553,9 +550,16 @@ open class CustomExoPlayerView(
     open fun isFullscreen() =
         resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
-    override fun onConfigurationChanged(newConfig: Configuration) {
+    override fun onConfigurationChanged(newConfig: Configuration?) {
         super.onConfigurationChanged(newConfig)
 
+        updateMarginsByFullscreenMode()
+    }
+
+    /**
+     * Updates the margins according to the current orientation and fullscreen mode
+     */
+    fun updateMarginsByFullscreenMode() {
         // add a larger bottom margin to the time bar in landscape mode
         binding.progressBar.updateLayoutParams<MarginLayoutParams> {
             bottomMargin = (if (isFullscreen()) 20f else 10f).dpToPx()
@@ -563,19 +567,17 @@ open class CustomExoPlayerView(
 
         updateTopBarMargin()
 
-        // don't add extra padding if there's no cutout
-        if (!hasCutout && binding.topBar.marginStart == 0) return
+        // don't add extra padding if there's no cutout and no margin set that would need to be undone
+        if (!(context as BaseActivity).hasCutout && binding.topBar.marginStart == LANDSCAPE_MARGIN_HORIZONTAL_NONE) return
 
         // add a margin to the top and the bottom bar in landscape mode for notches
-        val newMargin = when (newConfig.orientation) {
-            Configuration.ORIENTATION_LANDSCAPE -> LANDSCAPE_MARGIN_HORIZONTAL
-            else -> 0
-        }
+        val isForcedPortrait = activity.requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+        val horizontalMargin = if (isFullscreen() && !isForcedPortrait) LANDSCAPE_MARGIN_HORIZONTAL else LANDSCAPE_MARGIN_HORIZONTAL_NONE
 
         listOf(binding.topBar, binding.bottomBar).forEach {
             it.updateLayoutParams<MarginLayoutParams> {
-                marginStart = newMargin
-                marginEnd = newMargin
+                marginStart = horizontalMargin
+                marginEnd = horizontalMargin
             }
         }
     }
@@ -599,7 +601,7 @@ open class CustomExoPlayerView(
      */
     fun updateTopBarMargin() {
         binding.topBar.updateLayoutParams<MarginLayoutParams> {
-            topMargin = getTopBarMarginDp().toFloat().dpToPx()
+            topMargin = (if (isFullscreen()) 18f else 0f).dpToPx()
         }
     }
 
@@ -614,10 +616,6 @@ open class CustomExoPlayerView(
         binding.timeLeft.text = "-${DateUtils.formatElapsedTime(timeLeft)}"
 
         runnableHandler.postDelayed(100, UPDATE_POSITION_TOKEN, this::updateCurrentPosition)
-    }
-
-    open fun getTopBarMarginDp(): Int {
-        return if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) 10 else 0
     }
 
     override fun onSingleTap() {
@@ -728,5 +726,6 @@ open class CustomExoPlayerView(
         private const val ANIMATION_DURATION = 100L
         private const val AUTO_HIDE_CONTROLLER_DELAY = 2000L
         private val LANDSCAPE_MARGIN_HORIZONTAL = 20f.dpToPx()
+        private val LANDSCAPE_MARGIN_HORIZONTAL_NONE = 0f.dpToPx()
     }
 }

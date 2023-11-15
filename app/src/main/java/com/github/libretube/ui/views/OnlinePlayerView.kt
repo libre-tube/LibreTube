@@ -1,7 +1,6 @@
 package com.github.libretube.ui.views
 
 import android.content.Context
-import android.content.res.Configuration
 import android.util.AttributeSet
 import android.view.Window
 import androidx.core.os.bundleOf
@@ -191,14 +190,6 @@ class OnlinePlayerView(
 
         if (playerViewModel?.isFullscreen?.value == true && !isPlayerLocked) {
             toggleSystemBars(true)
-        }
-    }
-
-    override fun getTopBarMarginDp(): Int {
-        return when {
-            resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE -> 15
-            playerViewModel?.isFullscreen?.value == true -> 20
-            else -> super.getTopBarMarginDp()
         }
     }
 
