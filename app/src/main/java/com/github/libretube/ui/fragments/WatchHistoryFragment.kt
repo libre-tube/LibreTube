@@ -18,13 +18,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentWatchHistoryBinding
+import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Database
+import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.ui.adapters.WatchHistoryAdapter
 import com.github.libretube.ui.models.PlayerViewModel
+import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.util.PlayingQueue
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
@@ -38,6 +43,23 @@ class WatchHistoryFragment : Fragment() {
     private val handler = Handler(Looper.getMainLooper())
     private val playerViewModel: PlayerViewModel by activityViewModels()
     private var isLoading = false
+
+    private var selectedStatusFilter = PreferenceHelper.getInt(
+        PreferenceKeys.SELECTED_HISTORY_STATUS_FILTER,
+        0
+    )
+        set(value) {
+            PreferenceHelper.putInt(PreferenceKeys.SELECTED_HISTORY_STATUS_FILTER, value)
+            field = value
+        }
+    private var selectedTypeFilter = PreferenceHelper.getInt(
+        PreferenceKeys.SELECTED_HISTORY_TYPE_FILTER,
+        0
+    )
+        set(value) {
+            PreferenceHelper.putInt(PreferenceKeys.SELECTED_HISTORY_TYPE_FILTER, value)
+            field = value
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,16 +77,14 @@ class WatchHistoryFragment : Fragment() {
             _binding?.watchHistoryRecView?.updatePadding(bottom = if (it) 64f.dpToPx() else 0)
         }
 
-        val watchHistory = runBlocking(Dispatchers.IO) {
+        val allHistory = runBlocking(Dispatchers.IO) {
             Database.watchHistoryDao().getAll().reversed()
         }
 
-        if (watchHistory.isEmpty()) return
+        if (allHistory.isEmpty()) return
 
-        watchHistory.forEach {
-            it.thumbnailUrl = ProxyHelper.rewriteUrl(it.thumbnailUrl)
-            it.uploaderAvatar = ProxyHelper.rewriteUrl(it.uploaderAvatar)
-        }
+        binding.filterTypeTV.text = resources.getStringArray(R.array.filterOptions)[selectedTypeFilter]
+        binding.filterStatusTV.text = resources.getStringArray(R.array.filterStatusOptions)[selectedStatusFilter]
 
         binding.clear.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
@@ -80,6 +100,45 @@ class WatchHistoryFragment : Fragment() {
                 .setNegativeButton(R.string.cancel, null)
                 .show()
         }
+
+        binding.filterTypeTV.setOnClickListener {
+            val filterOptions = resources.getStringArray(R.array.filterOptions)
+
+            BaseBottomSheet().apply {
+                setSimpleItems(filterOptions.toList()) { index ->
+                    binding.filterTypeTV.text = filterOptions[index]
+                    selectedTypeFilter = index
+                    showWatchHistory(allHistory)
+                }
+            }.show(childFragmentManager)
+        }
+
+        binding.filterStatusTV.setOnClickListener {
+            val filterOptions = resources.getStringArray(R.array.filterStatusOptions)
+
+            BaseBottomSheet().apply {
+                setSimpleItems(filterOptions.toList()) { index ->
+                    binding.filterStatusTV.text = filterOptions[index]
+                    selectedStatusFilter = index
+                    showWatchHistory(allHistory)
+                }
+            }.show(childFragmentManager)
+        }
+
+        showWatchHistory(allHistory)
+    }
+
+    private fun showWatchHistory(allHistory: List<WatchHistoryItem>) {
+        val watchHistory = allHistory.filterByStatusAndWatchPosition()
+
+        watchHistory.forEach {
+            it.thumbnailUrl = ProxyHelper.rewriteUrl(it.thumbnailUrl)
+            it.uploaderAvatar = ProxyHelper.rewriteUrl(it.uploaderAvatar)
+        }
+
+        val watchHistoryAdapter = WatchHistoryAdapter(
+            watchHistory.toMutableList()
+        )
 
         binding.playAll.setOnClickListener {
             PlayingQueue.resetToDefaults()
@@ -103,10 +162,6 @@ class WatchHistoryFragment : Fragment() {
                 keepQueue = true
             )
         }
-
-        val watchHistoryAdapter = WatchHistoryAdapter(
-            watchHistory.toMutableList()
-        )
 
         binding.watchHistoryRecView.layoutManager = LinearLayoutManager(context)
         binding.watchHistoryRecView.adapter = watchHistoryAdapter
@@ -156,6 +211,31 @@ class WatchHistoryFragment : Fragment() {
                     watchHistoryAdapter.showMoreItems()
                     isLoading = false
                 }
+            }
+        }
+    }
+
+    private fun List<WatchHistoryItem>.filterByStatusAndWatchPosition(): List<WatchHistoryItem> {
+        val watchHistoryItem = this.filter {
+            val isLive = (it.duration ?: -1L) < 0L
+            when (selectedTypeFilter) {
+                0 -> true
+                1 -> !it.isShort && !isLive
+                2 -> it.isShort // where is the StreamItem converted to watchHistoryItem?
+                3 -> isLive
+                else -> throw IllegalArgumentException()
+            }
+        }
+
+        if (selectedStatusFilter == 0) {
+            return watchHistoryItem
+        }
+
+        return runBlocking {
+            when (selectedStatusFilter) {
+                1 -> DatabaseHelper.filterByWatchStatus(watchHistoryItem)
+                2 -> DatabaseHelper.filterByWatchStatus(watchHistoryItem, false)
+                else -> throw IllegalArgumentException()
             }
         }
     }

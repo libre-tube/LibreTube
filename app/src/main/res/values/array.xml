@@ -315,6 +315,12 @@
         <item>@string/livestreams</item>
     </string-array>
 
+    <string-array name="filterStatusOptions">
+        <item>@string/watched</item>
+        <item>@string/continue_watching</item>
+        <item>@string/finished</item>
+    </string-array>
+
     <string-array name="playlistSortOptions">
         <item>@string/least_recent</item>
         <item>@string/most_recent</item>
