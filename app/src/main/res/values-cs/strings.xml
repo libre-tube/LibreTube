@@ -530,4 +530,6 @@
     <string name="downvote">Proti</string>
     <string name="repeat_mode_all">Opakovat vše</string>
     <string name="successfully_removed_from_playlist">Video „%1$s“ úspěšně odebráno z playlistu.</string>
+    <string name="watched">Zhlédnuto</string>
+    <string name="finished">Dokončeno</string>
 </resources>
