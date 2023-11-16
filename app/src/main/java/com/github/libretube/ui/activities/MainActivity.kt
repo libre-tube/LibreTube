@@ -103,10 +103,9 @@ class MainActivity : BaseActivity() {
         }
 
         // set default tab as start fragment
-        navController.graph.setStartDestination(startFragmentId)
-
-        // navigate to the default fragment
-        navController.navigate(startFragmentId)
+        navController.graph = navController.navInflater.inflate(R.navigation.nav).also {
+            it.setStartDestination(startFragmentId)
+        }
 
         binding.bottomNav.setOnApplyWindowInsetsListener(null)
 

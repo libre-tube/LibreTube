@@ -43,8 +43,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottomNav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
-        app:navGraph="@navigation/nav" />
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
 
     <FrameLayout
         android:id="@+id/container"
