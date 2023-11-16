@@ -1,7 +1,7 @@
 [versions]
 appcompat = "1.6.1"
 core = "1.12.0"
-gradle = "8.1.3"
+gradle = "8.1.4"
 kotlin = "1.9.20"
 lifecycle = "2.6.2"
 constraintlayout = "2.1.4"
