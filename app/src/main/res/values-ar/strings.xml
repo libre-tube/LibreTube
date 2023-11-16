@@ -539,4 +539,6 @@
     <string name="downvote">أسفل</string>
     <string name="repeat_mode_all">تكرار الكل</string>
     <string name="successfully_removed_from_playlist">تمت إزالة \"%1$s\" من قائمة التشغيل بنجاح.</string>
+    <string name="watched">شاهدت</string>
+    <string name="finished">انتهى</string>
 </resources>
