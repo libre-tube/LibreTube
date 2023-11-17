@@ -522,4 +522,8 @@
     <string name="undo">Hoàn tác</string>
     <string name="segment_submitted">Đã gửi phân đoạn</string>
     <string name="downvote">Xuống</string>
+    <string name="watched">Đã xem</string>
+    <string name="repeat_mode_all">Lặp lại tất cả</string>
+    <string name="finished">Hoàn thành</string>
+    <string name="successfully_removed_from_playlist">Thành công xóa \"%1$s\" khỏi danh sách.</string>
 </resources>
