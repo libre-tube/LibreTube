@@ -204,6 +204,11 @@ open class CustomExoPlayerView(
             if (isLive) player?.let { it.seekTo(it.duration) }
         }
 
+        // forward touch events to the time bar for better accessibility
+        binding.bottomBar.setOnTouchListener { _, motionEvent ->
+            binding.exoProgress.onTouchEvent(motionEvent)
+        }
+
         updateCurrentPosition()
     }
 
