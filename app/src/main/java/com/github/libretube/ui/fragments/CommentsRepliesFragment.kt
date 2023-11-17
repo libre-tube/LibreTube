@@ -82,13 +82,11 @@ class CommentsRepliesFragment : Fragment() {
                 ::repliesPage.isInitialized &&
                 repliesPage.nextpage != null
             ) {
-                fetchReplies(videoId, repliesPage.nextpage!!) {
-                    repliesAdapter.updateItems(repliesPage.comments)
-                }
+                fetchReplies(videoId, repliesPage.nextpage!!)
             }
         }
 
-        loadInitialReplies(videoId, comment.repliesPage.orEmpty(), repliesAdapter)
+        loadInitialReplies(videoId, comment.repliesPage.orEmpty())
     }
 
     override fun onDestroyView() {
@@ -98,34 +96,32 @@ class CommentsRepliesFragment : Fragment() {
 
     private fun loadInitialReplies(
         videoId: String,
-        nextPage: String,
-        repliesAdapter: CommentsAdapter
+        nextPage: String
     ) {
         _binding?.progress?.isVisible = true
-        fetchReplies(videoId, nextPage) {
-            repliesAdapter.updateItems(it.comments)
-            _binding?.progress?.isGone = true
-        }
+        fetchReplies(videoId, nextPage)
     }
 
-    private fun fetchReplies(
-        videoId: String,
-        nextPage: String,
-        onFinished: (CommentsPage) -> Unit
-    ) {
-        lifecycleScope.launch(Dispatchers.IO) {
+    private fun fetchReplies(videoId: String, nextPage: String) {
+        _binding?.progress?.isVisible = true
+
+        lifecycleScope.launch {
             if (isLoading) return@launch
             isLoading = true
 
             repliesPage = try {
-                RetrofitInstance.api.getCommentsNextPage(videoId, nextPage)
+                withContext(Dispatchers.IO) {
+                    RetrofitInstance.api.getCommentsNextPage(videoId, nextPage)
+                }
             } catch (e: Exception) {
                 Log.e(TAG(), "IOException, you might not have internet connection")
                 return@launch
+            } finally {
+                _binding?.progress?.isGone = true
             }
             repliesPage.comments = repliesPage.comments.filterNonEmptyComments()
             withContext(Dispatchers.Main) {
-                onFinished.invoke(repliesPage)
+                repliesAdapter.updateItems(repliesPage.comments)
             }
             isLoading = false
         }
