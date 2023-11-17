@@ -192,7 +192,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/main_container"
-        android:background="?android:windowBackground">
+        android:background="?android:colorBackground">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/related_rec_view"
