@@ -445,7 +445,15 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                 if (_binding == null) return
 
-                if (currentId == transitionEndId) {
+                if (currentId == transitionStartId) {
+                    viewModel.isMiniPlayerVisible.value = false
+                    // re-enable captions
+                    updateCurrentSubtitle(currentSubtitle)
+                    binding.player.useController = true
+                    commentsViewModel.setCommentSheetExpand(true)
+                    mainMotionLayout.progress = 0F
+                    changeOrientationMode()
+                } else if (currentId == transitionEndId) {
                     viewModel.isMiniPlayerVisible.value = true
                     // disable captions temporarily
                     updateCurrentSubtitle(null)
@@ -454,14 +462,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     binding.sbSkipBtn.isGone = true
                     mainMotionLayout.progress = 1F
                     (activity as MainActivity).requestOrientationChange()
-                } else if (currentId == transitionStartId) {
-                    viewModel.isMiniPlayerVisible.value = false
-                    // re-enable captions
-                    updateCurrentSubtitle(currentSubtitle)
-                    binding.player.useController = true
-                    commentsViewModel.setCommentSheetExpand(true)
-                    mainMotionLayout.progress = 0F
-                    changeOrientationMode()
                 }
             }
         })
@@ -706,7 +706,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         viewModel.isFullscreen.value = false
 
-        if (mainActivity.screenOrientationPref == ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT) {
+        if (
+            !PlayerHelper.autoFullscreenEnabled &&
+            mainActivity.screenOrientationPref == ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+        ) {
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
         }
 
