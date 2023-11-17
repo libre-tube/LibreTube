@@ -495,6 +495,7 @@
     <string name="successfully_removed_from_playlist">Successfully removed \"%1$s\" from the playlist.</string>
     <string name="watched">Watched</string>
     <string name="no_segments_found">There are no segments for this video yet.</string>
+    <string name="bottom_reached">Bottom reached!</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
