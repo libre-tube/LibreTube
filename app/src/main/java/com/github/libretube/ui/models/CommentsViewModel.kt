@@ -10,6 +10,7 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.ui.extensions.filterNonEmptyComments
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CommentsViewModel : ViewModel() {
     val commentsPage = MutableLiveData<CommentsPage?>()
@@ -17,11 +18,12 @@ class CommentsViewModel : ViewModel() {
 
     var videoId: String? = null
     var channelAvatar: String? = null
+    var handleLink: ((url: String) -> Unit)? = null
+
     private var nextPage: String? = null
-    private var isLoading = false
+    var isLoading = MutableLiveData<Boolean>()
     var currentCommentsPosition = 0
     var commentsSheetDismiss: (() -> Unit)? = null
-    var handleLink: ((url: String) -> Unit)? = null
 
     fun setCommentSheetExpand(value: Boolean?) {
         if (commentSheetExpand.value != value) {
@@ -30,31 +32,43 @@ class CommentsViewModel : ViewModel() {
     }
 
     fun fetchComments() {
-        videoId ?: return
-        viewModelScope.launch(Dispatchers.IO) {
-            isLoading = true
+        val videoId = videoId ?: return
+
+        isLoading.value = true
+
+        viewModelScope.launch {
             val response = try {
-                RetrofitInstance.api.getComments(videoId!!)
+                withContext(Dispatchers.IO) {
+                    RetrofitInstance.api.getComments(videoId)
+                }
             } catch (e: Exception) {
                 Log.e(TAG(), e.toString())
                 return@launch
+            } finally {
+                isLoading.value = false
             }
+
             nextPage = response.nextpage
             response.comments = response.comments.filterNonEmptyComments()
             commentsPage.postValue(response)
-            isLoading = false
         }
     }
 
     fun fetchNextComments() {
-        if (isLoading || nextPage == null || videoId == null) return
-        viewModelScope.launch(Dispatchers.IO) {
-            isLoading = true
+        if (isLoading.value == true || nextPage == null || videoId == null) return
+
+        isLoading.value = true
+
+        viewModelScope.launch {
             val response = try {
-                RetrofitInstance.api.getCommentsNextPage(videoId!!, nextPage!!)
+                withContext(Dispatchers.IO) {
+                    RetrofitInstance.api.getCommentsNextPage(videoId!!, nextPage!!)
+                }
             } catch (e: Exception) {
                 Log.e(TAG(), e.toString())
                 return@launch
+            } finally {
+                isLoading.value = false
             }
 
             val updatedPage = commentsPage.value?.apply {
@@ -65,12 +79,11 @@ class CommentsViewModel : ViewModel() {
 
             nextPage = response.nextpage
             commentsPage.postValue(updatedPage)
-            isLoading = false
         }
     }
 
     fun reset() {
-        isLoading = false
+        isLoading.value = false
         nextPage = null
         commentsPage.value = null
         videoId = null
