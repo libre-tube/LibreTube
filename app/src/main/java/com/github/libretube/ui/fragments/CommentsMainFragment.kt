@@ -55,7 +55,7 @@ class CommentsMainFragment : Fragment() {
             commentsSheet?.binding?.btnScrollToTop?.isVisible = viewModel.currentCommentsPosition != 0
 
             if (!viewBinding.commentsRV.canScrollVertically(1)) {
-                viewModel.fetchNextComments()
+                viewModel.fetchNextComments(requireContext())
             }
         }
         commentsSheet?.updateFragmentInfo(false, getString(R.string.comments))
