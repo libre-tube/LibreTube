@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.format.DateUtils
 import android.util.Log
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
@@ -91,6 +92,12 @@ class VoteForSegmentDialog : DialogFragment() {
 
         withContext(Dispatchers.Main) {
             val binding = _binding ?: return@withContext
+
+            if (segments.isEmpty()) {
+                dismiss()
+                Toast.makeText(context, R.string.no_segments_found, Toast.LENGTH_SHORT).show()
+                return@withContext
+            }
 
             val segmentTexts = segments.map {
                 "${it.category} (${
