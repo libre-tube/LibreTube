@@ -529,4 +529,6 @@
     <string name="successfully_removed_from_playlist">\"%1$s\" oynatma siyahısından uğurla silindi.</string>
     <string name="watched">Baxılan</string>
     <string name="finished">Bitdi</string>
+    <string name="bottom_reached">Aşağıya çatdı!</string>
+    <string name="no_segments_found">Bu video üçün hələ heç bir bölüm yoxdur.</string>
 </resources>
