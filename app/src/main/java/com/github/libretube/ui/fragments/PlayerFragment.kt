@@ -1030,11 +1030,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         viewModel.chaptersLiveData.value = streams.chapters
 
         if (PlayerHelper.relatedStreamsEnabled) {
+            val relatedLayoutManager = binding.relatedRecView.layoutManager as LinearLayoutManager
             binding.relatedRecView.adapter = VideosAdapter(
                 streams.relatedStreams.filter { !it.title.isNullOrBlank() }.toMutableList(),
-                forceMode = if (
-                    resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
-                ) {
+                forceMode = if (relatedLayoutManager.orientation == LinearLayoutManager.HORIZONTAL) {
                     VideosAdapter.Companion.ForceMode.RELATED
                 } else {
                     VideosAdapter.Companion.ForceMode.TRENDING
