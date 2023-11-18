@@ -532,4 +532,6 @@
     <string name="successfully_removed_from_playlist">Успешно уклоњено са плејлисте: „%1$s“.</string>
     <string name="watched">Одгледано</string>
     <string name="finished">Завршено</string>
+    <string name="bottom_reached">Досегнуто дно!</string>
+    <string name="no_segments_found">Још увек нема сегмената за овај видео снимак.</string>
 </resources>
