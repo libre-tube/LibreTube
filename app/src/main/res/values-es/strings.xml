@@ -532,4 +532,6 @@
     <string name="successfully_removed_from_playlist">Eliminado con éxito \"%1$s\" de la lista de reproducción.</string>
     <string name="watched">Vistos</string>
     <string name="finished">Acabados</string>
+    <string name="no_segments_found">Aún no hay partes para este vídeo.</string>
+    <string name="bottom_reached">¡Se alcanzó el final!</string>
 </resources>
