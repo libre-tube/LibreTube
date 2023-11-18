@@ -533,4 +533,8 @@
     <string name="downvote">Понизити</string>
     <string name="repeat_mode_all">Повторити все</string>
     <string name="successfully_removed_from_playlist">\"%1$s\" вилучено з добірки.</string>
+    <string name="watched">Переглянуто</string>
+    <string name="bottom_reached">Дно досягнуто!</string>
+    <string name="finished">Завершено</string>
+    <string name="no_segments_found">Для цього відео ще немає сегментів.</string>
 </resources>
