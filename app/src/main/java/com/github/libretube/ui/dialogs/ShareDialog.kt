@@ -59,7 +59,7 @@ class ShareDialog : DialogFragment() {
                     else -> instanceUrl
                 }
                 var url = when {
-                    shareObjectType == ShareObjectType.VIDEO && host == YOUTUBE_SHORT_URL -> "$YOUTUBE_SHORT_URL/$id"
+                    shareObjectType == ShareObjectType.VIDEO && host == YOUTUBE_FRONTEND_URL -> "$YOUTUBE_SHORT_URL/$id"
                     shareObjectType == ShareObjectType.VIDEO -> "$host/watch?v=$id"
                     shareObjectType == ShareObjectType.PLAYLIST -> "$host/playlist?list=$id"
                     else -> "$host/channel/$id"
