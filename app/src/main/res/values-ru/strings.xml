@@ -535,4 +535,6 @@
     <string name="successfully_removed_from_playlist">\"%1$s\" было успешно удалено из плейлиста.</string>
     <string name="watched">Просмотрено</string>
     <string name="finished">Завершено</string>
+    <string name="bottom_reached">Дно достигнуто!</string>
+    <string name="no_segments_found">Для этого видео пока нет сегментов.</string>
 </resources>
