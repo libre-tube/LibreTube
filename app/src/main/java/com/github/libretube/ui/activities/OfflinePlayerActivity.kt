@@ -168,9 +168,7 @@ class OfflinePlayerActivity : BaseActivity() {
             videoUri != null && audioUri != null -> {
                 val videoItem = MediaItem.Builder()
                     .setUri(videoUri)
-                    .apply {
-                        if (subtitle != null) setSubtitleConfigurations(listOf(subtitle))
-                    }
+                    .setSubtitleConfigurations(listOfNotNull(subtitle))
                     .build()
 
                 val videoSource = ProgressiveMediaSource.Factory(FileDataSource.Factory())
@@ -193,18 +191,14 @@ class OfflinePlayerActivity : BaseActivity() {
             videoUri != null -> player.setMediaItem(
                 MediaItem.Builder()
                     .setUri(videoUri)
-                    .apply {
-                        if (subtitle != null) setSubtitleConfigurations(listOf(subtitle))
-                    }
+                    .setSubtitleConfigurations(listOfNotNull(subtitle))
                     .build()
             )
 
             audioUri != null -> player.setMediaItem(
                 MediaItem.Builder()
                     .setUri(audioUri)
-                    .apply {
-                        if (subtitle != null) setSubtitleConfigurations(listOf(subtitle))
-                    }
+                    .setSubtitleConfigurations(listOfNotNull(subtitle))
                     .build()
             )
         }
