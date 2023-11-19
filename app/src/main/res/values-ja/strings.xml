@@ -80,7 +80,7 @@
     <string name="videoCount">%1$d 本の動画</string>
     <string name="playlists">再生リスト</string>
     <string name="history">履歴</string>
-    <string name="category_segments">セグメント</string>
+    <string name="category_segments">シーン</string>
     <string name="category_sponsor">スポンサー</string>
     <string name="search_history">検索履歴</string>
     <string name="music_albums">YT Musicアルバム</string>
@@ -341,7 +341,7 @@
     <string name="limit_to_runtime">ランタイムの上限</string>
     <string name="trends">急上昇</string>
     <string name="featured">注目</string>
-    <string name="trending">いま急上昇中</string>
+    <string name="trending">急上昇中</string>
     <string name="queue_insert_related_videos">関連動画を挿入する</string>
     <string name="bookmarks">ブックマーク</string>
     <string name="bookmark">ブックマーク</string>
@@ -501,8 +501,8 @@
     <string name="group_name_error_exists">重複しない名前を使用してください</string>
     <string name="registration_disabled">登録機能なし</string>
     <string name="automatic_once">一回自動</string>
-    <string name="sb_create_segment">セグメントを作成</string>
-    <string name="segment_type">セグメントの種類</string>
+    <string name="sb_create_segment">シーンを登録</string>
+    <string name="segment_type">シーンの種類</string>
     <string name="sb_invalid_segment">シーンの開始または終了が無効です</string>
     <string name="filename_too_long">ファイル名が長すぎます！</string>
     <string name="sponsorblock_user_id">SponsorBlock ユーザー名</string>
@@ -516,12 +516,16 @@
     <string name="same_as_fullscreen">全画面用 (上記) と同じ</string>
     <string name="remember_playback_speed">再生速度を記憶</string>
     <string name="no_fullscreen_resolution">全画面表示でない時の解像度</string>
-    <string name="vote_for_segment">シーンを評価</string>
+    <string name="vote_for_segment">登録済みシーンを評価</string>
     <string name="upvote">賛成</string>
     <string name="segment">シーン</string>
-    <string name="undo">元に戻す</string>
+    <string name="undo">取り消し</string>
     <string name="segment_submitted">シーンを送信しました</string>
     <string name="downvote">反対</string>
     <string name="repeat_mode_all">すべてリピート</string>
     <string name="successfully_removed_from_playlist">再生リストから以下を削除しました: %1$s</string>
+    <string name="watched">視聴済み</string>
+    <string name="bottom_reached">最後まで達しました！</string>
+    <string name="finished">完了</string>
+    <string name="no_segments_found">シーンがまだ未登録の動画です。</string>
 </resources>
