@@ -534,4 +534,8 @@
     <string name="finished">Завршено</string>
     <string name="bottom_reached">Досегнуто дно!</string>
     <string name="no_segments_found">Још увек нема сегмената за овај видео снимак.</string>
+    <string name="time_in_minutes">Време у минутима</string>
+    <string name="invalid_input">Неважећи унос</string>
+    <string name="disable_sleep_timer">Онемогући тајмер спавања</string>
+    <string name="start_sleep_timer">Покрени тајмер спавања</string>
 </resources>
