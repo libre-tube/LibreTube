@@ -30,7 +30,9 @@ open class BaseActivity : AppCompatActivity() {
     /**
      * Whether the phone of the user has a cutout like a notch or not
      */
-    var hasCutout = false
+    val hasCutout by lazy {
+        WindowHelper.hasCutout(window.decorView.rootView)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // set the app theme (e.g. Material You)
@@ -40,8 +42,6 @@ open class BaseActivity : AppCompatActivity() {
         LocaleHelper.updateLanguage(this)
 
         requestOrientationChange()
-
-        hasCutout = WindowHelper.hasCutout(window.decorView)
 
         super.onCreate(savedInstanceState)
     }
