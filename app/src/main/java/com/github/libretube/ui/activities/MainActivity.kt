@@ -42,7 +42,6 @@ import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.models.SearchViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
-import com.github.libretube.ui.tools.SleepTimer
 import com.google.android.material.elevation.SurfaceColors
 
 class MainActivity : BaseActivity() {
@@ -137,8 +136,6 @@ class MainActivity : BaseActivity() {
         PreferenceHelper.getErrorLog().ifBlank { null }?.let {
             ErrorDialog().show(supportFragmentManager, null)
         }
-
-        SleepTimer.setup(this)
 
         setupSubscriptionsBadge()
 

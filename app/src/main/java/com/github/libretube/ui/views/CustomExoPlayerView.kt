@@ -56,6 +56,7 @@ import com.github.libretube.ui.interfaces.PlayerOptions
 import com.github.libretube.ui.listeners.PlayerGestureController
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.PlaybackOptionsSheet
+import com.github.libretube.ui.sheets.SleepTimerSheet
 import com.github.libretube.util.PlayingQueue
 
 @SuppressLint("ClickableViewAccessibility")
@@ -347,6 +348,12 @@ open class CustomExoPlayerView(
             }
         ) {
             onPlaybackSpeedClicked()
+        },
+        BottomSheetItem(
+            context.getString(R.string.sleep_timer),
+            R.drawable.ic_sleep
+        ) {
+            onSleepTimerClicked()
         }
     )
 
@@ -550,6 +557,10 @@ open class CustomExoPlayerView(
                 PlayingQueue.repeatMode = PlayerHelper.repeatModes[index].first
             }
             .show(supportFragmentManager)
+    }
+
+    override fun onSleepTimerClicked() {
+        SleepTimerSheet().show(supportFragmentManager)
     }
 
     open fun isFullscreen() =
