@@ -692,16 +692,26 @@ open class CustomExoPlayerView(
     }
 
     override fun onFullscreenChange(isFullscreen: Boolean) {
-        if (PlayerHelper.swipeGestureEnabled && this::brightnessHelper.isInitialized) {
-            if (isFullscreen) {
+        if (isFullscreen) {
+            if (PlayerHelper.swipeGestureEnabled && this::brightnessHelper.isInitialized) {
                 brightnessHelper.restoreSavedBrightness()
-                if (resizeMode == AspectRatioFrameLayout.RESIZE_MODE_ZOOM) {
-                    subtitleView?.setBottomPaddingFraction(SUBTITLE_BOTTOM_PADDING_FRACTION)
-                }
-            } else {
-                brightnessHelper.resetToSystemBrightness(false)
-                subtitleView?.setBottomPaddingFraction(SubtitleView.DEFAULT_BOTTOM_PADDING_FRACTION)
             }
+            subtitleView?.setFixedTextSize(
+                Cue.TEXT_SIZE_TYPE_ABSOLUTE,
+                PlayerHelper.captionsTextSize * 1.5f
+            )
+            if (resizeMode == AspectRatioFrameLayout.RESIZE_MODE_ZOOM) {
+                subtitleView?.setBottomPaddingFraction(SUBTITLE_BOTTOM_PADDING_FRACTION)
+            }
+        } else {
+            if (PlayerHelper.swipeGestureEnabled && this::brightnessHelper.isInitialized) {
+                brightnessHelper.resetToSystemBrightness(false)
+            }
+            subtitleView?.setFixedTextSize(
+                Cue.TEXT_SIZE_TYPE_ABSOLUTE,
+                PlayerHelper.captionsTextSize
+            )
+            subtitleView?.setBottomPaddingFraction(SubtitleView.DEFAULT_BOTTOM_PADDING_FRACTION)
         }
     }
 
