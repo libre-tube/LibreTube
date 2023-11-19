@@ -1,0 +1,9 @@
+* fix: properly apply creator highlight
+* fix: restoring nav after process death
+* fix: auto fullscreen stops working after first rotation
+* fix: increase area that can be used to control the time bar
+* fix: crash when trying to vote while there are no sb segments yet
+* fix: related videos are truncated after rotation
+* fix: light theme setting doesn't work properly
+* fix: share dialog doesn't use shortened yt links for videos
+* fix: missing horizontal padding for player in landscape
