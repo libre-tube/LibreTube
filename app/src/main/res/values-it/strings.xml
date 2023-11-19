@@ -530,4 +530,8 @@
     <string name="downvote">Negativo</string>
     <string name="repeat_mode_all">Ripeti tutto</string>
     <string name="successfully_removed_from_playlist">\"%1$s\" rimosso correttamente dalla playlist.</string>
+    <string name="watched">Visto</string>
+    <string name="bottom_reached">Fine raggiunta!</string>
+    <string name="finished">Finito</string>
+    <string name="no_segments_found">Non ci sono ancora segmenti per questo video.</string>
 </resources>
