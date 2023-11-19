@@ -7,4 +7,5 @@ interface PlayerOptions {
     fun onResizeModeClicked()
 
     fun onRepeatModeClicked()
+    fun onSleepTimerClicked()
 }

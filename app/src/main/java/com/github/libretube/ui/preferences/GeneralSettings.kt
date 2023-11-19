@@ -32,25 +32,6 @@ class GeneralSettings : BasePreferenceFragment() {
             RequireRestartDialog().show(childFragmentManager, RequireRestartDialog::class.java.name)
             true
         }
-
-        val breakReminder =
-            findPreference<SwitchPreferenceCompat>(PreferenceKeys.SLEEP_TIMER)
-        val breakReminderTime = findPreference<EditTextPreference>(PreferenceKeys.SLEEP_TIMER_DELAY)
-        breakReminderTime?.isEnabled = PreferenceHelper.getBoolean(
-            PreferenceKeys.SLEEP_TIMER,
-            false
-        )
-
-        breakReminder?.setOnPreferenceChangeListener { _, newValue ->
-            breakReminderTime?.isEnabled = newValue as Boolean
-            RequireRestartDialog().show(childFragmentManager, RequireRestartDialog::class.java.name)
-            true
-        }
-
-        breakReminderTime?.setOnPreferenceChangeListener { _, _ ->
-            RequireRestartDialog().show(childFragmentManager, RequireRestartDialog::class.java.name)
-            true
-        }
     }
 
     private fun setupRegionPref(preference: ListPreference) {
