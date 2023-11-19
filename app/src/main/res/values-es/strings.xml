@@ -533,4 +533,9 @@
     <string name="watched">Vistos</string>
     <string name="finished">Acabados</string>
     <string name="no_segments_found">Aún no hay partes para este vídeo.</string>
+    <string name="bottom_reached">¡Se alcanzó el final!</string>
+    <string name="time_in_minutes">Tiempo en minutos</string>
+    <string name="invalid_input">Entrada no válida</string>
+    <string name="disable_sleep_timer">Desactivar el temporizador de apagado</string>
+    <string name="start_sleep_timer">Iniciar temporizador de apagado automático</string>
 </resources>
