@@ -541,4 +541,6 @@
     <string name="successfully_removed_from_playlist">تمت إزالة \"%1$s\" من قائمة التشغيل بنجاح.</string>
     <string name="watched">شاهدت</string>
     <string name="finished">انتهى</string>
+    <string name="bottom_reached">وصلت للقاع!</string>
+    <string name="no_segments_found">لا توجد أجزاء لهذا الفيديو بعد.</string>
 </resources>
