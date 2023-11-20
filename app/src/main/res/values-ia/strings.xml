@@ -387,7 +387,7 @@
     <string name="creation_date">Data de creation</string>
     <string name="download_channel_description">Monstrar un notification in le discarga de medios.</string>
     <string name="segment_submitted">Segmento inviate</string>
-    <string name="auto">Automatic</string>
+    <string name="auto">Auto</string>
     <string name="new_group">Nove</string>
     <string name="take_a_break">Il es hora de facer un pausa</string>
     <string name="notification_time">Limitar le tempore de notification</string>
@@ -436,4 +436,12 @@
     <string name="proxy">Proxy</string>
     <string name="alternative_videos_layout">Disposition alternative de videos</string>
     <string name="backup_restore_summary">Importar e exportar subscriptiones, listas, …</string>
+    <string name="import_format_freetube">FreeTube</string>
+    <string name="tooltip_close">Clauder</string>
+    <string name="import_format_piped">Piped / LibreTube</string>
+    <string name="watched">Reguardate</string>
+    <string name="import_format_youtube_csv">YouTube (CSV)</string>
+    <string name="tooltip_clear_queue">Rader cauda</string>
+    <string name="tooltip_fullscreen">Schermo plen</string>
+    <string name="import_format_newpipe">NewPipe</string>
 </resources>
