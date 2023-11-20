@@ -534,4 +534,8 @@
     <string name="bottom_reached">Fine raggiunta!</string>
     <string name="finished">Finito</string>
     <string name="no_segments_found">Non ci sono ancora segmenti per questo video.</string>
+    <string name="time_in_minutes">Tempo in minuti</string>
+    <string name="invalid_input">Input non valido</string>
+    <string name="disable_sleep_timer">Disattiva timer per dormire</string>
+    <string name="start_sleep_timer">Avvia timer per dormire</string>
 </resources>
