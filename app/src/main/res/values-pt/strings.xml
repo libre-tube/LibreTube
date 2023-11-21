@@ -532,10 +532,10 @@
     <string name="successfully_removed_from_playlist">\"%1$s\" foi removido da lista de reprodução.</string>
     <string name="time_in_minutes">Tempo em minutos</string>
     <string name="invalid_input">Entrada inválida</string>
-    <string name="disable_sleep_timer">Desativar o temporizador de sono</string>
-    <string name="watched">Assistido</string>
-    <string name="start_sleep_timer">Iniciar o temporizador de sono</string>
-    <string name="bottom_reached">O fundo do poço foi atingido!</string>
+    <string name="disable_sleep_timer">Desativar temporizador</string>
+    <string name="watched">Visto</string>
+    <string name="start_sleep_timer">Iniciar temporizador</string>
+    <string name="bottom_reached">Chegou ao fim!</string>
     <string name="finished">Terminado</string>
     <string name="no_segments_found">Ainda não existem segmentos para este vídeo.</string>
 </resources>
