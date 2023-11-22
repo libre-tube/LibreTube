@@ -444,4 +444,7 @@
     <string name="tooltip_clear_queue">Rader cauda</string>
     <string name="tooltip_fullscreen">Schermo plen</string>
     <string name="import_format_newpipe">NewPipe</string>
+    <string name="playback_pitch">Tono</string>
+    <string name="sleep_timer">Temporisator de somno</string>
+    <string name="export_playlists">Exportar listas de reproduction</string>
 </resources>
