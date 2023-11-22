@@ -1,15 +1,18 @@
 package com.github.libretube.workers
 
+import android.Manifest
 import android.app.Notification
-import android.app.NotificationManager
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.app.NotificationManagerCompat.NotificationWithIdAndTag
 import androidx.core.app.PendingIntentCompat
-import androidx.core.content.getSystemService
+import androidx.core.content.ContextCompat
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.github.libretube.LibreTubeApp.Companion.PUSH_CHANNEL_NAME
@@ -35,7 +38,7 @@ import kotlinx.coroutines.withContext
  */
 class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
     CoroutineWorker(appContext, parameters) {
-    private val notificationManager = appContext.getSystemService<NotificationManager>()!!
+    private val notificationManager = NotificationManagerCompat.from(appContext)
 
     override suspend fun doWork(): Result {
         if (!checkTime()) return Result.success()
@@ -126,6 +129,15 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
      * For more information, see https://developer.android.com/develop/ui/views/notifications/group
      */
     private suspend fun createNotificationsForChannel(group: String, streams: List<StreamItem>) {
+        // Avoid creating notifications if permission is not granted.
+        if (ContextCompat.checkSelfPermission(
+                applicationContext,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+
         val summaryId = group.hashCode()
         val intent = Intent(applicationContext, MainActivity::class.java)
             .setFlags(INTENT_FLAGS)
@@ -154,21 +166,18 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             .build()
 
         // Create stream notifications. These are automatically grouped on Android 7.0 and later.
-        val notificationsAndIds = withContext(Dispatchers.IO) {
+        val notifications = withContext(Dispatchers.IO) {
             streams.map { async { createStreamNotification(group, it) } }
                 .awaitAll()
-                .sortedBy { (_, uploaded, _) -> uploaded }
-                .map { (notificationId, _, notification) -> notificationId to notification }
-        } + (summaryId to summaryNotification)
-        notificationsAndIds.forEach { (notificationId, notification) ->
-            notificationManager.notify(notificationId, notification)
         }
+        notificationManager.notify(notifications)
+        notificationManager.notify(summaryId, summaryNotification)
     }
 
     private suspend fun createStreamNotification(
         group: String,
         stream: StreamItem
-    ): Triple<Int, Long, Notification> { // Notification ID, uploaded date and notification object
+    ): NotificationWithIdAndTag {
         val videoId = stream.url!!.toID()
         val intent = Intent(applicationContext, MainActivity::class.java)
             .setFlags(INTENT_FLAGS)
@@ -195,7 +204,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             .setWhen(stream.uploaded)
             .setShowWhen(true)
 
-        return Triple(notificationId, stream.uploaded, notificationBuilder.build())
+        return NotificationWithIdAndTag(notificationId, notificationBuilder.build())
     }
 
     private suspend fun downloadImage(url: String?): Bitmap? {
