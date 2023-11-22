@@ -26,7 +26,7 @@ jobs:
           python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
           architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
 
-      - name: Check for Execution Orders
+      - name: Retrieve Commit Info
         run: |
           cd .github
           curl https://api.github.com/repos/${{ github.repository }}/commits/${{ github.sha }} > commit.json
@@ -65,7 +65,7 @@ jobs:
         continue-on-error: true
         run: |
           mv .github/uploader.py .
-          echo "GH_REPO = '${{ github.repository }}'" > tgconfig.py
+          echo "GH_REPO = '${{ github.repository }}'" > config_file.py
           git clone --filter=blob:none https://github.com/libre-tube/NightlyBuilds nightly
           rm -rf nightly/*.apk
           mv app/build/outputs/apk/debug/*.apk nightly/

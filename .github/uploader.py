@@ -1,6 +1,6 @@
 from os import system as run, listdir, remove
 from json import load
-import tgconfig
+import config_fie
 import hashlib
 
 with open("../.github/commit.json") as f:
@@ -28,7 +28,7 @@ with open("checksums", "w") as checksums:
 
 if tgconfig.GH_REPO.lower() == "libre-tube/libretube":
     run("git add -f *")
-    run(f"git commit -m \"{message}\"")
+    run(f'git commit -m "{message}"')
     run("git push -u")
 else:
     print("Official Repo not Detected")
