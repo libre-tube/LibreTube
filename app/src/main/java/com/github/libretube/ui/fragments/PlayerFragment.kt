@@ -1272,7 +1272,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         if (!isFullscreen && noFullscreenResolution != null) {
             setPlayerResolution(noFullscreenResolution!!)
-        } else {
+        } else if (fullscreenResolution != null) {
             setPlayerResolution(fullscreenResolution ?: Int.MAX_VALUE)
         }
     }
