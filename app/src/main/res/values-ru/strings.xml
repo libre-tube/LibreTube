@@ -21,13 +21,13 @@
     <string name="customInstance">Свой</string>
     <string name="region">Регион</string>
     <string name="login_register">Войти/зарегистрироваться</string>
-    <string name="importsuccess">Подписан</string>
+    <string name="importsuccess">Подписаны</string>
     <string name="cannotDownload">Невозможно скачать эту трансляцию.</string>
     <string name="dlisinprogress">Дождитесь завершения всех текущих загрузок.</string>
     <string name="downloadfailed">Скачивание не удалось.</string>
     <string name="import_from_yt">Импортировать подписки</string>
     <string name="app_theme">Тема</string>
-    <string name="server_error">Возникла проблема с выбранным сервером. Попробуйте другой.</string>
+    <string name="server_error">Похоже, возникла проблема с выбранным сервером. Попробуйте другой сервер.</string>
     <string name="unknown_error">Ошибка сети.</string>
     <string name="error">Что-то пошло не так.</string>
     <string name="empty">Вы должны ввести имя пользователя и пароль.</string>
@@ -59,7 +59,7 @@
     <string name="comments">Комментарии</string>
     <string name="noInternet">Сначала подключитесь к Интернету.</string>
     <string name="videoCount">%1$d видео</string>
-    <string name="retry">Попробовать снова</string>
+    <string name="retry">Повторить</string>
     <string name="settings">Настройки</string>
     <string name="location">Местоположение</string>
     <string name="instance">Сервер</string>
@@ -88,7 +88,7 @@
     <string name="category_intro">Перерыв/вступительная анимация</string>
     <string name="category_intro_description">Интервал без фактического контента. Это может быть пауза, статичный кадр, повторяющаяся анимация. Не должно использоваться для переходов, содержащих информацию.</string>
     <string name="category_outro_description">Титры или когда появляются конечные заставки. Не для выводов с информацией.</string>
-    <string name="category_selfpromo">Неоплачиваемая/Самореклама</string>
+    <string name="category_selfpromo">Неоплачиваемая/самореклама</string>
     <string name="category_selfpromo_description">Похожее на «спонсора», но для бесплатной рекламы или саморекламы. Сюда входят сегменты об атрибутике, пожертвованиях и информация о коллаборации.</string>
     <string name="license">Лицензия</string>
     <string name="color_accent">Цветовой акцент</string>
@@ -120,7 +120,7 @@
     <string name="version">Версия %1$s</string>
     <string name="category_filler">Заполнители/шутки</string>
     <string name="category_music_offtopic">Музыка: части без музыки</string>
-    <string name="category_preview">Пред. показ/Краткое повторение</string>
+    <string name="category_preview">Предварительный просмотр/краткое изложение</string>
     <string name="category_preview_description">Для сегментов с подробным описанием будущего контента без дополнительной информации. Если он включает в себя клипы, которые появляются только здесь, скорее всего, это неправильная категория.</string>
     <string name="appearance">Внешний вид</string>
     <string name="customInstance_summary">Добавить…</string>
@@ -152,7 +152,7 @@
     <string name="player_autoplay">Автовоспроизведение</string>
     <string name="no_video">Нет видео</string>
     <string name="no_audio">Нет звука</string>
-    <string name="reset">Восстановить настройки по умолчанию</string>
+    <string name="reset">Восстановить настройки</string>
     <string name="reset_message">Сбросить все настройки и выйти из аккаунта\?</string>
     <string name="instance_frontend_url">Ссылка на фронтенд сервера</string>
     <string name="quality">Качество изображения</string>
@@ -179,7 +179,7 @@
     <string name="auto_rotation">Автоповорот</string>
     <string name="landscape">Альбомная</string>
     <string name="portrait">Портретная</string>
-    <string name="turnInternetOn">Пожалуйста, включите Wi-Fi или мобильный интернет для подключения.</string>
+    <string name="turnInternetOn">Пожалуйста, включите Wi-Fi или мобильную передачу данных, чтобы подключиться к Интернету.</string>
     <string name="open">Открыть…</string>
     <string name="chapters">Эпизоды</string>
     <string name="require_restart">Требуется перезапуск приложения</string>
@@ -245,7 +245,7 @@
     <string name="repeat_mode">Повтор</string>
     <string name="backup_restore">Резервное копирование и восстановление</string>
     <string name="backup">Создать копию</string>
-    <string name="picture_in_picture">Картинка в картинке (КвК/PiP)</string>
+    <string name="picture_in_picture">Картинка в картинке</string>
     <string name="resize_mode_fit">Исходный</string>
     <string name="resize_mode_fill">Заполнение</string>
     <string name="resize_mode_zoom">Приближенный</string>
@@ -277,7 +277,7 @@
     <string name="backup_customInstances">Свои серверы</string>
     <string name="save_feed">Загружать ленту в фоновом режиме</string>
     <string name="save_feed_summary">Загружать ленту подписок в фоновом режиме, предотвращая её автоматическое обновление.</string>
-    <string name="play_next">Проиграть следующий</string>
+    <string name="play_next">Воспроизвести следующий</string>
     <string name="navigation_bar">Панель навигации</string>
     <string name="change_region">Похоже, что тренды не доступны в текущем регионе. Выберите другой регион в настройках.</string>
     <string name="playback_pitch">Скорость</string>
@@ -354,8 +354,8 @@
     <string name="shuffle">Перемешать</string>
     <string name="rewind">Отмотать назад</string>
     <string name="forward">Отмотать вперед</string>
-    <string name="alternative_pip_controls">Альтернативное управление КвК</string>
-    <string name="alternative_pip_controls_summary">Показывать только кнопки пропуска и управления звуком в окне КвК вместо кнопок перемотки</string>
+    <string name="alternative_pip_controls">Альтернативные элементы управления PiP</string>
+    <string name="alternative_pip_controls_summary">Показывать только звук и пропускать элементы управления в PiP вместо перемотки вперед и назад</string>
     <string name="pause">Пауза</string>
     <string name="add_to_bookmarks">Добавить в закладки</string>
     <string name="remove_bookmark">Удалить закладку</string>
@@ -385,7 +385,7 @@
     <string name="autoplay_countdown_summary">Показывать 5-секундный обратный отсчёт перед автовоспроизведением следующего видео.</string>
     <string name="autoplay_countdown">Таймер автовоспроизведения</string>
     <string name="playing_next">Следующее воспроизведение за %1$s</string>
-    <string name="stats_for_nerds">Статистика для ботаников</string>
+    <string name="stats_for_nerds">Статистика</string>
     <string name="video_id">Идентификатор видео</string>
     <plurals name="months_ago">
         <item quantity="one">%d месяц назад</item>
@@ -405,7 +405,7 @@
     <string name="subscriberAndVideoCounts">%1$s подписчиков • %2$d видео</string>
     <string name="disable_proxy">Отключить прокси Piped</string>
     <string name="disable_proxy_summary">Загружать видео и изображения непосредственно с серверов YouTube. Включайте эту опцию только в случае, если постоянно используете VPN!</string>
-    <string name="auto_fullscreen_shorts">Автоматический полноэкранный режим для коротких видео</string>
+    <string name="auto_fullscreen_shorts">Автоматический полноэкранный режим для коротких видеороликов</string>
     <string name="new_group">Новая</string>
     <string name="group_name">Название группы</string>
     <string name="channel_groups">Группы каналов</string>
