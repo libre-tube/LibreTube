@@ -527,4 +527,12 @@
     <string name="segment_submitted">ସେଗମେଣ୍ଟ ଦାଖଲ କରାଯାଇଛି</string>
     <string name="downvote">ତଳକୁ</string>
     <string name="successfully_removed_from_playlist">\"%1$s\" କୁ ପ୍ଲେ ତାଲିକାରୁ ସଫଳ ଭାବରେ ଅପସାରଣ କରାଯାଇଛି ।</string>
+    <string name="time_in_minutes">ମିନିଟରେ ସମୟ</string>
+    <string name="invalid_input">ଅବୈଧ ନିବେଶ</string>
+    <string name="disable_sleep_timer">ଶୋଇବା ସମୟକୁ ଅକ୍ଷମ କରନ୍ତୁ</string>
+    <string name="watched">ପୂର୍ବରୁ ଦେଖାଯାଇଛି</string>
+    <string name="start_sleep_timer">ଶୋଇବା ସମୟ ଆରମ୍ଭ କରନ୍ତୁ</string>
+    <string name="bottom_reached">ତଳ ପାଖରେ ପହଞ୍ଚିଲା!</string>
+    <string name="finished">ସମାପ୍ତ</string>
+    <string name="no_segments_found">ଏହି ଭିଡିଓ ପାଇଁ ଏପର୍ଯ୍ୟନ୍ତ କୌଣସି ବିଭାଗ ନାହିଁ ।</string>
 </resources>
