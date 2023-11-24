@@ -15,16 +15,16 @@
     <string name="cancel">Отмена</string>
     <string name="loggedIn">Успешный вход.</string>
     <string name="loggedout">Успешный выход.</string>
-    <string name="registered">Успешная регистрация. Теперь вы можете подписываться на каналы.</string>
+    <string name="registered">Зарегистрированы. Теперь вы можете подписываться на каналы.</string>
     <string name="already_logged_in">Вход уже выполнен. Вы можете выйти из своего аккаунта.</string>
     <string name="instances">Выбрать…</string>
     <string name="customInstance">Свой</string>
     <string name="region">Регион</string>
     <string name="login_register">Войти/зарегистрироваться</string>
     <string name="importsuccess">Подписаны</string>
-    <string name="cannotDownload">Невозможно скачать эту трансляцию.</string>
-    <string name="dlisinprogress">Дождитесь завершения всех текущих загрузок.</string>
-    <string name="downloadfailed">Скачивание не удалось.</string>
+    <string name="cannotDownload">Не удается скачать эту трансляцию.</string>
+    <string name="dlisinprogress">Пожалуйста, дождитесь завершения всех текущих загрузок.</string>
+    <string name="downloadfailed">Не удалось загрузить.</string>
     <string name="import_from_yt">Импортировать подписки</string>
     <string name="app_theme">Тема</string>
     <string name="server_error">Похоже, возникла проблема с выбранным сервером. Попробуйте другой сервер.</string>
@@ -135,7 +135,7 @@
     <string name="clear_customInstances">Удалить добавленные</string>
     <string name="related_streams_summary">Показывать похожие трансляции рядом с той, которую вы смотрите.</string>
     <string name="invalid_url">Пожалуйста, введите рабочую ссылку</string>
-    <string name="buffering_goal">Предзагрузка</string>
+    <string name="buffering_goal">Предварительная загрузка</string>
     <string name="downloads">Загрузки</string>
     <string name="update_summary">Проверить наличие обновлений</string>
     <string name="app_uptodate">Используется последняя версия.</string>
@@ -405,7 +405,7 @@
     <string name="subscriberAndVideoCounts">%1$s подписчиков • %2$d видео</string>
     <string name="disable_proxy">Отключить прокси Piped</string>
     <string name="disable_proxy_summary">Загружать видео и изображения непосредственно с серверов YouTube. Включайте эту опцию только в случае, если постоянно используете VPN!</string>
-    <string name="auto_fullscreen_shorts">Автоматический полноэкранный режим для коротких видеороликов</string>
+    <string name="auto_fullscreen_shorts">Автоматический полноэкранный режим для Shorts</string>
     <string name="new_group">Новая</string>
     <string name="group_name">Название группы</string>
     <string name="channel_groups">Группы каналов</string>
@@ -425,7 +425,7 @@
     <string name="unlimited_search_history">Неограниченная история поиска</string>
     <string name="duration_reversed">Продолжительность (обратная)</string>
     <string name="duration">Длительность</string>
-    <string name="shorts_notifications">Уведомления для shorts</string>
+    <string name="shorts_notifications">Уведомления для Shorts</string>
     <string name="alphabetic">Алфавитный</string>
     <string name="creation_date">Дата создания</string>
     <string name="creation_date_reversed">Дата создания (обратная)</string>
