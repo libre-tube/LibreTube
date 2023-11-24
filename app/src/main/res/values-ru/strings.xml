@@ -22,7 +22,7 @@
     <string name="region">Регион</string>
     <string name="login_register">Войти/зарегистрироваться</string>
     <string name="importsuccess">Импортировано</string>
-    <string name="cannotDownload">Не удается скачать эту трансляцию.</string>
+    <string name="cannotDownload">Невозможно скачать эту трансляцию.</string>
     <string name="dlisinprogress">Пожалуйста, дождитесь завершения всех текущих загрузок.</string>
     <string name="downloadfailed">Не удалось загрузить.</string>
     <string name="import_from_yt">Импортировать подписки</string>
