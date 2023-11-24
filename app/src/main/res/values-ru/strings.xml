@@ -518,7 +518,7 @@
     <string name="contribute_to_sponsorblock">Внести свой вклад в SponsorBlock</string>
     <string name="donate">Поддержать</string>
     <string name="music_artists">Исполнители YT Music</string>
-    <string name="no_fullscreen_resolution">Разрешение не полноэкранного режима</string>
+    <string name="no_fullscreen_resolution">Разрешение неполноэкранного режима</string>
     <string name="playback_during_call_summary">Приложение также будет игнорировать другие источники звука. Например, проигрывание музыки.</string>
     <string name="playback_during_call">Не прерывать воспроизведение при вызове</string>
     <string name="same_as_fullscreen">Такое же как для полноэкранного режима</string>
