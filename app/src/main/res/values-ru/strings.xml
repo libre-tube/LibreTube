@@ -256,7 +256,7 @@
     <string name="copied_to_clipboard">Скопировано в буфер обмена</string>
     <string name="open_copied">Открыть</string>
     <string name="device_info">Об устройстве</string>
-    <string name="new_videos_badge">Индикация новых роликов</string>
+    <string name="new_videos_badge">Индикатор новых видео</string>
     <string name="push_channel_description">Показывать уведомления о новых трансляциях, когда доступны.</string>
     <string name="sb_skip_manual_summary">Не пропускать отрывки автоматически, всегда спрашивать.</string>
     <string name="new_videos_badge_summary">Показывать значок, если появились новые видео.</string>
@@ -539,5 +539,5 @@
     <string name="time_in_minutes">Время в минутах</string>
     <string name="invalid_input">Ввод некорректен</string>
     <string name="disable_sleep_timer">Остановить таймер сна</string>
-    <string name="start_sleep_timer">Начать таймер сна</string>
+    <string name="start_sleep_timer">Запустить таймер сна</string>
 </resources>
