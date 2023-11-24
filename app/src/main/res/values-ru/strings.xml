@@ -152,7 +152,7 @@
     <string name="player_autoplay">Автовоспроизведение</string>
     <string name="no_video">Нет видео</string>
     <string name="no_audio">Нет звука</string>
-    <string name="reset">Восстановить настройки</string>
+    <string name="reset">Восстановить настройки по умолчанию</string>
     <string name="reset_message">Сбросить все настройки и выйти из аккаунта\?</string>
     <string name="instance_frontend_url">Ссылка на фронтенд сервера</string>
     <string name="quality">Качество изображения</string>
@@ -355,7 +355,7 @@
     <string name="rewind">Отмотать назад</string>
     <string name="forward">Отмотать вперед</string>
     <string name="alternative_pip_controls">Альтернативные элементы управления PiP</string>
-    <string name="alternative_pip_controls_summary">Показывать только звук и пропускать элементы управления в PiP вместо перемотки вперед и назад</string>
+    <string name="alternative_pip_controls_summary">Показывать \"только звук\" и пропуск в PiP вместо перемотки вперед и назад</string>
     <string name="pause">Пауза</string>
     <string name="add_to_bookmarks">Добавить в закладки</string>
     <string name="remove_bookmark">Удалить закладку</string>
