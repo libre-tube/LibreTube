@@ -462,7 +462,7 @@
     <string name="category_highlight_description">Это может быть анонсированный заголовок, миниатюра или самая интересная часть видео. Вы можете перейти к нему, нажав на него в блоке разделов.</string>
     <string name="stop">Остановить</string>
     <string name="fallback_piped_proxy">Запасной вариант через прокси Piped</string>
-    <string name="fallback_piped_proxy_desc">Загружайте видео через прокси, если прямое подключение к YouTube не работает для текущего видео (увеличивает время начальной загрузки). Если отключено, музыкальный контент YouTube, скорее всего, не будет воспроизводиться из-за ограничений YT.</string>
+    <string name="fallback_piped_proxy_desc">Загружать видео через прокси, если прямое подключение к YouTube не работает для текущего видео (увеличивает время начальной загрузки). Если отключено, музыкальный контент YouTube, скорее всего, не будет воспроизводиться из-за ограничений YT.</string>
     <string name="unknown_audio_language">Неизвестный язык аудиодорожки</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_track_type">Неизвестный тип звуковой дорожки</string>
