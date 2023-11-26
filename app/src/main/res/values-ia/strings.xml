@@ -460,4 +460,5 @@
     <string name="unknown_audio_track_type">Typo de tracia de audio incognite</string>
     <string name="push_channel_description">Monstrar un notification quando nove fluxos es disponibile.</string>
     <string name="noInternet">Connecte te primemente al Internet.</string>
+    <string name="irreversible">Es tu secur? Isto non potera esser disfacite!</string>
 </resources>
