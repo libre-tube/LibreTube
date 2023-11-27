@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
@@ -80,10 +79,7 @@ class CommentsRepliesFragment : Fragment() {
 
         binding.commentsRV.viewTreeObserver.addOnScrollChangedListener {
             if (_binding?.commentsRV?.canScrollVertically(1) == false && ::repliesPage.isInitialized) {
-                if (repliesPage.nextpage == null) {
-                    Toast.makeText(context, R.string.bottom_reached, Toast.LENGTH_SHORT).show()
-                    return@addOnScrollChangedListener
-                }
+                if (repliesPage.nextpage == null) return@addOnScrollChangedListener
 
                 fetchReplies(videoId, repliesPage.nextpage!!)
             }

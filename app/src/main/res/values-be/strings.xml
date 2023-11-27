@@ -534,7 +534,6 @@
     <string name="repeat_mode_all">Паўтарыце ўсё</string>
     <string name="successfully_removed_from_playlist">\"%1$s\" быў выдалены з падборкі.</string>
     <string name="watched">Прагледжана</string>
-    <string name="bottom_reached">Дно дасягнута!</string>
     <string name="finished">Скончана</string>
     <string name="no_segments_found">Для гэтага відэа яшчэ няма сегментаў.</string>
 </resources>

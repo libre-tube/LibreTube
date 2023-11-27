@@ -532,6 +532,5 @@
     <string name="successfully_removed_from_playlist">Video „%1$s“ úspěšně odebráno z playlistu.</string>
     <string name="watched">Zhlédnuto</string>
     <string name="finished">Dokončeno</string>
-    <string name="bottom_reached">Níž to nejde!</string>
     <string name="no_segments_found">U tohoto videa zatím nejsou žádné segmenty.</string>
 </resources>
