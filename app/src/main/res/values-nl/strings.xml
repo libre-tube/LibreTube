@@ -527,4 +527,12 @@
     <string name="segment_submitted">Segment verzonden</string>
     <string name="downvote">Omlaag</string>
     <string name="successfully_removed_from_playlist">‘%1$s’ succesvol uit afspeellijst verwijderd</string>
+    <string name="watched">Bekeken</string>
+    <string name="bottom_reached">Bodem bereikt!</string>
+    <string name="finished">Klaar</string>
+    <string name="no_segments_found">Er zijn nog geen segmenten voor deze video.</string>
+    <string name="time_in_minutes">Tijd in minuten</string>
+    <string name="invalid_input">Ongeldige invoer</string>
+    <string name="disable_sleep_timer">Slaaptimer uitschakelen</string>
+    <string name="start_sleep_timer">Slaaptimer starten</string>
 </resources>

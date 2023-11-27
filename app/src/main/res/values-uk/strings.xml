@@ -536,4 +536,8 @@
     <string name="watched">Переглянуто</string>
     <string name="finished">Завершено</string>
     <string name="no_segments_found">Для цього відео ще немає сегментів.</string>
+    <string name="time_in_minutes">Час у хвилинах</string>
+    <string name="invalid_input">Недійсний ввід</string>
+    <string name="disable_sleep_timer">Вимкнути таймер сну</string>
+    <string name="start_sleep_timer">Запустити таймер сну</string>
 </resources>

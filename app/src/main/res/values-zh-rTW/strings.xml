@@ -524,4 +524,12 @@
     <string name="downvote">下</string>
     <string name="repeat_mode_all">重播全部</string>
     <string name="successfully_removed_from_playlist">已成功從播放清單中移除「%1$s」。</string>
+    <string name="time_in_minutes">時間以分鐘為單位</string>
+    <string name="invalid_input">無效的輸入</string>
+    <string name="disable_sleep_timer">停用睡眠計時器</string>
+    <string name="watched">已觀看</string>
+    <string name="start_sleep_timer">開始睡眠計時器</string>
+    <string name="bottom_reached">已達底部！</string>
+    <string name="finished">已結束</string>
+    <string name="no_segments_found">此影片尚無任何片段。</string>
 </resources>

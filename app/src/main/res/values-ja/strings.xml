@@ -462,7 +462,7 @@
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="dubbed_audio_track">吹き替え</string>
     <string name="descriptive_audio_track">解説</string>
-    <string name="continue_watching">視聴を続ける</string>
+    <string name="continue_watching">続きから再生</string>
     <string name="dearrow_summary">大げさでなくより正確な題名とサムネイルを表示します。読み込み時間は増加します。</string>
     <string name="dearrow">DeArrow を使用</string>
     <string name="visibility">公開状態</string>
@@ -473,7 +473,7 @@
     <string name="no_chapter">チャプターなし</string>
     <string name="uploader_name">公開者の名前</string>
     <string name="sort_by">並び替え</string>
-    <string name="duration_span">期間: %1$s</string>
+    <string name="duration_span">時間: %1$s</string>
     <string name="player_channel_name">プレーヤーのサービス</string>
     <string name="player_channel_description">再生中に通知を表示</string>
     <string name="tooltip_create_playlist">再生リストの作成</string>
@@ -524,7 +524,11 @@
     <string name="downvote">反対</string>
     <string name="repeat_mode_all">すべてリピート</string>
     <string name="successfully_removed_from_playlist">再生リストから以下を削除しました: %1$s</string>
-    <string name="watched">視聴済み</string>
-    <string name="finished">完了</string>
+    <string name="watched">再生した</string>
+    <string name="finished">最後まで見た</string>
     <string name="no_segments_found">シーンがまだ未登録の動画です。</string>
+    <string name="time_in_minutes">分数</string>
+    <string name="invalid_input">無効な入力です</string>
+    <string name="disable_sleep_timer">スリープタイマー無効</string>
+    <string name="start_sleep_timer">スリープタイマー開始</string>
 </resources>
