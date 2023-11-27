@@ -49,7 +49,7 @@ class DeleteAccountDialog : DialogFragment() {
             }
     }
 
-    private fun deleteAccount(password: String) = lifecycleScope.launch {
+    private suspend fun deleteAccount(password: String) {
         val token = PreferenceHelper.getToken()
 
         try {
@@ -59,7 +59,7 @@ class DeleteAccountDialog : DialogFragment() {
         } catch (e: Exception) {
             Log.e(TAG(), e.toString())
             Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-            return@launch
+            return
         }
         Toast.makeText(context, R.string.success, Toast.LENGTH_SHORT).show()
 
