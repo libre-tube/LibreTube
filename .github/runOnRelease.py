@@ -41,9 +41,7 @@ for file in assets:
 
     files.append(
         InputMediaDocument(
-            download(
-                file.get("name")
-            )
+            file.get("name")
         )
     )
 
