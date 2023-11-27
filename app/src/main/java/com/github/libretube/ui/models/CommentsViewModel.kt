@@ -1,16 +1,12 @@
 package com.github.libretube.ui.models
 
-import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.CommentsPage
 import com.github.libretube.extensions.TAG
-import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.ui.extensions.filterNonEmptyComments
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -58,11 +54,7 @@ class CommentsViewModel : ViewModel() {
         }
     }
 
-    fun fetchNextComments(context: Context) {
-        if (nextPage == null) {
-            Toast.makeText(context, R.string.bottom_reached, Toast.LENGTH_SHORT).show()
-        }
-
+    fun fetchNextComments() {
         if (isLoading.value == true || nextPage == null || videoId == null) return
 
         isLoading.value = true

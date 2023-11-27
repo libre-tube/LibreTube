@@ -536,4 +536,14 @@
     <string name="watched">Просмотрено</string>
     <string name="finished">Завершено</string>
     <string name="no_segments_found">Для этого видео пока нет сегментов.</string>
+<<<<<<< HEAD
 </resources>
+||||||| parent of 344b82f25 (Translated using Weblate (Interlingua))
+</resources>
+=======
+    <string name="time_in_minutes">Время в минутах</string>
+    <string name="invalid_input">Ввод некорректен</string>
+    <string name="disable_sleep_timer">Остановить таймер сна</string>
+    <string name="start_sleep_timer">Начать таймер сна</string>
+</resources>
+>>>>>>> 344b82f25 (Translated using Weblate (Interlingua))
