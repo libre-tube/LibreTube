@@ -38,7 +38,7 @@
     <string name="app_theme">Motīvs</string>
     <string name="error">Kaut kas nogāja greizi.</string>
     <string name="deletePlaylist">Izdzēst atskaņošanas sarakstu</string>
-    <string name="areYouSure">Vai izdzēst atskaņošanas sarakstu\?</string>
+    <string name="areYouSure">Vai izdzēst atskaņošanas sarakstu?</string>
     <string name="emptyList">Šeit nekā nav.</string>
     <string name="grid">Režģa kolonnas</string>
     <string name="register">Reģistrēties</string>
@@ -148,7 +148,7 @@
     <string name="category_music_offtopic_description">Tikai mūzikas videoklipiem. Šeit ietilpst brīži, kas nav daļas no oficiālās dziesmas. Beigu beigās videoklipam vajadzētu līdzināties oficiālajai dziesmas versijai (piemēram, Spotify versijai), cik vien tuvu iespējams.</string>
     <string name="player_autoplay">Automātiski atskaņot</string>
     <string name="reset">Atjaunot noklusējumu</string>
-    <string name="reset_message">Atiestatīt visus iestatījumus un izrakstīties\?</string>
+    <string name="reset_message">Atiestatīt visus iestatījumus un izrakstīties?</string>
     <string name="no_audio">Nav audio</string>
     <string name="no_video">Nav video</string>
     <string name="audio">Audio</string>
@@ -215,7 +215,7 @@
     <string name="notifications">Notifikācijas</string>
     <string name="notify_new_streams">Rādīt jauna satura notifikācijas</string>
     <string name="notify_new_streams_summary">Rādīt notifikācijas par jaunu saturu no veidotājiem, kuriem jūs sekojat.</string>
-    <string name="irreversible">Vai esat pārliecināts\? Šī darbība ir neatgriezeniska.</string>
+    <string name="irreversible">Vai esat pārliecināts? Šī darbība ir neatgriezeniska.</string>
     <string name="most_recent">Jaunākie</string>
     <string name="least_recent">Senākie</string>
     <string name="most_views">Skatītākie</string>
@@ -339,7 +339,7 @@
     <string name="unsupported_file_format">Neatbalstīts faila formāts: %1$s</string>
     <string name="hls_instead_of_dash">Izmantot HLS</string>
     <string name="auto_quality">Automātiski</string>
-    <string name="confirm_unsubscribe">Vai esiet pārliecināts, ka vēlaties atrakstīties no %1$s\?</string>
+    <string name="confirm_unsubscribe">Vai esiet pārliecināts, ka vēlaties atrakstīties no %1$s?</string>
     <string name="confirm_unsubscribing">Apstiprināt atrakstīšanos</string>
     <string name="confirm_unsubscribing_summary">Parādīt apstiprināšanas logu pirms atrakstīšanās.</string>
     <string name="play_all">Atskaņot visus</string>
@@ -360,7 +360,7 @@
     <string name="audio_only_mode">Audio režīms</string>
     <string name="proceed">Turpināt</string>
     <string name="privacy_alert">Privātuma brīdinājums</string>
-    <string name="username_email">Turpināt ar e-pasta adresi, kura nav ieteicama\?</string>
+    <string name="username_email">Turpināt ar e-pasta adresi, kura nav ieteicama?</string>
     <string name="export_playlists">Eksportēt atskaņošanas sarakstus</string>
     <string name="pause_on_quit">Pauzēt aizverot applikāciju</string>
     <string name="category">Kategorija</string>
