@@ -525,7 +525,6 @@
     <string name="repeat_mode_all">すべてリピート</string>
     <string name="successfully_removed_from_playlist">再生リストから以下を削除しました: %1$s</string>
     <string name="watched">視聴済み</string>
-    <string name="bottom_reached">最後まで達しました！</string>
     <string name="finished">完了</string>
     <string name="no_segments_found">シーンがまだ未登録の動画です。</string>
 </resources>

@@ -495,7 +495,6 @@
     <string name="successfully_removed_from_playlist">Successfully removed \"%1$s\" from the playlist.</string>
     <string name="watched">Watched</string>
     <string name="no_segments_found">There are no segments for this video yet.</string>
-    <string name="bottom_reached">Bottom reached!</string>
     <string name="start_sleep_timer">Start sleep timer</string>
     <string name="disable_sleep_timer">Disable sleep timer</string>
     <string name="time_in_minutes">Time in minutes</string>
