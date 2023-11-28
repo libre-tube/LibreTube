@@ -120,7 +120,7 @@ class DescriptionLayout(
             binding.playerDescriptionArrow.animate().rotation(
                 0F
             ).setDuration(ANIMATION_DURATION).start()
-            
+
             binding.playerDescription.isGone = true
 
             binding.descLinLayout.isGone = true
