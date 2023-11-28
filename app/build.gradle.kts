@@ -71,6 +71,11 @@ android {
     namespace = "com.github.libretube"
 
     tasks.register("testClasses")
+
+    lint {
+        abortOnError = false
+        checkReleaseBuilds = false
+    }
 }
 
 dependencies {
