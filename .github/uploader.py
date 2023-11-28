@@ -1,6 +1,6 @@
 from os import system as run, listdir, remove
 from json import load
-import config_fie
+import config_file
 import hashlib
 
 with open("../.github/commit.json") as f:
