@@ -120,6 +120,9 @@ class DescriptionLayout(
             binding.playerDescriptionArrow.animate().rotation(
                 0F
             ).setDuration(ANIMATION_DURATION).start()
+
+            binding.playerDescription.isGone = true
+
             binding.descLinLayout.isGone = true
 
             // limit the title height to two lines
@@ -129,6 +132,8 @@ class DescriptionLayout(
             binding.playerDescriptionArrow.animate().rotation(
                 180F
             ).setDuration(ANIMATION_DURATION).start()
+
+            binding.playerDescription.isVisible = true
             binding.descLinLayout.isVisible = true
 
             // show the whole title
