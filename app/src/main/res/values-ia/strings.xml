@@ -461,4 +461,7 @@
     <string name="push_channel_description">Monstrar un notification quando nove fluxos es disponibile.</string>
     <string name="noInternet">Connecte te primemente al Internet.</string>
     <string name="irreversible">Es tu secur? Isto non potera esser disfacite!</string>
+    <string name="tooltip_dismiss">Dimitter</string>
+    <string name="screen_orientation">Orientation del schermo</string>
+    <string name="same_as_fullscreen">Mesme que in schermo plen</string>
 </resources>
