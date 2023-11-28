@@ -1,7 +1,7 @@
 from pyrogram import Client
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InputMediaDocument
 from requests import get
-from tgconfig import TG_API_HASH, TG_API_ID, TG_TOKEN
+from config_file import TG_API_HASH, TG_API_ID, TG_TOKEN
 
 
 req = get("https://api.github.com/repos/Libre-Tube/LibreTube/releases/latest").json()

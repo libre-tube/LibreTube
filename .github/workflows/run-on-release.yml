@@ -15,9 +15,9 @@ jobs:
 
       - name: Upload to Telegram (@LibreTube)
         run: |
-          echo "TG_API_ID = '${{ secrets.TG_API_ID }}'" >> tgconfig.py
-          echo "TG_API_HASH = '${{ secrets.TG_API_HASH }}'" >> tgconfig.py
-          echo "TG_TOKEN = '${{ secrets.TG_TOKEN }}'" >> tgconfig.py
+          echo "TG_API_ID = '${{ secrets.TG_API_ID }}'" >> config_file.py
+          echo "TG_API_HASH = '${{ secrets.TG_API_HASH }}'" >> config_file.py
+          echo "TG_TOKEN = '${{ secrets.TG_TOKEN }}'" >> config_file.py
           pip install pyrogram TgCrypto requests
           mv .github/runOnRelease.py .
           python runOnRelease.py
