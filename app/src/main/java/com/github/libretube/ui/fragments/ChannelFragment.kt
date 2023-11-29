@@ -142,8 +142,7 @@ class ChannelFragment : Fragment() {
 
             val channelId = channelId ?: return@launch
             // fetch and update the subscription status
-            isSubscribed = SubscriptionHelper.isSubscribed(channelId)
-            if (isSubscribed == null) return@launch
+            isSubscribed = SubscriptionHelper.isSubscribed(channelId) ?: false
 
             binding.channelSubscribe.setupSubscriptionButton(
                 channelId,
