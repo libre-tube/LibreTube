@@ -2,7 +2,7 @@
 <resources>
     <string name="library">ਲਾਇਬ੍ਰੇਰੀ</string>
     <string name="yes">ਠੀਕ</string>
-    <string name="search_hint">ਖੋਜ</string>
+    <string name="search_hint">ਖੋਜ ਕਰੋ</string>
     <string name="videos">ਵੀਡੀਓਜ਼</string>
     <string name="subscribe">ਸਬਸਕ੍ਰਾਈਬ</string>
     <string name="unsubscribe">ਅਨ-ਸਬਸਕ੍ਰਾਈਬ</string>
@@ -527,4 +527,11 @@
     <string name="downvote">ਡਾਊਨਵੋਟ ਕਰੋ</string>
     <string name="repeat_mode_all">ਸਾਰੇ ਦੁਹਰਾਓ</string>
     <string name="successfully_removed_from_playlist">ਪਲੇਲਿਸਟ ਵਿੱਚੋਂ \"%1$s\" ਨੂੰ ਸਫਲਤਾਪੂਰਵਕ ਹਟਾਇਆ ਗਿਆ।</string>
+    <string name="time_in_minutes">ਮਿੰਟਾਂ ਵਿੱਚ ਸਮਾਂ</string>
+    <string name="invalid_input">ਅਵੈਧ ਇਨਪੁਟ</string>
+    <string name="disable_sleep_timer">ਸਲੀਪ ਟਾਈਮਰ ਨੂੰ ਡਿਸੇਬਲ ਕਰੋ</string>
+    <string name="watched">ਵੇਖਿਆ ਹੋਇਆ</string>
+    <string name="start_sleep_timer">ਸਲੀਪ ਟਾਈਮਰ ਸ਼ੁਰੂ ਕਰੋ</string>
+    <string name="finished">ਸਮਾਪਤ</string>
+    <string name="no_segments_found">ਇਸ ਵੀਡੀਓ ਲਈ ਅਜੇ ਤੱਕ ਕੋਈ ਸੈਗਮੈਂਟ ਨਹੀਂ ਹਨ।</string>
 </resources>
