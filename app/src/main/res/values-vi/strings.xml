@@ -123,7 +123,7 @@
     <string name="loggedIn">Đã đăng nhập.</string>
     <string name="loggedout">Đã đăng xuất.</string>
     <string name="downloadfailed">Tải xuống thất bại.</string>
-    <string name="server_error">Có một vấn đề với máy chủ được chọn. Hãy thử lại với một máy chủ khác</string>
+    <string name="server_error">Có vẻ như có một vấn đề với máy chủ được chọn. Hãy thử một instance khác.</string>
     <string name="category_segments">Các phân đoạn</string>
     <string name="category_sponsor_description">Quảng cáo có trả tiền, giới thiệu có trả tiền và quảng cáo trực tiếp. Không phải để tự quảng cáo hoặc gửi lời cảm ơn miễn phí tới các hoạt động chính nghĩa / người sáng tạo / trang web / sản phẩm mà họ thích.</string>
     <string name="category_intro_description">Khoảng thời gian không có chứa nội dung của video. Có thể là tạm dừng, khung tĩnh, hoạt ảnh lặp lại. Không nên được sử dụng cho các phân cảnh chuyển có chứa thông tin.</string>
@@ -526,4 +526,9 @@
     <string name="repeat_mode_all">Lặp lại tất cả</string>
     <string name="finished">Hoàn thành</string>
     <string name="successfully_removed_from_playlist">Thành công xóa \"%1$s\" khỏi danh sách.</string>
+    <string name="time_in_minutes">Thời gian tính bằng phút</string>
+    <string name="invalid_input">Đâu vào không hợp lệ</string>
+    <string name="disable_sleep_timer">Tắt tính năng hẹn giờ ngủ</string>
+    <string name="start_sleep_timer">Bắt đầu hẹn giờ ngủ</string>
+    <string name="no_segments_found">Chưa có phân đoạn nào cho video này.</string>
 </resources>
