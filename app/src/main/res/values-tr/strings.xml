@@ -510,4 +510,9 @@
     <string name="filename_too_long">Dosya adı çok uzun!</string>
     <string name="sponsorblock_user_id">SponsorBlock Kullanıcı Adı</string>
     <string name="contribute_to_sponsorblock">SponsorBlock\'a katkıda bulun</string>
+    <string name="autoplay_playlists_summary">Seçilen otomatik oynatma ayarından bağımsız olarak oynatma listelerindeki bir sonraki videoyu otomatik olarak oynat</string>
+    <string name="repeat_mode_all">Tümünü tekrarla</string>
+    <string name="donate">Bağış yap</string>
+    <string name="music_artists">YT Müzik Sanatçıları</string>
+    <string name="autoplay_playlists">Oynatma listelerini otomatik olarak oynat</string>
 </resources>
