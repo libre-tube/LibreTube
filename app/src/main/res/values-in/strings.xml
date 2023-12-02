@@ -92,7 +92,7 @@
     <string name="category_outro">Kartu akhir dan kredit</string>
     <string name="category_outro_description">Info mengikuti dengan akhir video. Bukan untuk kesimpulan dengan info.</string>
     <string name="category_interaction_description">Saat ada pengingat singkat untuk meminta suka, berlangganan atau mengikuti di tengah konten. Jika panjang atau tentang sesuatu yang spesifik, sebaiknya pakai kategori promosi diri sendiri.</string>
-    <string name="piped">Disalurkan</string>
+    <string name="piped">Piped</string>
     <string name="playOnBackground">Putar di latar belakang</string>
     <string name="license">Lisensi</string>
     <string name="color_accent">Aksen</string>
