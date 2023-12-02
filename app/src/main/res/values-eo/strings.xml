@@ -111,4 +111,12 @@
     <string name="donate">Donaci</string>
     <string name="music_artists">YT-Muzikaj Artistoj</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d videoj</string>
+    <string name="no_subtitles_available">Neniuj subtekstoj disponeblaj</string>
+    <string name="change_region">Tendenco ŝajnas esti maldisponebla por la nuna regiono. Bonvolu elekti alian en la agordoj.</string>
+    <string name="update_available">Versio %1$s disponeblas</string>
+    <string name="update_available_text">Nova ĝisdatigo disponeblas. Alklaku por malfermi la paĝon de eldonoj de GitHub.</string>
+    <string name="no_comments_available">Ĉi tiu video ne havas komentojn.</string>
+    <string name="failed_fetching_instances">Ne eblis akiri disponeblajn instancojn.</string>
+    <string name="push_channel_description">Montras sciigon kiam novaj fluoj disponeblas.</string>
+    <string name="lbry_hls_summary">Uzi LBRY HLS por enfluado se disponebla.</string>
 </resources>
