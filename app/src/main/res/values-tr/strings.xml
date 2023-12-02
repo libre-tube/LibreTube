@@ -515,4 +515,16 @@
     <string name="donate">Bağış yap</string>
     <string name="music_artists">YT Müzik Sanatçıları</string>
     <string name="autoplay_playlists">Oynatma listelerini otomatik olarak oynat</string>
+    <string name="time_in_minutes">Dakika cinsinden zaman</string>
+    <string name="invalid_input">Geçersiz giriş</string>
+    <string name="disable_sleep_timer">Uyku zamanlayıcısını devre dışı bırak</string>
+    <string name="watched">İzlenildi</string>
+    <string name="segment">Segment</string>
+    <string name="start_sleep_timer">Uyku zamanlayıcısını başlat</string>
+    <string name="undo">Geri al</string>
+    <string name="finished">Bitmiş</string>
+    <string name="no_segments_found">Bu video için henüz segment yok.</string>
+    <string name="playback_during_call">Telefon görüşmesi sırasında oynatmaya devam et</string>
+    <string name="successfully_removed_from_playlist">%1$s oynatma listesinden kaldırıldı.</string>
+    <string name="same_as_fullscreen">Tam ekran ile aynı</string>
 </resources>
