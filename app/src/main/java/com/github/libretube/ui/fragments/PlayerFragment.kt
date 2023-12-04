@@ -779,16 +779,16 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     override fun onDestroy() {
         super.onDestroy()
 
-        if (viewModel.player == exoPlayer) viewModel.player = null
+        if (this::exoPlayer.isInitialized) {
+            if (viewModel.player == exoPlayer) viewModel.player = null
 
-        if (this::exoPlayer.isInitialized) exoPlayer.pause()
+            exoPlayer.pause()
 
-        // disable the auto PiP mode for SDK >= 32
-        if (PlayerHelper.pipEnabled) {
-            PictureInPictureCompat.setPictureInPictureParams(
-                requireActivity(),
-                pipParams
-            )
+            if (PlayerHelper.pipEnabled) {
+                // disable the auto PiP mode for SDK >= 32
+                PictureInPictureCompat
+                    .setPictureInPictureParams(requireActivity(), pipParams)
+            }
         }
 
         handler.removeCallbacksAndMessages(null)
