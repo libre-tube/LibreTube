@@ -151,7 +151,7 @@
     <string name="downloading">Загрузка…</string>
     <string name="player_autoplay">Автовоспроизведение</string>
     <string name="no_video">Нет видео</string>
-    <string name="no_audio">Нет звука</string>
+    <string name="no_audio">Без звука</string>
     <string name="reset">Восстановить настройки по умолчанию</string>
     <string name="reset_message">Сбросить все настройки и выйти из аккаунта\?</string>
     <string name="instance_frontend_url">Ссылка на фронтенд сервера</string>

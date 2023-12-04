@@ -31,7 +31,7 @@
     <string name="server_error">به نظر کارساز گزیده مشکلی دارد. نمونه‌ای دیگر را بیازمایید.</string>
     <string name="error">مشکلی پیش آمد.</string>
     <string name="notgmail">این برای حساب پایپد است.</string>
-    <string name="defres">ابعاد ویدئو</string>
+    <string name="defres">تفکیک پذیری ویدیو</string>
     <string name="empty">باید نام کاربری و گذرواژه‌ای را وارد کنید.</string>
     <string name="emptyList">چیزی این‌جا نیست.</string>
     <string name="grid">ستون‌های شبکه</string>
@@ -527,4 +527,11 @@
     <string name="remember_playback_speed">به یاد سپردن سرعت پخش</string>
     <string name="downvote">پایین</string>
     <string name="successfully_removed_from_playlist">«%1$s» با موفّقیت از سیاههٔ پخش برداشته شد.</string>
+    <string name="time_in_minutes">زمان به دقیقه</string>
+    <string name="invalid_input">ورودی نامعتبر</string>
+    <string name="disable_sleep_timer">از کار انداختن شمارش معکوس خواب</string>
+    <string name="watched">تماشا شده</string>
+    <string name="start_sleep_timer">آغاز شمارش معکوس خواب</string>
+    <string name="finished">پایان یافته</string>
+    <string name="no_segments_found">هنوز بخشی برای این ویدیو وجود ندارد.</string>
 </resources>

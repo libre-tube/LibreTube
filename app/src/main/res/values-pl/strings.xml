@@ -52,7 +52,6 @@
     <string name="systemDefault">Systemowy</string>
     <string name="lightTheme">Jasny</string>
     <string name="subscribers">%1$s subskrypcji</string>
-    <string name="startpage">Główna</string>
     <string name="darkTheme">Ciemny</string>
     <string name="subscriptions">Subskrypcje</string>
     <string name="library">Biblioteka</string>
@@ -435,7 +434,7 @@
     <string name="export_subscriptions_to">Eksportuj subskrypcje do</string>
     <string name="import_format_freetube">FreeTube</string>
     <string name="import_format_newpipe">NewPipe</string>
-    <string name="welcome">Witamy w LibreTube</string>
+    <string name="welcome">Witamy w LibreZjeb</string>
     <string name="mark_as_unwatched">Oznacz jako nieobejrzane</string>
     <string name="dearrow">Włącz DeArrow</string>
     <string name="dearrow_summary">Pokaż dokładniejsze i mniej sensacyjne tytuły i miniatury. Wydłuża czas ładowania.</string>
@@ -457,7 +456,7 @@
     <string name="visibility_public">Publiczny</string>
     <string name="import_playlists_from">Importuj playlisty z</string>
     <string name="export_playlists_to">Eksportuj playlisty do</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
+    <string name="import_format_piped">Piped / LibreZjeb</string>
     <string name="fallback_piped_proxy_desc">Załaduj filmy przez serwer proxy, jeśli bezpośrednie połączenie z YouTube nie działa w przypadku bieżącego filmu (wydłuża początkowy czas ładowania). Jeśli ta opcja jest wyłączona, zawartość muzyczna YouTube prawdopodobnie nie będzie odtwarzana z powodu ograniczeń YT.</string>
     <string name="playlist_description">Opis playlisty</string>
     <string name="choose_instance_long">Wybierz poniżej instancję Piped, której chcesz użyć. Instancja Piped będzie działać jako pośrednik między Tobą a YouTube. Instancje te znajdują się w różnych fizycznych lokalizacjach — na co wskazują ich flagi państwowe. Instancje fizycznie bliżej ciebie są prawdopodobnie szybsze niż instancje, które nie są. W każdej chwili możesz zmienić używaną instancję w ustawieniach.</string>
@@ -533,4 +532,9 @@
     <string name="segment_submitted">Przesłano segment</string>
     <string name="downvote">W dół</string>
     <string name="successfully_removed_from_playlist">„%1$s” zostało usunięte z zaznaczenia.</string>
+    <string name="time_in_minutes">Czas w minutach</string>
+    <string name="invalid_input">Nieprawidłowe dane wejściowe</string>
+    <string name="disable_sleep_timer">Wyłącz wyłącznik czasowy</string>
+    <string name="start_sleep_timer">Uruchom wyłącznik czasowy</string>
+    <string name="no_segments_found">Nie ma jeszcze segmentów dla tego wideo.</string>
 </resources>
