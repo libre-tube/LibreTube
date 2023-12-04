@@ -138,7 +138,9 @@ class DownloadsAdapter(
         items.forEach {
             it.path.deleteIfExists()
         }
-        download.thumbnailPath?.deleteIfExists()
+        runCatching {
+            download.thumbnailPath?.deleteIfExists()
+        }
 
         runBlocking(Dispatchers.IO) {
             DatabaseHolder.Database.downloadDao().deleteDownload(download)
