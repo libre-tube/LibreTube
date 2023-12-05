@@ -11,12 +11,7 @@ class PlayerGestureControlsView(
     context: Context,
     attrs: AttributeSet? = null
 ) : ConstraintLayout(context, attrs) {
-    var binding: PlayerGestureControlsViewBinding
-
-    init {
-        val layoutInflater = LayoutInflater.from(context)
-        binding = PlayerGestureControlsViewBinding.inflate(layoutInflater, this, true)
-    }
+    val binding = PlayerGestureControlsViewBinding.inflate(LayoutInflater.from(context), this, true)
 
     override fun onSizeChanged(width: Int, height: Int, oldWidth: Int, oldHeight: Int) {
         super.onSizeChanged(width, height, oldHeight, oldHeight)

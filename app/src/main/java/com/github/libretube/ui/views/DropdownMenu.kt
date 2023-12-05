@@ -15,7 +15,8 @@ class DropdownMenu(
     context: Context,
     attributeSet: AttributeSet
 ) : FrameLayout(context, attributeSet) {
-    var binding: DropdownMenuBinding
+    private val binding =
+        DropdownMenuBinding.inflate(LayoutInflater.from(context), this, true)
 
     @Suppress("UNCHECKED_CAST")
     var adapter: ArrayAdapter<String>
@@ -26,15 +27,10 @@ class DropdownMenu(
         }
 
     val selectedItemPosition: Int
-        get() = adapter.getPosition(
-            binding.autoCompleteTextView.text.toString()
-        )
+        get() = adapter.getPosition(binding.autoCompleteTextView.text.toString())
 
     init {
-        val layoutInflater = LayoutInflater.from(context)
-        binding = DropdownMenuBinding.inflate(layoutInflater, this, true)
-
-        val ta = getContext().obtainStyledAttributes(attributeSet, R.styleable.DropdownMenu, 0, 0)
+        val ta = context.obtainStyledAttributes(attributeSet, R.styleable.DropdownMenu, 0, 0)
 
         try {
             binding.textInputLayout.hint = ta.getString(R.styleable.DropdownMenu_hint)
