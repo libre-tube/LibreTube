@@ -480,8 +480,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         if (PlayerHelper.pipEnabled) {
             PictureInPictureCompat.setPictureInPictureParams(activity, pipParams)
         }
-        binding.relPlayerPip.isVisible = PictureInPictureCompat
-            .isPictureInPictureAvailable(activity)
     }
 
     private fun onManualPlayerClose() {
@@ -628,10 +626,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 newFragment.arguments = bundleOf(IntentData.videoId to videoId)
                 newFragment.show(childFragmentManager, DownloadDialog::class.java.name)
             }
-        }
-
-        binding.relPlayerPip.setOnClickListener {
-            PictureInPictureCompat.enterPictureInPictureMode(requireActivity(), pipParams)
         }
 
         binding.playerChannel.setOnClickListener {
