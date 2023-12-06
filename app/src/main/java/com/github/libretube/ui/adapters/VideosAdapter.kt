@@ -35,7 +35,7 @@ import com.github.libretube.util.TextUtils
 class VideosAdapter(
     private val streamItems: MutableList<StreamItem>,
     private val showAllAtOnce: Boolean = true,
-    private val forceMode: ForceMode = ForceMode.NONE
+    private val forceMode: LayoutMode = LayoutMode.RESPECT_PREF
 ) : RecyclerView.Adapter<VideosViewHolder>() {
 
     private var visibleCount = minOf(10, streamItems.size)
@@ -82,14 +82,13 @@ class VideosAdapter(
             )
 
             forceMode in listOf(
-                ForceMode.TRENDING,
-                ForceMode.RELATED,
-                ForceMode.HOME
+                LayoutMode.TRENDING_ROW,
+                LayoutMode.RELATED_COLUMN
             ) -> VideosViewHolder(
                 TrendingRowBinding.inflate(layoutInflater, parent, false)
             )
 
-            forceMode == ForceMode.CHANNEL -> VideosViewHolder(
+            forceMode == LayoutMode.CHANNEL_ROW -> VideosViewHolder(
                 VideoRowBinding.inflate(layoutInflater, parent, false)
             )
 
@@ -126,11 +125,9 @@ class VideosAdapter(
         // Trending layout
         holder.trendingRowBinding?.apply {
             // set a fixed width for better visuals
-            root.updateLayoutParams {
-                when (forceMode) {
-                    ForceMode.RELATED -> width = 210f.dpToPx()
-                    ForceMode.HOME -> width = 250f.dpToPx()
-                    else -> {}
+            if (forceMode == LayoutMode.RELATED_COLUMN) {
+                root.updateLayoutParams {
+                    width = 250f.dpToPx()
                 }
             }
 
@@ -183,7 +180,7 @@ class VideosAdapter(
 
             ImageHelper.loadImage(video.thumbnail, thumbnail)
 
-            if (forceMode != ForceMode.CHANNEL) {
+            if (forceMode != LayoutMode.CHANNEL_ROW) {
                 ImageHelper.loadImage(video.uploaderAvatar, channelImage)
                 channelName.text = video.uploaderName
 
@@ -214,13 +211,12 @@ class VideosAdapter(
     }
 
     companion object {
-        enum class ForceMode {
-            NONE,
-            TRENDING,
-            ROW,
-            CHANNEL,
-            RELATED,
-            HOME
+        enum class LayoutMode {
+            RESPECT_PREF,
+            TRENDING_ROW,
+            VIDEO_ROW,
+            CHANNEL_ROW,
+            RELATED_COLUMN
         }
 
         fun getLayout(context: Context): LayoutManager {
