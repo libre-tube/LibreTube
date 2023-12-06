@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.ArrayAdapter
 import android.widget.FrameLayout
+import androidx.core.content.res.use
 import com.github.libretube.R
 import com.github.libretube.databinding.DropdownMenuBinding
 
@@ -30,15 +31,10 @@ class DropdownMenu(
         get() = adapter.getPosition(binding.autoCompleteTextView.text.toString())
 
     init {
-        val ta = context.obtainStyledAttributes(attributeSet, R.styleable.DropdownMenu, 0, 0)
-
-        try {
-            binding.textInputLayout.hint = ta.getString(R.styleable.DropdownMenu_hint)
-            binding.textInputLayout.startIconDrawable = ta.getDrawable(
-                R.styleable.DropdownMenu_icon
-            )
-        } finally {
-            ta.recycle()
+        context.obtainStyledAttributes(attributeSet, R.styleable.DropdownMenu, 0, 0).use {
+            binding.textInputLayout.hint = it.getString(R.styleable.DropdownMenu_hint)
+            binding.textInputLayout.startIconDrawable =
+                it.getDrawable(R.styleable.DropdownMenu_icon)
         }
     }
 

@@ -17,41 +17,25 @@ import kotlin.math.roundToInt
 class SliderPreference(
     context: Context,
     attributeSet: AttributeSet
-) : Preference(
-    context,
-    attributeSet
-) {
+) : Preference(context, attributeSet) {
     private lateinit var sliderBinding: DialogSliderBinding
-    private var defValue = 0f
-    private var valueFrom = 1f
-    private var valueTo = 10f
-    private var stepSize = 1f
+    private val defValue: Float
+    private val valueFrom: Float
+    private val valueTo: Float
+    private val stepSize: Float
+
+    init {
+        val ta = context.obtainStyledAttributes(attributeSet, R.styleable.SliderPreference)
+        defValue = ta.getFloat(R.styleable.SliderPreference_defValue, 0f)
+        valueFrom = ta.getFloat(R.styleable.SliderPreference_valueFrom, 1f)
+        valueTo = ta.getFloat(R.styleable.SliderPreference_valueTo, 10f)
+        stepSize = ta.getFloat(R.styleable.SliderPreference_stepSize, 1f)
+        ta.recycle()
+    }
 
     private var prefValue: Float
-        get() = PreferenceHelper.getString(
-            key,
-            defValue.toString()
-        ).toFloat()
-        set(value) {
-            PreferenceHelper.putString(
-                key,
-                value.toString()
-            )
-        }
-
-    private val typedArray = context.obtainStyledAttributes(
-        attributeSet,
-        R.styleable.SliderPreference
-    )
-
-    override fun onAttached() {
-        super.onAttached()
-
-        defValue = typedArray.getFloat(R.styleable.SliderPreference_defValue, defValue)
-        valueFrom = typedArray.getFloat(R.styleable.SliderPreference_valueFrom, valueFrom)
-        valueTo = typedArray.getFloat(R.styleable.SliderPreference_valueTo, valueTo)
-        stepSize = typedArray.getFloat(R.styleable.SliderPreference_stepSize, stepSize)
-    }
+        get() = PreferenceHelper.getString(key, defValue.toString()).toFloat()
+        set(value) = PreferenceHelper.putString(key, value.toString())
 
     override fun getSummary(): CharSequence = getDisplayedCurrentValue(prefValue)
 
