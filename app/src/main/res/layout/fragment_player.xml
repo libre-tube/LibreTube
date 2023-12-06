@@ -28,64 +28,53 @@
                 android:id="@+id/descriptionLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:animateLayoutChanges="true"/>
+                android:animateLayoutChanges="true" />
 
-            <com.google.android.material.card.MaterialCardView
-                style="@style/Widget.Material3.CardView.Elevated"
+            <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="17dp"
-                app:cardCornerRadius="27dp">
+                android:paddingBottom="10dp"
+                android:scrollbars="none">
 
                 <LinearLayout
                     android:id="@+id/optionsLL"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="8dp"
-                    android:layout_marginVertical="18dp"
-                    android:gravity="center"
+                    android:paddingHorizontal="2dp"
                     android:orientation="horizontal">
 
-                    <com.github.libretube.ui.views.DrawableTextView
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/relPlayer_share"
-                        style="@style/PlayerActionsText"
+                        style="@style/PlayerActionsButton"
                         android:text="@string/share"
-                        app:drawableTopCompat="@drawable/ic_share" />
+                        app:icon="@drawable/ic_share" />
 
-                    <com.github.libretube.ui.views.DrawableTextView
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/relPlayer_download"
-                        style="@style/PlayerActionsText"
+                        style="@style/PlayerActionsButton"
                         android:text="@string/download"
-                        app:drawableTopCompat="@drawable/ic_download" />
+                        app:icon="@drawable/ic_download" />
 
-                    <com.github.libretube.ui.views.DrawableTextView
-                        android:id="@+id/relPlayer_pip"
-                        style="@style/PlayerActionsText"
-                        android:text="@string/pop_up"
-                        app:drawableTopCompat="@drawable/ic_open" />
-
-                    <com.github.libretube.ui.views.DrawableTextView
-                        android:id="@+id/relPlayer_background"
-                        style="@style/PlayerActionsText"
-                        android:text="@string/audio"
-                        app:drawableTopCompat="@drawable/ic_headphones" />
-
-                    <com.github.libretube.ui.views.DrawableTextView
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/relPlayer_save"
-                        style="@style/PlayerActionsText"
+                        style="@style/PlayerActionsButton"
                         android:text="@string/save"
-                        app:drawableTopCompat="@drawable/ic_save" />
+                        app:icon="@drawable/ic_save" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/relPlayer_background"
+                        style="@style/PlayerActionsButton"
+                        android:text="@string/audio"
+                        app:icon="@drawable/ic_headphones" />
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </HorizontalScrollView>
 
             <LinearLayout
                 android:id="@+id/player_channel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
+                android:layout_marginHorizontal="2dp"
                 android:layout_marginVertical="10dp"
                 android:background="@drawable/rounded_ripple"
                 android:orientation="horizontal"
@@ -130,14 +119,11 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/player_subscribe"
-                    style="@style/Widget.Material3.Button.ElevatedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/subscribe"
-                    android:textColor="?colorControlNormal"
-                    android:textSize="12sp"
-                    app:cornerRadius="16dp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <com.google.android.material.card.MaterialCardView
@@ -145,15 +131,15 @@
                 style="@style/Widget.Material3.CardView.Elevated"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="12dp"
+                android:layout_marginHorizontal="6dp"
                 android:layout_marginVertical="16dp"
-                app:cardCornerRadius="18dp">
+                app:cardCornerRadius="20dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:paddingHorizontal="8dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="10dp"
                     android:text="@string/comments"
                     android:textAlignment="viewStart"
                     app:drawableEndCompat="@drawable/ic_arrow_up_down" />
@@ -163,8 +149,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/related_rec_view"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="12dp" />
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
@@ -242,13 +227,13 @@
 
     <ImageView
         android:id="@+id/close_imageView"
-        android:tooltipText="@string/tooltip_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:alpha="0"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="8dp"
         android:src="@drawable/ic_close"
+        android:tooltipText="@string/tooltip_close"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/main_container"
         app:layout_constraintEnd_toEndOf="@id/main_container"
@@ -256,13 +241,13 @@
 
     <ImageView
         android:id="@+id/play_imageView"
-        android:tooltipText="@string/tooltip_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:alpha="0"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="8dp"
         android:src="@drawable/ic_play"
+        android:tooltipText="@string/tooltip_play"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/close_imageView"
         app:layout_constraintEnd_toStartOf="@+id/close_imageView"

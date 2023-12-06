@@ -35,7 +35,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="16dp"
                 app:cardCornerRadius="27dp">
 
                 <LinearLayout
@@ -59,12 +60,6 @@
                         style="@style/PlayerActionsText"
                         android:text="@string/download"
                         app:drawableTopCompat="@drawable/ic_download" />
-
-                    <com.github.libretube.ui.views.DrawableTextView
-                        android:id="@+id/relPlayer_pip"
-                        style="@style/PlayerActionsText"
-                        android:text="@string/pop_up"
-                        app:drawableTopCompat="@drawable/ic_open" />
 
                     <com.github.libretube.ui.views.DrawableTextView
                         android:id="@+id/relPlayer_background"
