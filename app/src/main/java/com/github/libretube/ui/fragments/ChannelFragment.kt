@@ -224,7 +224,7 @@ class ChannelFragment : Fragment() {
         // recyclerview of the videos by the channel
         channelAdapter = VideosAdapter(
             response.relatedStreams.toMutableList(),
-            forceMode = VideosAdapter.Companion.ForceMode.CHANNEL
+            forceMode = VideosAdapter.Companion.LayoutMode.CHANNEL_ROW
         )
         binding.channelRecView.adapter = channelAdapter
 

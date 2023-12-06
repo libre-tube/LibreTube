@@ -127,7 +127,7 @@ class HomeFragment : Fragment() {
         binding.trendingRV.layoutManager = GridLayoutManager(context, 2)
         binding.trendingRV.adapter = VideosAdapter(
             trending.toMutableList(),
-            forceMode = VideosAdapter.Companion.ForceMode.TRENDING
+            forceMode = VideosAdapter.Companion.LayoutMode.TRENDING_ROW
         )
     }
 
@@ -165,7 +165,7 @@ class HomeFragment : Fragment() {
         )
         binding.featuredRV.adapter = VideosAdapter(
             filteredFeed.take(20).toMutableList(),
-            forceMode = VideosAdapter.Companion.ForceMode.HOME
+            forceMode = VideosAdapter.Companion.LayoutMode.RELATED_COLUMN
         )
     }
 
@@ -233,7 +233,7 @@ class HomeFragment : Fragment() {
         )
         binding.watchingRV.adapter = VideosAdapter(
             unwatchedVideos.toMutableList(),
-            forceMode = VideosAdapter.Companion.ForceMode.HOME
+            forceMode = VideosAdapter.Companion.LayoutMode.RELATED_COLUMN
         )
     }
 
