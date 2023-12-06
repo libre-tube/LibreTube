@@ -32,6 +32,7 @@ import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.DownloadHelper.getNotificationId
 import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.DownloadStatus
 import com.github.libretube.parcelable.DownloadData
 import com.github.libretube.receivers.NotificationReceiver
@@ -162,9 +163,9 @@ class DownloadService : LifecycleService() {
         downloadQueue[item.id] = true
         val notificationBuilder = getNotificationBuilder(item)
         setResumeNotification(notificationBuilder, item)
-        val path = item.path
-        var totalRead = path.fileSize()
-        val url = URL(item.url ?: return)
+
+        var totalRead = item.path.fileSize()
+        val url = URL(ProxyHelper.unwrapStreamUrl(item.url ?: return))
 
         // only fetch the content length if it's not been returned by the API
         if (item.downloadSize <= 0L) {
@@ -179,7 +180,7 @@ class DownloadService : LifecycleService() {
                 val con = startConnection(item, url, totalRead, item.downloadSize) ?: return
 
                 @Suppress("NewApi") // The StandardOpenOption enum is desugared.
-                val sink = path.sink(StandardOpenOption.APPEND).buffer()
+                val sink = item.path.sink(StandardOpenOption.APPEND).buffer()
                 val sourceByte = con.inputStream.source()
 
                 var lastTime = System.currentTimeMillis() / 1000
@@ -269,7 +270,9 @@ class DownloadService : LifecycleService() {
         val limit = if (readLimit == null) {
             ""
         } else {
-            min(readLimit, alreadyRead + BYTES_PER_REQUEST)
+            // generate a random byte distance to make it more difficult to fingerprint
+            val nextBytesToReadSize = (BYTES_PER_REQUEST_MIN..BYTES_PER_REQUEST_MAX).random()
+            min(readLimit, alreadyRead + nextBytesToReadSize)
         }
         con.setRequestProperty("Range", "bytes=$alreadyRead-$limit")
         con.connectTimeout = DownloadHelper.DEFAULT_TIMEOUT
@@ -536,7 +539,12 @@ class DownloadService : LifecycleService() {
             "com.github.libretube.services.DownloadService.ACTION_SERVICE_STARTED"
         const val ACTION_SERVICE_STOPPED =
             "com.github.libretube.services.DownloadService.ACTION_SERVICE_STOPPED"
+
+        // any values that are not in that range are strictly rate limited by YT or are very slow due
+        // to the amount of requests that's being made
+        private const val BYTES_PER_REQUEST_MIN = 500_000L
+        private const val BYTES_PER_REQUEST_MAX = 3_000_000L
+
         var IS_DOWNLOAD_RUNNING = false
-        private const val BYTES_PER_REQUEST = 10000000L
     }
 }
