@@ -68,6 +68,8 @@ object ProxyHelper {
             it.newBuilder()
                 .host(host)
                 .removeAllQueryParameters("host")
+                .removeAllQueryParameters("ump")
+                .removeAllQueryParameters("qhash")
                 .build()
                 .toString()
         } ?: url
