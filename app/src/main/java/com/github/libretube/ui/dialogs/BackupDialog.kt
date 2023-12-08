@@ -65,6 +65,7 @@ class BackupDialog : DialogFragment() {
                     is Number -> JsonPrimitive(value)
                     is Boolean -> JsonPrimitive(value)
                     is String -> JsonPrimitive(value)
+                    is Set<*> -> JsonPrimitive(value.joinToString(","))
                     else -> JsonNull
                 }
                 PreferenceItem(key, jsonValue)
