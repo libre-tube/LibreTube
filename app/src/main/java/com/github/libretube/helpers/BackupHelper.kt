@@ -100,7 +100,13 @@ object BackupHelper {
                         }
                     }
 
-                    is String -> putString(key, value)
+                    is String -> {
+                        if (key == PreferenceKeys.HOME_TAB_CONTENT) {
+                            putStringSet(key, value.split(",").toSet())
+                        } else {
+                            putString(key, value)
+                        }
+                    }
                 }
             }
         }
