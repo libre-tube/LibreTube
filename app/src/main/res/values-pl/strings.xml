@@ -188,7 +188,7 @@
     <string name="behavior">Zachowanie</string>
     <string name="pauseOnScreenOff">Wstrzymaj odtwarzanie</string>
     <string name="clonePlaylist">Sklonuj playlistę</string>
-    <string name="watch_history">Obejrzane</string>
+    <string name="watch_history">Historia Oglądania</string>
     <string name="auth_instance">Instancja uwierzytelniająca</string>
     <string name="auth_instance_summary">Użyj innej instancji do obsługi konta Piped.</string>
     <string name="auth_instances">Wybierz instancję autoryzacyjną</string>
@@ -537,4 +537,7 @@
     <string name="disable_sleep_timer">Wyłącz wyłącznik czasowy</string>
     <string name="start_sleep_timer">Uruchom wyłącznik czasowy</string>
     <string name="no_segments_found">Nie ma jeszcze segmentów dla tego wideo.</string>
+    <string name="watched">Obejrzane</string>
+    <string name="finished">Ukończone</string>
+    <string name="startpage">Główna</string>
 </resources>
