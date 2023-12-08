@@ -234,6 +234,8 @@ class ChannelFragment : Fragment() {
     private fun setupTabs(tabs: List<ChannelTab>) {
         this.channelTabs = tabs
 
+        val binding = _binding ?: return
+
         binding.tabChips.children.forEach { chip ->
             val resourceTab = possibleTabs.firstOrNull { it.chipId == chip.id }
             resourceTab?.let { resTab ->
