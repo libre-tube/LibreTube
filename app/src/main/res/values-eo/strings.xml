@@ -25,7 +25,7 @@
     <string name="customInstance">Propra</string>
     <string name="login_register">Ensaluti/registriĝi</string>
     <string name="importsuccess">Abonita</string>
-    <string name="cannotDownload">Ne eblas elŝuti tiun ĉi elsendaĵon.</string>
+    <string name="cannotDownload">Ne eblas elŝuti tiun ĉi elsendfluon.</string>
     <string name="downloadfailed">Elŝutado malsukcesis.</string>
     <string name="import_from_yt">Importi abonojn</string>
     <string name="app_theme">Etoso</string>
