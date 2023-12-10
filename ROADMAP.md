@@ -12,3 +12,4 @@ Feel free to help us if you have any knowledge concerning the following planned 
 - Google/MicroG Login
 - Support for anything else than Android (like iOS, Linux)
 - Support for Android TV
+- Support for YouTube.js (InnerTube) API or NewPipe Extractor.
