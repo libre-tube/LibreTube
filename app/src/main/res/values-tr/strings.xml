@@ -508,7 +508,7 @@
     <string name="tooltip_watch_position">İzleme pozisyonu</string>
     <string name="proxy">Proxy</string>
     <string name="filename_too_long">Dosya adı çok uzun!</string>
-    <string name="sponsorblock_user_id">SponsorBlock Kullanıcı Adı</string>
+    <string name="sponsorblock_user_id">SponsorBlock Kullanıcı Kimliği</string>
     <string name="contribute_to_sponsorblock">SponsorBlock\'a katkıda bulun</string>
     <string name="autoplay_playlists_summary">Seçilen otomatik oynatma ayarından bağımsız olarak oynatma listelerindeki bir sonraki videoyu otomatik olarak oynat</string>
     <string name="repeat_mode_all">Tümünü tekrarla</string>
@@ -519,7 +519,7 @@
     <string name="invalid_input">Geçersiz giriş</string>
     <string name="disable_sleep_timer">Uyku zamanlayıcısını devre dışı bırak</string>
     <string name="watched">İzlenildi</string>
-    <string name="segment">Segment</string>
+    <string name="segment">Bölüm</string>
     <string name="start_sleep_timer">Uyku zamanlayıcısını başlat</string>
     <string name="undo">Geri al</string>
     <string name="finished">Bitmiş</string>
@@ -527,4 +527,11 @@
     <string name="playback_during_call">Telefon görüşmesi sırasında oynatmaya devam et</string>
     <string name="successfully_removed_from_playlist">%1$s oynatma listesinden kaldırıldı.</string>
     <string name="same_as_fullscreen">Tam ekran ile aynı</string>
+    <string name="vote_for_segment">Bölüm için oy ver</string>
+    <string name="upvote">Olumlu</string>
+    <string name="no_fullscreen_resolution">Tam ekran çözünürlüğü yok</string>
+    <string name="playback_during_call_summary">Bunun, uygulamanın artık herhangi bir ses odağını işlememesini de etkilediğini unutmayın.</string>
+    <string name="segment_submitted">Bölüm gönderildi</string>
+    <string name="remember_playback_speed">Oynatma hızını hatırla</string>
+    <string name="downvote">Olumsuz</string>
 </resources>

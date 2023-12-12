@@ -127,7 +127,7 @@
     <string name="always">Заўсёды</string>
     <string name="selected">Выбранае</string>
     <string name="never">Ніколі</string>
-    <string name="autoRotatePlayer">Аўтаматычны поўнаэкранны рэжым</string>
+    <string name="autoRotatePlayer">Аўта поўнаэкранны рэжым</string>
     <string name="autoRotatePlayer_summary">Поўнаэкраннае прайграванне пры павароце прылады.</string>
     <string name="pure_theme">Чыстая тэма</string>
     <string name="pure_theme_summary">Чыста белая/чорная тэма</string>
@@ -216,7 +216,7 @@
     <string name="auth_instance_summary">Выкарыстоўвайце іншы асобнік для аўтэнтыфікаваных выклікаў.</string>
     <string name="watch_positions_title">Запомненыя пазіцыі прайгравання</string>
     <string name="system_caption_style">Сістэмны стыль субтытраў</string>
-    <string name="playerAudioFormat">Аўдыё фармат для плэера</string>
+    <string name="playerAudioFormat">Аўдыё фармат для прайгравальніка</string>
     <string name="dlisinprogress">Пачакайце, пакуль скончацца ўсе бягучыя загрузкі.</string>
     <string name="instance_frontend_url">URL-адрас інтэрфейсу асобніка</string>
     <string name="seek_increment">Шукаць прырост</string>
@@ -286,7 +286,7 @@
     <string name="navigation_bar">Панэль навігацыі</string>
     <string name="invalid_filename">Няправільнае імя файла!</string>
     <string name="playlists_order">Парадак плэйлістоў</string>
-    <string name="playlistNameReversed">Назва плэйліста (зваротны)</string>
+    <string name="playlistNameReversed">Назва плэйліста (зваротнае)</string>
     <string name="time_code">Часавы код (секунды)</string>
     <string name="added_to_playlist">Дададзена ў плэйліст %1$s</string>
     <string name="queue">Чарга</string>
@@ -322,7 +322,7 @@
     <string name="theme_monochrome">Мінімалістычны манахром</string>
     <string name="captions_size">Памер субтытраў</string>
     <string name="comments_disabled">Запампавальнік адключыў каментарыі.</string>
-    <string name="double_tap_seek_summary">Двойчы націсніце злева або справа, каб пераматаць пазіцыю гульца назад або наперад.</string>
+    <string name="double_tap_seek_summary">Двойчы націсніце злева або справа, каб пераматаць пазіцыю прайгравальніка назад або наперад.</string>
     <string name="export_playlists">Экспартаваць плэйлісты</string>
     <string name="import_playlists">Імпартаваць плэйлісты</string>
     <string name="backup_restore_summary">Імпарт і экспарт падпісак, плэйлістоў,…</string>
@@ -338,7 +338,7 @@
     <string name="rewind">Перамотка назад</string>
     <string name="add_to_bookmarks">Дадаць у закладкі</string>
     <string name="audio_only_mode">Рэжым толькі аўдыя</string>
-    <string name="audio_player">Аўдыяплэер</string>
+    <string name="audio_player">Аўдыёпрайгравальнік</string>
     <string name="audio_only_mode_summary">Ператварыце LibreTube у музычны прайгравальнік.</string>
     <string name="sleep_timer">Таймер сну</string>
     <string name="skip_silence">Прапусціць цішыню</string>
@@ -389,7 +389,7 @@
         <item quantity="other">%d гадоў таму</item>
     </plurals>
     <string name="category_preview_description">Для сегментаў з падрабязным апісаннем будучага кантэнту без дадатковай інфармацыі. Калі яна ўключае ў сябе кліпы, якія з\'яўляюцца толькі тут, гэта, хутчэй за ўсё, няправільная катэгорыя.</string>
-    <string name="alternative_player_layout">Альтэрнатыўны макет плэера</string>
+    <string name="alternative_player_layout">Альтэрнатыўны макет прайгравальніка</string>
     <string name="featured">Рэкамендацыі</string>
     <string name="pinch_control">Упраўленне шчыпком</string>
     <string name="pinch_control_summary">Выкарыстоўвайце жэст шчыпка для павелічэння/памяншэння.</string>
@@ -424,12 +424,12 @@
     <string name="show_stream_thumbnails">Паказваць мініяцюры відэа</string>
     <string name="unlimited_search_history">Неабмежаваная гісторыя пошуку</string>
     <string name="duration">Працягласць</string>
-    <string name="duration_reversed">Працягласць (перавернута)</string>
+    <string name="duration_reversed">Працягласць (зваротная)</string>
     <string name="shorts_notifications">Апавяшчэнні для shorts</string>
     <string name="creation_date">Дата стварэння</string>
     <string name="alphabetic">Алфавітны</string>
-    <string name="creation_date_reversed">Дата стварэння (перавернута)</string>
-    <string name="alphabetic_reversed">Алфавітны (перавернуты)</string>
+    <string name="creation_date_reversed">Дата стварэння (зваротная)</string>
+    <string name="alphabetic_reversed">Алфавітны (зваротны)</string>
     <string name="import_subscriptions_from">Імпартаваць падпіскі з</string>
     <string name="export_subscriptions_to">Экспартаваць падпіскі ў</string>
     <string name="import_format_newpipe">NewPipe</string>
@@ -500,9 +500,9 @@
     <string name="tooltip_create_playlist">Стварыць плэйліст</string>
     <string name="tooltip_minimize">Згарнуць</string>
     <string name="registration_disabled">Рэгістрацыя адключана</string>
-    <string name="player_channel_name">Служба плэера</string>
-    <string name="tooltip_locked">Заблакаваць плэер</string>
-    <string name="tooltip_unlocked">Разблакаваць плэер</string>
+    <string name="player_channel_name">Служба прайгравальніка</string>
+    <string name="tooltip_locked">Заблакаваць прайгравальнік</string>
+    <string name="tooltip_unlocked">Разблакаваць прайгравальнік</string>
     <string name="tooltip_options">Параметры</string>
     <string name="tooltip_filter">Фільтр</string>
     <string name="tooltip_scroll_to_top">Пракруціце ўверх</string>
