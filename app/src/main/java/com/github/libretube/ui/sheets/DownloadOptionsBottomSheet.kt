@@ -14,12 +14,8 @@ import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.ui.dialogs.ShareDialog
 
 class DownloadOptionsBottomSheet : BaseBottomSheet() {
-    private lateinit var videoId: String
-    private lateinit var uploader: String
-
     override fun onCreate(savedInstanceState: Bundle?) {
-        videoId = arguments?.getString(IntentData.videoId)!!
-        uploader = arguments?.getString(IntentData.channelName)!!
+        val videoId = arguments?.getString(IntentData.videoId)!!
 
         val options = listOf(
             R.string.playOnBackground,
@@ -42,10 +38,10 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
                 }
 
                 2 -> {
-                    val shareData = ShareData(currentVideo = uploader)
+                    val shareData = ShareData(currentVideo = videoId)
                     val bundle = bundleOf(
                         IntentData.id to videoId,
-                        IntentData.shareObjectType to ShareObjectType.CHANNEL,
+                        IntentData.shareObjectType to ShareObjectType.VIDEO,
                         IntentData.shareData to shareData
                     )
                     val newShareDialog = ShareDialog()
