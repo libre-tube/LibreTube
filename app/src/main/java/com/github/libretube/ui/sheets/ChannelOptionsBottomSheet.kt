@@ -24,12 +24,14 @@ import kotlinx.coroutines.withContext
 class ChannelOptionsBottomSheet : BaseBottomSheet() {
     private lateinit var channelId: String
     private var channelName: String? = null
+    private var subscribed: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         channelId = arguments?.getString(IntentData.channelId)!!
         channelName = arguments?.getString(IntentData.channelName)
+        subscribed = arguments?.getBoolean(IntentData.isSubscribed, false) ?: false
 
         setTitle(channelName)
 
@@ -39,6 +41,7 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
             getString(R.string.play_latest_videos),
             getString(R.string.playOnBackground)
         )
+        if (subscribed) optionsList.add(getString(R.string.add_to_group))
 
         setSimpleItems(optionsList) { which ->
             when (optionsList[which]) {
@@ -51,6 +54,13 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
                     val newShareDialog = ShareDialog()
                     newShareDialog.arguments = bundle
                     newShareDialog.show(parentFragmentManager, null)
+                }
+
+                getString(R.string.add_to_group) -> {
+                    val sheet = AddChannelToGroupSheet().apply {
+                        arguments = bundleOf(IntentData.channelId to channelId)
+                    }
+                    sheet.show(parentFragmentManager, null)
                 }
 
                 getString(R.string.play_latest_videos) -> {

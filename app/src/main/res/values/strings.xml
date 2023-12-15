@@ -499,6 +499,7 @@
     <string name="disable_sleep_timer">Disable sleep timer</string>
     <string name="time_in_minutes">Time in minutes</string>
     <string name="invalid_input">Invalid input</string>
+    <string name="add_to_group">Add to group</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
