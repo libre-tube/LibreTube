@@ -547,4 +547,5 @@
     <string name="invalid_input">مدخل غير صالح</string>
     <string name="disable_sleep_timer">تعطيل مؤقت النوم</string>
     <string name="start_sleep_timer">بدء مؤقت النوم</string>
+    <string name="add_to_group">إضافة إلى المجموعة</string>
 </resources>
