@@ -30,6 +30,7 @@ import com.github.libretube.ui.adapters.SearchAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.setupSubscriptionButton
+import com.github.libretube.ui.sheets.AddChannelToGroupSheet
 import com.github.libretube.util.deArrow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -172,6 +173,14 @@ class ChannelFragment : Fragment() {
             channelName,
             binding.notificationBell
         )
+
+        binding.channelSubscribe.setOnLongClickListener {
+            AddChannelToGroupSheet().apply {
+                arguments = bundleOf(IntentData.channelId to channelId)
+            }.show(childFragmentManager)
+
+            true
+        }
 
         binding.channelShare.setOnClickListener {
             val bundle = bundleOf(

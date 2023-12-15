@@ -33,4 +33,5 @@ object IntentData {
     const val videoStats = "videoStats"
     const val bitmapUrl = "bitmapUrl"
     const val isCurrentlyPlaying = "isCurrentlyPlaying"
+    const val isSubscribed = "isSubscribed"
 }

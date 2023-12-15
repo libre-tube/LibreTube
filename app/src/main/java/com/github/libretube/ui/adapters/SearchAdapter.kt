@@ -151,17 +151,21 @@ class SearchAdapter(
                 NavigationHelper.navigateChannel(root.context, item.url)
             }
 
+            var subscribed = false
+            binding.searchSubButton.setupSubscriptionButton(item.url.toID(), item.name?.toID()) {
+                subscribed = it
+            }
+
             root.setOnLongClickListener {
                 val channelOptionsSheet = ChannelOptionsBottomSheet()
                 channelOptionsSheet.arguments = bundleOf(
                     IntentData.channelId to item.url.toID(),
-                    IntentData.channelName to item.name
+                    IntentData.channelName to item.name,
+                    IntentData.isSubscribed to subscribed
                 )
                 channelOptionsSheet.show((root.context as BaseActivity).supportFragmentManager)
                 true
             }
-
-            binding.searchSubButton.setupSubscriptionButton(item.url.toID(), item.name?.toID())
         }
     }
 
