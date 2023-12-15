@@ -511,4 +511,12 @@
     <string name="filename_too_long">ناوی فایلەکە زۆۆۆر درێژە!</string>
     <string name="sponsorblock_user_id">زانیاری بەکارهێنەری SponsorBlock</string>
     <string name="donate">بەخشین</string>
+    <string name="autoplay_playlists_summary">لێدانی ڤیدیۆیی دواتر لەناو بەشی لیستی لێدانەکاندا بەپێی ڕێکخستنەکان</string>
+    <string name="no_fullscreen_resolution">قەبارەی پڕ بەشاشەی نییە</string>
+    <string name="repeat_mode_all">دووبارەکردنەوەی هەمووی</string>
+    <string name="finished">تەواوبوو</string>
+    <string name="music_artists">هونەرمەندی YT Music</string>
+    <string name="playback_during_call">بەردەوامی کارکردن لەکاتی پەیوەندیدا</string>
+    <string name="autoplay_playlists">لێدانی خۆکاری لیستی لێدانەکان</string>
+    <string name="same_as_fullscreen">هەروەکو پڕ بە شاشە</string>
 </resources>
