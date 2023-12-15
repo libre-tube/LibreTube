@@ -55,29 +55,19 @@
                 android:animateLayoutChanges="true"
                 android:orientation="vertical">
 
-                <com.google.android.material.card.MaterialCardView
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/toggle_subs"
-                    style="@style/Widget.Material3.CardView.Elevated"
+                    style="@style/PlayerActionsButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
+                    android:layout_marginHorizontal="14dp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginEnd="14dp"
                     android:layout_marginBottom="12dp"
-                    app:cardCornerRadius="18dp"
-                    app:cardElevation="10dp">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/toggle_subs_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:paddingHorizontal="8dp"
-                        android:text="@string/subscriptions"
-                        android:textAlignment="viewStart"
-                        app:drawableEndCompat="@drawable/ic_arrow_up_down" />
-
-                </com.google.android.material.card.MaterialCardView>
+                    android:text="@string/subscriptions"
+                    android:textAlignment="viewStart"
+                    android:textColor="?colorPrimary"
+                    app:drawableEndCompat="@drawable/ic_arrow_up_down"
+                    app:drawableTint="?colorPrimary" />
 
                 <RelativeLayout
                     android:id="@+id/sub_channels_container"
@@ -107,7 +97,6 @@
 
                         <TextView
                             android:id="@+id/filterTV"
-                            android:tooltipText="@string/tooltip_filter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start"
@@ -116,11 +105,11 @@
                             android:paddingHorizontal="10dp"
                             android:text="@string/all"
                             android:textSize="16sp"
+                            android:tooltipText="@string/tooltip_filter"
                             app:drawableEndCompat="@drawable/ic_filter" />
 
                         <TextView
                             android:id="@+id/sortTV"
-                            android:tooltipText="@string/tooltip_sort"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
@@ -129,6 +118,7 @@
                             android:paddingHorizontal="10dp"
                             android:text="@string/most_recent"
                             android:textSize="16sp"
+                            android:tooltipText="@string/tooltip_sort"
                             app:drawableEndCompat="@drawable/ic_sort" />
 
                     </FrameLayout>
@@ -146,14 +136,14 @@
 
                             <ImageView
                                 android:id="@+id/edit_groups"
-                                android:tooltipText="@string/tooltip_edit_groups"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginStart="12dp"
                                 android:layout_marginEnd="6dp"
                                 android:background="?attr/selectableItemBackgroundBorderless"
-                                android:src="@drawable/ic_edit" />
+                                android:src="@drawable/ic_edit"
+                                android:tooltipText="@string/tooltip_edit_groups" />
 
                             <com.google.android.material.chip.ChipGroup
                                 android:id="@+id/channel_groups"

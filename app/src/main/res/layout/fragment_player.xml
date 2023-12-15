@@ -11,7 +11,7 @@
         android:id="@+id/player_scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="?android:attr/colorBackground"
+        android:background="?colorSurfaceContainerLow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -40,8 +40,8 @@
                     android:id="@+id/optionsLL"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="2dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="2dp">
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/relPlayer_share"
@@ -126,25 +126,18 @@
                     android:textSize="12sp" />
             </LinearLayout>
 
-            <com.google.android.material.card.MaterialCardView
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/comments_toggle"
-                style="@style/Widget.Material3.CardView.Elevated"
+                style="@style/PlayerActionsButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="6dp"
-                android:layout_marginVertical="16dp"
-                app:cardCornerRadius="20dp">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginVertical="10dp"
-                    android:text="@string/comments"
-                    android:textAlignment="viewStart"
-                    app:drawableEndCompat="@drawable/ic_arrow_up_down" />
-
-            </com.google.android.material.card.MaterialCardView>
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                android:text="@string/comments"
+                android:textAlignment="viewStart"
+                android:textColor="?colorPrimary"
+                app:drawableEndCompat="@drawable/ic_arrow_up_down"
+                app:drawableTint="?colorPrimary" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/related_rec_view"
@@ -159,7 +152,7 @@
         android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="?attr/colorSurface"
+        android:background="?attr/colorSurfaceContainerLow"
         app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
