@@ -420,10 +420,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         mainActivity.binding.container.isVisible = true
         val mainMotionLayout = mainActivity.binding.mainMotionLayout
 
-        // add some elevation to the color to make it easier to distinguish
-        val surfaceColor = SurfaceColors.getColorForElevation(requireContext(), 3f)
-        binding.mainContainer.setBackgroundColor(surfaceColor)
-
         binding.playerMotionLayout.addTransitionListener(object : TransitionAdapter() {
             override fun onTransitionChange(
                 motionLayout: MotionLayout?,

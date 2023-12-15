@@ -27,6 +27,7 @@ import com.github.libretube.compat.PictureInPictureCompat
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.ActivityMainBinding
+import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
@@ -96,7 +97,7 @@ class MainActivity : BaseActivity() {
 
         // sets the navigation bar color to the previously calculated color
         window.navigationBarColor = if (binding.bottomNav.menu.size() > 0) {
-            SurfaceColors.getColorForElevation(this, binding.bottomNav.elevation)
+            ThemeHelper.getThemeColor(this, com.google.android.material.R.attr.colorSurfaceContainer)
         } else {
             ThemeHelper.getThemeColor(this, android.R.attr.colorBackground)
         }

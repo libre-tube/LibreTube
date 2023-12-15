@@ -325,7 +325,7 @@ class SubscriptionsFragment : Fragment() {
             showAllAtOnce = false
         )
         binding.subFeed.adapter = feedAdapter
-        binding.toggleSubsText.text = getString(R.string.subscriptions)
+        binding.toggleSubs.text = getString(R.string.subscriptions)
 
         PreferenceHelper.updateLastFeedWatchedTime()
     }
@@ -363,6 +363,6 @@ class SubscriptionsFragment : Fragment() {
         binding.emptyFeed.isVisible = notLoaded
 
         val subCount = subscriptions.size.toLong().formatShort()
-        binding.toggleSubsText.text = "${getString(R.string.subscriptions)} ($subCount)"
+        binding.toggleSubs.text = "${getString(R.string.subscriptions)} ($subCount)"
     }
 }
