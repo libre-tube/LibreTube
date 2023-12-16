@@ -531,4 +531,5 @@
     <string name="invalid_input">无效输入</string>
     <string name="disable_sleep_timer">禁用睡眠定时器</string>
     <string name="start_sleep_timer">开启睡眠定时器</string>
+    <string name="add_to_group">添加到组</string>
 </resources>
