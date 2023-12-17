@@ -48,7 +48,7 @@ class WelcomeActivity : BaseActivity() {
         // ALl the binding values are optional due to two different possible layouts (normal, landscape)
         viewModel.instances.observe(this) { instances ->
             binding.instancesRecycler?.layoutManager = LinearLayoutManager(this@WelcomeActivity)
-            binding.instancesRecycler?.adapter = InstancesAdapter(instances, viewModel) { index ->
+            binding.instancesRecycler?.adapter = InstancesAdapter(instances, viewModel.selectedInstanceIndex.value) { index ->
                 viewModel.selectedInstanceIndex.value = index
                 binding.okay?.alpha = 1f
             }

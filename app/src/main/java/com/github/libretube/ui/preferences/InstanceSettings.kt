@@ -1,26 +1,31 @@
 package com.github.libretube.ui.preferences
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.SwitchPreferenceCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.api.InstanceHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.PipedInstance
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.databinding.SimpleOptionsRecyclerBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.ui.adapters.InstancesAdapter
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.CustomInstanceDialog
 import com.github.libretube.ui.dialogs.DeleteAccountDialog
 import com.github.libretube.ui.dialogs.LoginDialog
 import com.github.libretube.ui.dialogs.LogoutDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -28,6 +33,7 @@ import kotlinx.coroutines.withContext
 class InstanceSettings : BasePreferenceFragment() {
     override val titleResourceId: Int = R.string.instance
     private val token get() = PreferenceHelper.getToken()
+    private var instances = listOf<PipedInstance>()
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.instance_settings, rootKey)
@@ -137,14 +143,11 @@ class InstanceSettings : BasePreferenceFragment() {
         instancePrefs: List<ListPreference>,
         publicInstances: List<PipedInstance>
     ) = runCatching {
-        val customInstanceList = withContext(Dispatchers.IO) {
+        val customInstances = withContext(Dispatchers.IO) {
             Database.customInstanceDao().getAll()
-        }
+        }.map { PipedInstance(it.name, it.apiUrl) }
 
-        val customInstances = customInstanceList
-            .map { PipedInstance(it.name, it.apiUrl) }
-
-        val instances = publicInstances
+        instances = publicInstances
             .plus(customInstances)
             .sortedBy { it.name }
 
@@ -161,6 +164,35 @@ class InstanceSettings : BasePreferenceFragment() {
                     preference.entry
                 }
         }
+    }
+
+    override fun onDisplayPreferenceDialog(preference: Preference) {
+        if (preference.key in arrayOf(PreferenceKeys.FETCH_INSTANCE, PreferenceKeys.AUTH_INSTANCE)) {
+            showInstanceSelectionDialog(preference as ListPreference)
+        } else {
+            super.onDisplayPreferenceDialog(preference)
+        }
+    }
+
+    private fun showInstanceSelectionDialog(preference: ListPreference) {
+        var selectedInstance = preference.value
+        val selectedIndex = instances.indexOfFirst { it.apiUrl == selectedInstance }
+
+        val layoutInflater = LayoutInflater.from(context)
+        val binding = SimpleOptionsRecyclerBinding.inflate(layoutInflater)
+        binding.optionsRecycler.layoutManager = LinearLayoutManager(context)
+        binding.optionsRecycler.adapter = InstancesAdapter(instances, selectedIndex) {
+            selectedInstance = instances[it].apiUrl
+        }
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(preference.title)
+            .setView(binding.root)
+            .setPositiveButton(R.string.okay) { _, _ ->
+                preference.value = selectedInstance
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
     }
 
     private fun logoutAndUpdateUI() {

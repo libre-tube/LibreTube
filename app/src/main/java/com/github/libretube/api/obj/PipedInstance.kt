@@ -17,7 +17,7 @@ data class PipedInstance(
     @SerialName("s3_enabled") val s3Enabled: Boolean = false,
     @SerialName("image_proxy_url") val imageProxyUrl: String = "",
     @SerialName("registration_disabled") val registrationDisabled: Boolean = false,
-    @SerialName("uptime_24h") val uptimeToday: Float = 0f,
-    @SerialName("uptime_7d") val uptimeWeek: Float = 0f,
-    @SerialName("uptime_30d") val uptimeMonth: Float = 0f
+    @SerialName("uptime_24h") val uptimeToday: Float? = null,
+    @SerialName("uptime_7d") val uptimeWeek: Float? = null,
+    @SerialName("uptime_30d") val uptimeMonth: Float? = null
 )
