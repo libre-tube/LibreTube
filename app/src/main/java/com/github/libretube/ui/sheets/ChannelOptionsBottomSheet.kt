@@ -37,15 +37,15 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
 
         // List that stores the different menu options. In the future could be add more options here.
         val optionsList = mutableListOf(
-            getString(R.string.share),
-            getString(R.string.play_latest_videos),
-            getString(R.string.playOnBackground)
+            R.string.share,
+            R.string.play_latest_videos,
+            R.string.playOnBackground
         )
-        if (subscribed) optionsList.add(getString(R.string.add_to_group))
+        if (subscribed) optionsList.add(R.string.add_to_group)
 
-        setSimpleItems(optionsList) { which ->
+        setSimpleItems(optionsList.map { getString(it) }) { which ->
             when (optionsList[which]) {
-                getString(R.string.share) -> {
+                R.string.share -> {
                     val bundle = bundleOf(
                         IntentData.id to channelId,
                         IntentData.shareObjectType to ShareObjectType.CHANNEL,
@@ -56,14 +56,14 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
                     newShareDialog.show(parentFragmentManager, null)
                 }
 
-                getString(R.string.add_to_group) -> {
+                R.string.add_to_group -> {
                     val sheet = AddChannelToGroupSheet().apply {
                         arguments = bundleOf(IntentData.channelId to channelId)
                     }
                     sheet.show(parentFragmentManager, null)
                 }
 
-                getString(R.string.play_latest_videos) -> {
+                R.string.play_latest_videos -> {
                     try {
                         val channel = withContext(Dispatchers.IO) {
                             RetrofitInstance.api.getChannel(channelId)
@@ -80,7 +80,7 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
                     }
                 }
 
-                getString(R.string.playOnBackground) -> {
+                R.string.playOnBackground -> {
                     try {
                         val channel = withContext(Dispatchers.IO) {
                             RetrofitInstance.api.getChannel(channelId)

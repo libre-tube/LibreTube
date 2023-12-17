@@ -46,26 +46,22 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
 
         setTitle(streamItem.title)
 
-        val optionsList = mutableListOf<String>()
+        val optionsList = mutableListOf<Int>()
         if (!isCurrentlyPlaying) {
             optionsList += getOptionsForNotActivePlayback(videoId)
         }
 
-        optionsList += listOf(
-            getString(R.string.addToPlaylist),
-            getString(R.string.download),
-            getString(R.string.share)
-        )
+        optionsList += listOf(R.string.addToPlaylist, R.string.download, R.string.share)
 
-        setSimpleItems(optionsList) { which ->
+        setSimpleItems(optionsList.map { getString(it) }) { which ->
             when (optionsList[which]) {
                 // Start the background mode
-                getString(R.string.playOnBackground) -> {
+                R.string.playOnBackground -> {
                     BackgroundHelper.playOnBackground(requireContext(), videoId)
                     NavigationHelper.startAudioPlayer(requireContext(), true)
                 }
                 // Add Video to Playlist Dialog
-                getString(R.string.addToPlaylist) -> {
+                R.string.addToPlaylist -> {
                     val newAddToPlaylistDialog = AddToPlaylistDialog()
                     newAddToPlaylistDialog.arguments = bundleOf(IntentData.videoId to videoId)
                     newAddToPlaylistDialog.show(
@@ -74,13 +70,13 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                     )
                 }
 
-                getString(R.string.download) -> {
+                R.string.download -> {
                     val newFragment = DownloadDialog()
                     newFragment.arguments = bundleOf(IntentData.videoId to videoId)
                     newFragment.show(parentFragmentManager, DownloadDialog::class.java.name)
                 }
 
-                getString(R.string.share) -> {
+                R.string.share -> {
                     val bundle = bundleOf(
                         IntentData.id to videoId,
                         IntentData.shareObjectType to ShareObjectType.VIDEO,
@@ -92,15 +88,15 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                     newShareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
 
-                getString(R.string.play_next) -> {
+                R.string.play_next -> {
                     PlayingQueue.addAsNext(streamItem)
                 }
 
-                getString(R.string.add_to_queue) -> {
+                R.string.add_to_queue -> {
                     PlayingQueue.add(streamItem)
                 }
 
-                getString(R.string.mark_as_watched) -> {
+                R.string.mark_as_watched -> {
                     val watchPosition = WatchPosition(videoId, Long.MAX_VALUE)
                     withContext(Dispatchers.IO) {
                         DatabaseHolder.Database.watchPositionDao().insert(watchPosition)
@@ -120,7 +116,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                     setFragmentResult(VIDEO_OPTIONS_SHEET_REQUEST_KEY, bundleOf())
                 }
 
-                getString(R.string.mark_as_unwatched) -> {
+                R.string.mark_as_unwatched -> {
                     withContext(Dispatchers.IO) {
                         DatabaseHolder.Database.watchPositionDao().deleteByVideoId(videoId)
                         DatabaseHolder.Database.watchHistoryDao().deleteByVideoId(videoId)
@@ -133,16 +129,14 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
         super.onCreate(savedInstanceState)
     }
 
-    private fun getOptionsForNotActivePlayback(videoId: String): List<String> {
+    private fun getOptionsForNotActivePlayback(videoId: String): List<Int> {
         // List that stores the different menu options. In the future could be add more options here.
-        val optionsList = mutableListOf(
-            getString(R.string.playOnBackground)
-        )
+        val optionsList = mutableListOf(R.string.playOnBackground)
 
         // Check whether the player is running and add queue options
         if (PlayingQueue.isNotEmpty()) {
-            optionsList += getString(R.string.play_next)
-            optionsList += getString(R.string.add_to_queue)
+            optionsList += R.string.play_next
+            optionsList += R.string.add_to_queue
         }
 
         // show the mark as watched or unwatched option if watch positions are enabled
@@ -158,11 +152,11 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                 watchPositionEntry == null ||
                 watchPositionEntry.position < streamItem.duration!! * 1000 * 0.9
             ) {
-                optionsList += getString(R.string.mark_as_watched)
+                optionsList += R.string.mark_as_watched
             }
 
             if (watchHistoryEntry != null || watchPositionEntry != null) {
-                optionsList += getString(R.string.mark_as_unwatched)
+                optionsList += R.string.mark_as_unwatched
             }
         }
 
