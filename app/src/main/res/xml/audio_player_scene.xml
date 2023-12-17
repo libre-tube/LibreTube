@@ -16,6 +16,7 @@
         </KeyFrameSet>
         <OnClick
             motion:clickAction="toggle"
+            motion:duration="500"
             motion:targetId="@+id/miniPlayerControls" />
     </Transition>
 
