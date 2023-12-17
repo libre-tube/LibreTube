@@ -14,12 +14,9 @@
                 motion:framePosition="90"
                 motion:motionTarget="@+id/miniPlayerControls" />
         </KeyFrameSet>
-        <OnSwipe
-            motion:dragDirection="dragDown"
-            motion:dragScale="6"
-            motion:maxAcceleration="40"
-            motion:touchAnchorId="@+id/audio_player_container"
-            motion:touchAnchorSide="bottom" />
+        <OnClick
+            motion:clickAction="toggle"
+            motion:targetId="@+id/miniPlayerControls" />
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
