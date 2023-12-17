@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
-import com.github.libretube.api.obj.Instances
+import com.github.libretube.api.obj.PipedInstance
 import com.github.libretube.databinding.InstanceRowBinding
 import com.github.libretube.ui.models.WelcomeModel
 import com.github.libretube.ui.viewholders.InstancesViewHolder
 
 class InstancesAdapter(
-    private val instances: List<Instances>,
+    private val instances: List<PipedInstance>,
     viewModel: WelcomeModel,
     private val onSelectInstance: (index: Int) -> Unit
 ) : RecyclerView.Adapter<InstancesViewHolder>() {

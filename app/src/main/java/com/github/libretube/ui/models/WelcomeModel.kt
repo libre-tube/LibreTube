@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.github.libretube.api.InstanceHelper
-import com.github.libretube.api.obj.Instances
+import com.github.libretube.api.obj.PipedInstance
 import com.github.libretube.extensions.toastFromMainDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 class WelcomeModel(private val application: Application) : AndroidViewModel(application) {
     val selectedInstanceIndex = MutableLiveData<Int>()
 
-    var instances = MutableLiveData<List<Instances>>()
+    var instances = MutableLiveData<List<PipedInstance>>()
 
     fun fetchInstances() {
         if (!instances.value.isNullOrEmpty()) return
