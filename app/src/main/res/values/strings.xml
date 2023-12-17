@@ -500,6 +500,7 @@
     <string name="time_in_minutes">Time in minutes</string>
     <string name="invalid_input">Invalid input</string>
     <string name="add_to_group">Add to group</string>
+    <string name="uptime">%.2f%% uptime</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
