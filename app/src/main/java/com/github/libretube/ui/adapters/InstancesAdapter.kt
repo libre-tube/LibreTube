@@ -29,13 +29,15 @@ class InstancesAdapter(
     override fun onBindViewHolder(holder: InstancesViewHolder, position: Int) {
         val instance = instances[position]
         holder.binding.apply {
-            var instanceText = "${instance.name}   ${instance.locations}"
-            if (instance.cdn) instanceText += "   (\uD83C\uDF10 CDN)"
+            var instanceText = "${instance.name} ${instance.locations}"
+            if (instance.cdn) instanceText += " (\uD83C\uDF10 CDN)"
             if (instance.registrationDisabled) {
                 instanceText +=
-                    "   (${root.context.getString(R.string.registration_disabled)})"
+                    " (${root.context.getString(R.string.registration_disabled)})"
             }
+            instanceText += ", " + root.context.getString(R.string.uptime, instance.uptimeMonth)
             radioButton.text = instanceText
+
             radioButton.setOnCheckedChangeListener(null)
             radioButton.isChecked = selectedInstanceIndex == position
             radioButton.setOnCheckedChangeListener { _, isChecked ->
