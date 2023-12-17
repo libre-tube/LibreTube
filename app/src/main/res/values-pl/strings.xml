@@ -516,7 +516,7 @@
     <string name="contribute_to_sponsorblock">Wspomóż rozwój SponsorBlock</string>
     <string name="sponsorblock_user_id">ID użytkownika SponsorBlock</string>
     <string name="autoplay_playlists_summary">Automatycznie odtwarzaj następny film na listach odtwarzania, niezależnie od wybranego ustawienia automatycznego odtwarzania</string>
-    <string name="no_fullscreen_resolution">Brak rozdzielczości pełnoekranowej</string>
+    <string name="no_fullscreen_resolution">Rozdzielczość video w trybie pełnoekranowym</string>
     <string name="playback_during_call_summary">Pamiętaj, że wpływa to również na to, że aplikacja nie obsługuje już żadnego rodzaju fokusu dźwięku.</string>
     <string name="donate">Wspomóż</string>
     <string name="music_artists">Artyści YT Muzyki</string>
@@ -540,4 +540,5 @@
     <string name="watched">Obejrzane</string>
     <string name="finished">Ukończone</string>
     <string name="startpage">Główna</string>
+    <string name="add_to_group">Dodaj do grupy</string>
 </resources>
