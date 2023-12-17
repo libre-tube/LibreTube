@@ -10,7 +10,7 @@ import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
 import com.github.libretube.api.InstanceHelper
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.obj.Instances
+import com.github.libretube.api.obj.PipedInstance
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Database
@@ -135,14 +135,14 @@ class InstanceSettings : BasePreferenceFragment() {
 
     private suspend fun initInstancesPref(
         instancePrefs: List<ListPreference>,
-        publicInstances: List<Instances>
+        publicInstances: List<PipedInstance>
     ) = runCatching {
         val customInstanceList = withContext(Dispatchers.IO) {
             Database.customInstanceDao().getAll()
         }
 
         val customInstances = customInstanceList
-            .map { Instances(it.name, it.apiUrl) }
+            .map { PipedInstance(it.name, it.apiUrl) }
 
         val instances = publicInstances
             .plus(customInstances)
