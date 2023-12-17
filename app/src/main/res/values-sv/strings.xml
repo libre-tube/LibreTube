@@ -535,4 +535,5 @@
     <string name="bottom_reached">Botten nådd!</string>
     <string name="finished">Färdig</string>
     <string name="no_segments_found">Det finns inga segment för den här videon ännu.</string>
+    <string name="add_to_group">Lägg till i grupp</string>
 </resources>
