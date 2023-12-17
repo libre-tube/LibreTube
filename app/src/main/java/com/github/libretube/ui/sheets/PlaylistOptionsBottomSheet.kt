@@ -39,36 +39,32 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
         setTitle(playlistName)
 
         // options for the dialog
-        val optionsList = mutableListOf(
-            getString(R.string.playOnBackground)
-        )
+        val optionsList = mutableListOf(R.string.playOnBackground)
 
-        if (PlayingQueue.isNotEmpty()) optionsList.add(getString(R.string.add_to_queue))
+        if (PlayingQueue.isNotEmpty()) optionsList.add(R.string.add_to_queue)
 
         val isBookmarked = runBlocking(Dispatchers.IO) {
             DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId)
         }
 
         if (playlistType == PlaylistType.PUBLIC) {
-            optionsList.add(getString(R.string.share))
-            optionsList.add(getString(R.string.clonePlaylist))
+            optionsList.add(R.string.share)
+            optionsList.add(R.string.clonePlaylist)
 
             // only add the bookmark option to the playlist if public
-            optionsList.add(
-                getString(if (isBookmarked) R.string.remove_bookmark else R.string.add_to_bookmarks)
-            )
+            optionsList.add(if (isBookmarked) R.string.remove_bookmark else R.string.add_to_bookmarks)
         } else {
-            optionsList.add(getString(R.string.renamePlaylist))
-            optionsList.add(getString(R.string.change_playlist_description))
-            optionsList.add(getString(R.string.deletePlaylist))
+            optionsList.add(R.string.renamePlaylist)
+            optionsList.add(R.string.change_playlist_description)
+            optionsList.add(R.string.deletePlaylist)
         }
 
-        setSimpleItems(optionsList) { which ->
+        setSimpleItems(optionsList.map { getString(it) }) { which ->
             val mFragmentManager = (context as BaseActivity).supportFragmentManager
 
             when (optionsList[which]) {
                 // play the playlist in the background
-                getString(R.string.playOnBackground) -> {
+                R.string.playOnBackground -> {
                     val playlist = withContext(Dispatchers.IO) {
                         PlaylistsHelper.getPlaylist(playlistId)
                     }
@@ -81,11 +77,11 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                     }
                 }
 
-                getString(R.string.add_to_queue) -> {
+                R.string.add_to_queue -> {
                     PlayingQueue.insertPlaylist(playlistId, null)
                 }
                 // Clone the playlist to the users Piped account
-                getString(R.string.clonePlaylist) -> {
+                R.string.clonePlaylist -> {
                     val context = requireContext()
                     val playlistId = withContext(Dispatchers.IO) {
                         runCatching {
@@ -97,7 +93,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                     )
                 }
                 // share the playlist
-                getString(R.string.share) -> {
+                R.string.share -> {
                     val newShareDialog = ShareDialog()
                     newShareDialog.arguments = bundleOf(
                         IntentData.id to playlistId,
@@ -108,7 +104,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                     newShareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
 
-                getString(R.string.deletePlaylist) -> {
+                R.string.deletePlaylist -> {
                     val newDeletePlaylistDialog = DeletePlaylistDialog()
                     newDeletePlaylistDialog.arguments = bundleOf(
                         IntentData.playlistId to playlistId,
@@ -117,7 +113,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                     newDeletePlaylistDialog.show(mFragmentManager, null)
                 }
 
-                getString(R.string.renamePlaylist) -> {
+                R.string.renamePlaylist -> {
                     val newRenamePlaylistDialog = RenamePlaylistDialog()
                     newRenamePlaylistDialog.arguments = bundleOf(
                         IntentData.playlistId to playlistId,
@@ -126,7 +122,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                     newRenamePlaylistDialog.show(mFragmentManager, null)
                 }
 
-                getString(R.string.change_playlist_description) -> {
+                R.string.change_playlist_description -> {
                     val newPlaylistDescriptionDialog = PlaylistDescriptionDialog()
                     newPlaylistDescriptionDialog.arguments = bundleOf(
                         IntentData.playlistId to playlistId,

@@ -22,22 +22,22 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
             R.string.go_to_video,
             R.string.share,
             R.string.delete
-        ).map { getString(it) }
+        )
 
-        setSimpleItems(options) { selectedIndex ->
-            when (selectedIndex) {
-                0 -> {
+        setSimpleItems(options.map { getString(it) }) { which ->
+            when (options[which]) {
+                R.string.playOnBackground -> {
                     val playerIntent = Intent(requireContext(), OfflinePlayerService::class.java)
                         .putExtra(IntentData.videoId, videoId)
                     context?.stopService(playerIntent)
                     ContextCompat.startForegroundService(requireContext(), playerIntent)
                 }
 
-                1 -> {
+                R.string.go_to_video -> {
                     NavigationHelper.navigateVideo(requireContext(), videoId = videoId)
                 }
 
-                2 -> {
+                R.string.share -> {
                     val shareData = ShareData(currentVideo = videoId)
                     val bundle = bundleOf(
                         IntentData.id to videoId,
@@ -49,7 +49,7 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
                     newShareDialog.show(parentFragmentManager, null)
                 }
 
-                3 -> {
+                R.string.delete -> {
                     setFragmentResult(DELETE_DOWNLOAD_REQUEST_KEY, bundleOf())
                     dialog?.dismiss()
                 }
