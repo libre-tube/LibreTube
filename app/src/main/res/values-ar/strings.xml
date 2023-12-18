@@ -548,4 +548,5 @@
     <string name="disable_sleep_timer">تعطيل مؤقت النوم</string>
     <string name="start_sleep_timer">بدء مؤقت النوم</string>
     <string name="add_to_group">إضافة إلى المجموعة</string>
+    <string name="uptime">وقت تشغيل %.2f%%</string>
 </resources>
