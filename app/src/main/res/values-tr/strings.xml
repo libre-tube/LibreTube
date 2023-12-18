@@ -534,4 +534,6 @@
     <string name="segment_submitted">Bölüm gönderildi</string>
     <string name="remember_playback_speed">Oynatma hızını hatırla</string>
     <string name="downvote">Olumsuz</string>
+    <string name="add_to_group">Gruba ekle</string>
+    <string name="uptime">%%%.2f çalışma zamanı</string>
 </resources>

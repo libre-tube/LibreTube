@@ -534,4 +534,6 @@
     <string name="start_sleep_timer">ਸਲੀਪ ਟਾਈਮਰ ਸ਼ੁਰੂ ਕਰੋ</string>
     <string name="finished">ਸਮਾਪਤ</string>
     <string name="no_segments_found">ਇਸ ਵੀਡੀਓ ਲਈ ਅਜੇ ਤੱਕ ਕੋਈ ਸੈਗਮੈਂਟ ਨਹੀਂ ਹਨ।</string>
+    <string name="add_to_group">ਗਰੁੱਪ ਵਿੱਚ ਸ਼ਾਮਿਲ ਕਰੋ</string>
+    <string name="uptime">%.2f%% ਅੱਪਟਾਈਮ</string>
 </resources>

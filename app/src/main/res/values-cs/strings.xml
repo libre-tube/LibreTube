@@ -538,4 +538,5 @@
     <string name="disable_sleep_timer">Vypnout časovač spánku</string>
     <string name="start_sleep_timer">Spustit časovač spánku</string>
     <string name="add_to_group">Přidat do skupiny</string>
+    <string name="uptime">Doba online %.2f%%</string>
 </resources>

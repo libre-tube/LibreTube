@@ -469,7 +469,7 @@
     <string name="dearrow">DeArrow\'u Aktivləşdir</string>
     <string name="dearrow_summary">Daha dəqiq və daha az sensasiyalı başlıqlar və miniatürlər göstər. Yüklənilmə müddətin artırır.</string>
     <string name="visibility">Görünmə</string>
-    <string name="visibility_public">Ümumi</string>
+    <string name="visibility_public">İctimai</string>
     <string name="visibility_unlisted">Siyahıdan kənar</string>
     <string name="sort_by">Çeşidlə</string>
     <string name="uploader_name">Yükləyicinin adı</string>
@@ -535,4 +535,5 @@
     <string name="disable_sleep_timer">Yuxu taymerin qeyri-aktiv et</string>
     <string name="start_sleep_timer">Yuxu taymerin başlat</string>
     <string name="add_to_group">Qrupa əlavə et</string>
+    <string name="uptime">%.2f%% işləmə vaxtı</string>
 </resources>
