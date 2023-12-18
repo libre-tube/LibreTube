@@ -532,4 +532,6 @@
     <string name="bottom_reached">已達底部！</string>
     <string name="finished">已結束</string>
     <string name="no_segments_found">此影片尚無任何片段。</string>
+    <string name="add_to_group">新增至群組</string>
+    <string name="uptime">%.2f%% 正常運作時間</string>
 </resources>
