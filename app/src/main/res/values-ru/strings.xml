@@ -541,4 +541,5 @@
     <string name="disable_sleep_timer">Остановить таймер сна</string>
     <string name="start_sleep_timer">Запустить таймер сна</string>
     <string name="add_to_group">Добавить в группу</string>
+    <string name="uptime">%.2f%% доступность</string>
 </resources>
