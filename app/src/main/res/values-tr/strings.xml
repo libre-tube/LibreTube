@@ -43,7 +43,7 @@
     <string name="instances">Seç…</string>
     <string name="customInstance">Özel</string>
     <string name="server_error">Seçilen sunucu ile ilgili bir sorun var. Başka bir sunucu deneyin.</string>
-    <string name="grid">Sütun sayısı</string>
+    <string name="grid">Sütun sayısı (dikey)</string>
     <string name="import_from_yt_summary">YouTube veya NewPipe\'tan</string>
     <string name="emptyPlaylistName">Oynatma listesi adı boş olamaz</string>
     <string name="subscriptions">Abonelikler</string>
@@ -536,4 +536,5 @@
     <string name="downvote">Olumsuz</string>
     <string name="add_to_group">Gruba ekle</string>
     <string name="uptime">%%%.2f çalışma zamanı</string>
+    <string name="grid_landscape">Sütun sayısı (yatay)</string>
 </resources>
