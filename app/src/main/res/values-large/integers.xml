@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="grid_items">2</integer>
+    <integer name="grid_items_landscape">4</integer>
 </resources>

@@ -26,9 +26,9 @@
         tools:layout="@layout/fragment_library" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.github.libretube.ui.fragments.SearchFragment"
+        android:name="com.github.libretube.ui.fragments.SearchSuggestionsFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search_suggestions" />
     <fragment
         android:id="@+id/searchResultFragment"
         android:name="com.github.libretube.ui.fragments.SearchResultFragment"

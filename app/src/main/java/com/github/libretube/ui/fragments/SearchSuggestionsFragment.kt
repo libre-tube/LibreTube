@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.databinding.FragmentSearchBinding
+import com.github.libretube.databinding.FragmentSearchSuggestionsBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.extensions.TAG
 import com.github.libretube.helpers.PreferenceHelper
@@ -26,8 +26,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class SearchFragment : Fragment() {
-    private var _binding: FragmentSearchBinding? = null
+class SearchSuggestionsFragment : Fragment() {
+    private var _binding: FragmentSearchSuggestionsBinding? = null
     private val binding get() = _binding!!
     private val viewModel: SearchViewModel by activityViewModels()
 
@@ -41,7 +41,7 @@ class SearchFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSearchBinding.inflate(inflater)
+        _binding = FragmentSearchSuggestionsBinding.inflate(inflater)
         return binding.root
     }
 

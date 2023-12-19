@@ -11,21 +11,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.databinding.FragmentDownloadsBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.DownloadWithItems
+import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.obj.DownloadStatus
 import com.github.libretube.receivers.DownloadReceiver
 import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.adapters.DownloadsAdapter
+import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
 import kotlin.io.path.fileSize
 import kotlinx.coroutines.Dispatchers
@@ -34,7 +35,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class DownloadsFragment : Fragment() {
+class DownloadsFragment : DynamicLayoutManagerFragment() {
     private var _binding: FragmentDownloadsBinding? = null
     private val binding get() = _binding!!
 
@@ -72,6 +73,10 @@ class DownloadsFragment : Fragment() {
         return binding.root
     }
 
+    override fun setLayoutManagers(gridItems: Int) {
+        _binding?.downloads?.layoutManager = GridLayoutManager(context, gridItems.ceilHalf())
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -84,8 +89,6 @@ class DownloadsFragment : Fragment() {
 
         binding.downloadsEmpty.isGone = true
         binding.downloads.isVisible = true
-
-        binding.downloads.layoutManager = LinearLayoutManager(context)
 
         val adapter = DownloadsAdapter(requireContext(), downloads) {
             var isDownloading = false

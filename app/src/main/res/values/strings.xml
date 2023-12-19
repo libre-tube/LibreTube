@@ -39,7 +39,8 @@
     <string name="empty">You have to enter a username and password.</string>
     <string name="notgmail">This is for a Piped account.</string>
     <string name="defres">Video resolution</string>
-    <string name="grid">Grid columns</string>
+    <string name="grid">Grid columns (portrait)</string>
+    <string name="grid_landscape">Grid columns (landscape)</string>
     <string name="emptyList">Nothing here.</string>
     <string name="deletePlaylist">Delete playlist</string>
     <string name="areYouSure">Delete the playlist?</string>

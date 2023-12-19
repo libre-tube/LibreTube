@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isGone
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
@@ -17,6 +16,7 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.adapters.VideosAdapter
+import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.util.deArrow
 import com.google.android.material.snackbar.Snackbar
 import java.io.IOException
@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
-class TrendsFragment : Fragment() {
+class TrendsFragment : DynamicLayoutManagerFragment() {
     private var _binding: FragmentTrendsBinding? = null
     private val binding get() = _binding!!
 
@@ -36,6 +36,10 @@ class TrendsFragment : Fragment() {
     ): View {
         _binding = FragmentTrendsBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun setLayoutManagers(gridItems: Int) {
+        _binding?.recview?.layoutManager = VideosAdapter.getLayout(requireContext(), gridItems)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -87,7 +91,6 @@ class TrendsFragment : Fragment() {
             }
 
             binding.recview.adapter = VideosAdapter(response.toMutableList())
-            binding.recview.layoutManager = VideosAdapter.getLayout(requireContext())
         }
     }
 }
