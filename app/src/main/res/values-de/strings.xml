@@ -115,7 +115,7 @@
     <string name="playback_speed">Wiedergabegeschwindigkeit</string>
     <string name="advanced">Optionen für Fortgeschrittene</string>
     <string name="player">Player</string>
-    <string name="appearance_summary">Aussehen, Anordnung und Layout</string>
+    <string name="appearance_summary">Anpassung von Aussehen, Anordnung und Layout.</string>
     <string name="live">Live</string>
     <string name="shareTo">URL teilen an</string>
     <string name="defaultIcon">Standard</string>
@@ -535,4 +535,6 @@
     <string name="bottom_reached">Unten angekommen!</string>
     <string name="finished">Fertig</string>
     <string name="no_segments_found">Für dieses Video sind bisher keine Abschnitte vorhanden.</string>
+    <string name="add_to_group">Zur Gruppe hinzufügen</string>
+    <string name="uptime">%.2f%% Betriebszeit</string>
 </resources>

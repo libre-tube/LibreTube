@@ -539,4 +539,5 @@
     <string name="disable_sleep_timer">Desactivar el temporizador de apagado</string>
     <string name="start_sleep_timer">Iniciar temporizador de apagado automático</string>
     <string name="add_to_group">Añadir al grupo</string>
+    <string name="uptime">%.2f%% tiempo de actividad</string>
 </resources>

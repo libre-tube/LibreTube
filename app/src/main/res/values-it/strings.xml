@@ -538,4 +538,6 @@
     <string name="invalid_input">Input non valido</string>
     <string name="disable_sleep_timer">Disattiva timer per dormire</string>
     <string name="start_sleep_timer">Avvia timer per dormire</string>
+    <string name="add_to_group">Aggiungi al gruppo</string>
+    <string name="uptime">%.2f%% disponibile</string>
 </resources>
