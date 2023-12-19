@@ -514,13 +514,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         playerBinding.speedShortcut.setOnClickListener {
-            PlaybackOptionsSheet(exoPlayer).show(childFragmentManager,null)
+            PlaybackOptionsSheet(exoPlayer).show(childFragmentManager, null)
         }
 
         playerBinding.speedShortcut.setOnLongClickListener {
             val defaultSpeed = 1f
             exoPlayer.setPlaybackSpeed(defaultSpeed)
-            Toast.makeText(context,R.string.resetspeedshortcut,Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, R.string.resetspeedshortcut, Toast.LENGTH_SHORT).show()
             return@setOnLongClickListener true
         }
 
