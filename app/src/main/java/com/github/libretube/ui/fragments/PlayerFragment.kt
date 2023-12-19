@@ -105,6 +105,7 @@ import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.ChaptersBottomSheet
 import com.github.libretube.ui.sheets.CommentsSheet
+import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.sheets.StatsSheet
 import com.github.libretube.util.NowPlayingNotification
@@ -114,7 +115,6 @@ import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
 import com.github.libretube.util.YoutubeHlsPlaylistParser
 import com.github.libretube.util.deArrow
-import com.google.android.material.elevation.SurfaceColors
 import java.io.IOException
 import java.util.*
 import java.util.concurrent.Executors
@@ -511,6 +511,17 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playerBinding.queueToggle.isVisible = true
         playerBinding.queueToggle.setOnClickListener {
             PlayingQueueSheet().show(childFragmentManager, null)
+        }
+
+        playerBinding.speedShortcut.setOnClickListener {
+            PlaybackOptionsSheet(exoPlayer).show(childFragmentManager,null)
+        }
+
+        playerBinding.speedShortcut.setOnLongClickListener {
+            val defaultSpeed = 1f
+            exoPlayer.setPlaybackSpeed(defaultSpeed)
+            Toast.makeText(context,R.string.resetspeedshortcut,Toast.LENGTH_SHORT).show()
+            return@setOnLongClickListener true
         }
 
         // FullScreen button trigger

@@ -501,6 +501,7 @@
     <string name="invalid_input">Invalid input</string>
     <string name="add_to_group">Add to group</string>
     <string name="uptime">%.2f%% uptime</string>
+    <string name="resetspeedshortcut">Playback speed is normal(1.0)</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
