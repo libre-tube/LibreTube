@@ -94,6 +94,15 @@
             app:title="@string/grid"
             app:useSimpleSummaryProvider="true" />
 
+        <ListPreference
+            android:icon="@drawable/ic_grid"
+            app:defaultValue="@integer/grid_items_landscape"
+            app:entries="@array/grid"
+            app:entryValues="@array/grid"
+            app:key="grid_landscape"
+            app:title="@string/grid_landscape"
+            app:useSimpleSummaryProvider="true" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

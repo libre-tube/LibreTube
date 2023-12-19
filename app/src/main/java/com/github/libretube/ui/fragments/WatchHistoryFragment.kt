@@ -10,11 +10,10 @@ import androidx.core.os.postDelayed
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
@@ -23,11 +22,13 @@ import com.github.libretube.databinding.FragmentWatchHistoryBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.WatchHistoryItem
+import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.ui.adapters.WatchHistoryAdapter
+import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.util.PlayingQueue
@@ -36,7 +37,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class WatchHistoryFragment : Fragment() {
+class WatchHistoryFragment : DynamicLayoutManagerFragment() {
     private var _binding: FragmentWatchHistoryBinding? = null
     private val binding get() = _binding!!
 
@@ -68,6 +69,10 @@ class WatchHistoryFragment : Fragment() {
     ): View {
         _binding = FragmentWatchHistoryBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun setLayoutManagers(gridItems: Int) {
+        _binding?.watchHistoryRecView?.layoutManager = GridLayoutManager(context, gridItems.ceilHalf())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -163,7 +168,6 @@ class WatchHistoryFragment : Fragment() {
             )
         }
 
-        binding.watchHistoryRecView.layoutManager = LinearLayoutManager(context)
         binding.watchHistoryRecView.adapter = watchHistoryAdapter
         binding.historyEmpty.isGone = true
         binding.historyScrollView.isVisible = true

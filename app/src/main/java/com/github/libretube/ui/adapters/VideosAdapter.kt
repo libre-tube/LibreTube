@@ -9,7 +9,6 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.github.libretube.R
@@ -19,6 +18,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.AllCaughtUpRowBinding
 import com.github.libretube.databinding.TrendingRowBinding
 import com.github.libretube.databinding.VideoRowBinding
+import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
@@ -219,21 +219,15 @@ class VideosAdapter(
             RELATED_COLUMN
         }
 
-        fun getLayout(context: Context): LayoutManager {
+        fun getLayout(context: Context, gridItems: Int): LayoutManager {
             return if (PreferenceHelper.getBoolean(
                     PreferenceKeys.ALTERNATIVE_VIDEOS_LAYOUT,
                     false
                 )
             ) {
-                LinearLayoutManager(context)
+                GridLayoutManager(context, gridItems.ceilHalf())
             } else {
-                GridLayoutManager(
-                    context,
-                    PreferenceHelper.getString(
-                        PreferenceKeys.GRID_COLUMNS,
-                        context.resources.getInteger(R.integer.grid_items).toString()
-                    ).toInt()
-                )
+                GridLayoutManager(context, gridItems)
             }
         }
 
