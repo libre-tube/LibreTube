@@ -20,7 +20,7 @@
     <string name="app_theme">Motiv aplikace</string>
     <string name="server_error">Zdá se, že s vybraným serverem je problém. Zkuste jinou instanci.</string>
     <string name="unknown_error">Chyba sítě.</string>
-    <string name="grid">Sloupce mřížky</string>
+    <string name="grid">Sloupce mřížky (na výšku)</string>
     <string name="emptyList">Nic tu není.</string>
     <string name="deletePlaylist">Odstranit playlist</string>
     <string name="areYouSure">Opravdu chcete odstranit tento playlist\?</string>
@@ -539,4 +539,5 @@
     <string name="start_sleep_timer">Spustit časovač spánku</string>
     <string name="add_to_group">Přidat do skupiny</string>
     <string name="uptime">Doba online %.2f%%</string>
+    <string name="grid_landscape">Sloupce mřížky (na šířku)</string>
 </resources>
