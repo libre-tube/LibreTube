@@ -30,7 +30,7 @@
     <string name="empty">Debes introducir un nombre de usuario y una contraseña.</string>
     <string name="notgmail">en cuenta de Piped.</string>
     <string name="defres">Resolución de vídeo</string>
-    <string name="grid">Columnas de la cuadrícula</string>
+    <string name="grid">Columnas de la cuadrícula (vertical)</string>
     <string name="emptyList">No hay nada aquí.</string>
     <string name="areYouSure">¿Eliminar la lista de reproducción\?</string>
     <string name="playlistCreated">Lista de reproducción creada.</string>
@@ -540,4 +540,5 @@
     <string name="start_sleep_timer">Iniciar temporizador de apagado automático</string>
     <string name="add_to_group">Añadir al grupo</string>
     <string name="uptime">%.2f%% tiempo de actividad</string>
+    <string name="grid_landscape">Columnas de la cuadrícula (horizontal)</string>
 </resources>
