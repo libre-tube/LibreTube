@@ -34,8 +34,10 @@ class SliderPreference(
     }
 
     private var prefValue: Float
-        get() = PreferenceHelper.getString(key, defValue.toString()).toFloat()
+        get() = PreferenceHelper.getString(key, defValue.toString()).toFloat().ensureValid()
         set(value) = PreferenceHelper.putString(key, value.toString())
+
+    private fun Float.ensureValid(): Float = this - (this % stepSize)
 
     override fun getSummary(): CharSequence = getDisplayedCurrentValue(prefValue)
 
