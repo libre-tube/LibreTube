@@ -7,9 +7,8 @@ import androidx.fragment.app.Fragment
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.helpers.PreferenceHelper
-import kotlin.math.min
 
-abstract class DynamicLayoutManagerFragment: Fragment() {
+abstract class DynamicLayoutManagerFragment : Fragment() {
     abstract fun setLayoutManagers(gridItems: Int)
 
     private fun getGridItemsCount(orientation: Int): Int {

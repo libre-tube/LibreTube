@@ -114,7 +114,6 @@ import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
 import com.github.libretube.util.YoutubeHlsPlaylistParser
 import com.github.libretube.util.deArrow
-import com.google.android.material.elevation.SurfaceColors
 import java.io.IOException
 import java.util.*
 import java.util.concurrent.Executors

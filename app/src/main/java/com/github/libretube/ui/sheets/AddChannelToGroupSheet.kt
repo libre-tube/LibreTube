@@ -14,7 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class AddChannelToGroupSheet: ExpandedBottomSheet() {
+class AddChannelToGroupSheet : ExpandedBottomSheet() {
     private lateinit var channelId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -32,7 +32,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
-import kotlin.math.ceil
 
 class SearchResultFragment : DynamicLayoutManagerFragment() {
     private var _binding: FragmentSearchResultBinding? = null

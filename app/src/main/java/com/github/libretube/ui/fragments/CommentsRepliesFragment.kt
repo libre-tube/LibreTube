@@ -93,10 +93,7 @@ class CommentsRepliesFragment : Fragment() {
         _binding = null
     }
 
-    private fun loadInitialReplies(
-        videoId: String,
-        nextPage: String
-    ) {
+    private fun loadInitialReplies(videoId: String, nextPage: String) {
         _binding?.progress?.isVisible = true
         fetchReplies(videoId, nextPage)
     }
