@@ -34,7 +34,7 @@
     <string name="empty">必須輸入使用者名稱和密碼。</string>
     <string name="notgmail">此為Piped帳號。</string>
     <string name="defres">影片解析度</string>
-    <string name="grid">格線佈局</string>
+    <string name="grid">格線佈局（縱向）</string>
     <string name="emptyList">空空如也。</string>
     <string name="deletePlaylist">刪除播放清單</string>
     <string name="areYouSure">確認刪除播放清單？</string>
@@ -534,4 +534,5 @@
     <string name="no_segments_found">此影片尚無任何片段。</string>
     <string name="add_to_group">新增至群組</string>
     <string name="uptime">%.2f%% 正常運作時間</string>
+    <string name="grid_landscape">格線佈局（橫向）</string>
 </resources>
