@@ -29,7 +29,7 @@
     <string name="error">Etwas ist schiefgelaufen.</string>
     <string name="notgmail">Dies ist für ein Piped-Konto.</string>
     <string name="defres">Video-Auflösung</string>
-    <string name="grid">Spaltenanzahl</string>
+    <string name="grid">Spaltenanzahl im Hochformat</string>
     <string name="emptyList">Gähnende Leere.</string>
     <string name="success">Fertig.</string>
     <string name="yes">Ja</string>
@@ -115,7 +115,7 @@
     <string name="playback_speed">Wiedergabegeschwindigkeit</string>
     <string name="advanced">Optionen für Fortgeschrittene</string>
     <string name="player">Player</string>
-    <string name="appearance_summary">Anpassung von Aussehen, Anordnung und Layout.</string>
+    <string name="appearance_summary">Aussehen, Anordnung und Layout</string>
     <string name="live">Live</string>
     <string name="shareTo">URL teilen an</string>
     <string name="defaultIcon">Standard</string>
