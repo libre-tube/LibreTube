@@ -67,7 +67,7 @@
     <string name="darkTheme">深色</string>
     <string name="okay">确定</string>
     <string name="music_songs">YT Music 歌曲</string>
-    <string name="grid">网格列</string>
+    <string name="grid">网格列（竖屏）</string>
     <string name="deletePlaylist">删除播放列表</string>
     <string name="areYouSure">要删除这个播放列表吗？</string>
     <string name="createPlaylist">创建播放列表</string>
@@ -533,4 +533,5 @@
     <string name="start_sleep_timer">开启睡眠定时器</string>
     <string name="add_to_group">添加到组</string>
     <string name="uptime">%.2f%% 在线时间</string>
+    <string name="grid_landscape">网格列（横屏）</string>
 </resources>
