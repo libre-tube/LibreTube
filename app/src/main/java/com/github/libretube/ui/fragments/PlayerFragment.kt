@@ -114,7 +114,6 @@ import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
 import com.github.libretube.util.YoutubeHlsPlaylistParser
 import com.github.libretube.util.deArrow
-import com.google.android.material.elevation.SurfaceColors
 import java.io.IOException
 import java.util.*
 import java.util.concurrent.Executors
@@ -201,8 +200,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     private val fullscreenDialog by lazy {
         object : Dialog(requireContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen) {
+            @Deprecated("Deprecated in Java", ReplaceWith("onbackpressedispatcher and callback"))
             override fun onBackPressed() {
-                super.onBackPressed()
                 unsetFullscreen()
             }
         }
