@@ -165,6 +165,12 @@ object PlayerHelper {
             true
         )
 
+    val useRichCaptionRendering: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.RICH_CAPTION_RENDERING,
+            false
+        )
+
     private val bufferingGoal: Int
         get() = PreferenceHelper.getString(
             PreferenceKeys.BUFFERING_GOAL,

@@ -123,6 +123,12 @@
             app:key="caption_settings"
             app:title="@string/caption_settings" />
 
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_caption"
+            app:defaultValue="false"
+            app:key="rich_caption_rendering"
+            app:title="@string/rich_caption_rendering" />
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/queue">
