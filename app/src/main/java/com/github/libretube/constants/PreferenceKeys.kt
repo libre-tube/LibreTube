@@ -71,6 +71,7 @@ object PreferenceKeys {
     const val SEARCH_HISTORY_TOGGLE = "search_history_toggle"
     const val SYSTEM_CAPTION_STYLE = "system_caption_style"
     const val CAPTION_SETTINGS = "caption_settings"
+    const val RICH_CAPTION_RENDERING = "rich_caption_rendering"
     const val SEEK_INCREMENT = "seek_increment"
     const val DEFAULT_RESOLUTION = "default_res"
     const val DEFAULT_RESOLUTION_MOBILE = "default_res_mobile"

@@ -605,8 +605,8 @@ open class CustomExoPlayerView(
         val captionStyle = PlayerHelper.getCaptionStyle(context)
         subtitleView?.apply {
             setApplyEmbeddedFontSizes(false)
-            setViewType(SubtitleView.VIEW_TYPE_WEB)
             setFixedTextSize(Cue.TEXT_SIZE_TYPE_ABSOLUTE, PlayerHelper.captionsTextSize)
+            if (PlayerHelper.useRichCaptionRendering) setViewType(SubtitleView.VIEW_TYPE_WEB)
             if (!PlayerHelper.useSystemCaptionStyle) return
             setApplyEmbeddedStyles(captionStyle == CaptionStyleCompat.DEFAULT)
             setStyle(captionStyle)
