@@ -33,7 +33,7 @@
     <string name="empty">Вы должны ввести имя пользователя и пароль.</string>
     <string name="notgmail">Для использования аккаунта Piped.</string>
     <string name="defres">Разрешение видео</string>
-    <string name="grid">Столбцы сетки</string>
+    <string name="grid">Столбцы (в вертикальном режиме)</string>
     <string name="emptyList">Ничего нет.</string>
     <string name="deletePlaylist">Удалить плейлист</string>
     <string name="areYouSure">Удалить плейлист\?</string>
@@ -542,4 +542,5 @@
     <string name="start_sleep_timer">Запустить таймер сна</string>
     <string name="add_to_group">Добавить в группу</string>
     <string name="uptime">%.2f%% доступность</string>
+    <string name="grid_landscape">Столбцы (в горизонтальном режиме)</string>
 </resources>

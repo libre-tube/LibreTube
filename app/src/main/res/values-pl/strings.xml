@@ -29,7 +29,7 @@
     <string name="unknown_error">Błąd sieci.</string>
     <string name="error">Coś poszło nie tak.</string>
     <string name="notgmail">Dotyczy konta Piped.</string>
-    <string name="defres">Rozdzielczość wideo</string>
+    <string name="defres">Rozdzielczość wideo w trybie pełnoekranowym</string>
     <string name="grid">Kolumny siatki</string>
     <string name="emptyList">Tu jeszcze nic nie ma.</string>
     <string name="deletePlaylist">Usuń playlistę</string>
@@ -462,7 +462,7 @@
     <string name="choose_instance_long">Wybierz poniżej instancję Piped, której chcesz użyć. Instancja Piped będzie działać jako pośrednik między Tobą a YouTube. Instancje te znajdują się w różnych fizycznych lokalizacjach — na co wskazują ich flagi państwowe. Instancje fizycznie bliżej ciebie są prawdopodobnie szybsze niż instancje, które nie są. W każdej chwili możesz zmienić używaną instancję w ustawieniach.</string>
     <string name="fallback_piped_proxy">Powrót do proxy Piped</string>
     <string name="home_tab_content">Zawartość strony głównej</string>
-    <string name="jumped_to_highlight">Skocz do wyróżnionego filmu</string>
+    <string name="jumped_to_highlight">Przeskocz do wyróżnionego filmu</string>
     <string name="category_highlight_description">Może to być reklamowany tytuł, miniatura lub najciekawsza część filmu. Możesz przejść do niego, dotykając go w sekcji rozdziałów.</string>
     <string name="show_search_suggestions">Pokaż sugestie wyszukiwania</string>
     <string name="stop">Zatrzymaj</string>
@@ -516,13 +516,13 @@
     <string name="contribute_to_sponsorblock">Wspomóż rozwój SponsorBlock</string>
     <string name="sponsorblock_user_id">ID użytkownika SponsorBlock</string>
     <string name="autoplay_playlists_summary">Automatycznie odtwarzaj następny film na listach odtwarzania, niezależnie od wybranego ustawienia automatycznego odtwarzania</string>
-    <string name="no_fullscreen_resolution">Rozdzielczość video w trybie pełnoekranowym</string>
+    <string name="no_fullscreen_resolution">Rozdzielczość wideo w trybie nie-pełnoekranowym</string>
     <string name="playback_during_call_summary">Pamiętaj, że wpływa to również na to, że aplikacja nie obsługuje już żadnego rodzaju fokusu dźwięku.</string>
     <string name="donate">Wspomóż</string>
     <string name="music_artists">Artyści YT Muzyki</string>
     <string name="playback_during_call">Kontynuuj odtwarzanie podczas rozmowy telefonicznej</string>
     <string name="autoplay_playlists">Automatyczne odtwarzanie list odtwarzania</string>
-    <string name="same_as_fullscreen">Tak samo jak w trybie pełnoekranowym</string>
+    <string name="same_as_fullscreen">Taka sama jak w trybie pełnoekranowym</string>
     <string name="remember_playback_speed">Zapamiętaj prędkość odtwarzania</string>
     <string name="vote_for_segment">Zagłosuj na segment</string>
     <string name="upvote">W górę</string>

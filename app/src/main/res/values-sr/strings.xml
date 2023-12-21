@@ -29,7 +29,7 @@
     <string name="error">Нешто није у реду.</string>
     <string name="empty">Морате да унесете корисничко име и лозинку.</string>
     <string name="defres">Резолуција видео снимка</string>
-    <string name="grid">Мрежне колоне</string>
+    <string name="grid">Мрежне колоне (усправно)</string>
     <string name="emptyList">Овде нема ничега.</string>
     <string name="addToPlaylist">Додај на плејлисту</string>
     <string name="createPlaylist">Направи плејлисту</string>
@@ -540,4 +540,5 @@
     <string name="start_sleep_timer">Покрени тајмер спавања</string>
     <string name="add_to_group">Додај у групу</string>
     <string name="uptime">Време рада: %.2f%%</string>
+    <string name="grid_landscape">Мрежне колоне (водоравно)</string>
 </resources>

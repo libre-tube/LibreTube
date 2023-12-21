@@ -29,7 +29,7 @@
     <string name="empty">لا يمكن أن يكون اسم المستخدم وكلمة المرور فارغين.</string>
     <string name="notgmail">هذا لحساب Piped.</string>
     <string name="defres">دقة الفيديو</string>
-    <string name="grid">أعمدة الشبكة</string>
+    <string name="grid">أعمدة الشبكة (عمودي)</string>
     <string name="emptyList">لا شيء هنا.</string>
     <string name="deletePlaylist">حذف قائمة التشغيل</string>
     <string name="areYouSure">حذف قائمة التشغيل؟</string>
@@ -549,4 +549,5 @@
     <string name="start_sleep_timer">بدء مؤقت النوم</string>
     <string name="add_to_group">إضافة إلى المجموعة</string>
     <string name="uptime">وقت تشغيل %.2f%%</string>
+    <string name="grid_landscape">أعمدة الشبكة (أفقي)</string>
 </resources>
