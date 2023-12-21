@@ -506,4 +506,21 @@
     <string name="downvote">Non me place</string>
     <string name="lbry_hls_summary">Usar LBRY HLS pro le fluxos si es disponibile</string>
     <string name="duration_reversed">Duration (invertite)</string>
+    <string name="vote_for_segment">Votar per le segmento</string>
+    <string name="pinch_control">Controlo de pinciamento</string>
+    <string name="change_region">Tendentias non pare esser disponibile pro le region actual. Selige altere in le parametros.</string>
+    <string name="break_reminder_time">Minutas ante de esser rememorate</string>
+    <string name="watch_history_summary">Mantener le controlo del videos reguardate localmente</string>
+    <string name="alternative_pip_controls_summary">Monstrar solmente audio e saltar controlos in Imagine-in-Imagine in vice de avantiar e rebobinar</string>
+    <string name="swipe_controls_summary">Glissar pro adjustar le luminositate e volumine.</string>
+    <string name="swipe_controls">Controlos de glissamento</string>
+    <string name="tooltip_scroll_to_top">Rolar al alto</string>
+    <string name="tooltip_sponsorblock">Commutar SponsorBlock</string>
+    <string name="pinch_control_summary">Usa le pinciamento pro aggrandir/diminuer.</string>
+    <string name="sb_color_enable">Commutar colores personalisate pro le segmentos de SponsorBlock.</string>
+    <string name="double_tap_seek_summary">Tocca duo vices al sinistra o dextra pro rebobinar o avantiar le position del reproductor.</string>
+    <string name="no_segments_found">Il non ha ancora segmentos pro iste video.</string>
+    <string name="successfully_removed_from_playlist">Removite con successo \"%1$s\" ab le lista de reproduction.</string>
+    <string name="failed_fetching_instances">Non poteva recuperar le instantias disponibile.</string>
+    <string name="new_videos_badge_summary">Monstrar un insignia con le quantitate de nove videos si il ha alicun.</string>
 </resources>
