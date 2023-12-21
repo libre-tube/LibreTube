@@ -127,7 +127,8 @@
             android:icon="@drawable/ic_caption"
             app:defaultValue="false"
             app:key="rich_caption_rendering"
-            app:title="@string/rich_caption_rendering" />
+            app:title="@string/rich_caption_rendering"
+            android:summary="@string/rich_caption_rendering_summary"/>
 
     </PreferenceCategory>
 
