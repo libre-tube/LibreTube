@@ -20,6 +20,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.content.getSystemService
@@ -201,8 +202,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     private val fullscreenDialog by lazy {
         object : Dialog(requireContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen) {
+            @Deprecated("Deprecated in Java", ReplaceWith("onbackpressedispatcher and callback"))
             override fun onBackPressed() {
-                super.onBackPressed()
                 unsetFullscreen()
             }
         }

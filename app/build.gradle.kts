@@ -68,14 +68,18 @@ android {
         jniLibs.excludes.add("lib/armeabi-v7a/*_neon.so")
     }
 
-    namespace = "com.github.libretube"
-
     tasks.register("testClasses")
 
     lint {
         abortOnError = false
         checkReleaseBuilds = false
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    namespace = "com.github.libretube"
 }
 
 dependencies {
