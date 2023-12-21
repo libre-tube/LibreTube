@@ -69,7 +69,7 @@
     <string name="empty">İstifadəçi adı və parol daxil etməlisiniz.</string>
     <string name="notgmail">Bu Piped hesabı üçündür.</string>
     <string name="defres">Video görüntü imkanı</string>
-    <string name="grid">Şəbəkə sütunları</string>
+    <string name="grid">Şəbəkə sütunları (portret)</string>
     <string name="emptyList">Bura boşdur.</string>
     <string name="deletePlaylist">Oynatma siyahısın sil</string>
     <string name="areYouSure">Oynatma siyahısı silinsin\?</string>
@@ -536,4 +536,5 @@
     <string name="start_sleep_timer">Yuxu taymerin başlat</string>
     <string name="add_to_group">Qrupa əlavə et</string>
     <string name="uptime">%.2f%% işləmə vaxtı</string>
+    <string name="grid_landscape">Şəbəkə sütunları (landşaft)</string>
 </resources>
