@@ -24,7 +24,7 @@ class DropdownMenu(
         get() = binding.autoCompleteTextView.adapter as ArrayAdapter<String>
         set(value) {
             binding.autoCompleteTextView.setAdapter(value)
-            binding.autoCompleteTextView.setText(value.getItem(0), false)
+            if (!value.isEmpty) binding.autoCompleteTextView.setText(value.getItem(0), false)
         }
 
     val selectedItemPosition: Int
@@ -36,6 +36,12 @@ class DropdownMenu(
             binding.textInputLayout.startIconDrawable =
                 it.getDrawable(R.styleable.DropdownMenu_icon)
         }
+
+        adapter = ArrayAdapter(context, R.layout.dropdown_item)
+    }
+
+    fun setItems(items: List<String>) {
+        adapter = ArrayAdapter(context, R.layout.dropdown_item, items)
     }
 
     fun setSelection(index: Int) {
