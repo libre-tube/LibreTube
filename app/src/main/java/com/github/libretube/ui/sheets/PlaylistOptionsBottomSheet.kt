@@ -52,7 +52,9 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
             optionsList.add(R.string.clonePlaylist)
 
             // only add the bookmark option to the playlist if public
-            optionsList.add(if (isBookmarked) R.string.remove_bookmark else R.string.add_to_bookmarks)
+            optionsList.add(
+                if (isBookmarked) R.string.remove_bookmark else R.string.add_to_bookmarks
+            )
         } else {
             optionsList.add(R.string.renamePlaylist)
             optionsList.add(R.string.change_playlist_description)

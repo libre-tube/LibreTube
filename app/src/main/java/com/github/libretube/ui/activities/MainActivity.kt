@@ -27,7 +27,6 @@ import com.github.libretube.compat.PictureInPictureCompat
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.ActivityMainBinding
-import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
@@ -43,7 +42,6 @@ import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.models.SearchViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
-import com.google.android.material.elevation.SurfaceColors
 
 class MainActivity : BaseActivity() {
     lateinit var binding: ActivityMainBinding

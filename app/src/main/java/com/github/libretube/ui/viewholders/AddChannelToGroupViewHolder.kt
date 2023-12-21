@@ -5,4 +5,4 @@ import com.github.libretube.databinding.AddChannelToGroupRowBinding
 
 class AddChannelToGroupViewHolder(
     val binding: AddChannelToGroupRowBinding
-): RecyclerView.ViewHolder(binding.root)
+) : RecyclerView.ViewHolder(binding.root)

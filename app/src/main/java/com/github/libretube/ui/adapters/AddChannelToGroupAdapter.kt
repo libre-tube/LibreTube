@@ -10,7 +10,7 @@ import com.github.libretube.ui.viewholders.AddChannelToGroupViewHolder
 class AddChannelToGroupAdapter(
     private val channelGroups: MutableList<SubscriptionGroup>,
     private val channelId: String
-): RecyclerView.Adapter<AddChannelToGroupViewHolder>() {
+) : RecyclerView.Adapter<AddChannelToGroupViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddChannelToGroupViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = AddChannelToGroupRowBinding.inflate(layoutInflater, parent, false)
@@ -27,8 +27,11 @@ class AddChannelToGroupAdapter(
             groupCheckbox.isChecked = channelGroup.channels.contains(channelId)
 
             groupCheckbox.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) channelGroup.channels = channelGroup.channels + channelId
-                else channelGroup.channels = channelGroup.channels - channelId
+                if (isChecked) {
+                    channelGroup.channels = channelGroup.channels + channelId
+                } else {
+                    channelGroup.channels = channelGroup.channels - channelId
+                }
 
                 notifyItemChanged(position)
             }

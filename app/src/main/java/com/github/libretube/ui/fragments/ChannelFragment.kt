@@ -32,12 +32,12 @@ import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.sheets.AddChannelToGroupSheet
 import com.github.libretube.util.deArrow
+import java.io.IOException
+import kotlin.math.ceil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
-import java.io.IOException
-import kotlin.math.ceil
 
 class ChannelFragment : DynamicLayoutManagerFragment() {
     private var _binding: FragmentChannelBinding? = null
@@ -79,7 +79,8 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
     }
 
     override fun setLayoutManagers(gridItems: Int) {
-        _binding?.channelRecView?.layoutManager = GridLayoutManager(context,
+        _binding?.channelRecView?.layoutManager = GridLayoutManager(
+            context,
             ceil((gridItems.toDouble() / 2)).toInt()
         )
     }
