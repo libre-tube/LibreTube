@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.text.InputFilter
 import android.text.format.Formatter
 import android.util.Log
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.fragment.app.DialogFragment
@@ -25,11 +24,11 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.parcelable.DownloadData
 import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
+import java.io.IOException
 
 class DownloadDialog : DialogFragment() {
     private lateinit var videoId: String
@@ -117,44 +116,27 @@ class DownloadDialog : DialogFragment() {
 
         if (subtitles.isEmpty()) binding.subtitleSpinner.isGone = true
 
-        // initialize the video sources
-        val videoArrayAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.dropdown_item,
-            videoStreams.map {
-                val fileSize = Formatter.formatShortFileSize(context, it.contentLength)
-                "${it.quality} ${it.codec} ($fileSize)"
-            }.toMutableList().also {
-                it.add(0, getString(R.string.no_video))
-            }
-        )
+        binding.videoSpinner.items = videoStreams.map {
+            val fileSize = Formatter.formatShortFileSize(context, it.contentLength)
+            "${it.quality} ${it.codec} ($fileSize)"
+        }.toMutableList().also {
+            it.add(0, getString(R.string.no_video))
+        }
 
-        val audioArrayAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.dropdown_item,
-            audioStreams.map {
-                val fileSize = it.contentLength
-                    .takeIf { l -> l > 0 }
-                    ?.let { cl -> Formatter.formatShortFileSize(context, cl) }
-                val infoStr = listOfNotNull(it.audioTrackLocale, fileSize)
-                    .joinToString(", ")
-                "${it.quality} ${it.format} ($infoStr)"
-            }.toMutableList().also {
-                it.add(0, getString(R.string.no_audio))
-            }
-        )
+        binding.audioSpinner.items = audioStreams.map {
+            val fileSize = it.contentLength
+                .takeIf { l -> l > 0 }
+                ?.let { cl -> Formatter.formatShortFileSize(context, cl) }
+            val infoStr = listOfNotNull(it.audioTrackLocale, fileSize)
+                .joinToString(", ")
+            "${it.quality} ${it.format} ($infoStr)"
+        }.toMutableList().also {
+            it.add(0, getString(R.string.no_audio))
+        }
 
-        val subtitleArrayAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.dropdown_item,
-            subtitles.map { it.name.orEmpty() }.toMutableList().also {
-                it.add(0, getString(R.string.no_subtitle))
-            }
-        )
-
-        binding.videoSpinner.adapter = videoArrayAdapter
-        binding.audioSpinner.adapter = audioArrayAdapter
-        binding.subtitleSpinner.adapter = subtitleArrayAdapter
+        binding.subtitleSpinner.items = subtitles.map { it.name.orEmpty() }.toMutableList().also {
+            it.add(0, getString(R.string.no_subtitle))
+        }
 
         restorePreviousSelections(binding, videoStreams, audioStreams, subtitles)
 
@@ -232,18 +214,18 @@ class DownloadDialog : DialogFragment() {
             getSel(VIDEO_DOWNLOAD_QUALITY),
             getSel(VIDEO_DOWNLOAD_FORMAT)
         )?.let {
-            binding.videoSpinner.setSelection(it + 1)
+            binding.audioSpinner.selectedItemPosition = it + 1
         }
         getStreamSelection(
             audioStreams,
             getSel(AUDIO_DOWNLOAD_QUALITY),
             getSel(AUDIO_DOWNLOAD_FORMAT)
         )?.let {
-            binding.audioSpinner.setSelection(it + 1)
+            binding.audioSpinner.selectedItemPosition = it + 1
         }
 
         subtitles.indexOfFirst { it.code == getSel(SUBTITLE_LANGUAGE) }.takeIf { it != -1 }?.let {
-            binding.subtitleSpinner.setSelection(it + 1)
+            binding.audioSpinner.selectedItemPosition = it + 1
         }
     }
 

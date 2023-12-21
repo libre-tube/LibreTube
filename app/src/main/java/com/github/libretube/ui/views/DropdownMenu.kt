@@ -22,13 +22,20 @@ class DropdownMenu(
     @Suppress("UNCHECKED_CAST")
     var adapter: ArrayAdapter<String>
         get() = binding.autoCompleteTextView.adapter as ArrayAdapter<String>
-        set(value) {
+        private set(value) {
             binding.autoCompleteTextView.setAdapter(value)
             if (!value.isEmpty) binding.autoCompleteTextView.setText(value.getItem(0), false)
         }
 
-    val selectedItemPosition: Int
+    var items: List<String>
+        get() = (0 until adapter.count).mapNotNull { adapter.getItem(it) }
+        set(value) {
+            adapter = ArrayAdapter(context, R.layout.dropdown_item, value)
+        }
+
+    var selectedItemPosition: Int
         get() = adapter.getPosition(binding.autoCompleteTextView.text.toString())
+        set(index) = binding.autoCompleteTextView.setText(adapter.getItem(index), false)
 
     init {
         context.obtainStyledAttributes(attributeSet, R.styleable.DropdownMenu, 0, 0).use {
@@ -38,13 +45,5 @@ class DropdownMenu(
         }
 
         adapter = ArrayAdapter(context, R.layout.dropdown_item)
-    }
-
-    fun setItems(items: List<String>) {
-        adapter = ArrayAdapter(context, R.layout.dropdown_item, items)
-    }
-
-    fun setSelection(index: Int) {
-        binding.autoCompleteTextView.setText(adapter.getItem(index), false)
     }
 }

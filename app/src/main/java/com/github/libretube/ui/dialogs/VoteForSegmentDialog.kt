@@ -55,12 +55,10 @@ class VoteForSegmentDialog : DialogFragment() {
                         ?.uuid ?: return@setOnClickListener
 
                     // see https://wiki.sponsor.ajay.app/w/API_Docs#POST_/api/voteOnSponsorTime
-                    val score = if (binding.upvote.isChecked) {
-                        1
-                    } else if (binding.downvote.isChecked) {
-                        0
-                    } else {
-                        20
+                    val score = when {
+                        binding.upvote.isChecked -> 1
+                        binding.downvote.isChecked -> 0
+                        else -> 20
                     }
 
                     dialog?.hide()
@@ -99,15 +97,13 @@ class VoteForSegmentDialog : DialogFragment() {
                 return@withContext
             }
 
-            val segmentTexts = segments.map {
+            binding.segmentsDropdown.items = segments.map {
                 "${it.category} (${
                     DateUtils.formatElapsedTime(it.segmentStartAndEnd.first.toLong())
                 } - ${
                     DateUtils.formatElapsedTime(it.segmentStartAndEnd.second.toLong())
                 })"
             }
-            binding.segmentsDropdown.adapter =
-                ArrayAdapter(requireContext(), R.layout.dropdown_item, segmentTexts)
         }
     }
 

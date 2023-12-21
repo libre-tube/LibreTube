@@ -41,12 +41,7 @@ class SubmitSegmentDialog : DialogFragment() {
 
         binding.startTime.setText((currentPosition.toFloat() / 1000).toString())
 
-        val categoryNames = resources.getStringArray(R.array.sponsorBlockSegmentNames)
-        binding.segmentCategory.adapter = ArrayAdapter(
-            requireContext(),
-            R.layout.dropdown_item,
-            categoryNames
-        )
+        binding.segmentCategory.items = resources.getStringArray(R.array.sponsorBlockSegmentNames).toList()
 
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(R.string.sb_create_segment))

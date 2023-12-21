@@ -91,16 +91,15 @@ class AddToPlaylistDialog : DialogFragment() {
                     return@repeatOnLifecycle
                 }.filter { !it.name.isNullOrEmpty() }
 
-                binding.playlistsSpinner.setItems(playlists.map { it.name!! })
+                binding.playlistsSpinner.items = playlists.map { it.name!! }
 
                 if (response.isEmpty()) return@repeatOnLifecycle
 
                 // select the last used playlist
                 viewModel.lastSelectedPlaylistId?.let { id ->
-                    val latestIndex = response
+                    binding.playlistsSpinner.selectedItemPosition = response
                         .indexOfFirst { it.id == id }
                         .takeIf { it >= 0 } ?: 0
-                    binding.playlistsSpinner.setSelection(latestIndex)
                 }
             }
         }
