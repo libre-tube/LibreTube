@@ -537,4 +537,6 @@
     <string name="add_to_group">Přidat do skupiny</string>
     <string name="uptime">Doba online %.2f%%</string>
     <string name="grid_landscape">Sloupce mřížky (na šířku)</string>
+    <string name="rich_caption_rendering">Vylepšené vykreslování titulků</string>
+    <string name="rich_caption_rendering_summary">Vykreslovat webové titulky pro lepší a více přizpůsobený zážitek.</string>
 </resources>
