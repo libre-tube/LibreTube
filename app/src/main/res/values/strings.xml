@@ -223,6 +223,7 @@
     <string name="watch_positions_title">Remembered playback positions</string>
     <string name="reset_watch_positions">Reset</string>
     <string name="system_caption_style">System caption style</string>
+    <string name="rich_caption_rendering">Rich caption rendering</string>
     <string name="captions">Captions</string>
     <string name="none">None</string>
     <string name="general">General</string>
