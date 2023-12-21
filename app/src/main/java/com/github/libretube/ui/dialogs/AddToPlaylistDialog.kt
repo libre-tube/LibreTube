@@ -66,9 +66,11 @@ class AddToPlaylistDialog : DialogFragment() {
                     CreatePlaylistDialog().show(childFragmentManager, null)
                 }
                 getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
-                    val index = binding.playlistsSpinner.selectedItemPosition
-                    val playlist = playlists[index]
+                    val playlistIndex = binding.playlistsSpinner.selectedItemPosition
+
+                    val playlist = playlists.getOrElse(playlistIndex) { return@setOnClickListener }
                     viewModel.lastSelectedPlaylistId = playlist.id!!
+
                     dialog?.hide()
                     lifecycleScope.launch {
                         addToPlaylist(playlist.id, playlist.name!!)
@@ -87,21 +89,17 @@ class AddToPlaylistDialog : DialogFragment() {
                     Log.e(TAG(), e.toString())
                     Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
                     return@repeatOnLifecycle
-                }
+                }.filter { !it.name.isNullOrEmpty() }
 
-                playlists = response.filter { !it.name.isNullOrEmpty() }
-                if (playlists.isEmpty()) return@repeatOnLifecycle
+                binding.playlistsSpinner.setItems(playlists.map { it.name!! })
 
-                binding.playlistsSpinner.adapter =
-                    ArrayAdapter(
-                        requireContext(),
-                        R.layout.dropdown_item,
-                        playlists.map { it.name!! }
-                    )
+                if (response.isEmpty()) return@repeatOnLifecycle
 
                 // select the last used playlist
                 viewModel.lastSelectedPlaylistId?.let { id ->
-                    val latestIndex = response.indexOfFirst { it.id == id }.takeIf { it >= 0 } ?: 0
+                    val latestIndex = response
+                        .indexOfFirst { it.id == id }
+                        .takeIf { it >= 0 } ?: 0
                     binding.playlistsSpinner.setSelection(latestIndex)
                 }
             }
