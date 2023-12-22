@@ -540,4 +540,6 @@
     <string name="add_to_group">Добавить в группу</string>
     <string name="uptime">%.2f%% доступность</string>
     <string name="grid_landscape">Столбцы (в горизонтальном режиме)</string>
+    <string name="rich_caption_rendering">Продвинутые субтитры</string>
+    <string name="rich_caption_rendering_summary">Отрисовывать субтитры веб-движком для поддержки расширенных возможностей и настроек.</string>
 </resources>
