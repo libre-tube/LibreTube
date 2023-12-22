@@ -304,7 +304,6 @@
     <string name="behavior">හැසිරීම</string>
     <string name="pauseOnScreenOff">ස්වයං නැවැත්වීම</string>
     <string name="clonePlaylist">වාදන ලැයිස්තුව ක්ලෝනය කරන්න</string>
-    <string name="autoplay_summary">වත්මන් වීඩියෝවෙන් පසුව ඊළඟ වීඩියෝව ස්වයංක්‍රීයව වාදනය කරන්න.</string>
     <string name="reset_message">සියලු සැකසුම් යළි සකසා වරනය වන්නද\?</string>
     <string name="require_restart_message">නව වෙනස්කම් භාවිතා කිරීමට යෙදුම නැවත පටන් ගන්න.</string>
     <string name="watch_positions">ස්ථානය මතක තබා ගන්න</string>
@@ -336,7 +335,6 @@
     <string name="copied_to_clipboard">පසුරු පුවරුවට පිටපත් කර ඇත</string>
     <string name="legacy_subscriptions">උරුම දායකත්ව දසුන</string>
     <string name="renamePlaylist">වාදන ලැයිස්තුව නැවත නම් කරන්න</string>
-    <string name="sb_skip_manual_summary">කොටස් ස්වයංක්‍රීයව මඟ නොහරින්න, සෑම විටම පෙර විමසන්න.</string>
     <string name="playlists_order">වාදන ලැයිස්තු අනුපිළිවෙල</string>
     <string name="time_code">කාල කේතය (තත්පර)</string>
     <string name="confirm_unsubscribing_summary">දායකත්වයෙන් ඉවත් වීමට පෙර තහවුරු කිරීමේ සංවාදයක් පෙන්වන්න.</string>
@@ -344,7 +342,6 @@
     <string name="alternative_player_layout">විකල්ප වාදක පිරිසැලසුම</string>
     <string name="end_time">අවසන් කාලය</string>
     <string name="start_time">ආරම්භක කාලය</string>
-    <string name="alternative_player_layout_summary">අදාළ වීඩියෝ පහතින් වෙනුවට අදහස්වලට ඉහළින් පේළියක් ලෙස පෙන්වන්න.</string>
     <string name="hls_instead_of_dash_summary">DASH වෙනුවට HLS භාවිතා කරන්න (මන්දගාමී වනු ඇත, නිර්දේශ නොකරයි)</string>
     <string name="bookmark">පොත් සලකුණ</string>
     <string name="local_playlists">දේශීය වාදන ලැයිස්තු</string>

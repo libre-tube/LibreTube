@@ -111,7 +111,6 @@
     <string name="playback_speed">خێرایی لێدان</string>
     <string name="advanced">ڕێکخستنی زیاتر</string>
     <string name="player">لێدەر</string>
-    <string name="autoplay_summary">لێدانی خۆکاری ڤیدیۆی داهاتووی دوای ڤیدیۆیی ئێستا.</string>
     <string name="clonePlaylist">دەستکاریکردنی لیستی لێدان</string>
     <string name="pauseOnScreenOff">ڕاگرتنی خۆکاری</string>
     <string name="pauseOnScreenOff_summary">ڕاگرتنی لێدان کاتێک شاشەکە کوژایەوە.</string>
@@ -198,7 +197,6 @@
     <string name="open_copied">کردنەوە</string>
     <string name="audio_video_summary">کوالێتی و شێواز</string>
     <string name="delete">سڕینەوە لە داگرتنەکاندا</string>
-    <string name="sb_skip_manual_summary">پێش نەخستنی بەشەکان بە خۆکاری، هەمیشە ئاگادارکردنەوە لەپێشدا.</string>
     <string name="most_recent">نوێترین</string>
     <string name="portrait">ستوونی (ئاسایی)</string>
     <string name="open">کردنەوە…</string>
@@ -326,8 +324,7 @@
     <string name="queue_insert_related_videos">زیادکردنی ڤیدیۆیی هاوشێوە</string>
     <string name="lbry_hls_summary">بەکارهێنانی LBRY HLS بۆ لێدانی ڤیدیۆکان ئەگەر بەردەست بوو.</string>
     <string name="autoplay_countdown">ماوەی لێدانی خۆکاری</string>
-    <string name="notification_time_summary">دیاریکردنی مەودای کاتی ئاگادارکردنەوەکان بۆ پیشاندانی بڵاوکراوە.</string>
-    <string name="alternative_player_layout_summary">پیشاندانی ڤیدیۆ هاوشێوەکان لەسەرووی بەشی لێدوانەکان.</string>
+    <string name="notification_time_summary">دیاریکردنی مەودای کاتی ئاگادارکردنەوەکان بۆ پیشاندانی بڵاوکراوە</string>
     <string name="audio_track">تراکی دەنگی</string>
     <string name="limit_to_runtime">سنوردارکردن بۆ لێدان</string>
     <string name="trends">پێشنیارکراوەکان</string>

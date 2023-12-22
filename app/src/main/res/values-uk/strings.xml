@@ -157,8 +157,7 @@
     <string name="require_restart_message">Перезапустіть застосунок для застосування змін.</string>
     <string name="player_summary">Налаштування і поведінка програвача</string>
     <string name="pauseOnScreenOff">Автопауза</string>
-    <string name="pauseOnScreenOff_summary">Призупиняти відтворення при вимкненні екрану.</string>
-    <string name="autoplay_summary">Автоматично відтворювати наступне відео після поточного.</string>
+    <string name="pauseOnScreenOff_summary">Призупиняти відтворення при вимкненні екрану</string>
     <string name="customInstance_summary">Додати…</string>
     <string name="addInstance">Додати екземпляр</string>
     <string name="clear_customInstances">Стерти додане</string>
@@ -217,7 +216,6 @@
     <string name="repeat_mode_none">Немає</string>
     <string name="sb_skip_manual">Пропустити вручну</string>
     <string name="skip_segment">Пропустити сегмент</string>
-    <string name="sb_skip_manual_summary">Не пропускати сегменти автоматично, завжди запитувати.</string>
     <string name="local_subscriptions">Локальні підписки</string>
     <string name="preferences">Налаштування</string>
     <string name="backup_customInstances">Користувацькі налаштування</string>
@@ -302,7 +300,6 @@
     <string name="start_time">Час початку</string>
     <string name="notification_time">Обмежити час сповіщень</string>
     <string name="navbar_order">Порядок</string>
-    <string name="alternative_player_layout_summary">Показувати пов\'язані відео рядком над коментарями, а не під ними.</string>
     <string name="layout">Вигляд</string>
     <string name="alternative_player_layout">Альтернативний вигляд програвача</string>
     <string name="audio_track">Звукова доріжка</string>

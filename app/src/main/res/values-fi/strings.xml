@@ -165,7 +165,6 @@
     <string name="seek_increment">Etsi lisäystä</string>
     <string name="pauseOnScreenOff_summary">Pysäytä toisto, kun näyttö on pois päältä.</string>
     <string name="pauseOnScreenOff">Automaattinen tauko</string>
-    <string name="autoplay_summary">Automaattisesti toistaa seuraavan videon nykyisen videon jälkeen.</string>
     <string name="clonePlaylist">Kloonaa soittolista</string>
     <string name="watch_history">Katso historia</string>
     <string name="playlistCloned">Soittolista kloonattu</string>
@@ -248,11 +247,9 @@
     <string name="player_resize_mode">Muuta kokoa</string>
     <string name="new_videos_badge_summary">Näytä merkki uusien videoiden määrästä, jos niitä on.</string>
     <string name="sb_skip_manual">Ohita manuaalisesti</string>
-    <string name="sb_skip_manual_summary">Älä ohita segmenttejä automaattisesti, kysy aina ennen.</string>
     <string name="end_time">Lopetusaika</string>
     <string name="notification_time_summary">Aikaväli, jolloin ilmoitukset voidaan näyttää.</string>
     <string name="layout">Asettelu</string>
-    <string name="alternative_player_layout_summary">Näytä aiheeseen liittyviä videoeita rivinä kommentien yläpuolella, ei alla.</string>
     <string name="username_email">Jatka sähköpostiosoitteella, jota ei suositella\?</string>
     <string name="audio_player">Audiosoitin</string>
     <string name="audio_only_mode_summary">Muuta LibreTube musiikkisoittimeksi.</string>

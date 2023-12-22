@@ -159,8 +159,7 @@
     <string name="seek_increment">Joan-etorrien gehikuntza</string>
     <string name="reset">Ezabatu datu guztiak</string>
     <string name="reset_message">Ziur al zaude saioa amaitu eta zure ezarpen guztiak berrezarri nahi dituzula\?</string>
-    <string name="pauseOnScreenOff_summary">Pantaila itzalita dagoenean, erreproduzitzailea gelditu.</string>
-    <string name="autoplay_summary">Erreproduzitu automatikoki hurrengo bideoa unekoa amaitzen denean.</string>
+    <string name="pauseOnScreenOff_summary">Pantaila itzalita dagoenean, erreproduzitzailea gelditu</string>
     <string name="pauseOnScreenOff">Automatikoki gelditzea</string>
     <string name="clonePlaylist">Klonatu erreprodukzio zerrenda</string>
     <string name="deleteAccount">Ezabatu kontua</string>
@@ -264,7 +263,6 @@
     <string name="wifi">Wi-Fi</string>
     <string name="skip_segment">Saltatu zatia</string>
     <string name="sb_skip_manual">Saltatu eskuz</string>
-    <string name="sb_skip_manual_summary">Ez saltatu segmentuak automatikoki, galdetu beti aurretik.</string>
     <string name="download_channel_name">Deskarga zerbitzua</string>
     <string name="download_channel_description">Multimedia deskargatzean jakinarazpen bat erakusten du.</string>
     <string name="push_channel_name">Jakinarazpenen egilea</string>
@@ -315,7 +313,6 @@
     <string name="playback_pitch">Tonua</string>
     <string name="audio_track">Audio pista</string>
     <string name="defaults">Lehenetsia</string>
-    <string name="alternative_player_layout_summary">Bistaratu erlazionatutako bideoak errenkada gisa iruzkinen gainetik, behean agertu beharrean.</string>
     <string name="hls_instead_of_dash">HLS erabili</string>
     <string name="hls_instead_of_dash_summary">Erabili HLS DASH-en ordez (motelagoa izango da, ez da gomendatzen)</string>
     <string name="auto_quality">Automatikoa</string>

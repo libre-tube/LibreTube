@@ -162,7 +162,6 @@
     <string name="legacy_subscriptions">Starszy widok subskrybcji</string>
     <string name="device_info">Informacje o urządzeniu</string>
     <string name="downloading">Pobieranie…</string>
-    <string name="autoplay_summary">Automatycznie odtwórz kolejny filmik po obejrzeniu bieżącego.</string>
     <string name="playingOnBackground">Odtwarzanie w tle…</string>
     <string name="checking_frequency">Sprawdzaj co…</string>
     <string name="history_empty">Nie ma jeszcze historii.</string>
@@ -266,7 +265,6 @@
     <string name="new_videos_badge_summary">Wyświetlaj plakietkę z ilością nowych filmów.</string>
     <string name="skip_segment">Pomiń segment</string>
     <string name="sb_skip_manual">Pomiń ręcznie</string>
-    <string name="sb_skip_manual_summary">Nie pomijaj segmentów automatycznie, zawsze informuj przed ich pominięciem.</string>
     <string name="local_subscriptions">Lokalne subskrypcje</string>
     <string name="preferences">Preferencje</string>
     <string name="backup_customInstances">Instancje niestandardowe</string>
@@ -302,7 +300,6 @@
     <string name="notification_time_summary">Zakres czasu, w którym powiadomienia mogą być wyświetlane.</string>
     <string name="layout">Układ</string>
     <string name="navbar_order">Zarządzanie</string>
-    <string name="alternative_player_layout_summary">Pokaż powiązane filmiki w wierszu nad komentarzami.</string>
     <string name="alternative_player_layout">Inny układ powiązanych filmów</string>
     <string name="audio_track">Ścieżka dźwiękowa</string>
     <string name="hls_instead_of_dash">HTTP Live Streaming</string>

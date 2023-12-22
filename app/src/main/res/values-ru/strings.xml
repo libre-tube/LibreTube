@@ -160,8 +160,7 @@
     <string name="player_summary">Настройки и поведение</string>
     <string name="seek_increment">Шаг перемотки</string>
     <string name="pauseOnScreenOff">Автоматическая пауза</string>
-    <string name="pauseOnScreenOff_summary">Останавливать воспроизведение при отключении экрана.</string>
-    <string name="autoplay_summary">Автоматически воспроизводить следующее видео после текущего.</string>
+    <string name="pauseOnScreenOff_summary">Останавливать воспроизведение при отключении экрана</string>
     <string name="clonePlaylist">Клонировать плейлист</string>
     <string name="deleteAccount">Удалить аккаунт</string>
     <string name="deleteAccount_summary">Удалить свой аккаунт Piped</string>
@@ -258,8 +257,7 @@
     <string name="device_info">Об устройстве</string>
     <string name="new_videos_badge">Индикатор новых видео</string>
     <string name="push_channel_description">Показывать уведомления о появлении новых трансляций.</string>
-    <string name="sb_skip_manual_summary">Не пропускать отрывки автоматически, всегда спрашивать.</string>
-    <string name="new_videos_badge_summary">Показывать значок с количеством, когда есть новые видео.</string>
+    <string name="new_videos_badge_summary">Показывать значок с количеством, когда есть новые видео</string>
     <string name="download_channel_name">Служба загрузки</string>
     <string name="sb_skip_manual">Ручной пропуск</string>
     <string name="skip_segment">Пропустить отрывок</string>
@@ -302,7 +300,6 @@
     <string name="notification_time">Ограничение времени уведомлений</string>
     <string name="notification_time_summary">Ограничение времени, в которое будут показаны уведомления о трансляцих.</string>
     <string name="navbar_order">Порядок навигации</string>
-    <string name="alternative_player_layout_summary">Показать связанные видео в виде ряда над комментариями, а не под ними.</string>
     <string name="layout">Раскладка</string>
     <string name="alternative_player_layout">Альтернативная раскладка проигрывателя</string>
     <string name="audio_track">Звуковая дорожка</string>

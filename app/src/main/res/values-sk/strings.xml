@@ -234,7 +234,6 @@
     <string name="behavior">Správanie</string>
     <string name="pauseOnScreenOff">Automatická pauza</string>
     <string name="pauseOnScreenOff_summary">Pozastaviť prehrávanie keď je display vypnutý</string>
-    <string name="autoplay_summary">"Automatické prehrávanie  ďalšieho videa po aktuálnom"</string>
     <string name="playingOnBackground">Prehrávanie na pozadí…</string>
     <string name="clonePlaylist">"Klonovať   zoznam skladieb"</string>
     <string name="best_quality">Najlepšia</string>

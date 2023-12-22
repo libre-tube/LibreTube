@@ -139,7 +139,6 @@
     <string name="related_streams_summary">আপনার দেখতে থাকা ভিডিওর অনুরুপ ভিডিও প্রদর্শন করুন।</string>
     <string name="defaultIcon">ডিফল্ট</string>
     <string name="empty_instance">অ্যাপের নাম ও লিংক উল্লেখ করুন।</string>
-    <string name="autoplay_summary">ভিডিও শেষ হওয়ার পর স্বয়ংক্রিয়ভাবে নতুন ভিডিও চালু করুন।</string>
     <string name="reset_message">সব সেটিংস রিসেট এবং লগ-আউট করুন\?</string>
     <string name="notgmail">এটি একটি পাইপড অ্যাকাউন্টের জন্য।</string>
     <string name="noInternet">প্রথমে ইন্টারনেট চালু করুন।</string>
@@ -266,7 +265,6 @@
     <string name="open_copied">খুলুন</string>
     <string name="audio_video_summary">মান এবং ফর্ম্যাট</string>
     <string name="renamePlaylist">প্লেলিস্ট পুনঃনামকরণ</string>
-    <string name="sb_skip_manual_summary">সরাসরি সেগমেন্ট স্কিপ না করে প্রমট দেখান।</string>
     <string name="network_metered">মিটারযুক্ত</string>
     <string name="new_videos_badge_summary">নতুন ভিডিওর সংখ্যাসহ ব্যাজ দেখান।</string>
     <string name="preferences">পছন্দসমূহ</string>
@@ -315,7 +313,6 @@
     <string name="navbar_order">ক্রম</string>
     <string name="username_email">ই-মেইল ঠিকানা প্রস্তাবিত নয়।</string>
     <string name="exportsuccess">রপ্তানি করা।</string>
-    <string name="alternative_player_layout_summary">নীচের পরিবর্তে মন্তব্যের উপরে একটি সারি হিসাবে সম্পর্কযুক্ত ভিডিওগুলি দেখান৷</string>
     <string name="queue_insert_related_videos">সম্পর্কিত ভিডিও ঢোকান</string>
     <string name="bookmarks">বুকমার্কগুলো</string>
     <string name="bookmark">বুকমার্ক</string>

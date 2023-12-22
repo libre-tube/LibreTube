@@ -234,7 +234,6 @@
     <string name="landscape">Landskap</string>
     <string name="sb_color_enable">Växlar mellan anpassade färgsegment för SponsorBlock-segment.</string>
     <string name="background_mode">Bakgrundsläge</string>
-    <string name="autoplay_summary">Spela automatiskt upp nästa video efter den som visas nu.</string>
     <string name="least_recent">Äldsta</string>
     <string name="open">Öppna…</string>
     <string name="require_restart_message">Starta om appen för att använda de nya ändringarna.</string>
@@ -384,7 +383,6 @@
     <string name="alternative_player_layout">Alternativ utformning av spelaren</string>
     <string name="fallback_piped_proxy">Använd Piped-proxy som reserv</string>
     <string name="sb_skip_manual">Skippa manuellt</string>
-    <string name="sb_skip_manual_summary">Skippa inte segment automatiskt, utan fråga alltid innan.</string>
     <string name="export_playlists">Exportera spellistor</string>
     <string name="forward">Spola framåt</string>
     <string name="audio_track_format">%1$s - %2$s</string>
@@ -435,7 +433,6 @@
     <string name="creation_date_reversed">Utgivningsdatum (omvänt)</string>
     <string name="shorts_notifications">Notifikationer för Shorts</string>
     <string name="all_caught_up_summary">Du har sett alla nya videor</string>
-    <string name="alternative_player_layout_summary">Visa relaterade videor som en rad ovanför kommentarerna istället för nedanför.</string>
     <string name="playback_during_call">Fortsätt uppspelning under telefonsamtal</string>
     <string name="audio_player">Ljudspelare</string>
     <string name="export_playlists_to">Exportera spellistor till</string>

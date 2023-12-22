@@ -160,8 +160,7 @@
     <string name="player_summary">Noklusējumi un uzvedība</string>
     <string name="seek_increment">Patīšanas iedaļa</string>
     <string name="pauseOnScreenOff">Automātiski iepauzēt</string>
-    <string name="pauseOnScreenOff_summary">Pārtraukt atskaņošanu, kad ekrāns tiek izslēgts.</string>
-    <string name="autoplay_summary">Automātiski atskaņot nākamo video, kad iepriekšējais beidzas.</string>
+    <string name="pauseOnScreenOff_summary">Pārtraukt atskaņošanu, kad ekrāns tiek izslēgts</string>
     <string name="clonePlaylist">Duplicēt atskaņošanas sarakstu</string>
     <string name="deleteAccount">Izdzēst kontu</string>
     <string name="deleteAccount_summary">Izdzēst Piped kontu</string>
@@ -264,7 +263,6 @@
     <string name="new_videos_badge">Jauno video indikators</string>
     <string name="skip_segment">Izlaist segmentu</string>
     <string name="sb_skip_manual">Izlaist manuāli</string>
-    <string name="sb_skip_manual_summary">Neizlaiž segmentus automātiski, vienmēr vispirms pajautā.</string>
     <string name="preferences">Iestatījumi</string>
     <string name="local_subscriptions">Ierīcē glabātie abonementi</string>
     <string name="mobile_data">Mobilie dati</string>
@@ -335,7 +333,6 @@
     <string name="navbar_order">Secība</string>
     <string name="layout">Izklājums</string>
     <string name="alternative_player_layout">Alternatīvs atskaņotāja izklājums</string>
-    <string name="alternative_player_layout_summary">Rādīt saistītos video rindā virs komentāriem nevis zem tiem.</string>
     <string name="unsupported_file_format">Neatbalstīts faila formāts: %1$s</string>
     <string name="hls_instead_of_dash">Izmantot HLS</string>
     <string name="auto_quality">Automātiski</string>

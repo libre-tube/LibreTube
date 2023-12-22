@@ -160,8 +160,7 @@
     <string name="reset">Restaurer les valeurs par défaut</string>
     <string name="reset_message">Réinitialiser tous vos paramètres et vous déconnecter \?</string>
     <string name="pauseOnScreenOff">Pause automatique</string>
-    <string name="pauseOnScreenOff_summary">Mettre la lecture en pause lorsque l\'écran s\'éteint.</string>
-    <string name="autoplay_summary">Lancer automatiquement la vidéo suivante après l\'actuelle.</string>
+    <string name="pauseOnScreenOff_summary">Mettre la lecture en pause lorsque l\'écran s\'éteint</string>
     <string name="clonePlaylist">Cloner une liste de lecture</string>
     <string name="deleteAccount_summary">Supprimer votre compte Piped</string>
     <string name="deleteAccount">Supprimer le compte</string>
@@ -267,7 +266,6 @@
     <string name="mobile_data">Données mobiles</string>
     <string name="skip_segment">Sauter le segment</string>
     <string name="sb_skip_manual">Passer manuellement</string>
-    <string name="sb_skip_manual_summary">Ne pas automatiquement passer les segments, demander avant.</string>
     <string name="backup_customInstances">Instances personnalisées</string>
     <string name="local_subscriptions">Abonnements locaux</string>
     <string name="preferences">Préférences</string>
@@ -304,7 +302,6 @@
     <string name="alternative_player_layout">Mise en page alternative du lecteur</string>
     <string name="navbar_order">Ordre</string>
     <string name="layout">Mise en page</string>
-    <string name="alternative_player_layout_summary">Affichez les vidéos associées sous forme de ligne au-dessus des commentaires plutôt qu\'en dessous.</string>
     <string name="audio_track">Piste audio</string>
     <string name="hls_instead_of_dash">Utiliser HLS</string>
     <string name="hls_instead_of_dash_summary">Utiliser HLS à la place de DASH (sera plus lent, non recommandé)</string>

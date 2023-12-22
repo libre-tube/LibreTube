@@ -204,7 +204,6 @@
     <string name="quality">Kvalitet</string>
     <string name="behavior">Adfærd</string>
     <string name="player_summary">Standarder og adfærd</string>
-    <string name="autoplay_summary">Afspil den næste video automatisk efter den aktuelle.</string>
     <string name="playingOnBackground">Afspiller i baggrunden…</string>
     <string name="clonePlaylist">Klon playliste</string>
     <string name="caption_settings">Undertekster</string>

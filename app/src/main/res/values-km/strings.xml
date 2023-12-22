@@ -209,7 +209,6 @@
     <string name="shapedIcon">រាងឆ្កួត</string>
     <string name="legacyIcon">កេរ្តិ៍ដំណែលបាត់បង់</string>
     <string name="background_mode">របៀបផ្ទៃខាងក្រោយ</string>
-    <string name="autoplay_summary">ចាក់វីដេអូបន្ទាប់ដោយស្វ័យប្រវត្តិ នៅពេលវីដេអូបច្ចុប្បន្នបញ្ចប់។</string>
     <string name="least_recent">ចាស់បំផុត</string>
     <string name="open">បើក…</string>
     <string name="require_restart_message">រីស្តាតកម្មវិធី ដើម្បីប្រើការផ្លាស់ប្តូរថ្មីនេះ។</string>
@@ -266,7 +265,6 @@
     <string name="maximum_image_cache">ទំហំឃ្លាំងសម្ងាត់រូបភាពអតិបរមា</string>
     <string name="backup">បម្រុងទុក</string>
     <string name="sb_skip_manual">រំលង ដោយដៃ</string>
-    <string name="sb_skip_manual_summary">កុំរំលងចម្រៀកស្វ័យប្រវត្តិ, តែងតែប្រាប់មុនជានិច្ច។</string>
     <string name="repeat_mode_all">សារឡើងវិញទាំងអស់</string>
     <string name="skip_segment">រំលង ចម្រៀក</string>
     <string name="history_size">ទំហំកំណត់ត្រាអតិបរមា</string>

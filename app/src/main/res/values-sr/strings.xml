@@ -121,8 +121,7 @@
     <string name="player_summary">Подразумевано и понашање</string>
     <string name="seek_increment">Период премотавања</string>
     <string name="pauseOnScreenOff">Аутоматска пауза</string>
-    <string name="pauseOnScreenOff_summary">Паузирање репродукције када је екран искључен.</string>
-    <string name="autoplay_summary">Аутоматско пуштање следећег видео снимка после тренутног.</string>
+    <string name="pauseOnScreenOff_summary">Паузирање репродукције када је екран искључен</string>
     <string name="clonePlaylist">Клонирај плејлисту</string>
     <string name="reset">Врати подразумевано</string>
     <string name="deleteAccount">Избриши налог</string>
@@ -269,7 +268,6 @@
     <string name="new_videos_badge">Индикатор за нове видео снимке</string>
     <string name="new_videos_badge_summary">Прикажите значку са количином нових видео снимака, ако их има.</string>
     <string name="sb_skip_manual">Прескочи ручно</string>
-    <string name="sb_skip_manual_summary">Не прескачи сегменте аутоматски, увек питај пре.</string>
     <string name="preferences">Преференце</string>
     <string name="backup_customInstances">Прилагођене инстанце</string>
     <string name="play_next">Пусти следеће</string>
@@ -297,8 +295,7 @@
     <string name="start_time">Почетно време</string>
     <string name="end_time">Завршно време</string>
     <string name="notification_time">Ограничи време обавештења</string>
-    <string name="notification_time_summary">Ограничите временски период у коме се приказују обавештења о стриму.</string>
-    <string name="alternative_player_layout_summary">Прикажите сличне видео снимке као ред изнад коментара уместо испод.</string>
+    <string name="notification_time_summary">Ограничите временски период у коме се приказују обавештења о стриму</string>
     <string name="navbar_order">Редослед</string>
     <string name="layout">Изглед</string>
     <string name="alternative_player_layout">Алтернативни изглед плејера</string>

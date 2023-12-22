@@ -110,8 +110,7 @@
     <string name="chapters">チャプター</string>
     <string name="birdIcon">小鳥</string>
     <string name="instance_name">インスタンス名</string>
-    <string name="pauseOnScreenOff_summary">画面が消えた際に一時停止します。</string>
-    <string name="autoplay_summary">再生している動画が終了したら次の動画を自動再生します。</string>
+    <string name="pauseOnScreenOff_summary">画面が消えた際に一時停止します</string>
     <string name="account">アカウント</string>
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
@@ -263,7 +262,6 @@
     <string name="mobile_data">モバイルデータ通信</string>
     <string name="skip_segment">ここをスキップ</string>
     <string name="sb_skip_manual">手動でスキップ</string>
-    <string name="sb_skip_manual_summary">該当部分を自動でスキップせず問い合わせを表示します。</string>
     <string name="preferences">設定</string>
     <string name="save_feed_summary">登録チャンネルをバックグラウンドで読み込み、自動で更新しません。</string>
     <string name="playback_pitch">ピッチ</string>
@@ -304,7 +302,6 @@
     <string name="navbar_order">並べ替え</string>
     <string name="layout">配置</string>
     <string name="alternative_player_layout">プレーヤーの配置変更</string>
-    <string name="alternative_player_layout_summary">関連動画をコメントの下ではなく上に並べて表示します。</string>
     <string name="local_playlists">端末内の再生リスト</string>
     <string name="color_violet">深紫色</string>
     <string name="volume">音量</string>

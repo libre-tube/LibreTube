@@ -158,7 +158,6 @@
     <string name="player_summary">Forvalg og adferd</string>
     <string name="seek_increment">Blafringsmengde</string>
     <string name="reset_message">Tilbakestill alle innstillinger og logg ut\?</string>
-    <string name="autoplay_summary">Spill neste video når nåværende er fullført.</string>
     <string name="reset">Gjenopprett forvalg</string>
     <string name="pauseOnScreenOff">Automatisk pause</string>
     <string name="pauseOnScreenOff_summary">Sett avspilling når skjermen skrus av.</string>
@@ -266,7 +265,6 @@
     <string name="mobile_data">Mobildata</string>
     <string name="skip_segment">Hopp over</string>
     <string name="sb_skip_manual">Hopp over manuelt</string>
-    <string name="sb_skip_manual_summary">Ikke hopp over automatisk, alltid spør.</string>
     <string name="local_subscriptions">Lokale abonnementer</string>
     <string name="preferences">Innstillinger</string>
     <string name="backup_customInstances">Egendefinerte instanser</string>
@@ -302,7 +300,6 @@
     <string name="notification_time">Begrens merknadstid</string>
     <string name="notification_time_summary">Tidsperiode merknadene kan vises.</string>
     <string name="navbar_order">Rekkefølge</string>
-    <string name="alternative_player_layout_summary">Vis relaterte videoer som rad over kommentarene istedenfor under.</string>
     <string name="audio_track">Lydspor</string>
     <string name="hls_instead_of_dash">Bruk HLS</string>
     <string name="hls_instead_of_dash_summary">Bruk HLS istedenfor DASH (tregere og ikke anbefalt)</string>

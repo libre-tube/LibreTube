@@ -158,8 +158,7 @@
     <string name="instance_frontend_url">Oluşum ön ucunun URL\'si</string>
     <string name="seek_increment">Arama artışı</string>
     <string name="pauseOnScreenOff">Otomatik duraklatma</string>
-    <string name="pauseOnScreenOff_summary">Ekran kapatılınca oynatmayı duraklat.</string>
-    <string name="autoplay_summary">Geçerli videodan sonraki videoyu otomatik olarak oynatın.</string>
+    <string name="pauseOnScreenOff_summary">Ekran kapatılınca oynatmayı duraklat</string>
     <string name="clonePlaylist">Oynatma listesini kopyala</string>
     <string name="reset">Varsayılanlara sıfırla</string>
     <string name="reset_message">Tüm ayarlar sıfırlansın ve oturum kapatılsın mı\?</string>
@@ -267,7 +266,6 @@
     <string name="wifi">Wi-Fi</string>
     <string name="skip_segment">Bölümü atla</string>
     <string name="sb_skip_manual">Manuel olarak atla</string>
-    <string name="sb_skip_manual_summary">Bölümleri otomatik olarak atlama, atlamadan önce sor.</string>
     <string name="local_subscriptions">Yerel abonelikler</string>
     <string name="preferences">Tercihler</string>
     <string name="backup_customInstances">Özel Oluşumlar</string>
@@ -303,7 +301,6 @@
     <string name="notification_time_summary">Video bildirimlerinin gösterileceği zaman aralığını sınırla.</string>
     <string name="layout">Düzen</string>
     <string name="alternative_player_layout">Alternatif oynatıcı düzeni</string>
-    <string name="alternative_player_layout_summary">İlgili videoları, yorumların altında değil, üstünde bir satır olarak göster.</string>
     <string name="navbar_order">Sıra</string>
     <string name="audio_track">Müzik parçası</string>
     <string name="auto_quality">Oto</string>

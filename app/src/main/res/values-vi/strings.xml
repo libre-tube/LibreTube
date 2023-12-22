@@ -159,8 +159,7 @@
     <string name="player_summary">Mặc định và hành vi</string>
     <string name="seek_increment">Tua nhanh thêm</string>
     <string name="pauseOnScreenOff">Tự động tạm ngừng</string>
-    <string name="pauseOnScreenOff_summary">Tạm ngừng phát lại khi màn hình tắt.</string>
-    <string name="autoplay_summary">Tự động phát video tiếp theo khi video hiện tại kết thúc.</string>
+    <string name="pauseOnScreenOff_summary">Tạm ngừng phát lại khi màn hình tắt</string>
     <string name="clonePlaylist">Nhân bản danh sách phát</string>
     <string name="deleteAccount">Xóa tài khoản</string>
     <string name="deleteAccount_summary">Xóa tài khoản Piped của bạn</string>
@@ -229,7 +228,6 @@
     <string name="network_metered">Tính cước</string>
     <string name="skip_segment">Bỏ qua phân đoạn</string>
     <string name="sb_skip_manual">Bỏ qua thủ công</string>
-    <string name="sb_skip_manual_summary">Đừng tự động bỏ qua các phân đoạn, hãy luôn nhắc trước đó.</string>
     <string name="download_channel_description">Hiển thị thông báo khi tải xuống phương tiện.</string>
     <string name="push_channel_description">Hiển thị thông báo khi có luồng phát mới.</string>
     <string name="push_channel_name">Nguồn cấp thông báo</string>
@@ -297,7 +295,6 @@
     <string name="navbar_order">Thứ tự</string>
     <string name="layout">Bố cục</string>
     <string name="alternative_player_layout">Bố cục thay thế cho trình phát</string>
-    <string name="alternative_player_layout_summary">Hiển thị các video liên quan bên trên phần bình luận thay vì ở dưới.</string>
     <string name="added_to_playlist">Đã thêm vào danh sách phát %1$s</string>
     <string name="filename">Tên tệp</string>
     <string name="invalid_filename">Tên tệp không hợp lệ!</string>

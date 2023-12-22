@@ -179,7 +179,6 @@
     <string name="related_streams_summary">Mutasson hasonló közvetítéseket a jelenleg nézett mellett.</string>
     <string name="playerVideoFormat">Videóformátum a lejátszóhoz</string>
     <string name="instance_frontend_url">URL a példány frontendjéhez</string>
-    <string name="autoplay_summary">A következő videó automatikus lejátszása az aktuális után.</string>
     <string name="clonePlaylist">Lejátszási lista klónozása</string>
     <string name="auth_instance">Hitelesítési példány</string>
     <string name="auth_instance_summary">Használjon másik példányt a hitelesített hívásokhoz.</string>
@@ -277,7 +276,6 @@
     <string name="save_feed_summary">Töltse be az feliratkozott videófolyamot a háttérben, és akadályozza meg az automatikus frissítést.</string>
     <string name="skip_segment">Szakasz kihagyása</string>
     <string name="sb_skip_manual">Manuális kihagyás</string>
-    <string name="sb_skip_manual_summary">Ne hagyja ki a szakaszokat automatikusan, mindig kérdezzen előtte.</string>
     <string name="playback_pitch">Hangmagasság</string>
     <string name="save_feed">Videófolyam betöltése a háttérben</string>
     <string name="change_region">A felkapott úgy tűnik, hogy nem elérhető a jelenlegi régió számára. Válasszon egy másikat a beállításokban.</string>
@@ -304,7 +302,6 @@
     <string name="layout">Elrendezés</string>
     <string name="alternative_player_layout">Alternatív lejátszó elrendezés</string>
     <string name="navbar_order">Sorrend</string>
-    <string name="alternative_player_layout_summary">A kapcsolódó videók megjelenítése egy sorban a hozzászólások felett, nem pedig alattuk.</string>
     <string name="audio_track">Hangsáv</string>
     <string name="hls_instead_of_dash">HLS használata</string>
     <string name="auto_quality">Automatikus</string>

@@ -226,7 +226,6 @@
     <string name="navLabelVisibility">Vizibilitatea etichetei</string>
     <string name="reset_watch_positions">Resetați</string>
     <string name="sb_skip_manual">Omiteți manual</string>
-    <string name="sb_skip_manual_summary">Nu se omit automat segmentele, ci se solicită întotdeauna înainte.</string>
     <string name="preferences">Preferințe</string>
     <string name="worst_quality">Cel mai slab</string>
     <string name="default_subtitle_language">Limba subtitrărilor</string>
@@ -257,7 +256,6 @@
     <string name="navigation_bar">Bară de navigare</string>
     <string name="filename">Nume de fișier</string>
     <string name="playlistNameReversed">Numele playlist-ului (inversat)</string>
-    <string name="autoplay_summary">Redați automat următorul videoclip după cel actual.</string>
     <string name="playingOnBackground">Se redă în fundal …</string>
     <string name="player_summary">Valori prestabilite și comportament</string>
     <string name="replies">Răspunsuri</string>
@@ -323,7 +321,6 @@
     <string name="navbar_order">Ordine</string>
     <string name="layout">Aspect</string>
     <string name="alternative_player_layout">Aspect alternativ al playerului</string>
-    <string name="alternative_player_layout_summary">Afișați videoclipurile asociate ca un rând deasupra comentariilor în loc de mai jos.</string>
     <string name="audio_track">Pistă audio</string>
     <string name="app_backup">Backup aplicație</string>
     <string name="backup_restore_summary">Importați și exportați abonamente, liste de redare, …</string>

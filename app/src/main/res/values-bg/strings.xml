@@ -355,7 +355,6 @@
     <string name="piped">Piped</string>
     <string name="fallback_piped_proxy">Завръщане към Piped прокси</string>
     <string name="sb_skip_manual">Пропуснете ръчно</string>
-    <string name="sb_skip_manual_summary">Не пропускайте автоматично сегменти, винаги подканвайте преди.</string>
     <string name="search_history_summary">Запомнете търсенията</string>
     <string name="auth_instances">Изберете инстанция за удостоверяване</string>
     <string name="category_selfpromo_summary">Подобно на „спонсор“, с изключение на неплатено или самореклама. Това включва секции за стоки, дарения или информация за това с кого са си сътрудничили.</string>
@@ -399,7 +398,6 @@
     <string name="legacyIcon">Изгубено наследство</string>
     <string name="instances">Избирам…</string>
     <string name="background_mode">Фонов режим</string>
-    <string name="autoplay_summary">Автоматично пускане на следващия видеоклип след текущия.</string>
     <string name="import_format_newpipe">NewPipe</string>
     <string name="tooltip_reverse">Обръщане</string>
     <string name="tooltip_create_playlist">Създаване на плейлист</string>
@@ -468,7 +466,6 @@
     <string name="shorts_notifications">Известия за кртки видеоклипове</string>
     <string name="category_filler_summary">За тангенциални сцени, добавени само за запълване или хумор, които не са необходими за разбиране на основното съдържание на видеоклипа.</string>
     <string name="segment_skipped">Пропуснат сегмент</string>
-    <string name="alternative_player_layout_summary">Показвайте свързаните видеоклипове като ред над коментарите вместо отдолу.</string>
     <string name="player">Плейър</string>
     <string name="playback_during_call">Продължете възпроизвеждането по време на телефонно обаждане</string>
     <string name="screen_orientation">Ориентация на екрана</string>

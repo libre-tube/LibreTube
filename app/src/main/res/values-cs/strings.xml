@@ -202,8 +202,7 @@
     <string name="none">Žádné</string>
     <string name="seek_increment">Násobek hledání</string>
     <string name="pauseOnScreenOff">Automatické pozastavení</string>
-    <string name="pauseOnScreenOff_summary">Pozastavit přehrávání při vypnutí obrazovky.</string>
-    <string name="autoplay_summary">Automaticky přehrát další video po aktuálním.</string>
+    <string name="pauseOnScreenOff_summary">Pozastavit přehrávání při vypnutí obrazovky</string>
     <string name="clonePlaylist">Duplikovat playlist</string>
     <string name="playingOnBackground">Přehrávání na pozadí…</string>
     <string name="caption_settings">Titulky</string>
@@ -269,7 +268,6 @@
     <string name="push_channel_name">Pracovník oznámení</string>
     <string name="download_channel_name">Služba stahování</string>
     <string name="skip_segment">Přeskočit segment</string>
-    <string name="sb_skip_manual_summary">Nepřeskakovat segmenty automaticky, vždy se nejprve zeptat.</string>
     <string name="download_channel_description">Zobrazí oznámení při stahování médií.</string>
     <string name="push_channel_description">Zobrazí oznámení, když jsou k dispozici nové videa.</string>
     <string name="local_subscriptions">Lokální odběry</string>
@@ -302,7 +300,6 @@
     <string name="end_time">Koncový čas</string>
     <string name="notification_time_summary">Omezit časové rozmezí, ve kterém budou zobrazována upozornění o videích.</string>
     <string name="navbar_order">Pořadí</string>
-    <string name="alternative_player_layout_summary">Zobrazit související videa jako řádek nad komentáři místo pod nimi.</string>
     <string name="layout">Rozložení</string>
     <string name="alternative_player_layout">Alternativní rozložení přehrávače</string>
     <string name="audio_track">Zvuková stopa</string>

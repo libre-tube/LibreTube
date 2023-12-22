@@ -208,8 +208,7 @@
     <string name="download_paused">डाउनलोड थांबवले</string>
     <string name="concurrent_downloads_limit_reached">कमाल समवर्ती डाउनलोड मर्यादा गाठली.</string>
     <string name="pauseOnScreenOff_summary">स्क्रीन बंद केल्यावर प्लेबॅकला थांबवा.</string>
-    <string name="autoplay_summary">सध्याच्या व्हिडिओनंतर पुढील व्हिडिओ ऑटो-प्ले करा.</string>
-    <string name="auth_instance_summary">प्रमाणीकृत कॉलसाठी भिन्न instance वापरा.</string>
+    <string name="auth_instance_summary">प्रमाणीकृत कॉलसाठी भिन्न instance वापरा</string>
     <string name="selected">निवडले</string>
     <string name="flameIcon">उडणारी ज्योत</string>
     <string name="require_restart_message">नवीन बदल वापरण्यासाठी ॲप रीस्टार्ट करा.</string>
@@ -260,7 +259,6 @@
     <string name="app_backup">ॲप बॅकअप</string>
     <string name="username_email">शिफारस नसलेल्या ई-मेल पत्त्यासह पुढे जायचे\?</string>
     <string name="proceed">पुढे जा</string>
-    <string name="alternative_player_layout_summary">संबंधित व्हिडिओ खाली ऐवजी टिप्पण्यांच्या वर पंक्ती म्हणून दर्शवा.</string>
     <string name="confirm_unsubscribe">तुमची खात्री आहे की तुम्ही %1$s सदस्यत्व रद्द करू इच्छिता\?</string>
     <string name="custom_playback_speed">सानुकूल गती</string>
     <string name="import_playlists">प्लेलिस्ट आयात करा</string>
@@ -312,7 +310,6 @@
     <string name="mobile_data">मोबाइल डेटा</string>
     <string name="skip_segment">विभाग वगळा</string>
     <string name="sb_skip_manual">व्यक्तिचलितपणे वगळा</string>
-    <string name="sb_skip_manual_summary">विभाग आपोआप वगळू नका, नेहमी आधी सूचना द्या.</string>
     <string name="local_subscriptions">स्थानिक सदस्यता</string>
     <string name="change_region">सध्याच्या क्षेत्रासाठी ट्रेंडिंग अनुपलब्ध असल्याचे दिसते. कृपया सेटिंग्जमध्ये दुसरा निवडा.</string>
     <string name="filename">फाईलचे नाव</string>

@@ -133,14 +133,12 @@
     <string name="renamePlaylist">પ્લેલીસ્ટનું નામ બદલો</string>
     <string name="mobile_data">મોબાઇલ માહિતી</string>
     <string name="sb_skip_manual">જાતે અવગણો</string>
-    <string name="sb_skip_manual_summary">સેગ્મેન્ટોને આપમેળે અવગણશો નહીં, હંમેશા પહેલાં પૂછો.</string>
     <string name="save_feed">પાશ્ર્વભાગમાં ફીડને લાવો</string>
     <string name="navigation_bar">શોધખોળ પટ્ટી</string>
     <string name="material_you">સામગ્રી તમે</string>
     <string name="navbar_order">ક્રમ</string>
     <string name="layout">લેઆઉટ</string>
     <string name="alternative_player_layout">વૈકલ્પિક પ્લેયર લેઆઉટ</string>
-    <string name="alternative_player_layout_summary">નીચેની જગ્યાએ ટિપ્પણીઓની ઉપર હરોળ તરીકે સંબંધિત વિડિયોને બતાવો.</string>
     <string name="change_region">વર્તમાન ક્ષેત્ર માટે ટ્રેન્ડિંગ અનુપલબ્ધ હોય તેવું લાગે છે. કૃપા કરીને સેટિંગ્સમાં અન્યને પસંદ કરો.</string>
     <string name="downloading">ડાઉનલોડ કરી રહ્યું છે…</string>
     <string name="clear_customInstances">સ્પષ્ટ ઉમેર્યું</string>
@@ -299,7 +297,6 @@
     <string name="always">હંમેશા</string>
     <string name="watch_history_summary">સ્થાનિક રીતે જોયેલી વિડિયો પર નજર રાખો</string>
     <string name="watch_positions_title">યાદ રાખેલ પ્લેબેક સ્થાનો</string>
-    <string name="autoplay_summary">વર્તમાન વિડિઓ પછી આગલી વિડિઓને સ્વતઃ ચલાવો.</string>
     <string name="clonePlaylist">ક્લોન પ્લેલીસ્ટ</string>
     <string name="deleteAccount_summary">તમારું પાઇપ થયેલ ખાતું કાઢી નાંખો</string>
     <string name="autoRotatePlayer_summary">જ્યારે ઉપકરણ ચાલુ થાય ત્યારે સંપૂર્ણસ્ક્રીન પ્લેબેક.</string>

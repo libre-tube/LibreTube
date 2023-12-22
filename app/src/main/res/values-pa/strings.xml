@@ -118,8 +118,7 @@
     <string name="hide_watched_from_feed">ਫੀਡ ਤੋਂ ਦੇਖੇ ਗਏ ਵੀਡੀਓ ਨੂੰ ਲੁਕਾਓ</string>
     <string name="shapedIcon">ਮੂਰਖ ਆਕਾਰ</string>
     <string name="flameIcon">ਉੱਡਦੀ ਲਾਟ</string>
-    <string name="pauseOnScreenOff_summary">ਜਦੋਂ ਸਕ੍ਰੀਨ ਬੰਦ ਹੋ ਜਾਵੇ ਤਾਂ ਪਲੇਬੈਕ ਨੂੰ ਰੋਕੋ।</string>
-    <string name="autoplay_summary">ਮੌਜੂਦਾ ਵੀਡੀਓ ਤੋਂ ਬਾਅਦ ਅਗਲੀ ਵੀਡੀਓ ਨੂੰ ਆਟੋ-ਪਲੇ ਕਰੋ।</string>
+    <string name="pauseOnScreenOff_summary">ਜਦੋਂ ਸਕ੍ਰੀਨ ਬੰਦ ਹੋ ਜਾਵੇ ਤਾਂ ਪਲੇਬੈਕ ਨੂੰ ਰੋਕੋ</string>
     <string name="reset_message">ਕੀ ਸਾਰੀਆਂ ਸੈਟਿੰਗਾਂ ਰੀਸੈਟ ਕਰਕੇ ਲੌਗ ਆਊਟ ਕਰਨਾ ਹੈ\?</string>
     <string name="downloads">ਡਾਊਨਲੋਡਸ</string>
     <string name="update_summary">ਅੱਪਡੇਟ ਲਈ ਜਾਂਚ ਕਰੋ</string>
@@ -265,7 +264,6 @@
     <string name="new_videos_badge_summary">ਜੇਕਰ ਕੁਝ ਹਨ ਤਾਂ ਨਵੇਂ ਵੀਡੀਓ ਦੀ ਗਿਣਤੀ ਦੇ ਨਾਲ ਇੱਕ ਬੈਜ ਦਿਖਾਓ।</string>
     <string name="skip_segment">ਸਕਿਪ ਸੈਗਮੈਂਟ</string>
     <string name="sb_skip_manual">ਹੱਥੀਂ ਸਕਿਪ ਕਰੋ</string>
-    <string name="sb_skip_manual_summary">ਸੈਗਮੈਂਟਾਂ ਨੂੰ ਸਵੈਚਲਿਤ ਤੌਰ \'ਤੇ ਨਾ ਸਕਿਪ ਕਰੋ, ਹਮੇਸ਼ਾ ਪਹਿਲਾਂ ਪੁੱਛੋ।</string>
     <string name="local_subscriptions">ਸਥਾਨਕ ਸਬਸਕ੍ਰਿਪਸ਼ਨ</string>
     <string name="preferences">ਤਰਜੀਹਾਂ</string>
     <string name="backup_customInstances">ਕਸਟਮ ਇੰਸਟੈਂਸ</string>
@@ -289,7 +287,6 @@
     <string name="time">ਸਮਾਂ</string>
     <string name="start_time">ਸ਼ੁਰੂਆਤੀ ਸਮਾਂ</string>
     <string name="end_time">ਸਮਾਪਤੀ ਸਮਾਂ</string>
-    <string name="alternative_player_layout_summary">ਸੰਬੰਧਿਤ ਵੀਡੀਓਜ਼ ਨੂੰ ਹੇਠਾਂ ਦੀ ਬਜਾਏ ਟਿੱਪਣੀਆਂ ਦੇ ਉੱਪਰ ਇੱਕ ਕਤਾਰ ਦੇ ਰੂਪ ਵਿੱਚ ਦਿਖਾਓ।</string>
     <string name="audio_track">ਆਡੀਓ ਟਰੈਕ</string>
     <string name="queue_insert_related_videos">ਸੰਬੰਧਿਤ ਵੀਡੀਓ ਪਾਓ</string>
     <string name="local_playlists">ਸਥਾਨਕ ਪਲੇਲਿਸਟਾਂ</string>

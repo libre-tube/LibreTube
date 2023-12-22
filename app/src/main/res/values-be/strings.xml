@@ -100,8 +100,7 @@
     <string name="behavior">Паводзіны</string>
     <string name="player_summary">Па змаўчанні і паводзіны</string>
     <string name="pauseOnScreenOff">Аўтапаўза</string>
-    <string name="pauseOnScreenOff_summary">Спыняць прайграванне пры адключэнні экрана.</string>
-    <string name="autoplay_summary">Аўтаматычнае прайграванне наступнага відэа пасля бягучага.</string>
+    <string name="pauseOnScreenOff_summary">Спыняць прайграванне пры адключэнні экрана</string>
     <string name="clonePlaylist">Кланаваць плэйліст</string>
     <string name="reset">Аднавіць значэнні па змаўчанні</string>
     <string name="reset_message">Скінуць усе налады і выйсці\?</string>
@@ -277,7 +276,6 @@
     <string name="local_subscriptions">Лакальныя падпіскі</string>
     <string name="skip_segment">Прапусціць сегмент</string>
     <string name="sb_skip_manual">Прапусціць уручную</string>
-    <string name="sb_skip_manual_summary">Не прапускайце сегменты аўтаматычна, заўсёды запытвайце раней.</string>
     <string name="backup_customInstances">Карыстальніцкія асобнікі</string>
     <string name="save_feed">Загружаць канал у фонавым рэжыме</string>
     <string name="save_feed_summary">Загружайце стужку падпіскі ў фонавым рэжыме і не дазваляйце ёй аўтаматычна абнаўляцца.</string>
@@ -300,8 +298,7 @@
     <string name="notification_time">Час атрымання апавяшчэнняў</string>
     <string name="confirm_unsubscribing_summary">Паказаць дыялогавае акно пацверджання перад адмовай ад падпіскі.</string>
     <string name="play_all">Гуляць усе</string>
-    <string name="notification_time_summary">Прамежак часу, у які дазволена паказваць апавяшчэнні.</string>
-    <string name="alternative_player_layout_summary">Паказваць звязаныя відэа ў радку над каментарыямі, а не ўнізе.</string>
+    <string name="notification_time_summary">Прамежак часу, у які дазволена паказваць апавяшчэнні</string>
     <string name="audio_track">Гукавая дарожка</string>
     <string name="hls_instead_of_dash">Выкарыстоўвайце HLS</string>
     <string name="auto_quality">Аўто</string>

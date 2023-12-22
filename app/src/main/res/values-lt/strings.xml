@@ -85,8 +85,7 @@
     <string name="instance_frontend_url">URL į perdavimo šaltinio sąsają</string>
     <string name="quality">Kokybė</string>
     <string name="pauseOnScreenOff">Automatinis pristabdymas</string>
-    <string name="pauseOnScreenOff_summary">Pristabdyti atkūrimą, kai ekranas išjungtas.</string>
-    <string name="autoplay_summary">Automatiškai paleisti kitą vaizdo įrašą po dabartinio.</string>
+    <string name="pauseOnScreenOff_summary">Pristabdyti atkūrimą, kai ekranas išjungtas</string>
     <string name="reset">Atkurti numatytus nustatymus</string>
     <string name="account">Paskyra</string>
     <string name="auth_instance">Autentifikavimo perdavimo šaltinis</string>
@@ -276,7 +275,6 @@
     <string name="required_network">Būtinas ryšys</string>
     <string name="network_all">Visi</string>
     <string name="picture_in_picture">Vaizdas vaizde</string>
-    <string name="sb_skip_manual_summary">Nepraleisti segmentų automatiškai, visada prieš tai įspėti.</string>
     <string name="backup_customInstances">Pasirinktiniai perdavimo šaltiniai</string>
     <string name="save_feed_summary">Fone įkelti prenumeratos kanalą ir neleisti, kad jis būtų automatiškai atnaujinamas.</string>
     <string name="play_next">Paleisti sekantį</string>
@@ -303,7 +301,6 @@
     <string name="notification_time">Pranešimo laikas</string>
     <string name="navbar_order">Rikiavimas</string>
     <string name="layout">Išdėstymas</string>
-    <string name="alternative_player_layout_summary">Rodyti susijusius vaizdo įrašus kaip eilutę virš komentarų, o ne kaip įprasta po jais.</string>
     <string name="alternative_player_layout">Alternatyvus grotuvo išdėstymas</string>
     <string name="audio_track">Garso takelis</string>
     <string name="auto_quality">Automatinė</string>

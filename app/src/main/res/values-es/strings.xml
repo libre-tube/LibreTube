@@ -158,8 +158,7 @@
     <string name="player_summary">Valores predeterminados y comportamiento</string>
     <string name="seek_increment">Incremento al avanzar/retroceder (seg)</string>
     <string name="pauseOnScreenOff">Pausa automática</string>
-    <string name="pauseOnScreenOff_summary">Pausar el reproductor cuando se apaga la pantalla.</string>
-    <string name="autoplay_summary">Reproducir automáticamente el siguiente vídeo después del actual.</string>
+    <string name="pauseOnScreenOff_summary">Pausar el reproductor cuando se apaga la pantalla</string>
     <string name="clonePlaylist">Clonar lista de reproducción</string>
     <string name="reset">Restaurar los valores predeterminados</string>
     <string name="reset_message">¿Restablecer todos los ajustes y cerrar la sesión\?</string>
@@ -270,7 +269,6 @@
     <string name="skip_segment">Omitir</string>
     <string name="download_channel_description">Mostrar una notificación al descargar medios.</string>
     <string name="push_channel_name">Notificador de novedades</string>
-    <string name="sb_skip_manual_summary">No omitir segmentos automáticamente, preguntarme siempre.</string>
     <string name="push_channel_description">Mostrar una notificación cuando hay nuevas transmisiones disponibles.</string>
     <string name="local_subscriptions">Suscripciones locales</string>
     <string name="preferences">Preferencias</string>
@@ -300,8 +298,7 @@
     <string name="start_time">Hora de inicio</string>
     <string name="end_time">Hora de finalización</string>
     <string name="notification_time">Restringir horario de notificación</string>
-    <string name="notification_time_summary">Limitar el intervalo de tiempo en el que se muestran las notificaciones.</string>
-    <string name="alternative_player_layout_summary">Mostrar los vídeos relacionados en una fila sobre los comentarios en vez de al final.</string>
+    <string name="notification_time_summary">Limitar el intervalo de tiempo en el que se muestran las notificaciones</string>
     <string name="alternative_player_layout">Diseño alternativo del reproductor</string>
     <string name="navbar_order">Ordenar</string>
     <string name="layout">Diseño</string>

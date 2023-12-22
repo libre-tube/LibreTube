@@ -170,7 +170,6 @@
     <string name="quality">Qualidade</string>
     <string name="player_summary">Predefinições e comportamento</string>
     <string name="seek_increment">Incremento de avanço/recuo</string>
-    <string name="autoplay_summary">Reproduzir vídeos seguintes automaticamente.</string>
     <string name="downloading">A descarregar…</string>
     <string name="empty_instance">Preencha o nome e a URL da API.</string>
     <string name="category_music_offtopic">Música: secção não musical</string>
@@ -262,7 +261,6 @@
     <string name="push_channel_description">Mostrar notificação se existirem novos fluxos multimédia.</string>
     <string name="skip_segment">Ignorar segmento</string>
     <string name="sb_skip_manual">Ignorar manualmente</string>
-    <string name="sb_skip_manual_summary">Não ignorar segmentos, perguntar antes.</string>
     <string name="download_channel_name">Serviço de descargas</string>
     <string name="local_subscriptions">Subscrições locais</string>
     <string name="preferences">Preferências</string>
@@ -305,7 +303,6 @@
     <string name="navbar_order">Ordem</string>
     <string name="layout">Esquema</string>
     <string name="alternative_player_layout">Esquema alternativo de reprodução</string>
-    <string name="alternative_player_layout_summary">Mostrar os vídeos relacionados como uma linha acima dos comentários em vez de abaixo.</string>
     <string name="audio_track">Faixa de áudio</string>
     <string name="hls_instead_of_dash">Usar HLS</string>
     <string name="hls_instead_of_dash_summary">Usar HLS em vez de DASH (será mais lento, não recomendado)</string>

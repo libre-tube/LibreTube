@@ -160,7 +160,6 @@
     <string name="pauseOnScreenOff">השהיה אוטומטית</string>
     <string name="pauseOnScreenOff_summary">השהיית הניגון עם כיבוי המסך.</string>
     <string name="clonePlaylist">שכפול רשימת הנגינה</string>
-    <string name="autoplay_summary">לנגן את הסרטון הבא אוטומטית אחרי הנוכחי.</string>
     <string name="reset">שחזור ברירות מחדל</string>
     <string name="reset_message">לאפס את כל ההגדרות ולצאת\?</string>
     <string name="account">חשבון</string>
@@ -267,7 +266,6 @@
     <string name="new_videos_badge_summary">להציג עיטור עם כמות הסרטונים החדשים אם יש כאלה.</string>
     <string name="skip_segment">דילוג על מקטע</string>
     <string name="sb_skip_manual">דילוג ידני</string>
-    <string name="sb_skip_manual_summary">לא לדלג על קטעים אוטומטית, תמיד להודיע לפני.</string>
     <string name="local_subscriptions">מינויים מקומיים</string>
     <string name="preferences">העדפות</string>
     <string name="backup_customInstances">מופעים מותאמים אישית</string>
@@ -301,7 +299,6 @@
     <string name="notification_time">הגבלת זמן התראה</string>
     <string name="notification_time_summary">הגבלת חלון הזמן שבו תופענה התראות לץ תזרימים.</string>
     <string name="play_all">לנגן הכול</string>
-    <string name="alternative_player_layout_summary">להציג את הסרטונים הקשורים כשורה צריך לתגובות במקום מתחת.</string>
     <string name="navbar_order">סדר</string>
     <string name="layout">פריסה</string>
     <string name="alternative_player_layout">פריסת נגן חלופית</string>

@@ -146,7 +146,6 @@
     <string name="flameIcon">휘날리는 화염</string>
     <string name="reset">초기값으로 복원</string>
     <string name="reset_message">모든 설정을 재설정하고 로그아웃하시겠습니까\?</string>
-    <string name="autoplay_summary">현재 비디오가 끝나면 다음 비디오를 자동 재생합니다.</string>
     <string name="no_audio">오디오 없음</string>
     <string name="no_video">비디오 없음</string>
     <string name="audio">오디오</string>
@@ -298,10 +297,8 @@
     <string name="shapedIcon">웃긴 모양</string>
     <string name="captions_size">캡션 크기</string>
     <string name="sb_skip_manual">수동으로 건너뛰기</string>
-    <string name="sb_skip_manual_summary">세그먼트를 자동으로 건너뛰지 말고, 항상 건너뛰기 전에 확인하십시오.</string>
     <string name="gradientIcon">glib 기울기</string>
     <string name="open">열기…</string>
-    <string name="alternative_player_layout_summary">아래가 아닌 댓글 위에 관련 동영상을 행으로 표시합니다.</string>
     <string name="seek_increment">증가분 찾기</string>
     <string name="backup_restore_summary">구독, 재생 목록 가져오기 및 내보내기, …</string>
     <string name="privacy_alert">개인 정보 보호 경고</string>

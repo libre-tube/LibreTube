@@ -150,7 +150,6 @@
     <string name="player_summary">ଡିଫଲ୍ଟ ଓ ଆଚରଣ</string>
     <string name="seek_increment">ବୃଦ୍ଧି ଖୋଜ</string>
     <string name="pauseOnScreenOff">ସ୍ଵତଃ-ବିରାମ</string>
-    <string name="autoplay_summary">ସାମ୍ପ୍ରତିକ ଭିଡିଓ ପରେ ପରବର୍ତ୍ତୀ ଭିଡିଓକୁ ସ୍ଵତଃ-ଚଲାନ୍ତୁ ।</string>
     <string name="clonePlaylist">କ୍ଲୋନ୍ ପ୍ଲେଲିଷ୍ଟ୍</string>
     <string name="deleteAccount">ଖାତା ବିଲୋପ କରନ୍ତୁ</string>
     <string name="account">ଆକାଉଣ୍ଟ</string>
@@ -220,7 +219,6 @@
     <string name="new_videos_badge_summary">ଯଦି କିଛି ଅଛି ତେବେ ନୂତନ ଭିଡିଓ ପରିମାଣ ସହିତ ଏକ ବ୍ୟାଜ୍ ଦେଖାନ୍ତୁ ।</string>
     <string name="skip_segment">ବିଭାଗକୁ ଏଡ଼ାଇଦିଅ</string>
     <string name="sb_skip_manual">ମେନୁଆଲି ଏଡାନ୍ତୁ</string>
-    <string name="sb_skip_manual_summary">ସ୍ଵତଃ ଏଡାନ୍ତୁ ନାହିଁ।</string>
     <string name="local_subscriptions">ସ୍ଥାନୀୟ ସଦସ୍ୟତା</string>
     <string name="backup_customInstances">ଅନୁକୂଳ୍ ଇନଷ୍ଟାନ୍ସ</string>
     <string name="save_feed">ପୃଷ୍ଠଭୂମିରେ ଫିଡ୍ ଲୋଡ୍ କରନ୍ତୁ</string>
@@ -304,7 +302,6 @@
     <string name="navbar_order">ସଜାନ୍ତୁ</string>
     <string name="layout">ଲେଆଉଟ୍</string>
     <string name="alternative_player_layout">ବିକଳ୍ପ ପ୍ଲେୟାର୍ ଲେଆଉଟ୍</string>
-    <string name="alternative_player_layout_summary">ନିମ୍ନୋକ୍ତ ମନ୍ତବ୍ୟଗୁଡିକ ଉପରେ ସଂପୃକ୍ତ ଭିଡିଓଗୁଡିକ ଧାଡି ଭାବରେ ଦେଖାନ୍ତୁ ।</string>
     <string name="audio_track">ଅଡିଓ ଟ୍ରାକ୍</string>
     <string name="hls_instead_of_dash">HLS ବ୍ୟବହାର କରନ୍ତୁ</string>
     <string name="hls_instead_of_dash_summary">DASH ପରିବର୍ତ୍ତେ HLS ବ୍ୟବହାର କରନ୍ତୁ (ଧୀର ହେବ, ସୁପାରିଶ ହେବ ନାହିଁ)</string>

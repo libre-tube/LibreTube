@@ -180,8 +180,7 @@
     <string name="player_summary">Defaults and behavior</string>
     <string name="seek_increment">Seek increment</string>
     <string name="pauseOnScreenOff">Auto-pause</string>
-    <string name="pauseOnScreenOff_summary">Pause playback when the screen is turned off.</string>
-    <string name="autoplay_summary">Auto-play the next video after the current one.</string>
+    <string name="pauseOnScreenOff_summary">Pause playback when the screen is turned off</string>
     <string name="clonePlaylist">Clone playlist</string>
     <string name="reset">Restore defaults</string>
     <string name="reset_message">Reset all settings and log out?</string>
@@ -294,7 +293,6 @@
     <string name="new_videos_badge_summary">Show a badge with the amount of new videos if there are some.</string>
     <string name="skip_segment">Skip segment</string>
     <string name="sb_skip_manual">Skip manually</string>
-    <string name="sb_skip_manual_summary">Don\'t skip segments automatically, always prompt before.</string>
     <string name="local_subscriptions">Local subscriptions</string>
     <string name="preferences">Preferences</string>
     <string name="backup_customInstances">Custom Instances</string>
@@ -332,7 +330,6 @@
     <string name="navbar_order">Order</string>
     <string name="layout">Layout</string>
     <string name="alternative_player_layout">Alternative player layout</string>
-    <string name="alternative_player_layout_summary">Show the related videos as a row above the comments instead of below.</string>
     <string name="audio_track">Audio track</string>
     <string name="unsupported_file_format">Unsupported file format: %1$s</string>
     <string name="hls_instead_of_dash">Use HLS</string>

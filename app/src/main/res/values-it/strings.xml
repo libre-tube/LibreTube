@@ -157,7 +157,6 @@
     <string name="behavior">Comportamento</string>
     <string name="player_summary">Predefiniti e comportamento</string>
     <string name="seek_increment">Incremento di ricerca</string>
-    <string name="autoplay_summary">Riproduci automaticamente il video successivo quando quello attuale è finito.</string>
     <string name="pauseOnScreenOff">Pausa automatica</string>
     <string name="pauseOnScreenOff_summary">Metti in pausa la riproduzione quando lo schermo è spento.</string>
     <string name="clonePlaylist">Clona playlist</string>
@@ -266,7 +265,6 @@
     <string name="mobile_data">Dati mobili</string>
     <string name="skip_segment">Salta il segmento</string>
     <string name="sb_skip_manual">Salta manualmente</string>
-    <string name="sb_skip_manual_summary">Non saltare i segmenti automaticamente, chiedi sempre prima.</string>
     <string name="download_channel_description">Mostra una notifica quando si scaricano i media.</string>
     <string name="local_subscriptions">Iscrizioni locali</string>
     <string name="preferences">Preferenze</string>
@@ -308,7 +306,6 @@
     <string name="swipe_controls_summary">Usa i gesti per regolare la luminosità e il volume.</string>
     <string name="defaults">Predefiniti</string>
     <string name="swipe_controls">Gesti</string>
-    <string name="alternative_player_layout_summary">Mostra i video correlati su una riga al di sopra dei commenti, anziché al di sotto.</string>
     <string name="navbar_order">Ordine</string>
     <string name="layout">Disposizione</string>
     <string name="alternative_player_layout">Layout alternativo del player</string>

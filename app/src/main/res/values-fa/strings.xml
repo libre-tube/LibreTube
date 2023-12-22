@@ -302,13 +302,11 @@
     <string name="watch_history_summary">ردیابی محلی ویدیوهای دیده شده</string>
     <string name="maximum_image_cache">بیشینهٔ اندازهٔ انبارهٔ تصویر</string>
     <string name="skip_segment">رد شدن از بخش</string>
-    <string name="sb_skip_manual_summary">از بخش‌ها به‌طور خودکار رد نشوید، همیشه قبل از آن درخواست کنید.</string>
     <string name="added_to_playlist">افزوده به سیاههٔ پخش %1$s</string>
     <string name="delete">حذف از دانلودها</string>
     <string name="change_region">به نظر می رسد پرطرفدار ها برای منطقه فعلی در دسترس نیست. لطفاً یکی دیگر را در تنظیمات انتخاب کنید.</string>
-    <string name="pauseOnScreenOff_summary">مکث پخش هنگام خاموش بودن صفحه.</string>
-    <string name="autoplay_summary">پخش خودکار ویدیوی بعدی بعد از ویدیوی فعلی.</string>
-    <string name="skip_buttons_summary">نمایش دکمه ها برای پرش به ویدیو بعدی یا قبلی.</string>
+    <string name="pauseOnScreenOff_summary">مکث پخش هنگام خاموش بودن صفحه</string>
+    <string name="skip_buttons_summary">نمایش دکمه ها برای پرش به ویدیو بعدی یا قبلی</string>
     <string name="playerVideoFormat">قالب ویدیویی پخش‌کننده</string>
     <string name="instance_frontend_url">نشانی پیشانهٔ نمونه</string>
     <string name="seek_increment">پیشروی جویش</string>
@@ -398,7 +396,6 @@
     <string name="play_automatically">پخش خودکار</string>
     <string name="play_automatically_summary">هنگام انتخاب، پخش خودکار ویدیو را شروع کنید</string>
     <string name="go_to_video">رفتن به ویدیو</string>
-    <string name="alternative_player_layout_summary">نمایش ویدیوهای مربوط به شکل ردیفی بالای دیدگاه‌ها به جای زیرشان.</string>
     <string name="alternative_pip_controls">کنترل های جایگزین PiP</string>
     <string name="queue_insert_related_videos">درج فیلم های مرتبط</string>
     <string name="double_tap_seek_summary">دوبار در سمت چپ یا راست ضربه بزنید تا موقعیت پخش کننده به عقب یا جلو برود.</string>

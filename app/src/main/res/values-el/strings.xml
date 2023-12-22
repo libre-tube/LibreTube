@@ -160,8 +160,7 @@
     <string name="reset">Επαναφορά προεπιλογών</string>
     <string name="reset_message">Επαναφορά όλων των ρυθμίσεων και αποσύνδεση;</string>
     <string name="pauseOnScreenOff">Αυτόματη παύση</string>
-    <string name="pauseOnScreenOff_summary">Παύση της αναπαραγωγής όταν η οθόνη είναι απενεργοποιημένη.</string>
-    <string name="autoplay_summary">Αυτόματη αναπαραγωγή του επόμενου βίντεο μετά το τρέχον.</string>
+    <string name="pauseOnScreenOff_summary">Παύση της αναπαραγωγής όταν η οθόνη είναι απενεργοποιημένη</string>
     <string name="clonePlaylist">Κλωνοποίηση λίστας αναπαραγωγής</string>
     <string name="deleteAccount">Διαγραφή λογαριασμού</string>
     <string name="account">Λογαριασμός</string>
@@ -286,7 +285,6 @@
     <string name="notification_time_summary">Περιορίστε το χρονικό διάστημα εντός του οποίου εμφανίζονται οι ειδοποιήσεις ροής.</string>
     <string name="layout">Διάταξη</string>
     <string name="alternative_player_layout">Εναλλακτική διάταξη αναπαραγωγής</string>
-    <string name="alternative_player_layout_summary">Εμφανίστε τα σχετικά βίντεο ως μια σειρά πάνω από τα σχόλια αντί για παρακάτω.</string>
     <string name="hls_instead_of_dash_summary">Χρησιμοποιήστε HLS αντί για DASH (πιο αργό, δεν συνιστάται)</string>
     <string name="auto_quality">Αυτόματο</string>
     <string name="trending">Τι είναι σε τάση τώρα</string>
@@ -330,7 +328,6 @@
     <string name="download_paused">Το κατέβασμα τέθηκε σε παύση</string>
     <string name="skip_segment">Παράλειψη τμήματος</string>
     <string name="sb_skip_manual">Παράβλεψη χειροκίνητα</string>
-    <string name="sb_skip_manual_summary">Μην παραλείψεις τμήματα αυτόματα, πάντα ζήτα προτροπή.</string>
     <string name="playlistNameReversed">Όνομα λίστας αναπαραγωγής (αντίστροφο)</string>
     <string name="time_code">Κωδικός χρόνου (δευτερόλεπτα)</string>
     <string name="playlistCloned">Η λίστα αναπαραγωγής κλωνοποιήθηκε</string>

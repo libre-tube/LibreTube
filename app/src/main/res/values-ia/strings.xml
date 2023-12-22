@@ -167,7 +167,6 @@
     <string name="shapedIcon">Forma fatue</string>
     <string name="legacyIcon">Antique</string>
     <string name="category_sponsor">Sponsor</string>
-    <string name="autoplay_summary">Reproducer automaticamente le sequente video post le actual.</string>
     <string name="least_recent">Plus vetule</string>
     <string name="open">Aperir…</string>
     <string name="require_restart_message">Reinitia le application pro applicar le cambios.</string>
@@ -275,7 +274,6 @@
     <string name="play_next">Reproducer le sequente</string>
     <string name="no_subtitles_available">Necun subtitulos disponibile</string>
     <string name="new_videos_badge">Indicator de nove videos</string>
-    <string name="sb_skip_manual_summary">Non saltar segmentos automaticamente, sempre demandar avante.</string>
     <string name="save_feed">Cargar fluxo in secunde plano</string>
     <string name="yt_shorts">Shorts</string>
     <string name="resize_mode_fit">Adjustar</string>
@@ -502,7 +500,6 @@
     <string name="autoplay_countdown">Computo a retro del reproduction automatic</string>
     <string name="username_email">Continuar con un adresse de e-mail que non es reccomendate?</string>
     <string name="creation_date_reversed">Data de creation (invertite)</string>
-    <string name="alternative_player_layout_summary">Monstrar le videos associate como un rango supra le commentos in vice de in basso.</string>
     <string name="playback_during_call">Continuar le reproduction durante un appello telephonic</string>
     <string name="custom_playback_speed_summary">Usar un velocitate de reproduction differente que le reproductor normal.</string>
     <string name="alphabetic_reversed">Alphabetic (invertite)</string>

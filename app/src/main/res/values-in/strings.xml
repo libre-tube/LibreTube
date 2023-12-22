@@ -152,8 +152,7 @@
     <string name="device_info">Info Perangkat</string>
     <string name="clear_customInstances">Hapus yang telah ditambahkan</string>
     <string name="pauseOnScreenOff">Jeda secara otomatis</string>
-    <string name="pauseOnScreenOff_summary">Jeda pemutaran ketika layar dimatikan.</string>
-    <string name="autoplay_summary">Mainkan video berikut secara otomatis setelah video saat ini.</string>
+    <string name="pauseOnScreenOff_summary">Jeda pemutaran ketika layar dimatikan</string>
     <string name="reset_message">Atur ulang semua pengaturan dan keluar\?</string>
     <string name="require_restart_message">Mulai ulang aplikasi untuk menggunakan perubahan baru.</string>
     <string name="search_history_summary">Ingat penelusuran</string>
@@ -267,7 +266,6 @@
     <string name="wifi">Wi-Fi</string>
     <string name="skip_segment">Lewati segmen</string>
     <string name="sb_skip_manual">Lewati secara manual</string>
-    <string name="sb_skip_manual_summary">Jangan lewati segmen secara otomatis, selalu tanya sebelumnya.</string>
     <string name="local_subscriptions">Langganan lokal</string>
     <string name="backup_customInstances">Instansi Kustom</string>
     <string name="download_channel_name">Layanan Unduhan</string>
@@ -304,7 +302,6 @@
     <string name="navbar_order">Urutan</string>
     <string name="layout">Tata letak</string>
     <string name="alternative_player_layout">Tata letak pemutar alternatif</string>
-    <string name="alternative_player_layout_summary">Tampilkan video terkait sebagai baris di atas komentar, bukan di bawah.</string>
     <string name="audio_track">Trek audio</string>
     <string name="hls_instead_of_dash">Gunakan HLS</string>
     <string name="auto_quality">Otomatis</string>

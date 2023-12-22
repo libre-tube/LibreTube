@@ -156,8 +156,7 @@
     <string name="clonePlaylist">Playlist duplizieren</string>
     <string name="watch_history">Wiedergabeverlauf</string>
     <string name="instance_frontend_url">URL zum Instanz-Frontend</string>
-    <string name="pauseOnScreenOff_summary">Den Player pausieren, wenn der Bildschirm ausgeschaltet ist.</string>
-    <string name="autoplay_summary">Spiele nach dem aktuellen Video automatisch das nächste ab.</string>
+    <string name="pauseOnScreenOff_summary">Den Player pausieren, wenn der Bildschirm ausgeschaltet ist</string>
     <string name="watch_positions">Position merken</string>
     <string name="auth_instance">Authentifizierungsinstanz</string>
     <string name="auth_instance_summary">Verwende für authentifizierte Aufrufe eine andere Instanz.</string>
@@ -253,8 +252,7 @@
     <string name="audio_video_summary">Qualität und Format</string>
     <string name="repeat_mode_current">Aktuelles Video</string>
     <string name="mobile_data">Mobile Daten</string>
-    <string name="new_videos_badge_summary">Zeigt ein Abzeichen mit der Anzahl neuer Videos an, falls vorhanden.</string>
-    <string name="sb_skip_manual_summary">Abschnitte nicht automatisch überspringen, immer vorher fragen.</string>
+    <string name="new_videos_badge_summary">Zeigt ein Abzeichen mit der Anzahl neuer Videos an, falls vorhanden</string>
     <string name="local_subscriptions">Lokale Abos</string>
     <string name="playback_pitch">Tonhöhe</string>
     <string name="download_channel_description">Zeigt beim Herunterladen von Medien eine Benachrichtigung an.</string>
@@ -301,7 +299,6 @@
     <string name="navbar_order">Anordnung</string>
     <string name="layout">Layout</string>
     <string name="alternative_player_layout">Alternatives Player-Layout</string>
-    <string name="alternative_player_layout_summary">Zeige ähnliche Videos über den Kommentaren in einer Reihe an anstatt darunter.</string>
     <string name="added_to_playlist">Zur Playlist %1$s hinzugefügt</string>
     <string name="audio_track">Tonspur</string>
     <string name="livestreams">Livestreams</string>

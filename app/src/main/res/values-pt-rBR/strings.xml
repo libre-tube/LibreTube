@@ -218,8 +218,7 @@
     <string name="behavior">Comportamento</string>
     <string name="seek_increment">Incremento de avanço/retrocesso</string>
     <string name="pauseOnScreenOff">Pausa automática</string>
-    <string name="pauseOnScreenOff_summary">Pausar quando a tela é desligada.</string>
-    <string name="autoplay_summary">Reproduzir o próximo vídeo assim que o atual termina.</string>
+    <string name="pauseOnScreenOff_summary">Pausar quando a tela é desligada</string>
     <string name="playingOnBackground">Reproduzindo em segundo plano…</string>
     <string name="clonePlaylist">Clonar playlist</string>
     <string name="downloading">Baixando…</string>
@@ -270,7 +269,6 @@
     <string name="renamePlaylist">Renomear playlist</string>
     <string name="new_videos_badge">Indicador para novos vídeos</string>
     <string name="skip_segment">Pular segmento</string>
-    <string name="sb_skip_manual_summary">Não pular segmentos automaticamente, sempre perguntar.</string>
     <string name="playback_pitch">Tom</string>
     <string name="copied">Copiado</string>
     <string name="change_region">Feed de tendências parece estar indisponível na região atual. Por favor, selecione uma região diferente nas configurações.</string>
@@ -304,7 +302,6 @@
     <string name="navbar_order">Ordem</string>
     <string name="layout">Esquema</string>
     <string name="alternative_player_layout">Esquema alternativo do reprodutor</string>
-    <string name="alternative_player_layout_summary">Exibir os vídeos relacionados como uma linha acima dos comentários em vez de abaixo.</string>
     <string name="audio_track">Faixa de áudio</string>
     <string name="hls_instead_of_dash">Usar HLS</string>
     <string name="hls_instead_of_dash_summary">Usar HLS em vez de DASH (será mais lento, não recomendado)</string>

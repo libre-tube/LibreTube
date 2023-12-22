@@ -150,7 +150,6 @@
     <string name="new_videos_badge_summary">यदि कुछ हैं तो नए वीडियो की मात्रा के साथ बैज दिखाएं।</string>
     <string name="skip_segment">खंड छोड़ें</string>
     <string name="sb_skip_manual">मैन्युअली छोड़ें</string>
-    <string name="sb_skip_manual_summary">खंडों को स्वचालित रूप से न छोड़ें, हमेशा पहले संकेत दें।</string>
     <string name="local_subscriptions">स्थानीय सब्सक्रिप्शनें</string>
     <string name="preferences">तरजीहें</string>
     <string name="backup_customInstances">कस्टम इंस्टैंस</string>
@@ -163,7 +162,6 @@
     <string name="navbar_order">क्रम</string>
     <string name="layout">लेआउट</string>
     <string name="alternative_player_layout">वैकल्पिक प्लेयर लेआउट</string>
-    <string name="alternative_player_layout_summary">संबंधित वीडियो को नीचे की बजाय टिप्पणियों के ऊपर एक पंक्ति के रूप में दिखाएं।</string>
     <string name="change_region">वर्तमान क्षेत्र के लिए चलन में अनुपलब्ध प्रतीत होता है। कृपया सेटिंग्स में दूसरे का चयन करें।</string>
     <string name="device_info">डिवाइस की जानकारी</string>
     <string name="disabled">आफ</string>
@@ -267,8 +265,7 @@
     <string name="instance_frontend_url">URL से इंस्टेंस का फर॔टऐंड</string>
     <string name="seek_increment">सीक में वृद्धि</string>
     <string name="pauseOnScreenOff">ऑटो ठहराव</string>
-    <string name="pauseOnScreenOff_summary">स्क्रीन बंद होने पर प्लेबैक रोकें।</string>
-    <string name="autoplay_summary">मौजूदा वीडियो के बाद अगला वीडियो ऑटो-प्ले करें।</string>
+    <string name="pauseOnScreenOff_summary">स्क्रीन बंद होने पर प्लेबैक रोकें</string>
     <string name="clonePlaylist">क्लोन प्लेलिस्ट</string>
     <string name="reset">डिफॉल्ट्स का पुनःस्थापन</string>
     <string name="deleteAccount">खाता डिलीट करें</string>

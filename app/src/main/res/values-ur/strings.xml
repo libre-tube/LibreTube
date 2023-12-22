@@ -115,8 +115,7 @@
     <string name="behavior">رویہ</string>
     <string name="player_summary">ڈیفالٹس اور رویہ</string>
     <string name="seek_increment">سیک اضافہ</string>
-    <string name="pauseOnScreenOff_summary">اسکرین آف ہونے پر پلے بیک کو روک دیں۔</string>
-    <string name="autoplay_summary">موجودہ ویڈیو کے بعد اگلی ویڈیو خود بخود چلائیں۔</string>
+    <string name="pauseOnScreenOff_summary">اسکرین آف ہونے پر پلے بیک کو روک دیں</string>
     <string name="clonePlaylist">پلے لسٹ کلون کریں</string>
     <string name="reset">ڈیفالٹس بحال کریں</string>
     <string name="category_selfpromo">بلا معاوضہ/سیلف پروموشن</string>

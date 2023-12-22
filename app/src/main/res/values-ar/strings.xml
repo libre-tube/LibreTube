@@ -158,8 +158,7 @@
     <string name="player_summary">الإعدادات الافتراضية والسلوك</string>
     <string name="seek_increment">معدل التقديم</string>
     <string name="pauseOnScreenOff">الإيقاف المؤقت التلقائي</string>
-    <string name="autoplay_summary">التشغيل التلقائي للفيديو التالي بعد الفيديو الحالي.</string>
-    <string name="pauseOnScreenOff_summary">أوقف التشغيل مؤقتا عند إيقاف تشغيل الشاشة.</string>
+    <string name="pauseOnScreenOff_summary">أوقف التشغيل مؤقتا عند إيقاف تشغيل الشاشة</string>
     <string name="reset">استعادة الإعدادات الافتراضية</string>
     <string name="reset_message">إعادة تعيين جميع الإعدادات وتسجيل الخروج؟</string>
     <string name="clonePlaylist">نسخ قائمة التشغيل</string>
@@ -267,7 +266,6 @@
     <string name="new_videos_badge_summary">اعرض شارة تحتوي على عدد مقاطع الفيديو الجديدة إذا كان هناك بعضها.</string>
     <string name="skip_segment">تخطي الجزء</string>
     <string name="sb_skip_manual">تخطي يدويًا</string>
-    <string name="sb_skip_manual_summary">لا تتخطى الاجزاء تلقائيًا ، بل قم دائمًا بالمطالبة بها من قبل.</string>
     <string name="download_channel_name">تحميل الخدمة</string>
     <string name="download_channel_description">يعرض إشعارا عند تنزيل الوسائط.</string>
     <string name="local_subscriptions">الاشتراكات المحلية</string>
@@ -304,7 +302,6 @@
     <string name="navbar_order">ترتيب</string>
     <string name="layout">التَخطِيط</string>
     <string name="alternative_player_layout">تخطيط المشغل البديل</string>
-    <string name="alternative_player_layout_summary">وتظهر أشرطة الفيديو ذات الصلة كصف أعلى من التعليقات بدلا من التعليقات الواردة أدناه.</string>
     <string name="audio_track">مسار صوتي</string>
     <string name="hls_instead_of_dash">استخدام HLS</string>
     <string name="hls_instead_of_dash_summary">استخدم HLS بدلا من DASH (سيكون أبطأ ، غير مستحسن)</string>

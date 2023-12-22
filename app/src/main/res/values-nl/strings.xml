@@ -160,8 +160,7 @@
     <string name="player_summary">Standaardwaarden en spelersgedrag</string>
     <string name="seek_increment">Zoek­stap</string>
     <string name="pauseOnScreenOff">Automatisch pauzeren</string>
-    <string name="pauseOnScreenOff_summary">Pauzeer media wanneer het scherm wordt uitgeschakeld.</string>
-    <string name="autoplay_summary">Automatisch de volgende video afspelen na de huidige.</string>
+    <string name="pauseOnScreenOff_summary">Pauzeer media wanneer het scherm wordt uitgeschakeld</string>
     <string name="clonePlaylist">Afspeellijst klonen</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d video\'s</string>
     <string name="jumped_to_highlight">Naar hoogtepunt gesprongen</string>
@@ -393,7 +392,6 @@
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unlimited_search_history">Ongelimiteerde zoek­geschiedenis</string>
     <string name="irreversible">Weet u het zeker\? Dit kan niet ongedaan worden gemaakt!</string>
-    <string name="sb_skip_manual_summary">Sla segmenten niet automatisch over; vraag dit altijd van tevoren.</string>
     <string name="unknown_audio_language">Onbekende audiotaal</string>
     <string name="fullscreen_gestures">Gebaren voor volledig scherm</string>
     <string name="double_tap_seek">Dubbeltikken om te zoeken</string>
@@ -492,8 +490,7 @@
     <string name="disable_proxy_summary">Laad video\'s en afbeeldingen rechtstreeks van de servers van YouTube. Schakel de optie alleen in als je toch al een VPN gebruikt!</string>
     <string name="play_automatically_summary">Start het afspelen automatisch bij het selecteren van een video</string>
     <string name="emptyPlaylistDescription">De afspeellijstbeschrijving kan niet leeg zijn</string>
-    <string name="swipe_controls_summary">Gebruik een veegbeweging om de helderheid en het volume aan te passen.</string>
-    <string name="alternative_player_layout_summary">Toon de gerelateerde video\'s als een rij boven de opmerkingen in plaats van eronder.</string>
+    <string name="swipe_controls_summary">Gebruik een veegbeweging om de helderheid en het volume aan te passen</string>
     <string name="hls_instead_of_dash_summary">Gebruik HLS in plaats van DASH (zal langzamer zijn, niet aanbevolen)</string>
     <string name="double_tap_seek_summary">Tik twee keer links of rechts om de speler terug of vooruit te spoelen.</string>
     <string name="username_email">Doorgaan met een e-mailadres dat niet wordt aanbevolen\?</string>

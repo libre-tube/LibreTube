@@ -157,7 +157,6 @@
     <string name="player_summary">Standartlar və davranış</string>
     <string name="seek_increment">Axtarılan artım</string>
     <string name="instance_frontend_url">İnstansiya ön çıxış üçün URL</string>
-    <string name="autoplay_summary">Cari video ardınca növbəti videonu avtomatik oynat.</string>
     <string name="pauseOnScreenOff">Avtomatik fasilə</string>
     <string name="pauseOnScreenOff_summary">Ekran söndürüldükdə oynatmanı dayandır.</string>
     <string name="clonePlaylist">Oynatma siyahısın klonla</string>
@@ -267,7 +266,6 @@
     <string name="wifi">Wi-Fi</string>
     <string name="skip_segment">Bölümü ötür</string>
     <string name="sb_skip_manual">Əl ilə ötür</string>
-    <string name="sb_skip_manual_summary">Bölümləri avtomatik olaraq ötürmə, həmişə əvvəlcə icazə istə.</string>
     <string name="local_subscriptions">Yerli abunəlikər</string>
     <string name="preferences">Üstünlüklər</string>
     <string name="backup_customInstances">Fərdi İnstansiyalar</string>
@@ -304,7 +302,6 @@
     <string name="navbar_order">Düzülüş</string>
     <string name="layout">Tərtibat</string>
     <string name="alternative_player_layout">Alternativ oynadıcı tərtibatı</string>
-    <string name="alternative_player_layout_summary">Əlaqəli videoları aşağı əvəzinə, şərhlər üstündə cərgə kimi göstər.</string>
     <string name="audio_track">Səs axını</string>
     <string name="auto_quality">Avtomatik</string>
     <string name="hls_instead_of_dash">HLS istifadə et</string>

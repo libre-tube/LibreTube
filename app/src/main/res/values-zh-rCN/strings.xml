@@ -156,8 +156,7 @@
     <string name="player_summary">默认和行为</string>
     <string name="seek_increment">跳转时长</string>
     <string name="pauseOnScreenOff">自动暂停</string>
-    <string name="pauseOnScreenOff_summary">屏幕关闭时暂停播放。</string>
-    <string name="autoplay_summary">当前的视频播完后，自动播放下一个视频。</string>
+    <string name="pauseOnScreenOff_summary">屏幕关闭时暂停播放</string>
     <string name="clonePlaylist">复制播放列表</string>
     <string name="category_music_offtopic_summary">仅用于音乐视频。它应该涵盖视频的一部分，而不是官方混音的一部分。最后，视频应尽可能类似于 Spotify 或任何其他混合版本，或减少谈话或其他干扰。</string>
     <string name="category_preview_summary">用于详细说明未来内容的片段，但没有其他信息。如果它包含只出现在这里的剪辑，则很可能是错误的类别。</string>
@@ -268,7 +267,6 @@
     <string name="push_channel_description">新影音流可用时显示通知。</string>
     <string name="skip_segment">跳过片段</string>
     <string name="sb_skip_manual">手动跳过</string>
-    <string name="sb_skip_manual_summary">跳过片段前始终先提示。</string>
     <string name="download_channel_name">下载服务</string>
     <string name="download_channel_description">下载媒体文件时显示通知。</string>
     <string name="push_channel_name">通知 Worker</string>
@@ -304,7 +302,6 @@
     <string name="navbar_order">顺序</string>
     <string name="layout">布局</string>
     <string name="alternative_player_layout">备选的播放器布局</string>
-    <string name="alternative_player_layout_summary">将相关视频显示为评论上方而不是下方的一行。</string>
     <string name="audio_track">音轨</string>
     <string name="hls_instead_of_dash">使用 HLS</string>
     <string name="hls_instead_of_dash_summary">使用 HLS 而不是 DASH（会更慢，不推荐）</string>
