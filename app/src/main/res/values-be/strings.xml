@@ -457,7 +457,7 @@
     <string name="manual">Уручную</string>
     <string name="automatic">Аўтаматычны</string>
     <string name="visible">Паказаць у панэлі пошуку</string>
-    <string name="sb_color_enable">Пераключае карыстальніцкія каляровыя сегменты для сегментаў SponsorBlock.</string>
+    <string name="sb_custom_colors_summary">Пераключае карыстальніцкія каляровыя сегменты для сегментаў SponsorBlock.</string>
     <string name="off">Выкл</string>
     <string name="continue_watching">Працягнуць прагляд</string>
     <string name="dearrow">Уключыць DeArrow</string>

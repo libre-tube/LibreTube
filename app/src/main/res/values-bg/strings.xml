@@ -392,7 +392,7 @@
     <string name="disable_proxy_summary">Зареждайте видеоклипове и изображения директно от сървърите на YouTube. Активирайте опцията само ако все пак използвате VPN!</string>
     <string name="related_streams_summary">Показвай подобни потоци заедно с това, което гледате.</string>
     <string name="empty_instance">Попълнете името и URL адреса на API.</string>
-    <string name="sb_color_enable">Превключва персонализирани цветови сегменти за сегменти на SponsorBlock.</string>
+    <string name="sb_custom_colors_summary">Превключва персонализирани цветови сегменти за сегменти на SponsorBlock.</string>
     <string name="playlistCloned">Плейлистът е клониран</string>
     <string name="shapedIcon">Глупава форма</string>
     <string name="legacyIcon">Изгубено наследство</string>

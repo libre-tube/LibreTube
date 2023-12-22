@@ -232,7 +232,7 @@
     <string name="concurrent_downloads">Max antal nerladdningar samtidigt</string>
     <string name="player_autoplay">Spela automatiskt</string>
     <string name="landscape">Landskap</string>
-    <string name="sb_color_enable">Växlar mellan anpassade färgsegment för SponsorBlock-segment.</string>
+    <string name="sb_custom_colors_summary">Växlar mellan anpassade färgsegment för SponsorBlock-segment.</string>
     <string name="background_mode">Bakgrundsläge</string>
     <string name="least_recent">Äldsta</string>
     <string name="open">Öppna…</string>

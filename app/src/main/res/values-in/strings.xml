@@ -438,7 +438,7 @@
     <string name="manual">Manual</string>
     <string name="off">Mati</string>
     <string name="automatic">Otomatis</string>
-    <string name="sb_color_enable">Mengaktifkan segmen warna kustom untuk segmen pemblokiran sponsor.</string>
+    <string name="sb_custom_colors_summary">Mengaktifkan segmen warna kustom untuk segmen pemblokiran sponsor.</string>
     <string name="invalid_color">Nilai warna yang dimasukkan tidak valid!</string>
     <string name="visible">Tampilkan dalam bilah seek</string>
     <string name="color">Warna</string>

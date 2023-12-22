@@ -453,7 +453,7 @@
     <string name="stop">Parar</string>
     <string name="fallback_piped_proxy_summary">Carregue vídeos por meio do proxy se a conexão direta com o YouTube não funcionar para o vídeo atual (aumenta o tempo de carregamento inicial). Se desativado, o conteúdo de música do YouTube provavelmente não será reproduzido devido a restrições</string>
     <string name="sb_custom_colors">Cores de segmento personalizadas</string>
-    <string name="sb_color_enable">Trocar cores do bloqueio de segmentos de patrocinio.</string>
+    <string name="sb_custom_colors_summary">Trocar cores do bloqueio de segmentos de patrocinio.</string>
     <string name="color">Cor</string>
     <string name="invalid_color">Valor de cor inválido inserido!</string>
     <string name="enter_hex_value">Digite o valor hexadecimal da cor</string>

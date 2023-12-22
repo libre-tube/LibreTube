@@ -441,7 +441,7 @@
     <string name="manual">Əl ilə</string>
     <string name="automatic">Avtomatik</string>
     <string name="off">Bağla</string>
-    <string name="sb_color_enable">SponsorBlock bölümləri üçün fərdi rəng bölümlərin dəyişdirir.</string>
+    <string name="sb_custom_colors_summary">SponsorBlock bölümləri üçün fərdi rəng bölümlərin dəyişdirir.</string>
     <string name="invalid_color">Yanlış rəng dəyəri daxil edildi!</string>
     <string name="sb_custom_colors">Fərdi bölüm rəngləri</string>
     <string name="color">Rəng</string>

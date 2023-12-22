@@ -442,7 +442,7 @@
     <string name="color">ڕەنگ</string>
     <string name="enter_hex_value">بەهای تایبەتی ڕەنگ بنوسە</string>
     <string name="manual">دەستی</string>
-    <string name="sb_color_enable">پیشاندانی ڕەنگی تایبەت بۆ بەشە پەڕێنراوەکانی سپۆنسەر</string>
+    <string name="sb_custom_colors_summary">پیشاندانی ڕەنگی تایبەت بۆ بەشە پەڕێنراوەکانی سپۆنسەر</string>
     <string name="invalid_color">بەهایەکی نادروستی ڕەنگ نوسراوە!</string>
     <string name="off">نا چالاک</string>
     <string name="visible">پیشاندان لەبەشی خوارەوە</string>

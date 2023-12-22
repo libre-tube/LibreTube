@@ -446,7 +446,7 @@
     <string name="automatic">Automático</string>
     <string name="invalid_color">¡Se ha introducido un código de color inválido!</string>
     <string name="visible">Señalador</string>
-    <string name="sb_color_enable">Usa los colores personalizados para los señaladores de la barra de tiempo.</string>
+    <string name="sb_custom_colors_summary">Usa los colores personalizados para los señaladores de la barra de tiempo.</string>
     <string name="sb_custom_colors">Segmentos con color personalizado</string>
     <string name="color">Color</string>
     <string name="enter_hex_value">Introduce un código de color HEX</string>

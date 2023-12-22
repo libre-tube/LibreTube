@@ -453,8 +453,8 @@
     <string name="chapters_videoHighlight">Vídeo em destaque</string>
     <string name="jumped_to_highlight">Saltou para o vídeo em destaque</string>
     <string name="category_highlight">Mostrar vídeo de destaque</string>
-    <string name="category_highlight_summary">Pode ser o título anunciado, a miniatura ou a parte mais interessante do vídeo. Pode saltar para essa parte tocando nela na secção de capítulos.</string>
-    <string name="sb_color_enable">Alterna segmentos de cores personalizadas para segmentos SponsorBlock.</string>
+    <string name="category_highlight_summary">Pode ser o título anunciado, a miniatura ou a parte mais interessante do vídeo. Pode saltar para essa parte tocando nela na secção de capítulos</string>
+    <string name="sb_custom_colors_summary">Alterna segmentos de cores personalizadas para segmentos SponsorBlock.</string>
     <string name="fallback_piped_proxy">Usar Piped proxy como recurso</string>
     <string name="fallback_piped_proxy_summary">Carregar vídeos através do proxy Piper se a ligação ao YouTube não funcionar para o vídeo em reprodução (aumenta o tempo de carregamento inicial). Se estiver desativado, é provável que o conteúdo musical do YouTube não seja reproduzido devido a restrições do YT</string>
     <string name="continue_watching">Continuar a ver</string>

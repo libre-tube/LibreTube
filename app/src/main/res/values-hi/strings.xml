@@ -440,7 +440,7 @@
     <string name="manual">हस्तचालित</string>
     <string name="automatic">स्वचालित</string>
     <string name="off">बंद</string>
-    <string name="sb_color_enable">स्पांसर ब्लॉक सेगमेंट के लिए कस्टम रंग सेगमेंट टॉगल।</string>
+    <string name="sb_custom_colors_summary">स्पांसर ब्लॉक सेगमेंट के लिए कस्टम रंग सेगमेंट टॉगल।</string>
     <string name="sb_custom_colors">कस्टम सेगमेंट रंग</string>
     <string name="enter_hex_value">रंग हेक्स मान दर्ज करें</string>
     <string name="visible">सीक बार में दिखाएँ</string>

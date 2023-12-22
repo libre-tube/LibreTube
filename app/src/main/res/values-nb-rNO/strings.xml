@@ -440,7 +440,7 @@
     <string name="show_search_suggestions">Vis søkeforslag</string>
     <string name="fallback_piped_proxy">Fall tilbake til Piped-mellomtjener</string>
     <string name="stop">Stopp</string>
-    <string name="sb_color_enable">Veksler egendefinerte fargesegmenter for SponsorBlock-segmenter.</string>
+    <string name="sb_custom_colors_summary">Veksler egendefinerte fargesegmenter for SponsorBlock-segmenter.</string>
     <string name="sb_custom_colors">Egendefinerte segmentfarger</string>
     <string name="color">Farge</string>
     <string name="invalid_color">Ugyldig farge angitt.</string>

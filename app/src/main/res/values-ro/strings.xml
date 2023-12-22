@@ -449,7 +449,7 @@
     <string name="jumped_to_highlight">Sărit la evidențierea video</string>
     <string name="category_highlight_summary">Ar putea fi fie titlul promovat, miniatura sau partea cea mai interesantă a videoclipului. Puteți sări la el atingând-o în secțiunea capitole.</string>
     <string name="category_highlight">Afișați evidențierea videoclipului</string>
-    <string name="sb_color_enable">Comută segmentele de culoare personalizate pentru segmentele SponsorBlock.</string>
+    <string name="sb_custom_colors_summary">Comută segmentele de culoare personalizate pentru segmentele SponsorBlock.</string>
     <string name="invalid_color">A fost introdusă o valoare de culoare nevalidă!</string>
     <string name="color">Culoare</string>
     <string name="emptyPlaylistDescription">Descrierea playlistului nu poate fi goală</string>

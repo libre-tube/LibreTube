@@ -444,7 +444,7 @@
     <string name="enter_hex_value">Farb-Hex-Wert eingeben</string>
     <string name="invalid_color">Ungültiger Farbwert eingegeben!</string>
     <string name="sb_custom_colors">Abschnittsfarben</string>
-    <string name="sb_color_enable">Abschnitte je nach SponsorBlock-Kategorie farblich markieren.</string>
+    <string name="sb_custom_colors_summary">Abschnitte je nach SponsorBlock-Kategorie farblich markieren.</string>
     <string name="color">Farbe</string>
     <string name="visible">In Suchleiste anzeigen</string>
     <string name="chapters_videoHighlight">Video-Highlight</string>

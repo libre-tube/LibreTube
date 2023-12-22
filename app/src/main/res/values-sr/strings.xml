@@ -481,8 +481,8 @@
     <string name="automatic_once">Аутоматски једном</string>
     <string name="choose_instance">Прво изаберите инстанцу!</string>
     <string name="manual">Ручно</string>
-    <string name="playback_during_call_summary">Имајте на уму да ово такође утиче на то да апликација више не управља било којом врстом фокуса аудио снимка.</string>
-    <string name="sb_color_enable">Укључује прилагођене боје сегмента за SponsorBlock сегменте.</string>
+    <string name="playback_during_call_summary">Имајте на уму да ово такође утиче на то да апликација више не управља било којом врстом фокуса аудио снимка</string>
+    <string name="sb_custom_colors_summary">Укључује прилагођене боје сегмента за SponsorBlock сегменте.</string>
     <string name="import_format_newpipe">NewPipe</string>
     <string name="tooltip_reverse">Обрнуто</string>
     <string name="tooltip_create_playlist">Направи плејлисту</string>

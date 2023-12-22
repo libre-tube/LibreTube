@@ -488,7 +488,7 @@
     <string name="tooltip_sponsorblock">Activer/désactiver SponsorBlock</string>
     <string name="automatic_once">Automatique une fois</string>
     <string name="manual">Manuel</string>
-    <string name="sb_color_enable">Permet de personnaliser les couleurs des segments de SponsorBlock.</string>
+    <string name="sb_custom_colors_summary">Permet de personnaliser les couleurs des segments de SponsorBlock.</string>
     <string name="tooltip_reverse">Inverser</string>
     <string name="tooltip_create_playlist">Créer une liste de lecture</string>
     <string name="contribute_to_sponsorblock">Contribuer à SponsorBlock</string>

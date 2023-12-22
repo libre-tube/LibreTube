@@ -440,9 +440,9 @@
     <string name="new_videos_badge">Indicator voor nieuwe video\'s</string>
     <string name="show_stream_thumbnails_summary">Toon de miniaturen van nieuwe streams. Inschakelen gebruikt extra gegevens.</string>
     <string name="take_a_break">Tijd om een pauze te nemen</string>
-    <string name="new_videos_badge_summary">Toon een badge met het aantal nieuwe videos als deze er zijn.</string>
-    <string name="confirm_unsubscribing_summary">Toont een bevestigings­dialoog voor het deabonneren.</string>
-    <string name="sb_color_enable">Schakelt aangepaste kleuren voor SponsorBlock-segmenten in.</string>
+    <string name="new_videos_badge_summary">Toon een badge met het aantal nieuwe videos als deze er zijn</string>
+    <string name="confirm_unsubscribing_summary">Toont een bevestigings­dialoog voor het deabonneren</string>
+    <string name="sb_custom_colors_summary">Schakelt aangepaste kleuren voor SponsorBlock-segmenten in.</string>
     <string name="all_caught_up_summary">U heeft alle nieuwe video\'s gezien</string>
     <string name="all_caught_up">U bent helemaal bij</string>
     <string name="play_latest_videos">Nieuwste video\'s afspelen</string>

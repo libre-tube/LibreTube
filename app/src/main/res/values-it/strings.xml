@@ -446,7 +446,7 @@
     <string name="off">Disattiva</string>
     <string name="visible">Mostra nella barra di ricerca</string>
     <string name="stop">Ferma</string>
-    <string name="sb_color_enable">Alterna i segmenti di colore personalizzati per i segmenti di SponsorBlock.</string>
+    <string name="sb_custom_colors_summary">Alterna i segmenti di colore personalizzati per i segmenti di SponsorBlock.</string>
     <string name="sb_custom_colors">Colori dei segmenti personalizzati</string>
     <string name="chapters_videoHighlight">Momento saliente</string>
     <string name="jumped_to_highlight">Passato al momento saliente</string>

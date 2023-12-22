@@ -438,7 +438,7 @@
     <string name="off">关</string>
     <string name="manual">手动</string>
     <string name="automatic">自动</string>
-    <string name="sb_color_enable">切换是否开启 sponsor block 分段的自定义颜色分段。</string>
+    <string name="sb_custom_colors_summary">切换是否开启 sponsor block 分段的自定义颜色分段。</string>
     <string name="sb_custom_colors">自定义分段颜色</string>
     <string name="color">颜色</string>
     <string name="invalid_color">输入的颜色值无效！</string>

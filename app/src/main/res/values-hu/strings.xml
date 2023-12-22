@@ -444,8 +444,8 @@
     <string name="invalid_color">Érvénytelen a megadott színérték!</string>
     <string name="enter_hex_value">Hexadecimális színérték megadása</string>
     <string name="jumped_to_highlight">Ugrás a videó kiemeléshez</string>
-    <string name="sb_color_enable">Egyéni színek bekapcsolása a SzponzorBlokk-szakaszokhoz.</string>
-    <string name="category_highlight_summary">Lehet a meghirdetett cím, a bélyegkép vagy a videó legérdekesebb része. A fejezetek részben a rákoppintással ugorhat oda.</string>
+    <string name="sb_custom_colors_summary">Egyéni színek bekapcsolása a SzponzorBlokk-szakaszokhoz.</string>
+    <string name="category_highlight_summary">Lehet a meghirdetett cím, a bélyegkép vagy a videó legérdekesebb része. A fejezetek részben a rákoppintással ugorhat oda</string>
     <string name="choose_instance_long">Válasszon ki az alább felsoroltak közül egy Piped példányt. A Piped példány közvetítőként fog működni Ön és a YouTube között. Ezek a példányok különböző fizikai helyszíneken találhatók - ezeket az országzászló jelzi. A fizikailag közelebbi példányok valószínűleg gyorsabbak, mint a távoli példányok. A beállításokban bármikor megváltoztatható a használt példány.</string>
     <string name="off">Ki</string>
     <string name="fallback_piped_proxy_summary">Videók betöltése proxy-n keresztül, ha a YouTube-hoz való közvetlen csatlakozás nem működik az aktuális videónál (növeli a kezdeti betöltési időt). Ha ki van kapcsolva, a YouTube zenei tartalma valószínűleg nem fog lejátszódni a YT korlátozások miatt</string>

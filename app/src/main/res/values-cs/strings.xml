@@ -444,7 +444,7 @@
     <string name="off">Vypnuto</string>
     <string name="manual">Ruční</string>
     <string name="automatic">Automatické</string>
-    <string name="sb_color_enable">Přepne vlastní barvu segmentů pro segmenty SponsorBlock.</string>
+    <string name="sb_custom_colors_summary">Přepne vlastní barvu segmentů pro segmenty SponsorBlock.</string>
     <string name="sb_custom_colors">Vlastní barvy segmentů</string>
     <string name="color">Barva</string>
     <string name="visible">Zobrazit v liště</string>

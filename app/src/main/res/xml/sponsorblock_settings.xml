@@ -43,7 +43,7 @@
 
     <SwitchPreferenceCompat
         android:dependency="sb_enabled_key"
-        android:summary="@string/sb_color_enable"
+        android:summary="@string/sb_custom_colors_summary"
         app:defaultValue="false"
         app:key="sb_enable_custom_colors"
         app:title="@string/sb_custom_colors" />

@@ -452,7 +452,7 @@
     <string name="invalid_color">ערך הצבע שנבחר שגוי!</string>
     <string name="color">צבע</string>
     <string name="sb_custom_colors">צבעי מקטעים מותאמים</string>
-    <string name="sb_color_enable">מחליף מקטעי צבע מותאמים במקטעים ממומנים ולהפך.</string>
+    <string name="sb_custom_colors_summary">מחליף מקטעי צבע מותאמים במקטעים ממומנים ולהפך.</string>
     <string name="chapters_videoHighlight">קטע בולט בסרטון</string>
     <string name="category_highlight">הצגת הקטע הבולט בסרטון</string>
     <string name="jumped_to_highlight">קפצנו לקטע הבולט בסרטון</string>

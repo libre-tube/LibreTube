@@ -446,7 +446,7 @@
     <string name="playlist_description">Oynatma listesi açıklaması</string>
     <string name="emptyPlaylistDescription">Oynatma listesi açıklaması boş bırakılamaz</string>
     <string name="shorts_notifications">Shorts için bildirimler</string>
-    <string name="sb_color_enable">SponsorBlock kısımları için özel renkler özelliğini açar veya kapatır.</string>
+    <string name="sb_custom_colors_summary">SponsorBlock kısımları için özel renkler özelliğini açar veya kapatır.</string>
     <string name="show_search_suggestions">Arama önerilerini göster</string>
     <string name="category_highlight_summary">Video başlığı, küçük resim veya videonun en ilginç kısmı. Bölümler kısmında üzerine dokunarak ilgili bölüme gidebilirsiniz.</string>
     <string name="enter_hex_value">Rengin Hex Değerini Girin</string>

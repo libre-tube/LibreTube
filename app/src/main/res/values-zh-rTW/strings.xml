@@ -440,7 +440,7 @@
     <string name="manual">手動</string>
     <string name="automatic">自動</string>
     <string name="stop">停止</string>
-    <string name="sb_color_enable">切換贊助者封鎖區塊的自訂色彩</string>
+    <string name="sb_custom_colors_summary">切換贊助者封鎖區塊的自訂色彩</string>
     <string name="sb_custom_colors">自訂區塊色彩</string>
     <string name="invalid_color">輸入了無效色彩值！</string>
     <string name="enter_hex_value">輸入顏色的十六進位值</string>

@@ -437,7 +437,7 @@
     <string name="emptyPlaylistDescription">ਪਲੇਅ-ਲਿਸਟ ਵੇਰਵਾ ਖਾਲੀ ਨਹੀਂ ਹੋ ਸਕਦਾ</string>
     <string name="change_playlist_description">ਪਲੇਅ-ਲਿਸਟ ਵੇਰਵਾ ਬਦਲੋ</string>
     <string name="playlist_description">ਪਲੇਅ-ਲਿਸਟ ਵੇਰਵਾ</string>
-    <string name="sb_color_enable">ਸਪਾਂਸਰ ਬਲਾਕ ਸੈਗਮੈਂਟਾਂ ਲਈ ਪਸੰਦੀਦਾ ਰੰਗਦਾਰ ਹਿੱਸਿਆਂ ਨੂੰ ਟੌਗਲ ਕਰਦਾ ਹੈ।</string>
+    <string name="sb_custom_colors_summary">ਸਪਾਂਸਰ ਬਲਾਕ ਸੈਗਮੈਂਟਾਂ ਲਈ ਪਸੰਦੀਦਾ ਰੰਗਦਾਰ ਹਿੱਸਿਆਂ ਨੂੰ ਟੌਗਲ ਕਰਦਾ ਹੈ।</string>
     <string name="sb_custom_colors">ਕਸਟਮ ਸੈਗਮੈਂਟ ਰੰਗ</string>
     <string name="invalid_color">ਅਵੈਧ ਰੰਗ ਵੈਲਿਯੂ ਦਾਖਲ ਕੀਤੀ ਗਈ!</string>
     <string name="off">ਆਫ</string>

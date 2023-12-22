@@ -449,7 +449,7 @@
     <string name="fallback_piped_proxy_summary">بار کردن ویدیوها با پیشکار در صورن کار نکردن اتّصال مستقیم به یوتوب برای ویدیوی جاری (زمان بار کردن نخستین را افزایش می دهد). اگر از کار بیفتد احتمالاً محتوای آهنگ‌های یوتوب به دلیل محدودیت‌های یوتوب پخش نخواهد شد</string>
     <string name="dearrow_summary">عنوان‌ها و بندانگشتی‌های دقیق‌تر و کم اغراق آمیز را نشان دهید. زمان بار کردن را افزایش می‌دهد</string>
     <string name="stop">توقف</string>
-    <string name="sb_color_enable">بخش‌های رنگی سفارشی را برای بخش‌های SponsorBlock تغییر می‌دهد.</string>
+    <string name="sb_custom_colors_summary">بخش‌های رنگی سفارشی را برای بخش‌های SponsorBlock تغییر می‌دهد.</string>
     <string name="color">رنگ</string>
     <string name="invalid_color">مقدار رنگ نامعتبر وارد شده است!</string>
     <string name="enter_hex_value">مقدار کد رنگ HEX را وارد نمایید</string>

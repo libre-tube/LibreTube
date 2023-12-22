@@ -447,7 +447,7 @@
     <string name="off">Отключено</string>
     <string name="manual">Вручную</string>
     <string name="automatic">Автоматически</string>
-    <string name="sb_color_enable">Вкл/выкл цветовую маркировку для сегментов спонсорских блокировок.</string>
+    <string name="sb_custom_colors_summary">Вкл/выкл цветовую маркировку для сегментов спонсорских блокировок.</string>
     <string name="visible">Показать в строке поиска</string>
     <string name="color">Цвет</string>
     <string name="invalid_color">Введено неверное значение цвета!</string>

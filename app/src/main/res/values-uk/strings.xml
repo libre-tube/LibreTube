@@ -449,7 +449,7 @@
     <string name="automatic">Автоматично</string>
     <string name="invalid_color">Введено недійсне значення кольору!</string>
     <string name="color">Колір</string>
-    <string name="sb_color_enable">Перемикає власні колірні сегменти для сегментів SponsorBlock.</string>
+    <string name="sb_custom_colors_summary">Перемикає власні колірні сегменти для сегментів SponsorBlock.</string>
     <string name="sb_custom_colors">Користувацькі кольори сегментів</string>
     <string name="enter_hex_value">Введіть Hex значення кольору</string>
     <string name="visible">Показати на панелі прокручування</string>

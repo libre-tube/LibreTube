@@ -371,7 +371,7 @@
     <string name="jumped_to_highlight">Đã chuyển đến Video nổi bật</string>
     <string name="category_highlight_summary">Có thể là tiêu đề được quảng cáo, hình thu nhỏ hoặc phần thú vị nhất của video. Bạn có thể bỏ qua nó bằng cách nhấn vào nó trong phần chương.</string>
     <string name="category_highlight">Hiển thị video nổi bật</string>
-    <string name="sb_color_enable">Bật/tắt các phân đoạn màu tùy chỉnh cho các phân đoạn Khóa Nhà tài trợ.</string>
+    <string name="sb_custom_colors_summary">Bật/tắt các phân đoạn màu tùy chỉnh cho các phân đoạn Khóa Nhà tài trợ.</string>
     <string name="pause_on_quit">Tạm dừng khi thoát</string>
     <string name="audio_only_mode">Chế độ chỉ âm thanh</string>
     <string name="play_automatically">Phát tự động</string>
