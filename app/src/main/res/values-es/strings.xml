@@ -538,4 +538,7 @@
     <string name="add_to_group">Añadir al grupo</string>
     <string name="uptime">%.2f%% tiempo de actividad</string>
     <string name="grid_landscape">Columnas de la cuadrícula (horizontal)</string>
+    <string name="rich_caption_rendering">Renderizado de subtítulos enriquecidos</string>
+    <string name="rich_caption_rendering_summary">Renderiza subtítulos web para una experiencia más rica y personalizada.</string>
+    <string name="copy_tooltip">Copiar</string>
 </resources>
