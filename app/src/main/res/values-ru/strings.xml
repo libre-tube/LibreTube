@@ -542,4 +542,5 @@
     <string name="grid_landscape">Столбцы (в горизонтальном режиме)</string>
     <string name="rich_caption_rendering">Продвинутые субтитры</string>
     <string name="rich_caption_rendering_summary">Отрисовывать субтитры веб-движком для поддержки расширенных возможностей и настроек.</string>
+    <string name="copy_tooltip">Копировать</string>
 </resources>
