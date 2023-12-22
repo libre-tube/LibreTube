@@ -222,7 +222,7 @@
     <string name="history_summary">История на гледане и търсене</string>
     <string name="app_backup">Архивиране на приложението</string>
     <string name="category_filler">Филтър Допирателна/Вицове</string>
-    <string name="category_preview_description">За сегменти, описващи подробно бъдещо съдържание без допълнителна информация. Ако включва клипове, които се показват само тук, това много вероятно е грешната категория.</string>
+    <string name="category_preview_summary">За сегменти, описващи подробно бъдещо съдържание без допълнителна информация. Ако включва клипове, които се показват само тук, това много вероятно е грешната категория.</string>
     <string name="misc">Разни</string>
     <string name="deleteAccount_summary">Изтрийте своя Piped акаунт</string>
     <string name="tooltip_locked">Заключване на плейъра</string>
@@ -251,7 +251,7 @@
     <string name="dubbed_audio_track">дублиран</string>
     <string name="none">Нито един</string>
     <string name="limit_to_runtime">Ограничение до време на изпълнение</string>
-    <string name="category_sponsor_description">Платена промоция, платени реферали и директни реклами. Не за самореклама или безплатни искрени възгласи към каузи, създатели, уебсайтове и продукти.</string>
+    <string name="category_sponsor_summary">Платена промоция, платени реферали и директни реклами. Не за самореклама или безплатни искрени възгласи към каузи, създатели, уебсайтове и продукти.</string>
     <string name="unlimited">Неограничен</string>
     <string name="hide_watched_from_feed">Скриване на гледаните видеоклипове от емисията</string>
     <string name="buffering_goal_summary">Макс. количество секунди видео за буфериране.</string>
@@ -267,12 +267,12 @@
     <string name="no_fullscreen_resolution">Без резолюция на цял екран</string>
     <string name="home_tab_content">Съдържание на началния раздел</string>
     <string name="alternative_pip_controls_summary">Показване само на аудио и пропускане на контроли в PiP вместо превъртане напред и назад</string>
-    <string name="category_outro_description">Информация след края. Не за изводи с инфо.</string>
+    <string name="category_outro_summary">Информация след края. Не за изводи с инфо.</string>
     <string name="material_you">Материален</string>
     <string name="hide_watched_from_feed_summary">Не показвайте видеоклипове, гледани повече от 90% в раздела за абонаменти.</string>
     <string name="resume">Продължи</string>
     <string name="server_error">Изглежда има проблем с избрания сървър. Опитайте друга инстанция.</string>
-    <string name="category_highlight_description">Може да бъде или рекламираното заглавие, миниизображението или най-интересната част от видеоклипа. Можете да преминете към него, като го докоснете в секцията с глави.</string>
+    <string name="category_highlight_summary">Може да бъде или рекламираното заглавие, миниизображението или най-интересната част от видеоклипа. Можете да преминете към него, като го докоснете в секцията с глави.</string>
     <string name="uploader_name">Име на качващия</string>
     <string name="swipe_controls_summary">Използвайте жест за плъзгане, за да регулирате яркостта и силата на звука.</string>
     <string name="tooltip_filter">Филтър</string>
@@ -286,7 +286,7 @@
     <string name="filename_too_long">Името на файла е твърде дълго!</string>
     <string name="help">Помощ</string>
     <string name="double_tap_seek">Докоснете двукратно за превъртане</string>
-    <string name="fallback_piped_proxy_desc">Заредете видеоклипове през проксито, ако директното свързване с YouTube не работи за текущия видеоклип (увеличава първоначалното време за зареждане). Ако е деактивирано, музикалното съдържание в YouTube вероятно няма да се възпроизвежда поради ограниченията на YT.</string>
+    <string name="fallback_piped_proxy_summary">Заредете видеоклипове през проксито, ако директното свързване с YouTube не работи за текущия видеоклип (увеличава първоначалното време за зареждане). Ако е деактивирано, музикалното съдържание в YouTube вероятно няма да се възпроизвежда поради ограниченията на YT</string>
     <string name="instance_frontend_url">URL към потребителски интерфейс</string>
     <string name="advanced">Разширено</string>
     <string name="deletePlaylist">Изтриване на плейлист</string>
@@ -304,7 +304,7 @@
     <string name="history_empty">Все още няма история.</string>
     <string name="watch_history">История на гледане</string>
     <string name="mark_as_watched">Маркирайте като гледани</string>
-    <string name="category_music_offtopic_description">Само за използване в музикални видеоклипове. Трябва да покрива части от видеоклипа, които не са част от официални миксове. В крайна сметка видеоклипът трябва да наподобява Spotify или всяка друга смесена версия възможно най-близо или да намали говоренето или други разсейвания.</string>
+    <string name="category_music_offtopic_summary">Само за използване в музикални видеоклипове. Трябва да покрива части от видеоклипа, които не са част от официални миксове. В крайна сметка видеоклипът трябва да наподобява Spotify или всяка друга смесена версия възможно най-близо или да намали говоренето или други разсейвания.</string>
     <string name="group_name">Име на групата</string>
     <string name="remove_bookmark">Премахване на отметка</string>
     <string name="color_violet">Виолетов</string>
@@ -358,7 +358,7 @@
     <string name="sb_skip_manual_summary">Не пропускайте автоматично сегменти, винаги подканвайте преди.</string>
     <string name="search_history_summary">Запомнете търсенията</string>
     <string name="auth_instances">Изберете инстанция за удостоверяване</string>
-    <string name="category_selfpromo_description">Подобно на „спонсор“, с изключение на неплатено или самореклама. Това включва секции за стоки, дарения или информация за това с кого са си сътрудничили.</string>
+    <string name="category_selfpromo_summary">Подобно на „спонсор“, с изключение на неплатено или самореклама. Това включва секции за стоки, дарения или информация за това с кого са си сътрудничили.</string>
     <string name="color_purple">Лилав</string>
     <string name="export_playlists">Експортиране на плейлисти</string>
     <string name="forward">Напред</string>
@@ -387,7 +387,7 @@
     <string name="emptyList">Тук няма нищо.</string>
     <string name="playback_during_call_summary">Имайте предвид, че това също засяга приложението да не обработва повече никакъв вид аудио фокус.</string>
     <string name="always">Винаги</string>
-    <string name="category_intro_description">Интервал без действително съдържание. Може да е пауза, статичен кадър, повтаряща се анимация. Не трябва да се използва за преходи, съдържащи информация.</string>
+    <string name="category_intro_summary">Интервал без действително съдържание. Може да е пауза, статичен кадър, повтаряща се анимация. Не трябва да се използва за преходи, съдържащи информация.</string>
     <string name="concurrent_downloads">Максимални едновременни изтегляния</string>
     <string name="player_autoplay">Автоматично изпълнение</string>
     <string name="disable_proxy_summary">Зареждайте видеоклипове и изображения директно от сървърите на YouTube. Активирайте опцията само ако все пак използвате VPN!</string>
@@ -466,7 +466,7 @@
     <string name="advanced_summary">Изтегляния, и нулиране</string>
     <string name="creation_date_reversed">Дата на създаване (обърнато)</string>
     <string name="shorts_notifications">Известия за кртки видеоклипове</string>
-    <string name="category_filler_description">За тангенциални сцени, добавени само за запълване или хумор, които не са необходими за разбиране на основното съдържание на видеоклипа.</string>
+    <string name="category_filler_summary">За тангенциални сцени, добавени само за запълване или хумор, които не са необходими за разбиране на основното съдържание на видеоклипа.</string>
     <string name="segment_skipped">Пропуснат сегмент</string>
     <string name="alternative_player_layout_summary">Показвайте свързаните видеоклипове като ред над коментарите вместо отдолу.</string>
     <string name="player">Плейър</string>

@@ -91,12 +91,12 @@
     <string name="changeLanguage">Limbă</string>
     <string name="systemDefault">Sistem</string>
     <string name="sponsorblock_summary">Se utilizează API-ul https://sponsor.ajay.app</string>
-    <string name="category_sponsor_description">Promovare plătită, recomandări plătite și reclame directe. Nu pentru autopromovare sau pentru a face publicitate autentică gratuită pentru cauze, creatori, site-uri web și produse.</string>
-    <string name="category_selfpromo_description">Asemănător cu \"sponsor\", cu excepția cazului în care nu este plătit sau se promovează singur. Aceasta include secțiuni despre produse, donații sau informații despre persoanele cu care au colaborat.</string>
-    <string name="category_interaction_description">Atunci când există un scurt mesaj de reamintire pentru a da like, a vă abona sau a urmări în mijlocul conținutului. Dacă este lung sau se referă la ceva anume, ar trebui să fie în schimb autopromovare.</string>
-    <string name="category_intro_description">Un interval fără conținut real. Poate fi o pauză, un cadru static, o animație care se repetă. Nu ar trebui să fie utilizat pentru tranziții care conțin informații.</string>
+    <string name="category_sponsor_summary">Promovare plătită, recomandări plătite și reclame directe. Nu pentru autopromovare sau pentru a face publicitate autentică gratuită pentru cauze, creatori, site-uri web și produse.</string>
+    <string name="category_selfpromo_summary">Asemănător cu \"sponsor\", cu excepția cazului în care nu este plătit sau se promovează singur. Aceasta include secțiuni despre produse, donații sau informații despre persoanele cu care au colaborat.</string>
+    <string name="category_interaction_summary">Atunci când există un scurt mesaj de reamintire pentru a da like, a vă abona sau a urmări în mijlocul conținutului. Dacă este lung sau se referă la ceva anume, ar trebui să fie în schimb autopromovare.</string>
+    <string name="category_intro_summary">Un interval fără conținut real. Poate fi o pauză, un cadru static, o animație care se repetă. Nu ar trebui să fie utilizat pentru tranziții care conțin informații.</string>
     <string name="category_outro">Ecranele de final și creditele</string>
-    <string name="category_outro_description">Informații de după încheiere. Nu pentru concluzii cu informații.</string>
+    <string name="category_outro_summary">Informații de după încheiere. Nu pentru concluzii cu informații.</string>
     <string name="app_icon">Pictogramă</string>
     <string name="enabled">Pornit</string>
     <string name="disabled">Oprit</string>
@@ -190,7 +190,7 @@
     <string name="category_music_offtopic">Muzică: Secțiunea non-muzică</string>
     <string name="category_preview">Previzualizare/Recapitulare</string>
     <string name="category_filler">Tangenta de umplere/Glume</string>
-    <string name="category_filler_description">Pentru scenele tangențiale adăugate numai pentru umplere sau umor, nu este necesar pentru a înțelege conținutul principal al videoclipului.</string>
+    <string name="category_filler_summary">Pentru scenele tangențiale adăugate numai pentru umplere sau umor, nu este necesar pentru a înțelege conținutul principal al videoclipului.</string>
     <string name="buffering_goal">Încărcare în avans</string>
     <string name="buffering_goal_summary">Numărul maxim de secunde de video care trebuie puse în buffer.</string>
     <string name="playerVideoFormat">Format video pentru player</string>
@@ -261,8 +261,8 @@
     <string name="playingOnBackground">Se redă în fundal …</string>
     <string name="player_summary">Valori prestabilite și comportament</string>
     <string name="replies">Răspunsuri</string>
-    <string name="category_music_offtopic_description">Numai pentru utilizare în videoclipuri muzicale. Ar trebui să acopere părți ale videoclipului, care nu fac parte din mixajele oficiale. În cele din urmă, videoclipul ar trebui să semene cât mai mult cu Spotify sau cu orice altă versiune mixtă sau să reducă vorbirea sau alte distrageri.</string>
-    <string name="category_preview_description">Pentru segmente care detaliază conținut viitor fără informații suplimentare. Dacă include clipuri care apar doar aici, aceasta este foarte probabil o categorie greșită.</string>
+    <string name="category_music_offtopic_summary">Numai pentru utilizare în videoclipuri muzicale. Ar trebui să acopere părți ale videoclipului, care nu fac parte din mixajele oficiale. În cele din urmă, videoclipul ar trebui să semene cât mai mult cu Spotify sau cu orice altă versiune mixtă sau să reducă vorbirea sau alte distrageri.</string>
+    <string name="category_preview_summary">Pentru segmente care detaliază conținut viitor fără informații suplimentare. Dacă include clipuri care apar doar aici, aceasta este foarte probabil o categorie greșită.</string>
     <string name="audio">Audio</string>
     <string name="video">Video</string>
     <string name="unknown">Necunoscut</string>
@@ -441,7 +441,7 @@
     <string name="choose_instance_long">Vă rugăm să alegeți o instanță Piped pe care să o utilizați de mai jos. Instanța Piped va acționa ca intermediar între dvs. și YouTube. Aceste instanțe sunt situate în diferite locații fizice - indicate de steagurile țării lor. Instanțele mai apropiate fizic de tine sunt probabil mai rapide decât cazurile care nu sunt. Puteți schimba oricând instanța pe care o utilizați în setări.</string>
     <string name="home_tab_content">Conținutul filei Acasă</string>
     <string name="fallback_piped_proxy">Rezervă la proxy Piped</string>
-    <string name="fallback_piped_proxy_desc">Încărcați videoclipuri prin proxy dacă conectarea directă la YouTube nu funcționează pentru videoclipul curent (crește timpul inițial de încărcare). Dacă este dezactivat, conținutul muzical YouTube nu va fi redat probabil din cauza restricțiilor YT.</string>
+    <string name="fallback_piped_proxy_summary">Încărcați videoclipuri prin proxy dacă conectarea directă la YouTube nu funcționează pentru videoclipul curent (crește timpul inițial de încărcare). Dacă este dezactivat, conținutul muzical YouTube nu va fi redat probabil din cauza restricțiilor YT</string>
     <string name="off">Oprit</string>
     <string name="automatic">Automat</string>
     <string name="stop">Opreşte</string>
@@ -450,7 +450,7 @@
     <string name="change_playlist_description">Schimbă descrierea playlistului</string>
     <string name="chapters_videoHighlight">Evidențiere video</string>
     <string name="jumped_to_highlight">Sărit la evidențierea video</string>
-    <string name="category_highlight_description">Ar putea fi fie titlul promovat, miniatura sau partea cea mai interesantă a videoclipului. Puteți sări la el atingând-o în secțiunea capitole.</string>
+    <string name="category_highlight_summary">Ar putea fi fie titlul promovat, miniatura sau partea cea mai interesantă a videoclipului. Puteți sări la el atingând-o în secțiunea capitole.</string>
     <string name="category_highlight">Afișați evidențierea videoclipului</string>
     <string name="sb_color_enable">Comută segmentele de culoare personalizate pentru segmentele SponsorBlock.</string>
     <string name="invalid_color">A fost introdusă o valoare de culoare nevalidă!</string>

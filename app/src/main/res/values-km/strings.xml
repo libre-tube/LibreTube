@@ -26,8 +26,8 @@
     <string name="success">ជោគជ័យ។</string>
     <string name="color_accent">សង្កត់ពណ៌</string>
     <string name="subscribers">អ្នកជាវ %1$s នាក់</string>
-    <string name="category_sponsor_description">ការផ្សព្វផ្សាយបង់ប្រាក់, ការណែនាំបង់ប្រាក់ និងការផ្សាយពាណិជ្ជកម្មផ្ទាល់។ មិនសម្រាប់ការផ្សាយខ្លួនឯង/ក្លែងធ្វើឥតគិតថ្លៃ, ស្រែកហៅរកមូលហេតុ, អ្នកបង្កើតមាតិកា, វេបសាយ និងផលិតផល។</string>
-    <string name="category_interaction_description">នៅពេលដែលមានការរំលឹកខ្លីមួយនៅកណ្តាលមាតិកាដើម្បី ចូលចិត្ត ជាវ ឬតាមដាន។ ប្រសិនបើវាវែង ឬអំពីអ្វីមួយជាក់លាក់ វាគួរតែជាការផ្សព្វផ្សាយខ្លួនឯងជំនួសវិញ។</string>
+    <string name="category_sponsor_summary">ការផ្សព្វផ្សាយបង់ប្រាក់, ការណែនាំបង់ប្រាក់ និងការផ្សាយពាណិជ្ជកម្មផ្ទាល់។ មិនសម្រាប់ការផ្សាយខ្លួនឯង/ក្លែងធ្វើឥតគិតថ្លៃ, ស្រែកហៅរកមូលហេតុ, អ្នកបង្កើតមាតិកា, វេបសាយ និងផលិតផល។</string>
+    <string name="category_interaction_summary">នៅពេលដែលមានការរំលឹកខ្លីមួយនៅកណ្តាលមាតិកាដើម្បី ចូលចិត្ត ជាវ ឬតាមដាន។ ប្រសិនបើវាវែង ឬអំពីអ្វីមួយជាក់លាក់ វាគួរតែជាការផ្សព្វផ្សាយខ្លួនឯងជំនួសវិញ។</string>
     <string name="import_from_yt_summary">ពីយូធូប ឬ NewPipe</string>
     <string name="update_available">កំណែ %1$s គឺអាចប្រើប្រាស់បាន</string>
     <string name="appearance">លក្ខណៈខាងក្រៅ</string>
@@ -66,7 +66,7 @@
     <string name="unknown_error">កំហុសបណ្ដាញ។</string>
     <string name="license">កម្មសិទ្ធិបញ្ញា</string>
     <string name="playlistName">ឈ្មោះកម្រងវីដេអូ</string>
-    <string name="category_selfpromo_description">ស្រដៀងទៅនឹង \"ឧបត្ថម្ភក\" លើកលែងតែការមិនបង់ប្រាក់ ឬការផ្សព្វផ្សាយខ្លួនឯង។ នេះរួមបញ្ចូលផ្នែកសម្រាប់ព័ត៌មានអំពីផលិតផល ការបរិច្ចាគ ឬដៃគូ។</string>
+    <string name="category_selfpromo_summary">ស្រដៀងទៅនឹង \"ឧបត្ថម្ភក\" លើកលែងតែការមិនបង់ប្រាក់ ឬការផ្សព្វផ្សាយខ្លួនឯង។ នេះរួមបញ្ចូលផ្នែកសម្រាប់ព័ត៌មានអំពីផលិតផល ការបរិច្ចាគ ឬដៃគូ។</string>
     <string name="color_purple">ស្វាយអ</string>
     <string name="about">អំពី</string>
     <string name="systemDefault">ប្រព័ន្ធ</string>
@@ -138,7 +138,7 @@
     <string name="history_summary">ប្រវត្តិមើល និងស្វែងរក</string>
     <string name="auto_rotation">ស្វ័យបង្វិល</string>
     <string name="downloading">កំពុងទាញយក…</string>
-    <string name="category_preview_description">សម្រាប់ចម្រៀកដែលអនាគតមាតិកាលម្អិតដោយគ្មានព័ត៌មានលម្អិតបន្ថែម។ បើសិនវារួមបញ្ចូលឃ្លីបដែលបង្ហាញតែរូបរាងនៅទីនេះ នេះទំនងជាខុសចំណាត់ថ្នាក់។</string>
+    <string name="category_preview_summary">សម្រាប់ចម្រៀកដែលអនាគតមាតិកាលម្អិតដោយគ្មានព័ត៌មានលម្អិតបន្ថែម។ បើសិនវារួមបញ្ចូលឃ្លីបដែលបង្ហាញតែរូបរាងនៅទីនេះ នេះទំនងជាខុសចំណាត់ថ្នាក់។</string>
     <string name="translate">ការបកប្រែ</string>
     <string name="deleteAccount_summary">លុបគណនី Piped របស់អ្នក</string>
     <string name="unknown">មិនស្គាល់ប្រភព</string>

@@ -96,13 +96,13 @@
     <string name="music_videos">ویدیوهای آهنگ‌های یوتوب</string>
     <string name="category_intro">وقفه / انیمیشن ورودی</string>
     <string name="sponsorblock_summary">استفاده از https://sponsor.ajay.app API</string>
-    <string name="category_selfpromo_description">شبیه «حامی» به جز تبلیغات بدون پرداخت یا تبلیغ خود. شامل بخش‌هایی دربارهٔ به کالاها، اعانه‌ها یا اطّلاعاتی دربارهٔ هم‌کاری‌ها.</string>
+    <string name="category_selfpromo_summary">شبیه «حامی» به جز تبلیغات بدون پرداخت یا تبلیغ خود. شامل بخش‌هایی دربارهٔ به کالاها، اعانه‌ها یا اطّلاعاتی دربارهٔ هم‌کاری‌ها.</string>
     <string name="playOnBackground">پخش در پس‌زمینه</string>
-    <string name="category_interaction_description">هنگامی که در میان محتوا یادآوری کوتاهی برای پسند، اشتراک یا پی‌گیری وجود دارد. اگر طولانی یا دربارهٔ مورد خاصی باشد باید تبلیغ خود درنظر گرفته شود.</string>
-    <string name="category_intro_description">بازه‌ای بدون محتوای واقعی. ممکن است مکث، قاب ثابت یا تکرار پویانمایی باشد. برای گذارهای دارای اطّلاعات استفاده نشود.</string>
+    <string name="category_interaction_summary">هنگامی که در میان محتوا یادآوری کوتاهی برای پسند، اشتراک یا پی‌گیری وجود دارد. اگر طولانی یا دربارهٔ مورد خاصی باشد باید تبلیغ خود درنظر گرفته شود.</string>
+    <string name="category_intro_summary">بازه‌ای بدون محتوای واقعی. ممکن است مکث، قاب ثابت یا تکرار پویانمایی باشد. برای گذارهای دارای اطّلاعات استفاده نشود.</string>
     <string name="app_uptodate">در حال اجرای جدیدترین نگارش.</string>
     <string name="category_music_offtopic">آهنگ‌ها: بخش بدون آهنگ</string>
-    <string name="category_music_offtopic_description">فقط برای استفاده در نماهنگ‌ها. باید ویدیو را پوشش دهد نه ترکیب‌های رسمی را. در نهایت ویدیو باید تا جای امکان بازسازی اسپاتیفای یا هر ترکیب دیگری بوده یا صحبت و دیگر موارد پرتی حواس را بکاهد.</string>
+    <string name="category_music_offtopic_summary">فقط برای استفاده در نماهنگ‌ها. باید ویدیو را پوشش دهد نه ترکیب‌های رسمی را. در نهایت ویدیو باید تا جای امکان بازسازی اسپاتیفای یا هر ترکیب دیگری بوده یا صحبت و دیگر موارد پرتی حواس را بکاهد.</string>
     <string name="category_preview">پیش‌نمایش یا خلاصه</string>
     <string name="playback_speed">سرعت پخش</string>
     <string name="advanced">پیش‌رفته</string>
@@ -282,7 +282,7 @@
     <string name="codecs">رمزینه‌ها</string>
     <string name="resume">از سر گیری</string>
     <string name="pause">مکث</string>
-    <string name="category_preview_description">برای بخش‌هایی که محتوای پیش رو را بدون اطَلاعات اضفی شرح می‌دهند. اگر شامل کلیپ‌هاییست که تنها این‌جا ظاهر شده‌اند احتمالاً این‌جا دستهٔ اشتباهی است.</string>
+    <string name="category_preview_summary">برای بخش‌هایی که محتوای پیش رو را بدون اطَلاعات اضفی شرح می‌دهند. اگر شامل کلیپ‌هاییست که تنها این‌جا ظاهر شده‌اند احتمالاً این‌جا دستهٔ اشتباهی است.</string>
     <string name="deleteAccount_summary">حساب پایپد خود را حذف کنید</string>
     <string name="network_wifi">فقط در وای فای</string>
     <string name="playingOnBackground">درحال پخش در پس‌زمینه…</string>
@@ -296,7 +296,7 @@
     <string name="duration">مدت زمان</string>
     <string name="duration_reversed">مدت زمان (برعکس)</string>
     <string name="category_outro">قاب‌های پایانی و اعتبارها</string>
-    <string name="category_outro_description">اطلاعات پس از پایان نه برای نتیجه گیری با اطّلاعات.</string>
+    <string name="category_outro_summary">اطلاعات پس از پایان نه برای نتیجه گیری با اطّلاعات.</string>
     <string name="no_subtitle">بدون زیرنویس</string>
     <string name="aspect_ratio">نسبت تصویر</string>
     <string name="watch_history_summary">ردیابی محلی ویدیوهای دیده شده</string>
@@ -326,7 +326,7 @@
         <item quantity="other">%d جریان جدید</item>
     </plurals>
     <string name="legacy_subscriptions">نمای اشتراک‌های قدیمی</string>
-    <string name="category_filler_description">برای صحنه‌‌هایی که فقط برای پرکردن یا طنز اضافه شده‌اند و برای درک محتوای اصلی ویدیو لازم نیستند.</string>
+    <string name="category_filler_summary">برای صحنه‌‌هایی که فقط برای پرکردن یا طنز اضافه شده‌اند و برای درک محتوای اصلی ویدیو لازم نیستند.</string>
     <string name="shareTo">هم‌رسانی نشانی با</string>
     <string name="instance_api_url">نشانی رابط برنامه‌نویسی نمونه</string>
     <string name="empty_instance">نام و نشانی رابط برنامه‌نویسی را وارد کنید.</string>
@@ -449,8 +449,8 @@
     <string name="manual">دستی</string>
     <string name="automatic">خودکار</string>
     <string name="continue_watching">ادامه تماشا</string>
-    <string name="fallback_piped_proxy_desc">بار کردن ویدیوها با پیشکار در صورن کار نکردن اتّصال مستقیم به یوتوب برای ویدیوی جاری (زمان بار کردن نخستین را افزایش می دهد). اگر از کار بیفتد احتمالاً محتوای آهنگ‌های یوتوب به دلیل محدودیت‌های یوتوب پخش نخواهد شد.</string>
-    <string name="dearrow_summary">عنوان‌ها و بندانگشتی‌های دقیق‌تر و کم اغراق آمیز را نشان دهید. زمان بار کردن را افزایش می‌دهد.</string>
+    <string name="fallback_piped_proxy_summary">بار کردن ویدیوها با پیشکار در صورن کار نکردن اتّصال مستقیم به یوتوب برای ویدیوی جاری (زمان بار کردن نخستین را افزایش می دهد). اگر از کار بیفتد احتمالاً محتوای آهنگ‌های یوتوب به دلیل محدودیت‌های یوتوب پخش نخواهد شد</string>
+    <string name="dearrow_summary">عنوان‌ها و بندانگشتی‌های دقیق‌تر و کم اغراق آمیز را نشان دهید. زمان بار کردن را افزایش می‌دهد</string>
     <string name="stop">توقف</string>
     <string name="sb_color_enable">بخش‌های رنگی سفارشی را برای بخش‌های SponsorBlock تغییر می‌دهد.</string>
     <string name="color">رنگ</string>
@@ -458,7 +458,7 @@
     <string name="enter_hex_value">مقدار کد رنگ HEX را وارد نمایید</string>
     <string name="jumped_to_highlight">پرش به بخش مهم ویدیو</string>
     <string name="category_highlight">نمایش بخش مهم ویدئو</string>
-    <string name="category_highlight_description">هم می‌تواند نام تبلیغاتی، تصویر کوچک یا جالب‌ترین قسمت ویدئو باشد. می‌توانید با لمس آن در بخش فصل‌ها به آن پرش کنید.</string>
+    <string name="category_highlight_summary">هم می‌تواند نام تبلیغاتی، تصویر کوچک یا جالب‌ترین قسمت ویدئو باشد. می‌توانید با لمس آن در بخش فصل‌ها به آن پرش کنید.</string>
     <string name="sb_custom_colors">رنگ‌های بخش سفارشی</string>
     <string name="change_playlist_description">تغییر توضیح فهرست پخش</string>
     <string name="playlist_description">توضیح فهرست پخش</string>

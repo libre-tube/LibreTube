@@ -63,7 +63,7 @@
     <string name="addToPlaylist">加去 Playlist</string>
     <string name="all">全部</string>
     <string name="playlists">Playlists</string>
-    <string name="category_selfpromo_description">呢樣類似 “Sponsor” 除咗無俾或者自我推銷。包括呢件 Product，Donate 或者關於佢地同邊個合作嘅資料</string>
+    <string name="category_selfpromo_summary">呢樣類似 “Sponsor” 除咗無俾或者自我推銷。包括呢件 Product，Donate 或者關於佢地同邊個合作嘅資料</string>
     <string name="okay">搞掂</string>
     <string name="history">記錄</string>
     <string name="search_history">搵記錄</string>

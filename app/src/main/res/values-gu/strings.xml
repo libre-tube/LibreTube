@@ -34,8 +34,8 @@
     <string name="category_sponsor">પ્રાયોજક</string>
     <string name="category_selfpromo">અવેતન/સ્વ-પ્રમોશન</string>
     <string name="category_intro">ઈન્ટરમિશન/ઈન્ટ્રો એનિમેશન</string>
-    <string name="category_outro_description">અંતને અનુસરતી માહિતી. માહિતી સાથેના તારણો માટે નહીં.</string>
-    <string name="category_intro_description">વાસ્તવિક સામગ્રી વિનાનો અંતરાલ. વિરામ, સ્થિર ફ્રેમ, એનિમેશનનું પુનરાવર્તન થઈ શકે છે. માહિતી ધરાવતા સંક્રમણો માટે તેનો ઉપયોગ થવો જોઈએ નહીં.</string>
+    <string name="category_outro_summary">અંતને અનુસરતી માહિતી. માહિતી સાથેના તારણો માટે નહીં.</string>
+    <string name="category_intro_summary">વાસ્તવિક સામગ્રી વિનાનો અંતરાલ. વિરામ, સ્થિર ફ્રેમ, એનિમેશનનું પુનરાવર્તન થઈ શકે છે. માહિતી ધરાવતા સંક્રમણો માટે તેનો ઉપયોગ થવો જોઈએ નહીં.</string>
     <string name="playOnBackground">પાશ્વ ભાગમાં વગાડો</string>
     <string name="defaultIcon">મૂળભૂત</string>
     <string name="customization">ગોઠવણીઓ</string>
@@ -64,8 +64,8 @@
     <string name="queue">કતાર</string>
     <string name="time">સમય</string>
     <string name="notification_time">સૂચના સમય</string>
-    <string name="notification_time_summary">સમયગાળો જેમાં સૂચનાઓ બતાવવાની મંજૂરી છે.</string>
-    <string name="download_channel_description">જ્યારે મીડિયાને ડાઉનલોડ કરી રહ્યા હોય ત્યારે સૂચના બતાવે છે.</string>
+    <string name="notification_time_summary">સમયગાળો જેમાં સૂચનાઓ બતાવવાની મંજૂરી છે</string>
+    <string name="download_channel_description">જ્યારે મીડિયાને ડાઉનલોડ કરી રહ્યા હોય ત્યારે સૂચના બતાવે છે</string>
     <string name="push_channel_description">જ્યારે નવી સ્ટ્રીમો ઉપલબ્ધ હોય ત્યારે સૂચનને બતાવે છે.</string>
     <string name="legacyIcon">ગુમ થયેલ વારસો</string>
     <string name="gradientIcon">ગ્લિબ ઢાળ</string>
@@ -267,8 +267,8 @@
     <string name="logout">બહાર નીકળો</string>
     <string name="already_logged_in">પહેલેથી જ પ્રવેશેલ છે. તમે તમારા ખાતામાંથી લોગ આઉટ થઈ શકો છો.</string>
     <string name="defres">વિડિઓ રિઝોલ્યુશન</string>
-    <string name="category_sponsor_description">પેઇડ પ્રમોશન, પેઇડ રેફરલ્સ અને સીધી જાહેરાતો. સેલ્ફ-પ્રમોશન અથવા કારણો, સર્જકો, વેબસાઇટ્સ અને ઉત્પાદનો માટે મફત અસલી બૂમો પાડવા માટે નહીં.</string>
-    <string name="category_selfpromo_description">અવેતન અથવા સ્વ-બઢતી સિવાય \"પ્રાયોજક\" ની જેમ. આમાં માલ, દાન અથવા તેઓએ કોની સાથે સહયોગ કર્યો તે વિશેની માહિતી વિશેના વિભાગોનો સમાવેશ થાય છે.</string>
+    <string name="category_sponsor_summary">પેઇડ પ્રમોશન, પેઇડ રેફરલ્સ અને સીધી જાહેરાતો. સેલ્ફ-પ્રમોશન અથવા કારણો, સર્જકો, વેબસાઇટ્સ અને ઉત્પાદનો માટે મફત અસલી બૂમો પાડવા માટે નહીં.</string>
+    <string name="category_selfpromo_summary">અવેતન અથવા સ્વ-બઢતી સિવાય \"પ્રાયોજક\" ની જેમ. આમાં માલ, દાન અથવા તેઓએ કોની સાથે સહયોગ કર્યો તે વિશેની માહિતી વિશેના વિભાગોનો સમાવેશ થાય છે.</string>
     <string name="unsubscribe">ઉમેદવારી દૂર કરો</string>
     <string name="cannotDownload">આ સ્ટ્રીમને ડાઉનલોડ કરી શકાતુ નથી.</string>
     <string name="dlisinprogress">બીજો ડાઉનલોડ પહેલેથી જ પ્રગતિમાં છે, મહેરબાની કરીને તે સમાપ્ત થાય ત્યાં સુધી રાહ જુઓ.</string>
@@ -277,10 +277,10 @@
     <string name="location">સ્થાન</string>
     <string name="pauseOnScreenOff_summary">જ્યારે સ્ક્રીન બંધ હોય ત્યારે પ્લેબેકને અટકાવો.</string>
     <string name="copied">નકલ થયેલ</string>
-    <string name="category_interaction_description">જ્યારે સામગ્રીની મધ્યમાં પસંદ કરવા, સબ્સ્ક્રાઇબ કરવા અથવા અનુસરવા માટે એક ટૂંકું રીમાઇન્ડર હોય. જો લાંબી અથવા કોઈ ચોક્કસ બાબત વિશે હોય, તો તેના બદલે તે સ્વ-બઢતી હોવી જોઈએ.</string>
-    <string name="category_music_offtopic_description">ફક્ત મ્યુઝિક વીડિયોમાં ઉપયોગ માટે. તે વિડિઓના ભાગોને આવરી લેવું જોઈએ, સત્તાવાર મિશ્રણનો ભાગ નહીં. અંતમાં, વિડિઓ સ્પોટિફાઇ અથવા અન્ય કોઈપણ મિશ્રિત સંસ્કરણને શક્ય તેટલી નજીકથી મળતી આવવી જોઈએ, અથવા વાત કરવા અથવા અન્ય વિક્ષેપોને ઘટાડવી જોઈએ.</string>
-    <string name="category_filler_description">ફક્ત ફિલર અથવા રમૂજ માટે ઉમેરવામાં આવેલા સ્પર્શકીય દ્રશ્યો માટે વિડિઓની મુખ્ય સામગ્રીને સમજવાની જરૂર નથી.</string>
-    <string name="category_preview_description">તેની શ્રેણીમાં આ અથવા ભાવિ વિડિઓઝમાં આગામી સામગ્રીની વિગતો આપતા સેગમેન્ટ્સ માટે, પરંતુ વધારાની માહિતી પ્રદાન કરતા નથી. જો તેમાં માત્ર અહીં જ દેખાતી ક્લિપ્સ નો સમાવેશ થાય છે, તો આ ખોટી કેટેગરી હોવાની સંભાવના છે.</string>
+    <string name="category_interaction_summary">જ્યારે સામગ્રીની મધ્યમાં પસંદ કરવા, સબ્સ્ક્રાઇબ કરવા અથવા અનુસરવા માટે એક ટૂંકું રીમાઇન્ડર હોય. જો લાંબી અથવા કોઈ ચોક્કસ બાબત વિશે હોય, તો તેના બદલે તે સ્વ-બઢતી હોવી જોઈએ.</string>
+    <string name="category_music_offtopic_summary">ફક્ત મ્યુઝિક વીડિયોમાં ઉપયોગ માટે. તે વિડિઓના ભાગોને આવરી લેવું જોઈએ, સત્તાવાર મિશ્રણનો ભાગ નહીં. અંતમાં, વિડિઓ સ્પોટિફાઇ અથવા અન્ય કોઈપણ મિશ્રિત સંસ્કરણને શક્ય તેટલી નજીકથી મળતી આવવી જોઈએ, અથવા વાત કરવા અથવા અન્ય વિક્ષેપોને ઘટાડવી જોઈએ.</string>
+    <string name="category_filler_summary">ફક્ત ફિલર અથવા રમૂજ માટે ઉમેરવામાં આવેલા સ્પર્શકીય દ્રશ્યો માટે વિડિઓની મુખ્ય સામગ્રીને સમજવાની જરૂર નથી.</string>
+    <string name="category_preview_summary">તેની શ્રેણીમાં આ અથવા ભાવિ વિડિઓઝમાં આગામી સામગ્રીની વિગતો આપતા સેગમેન્ટ્સ માટે, પરંતુ વધારાની માહિતી પ્રદાન કરતા નથી. જો તેમાં માત્ર અહીં જ દેખાતી ક્લિપ્સ નો સમાવેશ થાય છે, તો આ ખોટી કેટેગરી હોવાની સંભાવના છે.</string>
     <string name="update_available">વર્ઝન %1$s ઉપલબ્ધ છે</string>
     <string name="customInstance_summary">ઉમેરો…</string>
     <string name="instance_name">નમૂના નામ</string>

@@ -79,15 +79,15 @@
     <string name="category_segments">Segmentoj</string>
     <string name="category_sponsor">Sponsoro</string>
     <string name="import_from_yt_summary">De YouTube aŭ NewPipe</string>
-    <string name="category_sponsor_description">Porpagita reklamado, porpagitaj direktadoj, kaj rektaj reklamoj. Ne por mem-reklamado aŭ senpagaj sciigoj pri aferoj subtenindaj/kreistoj/retejoj/produktaĵoj, kiujn oni ŝatas.</string>
+    <string name="category_sponsor_summary">Porpagita reklamado, porpagitaj direktadoj, kaj rektaj reklamoj. Ne por mem-reklamado aŭ senpagaj sciigoj pri aferoj subtenindaj/kreistoj/retejoj/produktaĵoj, kiujn oni ŝatas.</string>
     <string name="category_selfpromo">Nepagita/Mem-reklamado</string>
-    <string name="category_selfpromo_description">Simila al \"sponsoro\" sed por nepagita aŭ primema reklamado. Tio inkluzivas sekciojn pri varoj, donacoj, aŭ informoj pri kunlaborinto.</string>
+    <string name="category_selfpromo_summary">Simila al \"sponsoro\" sed por nepagita aŭ primema reklamado. Tio inkluzivas sekciojn pri varoj, donacoj, aŭ informoj pri kunlaborinto.</string>
     <string name="category_interaction">Resciigo pri interago (abonado)</string>
-    <string name="category_interaction_description">Kiam estas mallonga sciigo por ŝati, aboni aŭ sekvi la kreiston meze de la enhavo. Se ĝi estas longa aŭ temas pri io specifa, oni anstataŭe taksu ĝin mem-reklamado.</string>
+    <string name="category_interaction_summary">Kiam estas mallonga sciigo por ŝati, aboni aŭ sekvi la kreiston meze de la enhavo. Se ĝi estas longa aŭ temas pri io specifa, oni anstataŭe taksu ĝin mem-reklamado.</string>
     <string name="category_intro">Interakto/enkonduka animaciaĵo</string>
-    <string name="category_intro_description">Segmento sen vera enhavo. Tio povas esti paŭzo, senmova bildo, ripetata animaciaĵo. Oni ne uzu tion ĉi por transiroj, kiuj enhavas informojn.</string>
+    <string name="category_intro_summary">Segmento sen vera enhavo. Tio povas esti paŭzo, senmova bildo, ripetata animaciaĵo. Oni ne uzu tion ĉi por transiroj, kiuj enhavas informojn.</string>
     <string name="category_outro">Finkartoj/agnoskoj</string>
-    <string name="category_outro_description">Agnoskoj aŭ kiam aperas la finkartoj de YouTube. Ne por konkludoj kun informoj.</string>
+    <string name="category_outro_summary">Agnoskoj aŭ kiam aperas la finkartoj de YouTube. Ne por konkludoj kun informoj.</string>
     <string name="license">Permesilo</string>
     <string name="color_accent">Emfaza koloro</string>
     <string name="color_red">Ruĝo</string>
@@ -118,5 +118,5 @@
     <string name="no_comments_available">Ĉi tiu video ne havas komentojn.</string>
     <string name="failed_fetching_instances">Ne eblis akiri disponeblajn instancojn.</string>
     <string name="push_channel_description">Montras sciigon kiam novaj fluoj disponeblas.</string>
-    <string name="lbry_hls_summary">Uzi LBRY HLS por enfluado se disponebla.</string>
+    <string name="lbry_hls_summary">Uzi LBRY HLS por enfluado se disponebla</string>
 </resources>

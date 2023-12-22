@@ -64,12 +64,12 @@
     <string name="category_interaction">इंटरॅक्शन रिमाइंडर (लाईक आणि सबस्क्राइब करा)</string>
     <string name="category_intro">इंटरमिशन/इंट्रो अॅनिमेशन</string>
     <string name="category_outro">एंड कार्ड्स आणि क्रेडिट्स</string>
-    <string name="category_outro_description">शेवटानंतरची माहिती. त्याचासह निष्कर्ष काढण्यासाठी नाही.</string>
+    <string name="category_outro_summary">शेवटानंतरची माहिती. त्याचासह निष्कर्ष काढण्यासाठी नाही.</string>
     <string name="license">परवाना</string>
-    <string name="category_interaction_description">जेव्हा सामग्रीच्या मध्यभागी लाइक, सबस्क्राइब किंवा अनुसरण करण्यासाठी एक छोटा स्मरणपत्र असतो. जर दीर्घ किंवा विशिष्ट गोष्टीबद्दल असेल तर त्याऐवजी ते स्वयंप्रचार असावे.</string>
-    <string name="category_sponsor_description">सशुल्क जाहिरात, सशुल्क संदर्भ आणि थेट जाहिराती. स्वयं-प्रमोशनसाठी किंवा कारणे, निर्माते, वेबसाइट्स आणि उत्पादनांसाठी विनामूल्य अस्सल shoutouts साठी नाही.</string>
-    <string name="category_selfpromo_description">\"प्रायोजक\" सारखेच बिनपगारी किंवा स्वत:ची जाहिरात वगळता. यामध्ये व्यापारी माल, देणग्या किंवा त्यांनी कोणासोबत सहकार्य केले याविषयीच्या माहितीचा समावेश आहे.</string>
-    <string name="category_intro_description">वास्तविक सामग्रीशिवाय मध्यांतर. एक विराम, स्थिर फ्रेम, पुनरावृत्ती ॲनिमेशन असू शकते. माहिती असलेल्या संक्रमणांसाठी वापरले जाऊ नये.</string>
+    <string name="category_interaction_summary">जेव्हा सामग्रीच्या मध्यभागी लाइक, सबस्क्राइब किंवा अनुसरण करण्यासाठी एक छोटा स्मरणपत्र असतो. जर दीर्घ किंवा विशिष्ट गोष्टीबद्दल असेल तर त्याऐवजी ते स्वयंप्रचार असावे.</string>
+    <string name="category_sponsor_summary">सशुल्क जाहिरात, सशुल्क संदर्भ आणि थेट जाहिराती. स्वयं-प्रमोशनसाठी किंवा कारणे, निर्माते, वेबसाइट्स आणि उत्पादनांसाठी विनामूल्य अस्सल shoutouts साठी नाही.</string>
+    <string name="category_selfpromo_summary">\"प्रायोजक\" सारखेच बिनपगारी किंवा स्वत:ची जाहिरात वगळता. यामध्ये व्यापारी माल, देणग्या किंवा त्यांनी कोणासोबत सहकार्य केले याविषयीच्या माहितीचा समावेश आहे.</string>
+    <string name="category_intro_summary">वास्तविक सामग्रीशिवाय मध्यांतर. एक विराम, स्थिर फ्रेम, पुनरावृत्ती ॲनिमेशन असू शकते. माहिती असलेल्या संक्रमणांसाठी वापरले जाऊ नये.</string>
     <string name="emptyPlaylistName">प्लेलिस्ट नाव रिक्त असू शकत नाही</string>
     <string name="startpage">घर</string>
     <string name="subscriptions">सदस्यता</string>
@@ -120,7 +120,7 @@
     <string name="data_saver_mode">डेटा-सेव्हर मोड</string>
     <string name="category_preview">पूर्वावलोकन/रीकॅप</string>
     <string name="category_filler">फिलर टँजेंट/विनोद</string>
-    <string name="category_filler_description">केवळ फिलर किंवा विनोदासाठी जोडलेल्या स्पर्शिक दृश्यांसाठी व्हिडिओची मुख्य सामग्री समजून घेणे आवश्यक नाही.</string>
+    <string name="category_filler_summary">केवळ फिलर किंवा विनोदासाठी जोडलेल्या स्पर्शिक दृश्यांसाठी व्हिडिओची मुख्य सामग्री समजून घेणे आवश्यक नाही.</string>
     <string name="category_music_offtopic">संगीत: गैर-संगीत सेक्शन</string>
     <string name="playback_speed">प्लेबॅक गती</string>
     <string name="advanced">अडवांस</string>
@@ -132,7 +132,7 @@
     <string name="instance_name">Instance चे नाव</string>
     <string name="torchIcon">ट्रेंडी टॉर्च</string>
     <string name="version">व्हर्जन %1$s</string>
-    <string name="category_preview_description">अतिरिक्त माहितीशिवाय भविष्यातील सामग्री तपशीलवार विभागांसाठी. त्यात फक्त येथे दिसणार्‍या क्लिपचा समावेश असल्यास, ही बहुधा चुकीची श्रेणी आहे.</string>
+    <string name="category_preview_summary">अतिरिक्त माहितीशिवाय भविष्यातील सामग्री तपशीलवार विभागांसाठी. त्यात फक्त येथे दिसणार्‍या क्लिपचा समावेश असल्यास, ही बहुधा चुकीची श्रेणी आहे.</string>
     <string name="color_blue">आनंदी निळा</string>
     <string name="replies">प्रत्युत्तरे</string>
     <string name="watch_positions">प्लेबॅक स्थिती लक्षात ठेवा</string>
@@ -198,7 +198,7 @@
     <string name="subscriberAndVideoCounts">%1$s सब्सक्राइबर • %2$d व्हिडियोस</string>
     <string name="enabled">चालू</string>
     <string name="playOnBackground">बेकग्राऊड मध्ये प्ले करा</string>
-    <string name="category_music_offtopic_description">फक्त संगीत व्हिडिओमध्ये वापरण्यासाठी. यात व्हिडिओचे काही भाग समाविष्ट असले पाहिजेत, अधिकृत मिक्सचा भाग नसावा. सरतेशेवटी, व्हिडिओ Spotify किंवा इतर कोणत्याही मिश्रित आवृत्तीशी शक्य तितक्या जवळून सारखा असावा.</string>
+    <string name="category_music_offtopic_summary">फक्त संगीत व्हिडिओमध्ये वापरण्यासाठी. यात व्हिडिओचे काही भाग समाविष्ट असले पाहिजेत, अधिकृत मिक्सचा भाग नसावा. सरतेशेवटी, व्हिडिओ Spotify किंवा इतर कोणत्याही मिश्रित आवृत्तीशी शक्य तितक्या जवळून सारखा असावा.</string>
     <string name="app_uptodate">नवीन व्हर्जन वापरत आहात.</string>
     <string name="normal_views">%1$s व्ह्यूज%2$s</string>
     <string name="clear_customInstances">ॲड केलेले साफ करा</string>

@@ -43,7 +43,7 @@
     <string name="category_sponsor">Спонсар</string>
     <string name="category_selfpromo">Неаплатнае/Самарэклама</string>
     <string name="category_intro">Антракт/Уступная анімацыя</string>
-    <string name="category_outro_description">Інфармацыя пасля заканчэння. Не для высноваў з інфармацыяй.</string>
+    <string name="category_outro_summary">Інфармацыя пасля заканчэння. Не для высноваў з інфармацыяй.</string>
     <string name="category_outro">Канчатковая застаўка і тытры</string>
     <string name="category_filler">Філеры/Жарты</string>
     <string name="category_preview">Папярэдні прагляд/Паўторы</string>
@@ -193,12 +193,12 @@
     <string name="music_songs">Песні YT Music</string>
     <string name="sponsorblock">SponsorBlock</string>
     <string name="category_interaction">Напамін аб узаемадзеянні</string>
-    <string name="category_sponsor_description">Платнае прасоўванне, платныя рэфералы і прамая рэклама. Не для самарэкламы або бясплатнай шчырай хвалы справам, стваральнікам, вэб-сайтам і прадуктам.</string>
-    <string name="category_selfpromo_description">Падобна «спонсару», за выключэннем неаплатнага або самарэкламы. Гэта ўключае ў сябе раздзелы пра тавары, ахвяраванні або інфармацыю аб тым, з кім яны супрацоўнічалі.</string>
-    <string name="category_interaction_description">Калі ёсць кароткі напамін паставіць лайкі, падпісацца або падпісацца ў сярэдзіне кантэнту. Калі доўга або пра нешта канкрэтнае, гэта павінна быць самарэклама.</string>
-    <string name="category_intro_description">Інтэрвал без фактычнага зместу. Можа быць паўза, статычны кадр, паўтаральная анімацыя. Не варта выкарыстоўваць для пераходаў, якія змяшчаюць інфармацыю.</string>
-    <string name="category_music_offtopic_description">Толькі для выкарыстання ў музычных відэа. Ён павінен ахопліваць часткі відэа, якія не ўваходзяць у афіцыйныя міксы. У рэшце рэшт, відэа павінна быць як мага больш падобным на Spotify або любую іншую змешаную версію, або паменшыць колькасць размоў і іншых фактараў, якія адцягваюць увагу.</string>
-    <string name="category_filler_description">Для датычных сцэн, дададзеных толькі для напаўнення або гумару, не патрабуецца для разумення асноўнага зместу відэа.</string>
+    <string name="category_sponsor_summary">Платнае прасоўванне, платныя рэфералы і прамая рэклама. Не для самарэкламы або бясплатнай шчырай хвалы справам, стваральнікам, вэб-сайтам і прадуктам.</string>
+    <string name="category_selfpromo_summary">Падобна «спонсару», за выключэннем неаплатнага або самарэкламы. Гэта ўключае ў сябе раздзелы пра тавары, ахвяраванні або інфармацыю аб тым, з кім яны супрацоўнічалі.</string>
+    <string name="category_interaction_summary">Калі ёсць кароткі напамін паставіць лайкі, падпісацца або падпісацца ў сярэдзіне кантэнту. Калі доўга або пра нешта канкрэтнае, гэта павінна быць самарэклама.</string>
+    <string name="category_intro_summary">Інтэрвал без фактычнага зместу. Можа быць паўза, статычны кадр, паўтаральная анімацыя. Не варта выкарыстоўваць для пераходаў, якія змяшчаюць інфармацыю.</string>
+    <string name="category_music_offtopic_summary">Толькі для выкарыстання ў музычных відэа. Ён павінен ахопліваць часткі відэа, якія не ўваходзяць у афіцыйныя міксы. У рэшце рэшт, відэа павінна быць як мага больш падобным на Spotify або любую іншую змешаную версію, або паменшыць колькасць размоў і іншых фактараў, якія адцягваюць увагу.</string>
+    <string name="category_filler_summary">Для датычных сцэн, дададзеных толькі для напаўнення або гумару, не патрабуецца для разумення асноўнага зместу відэа.</string>
     <string name="category_music_offtopic">Музыка: немузычны раздзел</string>
     <string name="license">Ліцэнзія</string>
     <string name="color_blue">Блажэнная сінь</string>
@@ -388,7 +388,7 @@
         <item quantity="many">%d гадоў таму</item>
         <item quantity="other">%d гадоў таму</item>
     </plurals>
-    <string name="category_preview_description">Для сегментаў з падрабязным апісаннем будучага кантэнту без дадатковай інфармацыі. Калі яна ўключае ў сябе кліпы, якія з\'яўляюцца толькі тут, гэта, хутчэй за ўсё, няправільная катэгорыя.</string>
+    <string name="category_preview_summary">Для сегментаў з падрабязным апісаннем будучага кантэнту без дадатковай інфармацыі. Калі яна ўключае ў сябе кліпы, якія з\'яўляюцца толькі тут, гэта, хутчэй за ўсё, няправільная катэгорыя.</string>
     <string name="alternative_player_layout">Альтэрнатыўны макет прайгравальніка</string>
     <string name="featured">Рэкамендацыі</string>
     <string name="pinch_control">Упраўленне шчыпком</string>
@@ -448,9 +448,9 @@
     <string name="emptyPlaylistDescription">Апісанне плэйліста не можа быць пустым</string>
     <string name="show_search_suggestions">Паказаць прапановы пошуку</string>
     <string name="fallback_piped_proxy">Зварот да проксі Piped</string>
-    <string name="fallback_piped_proxy_desc">Загружайце відэа праз проксі-сервер, калі непасрэднае падключэнне да YouTube не працуе для бягучага відэа (павялічвае пачатковы час загрузкі). Калі гэта адключана, музычны кантэнт YouTube, хутчэй за ўсё, не будзе прайгравацца з-за абмежаванняў YT.</string>
+    <string name="fallback_piped_proxy_summary">Загружайце відэа праз проксі-сервер, калі непасрэднае падключэнне да YouTube не працуе для бягучага відэа (павялічвае пачатковы час загрузкі). Калі гэта адключана, музычны кантэнт YouTube, хутчэй за ўсё, не будзе прайгравацца з-за абмежаванняў YT</string>
     <string name="unknown_audio_language">Невядомая мова гуку</string>
-    <string name="category_highlight_description">Гэта можа быць рэкламуемая назва, мініяцюра або самая цікавая частка відэа. Вы можаце перайсці да яго, націснуўшы на яго ў раздзеле раздзелаў.</string>
+    <string name="category_highlight_summary">Гэта можа быць рэкламуемая назва, мініяцюра або самая цікавая частка відэа. Вы можаце перайсці да яго, націснуўшы на яго ў раздзеле раздзелаў.</string>
     <string name="unknown_audio_track_type">Невядомы тып гукавой дарожкі</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="sb_custom_colors">Карыстальніцкія колеры сегментаў</string>

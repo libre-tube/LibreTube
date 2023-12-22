@@ -79,8 +79,8 @@
     <string name="restore">Restaurar</string>
     <string name="none">Nulle</string>
     <string name="subscribers">%1$s subscriptores</string>
-    <string name="category_sponsor_description">Promotion de pagamento, referentias de pagamento e publicitate directe. Non pro auto-promotion o gratitude genuine e gratuite a causas, creatores, sitos web e productos.</string>
-    <string name="category_interaction_description">Quando il ha un rememoration curte a facer me place, subscriber o sequer in le medie del contento. Si es longe o super alique specific, illo deberea esser autopromotion.</string>
+    <string name="category_sponsor_summary">Promotion de pagamento, referentias de pagamento e publicitate directe. Non pro auto-promotion o gratitude genuine e gratuite a causas, creatores, sitos web e productos.</string>
+    <string name="category_interaction_summary">Quando il ha un rememoration curte a facer me place, subscriber o sequer in le medie del contento. Si es longe o super alique specific, illo deberea esser autopromotion.</string>
     <string name="import_from_yt_summary">De Youtube o NewPipe</string>
     <string name="torchIcon">Torcha</string>
     <string name="defaultIcon">Predefinite</string>
@@ -90,12 +90,12 @@
     <string name="login_register">Aperir session/Registrar se</string>
     <string name="downloads">Discargamentos</string>
     <string name="defres">Resolution de video</string>
-    <string name="category_outro_description">Information que seque le fin. Non pro conclusiones con information.</string>
+    <string name="category_outro_summary">Information que seque le fin. Non pro conclusiones con information.</string>
     <string name="material_you">Material You</string>
     <string name="resume">Resumer</string>
     <string name="app_icon">Icone</string>
     <string name="server_error">Il pare que il ha un problema con le servitor seligite. Essaya un altere instantia.</string>
-    <string name="category_highlight_description">Pote esser le titulo annunciate, le miniatura o le parte plus interessante del video. Tu pote saltar to ille al toccar in le section del capitulos.</string>
+    <string name="category_highlight_summary">Pote esser le titulo annunciate, le miniatura o le parte plus interessante del video. Tu pote saltar to ille al toccar in le section del capitulos.</string>
     <string name="category_outro">Animationes de fin e creditos</string>
     <string name="cannotDownload">Non pote discargar iste fluxo.</string>
     <string name="show_stream_thumbnails">Monstrar miniaturas de fluxo</string>
@@ -145,7 +145,7 @@
     <string name="playlistName">Nomine del lista de reproduction</string>
     <string name="search_history_summary">Rememorar recercas</string>
     <string name="auth_instances">Selige un instantia de authentication</string>
-    <string name="category_selfpromo_description">Simile a \"sponsor\" ma pro promotion proprie o non pagate. Isto include sectiones re mercantias, donationes o information sur con qui habeva collaborate.</string>
+    <string name="category_selfpromo_summary">Simile a \"sponsor\" ma pro promotion proprie o non pagate. Isto include sectiones re mercantias, donationes o information sur con qui habeva collaborate.</string>
     <string name="color_purple">Purpura placente</string>
     <string name="about">A proposito de</string>
     <string name="no_subtitle">Sin subtitulos</string>
@@ -158,7 +158,7 @@
     <string name="emptyList">Nihil hic.</string>
     <string name="no_search_result">Nulle resultatos.</string>
     <string name="always">Sempre</string>
-    <string name="category_intro_description">Un intervallo sin contento actual. Pote esser un pausa, quadro static, animation in repetition. Non deberea esser usate in transitiones que contine information.</string>
+    <string name="category_intro_summary">Un intervallo sin contento actual. Pote esser un pausa, quadro static, animation in repetition. Non deberea esser usate in transitiones que contine information.</string>
     <string name="concurrent_downloads">Numero maxime de discargas simultanee</string>
     <string name="player_autoplay">Reproduction automatic</string>
     <string name="music_songs">Cantos de YT Music</string>
@@ -206,7 +206,7 @@
     <string name="watch_positions_title">Positiones de reproduction rememorate</string>
     <string name="worst_quality">Le pejor</string>
     <string name="advanced_summary">Discargas e reinitialisation</string>
-    <string name="category_filler_description">Pro scenas in parallelo addite solmente pro replen o burlas non necessari pro le comprehension del contento principal de iste video.</string>
+    <string name="category_filler_summary">Pro scenas in parallelo addite solmente pro replen o burlas non necessari pro le comprehension del contento principal de iste video.</string>
     <string name="general_summary">Lingua e region</string>
     <string name="segment_skipped">Segmento saltate</string>
     <string name="player">Reproductor</string>
@@ -483,8 +483,8 @@
     <string name="hide_watched_from_feed_summary">Non monstrar videos reguardate plus de 90% in le scheda de subscriptiones.</string>
     <string name="notification_time_summary">Limitar le intervallo de tempore in le qual le notificationes de fluxo es monstrate.</string>
     <string name="aspect_ratio">Proportion del video</string>
-    <string name="category_music_offtopic_description">Solmente pro uso in videos musical. Illo deberea cover partes del video que non es parte del mixturas official. In the end, the video should resemble the Spotify or any other mixed version as closely as possible, or reduce talking or other distractions.</string>
-    <string name="autoplay_countdown_summary">Monstrar un computo a retro de 5 secundas ante le reproduction automatic del sequente video.</string>
+    <string name="category_music_offtopic_summary">Solmente pro uso in videos musical. Illo deberea cover partes del video que non es parte del mixturas official. In the end, the video should resemble the Spotify or any other mixed version as closely as possible, or reduce talking or other distractions.</string>
+    <string name="autoplay_countdown_summary">Monstrar un computo a retro de 5 secundas ante le reproduction automatic del sequente video</string>
     <string name="category_preview">Previsualisation/Summario</string>
     <string name="fallback_piped_proxy">Recurrer al proxy de Piped</string>
     <string name="grid_landscape">Columnas del grillia (horizontal)</string>

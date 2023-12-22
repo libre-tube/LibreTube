@@ -66,7 +66,7 @@
     <string name="category_selfpromo">Không trả tiền/Tự quảng cáo</string>
     <string name="category_interaction">Nhắc nhở tương tác</string>
     <string name="category_intro">Gián đoạn/Hoạt cảnh giới thiệu</string>
-    <string name="category_outro_description">Thông tin sau phần kết. Không phải cho kết luận với thông tin.</string>
+    <string name="category_outro_summary">Thông tin sau phần kết. Không phải cho kết luận với thông tin.</string>
     <string name="license">Giấy phép</string>
     <string name="color_accent">Nhấn</string>
     <string name="color_blue">Xanh dương tươi</string>
@@ -94,8 +94,8 @@
     <string name="addToPlaylist">Thêm vào danh sách phát</string>
     <string name="customization">Tùy chỉnh</string>
     <string name="sponsorblock_summary">Sử dụng API sponsor.ajay.app</string>
-    <string name="category_selfpromo_description">Tương tự như \"nhà tài trợ\" ngoại trừ không trả tiền hoặc tự quảng cáo. Điều này bao gồm các phần về hàng hóa, quyên góp hoặc thông tin về người mà họ đã cộng tác.</string>
-    <string name="category_interaction_description">Khi có một lời nhắc ngắn hãy thích, đăng ký hoặc theo dõi ở giữa nội dung. Nếu dài hoặc về một cái gì đó cụ thể, thay vào nên liệt vào dạng tự quảng cáo.</string>
+    <string name="category_selfpromo_summary">Tương tự như \"nhà tài trợ\" ngoại trừ không trả tiền hoặc tự quảng cáo. Điều này bao gồm các phần về hàng hóa, quyên góp hoặc thông tin về người mà họ đã cộng tác.</string>
+    <string name="category_interaction_summary">Khi có một lời nhắc ngắn hãy thích, đăng ký hoặc theo dõi ở giữa nội dung. Nếu dài hoặc về một cái gì đó cụ thể, thay vào nên liệt vào dạng tự quảng cáo.</string>
     <string name="category_outro">Thẻ kết thúc và tín dụng</string>
     <string name="color_purple">Màu tím dễ chịu</string>
     <string name="update_summary">Kiểm tra cập nhật mới</string>
@@ -104,11 +104,11 @@
     <string name="invalid_url">Hãy nhập một URL mà hoạt đông được</string>
     <string name="darkTheme">Tối</string>
     <string name="lightTheme">Sáng</string>
-    <string name="category_filler_description">Dành cho các cảnh tiếp theo được thêm vào để bổ sung hoặc hài hước không bắt buộc để hiểu nội dung chính của video.</string>
+    <string name="category_filler_summary">Dành cho các cảnh tiếp theo được thêm vào để bổ sung hoặc hài hước không bắt buộc để hiểu nội dung chính của video.</string>
     <string name="category_music_offtopic">Âm nhạc: Phần không có nhạc</string>
     <string name="category_filler">Filler Tangent / Trò đùa</string>
     <string name="category_preview">Xem trước/Tóm tắt</string>
-    <string name="category_preview_description">Đối với các phân đoạn nêu chi tiết nội dung trong tương lai mà không có thông tin bổ sung. Nếu nó bao gồm các clip chỉ xuất hiện ở đây, thì rất có thể đây là danh mục sai.</string>
+    <string name="category_preview_summary">Đối với các phân đoạn nêu chi tiết nội dung trong tương lai mà không có thông tin bổ sung. Nếu nó bao gồm các clip chỉ xuất hiện ở đây, thì rất có thể đây là danh mục sai.</string>
     <string name="material_you">Tài liệu bạn</string>
     <string name="app_icon">Biểu tượng</string>
     <string name="enabled">Kích hoạt</string>
@@ -125,9 +125,9 @@
     <string name="downloadfailed">Tải xuống thất bại.</string>
     <string name="server_error">Có vẻ như có một vấn đề với máy chủ được chọn. Hãy thử một instance khác.</string>
     <string name="category_segments">Các phân đoạn</string>
-    <string name="category_sponsor_description">Quảng cáo có trả tiền, giới thiệu có trả tiền và quảng cáo trực tiếp. Không phải để tự quảng cáo hoặc gửi lời cảm ơn miễn phí tới các hoạt động chính nghĩa / người sáng tạo / trang web / sản phẩm mà họ thích.</string>
-    <string name="category_intro_description">Khoảng thời gian không có chứa nội dung của video. Có thể là tạm dừng, khung tĩnh, hoạt ảnh lặp lại. Không nên được sử dụng cho các phân cảnh chuyển có chứa thông tin.</string>
-    <string name="category_music_offtopic_description">Chỉ sử dụng cho các video ca nhạc. Nó phải bao gồm các phần của video không phải là một phần của bản phối chính thức. Chung quy lại, video phải giống với Spotify hoặc bất kỳ phiên bản phối nào khác càng giống càng tốt, hoặc giảm nói chuyện hoặc các yếu tố gây xao nhãng khác.</string>
+    <string name="category_sponsor_summary">Quảng cáo có trả tiền, giới thiệu có trả tiền và quảng cáo trực tiếp. Không phải để tự quảng cáo hoặc gửi lời cảm ơn miễn phí tới các hoạt động chính nghĩa / người sáng tạo / trang web / sản phẩm mà họ thích.</string>
+    <string name="category_intro_summary">Khoảng thời gian không có chứa nội dung của video. Có thể là tạm dừng, khung tĩnh, hoạt ảnh lặp lại. Không nên được sử dụng cho các phân cảnh chuyển có chứa thông tin.</string>
+    <string name="category_music_offtopic_summary">Chỉ sử dụng cho các video ca nhạc. Nó phải bao gồm các phần của video không phải là một phần của bản phối chính thức. Chung quy lại, video phải giống với Spotify hoặc bất kỳ phiên bản phối nào khác càng giống càng tốt, hoặc giảm nói chuyện hoặc các yếu tố gây xao nhãng khác.</string>
     <string name="buffering_goal">Tải trước</string>
     <string name="shareTo">Chia sẻ URL tới</string>
     <string name="legacyIcon">Di sản thất lạc</string>
@@ -356,7 +356,7 @@
     <string name="color">Màu sắc</string>
     <string name="enter_hex_value">Nhập giá trị màu Hex</string>
     <string name="fallback_piped_proxy">Dự phòng cho proxy Piped</string>
-    <string name="fallback_piped_proxy_desc">Tải video qua proxy nếu kết nối trực tiếp với YouTube không hoạt động đối với video hiện tại (tăng thời gian tải ban đầu). Nếu bị tắt, nội dung âm nhạc trên YouTube có thể sẽ không phát do các hạn chế của YouTube.</string>
+    <string name="fallback_piped_proxy_summary">Tải video qua proxy nếu kết nối trực tiếp với YouTube không hoạt động đối với video hiện tại (tăng thời gian tải ban đầu). Nếu bị tắt, nội dung âm nhạc trên YouTube có thể sẽ không phát do các hạn chế của YouTube</string>
     <string name="choose_instance_long">Vui lòng chọn một phiên bản Piped để sử dụng từ bên dưới. Phiên bản Piped sẽ đóng vai trò trung gian giữa bạn và YouTube. Các phiên bản này được đặt tại các vị trí thực tế khác nhau - được biểu thị bằng (các) cờ quốc gia của chúng. Các trường hợp gần bạn hơn về mặt vật lý có khả năng nhanh hơn các trường hợp không ở gần bạn. Bạn có thể thay đổi phiên bản bạn sử dụng trong phần cài đặt bất kỳ lúc nào.</string>
     <string name="off">Tắt</string>
     <string name="fullscreen_gestures">Cử chỉ vào/thoát toàn màn hình</string>
@@ -372,7 +372,7 @@
     <string name="autoplay_countdown">Đếm ngược tự động phát</string>
     <string name="autoplay_countdown_summary">Hiển thị đếm ngược 5 giây trước khi tự động phát video tiếp theo.</string>
     <string name="jumped_to_highlight">Đã chuyển đến Video nổi bật</string>
-    <string name="category_highlight_description">Có thể là tiêu đề được quảng cáo, hình thu nhỏ hoặc phần thú vị nhất của video. Bạn có thể bỏ qua nó bằng cách nhấn vào nó trong phần chương.</string>
+    <string name="category_highlight_summary">Có thể là tiêu đề được quảng cáo, hình thu nhỏ hoặc phần thú vị nhất của video. Bạn có thể bỏ qua nó bằng cách nhấn vào nó trong phần chương.</string>
     <string name="category_highlight">Hiển thị video nổi bật</string>
     <string name="sb_color_enable">Bật/tắt các phân đoạn màu tùy chỉnh cho các phân đoạn Khóa Nhà tài trợ.</string>
     <string name="pause_on_quit">Tạm dừng khi thoát</string>
