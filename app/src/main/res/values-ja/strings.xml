@@ -531,4 +531,7 @@
     <string name="add_to_group">グループに追加</string>
     <string name="uptime">%.2f%% 稼働</string>
     <string name="grid_landscape">一覧での1行あたりの表示数 (縦画面)</string>
+    <string name="rich_caption_rendering">字幕の描画を高品質にする</string>
+    <string name="rich_caption_rendering_summary">より高品質にウェブ字幕を描画。</string>
+    <string name="copy_tooltip">コピー</string>
 </resources>
