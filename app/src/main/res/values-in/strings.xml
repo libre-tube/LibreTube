@@ -19,7 +19,7 @@
     <string name="videos">Video</string>
     <string name="downloadfailed">Unduhan Gagal.</string>
     <string name="import_from_yt">Impor langganan</string>
-    <string name="notgmail">Ini untuk akun Piped Anda.</string>
+    <string name="notgmail">Ini untuk akun Piped Anda</string>
     <string name="already_logged_in">Anda sudah masuk, Anda dapat keluar dari akun anda.</string>
     <string name="instances">Pilih…</string>
     <string name="customInstance">Kustom</string>
@@ -81,17 +81,17 @@
     <string name="segment_skipped">Segmen dilewati</string>
     <string name="category_sponsor">Sponsor</string>
     <string name="category_segments">Segmen</string>
-    <string name="category_sponsor_summary">Promosi dibayar, tautan dibayar dan iklan langsung. Tidak untuk promosi diri sendiri atau dukungan gratis untuk gerakan, kreator, situs.</string>
+    <string name="category_sponsor_summary">Promosi dibayar, tautan dibayar dan iklan langsung. Tidak untuk promosi diri sendiri atau dukungan gratis untuk gerakan, kreator, situs</string>
     <string name="category_selfpromo">Promosi Diri Sendiri/Tidak Dibayar</string>
     <string name="app_icon">Ikon</string>
     <string name="youtube">Youtube</string>
-    <string name="category_selfpromo_summary">Mirip dengan \"sponsor\" kecuali ini tidak dibayar atau promosi diri sendiri. Ini termasuk merchandise, donasi, atau informasi tentang siapa yang berkolaborasi dengan mereka.</string>
+    <string name="category_selfpromo_summary">Mirip dengan \"sponsor\" kecuali ini tidak dibayar atau promosi diri sendiri. Ini termasuk merchandise, donasi, atau informasi tentang siapa yang berkolaborasi dengan mereka</string>
     <string name="category_interaction">Pengingat interaksi</string>
     <string name="category_intro">Jeda/Animasi Intro</string>
-    <string name="category_intro_summary">Bagian yang bukan konten sebenarnya. Dapat berupa jeda, gambar statik, atau animasi berulang. Ini tidak boleh digunakan untuk transisi yang berisi informasi.</string>
+    <string name="category_intro_summary">Bagian yang bukan konten sebenarnya. Dapat berupa jeda, gambar statik, atau animasi berulang. Ini tidak boleh digunakan untuk transisi yang berisi informasi</string>
     <string name="category_outro">Kartu akhir dan kredit</string>
-    <string name="category_outro_summary">Info mengikuti dengan akhir video. Bukan untuk kesimpulan dengan info.</string>
-    <string name="category_interaction_summary">Saat ada pengingat singkat untuk meminta suka, berlangganan atau mengikuti di tengah konten. Jika panjang atau tentang sesuatu yang spesifik, sebaiknya pakai kategori promosi diri sendiri.</string>
+    <string name="category_outro_summary">Info mengikuti dengan akhir video. Bukan untuk kesimpulan dengan info</string>
+    <string name="category_interaction_summary">Saat ada pengingat singkat untuk meminta suka, berlangganan atau mengikuti di tengah konten. Jika panjang atau tentang sesuatu yang spesifik, sebaiknya pakai kategori promosi diri sendiri</string>
     <string name="piped">Piped</string>
     <string name="playOnBackground">Putar di latar belakang</string>
     <string name="license">Lisensi</string>
@@ -123,7 +123,7 @@
     <string name="watch_positions">Ingat posisi</string>
     <string name="auth_instances">Gunakan sebuah instansi otentikasi</string>
     <string name="no_player_found">Tidak ada pemain eksternal. Pastikan Anda memiliki satu terinstal.</string>
-    <string name="data_saver_mode_summary">Melewati gambar mini dan gambar lainnya.</string>
+    <string name="data_saver_mode_summary">Melewati gambar mini dan gambar lainnya</string>
     <string name="resize_mode_zoom">Perbesar</string>
     <string name="repeat_mode_none">Tidak diulang</string>
     <string name="checking_frequency">Memeriksa setiap…</string>
@@ -166,10 +166,10 @@
     <string name="translate">Terjemahan</string>
     <string name="no_search_result">Tidak ada hasil.</string>
     <string name="share_with_time">Bagikan dengan kode waktu</string>
-    <string name="category_filler_summary">Untuk adegan tangensial yang ditambahkan hanya untuk pengisi atau lelucon tidak dibutuhkan untuk mengerti konten utama video.</string>
+    <string name="category_filler_summary">Untuk adegan tangensial yang ditambahkan hanya untuk pengisi atau lelucon tidak dibutuhkan untuk mengerti konten utama video</string>
     <string name="category_filler">Pengisi Lelucon/Tangensial</string>
     <string name="category_music_offtopic">Musik: Bagian Non-Musik</string>
-    <string name="category_music_offtopic_summary">Hanya gunakan ini dalam musik video. Ini seharusnya bagian video yang bukan bagian dari mix resmi. Akhirnya, videonya seharusnya mirip dengan versi mix Spotify atau versi mix yang lain semirip mungkin, atau kurangi percakapan atau gangguan lainnya.</string>
+    <string name="category_music_offtopic_summary">Hanya gunakan ini dalam musik video. Ini seharusnya bagian video yang bukan bagian dari mix resmi. Akhirnya, videonya seharusnya mirip dengan versi mix Spotify atau versi mix yang lain semirip mungkin, atau kurangi percakapan atau gangguan lainnya</string>
     <string name="category_preview">Tampilan/Rekap</string>
     <string name="update_available">Versi %1$s tersedia</string>
     <string name="update_available_text">Pembaruan baru tersedia. Klik untuk membuka laman rilis GitHub.</string>
@@ -179,7 +179,7 @@
     <string name="advanced">Tingkat lanjut</string>
     <string name="live">Langsung</string>
     <string name="shareTo">Bagikan URL ke</string>
-    <string name="category_preview_summary">Untuk segmen yang merinci konten mendatang tanpa info tambahan. Jika termasuk klip yang hanya muncul di sini, kemungkinan besar ini adalah kategori yang salah.</string>
+    <string name="category_preview_summary">Untuk segmen yang merinci konten mendatang tanpa info tambahan. Jika termasuk klip yang hanya muncul di sini, kemungkinan besar ini adalah kategori yang salah</string>
     <string name="background_mode">Mode latar belakang</string>
     <string name="landscape">Lanskap</string>
     <string name="audio_video">Audio dan video</string>
@@ -192,7 +192,7 @@
     <string name="app_uptodate">Berjalan pada versi terkini.</string>
     <string name="update_summary">Periksa untuk pembaruan</string>
     <string name="player">Pemain</string>
-    <string name="appearance_summary">Atur aplikasi sesuai rasa Anda.</string>
+    <string name="appearance_summary">Atur aplikasi sesuai rasa Anda</string>
     <string name="advanced_summary">Unduhan dan pengaturan ulang</string>
     <string name="backup_restore">Cadangkan &amp; pulihkan</string>
     <string name="backup">Cadangkan</string>
@@ -201,9 +201,9 @@
     <string name="customInstance_summary">Tambahkan…</string>
     <string name="invalid_url">Mohon masukkan URL yang dapat digunakan</string>
     <string name="related_streams">Konten terkait</string>
-    <string name="related_streams_summary">Tampilkan saluran yang terkait dengan apa yang Anda tonton.</string>
+    <string name="related_streams_summary">Tampilkan saluran yang terkait dengan apa yang Anda tonton</string>
     <string name="buffering_goal">Pramuat</string>
-    <string name="buffering_goal_summary">Berapa detik maks. video untuk dimuat dahulu.</string>
+    <string name="buffering_goal_summary">Berapa detik maks. video untuk dimuat dahulu</string>
     <string name="playerVideoFormat">Format video untuk pemain</string>
     <string name="no_audio">Tanpa audio</string>
     <string name="no_video">Tanpa video</string>
@@ -212,7 +212,7 @@
     <string name="clonePlaylist">Gandakan daftar putar</string>
     <string name="deleteAccount_summary">Hapus akun Piped Anda</string>
     <string name="auth_instance">Instansi otentikasi</string>
-    <string name="auth_instance_summary">Gunakan instansi yang lain untuk panggilan terotentikasi.</string>
+    <string name="auth_instance_summary">Gunakan instansi yang lain untuk panggilan terotentikasi</string>
     <string name="github">GitHub</string>
     <string name="chapters">Bab</string>
     <string name="pure_theme">Tema murni</string>
@@ -226,12 +226,12 @@
     <string name="general">Umum</string>
     <string name="default_subtitle_language">Bahasa takarir</string>
     <string name="notify_new_streams">Tampilkan notifikasi untuk saluran baru</string>
-    <string name="notify_new_streams_summary">Tampilkan notifikasi untuk saluran baru dari kreator yang Anda ikuti.</string>
+    <string name="notify_new_streams_summary">Tampilkan notifikasi untuk saluran baru dari kreator yang Anda ikuti</string>
     <string name="history_empty">Belum ada riwayat.</string>
     <string name="required_network">Dibutuhkan koneksi</string>
     <string name="export_subscriptions">Ekspor langganan</string>
     <string name="skip_buttons">Tombol lewat</string>
-    <string name="skip_buttons_summary">Tampilkan tombol untuk melewati ke video berikutnya atau sebelumnya.</string>
+    <string name="skip_buttons_summary">Tampilkan tombol untuk melewati ke video berikutnya atau sebelumnya</string>
     <string name="history_size">Ukuran riwayat maksimum</string>
     <string name="unlimited">Tidak terbatas</string>
     <string name="add_to_queue">Tambahkan ke antrean</string>
@@ -251,7 +251,7 @@
     <string name="selected">Dipilih</string>
     <string name="never">Tidak pernah</string>
     <string name="autoRotatePlayer">Penuhi layar secara otomatis</string>
-    <string name="autoRotatePlayer_summary">Memainkan dengan layar penuh secara otomatis ketika perangkat diputar.</string>
+    <string name="autoRotatePlayer_summary">Memainkan dengan layar penuh secara otomatis ketika perangkat diputar</string>
     <string name="general_summary">Bahasa dan wilayah</string>
     <string name="quality">Kualitas</string>
     <string name="behavior">Perilaku</string>
@@ -274,7 +274,7 @@
     <string name="push_channel_name">Pekerja Notifikasi</string>
     <string name="push_channel_description">Menampilkan sebuah notifikasi ketika saluran baru telah tersedia.</string>
     <string name="save_feed">Muat umpan di latar belakang</string>
-    <string name="save_feed_summary">Muat umpan langganan di latar belakang dan cegah dari memuat secara otomatis.</string>
+    <string name="save_feed_summary">Muat umpan langganan di latar belakang dan cegah dari memuat secara otomatis</string>
     <string name="play_next">Main berikutnya</string>
     <string name="navigation_bar">Bilah navigasi</string>
     <string name="change_region">Sedang Tren sepertinya tidak tersedia untuk wilayah saat ini. Pilih yang lain di pengaturan.</string>
@@ -291,14 +291,14 @@
     <string name="defaultIconLight">Terang bawaan</string>
     <string name="playlistCloned">Daftar luter digandakan</string>
     <string name="confirm_unsubscribing">Konfirmasi membatalkan langganan</string>
-    <string name="confirm_unsubscribing_summary">Tampilkan sebuah dialog konfirmasi sebelum membatalkan langganan.</string>
+    <string name="confirm_unsubscribing_summary">Tampilkan sebuah dialog konfirmasi sebelum membatalkan langganan</string>
     <string name="confirm_unsubscribe">Apakah Anda yakin ingin membatalkan langganan ke %1$s\?</string>
     <string name="play_all">Mainkan semua</string>
     <string name="time">Waktu</string>
     <string name="start_time">Waktu mulai</string>
     <string name="end_time">Waktu akhir</string>
     <string name="notification_time">Batasi waktu pemberitahuan</string>
-    <string name="notification_time_summary">Batas rentang waktu untuk notifikasi saluran ditampilkan.</string>
+    <string name="notification_time_summary">Batas rentang waktu untuk notifikasi saluran ditampilkan</string>
     <string name="navbar_order">Urutan</string>
     <string name="layout">Tata letak</string>
     <string name="alternative_player_layout">Tata letak pemutar alternatif</string>
@@ -318,7 +318,7 @@
     <string name="volume">Volume</string>
     <string name="auto">Otomatis</string>
     <string name="swipe_controls">Kendali usap</string>
-    <string name="swipe_controls_summary">Gunakan gestur usap untuk mengatur kecerahan dan volume.</string>
+    <string name="swipe_controls_summary">Gunakan gestur usap untuk mengatur kecerahan dan volume</string>
     <string name="defaults">Bawaan</string>
     <string name="brightness">Kecerahan</string>
     <string name="pop_up">Jendela</string>
@@ -326,7 +326,7 @@
     <string name="comments_disabled">Komentar dinonaktifkan oleh pengunggah.</string>
     <string name="captions_size">Ukuran takarir</string>
     <string name="double_tap_seek">Ketuk dua kali untuk seek</string>
-    <string name="double_tap_seek_summary">Ketuk dua kali pada sisi kiri atau kanan untuk mundur atau maju posisi pemain.</string>
+    <string name="double_tap_seek_summary">Ketuk dua kali pada sisi kiri atau kanan untuk mundur atau maju posisi pemain</string>
     <string name="all_caught_up_summary">Anda telah melihat semua video baru</string>
     <string name="all_caught_up">Anda telah melihat semuanya</string>
     <string name="import_playlists">Impor daftar putar</string>
@@ -338,13 +338,13 @@
     <string name="proceed">Lanjutkan</string>
     <string name="backup_restore_summary">Impor &amp; ekspor langganan, daftar putar, …</string>
     <string name="pinch_control">Kendali cubit</string>
-    <string name="pinch_control_summary">Gunakan gestur cubit untuk perbesar/perkecil.</string>
+    <string name="pinch_control_summary">Gunakan gestur cubit untuk perbesar/perkecil</string>
     <string name="theme_monochrome">Monokrom Minimalis</string>
     <string name="play_latest_videos">Putar video terkini</string>
     <string name="nothing_selected">Tidak ada yang dipilih!</string>
     <string name="color_violet">Ungu Serbaguna</string>
     <string name="failed_fetching_instances">Tidak bisa mendapatkan instansi tersedia.</string>
-    <string name="hide_watched_from_feed_summary">Jangan tampilkan video yang ditonton lebih dari 90% dalam tab langganan.</string>
+    <string name="hide_watched_from_feed_summary">Jangan tampilkan video yang ditonton lebih dari 90% dalam tab langganan</string>
     <string name="hide_watched_from_feed">Sembunyikan video yang telah ditonton dari umpan</string>
     <string name="playlistUrl">URL Daftar Putar</string>
     <string name="pause_on_quit">Jeda ketika keluar</string>
@@ -357,7 +357,7 @@
     <string name="alternative_pip_controls">Kontrol gambar dalam gambar alternatif</string>
     <string name="alternative_pip_controls_summary">Hanya tampilkan audio dan kontrol lewati dalam mode gambar dalam gambar daripada maju dan mundur</string>
     <string name="audio_player">Pemutar audio</string>
-    <string name="audio_only_mode_summary">Jadikan LibreTube menjadi pemutar musik.</string>
+    <string name="audio_only_mode_summary">Jadikan LibreTube menjadi pemutar musik</string>
     <string name="audio_only_mode">Mode hanya audio</string>
     <string name="no_subtitle">Tidak ada takarir</string>
     <string name="download_paused">Unduhan dijeda</string>
@@ -375,12 +375,12 @@
     <string name="mark_as_watched">Tandai sebagai ditonton</string>
     <string name="unsupported_file_format">Format berkas tidak didukung: %1$s</string>
     <string name="custom_playback_speed">Kecepatan kustom</string>
-    <string name="custom_playback_speed_summary">Gunakan kecepatan pemutaran yang berbeda daripada pemutar yang normal.</string>
+    <string name="custom_playback_speed_summary">Gunakan kecepatan pemutaran yang berbeda daripada pemutar yang normal</string>
     <string name="normal_views">%1$s tampilan%2$s</string>
     <string name="trending_views">%1$s • %2$s tampilan • %3$s</string>
     <string name="category">Kategori</string>
     <string name="autoplay_countdown">Hitung mundur otomatis</string>
-    <string name="autoplay_countdown_summary">Tampilkan hitungan mundur 5 detik sebelum memutar video berikutnya secara otomatis.</string>
+    <string name="autoplay_countdown_summary">Tampilkan hitungan mundur 5 detik sebelum memutar video berikutnya secara otomatis</string>
     <string name="playing_next">Memutar berikutnya dalam %1$s</string>
     <string name="stats_for_nerds">Statistik untuk kutu buku</string>
     <string name="video_id">ID Video</string>
@@ -391,7 +391,7 @@
         <item quantity="other">%d tahun yang lalu</item>
     </plurals>
     <string name="lbry_hls">LBRY HLS</string>
-    <string name="lbry_hls_summary">Gunakan LBRY HLS untuk saluran jika tersedia.</string>
+    <string name="lbry_hls_summary">Gunakan LBRY HLS untuk saluran jika tersedia</string>
     <string name="subscriberAndVideoCounts">%1$s pelanggan • %2$d video</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d video</string>
     <string name="disable_proxy">Nonaktifkan proksi Piped</string>
@@ -409,7 +409,7 @@
         <item quantity="other">%d saluran baru</item>
     </plurals>
     <string name="show_stream_thumbnails">Tampilkan gambar kecil saluran</string>
-    <string name="show_stream_thumbnails_summary">Menampilkan gambar kecil saluran baru. Mengaktifkan ini akan membutuhkan lebih banyak data.</string>
+    <string name="show_stream_thumbnails_summary">Menampilkan gambar kecil saluran baru. Mengaktifkan ini akan membutuhkan lebih banyak data</string>
     <string name="unlimited_search_history">Riwayat pencarian tidak terbatas</string>
     <string name="duration">Durasi</string>
     <string name="duration_reversed">Durasi (dibalik)</string>
@@ -438,7 +438,7 @@
     <string name="manual">Manual</string>
     <string name="off">Mati</string>
     <string name="automatic">Otomatis</string>
-    <string name="sb_custom_colors_summary">Mengaktifkan segmen warna kustom untuk segmen pemblokiran sponsor.</string>
+    <string name="sb_custom_colors_summary">Mengaktifkan segmen warna kustom untuk segmen pemblokiran sponsor</string>
     <string name="invalid_color">Nilai warna yang dimasukkan tidak valid!</string>
     <string name="visible">Tampilkan dalam bilah seek</string>
     <string name="color">Warna</string>
@@ -446,7 +446,7 @@
     <string name="enter_hex_value">Masukkan Nilai Hex Warna</string>
     <string name="jumped_to_highlight">Dilompati ke Sorotan Video</string>
     <string name="category_highlight">Tampilkan sorotan video</string>
-    <string name="category_highlight_summary">Dapat berupa judul yang ditampilkan, gambar kecil atau bagian video yang paling menarik. Anda dapat melompati ke bagiannya dengan mengetuk pada bagian bab.</string>
+    <string name="category_highlight_summary">Dapat berupa judul yang ditampilkan, gambar kecil atau bagian video yang paling menarik. Anda dapat melompati ke bagiannya dengan mengetuk pada bagian bab</string>
     <string name="stop">Berhenti</string>
     <string name="chapters_videoHighlight">Sorotan Video</string>
     <string name="fallback_piped_proxy">Proksi Piped sebagai cadangan</string>
@@ -461,7 +461,7 @@
     <string name="unknown_or_no_audio">tidak diketahui atau tidak ada audio</string>
     <string name="continue_watching">Lanjut Menonton</string>
     <string name="dearrow">Aktifkan DeArrow</string>
-    <string name="dearrow_summary">Tampilkan judul dan thumbnail yang lebih akurat dan tidak terlalu sensasional. Meningkatkan waktu pemuatan.</string>
+    <string name="dearrow_summary">Tampilkan judul dan thumbnail yang lebih akurat dan tidak terlalu sensasional. Meningkatkan waktu pemuatan</string>
     <string name="visibility">Visibilitas</string>
     <string name="visibility_unlisted">Tidak terdaftar</string>
     <string name="visibility_public">Publik</string>
@@ -506,7 +506,7 @@
     <string name="sponsorblock_user_id">ID pengguna SponsorBlock</string>
     <string name="donate">Donasi</string>
     <string name="no_fullscreen_resolution">Resolusi tanpa layar penuh</string>
-    <string name="playback_during_call_summary">Hal ini juga memengaruhi aplikasi untuk tidak lagi menangani fokus audio apa pun.</string>
+    <string name="playback_during_call_summary">Hal ini juga memengaruhi aplikasi untuk tidak lagi menangani fokus audio apa pun</string>
     <string name="music_artists">Artis YT Music</string>
     <string name="playback_during_call">Lanjutkan pemutar</string>
     <string name="same_as_fullscreen">Sama seperti layar penuh</string>

@@ -42,7 +42,7 @@
     <string name="playback_speed">Wideo tizligi</string>
     <string name="advanced">Has giňişleýin</string>
     <string name="player">Pleýer</string>
-    <string name="appearance_summary">Programmany öz islegiňize görä sazlaň.</string>
+    <string name="appearance_summary">Programmany öz islegiňize görä sazlaň</string>
     <string name="advanced_summary">Ýüklemeler, we deslapky</string>
     <string name="live">Göni ýaýlym</string>
     <string name="shareTo">URL-i paýlaşyň</string>
@@ -54,7 +54,7 @@
     <string name="addInstance">Salgylanma goşuň</string>
     <string name="version">V %1$s</string>
     <string name="related_streams">Degişli mazmun</string>
-    <string name="related_streams_summary">Görýän zatlaryňyz bilen baglanyşykly wideolary görkeziň.</string>
+    <string name="related_streams_summary">Görýän zatlaryňyz bilen baglanyşykly wideolary görkeziň</string>
     <string name="buffering_goal">Öňünden ýükleme</string>
     <string name="buffering_goal_summary">Öňünden ýüklemek üçin maks sekunt mukdary</string>
     <string name="playerVideoFormat">Pleýer üçin wideo formaty</string>
@@ -91,7 +91,7 @@
     <string name="unknown_error">Ulgamda näsazlyk.</string>
     <string name="error">Bir zat nädogry boldy.</string>
     <string name="empty">Ulanyjy adyny we kodyny girizmeli.</string>
-    <string name="notgmail">Bu Piped hasaby üçin.</string>
+    <string name="notgmail">Bu Piped hasaby üçin</string>
     <string name="defres">Wideo çözgüdi</string>
     <string name="grid">Panel sütünleri</string>
     <string name="deletePlaylist">Aýdym sanawyny poz</string>
@@ -131,7 +131,7 @@
     <string name="segment_skipped">Geçirilen bölüm</string>
     <string name="category_segments">Bölümler</string>
     <string name="category_sponsor">Hemaýatkär</string>
-    <string name="category_sponsor_summary">Tölegli mahabat, tölegli salgylanmalar we göni mahabatlar. Özüňi tanatmak ýa-da sebäplere, döredijilere, web sahypalaryna we önümlere mugt hakyky tanatmak üçin däl.</string>
+    <string name="category_sponsor_summary">Tölegli mahabat, tölegli salgylanmalar we göni mahabatlar. Özüňi tanatmak ýa-da sebäplere, döredijilere, web sahypalaryna we önümlere mugt hakyky tanatmak üçin däl</string>
     <string name="category_selfpromo">Tölenmedik/Özüňi tanatmak</string>
     <string name="dlisinprogress">Başga bir göçürip alma dowam edýär, gutarýança garaşmagyňyzy haýyş edýäris.</string>
     <string name="server_error">Serwerde näsazlyk bar. Başga bir salgylanmany barlap görjekmi\?</string>
@@ -154,9 +154,9 @@
     <string name="watch_history_summary">Görülen wideolary ýerli derejede saklaň</string>
     <string name="reset_watch_positions">Deslapky</string>
     <string name="data_saver_mode">Maglumat tygşytlaýjy tertibi</string>
-    <string name="data_saver_mode_summary">Eskizleri we beýleki suratlary ýükleme.</string>
+    <string name="data_saver_mode_summary">Eskizleri we beýleki suratlary ýükleme</string>
     <string name="autoRotatePlayer">Awtomatiki doly ekran</string>
-    <string name="autoRotatePlayer_summary">Enjam öwrülende pleýeriň doly ekranyna awtomatiki geçiň.</string>
+    <string name="autoRotatePlayer_summary">Enjam öwrülende pleýeriň doly ekranyna awtomatiki geçiň</string>
     <string name="general">Umumy</string>
     <string name="general_summary">Dil, we sebit</string>
     <string name="notifications">Bildirişler</string>
@@ -171,13 +171,13 @@
     <string name="worst_quality">Iň erbet</string>
     <string name="no_search_result">Netije ýok.</string>
     <string name="default_subtitle_language">Subtitr dili</string>
-    <string name="notify_new_streams_summary">Abuna bolan kanallaryňyzyň täze wideolary barada bildirişler.</string>
+    <string name="notify_new_streams_summary">Abuna bolan kanallaryňyzyň täze wideolary barada bildirişler</string>
     <string name="most_recent">Iň täze</string>
     <string name="least_recent">Iň köne</string>
     <string name="required_network">Gerekli birikme</string>
     <string name="network_all">Ählisi</string>
     <string name="network_wifi">Diňe Wi-Fi-da</string>
-    <string name="skip_buttons_summary">Indiki ýa-da öňki wideo geçmek üçin düwmeleri görkez.</string>
+    <string name="skip_buttons_summary">Indiki ýa-da öňki wideo geçmek üçin düwmeleri görkez</string>
     <string name="add_to_queue">Nobata goşuň</string>
     <string name="open_copied">Aç</string>
     <string name="playerAudioFormat">Pleýer üçin ses formaty</string>

@@ -46,5 +46,5 @@
     <string name="password">Գաղտնաբառ</string>
     <string name="dlisinprogress">Մեկ այլ ներբեռնում արդեն ընթացքի մեջ է, սպասեք մինչ այն ավարտվի:</string>
     <string name="error">Ինչ-որ բան սխալ է:</string>
-    <string name="notgmail">Սա Piped հաշվի համար է:</string>
+    <string name="notgmail">Սա Piped հաշվի համար է</string>
 </resources>

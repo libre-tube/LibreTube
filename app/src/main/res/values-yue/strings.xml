@@ -22,7 +22,7 @@
     <string name="app_theme">主題</string>
     <string name="unknown_error">網路有錯誤.</string>
     <string name="error">有啲嘢出左問題.</string>
-    <string name="notgmail">呢個係 for Piped.</string>
+    <string name="notgmail">呢個係 for Piped</string>
     <string name="defres">影片解析度</string>
     <string name="createPlaylist">起個 Playlist</string>
     <string name="playlistCreated">條 Playlist 已經成功起咗.</string>
@@ -81,7 +81,7 @@
     <string name="pause">暫停</string>
     <string name="download_paused">暫停下載</string>
     <string name="audio">聲</string>
-    <string name="pauseOnScreenOff_summary">當你部機嘅芒熄咗嘅時候就會自動暫停條片。</string>
+    <string name="pauseOnScreenOff_summary">當你部機嘅芒熄咗嘅時候就會自動暫停條片</string>
     <string name="never">永遠</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">喺背景度播</string>
@@ -128,7 +128,7 @@
     <string name="open">開…</string>
     <string name="require_restart">需要重開隻 Apps</string>
     <string name="live">直播</string>
-    <string name="autoRotatePlayer_summary">會喺你部機著返嘅時候開始 Fullscreen 播返。</string>
+    <string name="autoRotatePlayer_summary">會喺你部機著返嘅時候開始 Fullscreen 播返</string>
     <string name="pure_theme_summary">純白 / 黑色主題</string>
     <string name="pure_theme">純白主題</string>
     <string name="always">成日</string>
@@ -160,7 +160,7 @@
     <string name="audio_only_mode_summary">將 LibreTube 轉做一個音樂 Player</string>
     <string name="help">幫助</string>
     <string name="autoplay_countdown">自動倒數</string>
-    <string name="autoplay_countdown_summary">倒數五秒之後自動播下一條片.</string>
+    <string name="autoplay_countdown_summary">倒數五秒之後自動播下一條片</string>
     <string name="playing_next">下條片會喺 %1$s 播</string>
     <string name="video_id">條片 ID</string>
     <string name="replies">覆左嘅回覆</string>
