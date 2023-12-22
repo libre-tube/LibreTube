@@ -9,7 +9,7 @@
     <string name="sponsorblock_notifications">ការជូនដំណឹង</string>
     <string name="password">ពាក្យសម្ងាត់</string>
     <string name="music_playlists">កម្រងចាក់ យូធូបតន្ត្រី</string>
-    <string name="notgmail">នេះគឺជាគណនី Piped។</string>
+    <string name="notgmail">នេះគឺជាគណនី Piped</string>
     <string name="createPlaylist">បង្កើតកម្រងវីដេអូ</string>
     <string name="playOnBackground">ចាក់នៅផ្ទៃខាងក្រោយ</string>
     <string name="music_albums">អាល់ប៊ុម យូធូបតន្ត្រី</string>
@@ -26,8 +26,8 @@
     <string name="success">ជោគជ័យ។</string>
     <string name="color_accent">សង្កត់ពណ៌</string>
     <string name="subscribers">អ្នកជាវ %1$s នាក់</string>
-    <string name="category_sponsor_description">ការផ្សព្វផ្សាយបង់ប្រាក់, ការណែនាំបង់ប្រាក់ និងការផ្សាយពាណិជ្ជកម្មផ្ទាល់។ មិនសម្រាប់ការផ្សាយខ្លួនឯង/ក្លែងធ្វើឥតគិតថ្លៃ, ស្រែកហៅរកមូលហេតុ, អ្នកបង្កើតមាតិកា, វេបសាយ និងផលិតផល។</string>
-    <string name="category_interaction_description">នៅពេលដែលមានការរំលឹកខ្លីមួយនៅកណ្តាលមាតិកាដើម្បី ចូលចិត្ត ជាវ ឬតាមដាន។ ប្រសិនបើវាវែង ឬអំពីអ្វីមួយជាក់លាក់ វាគួរតែជាការផ្សព្វផ្សាយខ្លួនឯងជំនួសវិញ។</string>
+    <string name="category_sponsor_summary">ការផ្សព្វផ្សាយបង់ប្រាក់, ការណែនាំបង់ប្រាក់ និងការផ្សាយពាណិជ្ជកម្មផ្ទាល់។ មិនសម្រាប់ការផ្សាយខ្លួនឯង/ក្លែងធ្វើឥតគិតថ្លៃ, ស្រែកហៅរកមូលហេតុ, អ្នកបង្កើតមាតិកា, វេបសាយ និងផលិតផល</string>
+    <string name="category_interaction_summary">នៅពេលដែលមានការរំលឹកខ្លីមួយនៅកណ្តាលមាតិកាដើម្បី ចូលចិត្ត ជាវ ឬតាមដាន។ ប្រសិនបើវាវែង ឬអំពីអ្វីមួយជាក់លាក់ វាគួរតែជាការផ្សព្វផ្សាយខ្លួនឯងជំនួសវិញ</string>
     <string name="import_from_yt_summary">ពីយូធូប ឬ NewPipe</string>
     <string name="update_available">កំណែ %1$s គឺអាចប្រើប្រាស់បាន</string>
     <string name="appearance">លក្ខណៈខាងក្រៅ</string>
@@ -66,7 +66,7 @@
     <string name="unknown_error">កំហុសបណ្ដាញ។</string>
     <string name="license">កម្មសិទ្ធិបញ្ញា</string>
     <string name="playlistName">ឈ្មោះកម្រងវីដេអូ</string>
-    <string name="category_selfpromo_description">ស្រដៀងទៅនឹង \"ឧបត្ថម្ភក\" លើកលែងតែការមិនបង់ប្រាក់ ឬការផ្សព្វផ្សាយខ្លួនឯង។ នេះរួមបញ្ចូលផ្នែកសម្រាប់ព័ត៌មានអំពីផលិតផល ការបរិច្ចាគ ឬដៃគូ។</string>
+    <string name="category_selfpromo_summary">ស្រដៀងទៅនឹង \"ឧបត្ថម្ភក\" លើកលែងតែការមិនបង់ប្រាក់ ឬការផ្សព្វផ្សាយខ្លួនឯង។ នេះរួមបញ្ចូលផ្នែកសម្រាប់ព័ត៌មានអំពីផលិតផល ការបរិច្ចាគ ឬដៃគូ</string>
     <string name="color_purple">ស្វាយអ</string>
     <string name="about">អំពី</string>
     <string name="systemDefault">ប្រព័ន្ធ</string>
@@ -122,7 +122,7 @@
     <string name="least_views">មើលតិចបំផុត</string>
     <string name="shareTo">ចែករំលែក URL ទៅ</string>
     <string name="birdIcon">បក្សីដែលបានជំរុញ</string>
-    <string name="appearance_summary">កែតម្រូវកម្មវិធីតាមការចូលចិត្តរបស់អ្នក។</string>
+    <string name="appearance_summary">កែតម្រូវកម្មវិធីតាមការចូលចិត្តរបស់អ្នក</string>
     <string name="no_audio">គ្មានភ្លេង</string>
     <string name="pure_theme_summary">ស្បែកស/ខ្មៅសុទ្ធ</string>
     <string name="network_wifi">មានតែនៅលើ Wi-Fi ប៉ុណ្ណោះ</string>
@@ -138,7 +138,7 @@
     <string name="history_summary">ប្រវត្តិមើល និងស្វែងរក</string>
     <string name="auto_rotation">ស្វ័យបង្វិល</string>
     <string name="downloading">កំពុងទាញយក…</string>
-    <string name="category_preview_description">សម្រាប់ចម្រៀកដែលអនាគតមាតិកាលម្អិតដោយគ្មានព័ត៌មានលម្អិតបន្ថែម។ បើសិនវារួមបញ្ចូលឃ្លីបដែលបង្ហាញតែរូបរាងនៅទីនេះ នេះទំនងជាខុសចំណាត់ថ្នាក់។</string>
+    <string name="category_preview_summary">សម្រាប់ចម្រៀកដែលអនាគតមាតិកាលម្អិតដោយគ្មានព័ត៌មានលម្អិតបន្ថែម។ បើសិនវារួមបញ្ចូលឃ្លីបដែលបង្ហាញតែរូបរាងនៅទីនេះ នេះទំនងជាខុសចំណាត់ថ្នាក់</string>
     <string name="translate">ការបកប្រែ</string>
     <string name="deleteAccount_summary">លុបគណនី Piped របស់អ្នក</string>
     <string name="unknown">មិនស្គាល់ប្រភព</string>
@@ -155,7 +155,7 @@
     <string name="restore">ស្ដារឡើងវិញ</string>
     <string name="none">គ្មាន</string>
     <string name="unlimited">គ្មានដែនកំណត់</string>
-    <string name="buffering_goal_summary">ចំនួនវិនាទីអតិបរមានៃវីដេអូ ដើម្បីបាហ្វ័រ។</string>
+    <string name="buffering_goal_summary">ចំនួនវិនាទីអតិបរមានៃវីដេអូ ដើម្បីបាហ្វ័រ</string>
     <string name="torchIcon">ពិលទាន់សម័យ</string>
     <string name="defaultIcon">បុរេជម្រើស</string>
     <string name="chapters">ជំពូក</string>
@@ -194,7 +194,7 @@
     <string name="auth_instances">ជ្រើសយថាភូតកម្មឧបមា</string>
     <string name="no_subtitle">គ្មានអក្សររត់</string>
     <string name="concurrent_downloads_limit_reached">ការទាញយកស្របគ្នាអតិបរមាបានដល់ដែនកំណត់។</string>
-    <string name="notify_new_streams_summary">បង្ហាញការជូនដំណឹង សម្រាប់ស្ទ្រីមថ្មីពីអ្នកបង្កើតដែលអ្នកតាម។</string>
+    <string name="notify_new_streams_summary">បង្ហាញការជូនដំណឹង សម្រាប់ស្ទ្រីមថ្មីពីអ្នកបង្កើតដែលអ្នកតាម</string>
     <string name="playerVideoFormat">ហ្វ័រម៉ាតវីដេអូសម្រាប់ការីចាក់</string>
     <string name="instance_name">ឈ្មោះឧបមា</string>
     <string name="share_with_time">ចែករំលែកជាមួយកូដម៉ោង</string>
@@ -209,7 +209,6 @@
     <string name="shapedIcon">រាងឆ្កួត</string>
     <string name="legacyIcon">កេរ្តិ៍ដំណែលបាត់បង់</string>
     <string name="background_mode">របៀបផ្ទៃខាងក្រោយ</string>
-    <string name="autoplay_summary">ចាក់វីដេអូបន្ទាប់ដោយស្វ័យប្រវត្តិ នៅពេលវីដេអូបច្ចុប្បន្នបញ្ចប់។</string>
     <string name="least_recent">ចាស់បំផុត</string>
     <string name="open">បើក…</string>
     <string name="require_restart_message">រីស្តាតកម្មវិធី ដើម្បីប្រើការផ្លាស់ប្តូរថ្មីនេះ។</string>
@@ -225,10 +224,10 @@
     <string name="clonePlaylist">ក្លូនកម្រងវីដេអូ</string>
     <string name="instance_summary">Piped បញ្ជាប់ចូល និងគណនី</string>
     <string name="no_video">គ្មានវីដេអូ</string>
-    <string name="data_saver_mode_summary">រំលងរូបតូចៗ និងរូបភាពផ្សេងទៀត។</string>
+    <string name="data_saver_mode_summary">រំលងរូបតូចៗ និងរូបភាពផ្សេងទៀត</string>
     <string name="quality">គុណភាព</string>
     <string name="never">មិនដែល</string>
-    <string name="skip_buttons_summary">បង្ហាញប៊ូតុងដើម្បីរំលងទៅវីដេអូបន្ទាប់ ឬមុន។</string>
+    <string name="skip_buttons_summary">បង្ហាញប៊ូតុងដើម្បីរំលងទៅវីដេអូបន្ទាប់ ឬមុន</string>
     <string name="worst_quality">អាក្រក់បំផុត</string>
     <string name="advanced_summary">ទាញយក និងកំណត់ឡើងវិញ</string>
     <string name="general_summary">ភាសា និងតំបន់</string>
@@ -242,7 +241,7 @@
     <string name="seek_increment">ការបង្កើនស្វែងរក</string>
     <string name="audio">អូឌីយោ</string>
     <string name="deleteAccount">លុបគណនី</string>
-    <string name="pauseOnScreenOff_summary">ផ្អាកការចាក់សារថ្មី ខណៈអេក្រង់រលត់បិទ។</string>
+    <string name="pauseOnScreenOff_summary">ផ្អាកការចាក់សារថ្មី ខណៈអេក្រង់រលត់បិទ</string>
     <string name="watch_positions">ចងចាំទីតាំង</string>
     <string name="best_quality">ល្អបំផុត</string>
     <string name="fireIcon">ភ្លើងទាន់សម័យ</string>
@@ -266,7 +265,6 @@
     <string name="maximum_image_cache">ទំហំឃ្លាំងសម្ងាត់រូបភាពអតិបរមា</string>
     <string name="backup">បម្រុងទុក</string>
     <string name="sb_skip_manual">រំលង ដោយដៃ</string>
-    <string name="sb_skip_manual_summary">កុំរំលងចម្រៀកស្វ័យប្រវត្តិ, តែងតែប្រាប់មុនជានិច្ច។</string>
     <string name="repeat_mode_all">សារឡើងវិញទាំងអស់</string>
     <string name="skip_segment">រំលង ចម្រៀក</string>
     <string name="history_size">ទំហំកំណត់ត្រាអតិបរមា</string>

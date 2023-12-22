@@ -38,12 +38,12 @@
     <SwitchPreferenceCompat
         app:defaultValue="true"
         app:key="sb_highlights"
-        app:summary="@string/category_highlight_description"
+        app:summary="@string/category_highlight_summary"
         app:title="@string/category_highlight" />
 
     <SwitchPreferenceCompat
         android:dependency="sb_enabled_key"
-        android:summary="@string/sb_color_enable"
+        android:summary="@string/sb_custom_colors_summary"
         app:defaultValue="false"
         app:key="sb_enable_custom_colors"
         app:title="@string/sb_custom_colors" />
@@ -55,7 +55,7 @@
         <com.github.libretube.ui.views.SbSpinnerPreference
             app:defaultValue="automatic"
             app:key="sponsor_category"
-            app:summary="@string/category_sponsor_description"
+            app:summary="@string/category_sponsor_summary"
             app:title="@string/category_sponsor" />
 
         <com.github.libretube.ui.views.ColorPreference
@@ -67,7 +67,7 @@
         <com.github.libretube.ui.views.SbSpinnerPreference
             app:defaultValue="automatic"
             app:key="selfpromo_category"
-            app:summary="@string/category_selfpromo_description"
+            app:summary="@string/category_selfpromo_summary"
             app:title="@string/category_selfpromo" />
 
         <com.github.libretube.ui.views.ColorPreference
@@ -79,7 +79,7 @@
         <com.github.libretube.ui.views.SbSpinnerPreference
             app:defaultValue="off"
             app:key="interaction_category"
-            app:summary="@string/category_interaction_description"
+            app:summary="@string/category_interaction_summary"
             app:title="@string/category_interaction" />
 
         <com.github.libretube.ui.views.ColorPreference
@@ -91,7 +91,7 @@
         <com.github.libretube.ui.views.SbSpinnerPreference
             app:defaultValue="off"
             app:key="intro_category"
-            app:summary="@string/category_intro_description"
+            app:summary="@string/category_intro_summary"
             app:title="@string/category_intro" />
 
         <com.github.libretube.ui.views.ColorPreference
@@ -103,7 +103,7 @@
         <com.github.libretube.ui.views.SbSpinnerPreference
             app:defaultValue="off"
             app:key="outro_category"
-            app:summary="@string/category_outro_description"
+            app:summary="@string/category_outro_summary"
             app:title="@string/category_outro" />
 
         <com.github.libretube.ui.views.ColorPreference
@@ -115,7 +115,7 @@
         <com.github.libretube.ui.views.SbSpinnerPreference
             app:defaultValue="off"
             app:key="filler_category"
-            app:summary="@string/category_filler_description"
+            app:summary="@string/category_filler_summary"
             app:title="@string/category_filler" />
 
         <com.github.libretube.ui.views.ColorPreference
@@ -127,7 +127,7 @@
         <com.github.libretube.ui.views.SbSpinnerPreference
             app:defaultValue="off"
             app:key="music_offtopic_category"
-            app:summary="@string/category_music_offtopic_description"
+            app:summary="@string/category_music_offtopic_summary"
             app:title="@string/category_music_offtopic" />
 
         <com.github.libretube.ui.views.ColorPreference
@@ -139,7 +139,7 @@
         <com.github.libretube.ui.views.SbSpinnerPreference
             app:defaultValue="off"
             app:key="preview_category"
-            app:summary="@string/category_preview_description"
+            app:summary="@string/category_preview_summary"
             app:title="@string/category_preview" />
 
         <com.github.libretube.ui.views.ColorPreference

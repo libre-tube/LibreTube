@@ -22,7 +22,7 @@
     <string name="unknown_error">Памылка сеткі.</string>
     <string name="error">Нешта пайшло не так.</string>
     <string name="empty">Вы павінны ўвесці імя карыстальніка і пароль.</string>
-    <string name="notgmail">Гэта для ўліковага запісу Piped.</string>
+    <string name="notgmail">Гэта для ўліковага запісу Piped</string>
     <string name="grid">Слупкі сеткі</string>
     <string name="emptyList">Нічога тут.</string>
     <string name="success">Гатова.</string>
@@ -43,7 +43,7 @@
     <string name="category_sponsor">Спонсар</string>
     <string name="category_selfpromo">Неаплатнае/Самарэклама</string>
     <string name="category_intro">Антракт/Уступная анімацыя</string>
-    <string name="category_outro_description">Інфармацыя пасля заканчэння. Не для высноваў з інфармацыяй.</string>
+    <string name="category_outro_summary">Інфармацыя пасля заканчэння. Не для высноваў з інфармацыяй</string>
     <string name="category_outro">Канчатковая застаўка і тытры</string>
     <string name="category_filler">Філеры/Жарты</string>
     <string name="category_preview">Папярэдні прагляд/Паўторы</string>
@@ -58,7 +58,7 @@
     <string name="playback_speed">Хуткасць прайгравання</string>
     <string name="advanced">Пашыраныя</string>
     <string name="player">Прайгравальнік</string>
-    <string name="appearance_summary">Наладзьце праграму на свой густ.</string>
+    <string name="appearance_summary">Наладзьце праграму на свой густ</string>
     <string name="advanced_summary">Загрузкі і скід</string>
     <string name="shareTo">Абагуліць URL для</string>
     <string name="trending_views">%1$s • %2$s праглядаў • %3$s</string>
@@ -81,9 +81,9 @@
     <string name="invalid_url">Калі ласка, увядзіце URL, які працуе</string>
     <string name="version">Версія %1$s</string>
     <string name="related_streams">Звязаны кантэнт</string>
-    <string name="related_streams_summary">Паказвайце падобныя патокі побач з тым, што вы праглядаеце.</string>
+    <string name="related_streams_summary">Паказвайце падобныя патокі побач з тым, што вы праглядаеце</string>
     <string name="buffering_goal">Папярэдняя загрузка</string>
-    <string name="buffering_goal_summary">Макс. колькасць секунд відэа для буферызацыі.</string>
+    <string name="buffering_goal_summary">Макс. колькасць секунд відэа для буферызацыі</string>
     <string name="playerVideoFormat">Відэа фармат для прайгравальніка</string>
     <string name="no_audio">Няма гуку</string>
     <string name="audio">Аўдыё</string>
@@ -100,8 +100,7 @@
     <string name="behavior">Паводзіны</string>
     <string name="player_summary">Па змаўчанні і паводзіны</string>
     <string name="pauseOnScreenOff">Аўтапаўза</string>
-    <string name="pauseOnScreenOff_summary">Спыняць прайграванне пры адключэнні экрана.</string>
-    <string name="autoplay_summary">Аўтаматычнае прайграванне наступнага відэа пасля бягучага.</string>
+    <string name="pauseOnScreenOff_summary">Спыняць прайграванне пры адключэнні экрана</string>
     <string name="clonePlaylist">Кланаваць плэйліст</string>
     <string name="reset">Аднавіць значэнні па змаўчанні</string>
     <string name="reset_message">Скінуць усе налады і выйсці\?</string>
@@ -128,12 +127,12 @@
     <string name="selected">Выбранае</string>
     <string name="never">Ніколі</string>
     <string name="autoRotatePlayer">Аўта поўнаэкранны рэжым</string>
-    <string name="autoRotatePlayer_summary">Поўнаэкраннае прайграванне пры павароце прылады.</string>
+    <string name="autoRotatePlayer_summary">Поўнаэкраннае прайграванне пры павароце прылады</string>
     <string name="pure_theme">Чыстая тэма</string>
     <string name="pure_theme_summary">Чыста белая/чорная тэма</string>
     <string name="no_player_found">Знешні прайгравальнік не знойдзены. Пераканайцеся, што ў вас усталяваны адзін.</string>
     <string name="data_saver_mode">Рэжым эканоміі трафіку</string>
-    <string name="data_saver_mode_summary">Прапусціць мініяцюры і іншыя выявы.</string>
+    <string name="data_saver_mode_summary">Прапусціць мініяцюры і іншыя выявы</string>
     <string name="search_history_summary">Запомніце пошукавыя запыты</string>
     <string name="watch_history_summary">Сачыце за прагледжанымі відэа лакальна</string>
     <string name="history_summary">Гісторыя прагляду і пошуку</string>
@@ -193,12 +192,12 @@
     <string name="music_songs">Песні YT Music</string>
     <string name="sponsorblock">SponsorBlock</string>
     <string name="category_interaction">Напамін аб узаемадзеянні</string>
-    <string name="category_sponsor_description">Платнае прасоўванне, платныя рэфералы і прамая рэклама. Не для самарэкламы або бясплатнай шчырай хвалы справам, стваральнікам, вэб-сайтам і прадуктам.</string>
-    <string name="category_selfpromo_description">Падобна «спонсару», за выключэннем неаплатнага або самарэкламы. Гэта ўключае ў сябе раздзелы пра тавары, ахвяраванні або інфармацыю аб тым, з кім яны супрацоўнічалі.</string>
-    <string name="category_interaction_description">Калі ёсць кароткі напамін паставіць лайкі, падпісацца або падпісацца ў сярэдзіне кантэнту. Калі доўга або пра нешта канкрэтнае, гэта павінна быць самарэклама.</string>
-    <string name="category_intro_description">Інтэрвал без фактычнага зместу. Можа быць паўза, статычны кадр, паўтаральная анімацыя. Не варта выкарыстоўваць для пераходаў, якія змяшчаюць інфармацыю.</string>
-    <string name="category_music_offtopic_description">Толькі для выкарыстання ў музычных відэа. Ён павінен ахопліваць часткі відэа, якія не ўваходзяць у афіцыйныя міксы. У рэшце рэшт, відэа павінна быць як мага больш падобным на Spotify або любую іншую змешаную версію, або паменшыць колькасць размоў і іншых фактараў, якія адцягваюць увагу.</string>
-    <string name="category_filler_description">Для датычных сцэн, дададзеных толькі для напаўнення або гумару, не патрабуецца для разумення асноўнага зместу відэа.</string>
+    <string name="category_sponsor_summary">Платнае прасоўванне, платныя рэфералы і прамая рэклама. Не для самарэкламы або бясплатнай шчырай хвалы справам, стваральнікам, вэб-сайтам і прадуктам</string>
+    <string name="category_selfpromo_summary">Падобна «спонсару», за выключэннем неаплатнага або самарэкламы. Гэта ўключае ў сябе раздзелы пра тавары, ахвяраванні або інфармацыю аб тым, з кім яны супрацоўнічалі</string>
+    <string name="category_interaction_summary">Калі ёсць кароткі напамін паставіць лайкі, падпісацца або падпісацца ў сярэдзіне кантэнту. Калі доўга або пра нешта канкрэтнае, гэта павінна быць самарэклама</string>
+    <string name="category_intro_summary">Інтэрвал без фактычнага зместу. Можа быць паўза, статычны кадр, паўтаральная анімацыя. Не варта выкарыстоўваць для пераходаў, якія змяшчаюць інфармацыю</string>
+    <string name="category_music_offtopic_summary">Толькі для выкарыстання ў музычных відэа. Ён павінен ахопліваць часткі відэа, якія не ўваходзяць у афіцыйныя міксы. У рэшце рэшт, відэа павінна быць як мага больш падобным на Spotify або любую іншую змешаную версію, або паменшыць колькасць размоў і іншых фактараў, якія адцягваюць увагу</string>
+    <string name="category_filler_summary">Для датычных сцэн, дададзеных толькі для напаўнення або гумару, не патрабуецца для разумення асноўнага зместу відэа</string>
     <string name="category_music_offtopic">Музыка: немузычны раздзел</string>
     <string name="license">Ліцэнзія</string>
     <string name="color_blue">Блажэнная сінь</string>
@@ -213,7 +212,7 @@
     <string name="no_video">Няма відэа</string>
     <string name="no_subtitle">Без субтытраў</string>
     <string name="downloading">Спампоўка…</string>
-    <string name="auth_instance_summary">Выкарыстоўвайце іншы асобнік для аўтэнтыфікаваных выклікаў.</string>
+    <string name="auth_instance_summary">Выкарыстоўвайце іншы асобнік для аўтэнтыфікаваных выклікаў</string>
     <string name="watch_positions_title">Запомненыя пазіцыі прайгравання</string>
     <string name="system_caption_style">Сістэмны стыль субтытраў</string>
     <string name="playerAudioFormat">Аўдыё фармат для прайгравальніка</string>
@@ -223,7 +222,7 @@
     <string name="landscape">Альбомная</string>
     <string name="portrait">Партрэтная</string>
     <string name="notify_new_streams">Апавяшчэнні аб новых стрымах</string>
-    <string name="notify_new_streams_summary">Апавяшчэнні аб новым кантэнте ад стваральнікаў, за якімі вы сочыце.</string>
+    <string name="notify_new_streams_summary">Апавяшчэнні аб новым кантэнте ад стваральнікаў, за якімі вы сочыце</string>
     <string name="checking_frequency">Правяраючы кожную…</string>
     <string name="history_empty">Гісторыі пакуль няма.</string>
     <string name="most_recent">Самы новы</string>
@@ -239,7 +238,7 @@
     <string name="error_occurred">Памылка</string>
     <string name="copied">Скапіравана</string>
     <string name="skip_buttons">Кнопкі пропуску</string>
-    <string name="skip_buttons_summary">Паказаць кнопкі для пераходу да наступнага або папярэдняга відэа.</string>
+    <string name="skip_buttons_summary">Паказаць кнопкі для пераходу да наступнага або папярэдняга відэа</string>
     <string name="history_size">Максімальны памер гісторыі</string>
     <string name="unlimited">Неабмежаваны</string>
     <string name="background_mode">Фонавы рэжым</string>
@@ -277,10 +276,9 @@
     <string name="local_subscriptions">Лакальныя падпіскі</string>
     <string name="skip_segment">Прапусціць сегмент</string>
     <string name="sb_skip_manual">Прапусціць уручную</string>
-    <string name="sb_skip_manual_summary">Не прапускайце сегменты аўтаматычна, заўсёды запытвайце раней.</string>
     <string name="backup_customInstances">Карыстальніцкія асобнікі</string>
     <string name="save_feed">Загружаць канал у фонавым рэжыме</string>
-    <string name="save_feed_summary">Загружайце стужку падпіскі ў фонавым рэжыме і не дазваляйце ёй аўтаматычна абнаўляцца.</string>
+    <string name="save_feed_summary">Загружайце стужку падпіскі ў фонавым рэжыме і не дазваляйце ёй аўтаматычна абнаўляцца</string>
     <string name="preferences">Налады</string>
     <string name="play_next">Перайсці да наступнага</string>
     <string name="navigation_bar">Панэль навігацыі</string>
@@ -298,10 +296,9 @@
     <string name="start_time">Час пачатку</string>
     <string name="end_time">Час заканчэння</string>
     <string name="notification_time">Час атрымання апавяшчэнняў</string>
-    <string name="confirm_unsubscribing_summary">Паказаць дыялогавае акно пацверджання перад адмовай ад падпіскі.</string>
+    <string name="confirm_unsubscribing_summary">Паказаць дыялогавае акно пацверджання перад адмовай ад падпіскі</string>
     <string name="play_all">Гуляць усе</string>
-    <string name="notification_time_summary">Прамежак часу, у які дазволена паказваць апавяшчэнні.</string>
-    <string name="alternative_player_layout_summary">Паказваць звязаныя відэа ў радку над каментарыямі, а не ўнізе.</string>
+    <string name="notification_time_summary">Прамежак часу, у які дазволена паказваць апавяшчэнні</string>
     <string name="audio_track">Гукавая дарожка</string>
     <string name="hls_instead_of_dash">Выкарыстоўвайце HLS</string>
     <string name="auto_quality">Аўто</string>
@@ -314,7 +311,7 @@
     <string name="queue_insert_related_videos">Уставіць звязаныя відэа</string>
     <string name="local_playlists">Лакальныя плэйлісты</string>
     <string name="swipe_controls">Кіраванне жэстамі</string>
-    <string name="swipe_controls_summary">Выкарыстоўвайце жэсты для рэгулявання яркасці і гучнасці.</string>
+    <string name="swipe_controls_summary">Выкарыстоўвайце жэсты для рэгулявання яркасці і гучнасці</string>
     <string name="volume">Гучнасць</string>
     <string name="auto">Аўто</string>
     <string name="defaults">Па змаўчанні</string>
@@ -322,7 +319,7 @@
     <string name="theme_monochrome">Мінімалістычны манахром</string>
     <string name="captions_size">Памер субтытраў</string>
     <string name="comments_disabled">Запампавальнік адключыў каментарыі.</string>
-    <string name="double_tap_seek_summary">Двойчы націсніце злева або справа, каб пераматаць пазіцыю прайгравальніка назад або наперад.</string>
+    <string name="double_tap_seek_summary">Двойчы націсніце злева або справа, каб пераматаць пазіцыю прайгравальніка назад або наперад</string>
     <string name="export_playlists">Экспартаваць плэйлісты</string>
     <string name="import_playlists">Імпартаваць плэйлісты</string>
     <string name="backup_restore_summary">Імпарт і экспарт падпісак, плэйлістоў,…</string>
@@ -339,7 +336,7 @@
     <string name="add_to_bookmarks">Дадаць у закладкі</string>
     <string name="audio_only_mode">Рэжым толькі аўдыя</string>
     <string name="audio_player">Аўдыёпрайгравальнік</string>
-    <string name="audio_only_mode_summary">Ператварыце LibreTube у музычны прайгравальнік.</string>
+    <string name="audio_only_mode_summary">Ператварыце LibreTube у музычны прайгравальнік</string>
     <string name="sleep_timer">Таймер сну</string>
     <string name="skip_silence">Прапусціць цішыню</string>
     <string name="help">Даведка</string>
@@ -357,7 +354,7 @@
     <string name="layout">Макет</string>
     <string name="brightness">Яркасць</string>
     <string name="proceed">Працягвайце</string>
-    <string name="hide_watched_from_feed_summary">Не паказвайце на ўкладцы \"Падпіскі\" відэа, якія праглядаюць больш за 90%.</string>
+    <string name="hide_watched_from_feed_summary">Не паказвайце на ўкладцы \"Падпіскі\" відэа, якія праглядаюць больш за 90%</string>
     <string name="playlistUrl">URL-адрас плэйліста</string>
     <string name="pause_on_quit">Паўза пры выхадзе</string>
     <string name="forward">Перамотка наперад</string>
@@ -366,14 +363,14 @@
     <string name="custom_playback_speed">Карыстальніцкая хуткасць</string>
     <string name="alternative_pip_controls">Альтэрнатыўныя элементы кіравання PiP</string>
     <string name="alternative_pip_controls_summary">Паказваць толькі аўдыя і прапускаць элементы кіравання ў PiP замест перамоткі наперад і назад</string>
-    <string name="custom_playback_speed_summary">Выкарыстоўвайце іншую хуткасць прайгравання, чым для звычайнага прайгравальніка.</string>
+    <string name="custom_playback_speed_summary">Выкарыстоўвайце іншую хуткасць прайгравання, чым для звычайнага прайгравальніка</string>
     <string name="faq">Часта задаюць пытанні</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d відэа</string>
-    <string name="new_videos_badge_summary">Паказаць значок з колькасцю новых відэа, калі яны ёсць.</string>
+    <string name="new_videos_badge_summary">Паказаць значок з колькасцю новых відэа, калі яны ёсць</string>
     <string name="change_region">\"Трэнды\" недаступныя для бягучага рэгіёну. Калі ласка, абярыце іншы ў наладах.</string>
     <string name="filename">Імя файла</string>
-    <string name="autoplay_countdown_summary">Паказваць 5-секундны зваротны адлік перад аўтаматычным прайграваннем наступнага відэа.</string>
-    <string name="lbry_hls_summary">Выкарыстоўвайце LBRY HLS для трансляцыі, калі гэта магчыма.</string>
+    <string name="autoplay_countdown_summary">Паказваць 5-секундны зваротны адлік перад аўтаматычным прайграваннем наступнага відэа</string>
+    <string name="lbry_hls_summary">Выкарыстоўвайце LBRY HLS для трансляцыі, калі гэта магчыма</string>
     <plurals name="months_ago">
         <item quantity="one">%d месяц таму</item>
         <item quantity="few">%d месяцы таму</item>
@@ -388,11 +385,11 @@
         <item quantity="many">%d гадоў таму</item>
         <item quantity="other">%d гадоў таму</item>
     </plurals>
-    <string name="category_preview_description">Для сегментаў з падрабязным апісаннем будучага кантэнту без дадатковай інфармацыі. Калі яна ўключае ў сябе кліпы, якія з\'яўляюцца толькі тут, гэта, хутчэй за ўсё, няправільная катэгорыя.</string>
+    <string name="category_preview_summary">Для сегментаў з падрабязным апісаннем будучага кантэнту без дадатковай інфармацыі. Калі яна ўключае ў сябе кліпы, якія з\'яўляюцца толькі тут, гэта, хутчэй за ўсё, няправільная катэгорыя</string>
     <string name="alternative_player_layout">Альтэрнатыўны макет прайгравальніка</string>
     <string name="featured">Рэкамендацыі</string>
     <string name="pinch_control">Упраўленне шчыпком</string>
-    <string name="pinch_control_summary">Выкарыстоўвайце жэст шчыпка для павелічэння/памяншэння.</string>
+    <string name="pinch_control_summary">Выкарыстоўвайце жэст шчыпка для павелічэння/памяншэння</string>
     <string name="pop_up">Усплывальнае акно</string>
     <string name="color_violet">Універсальны фіялетавы</string>
     <string name="download_channel_name">Служба запампоўкі</string>
@@ -420,7 +417,7 @@
         <item quantity="many">%d новых стрымаў</item>
         <item quantity="other">%d новых стрымаў</item>
     </plurals>
-    <string name="show_stream_thumbnails_summary">Паказаць мініяцюры новых відэа. Уключэнне гэтага прывядзе да спажывання дадатковых даных.</string>
+    <string name="show_stream_thumbnails_summary">Паказаць мініяцюры новых відэа. Уключэнне гэтага прывядзе да спажывання дадатковых даных</string>
     <string name="show_stream_thumbnails">Паказваць мініяцюры відэа</string>
     <string name="unlimited_search_history">Неабмежаваная гісторыя пошуку</string>
     <string name="duration">Працягласць</string>
@@ -448,9 +445,9 @@
     <string name="emptyPlaylistDescription">Апісанне плэйліста не можа быць пустым</string>
     <string name="show_search_suggestions">Паказаць прапановы пошуку</string>
     <string name="fallback_piped_proxy">Зварот да проксі Piped</string>
-    <string name="fallback_piped_proxy_desc">Загружайце відэа праз проксі-сервер, калі непасрэднае падключэнне да YouTube не працуе для бягучага відэа (павялічвае пачатковы час загрузкі). Калі гэта адключана, музычны кантэнт YouTube, хутчэй за ўсё, не будзе прайгравацца з-за абмежаванняў YT.</string>
+    <string name="fallback_piped_proxy_summary">Загружайце відэа праз проксі-сервер, калі непасрэднае падключэнне да YouTube не працуе для бягучага відэа (павялічвае пачатковы час загрузкі). Калі гэта адключана, музычны кантэнт YouTube, хутчэй за ўсё, не будзе прайгравацца з-за абмежаванняў YT</string>
     <string name="unknown_audio_language">Невядомая мова гуку</string>
-    <string name="category_highlight_description">Гэта можа быць рэкламуемая назва, мініяцюра або самая цікавая частка відэа. Вы можаце перайсці да яго, націснуўшы на яго ў раздзеле раздзелаў.</string>
+    <string name="category_highlight_summary">Гэта можа быць рэкламуемая назва, мініяцюра або самая цікавая частка відэа. Вы можаце перайсці да яго, націснуўшы на яго ў раздзеле раздзелаў</string>
     <string name="unknown_audio_track_type">Невядомы тып гукавой дарожкі</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="sb_custom_colors">Карыстальніцкія колеры сегментаў</string>
@@ -460,11 +457,11 @@
     <string name="manual">Уручную</string>
     <string name="automatic">Аўтаматычны</string>
     <string name="visible">Паказаць у панэлі пошуку</string>
-    <string name="sb_color_enable">Пераключае карыстальніцкія каляровыя сегменты для сегментаў SponsorBlock.</string>
+    <string name="sb_custom_colors_summary">Пераключае карыстальніцкія каляровыя сегменты для сегментаў SponsorBlock</string>
     <string name="off">Выкл</string>
     <string name="continue_watching">Працягнуць прагляд</string>
     <string name="dearrow">Уключыць DeArrow</string>
-    <string name="dearrow_summary">Паказвайце больш дакладныя і менш сенсацыйныя назвы і мініяцюры. Павялічвае час загрузкі.</string>
+    <string name="dearrow_summary">Паказвайце больш дакладныя і менш сенсацыйныя назвы і мініяцюры. Павялічвае час загрузкі</string>
     <string name="default_or_unknown_audio_track">па змаўчанні або невядома</string>
     <string name="unknown_or_no_audio">невядома або няма гуку</string>
     <string name="stop">Спыніць</string>
@@ -518,7 +515,7 @@
     <string name="contribute_to_sponsorblock">Унесці свой уклад у SponsorBlock</string>
     <string name="donate">Падтрымліваць</string>
     <string name="no_fullscreen_resolution">Разрозненне для не поўнаэкраннага рэжыму</string>
-    <string name="playback_during_call_summary">Звярніце ўвагу, што гэта таксама прыводзіць да таго, што праграма больш не будзе працаваць з любым тыпам аўдыяфокусу.</string>
+    <string name="playback_during_call_summary">Звярніце ўвагу, што гэта таксама прыводзіць да таго, што праграма больш не будзе працаваць з любым тыпам аўдыяфокусу</string>
     <string name="music_artists">Выканаўцы музыкі YT</string>
     <string name="playback_during_call">Працягвайце прайграванне падчас тэлефоннага званка</string>
     <string name="same_as_fullscreen">Такая ж як для поўнаэкраннага рэжыму</string>

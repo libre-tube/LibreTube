@@ -27,7 +27,7 @@
     <string name="import_from_yt">استيراد الاشتراكات</string>
     <string name="app_theme">سمة التطبيق</string>
     <string name="empty">لا يمكن أن يكون اسم المستخدم وكلمة المرور فارغين.</string>
-    <string name="notgmail">هذا لحساب Piped.</string>
+    <string name="notgmail">هذا لحساب Piped</string>
     <string name="defres">دقة الفيديو</string>
     <string name="grid">أعمدة الشبكة (عمودي)</string>
     <string name="emptyList">لا شيء هنا.</string>
@@ -80,13 +80,13 @@
     <string name="sponsorblock">حاجب الرعاة</string>
     <string name="sponsorblock_summary">يستخدم واجهة برمجة التطبيقات من https://sponsor.ajay.app/</string>
     <string name="segment_skipped">الجزء الذي تم تخطيه</string>
-    <string name="category_interaction_description">عندما يكون هناك تذكير قصير لإبداء الإعجاب أو الاشتراك أو المتابعة في منتصف الفيديو. إذا كان التذكير طويلاً أو متعلقاً بشيء محدد ، فيجب أن يكون ترويجاً ذاتياً.</string>
+    <string name="category_interaction_summary">عندما يكون هناك تذكير قصير لإبداء الإعجاب أو الاشتراك أو المتابعة في منتصف الفيديو. إذا كان التذكير طويلاً أو متعلقاً بشيء محدد ، فيجب أن يكون ترويجاً ذاتياً</string>
     <string name="category_intro">استراحة/مقدمة رسوم متحركة</string>
-    <string name="category_intro_description">فاصل زمني بدون محتوى فعلي. يمكن أن يكون وقفة ، صورة ثابتة ، صورة متحركة مكررة. لا ينبغي استخدام هذا للانتقالات التي تحتوي على معلومات.</string>
-    <string name="category_outro_description">معلومات تلي عرض أسماء المساهمين في العمل. ليس للاستنتاجات التي تحتوي على المعلومات.</string>
+    <string name="category_intro_summary">فاصل زمني بدون محتوى فعلي. يمكن أن يكون وقفة ، صورة ثابتة ، صورة متحركة مكررة. لا ينبغي استخدام هذا للانتقالات التي تحتوي على معلومات</string>
+    <string name="category_outro_summary">معلومات تلي عرض أسماء المساهمين في العمل. ليس للاستنتاجات التي تحتوي على المعلومات</string>
     <string name="category_segments">الاجزاء</string>
     <string name="category_selfpromo">الترويج غير المدفوع للغير أو الترويج الذاتي</string>
-    <string name="category_selfpromo_description">على غرار \"الراعي\" باستثناء الترويج غير المدفوع أو الذاتي. يتضمن ذلك أقساما حول البضائع أو التبرعات أو معلومات حول من تعاونوا معه.</string>
+    <string name="category_selfpromo_summary">على غرار \"الراعي\" باستثناء الترويج غير المدفوع أو الذاتي. يتضمن ذلك أقساما حول البضائع أو التبرعات أو معلومات حول من تعاونوا معه</string>
     <string name="category_interaction">تذكير التفاعل</string>
     <string name="license">الترخيص</string>
     <string name="color_accent">اللون الثانوي</string>
@@ -96,7 +96,7 @@
     <string name="color_green">أخضر</string>
     <string name="color_purple">بنفسجي</string>
     <string name="material_you">المواد أنت</string>
-    <string name="category_sponsor_description">ترويج مدفوع و إحالات مدفوعة و إعلانات مباشرة. ليس للترويج الذاتي أو الترويج المجاني لأهداف أو منشئي محتوى أو مواقع ويب أو منتجات.</string>
+    <string name="category_sponsor_summary">ترويج مدفوع و إحالات مدفوعة و إعلانات مباشرة. ليس للترويج الذاتي أو الترويج المجاني لأهداف أو منشئي محتوى أو مواقع ويب أو منتجات</string>
     <string name="category_outro">شارة النهاية / أسماء المساهمين في العمل</string>
     <string name="sponsorblock_notifications">الإشعارات</string>
     <string name="app_icon">أيقونة</string>
@@ -116,19 +116,19 @@
     <string name="invalid_url">الرجاء إدخال عنوان URL يعمل</string>
     <string name="version">الإصدار %1$s</string>
     <string name="related_streams">المحتويات ذات الصلة</string>
-    <string name="related_streams_summary">اعرض محتوى مشابه إلى جانب ما تشاهده.</string>
+    <string name="related_streams_summary">اعرض محتوى مشابه إلى جانب ما تشاهده</string>
     <string name="category_filler">حشو لاداع له / او نكات</string>
-    <string name="category_filler_description">للمشاهد العرضية المضافة فقط للحشو أو الفكاهة و غير المطلوبة لفهم المحتوى الرئيسي للفيديو.</string>
+    <string name="category_filler_summary">للمشاهد العرضية المضافة فقط للحشو أو الفكاهة و غير المطلوبة لفهم المحتوى الرئيسي للفيديو</string>
     <string name="category_music_offtopic">الموسيقى: قسم غير متعلق بالموسيقى</string>
     <string name="category_preview">معاينة / خلاصة</string>
-    <string name="category_preview_description">للأجزاء التي توضح بالتفصيل المحتوى المستقبلي بدون معلومات إضافية. إذا كانت تتضمن مقاطع تظهر هنا فقط ، فمن المحتمل جدًا أن تكون هذه الفئة الخطأ.</string>
+    <string name="category_preview_summary">للأجزاء التي توضح بالتفصيل المحتوى المستقبلي بدون معلومات إضافية. إذا كانت تتضمن مقاطع تظهر هنا فقط ، فمن المحتمل جدًا أن تكون هذه الفئة الخطأ</string>
     <string name="instance_api_url">عنوان URL لمثيل واجهة برمجة التطبيقات</string>
     <string name="addInstance">إضافة مثيل</string>
     <string name="empty_instance">املأ الاسم وعنوان URL لواجهة برمجة التطبيقات.</string>
     <string name="playerVideoFormat">تنسيق الفيديو لمشغل</string>
-    <string name="category_music_offtopic_description">فقط للاستخدام في مقاطع الفيديو الموسيقية. يجب أن تغطي أجزاء من الفيديو وليس جزءا من الخلطات الرسمية. في النهاية ، يجب أن يشبه الفيديو Spotify أو أي إصدار مختلط آخر قدر الإمكان ، أو يقلل من التحدث أو تشتيت الانتباه.</string>
+    <string name="category_music_offtopic_summary">فقط للاستخدام في مقاطع الفيديو الموسيقية. يجب أن تغطي أجزاء من الفيديو وليس جزءا من الخلطات الرسمية. في النهاية ، يجب أن يشبه الفيديو Spotify أو أي إصدار مختلط آخر قدر الإمكان ، أو يقلل من التحدث أو تشتيت الانتباه</string>
     <string name="buffering_goal">التحميل المسبق</string>
-    <string name="buffering_goal_summary">الحد الأقصى لعدد ثواني الفيديو للتخزين المؤقت.</string>
+    <string name="buffering_goal_summary">الحد الأقصى لعدد ثواني الفيديو للتخزين المؤقت</string>
     <string name="update_available">الإصدار %1$s متاح</string>
     <string name="downloads">التنزيلات</string>
     <string name="legacyIcon">الإرث الضائع</string>
@@ -143,7 +143,7 @@
     <string name="advanced">متقدم</string>
     <string name="player">المشغل</string>
     <string name="playback_speed">سرعة التشغيل</string>
-    <string name="appearance_summary">اضبط التطبيق حسب رغبتك.</string>
+    <string name="appearance_summary">اضبط التطبيق حسب رغبتك</string>
     <string name="advanced_summary">التنزيلات وإعادة التعيين</string>
     <string name="customInstance_summary">أضف…</string>
     <string name="shareTo">مشاركة الرابط إلى</string>
@@ -158,8 +158,7 @@
     <string name="player_summary">الإعدادات الافتراضية والسلوك</string>
     <string name="seek_increment">معدل التقديم</string>
     <string name="pauseOnScreenOff">الإيقاف المؤقت التلقائي</string>
-    <string name="autoplay_summary">التشغيل التلقائي للفيديو التالي بعد الفيديو الحالي.</string>
-    <string name="pauseOnScreenOff_summary">أوقف التشغيل مؤقتا عند إيقاف تشغيل الشاشة.</string>
+    <string name="pauseOnScreenOff_summary">أوقف التشغيل مؤقتا عند إيقاف تشغيل الشاشة</string>
     <string name="reset">استعادة الإعدادات الافتراضية</string>
     <string name="reset_message">إعادة تعيين جميع الإعدادات وتسجيل الخروج؟</string>
     <string name="clonePlaylist">نسخ قائمة التشغيل</string>
@@ -170,7 +169,7 @@
     <string name="watch_history">سجل المشاهدة</string>
     <string name="watch_positions">تذكر مكان التوقف</string>
     <string name="auth_instance">مصادقة المثيل</string>
-    <string name="auth_instance_summary">استخدم مثيلا مختلفا للمكالمات المصادق عليها.</string>
+    <string name="auth_instance_summary">استخدم مثيلا مختلفا للمكالمات المصادق عليها</string>
     <string name="auth_instances">اختر مثيل المصادقة</string>
     <string name="github">جيت هب</string>
     <string name="audio_video">الصوت والفيديو</string>
@@ -189,7 +188,7 @@
     <string name="selected">المحدد</string>
     <string name="never">أبداً</string>
     <string name="autoRotatePlayer">ملء الشاشة تلقائيا</string>
-    <string name="autoRotatePlayer_summary">التشغيل بملء الشاشة عند تدوير الجهاز.</string>
+    <string name="autoRotatePlayer_summary">التشغيل بملء الشاشة عند تدوير الجهاز</string>
     <string name="pure_theme">نسق نقي</string>
     <string name="pure_theme_summary">نسق أبيض/أسود نقي</string>
     <string name="no_player_found">لم يتم العثور على مشغل خارجي. يرجى التأكد من تثبيته.</string>
@@ -201,7 +200,7 @@
     <string name="system_caption_style">نمط التسمية التوضيحية للنظام</string>
     <string name="captions">التسميات التوضيحيه</string>
     <string name="none">لاشيء</string>
-    <string name="data_saver_mode_summary">تخطي الصور المصغرة والصور الأخرى.</string>
+    <string name="data_saver_mode_summary">تخطي الصور المصغرة والصور الأخرى</string>
     <string name="history_summary">سجل المشاهدة والبحث</string>
     <string name="general">عام</string>
     <string name="general_summary">اللغة والمنطقة</string>
@@ -214,7 +213,7 @@
     <string name="default_subtitle_language">لغة الترجمة</string>
     <string name="notifications">الإشعارات</string>
     <string name="notify_new_streams">عرض إشعارات لأحداث البث الجديدة</string>
-    <string name="notify_new_streams_summary">إشعارات حول المحتوى الجديد من منشئي المحتوى الذين تتابعهم.</string>
+    <string name="notify_new_streams_summary">إشعارات حول المحتوى الجديد من منشئي المحتوى الذين تتابعهم</string>
     <string name="checking_frequency">تحقق من كل…</string>
     <string name="irreversible">هل أنت متأكد؟ هذا لا يمكن التراجع عنه!</string>
     <string name="history_empty">لا يوجد سجل حتى الان.</string>
@@ -233,7 +232,7 @@
     <string name="share_with_time">شارك مع رمز الوقت</string>
     <string name="export_subscriptions">تصدير الاشتراكات</string>
     <string name="skip_buttons">أزرار التخطي</string>
-    <string name="skip_buttons_summary">إظهار الأزرار للتخطي إلى الفيديو التالي أو السابق.</string>
+    <string name="skip_buttons_summary">إظهار الأزرار للتخطي إلى الفيديو التالي أو السابق</string>
     <string name="history_size">الحد الأقصى لحجم السجل</string>
     <string name="unlimited">غير محدود</string>
     <string name="background_mode">وضع الخلفية</string>
@@ -264,10 +263,9 @@
     <string name="wifi">واي فاي</string>
     <string name="mobile_data">البيانات الخليوية</string>
     <string name="new_videos_badge">مؤشر لمقاطع الفيديو الجديدة</string>
-    <string name="new_videos_badge_summary">اعرض شارة تحتوي على عدد مقاطع الفيديو الجديدة إذا كان هناك بعضها.</string>
+    <string name="new_videos_badge_summary">اعرض شارة تحتوي على عدد مقاطع الفيديو الجديدة إذا كان هناك بعضها</string>
     <string name="skip_segment">تخطي الجزء</string>
     <string name="sb_skip_manual">تخطي يدويًا</string>
-    <string name="sb_skip_manual_summary">لا تتخطى الاجزاء تلقائيًا ، بل قم دائمًا بالمطالبة بها من قبل.</string>
     <string name="download_channel_name">تحميل الخدمة</string>
     <string name="download_channel_description">يعرض إشعارا عند تنزيل الوسائط.</string>
     <string name="local_subscriptions">الاشتراكات المحلية</string>
@@ -276,7 +274,7 @@
     <string name="push_channel_name">عامل الإخطار</string>
     <string name="push_channel_description">يظهر إشعارًا عند توفر تدفقات جديدة.</string>
     <string name="save_feed">تحميل التغذية في الخلفية</string>
-    <string name="save_feed_summary">قم بتحميل خلاصة الاشتراك في الخلفية وامنعها من التحديث التلقائي.</string>
+    <string name="save_feed_summary">قم بتحميل خلاصة الاشتراك في الخلفية وامنعها من التحديث التلقائي</string>
     <string name="play_next">تشغيل التالي</string>
     <string name="navigation_bar">شريط التنقل</string>
     <string name="change_region">المتصدرة يبدو أنها غير متاحة في المنطقة الحالية . الرجاء اختيار آخر في الإعداد .</string>
@@ -294,9 +292,9 @@
     <string name="playlistCloned">تم استنساخ قائمة التشغيل</string>
     <string name="confirm_unsubscribe">هل أنت متأكد من أنك تريد إلغاء الاشتراك %1$s؟</string>
     <string name="confirm_unsubscribing">تأكيد إلغاء الاشتراك</string>
-    <string name="confirm_unsubscribing_summary">إظهار مربع حوار تأكيد قبل إلغاء الاشتراك.</string>
+    <string name="confirm_unsubscribing_summary">إظهار مربع حوار تأكيد قبل إلغاء الاشتراك</string>
     <string name="play_all">تشغيل الكل</string>
-    <string name="notification_time_summary">حدد الفترة الزمنية التي تظهر فيها إشعارات البث.</string>
+    <string name="notification_time_summary">حدد الفترة الزمنية التي تظهر فيها إشعارات البث</string>
     <string name="time">الوقت</string>
     <string name="end_time">وقت الانتهاء</string>
     <string name="start_time">وقت البدء</string>
@@ -304,7 +302,6 @@
     <string name="navbar_order">ترتيب</string>
     <string name="layout">التَخطِيط</string>
     <string name="alternative_player_layout">تخطيط المشغل البديل</string>
-    <string name="alternative_player_layout_summary">وتظهر أشرطة الفيديو ذات الصلة كصف أعلى من التعليقات بدلا من التعليقات الواردة أدناه.</string>
     <string name="audio_track">مسار صوتي</string>
     <string name="hls_instead_of_dash">استخدام HLS</string>
     <string name="hls_instead_of_dash_summary">استخدم HLS بدلا من DASH (سيكون أبطأ ، غير مستحسن)</string>
@@ -324,10 +321,10 @@
     <string name="swipe_controls">عناصر التحكم في السحب</string>
     <string name="defaults">الإفتراضي</string>
     <string name="pop_up">نافذة منبثقة</string>
-    <string name="swipe_controls_summary">استخدم إيماءة السحب لضبط السطوع ومستوى الصوت.</string>
+    <string name="swipe_controls_summary">استخدم إيماءة السحب لضبط السطوع ومستوى الصوت</string>
     <string name="no_comments_available">هذا الفيديو ليس له تعليقات.</string>
     <string name="comments_disabled">التعليقات معطلة من قبل القائم بالتحميل.</string>
-    <string name="double_tap_seek_summary">اضغط مرتين على اليسار أو اليمين لترجيع موضع المشغل أو إعادة تقديمه.</string>
+    <string name="double_tap_seek_summary">اضغط مرتين على اليسار أو اليمين لترجيع موضع المشغل أو إعادة تقديمه</string>
     <string name="all_caught_up">لقد وصلت الى النهاية</string>
     <string name="captions_size">حجم التسميات التوضيحية</string>
     <string name="double_tap_seek">انقر نقرا مزدوجا للسعي</string>
@@ -341,13 +338,13 @@
     <string name="exportsuccess">تم التصدير.</string>
     <string name="username_email">هل تريد المتابعة باستخدام عنوان بريد إلكتروني غير مستحسن؟</string>
     <string name="pinch_control">التحكم في ايماءة القرص</string>
-    <string name="pinch_control_summary">استخدم إيماءة القرص للتكبير / التصغير.</string>
+    <string name="pinch_control_summary">استخدم إيماءة القرص للتكبير / التصغير</string>
     <string name="theme_monochrome">أضيق الحدود أحادية اللون</string>
     <string name="play_latest_videos">تشغيل أحدث مقاطع الفيديو</string>
     <string name="nothing_selected">لا شيء محدد!</string>
     <string name="color_violet">البنفسج</string>
     <string name="failed_fetching_instances">تعذر جلب المثيلات المتاحة.</string>
-    <string name="hide_watched_from_feed_summary">لا تعرض الفيديوهات التي تتم مشاهدتها بنسبة تزيد عن 90٪ في علامة التبويب \"الاشتراكات\".</string>
+    <string name="hide_watched_from_feed_summary">لا تعرض الفيديوهات التي تتم مشاهدتها بنسبة تزيد عن 90٪ في علامة التبويب \"الاشتراكات\"</string>
     <string name="hide_watched_from_feed">إخفاء مقاطع الفيديو التي تمت مشاهدتها من الخلاصة</string>
     <string name="playlistUrl">عنوان URL لقائمة التشغيل</string>
     <string name="pause_on_quit">توقف عند الخروج</string>
@@ -361,7 +358,7 @@
     <string name="alternative_pip_controls_summary">إظهار الصوت فقط وتخطي ضوابط \"صورة داخل صورة\" بدلاً من التقديم والترجيع</string>
     <string name="audio_player">مشغل الصوت</string>
     <string name="audio_only_mode">وضع الصوت فقط</string>
-    <string name="audio_only_mode_summary">حول LibreTube إلى مشغل موسيقى.</string>
+    <string name="audio_only_mode_summary">حول LibreTube إلى مشغل موسيقى</string>
     <string name="no_subtitle">لا توجد ترجمة</string>
     <string name="download_paused">إيقاف التنزيل مؤقتًا</string>
     <string name="download_completed">اكتمل التنزيل</string>
@@ -378,7 +375,7 @@
     <string name="unsupported_file_format">تنسيق الملف غير المدعوم: %1$s</string>
     <string name="mark_as_watched">علّمه كفيديو تمت مشاهدته</string>
     <string name="custom_playback_speed">سرعة مخصصة</string>
-    <string name="custom_playback_speed_summary">استخدم سرعة تشغيل مختلفة عن سرعة المشغل العادي.</string>
+    <string name="custom_playback_speed_summary">استخدم سرعة تشغيل مختلفة عن سرعة المشغل العادي</string>
     <string name="category">الفئة</string>
     <string name="trending_views">%1$s • %2$s مشاهدات • %3$s</string>
     <string name="normal_views">%1$s مشاهدات %2$s</string>
@@ -386,7 +383,7 @@
     <string name="video_id">معرف الفيديو</string>
     <string name="autoplay_countdown">العد التنازلي للتشغيل التلقائي</string>
     <string name="playing_next">يتم التشغيل بعد ذلك في %1$s</string>
-    <string name="autoplay_countdown_summary">أظهر العد التنازلي 5 ثوانٍ قبل التشغيل التلقائي للفيديو التالي.</string>
+    <string name="autoplay_countdown_summary">أظهر العد التنازلي 5 ثوانٍ قبل التشغيل التلقائي للفيديو التالي</string>
     <plurals name="years_ago">
         <item quantity="zero">%d منذ سنة</item>
         <item quantity="one">%d منذ سنة</item>
@@ -404,7 +401,7 @@
         <item quantity="other">%d منذ أشهر</item>
     </plurals>
     <string name="lbry_hls">LBRY HLS</string>
-    <string name="lbry_hls_summary">استخدم LBRY HLS للبث إذا كان متاحا.</string>
+    <string name="lbry_hls_summary">استخدم LBRY HLS للبث إذا كان متاحا</string>
     <string name="subscriberAndVideoCounts">مشتركون %1$s • فيديوهات %2$d</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d مقاطع فيديو</string>
     <string name="disable_proxy">تعطيل وكيل الأنابيب</string>
@@ -427,7 +424,7 @@
         <item quantity="other">%d تدفقات جديدة</item>
     </plurals>
     <string name="show_stream_thumbnails">إظهار الصور المصغرة للبث</string>
-    <string name="show_stream_thumbnails_summary">يعرض صورة مصغرة من تيار جديد . تمكين هذه الميزة سوف تستهلك بيانات إضافية .</string>
+    <string name="show_stream_thumbnails_summary">يعرض صورة مصغرة من تيار جديد . تمكين هذه الميزة سوف تستهلك بيانات إضافية</string>
     <string name="unlimited_search_history">سجل بحث غير محدود</string>
     <string name="duration">المدة</string>
     <string name="duration_reversed">المدة (معكوسة)</string>
@@ -456,7 +453,7 @@
     <string name="off">معطل</string>
     <string name="manual">يدوي</string>
     <string name="automatic">تلقائي</string>
-    <string name="sb_color_enable">تبديل شرائح الألوان المخصصة لشرائح كتلة الراعي.</string>
+    <string name="sb_custom_colors_summary">تبديل شرائح الألوان المخصصة لشرائح كتلة الراعي</string>
     <string name="sb_custom_colors">ألوان شرائح مخصصة</string>
     <string name="invalid_color">تم إدخال قيمة لون غير صالحة!</string>
     <string name="enter_hex_value">أدخل قيمة لون سداسي عشري</string>
@@ -464,11 +461,11 @@
     <string name="color">اللون</string>
     <string name="jumped_to_highlight">انتقل إلى اقسام الفيديو</string>
     <string name="category_highlight">إظهار تمييز الفيديو</string>
-    <string name="category_highlight_description">يمكن أن يكون العنوان المعلن عنه أو الصورة المصغرة أو الجزء الأكثر إثارة للاهتمام من الفيديو. يمكنك التخطي إليه من خلال النقر عليه في قسم الفصول.</string>
+    <string name="category_highlight_summary">يمكن أن يكون العنوان المعلن عنه أو الصورة المصغرة أو الجزء الأكثر إثارة للاهتمام من الفيديو. يمكنك التخطي إليه من خلال النقر عليه في قسم الفصول</string>
     <string name="chapters_videoHighlight">ملخصات الفيديو</string>
     <string name="stop">إيقاف</string>
     <string name="fallback_piped_proxy">الرجوع إلى الوكيل Piped</string>
-    <string name="fallback_piped_proxy_desc">قم بتحميل مقاطع الفيديو عبر الخادم الوكيل إذا كان الاتصال ب YouTube مباشرة لا يعمل مع الفيديو الحالي (يزيد من أوقات التحميل الأولية). إذا تم تعطيله ، فمن المحتمل ألا يتم تشغيل محتوى موسيقى YouTube بسبب قيود YT.</string>
+    <string name="fallback_piped_proxy_summary">قم بتحميل مقاطع الفيديو عبر الخادم الوكيل إذا كان الاتصال ب YouTube مباشرة لا يعمل مع الفيديو الحالي (يزيد من أوقات التحميل الأولية). إذا تم تعطيله ، فمن المحتمل ألا يتم تشغيل محتوى موسيقى YouTube بسبب قيود YT</string>
     <string name="unknown_audio_track_type">نوع مسار صوتي غير معروف</string>
     <string name="original_or_main_audio_track">أصلي أو رئيسي</string>
     <string name="dubbed_audio_track">مدبلجة</string>
@@ -478,7 +475,7 @@
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">لغة صوت غير معروفة</string>
     <string name="continue_watching">مواصلة المشاهدة</string>
-    <string name="dearrow_summary">اعرض عناوين وصورا مصغرة أكثر دقة وأقل إثارة. يزيد من أوقات التحميل.</string>
+    <string name="dearrow_summary">اعرض عناوين وصورا مصغرة أكثر دقة وأقل إثارة. يزيد من أوقات التحميل</string>
     <string name="dearrow">تمكين دي ارو</string>
     <string name="visibility_public">عام</string>
     <string name="visibility">رؤية</string>
@@ -526,7 +523,7 @@
     <string name="music_artists">YT الموسيقى: الفنانين</string>
     <string name="no_fullscreen_resolution">لاتوجد دقة لشاشة الكاملة</string>
     <string name="same_as_fullscreen">مطابق لإعداد الشاشة الكاملة</string>
-    <string name="playback_during_call_summary">لاحظ أن هذا يؤثر أيضًا على التطبيق بحيث لا يتعامل مع أي نوع من التركيز الصوتي بعد الآن.</string>
+    <string name="playback_during_call_summary">لاحظ أن هذا يؤثر أيضًا على التطبيق بحيث لا يتعامل مع أي نوع من التركيز الصوتي بعد الآن</string>
     <string name="playback_during_call">متابعة التشغيل أثناء المكالمة الهاتفية</string>
     <string name="autoplay_playlists_summary">تشغيل الفيديو التالي تلقائيًا في قوائم التشغيل بغض النظر عن إعداد التشغيل التلقائي المحدد</string>
     <string name="autoplay_playlists">شغّل قوائم التشغيل تلقائيًا</string>

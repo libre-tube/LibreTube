@@ -23,7 +23,7 @@
     <string name="unknown_error">Nabigo ang network.</string>
     <string name="error">May pagkakamaling nangyari.</string>
     <string name="empty">Dapat kang maglagay ng username at kontrasenya (password).</string>
-    <string name="notgmail">Ito ay para sa Pipe account.</string>
+    <string name="notgmail">Ito ay para sa Pipe account</string>
     <string name="defres">Resolusyon ng video</string>
     <string name="createPlaylist">Gumawa ng playlist</string>
     <string name="playlistName">Pangalan ng playlist</string>
