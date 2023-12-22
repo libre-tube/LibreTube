@@ -539,4 +539,5 @@
     <string name="grid_landscape">Sloupce mřížky (na šířku)</string>
     <string name="rich_caption_rendering">Vylepšené vykreslování titulků</string>
     <string name="rich_caption_rendering_summary">Vykreslovat webové titulky pro lepší a více přizpůsobený zážitek.</string>
+    <string name="copy_tooltip">Kopírovat</string>
 </resources>
