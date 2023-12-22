@@ -398,7 +398,7 @@
     <string name="lbry_hls_summary">Pro streamování použít LBRY HLS, pokud je k dispozici</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d videí</string>
     <string name="subscriberAndVideoCounts">%1$s odběratelů • %2$d videí</string>
-    <string name="disable_proxy_summary">Načítat videa a obrázky přímo ze serverů YouTube. Tuto možnost povolte pouze v případě, že stejně používáte VPN!</string>
+    <string name="disable_proxy_summary">Načítat videa a obrázky přímo ze serverů YouTube. Tuto možnost povolte pouze v případě, že vždy používáte VPN</string>
     <string name="disable_proxy">Zakázat proxy přes Piped</string>
     <string name="auto_fullscreen_shorts">Automatická celá obrazovka u Shorts</string>
     <string name="new_group">Nová</string>
@@ -538,6 +538,6 @@
     <string name="uptime">Doba online %.2f%%</string>
     <string name="grid_landscape">Sloupce mřížky (na šířku)</string>
     <string name="rich_caption_rendering">Vylepšené vykreslování titulků</string>
-    <string name="rich_caption_rendering_summary">Vykreslovat webové titulky pro lepší a více přizpůsobený zážitek.</string>
+    <string name="rich_caption_rendering_summary">Vykreslovat webové titulky pro lepší a více přizpůsobený zážitek</string>
     <string name="copy_tooltip">Kopírovat</string>
 </resources>
