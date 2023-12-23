@@ -11,7 +11,6 @@ import android.os.Build
 import android.os.Bundle
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
 import androidx.core.app.PendingIntentCompat
@@ -31,6 +30,7 @@ import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.obj.PlayerNotificationData
+import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.ui.activities.MainActivity
 import java.util.UUID
 
@@ -38,7 +38,7 @@ import java.util.UUID
 class NowPlayingNotification(
     private val context: Context,
     private val player: ExoPlayer,
-    private val isBackgroundPlayerNotification: Boolean
+    private val notificationType: NowPlayingNotificationType
 ) {
     private var videoId: String? = null
     private val nManager = context.getSystemService<NotificationManager>()!!
@@ -78,7 +78,7 @@ class NowPlayingNotification(
         // is set to "singleTop" in the AndroidManifest (important!!!)
         // that's the only way to launch back into the previous activity (e.g. the player view
         val intent = Intent(context, MainActivity::class.java).apply {
-            if (isBackgroundPlayerNotification) {
+            if (notificationType == NowPlayingNotificationType.AUDIO_ONLINE) {
                 putExtra(IntentData.openAudioPlayer, true)
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             }
@@ -257,12 +257,12 @@ class NowPlayingNotification(
 
     private fun createPlaybackState(@PlaybackStateCompat.State state: Int): PlaybackStateCompat {
         val stateActions = PlaybackStateCompat.ACTION_SKIP_TO_NEXT or
-            PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS or
-            PlaybackStateCompat.ACTION_REWIND or
-            PlaybackStateCompat.ACTION_FAST_FORWARD or
-            PlaybackStateCompat.ACTION_PLAY_PAUSE or
-            PlaybackStateCompat.ACTION_PAUSE or
-            PlaybackStateCompat.ACTION_SEEK_TO
+                PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS or
+                PlaybackStateCompat.ACTION_REWIND or
+                PlaybackStateCompat.ACTION_FAST_FORWARD or
+                PlaybackStateCompat.ACTION_PLAY_PAUSE or
+                PlaybackStateCompat.ACTION_PAUSE or
+                PlaybackStateCompat.ACTION_SEEK_TO
 
         return PlaybackStateCompat.Builder()
             .setActions(stateActions)
@@ -304,9 +304,10 @@ class NowPlayingNotification(
             }
 
             STOP -> {
-                Log.e("stop", "stop")
-                if (isBackgroundPlayerNotification) {
-                    BackgroundHelper.stopBackgroundPlay(context)
+                when (notificationType) {
+                    NowPlayingNotificationType.AUDIO_ONLINE -> BackgroundHelper.stopBackgroundPlay(context)
+                    NowPlayingNotificationType.AUDIO_OFFLINE -> BackgroundHelper.stopBackgroundPlay(context, OfflinePlayerService::class.java)
+                    else -> Unit
                 }
             }
         }
@@ -407,5 +408,12 @@ class NowPlayingNotification(
         private const val FORWARD = "forward"
         private const val PLAY_PAUSE = "play_pause"
         private const val STOP = "stop"
+
+        enum class NowPlayingNotificationType {
+            VIDEO_ONLINE,
+            VIDEO_OFFLINE,
+            AUDIO_ONLINE,
+            AUDIO_OFFLINE,
+        }
     }
 }

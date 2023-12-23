@@ -258,7 +258,7 @@ class OnlinePlayerService : LifecycleService() {
             nowPlayingNotification = NowPlayingNotification(
                 this@OnlinePlayerService,
                 player!!,
-                true
+                NowPlayingNotification.Companion.NowPlayingNotificationType.AUDIO_ONLINE
             )
         }
         val playerNotificationData = PlayerNotificationData(
