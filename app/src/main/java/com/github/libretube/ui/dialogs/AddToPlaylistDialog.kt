@@ -83,7 +83,7 @@ class AddToPlaylistDialog : DialogFragment() {
     private fun fetchPlaylists(binding: DialogAddToPlaylistBinding) {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
-                val response = try {
+                playlists = try {
                     PlaylistsHelper.getPlaylists()
                 } catch (e: Exception) {
                     Log.e(TAG(), e.toString())
@@ -93,11 +93,11 @@ class AddToPlaylistDialog : DialogFragment() {
 
                 binding.playlistsSpinner.items = playlists.map { it.name!! }
 
-                if (response.isEmpty()) return@repeatOnLifecycle
+                if (playlists.isEmpty()) return@repeatOnLifecycle
 
                 // select the last used playlist
                 viewModel.lastSelectedPlaylistId?.let { id ->
-                    binding.playlistsSpinner.selectedItemPosition = response
+                    binding.playlistsSpinner.selectedItemPosition = playlists
                         .indexOfFirst { it.id == id }
                         .takeIf { it >= 0 } ?: 0
                 }
