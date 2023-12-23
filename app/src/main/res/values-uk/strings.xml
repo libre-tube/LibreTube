@@ -540,7 +540,7 @@
     <string name="add_to_group">Додати до групи</string>
     <string name="uptime">Час онлайн %.2f%%</string>
     <string name="rich_caption_rendering">Просунуті субтитри</string>
-    <string name="rich_caption_rendering_summary">Малювати субтитри веб-движком для підтримки розширених можливостей та налаштувань</string>
+    <string name="rich_caption_rendering_summary">Малювати субтитри вебрушієм для підтримки розширених можливостей і налаштувань</string>
     <string name="grid_landscape">Стовпці (у горизонтальному режимі)</string>
     <string name="copy_tooltip">Копіювати</string>
 </resources>
