@@ -534,4 +534,6 @@
     <string name="add_to_group">Qrupa əlavə et</string>
     <string name="uptime">%.2f%% işləmə vaxtı</string>
     <string name="grid_landscape">Şəbəkə sütunları (landşaft)</string>
+    <string name="rich_caption_rendering">Zəngin titr təqdimatı</string>
+    <string name="rich_caption_rendering_summary">Daha zəngin və fərdiləşdirilmiş təcrübə üçün veb titrləri göstər.</string>
 </resources>

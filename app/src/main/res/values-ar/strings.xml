@@ -547,4 +547,6 @@
     <string name="add_to_group">إضافة إلى المجموعة</string>
     <string name="uptime">وقت تشغيل %.2f%%</string>
     <string name="grid_landscape">أعمدة الشبكة (أفقي)</string>
+    <string name="rich_caption_rendering">تقديم التسمية التوضيحية الغنية</string>
+    <string name="rich_caption_rendering_summary">عرض التسميات التوضيحية على الويب للحصول على تجربة أكثر ثراءً وتخصيصًا.</string>
 </resources>
