@@ -65,7 +65,7 @@ class AboutActivity : BaseActivity() {
 
     private fun onLongClick(href: String) {
         // copy the link to the clipboard
-        ClipboardHelper.save(this, href)
+        ClipboardHelper.save(this, text = href)
         // show the snackBar with open action
         Snackbar.make(
             binding.root,
