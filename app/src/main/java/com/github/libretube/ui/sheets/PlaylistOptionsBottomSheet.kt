@@ -68,8 +68,12 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                 // play the playlist in the background
                 R.string.playOnBackground -> {
                     val playlist = withContext(Dispatchers.IO) {
-                        PlaylistsHelper.getPlaylist(playlistId)
+                        runCatching { PlaylistsHelper.getPlaylist(playlistId) }
+                    }.getOrElse {
+                        context?.toastFromMainDispatcher(R.string.error)
+                        return@setSimpleItems
                     }
+
                     playlist.relatedStreams.firstOrNull()?.let {
                         BackgroundHelper.playOnBackground(
                             requireContext(),
