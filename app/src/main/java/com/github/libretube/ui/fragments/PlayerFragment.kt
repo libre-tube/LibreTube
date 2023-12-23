@@ -1363,7 +1363,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      */
     private fun initializePlayerNotification() {
         if (!this::nowPlayingNotification.isInitialized) {
-            nowPlayingNotification = NowPlayingNotification(requireContext(), exoPlayer, false)
+            nowPlayingNotification = NowPlayingNotification(
+                requireContext(),
+                exoPlayer,
+                NowPlayingNotification.Companion.NowPlayingNotificationType.VIDEO_ONLINE
+            )
         }
         val playerNotificationData = PlayerNotificationData(
             streams.title,

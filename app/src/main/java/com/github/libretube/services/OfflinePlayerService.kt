@@ -96,7 +96,11 @@ class OfflinePlayerService : LifecycleService() {
         player!!.setWakeMode(C.WAKE_MODE_LOCAL)
         player!!.addListener(playerListener)
 
-        nowPlayingNotification = NowPlayingNotification(this, player!!, true)
+        nowPlayingNotification = NowPlayingNotification(
+            this,
+            player!!,
+            NowPlayingNotification.Companion.NowPlayingNotificationType.AUDIO_OFFLINE
+        )
     }
 
     /**
