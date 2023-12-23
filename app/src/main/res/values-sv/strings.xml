@@ -73,7 +73,7 @@
     <string name="notgmail">Detta är för ett Piped-konto</string>
     <string name="deletePlaylist">Ta bort spellista</string>
     <string name="areYouSure">Radera spellistan\?</string>
-    <string name="grid">Rutnätskolumner</string>
+    <string name="grid">Rutnätskolumner (porträtt)</string>
     <string name="createPlaylist">Upprätt spellista</string>
     <string name="playlistCreated">Spellista upprättad.</string>
     <string name="playlistName">Spellistans namn</string>
@@ -399,7 +399,7 @@
     <string name="pop_up">Pop-up</string>
     <string name="manual">Manuell</string>
     <string name="playback_during_call_summary">Observera att detta också påverkar appen så att den inte längre hanterar någon form av ljudfokus</string>
-    <string name="disable_proxy_summary">Ladda videor och bilder direkt från YouTubes servrar. Aktivera bara detta alternativ om du ändå använder en VPN!</string>
+    <string name="disable_proxy_summary">Ladda videor och bilder direkt från YouTubes servrar. Aktivera bara detta alternativet om du alltid använder en VPN</string>
     <string name="playlistCloned">Spellistan klonad</string>
     <string name="import_format_newpipe">NewPipe</string>
     <string name="shuffle">Blanda</string>
@@ -534,4 +534,8 @@
     <string name="no_segments_found">Det finns inga segment för den här videon ännu.</string>
     <string name="add_to_group">Lägg till i grupp</string>
     <string name="uptime">%.2f%% upptid</string>
+    <string name="rich_caption_rendering">Rik rendering av bildtexter</string>
+    <string name="rich_caption_rendering_summary">Rendera webbtexter för en mer rik och anpassad upplevelse</string>
+    <string name="grid_landscape">Rutnätskolumner (landskap)</string>
+    <string name="copy_tooltip">Kopiera</string>
 </resources>
