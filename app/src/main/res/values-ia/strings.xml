@@ -487,7 +487,7 @@
     <string name="fallback_piped_proxy">Recurrer al proxy de Piped</string>
     <string name="grid_landscape">Columnas del grillia (horizontal)</string>
     <string name="playlistNameReversed">Nomine del lista de reproduction (invertite)</string>
-    <string name="disable_proxy_summary">Cargar videos e imagines directemente ab le servitores de YouTube. Solmente activa iste option si tu usa un VPN!</string>
+    <string name="disable_proxy_summary">Cargar videos e imagines directemente ab le servitores de YouTube. Solmente activa iste option si tu usa sempre un VPN</string>
     <string name="tooltip_reverse">Inverter</string>
     <string name="confirm_unsubscribe">Es tu secur que tu vole desubscriber te ab %1$s?</string>
     <string name="fullscreen_gestures">Gestos de entrata/exito in schermo plen</string>
@@ -512,15 +512,19 @@
     <string name="break_reminder_time">Minutas ante de esser rememorate</string>
     <string name="watch_history_summary">Mantener le controlo del videos reguardate localmente</string>
     <string name="alternative_pip_controls_summary">Monstrar solmente audio e saltar controlos in Imagine-in-Imagine in vice de avantiar e rebobinar</string>
-    <string name="swipe_controls_summary">Glissar pro adjustar le luminositate e volumine.</string>
+    <string name="swipe_controls_summary">Glissar pro adjustar le luminositate e volumine</string>
     <string name="swipe_controls">Controlos de glissamento</string>
     <string name="tooltip_scroll_to_top">Rolar al alto</string>
     <string name="tooltip_sponsorblock">Commutar SponsorBlock</string>
-    <string name="pinch_control_summary">Usa le pinciamento pro aggrandir/diminuer.</string>
+    <string name="pinch_control_summary">Usa le pinciamento pro aggrandir/diminuer</string>
     <string name="sb_color_enable">Commutar colores personalisate pro le segmentos de SponsorBlock.</string>
-    <string name="double_tap_seek_summary">Tocca duo vices al sinistra o dextra pro rebobinar o avantiar le position del reproductor.</string>
+    <string name="double_tap_seek_summary">Tocca duo vices al sinistra o dextra pro rebobinar o avantiar le position del reproductor</string>
     <string name="no_segments_found">Il non ha ancora segmentos pro iste video.</string>
     <string name="successfully_removed_from_playlist">Removite con successo \"%1$s\" ab le lista de reproduction.</string>
     <string name="failed_fetching_instances">Non poteva recuperar le instantias disponibile.</string>
     <string name="new_videos_badge_summary">Monstrar un insignia con le quantitate de nove videos si il ha alicun.</string>
+    <string name="autoplay_playlists_summary">Reproducer automaticamente le sequente video in le listas de reproduction independentemente del parametro de reproduction automatic seligite</string>
+    <string name="push_channel_name">Worker de notificationes</string>
+    <string name="sb_custom_colors_summary">Commuta colores personalisate del segmentos de SponsorBlock</string>
+    <string name="copy_tooltip">Copiar</string>
 </resources>
