@@ -116,7 +116,7 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
 
         try {
             if (binding.tabChips.checkedChipId == binding.videos.id) {
-                fetchChannelNextPage(nextPages[0] ?: return@launch)?.let {
+                fetchChannelNextPage(nextPages[0] ?: return@launch).let {
                     nextPages[0] = it
                 }
             } else {
@@ -127,7 +127,7 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
                     tab.name == possibleTabs[currentTabIndex - 1].identifierName
                 }
                 val nextPage = nextPages[currentTabIndex] ?: return@launch
-                fetchTabNextPage(nextPage, channelTab)?.let {
+                fetchTabNextPage(nextPage, channelTab).let {
                     nextPages[currentTabIndex] = it
                 }
             }
