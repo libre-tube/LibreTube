@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.SoftwareKeyboardControllerCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -18,7 +19,6 @@ import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.ceilHalf
-import com.github.libretube.extensions.hideKeyboard
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.activities.MainActivity
@@ -115,7 +115,7 @@ class SearchResultFragment : DynamicLayoutManagerFragment() {
                 "${ShareDialog.YOUTUBE_FRONTEND_URL}/watch?v=$videoId"
             } ?: query
 
-            view?.let { context?.hideKeyboard(it) }
+            view?.let { SoftwareKeyboardControllerCompat(it).hide() }
             val response = try {
                 withContext(Dispatchers.IO) {
                     RetrofitInstance.api.getSearchResults(searchQuery, searchFilter).apply {
