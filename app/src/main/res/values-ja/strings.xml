@@ -394,7 +394,7 @@
     <string name="subscriberAndVideoCounts">登録者数 %1$s人 • %2$d 本の動画</string>
     <string name="replies">返信</string>
     <string name="disable_proxy">Pipedのプロキシを無効化</string>
-    <string name="disable_proxy_summary">動画や画像を YouTube のサーバーから直接読み込みます。VPN を併用する場合にのみ有効化してください！</string>
+    <string name="disable_proxy_summary">動画や画像を YouTube のサーバーから直接取得します。VPN を常時使用する場合にのみご利用ください！</string>
     <string name="auto_fullscreen_shorts">ショート動画を自動で全画面表示</string>
     <string name="sleep_timer">スリープタイマー</string>
     <string name="fullscreen_gestures">ジェスチャで全画面を開始/終了</string>
@@ -532,6 +532,6 @@
     <string name="uptime">%.2f%% 稼働</string>
     <string name="grid_landscape">一覧での1行あたりの表示数 (縦画面)</string>
     <string name="rich_caption_rendering">字幕の描画を高品質にする</string>
-    <string name="rich_caption_rendering_summary">より高品質にウェブ字幕を描画。</string>
+    <string name="rich_caption_rendering_summary">より高品質にウェブ字幕を描画</string>
     <string name="copy_tooltip">コピー</string>
 </resources>
