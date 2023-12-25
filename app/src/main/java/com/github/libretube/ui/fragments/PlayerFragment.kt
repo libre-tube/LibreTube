@@ -787,6 +787,15 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             context?.unregisterReceiver(broadcastReceiver)
         }
 
+        _binding = null
+    }
+
+    override fun onStop() {
+        super.onStop()
+        stopVideoPlay()
+    }
+
+    private fun stopVideoPlay() {
         try {
             saveWatchPosition()
 
@@ -796,8 +805,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
-        _binding = null
     }
 
     // save the watch position if video isn't finished and option enabled
@@ -1600,8 +1607,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         mainActivity.supportFragmentManager.commit {
             remove(this@PlayerFragment)
         }
-
-        onDestroy()
     }
 
     /**
