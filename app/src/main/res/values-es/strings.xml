@@ -399,7 +399,7 @@
     <string name="subscriberAndVideoCounts">%1$s suscriptores • %2$d vídeos</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d vídeos</string>
     <string name="disable_proxy">Deshabilitar el proxy de Piped</string>
-    <string name="disable_proxy_summary">Carga vídeos e imágenes directamente desde los servidores de YouTube. Sólo activa esta opción si de todos modos utilizas una VPN!</string>
+    <string name="disable_proxy_summary">Cargar videos e imágenes directamente desde los servidores de YouTube. Solo habilita la opción si siempre usas una VPN</string>
     <string name="auto_fullscreen_shorts">Shorts en pantalla completa</string>
     <string name="channel_groups">Grupos de canales</string>
     <string name="new_group">Nuevo</string>
@@ -539,6 +539,6 @@
     <string name="uptime">%.2f%% tiempo de actividad</string>
     <string name="grid_landscape">Columnas de la cuadrícula (horizontal)</string>
     <string name="rich_caption_rendering">Renderizado de subtítulos enriquecidos</string>
-    <string name="rich_caption_rendering_summary">Renderiza subtítulos web para una experiencia más rica y personalizada.</string>
+    <string name="rich_caption_rendering_summary">Renderizar los subtítulos web para una experiencia más rica y personalizada</string>
     <string name="copy_tooltip">Copiar</string>
 </resources>
