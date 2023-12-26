@@ -396,7 +396,7 @@
     <string name="subscriberAndVideoCounts">%1$s 订阅者 • %2$d 个视频</string>
     <string name="show_stream_thumbnails">显示缩略图</string>
     <string name="fullscreen_gestures">进入/退出全屏的手势</string>
-    <string name="disable_proxy_summary">直接从 YouTube 服务器加载视频与图像。无论如何请仅在使用 VPN 时启用本选项！</string>
+    <string name="disable_proxy_summary">直接从 YouTube 服务器加载视频与图像。请只在始终使用 VPN 时开启此选项</string>
     <string name="show_stream_thumbnails_summary">显示新影音流的缩略图。启用此选项会产生额外数据消耗</string>
     <string name="disable_proxy">禁用 Piped 代理</string>
     <string name="go_to_video">转到视频</string>
@@ -532,6 +532,6 @@
     <string name="uptime">%.2f%% 在线时间</string>
     <string name="grid_landscape">网格列（横屏）</string>
     <string name="rich_caption_rendering">富字幕渲染</string>
-    <string name="rich_caption_rendering_summary">渲染 web 字幕获得更丰富和定制的体验。</string>
+    <string name="rich_caption_rendering_summary">渲染 web 字幕获得更丰富和定制的体验</string>
     <string name="copy_tooltip">复制</string>
 </resources>
