@@ -536,4 +536,6 @@
     <string name="uptime">%.2f%% beschikbaar</string>
     <string name="grid_landscape">Raster­kolommen (landschap)</string>
     <string name="copy_tooltip">Kopiëren</string>
+    <string name="rich_caption_rendering">Rijke weergave van bijschriften</string>
+    <string name="rich_caption_rendering_summary">Geef web­bijschriften weer voor een rijkere en persoonlijkere ervaring</string>
 </resources>
