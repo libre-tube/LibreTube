@@ -410,7 +410,7 @@
     <string name="edit_group">編輯群組</string>
     <string name="shorts_notifications">短片通知</string>
     <string name="show_stream_thumbnails">顯示串流縮圖</string>
-    <string name="disable_proxy_summary">直接從 YouTube 的伺服器載入影片與圖片。僅在您使用 VPN 時才啟用此選項！</string>
+    <string name="disable_proxy_summary">直接從 YouTube 的伺服器載入影片與圖片。若您一律使用 VPN 則僅應在此時僅用此選項</string>
     <string name="video_id">影片 ID</string>
     <string name="play_automatically">自動播放</string>
     <string name="play_automatically_summary">選取時自動開始播放影片</string>
@@ -532,4 +532,7 @@
     <string name="add_to_group">新增至群組</string>
     <string name="uptime">%.2f%% 正常運作時間</string>
     <string name="grid_landscape">格線佈局（橫向）</string>
+    <string name="rich_caption_rendering">豐富字幕繪製</string>
+    <string name="rich_caption_rendering_summary">繪製網頁字幕以獲得更豐富與客製化的體驗</string>
+    <string name="copy_tooltip">複製</string>
 </resources>
