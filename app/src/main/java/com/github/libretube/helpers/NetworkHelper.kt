@@ -15,20 +15,16 @@ object NetworkHelper {
         // In case we are using a VPN, we return true since we might be using reverse tethering
         val connectivityManager = context.getSystemService<ConnectivityManager>() ?: return false
 
-        if (Build.VERSION.SDK_INT >= 23) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val activeNetwork = connectivityManager.activeNetwork
             val caps = connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
-            val hasConnection = caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-            val isVpn = caps.hasTransport(NetworkCapabilities.TRANSPORT_VPN)
-            return hasConnection || isVpn
+            return caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                    || caps.hasTransport(NetworkCapabilities.TRANSPORT_VPN)
         } else {
-            if (connectivityManager.activeNetworkInfo?.isConnected == true) {
-                return true
-            }
-
             // activeNetworkInfo might return null instead of the VPN, so better check it explicitly
-            val vpnInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_VPN)
-            return vpnInfo?.isConnected == true
+            val networkInfo = connectivityManager.activeNetworkInfo
+                ?: connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_VPN)
+            return networkInfo?.isConnected == true
         }
     }
 
