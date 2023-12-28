@@ -97,6 +97,7 @@ import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.extensions.animateDown
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.listeners.SeekbarPreviewListener
@@ -461,12 +462,18 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
         })
 
-        binding.playerMotionLayout.addSwipeUpListener {
-            if (this::streams.isInitialized && PlayerHelper.fullscreenGesturesEnabled) {
-                binding.player.hideController()
-                setFullscreen()
+        binding.playerMotionLayout
+            .addSwipeUpListener {
+                if (this::streams.isInitialized && PlayerHelper.fullscreenGesturesEnabled) {
+                    binding.player.hideController()
+                    setFullscreen()
+                }
             }
-        }
+            .addSwipeDownListener {
+                if (viewModel.isMiniPlayerVisible.value == true) {
+                    closeMiniPlayer()
+                }
+            }
 
         binding.playerMotionLayout.progress = 1F
         binding.playerMotionLayout.transitionToStart()
@@ -475,6 +482,16 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         if (PlayerHelper.pipEnabled) {
             PictureInPictureCompat.setPictureInPictureParams(activity, pipParams)
         }
+    }
+
+    private fun closeMiniPlayer() {
+        binding
+            .playerMotionLayout
+            .animateDown(
+                duration = 300L,
+                dy = 500F,
+                onEnd = ::killPlayerFragment,
+            )
     }
 
     private fun onManualPlayerClose() {
