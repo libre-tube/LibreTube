@@ -534,4 +534,8 @@
     <string name="save_feed_summary">Cargar le fluxos de subscriptiones in secunde plano e impedir lor actualisation automatic</string>
     <string name="playback_during_call_summary">Nota que isto tamben affecta al application que non poterea gerer plus necun foco de audio</string>
     <string name="choose_instance_long">Selige un instantia de Piped a usar infra. Le instantia de Piped actuara como mediator inter tu e YouTube. Iste instantias es locate in locationes physic differente- indicate per le bandieras del paises. Instantias physicamente proxime a te es probabilemente plus veloce que instantias plus distante. Tu pote cambiar le instantia que tu usa in le parametros at any time.</string>
+    <string name="uptime">%.2f%% tempore de activitate</string>
+    <string name="gradientIcon">Gradiente volubile</string>
+    <string name="all_caught_up">Tu videva toto</string>
+    <string name="fallback_piped_proxy_summary">Cargar videos via le proxy si le connexion a YouTube non functiona pro le video actual (augmenta le tempore initial de carga). Si es disactivate, le contentos musical de YouTube poterea non reproducer se per restrictiones de YT</string>
 </resources>
