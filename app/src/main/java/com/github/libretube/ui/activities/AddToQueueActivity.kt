@@ -3,6 +3,7 @@ package com.github.libretube.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.net.toUri
+import com.github.libretube.constants.IntentData
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.util.PlayingQueue
 
@@ -29,10 +30,15 @@ class AddToQueueActivity : BaseActivity() {
 
         if (videoId == null) videoId = uri.path!!.replace("/", "")
 
-        // if playing a video currently, the playing queue is not empty
-        if (PlayingQueue.isNotEmpty()) PlayingQueue.insertByVideoId(videoId!!)
-
         val intent = packageManager.getLaunchIntentForPackage(packageName)
+
+        // if playing a video currently, the video will be added to the queue
+        if (PlayingQueue.isNotEmpty()) {
+            PlayingQueue.insertByVideoId(videoId!!)
+        } else {
+            intent?.putExtra(IntentData.videoId, videoId)
+        }
+
         startActivity(intent)
         finishAndRemoveTask()
     }
