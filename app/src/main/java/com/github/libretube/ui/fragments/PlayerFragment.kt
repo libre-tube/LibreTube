@@ -429,8 +429,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 if (_binding == null) return
 
                 mainMotionLayout.progress = abs(progress)
-                binding.player.hideController()
-                binding.player.useController = false
+                disableController()
                 commentsViewModel.setCommentSheetExpand(false)
                 chaptersBottomSheet?.dismiss()
                 transitionEndId = endId
@@ -444,7 +443,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     viewModel.isMiniPlayerVisible.value = false
                     // re-enable captions
                     updateCurrentSubtitle(currentSubtitle)
-                    binding.player.useController = true
+                    enableController()
                     commentsViewModel.setCommentSheetExpand(true)
                     mainMotionLayout.progress = 0F
                     changeOrientationMode()
@@ -452,7 +451,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     viewModel.isMiniPlayerVisible.value = true
                     // disable captions temporarily
                     updateCurrentSubtitle(null)
-                    binding.player.useController = false
+                    disableController()
                     commentsViewModel.setCommentSheetExpand(null)
                     binding.sbSkipBtn.isGone = true
                     mainMotionLayout.progress = 1F
@@ -463,7 +462,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         binding.playerMotionLayout.addSwipeUpListener {
             if (this::streams.isInitialized && PlayerHelper.fullscreenGesturesEnabled) {
-                binding.player.hideController()
+                disableController()
                 setFullscreen()
             }
         }
@@ -516,7 +515,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // hide fullscreen button if autorotation enabled
         playerBinding.fullscreen.setOnClickListener {
             // hide player controller
-            binding.player.hideController()
+            disableController()
             if (viewModel.isFullscreen.value == false) {
                 // go to fullscreen mode
                 setFullscreen()
@@ -1056,8 +1055,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private fun showAutoPlayCountdown() {
         if (!PlayingQueue.hasNext()) return
 
-        binding.player.useController = false
-        binding.player.hideController()
+        disableController()
         binding.autoplayCountdown.setHideSelfListener {
             // could fail if the video already got closed before
             runCatching {
@@ -1515,13 +1513,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode)
         if (isInPictureInPictureMode) {
             // hide and disable exoPlayer controls
-            binding.player.hideController()
-            binding.player.useController = false
+            disableController()
 
             updateCurrentSubtitle(null)
 
             openOrCloseFullscreenDialog(true)
         } else {
+            enableController()
+
             // close button got clicked in PiP mode
             // pause the video and keep the app alive
             if (lifecycle.currentState == Lifecycle.State.CREATED) exoPlayer.pause()
@@ -1651,5 +1650,15 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         } else {
             checkForNecessaryOrientationRestart()
         }
+    }
+
+    private fun enableController() {
+        binding.player.useController = true
+        binding.player.showController()
+    }
+
+    private fun disableController() {
+        binding.player.useController = false
+        binding.player.hideController()
     }
 }
