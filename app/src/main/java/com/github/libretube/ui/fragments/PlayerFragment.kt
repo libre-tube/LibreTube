@@ -187,6 +187,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private var scrubbingTimeBar = false
     private var chaptersBottomSheet: ChaptersBottomSheet? = null
 
+    // True when the video was closed through the close button on PiP mode
+    private var closedVideo = false
+
     /**
      * The orientation of the `fragment_player.xml` that's currently used
      * This is needed in order to figure out if the current layout is the landscape one or not.
@@ -756,6 +759,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     override fun onResume() {
         super.onResume()
 
+        if (closedVideo) {
+            closedVideo = false
+            nowPlayingNotification.refreshNotification()
+        }
+
         // re-enable and load video stream
         if (this::trackSelector.isInitialized) {
             trackSelector.updateParameters {
@@ -787,10 +795,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         _binding = null
-    }
 
-    override fun onStop() {
-        super.onStop()
         stopVideoPlay()
     }
 
@@ -1523,10 +1528,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             // close button got clicked in PiP mode
             // pause the video and keep the app alive
-            if (lifecycle.currentState == Lifecycle.State.CREATED) exoPlayer.pause()
-
-            // enable exoPlayer controls again
-            binding.player.useController = true
+            if (lifecycle.currentState == Lifecycle.State.CREATED) {
+                exoPlayer.pause()
+                nowPlayingNotification.cancelNotification()
+                closedVideo = true
+            }
 
             updateCurrentSubtitle(currentSubtitle)
 
@@ -1594,6 +1600,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private fun killPlayerFragment() {
+        stopVideoPlay()
         viewModel.isFullscreen.value = false
         viewModel.isMiniPlayerVisible.value = false
 

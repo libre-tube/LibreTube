@@ -400,6 +400,14 @@ class NowPlayingNotification(
         nManager.cancel(PLAYER_NOTIFICATION_ID)
     }
 
+    fun cancelNotification() {
+        nManager.cancel(PLAYER_NOTIFICATION_ID)
+    }
+
+    fun refreshNotification() {
+        createOrUpdateNotification()
+    }
+
     companion object {
         const val PLAYER_NOTIFICATION_ID = 1
         private const val PREV = "prev"
