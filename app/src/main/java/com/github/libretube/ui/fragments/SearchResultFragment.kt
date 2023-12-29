@@ -9,10 +9,10 @@ import androidx.core.view.SoftwareKeyboardControllerCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSearchResultBinding
 import com.github.libretube.db.DatabaseHelper
@@ -36,17 +36,12 @@ import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 class SearchResultFragment : DynamicLayoutManagerFragment() {
     private var _binding: FragmentSearchResultBinding? = null
     private val binding get() = _binding!!
+    private val args by navArgs<SearchResultFragmentArgs>()
 
     private var nextPage: String? = null
-    private var query = ""
 
     private lateinit var searchAdapter: SearchAdapter
     private var searchFilter = "all"
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        query = arguments?.getString(IntentData.query).toString()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,10 +61,10 @@ class SearchResultFragment : DynamicLayoutManagerFragment() {
 
         // fixes a bug that the search query will stay the old one when searching for multiple
         // different queries in a row and navigating to the previous ones through back presses
-        (context as MainActivity).setQuerySilent(query)
+        (context as MainActivity).setQuerySilent(args.query)
 
         // add the query to the history
-        addToHistory(query)
+        addToHistory(args.query)
 
         // filter options
         binding.filterChipGroup.setOnCheckedStateChangeListener { _, _ ->
@@ -109,11 +104,11 @@ class SearchResultFragment : DynamicLayoutManagerFragment() {
             var timeStamp: Long? = null
 
             // parse search URLs from YouTube entered in the search bar
-            val searchQuery = query.toHttpUrlOrNull()?.let {
-                val videoId = TextUtils.getVideoIdFromUrl(it.toString()) ?: query
+            val searchQuery = args.query.toHttpUrlOrNull()?.let {
+                val videoId = TextUtils.getVideoIdFromUrl(it.toString()) ?: args.query
                 timeStamp = it.queryParameter("t")?.toTimeInSeconds()
                 "${ShareDialog.YOUTUBE_FRONTEND_URL}/watch?v=$videoId"
-            } ?: query
+            } ?: args.query
 
             view?.let { SoftwareKeyboardControllerCompat(it).hide() }
             val response = try {
@@ -146,7 +141,7 @@ class SearchResultFragment : DynamicLayoutManagerFragment() {
             val response = try {
                 withContext(Dispatchers.IO) {
                     RetrofitInstance.api.getSearchResultsNextPage(
-                        query,
+                        args.query,
                         searchFilter,
                         nextPage!!
                     ).apply {

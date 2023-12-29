@@ -48,6 +48,7 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.hls.HlsMediaSource
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.libretube.NavDirections
 import com.github.libretube.R
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.JsonHelper
@@ -644,8 +645,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             if (!this::streams.isInitialized) return@setOnClickListener
 
             val activity = view?.context as MainActivity
-            val bundle = bundleOf(IntentData.channelId to streams.uploaderUrl)
-            activity.navController.navigate(R.id.channelFragment, bundle)
+            activity.navController.navigate(NavDirections.openChannel(streams.uploaderUrl))
             activity.binding.mainMotionLayout.transitionToEnd()
             binding.playerMotionLayout.transitionToEnd()
         }
