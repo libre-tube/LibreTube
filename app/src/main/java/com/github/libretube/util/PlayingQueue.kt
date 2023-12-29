@@ -212,7 +212,7 @@ object PlayingQueue {
         // don't add new videos to the queue if the user chose to repeat only the current queue
         if (isLast() && repeatMode == Player.REPEAT_MODE_ALL) return
 
-        add(*streams.toTypedArray(), skipExisting = true)
+        add(*streams.filter { !it.isLive }.toTypedArray(), skipExisting = true)
     }
 
     fun onQueueItemSelected(index: Int) {

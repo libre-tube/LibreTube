@@ -23,7 +23,7 @@
     <string name="error">Нешта пайшло не так.</string>
     <string name="empty">Вы павінны ўвесці імя карыстальніка і пароль.</string>
     <string name="notgmail">Гэта для ўліковага запісу Piped</string>
-    <string name="grid">Слупкі сеткі</string>
+    <string name="grid">Стоўбцы (у вертыкальным рэжыме)</string>
     <string name="emptyList">Нічога тут.</string>
     <string name="success">Гатова.</string>
     <string name="about">Аб LibreTube</string>
@@ -401,7 +401,7 @@
     <string name="all_caught_up_summary">Вы бачылі ўсё новыя відэа</string>
     <string name="shuffle">Змяшаць</string>
     <string name="disable_proxy">Выключыць проксі Piped</string>
-    <string name="disable_proxy_summary">Загружайце відэа і выявы непасрэдна з сервераў YouTube. Уключайце опцыю, толькі калі вы ўсё роўна карыстаецеся VPN!</string>
+    <string name="disable_proxy_summary">Загружаць відэа і выявы непасрэдна з сервераў YouTube. Уключайце гэтую опцыю толькі калі заўсёды карыстаецеся VPN</string>
     <string name="auto_fullscreen_shorts">Аўтаматычны поўнаэкранны рэжым для кароткіх відэа</string>
     <string name="new_group">Новы</string>
     <string name="edit_group">Рэдагаваць групу</string>
@@ -537,4 +537,10 @@
     <string name="invalid_input">Няправільны ўвод</string>
     <string name="disable_sleep_timer">Выключыць таймер сну</string>
     <string name="start_sleep_timer">Запусціць таймер сну</string>
+    <string name="add_to_group">Дадаць у групу</string>
+    <string name="rich_caption_rendering">Прасунутыя субтытры</string>
+    <string name="rich_caption_rendering_summary">Адмалёўваць субтытры вэб-рухавічком для падтрымкі пашыраных магчымасцяў і налад</string>
+    <string name="uptime">Час онлайн %.2f%%</string>
+    <string name="grid_landscape">Стоўбцы (у гарызантальным рэжыме)</string>
+    <string name="copy_tooltip">Капіяваць</string>
 </resources>

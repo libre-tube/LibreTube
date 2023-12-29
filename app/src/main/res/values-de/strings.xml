@@ -534,4 +534,8 @@
     <string name="no_segments_found">Für dieses Video sind bisher keine Abschnitte vorhanden.</string>
     <string name="add_to_group">Zur Gruppe hinzufügen</string>
     <string name="uptime">%.2f%% Betriebszeit</string>
+    <string name="rich_caption_rendering">Rich-Text Untertitel</string>
+    <string name="rich_caption_rendering_summary">Individuell gestaltete Untertitel (z.B. fettgedruckt oder andere Schriftart) anzeigen</string>
+    <string name="grid_landscape">Spaltenanzahl im Querformat</string>
+    <string name="copy_tooltip">Kopieren</string>
 </resources>

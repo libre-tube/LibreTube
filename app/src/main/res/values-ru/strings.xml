@@ -401,7 +401,7 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d видео</string>
     <string name="subscriberAndVideoCounts">%1$s подписчиков • %2$d видео</string>
     <string name="disable_proxy">Отключить прокси Piped</string>
-    <string name="disable_proxy_summary">Загружать видео и изображения непосредственно с серверов YouTube. Включайте эту опцию только если уже используете VPN!</string>
+    <string name="disable_proxy_summary">Загружать видео и изображения непосредственно с серверов YouTube. Включайте эту опцию только если всегда используете VPN</string>
     <string name="auto_fullscreen_shorts">Автоматический полноэкранный режим для коротких видео</string>
     <string name="new_group">Новая</string>
     <string name="group_name">Название группы</string>
@@ -541,6 +541,6 @@
     <string name="uptime">%.2f%% доступность</string>
     <string name="grid_landscape">Столбцы (в горизонтальном режиме)</string>
     <string name="rich_caption_rendering">Продвинутые субтитры</string>
-    <string name="rich_caption_rendering_summary">Отрисовывать субтитры веб-движком для поддержки расширенных возможностей и настроек.</string>
+    <string name="rich_caption_rendering_summary">Отрисовывать субтитры веб-движком для поддержки расширенных возможностей и настроек</string>
     <string name="copy_tooltip">Копировать</string>
 </resources>

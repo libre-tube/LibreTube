@@ -29,7 +29,7 @@
     <string name="notgmail">Dit is voor een Piped-account</string>
     <string name="importsuccess">Geabonneerd</string>
     <string name="unknown_error">Netwerkfout</string>
-    <string name="grid">Rasterkolommen</string>
+    <string name="grid">Raster­kolommen (portret)</string>
     <string name="playlistName">Afspeellijstnaam</string>
     <string name="systemLanguage">Systeem</string>
     <string name="startpage">Thuis</string>
@@ -487,7 +487,7 @@
     <string name="dearrow_summary">Geef meer accurate en minder sensationele titels en miniaturen weer. Verhoogt de laadtijden</string>
     <string name="notification_time_summary">Beperk de tijdspanne waarin streammeldingen worden weergegeven</string>
     <string name="alternative_pip_controls_summary">Toon alleen audio en overslaan in PiP in plaats van vooruit- en terugspoelen</string>
-    <string name="disable_proxy_summary">Laad video\'s en afbeeldingen rechtstreeks van de servers van YouTube. Schakel de optie alleen in als je toch al een VPN gebruikt!</string>
+    <string name="disable_proxy_summary">Laad video\'s en afbeeldingen rechtstreeks van de servers van YouTube.</string>
     <string name="play_automatically_summary">Start het afspelen automatisch bij het selecteren van een video</string>
     <string name="emptyPlaylistDescription">De afspeellijstbeschrijving kan niet leeg zijn</string>
     <string name="swipe_controls_summary">Gebruik een veegbeweging om de helderheid en het volume aan te passen</string>
@@ -534,4 +534,8 @@
     <string name="start_sleep_timer">Slaaptimer starten</string>
     <string name="add_to_group">Toevoegen aan groep</string>
     <string name="uptime">%.2f%% beschikbaar</string>
+    <string name="grid_landscape">Raster­kolommen (landschap)</string>
+    <string name="copy_tooltip">Kopiëren</string>
+    <string name="rich_caption_rendering">Rijke weergave van bijschriften</string>
+    <string name="rich_caption_rendering_summary">Geef web­bijschriften weer voor een rijkere en persoonlijkere ervaring</string>
 </resources>

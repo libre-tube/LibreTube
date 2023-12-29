@@ -34,7 +34,7 @@
     <string name="emptyList">Non c\'è nulla.</string>
     <string name="deletePlaylist">Elimina la playlist</string>
     <string name="areYouSure">Sei sicuro/a di volerla eliminare\?</string>
-    <string name="grid">Colonne della griglia</string>
+    <string name="grid">Colonne della griglia (verticale)</string>
     <string name="save">Salva</string>
     <string name="region">Regione</string>
     <string name="importsuccess">Iscritto</string>
@@ -399,7 +399,7 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d video</string>
     <string name="subscriberAndVideoCounts">%1$s iscritti • %2$d video</string>
     <string name="disable_proxy">Disabilita proxy Piped</string>
-    <string name="disable_proxy_summary">Carica video e immagini direttamente dai server di YouTube. Abilita l\'opzione solo se usi una VPN!</string>
+    <string name="disable_proxy_summary">Carica video e immagini direttamente dai server di YouTube. Attiva l\'opzione solo se usi sempre una VPN</string>
     <string name="auto_fullscreen_shorts">Schermo intero automatico su video brevi</string>
     <string name="channel_groups">Gruppi di canali</string>
     <string name="new_group">Nuovo</string>
@@ -537,4 +537,8 @@
     <string name="start_sleep_timer">Avvia timer per dormire</string>
     <string name="add_to_group">Aggiungi al gruppo</string>
     <string name="uptime">%.2f%% disponibile</string>
+    <string name="rich_caption_rendering">Rendering ricco dei sottotitoli</string>
+    <string name="rich_caption_rendering_summary">Rendering dei sottotitoli web per un\'esperienza più ricca e personalizzata</string>
+    <string name="grid_landscape">Colonne della griglia (orizzontale)</string>
+    <string name="copy_tooltip">Copia</string>
 </resources>

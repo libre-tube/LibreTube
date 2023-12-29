@@ -7,7 +7,7 @@
     <string name="unsubscribe">Abunə Olma</string>
     <string name="share">Paylaşma</string>
     <string name="save">Saxlama</string>
-    <string name="download">Yükləmə</string>
+    <string name="download">Yüklə</string>
     <string name="username">İstifadəçi adı</string>
     <string name="password">Parol</string>
     <string name="login">Daxil ol</string>
@@ -397,13 +397,13 @@
     <string name="subscriberAndVideoCounts">%1$s abunəçi • %2$d video</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d video</string>
     <string name="disable_proxy">Piped proksini bağla</string>
-    <string name="disable_proxy_summary">Videoları və şəkilləri birbaşa YouTube serverlərindən yüklə. Seçimi, ancaq VPN istifadə edirsinizsə aktivləşdirin!</string>
+    <string name="disable_proxy_summary">Videoları və şəkilləri birbaşa YouTube serverlərindən yükləyin. Həmişə seçimi ancaq VPN istifadə edirsinizsə, aktivləşdirin</string>
     <string name="auto_fullscreen_shorts">Qısa videolarda avto tam ekran</string>
     <string name="edit_group">Qrupu redaktə et</string>
     <string name="channel_groups">Kanal qrupları</string>
     <string name="group_name">Qrup adı</string>
     <string name="new_group">Yeni</string>
-    <string name="play_automatically_summary">Seçilərkən videonu avtomatik oynatmağa başla</string>
+    <string name="play_automatically_summary">Seçiləndə videonu avtomatik oynatmağa başla</string>
     <string name="play_automatically">Avtomatik oynat</string>
     <string name="fullscreen_gestures">Tam ekran jestlərinə gir/çıx</string>
     <string name="go_to_video">Videoya keç</string>
@@ -535,5 +535,6 @@
     <string name="uptime">%.2f%% işləmə vaxtı</string>
     <string name="grid_landscape">Şəbəkə sütunları (landşaft)</string>
     <string name="rich_caption_rendering">Zəngin titr təqdimatı</string>
-    <string name="rich_caption_rendering_summary">Daha zəngin və fərdiləşdirilmiş təcrübə üçün veb titrləri göstər.</string>
+    <string name="rich_caption_rendering_summary">Daha zəngin və fərdiləşdirilmiş təcrübə üçün veb titrləri göstər</string>
+    <string name="copy_tooltip">Köçür</string>
 </resources>

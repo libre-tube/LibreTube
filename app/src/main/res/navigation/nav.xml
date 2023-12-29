@@ -33,17 +33,43 @@
         android:id="@+id/searchResultFragment"
         android:name="com.github.libretube.ui.fragments.SearchResultFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search_result" />
+        tools:layout="@layout/fragment_search_result">
+        <argument
+            android:name="query"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
     <fragment
         android:id="@+id/channelFragment"
         android:name="com.github.libretube.ui.fragments.ChannelFragment"
         android:label="channel"
-        tools:layout="@layout/fragment_channel" />
+        tools:layout="@layout/fragment_channel" >
+        <argument
+            android:name="channelId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="channelName"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
     <fragment
         android:id="@+id/playlistFragment"
         android:name="com.github.libretube.ui.fragments.PlaylistFragment"
         android:label="fragment_playlist"
-        tools:layout="@layout/fragment_playlist" />
+        tools:layout="@layout/fragment_playlist">
+        <argument
+            android:name="playlistId"
+            app:argType="string"
+            app:nullable="false" />
+        <argument
+            android:name="playlistType"
+            app:argType="com.github.libretube.enums.PlaylistType"
+            app:nullable="false"
+            android:defaultValue="PUBLIC" />
+    </fragment>
     <fragment
         android:id="@+id/watchHistoryFragment"
         android:name="com.github.libretube.ui.fragments.WatchHistoryFragment"
@@ -54,4 +80,11 @@
         android:name="com.github.libretube.ui.fragments.DownloadsFragment"
         android:label="@string/downloads"
         tools:layout="@layout/fragment_downloads" />
+
+    <action android:id="@+id/openChannel"
+        app:destination="@id/channelFragment" />
+    <action android:id="@+id/openPlaylist"
+        app:destination="@id/playlistFragment" />
+    <action android:id="@+id/showSearchResults"
+        app:destination="@id/searchResultFragment" />
 </navigation>

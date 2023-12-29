@@ -46,7 +46,7 @@
     <string name="error">Щось пішло не так.</string>
     <string name="notgmail">Це для акаунту Piped</string>
     <string name="defres">Роздільність відео</string>
-    <string name="grid">Стовпці сітки</string>
+    <string name="grid">Стовпці (у вертикальному режимі)</string>
     <string name="deletePlaylist">Видалити добірку</string>
     <string name="areYouSure">Видалити цю добірку\?</string>
     <string name="createPlaylist">Створити добірку</string>
@@ -401,7 +401,7 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d відео</string>
     <string name="subscriberAndVideoCounts">%1$s підписників • %2$d відео</string>
     <string name="disable_proxy">Вимкнути транспортний проксі</string>
-    <string name="disable_proxy_summary">Завантажуйте відео й зображення безпосередньо з серверів YouTube. Увімкніть цю опцію, якщо ви все одно використовуєте VPN!</string>
+    <string name="disable_proxy_summary">Завантажувати відео та зображення безпосередньо з серверів YouTube. Увімкніть цю опцію лише якщо завжди використовуєте VPN</string>
     <string name="auto_fullscreen_shorts">Автоматичний повноекранний режим для коротких відео</string>
     <string name="new_group">Нова</string>
     <string name="edit_group">Редагувати групу</string>
@@ -539,4 +539,8 @@
     <string name="start_sleep_timer">Запустити таймер сну</string>
     <string name="add_to_group">Додати до групи</string>
     <string name="uptime">Час онлайн %.2f%%</string>
+    <string name="rich_caption_rendering">Просунуті субтитри</string>
+    <string name="rich_caption_rendering_summary">Малювати субтитри вебрушієм для підтримки розширених можливостей і налаштувань</string>
+    <string name="grid_landscape">Стовпці (у горизонтальному режимі)</string>
+    <string name="copy_tooltip">Копіювати</string>
 </resources>

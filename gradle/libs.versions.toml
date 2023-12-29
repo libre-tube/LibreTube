@@ -38,6 +38,7 @@ kotlin-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", v
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation" }
 androidx-navigation-ui = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation" }
+androidx-navigation-safeargs = { group = "androidx.navigation", name = "navigation-safe-args-gradle-plugin", version.ref = "navigation" }
 androidx-legacySupport = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacySupport" }
 androidx-preference = { group = "androidx.preference", name = "preference-ktx", version.ref = "preference" }
 androidx-test-junit = { group = "androidx.test.ext", name = "junit", version.ref = "extJunit" }

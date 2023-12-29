@@ -48,6 +48,7 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.hls.HlsMediaSource
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.libretube.NavDirections
 import com.github.libretube.R
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.JsonHelper
@@ -97,6 +98,7 @@ import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.extensions.animateDown
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.listeners.SeekbarPreviewListener
@@ -463,12 +465,18 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
         })
 
-        binding.playerMotionLayout.addSwipeUpListener {
-            if (this::streams.isInitialized && PlayerHelper.fullscreenGesturesEnabled) {
-                disableController()
-                setFullscreen()
+        binding.playerMotionLayout
+            .addSwipeUpListener {
+                if (this::streams.isInitialized && PlayerHelper.fullscreenGesturesEnabled) {
+                    disableController()
+                    setFullscreen()
+                }
             }
-        }
+            .addSwipeDownListener {
+                if (viewModel.isMiniPlayerVisible.value == true) {
+                    closeMiniPlayer()
+                }
+            }
 
         binding.playerMotionLayout.progress = 1F
         binding.playerMotionLayout.transitionToStart()
@@ -477,6 +485,16 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         if (PlayerHelper.pipEnabled) {
             PictureInPictureCompat.setPictureInPictureParams(activity, pipParams)
         }
+    }
+
+    private fun closeMiniPlayer() {
+        binding
+            .playerMotionLayout
+            .animateDown(
+                duration = 300L,
+                dy = 500F,
+                onEnd = ::killPlayerFragment,
+            )
     }
 
     private fun onManualPlayerClose() {
@@ -629,8 +647,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             if (!this::streams.isInitialized) return@setOnClickListener
 
             val activity = view?.context as MainActivity
-            val bundle = bundleOf(IntentData.channelId to streams.uploaderUrl)
-            activity.navController.navigate(R.id.channelFragment, bundle)
+            activity.navController.navigate(NavDirections.openChannel(streams.uploaderUrl))
             activity.binding.mainMotionLayout.transitionToEnd()
             binding.playerMotionLayout.transitionToEnd()
         }
