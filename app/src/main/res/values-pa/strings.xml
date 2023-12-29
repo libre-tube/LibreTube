@@ -399,7 +399,7 @@
     <string name="fullscreen_gestures">ਫੁਲਸਕ੍ਰੀਨ ਸੰਕੇਤਾਂ ਵਿੱਚ ਦਾਖਲ/ਬਾਹਰ ਜਾਓ</string>
     <string name="go_to_video">ਵੀਡੀਓ \'ਤੇ ਜਾਓ</string>
     <string name="disable_proxy">ਪਾਈਪਡ ਪਰੌਕਸੀ ਖਾਰਿਜ ਕਰੋ</string>
-    <string name="disable_proxy_summary">YouTube ਦੇ ਸਰਵਰਾਂ ਤੋਂ ਸਿੱਧੇ ਵੀਡੀਓ ਅਤੇ ਚਿੱਤਰ ਲੋਡ ਕਰੋ। ਜੇਕਰ ਤੁਸੀਂ ਫਿਰ ਵੀ VPN ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋ ਤਾਂ ਹੀ ਵਿਕਲਪ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ!</string>
+    <string name="disable_proxy_summary">YouTube ਦੇ ਸਰਵਰਾਂ ਤੋਂ ਸਿੱਧੇ ਵੀਡੀਓ ਅਤੇ ਚਿੱਤਰ ਲੋਡ ਕਰੋ। ਜੇਕਰ ਤੁਸੀਂ ਹਮੇਸ਼ਾਂ VPN ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋ ਤਾਂ ਹੀ ਵਿਕਲਪ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ!</string>
     <string name="new_group">ਨਵਾਂ</string>
     <string name="group_name">ਗਰੁੱਪ ਨਾਮ</string>
     <plurals name="channel_new_streams">
