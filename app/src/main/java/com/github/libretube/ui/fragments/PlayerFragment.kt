@@ -1678,7 +1678,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     private fun enableController() {
         binding.player.useController = true
-        binding.player.showController()
     }
 
     private fun disableController() {
