@@ -2,12 +2,8 @@
 
 TEXT="$1"
 
-# the link containing the full commit history
-FULLCHANGELOG=$(echo "$TEXT{@}" | tail -n 1)
-NEWCONTRIBUTORS=$(echo "$TEXT{@}" | grep 'first contribution')
-
 # remove everything related to weblate and dependencies
-TEXT=$(printf "${TEXT[@]}" | sed -e 's/.*Weblate.*//g' -e 's/.*dependency.*//g' -e 's/^\*\*Full//g' -e 's/.*first contribution.*//g' -e 's/##.*//g')
+TEXT=$(printf "${TEXT[@]}" | sed -e 's/.*Translations.*//g' -e 's/.*(fix|chore)\(deps\).*//g')
 
 # go through all the lines inside the file
 readarray -t y <<< "${TEXT[@]}"
@@ -21,15 +17,18 @@ trim() {
     printf '%s' "$var"
 }
 
-# Print all the found and categorized changes
-create_changelog() {
-  trim "$(echo "$TEXT" | sort)"
-  [ "$NEWCONTRIBUTORS" ] && echo -e "\n\n## New contributors\n$NEWCONTRIBUTORS"
-  echo -e "\n\n$FULLCHANGELOG"
-}
+TRIMMED=`trim "$(echo "$TEXT" | sort)"`
 
-# generate a new changelog
-CHANGELOG=$(create_changelog)
+CHANGELOG=()
+CURRENTSECTION=""
+while IFS= read -r line; do
+    SECTION=$(echo "$line" | cut -d ":" -f 1 | tr -d "*" | tr -d " " | sed "s/(.*)//g")
+    if [ "$SECTION" != "$CURRENTSECTION" ]; then
+        CHANGELOG+="\n## ${SECTION^}\n"
+        CURRENTSECTION="$SECTION"
+    fi
+    CHANGELOG+="$line\n"
+done <<< "$TRIMMED"
 
 # Output the generated changelog
-echo "$CHANGELOG"
+echo -e "$CHANGELOG"
