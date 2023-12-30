@@ -448,7 +448,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     viewModel.isMiniPlayerVisible.value = false
                     // re-enable captions
                     updateCurrentSubtitle(currentSubtitle)
-                    enableController()
+                    binding.player.useController = true
                     commentsViewModel.setCommentSheetExpand(true)
                     mainMotionLayout.progress = 0F
                     changeOrientationMode()
@@ -468,7 +468,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         binding.playerMotionLayout
             .addSwipeUpListener {
                 if (this::streams.isInitialized && PlayerHelper.fullscreenGesturesEnabled) {
-                    disableController()
+                    binding.player.hideController()
                     setFullscreen()
                 }
             }
@@ -536,7 +536,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // hide fullscreen button if autorotation enabled
         playerBinding.fullscreen.setOnClickListener {
             // hide player controller
-            disableController()
+            binding.player.hideController()
             if (viewModel.isFullscreen.value == false) {
                 // go to fullscreen mode
                 setFullscreen()
@@ -1541,7 +1541,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             openOrCloseFullscreenDialog(true)
         } else {
-            enableController()
+            binding.player.useController = true
 
             // close button got clicked in PiP mode
             // pause the video and keep the app alive
@@ -1674,10 +1674,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         } else {
             checkForNecessaryOrientationRestart()
         }
-    }
-
-    private fun enableController() {
-        binding.player.useController = true
     }
 
     private fun disableController() {
