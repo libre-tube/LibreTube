@@ -189,6 +189,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private var scrubbingTimeBar = false
     private var chaptersBottomSheet: ChaptersBottomSheet? = null
 
+    // True when the video was closed through the close button on PiP mode
+    private var closedVideo = false
+
     /**
      * The orientation of the `fragment_player.xml` that's currently used
      * This is needed in order to figure out if the current layout is the landscape one or not.
@@ -431,8 +434,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 if (_binding == null) return
 
                 mainMotionLayout.progress = abs(progress)
-                binding.player.hideController()
-                binding.player.useController = false
+                disableController()
                 commentsViewModel.setCommentSheetExpand(false)
                 chaptersBottomSheet?.dismiss()
                 transitionEndId = endId
@@ -446,7 +448,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     viewModel.isMiniPlayerVisible.value = false
                     // re-enable captions
                     updateCurrentSubtitle(currentSubtitle)
-                    binding.player.useController = true
+                    enableController()
                     commentsViewModel.setCommentSheetExpand(true)
                     mainMotionLayout.progress = 0F
                     changeOrientationMode()
@@ -454,7 +456,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     viewModel.isMiniPlayerVisible.value = true
                     // disable captions temporarily
                     updateCurrentSubtitle(null)
-                    binding.player.useController = false
+                    disableController()
                     commentsViewModel.setCommentSheetExpand(null)
                     binding.sbSkipBtn.isGone = true
                     mainMotionLayout.progress = 1F
@@ -466,7 +468,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         binding.playerMotionLayout
             .addSwipeUpListener {
                 if (this::streams.isInitialized && PlayerHelper.fullscreenGesturesEnabled) {
-                    binding.player.hideController()
+                    disableController()
                     setFullscreen()
                 }
             }
@@ -534,7 +536,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // hide fullscreen button if autorotation enabled
         playerBinding.fullscreen.setOnClickListener {
             // hide player controller
-            binding.player.hideController()
+            disableController()
             if (viewModel.isFullscreen.value == false) {
                 // go to fullscreen mode
                 setFullscreen()
@@ -774,6 +776,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     override fun onResume() {
         super.onResume()
 
+        if (closedVideo) {
+            closedVideo = false
+            nowPlayingNotification.refreshNotification()
+        }
+
         // re-enable and load video stream
         if (this::trackSelector.isInitialized) {
             trackSelector.updateParameters {
@@ -804,6 +811,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             context?.unregisterReceiver(broadcastReceiver)
         }
 
+        _binding = null
+
+        stopVideoPlay()
+    }
+
+    private fun stopVideoPlay() {
         try {
             saveWatchPosition()
 
@@ -813,8 +826,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
-        _binding = null
     }
 
     // save the watch position if video isn't finished and option enabled
@@ -1066,8 +1077,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private fun showAutoPlayCountdown() {
         if (!PlayingQueue.hasNext()) return
 
-        binding.player.useController = false
-        binding.player.hideController()
+        disableController()
         binding.autoplayCountdown.setHideSelfListener {
             // could fail if the video already got closed before
             runCatching {
@@ -1525,19 +1535,21 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode)
         if (isInPictureInPictureMode) {
             // hide and disable exoPlayer controls
-            binding.player.hideController()
-            binding.player.useController = false
+            disableController()
 
             updateCurrentSubtitle(null)
 
             openOrCloseFullscreenDialog(true)
         } else {
+            enableController()
+
             // close button got clicked in PiP mode
             // pause the video and keep the app alive
-            if (lifecycle.currentState == Lifecycle.State.CREATED) exoPlayer.pause()
-
-            // enable exoPlayer controls again
-            binding.player.useController = true
+            if (lifecycle.currentState == Lifecycle.State.CREATED) {
+                exoPlayer.pause()
+                nowPlayingNotification.cancelNotification()
+                closedVideo = true
+            }
 
             updateCurrentSubtitle(currentSubtitle)
 
@@ -1605,6 +1617,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private fun killPlayerFragment() {
+        stopVideoPlay()
         viewModel.isFullscreen.value = false
         viewModel.isMiniPlayerVisible.value = false
 
@@ -1617,8 +1630,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         mainActivity.supportFragmentManager.commit {
             remove(this@PlayerFragment)
         }
-
-        onDestroy()
     }
 
     /**
@@ -1663,5 +1674,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         } else {
             checkForNecessaryOrientationRestart()
         }
+    }
+
+    private fun enableController() {
+        binding.player.useController = true
+    }
+
+    private fun disableController() {
+        binding.player.useController = false
+        binding.player.hideController()
     }
 }
