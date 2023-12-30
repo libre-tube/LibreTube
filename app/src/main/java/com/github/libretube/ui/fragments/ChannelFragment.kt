@@ -14,12 +14,12 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.ChannelTab
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentChannelBinding
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ImageHelper
@@ -38,7 +38,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
-import kotlin.math.ceil
 
 class ChannelFragment : DynamicLayoutManagerFragment() {
     private var _binding: FragmentChannelBinding? = null
@@ -49,7 +48,6 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
     private var channelName: String? = null
     private var channelAdapter: VideosAdapter? = null
     private var isLoading = true
-    private var isSubscribed: Boolean? = false
 
     private val possibleTabs = arrayOf(
         ChannelTabs.Shorts,
@@ -79,7 +77,7 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
     override fun setLayoutManagers(gridItems: Int) {
         _binding?.channelRecView?.layoutManager = GridLayoutManager(
             context,
-            ceil((gridItems.toDouble() / 2)).toInt()
+            gridItems.ceilHalf()
         )
     }
 
@@ -169,8 +167,6 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
         val shareData = ShareData(currentChannel = response.name)
 
         val channelId = channelId ?: return@launch
-        // fetch and update the subscription status
-        isSubscribed = SubscriptionHelper.isSubscribed(channelId) ?: false
 
         binding.channelSubscribe.setupSubscriptionButton(
             channelId,
