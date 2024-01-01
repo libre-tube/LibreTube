@@ -10,6 +10,7 @@
         android:layout_marginVertical="5dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="55dp"
+        android:background="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearance="@style/CircleImageView" />

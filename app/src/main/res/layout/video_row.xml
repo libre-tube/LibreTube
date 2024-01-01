@@ -111,6 +111,7 @@
 
             <ImageView
                 android:id="@+id/channel_image"
+                android:background="@android:color/white"
                 android:layout_width="27dp"
                 android:layout_height="27dp" />
 

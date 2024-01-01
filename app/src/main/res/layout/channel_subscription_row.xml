@@ -14,6 +14,7 @@
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginStart="8dp"
+        android:background="@android:color/white"
         app:shapeAppearance="@style/CircleImageView" />
 
     <TextView

@@ -86,6 +86,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginEnd="4dp"
+                    android:background="@android:color/white"
                     app:shapeAppearance="@style/CircleImageView" />
 
                 <LinearLayout

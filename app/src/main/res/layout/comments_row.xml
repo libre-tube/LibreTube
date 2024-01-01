@@ -21,7 +21,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginEnd="16dp"
-            android:background="@android:color/darker_gray"
+            android:background="@android:color/white"
             app:shapeAppearance="@style/CircleImageView"
             tools:src="@mipmap/ic_launcher" />
 
@@ -122,6 +122,7 @@
                     android:layout_height="14dp"
                     android:layout_marginEnd="8dp"
                     android:visibility="gone"
+                    android:background="@android:color/white"
                     tools:visibility="gone"
                     app:shapeAppearance="@style/CircleImageView" />
 
