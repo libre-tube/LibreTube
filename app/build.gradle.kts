@@ -5,6 +5,7 @@ plugins {
     id("kotlinx-serialization")
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
+    alias(libs.plugins.baselineprofile)
 }
 
 android {
@@ -135,4 +136,8 @@ dependencies {
     /* Room */
     ksp(libs.room.compiler)
     implementation(libs.room)
+
+    /* Baseline profile generation */
+    implementation(libs.androidx.profileinstaller)
+    "baselineProfile"(project(":baselineprofile"))
 }
