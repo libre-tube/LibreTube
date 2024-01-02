@@ -57,6 +57,7 @@ android {
         jvmTarget = "17"
     }
 
+    // Comment this block if issues occur while generating the baseline profile
     splits {
         abi {
             isEnable = true
