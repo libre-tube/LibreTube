@@ -24,7 +24,7 @@
     <string name="error">Ocorreu um erro.</string>
     <string name="notgmail">Apenas com uma conta Piped</string>
     <string name="defres">Resolução dos vídeos</string>
-    <string name="grid">Colunas da grelha (retrato)</string>
+    <string name="grid">Colunas da grelha (vertical)</string>
     <string name="emptyList">Nada para ver aqui.</string>
     <string name="deletePlaylist">Eliminar lista de reprodução</string>
     <string name="areYouSure">Tem a certeza de que deseja eliminar esta lista\?</string>
@@ -146,7 +146,7 @@
     <string name="related_streams_summary">Mostrar conteúdo semelhante ao dos vídeos visualizados</string>
     <string name="related_streams">Conteúdo relacionado</string>
     <string name="watch_history">Histórico de visualizações</string>
-    <string name="watch_positions">Lembrar posição</string>
+    <string name="watch_positions">Memorizar posição</string>
     <string name="auth_instance">Instância de autenticação</string>
     <string name="auth_instance_summary">Utilize outra instância para invocações autenticadas</string>
     <string name="auth_instances">Escolha uma instância</string>
@@ -245,7 +245,7 @@
     <string name="repeat_mode_current">Atual</string>
     <string name="backup_restore">Backup e restauro</string>
     <string name="backup">Backup</string>
-    <string name="picture_in_picture">Imagem-em-imagem</string>
+    <string name="picture_in_picture">Imagem em imagem (PIP)</string>
     <string name="maximum_image_cache">Máximo de imagens em cache</string>
     <string name="copied_to_clipboard">Copiado para a área de transferência</string>
     <string name="open_copied">Abrir</string>
@@ -305,7 +305,7 @@
     <string name="alternative_player_layout">Esquema alternativo de reprodução</string>
     <string name="audio_track">Faixa de áudio</string>
     <string name="hls_instead_of_dash">Usar HLS</string>
-    <string name="hls_instead_of_dash_summary">Usar HLS em vez de DASH (será mais lento, não recomendado)</string>
+    <string name="hls_instead_of_dash_summary">Usar HLS em vez de DASH (mais lento, não recomendado)</string>
     <string name="auto_quality">Automático</string>
     <string name="limit_to_runtime">Limite de tempo para execução</string>
     <string name="trends">Tendências</string>
@@ -484,7 +484,7 @@
     <string name="tooltip_minimize">Minimizar</string>
     <string name="tooltip_play">Reproduzir</string>
     <string name="tooltip_edit_groups">Editar grupos</string>
-    <string name="tooltip_fullscreen">Ecrã inteiro</string>
+    <string name="tooltip_fullscreen">Ecrã completo</string>
     <string name="tooltip_close">Fechar</string>
     <string name="tooltip_filter">Filtrar</string>
     <string name="player_channel_name">Serviço reprodutor</string>
@@ -513,7 +513,7 @@
     <string name="donate">Doar</string>
     <string name="no_fullscreen_resolution">Resolução sem ecrã completo</string>
     <string name="music_artists">Artistas do YT Music</string>
-    <string name="same_as_fullscreen">O mesmo que em ecrã total</string>
+    <string name="same_as_fullscreen">Igual a ecrã completo</string>
     <string name="playback_during_call_summary">Tenha em atenção que isto implica que a aplicação não posa gerir o foco de áudio</string>
     <string name="playback_during_call">Continuar reprodução durante uma chamada</string>
     <string name="autoplay_playlists_summary">Reproduzir o vídeo seguinte da lista de reprodução, independentemente do modo de reprodução automática</string>
@@ -537,7 +537,7 @@
     <string name="no_segments_found">Ainda não existem segmentos para este vídeo.</string>
     <string name="add_to_group">Adicionar ao grupo</string>
     <string name="uptime">%.2f%% tempo de atividade</string>
-    <string name="grid_landscape">Colunas de grade (paisagem)</string>
+    <string name="grid_landscape">Colunas da grelha (horizontal)</string>
     <string name="rich_caption_rendering">Legendas melhoradas</string>
     <string name="rich_caption_rendering_summary">Processar legendas para um experiência melhorada e personalizada</string>
     <string name="copy_tooltip">Copiar</string>
