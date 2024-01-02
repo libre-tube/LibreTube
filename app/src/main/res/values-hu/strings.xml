@@ -39,7 +39,7 @@
     <string name="importsuccess">Sikeres feliratkozás</string>
     <string name="error">Valami gond van.</string>
     <string name="region">Régió</string>
-    <string name="grid">Rács oszlopok</string>
+    <string name="grid">Rács oszlopok (álló)</string>
     <string name="notgmail">Ez a Piped fiók számára van</string>
     <string name="playlistName">Lejátszási lista neve</string>
     <string name="fail">Sikertelen :(</string>
@@ -387,7 +387,7 @@
     <string name="playing_next">Következő lejátszása: %1$s múlva</string>
     <string name="lbry_hls_summary">LBRY HLS használata a streameléshez, ha elérhető</string>
     <string name="disable_proxy">Piped proxy letiltása</string>
-    <string name="disable_proxy_summary">Videók és képek betöltése közvetlenül a YouTube szervereiről. Csak akkor engedélyezze ezt az opciót, ha egyébként is VPN-t használ!</string>
+    <string name="disable_proxy_summary">Videók és képek betöltése közvetlenül a YouTube szervereiről. Csak akkor engedélyezze ezt az opciót, ha mindig VPN-t használ</string>
     <string name="auto_fullscreen_shorts">Automatikus teljes képernyőre váltás rövid videóknál</string>
     <string name="trending_views">%1$s • %2$s megtekintés • %3$s</string>
     <string name="normal_views">%1$s megtekintés %2$s</string>
@@ -524,4 +524,17 @@
     <string name="downvote">Le</string>
     <string name="repeat_mode_all">Összes ismétlése</string>
     <string name="successfully_removed_from_playlist">\"%1$s\" sikeresen eltávolítva a lejátszási listáról.</string>
+    <string name="add_to_group">Hozzáadás csoporthoz</string>
+    <string name="time_in_minutes">Idő percben</string>
+    <string name="invalid_input">Érvénytelen bemenet</string>
+    <string name="disable_sleep_timer">Elalvási időzítő kikapcsolása</string>
+    <string name="rich_caption_rendering">Gazdag felirat megjelenítése</string>
+    <string name="watched">Megtekintett</string>
+    <string name="rich_caption_rendering_summary">Webes feliratok megjelenítése, részletesebb és testreszabhatóbb élmény érdekében</string>
+    <string name="uptime">%.2f%% elérhetőség</string>
+    <string name="start_sleep_timer">Elalvási időzítő indítása</string>
+    <string name="grid_landscape">Rács oszlopok (fekvő)</string>
+    <string name="finished">Befejezett</string>
+    <string name="no_segments_found">Még nincsenek szakaszok ehhez a videóhoz.</string>
+    <string name="copy_tooltip">Másolás</string>
 </resources>
