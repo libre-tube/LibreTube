@@ -57,7 +57,7 @@
     <string name="empty">ユーザー名とパスワードを入力してください。</string>
     <string name="import_from_yt">登録チャンネルをインポート</string>
     <string name="defres">画質</string>
-    <string name="grid">一覧での1行あたりの表示数 (横画面)</string>
+    <string name="grid">一覧での1行あたりの表示数 (縦画面)</string>
     <string name="deletePlaylist">再生リストを削除</string>
     <string name="areYouSure">この再生リストを削除しますか？</string>
     <string name="about">このアプリについて</string>
@@ -394,7 +394,7 @@
     <string name="subscriberAndVideoCounts">登録者数 %1$s人 • %2$d 本の動画</string>
     <string name="replies">返信</string>
     <string name="disable_proxy">Pipedのプロキシを無効化</string>
-    <string name="disable_proxy_summary">動画や画像を YouTube のサーバーから直接取得します。VPN を常時使用する場合にのみご利用ください！</string>
+    <string name="disable_proxy_summary">動画や画像を YouTube のサーバーから直接取得します。VPN を常時使用する際にのみ使用します</string>
     <string name="auto_fullscreen_shorts">ショート動画を自動で全画面表示</string>
     <string name="sleep_timer">スリープタイマー</string>
     <string name="fullscreen_gestures">ジェスチャで全画面を開始/終了</string>
@@ -529,8 +529,8 @@
     <string name="disable_sleep_timer">スリープタイマー無効</string>
     <string name="start_sleep_timer">スリープタイマー開始</string>
     <string name="add_to_group">グループに追加</string>
-    <string name="uptime">%.2f%% 稼働</string>
-    <string name="grid_landscape">一覧での1行あたりの表示数 (縦画面)</string>
+    <string name="uptime">%.2f%%稼働</string>
+    <string name="grid_landscape">一覧での1行あたりの表示数 (横画面)</string>
     <string name="rich_caption_rendering">字幕の描画を高品質にする</string>
     <string name="rich_caption_rendering_summary">より高品質にウェブ字幕を描画</string>
     <string name="copy_tooltip">コピー</string>

@@ -389,7 +389,7 @@
     <string name="category_intro_summary">Интервал без действително съдържание. Може да е пауза, статичен кадър, повтаряща се анимация. Не трябва да се използва за преходи, съдържащи информация</string>
     <string name="concurrent_downloads">Максимални едновременни изтегляния</string>
     <string name="player_autoplay">Автоматично изпълнение</string>
-    <string name="disable_proxy_summary">Зареждайте видеоклипове и изображения директно от сървърите на YouTube. Активирайте опцията само ако все пак използвате VPN!</string>
+    <string name="disable_proxy_summary">Зареждайте видеоклипове и изображения директно от сървърите на YouTube. Активирайте опцията само ако все пак използвате VPN</string>
     <string name="related_streams_summary">Показвай подобни потоци заедно с това, което гледате</string>
     <string name="empty_instance">Попълнете името и URL адреса на API.</string>
     <string name="sb_custom_colors_summary">Превключва персонализирани цветови сегменти за сегменти на SponsorBlock</string>
@@ -431,7 +431,7 @@
         <item quantity="other">%d месеци</item>
     </plurals>
     <string name="replies">Отговори</string>
-    <string name="grid">Решетъчни колони</string>
+    <string name="grid">Решетъчни колони (портрет)</string>
     <string name="new_group">Нов</string>
     <string name="autoplay_countdown">Автоматично отброяване</string>
     <string name="choose_instance_long">Моля, изберете Piped инстанция, която да използвате отдолу. Инстанцията Piped ще действа като посредник между вас и YouTube. Тези инстанции се намират на различни физически местоположения - обозначени с техните флагове на държавата. Инстанциите, които са физически по-близо до вас, вероятно са по-бързи от инстанциите, които не са. Можете да промените инстанцията, който използвате в настройките по всяко време.</string>
@@ -523,4 +523,18 @@
     <string name="backup_restore_summary">Импортиране и експортиране на абонаменти, плейлисти,…</string>
     <string name="fireIcon">Моден огън</string>
     <string name="repeat_mode">Режим на повторение</string>
+    <string name="add_to_group">Добавяне към група</string>
+    <string name="time_in_minutes">Време в минути</string>
+    <string name="invalid_input">Невалиден вход</string>
+    <string name="disable_sleep_timer">Деактивирайте таймера за заспиване</string>
+    <string name="rich_caption_rendering">Обогатено изобразяване на надписи</string>
+    <string name="watched">Гледано</string>
+    <string name="rich_caption_rendering_summary">Изобразете уеб надписи за по-богато и персонализирано изживяване</string>
+    <string name="uptime">%.2f%% време на работа</string>
+    <string name="start_sleep_timer">Стартирайте таймера за заспиване</string>
+    <string name="grid_landscape">Решетачни колони (пейзаж)</string>
+    <string name="finished">Готово</string>
+    <string name="no_segments_found">Все още няма сегменти за този видеоклип.</string>
+    <string name="successfully_removed_from_playlist">Успешно премахване \"%1$s\" от плейлиста.</string>
+    <string name="copy_tooltip">Копирай</string>
 </resources>

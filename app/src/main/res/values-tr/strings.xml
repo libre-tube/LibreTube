@@ -278,7 +278,7 @@
     <string name="play_next">Bundan sonra oynat</string>
     <string name="navigation_bar">Gezinme çubuğu</string>
     <string name="change_region">Trendler mevcut bölge için kullanılamıyor gibi görünüyor. Lütfen ayarlarda başka bir tane seçin.</string>
-    <string name="playback_pitch">Ses yüksekliği</string>
+    <string name="playback_pitch">Ses perdesi</string>
     <string name="playlists_order">Oynatma listesi sırası</string>
     <string name="playlistNameReversed">Oynatma listesi adı (ters)</string>
     <string name="filename">Dosya adı</string>
@@ -302,7 +302,7 @@
     <string name="layout">Düzen</string>
     <string name="alternative_player_layout">Alternatif oynatıcı düzeni</string>
     <string name="navbar_order">Sıra</string>
-    <string name="audio_track">Müzik parçası</string>
+    <string name="audio_track">Ses parçası</string>
     <string name="auto_quality">Oto</string>
     <string name="hls_instead_of_dash">HLS\'yi kullan</string>
     <string name="hls_instead_of_dash_summary">DASH yerine HLS kullan (daha yavaş olacaktır, önerilmez)</string>
@@ -398,7 +398,7 @@
     <string name="lbry_hls_summary">Mevcut ise video yayını için LBRY HLS kullan</string>
     <string name="disable_proxy">Piped proxy\'yi devre dışı bırak</string>
     <string name="auto_fullscreen_shorts">Kısa videolar için otomatik tam ekran</string>
-    <string name="disable_proxy_summary">Videoları ve resimleri doğrudan YouTube sunucularından yükleyin. Bu seçeneği yalnızca yine de bir VPN kullanıyorsanız etkinleştirin!</string>
+    <string name="disable_proxy_summary">Videoları ve resimleri doğrudan YouTube sunucularından yükleyin. Bu seçeneği yalnızca sürekli bir VPN kullanıyorsanız etkinleştirin.</string>
     <string name="group_name">Grup adı</string>
     <string name="channel_groups">Kanal grupları</string>
     <string name="edit_group">Grubu düzenle</string>
@@ -467,7 +467,7 @@
     <string name="visibility_unlisted">Listelenmemiş</string>
     <string name="unknown_audio_track_type">Bilinmeyen ses parçası türü</string>
     <string name="descriptive_audio_track">açıklayıcı</string>
-    <string name="default_or_unknown_audio_track">varsayılan veya bilinmeyen</string>
+    <string name="default_or_unknown_audio_track">Varsayılan veya bilinmeyen</string>
     <string name="unknown_or_no_audio">bilinmeyen veya ses yok</string>
     <string name="group_name_error_exists">Lütfen benzersiz bir isim seçin</string>
     <string name="resolution_limited">sınırlı</string>
@@ -534,4 +534,7 @@
     <string name="add_to_group">Gruba ekle</string>
     <string name="uptime">%%%.2f çalışma zamanı</string>
     <string name="grid_landscape">Sütun sayısı (yatay)</string>
+    <string name="rich_caption_rendering">Zengin altyazı oluşturma</string>
+    <string name="rich_caption_rendering_summary">Daha zengin ve kişiselleştirilmiş bir deneyim için web altyazılarını oluşturun</string>
+    <string name="copy_tooltip">Kopyala</string>
 </resources>

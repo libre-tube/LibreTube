@@ -27,7 +27,7 @@
     <string name="server_error">Problem mit ausgewähltem Server. Versuche eine andere Instanz.</string>
     <string name="unknown_error">Netzwerkfehler.</string>
     <string name="error">Etwas ist schiefgelaufen.</string>
-    <string name="notgmail">Dies ist für ein Piped-Konto</string>
+    <string name="notgmail">Von deinem Piped-Konto abmelden</string>
     <string name="defres">Video-Auflösung</string>
     <string name="grid">Spaltenanzahl im Hochformat</string>
     <string name="emptyList">Gähnende Leere.</string>
@@ -207,7 +207,7 @@
     <string name="watch_positions_title">Gespeicherte Wiedergabepositionen</string>
     <string name="gradientIcon">Verspielter Verlauf</string>
     <string name="playingOnBackground">Abspielen im Hintergrund…</string>
-    <string name="playerAudioQuality">Audio Qualität</string>
+    <string name="playerAudioQuality">Audio-Qualität</string>
     <string name="worst_quality">Schlechteste Qualität</string>
     <string name="system_caption_style">Untertitel-Stil des Systems nutzen</string>
     <string name="playerAudioFormat">Audioformat für Player</string>
@@ -512,7 +512,7 @@
     <string name="no_fullscreen_resolution">Auflösung außerhalb des Vollbildmodus</string>
     <string name="same_as_fullscreen">Gleich wie im Vollbild</string>
     <string name="playback_during_call_summary">Bitte beachten, dass die App mit dieser Einstellung keinen Audio-Fokus mehr ändern kann</string>
-    <string name="playback_during_call">Wiedergabe beim Telefonieren fortsetzen</string>
+    <string name="playback_during_call">Beim Telefonieren nicht pausieren</string>
     <string name="autoplay_playlists_summary">Das nächste Video in einer Playlist automatisch abspielen, unabhängig von der Autoplay-Einstellung</string>
     <string name="autoplay_playlists">Automatische Playlist-Wiedergabe</string>
     <string name="remember_playback_speed">Wiedergabegeschwindigkeit merken</string>

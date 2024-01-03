@@ -33,7 +33,7 @@
     <string name="error">କିଛି ଭୁଲ୍ ଘଟିଛି ।</string>
     <string name="notgmail">ଏହା ପାଇପ୍ ଆକାଉଣ୍ଟ ଅଟେ</string>
     <string name="defres">ଭିଡିଓ ର ଆକାର</string>
-    <string name="grid">ଗ୍ରିଡ ସ୍ତମ୍ଭ</string>
+    <string name="grid">ଗ୍ରୀଡ ସ୍ତମ୍ଭ (ପ୍ରତିକୃତି)</string>
     <string name="emptyList">ଏଠାରେ କିଛି ନାହିଁ ।</string>
     <string name="settings">ସେଟିଂ</string>
     <string name="location">ଜାଗା</string>
@@ -365,7 +365,7 @@
     <string name="unknown">ଅଜ୍ଞାତ</string>
     <string name="resume">ପୁଣି ଆରମ୍ଭ କରନ୍ତୁ</string>
     <string name="audio_only_mode">କେବଳ ଅଡିଓ ମୋଡ୍</string>
-    <string name="audio_only_mode_summary">LibreTube କୁ ଏକ ମ୍ୟୁଜିକ୍ ପ୍ଲେୟାରରେ ପରିଣତ କର ।</string>
+    <string name="audio_only_mode_summary">LibreTube କୁ ଏକ ମ୍ୟୁଜିକ୍ ପ୍ଲେୟାରରେ ପରିଣତ କର</string>
     <string name="sleep_timer">ଶୋଇବା ସମୟ</string>
     <string name="skip_silence">ନୀରବତା ଛାଡିଦିଅ</string>
     <string name="help">ସାହାଯ୍ୟ</string>
@@ -397,7 +397,7 @@
     <string name="subscriberAndVideoCounts">%1$s ଗ୍ରାହକ • %2$d ଭିଡିଓ</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d ଭିଡିଓ</string>
     <string name="disable_proxy">ପାଇପ୍ ପ୍ରକ୍ସି ଅକ୍ଷମ କରନ୍ତୁ</string>
-    <string name="disable_proxy_summary">ସିଧାସଳଖ ୟୁଟ୍ୟୁବ୍ ସର୍ଭରରୁ ଭିଡିଓ ଏବଂ ପ୍ରତିଛବି ଲୋଡ୍ କରନ୍ତୁ । ଯଦି ଆପଣ ଯେକୌଣସି ପ୍ରକାରେ ଏକ VPN ବ୍ୟବହାର କରନ୍ତି ତେବେ କେବଳ ଏହି ବିକଳ୍ପକୁ ସକ୍ଷମ କରନ୍ତୁ!</string>
+    <string name="disable_proxy_summary">ୟୁଟ୍ୟୁବ ସର୍ଭରରୁ ସିଧାସଳଖ ଭିଡିଓ ଏବଂ ପ୍ରତିଛବିଗୁଡ଼ିକୁ ଧାରଣ କରନ୍ତୁ । ଯଦି ଆପଣ ସର୍ବଦା VPN ବ୍ୟବହାର କରନ୍ତି ତେବେ କେବଳ ବିକଳ୍ପକୁ ସକ୍ରିୟ କରନ୍ତୁ</string>
     <string name="auto_fullscreen_shorts">ଛୋଟ ଭିଡିଓଗୁଡ଼ିକରେ ଅଟୋ ଫୁଲ୍ ସ୍କ୍ରିନ୍</string>
     <string name="new_group">ନୂତନ</string>
     <string name="group_name">ଗୋଷ୍ଠୀ ନାମ</string>
@@ -532,4 +532,10 @@
     <string name="bottom_reached">ତଳ ପାଖରେ ପହଞ୍ଚିଲା!</string>
     <string name="finished">ସମାପ୍ତ</string>
     <string name="no_segments_found">ଏହି ଭିଡିଓ ପାଇଁ ଏପର୍ଯ୍ୟନ୍ତ କୌଣସି ବିଭାଗ ନାହିଁ ।</string>
+    <string name="add_to_group">ସମୂହରେ ଯୋଗ କରନ୍ତୁ</string>
+    <string name="rich_caption_rendering">ସମୃଦ୍ଧ ଶୀର୍ଷକ ଚିତ୍ରଣ</string>
+    <string name="rich_caption_rendering_summary">ଅଧିକ ସମୃଦ୍ଧ ଏବଂ ଇଚ୍ଛାମୁତାବକ ଅନୁଭୂତି ପାଇଁ ୱେବ କ୍ୟାପ୍ସନ ପ୍ରଦାନ କରନ୍ତୁ</string>
+    <string name="uptime">%.2f%% ଅପଟାଇମ</string>
+    <string name="grid_landscape">ଗ୍ରୀଡ ସ୍ତମ୍ଭ (ଦୃଶ୍ୟପଟ)</string>
+    <string name="copy_tooltip">ନକଲ କରନ୍ତୁ</string>
 </resources>

@@ -522,7 +522,7 @@
     <string name="no_segments_found">Il non ha ancora segmentos pro iste video.</string>
     <string name="successfully_removed_from_playlist">Removite con successo \"%1$s\" ab le lista de reproduction.</string>
     <string name="failed_fetching_instances">Non poteva recuperar le instantias disponibile.</string>
-    <string name="new_videos_badge_summary">Monstrar un insignia con le quantitate de nove videos si il ha alicun.</string>
+    <string name="new_videos_badge_summary">Monstrar un insignia con le quantitate de nove videos si il ha alicun</string>
     <string name="autoplay_playlists_summary">Reproducer automaticamente le sequente video in le listas de reproduction independentemente del parametro de reproduction automatic seligite</string>
     <string name="push_channel_name">Worker de notificationes</string>
     <string name="sb_custom_colors_summary">Commuta colores personalisate del segmentos de SponsorBlock</string>
