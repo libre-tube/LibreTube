@@ -106,7 +106,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
 
         binding.subRefresh.setOnRefreshListener {
             viewModel.fetchSubscriptions(requireContext())
-            viewModel.fetchFeed(requireContext())
+            viewModel.fetchFeed(requireContext(), true)
         }
 
         binding.sortTV.setOnClickListener {

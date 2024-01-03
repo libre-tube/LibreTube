@@ -23,6 +23,14 @@ object SubscriptionHelper {
     private const val GET_SUBSCRIPTIONS_LIMIT = 100
     private val token get() = PreferenceHelper.getToken()
 
+    private var feed: List<StreamItem> = listOf()
+    private var lastFeedFetchTime: Long = 0
+    /*
+     * Minimum time that has to pass until the feed is refreshed.
+     * Currently set to 5 minutes
+     */
+    private const val UPDATE_TIME_INTERVAL = 5 * 60 * 1000
+
     suspend fun subscribe(channelId: String) {
         if (token.isNotEmpty()) {
             runCatching {
@@ -111,8 +119,14 @@ object SubscriptionHelper {
         }
     }
 
-    suspend fun getFeed(): List<StreamItem> {
-        return if (token.isNotEmpty()) {
+    suspend fun getFeed(forceRefresh: Boolean = false): List<StreamItem> {
+        val currentTime = System.currentTimeMillis()
+        // if we already have a fetched feed, that is fresher than `UPDATE_TIME_INTERVAL` and were not force refreshing,
+        // we just return the feed
+        if (feed.isNotEmpty() && currentTime - lastFeedFetchTime <= UPDATE_TIME_INTERVAL && !forceRefresh)
+            return feed
+
+        feed = if (token.isNotEmpty()) {
             RetrofitInstance.authApi.getFeed(token)
         } else {
             val subscriptions = Database.localSubscriptionDao().getAll().map { it.channelId }
@@ -126,5 +140,7 @@ object SubscriptionHelper {
                 )
             }
         }.deArrow()
+        lastFeedFetchTime = currentTime
+        return feed
     }
 }

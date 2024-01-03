@@ -21,10 +21,10 @@ class SubscriptionsViewModel : ViewModel() {
 
     var subscriptions = MutableLiveData<List<Subscription>?>()
 
-    fun fetchFeed(context: Context) {
+    fun fetchFeed(context: Context, forceRefresh: Boolean = false) {
         viewModelScope.launch(Dispatchers.IO) {
             val videoFeed = try {
-                SubscriptionHelper.getFeed()
+                SubscriptionHelper.getFeed(forceRefresh)
             } catch (e: Exception) {
                 context.toastFromMainDispatcher(R.string.server_error)
                 Log.e(TAG(), e.toString())
