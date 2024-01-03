@@ -214,7 +214,7 @@ class DownloadDialog : DialogFragment() {
             getSel(VIDEO_DOWNLOAD_QUALITY),
             getSel(VIDEO_DOWNLOAD_FORMAT)
         )?.let {
-            binding.audioSpinner.selectedItemPosition = it + 1
+            binding.videoSpinner.selectedItemPosition = it + 1
         }
         getStreamSelection(
             audioStreams,
@@ -225,7 +225,7 @@ class DownloadDialog : DialogFragment() {
         }
 
         subtitles.indexOfFirst { it.code == getSel(SUBTITLE_LANGUAGE) }.takeIf { it != -1 }?.let {
-            binding.audioSpinner.selectedItemPosition = it + 1
+            binding.subtitleSpinner.selectedItemPosition = it + 1
         }
     }
 
