@@ -9,11 +9,7 @@ import android.view.View
  * @param dy The distance to move the view along the Y-axis.
  * @param onEnd An optional lambda function that is invoked when the animation ends.
  */
-fun View.animateDown(
-    duration: Long,
-    dy: Float,
-    onEnd: () -> Unit = { }
-) {
+fun View.animateDown(duration: Long, dy: Float, onEnd: () -> Unit = { }) {
     this
         .animate()
         .withEndAction { onEnd.invoke() }

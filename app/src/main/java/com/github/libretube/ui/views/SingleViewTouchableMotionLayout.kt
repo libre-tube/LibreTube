@@ -64,7 +64,6 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
             distanceX: Float,
             distanceY: Float
         ): Boolean {
-
             if (distanceY < -15F) {
                 swipeDownListener.forEach { it.invoke() }
                 return true

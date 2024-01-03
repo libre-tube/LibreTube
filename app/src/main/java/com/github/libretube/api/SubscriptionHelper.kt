@@ -25,6 +25,7 @@ object SubscriptionHelper {
 
     private var feed: List<StreamItem> = listOf()
     private var lastFeedFetchTime: Long = 0
+
     /*
      * Minimum time that has to pass until the feed is refreshed.
      * Currently set to 5 minutes
@@ -123,8 +124,9 @@ object SubscriptionHelper {
         val currentTime = System.currentTimeMillis()
         // if we already have a fetched feed, that is fresher than `UPDATE_TIME_INTERVAL` and were not force refreshing,
         // we just return the feed
-        if (feed.isNotEmpty() && currentTime - lastFeedFetchTime <= UPDATE_TIME_INTERVAL && !forceRefresh)
+        if (feed.isNotEmpty() && currentTime - lastFeedFetchTime <= UPDATE_TIME_INTERVAL && !forceRefresh) {
             return feed
+        }
 
         feed = if (token.isNotEmpty()) {
             RetrofitInstance.authApi.getFeed(token)
