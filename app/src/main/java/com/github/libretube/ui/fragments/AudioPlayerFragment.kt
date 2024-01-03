@@ -44,6 +44,7 @@ import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.ChaptersBottomSheet
 import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
+import com.github.libretube.ui.sheets.SleepTimerSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.util.DataSaverMode
 import com.github.libretube.util.PlayingQueue
@@ -150,6 +151,10 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
                 PlaybackOptionsSheet(it)
                     .show(childFragmentManager)
             }
+        }
+
+        binding.sleepTimer.setOnClickListener {
+            SleepTimerSheet().show(childFragmentManager)
         }
 
         binding.openVideo.setOnClickListener {
