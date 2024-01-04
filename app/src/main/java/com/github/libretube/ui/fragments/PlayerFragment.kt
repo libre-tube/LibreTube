@@ -79,6 +79,7 @@ import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.SPONSOR_HIGHLIGHT_CATEGORY
@@ -423,6 +424,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private fun initializeTransitionLayout() {
         mainActivity.binding.container.isVisible = true
         val mainMotionLayout = mainActivity.binding.mainMotionLayout
+        mainMotionLayout.progress = 0F
 
         binding.playerMotionLayout.addTransitionListener(object : TransitionAdapter() {
             override fun onTransitionChange(
@@ -433,7 +435,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             ) {
                 if (_binding == null) return
 
-                mainMotionLayout.progress = abs(progress)
+                if (NavBarHelper.hasTabs()) {
+                    mainMotionLayout.progress = abs(progress)
+                }
                 disableController()
                 commentsViewModel.setCommentSheetExpand(false)
                 chaptersBottomSheet?.dismiss()
@@ -459,7 +463,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     disableController()
                     commentsViewModel.setCommentSheetExpand(null)
                     binding.sbSkipBtn.isGone = true
-                    mainMotionLayout.progress = 1F
+                    if (NavBarHelper.hasTabs()) {
+                        mainMotionLayout.progress = 1F
+                    }
                     (activity as MainActivity).requestOrientationChange()
                 }
             }
