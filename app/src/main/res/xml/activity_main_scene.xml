@@ -12,14 +12,27 @@
                 android:translationY="0dp"
                 motion:framePosition="0"
                 motion:motionTarget="@+id/bottomNav" />
+
             <KeyAttribute
-                android:translationY="55dp"
-                motion:framePosition="75"
+                android:translationY="80dp"
+                motion:framePosition="1"
                 motion:motionTarget="@+id/bottomNav" />
+
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="100"
+                motion:motionTarget="@+id/bottomNav" />
+
             <KeyAttribute
                 android:scaleY="1"
-                motion:framePosition="50"
+                motion:framePosition="30"
                 motion:motionTarget="@+id/container" />
+
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="35"
+                motion:motionTarget="@+id/container" />
+
             <KeyAttribute
                 android:translationY="-80dp"
                 motion:framePosition="100"
