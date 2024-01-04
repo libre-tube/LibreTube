@@ -1,8 +1,12 @@
 package com.github.libretube.baselineprofile
 
+import android.widget.RadioButton
+import androidx.benchmark.macro.MacrobenchmarkScope
 import androidx.benchmark.macro.junit4.BaselineProfileRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
+import androidx.test.uiautomator.By
+import androidx.test.uiautomator.Until
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -53,14 +57,22 @@ class BaselineProfileGenerator {
             pressHome()
             startActivityAndWait()
 
-            // TODO Write more interactions to optimize advanced journeys of your app.
-            // For example:
-            // 1. Wait until the content is asynchronously loaded
-            // 2. Scroll the feed content
-            // 3. Navigate to detail screen
+            loadHomePage()
 
             // Check UiAutomator documentation for more information how to interact with the app.
             // https://d.android.com/training/testing/other-components/ui-automator
         }
+    }
+
+    private fun MacrobenchmarkScope.loadHomePage() {
+        // Select a Piped instance on the initial screen and click the OK button
+        val selector = By.clazz(RadioButton::class.java)
+        device.wait(Until.hasObject(selector), 1000)
+        device.findObject(selector)?.click()
+
+        device.findObject(By.text("OK"))?.click()
+
+        // Wait until the home page is loaded
+        device.wait(Until.hasObject(By.text("Home")), 1000)
     }
 }
