@@ -1,6 +1,7 @@
 [versions]
 appcompat = "1.6.1"
 core = "1.12.0"
+gradle = "8.2.1"
 kotlin = "1.9.22"
 lifecycle = "2.6.2"
 constraintlayout = "2.1.4"
@@ -16,7 +17,7 @@ desugaring = "2.0.4"
 cronetEmbedded = "113.5672.61"
 cronetOkHttp = "0.1.0"
 coil = "2.5.0"
-leakcanary = "2.12"
+leakcanary = "2.13"
 room = "2.6.1"
 kotlinxSerialization = "1.6.2"
 kotlinxDatetime = "0.5.0"
@@ -24,7 +25,6 @@ kotlinxRetrofit = "1.0.0"
 media3 = "1.2.0"
 activity = "1.8.2"
 fragment = "1.6.2"
-agp = "8.2.0"
 uiautomator = "2.2.0"
 benchmarkMacroJunit4 = "1.2.2"
 baselineprofile = "1.2.2"
@@ -36,7 +36,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 androidx-core = { group = "androidx.core", name = "core", version.ref = "core" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
-gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
@@ -74,7 +74,7 @@ androidx-benchmark-macro-junit4 = { group = "androidx.benchmark", name = "benchm
 androidx-profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "profileinstaller" }
 
 [plugins]
-androidTest = { id = "com.android.test", version.ref = "agp" }
+androidTest = { id = "com.android.test", version.ref = "gradle" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 baselineprofile = { id = "androidx.baselineprofile", version.ref = "baselineprofile" }
-androidApplication = { id = "com.android.application", version.ref = "agp" }
+androidApplication = { id = "com.android.application", version.ref = "gradle" }

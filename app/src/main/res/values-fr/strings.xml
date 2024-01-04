@@ -36,7 +36,7 @@
     <string name="addToPlaylist">Ajouter à la liste de lecture</string>
     <string name="success">Fait.</string>
     <string name="fail">Échec :(</string>
-    <string name="grid">Colonnes de la grille</string>
+    <string name="grid">Colonnes de la grille (portrait)</string>
     <string name="emptyList">Rien ici.</string>
     <string name="deletePlaylist">Supprimer la liste de lecture</string>
     <string name="areYouSure">Supprimer la liste de lecture \?</string>
@@ -399,7 +399,7 @@
         <item quantity="other">il y a %d mois</item>
     </plurals>
     <string name="disable_proxy">Désactiver le proxy Piped</string>
-    <string name="disable_proxy_summary">Chargez des vidéos et des images directement depuis les serveurs de YouTube. N\'activez cette option que si vous utilisez un VPN !</string>
+    <string name="disable_proxy_summary">Chargez des vidéos et des images directement depuis les serveurs de YouTube. N\'activez l\'option que si vous utilisez toujours un VPN</string>
     <string name="auto_fullscreen_shorts">Plein écran automatique sur les vidéos courtes</string>
     <string name="go_to_video">Aller à la vidéo</string>
     <string name="creation_date_reversed">Date de création (inversée)</string>
@@ -535,4 +535,10 @@
     <string name="bottom_reached">Le bas est atteint !</string>
     <string name="finished">Terminé</string>
     <string name="no_segments_found">Il n\'y a pas encore de segments pour cette vidéo.</string>
+    <string name="add_to_group">Ajouter au groupe</string>
+    <string name="rich_caption_rendering">Sous-titres en texte enrichi</string>
+    <string name="rich_caption_rendering_summary">Afficher des sous-titres personnalisés (par ex. en gras ou avec une autre police)</string>
+    <string name="uptime">%.2f%% d\'utilisation</string>
+    <string name="grid_landscape">Colonnes de la grille (paysage)</string>
+    <string name="copy_tooltip">Copier</string>
 </resources>
