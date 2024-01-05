@@ -257,7 +257,7 @@
     <string name="local_subscriptions">Локална праћења</string>
     <string name="skip_segment">Прескочи сегмент</string>
     <string name="save_feed">Учитај фид у позадини</string>
-    <string name="save_feed_summary">Учитавање фида праћења у позадини и спречавање његовог аутоматског освежавања</string>
+    <string name="save_feed_summary">Учитавање фида претплате у позадини и спречавање његовог поновног учитавања приликом промене картица</string>
     <string name="navigation_bar">Трака за навигацију</string>
     <string name="push_channel_description">Приказује обавештења када су нови стримови доступни.</string>
     <string name="push_channel_name">Радник обавештења</string>
@@ -318,7 +318,7 @@
     <string name="volume">Јачина звука</string>
     <string name="auto">Аутоматски</string>
     <string name="swipe_controls">Контроле превлачења</string>
-    <string name="swipe_controls_summary">Користите покрет превлачења да бисте подесили осветљеност и јачину звука</string>
+    <string name="swipe_controls_summary">Превуците да бисте подесили осветљеност и јачину звука док сте у режиму целог екрана</string>
     <string name="defaults">Подразумевано</string>
     <string name="pop_up">Искачући прозор</string>
     <string name="captions_size">Величина титлова</string>
