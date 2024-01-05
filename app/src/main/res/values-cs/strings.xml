@@ -274,7 +274,7 @@
     <string name="preferences">Předvolby</string>
     <string name="backup_customInstances">Vlastní instance</string>
     <string name="save_feed">Načítat zdroj v pozadí</string>
-    <string name="save_feed_summary">Načítat zdroj odběrů v pozadí a zabránit jeho automatickému obnovování</string>
+    <string name="save_feed_summary">Načítat zdroj odběrů v pozadí a zabránit jeho obnovování při přepínání karet</string>
     <string name="play_next">Přehrát jako další</string>
     <string name="navigation_bar">Navigační lišta</string>
     <string name="change_region">Zdá se, že trendy nejsou pro aktuální oblast k dispozici. V nastavení prosím vyberte jinou.</string>
@@ -320,7 +320,7 @@
     <string name="swipe_controls">Ovládání přejetím prstem</string>
     <string name="defaults">Výchozí</string>
     <string name="volume">Hlasitost</string>
-    <string name="swipe_controls_summary">Pomocí gesta přejetí prstem upravit jas a hlasitost</string>
+    <string name="swipe_controls_summary">Přejeďte prstem pro upravení jasu a hlasitosti v režimu celé obrazovky</string>
     <string name="pop_up">Pop-Up</string>
     <string name="no_comments_available">Toto video nemá žádné komentáře.</string>
     <string name="double_tap_seek">Dvojitým klepnutím vyhledáte</string>
