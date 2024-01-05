@@ -512,7 +512,7 @@
     <string name="break_reminder_time">Minutas ante de esser rememorate</string>
     <string name="watch_history_summary">Mantener le controlo del videos reguardate localmente</string>
     <string name="alternative_pip_controls_summary">Monstrar solmente audio e saltar controlos in Imagine-in-Imagine in vice de avantiar e rebobinar</string>
-    <string name="swipe_controls_summary">Glissar pro adjustar le luminositate e volumine</string>
+    <string name="swipe_controls_summary">Glissar pro adjustar le luminositate e volumine in modo de schermo plen</string>
     <string name="swipe_controls">Controlos de glissamento</string>
     <string name="tooltip_scroll_to_top">Rolar al alto</string>
     <string name="tooltip_sponsorblock">Commutar SponsorBlock</string>
@@ -531,7 +531,7 @@
     <string name="rich_caption_rendering">Rendition de subtitulos inricchite</string>
     <string name="category_preview_summary">Pro segmentos detaliante contentos futur sin information additional. SI illo include clips que solmente appare hic, isto es troppo probabile que sia un categoria erronee</string>
     <string name="rich_caption_rendering_summary">Render subtitulos web pro un experientia plus inricchite e personalisate</string>
-    <string name="save_feed_summary">Cargar le fluxos de subscriptiones in secunde plano e impedir lor actualisation automatic</string>
+    <string name="save_feed_summary">Cargar le fluxos de subscriptiones in secunde plano e impedir que sia recargate in le cambio de schedas</string>
     <string name="playback_during_call_summary">Nota que isto tamben affecta al application que non poterea gerer plus necun foco de audio</string>
     <string name="choose_instance_long">Selige un instantia de Piped a usar infra. Le instantia de Piped actuara como mediator inter tu e YouTube. Iste instantias es locate in locationes physic differente- indicate per le bandieras del paises. Instantias physicamente proxime a te es probabilemente plus veloce que instantias plus distante. Tu pote cambiar le instantia que tu usa in le parametros at any time.</string>
     <string name="uptime">%.2f%% tempore de activitate</string>
