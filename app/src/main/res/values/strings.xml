@@ -297,7 +297,7 @@
     <string name="preferences">Preferences</string>
     <string name="backup_customInstances">Custom Instances</string>
     <string name="save_feed">Load feed in background</string>
-    <string name="save_feed_summary">Load the subscription feed in the background and prevent it from being auto-refreshed</string>
+    <string name="save_feed_summary">Load the subscription feed in the background and prevent it from being reloaded when switching tabs</string>
     <string name="play_next">Play next</string>
     <string name="navigation_bar">Navigation bar</string>
     <string name="change_region">Trending seems to be unavailable for the current region. Please select another in the settings.</string>
