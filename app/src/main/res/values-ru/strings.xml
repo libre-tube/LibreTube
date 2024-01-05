@@ -318,7 +318,7 @@
     <string name="brightness">Яркость</string>
     <string name="volume">Громкость</string>
     <string name="auto">Авто</string>
-    <string name="swipe_controls_summary">Использовать жест прокрутки для регулирования яркости и громкости</string>
+    <string name="swipe_controls_summary">Регулирование яркости и громкости жестами прокрутки в полноэкранном режиме</string>
     <string name="swipe_controls">Управление прокруткой</string>
     <string name="defaults">По умолчанию</string>
     <string name="no_comments_available">Это видео не имеет комментариев.</string>
