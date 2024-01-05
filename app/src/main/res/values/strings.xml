@@ -350,7 +350,7 @@
     <string name="volume">Volume</string>
     <string name="auto">Auto</string>
     <string name="swipe_controls">Swipe controls</string>
-    <string name="swipe_controls_summary">Use swipe gesture to adjust the brightness and volume</string>
+    <string name="swipe_controls_summary">Swipe to adjust the brightness and volume while in fullscreen mode</string>
     <string name="pinch_control">Pinch control</string>
     <string name="pinch_control_summary">Use pinch gesture to zoom in/out</string>
     <string name="defaults">Defaults</string>
