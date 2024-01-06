@@ -167,6 +167,7 @@ class HomeFragment : Fragment() {
             filteredFeed.take(20).toMutableList(),
             forceMode = VideosAdapter.Companion.LayoutMode.RELATED_COLUMN
         )
+        binding.featuredRV.setHasFixedSize(true)
     }
 
     private suspend fun loadBookmarks() {

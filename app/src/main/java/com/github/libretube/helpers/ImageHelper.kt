@@ -20,35 +20,43 @@ import com.github.libretube.util.DataSaverMode
 import java.nio.file.Path
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.io.File
 
 object ImageHelper {
     lateinit var imageLoader: ImageLoader
+
+    private val Context.coilFile get() = cacheDir.resolve("coil")
 
     /**
      * Initialize the image loader
      */
     fun initializeImageLoader(context: Context) {
-        val maxImageCacheSize = PreferenceHelper.getString(
-            PreferenceKeys.MAX_IMAGE_CACHE,
-            ""
-        )
+        val maxCacheSize = PreferenceHelper.getString(PreferenceKeys.MAX_IMAGE_CACHE, "128")
 
         imageLoader = ImageLoader.Builder(context)
             .callFactory(CronetHelper.callFactory)
+            .crossfade(true)
             .apply {
-                when (maxImageCacheSize) {
-                    "" -> {
-                        diskCachePolicy(CachePolicy.DISABLED)
-                    }
+                if (maxCacheSize.isEmpty()) {
+                    diskCachePolicy(CachePolicy.DISABLED)
+                } else {
+                    diskCachePolicy(CachePolicy.ENABLED)
+                    memoryCachePolicy(CachePolicy.ENABLED)
 
-                    else -> diskCache(
-                        DiskCache.Builder()
-                            .directory(context.cacheDir.resolve("coil"))
-                            .maxSizeBytes(maxImageCacheSize.toInt() * 1024 * 1024L)
-                            .build()
+                    val diskCache = generateDiskCache(
+                        directory = context.coilFile,
+                        size = maxCacheSize.toInt()
                     )
+                    diskCache(diskCache)
                 }
             }
+            .build()
+    }
+
+    private fun generateDiskCache(directory: File, size: Int): DiskCache {
+        return DiskCache.Builder()
+            .directory(directory)
+            .maxSizeBytes(size * 1024 * 1024L)
             .build()
     }
 
@@ -57,7 +65,7 @@ object ImageHelper {
      */
     fun loadImage(url: String?, target: ImageView) {
         // only load the image if the data saver mode is disabled
-        if (DataSaverMode.isEnabled(target.context) || url == null) return
+        if (DataSaverMode.isEnabled(target.context) || url.isNullOrEmpty()) return
         val urlToLoad = ProxyHelper.unwrapImageUrl(url)
 
         val request = ImageRequest.Builder(target.context)
