@@ -319,7 +319,7 @@
     <string name="auto">Oto</string>
     <string name="swipe_controls">Kaydırma kontrolleri</string>
     <string name="brightness">Parlaklık</string>
-    <string name="swipe_controls_summary">Parlaklığı ve sesi ayarlamak için kaydırma hareketini kullan</string>
+    <string name="swipe_controls_summary">Tam ekran modundayken parlaklığı ve ses seviyesini ayarlamak için kaydırın</string>
     <string name="defaults">Varsayılanlar</string>
     <string name="pop_up">Açılır pencere</string>
     <string name="comments_disabled">Yorumlar yükleyici tarafından devre dışı bırakıldı.</string>
