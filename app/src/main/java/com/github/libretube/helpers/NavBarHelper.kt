@@ -16,15 +16,22 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 
 object NavBarHelper {
+
     private const val SEPARATOR = ","
+
+    fun hasTabs(): Boolean {
+        val prefsItems = getNavBarPrefs()
+
+        val tabsUnchanged = prefsItems.isEmpty()
+        val allTabsHidden = prefsItems.all { it.contains("-") }
+
+        return tabsUnchanged || !allTabsHidden
+    }
 
     // contains "-" -> invisible menu item, else -> visible menu item
     fun getNavBarItems(context: Context): List<MenuItem> {
         val prefItems = try {
-            PreferenceHelper.getString(
-                PreferenceKeys.NAVBAR_ITEMS,
-                ""
-            ).split(SEPARATOR)
+            getNavBarPrefs()
         } catch (e: Exception) {
             Log.e("fail to parse nav items", e.toString())
             return getDefaultNavBarItems(context)
@@ -126,4 +133,11 @@ object NavBarHelper {
         val index = getDefaultNavBarItems(context).indexOfFirst { it.itemId == itemId }
         PreferenceHelper.putInt(PreferenceKeys.START_FRAGMENT, index)
     }
+
+    private fun getNavBarPrefs(): List<String> {
+        return PreferenceHelper
+            .getString(PreferenceKeys.NAVBAR_ITEMS, "")
+            .split(SEPARATOR)
+    }
+
 }

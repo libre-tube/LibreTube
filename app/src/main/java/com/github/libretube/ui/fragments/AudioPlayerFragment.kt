@@ -33,6 +33,7 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.AudioHelper
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.ThemeHelper
@@ -216,6 +217,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     private fun initializeTransitionLayout() {
         mainActivity.binding.container.isVisible = true
         val mainMotionLayout = mainActivity.binding.mainMotionLayout
+        mainMotionLayout.progress = 0F
 
         val surfaceColor = SurfaceColors.getColorForElevation(requireContext(), 3f)
         binding.audioPlayerContainer.setBackgroundColor(surfaceColor)
@@ -227,7 +229,9 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
                 endId: Int,
                 progress: Float
             ) {
-                mainMotionLayout.progress = abs(progress)
+                if (NavBarHelper.hasTabs()) {
+                    mainMotionLayout.progress = abs(progress)
+                }
                 transitionEndId = endId
                 transitionStartId = startId
             }
@@ -235,7 +239,9 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                 if (currentId == transitionEndId) {
                     viewModel.isMiniPlayerVisible.value = true
-                    mainMotionLayout.progress = 1F
+                    if (NavBarHelper.hasTabs()) {
+                        mainMotionLayout.progress = 1F
+                    }
                 } else if (currentId == transitionStartId) {
                     viewModel.isMiniPlayerVisible.value = false
                     mainMotionLayout.progress = 0F
