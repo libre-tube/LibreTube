@@ -220,7 +220,7 @@
     <string name="preferences">Налаштування</string>
     <string name="backup_customInstances">Користувацькі налаштування</string>
     <string name="save_feed">Завантажувати стрічку у фоновому режимі</string>
-    <string name="save_feed_summary">Завантажувати стрічку підписок у фоновому режимі та не допускати її автооновлення</string>
+    <string name="save_feed_summary">Завантажувати стрічку підписок у фоновому режимі та запобігати її перезавантаженню при перемиканні вкладок</string>
     <string name="playback_pitch">Швидкість</string>
     <string name="play_next">Відтворити наступне</string>
     <string name="download_channel_name">Служба завантаження</string>
@@ -318,7 +318,7 @@
     <string name="brightness">Яскравість</string>
     <string name="auto">Авто</string>
     <string name="swipe_controls">Керування посуваннями</string>
-    <string name="swipe_controls_summary">Для регулювання яскравості та гучності використовувати жест посування</string>
+    <string name="swipe_controls_summary">Проведіть по екрану, щоб відрегулювати яскравість і гучність у повноекранному режимі</string>
     <string name="volume">Гучність</string>
     <string name="defaults">Типові</string>
     <string name="pop_up">Спливне вікно</string>
