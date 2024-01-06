@@ -163,7 +163,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             killFragment()
             NavigationHelper.navigateVideo(
                 context = requireContext(),
-                videoId = PlayingQueue.getCurrent()?.url?.toID(),
+                videoUrlOrId = PlayingQueue.getCurrent()?.url,
                 timestamp = playerService?.player?.currentPosition?.div(1000) ?: 0,
                 keepQueue = true,
                 forceVideo = true

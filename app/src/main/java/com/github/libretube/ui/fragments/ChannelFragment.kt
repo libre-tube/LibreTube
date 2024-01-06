@@ -61,8 +61,10 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        channelId = args.channelId?.toID()
-        channelName = args.channelName?.replace("/c/", "")?.replace("/user/", "")
+        channelName = args.channelName
+            ?.replace("/c/", "")
+            ?.replace("/user/", "")
+        channelId = args.channelId
     }
 
     override fun onCreateView(

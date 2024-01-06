@@ -415,7 +415,7 @@ class MainActivity : BaseActivity() {
         intent?.getStringExtra(IntentData.videoId)?.let {
             NavigationHelper.navigateVideo(
                 context = this,
-                videoId = it,
+                videoUrlOrId = it,
                 timestamp = intent.getLongExtra(IntentData.timeStamp, 0L)
             )
         }

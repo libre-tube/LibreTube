@@ -212,8 +212,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
         PlayingQueue.clear()
         PlayingQueue.add(*streams.toTypedArray())
 
-        val videoId = streams.first().url.orEmpty().toID()
-        NavigationHelper.navigateVideo(requireContext(), videoId = videoId, keepQueue = true)
+        NavigationHelper.navigateVideo(requireContext(), videoUrlOrId = streams.first().url, keepQueue = true)
     }
 
     @SuppressLint("InflateParams")
