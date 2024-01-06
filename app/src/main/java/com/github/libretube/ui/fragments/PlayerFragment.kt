@@ -653,7 +653,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             if (!this::streams.isInitialized) return@setOnClickListener
 
             val activity = view?.context as MainActivity
-            activity.navController.navigate(NavDirections.openChannel(streams.uploaderUrl))
+            NavigationHelper.navigateChannel(requireContext(), streams.uploaderUrl)
             activity.binding.mainMotionLayout.transitionToEnd()
             binding.playerMotionLayout.transitionToEnd()
         }

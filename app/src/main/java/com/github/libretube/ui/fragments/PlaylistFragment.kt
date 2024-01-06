@@ -146,8 +146,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
 
             binding.playlistInfo.text = getChannelAndVideoString(response, response.videos)
             binding.playlistInfo.setOnClickListener {
-                (context as MainActivity).navController
-                    .navigate(NavDirections.openChannel(response.uploaderUrl))
+                NavigationHelper.navigateChannel(requireContext(), response.uploaderUrl)
             }
 
             binding.playlistDescription.text = response.description?.parseAsHtml()
