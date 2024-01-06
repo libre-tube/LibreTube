@@ -274,7 +274,7 @@
     <string name="backup_customInstances">自定义实例</string>
     <string name="preferences">选项</string>
     <string name="save_feed">后台加载订阅源</string>
-    <string name="save_feed_summary">后台加载订阅源并防止其自动刷新</string>
+    <string name="save_feed_summary">后台加载订阅源并防止其在切换标签页时重新加载</string>
     <string name="play_next">播放下一个</string>
     <string name="navigation_bar">导航栏</string>
     <string name="change_region">“时下流行”似乎对当前地区不可用。请在设置中另选一个地区。</string>
@@ -319,7 +319,7 @@
     <string name="auto">自动</string>
     <string name="defaults">默认值</string>
     <string name="volume">音量</string>
-    <string name="swipe_controls_summary">使用滑动手势调整亮度和音量</string>
+    <string name="swipe_controls_summary">全屏模式下使用滑动手势调整亮度和音量</string>
     <string name="swipe_controls">滑动操控</string>
     <string name="pop_up">悬浮窗</string>
     <string name="comments_disabled">上传者禁止评论。</string>
