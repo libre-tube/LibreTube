@@ -274,7 +274,7 @@
     <string name="push_channel_name">عامل الإخطار</string>
     <string name="push_channel_description">يظهر إشعارًا عند توفر تدفقات جديدة.</string>
     <string name="save_feed">تحميل التغذية في الخلفية</string>
-    <string name="save_feed_summary">قم بتحميل خلاصة الاشتراك في الخلفية وامنعها من التحديث التلقائي</string>
+    <string name="save_feed_summary">قم بتحميل موجز الاشتراك في الخلفية ومنع إعادة تحميله عند تبديل علامات التبويب</string>
     <string name="play_next">تشغيل التالي</string>
     <string name="navigation_bar">شريط التنقل</string>
     <string name="change_region">المتصدرة يبدو أنها غير متاحة في المنطقة الحالية . الرجاء اختيار آخر في الإعداد .</string>
@@ -321,7 +321,7 @@
     <string name="swipe_controls">عناصر التحكم في السحب</string>
     <string name="defaults">الإفتراضي</string>
     <string name="pop_up">نافذة منبثقة</string>
-    <string name="swipe_controls_summary">استخدم إيماءة السحب لضبط السطوع ومستوى الصوت</string>
+    <string name="swipe_controls_summary">اسحب لضبط السطوع ومستوى الصوت أثناء وجودك في وضع ملء الشاشة</string>
     <string name="no_comments_available">هذا الفيديو ليس له تعليقات.</string>
     <string name="comments_disabled">التعليقات معطلة من قبل القائم بالتحميل.</string>
     <string name="double_tap_seek_summary">اضغط مرتين على اليسار أو اليمين لترجيع موضع المشغل أو إعادة تقديمه</string>

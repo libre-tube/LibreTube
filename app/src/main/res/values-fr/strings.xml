@@ -271,7 +271,7 @@
     <string name="preferences">Préférences</string>
     <string name="push_channel_name">Agent de notification</string>
     <string name="save_feed">Charger le flux en arrière-plan</string>
-    <string name="save_feed_summary">Chargez le flux d’abonnement en arrière-plan et empêchez son actualisation automatique</string>
+    <string name="save_feed_summary">Charger le flux d\'abonnement en arrière-plan et éviter qu\'il ne soit rechargé lorsqu\'on change d\'onglet</string>
     <string name="play_next">Lire à la suite</string>
     <string name="navigation_bar">Barre de navigation</string>
     <string name="download_channel_name">Service de Téléchargement</string>
@@ -321,7 +321,7 @@
     <string name="local_playlists">Listes de lecture locales</string>
     <string name="auto">Auto</string>
     <string name="swipe_controls">Commandes par balayage</string>
-    <string name="swipe_controls_summary">Balayer l\'écran pour ajuster la luminosité et le volume</string>
+    <string name="swipe_controls_summary">Balayer l\'écran pour ajuster la luminosité et le volume en mode plein écran</string>
     <string name="pop_up">Pop-Up</string>
     <string name="double_tap_seek_summary">Appuyez deux fois à gauche ou à droite pour avancer ou reculer la position de la lecture</string>
     <string name="double_tap_seek">Appuyez deux fois pour rechercher</string>

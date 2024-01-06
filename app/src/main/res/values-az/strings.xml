@@ -270,7 +270,7 @@
     <string name="preferences">Üstünlüklər</string>
     <string name="backup_customInstances">Fərdi İnstansiyalar</string>
     <string name="save_feed">Axını arxa planda yüklə</string>
-    <string name="save_feed_summary">Abunəlik axının arxa planda yükləməsin və avtomatik yeniləməsin dayandır</string>
+    <string name="save_feed_summary">Abunəlik axının arxa planda yükləyin və səhifələri dəyişərkən onun yenidən yüklənməsinin qarşısını alın</string>
     <string name="download_channel_name">Yükləmə Xidməti</string>
     <string name="download_channel_description">Media yükləyərkən bildiriş göstərir.</string>
     <string name="push_channel_name">Bildiriş İşçisi</string>
@@ -317,7 +317,7 @@
     <string name="local_playlists">Yerli oynatma siyahıları</string>
     <string name="brightness">Parlaqlıq</string>
     <string name="auto">Avtomatik</string>
-    <string name="swipe_controls_summary">Parlaqlıq və səs səviyyəsin nizamlamaq üçün sürüşdürmə jesti istifadə et</string>
+    <string name="swipe_controls_summary">Tam ekran rejimində parlaqlıq və səs səviyyəsin tənzimləmək üçün sürüşdür</string>
     <string name="volume">Səs səviyyəsi</string>
     <string name="swipe_controls">Sürüşdürmə nəzarətləri</string>
     <string name="defaults">Standartlar</string>
