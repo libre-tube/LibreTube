@@ -274,7 +274,7 @@
     <string name="preferences">Preferencias</string>
     <string name="backup_customInstances">Instancias personalizadas</string>
     <string name="save_feed">Cargar contenido en segundo plano</string>
-    <string name="save_feed_summary">Cargar contenido de las suscripciones en segundo plano para evitar que la pestaña se auto-refresque</string>
+    <string name="save_feed_summary">Cargar el feed de suscripción en segundo plano y evitar que se vuelva a cargar al cambiar de pestaña</string>
     <string name="play_next">Reproducir el siguiente</string>
     <string name="navigation_bar">Barra de navegación</string>
     <string name="change_region">Tendencias parece no estar disponible para la región actual. Selecciona otra en la configuración.</string>
@@ -319,7 +319,7 @@
     <string name="auto">Automática</string>
     <string name="swipe_controls">Controles de deslizamiento</string>
     <string name="brightness">Brillo</string>
-    <string name="swipe_controls_summary">Deslizar en los laterales de la pantalla para ajustar el brillo y el volumen</string>
+    <string name="swipe_controls_summary">Desliza el dedo para ajustar el brillo y el volumen en el modo de pantalla completa</string>
     <string name="defaults">Predeterminados</string>
     <string name="pop_up">Flotante</string>
     <string name="no_comments_available">Este vídeo no tiene comentarios.</string>
