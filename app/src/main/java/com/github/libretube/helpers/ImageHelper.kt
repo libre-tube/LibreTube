@@ -3,6 +3,7 @@ package com.github.libretube.helpers
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.net.Uri
 import android.widget.ImageView
 import androidx.core.graphics.drawable.toBitmapOrNull
@@ -58,7 +59,18 @@ object ImageHelper {
         // only load the image if the data saver mode is disabled
         if (DataSaverMode.isEnabled(target.context) || url == null) return
         val urlToLoad = ProxyHelper.unwrapImageUrl(url)
-        target.load(urlToLoad, imageLoader)
+
+        val request = ImageRequest.Builder(target.context)
+            .data(urlToLoad)
+            .listener { _, result ->
+                // set the background to white for transparent images
+                target.setBackgroundColor(Color.WHITE)
+
+                target.setImageDrawable(result.drawable)
+            }
+            .build()
+
+        imageLoader.enqueue(request)
     }
 
     suspend fun downloadImage(context: Context, url: String, path: Path) {
