@@ -43,7 +43,7 @@ class SubscriptionChannelAdapter(
 
         holder.binding.apply {
             subscriptionChannelName.text = subscription.name
-            ImageHelper.loadImage(subscription.avatar, subscriptionChannelImage)
+            ImageHelper.loadImage(subscription.avatar, subscriptionChannelImage, true)
 
             root.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, subscription.url)

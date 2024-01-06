@@ -34,7 +34,7 @@ class SubscriptionGroupChannelsAdapter(
                 NavigationHelper.navigateChannel(root.context, channel.url)
             }
             subscriptionChannelName.text = channel.name
-            ImageHelper.loadImage(channel.avatar, subscriptionChannelImage)
+            ImageHelper.loadImage(channel.avatar, subscriptionChannelImage, true)
 
             val channelId = channel.url.toID()
             channelIncluded.setOnCheckedChangeListener(null)

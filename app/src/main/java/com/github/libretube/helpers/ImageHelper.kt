@@ -63,7 +63,7 @@ object ImageHelper {
     /**
      * load an image from a url into an imageView
      */
-    fun loadImage(url: String?, target: ImageView) {
+    fun loadImage(url: String?, target: ImageView, whiteBackground: Boolean = false) {
         // only load the image if the data saver mode is disabled
         if (DataSaverMode.isEnabled(target.context) || url.isNullOrEmpty()) return
         val urlToLoad = ProxyHelper.unwrapImageUrl(url)
@@ -72,7 +72,7 @@ object ImageHelper {
             .data(urlToLoad)
             .listener { _, result ->
                 // set the background to white for transparent images
-                target.setBackgroundColor(Color.WHITE)
+                if (whiteBackground) target.setBackgroundColor(Color.WHITE)
 
                 target.setImageDrawable(result.drawable)
             }

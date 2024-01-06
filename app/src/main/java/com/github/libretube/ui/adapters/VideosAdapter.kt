@@ -147,7 +147,7 @@ class VideosAdapter(
                 NavigationHelper.navigateChannel(root.context, video.uploaderUrl)
             }
             ImageHelper.loadImage(video.thumbnail, thumbnail)
-            ImageHelper.loadImage(video.uploaderAvatar, channelImage)
+            ImageHelper.loadImage(video.uploaderAvatar, channelImage, true)
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, video.url)
             }
@@ -181,7 +181,7 @@ class VideosAdapter(
             ImageHelper.loadImage(video.thumbnail, thumbnail)
 
             if (forceMode != LayoutMode.CHANNEL_ROW) {
-                ImageHelper.loadImage(video.uploaderAvatar, channelImage)
+                ImageHelper.loadImage(video.uploaderAvatar, channelImage, true)
                 channelName.text = video.uploaderName
 
                 channelContainer.setOnClickListener {
