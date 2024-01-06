@@ -22,12 +22,12 @@
 
         <com.github.libretube.ui.views.SliderPreference
             android:icon="@drawable/ic_download"
-            android:key="max_concurrent_downloads"
+            android:key="max_parallel_downloads"
             android:title="@string/concurrent_downloads"
             app:defValue="6"
             app:stepSize="1"
             app:valueFrom="1"
-            app:valueTo="20" />
+            app:valueTo="6" />
 
         <ListPreference
             android:entries="@array/cacheSize"

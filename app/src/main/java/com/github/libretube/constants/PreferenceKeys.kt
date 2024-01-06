@@ -145,7 +145,7 @@ object PreferenceKeys {
     const val SHARE_WITH_TIME_CODE = "share_with_time_code"
     const val CONFIRM_UNSUBSCRIBE = "confirm_unsubscribing"
     const val CLEAR_BOOKMARKS = "clear_bookmarks"
-    const val MAX_CONCURRENT_DOWNLOADS = "max_concurrent_downloads"
+    const val MAX_CONCURRENT_DOWNLOADS = "max_parallel_downloads"
     const val DISABLE_VIDEO_IMAGE_PROXY = "disable_video_image_proxy"
     const val CONTRIBUTE_TO_SB = "sb_contribute_key"
 
