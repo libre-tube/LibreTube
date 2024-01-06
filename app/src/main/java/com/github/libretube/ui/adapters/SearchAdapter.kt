@@ -98,7 +98,7 @@ class SearchAdapter(
             // only display channel related info if not in a channel tab
             if (!isChannelAdapter) {
                 channelName.text = item.uploaderName
-                ImageHelper.loadImage(item.uploaderAvatar, channelImage)
+                ImageHelper.loadImage(item.uploaderAvatar, channelImage, true)
             } else {
                 channelContainer.isGone = true
             }
@@ -133,7 +133,7 @@ class SearchAdapter(
 
     private fun bindChannel(item: ContentItem, binding: ChannelRowBinding) {
         binding.apply {
-            ImageHelper.loadImage(item.thumbnail, searchChannelImage)
+            ImageHelper.loadImage(item.thumbnail, searchChannelImage, true)
             searchChannelName.text = item.name
 
             val subscribers = item.subscribers.formatShort()

@@ -83,11 +83,11 @@ class CommentsAdapter(
             commentText.text = comment.commentText?.replace("</a>", "</a> ")
                 ?.parseAsHtml(tagHandler = HtmlParser(LinkHandler(handleLink ?: {})))
 
-            ImageHelper.loadImage(comment.thumbnail, commentorImage)
+            ImageHelper.loadImage(comment.thumbnail, commentorImage, true)
             likesTextView.text = comment.likeCount.formatShort()
 
             if (comment.creatorReplied && !channelAvatar.isNullOrBlank()) {
-                ImageHelper.loadImage(channelAvatar, creatorReplyImageView)
+                ImageHelper.loadImage(channelAvatar, creatorReplyImageView, true)
                 creatorReplyImageView.isVisible = true
             }
 

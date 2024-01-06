@@ -32,7 +32,8 @@ class LegacySubscriptionAdapter(
             channelName.text = subscription.name
             ImageHelper.loadImage(
                 subscription.avatar,
-                channelAvatar
+                channelAvatar,
+                true
             )
             root.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, subscription.url)

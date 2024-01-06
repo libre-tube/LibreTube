@@ -1038,7 +1038,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         binding.descriptionLayout.setStreams(streams)
 
         binding.apply {
-            ImageHelper.loadImage(streams.uploaderAvatar, binding.playerChannelImage)
+            ImageHelper.loadImage(streams.uploaderAvatar, binding.playerChannelImage, true)
             playerChannelName.text = streams.uploader
             titleTextView.text = streams.title
             playerChannelSubCount.text = context?.getString(

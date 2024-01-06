@@ -216,7 +216,7 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
         }
 
         ImageHelper.loadImage(response.bannerUrl, binding.channelBanner)
-        ImageHelper.loadImage(response.avatarUrl, binding.channelImage)
+        ImageHelper.loadImage(response.avatarUrl, binding.channelImage, true)
 
         binding.channelImage.setOnClickListener {
             NavigationHelper.openImagePreview(
