@@ -35,10 +35,7 @@ class LegacySubscriptionAdapter(
                 channelAvatar
             )
             root.setOnClickListener {
-                NavigationHelper.navigateChannel(
-                    root.context,
-                    subscription.url.toID()
-                )
+                NavigationHelper.navigateChannel(root.context, subscription.url)
             }
 
             root.setOnLongClickListener {

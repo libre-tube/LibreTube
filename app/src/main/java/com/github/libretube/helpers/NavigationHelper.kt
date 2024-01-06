@@ -26,11 +26,11 @@ import com.github.libretube.ui.views.SingleViewTouchableMotionLayout
 object NavigationHelper {
     private val handler = Handler(Looper.getMainLooper())
 
-    fun navigateChannel(context: Context, channelId: String?) {
-        if (channelId == null) return
+    fun navigateChannel(context: Context, channelUrlOrId: String?) {
+        if (channelUrlOrId == null) return
 
         val activity = ContextHelper.unwrapActivity(context)
-        activity.navController.navigate(NavDirections.openChannel(channelId))
+        activity.navController.navigate(NavDirections.openChannel(channelUrlOrId.toID()))
         try {
             if (activity.binding.mainMotionLayout.progress == 0.toFloat()) {
                 activity.binding.mainMotionLayout.transitionToEnd()
@@ -48,20 +48,20 @@ object NavigationHelper {
      */
     fun navigateVideo(
         context: Context,
-        videoId: String?,
+        videoUrlOrId: String?,
         playlistId: String? = null,
         channelId: String? = null,
         keepQueue: Boolean = false,
         timestamp: Long = 0,
         forceVideo: Boolean = false
     ) {
-        if (videoId == null) return
+        if (videoUrlOrId == null) return
         BackgroundHelper.stopBackgroundPlay(context)
 
         if (PreferenceHelper.getBoolean(PreferenceKeys.AUDIO_ONLY_MODE, false) && !forceVideo) {
             BackgroundHelper.playOnBackground(
                 context,
-                videoId.toID(),
+                videoUrlOrId.toID(),
                 timestamp,
                 playlistId,
                 channelId,
@@ -73,7 +73,7 @@ object NavigationHelper {
             return
         }
 
-        val playerData = PlayerData(videoId.toID(), playlistId, channelId, keepQueue, timestamp)
+        val playerData = PlayerData(videoUrlOrId.toID(), playlistId, channelId, keepQueue, timestamp)
         val bundle = bundleOf(IntentData.playerData to playerData)
 
         val activity = ContextHelper.unwrapActivity(context)
@@ -82,11 +82,11 @@ object NavigationHelper {
         }
     }
 
-    fun navigatePlaylist(context: Context, playlistId: String?, playlistType: PlaylistType) {
-        if (playlistId == null) return
+    fun navigatePlaylist(context: Context, playlistUrlOrId: String?, playlistType: PlaylistType) {
+        if (playlistUrlOrId == null) return
 
         val activity = ContextHelper.unwrapActivity(context)
-        activity.navController.navigate(NavDirections.openPlaylist(playlistId, playlistType))
+        activity.navController.navigate(NavDirections.openPlaylist(playlistUrlOrId.toID(), playlistType))
     }
 
     /**

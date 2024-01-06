@@ -29,13 +29,14 @@ class SubscriptionGroupChannelsAdapter(
 
     override fun onBindViewHolder(holder: SubscriptionGroupChannelRowViewHolder, position: Int) {
         val channel = channels[position]
-        val channelId = channel.url.toID()
         holder.binding.apply {
             root.setOnClickListener {
-                NavigationHelper.navigateChannel(root.context, channelId)
+                NavigationHelper.navigateChannel(root.context, channel.url)
             }
             subscriptionChannelName.text = channel.name
             ImageHelper.loadImage(channel.avatar, subscriptionChannelImage)
+
+            val channelId = channel.url.toID()
             channelIncluded.setOnCheckedChangeListener(null)
             channelIncluded.isChecked = group.channels.contains(channelId)
             channelIncluded.setOnCheckedChangeListener { _, isChecked ->

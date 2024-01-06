@@ -22,6 +22,7 @@ import com.github.libretube.api.obj.Comment
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.CommentsRowBinding
 import com.github.libretube.extensions.formatShort
+import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ClipboardHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
