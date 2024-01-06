@@ -339,7 +339,7 @@
     <string name="preferences">Preferenser</string>
     <string name="uploader_name">Uppladdarens namn</string>
     <string name="clear_bookmarks">Ta bort bokmärken</string>
-    <string name="swipe_controls_summary">Använd svepgester för att justera ljusstyrka och volym</string>
+    <string name="swipe_controls_summary">Svep för att justera ljusstyrkan och volymen i helskärmsläge</string>
     <string name="filename">Filnamn</string>
     <string name="off">Av</string>
     <string name="codecs">Kodekar</string>
@@ -348,7 +348,7 @@
     <string name="fallback_piped_proxy_summary">Ladda videor via proxyn om direktanslutning till YouTube inte fungerar för den aktuella videon (ökar den initiala laddningstiden). Om den är inaktiverad kommer musikinnehåll från YouTube sannolikt inte att spelas upp på grund av YT-begränsningar</string>
     <string name="mark_as_unwatched">Markera som osedd</string>
     <string name="import_subscriptions_from">Importera prenumerationer från</string>
-    <string name="save_feed_summary">Ladda prenumerationsflödet i bakgrunden och förhindra att det uppdateras automatiskt</string>
+    <string name="save_feed_summary">Ladda prenumerationsflödet i bakgrunden och förhindra att det laddas om när du byter flik</string>
     <string name="automatic">Automatisk</string>
     <string name="play_latest_videos">Spela upp senaste videor</string>
     <string name="repeat_mode_current">Nuvarande</string>
