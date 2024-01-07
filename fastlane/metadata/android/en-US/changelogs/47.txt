@@ -1,0 +1,9 @@
+* fix: Audio Pausing on quickly volume level adjustment
+* fix: can't open playlists
+* fix: clarify setting description
+* fix: correctly display transparent channelImages
+* fix: crash on download menu
+* fix: Improve home feed layout and fix issue where incorrect cache size was defaulted.
+* fix: Improve player to mini-player transition + bottom space when there are no navigation tabs 
+* fix: Incorrect actions management through bluetooth devices
+* fix: remove unnecessary subscription status api call in channel fragment
