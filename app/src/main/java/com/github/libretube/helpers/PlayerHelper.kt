@@ -41,11 +41,11 @@ import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.obj.VideoStats
 import com.github.libretube.util.TextUtils
+import kotlinx.coroutines.runBlocking
 import java.util.Locale
 import java.util.concurrent.Executors
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
-import kotlinx.coroutines.runBlocking
 
 object PlayerHelper {
     private const val ACTION_MEDIA_CONTROL = "media_control"
@@ -334,11 +334,11 @@ object PlayerHelper {
 
     fun shouldPlayNextVideo(isPlaylist: Boolean = false): Boolean {
         return autoPlayEnabled || (
-            isPlaylist && PreferenceHelper.getBoolean(
-                PreferenceKeys.AUTOPLAY_PLAYLISTS,
-                false
-            )
-            )
+                isPlaylist && PreferenceHelper.getBoolean(
+                    PreferenceKeys.AUTOPLAY_PLAYLISTS,
+                    false
+                )
+                )
     }
 
     private val handleAudioFocus
@@ -552,9 +552,9 @@ object PlayerHelper {
             if (currentPosition in segmentStart until segmentEnd) {
                 if (sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC ||
                     (
-                        sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE &&
-                            !segment.skipped
-                        )
+                            sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE &&
+                                    !segment.skipped
+                            )
                 ) {
                     if (sponsorBlockNotifications) {
                         runCatching {
@@ -566,9 +566,9 @@ object PlayerHelper {
                     segment.skipped = true
                 } else if (sponsorBlockConfig[segment.category] == SbSkipOptions.MANUAL ||
                     (
-                        sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE &&
-                            segment.skipped
-                        )
+                            sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE &&
+                                    segment.skipped
+                            )
                 ) {
                     return segment
                 }
@@ -598,7 +598,8 @@ object PlayerHelper {
                 val chapter = chapters[index]
                 // remove the video highlight if it's already longer ago than [ChapterSegment.HIGHLIGHT_LENGTH],
                 // otherwise the SponsorBlock highlight would be shown from its starting point to the end
-                val isWithinMaxHighlightDuration = (currentPositionSeconds - chapter.start) < ChapterSegment.HIGHLIGHT_LENGTH
+                val isWithinMaxHighlightDuration =
+                    (currentPositionSeconds - chapter.start) < ChapterSegment.HIGHLIGHT_LENGTH
                 chapter.highlightDrawable == null || isWithinMaxHighlightDuration
             }
     }
@@ -752,9 +753,9 @@ object PlayerHelper {
      */
     fun haveAudioTrackRoleFlagSet(@C.RoleFlags roleFlags: Int): Boolean {
         return isFlagSet(roleFlags, C.ROLE_FLAG_DESCRIBES_VIDEO) ||
-            isFlagSet(roleFlags, C.ROLE_FLAG_DUB) ||
-            isFlagSet(roleFlags, C.ROLE_FLAG_MAIN) ||
-            isFlagSet(roleFlags, C.ROLE_FLAG_ALTERNATE)
+                isFlagSet(roleFlags, C.ROLE_FLAG_DUB) ||
+                isFlagSet(roleFlags, C.ROLE_FLAG_MAIN) ||
+                isFlagSet(roleFlags, C.ROLE_FLAG_ALTERNATE)
     }
 
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
@@ -770,5 +771,11 @@ object PlayerHelper {
         val videoQuality =
             "${player.videoFormat?.width}x${player.videoFormat?.height} ${player.videoFormat?.frameRate?.toInt()}fps"
         return VideoStats(videoId, videoInfo, videoQuality, audioInfo)
+    }
+
+    fun getPlayPauseActionIcon(player: Player) = when {
+        player.isPlaying -> R.drawable.ic_pause
+        player.playbackState == Player.STATE_ENDED -> R.drawable.ic_restart
+        else -> R.drawable.ic_play
     }
 }

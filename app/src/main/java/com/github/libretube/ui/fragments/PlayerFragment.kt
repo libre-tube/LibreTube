@@ -1160,13 +1160,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private fun updatePlayPauseButton() {
-        binding.playImageView.setImageResource(
-            when {
-                exoPlayer.isPlaying -> R.drawable.ic_pause
-                exoPlayer.playbackState == Player.STATE_ENDED -> R.drawable.ic_restart
-                else -> R.drawable.ic_play
-            }
-        )
+        binding.playImageView.setImageResource(PlayerHelper.getPlayPauseActionIcon(exoPlayer))
     }
 
     private suspend fun initializeHighlight(highlight: Segment) {
