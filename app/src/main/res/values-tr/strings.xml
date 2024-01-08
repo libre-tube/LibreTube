@@ -270,7 +270,7 @@
     <string name="preferences">Tercihler</string>
     <string name="backup_customInstances">Özel Oluşumlar</string>
     <string name="save_feed">Akışı arka planda yükle</string>
-    <string name="save_feed_summary">Abonelik akışının arka planda yüklenmesini ve otomatik olarak yenilenmesini önleyin</string>
+    <string name="save_feed_summary">Abonelik akışını arka planda yükleyin ve sekmeler arasında geçiş yaparken yeniden yüklenmesini önleyin</string>
     <string name="download_channel_name">İndirme Hizmeti</string>
     <string name="download_channel_description">Medya indirirken bildirim gösterir.</string>
     <string name="push_channel_name">Bildirim Çalışanı</string>
@@ -297,7 +297,7 @@
     <string name="time">Zaman</string>
     <string name="start_time">Başlangıç zamanı</string>
     <string name="end_time">Bitiş zamanı</string>
-    <string name="notification_time">Bildirim süresini kısıtla</string>
+    <string name="notification_time">Bildirim zamanlamasını kısıtla</string>
     <string name="notification_time_summary">Video bildirimlerinin gösterileceği zaman aralığını sınırla</string>
     <string name="layout">Düzen</string>
     <string name="alternative_player_layout">Alternatif oynatıcı düzeni</string>
@@ -415,7 +415,7 @@
     <string name="duration_reversed">Süre (ters)</string>
     <string name="unlimited_search_history">Sınırsız arama geçmişi</string>
     <string name="show_stream_thumbnails">Video küçük resimlerini göster</string>
-    <string name="show_stream_thumbnails_summary">Yeni videoların küçük resimlerini gösterin. Bunu etkinleştirmek ek veri tüketir</string>
+    <string name="show_stream_thumbnails_summary">Yeni videoların küçük resimlerini gösterin. Bunu etkinleştirmek ek veri tüketecektir</string>
     <string name="fallback_piped_proxy_summary">YouTube\'a doğrudan bağlanmak mevcut video için çalışmıyorsa videoları proxy aracılığıyla (ilk yükleme sürelerini artırır) yükleyin. Devre dışı bırakılırsa YouTube Müzik içeriği, YT kısıtlamaları nedeniyle muhtemelen oynatılamayacaktır</string>
     <string name="fallback_piped_proxy">Piped proxy\'e dönüş yap</string>
     <string name="import_format_freetube">FreeTube</string>
@@ -423,8 +423,8 @@
     <string name="choose_instance">Lütfen önce bir isteyici seçin!</string>
     <string name="mark_as_unwatched">İzlenmedi olarak işaretle</string>
     <string name="choose_instance_long">Lütfen aşağıdan kullanmak için bir Piped isteyicisi seçin. Piped isteyicisi, siz ve YouTube arasında aracı görevi görür. Bu isteyiciler, ülke bayraklarıyla gösterilen farklı fiziksel konumlarda bulunur. Size fiziksel olarak daha yakın olan isteyiciler, muhtemelen, yakın olmayan isteyicilerden daha hızlıdır. Ayarlarda kullandığınız isteyiciyi istediğiniz zaman değiştirebilirsiniz.</string>
-    <string name="import_playlists_from">Oynatma listelerini şuradan içe aktar</string>
-    <string name="export_subscriptions_to">Abonelikleri şuraya aktar</string>
+    <string name="import_playlists_from">Oynatma listelerini içe aktar</string>
+    <string name="export_subscriptions_to">Abonelikleri dışa aktar</string>
     <string name="import_subscriptions_from">Abonelikleri şurdan içe aktar</string>
     <string name="home_tab_content">Giriş sekmesi içeriği</string>
     <string name="stop">Durdur</string>
@@ -434,7 +434,7 @@
     <string name="alphabetic">Alfabetik</string>
     <string name="manual">El ile</string>
     <string name="automatic">Otomatik</string>
-    <string name="export_playlists_to">Çalma listelerini şuraya aktar</string>
+    <string name="export_playlists_to">Oynatma listelerini dışa aktar</string>
     <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="creation_date">Oluşturulma tarihi</string>
     <string name="creation_date_reversed">Oluşturulma tarihi (ters)</string>
