@@ -168,7 +168,7 @@ open class CustomExoPlayerView(
                         Player.EVENT_PLAY_WHEN_READY_CHANGED
                     )
                 ) {
-                    updatePlayPauseButton()
+                    binding.playPauseBTN.setImageResource(PlayerHelper.getPlayPauseActionIcon(player))
 
                     // keep screen on if the video is playing
                     keepScreenOn = player.isPlaying == true
@@ -225,16 +225,6 @@ open class CustomExoPlayerView(
     }
 
     open fun onPlayerEvent(player: Player, playerEvents: Player.Events) = Unit
-
-    private fun updatePlayPauseButton() {
-        binding.playPauseBTN.setImageResource(
-            when {
-                player?.isPlaying == true -> R.drawable.ic_pause
-                player?.playbackState == Player.STATE_ENDED -> R.drawable.ic_restart
-                else -> R.drawable.ic_play
-            }
-        )
-    }
 
     private fun updateDisplayedDurationType(showTimeLeft: Boolean? = null) {
         var shouldShowTimeLeft = showTimeLeft ?: PreferenceHelper

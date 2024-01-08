@@ -100,16 +100,18 @@ class OnlinePlayerService : LifecycleService() {
     /**
      * Listener for passing playback state changes to the AudioPlayerFragment
      */
-    var onIsPlayingChanged: ((isPlaying: Boolean) -> Unit)? = null
+    var onStateOrPlayingChanged: ((isPlaying: Boolean) -> Unit)? = null
     var onNewVideo: ((streams: Streams, videoId: String) -> Unit)? = null
 
     private val playerListener = object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
             super.onIsPlayingChanged(isPlaying)
-            onIsPlayingChanged?.invoke(isPlaying)
+            onStateOrPlayingChanged?.invoke(isPlaying)
         }
 
         override fun onPlaybackStateChanged(state: Int) {
+            onStateOrPlayingChanged?.invoke(player?.isPlaying ?: false)
+
             when (state) {
                 Player.STATE_ENDED -> {
                     if (PlayerHelper.shouldPlayNextVideo(playlistId != null) && !isTransitioning) playNextVideo()
@@ -411,12 +413,4 @@ class OnlinePlayerService : LifecycleService() {
     fun getDuration() = player?.duration
 
     fun seekToPosition(position: Long) = player?.seekTo(position)
-
-    fun pause() {
-        player?.pause()
-    }
-
-    fun play() {
-        player?.play()
-    }
 }
