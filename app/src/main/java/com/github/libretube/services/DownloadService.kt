@@ -118,6 +118,7 @@ class DownloadService : LifecycleService() {
                     streams.title,
                     streams.description,
                     streams.uploader,
+                    streams.duration,
                     streams.uploadTimestamp.toLocalDateTime(TimeZone.currentSystemDefault()).date,
                     thumbnailTargetPath
                 )
