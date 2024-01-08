@@ -3,6 +3,7 @@ package com.github.libretube.ui.adapters
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
@@ -74,6 +75,10 @@ class DownloadsAdapter(
             } else {
                 downloadOverlay.isGone = true
                 fileSize.text = totalSizeInfo
+                durationContainer.isVisible = true
+                download.duration?.let {
+                    thumbnailDuration.text = DateUtils.formatElapsedTime(it)
+                }
             }
 
             download.thumbnailPath?.let { path ->
