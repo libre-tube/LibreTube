@@ -304,6 +304,11 @@ class OnlinePlayerService : LifecycleService() {
      * Plays the next video from the queue
      */
     private fun playNextVideo(nextId: String? = null) {
+        if (nextId == null && PlayingQueue.repeatMode == Player.REPEAT_MODE_ONE) {
+            player?.seekTo(0)
+            return
+        }
+
         val nextVideo = nextId ?: PlayingQueue.getNext() ?: return
 
         // play new video on background

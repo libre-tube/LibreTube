@@ -236,7 +236,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 }
 
                 PlayerEvent.Next -> {
-                    playNextVideo()
+                    playNextVideo(PlayingQueue.getNext())
                 }
 
                 PlayerEvent.Background -> {
@@ -634,7 +634,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         playerBinding.skipNext.setOnClickListener {
-            playNextVideo()
+            playNextVideo(PlayingQueue.getNext())
         }
 
         binding.relPlayerDownload.setOnClickListener {
@@ -1004,6 +1004,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     // used for autoplay and skipping to next video
     private fun playNextVideo(nextId: String? = null) {
+        if (nextId == null && PlayingQueue.repeatMode == Player.REPEAT_MODE_ONE) {
+            exoPlayer.seekTo(0)
+            return
+        }
+
         val nextVideoId = nextId ?: PlayingQueue.getNext()
         // by making sure that the next and the current video aren't the same
         saveWatchPosition()
