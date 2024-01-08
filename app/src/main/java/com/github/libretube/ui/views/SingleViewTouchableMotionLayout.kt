@@ -23,6 +23,9 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
     private val swipeUpListener = mutableListOf<() -> Unit>()
     private val swipeDownListener = mutableListOf<() -> Unit>()
 
+    private var startedMinimized = false
+    private var isStrictlyDownSwipe = false
+
     init {
         addTransitionListener(object : TransitionAdapter() {
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
@@ -65,7 +68,11 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
             distanceY: Float
         ): Boolean {
 
-            if (distanceY < -15F) {
+            if (isStrictlyDownSwipe && distanceY > 0) {
+                isStrictlyDownSwipe = false
+            }
+
+            if (isStrictlyDownSwipe && startedMinimized && distanceY < -15F) {
                 swipeDownListener.forEach { it.invoke() }
                 return true
             }
@@ -100,6 +107,10 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 touchStarted = false
                 return super.onTouchEvent(event)
+            }
+            MotionEvent.ACTION_DOWN -> {
+                isStrictlyDownSwipe = true
+                startedMinimized = progress == 1F
             }
         }
         if (!touchStarted) {
