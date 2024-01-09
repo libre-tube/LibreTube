@@ -11,6 +11,7 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PreferenceHelper
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.decodeFromJsonElement
+import java.util.TreeSet
 
 object DeArrowUtil {
     private fun extractTitleAndThumbnail(data: JsonElement): Pair<String?, String?> {
@@ -32,9 +33,7 @@ object DeArrowUtil {
     suspend fun deArrowStreamItems(streamItems: List<StreamItem>): List<StreamItem> {
         if (!PreferenceHelper.getBoolean(PreferenceKeys.DEARROW, false)) return streamItems
 
-        val videoIds = streamItems.mapNotNull { it.url?.toID() }
-            .sorted()
-            .toSet()
+        val videoIds = streamItems.mapNotNullTo(TreeSet()) { it.url?.toID() }
             .joinToString(",")
 
         val response = try {
@@ -59,9 +58,7 @@ object DeArrowUtil {
         if (!PreferenceHelper.getBoolean(PreferenceKeys.DEARROW, false)) return contentItems
 
         val videoIds = contentItems.filter { it.type == "stream" }
-            .map { it.url.toID() }
-            .sorted()
-            .toSet()
+            .mapTo(TreeSet()) { it.url.toID() }
             .joinToString(",")
 
         if (videoIds.isEmpty()) return contentItems
