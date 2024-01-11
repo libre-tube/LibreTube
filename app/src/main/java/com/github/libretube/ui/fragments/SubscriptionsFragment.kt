@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -36,6 +37,8 @@ import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.sheets.ChannelGroupsSheet
 import com.github.libretube.ui.sheets.FilterSortBottomSheet
+import com.github.libretube.ui.sheets.FilterSortBottomSheet.Companion.FILTER_SORT_REQUEST_KEY
+import com.github.libretube.ui.sheets.FilterSortBottomSheet.Companion.SELECTED_SORT_OPTION_KEY
 import com.github.libretube.util.PlayingQueue
 import com.google.android.material.chip.Chip
 import kotlinx.coroutines.Dispatchers
@@ -171,16 +174,20 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
         binding.filterSort.setOnClickListener  {
             val sortOptions = resources.getStringArray(R.array.sortOptions)
 
+            val fragManager = (context as AppCompatActivity).supportFragmentManager
+            fragManager.setFragmentResultListener(
+                FILTER_SORT_REQUEST_KEY,
+                context as AppCompatActivity
+            ) { _, resultBundle ->
+                selectedSortOrder = resultBundle.getInt(SELECTED_SORT_OPTION_KEY)
+                showFeed()
+            }
+
             FilterSortBottomSheet.createWith(
                 sortOptions = sortOptions.mapIndexed { index, option ->
                     SelectableOption(isSelected = index == selectedSortOrder, name = option)
-                },
-                sortListener = { index, _ ->
-                    selectedSortOrder = index
-                    showFeed()
-                },
-                filtersListener = ::showFeed
-            ).show(childFragmentManager)
+                }
+            ).show(fragManager)
         }
     }
 
@@ -248,14 +255,13 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
     private fun List<StreamItem>.filterByStatusAndWatchPosition(): List<StreamItem> {
 
         val streamItems = this.filter {
-            val isLive = (it.duration ?: -1L) < 0L
-            val isVideo = !it.isShort && !isLive
+            val isVideo = !it.isShort && !it.isLive
 
             return@filter when {
-                !ContentFilter.SHORTS.isEnabled() && it.isShort  -> false
-                !ContentFilter.VIDEOS.isEnabled() && isVideo     -> false
-                !ContentFilter.LIVESTREAMS.isEnabled() && isLive -> false
-                else                                             -> true
+                !ContentFilter.SHORTS.isEnabled() && it.isShort     -> false
+                !ContentFilter.VIDEOS.isEnabled() && isVideo        -> false
+                !ContentFilter.LIVESTREAMS.isEnabled() && it.isLive -> false
+                else                                                -> true
             }
 
         }
