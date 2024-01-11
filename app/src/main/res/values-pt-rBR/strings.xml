@@ -444,14 +444,14 @@
     <string name="off">Desativado</string>
     <string name="manual">Manual</string>
     <string name="automatic">Automático</string>
-    <string name="fallback_piped_proxy">Fallback para o proxy do Piped</string>
+    <string name="fallback_piped_proxy">Fallback para o proxy Piped</string>
     <string name="visible">Mostrar na barra de busca</string>
     <string name="jumped_to_highlight">Pulou para o destaque do vídeo</string>
     <string name="category_highlight">Mostrar destaque do vídeo</string>
     <string name="category_highlight_summary">Pode ser o título anunciado, a miniatura ou a parte mais interessante do vídeo. Você pode pular tocando nele na seção de capítulos</string>
     <string name="chapters_videoHighlight">Vídeo em destaque</string>
     <string name="stop">Parar</string>
-    <string name="fallback_piped_proxy_summary">Carregar vídeos através do proxy se conectar ao YouTube diretamente não funciona para o vídeo atual (aumenta os tempos iniciais de carregamento). Se desativado, o conteúdo de música do YouTube provavelmente não vai tocar devido a restrições de YT</string>
+    <string name="fallback_piped_proxy_summary">Carregue vídeos por meio do proxy se a conexão direta com o YouTube não funcionar para o vídeo atual (aumenta o tempo de carregamento inicial). Se desativado, o conteúdo musical do YouTube provavelmente não será reproduzido devido às restrições do YT</string>
     <string name="sb_custom_colors">Cores de segmento personalizadas</string>
     <string name="sb_custom_colors_summary">Alterna segmentos de cores personalizadas para segmentos SponsorBlock</string>
     <string name="color">Cor</string>
@@ -540,4 +540,6 @@
     <string name="uptime">%.2f%% em atividade</string>
     <string name="grid_landscape">Colunas da grade (modo paisagem)</string>
     <string name="copy_tooltip">Copiar</string>
+    <string name="import_groups">Importar grupos de canais</string>
+    <string name="export_groups">Exportar grupos de canais</string>
 </resources>
