@@ -9,6 +9,7 @@ import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.db.DatabaseHolder.Database
+import com.github.libretube.db.obj.SubscriptionGroup
 import com.github.libretube.enums.ImportFormat
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
@@ -18,7 +19,8 @@ import com.github.libretube.obj.FreetubeSubscriptions
 import com.github.libretube.obj.NewPipeSubscription
 import com.github.libretube.obj.NewPipeSubscriptions
 import com.github.libretube.obj.PipedImportPlaylist
-import com.github.libretube.obj.PipedImportPlaylistFile
+import com.github.libretube.obj.PipedBackupFile
+import com.github.libretube.obj.PipedChannelGroup
 import java.util.Date
 import java.util.stream.Collectors
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -139,7 +141,7 @@ object ImportHelper {
         when (importFormat) {
             ImportFormat.PIPED -> {
                 val playlistFile = activity.contentResolver.openInputStream(uri)?.use {
-                    JsonHelper.json.decodeFromStream<PipedImportPlaylistFile>(it)
+                    JsonHelper.json.decodeFromStream<PipedBackupFile>(it)
                 }
                 importPlaylists.addAll(playlistFile?.playlists.orEmpty())
 
@@ -229,7 +231,7 @@ object ImportHelper {
         when (importFormat) {
             ImportFormat.PIPED -> {
                 val playlists = PlaylistsHelper.exportPipedPlaylists()
-                val playlistFile = PipedImportPlaylistFile("Piped", 1, playlists)
+                val playlistFile = PipedBackupFile("Piped", 1, playlists = playlists)
 
                 activity.contentResolver.openOutputStream(uri)?.use {
                     JsonHelper.json.encodeToStream(playlistFile, it)
@@ -247,6 +249,30 @@ object ImportHelper {
             }
 
             else -> Unit
+        }
+    }
+
+    @OptIn(ExperimentalSerializationApi::class)
+    suspend fun importGroups(activity: Activity, uri: Uri) {
+        val pipedFile = activity.contentResolver.openInputStream(uri)?.use {
+            JsonHelper.json.decodeFromStream<PipedBackupFile>(it)
+        } ?: return
+
+        pipedFile.groups.forEach {
+            val group = SubscriptionGroup(it.groupName, it.channels)
+            Database.subscriptionGroupsDao().createGroup(group)
+        }
+    }
+
+    @OptIn(ExperimentalSerializationApi::class)
+    suspend fun exportGroups(activity: Activity, uri: Uri) {
+        val channelGroups = Database.subscriptionGroupsDao().getAll().map {
+            PipedChannelGroup(it.name, it.channels)
+        }
+        val pipedFile = PipedBackupFile("Piped", 1, groups = channelGroups)
+
+        activity.contentResolver.openOutputStream(uri)?.use {
+            JsonHelper.json.encodeToStream(pipedFile, it)
         }
     }
 }
