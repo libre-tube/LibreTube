@@ -537,4 +537,6 @@
     <string name="rich_caption_rendering">Zəngin titr təqdimatı</string>
     <string name="rich_caption_rendering_summary">Daha zəngin və fərdiləşdirilmiş təcrübə üçün veb titrləri göstər</string>
     <string name="copy_tooltip">Köçür</string>
+    <string name="export_groups">Kanal qrupların ixrac et</string>
+    <string name="import_groups">Kanal qrupların idxal et</string>
 </resources>
