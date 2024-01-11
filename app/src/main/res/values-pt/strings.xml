@@ -266,7 +266,7 @@
     <string name="preferences">Preferências</string>
     <string name="backup_customInstances">Instâncias personalizadas</string>
     <string name="save_feed">Carregar fontes em segundo plano</string>
-    <string name="save_feed_summary">Carregar subscrições em segundo plano e impedir atualização automática</string>
+    <string name="save_feed_summary">Carregar fonte de subscrição em segundo plano e impedir a atualização automática ao alternar guias</string>
     <string name="play_next">Reproduzir seguinte</string>
     <string name="navigation_bar">Barra de navegação</string>
     <string name="change_region">Parece que as tendências não estão disponíveis na sua região. Selecione outra região nas definições.</string>
@@ -339,7 +339,7 @@
     <string name="privacy_alert">Alerta de privacidade</string>
     <string name="username_email">Não recomendamos a partilha do endereço de e-mail. Deseja continuar\?</string>
     <string name="play_latest_videos">Reproduzir últimos vídeos</string>
-    <string name="swipe_controls_summary">Utilizar gestos para controlar o volume e o brilho</string>
+    <string name="swipe_controls_summary">Deslize para ajustar o brilho e o volume no modo de ecrã inteiro</string>
     <string name="all_caught_up">É tudo por hoje</string>
     <string name="nothing_selected">Nada selecionado!</string>
     <string name="color_violet">Violeta</string>
@@ -399,7 +399,7 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d vídeos</string>
     <string name="subscriberAndVideoCounts">%1$s subscritores • %2$d vídeos</string>
     <string name="disable_proxy">Desativar proxy Piped</string>
-    <string name="disable_proxy_summary">Carreguar vídeos e imagens diretamente dos servidores YouTube. Apenas deve ativar a opção se utilizar uma VPN!</string>
+    <string name="disable_proxy_summary">Carregar vídeos e imagens diretamente dos servidores YouTube. Apenas deve ativar esta opção se utilizar uma VPN!</string>
     <string name="auto_fullscreen_shorts">Ecrã completo automático em vídeos curtos</string>
     <string name="channel_groups">Grupos de canais</string>
     <string name="new_group">Novo</string>

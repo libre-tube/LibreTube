@@ -407,7 +407,7 @@
     <string name="default_or_unknown_audio_track">standaard of onbekend</string>
     <string name="unsupported_file_format">Niet-ondersteund bestands­formaat: %1$s</string>
     <string name="mark_as_watched">Markeren als gezien</string>
-    <string name="save_feed_summary">Laad de abonnementen-feed op de achtergrond en voorkom dat deze automatisch verversd wordt</string>
+    <string name="save_feed_summary">Laad de abonnementen-feed op de achtergrond en voorkom dat deze herladen wordt bij het wisselen van tabbladen</string>
     <string name="trending">Nu trending</string>
     <string name="pause_on_quit">Pauzeren bij afsluiten</string>
     <string name="playingOnBackground">Afspelen op achtergrond…</string>
@@ -490,7 +490,7 @@
     <string name="disable_proxy_summary">Laad video\'s en afbeeldingen rechtstreeks van de servers van YouTube.</string>
     <string name="play_automatically_summary">Start het afspelen automatisch bij het selecteren van een video</string>
     <string name="emptyPlaylistDescription">De afspeellijstbeschrijving kan niet leeg zijn</string>
-    <string name="swipe_controls_summary">Gebruik een veegbeweging om de helderheid en het volume aan te passen</string>
+    <string name="swipe_controls_summary">Veeg tijdens volledig scherm om de helderheid en het volume aan te passen</string>
     <string name="hls_instead_of_dash_summary">Gebruik HLS in plaats van DASH (zal langzamer zijn, niet aanbevolen)</string>
     <string name="double_tap_seek_summary">Tik twee keer links of rechts om de speler terug of vooruit te spoelen</string>
     <string name="username_email">Doorgaan met een e-mailadres dat niet wordt aanbevolen\?</string>

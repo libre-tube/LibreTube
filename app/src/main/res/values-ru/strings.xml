@@ -274,7 +274,7 @@
     <string name="local_subscriptions">Локальные подписки</string>
     <string name="backup_customInstances">Свои серверы</string>
     <string name="save_feed">Фоновая загрузка ленты</string>
-    <string name="save_feed_summary">Загружать ленту подписок в фоновом режиме, предотвращая её автоматическое обновление</string>
+    <string name="save_feed_summary">Загружать ленту подписок в фоновом режиме, предотвращая её обновление при смене вкладок</string>
     <string name="play_next">Воспроизвести следующее</string>
     <string name="navigation_bar">Панель навигации</string>
     <string name="change_region">Похоже, что тренды не доступны в текущем регионе. Выберите другой регион в настройках.</string>

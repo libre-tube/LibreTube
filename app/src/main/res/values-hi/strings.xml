@@ -154,7 +154,7 @@
     <string name="preferences">तरजीहें</string>
     <string name="backup_customInstances">कस्टम इंस्टैंस</string>
     <string name="save_feed">पृष्ठभूमि में फ़ीड लोड करें</string>
-    <string name="save_feed_summary">सब्सक्रिप्शन फीड को बैकग्राउंड में लोड करें और इसे ऑटो-रीफ्रेश होने से रोकें</string>
+    <string name="save_feed_summary">सब्सक्रिप्शन फीड को बैकग्राउंड में लोड करें और टैब स्विच करते समय इसे पुनः लोड होने से रोकें</string>
     <string name="navigation_bar">नेविगेशन पट्टी</string>
     <string name="playback_pitch">पिॅच</string>
     <string name="error_occurred">ख़राबी</string>
@@ -226,7 +226,7 @@
     <string name="push_channel_name">सूचना कार्यकर्ता</string>
     <string name="brightness">चमक</string>
     <string name="swipe_controls">स्वाइप नियंत्रण</string>
-    <string name="swipe_controls_summary">चमक और ध्वनि को समायोजित करने के लिए स्वाइप जेस्चर का उपयोग करें</string>
+    <string name="swipe_controls_summary">फ़ुलस्क्रीन मोड में चमक और वॉल्यूम एडजस्ट करने के लिए स्वाइप करें</string>
     <string name="download_channel_name">डाउनलोड सेवा</string>
     <string name="download_channel_description">मीडिया डाउनलोड करते समय एक सूचना दिखाता है।</string>
     <string name="queue_insert_related_videos">संबंधित वीडियो डालें</string>
@@ -379,7 +379,7 @@
     <string name="normal_views">%1$s ने देखा %2$s</string>
     <string name="trending_views">%1$s • %2$s दृश्य • %3$s</string>
     <string name="autoplay_countdown">ऑटोप्ले की उलटी गिनती</string>
-    <string name="autoplay_countdown_summary">अगले वीडियो को स्वतः चलाने से पहले 5 सेकंड उलटी गिनती दिखाएं।</string>
+    <string name="autoplay_countdown_summary">अगले वीडियो को स्वतः चलाने से पहले 5 सेकंड उलटी गिनती दिखाएं</string>
     <string name="playing_next">अगला %1$s में चलाया जा रहा है</string>
     <string name="stats_for_nerds">नरडों के लिए आँकड़े</string>
     <string name="video_id">वीडियो आईडी</string>
@@ -397,7 +397,7 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d वीडियोज</string>
     <string name="subscriberAndVideoCounts">%1$s सब्सक्राइबर • %2$d वीडियोज</string>
     <string name="disable_proxy">Piped proxy अक्षम करें</string>
-    <string name="disable_proxy_summary">YouTube के सर्वर से सीधे वीडियो और चित्र लोड करें। यदि आप हमेशा VPN का उपयोग करते हैं तो ही विकल्प को सक्षम करें!</string>
+    <string name="disable_proxy_summary">YouTube के सर्वर से सीधे वीडियो और चित्र लोड करें। यदि आप हमेशा VPN का उपयोग करते हैं तो ही विकल्प को सक्षम करें</string>
     <string name="auto_fullscreen_shorts">शॉर्ट वीडियो पर ऑटो फुलस्क्रीन</string>
     <string name="fullscreen_gestures">फ़ुलस्क्रीन में वीडियो देखने/उससे बाहर निकलने के जेस्चर</string>
     <string name="go_to_video">वीडियो पर जाएं</string>

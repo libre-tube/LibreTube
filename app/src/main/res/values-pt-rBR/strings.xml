@@ -12,10 +12,10 @@
     <string name="logout">Sair</string>
     <string name="loggedIn">Você está logado.</string>
     <string name="loggedout">Você saiu da sua conta.</string>
-    <string name="already_logged_in">Você já está logado. Se preferir, você pode sair da sua conta.</string>
+    <string name="already_logged_in">Você está logado. Se preferir, você pode sair da sua conta.</string>
     <string name="instances">Escolher…</string>
     <string name="customInstance">Personalizada</string>
-    <string name="login_register">Fazer login/cadastre-se</string>
+    <string name="login_register">Fazer login / criar conta</string>
     <string name="cannotDownload">Não é possível baixar este arquivo.</string>
     <string name="downloadfailed">Download falhou.</string>
     <string name="import_from_yt">Importar inscrições</string>
@@ -25,7 +25,7 @@
     <string name="error">Algo deu errado.</string>
     <string name="empty">Você deve inserir o usuário e a senha.</string>
     <string name="notgmail">Isto é para uma conta Piped</string>
-    <string name="defres">Resolução de vídeo</string>
+    <string name="defres">Resolução dos vídeos</string>
     <string name="grid">Colunas da grade (modo retrato)</string>
     <string name="emptyList">Não há nada aqui.</string>
     <string name="deletePlaylist">Excluir playlist</string>
@@ -39,7 +39,7 @@
     <string name="subscribe">Inscrever-se</string>
     <string name="dlisinprogress">Aguarde até que todos os downloads atuais sejam concluídos.</string>
     <string name="username">Usuário</string>
-    <string name="registered">Cadastrado. Agora você pode se inscrever em canais.</string>
+    <string name="registered">Cadastrado concluído. Agora você pode se inscrever em canais.</string>
     <string name="cancel">Cancelar</string>
     <string name="region">Região</string>
     <string name="importsuccess">Inscrito</string>
@@ -180,7 +180,7 @@
     <string name="no_search_result">Sem resultados.</string>
     <string name="reset_message">Redefinir todas as configurações e sair?</string>
     <string name="watch_history">Histórico de visualizações</string>
-    <string name="watch_positions">Continuar assistindo de onde parou</string>
+    <string name="watch_positions">Lembrar posição</string>
     <string name="auth_instance">Instância de autenticação</string>
     <string name="auth_instance_summary">Usar uma instância diferente para chamadas autenticadas</string>
     <string name="auth_instances">Escolha uma instância de autenticação</string>
@@ -197,7 +197,7 @@
     <string name="video">Vídeo</string>
     <string name="player_autoplay">Reprodução automática</string>
     <string name="turnInternetOn">Ative o Wi-Fi ou os dados móveis para se conectar à Internet.</string>
-    <string name="navLabelVisibility">Visibilidade do rótulo</string>
+    <string name="navLabelVisibility">Visibilidade dos rótulos</string>
     <string name="never">Nunca</string>
     <string name="autoRotatePlayer_summary">Reproduzir em tela cheia quando o dispositivo for girado</string>
     <string name="pure_theme">Tema puro</string>
@@ -226,7 +226,7 @@
     <string name="playerAudioFormat">Formato de áudio do player</string>
     <string name="playerAudioQuality">Qualidade do áudio</string>
     <string name="best_quality">Melhor</string>
-    <string name="worst_quality">Pior</string>
+    <string name="worst_quality">Menor qualidade</string>
     <string name="new_videos_badge_summary">Mostrar um selo com a quantidade de novos vídeos, se houver</string>
     <string name="backup_restore">Backup e restauração</string>
     <string name="save_feed">Carregar feed em segundo plano</string>
@@ -242,16 +242,16 @@
     <string name="playlistNameReversed">Nome da playlist (invertido)</string>
     <string name="skip_buttons_summary">Mostrar botões para avançar/retroceder para o próximo vídeo ou anterior</string>
     <string name="skip_buttons">Botões para avançar/retroceder</string>
-    <string name="background_mode">Modo plano de fundo</string>
+    <string name="background_mode">Modo de segundo plano</string>
     <string name="add_to_queue">Adicionar à fila</string>
     <string name="error_occurred">Erro</string>
     <string name="misc">Outros</string>
     <string name="take_a_break">Hora de fazer uma pausa</string>
     <string name="resize_mode_fill">Preencher</string>
     <string name="repeat_mode_none">Nenhum</string>
-    <string name="picture_in_picture">Picture-in-Picture (PiP)</string>
+    <string name="picture_in_picture">Picture-in-picture (PiP)</string>
     <string name="break_reminder_time">Minutos antes de ser lembrado</string>
-    <string name="yt_shorts">Vídeos curtos</string>
+    <string name="yt_shorts">Shorts</string>
     <string name="no_subtitles_available">Nenhuma legenda disponível</string>
     <string name="repeat_mode">Modo de repetição</string>
     <string name="backup">Backup</string>
@@ -323,7 +323,7 @@
     <string name="defaults">Padrões</string>
     <string name="pop_up">Pop-up</string>
     <string name="no_comments_available">Este vídeo não tem comentários.</string>
-    <string name="comments_disabled">Os comentários foram desativados pelo autor.</string>
+    <string name="comments_disabled">Os comentários estão desativados.</string>
     <string name="captions_size">Tamanho das legendas</string>
     <string name="double_tap_seek">Toque duas vezes para procurar</string>
     <string name="all_caught_up">Você está em dia</string>
@@ -395,10 +395,10 @@
         <item quantity="other">%d meses atrás</item>
     </plurals>
     <string name="lbry_hls">LBRY HLS</string>
-    <string name="lbry_hls_summary">Use LBRY HLS para streaming, se disponível</string>
+    <string name="lbry_hls_summary">Usar LBRY HLS para streaming, se disponível</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d vídeos</string>
     <string name="subscriberAndVideoCounts">%1$s inscritos • %2$d vídeos</string>
-    <string name="disable_proxy">Desabilitar o proxy do Piped</string>
+    <string name="disable_proxy">Desabilitar proxy Piped</string>
     <string name="disable_proxy_summary">Carregue vídeos e imagens diretamente dos servidores do YouTube. Habilite a opção apenas se você sempre usa uma VPN</string>
     <string name="auto_fullscreen_shorts">Tela cheia automática em vídeos curtos</string>
     <string name="new_group">Novo</string>
@@ -451,7 +451,7 @@
     <string name="category_highlight_summary">Pode ser o título anunciado, a miniatura ou a parte mais interessante do vídeo. Você pode pular tocando nele na seção de capítulos</string>
     <string name="chapters_videoHighlight">Vídeo em destaque</string>
     <string name="stop">Parar</string>
-    <string name="fallback_piped_proxy_summary">Carregue vídeos por meio do proxy se a conexão direta com o YouTube não funcionar para o vídeo atual (aumenta o tempo de carregamento inicial). Se desativado, o conteúdo de música do YouTube provavelmente não será reproduzido devido a restrições</string>
+    <string name="fallback_piped_proxy_summary">Carregar vídeos através do proxy se conectar ao YouTube diretamente não funciona para o vídeo atual (aumenta os tempos iniciais de carregamento). Se desativado, o conteúdo de música do YouTube provavelmente não vai tocar devido a restrições de YT</string>
     <string name="sb_custom_colors">Cores de segmento personalizadas</string>
     <string name="sb_custom_colors_summary">Alterna segmentos de cores personalizadas para segmentos SponsorBlock</string>
     <string name="color">Cor</string>
@@ -459,7 +459,7 @@
     <string name="enter_hex_value">Digite o valor hexadecimal da cor</string>
     <string name="dearrow">Habilitar DeArrow</string>
     <string name="dearrow_summary">Mostrar títulos e miniaturas mais precisos e menos sensacionalistas. Aumenta o tempo de carregamento dos vídeos</string>
-    <string name="continue_watching">Continue assistindo</string>
+    <string name="continue_watching">Continuar assistindo</string>
     <string name="descriptive_audio_track">descritivo</string>
     <string name="default_or_unknown_audio_track">padrão ou desconhecido</string>
     <string name="unknown_or_no_audio">desconhecido ou sem audio</string>
@@ -476,14 +476,14 @@
     <string name="duration_span">Duração: %1$s</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="screen_orientation">Orientação da tela</string>
-    <string name="remove_watched_videos">Remover videos visualizados</string>
+    <string name="remove_watched_videos">Remover vídeos visualizados</string>
     <string name="player_channel_name">Assistente do Player</string>
     <string name="player_channel_description">Mostrar notificação quando estiver reproduzindo</string>
     <string name="tooltip_create_playlist">Criar playlist</string>
     <string name="tooltip_repeat">Repetir</string>
     <string name="tooltip_clear_queue">Limpar fila</string>
     <string name="tooltip_close">Fechar</string>
-    <string name="tooltip_watch_position">Posição temporal</string>
+    <string name="tooltip_watch_position">Ver posição</string>
     <string name="tooltip_minimize">Minimizar</string>
     <string name="tooltip_unlocked">Desbloquear player</string>
     <string name="tooltip_fullscreen">Tela cheia</string>

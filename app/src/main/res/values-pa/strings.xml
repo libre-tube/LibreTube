@@ -268,7 +268,7 @@
     <string name="preferences">ਤਰਜੀਹਾਂ</string>
     <string name="backup_customInstances">ਕਸਟਮ ਇੰਸਟੈਂਸ</string>
     <string name="save_feed">ਬੈਕਗ੍ਰਾਊਂਡ ਵਿੱਚ ਫੀਡ ਲੋਡ ਕਰੋ</string>
-    <string name="save_feed_summary">ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਫੀਡ ਨੂੰ ਪਿਛੋਕੜ ਵਿੱਚ ਲੋਡ ਕਰੋ ਅਤੇ ਇਸਨੂੰ ਸਵੈ-ਤਾਜ਼ਾ ਹੋਣ ਤੋਂ ਰੋਕੋ</string>
+    <string name="save_feed_summary">ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਫੀਡ ਨੂੰ ਬੈਕਗ੍ਰਾਊਂਡ ਵਿੱਚ ਲੋਡ ਕਰੋ ਅਤੇ ਟੈਬਾਂ ਨੂੰ ਬਦਲਣ ਵੇਲੇ ਇਸਨੂੰ ਮੁੜ ਲੋਡ ਹੋਣ ਤੋਂ ਰੋਕੋ</string>
     <string name="navigation_bar">ਨੈਵੀਗੇਸ਼ਨ ਪੱਟੀ</string>
     <string name="change_region">ਮੌਜੂਦਾ ਖੇਤਰ ਲਈ ਰੁਝਾਨ ਅਣਉਪਲਬਧ ਜਾਪਦਾ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਕੋਈ ਹੋਰ ਚੁਣੋ।</string>
     <string name="playback_pitch">ਪਿੱਚ</string>
@@ -337,7 +337,7 @@
     <string name="bookmarks">ਬੁੱਕਮਾਰਕਸ</string>
     <string name="bookmark">ਬੁੱਕਮਾਰਕ</string>
     <string name="no_comments_available">ਇਸ ਵੀਡੀਓ \'ਤੇ ਕੋਈ ਟਿੱਪਣੀ ਨਹੀਂ ਹੈ।</string>
-    <string name="swipe_controls_summary">ਚਮਕ ਅਤੇ ਆਵਾਜ਼ ਨੂੰ ਅਨੁਕੂਲ ਕਰਨ ਲਈ ਸਵਾਈਪ ਸੰਕੇਤ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
+    <string name="swipe_controls_summary">ਫੁੱਲ ਸਕਰੀਨ ਮੋਡ ਵਿੱਚ ਹੋਣ ਵੇਲੇ ਚਮਕ ਅਤੇ ਆਵਾਜ਼ ਨੂੰ ਐਡਜਸਟ ਕਰਨ ਲਈ ਸਵਾਈਪ ਕਰੋ</string>
     <string name="comments_disabled">ਟਿੱਪਣੀਆਂ ਅੱਪਲੋਡਰ ਦੁਆਰਾ ਅਸਮਰੱਥ ਹਨ।</string>
     <string name="all_caught_up">ਤੁਸੀਂ ਸਭ ਸਮਝ ਲਿਆ ਹੈ</string>
     <string name="double_tap_seek_summary">ਪਲੇਅਰ ਦੀ ਸਥਿਤੀ ਨੂੰ ਰੀਵਾਇੰਡ ਕਰਨ ਜਾਂ ਅੱਗੇ ਭੇਜਣ ਲਈ ਖੱਬੇ ਜਾਂ ਸੱਜੇ ਪਾਸੇ ਦੋ ਵਾਰ ਟੈਪ ਕਰੋ</string>
@@ -399,7 +399,7 @@
     <string name="fullscreen_gestures">ਫੁਲਸਕ੍ਰੀਨ ਸੰਕੇਤਾਂ ਵਿੱਚ ਦਾਖਲ/ਬਾਹਰ ਜਾਓ</string>
     <string name="go_to_video">ਵੀਡੀਓ \'ਤੇ ਜਾਓ</string>
     <string name="disable_proxy">ਪਾਈਪਡ ਪਰੌਕਸੀ ਖਾਰਿਜ ਕਰੋ</string>
-    <string name="disable_proxy_summary">YouTube ਦੇ ਸਰਵਰਾਂ ਤੋਂ ਸਿੱਧੇ ਵੀਡੀਓ ਅਤੇ ਚਿੱਤਰ ਲੋਡ ਕਰੋ। ਜੇਕਰ ਤੁਸੀਂ ਹਮੇਸ਼ਾਂ VPN ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋ ਤਾਂ ਹੀ ਵਿਕਲਪ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ!</string>
+    <string name="disable_proxy_summary">YouTube ਦੇ ਸਰਵਰਾਂ ਤੋਂ ਸਿੱਧੇ ਵੀਡੀਓ ਅਤੇ ਚਿੱਤਰ ਲੋਡ ਕਰੋ। ਜੇਕਰ ਤੁਸੀਂ ਹਮੇਸ਼ਾਂ VPN ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋ ਤਾਂ ਹੀ ਵਿਕਲਪ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ</string>
     <string name="new_group">ਨਵਾਂ</string>
     <string name="group_name">ਗਰੁੱਪ ਨਾਮ</string>
     <plurals name="channel_new_streams">
@@ -534,7 +534,7 @@
     <string name="add_to_group">ਗਰੁੱਪ ਵਿੱਚ ਸ਼ਾਮਿਲ ਕਰੋ</string>
     <string name="uptime">%.2f%% ਅੱਪਟਾਈਮ</string>
     <string name="rich_caption_rendering">ਰਿਚ ਕੈਪਸ਼ਨ ਰੈਂਡਰਿੰਗ</string>
-    <string name="rich_caption_rendering_summary">ਵਧੇਰੇ ਰਿੱਚ ਅਤੇ ਅਨੁਕੂਲਿਤ ਅਨੁਭਵ ਲਈ ਵੈੱਬ ਸੁਰਖੀਆਂ ਨੂੰ ਰੈਂਡਰ ਕਰੋ।</string>
+    <string name="rich_caption_rendering_summary">ਵਧੇਰੇ ਰਿੱਚ ਅਤੇ ਅਨੁਕੂਲਿਤ ਅਨੁਭਵ ਲਈ ਵੈੱਬ ਸੁਰਖੀਆਂ ਨੂੰ ਰੈਂਡਰ ਕਰੋ</string>
     <string name="grid_landscape">ਗਰਿੱਡ ਕਾਲਮ (ਲੈਂਡਸਕੇਪ)</string>
     <string name="copy_tooltip">ਕਾਪੀ ਕਰੋ</string>
 </resources>

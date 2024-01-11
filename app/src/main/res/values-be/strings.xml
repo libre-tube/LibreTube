@@ -278,7 +278,7 @@
     <string name="sb_skip_manual">Прапусціць уручную</string>
     <string name="backup_customInstances">Карыстальніцкія асобнікі</string>
     <string name="save_feed">Загружаць канал у фонавым рэжыме</string>
-    <string name="save_feed_summary">Загружайце стужку падпіскі ў фонавым рэжыме і не дазваляйце ёй аўтаматычна абнаўляцца</string>
+    <string name="save_feed_summary">Загружайце стужку падпіскі ў фонавым рэжыме і не дазваляйце ёй перазагружацца пры пераключэнні ўкладак</string>
     <string name="preferences">Налады</string>
     <string name="play_next">Перайсці да наступнага</string>
     <string name="navigation_bar">Панэль навігацыі</string>
@@ -311,7 +311,7 @@
     <string name="queue_insert_related_videos">Уставіць звязаныя відэа</string>
     <string name="local_playlists">Лакальныя плэйлісты</string>
     <string name="swipe_controls">Кіраванне жэстамі</string>
-    <string name="swipe_controls_summary">Выкарыстоўвайце жэсты для рэгулявання яркасці і гучнасці</string>
+    <string name="swipe_controls_summary">Правядзіце пальцам, каб наладзіць яркасць і гучнасць у поўнаэкранным рэжыме</string>
     <string name="volume">Гучнасць</string>
     <string name="auto">Аўто</string>
     <string name="defaults">Па змаўчанні</string>

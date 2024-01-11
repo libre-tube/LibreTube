@@ -274,7 +274,7 @@
     <string name="push_channel_name">Operatore di notifica</string>
     <string name="push_channel_description">Mostra una notifica quando sono disponibili nuovi video.</string>
     <string name="save_feed">Carica flusso in secondo piano</string>
-    <string name="save_feed_summary">Carica il flusso di iscrizioni in secondo piano e impedisci che venga aggiornato automaticamente</string>
+    <string name="save_feed_summary">Carica il flusso di iscrizioni in secondo piano e impedisci che venga ricaricato quando si cambia scheda</string>
     <string name="legacy_subscriptions">Vista delle iscrizioni obsoleta</string>
     <string name="navigation_bar">Barra di navigazione</string>
     <string name="change_region">La Tendenza sembra non essere disponibile per la regione attuale. Selezionane un\'altra nelle impostazioni.</string>
@@ -303,7 +303,7 @@
     <string name="brightness">Luminosità</string>
     <string name="volume">Volume</string>
     <string name="auto">Automatico</string>
-    <string name="swipe_controls_summary">Usa i gesti per regolare la luminosità e il volume</string>
+    <string name="swipe_controls_summary">Usa i gesti per regolare la luminosità e il volume quando a schermo intero</string>
     <string name="defaults">Predefiniti</string>
     <string name="swipe_controls">Gesti</string>
     <string name="navbar_order">Ordine</string>
