@@ -20,11 +20,13 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.enums.ContentFilter
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.obj.SelectableOption
 import com.github.libretube.ui.adapters.LegacySubscriptionAdapter
 import com.github.libretube.ui.adapters.SubscriptionChannelAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
@@ -32,8 +34,8 @@ import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.models.EditChannelGroupsModel
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
-import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.ChannelGroupsSheet
+import com.github.libretube.ui.sheets.FilterSortBottomSheet
 import com.github.libretube.util.PlayingQueue
 import com.google.android.material.chip.Chip
 import kotlinx.coroutines.Dispatchers
@@ -55,11 +57,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
     private var selectedSortOrder = PreferenceHelper.getInt(PreferenceKeys.FEED_SORT_ORDER, 0)
         set(value) {
             PreferenceHelper.putInt(PreferenceKeys.FEED_SORT_ORDER, value)
-            field = value
-        }
-    private var selectedFilter = PreferenceHelper.getInt(PreferenceKeys.SELECTED_FEED_FILTER, 0)
-        set(value) {
-            PreferenceHelper.putInt(PreferenceKeys.SELECTED_FEED_FILTER, value)
             field = value
         }
 
@@ -84,9 +81,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
             false
         )
 
-        // update the text according to the current order and filter
-        binding.sortTV.text = resources.getStringArray(R.array.sortOptions)[selectedSortOrder]
-        binding.filterTV.text = resources.getStringArray(R.array.filterOptions)[selectedFilter]
+        setupSortAndFilter()
 
         binding.subRefresh.isEnabled = true
         binding.subProgress.isVisible = true
@@ -107,30 +102,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
         binding.subRefresh.setOnRefreshListener {
             viewModel.fetchSubscriptions(requireContext())
             viewModel.fetchFeed(requireContext())
-        }
-
-        binding.sortTV.setOnClickListener {
-            val sortOptions = resources.getStringArray(R.array.sortOptions)
-
-            BaseBottomSheet().apply {
-                setSimpleItems(sortOptions.toList()) { index ->
-                    binding.sortTV.text = sortOptions[index]
-                    selectedSortOrder = index
-                    showFeed()
-                }
-            }.show(childFragmentManager)
-        }
-
-        binding.filterTV.setOnClickListener {
-            val filterOptions = resources.getStringArray(R.array.filterOptions)
-
-            BaseBottomSheet().apply {
-                setSimpleItems(filterOptions.toList()) { index ->
-                    binding.filterTV.text = filterOptions[index]
-                    selectedFilter = index
-                    showFeed()
-                }
-            }.show(childFragmentManager)
         }
 
         binding.toggleSubs.isVisible = true
@@ -196,6 +167,23 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
         }
     }
 
+    private fun setupSortAndFilter() {
+        binding.filterSort.setOnClickListener  {
+            val sortOptions = resources.getStringArray(R.array.sortOptions)
+
+            FilterSortBottomSheet.createWith(
+                sortOptions = sortOptions.mapIndexed { index, option ->
+                    SelectableOption(isSelected = index == selectedSortOrder, name = option)
+                },
+                sortListener = { index, _ ->
+                    selectedSortOrder = index
+                    showFeed()
+                },
+                filtersListener = ::showFeed
+            ).show(childFragmentManager)
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -258,15 +246,18 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
     }
 
     private fun List<StreamItem>.filterByStatusAndWatchPosition(): List<StreamItem> {
+
         val streamItems = this.filter {
             val isLive = (it.duration ?: -1L) < 0L
-            when (selectedFilter) {
-                0 -> true
-                1 -> !it.isShort && !isLive
-                2 -> it.isShort
-                3 -> isLive
-                else -> throw IllegalArgumentException()
+            val isVideo = !it.isShort && !isLive
+
+            return@filter when {
+                !ContentFilter.SHORTS.isEnabled() && it.isShort  -> false
+                !ContentFilter.VIDEOS.isEnabled() && isVideo     -> false
+                !ContentFilter.LIVESTREAMS.isEnabled() && isLive -> false
+                else                                             -> true
             }
+
         }
 
         if (!PreferenceHelper.getBoolean(

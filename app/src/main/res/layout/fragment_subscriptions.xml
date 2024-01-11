@@ -55,19 +55,41 @@
                 android:animateLayoutChanges="true"
                 android:orientation="vertical">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/toggle_subs"
-                    style="@style/PlayerActionsButton"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="14dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="12dp"
-                    android:text="@string/subscriptions"
-                    android:textAlignment="viewStart"
-                    android:textColor="?colorPrimary"
-                    app:drawableEndCompat="@drawable/ic_arrow_up_down"
-                    app:drawableTint="?colorPrimary" />
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/filter_sort"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_filter_sort"
+                        android:contentDescription="@string/tooltip_filter"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:padding="6dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="7dp"
+                        android:alpha="0.7"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/toggle_subs"
+                        style="@style/PlayerActionsButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="6dp"
+                        app:layout_constraintEnd_toStartOf="@id/filter_sort"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:text="@string/subscriptions"
+                        android:textAlignment="viewStart"
+                        android:textColor="?colorPrimary"
+                        app:drawableEndCompat="@drawable/ic_arrow_up_down"
+                        app:drawableTint="?colorPrimary" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <RelativeLayout
                     android:id="@+id/sub_channels_container"
@@ -89,39 +111,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp">
-
-                        <TextView
-                            android:id="@+id/filterTV"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="start"
-                            android:layout_marginStart="5dp"
-                            android:drawablePadding="5dp"
-                            android:paddingHorizontal="10dp"
-                            android:text="@string/all"
-                            android:textSize="16sp"
-                            android:tooltipText="@string/tooltip_filter"
-                            app:drawableEndCompat="@drawable/ic_filter" />
-
-                        <TextView
-                            android:id="@+id/sortTV"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end"
-                            android:layout_marginEnd="5dp"
-                            android:drawablePadding="5dp"
-                            android:paddingHorizontal="10dp"
-                            android:text="@string/most_recent"
-                            android:textSize="16sp"
-                            android:tooltipText="@string/tooltip_sort"
-                            app:drawableEndCompat="@drawable/ic_sort" />
-
-                    </FrameLayout>
 
                     <HorizontalScrollView
                         android:layout_width="match_parent"
