@@ -31,6 +31,20 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/channel_groups">
+
+        <Preference
+            android:icon="@drawable/ic_download_filled"
+            app:key="import_groups"
+            app:title="@string/import_groups" />
+
+        <Preference
+            android:icon="@drawable/ic_upload"
+            app:key="export_groups"
+            app:title="@string/export_groups" />
+
+    </PreferenceCategory>
+
     <PreferenceCategory app:title="@string/app_backup">
 
         <Preference
