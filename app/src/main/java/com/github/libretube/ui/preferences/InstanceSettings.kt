@@ -34,6 +34,7 @@ class InstanceSettings : BasePreferenceFragment() {
     override val titleResourceId: Int = R.string.instance
     private val token get() = PreferenceHelper.getToken()
     private var instances = listOf<PipedInstance>()
+    private val authInstanceToggle get() = findPreference<SwitchPreferenceCompat>(PreferenceKeys.AUTH_INSTANCE_TOGGLE)!!
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.instance_settings, rootKey)
@@ -44,7 +45,6 @@ class InstanceSettings : BasePreferenceFragment() {
         )!!
         val authInstance = findPreference<ListPreference>(PreferenceKeys.AUTH_INSTANCE)!!
         val instancePrefs = listOf(instancePref, authInstance)
-
         val appContext = requireContext().applicationContext
 
         lifecycleScope.launch {
@@ -60,15 +60,6 @@ class InstanceSettings : BasePreferenceFragment() {
             } catch (e: Exception) {
                 appContext.toastFromMainDispatcher(e.message.orEmpty())
             }
-        }
-
-        instancePref.setOnPreferenceChangeListener { _, _ ->
-            if (!authInstanceToggle.isChecked) {
-                logoutAndUpdateUI()
-            }
-            RetrofitInstance.lazyMgr.reset()
-            ActivityCompat.recreate(requireActivity())
-            true
         }
 
         authInstance.setOnPreferenceChangeListener { _, _ ->
@@ -190,6 +181,7 @@ class InstanceSettings : BasePreferenceFragment() {
             .setView(binding.root)
             .setPositiveButton(R.string.okay) { _, _ ->
                 preference.value = selectedInstance
+                resetForNewInstance()
             }
             .setNegativeButton(R.string.cancel, null)
             .show()
@@ -201,6 +193,14 @@ class InstanceSettings : BasePreferenceFragment() {
         findPreference<Preference>(PreferenceKeys.LOGIN_REGISTER)?.isVisible = true
         findPreference<Preference>(PreferenceKeys.LOGOUT)?.isVisible = false
         findPreference<Preference>(PreferenceKeys.DELETE_ACCOUNT)?.isEnabled = false
+    }
+
+    private fun resetForNewInstance() {
+        if (!authInstanceToggle.isChecked) {
+            logoutAndUpdateUI()
+        }
+        RetrofitInstance.lazyMgr.reset()
+        ActivityCompat.recreate(requireActivity())
     }
 
     companion object {
