@@ -5,7 +5,6 @@ import com.github.libretube.helpers.PreferenceHelper
 
 private val enabledFiltersSet get() = PreferenceHelper
     .getString(SELECTED_FEED_FILTERS, "1,2,3")
-    .let { filtersPref -> if (filtersPref == "0") "1,2,3" else filtersPref } // For transition from 0 to 1,2,3 - legacy compatibility
     .split(',')
     .toMutableSet()
 
