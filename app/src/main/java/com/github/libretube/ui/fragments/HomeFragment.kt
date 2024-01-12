@@ -23,6 +23,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentHomeBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.enums.ContentFilter
 import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
@@ -145,12 +146,13 @@ class HomeFragment : Fragment() {
                 }
             }.getOrNull()?.takeIf { it.isNotEmpty() } ?: return
         }
+
+        val allowShorts = ContentFilter.SHORTS.isEnabled()
+        val allowVideos = ContentFilter.VIDEOS.isEnabled()
+        val allowAll = (!allowShorts && !allowVideos)
+
         var filteredFeed = feed.filter {
-            when (PreferenceHelper.getInt(PreferenceKeys.SELECTED_FEED_FILTER, 0)) {
-                1 -> !it.isShort
-                2 -> it.isShort
-                else -> true
-            }
+            (allowShorts && it.isShort) || (allowVideos && !it.isShort) || allowAll
         }
         if (PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)) {
             filteredFeed = runBlocking { DatabaseHelper.filterUnwatched(filteredFeed) }

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/standard_bottom_sheet"
+        style="@style/Widget.Material3.BottomSheet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="20dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Drag handle for accessibility -->
+            <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+                android:id="@+id/drag_handle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/tooltip_filter" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/filters"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    app:selectionRequired="true"
+                    app:singleLine="false"
+                    app:singleSelection="false"
+                    app:chipMinTouchTargetSize="0dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/filter_videos"
+                        style="@style/ElevatedFilterChip"
+                        android:layout_marginHorizontal="0dp"
+                        app:chipSpacingVertical="10dp"
+                        app:chipEndPadding="6dp"
+                        app:chipStartPadding="6dp"
+                        android:checked="true"
+                        android:text="@string/videos" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/filter_shorts"
+                        style="@style/ElevatedFilterChip"
+                        android:layout_marginHorizontal="0dp"
+                        app:chipEndPadding="6dp"
+                        app:chipStartPadding="6dp"
+                        android:checked="true"
+                        android:text="@string/yt_shorts" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/filter_livestreams"
+                        style="@style/ElevatedFilterChip"
+                        android:layout_marginHorizontal="0dp"
+                        app:chipEndPadding="6dp"
+                        app:chipStartPadding="6dp"
+                        android:checked="true"
+                        android:text="@string/livestreams" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/tooltip_sort" />
+
+                <RadioGroup
+                    android:id="@+id/sort_radio_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

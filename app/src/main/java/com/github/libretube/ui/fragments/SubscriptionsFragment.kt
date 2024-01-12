@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.core.view.children
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -16,15 +18,18 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.enums.ContentFilter
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.obj.SelectableOption
 import com.github.libretube.ui.adapters.LegacySubscriptionAdapter
 import com.github.libretube.ui.adapters.SubscriptionChannelAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
@@ -32,8 +37,10 @@ import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.models.EditChannelGroupsModel
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
-import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.ChannelGroupsSheet
+import com.github.libretube.ui.sheets.FilterSortBottomSheet
+import com.github.libretube.ui.sheets.FilterSortBottomSheet.Companion.FILTER_SORT_REQUEST_KEY
+import com.github.libretube.ui.sheets.FilterSortBottomSheet.Companion.SELECTED_SORT_OPTION_KEY
 import com.github.libretube.util.PlayingQueue
 import com.google.android.material.chip.Chip
 import kotlinx.coroutines.Dispatchers
@@ -55,11 +62,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
     private var selectedSortOrder = PreferenceHelper.getInt(PreferenceKeys.FEED_SORT_ORDER, 0)
         set(value) {
             PreferenceHelper.putInt(PreferenceKeys.FEED_SORT_ORDER, value)
-            field = value
-        }
-    private var selectedFilter = PreferenceHelper.getInt(PreferenceKeys.SELECTED_FEED_FILTER, 0)
-        set(value) {
-            PreferenceHelper.putInt(PreferenceKeys.SELECTED_FEED_FILTER, value)
             field = value
         }
 
@@ -84,9 +86,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
             false
         )
 
-        // update the text according to the current order and filter
-        binding.sortTV.text = resources.getStringArray(R.array.sortOptions)[selectedSortOrder]
-        binding.filterTV.text = resources.getStringArray(R.array.filterOptions)[selectedFilter]
+        setupSortAndFilter()
 
         binding.subRefresh.isEnabled = true
         binding.subProgress.isVisible = true
@@ -107,30 +107,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
         binding.subRefresh.setOnRefreshListener {
             viewModel.fetchSubscriptions(requireContext())
             viewModel.fetchFeed(requireContext())
-        }
-
-        binding.sortTV.setOnClickListener {
-            val sortOptions = resources.getStringArray(R.array.sortOptions)
-
-            BaseBottomSheet().apply {
-                setSimpleItems(sortOptions.toList()) { index ->
-                    binding.sortTV.text = sortOptions[index]
-                    selectedSortOrder = index
-                    showFeed()
-                }
-            }.show(childFragmentManager)
-        }
-
-        binding.filterTV.setOnClickListener {
-            val filterOptions = resources.getStringArray(R.array.filterOptions)
-
-            BaseBottomSheet().apply {
-                setSimpleItems(filterOptions.toList()) { index ->
-                    binding.filterTV.text = filterOptions[index]
-                    selectedFilter = index
-                    showFeed()
-                }
-            }.show(childFragmentManager)
         }
 
         binding.toggleSubs.isVisible = true
@@ -196,6 +172,33 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
         }
     }
 
+    private fun setupSortAndFilter() {
+        binding.filterSort.setOnClickListener  {
+            val activityCompat = context as AppCompatActivity
+            val fragManager = activityCompat
+                .supportFragmentManager
+                .apply {
+                    setFragmentResultListener(FILTER_SORT_REQUEST_KEY, activityCompat) { _, resultBundle ->
+                        selectedSortOrder = resultBundle.getInt(SELECTED_SORT_OPTION_KEY)
+                        showFeed()
+                    }
+                }
+
+            FilterSortBottomSheet()
+                .apply { arguments = bundleOf(IntentData.sortOptions to fetchSortOptions()) }
+                .show(fragManager)
+        }
+    }
+
+    private fun fetchSortOptions(): Array<SelectableOption> {
+        return resources
+            .getStringArray(R.array.sortOptions)
+            .mapIndexed { index, option ->
+                SelectableOption(isSelected = index == selectedSortOrder, name = option)
+            }
+            .toTypedArray()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -258,15 +261,17 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
     }
 
     private fun List<StreamItem>.filterByStatusAndWatchPosition(): List<StreamItem> {
+
         val streamItems = this.filter {
-            val isLive = (it.duration ?: -1L) < 0L
-            when (selectedFilter) {
-                0 -> true
-                1 -> !it.isShort && !isLive
-                2 -> it.isShort
-                3 -> isLive
-                else -> throw IllegalArgumentException()
+            val isVideo = !it.isShort && !it.isLive
+
+            return@filter when {
+                !ContentFilter.SHORTS.isEnabled() && it.isShort     -> false
+                !ContentFilter.VIDEOS.isEnabled() && isVideo        -> false
+                !ContentFilter.LIVESTREAMS.isEnabled() && it.isLive -> false
+                else                                                -> true
             }
+
         }
 
         if (!PreferenceHelper.getBoolean(
