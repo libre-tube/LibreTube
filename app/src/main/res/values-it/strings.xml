@@ -541,4 +541,6 @@
     <string name="rich_caption_rendering_summary">Rendering dei sottotitoli web per un\'esperienza più ricca e personalizzata</string>
     <string name="grid_landscape">Colonne della griglia (orizzontale)</string>
     <string name="copy_tooltip">Copia</string>
+    <string name="export_groups">Esporta gruppi di canali</string>
+    <string name="import_groups">Importa gruppi di canali</string>
 </resources>
