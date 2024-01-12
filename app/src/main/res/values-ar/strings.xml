@@ -550,4 +550,6 @@
     <string name="rich_caption_rendering">تقديم التسمية التوضيحية الغنية</string>
     <string name="rich_caption_rendering_summary">عرض التسميات التوضيحية على الويب للحصول على تجربة أكثر ثراءً وتخصيصًا</string>
     <string name="copy_tooltip">نسخ</string>
+    <string name="import_groups">استيراد مجموعات القنوات</string>
+    <string name="export_groups">تصدير مجموعات القنوات</string>
 </resources>
