@@ -538,4 +538,6 @@
     <string name="rich_caption_rendering_summary">Rendera webbtexter för en mer rik och anpassad upplevelse</string>
     <string name="grid_landscape">Rutnätskolumner (landskap)</string>
     <string name="copy_tooltip">Kopiera</string>
+    <string name="export_groups">Exportera kanal grupper</string>
+    <string name="import_groups">Importera kanal grupper</string>
 </resources>
