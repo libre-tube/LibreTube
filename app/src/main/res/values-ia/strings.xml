@@ -538,4 +538,6 @@
     <string name="gradientIcon">Gradiente volubile</string>
     <string name="all_caught_up">Tu videva toto</string>
     <string name="fallback_piped_proxy_summary">Cargar videos via le proxy si le connexion a YouTube non functiona pro le video actual (augmenta le tempore initial de carga). Si es disactivate, le contentos musical de YouTube poterea non reproducer se per restrictiones de YT</string>
+    <string name="import_groups">Importar gruppos de canales</string>
+    <string name="export_groups">Exportar gruppos de canales</string>
 </resources>
