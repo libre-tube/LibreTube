@@ -543,4 +543,6 @@
     <string name="rich_caption_rendering">Продвинутые субтитры</string>
     <string name="rich_caption_rendering_summary">Отрисовывать субтитры веб-движком для поддержки расширенных возможностей и настроек</string>
     <string name="copy_tooltip">Копировать</string>
+    <string name="import_groups">Импортировать группы каналов</string>
+    <string name="export_groups">Экспортировать группы каналов</string>
 </resources>
