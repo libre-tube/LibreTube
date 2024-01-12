@@ -537,4 +537,6 @@
     <string name="rich_caption_rendering_summary">ਵਧੇਰੇ ਰਿੱਚ ਅਤੇ ਅਨੁਕੂਲਿਤ ਅਨੁਭਵ ਲਈ ਵੈੱਬ ਸੁਰਖੀਆਂ ਨੂੰ ਰੈਂਡਰ ਕਰੋ</string>
     <string name="grid_landscape">ਗਰਿੱਡ ਕਾਲਮ (ਲੈਂਡਸਕੇਪ)</string>
     <string name="copy_tooltip">ਕਾਪੀ ਕਰੋ</string>
+    <string name="export_groups">ਚੈਨਲ ਗਰੁੱਪ ਐਕਸਪੋਰਟ ਕਰੋ</string>
+    <string name="import_groups">ਚੈਨਲ ਗਰੁੱਪ ਇੰਪੋਰਟ ਕਰੋ</string>
 </resources>
