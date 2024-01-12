@@ -534,4 +534,6 @@
     <string name="rich_caption_rendering">富字幕渲染</string>
     <string name="rich_caption_rendering_summary">渲染 web 字幕获得更丰富和定制的体验</string>
     <string name="copy_tooltip">复制</string>
+    <string name="import_groups">导入频道组</string>
+    <string name="export_groups">导出频道组</string>
 </resources>
