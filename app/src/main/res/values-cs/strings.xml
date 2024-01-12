@@ -540,4 +540,6 @@
     <string name="rich_caption_rendering">Vylepšené vykreslování titulků</string>
     <string name="rich_caption_rendering_summary">Vykreslovat webové titulky pro lepší a více přizpůsobený zážitek</string>
     <string name="copy_tooltip">Kopírovat</string>
+    <string name="import_groups">Importovat skupiny kanálů</string>
+    <string name="export_groups">Exportovat skupiny kanállů</string>
 </resources>
