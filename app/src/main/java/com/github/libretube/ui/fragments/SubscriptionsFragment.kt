@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.core.view.children
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
 import com.github.libretube.db.DatabaseHelper
@@ -172,23 +174,29 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
 
     private fun setupSortAndFilter() {
         binding.filterSort.setOnClickListener  {
-            val sortOptions = resources.getStringArray(R.array.sortOptions)
-
-            val fragManager = (context as AppCompatActivity).supportFragmentManager
-            fragManager.setFragmentResultListener(
-                FILTER_SORT_REQUEST_KEY,
-                context as AppCompatActivity
-            ) { _, resultBundle ->
-                selectedSortOrder = resultBundle.getInt(SELECTED_SORT_OPTION_KEY)
-                showFeed()
-            }
-
-            FilterSortBottomSheet.createWith(
-                sortOptions = sortOptions.mapIndexed { index, option ->
-                    SelectableOption(isSelected = index == selectedSortOrder, name = option)
+            val activityCompat = context as AppCompatActivity
+            val fragManager = activityCompat
+                .supportFragmentManager
+                .apply {
+                    setFragmentResultListener(FILTER_SORT_REQUEST_KEY, activityCompat) { _, resultBundle ->
+                        selectedSortOrder = resultBundle.getInt(SELECTED_SORT_OPTION_KEY)
+                        showFeed()
+                    }
                 }
-            ).show(fragManager)
+
+            FilterSortBottomSheet()
+                .apply { arguments = bundleOf(IntentData.sortOptions to fetchSortOptions()) }
+                .show(fragManager)
         }
+    }
+
+    private fun fetchSortOptions(): Array<SelectableOption> {
+        return resources
+            .getStringArray(R.array.sortOptions)
+            .mapIndexed { index, option ->
+                SelectableOption(isSelected = index == selectedSortOrder, name = option)
+            }
+            .toTypedArray()
     }
 
     override fun onDestroyView() {

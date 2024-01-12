@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FilterSortSheetBinding
 import com.github.libretube.enums.ContentFilter
 import com.github.libretube.obj.SelectableOption
@@ -16,9 +17,14 @@ class FilterSortBottomSheet: ExpandedBottomSheet() {
     private var _binding: FilterSortSheetBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var sortOptions: Collection<SelectableOption>
+    private lateinit var sortOptions: Array<SelectableOption>
 
     private var selectedIndex: Int = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        sortOptions = requireArguments().getParcelableArray(IntentData.sortOptions) as Array<SelectableOption>
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -93,16 +99,8 @@ class FilterSortBottomSheet: ExpandedBottomSheet() {
     }
 
     companion object {
-
         const val FILTER_SORT_REQUEST_KEY = "filter_sort_request_key"
         const val SELECTED_SORT_OPTION_KEY = "selected_sort_option_key"
-
-        fun createWith(
-            sortOptions: Collection<SelectableOption>
-        ) = FilterSortBottomSheet().apply {
-            this.sortOptions = sortOptions
-        }
-
     }
 
 }
