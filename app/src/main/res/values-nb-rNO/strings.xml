@@ -523,4 +523,20 @@
     <string name="autoplay_playlists">Autospill spillelister</string>
     <string name="remember_playback_speed">Husk avspillingshastighet</string>
     <string name="downvote">Nedover</string>
+    <string name="watched">Sett</string>
+    <string name="add_to_group">Legg til i gruppe</string>
+    <string name="uptime">%.2f%% oppetid</string>
+    <string name="grid_landscape">Rutenettskolonner (liggende)</string>
+    <string name="rich_caption_rendering_summary">Tegn vev-undertekster for rikere og mer tilpasset opplevelse</string>
+    <string name="invalid_input">Ugyldig inndata</string>
+    <string name="start_sleep_timer">Start søvntidsur</string>
+    <string name="import_groups">Importer kanalgrupper</string>
+    <string name="export_groups">Eksporter kanalgrupper</string>
+    <string name="no_segments_found">Ingen segmenter for denne videoen enda.</string>
+    <string name="copy_tooltip">Kopier</string>
+    <string name="disable_sleep_timer">Skru av søvntidsur</string>
+    <string name="time_in_minutes">Tid i minutter</string>
+    <string name="rich_caption_rendering">Avansert undertekstopptegning</string>
+    <string name="successfully_removed_from_playlist">«%1$s» fjernet fra spillelisten.</string>
+    <string name="finished">Fullført</string>
 </resources>
