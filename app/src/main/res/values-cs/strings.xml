@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="search_hint">Hledat</string>
-    <string name="subscribe">ODEBÍRAT</string>
+    <string name="subscribe">Odebírat</string>
     <string name="unsubscribe">ODHLÁSIT ODBĚR</string>
     <string name="yes">Ano</string>
     <string name="username">Uživatelské jméno</string>
@@ -509,7 +509,7 @@
     <string name="sb_invalid_segment">Neplatný začátek nebo konec segmentu</string>
     <string name="contribute_to_sponsorblock">Přispějte do služby SponsorBlock</string>
     <string name="filename_too_long">Název souboru je příliš dlouhý!</string>
-    <string name="sponsorblock_user_id">SponsorBlock UserID</string>
+    <string name="sponsorblock_user_id">ID použivatele SponsorBlock</string>
     <string name="donate">Přispět</string>
     <string name="no_fullscreen_resolution">Rozlišení bez celé obrazovky</string>
     <string name="playback_during_call_summary">Má to také vliv na to, že aplikace již nezpracovává žádný druh zaměření zvuku</string>
