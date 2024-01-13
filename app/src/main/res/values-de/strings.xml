@@ -538,4 +538,6 @@
     <string name="rich_caption_rendering_summary">Individuell gestaltete Untertitel (z.B. fettgedruckt oder andere Schriftart) anzeigen</string>
     <string name="grid_landscape">Spaltenanzahl im Querformat</string>
     <string name="copy_tooltip">Kopieren</string>
+    <string name="export_groups">Kanalgruppen exportieren</string>
+    <string name="import_groups">Kanalgruppen importieren</string>
 </resources>
