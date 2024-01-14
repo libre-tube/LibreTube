@@ -247,7 +247,7 @@ class MainActivity : BaseActivity() {
     private fun isSearchInProgress(): Boolean {
         if (!::navController.isInitialized) return false
         val id = navController.currentDestination?.id ?: return false
-        return id in listOf(R.id.searchFragment, R.id.searchResultFragment)
+        return id in listOf(R.id.searchFragment, R.id.searchResultFragment, R.id.channelFragment)
     }
 
     override fun invalidateMenu() {
