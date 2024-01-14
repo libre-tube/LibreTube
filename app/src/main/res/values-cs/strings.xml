@@ -224,12 +224,12 @@
     <string name="history_empty">Zatím žádná historie.</string>
     <string name="network_wifi">Pouze Wi-Fi</string>
     <string name="irreversible">Opravdu\? Tohle se nedá vrátit!</string>
-    <string name="network_all">Vše</string>
+    <string name="network_all">Všechny</string>
     <string name="network_metered">Měřené</string>
     <string name="no_search_result">Žádné výsledky.</string>
     <string name="error_occurred">Chyba</string>
     <string name="copied">Zkopírováno</string>
-    <string name="share_with_time">Sdílet s časem</string>
+    <string name="share_with_time">Sdílet s časovým kódem</string>
     <string name="export_subscriptions">Exportovat odběry</string>
     <string name="skip_buttons">Tlačítka přeskočení</string>
     <string name="history_size">Maximální velikost historie</string>
@@ -283,7 +283,7 @@
     <string name="filename">Název souboru</string>
     <string name="playlists_order">Pořadí playlistů</string>
     <string name="playlistNameReversed">Název playlistu (obráceně)</string>
-    <string name="time_code">Čas (sekundy)</string>
+    <string name="time_code">Časový kód (sekundy)</string>
     <string name="added_to_playlist">Přidáno do playlistu %1$s</string>
     <string name="queue">Fronta</string>
     <string name="livestreams">Živé přenosy</string>
