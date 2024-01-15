@@ -344,7 +344,7 @@
     <string name="nothing_selected">Nada selecionado!</string>
     <string name="color_violet">Violeta versátil</string>
     <string name="failed_fetching_instances">Não foi possível buscar as instâncias disponíveis.</string>
-    <string name="hide_watched_from_feed">Ocultar vídeos visualizados no feed</string>
+    <string name="hide_watched_from_feed">Ocultar vídeos já assistidos</string>
     <string name="hide_watched_from_feed_summary">Não mostrar vídeos com mais de 90% de visualizações na guia de inscrições</string>
     <string name="playlistUrl">URL da playlist</string>
     <string name="pause_on_quit">Pausar ao sair</string>
