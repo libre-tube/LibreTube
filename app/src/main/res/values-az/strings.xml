@@ -344,7 +344,7 @@
     <string name="nothing_selected">Heç nə seçilməyib!</string>
     <string name="color_violet">Bütöv Bənövşə</string>
     <string name="failed_fetching_instances">Mövcud instansiyaları əldə etmək mümkün olmadı.</string>
-    <string name="hide_watched_from_feed">Baxılan videoları axından gizlət</string>
+    <string name="hide_watched_from_feed">Artıq baxılan videoları gizlət</string>
     <string name="hide_watched_from_feed_summary">Abunəliklər səhifəsində 90% daha çox baxılan videoları göstərmə</string>
     <string name="playlistUrl">Oynatma Siyahısı URL\'si</string>
     <string name="pause_on_quit">Çıxışda dayandır</string>
