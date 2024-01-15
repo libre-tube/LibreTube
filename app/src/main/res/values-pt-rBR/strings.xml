@@ -16,7 +16,7 @@
     <string name="instances">Escolher…</string>
     <string name="customInstance">Personalizada</string>
     <string name="login_register">Fazer login / criar conta</string>
-    <string name="cannotDownload">Não é possível baixar este arquivo.</string>
+    <string name="cannotDownload">Não é possível baixar este vídeo.</string>
     <string name="downloadfailed">Download falhou.</string>
     <string name="import_from_yt">Importar inscrições</string>
     <string name="app_theme">Tema</string>
@@ -141,7 +141,7 @@
     <string name="category_preview_summary">Para segmentos detalhando conteúdo futuro sem informações adicionais. Se incluir clipes que aparecem apenas aqui, é muito provável que esta seja a categoria errada</string>
     <string name="buffering_goal">Pré-carregamento</string>
     <string name="buffering_goal_summary">Número máximo de segundos para pôr em memória</string>
-    <string name="playerVideoFormat">Formato de vídeo do player</string>
+    <string name="playerVideoFormat">Formato padrão dos vídeos</string>
     <string name="update_available">A versão %1$s está disponível</string>
     <string name="advanced_summary">Downloads e redefinição</string>
     <string name="player_summary">Padrões e comportamento</string>
@@ -223,9 +223,9 @@
     <string name="clonePlaylist">Clonar playlist</string>
     <string name="downloading">Baixando…</string>
     <string name="caption_settings">Legendas</string>
-    <string name="playerAudioFormat">Formato de áudio do player</string>
+    <string name="playerAudioFormat">Formato padrão do áudio</string>
     <string name="playerAudioQuality">Qualidade do áudio</string>
-    <string name="best_quality">Melhor</string>
+    <string name="best_quality">Melhor qualidade</string>
     <string name="worst_quality">Menor qualidade</string>
     <string name="new_videos_badge_summary">Mostrar um selo com a quantidade de novos vídeos, se houver</string>
     <string name="backup_restore">Backup e restauração</string>
@@ -249,7 +249,7 @@
     <string name="take_a_break">Hora de fazer uma pausa</string>
     <string name="resize_mode_fill">Preencher</string>
     <string name="repeat_mode_none">Nenhum</string>
-    <string name="picture_in_picture">Picture-in-picture (PiP)</string>
+    <string name="picture_in_picture">Picture-in-picture (PIP)</string>
     <string name="break_reminder_time">Minutos antes de ser lembrado</string>
     <string name="yt_shorts">Shorts</string>
     <string name="no_subtitles_available">Nenhuma legenda disponível</string>
@@ -269,7 +269,7 @@
     <string name="renamePlaylist">Renomear playlist</string>
     <string name="new_videos_badge">Indicador para novos vídeos</string>
     <string name="skip_segment">Pular segmento</string>
-    <string name="playback_pitch">Tom</string>
+    <string name="playback_pitch">Tom de reprodução</string>
     <string name="copied">Copiado</string>
     <string name="change_region">Parece que as tendências não estão disponíveis na sua região. Selecione outra região nas configurações.</string>
     <string name="legacy_subscriptions">Visualização antiga de inscrições</string>
@@ -354,8 +354,8 @@
     <string name="rewind">Retroceder</string>
     <string name="forward">Avançar</string>
     <string name="pause">Pausar</string>
-    <string name="alternative_pip_controls">Controles PiP alternativos</string>
-    <string name="alternative_pip_controls_summary">Mostrar apenas áudio e pular controles em PiP ao invés de avançar e retroceder</string>
+    <string name="alternative_pip_controls">Controles PIP alternativos</string>
+    <string name="alternative_pip_controls_summary">Mostrar apenas áudio e pular controles em PIP ao invés de avançar e retroceder</string>
     <string name="audio_player">Player de áudio</string>
     <string name="no_subtitle">Sem legenda</string>
     <string name="download_paused">Download pausado</string>
