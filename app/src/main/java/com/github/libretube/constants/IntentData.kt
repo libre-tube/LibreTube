@@ -35,4 +35,5 @@ object IntentData {
     const val isCurrentlyPlaying = "isCurrentlyPlaying"
     const val isSubscribed = "isSubscribed"
     const val sortOptions = "sortOptions"
+    const val hideWatched = "hideWatched"
 }

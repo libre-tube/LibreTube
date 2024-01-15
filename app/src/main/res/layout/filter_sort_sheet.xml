@@ -89,6 +89,13 @@
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="16dp"/>
 
+                <CheckBox
+                    android:id="@+id/hide_watched_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hide_watched_from_feed"
+                    android:layout_marginStart="16dp"/>
+
             </LinearLayout>
 
         </LinearLayout>
