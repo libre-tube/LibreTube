@@ -40,7 +40,6 @@ import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.sheets.ChannelGroupsSheet
 import com.github.libretube.ui.sheets.FilterSortBottomSheet
 import com.github.libretube.ui.sheets.FilterSortBottomSheet.Companion.FILTER_SORT_REQUEST_KEY
-import com.github.libretube.ui.sheets.FilterSortBottomSheet.Companion.SELECTED_SORT_OPTION_KEY
 import com.github.libretube.util.PlayingQueue
 import com.google.android.material.chip.Chip
 import kotlinx.coroutines.Dispatchers
@@ -62,6 +61,13 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
     private var selectedSortOrder = PreferenceHelper.getInt(PreferenceKeys.FEED_SORT_ORDER, 0)
         set(value) {
             PreferenceHelper.putInt(PreferenceKeys.FEED_SORT_ORDER, value)
+            field = value
+        }
+
+    private var hideWatched =
+        PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)
+        set(value) {
+            PreferenceHelper.putBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, value)
             field = value
         }
 
@@ -173,19 +179,25 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
     }
 
     private fun setupSortAndFilter() {
-        binding.filterSort.setOnClickListener  {
+        binding.filterSort.setOnClickListener {
             val activityCompat = context as AppCompatActivity
             val fragManager = activityCompat
                 .supportFragmentManager
                 .apply {
                     setFragmentResultListener(FILTER_SORT_REQUEST_KEY, activityCompat) { _, resultBundle ->
-                        selectedSortOrder = resultBundle.getInt(SELECTED_SORT_OPTION_KEY)
+                        selectedSortOrder = resultBundle.getInt(IntentData.sortOptions)
+                        hideWatched = resultBundle.getBoolean(IntentData.hideWatched)
                         showFeed()
                     }
                 }
 
             FilterSortBottomSheet()
-                .apply { arguments = bundleOf(IntentData.sortOptions to fetchSortOptions()) }
+                .apply {
+                    arguments = bundleOf(
+                        IntentData.sortOptions to fetchSortOptions(),
+                        IntentData.hideWatched to hideWatched
+                    )
+                }
                 .show(fragManager)
         }
     }
@@ -215,7 +227,11 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
         PlayingQueue.clear()
         PlayingQueue.add(*streams.toTypedArray())
 
-        NavigationHelper.navigateVideo(requireContext(), videoUrlOrId = streams.first().url, keepQueue = true)
+        NavigationHelper.navigateVideo(
+            requireContext(),
+            videoUrlOrId = streams.first().url,
+            keepQueue = true
+        )
     }
 
     @SuppressLint("InflateParams")
@@ -266,23 +282,16 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
             val isVideo = !it.isShort && !it.isLive
 
             return@filter when {
-                !ContentFilter.SHORTS.isEnabled() && it.isShort     -> false
-                !ContentFilter.VIDEOS.isEnabled() && isVideo        -> false
+                !ContentFilter.SHORTS.isEnabled() && it.isShort -> false
+                !ContentFilter.VIDEOS.isEnabled() && isVideo -> false
                 !ContentFilter.LIVESTREAMS.isEnabled() && it.isLive -> false
-                else                                                -> true
+                else -> true
             }
-
         }
 
-        if (!PreferenceHelper.getBoolean(
-                PreferenceKeys.HIDE_WATCHED_FROM_FEED,
-                false
-            )
-        ) {
-            return streamItems
-        }
-
-        return runBlocking { DatabaseHelper.filterUnwatched(streamItems) }
+        return if (hideWatched) runBlocking {
+            DatabaseHelper.filterUnwatched(streamItems)
+        } else streamItems
     }
 
     private fun List<StreamItem>.sortedBySelectedOrder() = when (selectedSortOrder) {

@@ -1,5 +1,6 @@
 package com.github.libretube.ui.sheets
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,10 +20,17 @@ class FilterSortBottomSheet: ExpandedBottomSheet() {
 
     private lateinit var sortOptions: Array<SelectableOption>
 
-    private var selectedIndex: Int = 0
+    private var selectedIndex = 0
+    private var hideWatched = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        sortOptions = requireArguments().getParcelableArray(IntentData.sortOptions) as Array<SelectableOption>
+        sortOptions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requireArguments().getParcelableArray(IntentData.sortOptions, SelectableOption::class.java)!!
+        } else {
+            @Suppress("DEPRECATION")
+            requireArguments().getParcelableArray(IntentData.sortOptions) as Array<SelectableOption>
+        }
+        hideWatched = requireArguments().getBoolean(IntentData.hideWatched)
         super.onCreate(savedInstanceState)
     }
 
@@ -38,6 +46,7 @@ class FilterSortBottomSheet: ExpandedBottomSheet() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         addSortOptions()
         observeSortChanges()
+        observeHideWatchedChanges()
         setInitialFiltersState()
         observeFiltersChanges()
     }
@@ -71,10 +80,18 @@ class FilterSortBottomSheet: ExpandedBottomSheet() {
         }
     }
 
+    private fun observeHideWatchedChanges() {
+        binding.hideWatchedCheckbox.setOnCheckedChangeListener { _, checked ->
+            hideWatched = checked
+            notifyChange()
+        }
+    }
+
     private fun setInitialFiltersState() {
         binding.filterVideos.isChecked = ContentFilter.VIDEOS.isEnabled()
         binding.filterShorts.isChecked =  ContentFilter.SHORTS.isEnabled()
         binding.filterLivestreams.isChecked = ContentFilter.LIVESTREAMS.isEnabled()
+        binding.hideWatchedCheckbox.isChecked = hideWatched
     }
 
     private fun observeFiltersChanges() {
@@ -89,7 +106,10 @@ class FilterSortBottomSheet: ExpandedBottomSheet() {
     private fun notifyChange() {
         setFragmentResult(
             requestKey = FILTER_SORT_REQUEST_KEY,
-            result = bundleOf(SELECTED_SORT_OPTION_KEY to selectedIndex)
+            result = bundleOf(
+                IntentData.sortOptions to selectedIndex,
+                IntentData.hideWatched to hideWatched
+            )
         )
     }
 
@@ -100,7 +120,5 @@ class FilterSortBottomSheet: ExpandedBottomSheet() {
 
     companion object {
         const val FILTER_SORT_REQUEST_KEY = "filter_sort_request_key"
-        const val SELECTED_SORT_OPTION_KEY = "selected_sort_option_key"
     }
-
 }

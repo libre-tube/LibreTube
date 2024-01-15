@@ -56,12 +56,6 @@
             app:key="confirm_unsubscribing"
             app:title="@string/confirm_unsubscribing" />
 
-        <SwitchPreferenceCompat
-            android:icon="@drawable/ic_invisible"
-            android:summary="@string/hide_watched_from_feed_summary"
-            android:title="@string/hide_watched_from_feed"
-            app:key="hide_watched_from_feed" />
-
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/misc">
