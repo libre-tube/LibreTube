@@ -45,20 +45,6 @@
             app:title="@string/picture_in_picture" />
 
         <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:dependency="picture_in_picture"
-            android:icon="@drawable/ic_headphones"
-            android:summary="@string/alternative_pip_controls_summary"
-            app:key="alternative_pip_controls"
-            app:title="@string/alternative_pip_controls" />
-
-        <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:icon="@drawable/ic_pause_filled"
-            app:key="pause_on_quit"
-            app:title="@string/pause_on_quit" />
-
-        <SwitchPreferenceCompat
             android:disableDependentsState="true"
             android:icon="@drawable/ic_rotating_circle"
             android:summary="@string/autoRotatePlayer_summary"
@@ -76,10 +62,6 @@
             app:title="@string/fullscreen_orientation"
             app:useSimpleSummaryProvider="true" />
 
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/player">
-
         <com.github.libretube.ui.views.SliderPreference
             android:icon="@drawable/ic_skip"
             app:defValue="10.0"
@@ -89,27 +71,9 @@
             app:valueFrom="5.0"
             app:valueTo="60.0" />
 
-        <ListPreference
-            android:icon="@drawable/ic_time"
-            app:defaultValue="50"
-            app:entries="@array/bufferingGoal"
-            app:entryValues="@array/bufferingGoalValues"
-            app:key="buffering_goal"
-            app:summary="@string/buffering_goal_summary"
-            app:title="@string/buffering_goal" />
-
-        <com.github.libretube.ui.views.SliderPreference
-            android:icon="@drawable/ic_text"
-            android:key="captions_size"
-            android:title="@string/captions_size"
-            app:defValue="18"
-            app:stepSize="1"
-            app:valueFrom="8"
-            app:valueTo="30" />
-
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/appearance">
+    <PreferenceCategory app:title="@string/captions">
 
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_caption"
@@ -129,6 +93,15 @@
             app:key="rich_caption_rendering"
             app:title="@string/rich_caption_rendering"
             android:summary="@string/rich_caption_rendering_summary"/>
+
+        <com.github.libretube.ui.views.SliderPreference
+            android:icon="@drawable/ic_text"
+            android:key="captions_size"
+            android:title="@string/captions_size"
+            app:defValue="18"
+            app:stepSize="1"
+            app:valueFrom="8"
+            app:valueTo="30" />
 
     </PreferenceCategory>
 
@@ -236,6 +209,29 @@
             app:defaultValue="false"
             app:key="playback_during_call"
             app:title="@string/playback_during_call" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:dependency="picture_in_picture"
+            android:icon="@drawable/ic_headphones"
+            android:summary="@string/alternative_pip_controls_summary"
+            app:key="alternative_pip_controls"
+            app:title="@string/alternative_pip_controls" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_pause_filled"
+            app:key="pause_on_quit"
+            app:title="@string/pause_on_quit" />
+
+        <ListPreference
+            android:icon="@drawable/ic_time"
+            app:defaultValue="50"
+            app:entries="@array/bufferingGoal"
+            app:entryValues="@array/bufferingGoalValues"
+            app:key="buffering_goal"
+            app:summary="@string/buffering_goal_summary"
+            app:title="@string/buffering_goal" />
 
     </PreferenceCategory>
 
