@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ProgressBar
         android:id="@+id/progress"
@@ -126,6 +127,26 @@
             android:text="@string/emptyList"
             android:textSize="20sp"
             android:textStyle="bold" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/refresh_button"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:textSize="12sp"
+            app:backgroundTint="@color/exo_black_opacity_70"
+            android:text="@string/retry"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/change_instance"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            app:backgroundTint="@color/exo_black_opacity_70"
+            android:text="@string/change_instance"/>
     </LinearLayout>
 
 </FrameLayout>

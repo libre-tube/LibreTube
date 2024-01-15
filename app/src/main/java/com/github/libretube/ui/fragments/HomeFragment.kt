@@ -1,5 +1,6 @@
 package com.github.libretube.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,42 +9,34 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
-import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.SubscriptionHelper
-import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.api.obj.Playlists
+import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.constants.PreferenceKeys.HOME_TAB_CONTENT
 import com.github.libretube.databinding.FragmentHomeBinding
-import com.github.libretube.db.DatabaseHelper
-import com.github.libretube.db.DatabaseHolder
-import com.github.libretube.enums.ContentFilter
-import com.github.libretube.helpers.LocaleHelper
-import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.db.obj.PlaylistBookmark
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.adapters.PlaylistBookmarkAdapter
 import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
+import com.github.libretube.ui.adapters.VideosAdapter.Companion.LayoutMode
+import com.github.libretube.ui.models.HomeViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
-import com.github.libretube.util.deArrow
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
+import com.google.android.material.snackbar.Snackbar
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
     private val subscriptionsViewModel: SubscriptionsViewModel by activityViewModels()
+    private val homeViewModel: HomeViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -82,7 +75,50 @@ class HomeFragment : Fragment() {
             fetchHomeFeed()
         }
 
-        fetchHomeFeed()
+        binding.refreshButton.setOnClickListener {
+            fetchHomeFeed()
+        }
+
+        binding.changeInstance.setOnClickListener {
+            redirectToIntentSettings()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        observeChanges()
+
+        // Avoid re-fetching when re-entering the screen if it was loaded successfully
+        if (homeViewModel.loadedSuccessfully.value == false) {
+            fetchHomeFeed()
+        }
+    }
+
+    private fun observeChanges() {
+        with (homeViewModel) {
+            trending.observe(viewLifecycleOwner, ::showTrending)
+            feed.observe(viewLifecycleOwner, ::showFeed)
+            bookmarks.observe(viewLifecycleOwner, ::showBookmarks)
+            playlists.observe(viewLifecycleOwner, ::showPlaylists)
+            continueWatching.observe(viewLifecycleOwner, ::showContinueWatching)
+            isLoading.observe(viewLifecycleOwner, ::updateLoading)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        stopObservingChanges()
+    }
+
+    private fun stopObservingChanges() {
+        with (homeViewModel) {
+            trending.removeObserver(::showTrending)
+            feed.removeObserver(::showFeed)
+            bookmarks.removeObserver(::showBookmarks)
+            playlists.removeObserver(::showPlaylists)
+            continueWatching.removeObserver(::showContinueWatching)
+            isLoading.removeObserver(::updateLoading)
+        }
     }
 
     override fun onDestroyView() {
@@ -91,118 +127,58 @@ class HomeFragment : Fragment() {
     }
 
     private fun fetchHomeFeed() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.CREATED) {
-                binding.nothingHere.isGone = true
-                val defaultItems = resources.getStringArray(R.array.homeTabItemsValues)
-                val visibleItems = PreferenceHelper
-                    .getStringSet(PreferenceKeys.HOME_TAB_CONTENT, defaultItems.toSet())
-                awaitAll(
-                    async { if (visibleItems.contains(TRENDING)) loadTrending() },
-                    async { if (visibleItems.contains(WATCHING)) loadVideosToContinueWatching() },
-                    async { if (visibleItems.contains(BOOKMARKS)) loadBookmarks() },
-                    async { if (visibleItems.contains(FEATURED)) loadFeed() },
-                    async { if (visibleItems.contains(PLAYLISTS)) loadPlaylists() }
-                )
+        binding.nothingHere.isGone = true
+        val defaultItems = resources.getStringArray(R.array.homeTabItemsValues)
+        val visibleItems = PreferenceHelper.getStringSet(HOME_TAB_CONTENT, defaultItems.toSet())
 
-                val binding = _binding ?: return@repeatOnLifecycle
-                // No category is shown because they are either empty or disabled
-                if (binding.progress.isVisible) {
-                    binding.progress.isGone = true
-                    binding.nothingHere.isVisible = true
-                }
-            }
-        }
+        homeViewModel.loadHomeFeed(
+            context = requireContext(),
+            savedFeed = subscriptionsViewModel.videoFeed.value,
+            visibleItems = visibleItems,
+            onUnusualLoadTime = ::showChangeInstanceSnackBar
+        )
     }
 
-    private suspend fun loadTrending() {
-        val region = LocaleHelper.getTrendingRegion(requireContext())
-        val trending = runCatching {
-            withContext(Dispatchers.IO) {
-                RetrofitInstance.api.getTrending(region).deArrow().take(10)
-            }
-        }.getOrNull()?.takeIf { it.isNotEmpty() } ?: return
-        val binding = _binding ?: return
+    private fun showTrending(streamItems: List<StreamItem>?) {
+        streamItems ?: return
 
         makeVisible(binding.trendingRV, binding.trendingTV)
         binding.trendingRV.layoutManager = GridLayoutManager(context, 2)
         binding.trendingRV.adapter = VideosAdapter(
-            trending.toMutableList(),
-            forceMode = VideosAdapter.Companion.LayoutMode.TRENDING_ROW
+            streamItems.toMutableList(),
+            forceMode = LayoutMode.TRENDING_ROW
         )
     }
 
-    private suspend fun loadFeed() {
-        val savedFeed = subscriptionsViewModel.videoFeed.value
-        val feed = if (
-            PreferenceHelper.getBoolean(PreferenceKeys.SAVE_FEED, false) &&
-            !savedFeed.isNullOrEmpty()
-        ) {
-            savedFeed
-        } else {
-            runCatching {
-                withContext(Dispatchers.IO) {
-                    SubscriptionHelper.getFeed()
-                }
-            }.getOrNull()?.takeIf { it.isNotEmpty() } ?: return
-        }
-
-        val allowShorts = ContentFilter.SHORTS.isEnabled()
-        val allowVideos = ContentFilter.VIDEOS.isEnabled()
-        val allowAll = (!allowShorts && !allowVideos)
-
-        var filteredFeed = feed.filter {
-            (allowShorts && it.isShort) || (allowVideos && !it.isShort) || allowAll
-        }
-        if (PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)) {
-            filteredFeed = runBlocking { DatabaseHelper.filterUnwatched(filteredFeed) }
-        }
-        val binding = _binding ?: return
+    private fun showFeed(streamItems: List<StreamItem>?) {
+        streamItems ?: return
 
         makeVisible(binding.featuredRV, binding.featuredTV)
-        binding.featuredRV.layoutManager = LinearLayoutManager(
-            context,
-            LinearLayoutManager.HORIZONTAL,
-            false
-        )
-        binding.featuredRV.adapter = VideosAdapter(
-            filteredFeed.take(20).toMutableList(),
-            forceMode = VideosAdapter.Companion.LayoutMode.RELATED_COLUMN
-        )
-        binding.featuredRV.setHasFixedSize(true)
+        val feedVideos = streamItems.take(20).toMutableList()
+        with (binding.featuredRV) {
+            layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
+            adapter = VideosAdapter(feedVideos, forceMode = LayoutMode.RELATED_COLUMN)
+        }
     }
 
-    private suspend fun loadBookmarks() {
-        val bookmarkedPlaylists = withContext(Dispatchers.IO) {
-            DatabaseHolder.Database.playlistBookmarkDao().getAll()
-        }.takeIf { it.isNotEmpty() } ?: return
-        val binding = _binding ?: return
+    private fun showBookmarks(bookmarks: List<PlaylistBookmark>?) {
+        bookmarks ?: return
 
         makeVisible(binding.bookmarksTV, binding.bookmarksRV)
-        binding.bookmarksRV.layoutManager = LinearLayoutManager(
-            context,
-            LinearLayoutManager.HORIZONTAL,
-            false
-        )
-        binding.bookmarksRV.adapter = PlaylistBookmarkAdapter(
-            bookmarkedPlaylists,
-            PlaylistBookmarkAdapter.Companion.BookmarkMode.HOME
-        )
+        with (binding.bookmarksRV) {
+            layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
+            adapter = PlaylistBookmarkAdapter(bookmarks.toMutableList())
+        }
     }
 
-    private suspend fun loadPlaylists() {
-        val playlists = runCatching {
-            withContext(Dispatchers.IO) {
-                PlaylistsHelper.getPlaylists().take(20)
-            }
-        }.getOrNull()?.takeIf { it.isNotEmpty() } ?: return
-        val binding = _binding ?: return
+    private fun showPlaylists(playlists: List<Playlists>?) {
+        playlists ?: return
 
         makeVisible(binding.playlistsRV, binding.playlistsTV)
         binding.playlistsRV.layoutManager = LinearLayoutManager(context)
         binding.playlistsRV.adapter = PlaylistsAdapter(
             playlists.toMutableList(),
-            PlaylistsHelper.getPrivatePlaylistType()
+            playlistType = PlaylistsHelper.getPrivatePlaylistType()
         )
         binding.playlistsRV.adapter?.registerAdapterDataObserver(object :
             RecyclerView.AdapterDataObserver() {
@@ -216,46 +192,72 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private suspend fun loadVideosToContinueWatching() {
-        if (!PlayerHelper.watchHistoryEnabled) return
-
-        val videos = withContext(Dispatchers.IO) {
-            DatabaseHolder.Database.watchHistoryDao().getAll()
-        }
-        val unwatchedVideos = DatabaseHelper.filterUnwatched(videos.map { it.toStreamItem() })
-            .reversed()
-            .take(20)
-        if (unwatchedVideos.isEmpty()) return
-        val binding = _binding ?: return
+    private fun showContinueWatching(unwatchedVideos: List<StreamItem>?) {
+        unwatchedVideos ?: return
 
         makeVisible(binding.watchingRV, binding.watchingTV)
-        binding.watchingRV.layoutManager = LinearLayoutManager(
-            context,
-            LinearLayoutManager.HORIZONTAL,
-            false
-        )
+        binding.watchingRV.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
         binding.watchingRV.adapter = VideosAdapter(
             unwatchedVideos.toMutableList(),
-            forceMode = VideosAdapter.Companion.LayoutMode.RELATED_COLUMN
+            forceMode = LayoutMode.RELATED_COLUMN
         )
+    }
+
+    private fun updateLoading(isLoading: Boolean) {
+        if (isLoading) {
+            showLoading()
+        } else {
+            hideLoading()
+        }
+    }
+
+    private fun showLoading() {
+        binding.progress.isVisible = !binding.refresh.isRefreshing
+        binding.nothingHere.isVisible = false
+    }
+
+    private fun hideLoading() {
+        binding.progress.isVisible = false
+        binding.refresh.isRefreshing = false
+
+        val hasContent = homeViewModel.loadedSuccessfully.value == true
+        if (hasContent) {
+            showContent()
+        } else {
+            showNothingHere()
+        }
+    }
+
+    private fun showNothingHere() {
+        binding.nothingHere.isVisible = true
+        binding.scroll.isVisible = false
+    }
+
+    private fun showContent() {
+        binding.nothingHere.isVisible = false
+        binding.scroll.isVisible = true
+    }
+
+    private fun showChangeInstanceSnackBar() {
+        val root = _binding?.root ?: return
+        Snackbar
+            .make(root, R.string.suggest_change_instance, Snackbar.LENGTH_LONG)
+            .apply {
+                setAction(R.string.change) {
+                    redirectToIntentSettings()
+                }
+                show()
+            }
+    }
+
+    private fun redirectToIntentSettings() {
+        val settingsIntent = Intent(context, SettingsActivity::class.java).apply {
+            putExtra(SettingsActivity.REDIRECT_KEY, SettingsActivity.REDIRECT_TO_INTENT_SETTINGS)
+        }
+        startActivity(settingsIntent)
     }
 
     private fun makeVisible(vararg views: View) {
-        views.forEach {
-            it.isVisible = true
-        }
-        val binding = _binding ?: return
-        binding.progress.isGone = true
-        binding.scroll.isVisible = true
-        binding.refresh.isRefreshing = false
-    }
-
-    companion object {
-        // The values of the preference entries for the home tab content
-        private const val FEATURED = "featured"
-        private const val WATCHING = "watching"
-        private const val TRENDING = "trending"
-        private const val BOOKMARKS = "bookmarks"
-        private const val PLAYLISTS = "playlists"
+        views.forEach { it.isVisible = true }
     }
 }
