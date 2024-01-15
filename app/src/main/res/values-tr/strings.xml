@@ -537,4 +537,6 @@
     <string name="rich_caption_rendering">Zengin altyazı oluşturma</string>
     <string name="rich_caption_rendering_summary">Daha zengin ve kişiselleştirilmiş bir deneyim için web altyazılarını oluşturun</string>
     <string name="copy_tooltip">Kopyala</string>
+    <string name="export_groups">Kanal gruplarını dışa aktar</string>
+    <string name="import_groups">Kanal gruplarını içe aktar</string>
 </resources>

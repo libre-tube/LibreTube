@@ -541,4 +541,6 @@
     <string name="rich_caption_rendering">Renderizado de subtítulos enriquecidos</string>
     <string name="rich_caption_rendering_summary">Renderizar los subtítulos web para una experiencia más rica y personalizada</string>
     <string name="copy_tooltip">Copiar</string>
+    <string name="export_groups">Exportar los grupos de canales</string>
+    <string name="import_groups">Importar los grupos de canales</string>
 </resources>

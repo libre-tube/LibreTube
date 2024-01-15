@@ -543,4 +543,6 @@
     <string name="rich_caption_rendering_summary">Малювати субтитри вебрушієм для підтримки розширених можливостей і налаштувань</string>
     <string name="grid_landscape">Стовпці (у горизонтальному режимі)</string>
     <string name="copy_tooltip">Копіювати</string>
+    <string name="export_groups">Експортувати групи каналів</string>
+    <string name="import_groups">Імпортувати групи каналів</string>
 </resources>

@@ -541,4 +541,6 @@
     <string name="uptime">%.2f%% d\'utilisation</string>
     <string name="grid_landscape">Colonnes de la grille (paysage)</string>
     <string name="copy_tooltip">Copier</string>
+    <string name="export_groups">Exporter des groupes de chaînes</string>
+    <string name="import_groups">Importer des groupes de chaînes</string>
 </resources>

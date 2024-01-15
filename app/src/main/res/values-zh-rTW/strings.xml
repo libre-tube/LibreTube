@@ -535,4 +535,6 @@
     <string name="rich_caption_rendering">豐富字幕繪製</string>
     <string name="rich_caption_rendering_summary">繪製網頁字幕以獲得更豐富與客製化的體驗</string>
     <string name="copy_tooltip">複製</string>
+    <string name="import_groups">匯入頻道群組</string>
+    <string name="export_groups">匯出頻道群組</string>
 </resources>

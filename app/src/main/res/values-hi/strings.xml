@@ -537,4 +537,6 @@
     <string name="rich_caption_rendering_summary">अधिक समृद्ध और अनुकूलित अनुभव के लिए वेब कैप्शन प्रस्तुत करें</string>
     <string name="grid_landscape">ग्रिड कॉलम (लैंडसकेप)</string>
     <string name="copy_tooltip">कॉपी करें</string>
+    <string name="import_groups">चैनल समूह आयात करें</string>
+    <string name="export_groups">चैनल समूह निर्यात करें</string>
 </resources>

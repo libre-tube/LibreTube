@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="search_hint">Hledat</string>
-    <string name="subscribe">ODEBÍRAT</string>
+    <string name="subscribe">Odebírat</string>
     <string name="unsubscribe">ODHLÁSIT ODBĚR</string>
     <string name="yes">Ano</string>
     <string name="username">Uživatelské jméno</string>
@@ -224,12 +224,12 @@
     <string name="history_empty">Zatím žádná historie.</string>
     <string name="network_wifi">Pouze Wi-Fi</string>
     <string name="irreversible">Opravdu\? Tohle se nedá vrátit!</string>
-    <string name="network_all">Vše</string>
+    <string name="network_all">Všechny</string>
     <string name="network_metered">Měřené</string>
     <string name="no_search_result">Žádné výsledky.</string>
     <string name="error_occurred">Chyba</string>
     <string name="copied">Zkopírováno</string>
-    <string name="share_with_time">Sdílet s časem</string>
+    <string name="share_with_time">Sdílet s časovým kódem</string>
     <string name="export_subscriptions">Exportovat odběry</string>
     <string name="skip_buttons">Tlačítka přeskočení</string>
     <string name="history_size">Maximální velikost historie</string>
@@ -283,7 +283,7 @@
     <string name="filename">Název souboru</string>
     <string name="playlists_order">Pořadí playlistů</string>
     <string name="playlistNameReversed">Název playlistu (obráceně)</string>
-    <string name="time_code">Čas (sekundy)</string>
+    <string name="time_code">Časový kód (sekundy)</string>
     <string name="added_to_playlist">Přidáno do playlistu %1$s</string>
     <string name="queue">Fronta</string>
     <string name="livestreams">Živé přenosy</string>
@@ -509,7 +509,7 @@
     <string name="sb_invalid_segment">Neplatný začátek nebo konec segmentu</string>
     <string name="contribute_to_sponsorblock">Přispějte do služby SponsorBlock</string>
     <string name="filename_too_long">Název souboru je příliš dlouhý!</string>
-    <string name="sponsorblock_user_id">SponsorBlock UserID</string>
+    <string name="sponsorblock_user_id">ID použivatele SponsorBlock</string>
     <string name="donate">Přispět</string>
     <string name="no_fullscreen_resolution">Rozlišení bez celé obrazovky</string>
     <string name="playback_during_call_summary">Má to také vliv na to, že aplikace již nezpracovává žádný druh zaměření zvuku</string>
@@ -540,4 +540,6 @@
     <string name="rich_caption_rendering">Vylepšené vykreslování titulků</string>
     <string name="rich_caption_rendering_summary">Vykreslovat webové titulky pro lepší a více přizpůsobený zážitek</string>
     <string name="copy_tooltip">Kopírovat</string>
+    <string name="import_groups">Importovat skupiny kanálů</string>
+    <string name="export_groups">Exportovat skupiny kanállů</string>
 </resources>

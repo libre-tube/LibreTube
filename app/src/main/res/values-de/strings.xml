@@ -159,7 +159,7 @@
     <string name="pauseOnScreenOff_summary">Den Player pausieren, wenn der Bildschirm ausgeschaltet ist</string>
     <string name="watch_positions">Position merken</string>
     <string name="auth_instance">Authentifizierungsinstanz</string>
-    <string name="auth_instance_summary">Verwende für authentifizierte Aufrufe eine andere Instanz</string>
+    <string name="auth_instance_summary">Verwende für authentifizierte Aufrufe (anmelden, Playlists speichern usw.) eine andere Instanz</string>
     <string name="auth_instances">Wähle eine Authentifizierungsinstanz</string>
     <string name="github">GitHub</string>
     <string name="turnInternetOn">Bitte stelle eine Internetverbindung her, indem du WLAN oder mobile Daten aktivierst.</string>
@@ -263,7 +263,7 @@
     <string name="network_wifi">Nur über WLAN</string>
     <string name="share_with_time">Mit Zeitstempel teilen</string>
     <string name="export_subscriptions">Abos exportieren</string>
-    <string name="save_feed_summary">Lade dein Abo-Feed im Hintergrund und verhindere, dass es automatisch aktualisiert wird</string>
+    <string name="save_feed_summary">Lade dein Abo-Feed im Hintergrund und verhindere, dass es beim Tabwechsel neu geladen werden muss</string>
     <string name="delete">Aus Downloads löschen</string>
     <string name="skip_buttons_summary">Schaltflächen anzeigen, um zum nächsten oder vorherigen Video zu springen</string>
     <string name="resize_mode_zoom">Vergrößern</string>
@@ -324,7 +324,7 @@
     <string name="no_comments_available">Dieses Video hat keine Kommentare.</string>
     <string name="comments_disabled">Kommentare sind durch den Uploader deaktiviert.</string>
     <string name="all_caught_up_summary">Du hast alle neuen Videos gesehen</string>
-    <string name="swipe_controls_summary">Verwende eine Wischgeste, um Helligkeit und Lautstärke anzupassen</string>
+    <string name="swipe_controls_summary">Verwende im Vollbildmodus eine Wischgeste, um Helligkeit und Lautstärke anzupassen</string>
     <string name="captions_size">Untertitelgröße</string>
     <string name="double_tap_seek">Doppeltippen zum Suchen</string>
     <string name="all_caught_up">Du bist auf dem neuesten Stand</string>
@@ -538,4 +538,6 @@
     <string name="rich_caption_rendering_summary">Individuell gestaltete Untertitel (z.B. fettgedruckt oder andere Schriftart) anzeigen</string>
     <string name="grid_landscape">Spaltenanzahl im Querformat</string>
     <string name="copy_tooltip">Kopieren</string>
+    <string name="export_groups">Kanalgruppen exportieren</string>
+    <string name="import_groups">Kanalgruppen importieren</string>
 </resources>
