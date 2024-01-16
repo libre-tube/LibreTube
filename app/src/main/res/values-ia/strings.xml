@@ -463,7 +463,7 @@
     <string name="screen_orientation">Orientation del schermo</string>
     <string name="same_as_fullscreen">Mesme que in schermo plen</string>
     <string name="playlists_order">Ordine del listas de reproduction</string>
-    <string name="hide_watched_from_feed">Celar videos reguardate</string>
+    <string name="hide_watched_from_feed">Celar videos jam reguardate</string>
     <string name="tooltip_filter">Filtrar</string>
     <string name="exportsuccess">Exportate.</string>
     <string name="tooltip_edit_groups">Modificar le gruppos</string>

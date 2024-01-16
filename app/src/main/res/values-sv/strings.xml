@@ -325,7 +325,7 @@
     <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="dubbed_audio_track">dubbat</string>
     <string name="limit_to_runtime">Begränsa till uppspelningstid</string>
-    <string name="hide_watched_from_feed">Dölj sedda videor från flödet</string>
+    <string name="hide_watched_from_feed">Dölj redan sedda videor</string>
     <string name="wifi">Wi-Fi</string>
     <string name="skip_silence">Hoppa över tystnad</string>
     <string name="change_playlist_description">Ändra spellistans beskrivning</string>
