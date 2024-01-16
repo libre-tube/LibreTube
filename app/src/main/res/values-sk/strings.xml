@@ -294,7 +294,7 @@
     <string name="proceed">Pokračovať</string>
     <string name="codecs">Kodeky</string>
     <string name="no_chapter">Neexistuje žiadna kapitola</string>
-    <string name="hide_watched_from_feed">Skryť sledované videá pred streamovaním</string>
+    <string name="hide_watched_from_feed">Skryť už sledované videá</string>
     <string name="add_to_group">Pridať do skupiny</string>
     <string name="player_channel_description">Zobrazí upozornenie pri prehrávaní</string>
     <string name="chapters_videoHighlight">Zvýraznenie videa</string>
