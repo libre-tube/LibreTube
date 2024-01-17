@@ -34,7 +34,7 @@
     <string name="defres">تفکیک پذیری ویدیو</string>
     <string name="empty">باید نام کاربری و گذرواژه‌ای را وارد کنید.</string>
     <string name="emptyList">چیزی این‌جا نیست.</string>
-    <string name="grid">ستون‌های شبکه</string>
+    <string name="grid">ستون‌های شبکه‌ای (عمودی)</string>
     <string name="deletePlaylist">حذف سیاههٔ پخش</string>
     <string name="areYouSure">حذف سیاههٔ پخش؟</string>
     <string name="createPlaylist">ایجاد سیاههٔ پخش</string>
@@ -220,7 +220,7 @@
     <string name="autoRotatePlayer">تمام‌صفحهٔ خودکار</string>
     <string name="pure_theme">زمینهٔ خالص</string>
     <string name="reset_watch_positions">بازنشانی</string>
-    <string name="captions">نوشته‌ها</string>
+    <string name="captions">زیرنویس‌ها</string>
     <string name="none">هیچ</string>
     <string name="notifications">آگاهی‌ها</string>
     <string name="playerAudioQuality">کیفیت صدا</string>
@@ -336,7 +336,7 @@
     <string name="copied_to_clipboard">رونوشته به تخته‌گیره</string>
     <string name="break_reminder_time">دقیقه‌های پیش از یادآوری</string>
     <string name="new_videos_badge">نشانگر ویدئوهای جدید</string>
-    <string name="save_feed_summary">فید اشتراک را در پس‌زمینه بارگیری و از بازخوانی خودکار آن جلوگیری کنید</string>
+    <string name="save_feed_summary">بار کردن خوراک اشتراک در پس‌زمینه و جلوگیری از بازخوانیش هنگام تعویض زبانه</string>
     <string name="autoplay_countdown">شمارش معکوس پخش خودکار</string>
     <string name="playing_next">پخش بعدی در %1$s</string>
     <string name="lbry_hls">کتابخانه HLS</string>
@@ -384,14 +384,14 @@
     <string name="app_backup">پشتیبان کاره</string>
     <string name="fullscreen_gestures">حرکات ورود یا خروج تمام‌صفحه</string>
     <string name="hide_watched_from_feed_summary">ویدیوهایی را که بیش از 90 درصد تماشا می‌شوند در برگه اشتراک‌ها نشان ندهید</string>
-    <string name="hide_watched_from_feed">ویدیوهای تماشا شده را از فید پنهان کنید</string>
+    <string name="hide_watched_from_feed">نهفتن ویدیوهای تماشا شده</string>
     <string name="disable_proxy">از کار انداختن پیشکار پایپد</string>
     <string name="auto_fullscreen_shorts">تمام صفحه خودکار در ویدیوهای کوتاه</string>
     <string name="channel_groups">گروه‌های کانال</string>
     <string name="group_name">نام گروه</string>
     <string name="edit_group">ویرایش گروه</string>
     <string name="lbry_hls_summary">استفاده از کتابخانهٔ LBRY HSL برای جریان‌ها در صورت وجود</string>
-    <string name="disable_proxy_summary">بارگیری مستقیم ویدیوها و تصاویر از کارسازهای یوتیوب. تنها در صورت استفاده از وی‌پی‌ان این گزینه را فعال کنید!</string>
+    <string name="disable_proxy_summary">بارگیری مستقیم ویدیوها و تصاویر از کارسازهای یوتوب. به کار انداختن تنها در صورت استفادهٔ همیشگی از وی‌پی‌ان</string>
     <string name="failed_fetching_instances">نمونه‌های موجود واکشی نشد.</string>
     <string name="play_automatically">پخش خودکار</string>
     <string name="play_automatically_summary">هنگام انتخاب، پخش خودکار ویدیو را شروع کنید</string>
@@ -408,7 +408,7 @@
     <string name="custom_playback_speed_summary">از سرعت پخش متفاوتی نسبت به پخش کننده معمولی استفاده کنید</string>
     <string name="pause_on_quit">مکث هنگام خروج</string>
     <string name="comments_disabled">نظرات توسط آپلود کننده غیرفعال شده است.</string>
-    <string name="swipe_controls_summary">برای تنظیم روشنایی و صدا از ژست کشیدن انگشت استفاده کنید</string>
+    <string name="swipe_controls_summary">کشیدن برای تنظیم روشنایی و صدا در حالت تمام‌صفحه</string>
     <string name="double_tap_seek">دو ضربه برای گشتن</string>
     <string name="pinch_control_summary">برای بزرگ‌نمایی/کوچک‌نمایی از ژست نیشگون استفاده کنید</string>
     <string name="play_latest_videos">پخش آخرین ویدیوها</string>
@@ -531,4 +531,12 @@
     <string name="start_sleep_timer">آغاز شمارش معکوس خواب</string>
     <string name="finished">پایان یافته</string>
     <string name="no_segments_found">هنوز بخشی برای این ویدیو وجود ندارد.</string>
+    <string name="rich_caption_rendering">پرداخت زیرنویس غنی</string>
+    <string name="rich_caption_rendering_summary">پرداخت زیرنویس وب برای تجربهٔ غنی‌تر ‌و شخصی‌تر</string>
+    <string name="import_groups">درون‌ریزی گروه‌های کانال</string>
+    <string name="add_to_group">افزودن به گروه</string>
+    <string name="grid_landscape">ستون‌های شبکه‌ای (افقی)</string>
+    <string name="export_groups">برون‌ریزی گروه‌های کانال</string>
+    <string name="copy_tooltip">رونوشت</string>
+    <string name="uptime">%.2f٪ بالا بودن</string>
 </resources>
