@@ -67,18 +67,30 @@ class OfflinePlayerService : LifecycleService() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        videoId = intent?.getStringExtra(IntentData.videoId)!!
-
         lifecycleScope.launch {
             downloadsWithItems = withContext(Dispatchers.IO) {
                 DatabaseHolder.Database.downloadDao().getAll()
             }
-            val downloadWithItems = downloadsWithItems.first { it.download.videoId == videoId }
+            if (downloadsWithItems.isEmpty()) {
+                onDestroy()
+                return@launch
+            }
+
+            val videoId = intent?.getStringExtra(IntentData.videoId)
+
+            val downloadToPlay = if (videoId == null) {
+                downloadsWithItems = downloadsWithItems.shuffled()
+                downloadsWithItems.first()
+            } else {
+                downloadsWithItems.first { it.download.videoId == videoId }
+            }
+
+            this@OfflinePlayerService.videoId = downloadToPlay.download.videoId
 
             createPlayerAndNotification()
 
             // destroy the service if there was no success playing the selected audio/video
-            if (!startAudioPlayer(downloadWithItems)) onDestroy()
+            if (!startAudioPlayer(downloadToPlay)) onDestroy()
         }
 
         return super.onStartCommand(intent, flags, startId)

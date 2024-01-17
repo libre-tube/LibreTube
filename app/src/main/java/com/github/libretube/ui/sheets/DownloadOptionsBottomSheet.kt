@@ -8,6 +8,7 @@ import androidx.fragment.app.setFragmentResult
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.enums.ShareObjectType
+import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.services.OfflinePlayerService
@@ -27,10 +28,7 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
         setSimpleItems(options.map { getString(it) }) { which ->
             when (options[which]) {
                 R.string.playOnBackground -> {
-                    val playerIntent = Intent(requireContext(), OfflinePlayerService::class.java)
-                        .putExtra(IntentData.videoId, videoId)
-                    context?.stopService(playerIntent)
-                    ContextCompat.startForegroundService(requireContext(), playerIntent)
+                    BackgroundHelper.playOnBackgroundOffline(requireContext(), videoId)
                 }
 
                 R.string.go_to_video -> {
