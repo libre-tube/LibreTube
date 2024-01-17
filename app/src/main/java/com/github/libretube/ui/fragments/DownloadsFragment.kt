@@ -9,6 +9,7 @@ import android.os.IBinder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -16,15 +17,18 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentDownloadsBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.formatAsFileSize
+import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.obj.DownloadStatus
 import com.github.libretube.receivers.DownloadReceiver
 import com.github.libretube.services.DownloadService
+import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.ui.adapters.DownloadsAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
@@ -150,6 +154,10 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
                 }
             }
         )
+
+        binding.shuffleBackground.setOnClickListener {
+            BackgroundHelper.playOnBackgroundOffline(requireContext(), null)
+        }
     }
 
     override fun onStart() {
