@@ -16,6 +16,7 @@ import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.PlaylistBookmark
 import com.github.libretube.enums.ContentFilter
+import com.github.libretube.extensions.runSafely
 import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
@@ -152,23 +153,6 @@ class HomeViewModel: ViewModel() {
             allowAll || (allowShorts && it.isShort) || (allowVideos && !it.isShort)
         }
         return runBlocking { DatabaseHelper.filterUnwatched(filteredFeed) }
-    }
-
-    private suspend fun <T> runSafely(
-        onSuccess: (List<T>) -> Unit = { },
-        ioBlock: suspend () -> List<T>,
-    ) {
-        withContext(Dispatchers.IO) {
-            val result = runCatching { ioBlock.invoke() }
-                .getOrNull()
-                ?.takeIf { it.isNotEmpty() } ?: return@withContext
-
-            withContext(Dispatchers.Main) {
-                if (result.isNotEmpty()) {
-                    onSuccess.invoke(result)
-                }
-            }
-        }
     }
 
     private fun <T> MutableLiveData<T>.updateIfChanged(newValue: T) {
