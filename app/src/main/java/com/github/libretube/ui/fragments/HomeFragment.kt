@@ -140,7 +140,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun showTrending(streamItems: List<StreamItem>?) {
-        streamItems ?: return
+        if (streamItems == null) return
 
         makeVisible(binding.trendingRV, binding.trendingTV)
         binding.trendingRV.layoutManager = GridLayoutManager(context, 2)
@@ -162,7 +162,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun showBookmarks(bookmarks: List<PlaylistBookmark>?) {
-        bookmarks ?: return
+        if (bookmarks == null) return
 
         makeVisible(binding.bookmarksTV, binding.bookmarksRV)
         with (binding.bookmarksRV) {
@@ -172,7 +172,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun showPlaylists(playlists: List<Playlists>?) {
-    if (playlists == null) return
+        if (playlists == null) return
 
         makeVisible(binding.playlistsRV, binding.playlistsTV)
         binding.playlistsRV.layoutManager = LinearLayoutManager(context)
