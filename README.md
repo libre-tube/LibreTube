@@ -1,4 +1,4 @@
-<div align="center">
+<div align="center" id="start-of-content">
   <img src="https://libre-tube.github.io/images/gh-banner.png" width="auto" height="auto" alt="LibreTube">
   
 [![GPL-v3](https://libre-tube.github.io/assets/widgets/license-widget.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
@@ -9,9 +9,9 @@
 [![Lemmy](https://libre-tube.github.io/assets/widgets/lemmy-widget.svg)](https://feddit.rocks/c/libretube)
 
 </div>
-
-> **Note** <br>
-> We don't accept feature or bug requests on these platforms. Kindly submit requests only on GitHub.
+<div>
+**Note** <br>
+We don't accept feature or bug requests on these platforms. Kindly submit requests only on GitHub.
 
 </div><div align="center" style="width:100%; display:flex; justify-content:space-between;">
 
@@ -37,7 +37,7 @@
 
 <h2 align="left">
 <sub>
-<img  src="fastlane/metadata/android/en-US/images/readme/about.svg"
+<img  src="fastlane/metadata/android/en-US/images/readme/about.svg" alt="About"
       height="30"
       width="30">
 </sub>
@@ -54,7 +54,7 @@ If you have questions or need help, please make sure to read the [FAQ](https://l
 
 <h2 align="left">
 <sub>
-<img  src="fastlane/metadata/android/en-US/images/readme/phone.svg"
+<img  src="fastlane/metadata/android/en-US/images/readme/phone.svg" alt="Phone"
       height="30"
       width="30">
 </sub>
@@ -72,7 +72,7 @@ Screenshots
 
 <h2 align="left">
 <sub>
-<img  src="fastlane/metadata/android/en-US/images/readme/feature.svg"
+<img  src="fastlane/metadata/android/en-US/images/readme/feature.svg" alt="Feature"
       height="30"
       width="30">
 </sub>
@@ -93,7 +93,7 @@ Features
 
 <h2 align="left">
 <sub>
-<img  src="fastlane/metadata/android/en-US/images/readme/community.svg"
+<img  src="fastlane/metadata/android/en-US/images/readme/community.svg" alt="Community"
       height="30"
       width="30">
 </sub>
@@ -113,7 +113,7 @@ The most common commit types are "feat", "fix", "refactor", "ci" and "chore".
 
 <h2 align="left">
 <sub>
-<img  src="fastlane/metadata/android/en-US/images/readme/donate.svg"
+<img  src="fastlane/metadata/android/en-US/images/readme/donate.svg" alt="Donate"
       height="30"
       width="30">
 </sub>
@@ -136,7 +136,7 @@ Contributions in any form are welcome!
 
 <h2 align="left">
 <sub>
-<img  src="fastlane/metadata/android/en-US/images/readme/ltvnp.svg"
+<img  src="fastlane/metadata/android/en-US/images/readme/ltvnp.svg" alt="Metadata"
       height="30"
       width="30">
 </sub>
@@ -156,7 +156,7 @@ Both are great clients for watching YouTube videos. It depends on the individual
 
 <h2 align="left">
 <sub>
-<img  src="fastlane/metadata/android/en-US/images/readme/privacy.svg"
+<img  src="fastlane/metadata/android/en-US/images/readme/privacy.svg" alt="Privacy"
       height="30"
       width="30">
 </sub>
@@ -174,7 +174,9 @@ LibreTube is [Free Software](https://en.wikipedia.org/wiki/Free_software): You c
 [Free Software Foundation](https://www.fsf.org/).
 
 <div align="right">
-<table><td>
-<a href="#start-of-content">↥ Scroll to top</a>
-</td></table>
+<table>
+    <td>
+        <a href="#start-of-content">↥ Scroll to top</a>
+    </td>
+</table>
 </div>
