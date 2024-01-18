@@ -45,10 +45,7 @@ class SettingsActivity : BaseActivity() {
     private fun handleRedirect() {
         val redirectKey = intent.extras?.getString(REDIRECT_KEY)
 
-        when (redirectKey) {
-            REDIRECT_TO_INTENT_SETTINGS -> redirectTo<InstanceSettings>()
-            else                        -> { }
-        }
+        if (redirectKey == REDIRECT_TO_INTENT_SETTINGS) redirectTo<InstanceSettings>()
     }
 
     fun changeTopBarText(text: String) {
