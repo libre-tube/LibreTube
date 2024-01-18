@@ -151,7 +151,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun showFeed(streamItems: List<StreamItem>?) {
-        streamItems ?: return
+    if (streamItems == null) return
 
         makeVisible(binding.featuredRV, binding.featuredTV)
         val feedVideos = streamItems.take(20).toMutableList()
