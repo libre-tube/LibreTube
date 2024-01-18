@@ -83,16 +83,14 @@ class NowPlayingNotification(
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             }
         }
-        return PendingIntentCompat.getActivity(
-            context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT, false
-        )
+        return PendingIntentCompat
+                .getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT, false)
     }
 
     private fun createIntent(action: String): PendingIntent? {
         val intent = Intent(action).setPackage(context.packageName)
-        return PendingIntentCompat.getBroadcast(
-            context, 1, intent, PendingIntent.FLAG_CANCEL_CURRENT, false
-        )
+        return PendingIntentCompat
+            .getBroadcast(context, 1, intent, PendingIntent.FLAG_CANCEL_CURRENT, false)
     }
 
     private fun enqueueThumbnailRequest(callback: (Bitmap) -> Unit) {
@@ -106,11 +104,13 @@ class NowPlayingNotification(
             return
         }
 
-        val request = ImageRequest.Builder(context).data(notificationData?.thumbnailUrl).target {
-            notificationBitmap = processBitmap(it.toBitmap())
-            callback.invoke(notificationBitmap!!)
-        }.build()
-
+        val request = ImageRequest.Builder(context)
+            .data(notificationData?.thumbnailUrl)
+            .target {
+                notificationBitmap = processBitmap(it.toBitmap())
+                callback.invoke(notificationBitmap!!)
+            }
+            .build()
         // enqueue the thumbnail loading request
         ImageHelper.imageLoader.enqueue(request)
     }
@@ -127,7 +127,8 @@ class NowPlayingNotification(
         get() = listOf(
             createNotificationAction(R.drawable.ic_prev_outlined, PREV),
             createNotificationAction(
-                if (player.isPlaying) R.drawable.ic_pause else R.drawable.ic_play, PLAY_PAUSE
+                if (player.isPlaying) R.drawable.ic_pause else R.drawable.ic_play,
+                PLAY_PAUSE
             ),
             createNotificationAction(R.drawable.ic_next_outlined, NEXT),
             createNotificationAction(R.drawable.ic_rewind_md, REWIND),
@@ -136,7 +137,8 @@ class NowPlayingNotification(
         )
 
     private fun createNotificationAction(
-        drawableRes: Int, actionName: String
+        drawableRes: Int,
+        actionName: String
     ): NotificationCompat.Action {
         return NotificationCompat.Action.Builder(drawableRes, actionName, createIntent(actionName))
             .build()
@@ -263,16 +265,17 @@ class NowPlayingNotification(
     }
 
     private fun createPlaybackState(@PlaybackStateCompat.State state: Int): PlaybackStateCompat {
-        val stateActions =
-            PlaybackStateCompat.ACTION_SKIP_TO_NEXT or
-                    PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS or
-                    PlaybackStateCompat.ACTION_REWIND or PlaybackStateCompat.ACTION_FAST_FORWARD or
-                    PlaybackStateCompat.ACTION_PLAY_PAUSE or PlaybackStateCompat.ACTION_PAUSE or
-                    PlaybackStateCompat.ACTION_PLAY or PlaybackStateCompat.ACTION_SEEK_TO
+        val stateActions = PlaybackStateCompat.ACTION_SKIP_TO_NEXT or
+                PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS or
+                PlaybackStateCompat.ACTION_REWIND or
+                PlaybackStateCompat.ACTION_FAST_FORWARD or
+                PlaybackStateCompat.ACTION_PLAY_PAUSE or
+                PlaybackStateCompat.ACTION_PAUSE or
+                PlaybackStateCompat.ACTION_PLAY or
+                PlaybackStateCompat.ACTION_SEEK_TO
 
-        return PlaybackStateCompat.Builder().setActions(stateActions)
-            .addCustomAction(createMediaSessionAction(R.drawable.ic_rewind_md, REWIND))
-            .addCustomAction(createMediaSessionAction(R.drawable.ic_forward_md, FORWARD))
+        return PlaybackStateCompat.Builder()
+            .setActions(stateActions)
             .setState(state, player.currentPosition, player.playbackParameters.speed).build()
     }
 
@@ -309,14 +312,8 @@ class NowPlayingNotification(
 
             STOP -> {
                 when (notificationType) {
-                    NowPlayingNotificationType.AUDIO_ONLINE -> BackgroundHelper.stopBackgroundPlay(
-                        context
-                    )
-
-                    NowPlayingNotificationType.AUDIO_OFFLINE -> BackgroundHelper.stopBackgroundPlay(
-                        context, OfflinePlayerService::class.java
-                    )
-
+                    NowPlayingNotificationType.AUDIO_ONLINE -> BackgroundHelper.stopBackgroundPlay(context)
+                    NowPlayingNotificationType.AUDIO_OFFLINE -> BackgroundHelper.stopBackgroundPlay(context, OfflinePlayerService::class.java)
                     else -> Unit
                 }
             }
@@ -356,22 +353,27 @@ class NowPlayingNotification(
     private fun createNotificationBuilder() {
         notificationBuilder = NotificationCompat.Builder(context, PLAYER_CHANNEL_NAME)
             .setSmallIcon(R.drawable.ic_launcher_lockscreen)
-            .setContentIntent(createCurrentContentIntent()).setDeleteIntent(createIntent(STOP))
+            .setContentIntent(createCurrentContentIntent())
+            .setDeleteIntent(createIntent(STOP))
             .setStyle(
-                MediaStyle().setMediaSession(mediaSession.sessionToken)
+                MediaStyle()
+                    .setMediaSession(mediaSession.sessionToken)
                     .setShowActionsInCompactView(1)
             )
     }
 
     private fun createOrUpdateNotification() {
         if (notificationBuilder == null) return
-        val notification = notificationBuilder!!.setContentTitle(notificationData?.title)
-            .setContentText(notificationData?.uploaderName).setLargeIcon(notificationBitmap)
+        val notification = notificationBuilder!!
+            .setContentTitle(notificationData?.title)
+            .setContentText(notificationData?.uploaderName)
+            .setLargeIcon(notificationBitmap)
             .clearActions().apply {
                 legacyNotificationButtons.forEach {
                     addAction(it)
                 }
-            }.build()
+            }
+            .build()
         updateSessionMetadata()
         nManager.notify(PLAYER_NOTIFICATION_ID, notification)
     }
@@ -423,7 +425,10 @@ class NowPlayingNotification(
         private const val REPLAY = "replay"
 
         enum class NowPlayingNotificationType {
-            VIDEO_ONLINE, VIDEO_OFFLINE, AUDIO_ONLINE, AUDIO_OFFLINE,
+            VIDEO_ONLINE,
+            VIDEO_OFFLINE,
+            AUDIO_ONLINE,
+            AUDIO_OFFLINE,
         }
     }
 }
