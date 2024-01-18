@@ -193,7 +193,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun showContinueWatching(unwatchedVideos: List<StreamItem>?) {
-        unwatchedVideos ?: return
+    if (unwatchedVideos == null) return
 
         makeVisible(binding.watchingRV, binding.watchingTV)
         binding.watchingRV.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
