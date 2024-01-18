@@ -10,8 +10,8 @@
 
 </div>
 <div>
-**Note** <br>
-We don't accept feature or bug requests on these platforms. Kindly submit requests only on GitHub.
+> **Note** <br>
+> We don't accept feature or bug requests on these platforms. Kindly submit requests only on GitHub.
 
 </div><div align="center" style="width:100%; display:flex; justify-content:space-between;">
 
