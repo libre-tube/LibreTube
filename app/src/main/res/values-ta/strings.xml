@@ -1,2 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="startpage">முகப்பு</string>
+    <string name="subscriptions">சந்தாக்கள்</string>
+    <string name="yes">ஆம்</string>
+    <string name="search_hint">தேடு</string>
+    <string name="videos">கானொளிகள்</string>
+    <string name="download">பதிவிறக்கு</string>
+    <string name="save">சேமி</string>
+    <string name="login">உள் நுழை</string>
+    <string name="logout">வெளியேறு</string>
+    <string name="share">பகிர்</string>
+    <string name="instances">தேர்ந்தெடு…</string>
+</resources>
