@@ -8,12 +8,8 @@ import com.github.libretube.api.obj.ChapterSegment
 class PlayerViewModel : ViewModel() {
     var player: ExoPlayer? = null
 
-    val isMiniPlayerVisible = MutableLiveData<Boolean>().apply {
-        value = false
-    }
-    val isFullscreen = MutableLiveData<Boolean>().apply {
-        value = false
-    }
+    val isMiniPlayerVisible = MutableLiveData(false)
+    val isFullscreen = MutableLiveData(false)
 
     var maxSheetHeightPx = 0
 
