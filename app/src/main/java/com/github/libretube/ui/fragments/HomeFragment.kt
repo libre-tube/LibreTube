@@ -172,7 +172,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun showPlaylists(playlists: List<Playlists>?) {
-        playlists ?: return
+    if (playlists == null) return
 
         makeVisible(binding.playlistsRV, binding.playlistsTV)
         binding.playlistsRV.layoutManager = LinearLayoutManager(context)
