@@ -539,4 +539,5 @@
     <string name="copy_tooltip">Kopyala</string>
     <string name="export_groups">Kanal gruplarını dışa aktar</string>
     <string name="import_groups">Kanal gruplarını içe aktar</string>
+    <string name="change">Değiştir</string>
 </resources>
