@@ -17,6 +17,7 @@ import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.PlaylistBookmark
 import com.github.libretube.enums.ContentFilter
 import com.github.libretube.extensions.runSafely
+import com.github.libretube.extensions.updateIfChanged
 import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
@@ -35,26 +36,19 @@ class HomeViewModel: ViewModel() {
     private val useSavedFeed get() = PreferenceHelper.getBoolean(SAVE_FEED, false)
     private val hideWatched get() = PreferenceHelper.getBoolean(HIDE_WATCHED_FROM_FEED, false)
 
-    val trending: LiveData<List<StreamItem>?> get() = _trending
-    private val _trending: MutableLiveData<List<StreamItem>> = MutableLiveData(null)
+    val trending: MutableLiveData<List<StreamItem>> = MutableLiveData(null)
 
-    val feed: LiveData<List<StreamItem>?> get() = _feed
-    private val _feed: MutableLiveData<List<StreamItem>> = MutableLiveData(null)
+    val feed: MutableLiveData<List<StreamItem>> = MutableLiveData(null)
 
-    val bookmarks: LiveData<List<PlaylistBookmark>?> get() = _bookmarks
-    private val _bookmarks: MutableLiveData<List<PlaylistBookmark>> = MutableLiveData(null)
+    val bookmarks: MutableLiveData<List<PlaylistBookmark>> = MutableLiveData(null)
 
-    val playlists: LiveData<List<Playlists>?> get() = _playlists
-    private val _playlists: MutableLiveData<List<Playlists>> = MutableLiveData(null)
+    val playlists: MutableLiveData<List<Playlists>> = MutableLiveData(null)
 
-    val continueWatching: LiveData<List<StreamItem>?> get() = _continueWatching
-    private val _continueWatching: MutableLiveData<List<StreamItem>> = MutableLiveData(null)
+    val continueWatching: MutableLiveData<List<StreamItem>> = MutableLiveData(null)
 
-    val isLoading: LiveData<Boolean> get() = _isLoading
-    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData(true)
+    val isLoading: MutableLiveData<Boolean> = MutableLiveData(true)
 
-    val loadedSuccessfully: LiveData<Boolean> get() = _loadedSuccessfully
-    private val _loadedSuccessfully: MutableLiveData<Boolean> = MutableLiveData(false)
+    val loadedSuccessfully: MutableLiveData<Boolean> = MutableLiveData(false)
 
     private var loadHomeJob: Job? = null
 
@@ -64,7 +58,7 @@ class HomeViewModel: ViewModel() {
         visibleItems: Set<String>,
         onUnusualLoadTime: () -> Unit
     ) {
-        _isLoading.value = true
+        isLoading.value = true
 
         loadHomeJob?.cancel()
         loadHomeJob = viewModelScope.launch {
@@ -76,8 +70,8 @@ class HomeViewModel: ViewModel() {
                     async { if (visibleItems.contains(PLAYLISTS)) loadPlaylists() },
                     async { if (visibleItems.contains(WATCHING)) loadVideosToContinueWatching() }
                 )
-                _loadedSuccessfully.value = trending.value.isNullOrEmpty() == false
-                _isLoading.value = false
+                loadedSuccessfully.value = trending.value.isNullOrEmpty() == false
+                isLoading.value = false
             }
 
             withContext(Dispatchers.IO) {
@@ -92,28 +86,28 @@ class HomeViewModel: ViewModel() {
         val region = LocaleHelper.getTrendingRegion(context)
 
         runSafely(
-            onSuccess = { videos -> _trending.updateIfChanged(videos) },
+            onSuccess = { videos -> trending.updateIfChanged(videos) },
             ioBlock = { RetrofitInstance.api.getTrending(region).deArrow().take(10) }
         )
     }
 
     private suspend fun loadFeed(savedFeed: List<StreamItem>? = null) {
         runSafely(
-            onSuccess = { videos -> _feed.updateIfChanged(videos) },
+            onSuccess = { videos -> feed.updateIfChanged(videos) },
             ioBlock = { tryLoadFeed(savedFeed) }
         )
     }
 
     private suspend fun loadBookmarks() {
         runSafely(
-            onSuccess = { bookmarks -> _bookmarks.updateIfChanged(bookmarks) },
+            onSuccess = { newBookmarks -> bookmarks.updateIfChanged(newBookmarks) },
             ioBlock = { DatabaseHolder.Database.playlistBookmarkDao().getAll() }
         )
     }
 
     private suspend fun loadPlaylists() {
         runSafely(
-            onSuccess = { playlists -> _playlists.updateIfChanged(playlists) },
+            onSuccess = { newPlaylists -> playlists.updateIfChanged(newPlaylists) },
             ioBlock = { PlaylistsHelper.getPlaylists().take(20) }
         )
     }
@@ -121,7 +115,7 @@ class HomeViewModel: ViewModel() {
     private suspend fun loadVideosToContinueWatching() {
         if (!PlayerHelper.watchHistoryEnabled) return
         runSafely(
-            onSuccess = { videos -> _continueWatching.updateIfChanged(videos) },
+            onSuccess = { videos -> continueWatching.updateIfChanged(videos) },
             ioBlock = ::loadWatchingFromDB
         )
     }
@@ -153,10 +147,6 @@ class HomeViewModel: ViewModel() {
             allowAll || (allowShorts && it.isShort) || (allowVideos && !it.isShort)
         }
         return runBlocking { DatabaseHelper.filterUnwatched(filteredFeed) }
-    }
-
-    private fun <T> MutableLiveData<T>.updateIfChanged(newValue: T) {
-        if (value != newValue) value = newValue
     }
 
     companion object {
