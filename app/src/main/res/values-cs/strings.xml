@@ -542,4 +542,7 @@
     <string name="copy_tooltip">Kopírovat</string>
     <string name="import_groups">Importovat skupiny kanálů</string>
     <string name="export_groups">Exportovat skupiny kanállů</string>
+    <string name="change_instance">Změnit instanci</string>
+    <string name="suggest_change_instance">Načítání trvá déle než obvykle. Zvažte změnu instance</string>
+    <string name="change">Změnit</string>
 </resources>
