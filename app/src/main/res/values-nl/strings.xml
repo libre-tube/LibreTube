@@ -422,7 +422,7 @@
     <string name="share_with_time">Delen met tijdscode</string>
     <string name="added_to_playlist">Toegevoegd aan afspeellijst %1$s</string>
     <string name="pinch_control_summary">Gebruik knijpgebaren om in of uit te zoomen</string>
-    <string name="hide_watched_from_feed">Bekeken video\'s uit feed verbergen</string>
+    <string name="hide_watched_from_feed">Bekeken video\'s verbergen</string>
     <string name="playerAudioFormat">Audioformaat voor speler</string>
     <string name="change_region">Trending is niet beschikbaar voor de huidige regio. Selecteer een andere onder instellingen.</string>
     <string name="comments_disabled">Opmerkingen zijn uitgeschakeld door de uploader.</string>
@@ -538,4 +538,6 @@
     <string name="copy_tooltip">Kopiëren</string>
     <string name="rich_caption_rendering">Rijke weergave van bijschriften</string>
     <string name="rich_caption_rendering_summary">Geef web­bijschriften weer voor een rijkere en persoonlijkere ervaring</string>
+    <string name="import_groups">Kanaal­groepen importeren</string>
+    <string name="export_groups">Kanaal­groepen exporteren</string>
 </resources>
