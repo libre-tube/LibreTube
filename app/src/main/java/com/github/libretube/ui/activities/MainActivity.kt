@@ -17,6 +17,7 @@ import androidx.core.view.allViews
 import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.core.widget.NestedScrollView
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -43,6 +44,8 @@ import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.models.SearchViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
+import com.github.libretube.util.InAppUpdater
+import kotlinx.coroutines.launch
 
 class MainActivity : BaseActivity() {
     lateinit var binding: ActivityMainBinding
@@ -80,6 +83,11 @@ class MainActivity : BaseActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        lifecycleScope.launch {
+            val updater = InAppUpdater(context = this@MainActivity)
+            updater.checkUpdate(manualTrigger = false)
+        } // Check update
 
         // set the action bar for the activity
         setSupportActionBar(binding.toolbar)

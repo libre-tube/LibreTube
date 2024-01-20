@@ -1,33 +1,28 @@
 package com.github.libretube.ui.dialogs
 
-import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.net.toUri
-import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
-import com.github.libretube.constants.IntentData
-import com.github.libretube.extensions.parcelable
-import com.github.libretube.obj.update.UpdateInfo
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class UpdateAvailableDialog : DialogFragment() {
-    private lateinit var updateInfo: UpdateInfo
+class UpdateAvailableDialog {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        updateInfo = requireArguments().parcelable(IntentData.updateInfo)!!
-    }
+    fun showDialog(changelog: String,releaseUrl:String, context: Context) {
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return MaterialAlertDialogBuilder(requireContext())
-            .setTitle(context?.getString(R.string.update_available, updateInfo.name))
-            .setMessage(context?.getString(R.string.update_available_text))
-            .setNegativeButton(R.string.cancel, null)
-            .setPositiveButton(context?.getString(R.string.okay)) { _, _ ->
-                val intent = Intent(Intent.ACTION_VIEW).setData(updateInfo.htmlUrl.toUri())
-                startActivity(intent)
+        val dialogBuilder = MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.update_available)
+            .setMessage(changelog)
+            .setPositiveButton(R.string.download) { _, _ ->
+                val intent = Intent(Intent.ACTION_VIEW).setData(releaseUrl.toUri())
+                startActivity(context,intent, Bundle())
             }
-            .show()
+            .setNegativeButton(R.string.tooltip_dismiss) { dialog, _ ->
+                dialog.dismiss()
+            }
+
+        dialogBuilder.show()
     }
 }

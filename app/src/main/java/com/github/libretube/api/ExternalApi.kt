@@ -2,13 +2,11 @@ package com.github.libretube.api
 
 import com.github.libretube.api.obj.PipedInstance
 import com.github.libretube.api.obj.SubmitSegmentResponse
-import com.github.libretube.obj.update.UpdateInfo
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
 import retrofit2.http.Url
 
-private const val GITHUB_API_URL = "https://api.github.com/repos/libre-tube/LibreTube/releases/latest"
 private const val SB_API_URL = "https://sponsor.ajay.app"
 
 interface ExternalApi {
@@ -16,9 +14,6 @@ interface ExternalApi {
     @GET
     suspend fun getInstances(@Url url: String): List<PipedInstance>
 
-    // fetch latest version info
-    @GET(GITHUB_API_URL)
-    suspend fun getUpdateInfo(): UpdateInfo
 
     @POST("$SB_API_URL/api/skipSegments")
     suspend fun submitSegment(
