@@ -303,14 +303,12 @@
     <string name="swipe_controls">Ovládanie potiahnutím prstom</string>
     <string name="forward">Dopredu</string>
     <string name="backup_restore">Záloha a obnovenie</string>
-    <string name="save_feed_summary">Načíta stream odberu na pozadí a zabráni jeho opätovnému načítaniu pri prepínaní kariet</string>
     <string name="play_next">Potom prehrať</string>
     <string name="limit_to_runtime">Obmedziť podľa času spustenia</string>
     <string name="audio_track">Zvuková stopa</string>
     <string name="backup">Záloha</string>
     <string name="local_subscriptions">Lokálne odbery</string>
     <string name="preferences">Predvoľby</string>
-    <string name="save_feed">Načítať stream na pozadí</string>
     <string name="privacy_alert">Upozornenie o ochrane osobných údajov</string>
     <string name="captions_size">Veľkosť titulkov</string>
     <string name="audio_player">Prehrávač zvuku</string>

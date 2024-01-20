@@ -273,8 +273,6 @@
     <string name="local_subscriptions">Lokální odběry</string>
     <string name="preferences">Předvolby</string>
     <string name="backup_customInstances">Vlastní instance</string>
-    <string name="save_feed">Načítat zdroj v pozadí</string>
-    <string name="save_feed_summary">Načítat zdroj odběrů v pozadí a zabránit jeho obnovování při přepínání karet</string>
     <string name="play_next">Přehrát jako další</string>
     <string name="navigation_bar">Navigační lišta</string>
     <string name="change_region">Zdá se, že trendy nejsou pro aktuální oblast k dispozici. V nastavení prosím vyberte jinou.</string>

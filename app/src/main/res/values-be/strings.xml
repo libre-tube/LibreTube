@@ -277,8 +277,6 @@
     <string name="skip_segment">Прапусціць сегмент</string>
     <string name="sb_skip_manual">Прапусціць уручную</string>
     <string name="backup_customInstances">Карыстальніцкія асобнікі</string>
-    <string name="save_feed">Загружаць канал у фонавым рэжыме</string>
-    <string name="save_feed_summary">Загружайце стужку падпіскі ў фонавым рэжыме і не дазваляйце ёй перазагружацца пры пераключэнні ўкладак</string>
     <string name="preferences">Налады</string>
     <string name="play_next">Перайсці да наступнага</string>
     <string name="navigation_bar">Панэль навігацыі</string>

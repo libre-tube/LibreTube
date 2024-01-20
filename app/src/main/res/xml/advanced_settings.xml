@@ -45,12 +45,6 @@
             app:title="@string/new_videos_badge" />
 
         <SwitchPreferenceCompat
-            android:icon="@drawable/ic_loading"
-            android:summary="@string/save_feed_summary"
-            app:key="save_feed"
-            app:title="@string/save_feed" />
-
-        <SwitchPreferenceCompat
             android:icon="@drawable/ic_check"
             android:summary="@string/confirm_unsubscribing_summary"
             app:key="confirm_unsubscribing"

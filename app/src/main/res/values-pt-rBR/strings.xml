@@ -229,7 +229,6 @@
     <string name="worst_quality">Menor qualidade</string>
     <string name="new_videos_badge_summary">Mostrar um ícone com a quantidade de novos vídeos, se houver</string>
     <string name="backup_restore">Backup e restauração</string>
-    <string name="save_feed">Carregar feed em segundo plano</string>
     <string name="maximum_image_cache">Tamanho máximo do cache de imagem</string>
     <string name="open_copied">Abrir</string>
     <string name="audio_video_summary">Qualidade e formato</string>
@@ -237,7 +236,6 @@
     <string name="sb_skip_manual">Pular manualmente</string>
     <string name="local_subscriptions">Inscrições locais</string>
     <string name="preferences">Preferências</string>
-    <string name="save_feed_summary">Carregue o feed de assinatura em segundo plano e evite que ele seja recarregado ao alternar entre guias</string>
     <string name="backup_customInstances">Instâncias personalizadas</string>
     <string name="playlistNameReversed">Nome da playlist (invertido)</string>
     <string name="skip_buttons_summary">Mostrar botões para avançar/retroceder para o próximo vídeo ou anterior</string>

@@ -139,7 +139,6 @@
     <string name="skip_segment">Praleisti segmentą</string>
     <string name="local_subscriptions">Vietinės prenumeratos</string>
     <string name="preferences">Nuostatos</string>
-    <string name="save_feed">Įkelti sklaidos kanalą fone</string>
     <string name="change_region">Atrodo, kad dabartiniame regione tendencijos yra neprieinamos. Nustatymuose pasirinkite kitą.</string>
     <string name="playback_pitch">Pikinė</string>
     <string name="filename">Failo pavadinimas</string>
@@ -276,7 +275,6 @@
     <string name="network_all">Visi</string>
     <string name="picture_in_picture">Vaizdas vaizde</string>
     <string name="backup_customInstances">Pasirinktiniai perdavimo šaltiniai</string>
-    <string name="save_feed_summary">Fone įkelti prenumeratos kanalą ir neleisti, kad jis būtų automatiškai atnaujinamas</string>
     <string name="play_next">Paleisti sekantį</string>
     <string name="push_channel_name">Pranešimų agentas</string>
     <string name="category_selfpromo_summary">Panašus į „rėmimą“, išskyrus neapmokamą arba savęs reklamavimą. Tai apima skyrius apie prekes, aukas arba informaciją apie tai, su kuo kūrėjas bendradarbiavo</string>

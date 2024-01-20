@@ -263,7 +263,6 @@
     <string name="network_wifi">Nur über WLAN</string>
     <string name="share_with_time">Mit Zeitstempel teilen</string>
     <string name="export_subscriptions">Abos exportieren</string>
-    <string name="save_feed_summary">Lade dein Abo-Feed im Hintergrund und verhindere, dass es beim Tabwechsel neu geladen werden muss</string>
     <string name="delete">Aus Downloads löschen</string>
     <string name="skip_buttons_summary">Schaltflächen anzeigen, um zum nächsten oder vorherigen Video zu springen</string>
     <string name="resize_mode_zoom">Vergrößern</string>
@@ -273,7 +272,6 @@
     <string name="new_videos_badge">Indikator für neue Videos</string>
     <string name="preferences">Einstellungen</string>
     <string name="backup_customInstances">Benutzerdefinierte Instanzen</string>
-    <string name="save_feed">Feed im Hintergrund laden</string>
     <string name="play_next">Als nächstes abspielen</string>
     <string name="break_reminder_time">Minuten bis zur Benachrichtigung</string>
     <string name="player_resize_mode">Skalierungsmodus</string>

@@ -335,8 +335,6 @@
     <string name="video_id">کۆدی ڤیدیۆ</string>
     <string name="alternative_videos_layout">بەشی هاوشێوەی ڤیدیۆ</string>
     <string name="autoRotatePlayer_summary">خستە دۆخی پڕ بە شاشە کاتێ ئامێرەکە خرایە سەرلا</string>
-    <string name="save_feed">کردنەوەی شتەکان لە پشت شاشە</string>
-    <string name="save_feed_summary">کردنەوەی زانیاری هاوبەشییەکان لە پشت شاشەو ڕێگریکردن لە نوێبونەوەی خۆکاری</string>
     <string name="change_region">ڤیدیۆ پێشنیارکراوەکان بەردەست نییە لەم شوێنەدا، تکایە شوێنێکی تر هەڵبژێرە لەبەشی ڕێکخستندا.</string>
     <string name="alternative_player_layout">خشتەی لێدەری هاوشێوە</string>
     <string name="unsupported_file_format">جۆری فایل نەگونجاوە: %1$s</string>

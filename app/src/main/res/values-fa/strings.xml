@@ -316,7 +316,6 @@
     <string name="confirm_unsubscribing_summary">قبل از لغو اشتراک، یک گفتگوی تأیید را نشان دهید</string>
     <string name="history_empty">هنوز تاریخچه‌ای وجود ندارد.</string>
     <string name="picture_in_picture">تصویر-در-تصویر</string>
-    <string name="save_feed">بارگذاری فید در پس‌زمینه</string>
     <string name="playlistNameReversed">نام سیاههٔ پخش (واژگون)</string>
     <string name="notification_time_summary">محدود کردن بازه زمانی‌ای که آگاهی‌های جریان نشان داده می‌شوند</string>
     <plurals name="channel_new_streams">
@@ -336,7 +335,6 @@
     <string name="copied_to_clipboard">رونوشته به تخته‌گیره</string>
     <string name="break_reminder_time">دقیقه‌های پیش از یادآوری</string>
     <string name="new_videos_badge">نشانگر ویدئوهای جدید</string>
-    <string name="save_feed_summary">بار کردن خوراک اشتراک در پس‌زمینه و جلوگیری از بازخوانیش هنگام تعویض زبانه</string>
     <string name="autoplay_countdown">شمارش معکوس پخش خودکار</string>
     <string name="playing_next">پخش بعدی در %1$s</string>
     <string name="lbry_hls">کتابخانه HLS</string>

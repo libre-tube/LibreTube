@@ -1,7 +1,6 @@
 package com.github.libretube.ui.models
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,7 +10,6 @@ import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.PreferenceKeys.HIDE_WATCHED_FROM_FEED
-import com.github.libretube.constants.PreferenceKeys.SAVE_FEED
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.PlaylistBookmark
@@ -32,8 +30,6 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class HomeViewModel: ViewModel() {
-
-    private val useSavedFeed get() = PreferenceHelper.getBoolean(SAVE_FEED, false)
     private val hideWatched get() = PreferenceHelper.getBoolean(HIDE_WATCHED_FROM_FEED, false)
 
     val trending: MutableLiveData<List<StreamItem>> = MutableLiveData(null)
@@ -54,7 +50,7 @@ class HomeViewModel: ViewModel() {
 
     fun loadHomeFeed(
         context: Context,
-        savedFeed: List<StreamItem>? = null,
+        subscriptionsViewModel: SubscriptionsViewModel,
         visibleItems: Set<String>,
         onUnusualLoadTime: () -> Unit
     ) {
@@ -65,7 +61,7 @@ class HomeViewModel: ViewModel() {
             val result = async {
                 awaitAll(
                     async { if (visibleItems.contains(TRENDING)) loadTrending(context) },
-                    async { if (visibleItems.contains(FEATURED)) loadFeed(savedFeed) },
+                    async { if (visibleItems.contains(FEATURED)) loadFeed(subscriptionsViewModel) },
                     async { if (visibleItems.contains(BOOKMARKS)) loadBookmarks() },
                     async { if (visibleItems.contains(PLAYLISTS)) loadPlaylists() },
                     async { if (visibleItems.contains(WATCHING)) loadVideosToContinueWatching() }
@@ -91,10 +87,10 @@ class HomeViewModel: ViewModel() {
         )
     }
 
-    private suspend fun loadFeed(savedFeed: List<StreamItem>? = null) {
+    private suspend fun loadFeed(subscriptionsViewModel: SubscriptionsViewModel) {
         runSafely(
             onSuccess = { videos -> feed.updateIfChanged(videos) },
-            ioBlock = { tryLoadFeed(savedFeed) }
+            ioBlock = { tryLoadFeed(subscriptionsViewModel) }
         )
     }
 
@@ -128,12 +124,11 @@ class HomeViewModel: ViewModel() {
             .take(20)
     }
 
-    private suspend fun tryLoadFeed(savedFeed: List<StreamItem>?): List<StreamItem> {
-        val feed = if (useSavedFeed && !savedFeed.isNullOrEmpty()) {
-            savedFeed
-        } else {
-            SubscriptionHelper.getFeed()
-        }
+    private suspend fun tryLoadFeed(subscriptionsViewModel: SubscriptionsViewModel): List<StreamItem> {
+        subscriptionsViewModel.videoFeed.value?.let { return it }
+
+        val feed = SubscriptionHelper.getFeed()
+        subscriptionsViewModel.videoFeed.postValue(feed)
 
         return if (hideWatched) feed.filterWatched() else feed
     }

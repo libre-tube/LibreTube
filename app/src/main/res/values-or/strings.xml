@@ -221,9 +221,7 @@
     <string name="sb_skip_manual">ମେନୁଆଲି ଏଡାନ୍ତୁ</string>
     <string name="local_subscriptions">ସ୍ଥାନୀୟ ସଦସ୍ୟତା</string>
     <string name="backup_customInstances">ଅନୁକୂଳ୍ ଇନଷ୍ଟାନ୍ସ</string>
-    <string name="save_feed">ପୃଷ୍ଠଭୂମିରେ ଫିଡ୍ ଲୋଡ୍ କରନ୍ତୁ</string>
     <string name="play_next">ପରବର୍ତ୍ତୀ ଖେଳନ୍ତୁ</string>
-    <string name="save_feed_summary">ସବସ୍କ୍ରିପସନ୍ ଫିଡ୍ ପୃଷ୍ଠଭୂମିରେ ଲୋଡ୍ କରନ୍ତୁ ଏବଂ ଏହାକୁ ସ୍ଵତଃ-ସତେଜ ହେବାକୁ ପ୍ରତିରୋଧ କରନ୍ତୁ</string>
     <string name="navigation_bar">ନାଭିଗେସନ୍ ବାର୍</string>
     <string name="change_region">ସାମ୍ପ୍ରତିକ ଭାବେ ଟ୍ରେଡିଂ ଏହି ଜାଗାରେ ନାହିଁ ।</string>
     <string name="added_to_playlist">%1$s ପ୍ଲେ ଲିଷ୍ଟରେ ଯୋଡା ଯାଇଛି</string>

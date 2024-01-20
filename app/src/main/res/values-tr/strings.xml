@@ -269,8 +269,6 @@
     <string name="local_subscriptions">Yerel abonelikler</string>
     <string name="preferences">Tercihler</string>
     <string name="backup_customInstances">Özel Oluşumlar</string>
-    <string name="save_feed">Akışı arka planda yükle</string>
-    <string name="save_feed_summary">Abonelik akışını arka planda yükleyin ve sekmeler arasında geçiş yaparken yeniden yüklenmesini önleyin</string>
     <string name="download_channel_name">İndirme Hizmeti</string>
     <string name="download_channel_description">Medya indirirken bildirim gösterir.</string>
     <string name="push_channel_name">Bildirim Çalışanı</string>

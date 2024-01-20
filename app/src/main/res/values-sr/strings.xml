@@ -256,8 +256,6 @@
     <string name="open_copied">Отвори</string>
     <string name="local_subscriptions">Локална праћења</string>
     <string name="skip_segment">Прескочи сегмент</string>
-    <string name="save_feed">Учитај фид у позадини</string>
-    <string name="save_feed_summary">Учитавање фида претплате у позадини и спречавање његовог поновног учитавања приликом промене картица</string>
     <string name="navigation_bar">Трака за навигацију</string>
     <string name="push_channel_description">Приказује обавештења када су нови стримови доступни.</string>
     <string name="push_channel_name">Радник обавештења</string>

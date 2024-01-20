@@ -188,7 +188,6 @@
     <string name="pause">Tauko</string>
     <string name="forward">Eteenpäin</string>
     <string name="skip_segment">Ohita segmentti</string>
-    <string name="save_feed">Lataa syöte taustalla</string>
     <string name="time">Aika</string>
     <string name="start_time">Aloitusaika</string>
     <string name="hide_watched_from_feed">Piilota katsotut videot syötteestä</string>
@@ -207,7 +206,6 @@
     <string name="device_info">Laitetieto</string>
     <string name="yt_shorts">Shorts</string>
     <string name="copied_to_clipboard">Kopioitu leikepöydälle</string>
-    <string name="save_feed_summary">Lataa tilaussyöte taustalla ja estä sitä päivittymästä automaattisesti</string>
     <string name="unsupported_file_format">Tiedostomuotoa %1$s ei tueta</string>
     <string name="hls_instead_of_dash">Käytä HLS</string>
     <string name="nothing_selected">Mitään ei ole valittu!</string>

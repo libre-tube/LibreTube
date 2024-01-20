@@ -153,8 +153,6 @@
     <string name="local_subscriptions">स्थानीय सब्सक्रिप्शनें</string>
     <string name="preferences">तरजीहें</string>
     <string name="backup_customInstances">कस्टम इंस्टैंस</string>
-    <string name="save_feed">पृष्ठभूमि में फ़ीड लोड करें</string>
-    <string name="save_feed_summary">सब्सक्रिप्शन फीड को बैकग्राउंड में लोड करें और टैब स्विच करते समय इसे पुनः लोड होने से रोकें</string>
     <string name="navigation_bar">नेविगेशन पट्टी</string>
     <string name="playback_pitch">पिॅच</string>
     <string name="error_occurred">ख़राबी</string>

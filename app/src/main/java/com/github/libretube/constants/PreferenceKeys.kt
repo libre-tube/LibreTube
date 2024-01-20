@@ -19,7 +19,6 @@ object PreferenceKeys {
     const val LANGUAGE = "language"
     const val REGION = "region"
     const val ORIENTATION = "orientation"
-    const val SAVE_FEED = "save_feed"
     const val NAVBAR_ITEMS = "navbar_items"
     const val START_FRAGMENT = "start_fragment"
 
