@@ -227,7 +227,7 @@
     <string name="playerAudioQuality">Qualidade do áudio</string>
     <string name="best_quality">Melhor qualidade</string>
     <string name="worst_quality">Menor qualidade</string>
-    <string name="new_videos_badge_summary">Mostrar um selo com a quantidade de novos vídeos, se houver</string>
+    <string name="new_videos_badge_summary">Mostrar um ícone com a quantidade de novos vídeos, se houver</string>
     <string name="backup_restore">Backup e restauração</string>
     <string name="save_feed">Carregar feed em segundo plano</string>
     <string name="maximum_image_cache">Tamanho máximo do cache de imagem</string>
@@ -395,7 +395,7 @@
         <item quantity="other">%d meses atrás</item>
     </plurals>
     <string name="lbry_hls">LBRY HLS</string>
-    <string name="lbry_hls_summary">Usar LBRY HLS para streaming, se disponível</string>
+    <string name="lbry_hls_summary">Usar LBRY HLS para transmissão, se disponível</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d vídeos</string>
     <string name="subscriberAndVideoCounts">%1$s inscritos • %2$d vídeos</string>
     <string name="disable_proxy">Desabilitar proxy Piped</string>
@@ -542,4 +542,7 @@
     <string name="copy_tooltip">Copiar</string>
     <string name="import_groups">Importar grupos de canais</string>
     <string name="export_groups">Exportar grupos de canais</string>
+    <string name="change_instance">Alterar instância</string>
+    <string name="suggest_change_instance">O carregamento está demorando mais que o normal. Considere mudar de instância</string>
+    <string name="change">Alterar</string>
 </resources>

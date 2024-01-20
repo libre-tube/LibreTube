@@ -543,4 +543,7 @@
     <string name="copy_tooltip">Copiar</string>
     <string name="import_groups">Importar grupos de canais</string>
     <string name="export_groups">Exportar grupos de canais</string>
+    <string name="change_instance">Alterar instância</string>
+    <string name="suggest_change_instance">O carregamento está a demorar mais do que o habitual. Considere alterar a instância</string>
+    <string name="change">Alterar</string>
 </resources>

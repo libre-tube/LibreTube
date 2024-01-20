@@ -545,4 +545,7 @@
     <string name="copy_tooltip">Копировать</string>
     <string name="import_groups">Импортировать группы каналов</string>
     <string name="export_groups">Экспортировать группы каналов</string>
+    <string name="change_instance">Сменить сервер</string>
+    <string name="suggest_change_instance">Загрузка занимает дольше нормального. Возможно, стоит сменить сервер</string>
+    <string name="change">Сменить</string>
 </resources>

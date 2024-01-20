@@ -539,4 +539,7 @@
     <string name="copy_tooltip">Köçür</string>
     <string name="export_groups">Kanal qrupların ixrac et</string>
     <string name="import_groups">Kanal qrupların idxal et</string>
+    <string name="change_instance">İnstansiyanı dəyişdir</string>
+    <string name="suggest_change_instance">Yüklənilmə həmişəkindən daha uzun çəkir. İnstansiyanı dəyişdirməyi düşünün</string>
+    <string name="change">Dəyişdir</string>
 </resources>

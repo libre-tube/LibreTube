@@ -542,4 +542,7 @@
         <item quantity="other">Pred %d rokmi</item>
     </plurals>
     <string name="import_format_newpipe">NewPipe</string>
+    <string name="change_instance">Zmeniť inštanciu</string>
+    <string name="suggest_change_instance">Načítanie trvá dlhšie ako zvyčajne. Zvážte zmenu inštancie</string>
+    <string name="change">Zmeniť</string>
 </resources>
