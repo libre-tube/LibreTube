@@ -232,7 +232,6 @@
     <string name="navigation_bar">ナビゲーションバー</string>
     <string name="local_subscriptions">端末内の登録チャンネル</string>
     <string name="backup_customInstances">カスタムインスタンス</string>
-    <string name="save_feed">バックグラウンドでフィードを読み込み</string>
     <string name="play_next">次の動画</string>
     <string name="new_videos_badge_summary">新着動画があれば数をバッジに表示します</string>
     <string name="confirm_unsubscribing">登録解除の確認</string>
@@ -263,7 +262,6 @@
     <string name="skip_segment">ここをスキップ</string>
     <string name="sb_skip_manual">手動でスキップ</string>
     <string name="preferences">設定</string>
-    <string name="save_feed_summary">登録チャンネルをバックグラウンドで読み込み、タブ切り替え時には読み込みません</string>
     <string name="playback_pitch">ピッチ</string>
     <string name="error_occurred">エラー</string>
     <string name="copied">コピーしました</string>

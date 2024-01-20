@@ -273,8 +273,6 @@
     <string name="preferences">Preferensi</string>
     <string name="push_channel_name">Pekerja Notifikasi</string>
     <string name="push_channel_description">Menampilkan sebuah notifikasi ketika saluran baru telah tersedia.</string>
-    <string name="save_feed">Muat umpan di latar belakang</string>
-    <string name="save_feed_summary">Muat umpan langganan di latar belakang dan cegah dari memuat secara otomatis</string>
     <string name="play_next">Main berikutnya</string>
     <string name="navigation_bar">Bilah navigasi</string>
     <string name="change_region">Sedang Tren sepertinya tidak tersedia untuk wilayah saat ini. Pilih yang lain di pengaturan.</string>

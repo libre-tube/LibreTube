@@ -250,8 +250,6 @@
     <string name="delete">Ștergeți din descărcări</string>
     <string name="local_subscriptions">Abonamente locale</string>
     <string name="backup_customInstances">Instanțe personalizate</string>
-    <string name="save_feed">Încărcați fluxul în fundal</string>
-    <string name="save_feed_summary">Încărcați fluxul de abonamente în fundal și împiedicați-l să fie reîmprospătat</string>
     <string name="play_next">Redați următorul</string>
     <string name="navigation_bar">Bară de navigare</string>
     <string name="filename">Nume de fișier</string>

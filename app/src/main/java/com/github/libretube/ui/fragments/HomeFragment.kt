@@ -133,7 +133,7 @@ class HomeFragment : Fragment() {
 
         homeViewModel.loadHomeFeed(
             context = requireContext(),
-            savedFeed = subscriptionsViewModel.videoFeed.value,
+            subscriptionsViewModel = subscriptionsViewModel,
             visibleItems = visibleItems,
             onUnusualLoadTime = ::showChangeInstanceSnackBar
         )

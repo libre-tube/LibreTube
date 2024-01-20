@@ -407,7 +407,6 @@
     <string name="default_or_unknown_audio_track">standaard of onbekend</string>
     <string name="unsupported_file_format">Niet-ondersteund bestands­formaat: %1$s</string>
     <string name="mark_as_watched">Markeren als gezien</string>
-    <string name="save_feed_summary">Laad de abonnementen-feed op de achtergrond en voorkom dat deze herladen wordt bij het wisselen van tabbladen</string>
     <string name="trending">Nu trending</string>
     <string name="pause_on_quit">Pauzeren bij afsluiten</string>
     <string name="playingOnBackground">Afspelen op achtergrond…</string>
@@ -461,7 +460,6 @@
     <string name="watch_history_summary">Houd bekeken video\'s lokaal bij</string>
     <string name="history_summary">Kijk- en zoek­geschiedenis</string>
     <string name="skip_buttons_summary">Toon knoppen om naar de volgende of vorige video te gaan</string>
-    <string name="save_feed">Feed op achtergrond laden</string>
     <string name="confirm_unsubscribe">Weet u zeker dat u zich wilt deabonneren van %1$s\?</string>
     <string name="sb_custom_colors">Aangepaste segment­kleuren</string>
     <string name="invalid_color">Ongeldige kleur­waarde ingevoerd!</string>

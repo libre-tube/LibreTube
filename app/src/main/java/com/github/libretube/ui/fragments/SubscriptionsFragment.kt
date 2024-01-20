@@ -87,18 +87,13 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val loadFeedInBackground = PreferenceHelper.getBoolean(
-            PreferenceKeys.SAVE_FEED,
-            false
-        )
-
         setupSortAndFilter()
 
         binding.subRefresh.isEnabled = true
         binding.subProgress.isVisible = true
 
-        if (!isCurrentTabSubChannels && (viewModel.videoFeed.value == null || !loadFeedInBackground)) {
-            viewModel.videoFeed.value = null
+        if (!isCurrentTabSubChannels && viewModel.videoFeed.value == null) {
+            viewModel.fetchSubscriptions(requireContext())
             viewModel.fetchFeed(requireContext())
         }
 
@@ -122,15 +117,8 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
             binding.subRefresh.isRefreshing = true
             isCurrentTabSubChannels = !isCurrentTabSubChannels
 
-            if (isCurrentTabSubChannels) {
-                if (viewModel.subscriptions.value == null) {
-                    viewModel.fetchSubscriptions(requireContext())
-                } else {
-                    showSubscriptions()
-                }
-            } else {
-                showFeed()
-            }
+            if (isCurrentTabSubChannels) showSubscriptions() else showFeed()
+
             binding.subChannelsContainer.isVisible = isCurrentTabSubChannels
             binding.subFeedContainer.isGone = isCurrentTabSubChannels
         }

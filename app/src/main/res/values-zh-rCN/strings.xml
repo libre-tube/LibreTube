@@ -273,8 +273,6 @@
     <string name="local_subscriptions">本地订阅</string>
     <string name="backup_customInstances">自定义实例</string>
     <string name="preferences">选项</string>
-    <string name="save_feed">后台加载订阅源</string>
-    <string name="save_feed_summary">后台加载订阅源并防止其在切换标签页时重新加载</string>
     <string name="play_next">播放下一个</string>
     <string name="navigation_bar">导航栏</string>
     <string name="change_region">“时下流行”似乎对当前地区不可用。请在设置中另选一个地区。</string>

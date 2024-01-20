@@ -273,8 +273,6 @@
     <string name="backup_customInstances">نُسَخ مخصّصة</string>
     <string name="push_channel_name">عامل الإخطار</string>
     <string name="push_channel_description">يظهر إشعارًا عند توفر تدفقات جديدة.</string>
-    <string name="save_feed">تحميل التغذية في الخلفية</string>
-    <string name="save_feed_summary">قم بتحميل موجز الاشتراك في الخلفية ومنع إعادة تحميله عند تبديل علامات التبويب</string>
     <string name="play_next">تشغيل التالي</string>
     <string name="navigation_bar">شريط التنقل</string>
     <string name="change_region">المتصدرة يبدو أنها غير متاحة في المنطقة الحالية . الرجاء اختيار آخر في الإعداد .</string>

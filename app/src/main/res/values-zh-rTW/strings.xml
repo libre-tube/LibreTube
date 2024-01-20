@@ -245,8 +245,6 @@
     <string name="delete">從下載刪除</string>
     <string name="new_videos_badge">新影片的指示器</string>
     <string name="backup_customInstances">自訂執行個體</string>
-    <string name="save_feed">在背景載入訂閱播放清單</string>
-    <string name="save_feed_summary">在背景載入訂閱播放清單，並防止切換分頁時重新載入</string>
     <string name="filename">檔案名稱</string>
     <string name="added_to_playlist">新增至播放清單 %1$s</string>
     <string name="confirm_unsubscribe">您確定要取消訂閱 %1$s 嗎？</string>

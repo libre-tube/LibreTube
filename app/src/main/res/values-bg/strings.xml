@@ -293,7 +293,6 @@
     <string name="mark_as_unwatched">Маркирай като негледано</string>
     <string name="import_subscriptions_from">Импортиране на абонаменти от</string>
     <string name="category_segments">Сегменти</string>
-    <string name="save_feed_summary">Заредете емисията за абонамент във фонов режим и предотвратете автоматичното й опресняване</string>
     <string name="automatic">Автоматичен</string>
     <string name="play_latest_videos">Пуснете най-новите видеоклипове</string>
     <string name="repeat_mode_current">Текущ</string>
@@ -420,7 +419,6 @@
     <string name="auth_instance_summary">Използвайте различена инстанция за удостоверени повиквания</string>
     <string name="download_channel_description">Показва известие при изтегляне на медия.</string>
     <string name="segment_submitted">Сегментът е изпратен</string>
-    <string name="save_feed">Зареждане на емисия във фонов режим</string>
     <string name="unknown_audio_track_type">Неизвестен тип аудио запис</string>
     <string name="gradientIcon">Плъзгав наклон</string>
     <string name="resize_mode_fill">Пълен</string>

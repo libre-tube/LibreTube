@@ -284,7 +284,6 @@
     <string name="export_subscriptions">निर्यात Subscriptions</string>
     <string name="preferences">प्राधान्ये</string>
     <string name="backup_customInstances">सानुकूल इंस्तान्सेस</string>
-    <string name="save_feed">पार्श्वभूमीत फीड लोड करा</string>
     <string name="navigation_bar">नेव्हिगेशन बार</string>
     <string name="play_all">सर्व प्ले करा</string>
     <string name="livestreams">लाइव्हस्ट्रीम्स</string>
@@ -371,7 +370,6 @@
     <string name="repeat_mode">रिपीट मोड</string>
     <string name="resize_mode_fit">फिट</string>
     <string name="resize_mode_fill">भरा</string>
-    <string name="save_feed_summary">बॅकग्राउंडमध्ये सब्सक्रिप्शन फीड लोड करा आणि ते ऑटो-रिफ्रेश होण्यापासून प्रतिबंधित करा</string>
     <string name="play_next">पुढील प्ले करा</string>
     <string name="playback_pitch">पिच</string>
     <string name="confirm_unsubscribing_summary">सदस्यत्व रद्द करण्यापूर्वी एक पुष्टीकरण संवाद दर्शवा</string>

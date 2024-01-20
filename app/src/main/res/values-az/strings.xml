@@ -269,8 +269,6 @@
     <string name="local_subscriptions">Yerli abunəlikər</string>
     <string name="preferences">Üstünlüklər</string>
     <string name="backup_customInstances">Fərdi İnstansiyalar</string>
-    <string name="save_feed">Axını arxa planda yüklə</string>
-    <string name="save_feed_summary">Abunəlik axının arxa planda yükləyin və səhifələri dəyişərkən onun yenidən yüklənməsinin qarşısını alın</string>
     <string name="download_channel_name">Yükləmə Xidməti</string>
     <string name="download_channel_description">Media yükləyərkən bildiriş göstərir.</string>
     <string name="push_channel_name">Bildiriş İşçisi</string>

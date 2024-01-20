@@ -272,8 +272,6 @@
     <string name="push_channel_description">Pokazuje powiadomienie, kiedy dostępne są nowe filmy.</string>
     <string name="push_channel_name">Powiadomienie Push</string>
     <string name="download_channel_description">Pokazuje powiadomienie podczas pobierania multimediów.</string>
-    <string name="save_feed_summary">Załaduj kanał subskrypcji w tle i zapobiegnij jego automatycznemu odświeżaniu</string>
-    <string name="save_feed">Ładowanie kanału w tle</string>
     <string name="play_next">Odtwórz następne</string>
     <string name="navigation_bar">Pasek nawigacyjny</string>
     <string name="change_region">Filmy na czasie wydają się być niedostępne dla bieżącego regionu. Proszę wybrać inny w ustawieniach.</string>

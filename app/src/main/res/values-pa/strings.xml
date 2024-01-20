@@ -267,8 +267,6 @@
     <string name="local_subscriptions">ਸਥਾਨਕ ਸਬਸਕ੍ਰਿਪਸ਼ਨ</string>
     <string name="preferences">ਤਰਜੀਹਾਂ</string>
     <string name="backup_customInstances">ਕਸਟਮ ਇੰਸਟੈਂਸ</string>
-    <string name="save_feed">ਬੈਕਗ੍ਰਾਊਂਡ ਵਿੱਚ ਫੀਡ ਲੋਡ ਕਰੋ</string>
-    <string name="save_feed_summary">ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਫੀਡ ਨੂੰ ਬੈਕਗ੍ਰਾਊਂਡ ਵਿੱਚ ਲੋਡ ਕਰੋ ਅਤੇ ਟੈਬਾਂ ਨੂੰ ਬਦਲਣ ਵੇਲੇ ਇਸਨੂੰ ਮੁੜ ਲੋਡ ਹੋਣ ਤੋਂ ਰੋਕੋ</string>
     <string name="navigation_bar">ਨੈਵੀਗੇਸ਼ਨ ਪੱਟੀ</string>
     <string name="change_region">ਮੌਜੂਦਾ ਖੇਤਰ ਲਈ ਰੁਝਾਨ ਅਣਉਪਲਬਧ ਜਾਪਦਾ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਕੋਈ ਹੋਰ ਚੁਣੋ।</string>
     <string name="playback_pitch">ਪਿੱਚ</string>

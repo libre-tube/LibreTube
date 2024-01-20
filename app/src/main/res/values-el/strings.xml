@@ -345,8 +345,6 @@
     <string name="exportsuccess">Εξήχθη.</string>
     <string name="preferences">Προτιμήσεις</string>
     <string name="backup_customInstances">Προσαρμοσμένες περιπτώσεις</string>
-    <string name="save_feed">Φόρτωση ροής στο παρασκήνιο</string>
-    <string name="save_feed_summary">Φορτώστε τη ροή της συνδρομής στο παρασκήνιο και αποτρέψτε την αυτόματη ανανέωσή της</string>
     <string name="queue">Ουρά</string>
     <string name="livestreams">Ζωντανές Ροές</string>
     <string name="alternative_videos_layout">Εναλλακτική διάταξη βίντεο</string>

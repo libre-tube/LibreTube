@@ -204,7 +204,6 @@
     <string name="local_subscriptions">දේශීයව ගබඩා කර ඇති දායකත්වයන්</string>
     <string name="preferences">සැකසුම්</string>
     <string name="backup_customInstances">වෙනත් සේවාදායකයක්</string>
-    <string name="save_feed">පසුබිමේ නවතම වීඩියෝ පූරණය කරන්න</string>
     <string name="navigation_bar">මං සෙවුම් තීරුව</string>
     <string name="playback_pitch">ස්වරය</string>
     <string name="filename">ගොනු නාමය</string>
@@ -326,7 +325,6 @@
     <string name="required_network">සම්බන්ධතාවයක් අවශ්‍ය</string>
     <string name="skip_buttons">මඟ හරින බොත්තම්</string>
     <string name="new_videos_badge">නව වීඩියෝ සඳහා දර්ශකය</string>
-    <string name="save_feed_summary">නව දායකත්ව වීඩියෝ පසුබිමේ පූරණය කර එය ස්වයංක්‍රීයව නැවුම් වීම වළක්වන්න</string>
     <string name="resize_mode_zoom">විශාලනය කරන්න</string>
     <string name="repeat_mode_none">කිසිවක් නැත</string>
     <string name="add_to_queue">පෝලිමට එකතු කරන්න</string>

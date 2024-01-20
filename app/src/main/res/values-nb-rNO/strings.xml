@@ -268,8 +268,6 @@
     <string name="local_subscriptions">Lokale abonnementer</string>
     <string name="preferences">Innstillinger</string>
     <string name="backup_customInstances">Egendefinerte instanser</string>
-    <string name="save_feed">Last inn informasjonsstrøm i bakgrunnen</string>
-    <string name="save_feed_summary">Last inn abonnementsinformasjonsstrømmen i bakgrunnen og forhindre auto-gjenoppfrisking av den</string>
     <string name="play_next">Spill neste</string>
     <string name="download_channel_name">Nedlastingstjeneste</string>
     <string name="download_channel_description">Vis en merknad ved nedlasting av media.</string>

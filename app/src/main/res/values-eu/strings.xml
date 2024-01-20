@@ -269,8 +269,6 @@
     <string name="local_subscriptions">Tokiko harpidetzak</string>
     <string name="preferences">Hobespenak</string>
     <string name="backup_customInstances">Instantzia pertsonalizatuak</string>
-    <string name="save_feed">Kargatu jarioa atzeko planoan</string>
-    <string name="save_feed_summary">Kargatu harpidetzako jarioa atzeko planoan eta saihestu automatikoki freskatzea</string>
     <string name="play_next">Erreproduzitu hurrengoa</string>
     <string name="navigation_bar">Nabigazio-barra</string>
     <string name="push_channel_description">Erakutsi jakinarazpen bat eduki berriak erabilgarri daudenean.</string>

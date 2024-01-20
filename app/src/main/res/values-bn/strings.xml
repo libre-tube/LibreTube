@@ -268,8 +268,6 @@
     <string name="network_metered">মিটারযুক্ত</string>
     <string name="new_videos_badge_summary">নতুন ভিডিওর সংখ্যাসহ ব্যাজ দেখান</string>
     <string name="preferences">পছন্দসমূহ</string>
-    <string name="save_feed">ফিড ব্যাকগ্রাউন্ডে লোড করুন</string>
-    <string name="save_feed_summary">ফিড ব্যাকগ্রাউন্ডে লোড করুন এবং অটো রিফ্রেশ হওয়া বন্ধ করুন</string>
     <string name="play_next">পরেরটা চালান</string>
     <string name="added_to_playlist">প্লে-লিস্টে অ্যাড করুন</string>
     <string name="push_channel_name">নোটিফিকেশন ওয়ার্কার</string>
