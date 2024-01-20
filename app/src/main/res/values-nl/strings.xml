@@ -540,4 +540,7 @@
     <string name="rich_caption_rendering_summary">Geef web­bijschriften weer voor een rijkere en persoonlijkere ervaring</string>
     <string name="import_groups">Kanaal­groepen importeren</string>
     <string name="export_groups">Kanaal­groepen exporteren</string>
+    <string name="change_instance">Instantie wijzigen</string>
+    <string name="suggest_change_instance">Laden duurt langer dan normaal; overweeg een andere instantie te gebruiken.</string>
+    <string name="change">Wijzigen</string>
 </resources>
