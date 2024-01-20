@@ -536,4 +536,7 @@
     <string name="copy_tooltip">复制</string>
     <string name="import_groups">导入频道组</string>
     <string name="export_groups">导出频道组</string>
+    <string name="change_instance">更换实例</string>
+    <string name="suggest_change_instance">加载所花时间比平常要多。请考虑更换实例</string>
+    <string name="change">更换</string>
 </resources>
