@@ -22,6 +22,6 @@ class UpdateAvailableDialog {
             .setNegativeButton(R.string.tooltip_dismiss) { dialog, _ ->
                 dialog.dismiss()
             }
-                .show()
+            .show()
     }
 }
