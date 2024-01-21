@@ -541,4 +541,7 @@
     <string name="copy_tooltip">Copier</string>
     <string name="export_groups">Exporter des groupes de chaînes</string>
     <string name="import_groups">Importer des groupes de chaînes</string>
+    <string name="suggest_change_instance">Le chargement prend plus de temps que d\'habitude. Envisagez de changer d\'instance</string>
+    <string name="change_instance">Changer d\'instance</string>
+    <string name="change">Changer</string>
 </resources>

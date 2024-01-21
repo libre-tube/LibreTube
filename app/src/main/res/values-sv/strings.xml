@@ -538,4 +538,7 @@
     <string name="copy_tooltip">Kopiera</string>
     <string name="export_groups">Exportera kanal grupper</string>
     <string name="import_groups">Importera kanal grupper</string>
+    <string name="change_instance">Ändra instans</string>
+    <string name="suggest_change_instance">Det tar mer tid än vanligt att ladda. Överväg att byta instans</string>
+    <string name="change">Byt</string>
 </resources>

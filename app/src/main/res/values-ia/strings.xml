@@ -540,4 +540,5 @@
     <string name="export_groups">Exportar gruppos de canales</string>
     <string name="change">Cambiar</string>
     <string name="change_instance">Cambiar de instantia</string>
+    <string name="suggest_change_instance">Le carga prende plus de tempore que de costume. Considera cambiar de instantia</string>
 </resources>
