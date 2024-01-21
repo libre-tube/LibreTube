@@ -62,6 +62,13 @@ class LibreTubeApp : Application() {
      */
     private fun initializeNotificationChannels() {
         val downloadChannel = NotificationChannelCompat.Builder(
+            PLAYLIST_DOWNLOAD_ENQUEUE_CHANNEL_NAME,
+            NotificationManagerCompat.IMPORTANCE_LOW
+        )
+            .setName(getString(R.string.download_playlist))
+            .setDescription(getString(R.string.enqueue_playlist_description))
+            .build()
+        val playlistDownloadEnqueueChannel = NotificationChannelCompat.Builder(
             DOWNLOAD_CHANNEL_NAME,
             NotificationManagerCompat.IMPORTANCE_LOW
         )
@@ -87,6 +94,7 @@ class LibreTubeApp : Application() {
         notificationManager.createNotificationChannelsCompat(
             listOf(
                 downloadChannel,
+                playlistDownloadEnqueueChannel,
                 pushChannel,
                 playerChannel
             )
@@ -97,6 +105,7 @@ class LibreTubeApp : Application() {
         lateinit var instance: LibreTubeApp
 
         const val DOWNLOAD_CHANNEL_NAME = "download_service"
+        const val PLAYLIST_DOWNLOAD_ENQUEUE_CHANNEL_NAME = "playlist_download_enqueue"
         const val PLAYER_CHANNEL_NAME = "player_mode"
         const val PUSH_CHANNEL_NAME = "notification_worker"
     }

@@ -280,6 +280,15 @@
         <item>worst</item>
     </string-array>
 
+    <string-array name="audioQualityBitrates">
+        <item>196kbps</item>
+        <item>128kbps</item>
+        <item>96kbps</item>
+        <item>64kbps</item>
+        <item>48kbps</item>
+        <item>32kbps</item>
+    </string-array>
+
     <string-array name="checkingFrequency">
         <item>15 minutes</item>
         <item>30 minutes</item>
