@@ -7,6 +7,7 @@ import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.util.UpdateChecker
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainSettings : BasePreferenceFragment() {
@@ -22,7 +23,7 @@ class MainSettings : BasePreferenceFragment() {
         // manual trigger, in case
         update?.setOnPreferenceClickListener {
 
-            lifecycleScope.launch {
+            lifecycleScope.launch(Dispatchers.IO) {
                 val updater = UpdateChecker(requireContext())
                 updater.checkUpdate(manualTrigger = true)
             }
