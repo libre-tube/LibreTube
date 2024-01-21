@@ -44,7 +44,7 @@ import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.models.SearchViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
-import com.github.libretube.util.InAppUpdater
+import com.github.libretube.util.UpdateChecker
 import kotlinx.coroutines.launch
 
 class MainActivity : BaseActivity() {
@@ -84,10 +84,13 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        lifecycleScope.launch {
-            val updater = InAppUpdater(context = this@MainActivity)
-            updater.checkUpdate(manualTrigger = false)
-        } // Check update
+        if (PreferenceHelper.getBoolean(PreferenceKeys.AUTO_UPDATES, false)) {
+
+            lifecycleScope.launch {
+                val updater = UpdateChecker(context = this@MainActivity)
+                updater.checkUpdate(manualTrigger = false)
+            } // Check update
+        }
 
         // set the action bar for the activity
         setSupportActionBar(binding.toolbar)

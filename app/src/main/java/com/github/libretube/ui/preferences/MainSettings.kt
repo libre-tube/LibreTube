@@ -6,7 +6,7 @@ import androidx.preference.Preference
 import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.ui.base.BasePreferenceFragment
-import com.github.libretube.util.InAppUpdater
+import com.github.libretube.util.UpdateChecker
 import kotlinx.coroutines.launch
 
 class MainSettings : BasePreferenceFragment() {
@@ -23,7 +23,7 @@ class MainSettings : BasePreferenceFragment() {
         update?.setOnPreferenceClickListener {
 
             lifecycleScope.launch {
-                val updater = InAppUpdater(requireContext())
+                val updater = UpdateChecker(requireContext())
                 updater.checkUpdate(manualTrigger = true)
             }
 

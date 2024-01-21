@@ -419,6 +419,7 @@
     <string name="group_name_error_exists">Please choose a name that is unique</string>
     <string name="edit_group">Edit group</string>
     <string name="play_automatically">Play automatically</string>
+    <string name="show_updates">Show app updates</string>
     <string name="play_automatically_summary">Start playing video automatically when selecting</string>
     <string name="fullscreen_gestures">Enter/exit fullscreen gestures</string>
     <string name="go_to_video">Go to video</string>
