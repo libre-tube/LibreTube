@@ -45,6 +45,7 @@ import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.models.SearchViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.util.UpdateChecker
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainActivity : BaseActivity() {
@@ -85,7 +86,7 @@ class MainActivity : BaseActivity() {
         setContentView(binding.root)
 
         if (PreferenceHelper.getBoolean(PreferenceKeys.AUTO_UPDATES, false)) {
-            lifecycleScope.launch {
+            lifecycleScope.launch(Dispatchers.IO) {
                 val updater = UpdateChecker(context = this@MainActivity)
                 updater.checkUpdate(manualTrigger = false)
             } // Check update
