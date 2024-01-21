@@ -85,7 +85,6 @@ class MainActivity : BaseActivity() {
         setContentView(binding.root)
 
         if (PreferenceHelper.getBoolean(PreferenceKeys.AUTO_UPDATES, false)) {
-
             lifecycleScope.launch {
                 val updater = UpdateChecker(context = this@MainActivity)
                 updater.checkUpdate(manualTrigger = false)

@@ -12,7 +12,7 @@ class UpdateAvailableDialog {
 
     fun showDialog(changelog: String,releaseUrl:String, context: Context) {
 
-        val dialogBuilder = MaterialAlertDialogBuilder(context)
+        MaterialAlertDialogBuilder(context)
             .setTitle(R.string.update_available)
             .setMessage(changelog)
             .setPositiveButton(R.string.download) { _, _ ->
@@ -22,7 +22,6 @@ class UpdateAvailableDialog {
             .setNegativeButton(R.string.tooltip_dismiss) { dialog, _ ->
                 dialog.dismiss()
             }
-
-        dialogBuilder.show()
+                .show()
     }
 }

@@ -17,11 +17,9 @@ class UpdateChecker(private val context: Context) {
     private lateinit var releaseURL: String
 
     suspend fun checkUpdate(manualTrigger: Boolean = false) {
-
         val currentAppVersion = BuildConfig.VERSION_NAME.replace(".", "")
 
         try {
-
             val response = RetrofitInstance.externalApi.getLatestRelease()
 
             if (response.isSuccessful) {
@@ -40,23 +38,19 @@ class UpdateChecker(private val context: Context) {
                             context
                         )
                     }
-
                 } else if (manualTrigger) {
                     Toast.makeText(context, R.string.app_uptodate, Toast.LENGTH_LONG).show()
                 }
-
             } else {
                 Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_LONG).show()
                 Log.e(TAG(), response.toString())
             }
-
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
     private fun sanitizeChangelog(changelog: String): String {
-
         val sanitizedChangelog = changelog.substringBeforeLast("**Full Changelog**")
         val withoutLinks = sanitizedChangelog.replace(Regex("in https://github\\.com/[^\\s]+"), "")
 
