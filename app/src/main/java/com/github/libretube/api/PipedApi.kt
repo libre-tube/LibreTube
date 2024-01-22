@@ -1,23 +1,6 @@
 package com.github.libretube.api
 
-import com.github.libretube.api.obj.Channel
-import com.github.libretube.api.obj.ChannelTabResponse
-import com.github.libretube.api.obj.CommentsPage
-import com.github.libretube.api.obj.DeleteUserRequest
-import com.github.libretube.api.obj.EditPlaylistBody
-import com.github.libretube.api.obj.Login
-import com.github.libretube.api.obj.Message
-import com.github.libretube.api.obj.PipedConfig
-import com.github.libretube.api.obj.Playlist
-import com.github.libretube.api.obj.Playlists
-import com.github.libretube.api.obj.SearchResult
-import com.github.libretube.api.obj.SegmentData
-import com.github.libretube.api.obj.StreamItem
-import com.github.libretube.api.obj.Streams
-import com.github.libretube.api.obj.Subscribe
-import com.github.libretube.api.obj.Subscribed
-import com.github.libretube.api.obj.Subscription
-import com.github.libretube.api.obj.Token
+import com.github.libretube.api.obj.*
 import kotlinx.serialization.json.JsonObject
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -47,7 +30,7 @@ interface PipedApi {
     ): SegmentData
 
     @GET("dearrow")
-    suspend fun getDeArrowContent(@Query("videoIds") videoIds: String): JsonObject
+    suspend fun getDeArrowContent(@Query("videoIds") videoIds: String): Map<String, DeArrowContent>
 
     @GET("nextpage/comments/{videoId}")
     suspend fun getCommentsNextPage(
