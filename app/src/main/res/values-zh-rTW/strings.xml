@@ -535,4 +535,7 @@
     <string name="copy_tooltip">複製</string>
     <string name="import_groups">匯入頻道群組</string>
     <string name="export_groups">匯出頻道群組</string>
+    <string name="change">變更</string>
+    <string name="change_instance">變更站台</string>
+    <string name="suggest_change_instance">載入時間較平常久。請考慮變更站台</string>
 </resources>
