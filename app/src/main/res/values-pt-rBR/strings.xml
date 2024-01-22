@@ -549,4 +549,5 @@
     <string name="default_language">Padrão</string>
     <string name="audio_language">Idioma do áudio</string>
     <string name="enqueueing_playlist_download">Enfileirando vídeos para o download da playlist %1$s</string>
+    <string name="delete_all">Todos os downloads serão excluídos!</string>
 </resources>
