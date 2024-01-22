@@ -15,6 +15,7 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
+import com.github.libretube.enums.NotificationId
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.getWhileDigit
 import com.github.libretube.extensions.serializableExtra
@@ -24,7 +25,6 @@ import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.parcelable.DownloadData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class PlaylistDownloadEnqueueService : LifecycleService() {
     private lateinit var nManager: NotificationManager
@@ -42,7 +42,7 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
     override fun onCreate() {
         super.onCreate()
 
-        startForeground(ENQUEUE_PROGRESS_NOTIFICATION_ID, buildNotification())
+        startForeground(NotificationId.ENQUEUE_PLAYLIST_DOWNLOAD.id, buildNotification())
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -56,7 +56,7 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
         captionLanguage = intent.getStringExtra(IntentData.captionLanguage)
         audioLanguage = intent.getStringExtra(IntentData.audioLanguage)
 
-        nManager.notify(ENQUEUE_PROGRESS_NOTIFICATION_ID, buildNotification())
+        nManager.notify(NotificationId.ENQUEUE_PLAYLIST_DOWNLOAD.id, buildNotification())
 
         lifecycleScope.launch(Dispatchers.IO) {
             if (playlistType != PlaylistType.PUBLIC) {
@@ -82,7 +82,7 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
         val playlist = try {
             PlaylistsHelper.getPlaylist(playlistId)
         } catch (e: Exception) {
-            toastFromMainDispatcher(e.localizedMessage)
+            toastFromMainDispatcher(e.localizedMessage.orEmpty())
             stopSelf()
             return
         }
@@ -94,7 +94,7 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
         val playlist = try {
             RetrofitInstance.api.getPlaylist(playlistId)
         } catch (e: Exception) {
-            toastFromMainDispatcher(e.localizedMessage)
+            toastFromMainDispatcher(e.localizedMessage.orEmpty())
             stopSelf()
             return
         }
@@ -130,7 +130,7 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
     }
 
     private suspend fun enqueueStreams(streams: List<StreamItem>) {
-        nManager.notify(ENQUEUE_PROGRESS_NOTIFICATION_ID, buildNotification())
+        nManager.notify(NotificationId.ENQUEUE_PLAYLIST_DOWNLOAD.id, buildNotification())
 
         for (stream in streams) {
             val videoInfo = runCatching {
@@ -157,7 +157,7 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
             DownloadHelper.startDownloadService(this, downloadData)
 
             amountOfVideosDone++
-            nManager.notify(ENQUEUE_PROGRESS_NOTIFICATION_ID, buildNotification())
+            nManager.notify(NotificationId.ENQUEUE_PLAYLIST_DOWNLOAD.id, buildNotification())
         }
 
         if (amountOfVideos == amountOfVideosDone) stopSelf()
@@ -182,9 +182,5 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
         stopSelf()
 
         super.onDestroy()
-    }
-
-    companion object {
-        private const val ENQUEUE_PROGRESS_NOTIFICATION_ID = 3
     }
 }

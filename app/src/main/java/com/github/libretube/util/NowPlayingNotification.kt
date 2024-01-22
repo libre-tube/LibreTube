@@ -24,6 +24,7 @@ import coil.request.ImageRequest
 import com.github.libretube.LibreTubeApp.Companion.PLAYER_CHANNEL_NAME
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
+import com.github.libretube.enums.NotificationId
 import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.toMediaMetadataCompat
 import com.github.libretube.helpers.BackgroundHelper
@@ -370,7 +371,7 @@ class NowPlayingNotification(
             }
             .build()
         updateSessionMetadata()
-        nManager.notify(PLAYER_NOTIFICATION_ID, notification)
+        nManager.notify(NotificationId.PLAYER_PLAYBACK.id, notification)
     }
 
     private val notificationActionReceiver = object : BroadcastReceiver() {
@@ -398,11 +399,11 @@ class NowPlayingNotification(
             context.unregisterReceiver(notificationActionReceiver)
         }
 
-        nManager.cancel(PLAYER_NOTIFICATION_ID)
+        nManager.cancel(NotificationId.PLAYER_PLAYBACK.id)
     }
 
     fun cancelNotification() {
-        nManager.cancel(PLAYER_NOTIFICATION_ID)
+        nManager.cancel(NotificationId.PLAYER_PLAYBACK.id)
     }
 
     fun refreshNotification() {
@@ -410,7 +411,6 @@ class NowPlayingNotification(
     }
 
     companion object {
-        const val PLAYER_NOTIFICATION_ID = 1
         private const val PREV = "prev"
         private const val NEXT = "next"
         private const val REWIND = "rewind"
