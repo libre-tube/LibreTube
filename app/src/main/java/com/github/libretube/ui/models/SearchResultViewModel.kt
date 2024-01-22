@@ -1,5 +1,6 @@
 package com.github.libretube.ui.models
 
+import androidx.core.net.toUri
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,16 +14,13 @@ import com.github.libretube.util.TextUtils
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
-import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 class SearchResultViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
     private val args = SearchResultFragmentArgs.fromSavedStateHandle(savedStateHandle)
 
     // parse search URLs from YouTube entered in the search bar
-    private val searchQuery = args.query.toHttpUrlOrNull()?.let {
-        val videoId = TextUtils.getVideoIdFromUrl(it.toString()) ?: args.query
-        "${ShareDialog.YOUTUBE_FRONTEND_URL}/watch?v=$videoId"
-    } ?: args.query
+    private val videoId = TextUtils.getVideoIdFromUri(args.query.toUri()) ?: args.query
+    private val searchQuery = "${ShareDialog.YOUTUBE_FRONTEND_URL}/watch?v=$videoId"
 
     private val filterMutableData = MutableStateFlow("all")
 
