@@ -16,6 +16,7 @@ import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.DeletePlaylistDialog
+import com.github.libretube.ui.dialogs.DownloadPlaylistDialog
 import com.github.libretube.ui.dialogs.PlaylistDescriptionDialog
 import com.github.libretube.ui.dialogs.RenamePlaylistDialog
 import com.github.libretube.ui.dialogs.ShareDialog
@@ -39,7 +40,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
         setTitle(playlistName)
 
         // options for the dialog
-        val optionsList = mutableListOf(R.string.playOnBackground)
+        val optionsList = mutableListOf(R.string.playOnBackground, R.string.download)
 
         if (PlayingQueue.isNotEmpty()) optionsList.add(R.string.add_to_queue)
 
@@ -135,6 +136,17 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                         IntentData.playlistDescription to ""
                     )
                     newPlaylistDescriptionDialog.show(mFragmentManager, null)
+                }
+
+                R.string.download -> {
+                    val downloadPlaylistDialog = DownloadPlaylistDialog().apply {
+                        arguments = bundleOf(
+                            IntentData.playlistId to playlistId,
+                            IntentData.playlistName to playlistName,
+                            IntentData.playlistType to playlistType
+                        )
+                    }
+                    downloadPlaylistDialog.show(mFragmentManager, null)
                 }
 
                 else -> {

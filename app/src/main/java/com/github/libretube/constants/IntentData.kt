@@ -36,4 +36,8 @@ object IntentData {
     const val isSubscribed = "isSubscribed"
     const val sortOptions = "sortOptions"
     const val hideWatched = "hideWatched"
+    const val maxVideoQuality = "maxVideoQuality"
+    const val maxAudioQuality = "maxAudioQuality"
+    const val audioLanguage = "audioLanguage"
+    const val captionLanguage = "captionLanguage"
 }
