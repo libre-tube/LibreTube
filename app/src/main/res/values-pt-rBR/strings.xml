@@ -543,4 +543,10 @@
     <string name="change_instance">Alterar instância</string>
     <string name="suggest_change_instance">O carregamento está demorando mais que o normal. Considere mudar de instância</string>
     <string name="change">Alterar</string>
+    <string name="enqueue_playlist_description">Mostra notificação ao enfileirar vídeos da playlist para o download.</string>
+    <string name="download_playlist">Baixar playlist</string>
+    <string name="download_playlist_note">Selecione a qualidade máxima de áudio/vídeo para download. As legendas só serão baixadas se estiverem disponíveis.</string>
+    <string name="default_language">Padrão</string>
+    <string name="audio_language">Idioma do áudio</string>
+    <string name="enqueueing_playlist_download">Enfileirando vídeos para o download da playlist %1$s</string>
 </resources>
