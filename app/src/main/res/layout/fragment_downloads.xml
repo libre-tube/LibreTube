@@ -35,6 +35,18 @@
         android:visibility="gone" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/delete_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="80dp"
+        android:layout_marginEnd="18dp"
+        android:contentDescription="@string/shuffle"
+        android:src="@drawable/ic_delete"
+        android:tooltipText="@string/delete"
+        tools:targetApi="o" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/shuffle_background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
