@@ -307,7 +307,7 @@
     <string name="rewind">Înapoi</string>
     <string name="alternative_pip_controls">Controale suprapunere alternative</string>
     <string name="failed_fetching_instances">Nu s-au putut prelua instanțele disponibile.</string>
-    <string name="hide_watched_from_feed">Ascundeți videoclipurile vizionate din flux</string>
+    <string name="hide_watched_from_feed">Ascundeți videoclipurile deja vizionate</string>
     <string name="hide_watched_from_feed_summary">Nu afișa videoclipuri vizionate mai mult de 90% în fila Abonamente</string>
     <string name="push_channel_description">Afișați o notificare când sunt disponibile fluxuri noi.</string>
     <string name="autoplay_countdown_summary">Afișați o numărătoare inversă de 5 secunde înainte de redarea automată a următorului videoclip</string>
@@ -538,4 +538,9 @@
     <string name="invalid_input">Intrare incorectă</string>
     <string name="no_fullscreen_resolution">Rezoluție normală (fără ecran complet)</string>
     <string name="same_as_fullscreen">La fel ca în ecran complet</string>
+    <string name="change">Schimbă</string>
+    <string name="change_instance">Schimbă instanță</string>
+    <string name="suggest_change_instance">Încărcarea durează mai mult decât de obicei. Luați în considerare să schimbați instanța</string>
+    <string name="import_groups">Importați grupuri de canale</string>
+    <string name="export_groups">Exportați grupuri de canale</string>
 </resources>
