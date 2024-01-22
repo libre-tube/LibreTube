@@ -1,6 +1,7 @@
 package com.github.libretube.ui.fragments
 
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.ServiceConnection
@@ -9,15 +10,14 @@ import android.os.IBinder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
-import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentDownloadsBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.DownloadWithItems
@@ -28,10 +28,10 @@ import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.obj.DownloadStatus
 import com.github.libretube.receivers.DownloadReceiver
 import com.github.libretube.services.DownloadService
-import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.ui.adapters.DownloadsAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlin.io.path.fileSize
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -83,6 +83,7 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.deleteAll.isInvisible = true
 
         val dbDownloads = runBlocking(Dispatchers.IO) {
             Database.downloadDao().getAll()
@@ -93,7 +94,6 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
 
         binding.downloadsEmpty.isGone = true
         binding.downloads.isVisible = true
-
         val adapter = DownloadsAdapter(requireContext(), downloads) {
             var isDownloading = false
             val ids = it.downloadItems
@@ -155,9 +155,31 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
             }
         )
 
+
+        if (dbDownloads.isNotEmpty()){
+            binding.deleteAll.isVisible = true
+            binding.deleteAll.setOnClickListener{
+                showDeleteAllDialog(binding.root.context, adapter)
+            }
+        }
+
+
         binding.shuffleBackground.setOnClickListener {
             BackgroundHelper.playOnBackgroundOffline(requireContext(), null)
         }
+    }
+
+    private fun showDeleteAllDialog(context: Context, adapter: DownloadsAdapter) {
+        MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.delete_all)
+            .setMessage(R.string.irreversible)
+            .setPositiveButton(R.string.okay) { _, _ ->
+                for (downloadIndex in downloads.size - 1 downTo 0) {
+                    adapter.deleteDownload(downloadIndex)
+                }
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
     }
 
     override fun onStart() {
@@ -167,6 +189,7 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
         }
         super.onStart()
     }
+
 
     override fun onResume() {
         super.onResume()

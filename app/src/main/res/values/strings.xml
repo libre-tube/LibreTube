@@ -286,6 +286,7 @@
     <string name="device_info">Device Info</string>
     <string name="audio_video_summary">Quality and format</string>
     <string name="delete">Delete from downloads</string>
+    <string name="delete_all">All downloads will be deleted!</string>
     <string name="renamePlaylist">Rename playlist</string>
     <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">Mobile data</string>

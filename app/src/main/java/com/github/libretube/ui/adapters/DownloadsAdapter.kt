@@ -136,7 +136,7 @@ class DownloadsAdapter(
             .show()
     }
 
-    private fun deleteDownload(position: Int) {
+    fun deleteDownload(position: Int) {
         val download = downloads[position].download
         val items = downloads[position].downloadItems
 
