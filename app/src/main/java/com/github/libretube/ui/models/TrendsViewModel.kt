@@ -1,6 +1,7 @@
 package com.github.libretube.ui.models
 
 import android.content.Context
+import android.os.Parcelable
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
@@ -20,6 +21,7 @@ import java.io.IOException
 
 class TrendsViewModel: ViewModel() {
     val trendingVideos = MutableLiveData<List<StreamItem>>()
+    var recyclerViewState: Parcelable? = null
 
     fun fetchTrending(context: Context) {
         viewModelScope.launch {
