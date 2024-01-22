@@ -8,7 +8,5 @@ object SearchCallback : DiffUtil.ItemCallback<ContentItem>() {
         return oldItem.url == newItem.url
     }
 
-    override fun areContentsTheSame(oldItem: ContentItem, newItem: ContentItem): Boolean {
-        return true
-    }
+    override fun areContentsTheSame(oldItem: ContentItem, newItem: ContentItem) = true
 }

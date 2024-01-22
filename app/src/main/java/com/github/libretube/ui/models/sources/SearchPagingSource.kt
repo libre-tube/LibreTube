@@ -11,9 +11,7 @@ class SearchPagingSource(
     private val searchQuery: String,
     private val searchFilter: String
 ): PagingSource<String, ContentItem>() {
-    override fun getRefreshKey(state: PagingState<String, ContentItem>): String? {
-        return null
-    }
+    override fun getRefreshKey(state: PagingState<String, ContentItem>) = null
 
     override suspend fun load(params: LoadParams<String>): LoadResult<String, ContentItem> {
         return try {
