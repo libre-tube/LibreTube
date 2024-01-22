@@ -151,7 +151,7 @@
     <string name="no_video">لا يوجد فيديو</string>
     <string name="audio">صوت</string>
     <string name="video">فيديو</string>
-    <string name="downloading">تحميل…</string>
+    <string name="downloading">جارِ التنزيل…</string>
     <string name="instance_frontend_url">عنوان URL لنُسْخَة الواجهة الأمامية</string>
     <string name="quality">الجودة</string>
     <string name="behavior">السلوك</string>
@@ -266,8 +266,8 @@
     <string name="new_videos_badge_summary">اعرض شارة تحتوي على عدد مقاطع الفيديو الجديدة إذا كان هناك بعضها</string>
     <string name="skip_segment">تخطي الجزء</string>
     <string name="sb_skip_manual">تخطي يدويًا</string>
-    <string name="download_channel_name">تحميل الخدمة</string>
-    <string name="download_channel_description">يعرض إشعارا عند تنزيل الوسائط.</string>
+    <string name="download_channel_name">نزّل الخدمة</string>
+    <string name="download_channel_description">يعرض إشعارًا عند تنزيل الوسائط.</string>
     <string name="local_subscriptions">الاشتراكات المحلية</string>
     <string name="preferences">التفضيلات</string>
     <string name="backup_customInstances">نُسَخ مخصّصة</string>
@@ -553,4 +553,10 @@
     <string name="change">غيّر</string>
     <string name="change_instance">غيّر النُسْخَة</string>
     <string name="suggest_change_instance">يستغرق التنزيل أكثر من المعتاد. يُرجى النظر في تغيير النُسْخَة</string>
+    <string name="audio_language">اللغة الصوتية</string>
+    <string name="default_language">الافتراضي</string>
+    <string name="download_playlist">نزّل قائمة التشغيل</string>
+    <string name="download_playlist_note">الرجاء تحديد الحد الأقصى لجودة الصوت/الفيديو للتنزيل. سيتم تنزيل التسميات التوضيحية فقط إذا كانت متوفرة.</string>
+    <string name="enqueue_playlist_description">يعرض إشعارًا عند وضع مقاطع فيديو في قائمة التشغيل لتنزيلها.</string>
+    <string name="enqueueing_playlist_download">وضع مقاطع الفيديو في قائمة الانتظار لتنزيل قائمة التشغيل %1$s</string>
 </resources>
