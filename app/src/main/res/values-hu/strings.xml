@@ -535,4 +535,5 @@
     <string name="finished">Befejezett</string>
     <string name="no_segments_found">Még nincsenek szakaszok ehhez a videóhoz.</string>
     <string name="copy_tooltip">Másolás</string>
+    <string name="default_language">Alapértelmezett</string>
 </resources>
