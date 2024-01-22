@@ -537,4 +537,11 @@
     <string name="change_instance">更换实例</string>
     <string name="suggest_change_instance">加载所花时间比平常要多。请考虑更换实例</string>
     <string name="change">更换</string>
+    <string name="download_playlist_note">请选择要下载的最高音视频质量。字幕仅会在可用时下载。</string>
+    <string name="delete_all">所有已下载项目将被删除！</string>
+    <string name="download_playlist">下载播放列表</string>
+    <string name="enqueue_playlist_description">将待下载的播放列表视频加入队列时显示通知。</string>
+    <string name="enqueueing_playlist_download">正将播放列表 %1$s 中的待下载视频加入队列</string>
+    <string name="audio_language">音频语言</string>
+    <string name="default_language">默认</string>
 </resources>
