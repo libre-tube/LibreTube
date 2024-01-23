@@ -1,6 +1,5 @@
 package com.github.libretube.ui.sheets
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,26 +10,22 @@ import androidx.fragment.app.setFragmentResult
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FilterSortSheetBinding
 import com.github.libretube.enums.ContentFilter
+import com.github.libretube.extensions.parcelableArrayList
 import com.github.libretube.obj.SelectableOption
 
 class FilterSortBottomSheet: ExpandedBottomSheet() {
-
     private var _binding: FilterSortSheetBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var sortOptions: Array<SelectableOption>
+    private lateinit var sortOptions: List<SelectableOption>
 
     private var selectedIndex = 0
     private var hideWatched = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        sortOptions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            requireArguments().getParcelableArray(IntentData.sortOptions, SelectableOption::class.java)!!
-        } else {
-            @Suppress("DEPRECATION")
-            requireArguments().getParcelableArray(IntentData.sortOptions) as Array<SelectableOption>
-        }
-        hideWatched = requireArguments().getBoolean(IntentData.hideWatched)
+        val arguments = requireArguments()
+        sortOptions = arguments.parcelableArrayList(IntentData.sortOptions)!!
+        hideWatched = arguments.getBoolean(IntentData.hideWatched)
         super.onCreate(savedInstanceState)
     }
 
@@ -52,8 +47,7 @@ class FilterSortBottomSheet: ExpandedBottomSheet() {
     }
 
     private fun addSortOptions() {
-        for (i in sortOptions.indices) {
-            val option = sortOptions.elementAt(i)
+        sortOptions.forEachIndexed { i, option ->
             val rb = createRadioButton(i, option.name)
 
             binding.sortRadioGroup.addView(rb)
