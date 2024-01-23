@@ -134,8 +134,8 @@ class HomeViewModel: ViewModel() {
     }
 
     private suspend fun List<StreamItem>.filterWatched(): List<StreamItem> {
-        val allowShorts = ContentFilter.SHORTS.isEnabled()
-        val allowVideos = ContentFilter.VIDEOS.isEnabled()
+        val allowShorts = ContentFilter.SHORTS.isEnabled
+        val allowVideos = ContentFilter.VIDEOS.isEnabled
         val allowAll = (!allowShorts && !allowVideos)
 
         val filteredFeed = this.filter {

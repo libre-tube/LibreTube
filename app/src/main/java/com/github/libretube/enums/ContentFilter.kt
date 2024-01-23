@@ -8,26 +8,18 @@ enum class ContentFilter {
     SHORTS,
     LIVESTREAMS;
 
-    fun isEnabled() = enabledFiltersSet.contains(ordinal.toString())
+    var isEnabled
+        get() = name in enabledFiltersSet
+        set(enabled) {
+            val newFilters = enabledFiltersSet
+                .apply { if (enabled) add(name) else remove(name) }
 
-    fun setState(enabled: Boolean) {
-        val newFilters = enabledFiltersSet
-            .apply {if (enabled) add(ordinal.toString()) else remove(ordinal.toString()) }
-            .joinToString(",")
-
-        PreferenceHelper.putString(SELECTED_FEED_FILTERS, newFilters)
-    }
+            PreferenceHelper.putStringSet(SELECTED_FEED_FILTERS, newFilters)
+        }
 
     companion object {
-
         private val enabledFiltersSet get() = PreferenceHelper
-            .getString(
-                key = SELECTED_FEED_FILTERS,
-                defValue = entries.joinToString(",") { it.ordinal.toString() }
-            )
-            .split(',')
+            .getStringSet(SELECTED_FEED_FILTERS, entries.mapTo(mutableSetOf()) { it.name })
             .toMutableSet()
-
     }
-
 }

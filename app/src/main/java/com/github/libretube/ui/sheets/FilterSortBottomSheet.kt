@@ -88,17 +88,17 @@ class FilterSortBottomSheet: ExpandedBottomSheet() {
     }
 
     private fun setInitialFiltersState() {
-        binding.filterVideos.isChecked = ContentFilter.VIDEOS.isEnabled()
-        binding.filterShorts.isChecked =  ContentFilter.SHORTS.isEnabled()
-        binding.filterLivestreams.isChecked = ContentFilter.LIVESTREAMS.isEnabled()
+        binding.filterVideos.isChecked = ContentFilter.VIDEOS.isEnabled
+        binding.filterShorts.isChecked =  ContentFilter.SHORTS.isEnabled
+        binding.filterLivestreams.isChecked = ContentFilter.LIVESTREAMS.isEnabled
         binding.hideWatchedCheckbox.isChecked = hideWatched
     }
 
     private fun observeFiltersChanges() {
         binding.filters.setOnCheckedStateChangeListener { _, _ ->
-            ContentFilter.VIDEOS.setState(binding.filterVideos.isChecked)
-            ContentFilter.SHORTS.setState(binding.filterShorts.isChecked)
-            ContentFilter.LIVESTREAMS.setState(binding.filterLivestreams.isChecked)
+            ContentFilter.VIDEOS.isEnabled = binding.filterVideos.isChecked
+            ContentFilter.SHORTS.isEnabled = binding.filterShorts.isChecked
+            ContentFilter.LIVESTREAMS.isEnabled = binding.filterLivestreams.isChecked
             notifyChange()
         }
     }
