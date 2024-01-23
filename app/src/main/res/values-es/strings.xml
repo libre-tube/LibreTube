@@ -544,4 +544,11 @@
     <string name="change">Cambiar</string>
     <string name="change_instance">Cambiar de instancia</string>
     <string name="suggest_change_instance">La carga tarda más de lo habitual. Considere cambiar la instancia</string>
+    <string name="delete_all">¡Se eliminarán todas las descargas!</string>
+    <string name="download_playlist">Descargar lista de reproducción</string>
+    <string name="enqueueing_playlist_download">Vídeos en cola para descargar de la lista de reproducción %1$s</string>
+    <string name="download_playlist_note">Por favor, sleccione la calidad máxima de audio/vídeo que desea descargar. Los subtítulos sólo se descargarán si están disponibles.</string>
+    <string name="enqueue_playlist_description">Muestra una notificación cuando se ponen en cola vídeos de una lista de reproducción para ser descargados.</string>
+    <string name="audio_language">Idioma del audio</string>
+    <string name="default_language">Predeterminado</string>
 </resources>

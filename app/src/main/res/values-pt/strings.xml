@@ -550,4 +550,5 @@
     <string name="download_playlist">Descarregar lista de reprodução</string>
     <string name="download_playlist_note">Seleccione a qualidade máxima de áudio/vídeo a descarregar. As legendas só serão descarregadas se estiverem disponíveis.</string>
     <string name="enqueue_playlist_description">Mostrar notificação quando se colocam em fila de espera vídeos de uma lista de reprodução para serem descarregados.</string>
+    <string name="delete_all">Todas as descargas serão eliminadas!</string>
 </resources>

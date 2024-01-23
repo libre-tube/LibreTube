@@ -546,4 +546,5 @@
     <string name="download_playlist_note">Xahiş olunur, yükləmək üçün maksimum səs/video keyfiyyətin seç. Titrlər yalnız varsa yükləniləcək.</string>
     <string name="enqueue_playlist_description">Yükləniləcək pleylistin videoların növbəyə qoyarkən bildiriş göstərir.</string>
     <string name="enqueueing_playlist_download">%1$s oynatma siyahısın yükləmək üçün videolar növbəyə salınır</string>
+    <string name="delete_all">Bütün yükləmələr silinəcək!</string>
 </resources>

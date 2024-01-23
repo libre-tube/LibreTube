@@ -544,4 +544,11 @@
     <string name="suggest_change_instance">Le chargement prend plus de temps que d\'habitude. Envisagez de changer d\'instance</string>
     <string name="change_instance">Changer d\'instance</string>
     <string name="change">Changer</string>
+    <string name="default_language">Par défaut</string>
+    <string name="delete_all">Tous les téléchargements seront supprimés !</string>
+    <string name="download_playlist_note">Veuillez sélectionner la qualité audio/vidéo maximale à télécharger. Les sous-titres ne seront téléchargés que s\'ils sont disponibles.</string>
+    <string name="enqueueing_playlist_download">Mise en file d\'attente des vidéos à télécharger de la liste de lecture %1$s</string>
+    <string name="download_playlist">Télécharger la liste de lecture</string>
+    <string name="enqueue_playlist_description">Affiche une notification lors de la mise en file d\'attente des vidéos d\'une liste de lecture à télécharger.</string>
+    <string name="audio_language">Langue de l\'audio</string>
 </resources>

@@ -541,4 +541,11 @@
     <string name="change">Cambiar</string>
     <string name="change_instance">Cambiar de instantia</string>
     <string name="suggest_change_instance">Le carga prende plus de tempore que de costume. Considera cambiar de instantia</string>
+    <string name="enqueue_playlist_description">Monstra un notification quando le videos de un lista de reproduction es addite al cauda pro esser discargate.</string>
+    <string name="enqueueing_playlist_download">Addition al cauda de videos a discargar del lista de reproduction %1$s</string>
+    <string name="audio_language">Lingua de audio</string>
+    <string name="default_language">Predeterminate</string>
+    <string name="delete_all">Tote le discargamentos essera delite!</string>
+    <string name="download_playlist">Discargar le lista de reproduction</string>
+    <string name="download_playlist_note">Selige le qualitate maxime de audio/video a discargar. Le subtitulos solmente essera discargate si es disponibile.</string>
 </resources>

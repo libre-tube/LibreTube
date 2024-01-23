@@ -541,4 +541,11 @@
     <string name="change_instance">Ändra instans</string>
     <string name="suggest_change_instance">Det tar mer tid än vanligt att ladda. Överväg att byta instans</string>
     <string name="change">Byt</string>
+    <string name="audio_language">Ljudspråk</string>
+    <string name="default_language">Standard</string>
+    <string name="delete_all">Alla nedladdningar kommer att raderas!</string>
+    <string name="download_playlist">Ladda ner spellista</string>
+    <string name="download_playlist_note">Välj maximal ljud/videokvalitet för nedladdning. Undertexter kommer bara att laddas ner om de är tillgängliga.</string>
+    <string name="enqueue_playlist_description">Visar en avisering när videor från en spellista som ska laddas ner från en kö.</string>
+    <string name="enqueueing_playlist_download">Köar videor för nedladdning av spellistan %1$s</string>
 </resources>
