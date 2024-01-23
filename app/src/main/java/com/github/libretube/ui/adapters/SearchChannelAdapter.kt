@@ -70,6 +70,7 @@ class SearchChannelAdapter : ListAdapter<ContentItem, SearchViewHolder>(SearchCa
 
     private fun bindVideo(item: ContentItem, binding: VideoRowBinding, position: Int) {
         binding.apply {
+            thumbnail.setImageDrawable(null)
             ImageHelper.loadImage(item.thumbnail, thumbnail)
             thumbnailDuration.setFormattedDuration(item.duration, item.isShort)
             videoTitle.text = item.title
