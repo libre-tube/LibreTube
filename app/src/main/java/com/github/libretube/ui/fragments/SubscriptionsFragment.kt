@@ -190,13 +190,11 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
         }
     }
 
-    private fun fetchSortOptions(): Array<SelectableOption> {
-        return resources
-            .getStringArray(R.array.sortOptions)
+    private fun fetchSortOptions(): List<SelectableOption> {
+        return resources.getStringArray(R.array.sortOptions)
             .mapIndexed { index, option ->
                 SelectableOption(isSelected = index == selectedSortOrder, name = option)
             }
-            .toTypedArray()
     }
 
     override fun onDestroyView() {
