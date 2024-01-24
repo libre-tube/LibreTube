@@ -768,6 +768,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             trackSelector.updateParameters {
                 setTrackTypeDisabled(C.TRACK_TYPE_VIDEO, true)
             }
+
+            //when screen is off, if the video is playing and auto-pause setting is disabled, switch to audio player
+            if (exoPlayer.isPlaying && !PlayerHelper.pausePlayerOnScreenOffEnabled){
+                CoroutineScope(Dispatchers.Main).launch {
+                    exoPlayer.pause()
+                    playOnBackground()
+                }
+            }
         }
 
         // pause player if screen off and setting enabled
