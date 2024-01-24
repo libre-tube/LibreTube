@@ -541,6 +541,4 @@
     <string name="change_instance">Instantie wijzigen</string>
     <string name="suggest_change_instance">Laden duurt langer dan normaal; overweeg een andere instantie te gebruiken.</string>
     <string name="change">Wijzigen</string>
-    <string name="download_playlist"></string>
-    <string name="download_playlist_note"></string>
 </resources>
