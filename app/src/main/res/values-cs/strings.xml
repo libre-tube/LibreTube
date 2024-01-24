@@ -549,4 +549,5 @@
     <string name="download_playlist">Stáhnout playlist</string>
     <string name="download_playlist_note">Vyberte prosím maximální kvalitu zvuku/videa ke stažení. Titulky budou staženy pouze pokud budou dostupné.</string>
     <string name="enqueueing_playlist_download">Zařazování videí z playlistu %1$s do fronty ke stažení</string>
+    <string name="delete_all">Všechny stažené soubory budou smazány!</string>
 </resources>

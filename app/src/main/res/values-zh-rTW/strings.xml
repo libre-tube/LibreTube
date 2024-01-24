@@ -538,4 +538,11 @@
     <string name="change">變更</string>
     <string name="change_instance">變更站台</string>
     <string name="suggest_change_instance">載入時間較平常久。請考慮變更站台</string>
+    <string name="download_playlist">下載播放清單</string>
+    <string name="download_playlist_note">請選取要下載的最大音訊/視訊品質。字幕僅會在可用時下載。</string>
+    <string name="delete_all">將會刪除所有下載！</string>
+    <string name="enqueueing_playlist_download">正在將下載播放清單 %1$s 的影片排入佇列</string>
+    <string name="audio_language">音訊語言</string>
+    <string name="enqueue_playlist_description">將要下載的播放清單的影片加入佇列時顯示通知。</string>
+    <string name="default_language">預設</string>
 </resources>

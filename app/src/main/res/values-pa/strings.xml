@@ -115,7 +115,7 @@
     <string name="update_available">ਸੰਸਕਰਣ %1$s ਉਪਲਬਧ ਹੈ</string>
     <string name="appearance">ਦਿੱਖ</string>
     <string name="failed_fetching_instances">ਉਪਲੱਬਧ ਉਦਾਹਰਨਾਂ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕਰ ਸਕਿਆ।</string>
-    <string name="hide_watched_from_feed">ਫੀਡ ਤੋਂ ਦੇਖੇ ਗਏ ਵੀਡੀਓ ਨੂੰ ਲੁਕਾਓ</string>
+    <string name="hide_watched_from_feed">ਪਹਿਲਾਂ ਤੋਂ ਵੇਖੇ ਗਏ ਵੀਡੀਓ ਲੁਕਾਓ</string>
     <string name="shapedIcon">ਮੂਰਖ ਆਕਾਰ</string>
     <string name="flameIcon">ਉੱਡਦੀ ਲਾਟ</string>
     <string name="pauseOnScreenOff_summary">ਜਦੋਂ ਸਕ੍ਰੀਨ ਬੰਦ ਹੋ ਜਾਵੇ ਤਾਂ ਪਲੇਬੈਕ ਨੂੰ ਰੋਕੋ</string>
@@ -537,4 +537,14 @@
     <string name="copy_tooltip">ਕਾਪੀ ਕਰੋ</string>
     <string name="export_groups">ਚੈਨਲ ਗਰੁੱਪ ਐਕਸਪੋਰਟ ਕਰੋ</string>
     <string name="import_groups">ਚੈਨਲ ਗਰੁੱਪ ਇੰਪੋਰਟ ਕਰੋ</string>
+    <string name="change">ਬਦਲੋ</string>
+    <string name="download_playlist">ਪਲੇਲਿਸਟ ਡਾਊਨਲੋਡ ਕਰੋ</string>
+    <string name="audio_language">ਆਡੀਓ ਦੀ ਭਾਸ਼ਾ</string>
+    <string name="delete_all">ਸਾਰੇ ਡਾਊਨਲੋਡ ਮਿਟਾ ਦਿੱਤੇ ਜਾਣਗੇ!</string>
+    <string name="change_instance">ਇੰਸਟੈਂਸ ਬਦਲੋ</string>
+    <string name="suggest_change_instance">ਲੋਡ ਹੋਣ ਵਿੱਚ ਆਮ ਨਾਲੋਂ ਵੱਧ ਸਮਾਂ ਲੱਗ ਰਿਹਾ ਹੈ। ਇੰਸਟੈਂਸ ਬਦਲਣ \'ਤੇ ਵਿਚਾਰ ਕਰੋ</string>
+    <string name="download_playlist_note">ਕਿਰਪਾ ਕਰਕੇ ਡਾਊਨਲੋਡ ਕਰਨ ਲਈ ਅਧਿਕਤਮ ਆਡੀਓ/ਵੀਡੀਓ ਗੁਣਵੱਤਾ ਦੀ ਚੋਣ ਕਰੋ। ਕੈਪਸ਼ਨਾਂ ਸਿਰਫ਼ ਉਪਲਬਧ ਹੋਣ \'ਤੇ ਹੀ ਡਾਊਨਲੋਡ ਕੀਤੀਆਂ ਜਾਣਗੀਆਂ।</string>
+    <string name="enqueue_playlist_description">ਡਾਊਨਲੋਡ ਕੀਤੇ ਜਾਣ ਵਾਲੇ ਪਲੇਲਿਸਟ ਦੇ ਵੀਡੀਓਜ਼ ਨੂੰ ਕਤਾਰਬੱਧ ਕਰਦੇ ਸਮੇਂ ਇੱਕ ਸੂਚਨਾ ਵਿਖਾਉਂਦਾ ਹੈ।</string>
+    <string name="enqueueing_playlist_download">ਪਲੇਲਿਸਟ %1$s ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨ ਲਈ ਵੀਡੀਓਜ਼ ਦੀ ਕਤਾਰਬੰਦੀ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ</string>
+    <string name="default_language">ਡਿਫ਼ਾਲਟ</string>
 </resources>

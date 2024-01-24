@@ -342,7 +342,7 @@
     <string name="color_violet">बहुमुखी बैंगनी</string>
     <string name="nothing_selected">कुछ चुना नहीं!</string>
     <string name="failed_fetching_instances">उपलब्ध इंस्टेंस ला नहीं पाया।</string>
-    <string name="hide_watched_from_feed">फ़ीड से देखे गए वीडियो छुपाएं</string>
+    <string name="hide_watched_from_feed">पहले से देखे गए वीडियो छिपाएं</string>
     <string name="hide_watched_from_feed_summary">सदस्यता टैब में 90% से अधिक देखे जा रहे वीडियो न दिखाएं</string>
     <string name="playlistUrl">प्लेलिस्ट URL</string>
     <string name="pause_on_quit">छोड़ने पर रुकें</string>
@@ -537,4 +537,14 @@
     <string name="copy_tooltip">कॉपी करें</string>
     <string name="import_groups">चैनल समूह आयात करें</string>
     <string name="export_groups">चैनल समूह निर्यात करें</string>
+    <string name="change_instance">इंसटैंस बदलें</string>
+    <string name="suggest_change_instance">लोडिंग में सामान्य से अधिक समय लग रहा है। इंसटैंस बदलने पर विचार करें</string>
+    <string name="change">बदलें</string>
+    <string name="enqueue_playlist_description">डाउनलोड की जाने वाली प्लेलिस्ट के वीडियो को कतारबद्ध करते समय एक अधिसूचना दिखाता है।</string>
+    <string name="audio_language">ऑडियो की भाषा</string>
+    <string name="default_language">डिफ़ॉल्ट</string>
+    <string name="delete_all">सभी डाउनलोड हटा दिए जाएंगे!</string>
+    <string name="download_playlist">प्लेलिस्ट डाउनलोड करें</string>
+    <string name="download_playlist_note">कृपया डाउनलोड करने के लिए अधिकतम ऑडियो/वीडियो गुणवत्ता चुनें। कैप्शन केवल उपलब्ध होने पर ही डाउनलोड किए जाएंगे।</string>
+    <string name="enqueueing_playlist_download">प्लेलिस्ट %1$s को डाउनलोड करने के लिए वीडियो को कतारबद्ध किया जा रहा है</string>
 </resources>

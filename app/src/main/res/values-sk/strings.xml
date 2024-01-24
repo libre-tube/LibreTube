@@ -543,4 +543,11 @@
     <string name="change_instance">Zmeniť inštanciu</string>
     <string name="suggest_change_instance">Načítanie trvá dlhšie ako zvyčajne. Zvážte zmenu inštancie</string>
     <string name="change">Zmeniť</string>
+    <string name="audio_language">Jazyk zvuku</string>
+    <string name="default_language">Predvolený</string>
+    <string name="enqueueing_playlist_download">Videá zo zoznamu skladieb %1$s sú v poradí na stiahnutie</string>
+    <string name="enqueue_playlist_description">Zobrazí upozornenie pri zaradení videí zo zoznamu skladieb, ktoré sa majú stiahnuť.</string>
+    <string name="delete_all">Všetky stiahnuté súbory budú vymazané!</string>
+    <string name="download_playlist">Stiahnuť zoznam skladieb</string>
+    <string name="download_playlist_note">Vyberte požadovanú maximálnu kvalitu zvuku/videa na stiahnutie. Titulky sa stiahnu len vtedy, ak sú k dispozícii.</string>
 </resources>

@@ -362,7 +362,7 @@
     <string name="no_subtitle">Alt yazı yok</string>
     <string name="download_paused">İndirme duraklatıldı</string>
     <string name="download_completed">İndirme tamamlandı</string>
-    <string name="hide_watched_from_feed">İzlenen videoları akıştan gizle</string>
+    <string name="hide_watched_from_feed">İzlenmiş videoları gizle</string>
     <string name="forward">İlerlet</string>
     <string name="sleep_timer">Uyku zamanlayıcı</string>
     <string name="skip_silence">Sessizliği atla</string>
@@ -538,4 +538,13 @@
     <string name="export_groups">Kanal gruplarını dışa aktar</string>
     <string name="import_groups">Kanal gruplarını içe aktar</string>
     <string name="change">Değiştir</string>
+    <string name="change_instance">Örneği değiştir</string>
+    <string name="download_playlist">Oynatma listesini indir</string>
+    <string name="enqueue_playlist_description">İndirilecek bir oynatma listesinin videoları sıraya alınırken bir bildirim gösterilir.</string>
+    <string name="enqueueing_playlist_download">%1$s oynatma listesinden videolar indirmek için sıraya alınıyor</string>
+    <string name="default_language">Varsayılan</string>
+    <string name="delete_all">Tüm indirilenler silinecektir!</string>
+    <string name="suggest_change_instance">Yükleme her zamankinden uzun sürüyor. Örneği değiştirmeyi deneyin</string>
+    <string name="download_playlist_note">Lütfen indirme için en yüksek ses/video kalitesini seçin. Altyazılar yalnızca mevcut olması durumunda indirilecektir.</string>
+    <string name="audio_language">Ses dili</string>
 </resources>
