@@ -552,4 +552,5 @@
     <string name="download_playlist">Скачать плейлист</string>
     <string name="enqueue_playlist_description">Показывать уведомление с очередью видео при скачивании плейлиста.</string>
     <string name="download_playlist_note">Выберите максимальное качество скачиваемого аудио/видео. Субтитры будут скачаны только при наличии.</string>
+    <string name="delete_all">Все скачанные видео будут удалены!</string>
 </resources>
