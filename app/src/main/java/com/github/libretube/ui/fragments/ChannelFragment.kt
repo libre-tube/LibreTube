@@ -26,7 +26,7 @@ import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.obj.ChannelTabs
 import com.github.libretube.obj.ShareData
-import com.github.libretube.ui.adapters.SearchAdapter
+import com.github.libretube.ui.adapters.SearchChannelAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.dialogs.ShareDialog
@@ -57,7 +57,7 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
     )
     private var channelTabs: List<ChannelTab> = emptyList()
     private var nextPages = Array<String?>(5) { null }
-    private var searchAdapter: SearchAdapter? = null
+    private var searchChannelAdapter: SearchChannelAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -293,9 +293,9 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
 
         val binding = _binding ?: return@launch
 
-        searchAdapter = SearchAdapter(true)
-        binding.channelRecView.adapter = searchAdapter
-        searchAdapter?.submitList(response.content)
+        searchChannelAdapter = SearchChannelAdapter()
+        binding.channelRecView.adapter = searchChannelAdapter
+        searchChannelAdapter?.submitList(response.content)
 
         binding.channelRefresh.isRefreshing = false
         isLoading = false
@@ -320,7 +320,7 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
             content = content.deArrow()
         }
 
-        searchAdapter?.let {
+        searchChannelAdapter?.let {
             it.submitList(it.currentList + newContent.content)
         }
 
