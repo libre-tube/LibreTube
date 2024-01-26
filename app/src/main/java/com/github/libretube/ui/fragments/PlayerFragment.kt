@@ -252,7 +252,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     // schedule task to save the watch position each second
-    private var watchPositionTimer = Timer()
+    private var watchPositionTimer: Timer? = null
 
     private val playerListener = object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
@@ -279,16 +279,16 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 )
             }
 
-            //Start or pause watch position timer
+            // Start or pause watch position timer
             if (isPlaying) {
                 watchPositionTimer = Timer()
-                watchPositionTimer.scheduleAtFixedRate(object : TimerTask() {
+                watchPositionTimer!!.scheduleAtFixedRate(object : TimerTask() {
                     override fun run() {
                         handler.post(this@PlayerFragment::saveWatchPosition)
                     }
                 }, 1000, 1000)
             } else {
-                watchPositionTimer.cancel()
+                watchPositionTimer?.cancel()
             }
         }
 
@@ -824,7 +824,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         stopVideoPlay()
 
-        watchPositionTimer.cancel()
+        watchPositionTimer?.cancel()
     }
 
     private fun stopVideoPlay() {
@@ -912,7 +912,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             val videoStream = streams.videoStreams.firstOrNull()
             val isShort = PlayingQueue.getCurrent()?.isShort == true ||
-                    (videoStream?.height ?: 0) > (videoStream?.width ?: 0)
+                (videoStream?.height ?: 0) > (videoStream?.width ?: 0)
 
             PlayingQueue.setOnQueueTapListener { streamItem ->
                 streamItem.url?.toID()?.let { playNextVideo(it) }
@@ -950,7 +950,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 if (binding.playerMotionLayout.progress != 1.0f) {
                     // show controllers when not in picture in picture mode
                     val inPipMode = PlayerHelper.pipEnabled &&
-                            PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
+                        PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
                     if (!inPipMode) {
                         binding.player.useController = true
                     }
