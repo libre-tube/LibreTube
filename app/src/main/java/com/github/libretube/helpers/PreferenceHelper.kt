@@ -51,6 +51,10 @@ object PreferenceHelper {
         settings.edit(commit = true) { putStringSet(key, value) }
     }
 
+    fun remove(key: String) {
+        settings.edit(commit = true) { remove(key) }
+    }
+
     fun getString(key: String?, defValue: String): String {
         return settings.getString(key, defValue) ?: defValue
     }
