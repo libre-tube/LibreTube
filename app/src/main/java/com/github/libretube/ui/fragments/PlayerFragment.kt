@@ -48,7 +48,6 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.hls.HlsMediaSource
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.libretube.NavDirections
 import com.github.libretube.R
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.JsonHelper
@@ -252,6 +251,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
     }
 
+    // schedule task to save the watch position each second
+    private var watchPositionTimer: Timer? = null
+
     private val playerListener = object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
             if (PlayerHelper.pipEnabled) {
@@ -275,6 +277,18 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     this@PlayerFragment::checkForSegments,
                     100
                 )
+            }
+
+            // Start or pause watch position timer
+            if (isPlaying) {
+                watchPositionTimer = Timer()
+                watchPositionTimer!!.scheduleAtFixedRate(object : TimerTask() {
+                    override fun run() {
+                        handler.post(this@PlayerFragment::saveWatchPosition)
+                    }
+                }, 1000, 1000)
+            } else {
+                watchPositionTimer?.cancel()
             }
         }
 
@@ -364,17 +378,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         context?.registerReceiver(
             broadcastReceiver,
             IntentFilter(PlayerHelper.getIntentAction(requireContext()))
-        )
-
-        // schedule task to save the watch position each second
-        Timer().scheduleAtFixedRate(
-            object : TimerTask() {
-                override fun run() {
-                    handler.post(this@PlayerFragment::saveWatchPosition)
-                }
-            },
-            1000,
-            1000
         )
 
         fullscreenResolution = PlayerHelper.getDefaultResolution(requireContext(), true)
@@ -820,6 +823,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         _binding = null
 
         stopVideoPlay()
+
+        watchPositionTimer?.cancel()
     }
 
     private fun stopVideoPlay() {
