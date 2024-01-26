@@ -48,7 +48,6 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.hls.HlsMediaSource
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.libretube.NavDirections
 import com.github.libretube.R
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.JsonHelper
@@ -110,6 +109,7 @@ import com.github.libretube.ui.sheets.ChaptersBottomSheet
 import com.github.libretube.ui.sheets.CommentsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.sheets.StatsSheet
+import com.github.libretube.util.CustomTimer
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.OnlineTimeFrameReceiver
 import com.github.libretube.util.PlayingQueue
@@ -276,6 +276,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     100
                 )
             }
+
+            watchPositionSavingTask.updateState(isPlaying)
         }
 
         override fun onEvents(player: Player, events: Player.Events) {
@@ -349,6 +351,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
     }
 
+    // schedule task to save the watch position each second
+    private val watchPositionSavingTask = object : CustomTimer(1000, 1000) {
+        override fun onTimerTick() {
+            handler.post(this@PlayerFragment::saveWatchPosition)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val playerData = requireArguments().parcelable<PlayerData>(IntentData.playerData)!!
@@ -364,17 +373,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         context?.registerReceiver(
             broadcastReceiver,
             IntentFilter(PlayerHelper.getIntentAction(requireContext()))
-        )
-
-        // schedule task to save the watch position each second
-        Timer().scheduleAtFixedRate(
-            object : TimerTask() {
-                override fun run() {
-                    handler.post(this@PlayerFragment::saveWatchPosition)
-                }
-            },
-            1000,
-            1000
         )
 
         fullscreenResolution = PlayerHelper.getDefaultResolution(requireContext(), true)
@@ -907,7 +905,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             val videoStream = streams.videoStreams.firstOrNull()
             val isShort = PlayingQueue.getCurrent()?.isShort == true ||
-                (videoStream?.height ?: 0) > (videoStream?.width ?: 0)
+                    (videoStream?.height ?: 0) > (videoStream?.width ?: 0)
 
             PlayingQueue.setOnQueueTapListener { streamItem ->
                 streamItem.url?.toID()?.let { playNextVideo(it) }
@@ -945,7 +943,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 if (binding.playerMotionLayout.progress != 1.0f) {
                     // show controllers when not in picture in picture mode
                     val inPipMode = PlayerHelper.pipEnabled &&
-                        PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
+                            PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
                     if (!inPipMode) {
                         binding.player.useController = true
                     }
