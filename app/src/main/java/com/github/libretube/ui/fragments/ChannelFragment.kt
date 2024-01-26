@@ -90,10 +90,10 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
             fetchChannel()
         }
 
-        binding.channelScrollView.viewTreeObserver.addOnScrollChangedListener {
+        binding.channelRecView.viewTreeObserver.addOnScrollChangedListener {
             val binding = _binding ?: return@addOnScrollChangedListener
 
-            if (binding.channelScrollView.canScrollVertically(1) || isLoading) return@addOnScrollChangedListener
+            if (binding.channelRecView.canScrollVertically(1) || isLoading) return@addOnScrollChangedListener
 
             loadNextPage()
         }
@@ -199,7 +199,7 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
         isLoading = false
         binding.channelRefresh.isRefreshing = false
 
-        binding.channelScrollView.isVisible = true
+
         binding.channelName.text = response.name
         if (response.verified) {
             binding.channelName
