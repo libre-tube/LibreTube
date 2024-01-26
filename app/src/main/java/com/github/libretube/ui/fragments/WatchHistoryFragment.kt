@@ -15,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.withTransaction
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.PreferenceKeys
@@ -91,15 +92,23 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment() {
         binding.filterTypeTV.text = resources.getStringArray(R.array.filterOptions)[selectedTypeFilter]
         binding.filterStatusTV.text = resources.getStringArray(R.array.filterStatusOptions)[selectedStatusFilter]
 
+        val watchPositionItem = arrayOf("Also clear watch positions")
+        val selected = booleanArrayOf(false)
+
         binding.clear.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.clear_history)
-                .setMessage(R.string.irreversible)
+                .setMultiChoiceItems(watchPositionItem, selected) { _, index, newValue ->
+                    selected[index] = newValue
+                }
                 .setPositiveButton(R.string.okay) { _, _ ->
                     binding.historyScrollView.isGone = true
                     binding.historyEmpty.isVisible = true
                     lifecycleScope.launch(Dispatchers.IO) {
-                        Database.watchHistoryDao().deleteAll()
+                        Database.withTransaction {
+                            Database.watchHistoryDao().deleteAll()
+                            if (selected[0]) Database.watchPositionDao().deleteAll()
+                        }
                     }
                 }
                 .setNegativeButton(R.string.cancel, null)
