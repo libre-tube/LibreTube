@@ -146,7 +146,7 @@ open class CustomExoPlayerView(
             // change locked status
             isPlayerLocked = !isPlayerLocked
 
-            toggleSystemBars(!isPlayerLocked)
+            if (isFullscreen()) toggleSystemBars(!isPlayerLocked)
         }
 
         resizeMode = when (resizeModePref) {
