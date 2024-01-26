@@ -499,7 +499,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             .animateDown(
                 duration = 300L,
                 dy = 500F,
-                onEnd = ::killPlayerFragment,
+                onEnd = ::onManualPlayerClose,
             )
     }
 
