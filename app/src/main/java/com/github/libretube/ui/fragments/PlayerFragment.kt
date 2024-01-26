@@ -109,7 +109,6 @@ import com.github.libretube.ui.sheets.ChaptersBottomSheet
 import com.github.libretube.ui.sheets.CommentsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.sheets.StatsSheet
-import com.github.libretube.util.CustomTimer
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.OnlineTimeFrameReceiver
 import com.github.libretube.util.PlayingQueue
@@ -252,6 +251,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
     }
 
+    // schedule task to save the watch position each second
+    private var watchPositionTimer = Timer()
+
     private val playerListener = object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
             if (PlayerHelper.pipEnabled) {
@@ -277,7 +279,17 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 )
             }
 
-            watchPositionSavingTask.updateState(isPlaying)
+            //Start or pause watch position timer
+            if (isPlaying) {
+                watchPositionTimer = Timer()
+                watchPositionTimer.scheduleAtFixedRate(object : TimerTask() {
+                    override fun run() {
+                        handler.post(this@PlayerFragment::saveWatchPosition)
+                    }
+                }, 1000, 1000)
+            } else {
+                watchPositionTimer.cancel()
+            }
         }
 
         override fun onEvents(player: Player, events: Player.Events) {
@@ -348,13 +360,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-        }
-    }
-
-    // schedule task to save the watch position each second
-    private val watchPositionSavingTask = object : CustomTimer(1000, 1000) {
-        override fun onTimerTick() {
-            handler.post(this@PlayerFragment::saveWatchPosition)
         }
     }
 
@@ -818,6 +823,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         _binding = null
 
         stopVideoPlay()
+
+        watchPositionTimer.cancel()
     }
 
     private fun stopVideoPlay() {
