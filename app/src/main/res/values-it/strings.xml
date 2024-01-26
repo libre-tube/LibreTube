@@ -544,4 +544,11 @@
     <string name="change_instance">Cambia istanza</string>
     <string name="suggest_change_instance">Il caricamento sta impiegando più tempo del solito. Prova a cambiare istanza</string>
     <string name="change">Cambia</string>
+    <string name="download_playlist_note">Seleziona la qualità audio/video massima da scaricare. I sottotitoli verranno scaricati solo se disponibili.</string>
+    <string name="download_playlist">Scarica playlist</string>
+    <string name="enqueueing_playlist_download">Accodamento di video da scaricare della playlist %1$s</string>
+    <string name="delete_all">Tutti i download verranno eliminati!</string>
+    <string name="enqueue_playlist_description">Mostra una notifica quando si accodano video di una playlist da scaricare.</string>
+    <string name="audio_language">Lingua dell\'audio</string>
+    <string name="default_language">Predefinita</string>
 </resources>
