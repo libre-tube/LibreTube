@@ -92,7 +92,7 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment() {
         binding.filterTypeTV.text = resources.getStringArray(R.array.filterOptions)[selectedTypeFilter]
         binding.filterStatusTV.text = resources.getStringArray(R.array.filterStatusOptions)[selectedStatusFilter]
 
-        val watchPositionItem = arrayOf("Also clear watch positions")
+        val watchPositionItem = arrayOf(getString(R.string.also_clear_watch_positions))
         val selected = booleanArrayOf(false)
 
         binding.clear.setOnClickListener {
