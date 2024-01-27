@@ -8,26 +8,32 @@ enum class ContentFilter {
     SHORTS,
     LIVESTREAMS;
 
-    fun isEnabled() = enabledFiltersSet.contains(ordinal.toString())
+    var isEnabled
+        get() = name in enabledFiltersSet
+        set(enabled) {
+            val newFilters = enabledFiltersSet
+                .apply { if (enabled) add(name) else remove(name) }
 
-    fun setState(enabled: Boolean) {
-        val newFilters = enabledFiltersSet
-            .apply {if (enabled) add(ordinal.toString()) else remove(ordinal.toString()) }
-            .joinToString(",")
-
-        PreferenceHelper.putString(SELECTED_FEED_FILTERS, newFilters)
-    }
+            PreferenceHelper.putStringSet(SELECTED_FEED_FILTERS, newFilters)
+        }
 
     companion object {
+        private val enabledFiltersSet: MutableSet<String> get() {
+            val entryNames = try {
+                PreferenceHelper
+                    .getStringSet(SELECTED_FEED_FILTERS, entries.mapTo(mutableSetOf()) { it.name })
+            } catch (e: ClassCastException) {
+                // TODO: Remove the conversion code below.
+                // Assume the old preference is present and convert it.
+                val string = PreferenceHelper.getString(SELECTED_FEED_FILTERS, "")
+                PreferenceHelper.remove(SELECTED_FEED_FILTERS)
+                val set = string.split(',')
+                    .mapTo(mutableSetOf()) { entries[it.toInt()].name }
+                PreferenceHelper.putStringSet(SELECTED_FEED_FILTERS, set)
+                set
+            }
 
-        private val enabledFiltersSet get() = PreferenceHelper
-            .getString(
-                key = SELECTED_FEED_FILTERS,
-                defValue = entries.joinToString(",") { it.ordinal.toString() }
-            )
-            .split(',')
-            .toMutableSet()
-
+            return entryNames.toMutableSet()
+        }
     }
-
 }
