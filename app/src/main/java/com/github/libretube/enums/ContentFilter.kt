@@ -23,6 +23,7 @@ enum class ContentFilter {
                 PreferenceHelper
                     .getStringSet(SELECTED_FEED_FILTERS, entries.mapTo(mutableSetOf()) { it.name })
             } catch (e: ClassCastException) {
+                // TODO: Remove the conversion code below.
                 // Assume the old preference is present and convert it.
                 val string = PreferenceHelper.getString(SELECTED_FEED_FILTERS, "")
                 PreferenceHelper.remove(SELECTED_FEED_FILTERS)
