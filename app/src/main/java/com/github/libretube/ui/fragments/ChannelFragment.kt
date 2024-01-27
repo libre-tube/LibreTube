@@ -12,6 +12,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.ChannelTab
@@ -33,6 +34,7 @@ import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.sheets.AddChannelToGroupSheet
 import com.github.libretube.util.deArrow
+import com.google.android.material.appbar.AppBarLayout
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -50,27 +52,22 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
     private var isLoading = true
 
     private val possibleTabs = arrayOf(
-        ChannelTabs.Shorts,
-        ChannelTabs.Livestreams,
-        ChannelTabs.Playlists,
-        ChannelTabs.Channels
+        ChannelTabs.Shorts, ChannelTabs.Livestreams, ChannelTabs.Playlists, ChannelTabs.Channels
     )
     private var channelTabs: List<ChannelTab> = emptyList()
     private var nextPages = Array<String?>(5) { null }
     private var searchChannelAdapter: SearchChannelAdapter? = null
 
+    private var isAppBarFullyExpanded: Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        channelName = args.channelName
-            ?.replace("/c/", "")
-            ?.replace("/user/", "")
+        channelName = args.channelName?.replace("/c/", "")?.replace("/user/", "")
         channelId = args.channelId
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentChannelBinding.inflate(inflater, container, false)
         return binding.root
@@ -78,13 +75,23 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
 
     override fun setLayoutManagers(gridItems: Int) {
         _binding?.channelRecView?.layoutManager = GridLayoutManager(
-            context,
-            gridItems.ceilHalf()
+            context, gridItems.ceilHalf()
         )
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Check if the AppBarLayout is fully expanded
+        binding.channelAppBar.addOnOffsetChangedListener { _, verticalOffset ->
+            isAppBarFullyExpanded = verticalOffset == 0
+        }
+
+        // Determine if the child can scroll up
+        binding.channelRefresh.setOnChildScrollUpCallback { _, _ ->
+            !isAppBarFullyExpanded
+        }
 
         binding.channelRefresh.setOnRefreshListener {
             fetchChannel()
@@ -171,9 +178,7 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
         val channelId = channelId ?: return@launch
 
         binding.channelSubscribe.setupSubscriptionButton(
-            channelId,
-            channelName,
-            binding.notificationBell
+            channelId, channelName, binding.notificationBell
         )
 
         binding.channelSubscribe.setOnLongClickListener {
@@ -202,12 +207,15 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
 
         binding.channelName.text = response.name
         if (response.verified) {
-            binding.channelName
-                .setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_verified, 0)
+            binding.channelName.setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                0,
+                R.drawable.ic_verified,
+                0
+            )
         }
         binding.channelSubs.text = resources.getString(
-            R.string.subscribers,
-            response.subscriberCount.formatShort()
+            R.string.subscribers, response.subscriberCount.formatShort()
         )
         if (response.description.orEmpty().isBlank()) {
             binding.channelDescription.isGone = true
@@ -220,15 +228,13 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
 
         binding.channelImage.setOnClickListener {
             NavigationHelper.openImagePreview(
-                requireContext(),
-                response.avatarUrl ?: return@setOnClickListener
+                requireContext(), response.avatarUrl ?: return@setOnClickListener
             )
         }
 
         binding.channelBanner.setOnClickListener {
             NavigationHelper.openImagePreview(
-                requireContext(),
-                response.bannerUrl ?: return@setOnClickListener
+                requireContext(), response.bannerUrl ?: return@setOnClickListener
             )
         }
 
