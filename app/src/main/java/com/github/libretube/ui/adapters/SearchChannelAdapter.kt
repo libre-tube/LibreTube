@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
@@ -19,6 +18,7 @@ import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.ui.adapters.callbacks.SearchCallback
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setFormattedDuration
 import com.github.libretube.ui.extensions.setWatchProgressLength
@@ -30,26 +30,15 @@ import com.github.libretube.ui.viewholders.SearchViewHolder
 import com.github.libretube.util.TextUtils
 import kotlinx.serialization.encodeToString
 
-class SearchAdapter(
-    private val isChannelAdapter: Boolean = false,
-    private val timeStamp: Long = 0
-) : ListAdapter<ContentItem, SearchViewHolder>(SearchCallback) {
+// TODO: Replace with SearchResultsAdapter when migrating the channel fragment to use Paging as well
+class SearchChannelAdapter : ListAdapter<ContentItem, SearchViewHolder>(SearchCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 
         return when (viewType) {
-            0 -> SearchViewHolder(
-                VideoRowBinding.inflate(layoutInflater, parent, false)
-            )
-
-            1 -> SearchViewHolder(
-                ChannelRowBinding.inflate(layoutInflater, parent, false)
-            )
-
-            2 -> SearchViewHolder(
-                PlaylistsRowBinding.inflate(layoutInflater, parent, false)
-            )
-
+            0 -> SearchViewHolder(VideoRowBinding.inflate(layoutInflater, parent, false))
+            1 -> SearchViewHolder(ChannelRowBinding.inflate(layoutInflater, parent, false))
+            2 -> SearchViewHolder(PlaylistsRowBinding.inflate(layoutInflater, parent, false))
             else -> throw IllegalArgumentException("Invalid type")
         }
     }
@@ -81,6 +70,7 @@ class SearchAdapter(
 
     private fun bindVideo(item: ContentItem, binding: VideoRowBinding, position: Int) {
         binding.apply {
+            thumbnail.setImageDrawable(null)
             ImageHelper.loadImage(item.thumbnail, thumbnail)
             thumbnailDuration.setFormattedDuration(item.duration, item.isShort)
             videoTitle.text = item.title
@@ -95,16 +85,10 @@ class SearchAdapter(
                 uploadDate
             )
 
-            // only display channel related info if not in a channel tab
-            if (!isChannelAdapter) {
-                channelName.text = item.uploaderName
-                ImageHelper.loadImage(item.uploaderAvatar, channelImage, true)
-            } else {
-                channelContainer.isGone = true
-            }
+            channelContainer.isGone = true
 
             root.setOnClickListener {
-                NavigationHelper.navigateVideo(root.context, item.url, timestamp = timeStamp)
+                NavigationHelper.navigateVideo(root.context, item.url)
             }
 
             val videoId = item.url.toID()
@@ -121,7 +105,7 @@ class SearchAdapter(
                 val contentItemString = JsonHelper.json.encodeToString(item)
                 val streamItem: StreamItem = JsonHelper.json.decodeFromString(contentItemString)
                 sheet.arguments = bundleOf(IntentData.streamItem to streamItem)
-                sheet.show(fragmentManager, SearchAdapter::class.java.name)
+                sheet.show(fragmentManager, SearchChannelAdapter::class.java.name)
                 true
             }
             channelContainer.setOnClickListener {
@@ -133,6 +117,7 @@ class SearchAdapter(
 
     private fun bindChannel(item: ContentItem, binding: ChannelRowBinding) {
         binding.apply {
+            searchChannelImage.setImageDrawable(null)
             ImageHelper.loadImage(item.thumbnail, searchChannelImage, true)
             searchChannelName.text = item.name
 
@@ -171,6 +156,7 @@ class SearchAdapter(
 
     private fun bindPlaylist(item: ContentItem, binding: PlaylistsRowBinding) {
         binding.apply {
+            playlistThumbnail.setImageDrawable(null)
             ImageHelper.loadImage(item.thumbnail, playlistThumbnail)
             if (item.videos != -1L) videoCount.text = item.videos.toString()
             playlistTitle.text = item.name
@@ -194,16 +180,6 @@ class SearchAdapter(
                 )
                 true
             }
-        }
-    }
-
-    private object SearchCallback : DiffUtil.ItemCallback<ContentItem>() {
-        override fun areItemsTheSame(oldItem: ContentItem, newItem: ContentItem): Boolean {
-            return oldItem.url == newItem.url
-        }
-
-        override fun areContentsTheSame(oldItem: ContentItem, newItem: ContentItem): Boolean {
-            return true
         }
     }
 }

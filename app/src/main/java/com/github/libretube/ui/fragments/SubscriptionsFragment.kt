@@ -268,9 +268,9 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
             val isVideo = !it.isShort && !it.isLive
 
             return@filter when {
-                !ContentFilter.SHORTS.isEnabled() && it.isShort -> false
-                !ContentFilter.VIDEOS.isEnabled() && isVideo -> false
-                !ContentFilter.LIVESTREAMS.isEnabled() && it.isLive -> false
+                !ContentFilter.SHORTS.isEnabled && it.isShort -> false
+                !ContentFilter.VIDEOS.isEnabled && isVideo -> false
+                !ContentFilter.LIVESTREAMS.isEnabled && it.isLive -> false
                 else -> true
             }
         }

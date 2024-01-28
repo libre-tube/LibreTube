@@ -26,9 +26,10 @@ media3 = "1.2.1"
 activity = "1.8.2"
 fragment = "1.6.2"
 uiautomator = "2.2.0"
-benchmarkMacroJunit4 = "1.2.2"
-baselineprofile = "1.2.2"
+benchmarkMacroJunit4 = "1.2.3"
+baselineprofile = "1.2.3"
 profileinstaller = "1.3.1"
+paging = "3.2.1"
 
 [libraries]
 androidx-activity = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity" }
@@ -72,6 +73,7 @@ kotlinx-serialization-retrofit = { group = "com.jakewharton.retrofit", name = "r
 androidx-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
 androidx-benchmark-macro-junit4 = { group = "androidx.benchmark", name = "benchmark-macro-junit4", version.ref = "benchmarkMacroJunit4" }
 androidx-profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "profileinstaller" }
+androidx-paging = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "paging" }
 
 [plugins]
 androidTest = { id = "com.android.test", version.ref = "gradle" }

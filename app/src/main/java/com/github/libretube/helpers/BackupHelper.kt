@@ -90,18 +90,19 @@ object BackupHelper {
                     is Float -> putFloat(key, value)
                     is Long -> putLong(key, value)
                     is Int -> {
-                        when {
-                            // we only use integers for SponsorBlock colors and the start fragment
-                            key == PreferenceKeys.START_FRAGMENT || key.orEmpty().contains("_color") -> putInt(
-                                key,
-                                value
-                            )
-                            else -> putLong(key, value.toLong())
+                        // we only use integers for SponsorBlock colors and the start fragment
+                        if (key == PreferenceKeys.START_FRAGMENT || "_color" in key.orEmpty()) {
+                            putInt(key, value)
+                        } else {
+                            putLong(key, value.toLong())
                         }
                     }
 
                     is String -> {
-                        if (key == PreferenceKeys.HOME_TAB_CONTENT) {
+                        if (
+                            key == PreferenceKeys.HOME_TAB_CONTENT ||
+                            key == PreferenceKeys.SELECTED_FEED_FILTERS
+                        ) {
                             putStringSet(key, value.split(",").toSet())
                         } else {
                             putString(key, value)

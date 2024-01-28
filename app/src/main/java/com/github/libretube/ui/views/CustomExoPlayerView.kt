@@ -146,7 +146,7 @@ open class CustomExoPlayerView(
             // change locked status
             isPlayerLocked = !isPlayerLocked
 
-            toggleSystemBars(!isPlayerLocked)
+            if (isFullscreen()) toggleSystemBars(!isPlayerLocked)
         }
 
         resizeMode = when (resizeModePref) {
@@ -206,7 +206,7 @@ open class CustomExoPlayerView(
         }
 
         // forward touch events to the time bar for better accessibility
-        binding.bottomBar.setOnTouchListener { _, motionEvent ->
+        binding.progressBar.setOnTouchListener { _, motionEvent ->
             binding.exoProgress.onTouchEvent(motionEvent)
         }
 
