@@ -98,11 +98,10 @@ class VoteForSegmentDialog : DialogFragment() {
             }
 
             binding.segmentsDropdown.items = segments.map {
-                "${it.category} (${
-                    DateUtils.formatElapsedTime(it.segmentStartAndEnd.first.toLong())
-                } - ${
-                    DateUtils.formatElapsedTime(it.segmentStartAndEnd.second.toLong())
-                })"
+                val (start, end) = it.segmentStartAndEnd
+                val (startStr, endStr) = DateUtils.formatElapsedTime(start.toLong()) to
+                        DateUtils.formatElapsedTime(end.toLong())
+                "${it.category} ($startStr - $endStr)"
             }
         }
     }

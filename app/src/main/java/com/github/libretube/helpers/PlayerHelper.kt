@@ -550,11 +550,9 @@ object PlayerHelper {
             if ((duration - currentPosition).absoluteValue < 500) continue
 
             if (currentPosition in segmentStart until segmentEnd) {
-                if (sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC ||
-                    (
-                            sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE &&
-                                    !segment.skipped
-                            )
+                val key = sponsorBlockConfig[segment.category]
+                if (key == SbSkipOptions.AUTOMATIC ||
+                    (key == SbSkipOptions.AUTOMATIC_ONCE && !segment.skipped)
                 ) {
                     if (sponsorBlockNotifications) {
                         runCatching {
@@ -564,11 +562,8 @@ object PlayerHelper {
                     }
                     seekTo(segmentEnd)
                     segment.skipped = true
-                } else if (sponsorBlockConfig[segment.category] == SbSkipOptions.MANUAL ||
-                    (
-                            sponsorBlockConfig[segment.category] == SbSkipOptions.AUTOMATIC_ONCE &&
-                                    segment.skipped
-                            )
+                } else if (key == SbSkipOptions.MANUAL ||
+                    (key == SbSkipOptions.AUTOMATIC_ONCE && segment.skipped)
                 ) {
                     return segment
                 }
