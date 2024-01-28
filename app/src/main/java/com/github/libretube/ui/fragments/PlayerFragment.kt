@@ -665,7 +665,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         viewModel.maxSheetHeightPx = binding.root.height - binding.player.height
     }
 
-    private fun playOnBackground() {
+    private fun playOnBackground(returnToVideo: Boolean = false) {
         BackgroundHelper.stopBackgroundPlay(requireContext())
         BackgroundHelper.playOnBackground(
             requireContext(),
@@ -677,7 +677,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             keepVideoPlayerAlive = true
         )
         killPlayerFragment()
-        NavigationHelper.startAudioPlayer(requireContext())
+        NavigationHelper.startAudioPlayer(context = requireContext(), returnToVideo = returnToVideo)
     }
 
     private fun updateFullscreenOrientation() {
@@ -771,9 +771,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             //when screen is off, if the video is playing and auto-pause setting is disabled, switch to audio player
             if (exoPlayer.isPlaying && !PlayerHelper.pausePlayerOnScreenOffEnabled){
-                CoroutineScope(Dispatchers.Main).launch {
+                handler.post {
                     exoPlayer.pause()
-                    playOnBackground()
+                    playOnBackground(true)
                 }
             }
         }

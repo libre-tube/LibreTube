@@ -92,10 +92,13 @@ object NavigationHelper {
     /**
      * Start the audio player fragment
      */
-    fun startAudioPlayer(context: Context, minimizeByDefault: Boolean = false) {
+    fun startAudioPlayer(context: Context, minimizeByDefault: Boolean = false, returnToVideo: Boolean = false) {
         val activity = ContextHelper.unwrapActivity(context)
         activity.supportFragmentManager.commitNow {
-            val args = bundleOf(IntentData.minimizeByDefault to minimizeByDefault)
+            val args = bundleOf(
+                IntentData.minimizeByDefault to minimizeByDefault,
+                IntentData.returnToVideo to returnToVideo
+            )
             replace<AudioPlayerFragment>(R.id.container, args = args)
         }
     }
