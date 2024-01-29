@@ -547,4 +547,5 @@
     <string name="suggest_change_instance">Yükleme her zamankinden uzun sürüyor. Örneği değiştirmeyi deneyin</string>
     <string name="download_playlist_note">Lütfen indirme için en yüksek ses/video kalitesini seçin. Altyazılar yalnızca mevcut olması durumunda indirilecektir.</string>
     <string name="audio_language">Ses dili</string>
+    <string name="also_clear_watch_positions">İzleme konumlarını da temizle</string>
 </resources>
