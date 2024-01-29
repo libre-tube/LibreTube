@@ -538,4 +538,10 @@
     <string name="copy_tooltip">Kopieren</string>
     <string name="export_groups">Kanalgruppen exportieren</string>
     <string name="import_groups">Kanalgruppen importieren</string>
+    <string name="change_instance">Instanz ändern</string>
+    <string name="change">Ändern</string>
+    <string name="delete_all">Alle Downloads werden gelöscht!</string>
+    <string name="default_language">Standard</string>
+    <string name="download_playlist">Wiedergabeliste herunterladen</string>
+    <string name="audio_language">Audiosprache</string>
 </resources>
