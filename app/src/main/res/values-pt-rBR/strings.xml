@@ -481,7 +481,7 @@
     <string name="tooltip_repeat">Repetir</string>
     <string name="tooltip_clear_queue">Limpar fila</string>
     <string name="tooltip_close">Fechar</string>
-    <string name="tooltip_watch_position">Ver posição</string>
+    <string name="tooltip_watch_position">Posição de reprodução</string>
     <string name="tooltip_minimize">Minimizar</string>
     <string name="tooltip_unlocked">Desbloquear player</string>
     <string name="tooltip_fullscreen">Tela cheia</string>
@@ -550,4 +550,5 @@
     <string name="audio_language">Idioma do áudio</string>
     <string name="enqueueing_playlist_download">Enfileirando vídeos para o download da playlist %1$s</string>
     <string name="delete_all">Todos os downloads serão excluídos!</string>
+    <string name="also_clear_watch_positions">Limpar também as posições de reprodução</string>
 </resources>
