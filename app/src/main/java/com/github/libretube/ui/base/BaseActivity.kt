@@ -1,6 +1,7 @@
 package com.github.libretube.ui.base
 
 import android.content.pm.ActivityInfo
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.libretube.R
@@ -37,6 +38,10 @@ open class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         // set the app theme (e.g. Material You)
         ThemeHelper.updateTheme(this)
+
+        // Set the navigation and statusBar color if SDK < 23
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+            ThemeHelper.setSystemBarColors(this, window, false)
 
         // set the apps language
         LocaleHelper.updateLanguage(this)
