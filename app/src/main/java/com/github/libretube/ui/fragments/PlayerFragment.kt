@@ -1142,7 +1142,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         val durationWithoutSegments = duration - segments.sumOf {
             val (start, end) = it.segmentStartAndEnd
-            end - start
+            end.toDouble() - start.toDouble()
         }.toLong()
         val durationString = DateUtils.formatElapsedTime(duration)
 
