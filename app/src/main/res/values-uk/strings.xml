@@ -546,4 +546,12 @@
     <string name="change_instance">Змінити сервер</string>
     <string name="suggest_change_instance">Завантаження триває довше, ніж зазвичай. Спробуйте змінити сервер</string>
     <string name="change">Змінити</string>
+    <string name="audio_language">Мова аудіо</string>
+    <string name="delete_all">Всі завантаження будуть видалені!</string>
+    <string name="enqueueing_playlist_download">Додати відео зі списку відтворення
+\n%1$s до черги на завантаження</string>
+    <string name="default_language">Типова</string>
+    <string name="download_playlist">Завантажити список відтворення</string>
+    <string name="download_playlist_note">Будь ласка, оберіть максимальну якість аудіо/відео для завантаження. Субтитри будуть завантажені лише за наявності.</string>
+    <string name="enqueue_playlist_description">Показує сповіщення під час створення черги на завантаження відео зі списку відтворення.</string>
 </resources>

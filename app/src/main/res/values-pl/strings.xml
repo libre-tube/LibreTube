@@ -30,7 +30,7 @@
     <string name="error">Coś poszło nie tak.</string>
     <string name="notgmail">Dotyczy konta Piped</string>
     <string name="defres">Rozdzielczość wideo w trybie pełnoekranowym</string>
-    <string name="grid">Kolumny siatki</string>
+    <string name="grid">Kolumny siatki (pionowo)</string>
     <string name="emptyList">Tu jeszcze nic nie ma.</string>
     <string name="deletePlaylist">Usuń playlistę</string>
     <string name="createPlaylist">Utwórz playlistę</string>
@@ -316,7 +316,7 @@
     <string name="volume">Głośność</string>
     <string name="auto">Auto</string>
     <string name="swipe_controls">Sterowanie gestami</string>
-    <string name="swipe_controls_summary">Steruj jasnością i głośnością za pomocą gestów</string>
+    <string name="swipe_controls_summary">Steruj jasnością i głośnością za pomocą gestów w trybie pełnoekranowym</string>
     <string name="defaults">Domyślne</string>
     <string name="pop_up">Tryb PiP</string>
     <string name="no_comments_available">Nie skomentowano jeszcze tego materiału.</string>
@@ -398,7 +398,7 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d filmów</string>
     <string name="subscriberAndVideoCounts">%1$s subskrybentów • %2$d filmów</string>
     <string name="disable_proxy">Wyłącz proxy Piped</string>
-    <string name="disable_proxy_summary">Wczytuj filmy i obrazy bezpośrednio z serwerów YouTube. Włącz tę opcję tylko wtedy, gdy i tak używasz VPN!</string>
+    <string name="disable_proxy_summary">Wczytuj filmy i obrazy bezpośrednio z serwerów YouTube. Włącz tę opcję tylko, jeśli zawsze używasz VPN</string>
     <string name="auto_fullscreen_shorts">Automatyczny pełny ekran dla krótkich filmów</string>
     <string name="channel_groups">Grupy kanałów</string>
     <string name="new_group">Nowa</string>
@@ -445,7 +445,7 @@
     <string name="category_highlight">Pokaż najciekawsze filmu</string>
     <string name="sb_custom_colors">Niestandardowe kolory segmentów</string>
     <string name="manual">Ręcznie</string>
-    <string name="visible">Pokaż w pasku wyszukiwania</string>
+    <string name="visible">Pokaż na pasku ładowania</string>
     <string name="off">Wyłączony</string>
     <string name="visibility">Widoczność</string>
     <string name="visibility_public">Publiczny</string>
@@ -455,7 +455,7 @@
     <string name="fallback_piped_proxy_summary">Załaduj filmy przez serwer proxy, jeśli bezpośrednie połączenie z YouTube nie działa w przypadku bieżącego filmu (wydłuża początkowy czas ładowania). Jeśli ta opcja jest wyłączona, zawartość muzyczna YouTube prawdopodobnie nie będzie odtwarzana z powodu ograniczeń YT</string>
     <string name="playlist_description">Opis playlisty</string>
     <string name="choose_instance_long">Wybierz poniżej instancję Piped, której chcesz użyć. Instancja Piped będzie działać jako pośrednik między Tobą a YouTube. Instancje te znajdują się w różnych fizycznych lokalizacjach — na co wskazują ich flagi państwowe. Instancje fizycznie bliżej ciebie są prawdopodobnie szybsze niż instancje, które nie są. W każdej chwili możesz zmienić używaną instancję w ustawieniach.</string>
-    <string name="fallback_piped_proxy">Powrót do proxy Piped</string>
+    <string name="fallback_piped_proxy">W wypadku niepowodzenia użyj proxy Piped</string>
     <string name="home_tab_content">Zawartość strony głównej</string>
     <string name="jumped_to_highlight">Przeskocz do wyróżnionego filmu</string>
     <string name="category_highlight_summary">Może to być reklamowany tytuł, miniatura lub najciekawsza część filmu. Możesz przejść do niego, dotykając go w sekcji rozdziałów</string>
@@ -536,4 +536,22 @@
     <string name="finished">Ukończone</string>
     <string name="startpage">Główna</string>
     <string name="add_to_group">Dodaj do grupy</string>
+    <string name="change_instance">Zmień instancję</string>
+    <string name="suggest_change_instance">Ładowanie trwa dłużej niż zwykle. Pomyśl o zmianie instancji</string>
+    <string name="download_playlist">Pobierz playlistę</string>
+    <string name="enqueueing_playlist_download">Przygotowywanie nagrań do pobrania z playlisty %1$s</string>
+    <string name="change">Zmień</string>
+    <string name="grid_landscape">Kolumny siatki (poziomo)</string>
+    <string name="rich_caption_rendering">Bogate renderowanie napisów</string>
+    <string name="rich_caption_rendering_summary">Wyświetlaj napisy dla wspanialszego i dostosowanego do swoich potrzeb doświadczenia</string>
+    <string name="import_groups">Ważne grupy kanałów</string>
+    <string name="copy_tooltip">Kopiuj</string>
+    <string name="also_clear_watch_positions">Automatycznie wyczyść pozycje oglądania</string>
+    <string name="uptime">%.2f%% czas pracy</string>
+    <string name="delete_all">Wszystkie pobrane pliki zostaną usunięte!</string>
+    <string name="export_groups">Wyeksportuj grupy kanałów</string>
+    <string name="download_playlist_note">Proszę wybrać maksymalną jakość audio/video do pobrania. Napisy będą pobrane tylko jeśli są dostępne.</string>
+    <string name="enqueue_playlist_description">Pokaż powiadomienie gdy nagranie z playlisty zostanie przygotowane do pobrania.</string>
+    <string name="audio_language">Język audio</string>
+    <string name="default_language">Domyślny</string>
 </resources>

@@ -98,6 +98,7 @@ dependencies {
     implementation(libs.androidx.navigation.ui)
     implementation(libs.androidx.preference)
     implementation(libs.androidx.work.runtime)
+    implementation(libs.androidx.collection)
 
     /* Android Lifecycle */
     implementation(libs.lifecycle.viewmodel)

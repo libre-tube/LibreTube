@@ -67,7 +67,7 @@ class MarkableTimeBar(
         canvas.restore()
     }
 
-    private fun Double.toLength(): Int {
+    private fun Float.toLength(): Int {
         return (this * 1000 / player!!.duration * length).toInt()
     }
 
