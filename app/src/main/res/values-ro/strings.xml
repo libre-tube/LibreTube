@@ -543,4 +543,12 @@
     <string name="suggest_change_instance">Încărcarea durează mai mult decât de obicei. Luați în considerare să schimbați instanța</string>
     <string name="import_groups">Importați grupuri de canale</string>
     <string name="export_groups">Exportați grupuri de canale</string>
+    <string name="download_playlist">Descarcă lista de redare</string>
+    <string name="enqueue_playlist_description">Afișează o notificare când pui în coadă videoclipuri ale unei liste de redare pentru a fi descărcate.</string>
+    <string name="enqueueing_playlist_download">Videoclipuri în coadă pentru a încărca lista de redare %1$s</string>
+    <string name="audio_language">Limba audio</string>
+    <string name="also_clear_watch_positions">De asemenea, șterge pozițiile privite</string>
+    <string name="delete_all">Toate descărcările vor fi șterse!</string>
+    <string name="download_playlist_note">Selectează calitatea audio/video maximă de descărcat. Subtitrările vor fi descărcate numai dacă sunt disponibile.</string>
+    <string name="default_language">Implicit</string>
 </resources>
