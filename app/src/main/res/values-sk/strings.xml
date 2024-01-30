@@ -550,4 +550,5 @@
     <string name="delete_all">Všetky stiahnuté súbory budú vymazané!</string>
     <string name="download_playlist">Stiahnuť zoznam skladieb</string>
     <string name="download_playlist_note">Vyberte požadovanú maximálnu kvalitu zvuku/videa na stiahnutie. Titulky sa stiahnu len vtedy, ak sú k dispozícii.</string>
+    <string name="also_clear_watch_positions">Vymazať aj pozície sledovania</string>
 </resources>
