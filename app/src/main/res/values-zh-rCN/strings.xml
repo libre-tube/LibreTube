@@ -544,4 +544,5 @@
     <string name="enqueueing_playlist_download">正将播放列表 %1$s 中的待下载视频加入队列</string>
     <string name="audio_language">音频语言</string>
     <string name="default_language">默认</string>
+    <string name="also_clear_watch_positions">同样清除观看位置</string>
 </resources>
