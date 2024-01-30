@@ -356,7 +356,7 @@
     <string name="help">Ajutor</string>
     <string name="faq">Întrebări frecvente</string>
     <string name="mark_as_watched">Marcați ca urmărit</string>
-    <string name="download_channel_description">Afișați o notificare la descărcarea conținutului media</string>
+    <string name="download_channel_description">Afișați o notificare la descărcarea conținutului media.</string>
     <string name="custom_playback_speed">Viteză particularizată</string>
     <string name="custom_playback_speed_summary">Utilizați o viteză de redare diferită de cea a player-ului normal</string>
     <string name="defaultIconLight">Luminată implicită</string>
@@ -482,7 +482,7 @@
     <string name="group_name_error_empty">Vă rugăm să introduceți un nume</string>
     <string name="donate">Donaţi</string>
     <string name="screen_orientation">Orientarea ecranului</string>
-    <string name="duration_span">Durata</string>
+    <string name="duration_span">Durata: %1$s</string>
     <string name="proxy">Proxy</string>
     <string name="tooltip_close">Închidere</string>
     <string name="tooltip_play">Redare</string>
@@ -515,7 +515,7 @@
     <string name="tooltip_sponsorblock">Comutați SponsorBlock</string>
     <string name="tooltip_options">Opțiuni</string>
     <string name="rich_caption_rendering">Redare bogată subtitrări</string>
-    <string name="rich_caption_rendering_summary">"Redă subtitrările  pentru o experiență mai bogată și mai personalizată"</string>
+    <string name="rich_caption_rendering_summary">Redă subtitrările pentru o experiență mai bogată și mai personalizată</string>
     <string name="autoplay_playlists_summary">Redați automat videoclipul următor din listele de redare, indiferent de setarea de redare automată selectată</string>
     <string name="downvote">Jos</string>
     <string name="tooltip_reverse">Verso</string>
