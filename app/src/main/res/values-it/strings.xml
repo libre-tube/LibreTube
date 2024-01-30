@@ -551,4 +551,5 @@
     <string name="enqueue_playlist_description">Mostra una notifica quando si accodano video di una playlist da scaricare.</string>
     <string name="audio_language">Lingua dell\'audio</string>
     <string name="default_language">Predefinita</string>
+    <string name="also_clear_watch_positions">Cancella anche le posizioni di riproduzione</string>
 </resources>
