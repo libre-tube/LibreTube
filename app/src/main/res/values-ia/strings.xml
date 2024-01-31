@@ -548,4 +548,5 @@
     <string name="delete_all">Tote le discargamentos essera delite!</string>
     <string name="download_playlist">Discargar le lista de reproduction</string>
     <string name="download_playlist_note">Selige le qualitate maxime de audio/video a discargar. Le subtitulos solmente essera discargate si es disponibile.</string>
+    <string name="also_clear_watch_positions">Tamben rader le positiones de reguardar</string>
 </resources>
