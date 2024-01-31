@@ -4,9 +4,9 @@
     <string name="customInstance">مخصص</string>
     <string name="registered">تم إنشاء حساب. تستطيع الآن الاشتراك بالقنوات.</string>
     <string name="search_hint">بحث</string>
-    <string name="unsubscribe">إلغاء الاشتراك</string>
+    <string name="unsubscribe">إلغاء الإشتراك</string>
     <string name="download">تنزيل</string>
-    <string name="subscribe">اشترك</string>
+    <string name="subscribe">إشترك</string>
     <string name="share">مشاركة</string>
     <string name="password">كلمة المرور</string>
     <string name="cancel">إلغاء</string>
@@ -51,8 +51,8 @@
     <string name="lightTheme">فاتح</string>
     <string name="library">المكتبة</string>
     <string name="import_from_yt_summary">من اليوتيوب او نيوبايب</string>
-    <string name="subscriptions">الاشتراكات</string>
-    <string name="videos">الفيديوهات</string>
+    <string name="subscriptions">الإشتراكات</string>
+    <string name="videos">مقاطع الفيديو</string>
     <string name="systemLanguage">النظام</string>
     <string name="darkTheme">داكن</string>
     <string name="subscribers">%1$s مشتركين</string>
