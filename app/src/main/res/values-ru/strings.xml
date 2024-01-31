@@ -167,7 +167,7 @@
     <string name="account">Аккаунт</string>
     <string name="restore">Восстановить из копии</string>
     <string name="watch_history">История просмотра</string>
-    <string name="watch_positions">Сохранить позицию</string>
+    <string name="watch_positions">Запоминание позиции</string>
     <string name="auth_instance">Сервер аутентификации</string>
     <string name="auth_instance_summary">Использовать другой сервер для аутентификации</string>
     <string name="github">GitHub</string>
@@ -191,7 +191,7 @@
     <string name="data_saver_mode">Режим экономии трафика</string>
     <string name="search_history_summary">Запоминать историю поисков</string>
     <string name="selected">Выбранное</string>
-    <string name="watch_positions_title">Сохранённые позиции воспроизведения</string>
+    <string name="watch_positions_title">Сохранённые позиции просмотра</string>
     <string name="system_caption_style">Системный стиль субтитров</string>
     <string name="none">Нет</string>
     <string name="autoRotatePlayer_summary">Полноэкранный режим при повороте устройства</string>
@@ -210,7 +210,7 @@
     <string name="irreversible">Вы уверены\? Это действие нельзя отменить!</string>
     <string name="least_recent">Сначала старые</string>
     <string name="most_recent">Сначала новые</string>
-    <string name="most_views">Больше просмотров</string>
+    <string name="most_views">Количеству просмотров</string>
     <string name="least_views">Меньше просмотров</string>
     <string name="network_metered">Лимитное</string>
     <string name="no_search_result">Нет результатов.</string>
@@ -422,7 +422,7 @@
     <string name="duration">Длительность</string>
     <string name="shorts_notifications">Уведомлять о Shorts</string>
     <string name="alphabetic">Алфавитный</string>
-    <string name="creation_date">Дата создания</string>
+    <string name="creation_date">Дате создания</string>
     <string name="creation_date_reversed">Дата создания (обратная)</string>
     <string name="alphabetic_reversed">Алфавитный (обратный)</string>
     <string name="import_format_newpipe">NewPipe</string>
@@ -473,21 +473,21 @@
     <string name="visibility_public">Общественная</string>
     <string name="visibility_unlisted">Не показывается</string>
     <string name="screen_orientation">Ориентация экрана</string>
-    <string name="sort_by">Сортировать по</string>
+    <string name="sort_by">Упорядочить по</string>
     <string name="duration_span">Длительность: %1$s</string>
     <string name="no_chapter">Нет раздела</string>
-    <string name="uploader_name">Имя загрузчика</string>
+    <string name="uploader_name">Названию канала</string>
     <string name="remove_watched_videos">Удалить просмотренные видео</string>
     <string name="player_channel_name">Служба проигрывателя</string>
     <string name="player_channel_description">Показывать уведомление при воспроизведении</string>
     <string name="tooltip_repeat">Повтор</string>
     <string name="tooltip_filter">Фильтр</string>
     <string name="tooltip_sponsorblock">Переключить SponsorBlock</string>
-    <string name="tooltip_reverse">Вернуть</string>
-    <string name="tooltip_sort">Сортировать</string>
-    <string name="tooltip_watch_position">Положение часов</string>
+    <string name="tooltip_reverse">Перевернуть</string>
+    <string name="tooltip_sort">Упорядочивание</string>
+    <string name="tooltip_watch_position">Позиция просмотра</string>
     <string name="tooltip_clear_queue">Очистить очередь</string>
-    <string name="tooltip_dismiss">Отклонить</string>
+    <string name="tooltip_dismiss">Закрыть</string>
     <string name="tooltip_locked">Заблокировать проигрыватель</string>
     <string name="tooltip_unlocked">Разблокировать проигрыватель</string>
     <string name="tooltip_fullscreen">Полный экран</string>
@@ -553,4 +553,5 @@
     <string name="enqueue_playlist_description">Показывать уведомление при постановке видео в плейлист для загрузки.</string>
     <string name="download_playlist_note">Выберите максимальное качество скачиваемого аудио/видео. Субтитры будут скачаны только при наличии.</string>
     <string name="delete_all">Все скачанные видео будут удалены!</string>
+    <string name="also_clear_watch_positions">Также удалить позиции просмотра</string>
 </resources>
