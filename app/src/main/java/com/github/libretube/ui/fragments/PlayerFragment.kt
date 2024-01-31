@@ -1113,10 +1113,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      */
     private fun handleLink(link: String) {
         // get video id if the link is a valid youtube video link
-        val videoId = TextUtils.getVideoIdFromUrl(link)
+        val uri = link.toUri()
+        val videoId = TextUtils.getVideoIdFromUri(uri)
+
         if (videoId.isNullOrEmpty()) {
             // not a YouTube video link, thus handle normally
-            val intent = Intent(Intent.ACTION_VIEW, link.toUri())
+            val intent = Intent(Intent.ACTION_VIEW, uri)
             startActivity(intent)
             return
         }
@@ -1124,7 +1126,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // check if the video is the current video and has a valid time
         if (videoId == this.videoId) {
             // try finding the time stamp of the url and seek to it if found
-            link.toUri().getQueryParameter("t")?.toTimeInSeconds()?.let {
+            uri.getQueryParameter("t")?.toTimeInSeconds()?.let {
                 exoPlayer.seekTo(it * 1000)
             }
         } else {
