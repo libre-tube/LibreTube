@@ -537,4 +537,13 @@
     <string name="export_groups">برون‌ریزی گروه‌های کانال</string>
     <string name="copy_tooltip">رونوشت</string>
     <string name="uptime">%.2f٪ بالا بودن</string>
+    <string name="change">دگرگونی</string>
+    <string name="default_language">پیش‌گزیده</string>
+    <string name="audio_language">زبان صدا</string>
+    <string name="download_playlist">بارگیری سیاههٔ پخش</string>
+    <string name="download_playlist_note">لطفاً بیشینهٔ کیفیت صوت و تصویر را برای بارگیری برگزینید. زیرنویس‌ها تنها در صورت موجود بودن بار گرفته می‌شوند.</string>
+    <string name="delete_all">همهٔ بارگیری‌ها حذف خواهند شد!</string>
+    <string name="change_instance">تغییر نمونه</string>
+    <string name="suggest_change_instance">بار کردن بیش از معمول طول کشیده. تعویض نمونه را در نظر داشته باشید</string>
+    <string name="also_clear_watch_positions">همچنین پاک کردن موقعیت‌های پخش</string>
 </resources>
