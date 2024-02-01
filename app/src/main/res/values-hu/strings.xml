@@ -536,4 +536,12 @@
     <string name="no_segments_found">Még nincsenek szakaszok ehhez a videóhoz.</string>
     <string name="copy_tooltip">Másolás</string>
     <string name="default_language">Alapértelmezett</string>
+    <string name="change">Váltás</string>
+    <string name="suggest_change_instance">A betöltés az átlagosnál tovább tart. Fontolja meg, hogy példányt vált</string>
+    <string name="change_instance">Példány váltása</string>
+    <string name="audio_language">Hang nyelve</string>
+    <string name="export_groups">Csatornacsoportok exportálása</string>
+    <string name="download_playlist">Lejátszási lista letöltése</string>
+    <string name="delete_all">Az összes letöltés törölve lesz!</string>
+    <string name="import_groups">Csatornacsoportok importálása</string>
 </resources>
