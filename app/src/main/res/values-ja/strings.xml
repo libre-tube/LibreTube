@@ -475,7 +475,7 @@
     <string name="tooltip_sort">並び替え</string>
     <string name="tooltip_repeat">リピート</string>
     <string name="tooltip_reverse">逆順</string>
-    <string name="tooltip_watch_position">視聴済みの位置</string>
+    <string name="tooltip_watch_position">再生済みの位置</string>
     <string name="resolution_limited">選択</string>
     <string name="tooltip_minimize">最小化</string>
     <string name="tooltip_fullscreen">全画面</string>
@@ -544,4 +544,5 @@
     <string name="download_playlist_note">ダウンロードする音声/映像の最高品質を選択します。字幕は利用可能ならダウンロードされます。</string>
     <string name="enqueue_playlist_description">再生リストからダウンロードする動画を追加するときに通知する。</string>
     <string name="enqueueing_playlist_download">以下の再生リストの動画をダウンロード %1$s</string>
+    <string name="also_clear_watch_positions">再生済みの位置の記憶も消去</string>
 </resources>
