@@ -99,12 +99,13 @@ dependencies {
     implementation(libs.androidx.core)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.fragment)
-    implementation(libs.androidx.legacySupport)
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)
     implementation(libs.androidx.preference)
     implementation(libs.androidx.work.runtime)
     implementation(libs.androidx.collection)
+    implementation(libs.androidx.media)
+    implementation(libs.androidx.swiperefreshlayout)
 
     /* Android Lifecycle */
     implementation(libs.lifecycle.viewmodel)
