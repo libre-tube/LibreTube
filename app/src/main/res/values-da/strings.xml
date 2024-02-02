@@ -540,4 +540,12 @@
     <string name="lbry_hls_summary">Brug LBRY HLS til streaming hvis muligt</string>
     <string name="choose_instance_long">Vælg venligst en Piped-instans, du vil bruge, nedenfor. Piped-instansen vil fungere som en mellemmand mellem dig og Youtube. Disse instanser er placeret i forskellige fysiske lokationer - indikeret ved deres landeflag. Instanser, der er tættere på dig, er sandsynligvis hurtigere end instanser, der ikke er. Du kan til enhver tid ændre den instans, du bruger, i indstillingerne.</string>
     <string name="off">Fra</string>
+    <string name="tooltip_scroll_to_top">Scroll til toppen</string>
+    <string name="tooltip_fullscreen">Fuld skærm</string>
+    <string name="tooltip_edit_groups">Redigér grupper</string>
+    <string name="tooltip_close">Luk</string>
+    <string name="tooltip_play">Afspil</string>
+    <string name="tooltip_filter">Filtrer</string>
+    <string name="tooltip_create_playlist">Opret playliste</string>
+    <string name="also_clear_watch_positions">Også ryd afspilningspositionerne</string>
 </resources>
