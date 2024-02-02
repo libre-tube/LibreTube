@@ -70,6 +70,7 @@
     <string name="noInternet">Connect to the Internet first.</string>
     <string name="retry">Retry</string>
     <string name="comments">Comments</string>
+    <string name="comments_count">Comments (%1$s)</string>
     <string name="replies">Replies</string>
     <string name="channels">Channels</string>
     <string name="all">All</string>
