@@ -50,7 +50,6 @@ class CommentsMainFragment : Fragment() {
         }
 
         binding.commentsRV.viewTreeObserver.addOnScrollChangedListener {
-            val viewBinding = _binding ?: return@addOnScrollChangedListener
             // save the last scroll position to become used next time when the sheet is opened
             viewModel.currentCommentsPosition = layoutManager.findFirstVisibleItemPosition()
 

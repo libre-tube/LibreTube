@@ -29,7 +29,6 @@ import com.github.libretube.ui.fragments.CommentsRepliesFragment
 import com.github.libretube.ui.viewholders.CommentsViewHolder
 import com.github.libretube.util.HtmlParser
 import com.github.libretube.util.LinkHandler
-import com.github.libretube.util.TextUtils
 
 class CommentPagingAdapter(
     private val fragment: Fragment?,
@@ -54,7 +53,8 @@ class CommentPagingAdapter(
             commentAuthor.setBackgroundResource(
                 if (comment.channelOwner) R.drawable.comment_channel_owner_bg else 0
             )
-            commentInfos.text = TextUtils.SEPARATOR + comment.commentedTime
+            commentInfos.text = root.context
+                .getString(R.string.commentedTimeWithSeparator, comment.commentedTime)
 
             commentText.movementMethod = LinkMovementMethodCompat.getInstance()
             commentText.text = comment.commentText?.replace("</a>", "</a> ")
