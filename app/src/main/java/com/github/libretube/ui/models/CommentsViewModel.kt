@@ -3,8 +3,10 @@ package com.github.libretube.ui.models
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asFlow
+import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
 import com.github.libretube.ui.models.sources.CommentPagingSource
 import com.github.libretube.ui.models.sources.CommentRepliesPagingSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -16,11 +18,13 @@ class CommentsViewModel : ViewModel() {
     val selectedCommentLiveData = MutableLiveData<String>()
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val commentsFlow = videoIdLiveData.asFlow().flatMapLatest {
-        Pager(PagingConfig(pageSize = 20, enablePlaceholders = false)) {
-            CommentPagingSource(it)
-        }.flow
-    }
+    val commentsFlow = videoIdLiveData.asFlow()
+        .flatMapLatest {
+            Pager(PagingConfig(pageSize = 20, enablePlaceholders = false)) {
+                CommentPagingSource(it)
+            }.flow
+        }
+        .cachedIn(viewModelScope)
     @OptIn(ExperimentalCoroutinesApi::class)
     val commentRepliesFlow = videoIdLiveData.asFlow()
         .combine(selectedCommentLiveData.asFlow()) { videoId, comment -> videoId to comment }
@@ -29,6 +33,7 @@ class CommentsViewModel : ViewModel() {
                 CommentRepliesPagingSource(videoId, commentPage)
             }.flow
         }
+        .cachedIn(viewModelScope)
 
     val commentSheetExpand = MutableLiveData<Boolean?>()
 
