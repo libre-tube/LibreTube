@@ -143,7 +143,7 @@ class HomeViewModel : ViewModel() {
         val filteredFeed = this.filter {
             allowAll || (allowShorts && it.isShort) || (allowVideos && !it.isShort)
         }
-        return runBlocking { DatabaseHelper.filterUnwatched(filteredFeed) }
+        return DatabaseHelper.filterUnwatched(filteredFeed)
     }
 
     companion object {
