@@ -1,6 +1,7 @@
 package com.github.libretube.ui.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
@@ -68,24 +69,24 @@ class CommentPagingAdapter(
                 creatorReplyImageView.isVisible = true
             }
 
-            if (comment.verified) verifiedImageView.isVisible = true
-            if (comment.pinned) pinnedImageView.isVisible = true
-            if (comment.hearted) heartedImageView.isVisible = true
-            if (comment.repliesPage != null) repliesCount.isVisible = true
+            verifiedImageView.isVisible = comment.verified
+            pinnedImageView.isVisible = comment.pinned
+            heartedImageView.isVisible = comment.hearted
+            repliesCount.isVisible = comment.repliesPage != null
             if (comment.replyCount > 0L) {
                 repliesCount.text = comment.replyCount.formatShort()
             }
 
             commentorImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, comment.commentorUrl)
-                dismiss.invoke()
+                dismiss()
             }
 
             if (isRepliesAdapter) {
                 repliesCount.isGone = true
 
                 // highlight the comment that is being replied to
-                if (comment == getItem(0)) {
+                if (position == 0) {
                     root.setBackgroundColor(
                         ThemeHelper.getThemeColor(
                             root.context,
@@ -104,12 +105,9 @@ class CommentPagingAdapter(
             }
 
             if (!isRepliesAdapter && comment.repliesPage != null) {
-                root.setOnClickListener {
-                    navigateToReplies(comment)
-                }
-                commentText.setOnClickListener {
-                    navigateToReplies(comment)
-                }
+                val onClickListener = View.OnClickListener { navigateToReplies(comment) }
+                root.setOnClickListener(onClickListener)
+                commentText.setOnClickListener(onClickListener)
             }
             root.setOnLongClickListener {
                 ClipboardHelper.save(

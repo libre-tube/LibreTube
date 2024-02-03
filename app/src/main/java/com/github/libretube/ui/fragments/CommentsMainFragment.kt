@@ -69,29 +69,29 @@ class CommentsMainFragment : Fragment() {
         binding.commentsRV.adapter = commentPagingAdapter
 
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.CREATED) {
-                commentPagingAdapter.loadStateFlow.collect {
-                    binding.progress.isVisible = it.refresh is LoadState.Loading
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    commentPagingAdapter.loadStateFlow.collect {
+                        binding.progress.isVisible = it.refresh is LoadState.Loading
 
-                    if (it.append is LoadState.NotLoading && it.append.endOfPaginationReached) {
-                        binding.errorTV.text = getString(R.string.no_comments_available)
-                        binding.errorTV.isVisible = true
-                        return@collect
+                        if (it.append is LoadState.NotLoading && it.append.endOfPaginationReached) {
+                            binding.errorTV.text = getString(R.string.no_comments_available)
+                            binding.errorTV.isVisible = true
+                            return@collect
+                        }
                     }
                 }
-            }
-        }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.CREATED) {
-                viewModel.commentsFlow.collect {
-                    commentPagingAdapter.submitData(it)
+                launch {
+                    viewModel.commentsFlow.collect {
+                        commentPagingAdapter.submitData(it)
 
-                    val commentCount = commentPagingAdapter.itemCount.toLong().formatShort()
-                    commentsSheet?.updateFragmentInfo(
-                        false,
-                        getString(R.string.comments_count, commentCount)
-                    )
+                        val commentCount = commentPagingAdapter.itemCount.toLong().formatShort()
+                        commentsSheet?.updateFragmentInfo(
+                            false,
+                            getString(R.string.comments_count, commentCount)
+                        )
+                    }
                 }
             }
         }
