@@ -13,24 +13,24 @@ import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.extensions.TAG
 import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.util.deArrow
+import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
-import java.io.IOException
 
-class TrendsViewModel: ViewModel() {
+class TrendsViewModel : ViewModel() {
     val trendingVideos = MutableLiveData<List<StreamItem>>()
     var recyclerViewState: Parcelable? = null
 
     fun fetchTrending(context: Context) {
         viewModelScope.launch {
             try {
-                  val region = LocaleHelper.getTrendingRegion(context)
-                  val response = withContext(Dispatchers.IO) {
-                      RetrofitInstance.api.getTrending(region).deArrow()
-                  }
-                  trendingVideos.postValue(response)
+                val region = LocaleHelper.getTrendingRegion(context)
+                val response = withContext(Dispatchers.IO) {
+                    RetrofitInstance.api.getTrending(region).deArrow()
+                }
+                trendingVideos.postValue(response)
             } catch (e: IOException) {
                 println(e)
                 Log.e(TAG(), "IOException, you might not have internet connection")

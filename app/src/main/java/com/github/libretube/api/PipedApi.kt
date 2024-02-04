@@ -1,7 +1,6 @@
 package com.github.libretube.api
 
 import com.github.libretube.api.obj.*
-import kotlinx.serialization.json.JsonObject
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header

@@ -6,6 +6,12 @@ plugins {
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
     alias(libs.plugins.baselineprofile)
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
+}
+
+ktlint {
+    // version.set("12.1.0") // Use the desired version
+    baseline.set(file(".editorconfig")) // Adjust the path as needed
 }
 
 android {

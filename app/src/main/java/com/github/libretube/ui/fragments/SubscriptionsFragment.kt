@@ -172,7 +172,10 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
             val fragManager = activityCompat
                 .supportFragmentManager
                 .apply {
-                    setFragmentResultListener(FILTER_SORT_REQUEST_KEY, activityCompat) { _, resultBundle ->
+                    setFragmentResultListener(
+                        FILTER_SORT_REQUEST_KEY,
+                        activityCompat
+                    ) { _, resultBundle ->
                         selectedSortOrder = resultBundle.getInt(IntentData.sortOptions)
                         hideWatched = resultBundle.getBoolean(IntentData.hideWatched)
                         showFeed()
@@ -263,7 +266,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
     }
 
     private fun List<StreamItem>.filterByStatusAndWatchPosition(): List<StreamItem> {
-
         val streamItems = this.filter {
             val isVideo = !it.isShort && !it.isLive
 
@@ -275,9 +277,13 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
             }
         }
 
-        return if (hideWatched) runBlocking {
-            DatabaseHelper.filterUnwatched(streamItems)
-        } else streamItems
+        return if (hideWatched) {
+            runBlocking {
+                DatabaseHelper.filterUnwatched(streamItems)
+            }
+        } else {
+            streamItems
+        }
     }
 
     private fun List<StreamItem>.sortedBySelectedOrder() = when (selectedSortOrder) {

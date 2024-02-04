@@ -17,6 +17,7 @@ import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 class SearchResultViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
     private val args = SearchResultFragmentArgs.fromSavedStateHandle(savedStateHandle)
+
     // parse search URLs from YouTube entered in the search bar
     private val searchQuery = args.query.toHttpUrlOrNull()?.let {
         val videoId = TextUtils.getVideoIdFromUrl(it.toString()) ?: args.query
@@ -24,6 +25,7 @@ class SearchResultViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
     } ?: args.query
 
     private val filterMutableData = MutableStateFlow("all")
+
     @OptIn(ExperimentalCoroutinesApi::class)
     val searchResultsFlow = filterMutableData.flatMapLatest {
         Pager(

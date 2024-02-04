@@ -258,13 +258,13 @@ class NowPlayingNotification(
 
     private fun createPlaybackState(@PlaybackStateCompat.State state: Int): PlaybackStateCompat {
         val stateActions = PlaybackStateCompat.ACTION_SKIP_TO_NEXT or
-                PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS or
-                PlaybackStateCompat.ACTION_REWIND or
-                PlaybackStateCompat.ACTION_FAST_FORWARD or
-                PlaybackStateCompat.ACTION_PLAY_PAUSE or
-                PlaybackStateCompat.ACTION_PAUSE or
-                PlaybackStateCompat.ACTION_PLAY or
-                PlaybackStateCompat.ACTION_SEEK_TO
+            PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS or
+            PlaybackStateCompat.ACTION_REWIND or
+            PlaybackStateCompat.ACTION_FAST_FORWARD or
+            PlaybackStateCompat.ACTION_PLAY_PAUSE or
+            PlaybackStateCompat.ACTION_PAUSE or
+            PlaybackStateCompat.ACTION_PLAY or
+            PlaybackStateCompat.ACTION_SEEK_TO
 
         return PlaybackStateCompat.Builder()
             .setActions(stateActions)
@@ -302,15 +302,24 @@ class NowPlayingNotification(
 
             PLAY_PAUSE -> {
                 if (player.playerError != null) player.prepare()
-                if (player.isPlaying) player.pause()
-                else if (player.playbackState == Player.STATE_ENDED) player.seekTo(0)
-                else player.play()
+                if (player.isPlaying) {
+                    player.pause()
+                } else if (player.playbackState == Player.STATE_ENDED) {
+                    player.seekTo(0)
+                } else {
+                    player.play()
+                }
             }
 
             STOP -> {
                 when (notificationType) {
-                    NowPlayingNotificationType.AUDIO_ONLINE -> BackgroundHelper.stopBackgroundPlay(context)
-                    NowPlayingNotificationType.AUDIO_OFFLINE -> BackgroundHelper.stopBackgroundPlay(context, OfflinePlayerService::class.java)
+                    NowPlayingNotificationType.AUDIO_ONLINE -> BackgroundHelper.stopBackgroundPlay(
+                        context
+                    )
+                    NowPlayingNotificationType.AUDIO_OFFLINE -> BackgroundHelper.stopBackgroundPlay(
+                        context,
+                        OfflinePlayerService::class.java
+                    )
                     else -> Unit
                 }
             }
@@ -424,7 +433,7 @@ class NowPlayingNotification(
             VIDEO_ONLINE,
             VIDEO_OFFLINE,
             AUDIO_ONLINE,
-            AUDIO_OFFLINE,
+            AUDIO_OFFLINE
         }
     }
 }

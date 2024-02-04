@@ -116,16 +116,16 @@ import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
 import com.github.libretube.util.YoutubeHlsPlaylistParser
 import com.github.libretube.util.deArrow
+import java.io.IOException
+import java.util.*
+import java.util.concurrent.Executors
+import kotlin.math.abs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
-import java.io.IOException
-import java.util.*
-import java.util.concurrent.Executors
-import kotlin.math.abs
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class PlayerFragment : Fragment(), OnlinePlayerOptions {
@@ -282,11 +282,15 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             // Start or pause watch position timer
             if (isPlaying) {
                 watchPositionTimer = Timer()
-                watchPositionTimer!!.scheduleAtFixedRate(object : TimerTask() {
-                    override fun run() {
-                        handler.post(this@PlayerFragment::saveWatchPosition)
-                    }
-                }, 1000, 1000)
+                watchPositionTimer!!.scheduleAtFixedRate(
+                    object : TimerTask() {
+                        override fun run() {
+                            handler.post(this@PlayerFragment::saveWatchPosition)
+                        }
+                    },
+                    1000,
+                    1000
+                )
             } else {
                 watchPositionTimer?.cancel()
             }
@@ -502,7 +506,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             .animateDown(
                 duration = 300L,
                 dy = 500F,
-                onEnd = ::onManualPlayerClose,
+                onEnd = ::onManualPlayerClose
             )
     }
 

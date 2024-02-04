@@ -120,7 +120,6 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
     }
 
     private fun fetchPlaylist() {
-
         lifecycleScope.launch {
             val response = try {
                 withContext(Dispatchers.IO) {

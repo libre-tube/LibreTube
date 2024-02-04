@@ -114,21 +114,23 @@ class BackupRestoreSettings : BasePreferenceFragment() {
         }
     }
 
-    private val getChannelGroupsFile = registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) {
-        it?.forEach { uri ->
-            CoroutineScope(Dispatchers.IO).launch {
-                ImportHelper.importGroups(requireActivity(), uri)
+    private val getChannelGroupsFile =
+        registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) {
+            it?.forEach { uri ->
+                CoroutineScope(Dispatchers.IO).launch {
+                    ImportHelper.importGroups(requireActivity(), uri)
+                }
             }
         }
-    }
 
-    private val createChannelGroupsFile = registerForActivityResult(ActivityResultContracts.CreateDocument(JSON)) {
-        it?.let { uri ->
-            lifecycleScope.launch(Dispatchers.IO) {
-                ImportHelper.exportGroups(requireActivity(), uri)
+    private val createChannelGroupsFile =
+        registerForActivityResult(ActivityResultContracts.CreateDocument(JSON)) {
+            it?.let { uri ->
+                lifecycleScope.launch(Dispatchers.IO) {
+                    ImportHelper.exportGroups(requireActivity(), uri)
+                }
             }
         }
-    }
 
     private fun createImportFormatDialog(
         @StringRes titleStringId: Int,

@@ -72,7 +72,9 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
     private fun buildNotification(): Notification {
         return NotificationCompat.Builder(this, PLAYLIST_DOWNLOAD_ENQUEUE_CHANNEL_NAME)
             .setSmallIcon(R.drawable.ic_download)
-            .setContentTitle(getString(R.string.enqueueing_playlist_download, playlistName ?: "..."))
+            .setContentTitle(
+                getString(R.string.enqueueing_playlist_download, playlistName ?: "...")
+            )
             .setProgress(amountOfVideos, amountOfVideosDone, false)
             .setOnlyAlertOnce(true)
             .build()

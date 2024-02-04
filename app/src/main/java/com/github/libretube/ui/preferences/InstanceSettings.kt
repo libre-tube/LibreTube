@@ -34,7 +34,9 @@ class InstanceSettings : BasePreferenceFragment() {
     override val titleResourceId: Int = R.string.instance
     private val token get() = PreferenceHelper.getToken()
     private var instances = listOf<PipedInstance>()
-    private val authInstanceToggle get() = findPreference<SwitchPreferenceCompat>(PreferenceKeys.AUTH_INSTANCE_TOGGLE)!!
+    private val authInstanceToggle get() = findPreference<SwitchPreferenceCompat>(
+        PreferenceKeys.AUTH_INSTANCE_TOGGLE
+    )!!
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.instance_settings, rootKey)
