@@ -66,7 +66,10 @@ class HomeViewModel: ViewModel() {
                     async { if (visibleItems.contains(PLAYLISTS)) loadPlaylists() },
                     async { if (visibleItems.contains(WATCHING)) loadVideosToContinueWatching() }
                 )
-                loadedSuccessfully.value = trending.value.isNullOrEmpty() == false
+                loadedSuccessfully.value =
+                    (!trending.value.isNullOrEmpty()) || (!feed.value.isNullOrEmpty()) ||
+                    (!bookmarks.value.isNullOrEmpty()) || (!playlists.value.isNullOrEmpty()) ||
+                    (!continueWatching.value.isNullOrEmpty())
                 isLoading.value = false
             }
 
