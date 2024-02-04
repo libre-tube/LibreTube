@@ -535,4 +535,5 @@
     <string name="no_segments_found">Все още няма сегменти за този видеоклип.</string>
     <string name="successfully_removed_from_playlist">Успешно премахване \"%1$s\" от плейлиста.</string>
     <string name="copy_tooltip">Копирай</string>
+    <string name="delete_all">Hrvatski</string>
 </resources>
