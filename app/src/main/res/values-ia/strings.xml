@@ -7,7 +7,7 @@
     <string name="startpage">Initio</string>
     <string name="subscriptions">Subscriptiones</string>
     <string name="download">Discargar</string>
-    <string name="save">Salvar</string>
+    <string name="save">Salveguardar</string>
     <string name="username">Nomine de usator</string>
     <string name="password">Contrasigno</string>
     <string name="login">Initiar le session</string>
@@ -245,7 +245,7 @@
     <string name="open_copied">Aperir</string>
     <string name="preferences">Preferentias</string>
     <string name="repeat_mode_current">Actual</string>
-    <string name="data_saver_mode">Modo de salvamento de datos</string>
+    <string name="data_saver_mode">Modo de sparnio de datos</string>
     <string name="delete">Deler ab le discargas</string>
     <string name="backup_restore">Copia de securitate e restauration</string>
     <string name="device_info">Information del apparato</string>
