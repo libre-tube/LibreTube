@@ -547,4 +547,5 @@
     <string name="enqueue_playlist_description">ਡਾਊਨਲੋਡ ਕੀਤੇ ਜਾਣ ਵਾਲੇ ਪਲੇਲਿਸਟ ਦੇ ਵੀਡੀਓਜ਼ ਨੂੰ ਕਤਾਰਬੱਧ ਕਰਦੇ ਸਮੇਂ ਇੱਕ ਸੂਚਨਾ ਵਿਖਾਉਂਦਾ ਹੈ।</string>
     <string name="enqueueing_playlist_download">ਪਲੇਲਿਸਟ %1$s ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨ ਲਈ ਵੀਡੀਓਜ਼ ਦੀ ਕਤਾਰਬੰਦੀ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ</string>
     <string name="default_language">ਡਿਫ਼ਾਲਟ</string>
+    <string name="also_clear_watch_positions">ਵੇਖਣ ਦੀਆਂ ਸਥਿਤੀਆਂ ਵੀ ਸਾਫ਼ ਕਰੋ</string>
 </resources>

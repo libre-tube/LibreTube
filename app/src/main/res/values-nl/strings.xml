@@ -541,4 +541,9 @@
     <string name="change_instance">Instantie wijzigen</string>
     <string name="suggest_change_instance">Laden duurt langer dan normaal; overweeg een andere instantie te gebruiken.</string>
     <string name="change">Wijzigen</string>
+    <string name="delete_all">Alle downloads zullen worden verwijderd!</string>
+    <string name="default_language">Standaard</string>
+    <string name="audio_language">Audio­taal</string>
+    <string name="download_playlist">Afspeel­lijst downloaden</string>
+    <string name="also_clear_watch_positions">Kijk­posities ook wissen</string>
 </resources>
