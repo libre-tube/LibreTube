@@ -36,20 +36,30 @@ object ThemeHelper {
         window.statusBarColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getThemeColor(context, android.R.attr.colorBackground)
         } else {
-            if (isDarkMode(context)) getThemeColor(context, android.R.attr.colorBackground)
-            else getThemeColor(context, com.google.android.material.R.attr.colorOnBackground)
+            if (isDarkMode(context)) {
+                getThemeColor(context, android.R.attr.colorBackground)
+            } else {
+                getThemeColor(context, com.google.android.material.R.attr.colorOnBackground)
+            }
         }
     }
 
     /**
      * Set the background color of the navigation bar
      */
-    private fun setNavigationBarColor(context: Context, window: Window, isBottomNavVisible: Boolean) {
+    private fun setNavigationBarColor(
+        context: Context,
+        window: Window,
+        isBottomNavVisible: Boolean
+    ) {
         window.navigationBarColor = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M && !isDarkMode(context)) {
             getThemeColor(context, com.google.android.material.R.attr.colorOnBackground)
         } else {
-            if (isBottomNavVisible) getThemeColor(context, com.google.android.material.R.attr.colorSurfaceContainer)
-            else getThemeColor(context, android.R.attr.colorBackground)
+            if (isBottomNavVisible) {
+                getThemeColor(context, com.google.android.material.R.attr.colorSurfaceContainer)
+            } else {
+                getThemeColor(context, android.R.attr.colorBackground)
+            }
         }
     }
 
