@@ -512,6 +512,7 @@
     <string name="add_to_group">Add to group</string>
     <string name="uptime">%.2f%% uptime</string>
     <string name="change">Change</string>
+    <string name="gestures">Gestures</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
