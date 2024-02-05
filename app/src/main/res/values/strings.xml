@@ -469,6 +469,7 @@
     <string name="enqueueing_playlist_download">Enqueueing videos to download of playlist "%1$s"</string>
     <string name="audio_language">Audio language</string>
     <string name="default_language">Default</string>
+    <string name="behavior_when_minimized">Behavior when minimized</string>
 
     <!-- Backup & Restore Settings -->
     <string name="import_subscriptions_from">Import subscriptions from</string>
@@ -512,6 +513,7 @@
     <string name="add_to_group">Add to group</string>
     <string name="uptime">%.2f%% uptime</string>
     <string name="change">Change</string>
+    <string name="gestures">Gestures</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
