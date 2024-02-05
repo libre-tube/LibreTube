@@ -13,7 +13,7 @@ class UpdateAvailableDialog {
     fun showDialog(
         changelog: String,
         releaseUrl: String,
-        context: Context
+        context: Context,
     ) {
 
         MaterialAlertDialogBuilder(context)
