@@ -254,6 +254,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     // schedule task to save the watch position each second
     private var watchPositionTimer: Timer? = null
 
+    private var bufferingTimeoutTask: Runnable? = null
+
     private val playerListener = object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
             if (PlayerHelper.pipEnabled) {
@@ -347,6 +349,20 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 // finish PiP by finishing the activity
                 activity?.finish()
             }
+
+            // Buffering timeout after 10 Minutes
+            if (playbackState == Player.STATE_BUFFERING) {
+                if (bufferingTimeoutTask == null) {
+                    bufferingTimeoutTask = Runnable {
+                        exoPlayer.pause()
+                    }
+                }
+
+                handler.postDelayed(bufferingTimeoutTask!!, PlayerHelper.MAX_BUFFER_DELAY)
+            } else {
+                bufferingTimeoutTask?.let { handler.removeCallbacks(it) }
+            }
+
             super.onPlaybackStateChanged(playbackState)
         }
 

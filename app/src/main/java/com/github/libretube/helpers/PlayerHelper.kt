@@ -52,7 +52,12 @@ object PlayerHelper {
     const val CONTROL_TYPE = "control_type"
     const val SPONSOR_HIGHLIGHT_CATEGORY = "poi_highlight"
     const val ROLE_FLAG_AUTO_GEN_SUBTITLE = C.ROLE_FLAG_SUPPLEMENTARY
-    const val MINIMUM_BUFFER_DURATION = 1000 * 10 // exo default is 50s
+    private const val MINIMUM_BUFFER_DURATION = 1000 * 10 // exo default is 50s
+
+    /**
+     * The maximum amount of time to wait until the video starts playing: 10 minutes
+     */
+    const val MAX_BUFFER_DELAY = 10 * 60 * 1000L
 
     val repeatModes = listOf(
         Player.REPEAT_MODE_OFF to R.string.repeat_mode_none,
