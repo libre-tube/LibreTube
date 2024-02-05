@@ -12,4 +12,3 @@ data class UpdateInfo(
     val body: String,
     val html_url: String,
 ) : Parcelable
-/* name: version name; body: changelog; html_url: uri to latest release tag */
