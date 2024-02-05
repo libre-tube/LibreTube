@@ -551,4 +551,6 @@
     <string name="enqueueing_playlist_download">Zařazování videí z playlistu %1$s do fronty ke stažení</string>
     <string name="delete_all">Všechny stažené soubory budou smazány!</string>
     <string name="also_clear_watch_positions">Vymazat taky pozice sledování</string>
+    <string name="gestures">Gesta</string>
+    <string name="behavior_when_minimized">Chování při minimalizaci</string>
 </resources>
