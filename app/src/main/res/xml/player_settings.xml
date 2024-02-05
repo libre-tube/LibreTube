@@ -51,11 +51,14 @@
             app:key="skip_buttons"
             app:title="@string/skip_buttons" />
 
-        <SwitchPreferenceCompat
+        <ListPreference
             android:defaultValue="true"
             android:icon="@drawable/ic_window"
-            app:key="picture_in_picture"
-            app:title="@string/picture_in_picture" />
+            app:key="behavior_when_minimized"
+            app:title="@string/behavior_when_minimized"
+            app:entries="@array/onMinimize"
+            app:entryValues="@array/onMinimizeValues"
+            app:useSimpleSummaryProvider="true" />
 
         <SwitchPreferenceCompat
             android:disableDependentsState="true"
@@ -218,7 +221,6 @@
 
         <SwitchPreferenceCompat
             android:defaultValue="false"
-            android:dependency="picture_in_picture"
             android:icon="@drawable/ic_headphones"
             android:summary="@string/alternative_pip_controls_summary"
             app:key="alternative_pip_controls"
@@ -230,12 +232,6 @@
             app:defaultValue="false"
             app:key="pause_screen_off"
             app:title="@string/pauseOnScreenOff" />
-
-        <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:icon="@drawable/ic_pause_filled"
-            app:key="pause_on_quit"
-            app:title="@string/pause_on_quit" />
 
     </PreferenceCategory>
 

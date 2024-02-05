@@ -80,7 +80,6 @@ object PreferenceKeys {
     const val PLAYER_AUDIO_QUALITY_MOBILE = "player_audio_quality_mobile"
     const val DEFAULT_SUBTITLE = "default_subtitle"
     const val SKIP_BUTTONS = "skip_buttons"
-    const val PICTURE_IN_PICTURE = "picture_in_picture"
     const val PLAYER_RESIZE_MODE = "player_resize_mode"
     const val DEARROW = "dearrow"
     const val USE_HLS_OVER_DASH = "use_hls"
@@ -90,7 +89,6 @@ object PreferenceKeys {
     const val PLAYER_PINCH_CONTROL = "player_pinch_control"
     const val CAPTIONS_SIZE = "captions_size"
     const val DOUBLE_TAP_TO_SEEK = "double_tap_seek"
-    const val PAUSE_ON_QUIT = "pause_on_quit"
     const val ALTERNATIVE_PIP_CONTROLS = "alternative_pip_controls"
     const val SKIP_SILENCE = "skip_silence"
     const val ENABLED_VIDEO_CODECS = "video_codecs"
@@ -104,6 +102,7 @@ object PreferenceKeys {
     const val SHOW_TIME_LEFT = "show_time_left"
     const val FALLBACK_PIPED_PROXY = "fallback_piped_proxy"
     const val ALLOW_PLAYBACK_DURING_CALL = "playback_during_call"
+    const val BEHAVIOR_WHEN_MINIMIZED = "behavior_when_minimized"
 
     /**
      * Background mode

@@ -517,4 +517,16 @@
         <item>@string/category_music_offtopic</item>
         <item>@string/category_preview</item>
     </string-array>
+
+    <string-array name="onMinimize">
+        <item>@string/picture_in_picture</item>
+        <item>@string/pause</item>
+        <item>@string/none</item>
+    </string-array>
+
+    <string-array name="onMinimizeValues">
+        <item>pip</item>
+        <item>pause</item>
+        <item>none</item>
+    </string-array>
 </resources>

@@ -221,11 +221,16 @@ object PlayerHelper {
             false
         )
 
+    private val behaviorWhenMinimized = PreferenceHelper.getString(
+        PreferenceKeys.BEHAVIOR_WHEN_MINIMIZED,
+        "pip"
+    )
+
     val pipEnabled: Boolean
-        get() = PreferenceHelper.getBoolean(
-            PreferenceKeys.PICTURE_IN_PICTURE,
-            true
-        )
+        get() = behaviorWhenMinimized == "pip"
+
+    val pauseOnQuit: Boolean
+        get() = behaviorWhenMinimized == "pause"
 
     var autoPlayEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
@@ -304,12 +309,6 @@ object PlayerHelper {
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.DOUBLE_TAP_TO_SEEK,
             true
-        )
-
-    val pauseOnQuit: Boolean
-        get() = PreferenceHelper.getBoolean(
-            PreferenceKeys.PAUSE_ON_QUIT,
-            false
         )
 
     private val alternativePiPControls: Boolean
