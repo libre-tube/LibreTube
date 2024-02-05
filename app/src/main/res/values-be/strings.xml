@@ -277,8 +277,6 @@
     <string name="skip_segment">Прапусціць сегмент</string>
     <string name="sb_skip_manual">Прапусціць уручную</string>
     <string name="backup_customInstances">Карыстальніцкія асобнікі</string>
-    <string name="save_feed">Загружаць канал у фонавым рэжыме</string>
-    <string name="save_feed_summary">Загружайце стужку падпіскі ў фонавым рэжыме і не дазваляйце ёй перазагружацца пры пераключэнні ўкладак</string>
     <string name="preferences">Налады</string>
     <string name="play_next">Перайсці да наступнага</string>
     <string name="navigation_bar">Панэль навігацыі</string>
@@ -327,7 +325,7 @@
     <string name="privacy_alert">Абвестка аб прыватнасці</string>
     <string name="username_email">Працягнуць з адрасам электроннай пошты, які не рэкамендуецца\?</string>
     <string name="app_backup">Рэзервовае капіраванне праграмы</string>
-    <string name="hide_watched_from_feed">Схаваць прагледжаныя відэа са стужкі</string>
+    <string name="hide_watched_from_feed">Схаваць ужо прагледжаныя відэа</string>
     <string name="play_latest_videos">Прайграць апошнія відэа</string>
     <string name="nothing_selected">Нічога не выбрана!</string>
     <string name="failed_fetching_instances">Не ўдалося атрымаць даступныя асобнікі.</string>
@@ -543,4 +541,11 @@
     <string name="uptime">Час онлайн %.2f%%</string>
     <string name="grid_landscape">Стоўбцы (у гарызантальным рэжыме)</string>
     <string name="copy_tooltip">Капіяваць</string>
+    <string name="change_instance">Змяніць сервер</string>
+    <string name="suggest_change_instance">Спампоўка займае больш часу, чым звычайна. Паспрабуйце змяніць сервер</string>
+    <string name="export_groups">Экспартаваць групы каналаў</string>
+    <string name="import_groups">Імпартаваць групы каналаў</string>
+    <string name="delete_all">Усе спампоўкі будуць выдалены!</string>
+    <string name="download_playlist">Спампаваць плэйліст</string>
+    <string name="download_playlist_note">Выберыце максімальную якасць аўдыё/відэа для спампоўкі. Субтытры будуць спампоўвацца, толькі калі яны даступныя.</string>
 </resources>

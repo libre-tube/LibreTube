@@ -276,8 +276,6 @@
     <string name="invalid_filename">Nederīgs faila nosaukums!</string>
     <string name="playlists_order">Atskaņošanas sarakstu secība</string>
     <string name="playlistNameReversed">Atskaņošanas saraksta nosaukums (atpakaļgaitā)</string>
-    <string name="save_feed">Ielādēt plūsmu fonā</string>
-    <string name="save_feed_summary">Ielādē abonementu plūsmu fonā un neļauj tai automātiski atjaunoties</string>
     <string name="play_next">Atskaņot nākamo</string>
     <string name="no_subtitle">Bez subtitriem</string>
     <string name="download_paused">Lejupielāde iepauzēta</string>

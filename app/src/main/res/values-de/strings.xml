@@ -263,7 +263,6 @@
     <string name="network_wifi">Nur über WLAN</string>
     <string name="share_with_time">Mit Zeitstempel teilen</string>
     <string name="export_subscriptions">Abos exportieren</string>
-    <string name="save_feed_summary">Lade dein Abo-Feed im Hintergrund und verhindere, dass es beim Tabwechsel neu geladen werden muss</string>
     <string name="delete">Aus Downloads löschen</string>
     <string name="skip_buttons_summary">Schaltflächen anzeigen, um zum nächsten oder vorherigen Video zu springen</string>
     <string name="resize_mode_zoom">Vergrößern</string>
@@ -273,7 +272,6 @@
     <string name="new_videos_badge">Indikator für neue Videos</string>
     <string name="preferences">Einstellungen</string>
     <string name="backup_customInstances">Benutzerdefinierte Instanzen</string>
-    <string name="save_feed">Feed im Hintergrund laden</string>
     <string name="play_next">Als nächstes abspielen</string>
     <string name="break_reminder_time">Minuten bis zur Benachrichtigung</string>
     <string name="player_resize_mode">Skalierungsmodus</string>
@@ -324,7 +322,7 @@
     <string name="no_comments_available">Dieses Video hat keine Kommentare.</string>
     <string name="comments_disabled">Kommentare sind durch den Uploader deaktiviert.</string>
     <string name="all_caught_up_summary">Du hast alle neuen Videos gesehen</string>
-    <string name="swipe_controls_summary">Verwende im Vollbildmodus eine Wischgeste, um Helligkeit und Lautstärke anzupassen</string>
+    <string name="swipe_controls_summary">Im Vollbildmodus swipen, um Helligkeit und Lautstärke anzupassen</string>
     <string name="captions_size">Untertitelgröße</string>
     <string name="double_tap_seek">Doppeltippen zum Suchen</string>
     <string name="all_caught_up">Du bist auf dem neuesten Stand</string>
@@ -421,11 +419,11 @@
     <string name="alphabetic">Alphabetisch A→Z</string>
     <string name="creation_date">Erstellungsdatum (neueste zuerst)</string>
     <string name="creation_date_reversed">Erstellungsdatum (älteste zuerst)</string>
-    <string name="export_subscriptions_to">Abos exportieren nach</string>
+    <string name="export_subscriptions_to">Abos exportieren im Format von</string>
     <string name="import_format_newpipe">NewPipe</string>
     <string name="import_format_freetube">FreeTube</string>
     <string name="import_format_youtube_csv">YouTube (als CSV)</string>
-    <string name="import_subscriptions_from">Abos importieren aus</string>
+    <string name="import_subscriptions_from">Abos importieren im Format von</string>
     <string name="export_playlists_to">Playlists exportieren nach</string>
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="import_playlists_from">Playlists importieren aus</string>
@@ -540,4 +538,15 @@
     <string name="copy_tooltip">Kopieren</string>
     <string name="export_groups">Kanalgruppen exportieren</string>
     <string name="import_groups">Kanalgruppen importieren</string>
+    <string name="change_instance">Instanz ändern</string>
+    <string name="change">Ändern</string>
+    <string name="delete_all">Alle Downloads werden gelöscht!</string>
+    <string name="default_language">Standard</string>
+    <string name="download_playlist">Playlist herunterladen</string>
+    <string name="audio_language">Audio-Sprache</string>
+    <string name="suggest_change_instance">Laden dauert länger als üblich. Eventuell Instanz wechseln?</string>
+    <string name="enqueue_playlist_description">Benachrichtigen, wenn Videos einer Playlist der Download-Warteschlange hinzugefügt werden.</string>
+    <string name="enqueueing_playlist_download">Videos aus Playlist %1$s werden zum Download eingereiht</string>
+    <string name="also_clear_watch_positions">Wiedergabepositionen ebenso löschen</string>
+    <string name="download_playlist_note">Bitte wähle die maximale Audio-/Videoqualität zum Downloaden. Untertitel werden nur heruntergeladen, falls sie verfügbar sind.</string>
 </resources>

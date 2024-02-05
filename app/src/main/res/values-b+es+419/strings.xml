@@ -273,8 +273,6 @@
     <string name="local_subscriptions">Suscripciones locales</string>
     <string name="preferences">Preferencias</string>
     <string name="backup_customInstances">Instancias personalizadas</string>
-    <string name="save_feed">Cargar contenido en segundo plano</string>
-    <string name="save_feed_summary">Cargar contenido de las suscripciones en segundo plano para evitar que la pestaña se auto-refresque</string>
     <string name="play_next">Reproducir el siguiente</string>
     <string name="navigation_bar">Barra de navegación</string>
     <string name="change_region">Tendencias parece no estar disponible para la región actual. Selecciona otra en la configuración.</string>

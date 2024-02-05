@@ -87,18 +87,13 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val loadFeedInBackground = PreferenceHelper.getBoolean(
-            PreferenceKeys.SAVE_FEED,
-            false
-        )
-
         setupSortAndFilter()
 
         binding.subRefresh.isEnabled = true
         binding.subProgress.isVisible = true
 
-        if (!isCurrentTabSubChannels && (viewModel.videoFeed.value == null || !loadFeedInBackground)) {
-            viewModel.videoFeed.value = null
+        if (!isCurrentTabSubChannels && viewModel.videoFeed.value == null) {
+            viewModel.fetchSubscriptions(requireContext())
             viewModel.fetchFeed(requireContext())
         }
 
@@ -122,15 +117,8 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
             binding.subRefresh.isRefreshing = true
             isCurrentTabSubChannels = !isCurrentTabSubChannels
 
-            if (isCurrentTabSubChannels) {
-                if (viewModel.subscriptions.value == null) {
-                    viewModel.fetchSubscriptions(requireContext())
-                } else {
-                    showSubscriptions()
-                }
-            } else {
-                showFeed()
-            }
+            if (isCurrentTabSubChannels) showSubscriptions() else showFeed()
+
             binding.subChannelsContainer.isVisible = isCurrentTabSubChannels
             binding.subFeedContainer.isGone = isCurrentTabSubChannels
         }
@@ -202,13 +190,11 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
         }
     }
 
-    private fun fetchSortOptions(): Array<SelectableOption> {
-        return resources
-            .getStringArray(R.array.sortOptions)
+    private fun fetchSortOptions(): List<SelectableOption> {
+        return resources.getStringArray(R.array.sortOptions)
             .mapIndexed { index, option ->
                 SelectableOption(isSelected = index == selectedSortOrder, name = option)
             }
-            .toTypedArray()
     }
 
     override fun onDestroyView() {
@@ -282,9 +268,9 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
             val isVideo = !it.isShort && !it.isLive
 
             return@filter when {
-                !ContentFilter.SHORTS.isEnabled() && it.isShort -> false
-                !ContentFilter.VIDEOS.isEnabled() && isVideo -> false
-                !ContentFilter.LIVESTREAMS.isEnabled() && it.isLive -> false
+                !ContentFilter.SHORTS.isEnabled && it.isShort -> false
+                !ContentFilter.VIDEOS.isEnabled && isVideo -> false
+                !ContentFilter.LIVESTREAMS.isEnabled && it.isLive -> false
                 else -> true
             }
         }

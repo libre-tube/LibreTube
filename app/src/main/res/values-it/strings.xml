@@ -273,8 +273,6 @@
     <string name="download_channel_name">Servizio di Download</string>
     <string name="push_channel_name">Operatore di notifica</string>
     <string name="push_channel_description">Mostra una notifica quando sono disponibili nuovi video.</string>
-    <string name="save_feed">Carica flusso in secondo piano</string>
-    <string name="save_feed_summary">Carica il flusso di iscrizioni in secondo piano e impedisci che venga ricaricato quando si cambia scheda</string>
     <string name="legacy_subscriptions">Vista delle iscrizioni obsoleta</string>
     <string name="navigation_bar">Barra di navigazione</string>
     <string name="change_region">La Tendenza sembra non essere disponibile per la regione attuale. Selezionane un\'altra nelle impostazioni.</string>
@@ -543,4 +541,15 @@
     <string name="copy_tooltip">Copia</string>
     <string name="export_groups">Esporta gruppi di canali</string>
     <string name="import_groups">Importa gruppi di canali</string>
+    <string name="change_instance">Cambia istanza</string>
+    <string name="suggest_change_instance">Il caricamento sta impiegando più tempo del solito. Prova a cambiare istanza</string>
+    <string name="change">Cambia</string>
+    <string name="download_playlist_note">Seleziona la qualità audio/video massima da scaricare. I sottotitoli verranno scaricati solo se disponibili.</string>
+    <string name="download_playlist">Scarica playlist</string>
+    <string name="enqueueing_playlist_download">Accodamento di video da scaricare della playlist %1$s</string>
+    <string name="delete_all">Tutti i download verranno eliminati!</string>
+    <string name="enqueue_playlist_description">Mostra una notifica quando si accodano video di una playlist da scaricare.</string>
+    <string name="audio_language">Lingua dell\'audio</string>
+    <string name="default_language">Predefinita</string>
+    <string name="also_clear_watch_positions">Cancella anche le posizioni di riproduzione</string>
 </resources>

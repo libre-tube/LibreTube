@@ -133,7 +133,7 @@ class HomeFragment : Fragment() {
 
         homeViewModel.loadHomeFeed(
             context = requireContext(),
-            savedFeed = subscriptionsViewModel.videoFeed.value,
+            subscriptionsViewModel = subscriptionsViewModel,
             visibleItems = visibleItems,
             onUnusualLoadTime = ::showChangeInstanceSnackBar
         )
@@ -167,7 +167,10 @@ class HomeFragment : Fragment() {
         makeVisible(binding.bookmarksTV, binding.bookmarksRV)
         with (binding.bookmarksRV) {
             layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
-            adapter = PlaylistBookmarkAdapter(bookmarks.toMutableList())
+            adapter = PlaylistBookmarkAdapter(
+                bookmarks.toMutableList(),
+                PlaylistBookmarkAdapter.Companion.BookmarkMode.HOME
+            )
         }
     }
 

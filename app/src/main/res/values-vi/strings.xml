@@ -234,11 +234,9 @@
     <string name="local_subscriptions">Đăng ký cục bộ</string>
     <string name="preferences">Sở thích</string>
     <string name="backup_customInstances">Thực thể tùy chỉnh</string>
-    <string name="save_feed">Tải nguồn cấp dữ liệu trong nền</string>
     <string name="download_channel_name">Dịch vụ tải về</string>
     <string name="no_subtitles_available">Không có phụ đề</string>
     <string name="repeat_mode_current">Hiện tại</string>
-    <string name="save_feed_summary">Tải nguồn cấp dữ liệu đăng ký ở chế độ nền và ngăn nó tự động làm mới</string>
     <string name="break_reminder_time">Vài phút trước khi được nhắc nhở</string>
     <string name="legacy_subscriptions">Chế độ xem trang đăng ký cổ điển</string>
     <string name="device_info">Thông tin thiết bị</string>

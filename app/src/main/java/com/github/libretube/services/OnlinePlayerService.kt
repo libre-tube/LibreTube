@@ -30,6 +30,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.WatchPosition
+import com.github.libretube.enums.NotificationId
 import com.github.libretube.extensions.parcelableExtra
 import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toID
@@ -40,7 +41,6 @@ import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.util.NowPlayingNotification
-import com.github.libretube.util.NowPlayingNotification.Companion.PLAYER_NOTIFICATION_ID
 import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -159,7 +159,7 @@ class OnlinePlayerService : LifecycleService() {
             .setSmallIcon(R.drawable.ic_launcher_lockscreen)
             .build()
 
-        startForeground(PLAYER_NOTIFICATION_ID, notification)
+        startForeground(NotificationId.PLAYER_PLAYBACK.id, notification)
     }
 
     /**

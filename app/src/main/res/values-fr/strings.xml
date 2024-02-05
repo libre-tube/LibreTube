@@ -270,8 +270,6 @@
     <string name="local_subscriptions">Abonnements locaux</string>
     <string name="preferences">Préférences</string>
     <string name="push_channel_name">Agent de notification</string>
-    <string name="save_feed">Charger le flux en arrière-plan</string>
-    <string name="save_feed_summary">Charger le flux d\'abonnement en arrière-plan et éviter qu\'il ne soit rechargé lorsqu\'on change d\'onglet</string>
     <string name="play_next">Lire à la suite</string>
     <string name="navigation_bar">Barre de navigation</string>
     <string name="download_channel_name">Service de Téléchargement</string>
@@ -543,4 +541,15 @@
     <string name="copy_tooltip">Copier</string>
     <string name="export_groups">Exporter des groupes de chaînes</string>
     <string name="import_groups">Importer des groupes de chaînes</string>
+    <string name="suggest_change_instance">Le chargement prend plus de temps que d\'habitude. Envisagez de changer d\'instance</string>
+    <string name="change_instance">Changer d\'instance</string>
+    <string name="change">Changer</string>
+    <string name="default_language">Par défaut</string>
+    <string name="delete_all">Tous les téléchargements seront supprimés !</string>
+    <string name="download_playlist_note">Veuillez sélectionner la qualité audio/vidéo maximale à télécharger. Les sous-titres ne seront téléchargés que s\'ils sont disponibles.</string>
+    <string name="enqueueing_playlist_download">Mise en file d\'attente des vidéos à télécharger de la liste de lecture %1$s</string>
+    <string name="download_playlist">Télécharger la liste de lecture</string>
+    <string name="enqueue_playlist_description">Affiche une notification lors de la mise en file d\'attente des vidéos d\'une liste de lecture à télécharger.</string>
+    <string name="audio_language">Langue de l\'audio</string>
+    <string name="also_clear_watch_positions">Effacez également les positions de lecture</string>
 </resources>

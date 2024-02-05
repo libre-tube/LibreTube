@@ -273,11 +273,9 @@
     <string name="push_channel_description">Értesítés megjelenítése, amikor új közvetítések érhetők el.</string>
     <string name="navigation_bar">Navigációs sáv</string>
     <string name="download_channel_description">Értesítés megjelenítése média letöltésekor.</string>
-    <string name="save_feed_summary">Töltse be az feliratkozott videófolyamot a háttérben, és akadályozza meg az automatikus frissítést</string>
     <string name="skip_segment">Szakasz kihagyása</string>
     <string name="sb_skip_manual">Manuális kihagyás</string>
     <string name="playback_pitch">Hangmagasság</string>
-    <string name="save_feed">Videófolyam betöltése a háttérben</string>
     <string name="change_region">A felkapott úgy tűnik, hogy nem elérhető a jelenlegi régió számára. Válasszon egy másikat a beállításokban.</string>
     <string name="added_to_playlist">Hozzáadva a lejátszási listához %1$s</string>
     <string name="invalid_filename">Érvénytelen fájlnév!</string>
@@ -318,7 +316,7 @@
     <string name="volume">Hangerő</string>
     <string name="auto">Automatikus</string>
     <string name="brightness">Fényerő</string>
-    <string name="swipe_controls_summary">Húzási gesztusok használata a hangerő és a fényerő beállításához</string>
+    <string name="swipe_controls_summary">Húzás hangerő és a fényerő beállításához teljes képernyős módban</string>
     <string name="swipe_controls">Húzási vezérlők</string>
     <string name="defaults">Alapértékek</string>
     <string name="pop_up">Felugró</string>
@@ -344,7 +342,7 @@
     <string name="theme_monochrome">Minimalista monokróm</string>
     <string name="play_latest_videos">Legújabb videók lejátszása</string>
     <string name="failed_fetching_instances">Nem sikerült lekérni az elérhető példányokat.</string>
-    <string name="hide_watched_from_feed">Megnézett videó elrejtése a videófolyamból</string>
+    <string name="hide_watched_from_feed">A már megnézett videók elrejtése</string>
     <string name="hide_watched_from_feed_summary">Ne mutassa a már 90%-ig megnézett videókat a feliratkozások lapon</string>
     <string name="playlistUrl">Lejátszási lista URL</string>
     <string name="pause_on_quit">Szüneteltet bezárásnál</string>
@@ -493,7 +491,7 @@
     <string name="tooltip_sponsorblock">SzponzorBlokk váltása</string>
     <string name="tooltip_options">Lehetőségek</string>
     <string name="resolution_limited">korlátozott</string>
-    <string name="tooltip_watch_position">Pozíció figyelése</string>
+    <string name="tooltip_watch_position">Megtekintési pozíció</string>
     <string name="tooltip_scroll_to_top">Görgetés a tetejére</string>
     <string name="tooltip_minimize">Minimalizálás</string>
     <string name="registration_disabled">Regisztráció letiltva</string>
@@ -529,7 +527,7 @@
     <string name="invalid_input">Érvénytelen bemenet</string>
     <string name="disable_sleep_timer">Elalvási időzítő kikapcsolása</string>
     <string name="rich_caption_rendering">Gazdag felirat megjelenítése</string>
-    <string name="watched">Megtekintett</string>
+    <string name="watched">Megnézett</string>
     <string name="rich_caption_rendering_summary">Webes feliratok megjelenítése, részletesebb és testreszabhatóbb élmény érdekében</string>
     <string name="uptime">%.2f%% elérhetőség</string>
     <string name="start_sleep_timer">Elalvási időzítő indítása</string>
@@ -537,4 +535,17 @@
     <string name="finished">Befejezett</string>
     <string name="no_segments_found">Még nincsenek szakaszok ehhez a videóhoz.</string>
     <string name="copy_tooltip">Másolás</string>
+    <string name="default_language">Alapértelmezett</string>
+    <string name="change">Váltás</string>
+    <string name="suggest_change_instance">A betöltés az átlagosnál tovább tart. Fontolja meg, hogy példányt vált</string>
+    <string name="change_instance">Példány váltása</string>
+    <string name="audio_language">Hang nyelve</string>
+    <string name="export_groups">Csatornacsoportok exportálása</string>
+    <string name="download_playlist">Lejátszási lista letöltése</string>
+    <string name="delete_all">Az összes letöltés törölve lesz!</string>
+    <string name="import_groups">Csatornacsoportok importálása</string>
+    <string name="enqueueing_playlist_download">Videók sorbaállítása letöltéshez a(z) %1$s lejátszási listából</string>
+    <string name="download_playlist_note">Válassza ki a maximális letöltendő hang/videóminőséget. A feliratok csak akkor lesznek letöltve, ha elérhetőek.</string>
+    <string name="enqueue_playlist_description">Értesítés megjelenítése, amikor egy lejátszási lista videóit állítja sorba letöltéshez.</string>
+    <string name="also_clear_watch_positions">A megtekintési pozíciókat is törölje</string>
 </resources>

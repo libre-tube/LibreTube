@@ -273,8 +273,6 @@
     <string name="local_subscriptions">Lokální odběry</string>
     <string name="preferences">Předvolby</string>
     <string name="backup_customInstances">Vlastní instance</string>
-    <string name="save_feed">Načítat zdroj v pozadí</string>
-    <string name="save_feed_summary">Načítat zdroj odběrů v pozadí a zabránit jeho obnovování při přepínání karet</string>
     <string name="play_next">Přehrát jako další</string>
     <string name="navigation_bar">Navigační lišta</string>
     <string name="change_region">Zdá se, že trendy nejsou pro aktuální oblast k dispozici. V nastavení prosím vyberte jinou.</string>
@@ -542,4 +540,15 @@
     <string name="copy_tooltip">Kopírovat</string>
     <string name="import_groups">Importovat skupiny kanálů</string>
     <string name="export_groups">Exportovat skupiny kanállů</string>
+    <string name="change_instance">Změnit instanci</string>
+    <string name="suggest_change_instance">Načítání trvá déle než obvykle. Zvažte změnu instance</string>
+    <string name="change">Změnit</string>
+    <string name="enqueue_playlist_description">Zobrazí oznámení při zařazování videí z playlistu do fronty ke stažení.</string>
+    <string name="audio_language">Jazyk zvuku</string>
+    <string name="default_language">Výchozí</string>
+    <string name="download_playlist">Stáhnout playlist</string>
+    <string name="download_playlist_note">Vyberte prosím maximální kvalitu zvuku/videa ke stažení. Titulky budou staženy pouze pokud budou dostupné.</string>
+    <string name="enqueueing_playlist_download">Zařazování videí z playlistu %1$s do fronty ke stažení</string>
+    <string name="delete_all">Všechny stažené soubory budou smazány!</string>
+    <string name="also_clear_watch_positions">Vymazat taky pozice sledování</string>
 </resources>

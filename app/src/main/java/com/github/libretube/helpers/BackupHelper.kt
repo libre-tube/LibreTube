@@ -55,11 +55,12 @@ object BackupHelper {
         Database.subscriptionGroupsDao().insertAll(backupFile.channelGroups.orEmpty())
 
         backupFile.localPlaylists?.forEach {
-            Database.localPlaylistsDao().createPlaylist(it.playlist)
-            val playlistId = Database.localPlaylistsDao().getAll().last().playlist.id
+            // the playlist will be created with an id of 0, so that Room will auto generate a
+            // new playlist id to avoid conflicts with existing local playlists
+            val playlistId = Database.localPlaylistsDao().createPlaylist(it.playlist.copy(id = 0))
             it.videos.forEach { playlistItem ->
-                playlistItem.playlistId = playlistId
-                Database.localPlaylistsDao().addPlaylistVideo(playlistItem)
+                playlistItem.playlistId = playlistId.toInt()
+                Database.localPlaylistsDao().addPlaylistVideo(playlistItem.copy(id = 0))
             }
         }
 
@@ -90,18 +91,19 @@ object BackupHelper {
                     is Float -> putFloat(key, value)
                     is Long -> putLong(key, value)
                     is Int -> {
-                        when {
-                            // we only use integers for SponsorBlock colors and the start fragment
-                            key == PreferenceKeys.START_FRAGMENT || key.orEmpty().contains("_color") -> putInt(
-                                key,
-                                value
-                            )
-                            else -> putLong(key, value.toLong())
+                        // we only use integers for SponsorBlock colors and the start fragment
+                        if (key == PreferenceKeys.START_FRAGMENT || "_color" in key.orEmpty()) {
+                            putInt(key, value)
+                        } else {
+                            putLong(key, value.toLong())
                         }
                     }
 
                     is String -> {
-                        if (key == PreferenceKeys.HOME_TAB_CONTENT) {
+                        if (
+                            key == PreferenceKeys.HOME_TAB_CONTENT ||
+                            key == PreferenceKeys.SELECTED_FEED_FILTERS
+                        ) {
                             putStringSet(key, value.split(",").toSet())
                         } else {
                             putString(key, value)

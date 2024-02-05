@@ -273,8 +273,6 @@
     <string name="local_subscriptions">本地订阅</string>
     <string name="backup_customInstances">自定义实例</string>
     <string name="preferences">选项</string>
-    <string name="save_feed">后台加载订阅源</string>
-    <string name="save_feed_summary">后台加载订阅源并防止其在切换标签页时重新加载</string>
     <string name="play_next">播放下一个</string>
     <string name="navigation_bar">导航栏</string>
     <string name="change_region">“时下流行”似乎对当前地区不可用。请在设置中另选一个地区。</string>
@@ -536,4 +534,15 @@
     <string name="copy_tooltip">复制</string>
     <string name="import_groups">导入频道组</string>
     <string name="export_groups">导出频道组</string>
+    <string name="change_instance">更换实例</string>
+    <string name="suggest_change_instance">加载所花时间比平常要多。请考虑更换实例</string>
+    <string name="change">更换</string>
+    <string name="download_playlist_note">请选择要下载的最高音视频质量。字幕仅会在可用时下载。</string>
+    <string name="delete_all">所有已下载项目将被删除！</string>
+    <string name="download_playlist">下载播放列表</string>
+    <string name="enqueue_playlist_description">将待下载的播放列表视频加入队列时显示通知。</string>
+    <string name="enqueueing_playlist_download">正将播放列表 %1$s 中的待下载视频加入队列</string>
+    <string name="audio_language">音频语言</string>
+    <string name="default_language">默认</string>
+    <string name="also_clear_watch_positions">同样清除观看位置</string>
 </resources>

@@ -303,14 +303,12 @@
     <string name="swipe_controls">Ovládanie potiahnutím prstom</string>
     <string name="forward">Dopredu</string>
     <string name="backup_restore">Záloha a obnovenie</string>
-    <string name="save_feed_summary">Načíta stream odberu na pozadí a zabráni jeho opätovnému načítaniu pri prepínaní kariet</string>
     <string name="play_next">Potom prehrať</string>
     <string name="limit_to_runtime">Obmedziť podľa času spustenia</string>
     <string name="audio_track">Zvuková stopa</string>
     <string name="backup">Záloha</string>
     <string name="local_subscriptions">Lokálne odbery</string>
     <string name="preferences">Predvoľby</string>
-    <string name="save_feed">Načítať stream na pozadí</string>
     <string name="privacy_alert">Upozornenie o ochrane osobných údajov</string>
     <string name="captions_size">Veľkosť titulkov</string>
     <string name="audio_player">Prehrávač zvuku</string>
@@ -542,4 +540,15 @@
         <item quantity="other">Pred %d rokmi</item>
     </plurals>
     <string name="import_format_newpipe">NewPipe</string>
+    <string name="change_instance">Zmeniť inštanciu</string>
+    <string name="suggest_change_instance">Načítanie trvá dlhšie ako zvyčajne. Zvážte zmenu inštancie</string>
+    <string name="change">Zmeniť</string>
+    <string name="audio_language">Jazyk zvuku</string>
+    <string name="default_language">Predvolený</string>
+    <string name="enqueueing_playlist_download">Videá zo zoznamu skladieb %1$s sú v poradí na stiahnutie</string>
+    <string name="enqueue_playlist_description">Zobrazí upozornenie pri zaradení videí zo zoznamu skladieb, ktoré sa majú stiahnuť.</string>
+    <string name="delete_all">Všetky stiahnuté súbory budú vymazané!</string>
+    <string name="download_playlist">Stiahnuť zoznam skladieb</string>
+    <string name="download_playlist_note">Vyberte požadovanú maximálnu kvalitu zvuku/videa na stiahnutie. Titulky sa stiahnu len vtedy, ak sú k dispozícii.</string>
+    <string name="also_clear_watch_positions">Vymazať aj pozície sledovania</string>
 </resources>

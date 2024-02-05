@@ -25,6 +25,7 @@ import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.Download
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
+import com.github.libretube.enums.NotificationId
 import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.extensions.getContentLength
 import com.github.libretube.extensions.parcelableExtra
@@ -411,7 +412,7 @@ class DownloadService : LifecycleService() {
             .setOnlyAlertOnce(true)
             .setGroupSummary(true)
 
-        startForeground(DOWNLOAD_PROGRESS_NOTIFICATION_ID, summaryNotificationBuilder.build())
+        startForeground(NotificationId.DOWNLOAD_IN_PROGRESS.id, summaryNotificationBuilder.build())
     }
 
     private fun getNotificationBuilder(item: DownloadItem): NotificationCompat.Builder {
@@ -534,7 +535,6 @@ class DownloadService : LifecycleService() {
     }
 
     companion object {
-        private const val DOWNLOAD_PROGRESS_NOTIFICATION_ID = 2
         private const val DOWNLOAD_NOTIFICATION_GROUP = "download_notification_group"
         const val ACTION_SERVICE_STARTED =
             "com.github.libretube.services.DownloadService.ACTION_SERVICE_STARTED"

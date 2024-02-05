@@ -358,6 +358,12 @@
             android:exported="false" />
 
         <service
+            android:name=".services.PlaylistDownloadEnqueueService"
+            android:foregroundServiceType="dataSync"
+            android:enabled="true"
+            android:exported="false" />
+
+        <service
             android:name=".services.OnlinePlayerService"
             android:foregroundServiceType="mediaPlayback"
             android:enabled="true"

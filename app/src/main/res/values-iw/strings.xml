@@ -271,9 +271,7 @@
     <string name="backup_customInstances">מופעים מותאמים אישית</string>
     <string name="download_channel_name">שירות ההורדות</string>
     <string name="download_channel_description">מציג התראה בזמן הורדת מדיה.</string>
-    <string name="save_feed">לטעון את ערוץ ההזנות ברקע</string>
     <string name="push_channel_name">מתפעל התראות</string>
-    <string name="save_feed_summary">לטעון את ערוץ ההזנה של המינוי ברקע ולמנוע את רענונו מחדש אוטומטית</string>
     <string name="push_channel_description">מציג התראה כשתזרימים חדשים זמינים.</string>
     <string name="play_next">לנגן את הבא</string>
     <string name="navigation_bar">סרגל ניווט</string>

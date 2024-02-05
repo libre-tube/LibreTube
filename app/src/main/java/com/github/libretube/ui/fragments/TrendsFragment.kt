@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import com.github.libretube.R
 import com.github.libretube.databinding.FragmentTrendsBinding
 import com.github.libretube.ui.activities.SettingsActivity
@@ -39,6 +41,7 @@ class TrendsFragment : DynamicLayoutManagerFragment() {
         viewModel.trendingVideos.observe(viewLifecycleOwner) { videos ->
             if (videos == null) return@observe
 
+            binding.recview.layoutManager?.onRestoreInstanceState(viewModel.recyclerViewState)
             binding.recview.adapter = VideosAdapter(videos.toMutableList())
             binding.homeRefresh.isRefreshing = false
             binding.progressBar.isGone = true
@@ -57,6 +60,12 @@ class TrendsFragment : DynamicLayoutManagerFragment() {
         binding.homeRefresh.setOnRefreshListener {
             viewModel.fetchTrending(requireContext())
         }
+
+        viewLifecycleOwner.lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onDestroy(owner: LifecycleOwner) {
+                viewModel.recyclerViewState = _binding?.recview?.layoutManager?.onSaveInstanceState()
+            }
+        })
 
         viewModel.fetchTrending(requireContext())
     }

@@ -60,7 +60,6 @@
     <string name="local_subscriptions">સ્થાનિક લવાજમ</string>
     <string name="preferences">પસંદગીઓ</string>
     <string name="backup_customInstances">કસ્ટમ ઉદાહરણો</string>
-    <string name="save_feed_summary">પાશ્વ ભાગમાં લવાજમ ફીડને લાવો અને તેને આપોઆપ-તાજુ થવાથી અટકાવો</string>
     <string name="queue">કતાર</string>
     <string name="time">સમય</string>
     <string name="notification_time">સૂચના સમય</string>
@@ -133,7 +132,6 @@
     <string name="renamePlaylist">પ્લેલીસ્ટનું નામ બદલો</string>
     <string name="mobile_data">મોબાઇલ માહિતી</string>
     <string name="sb_skip_manual">જાતે અવગણો</string>
-    <string name="save_feed">પાશ્ર્વભાગમાં ફીડને લાવો</string>
     <string name="navigation_bar">શોધખોળ પટ્ટી</string>
     <string name="material_you">સામગ્રી તમે</string>
     <string name="navbar_order">ક્રમ</string>

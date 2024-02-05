@@ -1,13 +1,12 @@
 [versions]
 appcompat = "1.6.1"
 core = "1.12.0"
-gradle = "8.2.1"
+gradle = "8.2.2"
 kotlin = "1.9.22"
 lifecycle = "2.7.0"
 constraintlayout = "2.1.4"
 material = "1.11.0"
 navigation = "2.7.6"
-legacySupport = "1.0.0"
 preference = "1.2.1"
 extJunit = "1.1.5"
 espresso = "3.5.1"
@@ -22,13 +21,17 @@ room = "2.6.1"
 kotlinxSerialization = "1.6.2"
 kotlinxDatetime = "0.5.0"
 kotlinxRetrofit = "1.0.0"
+media = "1.7.0"
 media3 = "1.2.1"
 activity = "1.8.2"
 fragment = "1.6.2"
 uiautomator = "2.2.0"
-benchmarkMacroJunit4 = "1.2.2"
-baselineprofile = "1.2.2"
+benchmarkMacroJunit4 = "1.2.3"
+baselineprofile = "1.2.3"
 profileinstaller = "1.3.1"
+paging = "3.2.1"
+collection = "1.4.0"
+swiperefreshlayout = "1.1.0"
 
 [libraries]
 androidx-activity = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity" }
@@ -43,11 +46,11 @@ material = { group = "com.google.android.material", name = "material", version.r
 androidx-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation" }
 androidx-navigation-ui = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation" }
 androidx-navigation-safeargs = { group = "androidx.navigation", name = "navigation-safe-args-gradle-plugin", version.ref = "navigation" }
-androidx-legacySupport = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacySupport" }
 androidx-preference = { group = "androidx.preference", name = "preference-ktx", version.ref = "preference" }
 androidx-test-junit = { group = "androidx.test.ext", name = "junit", version.ref = "extJunit" }
 androidx-test-espressoCore = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
 androidx-work-runtime = { group = "androidx.work", name="work-runtime-ktx", version.ref="workRuntime" }
+androidx-media = { group = "androidx.media", name = "media", version.ref = "media" }
 androidx-media3-exoplayer = { group = "androidx.media3", name="media3-exoplayer", version.ref="media3" }
 androidx-media3-exoplayer-hls = { group = "androidx.media3", name="media3-exoplayer-hls", version.ref="media3" }
 androidx-media3-exoplayer-dash = { group = "androidx.media3", name="media3-exoplayer-dash", version.ref="media3" }
@@ -72,6 +75,9 @@ kotlinx-serialization-retrofit = { group = "com.jakewharton.retrofit", name = "r
 androidx-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
 androidx-benchmark-macro-junit4 = { group = "androidx.benchmark", name = "benchmark-macro-junit4", version.ref = "benchmarkMacroJunit4" }
 androidx-profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "profileinstaller" }
+androidx-paging = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "paging" }
+androidx-collection = { group = "androidx.collection", name = "collection", version.ref = "collection" }
+androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 
 [plugins]
 androidTest = { id = "com.android.test", version.ref = "gradle" }

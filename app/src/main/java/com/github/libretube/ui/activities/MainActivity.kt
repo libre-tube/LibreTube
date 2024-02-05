@@ -105,12 +105,8 @@ class MainActivity : BaseActivity() {
             R.id.homeFragment
         }
 
-        // sets the navigation bar color to the previously calculated color
-        window.navigationBarColor = if (binding.bottomNav.menu.size() > 0) {
-            ThemeHelper.getThemeColor(this, com.google.android.material.R.attr.colorSurfaceContainer)
-        } else {
-            ThemeHelper.getThemeColor(this, android.R.attr.colorBackground)
-        }
+        // sets the color if the navigation bar is visible
+        ThemeHelper.setSystemBarColors(this, window, binding.bottomNav.menu.size() > 0)
 
         // set default tab as start fragment
         navController.graph = navController.navInflater.inflate(R.navigation.nav).also {
@@ -176,7 +172,7 @@ class MainActivity : BaseActivity() {
 
                 R.id.searchResultFragment -> {
                     navController.popBackStack(R.id.searchFragment, true) ||
-                        navController.popBackStack()
+                            navController.popBackStack()
                 }
 
                 else -> {

@@ -232,7 +232,6 @@
     <string name="navigation_bar">ナビゲーションバー</string>
     <string name="local_subscriptions">端末内の登録チャンネル</string>
     <string name="backup_customInstances">カスタムインスタンス</string>
-    <string name="save_feed">バックグラウンドでフィードを読み込み</string>
     <string name="play_next">次の動画</string>
     <string name="new_videos_badge_summary">新着動画があれば数をバッジに表示します</string>
     <string name="confirm_unsubscribing">登録解除の確認</string>
@@ -263,7 +262,6 @@
     <string name="skip_segment">ここをスキップ</string>
     <string name="sb_skip_manual">手動でスキップ</string>
     <string name="preferences">設定</string>
-    <string name="save_feed_summary">登録チャンネルをバックグラウンドで読み込み、タブ切り替え時には読み込みません</string>
     <string name="playback_pitch">ピッチ</string>
     <string name="error_occurred">エラー</string>
     <string name="copied">コピーしました</string>
@@ -477,7 +475,7 @@
     <string name="tooltip_sort">並び替え</string>
     <string name="tooltip_repeat">リピート</string>
     <string name="tooltip_reverse">逆順</string>
-    <string name="tooltip_watch_position">視聴済みの位置</string>
+    <string name="tooltip_watch_position">再生済みの位置</string>
     <string name="resolution_limited">選択</string>
     <string name="tooltip_minimize">最小化</string>
     <string name="tooltip_fullscreen">全画面</string>
@@ -536,4 +534,15 @@
     <string name="copy_tooltip">コピー</string>
     <string name="import_groups">チャンネルのグループをインポート</string>
     <string name="export_groups">チャンネルのグループをエクスポート</string>
+    <string name="change">変更</string>
+    <string name="change_instance">インスタンスを変更</string>
+    <string name="suggest_change_instance">読み込み時間が長いです。インスタンスの変更も可能です</string>
+    <string name="download_playlist">再生リストのダウンロード</string>
+    <string name="audio_language">音声の言語</string>
+    <string name="default_language">標準</string>
+    <string name="delete_all">すべてのダウンロードを消去しました！</string>
+    <string name="download_playlist_note">ダウンロードする音声/映像の最高品質を選択します。字幕は利用可能ならダウンロードされます。</string>
+    <string name="enqueue_playlist_description">再生リストからダウンロードする動画を追加するときに通知する。</string>
+    <string name="enqueueing_playlist_download">以下の再生リストの動画をダウンロード %1$s</string>
+    <string name="also_clear_watch_positions">再生済みの位置の記憶も消去</string>
 </resources>

@@ -256,8 +256,6 @@
     <string name="open_copied">Отвори</string>
     <string name="local_subscriptions">Локална праћења</string>
     <string name="skip_segment">Прескочи сегмент</string>
-    <string name="save_feed">Учитај фид у позадини</string>
-    <string name="save_feed_summary">Учитавање фида претплате у позадини и спречавање његовог поновног учитавања приликом промене картица</string>
     <string name="navigation_bar">Трака за навигацију</string>
     <string name="push_channel_description">Приказује обавештења када су нови стримови доступни.</string>
     <string name="push_channel_name">Радник обавештења</string>
@@ -543,4 +541,15 @@
     <string name="copy_tooltip">Копирај</string>
     <string name="import_groups">Увези групе канала</string>
     <string name="export_groups">Извези групе канала</string>
+    <string name="change_instance">Промени инстанцу</string>
+    <string name="change">Промени</string>
+    <string name="delete_all">Сва преузимања ће бити избрисана!</string>
+    <string name="suggest_change_instance">Учитавање траје више него обично. Размислите о промени инстанце</string>
+    <string name="enqueue_playlist_description">Приказује обавештење када се у ред стављају видео снимци с плејлисте за преузимање.</string>
+    <string name="audio_language">Језик аудио снимка</string>
+    <string name="default_language">Подразумевани</string>
+    <string name="download_playlist">Преузми плејлисту</string>
+    <string name="enqueueing_playlist_download">Стављање видео снимака у ред за преузимање плејлисте %1$s</string>
+    <string name="download_playlist_note">Изаберите максималан квалитет аудио/видео снимка за преузимање. Наслови ће се преузимати само ако су доступни.</string>
+    <string name="also_clear_watch_positions">Такође очисти позиције гледања</string>
 </resources>

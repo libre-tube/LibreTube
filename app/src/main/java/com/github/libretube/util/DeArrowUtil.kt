@@ -1,7 +1,6 @@
 package com.github.libretube.util
 
 import android.util.Log
-import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.ContentItem
 import com.github.libretube.api.obj.DeArrowContent
@@ -9,17 +8,10 @@ import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PreferenceHelper
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.decodeFromJsonElement
 import java.util.TreeSet
 
 object DeArrowUtil {
-    private fun extractTitleAndThumbnail(data: JsonElement): Pair<String?, String?> {
-        val content = try {
-            JsonHelper.json.decodeFromJsonElement<DeArrowContent>(data)
-        } catch (e: Exception) {
-            return null to null
-        }
+    private fun extractTitleAndThumbnail(content: DeArrowContent): Pair<String?, String?> {
         val newTitle = content.titles.firstOrNull { it.votes >= 0 || it.locked }?.title
         val newThumbnail = content.thumbnails.firstOrNull {
             it.thumbnail != null && !it.original && (it.votes >= 0 || it.locked)

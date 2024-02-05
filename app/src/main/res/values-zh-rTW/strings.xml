@@ -245,8 +245,6 @@
     <string name="delete">從下載刪除</string>
     <string name="new_videos_badge">新影片的指示器</string>
     <string name="backup_customInstances">自訂執行個體</string>
-    <string name="save_feed">在背景載入訂閱播放清單</string>
-    <string name="save_feed_summary">在背景載入訂閱播放清單，並防止切換分頁時重新載入</string>
     <string name="filename">檔案名稱</string>
     <string name="added_to_playlist">新增至播放清單 %1$s</string>
     <string name="confirm_unsubscribe">您確定要取消訂閱 %1$s 嗎？</string>
@@ -537,4 +535,15 @@
     <string name="copy_tooltip">複製</string>
     <string name="import_groups">匯入頻道群組</string>
     <string name="export_groups">匯出頻道群組</string>
+    <string name="change">變更</string>
+    <string name="change_instance">變更站台</string>
+    <string name="suggest_change_instance">載入時間較平常久。請考慮變更站台</string>
+    <string name="download_playlist">下載播放清單</string>
+    <string name="download_playlist_note">請選取要下載的最大音訊/視訊品質。字幕僅會在可用時下載。</string>
+    <string name="delete_all">將會刪除所有下載！</string>
+    <string name="enqueueing_playlist_download">正在將下載播放清單 %1$s 的影片排入佇列</string>
+    <string name="audio_language">音訊語言</string>
+    <string name="enqueue_playlist_description">將要下載的播放清單的影片加入佇列時顯示通知。</string>
+    <string name="default_language">預設</string>
+    <string name="also_clear_watch_positions">也清除觀看位置</string>
 </resources>

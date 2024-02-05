@@ -253,6 +253,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="-6dp"
             android:baselineAligned="false"
             android:paddingStart="10dp"
             android:paddingEnd="20dp">
@@ -302,8 +303,8 @@
                     android:id="@+id/chapter_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
                     android:ellipsize="end"
+                    android:gravity="center_vertical"
                     android:maxLines="1"
                     android:textColor="@android:color/white"
                     android:visibility="gone"
@@ -335,16 +336,16 @@
         <LinearLayout
             android:id="@+id/progress_bar"
             android:layout_width="match_parent"
-            android:layout_height="16dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginHorizontal="10dp"
+            android:translationZ="10dp">
 
             <com.github.libretube.ui.views.MarkableTimeBar
                 android:id="@+id/exo_progress"
                 android:layout_width="match_parent"
-                android:layout_height="16dp"
+                android:layout_height="match_parent"
+                android:paddingTop="6dp"
                 app:bar_height="2dp"
                 app:played_color="?attr/colorSecondary"
                 app:scrubber_color="?attr/colorSecondary"
