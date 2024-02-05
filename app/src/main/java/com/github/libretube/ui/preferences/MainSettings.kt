@@ -18,9 +18,9 @@ class MainSettings : BasePreferenceFragment() {
 
         val update = findPreference<Preference>("update")
         val appVersion = BuildConfig.VERSION_NAME
-        update?.summary = "v${appVersion}"
+        update?.summary = "v$appVersion"
 
-        // manual trigger, in case
+        // manual trigger
         update?.setOnPreferenceClickListener {
 
             lifecycleScope.launch(Dispatchers.IO) {

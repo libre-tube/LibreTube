@@ -12,7 +12,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class UpdateChecker(private val context: Context) {
-
     private lateinit var changelog: String
     private lateinit var releaseURL: String
 
@@ -35,7 +34,7 @@ class UpdateChecker(private val context: Context) {
                         UpdateAvailableDialog().showDialog(
                             sanitizeChangelog(changelog),
                             releaseURL,
-                            context
+                            context,
                         )
                     }
                 } else if (manualTrigger) {
