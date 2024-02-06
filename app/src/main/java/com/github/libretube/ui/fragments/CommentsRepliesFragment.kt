@@ -14,9 +14,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.libretube.R
 import com.github.libretube.api.obj.Comment
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentCommentsBinding
+import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.ui.adapters.CommentPagingAdapter
 import com.github.libretube.ui.models.CommentsViewModel
@@ -53,11 +55,15 @@ class CommentsRepliesFragment : Fragment() {
             null,
             videoId,
             viewModel.channelAvatar,
-            true,
+            comment,
             viewModel.handleLink,
         ) {
             viewModel.commentsSheetDismiss?.invoke()
         }
+        (parentFragment as CommentsSheet).updateFragmentInfo(
+            true,
+            "${getString(R.string.replies)} (${comment.replyCount.formatShort()})"
+        )
 
         binding.commentsRV.updatePadding(top = 0)
         binding.commentsRV.layoutManager = LinearLayoutManager(context)
@@ -69,12 +75,11 @@ class CommentsRepliesFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     repliesAdapter.loadStateFlow.collect {
-                        binding.progress.isVisible = it.append is LoadState.Loading
+                        binding.progress.isVisible = it.refresh is LoadState.Loading
                     }
                 }
 
                 launch {
-                    // TODO: Display the original selected comment as well.
                     viewModel.commentRepliesFlow.collect {
                         repliesAdapter.submitData(it)
                     }

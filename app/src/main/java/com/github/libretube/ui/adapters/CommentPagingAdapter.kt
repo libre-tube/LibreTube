@@ -35,10 +35,14 @@ class CommentPagingAdapter(
     private val fragment: Fragment?,
     private val videoId: String,
     private val channelAvatar: String?,
-    private val isRepliesAdapter: Boolean = false,
+    private val parentComment: Comment? = null,
     private val handleLink: ((url: String) -> Unit)?,
     private val dismiss: () -> Unit
 ) : PagingDataAdapter<Comment, CommentsViewHolder>(CommentCallback) {
+    private val isRepliesAdapter = parentComment != null
+
+    override fun getItemCount() = (if (isRepliesAdapter) 1 else 0) + super.getItemCount()
+
     private fun navigateToReplies(comment: Comment) {
         val args = bundleOf(IntentData.videoId to videoId, IntentData.comment to comment)
         fragment!!.parentFragmentManager.commit {
@@ -48,7 +52,11 @@ class CommentPagingAdapter(
     }
 
     override fun onBindViewHolder(holder: CommentsViewHolder, position: Int) {
-        val comment = getItem(position)!!
+        val comment = if (parentComment != null) {
+            if (position == 0) parentComment else getItem(position - 1)!!
+        } else {
+            getItem(position)!!
+        }
         holder.binding.apply {
             commentAuthor.text = comment.author
             commentAuthor.setBackgroundResource(
@@ -61,6 +69,7 @@ class CommentPagingAdapter(
             commentText.text = comment.commentText?.replace("</a>", "</a> ")
                 ?.parseAsHtml(tagHandler = HtmlParser(LinkHandler(handleLink ?: {})))
 
+            commentorImage.setImageDrawable(null)
             ImageHelper.loadImage(comment.thumbnail, commentorImage, true)
             likesTextView.text = comment.likeCount.formatShort()
 
