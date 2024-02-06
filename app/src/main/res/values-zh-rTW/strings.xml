@@ -546,4 +546,6 @@
     <string name="enqueue_playlist_description">將要下載的播放清單的影片加入佇列時顯示通知。</string>
     <string name="default_language">預設</string>
     <string name="also_clear_watch_positions">也清除觀看位置</string>
+    <string name="behavior_when_minimized">最小化時的行為</string>
+    <string name="gestures">手勢</string>
 </resources>
