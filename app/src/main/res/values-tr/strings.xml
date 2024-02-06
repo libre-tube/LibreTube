@@ -548,4 +548,6 @@
     <string name="download_playlist_note">Lütfen indirme için en yüksek ses/video kalitesini seçin. Altyazılar yalnızca mevcut olması durumunda indirilecektir.</string>
     <string name="audio_language">Ses dili</string>
     <string name="also_clear_watch_positions">İzleme konumlarını da temizle</string>
+    <string name="behavior_when_minimized">Küçültüldüğündeki davranış</string>
+    <string name="gestures">Hareketler</string>
 </resources>

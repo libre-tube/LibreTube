@@ -545,4 +545,6 @@
     <string name="audio_language">音频语言</string>
     <string name="default_language">默认</string>
     <string name="also_clear_watch_positions">同样清除观看位置</string>
+    <string name="behavior_when_minimized">最小化时的行为</string>
+    <string name="gestures">手势</string>
 </resources>

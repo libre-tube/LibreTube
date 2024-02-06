@@ -552,4 +552,6 @@
     <string name="enqueue_playlist_description">Mostrar notificação quando se colocam em fila de espera vídeos de uma lista de reprodução para serem descarregados.</string>
     <string name="delete_all">Todas as descargas serão eliminadas!</string>
     <string name="also_clear_watch_positions">Limpar também as posições de reprodução</string>
+    <string name="behavior_when_minimized">Comportamento quando minimizado</string>
+    <string name="gestures">Gestos</string>
 </resources>

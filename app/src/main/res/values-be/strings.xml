@@ -548,4 +548,13 @@
     <string name="delete_all">Усе спампоўкі будуць выдалены!</string>
     <string name="download_playlist">Спампаваць плэйліст</string>
     <string name="download_playlist_note">Выберыце максімальную якасць аўдыё/відэа для спампоўкі. Субтытры будуць спампоўвацца, толькі калі яны даступныя.</string>
+    <string name="behavior_when_minimized">Паводзіны пры згортванні</string>
+    <string name="gestures">Жэсты</string>
+    <string name="also_clear_watch_positions">Таксама ачысціць пазіцыі прагляду</string>
+    <string name="change">Змяніць</string>
+    <string name="enqueue_playlist_description">Паказваць апавяшчэнне пры стварэнні чаргі на загрузку відэа з плэйліста.</string>
+    <string name="enqueueing_playlist_download">Дадаць відэа з плэйліста
+\n%1$s у чаргу на загрузку</string>
+    <string name="audio_language">Мова аўдыё</string>
+    <string name="default_language">Па змаўчанні</string>
 </resources>

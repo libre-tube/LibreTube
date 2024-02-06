@@ -551,4 +551,6 @@
     <string name="enqueueing_playlist_download">Enfileirando vídeos para o download da playlist %1$s</string>
     <string name="delete_all">Todos os downloads serão excluídos!</string>
     <string name="also_clear_watch_positions">Limpar também as posições de reprodução</string>
+    <string name="behavior_when_minimized">Comportamento quando minimizado</string>
+    <string name="gestures">Gestos</string>
 </resources>
