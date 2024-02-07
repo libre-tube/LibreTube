@@ -123,7 +123,6 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
     }
 
     private fun fetchPlaylist() {
-        binding.playlistScrollview.isGone = true
         lifecycleScope.launch {
             val response = try {
                 withContext(Dispatchers.IO) {
@@ -136,7 +135,6 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
             val binding = _binding ?: return@launch
 
             playlistFeed = response.relatedStreams.toMutableList()
-            binding.playlistScrollview.isVisible = true
             nextPage = response.nextpage
             playlistName = response.name
             isLoading = false
@@ -312,8 +310,8 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
             }
         })
 
-        binding.playlistScrollview.viewTreeObserver.addOnScrollChangedListener {
-            if (_binding?.playlistScrollview?.canScrollVertically(1) == false &&
+        binding.playlistRecView.viewTreeObserver.addOnScrollChangedListener {
+            if (_binding?.playlistRecView?.canScrollVertically(1) == false &&
                 !isLoading
             ) {
                 // append more playlists to the recycler view
