@@ -1,2 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="subscriptions">Tellimused</string>
+    <string name="library">Sinu kogumik</string>
+    <string name="videos">Videod</string>
+    <string name="download">Laadi alla</string>
+    <string name="save">Salvesta</string>
+    <string name="login">Logi sisse</string>
+    <string name="register">Registreeru</string>
+    <string name="logout">Logi välja</string>
+    <string name="cancel">Katkesta</string>
+    <string name="loggedIn">Sisselogitud.</string>
+    <string name="loggedout">Väljalogitud.</string>
+    <string name="startpage">Avaleht</string>
+    <string name="yes">Jah</string>
+    <string name="search_hint">Otsi</string>
+    <string name="subscribe">Telli</string>
+    <string name="unsubscribe">Loobu tellimusest</string>
+    <string name="share">Jaga</string>
+    <string name="username">Kasutajanimi</string>
+    <string name="password">Salasõna</string>
+</resources>
