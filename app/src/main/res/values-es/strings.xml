@@ -551,4 +551,7 @@
     <string name="enqueue_playlist_description">Muestra una notificación cuando se ponen en cola vídeos de una lista de reproducción para ser descargados.</string>
     <string name="audio_language">Idioma del audio</string>
     <string name="default_language">Predeterminado</string>
+    <string name="behavior_when_minimized">Comportamiento al minimizar</string>
+    <string name="gestures">Gestos</string>
+    <string name="also_clear_watch_positions">Borre también las posiciones de visualización</string>
 </resources>
