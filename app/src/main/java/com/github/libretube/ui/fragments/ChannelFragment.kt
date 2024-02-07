@@ -59,6 +59,8 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
     private var nextPages = Array<String?>(5) { null }
     private var searchChannelAdapter: SearchChannelAdapter? = null
 
+    private var isAppBarFullyExpanded: Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         channelName = args.channelName
@@ -85,6 +87,16 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Check if the AppBarLayout is fully expanded
+        binding.channelAppBar.addOnOffsetChangedListener { _, verticalOffset ->
+            isAppBarFullyExpanded = verticalOffset == 0
+        }
+
+        // Determine if the child can scroll up
+        binding.channelRefresh.setOnChildScrollUpCallback { _, _ ->
+            !isAppBarFullyExpanded
+        }
 
         binding.channelRefresh.setOnRefreshListener {
             fetchChannel()
