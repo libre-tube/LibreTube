@@ -561,4 +561,6 @@
     <string name="enqueueing_playlist_download">وضع مقاطع الفيديو في قائمة الانتظار لتنزيل قائمة التشغيل %1$s</string>
     <string name="delete_all">سيتم حذف جميع التنزيلات!</string>
     <string name="also_clear_watch_positions">أيضًا امسح مواضع المشاهدة</string>
+    <string name="gestures">الإيماءات</string>
+    <string name="behavior_when_minimized">السلوك عند التصغير</string>
 </resources>

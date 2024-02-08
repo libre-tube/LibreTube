@@ -546,4 +546,9 @@
     <string name="audio_language">Audio­taal</string>
     <string name="download_playlist">Afspeel­lijst downloaden</string>
     <string name="also_clear_watch_positions">Kijk­posities ook wissen</string>
+    <string name="enqueue_playlist_description">Toont een melding bij het in wachtrij plaatsen van te downloaden video\'s van een afspeellijst.</string>
+    <string name="enqueueing_playlist_download">In wachtrij plaatsen van video\'s om te downloaden van afspeellijst %1$s</string>
+    <string name="behavior_when_minimized">Gedrag wanneer geminimaliseerd</string>
+    <string name="gestures">Gebaren</string>
+    <string name="download_playlist_note">Selecteer de maximale audio/videokwaliteit om te downloaden. Bijschriften worden alleen gedownload als ze beschikbaar zijn.</string>
 </resources>
