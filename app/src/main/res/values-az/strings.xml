@@ -550,4 +550,5 @@
     <string name="also_clear_watch_positions">Baxış mövqelərini də təmizlə</string>
     <string name="behavior_when_minimized">Kiçildilərkən davranış</string>
     <string name="gestures">Jestlər</string>
+    <string name="external_player">Xarici oynadıcı</string>
 </resources>
