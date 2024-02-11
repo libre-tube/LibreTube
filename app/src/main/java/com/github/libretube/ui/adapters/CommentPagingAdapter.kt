@@ -1,9 +1,8 @@
 package com.github.libretube.ui.adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.os.bundleOf
@@ -16,13 +15,13 @@ import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import androidx.recyclerview.widget.RecyclerView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import com.github.libretube.R
 import com.github.libretube.api.obj.Comment
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.CommentsRowBinding
 import com.github.libretube.extensions.formatShort
-import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ClipboardHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
@@ -31,35 +30,18 @@ import com.github.libretube.ui.fragments.CommentsRepliesFragment
 import com.github.libretube.ui.viewholders.CommentsViewHolder
 import com.github.libretube.util.HtmlParser
 import com.github.libretube.util.LinkHandler
-import com.github.libretube.util.TextUtils
 
-class CommentsAdapter(
+class CommentPagingAdapter(
     private val fragment: Fragment?,
     private val videoId: String,
     private val channelAvatar: String?,
-    private val comments: MutableList<Comment>,
-    private val isRepliesAdapter: Boolean = false,
+    private val parentComment: Comment? = null,
     private val handleLink: ((url: String) -> Unit)?,
     private val dismiss: () -> Unit
-) : RecyclerView.Adapter<CommentsViewHolder>() {
+) : PagingDataAdapter<Comment, CommentsViewHolder>(CommentCallback) {
+    private val isRepliesAdapter = parentComment != null
 
-    fun clear() {
-        val size: Int = comments.size
-        comments.clear()
-        notifyItemRangeRemoved(0, size)
-    }
-
-    fun updateItems(newItems: List<Comment>) {
-        val commentsSize = comments.size
-        comments.addAll(newItems)
-        notifyItemRangeInserted(commentsSize, newItems.size)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentsViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = CommentsRowBinding.inflate(layoutInflater, parent, false)
-        return CommentsViewHolder(binding)
-    }
+    override fun getItemCount() = (if (isRepliesAdapter) 1 else 0) + super.getItemCount()
 
     private fun navigateToReplies(comment: Comment) {
         val args = bundleOf(IntentData.videoId to videoId, IntentData.comment to comment)
@@ -69,20 +51,25 @@ class CommentsAdapter(
         }
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CommentsViewHolder, position: Int) {
-        val comment = comments[position]
+        val comment = if (parentComment != null) {
+            if (position == 0) parentComment else getItem(position - 1)!!
+        } else {
+            getItem(position)!!
+        }
         holder.binding.apply {
             commentAuthor.text = comment.author
             commentAuthor.setBackgroundResource(
                 if (comment.channelOwner) R.drawable.comment_channel_owner_bg else 0
             )
-            commentInfos.text = TextUtils.SEPARATOR + comment.commentedTime
+            commentInfos.text = root.context
+                .getString(R.string.commentedTimeWithSeparator, comment.commentedTime)
 
             commentText.movementMethod = LinkMovementMethodCompat.getInstance()
             commentText.text = comment.commentText?.replace("</a>", "</a> ")
                 ?.parseAsHtml(tagHandler = HtmlParser(LinkHandler(handleLink ?: {})))
 
+            commentorImage.setImageDrawable(null)
             ImageHelper.loadImage(comment.thumbnail, commentorImage, true)
             likesTextView.text = comment.likeCount.formatShort()
 
@@ -91,24 +78,24 @@ class CommentsAdapter(
                 creatorReplyImageView.isVisible = true
             }
 
-            if (comment.verified) verifiedImageView.isVisible = true
-            if (comment.pinned) pinnedImageView.isVisible = true
-            if (comment.hearted) heartedImageView.isVisible = true
-            if (comment.repliesPage != null) repliesCount.isVisible = true
+            verifiedImageView.isVisible = comment.verified
+            pinnedImageView.isVisible = comment.pinned
+            heartedImageView.isVisible = comment.hearted
+            repliesCount.isVisible = comment.repliesPage != null
             if (comment.replyCount > 0L) {
                 repliesCount.text = comment.replyCount.formatShort()
             }
 
             commentorImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, comment.commentorUrl)
-                dismiss.invoke()
+                dismiss()
             }
 
             if (isRepliesAdapter) {
                 repliesCount.isGone = true
 
                 // highlight the comment that is being replied to
-                if (comment == comments.firstOrNull()) {
+                if (position == 0) {
                     root.setBackgroundColor(
                         ThemeHelper.getThemeColor(
                             root.context,
@@ -117,7 +104,7 @@ class CommentsAdapter(
                     )
 
                     root.updatePadding(top = 20)
-                    root.updateLayoutParams<MarginLayoutParams> { bottomMargin = 20 }
+                    root.updateLayoutParams<ViewGroup.MarginLayoutParams> { bottomMargin = 20 }
                 } else {
                     root.background = AppCompatResources.getDrawable(
                         root.context,
@@ -127,12 +114,9 @@ class CommentsAdapter(
             }
 
             if (!isRepliesAdapter && comment.repliesPage != null) {
-                root.setOnClickListener {
-                    navigateToReplies(comment)
-                }
-                commentText.setOnClickListener {
-                    navigateToReplies(comment)
-                }
+                val onClickListener = View.OnClickListener { navigateToReplies(comment) }
+                root.setOnClickListener(onClickListener)
+                commentText.setOnClickListener(onClickListener)
             }
             root.setOnLongClickListener {
                 ClipboardHelper.save(
@@ -145,5 +129,17 @@ class CommentsAdapter(
         }
     }
 
-    override fun getItemCount() = comments.size
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentsViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = CommentsRowBinding.inflate(layoutInflater, parent, false)
+        return CommentsViewHolder(binding)
+    }
+}
+
+private object CommentCallback : DiffUtil.ItemCallback<Comment>() {
+    override fun areItemsTheSame(oldItem: Comment, newItem: Comment): Boolean {
+        return oldItem.commentId == newItem.commentId
+    }
+
+    override fun areContentsTheSame(oldItem: Comment, newItem: Comment) = true
 }
