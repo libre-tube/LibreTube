@@ -27,6 +27,7 @@ import kotlinx.coroutines.withContext
 object PlaylistsHelper {
     private val pipedPlaylistRegex =
         "[\\da-fA-F]{8}-[\\da-fA-F]{4}-[\\da-fA-F]{4}-[\\da-fA-F]{4}-[\\da-fA-F]{12}".toRegex()
+    private const val MAX_CONCURRENT_IMPORT_CALLS = 5
 
     private val token get() = PreferenceHelper.getToken()
     val loggedIn: Boolean get() = token.isNotEmpty()
@@ -59,6 +60,7 @@ object PlaylistsHelper {
             "alphabetic" -> playlists.sortedBy { it.name?.lowercase() }
             "alphabetic_reversed" -> playlists.sortedBy { it.name?.lowercase() }
                 .reversed()
+
             else -> playlists
         }
     }
@@ -176,34 +178,25 @@ object PlaylistsHelper {
 
     suspend fun importPlaylists(playlists: List<PipedImportPlaylist>) =
         withContext(Dispatchers.IO) {
-            playlists.map { playlist ->
-                val playlistId = createPlaylist(playlist.name!!)
-                async {
-                    playlistId ?: return@async
-                    // if logged in, add the playlists by their ID via an api call
-                    if (loggedIn) {
-                        addToPlaylist(
-                            playlistId,
-                            *playlist.videos.map {
-                                StreamItem(url = it)
-                            }.toTypedArray()
-                        )
-                    } else {
-                        // if not logged in, all video information needs to become fetched manually
-                        // Only do so with 20 videos at once to prevent performance issues
-                        val streams = playlist.videos.mapIndexed { index, id -> id to index }
-                            .groupBy { it.second % 20 }.map { (_, videos) ->
-                                videos.parallelMap {
-                                    runCatching {
-                                        RetrofitInstance.api.getStreams(it.first)
-                                            .toStreamItem(it.first)
-                                    }
-                                }.mapNotNull { it.getOrNull() }
-                            }
-                        addToPlaylist(playlistId, *streams.flatten().toTypedArray())
-                    }
+            for (playlist in playlists) {
+                val playlistId = createPlaylist(playlist.name!!) ?: return@withContext
+                // if logged in, add the playlists by their ID via an api call
+                if (loggedIn) {
+                    val streams = playlist.videos.map { StreamItem(url = it) }
+                    addToPlaylist(playlistId, *streams.toTypedArray())
+                } else {
+                    // if not logged in, all video information needs to become fetched manually
+                    // Only do so with `MAX_CONCURRENT_IMPORT_CALLS` videos at once to prevent performance issues
+                    val streams = playlist.videos.chunked(MAX_CONCURRENT_IMPORT_CALLS).map { videos ->
+                        videos.parallelMap {
+                            runCatching { RetrofitInstance.api.getStreams(it) }
+                                .getOrNull()
+                                ?.toStreamItem(it)
+                        }.filterNotNull()
+                    }.flatten()
+                    addToPlaylist(playlistId, *streams.toTypedArray())
                 }
-            }.awaitAll()
+            }
         }
 
     suspend fun exportPipedPlaylists(): List<PipedImportPlaylist> = withContext(Dispatchers.IO) {
