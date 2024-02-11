@@ -78,6 +78,7 @@ import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.IntentHelper
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
@@ -602,26 +603,16 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             newShareDialog.show(childFragmentManager, ShareDialog::class.java.name)
         }
 
-        binding.relPlayerShare.setOnLongClickListener {
-            if (!this::streams.isInitialized || streams.hls == null) {
-                return@setOnLongClickListener true
-            }
+        binding.relPlayerExternalPlayer.setOnClickListener {
+            if (!this::streams.isInitialized || streams.hls == null) return@setOnClickListener
 
-            // start an intent with video as mimetype using the hls stream
-            val intent = Intent(Intent.ACTION_VIEW).apply {
-                setDataAndType(streams.hls.orEmpty().toUri(), "video/*")
-                putExtra(Intent.EXTRA_TITLE, streams.title)
-                putExtra("title", streams.title)
-                putExtra("artist", streams.uploader)
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            val context = requireContext()
+            lifecycleScope.launch {
+                val hlsStream = withContext(Dispatchers.IO) {
+                    ProxyHelper.unwrapStreamUrl(streams.hls!!).toUri()
+                }
+                IntentHelper.openWithExternalPlayer(context, hlsStream, streams.title, streams.uploader)
             }
-
-            try {
-                startActivity(intent)
-            } catch (e: Exception) {
-                Toast.makeText(context, R.string.no_player_found, Toast.LENGTH_SHORT).show()
-            }
-            true
         }
 
         binding.relPlayerBackground.setOnClickListener {
@@ -630,6 +621,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             // start the background mode
             playOnBackground()
+        }
+
+        binding.relPlayerPip.setOnClickListener {
+            PictureInPictureCompat.enterPictureInPictureMode(requireActivity(), pipParams)
         }
 
         binding.relatedRecView.layoutManager = LinearLayoutManager(
