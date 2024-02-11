@@ -556,4 +556,7 @@
     <string name="also_clear_watch_positions">Также удалить позиции просмотра</string>
     <string name="behavior_when_minimized">Поведение при сворачивании</string>
     <string name="gestures">Жесты</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="comments_count">Комментарии (%1$s)</string>
+    <string name="external_player">Внешний проигрыватель</string>
 </resources>
