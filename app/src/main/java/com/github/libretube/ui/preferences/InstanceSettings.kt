@@ -29,11 +29,13 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.HttpUrl.Companion.toHttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 class InstanceSettings : BasePreferenceFragment() {
     override val titleResourceId: Int = R.string.instance
     private val token get() = PreferenceHelper.getToken()
-    private var instances = listOf<PipedInstance>()
+    private var instances = mutableListOf<PipedInstance>()
     private val authInstanceToggle get() = findPreference<SwitchPreferenceCompat>(PreferenceKeys.AUTH_INSTANCE_TOGGLE)!!
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -138,9 +140,18 @@ class InstanceSettings : BasePreferenceFragment() {
             Database.customInstanceDao().getAll()
         }.map { PipedInstance(it.name, it.apiUrl) }
 
-        instances = publicInstances
-            .plus(customInstances)
-            .sortedBy { it.name }
+        instances = publicInstances.plus(customInstances).toMutableList()
+
+        // add the currently used instances to the list if they're currently down / not part
+        // of the public instances list
+        for (apiUrl in listOf(RetrofitInstance.apiUrl, RetrofitInstance.authUrl)) {
+            if (instances.none { it.apiUrl == apiUrl }) {
+                val origin = apiUrl.toHttpUrl().host
+                instances.add(PipedInstance(origin, apiUrl, isCurrentlyDown = true))
+            }
+        }
+
+        instances.sortBy { it.name }
 
         // If any preference dialog is visible in this fragment, it's one of the instance selection
         // dialogs. In order to prevent UX issues, we don't update the instances list then.

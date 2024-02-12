@@ -19,5 +19,6 @@ data class PipedInstance(
     @SerialName("registration_disabled") val registrationDisabled: Boolean = false,
     @SerialName("uptime_24h") val uptimeToday: Float? = null,
     @SerialName("uptime_7d") val uptimeWeek: Float? = null,
-    @SerialName("uptime_30d") val uptimeMonth: Float? = null
+    @SerialName("uptime_30d") val uptimeMonth: Float? = null,
+    val isCurrentlyDown: Boolean = false,
 )
