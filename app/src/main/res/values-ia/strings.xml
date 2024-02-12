@@ -551,4 +551,7 @@
     <string name="also_clear_watch_positions">Tamben rader le positiones de reguardar</string>
     <string name="behavior_when_minimized">Comportamento quando es minimisate</string>
     <string name="gestures">Gestos</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="comments_count">Commentos (%1$s)</string>
+    <string name="external_player">Reproductor externe</string>
 </resources>

@@ -563,4 +563,7 @@
     <string name="also_clear_watch_positions">أيضًا امسح مواضع المشاهدة</string>
     <string name="gestures">الإيماءات</string>
     <string name="behavior_when_minimized">السلوك عند التصغير</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="comments_count">التعليقات (%1$s)</string>
+    <string name="external_player">مشغل خارجي</string>
 </resources>

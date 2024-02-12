@@ -554,4 +554,7 @@
     <string name="behavior_when_minimized">Comportamiento al minimizar</string>
     <string name="gestures">Gestos</string>
     <string name="also_clear_watch_positions">Borre también las posiciones de visualización</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="external_player">Reproductor externo</string>
+    <string name="comments_count">Comentarios (%1$s)</string>
 </resources>

@@ -554,4 +554,7 @@
     <string name="also_clear_watch_positions">Limpar também as posições de reprodução</string>
     <string name="behavior_when_minimized">Comportamento quando minimizado</string>
     <string name="gestures">Gestos</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="comments_count">Comentários (%1$s)</string>
+    <string name="external_player">Reprodutor externo</string>
 </resources>

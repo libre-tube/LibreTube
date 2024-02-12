@@ -548,4 +548,9 @@
     <string name="download_playlist_note">कृपया डाउनलोड करने के लिए अधिकतम ऑडियो/वीडियो गुणवत्ता चुनें। कैप्शन केवल उपलब्ध होने पर ही डाउनलोड किए जाएंगे।</string>
     <string name="enqueueing_playlist_download">प्लेलिस्ट %1$s को डाउनलोड करने के लिए वीडियो को कतारबद्ध किया जा रहा है</string>
     <string name="also_clear_watch_positions">देखने की स्थिति भी साफ़ करें</string>
+    <string name="behavior_when_minimized">व्यवहार जब मिनीमाईज किया जाए</string>
+    <string name="comments_count">टिप्पणियाँ (%1$s)</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="external_player">बाहरी प्लेयर</string>
+    <string name="gestures">इशारे</string>
 </resources>

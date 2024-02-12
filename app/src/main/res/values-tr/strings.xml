@@ -550,4 +550,7 @@
     <string name="also_clear_watch_positions">İzleme konumlarını da temizle</string>
     <string name="behavior_when_minimized">Küçültüldüğündeki davranış</string>
     <string name="gestures">Hareketler</string>
+    <string name="comments_count">Yorumlar (%1$s)</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="external_player">Harici oynatıcı</string>
 </resources>

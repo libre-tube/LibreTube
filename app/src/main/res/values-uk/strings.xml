@@ -557,4 +557,7 @@
     <string name="also_clear_watch_positions">Також очистити позиції перегляду</string>
     <string name="behavior_when_minimized">Поведінка при згортанні</string>
     <string name="gestures">Жести</string>
+    <string name="comments_count">Коментарі (%1$s)</string>
+    <string name="external_player">Зовнішній програвач</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
 </resources>

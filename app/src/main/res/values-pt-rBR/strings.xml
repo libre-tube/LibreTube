@@ -221,7 +221,7 @@
     <string name="pauseOnScreenOff_summary">Pausar reprodução quando a tela estiver desligada</string>
     <string name="playingOnBackground">Reproduzindo em segundo plano…</string>
     <string name="clonePlaylist">Clonar playlist</string>
-    <string name="downloading">Baixando…</string>
+    <string name="downloading">Fazendo o download…</string>
     <string name="caption_settings">Legendas</string>
     <string name="playerAudioFormat">Formato padrão do áudio</string>
     <string name="playerAudioQuality">Qualidade do áudio</string>
@@ -553,4 +553,7 @@
     <string name="also_clear_watch_positions">Limpar também as posições de reprodução</string>
     <string name="behavior_when_minimized">Comportamento quando minimizado</string>
     <string name="gestures">Gestos</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="comments_count">Comentários (%1$s)</string>
+    <string name="external_player">Player externo</string>
 </resources>

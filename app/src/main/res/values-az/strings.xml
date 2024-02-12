@@ -551,4 +551,6 @@
     <string name="behavior_when_minimized">Kiçildilərkən davranış</string>
     <string name="gestures">Jestlər</string>
     <string name="external_player">Xarici oynadıcı</string>
+    <string name="comments_count">Şərhlər (%1$s)</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
 </resources>
