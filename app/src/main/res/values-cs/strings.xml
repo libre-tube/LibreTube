@@ -554,4 +554,6 @@
     <string name="gestures">Gesta</string>
     <string name="behavior_when_minimized">Chování při minimalizaci</string>
     <string name="external_player">Externí přehrávač</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="comments_count">Komentáře (%1$s)</string>
 </resources>
