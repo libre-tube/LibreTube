@@ -547,4 +547,7 @@
     <string name="also_clear_watch_positions">同样清除观看位置</string>
     <string name="behavior_when_minimized">最小化时的行为</string>
     <string name="gestures">手势</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="comments_count">评论（%1$s）</string>
+    <string name="external_player">外部播放器</string>
 </resources>
