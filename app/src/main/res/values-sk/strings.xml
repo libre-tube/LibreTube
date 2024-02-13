@@ -260,7 +260,7 @@
     <string name="export_playlists_to">Exportovať zoznamy skladieb do</string>
     <string name="import_playlists">Importovať zoznamy skladieb</string>
     <string name="mark_as_watched">Označiť ako sledované</string>
-    <string name="creation_date_reversed">Dátum vytvorenia (v opačnom poradí)</string>
+    <string name="creation_date_reversed">Dátum vzniku (v opačnom poradí)</string>
     <string name="alphabetic">Abecedne</string>
     <string name="alphabetic_reversed">Abecedne (v opačnom poradí)</string>
     <string name="home_tab_content">Obsah karty Domov</string>
@@ -462,7 +462,7 @@
     <string name="play_automatically">Prehrať automaticky</string>
     <string name="group_name">Názov skupiny</string>
     <string name="go_to_video">Prejsť na video</string>
-    <string name="creation_date">Dátum vytvorenia</string>
+    <string name="creation_date">Dátum vzniku</string>
     <string name="mark_as_unwatched">Označiť ako nesledované</string>
     <string name="choose_instance">Najprv vyberte inštanciu!</string>
     <string name="change_playlist_description">Zmeniť popis zoznamu skladieb</string>
