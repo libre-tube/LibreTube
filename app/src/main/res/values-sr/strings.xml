@@ -552,4 +552,9 @@
     <string name="enqueueing_playlist_download">Стављање видео снимака у ред за преузимање плејлисте %1$s</string>
     <string name="download_playlist_note">Изаберите максималан квалитет аудио/видео снимка за преузимање. Наслови ће се преузимати само ако су доступни.</string>
     <string name="also_clear_watch_positions">Такође очисти позиције гледања</string>
+    <string name="behavior_when_minimized">Понашање када је минимизирано</string>
+    <string name="gestures">Покрети</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="comments_count">Коментари (%1$s)</string>
+    <string name="external_player">Спољни плејер</string>
 </resources>
