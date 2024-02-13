@@ -61,8 +61,8 @@
     <string name="color_yellow">Neskutočne žltá</string>
     <string name="color_green">Skvelá zelená</string>
     <string name="app_icon">Ikona</string>
-    <string name="enabled">Zapnuté</string>
-    <string name="disabled">Vypnuté</string>
+    <string name="enabled">Zapnutý</string>
+    <string name="disabled">Vypnutý</string>
     <string name="app_theme">Téma</string>
     <string name="library">Knižnica</string>
     <string name="search_hint">Vyhľadávanie</string>
@@ -120,7 +120,7 @@
     <string name="category_intro_summary">Interval bez skutočného obsahu. Môže to byť pauza, statický snímok, opakujúca sa animácia. Nemal by sa používať pre prechody obsahujúce informácie</string>
     <string name="category_filler">Nepodstatné/Vtipy</string>
     <string name="category_preview_summary">Pre segmenty popisujúce budúci obsah bez ďalších informácií. Ak obsahuje klipy, ktoré sa objavujú len tu, je veľmi pravdepodobné, že ide o nesprávnu kategóriu</string>
-    <string name="playOnBackground">Hrať na pozadí</string>
+    <string name="playOnBackground">Prehrať na pozadí</string>
     <string name="update_available_text">K dispozícii je nová aktualizácia. Kliknutím otvoríte stránku vydaní GitHub.</string>
     <string name="piped">Piped</string>
     <string name="playback_speed">Rýchlosť prehrávania</string>
@@ -141,7 +141,7 @@
     <string name="gradientIcon">Glib prechod</string>
     <string name="update_available">K dispozícii je verzia %1$s</string>
     <string name="category_interaction_summary">Keď sa uprostred obsahu nachádza krátke pripomenutie, aby ste sa prihlásili k odberu alebo sledovaniu. Ak je dlhé alebo o niečom konkrétnom, bude to sebapropagácia</string>
-    <string name="buffering_goal">Predbežné načítanie</string>
+    <string name="buffering_goal">Prednačítanie</string>
     <string name="category_filler_summary">Pre nesúvisiace scény pridané len ako výplň alebo humor, ktoré nie sú potrebné na pochopenie hlavného obsahu videa</string>
     <string name="category_music_offtopic_summary">Len na použitie v hudobných videách. Mal by pokrývať časti videoklipu, ktoré nie sú súčasťou oficiálnych mixov. Nakoniec by sa video malo čo najviac podobať verzii mixu na Spotify alebo akejkoľvek inej verzii mixu, alebo redukovať hovorenie alebo iné rušivé prvky</string>
     <string name="category_outro_summary">Informácie po skončení. Nie pre závery s informáciami</string>
@@ -161,7 +161,7 @@
     <string name="least_views">Najmenej zobrazení</string>
     <string name="most_recent">Najnovšie</string>
     <string name="require_restart_message">Ak chcete použiť nové zmeny, reštartujte aplikáciu.</string>
-    <string name="network_metered">Merané</string>
+    <string name="network_metered">Meraná</string>
     <string name="network_wifi">Iba na wifi</string>
     <string name="error_occurred">Chyba</string>
     <string name="copied">Skopírované</string>
@@ -189,7 +189,7 @@
     <string name="github">GitHub</string>
     <string name="history_size">Maximálna veľkosť histórie</string>
     <string name="unlimited">Neobmedzená</string>
-    <string name="background_mode">Režim na pozadí</string>
+    <string name="background_mode">Režim pozadia</string>
     <string name="audio_video">Audio a video</string>
     <string name="fullscreen_orientation">Orientácia na celú obrazovku</string>
     <string name="landscape">Na šírku</string>
@@ -200,8 +200,8 @@
     <string name="no_subtitles_available">Titulky nie sú k dispozícii</string>
     <string name="repeat_mode">Režim opakovania</string>
     <string name="resize_mode_zoom">Priblížiť</string>
-    <string name="repeat_mode_none">Žiadny</string>
-    <string name="repeat_mode_current">Aktuálny</string>
+    <string name="repeat_mode_none">Nič</string>
+    <string name="repeat_mode_current">Aktuálne</string>
     <string name="auth_instance_summary">Pre overené pozvánky použije inú inštanciu</string>
     <string name="playerVideoFormat">Video formát pre prehrávač</string>
     <string name="no_audio">Bez zvuku</string>
@@ -220,7 +220,7 @@
     <string name="no_player_found">Žiadny externý prehrávač nebol nájdený. Uistite sa, že ho máte nainštalovaný.</string>
     <string name="data_saver_mode">Režim šetrenia dát</string>
     <string name="data_saver_mode_summary">Vynechá miniatúry a iné obrázky</string>
-    <string name="search_history_summary">Zapamätať vyhľadávania</string>
+    <string name="search_history_summary">Zapamätá si vyhľadávanie</string>
     <string name="watch_history_summary">Zachová lokálne stopu sledovaných videí</string>
     <string name="history_summary">História sledovania a vyhľadávania</string>
     <string name="watch_positions_title">Zapamätané pozície prehrávania</string>
@@ -289,7 +289,7 @@
     <string name="playlistNameReversed">Názov zoznamu skladieb (obrátene)</string>
     <string name="confirm_unsubscribing">Potvrdiť zrušenie odberu</string>
     <string name="alternative_player_layout">Alternatívne usporiadanie prehrávača</string>
-    <string name="navbar_order">Poradie v navigačnom paneli</string>
+    <string name="navbar_order">Poradie</string>
     <string name="exportsuccess">Exportované.</string>
     <string name="proceed">Pokračovať</string>
     <string name="codecs">Kodeky</string>
@@ -303,7 +303,7 @@
     <string name="swipe_controls">Ovládanie potiahnutím prstom</string>
     <string name="forward">Dopredu</string>
     <string name="backup_restore">Záloha a obnovenie</string>
-    <string name="play_next">Potom prehrať</string>
+    <string name="play_next">Ďalej prehrať</string>
     <string name="limit_to_runtime">Obmedziť podľa času spustenia</string>
     <string name="audio_track">Zvuková stopa</string>
     <string name="backup">Záloha</string>
@@ -419,7 +419,7 @@
     <string name="new_videos_badge_summary">Zobrazí znak s počtom nových videí, ak nejaké sú</string>
     <string name="sb_skip_manual">Vynechať ručne</string>
     <string name="navigation_bar">Navigačný panel</string>
-    <string name="delete">Odstrániť zo sťahovaných súborov</string>
+    <string name="delete">Odstrániť zo stiahnutých súborov</string>
     <string name="skip_segment">Vynechať segment</string>
     <string name="layout">Usporiadanie</string>
     <string name="hls_instead_of_dash_summary">Použije HLS namiesto DASH (bude pomalšie, neodporúča sa)</string>
