@@ -211,6 +211,8 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
         isLoading = false
         binding.channelRefresh.isRefreshing = false
 
+        binding.channelCoordinator.isVisible = true
+
         binding.channelName.text = response.name
         if (response.verified) {
             binding.channelName
