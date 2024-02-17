@@ -6,10 +6,10 @@
     <string name="videos">Відэа</string>
     <string name="username">Імя карыстальніка</string>
     <string name="password">Пароль</string>
-    <string name="login">Увайсці</string>
+    <string name="login">Ўваход</string>
     <string name="logout">Выйсці</string>
     <string name="cancel">Адмена</string>
-    <string name="loggedIn">Увайсці ў.</string>
+    <string name="loggedIn">Ўвайсці ў.</string>
     <string name="loggedout">Выйсці з.</string>
     <string name="instances">Абярыце…</string>
     <string name="customInstance">Карыстацкі асобнік</string>
@@ -42,7 +42,7 @@
     <string name="category_segments">Сегменты</string>
     <string name="category_sponsor">Спонсар</string>
     <string name="category_selfpromo">Неаплатнае/Самарэклама</string>
-    <string name="category_intro">Антракт/Уступная анімацыя</string>
+    <string name="category_intro">Антракт/Ўступная анімацыя</string>
     <string name="category_outro_summary">Інфармацыя пасля заканчэння. Не для высноваў з інфармацыяй</string>
     <string name="category_outro">Канчатковая застаўка і тытры</string>
     <string name="category_filler">Філеры/Жарты</string>
@@ -76,7 +76,7 @@
     <string name="instance_name">Імя асобніка</string>
     <string name="instance_api_url">URL для API асобніка</string>
     <string name="addInstance">Дадаць асобнік</string>
-    <string name="empty_instance">Увядзіце імя і URL API.</string>
+    <string name="empty_instance">Ўвядзіце імя і URL API.</string>
     <string name="clear_customInstances">Ачысціць дададзены</string>
     <string name="invalid_url">Калі ласка, увядзіце URL, які працуе</string>
     <string name="version">Версія %1$s</string>
@@ -117,7 +117,7 @@
     <string name="fullscreen_orientation">Поўнаэкранная арыентацыя</string>
     <string name="aspect_ratio">Суадносіны бакоў відэа</string>
     <string name="auto_rotation">Аўтапаварот</string>
-    <string name="turnInternetOn">Уключыце Wi-Fi або мабільную перадачу даных, каб падключыцца да Інтэрнэту.</string>
+    <string name="turnInternetOn">Ўключыце Wi-Fi або мабільную перадачу даных, каб падключыцца да Інтэрнэту.</string>
     <string name="open">Адкрыць…</string>
     <string name="chapters">Раздзелы</string>
     <string name="require_restart">Патрабуецца перазапуск праграмы</string>
@@ -159,7 +159,7 @@
     <string name="register">Рэгістрацыя</string>
     <string name="already_logged_in">Вы ўжо ўвайшлі ў сістэму. Вы можаце выйсці са свайго ўліковага запісу.</string>
     <string name="registered">Зарэгістраваны. Цяпер вы можаце падпісацца на каналы.</string>
-    <string name="login_register">Увайсці/зарэгістравацца</string>
+    <string name="login_register">Ўвайсці/зарэгістравацца</string>
     <string name="cannotDownload">Немагчыма спампаваць гэты стрым.</string>
     <string name="lightTheme">Светлая</string>
     <string name="playOnBackground">Гуляць у фонавым рэжыме</string>
@@ -196,7 +196,7 @@
     <string name="category_selfpromo_summary">Падобна «спонсару», за выключэннем неаплатнага або самарэкламы. Гэта ўключае ў сябе раздзелы пра тавары, ахвяраванні або інфармацыю аб тым, з кім яны супрацоўнічалі</string>
     <string name="category_interaction_summary">Калі ёсць кароткі напамін паставіць лайкі, падпісацца або падпісацца ў сярэдзіне кантэнту. Калі доўга або пра нешта канкрэтнае, гэта павінна быць самарэклама</string>
     <string name="category_intro_summary">Інтэрвал без фактычнага зместу. Можа быць паўза, статычны кадр, паўтаральная анімацыя. Не варта выкарыстоўваць для пераходаў, якія змяшчаюць інфармацыю</string>
-    <string name="category_music_offtopic_summary">Толькі для выкарыстання ў музычных відэа. Ён павінен ахопліваць часткі відэа, якія не ўваходзяць у афіцыйныя міксы. У рэшце рэшт, відэа павінна быць як мага больш падобным на Spotify або любую іншую змешаную версію, або паменшыць колькасць размоў і іншых фактараў, якія адцягваюць увагу</string>
+    <string name="category_music_offtopic_summary">Толькі для выкарыстання ў музычных відэа. Ён павінен ахопліваць часткі відэа, якія не ўваходзяць ў афіцыйныя міксы. Ў рэшце рэшт, відэа павінна быць як мага больш падобным на Spotify або любую іншую змешаную версію, або паменшыць колькасць размоў і іншых фактараў, якія адцягваюць увагу</string>
     <string name="category_filler_summary">Для датычных сцэн, дададзеных толькі для напаўнення або гумару, не патрабуецца для разумення асноўнага зместу відэа</string>
     <string name="category_music_offtopic">Музыка: немузычны раздзел</string>
     <string name="license">Ліцэнзія</string>
@@ -306,7 +306,7 @@
     <string name="clear_bookmarks">Ачысціць закладкі</string>
     <string name="trending">Што зараз у трэндзе</string>
     <string name="bookmarks">Закладкі</string>
-    <string name="queue_insert_related_videos">Уставіць звязаныя відэа</string>
+    <string name="queue_insert_related_videos">Ўставіць звязаныя відэа</string>
     <string name="local_playlists">Лакальныя плэйлісты</string>
     <string name="swipe_controls">Кіраванне жэстамі</string>
     <string name="swipe_controls_summary">Правядзіце пальцам, каб наладзіць яркасць і гучнасць у поўнаэкранным рэжыме</string>
@@ -386,9 +386,9 @@
     <string name="category_preview_summary">Для сегментаў з падрабязным апісаннем будучага кантэнту без дадатковай інфармацыі. Калі яна ўключае ў сябе кліпы, якія з\'яўляюцца толькі тут, гэта, хутчэй за ўсё, няправільная катэгорыя</string>
     <string name="alternative_player_layout">Альтэрнатыўны макет прайгравальніка</string>
     <string name="featured">Рэкамендацыі</string>
-    <string name="pinch_control">Упраўленне шчыпком</string>
+    <string name="pinch_control">Шчыпковы кантроль</string>
     <string name="pinch_control_summary">Выкарыстоўвайце жэст шчыпка для павелічэння/памяншэння</string>
-    <string name="pop_up">Усплывальнае акно</string>
+    <string name="pop_up">Ўсплывальнае акно</string>
     <string name="color_violet">Універсальны фіялетавы</string>
     <string name="download_channel_name">Служба запампоўкі</string>
     <string name="live">Прамы эфір</string>
@@ -399,7 +399,7 @@
     <string name="all_caught_up_summary">Вы бачылі ўсё новыя відэа</string>
     <string name="shuffle">Змяшаць</string>
     <string name="disable_proxy">Выключыць проксі Piped</string>
-    <string name="disable_proxy_summary">Загружаць відэа і выявы непасрэдна з сервераў YouTube. Уключайце гэтую опцыю толькі калі заўсёды карыстаецеся VPN</string>
+    <string name="disable_proxy_summary">Загружаць відэа і выявы непасрэдна з сервераў YouTube. Ўключайце гэтую опцыю толькі калі заўсёды карыстаецеся VPN</string>
     <string name="auto_fullscreen_shorts">Аўтаматычны поўнаэкранны рэжым для кароткіх відэа</string>
     <string name="new_group">Новы</string>
     <string name="edit_group">Рэдагаваць групу</string>
@@ -407,7 +407,7 @@
     <string name="group_name">Назва групы</string>
     <string name="play_automatically">Прайграваць аўтаматычна</string>
     <string name="play_automatically_summary">Аўтаматычны запуск прайгравання відэа пры выбары</string>
-    <string name="fullscreen_gestures">Уваход/выход з поўнаэкранных жэстаў</string>
+    <string name="fullscreen_gestures">Ўваход/выход з поўнаэкранных жэстаў</string>
     <string name="go_to_video">Перайсці да відэа</string>
     <plurals name="channel_new_streams">
         <item quantity="one">%d новы стрым</item>
@@ -415,7 +415,7 @@
         <item quantity="many">%d новых стрымаў</item>
         <item quantity="other">%d новых стрымаў</item>
     </plurals>
-    <string name="show_stream_thumbnails_summary">Паказаць мініяцюры новых відэа. Уключэнне гэтага прывядзе да спажывання дадатковых даных</string>
+    <string name="show_stream_thumbnails_summary">Паказаць мініяцюры новых відэа. Ўключэнне гэтага прывядзе да спажывання дадатковых даных</string>
     <string name="show_stream_thumbnails">Паказваць мініяцюры відэа</string>
     <string name="unlimited_search_history">Неабмежаваная гісторыя пошуку</string>
     <string name="duration">Працягласць</string>
@@ -449,16 +449,16 @@
     <string name="unknown_audio_track_type">Невядомы тып гукавой дарожкі</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="sb_custom_colors">Карыстальніцкія колеры сегментаў</string>
-    <string name="invalid_color">Уведзена няправільнае значэнне колеру!</string>
-    <string name="enter_hex_value">Увядзіце Hex-значэнне колеру</string>
+    <string name="invalid_color">Ўведзена няправільнае значэнне колеру!</string>
+    <string name="enter_hex_value">Ўвядзіце Hex-значэнне колеру</string>
     <string name="color">Колер</string>
-    <string name="manual">Уручную</string>
+    <string name="manual">Ўручную</string>
     <string name="automatic">Аўтаматычны</string>
     <string name="visible">Паказаць у панэлі пошуку</string>
     <string name="sb_custom_colors_summary">Пераключае карыстальніцкія каляровыя сегменты для сегментаў SponsorBlock</string>
     <string name="off">Выкл</string>
     <string name="continue_watching">Працягнуць прагляд</string>
-    <string name="dearrow">Уключыць DeArrow</string>
+    <string name="dearrow">Ўключыць DeArrow</string>
     <string name="dearrow_summary">Паказвайце больш дакладныя і менш сенсацыйныя назвы і мініяцюры. Павялічвае час загрузкі</string>
     <string name="default_or_unknown_audio_track">па змаўчанні або невядома</string>
     <string name="unknown_or_no_audio">невядома або няма гуку</string>
@@ -503,14 +503,14 @@
     <string name="tooltip_scroll_to_top">Пракруціце ўверх</string>
     <string name="automatic_once">Адзін раз аўтаматычна</string>
     <string name="proxy">Проксі</string>
-    <string name="group_name_error_empty">Увядзіце імя</string>
+    <string name="group_name_error_empty">Ўвядзіце імя</string>
     <string name="group_name_error_exists">Выберыце унікальнае імя</string>
     <string name="sb_create_segment">Стварыць сегмент</string>
     <string name="segment_type">Тып сегмента</string>
     <string name="sb_invalid_segment">Няправільны пачатак або канец сегмента</string>
     <string name="filename_too_long">Назва файла занадта доўгая!</string>
     <string name="sponsorblock_user_id">UserID ў SponsorBlock</string>
-    <string name="contribute_to_sponsorblock">Унесці свой уклад у SponsorBlock</string>
+    <string name="contribute_to_sponsorblock">Унесці свой ўклад у SponsorBlock</string>
     <string name="donate">Падтрымліваць</string>
     <string name="no_fullscreen_resolution">Разрозненне для не поўнаэкраннага рэжыму</string>
     <string name="playback_during_call_summary">Звярніце ўвагу, што гэта таксама прыводзіць да таго, што праграма больш не будзе працаваць з любым тыпам аўдыяфокусу</string>
@@ -557,4 +557,7 @@
 \n%1$s у чаргу на загрузку</string>
     <string name="audio_language">Мова аўдыё</string>
     <string name="default_language">Па змаўчанні</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="external_player">Знешні прайгравальнік</string>
+    <string name="comments_count">Каментары (%1$s)</string>
 </resources>
