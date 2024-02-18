@@ -391,11 +391,8 @@ class NowPlayingNotification(
     /**
      * Destroy the [NowPlayingNotification]
      */
-    fun destroySelfAndPlayer() {
+    fun destroySelf() {
         mediaSession.release()
-
-        player.stop()
-        player.release()
 
         runCatching {
             context.unregisterReceiver(notificationActionReceiver)
