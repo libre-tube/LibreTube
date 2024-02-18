@@ -312,9 +312,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             saveWatchPosition()
 
             if (playbackState == Player.STATE_READY) {
-                if (streams.category == Streams.categoryMusic) {
-                    exoPlayer.setPlaybackSpeed(1f)
-                }
             }
 
             // set the playback speed to one if having reached the end of a livestream
@@ -988,6 +985,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 }
 
                 setCurrentChapterName()
+
+                if (streams.category == Streams.categoryMusic) {
+                    exoPlayer.setPlaybackSpeed(1f)
+                }
             }
         }
     }
