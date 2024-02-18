@@ -550,4 +550,7 @@
     <string name="enqueueing_playlist_download">Köar videor för nedladdning av spellistan %1$s</string>
     <string name="behavior_when_minimized">Beteende när det är minimerat</string>
     <string name="gestures">Gester</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="comments_count">Kommentarer (%1$s)</string>
+    <string name="external_player">Extern spelare</string>
 </resources>
