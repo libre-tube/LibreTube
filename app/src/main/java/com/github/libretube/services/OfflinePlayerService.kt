@@ -146,8 +146,10 @@ class OfflinePlayerService : LifecycleService() {
     }
 
     override fun onDestroy() {
-        nowPlayingNotification?.destroySelfAndPlayer()
+        nowPlayingNotification?.destroySelf()
 
+        player?.stop()
+        player?.release()
         player = null
         nowPlayingNotification = null
 
