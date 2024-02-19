@@ -221,7 +221,7 @@
     <string name="unknown">未知</string>
     <string name="resume">繼續</string>
     <string name="pauseOnScreenOff">自動暫停</string>
-    <string name="portrait">肖像</string>
+    <string name="portrait">縱向</string>
     <string name="turnInternetOn">請開啟Wifi或行動數據連上網路。</string>
     <string name="never">永不</string>
     <string name="selected">已選取</string>
@@ -315,7 +315,7 @@
     <string name="fullscreen_orientation">全螢幕方向</string>
     <string name="aspect_ratio">影片比例</string>
     <string name="auto_rotation">自動旋轉</string>
-    <string name="landscape">風景</string>
+    <string name="landscape">橫向</string>
     <string name="pinch_control">調整音高</string>
     <string name="play_latest_videos">播放最新影片</string>
     <string name="audio_track">音訊曲目</string>
