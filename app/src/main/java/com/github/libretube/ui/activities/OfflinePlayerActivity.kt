@@ -5,6 +5,7 @@ import android.media.session.PlaybackState
 import android.net.Uri
 import android.os.Bundle
 import android.text.format.DateUtils
+import android.view.KeyEvent
 import androidx.activity.viewModels
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
@@ -230,5 +231,9 @@ class OfflinePlayerActivity : BaseActivity() {
         }
 
         super.onUserLeaveHint()
+    }
+
+    override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
+        return binding.player.onKeyBoardAction(keyCode, event)
     }
 }

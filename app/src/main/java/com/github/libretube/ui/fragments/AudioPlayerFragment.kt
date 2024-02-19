@@ -123,15 +123,11 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         }
 
         binding.prev.setOnClickListener {
-            val currentIndex = PlayingQueue.currentIndex()
-            if (!PlayingQueue.hasPrev()) return@setOnClickListener
-            PlayingQueue.onQueueItemSelected(currentIndex - 1)
+            PlayingQueue.navigatePrev()
         }
 
         binding.next.setOnClickListener {
-            val currentIndex = PlayingQueue.currentIndex()
-            if (!PlayingQueue.hasNext()) return@setOnClickListener
-            PlayingQueue.onQueueItemSelected(currentIndex + 1)
+            PlayingQueue.navigateNext()
         }
 
         listOf(binding.forwardTV, binding.rewindTV).forEach {

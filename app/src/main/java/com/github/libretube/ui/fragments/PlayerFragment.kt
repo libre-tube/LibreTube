@@ -15,6 +15,7 @@ import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
 import android.text.format.DateUtils
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -189,6 +190,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             @Deprecated("Deprecated in Java", ReplaceWith("onbackpressedispatcher and callback"))
             override fun onBackPressed() {
                 unsetFullscreen()
+            }
+
+            override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
+                return _binding?.player?.onKeyUp(keyCode, event) ?: true
             }
         }
     }
@@ -535,19 +540,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // FullScreen button trigger
         // hide fullscreen button if autorotation enabled
         playerBinding.fullscreen.setOnClickListener {
-            // hide player controller
-            binding.player.hideController()
-            if (viewModel.isFullscreen.value == false) {
-                // go to fullscreen mode
-                setFullscreen()
-            } else {
-                // exit fullscreen mode
-                unsetFullscreen()
-
-                // disable the fullscreen button for auto fullscreen
-                // this is necessary to hide the button after an auto fullscreen for shorts
-                playerBinding.fullscreen.isVisible = !PlayerHelper.autoFullscreenEnabled
-            }
+            toggleFullscreen()
         }
 
         val updateSbImageResource = {
@@ -730,6 +723,25 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         checkForNecessaryOrientationRestart()
 
         binding.player.updateMarginsByFullscreenMode()
+    }
+
+    /**
+     * Enable or disable fullscreen depending on the current state
+     */
+    fun toggleFullscreen() {
+        // hide player controller
+        binding.player.hideController()
+        if (viewModel.isFullscreen.value == false) {
+            // go to fullscreen mode
+            setFullscreen()
+        } else {
+            // exit fullscreen mode
+            unsetFullscreen()
+
+            // disable the fullscreen button for auto fullscreen
+            // this is necessary to hide the button after an auto fullscreen for shorts
+            playerBinding.fullscreen.isVisible = !PlayerHelper.autoFullscreenEnabled
+        }
     }
 
     private fun openOrCloseFullscreenDialog(open: Boolean) {
@@ -1689,5 +1701,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private fun disableController() {
         binding.player.useController = false
         binding.player.hideController()
+    }
+
+    fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
+        return _binding?.player?.onKeyBoardAction(keyCode, event) ?: false
     }
 }
