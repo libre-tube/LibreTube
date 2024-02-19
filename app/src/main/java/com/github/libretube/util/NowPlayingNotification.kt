@@ -279,15 +279,11 @@ class NowPlayingNotification(
     private fun handlePlayerAction(action: String) {
         when (action) {
             NEXT -> {
-                if (!PlayingQueue.hasNext()) return
-
-                PlayingQueue.onQueueItemSelected(PlayingQueue.currentIndex() + 1)
+                PlayingQueue.navigateNext()
             }
 
             PREV -> {
-                if (!PlayingQueue.hasPrev()) return
-
-                PlayingQueue.onQueueItemSelected(PlayingQueue.currentIndex() - 1)
+                PlayingQueue.navigatePrev()
             }
 
             REWIND -> {

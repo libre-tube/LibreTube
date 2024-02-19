@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -138,12 +139,7 @@ class MainActivity : BaseActivity() {
         // new way of handling back presses
         onBackPressedDispatcher.addCallback {
             if (playerViewModel.isFullscreen.value == true) {
-                supportFragmentManager.fragments.filterIsInstance<PlayerFragment>()
-                    .firstOrNull()
-                    ?.let {
-                        it.unsetFullscreen()
-                        return@addCallback
-                    }
+                runOnPlayerFragment { unsetFullscreen() }
             }
 
             if (binding.mainMotionLayout.progress == 0F) {
@@ -490,14 +486,23 @@ class MainActivity : BaseActivity() {
 
     override fun onUserLeaveHint() {
         super.onUserLeaveHint()
-        supportFragmentManager.fragments.forEach { fragment ->
-            (fragment as? PlayerFragment)?.onUserLeaveHint()
-        }
+
+        runOnPlayerFragment { onUserLeaveHint() }
     }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         this.intent = intent
         loadIntentData()
+    }
+
+    override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
+        return runOnPlayerFragment { onKeyUp(keyCode, event) } ?: false
+    }
+
+    private fun <T> runOnPlayerFragment(action: PlayerFragment.() -> T): T? {
+        return supportFragmentManager.fragments.filterIsInstance<PlayerFragment>()
+            .firstOrNull()
+            ?.let(action)
     }
 }
