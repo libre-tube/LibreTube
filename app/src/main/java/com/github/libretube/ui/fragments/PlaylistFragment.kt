@@ -140,6 +140,8 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
             isLoading = false
             ImageHelper.loadImage(response.thumbnailUrl, binding.thumbnail)
             binding.playlistProgress.isGone = true
+            binding.playlistAppBar.isVisible = true
+            binding.playlistRecView.isVisible = true
             binding.playlistName.text = response.name
 
             binding.playlistInfo.text = getChannelAndVideoString(response, response.videos)
