@@ -461,7 +461,7 @@
     <string name="descriptive_audio_track">descritivo</string>
     <string name="default_or_unknown_audio_track">padrão ou desconhecido</string>
     <string name="unknown_or_no_audio">desconhecido ou sem audio</string>
-    <string name="original_or_main_audio_track">Original ou principal</string>
+    <string name="original_or_main_audio_track">original ou principal</string>
     <string name="unknown_audio_track_type">Tipo de faixa de áudio desconhecido</string>
     <string name="dubbed_audio_track">apelidada</string>
     <string name="unknown_audio_language">Idioma de áudio desconhecido</string>
