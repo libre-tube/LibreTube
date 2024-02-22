@@ -27,6 +27,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.enums.NotificationId
 import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.toMediaMetadataCompat
+import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.PlayerHelper
@@ -66,6 +67,7 @@ class NowPlayingNotification(
 
     private fun loadCurrentLargeIcon() {
         if (DataSaverMode.isEnabled(context)) return
+
         if (notificationBitmap == null) {
             enqueueThumbnailRequest {
                 createOrUpdateNotification()
@@ -84,12 +86,14 @@ class NowPlayingNotification(
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             }
         }
+
         return PendingIntentCompat
             .getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT, false)
     }
 
     private fun createIntent(action: String): PendingIntent? {
         val intent = Intent(action).setPackage(context.packageName)
+
         return PendingIntentCompat
             .getBroadcast(context, 1, intent, PendingIntent.FLAG_CANCEL_CURRENT, false)
     }
@@ -245,15 +249,13 @@ class NowPlayingNotification(
     private fun updateSessionPlaybackState(isPlaying: Boolean? = null, isLoading: Boolean? = null) {
         val loading = isLoading == true || (isPlaying == false && player.isLoading)
 
-        val newPlaybackState = if (loading) {
-            createPlaybackState(PlaybackStateCompat.STATE_BUFFERING)
-        } else if (isPlaying ?: player.isPlaying) {
-            createPlaybackState(PlaybackStateCompat.STATE_PLAYING)
-        } else {
-            createPlaybackState(PlaybackStateCompat.STATE_PAUSED)
+        val newPlaybackState = when {
+            loading -> PlaybackStateCompat.STATE_BUFFERING
+            isPlaying ?: player.isPlaying -> PlaybackStateCompat.STATE_PLAYING
+            else -> PlaybackStateCompat.STATE_PAUSED
         }
 
-        mediaSession.setPlaybackState(newPlaybackState)
+        mediaSession.setPlaybackState(createPlaybackState(newPlaybackState))
     }
 
     private fun createPlaybackState(@PlaybackStateCompat.State state: Int): PlaybackStateCompat {
@@ -277,19 +279,11 @@ class NowPlayingNotification(
     private fun handlePlayerAction(action: String) {
         when (action) {
             NEXT -> {
-                if (PlayingQueue.hasNext()) {
-                    PlayingQueue.onQueueItemSelected(
-                        PlayingQueue.currentIndex() + 1
-                    )
-                }
+                PlayingQueue.navigateNext()
             }
 
             PREV -> {
-                if (PlayingQueue.hasPrev()) {
-                    PlayingQueue.onQueueItemSelected(
-                        PlayingQueue.currentIndex() - 1
-                    )
-                }
+                PlayingQueue.navigatePrev()
             }
 
             REWIND -> {
@@ -301,10 +295,7 @@ class NowPlayingNotification(
             }
 
             PLAY_PAUSE -> {
-                if (player.playerError != null) player.prepare()
-                if (player.isPlaying) player.pause()
-                else if (player.playbackState == Player.STATE_ENDED) player.seekTo(0)
-                else player.play()
+                player.togglePlayPauseState()
             }
 
             STOP -> {
@@ -391,11 +382,8 @@ class NowPlayingNotification(
     /**
      * Destroy the [NowPlayingNotification]
      */
-    fun destroySelfAndPlayer() {
+    fun destroySelf() {
         mediaSession.release()
-
-        player.stop()
-        player.release()
 
         runCatching {
             context.unregisterReceiver(notificationActionReceiver)

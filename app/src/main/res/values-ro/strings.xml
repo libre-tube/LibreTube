@@ -551,4 +551,9 @@
     <string name="delete_all">Toate descărcările vor fi șterse!</string>
     <string name="download_playlist_note">Selectează calitatea audio/video maximă de descărcat. Subtitrările vor fi descărcate numai dacă sunt disponibile.</string>
     <string name="default_language">Implicit</string>
+    <string name="gestures">Gesturi</string>
+    <string name="behavior_when_minimized">Comportament când este minimizat</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="comments_count">Comentarii (%1$s)</string>
+    <string name="external_player">Player extern</string>
 </resources>

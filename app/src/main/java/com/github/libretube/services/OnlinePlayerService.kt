@@ -387,7 +387,10 @@ class OnlinePlayerService : LifecycleService() {
         // reset the playing queue
         PlayingQueue.resetToDefaults()
 
-        if (this::nowPlayingNotification.isInitialized) nowPlayingNotification.destroySelfAndPlayer()
+        if (this::nowPlayingNotification.isInitialized) nowPlayingNotification.destroySelf()
+
+        player?.stop()
+        player?.release()
 
         // called when the user pressed stop in the notification
         // stop the service from being in the foreground and remove the notification

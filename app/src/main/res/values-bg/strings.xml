@@ -11,7 +11,7 @@
     <string name="unsubscribe">Отписване</string>
     <string name="share">Сподели</string>
     <string name="download">Изтегли</string>
-    <string name="save">Запазване</string>
+    <string name="save">Запази</string>
     <string name="username">Потребителско име</string>
     <string name="password">Парола</string>
     <string name="login">Влизане</string>
@@ -19,7 +19,7 @@
     <string name="loggedout">Отписване.</string>
     <string name="registered">Регистриран. Вече можете да се абонирате за канали.</string>
     <string name="region">Регион</string>
-    <string name="login_register">Вписване/Регистриране</string>
+    <string name="login_register">Вписване/Регистрация</string>
     <string name="importsuccess">Абониран</string>
     <string name="downloadfailed">Изтеглянето е неуспешно.</string>
     <string name="app_theme">Тема</string>
@@ -115,7 +115,7 @@
     <string name="irreversible">Сигурни ли сте\? Това не може да бъде отменено!</string>
     <string name="notify_new_streams">Известия за нови потоци</string>
     <string name="notifications">Известия</string>
-    <string name="default_subtitle_language">Език на субтитрите</string>
+    <string name="default_subtitle_language">Език на надписите</string>
     <string name="best_quality">Най-доброто</string>
     <string name="device_info">Информация за устройството</string>
     <string name="open_copied">отваряне</string>
@@ -147,7 +147,7 @@
     <string name="clear_bookmarks">Изчистване на отметките</string>
     <string name="all_caught_up_summary">Видяхте всички нови видеоклипове</string>
     <string name="add_to_bookmarks">Добавяне към отметките</string>
-    <string name="general">Общо</string>
+    <string name="general">Общи</string>
     <string name="swipe_controls">Плъзнете за контролите</string>
     <string name="playerAudioQuality">Качество на звука</string>
     <string name="behavior">Поведение</string>
@@ -185,7 +185,7 @@
     <string name="vote_for_segment">Гласувайте за сегмент</string>
     <string name="upvote">Горе</string>
     <string name="pure_theme">Чиста тема</string>
-    <string name="trending">Какво е в набиращи популярност сега</string>
+    <string name="trending">Набиращи популярност</string>
     <string name="end_time">Крайно време</string>
     <string name="enter_hex_value">Въведете шестнадесетична стойност на цвета</string>
     <string name="import_format_piped">Piped / LibreTube</string>
@@ -253,7 +253,7 @@
     <string name="limit_to_runtime">Ограничение до време на изпълнение</string>
     <string name="category_sponsor_summary">Платена промоция, платени реферали и директни реклами. Не за самореклама или безплатни искрени възгласи към каузи, създатели, уебсайтове и продукти</string>
     <string name="unlimited">Неограничен</string>
-    <string name="hide_watched_from_feed">Скриване на гледаните видеоклипове от емисията</string>
+    <string name="hide_watched_from_feed">Скриване на вече гледани видеоклипове</string>
     <string name="buffering_goal_summary">Макс. количество секунди видео за буфериране</string>
     <string name="category_interaction_summary">Когато има кратко напомняне да харесате, да се абонирате или да следвате в средата на съдържанието. Ако е дълго или за нещо конкретно, вместо това трябва да е самореклама</string>
     <string name="import_from_yt_summary">От YouTube или NewPipe</string>
@@ -274,7 +274,7 @@
     <string name="server_error">Изглежда има проблем с избрания сървър. Опитайте друга инстанция.</string>
     <string name="category_highlight_summary">Може да бъде или рекламираното заглавие, миниизображението или най-интересната част от видеоклипа. Можете да преминете към него, като го докоснете в секцията с глави</string>
     <string name="uploader_name">Име на качващия</string>
-    <string name="swipe_controls_summary">Използвайте жест за плъзгане, за да регулирате яркостта и силата на звука</string>
+    <string name="swipe_controls_summary">Плъзнете, за да регулирате яркостта и силата на звука, докато сте в режим на цял екран</string>
     <string name="tooltip_filter">Филтър</string>
     <string name="off">Изключено</string>
     <string name="codecs">Кодеци</string>
@@ -536,4 +536,21 @@
     <string name="successfully_removed_from_playlist">Успешно премахване \"%1$s\" от плейлиста.</string>
     <string name="copy_tooltip">Копирай</string>
     <string name="delete_all">Hrvatski</string>
+    <string name="change_instance">Промяна на инстанция</string>
+    <string name="import_groups">Импортирайте групи канали</string>
+    <string name="change">Промяна</string>
+    <string name="behavior_when_minimized">Поведение при минимизиране</string>
+    <string name="gestures">Жестове</string>
+    <string name="also_clear_watch_positions">Също така изчистете позициите на часовника</string>
+    <string name="audio_language">Аудио език</string>
+    <string name="suggest_change_instance">Зареждането отнема повече от обикновено. Помислете за промяна на инстанцията</string>
+    <string name="export_groups">Експортиране на групи канали</string>
+    <string name="download_playlist">Изтегляне на плейлист</string>
+    <string name="enqueue_playlist_description">Показва известие, когато поставя в опашка видеоклипове от плейлист за изтегляне.</string>
+    <string name="enqueueing_playlist_download">Подреждане на видеоклипове за изтегляне на плейлиста %1$s</string>
+    <string name="default_language">По подразбиране</string>
+    <string name="download_playlist_note">Моля, изберете максималното аудио/видео качество за изтегляне. Надписите ще бъдат изтеглени само ако са налични.</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="comments_count">Коментари (%1$s)</string>
+    <string name="external_player">Външен плеър</string>
 </resources>

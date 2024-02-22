@@ -14,6 +14,7 @@ fun Player.togglePlayPauseState() {
         }
 
         !isPlaying -> play()
+
         else -> pause()
     }
 }

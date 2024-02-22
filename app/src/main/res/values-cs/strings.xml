@@ -223,7 +223,7 @@
     <string name="required_network">Požadované připojení</string>
     <string name="history_empty">Zatím žádná historie.</string>
     <string name="network_wifi">Pouze Wi-Fi</string>
-    <string name="irreversible">Opravdu\? Tohle se nedá vrátit!</string>
+    <string name="irreversible">Opravdu? Tato akce je nevratná!</string>
     <string name="network_all">Všechny</string>
     <string name="network_metered">Měřené</string>
     <string name="no_search_result">Žádné výsledky.</string>
@@ -533,7 +533,7 @@
     <string name="disable_sleep_timer">Vypnout časovač spánku</string>
     <string name="start_sleep_timer">Spustit časovač spánku</string>
     <string name="add_to_group">Přidat do skupiny</string>
-    <string name="uptime">Doba online %.2f%%</string>
+    <string name="uptime">spolehlivost %.2f%%</string>
     <string name="grid_landscape">Sloupce mřížky (na šířku)</string>
     <string name="rich_caption_rendering">Vylepšené vykreslování titulků</string>
     <string name="rich_caption_rendering_summary">Vykreslovat webové titulky pro lepší a více přizpůsobený zážitek</string>
@@ -551,4 +551,9 @@
     <string name="enqueueing_playlist_download">Zařazování videí z playlistu %1$s do fronty ke stažení</string>
     <string name="delete_all">Všechny stažené soubory budou smazány!</string>
     <string name="also_clear_watch_positions">Vymazat taky pozice sledování</string>
+    <string name="gestures">Gesta</string>
+    <string name="behavior_when_minimized">Chování při minimalizaci</string>
+    <string name="external_player">Externí přehrávač</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="comments_count">Komentáře (%1$s)</string>
 </resources>

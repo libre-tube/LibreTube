@@ -549,4 +549,6 @@
     <string name="enqueueing_playlist_download">Videos aus Playlist %1$s werden zum Download eingereiht</string>
     <string name="also_clear_watch_positions">Wiedergabepositionen ebenso löschen</string>
     <string name="download_playlist_note">Bitte wähle die maximale Audio-/Videoqualität zum Downloaden. Untertitel werden nur heruntergeladen, falls sie verfügbar sind.</string>
+    <string name="gestures">Gesten</string>
+    <string name="behavior_when_minimized">Verhalten bei Minimierung</string>
 </resources>

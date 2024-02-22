@@ -548,4 +548,9 @@
     <string name="download_playlist_note">Válassza ki a maximális letöltendő hang/videóminőséget. A feliratok csak akkor lesznek letöltve, ha elérhetőek.</string>
     <string name="enqueue_playlist_description">Értesítés megjelenítése, amikor egy lejátszási lista videóit állítja sorba letöltéshez.</string>
     <string name="also_clear_watch_positions">A megtekintési pozíciókat is törölje</string>
+    <string name="behavior_when_minimized">Viselkedés minimalizálva</string>
+    <string name="gestures">Gesztusok</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="comments_count">Hozzászólások (%1$s)</string>
+    <string name="external_player">Külső lejátszó</string>
 </resources>

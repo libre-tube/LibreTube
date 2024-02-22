@@ -548,4 +548,9 @@
     <string name="enqueueing_playlist_download">ਪਲੇਲਿਸਟ %1$s ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨ ਲਈ ਵੀਡੀਓਜ਼ ਦੀ ਕਤਾਰਬੰਦੀ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ</string>
     <string name="default_language">ਡਿਫ਼ਾਲਟ</string>
     <string name="also_clear_watch_positions">ਵੇਖਣ ਦੀਆਂ ਸਥਿਤੀਆਂ ਵੀ ਸਾਫ਼ ਕਰੋ</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="comments_count">ਟਿੱਪਣੀਆਂ (%1$s)</string>
+    <string name="behavior_when_minimized">ਮਿਨੀਮਾਈਜ਼ ਕਰਨ \'ਤੇ ਵਿਵਹਾਰ</string>
+    <string name="external_player">ਬਾਹਰੀ ਪਲੇਅਰ</string>
+    <string name="gestures">ਇਸ਼ਾਰੇ</string>
 </resources>

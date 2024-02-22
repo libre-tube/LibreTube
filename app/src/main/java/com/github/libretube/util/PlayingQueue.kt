@@ -222,6 +222,18 @@ object PlayingQueue {
         }
     }
 
+    fun navigatePrev() {
+        if (!hasPrev()) return
+
+        onQueueItemSelected(currentIndex() - 1)
+    }
+
+    fun navigateNext() {
+        if (!hasNext()) return
+
+        onQueueItemSelected(currentIndex() + 1)
+    }
+
     fun setOnQueueTapListener(listener: (StreamItem) -> Unit) {
         onQueueTapListener = listener
     }

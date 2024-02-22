@@ -551,4 +551,10 @@
     <string name="enqueue_playlist_description">Muestra una notificación cuando se ponen en cola vídeos de una lista de reproducción para ser descargados.</string>
     <string name="audio_language">Idioma del audio</string>
     <string name="default_language">Predeterminado</string>
+    <string name="behavior_when_minimized">Comportamiento al minimizar</string>
+    <string name="gestures">Gestos</string>
+    <string name="also_clear_watch_positions">Borre también las posiciones de visualización</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="external_player">Reproductor externo</string>
+    <string name="comments_count">Comentarios (%1$s)</string>
 </resources>

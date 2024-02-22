@@ -10,12 +10,12 @@
     <string name="login">Fazer login</string>
     <string name="register">Criar conta</string>
     <string name="logout">Sair</string>
-    <string name="loggedIn">Você está logado.</string>
-    <string name="loggedout">Você saiu da sua conta.</string>
-    <string name="already_logged_in">Você está logado. Se preferir, você pode sair da sua conta.</string>
+    <string name="loggedIn">Sessão iniciada.</string>
+    <string name="loggedout">Sessão encerrada.</string>
+    <string name="already_logged_in">Sessão já iniciada. Se preferir, você pode sair da sua conta.</string>
     <string name="instances">Escolher…</string>
     <string name="customInstance">Personalizada</string>
-    <string name="login_register">Fazer login / criar conta</string>
+    <string name="login_register">Fazer login/criar conta</string>
     <string name="cannotDownload">Não é possível baixar este vídeo.</string>
     <string name="downloadfailed">Download falhou.</string>
     <string name="import_from_yt">Importar inscrições</string>
@@ -160,7 +160,7 @@
     <string name="irreversible">Tem certeza\? Isto não pode ser desfeito!</string>
     <string name="least_views">Menos visualizados</string>
     <string name="require_restart">É necessário reiniciar o aplicativo</string>
-    <string name="deleteAccount_summary">Exluir sua conta do Piped</string>
+    <string name="deleteAccount_summary">Exluir sua conta Piped</string>
     <string name="no_audio">Sem áudio</string>
     <string name="always">Sempre</string>
     <string name="selected">Selecionado</string>
@@ -197,7 +197,7 @@
     <string name="video">Vídeo</string>
     <string name="player_autoplay">Reprodução automática</string>
     <string name="turnInternetOn">Ative o Wi-Fi ou os dados móveis para se conectar à Internet.</string>
-    <string name="navLabelVisibility">Visibilidade dos rótulos</string>
+    <string name="navLabelVisibility">Visibilidade dos textos</string>
     <string name="never">Nunca</string>
     <string name="autoRotatePlayer_summary">Reproduzir em tela cheia quando o dispositivo for girado</string>
     <string name="pure_theme">Tema puro</string>
@@ -221,7 +221,7 @@
     <string name="pauseOnScreenOff_summary">Pausar reprodução quando a tela estiver desligada</string>
     <string name="playingOnBackground">Reproduzindo em segundo plano…</string>
     <string name="clonePlaylist">Clonar playlist</string>
-    <string name="downloading">Baixando…</string>
+    <string name="downloading">Fazendo o download…</string>
     <string name="caption_settings">Legendas</string>
     <string name="playerAudioFormat">Formato padrão do áudio</string>
     <string name="playerAudioQuality">Qualidade do áudio</string>
@@ -289,8 +289,8 @@
     <string name="defaultIconLight">Claro padrão</string>
     <string name="playlistCloned">Playlist clonada</string>
     <string name="confirm_unsubscribing">Confirmar cancelamento de inscrição</string>
-    <string name="confirm_unsubscribing_summary">Mostrar diálogo de confirmação antes de cancelar a assinatura</string>
-    <string name="confirm_unsubscribe">Tem certeza de que deseja cancelar a assinatura de %1$s?</string>
+    <string name="confirm_unsubscribing_summary">Mostrar diálogo de confirmação antes de cancelar a inscrição</string>
+    <string name="confirm_unsubscribe">Tem certeza de que deseja cancelar a inscrição de %1$s?</string>
     <string name="play_all">Reproduzir tudo</string>
     <string name="time">Tempo</string>
     <string name="start_time">Horário inicial</string>
@@ -397,7 +397,7 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d vídeos</string>
     <string name="subscriberAndVideoCounts">%1$s inscritos • %2$d vídeos</string>
     <string name="disable_proxy">Desabilitar proxy Piped</string>
-    <string name="disable_proxy_summary">Carregue vídeos e imagens diretamente dos servidores do YouTube. Habilite a opção apenas se você sempre usa uma VPN</string>
+    <string name="disable_proxy_summary">Carregar vídeos e imagens diretamente dos servidores do YouTube. Habilite a opção apenas se você sempre usa uma VPN</string>
     <string name="auto_fullscreen_shorts">Tela cheia automática em vídeos curtos</string>
     <string name="new_group">Novo</string>
     <string name="channel_groups">Grupos de canais</string>
@@ -449,7 +449,7 @@
     <string name="category_highlight_summary">Pode ser o título anunciado, a miniatura ou a parte mais interessante do vídeo. Você pode pular tocando nele na seção de capítulos</string>
     <string name="chapters_videoHighlight">Vídeo em destaque</string>
     <string name="stop">Parar</string>
-    <string name="fallback_piped_proxy_summary">Carregue vídeos por meio do proxy se a conexão direta com o YouTube não funcionar para o vídeo atual (aumenta o tempo de carregamento inicial). Se desativado, o conteúdo musical do YouTube provavelmente não será reproduzido devido às restrições do YT</string>
+    <string name="fallback_piped_proxy_summary">Carregar vídeos por meio do proxy se a conexão direta com o YouTube não funcionar para o vídeo atual (aumenta o tempo de carregamento inicial). Se desativado, o conteúdo musical do YouTube provavelmente não será reproduzido devido às restrições do YT</string>
     <string name="sb_custom_colors">Cores de segmento personalizadas</string>
     <string name="sb_custom_colors_summary">Alterna segmentos de cores personalizadas para segmentos SponsorBlock</string>
     <string name="color">Cor</string>
@@ -461,7 +461,7 @@
     <string name="descriptive_audio_track">descritivo</string>
     <string name="default_or_unknown_audio_track">padrão ou desconhecido</string>
     <string name="unknown_or_no_audio">desconhecido ou sem audio</string>
-    <string name="original_or_main_audio_track">Original ou principal</string>
+    <string name="original_or_main_audio_track">original ou principal</string>
     <string name="unknown_audio_track_type">Tipo de faixa de áudio desconhecido</string>
     <string name="dubbed_audio_track">apelidada</string>
     <string name="unknown_audio_language">Idioma de áudio desconhecido</string>
@@ -505,7 +505,7 @@
     <string name="segment_type">Tipo de segmento</string>
     <string name="sb_invalid_segment">Início ou fim do segmento inválido</string>
     <string name="proxy">Proxy</string>
-    <string name="contribute_to_sponsorblock">Contribua para o SponsorBlock</string>
+    <string name="contribute_to_sponsorblock">Contribuir para o SponsorBlock</string>
     <string name="filename_too_long">Nome do arquivo muito longo!</string>
     <string name="sponsorblock_user_id">ID do usuário SponsorBlock</string>
     <string name="donate">Doar</string>
@@ -534,7 +534,7 @@
     <string name="no_segments_found">Ainda não há segmentos para este vídeo.</string>
     <string name="add_to_group">Adicionar ao grupo</string>
     <string name="rich_caption_rendering">Legendas melhoradas</string>
-    <string name="rich_caption_rendering_summary">Renderize legendas da web para uma experiência mais rica e personalizada</string>
+    <string name="rich_caption_rendering_summary">Processar legendas para um experiência melhorada e personalizada</string>
     <string name="uptime">%.2f%% em atividade</string>
     <string name="grid_landscape">Colunas da grade (modo paisagem)</string>
     <string name="copy_tooltip">Copiar</string>
@@ -543,7 +543,7 @@
     <string name="change_instance">Alterar instância</string>
     <string name="suggest_change_instance">O carregamento está demorando mais que o normal. Considere mudar de instância</string>
     <string name="change">Alterar</string>
-    <string name="enqueue_playlist_description">Mostra notificação ao enfileirar vídeos da playlist para o download.</string>
+    <string name="enqueue_playlist_description">Mostrar notificação ao enfileirar vídeos da playlist para o download.</string>
     <string name="download_playlist">Baixar playlist</string>
     <string name="download_playlist_note">Selecione a qualidade máxima de áudio/vídeo para download. As legendas só serão baixadas se estiverem disponíveis.</string>
     <string name="default_language">Padrão</string>
@@ -551,4 +551,9 @@
     <string name="enqueueing_playlist_download">Enfileirando vídeos para o download da playlist %1$s</string>
     <string name="delete_all">Todos os downloads serão excluídos!</string>
     <string name="also_clear_watch_positions">Limpar também as posições de reprodução</string>
+    <string name="behavior_when_minimized">Comportamento quando minimizado</string>
+    <string name="gestures">Gestos</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="comments_count">Comentários (%1$s)</string>
+    <string name="external_player">Player externo</string>
 </resources>

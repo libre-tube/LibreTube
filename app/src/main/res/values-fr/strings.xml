@@ -552,4 +552,9 @@
     <string name="enqueue_playlist_description">Affiche une notification lors de la mise en file d\'attente des vidéos d\'une liste de lecture à télécharger.</string>
     <string name="audio_language">Langue de l\'audio</string>
     <string name="also_clear_watch_positions">Effacez également les positions de lecture</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="comments_count">Commentaires (%1$s)</string>
+    <string name="external_player">Lecteur externe</string>
+    <string name="behavior_when_minimized">Comportement en cas de minimisation</string>
+    <string name="gestures">Gestes</string>
 </resources>

@@ -42,6 +42,8 @@ class InstancesAdapter(
             }
             radioButton.text = instanceText
 
+            radioButton.alpha = if (instance.isCurrentlyDown) 0.5f else 1f
+
             radioButton.setOnCheckedChangeListener(null)
             radioButton.isChecked = selectedInstanceIndex == position
             radioButton.setOnCheckedChangeListener { _, isChecked ->

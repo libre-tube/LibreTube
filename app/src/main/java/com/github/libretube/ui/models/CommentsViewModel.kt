@@ -1,27 +1,45 @@
 package com.github.libretube.ui.models
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
-import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.obj.CommentsPage
-import com.github.libretube.extensions.TAG
-import com.github.libretube.ui.extensions.filterNonEmptyComments
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
+import com.github.libretube.ui.models.sources.CommentPagingSource
+import com.github.libretube.ui.models.sources.CommentRepliesPagingSource
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapLatest
 
 class CommentsViewModel : ViewModel() {
-    val commentsPage = MutableLiveData<CommentsPage?>()
+    val videoIdLiveData = MutableLiveData<String>()
+    val selectedCommentLiveData = MutableLiveData<String>()
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val commentsFlow = videoIdLiveData.asFlow()
+        .flatMapLatest {
+            Pager(PagingConfig(pageSize = 20, enablePlaceholders = false)) {
+                CommentPagingSource(it)
+            }.flow
+        }
+        .cachedIn(viewModelScope)
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val commentRepliesFlow = videoIdLiveData.asFlow()
+        .combine(selectedCommentLiveData.asFlow()) { videoId, comment -> videoId to comment }
+        .flatMapLatest { (videoId, commentPage) ->
+            Pager(PagingConfig(20, enablePlaceholders = false)) {
+                CommentRepliesPagingSource(videoId, commentPage)
+            }.flow
+        }
+        .cachedIn(viewModelScope)
+
     val commentSheetExpand = MutableLiveData<Boolean?>()
 
-    var videoId: String? = null
     var channelAvatar: String? = null
     var handleLink: ((url: String) -> Unit)? = null
 
-    private var nextPage: String? = null
-    var isLoading = MutableLiveData<Boolean>()
     var currentCommentsPosition = 0
     var commentsSheetDismiss: (() -> Unit)? = null
 
@@ -31,62 +49,7 @@ class CommentsViewModel : ViewModel() {
         }
     }
 
-    fun fetchComments() {
-        val videoId = videoId ?: return
-
-        isLoading.value = true
-
-        viewModelScope.launch {
-            val response = try {
-                withContext(Dispatchers.IO) {
-                    RetrofitInstance.api.getComments(videoId)
-                }
-            } catch (e: Exception) {
-                Log.e(TAG(), e.toString())
-                return@launch
-            } finally {
-                isLoading.value = false
-            }
-
-            nextPage = response.nextpage
-            response.comments = response.comments.filterNonEmptyComments()
-            commentsPage.postValue(response)
-        }
-    }
-
-    fun fetchNextComments() {
-        if (isLoading.value == true || nextPage == null || videoId == null) return
-
-        isLoading.value = true
-
-        viewModelScope.launch {
-            val response = try {
-                withContext(Dispatchers.IO) {
-                    RetrofitInstance.api.getCommentsNextPage(videoId!!, nextPage!!)
-                }
-            } catch (e: Exception) {
-                Log.e(TAG(), e.toString())
-                return@launch
-            } finally {
-                isLoading.value = false
-            }
-
-            val updatedPage = commentsPage.value?.apply {
-                comments += response.comments
-                    .filterNonEmptyComments()
-                    .filter { comment -> comments.none { it.commentId == comment.commentId } }
-            }
-
-            nextPage = response.nextpage
-            commentsPage.postValue(updatedPage)
-        }
-    }
-
     fun reset() {
-        isLoading.value = false
-        nextPage = null
-        commentsPage.value = null
-        videoId = null
         setCommentSheetExpand(null)
         currentCommentsPosition = 0
     }

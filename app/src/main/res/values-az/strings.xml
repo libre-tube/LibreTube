@@ -548,4 +548,9 @@
     <string name="enqueueing_playlist_download">%1$s oynatma siyahısın yükləmək üçün videolar növbəyə salınır</string>
     <string name="delete_all">Bütün yükləmələr silinəcək!</string>
     <string name="also_clear_watch_positions">Baxış mövqelərini də təmizlə</string>
+    <string name="behavior_when_minimized">Kiçildilərkən davranış</string>
+    <string name="gestures">Jestlər</string>
+    <string name="external_player">Xarici oynadıcı</string>
+    <string name="comments_count">Şərhlər (%1$s)</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
 </resources>

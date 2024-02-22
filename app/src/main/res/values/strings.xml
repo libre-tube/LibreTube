@@ -66,10 +66,12 @@
     <string name="donate">Donate</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d videos</string>
     <string name="subscriberAndVideoCounts">%1$s subscribers • %2$d videos</string>
+    <string name="commentedTimeWithSeparator"> • %1$s</string>
     <string name="videoCount">%1$d videos</string>
     <string name="noInternet">Connect to the Internet first.</string>
     <string name="retry">Retry</string>
     <string name="comments">Comments</string>
+    <string name="comments_count">Comments (%1$s)</string>
     <string name="replies">Replies</string>
     <string name="channels">Channels</string>
     <string name="all">All</string>
@@ -470,6 +472,8 @@
     <string name="enqueueing_playlist_download">Enqueueing videos to download of playlist "%1$s"</string>
     <string name="audio_language">Audio language</string>
     <string name="default_language">Default</string>
+    <string name="behavior_when_minimized">Behavior when minimized</string>
+    <string name="external_player">External player</string>
 
     <!-- Backup & Restore Settings -->
     <string name="import_subscriptions_from">Import subscriptions from</string>
@@ -513,6 +517,7 @@
     <string name="add_to_group">Add to group</string>
     <string name="uptime">%.2f%% uptime</string>
     <string name="change">Change</string>
+    <string name="gestures">Gestures</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

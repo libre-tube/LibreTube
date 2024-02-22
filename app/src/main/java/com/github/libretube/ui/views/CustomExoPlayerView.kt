@@ -10,6 +10,7 @@ import android.os.Handler
 import android.os.Looper
 import android.text.format.DateUtils
 import android.util.AttributeSet
+import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.Window
@@ -23,6 +24,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.marginStart
 import androidx.core.view.updateLayoutParams
+import androidx.fragment.app.commit
 import androidx.media3.common.C
 import androidx.media3.common.Player
 import androidx.media3.common.text.Cue
@@ -44,6 +46,7 @@ import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.helpers.AudioHelper
 import com.github.libretube.helpers.BrightnessHelper
+import com.github.libretube.helpers.ContextHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.WindowHelper
@@ -51,6 +54,7 @@ import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.toggleSystemBars
 import com.github.libretube.ui.extensions.trySetTooltip
+import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.interfaces.PlayerOptions
 import com.github.libretube.ui.listeners.PlayerGestureController
@@ -727,6 +731,34 @@ open class CustomExoPlayerView(
             enqueueHideControllerTask()
         }
         return super.onInterceptTouchEvent(ev)
+    }
+
+    fun onKeyBoardAction(keyCode: Int, event: KeyEvent?): Boolean {
+        when (keyCode) {
+            KeyEvent.KEYCODE_SPACE, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE -> {
+                player?.togglePlayPauseState()
+            }
+            KeyEvent.KEYCODE_DPAD_RIGHT, KeyEvent.KEYCODE_MEDIA_FAST_FORWARD -> {
+                forward()
+            }
+            KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_MEDIA_REWIND -> {
+                rewind()
+            }
+            KeyEvent.KEYCODE_N, KeyEvent.KEYCODE_NAVIGATE_NEXT -> {
+                PlayingQueue.navigateNext()
+            }
+            KeyEvent.KEYCODE_P, KeyEvent.KEYCODE_NAVIGATE_PREVIOUS -> {
+                PlayingQueue.navigatePrev()
+            }
+            KeyEvent.KEYCODE_F -> {
+                val fragmentManager = ContextHelper.unwrapActivity(context).supportFragmentManager
+                fragmentManager.fragments.filterIsInstance<PlayerFragment>().firstOrNull()
+                    ?.toggleFullscreen()
+            }
+            else -> super.onKeyUp(keyCode, event)
+        }
+
+        return true
     }
 
     open fun minimizeOrExitPlayer() = Unit
