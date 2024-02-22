@@ -16,7 +16,7 @@ class UpdateAvailableDialog : DialogFragment() {
     fun onCreateDialog(
         changelog: String,
         releaseUrl: String,
-        context: Context
+        context: Context,
     ): Dialog {
 
         return MaterialAlertDialogBuilder(context)
