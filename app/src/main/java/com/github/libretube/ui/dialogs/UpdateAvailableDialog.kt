@@ -13,7 +13,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class UpdateAvailableDialog : DialogFragment() {
 
-    fun onCreateDialog(changelog: String, releaseUrl: String, context: Context): Dialog {
+    fun onCreateDialog(
+        changelog: String,
+        releaseUrl: String,
+        context: Context
+    ): Dialog {
 
         return MaterialAlertDialogBuilder(context)
             .setTitle(R.string.update_available)
