@@ -12,8 +12,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class UpdateChecker(private val context: Context) {
-    private lateinit var changelog: String
-    private lateinit var releaseURL: String
+    private var changelog: String? = null
+    private var releaseURL: String? = null
 
     suspend fun checkUpdate(manualTrigger: Boolean = false) {
         val currentAppVersion = BuildConfig.VERSION_NAME.replace(".", "")
@@ -31,9 +31,9 @@ class UpdateChecker(private val context: Context) {
 
                 if (update != null && currentAppVersion.toInt() < update) {
                     withContext(Dispatchers.Main) {
-                        UpdateAvailableDialog().showDialog(
-                            sanitizeChangelog(changelog),
-                            releaseURL,
+                        UpdateAvailableDialog().onCreateDialog(
+                            sanitizeChangelog(changelog!!),
+                            releaseURL!!,
                             context,
                         )
                     }
