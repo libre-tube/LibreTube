@@ -112,9 +112,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         binding.uploader.isSelected = true
 
         binding.minimizePlayer.setOnClickListener {
-            val mainMotionLayout = mainActivity.binding.mainMotionLayout
-            mainMotionLayout.transitionToStart()
-            binding.playerMotionLayout.transitionToEnd()
+            minimizePlayer()
         }
 
         binding.autoPlay.isChecked = PlayerHelper.autoPlayEnabled
@@ -207,6 +205,12 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         if (!PlayerHelper.playAutomatically) updatePlayPauseButton()
     }
 
+    private fun minimizePlayer() {
+        val mainMotionLayout = mainActivity.binding.mainMotionLayout
+        mainMotionLayout.transitionToStart()
+        binding.playerMotionLayout.transitionToEnd()
+    }
+
     private fun killFragment() {
         viewModel.isFullscreen.value = false
         binding.playerMotionLayout.transitionToEnd()
@@ -250,6 +254,10 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
                 }
             }
         })
+
+        binding.playerMotionLayout.addSwipeDownListener {
+            minimizePlayer()
+        }
 
         if (arguments?.getBoolean(IntentData.minimizeByDefault, false) != true) {
             binding.playerMotionLayout.progress = 1f
