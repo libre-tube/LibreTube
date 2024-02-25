@@ -34,6 +34,7 @@ import com.github.libretube.ui.adapters.LegacySubscriptionAdapter
 import com.github.libretube.ui.adapters.SubscriptionChannelAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
+import com.github.libretube.ui.extensions.addOnBottomReachedListener
 import com.github.libretube.ui.models.EditChannelGroupsModel
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
@@ -134,24 +135,20 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
             binding.subFeed.isGone = isCurrentTabSubChannels
         }
 
-        binding.subChannels.viewTreeObserver.addOnScrollChangedListener {
-            val binding = _binding
-            if (binding?.subChannels?.canScrollVertically(1) == false &&
-                viewModel.subscriptions.value != null && // scroll view is at bottom
-                isCurrentTabSubChannels
-            ) {
+        binding.subChannels.addOnBottomReachedListener {
+            val binding = _binding ?: return@addOnBottomReachedListener
+
+            if (viewModel.subscriptions.value != null && isCurrentTabSubChannels) {
                 binding.subRefresh.isRefreshing = true
                 channelsAdapter?.updateItems()
                 binding.subRefresh.isRefreshing = false
             }
         }
 
-        binding.subFeed.viewTreeObserver.addOnScrollChangedListener {
-            val binding = _binding
-            if (binding?.subFeed?.canScrollVertically(1) == false &&
-                viewModel.videoFeed.value != null && // scroll view is at bottom
-                !isCurrentTabSubChannels
-            ) {
+        binding.subFeed.addOnBottomReachedListener {
+            val binding = _binding ?: return@addOnBottomReachedListener
+
+            if (viewModel.videoFeed.value != null && !isCurrentTabSubChannels) {
                 binding.subRefresh.isRefreshing = true
                 feedAdapter?.updateItems()
                 binding.subRefresh.isRefreshing = false
