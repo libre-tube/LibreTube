@@ -17,7 +17,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.NavDirections
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
@@ -31,15 +30,14 @@ import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
-import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
-import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.PlaylistAdapter
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
+import com.github.libretube.ui.extensions.addOnBottomReachedListener
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
@@ -312,18 +310,16 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
             }
         })
 
-        binding.playlistRecView.viewTreeObserver.addOnScrollChangedListener {
-            if (_binding?.playlistRecView?.canScrollVertically(1) == false &&
-                !isLoading
-            ) {
-                // append more playlists to the recycler view
-                if (playlistType != PlaylistType.PUBLIC) {
-                    isLoading = true
-                    playlistAdapter?.showMoreItems()
-                    isLoading = false
-                } else {
-                    fetchNextPage()
-                }
+        binding.playlistRecView.addOnBottomReachedListener {
+            if (isLoading) return@addOnBottomReachedListener
+
+            // append more playlists to the recycler view
+            if (playlistType != PlaylistType.PUBLIC) {
+                isLoading = true
+                playlistAdapter?.showMoreItems()
+                isLoading = false
+            } else {
+                fetchNextPage()
             }
         }
 

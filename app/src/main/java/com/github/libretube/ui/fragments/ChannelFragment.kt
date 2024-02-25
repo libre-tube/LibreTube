@@ -30,6 +30,7 @@ import com.github.libretube.ui.adapters.SearchChannelAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.extensions.addOnBottomReachedListener
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.sheets.AddChannelToGroupSheet
 import com.github.libretube.util.deArrow
@@ -102,10 +103,8 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
             fetchChannel()
         }
 
-        binding.channelRecView.viewTreeObserver.addOnScrollChangedListener {
-            val binding = _binding ?: return@addOnScrollChangedListener
-
-            if (binding.channelRecView.canScrollVertically(1) || isLoading) return@addOnScrollChangedListener
+        binding.channelRecView.addOnBottomReachedListener {
+            if (_binding == null || isLoading) return@addOnBottomReachedListener
 
             loadNextPage()
         }
