@@ -24,7 +24,6 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.marginStart
 import androidx.core.view.updateLayoutParams
-import androidx.fragment.app.commit
 import androidx.media3.common.C
 import androidx.media3.common.Player
 import androidx.media3.common.text.Cue
