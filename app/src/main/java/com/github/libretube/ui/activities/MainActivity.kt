@@ -136,10 +136,10 @@ class MainActivity : BaseActivity() {
 
         setupSubscriptionsBadge()
 
-        // new way of handling back presses
         onBackPressedDispatcher.addCallback {
             if (playerViewModel.isFullscreen.value == true) {
-                runOnPlayerFragment { unsetFullscreen() }
+                val fullscreenUnsetSuccess = runOnPlayerFragment { unsetFullscreen() }
+                if (fullscreenUnsetSuccess) return@addCallback
             }
 
             if (binding.mainMotionLayout.progress == 0F) {
@@ -497,12 +497,19 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
-        return runOnPlayerFragment { onKeyUp(keyCode, event) } ?: false
+        return runOnPlayerFragment { onKeyUp(keyCode, event) }
     }
 
-    private fun <T> runOnPlayerFragment(action: PlayerFragment.() -> T): T? {
-        return supportFragmentManager.fragments.filterIsInstance<PlayerFragment>()
+    /**
+     * Attempt to run code on the player fragment if running
+     * Returns true if a running player fragment was found and the action got consumed, else false
+     */
+    private fun runOnPlayerFragment(action: PlayerFragment.() -> Unit): Boolean {
+        supportFragmentManager.fragments.filterIsInstance<PlayerFragment>()
             .firstOrNull()
             ?.let(action)
+            ?.run { return true }
+
+        return false
     }
 }

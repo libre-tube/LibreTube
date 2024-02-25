@@ -32,7 +32,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/StartupTheme"
-        tools:targetApi="n">
+        android:enableOnBackInvokedCallback="true"
+        tools:targetApi="tiramisu">
 
         <activity
             android:name=".ui.activities.WelcomeActivity"
