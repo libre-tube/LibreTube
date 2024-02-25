@@ -6,165 +6,175 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
-        android:id="@+id/channel_scrollView"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/channel_coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="invisible"
-        tools:context=".ui.fragments.ChannelFragment">
+        android:visibility="gone">
 
-        <LinearLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/channel_app_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/channel_banner"
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/channel_collapsing_tb"
                 android:layout_width="match_parent"
-                android:layout_height="80dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:orientation="horizontal">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/channel_image"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_gravity="center"
-                    app:shapeAppearance="@style/CircleImageView" />
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll"
+                app:titleCollapseMode="scale">
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_collapseMode="pin">
 
-                    <TextView
-                        android:id="@+id/channel_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:layout_marginTop="3.5dp"
-                        android:drawablePadding="3dp"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        tools:text="Channel Name" />
+                    <ImageView
+                        android:id="@+id/channel_banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp" />
 
-                    <TextView
-                        android:id="@+id/channel_subs"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/channel_image"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            app:shapeAppearance="@style/CircleImageView" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/channel_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginTop="3.5dp"
+                                android:drawablePadding="3dp"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                tools:text="Channel Name" />
+
+                            <TextView
+                                android:id="@+id/channel_subs"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:maxLines="1"
+                                android:text="@string/app_name"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/channel_share"
+                            style="@style/ElevatedIconButton"
+                            android:tooltipText="@string/share"
+                            app:icon="@drawable/ic_share"
+                            tools:targetApi="m" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/notification_bell"
+                            style="@style/ElevatedIconButton"
+                            android:tooltipText="@string/notifications"
+                            app:icon="@drawable/ic_notification"
+                            tools:targetApi="m" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/channel_subscribe"
+                            style="@style/Widget.Material3.Button.ElevatedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableTint="?android:attr/textColorPrimary"
+                            android:stateListAnimator="@null"
+                            android:text="@string/subscribe"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:textSize="12sp"
+                            app:cornerRadius="20dp"
+                            app:elevation="20dp"
+                            tools:targetApi="m" />
+
+                    </LinearLayout>
+
+                    <com.github.libretube.ui.views.ExpandableTextView
+                        android:id="@+id/channel_description"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:maxLines="1"
-                        android:text="@string/app_name"
-                        android:textSize="12sp" />
+                        android:layout_marginHorizontal="5dp"
+                        android:autoLink="web"
+                        android:padding="10dp" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="10dp"
+                        android:scrollbars="none">
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/tab_chips"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:checkedChip="@+id/videos"
+                            app:selectionRequired="true"
+                            app:singleLine="true"
+                            app:singleSelection="true">
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@id/videos"
+                                style="@style/channelChip"
+                                android:text="@string/videos"
+                                android:visibility="visible" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/shorts"
+                                style="@style/channelChip"
+                                android:text="@string/yt_shorts" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/livestreams"
+                                style="@style/channelChip"
+                                android:text="@string/livestreams" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/playlists"
+                                style="@style/channelChip"
+                                android:text="@string/playlists" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/channels"
+                                style="@style/channelChip"
+                                android:text="@string/channels" />
+
+                        </com.google.android.material.chip.ChipGroup>
+
+                    </HorizontalScrollView>
 
                 </LinearLayout>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/channel_share"
-                    android:tooltipText="@string/share"
-                    style="@style/ElevatedIconButton"
-                    app:icon="@drawable/ic_share"
-                    tools:targetApi="m" />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/notification_bell"
-                    android:tooltipText="@string/notifications"
-                    style="@style/ElevatedIconButton"
-                    app:icon="@drawable/ic_notification"
-                    tools:targetApi="m" />
+        </com.google.android.material.appbar.AppBarLayout>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/channel_subscribe"
-                    style="@style/Widget.Material3.Button.ElevatedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableTint="?android:attr/textColorPrimary"
-                    android:stateListAnimator="@null"
-                    android:text="@string/subscribe"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="12sp"
-                    app:cornerRadius="20dp"
-                    app:elevation="20dp"
-                    tools:targetApi="m" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/channel_recView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-            </LinearLayout>
-
-            <com.github.libretube.ui.views.ExpandableTextView
-                android:id="@+id/channel_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
-                android:autoLink="web"
-                android:padding="10dp" />
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="10dp"
-                android:scrollbars="none">
-
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/tab_chips"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:checkedChip="@+id/videos"
-                    app:selectionRequired="true"
-                    app:singleLine="true"
-                    app:singleSelection="true">
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@id/videos"
-                        style="@style/channelChip"
-                        android:text="@string/videos"
-                        android:visibility="visible" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/shorts"
-                        style="@style/channelChip"
-                        android:text="@string/yt_shorts" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/livestreams"
-                        style="@style/channelChip"
-                        android:text="@string/livestreams" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/playlists"
-                        style="@style/channelChip"
-                        android:text="@string/playlists" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/channels"
-                        style="@style/channelChip"
-                        android:text="@string/channels" />
-
-                </com.google.android.material.chip.ChipGroup>
-
-            </HorizontalScrollView>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:descendantFocusability="blocksDescendants">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/channel_recView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false" />
-
-            </RelativeLayout>
-        </LinearLayout>
-    </ScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </com.github.libretube.ui.views.CustomSwipeToRefresh>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,148 +10,156 @@
         android:id="@+id/playlist_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:layout_gravity="center" />
 
-    <ScrollView
-        android:id="@+id/playlist_scrollview"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/playlist_recView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:visibility="gone"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/playlist_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/playlist_collapsing_tb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/thumbnail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginVertical="10dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small"
-                tools:src="@tools:sample/backgrounds/scenic" />
+            app:layout_scrollFlags="scroll"
+            app:titleCollapseMode="scale">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <com.github.libretube.ui.views.ExpandableTextView
-                    android:id="@+id/playlist_name"
-                    android:layout_width="0dp"
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/thumbnail"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_weight="1"
-                    android:paddingHorizontal="5dp"
-                    android:paddingVertical="2dp"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small"
+                    tools:src="@tools:sample/backgrounds/scenic" />
 
                 <LinearLayout
-                    android:id="@+id/sortContainer"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/rounded_ripple"
-                    android:padding="5dp"
-                    android:visibility="gone"
-                    tools:visibility="visible">
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/sortTV"
+                    <com.github.libretube.ui.views.ExpandableTextView
+                        android:id="@+id/playlist_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:paddingHorizontal="5dp"
+                        android:paddingVertical="2dp"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/sortContainer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        tools:text="@string/most_recent" />
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/rounded_ripple"
+                        android:padding="5dp"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <TextView
+                            android:id="@+id/sortTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="5dp"
+                            tools:text="@string/most_recent" />
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_sort" />
+
+                    </LinearLayout>
 
                     <ImageView
+                        android:id="@+id/optionsMenu"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_sort" />
+                        android:layout_marginEnd="20dp"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_three_dots" />
 
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/optionsMenu"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="20dp"
-                    android:background="?selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_three_dots" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/playlistInfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="15dp"
-                android:paddingBottom="5dp"
-                android:textStyle="bold" />
-
-            <com.github.libretube.ui.views.ExpandableTextView
-                android:id="@+id/playlistDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
-                android:autoLink="web"
-                android:paddingHorizontal="10dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="10dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:orientation="horizontal">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/play_all"
-                    style="@style/Widget.Material3.Button.OutlinedButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_weight="1"
-                    android:maxLines="1"
-                    android:text="@string/play_all"
-                    app:icon="@drawable/ic_playlist" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/bookmark"
-                    style="@style/Widget.Material3.Button"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_weight="1"
-                    android:maxLines="1"
-                    android:text="@string/bookmark"
-                    app:icon="@drawable/ic_bookmark_outlined" />
-
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:descendantFocusability="blocksDescendants">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/playlist_recView"
+                <TextView
+                    android:id="@+id/playlistInfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clipToPadding="false"
-                    android:nestedScrollingEnabled="false" />
-            </RelativeLayout>
+                    android:paddingHorizontal="15dp"
+                    android:paddingBottom="5dp"
+                    android:textStyle="bold" />
 
-        </LinearLayout>
+                <com.github.libretube.ui.views.ExpandableTextView
+                    android:id="@+id/playlistDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:autoLink="web"
+                    android:paddingHorizontal="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="10dp" />
 
-    </ScrollView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:orientation="horizontal">
 
-</RelativeLayout>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/play_all"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_weight="1"
+                        android:maxLines="1"
+                        android:text="@string/play_all"
+                        app:icon="@drawable/ic_playlist" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/bookmark"
+                        style="@style/Widget.Material3.Button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_weight="1"
+                        android:maxLines="1"
+                        android:text="@string/bookmark"
+                        app:icon="@drawable/ic_bookmark_outlined" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
