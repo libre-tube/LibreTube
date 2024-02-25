@@ -17,7 +17,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
+import com.github.libretube.api.obj.Channel
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.api.obj.Subscription
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
@@ -165,7 +167,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
 
         binding.channelGroups.setOnCheckedStateChangeListener { group, checkedIds ->
             selectedFilterGroup = group.children.indexOfFirst { it.id == checkedIds.first() }
-            showFeed()
+            if (isCurrentTabSubChannels) showSubscriptions() else showFeed()
         }
 
         channelGroupsModel.groups.observe(viewLifecycleOwner) {
@@ -279,8 +281,15 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
         }
     }
 
-    private fun List<StreamItem>.filterByStatusAndWatchPosition(): List<StreamItem> {
+    @JvmName("filterSubsByGroup")
+    private fun List<Subscription>.filterByGroup(groupIndex: Int): List<Subscription> {
+        if (groupIndex == 0) return this
 
+        val group = channelGroupsModel.groups.value?.getOrNull(groupIndex - 1)
+        return filter { group?.channels?.contains(it.url.toID()) != false }
+    }
+
+    private fun List<StreamItem>.filterByStatusAndWatchPosition(): List<StreamItem> {
         val streamItems = this.filter {
             val isVideo = !it.isShort && !it.isLive
 
@@ -350,7 +359,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
 
     @SuppressLint("SetTextI18n")
     private fun showSubscriptions() {
-        val subscriptions = viewModel.subscriptions.value ?: return
+        val subscriptions = viewModel.subscriptions.value?.filterByGroup(selectedFilterGroup) ?: return
 
         val legacySubscriptions = PreferenceHelper.getBoolean(
             PreferenceKeys.LEGACY_SUBSCRIPTIONS,
