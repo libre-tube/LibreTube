@@ -55,6 +55,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
     private val channelGroupsModel: EditChannelGroupsModel by activityViewModels()
     private var selectedFilterGroup = 0
     private var isCurrentTabSubChannels = false
+    private var isAppBarFullyExpanded = true
 
     var feedAdapter: VideosAdapter? = null
     private var channelsAdapter: SubscriptionChannelAdapter? = null
@@ -89,6 +90,16 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
 
         setupSortAndFilter()
 
+        // Check if the AppBarLayout is fully expanded
+        binding.subscriptionsAppBar.addOnOffsetChangedListener { _, verticalOffset ->
+            isAppBarFullyExpanded = verticalOffset == 0
+        }
+
+        // Determine if the child can scroll up
+        binding.subRefresh.setOnChildScrollUpCallback { _, _ ->
+            !isAppBarFullyExpanded
+        }
+
         binding.subRefresh.isEnabled = true
         binding.subProgress.isVisible = true
 
@@ -119,21 +130,30 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
 
             if (isCurrentTabSubChannels) showSubscriptions() else showFeed()
 
-            binding.subChannelsContainer.isVisible = isCurrentTabSubChannels
-            binding.subFeedContainer.isGone = isCurrentTabSubChannels
+            binding.subChannels.isVisible = isCurrentTabSubChannels
+            binding.subFeed.isGone = isCurrentTabSubChannels
         }
 
-        binding.scrollviewSub.viewTreeObserver.addOnScrollChangedListener {
+        binding.subChannels.viewTreeObserver.addOnScrollChangedListener {
             val binding = _binding
-            if (binding?.scrollviewSub?.canScrollVertically(1) == false &&
-                viewModel.videoFeed.value != null // scroll view is at bottom
+            if (binding?.subChannels?.canScrollVertically(1) == false &&
+                viewModel.subscriptions.value != null && // scroll view is at bottom
+                isCurrentTabSubChannels
             ) {
                 binding.subRefresh.isRefreshing = true
-                if (isCurrentTabSubChannels) {
-                    channelsAdapter?.updateItems()
-                } else {
-                    feedAdapter?.updateItems()
-                }
+                channelsAdapter?.updateItems()
+                binding.subRefresh.isRefreshing = false
+            }
+        }
+
+        binding.subFeed.viewTreeObserver.addOnScrollChangedListener {
+            val binding = _binding
+            if (binding?.subFeed?.canScrollVertically(1) == false &&
+                viewModel.videoFeed.value != null && // scroll view is at bottom
+                !isCurrentTabSubChannels
+            ) {
+                binding.subRefresh.isRefreshing = true
+                feedAdapter?.updateItems()
                 binding.subRefresh.isRefreshing = false
             }
         }
@@ -141,7 +161,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
         // add some extra margin to the subscribed channels while the mini player is visible
         // otherwise the last channel would be invisible
         playerModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
-            binding.subChannelsContainer.updateLayoutParams<MarginLayoutParams> {
+            binding.subChannels.updateLayoutParams<MarginLayoutParams> {
                 bottomMargin = (if (it) 64f else 0f).dpToPx()
             }
         }
@@ -314,11 +334,11 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
             }
         }
 
-        binding.subChannelsContainer.isGone = true
+        binding.subChannels.isGone = true
         binding.subProgress.isGone = true
 
         val notLoaded = viewModel.videoFeed.value.isNullOrEmpty()
-        binding.subFeedContainer.isGone = notLoaded
+        binding.subFeed.isGone = notLoaded
         binding.emptyFeed.isVisible = notLoaded
 
         feedAdapter = VideosAdapter(
@@ -357,10 +377,10 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
 
         binding.subRefresh.isRefreshing = false
         binding.subProgress.isGone = true
-        binding.subFeedContainer.isGone = true
+        binding.subFeed.isGone = true
 
         val notLoaded = viewModel.subscriptions.value.isNullOrEmpty()
-        binding.subChannelsContainer.isGone = notLoaded
+        binding.subChannels.isGone = notLoaded
         binding.emptyFeed.isVisible = notLoaded
 
         val subCount = subscriptions.size.toLong().formatShort()
