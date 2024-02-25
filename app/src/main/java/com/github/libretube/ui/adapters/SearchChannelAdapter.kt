@@ -70,7 +70,6 @@ class SearchChannelAdapter : ListAdapter<ContentItem, SearchViewHolder>(SearchCa
 
     private fun bindVideo(item: ContentItem, binding: VideoRowBinding, position: Int) {
         binding.apply {
-            thumbnail.setImageDrawable(null)
             ImageHelper.loadImage(item.thumbnail, thumbnail)
             thumbnailDuration.setFormattedDuration(item.duration, item.isShort)
             videoTitle.text = item.title
@@ -117,7 +116,6 @@ class SearchChannelAdapter : ListAdapter<ContentItem, SearchViewHolder>(SearchCa
 
     private fun bindChannel(item: ContentItem, binding: ChannelRowBinding) {
         binding.apply {
-            searchChannelImage.setImageDrawable(null)
             ImageHelper.loadImage(item.thumbnail, searchChannelImage, true)
             searchChannelName.text = item.name
 
@@ -156,7 +154,6 @@ class SearchChannelAdapter : ListAdapter<ContentItem, SearchViewHolder>(SearchCa
 
     private fun bindPlaylist(item: ContentItem, binding: PlaylistsRowBinding) {
         binding.apply {
-            playlistThumbnail.setImageDrawable(null)
             ImageHelper.loadImage(item.thumbnail, playlistThumbnail)
             if (item.videos != -1L) videoCount.text = item.videos.toString()
             playlistTitle.text = item.name

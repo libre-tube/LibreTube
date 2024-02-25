@@ -103,8 +103,6 @@ class VideosAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: VideosViewHolder, position: Int) {
-        holder.trendingRowBinding?.thumbnail?.setImageDrawable(null)
-
         val video = streamItems[position]
         val videoId = video.url?.toID()
 
@@ -114,9 +112,9 @@ class VideosAdapter(
         }
 
         val context = (
-            holder.videoRowBinding ?: holder.trendingRowBinding
+                holder.videoRowBinding ?: holder.trendingRowBinding
                 ?: holder.allCaughtUpBinding
-            )!!.root.context
+                )!!.root.context
         val activity = (context as BaseActivity)
         val fragmentManager = activity.supportFragmentManager
 

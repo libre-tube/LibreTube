@@ -64,6 +64,9 @@ object ImageHelper {
      * load an image from a url into an imageView
      */
     fun loadImage(url: String?, target: ImageView, whiteBackground: Boolean = false) {
+        // clear image to avoid loading issues at fast scrolling
+        target.setImageBitmap(null)
+
         // only load the image if the data saver mode is disabled
         if (DataSaverMode.isEnabled(target.context) || url.isNullOrEmpty()) return
         val urlToLoad = ProxyHelper.unwrapImageUrl(url)
