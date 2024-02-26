@@ -80,4 +80,23 @@
     <string name="channels">Kanalid</string>
     <string name="clear_history">Tühjenda ajalugu</string>
     <string name="playlistCreated">Esitusloend on loodud.</string>
+    <string name="sponsorblock">SponsorBlock</string>
+    <string name="sponsorblock_summary">Kasutusel on https://sponsor.ajay.app API</string>
+    <string name="music_songs">YT Music - Laulud</string>
+    <string name="music_videos">YT Music - Videod</string>
+    <string name="music_albums">YT Music - Albumid</string>
+    <string name="music_playlists">YT Music - Esitusloendid</string>
+    <string name="music_artists">YT Music - Esitajad</string>
+    <string name="license">Litsents</string>
+    <string name="segment_skipped">Vahelejäetud segment</string>
+    <string name="piped">Piped</string>
+    <string name="youtube">YouTube</string>
+    <string name="playOnBackground">Esita taustal</string>
+    <string name="update_available_text">Saadaval on rakenduse uus versioon. Klõpsi siin, et avada asjakohane leht GitHub\'is.</string>
+    <string name="downloads">Allalaadimised</string>
+    <string name="update_summary">Kontrolli rakenduse uuendusi</string>
+    <string name="app_uptodate">Sul on kasutusel viimane versioon.</string>
+    <string name="update_available">Saadaval on versioon %1$s</string>
+    <string name="appearance">Välimus</string>
+    <string name="playback_speed">Taasesituse kiirus</string>
 </resources>
