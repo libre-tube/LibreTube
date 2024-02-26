@@ -30,6 +30,7 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.ui.adapters.WatchHistoryAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
+import com.github.libretube.ui.extensions.addOnBottomReachedListener
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.util.PlayingQueue
@@ -73,7 +74,8 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment() {
     }
 
     override fun setLayoutManagers(gridItems: Int) {
-        _binding?.watchHistoryRecView?.layoutManager = GridLayoutManager(context, gridItems.ceilHalf())
+        _binding?.watchHistoryRecView?.layoutManager =
+            GridLayoutManager(context, gridItems.ceilHalf())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -89,8 +91,10 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment() {
 
         if (allHistory.isEmpty()) return
 
-        binding.filterTypeTV.text = resources.getStringArray(R.array.filterOptions)[selectedTypeFilter]
-        binding.filterStatusTV.text = resources.getStringArray(R.array.filterStatusOptions)[selectedStatusFilter]
+        binding.filterTypeTV.text =
+            resources.getStringArray(R.array.filterOptions)[selectedTypeFilter]
+        binding.filterStatusTV.text =
+            resources.getStringArray(R.array.filterStatusOptions)[selectedStatusFilter]
 
         val watchPositionItem = arrayOf(getString(R.string.also_clear_watch_positions))
         val selected = booleanArrayOf(false)
@@ -102,7 +106,7 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment() {
                     selected[index] = newValue
                 }
                 .setPositiveButton(R.string.okay) { _, _ ->
-                    binding.historyScrollView.isGone = true
+                    binding.historyContainer.isGone = true
                     binding.historyEmpty.isVisible = true
                     lifecycleScope.launch(Dispatchers.IO) {
                         Database.withTransaction {
@@ -179,7 +183,7 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment() {
 
         binding.watchHistoryRecView.adapter = watchHistoryAdapter
         binding.historyEmpty.isGone = true
-        binding.historyScrollView.isVisible = true
+        binding.historyContainer.isVisible = true
 
         val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
             0,
@@ -207,7 +211,7 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment() {
             RecyclerView.AdapterDataObserver() {
             override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
                 if (watchHistoryAdapter.itemCount == 0) {
-                    binding.historyScrollView.isGone = true
+                    binding.historyContainer.isGone = true
                     binding.historyEmpty.isVisible = true
                 }
             }
@@ -216,14 +220,13 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment() {
         // add a listener for scroll end, delay needed to prevent loading new ones the first time
         handler.postDelayed(200) {
             if (_binding == null) return@postDelayed
-            binding.historyScrollView.viewTreeObserver.addOnScrollChangedListener {
-                if (_binding?.historyScrollView?.canScrollVertically(1) == false &&
-                    !isLoading
-                ) {
-                    isLoading = true
-                    watchHistoryAdapter.showMoreItems()
-                    isLoading = false
-                }
+
+            binding.watchHistoryRecView.addOnBottomReachedListener {
+                if (isLoading) return@addOnBottomReachedListener
+
+                isLoading = true
+                watchHistoryAdapter.showMoreItems()
+                isLoading = false
             }
         }
     }

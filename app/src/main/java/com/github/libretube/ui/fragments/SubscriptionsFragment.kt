@@ -17,7 +17,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
+import com.github.libretube.api.obj.Channel
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.api.obj.Subscription
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
@@ -34,6 +36,7 @@ import com.github.libretube.ui.adapters.LegacySubscriptionAdapter
 import com.github.libretube.ui.adapters.SubscriptionChannelAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
+import com.github.libretube.ui.extensions.addOnBottomReachedListener
 import com.github.libretube.ui.models.EditChannelGroupsModel
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
@@ -55,6 +58,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
     private val channelGroupsModel: EditChannelGroupsModel by activityViewModels()
     private var selectedFilterGroup = 0
     private var isCurrentTabSubChannels = false
+    private var isAppBarFullyExpanded = true
 
     var feedAdapter: VideosAdapter? = null
     private var channelsAdapter: SubscriptionChannelAdapter? = null
@@ -89,6 +93,16 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
 
         setupSortAndFilter()
 
+        // Check if the AppBarLayout is fully expanded
+        binding.subscriptionsAppBar.addOnOffsetChangedListener { _, verticalOffset ->
+            isAppBarFullyExpanded = verticalOffset == 0
+        }
+
+        // Determine if the child can scroll up
+        binding.subRefresh.setOnChildScrollUpCallback { _, _ ->
+            !isAppBarFullyExpanded
+        }
+
         binding.subRefresh.isEnabled = true
         binding.subProgress.isVisible = true
 
@@ -119,21 +133,26 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
 
             if (isCurrentTabSubChannels) showSubscriptions() else showFeed()
 
-            binding.subChannelsContainer.isVisible = isCurrentTabSubChannels
-            binding.subFeedContainer.isGone = isCurrentTabSubChannels
+            binding.subChannels.isVisible = isCurrentTabSubChannels
+            binding.subFeed.isGone = isCurrentTabSubChannels
         }
 
-        binding.scrollviewSub.viewTreeObserver.addOnScrollChangedListener {
-            val binding = _binding
-            if (binding?.scrollviewSub?.canScrollVertically(1) == false &&
-                viewModel.videoFeed.value != null // scroll view is at bottom
-            ) {
+        binding.subChannels.addOnBottomReachedListener {
+            val binding = _binding ?: return@addOnBottomReachedListener
+
+            if (viewModel.subscriptions.value != null && isCurrentTabSubChannels) {
                 binding.subRefresh.isRefreshing = true
-                if (isCurrentTabSubChannels) {
-                    channelsAdapter?.updateItems()
-                } else {
-                    feedAdapter?.updateItems()
-                }
+                channelsAdapter?.updateItems()
+                binding.subRefresh.isRefreshing = false
+            }
+        }
+
+        binding.subFeed.addOnBottomReachedListener {
+            val binding = _binding ?: return@addOnBottomReachedListener
+
+            if (viewModel.videoFeed.value != null && !isCurrentTabSubChannels) {
+                binding.subRefresh.isRefreshing = true
+                feedAdapter?.updateItems()
                 binding.subRefresh.isRefreshing = false
             }
         }
@@ -141,14 +160,14 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
         // add some extra margin to the subscribed channels while the mini player is visible
         // otherwise the last channel would be invisible
         playerModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
-            binding.subChannelsContainer.updateLayoutParams<MarginLayoutParams> {
+            binding.subChannels.updateLayoutParams<MarginLayoutParams> {
                 bottomMargin = (if (it) 64f else 0f).dpToPx()
             }
         }
 
         binding.channelGroups.setOnCheckedStateChangeListener { group, checkedIds ->
             selectedFilterGroup = group.children.indexOfFirst { it.id == checkedIds.first() }
-            showFeed()
+            if (isCurrentTabSubChannels) showSubscriptions() else showFeed()
         }
 
         channelGroupsModel.groups.observe(viewLifecycleOwner) {
@@ -262,8 +281,15 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
         }
     }
 
-    private fun List<StreamItem>.filterByStatusAndWatchPosition(): List<StreamItem> {
+    @JvmName("filterSubsByGroup")
+    private fun List<Subscription>.filterByGroup(groupIndex: Int): List<Subscription> {
+        if (groupIndex == 0) return this
 
+        val group = channelGroupsModel.groups.value?.getOrNull(groupIndex - 1)
+        return filter { group?.channels?.contains(it.url.toID()) != false }
+    }
+
+    private fun List<StreamItem>.filterByStatusAndWatchPosition(): List<StreamItem> {
         val streamItems = this.filter {
             val isVideo = !it.isShort && !it.isLive
 
@@ -314,11 +340,11 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
             }
         }
 
-        binding.subChannelsContainer.isGone = true
+        binding.subChannels.isGone = true
         binding.subProgress.isGone = true
 
         val notLoaded = viewModel.videoFeed.value.isNullOrEmpty()
-        binding.subFeedContainer.isGone = notLoaded
+        binding.subFeed.isGone = notLoaded
         binding.emptyFeed.isVisible = notLoaded
 
         feedAdapter = VideosAdapter(
@@ -333,7 +359,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
 
     @SuppressLint("SetTextI18n")
     private fun showSubscriptions() {
-        val subscriptions = viewModel.subscriptions.value ?: return
+        val subscriptions = viewModel.subscriptions.value?.filterByGroup(selectedFilterGroup) ?: return
 
         val legacySubscriptions = PreferenceHelper.getBoolean(
             PreferenceKeys.LEGACY_SUBSCRIPTIONS,
@@ -357,10 +383,10 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
 
         binding.subRefresh.isRefreshing = false
         binding.subProgress.isGone = true
-        binding.subFeedContainer.isGone = true
+        binding.subFeed.isGone = true
 
         val notLoaded = viewModel.subscriptions.value.isNullOrEmpty()
-        binding.subChannelsContainer.isGone = notLoaded
+        binding.subChannels.isGone = notLoaded
         binding.emptyFeed.isVisible = notLoaded
 
         val subCount = subscriptions.size.toLong().formatShort()

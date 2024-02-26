@@ -30,6 +30,7 @@ import com.github.libretube.ui.adapters.SearchChannelAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.extensions.addOnBottomReachedListener
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.sheets.AddChannelToGroupSheet
 import com.github.libretube.util.deArrow
@@ -59,6 +60,8 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
     private var nextPages = Array<String?>(5) { null }
     private var searchChannelAdapter: SearchChannelAdapter? = null
 
+    private var isAppBarFullyExpanded: Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         channelName = args.channelName
@@ -86,14 +89,22 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Check if the AppBarLayout is fully expanded
+        binding.channelAppBar.addOnOffsetChangedListener { _, verticalOffset ->
+            isAppBarFullyExpanded = verticalOffset == 0
+        }
+
+        // Determine if the child can scroll up
+        binding.channelRefresh.setOnChildScrollUpCallback { _, _ ->
+            !isAppBarFullyExpanded
+        }
+
         binding.channelRefresh.setOnRefreshListener {
             fetchChannel()
         }
 
-        binding.channelScrollView.viewTreeObserver.addOnScrollChangedListener {
-            val binding = _binding ?: return@addOnScrollChangedListener
-
-            if (binding.channelScrollView.canScrollVertically(1) || isLoading) return@addOnScrollChangedListener
+        binding.channelRecView.addOnBottomReachedListener {
+            if (_binding == null || isLoading) return@addOnBottomReachedListener
 
             loadNextPage()
         }
@@ -199,7 +210,8 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
         isLoading = false
         binding.channelRefresh.isRefreshing = false
 
-        binding.channelScrollView.isVisible = true
+        binding.channelCoordinator.isVisible = true
+
         binding.channelName.text = response.name
         if (response.verified) {
             binding.channelName

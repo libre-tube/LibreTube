@@ -20,7 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <ImageView
             android:layout_width="100dp"
@@ -44,132 +45,126 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
-            android:id="@+id/scrollview_sub"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/sub_coordinator"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/subscriptions_app_bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:animateLayoutChanges="true"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/filter_sort"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/ic_filter_sort"
-                        android:contentDescription="@string/tooltip_filter"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:padding="6dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="7dp"
-                        android:alpha="0.7"/>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/toggle_subs"
-                        style="@style/PlayerActionsButton"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginEnd="6dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="6dp"
-                        app:layout_constraintEnd_toStartOf="@id/filter_sort"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:text="@string/subscriptions"
-                        android:textAlignment="viewStart"
-                        android:textColor="?colorPrimary"
-                        app:drawableEndCompat="@drawable/ic_arrow_up_down"
-                        app:drawableTint="?colorPrimary" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <RelativeLayout
-                    android:id="@+id/sub_channels_container"
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/subscriptions_collapsing_tb"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:descendantFocusability="blocksDescendants"
-                    android:visibility="gone">
+                    app:layout_scrollFlags="scroll"
+                    app:titleCollapseMode="scale">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/sub_channels"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="false" />
-
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:id="@+id/sub_feed_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="3dp"
-                        android:scrollbars="none">
+                        android:animateLayoutChanges="true"
+                        android:orientation="vertical">
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <ImageView
-                                android:id="@+id/edit_groups"
-                                android:layout_width="wrap_content"
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/toggle_subs"
+                                style="@style/PlayerActionsButton"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
+
                                 android:layout_marginStart="12dp"
+                                android:layout_marginTop="5dp"
                                 android:layout_marginEnd="6dp"
-                                android:background="?attr/selectableItemBackgroundBorderless"
-                                android:src="@drawable/ic_edit"
-                                android:tooltipText="@string/tooltip_edit_groups" />
+                                android:layout_marginBottom="6dp"
+                                android:layout_weight="1"
+                                android:text="@string/subscriptions"
+                                android:textAlignment="viewStart"
+                                android:textColor="?colorPrimary"
+                                app:drawableEndCompat="@drawable/ic_arrow_up_down"
+                                app:drawableTint="?colorPrimary" />
 
-                            <com.google.android.material.chip.ChipGroup
-                                android:id="@+id/channel_groups"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                app:checkedChip="@id/chip_all"
-                                app:selectionRequired="true"
-                                app:singleLine="true"
-                                app:singleSelection="true">
-
-                                <com.google.android.material.chip.Chip
-                                    android:id="@+id/chip_all"
-                                    style="@style/ElevatedFilterChip"
-                                    android:text="@string/all" />
-
-                            </com.google.android.material.chip.ChipGroup>
+                            <ImageView
+                                android:id="@+id/filter_sort"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="7dp"
+                                android:alpha="0.7"
+                                android:contentDescription="@string/tooltip_filter"
+                                android:padding="6dp"
+                                android:src="@drawable/ic_filter_sort" />
 
                         </LinearLayout>
 
-                    </HorizontalScrollView>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:descendantFocusability="blocksDescendants">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/sub_feed"
+                        <HorizontalScrollView
+                            android:id="@+id/channel_groups_container"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:nestedScrollingEnabled="false" />
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="3dp"
+                            android:scrollbars="none">
 
-                    </RelativeLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
 
-                </LinearLayout>
-            </LinearLayout>
-        </ScrollView>
+                                <ImageView
+                                    android:id="@+id/edit_groups"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="12dp"
+                                    android:layout_marginEnd="6dp"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:src="@drawable/ic_edit"
+                                    android:tooltipText="@string/tooltip_edit_groups" />
+
+                                <com.google.android.material.chip.ChipGroup
+                                    android:id="@+id/channel_groups"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    app:checkedChip="@id/chip_all"
+                                    app:selectionRequired="true"
+                                    app:singleLine="true"
+                                    app:singleSelection="true">
+
+                                    <com.google.android.material.chip.Chip
+                                        android:id="@+id/chip_all"
+                                        style="@style/ElevatedFilterChip"
+                                        android:text="@string/all" />
+
+                                </com.google.android.material.chip.ChipGroup>
+
+                            </LinearLayout>
+
+                        </HorizontalScrollView>
+
+                    </LinearLayout>
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sub_feed"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sub_channels"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </com.github.libretube.ui.views.CustomSwipeToRefresh>
 </RelativeLayout>

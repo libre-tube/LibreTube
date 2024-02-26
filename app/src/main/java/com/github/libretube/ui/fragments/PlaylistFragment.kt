@@ -17,7 +17,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.NavDirections
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
@@ -31,15 +30,14 @@ import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
-import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
-import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.PlaylistAdapter
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
+import com.github.libretube.ui.extensions.addOnBottomReachedListener
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
@@ -123,7 +121,6 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
     }
 
     private fun fetchPlaylist() {
-        binding.playlistScrollview.isGone = true
         lifecycleScope.launch {
             val response = try {
                 withContext(Dispatchers.IO) {
@@ -136,12 +133,13 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
             val binding = _binding ?: return@launch
 
             playlistFeed = response.relatedStreams.toMutableList()
-            binding.playlistScrollview.isVisible = true
             nextPage = response.nextpage
             playlistName = response.name
             isLoading = false
             ImageHelper.loadImage(response.thumbnailUrl, binding.thumbnail)
             binding.playlistProgress.isGone = true
+            binding.playlistAppBar.isVisible = true
+            binding.playlistRecView.isVisible = true
             binding.playlistName.text = response.name
 
             binding.playlistInfo.text = getChannelAndVideoString(response, response.videos)
@@ -312,18 +310,16 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
             }
         })
 
-        binding.playlistScrollview.viewTreeObserver.addOnScrollChangedListener {
-            if (_binding?.playlistScrollview?.canScrollVertically(1) == false &&
-                !isLoading
-            ) {
-                // append more playlists to the recycler view
-                if (playlistType != PlaylistType.PUBLIC) {
-                    isLoading = true
-                    playlistAdapter?.showMoreItems()
-                    isLoading = false
-                } else {
-                    fetchNextPage()
-                }
+        binding.playlistRecView.addOnBottomReachedListener {
+            if (isLoading) return@addOnBottomReachedListener
+
+            // append more playlists to the recycler view
+            if (playlistType != PlaylistType.PUBLIC) {
+                isLoading = true
+                playlistAdapter?.showMoreItems()
+                isLoading = false
+            } else {
+                fetchNextPage()
             }
         }
 
