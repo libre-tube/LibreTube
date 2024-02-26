@@ -98,4 +98,23 @@
     <string name="update_available">Saadaval on versioon %1$s</string>
     <string name="appearance">Välimus</string>
     <string name="playback_speed">Taasesituse kiirus</string>
+    <string name="category_segments">Video segmendid</string>
+    <string name="category_sponsor">Sponsor</string>
+    <string name="category_sponsor_summary">Tasutud turundus, tasuline viitamine või otsene reklaam. Ei käi enesereklaami kohta ega tasuta tõeliste toetusavalduste kohta, mis tutvustavad üritusi, loojaid, saite või tooteid</string>
+    <string name="category_selfpromo">Tasuta reklaam või enesereklaam</string>
+    <string name="category_selfpromo_summary">Sarnane „sponsorile“, kuid tegemist on tasuta reklaamiga või enesereklaamiga. Siin hulgas on tootenäidete teave või info annetuste ja koostööpartnerite kohta</string>
+    <string name="color_accent">Aktsentvärv</string>
+    <string name="color_red">Puhkav punane</string>
+    <string name="color_blue">Õnnis sinine</string>
+    <string name="color_yellow">Tormakas kollane</string>
+    <string name="color_green">Äge roheline</string>
+    <string name="color_purple">Meeldiv lilla</string>
+    <string name="material_you">Oluline sina</string>
+    <string name="sponsorblock_notifications">Teavitused</string>
+    <string name="app_icon">Ikoon</string>
+    <string name="enabled">Sisse lülitatud</string>
+    <string name="disabled">Välja lülitatud</string>
+    <string name="advanced">Lisaseadistused</string>
+    <string name="player">Meediamängija</string>
+    <string name="appearance_summary">Kohanda rakendus endale meeldivaks</string>
 </resources>
