@@ -14,7 +14,7 @@ android {
     defaultConfig {
         applicationId = "com.github.libretube"
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 47
         versionName = "0.21.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
