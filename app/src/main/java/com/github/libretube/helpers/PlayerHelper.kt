@@ -221,10 +221,11 @@ object PlayerHelper {
             false
         )
 
-    private val behaviorWhenMinimized = PreferenceHelper.getString(
-        PreferenceKeys.BEHAVIOR_WHEN_MINIMIZED,
-        "pip"
-    )
+    private val behaviorWhenMinimized
+        get() = PreferenceHelper.getString(
+            PreferenceKeys.BEHAVIOR_WHEN_MINIMIZED,
+            "pip"
+        )
 
     val pipEnabled: Boolean
         get() = behaviorWhenMinimized == "pip"
@@ -386,7 +387,9 @@ object PlayerHelper {
     }
 
     private fun getPendingIntent(activity: Activity, event: PlayerEvent): PendingIntent {
-        val intent = Intent(getIntentAction(activity)).putExtra(CONTROL_TYPE, event)
+        val intent = Intent(getIntentAction(activity))
+            .setPackage(activity.packageName)
+            .putExtra(CONTROL_TYPE, event)
         return PendingIntentCompat.getBroadcast(activity, event.ordinal, intent, 0, false)!!
     }
 

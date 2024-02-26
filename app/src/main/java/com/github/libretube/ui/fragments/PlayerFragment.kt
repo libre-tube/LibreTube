@@ -23,6 +23,7 @@ import android.view.ViewGroup.LayoutParams
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
+import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.toDrawable
 import androidx.core.net.toUri
@@ -371,9 +372,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playerLayoutOrientation = resources.configuration.orientation
 
         // broadcast receiver for PiP actions
-        context?.registerReceiver(
+        ContextCompat.registerReceiver(
+            requireContext(),
             broadcastReceiver,
-            IntentFilter(PlayerHelper.getIntentAction(requireContext()))
+            IntentFilter(PlayerHelper.getIntentAction(requireContext())),
+            ContextCompat.RECEIVER_NOT_EXPORTED
         )
 
         fullscreenResolution = PlayerHelper.getDefaultResolution(requireContext(), true)
@@ -594,6 +597,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             // start the background mode
             playOnBackground()
         }
+
+        binding.relPlayerPip.isVisible = PictureInPictureCompat.isPictureInPictureAvailable(requireContext())
 
         binding.relPlayerPip.setOnClickListener {
             PictureInPictureCompat.enterPictureInPictureMode(requireActivity(), pipParams)
@@ -1586,11 +1591,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     fun onUserLeaveHint() {
-        if (PlayerHelper.pipEnabled && shouldStartPiP()) {
+        if (shouldStartPiP()) {
             PictureInPictureCompat.enterPictureInPictureMode(requireActivity(), pipParams)
-            return
-        }
-        if (PlayerHelper.pauseOnQuit) {
+        } else if (PlayerHelper.pauseOnQuit) {
             exoPlayer.pause()
         }
     }
@@ -1625,14 +1628,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     /**
      * Detect whether PiP is supported and enabled
      */
-    private fun usePiP(): Boolean {
+    private fun shouldUsePip(): Boolean {
         return PictureInPictureCompat.isPictureInPictureAvailable(requireContext()) && PlayerHelper.pipEnabled
     }
 
     private fun shouldStartPiP(): Boolean {
-        return usePiP() && exoPlayer.isPlaying && !BackgroundHelper.isBackgroundServiceRunning(
-            requireContext()
-        )
+        return shouldUsePip() && exoPlayer.isPlaying &&
+                !BackgroundHelper.isBackgroundServiceRunning(requireContext())
     }
 
     private fun killPlayerFragment() {

@@ -14,6 +14,7 @@ import android.support.v4.media.session.PlaybackStateCompat
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
 import androidx.core.app.PendingIntentCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.toBitmap
 import androidx.media.app.NotificationCompat.MediaStyle
@@ -92,7 +93,8 @@ class NowPlayingNotification(
     }
 
     private fun createIntent(action: String): PendingIntent? {
-        val intent = Intent(action).setPackage(context.packageName)
+        val intent = Intent(action)
+            .setPackage(context.packageName)
 
         return PendingIntentCompat
             .getBroadcast(context, 1, intent, PendingIntent.FLAG_CANCEL_CURRENT, false)
@@ -374,9 +376,12 @@ class NowPlayingNotification(
     }
 
     private fun createActionReceiver() {
-        listOf(PREV, NEXT, REWIND, FORWARD, PLAY_PAUSE, STOP).forEach {
-            context.registerReceiver(notificationActionReceiver, IntentFilter(it))
+        val filter = IntentFilter().apply {
+            listOf(PREV, NEXT, REWIND, FORWARD, PLAY_PAUSE, STOP).forEach {
+                addAction(it)
+            }
         }
+        ContextCompat.registerReceiver(context, notificationActionReceiver, filter, ContextCompat.RECEIVER_NOT_EXPORTED)
     }
 
     /**
