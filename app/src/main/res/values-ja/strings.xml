@@ -531,4 +531,7 @@
     <string name="also_clear_watch_positions">再生済みの位置の記憶も消去</string>
     <string name="gestures">ジェスチャー</string>
     <string name="behavior_when_minimized">最小化時の動作</string>
+    <string name="comments_count">コメント (%1$s)</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="external_player">外部のプレイヤー</string>
 </resources>
