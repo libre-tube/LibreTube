@@ -18,7 +18,7 @@ interface ExternalApi {
 
     // fetch latest version info
     @GET(GITHUB_API_URL)
-    suspend fun getUpdateInfo(): UpdateInfo
+    suspend fun getLatestRelease(): UpdateInfo
 
     @POST("$SB_API_URL/api/skipSegments")
     suspend fun submitSegment(
