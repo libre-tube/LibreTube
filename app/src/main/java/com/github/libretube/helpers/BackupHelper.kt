@@ -49,10 +49,10 @@ object BackupHelper {
         Database.watchHistoryDao().insertAll(backupFile.watchHistory.orEmpty())
         Database.searchHistoryDao().insertAll(backupFile.searchHistory.orEmpty())
         Database.watchPositionDao().insertAll(backupFile.watchPositions.orEmpty())
-        Database.localSubscriptionDao().insertAll(backupFile.localSubscriptions.orEmpty())
+        Database.localSubscriptionDao().insertAll(backupFile.subscriptions.orEmpty())
         Database.customInstanceDao().insertAll(backupFile.customInstances.orEmpty())
         Database.playlistBookmarkDao().insertAll(backupFile.playlistBookmarks.orEmpty())
-        Database.subscriptionGroupsDao().insertAll(backupFile.channelGroups.orEmpty())
+        Database.subscriptionGroupsDao().insertAll(backupFile.groups.orEmpty())
 
         backupFile.localPlaylists?.forEach {
             // the playlist will be created with an id of 0, so that Room will auto generate a
@@ -72,6 +72,7 @@ object BackupHelper {
      */
     private fun restorePreferences(context: Context, preferences: List<PreferenceItem>?) {
         if (preferences == null) return
+
         PreferenceManager.getDefaultSharedPreferences(context).edit(commit = true) {
             // clear the previous settings
             clear()
