@@ -62,8 +62,6 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.db.DatabaseHelper
-import com.github.libretube.db.DatabaseHolder.Database
-import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.formatShort
@@ -114,7 +112,6 @@ import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
 import com.github.libretube.util.YoutubeHlsPlaylistParser
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -275,7 +272,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     override fun run() {
                         handler.post(this@PlayerFragment::saveWatchPosition)
                     }
-                }, 1000, 1000)
+                }, PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS, PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS)
             } else {
                 watchPositionTimer?.cancel()
             }
@@ -861,17 +858,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     // save the watch position if video isn't finished and option enabled
     private fun saveWatchPosition() {
-        if (!this::exoPlayer.isInitialized || !PlayerHelper.watchPositionsVideo || isTransitioning ||
-            exoPlayer.duration == C.TIME_UNSET || exoPlayer.currentPosition in listOf(
-                0L,
-                C.TIME_UNSET
-            )
-        ) {
-            return
-        }
-        val watchPosition = WatchPosition(videoId, exoPlayer.currentPosition)
-        CoroutineScope(Dispatchers.IO).launch {
-            Database.watchPositionDao().insert(watchPosition)
+        if (this::exoPlayer.isInitialized && !isTransitioning && PlayerHelper.watchPositionsVideo) {
+            PlayerHelper.saveWatchPosition(exoPlayer, videoId)
         }
     }
 
@@ -1290,7 +1278,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     timeStamp = 0L
                 } else if (!streams.livestream) {
                     // seek to the saved watch position
-                    PlayerHelper.getPosition(videoId, streams.duration)?.let {
+                    PlayerHelper.getStoredWatchPosition(videoId, streams.duration)?.let {
                         exoPlayer.seekTo(it)
                     }
                 }
