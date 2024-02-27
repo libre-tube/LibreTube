@@ -46,8 +46,7 @@ class UpdateChecker(private val context: Context) {
     private fun sanitizeChangelog(changelog: String): String {
         val removeBloat = changelog.substringBeforeLast("**Full Changelog**")
         val removeLinks = removeBloat.replace(Regex("in https://github\\.com/\\S+"), "")
-        val uppercaseChangeType =
-            removeLinks.lines().joinToString("\n") { line ->
+        val uppercaseChangeType = removeLinks.lines().joinToString("\n") { line ->
             if (line.startsWith("##")) line.uppercase(Locale.ROOT) + " :" else line
         }
         val removeHashes = uppercaseChangeType.replace("## ", "")
