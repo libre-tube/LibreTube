@@ -1,7 +1,9 @@
 package com.github.libretube.services
 
 import android.content.Intent
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
 import androidx.annotation.OptIn
 import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
@@ -29,17 +31,39 @@ import kotlin.io.path.exists
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.Timer
+import java.util.TimerTask
 
 /**
  * A service to play downloaded audio in the background
  */
 class OfflinePlayerService : LifecycleService() {
+    val handler = Handler(Looper.getMainLooper())
+
     private var player: ExoPlayer? = null
     private var nowPlayingNotification: NowPlayingNotification? = null
     private lateinit var videoId: String
     private var downloadsWithItems: List<DownloadWithItems> = emptyList()
 
+    private var watchPositionTimer: Timer? = null
+
     private val playerListener = object : Player.Listener {
+        override fun onIsPlayingChanged(isPlaying: Boolean) {
+            super.onIsPlayingChanged(isPlaying)
+
+            // Start or pause watch position timer
+            if (isPlaying) {
+                watchPositionTimer = Timer()
+                watchPositionTimer!!.scheduleAtFixedRate(object : TimerTask() {
+                    override fun run() {
+                        handler.post(this@OfflinePlayerService::saveWatchPosition)
+                    }
+                }, PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS, PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS)
+            } else {
+                watchPositionTimer?.cancel()
+            }
+        }
+
         override fun onPlaybackStateChanged(playbackState: Int) {
             super.onPlaybackStateChanged(playbackState)
 
@@ -142,16 +166,32 @@ class OfflinePlayerService : LifecycleService() {
         player?.playWhenReady = PlayerHelper.playAutomatically
         player?.prepare()
 
+        if (PlayerHelper.watchPositionsAudio) {
+            PlayerHelper.getStoredWatchPosition(videoId, downloadWithItems.download.duration)?.let {
+                player?.seekTo(it)
+            }
+        }
+
         return true
     }
 
+    private fun saveWatchPosition() {
+        if (!PlayerHelper.watchPositionsVideo) return
+
+        player?.let { PlayerHelper.saveWatchPosition(it, videoId) }
+    }
+
     override fun onDestroy() {
+        saveWatchPosition()
+
         nowPlayingNotification?.destroySelf()
 
         player?.stop()
         player?.release()
         player = null
         nowPlayingNotification = null
+
+        watchPositionTimer?.cancel()
 
         ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
         stopSelf()

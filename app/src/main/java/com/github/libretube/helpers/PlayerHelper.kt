@@ -36,11 +36,15 @@ import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.obj.VideoStats
 import com.github.libretube.util.TextUtils
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.util.Locale
 import java.util.concurrent.Executors
@@ -53,6 +57,7 @@ object PlayerHelper {
     const val SPONSOR_HIGHLIGHT_CATEGORY = "poi_highlight"
     const val ROLE_FLAG_AUTO_GEN_SUBTITLE = C.ROLE_FLAG_SUPPLEMENTARY
     private const val MINIMUM_BUFFER_DURATION = 1000 * 10 // exo default is 50s
+    const val WATCH_POSITION_TIMER_DELAY_MS = 1000L
 
     /**
      * The maximum amount of time to wait until the video starts playing: 10 minutes
@@ -606,7 +611,7 @@ object PlayerHelper {
             }
     }
 
-    fun getPosition(videoId: String, duration: Long?): Long? {
+    fun getStoredWatchPosition(videoId: String, duration: Long?): Long? {
         if (duration == null) return null
 
         runCatching {
@@ -779,5 +784,16 @@ object PlayerHelper {
         player.isPlaying -> R.drawable.ic_pause
         player.playbackState == Player.STATE_ENDED -> R.drawable.ic_restart
         else -> R.drawable.ic_play
+    }
+
+    fun saveWatchPosition(player: ExoPlayer, videoId: String) {
+        if (player.duration == C.TIME_UNSET || player.currentPosition in listOf(0L, C.TIME_UNSET)) {
+            return
+        }
+
+        val watchPosition = WatchPosition(videoId, player.currentPosition)
+        CoroutineScope(Dispatchers.IO).launch {
+            DatabaseHolder.Database.watchPositionDao().insert(watchPosition)
+        }
     }
 }

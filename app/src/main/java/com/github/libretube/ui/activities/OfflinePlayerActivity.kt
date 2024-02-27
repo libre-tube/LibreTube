@@ -4,6 +4,8 @@ import android.content.pm.ActivityInfo
 import android.media.session.PlaybackState
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.format.DateUtils
 import android.view.KeyEvent
 import androidx.activity.viewModels
@@ -42,9 +44,13 @@ import kotlin.io.path.exists
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.Timer
+import java.util.TimerTask
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class OfflinePlayerActivity : BaseActivity() {
+    private val handler = Handler(Looper.getMainLooper())
+
     private lateinit var binding: ActivityOfflinePlayerBinding
     private lateinit var videoId: String
     private lateinit var player: ExoPlayer
@@ -55,6 +61,8 @@ class OfflinePlayerActivity : BaseActivity() {
     private lateinit var playerBinding: ExoStyledPlayerControlViewBinding
     private val playerViewModel: PlayerViewModel by viewModels()
 
+    private var watchPositionTimer: Timer? = null
+
     private val playerListener = object : Player.Listener {
         override fun onEvents(player: Player, events: Player.Events) {
             super.onEvents(player, events)
@@ -62,6 +70,22 @@ class OfflinePlayerActivity : BaseActivity() {
             playerBinding.duration.text = DateUtils.formatElapsedTime(
                 player.duration / 1000
             )
+        }
+
+        override fun onIsPlayingChanged(isPlaying: Boolean) {
+            super.onIsPlayingChanged(isPlaying)
+
+            // Start or pause watch position timer
+            if (isPlaying) {
+                watchPositionTimer = Timer()
+                watchPositionTimer!!.scheduleAtFixedRate(object : TimerTask() {
+                    override fun run() {
+                        handler.post(this@OfflinePlayerActivity::saveWatchPosition)
+                    }
+                }, PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS, PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS)
+            } else {
+                watchPositionTimer?.cancel()
+            }
         }
 
         override fun onPlaybackStateChanged(playbackState: Int) {
@@ -154,6 +178,12 @@ class OfflinePlayerActivity : BaseActivity() {
 
             player.playWhenReady = PlayerHelper.playAutomatically
             player.prepare()
+
+            if (PlayerHelper.watchPositionsVideo) {
+                PlayerHelper.getStoredWatchPosition(videoId, downloadInfo.download.duration)?.let {
+                    player.seekTo(it)
+                }
+            }
         }
     }
 
@@ -205,6 +235,12 @@ class OfflinePlayerActivity : BaseActivity() {
         }
     }
 
+    private fun saveWatchPosition() {
+        if (!PlayerHelper.watchPositionsVideo) return
+
+        PlayerHelper.saveWatchPosition(player, videoId)
+    }
+
     override fun onResume() {
         playerViewModel.isFullscreen.value = true
         super.onResume()
@@ -216,7 +252,11 @@ class OfflinePlayerActivity : BaseActivity() {
     }
 
     override fun onDestroy() {
+        saveWatchPosition()
+
         player.release()
+        watchPositionTimer?.cancel()
+
         super.onDestroy()
     }
 

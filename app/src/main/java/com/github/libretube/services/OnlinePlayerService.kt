@@ -28,8 +28,6 @@ import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHelper
-import com.github.libretube.db.DatabaseHolder.Database
-import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.enums.NotificationId
 import com.github.libretube.extensions.parcelableExtra
 import com.github.libretube.extensions.setMetadata
@@ -42,11 +40,12 @@ import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayingQueue
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
+import java.util.Timer
+import java.util.TimerTask
 
 /**
  * Loads the selected videos audio in background mode with a notification area.
@@ -103,10 +102,24 @@ class OnlinePlayerService : LifecycleService() {
     var onStateOrPlayingChanged: ((isPlaying: Boolean) -> Unit)? = null
     var onNewVideo: ((streams: Streams, videoId: String) -> Unit)? = null
 
+    private var watchPositionTimer: Timer? = null
+
     private val playerListener = object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
             super.onIsPlayingChanged(isPlaying)
             onStateOrPlayingChanged?.invoke(isPlaying)
+
+            // Start or pause watch position timer
+            if (isPlaying) {
+                watchPositionTimer = Timer()
+                watchPositionTimer!!.scheduleAtFixedRate(object : TimerTask() {
+                    override fun run() {
+                        handler.post(this@OnlinePlayerService::saveWatchPosition)
+                    }
+                }, PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS, PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS)
+            } else {
+                watchPositionTimer?.cancel()
+            }
         }
 
         override fun onPlaybackStateChanged(state: Int) {
@@ -180,25 +193,14 @@ class OnlinePlayerService : LifecycleService() {
             PlayingQueue.setOnQueueTapListener { streamItem ->
                 streamItem.url?.toID()?.let { playNextVideo(it) }
             }
-
-            if (PlayerHelper.watchPositionsAudio) {
-                updateWatchPosition()
-            }
         }
         return super.onStartCommand(intent, flags, startId)
     }
 
-    private fun updateWatchPosition() {
-        player?.currentPosition?.let {
-            if (isTransitioning) return@let
+    private fun saveWatchPosition() {
+        if (isTransitioning || !PlayerHelper.watchPositionsAudio) return
 
-            val watchPosition = WatchPosition(videoId, it)
-
-            CoroutineScope(Dispatchers.IO).launch {
-                Database.watchPositionDao().insert(watchPosition)
-            }
-        }
-        handler.postDelayed(this::updateWatchPosition, 500)
+        player?.let { PlayerHelper.saveWatchPosition(it, videoId) }
     }
 
     /**
@@ -248,7 +250,7 @@ class OnlinePlayerService : LifecycleService() {
                 if (seekToPosition != 0L) {
                     player?.seekTo(seekToPosition)
                 } else if (PlayerHelper.watchPositionsAudio) {
-                    PlayerHelper.getPosition(videoId, streams?.duration)?.let {
+                    PlayerHelper.getStoredWatchPosition(videoId, streams?.duration)?.let {
                         player?.seekTo(it)
                     }
                 }
@@ -391,6 +393,8 @@ class OnlinePlayerService : LifecycleService() {
 
         player?.stop()
         player?.release()
+
+        watchPositionTimer?.cancel()
 
         // called when the user pressed stop in the notification
         // stop the service from being in the foreground and remove the notification
