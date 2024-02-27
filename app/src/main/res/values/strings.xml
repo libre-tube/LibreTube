@@ -155,7 +155,7 @@
     <string name="empty_instance">Fill in the name and the API URL.</string>
     <string name="clear_customInstances">Clear added</string>
     <string name="invalid_url">Please enter a URL that works</string>
-    <string name="version">v0.21.1</string>
+    <string name="version">v%1$s</string>
     <string name="related_streams">Related content</string>
     <string name="related_streams_summary">Show similar streams alongside what you watch</string>
     <string name="buffering_goal">Preloading</string>
@@ -420,7 +420,7 @@
     <string name="group_name_error_exists">Please choose a name that is unique</string>
     <string name="edit_group">Edit group</string>
     <string name="play_automatically">Play automatically</string>
-    <string name="show_updates">Show app updates</string>
+    <string name="show_updates">Check updates automatically</string>
     <string name="play_automatically_summary">Start playing video automatically when selecting</string>
     <string name="fullscreen_gestures">Enter/exit fullscreen gestures</string>
     <string name="go_to_video">Go to video</string>

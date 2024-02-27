@@ -17,15 +17,13 @@ class MainSettings : BasePreferenceFragment() {
         setPreferencesFromResource(R.xml.settings, rootKey)
 
         val update = findPreference<Preference>("update")
-        val appVersion = BuildConfig.VERSION_NAME
-        update?.summary = "v$appVersion"
+        update?.summary = "v${BuildConfig.VERSION_NAME}"
 
-        // manual trigger
+        // check app update manually
         update?.setOnPreferenceClickListener {
 
             lifecycleScope.launch(Dispatchers.IO) {
-                val updater = UpdateChecker(requireContext())
-                updater.checkUpdate(manualTrigger = true)
+                UpdateChecker(requireContext()).checkUpdate(true)
             }
 
             true

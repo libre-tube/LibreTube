@@ -86,11 +86,11 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (PreferenceHelper.getBoolean(PreferenceKeys.AUTO_UPDATES, false)) {
+        // Check update automatically
+        if (PreferenceHelper.getBoolean(PreferenceKeys.AUTOMATIC_UPDATE_CHECKS, false)) {
             lifecycleScope.launch(Dispatchers.IO) {
-                val updater = UpdateChecker(context = this@MainActivity)
-                updater.checkUpdate(manualTrigger = false)
-            } // Check update
+                UpdateChecker(this@MainActivity).checkUpdate(false)
+            }
         }
 
         // set the action bar for the activity

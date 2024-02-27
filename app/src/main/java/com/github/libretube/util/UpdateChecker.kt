@@ -10,39 +10,34 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.ui.dialogs.UpdateAvailableDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.util.Locale
 
 class UpdateChecker(private val context: Context) {
-    private var changelog: String? = null
-    private var releaseURL: String? = null
 
-    suspend fun checkUpdate(manualTrigger: Boolean = false) {
-        val currentAppVersion = BuildConfig.VERSION_NAME.replace(".", "")
+    suspend fun checkUpdate(isManualCheck: Boolean = false) {
+        val changelog: String?
+        val releaseURL: String?
+        val currentAppVersion = BuildConfig.VERSION_NAME.replace(".", "").toInt()
 
         try {
             val response = RetrofitInstance.externalApi.getLatestRelease()
+            releaseURL = response.htmlUrl
 
-            if (response.isSuccessful) {
-                val latestRelease = response.body()
-                releaseURL = latestRelease?.html_url.toString()
+            // version would be in the format "0.21.1"
+            val update = response.name.replace(".", "").toIntOrNull()
+            changelog = response.body
 
-                // version would be in the format "0.21.1"
-                val update = latestRelease?.name?.replace(".", "")?.toIntOrNull()
-                changelog = latestRelease?.body.toString()
-
-                if (update != null && currentAppVersion.toInt() < update) {
-                    withContext(Dispatchers.Main) {
-                        UpdateAvailableDialog().onCreateDialog(
-                            sanitizeChangelog(changelog!!),
-                            releaseURL!!,
-                            context,
-                        )
-                    }
-                } else if (manualTrigger) {
-                    Toast.makeText(context, R.string.app_uptodate, Toast.LENGTH_LONG).show()
+            if (update != null && currentAppVersion < update) {
+                withContext(Dispatchers.Main) {
+                    UpdateAvailableDialog().onCreateDialog(
+                        sanitizeChangelog(changelog),
+                        releaseURL,
+                        context,
+                    )
                 }
-            } else {
-                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_LONG).show()
-                Log.e(TAG(), response.toString())
+                Log.i(TAG(), response.toString())
+            } else if (isManualCheck) {
+                Toast.makeText(context, R.string.app_uptodate, Toast.LENGTH_LONG).show()
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -50,9 +45,14 @@ class UpdateChecker(private val context: Context) {
     }
 
     private fun sanitizeChangelog(changelog: String): String {
-        val sanitizedChangelog = changelog.substringBeforeLast("**Full Changelog**")
-        val withoutLinks = sanitizedChangelog.replace(Regex("in https://github\\.com/[^\\s]+"), "")
+        val removeBloat = changelog.substringBeforeLast("**Full Changelog**")
+        val removeLinks = removeBloat.replace(Regex("in https://github\\.com/\\S+"), "")
+        val uppercaseChangeType = removeLinks.lines().joinToString("\n") { line ->
+            if (line.startsWith("##")) line.uppercase(Locale.ROOT) + " :" else line
+        }
+        val removeHashes = uppercaseChangeType.replace("## ", "")
+        val cleanPrefix = removeHashes.replace("*", "•")
 
-        return withoutLinks.trim()
+        return cleanPrefix.trim()
     }
 }

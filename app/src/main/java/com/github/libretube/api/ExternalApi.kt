@@ -3,7 +3,6 @@ package com.github.libretube.api
 import com.github.libretube.api.obj.PipedInstance
 import com.github.libretube.api.obj.SubmitSegmentResponse
 import com.github.libretube.obj.update.UpdateInfo
-import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
@@ -19,7 +18,7 @@ interface ExternalApi {
 
     // fetch latest version info
     @GET(GITHUB_API_URL)
-    suspend fun getLatestRelease(): Response<UpdateInfo>
+    suspend fun getLatestRelease(): UpdateInfo
 
     @POST("$SB_API_URL/api/skipSegments")
     suspend fun submitSegment(
