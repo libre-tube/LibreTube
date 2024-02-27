@@ -12,18 +12,17 @@ import com.github.libretube.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class UpdateAvailableDialog : DialogFragment() {
-
     fun onCreateDialog(
         changelog: String,
         releaseUrl: String,
         context: Context,
     ): Dialog {
-
         return MaterialAlertDialogBuilder(context)
             .setTitle(R.string.update_available)
             .setMessage(changelog)
             .setPositiveButton(R.string.download, null)
             .setNegativeButton(R.string.tooltip_dismiss, null)
+            .setCancelable(false)
             .show()
             .apply {
                 getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
