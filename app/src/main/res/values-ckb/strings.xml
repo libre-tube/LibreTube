@@ -28,7 +28,6 @@
     <string name="about">دەربارەی</string>
     <string name="importsuccess">بەشداریتکردووە</string>
     <string name="cannotDownload">ناتوانرێت ئەمە دابەزێنرێت.</string>
-    <string name="dlisinprogress">تکایە چاوەڕوانبە تا هەموو داگرتنەکانی ئێستا تەواو دەبن.</string>
     <string name="downloadfailed">داگرتن سەرکەوتوو نەبوو.</string>
     <string name="emptyPlaylistName">ناوی لیستی لێدان نابێ بەتاڵ بێت</string>
     <string name="addToPlaylist">زیادکردن بۆ لیستی لێدان</string>
@@ -184,7 +183,6 @@
     <string name="unknown">نەزانراو</string>
     <string name="swipe_controls">دوگمەکانی کۆنترۆڵ</string>
     <string name="no_player_found">هیچ لێدەرێکی دەرەکی نەدۆزاریەوە، تکایە دڵنیابەرەوە لەوەی کە دانەیەکت دابەزاندوە.</string>
-    <string name="break_reminder_time">خولەکی پێش ئاگادارکردنەوە</string>
     <string name="wifi">وایفای (بێتەل)</string>
     <string name="mobile_data">داتای مۆبایل</string>
     <string name="no_comments_available">ئەم ڤیدیۆیە هیچ لێدوانێكی نییە.</string>
@@ -214,7 +212,6 @@
     <string name="least_recent">کۆنترین</string>
     <string name="caption_settings">ژێرنووس</string>
     <string name="playerAudioFormat">شێوازی دەنگ بۆ لێدەر</string>
-    <string name="best_quality">باشترین</string>
     <string name="playerAudioQuality">کوالێتی دەنگ</string>
     <string name="no_subtitles_available">ژێرنووس بەردەست نییە</string>
     <string name="notifications">ئاگادارکردنەوەکان</string>
@@ -245,7 +242,6 @@
     <string name="required_network">پێویستی بە ئینتەرنێتە</string>
     <string name="translate">وەرگێڕان</string>
     <string name="skip_segment">شێوازی پەڕاندن</string>
-    <string name="sb_skip_manual">پەڕاندنی دەستی</string>
     <string name="theme_monochrome">ڕەش و سپی</string>
     <string name="audio_video">دەنگ و ڤیدیۆ</string>
     <string name="defaults">بنەڕەتی</string>
@@ -290,10 +286,7 @@
     <string name="playback_pitch">تیژیی</string>
     <string name="filename">ناوی فایل</string>
     <string name="invalid_filename">ناوی فایل نادروستە!</string>
-    <string name="playlists_order">ڕیزکردنی لیستی لێدان</string>
-    <string name="playlistNameReversed">ناوی لیستی لێدان (پێچەوانە)</string>
     <string name="added_to_playlist">زیادکرا بۆ لیستی لێدانی %1$s</string>
-    <string name="pop_up">بچووککراوە</string>
     <string name="worst_quality">خراپترین</string>
     <string name="time_code">مەودای کات (چرکە)</string>
     <string name="renamePlaylist">ناوگۆڕینی لیستی لێدان</string>
@@ -336,7 +329,6 @@
     <string name="alternative_videos_layout">بەشی هاوشێوەی ڤیدیۆ</string>
     <string name="autoRotatePlayer_summary">خستە دۆخی پڕ بە شاشە کاتێ ئامێرەکە خرایە سەرلا</string>
     <string name="change_region">ڤیدیۆ پێشنیارکراوەکان بەردەست نییە لەم شوێنەدا، تکایە شوێنێکی تر هەڵبژێرە لەبەشی ڕێکخستندا.</string>
-    <string name="alternative_player_layout">خشتەی لێدەری هاوشێوە</string>
     <string name="unsupported_file_format">جۆری فایل نەگونجاوە: %1$s</string>
     <string name="hls_instead_of_dash">بەکارهێنانی HLS</string>
     <string name="auto_quality">خۆکار</string>
@@ -364,7 +356,6 @@
     <string name="push_channel_name">شێوازی ئاگادارکردنەوە</string>
     <string name="duration_reversed">ماوە (پێچەوانەکراو)</string>
     <string name="shuffle">تێکەڵاوکردن</string>
-    <string name="pause_on_quit">ڕاگرتن لەکاتی دەرچوون</string>
     <string name="fullscreen_gestures">کردن/لابردنی ئاماژەکانی دۆخی پڕ بەشاشە</string>
     <string name="go_to_video">چوون بۆ ڤیدیۆ</string>
     <string name="disable_proxy">ناچالاککردنی پرۆکسی Pipe</string>
@@ -386,7 +377,6 @@
     <string name="show_stream_thumbnails_summary">وێنە بچووکەکانی بڵاوکراوەی نوێ پیشان دەدرێت، بە چالاککردنی ئەمە داتای زیادە بەکاردەهێنێت</string>
     <string name="double_tap_seek_summary">دووجار دەستدان لەلای ڕاست یان چەپ بۆ پێشخستن یان دواخستنی ڤیدیۆ</string>
     <string name="failed_fetching_instances">ناتوانرێ زانیارییەکان بەردەست بخرێن.</string>
-    <string name="hide_watched_from_feed_summary">پیشان نەدانی ئەو ڤیدیۆیانەی کە زیاتر لە ٪٩٠ سەیردەکرێن لەبەشی بەشداریکردنەکاندا</string>
     <string name="playlistUrl">بەستەری لیستی لێدان</string>
     <string name="remove_bookmark">لابردنی نیشانەکراو</string>
     <string name="rewind">داوخستن</string>
@@ -402,7 +392,6 @@
     <string name="channel_groups">گرووپی کەناڵەکان</string>
     <string name="new_group">نوێ</string>
     <string name="group_name">ناوی گرووپ</string>
-    <string name="edit_group">دەستکاریکردنی گرووپ</string>
     <string name="swipe_controls_summary">بەکارهێنانی ئاماژەکان بۆ زیادکردن و کەمکردنەوەی ڕێژەی دەنگ و ڕووناکی شاشە</string>
     <string name="pinch_control">ئاماژەی بچووککردنەوە</string>
     <string name="pinch_control_summary">بەکارهێنانی ئاماژەی بچووککردنەوە بۆ هێنانەپێش/دوورخستنەوە</string>
@@ -411,7 +400,6 @@
     <string name="skip_silence">پەڕاندنی بێدەنگەکان</string>
     <string name="custom_playback_speed_summary">بەکارهێنانی خێراییەکی جیاوازتر لە لێدانی ئاسایی</string>
     <string name="autoplay_countdown_summary">پیشاندانی ژماردنی ٥ چرکە پێش لێدانی ڤێدیۆیی دواتر</string>
-    <string name="audio_player">لێدەری دەنگ</string>
     <string name="download_channel_description">پیشاندانی ئاگادارکردنەوە لەکاتی داگرتنی فایلەکان.</string>
     <string name="play_automatically">لێدان بە خۆکاری</string>
     <string name="shorts_notifications">ئاگادارکردنەوە بۆ ڤیدیۆ کورتەکان</string>
@@ -438,7 +426,6 @@
     <string name="show_search_suggestions">پیشاندانی پێشنیارەکانی گەڕان</string>
     <string name="sb_custom_colors">ڕەنگی تایبەتی نیشانەکردن</string>
     <string name="color">ڕەنگ</string>
-    <string name="enter_hex_value">بەهای تایبەتی ڕەنگ بنوسە</string>
     <string name="manual">دەستی</string>
     <string name="sb_custom_colors_summary">پیشاندانی ڕەنگی تایبەت بۆ بەشە پەڕێنراوەکانی سپۆنسەر</string>
     <string name="invalid_color">بەهایەکی نادروستی ڕەنگ نوسراوە!</string>
@@ -446,7 +433,6 @@
     <string name="visible">پیشاندان لەبەشی خوارەوە</string>
     <string name="automatic">خۆکاری</string>
     <string name="chapters_videoHighlight">بەشەکانی ڤیدیۆ</string>
-    <string name="jumped_to_highlight">چوون بۆ بەشە دیاریکراوەکان</string>
     <string name="category_highlight">پیشاندانی بەشە دیاریکراوەکان</string>
     <string name="category_highlight_summary">دەکرێت یان ناونیشانی ڕیکلامکراو بێت، وێنە بچووکەکە یان سەرنجڕاکێشترین بەش لە ڤیدیۆکەدا. دەتوانیت بەسەریدا تێپەڕیت بە لێدانی لەسەری لە بەشی بابەتەکاندا</string>
     <string name="stop">وەستاندن</string>

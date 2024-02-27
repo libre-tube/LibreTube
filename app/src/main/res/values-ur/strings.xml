@@ -29,7 +29,6 @@
     <string name="region">علاقہ</string>
     <string name="login_register">لاگ ان/رجسٹر</string>
     <string name="cannotDownload">اس سلسلہ کو ڈاؤن لوڈ نہیں کیا جا سکتا۔</string>
-    <string name="dlisinprogress">ایک اور ڈاؤن لوڈ پہلے سے جاری ہے، براہ کرم اس کے مکمل ہونے تک انتظار کریں۔</string>
     <string name="app_theme">تھیم</string>
     <string name="unknown_error">نیٹ ورک کی خرابی۔</string>
     <string name="error">کچھ غلط ہو گیا.</string>
@@ -218,7 +217,6 @@
     <string name="caption_settings">کیپشنز</string>
     <string name="playerAudioFormat">پلیئر کے لیے آڈیو فارمیٹ</string>
     <string name="playerAudioQuality">آڈیو کوالٹی</string>
-    <string name="best_quality">بہترین</string>
     <string name="most_recent">تازہ ترین</string>
     <string name="least_recent">قدیم ترین</string>
     <string name="network_all">تمام</string>

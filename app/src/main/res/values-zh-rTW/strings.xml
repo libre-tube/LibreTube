@@ -132,7 +132,6 @@
     <string name="changeLanguage">語言</string>
     <string name="register">註冊</string>
     <string name="server_error">所選伺服器似乎有問題。 嘗試另一個執行個體。</string>
-    <string name="dlisinprogress">請等待所有下載完成。</string>
     <string name="systemLanguage">系統</string>
     <string name="okay">好</string>
     <string name="location">位置</string>
@@ -188,7 +187,6 @@
     <string name="notify_new_streams">為新的直播顯示通知</string>
     <string name="notify_new_streams_summary">顯示您跟隨的創作者最新串流的通知</string>
     <string name="wifi">Wi-Fi</string>
-    <string name="pop_up">彈出</string>
     <string name="no_comments_available">此影片沒有評論。</string>
     <string name="required_network">需要的連線</string>
     <string name="network_all">全部</string>
@@ -202,7 +200,6 @@
     <string name="background_mode">背景模式</string>
     <string name="add_to_queue">加入佇列</string>
     <string name="skip_segment">跳過片段</string>
-    <string name="sb_skip_manual">手動跳過</string>
     <string name="local_subscriptions">本機訂閱播放清單</string>
     <string name="preferences">偏好設定</string>
     <string name="queue">佇列</string>
@@ -250,20 +247,16 @@
     <string name="confirm_unsubscribe">您確定要取消訂閱 %1$s 嗎？</string>
     <string name="misc">雜項</string>
     <string name="player_resize_mode">重新調整大小模式</string>
-    <string name="break_reminder_time">幾分鐘前提醒</string>
     <string name="resize_mode_fit">適應</string>
     <string name="copied_to_clipboard">複製到剪貼簿</string>
     <string name="repeat_mode_none">無</string>
     <string name="new_videos_badge_summary">如果有新影片，顯示數量徽章</string>
     <string name="hide_watched_from_feed">隱藏已觀看過的影片</string>
-    <string name="hide_watched_from_feed_summary">不要在訂閱播放清單頁籤顯示觀看進度90%以上的影片</string>
     <string name="download_channel_name">下載服務</string>
     <string name="confirm_unsubscribing_summary">在取消訂閱前顯示確認對話框</string>
     <string name="livestreams">直播</string>
     <string name="invalid_filename">檔案名稱無效！</string>
     <string name="playback_pitch">音高</string>
-    <string name="playlists_order">播放清單順序</string>
-    <string name="playlistNameReversed">播放清單名稱 (反序)</string>
     <string name="pure_theme_summary">純粹白/黑主題</string>
     <string name="watch_positions_title">記住播放位置</string>
     <string name="reset_watch_positions">重設</string>
@@ -328,7 +321,6 @@
     <string name="defaultIconLight">預設亮色</string>
     <string name="open_copied">開啟</string>
     <string name="general">一般</string>
-    <string name="audio_player">音訊播放器</string>
     <string name="playlistUrl">播放清單網址</string>
     <string name="download_channel_description">在下載媒體檔案時顯示通知。</string>
     <string name="push_channel_name">通知工作器</string>
@@ -341,14 +333,12 @@
     <string name="download_paused">下載暫停</string>
     <string name="navbar_order">排序</string>
     <string name="layout">版面</string>
-    <string name="alternative_player_layout">另一種播放器版面</string>
     <string name="hls_instead_of_dash">使用HLS</string>
     <string name="hls_instead_of_dash_summary">使用HLS而非DASH (較慢，不推薦)</string>
     <string name="auto_quality">自動</string>
     <string name="trending">現正熱門</string>
     <string name="comments_disabled">上傳者停用了留言功能。</string>
     <string name="theme_monochrome">極簡單色</string>
-    <string name="pause_on_quit">退出後暫停</string>
     <string name="queue_insert_related_videos">插入相關影片</string>
     <string name="bookmarks">書籤</string>
     <string name="bookmark">加入書籤</string>
@@ -362,7 +352,6 @@
     <string name="skip_silence">跳過無聲片段</string>
     <string name="help">幫助</string>
     <string name="faq">問答</string>
-    <string name="best_quality">最佳</string>
     <string name="seek_increment">快轉幅度</string>
     <string name="import_playlists">匯入播放清單</string>
     <string name="alternative_pip_controls">另一種畫中畫控制模式</string>
@@ -405,7 +394,6 @@
     <string name="channel_groups">頻道群組</string>
     <string name="new_group">新</string>
     <string name="group_name">群組名稱</string>
-    <string name="edit_group">編輯群組</string>
     <string name="shorts_notifications">短片通知</string>
     <string name="show_stream_thumbnails">顯示串流縮圖</string>
     <string name="disable_proxy_summary">直接從 YouTube 的伺服器載入影片與圖片。若您一律使用 VPN 則僅應在此時僅用此選項</string>
@@ -440,9 +428,7 @@
     <string name="sb_custom_colors_summary">切換贊助者封鎖區塊的自訂色彩</string>
     <string name="sb_custom_colors">自訂區塊色彩</string>
     <string name="invalid_color">輸入了無效色彩值！</string>
-    <string name="enter_hex_value">輸入顏色的十六進位值</string>
     <string name="chapters_videoHighlight">影片精彩片段</string>
-    <string name="jumped_to_highlight">跳到影片的精彩片段</string>
     <string name="color">色彩</string>
     <string name="visible">在進度列中顯示</string>
     <string name="category_highlight">顯示影片的精彩片段</string>
@@ -524,7 +510,6 @@
     <string name="disable_sleep_timer">停用睡眠計時器</string>
     <string name="watched">已觀看</string>
     <string name="start_sleep_timer">開始睡眠計時器</string>
-    <string name="bottom_reached">已達底部！</string>
     <string name="finished">已結束</string>
     <string name="no_segments_found">此影片尚無任何片段。</string>
     <string name="add_to_group">新增至群組</string>
@@ -533,8 +518,6 @@
     <string name="rich_caption_rendering">豐富字幕繪製</string>
     <string name="rich_caption_rendering_summary">繪製網頁字幕以獲得更豐富與客製化的體驗</string>
     <string name="copy_tooltip">複製</string>
-    <string name="import_groups">匯入頻道群組</string>
-    <string name="export_groups">匯出頻道群組</string>
     <string name="change">變更</string>
     <string name="change_instance">變更站台</string>
     <string name="suggest_change_instance">載入時間較平常久。請考慮變更站台</string>

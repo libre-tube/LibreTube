@@ -24,7 +24,6 @@
     <string name="login_register">Saioa hasi/erregistratu</string>
     <string name="importsuccess">Harpidetuta</string>
     <string name="cannotDownload">Ezin da deskargatu eduki hau.</string>
-    <string name="dlisinprogress">Itxaron abian dagoen deskarga bukatu arte, mesedez.</string>
     <string name="downloadfailed">Ezin izan da deskargatu.</string>
     <string name="import_from_yt">Inportatu harpidetzak</string>
     <string name="import_from_yt_summary">Youtube edo NewPipetik</string>
@@ -202,7 +201,6 @@
     <string name="watch_history_summary">Gailuan ikusitako bideoen jarraipena egitea</string>
     <string name="watch_positions_title">Gogoratu erreprodukzioen posizioak</string>
     <string name="captions">Azpitituluak</string>
-    <string name="best_quality">Onena</string>
     <string name="worst_quality">Txarrena</string>
     <string name="default_subtitle_language">Azpitituluen hizkuntza</string>
     <string name="playerAudioFormat">Erreproduzitzailearen audio formatua</string>
@@ -240,7 +238,6 @@
     <string name="export_subscriptions">Harpidetzak esportatu</string>
     <string name="skip_buttons_summary">Erakutsi botoiak hurrengo edo aurreko bideora joateko</string>
     <string name="yt_shorts">Motzak</string>
-    <string name="break_reminder_time">Gogorarazi ondorengo minutuak igarotzean</string>
     <string name="legacy_subscriptions">Harpidetza zaharren ikuspegia</string>
     <string name="device_info">Gailuaren informazioa</string>
     <string name="no_subtitles_available">Ez dago azpititulurik erabilgarri</string>
@@ -262,7 +259,6 @@
     <string name="new_videos_badge_summary">Erakutsi bereizgarri bat bideo berrien kopuruarekin, baldin badaude</string>
     <string name="wifi">Wi-Fi</string>
     <string name="skip_segment">Saltatu zatia</string>
-    <string name="sb_skip_manual">Saltatu eskuz</string>
     <string name="download_channel_name">Deskarga zerbitzua</string>
     <string name="download_channel_description">Multimedia deskargatzean jakinarazpen bat erakusten du.</string>
     <string name="push_channel_name">Jakinarazpenen egilea</string>
@@ -280,8 +276,6 @@
     <string name="added_to_playlist">Gehitu erreprodukzio zerrendara %1$s</string>
     <string name="filename">Fitxategi izena</string>
     <string name="invalid_filename">Fitxategi izen baliogabea!</string>
-    <string name="playlists_order">Erreprodukzio zerrenden ordena</string>
-    <string name="playlistNameReversed">Erreprodukzio zerrendaren izena (alderantzizkatua)</string>
     <string name="livestreams">Zuzeneko transmisioak</string>
     <string name="alternative_videos_layout">Bideo alternatiboen diseinua</string>
     <string name="defaultIconLight">Lehenetsitako argia</string>
@@ -302,10 +296,8 @@
     <string name="auto">Automatikoa</string>
     <string name="swipe_controls">Irristatze kontrola</string>
     <string name="swipe_controls_summary">Erabili irristatzeko keinua distira eta bolumena doitzeko</string>
-    <string name="pop_up">Leiho gainjarria</string>
     <string name="navbar_order">Ordenatu</string>
     <string name="layout">Diseinua</string>
-    <string name="alternative_player_layout">Erreproduzitzailearen diseinu alternatiboa</string>
     <string name="pinch_control">Atximur kontrola</string>
     <string name="pinch_control_summary">Erabil atximur egiteko keinua, hurbiltzeko/ urruntzeko</string>
     <string name="playback_pitch">Tonua</string>
@@ -333,7 +325,6 @@
     <string name="concurrent_downloads_limit_reached">Uneko deskarga kopuru maximora heldu zara.</string>
     <string name="unknown">Ezezaguna</string>
     <string name="grid_landscape">Lauki-sareko zutabeak (horizontala)</string>
-    <string name="jumped_to_highlight">Nabarmendutako unera joan zara</string>
     <string name="download_completed">Deskargatua</string>
     <string name="concurrent_downloads">Uneko deskarga kopuru maximoa</string>
     <string name="resume">Berrabiarazi</string>

@@ -28,7 +28,6 @@
     <string name="login_register">Log in/register</string>
     <string name="importsuccess">Subscribed</string>
     <string name="cannotDownload">Can\'t download this stream.</string>
-    <string name="dlisinprogress">Please wait for all current downloads to finish.</string>
     <string name="downloadfailed">Download failed.</string>
     <string name="import_from_yt">Import subscriptions</string>
     <string name="import_from_yt_summary">From YouTube or NewPipe</string>
@@ -89,7 +88,6 @@
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">Uses the https://sponsor.ajay.app API</string>
     <string name="segment_skipped">Skipped segment</string>
-    <string name="jumped_to_highlight">Jumped to Video Highlight</string>
     <string name="category_segments">Segments</string>
     <string name="category_sponsor">Sponsor</string>
     <string name="category_sponsor_summary">Paid promotion, paid referrals and direct advertisements. Not for self-promotion or free genuine shoutouts to causes, creators, websites, and products</string>
@@ -234,7 +232,6 @@
     <string name="caption_settings">Captions</string>
     <string name="playerAudioFormat">Audio format for player</string>
     <string name="playerAudioQuality">Audio quality</string>
-    <string name="best_quality">Best</string>
     <string name="worst_quality">Worst</string>
     <string name="default_subtitle_language">Subtitle language</string>
     <string name="notifications">Notifications</string>
@@ -283,7 +280,6 @@
     <string name="maximum_image_cache">Max image cache size</string>
     <string name="copied_to_clipboard">Copied to clipboard</string>
     <string name="open_copied">Open</string>
-    <string name="break_reminder_time">Minutes before being reminded</string>
     <string name="legacy_subscriptions">Legacy subscriptions view</string>
     <string name="device_info">Device Info</string>
     <string name="audio_video_summary">Quality and format</string>
@@ -295,7 +291,6 @@
     <string name="new_videos_badge">Indicator for new videos</string>
     <string name="new_videos_badge_summary">Show a badge with the amount of new videos if there are some</string>
     <string name="skip_segment">Skip segment</string>
-    <string name="sb_skip_manual">Skip manually</string>
     <string name="local_subscriptions">Local subscriptions</string>
     <string name="preferences">Preferences</string>
     <string name="backup_customInstances">Custom Instances</string>
@@ -307,8 +302,6 @@
     <string name="playback_pitch">Pitch</string>
     <string name="filename">Filename</string>
     <string name="invalid_filename">Invalid filename!</string>
-    <string name="playlists_order">Playlists order</string>
-    <string name="playlistNameReversed">Playlist name (reversed)</string>
     <string name="time_code">Time code (seconds)</string>
     <string name="added_to_playlist">Added to playlist %1$s</string>
     <string name="queue">Queue</string>
@@ -316,7 +309,6 @@
     <string name="sb_custom_colors">Custom segment colors</string>
     <string name="color">Color</string>
     <string name="invalid_color">Invalid color value entered!</string>
-    <string name="enter_hex_value">Enter Color Hex Value</string>
     <string name="livestreams">Livestreams</string>
     <string name="alternative_videos_layout">Alternative videos layout</string>
     <string name="defaultIconLight">Default light</string>
@@ -332,7 +324,6 @@
     <string name="notification_time_summary">Limit the time span in which stream notifications are shown</string>
     <string name="navbar_order">Order</string>
     <string name="layout">Layout</string>
-    <string name="alternative_player_layout">Alternative player layout</string>
     <string name="audio_track">Audio track</string>
     <string name="unsupported_file_format">Unsupported file format: %1$s</string>
     <string name="hls_instead_of_dash">Use HLS</string>
@@ -357,7 +348,6 @@
     <string name="pinch_control">Pinch control</string>
     <string name="pinch_control_summary">Use pinch gesture to zoom in/out</string>
     <string name="defaults">Defaults</string>
-    <string name="pop_up">Pop-Up</string>
     <string name="comments_disabled">Comments are disabled by the uploader.</string>
     <string name="no_comments_available">This video has no comments.</string>
     <string name="theme_monochrome">Minimalistic Monochrome</string>
@@ -379,9 +369,7 @@
     <string name="color_violet">Versatile Violet</string>
     <string name="failed_fetching_instances">Could not fetch available instances.</string>
     <string name="hide_watched_from_feed">Hide already watched videos</string>
-    <string name="hide_watched_from_feed_summary">Don\'t show videos being watched more than 90% in the subscriptions tab</string>
     <string name="playlistUrl">Playlist URL</string>
-    <string name="pause_on_quit">Pause on quit</string>
     <string name="shuffle">Shuffle</string>
     <string name="add_to_bookmarks">Add to bookmarks</string>
     <string name="remove_bookmark">Remove bookmark</string>
@@ -389,7 +377,6 @@
     <string name="forward">Forward</string>
     <string name="alternative_pip_controls">Alternative PiP controls</string>
     <string name="alternative_pip_controls_summary">Show audio only and skip controls in PiP instead of forward and rewind</string>
-    <string name="audio_player">Audio player</string>
     <string name="audio_only_mode">Audio only mode</string>
     <string name="audio_only_mode_summary">Turn LibreTube into a music player</string>
     <string name="sleep_timer">Sleep timer</string>
@@ -418,7 +405,6 @@
     <string name="group_name">Group name</string>
     <string name="group_name_error_empty">Please enter a name</string>
     <string name="group_name_error_exists">Please choose a name that is unique</string>
-    <string name="edit_group">Edit group</string>
     <string name="play_automatically">Play automatically</string>
     <string name="play_automatically_summary">Start playing video automatically when selecting</string>
     <string name="fullscreen_gestures">Enter/exit fullscreen gestures</string>
@@ -463,8 +449,6 @@
     <string name="downvote">Down</string>
     <string name="undo">Undo</string>
     <string name="segment">Segment</string>
-    <string name="import_groups">Import channel groups</string>
-    <string name="export_groups">Export channel groups</string>
     <string name="download_playlist">Download playlist</string>
     <string name="download_playlist_note">Please select the maximum audio/video quality to download. Captions will only be downloaded if available.</string>
     <string name="enqueue_playlist_description">Shows a notification when enqueueing videos of a playlist to be downloaded.</string>

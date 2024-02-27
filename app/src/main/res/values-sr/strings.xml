@@ -163,7 +163,6 @@
     <string name="unsubscribe">Прекини праћење</string>
     <string name="download">Преузми</string>
     <string name="save">Сачувај</string>
-    <string name="dlisinprogress">Сачекајте док се сва тренутна преузимања не заврше.</string>
     <string name="downloadfailed">Преузимање није успело.</string>
     <string name="notgmail">Ово је за Piped налог</string>
     <string name="emptyPlaylistName">Назив плејлисте не може бити празан</string>
@@ -227,7 +226,6 @@
     <string name="caption_settings">Титлови</string>
     <string name="playerAudioFormat">Формат аудио снимка за плејер</string>
     <string name="playerAudioQuality">Квалитет аудио снимка</string>
-    <string name="best_quality">Најбољи</string>
     <string name="worst_quality">Најгори</string>
     <string name="share_with_time">Дели са временским кодом</string>
     <string name="export_subscriptions">Изези праћења</string>
@@ -265,17 +263,13 @@
     <string name="mobile_data">Мобилни подаци</string>
     <string name="new_videos_badge">Индикатор за нове видео снимке</string>
     <string name="new_videos_badge_summary">Прикажите значку са количином нових видео снимака, ако их има</string>
-    <string name="sb_skip_manual">Прескочи ручно</string>
     <string name="preferences">Преференце</string>
     <string name="backup_customInstances">Прилагођене инстанце</string>
     <string name="play_next">Пусти следеће</string>
     <string name="playback_pitch">Висина тона</string>
-    <string name="break_reminder_time">Неколико минута пре подсећања</string>
     <string name="change_region">Чини се да видео снимци у тренду нису доступни за тренутни регион. Изаберите други регион у подешавањима.</string>
     <string name="filename">Назив фајла</string>
     <string name="invalid_filename">Неважећи назив фајла!</string>
-    <string name="playlists_order">Редослед плејлиста</string>
-    <string name="playlistNameReversed">Назив плејлисте (обрнуто)</string>
     <string name="download_channel_name">Услуга преузимања</string>
     <string name="download_channel_description">Приказује обавештења приликом преузимања медија.</string>
     <string name="renamePlaylist">Преименуј плејлисту</string>
@@ -296,7 +290,6 @@
     <string name="notification_time_summary">Ограничите временски период у коме се приказују обавештења о стриму</string>
     <string name="navbar_order">Редослед</string>
     <string name="layout">Изглед</string>
-    <string name="alternative_player_layout">Алтернативни изглед плејера</string>
     <string name="audio_track">Аудио трака</string>
     <string name="livestreams">Стримови уживо</string>
     <string name="alternative_videos_layout">Алтернативни изглед видео снимка</string>
@@ -318,20 +311,17 @@
     <string name="swipe_controls">Контроле превлачења</string>
     <string name="swipe_controls_summary">Превуците да бисте подесили осветљеност и јачину звука док сте у режиму целог екрана</string>
     <string name="defaults">Подразумевано</string>
-    <string name="pop_up">Искачући прозор</string>
     <string name="captions_size">Величина титлова</string>
     <string name="pause">Паузирај</string>
     <string name="rewind">Премотај уназад</string>
     <string name="double_tap_seek">Додирни двапут за премотавање</string>
     <string name="double_tap_seek_summary">Додирните двапут лево или десно да премотате уназад или унапред позицију плејера</string>
     <string name="failed_fetching_instances">Није могуће преузети доступне инстанце.</string>
-    <string name="hide_watched_from_feed_summary">Не приказујте видео снимке који су одгледани више од 90% на картици праћења</string>
     <string name="nothing_selected">Ништа није изабрано!</string>
     <string name="pinch_control">Контрола штипања</string>
     <string name="export_playlists">Извези плејлисте</string>
     <string name="app_backup">Прављење резервне копије апликације</string>
     <string name="play_latest_videos">Пусти најновије видео снимке</string>
-    <string name="audio_player">Плејер аудио снимка</string>
     <string name="playlistUrl">URL адреса плејлисте</string>
     <string name="no_subtitle">Нема титла</string>
     <string name="download_paused">Преузимање је паузирано</string>
@@ -358,7 +348,6 @@
     <string name="unknown">Непознато</string>
     <string name="resume">Настави</string>
     <string name="comments_disabled">Аутор је онемогућио коментаре.</string>
-    <string name="pause_on_quit">Паузирај при изласку</string>
     <string name="queue_insert_related_videos">Убацивање повезаних видео снимака</string>
     <string name="clear_bookmarks">Очисти обележиваче</string>
     <string name="shuffle">Мешање</string>
@@ -401,11 +390,9 @@
     <string name="auto_fullscreen_shorts">Аутоматски преко целог екрана за кратке видео снимке</string>
     <string name="new_group">Ново</string>
     <string name="group_name">Назив групе</string>
-    <string name="edit_group">Измени групу</string>
     <string name="channel_groups">Групе канала</string>
     <string name="play_automatically">Пусти аутоматски</string>
     <string name="play_automatically_summary">Почните да пуштате видео снимак аутоматски када изаберете</string>
-    <string name="jumped_to_highlight">Прескочено на истакнути део видео снимка</string>
     <string name="category_highlight">Прикажи истакнути део видео снимка</string>
     <string name="category_highlight_summary">Може бити рекламни наслов, сличица или најзанимљивији део видео снимка. Можете прескочити на њега тако што ћете га додирнути у сегменту за поглавља</string>
     <string name="show_stream_thumbnails">Прикажи сличице стрима</string>
@@ -422,7 +409,6 @@
     <string name="resolution_limited">ограничено</string>
     <string name="tooltip_close">Затвори</string>
     <string name="playlist_description">Опис плејлисте</string>
-    <string name="enter_hex_value">Унесите хексадецималну вредност боје</string>
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="unknown_or_no_audio">непознато или без звука</string>
     <string name="auto_generated">аутоматски генерисано</string>
@@ -527,7 +513,6 @@
     <string name="successfully_removed_from_playlist">Успешно уклоњено са плејлисте: „%1$s“.</string>
     <string name="watched">Одгледано</string>
     <string name="finished">Завршено</string>
-    <string name="bottom_reached">Досегнуто дно!</string>
     <string name="no_segments_found">Још увек нема сегмената за овај видео снимак.</string>
     <string name="time_in_minutes">Време у минутима</string>
     <string name="invalid_input">Неважећи унос</string>
@@ -539,8 +524,6 @@
     <string name="rich_caption_rendering">Напредни титлови</string>
     <string name="rich_caption_rendering_summary">Приказивање веб-титлова за богатије и прилагођеније искуство</string>
     <string name="copy_tooltip">Копирај</string>
-    <string name="import_groups">Увези групе канала</string>
-    <string name="export_groups">Извези групе канала</string>
     <string name="change_instance">Промени инстанцу</string>
     <string name="change">Промени</string>
     <string name="delete_all">Сва преузимања ће бити избрисана!</string>

@@ -60,7 +60,6 @@
     <string name="customInstance">Personalitzat</string>
     <string name="region">Regió</string>
     <string name="login_register">Entra/registra\'t</string>
-    <string name="dlisinprogress">Espereu que finalitzin totes les descàrregues actuals.</string>
     <string name="downloadfailed">Error de descàrrega.</string>
     <string name="import_from_yt">Importa subscripcions</string>
     <string name="import_from_yt_summary">Des de YouTube o NewPipe</string>
@@ -170,7 +169,6 @@
     <string name="network_metered">Mesurat</string>
     <string name="rich_caption_rendering">Renderitzat de subtítols enriquits</string>
     <string name="portrait">Vertical</string>
-    <string name="break_reminder_time">Minuts abans de ser notificat</string>
     <string name="history_summary">Historial de cerques i visualitzacions</string>
     <string name="auto_rotation">Rotació automàtica</string>
     <string name="translate">Traducció</string>
@@ -180,7 +178,6 @@
     <string name="unknown">Desconeguda</string>
     <string name="required_network">Connexió necessària</string>
     <string name="autoRotatePlayer">Pantalla completa automàtica</string>
-    <string name="jumped_to_highlight">Saltat al moment destacat</string>
     <string name="pause">Pausa</string>
     <string name="pauseOnScreenOff">Pausa automàtica</string>
     <string name="navLabelVisibility">Visibilitat de l\'etiqueta</string>
@@ -275,7 +272,6 @@
     <string name="resize_mode_fit">Ajustar</string>
     <string name="pauseOnScreenOff_summary">Pausa la reproducció quan la pantalla estigui apagada</string>
     <string name="watch_positions">Recorda la posició</string>
-    <string name="best_quality">La millor</string>
     <string name="repeat_mode">Mode de repetició</string>
     <string name="all_caught_up">Esteu al dia</string>
     <string name="codecs">Còdecs</string>
@@ -286,7 +282,6 @@
     <string name="app_backup">Còpia de seguretat de l\'aplicació</string>
     <string name="dubbed_audio_track">doblat</string>
     <string name="play_all">Reprodueix-ho tot</string>
-    <string name="pop_up">Finestra emergent</string>
     <string name="suggest_change_instance">La càrrega triga més del normal. Tingueu en compte la possibilitat de canviar la instància</string>
     <string name="change_instance">Canvia la instància</string>
     <string name="import_format_newpipe">NewPipe</string>
@@ -335,7 +330,6 @@
     <string name="duration_span">Durada: %1$s</string>
     <string name="backup_customInstances">Instàncies personalitzades</string>
     <string name="defaultIconLight">Llum per defecte</string>
-    <string name="sb_skip_manual">Salta manualment</string>
     <string name="livestreams">Transmissions en viu</string>
     <string name="confirm_unsubscribe">Esteu segur que us voleu cancel·lar la subscripció a %1$s?</string>
     <string name="confirm_unsubscribing">Confirma la cancel·lació de la subscripció</string>
@@ -375,8 +369,6 @@
     <string name="nothing_selected">No hi ha res seleccionat.</string>
     <string name="color_violet">Violeta versàtil</string>
     <string name="playlistUrl">URL de la llista de reproducció</string>
-    <string name="hide_watched_from_feed_summary">No mostris vídeos que s\'hagin vist en més del 90% a la pestanya de subscripcions</string>
-    <string name="pause_on_quit">Pausa en sortir</string>
     <string name="audio_only_mode_summary">Converteix LibreTube en un reproductor de música</string>
     <string name="sleep_timer">Temporitzador</string>
     <string name="skip_silence">Salta el silenci</string>
@@ -434,7 +426,6 @@
     <string name="time_code">Codi de temps (segons)</string>
     <string name="queue">Cua</string>
     <string name="confirm_unsubscribing_summary">Mostra un quadre de diàleg de confirmació abans de cancel·lar la subscripció</string>
-    <string name="alternative_player_layout">Disseny del reproductor alternatiu</string>
     <string name="hls_instead_of_dash_summary">Utilitza HLS en lloc de DASH (serà més lent, no es recomana)</string>
     <string name="queue_insert_related_videos">Insereix vídeos relacionats</string>
     <string name="autoplay_playlists">Reprodueix automàticament les llistes de reproducció</string>
@@ -450,7 +441,6 @@
     <string name="username_email">Voleu procedir amb una adreça de correu electrònic que no es recomana?</string>
     <string name="forward">Avança</string>
     <string name="alternative_pip_controls_summary">Mostra només els controls d\'àudio i per saltar a Imatge sobre Imatge en lloc de retrocedir i avançar</string>
-    <string name="audio_player">Reproductor d\'àudio</string>
     <string name="audio_only_mode">Mode de només àudio</string>
     <string name="mark_as_watched">Marca com a vist</string>
     <string name="custom_playback_speed">Velocitat personalitzada</string>
@@ -462,7 +452,6 @@
     <string name="disable_proxy">Desactiva el servidor intermediari de Piped</string>
     <string name="disable_proxy_summary">Carrega els vídeos i imatges directament del servidor de YouTube. Habiliteu aquesta opció només si sempre utilitzeu una VPN</string>
     <string name="auto_fullscreen_shorts">Pantalla completa automàtica en vídeos curts (Shorts)</string>
-    <string name="edit_group">Edita el grup</string>
     <string name="play_automatically">Reprodueix automàticament</string>
     <string name="fullscreen_gestures">Gests d\'entrar/sortir de pantalla completa</string>
     <string name="go_to_video">Ves al vídeo</string>
@@ -519,8 +508,6 @@
     <string name="hide_watched_from_feed">Amaga els vídeos ja vistos</string>
     <string name="shuffle">Aleatori</string>
     <string name="add_to_bookmarks">Afegeix als marcadors</string>
-    <string name="import_groups">Importa grups de canals</string>
-    <string name="export_groups">Exporta grups de canals</string>
     <string name="tooltip_play">Reprodueix</string>
     <string name="tooltip_edit_groups">Edita els grups</string>
     <string name="tooltip_create_playlist">Crea una llista de reproducció</string>
@@ -540,13 +527,10 @@
     <string name="change_region">Sembla que les tendències no estan disponibles per a la regió actual. Si us plau, seleccioneu-ne una altra a la configuració.</string>
     <string name="playback_pitch">To</string>
     <string name="filename">Nom del fitxer</string>
-    <string name="playlists_order">Ordre de les llistes de reproducció</string>
-    <string name="playlistNameReversed">Nom de la llista de reproducció (invertit)</string>
     <string name="hls_instead_of_dash">Utilitza HLS</string>
     <string name="pinch_control">Controls del pinçament</string>
     <string name="automatic">Automàtic</string>
     <string name="invalid_color">El color introduït no és vàlid.</string>
-    <string name="enter_hex_value">Introduïu el valor hexadecimal del color</string>
     <string name="manual">Manual</string>
     <string name="wifi">Wi-Fi</string>
     <string name="exportsuccess">Exportat</string>

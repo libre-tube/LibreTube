@@ -157,7 +157,6 @@
     <string name="caption_settings">සිරස්තල</string>
     <string name="playerAudioFormat">වාදකය සඳහා ශ්‍රව්‍ය ආකෘතිය</string>
     <string name="playerAudioQuality">ශ්‍රව්‍ය ගුණත්වය</string>
-    <string name="best_quality">විශිෂ්ට</string>
     <string name="worst_quality">නරකම</string>
     <string name="notify_new_streams">නව ප්‍රවාහ සඳහා දැනුම්දීම් පෙන්වන්න</string>
     <string name="checking_frequency">බලන වාර ගණන…</string>
@@ -192,7 +191,6 @@
     <string name="picture_in_picture">පින්තූරයේ පින්තූරය</string>
     <string name="maximum_image_cache">උපරිම පින්තූර නිහිත ප්‍රමාණය</string>
     <string name="open_copied">විවෘත කරන්න</string>
-    <string name="break_reminder_time">මතක් කිරීමට පෙර මිනිත්තු ගණන</string>
     <string name="device_info">උපාංග තොරතුරු</string>
     <string name="audio_video_summary">ගුණත්වය සහ ආකෘතිය</string>
     <string name="delete">බාගත කිරීම් වලින් මකන්න</string>
@@ -200,7 +198,6 @@
     <string name="mobile_data">ජංගම දත්ත</string>
     <string name="new_videos_badge_summary">අලුත් වීඩියෝ තිබේ නම් ප්‍රමාණය සමඟ ලාංඡනයක් පෙන්වන්න</string>
     <string name="skip_segment">කොටස මඟ හරින්න</string>
-    <string name="sb_skip_manual">අතින් මඟ හරින්න</string>
     <string name="local_subscriptions">දේශීයව ගබඩා කර ඇති දායකත්වයන්</string>
     <string name="preferences">සැකසුම්</string>
     <string name="backup_customInstances">වෙනත් සේවාදායකයක්</string>
@@ -238,7 +235,6 @@
     <string name="pinch_control">කෙනිත්තීම අභිනය පාලනය</string>
     <string name="pinch_control_summary">විශාලනය කිරීමට/පිටතට කිරීමට කෙනිත්තීම අභිනය භාවිත කරන්න</string>
     <string name="defaults">පෙරනිමි</string>
-    <string name="pop_up">උත්පතන</string>
     <string name="theme_monochrome">අවම ඒකවර්ණ</string>
     <string name="captions_size">සිරස්තල ප්‍රමාණය</string>
     <string name="play_all">සියල්ල වාදනය කරන්න</string>
@@ -253,10 +249,7 @@
     <string name="color_violet">ජම්බූල පාට</string>
     <string name="import_playlists">වාදන ලැයිස්තු ආනයනය කරන්න</string>
     <string name="playlistUrl">වාදන ලැයිස්තු URL</string>
-    <string name="audio_player">ශ්‍රව්‍ය වාදකය</string>
     <string name="audio_only_mode_summary">LibreTube සංගීත වාදකයක් බවට පත් කරන්න</string>
-    <string name="hide_watched_from_feed_summary">දායකත්ව පිම්මෙහි 90%කට වඩා නරඹන වීඩියෝ නොපෙන්වන්න</string>
-    <string name="pause_on_quit">ඉවත් වීමේදී නවත්වන්න</string>
     <string name="shuffle">කලවම් කරන්න</string>
     <string name="add_to_bookmarks">පොත් සලකුණු වලට එකතු කරන්න</string>
     <string name="rewind">ආපස්සට යන්න</string>
@@ -274,7 +267,6 @@
     <string name="registered">ලියාපදිංචි. දැන් ඔබට නාලිකා වලට දායක විය හැක.</string>
     <string name="instances">තෝරන්න…</string>
     <string name="login_register">පුරනය වන්න / ලියාපදිංචි වන්න</string>
-    <string name="dlisinprogress">සියලුම බාගැනීම් අවසන් වන තෙක් කරුණාකර රැඳී සිටින්න.</string>
     <string name="empty">ඔබ පරිශීලක නාමයක් සහ මුරපදයක් ඇතුළත් කළ යුතුය.</string>
     <string name="server_error">තෝරාගත් සේවාදායකයේ ගැටලුවක් තිබේ. වෙනත් සේවාදායකයක් උත්සාහ කරන්න.</string>
     <string name="notgmail">මෙය Piped ගිණුමක් සඳහා ය</string>
@@ -333,11 +325,9 @@
     <string name="copied_to_clipboard">පසුරු පුවරුවට පිටපත් කර ඇත</string>
     <string name="legacy_subscriptions">උරුම දායකත්ව දසුන</string>
     <string name="renamePlaylist">වාදන ලැයිස්තුව නැවත නම් කරන්න</string>
-    <string name="playlists_order">වාදන ලැයිස්තු අනුපිළිවෙල</string>
     <string name="time_code">කාල කේතය (තත්පර)</string>
     <string name="confirm_unsubscribing_summary">දායකත්වයෙන් ඉවත් වීමට පෙර තහවුරු කිරීමේ සංවාදයක් පෙන්වන්න</string>
     <string name="playlistCloned">වාදන ලැයිස්තුව ක්ලෝන කරන ලදී</string>
-    <string name="alternative_player_layout">විකල්ප වාදක පිරිසැලසුම</string>
     <string name="end_time">අවසන් කාලය</string>
     <string name="start_time">ආරම්භක කාලය</string>
     <string name="hls_instead_of_dash_summary">DASH වෙනුවට HLS භාවිතා කරන්න (මන්දගාමී වනු ඇත, නිර්දේශ නොකරයි)</string>
@@ -355,7 +345,6 @@
     <string name="areYouSure">මෙම වාදන ලැයිස්තුව මකන්නද\?</string>
     <string name="emptyPlaylistName">වාදන ලැයිස්තුවේ නම හිස් විය නොහැක</string>
     <string name="pauseOnScreenOff_summary">තිරය ක්‍රියාවිරහිත වූ විට වාදනය නවත්වන්න</string>
-    <string name="playlistNameReversed">වාදන ලැයිස්තුවේ නම (ප්‍රතිලෝම)</string>
     <string name="playlistCreated">වාදන ලැයිස්තුව සාදන ලදී.</string>
     <string name="addToPlaylist">වාදන ලැයිස්තුවට එක් කරන්න</string>
     <string name="remove_bookmark">පොත් සලකුණ ඉවත් කරන්න</string>
@@ -399,7 +388,6 @@
     <string name="auto_fullscreen_shorts">කෙටි වීඩියෝ සඳහා ස්වයංක්‍රීය පූර්ණ තිරය</string>
     <string name="new_group">අලුත්</string>
     <string name="group_name">කණ්ඩායමේ නම</string>
-    <string name="edit_group">කණ්ඩායම සංස්කරණය කරන්න</string>
     <string name="channel_groups">නාලිකා කණ්ඩායම්</string>
     <string name="go_to_video">වීඩියෝව වෙත යන්න</string>
     <plurals name="channel_new_streams">

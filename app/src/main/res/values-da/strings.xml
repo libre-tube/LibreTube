@@ -9,7 +9,6 @@
     <string name="loggedout">Logged ud.</string>
     <string name="already_logged_in">Allerede logged ind. Du kan logge ud af din konto når du vil.</string>
     <string name="login_register">Log ind/registrer</string>
-    <string name="dlisinprogress">Vent venligst til, at alle downloads er færdige.</string>
     <string name="downloadfailed">Download mislykkedes.</string>
     <string name="server_error">Der ser ud til at være et problem med den valgte server. Prøv en anden instans.</string>
     <string name="unknown_error">Netværksfejl.</string>
@@ -209,7 +208,6 @@
     <string name="caption_settings">Undertekster</string>
     <string name="playerAudioFormat">Lydformat til afspiller</string>
     <string name="playerAudioQuality">Lydkvalitet</string>
-    <string name="best_quality">Bedst</string>
     <string name="worst_quality">Værst</string>
     <string name="history_empty">Ingen historik endnu.</string>
     <string name="least_views">Færreste visninger</string>
@@ -254,7 +252,6 @@
     <string name="copied_to_clipboard">Kopieret til udklipsholder</string>
     <string name="maximum_image_cache">Maks. billedcachestørrelse</string>
     <string name="open_copied">Åben</string>
-    <string name="break_reminder_time">Minutter før påmindelse</string>
     <string name="legacy_subscriptions">Ældre abonnementsvisning</string>
     <string name="device_info">Enhedsoplysninger</string>
     <string name="audio_video_summary">Kvalitet og format</string>
@@ -282,7 +279,6 @@
     <string name="tooltip_clear_queue">Ryd kø</string>
     <string name="filename">Filnavn</string>
     <string name="change_instance">Ændre instans</string>
-    <string name="alternative_player_layout">Alternativ afspillerlayout</string>
     <string name="change">Skift</string>
     <string name="download_channel_description">Viser en notifikationer, når der downloades medier.</string>
     <string name="tooltip_minimize">Minimeér</string>
@@ -304,9 +300,7 @@
     <string name="new_videos_badge_summary">Vis badge ned antallet af nye videoer hvis der er nogle</string>
     <string name="suggest_change_instance">Indlæsning tager længere tid end normalt. Overvej at ændre instans</string>
     <string name="invalid_filename">Ugyldigt filnavn!</string>
-    <string name="playlists_order">Playlisternes rækkefølge</string>
     <string name="invalid_color">Ugyldig farveværdi indtastet!</string>
-    <string name="enter_hex_value">Indtast farvehex-værdi</string>
     <string name="livestreams">Livestreams</string>
     <string name="alternative_videos_layout">Alternativ videolayout</string>
     <string name="defaultIconLight">Standard lys</string>
@@ -326,7 +320,6 @@
     <string name="swipe_controls_summary">Swipe for at justere lysstyrken og volumen i fuld skærm-tilstand</string>
     <string name="pinch_control_summary">Brug pinchbevægelse til at zoome in/ud</string>
     <string name="defaults">Standarder</string>
-    <string name="pop_up">Pop-op</string>
     <string name="all_caught_up">Du er helt opdateret</string>
     <string name="all_caught_up_summary">Du har set alle nye videoer</string>
     <string name="username_email">Fortsæt med en e-mailadresse der ikke er anbefalet?</string>
@@ -334,8 +327,6 @@
     <string name="nothing_selected">Intet valgt!</string>
     <string name="color_violet">Alsidig violet</string>
     <string name="failed_fetching_instances">Kunne ikke hente tilgængelige instanser.</string>
-    <string name="hide_watched_from_feed_summary">Vis ikke videoer, der er mere end 90% sete i abonnementsfanen</string>
-    <string name="pause_on_quit">Pause ved afslutning</string>
     <string name="shuffle">Bland</string>
     <string name="custom_playback_speed">TIlpasset hastighed</string>
     <string name="custom_playback_speed_summary">Brug en anden afspilningshastighed end for den normale afspiller</string>
@@ -359,8 +350,6 @@
     <string name="visibility_unlisted">Unoteret</string>
     <string name="remove_watched_videos">Fjern sete videoer</string>
     <string name="segment_submitted">Segment indsendt</string>
-    <string name="import_groups">Importér kanalgrupper</string>
-    <string name="export_groups">Eksportér kanalgrupper</string>
     <string name="import_format_youtube_csv">Youtube (CSV)</string>
     <string name="download_playlist">Download playliste</string>
     <string name="download_playlist_note">Vælg venligst den maksimale lyd-/video-kvalitet at downloade. Undertekster vil kun blive downloadet hvis tilgængelige.</string>
@@ -397,12 +386,9 @@
     <string name="show_stream_thumbnails">Vis streamthumbnails</string>
     <string name="new_videos_badge">Indikator for nye videoer</string>
     <string name="mobile_data">Mobildata</string>
-    <string name="playlistNameReversed">Playlistenavn (omvendt)</string>
     <string name="time_code">Tidskoden (sekunder)</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d videoer</string>
     <string name="privacy_alert">Privatlivsadvarsel</string>
-    <string name="audio_player">Lydafspiller</string>
-    <string name="jumped_to_highlight">Hoppet til video højdepunkt</string>
     <string name="dubbed_audio_track">oversat</string>
     <string name="show_search_suggestions">Vis søgeanbefalinger</string>
     <string name="audio_track_format">%1$s - %2$s</string>
@@ -503,9 +489,7 @@
     <string name="skip_segment">Spring segment over</string>
     <string name="copy_tooltip">Kopier</string>
     <string name="autoplay_countdown">Automatisk afspilning nedtælling</string>
-    <string name="edit_group">Rediger gruppe</string>
     <string name="play_automatically">Afspil automatisk</string>
-    <string name="sb_skip_manual">Spring manuelt over</string>
     <string name="local_subscriptions">Lokale abonnementer</string>
     <string name="play_next">Spil som næste</string>
     <string name="navigation_bar">Navigationsbar</string>

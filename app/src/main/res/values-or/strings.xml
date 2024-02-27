@@ -77,7 +77,6 @@
     <string name="update_available_text">ନୂତନ ଅଦ୍ୟତନ ଉପଲବ୍ଧ । GitHub ରିଲିଜ୍ ପୃଷ୍ଠା ଖୋଲିବାକୁ କ୍ଲିକ୍ କରନ୍ତୁ ।</string>
     <string name="appearance">ରୂପ</string>
     <string name="playlistCreated">ପ୍ଲେଲିଷ୍ଟ ଯୋଡାଗଲା ।</string>
-    <string name="dlisinprogress">ସମସ୍ତ ସାମ୍ପ୍ରତିକ ଡାଉନଲୋଡ୍ ସମାପ୍ତ ନହେବା ପର୍ଯ୍ୟନ୍ତ ଦୟାକରି ଅପେକ୍ଷା କରନ୍ତୁ |</string>
     <string name="import_from_yt">ସଦସ୍ୟତା ଗୁଡ଼ିକୁ ଆମଦାନୀ କରନ୍ତୁ</string>
     <string name="server_error">ମନୋନୀତ ସର୍ଭର ସହିତ ଏକ ସମସ୍ୟା ଥିବା ପରି ମନେହୁଏ । ଅନ୍ୟ ଏକ ଉଦାହରଣ ଚେଷ୍ଟା କରନ୍ତୁ ।</string>
     <string name="empty">ଆପଣଙ୍କୁ ନିଜର ପଞ୍ଜୀକୃତ ନାମ ଓ ପାସ୍ ୱାର୍ଡ ଦେବାକୁ ହେବ ।</string>
@@ -193,7 +192,6 @@
     <string name="repeat_mode_none">ଦରକାର ନାହିଁ</string>
     <string name="repeat_mode_current">ବର୍ତ୍ତମାନର</string>
     <string name="preferences">ପସନ୍ଦ</string>
-    <string name="playlistNameReversed">ପ୍ଲେଲିଷ୍ଟ ନାମ ଓଲଟା</string>
     <string name="time_code">ଟାଇମ୍ କୋଡ୍ (ସେକେଣ୍ଡରେ)</string>
     <string name="queue">ଧାଡ଼ି</string>
     <string name="instance_summary">ପାଇପ୍, ଲଗଇନ୍, ଏବଂ ଆକାଉଣ୍ଟ୍</string>
@@ -209,7 +207,6 @@
     <string name="maximum_image_cache">ସର୍ବାଧିକ ପ୍ରତିଛବି କ୍ୟାଚ୍ ଆକାର</string>
     <string name="copied_to_clipboard">କ୍ଲିପବୋର୍ଡରେ କପି କରାଯାଇଛି</string>
     <string name="open_copied">ଖୋଲନ୍ତୁ</string>
-    <string name="break_reminder_time">ମନେରଖିବା ପୂର୍ବରୁ କିଛି ମିନିଟ୍</string>
     <string name="device_info">ଉପକରଣ ସୂଚନା</string>
     <string name="delete">ଡାଉନଲୋଡ୍ ରୁ ଡିଲିଟ୍ କରନ୍ତୁ</string>
     <string name="audio_video_summary">ଗୁଣବତ୍ତା ଏବଂ ଫର୍ମାଟ୍</string>
@@ -218,14 +215,12 @@
     <string name="new_videos_badge">ନୂତନ ଭିଡିଓ ପାଇଁ ସୂଚକ</string>
     <string name="new_videos_badge_summary">ଯଦି କିଛି ଅଛି ତେବେ ନୂତନ ଭିଡିଓ ପରିମାଣ ସହିତ ଏକ ବ୍ୟାଜ୍ ଦେଖାନ୍ତୁ</string>
     <string name="skip_segment">ବିଭାଗକୁ ଏଡ଼ାଇଦିଅ</string>
-    <string name="sb_skip_manual">ମେନୁଆଲି ଏଡାନ୍ତୁ</string>
     <string name="local_subscriptions">ସ୍ଥାନୀୟ ସଦସ୍ୟତା</string>
     <string name="backup_customInstances">ଅନୁକୂଳ୍ ଇନଷ୍ଟାନ୍ସ</string>
     <string name="play_next">ପରବର୍ତ୍ତୀ ଖେଳନ୍ତୁ</string>
     <string name="navigation_bar">ନାଭିଗେସନ୍ ବାର୍</string>
     <string name="change_region">ସାମ୍ପ୍ରତିକ ଭାବେ ଟ୍ରେଡିଂ ଏହି ଜାଗାରେ ନାହିଁ ।</string>
     <string name="added_to_playlist">%1$s ପ୍ଲେ ଲିଷ୍ଟରେ ଯୋଡା ଯାଇଛି</string>
-    <string name="playlists_order">ପ୍ଲେଲିଷ୍ଟ କ୍ରମ</string>
     <string name="reset">ଡିଫଲ୍ଟଗୁଡିକ ପୁନରୁଦ୍ଧାର କରନ୍ତୁ</string>
     <string name="reset_message">ସମସ୍ତ ସେଟିଂସମୂହ ପୁନ ରିସେଟ୍ କରନ୍ତୁ ଏବଂ ଲଗ୍ ଆଉଟ୍ କରନ୍ତୁ \?</string>
     <string name="deleteAccount_summary">ଆପଣଙ୍କର ପାଇପ୍ ଆକାଉଣ୍ଟ୍ ଡିଲିଟ୍ କରନ୍ତୁ</string>
@@ -254,7 +249,6 @@
     <string name="history_summary">ଇତିହାସ ଦେଖନ୍ତୁ ଏବଂ ସନ୍ଧାନ କରନ୍ତୁ</string>
     <string name="captions">କ୍ୟାପସନ୍</string>
     <string name="playerAudioFormat">ଚାଳକ ନିମନ୍ତେ ଅଡ଼ିଓ ଫର୍ମାଟ୍</string>
-    <string name="best_quality">ସର୍ବତ୍ତମ</string>
     <string name="worst_quality">ସବୁଠାରୁ ଖରାପ</string>
     <string name="notify_new_streams_summary">ଆପଣ ଅନୁସରଣ କରୁଥିବା ସୃଷ୍ଟିକର୍ତ୍ତାଙ୍କ ଠାରୁ ନୂତନ ଷ୍ଟ୍ରିମ୍ ପାଇଁ ବିଜ୍ଞପ୍ତି ପ୍ରଦର୍ଶନ କରନ୍ତୁ</string>
     <string name="least_recent">ପୁରୁଣା</string>
@@ -299,7 +293,6 @@
     <string name="start_time">ଆରମ୍ଭ ସମୟ</string>
     <string name="navbar_order">ସଜାନ୍ତୁ</string>
     <string name="layout">ଲେଆଉଟ୍</string>
-    <string name="alternative_player_layout">ବିକଳ୍ପ ପ୍ଲେୟାର୍ ଲେଆଉଟ୍</string>
     <string name="audio_track">ଅଡିଓ ଟ୍ରାକ୍</string>
     <string name="hls_instead_of_dash">HLS ବ୍ୟବହାର କରନ୍ତୁ</string>
     <string name="hls_instead_of_dash_summary">DASH ପରିବର୍ତ୍ତେ HLS ବ୍ୟବହାର କରନ୍ତୁ (ଧୀର ହେବ, ସୁପାରିଶ ହେବ ନାହିଁ)</string>
@@ -319,7 +312,6 @@
     <string name="swipe_controls">ସ୍ୱାଇପ୍ ନିୟନ୍ତ୍ରଣ</string>
     <string name="swipe_controls_summary">ଉଜ୍ଜ୍ୱଳତା ଏବଂ ଭଲ୍ୟୁମ୍ ସଜାଡିବା ପାଇଁ ସ୍ୱାଇପ୍ ଅଙ୍ଗଭଙ୍ଗୀ ବ୍ୟବହାର କରନ୍ତୁ</string>
     <string name="defaults">ଡିଫଲ୍ଟ ଗୁଡ଼ିକ</string>
-    <string name="pop_up">ପପ୍-ଅପ୍</string>
     <string name="no_comments_available">ଏହି ଭିଡିଓରେ କୌଣସି ମନ୍ତବ୍ୟ ନାହିଁ ।</string>
     <string name="comments_disabled">ମନ୍ତବ୍ୟଗୁଡିକ ଅପଲୋଡର୍ ଙ୍କ ଦ୍ୱାରା ଅକ୍ଷମ ହୋଇଛି ।</string>
     <string name="captions_size">କ୍ୟାପସନ୍ ର ଆକାର</string>
@@ -343,9 +335,7 @@
     <string name="color_violet">ବହୁମୁଖୀ ବାଇଗଣୀ</string>
     <string name="failed_fetching_instances">ଉପଲବ୍ଧ ଉଦାହରଣଗୁଡିକ ଆଣିପାରିଲା ନାହିଁ ।</string>
     <string name="hide_watched_from_feed">ଫିଡ୍ ରୁ ଦେଖାଯାଇଥିବା ଭିଡିଓଗୁଡିକ ଲୁଚାନ୍ତୁ</string>
-    <string name="hide_watched_from_feed_summary">ସଦସ୍ୟତା ଟ୍ୟାବରେ 90% ରୁ ଅଧିକ ଦେଖାଯାଉଥିବା ଭିଡିଓ ଦେଖାନ୍ତୁ ନାହିଁ</string>
     <string name="playlistUrl">ପ୍ଲେଲିଷ୍ଟ୍ URL</string>
-    <string name="pause_on_quit">ଆପ୍ ଛାଡିବା ପରେ ଭିଡିଓକୁ ବିରତି ଦିଅନ୍ତୁ</string>
     <string name="shuffle">ସଫଲ୍</string>
     <string name="add_to_bookmarks">ବୁକମାର୍କରେ ଯୋଡନ୍ତୁ</string>
     <string name="remove_bookmark">ବୁକମାର୍କ ଅପସାରଣ କରନ୍ତୁ</string>
@@ -354,7 +344,6 @@
     <string name="pause">ବିରାମ</string>
     <string name="alternative_pip_controls">ବିକଳ୍ପ PIP ନିୟନ୍ତ୍ରଣ</string>
     <string name="alternative_pip_controls_summary">କେବଳ ଅଡିଓ ଦେଖାନ୍ତୁ ଏବଂ ଆଗକୁ ଏବଂ ପଛକୁ ନେବା ପରିବର୍ତ୍ତେ PiP ରେ କଣ୍ଟ୍ରୋଲ୍ ଛାଡିଦିଅ</string>
-    <string name="audio_player">ଅଡିଓ ପ୍ଲେୟାର</string>
     <string name="no_subtitle">କୌଣସି ଉପ-ଆଖ୍ୟା ନାହିଁ</string>
     <string name="download_paused">ଡାଉନଲୋଡ୍ ବିରତ ହୋଇଛି</string>
     <string name="download_completed">ଡାଉନଲୋଡ୍ ସମାପ୍ତ ହୋଇଛି</string>
@@ -399,7 +388,6 @@
     <string name="auto_fullscreen_shorts">ଛୋଟ ଭିଡିଓଗୁଡ଼ିକରେ ଅଟୋ ଫୁଲ୍ ସ୍କ୍ରିନ୍</string>
     <string name="new_group">ନୂତନ</string>
     <string name="group_name">ଗୋଷ୍ଠୀ ନାମ</string>
-    <string name="edit_group">ଗୋଷ୍ଠୀ ସମ୍ପାଦନା</string>
     <string name="channel_groups">ଚ୍ୟାନେଲ୍ ଗୋଷ୍ଠୀଗୁଡିକ</string>
     <string name="play_automatically_summary">ଚୟନ କରିବା ସମୟରେ ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଭିଡିଓ ଚାଲିବା ଆରମ୍ଭ କରନ୍ତୁ</string>
     <string name="play_automatically">ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଚଲାନ୍ତୁ</string>
@@ -441,9 +429,7 @@
     <string name="off">ବନ୍ଦ</string>
     <string name="color">ରଙ୍ଗ</string>
     <string name="sb_custom_colors">କଷ୍ଟମ୍ ସେଗମେଣ୍ଟ୍ ରଙ୍ଗ</string>
-    <string name="enter_hex_value">ରଙ୍ଗ ହେକ୍ସ ମୂଲ୍ୟ ପ୍ରବେଶ କରନ୍ତୁ</string>
     <string name="sb_custom_colors_summary">ପ୍ରାୟୋଜକ ବ୍ଲକ୍ ସେଗମେଣ୍ଟଗୁଡିକ ପାଇଁ କଷ୍ଟମ୍ ରଙ୍ଗ ସେଗମେଣ୍ଟଗୁଡିକ ଟୋଗଲ୍ କରନ୍ତୁ</string>
-    <string name="jumped_to_highlight">ଭିଡିଓ ହାଇଲାଇଟ୍ କୁ ଡେଇଁଲେ</string>
     <string name="category_highlight">ଭିଡିଓ ହାଇଲାଇଟ୍ ଦେଖନ୍ତୁ</string>
     <string name="category_highlight_summary">ବିଜ୍ଞାପନର ଟାଇଟଲ୍, ଥମ୍ବନେଲ କିମ୍ବା ଭିଡିଓର ସବୁଠାରୁ ଆକର୍ଷଣୀୟ ଅଂଶ ହୋଇପାରେ । ଆପଣ ଏହାକୁ ଅଧ୍ୟାୟ ବିଭାଗରେ ଟ୍ୟାପ୍ କରି ଏହାକୁ ଛାଡି ପାରିବେ</string>
     <string name="invalid_color">ଅବୈଧ ରଙ୍ଗ ମୂଲ୍ୟ ପ୍ରବେଶ!</string>
@@ -527,7 +513,6 @@
     <string name="disable_sleep_timer">ଶୋଇବା ସମୟକୁ ଅକ୍ଷମ କରନ୍ତୁ</string>
     <string name="watched">ପୂର୍ବରୁ ଦେଖାଯାଇଛି</string>
     <string name="start_sleep_timer">ଶୋଇବା ସମୟ ଆରମ୍ଭ କରନ୍ତୁ</string>
-    <string name="bottom_reached">ତଳ ପାଖରେ ପହଞ୍ଚିଲା!</string>
     <string name="finished">ସମାପ୍ତ</string>
     <string name="no_segments_found">ଏହି ଭିଡିଓ ପାଇଁ ଏପର୍ଯ୍ୟନ୍ତ କୌଣସି ବିଭାଗ ନାହିଁ ।</string>
     <string name="add_to_group">ସମୂହରେ ଯୋଗ କରନ୍ତୁ</string>

@@ -34,7 +34,6 @@
     <string name="areYouSure">Biztosan törölni szeretné a lejátszási listát\?</string>
     <string name="app_theme">Téma</string>
     <string name="emptyList">Itt nincs semmi.</string>
-    <string name="dlisinprogress">Várjon amíg az összes jelenlegi letöltés befejeződik.</string>
     <string name="customInstance">Egyéni</string>
     <string name="importsuccess">Sikeres feliratkozás</string>
     <string name="error">Valami gond van.</string>
@@ -125,7 +124,6 @@
     <string name="version">Verzió: %1$s</string>
     <string name="error_occurred">Hiba</string>
     <string name="copied">Másolva</string>
-    <string name="break_reminder_time">Emlékeztetés előtti percek</string>
     <string name="legacy_subscriptions">Régi feliratkozások nézet</string>
     <string name="device_info">Eszközinformáció</string>
     <string name="general_summary">Nyelv és régió</string>
@@ -230,7 +228,6 @@
     <string name="player_summary">Alapértelmezések és működés</string>
     <string name="audio_video_summary">Minőség és formátum</string>
     <string name="caption_settings">Feliratok</string>
-    <string name="best_quality">Legjobb</string>
     <string name="playerAudioFormat">Hangformátum a lejátszóhoz</string>
     <string name="playerAudioQuality">Hangminőség</string>
     <string name="update_available">%1$s verzió elérhető</string>
@@ -274,14 +271,11 @@
     <string name="navigation_bar">Navigációs sáv</string>
     <string name="download_channel_description">Értesítés megjelenítése média letöltésekor.</string>
     <string name="skip_segment">Szakasz kihagyása</string>
-    <string name="sb_skip_manual">Manuális kihagyás</string>
     <string name="playback_pitch">Hangmagasság</string>
     <string name="change_region">A felkapott úgy tűnik, hogy nem elérhető a jelenlegi régió számára. Válasszon egy másikat a beállításokban.</string>
     <string name="added_to_playlist">Hozzáadva a lejátszási listához %1$s</string>
     <string name="invalid_filename">Érvénytelen fájlnév!</string>
     <string name="filename">Fájlnév</string>
-    <string name="playlistNameReversed">Lejátszási lista neve (fordított)</string>
-    <string name="playlists_order">Lejátszási lista sorrend</string>
     <string name="time_code">Időkód (másodperc)</string>
     <string name="queue">Sor</string>
     <string name="livestreams">Élő közvetítések</string>
@@ -298,7 +292,6 @@
     <string name="notification_time">Értesítési idő korlátozása</string>
     <string name="notification_time_summary">Időtartam korlátozása, amely alatt az értesítések megjelennek</string>
     <string name="layout">Elrendezés</string>
-    <string name="alternative_player_layout">Alternatív lejátszó elrendezés</string>
     <string name="navbar_order">Sorrend</string>
     <string name="audio_track">Hangsáv</string>
     <string name="hls_instead_of_dash">HLS használata</string>
@@ -319,7 +312,6 @@
     <string name="swipe_controls_summary">Húzás hangerő és a fényerő beállításához teljes képernyős módban</string>
     <string name="swipe_controls">Húzási vezérlők</string>
     <string name="defaults">Alapértékek</string>
-    <string name="pop_up">Felugró</string>
     <string name="no_comments_available">A videóhoz nincs hozzászólás.</string>
     <string name="comments_disabled">A hozzászólásokat a feltöltő letiltotta.</string>
     <string name="double_tap_seek_summary">Koppintson kétszer balra vagy jobbra a lejátszás a vissza- vagy előretekeréshez</string>
@@ -343,9 +335,7 @@
     <string name="play_latest_videos">Legújabb videók lejátszása</string>
     <string name="failed_fetching_instances">Nem sikerült lekérni az elérhető példányokat.</string>
     <string name="hide_watched_from_feed">A már megnézett videók elrejtése</string>
-    <string name="hide_watched_from_feed_summary">Ne mutassa a már 90%-ig megnézett videókat a feliratkozások lapon</string>
     <string name="playlistUrl">Lejátszási lista URL</string>
-    <string name="pause_on_quit">Szüneteltet bezárásnál</string>
     <string name="shuffle">Keverés</string>
     <string name="add_to_bookmarks">Hozzáadás a könyvjelzőkhöz</string>
     <string name="remove_bookmark">Könyvjelző eltávolítása</string>
@@ -354,7 +344,6 @@
     <string name="rewind">Visszatekerés</string>
     <string name="alternative_pip_controls">Alternatív PiP irányítás</string>
     <string name="alternative_pip_controls_summary">Csak hang és átlépés gombok megjelenítése a PiP-ben az előretekerés és a visszatekerés helyett</string>
-    <string name="audio_player">Hanglejátszó</string>
     <string name="no_subtitle">Nincs felirat</string>
     <string name="download_paused">Letöltés szüneteltetve</string>
     <string name="download_completed">Letöltés befejezve</string>
@@ -399,7 +388,6 @@
     </plurals>
     <string name="new_group">Új</string>
     <string name="group_name">Csoportnév</string>
-    <string name="edit_group">Csoport szerkesztése</string>
     <string name="channel_groups">Csatornacsoportok</string>
     <string name="play_automatically_summary">Videó automatikus lejátszása kiválasztá</string>
     <string name="play_automatically">Automatikus lejátszás</string>
@@ -440,8 +428,6 @@
     <string name="sb_custom_colors">Egyéni szakaszszínek</string>
     <string name="color">Szín</string>
     <string name="invalid_color">Érvénytelen a megadott színérték!</string>
-    <string name="enter_hex_value">Hexadecimális színérték megadása</string>
-    <string name="jumped_to_highlight">Ugrás a videó kiemeléshez</string>
     <string name="sb_custom_colors_summary">Egyéni színek bekapcsolása a SzponzorBlokk-szakaszokhoz</string>
     <string name="category_highlight_summary">Lehet a meghirdetett cím, a bélyegkép vagy a videó legérdekesebb része. A fejezetek részben a rákoppintással ugorhat oda</string>
     <string name="choose_instance_long">Válasszon ki az alább felsoroltak közül egy Piped példányt. A Piped példány közvetítőként fog működni Ön és a YouTube között. Ezek a példányok különböző fizikai helyszíneken találhatók - ezeket az országzászló jelzi. A fizikailag közelebbi példányok valószínűleg gyorsabbak, mint a távoli példányok. A beállításokban bármikor megváltoztatható a használt példány.</string>
@@ -540,10 +526,8 @@
     <string name="suggest_change_instance">A betöltés az átlagosnál tovább tart. Fontolja meg, hogy példányt vált</string>
     <string name="change_instance">Példány váltása</string>
     <string name="audio_language">Hang nyelve</string>
-    <string name="export_groups">Csatornacsoportok exportálása</string>
     <string name="download_playlist">Lejátszási lista letöltése</string>
     <string name="delete_all">Az összes letöltés törölve lesz!</string>
-    <string name="import_groups">Csatornacsoportok importálása</string>
     <string name="enqueueing_playlist_download">Videók sorbaállítása letöltéshez a(z) %1$s lejátszási listából</string>
     <string name="download_playlist_note">Válassza ki a maximális letöltendő hang/videóminőséget. A feliratok csak akkor lesznek letöltve, ha elérhetőek.</string>
     <string name="enqueue_playlist_description">Értesítés megjelenítése, amikor egy lejátszási lista videóit állítja sorba letöltéshez.</string>

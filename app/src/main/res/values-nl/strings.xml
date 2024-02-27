@@ -20,7 +20,6 @@
     <string name="region">Regio</string>
     <string name="login_register">Inloggen/registreren</string>
     <string name="cannotDownload">Kan deze stream niet downloaden.</string>
-    <string name="dlisinprogress">Wacht a.u.b. tot alle downloads klaar zijn.</string>
     <string name="downloadfailed">Download mislukt.</string>
     <string name="import_from_yt">Abonnementen importeren</string>
     <string name="import_from_yt_summary">Van YouTube of NewPipe</string>
@@ -163,7 +162,6 @@
     <string name="pauseOnScreenOff_summary">Pauzeer media wanneer het scherm wordt uitgeschakeld</string>
     <string name="clonePlaylist">Afspeellijst klonen</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d video\'s</string>
-    <string name="jumped_to_highlight">Naar hoogtepunt gesprongen</string>
     <string name="subscriberAndVideoCounts">%1$s abonnees • %2$d video\'s</string>
     <string name="replies">Reacties</string>
     <string name="normal_views">%1$s weergaven%2$s</string>
@@ -225,7 +223,6 @@
     <string name="watch_positions">Positie onthouden</string>
     <string name="resume">Hervatten</string>
     <string name="caption_settings">Ondertitels</string>
-    <string name="pop_up">Pop-up</string>
     <string name="visibility">Zichtbaarheid</string>
     <string name="visibility_public">Publiek</string>
     <string name="visibility_unlisted">Niet vermeld</string>
@@ -255,7 +252,6 @@
     <string name="fullscreen_orientation">Oriëntatie bij volledig scherm</string>
     <string name="navLabelVisibility">Label­zichtbaarheid</string>
     <string name="data_saver_mode">Gegevens­besparings­modus</string>
-    <string name="best_quality">Beste</string>
     <string name="search_history_summary">Zoekopdrachten onthouden</string>
     <string name="playerAudioQuality">Audio­kwaliteit</string>
     <string name="misc">Diversen</string>
@@ -313,11 +309,9 @@
     <string name="theme_monochrome">Minimalistisch monochroom</string>
     <string name="color_violet">Veelzijdig violet</string>
     <string name="remove_bookmark">Bladwijzer verwijderen</string>
-    <string name="audio_player">Audio­speler</string>
     <string name="aspect_ratio">Beeldverhouding van video</string>
     <string name="require_restart">Herstart van app vereist</string>
     <string name="backup_customInstances">Aangepaste instanties</string>
-    <string name="playlists_order">Volgorde van afspeel­lijsten</string>
     <string name="pinch_control">Knijp­bediening</string>
     <string name="sleep_timer">Slaap­timer</string>
     <string name="time_code">Tijdcode (seconden)</string>
@@ -335,11 +329,9 @@
     <string name="device_info">Apparaat­info</string>
     <string name="mobile_data">Mobiele gegevens</string>
     <string name="skip_segment">Segment overslaan</string>
-    <string name="sb_skip_manual">Handmatig overslaan</string>
     <string name="local_subscriptions">Lokale abonnementen</string>
     <string name="history_size">Maximale geschiedenis­grootte</string>
     <string name="delete">Verwijderen uit downloads</string>
-    <string name="alternative_player_layout">Alternatieve speler-lay-out</string>
     <string name="import_playlists">Afspeellijsten importeren</string>
     <string name="export_playlists">Afspeellijsten exporteren</string>
     <string name="privacy_alert">Privacy-waarschuwing</string>
@@ -349,13 +341,11 @@
     <string name="video_id">Video-ID</string>
     <string name="autoplay_countdown">Aftellen voor volgende afspelen</string>
     <string name="group_name">Groepnaam</string>
-    <string name="edit_group">Groep bewerken</string>
     <string name="screen_orientation">Scherm­oriëntatie</string>
     <string name="deleteAccount_summary">Verwijder uw Piped-account</string>
     <string name="audio_video">Audio en video</string>
     <string name="pure_theme_summary">Puur wit/zwart thema</string>
     <string name="checking_frequency">Elke … controleren</string>
-    <string name="playlistNameReversed">Afspeellijst­naam (omgekeerd)</string>
     <string name="play_automatically">Automatisch afspelen</string>
     <string name="start_time">Starttijd</string>
     <string name="end_time">Eindtijd</string>
@@ -408,9 +398,7 @@
     <string name="unsupported_file_format">Niet-ondersteund bestands­formaat: %1$s</string>
     <string name="mark_as_watched">Markeren als gezien</string>
     <string name="trending">Nu trending</string>
-    <string name="pause_on_quit">Pauzeren bij afsluiten</string>
     <string name="playingOnBackground">Afspelen op achtergrond…</string>
-    <string name="enter_hex_value">Voer hex-waarde van kleur in</string>
     <string name="no_comments_available">Deze video heeft geen opmerkingen.</string>
     <string name="backup_restore_summary">Importeren en exporteren van gegevens</string>
     <string name="add_to_bookmarks">Toevoegen aan bladwijzers</string>
@@ -435,7 +423,6 @@
     <string name="notify_new_streams_summary">Toon meldingen voor nieuwe streams van makers die u volgt</string>
     <string name="limit_to_runtime">Limiteren tot runtime</string>
     <string name="maximum_image_cache">Maximale grootte van afbeeldings­cache</string>
-    <string name="break_reminder_time">Aantal minuten voor herinnering</string>
     <string name="new_videos_badge">Indicator voor nieuwe video\'s</string>
     <string name="show_stream_thumbnails_summary">Toon de miniaturen van nieuwe streams. Inschakelen gebruikt extra gegevens</string>
     <string name="take_a_break">Tijd om een pauze te nemen</string>
@@ -492,7 +479,6 @@
     <string name="hls_instead_of_dash_summary">Gebruik HLS in plaats van DASH (zal langzamer zijn, niet aanbevolen)</string>
     <string name="double_tap_seek_summary">Tik twee keer links of rechts om de speler terug of vooruit te spoelen</string>
     <string name="username_email">Doorgaan met een e-mailadres dat niet wordt aanbevolen\?</string>
-    <string name="hide_watched_from_feed_summary">Laat video\'s die meer dan 90% worden bekeken niet zien op het tabblad Abonnementen</string>
     <string name="custom_playback_speed_summary">Gebruik een andere afspeelsnelheid dan voor de normale speler</string>
     <string name="lbry_hls_summary">Gebruik LBRY HLS voor streaming indien beschikbaar</string>
     <string name="choose_instance_long">Kies hieronder een Piped-instantie die je wilt gebruiken. De Piped-instantie fungeert als tussenpersoon tussen jou en YouTube. Deze instanties bevinden zich op verschillende fysieke locaties - aangegeven door hun vlag(gen). Instanties die fysiek dichter bij jou in de buurt zijn, zijn waarschijnlijk sneller dan instanties die dat niet zijn. Je kunt de instantie die je gebruikt op elk moment wijzigen in de instellingen.</string>
@@ -523,7 +509,6 @@
     <string name="downvote">Omlaag</string>
     <string name="successfully_removed_from_playlist">‘%1$s’ succesvol uit afspeellijst verwijderd</string>
     <string name="watched">Bekeken</string>
-    <string name="bottom_reached">Bodem bereikt!</string>
     <string name="finished">Klaar</string>
     <string name="no_segments_found">Er zijn nog geen segmenten voor deze video.</string>
     <string name="time_in_minutes">Tijd in minuten</string>
@@ -536,8 +521,6 @@
     <string name="copy_tooltip">Kopiëren</string>
     <string name="rich_caption_rendering">Rijke weergave van bijschriften</string>
     <string name="rich_caption_rendering_summary">Geef web­bijschriften weer voor een rijkere en persoonlijkere ervaring</string>
-    <string name="import_groups">Kanaal­groepen importeren</string>
-    <string name="export_groups">Kanaal­groepen exporteren</string>
     <string name="change_instance">Instantie wijzigen</string>
     <string name="suggest_change_instance">Laden duurt langer dan normaal; overweeg een andere instantie te gebruiken.</string>
     <string name="change">Wijzigen</string>

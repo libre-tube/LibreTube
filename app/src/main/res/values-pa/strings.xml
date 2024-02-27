@@ -34,7 +34,6 @@
     <string name="update_available_text">ਨਵਾਂ ਅੱਪਡੇਟ ਉਪਲਬਧ ਹੈ। GitHub ਰਿਲੀਜ਼ ਪੰਨੇ ਨੂੰ ਖੋਲ੍ਹਣ ਲਈ ਕਲਿੱਕ ਕਰੋ।</string>
     <string name="cannotDownload">ਇਸ ਸਟ੍ਰੀਮ ਨੂੰ ਡਾਊਨਲੋਡ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ।</string>
     <string name="importsuccess">ਸਬਸਕ੍ਰਾਈਬ ਕੀਤਾ</string>
-    <string name="dlisinprogress">ਕਿਰਪਾ ਕਰਕੇ ਸਾਰੇ ਮੌਜੂਦਾ ਡਾਊਨਲੋਡਾਂ ਦੇ ਮੁਕੰਮਲ ਹੋਣ ਤੱਕ ਉਡੀਕ ਕਰੋ।</string>
     <string name="downloadfailed">ਡਾਊਨਲੋਡ ਅਸਫਲ ਰਿਹਾ।</string>
     <string name="import_from_yt">ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਆਯਾਤ ਕਰੋ</string>
     <string name="import_from_yt_summary">YouTube ਜਾਂ NewPipe ਤੋਂ</string>
@@ -210,7 +209,6 @@
     <string name="caption_settings">ਕੈਪਸ਼ਨਾਂ</string>
     <string name="playerAudioFormat">ਪਲੇਅਰ ਲਈ ਆਡੀਓ ਫਾਰਮੈਟ</string>
     <string name="playerAudioQuality">ਆਡੀਓ ਕੁਆਲਿਟੀ</string>
-    <string name="best_quality">ਵਧੀਆ</string>
     <string name="worst_quality">ਘਟੀਆ</string>
     <string name="default_subtitle_language">ਉਪਸਿਰਲੇਖ ਭਾਸ਼ਾ</string>
     <string name="notifications">ਨੋਟੀਫਿਕੇਸ਼ਨ</string>
@@ -254,7 +252,6 @@
     <string name="player_resize_mode">ਰੀਸਾਈਜ਼ ਮੋਡ</string>
     <string name="copied_to_clipboard">ਕਲਿੱਪਬੋਰਡ \'ਤੇ ਕਾਪੀ ਕੀਤਾ ਗਿਆ</string>
     <string name="open_copied">ਖੋਲ੍ਹੋ</string>
-    <string name="break_reminder_time">ਯਾਦ ਦਿਵਾਉਣ ਤੋਂ ਕੁਝ ਮਿੰਟ ਪਹਿਲਾਂ</string>
     <string name="device_info">ਡਿਵਾਈਸ ਜਾਣਕਾਰੀ</string>
     <string name="delete">ਡਾਊਨਲੋਡਾਂ ਤੋਂ ਮਿਟਾਓ</string>
     <string name="renamePlaylist">ਪਲੇਲਿਸਟ ਦਾ ਨਾਮ ਬਦਲੋ</string>
@@ -263,7 +260,6 @@
     <string name="new_videos_badge">ਨਵੇਂ ਵੀਡੀਓਜ਼ ਲਈ ਸੂਚਕ</string>
     <string name="new_videos_badge_summary">ਜੇਕਰ ਕੁਝ ਹਨ ਤਾਂ ਨਵੇਂ ਵੀਡੀਓ ਦੀ ਗਿਣਤੀ ਦੇ ਨਾਲ ਇੱਕ ਬੈਜ ਦਿਖਾਓ</string>
     <string name="skip_segment">ਸਕਿਪ ਸੈਗਮੈਂਟ</string>
-    <string name="sb_skip_manual">ਹੱਥੀਂ ਸਕਿਪ ਕਰੋ</string>
     <string name="local_subscriptions">ਸਥਾਨਕ ਸਬਸਕ੍ਰਿਪਸ਼ਨ</string>
     <string name="preferences">ਤਰਜੀਹਾਂ</string>
     <string name="backup_customInstances">ਕਸਟਮ ਇੰਸਟੈਂਸ</string>
@@ -272,8 +268,6 @@
     <string name="playback_pitch">ਪਿੱਚ</string>
     <string name="filename">ਫਾਈਲ ਦਾ ਨਾਂ</string>
     <string name="invalid_filename">ਅਵੈਧ ਫਾਈਲ ਨਾਮ!</string>
-    <string name="playlists_order">ਪਲੇਲਿਸਟਸ ਤਰਤੀਬ</string>
-    <string name="playlistNameReversed">ਪਲੇਲਿਸਟ ਨਾਮ (ਉਲਟੀ ਤਰਤੀਬ)</string>
     <string name="time_code">ਸਮਾਂ ਕੋਡ (ਸਕਿੰਟ)</string>
     <string name="added_to_playlist">%1$s ਪਲੇਲਿਸਟ ਵਿੱਚ ਜੋੜਿਆ</string>
     <string name="queue">ਕਤਾਰ</string>
@@ -295,7 +289,6 @@
     <string name="pinch_control">ਪਿੰਚ ਕੰਟਰੋਲ</string>
     <string name="pinch_control_summary">ਜ਼ੂਮ ਇਨ/ਆਊਟ ਕਰਨ ਲਈ ਪਿੰਚ ਸੰਕੇਤ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
     <string name="defaults">ਡੀਫ਼ਾਲਟਸ</string>
-    <string name="pop_up">ਪੌਪ-ਅਪ</string>
     <string name="theme_monochrome">ਨਿਊਨਤਮ ਮੋਨੋਕ੍ਰੋਮ</string>
     <string name="captions_size">ਕੈਪਸ਼ਨਾਂ ਦਾ ਆਕਾਰ</string>
     <string name="double_tap_seek">ਸੀਕ ਲਈ ਡਬਲ ਟੈਪ ਕਰੋ</string>
@@ -326,7 +319,6 @@
     <string name="layout">ਲੇਆਊਟ</string>
     <string name="notification_time_summary">ਸਮਾਂ ਸੀਮਤ ਕਰੋ ਜਿਸ ਵਿੱਚ ਸਟ੍ਰੀਮ ਸੂਚਨਾਵਾਂ ਦਿਖਾਈਆਂ ਜਾਂਦੀਆਂ ਹਨ</string>
     <string name="navbar_order">ਆਰਡਰ</string>
-    <string name="alternative_player_layout">ਵਿਕਲਪਿਕ ਪਲੇਅਰ ਲੇਆਊਟ</string>
     <string name="trending">ਹੁਣ ਕੀ ਰੁਝਾਨ ਹੈ</string>
     <string name="hls_instead_of_dash">HLS ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
     <string name="limit_to_runtime">ਰਨਟਾਈਮ ਦੀ ਸੀਮਾ</string>
@@ -342,10 +334,8 @@
     <string name="all_caught_up_summary">ਤੁਸੀਂ ਸਾਰੇ ਨਵੇਂ ਵੀਡੀਓ ਦੇਖੇ ਹਨ</string>
     <string name="proceed">ਅੱਗੇ ਵਧੋ</string>
     <string name="download_channel_description">ਮੀਡੀਆ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨ ਵੇਲੇ ਇੱਕ ਸੂਚਨਾ ਦਿਖਾਉਂਦਾ ਹੈ।</string>
-    <string name="hide_watched_from_feed_summary">ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਟੈਬ ਵਿੱਚ 90% ਤੋਂ ਵੱਧ ਦੇਖੇ ਜਾ ਰਹੇ ਵੀਡੀਓ ਨਾ ਦਿਖਾਓ</string>
     <string name="download_channel_name">ਸੇਵਾ ਡਾਊਨਲੋਡ ਕਰੋ</string>
     <string name="playlistUrl">ਪਲੇਲਿਸਟ URL</string>
-    <string name="pause_on_quit">ਛੱਡਣ \'ਤੇ ਰੁਕੋ</string>
     <string name="shuffle">ਸ਼ਫਲ</string>
     <string name="remove_bookmark">ਬੁੱਕਮਾਰਕ ਹਟਾਓ</string>
     <string name="add_to_bookmarks">ਬੁੱਕਮਾਰਕਸ \'ਚ ਸ਼ਾਮਿਲ ਕਰੋ</string>
@@ -354,7 +344,6 @@
     <string name="pause">ਰੋਕੋ</string>
     <string name="alternative_pip_controls_summary">ਸਿਰਫ਼ ਆਡੀਓ ਦਿਖਾਓ ਅਤੇ ਅੱਗੇ ਅਤੇ ਪਿੱਛੇ ਦੀ ਬਜਾਏ PiP ਵਿੱਚ ਕੰਟਰੋਲ ਛੱਡੋ</string>
     <string name="alternative_pip_controls">ਵਿਕਲਪਿਕ PiP ਨਿਯੰਤਰਣ</string>
-    <string name="audio_player">ਆਡੀਓ ਪਲੇਅਰ</string>
     <string name="audio_only_mode">ਸਿਰਫ ਆਡੀਓ ਮੋਡ</string>
     <string name="audio_only_mode_summary">LibreTube ਨੂੰ ਇੱਕ ਸੰਗੀਤ ਪਲੇਅਰ ਵਿੱਚ ਬਦਲੋ</string>
     <string name="no_subtitle">ਕੋਈ ਉਪਸਿਰਲੇਖ ਨਹੀਂ</string>
@@ -406,7 +395,6 @@
     </plurals>
     <string name="auto_fullscreen_shorts">ਛੋਟੇ ਵੀਡੀਓ \'ਤੇ ਪੂਰੀ ਸਕਰੀਨ ਆਪਣੇ-ਆਪ ਚਲਾਓ</string>
     <string name="channel_groups">ਚੈਨਲ ਸਮੂਹ</string>
-    <string name="edit_group">ਗਰੁੱਪ ਦਾ ਸੰਪਾਦਨ ਕਰੋ</string>
     <string name="play_automatically">ਆਪਣੇ-ਆਪ ਚਲਾਓ</string>
     <string name="play_automatically_summary">ਚੁਣਨ \'ਤੇ ਆਪਣੇ ਆਪ ਵੀਡੀਓ ਚਲਾਉਣਾ ਸ਼ੁਰੂ ਕਰੋ</string>
     <string name="show_stream_thumbnails">ਸਟ੍ਰੀਮ ਥੰਮਨੇਲ ਦਿਖਾਓ</string>
@@ -442,14 +430,12 @@
     <string name="manual">ਮੈਨੂਅਲ</string>
     <string name="automatic">ਆਟੋਮੈਟਿਕ</string>
     <string name="color">ਰੰਗ</string>
-    <string name="enter_hex_value">ਰੰਗ ਹੈਕਸ ਵੈਲਿਯੂ ਦਰਜ਼ ਕਰੋ</string>
     <string name="visible">ਸੀਕ ਬਾਰ ਵਿੱਚ ਵਿਖਾਓ</string>
     <string name="show_search_suggestions">ਖੋਜ ਸੁਝਾਅ ਵਿਖਾਓ</string>
     <string name="chapters_videoHighlight">ਵੀਡੀਓ ਹਾਈਲਾਈਟ</string>
     <string name="fallback_piped_proxy">ਪਾਈਪਡ ਪਰਾਕਸੀ ਤੇ ਫਾਲਬੈਕ ਕਰੋ</string>
     <string name="fallback_piped_proxy_summary">ਪਰਾਕਸੀ ਰਾਹੀਂ ਵੀਡੀਓ ਲੋਡ ਕਰੋ ਜੇਕਰ YouTube ਨਾਲ ਸਿੱਧੇ ਤੌਰ \'ਤੇ ਕਨੈਕਟ ਕਰਨਾ ਵਰਤਮਾਨ ਵੀਡੀਓ ਲਈ ਕੰਮ ਨਹੀਂ ਕਰਦਾ (ਸ਼ੁਰੂਆਤੀ ਲੋਡਿੰਗ ਸਮੇਂ ਨੂੰ ਵਧਾਉਂਦਾ ਹੈ)। ਜੇਕਰ ਅਸਮਰੱਥ ਕੀਤਾ ਗਿਆ ਹੋਵੇ, ਤਾਂ YT ਪਾਬੰਦੀਆਂ ਕਰਕੇ YouTube ਸੰਗੀਤ ਸਮੱਗਰੀ ਦੇ ਚੱਲਣ ਦੀ ਸੰਭਾਵਨਾ ਨਹੀਂ ਹੈ</string>
     <string name="stop">ਰੁਕੋ</string>
-    <string name="jumped_to_highlight">ਵੀਡੀਓ ਹਾਈਲਾਈਟ \'ਤੇ ਗਿਆ</string>
     <string name="category_highlight">ਵੀਡੀਓ ਹਾਈਲਾਈਟ ਵੇਖੋ</string>
     <string name="category_highlight_summary">ਜਾਂ ਤਾਂ ਵਿਗਿਆਪਨ ਕੀਤਾ ਸਿਰਲੇਖ, ਥੰਮਨੇਲ ਜਾਂ ਵੀਡੀਓ ਦਾ ਸਭ ਤੋਂ ਦਿਲਚਸਪ ਭਾਗ ਹੋ ਸਕਦਾ ਹੈ। ਤੁਸੀਂ ਚੈਪਟਰ ਭਾਗ ਵਿੱਚ ਇਸ \'ਤੇ ਟੈਪ ਕਰਕੇ ਇਸ \'ਤੇ ਜਾ ਸਕਦੇ ਹੋ</string>
     <string name="original_or_main_audio_track">ਅਸਲੀ ਜਾਂ ਮੁੱਖ</string>
@@ -535,8 +521,6 @@
     <string name="rich_caption_rendering_summary">ਵਧੇਰੇ ਰਿੱਚ ਅਤੇ ਅਨੁਕੂਲਿਤ ਅਨੁਭਵ ਲਈ ਵੈੱਬ ਸੁਰਖੀਆਂ ਨੂੰ ਰੈਂਡਰ ਕਰੋ</string>
     <string name="grid_landscape">ਗਰਿੱਡ ਕਾਲਮ (ਲੈਂਡਸਕੇਪ)</string>
     <string name="copy_tooltip">ਕਾਪੀ ਕਰੋ</string>
-    <string name="export_groups">ਚੈਨਲ ਗਰੁੱਪ ਐਕਸਪੋਰਟ ਕਰੋ</string>
-    <string name="import_groups">ਚੈਨਲ ਗਰੁੱਪ ਇੰਪੋਰਟ ਕਰੋ</string>
     <string name="change">ਬਦਲੋ</string>
     <string name="download_playlist">ਪਲੇਲਿਸਟ ਡਾਊਨਲੋਡ ਕਰੋ</string>
     <string name="audio_language">ਆਡੀਓ ਦੀ ਭਾਸ਼ਾ</string>

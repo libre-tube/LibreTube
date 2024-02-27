@@ -42,7 +42,6 @@
     <string name="fail">अनुत्तीर्ण होना :(</string>
     <string name="unknown_error">नेटवर्क त्रुटि।</string>
     <string name="region">क्षेत्र चुनें</string>
-    <string name="dlisinprogress">कृपया सभी मौजूदा डाउनलोड पूर्ण होने तक प्रतीक्षा करें।</string>
     <string name="about">के बारे में</string>
     <string name="startpage">घर</string>
     <string name="subscriptions">सब्सक्रिप्शनस</string>
@@ -139,7 +138,6 @@
     <string name="maximum_image_cache">अधिकतम इमेज कैश आकार</string>
     <string name="copied_to_clipboard">क्लिपबोर्ड पर कापी हुआ</string>
     <string name="open_copied">खोलें</string>
-    <string name="break_reminder_time">याद दिलाने से पहले मिनट</string>
     <string name="legacy_subscriptions">लीगेसी सब्सक्रिप्शनस दृश्य</string>
     <string name="audio_video_summary">गुणवत्ता और प्रारूप</string>
     <string name="delete">डाउनलोडस से डिलीट करें</string>
@@ -149,7 +147,6 @@
     <string name="new_videos_badge">नए वीडियो के लिए संकेतक</string>
     <string name="new_videos_badge_summary">यदि कुछ हैं तो नए वीडियो की मात्रा के साथ बैज दिखाएं</string>
     <string name="skip_segment">खंड छोड़ें</string>
-    <string name="sb_skip_manual">मैन्युअली छोड़ें</string>
     <string name="local_subscriptions">स्थानीय सब्सक्रिप्शनें</string>
     <string name="preferences">तरजीहें</string>
     <string name="backup_customInstances">कस्टम इंस्टैंस</string>
@@ -159,7 +156,6 @@
     <string name="copied">कॉपी किया गया</string>
     <string name="navbar_order">क्रम</string>
     <string name="layout">लेआउट</string>
-    <string name="alternative_player_layout">वैकल्पिक प्लेयर लेआउट</string>
     <string name="change_region">वर्तमान क्षेत्र के लिए चलन में अनुपलब्ध प्रतीत होता है। कृपया सेटिंग्स में दूसरे का चयन करें।</string>
     <string name="device_info">डिवाइस की जानकारी</string>
     <string name="disabled">आफ</string>
@@ -186,8 +182,6 @@
     <string name="skip_buttons_summary">अगले या पिछले वीडियो पर जाने के लिए बटन दिखाएं</string>
     <string name="filename">फ़ाइल का नाम</string>
     <string name="invalid_filename">अमान्य फ़ाइल नाम!</string>
-    <string name="playlists_order">प्लेलिस्ट का क्रम</string>
-    <string name="playlistNameReversed">प्लेलिस्ट का नाम (उलट)</string>
     <string name="category_preview_summary">अतिरिक्त जानकारी के बिना भविष्य की सामग्री का विवरण देने वाले सेगमेंट के लिए। यदि इसमें क्लिप शामिल हैं जो केवल यहां दिखाई देती हैं, तो बहुत संभव है कि यह गलत श्रेणी हो</string>
     <string name="category_filler_summary">केवल फिलर या हास्य के लिए जोड़े गए स्पर्शरेखा दृश्यों के लिए वीडियो की मुख्य सामग्री को समझने की आवश्यकता नहीं है</string>
     <string name="update_available">संस्करण %1$s उपलब्ध है</string>
@@ -317,9 +311,7 @@
     <string name="general">सामान्य</string>
     <string name="playerAudioFormat">प्लेयर के लिए ऑडियो फार्मेट</string>
     <string name="playerAudioQuality">ऑडियो गुणवत्ता</string>
-    <string name="best_quality">श्रेष्ठ</string>
     <string name="worst_quality">न्यूनतम</string>
-    <string name="pop_up">पॉप अप</string>
     <string name="no_comments_available">इस वीडियो पे कोई टिप्पणी नहीं है।</string>
     <string name="captions_size">कैप्शन का आकार</string>
     <string name="double_tap_seek">तलाश के लिए दो बार टैप करें</string>
@@ -343,9 +335,7 @@
     <string name="nothing_selected">कुछ चुना नहीं!</string>
     <string name="failed_fetching_instances">उपलब्ध इंस्टेंस ला नहीं पाया।</string>
     <string name="hide_watched_from_feed">पहले से देखे गए वीडियो छिपाएं</string>
-    <string name="hide_watched_from_feed_summary">सदस्यता टैब में 90% से अधिक देखे जा रहे वीडियो न दिखाएं</string>
     <string name="playlistUrl">प्लेलिस्ट URL</string>
-    <string name="pause_on_quit">छोड़ने पर रुकें</string>
     <string name="shuffle">शफल</string>
     <string name="add_to_bookmarks">बुकमार्कस में जोड़ें</string>
     <string name="remove_bookmark">बुकमार्क हटाएं</string>
@@ -354,7 +344,6 @@
     <string name="pause">रोकें</string>
     <string name="alternative_pip_controls">वैकल्पिक पीआईपी नियंत्रण</string>
     <string name="alternative_pip_controls_summary">आगे और पीछे करने के बजाय केवल ऑडियो दिखाएं और PiP में नियंत्रण छोड़ें</string>
-    <string name="audio_player">ऑडियो प्लेयर</string>
     <string name="audio_only_mode">ऑडियो केवल मोड</string>
     <string name="audio_only_mode_summary">LibreTube को म्यूजिक प्लेयर में बदलें</string>
     <string name="no_subtitle">कोई उपशीर्षक नहीं</string>
@@ -406,7 +395,6 @@
     <string name="new_group">नया</string>
     <string name="channel_groups">चैनल समूह</string>
     <string name="group_name">समूह नाम</string>
-    <string name="edit_group">समूह संपादित करें</string>
     <string name="play_automatically">स्वचालित रूप से खेलें</string>
     <string name="play_automatically_summary">चुनते समय स्वचालित रूप से वीडियो चलाना प्रारंभ करें</string>
     <string name="show_stream_thumbnails">स्ट्रीम थंमनेल दिखाएं</string>
@@ -440,14 +428,12 @@
     <string name="off">बंद</string>
     <string name="sb_custom_colors_summary">स्पांसर ब्लॉक सेगमेंट के लिए कस्टम रंग सेगमेंट टॉगल</string>
     <string name="sb_custom_colors">कस्टम सेगमेंट रंग</string>
-    <string name="enter_hex_value">रंग हेक्स मान दर्ज करें</string>
     <string name="visible">सीक बार में दिखाएँ</string>
     <string name="fallback_piped_proxy">पाइप्ड प्रॉक्सी पर फॉलबैक</string>
     <string name="fallback_piped_proxy_summary">प्रॉक्सी के माध्यम से वीडियो लोड करें यदि सीधे YouTube से कनेक्ट करना वर्तमान वीडियो के लिए काम नहीं करता है (प्रारंभिक लोडिंग समय बढ़ाता है)। यदि अक्षम किया जाता है, तो YT प्रतिबंधों के कारण YouTube संगीत सामग्री नहीं चलेगी</string>
     <string name="chapters_videoHighlight">वीडियो हाइलाइट</string>
     <string name="stop">रुको</string>
     <string name="color">रंग</string>
-    <string name="jumped_to_highlight">वीडियो हाइलाइट पर आ चुके</string>
     <string name="category_highlight">वीडियो हाइलाइट दिखाएँ</string>
     <string name="category_highlight_summary">या तो विज्ञापित शीर्षक, थंबनेल या वीडियो का सबसे दिलचस्प हिस्सा हो सकता है। आप अध्याय अनुभाग में इस पर टैप करके इसे छोड़ सकते हैं</string>
     <string name="invalid_color">अमान्य रंग मान दर्ज किया गया!</string>
@@ -535,8 +521,6 @@
     <string name="rich_caption_rendering_summary">अधिक समृद्ध और अनुकूलित अनुभव के लिए वेब कैप्शन प्रस्तुत करें</string>
     <string name="grid_landscape">ग्रिड कॉलम (लैंडसकेप)</string>
     <string name="copy_tooltip">कॉपी करें</string>
-    <string name="import_groups">चैनल समूह आयात करें</string>
-    <string name="export_groups">चैनल समूह निर्यात करें</string>
     <string name="change_instance">इंसटैंस बदलें</string>
     <string name="suggest_change_instance">लोडिंग में सामान्य से अधिक समय लग रहा है। इंसटैंस बदलने पर विचार करें</string>
     <string name="change">बदलें</string>

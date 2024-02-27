@@ -26,7 +26,6 @@
     <string name="login_register">Logi sisse või registreeru</string>
     <string name="importsuccess">Tellitud</string>
     <string name="cannotDownload">Selle videovoo allalaadimine ei õnnestu.</string>
-    <string name="dlisinprogress">Palun oota, et kõik pooleliolevad allalaadimised lõppeksid.</string>
     <string name="import_from_yt">Impordi tellimused</string>
     <string name="import_from_yt_summary">Impordi YouTube\'ist või NewPipe\'ist</string>
     <string name="app_theme">Teema</string>

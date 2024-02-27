@@ -116,7 +116,6 @@
     <string name="notify_new_streams">Известия за нови потоци</string>
     <string name="notifications">Известия</string>
     <string name="default_subtitle_language">Език на надписите</string>
-    <string name="best_quality">Най-доброто</string>
     <string name="device_info">Информация за устройството</string>
     <string name="open_copied">отваряне</string>
     <string name="copied_to_clipboard">Копирано в клипборда</string>
@@ -159,7 +158,6 @@
     <string name="subscriberAndVideoCounts">%1$s абонати • %2$d видеа</string>
     <string name="auto_fullscreen_shorts">Автоматичен цял екран на кратки видеоклипове</string>
     <string name="reset_message">Нулиране на всички настройки и излизане\?</string>
-    <string name="pause_on_quit">Пауза при излизане</string>
     <string name="autoplay_playlists_summary">Автоматично възпроизвеждане на следващия видеоклип в плейлисти, независимо от избраната настройка за автоматично възпроизвеждане</string>
     <string name="dearrow_summary">Показвайте по-точни и по-малко сензационни заглавия и миниатюри. Увеличава времето за зареждане</string>
     <string name="default_or_unknown_audio_track">по подразбиране или неизвестен</string>
@@ -178,7 +176,6 @@
     <string name="no_subtitles_available">Няма налични натписи</string>
     <string name="hls_instead_of_dash_summary">Използвайте HLS вместо DASH (ще бъде по-бавно, не се препоръчва)</string>
     <string name="pure_theme_summary">Чисто бяла/черна тема</string>
-    <string name="playlists_order">Ред на плейлистите</string>
     <string name="normal_views">%1$s показвания%2$s</string>
     <string name="tooltip_close">Затвори</string>
     <string name="playlist_description">Описание на плейлиста</string>
@@ -187,7 +184,6 @@
     <string name="pure_theme">Чиста тема</string>
     <string name="trending">Набиращи популярност</string>
     <string name="end_time">Крайно време</string>
-    <string name="enter_hex_value">Въведете шестнадесетична стойност на цвета</string>
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="confirm_unsubscribing">Потвърдете отписването</string>
     <string name="unknown_or_no_audio">неизвестен или без звук</string>
@@ -215,7 +211,6 @@
     <string name="visibility">Видимост</string>
     <string name="continue_watching">Продължете да гледате</string>
     <string name="tooltip_options">Опции</string>
-    <string name="break_reminder_time">Минути преди напомняне</string>
     <string name="playback_pitch">Стъпка</string>
     <string name="channel_groups">Групи канали</string>
     <string name="playing_next">Пускане след %1$s</string>
@@ -233,9 +228,7 @@
     <string name="unknown">Неизвестен</string>
     <string name="required_network">Необходима връзка</string>
     <string name="autoRotatePlayer">Автоматичен цял екран</string>
-    <string name="jumped_to_highlight">Премина към видео акцент</string>
     <string name="pause">Пауза</string>
-    <string name="dlisinprogress">Моля, изчакайте всички текущи изтегляния да приключат.</string>
     <string name="pauseOnScreenOff">Автоматична пауза</string>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="buffering_goal">Предварително зареждане</string>
@@ -269,7 +262,6 @@
     <string name="alternative_pip_controls_summary">Показване само на аудио и пропускане на контроли в PiP вместо превъртане напред и назад</string>
     <string name="category_outro_summary">Информация след края. Не за изводи с инфо</string>
     <string name="material_you">Материален</string>
-    <string name="hide_watched_from_feed_summary">Не показвайте видеоклипове, гледани повече от 90% в раздела за абонаменти</string>
     <string name="resume">Продължи</string>
     <string name="server_error">Изглежда има проблем с избрания сървър. Опитайте друга инстанция.</string>
     <string name="category_highlight_summary">Може да бъде или рекламираното заглавие, миниизображението или най-интересната част от видеоклипа. Можете да преминете към него, като го докоснете в секцията с глави</string>
@@ -337,7 +329,6 @@
     <string name="segment_type">Тип сегмент</string>
     <string name="defaultIconLight">Светлина по подразбиране</string>
     <string name="visibility_public">Обществен</string>
-    <string name="edit_group">Редактиране на група</string>
     <string name="areYouSure">Изтриване на плейлиста\?</string>
     <string name="trending_views">%1$s • %2$s показвания • %3$s</string>
     <string name="download_paused">Изтеглянето е на пауза</string>
@@ -349,11 +340,9 @@
     <string name="original_or_main_audio_track">оригинален или основен</string>
     <string name="caption_settings">Надписи</string>
     <string name="import_playlists">Импортиране на плейлисти</string>
-    <string name="alternative_player_layout">Алтернативно оформление на плейъра</string>
     <string name="tooltip_repeat">Повторение</string>
     <string name="piped">Piped</string>
     <string name="fallback_piped_proxy">Завръщане към Piped прокси</string>
-    <string name="sb_skip_manual">Пропуснете ръчно</string>
     <string name="search_history_summary">Запомнете търсенията</string>
     <string name="auth_instances">Изберете инстанция за удостоверяване</string>
     <string name="category_selfpromo_summary">Подобно на „спонсор“, с изключение на неплатено или самореклама. Това включва секции за стоки, дарения или информация за това с кого са си сътрудничили</string>
@@ -377,9 +366,7 @@
     <string name="automatic_once">Автоматично веднъж</string>
     <string name="instance_name">Име на инстанция</string>
     <string name="unsupported_file_format">Неподдържан файлов формат: %1$s</string>
-    <string name="playlistNameReversed">Име на плейлиста (обърнато)</string>
     <string name="choose_instance">Моля, първо изберете инстанция!</string>
-    <string name="pop_up">Изскачащ прозорец</string>
     <string name="share_with_time">Споделете с времеви код</string>
     <string name="manual">Ръчен</string>
     <string name="emptyList">Тук няма нищо.</string>
@@ -467,7 +454,6 @@
     <string name="player">Плейър</string>
     <string name="playback_during_call">Продължете възпроизвеждането по време на телефонно обаждане</string>
     <string name="screen_orientation">Ориентация на екрана</string>
-    <string name="audio_player">Аудио плейър</string>
     <string name="addInstance">Добавете инстанция</string>
     <string name="clear_customInstances">Изчистване на потребителски инстанции</string>
     <string name="autoplay_playlists">Списъци за автоматично пускане</string>
@@ -537,14 +523,12 @@
     <string name="copy_tooltip">Копирай</string>
     <string name="delete_all">Hrvatski</string>
     <string name="change_instance">Промяна на инстанция</string>
-    <string name="import_groups">Импортирайте групи канали</string>
     <string name="change">Промяна</string>
     <string name="behavior_when_minimized">Поведение при минимизиране</string>
     <string name="gestures">Жестове</string>
     <string name="also_clear_watch_positions">Също така изчистете позициите на часовника</string>
     <string name="audio_language">Аудио език</string>
     <string name="suggest_change_instance">Зареждането отнема повече от обикновено. Помислете за промяна на инстанцията</string>
-    <string name="export_groups">Експортиране на групи канали</string>
     <string name="download_playlist">Изтегляне на плейлист</string>
     <string name="enqueue_playlist_description">Показва известие, когато поставя в опашка видеоклипове от плейлист за изтегляне.</string>
     <string name="enqueueing_playlist_download">Подреждане на видеоклипове за изтегляне на плейлиста %1$s</string>

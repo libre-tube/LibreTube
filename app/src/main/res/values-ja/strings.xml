@@ -31,7 +31,6 @@
     <string name="share">共有</string>
     <string name="videos">動画</string>
     <string name="customInstance">カスタム</string>
-    <string name="dlisinprogress">現在のすべてのダウンロードが完了するまでお待ちください。</string>
     <string name="error">エラーが発生しました。</string>
     <string name="subscriptions">登録チャンネル</string>
     <string name="region">地域</string>
@@ -209,7 +208,6 @@
     <string name="caption_settings">字幕</string>
     <string name="playerAudioFormat">プレーヤーの音声形式</string>
     <string name="playerAudioQuality">音声の品質</string>
-    <string name="best_quality">最高</string>
     <string name="worst_quality">最低</string>
     <string name="playlistCloned">再生リストを複製しました</string>
     <string name="confirm_unsubscribe">%1$s の登録を解除しますか？</string>
@@ -253,14 +251,12 @@
     <string name="yt_shorts">ショート</string>
     <string name="repeat_mode">リピートの種類</string>
     <string name="resize_mode_zoom">ズーム</string>
-    <string name="break_reminder_time">休憩までの時間 (分)</string>
     <string name="no_subtitles_available">字幕なし</string>
     <string name="repeat_mode_none">なし</string>
     <string name="delete">ダウンロードから削除</string>
     <string name="renamePlaylist">再生リストの名前を変更</string>
     <string name="mobile_data">モバイルデータ通信</string>
     <string name="skip_segment">ここをスキップ</string>
-    <string name="sb_skip_manual">手動でスキップ</string>
     <string name="preferences">設定</string>
     <string name="playback_pitch">ピッチ</string>
     <string name="error_occurred">エラー</string>
@@ -277,8 +273,6 @@
     <string name="skip_buttons">スキップボタン</string>
     <string name="filename">ファイル名</string>
     <string name="invalid_filename">無効なファイル名です！</string>
-    <string name="playlistNameReversed">再生リスト名 (逆順)</string>
-    <string name="playlists_order">再生リストの表示順</string>
     <string name="livestreams">ライブ</string>
     <string name="alternative_videos_layout">動画配置の変更</string>
     <string name="download_channel_name">ダウンロードサービス</string>
@@ -299,7 +293,6 @@
     <string name="download_channel_description">メディアのダウンロード中に通知を表示します。</string>
     <string name="navbar_order">並べ替え</string>
     <string name="layout">配置</string>
-    <string name="alternative_player_layout">プレーヤーの配置変更</string>
     <string name="local_playlists">端末内の再生リスト</string>
     <string name="color_violet">深紫色</string>
     <string name="volume">音量</string>
@@ -307,7 +300,6 @@
     <string name="auto">自動</string>
     <string name="swipe_controls">スワイプ操作</string>
     <string name="swipe_controls_summary">全画面表示の時にスワイプで輝度と音量を調整します</string>
-    <string name="pop_up">ポップアップ</string>
     <string name="no_comments_available">この動画にはコメントがありません。</string>
     <string name="captions_size">字幕の大きさ</string>
     <string name="double_tap_seek">ダブルタップしてシーク</string>
@@ -344,8 +336,6 @@
     <string name="failed_fetching_instances">利用可能なインスタンスを取得できませんでした。</string>
     <string name="hide_watched_from_feed">視聴済みの動画を非表示</string>
     <string name="playlistUrl">再生リストのURL</string>
-    <string name="hide_watched_from_feed_summary">90%以上再生した動画を、登録チャンネルタブに表示しない</string>
-    <string name="pause_on_quit">終了時に一時停止</string>
     <string name="shuffle">シャッフル再生</string>
     <string name="add_to_bookmarks">ブックマークに追加</string>
     <string name="remove_bookmark">ブックマークを削除</string>
@@ -384,7 +374,6 @@
     <string name="unknown">不明</string>
     <string name="resume">再開</string>
     <string name="autoplay_countdown_summary">次の動画を自動再生する前に5秒間の秒読みを表示します</string>
-    <string name="audio_player">オーディオプレーヤー</string>
     <string name="unsupported_file_format">未対応のファイル形式: %1$s</string>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d 本の動画</string>
@@ -406,7 +395,6 @@
     <string name="channel_groups">登録チャンネルのグループ</string>
     <string name="new_group">新規追加</string>
     <string name="group_name">グループ名</string>
-    <string name="edit_group">グループの編集</string>
     <string name="play_automatically_summary">動画を選択すると自動的に再生します</string>
     <string name="duration_reversed">長さ (逆順)</string>
     <string name="duration">長さ</string>
@@ -440,9 +428,7 @@
     <string name="color">色</string>
     <string name="sb_custom_colors_summary">該当シーンの部分の色を替える</string>
     <string name="invalid_color">この色の値は無効です！</string>
-    <string name="enter_hex_value">16進数の色の値を入力</string>
     <string name="visible">シークバーに表示</string>
-    <string name="jumped_to_highlight">動画のハイライトにジャンプしました</string>
     <string name="category_highlight">動画のハイライトを表示</string>
     <string name="chapters_videoHighlight">動画のハイライト</string>
     <string name="category_highlight_summary">その動画の宣伝的な題、サムネイル、または最も興味を引く部分です。チャプター欄からタップするとそこに飛びます</string>
@@ -532,8 +518,6 @@
     <string name="rich_caption_rendering">字幕の描画を高品質にする</string>
     <string name="rich_caption_rendering_summary">より高品質にウェブ字幕を描画</string>
     <string name="copy_tooltip">コピー</string>
-    <string name="import_groups">チャンネルのグループをインポート</string>
-    <string name="export_groups">チャンネルのグループをエクスポート</string>
     <string name="change">変更</string>
     <string name="change_instance">インスタンスを変更</string>
     <string name="suggest_change_instance">読み込み時間が長いです。インスタンスの変更も可能です</string>

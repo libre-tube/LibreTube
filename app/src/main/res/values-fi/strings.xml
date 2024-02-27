@@ -31,7 +31,6 @@
     <string name="about">Tietoja</string>
     <string name="share">Jaa</string>
     <string name="customInstance">Mukautettu esiintymä</string>
-    <string name="dlisinprogress">Odota, että kaikki lataukset ovat valmiita.</string>
     <string name="cannotDownload">Ei voi ladata tätä videota.</string>
     <string name="unknown_error">Verkkovirhe.</string>
     <string name="import_from_yt">Tuo tilaukset YouTubesta</string>
@@ -181,9 +180,7 @@
     <string name="repeat_mode_current">Nykyinen</string>
     <string name="no_search_result">Ei tuloksia.</string>
     <string name="alternative_videos_layout">Vaihtoehtoinen videoasettelu</string>
-    <string name="alternative_player_layout">Vaihtoehtoinen toistin asettelu</string>
     <string name="faq">Usein kysytyt kysymykset</string>
-    <string name="pop_up">Ponnhahdusikkuna</string>
     <string name="no_comments_available">Tällä videolla ei ole kommentteja.</string>
     <string name="pause">Tauko</string>
     <string name="forward">Eteenpäin</string>
@@ -191,7 +188,6 @@
     <string name="time">Aika</string>
     <string name="start_time">Aloitusaika</string>
     <string name="hide_watched_from_feed">Piilota katsotut videot syötteestä</string>
-    <string name="hide_watched_from_feed_summary">Älä näytä tilaukset-välilehdellä videoita, joita katsotaan yli 90%</string>
     <string name="push_channel_description">Näyttää ilmoituksen, kun uusia striimejä on saatavilla.</string>
     <string name="unlimited">Rajoittamaton</string>
     <string name="picture_in_picture">Kuva kuvassa</string>
@@ -212,7 +208,6 @@
     <string name="alternative_pip_controls">Vaihtoehtoiset kuva kuvassa kontrollit</string>
     <string name="lbry_hls_summary">Käytä LBRY HLS:sää suoratoistoon, jos mahdollista</string>
     <string name="added_to_playlist">Lisätty soittolistaan</string>
-    <string name="pause_on_quit">Tauko lopettamisen yhteydessä</string>
     <string name="autoplay_countdown_summary">Näytä 5 sekunnin lähtölaskenta ennen seuraavan videon automaattista toistoa</string>
     <string name="exportsuccess">Vietiin.</string>
     <string name="pinch_control">Nipistysohjaus</string>
@@ -244,12 +239,10 @@
     <string name="backup_restore">Varmuuskopio &amp; palautus</string>
     <string name="player_resize_mode">Muuta kokoa</string>
     <string name="new_videos_badge_summary">Näytä merkki uusien videoiden määrästä, jos niitä on</string>
-    <string name="sb_skip_manual">Ohita manuaalisesti</string>
     <string name="end_time">Lopetusaika</string>
     <string name="notification_time_summary">Aikaväli, jolloin ilmoitukset voidaan näyttää</string>
     <string name="layout">Asettelu</string>
     <string name="username_email">Jatka sähköpostiosoitteella, jota ei suositella\?</string>
-    <string name="audio_player">Audiosoitin</string>
     <string name="audio_only_mode_summary">Muuta LibreTube musiikkisoittimeksi</string>
     <string name="sleep_timer">Uniajastin</string>
     <string name="stats_for_nerds">Tilastot nörteille</string>
@@ -295,7 +288,6 @@
     <string name="caption_settings">Tekstitykset</string>
     <string name="playerAudioFormat">Audioformaatti toistimelle</string>
     <string name="playerAudioQuality">Äänenlaatu</string>
-    <string name="best_quality">Paras</string>
     <string name="worst_quality">Huonoin</string>
     <string name="default_subtitle_language">Tekstityskieli</string>
     <string name="notifications">Ilmoitukset</string>
@@ -316,7 +308,6 @@
     <string name="resize_mode_zoom">Zoomaa</string>
     <string name="repeat_mode_none">Ei mitään</string>
     <string name="maximum_image_cache">Kuva välimustin enimmäiskoko</string>
-    <string name="break_reminder_time">Minuuttia ennen muistutusta</string>
     <string name="legacy_subscriptions">Vanha tilaukset näkymä</string>
     <string name="audio_video_summary">Laatu ja formaatti</string>
     <string name="delete">Poista latauksista</string>
@@ -330,9 +321,7 @@
     <string name="change_region">Trending ei näytä olevan saatavilla nykyisellä alueella. Valitse toinen asetuksista.</string>
     <string name="filename">Tiedoston nimi</string>
     <string name="invalid_filename">Virheellinen tiedoston nimi!</string>
-    <string name="playlists_order">Soittolistojen järjestys</string>
     <string name="playback_pitch">Sävelkorkeus</string>
-    <string name="playlistNameReversed">Soittolistan nimi (päinvastainen)</string>
     <string name="queue">Jono</string>
     <string name="play_all">Toista kaikki</string>
     <string name="notification_time">Ilmoitusaika</string>

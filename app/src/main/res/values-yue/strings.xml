@@ -15,7 +15,6 @@
     <string name="customInstance">自訂</string>
     <string name="region">地區</string>
     <string name="importsuccess">訂閱咗</string>
-    <string name="dlisinprogress">有嘢下載緊, 等埋佢下載完成先.</string>
     <string name="downloadfailed">下載失敗咗.</string>
     <string name="import_from_yt">匯入訂閱</string>
     <string name="import_from_yt_summary">嚟自 YouTube 或者 NewPipe</string>

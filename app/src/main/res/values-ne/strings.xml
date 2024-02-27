@@ -27,7 +27,6 @@
     <string name="login_register">लग इन / दर्ता गर्नुहोस्</string>
     <string name="importsuccess">सदस्यता लिइयो</string>
     <string name="cannotDownload">यो स्ट्रिम डाउनलोड गर्न सकिँदैन।</string>
-    <string name="dlisinprogress">कृपया सबै हालको डाउनलोडहरू समाप्त हुनको लागि पर्खनुहोस्।</string>
     <string name="downloadfailed">डाउनलोड असफल भयो।</string>
     <string name="import_from_yt">सदस्यता आयात गर्नुहोस्</string>
     <string name="import_from_yt_summary">YouTube वा NewPipe बाट</string>
@@ -91,7 +90,6 @@
     <string name="category_filler">फिलर ट्यान्जेन्ट/जोक्स</string>
     <string name="color_green">ग्रोभी हरियो</string>
     <string name="playlists">प्लेलिस्ट</string>
-    <string name="jumped_to_highlight">भिडियो हाइलाइटमा जानुभयो</string>
     <string name="enabled">प्रक्रिया चलिरहेको छ</string>
     <string name="search_history">किबोर्डखोज इतिहास</string>
     <string name="success">सकियो।</string>

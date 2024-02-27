@@ -38,7 +38,6 @@
     <string name="login_register">Вхід/реєстрація</string>
     <string name="importsuccess">Підписаний</string>
     <string name="cannotDownload">Неможливо завантажити цей стрім.</string>
-    <string name="dlisinprogress">Будь ласка, дочекайтеся завершення всіх поточних завантажень.</string>
     <string name="import_from_yt">Імпорт підписок</string>
     <string name="import_from_yt_summary">З YouTube або NewPipe</string>
     <string name="app_theme">Тема</string>
@@ -214,7 +213,6 @@
     <string name="picture_in_picture">Картинка в картинці</string>
     <string name="new_videos_badge_summary">Показувати значок із кількістю нових відео, якщо такі є</string>
     <string name="repeat_mode_none">Немає</string>
-    <string name="sb_skip_manual">Пропустити вручну</string>
     <string name="skip_segment">Пропустити сегмент</string>
     <string name="local_subscriptions">Локальні підписки</string>
     <string name="preferences">Налаштування</string>
@@ -226,11 +224,9 @@
     <string name="navigation_bar">Панель навігації</string>
     <string name="push_channel_name">Обробник сповіщень</string>
     <string name="error_occurred">Помилка</string>
-    <string name="break_reminder_time">Хвилин до нагадування</string>
     <string name="change_region">Здається, тренди недоступні для поточного регіону. Виберіть інший у налаштуваннях.</string>
     <string name="legacy_subscriptions">Застарілий вигляд підписок</string>
     <string name="device_info">Відомості про пристрій</string>
-    <string name="best_quality">Найвища</string>
     <string name="general_summary">Мова та регіон</string>
     <string name="most_recent">Найновіші</string>
     <string name="least_recent">Найдавніші</string>
@@ -279,8 +275,6 @@
     <string name="mobile_data">Мобільні дані</string>
     <string name="filename">Назва файлу</string>
     <string name="invalid_filename">Неприпустима назва файлу!</string>
-    <string name="playlistNameReversed">Назва добірки (у зворотному порядку)</string>
-    <string name="playlists_order">Порядок добірок</string>
     <string name="time_code">Часовий код (секунд)</string>
     <string name="added_to_playlist">Додано в добірку %1$s</string>
     <string name="queue">Черга</string>
@@ -299,7 +293,6 @@
     <string name="notification_time">Обмежити час сповіщень</string>
     <string name="navbar_order">Порядок</string>
     <string name="layout">Вигляд</string>
-    <string name="alternative_player_layout">Альтернативний вигляд програвача</string>
     <string name="audio_track">Звукова доріжка</string>
     <string name="hls_instead_of_dash">Використовувати HLS</string>
     <string name="hls_instead_of_dash_summary">Використовувати HLS замість DASH (працюватиме повільніше, не рекомендується)</string>
@@ -319,7 +312,6 @@
     <string name="swipe_controls_summary">Проведіть по екрану, щоб відрегулювати яскравість і гучність у повноекранному режимі</string>
     <string name="volume">Гучність</string>
     <string name="defaults">Типові</string>
-    <string name="pop_up">Спливне вікно</string>
     <string name="double_tap_seek">Двічі торкніться, щоб шукати</string>
     <string name="double_tap_seek_summary">Двічі торкніться ліворуч або праворуч, щоб перемотати назад або вперед</string>
     <string name="no_comments_available">До цього відео немає коментарів.</string>
@@ -343,9 +335,7 @@
     <string name="color_violet">Універсальний фіолетовий</string>
     <string name="failed_fetching_instances">Неможливо отримати доступні екземпляри.</string>
     <string name="hide_watched_from_feed">Приховати вже переглянуті відео</string>
-    <string name="hide_watched_from_feed_summary">Не показувати у вкладці підписок відео, переглянуті більше ніж на 90%</string>
     <string name="playlistUrl">URL добірки</string>
-    <string name="pause_on_quit">Пауза під час виходу</string>
     <string name="shuffle">Перетасувати</string>
     <string name="add_to_bookmarks">Додати до закладок</string>
     <string name="remove_bookmark">Вилучити закладку</string>
@@ -354,7 +344,6 @@
     <string name="pause">Призупинити</string>
     <string name="alternative_pip_controls">Альтернативні елементи керування PiP</string>
     <string name="alternative_pip_controls_summary">Показувати лише аудіо та пропускати елементи керування в PiP замість перемотування вперед та назад</string>
-    <string name="audio_player">Аудіопрогравач</string>
     <string name="audio_only_mode">Режим лише аудіо</string>
     <string name="audio_only_mode_summary">Перетворіть LibreTube на музичний програвач</string>
     <string name="no_subtitle">Субтитрів немає</string>
@@ -402,7 +391,6 @@
     <string name="disable_proxy_summary">Завантажувати відео та зображення безпосередньо з серверів YouTube. Увімкніть цю опцію лише якщо завжди використовуєте VPN</string>
     <string name="auto_fullscreen_shorts">Автоматичний повноекранний режим для коротких відео</string>
     <string name="new_group">Нова</string>
-    <string name="edit_group">Редагувати групу</string>
     <string name="channel_groups">Групи каналів</string>
     <string name="group_name">Назва групи</string>
     <string name="play_automatically">Автовідтворення</string>
@@ -449,10 +437,8 @@
     <string name="color">Колір</string>
     <string name="sb_custom_colors_summary">Перемикає власні колірні сегменти для сегментів SponsorBlock</string>
     <string name="sb_custom_colors">Користувацькі кольори сегментів</string>
-    <string name="enter_hex_value">Введіть Hex значення кольору</string>
     <string name="visible">Показати на панелі прокручування</string>
     <string name="category_highlight_summary">Це може бути рекламований заголовок, мініатюра або найцікавіша частина відео. Ви можете перейти до нього, натиснувши на нього в секції розділів</string>
-    <string name="jumped_to_highlight">Перехід до виділеного у відео</string>
     <string name="category_highlight">Показати виділене у відео</string>
     <string name="chapters_videoHighlight">Виділене у відео</string>
     <string name="stop">Зупинити</string>
@@ -541,8 +527,6 @@
     <string name="rich_caption_rendering_summary">Малювати субтитри вебрушієм для підтримки розширених можливостей і налаштувань</string>
     <string name="grid_landscape">Стовпці (у горизонтальному режимі)</string>
     <string name="copy_tooltip">Копіювати</string>
-    <string name="export_groups">Експортувати групи каналів</string>
-    <string name="import_groups">Імпортувати групи каналів</string>
     <string name="change_instance">Змінити сервер</string>
     <string name="suggest_change_instance">Завантаження триває довше, ніж зазвичай. Спробуйте змінити сервер</string>
     <string name="change">Змінити</string>

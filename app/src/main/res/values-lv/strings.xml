@@ -3,7 +3,6 @@
     <string name="search_hint">Meklēt</string>
     <string name="logout">Izrakstīties</string>
     <string name="importsuccess">Abonēts</string>
-    <string name="dlisinprogress">Lūdzu, pagaidiet, līdz visas pašreizējās lejupielādes ir pabeigtas.</string>
     <string name="server_error">Ar atlasīto serveri ir problēma. Pamēģiniet citu instanci.</string>
     <string name="password">Parole</string>
     <string name="cannotDownload">Nevar lejupielādēt.</string>
@@ -209,7 +208,6 @@
     <string name="playerAudioQuality">Audio kvalitāte</string>
     <string name="worst_quality">Sliktākā</string>
     <string name="playerAudioFormat">Atskaņotāja audio formāts</string>
-    <string name="best_quality">Augstākā</string>
     <string name="default_subtitle_language">Subtitru valoda</string>
     <string name="notifications">Notifikācijas</string>
     <string name="notify_new_streams">Rādīt jauna satura notifikācijas</string>
@@ -254,7 +252,6 @@
     <string name="copied_to_clipboard">Nokopēts starpliktuvē</string>
     <string name="player_resize_mode">Izmēra mainīšanas režīms</string>
     <string name="maximum_image_cache">Maksimālais attēlu kešatmiņas izmērs</string>
-    <string name="break_reminder_time">Minūtes pirms atgādinājuma</string>
     <string name="legacy_subscriptions">Vecais abonementu skats</string>
     <string name="device_info">Ierīces informācija</string>
     <string name="audio_video_summary">Kvalitāte un formāts</string>
@@ -262,7 +259,6 @@
     <string name="renamePlaylist">Pārsaukt atskaņošanas sarakstu</string>
     <string name="new_videos_badge">Jauno video indikators</string>
     <string name="skip_segment">Izlaist segmentu</string>
-    <string name="sb_skip_manual">Izlaist manuāli</string>
     <string name="preferences">Iestatījumi</string>
     <string name="local_subscriptions">Ierīcē glabātie abonementi</string>
     <string name="mobile_data">Mobilie dati</string>
@@ -274,8 +270,6 @@
     <string name="change_region">Izskatās, ka tendences nav pieejamas jūsu reģionā. Lūdzu, izvēlieties citu iestatījumos.</string>
     <string name="filename">Faila nosaukums</string>
     <string name="invalid_filename">Nederīgs faila nosaukums!</string>
-    <string name="playlists_order">Atskaņošanas sarakstu secība</string>
-    <string name="playlistNameReversed">Atskaņošanas saraksta nosaukums (atpakaļgaitā)</string>
     <string name="play_next">Atskaņot nākamo</string>
     <string name="no_subtitle">Bez subtitriem</string>
     <string name="download_paused">Lejupielāde iepauzēta</string>
@@ -288,13 +282,11 @@
     <string name="swipe_controls">Žestu kontroles</string>
     <string name="swipe_controls_summary">Izmantojiet vilkšanas žestu, lai pielāgotu spilgtumu un skaļumu</string>
     <string name="volume">Skaļums</string>
-    <string name="pop_up">Uznirstošais logs</string>
     <string name="audio_only_mode_summary">Pārvērst LibreTube par mūzikas atskaņotāju</string>
     <string name="skip_silence">Izlaist klusumu</string>
     <string name="all_caught_up_summary">Jūs esat redzējuši visus jaunos video</string>
     <string name="all_caught_up">Jūs esat visu redzējuši</string>
     <string name="hide_watched_from_feed">Paslēpt noskatītos video no plūsmas</string>
-    <string name="hide_watched_from_feed_summary">Nerādīt video abonomentu cilnē, kurus esat noskatījuši vismaz līdz 90% atzīmei</string>
     <string name="added_to_playlist">Pievienots atskaņošanas sarakstam %1$s</string>
     <string name="nothing_selected">Nekas nav izvēlēts!</string>
     <string name="autoplay_countdown_summary">Parādīt 5 sekunžu atskaiti pirms automātiski atskaņo nākamo video</string>
@@ -322,7 +314,6 @@
     <string name="download_channel_name">Lejuipielāžu serviss</string>
     <string name="alternative_videos_layout">Alternatīvs video izklājums</string>
     <string name="hls_instead_of_dash_summary">Izmantot HLS, nevis DASH (lēnak, nav ieteicams)</string>
-    <string name="audio_player">Audio atskaņotājs</string>
     <string name="push_channel_name">Paziņojumu strādnieks</string>
     <string name="time">Laiks</string>
     <string name="start_time">Sākuma laiks</string>
@@ -330,7 +321,6 @@
     <string name="notification_time_summary">Ierobežot laika posmu, kurā straumju notifikācijas tiek rādītas</string>
     <string name="navbar_order">Secība</string>
     <string name="layout">Izklājums</string>
-    <string name="alternative_player_layout">Alternatīvs atskaņotāja izklājums</string>
     <string name="unsupported_file_format">Neatbalstīts faila formāts: %1$s</string>
     <string name="hls_instead_of_dash">Izmantot HLS</string>
     <string name="auto_quality">Automātiski</string>
@@ -357,7 +347,6 @@
     <string name="privacy_alert">Privātuma brīdinājums</string>
     <string name="username_email">Turpināt ar e-pasta adresi, kura nav ieteicama?</string>
     <string name="export_playlists">Eksportēt atskaņošanas sarakstus</string>
-    <string name="pause_on_quit">Pauzēt aizverot applikāciju</string>
     <string name="category">Kategorija</string>
     <string name="bookmarks">Grāmatzīmes</string>
     <string name="bookmark">Grāmatzīme</string>
@@ -409,7 +398,6 @@
     <string name="auto_fullscreen_shorts">Automātisks pilnekrāna režīms īsiem video</string>
     <string name="new_group">Jauns</string>
     <string name="group_name">Kopas nosaukums</string>
-    <string name="edit_group">Rediģēt kopu</string>
     <string name="channel_groups">Kanālu kopas</string>
     <string name="disable_proxy_summary">Lādēt video un attēlus tieši no YouTube serveriem. Ieslēdziet tikai tad, ja jūs izmantojat VPN! Šī opcija var nestrādāt saturam no YouTube Music.</string>
     <string name="duration">Ilgums</string>

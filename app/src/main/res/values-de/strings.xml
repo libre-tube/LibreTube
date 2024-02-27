@@ -21,7 +21,6 @@
     <string name="region">Region</string>
     <string name="importsuccess">Abonniert</string>
     <string name="cannotDownload">Video kann nicht heruntergeladen werden.</string>
-    <string name="dlisinprogress">Bitte warten, bis alle aktuellen Downloads abgeschlossen sind.</string>
     <string name="downloadfailed">Herunterladen fehlgeschlagen.</string>
     <string name="app_theme">Design</string>
     <string name="server_error">Problem mit ausgewähltem Server. Versuche eine andere Instanz.</string>
@@ -198,7 +197,6 @@
     <string name="reset_watch_positions">Zurücksetzen</string>
     <string name="general">Allgemein</string>
     <string name="general_summary">Sprache und Region</string>
-    <string name="best_quality">Beste Qualität</string>
     <string name="navLabelVisibility">Sichtbare Beschriftungen</string>
     <string name="watch_history_summary">Angesehene Videos lokal speichern</string>
     <string name="history_summary">Wiedergabe- und Suchverlauf</string>
@@ -242,7 +240,6 @@
     <string name="take_a_break">Zeit für eine Pause</string>
     <string name="wifi">WLAN</string>
     <string name="skip_segment">Abschnitt überspringen</string>
-    <string name="sb_skip_manual">Manuell überspringen</string>
     <string name="navigation_bar">Navigationsleiste</string>
     <string name="download_channel_name">Download-Service</string>
     <string name="push_channel_name">Benachrichtigungsdienst</string>
@@ -273,14 +270,11 @@
     <string name="preferences">Einstellungen</string>
     <string name="backup_customInstances">Benutzerdefinierte Instanzen</string>
     <string name="play_next">Als nächstes abspielen</string>
-    <string name="break_reminder_time">Minuten bis zur Benachrichtigung</string>
     <string name="player_resize_mode">Skalierungsmodus</string>
     <string name="maximum_image_cache">Maximale Bild-Cache-Größe</string>
     <string name="renamePlaylist">Playlist umbenennen</string>
     <string name="filename">Dateiname</string>
     <string name="invalid_filename">Ungültiger Dateiname!</string>
-    <string name="playlists_order">Reihenfolge der Playlists</string>
-    <string name="playlistNameReversed">Name der Playlist (umgekehrt)</string>
     <string name="playlistCloned">Playlist dupliziert</string>
     <string name="confirm_unsubscribing">Deabonnieren bestätigen</string>
     <string name="defaultIconLight">Standard hell</string>
@@ -296,7 +290,6 @@
     <string name="notification_time_summary">Beschränke die Zeitspanne, in der Benachrichtigungen zu Videos angezeigt werden</string>
     <string name="navbar_order">Anordnung</string>
     <string name="layout">Layout</string>
-    <string name="alternative_player_layout">Alternatives Player-Layout</string>
     <string name="added_to_playlist">Zur Playlist %1$s hinzugefügt</string>
     <string name="audio_track">Tonspur</string>
     <string name="livestreams">Livestreams</string>
@@ -318,7 +311,6 @@
     <string name="volume">Lautstärke</string>
     <string name="swipe_controls">Wischgesten-Steuerung</string>
     <string name="defaults">Standardwerte</string>
-    <string name="pop_up">Pop-Up</string>
     <string name="no_comments_available">Dieses Video hat keine Kommentare.</string>
     <string name="comments_disabled">Kommentare sind durch den Uploader deaktiviert.</string>
     <string name="all_caught_up_summary">Du hast alle neuen Videos gesehen</string>
@@ -343,9 +335,7 @@
     <string name="nothing_selected">Nichts ausgewählt!</string>
     <string name="failed_fetching_instances">Verfügbare Instanzen konnten nicht abgerufen werden.</string>
     <string name="hide_watched_from_feed">Angesehene Videos ausblenden</string>
-    <string name="hide_watched_from_feed_summary">Im Abo-Tab keine Videos anzeigen, welche bereits zu mehr als 90% angesehen worden sind</string>
     <string name="playlistUrl">Playlist-URL</string>
-    <string name="pause_on_quit">Beim Beenden pausieren</string>
     <string name="shuffle">Zufallswiedergabe</string>
     <string name="add_to_bookmarks">Zu Lesezeichen hinzufügen</string>
     <string name="remove_bookmark">Lesezeichen entfernen</string>
@@ -364,7 +354,6 @@
     <string name="concurrent_downloads_limit_reached">Maximal Anzahl von Downloads erreicht.</string>
     <string name="audio_only_mode_summary">LibreTube in einen Musikplayer umwandeln</string>
     <string name="faq">Häufig gestellte Fragen</string>
-    <string name="audio_player">Audio-Player</string>
     <string name="help">Hilfe</string>
     <string name="concurrent_downloads">Maximale Anzahl gleichzeitiger Downloads</string>
     <string name="sleep_timer">Einschlaf-Timer</string>
@@ -400,7 +389,6 @@
     <string name="channel_groups">Kanal-Gruppen</string>
     <string name="new_group">Neu</string>
     <string name="group_name">Gruppenname</string>
-    <string name="edit_group">Gruppe bearbeiten</string>
     <string name="play_automatically">Automatisch abspielen</string>
     <string name="play_automatically_summary">Video beim Auswählen automatisch abspielen</string>
     <string name="fullscreen_gestures">Vollbild an/aus-Gesten</string>
@@ -439,7 +427,6 @@
     <string name="off">Aus</string>
     <string name="manual">Manuell</string>
     <string name="automatic">Automatisch</string>
-    <string name="enter_hex_value">Farb-Hex-Wert eingeben</string>
     <string name="invalid_color">Ungültiger Farbwert eingegeben!</string>
     <string name="sb_custom_colors">Abschnittsfarben</string>
     <string name="sb_custom_colors_summary">Abschnitte je nach SponsorBlock-Kategorie farblich markieren</string>
@@ -447,7 +434,6 @@
     <string name="visible">In Suchleiste anzeigen</string>
     <string name="chapters_videoHighlight">Video-Highlight</string>
     <string name="stop">Stopp</string>
-    <string name="jumped_to_highlight">Zum Video-Highlight gesprungen</string>
     <string name="category_highlight">Video-Highlight anzeigen</string>
     <string name="category_highlight_summary">Kann entweder das im Titel oder Vorschaubild Beworbene oder der interessanteste Teil des Videos sein. Zu diesem Abschnitt springen, indem du ihn im Kapitelbereich antippst</string>
     <string name="fallback_piped_proxy">Piped-Proxy als Fallback</string>
@@ -527,7 +513,6 @@
     <string name="disable_sleep_timer">Schlaf-Timer deaktivieren</string>
     <string name="watched">Gesehen</string>
     <string name="start_sleep_timer">Schlaf-Timer starten</string>
-    <string name="bottom_reached">Unten angekommen!</string>
     <string name="finished">Fertig</string>
     <string name="no_segments_found">Für dieses Video sind bisher keine Abschnitte vorhanden.</string>
     <string name="add_to_group">Zur Gruppe hinzufügen</string>
@@ -536,8 +521,6 @@
     <string name="rich_caption_rendering_summary">Individuell gestaltete Untertitel (z.B. fettgedruckt oder andere Schriftart) anzeigen</string>
     <string name="grid_landscape">Spaltenanzahl im Querformat</string>
     <string name="copy_tooltip">Kopieren</string>
-    <string name="export_groups">Kanalgruppen exportieren</string>
-    <string name="import_groups">Kanalgruppen importieren</string>
     <string name="change_instance">Instanz ändern</string>
     <string name="change">Ändern</string>
     <string name="delete_all">Alle Downloads werden gelöscht!</string>

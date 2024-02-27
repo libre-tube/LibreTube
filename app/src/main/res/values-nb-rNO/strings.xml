@@ -12,7 +12,6 @@
     <string name="region">Region</string>
     <string name="login_register">Logg inn/registrer deg</string>
     <string name="import_from_yt">Importer abonnementer</string>
-    <string name="dlisinprogress">Vent til alle nedlastinger er fullført …</string>
     <string name="downloadfailed">Nedlasting mislyktes.</string>
     <string name="server_error">Problem med tjeneren. Prøv en annen instans\?</string>
     <string name="defres">Video-oppløsning</string>
@@ -206,7 +205,6 @@
     <string name="network_all">Alle</string>
     <string name="playerAudioFormat">Lydformat for avspiller</string>
     <string name="playerAudioQuality">Lydkvalitet</string>
-    <string name="best_quality">Best</string>
     <string name="worst_quality">Verst</string>
     <string name="default_subtitle_language">Undertekstspråk</string>
     <string name="irreversible">Er du sikker\? Dette kan ikke angres.</string>
@@ -257,14 +255,12 @@
     <string name="maximum_image_cache">Maks. bildehurtiglagringsstørrelse</string>
     <string name="copied_to_clipboard">Kopiert til utklippstavlen</string>
     <string name="open_copied">Åpne</string>
-    <string name="break_reminder_time">Minutter før ny påminnelse</string>
     <string name="legacy_subscriptions">Visning for eldre abonnementer</string>
     <string name="renamePlaylist">Gi spillelisten nytt navn</string>
     <string name="new_videos_badge">Indikator for nye videoer</string>
     <string name="new_videos_badge_summary">Vis et skilt med evt. antall nye videoer</string>
     <string name="mobile_data">Mobildata</string>
     <string name="skip_segment">Hopp over</string>
-    <string name="sb_skip_manual">Hopp over manuelt</string>
     <string name="local_subscriptions">Lokale abonnementer</string>
     <string name="preferences">Innstillinger</string>
     <string name="backup_customInstances">Egendefinerte instanser</string>
@@ -276,11 +272,9 @@
     <string name="wifi">Wi-Fi</string>
     <string name="navigation_bar">Navigasjonsfelt</string>
     <string name="filename">Filnavn</string>
-    <string name="playlistNameReversed">Spillelistenavn (invertert)</string>
     <string name="playback_pitch">Tonehøyde</string>
     <string name="change_region">På vei opp ser ut til å være utilgjengelig for nåværende region. Velg en annen i innstillingene.</string>
     <string name="invalid_filename">Ugyldig filnavn</string>
-    <string name="playlists_order">Spillelisterekkefølge</string>
     <string name="queue">Kø</string>
     <string name="added_to_playlist">Lagt til på spillelisten %1$s</string>
     <string name="time_code">Tidskode</string>
@@ -306,7 +300,6 @@
     <string name="trending">Hva er populært nå</string>
     <string name="layout">Tilpasning</string>
     <string name="trends">På vei opp</string>
-    <string name="alternative_player_layout">Alternativ avspillertilpasning</string>
     <string name="featured">Framhevet</string>
     <string name="local_playlists">Lokale spillelister</string>
     <string name="queue_insert_related_videos">Legg til relaterte videoer</string>
@@ -319,7 +312,6 @@
     <string name="brightness">Lysstyrke</string>
     <string name="volume">Lydstyrke</string>
     <string name="auto">Auto</string>
-    <string name="pop_up">Oppsprett</string>
     <string name="no_comments_available">Videoen har ingen tilgjengelige kommentarer.</string>
     <string name="comments_disabled">Kommentarer er avskrudd av opplasteren.</string>
     <string name="double_tap_seek">Dobbelttrykk for å blafre</string>
@@ -342,16 +334,13 @@
     <string name="color_violet">Lårkort lilla</string>
     <string name="hide_watched_from_feed">Skjul sette videoer i informasjonsstrøm</string>
     <string name="failed_fetching_instances">Klarte ikke å hente tilgjengelige instanser.</string>
-    <string name="hide_watched_from_feed_summary">Ikke vis videoer du har sett mer enn 90% av i informasjonsstrømsfanen</string>
     <string name="nothing_selected">Ingenting valgt.</string>
     <string name="playlistUrl">Spilleliste-nettadresse</string>
-    <string name="pause_on_quit">Pause ved avslutning</string>
     <string name="shuffle">Stokk om</string>
     <string name="rewind">Spol tilbake</string>
     <string name="pause">Pause</string>
     <string name="alternative_pip_controls">Alternative BiB-kontroller</string>
     <string name="alternative_pip_controls_summary">Vis kun lyd og hopp over kontroller i PiP istedenfor spoling tilbake og forover</string>
-    <string name="audio_player">Lydspiller</string>
     <string name="audio_only_mode">Modus for kun lyd</string>
     <string name="no_subtitle">Ingen undertekst</string>
     <string name="download_paused">Nedlasting pauset</string>
@@ -406,7 +395,6 @@
     <string name="channel_groups">Kanalgrupper</string>
     <string name="new_group">Ny</string>
     <string name="group_name">Gruppenavn</string>
-    <string name="edit_group">Rediger gruppe</string>
     <string name="play_automatically">Spill automatisk</string>
     <string name="play_automatically_summary">Spill valgte video automatisk</string>
     <string name="welcome">Velkommen til LibreTube</string>
@@ -442,10 +430,8 @@
     <string name="sb_custom_colors">Egendefinerte segmentfarger</string>
     <string name="color">Farge</string>
     <string name="invalid_color">Ugyldig farge angitt.</string>
-    <string name="enter_hex_value">Skriv inn heksadesimal fargeverdi</string>
     <string name="automatic">Automatisk</string>
     <string name="chapters_videoHighlight">Videohøydepunkt</string>
-    <string name="jumped_to_highlight">Hoppet til videohøydepunkt</string>
     <string name="off">Av</string>
     <string name="visible">Vis i blafringsfelt</string>
     <string name="manual">Manuell</string>
@@ -528,8 +514,6 @@
     <string name="rich_caption_rendering_summary">Tegn vev-undertekster for rikere og mer tilpasset opplevelse</string>
     <string name="invalid_input">Ugyldig inndata</string>
     <string name="start_sleep_timer">Start søvntidsur</string>
-    <string name="import_groups">Importer kanalgrupper</string>
-    <string name="export_groups">Eksporter kanalgrupper</string>
     <string name="no_segments_found">Ingen segmenter for denne videoen enda.</string>
     <string name="copy_tooltip">Kopier</string>
     <string name="disable_sleep_timer">Skru av søvntidsur</string>

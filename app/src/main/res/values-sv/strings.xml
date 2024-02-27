@@ -64,7 +64,6 @@
     <string name="search_hint">Sök</string>
     <string name="customInstance">Anpassad</string>
     <string name="cannotDownload">Det går inte att ladda ner denna sändningen.</string>
-    <string name="dlisinprogress">Vänligen vänta tills alla nerladdningar är klara.</string>
     <string name="downloadfailed">Nerladdning misslyckats.</string>
     <string name="import_from_yt">Importera prenumerationer</string>
     <string name="unknown_error">Nätverksfel.</string>
@@ -162,7 +161,6 @@
     <string name="reset">Återställ förval</string>
     <string name="error_occurred">Fel</string>
     <string name="pure_theme">Stilrent tema</string>
-    <string name="enter_hex_value">Ange Hex-värde för färg</string>
     <string name="default_subtitle_language">Språk för undertexter</string>
     <string name="network_metered">Mobildata</string>
     <plurals name="channel_new_streams">
@@ -180,7 +178,6 @@
     <string name="unknown">Okänd</string>
     <string name="required_network">Nödvändig uppkoppling</string>
     <string name="autoRotatePlayer">Automatisk fullskärm</string>
-    <string name="jumped_to_highlight">Hoppade till videohöjdpunkt</string>
     <string name="pause">Pausa</string>
     <string name="pauseOnScreenOff">Pausa automatiskt</string>
     <string name="navLabelVisibility">Synlighet för etiketter</string>
@@ -276,12 +273,10 @@
     <string name="deleteAccount">Radera konto</string>
     <string name="pauseOnScreenOff_summary">Pausa uppspelningen när skärmen är avstängd</string>
     <string name="watch_positions">Kom ihåg position</string>
-    <string name="best_quality">Högsta</string>
     <string name="import_format_freetube">FreeTube</string>
     <string name="emptyPlaylistDescription">Spellistans beskrivning kan inte vara tom</string>
     <string name="group_name_error_exists">Vänligen välj ett namn som är unikt</string>
     <string name="auto_fullscreen_shorts">Automatisk fullskärm på korta videor</string>
-    <string name="pause_on_quit">Pausa när appen stängs</string>
     <string name="dearrow_summary">Visa mer korrekta och mindre sensationella titlar och förhandsbilder. Ökar laddningstiderna</string>
     <string name="default_or_unknown_audio_track">standard eller okänt</string>
     <string name="export_subscriptions_to">Exportera prenumerationer till</string>
@@ -289,7 +284,6 @@
     <string name="player_resize_mode">Ändra storlek</string>
     <string name="renamePlaylist">Byt namn på spellistan</string>
     <string name="hls_instead_of_dash_summary">Använd HLS istället för DASH (kommer vara långsammare, rekommenderas inte)</string>
-    <string name="playlists_order">Ordning på spellistor</string>
     <string name="playlist_description">Beskrivning av spellista</string>
     <string name="copied_to_clipboard">Kopierad till urklipp</string>
     <string name="trending">Trendigt just nu</string>
@@ -309,7 +303,6 @@
     <string name="visibility_unlisted">Olistad</string>
     <string name="visibility">Synlighet</string>
     <string name="continue_watching">Fortsätt titta</string>
-    <string name="break_reminder_time">Minuter innan påminnelse</string>
     <string name="playback_pitch">Tonhöjd</string>
     <string name="channel_groups">Kanalgrupper</string>
     <string name="playing_next">Spelar nästa om %1$s</string>
@@ -335,7 +328,6 @@
     <string name="no_fullscreen_resolution">Upplösning utan fullskärm</string>
     <string name="home_tab_content">Innehåll i fliken Hem</string>
     <string name="alternative_pip_controls_summary">Visa knappar för \"endast ljud\" och \"nästa/föregående\" i Bild-i-bild istället för \"spola framåt/bakåt\"</string>
-    <string name="hide_watched_from_feed_summary">Visa inte videor som setts mer än 90% i prenumerationsfliken</string>
     <string name="preferences">Preferenser</string>
     <string name="uploader_name">Uppladdarens namn</string>
     <string name="clear_bookmarks">Ta bort bokmärken</string>
@@ -374,14 +366,11 @@
     <string name="local_subscriptions">Lokala prenumerationer</string>
     <string name="defaultIconLight">Standard ljus</string>
     <string name="visibility_public">Offentlig</string>
-    <string name="edit_group">Redigera grupp</string>
     <string name="sleep_timer">Sovklocka</string>
     <string name="original_or_main_audio_track">original eller primärt</string>
     <string name="backup">Säkerhetskopiering</string>
     <string name="import_playlists">Importera spellistor</string>
-    <string name="alternative_player_layout">Alternativ utformning av spelaren</string>
     <string name="fallback_piped_proxy">Använd Piped-proxy som reserv</string>
-    <string name="sb_skip_manual">Skippa manuellt</string>
     <string name="export_playlists">Exportera spellistor</string>
     <string name="forward">Spola framåt</string>
     <string name="audio_track_format">%1$s - %2$s</string>
@@ -393,9 +382,7 @@
     <string name="pinch_control_summary">Använd nypgester för att zooma in/ut</string>
     <string name="automatic_once">Automatisk (en gång)</string>
     <string name="unsupported_file_format">Filformat utan stöd: %1$s</string>
-    <string name="playlistNameReversed">Namn på spellista (omvänd)</string>
     <string name="choose_instance">Vänligen välj en instans först!</string>
-    <string name="pop_up">Pop-up</string>
     <string name="manual">Manuell</string>
     <string name="playback_during_call_summary">Observera att detta också påverkar appen så att den inte längre hanterar någon form av ljudfokus</string>
     <string name="disable_proxy_summary">Ladda videor och bilder direkt från YouTubes servrar. Aktivera bara detta alternativet om du alltid använder en VPN</string>
@@ -432,7 +419,6 @@
     <string name="shorts_notifications">Notifikationer för Shorts</string>
     <string name="all_caught_up_summary">Du har sett alla nya videor</string>
     <string name="playback_during_call">Fortsätt uppspelning under telefonsamtal</string>
-    <string name="audio_player">Ljudspelare</string>
     <string name="export_playlists_to">Exportera spellistor till</string>
     <string name="duration_span">Varaktighet: %1$s</string>
     <string name="category">Kategori</string>
@@ -527,7 +513,6 @@
     <string name="disable_sleep_timer">Inaktivera insomningstimer</string>
     <string name="watched">Tittade</string>
     <string name="start_sleep_timer">Starta insomningstimer</string>
-    <string name="bottom_reached">Botten nådd!</string>
     <string name="finished">Färdig</string>
     <string name="no_segments_found">Det finns inga segment för den här videon ännu.</string>
     <string name="add_to_group">Lägg till i grupp</string>
@@ -536,8 +521,6 @@
     <string name="rich_caption_rendering_summary">Rendera webbtexter för en mer rik och anpassad upplevelse</string>
     <string name="grid_landscape">Rutnätskolumner (landskap)</string>
     <string name="copy_tooltip">Kopiera</string>
-    <string name="export_groups">Exportera kanal grupper</string>
-    <string name="import_groups">Importera kanal grupper</string>
     <string name="change_instance">Ändra instans</string>
     <string name="suggest_change_instance">Det tar mer tid än vanligt att ladda. Överväg att byta instans</string>
     <string name="change">Byt</string>

@@ -144,7 +144,6 @@
     <string name="playingOnBackground">Прайграванне ў фонавым рэжыме…</string>
     <string name="caption_settings">Налады субтытраў</string>
     <string name="playerAudioQuality">Якасць гуку</string>
-    <string name="best_quality">Лепшая</string>
     <string name="worst_quality">Горшая</string>
     <string name="default_subtitle_language">Мова субтытраў</string>
     <string name="notifications">Апавяшчэнні</string>
@@ -216,7 +215,6 @@
     <string name="watch_positions_title">Запомненыя пазіцыі прайгравання</string>
     <string name="system_caption_style">Сістэмны стыль субтытраў</string>
     <string name="playerAudioFormat">Аўдыё фармат для прайгравальніка</string>
-    <string name="dlisinprogress">Пачакайце, пакуль скончацца ўсе бягучыя загрузкі.</string>
     <string name="instance_frontend_url">URL-адрас інтэрфейсу асобніка</string>
     <string name="seek_increment">Шукаць прырост</string>
     <string name="landscape">Альбомная</string>
@@ -256,7 +254,6 @@
     <string name="maximum_image_cache">Максімальны памер кэша малюнкаў</string>
     <string name="copied_to_clipboard">Скапіравана ў буфер абмену</string>
     <string name="open_copied">Адкрыты</string>
-    <string name="break_reminder_time">Хвілін да напаміну</string>
     <string name="legacy_subscriptions">Састарэлы выгляд падпісак</string>
     <string name="device_info">Інфармацыя пра прыладу</string>
     <string name="audio_video_summary">Якасць і фармат</string>
@@ -275,14 +272,11 @@
     <string name="renamePlaylist">Перайменаваць плэйліст</string>
     <string name="local_subscriptions">Лакальныя падпіскі</string>
     <string name="skip_segment">Прапусціць сегмент</string>
-    <string name="sb_skip_manual">Прапусціць уручную</string>
     <string name="backup_customInstances">Карыстальніцкія асобнікі</string>
     <string name="preferences">Налады</string>
     <string name="play_next">Перайсці да наступнага</string>
     <string name="navigation_bar">Панэль навігацыі</string>
     <string name="invalid_filename">Няправільнае імя файла!</string>
-    <string name="playlists_order">Парадак плэйлістоў</string>
-    <string name="playlistNameReversed">Назва плэйліста (зваротнае)</string>
     <string name="time_code">Часавы код (секунды)</string>
     <string name="added_to_playlist">Дададзена ў плэйліст %1$s</string>
     <string name="queue">Чарга</string>
@@ -333,7 +327,6 @@
     <string name="rewind">Перамотка назад</string>
     <string name="add_to_bookmarks">Дадаць у закладкі</string>
     <string name="audio_only_mode">Рэжым толькі аўдыя</string>
-    <string name="audio_player">Аўдыёпрайгравальнік</string>
     <string name="audio_only_mode_summary">Ператварыце LibreTube у музычны прайгравальнік</string>
     <string name="sleep_timer">Таймер сну</string>
     <string name="skip_silence">Прапусціць цішыню</string>
@@ -352,9 +345,7 @@
     <string name="layout">Макет</string>
     <string name="brightness">Яркасць</string>
     <string name="proceed">Працягвайце</string>
-    <string name="hide_watched_from_feed_summary">Не паказвайце на ўкладцы \"Падпіскі\" відэа, якія праглядаюць больш за 90%</string>
     <string name="playlistUrl">URL-адрас плэйліста</string>
-    <string name="pause_on_quit">Паўза пры выхадзе</string>
     <string name="forward">Перамотка наперад</string>
     <string name="codecs">Кодэкі</string>
     <string name="mark_as_watched">Пазначыць як прагледжанае</string>
@@ -384,11 +375,9 @@
         <item quantity="other">%d гадоў таму</item>
     </plurals>
     <string name="category_preview_summary">Для сегментаў з падрабязным апісаннем будучага кантэнту без дадатковай інфармацыі. Калі яна ўключае ў сябе кліпы, якія з\'яўляюцца толькі тут, гэта, хутчэй за ўсё, няправільная катэгорыя</string>
-    <string name="alternative_player_layout">Альтэрнатыўны макет прайгравальніка</string>
     <string name="featured">Рэкамендацыі</string>
     <string name="pinch_control">Шчыпковы кантроль</string>
     <string name="pinch_control_summary">Выкарыстоўвайце жэст шчыпка для павелічэння/памяншэння</string>
-    <string name="pop_up">Ўсплывальнае акно</string>
     <string name="color_violet">Універсальны фіялетавы</string>
     <string name="download_channel_name">Служба запампоўкі</string>
     <string name="live">Прамы эфір</string>
@@ -402,7 +391,6 @@
     <string name="disable_proxy_summary">Загружаць відэа і выявы непасрэдна з сервераў YouTube. Ўключайце гэтую опцыю толькі калі заўсёды карыстаецеся VPN</string>
     <string name="auto_fullscreen_shorts">Аўтаматычны поўнаэкранны рэжым для кароткіх відэа</string>
     <string name="new_group">Новы</string>
-    <string name="edit_group">Рэдагаваць групу</string>
     <string name="channel_groups">Групы каналаў</string>
     <string name="group_name">Назва групы</string>
     <string name="play_automatically">Прайграваць аўтаматычна</string>
@@ -450,7 +438,6 @@
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="sb_custom_colors">Карыстальніцкія колеры сегментаў</string>
     <string name="invalid_color">Ўведзена няправільнае значэнне колеру!</string>
-    <string name="enter_hex_value">Ўвядзіце Hex-значэнне колеру</string>
     <string name="color">Колер</string>
     <string name="manual">Ўручную</string>
     <string name="automatic">Аўтаматычны</string>
@@ -464,7 +451,6 @@
     <string name="unknown_or_no_audio">невядома або няма гуку</string>
     <string name="stop">Спыніць</string>
     <string name="chapters_videoHighlight">Асноўныя моманты відэа</string>
-    <string name="jumped_to_highlight">Пераход да асноўнага моманту ў відэа</string>
     <string name="category_highlight">Вылучыць асноўныя моманты</string>
     <string name="dubbed_audio_track">дубляваная</string>
     <string name="original_or_main_audio_track">арыгінальны або асноўны</string>
@@ -543,8 +529,6 @@
     <string name="copy_tooltip">Капіяваць</string>
     <string name="change_instance">Змяніць сервер</string>
     <string name="suggest_change_instance">Спампоўка займае больш часу, чым звычайна. Паспрабуйце змяніць сервер</string>
-    <string name="export_groups">Экспартаваць групы каналаў</string>
-    <string name="import_groups">Імпартаваць групы каналаў</string>
     <string name="delete_all">Усе спампоўкі будуць выдалены!</string>
     <string name="download_playlist">Спампаваць плэйліст</string>
     <string name="download_playlist_note">Выберыце максімальную якасць аўдыё/відэа для спампоўкі. Субтытры будуць спампоўвацца, толькі калі яны даступныя.</string>

@@ -20,7 +20,6 @@
     <string name="customInstance">Niestandardowa instancja</string>
     <string name="login_register">Zaloguj się lub zarejestruj</string>
     <string name="importsuccess">Subskrypcje zostały zaimportowane</string>
-    <string name="dlisinprogress">Poczekaj, aż wszystkie bieżące pobieranie zostanie zakończone.</string>
     <string name="downloadfailed">Pobieranie nie powiodło się.</string>
     <string name="logout">Wyloguj się</string>
     <string name="import_from_yt">Importuj subskrypcje</string>
@@ -246,7 +245,6 @@
     <string name="delete">Usuń z pobranych</string>
     <string name="playerAudioFormat">Format dźwięku dla odtwarzacza</string>
     <string name="playerAudioQuality">Jakość dźwięku</string>
-    <string name="best_quality">Najlepsza</string>
     <string name="worst_quality">Najgorsza</string>
     <string name="torchIcon">Modna lampka</string>
     <string name="aspect_ratio">Użyj proporcji obrazu wideo</string>
@@ -257,14 +255,12 @@
     <string name="history_size">Maksymalny rozmiar historii</string>
     <string name="background_mode">Działanie w tle</string>
     <string name="share_with_time">Udostępnij z uwzględnieniem czasu</string>
-    <string name="break_reminder_time">Minuty przed przypomnieniem</string>
     <string name="renamePlaylist">Zmień nazwę playlisty</string>
     <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">Dane mobilne</string>
     <string name="new_videos_badge">Oznaczenie nowych filmów</string>
     <string name="new_videos_badge_summary">Wyświetlaj plakietkę z ilością nowych filmów</string>
     <string name="skip_segment">Pomiń segment</string>
-    <string name="sb_skip_manual">Pomiń ręcznie</string>
     <string name="local_subscriptions">Lokalne subskrypcje</string>
     <string name="preferences">Preferencje</string>
     <string name="backup_customInstances">Instancje niestandardowe</string>
@@ -279,8 +275,6 @@
     <string name="playback_pitch">Wysokość dźwięku</string>
     <string name="filename">Nazwa pliku</string>
     <string name="invalid_filename">Nieprawidłowa nazwa pliku!</string>
-    <string name="playlists_order">Kolejność playlist</string>
-    <string name="playlistNameReversed">Nazwa playlisty (odwrotnie)</string>
     <string name="added_to_playlist">Dodano do playlisty %1$s</string>
     <string name="queue">Kolejka</string>
     <string name="livestreams">Na żywo</string>
@@ -298,7 +292,6 @@
     <string name="notification_time_summary">Zakres czasu, w którym powiadomienia mogą być wyświetlane</string>
     <string name="layout">Układ</string>
     <string name="navbar_order">Zarządzanie</string>
-    <string name="alternative_player_layout">Inny układ powiązanych filmów</string>
     <string name="audio_track">Ścieżka dźwiękowa</string>
     <string name="hls_instead_of_dash">HTTP Live Streaming</string>
     <string name="hls_instead_of_dash_summary">Użyj HLS zamiast DASH (będzie wolniej, nie zalecane)</string>
@@ -318,7 +311,6 @@
     <string name="swipe_controls">Sterowanie gestami</string>
     <string name="swipe_controls_summary">Steruj jasnością i głośnością za pomocą gestów w trybie pełnoekranowym</string>
     <string name="defaults">Domyślne</string>
-    <string name="pop_up">Tryb PiP</string>
     <string name="no_comments_available">Nie skomentowano jeszcze tego materiału.</string>
     <string name="comments_disabled">Komentarze zostały wyłączone przez twórcę.</string>
     <string name="captions_size">Rozmiar napisów</string>
@@ -342,9 +334,7 @@
     <string name="color_violet">Wszechstronny fiolet</string>
     <string name="failed_fetching_instances">Nie udało się uzyskać dostępnych instancji.</string>
     <string name="hide_watched_from_feed">Ukryj obejrzane filmy</string>
-    <string name="hide_watched_from_feed_summary">Zmiana najbardziej widoczna w karcie subskrypcje</string>
     <string name="playlistUrl">Link do playlisty</string>
-    <string name="pause_on_quit">Zatrzymaj przy wyjściu</string>
     <string name="shuffle">Odtwórz losowo</string>
     <string name="add_to_bookmarks">Dodaj do zakładek</string>
     <string name="remove_bookmark">Usuń zakładkę</string>
@@ -353,7 +343,6 @@
     <string name="pause">Wstrzymaj</string>
     <string name="alternative_pip_controls">Alternatywne sterowanie PiP</string>
     <string name="alternative_pip_controls_summary">Pokaż elementy sterujące „tylko dźwięk” i pomijanie w PiP zamiast przewijania do przodu i do tyłu</string>
-    <string name="audio_player">Odtwarzacz dźwięku</string>
     <string name="download_paused">Pobieranie wstrzymane</string>
     <string name="download_completed">Pobieranie ukończone</string>
     <string name="concurrent_downloads">Maks. równoczesnych pobierań</string>
@@ -403,7 +392,6 @@
     <string name="channel_groups">Grupy kanałów</string>
     <string name="new_group">Nowa</string>
     <string name="group_name">Nazwa grupy</string>
-    <string name="edit_group">Edytuj grupę</string>
     <string name="play_automatically">Automatyczne odtwarzanie</string>
     <string name="play_automatically_summary">Automatycznie rozpocznij odtwarzanie wideo po wybraniu</string>
     <string name="unlimited_search_history">Nieograniczona historia wyszukiwania</string>
@@ -437,7 +425,6 @@
     <string name="unknown_audio_language">Nieznany język ścieżki dźwiękowej</string>
     <string name="color">Kolor</string>
     <string name="invalid_color">Wprowadzono nieprawidłową wartość koloru!</string>
-    <string name="enter_hex_value">Wprowadź Hex-wartość koloru</string>
     <string name="choose_instance">Najpierw wybierz instancję!</string>
     <string name="change_playlist_description">Zmień opis playlisty</string>
     <string name="emptyPlaylistDescription">Opis playlisty nie może być pusty</string>
@@ -457,7 +444,6 @@
     <string name="choose_instance_long">Wybierz poniżej instancję Piped, której chcesz użyć. Instancja Piped będzie działać jako pośrednik między Tobą a YouTube. Instancje te znajdują się w różnych fizycznych lokalizacjach — na co wskazują ich flagi państwowe. Instancje fizycznie bliżej ciebie są prawdopodobnie szybsze niż instancje, które nie są. W każdej chwili możesz zmienić używaną instancję w ustawieniach.</string>
     <string name="fallback_piped_proxy">W wypadku niepowodzenia użyj proxy Piped</string>
     <string name="home_tab_content">Zawartość strony głównej</string>
-    <string name="jumped_to_highlight">Przeskocz do wyróżnionego filmu</string>
     <string name="category_highlight_summary">Może to być reklamowany tytuł, miniatura lub najciekawsza część filmu. Możesz przejść do niego, dotykając go w sekcji rozdziałów</string>
     <string name="show_search_suggestions">Pokaż sugestie wyszukiwania</string>
     <string name="stop">Zatrzymaj</string>
@@ -544,12 +530,10 @@
     <string name="grid_landscape">Kolumny siatki (poziomo)</string>
     <string name="rich_caption_rendering">Bogate renderowanie napisów</string>
     <string name="rich_caption_rendering_summary">Wyświetlaj napisy dla wspanialszego i dostosowanego do swoich potrzeb doświadczenia</string>
-    <string name="import_groups">Ważne grupy kanałów</string>
     <string name="copy_tooltip">Kopiuj</string>
     <string name="also_clear_watch_positions">Automatycznie wyczyść pozycje oglądania</string>
     <string name="uptime">%.2f%% czas pracy</string>
     <string name="delete_all">Wszystkie pobrane pliki zostaną usunięte!</string>
-    <string name="export_groups">Wyeksportuj grupy kanałów</string>
     <string name="download_playlist_note">Proszę wybrać maksymalną jakość audio/video do pobrania. Napisy będą pobrane tylko jeśli są dostępne.</string>
     <string name="enqueue_playlist_description">Pokaż powiadomienie gdy nagranie z playlisty zostanie przygotowane do pobrania.</string>
     <string name="audio_language">Język audio</string>

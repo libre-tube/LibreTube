@@ -18,7 +18,6 @@
     <string name="logout">退出登录</string>
     <string name="cancel">取消</string>
     <string name="region">地区</string>
-    <string name="dlisinprogress">请等待所有当前下载任务完成。</string>
     <string name="downloadfailed">下载失败。</string>
     <string name="import_from_yt">导入订阅列表</string>
     <string name="import_from_yt_summary">从 YouTube 或 NewPipe</string>
@@ -208,7 +207,6 @@
     <string name="caption_settings">字幕</string>
     <string name="playerAudioFormat">播放器音频格式</string>
     <string name="playerAudioQuality">音频质量</string>
-    <string name="best_quality">最佳</string>
     <string name="worst_quality">最差</string>
     <string name="default_subtitle_language">字幕语言</string>
     <string name="irreversible">你确定吗？此操作无法撤销！</string>
@@ -254,7 +252,6 @@
     <string name="maximum_image_cache">最大图片缓存尺寸</string>
     <string name="open_copied">打开</string>
     <string name="copied_to_clipboard">已复制到剪贴板</string>
-    <string name="break_reminder_time">使用多少分钟后提醒休息</string>
     <string name="legacy_subscriptions">旧版订阅视图</string>
     <string name="device_info">设备信息</string>
     <string name="audio_video_summary">清晰度和格式</string>
@@ -266,7 +263,6 @@
     <string name="new_videos_badge_summary">显示新视频数量徽标</string>
     <string name="push_channel_description">新影音流可用时显示通知。</string>
     <string name="skip_segment">跳过片段</string>
-    <string name="sb_skip_manual">手动跳过</string>
     <string name="download_channel_name">下载服务</string>
     <string name="download_channel_description">下载媒体文件时显示通知。</string>
     <string name="push_channel_name">通知 Worker</string>
@@ -279,8 +275,6 @@
     <string name="playback_pitch">音调</string>
     <string name="filename">文件名</string>
     <string name="invalid_filename">无效的文件名！</string>
-    <string name="playlists_order">播放列表顺序</string>
-    <string name="playlistNameReversed">播放列表名称（倒序）</string>
     <string name="time_code">时间码（秒）</string>
     <string name="added_to_playlist">已添加到播放列表 %1$s</string>
     <string name="queue">队列</string>
@@ -299,7 +293,6 @@
     <string name="notification_time_summary">限制显示影音流通知的时间范围</string>
     <string name="navbar_order">顺序</string>
     <string name="layout">布局</string>
-    <string name="alternative_player_layout">备选的播放器布局</string>
     <string name="audio_track">音轨</string>
     <string name="hls_instead_of_dash">使用 HLS</string>
     <string name="hls_instead_of_dash_summary">使用 HLS 而不是 DASH（会更慢，不推荐）</string>
@@ -319,7 +312,6 @@
     <string name="volume">音量</string>
     <string name="swipe_controls_summary">全屏模式下使用滑动手势调整亮度和音量</string>
     <string name="swipe_controls">滑动操控</string>
-    <string name="pop_up">悬浮窗</string>
     <string name="comments_disabled">上传者禁止评论。</string>
     <string name="no_comments_available">此视频无评论。</string>
     <string name="double_tap_seek">点按两次跳转</string>
@@ -342,10 +334,8 @@
     <string name="nothing_selected">什么也没选中！</string>
     <string name="color_violet">Versatile Violet</string>
     <string name="failed_fetching_instances">无法获取可用实例。</string>
-    <string name="hide_watched_from_feed_summary">不要在订阅选项卡中显示观看比例超过 90% 的视频</string>
     <string name="hide_watched_from_feed">隐藏已看过的视频</string>
     <string name="playlistUrl">播放列表 URL</string>
-    <string name="pause_on_quit">退出时暂停</string>
     <string name="shuffle">随机播放</string>
     <string name="add_to_bookmarks">添加到书签</string>
     <string name="remove_bookmark">移除书签</string>
@@ -354,7 +344,6 @@
     <string name="rewind">后退</string>
     <string name="alternative_pip_controls">备选画中画控件</string>
     <string name="alternative_pip_controls_summary">在画中画里显示仅音频和跳过控件而非快进和快退控件</string>
-    <string name="audio_player">音频播放器</string>
     <string name="audio_only_mode_summary">将 LibreTube 作为音乐播放器</string>
     <string name="no_subtitle">无字幕</string>
     <string name="download_paused">下载已暂停</string>
@@ -404,7 +393,6 @@
     <string name="channel_groups">频道组</string>
     <string name="new_group">新建</string>
     <string name="group_name">频道组名称</string>
-    <string name="edit_group">编辑频道组</string>
     <string name="play_automatically">自动播放</string>
     <string name="play_automatically_summary">选择视频时自动开始播放</string>
     <string name="auto_fullscreen_shorts">观看短视频时自动全屏</string>
@@ -440,9 +428,7 @@
     <string name="sb_custom_colors">自定义分段颜色</string>
     <string name="color">颜色</string>
     <string name="invalid_color">输入的颜色值无效！</string>
-    <string name="enter_hex_value">输入 16 进制颜色值</string>
     <string name="visible">显示在拖动条中</string>
-    <string name="jumped_to_highlight">跳到精彩集锦</string>
     <string name="category_highlight_summary">可能是视频广告、缩略图或最有趣的部分。你可以在章节部分轻按它来跳到这部分</string>
     <string name="chapters_videoHighlight">精彩集锦</string>
     <string name="category_highlight">显示精彩集锦</string>
@@ -532,8 +518,6 @@
     <string name="rich_caption_rendering">富字幕渲染</string>
     <string name="rich_caption_rendering_summary">渲染 web 字幕获得更丰富和定制的体验</string>
     <string name="copy_tooltip">复制</string>
-    <string name="import_groups">导入频道组</string>
-    <string name="export_groups">导出频道组</string>
     <string name="change_instance">更换实例</string>
     <string name="suggest_change_instance">加载所花时间比平常要多。请考虑更换实例</string>
     <string name="change">更换</string>

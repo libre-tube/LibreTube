@@ -58,7 +58,6 @@
     <string name="login_register">Daxil ol/qeydiyyatdan keç</string>
     <string name="importsuccess">Abunə olundu</string>
     <string name="cannotDownload">Bu yayımı yükləmək mümkün deyil.</string>
-    <string name="dlisinprogress">Xahiş olunur, bütün cari yükləmələri tamamlamaq üçün gözləyin.</string>
     <string name="downloadfailed">Yükləmə uğursuz oldu.</string>
     <string name="import_from_yt">Abunəlikləri idxal et</string>
     <string name="import_from_yt_summary">YouTube və ya NewPipe-dan</string>
@@ -208,7 +207,6 @@
     <string name="caption_settings">Titrlər</string>
     <string name="playerAudioFormat">Oynadıcı üçün səs formatı</string>
     <string name="playerAudioQuality">Səs keyfiyyəti</string>
-    <string name="best_quality">Ən yaxşı</string>
     <string name="worst_quality">Ən pis</string>
     <string name="default_subtitle_language">Titr dili</string>
     <string name="notifications">Bildirişlər</string>
@@ -254,7 +252,6 @@
     <string name="copied_to_clipboard">Buferə köçürüldü</string>
     <string name="maximum_image_cache">Maksimum şəkil qalığı həcmi</string>
     <string name="open_copied">Aç</string>
-    <string name="break_reminder_time">Xatırlatma olmadan əvvəl dəqiqə</string>
     <string name="legacy_subscriptions">Köhnə abunəliklər görünüşü</string>
     <string name="device_info">Cihaz Məlumatı</string>
     <string name="audio_video_summary">Keyfiyyət və format</string>
@@ -265,7 +262,6 @@
     <string name="mobile_data">Mobil məlumat</string>
     <string name="wifi">Wi-Fi</string>
     <string name="skip_segment">Bölümü ötür</string>
-    <string name="sb_skip_manual">Əl ilə ötür</string>
     <string name="local_subscriptions">Yerli abunəlikər</string>
     <string name="preferences">Üstünlüklər</string>
     <string name="backup_customInstances">Fərdi İnstansiyalar</string>
@@ -279,8 +275,6 @@
     <string name="playback_pitch">Ucalıq</string>
     <string name="filename">Fayl adı</string>
     <string name="invalid_filename">Yanlış fayl adı!</string>
-    <string name="playlistNameReversed">Oynatma siyahısı adı (çevrilib)</string>
-    <string name="playlists_order">Oynatma siyahısı sırası</string>
     <string name="time_code">Vaxt kodu (saniyə)</string>
     <string name="added_to_playlist">%1$s oynatma siyahısına əlavə edildi</string>
     <string name="queue">Növbə</string>
@@ -299,7 +293,6 @@
     <string name="notification_time_summary">Yayım bildirişləri göstərilən vaxt aralığın məhdudlaşdır</string>
     <string name="navbar_order">Düzülüş</string>
     <string name="layout">Tərtibat</string>
-    <string name="alternative_player_layout">Alternativ oynadıcı tərtibatı</string>
     <string name="audio_track">Səs axını</string>
     <string name="auto_quality">Avtomatik</string>
     <string name="hls_instead_of_dash">HLS istifadə et</string>
@@ -319,7 +312,6 @@
     <string name="volume">Səs səviyyəsi</string>
     <string name="swipe_controls">Sürüşdürmə nəzarətləri</string>
     <string name="defaults">Standartlar</string>
-    <string name="pop_up">Ani görüntü</string>
     <string name="no_comments_available">Bu videonun şərhi yoxdur.</string>
     <string name="comments_disabled">Şərhlər yükləyici tərəfindən qeyri-aktiv edilib.</string>
     <string name="double_tap_seek">Axtarmaq üçün ikiqat kliklə</string>
@@ -343,9 +335,7 @@
     <string name="color_violet">Bütöv Bənövşə</string>
     <string name="failed_fetching_instances">Mövcud instansiyaları əldə etmək mümkün olmadı.</string>
     <string name="hide_watched_from_feed">Artıq baxılan videoları gizlət</string>
-    <string name="hide_watched_from_feed_summary">Abunəliklər səhifəsində 90% daha çox baxılan videoları göstərmə</string>
     <string name="playlistUrl">Oynatma Siyahısı URL\'si</string>
-    <string name="pause_on_quit">Çıxışda dayandır</string>
     <string name="shuffle">Qarışdır</string>
     <string name="remove_bookmark">Əlfəcini sil</string>
     <string name="add_to_bookmarks">Əlfəcinlərə əlavə et</string>
@@ -354,7 +344,6 @@
     <string name="alternative_pip_controls">Alternativ PiP idarəedicilər</string>
     <string name="alternative_pip_controls_summary">PiP\'də, irəli və geri çevirmə əvəzinə \"yalnız səs\" düyməsin göstər və idarəediciləri ötür</string>
     <string name="rewind">Geri</string>
-    <string name="audio_player">Səs yayımlayıcı</string>
     <string name="audio_only_mode">Yalnız səs rejimi</string>
     <string name="audio_only_mode_summary">LibreTube-u musiqi səsləndiriciyə çevir</string>
     <string name="no_subtitle">Titr yoxdur</string>
@@ -397,7 +386,6 @@
     <string name="disable_proxy">Piped proksini bağla</string>
     <string name="disable_proxy_summary">Videoları və şəkilləri birbaşa YouTube serverlərindən yükləyin. Həmişə seçimi ancaq VPN istifadə edirsinizsə, aktivləşdirin</string>
     <string name="auto_fullscreen_shorts">Qısa videolarda avto tam ekran</string>
-    <string name="edit_group">Qrupu redaktə et</string>
     <string name="channel_groups">Kanal qrupları</string>
     <string name="group_name">Qrup adı</string>
     <string name="new_group">Yeni</string>
@@ -443,9 +431,7 @@
     <string name="invalid_color">Yanlış rəng dəyəri daxil edildi!</string>
     <string name="sb_custom_colors">Fərdi bölüm rəngləri</string>
     <string name="color">Rəng</string>
-    <string name="enter_hex_value">Rəng Hex Dəyəri Daxil Et</string>
     <string name="visible">Axtarış çubuğunda göstər</string>
-    <string name="jumped_to_highlight">Video Vurğulanmasına Keçdi</string>
     <string name="category_highlight">Video vurğulaması göstər</string>
     <string name="category_highlight_summary">Ya reklam olunan başlıq, miniatür və ya videonun ən maraqlı hissəsi ola bilər. Bölümlər bölməsində üzərinə toxunaraq buna keçə bilərsiniz</string>
     <string name="chapters_videoHighlight">Video Vurğulama</string>
@@ -535,8 +521,6 @@
     <string name="rich_caption_rendering">Zəngin titr təqdimatı</string>
     <string name="rich_caption_rendering_summary">Daha zəngin və fərdiləşdirilmiş təcrübə üçün veb titrləri göstər</string>
     <string name="copy_tooltip">Köçür</string>
-    <string name="export_groups">Kanal qrupların ixrac et</string>
-    <string name="import_groups">Kanal qrupların idxal et</string>
     <string name="change_instance">İnstansiyanı dəyişdir</string>
     <string name="suggest_change_instance">Yüklənilmə həmişəkindən daha uzun çəkir. İnstansiyanı dəyişdirməyi düşünün</string>
     <string name="change">Dəyişdir</string>

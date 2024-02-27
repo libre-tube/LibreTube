@@ -35,7 +35,6 @@
     <string name="instances">निवड करा…</string>
     <string name="login_register">लॉगिन/नोंदणी करा</string>
     <string name="cannotDownload">ही stream डाउनलोड करू शकत नाही.</string>
-    <string name="dlisinprogress">दुसरे डाउनलोड आधीपासूनच सुरू आहे कृपया ते पूर्ण होईपर्यंत प्रतीक्षा करा.</string>
     <string name="server_error">निवडलेल्या सर्व्हरमध्ये समस्या असल्याचे दिसते. दुसरा instance वापरून पहा.</string>
     <string name="unknown_error">नेटवर्क त्रुटी.</string>
     <string name="empty">वापरकर्तानाव आणि पासवर्ड रिक्त असू शकत नाही.</string>
@@ -104,7 +103,6 @@
     <string name="worst_quality">सर्वात वाईट गुणवत्ता</string>
     <string name="playerAudioQuality">ऑडिओ गुणवत्ता</string>
     <string name="default_subtitle_language">उपशीर्षक भाषा</string>
-    <string name="best_quality">सर्वोत्तम गुणवत्ता</string>
     <string name="notify_new_streams">नवीन प्रवाहांसाठी सूचना</string>
     <string name="history_empty">अजून इतिहास नाही.</string>
     <string name="most_recent">सर्वात नवीन</string>
@@ -297,7 +295,6 @@
     <string name="backup_restore">बॅकअप आणि पुनर्संचयित करा</string>
     <string name="backup">बॅकअप</string>
     <string name="open_copied">उघडा</string>
-    <string name="break_reminder_time">आठवण करून देण्याच्या काही मिनिटांपूर्वी</string>
     <string name="player_resize_mode">आकार बदला मोड</string>
     <string name="maximum_image_cache">कमाल प्रतिमा कॅशे आकार</string>
     <string name="copied_to_clipboard">क्लिपबोर्डवर कॉपी केले</string>
@@ -308,13 +305,10 @@
     <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">मोबाइल डेटा</string>
     <string name="skip_segment">विभाग वगळा</string>
-    <string name="sb_skip_manual">व्यक्तिचलितपणे वगळा</string>
     <string name="local_subscriptions">स्थानिक सदस्यता</string>
     <string name="change_region">सध्याच्या क्षेत्रासाठी ट्रेंडिंग अनुपलब्ध असल्याचे दिसते. कृपया सेटिंग्जमध्ये दुसरा निवडा.</string>
     <string name="filename">फाईलचे नाव</string>
     <string name="invalid_filename">अवैध फाइलनाव!</string>
-    <string name="playlists_order">प्लेलिस्ट ऑर्डर</string>
-    <string name="playlistNameReversed">प्लेलिस्ट नाव (उलट)</string>
     <string name="time_code">वेळ कोड (सेकंद)</string>
     <string name="alternative_videos_layout">पर्यायी व्हिडिओ लेआउट</string>
     <string name="defaultIconLight">डीफॉल्ट प्रकाश</string>
@@ -325,7 +319,6 @@
     <string name="notification_time_summary">कालावधी ज्यामध्ये सूचना दर्शविण्याची अनुमती आहे</string>
     <string name="navbar_order">ऑर्डर</string>
     <string name="layout">मांडणी</string>
-    <string name="alternative_player_layout">पर्यायी प्लेअर लेआउट</string>
     <string name="audio_track">ऑडिओ ट्रॅक</string>
     <string name="limit_to_runtime">रनटाइमची मर्यादा</string>
     <string name="queue_insert_related_videos">संबंधित व्हिडिओ समाविष्ट करा</string>
@@ -334,7 +327,6 @@
     <string name="swipe_controls">स्वाइप नियंत्रणे</string>
     <string name="swipe_controls_summary">ब्राइटनेस आणि आवाज समायोजित करण्यासाठी स्वाइप जेश्चर वापरा</string>
     <string name="pinch_control_summary">झूम इन/आउट करण्यासाठी पिंच जेश्चर वापरा.</string>
-    <string name="pop_up">पॉप-अप</string>
     <string name="comments_disabled">अपलोडरद्वारे टिप्पण्या अक्षम केल्या आहेत.</string>
     <string name="theme_monochrome">मिनिमलिस्टिक मोनोक्रोम</string>
     <string name="double_tap_seek">शोधण्यासाठी दोनदा टॅप करा</string>
@@ -344,7 +336,6 @@
     <string name="exportsuccess">निर्यात केले.</string>
     <string name="play_latest_videos">नवीनतम व्हिडिओ प्ले करा</string>
     <string name="nothing_selected">काहीही निवडले नाही!</string>
-    <string name="hide_watched_from_feed_summary">सदस्यत्व टॅबमध्ये 90% पेक्षा जास्त पाहिलेले व्हिडिओ दर्शवू नका</string>
     <string name="shuffle">शफल</string>
     <string name="add_to_bookmarks">बुकमार्कमध्ये जोडा</string>
     <string name="download_channel_name">डाउनलोड सेवा</string>
@@ -359,7 +350,6 @@
     <string name="autoplay_countdown_summary">पुढील व्हिडिओ ऑटो-प्ले करण्यापूर्वी 5 सेकंदचा काउंटडाउन दर्शवा</string>
     <string name="playing_next">पुढील %1$s मध्ये प्ले होईल</string>
     <string name="lbry_hls">LBRY HLS</string>
-    <string name="audio_player">ऑडिओ प्लेयर</string>
     <string name="audio_video_summary">गुणवत्ता आणि स्वरूप</string>
     <string name="playlistUrl">प्लेलिस्ट URL</string>
     <string name="trends">ट्रेंड्स</string>
@@ -379,7 +369,6 @@
     <string name="defaults">डिफॉल्ट</string>
     <string name="no_comments_available">या व्हिडिओवर कोणत्याही टिप्पण्या नाहीत.</string>
     <string name="captions_size">मथळे आकार</string>
-    <string name="pause_on_quit">गेल्यावर विराम द्या</string>
     <string name="category">प्रवर्ग</string>
     <string name="bookmarks">बुकमार्क</string>
     <string name="bookmark">बुकमार्क</string>
