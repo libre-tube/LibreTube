@@ -39,13 +39,12 @@ import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.util.NowPlayingNotification
+import com.github.libretube.util.PauseableTimer
 import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
-import java.util.Timer
-import java.util.TimerTask
 
 /**
  * Loads the selected videos audio in background mode with a notification area.
@@ -102,7 +101,10 @@ class OnlinePlayerService : LifecycleService() {
     var onStateOrPlayingChanged: ((isPlaying: Boolean) -> Unit)? = null
     var onNewVideo: ((streams: Streams, videoId: String) -> Unit)? = null
 
-    private var watchPositionTimer: Timer? = null
+    private val watchPositionTimer = PauseableTimer(
+        onTick = this::saveWatchPosition,
+        delayMillis = PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS
+    )
 
     private val playerListener = object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
@@ -111,14 +113,9 @@ class OnlinePlayerService : LifecycleService() {
 
             // Start or pause watch position timer
             if (isPlaying) {
-                watchPositionTimer = Timer()
-                watchPositionTimer!!.scheduleAtFixedRate(object : TimerTask() {
-                    override fun run() {
-                        handler.post(this@OnlinePlayerService::saveWatchPosition)
-                    }
-                }, PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS, PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS)
+                watchPositionTimer.resume()
             } else {
-                watchPositionTimer?.cancel()
+                watchPositionTimer.pause()
             }
         }
 
@@ -394,7 +391,7 @@ class OnlinePlayerService : LifecycleService() {
         player?.stop()
         player?.release()
 
-        watchPositionTimer?.cancel()
+        watchPositionTimer.destroy()
 
         // called when the user pressed stop in the notification
         // stop the service from being in the foreground and remove the notification

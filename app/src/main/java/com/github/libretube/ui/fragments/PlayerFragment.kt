@@ -108,6 +108,7 @@ import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.sheets.StatsSheet
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.OnlineTimeFrameReceiver
+import com.github.libretube.util.PauseableTimer
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
@@ -236,7 +237,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     // schedule task to save the watch position each second
-    private var watchPositionTimer: Timer? = null
+    private val watchPositionTimer = PauseableTimer(
+        onTick = this::saveWatchPosition,
+        delayMillis = PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS
+    )
 
     private var bufferingTimeoutTask: Runnable? = null
 
@@ -267,14 +271,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             // Start or pause watch position timer
             if (isPlaying) {
-                watchPositionTimer = Timer()
-                watchPositionTimer!!.scheduleAtFixedRate(object : TimerTask() {
-                    override fun run() {
-                        handler.post(this@PlayerFragment::saveWatchPosition)
-                    }
-                }, PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS, PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS)
+                watchPositionTimer.resume()
             } else {
-                watchPositionTimer?.cancel()
+                watchPositionTimer.pause()
             }
         }
 
@@ -835,7 +834,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         stopVideoPlay()
 
-        watchPositionTimer?.cancel()
+        watchPositionTimer.destroy()
     }
 
     private fun stopVideoPlay() {
