@@ -27,12 +27,11 @@ import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.util.NowPlayingNotification
+import com.github.libretube.util.PauseableTimer
 import kotlin.io.path.exists
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.Timer
-import java.util.TimerTask
 
 /**
  * A service to play downloaded audio in the background
@@ -45,7 +44,10 @@ class OfflinePlayerService : LifecycleService() {
     private lateinit var videoId: String
     private var downloadsWithItems: List<DownloadWithItems> = emptyList()
 
-    private var watchPositionTimer: Timer? = null
+    private val watchPositionTimer = PauseableTimer(
+        onTick = this::saveWatchPosition,
+        delayMillis = PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS
+    )
 
     private val playerListener = object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
@@ -53,14 +55,9 @@ class OfflinePlayerService : LifecycleService() {
 
             // Start or pause watch position timer
             if (isPlaying) {
-                watchPositionTimer = Timer()
-                watchPositionTimer!!.scheduleAtFixedRate(object : TimerTask() {
-                    override fun run() {
-                        handler.post(this@OfflinePlayerService::saveWatchPosition)
-                    }
-                }, PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS, PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS)
+                watchPositionTimer.resume()
             } else {
-                watchPositionTimer?.cancel()
+                watchPositionTimer.pause()
             }
         }
 
@@ -191,7 +188,7 @@ class OfflinePlayerService : LifecycleService() {
         player = null
         nowPlayingNotification = null
 
-        watchPositionTimer?.cancel()
+        watchPositionTimer.destroy()
 
         ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
         stopSelf()

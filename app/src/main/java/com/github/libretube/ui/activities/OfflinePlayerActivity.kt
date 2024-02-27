@@ -4,8 +4,6 @@ import android.content.pm.ActivityInfo
 import android.media.session.PlaybackState
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.format.DateUtils
 import android.view.KeyEvent
 import androidx.activity.viewModels
@@ -40,17 +38,14 @@ import com.github.libretube.ui.interfaces.TimeFrameReceiver
 import com.github.libretube.ui.listeners.SeekbarPreviewListener
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.util.OfflineTimeFrameReceiver
+import com.github.libretube.util.PauseableTimer
 import kotlin.io.path.exists
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.Timer
-import java.util.TimerTask
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class OfflinePlayerActivity : BaseActivity() {
-    private val handler = Handler(Looper.getMainLooper())
-
     private lateinit var binding: ActivityOfflinePlayerBinding
     private lateinit var videoId: String
     private lateinit var player: ExoPlayer
@@ -61,7 +56,10 @@ class OfflinePlayerActivity : BaseActivity() {
     private lateinit var playerBinding: ExoStyledPlayerControlViewBinding
     private val playerViewModel: PlayerViewModel by viewModels()
 
-    private var watchPositionTimer: Timer? = null
+    private val watchPositionTimer = PauseableTimer(
+        onTick = this::saveWatchPosition,
+        delayMillis = PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS
+    )
 
     private val playerListener = object : Player.Listener {
         override fun onEvents(player: Player, events: Player.Events) {
@@ -77,14 +75,9 @@ class OfflinePlayerActivity : BaseActivity() {
 
             // Start or pause watch position timer
             if (isPlaying) {
-                watchPositionTimer = Timer()
-                watchPositionTimer!!.scheduleAtFixedRate(object : TimerTask() {
-                    override fun run() {
-                        handler.post(this@OfflinePlayerActivity::saveWatchPosition)
-                    }
-                }, PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS, PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS)
+                watchPositionTimer.resume()
             } else {
-                watchPositionTimer?.cancel()
+                watchPositionTimer.pause()
             }
         }
 
@@ -255,7 +248,7 @@ class OfflinePlayerActivity : BaseActivity() {
         saveWatchPosition()
 
         player.release()
-        watchPositionTimer?.cancel()
+        watchPositionTimer.destroy()
 
         super.onDestroy()
     }
