@@ -115,7 +115,6 @@
     <string name="clonePlaylist">প্লেলিস্ট ক্লোন করুন</string>
     <string name="reset">ডিফল্ট সেটিংস ফিরিয়ে আনুন</string>
     <string name="already_logged_in">ইতিমধ্যে লগ ইন করা হয়েছে। আপনি আপনার অ্যাকাউন্ট থেকে লগ আউট হয়ে যেতে পারেন।</string>
-    <string name="dlisinprogress">সকল ডাউনলোড শেষ হওয়া পর্যন্ত অপেক্ষা করুন।</string>
     <string name="import_from_yt">সাবস্ক্রিপশনগুলো ইমপোর্ট করুন</string>
     <string name="history">ইতিহাস</string>
     <string name="emptyPlaylistName">প্লেলিস্টটির নাম খালি থাকতে পারে না</string>
@@ -224,7 +223,6 @@
     <string name="captions">ক্যাপশনগুলো</string>
     <string name="none">None</string>
     <string name="playerAudioQuality">অডিও কোয়ালিটি</string>
-    <string name="best_quality">সেরা</string>
     <string name="export_subscriptions">সাবস্ক্রিপশনগুলো এক্সপোর্ট করুন</string>
     <string name="history_size">ইতিহাসের সর্বোচ্চ আকার</string>
     <string name="unlimited">অসীম</string>
@@ -254,8 +252,6 @@
     <string name="mobile_data">মোবাইল ডেটা</string>
     <string name="local_subscriptions">লোকাল সাবস্ক্রিপশন</string>
     <string name="player_resize_mode">রিসাইজ মোড</string>
-    <string name="break_reminder_time">মনে করানোর আগের সময়</string>
-    <string name="sb_skip_manual">ম্যানুয়ালি স্কিপ করুন</string>
     <string name="skip_segment">অংশটি স্কিপ করুন</string>
     <string name="legacy_subscriptions">ঐতিহ্যবাহী সাবস্ক্রিপশন ভিউ</string>
     <string name="device_info">ডিভাইসের তথ্য</string>
@@ -280,8 +276,6 @@
     <string name="download_channel_description">ডাউনলোডের সময় নোটিফিকেশন দেখান।</string>
     <string name="filename">ফাইলের নাম</string>
     <string name="invalid_filename">ইনভ্যালিড ফাইলনেম!</string>
-    <string name="playlists_order">প্লে-লিস্টের অর্ডার</string>
-    <string name="playlistNameReversed">নাম (উল্টো)</string>
     <string name="time_code">সময় কোড (সেকেন্ড)</string>
     <string name="queue">কিউ</string>
     <string name="livestreams">লাইভস্ট্রিমগুলো</string>
@@ -298,7 +292,6 @@
     <string name="notification_time">নোটিফিকেশনের সময়</string>
     <string name="notification_time_summary">নোটিফিকেশনের জন্য অনুমোদিত সময়</string>
     <string name="layout">লেয়াউট</string>
-    <string name="alternative_player_layout">বিকল্প প্লেয়ার লেয়াউট</string>
     <string name="audio_track">অডিও ট্র্যাক</string>
     <string name="hls_instead_of_dash">HLS ব্যাবহার করুন</string>
     <string name="hls_instead_of_dash_summary">DASH এর বদলে HLS ব্যাবহার করুন (ধীরগতিসম্পন্ন হতে পারে, সুপারিশকৃত নয়)</string>
@@ -315,7 +308,6 @@
     <string name="bookmarks">বুকমার্কগুলো</string>
     <string name="bookmark">বুকমার্ক</string>
     <string name="clear_bookmarks">বুকমার্ক মুছে দিন</string>
-    <string name="pop_up">পপ-আপ</string>
     <string name="replies">রিপ্লাইগুলা</string>
     <string name="download_completed">ডাউনলোড শেষ হয়েছে</string>
     <string name="concurrent_downloads">সর্বোচ্চ সমান্তরাল ডাউনলোড</string>

@@ -60,7 +60,6 @@
     <string name="sponsorblock_summary">ഉപയോഗിക്കുന്ന എപിഐ https://sponsor.ajay.app/</string>
     <string name="license">ലൈസൻസ്</string>
     <string name="already_logged_in">ഇതിനകം ലോഗിൻ ചെയ്തിട്ടുണ്ട്. നിങ്ങളുടെ അക്കൗണ്ടിൽ നിന്ന് നിങ്ങൾക്ക് ലോഗ് ഔട്ട് ചെയ്യാം.</string>
-    <string name="dlisinprogress">മറ്റൊരു ഡൗൺലോഡ് ഇതിനകം പുരോഗമിക്കുകയാണ്. അത് പൂർത്തിയാകുന്നതുവരെ കാത്തിരിക്കുക.</string>
     <string name="youtube">യൂട്യൂബ്</string>
     <string name="server_error">സെർവറിൽ ഒരു പ്രശ്നമുണ്ട്. മറ്റൊരു ഉദാഹരണം പരീക്ഷിക്കണോ\?</string>
     <string name="music_playlists">YT മ്യൂസിക് പ്ലേലിസ്റ്റുകൾ</string>
@@ -140,7 +139,6 @@
     <string name="related_streams_summary">നിങ്ങൾ കാണുന്നതിനൊപ്പം സമാന സ്ട്രീമുകളും കാണിക്കുക</string>
     <string name="quality">ഗുണമേന്മ</string>
     <string name="never">ഒരിക്കലും</string>
-    <string name="best_quality">മികച്ചത്</string>
     <string name="worst_quality">ഏറ്റവും മോശം</string>
     <string name="general">പൊതുവായ</string>
     <string name="category_music_offtopic">സംഗീതം: സംഗീതേതര വിഭാഗം</string>
@@ -184,7 +182,6 @@
     <string name="custom_playback_speed">ഇഷ്ടാനുസൃത വേഗത</string>
     <string name="push_channel_name">അറിയിപ്പ് തൊഴിലാളി</string>
     <string name="no_comments_available">ഈ വീഡിയോയ്ക്ക് അഭിപ്രായങ്ങളൊന്നുമില്ല.</string>
-    <string name="edit_group">സംഘത്തെ തിരുത്തുക</string>
     <string name="new_group">പുതിയത്</string>
     <string name="group_name">സംഘത്തിന്റെ പേര്</string>
     <string name="play_automatically">സ്വയമേവ കളിക്കുക</string>
@@ -201,7 +198,6 @@
     <string name="duration_reversed">ദൈർഘ്യം (വിപരീതമായി)</string>
     <string name="duration">ദൈർഘ്യം</string>
     <string name="show_search_suggestions">തിരയൽ നിർദ്ദേശങ്ങൾ കാണിക്കുക</string>
-    <string name="pause_on_quit">നിർത്തുമ്പോൾ താൽക്കാലികമായി നിർത്തുക</string>
     <string name="unlimited_search_history">പരിധിയില്ലാത്ത തിരയൽ ചരിത്രം</string>
     <string name="alphabetic_reversed">അക്ഷരമാലാക്രമം (വിപരീതമായി)</string>
     <string name="creation_date_reversed">സൃഷ്‌ടിച്ച തീയതി (വിപരീതമായി)</string>

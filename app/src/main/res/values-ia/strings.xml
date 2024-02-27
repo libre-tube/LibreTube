@@ -63,12 +63,10 @@
     <string name="unknown">Incognite</string>
     <string name="required_network">Connexiones necessari</string>
     <string name="autoRotatePlayer">Schermo plen automatic</string>
-    <string name="jumped_to_highlight">Tu ha saltate al Momento Destacate</string>
     <string name="clear_history">Rader le chronologia</string>
     <string name="enabled">Activate</string>
     <string name="search_history">Chronologia de recerca</string>
     <string name="pause">Pausa</string>
-    <string name="dlisinprogress">Attende le fin de tote le discargas actual.</string>
     <string name="pauseOnScreenOff">Pausa automatic</string>
     <string name="success">Preste.</string>
     <string name="buffering_goal">Precarga</string>
@@ -224,7 +222,6 @@
     <string name="deleteAccount">Deler conto</string>
     <string name="pauseOnScreenOff_summary">Pausar le reproduction quando le schermo es extinguite</string>
     <string name="watch_positions">Rememorar position</string>
-    <string name="best_quality">Le melior</string>
     <string name="fireIcon">Foco moderne</string>
     <string name="turnInternetOn">Activa le Wi-Fi o datos mobile pro connecter te al Internet.</string>
     <string name="player_resize_mode">Modo de redimension</string>
@@ -257,7 +254,6 @@
     <string name="skip_buttons">Buttones de salto</string>
     <string name="add_to_queue">Adder al cauda</string>
     <string name="backup">Copia de securitate</string>
-    <string name="sb_skip_manual">Saltar manualmente</string>
     <string name="skip_segment">Saltar</string>
     <string name="share_with_time">Compartir con marca de tempore</string>
     <string name="background_mode">Modo secunde plano</string>
@@ -285,7 +281,6 @@
     <string name="playlist_description">Description del lista de reproduction</string>
     <string name="trending">Le tendentias del momento</string>
     <string name="end_time">Hora de fin</string>
-    <string name="enter_hex_value">Insere un valor de color Hex</string>
     <string name="confirm_unsubscribing">Confirmar le desubscription</string>
     <string name="unknown_or_no_audio">incognite o sin audio</string>
     <string name="auto_generated">autogenerate</string>
@@ -357,10 +352,8 @@
     <string name="segment_type">Typo de segmento</string>
     <string name="defaultIconLight">Clar predefinite</string>
     <string name="visibility_public">Public</string>
-    <string name="edit_group">Modificar le gruppo</string>
     <string name="original_or_main_audio_track">original o principal</string>
     <string name="import_playlists">Importar listas de reproduction</string>
-    <string name="alternative_player_layout">Disposition alternative del reproductor</string>
     <string name="tooltip_repeat">Repeter</string>
     <string name="forward">Avantiar</string>
     <string name="undo">Disfacer</string>
@@ -371,7 +364,6 @@
     <string name="automatic_once">Automatic un vice</string>
     <string name="unsupported_file_format">Formato de file non supportate: %1$s</string>
     <string name="choose_instance">Primo selige un instantia!</string>
-    <string name="pop_up">Emergente</string>
     <string name="manual">Manual</string>
     <string name="related_streams_summary">Monstrar fluxos similar al que tu reguarda</string>
     <string name="playlistCloned">Liste de reproduction clonate</string>
@@ -399,7 +391,6 @@
     <string name="time_code">Codice de tempore (secundas)</string>
     <string name="shorts_notifications">Notificationes del Shorts</string>
     <string name="all_caught_up_summary">Tu habeva reguardate tote le nove videos</string>
-    <string name="audio_player">Reproductor de audio</string>
     <string name="autoplay_playlists">Listas de reproduction automatic</string>
     <string name="export_playlists_to">Exportar listas a</string>
     <string name="duration_span">Duration: %1$s</string>
@@ -461,7 +452,6 @@
     <string name="tooltip_dismiss">Dimitter</string>
     <string name="screen_orientation">Orientation del schermo</string>
     <string name="same_as_fullscreen">Mesme que in schermo plen</string>
-    <string name="playlists_order">Ordine del listas de reproduction</string>
     <string name="hide_watched_from_feed">Celar videos jam reguardate</string>
     <string name="tooltip_filter">Filtrar</string>
     <string name="exportsuccess">Exportate.</string>
@@ -471,13 +461,11 @@
     <string name="add_to_group">Adder a gruppo</string>
     <string name="emptyPlaylistDescription">Le description del lista de reproduction non pote esser vacue</string>
     <string name="group_name_error_exists">Selige un nomine que sia unic</string>
-    <string name="pause_on_quit">Pausar al quitar</string>
     <string name="hls_instead_of_dash_summary">Usar HLS in vice de DASH (essera plus lente, non recommendate)</string>
     <string name="upvote">Me place</string>
     <string name="tooltip_minimize">MInimisar</string>
     <string name="limit_to_runtime">Limitar al execution</string>
     <string name="buffering_goal_summary">Quantitate maxime de secundas de video a cargar in buffer</string>
-    <string name="hide_watched_from_feed_summary">Non monstrar videos reguardate plus de 90% in le scheda de subscriptiones</string>
     <string name="notification_time_summary">Limitar le intervallo de tempore in le qual le notificationes de fluxo es monstrate</string>
     <string name="aspect_ratio">Proportion del video</string>
     <string name="category_music_offtopic_summary">Solmente pro uso in videos musical. Illo deberea cover partes del video que non es parte del mixturas official. In the end, the video should resemble the Spotify or any other mixed version as closely as possible, or reduce talking or other distractions</string>
@@ -485,7 +473,6 @@
     <string name="category_preview">Previsualisation/Summario</string>
     <string name="fallback_piped_proxy">Recurrer al proxy de Piped</string>
     <string name="grid_landscape">Columnas del grillia (horizontal)</string>
-    <string name="playlistNameReversed">Nomine del lista de reproduction (invertite)</string>
     <string name="disable_proxy_summary">Cargar videos e imagines directemente ab le servitores de YouTube. Solmente activa iste option si tu usa sempre un VPN</string>
     <string name="tooltip_reverse">Inverter</string>
     <string name="confirm_unsubscribe">Es tu secur que tu vole desubscriber te ab %1$s?</string>
@@ -508,7 +495,6 @@
     <string name="vote_for_segment">Votar per le segmento</string>
     <string name="pinch_control">Controlo de pinciamento</string>
     <string name="change_region">Tendentias non pare esser disponibile pro le region actual. Selige altere in le parametros.</string>
-    <string name="break_reminder_time">Minutas ante de esser rememorate</string>
     <string name="watch_history_summary">Mantener le controlo del videos reguardate localmente</string>
     <string name="alternative_pip_controls_summary">Monstrar solmente audio e saltar controlos in Imagine-in-Imagine in vice de avantiar e rebobinar</string>
     <string name="swipe_controls_summary">Glissar pro adjustar le luminositate e volumine in modo de schermo plen</string>
@@ -516,7 +502,6 @@
     <string name="tooltip_scroll_to_top">Rolar al alto</string>
     <string name="tooltip_sponsorblock">Commutar SponsorBlock</string>
     <string name="pinch_control_summary">Usa le pinciamento pro aggrandir/diminuer</string>
-    <string name="sb_color_enable">Commutar colores personalisate pro le segmentos de SponsorBlock.</string>
     <string name="double_tap_seek_summary">Tocca duo vices al sinistra o dextra pro rebobinar o avantiar le position del reproductor</string>
     <string name="no_segments_found">Il non ha ancora segmentos pro iste video.</string>
     <string name="successfully_removed_from_playlist">Removite con successo \"%1$s\" ab le lista de reproduction.</string>
@@ -536,8 +521,6 @@
     <string name="gradientIcon">Gradiente volubile</string>
     <string name="all_caught_up">Tu videva toto</string>
     <string name="fallback_piped_proxy_summary">Cargar videos via le proxy si le connexion a YouTube non functiona pro le video actual (augmenta le tempore initial de carga). Si es disactivate, le contentos musical de YouTube poterea non reproducer se per restrictiones de YT</string>
-    <string name="import_groups">Importar gruppos de canales</string>
-    <string name="export_groups">Exportar gruppos de canales</string>
     <string name="change">Cambiar</string>
     <string name="change_instance">Cambiar de instantia</string>
     <string name="suggest_change_instance">Le carga prende plus de tempore que de costume. Considera cambiar de instantia</string>

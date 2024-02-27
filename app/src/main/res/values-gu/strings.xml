@@ -16,7 +16,6 @@
     <string name="deleteAccount">ખાતું કાઢી નાંખો</string>
     <string name="wifi">Wi-Fi</string>
     <string name="playback_pitch">પિચ</string>
-    <string name="pop_up">પોપ-અપ</string>
     <string name="channels">ચેનલો</string>
     <string name="all">તમામ</string>
     <string name="playlists">પ્લેલિસ્ટ્સ</string>
@@ -127,16 +126,13 @@
     <string name="maximum_image_cache">મહત્તમ ચિત્ર કેશ માપ</string>
     <string name="copied_to_clipboard">ક્લિપબોર્ડમાં નકલ થયેલ છે</string>
     <string name="open_copied">સાફ</string>
-    <string name="break_reminder_time">યાદ અપાવ્યા પહેલાંની મિનિટો</string>
     <string name="device_info">ઉપકરણ જાણકારી</string>
     <string name="renamePlaylist">પ્લેલીસ્ટનું નામ બદલો</string>
     <string name="mobile_data">મોબાઇલ માહિતી</string>
-    <string name="sb_skip_manual">જાતે અવગણો</string>
     <string name="navigation_bar">શોધખોળ પટ્ટી</string>
     <string name="material_you">સામગ્રી તમે</string>
     <string name="navbar_order">ક્રમ</string>
     <string name="layout">લેઆઉટ</string>
-    <string name="alternative_player_layout">વૈકલ્પિક પ્લેયર લેઆઉટ</string>
     <string name="change_region">વર્તમાન ક્ષેત્ર માટે ટ્રેન્ડિંગ અનુપલબ્ધ હોય તેવું લાગે છે. કૃપા કરીને સેટિંગ્સમાં અન્યને પસંદ કરો.</string>
     <string name="downloading">ડાઉનલોડ કરી રહ્યું છે…</string>
     <string name="clear_customInstances">સ્પષ્ટ ઉમેર્યું</string>
@@ -213,8 +209,6 @@
     <string name="darkTheme">અંધારું</string>
     <string name="filename">ફાઇલનામ</string>
     <string name="invalid_filename">અયોગ્ય ફાઈલનામ!</string>
-    <string name="playlists_order">પ્લેલીસ્ટનો ક્રમ</string>
-    <string name="playlistNameReversed">પ્લેલિસ્ટ નામ (ઉલટું)</string>
     <string name="history_size">મહત્તમ ઇતિહાસ માપ</string>
     <string name="unlimited">અમર્યાદિત</string>
     <string name="pinch_control">પિંચ નિયંત્રણ</string>
@@ -258,7 +252,6 @@
     <string name="hls_instead_of_dash_summary">DASH ને બદલે HLS વાપરો (ધીમું હશે, અગ્રહણીય નહિં થાય)</string>
     <string name="auto_quality">આપમેળે</string>
     <string name="worst_quality">ખરાબ</string>
-    <string name="best_quality">શ્રેષ્ઠ</string>
     <string name="videos">વિડિયો</string>
     <string name="logout">બહાર નીકળો</string>
     <string name="already_logged_in">પહેલેથી જ પ્રવેશેલ છે. તમે તમારા ખાતામાંથી લોગ આઉટ થઈ શકો છો.</string>
@@ -267,7 +260,6 @@
     <string name="category_selfpromo_summary">અવેતન અથવા સ્વ-બઢતી સિવાય \"પ્રાયોજક\" ની જેમ. આમાં માલ, દાન અથવા તેઓએ કોની સાથે સહયોગ કર્યો તે વિશેની માહિતી વિશેના વિભાગોનો સમાવેશ થાય છે</string>
     <string name="unsubscribe">ઉમેદવારી દૂર કરો</string>
     <string name="cannotDownload">આ સ્ટ્રીમને ડાઉનલોડ કરી શકાતુ નથી.</string>
-    <string name="dlisinprogress">બીજો ડાઉનલોડ પહેલેથી જ પ્રગતિમાં છે, મહેરબાની કરીને તે સમાપ્ત થાય ત્યાં સુધી રાહ જુઓ.</string>
     <string name="server_error">સર્વર સાથે સમસ્યા છે. બીજો દાખલો અજમાવી જુઓ\?</string>
     <string name="subscribers">%1$s સબ્સ્ક્રાઇબર્સ</string>
     <string name="location">સ્થાન</string>

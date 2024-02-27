@@ -24,7 +24,6 @@
     <string name="empty">Il nome utente e la password non possono essere vuoti.</string>
     <string name="notgmail">Questo è per un account Piped</string>
     <string name="defres">Risoluzione video</string>
-    <string name="dlisinprogress">Attendere che tutti i download in corso siano terminati.</string>
     <string name="unknown_error">Errore di connessione.</string>
     <string name="server_error">Sembra esserci un problema con il server selezionato. Prova un\'altra istanza.</string>
     <string name="customInstance">Personalizzata</string>
@@ -230,7 +229,6 @@
     <string name="backup">Backup</string>
     <string name="playingOnBackground">Riproduzione in sottofondo…</string>
     <string name="caption_settings">Sottotitoli</string>
-    <string name="best_quality">Migliore</string>
     <string name="worst_quality">Peggiore</string>
     <string name="default_subtitle_language">Lingua dei sottotitoli</string>
     <string name="irreversible">Sei sicuro\? Non può essere annullato!</string>
@@ -254,7 +252,6 @@
     <string name="history_empty">Cronologia vuota.</string>
     <string name="repeat_mode_none">Disattivata</string>
     <string name="misc">Varie</string>
-    <string name="break_reminder_time">Minuti prima dell\'avviso</string>
     <string name="device_info">Info sul dispositivo</string>
     <string name="audio_video_summary">Qualità e formato</string>
     <string name="delete">Elimina dagli scaricati</string>
@@ -264,7 +261,6 @@
     <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">Dati mobili</string>
     <string name="skip_segment">Salta il segmento</string>
-    <string name="sb_skip_manual">Salta manualmente</string>
     <string name="download_channel_description">Mostra una notifica quando si scaricano i media.</string>
     <string name="local_subscriptions">Iscrizioni locali</string>
     <string name="preferences">Preferenze</string>
@@ -279,8 +275,6 @@
     <string name="playback_pitch">Tono</string>
     <string name="filename">Nome del file</string>
     <string name="invalid_filename">Nome del file non valido!</string>
-    <string name="playlists_order">Ordine delle playlist</string>
-    <string name="playlistNameReversed">Nome playlist (invertito)</string>
     <string name="added_to_playlist">Aggiunto alla playlist %1$s</string>
     <string name="queue">Coda</string>
     <string name="livestreams">Trasmissioni in diretta</string>
@@ -306,7 +300,6 @@
     <string name="swipe_controls">Gesti</string>
     <string name="navbar_order">Ordine</string>
     <string name="layout">Disposizione</string>
-    <string name="alternative_player_layout">Layout alternativo del player</string>
     <string name="audio_track">Traccia audio</string>
     <string name="hls_instead_of_dash">Usa HLS</string>
     <string name="hls_instead_of_dash_summary">Usa HLS invece di DASH (sarà più lento, non consigliato)</string>
@@ -319,7 +312,6 @@
     <string name="bookmarks">Segnalibri</string>
     <string name="bookmark">Segnalibro</string>
     <string name="clear_bookmarks">Cancella segnalibri</string>
-    <string name="pop_up">Pop-up</string>
     <string name="no_comments_available">Questo video non ha commenti.</string>
     <string name="comments_disabled">I commenti sono disattivati dall\'autore del video.</string>
     <string name="captions_size">Dimensione sottotitoli</string>
@@ -343,9 +335,7 @@
     <string name="color_violet">Violetto versatile</string>
     <string name="failed_fetching_instances">Impossibile recuperare le istanze disponibili.</string>
     <string name="hide_watched_from_feed">Nascondi i video già guardati</string>
-    <string name="hide_watched_from_feed_summary">Non mostrare i video guardati oltre il 90% nella scheda delle iscrizioni</string>
     <string name="playlistUrl">URL della playlist</string>
-    <string name="pause_on_quit">Pausa all\'uscita</string>
     <string name="shuffle">Mischia</string>
     <string name="add_to_bookmarks">Aggiungi ai segnalibri</string>
     <string name="remove_bookmark">Rimuovi segnalibro</string>
@@ -354,7 +344,6 @@
     <string name="pause">Pausa</string>
     <string name="alternative_pip_controls">Controlli PiP alternativi</string>
     <string name="alternative_pip_controls_summary">Mostra solo l\'audio e salta i controlli nel PiP, invece di avanti e riavvolgi</string>
-    <string name="audio_player">Riproduttore audio</string>
     <string name="no_subtitle">Nessun sottotitolo</string>
     <string name="download_paused">Scaricamento in pausa</string>
     <string name="download_completed">Scaricamento completato</string>
@@ -402,7 +391,6 @@
     <string name="channel_groups">Gruppi di canali</string>
     <string name="new_group">Nuovo</string>
     <string name="group_name">Nome gruppo</string>
-    <string name="edit_group">Modifica gruppo</string>
     <string name="play_automatically">Riproduci automaticamente</string>
     <string name="play_automatically_summary">Riproduci il video automaticamente quando si seleziona</string>
     <string name="fullscreen_gestures">Gesti di entrata/uscita a schermo intero</string>
@@ -447,12 +435,10 @@
     <string name="sb_custom_colors_summary">Alterna i segmenti di colore personalizzati per i segmenti di SponsorBlock</string>
     <string name="sb_custom_colors">Colori dei segmenti personalizzati</string>
     <string name="chapters_videoHighlight">Momento saliente</string>
-    <string name="jumped_to_highlight">Passato al momento saliente</string>
     <string name="category_highlight">Mostra il momento saliente</string>
     <string name="category_highlight_summary">Può essere il titolo pubblicizzato, la miniatura o la parte più interessante del video. Puoi passare ad esso toccandolo nella sezione dei capitoli</string>
     <string name="color">Colore</string>
     <string name="invalid_color">Valore del colore inserito non valido!</string>
-    <string name="enter_hex_value">Inserisci il valore esadecimale del colore</string>
     <string name="fallback_piped_proxy_summary">Carica i video tramite il proxy se la connessione diretta a YouTube non funziona per il video corrente (aumenta i tempi di caricamento iniziale). Se disattivato, è probabile che i contenuti musicali di YouTube non vengano riprodotti a causa delle restrizioni di YT</string>
     <string name="fallback_piped_proxy">Ripiega ad un proxy Piped</string>
     <string name="unknown_audio_language">Lingua audio sconosciuta</string>
@@ -526,7 +512,6 @@
     <string name="repeat_mode_all">Ripeti tutto</string>
     <string name="successfully_removed_from_playlist">\"%1$s\" rimosso correttamente dalla playlist.</string>
     <string name="watched">Visto</string>
-    <string name="bottom_reached">Fine raggiunta!</string>
     <string name="finished">Finito</string>
     <string name="no_segments_found">Non ci sono ancora segmenti per questo video.</string>
     <string name="time_in_minutes">Tempo in minuti</string>
@@ -539,8 +524,6 @@
     <string name="rich_caption_rendering_summary">Rendering dei sottotitoli web per un\'esperienza più ricca e personalizzata</string>
     <string name="grid_landscape">Colonne della griglia (orizzontale)</string>
     <string name="copy_tooltip">Copia</string>
-    <string name="export_groups">Esporta gruppi di canali</string>
-    <string name="import_groups">Importa gruppi di canali</string>
     <string name="change_instance">Cambia istanza</string>
     <string name="suggest_change_instance">Il caricamento sta impiegando più tempo del solito. Prova a cambiare istanza</string>
     <string name="change">Cambia</string>

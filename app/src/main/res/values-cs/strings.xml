@@ -36,7 +36,6 @@
     <string name="loggedout">Úspěšně odhlášen.</string>
     <string name="region">Oblast</string>
     <string name="cannotDownload">Tento stream nelze stáhnout.</string>
-    <string name="dlisinprogress">Počkejte prosím, dokud nebudou dokončena všechna aktuální stahování.</string>
     <string name="error">Něco se pokazilo.</string>
     <string name="login_register">Přihlásit/registrovat</string>
     <string name="defres">Rozlišení videa</string>
@@ -208,7 +207,6 @@
     <string name="caption_settings">Titulky</string>
     <string name="playerAudioFormat">Formát zvuku pro přehrávač</string>
     <string name="playerAudioQuality">Kvalita zvuku</string>
-    <string name="best_quality">Nejlepší</string>
     <string name="worst_quality">Nejhorší</string>
     <string name="default_subtitle_language">Jazyk titulků</string>
     <string name="notifications">Upozornění</string>
@@ -254,7 +252,6 @@
     <string name="maximum_image_cache">Max. velikost mezipaměti obrázků</string>
     <string name="copied_to_clipboard">Zkopírováno do schránky</string>
     <string name="open_copied">Otevřít</string>
-    <string name="break_reminder_time">Minuty před připomenutím</string>
     <string name="legacy_subscriptions">Staré zobrazení odběrů</string>
     <string name="device_info">Informace o zařízení</string>
     <string name="audio_video_summary">Kvalita a formát</string>
@@ -264,7 +261,6 @@
     <string name="new_videos_badge_summary">Zobrazit značku s počtem nových videí, pokud nějaké jsou</string>
     <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">Mobilní data</string>
-    <string name="sb_skip_manual">Přeskočit ručně</string>
     <string name="push_channel_name">Pracovník oznámení</string>
     <string name="download_channel_name">Služba stahování</string>
     <string name="skip_segment">Přeskočit segment</string>
@@ -279,8 +275,6 @@
     <string name="playback_pitch">Výška</string>
     <string name="invalid_filename">Nesprávný název souboru!</string>
     <string name="filename">Název souboru</string>
-    <string name="playlists_order">Pořadí playlistů</string>
-    <string name="playlistNameReversed">Název playlistu (obráceně)</string>
     <string name="time_code">Časový kód (sekundy)</string>
     <string name="added_to_playlist">Přidáno do playlistu %1$s</string>
     <string name="queue">Fronta</string>
@@ -299,7 +293,6 @@
     <string name="notification_time_summary">Omezit časové rozmezí, ve kterém budou zobrazována upozornění o videích</string>
     <string name="navbar_order">Pořadí</string>
     <string name="layout">Rozložení</string>
-    <string name="alternative_player_layout">Alternativní rozložení přehrávače</string>
     <string name="audio_track">Zvuková stopa</string>
     <string name="auto_quality">Auto</string>
     <string name="hls_instead_of_dash">Použít HLS</string>
@@ -319,7 +312,6 @@
     <string name="defaults">Výchozí</string>
     <string name="volume">Hlasitost</string>
     <string name="swipe_controls_summary">Přejeďte prstem pro upravení jasu a hlasitosti v režimu celé obrazovky</string>
-    <string name="pop_up">Pop-Up</string>
     <string name="no_comments_available">Toto video nemá žádné komentáře.</string>
     <string name="double_tap_seek">Dvojitým klepnutím vyhledáte</string>
     <string name="captions_size">Velikost titulků</string>
@@ -343,9 +335,7 @@
     <string name="color_violet">Všestranná fialová</string>
     <string name="failed_fetching_instances">Nepodařilo se načíst dostupné instance.</string>
     <string name="hide_watched_from_feed">Skrýt zhlédnutá videa</string>
-    <string name="hide_watched_from_feed_summary">Na kartě odběry nezobrazovat videa, která jsou zhlédnuta z více než 90 %</string>
     <string name="playlistUrl">URL playlistu</string>
-    <string name="pause_on_quit">Pozastavit při ukončení</string>
     <string name="shuffle">Náhodně</string>
     <string name="add_to_bookmarks">Přidat do záložek</string>
     <string name="remove_bookmark">Odstranit záložku</string>
@@ -354,7 +344,6 @@
     <string name="alternative_pip_controls_summary">V PiP místo přetočení zpět a vpřed zobrazit ovládání režimu pouze zvuku a přeskočení</string>
     <string name="forward">Vpřed</string>
     <string name="alternative_pip_controls">Alternativní ovládací prvky PiP</string>
-    <string name="audio_player">Přehrávač zvuku</string>
     <string name="no_subtitle">Bez titulků</string>
     <string name="download_paused">Stahování pozastaveno</string>
     <string name="download_completed">Stahování dokončeno</string>
@@ -402,7 +391,6 @@
     <string name="new_group">Nová</string>
     <string name="group_name">Název skupiny</string>
     <string name="channel_groups">Skupiny kanálů</string>
-    <string name="edit_group">Upravit skupinu</string>
     <string name="play_automatically">Automatické přehrávání</string>
     <string name="play_automatically_summary">Automatické spuštění přehrávání videa při výběru</string>
     <string name="fullscreen_gestures">Gesta vstupu/opuštění režimu celé obrazovky</string>
@@ -447,11 +435,9 @@
     <string name="color">Barva</string>
     <string name="visible">Zobrazit v liště</string>
     <string name="invalid_color">Zadána neplatná hodnota barvy!</string>
-    <string name="enter_hex_value">Zadejte Hex hodnotu barvy</string>
     <string name="category_highlight">Zobrazit zvýraznění videa</string>
     <string name="stop">Zastavit</string>
     <string name="chapters_videoHighlight">Zvýraznění videa</string>
-    <string name="jumped_to_highlight">Přeskočeno na zvýraznění videa</string>
     <string name="category_highlight_summary">Může to být inzerovaný název, miniatura nebo nejzajímavější část videa. Můžete na ni přejít klepnutím v sekci kapitol</string>
     <string name="fallback_piped_proxy">Fallback na proxy Piped</string>
     <string name="fallback_piped_proxy_summary">Načítat videa přes proxy server, pokud přímé připojení k YouTube nefunguje pro aktuální video (zvyšuje počáteční dobu načítání). Pokud je vypnuto, hudební obsah YouTube se pravděpodobně nebude přehrávat kvůli omezením YT</string>
@@ -538,8 +524,6 @@
     <string name="rich_caption_rendering">Vylepšené vykreslování titulků</string>
     <string name="rich_caption_rendering_summary">Vykreslovat webové titulky pro lepší a více přizpůsobený zážitek</string>
     <string name="copy_tooltip">Kopírovat</string>
-    <string name="import_groups">Importovat skupiny kanálů</string>
-    <string name="export_groups">Exportovat skupiny kanállů</string>
     <string name="change_instance">Změnit instanci</string>
     <string name="suggest_change_instance">Načítání trvá déle než obvykle. Zvažte změnu instance</string>
     <string name="change">Změnit</string>

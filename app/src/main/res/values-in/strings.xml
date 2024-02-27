@@ -26,7 +26,6 @@
     <string name="region">Wilayah</string>
     <string name="login_register">Masuk/daftar</string>
     <string name="cannotDownload">Tidak dapat mengunduh, ini adalah aliran.</string>
-    <string name="dlisinprogress">Harap tunggu hingga semua unduhan saat ini selesai.</string>
     <string name="playlistCreated">Daftar putar dibuat.</string>
     <string name="importsuccess">Berlangganan</string>
     <string name="grid">Kolom kisi</string>
@@ -147,7 +146,6 @@
     <string name="version">Versi %1$s</string>
     <string name="error_occurred">Kesalahan</string>
     <string name="copied">Disalin</string>
-    <string name="break_reminder_time">Menit sebelum diingatkan</string>
     <string name="legacy_subscriptions">Tampilan langganan lawas</string>
     <string name="device_info">Info Perangkat</string>
     <string name="clear_customInstances">Hapus yang telah ditambahkan</string>
@@ -160,7 +158,6 @@
     <string name="reset_watch_positions">Atur ulang</string>
     <string name="playingOnBackground">Memainkan di latar belakang…</string>
     <string name="caption_settings">Takarir</string>
-    <string name="best_quality">Terbaik</string>
     <string name="worst_quality">Terburuk</string>
     <string name="network_wifi">Hanya pada Wi-Fi</string>
     <string name="translate">Terjemahan</string>
@@ -265,7 +262,6 @@
     <string name="mobile_data">Data seluler</string>
     <string name="wifi">Wi-Fi</string>
     <string name="skip_segment">Lewati segmen</string>
-    <string name="sb_skip_manual">Lewati secara manual</string>
     <string name="local_subscriptions">Langganan lokal</string>
     <string name="backup_customInstances">Instansi Kustom</string>
     <string name="download_channel_name">Layanan Unduhan</string>
@@ -279,8 +275,6 @@
     <string name="playback_pitch">Nada</string>
     <string name="filename">Nama file</string>
     <string name="invalid_filename">Nama file tidak absah!</string>
-    <string name="playlists_order">Urutan daftar main</string>
-    <string name="playlistNameReversed">Nama daftar main (dibalik)</string>
     <string name="time_code">Kode waktu (detik)</string>
     <string name="added_to_playlist">Ditambahkan ke daftar putar %1$s</string>
     <string name="queue">Antrean</string>
@@ -299,7 +293,6 @@
     <string name="notification_time_summary">Batas rentang waktu untuk notifikasi saluran ditampilkan</string>
     <string name="navbar_order">Urutan</string>
     <string name="layout">Tata letak</string>
-    <string name="alternative_player_layout">Tata letak pemutar alternatif</string>
     <string name="audio_track">Trek audio</string>
     <string name="hls_instead_of_dash">Gunakan HLS</string>
     <string name="auto_quality">Otomatis</string>
@@ -319,7 +312,6 @@
     <string name="swipe_controls_summary">Gunakan gestur usap untuk mengatur kecerahan dan volume</string>
     <string name="defaults">Bawaan</string>
     <string name="brightness">Kecerahan</string>
-    <string name="pop_up">Jendela</string>
     <string name="no_comments_available">Video ini tidak memiliki komentar.</string>
     <string name="comments_disabled">Komentar dinonaktifkan oleh pengunggah.</string>
     <string name="captions_size">Ukuran takarir</string>
@@ -342,10 +334,8 @@
     <string name="nothing_selected">Tidak ada yang dipilih!</string>
     <string name="color_violet">Ungu Serbaguna</string>
     <string name="failed_fetching_instances">Tidak bisa mendapatkan instansi tersedia.</string>
-    <string name="hide_watched_from_feed_summary">Jangan tampilkan video yang ditonton lebih dari 90% dalam tab langganan</string>
     <string name="hide_watched_from_feed">Sembunyikan video yang telah ditonton dari umpan</string>
     <string name="playlistUrl">URL Daftar Putar</string>
-    <string name="pause_on_quit">Jeda ketika keluar</string>
     <string name="shuffle">Acak</string>
     <string name="add_to_bookmarks">Tambahkan ke markah</string>
     <string name="remove_bookmark">Hapus markah</string>
@@ -354,7 +344,6 @@
     <string name="pause">Jeda</string>
     <string name="alternative_pip_controls">Kontrol gambar dalam gambar alternatif</string>
     <string name="alternative_pip_controls_summary">Hanya tampilkan audio dan kontrol lewati dalam mode gambar dalam gambar daripada maju dan mundur</string>
-    <string name="audio_player">Pemutar audio</string>
     <string name="audio_only_mode_summary">Jadikan LibreTube menjadi pemutar musik</string>
     <string name="audio_only_mode">Mode hanya audio</string>
     <string name="no_subtitle">Tidak ada takarir</string>
@@ -398,7 +387,6 @@
     <string name="channel_groups">Grup saluran</string>
     <string name="new_group">Baru</string>
     <string name="group_name">Nama grup</string>
-    <string name="edit_group">Sunting grup</string>
     <string name="play_automatically">Putar secara otomatis</string>
     <string name="play_automatically_summary">Mulai memutar video secara otomatis ketika memilih</string>
     <string name="fullscreen_gestures">Gestur masuk/keluar layar penuh</string>
@@ -441,8 +429,6 @@
     <string name="visible">Tampilkan dalam bilah seek</string>
     <string name="color">Warna</string>
     <string name="sb_custom_colors">Warna segmen kustom</string>
-    <string name="enter_hex_value">Masukkan Nilai Hex Warna</string>
-    <string name="jumped_to_highlight">Dilompati ke Sorotan Video</string>
     <string name="category_highlight">Tampilkan sorotan video</string>
     <string name="category_highlight_summary">Dapat berupa judul yang ditampilkan, gambar kecil atau bagian video yang paling menarik. Anda dapat melompati ke bagiannya dengan mengetuk pada bagian bab</string>
     <string name="stop">Berhenti</string>

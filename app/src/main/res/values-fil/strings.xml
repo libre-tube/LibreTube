@@ -74,7 +74,6 @@
     <string name="instance_api_url">URL ng instance API</string>
     <string name="customInstance_summary">Magdagdag…</string>
     <string name="playOnBackground">Mag-play sa background</string>
-    <string name="jumped_to_highlight">Tumalon sa Highlight ng Video</string>
     <string name="enabled">Nakabukas</string>
     <string name="color_accent">Mga accent</string>
     <string name="update_available">Available na ang bersyon %1$s</string>

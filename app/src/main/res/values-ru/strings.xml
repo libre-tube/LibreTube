@@ -23,7 +23,6 @@
     <string name="login_register">Войти/зарегистрироваться</string>
     <string name="importsuccess">Импортированы</string>
     <string name="cannotDownload">Невозможно скачать эту трансляцию.</string>
-    <string name="dlisinprogress">Пожалуйста, дождитесь завершения всех текущих загрузок.</string>
     <string name="downloadfailed">Скачивание не удалось.</string>
     <string name="import_from_yt">Импортировать подписки</string>
     <string name="app_theme">Тема</string>
@@ -228,7 +227,6 @@
     <string name="share_with_time">Поделиться с тайм-кодом</string>
     <string name="playingOnBackground">Воспроизведение в фоновом режиме…</string>
     <string name="playerAudioFormat">Аудио формат для проигрывателя</string>
-    <string name="best_quality">Лучшее</string>
     <string name="worst_quality">Низкое</string>
     <string name="export_subscriptions">Экспортировать подписки</string>
     <string name="skip_buttons">Кнопки перехода</string>
@@ -259,11 +257,9 @@
     <string name="push_channel_description">Показывать уведомления о появлении новых трансляций.</string>
     <string name="new_videos_badge_summary">Показывать значок с количеством, когда есть новые видео</string>
     <string name="download_channel_name">Служба загрузки</string>
-    <string name="sb_skip_manual">Ручной пропуск</string>
     <string name="skip_segment">Пропустить отрывок</string>
     <string name="download_channel_description">Показывать уведомление при загрузке медиа.</string>
     <string name="push_channel_name">Агент уведомлений</string>
-    <string name="break_reminder_time">Минут до напоминания</string>
     <string name="legacy_subscriptions">Старый вид отображения подписок</string>
     <string name="audio_video_summary">Качество и формат</string>
     <string name="delete">Удалить из загрузок</string>
@@ -279,9 +275,7 @@
     <string name="playback_pitch">Скорость</string>
     <string name="filename">Имя файла</string>
     <string name="invalid_filename">Неверное имя файла!</string>
-    <string name="playlists_order">Порядок плейлистов</string>
     <string name="added_to_playlist">Добавлено в плейлист %1$s</string>
-    <string name="playlistNameReversed">Название плейлиста (обратное)</string>
     <string name="time_code">Временной код (секунды)</string>
     <string name="queue">Очередь</string>
     <string name="livestreams">Прямые трансляции</string>
@@ -299,7 +293,6 @@
     <string name="notification_time_summary">Ограничение времени, в которое будут показаны уведомления о трансляцих</string>
     <string name="navbar_order">Порядок навигации</string>
     <string name="layout">Раскладка</string>
-    <string name="alternative_player_layout">Альтернативная раскладка проигрывателя</string>
     <string name="audio_track">Звуковая дорожка</string>
     <string name="hls_instead_of_dash">Использовать HLS</string>
     <string name="hls_instead_of_dash_summary">Использовать HLS вместо DASH (будет медленнее, не рекомендуется)</string>
@@ -326,7 +319,6 @@
     <string name="backup_restore_summary">Импорт и экспорт подписок, плейлистов, …</string>
     <string name="pinch_control">Управление щипком</string>
     <string name="pinch_control_summary">Использовать жест щипка для приближения/отдаления</string>
-    <string name="pop_up">В окне</string>
     <string name="comments_disabled">Комментарии отключены загружающим.</string>
     <string name="username_email">Продолжить с адресом электронной почты, который не рекомендуется\?</string>
     <string name="proceed">Продолжить</string>
@@ -343,9 +335,7 @@
     <string name="nothing_selected">Ничего не выбрано!</string>
     <string name="failed_fetching_instances">Не удалось получить доступные серверы.</string>
     <string name="hide_watched_from_feed">Скрывать уже просмотренные видео</string>
-    <string name="hide_watched_from_feed_summary">Не показывать видео с прогрессом просмотра более 90% во вкладке подписок</string>
     <string name="playlistUrl">URL плейлиста</string>
-    <string name="pause_on_quit">Пауза при выходе</string>
     <string name="shuffle">Перемешать</string>
     <string name="rewind">Отмотать назад</string>
     <string name="forward">Отмотать вперед</string>
@@ -354,7 +344,6 @@
     <string name="pause">Пауза</string>
     <string name="add_to_bookmarks">Добавить в закладки</string>
     <string name="remove_bookmark">Удалить закладку</string>
-    <string name="audio_player">Аудиопроигрыватель</string>
     <string name="no_subtitle">Без субтитров</string>
     <string name="download_paused">Загрузка приостановлена</string>
     <string name="download_completed">Загрузка завершена</string>
@@ -404,7 +393,6 @@
     <string name="new_group">Новая</string>
     <string name="group_name">Название группы</string>
     <string name="channel_groups">Группы каналов</string>
-    <string name="edit_group">Изменить группу</string>
     <string name="play_automatically">Проигрывать автоматически</string>
     <string name="play_automatically_summary">Начинать воспроизведение видео автоматически при выборе</string>
     <string name="fullscreen_gestures">Жесты входа/выхода из полноэкранного режима</string>
@@ -449,10 +437,8 @@
     <string name="visible">Показать в строке поиска</string>
     <string name="color">Цвет</string>
     <string name="invalid_color">Введено неверное значение цвета!</string>
-    <string name="enter_hex_value">Введите шестнадцатеричное значение цвета</string>
     <string name="sb_custom_colors">Цвета сегментов</string>
     <string name="chapters_videoHighlight">Ключевые моменты видео</string>
-    <string name="jumped_to_highlight">Переход к основному моменту в видео</string>
     <string name="category_highlight">Выделить основные моменты</string>
     <string name="category_highlight_summary">Это может быть анонсированный заголовок, миниатюра или самая интересная часть видео. Вы можете перейти к нему, нажав на него в блоке разделов</string>
     <string name="stop">Остановить</string>
@@ -541,8 +527,6 @@
     <string name="rich_caption_rendering">Продвинутые субтитры</string>
     <string name="rich_caption_rendering_summary">Отрисовывать субтитры веб-движком для поддержки расширенных возможностей и настроек</string>
     <string name="copy_tooltip">Копировать</string>
-    <string name="import_groups">Импортировать группы каналов</string>
-    <string name="export_groups">Экспортировать группы каналов</string>
     <string name="change_instance">Сменить сервер</string>
     <string name="suggest_change_instance">Загрузка занимает дольше нормального. Возможно, стоит сменить сервер</string>
     <string name="change">Сменить</string>

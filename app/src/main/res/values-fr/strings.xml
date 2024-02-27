@@ -25,7 +25,6 @@
     <string name="already_logged_in">Vous êtes déjà connecté(e), vous pouvez vous déconnecter.</string>
     <string name="region">Région</string>
     <string name="login_register">Se connecter/s\'inscrire</string>
-    <string name="dlisinprogress">Veuillez attendre la fin de tous les téléchargements en cours.</string>
     <string name="import_from_yt">Importer les abonnements</string>
     <string name="server_error">Il semble y avoir un problème avec le serveur sélectionné. Essayez une autre instance.</string>
     <string name="unknown_error">Erreur réseau.</string>
@@ -205,7 +204,6 @@
     <string name="general_summary">Langue et région</string>
     <string name="general">Général</string>
     <string name="playerAudioQuality">Qualité audio</string>
-    <string name="best_quality">Meilleure</string>
     <string name="worst_quality">Plus mauvaise</string>
     <string name="playingOnBackground">Lecture en arrière-plan…</string>
     <string name="caption_settings">Légendes</string>
@@ -254,7 +252,6 @@
     <string name="maximum_image_cache">Taille maximale du cache d\'images</string>
     <string name="open_copied">Ouvrir</string>
     <string name="copied_to_clipboard">Copié dans le presse-papier</string>
-    <string name="break_reminder_time">Minutes avant d\'être rappelé</string>
     <string name="legacy_subscriptions">Ancienne vue des abonnements</string>
     <string name="device_info">Informations de l\'appareil</string>
     <string name="audio_video_summary">Qualité et format</string>
@@ -265,7 +262,6 @@
     <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">Données mobiles</string>
     <string name="skip_segment">Sauter le segment</string>
-    <string name="sb_skip_manual">Passer manuellement</string>
     <string name="backup_customInstances">Instances personnalisées</string>
     <string name="local_subscriptions">Abonnements locaux</string>
     <string name="preferences">Préférences</string>
@@ -279,8 +275,6 @@
     <string name="playback_pitch">Hauteur</string>
     <string name="filename">Nom de fichier</string>
     <string name="invalid_filename">Nom de fichier invalide !</string>
-    <string name="playlists_order">Ordre des listes de lecture</string>
-    <string name="playlistNameReversed">Nom de la liste de lecture (inversé)</string>
     <string name="queue">File d\'attente</string>
     <string name="added_to_playlist">Ajouté à la liste de lecture %1$s</string>
     <string name="alternative_videos_layout">Mise en page alternative des vidéos</string>
@@ -297,7 +291,6 @@
     <string name="end_time">Heure de fin</string>
     <string name="notification_time">Limiter le temps de notification</string>
     <string name="notification_time_summary">Limiter la durée d\'affichage des notifications de flux</string>
-    <string name="alternative_player_layout">Mise en page alternative du lecteur</string>
     <string name="navbar_order">Ordre</string>
     <string name="layout">Mise en page</string>
     <string name="audio_track">Piste audio</string>
@@ -320,7 +313,6 @@
     <string name="auto">Auto</string>
     <string name="swipe_controls">Commandes par balayage</string>
     <string name="swipe_controls_summary">Balayer l\'écran pour ajuster la luminosité et le volume en mode plein écran</string>
-    <string name="pop_up">Pop-Up</string>
     <string name="double_tap_seek_summary">Appuyez deux fois à gauche ou à droite pour avancer ou reculer la position de la lecture</string>
     <string name="double_tap_seek">Appuyez deux fois pour rechercher</string>
     <string name="all_caught_up_summary">Vous avez vu toutes les nouvelles vidéos</string>
@@ -344,9 +336,7 @@
     <string name="failed_fetching_instances">Impossible de récupérer les instances disponibles.</string>
     <string name="remove_bookmark">Retirer le marque-page</string>
     <string name="hide_watched_from_feed">Masquer les vidéos déjà regardées</string>
-    <string name="hide_watched_from_feed_summary">Ne pas afficher les vidéos regardées à plus de 90 % dans l\'onglet des abonnements</string>
     <string name="playlistUrl">URL de la liste de lecture</string>
-    <string name="pause_on_quit">Mettre en pause en quittant</string>
     <string name="shuffle">Aléatoire</string>
     <string name="add_to_bookmarks">Ajouter aux marque-pages</string>
     <string name="rewind">Rembobiner</string>
@@ -354,7 +344,6 @@
     <string name="pause">Pause</string>
     <string name="alternative_pip_controls">Commandes d\'image dans l\'image alternatives</string>
     <string name="alternative_pip_controls_summary">Afficher uniquement l\'audio et les commandes de saut dans le mode \"Image dans l\'image\" au lieu de l\'avance et du retour en arrière</string>
-    <string name="audio_player">Lecteur audio</string>
     <string name="faq">FAQ</string>
     <string name="concurrent_downloads">Nombre maximal de téléchargements simultanés</string>
     <string name="skip_silence">Passer les silences</string>
@@ -412,7 +401,6 @@
     <string name="channel_groups">Groupes de chaines</string>
     <string name="new_group">Nouveau</string>
     <string name="group_name">Nom du groupe</string>
-    <string name="edit_group">Modifier le groupe</string>
     <string name="duration_reversed">Durée (inversée)</string>
     <string name="duration">Durée</string>
     <string name="alphabetic">Alphabétique</string>
@@ -443,7 +431,6 @@
     <string name="default_or_unknown_audio_track">par défaut ou inconnu</string>
     <string name="resolution_limited">limité</string>
     <string name="tooltip_close">Fermer</string>
-    <string name="enter_hex_value">Saisir la couleur en Hex</string>
     <string name="unknown_or_no_audio">inconnu ou pas d\'audio</string>
     <string name="auto_generated">généré automatiquement</string>
     <string name="tooltip_minimize">Minimiser</string>
@@ -455,7 +442,6 @@
     <string name="tooltip_options">Options</string>
     <string name="tooltip_locked">Verrouiller le lecteur</string>
     <string name="remove_watched_videos">Supprimer les vidéos visionnées</string>
-    <string name="jumped_to_highlight">Passé au moment fort de la vidéo</string>
     <string name="tooltip_play">Lire</string>
     <string name="category_highlight">Afficher le moment fort de la vidéo</string>
     <string name="dubbed_audio_track">doublée</string>
@@ -530,7 +516,6 @@
     <string name="disable_sleep_timer">Désactiver la minuterie de sommeil</string>
     <string name="watched">Visionné</string>
     <string name="start_sleep_timer">Démarrer la minuterie de sommeil</string>
-    <string name="bottom_reached">Le bas est atteint !</string>
     <string name="finished">Terminé</string>
     <string name="no_segments_found">Il n\'y a pas encore de segments pour cette vidéo.</string>
     <string name="add_to_group">Ajouter au groupe</string>
@@ -539,8 +524,6 @@
     <string name="uptime">%.2f%% d\'utilisation</string>
     <string name="grid_landscape">Colonnes de la grille (paysage)</string>
     <string name="copy_tooltip">Copier</string>
-    <string name="export_groups">Exporter des groupes de chaînes</string>
-    <string name="import_groups">Importer des groupes de chaînes</string>
     <string name="suggest_change_instance">Le chargement prend plus de temps que d\'habitude. Envisagez de changer d\'instance</string>
     <string name="change_instance">Changer d\'instance</string>
     <string name="change">Changer</string>

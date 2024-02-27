@@ -63,25 +63,6 @@
 
     </style>
 
-    <style name="PlayerActionsText">
-
-        <item name="android:autoSizeTextType" tools:targetApi="o">uniform</item>
-        <item name="android:autoSizeMinTextSize" tools:targetApi="o">10sp</item>
-        <item name="android:autoSizeMaxTextSize" tools:targetApi="p">14sp</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:gravity">center</item>
-        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_marginStart">3dp</item>
-        <item name="android:layout_marginEnd">3dp</item>
-        <item name="drawableTopDimen">24dp</item>
-        <item name="android:drawablePadding">3dp</item>
-
-    </style>
-
     <style name="PlayerActionsButton" parent="@style/Widget.Material3.Button.ElevatedButton">
 
         <item name="android:layout_width">wrap_content</item>

@@ -39,7 +39,6 @@
     <string name="password">Palavra-passe</string>
     <string name="registered">Registo efetuado. Agora já pode subscrever canais.</string>
     <string name="login_register">Entrar/registar</string>
-    <string name="dlisinprogress">Aguarde até todas as descargas estarem concluídas.</string>
     <string name="import_from_yt">Importar subscrições</string>
     <string name="empty">Não indicou o nome de utilizador ou a palavra-passe.</string>
     <string name="fail">Falha :(</string>
@@ -222,7 +221,6 @@
     <string name="caption_settings">Legendas</string>
     <string name="playerAudioFormat">Formato padrão do áudio</string>
     <string name="playerAudioQuality">Qualidade de som</string>
-    <string name="best_quality">Melhor</string>
     <string name="worst_quality">Pior</string>
     <string name="share_with_time">Partilhar com posição temporal</string>
     <string name="export_subscriptions">Exportar subscrições</string>
@@ -253,14 +251,12 @@
     <string name="device_info">Informação do dispositivo</string>
     <string name="audio_video_summary">Qualidade e formato</string>
     <string name="delete">Eliminar das descargas</string>
-    <string name="break_reminder_time">Minutos antes de ser lembrado</string>
     <string name="new_videos_badge">Indicador para novos vídeos</string>
     <string name="new_videos_badge_summary">Mostrar indicador com o número de novos vídeos, se existentes</string>
     <string name="download_channel_description">Mostrar notificação ao descarregar dados.</string>
     <string name="push_channel_name">Serviço de notificações</string>
     <string name="push_channel_description">Mostrar notificação se existirem novos fluxos multimédia.</string>
     <string name="skip_segment">Ignorar segmento</string>
-    <string name="sb_skip_manual">Ignorar manualmente</string>
     <string name="download_channel_name">Serviço de descargas</string>
     <string name="local_subscriptions">Subscrições locais</string>
     <string name="preferences">Preferências</string>
@@ -278,8 +274,6 @@
     <string name="category_filler">Tangente/Piadas</string>
     <string name="filename">Nome do ficheiro</string>
     <string name="invalid_filename">Nome de ficheiro inválido!</string>
-    <string name="playlists_order">Ordem das listas de reprodução</string>
-    <string name="playlistNameReversed">Nome da lista de reprodução (invertido)</string>
     <string name="category_preview_summary">Para segmentos detalhando conteúdo futuro sem informações adicionais. Se incluir clipes que aparecem apenas aqui, é muito provável que esta seja a categoria errada</string>
     <string name="livestreams">Emissões em direto</string>
     <string name="alternative_videos_layout">Esquema alternativo de vídeos</string>
@@ -300,7 +294,6 @@
     <string name="notification_time_summary">Limitar o intervalo de tempo em que as notificações são mostradas</string>
     <string name="navbar_order">Ordem</string>
     <string name="layout">Esquema</string>
-    <string name="alternative_player_layout">Esquema alternativo de reprodução</string>
     <string name="audio_track">Faixa de áudio</string>
     <string name="hls_instead_of_dash">Usar HLS</string>
     <string name="hls_instead_of_dash_summary">Usar HLS em vez de DASH (mais lento, não recomendado)</string>
@@ -318,7 +311,6 @@
     <string name="auto">Automático</string>
     <string name="swipe_controls">Controlo de deslize</string>
     <string name="defaults">Padrão</string>
-    <string name="pop_up">Popup</string>
     <string name="double_tap_seek">Dois toques para procurar</string>
     <string name="all_caught_up_summary">Já viu todos os novos vídeos</string>
     <string name="pinch_control">Apertar</string>
@@ -342,10 +334,8 @@
     <string name="nothing_selected">Nada selecionado!</string>
     <string name="color_violet">Violeta</string>
     <string name="failed_fetching_instances">Não foi possível obter as instâncias disponíveis.</string>
-    <string name="hide_watched_from_feed_summary">No separador Subscrições, não mostrar vídeos que foram vistos mais do que 90%</string>
     <string name="hide_watched_from_feed">Ocultar vídeos já vistos</string>
     <string name="playlistUrl">URL da lista de reprodução</string>
-    <string name="pause_on_quit">Pausa ao sair</string>
     <string name="shuffle">Baralhar</string>
     <string name="add_to_bookmarks">Adicionar aos marcadores</string>
     <string name="remove_bookmark">Remover marcador</string>
@@ -354,7 +344,6 @@
     <string name="pause">Pausa</string>
     <string name="alternative_pip_controls">Controlos PiP alternativos</string>
     <string name="alternative_pip_controls_summary">Mostrar apenas áudio e ignorar controlos PiP em vez de avançar e recuar</string>
-    <string name="audio_player">Reprodutor de áudio</string>
     <string name="no_subtitle">Sem legendas</string>
     <string name="download_paused">Descarga em pausa</string>
     <string name="audio_only_mode">Apenas áudio</string>
@@ -402,7 +391,6 @@
     <string name="channel_groups">Grupos de canais</string>
     <string name="new_group">Novo</string>
     <string name="group_name">Nome do grupo</string>
-    <string name="edit_group">Editar grupo</string>
     <string name="play_automatically">Reproduzir automaticamente</string>
     <string name="play_automatically_summary">Iniciar reprodução dos vídeos ao selecionar</string>
     <string name="fullscreen_gestures">Gestos para ativar/desativar ecrã completo</string>
@@ -443,13 +431,11 @@
     <string name="manual">Manual</string>
     <string name="automatic">Automático</string>
     <string name="invalid_color">Indicou um código de cor inválido!</string>
-    <string name="enter_hex_value">Indique o valor Hex da cor</string>
     <string name="color">Cor</string>
     <string name="visible">Mostrar na barra de progresso</string>
     <string name="stop">Parar</string>
     <string name="sb_custom_colors">Cores de segmento personalizadas</string>
     <string name="chapters_videoHighlight">Vídeo em destaque</string>
-    <string name="jumped_to_highlight">Saltou para o vídeo em destaque</string>
     <string name="category_highlight">Mostrar vídeo de destaque</string>
     <string name="category_highlight_summary">Pode ser o título anunciado, a miniatura ou a parte mais interessante do vídeo. Pode saltar para essa parte tocando nela na secção de capítulos</string>
     <string name="sb_custom_colors_summary">Alterna segmentos de cores personalizadas para segmentos SponsorBlock</string>
@@ -530,7 +516,6 @@
     <string name="disable_sleep_timer">Desativar temporizador</string>
     <string name="watched">Visto</string>
     <string name="start_sleep_timer">Iniciar temporizador</string>
-    <string name="bottom_reached">Chegou ao fim!</string>
     <string name="finished">Terminado</string>
     <string name="no_segments_found">Ainda não existem segmentos para este vídeo.</string>
     <string name="add_to_group">Adicionar ao grupo</string>
@@ -539,8 +524,6 @@
     <string name="rich_caption_rendering">Legendas melhoradas</string>
     <string name="rich_caption_rendering_summary">Processar legendas para um experiência melhorada e personalizada</string>
     <string name="copy_tooltip">Copiar</string>
-    <string name="import_groups">Importar grupos de canais</string>
-    <string name="export_groups">Exportar grupos de canais</string>
     <string name="change_instance">Alterar instância</string>
     <string name="suggest_change_instance">O carregamento está a demorar mais do que o habitual. Considere alterar a instância</string>
     <string name="change">Alterar</string>

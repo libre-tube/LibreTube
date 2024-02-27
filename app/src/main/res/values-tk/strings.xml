@@ -133,7 +133,6 @@
     <string name="category_sponsor">Hemaýatkär</string>
     <string name="category_sponsor_summary">Tölegli mahabat, tölegli salgylanmalar we göni mahabatlar. Özüňi tanatmak ýa-da sebäplere, döredijilere, web sahypalaryna we önümlere mugt hakyky tanatmak üçin däl</string>
     <string name="category_selfpromo">Tölenmedik/Özüňi tanatmak</string>
-    <string name="dlisinprogress">Başga bir göçürip alma dowam edýär, gutarýança garaşmagyňyzy haýyş edýäris.</string>
     <string name="server_error">Serwerde näsazlyk bar. Başga bir salgylanmany barlap görjekmi\?</string>
     <string name="emptyList">Bu ýerde hiç zat ýok.</string>
     <string name="location">Ýerleşýän ýeri</string>
@@ -166,7 +165,6 @@
     <string name="network_metered">Ölçegli</string>
     <string name="copied">Göçürildi</string>
     <string name="error_occurred">Ýalňyşlyk</string>
-    <string name="best_quality">Iň gowusy</string>
     <string name="translate">Terjime</string>
     <string name="worst_quality">Iň erbet</string>
     <string name="no_search_result">Netije ýok.</string>

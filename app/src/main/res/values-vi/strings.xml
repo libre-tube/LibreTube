@@ -85,7 +85,6 @@
     <string name="advanced_summary">Tải xuống và đặt lại</string>
     <string name="live">Trực tiếp</string>
     <string name="defaultIcon">Mặc định</string>
-    <string name="dlisinprogress">Hãy đợi tất cả tiến trình tải xuống hiện tại được hoàn thành.</string>
     <string name="notgmail">Điều này dành cho một tài khoản Piped</string>
     <string name="playlistCreated">Danh sách phát đã được tạo.</string>
     <string name="playlistName">Tên danh sách phát</string>
@@ -220,14 +219,12 @@
     <string name="caption_settings">Phụ đề</string>
     <string name="playerAudioFormat">Tự động định dạng cho trình phát</string>
     <string name="playerAudioQuality">Chất lượng âm thanh</string>
-    <string name="best_quality">Tốt nhất</string>
     <string name="worst_quality">Dở nhất</string>
     <string name="new_videos_badge">Chỉ báo cho video mới</string>
     <string name="new_videos_badge_summary">Hiển thị huy hiệu với số lượng video mới nếu có</string>
     <string name="wifi">Wi-Fi</string>
     <string name="network_metered">Tính cước</string>
     <string name="skip_segment">Bỏ qua phân đoạn</string>
-    <string name="sb_skip_manual">Bỏ qua thủ công</string>
     <string name="download_channel_description">Hiển thị thông báo khi tải xuống phương tiện.</string>
     <string name="push_channel_description">Hiển thị thông báo khi có luồng phát mới.</string>
     <string name="push_channel_name">Nguồn cấp thông báo</string>
@@ -237,7 +234,6 @@
     <string name="download_channel_name">Dịch vụ tải về</string>
     <string name="no_subtitles_available">Không có phụ đề</string>
     <string name="repeat_mode_current">Hiện tại</string>
-    <string name="break_reminder_time">Vài phút trước khi được nhắc nhở</string>
     <string name="legacy_subscriptions">Chế độ xem trang đăng ký cổ điển</string>
     <string name="device_info">Thông tin thiết bị</string>
     <string name="translate">Bản dịch</string>
@@ -292,12 +288,9 @@
     <string name="time_code">Mã thời gian (số giây)</string>
     <string name="navbar_order">Thứ tự</string>
     <string name="layout">Bố cục</string>
-    <string name="alternative_player_layout">Bố cục thay thế cho trình phát</string>
     <string name="added_to_playlist">Đã thêm vào danh sách phát %1$s</string>
     <string name="filename">Tên tệp</string>
     <string name="invalid_filename">Tên tệp không hợp lệ!</string>
-    <string name="playlists_order">Thứ tự sắp xếp danh sách phát</string>
-    <string name="playlistNameReversed">Tên danh sách phát (đảo ngược)</string>
     <string name="audio_track">Track âm thanh</string>
     <string name="livestreams">Trực tiếp</string>
     <string name="alternative_videos_layout">Bố cục thay thế cho videos</string>
@@ -334,7 +327,6 @@
     <string name="resume">Tiếp tục</string>
     <string name="unsupported_file_format">Định dạng file không hỗ trợ: %1$s</string>
     <string name="pinch_control_summary">Sử dụng cử chỉ chụm để phóng to/thu nhỏ</string>
-    <string name="pop_up">Pop-Up</string>
     <string name="comments_disabled">Phần bình luận đã được tắt bởi người đăng.</string>
     <string name="no_comments_available">Video này chưa có bình luận nào hết.</string>
     <string name="theme_monochrome">Đơn sắc tối giản</string>
@@ -349,7 +341,6 @@
     <string name="play_automatically_summary">Bắt đầu phát video tự động khi chọn</string>
     <string name="invalid_color">Đã nhập giá trị màu không hợp lệ!</string>
     <string name="color">Màu sắc</string>
-    <string name="enter_hex_value">Nhập giá trị màu Hex</string>
     <string name="fallback_piped_proxy">Dự phòng cho proxy Piped</string>
     <string name="fallback_piped_proxy_summary">Tải video qua proxy nếu kết nối trực tiếp với YouTube không hoạt động đối với video hiện tại (tăng thời gian tải ban đầu). Nếu bị tắt, nội dung âm nhạc trên YouTube có thể sẽ không phát do các hạn chế của YouTube</string>
     <string name="choose_instance_long">Vui lòng chọn một phiên bản Piped để sử dụng từ bên dưới. Phiên bản Piped sẽ đóng vai trò trung gian giữa bạn và YouTube. Các phiên bản này được đặt tại các vị trí thực tế khác nhau - được biểu thị bằng (các) cờ quốc gia của chúng. Các trường hợp gần bạn hơn về mặt vật lý có khả năng nhanh hơn các trường hợp không ở gần bạn. Bạn có thể thay đổi phiên bản bạn sử dụng trong phần cài đặt bất kỳ lúc nào.</string>
@@ -366,11 +357,9 @@
     <string name="sleep_timer">Hẹn giờ ngủ</string>
     <string name="autoplay_countdown">Đếm ngược tự động phát</string>
     <string name="autoplay_countdown_summary">Hiển thị đếm ngược 5 giây trước khi tự động phát video tiếp theo</string>
-    <string name="jumped_to_highlight">Đã chuyển đến Video nổi bật</string>
     <string name="category_highlight_summary">Có thể là tiêu đề được quảng cáo, hình thu nhỏ hoặc phần thú vị nhất của video. Bạn có thể bỏ qua nó bằng cách nhấn vào nó trong phần chương</string>
     <string name="category_highlight">Hiển thị video nổi bật</string>
     <string name="sb_custom_colors_summary">Bật/tắt các phân đoạn màu tùy chỉnh cho các phân đoạn Khóa Nhà tài trợ</string>
-    <string name="pause_on_quit">Tạm dừng khi thoát</string>
     <string name="audio_only_mode">Chế độ chỉ âm thanh</string>
     <string name="play_automatically">Phát tự động</string>
     <string name="continue_watching">Tiếp tục xem</string>
@@ -424,8 +413,6 @@
     <plurals name="channel_new_streams">
         <item quantity="other">%d luồng mới</item>
     </plurals>
-    <string name="audio_player">Máy nghe nhạc</string>
-    <string name="hide_watched_from_feed_summary">Không hiển thị những video đã xem hơn 90% trong thẻ đăng ký</string>
     <string name="nothing_selected">Không chọn gì!</string>
     <string name="add_to_bookmarks">Thêm vào dấu trang</string>
     <string name="remove_bookmark">Xóa dấu trang</string>
@@ -434,7 +421,6 @@
     <string name="channel_groups">Nhóm kênh</string>
     <string name="new_group">Mới</string>
     <string name="group_name">Tên nhóm</string>
-    <string name="edit_group">Chỉnh sửa nhóm</string>
     <string name="go_to_video">Đi đến video</string>
     <string name="manual">Thủ công</string>
     <string name="unknown_audio_language">Ngôn ngữ âm thanh không xác định</string>
@@ -542,8 +528,6 @@
     <string name="comments_count">Bình luận (%1$s)</string>
     <string name="rich_caption_rendering_summary">Hiển thị phụ đề web đầy đủ tính năng</string>
     <string name="copy_tooltip">Sao chép</string>
-    <string name="import_groups">Nhập nhóm kênh</string>
-    <string name="export_groups">Xuất khẩu nhóm kênh</string>
     <string name="download_playlist">Tải xuống danh sách phát</string>
     <string name="audio_language">Ngôn ngữ âm thanh</string>
     <string name="default_language">Mặc định</string>

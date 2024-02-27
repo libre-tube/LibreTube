@@ -38,7 +38,6 @@
     <string name="playlistName">اسم قائمة التشغيل</string>
     <string name="success">انتهى.</string>
     <string name="fail">فشل ذريع :(</string>
-    <string name="dlisinprogress">الرجاء الانتظار حتى تنتهي كافة التنزيلات الحالية.</string>
     <string name="unknown_error">خطأ في الشبكة.</string>
     <string name="server_error">يبدو أن هناك مشكلة في هذه نُسْخَة المحددة. جرب نُسْخَة أخرى.</string>
     <string name="error">حدث خطأ ما.</string>
@@ -208,7 +207,6 @@
     <string name="caption_settings">التسميات التوضيحية</string>
     <string name="playerAudioFormat">تنسيق الصوت للمشغل</string>
     <string name="playerAudioQuality">جودة الصوت</string>
-    <string name="best_quality">الأفضل</string>
     <string name="worst_quality">أسوأ</string>
     <string name="default_subtitle_language">لغة الترجمة</string>
     <string name="notifications">الإشعارات</string>
@@ -254,7 +252,6 @@
     <string name="copied_to_clipboard">تم نسخها إلى الحافظة</string>
     <string name="maximum_image_cache">الحد الأقصى لحجم ذاكرة التخزين المؤقت للصور</string>
     <string name="open_copied">فتح</string>
-    <string name="break_reminder_time">دقائق قبل التذكير</string>
     <string name="legacy_subscriptions">طريقة عرض الاشتراكات القديمة</string>
     <string name="device_info">معلومات الجهاز</string>
     <string name="audio_video_summary">الجودة والشكل</string>
@@ -265,7 +262,6 @@
     <string name="new_videos_badge">مؤشر لمقاطع الفيديو الجديدة</string>
     <string name="new_videos_badge_summary">اعرض شارة تحتوي على عدد مقاطع الفيديو الجديدة إذا كان هناك بعضها</string>
     <string name="skip_segment">تخطي الجزء</string>
-    <string name="sb_skip_manual">تخطي يدويًا</string>
     <string name="download_channel_name">نزّل الخدمة</string>
     <string name="download_channel_description">يعرض إشعارًا عند تنزيل الوسائط.</string>
     <string name="local_subscriptions">الاشتراكات المحلية</string>
@@ -279,8 +275,6 @@
     <string name="playback_pitch">الحدة</string>
     <string name="filename">اسم الملف</string>
     <string name="invalid_filename">اسم الملف غير صالح!</string>
-    <string name="playlists_order">ترتيب قوائم التشغيل</string>
-    <string name="playlistNameReversed">اسم قائمة التشغيل (معكوس)</string>
     <string name="time_code">رمز الوقت (بالثواني)</string>
     <string name="added_to_playlist">تمت الإضافة إلى قائمة التشغيل %1$s</string>
     <string name="queue">الانتظار</string>
@@ -299,7 +293,6 @@
     <string name="notification_time">تقييد وقت الإشعار</string>
     <string name="navbar_order">ترتيب</string>
     <string name="layout">التَخطِيط</string>
-    <string name="alternative_player_layout">تخطيط المشغل البديل</string>
     <string name="audio_track">مسار صوتي</string>
     <string name="hls_instead_of_dash">استخدام HLS</string>
     <string name="hls_instead_of_dash_summary">استخدم HLS بدلا من DASH (سيكون أبطأ ، غير مستحسن)</string>
@@ -318,7 +311,6 @@
     <string name="auto">تلقائي</string>
     <string name="swipe_controls">عناصر التحكم في السحب</string>
     <string name="defaults">الإفتراضي</string>
-    <string name="pop_up">نافذة منبثقة</string>
     <string name="swipe_controls_summary">اسحب لضبط السطوع ومستوى الصوت أثناء وجودك في وضع ملء الشاشة</string>
     <string name="no_comments_available">هذا الفيديو ليس له تعليقات.</string>
     <string name="comments_disabled">التعليقات معطلة من قبل القائم بالتحميل.</string>
@@ -342,10 +334,8 @@
     <string name="nothing_selected">لا شيء محدد!</string>
     <string name="color_violet">البنفسج</string>
     <string name="failed_fetching_instances">تعذر جلب النُسَخ المتاحة.</string>
-    <string name="hide_watched_from_feed_summary">لا تعرض الفيديوهات التي تتم مشاهدتها بنسبة تزيد عن 90٪ في علامة التبويب \"الاشتراكات\"</string>
     <string name="hide_watched_from_feed">إخفاء مقاطع الفيديو التي تمت مشاهدتها</string>
     <string name="playlistUrl">عنوان URL لقائمة التشغيل</string>
-    <string name="pause_on_quit">توقف عند الخروج</string>
     <string name="shuffle">خلط</string>
     <string name="remove_bookmark">إزالة الإشارة المرجعية</string>
     <string name="add_to_bookmarks">إضافة إلى الإشارات المرجعية</string>
@@ -354,7 +344,6 @@
     <string name="forward">التقديم</string>
     <string name="alternative_pip_controls">ضوابط \"صورة داخل صورة\" البديلة</string>
     <string name="alternative_pip_controls_summary">إظهار الصوت فقط وتخطي ضوابط \"صورة داخل صورة\" بدلاً من التقديم والترجيع</string>
-    <string name="audio_player">مشغل الصوت</string>
     <string name="audio_only_mode">وضع الصوت فقط</string>
     <string name="audio_only_mode_summary">حول LibreTube إلى مشغل موسيقى</string>
     <string name="no_subtitle">لا توجد ترجمة</string>
@@ -408,7 +397,6 @@
     <string name="new_group">جديد</string>
     <string name="group_name">أسم المجموعة</string>
     <string name="channel_groups">مجموعات القنوات</string>
-    <string name="edit_group">تحرير المجموعة</string>
     <string name="play_automatically">تشغيل تلقائيا</string>
     <string name="play_automatically_summary">بدء تشغيل الفيديو تلقائيا عند تحديده</string>
     <string name="fullscreen_gestures">الدخول/الخروج من إيماءات ملء الشاشة</string>
@@ -454,10 +442,8 @@
     <string name="sb_custom_colors_summary">تبديل شرائح الألوان المخصصة لشرائح كتلة الراعي</string>
     <string name="sb_custom_colors">ألوان شرائح مخصصة</string>
     <string name="invalid_color">تم إدخال قيمة لون غير صالحة!</string>
-    <string name="enter_hex_value">أدخل قيمة لون سداسي عشري</string>
     <string name="visible">عرض في شريط التمرير</string>
     <string name="color">اللون</string>
-    <string name="jumped_to_highlight">انتقل إلى اقسام الفيديو</string>
     <string name="category_highlight">إظهار تمييز الفيديو</string>
     <string name="category_highlight_summary">يمكن أن يكون العنوان المعلن عنه أو الصورة المصغرة أو الجزء الأكثر إثارة للاهتمام من الفيديو. يمكنك التخطي إليه من خلال النقر عليه في قسم الفصول</string>
     <string name="chapters_videoHighlight">ملخصات الفيديو</string>
@@ -536,7 +522,6 @@
     <string name="successfully_removed_from_playlist">تمت إزالة \"%1$s\" من قائمة التشغيل بنجاح.</string>
     <string name="watched">شاهدت</string>
     <string name="finished">انتهى</string>
-    <string name="bottom_reached">وصلت للقاع!</string>
     <string name="no_segments_found">لا توجد أجزاء لهذا الفيديو بعد.</string>
     <string name="time_in_minutes">الوقت بالدقائق</string>
     <string name="invalid_input">مدخل غير صالح</string>
@@ -548,8 +533,6 @@
     <string name="rich_caption_rendering">تقديم التسمية التوضيحية الغنية</string>
     <string name="rich_caption_rendering_summary">عرض التسميات التوضيحية على الويب للحصول على تجربة أكثر ثراءً وتخصيصًا</string>
     <string name="copy_tooltip">نسخ</string>
-    <string name="import_groups">استيراد مجموعات القنوات</string>
-    <string name="export_groups">تصدير مجموعات القنوات</string>
     <string name="change">غيّر</string>
     <string name="change_instance">غيّر النُسْخَة</string>
     <string name="suggest_change_instance">يستغرق التنزيل أكثر من المعتاد. يُرجى النظر في تغيير النُسْخَة</string>

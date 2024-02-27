@@ -18,11 +18,9 @@
     <string name="playlists">កម្រងវីដេអូ</string>
     <string name="all">ទាំងអស់</string>
     <string name="videos">វីដេអូ</string>
-    <string name="jumped_to_highlight">បានលោតទៅវីដេអូរំលេច</string>
     <string name="clear_history">ជម្រះប្រវត្តិ</string>
     <string name="enabled">បើក</string>
     <string name="search_history">ប្រវត្តិស្វែងរក</string>
-    <string name="dlisinprogress">សូមរង់ចាំ ការទាញយកបច្ចុប្បន្នទាំងអស់ឲ្យបញ្ចប់សិន។</string>
     <string name="success">ជោគជ័យ។</string>
     <string name="color_accent">សង្កត់ពណ៌</string>
     <string name="subscribers">អ្នកជាវ %1$s នាក់</string>
@@ -243,7 +241,6 @@
     <string name="deleteAccount">លុបគណនី</string>
     <string name="pauseOnScreenOff_summary">ផ្អាកការចាក់សារថ្មី ខណៈអេក្រង់រលត់បិទ</string>
     <string name="watch_positions">ចងចាំទីតាំង</string>
-    <string name="best_quality">ល្អបំផុត</string>
     <string name="fireIcon">ភ្លើងទាន់សម័យ</string>
     <string name="player_resize_mode">ម៉ូតប្ដូរទំហំ</string>
     <string name="renamePlaylist">ប្ដូរឈ្មោះបញ្ជីចាក់</string>
@@ -251,7 +248,6 @@
     <string name="copied_to_clipboard">បានចម្លងទៅក្ដារតម្រៀប</string>
     <string name="mobile_data">ទិន្នន័យចល័ត</string>
     <string name="audio_video_summary">គុណភាព និងហ្វ័រម៉ាត</string>
-    <string name="break_reminder_time">ប៉ុន្មាននាទី មុនចាប់ផ្តើមរម្លឹក</string>
     <string name="misc">ហ្គីតា</string>
     <string name="new_videos_badge">បង្ហាញប្រាប់សម្រាប់វីដេអូថ្មី</string>
     <string name="wifi">វ៉ាយហ្វាយ</string>
@@ -264,7 +260,6 @@
     <string name="legacy_subscriptions">មើលការជាវដែលមានស្រាប់</string>
     <string name="maximum_image_cache">ទំហំឃ្លាំងសម្ងាត់រូបភាពអតិបរមា</string>
     <string name="backup">បម្រុងទុក</string>
-    <string name="sb_skip_manual">រំលង ដោយដៃ</string>
     <string name="repeat_mode_all">សារឡើងវិញទាំងអស់</string>
     <string name="skip_segment">រំលង ចម្រៀក</string>
     <string name="history_size">ទំហំកំណត់ត្រាអតិបរមា</string>

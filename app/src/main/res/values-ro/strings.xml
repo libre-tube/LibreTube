@@ -21,7 +21,6 @@
     <string name="login_register">Autentificare/Înregistrare</string>
     <string name="importsuccess">Abonat</string>
     <string name="cannotDownload">Nu s-a putut descărca acest flux.</string>
-    <string name="dlisinprogress">Vă rugăm să așteptați ca toate descărcările curente să se finalizeze.</string>
     <string name="downloadfailed">Descărcare eșuată.</string>
     <string name="import_from_yt">Importați abonamente</string>
     <string name="import_from_yt_summary">Din YouTube sau NewPipe</string>
@@ -152,7 +151,6 @@
     <string name="playerAudioFormat">Format audio pentru player</string>
     <string name="playerAudioQuality">Calitate audio</string>
     <string name="general_summary">Limba și regiunea</string>
-    <string name="best_quality">Cel mai bun</string>
     <string name="notify_new_streams_summary">Afișează notificări pentru fluxuri noi de la creatorii pe care îi urmărești</string>
     <string name="most_views">Cele mai multe vizualizări</string>
     <string name="copied">Copiat</string>
@@ -165,7 +163,6 @@
     <string name="new_videos_badge_summary">Afișați o insignă cu cantitatea de videoclipuri noi, dacă există</string>
     <string name="skip_segment">Omiteți segmentul</string>
     <string name="invalid_filename">Nume invalid!</string>
-    <string name="playlists_order">Ordinea playlist-urilor</string>
     <string name="network_all">Toate</string>
     <string name="translate">Traducere</string>
     <string name="pause">Întrerupeți</string>
@@ -225,7 +222,6 @@
     <string name="pure_theme_summary">Alb pur/temă neagră</string>
     <string name="navLabelVisibility">Vizibilitatea etichetei</string>
     <string name="reset_watch_positions">Resetați</string>
-    <string name="sb_skip_manual">Omiteți manual</string>
     <string name="preferences">Preferințe</string>
     <string name="worst_quality">Cel mai slab</string>
     <string name="default_subtitle_language">Limba subtitrărilor</string>
@@ -253,7 +249,6 @@
     <string name="play_next">Redați următorul</string>
     <string name="navigation_bar">Bară de navigare</string>
     <string name="filename">Nume de fișier</string>
-    <string name="playlistNameReversed">Numele playlist-ului (inversat)</string>
     <string name="playingOnBackground">Se redă în fundal …</string>
     <string name="player_summary">Valori prestabilite și comportament</string>
     <string name="replies">Răspunsuri</string>
@@ -273,7 +268,6 @@
     <string name="never">Niciodată</string>
     <string name="require_restart_message">Reporniți aplicația pentru a utiliza noile modificări.</string>
     <string name="least_recent">Cele mai vechi</string>
-    <string name="break_reminder_time">Cu câteva minute înainte de a fi reamintit</string>
     <string name="renamePlaylist">Redenumiți playlist</string>
     <string name="repeat_mode_none">Niciunul</string>
     <string name="device_info">Informații despre dispozitiv</string>
@@ -308,7 +302,6 @@
     <string name="alternative_pip_controls">Controale suprapunere alternative</string>
     <string name="failed_fetching_instances">Nu s-au putut prelua instanțele disponibile.</string>
     <string name="hide_watched_from_feed">Ascundeți videoclipurile deja vizionate</string>
-    <string name="hide_watched_from_feed_summary">Nu afișa videoclipuri vizionate mai mult de 90% în fila Abonamente</string>
     <string name="push_channel_description">Afișați o notificare când sunt disponibile fluxuri noi.</string>
     <string name="autoplay_countdown_summary">Afișați o numărătoare inversă de 5 secunde înainte de redarea automată a următorului videoclip</string>
     <string name="playing_next">Următorul video în %1$s</string>
@@ -318,7 +311,6 @@
     <string name="time">Timp</string>
     <string name="navbar_order">Ordine</string>
     <string name="layout">Aspect</string>
-    <string name="alternative_player_layout">Aspect alternativ al playerului</string>
     <string name="audio_track">Pistă audio</string>
     <string name="app_backup">Backup aplicație</string>
     <string name="backup_restore_summary">Importați și exportați abonamente, liste de redare, …</string>
@@ -347,7 +339,6 @@
     <string name="play_latest_videos">Redați cele mai recente videoclipuri</string>
     <string name="nothing_selected">Nimic selectat!</string>
     <string name="playlistUrl">URL-ul playlist-ului</string>
-    <string name="pause_on_quit">Pauză la ieșire</string>
     <string name="shuffle">Amestecare</string>
     <string name="add_to_bookmarks">Adăugați la marcaje</string>
     <string name="forward">Înainte</string>
@@ -361,7 +352,6 @@
     <string name="custom_playback_speed_summary">Utilizați o viteză de redare diferită de cea a player-ului normal</string>
     <string name="defaultIconLight">Luminată implicită</string>
     <string name="pinch_control_summary">Utilizați gestul de ciupire pentru a mări/micșora</string>
-    <string name="pop_up">Pop-up</string>
     <string name="comments_disabled">Comentariile sunt dezactivate de către autor.</string>
     <string name="no_comments_available">Acest videoclip nu are comentarii.</string>
     <string name="bookmarks">Marcaje</string>
@@ -387,7 +377,6 @@
     <string name="import_playlists">Importați liste de redare</string>
     <string name="export_playlists">Exportați liste de redare</string>
     <string name="skip_silence">Omiteți tăcerea</string>
-    <string name="audio_player">Player audio</string>
     <string name="theme_monochrome">Monocrom minimalist</string>
     <plurals name="years_ago">
         <item quantity="one">acum %d an</item>
@@ -401,7 +390,6 @@
     <string name="auto_fullscreen_shorts">Ecran complet automat pentru videoclipuri scurte</string>
     <string name="channel_groups">Grupuri de canale</string>
     <string name="group_name">Numele grupului</string>
-    <string name="edit_group">Editați grupul</string>
     <string name="new_group">Nou</string>
     <string name="play_automatically">Redare automată</string>
     <string name="play_automatically_summary">Redați videoclipul automat când se selectează</string>
@@ -440,11 +428,9 @@
     <string name="off">Oprit</string>
     <string name="automatic">Automat</string>
     <string name="stop">Opreşte</string>
-    <string name="enter_hex_value">Introduceți valoarea hexagonală a culorii</string>
     <string name="sb_custom_colors">Culori personalizate pentru segmente</string>
     <string name="change_playlist_description">Schimbă descrierea playlistului</string>
     <string name="chapters_videoHighlight">Evidențiere video</string>
-    <string name="jumped_to_highlight">Sărit la evidențierea video</string>
     <string name="category_highlight_summary">Ar putea fi fie titlul promovat, miniatura sau partea cea mai interesantă a videoclipului. Puteți sări la el atingând-o în secțiunea capitole</string>
     <string name="category_highlight">Afișați evidențierea videoclipului</string>
     <string name="sb_custom_colors_summary">Comută segmentele de culoare personalizate pentru segmentele SponsorBlock</string>
@@ -541,8 +527,6 @@
     <string name="change">Schimbă</string>
     <string name="change_instance">Schimbă instanță</string>
     <string name="suggest_change_instance">Încărcarea durează mai mult decât de obicei. Luați în considerare să schimbați instanța</string>
-    <string name="import_groups">Importați grupuri de canale</string>
-    <string name="export_groups">Exportați grupuri de canale</string>
     <string name="download_playlist">Descarcă lista de redare</string>
     <string name="enqueue_playlist_description">Afișează o notificare când pui în coadă videoclipuri ale unei liste de redare pentru a fi descărcate.</string>
     <string name="enqueueing_playlist_download">Videoclipuri în coadă pentru a încărca lista de redare %1$s</string>

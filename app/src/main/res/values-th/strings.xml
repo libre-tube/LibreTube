@@ -35,7 +35,6 @@
     <string name="defres">ความละเอียด</string>
     <string name="login">ล็อกอิน</string>
     <string name="registered">"ลงทะเบียนแล้ว  ตอนนี้คุณสามารถสมัครรับข้อมูลช่องต่างๆได้แล้ว"</string>
-    <string name="dlisinprogress">โปรดรอให้การดาวน์โหลดปัจจุบันทั้งหมดเสร็จสิ้น</string>
     <string name="loggedIn">ล็อกอินเรียบร้อย</string>
     <string name="notgmail">นี่สำหรับบัญชี Piped</string>
     <string name="donate">โดเนท</string>

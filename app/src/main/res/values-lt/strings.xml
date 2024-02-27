@@ -131,7 +131,6 @@
     <string name="maximum_image_cache">Didžiausias vaizdų talpyklos dydis</string>
     <string name="copied_to_clipboard">Nukopijuota į iškarpinę</string>
     <string name="open_copied">Atidaryti</string>
-    <string name="break_reminder_time">Minutės iki priminimo</string>
     <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">Mobilieji duomenys</string>
     <string name="new_videos_badge">Naujų vaizdo įrašų indikatorius</string>
@@ -143,8 +142,6 @@
     <string name="playback_pitch">Pikinė</string>
     <string name="filename">Failo pavadinimas</string>
     <string name="invalid_filename">Netinkamas failo pavadinimas!</string>
-    <string name="playlists_order">Grojaraščių tvarka</string>
-    <string name="playlistNameReversed">Grojaraščio pavadinimas (atvirkštinis)</string>
     <string name="time_code">Laiko kodas (sekundėmis)</string>
     <string name="added_to_playlist">Pridėti į grojaraštį %1$s</string>
     <string name="queue">Eilė</string>
@@ -175,9 +172,7 @@
     <string name="resize_mode_zoom">Padidinti</string>
     <string name="delete">Ištrinti iš atsisiuntimų</string>
     <string name="resize_mode_fit">Talpinti</string>
-    <string name="dlisinprogress">Kitas atsisiuntimas jau vyksta, palaukite, kol jis bus baigtas.</string>
     <string name="server_error">Iškilo serverio problema. Bandyti kitą perdavimo šaltinį\?</string>
-    <string name="sb_skip_manual">Praleisti rankiniu būdu</string>
     <string name="navigation_bar">Naršymo juosta</string>
     <string name="import_from_yt_summary">Iš YouTube arba NewPipe</string>
     <string name="app_theme">Tema</string>
@@ -222,7 +217,6 @@
     <string name="no_player_found">Nerastas joks išorinis grotuvas. Įsitikinkite, kad turite jį įdiegtą.</string>
     <string name="notify_new_streams_summary">Pranešimai apie naują turinį iš kūrėjų, kuriuos stebite</string>
     <string name="checking_frequency">Tikrinama kas …</string>
-    <string name="best_quality">Geriausia</string>
     <string name="default_subtitle_language">Subtitrų kalba</string>
     <string name="no_search_result">Nėra rezultatų.</string>
     <string name="share_with_time">Dalintis su laiko kodu</string>
@@ -299,7 +293,6 @@
     <string name="notification_time">Pranešimo laikas</string>
     <string name="navbar_order">Rikiavimas</string>
     <string name="layout">Išdėstymas</string>
-    <string name="alternative_player_layout">Alternatyvus grotuvo išdėstymas</string>
     <string name="audio_track">Garso takelis</string>
     <string name="auto_quality">Automatinė</string>
     <string name="hls_instead_of_dash">Naudoti HLS</string>
@@ -319,7 +312,6 @@
     <string name="volume">Garsas</string>
     <string name="swipe_controls_summary">Braukimo gestu sureguliuokite ryškumą ir garsumą</string>
     <string name="defaults">Numatyti</string>
-    <string name="pop_up">Iššokantis langas</string>
     <string name="no_comments_available">Šis vaizdo įrašas neturi prieinamų komentarų.</string>
     <string name="comments_disabled">Įkėlėjas išjungė komentarus.</string>
     <string name="double_tap_seek">Dukart bakstelėti, kad prasukti</string>

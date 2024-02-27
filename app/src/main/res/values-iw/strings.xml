@@ -79,7 +79,6 @@
     <string name="registered">ההרשמה הצליחה. עכשיו אפשר להירשם למינוי לערוצים.</string>
     <string name="save">שמירה</string>
     <string name="region">אזור</string>
-    <string name="dlisinprogress">המתן עד שכל ההורדות הנוכחיות יסתיימו.</string>
     <string name="downloadfailed">ההורדה נכשלה.</string>
     <string name="import_from_yt">ייבוא מינויים</string>
     <string name="systemDefault">מערכת</string>
@@ -208,7 +207,6 @@
     <string name="caption_settings">כתוביות</string>
     <string name="playerAudioFormat">תצורת שמע לנגן</string>
     <string name="playerAudioQuality">איכות שמע</string>
-    <string name="best_quality">מיטבית</string>
     <string name="worst_quality">הנחותה ביותר</string>
     <string name="default_subtitle_language">שפת הכתוביות</string>
     <string name="irreversible">להמשיך\? אי אפשר לבטל את זה!</string>
@@ -254,7 +252,6 @@
     <string name="maximum_image_cache">גודל מטמון התמונות המרבי</string>
     <string name="copied_to_clipboard">הועתק ללוח גזירים</string>
     <string name="open_copied">פתיחה</string>
-    <string name="break_reminder_time">דקות לפני התזכורת</string>
     <string name="legacy_subscriptions">תצוגת מינויים מיושנת</string>
     <string name="device_info">פרטי מכשיר</string>
     <string name="audio_video_summary">איכות ותצורה</string>
@@ -265,7 +262,6 @@
     <string name="new_videos_badge">מחוון לסרטונים חדשים</string>
     <string name="new_videos_badge_summary">להציג עיטור עם כמות הסרטונים החדשים אם יש כאלה</string>
     <string name="skip_segment">דילוג על מקטע</string>
-    <string name="sb_skip_manual">דילוג ידני</string>
     <string name="local_subscriptions">מינויים מקומיים</string>
     <string name="preferences">העדפות</string>
     <string name="backup_customInstances">מופעים מותאמים אישית</string>
@@ -279,8 +275,6 @@
     <string name="change_region">כנראה שהמובילים לא זמינים לאזור הנוכחי. נא לבחור באזור אחר בהגדרות.</string>
     <string name="filename">שם קובץ</string>
     <string name="invalid_filename">שם הקובץ שגוי!</string>
-    <string name="playlists_order">סדר רשימות הנגינה</string>
-    <string name="playlistNameReversed">שם רשימת הנגינה (הפוך)</string>
     <string name="time_code">קוד זמן (שניות)</string>
     <string name="added_to_playlist">נוסף לרשימת הנגינה %1$s</string>
     <string name="queue">תור</string>
@@ -299,7 +293,6 @@
     <string name="play_all">לנגן הכול</string>
     <string name="navbar_order">סדר</string>
     <string name="layout">פריסה</string>
-    <string name="alternative_player_layout">פריסת נגן חלופית</string>
     <string name="audio_track">רצועת שמע</string>
     <string name="auto_quality">אוטומטי</string>
     <string name="hls_instead_of_dash">להשתמש בתזרים</string>
@@ -318,7 +311,6 @@
     <string name="auto">אוטומטי</string>
     <string name="swipe_controls">בקרי החלקה</string>
     <string name="defaults">ברירות מחדל</string>
-    <string name="pop_up">צף</string>
     <string name="swipe_controls_summary">להשתמש במחוות החלקה כדי לכוון את הבהירות ואת עצמת השמע</string>
     <string name="no_comments_available">לסרטון זה אין תגובות.</string>
     <string name="comments_disabled">הערות הושבתו על ידי מעלה הסרטון.</string>
@@ -343,9 +335,7 @@
     <string name="color_violet">סגול מסתגל</string>
     <string name="failed_fetching_instances">לא ניתן למשוך את המופעים הזמינים.</string>
     <string name="hide_watched_from_feed">הסתרת סרטונים שנצפו מערוץ העדכונים</string>
-    <string name="hide_watched_from_feed_summary">לא להציג סרטונים שצפית בלמעלה מ־90% מהם בלשונית המינויים</string>
     <string name="playlistUrl">כתובת רשימת נגינה</string>
-    <string name="pause_on_quit">השהיה עם היציאה</string>
     <string name="shuffle">ערבול</string>
     <string name="add_to_bookmarks">הוספה למועדפים</string>
     <string name="remove_bookmark">הסרת סימנייה</string>
@@ -354,7 +344,6 @@
     <string name="pause">השהיה</string>
     <string name="alternative_pip_controls">בקרים חלופיים לתמונה בתוך תמונה</string>
     <string name="alternative_pip_controls_summary">להציג בקרי שמע בלבד ודילוג בתמונה בתוך תמונה במקום קדימה ואחורה</string>
-    <string name="audio_player">נגן שמע</string>
     <string name="download_completed">ההורדה הושלמה</string>
     <string name="concurrent_downloads">כמות ההורדות המרבית במקביל</string>
     <string name="no_subtitle">אין כתובית</string>
@@ -402,7 +391,6 @@
     <string name="disable_proxy_summary">טעינת סרטונים ותמונות ישירות מהשרתים של YouTube. יש להפעיל את האפשרות רק אם כבר יש לך VPN!</string>
     <string name="auto_fullscreen_shorts">מסך מלא אוטומטי בסרטונים קצרים</string>
     <string name="group_name">שם הקבוצה</string>
-    <string name="edit_group">עריכת קבוצה</string>
     <string name="channel_groups">קבוצות ערוץ</string>
     <string name="new_group">חדשה</string>
     <string name="play_automatically">לנגן אוטומטית</string>
@@ -446,14 +434,12 @@
     <string name="off">כבוי</string>
     <string name="manual">ידני</string>
     <string name="visible">הצגה בפס האיתור</string>
-    <string name="enter_hex_value">נא למלא ערך הקסדצימלי של הצבע</string>
     <string name="invalid_color">ערך הצבע שנבחר שגוי!</string>
     <string name="color">צבע</string>
     <string name="sb_custom_colors">צבעי מקטעים מותאמים</string>
     <string name="sb_custom_colors_summary">מחליף מקטעי צבע מותאמים במקטעים ממומנים ולהפך</string>
     <string name="chapters_videoHighlight">קטע בולט בסרטון</string>
     <string name="category_highlight">הצגת הקטע הבולט בסרטון</string>
-    <string name="jumped_to_highlight">קפצנו לקטע הבולט בסרטון</string>
     <string name="category_highlight_summary">יכול להיות שזה הכותרת שפורסמה, התמונה הייצוגית או החלק המעניין ביותר של הסרטון. אפשר לדלג אליו בנגיעה בו בסעיף הפרקים</string>
     <string name="stop">עצירה</string>
     <string name="fallback_piped_proxy">נסיגה למתווך של Piped</string>
