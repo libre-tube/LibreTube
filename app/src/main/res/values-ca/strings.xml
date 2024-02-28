@@ -306,7 +306,7 @@
     <plurals name="months_ago">
         <item quantity="one">fa %d mes</item>
         <item quantity="many">fa %d mesos</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
     <string name="tooltip_filter">Filtra</string>
     <string name="delete_all">Se suprimiran totes les descàrregues.</string>
@@ -490,12 +490,12 @@
     <plurals name="years_ago">
         <item quantity="one">fa %d any</item>
         <item quantity="many">fa %d anys</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
     <plurals name="channel_new_streams">
         <item quantity="one">%d transmissió nova</item>
         <item quantity="many">%d transmissions noves</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
     <string name="change">Canvia</string>
     <string name="gestures">Gestos</string>
