@@ -105,7 +105,7 @@
     <string name="enabled">Увімкнено</string>
     <string name="disabled">Вимкнено</string>
     <string name="shareTo">Поділитися посиланням з</string>
-    <string name="update_available">Версія %1$s доступна</string>
+    <string name="update_available">Доступне оновлення</string>
     <string name="update_available_text">Доступне нове оновлення. Натисніть, щоб відкрити сторінку випусків на GitHub.</string>
     <string name="downloads">Завантаження</string>
     <string name="update_summary">Перевірити наявність оновлень</string>
@@ -544,4 +544,5 @@
     <string name="comments_count">Коментарі (%1$s)</string>
     <string name="external_player">Зовнішній програвач</string>
     <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="show_updates">Перевірити оновлення автоматично</string>
 </resources>
