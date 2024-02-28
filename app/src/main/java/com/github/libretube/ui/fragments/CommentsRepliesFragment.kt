@@ -56,7 +56,7 @@ class CommentsRepliesFragment : Fragment() {
             videoId,
             viewModel.channelAvatar,
             comment,
-            viewModel.handleLink,
+            viewModel.handleLink
         ) {
             viewModel.commentsSheetDismiss?.invoke()
         }

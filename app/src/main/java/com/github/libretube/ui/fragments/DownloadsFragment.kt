@@ -156,14 +156,12 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
             }
         )
 
-
-        if (dbDownloads.isNotEmpty()){
+        if (dbDownloads.isNotEmpty()) {
             binding.deleteAll.isVisible = true
-            binding.deleteAll.setOnClickListener{
+            binding.deleteAll.setOnClickListener {
                 showDeleteAllDialog(binding.root.context, adapter)
             }
         }
-
 
         binding.shuffleBackground.setOnClickListener {
             BackgroundHelper.playOnBackgroundOffline(requireContext(), null)
@@ -191,7 +189,6 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
         super.onStart()
     }
 
-
     override fun onResume() {
         super.onResume()
 
@@ -199,7 +196,12 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
             addAction(DownloadService.ACTION_SERVICE_STARTED)
             addAction(DownloadService.ACTION_SERVICE_STOPPED)
         }
-        ContextCompat.registerReceiver(requireContext(), downloadReceiver, filter, ContextCompat.RECEIVER_NOT_EXPORTED)
+        ContextCompat.registerReceiver(
+            requireContext(),
+            downloadReceiver,
+            filter,
+            ContextCompat.RECEIVER_NOT_EXPORTED
+        )
     }
 
     fun bindDownloadService(ids: IntArray? = null) {

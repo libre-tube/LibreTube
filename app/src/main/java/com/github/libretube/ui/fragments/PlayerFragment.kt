@@ -113,12 +113,12 @@ import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
 import com.github.libretube.util.YoutubeHlsPlaylistParser
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.*
 import java.util.concurrent.Executors
 import kotlin.math.abs
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class PlayerFragment : Fragment(), OnlinePlayerOptions {
@@ -497,7 +497,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             .animateDown(
                 duration = 300L,
                 dy = 500F,
-                onEnd = ::onManualPlayerClose,
+                onEnd = ::onManualPlayerClose
             )
     }
 
@@ -868,7 +868,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         handler.postDelayed(this::checkForSegments, 100)
         if (!sponsorBlockEnabled || viewModel.segments.isEmpty()) return
 
-        exoPlayer.checkForSegments(requireContext(), viewModel.segments, viewModel.sponsorBlockConfig)
+        exoPlayer.checkForSegments(
+            requireContext(),
+            viewModel.segments,
+            viewModel.sponsorBlockConfig
+        )
             ?.let { segment ->
                 if (viewModel.isMiniPlayerVisible.value == true) return@let
                 binding.sbSkipBtn.isVisible = true
@@ -913,7 +917,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             val videoStream = streams.videoStreams.firstOrNull()
             val isShort = PlayingQueue.getCurrent()?.isShort == true ||
-                    (videoStream?.height ?: 0) > (videoStream?.width ?: 0)
+                (videoStream?.height ?: 0) > (videoStream?.width ?: 0)
 
             PlayingQueue.setOnQueueTapListener { streamItem ->
                 streamItem.url?.toID()?.let { playNextVideo(it) }
@@ -950,7 +954,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             if (binding.playerMotionLayout.progress != 1.0f) {
                 // show controllers when not in picture in picture mode
                 val inPipMode = PlayerHelper.pipEnabled &&
-                        PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
+                    PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
                 if (!inPipMode) {
                     binding.player.useController = true
                 }
@@ -1621,7 +1625,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     private fun shouldStartPiP(): Boolean {
         return shouldUsePip() && exoPlayer.isPlaying &&
-                !BackgroundHelper.isBackgroundServiceRunning(requireContext())
+            !BackgroundHelper.isBackgroundServiceRunning(requireContext())
     }
 
     private fun killPlayerFragment() {

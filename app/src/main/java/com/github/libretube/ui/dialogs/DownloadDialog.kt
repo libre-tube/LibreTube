@@ -24,11 +24,11 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.parcelable.DownloadData
 import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
-import java.io.IOException
 
 class DownloadDialog : DialogFragment() {
     private lateinit var videoId: String

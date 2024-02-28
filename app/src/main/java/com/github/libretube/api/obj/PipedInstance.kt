@@ -20,5 +20,5 @@ data class PipedInstance(
     @SerialName("uptime_24h") val uptimeToday: Float? = null,
     @SerialName("uptime_7d") val uptimeWeek: Float? = null,
     @SerialName("uptime_30d") val uptimeMonth: Float? = null,
-    val isCurrentlyDown: Boolean = false,
+    val isCurrentlyDown: Boolean = false
 )

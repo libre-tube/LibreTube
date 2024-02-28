@@ -116,7 +116,11 @@ object ImportHelper {
 
             ImportFormat.FREETUBE -> {
                 val freeTubeChannels = subs.map {
-                    FreetubeSubscription(it.name, "", "${ShareDialog.YOUTUBE_FRONTEND_URL}${it.url}")
+                    FreetubeSubscription(
+                        it.name,
+                        "",
+                        "${ShareDialog.YOUTUBE_FRONTEND_URL}${it.url}"
+                    )
                 }
                 val freeTubeSubscriptions = FreetubeSubscriptions(subscriptions = freeTubeChannels)
                 activity.contentResolver.openOutputStream(uri)?.use {

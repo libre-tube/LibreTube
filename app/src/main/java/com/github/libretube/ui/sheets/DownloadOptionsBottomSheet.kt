@@ -1,8 +1,6 @@
 package com.github.libretube.ui.sheets
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import com.github.libretube.R
@@ -11,7 +9,6 @@ import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.obj.ShareData
-import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.ui.dialogs.ShareDialog
 
 class DownloadOptionsBottomSheet : BaseBottomSheet() {

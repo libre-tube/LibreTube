@@ -5,7 +5,6 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.util.Log
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
@@ -100,7 +99,7 @@ class VoteForSegmentDialog : DialogFragment() {
             binding.segmentsDropdown.items = segments.map {
                 val (start, end) = it.segmentStartAndEnd
                 val (startStr, endStr) = DateUtils.formatElapsedTime(start.toLong()) to
-                        DateUtils.formatElapsedTime(end.toLong())
+                    DateUtils.formatElapsedTime(end.toLong())
                 "${it.category} ($startStr - $endStr)"
             }
         }

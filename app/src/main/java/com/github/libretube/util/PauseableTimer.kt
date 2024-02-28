@@ -20,11 +20,15 @@ class PauseableTimer(
     fun resume() {
         if (timer == null) timer = Timer()
 
-        timer?.scheduleAtFixedRate(object : TimerTask() {
-            override fun run() {
-                handler.post(onTick)
-            }
-        }, delayMillis, delayMillis)
+        timer?.scheduleAtFixedRate(
+            object : TimerTask() {
+                override fun run() {
+                    handler.post(onTick)
+                }
+            },
+            delayMillis,
+            delayMillis
+        )
     }
 
     fun pause() {

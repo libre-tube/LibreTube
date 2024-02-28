@@ -52,21 +52,31 @@ class DownloadPlaylistDialog : DialogFragment() {
             .setView(binding.root)
             .setPositiveButton(R.string.download) { _, _ ->
                 with(binding) {
-                    val maxVideoQuality = if (videoSpinner.selectedItemPosition >= 1)
+                    val maxVideoQuality = if (videoSpinner.selectedItemPosition >= 1) {
                         possibleVideoQualities[videoSpinner.selectedItemPosition - 1]
-                            .getWhileDigit() else null
+                            .getWhileDigit()
+                    } else {
+                        null
+                    }
 
-                    val maxAudioQuality = if (audioSpinner.selectedItemPosition >= 1)
+                    val maxAudioQuality = if (audioSpinner.selectedItemPosition >= 1) {
                         possibleAudioQualities[audioSpinner.selectedItemPosition - 1]
-                            .getWhileDigit() else null
+                            .getWhileDigit()
+                    } else {
+                        null
+                    }
 
-                    val captionLanguage = if (subtitleSpinner.selectedItemPosition >= 1)
+                    val captionLanguage = if (subtitleSpinner.selectedItemPosition >= 1) {
                         availableLanguages[subtitleSpinner.selectedItemPosition - 1].code
-                    else null
+                    } else {
+                        null
+                    }
 
-                    val audioLanguage = if (audioLanguageSpinner.selectedItemPosition >= 1)
+                    val audioLanguage = if (audioLanguageSpinner.selectedItemPosition >= 1) {
                         availableLanguages[audioLanguageSpinner.selectedItemPosition - 1].code
-                    else null
+                    } else {
+                        null
+                    }
 
                     if (maxVideoQuality == null && maxAudioQuality == null) {
                         Toast.makeText(context, R.string.nothing_selected, Toast.LENGTH_SHORT)
@@ -89,6 +99,5 @@ class DownloadPlaylistDialog : DialogFragment() {
             }
             .setNegativeButton(R.string.cancel, null)
             .show()
-
     }
 }

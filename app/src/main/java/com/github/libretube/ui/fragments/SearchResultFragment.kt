@@ -61,20 +61,22 @@ class SearchResultFragment : DynamicLayoutManagerFragment() {
 
         // filter options
         binding.filterChipGroup.setOnCheckedStateChangeListener { _, _ ->
-            viewModel.setFilter(when (
-                binding.filterChipGroup.checkedChipId
-            ) {
-                R.id.chip_all -> "all"
-                R.id.chip_videos -> "videos"
-                R.id.chip_channels -> "channels"
-                R.id.chip_playlists -> "playlists"
-                R.id.chip_music_songs -> "music_songs"
-                R.id.chip_music_videos -> "music_videos"
-                R.id.chip_music_albums -> "music_albums"
-                R.id.chip_music_playlists -> "music_playlists"
-                R.id.chip_music_artists -> "music_artists"
-                else -> throw IllegalArgumentException("Filter out of range")
-            })
+            viewModel.setFilter(
+                when (
+                    binding.filterChipGroup.checkedChipId
+                ) {
+                    R.id.chip_all -> "all"
+                    R.id.chip_videos -> "videos"
+                    R.id.chip_channels -> "channels"
+                    R.id.chip_playlists -> "playlists"
+                    R.id.chip_music_songs -> "music_songs"
+                    R.id.chip_music_videos -> "music_videos"
+                    R.id.chip_music_albums -> "music_albums"
+                    R.id.chip_music_playlists -> "music_playlists"
+                    R.id.chip_music_artists -> "music_artists"
+                    else -> throw IllegalArgumentException("Filter out of range")
+                }
+            )
         }
 
         val timeStamp = args.query.toHttpUrlOrNull()?.queryParameter("t")?.toTimeInSeconds()
