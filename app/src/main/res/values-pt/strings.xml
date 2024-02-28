@@ -121,7 +121,7 @@
     <string name="instance_summary">Piped, sessão e conta</string>
     <string name="customInstance_summary">Adicionar…</string>
     <string name="instance_name">Nome da instância</string>
-    <string name="update_available">A versão %1$s está disponível</string>
+    <string name="update_available">Atualização disponível</string>
     <string name="downloads">Descargas</string>
     <string name="advanced">Avançado</string>
     <string name="playback_speed">Velocidade de reprodução</string>
@@ -540,4 +540,5 @@
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">Comentários (%1$s)</string>
     <string name="external_player">Reprodutor externo</string>
+    <string name="show_updates">Procurar atualizações automaticamente</string>
 </resources>
