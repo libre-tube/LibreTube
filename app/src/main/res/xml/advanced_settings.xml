@@ -4,6 +4,12 @@
 
     <PreferenceCategory app:title="@string/advanced">
 
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_download_filled"
+            app:key="automatic_update_checks"
+            app:title="@string/show_updates" />
+
         <ListPreference
             android:defaultValue="disabled"
             android:entries="@array/dataSaverModeOptions"

@@ -122,7 +122,7 @@
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Play in the background</string>
-    <string name="update_available">Version %1$s is available</string>
+    <string name="update_available">Update available</string>
     <string name="update_available_text">New update available. Click to open the GitHub releases page.</string>
     <string name="appearance">Appearance</string>
     <string name="downloads">Downloads</string>
@@ -154,6 +154,7 @@
     <string name="clear_customInstances">Clear added</string>
     <string name="invalid_url">Please enter a URL that works</string>
     <string name="version">Version %1$s</string>
+    <string name="show_updates">Check updates automatically</string>
     <string name="related_streams">Related content</string>
     <string name="related_streams_summary">Show similar streams alongside what you watch</string>
     <string name="buffering_goal">Preloading</string>
