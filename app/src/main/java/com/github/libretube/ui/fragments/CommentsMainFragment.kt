@@ -62,7 +62,7 @@ class CommentsMainFragment : Fragment() {
             this,
             viewModel.videoIdLiveData.value ?: return,
             viewModel.channelAvatar ?: return,
-            handleLink = viewModel.handleLink,
+            handleLink = viewModel.handleLink
         ) {
             viewModel.commentsSheetDismiss?.invoke()
         }

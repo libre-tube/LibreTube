@@ -73,7 +73,8 @@ object NavigationHelper {
             return
         }
 
-        val playerData = PlayerData(videoUrlOrId.toID(), playlistId, channelId, keepQueue, timestamp)
+        val playerData =
+            PlayerData(videoUrlOrId.toID(), playlistId, channelId, keepQueue, timestamp)
         val bundle = bundleOf(IntentData.playerData to playerData)
 
         val activity = ContextHelper.unwrapActivity(context)
@@ -86,7 +87,9 @@ object NavigationHelper {
         if (playlistUrlOrId == null) return
 
         val activity = ContextHelper.unwrapActivity(context)
-        activity.navController.navigate(NavDirections.openPlaylist(playlistUrlOrId.toID(), playlistType))
+        activity.navController.navigate(
+            NavDirections.openPlaylist(playlistUrlOrId.toID(), playlistType)
+        )
     }
 
     /**

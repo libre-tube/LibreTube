@@ -7,7 +7,7 @@ import com.github.libretube.api.obj.Comment
 
 class CommentRepliesPagingSource(
     private val videoId: String,
-    private val commentNextPage: String?,
+    private val commentNextPage: String?
 ) : PagingSource<String, Comment>() {
     override fun getRefreshKey(state: PagingState<String, Comment>) = null
 

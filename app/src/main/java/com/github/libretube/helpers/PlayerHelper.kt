@@ -42,14 +42,14 @@ import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.obj.VideoStats
 import com.github.libretube.util.TextUtils
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.util.Locale
 import java.util.concurrent.Executors
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 object PlayerHelper {
     private const val ACTION_MEDIA_CONTROL = "media_control"
@@ -344,11 +344,11 @@ object PlayerHelper {
 
     fun shouldPlayNextVideo(isPlaylist: Boolean = false): Boolean {
         return autoPlayEnabled || (
-                isPlaylist && PreferenceHelper.getBoolean(
-                    PreferenceKeys.AUTOPLAY_PLAYLISTS,
-                    false
-                )
-                )
+            isPlaylist && PreferenceHelper.getBoolean(
+                PreferenceKeys.AUTOPLAY_PLAYLISTS,
+                false
+            )
+            )
     }
 
     private val handleAudioFocus
@@ -760,9 +760,9 @@ object PlayerHelper {
      */
     fun haveAudioTrackRoleFlagSet(@C.RoleFlags roleFlags: Int): Boolean {
         return isFlagSet(roleFlags, C.ROLE_FLAG_DESCRIBES_VIDEO) ||
-                isFlagSet(roleFlags, C.ROLE_FLAG_DUB) ||
-                isFlagSet(roleFlags, C.ROLE_FLAG_MAIN) ||
-                isFlagSet(roleFlags, C.ROLE_FLAG_ALTERNATE)
+            isFlagSet(roleFlags, C.ROLE_FLAG_DUB) ||
+            isFlagSet(roleFlags, C.ROLE_FLAG_MAIN) ||
+            isFlagSet(roleFlags, C.ROLE_FLAG_ALTERNATE)
     }
 
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)

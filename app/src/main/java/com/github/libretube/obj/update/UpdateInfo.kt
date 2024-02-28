@@ -10,5 +10,5 @@ import kotlinx.serialization.Serializable
 data class UpdateInfo(
     val name: String,
     val body: String,
-    @SerialName("html_url") val htmlUrl: String,
+    @SerialName("html_url") val htmlUrl: String
 ) : Parcelable

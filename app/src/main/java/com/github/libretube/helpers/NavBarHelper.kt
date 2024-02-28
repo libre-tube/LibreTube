@@ -139,5 +139,4 @@ object NavBarHelper {
             .getString(PreferenceKeys.NAVBAR_ITEMS, "")
             .split(SEPARATOR)
     }
-
 }

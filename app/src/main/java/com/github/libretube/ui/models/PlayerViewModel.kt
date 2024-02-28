@@ -19,11 +19,11 @@ import com.github.libretube.api.obj.Subtitle
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.deArrow
+import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
-import java.io.IOException
 
 class PlayerViewModel : ViewModel() {
     var player: ExoPlayer? = null

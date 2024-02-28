@@ -9,7 +9,6 @@ import android.widget.ImageView
 import androidx.core.graphics.drawable.toBitmapOrNull
 import coil.ImageLoader
 import coil.disk.DiskCache
-import coil.load
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.github.libretube.api.CronetHelper
@@ -17,10 +16,10 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toAndroidUri
 import com.github.libretube.extensions.toAndroidUriOrNull
 import com.github.libretube.util.DataSaverMode
+import java.io.File
 import java.nio.file.Path
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.io.File
 
 object ImageHelper {
     lateinit var imageLoader: ImageLoader

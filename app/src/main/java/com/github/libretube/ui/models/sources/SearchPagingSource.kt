@@ -10,7 +10,7 @@ import retrofit2.HttpException
 class SearchPagingSource(
     private val searchQuery: String,
     private val searchFilter: String
-): PagingSource<String, ContentItem>() {
+) : PagingSource<String, ContentItem>() {
     override fun getRefreshKey(state: PagingState<String, ContentItem>) = null
 
     override suspend fun load(params: LoadParams<String>): LoadResult<String, ContentItem> {

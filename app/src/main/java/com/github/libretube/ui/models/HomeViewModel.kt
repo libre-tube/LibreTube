@@ -28,7 +28,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class HomeViewModel: ViewModel() {
+class HomeViewModel : ViewModel() {
     private val hideWatched get() = PreferenceHelper.getBoolean(HIDE_WATCHED_FROM_FEED, false)
 
     val trending: MutableLiveData<List<StreamItem>> = MutableLiveData(null)

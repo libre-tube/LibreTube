@@ -13,7 +13,7 @@ import com.github.libretube.enums.ContentFilter
 import com.github.libretube.extensions.parcelableArrayList
 import com.github.libretube.obj.SelectableOption
 
-class FilterSortBottomSheet: ExpandedBottomSheet() {
+class FilterSortBottomSheet : ExpandedBottomSheet() {
     private var _binding: FilterSortSheetBinding? = null
     private val binding get() = _binding!!
 
@@ -83,7 +83,7 @@ class FilterSortBottomSheet: ExpandedBottomSheet() {
 
     private fun setInitialFiltersState() {
         binding.filterVideos.isChecked = ContentFilter.VIDEOS.isEnabled
-        binding.filterShorts.isChecked =  ContentFilter.SHORTS.isEnabled
+        binding.filterShorts.isChecked = ContentFilter.SHORTS.isEnabled
         binding.filterLivestreams.isChecked = ContentFilter.LIVESTREAMS.isEnabled
         binding.hideWatchedCheckbox.isChecked = hideWatched
     }

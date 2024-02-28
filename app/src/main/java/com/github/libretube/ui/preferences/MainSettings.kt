@@ -21,7 +21,6 @@ class MainSettings : BasePreferenceFragment() {
 
         // check app update manually
         update?.setOnPreferenceClickListener {
-
             lifecycleScope.launch(Dispatchers.IO) {
                 UpdateChecker(requireContext()).checkUpdate(true)
             }

@@ -46,5 +46,5 @@ data class BackupFile(
 
     // playlists are exported in two different formats because the formats differ too much unfortunately
     var localPlaylists: List<LocalPlaylistWithVideos>? = emptyList(),
-    var playlists: List<PipedImportPlaylist>? = emptyList(),
+    var playlists: List<PipedImportPlaylist>? = emptyList()
 )

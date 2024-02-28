@@ -7,4 +7,4 @@ import kotlinx.parcelize.Parcelize
 data class SelectableOption(
     val isSelected: Boolean,
     val name: String
-): Parcelable
+) : Parcelable

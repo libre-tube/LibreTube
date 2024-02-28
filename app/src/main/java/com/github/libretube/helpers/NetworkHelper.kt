@@ -18,8 +18,8 @@ object NetworkHelper {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val activeNetwork = connectivityManager.activeNetwork
             val caps = connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
-            return caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-                    || caps.hasTransport(NetworkCapabilities.TRANSPORT_VPN)
+            return caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) ||
+                caps.hasTransport(NetworkCapabilities.TRANSPORT_VPN)
         } else {
             // activeNetworkInfo might return null instead of the VPN, so better check it explicitly
             val networkInfo = connectivityManager.activeNetworkInfo

@@ -171,7 +171,9 @@ open class CustomExoPlayerView(
                         Player.EVENT_PLAY_WHEN_READY_CHANGED
                     )
                 ) {
-                    binding.playPauseBTN.setImageResource(PlayerHelper.getPlayPauseActionIcon(player))
+                    binding.playPauseBTN.setImageResource(
+                        PlayerHelper.getPlayPauseActionIcon(player)
+                    )
 
                     // keep screen on if the video is playing
                     keepScreenOn = player.isPlaying == true

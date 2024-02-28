@@ -17,7 +17,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
-import com.github.libretube.api.obj.Channel
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Subscription
 import com.github.libretube.constants.IntentData
@@ -191,7 +190,10 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
             val fragManager = activityCompat
                 .supportFragmentManager
                 .apply {
-                    setFragmentResultListener(FILTER_SORT_REQUEST_KEY, activityCompat) { _, resultBundle ->
+                    setFragmentResultListener(
+                        FILTER_SORT_REQUEST_KEY,
+                        activityCompat
+                    ) { _, resultBundle ->
                         selectedSortOrder = resultBundle.getInt(IntentData.sortOptions)
                         hideWatched = resultBundle.getBoolean(IntentData.hideWatched)
                         showFeed()
@@ -301,9 +303,13 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
             }
         }
 
-        return if (hideWatched) runBlocking {
-            DatabaseHelper.filterUnwatched(streamItems)
-        } else streamItems
+        return if (hideWatched) {
+            runBlocking {
+                DatabaseHelper.filterUnwatched(streamItems)
+            }
+        } else {
+            streamItems
+        }
     }
 
     private fun List<StreamItem>.sortedBySelectedOrder() = when (selectedSortOrder) {

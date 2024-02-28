@@ -95,7 +95,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeChanges() {
-        with (homeViewModel) {
+        with(homeViewModel) {
             trending.observe(viewLifecycleOwner, ::showTrending)
             feed.observe(viewLifecycleOwner, ::showFeed)
             bookmarks.observe(viewLifecycleOwner, ::showBookmarks)
@@ -111,7 +111,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun stopObservingChanges() {
-        with (homeViewModel) {
+        with(homeViewModel) {
             trending.removeObserver(::showTrending)
             feed.removeObserver(::showFeed)
             bookmarks.removeObserver(::showBookmarks)
@@ -151,11 +151,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun showFeed(streamItems: List<StreamItem>?) {
-    if (streamItems == null) return
+        if (streamItems == null) return
 
         makeVisible(binding.featuredRV, binding.featuredTV)
         val feedVideos = streamItems.take(20).toMutableList()
-        with (binding.featuredRV) {
+        with(binding.featuredRV) {
             layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
             adapter = VideosAdapter(feedVideos, forceMode = LayoutMode.RELATED_COLUMN)
         }
@@ -165,7 +165,7 @@ class HomeFragment : Fragment() {
         if (bookmarks == null) return
 
         makeVisible(binding.bookmarksTV, binding.bookmarksRV)
-        with (binding.bookmarksRV) {
+        with(binding.bookmarksRV) {
             layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
             adapter = PlaylistBookmarkAdapter(
                 bookmarks.toMutableList(),

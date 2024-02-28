@@ -10,7 +10,9 @@ import kotlinx.serialization.Serializable
 @Entity(tableName = "localSubscription")
 data class LocalSubscription(
     @PrimaryKey val channelId: String,
-    @Ignore val url: String = "",
+    @Ignore val url: String = ""
 ) {
-    constructor(channelId: String): this(channelId, "${ShareDialog.YOUTUBE_FRONTEND_URL}/channel/$channelId")
+    constructor(
+        channelId: String
+    ) : this(channelId, "${ShareDialog.YOUTUBE_FRONTEND_URL}/channel/$channelId")
 }

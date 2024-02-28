@@ -67,7 +67,6 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
             distanceX: Float,
             distanceY: Float
         ): Boolean {
-
             if (isStrictlyDownSwipe && distanceY > 0) {
                 isStrictlyDownSwipe = false
             }

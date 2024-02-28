@@ -12,9 +12,9 @@ import com.github.libretube.constants.IntentData.appUpdateURL
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.ui.dialogs.UpdateAvailableDialog
+import java.util.Locale
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.util.Locale
 
 class UpdateChecker(private val context: Context) {
     suspend fun checkUpdate(isManualCheck: Boolean = false) {
@@ -40,7 +40,7 @@ class UpdateChecker(private val context: Context) {
 
     private fun showUpdateAvailableDialog(
         changelog: String,
-        url: String,
+        url: String
     ) {
         val dialog = UpdateAvailableDialog()
         val args =
