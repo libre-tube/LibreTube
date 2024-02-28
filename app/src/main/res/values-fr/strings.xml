@@ -105,7 +105,7 @@
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Lire en arrière-plan</string>
     <string name="advanced_summary">Téléchargements, et réinitialisation</string>
-    <string name="update_available">La version %1$s est disponible</string>
+    <string name="update_available">Mise à jour disponible</string>
     <string name="update_available_text">Nouvelle mise à jour disponible. Cliquez pour ouvrir la page des versions sur GitHub.</string>
     <string name="appearance">Apparence</string>
     <string name="downloads">Téléchargements</string>
@@ -540,4 +540,5 @@
     <string name="external_player">Lecteur externe</string>
     <string name="behavior_when_minimized">Comportement en cas de minimisation</string>
     <string name="gestures">Gestes</string>
+    <string name="show_updates">Vérification automatique des mises à jour</string>
 </resources>
