@@ -155,7 +155,7 @@
     <string name="auto_rotation">Automatické otáčení</string>
     <string name="landscape">Na šířku</string>
     <string name="portrait">Na výšku</string>
-    <string name="update_available">Je dostupná verze %1$s</string>
+    <string name="update_available">Je dostupná aktualizace</string>
     <string name="update_available_text">K dispozici je nová aktualizace. Klepnutím otevřete stránku s novinkami na GitHubu.</string>
     <string name="appearance">Vzhled</string>
     <string name="downloads">Stahování</string>
@@ -540,4 +540,5 @@
     <string name="external_player">Externí přehrávač</string>
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">Komentáře (%1$s)</string>
+    <string name="show_updates">Automaticky kontrolovat aktualizace</string>
 </resources>
