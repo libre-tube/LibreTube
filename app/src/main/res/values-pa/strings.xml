@@ -111,7 +111,7 @@
     <string name="piped">ਪਾਈਪਡ</string>
     <string name="youtube">ਯੂਟਿਊਬ</string>
     <string name="playOnBackground">ਬੈਕਗ੍ਰਾਊਂਡ ਵਿੱਚ ਚਲਾਓ</string>
-    <string name="update_available">ਸੰਸਕਰਣ %1$s ਉਪਲਬਧ ਹੈ</string>
+    <string name="update_available">ਨਵਾਂ ਸੰਸਕਰਣ ਉਪਲੱਬਧ ਹੈ</string>
     <string name="appearance">ਦਿੱਖ</string>
     <string name="failed_fetching_instances">ਉਪਲੱਬਧ ਉਦਾਹਰਨਾਂ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕਰ ਸਕਿਆ।</string>
     <string name="hide_watched_from_feed">ਪਹਿਲਾਂ ਤੋਂ ਵੇਖੇ ਗਏ ਵੀਡੀਓ ਲੁਕਾਓ</string>
@@ -537,4 +537,5 @@
     <string name="behavior_when_minimized">ਮਿਨੀਮਾਈਜ਼ ਕਰਨ \'ਤੇ ਵਿਵਹਾਰ</string>
     <string name="external_player">ਬਾਹਰੀ ਪਲੇਅਰ</string>
     <string name="gestures">ਇਸ਼ਾਰੇ</string>
+    <string name="show_updates">ਆਟੋਮੈਟਿਕਲੀ ਅੱਪਡੇਟ ਦੀ ਜਾਂਚ ਕਰੋ</string>
 </resources>
