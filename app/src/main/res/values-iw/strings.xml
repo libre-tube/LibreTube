@@ -19,7 +19,7 @@
     <string name="error">משהו השתבש.</string>
     <string name="empty">עליך למלא שם משתמש וסיסמה.</string>
     <string name="notgmail">זה לחשבון Piped</string>
-    <string name="grid">עמודות רשת</string>
+    <string name="grid">עמודות רשת (לאורך)</string>
     <string name="createPlaylist">יצירת רשימת נגינה</string>
     <string name="playlistName">שם רשימת הנגינה</string>
     <string name="emptyPlaylistName">שם רשימת הנגינה לא יכול להישאר ריק</string>
@@ -101,7 +101,7 @@
     <string name="sponsorblock">חסימת חסות</string>
     <string name="category_segments">מקטעים</string>
     <string name="material_you">Material You‎</string>
-    <string name="update_available">גרסה %1$s זמינה כעת</string>
+    <string name="update_available">יש עדכון</string>
     <string name="segment_skipped">מקטע שדולג</string>
     <string name="category_sponsor">נותן חסות</string>
     <string name="category_selfpromo">קידום לא בתשלום/עצמי</string>
@@ -513,4 +513,10 @@
     <string name="repeat_mode_all">לחזור על הכול</string>
     <string name="segment_submitted">מקטע הוגש</string>
     <string name="downvote">למטה</string>
+    <string name="grid_landscape">עמודות רשת (לרוחב)</string>
+    <string name="comments_count">תגובות (%1$s)</string>
+    <string name="finished">הסתיים</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="show_updates">לבדוק אוטומטית אם יש עדכונים</string>
+    <string name="rich_caption_rendering">עיבוד של כותרת עשירה</string>
 </resources>
