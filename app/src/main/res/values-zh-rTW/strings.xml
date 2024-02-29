@@ -94,7 +94,7 @@
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">背景播放</string>
-    <string name="update_available">版本 %1$s 已可下載</string>
+    <string name="update_available">可用更新</string>
     <string name="appearance">外觀</string>
     <string name="downloads">下載</string>
     <string name="update_summary">按這裡檢查更新</string>
@@ -534,4 +534,5 @@
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">留言 (%1$s)</string>
     <string name="external_player">外部播放器</string>
+    <string name="show_updates">自動檢查更新</string>
 </resources>
