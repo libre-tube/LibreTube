@@ -102,7 +102,7 @@
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Redare în fundal</string>
-    <string name="update_available">Versiunea %1$s este disponibilă</string>
+    <string name="update_available">Actualizare disponibilă</string>
     <string name="appearance">Aspect</string>
     <string name="update_summary">Verificați pentru actualizare</string>
     <string name="app_uptodate">Folosiți ultima versiune.</string>
@@ -540,4 +540,5 @@
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">Comentarii (%1$s)</string>
     <string name="external_player">Player extern</string>
+    <string name="show_updates">Verifică automat actualizările</string>
 </resources>
