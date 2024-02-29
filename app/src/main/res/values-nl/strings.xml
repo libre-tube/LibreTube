@@ -80,7 +80,7 @@
     <string name="enabled">Aan</string>
     <string name="disabled">Uit</string>
     <string name="piped">Piped</string>
-    <string name="update_available">Versie %1$s is beschikbaar</string>
+    <string name="update_available">Update beschikbaar</string>
     <string name="update_available_text">Nieuwe versie beschikbaar. Druk om de GitHub-uitgaven­pagina te openen.</string>
     <string name="createPlaylist">Afspeel­lijst aan­maken</string>
     <string name="loggedIn">Ingelogd</string>
@@ -537,4 +537,5 @@
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">Opmerkingen (%1$s)</string>
     <string name="external_player">Externe speler</string>
+    <string name="show_updates">Automatisch op updates controleren</string>
 </resources>
