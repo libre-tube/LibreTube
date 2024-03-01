@@ -128,7 +128,7 @@
     <string name="category_music_offtopic_summary">فقط للاستخدام في مقاطع الفيديو الموسيقية. يجب أن تغطي أجزاء من الفيديو وليس جزءا من الخلطات الرسمية. في النهاية ، يجب أن يشبه الفيديو Spotify أو أي إصدار مختلط آخر قدر الإمكان ، أو يقلل من التحدث أو تشتيت الانتباه</string>
     <string name="buffering_goal">التحميل المسبق</string>
     <string name="buffering_goal_summary">الحد الأقصى لعدد ثواني الفيديو للتخزين المؤقت</string>
-    <string name="update_available">الإصدار %1$s متاح</string>
+    <string name="update_available">التحديث متاح</string>
     <string name="downloads">التنزيلات</string>
     <string name="legacyIcon">الإرث الضائع</string>
     <string name="gradientIcon">التدرج اللوني</string>
@@ -549,4 +549,5 @@
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">التعليقات (%1$s)</string>
     <string name="external_player">مشغل خارجي</string>
+    <string name="show_updates">التحقق من التحديثات تلقائيا</string>
 </resources>
