@@ -82,7 +82,7 @@
     <string name="import_from_yt_summary">De Youtube o NewPipe</string>
     <string name="torchIcon">Torcha</string>
     <string name="defaultIcon">Predefinite</string>
-    <string name="update_available">Le version %1$s es disponibile</string>
+    <string name="update_available">Actualisation disponibile</string>
     <string name="chapters">Capitulos</string>
     <string name="appearance">Apparentia</string>
     <string name="login_register">Aperir session/Registrar se</string>
@@ -537,4 +537,5 @@
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">Commentos (%1$s)</string>
     <string name="external_player">Reproductor externe</string>
+    <string name="show_updates">Verificar actualisationes automaticamente</string>
 </resources>

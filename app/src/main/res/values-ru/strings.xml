@@ -104,7 +104,7 @@
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Играть в фоне</string>
     <string name="disabled">Откл.</string>
-    <string name="update_available">Версия %1$s доступна</string>
+    <string name="update_available">Доступно обновление</string>
     <string name="defaultIcon">По умолчанию</string>
     <string name="shapedIcon">Формальная форма</string>
     <string name="shareTo">Поделиться ссылкой с</string>
@@ -543,4 +543,5 @@
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">Комментарии (%1$s)</string>
     <string name="external_player">Внешний проигрыватель</string>
+    <string name="show_updates">Проверять обновления автоматически</string>
 </resources>

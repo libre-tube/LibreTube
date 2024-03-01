@@ -204,7 +204,7 @@
     <string name="material_you">Material You</string>
     <string name="app_icon">Значок</string>
     <string name="enabled">Укл</string>
-    <string name="update_available">Версія %1$s даступная</string>
+    <string name="update_available">Даступна абнаўленне</string>
     <string name="update_available_text">Даступна новае абнаўленне. Націсніце, каб адкрыць старонку выпускаў GitHub.</string>
     <string name="downloads">Загрузкі</string>
     <string name="app_uptodate">Абнавіць да апошняй версіі.</string>
@@ -544,4 +544,5 @@
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="external_player">Знешні прайгравальнік</string>
     <string name="comments_count">Каментары (%1$s)</string>
+    <string name="show_updates">Правяраць абнаўлення аўтаматычна</string>
 </resources>

@@ -141,7 +141,7 @@
     <string name="buffering_goal">Pré-carregamento</string>
     <string name="buffering_goal_summary">Número máximo de segundos para pôr em memória</string>
     <string name="playerVideoFormat">Formato padrão dos vídeos</string>
-    <string name="update_available">A versão %1$s está disponível</string>
+    <string name="update_available">Atualização disponível</string>
     <string name="advanced_summary">Downloads e redefinição</string>
     <string name="player_summary">Padrões e comportamento</string>
     <string name="related_streams_summary">Mostrar conteúdo semelhante aos vídeos que você assiste</string>
@@ -540,4 +540,5 @@
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">Comentários (%1$s)</string>
     <string name="external_player">Player externo</string>
+    <string name="show_updates">Buscar atualizações automaticamente</string>
 </resources>

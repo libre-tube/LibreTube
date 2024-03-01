@@ -105,7 +105,7 @@
     <string name="disabled">Desactivado</string>
     <string name="playOnBackground">Reproducir en segundo plano</string>
     <string name="update_available_text">Nueva actualización disponible. Toca para ir a la página de descargas de GitHub.</string>
-    <string name="update_available">La versión %1$s está disponible</string>
+    <string name="update_available">Actualización disponible</string>
     <string name="appearance">Apariencia</string>
     <string name="shareTo">Enviar URL a</string>
     <string name="defaultIcon">Predeterminado</string>
@@ -540,4 +540,5 @@
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="external_player">Reproductor externo</string>
     <string name="comments_count">Comentarios (%1$s)</string>
+    <string name="show_updates">Comprobar las actualizaciones automáticamente</string>
 </resources>

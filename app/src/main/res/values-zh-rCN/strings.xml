@@ -104,7 +104,7 @@
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">后台播放</string>
-    <string name="update_available">版本 %1$s 可用</string>
+    <string name="update_available">更新可用</string>
     <string name="update_available_text">有更新可用。点击打开 GitHub 发布页面。</string>
     <string name="update_summary">检查更新</string>
     <string name="category_preview">预览/回放</string>
@@ -534,4 +534,5 @@
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">评论（%1$s）</string>
     <string name="external_player">外部播放器</string>
+    <string name="show_updates">自动检测更新</string>
 </resources>

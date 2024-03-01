@@ -512,4 +512,27 @@
     <string name="start_sleep_timer">Mulai pengatur waktu tidur</string>
     <string name="finished">Selesai</string>
     <string name="no_segments_found">Belum ada segmen di video ini.</string>
+    <string name="suggest_change_instance">Pemuatan membutuhkan waktu lebih lama dari biasa. Pertimbangkan mengganti server</string>
+    <string name="change_instance">Ubah server</string>
+    <string name="behavior_when_minimized">Perilaku ketika diminimalkan</string>
+    <string name="delete_all">Semua unduhan akan dihapus!</string>
+    <string name="show_updates">Periksa pembaruan secara otomatis</string>
+    <string name="copy_tooltip">Salin</string>
+    <string name="audio_language">Bahasa audio</string>
+    <string name="change">Ubah</string>
+    <string name="also_clear_watch_positions">Jika hapus posisi pemutaran</string>
+    <string name="download_playlist">Unduh daftar putar</string>
+    <string name="default_language">Bawaan</string>
+    <string name="download_playlist_note">Silakan pilih kualitas audio/video untuk diunduh. Takarir akan diunduh jika tersedia.</string>
+    <string name="enqueueing_playlist_download">Mengantrekan video untuk diunduh dari daftar putar %1$s</string>
+    <string name="rich_caption_rendering">Perenderan takarir kaya</string>
+    <string name="rich_caption_rendering_summary">Render takarir web untuk pengalaman yang lebih kaya dan terkustomisasi</string>
+    <string name="gestures">Gestur</string>
+    <string name="grid_landscape">Kolom kisi (lanskap)</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="comments_count">Komentar (%1$s)</string>
+    <string name="enqueue_playlist_description">Menampilkan notifikasi ketika mengantrekan video dari daftar putar untuk diunduh.</string>
+    <string name="external_player">Pemutar eksternal</string>
+    <string name="add_to_group">Tambahkan ke grup</string>
+    <string name="uptime">Waktu aktif %.2f%%</string>
 </resources>
