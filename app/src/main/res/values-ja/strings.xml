@@ -105,7 +105,7 @@
     <string name="reset">初期設定に戻す</string>
     <string name="reset_message">すべての設定を初期化し、ログアウトしますか？</string>
     <string name="default_subtitle_language">字幕の言語</string>
-    <string name="update_available">バージョン %1$s が利用可能</string>
+    <string name="update_available">最新版があります</string>
     <string name="chapters">チャプター</string>
     <string name="birdIcon">小鳥</string>
     <string name="instance_name">インスタンス名</string>
@@ -534,4 +534,5 @@
     <string name="comments_count">コメント (%1$s)</string>
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="external_player">外部のプレイヤー</string>
+    <string name="show_updates">最新版を自動で確認</string>
 </resources>

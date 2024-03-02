@@ -138,7 +138,7 @@
     <string name="legacyIcon">Stratený odkaz</string>
     <string name="instance_summary">Piped, prihlásenie a účet</string>
     <string name="gradientIcon">Glib prechod</string>
-    <string name="update_available">K dispozícii je verzia %1$s</string>
+    <string name="update_available">K dispozícii je aktualizácia</string>
     <string name="category_interaction_summary">Keď sa uprostred obsahu nachádza krátke pripomenutie, aby ste sa prihlásili k odberu alebo sledovaniu. Ak je dlhé alebo o niečom konkrétnom, bude to sebapropagácia</string>
     <string name="buffering_goal">Prednačítanie</string>
     <string name="category_filler_summary">Pre nesúvisiace scény pridané len ako výplň alebo humor, ktoré nie sú potrebné na pochopenie hlavného obsahu videa</string>
@@ -540,4 +540,5 @@
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">Komentáre (%1$s)</string>
     <string name="external_player">Externý prehrávač</string>
+    <string name="show_updates">Kontrolovať aktualizácie automaticky</string>
 </resources>
