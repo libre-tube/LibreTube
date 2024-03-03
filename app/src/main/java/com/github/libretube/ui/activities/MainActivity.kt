@@ -12,6 +12,8 @@ import android.widget.ScrollView
 import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.constraintlayout.widget.ConstraintSet.Constraint
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.allViews
@@ -455,7 +457,7 @@ class MainActivity : BaseActivity() {
                 linLayout.isVisible = true
                 playerMotionLayout.setTransitionDuration(250)
                 playerMotionLayout.transitionToEnd()
-                playerMotionLayout.getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
+                playerMotionLayout.getConstraintSet(R.id.start).constrainHeight(R.id.player, ConstraintSet.WRAP_CONTENT)
                 playerMotionLayout.enableTransition(R.id.yt_transition, true)
             }
             (fragment as? AudioPlayerFragment)?.binding?.apply {
