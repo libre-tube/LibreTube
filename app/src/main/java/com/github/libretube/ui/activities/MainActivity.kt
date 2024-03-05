@@ -8,11 +8,11 @@ import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewTreeObserver
 import android.widget.ScrollView
 import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.allViews
@@ -417,11 +417,20 @@ class MainActivity : BaseActivity() {
             navController.navigate(NavDirections.openPlaylist(playlistId = it))
         }
         intent?.getStringExtra(IntentData.videoId)?.let {
-            NavigationHelper.navigateVideo(
-                context = this,
-                videoUrlOrId = it,
-                timestamp = intent.getLongExtra(IntentData.timeStamp, 0L)
-            )
+            // the bottom navigation bar has to be created before opening the video
+            // otherwise the player layout measures aren't calculated properly
+            // and the miniplayer is opened at a closed state and overlapsing the navigationb ar
+            binding.bottomNav.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    NavigationHelper.navigateVideo(
+                        context = this@MainActivity,
+                        videoUrlOrId = it,
+                        timestamp = intent.getLongExtra(IntentData.timeStamp, 0L)
+                    )
+
+                    binding.bottomNav.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                }
+            })
         }
         intent?.getStringExtra(IntentData.query)?.let {
             savedSearchQuery = it
@@ -456,8 +465,6 @@ class MainActivity : BaseActivity() {
                 linLayout.isVisible = true
                 playerMotionLayout.setTransitionDuration(250)
                 playerMotionLayout.transitionToEnd()
-                playerMotionLayout.getConstraintSet(R.id.start)
-                    .constrainHeight(R.id.player, ConstraintSet.WRAP_CONTENT)
                 playerMotionLayout.enableTransition(R.id.yt_transition, true)
             }
             (fragment as? AudioPlayerFragment)?.binding?.apply {
