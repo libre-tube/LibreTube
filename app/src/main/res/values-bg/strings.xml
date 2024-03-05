@@ -26,7 +26,7 @@
     <string name="defres">Видео резолюция</string>
     <string name="createPlaylist">Създаване на плейлист</string>
     <string name="playlistName">Име на плейлиста</string>
-    <string name="emptyPlaylistName">Името на плейлиста,не може да е празно</string>
+    <string name="emptyPlaylistName">Името на плейлиста, не може да е празно</string>
     <string name="addToPlaylist">Добавяне в плейлиста</string>
     <string name="success">Завършено.</string>
     <string name="about">Относно</string>
@@ -46,15 +46,15 @@
     <string name="playlists">Плейлисти</string>
     <string name="okay">Добре</string>
     <string name="search_history">История на търсенията</string>
-    <string name="music_songs">YT музикални песни</string>
-    <string name="music_videos">YT музикални видеа</string>
-    <string name="music_playlists">YT музикални плейлисти</string>
+    <string name="music_songs">YT Музикални Песни</string>
+    <string name="music_videos">YT Музикални Видеоклипове</string>
+    <string name="music_playlists">YT Музикални Плейлисти</string>
     <string name="sponsorblock">SponsorBlock</string>
     <string name="category_sponsor">Спонсор</string>
     <string name="color_accent">Акценти</string>
     <string name="app_icon">Икона</string>
     <string name="disabled">Изключено</string>
-    <string name="update_available">Версия %1$s е налична</string>
+    <string name="update_available">Налична актуализация</string>
     <string name="appearance">Външен вид</string>
     <string name="downloads">Изтегляния</string>
     <string name="update_summary">Проверка за актуализация</string>
@@ -84,7 +84,7 @@
     <string name="all">Всички</string>
     <string name="history">История</string>
     <string name="clear_history">Почистване на историята</string>
-    <string name="music_albums">YT музикални албуми</string>
+    <string name="music_albums">YT Музикални Албуми</string>
     <string name="license">Лиценз</string>
     <string name="enabled">Включено</string>
     <string name="sponsorblock_notifications">Известия</string>
@@ -151,11 +151,11 @@
     <string name="playerAudioQuality">Качество на звука</string>
     <string name="behavior">Поведение</string>
     <string name="import_format_freetube">FreeTube</string>
-    <string name="category_intro">Антракт/Въвеждаща анимация</string>
+    <string name="category_intro">Антракт/Въвеждаща Анимация</string>
     <string name="invalid_url">Моля, въведете URL който работи</string>
     <string name="emptyPlaylistDescription">Описанието на плейлиста не може да бъде празно</string>
     <string name="group_name_error_exists">Моля, изберете име, което е уникално</string>
-    <string name="subscriberAndVideoCounts">%1$s абонати • %2$d видеа</string>
+    <string name="subscriberAndVideoCounts">%1$s абонати • %2$d видеоклипове</string>
     <string name="auto_fullscreen_shorts">Автоматичен цял екран на кратки видеоклипове</string>
     <string name="reset_message">Нулиране на всички настройки и излизане\?</string>
     <string name="autoplay_playlists_summary">Автоматично възпроизвеждане на следващия видеоклип в плейлисти, независимо от избраната настройка за автоматично възпроизвеждане</string>
@@ -399,10 +399,10 @@
     <string name="fullscreen_gestures">Влизане/излизане от жестове на цял екран</string>
     <string name="repeat_mode_none">Нито един</string>
     <string name="player_summary">По подразбиране и поведение</string>
-    <string name="already_logged_in">Вече сте влезли. Можете да излезете от акаунта си</string>
+    <string name="already_logged_in">Вече сте влезли. Можете да излезете от акаунта си.</string>
     <string name="proceed">Продължете</string>
     <string name="creation_date">Дата на създаване</string>
-    <string name="category_selfpromo">Неплатено/самореклама</string>
+    <string name="category_selfpromo">Неплатено/Самореклама</string>
     <string name="auth_instance_summary">Използвайте различена инстанция за удостоверени повиквания</string>
     <string name="download_channel_description">Показва известие при изтегляне на медия.</string>
     <string name="segment_submitted">Сегментът е изпратен</string>
@@ -480,7 +480,7 @@
     <string name="livestreams">Потоци на живо</string>
     <string name="alphabetic_reversed">Азбучен (обърнато)</string>
     <string name="download_channel_name">Услуга за изтегляне</string>
-    <string name="uploaderAndVideoCount">%1$s • %2$d видеа</string>
+    <string name="uploaderAndVideoCount">%1$s • %2$d видеоклипове</string>
     <string name="tooltip_sort">Вид</string>
     <string name="hls_instead_of_dash">Използвайте HLS</string>
     <string name="duration">Продължителност</string>
@@ -521,7 +521,7 @@
     <string name="no_segments_found">Все още няма сегменти за този видеоклип.</string>
     <string name="successfully_removed_from_playlist">Успешно премахване \"%1$s\" от плейлиста.</string>
     <string name="copy_tooltip">Копирай</string>
-    <string name="delete_all">Hrvatski</string>
+    <string name="delete_all">Всички изтеглени файлове ще бъдат изтрити!</string>
     <string name="change_instance">Промяна на инстанция</string>
     <string name="change">Промяна</string>
     <string name="behavior_when_minimized">Поведение при минимизиране</string>
@@ -537,4 +537,5 @@
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">Коментари (%1$s)</string>
     <string name="external_player">Външен плеър</string>
+    <string name="show_updates">Автоматична проверка на актуализации</string>
 </resources>
