@@ -41,4 +41,5 @@ object IntentData {
     const val maxAudioQuality = "maxAudioQuality"
     const val audioLanguage = "audioLanguage"
     const val captionLanguage = "captionLanguage"
+    const val wasIntentStopped = "wasIntentStopped"
 }
