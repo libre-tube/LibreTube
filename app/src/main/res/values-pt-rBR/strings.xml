@@ -198,7 +198,7 @@
     <string name="turnInternetOn">Ative o Wi-Fi ou os dados móveis para se conectar à Internet.</string>
     <string name="navLabelVisibility">Visibilidade dos textos</string>
     <string name="never">Nunca</string>
-    <string name="autoRotatePlayer_summary">Reproduzir em tela cheia quando o dispositivo for girado</string>
+    <string name="autoRotatePlayer_summary">Reproduzir em tela cheia quando a orientação da tela girar para o modo paisagem</string>
     <string name="pure_theme">Tema puro</string>
     <string name="pure_theme_summary">Tema branco/preto puro</string>
     <string name="no_player_found">Nenhum player externo foi encontrado. Verifique se você tem um instalado.</string>
@@ -525,7 +525,7 @@
     <string name="grid_landscape">Colunas da grade (modo paisagem)</string>
     <string name="copy_tooltip">Copiar</string>
     <string name="change_instance">Alterar instância</string>
-    <string name="suggest_change_instance">O carregamento está demorando mais que o normal. Considere mudar de instância</string>
+    <string name="suggest_change_instance">O carregamento está demorando mais do que o esperado. Considere mudar de instância</string>
     <string name="change">Alterar</string>
     <string name="enqueue_playlist_description">Mostrar notificação ao enfileirar vídeos da playlist para o download.</string>
     <string name="download_playlist">Baixar playlist</string>

@@ -95,7 +95,7 @@
     <string name="downloads">Allalaadimised</string>
     <string name="update_summary">Kontrolli rakenduse uuendusi</string>
     <string name="app_uptodate">Sul on kasutusel viimane versioon.</string>
-    <string name="update_available">Saadaval on versioon %1$s</string>
+    <string name="update_available">Uus versioon on saadaval</string>
     <string name="appearance">Välimus</string>
     <string name="playback_speed">Taasesituse kiirus</string>
     <string name="category_segments">Video segmendid</string>
@@ -117,4 +117,9 @@
     <string name="advanced">Lisaseadistused</string>
     <string name="player">Meediamängija</string>
     <string name="appearance_summary">Kohanda rakendus endale meeldivaks</string>
+    <string name="normal_views">%1$s vaatamist%2$s</string>
+    <string name="live">Otseeeter</string>
+    <string name="shareTo">Jaga URL\'i</string>
+    <string name="trending_views">%1$s • %2$s vaatamist • %3$s</string>
+    <string name="defaultIcon">Vaikimisi</string>
 </resources>
