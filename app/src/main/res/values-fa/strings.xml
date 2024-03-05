@@ -30,7 +30,7 @@
     <string name="server_error">به نظر کارساز گزیده مشکلی دارد. نمونه‌ای دیگر را بیازمایید.</string>
     <string name="error">مشکلی پیش آمد.</string>
     <string name="notgmail">این برای حساب پایپد است</string>
-    <string name="defres">تفکیک پذیری ویدیو</string>
+    <string name="defres">کیفیت ویدیو</string>
     <string name="empty">باید نام کاربری و گذرواژه‌ای را وارد کنید.</string>
     <string name="emptyList">چیزی این‌جا نیست.</string>
     <string name="grid">ستون‌های شبکه‌ای (عمودی)</string>
@@ -89,7 +89,7 @@
     <string name="enabled">روشن</string>
     <string name="disabled">خاموش</string>
     <string name="appearance">ظاهر</string>
-    <string name="update_available">نگارش %1$s موجود است</string>
+    <string name="update_available">به‌روزرسانی موجود است</string>
     <string name="downloads">بارگیری‌ها</string>
     <string name="music_songs">آوازهای آهنگ‌های یوتوب</string>
     <string name="music_videos">ویدیوهای آهنگ‌های یوتوب</string>
@@ -460,7 +460,7 @@
     <string name="visibility">نمایانی</string>
     <string name="tooltip_options">گزینه‌ها</string>
     <string name="tooltip_locked">قفل پخش‌کننده</string>
-    <string name="remove_watched_videos">برداشتن ویدیوهای دیده شده</string>
+    <string name="remove_watched_videos">حذف ویدیوهای دیده شده</string>
     <string name="tooltip_play">پخش</string>
     <string name="no_chapter">بدون فصل</string>
     <string name="uploader_name">نام بارگذار</string>
@@ -496,7 +496,7 @@
     <string name="vote_for_segment">رأی برای بخش</string>
     <string name="upvote">بالا</string>
     <string name="segment">بخش</string>
-    <string name="no_fullscreen_resolution">تفکیک غیر تمام‌صفحه</string>
+    <string name="no_fullscreen_resolution">کیفیت غیر تمام‌صفحه</string>
     <string name="undo">برگردان</string>
     <string name="repeat_mode_all">تکرار همه</string>
     <string name="playback_during_call_summary">توجّه داشته باشید که این کار باعث می‌شود کاره دیگر هیچ گونه تمرکز صوتی‌ای را مدیریت نکند</string>
@@ -530,4 +530,12 @@
     <string name="change_instance">تغییر نمونه</string>
     <string name="suggest_change_instance">بار کردن بیش از معمول طول کشیده. تعویض نمونه را در نظر داشته باشید</string>
     <string name="also_clear_watch_positions">همچنین پاک کردن موقعیت‌های پخش</string>
+    <string name="behavior_when_minimized">رفتار هنگام کمینه بودن</string>
+    <string name="enqueue_playlist_description">هنگام در صف قرار گرفتن ویدیو های فهرست پخشی که باید بارگیری شوند، اعلان نشان داده می‌شود.</string>
+    <string name="enqueueing_playlist_download">در صف قرار دادن ویدیو‌ های فهرست پخش %1$s برای بارگیری</string>
+    <string name="gestures">ژست های حرکتی</string>
+    <string name="show_updates">بررسی خودکار به‌روزرسانی ها</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="comments_count">نظرات (%1$s)</string>
+    <string name="external_player">پخش کننده‌ٔ خارجی</string>
 </resources>
