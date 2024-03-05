@@ -113,7 +113,6 @@ import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
 import com.github.libretube.util.YoutubeHlsPlaylistParser
-import java.util.*
 import java.util.concurrent.Executors
 import kotlin.math.abs
 import kotlinx.coroutines.Dispatchers
@@ -782,6 +781,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         ) {
             exoPlayer.pause()
         }
+
+        // the app was put somewhere in the background - remember to not automatically continue
+        // playing on re-creation of the app
+        requireArguments().putBoolean(IntentData.wasIntentStopped, true)
+
         super.onPause()
     }
 
@@ -948,7 +952,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             initializePlayerView()
 
-            exoPlayer.playWhenReady = PlayerHelper.playAutomatically
+            // don't continue playback when the fragment is re-created after Android killed it
+            val wasIntentStopped = requireArguments().getBoolean(IntentData.wasIntentStopped, false)
+            exoPlayer.playWhenReady = PlayerHelper.playAutomatically && !wasIntentStopped
+            requireArguments().putBoolean(IntentData.wasIntentStopped, false)
+
             exoPlayer.prepare()
 
             if (binding.playerMotionLayout.progress != 1.0f) {
