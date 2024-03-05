@@ -948,8 +948,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 player = exoPlayer
             }
 
-            playerBinding.exoProgress.setPlayer(exoPlayer)
-
             initializePlayerView()
 
             // don't continue playback when the fragment is re-created after Android killed it
@@ -1095,7 +1093,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playerBinding.seekbarPreview.isGone = true
         seekBarPreviewListener?.let { playerBinding.exoProgress.removeListener(it) }
         seekBarPreviewListener = createSeekbarPreviewListener().also {
-            playerBinding.exoProgress.addListener(it)
+            playerBinding.exoProgress.addSeekBarListener(it)
         }
     }
 

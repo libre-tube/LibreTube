@@ -7,9 +7,7 @@ import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.view.marginLeft
-import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
-import androidx.media3.ui.DefaultTimeBar
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.helpers.PreferenceHelper
@@ -23,10 +21,8 @@ import com.google.android.material.R
 class MarkableTimeBar(
     context: Context,
     attributeSet: AttributeSet? = null
-) : DefaultTimeBar(context, attributeSet) {
-
+) : DismissableTimeBar(context, attributeSet) {
     private var segments = listOf<Segment>()
-    private var player: Player? = null
     private var length: Int = 0
 
     private val progressBarHeight = 2f.dpToPx()
@@ -37,7 +33,7 @@ class MarkableTimeBar(
     }
 
     private fun drawSegments(canvas: Canvas) {
-        if (player == null) return
+        if (exoPlayer == null) return
 
         canvas.save()
         val horizontalOffset = (parent as View).marginLeft
@@ -68,7 +64,7 @@ class MarkableTimeBar(
     }
 
     private fun Float.toLength(): Int {
-        return (this * 1000 / player!!.duration * length).toInt()
+        return (this * 1000 / exoPlayer!!.duration * length).toInt()
     }
 
     fun setSegments(segments: List<Segment>) {
@@ -77,9 +73,5 @@ class MarkableTimeBar(
 
     fun clearSegments() {
         segments = listOf()
-    }
-
-    fun setPlayer(player: Player) {
-        this.player = player
     }
 }
