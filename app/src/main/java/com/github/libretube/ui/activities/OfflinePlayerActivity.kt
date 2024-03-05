@@ -85,7 +85,7 @@ class OfflinePlayerActivity : BaseActivity() {
             super.onPlaybackStateChanged(playbackState)
             // setup seekbar preview
             if (playbackState == Player.STATE_READY) {
-                binding.player.binding.exoProgress.addListener(
+                binding.player.binding.exoProgress.addSeekBarListener(
                     SeekbarPreviewListener(
                         timeFrameReceiver ?: return,
                         binding.player.binding,

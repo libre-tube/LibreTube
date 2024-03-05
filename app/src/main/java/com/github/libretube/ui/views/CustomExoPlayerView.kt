@@ -182,8 +182,9 @@ open class CustomExoPlayerView(
             }
         })
 
+        player?.let { binding.exoProgress.setPlayer(it) }
         // prevent the controls from disappearing while scrubbing the time bar
-        binding.exoProgress.addListener(object : TimeBar.OnScrubListener {
+        binding.exoProgress.addSeekBarListener(object : TimeBar.OnScrubListener {
             override fun onScrubStart(timeBar: TimeBar, position: Long) {
                 cancelHideControllerTask()
             }
