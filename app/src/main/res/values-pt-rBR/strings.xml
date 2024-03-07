@@ -430,7 +430,7 @@
     <string name="off">Desativado</string>
     <string name="manual">Manual</string>
     <string name="automatic">Automático</string>
-    <string name="fallback_piped_proxy">Fallback para o proxy Piped</string>
+    <string name="fallback_piped_proxy">Encaminhar para o proxy Piped</string>
     <string name="visible">Mostrar na barra de busca</string>
     <string name="category_highlight">Mostrar destaque do vídeo</string>
     <string name="category_highlight_summary">Pode ser o título anunciado, a miniatura ou a parte mais interessante do vídeo. Você pode pular tocando nele na seção de capítulos</string>
