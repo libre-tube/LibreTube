@@ -86,7 +86,7 @@
     <string name="piped">Piped</string>
     <string name="youtube">YouTubе</string>
     <string name="playOnBackground">Пусти у позадини</string>
-    <string name="update_available">Доступна је верзија %1$s</string>
+    <string name="update_available">Доступно је ажурирање</string>
     <string name="update_available_text">Ново ажурирање доступно. Кликните да бисте отворили страницу GitHub издања.</string>
     <string name="appearance">Изглед</string>
     <string name="downloads">Преузимања</string>
@@ -540,4 +540,5 @@
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">Коментари (%1$s)</string>
     <string name="external_player">Спољни плејер</string>
+    <string name="show_updates">Аутоматски провери ажурирања</string>
 </resources>

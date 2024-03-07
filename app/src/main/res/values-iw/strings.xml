@@ -311,7 +311,7 @@
     <string name="auto">אוטומטי</string>
     <string name="swipe_controls">בקרי החלקה</string>
     <string name="defaults">ברירות מחדל</string>
-    <string name="swipe_controls_summary">להשתמש במחוות החלקה כדי לכוון את הבהירות ואת עצמת השמע</string>
+    <string name="swipe_controls_summary">ניתן להחליק על המסך כדי לכוון את הבהירות ואת עוצמת השמע בזמן צפייה במסך מלא</string>
     <string name="no_comments_available">לסרטון זה אין תגובות.</string>
     <string name="comments_disabled">הערות הושבתו על ידי מעלה הסרטון.</string>
     <string name="double_tap_seek">נגיעה כפולה לדילוג</string>
@@ -334,7 +334,7 @@
     <string name="nothing_selected">שום דבר לא נבחר!</string>
     <string name="color_violet">סגול מסתגל</string>
     <string name="failed_fetching_instances">לא ניתן למשוך את המופעים הזמינים.</string>
-    <string name="hide_watched_from_feed">הסתרת סרטונים שנצפו מערוץ העדכונים</string>
+    <string name="hide_watched_from_feed">להסתיר סרטונים שנצפו כבר</string>
     <string name="playlistUrl">כתובת רשימת נגינה</string>
     <string name="shuffle">ערבול</string>
     <string name="add_to_bookmarks">הוספה למועדפים</string>
@@ -388,7 +388,7 @@
     <string name="subscriberAndVideoCounts">%1$s מנויים • %2$d סרטונים</string>
     <string name="uploaderAndVideoCount">%1$s • ‏%2$d סרטונים</string>
     <string name="disable_proxy">השבתת המתווך של Piped</string>
-    <string name="disable_proxy_summary">טעינת סרטונים ותמונות ישירות מהשרתים של YouTube. יש להפעיל את האפשרות רק אם כבר יש לך VPN!</string>
+    <string name="disable_proxy_summary">טעינת סרטונים ותמונות ישירות מהשרתים של YouTube. יש להפעיל את האפשרות רק אם כל התקשורת שלך היא דרך VPN</string>
     <string name="auto_fullscreen_shorts">מסך מלא אוטומטי בסרטונים קצרים</string>
     <string name="group_name">שם הקבוצה</string>
     <string name="channel_groups">קבוצות ערוץ</string>
@@ -404,7 +404,7 @@
         <item quantity="other"/>
     </plurals>
     <string name="show_stream_thumbnails">הצגת תמונות ממוזערות של תזרימים</string>
-    <string name="show_stream_thumbnails_summary">הצגת תמונות ממוזערות של תזרימים חדשים. הפעלת האפשרות תוביל לצריכה של נתונים נוספים.</string>
+    <string name="show_stream_thumbnails_summary">הצגת תמונות ממוזערות של תזרימים חדשים. הפעלת האפשרות תוביל לצריכה של נתונים נוספים</string>
     <string name="unlimited_search_history">היסטוריית חיפושים בלתי מוגבלת</string>
     <string name="duration">משך</string>
     <string name="duration_reversed">משך (הפוך)</string>
@@ -519,4 +519,28 @@
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="show_updates">לבדוק אוטומטית אם יש עדכונים</string>
     <string name="rich_caption_rendering">עיבוד של כותרת עשירה</string>
+    <string name="change">החלפה</string>
+    <string name="change_instance">החלפת מופע</string>
+    <string name="copy_tooltip">העתקה</string>
+    <string name="behavior_when_minimized">התנהגות עם מזעור</string>
+    <string name="download_playlist_note">נא לבחור את איכות השמע/וידאו המרבית להורדה. כתוביות תתקבלנה רק אם תהיינה זמינות.</string>
+    <string name="disable_sleep_timer">השבתת מתזמן שינה</string>
+    <string name="time_in_minutes">זמן בדקות</string>
+    <string name="invalid_input">קלט שגוי</string>
+    <string name="uptime">%.2f%% זמינות</string>
+    <string name="successfully_removed_from_playlist">„%1$s” הוסר בהצלחה מרשימת הנגינה.</string>
+    <string name="watched">נצפה</string>
+    <string name="no_segments_found">עדיין אין מקטעים לסרטון הזה.</string>
+    <string name="start_sleep_timer">הפעלת מתזמן שינה</string>
+    <string name="download_playlist">הורדת רשימת נגינה</string>
+    <string name="enqueue_playlist_description">להציג התראות בעת הוספת סרטונים של רשימת נגינה להורדה.</string>
+    <string name="also_clear_watch_positions">לפנות גם את מקומות השעון</string>
+    <string name="delete_all">כל ההורדות תימחקנה!</string>
+    <string name="suggest_change_instance">הטעינה אורכת מעבר לרגיל. כדאי לשנות מופע</string>
+    <string name="add_to_group">הוספה לקבוצה</string>
+    <string name="audio_language">שפת השמע</string>
+    <string name="default_language">ברירת מחדל</string>
+    <string name="external_player">נגן חיצוני</string>
+    <string name="gestures">מחוות</string>
+    <string name="enqueueing_playlist_download">הוספת סרטונים להורדה מרשימת נגינה %1$s</string>
 </resources>

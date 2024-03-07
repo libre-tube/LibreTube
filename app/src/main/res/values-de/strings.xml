@@ -104,7 +104,7 @@
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Im Hintergrund abspielen</string>
-    <string name="update_available">Version %1$s ist verfügbar</string>
+    <string name="update_available">Update verfügbar</string>
     <string name="update_available_text">Neue Aktualisierung verfügbar. Hier klicken, um die GitHub-Releases Seite zu öffnen.</string>
     <string name="advanced_summary">Erweiterte Optionen und Werkseinstellungen</string>
     <string name="appearance">Design</string>
@@ -534,4 +534,8 @@
     <string name="download_playlist_note">Bitte wähle die maximale Audio-/Videoqualität zum Downloaden. Untertitel werden nur heruntergeladen, falls sie verfügbar sind.</string>
     <string name="gestures">Gesten</string>
     <string name="behavior_when_minimized">Verhalten bei Minimierung</string>
+    <string name="show_updates">Automatisch nach Updates prüfen</string>
+    <string name="external_player">Externer Player</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="comments_count">Kommentare (%1$s)</string>
 </resources>
