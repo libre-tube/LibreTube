@@ -17,6 +17,7 @@ import android.view.Window
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.TooltipCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.postDelayed
 import androidx.core.view.WindowInsetsCompat
@@ -52,7 +53,6 @@ import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.toggleSystemBars
-import com.github.libretube.ui.extensions.trySetTooltip
 import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.interfaces.PlayerOptions
@@ -141,7 +141,7 @@ open class CustomExoPlayerView(
             }
 
             binding.lockPlayer.setImageResource(icon)
-            binding.lockPlayer.trySetTooltip(context.getString(tooltip))
+            TooltipCompat.setTooltipText(binding.lockPlayer, context.getString(tooltip))
 
             // show/hide all the controls
             lockPlayer(isPlayerLocked)
