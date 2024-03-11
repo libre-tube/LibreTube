@@ -74,7 +74,7 @@ class CommentsMainFragment : Fragment() {
                     commentPagingAdapter.loadStateFlow.collect {
                         binding.progress.isVisible = it.refresh is LoadState.Loading
 
-                        if (it.append is LoadState.NotLoading && it.append.endOfPaginationReached) {
+                        if (it.append is LoadState.NotLoading && it.append.endOfPaginationReached && commentPagingAdapter.itemCount == 0) {
                             binding.errorTV.text = getString(R.string.no_comments_available)
                             binding.errorTV.isVisible = true
                             return@collect
