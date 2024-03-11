@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -25,6 +26,8 @@ class CommentsMainFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: CommentsViewModel by activityViewModels()
 
+    private var scrollListener: ViewTreeObserver.OnScrollChangedListener? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,17 +48,19 @@ class CommentsMainFragment : Fragment() {
         val commentsSheet = parentFragment as? CommentsSheet
         commentsSheet?.binding?.btnScrollToTop?.setOnClickListener {
             // scroll back to the top / first comment
-            _binding?.commentsRV?.smoothScrollToPosition(0)
-            viewModel.currentCommentsPosition = 0
+            _binding?.commentsRV?.smoothScrollToPosition(POSITION_START)
+            viewModel.changeCommentPosition(POSITION_START)
         }
 
-        binding.commentsRV.viewTreeObserver.addOnScrollChangedListener {
+        scrollListener = ViewTreeObserver.OnScrollChangedListener {
             // save the last scroll position to become used next time when the sheet is opened
-            viewModel.currentCommentsPosition = layoutManager.findFirstVisibleItemPosition()
-
+            viewModel.changeCommentPosition(layoutManager.findFirstVisibleItemPosition())
             // hide or show the scroll to top button
-            commentsSheet?.binding?.btnScrollToTop?.isVisible = viewModel.currentCommentsPosition != 0
+            commentsSheet?.binding?.btnScrollToTop?.isVisible =
+                viewModel.currentCommentsPosition.value != 0
         }
+        binding.commentsRV.viewTreeObserver.addOnScrollChangedListener(scrollListener)
+
         commentsSheet?.updateFragmentInfo(false, getString(R.string.comments))
 
         val commentPagingAdapter = CommentPagingAdapter(
@@ -97,8 +102,19 @@ class CommentsMainFragment : Fragment() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        binding.commentsRV.viewTreeObserver.removeOnScrollChangedListener(scrollListener)
+        scrollListener = null
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+    companion object {
+        const val POSITION_START = 0
+    }
+
 }

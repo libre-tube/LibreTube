@@ -1,5 +1,6 @@
 package com.github.libretube.ui.models
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asFlow
@@ -41,7 +42,12 @@ class CommentsViewModel : ViewModel() {
     var channelAvatar: String? = null
     var handleLink: ((url: String) -> Unit)? = null
 
-    var currentCommentsPosition = 0
+    private val _currentCommentsPosition = MutableLiveData(0)
+    val currentCommentsPosition: LiveData<Int> = _currentCommentsPosition
+
+    private val _currentRepliesPosition = MutableLiveData(0)
+    val currentRepliesPosition: LiveData<Int> = _currentRepliesPosition
+
     var commentsSheetDismiss: (() -> Unit)? = null
 
     fun setCommentSheetExpand(value: Boolean?) {
@@ -52,6 +58,18 @@ class CommentsViewModel : ViewModel() {
 
     fun reset() {
         setCommentSheetExpand(null)
-        currentCommentsPosition = 0
+        _currentCommentsPosition.value = 0
+    }
+
+    fun changeCommentPosition(position: Int) {
+        if (position != currentCommentsPosition.value) {
+            _currentCommentsPosition.postValue(position)
+        }
+    }
+
+    fun changeReplayPosition(position: Int) {
+        if (position != currentRepliesPosition.value) {
+            _currentRepliesPosition.postValue(position)
+        }
     }
 }
