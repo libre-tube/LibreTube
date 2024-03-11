@@ -153,4 +153,14 @@
     <string name="download_paused">Allalaadimine on peatatud</string>
     <string name="download_completed">Allalaadimine on lõppenud</string>
     <string name="concurrent_downloads">Suurim samaaegsete allalaadimiste arv</string>
+    <string name="show_updates">Kontrolli uuendusi automaatselt</string>
+    <string name="instance_summary">Piped, sisseligimine ja kasutajakonto</string>
+    <string name="customInstance_summary">Lisa…</string>
+    <string name="instance_name">Vaheserveri nimi</string>
+    <string name="instance_api_url">Vaheserveri API aadress</string>
+    <string name="addInstance">Lisa vaheserver</string>
+    <string name="empty_instance">Sisesta nimi ja API aadress.</string>
+    <string name="clear_customInstances">Kustuta lisatu</string>
+    <string name="invalid_url">Palun sisesta aadress, mis toimib</string>
+    <string name="version">Versioon %1$s</string>
 </resources>
