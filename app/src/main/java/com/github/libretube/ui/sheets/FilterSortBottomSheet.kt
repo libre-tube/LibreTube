@@ -40,9 +40,10 @@ class FilterSortBottomSheet : ExpandedBottomSheet() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         addSortOptions()
+        setInitialFiltersState()
+
         observeSortChanges()
         observeHideWatchedChanges()
-        setInitialFiltersState()
         observeFiltersChanges()
     }
 
@@ -66,6 +67,13 @@ class FilterSortBottomSheet : ExpandedBottomSheet() {
         }
     }
 
+    private fun setInitialFiltersState() {
+        binding.filterVideos.isChecked = ContentFilter.VIDEOS.isEnabled
+        binding.filterShorts.isChecked = ContentFilter.SHORTS.isEnabled
+        binding.filterLivestreams.isChecked = ContentFilter.LIVESTREAMS.isEnabled
+        binding.hideWatchedCheckbox.isChecked = hideWatched
+    }
+
     private fun observeSortChanges() {
         binding.sortRadioGroup.setOnCheckedChangeListener { group, checkedId ->
             val index = group.findViewById<RadioButton>(checkedId).tag as Int
@@ -79,13 +87,6 @@ class FilterSortBottomSheet : ExpandedBottomSheet() {
             hideWatched = checked
             notifyChange()
         }
-    }
-
-    private fun setInitialFiltersState() {
-        binding.filterVideos.isChecked = ContentFilter.VIDEOS.isEnabled
-        binding.filterShorts.isChecked = ContentFilter.SHORTS.isEnabled
-        binding.filterLivestreams.isChecked = ContentFilter.LIVESTREAMS.isEnabled
-        binding.hideWatchedCheckbox.isChecked = hideWatched
     }
 
     private fun observeFiltersChanges() {
