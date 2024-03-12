@@ -1040,9 +1040,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // start to play the next video
         playVideo()
         // close comment bottom sheet for next video
-        commentsViewModel.commentsSheetDismiss?.invoke()
+        runCatching { commentsViewModel.commentsSheetDismiss?.invoke() }
         // kill the chapters bottom sheet
-        chaptersBottomSheet?.dismiss()
+        runCatching { chaptersBottomSheet?.dismiss() }
         chaptersBottomSheet = null
     }
 
