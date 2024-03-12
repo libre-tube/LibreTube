@@ -1,11 +1,11 @@
 plugins {
     id("com.android.application")
-    id("com.google.devtools.ksp")
     id("kotlin-android")
     id("kotlinx-serialization")
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
     alias(libs.plugins.baselineprofile)
+    alias(libs.plugins.ksp)
 }
 
 android {
