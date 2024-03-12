@@ -273,6 +273,14 @@ class MainActivity : BaseActivity() {
         this.searchItem = searchItem
         searchView = searchItem.actionView as SearchView
 
+        searchView.setIconifiedByDefault(false)
+        searchView.queryHint = getString(R.string.search_hint)
+        searchView.setBackgroundColor(
+            ThemeHelper.getThemeColor(
+                this@MainActivity,
+                com.google.android.material.R.attr.colorSecondaryContainer
+            )
+        )
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 navController.navigate(NavDirections.showSearchResults(query))
