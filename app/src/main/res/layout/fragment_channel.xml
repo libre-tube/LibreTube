@@ -156,9 +156,9 @@
                                 android:text="@string/playlists" />
 
                             <com.google.android.material.chip.Chip
-                                android:id="@+id/channels"
+                                android:id="@+id/albums"
                                 style="@style/channelChip"
-                                android:text="@string/channels" />
+                                android:text="@string/albums" />
 
                         </com.google.android.material.chip.ChipGroup>
 

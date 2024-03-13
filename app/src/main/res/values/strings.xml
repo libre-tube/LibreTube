@@ -73,6 +73,7 @@
     <string name="comments_count">Comments (%1$s)</string>
     <string name="replies">Replies</string>
     <string name="channels">Channels</string>
+    <string name="albums">Albums</string>
     <string name="all">All</string>
     <string name="playlists">Playlists</string>
     <string name="okay">OK</string>
