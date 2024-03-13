@@ -541,4 +541,5 @@
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">Komentáře (%1$s)</string>
     <string name="show_updates">Automaticky kontrolovat aktualizace</string>
+    <string name="albums">Alba</string>
 </resources>
