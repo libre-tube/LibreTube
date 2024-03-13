@@ -541,4 +541,5 @@
     <string name="comments_count">Comentários (%1$s)</string>
     <string name="external_player">Player externo</string>
     <string name="show_updates">Buscar atualizações automaticamente</string>
+    <string name="albums">Álbuns</string>
 </resources>
