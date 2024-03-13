@@ -550,4 +550,5 @@
     <string name="comments_count">التعليقات (%1$s)</string>
     <string name="external_player">مشغل خارجي</string>
     <string name="show_updates">التحقق من التحديثات تلقائيا</string>
+    <string name="albums">الألبومات</string>
 </resources>
