@@ -10,5 +10,5 @@ sealed class ChannelTabs(
     object Playlists : ChannelTabs("playlists", R.id.playlists)
     object Shorts : ChannelTabs("shorts", R.id.shorts)
     object Livestreams : ChannelTabs("livestreams", R.id.livestreams)
-    object Channels : ChannelTabs("channels", R.id.channels)
+    object Albums : ChannelTabs("albums", R.id.albums)
 }
