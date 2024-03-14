@@ -54,7 +54,7 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
         ChannelTabs.Shorts,
         ChannelTabs.Livestreams,
         ChannelTabs.Playlists,
-        ChannelTabs.Channels
+        ChannelTabs.Albums
     )
     private var channelTabs: List<ChannelTab> = emptyList()
     private var nextPages = Array<String?>(5) { null }

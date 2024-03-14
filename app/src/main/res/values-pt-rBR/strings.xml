@@ -163,7 +163,7 @@
     <string name="no_audio">Sem áudio</string>
     <string name="always">Sempre</string>
     <string name="selected">Selecionado</string>
-    <string name="watch_history_summary">Mantenha o controle dos vídeos visualizados localmente</string>
+    <string name="watch_history_summary">Mantenha o controle dos vídeos assistidos localmente</string>
     <string name="reset_watch_positions">Redefinir</string>
     <string name="autoRotatePlayer">Tela cheia automática</string>
     <string name="notify_new_streams">Mostrar notificações para novos vídeos</string>
@@ -360,7 +360,7 @@
     <string name="replies">Respostas</string>
     <string name="codecs">Codecs</string>
     <string name="unsupported_file_format">Formato de arquivo não suportado: %1$s</string>
-    <string name="mark_as_watched">Marcar como visualizado</string>
+    <string name="mark_as_watched">Marcar como assistido</string>
     <string name="custom_playback_speed">Velocidade personalizada</string>
     <string name="custom_playback_speed_summary">Usar velocidade de reprodução personalizada</string>
     <string name="category">Categoria</string>
@@ -419,7 +419,7 @@
     <string name="import_format_piped">Piped/LibreTube</string>
     <string name="import_format_newpipe">NewPipe</string>
     <string name="home_tab_content">Conteúdo da guia inicial</string>
-    <string name="mark_as_unwatched">Marcar como não visualizado</string>
+    <string name="mark_as_unwatched">Marcar como não assistido</string>
     <string name="choose_instance_long">Escolha uma instância Piped para usar abaixo. A instância Piped atuará como intermediária entre você e o YouTube. Essas instâncias estão localizadas em locais físicos diferentes, indicados pelas bandeiras dos países. As instâncias fisicamente mais próximas de você são provavelmente mais rápidas do que as instâncias que não estão. Você pode alterar a instância usada nas configurações a qualquer momento.</string>
     <string name="choose_instance">Escolha uma instância primeiro!</string>
     <string name="welcome">Bem-vindo ao LibreTube</string>
@@ -430,7 +430,7 @@
     <string name="off">Desativado</string>
     <string name="manual">Manual</string>
     <string name="automatic">Automático</string>
-    <string name="fallback_piped_proxy">Fallback para o proxy Piped</string>
+    <string name="fallback_piped_proxy">Encaminhar para o proxy Piped</string>
     <string name="visible">Mostrar na barra de busca</string>
     <string name="category_highlight">Mostrar destaque do vídeo</string>
     <string name="category_highlight_summary">Pode ser o título anunciado, a miniatura ou a parte mais interessante do vídeo. Você pode pular tocando nele na seção de capítulos</string>
@@ -460,7 +460,7 @@
     <string name="duration_span">Duração: %1$s</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="screen_orientation">Orientação da tela</string>
-    <string name="remove_watched_videos">Remover vídeos visualizados</string>
+    <string name="remove_watched_videos">Remover vídeos assistidos</string>
     <string name="player_channel_name">Assistente do Player</string>
     <string name="player_channel_description">Mostrar notificação quando estiver reproduzindo</string>
     <string name="tooltip_create_playlist">Criar playlist</string>
@@ -514,7 +514,7 @@
     <string name="time_in_minutes">Tempo em minutos</string>
     <string name="invalid_input">Entrada inválida</string>
     <string name="disable_sleep_timer">Desativar temporizador</string>
-    <string name="watched">Visualizado</string>
+    <string name="watched">Assistido</string>
     <string name="start_sleep_timer">Iniciar temporizador</string>
     <string name="finished">Finalizado</string>
     <string name="no_segments_found">Ainda não há segmentos para este vídeo.</string>

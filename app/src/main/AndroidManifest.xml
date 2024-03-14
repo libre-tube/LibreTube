@@ -37,26 +37,32 @@
 
         <activity
             android:name=".ui.activities.WelcomeActivity"
-            android:label="@string/welcome" />
+            android:label="@string/welcome"
+            android:screenOrientation="locked" />
 
         <activity
             android:name=".ui.activities.NoInternetActivity"
-            android:label="@string/noInternet" />
+            android:label="@string/noInternet"
+            android:screenOrientation="locked" />
 
         <activity
             android:name=".ui.activities.SettingsActivity"
-            android:label="@string/settings" />
+            android:label="@string/settings"
+            android:screenOrientation="locked" />
 
         <activity
             android:name=".ui.activities.AboutActivity"
-            android:label="@string/settings" />
+            android:label="@string/settings"
+            android:screenOrientation="locked" />
 
         <activity
             android:name=".ui.activities.HelpActivity"
-            android:label="@string/settings" />
+            android:label="@string/settings"
+            android:screenOrientation="locked" />
 
         <activity
-            android:name=".ui.activities.ZoomableImageActivity" />
+            android:name=".ui.activities.ZoomableImageActivity"
+            android:screenOrientation="locked" />
 
         <activity
             android:name=".ui.activities.AddToQueueActivity"
@@ -84,7 +90,7 @@
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="user"
+            android:screenOrientation="locked"
             android:supportsPictureInPicture="true"
             android:windowSoftInputMode="adjustPan">
             <!-- allow being recognized as a music player -->

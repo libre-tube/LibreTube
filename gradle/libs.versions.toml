@@ -3,6 +3,7 @@ appcompat = "1.6.1"
 core = "1.12.0"
 gradle = "8.3.0"
 kotlin = "1.9.23"
+ksp = "1.9.23-1.0.19"
 lifecycle = "2.7.0"
 constraintlayout = "2.1.4"
 material = "1.11.0"
@@ -84,3 +85,4 @@ androidTest = { id = "com.android.test", version.ref = "gradle" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 baselineprofile = { id = "androidx.baselineprofile", version.ref = "baselineprofile" }
 androidApplication = { id = "com.android.application", version.ref = "gradle" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
