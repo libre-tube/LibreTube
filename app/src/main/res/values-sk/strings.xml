@@ -188,14 +188,14 @@
     <string name="github">GitHub</string>
     <string name="history_size">Maximálna veľkosť histórie</string>
     <string name="unlimited">Neobmedzená</string>
-    <string name="background_mode">Režim pozadia</string>
+    <string name="background_mode">Režim na pozadí</string>
     <string name="audio_video">Audio a video</string>
     <string name="fullscreen_orientation">Orientácia na celú obrazovku</string>
     <string name="landscape">Na šírku</string>
     <string name="add_to_queue">Pridať do poradia</string>
     <string name="misc">Rôzne</string>
     <string name="take_a_break">Čas dať si prestávku</string>
-    <string name="yt_shorts">Krátke videá</string>
+    <string name="yt_shorts">Krátke</string>
     <string name="no_subtitles_available">Titulky nie sú k dispozícii</string>
     <string name="repeat_mode">Režim opakovania</string>
     <string name="resize_mode_zoom">Priblížiť</string>
@@ -297,7 +297,7 @@
     <string name="swipe_controls">Ovládanie potiahnutím prstom</string>
     <string name="forward">Dopredu</string>
     <string name="backup_restore">Záloha a obnovenie</string>
-    <string name="play_next">Ďalej prehrať</string>
+    <string name="play_next">Prehrať ďalšie</string>
     <string name="limit_to_runtime">Obmedziť podľa času spustenia</string>
     <string name="audio_track">Zvuková stopa</string>
     <string name="backup">Záloha</string>
@@ -541,4 +541,5 @@
     <string name="comments_count">Komentáre (%1$s)</string>
     <string name="external_player">Externý prehrávač</string>
     <string name="show_updates">Kontrolovať aktualizácie automaticky</string>
+    <string name="albums">Albumy</string>
 </resources>
