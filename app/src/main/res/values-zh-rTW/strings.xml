@@ -535,4 +535,5 @@
     <string name="comments_count">留言 (%1$s)</string>
     <string name="external_player">外部播放器</string>
     <string name="show_updates">自動檢查更新</string>
+    <string name="albums">專輯</string>
 </resources>
