@@ -538,4 +538,5 @@
     <string name="external_player">बाहरी प्लेयर</string>
     <string name="gestures">इशारे</string>
     <string name="show_updates">अपडेट स्वचालित रूप से जांचें</string>
+    <string name="albums">एलबम</string>
 </resources>
