@@ -545,4 +545,5 @@
     <string name="external_player">Зовнішній програвач</string>
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="show_updates">Перевіряти оновлення автоматично</string>
+    <string name="albums">Альбоми</string>
 </resources>

@@ -538,4 +538,5 @@
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="external_player">Harici oynatıcı</string>
     <string name="show_updates">Güncellemeleri otomatik denetle</string>
+    <string name="albums">Albümler</string>
 </resources>
