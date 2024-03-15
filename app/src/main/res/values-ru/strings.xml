@@ -544,4 +544,5 @@
     <string name="comments_count">Комментарии (%1$s)</string>
     <string name="external_player">Внешний проигрыватель</string>
     <string name="show_updates">Проверять обновления автоматически</string>
+    <string name="albums">Альбомы</string>
 </resources>
