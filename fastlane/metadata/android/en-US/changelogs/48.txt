@@ -1,0 +1,8 @@
+* feat: support for downloading whole playlist at once
+* feat(player): support for keyboard navigation
+* feat: support for exporting and importing channel groups
+* feat: support for filtering
+* feat: Support multiple filter selection
+* feat(ui): option for automatic update checks
+* feat: option to shuffle downloads in background
+* feat: add 'hide watched videos' to feed filter options
