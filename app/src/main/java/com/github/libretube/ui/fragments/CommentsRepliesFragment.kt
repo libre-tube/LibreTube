@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
@@ -30,6 +31,8 @@ class CommentsRepliesFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: CommentsViewModel by activityViewModels()
+
+    private var scrollListener: ViewTreeObserver.OnScrollChangedListener? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,8 +69,36 @@ class CommentsRepliesFragment : Fragment() {
         )
 
         binding.commentsRV.updatePadding(top = 0)
-        binding.commentsRV.layoutManager = LinearLayoutManager(context)
+
+        val layoutManager = LinearLayoutManager(context)
+        binding.commentsRV.layoutManager = layoutManager
+
         binding.commentsRV.adapter = repliesAdapter
+
+        // init scroll position
+        if (viewModel.currentRepliesPosition.value != null) {
+            if (viewModel.currentRepliesPosition.value!! > POSITION_START) {
+                layoutManager.scrollToPosition(viewModel.currentRepliesPosition.value!!)
+            } else {
+                layoutManager.scrollToPosition(POSITION_START)
+            }
+        }
+
+        commentsSheet?.binding?.btnScrollToTop?.setOnClickListener {
+            // scroll back to the top / first comment
+            layoutManager.scrollToPosition(POSITION_START)
+            viewModel.setRepliesPosition(POSITION_START)
+        }
+
+        scrollListener = ViewTreeObserver.OnScrollChangedListener {
+            // save the last scroll position to become used next time when the sheet is opened
+            viewModel.setRepliesPosition(layoutManager.findFirstVisibleItemPosition())
+            // hide or show the scroll to top button
+            commentsSheet?.binding?.btnScrollToTop?.isVisible =
+                viewModel.currentRepliesPosition.value != 0
+        }
+
+        binding.commentsRV.viewTreeObserver.addOnScrollChangedListener(scrollListener)
 
         viewModel.selectedCommentLiveData.postValue(comment.repliesPage)
 
@@ -88,8 +119,18 @@ class CommentsRepliesFragment : Fragment() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        binding.commentsRV.viewTreeObserver.removeOnScrollChangedListener(scrollListener)
+        scrollListener = null
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        const val POSITION_START = 0
     }
 }
