@@ -215,7 +215,7 @@
     <string name="instance_frontend_url">URL para a interface da instância</string>
     <string name="quality">Qualidade</string>
     <string name="behavior">Comportamento</string>
-    <string name="seek_increment">Avançar/retroceder em segundos</string>
+    <string name="seek_increment">Intervalo de avanço/retrocesso</string>
     <string name="pauseOnScreenOff">Pausa automática</string>
     <string name="pauseOnScreenOff_summary">Pausar reprodução quando a tela estiver desligada</string>
     <string name="playingOnBackground">Reproduzindo em segundo plano…</string>

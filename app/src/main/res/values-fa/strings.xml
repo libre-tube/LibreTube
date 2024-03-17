@@ -538,4 +538,5 @@
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">نظرات (%1$s)</string>
     <string name="external_player">پخش کننده‌ٔ خارجی</string>
+    <string name="albums">آلبوم‌ها</string>
 </resources>
