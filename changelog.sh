@@ -1,3 +1,4 @@
+#!/bin/bash
 ## Usage: ./changelog.sh <text>
 
 TEXT="$1"
