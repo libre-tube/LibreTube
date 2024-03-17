@@ -784,7 +784,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         // the app was put somewhere in the background - remember to not automatically continue
         // playing on re-creation of the app
-        requireArguments().putBoolean(IntentData.wasIntentStopped, true)
+        // only run if the re-creation is not caused by an orientation change
+        if (!viewModel.isOrientationChangeInProgress) {
+            requireArguments().putBoolean(IntentData.wasIntentStopped, true)
+        }
 
         super.onPause()
     }
@@ -813,7 +816,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             // the player could also be a different instance because a new player fragment
             // got created in the meanwhile
-            if (!viewModel.shouldUseExistingPlayer && viewModel.player == exoPlayer) {
+            if (!viewModel.isOrientationChangeInProgress && viewModel.player == exoPlayer) {
                 viewModel.player = null
                 viewModel.trackSelector = null
             }
@@ -848,7 +851,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             viewModel.nowPlayingNotification?.destroySelf()
             viewModel.nowPlayingNotification = null
 
-            if (!viewModel.shouldUseExistingPlayer) {
+            if (!viewModel.isOrientationChangeInProgress) {
                 exoPlayer.stop()
                 exoPlayer.release()
             }
@@ -931,7 +934,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             binding.sbSkipBtn.isGone = true
 
             // set media sources for the player
-            if (!viewModel.shouldUseExistingPlayer) initStreamSources()
+            if (!viewModel.isOrientationChangeInProgress) initStreamSources()
 
             if (PreferenceHelper.getBoolean(PreferenceKeys.AUTO_FULLSCREEN_SHORTS, false) &&
                 isShort && binding.playerMotionLayout.progress == 0f
@@ -990,7 +993,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 exoPlayer.setPlaybackSpeed(1f)
             }
 
-            viewModel.shouldUseExistingPlayer = false
+            viewModel.isOrientationChangeInProgress = false
         }
     }
 
@@ -1670,7 +1673,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
             playerLayoutOrientation = orientation
 
-            viewModel.shouldUseExistingPlayer = true
+            viewModel.isOrientationChangeInProgress = true
             activity?.recreate()
         }
     }

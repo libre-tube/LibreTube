@@ -37,10 +37,11 @@ class PlayerViewModel : ViewModel() {
     var sponsorBlockConfig = PlayerHelper.getSponsorBlockCategories()
 
     /**
-     * Whether to continue using the current player
+     * Whether an orientation change is in progress, so that the current player should be continued to use
+     *
      * Set to true if the activity will be recreated due to an orientation change
      */
-    var shouldUseExistingPlayer = false
+    var isOrientationChangeInProgress = false
 
     val isMiniPlayerVisible = MutableLiveData(false)
     val isFullscreen = MutableLiveData(false)
@@ -56,7 +57,7 @@ class PlayerViewModel : ViewModel() {
      */
     suspend fun fetchVideoInfo(context: Context, videoId: String): Pair<Streams?, String?> =
         withContext(Dispatchers.IO) {
-            if (shouldUseExistingPlayer && streamsInfo != null) return@withContext streamsInfo to null
+            if (isOrientationChangeInProgress && streamsInfo != null) return@withContext streamsInfo to null
 
             streamsInfo = try {
                 RetrofitInstance.api.getStreams(videoId).apply {
@@ -75,7 +76,7 @@ class PlayerViewModel : ViewModel() {
         }
 
     suspend fun fetchSponsorBlockSegments(videoId: String) = withContext(Dispatchers.IO) {
-        if (sponsorBlockConfig.isEmpty() || shouldUseExistingPlayer) return@withContext
+        if (sponsorBlockConfig.isEmpty() || isOrientationChangeInProgress) return@withContext
 
         runCatching {
             segments =
@@ -88,7 +89,7 @@ class PlayerViewModel : ViewModel() {
 
     @OptIn(UnstableApi::class)
     fun keepOrCreatePlayer(context: Context): Pair<ExoPlayer, DefaultTrackSelector> {
-        if (!shouldUseExistingPlayer || player == null || trackSelector == null) {
+        if (!isOrientationChangeInProgress || player == null || trackSelector == null) {
             this.trackSelector = DefaultTrackSelector(context)
             this.player = PlayerHelper.createPlayer(context, trackSelector!!, false)
         }
