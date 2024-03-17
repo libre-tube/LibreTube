@@ -2,40 +2,36 @@
 <resources>
     <string-array name="instances">
         <item>kavin.rocks (Official)</item>
+        <item>syncpundit.io</item>
         <item>lunar.icu</item>
         <item>r4fo.com</item>
         <item>kavin.rocks libre (Official)</item>
         <item>projectsegfau.lt</item>
-        <item>projectsegfau.lt in</item>
-        <item>privacydev.net</item>
+        <item>projectsegfau.lt us</item>
         <item>smnz.de</item>
         <item>adminforge.de</item>
         <item>astartes.nl</item>
         <item>drgns.space</item>
-        <item>ggtyler.dev</item>
-        <item>seitan-ayoub.lol</item>
-        <item>owo.si</item>
-        <item>minionflo.net</item>
+        <item>ducks.party</item>
         <item>ngn.tf</item>
+        <item>coldforge.xyz</item>
     </string-array>
 
     <string-array name="instancesValue">
         <item>https://pipedapi.kavin.rocks</item>
+        <item>https://pipedapi.syncpundit.io</item>
         <item>https://piped-api.lunar.icu</item>
         <item>https://pipedapi.r4fo.com</item>
         <item>https://pipedapi-libre.kavin.rocks</item>
         <item>https://api.piped.projectsegfau.lt</item>
-        <item>https://pipedapi.in.projectsegfau.lt</item>
-        <item>https://api.piped.privacydev.net</item>
+        <item>https://pipedapi.us.projectsegfau.lt</item>
         <item>https://pipedapi.smnz.de</item>
         <item>https://pipedapi.adminforge.de</item>
         <item>https://pipedapi.astartes.nl</item>
         <item>https://pipedapi.drgns.space</item>
-        <item>https://piapi.ggtyler.dev</item>
-        <item>https://piped-backend.seitan-ayoub.lol</item>
-        <item>https://pipedapi.owo.si</item>
-        <item>https://api.piped.minionflo.net</item>
+        <item>https://pipedapi.ducks.party</item>
         <item>https://pipedapi.ngn.tf</item>
+        <item>https://pipedapi.coldforge.xyz</item>
     </string-array>
 
     <string-array name="languages">
