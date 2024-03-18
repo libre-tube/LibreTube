@@ -136,7 +136,8 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
             nextPage = response.nextpage
             playlistName = response.name
             isLoading = false
-            ImageHelper.loadImage(response.thumbnailUrl, binding.thumbnail)
+            if (!response.thumbnailUrl.isNullOrEmpty())
+                ImageHelper.loadImage(response.thumbnailUrl, binding.thumbnail)
             binding.playlistProgress.isGone = true
             binding.playlistAppBar.isVisible = true
             binding.playlistRecView.isVisible = true
