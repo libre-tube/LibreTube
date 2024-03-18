@@ -410,7 +410,7 @@
     <string name="duration">Длительность</string>
     <string name="shorts_notifications">Уведомлять о Shorts</string>
     <string name="alphabetic">Алфавитный</string>
-    <string name="creation_date">Дате создания</string>
+    <string name="creation_date">Дата создания</string>
     <string name="creation_date_reversed">Дата создания (обратная)</string>
     <string name="alphabetic_reversed">Алфавитный (обратный)</string>
     <string name="import_format_newpipe">NewPipe</string>
