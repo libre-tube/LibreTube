@@ -147,7 +147,9 @@
                 android:layout_marginVertical="10dp"
                 android:text="@string/comments"
                 android:textAlignment="viewStart"
-                app:drawableEndCompat="@drawable/ic_arrow_up_down" />
+                android:textColor="?colorPrimary"
+                app:drawableEndCompat="@drawable/ic_arrow_up_down"
+                app:drawableTint="?colorPrimary" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/related_rec_view"
