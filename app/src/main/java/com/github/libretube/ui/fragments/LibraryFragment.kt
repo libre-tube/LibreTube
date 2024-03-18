@@ -179,6 +179,7 @@ class LibraryFragment : DynamicLayoutManagerFragment() {
                 if (playlists.isNotEmpty()) {
                     showPlaylists(playlists)
                 } else {
+                    binding.sortTV.isVisible = false
                     binding.nothingHere.isVisible = true
                 }
             }
@@ -198,11 +199,13 @@ class LibraryFragment : DynamicLayoutManagerFragment() {
             RecyclerView.AdapterDataObserver() {
             override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
                 _binding?.nothingHere?.isVisible = playlistsAdapter.itemCount == 0
+                _binding?.sortTV?.isVisible = playlistsAdapter.itemCount > 0
                 super.onItemRangeRemoved(positionStart, itemCount)
             }
         })
 
         binding.nothingHere.isGone = true
+        binding.sortTV.isVisible = true
         binding.playlistRecView.adapter = playlistsAdapter
     }
 }
