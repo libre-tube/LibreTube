@@ -545,4 +545,5 @@
     <string name="external_player">Знешні прайгравальнік</string>
     <string name="comments_count">Каментары (%1$s)</string>
     <string name="show_updates">Правяраць абнаўлення аўтаматычна</string>
+    <string name="albums">Альбомы</string>
 </resources>
