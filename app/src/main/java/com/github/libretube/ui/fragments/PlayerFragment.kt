@@ -705,22 +705,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
 
         viewModel.isFullscreen.value = false
-
-        if (
-            !PlayerHelper.autoFullscreenEnabled &&
-            mainActivity.screenOrientationPref == ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-        ) {
-            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-        }
-
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
         playerBinding.exoTitle.isInvisible = true
 
+        mainActivity.requestedOrientation = mainActivity.screenOrientationPref
+        openOrCloseFullscreenDialog(false)
         updateResolutionOnFullscreenChange(false)
 
-        openOrCloseFullscreenDialog(false)
-
-        checkForNecessaryOrientationRestart()
+        restartActivityIfNeeded()
 
         binding.player.updateMarginsByFullscreenMode()
     }
@@ -1657,7 +1649,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      * Check if the activity needs to be recreated due to an orientation change
      * If true, the activity will be automatically restarted
      */
-    private fun checkForNecessaryOrientationRestart() {
+    private fun restartActivityIfNeeded() {
         val lockedOrientations =
             listOf(
                 ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT,
@@ -1696,7 +1688,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 else -> unsetFullscreen()
             }
         } else {
-            checkForNecessaryOrientationRestart()
+            restartActivityIfNeeded()
         }
     }
 
