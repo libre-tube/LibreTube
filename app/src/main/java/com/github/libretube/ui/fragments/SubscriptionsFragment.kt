@@ -24,7 +24,6 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
-import com.github.libretube.enums.ContentFilter
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
@@ -46,7 +45,6 @@ import com.github.libretube.util.PlayingQueue
 import com.google.android.material.chip.Chip
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class SubscriptionsFragment : DynamicLayoutManagerFragment() {
     private var _binding: FragmentSubscriptionsBinding? = null
@@ -226,7 +224,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
     private fun playByGroup(groupIndex: Int) {
         val streams = viewModel.videoFeed.value.orEmpty()
             .filterByGroup(groupIndex)
-            .filterByStatusAndWatchPosition()
+            .let { DatabaseHelper.filterByStatusAndWatchPosition(it, hideWatched) }
             .sortedBySelectedOrder()
 
         if (streams.isEmpty()) return
@@ -291,27 +289,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
         return filter { group?.channels?.contains(it.url.toID()) != false }
     }
 
-    private fun List<StreamItem>.filterByStatusAndWatchPosition(): List<StreamItem> {
-        val streamItems = this.filter {
-            val isVideo = !it.isShort && !it.isLive
-
-            return@filter when {
-                !ContentFilter.SHORTS.isEnabled && it.isShort -> false
-                !ContentFilter.VIDEOS.isEnabled && isVideo -> false
-                !ContentFilter.LIVESTREAMS.isEnabled && it.isLive -> false
-                else -> true
-            }
-        }
-
-        return if (hideWatched) {
-            runBlocking {
-                DatabaseHelper.filterUnwatched(streamItems)
-            }
-        } else {
-            streamItems
-        }
-    }
-
     private fun List<StreamItem>.sortedBySelectedOrder() = when (selectedSortOrder) {
         0 -> this
         1 -> this.reversed()
@@ -328,7 +305,9 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
         binding.subRefresh.isRefreshing = false
         val feed = videoFeed
             .filterByGroup(selectedFilterGroup)
-            .filterByStatusAndWatchPosition()
+            .let {
+                DatabaseHelper.filterByStatusAndWatchPosition(it, hideWatched)
+            }
 
         val sortedFeed = feed
             .sortedBySelectedOrder()

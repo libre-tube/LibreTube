@@ -18,8 +18,10 @@ import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.constants.PreferenceKeys.HOME_TAB_CONTENT
 import com.github.libretube.databinding.FragmentHomeBinding
+import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.obj.PlaylistBookmark
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.activities.SettingsActivity
@@ -154,7 +156,12 @@ class HomeFragment : Fragment() {
         if (streamItems == null) return
 
         makeVisible(binding.featuredRV, binding.featuredTV)
-        val feedVideos = streamItems.take(20).toMutableList()
+        val hideWatched = PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)
+        val feedVideos = streamItems
+            .let { DatabaseHelper.filterByStatusAndWatchPosition(it, hideWatched) }
+            .take(20)
+            .toMutableList()
+
         with(binding.featuredRV) {
             layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
             adapter = VideosAdapter(feedVideos, forceMode = LayoutMode.RELATED_COLUMN)
