@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="instances">اختر…</string>
+    <string name="instances">إختر…</string>
     <string name="customInstance">مخصص</string>
     <string name="registered">تم إنشاء حساب. تستطيع الآن الاشتراك بالقنوات.</string>
     <string name="search_hint">بحث</string>
@@ -17,9 +17,9 @@
     <string name="yes">نعم</string>
     <string name="login">تسجيل الدخول</string>
     <string name="logout">تسجيل الخروج</string>
-    <string name="username">اسم المستخدم</string>
+    <string name="username">إسم المستخدم</string>
     <string name="register">تسجيل جديد</string>
-    <string name="already_logged_in">لقد سجلت دخولك من قبل، يمكنك تسجيل الخروج من حسابك.</string>
+    <string name="already_logged_in">لقد سجلت دخولك بالفعل، يمكنك تسجيل الخروج من حسابك.</string>
     <string name="cannotDownload">لا يمكن تنزيل هذا البث.</string>
     <string name="region">المنطقة</string>
     <string name="importsuccess">مشترك</string>

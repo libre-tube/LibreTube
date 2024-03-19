@@ -538,4 +538,5 @@
     <string name="comments_count">Şərhlər (%1$s)</string>
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="show_updates">Yeniləmələri avtomatik yoxla</string>
+    <string name="albums">Albomlar</string>
 </resources>

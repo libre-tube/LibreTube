@@ -278,7 +278,7 @@
     <string name="playlistCloned">Playlist dupliziert</string>
     <string name="confirm_unsubscribing">Deabonnieren bestätigen</string>
     <string name="defaultIconLight">Standard hell</string>
-    <string name="confirm_unsubscribing_summary">Zeige Bestätigungsdialog vor dem Deabonnieren</string>
+    <string name="confirm_unsubscribing_summary">Zeige einen Bestätigungsdialog vor dem Deabonnieren</string>
     <string name="confirm_unsubscribe">Bist du sicher, dass du %1$s deabbonieren möchtest\?</string>
     <string name="local_playlists">Lokale Playlists</string>
     <string name="play_all">Alles abspielen</string>
@@ -302,7 +302,7 @@
     <string name="trends">Trends</string>
     <string name="featured">Vorgestellt</string>
     <string name="trending">Trends</string>
-    <string name="queue_insert_related_videos">Ähnliche Videos einfügen</string>
+    <string name="queue_insert_related_videos">Ähnliche Videos einreihen</string>
     <string name="bookmarks">Lesezeichen</string>
     <string name="bookmark">Lesezeichen</string>
     <string name="clear_bookmarks">Lesezeichen löschen</string>
