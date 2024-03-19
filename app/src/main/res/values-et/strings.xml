@@ -163,4 +163,18 @@
     <string name="clear_customInstances">Kustuta lisatu</string>
     <string name="invalid_url">Palun sisesta aadress, mis toimib</string>
     <string name="version">Versioon %1$s</string>
+    <string name="albums">Albumid</string>
+    <string name="category_interaction_summary">Lühike meeldetuletus video keskel tema meeldivaks märkimiseks või kanali tellimiseks. Kui meeldetuletus on pikem või midagi täpsemat, siis ta peaks olema märgitud enesereklaamiks</string>
+    <string name="category_outro">Lõpukaadrid ja -tiitrid</string>
+    <string name="category_outro_summary">Teave peale sisu lõppemist. Ei sisalda järeldusi, mis on sisu osa</string>
+    <string name="advanced_summary">Allalaadimised ja lähtestamine</string>
+    <string name="gradientIcon">Pealiskaudne kallak</string>
+    <string name="fireIcon">Moodne tuli</string>
+    <string name="torchIcon">Trendikas tõrvik</string>
+    <string name="shapedIcon">Totakas kuju</string>
+    <string name="flameIcon">Lendav leek</string>
+    <string name="birdIcon">Tõhustatud lind</string>
+    <string name="related_streams_summary">Näita hetkel vaatamisel oleva sisu kõrval samalaadset sisu</string>
+    <string name="related_streams">Teemakohane sisu</string>
+    <string name="legacyIcon">Kadunud pärand</string>
 </resources>
