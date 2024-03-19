@@ -40,10 +40,16 @@ class CommentPagingAdapter(
     private val dismiss: () -> Unit
 ) : PagingDataAdapter<Comment, CommentsViewHolder>(CommentCallback) {
     private val isRepliesAdapter = parentComment != null
+    private var clickEventConsumedByLinkHandler = false
 
     override fun getItemCount() = (if (isRepliesAdapter) 1 else 0) + super.getItemCount()
 
     private fun navigateToReplies(comment: Comment) {
+        if (clickEventConsumedByLinkHandler) {
+            clickEventConsumedByLinkHandler = false
+            return
+        }
+
         val args = bundleOf(IntentData.videoId to videoId, IntentData.comment to comment)
         fragment!!.parentFragmentManager.commit {
             replace<CommentsRepliesFragment>(R.id.commentFragContainer, args = args)
@@ -66,8 +72,12 @@ class CommentPagingAdapter(
                 .getString(R.string.commentedTimeWithSeparator, comment.commentedTime)
 
             commentText.movementMethod = LinkMovementMethodCompat.getInstance()
+            val linkHandler = LinkHandler {
+                clickEventConsumedByLinkHandler = true
+                handleLink?.invoke(it)
+            }
             commentText.text = comment.commentText?.replace("</a>", "</a> ")
-                ?.parseAsHtml(tagHandler = HtmlParser(LinkHandler(handleLink ?: {})))
+                ?.parseAsHtml(tagHandler = HtmlParser(linkHandler))
 
             ImageHelper.loadImage(comment.thumbnail, commentorImage, true)
             likesTextView.text = comment.likeCount.formatShort()
