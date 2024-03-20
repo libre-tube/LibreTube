@@ -24,11 +24,6 @@ object NotificationHelper {
             true
         )
 
-        val checkingFrequency = PreferenceHelper.getString(
-            PreferenceKeys.CHECKING_FREQUENCY,
-            "60"
-        ).toLong()
-
         // schedule the work manager request if logged in and notifications enabled
         if (!notificationsEnabled) {
             // cancel the work if notifications are disabled or the user is not logged in
@@ -36,6 +31,11 @@ object NotificationHelper {
                 .cancelUniqueWork(NOTIFICATION_WORK_NAME)
             return
         }
+
+        val checkingFrequency = PreferenceHelper.getString(
+            PreferenceKeys.CHECKING_FREQUENCY,
+            "60"
+        ).toLong()
 
         // required network type for the work
         val networkType = when (
