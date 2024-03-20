@@ -136,7 +136,9 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
             nextPage = response.nextpage
             playlistName = response.name
             isLoading = false
-            ImageHelper.loadImage(response.thumbnailUrl, binding.thumbnail)
+
+            if (!response.thumbnailUrl.isNullOrEmpty())
+                ImageHelper.loadImage(response.thumbnailUrl, binding.thumbnail)
             binding.playlistProgress.isGone = true
             binding.playlistAppBar.isVisible = true
             binding.playlistRecView.isVisible = true
@@ -193,13 +195,21 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
                 sheet.show(fragmentManager)
             }
 
-            binding.playAll.setOnClickListener {
-                if (playlistFeed.isEmpty()) return@setOnClickListener
-                NavigationHelper.navigateVideo(
-                    requireContext(),
-                    response.relatedStreams.first().url,
-                    playlistId
-                )
+            if (playlistFeed.isEmpty()) {
+                binding.nothingHere.isVisible = true
+            }
+
+            if (playlistFeed.isEmpty()) {
+                binding.playAll.isGone = true
+            } else {
+                binding.playAll.setOnClickListener {
+                    if (playlistFeed.isEmpty()) return@setOnClickListener
+                    NavigationHelper.navigateVideo(
+                        requireContext(),
+                        response.relatedStreams.first().url,
+                        playlistId
+                    )
+                }
             }
 
             if (playlistType == PlaylistType.PUBLIC) {
@@ -218,31 +228,41 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
                 }
             } else {
                 // private playlist, means shuffle is possible because all videos are received at once
-                binding.bookmark.setIconResource(R.drawable.ic_shuffle)
-                binding.bookmark.text = getString(R.string.shuffle)
-                binding.bookmark.setOnClickListener {
-                    if (playlistFeed.isEmpty()) return@setOnClickListener
-                    val queue = playlistFeed.shuffled()
-                    PlayingQueue.resetToDefaults()
-                    PlayingQueue.add(*queue.toTypedArray())
-                    NavigationHelper.navigateVideo(
-                        requireContext(),
-                        queue.first().url,
-                        playlistId = playlistId,
-                        keepQueue = true
-                    )
+                if (playlistFeed.isEmpty()) {
+                    binding.bookmark.isGone = true
+                } else {
+                    binding.bookmark.setIconResource(R.drawable.ic_shuffle)
+                    binding.bookmark.text = getString(R.string.shuffle)
+                    binding.bookmark.setOnClickListener {
+                        val queue = playlistFeed.shuffled()
+                        PlayingQueue.resetToDefaults()
+                        PlayingQueue.add(*queue.toTypedArray())
+                        NavigationHelper.navigateVideo(
+                            requireContext(),
+                            queue.first().url,
+                            playlistId = playlistId,
+                            keepQueue = true
+                        )
+                    }
                 }
-                binding.sortContainer.isGone = false
+
+                if (playlistFeed.isEmpty()) {
+                    binding.sortContainer.isGone = true
+                } else {
+                    binding.sortContainer.isVisible = true
+                    binding.sortContainer.setOnClickListener {
+                        BaseBottomSheet().apply {
+                            setSimpleItems(sortOptions.toList()) { index ->
+                                selectedSortOrder = index
+                                binding.sortTV.text = sortOptions[index]
+                                showPlaylistVideos(response)
+                            }
+                        }.show(childFragmentManager)
+                    }
+                }
+
                 binding.sortTV.text = sortOptions[selectedSortOrder]
-                binding.sortContainer.setOnClickListener {
-                    BaseBottomSheet().apply {
-                        setSimpleItems(sortOptions.toList()) { index ->
-                            selectedSortOrder = index
-                            binding.sortTV.text = sortOptions[index]
-                            showPlaylistVideos(response)
-                        }
-                    }.show(childFragmentManager)
-                }
+
             }
 
             updatePlaylistBookmark(response)
