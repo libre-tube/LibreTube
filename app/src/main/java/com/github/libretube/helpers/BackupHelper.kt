@@ -5,6 +5,7 @@ import android.net.Uri
 import android.util.Log
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
+import androidx.work.ExistingPeriodicWorkPolicy
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Database
@@ -113,5 +114,8 @@ object BackupHelper {
                 }
             }
         }
+
+        // re-schedule the notification worker as some settings related to it might have changed
+        NotificationHelper.enqueueWork(context, ExistingPeriodicWorkPolicy.UPDATE)
     }
 }
