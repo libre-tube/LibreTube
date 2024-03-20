@@ -191,7 +191,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
 
             override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
-                return _binding?.player?.onKeyUp(keyCode, event) ?: true
+                if (_binding?.player?.onKeyUp(keyCode, event) == true) {
+                    return true
+                }
+
+                return super.onKeyUp(keyCode, event)
             }
         }
     }
@@ -1701,7 +1705,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         binding.player.hideController()
     }
 
-    fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
-        return _binding?.player?.onKeyBoardAction(keyCode, event) ?: false
+    fun onKeyUp(keyCode: Int): Boolean {
+        return _binding?.player?.onKeyBoardAction(keyCode) ?: false
     }
 }

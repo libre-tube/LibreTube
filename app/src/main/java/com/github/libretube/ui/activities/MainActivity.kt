@@ -150,7 +150,10 @@ class MainActivity : BaseActivity() {
 
         onBackPressedDispatcher.addCallback {
             if (playerViewModel.isFullscreen.value == true) {
-                val fullscreenUnsetSuccess = runOnPlayerFragment { unsetFullscreen() }
+                val fullscreenUnsetSuccess = runOnPlayerFragment {
+                    unsetFullscreen()
+                    true
+                }
                 if (fullscreenUnsetSuccess) return@addCallback
             }
 
@@ -508,7 +511,10 @@ class MainActivity : BaseActivity() {
     override fun onUserLeaveHint() {
         super.onUserLeaveHint()
 
-        runOnPlayerFragment { onUserLeaveHint() }
+        runOnPlayerFragment {
+            onUserLeaveHint()
+            true
+        }
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -518,19 +524,21 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
-        return runOnPlayerFragment { onKeyUp(keyCode, event) }
+        if (runOnPlayerFragment { onKeyUp(keyCode) }) {
+            return true
+        }
+
+        return super.onKeyUp(keyCode, event)
     }
 
     /**
      * Attempt to run code on the player fragment if running
      * Returns true if a running player fragment was found and the action got consumed, else false
      */
-    private fun runOnPlayerFragment(action: PlayerFragment.() -> Unit): Boolean {
-        supportFragmentManager.fragments.filterIsInstance<PlayerFragment>()
+    private fun runOnPlayerFragment(action: PlayerFragment.() -> Boolean): Boolean {
+        return supportFragmentManager.fragments.filterIsInstance<PlayerFragment>()
             .firstOrNull()
             ?.let(action)
-            ?.run { return true }
-
-        return false
+            ?: false
     }
 }
