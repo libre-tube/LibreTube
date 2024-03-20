@@ -1,5 +1,3 @@
-import com.android.build.api.dsl.ManagedVirtualDevice
-
 plugins {
     alias(libs.plugins.androidTest)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -16,7 +14,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = "17"
     }
 
     defaultConfig {
@@ -28,21 +26,12 @@ android {
 
     targetProjectPath = ":app"
 
-    testOptions.managedDevices.devices {
-        create<ManagedVirtualDevice>("pixel6Api34") {
-            device = "Pixel 6"
-            apiLevel = 34
-            systemImageSource = "google"
-        }
-    }
 }
 
 // This is the configuration block for the Baseline Profile plugin.
 // You can specify to run the generators on a managed devices or connected devices.
-// For connected devices, API 28+ (rooted) or 33+ (not rooted) is required.
 baselineProfile {
-    managedDevices += "pixel6Api34"
-    useConnectedDevices = false
+    useConnectedDevices = true
 }
 
 dependencies {
@@ -50,4 +39,13 @@ dependencies {
     implementation(libs.androidx.test.espressoCore)
     implementation(libs.androidx.uiautomator)
     implementation(libs.androidx.benchmark.macro.junit4)
+}
+
+androidComponents {
+    onVariants { v ->
+        v.instrumentationRunnerArguments.put(
+            "targetAppId",
+            v.testedApks.map { v.artifacts.getBuiltArtifactsLoader().load(it)?.applicationId }
+        )
+    }
 }

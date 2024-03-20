@@ -5,6 +5,7 @@ import androidx.benchmark.macro.MacrobenchmarkScope
 import androidx.benchmark.macro.junit4.BaselineProfileRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.Until
 import org.junit.Rule
@@ -43,9 +44,10 @@ class BaselineProfileGenerator {
 
     @Test
     fun generate() {
-        // This example works only with the variant with application id `com.github.libretube`."
+        // The application id for the running build variant is read from the instrumentation arguments.
         rule.collect(
-            packageName = "com.github.libretube",
+            packageName = InstrumentationRegistry.getArguments().getString("targetAppId")
+                ?: throw Exception("targetAppId not passed as instrumentation runner arg"),
 
             // See: https://d.android.com/topic/performance/baselineprofiles/dex-layout-optimizations
             includeInStartupProfile = true
