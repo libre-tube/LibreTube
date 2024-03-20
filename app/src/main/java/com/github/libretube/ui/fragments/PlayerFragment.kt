@@ -1009,19 +1009,19 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
     }
 
-    // used for autoplay and skipping to next video
+    /**
+     * Can be used for autoplay and manually skipping to the next video.
+     */
     private fun playNextVideo(nextId: String? = null) {
         if (nextId == null && PlayingQueue.repeatMode == Player.REPEAT_MODE_ONE) {
             exoPlayer.seekTo(0)
             return
         }
 
-        val nextVideoId = nextId ?: PlayingQueue.getNext()
-        // by making sure that the next and the current video aren't the same
+        // save the current watch position before starting the next video
         saveWatchPosition()
 
-        // save the id of the next stream as videoId and load the next video
-        if (nextVideoId == null) return
+        val nextVideoId = nextId ?: PlayingQueue.getNext() ?: return
 
         isTransitioning = true
         videoId = nextVideoId
@@ -1030,13 +1030,17 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         arguments?.run {
             val playerData = parcelable<PlayerData>(IntentData.playerData)!!.copy(videoId = videoId)
             putParcelable(IntentData.playerData, playerData)
+            // make sure that autoplay continues without issues as the activity is obviously still alive
+            // when starting to play the next video
+            putBoolean(IntentData.wasIntentStopped, false)
         }
 
         // start to play the next video
         playVideo()
-        // close comment bottom sheet for next video
+
+        // close comment bottom sheet if opened for next video
         runCatching { commentsViewModel.commentsSheetDismiss?.invoke() }
-        // kill the chapters bottom sheet
+        // kill the chapters bottom sheet if opened
         runCatching { chaptersBottomSheet?.dismiss() }
         chaptersBottomSheet = null
     }
