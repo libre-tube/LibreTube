@@ -19,8 +19,9 @@ class SearchResultViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
     private val args = SearchResultFragmentArgs.fromSavedStateHandle(savedStateHandle)
 
     // parse search URLs from YouTube entered in the search bar
-    private val videoId = TextUtils.getVideoIdFromUri(args.query.toUri()) ?: args.query
-    private val searchQuery = "${ShareDialog.YOUTUBE_FRONTEND_URL}/watch?v=$videoId"
+    private val searchQuery = TextUtils.getVideoIdFromUri(args.query.toUri())?.let { videoId ->
+        "${ShareDialog.YOUTUBE_FRONTEND_URL}/watch?v=$videoId"
+    } ?: args.query
 
     private val filterMutableData = MutableStateFlow("all")
 
