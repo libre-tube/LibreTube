@@ -735,7 +735,7 @@ open class CustomExoPlayerView(
         return super.onInterceptTouchEvent(ev)
     }
 
-    fun onKeyBoardAction(keyCode: Int, event: KeyEvent?): Boolean {
+    fun onKeyBoardAction(keyCode: Int): Boolean {
         when (keyCode) {
             KeyEvent.KEYCODE_SPACE, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE -> {
                 player?.togglePlayPauseState()
@@ -757,7 +757,7 @@ open class CustomExoPlayerView(
                 fragmentManager.fragments.filterIsInstance<PlayerFragment>().firstOrNull()
                     ?.toggleFullscreen()
             }
-            else -> super.onKeyUp(keyCode, event)
+            else -> return false
         }
 
         return true
