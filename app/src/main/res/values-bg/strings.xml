@@ -33,7 +33,7 @@
     <string name="changeLanguage">Език</string>
     <string name="systemLanguage">Система</string>
     <string name="systemDefault">Система</string>
-    <string name="lightTheme">Светло</string>
+    <string name="lightTheme">Светла</string>
     <string name="subscribers">%1$s абонати</string>
     <string name="settings">Настройки</string>
     <string name="instance">Инстанция</string>
@@ -78,7 +78,7 @@
     <string name="cancel">Отказ</string>
     <string name="playlistCreated">Плейлиста е създаден.</string>
     <string name="unknown_error">Грешка в мрежата.</string>
-    <string name="darkTheme">Тъмно</string>
+    <string name="darkTheme">Тъмна</string>
     <string name="location">Местоположение</string>
     <string name="noInternet">Първо се свържете с интернет.</string>
     <string name="all">Всички</string>
@@ -88,7 +88,7 @@
     <string name="license">Лиценз</string>
     <string name="enabled">Включено</string>
     <string name="sponsorblock_notifications">Известия</string>
-    <string name="youtube">Ютуб</string>
+    <string name="youtube">YouTube</string>
     <string name="live">На живо</string>
     <string name="defaultIcon">По подразбиране</string>
     <string name="version">Версия %1$s</string>
@@ -117,7 +117,7 @@
     <string name="notifications">Известия</string>
     <string name="default_subtitle_language">Език на надписите</string>
     <string name="device_info">Информация за устройството</string>
-    <string name="open_copied">отваряне</string>
+    <string name="open_copied">Отваряне</string>
     <string name="copied_to_clipboard">Копирано в клипборда</string>
     <string name="picture_in_picture">Картина в картината</string>
     <string name="backup">Архивиране</string>
@@ -147,7 +147,7 @@
     <string name="all_caught_up_summary">Видяхте всички нови видеоклипове</string>
     <string name="add_to_bookmarks">Добавяне към отметките</string>
     <string name="general">Общи</string>
-    <string name="swipe_controls">Плъзнете за контролите</string>
+    <string name="swipe_controls">Контрол чрез плъзгане</string>
     <string name="playerAudioQuality">Качество на звука</string>
     <string name="behavior">Поведение</string>
     <string name="import_format_freetube">FreeTube</string>
@@ -204,7 +204,7 @@
     <string name="playOnBackground">Изпълни във фонов режим</string>
     <string name="sb_create_segment">Създайте сегмент</string>
     <string name="start_time">Началено време</string>
-    <string name="theme_monochrome">Минималистичен монохром</string>
+    <string name="theme_monochrome">Едноцветен</string>
     <string name="push_channel_name">Работник за уведомяване</string>
     <string name="visibility_unlisted">Скрит</string>
     <string name="sb_invalid_segment">Невалидно начало или край на сегмент</string>
@@ -242,7 +242,7 @@
     <string name="auth_instance">Инстанция за удостоверяване</string>
     <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="dubbed_audio_track">дублиран</string>
-    <string name="none">Нито един</string>
+    <string name="none">Нищо</string>
     <string name="limit_to_runtime">Ограничение до време на изпълнение</string>
     <string name="category_sponsor_summary">Платена промоция, платени реферали и директни реклами. Не за самореклама или безплатни искрени възгласи към каузи, създатели, уебсайтове и продукти</string>
     <string name="unlimited">Неограничен</string>
@@ -266,7 +266,7 @@
     <string name="server_error">Изглежда има проблем с избрания сървър. Опитайте друга инстанция.</string>
     <string name="category_highlight_summary">Може да бъде или рекламираното заглавие, миниизображението или най-интересната част от видеоклипа. Можете да преминете към него, като го докоснете в секцията с глави</string>
     <string name="uploader_name">Име на качващия</string>
-    <string name="swipe_controls_summary">Плъзнете, за да регулирате яркостта и силата на звука, докато сте в режим на цял екран</string>
+    <string name="swipe_controls_summary">Плъзнете за да регулирате яркостта и силата на звука, докато сте в режим на цял екран</string>
     <string name="tooltip_filter">Филтър</string>
     <string name="off">Изключено</string>
     <string name="codecs">Кодеци</string>
@@ -427,7 +427,7 @@
     <string name="double_tap_seek_summary">Докоснете два пъти отляво или отдясно, за да превъртите назад или напред позицията на плейъра</string>
     <string name="group_name_error_empty">Моля, въведете име</string>
     <string name="donate">Дарете</string>
-    <string name="music_artists">YT музикални изпълнители</string>
+    <string name="music_artists">YT Музикални Изпълнители</string>
     <string name="navbar_order">Ред</string>
     <string name="tooltip_edit_groups">Редактиране на групи</string>
     <string name="data_saver_mode_summary">Пропуснете миниатюри и други изображения</string>
@@ -443,7 +443,7 @@
     <string name="skip_buttons_summary">Показване на бутони за преминаване към следващото или предишното видео</string>
     <string name="watch_positions_title">Запомнени позиции за възпроизвеждане</string>
     <string name="yt_shorts">Кратки видеа</string>
-    <string name="worst_quality">Най-лошото</string>
+    <string name="worst_quality">Лошо</string>
     <string name="chapters_videoHighlight">Видео акцент</string>
     <string name="username_email">Да продължите с имейл адрес, който не се препоръчва\?</string>
     <string name="advanced_summary">Изтегляния, и нулиране</string>
@@ -492,7 +492,7 @@
     <string name="privacy_alert">Сигнал за поверителност</string>
     <string name="show_search_suggestions">Показване на предложения за търсене</string>
     <string name="trends">Набиращи популярност</string>
-    <string name="customInstance">Персонализиран</string>
+    <string name="customInstance">Потребителски</string>
     <string name="lbry_hls_summary">Използвайте LBRY HLS за стрийминг, ако има такъв</string>
     <string name="video_id">Видеоклип ID</string>
     <string name="resize_mode_fit">Подходящ</string>

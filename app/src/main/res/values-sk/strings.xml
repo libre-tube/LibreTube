@@ -23,7 +23,7 @@
     <string name="unknown_error">Chyba siete.</string>
     <string name="empty">Musíte zadať používateľské meno a heslo.</string>
     <string name="notgmail">Toto je pre účet Piped</string>
-    <string name="defres">Zobrazenie videa</string>
+    <string name="defres">Rozlíšenie videa</string>
     <string name="deletePlaylist">Odstrániť zoznam skladieb</string>
     <string name="areYouSure">Odstrániť zoznam skladieb\?</string>
     <string name="createPlaylist">Vytvoriť zoznam skladieb</string>
@@ -54,11 +54,11 @@
     <string name="music_albums">Albumy YT Music</string>
     <string name="music_playlists">Zoznamy skladieb YT Music</string>
     <string name="license">Licencia</string>
-    <string name="color_accent">Odtiene</string>
-    <string name="color_red">Odpočinková červená</string>
-    <string name="color_blue">Blažená modrá</string>
-    <string name="color_yellow">Neskutočne žltá</string>
-    <string name="color_green">Skvelá zelená</string>
+    <string name="color_accent">Akcenty</string>
+    <string name="color_red">Odpočinkovo červený</string>
+    <string name="color_blue">Blažene modrý</string>
+    <string name="color_yellow">Neskutočne žltý</string>
+    <string name="color_green">Fajn zelený</string>
     <string name="app_icon">Ikona</string>
     <string name="enabled">Zapnutý</string>
     <string name="disabled">Vypnutý</string>
@@ -90,7 +90,7 @@
     <string name="segment_skipped">Vynechaný segment</string>
     <string name="sponsorblock_summary">Používa https://sponsor.ajay.app API</string>
     <string name="category_selfpromo">Neplatená/vlastná propagácia</string>
-    <string name="color_purple">Príjemná fialová</string>
+    <string name="color_purple">Príjemne fialový</string>
     <string name="material_you">Material You</string>
     <string name="sponsorblock_notifications">Oznámenia</string>
     <string name="youtube">YouTube</string>
@@ -181,10 +181,10 @@
     <string name="no_search_result">Žiadne výsledky.</string>
     <string name="share_with_time">Zdieľať s časovým kódom</string>
     <string name="watch_history">História sledovania</string>
-    <string name="skip_buttons">Tlačidlá preskočenia</string>
-    <string name="skip_buttons_summary">Zobrazí tlačidlá na preskočenie na ďalšie alebo predchádzajúce video</string>
+    <string name="skip_buttons">Tlačidlá prechodu</string>
+    <string name="skip_buttons_summary">Zobrazí tlačidlá prechodu na ďalšie alebo predchádzajúce video</string>
     <string name="watch_positions">Zapamätať pozíciu</string>
-    <string name="auth_instance">Overovanie inštancie</string>
+    <string name="auth_instance">Overovacia inštancia</string>
     <string name="github">GitHub</string>
     <string name="history_size">Maximálna veľkosť histórie</string>
     <string name="unlimited">Neobmedzená</string>
@@ -201,7 +201,7 @@
     <string name="resize_mode_zoom">Priblížiť</string>
     <string name="repeat_mode_none">Nič</string>
     <string name="repeat_mode_current">Aktuálne</string>
-    <string name="auth_instance_summary">Pre overené pozvánky použije inú inštanciu</string>
+    <string name="auth_instance_summary">Použije inú inštanciu pre overené volania</string>
     <string name="playerVideoFormat">Video formát pre prehrávač</string>
     <string name="no_audio">Bez zvuku</string>
     <string name="no_video">Bez videa</string>
@@ -251,7 +251,7 @@
     <string name="mobile_data">Mobilné dáta</string>
     <string name="username_email">Pokračovať s e-mailovou adresou (nie je odporúčané)?</string>
     <string name="lbry_hls">LBRY HLS</string>
-    <string name="lbry_hls_summary">Použite LBRY HLS na streamovanie, ak je k dispozícii</string>
+    <string name="lbry_hls_summary">Použije LBRY HLS na streamovanie, ak je k dispozícii</string>
     <string name="download_channel_name">Služba sťahovania</string>
     <string name="welcome">Vítajte v LibreTube</string>
     <string name="export_playlists_to">Exportovať zoznamy skladieb do</string>
@@ -307,7 +307,7 @@
     <string name="captions_size">Veľkosť titulkov</string>
     <string name="faq">Často kladené otázky</string>
     <string name="hls_instead_of_dash">Použiť HLS</string>
-    <string name="auto_quality">Automatická</string>
+    <string name="auto_quality">Automaticky</string>
     <string name="resume">Pokračovať</string>
     <string name="unknown">Neznámy</string>
     <string name="video_id">ID videa</string>
@@ -322,7 +322,7 @@
     <string name="audio_only_mode">Iba zvuk</string>
     <string name="sleep_timer">Časovač spánku</string>
     <string name="play_automatically_summary">Začne automaticky prehrávať video po výbere</string>
-    <string name="auth_instances">Vybrať overujúcu inštanciu</string>
+    <string name="auth_instances">Vybrať overovaciu inštanciu</string>
     <string name="time_code">Časový kód (v sekundách)</string>
     <string name="notification_time_summary">Obmedzí časové rozpätie, v ktorom sa zobrazujú upozornenia o streamoch</string>
     <string name="featured">Odporúčané</string>
@@ -336,7 +336,7 @@
     <string name="grid_landscape">Stĺpce mriežky (na šírku)</string>
     <string name="concurrent_downloads">Maximálny počet súbežných sťahovaní</string>
     <string name="concurrent_downloads_limit_reached">Dosiahnutý limit maximálneho súbežného sťahovania.</string>
-    <string name="instance_frontend_url">Adresa URL klientskeho rozhrania inštancie</string>
+    <string name="instance_frontend_url">URL klientského rozhrania inštancie</string>
     <string name="seek_increment">Krok pretáčania</string>
     <string name="portrait">Na výšku</string>
     <string name="navLabelVisibility">Viditeľnosť označenia</string>
@@ -429,7 +429,7 @@
     <string name="backup_restore_summary">Importovať a exportovať odbery, zoznamy skladieb, …</string>
     <string name="play_latest_videos">Prehrať najnovšie videá</string>
     <string name="nothing_selected">Nič nie je vybrané!</string>
-    <string name="color_violet">Univerzálna fialová</string>
+    <string name="color_violet">Univerzálne fialový</string>
     <string name="playlistUrl">Adresa URL zoznamu skladieb</string>
     <string name="shuffle">Náhodný výber</string>
     <string name="audio_only_mode_summary">Premení LibreTube na prehrávač hudby</string>
@@ -438,7 +438,7 @@
     <string name="custom_playback_speed">Prispôsobená rýchlosť</string>
     <string name="category">Kategória</string>
     <string name="disable_proxy">Zakázať Piped proxy</string>
-    <string name="theme_monochrome">Minimalistický monochromatický</string>
+    <string name="theme_monochrome">Minimalisticky monochromatický</string>
     <string name="disable_proxy_summary">Načíta videá a obrázky priamo zo serverov YouTube. Túto možnosť povoľte len vtedy, ak vždy použijete sieť VPN</string>
     <string name="playing_next">Prehrať ďalšie za %1$s</string>
     <string name="new_group">Nová</string>
@@ -506,7 +506,7 @@
     <string name="alternative_pip_controls">Alternatívne ovládače PiP</string>
     <string name="repeat_mode_all">Všetko</string>
     <string name="show_stream_thumbnails">Zobraziť miniatúry streamov</string>
-    <string name="no_fullscreen_resolution">Zobrazenie bez celej obrazovky</string>
+    <string name="no_fullscreen_resolution">Rozlíšenie bez celej obrazovky</string>
     <string name="same_as_fullscreen">Ako pri celej obrazovke</string>
     <plurals name="months_ago">
         <item quantity="one">Pred mesiacom</item>
