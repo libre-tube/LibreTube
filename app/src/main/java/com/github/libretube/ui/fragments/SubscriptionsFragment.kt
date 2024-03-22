@@ -128,6 +128,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
             binding.subRefresh.isRefreshing = true
             isCurrentTabSubChannels = !isCurrentTabSubChannels
 
+            if (viewModel.subscriptions.value == null) viewModel.fetchSubscriptions(requireContext())
             if (isCurrentTabSubChannels) showSubscriptions() else showFeed()
 
             binding.subChannels.isVisible = isCurrentTabSubChannels
