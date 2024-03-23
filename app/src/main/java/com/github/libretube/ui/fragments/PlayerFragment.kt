@@ -922,6 +922,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             val isShort = PlayingQueue.getCurrent()?.isShort == true ||
                 (videoStream?.height ?: 0) > (videoStream?.width ?: 0)
 
+            // reverse default resolution for Shorts
+            if (isShort) {
+                fullscreenResolution = fullscreenResolution?.times(16)?.div(9)
+                noFullscreenResolution = noFullscreenResolution?.times(16)?.div(9)
+            }
+
             PlayingQueue.setOnQueueTapListener { streamItem ->
                 streamItem.url?.toID()?.let { playNextVideo(it) }
             }
