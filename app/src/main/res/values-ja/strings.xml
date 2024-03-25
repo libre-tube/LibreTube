@@ -282,7 +282,7 @@
     <string name="most_views">再生回数が多い</string>
     <string name="backup_restore">バックアップと復元</string>
     <string name="backup">バックアップ</string>
-    <string name="picture_in_picture">ピクチャー・イン・ピクチャー</string>
+    <string name="picture_in_picture">ピクチャインピクチャー</string>
     <string name="player_resize_mode">リサイズ方法</string>
     <string name="maximum_image_cache">最大画像キャッシュサイズ</string>
     <string name="copied_to_clipboard">クリップボードにコピーしました</string>
@@ -533,6 +533,7 @@
     <string name="behavior_when_minimized">最小化時の動作</string>
     <string name="comments_count">コメント (%1$s)</string>
     <string name="commentedTimeWithSeparator">• %1$s</string>
-    <string name="external_player">外部のプレイヤー</string>
+    <string name="external_player">別の再生プレイヤー</string>
     <string name="show_updates">最新版を自動で確認</string>
+    <string name="albums">アルバム</string>
 </resources>
