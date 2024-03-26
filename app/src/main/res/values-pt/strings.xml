@@ -76,7 +76,7 @@
     <string name="music_songs">Músicas no YT</string>
     <string name="music_videos">Videos de música no YT</string>
     <string name="music_albums">Álbuns de música no YT</string>
-    <string name="category_sponsor_summary">Promoções, referências pagas e anúncios diretos. Não para autopromoção nem para comunicações acerca de causas, criações, sites e produtos</string>
+    <string name="category_sponsor_summary">Promoções, referências pagas e anúncios diretos. Não por autopromoção nem comunicações acerca de causas, criações, sites e produtos</string>
     <string name="music_playlists">Listas de música no YT</string>
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">Utiliza a API https://sponsor.ajay.app</string>
@@ -97,7 +97,7 @@
     <string name="app_icon">Ícone</string>
     <string name="playOnBackground">Reproduzir em segundo plano</string>
     <string name="shareTo">Partilhar URL</string>
-    <string name="legacyIcon">Legado perdido</string>
+    <string name="legacyIcon">Legado</string>
     <string name="gradientIcon">Gradiente</string>
     <string name="fireIcon">Fogo</string>
     <string name="torchIcon">Tocha</string>
@@ -187,7 +187,7 @@
     <string name="pure_theme_summary">Branco/preto puro</string>
     <string name="default_subtitle_language">Idioma das legendas</string>
     <string name="notifications">Notificações</string>
-    <string name="notify_new_streams">Mostrar notificações para novos vídeos</string>
+    <string name="notify_new_streams">Notificações para novos vídeos</string>
     <string name="notify_new_streams_summary">Mostrar notificações para novos vídeos dos criadores que segue</string>
     <string name="checking_frequency">Verificar a cada…</string>
     <string name="irreversible">Tem a certeza\? Não pode reverter!</string>
@@ -274,10 +274,10 @@
     <string name="category_filler">Tangente/Piadas</string>
     <string name="filename">Nome do ficheiro</string>
     <string name="invalid_filename">Nome de ficheiro inválido!</string>
-    <string name="category_preview_summary">Para segmentos detalhando conteúdo futuro sem informações adicionais. Se incluir clipes que aparecem apenas aqui, é muito provável que esta seja a categoria errada</string>
+    <string name="category_preview_summary">Segmentos que detalham o conteúdo futuro sem informações adicionais. Se incluir clipes que aparecem apenas aqui, é muito provável que esta seja a categoria errada</string>
     <string name="livestreams">Emissões em direto</string>
     <string name="alternative_videos_layout">Esquema alternativo de vídeos</string>
-    <string name="defaultIconLight">Claro por omissão</string>
+    <string name="defaultIconLight">Claro</string>
     <string name="time_code">Código de tempo (segundos)</string>
     <string name="category_filler_summary">Para cenas tangenciais adicionadas apenas para preencher ou humor não necessário para compreender o conteúdo do vídeo</string>
     <string name="category_music_offtopic_summary">Apenas para utilização em vídeos musicais. Deve abranger partes do vídeo que não façam parte das misturas oficiais. No final, o vídeo deve-se assemelhar ao Spotify ou a qualquer outra versão mista o mais próximo possível ou reduzir a conversa e outras distrações</string>
@@ -286,7 +286,7 @@
     <string name="local_playlists">Listas de reprodução locais</string>
     <string name="play_all">Reproduzir tudo</string>
     <string name="confirm_unsubscribe">Tem a certeza de que deseja cancelar a subscrição %1$s\?</string>
-    <string name="confirm_unsubscribing_summary">Mostrar diálogo de confirmação antes de cancelar a subscrição</string>
+    <string name="confirm_unsubscribing_summary">Mostrar diálogo de confirmação antes de cancelar uma subscrição</string>
     <string name="time">Tempo</string>
     <string name="start_time">Início</string>
     <string name="end_time">Fim</string>
@@ -302,7 +302,7 @@
     <string name="trends">Tendências</string>
     <string name="featured">Destaques</string>
     <string name="trending">Tendências atuais</string>
-    <string name="queue_insert_related_videos">Inserir vídeos relacionados</string>
+    <string name="queue_insert_related_videos">Colocar vídeos relacionados</string>
     <string name="bookmarks">Marcadores</string>
     <string name="bookmark">Marcador</string>
     <string name="clear_bookmarks">Limpar marcadores</string>
@@ -329,7 +329,7 @@
     <string name="privacy_alert">Alerta de privacidade</string>
     <string name="username_email">Não recomendamos a partilha do endereço de e-mail. Deseja continuar\?</string>
     <string name="play_latest_videos">Reproduzir últimos vídeos</string>
-    <string name="swipe_controls_summary">Deslize para ajustar o brilho e o volume no modo de ecrã inteiro</string>
+    <string name="swipe_controls_summary">Deslize para ajustar o brilho e o volume no modo de ecrã completo</string>
     <string name="all_caught_up">É tudo por hoje</string>
     <string name="nothing_selected">Nada selecionado!</string>
     <string name="color_violet">Violeta</string>
@@ -387,11 +387,11 @@
     <string name="subscriberAndVideoCounts">%1$s subscritores • %2$d vídeos</string>
     <string name="disable_proxy">Desativar proxy Piped</string>
     <string name="disable_proxy_summary">Carregar vídeos e imagens diretamente dos servidores YouTube. Apenas deve ativar esta opção se utilizar uma VPN!</string>
-    <string name="auto_fullscreen_shorts">Ecrã completo automático em vídeos curtos</string>
+    <string name="auto_fullscreen_shorts">Ecrã completo em vídeos curtos</string>
     <string name="channel_groups">Grupos de canais</string>
     <string name="new_group">Novo</string>
     <string name="group_name">Nome do grupo</string>
-    <string name="play_automatically">Reproduzir automaticamente</string>
+    <string name="play_automatically">Reprodução automática</string>
     <string name="play_automatically_summary">Iniciar reprodução dos vídeos ao selecionar</string>
     <string name="fullscreen_gestures">Gestos para ativar/desativar ecrã completo</string>
     <string name="go_to_video">Ir para o vídeo</string>
@@ -434,11 +434,11 @@
     <string name="color">Cor</string>
     <string name="visible">Mostrar na barra de progresso</string>
     <string name="stop">Parar</string>
-    <string name="sb_custom_colors">Cores de segmento personalizadas</string>
+    <string name="sb_custom_colors">Cores personalizadas</string>
     <string name="chapters_videoHighlight">Vídeo em destaque</string>
-    <string name="category_highlight">Mostrar vídeo de destaque</string>
-    <string name="category_highlight_summary">Pode ser o título anunciado, a miniatura ou a parte mais interessante do vídeo. Pode saltar para essa parte tocando nela na secção de capítulos</string>
-    <string name="sb_custom_colors_summary">Alterna segmentos de cores personalizadas para segmentos SponsorBlock</string>
+    <string name="category_highlight">Mostrar destaque dos vídeos</string>
+    <string name="category_highlight_summary">Pode ser o título anunciado, a miniatura ou a parte mais interessante do vídeo. Pode ir para essa parte tocando-lhe na secção de capítulos</string>
+    <string name="sb_custom_colors_summary">Alternar segmentos de cores personalizadas para segmentos SponsorBlock</string>
     <string name="fallback_piped_proxy">Usar Piped proxy como recurso</string>
     <string name="fallback_piped_proxy_summary">Carregar vídeos através do proxy Piped se a ligação ao YouTube não funcionar para o vídeo atual (aumenta o tempo de carregamento inicial). Se desativado, é provável que o conteúdo musical não seja reproduzido devido a restrições do YouTube.</string>
     <string name="continue_watching">Continuar a ver</string>
@@ -451,7 +451,7 @@
     <string name="default_or_unknown_audio_track">padrão ou desconhecido</string>
     <string name="unknown_or_no_audio">desconhecido ou sem áudio</string>
     <string name="dearrow">Ativar \'DeArrow\'</string>
-    <string name="dearrow_summary">Mostra títulos e miniaturas mais precisas e menos sensacionalistas. Pode aumentar o tempo de carregamento dos vídeos</string>
+    <string name="dearrow_summary">Mostrar títulos e miniaturas mais precisas e menos sensacionalistas. Pode aumentar o tempo de carregamento dos vídeos</string>
     <string name="visibility">Visibilidade</string>
     <string name="visibility_public">Público</string>
     <string name="visibility_unlisted">Não listado</string>
@@ -498,7 +498,7 @@
     <string name="no_fullscreen_resolution">Resolução sem ecrã completo</string>
     <string name="music_artists">Artistas do YT Music</string>
     <string name="same_as_fullscreen">Igual a ecrã completo</string>
-    <string name="playback_during_call_summary">Tenha em atenção que isto implica que a aplicação não posa gerir o foco de áudio</string>
+    <string name="playback_during_call_summary">Tenha em conta que isto implica que a aplicação não possa mais gerir o foco de áudio</string>
     <string name="playback_during_call">Continuar reprodução durante uma chamada</string>
     <string name="autoplay_playlists_summary">Reproduzir o vídeo seguinte da lista de reprodução, independentemente do modo de reprodução automática</string>
     <string name="autoplay_playlists">Listas de reprodução automáticas</string>
@@ -522,7 +522,7 @@
     <string name="uptime">%.2f%% tempo de atividade</string>
     <string name="grid_landscape">Colunas da grelha (horizontal)</string>
     <string name="rich_caption_rendering">Legendas melhoradas</string>
-    <string name="rich_caption_rendering_summary">Processar legendas para um experiência melhorada e personalizada</string>
+    <string name="rich_caption_rendering_summary">Processar legendas para uma experiência melhorada e personalizada</string>
     <string name="copy_tooltip">Copiar</string>
     <string name="change_instance">Alterar instância</string>
     <string name="suggest_change_instance">O carregamento está a demorar mais do que o habitual. Considere alterar a instância</string>
