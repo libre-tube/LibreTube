@@ -51,6 +51,8 @@ import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.util.DataSaverMode
 import com.github.libretube.util.PlayingQueue
 import com.google.android.material.elevation.SurfaceColors
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlin.math.abs
 import kotlinx.coroutines.launch
 
@@ -71,6 +73,8 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
 
     private var playerService: OnlinePlayerService? = null
 
+    private var returnToVideo = false
+
     /** Defines callbacks for service binding, passed to bindService()  */
     private val connection = object : ServiceConnection {
         override fun onServiceConnected(className: ComponentName, service: IBinder) {
@@ -90,6 +94,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         Intent(activity, OnlinePlayerService::class.java).also { intent ->
             activity?.bindService(intent, connection, Context.BIND_AUTO_CREATE)
         }
+        returnToVideo = arguments?.getBoolean(IntentData.returnToVideo,false) ?: returnToVideo
     }
 
     override fun onCreateView(
@@ -156,15 +161,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         }
 
         binding.openVideo.setOnClickListener {
-            BackgroundHelper.stopBackgroundPlay(requireContext())
-            killFragment()
-            NavigationHelper.navigateVideo(
-                context = requireContext(),
-                videoUrlOrId = PlayingQueue.getCurrent()?.url,
-                timestamp = playerService?.player?.currentPosition?.div(1000) ?: 0,
-                keepQueue = true,
-                forceVideo = true
-            )
+            switchToVideoPlayer()
         }
 
         binding.openChapters.setOnClickListener {
@@ -363,6 +360,27 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             _binding?.openChapters?.isVisible = streams.chapters.isNotEmpty()
         }
         initializeSeekBar()
+    }
+
+    private fun switchToVideoPlayer(){
+        BackgroundHelper.stopBackgroundPlay(requireContext())
+        killFragment()
+        NavigationHelper.navigateVideo(
+            context = requireContext(),
+            videoUrlOrId = PlayingQueue.getCurrent()?.url,
+            timestamp = playerService?.player?.currentPosition?.div(1000) ?: 0,
+            keepQueue = true,
+            forceVideo = true
+        )
+    }
+    override fun onResume() {
+        super.onResume()
+
+        if (returnToVideo){
+            handler.post {
+                switchToVideoPlayer()
+            }
+        }
     }
 
     override fun onDestroyView() {
