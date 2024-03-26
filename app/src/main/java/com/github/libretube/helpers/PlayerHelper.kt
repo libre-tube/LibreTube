@@ -41,6 +41,7 @@ import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.obj.VideoStats
+import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
 import java.util.Locale
 import java.util.concurrent.Executors
@@ -343,6 +344,9 @@ object PlayerHelper {
             )
 
     fun shouldPlayNextVideo(isPlaylist: Boolean = false): Boolean {
+        // if there is no next video, it obviously should not be played
+        if (PlayingQueue.getNext() == null)
+            return false
         return autoPlayEnabled || (
             isPlaylist && PreferenceHelper.getBoolean(
                 PreferenceKeys.AUTOPLAY_PLAYLISTS,
