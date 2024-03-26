@@ -345,8 +345,10 @@ object PlayerHelper {
 
     fun shouldPlayNextVideo(isPlaylist: Boolean = false): Boolean {
         // if there is no next video, it obviously should not be played
-        if (PlayingQueue.getNext() == null)
+        if (!PlayingQueue.hasNext()) {
             return false
+        }
+
         return autoPlayEnabled || (
             isPlaylist && PreferenceHelper.getBoolean(
                 PreferenceKeys.AUTOPLAY_PLAYLISTS,

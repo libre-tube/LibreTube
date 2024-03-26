@@ -269,6 +269,12 @@ open class CustomExoPlayerView(
         super.showController()
     }
 
+    fun showControllerPermanently() {
+        // remove the previous callback from the queue to prevent a flashing behavior
+        cancelHideControllerTask()
+        super.showController()
+    }
+
     override fun onTouchEvent(event: MotionEvent) = false
 
     private fun initRewindAndForward() {

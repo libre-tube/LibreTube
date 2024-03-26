@@ -113,11 +113,11 @@ import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
 import com.github.libretube.util.YoutubeHlsPlaylistParser
-import java.util.concurrent.Executors
-import kotlin.math.abs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.concurrent.Executors
+import kotlin.math.abs
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class PlayerFragment : Fragment(), OnlinePlayerOptions {
@@ -313,7 +313,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                         playNextVideo()
                     }
                 } else {
-                    binding.player.showController()
+                    binding.player.showControllerPermanently()
                 }
             }
 
