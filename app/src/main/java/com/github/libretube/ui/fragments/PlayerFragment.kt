@@ -1687,17 +1687,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         ) {
             return
         }
-
-        if (PlayerHelper.autoFullscreenEnabled) {
-            when (newConfig.orientation) {
-                // go to fullscreen mode
-                Configuration.ORIENTATION_LANDSCAPE -> setFullscreen()
-                // exit fullscreen if not landscape
-                else -> unsetFullscreen()
-            }
-        } else {
-            restartActivityIfNeeded()
-        }
     }
 
     private fun disableController() {
