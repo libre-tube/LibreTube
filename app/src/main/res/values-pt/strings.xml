@@ -323,7 +323,7 @@
     <string name="double_tap_seek_summary">Toque duas vezes à esquerda ou à direita para recuar ou avançar o vídeo</string>
     <string name="import_playlists">Importar listas de reprodução</string>
     <string name="export_playlists">Exportar listas de reprodução</string>
-    <string name="app_backup">Backup de aplicações</string>
+    <string name="app_backup">Backup da aplicação</string>
     <string name="backup_restore_summary">Importar e exportar subscrições, listas de reprodução…</string>
     <string name="exportsuccess">Exportado.</string>
     <string name="privacy_alert">Alerta de privacidade</string>
@@ -440,7 +440,7 @@
     <string name="category_highlight_summary">Pode ser o título anunciado, a miniatura ou a parte mais interessante do vídeo. Pode saltar para essa parte tocando nela na secção de capítulos</string>
     <string name="sb_custom_colors_summary">Alterna segmentos de cores personalizadas para segmentos SponsorBlock</string>
     <string name="fallback_piped_proxy">Usar Piped proxy como recurso</string>
-    <string name="fallback_piped_proxy_summary">Carregar vídeos através do proxy Piper se a ligação ao YouTube não funcionar para o vídeo em reprodução (aumenta o tempo de carregamento inicial). Se estiver desativado, é provável que o conteúdo musical do YouTube não seja reproduzido devido a restrições do YT</string>
+    <string name="fallback_piped_proxy_summary">Carregar vídeos através do proxy Piped se a ligação ao YouTube não funcionar para o vídeo atual (aumenta o tempo de carregamento inicial). Se desativado, é provável que o conteúdo musical não seja reproduzido devido a restrições do YouTube.</string>
     <string name="continue_watching">Continuar a ver</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">Idioma de áudio desconhecido</string>

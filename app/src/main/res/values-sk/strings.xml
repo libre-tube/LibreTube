@@ -17,7 +17,7 @@
     <string name="importsuccess">Ste prihlásený k odberu</string>
     <string name="cannotDownload">Tento stream sa nedá stiahnuť.</string>
     <string name="downloadfailed">Sťahovanie zlyhalo.</string>
-    <string name="import_from_yt">Importujte odbery</string>
+    <string name="import_from_yt">Importovať odbery</string>
     <string name="import_from_yt_summary">Z YouTube alebo NewPipe</string>
     <string name="server_error">Na serveri sa vyskytol problém. Skúste inú inštanciu.</string>
     <string name="unknown_error">Chyba siete.</string>
@@ -60,8 +60,8 @@
     <string name="color_yellow">Neskutočne žltý</string>
     <string name="color_green">Fajn zelený</string>
     <string name="app_icon">Ikona</string>
-    <string name="enabled">Zapnutý</string>
-    <string name="disabled">Vypnutý</string>
+    <string name="enabled">Zapnuté</string>
+    <string name="disabled">Vypnuté</string>
     <string name="app_theme">Téma</string>
     <string name="library">Knižnica</string>
     <string name="search_hint">Vyhľadávanie</string>
@@ -160,7 +160,7 @@
     <string name="least_views">Najmenej zobrazení</string>
     <string name="most_recent">Najnovšie</string>
     <string name="require_restart_message">Ak chcete použiť nové zmeny, reštartujte aplikáciu.</string>
-    <string name="network_metered">Meraná</string>
+    <string name="network_metered">Merané</string>
     <string name="network_wifi">Iba na wifi</string>
     <string name="error_occurred">Chyba</string>
     <string name="copied">Skopírované</string>
@@ -279,7 +279,7 @@
     <string name="remove_bookmark">Odstrániť záložku</string>
     <string name="confirm_unsubscribe">Určite chcete zrušiť odber %1$s?</string>
     <string name="remove_watched_videos">Odstrániť odsledované videá</string>
-    <string name="pause">Daj si pauzu</string>
+    <string name="pause">Pozastaviť</string>
     <string name="double_tap_seek">Hľadať dvojitým ťuknutím</string>
     <string name="backup_customInstances">Vlastné inštancie</string>
     <string name="confirm_unsubscribing">Potvrdiť zrušenie odberu</string>
@@ -300,7 +300,7 @@
     <string name="play_next">Prehrať ďalšie</string>
     <string name="limit_to_runtime">Obmedziť podľa času spustenia</string>
     <string name="audio_track">Zvuková stopa</string>
-    <string name="backup">Záloha</string>
+    <string name="backup">Zálohovať</string>
     <string name="local_subscriptions">Lokálne odbery</string>
     <string name="preferences">Predvoľby</string>
     <string name="privacy_alert">Upozornenie o ochrane osobných údajov</string>
@@ -340,7 +340,7 @@
     <string name="seek_increment">Krok pretáčania</string>
     <string name="portrait">Na výšku</string>
     <string name="navLabelVisibility">Viditeľnosť označenia</string>
-    <string name="export_subscriptions">Exportovat odbery</string>
+    <string name="export_subscriptions">Exportovať odbery</string>
     <string name="resize_mode_fit">Prispôsobiť</string>
     <string name="resize_mode_fill">Vyplniť</string>
     <string name="filename">Názov súboru</string>
