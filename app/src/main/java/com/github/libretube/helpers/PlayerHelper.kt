@@ -83,11 +83,10 @@ object PlayerHelper {
     /**
      * Create a base64 encoded DASH stream manifest
      */
-    fun createDashSource(streams: Streams, context: Context, disableProxy: Boolean): Uri {
+    fun createDashSource(streams: Streams, context: Context): Uri {
         val manifest = DashHelper.createManifest(
             streams,
-            DisplayHelper.supportsHdr(context),
-            disableProxy
+            DisplayHelper.supportsHdr(context)
         )
 
         // encode to base64
@@ -337,10 +336,15 @@ object PlayerHelper {
         )
 
     val playAutomatically: Boolean
-        get() = PreferenceHelper
-            .getBoolean(
+        get() = PreferenceHelper.getBoolean(
                 PreferenceKeys.PLAY_AUTOMATICALLY,
                 true
+            )
+
+    val disablePipedProxy: Boolean
+        get() = PreferenceHelper.getBoolean(
+                PreferenceKeys.DISABLE_VIDEO_IMAGE_PROXY,
+                false
             )
 
     fun shouldPlayNextVideo(isPlaylist: Boolean = false): Boolean {
