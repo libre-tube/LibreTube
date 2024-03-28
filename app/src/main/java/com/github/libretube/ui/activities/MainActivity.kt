@@ -429,7 +429,7 @@ class MainActivity : BaseActivity() {
         intent?.getStringExtra(IntentData.videoId)?.let {
             // the bottom navigation bar has to be created before opening the video
             // otherwise the player layout measures aren't calculated properly
-            // and the miniplayer is opened at a closed state and overlapsing the navigationb ar
+            // and the miniplayer is opened at a closed state and overlapping the navigation bar
             binding.bottomNav.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
                     NavigationHelper.navigateVideo(
