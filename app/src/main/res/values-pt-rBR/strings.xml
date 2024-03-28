@@ -146,7 +146,7 @@
     <string name="player_summary">Padrões e comportamento</string>
     <string name="related_streams_summary">Mostrar conteúdo semelhante aos vídeos que você assiste</string>
     <string name="open">Abrir…</string>
-    <string name="reset">Restaurar padrões</string>
+    <string name="reset">Restaurar configurações</string>
     <string name="default_subtitle_language">Idioma da legenda</string>
     <string name="chapters">Capítulos</string>
     <string name="deleteAccount">Exluir conta</string>
@@ -168,12 +168,12 @@
     <string name="autoRotatePlayer">Tela cheia automática</string>
     <string name="notify_new_streams">Mostrar notificações para novos vídeos</string>
     <string name="most_views">Mais visualizados</string>
-    <string name="network_wifi">Somente em Wi-Fi</string>
+    <string name="network_wifi">Wi-Fi</string>
     <string name="translate">Tradução</string>
     <string name="history_empty">O histórico está vazio.</string>
     <string name="least_recent">Mais antigo</string>
     <string name="required_network">Conexão necessária</string>
-    <string name="network_metered">Conexão limitada</string>
+    <string name="network_metered">Dados móveis</string>
     <string name="most_recent">Mais recente</string>
     <string name="network_all">Todas</string>
     <string name="no_search_result">Sem resultados.</string>
