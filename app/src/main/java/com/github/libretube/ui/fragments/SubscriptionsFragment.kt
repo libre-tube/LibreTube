@@ -103,9 +103,11 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
         binding.subRefresh.isEnabled = true
         binding.subProgress.isVisible = true
 
-        if (!isCurrentTabSubChannels && viewModel.videoFeed.value == null) {
-            viewModel.fetchSubscriptions(requireContext())
+        if (viewModel.videoFeed.value == null) {
             viewModel.fetchFeed(requireContext())
+        }
+        if (viewModel.subscriptions.value == null) {
+            viewModel.fetchSubscriptions(requireContext())
         }
 
         viewModel.videoFeed.observe(viewLifecycleOwner) {
