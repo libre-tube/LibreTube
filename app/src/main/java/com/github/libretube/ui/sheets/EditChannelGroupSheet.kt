@@ -64,9 +64,11 @@ class EditChannelGroupSheet : ExpandedBottomSheet() {
 
         updateConfirmStatus()
         binding.confirm.setOnClickListener {
-            channelGroupsModel.groupToEdit?.name = binding.groupName.text.toString()
-            if (channelGroupsModel.groupToEdit?.name.isNullOrBlank()) return@setOnClickListener
-            saveGroup(channelGroupsModel.groupToEdit!!, oldGroupName)
+            val updatedGroup = channelGroupsModel.groupToEdit?.copy(
+                name = binding.groupName.text.toString().ifEmpty { return@setOnClickListener }
+            ) ?: return@setOnClickListener
+            saveGroup(updatedGroup, oldGroupName)
+
             dismiss()
         }
     }
@@ -78,10 +80,9 @@ class EditChannelGroupSheet : ExpandedBottomSheet() {
             ?.plus(group)
 
         CoroutineScope(Dispatchers.IO).launch {
-            runCatching {
-                // delete the old one as it might have a different name
-                DatabaseHolder.Database.subscriptionGroupsDao().deleteGroup(oldGroupName)
-            }
+            // delete the old version of the group first before updating it, as the name is the
+            // primary key
+            DatabaseHolder.Database.subscriptionGroupsDao().deleteGroup(oldGroupName)
             DatabaseHolder.Database.subscriptionGroupsDao().createGroup(group)
         }
     }
