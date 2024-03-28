@@ -1,0 +1,8 @@
+* fix: unable to view subscribed channels
+* fix: channel groups duplicated after updating name
+* fix: autofullscreen stops working after orientation change
+* fix: various comment/replies related issues
+* feat: improve video end screen
+* feat: show confirm modal before deleting channel group
+* feat: dismiss keyboard at back press on search page
+* chore: use hls if piped proxy disabled, remove piped proxy fallback option
