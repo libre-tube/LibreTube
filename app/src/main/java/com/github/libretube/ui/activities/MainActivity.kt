@@ -31,6 +31,7 @@ import com.github.libretube.compat.PictureInPictureCompat
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.ActivityMainBinding
+import com.github.libretube.extensions.anyChildFocused
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
@@ -168,6 +169,11 @@ class MainActivity : BaseActivity() {
                 startFragmentId -> {
                     moveTaskToBack(true)
                     onUserLeaveHint()
+                }
+
+                R.id.searchFragment -> {
+                    if (searchView.anyChildFocused()) searchView.clearFocus()
+                    else navController.popBackStack()
                 }
 
                 R.id.searchResultFragment -> {
