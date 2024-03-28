@@ -14,6 +14,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.api.obj.Comment
@@ -23,6 +25,7 @@ import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.ui.adapters.CommentPagingAdapter
 import com.github.libretube.ui.models.CommentsViewModel
+import com.github.libretube.ui.models.sources.CommentRepliesPagingSource
 import com.github.libretube.ui.sheets.CommentsSheet
 import kotlinx.coroutines.launch
 
@@ -58,8 +61,8 @@ class CommentsRepliesFragment : Fragment() {
             null,
             videoId,
             viewModel.channelAvatar,
-            comment,
-            viewModel.handleLink
+            isRepliesAdapter = true,
+            handleLink = viewModel.handleLink
         ) {
             viewModel.commentsSheetDismiss?.invoke()
         }
@@ -100,7 +103,9 @@ class CommentsRepliesFragment : Fragment() {
 
         binding.commentsRV.viewTreeObserver.addOnScrollChangedListener(scrollListener)
 
-        viewModel.selectedCommentLiveData.postValue(comment.repliesPage)
+        val commentRepliesFlow = Pager(PagingConfig(20, enablePlaceholders = false)) {
+            CommentRepliesPagingSource(videoId, comment)
+        }.flow
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -111,7 +116,7 @@ class CommentsRepliesFragment : Fragment() {
                 }
 
                 launch {
-                    viewModel.commentRepliesFlow.collect {
+                    commentRepliesFlow.collect {
                         repliesAdapter.submitData(it)
                     }
                 }
