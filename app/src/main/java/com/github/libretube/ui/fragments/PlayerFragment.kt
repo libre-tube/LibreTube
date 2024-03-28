@@ -696,6 +696,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         openOrCloseFullscreenDialog(true)
 
         binding.player.updateMarginsByFullscreenMode()
+
+        updateFullscreenButtonVisibility()
     }
 
     @SuppressLint("SourceLockedOrientationActivity")
@@ -712,31 +714,36 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
         playerBinding.exoTitle.isInvisible = true
 
-        mainActivity.requestedOrientation = mainActivity.screenOrientationPref
+        if (!PlayerHelper.autoFullscreenEnabled) {
+            mainActivity.requestedOrientation = mainActivity.screenOrientationPref
+        }
+
         openOrCloseFullscreenDialog(false)
         updateResolutionOnFullscreenChange(false)
 
         restartActivityIfNeeded()
 
         binding.player.updateMarginsByFullscreenMode()
+
+        updateFullscreenButtonVisibility()
+    }
+
+    private fun updateFullscreenButtonVisibility() {
+        playerBinding.fullscreen.isInvisible = PlayerHelper.autoFullscreenEnabled
     }
 
     /**
      * Enable or disable fullscreen depending on the current state
      */
     fun toggleFullscreen() {
-        // hide player controller
         binding.player.hideController()
+
         if (viewModel.isFullscreen.value == false) {
             // go to fullscreen mode
             setFullscreen()
         } else {
             // exit fullscreen mode
             unsetFullscreen()
-
-            // disable the fullscreen button for auto fullscreen
-            // this is necessary to hide the button after an auto fullscreen for shorts
-            playerBinding.fullscreen.isVisible = !PlayerHelper.autoFullscreenEnabled
         }
     }
 
@@ -936,11 +943,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 isShort && binding.playerMotionLayout.progress == 0f
             ) {
                 setFullscreen()
-                playerBinding.fullscreen.isVisible = true
-            } else {
-                // disable the fullscreen button for auto fullscreen
-                playerBinding.fullscreen.isVisible = !PlayerHelper.autoFullscreenEnabled
             }
+            updateFullscreenButtonVisibility()
 
             binding.player.apply {
                 useController = false
