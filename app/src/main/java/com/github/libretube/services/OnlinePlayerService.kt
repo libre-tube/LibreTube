@@ -325,14 +325,10 @@ class OnlinePlayerService : LifecycleService() {
     private suspend fun setMediaItem() {
         val streams = streams ?: return
 
-        val (uri, mimeType) = if (streams.audioStreams.isNotEmpty()) {
-            val disableProxy = ProxyHelper.useYouTubeSourceWithoutProxy(
-                streams.videoStreams.first().url!!
-            )
+        val (uri, mimeType) = if (streams.audioStreams.isNotEmpty() && !PlayerHelper.disablePipedProxy) {
             PlayerHelper.createDashSource(
                 streams,
-                this,
-                disableProxy
+                this
             ) to MimeTypes.APPLICATION_MPD
         } else {
             ProxyHelper.unwrapStreamUrl(streams.hls.orEmpty()).toUri() to MimeTypes.APPLICATION_M3U8

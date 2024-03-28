@@ -35,25 +35,20 @@ object ProxyHelper {
     /**
      * Detect whether the proxy should be used or not for a given stream URL based on user preferences
      */
-    suspend fun unwrapStreamUrl(url: String): String {
-        return if (useYouTubeSourceWithoutProxy(url)) unwrapUrl(url) else url
-    }
-
-    suspend fun useYouTubeSourceWithoutProxy(url: String) = when {
-        !PreferenceHelper.getBoolean(PreferenceKeys.DISABLE_VIDEO_IMAGE_PROXY, false) -> false
-        PreferenceHelper.getBoolean(PreferenceKeys.FALLBACK_PIPED_PROXY, true) -> {
-            // check whether the URL has content available, and disable proxy if that's the case
-            isUrlUsable(unwrapUrl(url))
+    fun unwrapStreamUrl(url: String): String {
+        return if (PlayerHelper.disablePipedProxy) {
+            unwrapUrl(url)
+        } else {
+            url
         }
-        else -> true
     }
 
-    fun unwrapImageUrl(url: String) = if (
-        !PreferenceHelper.getBoolean(PreferenceKeys.DISABLE_VIDEO_IMAGE_PROXY, false)
-    ) {
-        url
-    } else {
-        unwrapUrl(url)
+    fun unwrapImageUrl(url: String): String {
+        return if (PlayerHelper.disablePipedProxy) {
+            unwrapUrl(url)
+        } else {
+            url
+        }
     }
 
     /**

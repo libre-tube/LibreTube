@@ -100,7 +100,6 @@ object PreferenceKeys {
     const val UNLIMITED_SEARCH_HISTORY = "unlimited_search_history"
     const val SB_HIGHLIGHTS = "sb_highlights"
     const val SHOW_TIME_LEFT = "show_time_left"
-    const val FALLBACK_PIPED_PROXY = "fallback_piped_proxy"
     const val ALLOW_PLAYBACK_DURING_CALL = "playback_during_call"
     const val BEHAVIOR_WHEN_MINIMIZED = "behavior_when_minimized"
 
