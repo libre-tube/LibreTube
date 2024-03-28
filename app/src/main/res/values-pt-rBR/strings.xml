@@ -318,7 +318,7 @@
     <string name="double_tap_seek">Toque duas vezes para procurar</string>
     <string name="all_caught_up">Você está em dia</string>
     <string name="all_caught_up_summary">Você já viu todos os novos vídeos</string>
-    <string name="double_tap_seek_summary">Toque duas vezes à esquerda ou à direita para retroceder ou avançar a posição do player</string>
+    <string name="double_tap_seek_summary">Toque duas vezes à esquerda ou à direita para retroceder ou avançar a posição da reprodução</string>
     <string name="import_playlists">Importar playlists</string>
     <string name="export_playlists">Exportar playlists</string>
     <string name="app_backup">Backup do aplicativo</string>
@@ -461,7 +461,7 @@
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="screen_orientation">Orientação da tela</string>
     <string name="remove_watched_videos">Remover vídeos assistidos</string>
-    <string name="player_channel_name">Assistente do Player</string>
+    <string name="player_channel_name">Assistente de reprodução</string>
     <string name="player_channel_description">Mostrar notificação quando estiver reproduzindo</string>
     <string name="tooltip_create_playlist">Criar playlist</string>
     <string name="tooltip_repeat">Repetir</string>
@@ -469,9 +469,9 @@
     <string name="tooltip_close">Fechar</string>
     <string name="tooltip_watch_position">Posição de reprodução</string>
     <string name="tooltip_minimize">Minimizar</string>
-    <string name="tooltip_unlocked">Desbloquear player</string>
+    <string name="tooltip_unlocked">Desbloquear funções</string>
     <string name="tooltip_fullscreen">Tela cheia</string>
-    <string name="tooltip_locked">Bloquear player</string>
+    <string name="tooltip_locked">Bloquear funções</string>
     <string name="tooltip_sponsorblock">Alternar SponsorBlock</string>
     <string name="tooltip_dismiss">Dispensar</string>
     <string name="tooltip_edit_groups">Editar grupos</string>
