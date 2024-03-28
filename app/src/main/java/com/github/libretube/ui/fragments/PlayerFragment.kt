@@ -118,6 +118,7 @@ import kotlin.math.abs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.math.ceil
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class PlayerFragment : Fragment(), OnlinePlayerOptions {
@@ -137,6 +138,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private var channelId: String? = null
     private var keepQueue = false
     private var timeStamp = 0L
+    private var isShort = false
 
     // data and objects stored for the player
     private lateinit var exoPlayer: ExoPlayer
@@ -919,14 +921,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
 
             val videoStream = streams.videoStreams.firstOrNull()
-            val isShort = PlayingQueue.getCurrent()?.isShort == true ||
+            isShort = PlayingQueue.getCurrent()?.isShort == true ||
                 (videoStream?.height ?: 0) > (videoStream?.width ?: 0)
-
-            // reverse default resolution for Shorts
-            if (isShort) {
-                fullscreenResolution = fullscreenResolution?.times(16)?.div(9)
-                noFullscreenResolution = noFullscreenResolution?.times(16)?.div(9)
-            }
 
             PlayingQueue.setOnQueueTapListener { streamItem ->
                 streamItem.url?.toID()?.let { playNextVideo(it) }
@@ -1317,9 +1313,17 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         if (!this::trackSelector.isInitialized) return
 
         if (!isFullscreen && noFullscreenResolution != null) {
-            setPlayerResolution(noFullscreenResolution!!)
+            var resolution = noFullscreenResolution!!
+            if (isShort) {
+                resolution = ceil(resolution * 16.0 / 9.0).toInt()
+            }
+            setPlayerResolution(resolution)
         } else if (fullscreenResolution != null) {
-            setPlayerResolution(fullscreenResolution ?: Int.MAX_VALUE)
+            var resolution = fullscreenResolution
+            if (isShort && resolution != null) {
+                resolution = ceil(resolution * 16.0 / 9.0).toInt()
+            }
+            setPlayerResolution(resolution ?: Int.MAX_VALUE)
         }
     }
 
@@ -1493,10 +1497,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     if (currentQuality == it.resolution) "${it.name} ✓" else it.name
                 }
             ) { which ->
-                val newResolution = resolutions[which].resolution
+                var newResolution = resolutions[which].resolution
                 setPlayerResolution(newResolution)
 
                 // save the selected resolution to update on fullscreen change
+                if (isShort) {
+                    newResolution = ceil(newResolution * 9.0 / 16.0).toInt()
+                }
                 if (noFullscreenResolution != null && viewModel.isFullscreen.value != true) {
                     noFullscreenResolution = newResolution
                 } else {
