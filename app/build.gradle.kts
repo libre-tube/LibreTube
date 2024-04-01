@@ -126,6 +126,7 @@ dependencies {
 
     /* Retrofit and Kotlinx Serialization */
     implementation(libs.square.retrofit)
+    implementation(libs.logging.interceptor)
     implementation(libs.kotlinx.serialization)
     implementation(libs.kotlinx.datetime)
     implementation(libs.kotlinx.serialization.retrofit)

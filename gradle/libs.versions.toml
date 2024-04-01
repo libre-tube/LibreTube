@@ -6,6 +6,7 @@ kotlin = "1.9.23"
 ksp = "1.9.23-1.0.19"
 lifecycle = "2.7.0"
 constraintlayout = "2.1.4"
+loggingInterceptor = "4.12.0"
 material = "1.11.0"
 navigation = "2.7.7"
 preference = "1.2.1"
@@ -43,6 +44,7 @@ androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", versio
 gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
+logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation" }
 androidx-navigation-ui = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation" }
