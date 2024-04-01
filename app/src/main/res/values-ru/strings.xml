@@ -154,7 +154,7 @@
     <string name="reset">Восстановить настройки по умолчанию</string>
     <string name="reset_message">Сбросить все настройки и выйти из аккаунта\?</string>
     <string name="instance_frontend_url">Ссылка на фронтенд сервера</string>
-    <string name="quality">Качество изображения</string>
+    <string name="quality">Качество</string>
     <string name="behavior">Поведение</string>
     <string name="player_summary">Настройки и поведение</string>
     <string name="seek_increment">Шаг перемотки</string>
@@ -227,7 +227,7 @@
     <string name="share_with_time">Поделиться с тайм-кодом</string>
     <string name="playingOnBackground">Воспроизведение в фоновом режиме…</string>
     <string name="playerAudioFormat">Аудио формат для проигрывателя</string>
-    <string name="worst_quality">Низкое</string>
+    <string name="worst_quality">Самое низкое</string>
     <string name="export_subscriptions">Экспортировать подписки</string>
     <string name="skip_buttons">Кнопки перехода</string>
     <string name="background_mode">Фоновый режим</string>
@@ -296,7 +296,7 @@
     <string name="audio_track">Звуковая дорожка</string>
     <string name="hls_instead_of_dash">Использовать HLS</string>
     <string name="hls_instead_of_dash_summary">Использовать HLS вместо DASH (будет медленнее, не рекомендуется)</string>
-    <string name="auto_quality">Автоматическое</string>
+    <string name="auto_quality">Авто</string>
     <string name="trends">Тренды</string>
     <string name="bookmarks">Закладки</string>
     <string name="limit_to_runtime">Только при использовании</string>
@@ -535,7 +535,7 @@
     <string name="enqueueing_playlist_download">Постановка видео в очередь для загрузки плейлиста %1$s</string>
     <string name="download_playlist">Скачать плейлист</string>
     <string name="enqueue_playlist_description">Показывать уведомление при постановке видео в плейлист для загрузки.</string>
-    <string name="download_playlist_note">Выберите максимальное качество скачиваемого аудио/видео. Субтитры будут скачаны только при наличии.</string>
+    <string name="download_playlist_note">Выберите максимальное качество скачиваемого аудио/видео. Субтитры будут скачаны только при их наличии.</string>
     <string name="delete_all">Все скачанные видео будут удалены!</string>
     <string name="also_clear_watch_positions">Также удалить позиции просмотра</string>
     <string name="behavior_when_minimized">Поведение при сворачивании</string>
