@@ -11,15 +11,18 @@ import coil.ImageLoader
 import coil.disk.DiskCache
 import coil.request.CachePolicy
 import coil.request.ImageRequest
+import com.github.libretube.BuildConfig
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toAndroidUri
 import com.github.libretube.extensions.toAndroidUriOrNull
 import com.github.libretube.util.DataSaverMode
-import java.io.File
-import java.nio.file.Path
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import java.io.File
+import java.nio.file.Path
 
 object ImageHelper {
     lateinit var imageLoader: ImageLoader
@@ -32,9 +35,22 @@ object ImageHelper {
     fun initializeImageLoader(context: Context) {
         val maxCacheSize = PreferenceHelper.getString(PreferenceKeys.MAX_IMAGE_CACHE, "128")
 
+        val httpClient = OkHttpClient().newBuilder()
+
+        if (BuildConfig.DEBUG) {
+            val loggingInterceptor = HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BASIC
+            }
+
+            httpClient.addInterceptor(loggingInterceptor)
+        }
+
         imageLoader = ImageLoader.Builder(context)
             .callFactory(CronetHelper.callFactory)
             .crossfade(true)
+            .okHttpClient {
+                httpClient.build()
+            }
             .apply {
                 if (maxCacheSize.isEmpty()) {
                     diskCachePolicy(CachePolicy.DISABLED)

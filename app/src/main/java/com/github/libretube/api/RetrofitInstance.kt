@@ -1,9 +1,12 @@
 package com.github.libretube.api
 
+import com.github.libretube.BuildConfig
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.helpers.PreferenceHelper
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.create
 
@@ -28,10 +31,13 @@ object RetrofitInstance {
     private val kotlinxConverterFactory = JsonHelper.json
         .asConverterFactory("application/json".toMediaType())
 
+    private val httpClient by lazy { buildClient() }
+
     val api by resettableLazy(lazyMgr) {
         Retrofit.Builder()
             .baseUrl(apiUrl)
             .callFactory(CronetHelper.callFactory)
+            .client(httpClient)
             .addConverterFactory(kotlinxConverterFactory)
             .build()
             .create<PipedApi>()
@@ -41,6 +47,7 @@ object RetrofitInstance {
         Retrofit.Builder()
             .baseUrl(authUrl)
             .callFactory(CronetHelper.callFactory)
+            .client(httpClient)
             .addConverterFactory(kotlinxConverterFactory)
             .build()
             .create<PipedApi>()
@@ -50,8 +57,23 @@ object RetrofitInstance {
         Retrofit.Builder()
             .baseUrl(apiUrl)
             .callFactory(CronetHelper.callFactory)
+            .client(httpClient)
             .addConverterFactory(kotlinxConverterFactory)
             .build()
             .create<ExternalApi>()
+    }
+
+    private fun buildClient(): OkHttpClient {
+        val httpClient = OkHttpClient().newBuilder()
+
+        if (BuildConfig.DEBUG) {
+            val loggingInterceptor = HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BASIC
+            }
+
+            httpClient.addInterceptor(loggingInterceptor)
+        }
+
+        return httpClient.build()
     }
 }
