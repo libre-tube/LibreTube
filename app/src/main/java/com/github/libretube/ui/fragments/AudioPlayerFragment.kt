@@ -399,11 +399,15 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     }
 
     override fun onSwipe(distanceY: Float) {
+        if (!PlayerHelper.swipeGestureEnabled) return
+
         binding.volumeControls.isVisible = true
         updateVolume(distanceY)
     }
 
     override fun onSwipeEnd() {
+        if (!PlayerHelper.swipeGestureEnabled) return
+
         binding.volumeControls.isGone = true
     }
 
