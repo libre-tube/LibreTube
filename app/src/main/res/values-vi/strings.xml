@@ -108,7 +108,7 @@
     <string name="category_filler">Filler Tangent / Trò đùa</string>
     <string name="category_preview">Xem trước/Tóm tắt</string>
     <string name="category_preview_summary">Đối với các phân đoạn nêu chi tiết nội dung trong tương lai mà không có thông tin bổ sung. Nếu nó bao gồm các clip chỉ xuất hiện ở đây, thì rất có thể đây là danh mục sai</string>
-    <string name="material_you">Material You</string>
+    <string name="material_you">Chất liệu của bạn</string>
     <string name="app_icon">Biểu tượng</string>
     <string name="enabled">Kích hoạt</string>
     <string name="disabled">Tắt</string>
@@ -400,7 +400,7 @@
     <string name="mark_as_watched">Đánh dấu là đã xem</string>
     <string name="skip_silence">Bỏ qua khoảng lặng</string>
     <string name="help">Giúp đỡ</string>
-    <string name="disable_proxy_summary">Tải video và hình ảnh trực tiếp từ máy chủ của YouTube. Chỉ bật tùy chọn nếu bạn vẫn sử dụng VPN!</string>
+    <string name="disable_proxy_summary">Tải videos và hình ảnh trực tiếp từ máy chủ của YouTube. Chỉ bật tùy chọn nếu bạn vẫn sử dụng VPN</string>
     <string name="lbry_hls_summary">Sử dụng LBRY HLS để phát trực tuyến nếu có</string>
     <string name="video_id">ID của video</string>
     <string name="shorts_notifications">Thông báo cho các đoạn ngắn</string>
@@ -441,7 +441,7 @@
     <string name="dearrow_summary">Hiển thị tiêu đề và hình thu nhỏ chính xác hơn và ít giật gân hơn. Tăng thời gian tải</string>
     <string name="resolution_limited">giới hạn</string>
     <string name="tooltip_close">Đóng</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
+    <string name="import_format_piped">Đường ống / LibreTube</string>
     <string name="auto_generated">Tự động tạo ra</string>
     <string name="tooltip_minimize">Giảm thiểu</string>
     <string name="sb_create_segment">Tạo phân đoạn</string>
@@ -535,4 +535,5 @@
     <string name="enqueue_playlist_description">Hiển thị thông báo khi xếp các video của danh sách phát sẽ được tải xuống.</string>
     <string name="also_clear_watch_positions">Cũng xóa vị trí xem</string>
     <string name="show_updates">Kiểm tra cập nhật tự động</string>
+    <string name="albums">Tập ảnh</string>
 </resources>
