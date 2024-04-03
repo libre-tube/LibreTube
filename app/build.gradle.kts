@@ -107,10 +107,6 @@ dependencies {
     implementation(libs.lifecycle.livedata)
     implementation(libs.lifecycle.service)
 
-    /* Testing */
-    androidTestImplementation(libs.androidx.test.junit)
-    androidTestImplementation(libs.androidx.test.espressoCore)
-
     /* Design */
     implementation(libs.material)
 
