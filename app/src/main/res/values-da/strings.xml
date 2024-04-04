@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="library">Bibliotek</string>
-    <string name="unsubscribe">Afmeld abonnement</string>
+    <string name="unsubscribe">Afmeld</string>
     <string name="password">Adgangskode</string>
     <string name="login">Log ind</string>
     <string name="register">Tilmeld</string>
@@ -9,7 +9,7 @@
     <string name="loggedout">Logget ud.</string>
     <string name="already_logged_in">Allerede logget ind. Du kan logge ud af din konto, når du vil.</string>
     <string name="login_register">Log ind/tilmeld</string>
-    <string name="downloadfailed">Download mislykkedes.</string>
+    <string name="downloadfailed">Hentning mislykkedes.</string>
     <string name="server_error">Der ser ud til at være et problem med den valgte server. Prøv en anden instans.</string>
     <string name="unknown_error">Netværksfejl.</string>
     <string name="empty">Du skal indtaste et brugernavn og en adgangskode.</string>
@@ -19,7 +19,7 @@
     <string name="createPlaylist">Opret playliste</string>
     <string name="areYouSure">Slet playlisten\?</string>
     <string name="playlistCreated">Playliste oprettet.</string>
-    <string name="emptyPlaylistName">Playlistens navn må ikke være tom</string>
+    <string name="emptyPlaylistName">Playlistens navn må ikke være tomt</string>
     <string name="addToPlaylist">Føj til playliste</string>
     <string name="lightTheme">Lys</string>
     <string name="darkTheme">Mørk</string>
@@ -81,18 +81,18 @@
     <string name="search_hint">Søg</string>
     <string name="save">Gem</string>
     <string name="videos">Videoer</string>
-    <string name="subscribe">Abonner</string>
+    <string name="subscribe">Abonnér</string>
     <string name="loggedIn">Logget ind.</string>
     <string name="region">Region</string>
     <string name="share">Del</string>
     <string name="username">Brugernavn</string>
     <string name="error">Noget gik galt.</string>
-    <string name="download">Download</string>
+    <string name="download">Hent</string>
     <string name="cancel">Annullér</string>
     <string name="registered">Tilmeldt. Du kan nu abonnere på kanaler.</string>
     <string name="importsuccess">Abonneret</string>
-    <string name="customInstance">Brugerdefineret</string>
-    <string name="cannotDownload">Kan ikke downloade denne stream.</string>
+    <string name="customInstance">Tilpasset</string>
+    <string name="cannotDownload">Kan ikke hente denne stream.</string>
     <string name="import_from_yt">Importér abonnementer</string>
     <string name="import_from_yt_summary">Fra YouTube eller NewPipe</string>
     <string name="notgmail">Dette er til en Piped-konto</string>
@@ -128,13 +128,13 @@
     <string name="instance_summary">Piped, login og konto</string>
     <string name="customInstance_summary">Tilføj…</string>
     <string name="instance_name">Instansnavn</string>
-    <string name="instance_api_url">URL til API-instans</string>
+    <string name="instance_api_url">URL til instans-API</string>
     <string name="addInstance">Tilføj instans</string>
     <string name="clear_customInstances">Ryd tilføjet</string>
     <string name="invalid_url">Indtast venligst en URL, der virker</string>
     <string name="related_streams">Relateret indhold</string>
     <string name="version">Version %1$s</string>
-    <string name="related_streams_summary">Vis lignende streams ved siden af det, du ser</string>
+    <string name="related_streams_summary">Vis lignende indhold ved siden af det, du ser</string>
     <string name="empty_instance">Udfyld navnet og API-URL\'en.</string>
     <string name="category_filler">Fylde Indhold/Jokes</string>
     <string name="category_preview_summary">Til segmenter, der beskriver fremtidigt indhold uden yderligere information. Hvis det indeholder klip, der kun vises her, er det højst sandsynligt den forkerte kategori</string>
@@ -172,7 +172,7 @@
     <string name="auto_rotation">Automatisk rotation</string>
     <string name="landscape">Landskab</string>
     <string name="portrait">Portræt</string>
-    <string name="downloading">Downloader…</string>
+    <string name="downloading">Henter…</string>
     <string name="no_audio">Ingen lyd</string>
     <string name="no_video">Ingen video</string>
     <string name="audio">Lyd</string>
