@@ -27,6 +27,7 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.enums.NotificationId
 import com.github.libretube.extensions.parcelableExtra
@@ -35,6 +36,7 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.checkForSegments
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.parcelable.PlayerData
@@ -325,14 +327,19 @@ class OnlinePlayerService : LifecycleService() {
     private suspend fun setMediaItem() {
         val streams = streams ?: return
 
-        val (uri, mimeType) = if (streams.audioStreams.isNotEmpty() && !PlayerHelper.disablePipedProxy) {
-            PlayerHelper.createDashSource(
-                streams,
-                this
-            ) to MimeTypes.APPLICATION_MPD
-        } else {
-            ProxyHelper.unwrapStreamUrl(streams.hls.orEmpty()).toUri() to MimeTypes.APPLICATION_M3U8
-        }
+        val (uri, mimeType) =
+            if (!PreferenceHelper.getBoolean(
+                    PreferenceKeys.USE_HLS_OVER_DASH,
+                    false,
+                ) && streams.audioStreams.isNotEmpty() && !PlayerHelper.disablePipedProxy
+            ) {
+                PlayerHelper.createDashSource(
+                    streams,
+                    this,
+                ) to MimeTypes.APPLICATION_MPD
+            } else {
+                ProxyHelper.unwrapStreamUrl(streams.hls.orEmpty()).toUri() to MimeTypes.APPLICATION_M3U8
+            }
 
         val mediaItem = MediaItem.Builder()
             .setUri(uri)
