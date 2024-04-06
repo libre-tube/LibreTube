@@ -44,6 +44,11 @@ class RouterActivity : BaseActivity() {
             lastSegment == "playlist" -> {
                 putExtra(IntentData.playlistId, uri.getQueryParameter("list"))
             }
+            lastSegment == "watch_videos" -> {
+                putExtra(IntentData.playlistName, uri.getQueryParameter("title"))
+                val videoIds = uri.getQueryParameter("video_ids")?.split(",")
+                putExtra(IntentData.videoIds, videoIds?.toTypedArray())
+            }
             else -> {
                 val id = if (lastSegment == "watch") uri.getQueryParameter("v") else lastSegment
                 putExtra(IntentData.videoId, id)

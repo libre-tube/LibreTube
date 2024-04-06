@@ -306,6 +306,8 @@
                 <data android:pathPrefix="/playlist" />
                 <!-- search prefix -->
                 <data android:pathPrefix="/results" />
+                <!-- temporary playlist prefix -->
+                <data android:pathPrefix="/watch_videos" />
             </intent-filter>
 
             <!-- Support being detected as media player -->

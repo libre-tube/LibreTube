@@ -41,6 +41,7 @@ import com.github.libretube.helpers.ThemeHelper
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.ErrorDialog
+import com.github.libretube.ui.dialogs.ImportTempPlaylistDialog
 import com.github.libretube.ui.fragments.AudioPlayerFragment
 import com.github.libretube.ui.fragments.DownloadsFragment
 import com.github.libretube.ui.fragments.PlayerFragment
@@ -425,6 +426,16 @@ class MainActivity : BaseActivity() {
         }
         intent?.getStringExtra(IntentData.playlistId)?.let {
             navController.navigate(NavDirections.openPlaylist(playlistId = it))
+        }
+        intent?.getStringArrayExtra(IntentData.videoIds)?.let {
+            ImportTempPlaylistDialog()
+                .apply {
+                    arguments = bundleOf(
+                        IntentData.playlistName to intent?.getStringExtra(IntentData.playlistName),
+                        IntentData.videoIds to it
+                    )
+                }
+                .show(supportFragmentManager, null)
         }
         intent?.getStringExtra(IntentData.videoId)?.let {
             // the bottom navigation bar has to be created before opening the video
