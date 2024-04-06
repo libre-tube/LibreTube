@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.media3.common.util.UnstableApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.databinding.BottomSheetBinding
@@ -16,6 +17,7 @@ import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.ui.adapters.ChaptersAdapter
 import com.github.libretube.ui.models.PlayerViewModel
 
+@UnstableApi
 class ChaptersBottomSheet : UndimmedBottomSheet() {
     private var _binding: BottomSheetBinding? = null
     private val binding get() = _binding!!

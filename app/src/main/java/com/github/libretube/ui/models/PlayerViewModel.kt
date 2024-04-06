@@ -1,4 +1,3 @@
-
 package com.github.libretube.ui.models
 
 import android.content.Context
@@ -25,6 +24,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
 
+@UnstableApi
 class PlayerViewModel : ViewModel() {
     var player: ExoPlayer? = null
     var trackSelector: DefaultTrackSelector? = null

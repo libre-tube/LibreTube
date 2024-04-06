@@ -20,9 +20,7 @@ import kotlinx.coroutines.withContext
 class SeekbarPreviewListener(
     private val timeFrameReceiver: TimeFrameReceiver,
     private val playerBinding: ExoStyledPlayerControlViewBinding,
-    private val duration: Long,
-    private val onScrub: (position: Long) -> Unit = {},
-    private val onScrubEnd: (position: Long) -> Unit = {}
+    private val duration: Long
 ) : TimeBar.OnScrubListener {
     private var scrubInProgress = false
     private var lastPreviewPosition = Long.MAX_VALUE
@@ -52,10 +50,6 @@ class SeekbarPreviewListener(
         CoroutineScope(Dispatchers.IO).launch {
             processPreview(position)
         }
-
-        runCatching {
-            onScrub.invoke(position)
-        }
     }
 
     /**
@@ -74,8 +68,6 @@ class SeekbarPreviewListener(
                 playerBinding.seekbarPreview.alpha = 1f
             }
             .start()
-
-        onScrubEnd.invoke(position)
     }
 
     /**

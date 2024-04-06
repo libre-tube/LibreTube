@@ -9,5 +9,10 @@ data class DownloadWithItems(
         parentColumn = "videoId",
         entityColumn = "videoId"
     )
-    val downloadItems: List<DownloadItem>
+    val downloadItems: List<DownloadItem>,
+    @Relation(
+        parentColumn = "videoId",
+        entityColumn = "videoId"
+    )
+    val downloadChapters: List<DownloadChapter> = emptyList()
 )

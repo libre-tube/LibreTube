@@ -102,7 +102,6 @@ import com.github.libretube.ui.listeners.SeekbarPreviewListener
 import com.github.libretube.ui.models.CommentsViewModel
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
-import com.github.libretube.ui.sheets.ChaptersBottomSheet
 import com.github.libretube.ui.sheets.CommentsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.sheets.StatsSheet
@@ -166,8 +165,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private val handler = Handler(Looper.getMainLooper())
 
     private var seekBarPreviewListener: SeekbarPreviewListener? = null
-    private var scrubbingTimeBar = false
-    private var chaptersBottomSheet: ChaptersBottomSheet? = null
 
     // True when the video was closed through the close button on PiP mode
     private var closedVideo = false
@@ -441,7 +438,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 }
                 disableController()
                 commentsViewModel.setCommentSheetExpand(false)
-                chaptersBottomSheet?.dismiss()
                 transitionEndId = endId
                 transitionStartId = startId
             }
@@ -971,21 +967,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             // show the player notification
             initializePlayerNotification()
 
-            // enable the chapters dialog in the player
-            playerBinding.chapterName.setOnClickListener {
-                updateMaxSheetHeight()
-                val sheet =
-                    chaptersBottomSheet ?: ChaptersBottomSheet().also {
-                        chaptersBottomSheet = it
-                    }
-                if (sheet.isVisible) {
-                    sheet.dismiss()
-                } else {
-                    sheet.show(childFragmentManager)
-                }
-            }
-
-            setCurrentChapterName()
+            binding.player.setCurrentChapterName()
 
             fetchSponsorBlockSegments()
 
@@ -1048,9 +1030,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         // close comment bottom sheet if opened for next video
         runCatching { commentsViewModel.commentsSheetDismiss?.invoke() }
-        // kill the chapters bottom sheet if opened
-        runCatching { chaptersBottomSheet?.dismiss() }
-        chaptersBottomSheet = null
     }
 
     @SuppressLint("SetTextI18n")
@@ -1202,36 +1181,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         )
 
         withContext(Dispatchers.Main) {
-            setCurrentChapterName()
-        }
-    }
-
-    // set the name of the video chapter in the exoPlayerView
-    private fun setCurrentChapterName(forceUpdate: Boolean = false, enqueueNew: Boolean = true) {
-        // return if fragment view got killed already to avoid crashes
-        if (_binding == null) return
-
-        // only show the chapters layout if there are some chapters available
-        playerBinding.chapterName.isInvisible = viewModel.chapters.isEmpty()
-
-        // the following logic to set the chapter title can be skipped if no chapters are available
-        if (viewModel.chapters.isEmpty()) return
-
-        // call the function again in 100ms
-        if (enqueueNew) binding.player.postDelayed(this::setCurrentChapterName, 100)
-
-        // if the user is scrubbing the time bar, don't update
-        if (scrubbingTimeBar && !forceUpdate) return
-
-        val chapterName =
-            PlayerHelper.getCurrentChapterIndex(exoPlayer.currentPosition, viewModel.chapters)
-                ?.let {
-                    viewModel.chapters[it].title.trim()
-                } ?: getString(R.string.no_chapter)
-
-        // change the chapter name textView text to the chapterName
-        if (chapterName != playerBinding.chapterName.text) {
-            playerBinding.chapterName.text = chapterName
+            binding.player.setCurrentChapterName()
         }
     }
 
@@ -1608,15 +1558,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         return SeekbarPreviewListener(
             OnlineTimeFrameReceiver(requireContext(), streams.previewFrames),
             playerBinding,
-            streams.duration * 1000,
-            onScrub = {
-                setCurrentChapterName(forceUpdate = true, enqueueNew = false)
-                scrubbingTimeBar = true
-            },
-            onScrubEnd = {
-                scrubbingTimeBar = false
-                setCurrentChapterName(forceUpdate = true, enqueueNew = false)
-            }
+            streams.duration * 1000
         )
     }
 

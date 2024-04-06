@@ -23,6 +23,7 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.Download
+import com.github.libretube.db.obj.DownloadChapter
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
 import com.github.libretube.enums.NotificationId
@@ -124,6 +125,15 @@ class DownloadService : LifecycleService() {
                     thumbnailTargetPath
                 )
                 Database.downloadDao().insertDownload(download)
+                for (chapter in streams.chapters) {
+                    val downloadChapter = DownloadChapter(
+                        videoId = videoId,
+                        name = chapter.title,
+                        start = chapter.start,
+                        thumbnailUrl = chapter.image
+                    )
+                    Database.downloadDao().insertDownloadChapter(downloadChapter)
+                }
                 ImageHelper.downloadImage(
                     this@DownloadService,
                     streams.thumbnailUrl,
