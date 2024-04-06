@@ -252,13 +252,13 @@
     <string name="repeat_mode_current">Atual</string>
     <string name="push_channel_description">Mostrar notificação quando novos vídeos estiverem disponíveis.</string>
     <string name="push_channel_name">Assistente de notificações</string>
-    <string name="play_next">Reproduzir a seguir</string>
+    <string name="play_next">Reproduzir agora</string>
     <string name="navigation_bar">Barra de navegação</string>
     <string name="download_channel_description">Mostrar notificação ao baixar mídia.</string>
     <string name="export_subscriptions">Exportar inscrições</string>
     <string name="history_size">Tamanho máximo do histórico</string>
     <string name="resize_mode_zoom">Ampliar</string>
-    <string name="player_resize_mode">Modo de redimensionamento</string>
+    <string name="player_resize_mode">Redimensionamento</string>
     <string name="renamePlaylist">Renomear playlist</string>
     <string name="new_videos_badge">Indicador para novos vídeos</string>
     <string name="skip_segment">Pular segmento</string>
@@ -300,7 +300,7 @@
     <string name="limit_to_runtime">Limite de tempo para execução</string>
     <string name="trends">Em alta</string>
     <string name="featured">Destaques</string>
-    <string name="trending">O que está em alta agora</string>
+    <string name="trending">Em alta agora</string>
     <string name="bookmarks">Favoritos</string>
     <string name="bookmark">Favorito</string>
     <string name="clear_bookmarks">Limpar favoritos</string>
@@ -366,10 +366,10 @@
     <string name="category">Categoria</string>
     <string name="normal_views">%1$s visualizações %2$s</string>
     <string name="trending_views">%1$s • %2$s visualizações • %3$s</string>
-    <string name="playing_next">Reproduzir a seguir em %1$s</string>
+    <string name="playing_next">Próximo vídeo em %1$s</string>
     <string name="stats_for_nerds">Estatísticas para nerds</string>
     <string name="video_id">ID do vídeo</string>
-    <string name="autoplay_countdown">Contagem regressiva de reprodução automática</string>
+    <string name="autoplay_countdown">Contagem regressiva para reprodução automática</string>
     <string name="autoplay_countdown_summary">Mostrar contagem regressiva de 5 segundos antes de reproduzir automaticamente o próximo vídeo</string>
     <plurals name="years_ago">
         <item quantity="one">%d ano atrás</item>
