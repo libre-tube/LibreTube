@@ -5,6 +5,7 @@ object IntentData {
     const val playerData = "playerData"
     const val id = "id"
     const val videoId = "videoId"
+    const val videoIds = "videoIds"
     const val channelId = "channelId"
     const val channelName = "channelName"
     const val playlistId = "playlistId"
