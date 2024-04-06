@@ -240,9 +240,9 @@
     <string name="unlimited">Необмежено</string>
     <string name="add_to_queue">Додати в чергу</string>
     <string name="repeat_mode">Режим повторення</string>
-    <string name="resize_mode_fit">Допасувати</string>
-    <string name="resize_mode_fill">Заповнити</string>
-    <string name="resize_mode_zoom">Збільшити</string>
+    <string name="resize_mode_fit">Підганяння</string>
+    <string name="resize_mode_fill">Заповнення</string>
+    <string name="resize_mode_zoom">Наближення</string>
     <string name="maximum_image_cache">Макс. розмір кешу зображень</string>
     <string name="data_saver_mode">Режим заощадження даних</string>
     <string name="search_history_summary">Пам\'ятати історію пошуку</string>
@@ -546,4 +546,6 @@
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="show_updates">Перевіряти оновлення автоматично</string>
     <string name="albums">Альбоми</string>
+    <string name="import_temp_playlist">Імпортувати тимчасовий список відтворення?</string>
+    <string name="import_temp_playlist_summary">Бажаєте створити новий список відтворення під назвою \"%1$s\"? Список відтворення міститиме %2$d відео.</string>
 </resources>
