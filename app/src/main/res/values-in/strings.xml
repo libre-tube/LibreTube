@@ -536,4 +536,6 @@
     <string name="add_to_group">Tambahkan ke grup</string>
     <string name="uptime">Waktu aktif %.2f%%</string>
     <string name="albums">Album</string>
+    <string name="import_temp_playlist">Impor daftar putar sementara?</string>
+    <string name="import_temp_playlist_summary">Apakah Anda ingin membuat daftar putar baru bernama \'%1$s\'? Daftar putarnya akan berisi %2$d video.</string>
 </resources>
