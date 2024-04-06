@@ -539,4 +539,6 @@
     <string name="external_player">Harici oynatıcı</string>
     <string name="show_updates">Güncellemeleri otomatik denetle</string>
     <string name="albums">Albümler</string>
+    <string name="import_temp_playlist">Geçici oynatma listesi içe aktarılsın mı?</string>
+    <string name="import_temp_playlist_summary">\'%1$s\' adında yeni bir oynatma listesi oluşturmak istiyor musunuz? Oynatma listesinde %2$d video olacak.</string>
 </resources>
