@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.postDelayed
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isGone
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.core.view.marginStart
 import androidx.core.view.updateLayoutParams
@@ -35,6 +36,7 @@ import androidx.media3.ui.PlayerView
 import androidx.media3.ui.SubtitleView
 import androidx.media3.ui.TimeBar
 import com.github.libretube.R
+import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
@@ -58,13 +60,14 @@ import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.interfaces.PlayerOptions
 import com.github.libretube.ui.listeners.PlayerGestureController
 import com.github.libretube.ui.sheets.BaseBottomSheet
+import com.github.libretube.ui.sheets.ChaptersBottomSheet
 import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.ui.sheets.SleepTimerSheet
 import com.github.libretube.util.PlayingQueue
 
 @SuppressLint("ClickableViewAccessibility")
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
-open class CustomExoPlayerView(
+abstract class CustomExoPlayerView(
     context: Context,
     attributeSet: AttributeSet? = null
 ) : PlayerView(context, attributeSet), PlayerOptions, PlayerGestureOptions {
@@ -79,6 +82,8 @@ open class CustomExoPlayerView(
     private lateinit var brightnessHelper: BrightnessHelper
     private lateinit var audioHelper: AudioHelper
     private var doubleTapOverlayBinding: DoubleTapOverlayBinding? = null
+    private var chaptersBottomSheet: ChaptersBottomSheet? = null
+    private var scrubbingTimeBar = false
 
     /**
      * Objects from the parent fragment
@@ -191,10 +196,16 @@ open class CustomExoPlayerView(
 
             override fun onScrubMove(timeBar: TimeBar, position: Long) {
                 cancelHideControllerTask()
+
+                setCurrentChapterName(forceUpdate = true, enqueueNew = false)
+                scrubbingTimeBar = true
             }
 
             override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {
                 enqueueHideControllerTask()
+
+                setCurrentChapterName(forceUpdate = true, enqueueNew = false)
+                scrubbingTimeBar = false
             }
         })
 
@@ -217,6 +228,46 @@ open class CustomExoPlayerView(
         }
 
         updateCurrentPosition()
+
+        // enable the chapters dialog in the player
+        binding.chapterName.setOnClickListener {
+            val sheet = chaptersBottomSheet ?: ChaptersBottomSheet().also {
+                chaptersBottomSheet = it
+            }
+
+            if (sheet.isVisible) {
+                sheet.dismiss()
+            } else {
+                sheet.show(activity.supportFragmentManager)
+            }
+        }
+    }
+
+    // set the name of the video chapter in the exoPlayerView
+   fun setCurrentChapterName(forceUpdate: Boolean = false, enqueueNew: Boolean = true) {
+       val player = player ?: return
+        val chapters = getChapters()
+
+        binding.chapterName.isInvisible = chapters.isEmpty()
+
+        // the following logic to set the chapter title can be skipped if no chapters are available
+        if (chapters.isEmpty()) return
+
+        // call the function again in 100ms
+        if (enqueueNew) postDelayed(this::setCurrentChapterName, 100)
+
+        // if the user is scrubbing the time bar, don't update
+        if (scrubbingTimeBar && !forceUpdate) return
+
+        val newChapterName =
+            PlayerHelper.getCurrentChapterIndex(player.currentPosition, chapters)
+                ?.let { chapters[it].title.trim() }
+                ?: context.getString(R.string.no_chapter)
+
+        // change the chapter name textView text to the chapterName
+        if (newChapterName != binding.chapterName.text) {
+            binding.chapterName.text = newChapterName
+        }
     }
 
     fun toggleSystemBars(showBars: Boolean) {
@@ -770,6 +821,8 @@ open class CustomExoPlayerView(
     }
 
     open fun minimizeOrExitPlayer() = Unit
+
+    abstract fun getChapters(): List<ChapterSegment>
 
     open fun getWindow(): Window = activity.window
 

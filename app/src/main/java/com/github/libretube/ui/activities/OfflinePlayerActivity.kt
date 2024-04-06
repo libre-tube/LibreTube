@@ -28,6 +28,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.ActivityOfflinePlayerBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.db.DatabaseHolder.Database
+import com.github.libretube.db.obj.DownloadChapter
 import com.github.libretube.enums.FileType
 import com.github.libretube.extensions.toAndroidUri
 import com.github.libretube.extensions.updateParameters
@@ -123,6 +124,7 @@ class OfflinePlayerActivity : BaseActivity() {
         player = PlayerHelper.createPlayer(this, trackSelector, false)
         player.setWakeMode(C.WAKE_MODE_LOCAL)
         player.addListener(playerListener)
+        playerViewModel.player = player
 
         playerView = binding.player
         playerView.setShowSubtitleButton(true)
@@ -146,6 +148,10 @@ class OfflinePlayerActivity : BaseActivity() {
             val downloadInfo = withContext(Dispatchers.IO) {
                 Database.downloadDao().findById(videoId)
             }
+            val chapters = downloadInfo.downloadChapters.map(DownloadChapter::toChapterSegment)
+            playerViewModel.chaptersLiveData.value = chapters
+            binding.player.setChapters(chapters)
+
             val downloadFiles = downloadInfo.downloadItems.filter { it.path.exists() }
             playerBinding.exoTitle.text = downloadInfo.download.title
             playerBinding.exoTitle.isVisible = true
@@ -247,6 +253,7 @@ class OfflinePlayerActivity : BaseActivity() {
     override fun onDestroy() {
         saveWatchPosition()
 
+        playerViewModel.player = null
         player.release()
         watchPositionTimer.destroy()
 

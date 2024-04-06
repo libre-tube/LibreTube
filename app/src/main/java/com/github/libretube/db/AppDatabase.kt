@@ -15,6 +15,7 @@ import com.github.libretube.db.dao.WatchHistoryDao
 import com.github.libretube.db.dao.WatchPositionDao
 import com.github.libretube.db.obj.CustomInstance
 import com.github.libretube.db.obj.Download
+import com.github.libretube.db.obj.DownloadChapter
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.db.obj.LocalPlaylist
 import com.github.libretube.db.obj.LocalPlaylistItem
@@ -37,9 +38,10 @@ import com.github.libretube.db.obj.WatchPosition
         LocalPlaylistItem::class,
         Download::class,
         DownloadItem::class,
+        DownloadChapter::class,
         SubscriptionGroup::class
     ],
-    version = 17,
+    version = 18,
     autoMigrations = [
         AutoMigration(from = 7, to = 8),
         AutoMigration(from = 8, to = 9),

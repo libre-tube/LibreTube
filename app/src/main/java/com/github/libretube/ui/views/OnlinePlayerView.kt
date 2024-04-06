@@ -7,8 +7,10 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.lifecycle.LifecycleOwner
 import androidx.media3.common.C
+import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.trackselection.TrackSelector
 import com.github.libretube.R
+import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toID
@@ -22,6 +24,7 @@ import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.util.PlayingQueue
 
+@UnstableApi
 class OnlinePlayerView(
     context: Context,
     attributeSet: AttributeSet? = null
@@ -199,5 +202,9 @@ class OnlinePlayerView(
 
     override fun minimizeOrExitPlayer() {
         playerOptions?.exitFullscreen()
+    }
+
+    override fun getChapters(): List<ChapterSegment> {
+        return playerViewModel?.chapters.orEmpty()
     }
 }
