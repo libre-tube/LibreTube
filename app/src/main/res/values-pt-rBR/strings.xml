@@ -178,7 +178,7 @@
     <string name="network_all">Todas</string>
     <string name="no_search_result">Sem resultados.</string>
     <string name="reset_message">Redefinir todas as configurações e sair?</string>
-    <string name="watch_history">Histórico de visualizações</string>
+    <string name="watch_history">Histórico de exibição</string>
     <string name="watch_positions">Lembrar posição</string>
     <string name="auth_instance">Instância de autenticação</string>
     <string name="auth_instance_summary">Usar uma instância diferente para chamadas autenticadas</string>
@@ -205,7 +205,7 @@
     <string name="data_saver_mode">Economia de dados</string>
     <string name="data_saver_mode_summary">Ignorar miniaturas e outras imagens</string>
     <string name="search_history_summary">Lembrar pesquisas</string>
-    <string name="history_summary">Histórico de pesquisas e visualizações</string>
+    <string name="history_summary">Histórico de pesquisas e exibição</string>
     <string name="watch_positions_title">Lembrar posição de reprodução</string>
     <string name="system_caption_style">Estilo de legenda do sistema</string>
     <string name="captions">Legendas</string>
@@ -542,4 +542,6 @@
     <string name="external_player">Player externo</string>
     <string name="show_updates">Buscar atualizações automaticamente</string>
     <string name="albums">Álbuns</string>
+    <string name="import_temp_playlist">Importar playlist temporária?</string>
+    <string name="import_temp_playlist_summary">Deseja criar uma nova playlist chamada \"%1$s\"? A playlist conterá %2$d vídeos.</string>
 </resources>
