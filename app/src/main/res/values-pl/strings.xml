@@ -104,7 +104,7 @@
     <string name="enabled">Włączono</string>
     <string name="disabled">Wyłączono</string>
     <string name="update_available_text">Dostępna nowa wersja. Kliknij, aby otworzyć stronę wydań na GitHubie.</string>
-    <string name="update_available">Dostępna jest wersja %1$s</string>
+    <string name="update_available">Aktualizacja jest dostępna</string>
     <string name="defaultIcon">Domyślna</string>
     <string name="app_uptodate">Uruchomiona jest najnowsza wersja.</string>
     <string name="appearance_summary">Dostosuj aplikację do swoich potrzeb</string>
@@ -543,4 +543,8 @@
     <string name="external_player">Zewnętrzny odtwarzacz</string>
     <string name="gestures">Gesty</string>
     <string name="comments_count">Komentarze (%1$s)</string>
+    <string name="albums">Albumy</string>
+    <string name="commentedTimeWithSeparator">• %1$s</string>
+    <string name="import_temp_playlist">Zaimportować tymczasową playlistę?</string>
+    <string name="import_temp_playlist_summary">Czy chcesz utworzyć nową playlistę o nazwie „%1$s”? Playlista będzie zawierać %2$d filmów.</string>
 </resources>
