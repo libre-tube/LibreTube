@@ -542,4 +542,6 @@
     <string name="external_player">Riproduttore esterno</string>
     <string name="show_updates">Cerca aggiornamenti automaticamente</string>
     <string name="albums">Album</string>
+    <string name="import_temp_playlist">Importare playlist temporanea?</string>
+    <string name="import_temp_playlist_summary">Vuoi creare una nuova playlist di nome \'%1$s\'? La playlist conterrà %2$d video.</string>
 </resources>
