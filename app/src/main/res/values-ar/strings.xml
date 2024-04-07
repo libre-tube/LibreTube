@@ -551,4 +551,6 @@
     <string name="external_player">مشغل خارجي</string>
     <string name="show_updates">التحقق من التحديثات تلقائيا</string>
     <string name="albums">الألبومات</string>
+    <string name="import_temp_playlist">هل تريد استيراد قائمة التشغيل المؤقتة؟</string>
+    <string name="import_temp_playlist_summary">هل تريد إنشاء قائمة تشغيل جديدة باسم \'%1$s\'؟ ستحتوي قائمة التشغيل على %2$d مقطع فيديو.</string>
 </resources>
