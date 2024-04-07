@@ -539,4 +539,6 @@
     <string name="gestures">इशारे</string>
     <string name="show_updates">अपडेट स्वचालित रूप से जांचें</string>
     <string name="albums">एलबम</string>
+    <string name="import_temp_playlist">अस्थायी प्लेलिस्ट आयात करें?</string>
+    <string name="import_temp_playlist_summary">क्या आप \'%1$s\' नामक एक नई प्लेलिस्ट बनाना चाहते हैं? प्लेलिस्ट में %2$d वीडियो होंगे।</string>
 </resources>
