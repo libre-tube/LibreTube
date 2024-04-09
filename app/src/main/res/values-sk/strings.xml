@@ -542,4 +542,6 @@
     <string name="external_player">Externý prehrávač</string>
     <string name="show_updates">Kontrolovať aktualizácie automaticky</string>
     <string name="albums">Albumy</string>
+    <string name="import_temp_playlist">Importovať dočasný zoznam skladieb?</string>
+    <string name="import_temp_playlist_summary">Chcete vytvoriť nový zoznam skladieb s názvom \'%1$s\'? Zoznam skladieb bude obsahovať %2$d videí.</string>
 </resources>
