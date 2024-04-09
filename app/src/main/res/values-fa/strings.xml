@@ -539,4 +539,6 @@
     <string name="comments_count">نظرات (%1$s)</string>
     <string name="external_player">پخش کننده‌ٔ خارجی</string>
     <string name="albums">آلبوم‌ها</string>
+    <string name="import_temp_playlist_summary">آیا می خواهید یک سیاهه پخش جدید به نام \"%1$s\" ایجاد کنید؟ سیاهه پخش حاوی %2$d ویدیو خواهد بود.</string>
+    <string name="import_temp_playlist">سیاهه پخش موقت وارد شود؟</string>
 </resources>
