@@ -258,7 +258,7 @@
         <item name="android:colorBackground">@android:color/white</item>
         <item name="colorSurface">@android:color/white</item>
         <item name="colorSurfaceContainer">@android:color/white</item>
-        <item name="colorSurfaceVariant">@android:color/white</item>
+        <item name="popupMenuBackground">?colorOnSurfaceInverse</item>
 
     </style>
 
