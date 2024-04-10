@@ -539,4 +539,6 @@
     <string name="external_player">Външен плеър</string>
     <string name="show_updates">Автоматична проверка на актуализации</string>
     <string name="albums">Албуми</string>
+    <string name="import_temp_playlist">Импортиране на временен плейлист?</string>
+    <string name="import_temp_playlist_summary">Искате ли да създадете нов плейлист с име \'%1$s\'? Плейлистът ще съдържа %2$d видеоклипа.</string>
 </resources>
