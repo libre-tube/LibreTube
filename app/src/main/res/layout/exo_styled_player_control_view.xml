@@ -82,6 +82,15 @@
                     app:trackTint="#88ffffff" />
 
                 <ImageButton
+                    android:id="@+id/dearrow_submit"
+                    style="@style/PlayerControlTop"
+                    android:layout_marginEnd="2dp"
+                    android:src="@drawable/ic_dearrow"
+                    android:tooltipText="@string/contribute_to_dearrow"
+                    android:visibility="gone"
+                    app:tint="@android:color/white" />
+
+                <ImageButton
                     android:id="@+id/sb_submit"
                     style="@style/PlayerControlTop"
                     android:layout_marginEnd="2dp"

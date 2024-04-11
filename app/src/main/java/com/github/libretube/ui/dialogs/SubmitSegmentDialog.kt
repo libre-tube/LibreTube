@@ -17,6 +17,7 @@ import com.github.libretube.databinding.DialogSubmitSegmentBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.lang.Exception
 import kotlinx.coroutines.Dispatchers
@@ -86,14 +87,14 @@ class SubmitSegmentDialog : DialogFragment() {
 
         val categories = resources.getStringArray(R.array.sponsorBlockSegments)
         val category = categories[binding.segmentCategory.selectedItemPosition]
-        val userAgent = "${context.packageName}/${BuildConfig.VERSION_NAME}"
+        val userAgent = TextUtils.getUserAgent(context)
         val uuid = PreferenceHelper.getSponsorBlockUserID()
         val duration = duration?.let { it.toFloat() / 1000 }
 
         try {
             withContext(Dispatchers.IO) {
                 RetrofitInstance.externalApi
-                    .submitSegment(videoId, startTime, endTime, category, userAgent, uuid, duration)
+                    .submitSegment(videoId, uuid, userAgent, startTime, endTime, category, duration)
             }
             context.toastFromMainDispatcher(R.string.segment_submitted)
         } catch (e: Exception) {
