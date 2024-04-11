@@ -541,4 +541,7 @@
     <string name="show_updates">A frissítések automatikus ellenőrzése</string>
     <string name="import_temp_playlist">Importálja az átmeneti lejátszási listát?</string>
     <string name="import_temp_playlist_summary">Szeretne új lejátszási listát létrehozni „%1$s” néven? A lejátszási lista %2$d videót fog tartalmazni.</string>
+    <string name="title">Cím</string>
+    <string name="thumbnail_time">Miniatűr ideje</string>
+    <string name="contribute_to_dearrow">Közreműködés a DeArrow-hoz</string>
 </resources>
