@@ -48,7 +48,6 @@ class DownloadPlaylistDialog : DialogFragment() {
 
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(R.string.download_playlist) + ": " + playlistName)
-            .setMessage(R.string.download_playlist_note)
             .setView(binding.root)
             .setPositiveButton(R.string.download) { _, _ ->
                 with(binding) {
