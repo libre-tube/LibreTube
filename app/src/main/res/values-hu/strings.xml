@@ -539,4 +539,6 @@
     <string name="external_player">Külső lejátszó</string>
     <string name="albums">Albumok</string>
     <string name="show_updates">A frissítések automatikus ellenőrzése</string>
+    <string name="import_temp_playlist">Importálja az átmeneti lejátszási listát?</string>
+    <string name="import_temp_playlist_summary">Szeretne új lejátszási listát létrehozni „%1$s” néven? A lejátszási lista %2$d videót fog tartalmazni.</string>
 </resources>
