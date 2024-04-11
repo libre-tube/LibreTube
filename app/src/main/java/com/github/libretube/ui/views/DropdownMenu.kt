@@ -1,6 +1,7 @@
 package com.github.libretube.ui.views
 
 import android.content.Context
+import android.text.InputType
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.ArrayAdapter
@@ -36,6 +37,22 @@ class DropdownMenu(
     var selectedItemPosition: Int
         get() = adapter.getPosition(binding.autoCompleteTextView.text.toString())
         set(index) = binding.autoCompleteTextView.setText(adapter.getItem(index), false)
+
+    val text get() = binding.autoCompleteTextView.text.toString()
+
+    override fun setEnabled(enabled: Boolean) {
+        binding.textInputLayout.isEnabled = enabled
+    }
+
+    override fun isEnabled(): Boolean {
+        return binding.textInputLayout.isEnabled
+    }
+
+    var typingEnabled: Boolean
+        set(enabled) {
+            binding.autoCompleteTextView.inputType = if (enabled) InputType.TYPE_CLASS_TEXT else InputType.TYPE_NULL
+        }
+        get() = binding.autoCompleteTextView.inputType != InputType.TYPE_NULL
 
     init {
         context.obtainStyledAttributes(attributeSet, R.styleable.DropdownMenu, 0, 0).use {

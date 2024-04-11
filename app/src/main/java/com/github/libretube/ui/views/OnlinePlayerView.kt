@@ -1,6 +1,7 @@
 package com.github.libretube.ui.views
 
 import android.content.Context
+import android.os.Bundle
 import android.util.AttributeSet
 import android.view.Window
 import androidx.core.os.bundleOf
@@ -19,6 +20,7 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.base.BaseActivity
+import com.github.libretube.ui.dialogs.SubmitDeArrowDialog
 import com.github.libretube.ui.dialogs.SubmitSegmentDialog
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.models.PlayerViewModel
@@ -162,19 +164,29 @@ class OnlinePlayerView(
 
         binding.sbSubmit.isVisible = PreferenceHelper.getBoolean(PreferenceKeys.CONTRIBUTE_TO_SB, false)
         binding.sbSubmit.setOnClickListener {
-            val currentPosition = player?.currentPosition?.takeIf { it != C.TIME_UNSET } ?: 0
-            val duration = player?.duration?.takeIf { it != C.TIME_UNSET }
-            val videoId = PlayingQueue.getCurrent()?.url?.toID() ?: return@setOnClickListener
-
-            val bundle = bundleOf(
-                IntentData.currentPosition to currentPosition,
-                IntentData.duration to duration,
-                IntentData.videoId to videoId
-            )
-            val newSubmitSegmentDialog = SubmitSegmentDialog()
-            newSubmitSegmentDialog.arguments = bundle
-            newSubmitSegmentDialog.show((context as BaseActivity).supportFragmentManager, null)
+            val submitSegmentDialog = SubmitSegmentDialog()
+            submitSegmentDialog.arguments = buildSbBundleArgs() ?: return@setOnClickListener
+            submitSegmentDialog.show((context as BaseActivity).supportFragmentManager, null)
         }
+
+        binding.dearrowSubmit.isVisible = PreferenceHelper.getBoolean(PreferenceKeys.CONTRIBUTE_TO_DEARROW, false)
+        binding.dearrowSubmit.setOnClickListener {
+            val submitDialog = SubmitDeArrowDialog()
+            submitDialog.arguments = buildSbBundleArgs() ?: return@setOnClickListener
+            submitDialog.show((context as BaseActivity).supportFragmentManager, null)
+        }
+    }
+
+    private fun buildSbBundleArgs(): Bundle? {
+        val currentPosition = player?.currentPosition?.takeIf { it != C.TIME_UNSET } ?: 0
+        val duration = player?.duration?.takeIf { it != C.TIME_UNSET }
+        val videoId = PlayingQueue.getCurrent()?.url?.toID() ?: return null
+
+        return bundleOf(
+            IntentData.currentPosition to currentPosition,
+            IntentData.duration to duration,
+            IntentData.videoId to videoId
+        )
     }
 
     override fun getWindow(): Window = currentWindow ?: activity.window

@@ -434,6 +434,9 @@
     <string name="fallback_piped_proxy_summary">Load videos via the proxy if connecting to YouTube directly doesn\'t work for the current video (increases the initial loading times). If disabled, YouTube music content likely won\'t play due to YT restrictions</string>
     <string name="dearrow">Enable DeArrow</string>
     <string name="dearrow_summary">Show more accurate and less sensationalist titles and thumbnails. Increases loading times</string>
+    <string name="contribute_to_dearrow">Contribute to DeArrow</string>
+    <string name="title">Title</string>
+    <string name="thumbnail_time">Thumbnail time</string>
     <string name="visibility">Visibility</string>
     <string name="visibility_public">Public</string>
     <string name="visibility_unlisted">Unlisted</string>
