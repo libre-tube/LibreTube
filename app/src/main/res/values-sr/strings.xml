@@ -544,4 +544,7 @@
     <string name="albums">Албуми</string>
     <string name="import_temp_playlist">Увести привремену плејлисту?</string>
     <string name="import_temp_playlist_summary">Желите ли да направите нову плејлисту под називом „%1$s“? Плејлиста ће садржати %2$d видео снимака.</string>
+    <string name="contribute_to_dearrow">Допринос DeArrow-у</string>
+    <string name="title">Наслов</string>
+    <string name="thumbnail_time">Време сличице</string>
 </resources>
