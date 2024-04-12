@@ -553,4 +553,7 @@
     <string name="albums">الألبومات</string>
     <string name="import_temp_playlist">هل تريد استيراد قائمة التشغيل المؤقتة؟</string>
     <string name="import_temp_playlist_summary">هل تريد إنشاء قائمة تشغيل جديدة باسم \'%1$s\'؟ ستحتوي قائمة التشغيل على %2$d مقطع فيديو.</string>
+    <string name="title">العنوان</string>
+    <string name="contribute_to_dearrow">المساهمة في DeArrow</string>
+    <string name="thumbnail_time">وقت الصورة المصغرة</string>
 </resources>
