@@ -548,4 +548,7 @@
     <string name="albums">Альбоми</string>
     <string name="import_temp_playlist">Імпортувати тимчасовий список відтворення?</string>
     <string name="import_temp_playlist_summary">Бажаєте створити новий список відтворення під назвою \"%1$s\"? Список відтворення міститиме %2$d відео.</string>
+    <string name="title">Заголовок</string>
+    <string name="contribute_to_dearrow">Зробити внесок у DeArrow</string>
+    <string name="thumbnail_time">Час показу мініатюр</string>
 </resources>
