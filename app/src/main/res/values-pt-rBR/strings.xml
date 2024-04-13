@@ -226,7 +226,7 @@
     <string name="playerAudioQuality">Qualidade do áudio</string>
     <string name="worst_quality">Menor qualidade</string>
     <string name="new_videos_badge_summary">Mostrar um ícone com a quantidade de novos vídeos, se houver</string>
-    <string name="backup_restore">Backup e restauração</string>
+    <string name="backup_restore">Backup &amp; Restauração</string>
     <string name="maximum_image_cache">Tamanho máximo do cache de imagem</string>
     <string name="open_copied">Abrir</string>
     <string name="audio_video_summary">Qualidade e formato</string>
@@ -473,7 +473,7 @@
     <string name="tooltip_fullscreen">Tela cheia</string>
     <string name="tooltip_locked">Bloquear funções</string>
     <string name="tooltip_sponsorblock">Alternar SponsorBlock</string>
-    <string name="tooltip_dismiss">Dispensar</string>
+    <string name="tooltip_dismiss">Descartar</string>
     <string name="tooltip_edit_groups">Editar grupos</string>
     <string name="tooltip_sort">Classificar</string>
     <string name="auto_generated">gerado automaticamente</string>
