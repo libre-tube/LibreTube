@@ -55,7 +55,6 @@ import kotlin.io.path.div
 import kotlin.io.path.fileSize
 import kotlin.math.min
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
@@ -341,7 +340,8 @@ class DownloadService : LifecycleService() {
         }
 
         lifecycleScope.launch(coroutineContext) {
-            downloadFile(Database.downloadDao().findDownloadItemById(id))
+            val file = Database.downloadDao().findDownloadItemById(id) ?: return@launch
+            downloadFile(file)
         }
     }
 
@@ -361,16 +361,14 @@ class DownloadService : LifecycleService() {
     /**
      * Stop downloading job for given [id]. If no downloads are active, stop the service.
      */
-    private fun stop(id: Int) = CoroutineScope(Dispatchers.IO).launch {
+    private fun stop(id: Int) = lifecycleScope.launch(coroutineContext) {
         downloadQueue[id] = false
         _downloadFlow.emit(id to DownloadStatus.Stopped)
 
-        lifecycleScope.launch {
-            val item = Database.downloadDao().findDownloadItemById(id)
-            notificationManager.cancel(item.getNotificationId())
-            Database.downloadDao().deleteDownloadItemById(id)
-            stopServiceIfDone()
-        }
+        val item = Database.downloadDao().findDownloadItemById(id) ?: return@launch
+        notificationManager.cancel(item.getNotificationId())
+        Database.downloadDao().deleteDownloadItemById(id)
+        stopServiceIfDone()
     }
 
     /**

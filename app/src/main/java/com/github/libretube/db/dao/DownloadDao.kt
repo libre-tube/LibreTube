@@ -23,7 +23,7 @@ interface DownloadDao {
     suspend fun findById(videoId: String): DownloadWithItems
 
     @Query("SELECT * FROM downloaditem WHERE id = :id")
-    suspend fun findDownloadItemById(id: Int): DownloadItem
+    suspend fun findDownloadItemById(id: Int): DownloadItem?
 
     @Query("DELETE FROM downloaditem WHERE id = :id")
     suspend fun deleteDownloadItemById(id: Int)
