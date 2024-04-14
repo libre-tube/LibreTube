@@ -539,4 +539,9 @@
     <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="show_updates">Yeniləmələri avtomatik yoxla</string>
     <string name="albums">Albomlar</string>
+    <string name="contribute_to_dearrow">DeArrow-a töhfə ver</string>
+    <string name="title">Başlıq</string>
+    <string name="thumbnail_time">Miniatür vaxtı</string>
+    <string name="import_temp_playlist">Müvəqqəti pleylist idxal edilsin?</string>
+    <string name="import_temp_playlist_summary">\'%1$s\' adlı yeni pleylist yaratmaq istəyirsiniz? Pleylistdə %2$d video olacaq.</string>
 </resources>

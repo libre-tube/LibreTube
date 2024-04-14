@@ -538,4 +538,7 @@
     <string name="albums">Album</string>
     <string name="import_temp_playlist">Impor daftar putar sementara?</string>
     <string name="import_temp_playlist_summary">Apakah Anda ingin membuat daftar putar baru bernama \'%1$s\'? Daftar putarnya akan berisi %2$d video.</string>
+    <string name="thumbnail_time">Waktu gambar kecil</string>
+    <string name="contribute_to_dearrow">Berkontribusi ke DeArrow</string>
+    <string name="title">Judul</string>
 </resources>

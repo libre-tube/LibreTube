@@ -539,4 +539,9 @@
     <string name="external_player">Reproductor externe</string>
     <string name="show_updates">Verificar actualisationes automaticamente</string>
     <string name="albums">Albumes</string>
+    <string name="import_temp_playlist">Importar lista de reproduction temporari?</string>
+    <string name="import_temp_playlist_summary">Desira tu crear un nove lista de reproduction appellate \'%1$s\'? Le lista habera %2$d videos.</string>
+    <string name="title">Titulo</string>
+    <string name="contribute_to_dearrow">Contribuer a DeArrow</string>
+    <string name="thumbnail_time">Tempore de miniatura</string>
 </resources>

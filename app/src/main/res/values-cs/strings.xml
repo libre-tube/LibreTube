@@ -544,4 +544,7 @@
     <string name="albums">Alba</string>
     <string name="import_temp_playlist_summary">Chcete importovat dočasný playlist s názvem „%1$s“? Playlist bude obsahovat %2$d videí.</string>
     <string name="import_temp_playlist">Importovat dočasný playlist?</string>
+    <string name="contribute_to_dearrow">Přispět do DeArrow</string>
+    <string name="title">Název</string>
+    <string name="thumbnail_time">Čas miniatury</string>
 </resources>
