@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.text.format.DateUtils
 import android.util.Log
 import android.widget.Toast
+import androidx.core.view.isGone
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
-import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
@@ -148,7 +148,7 @@ class SubmitSegmentDialog : DialogFragment() {
             val binding = _binding ?: return@withContext
 
             if (segments.isEmpty()) {
-                dismiss()
+                binding.voteSegmentContainer.isGone = true
                 Toast.makeText(context, R.string.no_segments_found, Toast.LENGTH_SHORT).show()
                 return@withContext
             }
