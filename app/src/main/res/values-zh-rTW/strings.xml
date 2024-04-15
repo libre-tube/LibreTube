@@ -538,4 +538,7 @@
     <string name="albums">專輯</string>
     <string name="import_temp_playlist">匯入臨時播放清單？</string>
     <string name="import_temp_playlist_summary">您想建立一個名為「%1$s」的新播放清單嗎？該播放清單將包含 %2$d 個影片。</string>
+    <string name="contribute_to_dearrow">貢獻給 DeArrow</string>
+    <string name="title">標題</string>
+    <string name="thumbnail_time">縮圖時間</string>
 </resources>
