@@ -22,7 +22,7 @@ import kotlinx.coroutines.withContext
 
 class SubmitDeArrowDialog: DialogFragment() {
     private var videoId: String = ""
-    private var currentPosition: Long = 0
+    private var currentPosition: Float = 0f
 
     private var _binding: DialogSubmitDearrowBinding? = null
     private val binding get() = _binding!!
@@ -31,7 +31,7 @@ class SubmitDeArrowDialog: DialogFragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             videoId = it.getString(IntentData.videoId)!!
-            currentPosition = it.getLong(IntentData.currentPosition)
+            currentPosition = it.getLong(IntentData.currentPosition).toFloat() / 1000
         }
     }
 
