@@ -31,7 +31,7 @@
             android:id="@+id/thumbnail_time_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
+            android:checked="false"
             android:text="@string/thumbnail_time" />
 
     </LinearLayout>
@@ -53,6 +53,7 @@
             android:id="@+id/thumbnail_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
