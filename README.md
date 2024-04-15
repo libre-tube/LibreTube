@@ -69,6 +69,8 @@ Screenshots
 [<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_4.jpg" width=19% alt="Library">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_4.jpg)
 [<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_9.jpg" width=19% alt="Channel Overview">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_9.jpg)
 
+* For more [Screenshot](https://github.com/libre-tube/LibreTube/blob/master/SCREEN_SHOT.md) 
+
 </div>
 
 <h2 align="left">
