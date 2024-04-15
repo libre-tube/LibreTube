@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:checked="true"
+            android:checked="false"
             android:text="@string/title" />
 
         <com.google.android.material.checkbox.MaterialCheckBox
@@ -47,13 +47,13 @@
         android:id="@+id/thumbnail_time_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:enabled="false"
         android:hint="@string/thumbnail_time">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/thumbnail_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
             android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
