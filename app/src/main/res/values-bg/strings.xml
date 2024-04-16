@@ -541,4 +541,7 @@
     <string name="albums">Албуми</string>
     <string name="import_temp_playlist">Импортиране на временен плейлист?</string>
     <string name="import_temp_playlist_summary">Искате ли да създадете нов плейлист с име \'%1$s\'? Плейлистът ще съдържа %2$d видеоклипа.</string>
+    <string name="contribute_to_dearrow">Допринесете за DeArrow</string>
+    <string name="title">Заглавие</string>
+    <string name="thumbnail_time">Време за миниатюри</string>
 </resources>

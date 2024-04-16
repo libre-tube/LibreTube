@@ -536,7 +536,7 @@
 \n%1$s до черги на завантаження</string>
     <string name="default_language">Типова</string>
     <string name="download_playlist">Завантажити список відтворення</string>
-    <string name="download_playlist_note">Виберіть максимальну якість завантажуваного аудіо / відео. Субтитри будуть завантажені, лише якщо вони доступні.</string>
+    <string name="download_playlist_note">Виберіть максимальну якість завантажуваного аудіо/відео. Субтитри будуть завантажені, лише якщо вони доступні.</string>
     <string name="enqueue_playlist_description">Показує сповіщення під час створення черги на завантаження відео зі списку відтворення.</string>
     <string name="also_clear_watch_positions">Також очистити позиції перегляду</string>
     <string name="behavior_when_minimized">Поведінка при згортанні</string>
