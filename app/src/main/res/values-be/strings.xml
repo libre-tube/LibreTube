@@ -531,7 +531,7 @@
     <string name="suggest_change_instance">Спампоўка займае больш часу, чым звычайна. Паспрабуйце змяніць сервер</string>
     <string name="delete_all">Ўсе спампоўкі будуць выдалены!</string>
     <string name="download_playlist">Спампаваць плэйліст</string>
-    <string name="download_playlist_note">Абярыце максімальную якасць пампаванага аўдыё / відэа. Субтытры будуць запампаваны толькі пры іх наяўнасці.</string>
+    <string name="download_playlist_note">Абярыце максімальную якасць пампаванага аўдыё/відэа. Субтытры будуць запампаваны толькі пры іх наяўнасці.</string>
     <string name="behavior_when_minimized">Паводзіны пры згортванні</string>
     <string name="gestures">Жэсты</string>
     <string name="also_clear_watch_positions">Таксама ачысціць пазіцыі прагляду</string>
