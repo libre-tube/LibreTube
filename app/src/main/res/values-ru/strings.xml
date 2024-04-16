@@ -547,7 +547,7 @@
     <string name="albums">Альбомы</string>
     <string name="import_temp_playlist">Импортировать временный плейлист?</string>
     <string name="import_temp_playlist_summary">Хотите создать новый плейлист с именем «%1$s»? В плейлисте будет %2$d видео.</string>
-    <string name="contribute_to_dearrow">Внести вклад в DeArrow</string>
+    <string name="contribute_to_dearrow">Внести улучшение в DeArrow</string>
     <string name="title">Название</string>
-    <string name="thumbnail_time">Время показа миниатюр</string>
+    <string name="thumbnail_time">Показывать время на миниатюре</string>
 </resources>
