@@ -546,4 +546,6 @@
     <string name="albums">Albumy</string>
     <string name="import_temp_playlist">Zaimportować tymczasową playlistę?</string>
     <string name="import_temp_playlist_summary">Czy chcesz utworzyć nową playlistę o nazwie „%1$s”? Playlista będzie zawierać %2$d filmów.</string>
+    <string name="title">Tytuł</string>
+    <string name="contribute_to_dearrow">Przyczyń się do DeArrow</string>
 </resources>
