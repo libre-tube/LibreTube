@@ -117,6 +117,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.concurrent.Executors
 import kotlin.math.abs
+import kotlin.math.ceil
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class PlayerFragment : Fragment(), OnlinePlayerOptions {
@@ -136,6 +137,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private var channelId: String? = null
     private var keepQueue = false
     private var timeStamp = 0L
+    private var isShort = false
 
     // data and objects stored for the player
     private lateinit var exoPlayer: ExoPlayer
@@ -922,7 +924,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
 
             val videoStream = streams.videoStreams.firstOrNull()
-            val isShort = PlayingQueue.getCurrent()?.isShort == true ||
+            isShort = PlayingQueue.getCurrent()?.isShort == true ||
                 (videoStream?.height ?: 0) > (videoStream?.width ?: 0)
 
             PlayingQueue.setOnQueueTapListener { streamItem ->
@@ -1252,10 +1254,16 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
     }
 
-    private fun setPlayerResolution(resolution: Int) {
+    private fun setPlayerResolution(resolution: Int, isSelectedByUser: Boolean = false) {
+        val transformedResolution = if (!isSelectedByUser && isShort) {
+            ceil(resolution * 16.0 / 9.0).toInt()
+        } else {
+            resolution
+        }
+
         trackSelector.updateParameters {
-            setMaxVideoSize(Int.MAX_VALUE, resolution)
-            setMinVideoSize(Int.MIN_VALUE, resolution)
+            setMaxVideoSize(Int.MAX_VALUE, transformedResolution)
+            setMinVideoSize(Int.MIN_VALUE, transformedResolution)
         }
     }
 
@@ -1433,7 +1441,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 }
             ) { which ->
                 val newResolution = resolutions[which].resolution
-                setPlayerResolution(newResolution)
+                setPlayerResolution(newResolution, true)
 
                 // save the selected resolution to update on fullscreen change
                 if (noFullscreenResolution != null && viewModel.isFullscreen.value != true) {
