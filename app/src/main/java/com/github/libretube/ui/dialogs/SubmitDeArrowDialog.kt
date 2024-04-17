@@ -3,6 +3,7 @@ package com.github.libretube.ui.dialogs
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.widget.CompoundButton
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
@@ -41,13 +42,6 @@ class SubmitDeArrowDialog: DialogFragment() {
         binding.dearrowTitle.typingEnabled = true
         binding.thumbnailTime.setText(currentPosition.toString())
 
-        binding.titleCheckbox.setOnCheckedChangeListener { _, isChecked ->
-            binding.dearrowTitle.isEnabled = isChecked
-        }
-        binding.thumbnailTimeCheckbox.setOnCheckedChangeListener { _, isChecked ->
-            binding.thumbnailTimeInputLayout.isEnabled = isChecked
-        }
-
         lifecycleScope.launch { fetchDeArrowData() }
 
         return MaterialAlertDialogBuilder(requireContext())
@@ -56,7 +50,19 @@ class SubmitDeArrowDialog: DialogFragment() {
             .setNegativeButton(R.string.cancel, null)
             .show()
             .apply {
-                getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
+                val positiveButton = getButton(DialogInterface.BUTTON_POSITIVE)
+                positiveButton.isEnabled = false
+
+                binding.titleCheckbox.setOnCheckedChangeListener { _, isChecked ->
+                    binding.dearrowTitle.isEnabled = isChecked
+                    positiveButton.isEnabled = isChecked || binding.thumbnailTimeCheckbox.isChecked
+                }
+                binding.thumbnailTimeCheckbox.setOnCheckedChangeListener { _, isChecked ->
+                    binding.thumbnailTimeInputLayout.isEnabled = isChecked
+                    positiveButton.isEnabled = binding.titleCheckbox.isChecked || isChecked
+                }
+
+                positiveButton.setOnClickListener {
                     lifecycleScope.launch { submitDeArrow() }
                 }
             }
