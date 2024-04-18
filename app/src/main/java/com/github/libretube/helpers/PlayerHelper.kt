@@ -1,7 +1,6 @@
 package com.github.libretube.helpers
 
 import android.app.Activity
-import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -397,15 +396,8 @@ object PlayerHelper {
         }
     }
 
-    fun getIntentAction(context: Context): String {
+    fun getIntentActionName(context: Context): String {
         return context.packageName + "." + ACTION_MEDIA_CONTROL
-    }
-
-    private fun getPendingIntent(activity: Activity, event: PlayerEvent): PendingIntent {
-        val intent = Intent(getIntentAction(activity))
-            .setPackage(activity.packageName)
-            .putExtra(CONTROL_TYPE, event)
-        return PendingIntentCompat.getBroadcast(activity, event.ordinal, intent, 0, false)!!
     }
 
     private fun getRemoteAction(
@@ -414,13 +406,15 @@ object PlayerHelper {
         @StringRes title: Int,
         event: PlayerEvent
     ): RemoteActionCompat {
+        val intent = Intent(getIntentActionName(activity))
+            .setPackage(activity.packageName)
+            .putExtra(CONTROL_TYPE, event)
+        val pendingIntent = PendingIntentCompat.getBroadcast(activity, event.ordinal, intent, 0, false)!!
+
         val text = activity.getString(title)
-        return RemoteActionCompat(
-            IconCompat.createWithResource(activity, id),
-            text,
-            text,
-            getPendingIntent(activity, event)
-        )
+        val icon = IconCompat.createWithResource(activity, id)
+
+        return RemoteActionCompat(icon, text, text, pendingIntent)
     }
 
     /**
@@ -444,8 +438,8 @@ object PlayerHelper {
         val playPauseAction = getRemoteAction(
             activity,
             if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play,
-            R.string.pause,
-            if (isPlaying) PlayerEvent.Pause else PlayerEvent.Play
+            if (isPlaying) R.string.resume else R.string.pause,
+            PlayerEvent.PlayPause
         )
 
         val skipNextAction = getRemoteAction(

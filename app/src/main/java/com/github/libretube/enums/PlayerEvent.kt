@@ -1,8 +1,7 @@
 package com.github.libretube.enums
 
 enum class PlayerEvent {
-    Pause,
-    Play,
+    PlayPause,
     Forward,
     Rewind,
     Next,

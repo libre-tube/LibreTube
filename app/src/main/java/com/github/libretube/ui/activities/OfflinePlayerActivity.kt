@@ -1,12 +1,17 @@
 package com.github.libretube.ui.activities
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.ActivityInfo
-import android.media.session.PlaybackState
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.KeyEvent
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -30,7 +35,11 @@ import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.DownloadChapter
 import com.github.libretube.enums.FileType
+import com.github.libretube.enums.PlayerEvent
+import com.github.libretube.extensions.seekBy
+import com.github.libretube.extensions.serializableExtra
 import com.github.libretube.extensions.toAndroidUri
+import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.WindowHelper
@@ -74,6 +83,10 @@ class OfflinePlayerActivity : BaseActivity() {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
             super.onIsPlayingChanged(isPlaying)
 
+            if (PlayerHelper.pipEnabled) {
+                PictureInPictureCompat.setPictureInPictureParams(this@OfflinePlayerActivity, pipParams)
+            }
+
             // Start or pause watch position timer
             if (isPlaying) {
                 watchPositionTimer.resume()
@@ -97,6 +110,32 @@ class OfflinePlayerActivity : BaseActivity() {
         }
     }
 
+    private val playerActionReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            when (intent.serializableExtra<PlayerEvent>(PlayerHelper.CONTROL_TYPE) ?: return) {
+                PlayerEvent.PlayPause -> {
+                    player.togglePlayPauseState()
+                }
+
+                PlayerEvent.Forward -> {
+                    player.seekBy(PlayerHelper.seekIncrement)
+                }
+
+                PlayerEvent.Rewind -> {
+                    player.seekBy(-PlayerHelper.seekIncrement)
+                }
+
+                else -> Unit
+            }
+        }
+    }
+
+    private val pipParams get() = PictureInPictureParamsCompat.Builder()
+        .setActions(PlayerHelper.getPiPModeActions(this, player.isPlaying))
+        .setAutoEnterEnabled(PlayerHelper.pipEnabled && player.isPlaying)
+        .setAspectRatio(player.videoSize)
+        .build()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowHelper.toggleFullscreen(window, true)
 
@@ -116,6 +155,17 @@ class OfflinePlayerActivity : BaseActivity() {
             player.videoSize.width,
             player.videoSize.height
         )
+
+        ContextCompat.registerReceiver(
+            this,
+            playerActionReceiver,
+            IntentFilter(PlayerHelper.getIntentActionName(this)),
+            ContextCompat.RECEIVER_NOT_EXPORTED
+        )
+
+        if (PlayerHelper.pipEnabled) {
+            PictureInPictureCompat.setPictureInPictureParams(this, pipParams)
+        }
     }
 
     private fun initializePlayer() {
@@ -248,6 +298,10 @@ class OfflinePlayerActivity : BaseActivity() {
     override fun onPause() {
         playerViewModel.isFullscreen.value = false
         super.onPause()
+
+        if (PlayerHelper.pauseOnQuit) {
+            player.pause()
+        }
     }
 
     override fun onDestroy() {
@@ -257,20 +311,28 @@ class OfflinePlayerActivity : BaseActivity() {
         player.release()
         watchPositionTimer.destroy()
 
+        unregisterReceiver(playerActionReceiver)
+
         super.onDestroy()
     }
 
     override fun onUserLeaveHint() {
-        if (PlayerHelper.pipEnabled && player.playbackState != PlaybackState.STATE_PAUSED) {
-            PictureInPictureCompat.enterPictureInPictureMode(
-                this,
-                PictureInPictureParamsCompat.Builder()
-                    .setAspectRatio(player.videoSize)
-                    .build()
-            )
+        if (PlayerHelper.pipEnabled && player.isPlaying) {
+            PictureInPictureCompat.enterPictureInPictureMode(this, pipParams)
         }
 
         super.onUserLeaveHint()
+    }
+
+    override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean, configuration: Configuration) {
+        super.onPictureInPictureModeChanged(isInPictureInPictureMode)
+
+        if (isInPictureInPictureMode) {
+            playerView.hideController()
+            playerView.useController = false
+        } else {
+            playerView.useController = true
+        }
     }
 
     override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
