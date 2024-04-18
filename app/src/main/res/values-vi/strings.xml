@@ -535,4 +535,9 @@
     <string name="also_clear_watch_positions">Cũng xóa vị trí xem</string>
     <string name="show_updates">Kiểm tra cập nhật tự động</string>
     <string name="albums">Tập ảnh</string>
+    <string name="thumbnail_time">Thời điểm hình thu nhỏ</string>
+    <string name="contribute_to_dearrow">Đóng góp cho DeArrow</string>
+    <string name="title">Tiêu đề</string>
+    <string name="import_temp_playlist">Nhập danh sách phát tạm thời?</string>
+    <string name="import_temp_playlist_summary">Bạn có muốn tạo danh sách phát mới có tên \'%1$s\' không? Danh sách phát sẽ chứa %2$d băng hình.</string>
 </resources>
