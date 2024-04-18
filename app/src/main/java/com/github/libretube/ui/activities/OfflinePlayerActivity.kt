@@ -43,10 +43,12 @@ import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.WindowHelper
+import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.interfaces.TimeFrameReceiver
 import com.github.libretube.ui.listeners.SeekbarPreviewListener
 import com.github.libretube.ui.models.PlayerViewModel
+import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.OfflineTimeFrameReceiver
 import com.github.libretube.util.PauseableTimer
 import kotlin.io.path.exists
@@ -62,6 +64,7 @@ class OfflinePlayerActivity : BaseActivity() {
     private lateinit var playerView: PlayerView
     private lateinit var trackSelector: DefaultTrackSelector
     private var timeFrameReceiver: TimeFrameReceiver? = null
+    private var nowPlayingNotification: NowPlayingNotification? = null
 
     private lateinit var playerBinding: ExoStyledPlayerControlViewBinding
     private val playerViewModel: PlayerViewModel by viewModels()
@@ -191,19 +194,21 @@ class OfflinePlayerActivity : BaseActivity() {
             binding.doubleTapOverlay.binding,
             binding.playerGestureControlsView.binding
         )
+
+        nowPlayingNotification = NowPlayingNotification(this, player, NowPlayingNotification.Companion.NowPlayingNotificationType.VIDEO_OFFLINE)
     }
 
     private fun playVideo() {
         lifecycleScope.launch {
-            val downloadInfo = withContext(Dispatchers.IO) {
+            val (downloadInfo, downloadItems, downloadChapters) = withContext(Dispatchers.IO) {
                 Database.downloadDao().findById(videoId)
             }
-            val chapters = downloadInfo.downloadChapters.map(DownloadChapter::toChapterSegment)
+            val chapters = downloadChapters.map(DownloadChapter::toChapterSegment)
             playerViewModel.chaptersLiveData.value = chapters
             binding.player.setChapters(chapters)
 
-            val downloadFiles = downloadInfo.downloadItems.filter { it.path.exists() }
-            playerBinding.exoTitle.text = downloadInfo.download.title
+            val downloadFiles = downloadItems.filter { it.path.exists() }
+            playerBinding.exoTitle.text = downloadInfo.title
             playerBinding.exoTitle.isVisible = true
 
             val video = downloadFiles.firstOrNull { it.type == FileType.VIDEO }
@@ -229,10 +234,13 @@ class OfflinePlayerActivity : BaseActivity() {
             player.prepare()
 
             if (PlayerHelper.watchPositionsVideo) {
-                PlayerHelper.getStoredWatchPosition(videoId, downloadInfo.download.duration)?.let {
+                PlayerHelper.getStoredWatchPosition(videoId, downloadInfo.duration)?.let {
                     player.seekTo(it)
                 }
             }
+
+            val data = PlayerNotificationData(downloadInfo.title, downloadInfo.uploader, downloadInfo.thumbnailPath.toString())
+            nowPlayingNotification?.updatePlayerNotification(videoId, data)
         }
     }
 
@@ -310,6 +318,7 @@ class OfflinePlayerActivity : BaseActivity() {
         playerViewModel.player = null
         player.release()
         watchPositionTimer.destroy()
+        nowPlayingNotification?.destroySelf()
 
         unregisterReceiver(playerActionReceiver)
 
