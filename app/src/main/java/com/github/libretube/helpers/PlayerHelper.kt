@@ -1,6 +1,7 @@
 package com.github.libretube.helpers
 
 import android.app.Activity
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -38,6 +39,8 @@ import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
+import com.github.libretube.extensions.seekBy
+import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.obj.VideoStats
 import com.github.libretube.util.PlayingQueue
@@ -798,6 +801,27 @@ object PlayerHelper {
         val watchPosition = WatchPosition(videoId, player.currentPosition)
         CoroutineScope(Dispatchers.IO).launch {
             DatabaseHolder.Database.watchPositionDao().insert(watchPosition)
+        }
+    }
+
+    fun handlePlayerAction(player: Player, playerEvent: PlayerEvent): Boolean {
+        return when (playerEvent) {
+            PlayerEvent.PlayPause -> {
+                player.togglePlayPauseState()
+                true
+            }
+
+            PlayerEvent.Forward -> {
+                player.seekBy(PlayerHelper.seekIncrement)
+                true
+            }
+
+            PlayerEvent.Rewind -> {
+                player.seekBy(-PlayerHelper.seekIncrement)
+                true
+            }
+
+            else -> false
         }
     }
 }

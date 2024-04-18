@@ -6,5 +6,6 @@ enum class PlayerEvent {
     Rewind,
     Next,
     Prev,
-    Background
+    Background,
+    Stop
 }

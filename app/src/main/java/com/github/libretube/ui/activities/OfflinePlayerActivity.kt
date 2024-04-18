@@ -36,10 +36,8 @@ import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.DownloadChapter
 import com.github.libretube.enums.FileType
 import com.github.libretube.enums.PlayerEvent
-import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.serializableExtra
 import com.github.libretube.extensions.toAndroidUri
-import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.WindowHelper
@@ -115,21 +113,8 @@ class OfflinePlayerActivity : BaseActivity() {
 
     private val playerActionReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            when (intent.serializableExtra<PlayerEvent>(PlayerHelper.CONTROL_TYPE) ?: return) {
-                PlayerEvent.PlayPause -> {
-                    player.togglePlayPauseState()
-                }
-
-                PlayerEvent.Forward -> {
-                    player.seekBy(PlayerHelper.seekIncrement)
-                }
-
-                PlayerEvent.Rewind -> {
-                    player.seekBy(-PlayerHelper.seekIncrement)
-                }
-
-                else -> Unit
-            }
+            val event = intent.serializableExtra<PlayerEvent>(PlayerHelper.CONTROL_TYPE) ?: return
+            PlayerHelper.handlePlayerAction(player, event)
         }
     }
 

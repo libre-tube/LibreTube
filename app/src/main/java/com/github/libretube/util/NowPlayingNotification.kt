@@ -2,10 +2,8 @@ package com.github.libretube.util
 
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
@@ -14,7 +12,6 @@ import android.support.v4.media.session.PlaybackStateCompat
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
 import androidx.core.app.PendingIntentCompat
-import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.toBitmap
 import androidx.media.app.NotificationCompat.MediaStyle
@@ -26,14 +23,11 @@ import com.github.libretube.LibreTubeApp.Companion.PLAYER_CHANNEL_NAME
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.enums.NotificationId
-import com.github.libretube.extensions.seekBy
+import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.extensions.toMediaMetadataCompat
-import com.github.libretube.extensions.togglePlayPauseState
-import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.obj.PlayerNotificationData
-import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.ui.activities.MainActivity
 import java.util.UUID
 
@@ -133,14 +127,14 @@ class NowPlayingNotification(
 
     private val legacyNotificationButtons
         get() = listOf(
-            createNotificationAction(R.drawable.ic_prev_outlined, PREV),
+            createNotificationAction(R.drawable.ic_prev_outlined, PlayerEvent.Prev.name),
             createNotificationAction(
                 if (player.isPlaying) R.drawable.ic_pause else R.drawable.ic_play,
-                PLAY_PAUSE
+                PlayerEvent.PlayPause.name
             ),
-            createNotificationAction(R.drawable.ic_next_outlined, NEXT),
-            createNotificationAction(R.drawable.ic_rewind_md, REWIND),
-            createNotificationAction(R.drawable.ic_forward_md, FORWARD)
+            createNotificationAction(R.drawable.ic_next_outlined, PlayerEvent.Next.name),
+            createNotificationAction(R.drawable.ic_rewind_md, PlayerEvent.Rewind.name),
+            createNotificationAction(R.drawable.ic_forward_md, PlayerEvent.Forward.name)
         )
 
     private fun createNotificationAction(
@@ -165,38 +159,38 @@ class NowPlayingNotification(
         if (this::mediaSession.isInitialized) return
 
         val sessionCallback = object : MediaSessionCompat.Callback() {
-            override fun onSkipToNext() {
-                handlePlayerAction(NEXT)
-                super.onSkipToNext()
-            }
-
-            override fun onSkipToPrevious() {
-                handlePlayerAction(PREV)
-                super.onSkipToPrevious()
-            }
-
             override fun onRewind() {
-                handlePlayerAction(REWIND)
+                handlePlayerAction(PlayerEvent.Rewind)
                 super.onRewind()
             }
 
             override fun onFastForward() {
-                handlePlayerAction(FORWARD)
+                handlePlayerAction(PlayerEvent.Forward)
                 super.onFastForward()
             }
 
             override fun onPlay() {
-                handlePlayerAction(PLAY_PAUSE)
+                handlePlayerAction(PlayerEvent.PlayPause)
                 super.onPlay()
             }
 
             override fun onPause() {
-                handlePlayerAction(PLAY_PAUSE)
+                handlePlayerAction(PlayerEvent.PlayPause)
                 super.onPause()
             }
 
+            override fun onSkipToNext() {
+                handlePlayerAction(PlayerEvent.Next)
+                super.onSkipToNext()
+            }
+
+            override fun onSkipToPrevious() {
+                handlePlayerAction(PlayerEvent.Prev)
+                super.onSkipToPrevious()
+            }
+
             override fun onStop() {
-                handlePlayerAction(STOP)
+                handlePlayerAction(PlayerEvent.Stop)
                 super.onStop()
             }
 
@@ -206,7 +200,7 @@ class NowPlayingNotification(
             }
 
             override fun onCustomAction(action: String, extras: Bundle?) {
-                handlePlayerAction(action)
+                runCatching { handlePlayerAction(PlayerEvent.valueOf(action)) }
                 super.onCustomAction(action, extras)
             }
         }
@@ -272,47 +266,20 @@ class NowPlayingNotification(
 
         return PlaybackStateCompat.Builder()
             .setActions(stateActions)
-            .addCustomAction(createMediaSessionAction(R.drawable.ic_rewind_md, REWIND))
-            .addCustomAction(createMediaSessionAction(R.drawable.ic_forward_md, FORWARD))
+            .addCustomAction(createMediaSessionAction(R.drawable.ic_rewind_md, PlayerEvent.Rewind.name))
+            .addCustomAction(createMediaSessionAction(R.drawable.ic_forward_md, PlayerEvent.Forward.name))
             .setState(state, player.currentPosition, player.playbackParameters.speed)
             .build()
     }
 
-    private fun handlePlayerAction(action: String) {
-        when (action) {
-            NEXT -> {
-                PlayingQueue.navigateNext()
-            }
-
-            PREV -> {
-                PlayingQueue.navigatePrev()
-            }
-
-            REWIND -> {
-                player.seekBy(-PlayerHelper.seekIncrement)
-            }
-
-            FORWARD -> {
-                player.seekBy(PlayerHelper.seekIncrement)
-            }
-
-            PLAY_PAUSE -> {
-                player.togglePlayPauseState()
-            }
-
-            STOP -> {
-                when (notificationType) {
-                    NowPlayingNotificationType.AUDIO_ONLINE -> BackgroundHelper.stopBackgroundPlay(
-                        context
-                    )
-                    NowPlayingNotificationType.AUDIO_OFFLINE -> BackgroundHelper.stopBackgroundPlay(
-                        context,
-                        OfflinePlayerService::class.java
-                    )
-                    else -> Unit
-                }
-            }
-        }
+    /**
+     * Forward the action to the responsible notification owner (e.g. PlayerFragment)
+     */
+    private fun handlePlayerAction(action: PlayerEvent) {
+        val intent = Intent(PlayerHelper.getIntentActionName(context))
+            .setPackage(context.packageName)
+            .putExtra(PlayerHelper.CONTROL_TYPE, action)
+        context.sendBroadcast(intent)
     }
 
     /**
@@ -329,7 +296,6 @@ class NowPlayingNotification(
         if (notificationBuilder == null) {
             createMediaSession()
             createNotificationBuilder()
-            createActionReceiver()
             // update the notification each time the player continues playing or pauses
             player.addListener(object : Player.Listener {
                 override fun onIsPlayingChanged(isPlaying: Boolean) {
@@ -349,7 +315,7 @@ class NowPlayingNotification(
         notificationBuilder = NotificationCompat.Builder(context, PLAYER_CHANNEL_NAME)
             .setSmallIcon(R.drawable.ic_launcher_lockscreen)
             .setContentIntent(createCurrentContentIntent())
-            .setDeleteIntent(createIntent(STOP))
+            .setDeleteIntent(createIntent(PlayerEvent.Stop.name))
             .setStyle(
                 MediaStyle()
                     .setMediaSession(mediaSession.sessionToken)
@@ -374,35 +340,11 @@ class NowPlayingNotification(
         nManager.notify(NotificationId.PLAYER_PLAYBACK.id, notification)
     }
 
-    private val notificationActionReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            handlePlayerAction(intent.action ?: return)
-        }
-    }
-
-    private fun createActionReceiver() {
-        val filter = IntentFilter().apply {
-            listOf(PREV, NEXT, REWIND, FORWARD, PLAY_PAUSE, STOP).forEach {
-                addAction(it)
-            }
-        }
-        ContextCompat.registerReceiver(
-            context,
-            notificationActionReceiver,
-            filter,
-            ContextCompat.RECEIVER_NOT_EXPORTED
-        )
-    }
-
     /**
      * Destroy the [NowPlayingNotification]
      */
     fun destroySelf() {
         mediaSession.release()
-
-        runCatching {
-            context.unregisterReceiver(notificationActionReceiver)
-        }
 
         nManager.cancel(NotificationId.PLAYER_PLAYBACK.id)
     }
@@ -416,13 +358,6 @@ class NowPlayingNotification(
     }
 
     companion object {
-        private const val PREV = "prev"
-        private const val NEXT = "next"
-        private const val REWIND = "rewind"
-        private const val FORWARD = "forward"
-        private const val PLAY_PAUSE = "play_pause"
-        private const val STOP = "stop"
-
         enum class NowPlayingNotificationType {
             VIDEO_ONLINE,
             VIDEO_OFFLINE,
