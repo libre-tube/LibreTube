@@ -66,7 +66,6 @@ import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.parcelable
-import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.serializableExtra
 import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toID
@@ -202,21 +201,17 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      */
     private val playerActionReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            when (intent.serializableExtra<PlayerEvent>(PlayerHelper.CONTROL_TYPE) ?: return) {
-                PlayerEvent.PlayPause -> {
-                    exoPlayer.togglePlayPauseState()
-                }
+            val event = intent.serializableExtra<PlayerEvent>(PlayerHelper.CONTROL_TYPE) ?: return
 
-                PlayerEvent.Forward -> {
-                    exoPlayer.seekBy(PlayerHelper.seekIncrement)
-                }
+            if (PlayerHelper.handlePlayerAction(exoPlayer, event)) return
 
-                PlayerEvent.Rewind -> {
-                    exoPlayer.seekBy(-PlayerHelper.seekIncrement)
-                }
-
+            when (event) {
                 PlayerEvent.Next -> {
                     playNextVideo(PlayingQueue.getNext())
+                }
+
+                PlayerEvent.Prev -> {
+                    playNextVideo(PlayingQueue.getPrev())
                 }
 
                 PlayerEvent.Background -> {
