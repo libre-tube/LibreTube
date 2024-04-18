@@ -202,15 +202,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     /**
      * Receiver for all actions in the PiP mode
      */
-    private val broadcastReceiver = object : BroadcastReceiver() {
+    private val playerActionReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             when (intent.serializableExtra<PlayerEvent>(PlayerHelper.CONTROL_TYPE) ?: return) {
-                PlayerEvent.Play -> {
-                    exoPlayer.play()
-                }
-
-                PlayerEvent.Pause -> {
-                    exoPlayer.pause()
+                PlayerEvent.PlayPause -> {
+                    exoPlayer.togglePlayPauseState()
                 }
 
                 PlayerEvent.Forward -> {
@@ -372,8 +368,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // broadcast receiver for PiP actions
         ContextCompat.registerReceiver(
             requireContext(),
-            broadcastReceiver,
-            IntentFilter(PlayerHelper.getIntentAction(requireContext())),
+            playerActionReceiver,
+            IntentFilter(PlayerHelper.getIntentActionName(requireContext())),
             ContextCompat.RECEIVER_NOT_EXPORTED
         )
 
@@ -835,7 +831,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         runCatching {
             // unregister the receiver for player actions
-            context?.unregisterReceiver(broadcastReceiver)
+            context?.unregisterReceiver(playerActionReceiver)
         }
 
         _binding = null
