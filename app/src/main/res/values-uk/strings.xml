@@ -543,7 +543,6 @@
     <string name="gestures">Жести</string>
     <string name="comments_count">Коментарі (%1$s)</string>
     <string name="external_player">Зовнішній програвач</string>
-    <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="show_updates">Перевіряти оновлення автоматично</string>
     <string name="albums">Альбоми</string>
     <string name="import_temp_playlist">Імпортувати тимчасовий список відтворення?</string>

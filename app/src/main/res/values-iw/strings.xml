@@ -516,7 +516,6 @@
     <string name="grid_landscape">עמודות רשת (לרוחב)</string>
     <string name="comments_count">תגובות (%1$s)</string>
     <string name="finished">הסתיים</string>
-    <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="show_updates">לבדוק אוטומטית אם יש עדכונים</string>
     <string name="rich_caption_rendering">עיבוד של כותרת עשירה</string>
     <string name="change">החלפה</string>

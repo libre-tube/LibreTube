@@ -532,7 +532,6 @@
     <string name="gestures">ジェスチャー</string>
     <string name="behavior_when_minimized">最小化時の動作</string>
     <string name="comments_count">コメント (%1$s)</string>
-    <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="external_player">別の再生プレイヤー</string>
     <string name="show_updates">最新版を自動で確認</string>
     <string name="albums">アルバム</string>

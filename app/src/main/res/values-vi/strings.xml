@@ -524,7 +524,6 @@
     <string name="delete_all">Tất cả các tải xuống sẽ bị xóa!</string>
     <string name="download_playlist_note">Vui lòng chọn chất lượng audio/video tối đa để tải xuống. Phụ đề sẽ chỉ được tải xuống nếu có.</string>
     <string name="enqueueing_playlist_download">Xếp hàng video để tải xuống danh sách phát %1$s</string>
-    <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">Bình luận (%1$s)</string>
     <string name="rich_caption_rendering_summary">Kết xuất phụ đề web để có trải nghiệm phong phú và tùy chỉnh hơn</string>
     <string name="copy_tooltip">Sao chép</string>

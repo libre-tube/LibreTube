@@ -534,7 +534,6 @@
     <string name="enqueueing_playlist_download">Подреждане на видеоклипове за изтегляне на плейлиста %1$s</string>
     <string name="default_language">По подразбиране</string>
     <string name="download_playlist_note">Моля, изберете максималното аудио/видео качество за изтегляне. Надписите ще бъдат изтеглени само ако са налични.</string>
-    <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">Коментари (%1$s)</string>
     <string name="external_player">Външен плеър</string>
     <string name="show_updates">Автоматична проверка на актуализации</string>

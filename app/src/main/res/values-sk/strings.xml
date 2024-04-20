@@ -537,7 +537,6 @@
     <string name="also_clear_watch_positions">Vymazať aj pozície sledovania</string>
     <string name="gestures">Gestá</string>
     <string name="behavior_when_minimized">Správanie pri minimalizácii</string>
-    <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">Komentáre (%1$s)</string>
     <string name="external_player">Externý prehrávač</string>
     <string name="show_updates">Kontrolovať aktualizácie automaticky</string>

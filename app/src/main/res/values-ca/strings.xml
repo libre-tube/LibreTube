@@ -521,7 +521,6 @@
     <string name="creation_date">Data de creació</string>
     <string name="sb_custom_colors_summary">Activa/desactiva els segments dels colors personalitzats per als segments SponsorBlock</string>
     <string name="tooltip_repeat">Repeteix</string>
-    <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="play_next">Reprodueix a continuació</string>
     <string name="navigation_bar">Barra de navegació</string>
     <string name="change_region">Sembla que les tendències no estan disponibles per a la regió actual. Si us plau, seleccioneu-ne una altra a la configuració.</string>

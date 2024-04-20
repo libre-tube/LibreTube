@@ -73,7 +73,6 @@
     <string name="downloadfailed">Allalaadimine ei õnnestunud.</string>
     <string name="unknown_error">Võrguühenduse viga.</string>
     <string name="error">Midagi läks valesti.</string>
-    <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="lightTheme">Hele kujundus</string>
     <string name="noInternet">Palun loo esmalt internetiühendus.</string>
     <string name="channels">Kanalid</string>

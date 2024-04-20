@@ -65,7 +65,6 @@
     <string name="donate">Donate</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d videos</string>
     <string name="subscriberAndVideoCounts">%1$s subscribers • %2$d videos</string>
-    <string name="commentedTimeWithSeparator"> • %1$s</string>
     <string name="videoCount">%1$d videos</string>
     <string name="noInternet">Connect to the Internet first.</string>
     <string name="retry">Retry</string>

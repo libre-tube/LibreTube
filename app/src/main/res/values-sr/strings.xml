@@ -537,7 +537,6 @@
     <string name="also_clear_watch_positions">Такође очисти позиције гледања</string>
     <string name="behavior_when_minimized">Понашање када је минимизирано</string>
     <string name="gestures">Покрети</string>
-    <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">Коментари (%1$s)</string>
     <string name="external_player">Спољни плејер</string>
     <string name="show_updates">Аутоматски провери ажурирања</string>

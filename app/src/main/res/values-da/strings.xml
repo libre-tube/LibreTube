@@ -537,6 +537,5 @@
     <string name="albums">Album</string>
     <string name="show_updates">Tjek for opdateringer automatisk</string>
     <string name="external_player">Ekstern afspiller</string>
-    <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">Kommentarer (%1$s)</string>
 </resources>
