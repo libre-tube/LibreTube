@@ -529,7 +529,6 @@
     <string name="rich_caption_rendering_summary">Render takarir web untuk pengalaman yang lebih kaya dan terkustomisasi</string>
     <string name="gestures">Gestur</string>
     <string name="grid_landscape">Kolom kisi (lanskap)</string>
-    <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">Komentar (%1$s)</string>
     <string name="enqueue_playlist_description">Menampilkan notifikasi ketika mengantrekan video dari daftar putar untuk diunduh.</string>
     <string name="external_player">Pemutar eksternal</string>

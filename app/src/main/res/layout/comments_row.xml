@@ -48,6 +48,12 @@
                     tools:text="Octacat" />
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" • "
+                    tools:ignore="HardcodedText" />
+
+                <TextView
                     android:id="@+id/comment_infos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -56,7 +62,7 @@
                     android:textAlignment="viewStart"
                     android:textColor="?android:attr/textColorSecondary"
                     android:textSize="14sp"
-                    tools:text="• 10h" />
+                    tools:text="10h ago" />
 
                 <ImageView
                     android:id="@+id/verified_imageView"
@@ -83,10 +89,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="8dp"
+                android:focusable="false"
                 android:textAlignment="viewStart"
                 android:textIsSelectable="true"
                 android:textSize="15sp"
-                android:focusable="false"
                 tools:text="Comment Text" />
 
             <LinearLayout
@@ -122,8 +128,8 @@
                     android:layout_height="14dp"
                     android:layout_marginEnd="8dp"
                     android:visibility="gone"
-                    tools:visibility="gone"
-                    app:shapeAppearance="@style/CircleImageView" />
+                    app:shapeAppearance="@style/CircleImageView"
+                    tools:visibility="gone" />
 
                 <com.github.libretube.ui.views.DrawableTextView
                     android:id="@+id/replies_count"

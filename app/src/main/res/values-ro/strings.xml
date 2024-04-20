@@ -537,7 +537,6 @@
     <string name="default_language">Implicit</string>
     <string name="gestures">Gesturi</string>
     <string name="behavior_when_minimized">Comportament când este minimizat</string>
-    <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">Comentarii (%1$s)</string>
     <string name="external_player">Player extern</string>
     <string name="show_updates">Verifică automat actualizările</string>

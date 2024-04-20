@@ -534,7 +534,6 @@
     <string name="also_clear_watch_positions">देखने की स्थिति भी साफ़ करें</string>
     <string name="behavior_when_minimized">व्यवहार जब मिनीमाईज किया जाए</string>
     <string name="comments_count">टिप्पणियाँ (%1$s)</string>
-    <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="external_player">बाहरी प्लेयर</string>
     <string name="gestures">इशारे</string>
     <string name="show_updates">अपडेट स्वचालित रूप से जांचें</string>

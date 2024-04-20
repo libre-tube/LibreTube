@@ -62,8 +62,7 @@ class CommentPagingAdapter(
             commentAuthor.setBackgroundResource(
                 if (comment.channelOwner) R.drawable.comment_channel_owner_bg else 0
             )
-            commentInfos.text = root.context
-                .getString(R.string.commentedTimeWithSeparator, comment.commentedTime)
+            commentInfos.text = comment.commentedTime
 
             commentText.movementMethod = LinkMovementMethodCompat.getInstance()
             val linkHandler = LinkHandler {

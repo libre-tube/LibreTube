@@ -540,7 +540,6 @@
     <string name="enqueueing_playlist_download">Дадаць відэа з плэйліста %1$s ў чаргу на загрузку</string>
     <string name="audio_language">Мова аўдыё</string>
     <string name="default_language">Па змаўчанні</string>
-    <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="external_player">Знешні прайгравальнік</string>
     <string name="comments_count">Каментары (%1$s)</string>
     <string name="show_updates">Правяраць абнаўлення аўтаматычна</string>

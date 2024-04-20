@@ -536,7 +536,6 @@
     <string name="behavior_when_minimized">Verhalten bei Minimierung</string>
     <string name="show_updates">Automatisch nach Updates prüfen</string>
     <string name="external_player">Externer Player</string>
-    <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">Kommentare (%1$s)</string>
     <string name="albums">Alben</string>
 </resources>

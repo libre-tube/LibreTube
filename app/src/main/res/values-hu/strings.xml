@@ -534,7 +534,6 @@
     <string name="also_clear_watch_positions">A megtekintési pozíciókat is törölje</string>
     <string name="behavior_when_minimized">Viselkedés minimalizálva</string>
     <string name="gestures">Gesztusok</string>
-    <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="comments_count">Hozzászólások (%1$s)</string>
     <string name="external_player">Külső lejátszó</string>
     <string name="albums">Albumok</string>

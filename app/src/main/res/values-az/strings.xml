@@ -536,7 +536,6 @@
     <string name="gestures">Jestlər</string>
     <string name="external_player">Xarici oynadıcı</string>
     <string name="comments_count">Şərhlər (%1$s)</string>
-    <string name="commentedTimeWithSeparator">• %1$s</string>
     <string name="show_updates">Yeniləmələri avtomatik yoxla</string>
     <string name="albums">Albomlar</string>
     <string name="contribute_to_dearrow">DeArrow-a töhfə ver</string>
