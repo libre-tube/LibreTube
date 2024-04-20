@@ -543,4 +543,7 @@
     <string name="albums">Álbumes</string>
     <string name="import_temp_playlist_summary">¿Desea crear una nueva lista de reproducción llamada \'%1$s\'? La lista de reproducción contendrá %2$d vídeos.</string>
     <string name="import_temp_playlist">¿Importar lista de reproducción temporal?</string>
+    <string name="contribute_to_dearrow">Contribuir a DeArrow</string>
+    <string name="title">Título</string>
+    <string name="thumbnail_time">Duracción de la miniatura</string>
 </resources>

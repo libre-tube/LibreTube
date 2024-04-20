@@ -540,4 +540,7 @@
     <string name="behavior_when_minimized">Comportement en cas de minimisation</string>
     <string name="gestures">Gestes</string>
     <string name="show_updates">Vérification automatique des mises à jour</string>
+    <string name="contribute_to_dearrow">Contribuer à DeArrow</string>
+    <string name="title">Titre</string>
+    <string name="import_temp_playlist">Importer une liste de lecture temporaire ?</string>
 </resources>
