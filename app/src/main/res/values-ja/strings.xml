@@ -282,7 +282,7 @@
     <string name="most_views">再生回数が多い</string>
     <string name="backup_restore">バックアップと復元</string>
     <string name="backup">バックアップ</string>
-    <string name="picture_in_picture">ピクチャインピクチャー</string>
+    <string name="picture_in_picture">ピクチャインピクチャ</string>
     <string name="player_resize_mode">リサイズ方法</string>
     <string name="maximum_image_cache">最大画像キャッシュサイズ</string>
     <string name="copied_to_clipboard">クリップボードにコピーしました</string>
@@ -535,4 +535,9 @@
     <string name="external_player">別の再生プレイヤー</string>
     <string name="show_updates">最新版を自動で確認</string>
     <string name="albums">アルバム</string>
+    <string name="thumbnail_time">サムネイルの時間</string>
+    <string name="contribute_to_dearrow">DeArrow に貢献</string>
+    <string name="title">題名</string>
+    <string name="import_temp_playlist_summary">次の名前の新しい再生リストを作成しますか？「%1$s」%2$d 本の動画が含まれます。</string>
+    <string name="import_temp_playlist">一時的な再生リストをインポートしますか？</string>
 </resources>
