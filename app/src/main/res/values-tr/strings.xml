@@ -540,4 +540,7 @@
     <string name="albums">Albümler</string>
     <string name="import_temp_playlist">Geçici oynatma listesi içe aktarılsın mı?</string>
     <string name="import_temp_playlist_summary">\'%1$s\' adında yeni bir oynatma listesi oluşturmak istiyor musunuz? Oynatma listesinde %2$d video olacak.</string>
+    <string name="contribute_to_dearrow">DeArrow\'a katkıda bulunun</string>
+    <string name="title">Başlık</string>
+    <string name="thumbnail_time">Küçük resim zamanı</string>
 </resources>
