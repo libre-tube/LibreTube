@@ -540,4 +540,7 @@
     <string name="albums">Albums</string>
     <string name="import_temp_playlist">Tĳdelĳke afspeel­lĳst importeren?</string>
     <string name="import_temp_playlist_summary">Wilt u een nieuwe afspeel­lĳst maken met de naam ‘%1$s’? Deze bevat %2$d video\'s.</string>
+    <string name="thumbnail_time">Miniatuur­tĳd</string>
+    <string name="title">Titel</string>
+    <string name="contribute_to_dearrow">Bĳdragen aan DeArrow</string>
 </resources>
