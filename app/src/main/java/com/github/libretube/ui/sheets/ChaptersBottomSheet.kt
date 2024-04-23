@@ -7,6 +7,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.media3.common.util.UnstableApi
@@ -39,11 +40,7 @@ class ChaptersBottomSheet : UndimmedBottomSheet() {
             val binding = _binding ?: return
             handler.postDelayed(this, 200)
 
-            val player = playerViewModel.player ?: return
-            val currentIndex = PlayerHelper.getCurrentChapterIndex(
-                player.currentPosition,
-                playerViewModel.chapters
-            ) ?: return
+            val currentIndex = getCurrentIndex() ?: return
 
             val adapter = binding.optionsRecycler.adapter as ChaptersAdapter
             adapter.updateSelectedPosition(currentIndex)
@@ -61,6 +58,17 @@ class ChaptersBottomSheet : UndimmedBottomSheet() {
             }
         binding.optionsRecycler.adapter = adapter
 
+        binding.optionsRecycler.viewTreeObserver.addOnGlobalLayoutListener(
+            object : ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    val currentIndex = getCurrentIndex() ?: return
+                    binding.optionsRecycler.scrollToPosition(currentIndex)
+
+                    binding.optionsRecycler.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                }
+            }
+        )
+
         binding.bottomSheetTitle.text = context?.getString(R.string.chapters)
         binding.bottomSheetTitleLayout.isVisible = true
 
@@ -70,6 +78,15 @@ class ChaptersBottomSheet : UndimmedBottomSheet() {
         }
 
         updatePosition.run()
+    }
+
+    private fun getCurrentIndex(): Int? {
+        val player = playerViewModel.player ?: return null
+
+        return PlayerHelper.getCurrentChapterIndex(
+            player.currentPosition,
+            playerViewModel.chapters
+        )
     }
 
     override fun getSheetMaxHeightPx() = playerViewModel.maxSheetHeightPx
