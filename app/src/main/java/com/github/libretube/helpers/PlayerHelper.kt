@@ -1,14 +1,15 @@
 package com.github.libretube.helpers
 
 import android.app.Activity
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.util.Base64
+import android.util.Log
 import android.view.accessibility.CaptioningManager
 import android.widget.Toast
+import androidx.annotation.OptIn
 import androidx.annotation.StringRes
 import androidx.core.app.PendingIntentCompat
 import androidx.core.app.RemoteActionCompat
@@ -19,7 +20,9 @@ import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
 import androidx.media3.common.PlaybackParameters
 import androidx.media3.common.Player
+import androidx.media3.common.TrackSelectionOverride
 import androidx.media3.common.Tracks
+import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.datasource.cronet.CronetDataSource
 import androidx.media3.exoplayer.DefaultLoadControl
@@ -45,14 +48,14 @@ import com.github.libretube.extensions.updateParameters
 import com.github.libretube.obj.VideoStats
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
-import java.util.Locale
-import java.util.concurrent.Executors
-import kotlin.math.absoluteValue
-import kotlin.math.roundToInt
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.util.Locale
+import java.util.concurrent.Executors
+import kotlin.math.absoluteValue
+import kotlin.math.roundToInt
 
 object PlayerHelper {
     private const val ACTION_MEDIA_CONTROL = "media_control"
@@ -99,7 +102,7 @@ object PlayerHelper {
     /**
      * Get the system's default captions style
      */
-    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
+    @OptIn(androidx.media3.common.util.UnstableApi::class)
     fun getCaptionStyle(context: Context): CaptionStyleCompat {
         val captioningManager = context.getSystemService<CaptioningManager>()!!
         return if (!captioningManager.isEnabled) {
@@ -339,15 +342,15 @@ object PlayerHelper {
 
     val playAutomatically: Boolean
         get() = PreferenceHelper.getBoolean(
-                PreferenceKeys.PLAY_AUTOMATICALLY,
-                true
-            )
+            PreferenceKeys.PLAY_AUTOMATICALLY,
+            true
+        )
 
     val disablePipedProxy: Boolean
         get() = PreferenceHelper.getBoolean(
-                PreferenceKeys.DISABLE_VIDEO_IMAGE_PROXY,
-                false
-            )
+            PreferenceKeys.DISABLE_VIDEO_IMAGE_PROXY,
+            false
+        )
 
     fun shouldPlayNextVideo(isPlaylist: Boolean = false): Boolean {
         // if there is no next video, it obviously should not be played
@@ -356,11 +359,11 @@ object PlayerHelper {
         }
 
         return autoPlayEnabled || (
-            isPlaylist && PreferenceHelper.getBoolean(
-                PreferenceKeys.AUTOPLAY_PLAYLISTS,
-                false
-            )
-            )
+                isPlaylist && PreferenceHelper.getBoolean(
+                    PreferenceKeys.AUTOPLAY_PLAYLISTS,
+                    false
+                )
+                )
     }
 
     private val handleAudioFocus
@@ -382,19 +385,44 @@ object PlayerHelper {
             .toIntOrNull()
     }
 
-    /**
-     * Apply the preferred audio quality: auto or worst
-     */
-    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
-    fun applyPreferredAudioQuality(context: Context, trackSelector: DefaultTrackSelector) {
+    @OptIn(UnstableApi::class)
+    fun setPreferredAudioQuality(
+        context: Context,
+        player: Player,
+        trackSelector: DefaultTrackSelector
+    ) {
         val prefKey = if (NetworkHelper.isNetworkMetered(context)) {
             PreferenceKeys.PLAYER_AUDIO_QUALITY_MOBILE
         } else {
             PreferenceKeys.PLAYER_AUDIO_QUALITY
         }
-        when (PreferenceHelper.getString(prefKey, "auto")) {
-            "worst" -> trackSelector.updateParameters {
-                setMaxAudioBitrate(1)
+
+        val qualityPref = PreferenceHelper.getString(prefKey, "auto")
+        if (qualityPref == "auto") return
+
+        // multiple groups due to different possible audio languages
+        val audioTrackGroups = player.currentTracks.groups
+            .filter { it.type == C.TRACK_TYPE_AUDIO }
+
+        for (audioTrackGroup in audioTrackGroups) {
+            // find the best audio bitrate
+            val streams = (0 until audioTrackGroup.length).map { index ->
+                index to audioTrackGroup.getTrackFormat(index).bitrate
+            }
+
+            // if no bitrate info is available, fallback to the
+            // - first stream for lowest quality
+            // - last stream for highest quality
+            val streamIndex = if (qualityPref == "best") {
+                streams.maxByOrNull { it.second }?.takeIf { it.second != -1 }?.first
+                    ?: (streams.size - 1)
+            } else {
+                streams.minByOrNull { it.second }?.takeIf { it.second != -1 }?.first ?: 0
+            }
+
+            trackSelector.updateParameters {
+                val override = TrackSelectionOverride(audioTrackGroup.mediaTrackGroup, streamIndex)
+                setOverrideForType(override)
             }
         }
     }
@@ -412,7 +440,8 @@ object PlayerHelper {
         val intent = Intent(getIntentActionName(activity))
             .setPackage(activity.packageName)
             .putExtra(CONTROL_TYPE, event)
-        val pendingIntent = PendingIntentCompat.getBroadcast(activity, event.ordinal, intent, 0, false)!!
+        val pendingIntent =
+            PendingIntentCompat.getBroadcast(activity, event.ordinal, intent, 0, false)!!
 
         val text = activity.getString(title)
         val icon = IconCompat.createWithResource(activity, id)
@@ -468,7 +497,7 @@ object PlayerHelper {
     /**
      * Create a basic player, that is used for all types of playback situations inside the app
      */
-    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
+    @OptIn(androidx.media3.common.util.UnstableApi::class)
     fun createPlayer(
         context: Context,
         trackSelector: DefaultTrackSelector,
@@ -501,7 +530,7 @@ object PlayerHelper {
     /**
      * Get the load controls for the player (buffering, etc)
      */
-    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
+    @OptIn(androidx.media3.common.util.UnstableApi::class)
     fun getLoadControl(): LoadControl {
         return DefaultLoadControl.Builder()
             // cache the last three minutes
@@ -518,7 +547,7 @@ object PlayerHelper {
     /**
      * Load playback parameters such as speed and skip silence
      */
-    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
+    @OptIn(androidx.media3.common.util.UnstableApi::class)
     fun ExoPlayer.loadPlaybackParams(isBackgroundMode: Boolean = false): ExoPlayer {
         skipSilenceEnabled = skipSilence
         val speed = if (isBackgroundMode) backgroundSpeed else playbackSpeed
@@ -767,12 +796,12 @@ object PlayerHelper {
      */
     fun haveAudioTrackRoleFlagSet(@C.RoleFlags roleFlags: Int): Boolean {
         return isFlagSet(roleFlags, C.ROLE_FLAG_DESCRIBES_VIDEO) ||
-            isFlagSet(roleFlags, C.ROLE_FLAG_DUB) ||
-            isFlagSet(roleFlags, C.ROLE_FLAG_MAIN) ||
-            isFlagSet(roleFlags, C.ROLE_FLAG_ALTERNATE)
+                isFlagSet(roleFlags, C.ROLE_FLAG_DUB) ||
+                isFlagSet(roleFlags, C.ROLE_FLAG_MAIN) ||
+                isFlagSet(roleFlags, C.ROLE_FLAG_ALTERNATE)
     }
 
-    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
+    @OptIn(androidx.media3.common.util.UnstableApi::class)
     fun getVideoStats(player: ExoPlayer, videoId: String): VideoStats {
         val videoInfo = "${player.videoFormat?.codecs.orEmpty()} ${
             TextUtils.formatBitrate(
@@ -812,12 +841,12 @@ object PlayerHelper {
             }
 
             PlayerEvent.Forward -> {
-                player.seekBy(PlayerHelper.seekIncrement)
+                player.seekBy(seekIncrement)
                 true
             }
 
             PlayerEvent.Rewind -> {
-                player.seekBy(-PlayerHelper.seekIncrement)
+                player.seekBy(-seekIncrement)
                 true
             }
 
