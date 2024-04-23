@@ -42,7 +42,7 @@
     <string name="addToPlaylist">Добавить в плейлист</string>
     <string name="success">Готово.</string>
     <string name="fail">Ошибка :(</string>
-    <string name="about">О приложении</string>
+    <string name="about">О LibreTube</string>
     <string name="subscriptions">Подписки</string>
     <string name="library">Библиотека</string>
     <string name="videos">Видео</string>
@@ -75,7 +75,7 @@
     <string name="sponsorblock_summary">Используется API https://sponsor.ajay.app/</string>
     <string name="segment_skipped">Пропущен сегмент</string>
     <string name="category_interaction">Напоминание о реакции</string>
-    <string name="category_interaction_summary">Короткие просьбы поставить лайк, подписаться, включить уведомления посреди видео. Если сегмент длинный или о чем-то конкретном, он должен быть указан как самореклама</string>
+    <string name="category_interaction_summary">Короткие просьбы поставить лайк, подписаться, включить уведомления посреди видео. Если сегмент длинный или о чём-то конкретном, он должен быть указан как самореклама</string>
     <string name="category_outro">Конечная заставка и титры</string>
     <string name="category_segments">Сегменты</string>
     <string name="category_sponsor">Спонсор</string>
