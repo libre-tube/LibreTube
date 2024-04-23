@@ -234,6 +234,7 @@
     <string name="playerAudioFormat">Audio format for player</string>
     <string name="playerAudioQuality">Audio quality</string>
     <string name="worst_quality">Worst</string>
+    <string name="best_quality">Best</string>
     <string name="default_subtitle_language">Subtitle language</string>
     <string name="notifications">Notifications</string>
     <string name="notify_new_streams">Show notifications for new streams</string>

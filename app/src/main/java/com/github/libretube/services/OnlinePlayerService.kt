@@ -80,6 +80,7 @@ class OnlinePlayerService : LifecycleService() {
      * The [ExoPlayer] player. Followed tutorial [here](https://developer.android.com/codelabs/exoplayer-intro)
      */
     var player: ExoPlayer? = null
+    private var trackSelector: DefaultTrackSelector? = null
     private var isTransitioning = true
 
     /**
@@ -161,6 +162,14 @@ class OnlinePlayerService : LifecycleService() {
                     error.localizedMessage,
                     Toast.LENGTH_SHORT
                 ).show()
+            }
+        }
+
+        override fun onEvents(player: Player, events: Player.Events) {
+            super.onEvents(player, events)
+
+            if (events.contains(Player.EVENT_TRACKS_CHANGED)) {
+                PlayerHelper.setPreferredAudioQuality(this@OnlinePlayerService, player, trackSelector ?: return)
             }
         }
     }
@@ -321,13 +330,12 @@ class OnlinePlayerService : LifecycleService() {
     private fun initializePlayer() {
         if (player != null) return
 
-        val trackSelector = DefaultTrackSelector(this)
-        PlayerHelper.applyPreferredAudioQuality(this, trackSelector)
-        trackSelector.updateParameters {
+        trackSelector = DefaultTrackSelector(this)
+        trackSelector!!.updateParameters {
             setTrackTypeDisabled(C.TRACK_TYPE_VIDEO, true)
         }
 
-        player = PlayerHelper.createPlayer(this, trackSelector, true)
+        player = PlayerHelper.createPlayer(this, trackSelector!!, true)
         // prevent android from putting LibreTube to sleep when locked
         player!!.setWakeMode(WAKE_MODE_NETWORK)
 

@@ -265,11 +265,13 @@
     <string-array name="audioQuality">
         <item>@string/auto</item>
         <item>@string/worst_quality</item>
+        <item>@string/best_quality</item>
     </string-array>
 
     <string-array name="audioQualityValues">
         <item>auto</item>
         <item>worst</item>
+        <item>best</item>
     </string-array>
 
     <string-array name="audioQualityBitrates">
