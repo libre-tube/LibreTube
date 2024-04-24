@@ -546,4 +546,5 @@
     <string name="title">Titolo</string>
     <string name="contribute_to_dearrow">Contribuisci a DeArrow</string>
     <string name="thumbnail_time">Minuto anteprima</string>
+    <string name="best_quality">Migliore</string>
 </resources>
