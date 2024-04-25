@@ -247,7 +247,7 @@
     <string name="resize_mode_fill">Заполнение</string>
     <string name="resize_mode_zoom">Приближение</string>
     <string name="repeat_mode_none">Нет</string>
-    <string name="repeat_mode_current">Текущий</string>
+    <string name="repeat_mode_current">Текущее</string>
     <string name="player_resize_mode">Режим изменения размера</string>
     <string name="maximum_image_cache">Ограничение размера кэша изображений</string>
     <string name="copied_to_clipboard">Скопировано в буфер обмена</string>
