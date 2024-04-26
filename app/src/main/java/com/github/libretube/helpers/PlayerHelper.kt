@@ -520,7 +520,6 @@ object PlayerHelper {
             .setHandleAudioBecomingNoisy(true)
             .setLoadControl(getLoadControl())
             .setAudioAttributes(audioAttributes, handleAudioFocus)
-            .setUsePlatformDiagnostics(false)
             .build()
             .apply {
                 loadPlaybackParams(isBackgroundMode)
