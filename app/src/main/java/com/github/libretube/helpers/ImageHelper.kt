@@ -17,6 +17,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toAndroidUri
 import com.github.libretube.extensions.toAndroidUriOrNull
 import com.github.libretube.util.DataSaverMode
+import com.google.net.cronet.okhttptransport.CronetInterceptor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
@@ -36,6 +37,7 @@ object ImageHelper {
         val maxCacheSize = PreferenceHelper.getString(PreferenceKeys.MAX_IMAGE_CACHE, "128")
 
         val httpClient = OkHttpClient().newBuilder()
+            .addInterceptor(CronetInterceptor.newBuilder(CronetHelper.cronetEngine).build())
 
         if (BuildConfig.DEBUG) {
             val loggingInterceptor = HttpLoggingInterceptor().apply {
