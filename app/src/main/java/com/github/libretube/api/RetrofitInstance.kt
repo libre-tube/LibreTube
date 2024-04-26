@@ -3,6 +3,7 @@ package com.github.libretube.api
 import com.github.libretube.BuildConfig
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.helpers.PreferenceHelper
+import com.google.net.cronet.okhttptransport.CronetInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -24,6 +25,7 @@ object RetrofitInstance {
                 PreferenceKeys.AUTH_INSTANCE,
                 PIPED_API_URL
             )
+
             false -> apiUrl
         }
 
@@ -65,6 +67,7 @@ object RetrofitInstance {
 
     private fun buildClient(): OkHttpClient {
         val httpClient = OkHttpClient().newBuilder()
+            .addInterceptor(CronetInterceptor.newBuilder(CronetHelper.cronetEngine).build())
 
         if (BuildConfig.DEBUG) {
             val loggingInterceptor = HttpLoggingInterceptor().apply {
