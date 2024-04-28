@@ -227,7 +227,7 @@
     <string name="share_with_time">Поделиться с тайм-кодом</string>
     <string name="playingOnBackground">Воспроизведение в фоновом режиме…</string>
     <string name="playerAudioFormat">Аудио формат для проигрывателя</string>
-    <string name="worst_quality">Самое низкое</string>
+    <string name="worst_quality">Наихудшее</string>
     <string name="export_subscriptions">Экспортировать подписки</string>
     <string name="skip_buttons">Кнопки перехода</string>
     <string name="background_mode">Фоновый режим</string>
@@ -247,7 +247,7 @@
     <string name="resize_mode_fill">Заполнение</string>
     <string name="resize_mode_zoom">Приближение</string>
     <string name="repeat_mode_none">Нет</string>
-    <string name="repeat_mode_current">Текущий</string>
+    <string name="repeat_mode_current">Текущее</string>
     <string name="player_resize_mode">Режим изменения размера</string>
     <string name="maximum_image_cache">Ограничение размера кэша изображений</string>
     <string name="copied_to_clipboard">Скопировано в буфер обмена</string>
@@ -545,8 +545,9 @@
     <string name="show_updates">Проверять обновления автоматически</string>
     <string name="albums">Альбомы</string>
     <string name="import_temp_playlist">Импортировать временный плейлист?</string>
-    <string name="import_temp_playlist_summary">Хотите создать новый плейлист с именем «%1$s»? В плейлисте будет %2$d видео.</string>
+    <string name="import_temp_playlist_summary">Хотите создать новый плейлист «%1$s»? В этом плейлисте будет %2$d видео.</string>
     <string name="contribute_to_dearrow">Внести улучшение в DeArrow</string>
     <string name="title">Название</string>
     <string name="thumbnail_time">Показывать время на миниатюре</string>
+    <string name="best_quality">Наилучшее</string>
 </resources>

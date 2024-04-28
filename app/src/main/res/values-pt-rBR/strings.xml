@@ -11,7 +11,7 @@
     <string name="register">Criar conta</string>
     <string name="logout">Sair</string>
     <string name="loggedIn">Sessão iniciada.</string>
-    <string name="loggedout">Sessão encerrada.</string>
+    <string name="loggedout">Sessão finalizada.</string>
     <string name="already_logged_in">Sessão já iniciada. Se preferir, você pode sair da sua conta.</string>
     <string name="instances">Escolher…</string>
     <string name="customInstance">Personalizada</string>
@@ -546,4 +546,5 @@
     <string name="contribute_to_dearrow">Contribuir para o DeArrow</string>
     <string name="thumbnail_time">Tempo da miniatura</string>
     <string name="title">Título</string>
+    <string name="best_quality">Melhor qualidade</string>
 </resources>

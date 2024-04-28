@@ -548,4 +548,6 @@
     <string name="import_temp_playlist_summary">Czy chcesz utworzyć nową playlistę o nazwie „%1$s”? Playlista będzie zawierać %2$d filmów.</string>
     <string name="title">Tytuł</string>
     <string name="contribute_to_dearrow">Przyczyń się do DeArrow</string>
+    <string name="best_quality">Najwyższy</string>
+    <string name="thumbnail_time">Pokaż czas na miniaturze</string>
 </resources>
