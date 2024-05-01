@@ -637,7 +637,7 @@ abstract class CustomExoPlayerView(
         updateTopBarMargin()
 
         // don't add extra padding if there's no cutout and no margin set that would need to be undone
-        if (!(context as BaseActivity).hasCutout && binding.topBar.marginStart == LANDSCAPE_MARGIN_HORIZONTAL_NONE) return
+        if (!activity.hasCutout && binding.topBar.marginStart == LANDSCAPE_MARGIN_HORIZONTAL_NONE) return
 
         // add a margin to the top and the bottom bar in landscape mode for notches
         val isForcedPortrait = activity.requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT

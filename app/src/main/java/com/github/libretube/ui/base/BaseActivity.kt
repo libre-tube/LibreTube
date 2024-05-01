@@ -31,9 +31,7 @@ open class BaseActivity : AppCompatActivity() {
     /**
      * Whether the phone of the user has a cutout like a notch or not
      */
-    val hasCutout by lazy {
-        WindowHelper.hasCutout(window.decorView.rootView)
-    }
+    var hasCutout: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // set the app theme (e.g. Material You)
@@ -48,6 +46,12 @@ open class BaseActivity : AppCompatActivity() {
         LocaleHelper.updateLanguage(this)
 
         requestOrientationChange()
+
+        // wait for the window decor view to be drawn before detecting display cutouts
+        window.decorView.setOnApplyWindowInsetsListener { view, insets ->
+            hasCutout = WindowHelper.hasCutout(view)
+            insets
+        }
 
         super.onCreate(savedInstanceState)
     }
