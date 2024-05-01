@@ -106,8 +106,8 @@
     <string name="clear_customInstances">Очисти додато</string>
     <string name="invalid_url">Унесите исправну URL адресу</string>
     <string name="version">Верзија %1$s</string>
-    <string name="related_streams">Сличан садржај</string>
-    <string name="related_streams_summary">Прикажите сличан садржај уз оно што гледате</string>
+    <string name="related_streams">Сродан садржај</string>
+    <string name="related_streams_summary">Прикажите сродан садржај уз оно што гледате</string>
     <string name="buffering_goal">Предучитавање</string>
     <string name="buffering_goal_summary">Максимална количина секунди видео снимка у баферу</string>
     <string name="playerVideoFormat">Формат видео снимка за плејер</string>
@@ -234,7 +234,7 @@
     <string name="history_size">Максимална величина историје</string>
     <string name="background_mode">Позадински режим</string>
     <string name="unlimited">Неограничено</string>
-    <string name="add_to_queue">Додај у ред чекања</string>
+    <string name="add_to_queue">Додај у редослед</string>
     <string name="misc">Остало</string>
     <string name="take_a_break">Време је за паузу</string>
     <string name="yt_shorts">Shorts</string>
@@ -276,7 +276,7 @@
     <string name="legacy_subscriptions">Застарели приказ праћења</string>
     <string name="audio_video_summary">Квалитет и формат</string>
     <string name="added_to_playlist">Додато на плејлисту %1$s</string>
-    <string name="queue">Ред чекања</string>
+    <string name="queue">Редослед</string>
     <string name="time_code">Временски кôд (секунде)</string>
     <string name="playlistCloned">Плејлиста је клонирана</string>
     <string name="confirm_unsubscribe">Желите ли заиста да прекинете праћење %1$s\?</string>
@@ -348,7 +348,7 @@
     <string name="unknown">Непознато</string>
     <string name="resume">Настави</string>
     <string name="comments_disabled">Аутор је онемогућио коментаре.</string>
-    <string name="queue_insert_related_videos">Убацивање повезаних видео снимака</string>
+    <string name="queue_insert_related_videos">Убацивање сродних видео снимака</string>
     <string name="clear_bookmarks">Очисти обележиваче</string>
     <string name="shuffle">Мешање</string>
     <string name="remove_bookmark">Уклони обележивач</string>
@@ -446,7 +446,7 @@
     <string name="import_subscriptions_from">Увоз праћења из</string>
     <string name="automatic">Аутоматски</string>
     <string name="registration_disabled">Регистрација је онемогућена</string>
-    <string name="tooltip_clear_queue">Очисти ред чекања</string>
+    <string name="tooltip_clear_queue">Очисти редослед</string>
     <string name="sort_by">Сортирање по</string>
     <string name="player_channel_description">Приказује обавештење током пуштања</string>
     <string name="tooltip_scroll_to_top">Иди на врх</string>
@@ -528,11 +528,11 @@
     <string name="change">Промени</string>
     <string name="delete_all">Сва преузимања ће бити избрисана!</string>
     <string name="suggest_change_instance">Учитавање траје више него обично. Размислите о промени инстанце</string>
-    <string name="enqueue_playlist_description">Приказује обавештење када се у ред стављају видео снимци с плејлисте за преузимање.</string>
+    <string name="enqueue_playlist_description">Приказује обавештење када се у редослед стављају видео снимци с плејлисте за преузимање.</string>
     <string name="audio_language">Језик аудио снимка</string>
     <string name="default_language">Подразумевани</string>
     <string name="download_playlist">Преузми плејлисту</string>
-    <string name="enqueueing_playlist_download">Стављање видео снимака у ред за преузимање плејлисте %1$s</string>
+    <string name="enqueueing_playlist_download">Стављање видео снимака у редослед за преузимање плејлисте %1$s</string>
     <string name="download_playlist_note">Изаберите максималан квалитет аудио/видео снимка за преузимање. Наслови ће се преузимати само ако су доступни.</string>
     <string name="also_clear_watch_positions">Такође очисти позиције гледања</string>
     <string name="behavior_when_minimized">Понашање када је минимизирано</string>
