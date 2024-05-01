@@ -32,7 +32,7 @@
     <string name="emptyPlaylistName">ناوی لیستی لێدان نابێ بەتاڵ بێت</string>
     <string name="addToPlaylist">زیادکردن بۆ لیستی لێدان</string>
     <string name="server_error">کێشەیەک هەیە لە سێرڤەردا، نمونەیەکی تر تاقی بکەرەوە.</string>
-    <string name="grid">شێوازی ستوونی</string>
+    <string name="grid">ستوونەکانی گرید (پۆرترەیت)</string>
     <string name="emptyList">هیچ لیستێک بوونی نییە.</string>
     <string name="areYouSure">دڵنیاییت لە سڕینەوەی لیستی لێدان؟</string>
     <string name="defres">ڕوونی ڤیدیۆ</string>
@@ -138,7 +138,7 @@
     <string name="music_videos">ڤیدیۆکانی یوتوب میوزیک</string>
     <string name="music_albums">ئەلبومەکانی یوتوب میوزیک</string>
     <string name="music_playlists">لیستی لێدانەکانی یوتوب میوزیک</string>
-    <string name="update_available">وەشانی %1$s بەردەستە</string>
+    <string name="update_available">نوێکردنەوە بەردەستە</string>
     <string name="update_available_text">وەشانی نوێ بەردەستە، پەنجەی پێدابنێ بۆ کردنەوەی بەشی داگرتن.</string>
     <string name="downloads">داگرتنەکان</string>
     <string name="website">ماڵپەڕ</string>
@@ -343,7 +343,7 @@
     <string name="proceed">بەردوامبوون</string>
     <string name="play_latest_videos">لێدانی دوایین ڤیدیۆکان</string>
     <string name="nothing_selected">هیچ شتێک دیارینەکراوە!</string>
-    <string name="hide_watched_from_feed">شاردنەوەی ڤیدیۆ بینراوەکان لەبەشی سەرەکی</string>
+    <string name="hide_watched_from_feed">شاردنەوەی ڤیدیۆ بینراوەکان</string>
     <string name="faq">کراوە بە کوردی لەلایەن: گۆران غەریب</string>
     <string name="custom_playback_speed">خێرایی تایبەت</string>
     <string name="playing_next">ڤیدیۆیی دواتر لێدەدەرێت لەدوای %1$s</string>
@@ -359,7 +359,7 @@
     <string name="fullscreen_gestures">کردن/لابردنی ئاماژەکانی دۆخی پڕ بەشاشە</string>
     <string name="go_to_video">چوون بۆ ڤیدیۆ</string>
     <string name="disable_proxy">ناچالاککردنی پرۆکسی Pipe</string>
-    <string name="disable_proxy_summary">هێنانی ڤیدیۆ و وێنەکان ڕاستەوخۆ لە سێرڤەرەکانی یوتوبەوە، تەنها کاتێ ئەمە کارابکە کە VPN بەکاربهێنیت!</string>
+    <string name="disable_proxy_summary">هێنانی ڤیدیۆ و وێنەکان ڕاستەوخۆ لە سێرڤەرەکانی یوتوبەوە. ئەمە تەنها کاتێک کارا بکە کە هەمیشە VPN بەکاربهێنیت</string>
     <plurals name="years_ago">
         <item quantity="one">%d ساڵ لەمەوپێس</item>
         <item quantity="other">%d ساڵ لەمەوپێش</item>
@@ -392,7 +392,7 @@
     <string name="channel_groups">گرووپی کەناڵەکان</string>
     <string name="new_group">نوێ</string>
     <string name="group_name">ناوی گرووپ</string>
-    <string name="swipe_controls_summary">بەکارهێنانی ئاماژەکان بۆ زیادکردن و کەمکردنەوەی ڕێژەی دەنگ و ڕووناکی شاشە</string>
+    <string name="swipe_controls_summary">سوایپ بکە بۆ زیادکردن و کەمکردنەوەی ڕێژەی دەنگ و ڕووناکی لە دۆخی پڕی ڕوونما</string>
     <string name="pinch_control">ئاماژەی بچووککردنەوە</string>
     <string name="pinch_control_summary">بەکارهێنانی ئاماژەی بچووککردنەوە بۆ هێنانەپێش/دوورخستنەوە</string>
     <string name="alternative_pip_controls">دوگمە جێگرەوەکانی PiP</string>
