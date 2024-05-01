@@ -354,6 +354,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
     }
 
+    private val lockedOrientations = listOf(
+        ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT,
+        ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val playerData = requireArguments().parcelable<PlayerData>(IntentData.playerData)!!
@@ -715,8 +720,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         openOrCloseFullscreenDialog(false)
         updateResolutionOnFullscreenChange(false)
-
-        restartActivityIfNeeded()
 
         binding.player.updateMarginsByFullscreenMode()
 
@@ -1599,12 +1602,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      * If true, the activity will be automatically restarted
      */
     private fun restartActivityIfNeeded() {
-        val lockedOrientations =
-            listOf(
-                ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT,
-                ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-            )
-        if (mainActivity.screenOrientationPref in lockedOrientations) return
+        if (mainActivity.screenOrientationPref in lockedOrientations || viewModel.isOrientationChangeInProgress) return
 
         val orientation = resources.configuration.orientation
         if (viewModel.isFullscreen.value != true && orientation != playerLayoutOrientation) {
