@@ -1,6 +1,6 @@
 [versions]
 appcompat = "1.6.1"
-core = "1.13.0"
+core = "1.13.1"
 gradle = "8.3.1"
 kotlin = "1.9.23"
 ksp = "1.9.23-1.0.20"
