@@ -92,7 +92,7 @@
     <string name="category_interaction">Rappel d\'interaction</string>
     <string name="color_purple">Mauve plaisant</string>
     <string name="color_blue">Bleu béat</string>
-    <string name="color_accent">Accents</string>
+    <string name="color_accent">Thème de couleurs</string>
     <string name="color_red">Rouge reposant</string>
     <string name="color_yellow">Jaune vif</string>
     <string name="material_you">Material You</string>
@@ -104,13 +104,13 @@
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Lire en arrière-plan</string>
-    <string name="advanced_summary">Téléchargements, et réinitialisation</string>
+    <string name="advanced_summary">Téléchargements et réinitialisation</string>
     <string name="update_available">Mise à jour disponible</string>
     <string name="update_available_text">Nouvelle mise à jour disponible. Cliquez pour ouvrir la page des versions sur GitHub.</string>
     <string name="appearance">Apparence</string>
     <string name="downloads">Téléchargements</string>
     <string name="update_summary">Vérifier les mises à jour</string>
-    <string name="app_uptodate">Actuellement sur la version la plus récente.</string>
+    <string name="app_uptodate">Vous utilisez la version la plus récente.</string>
     <string name="playback_speed">Vitesse de lecture</string>
     <string name="advanced">Avancé</string>
     <string name="player">Lecteur</string>
@@ -128,7 +128,7 @@
     <string name="instance_name">Nom de l\'instance</string>
     <string name="flameIcon">Flamme volante</string>
     <string name="instance_api_url">URL de l\'API de l\'instance</string>
-    <string name="clear_customInstances">Effacer ajouté</string>
+    <string name="clear_customInstances">Effacer les ajouts</string>
     <string name="addInstance">Ajouter une instance</string>
     <string name="empty_instance">Complétez le nom et l\'URL de l\'API.</string>
     <string name="shapedIcon">Forme idiote</string>
@@ -155,7 +155,7 @@
     <string name="quality">Qualité</string>
     <string name="behavior">Comportement</string>
     <string name="player_summary">Valeurs par défaut et comportement</string>
-    <string name="seek_increment">Rechercher un incrément</string>
+    <string name="seek_increment">Incrément d\'avance / recul</string>
     <string name="reset">Restaurer les valeurs par défaut</string>
     <string name="reset_message">Réinitialiser tous vos paramètres et vous déconnecter \?</string>
     <string name="pauseOnScreenOff">Pause automatique</string>
@@ -165,8 +165,8 @@
     <string name="deleteAccount">Supprimer le compte</string>
     <string name="account">Compte</string>
     <string name="restore">Restaurer</string>
-    <string name="watch_history">Regarder l\'historique</string>
-    <string name="watch_positions">Se souvenir de la position</string>
+    <string name="watch_history">Historique de lecture</string>
+    <string name="watch_positions">Mémoriser la position</string>
     <string name="auth_instance">Instance d\'authentification</string>
     <string name="github">GitHub</string>
     <string name="auth_instance_summary">Utiliser une instance différente pour les appels authentifiés</string>
@@ -182,7 +182,7 @@
     <string name="chapters">Chapitres</string>
     <string name="require_restart_message">Redémarrez l\'application pour appliquer les nouvelles modifications.</string>
     <string name="require_restart">Redémarrage de l\'application nécessaire</string>
-    <string name="navLabelVisibility">Visibilité de l\'étiquette</string>
+    <string name="navLabelVisibility">Affichage de l\'étiquette</string>
     <string name="always">Toujours</string>
     <string name="autoRotatePlayer">Plein écran automatique</string>
     <string name="autoRotatePlayer_summary">Le mode plein écran du lecteur est activé lorsque l\'appareil est tourné</string>
@@ -192,7 +192,7 @@
     <string name="search_history_summary">Se souvenir des recherches</string>
     <string name="watch_history_summary">Garder la trace des vidéos regardées localement</string>
     <string name="history_summary">Historique des vidéos regardées et des recherches</string>
-    <string name="watch_positions_title">Se souvenir de la progression des lectures</string>
+    <string name="watch_positions_title">Mémoriser la position courante des lectures</string>
     <string name="reset_watch_positions">Réinitialiser</string>
     <string name="system_caption_style">Style des légendes du système</string>
     <string name="captions">Légendes</string>
@@ -217,7 +217,7 @@
     <string name="most_recent">Plus récents</string>
     <string name="network_all">Tous</string>
     <string name="network_wifi">Uniquement en Wi-Fi</string>
-    <string name="irreversible">Êtes-vous sûr(e) \? Cela ne peut pas être annulé !</string>
+    <string name="irreversible">Êtes-vous sûr(e) ? Cette action ne peut pas être annulée !</string>
     <string name="history_empty">Aucun historique.</string>
     <string name="notify_new_streams">Afficher des notifications pour les nouveaux flux</string>
     <string name="notify_new_streams_summary">Afficher des notifications pour les nouveaux flux des créateurs que vous suivez</string>
@@ -229,15 +229,15 @@
     <string name="error_occurred">Erreur</string>
     <string name="share_with_time">Partager avec l\'horodatage</string>
     <string name="export_subscriptions">Exporter les abonnements</string>
-    <string name="skip_buttons">Boutons pour passer</string>
+    <string name="skip_buttons">Boutons de saut</string>
     <string name="unlimited">Illimité</string>
     <string name="history_size">Taille maximale de l\'historique</string>
     <string name="background_mode">Mode arrière-plan</string>
-    <string name="add_to_queue">Ajouter à la file</string>
+    <string name="add_to_queue">Ajouter à la file d\'attente</string>
     <string name="yt_shorts">Shorts</string>
     <string name="misc">Divers</string>
     <string name="take_a_break">Il est temps de faire une pause</string>
-    <string name="skip_buttons_summary">Afficher les boutons pour passer à la vidéo suivante ou précédente</string>
+    <string name="skip_buttons_summary">Afficher les boutons pour sauter à la vidéo suivante ou précédente</string>
     <string name="backup_restore">Sauvegarde et restauration</string>
     <string name="backup">Sauvegarder</string>
     <string name="picture_in_picture">Image dans l\'image</string>
@@ -314,7 +314,7 @@
     <string name="swipe_controls">Commandes par balayage</string>
     <string name="swipe_controls_summary">Balayer l\'écran pour ajuster la luminosité et le volume en mode plein écran</string>
     <string name="double_tap_seek_summary">Appuyez deux fois à gauche ou à droite pour avancer ou reculer la position de la lecture</string>
-    <string name="double_tap_seek">Appuyez deux fois pour rechercher</string>
+    <string name="double_tap_seek">Appuyez deux fois pour avancer / reculer</string>
     <string name="all_caught_up_summary">Vous avez vu toutes les nouvelles vidéos</string>
     <string name="theme_monochrome">Monochrome minimaliste</string>
     <string name="nothing_selected">Rien n\'est sélectionné !</string>
@@ -530,7 +530,7 @@
     <string name="default_language">Par défaut</string>
     <string name="delete_all">Tous les téléchargements seront supprimés !</string>
     <string name="download_playlist_note">Veuillez sélectionner la qualité audio/vidéo maximale à télécharger. Les sous-titres ne seront téléchargés que s\'ils sont disponibles.</string>
-    <string name="enqueueing_playlist_download">Mise en file d\'attente des vidéos à télécharger de la liste de lecture %1$s</string>
+    <string name="enqueueing_playlist_download">Mise en file d\'attente des vidéos à télécharger pour la liste de lecture %1$s</string>
     <string name="download_playlist">Télécharger la liste de lecture</string>
     <string name="enqueue_playlist_description">Affiche une notification lors de la mise en file d\'attente des vidéos d\'une liste de lecture à télécharger.</string>
     <string name="audio_language">Langue de l\'audio</string>
@@ -539,8 +539,10 @@
     <string name="external_player">Lecteur externe</string>
     <string name="behavior_when_minimized">Comportement en cas de minimisation</string>
     <string name="gestures">Gestes</string>
-    <string name="show_updates">Vérification automatique des mises à jour</string>
+    <string name="show_updates">Vérifier automatiquement les mises à jour</string>
     <string name="contribute_to_dearrow">Contribuer à DeArrow</string>
     <string name="title">Titre</string>
     <string name="import_temp_playlist">Importer une liste de lecture temporaire ?</string>
+    <string name="albums">Albums</string>
+    <string name="import_temp_playlist_summary">Soyhaitez-vous créer une nouvelle liste de lecture nommée \'%1$s\' ? Cette liste de lecture contiendra %2$d vidéos.</string>
 </resources>
