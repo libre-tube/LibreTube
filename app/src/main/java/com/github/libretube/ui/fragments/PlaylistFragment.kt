@@ -1,7 +1,9 @@
 package com.github.libretube.ui.fragments
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -72,6 +74,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
             field = value
         }
     private val sortOptions by lazy { resources.getStringArray(R.array.playlistSortOptions) }
+    private var recyclerViewState: Parcelable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,6 +108,14 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
         playerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
             binding.playlistRecView.updatePadding(bottom = if (it) 64f.dpToPx() else 0)
         }
+
+        // manually restore the recyclerview state due to https://github.com/material-components/material-components-android/issues/3473
+        binding.playlistRecView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                recyclerViewState = binding.playlistRecView.layoutManager?.onSaveInstanceState()
+            }
+        })
 
         fetchPlaylist()
     }
@@ -401,5 +412,11 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
             playlistAdapter?.updateItems(response.relatedStreams)
             isLoading = false
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        // manually restore the recyclerview state due to https://github.com/material-components/material-components-android/issues/3473
+        binding.playlistRecView.layoutManager?.onRestoreInstanceState(recyclerViewState)
     }
 }

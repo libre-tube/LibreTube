@@ -36,12 +36,12 @@
         android:visibility="gone">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/playlist_app_bar"
+            android:id="@+id/watch_history_app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/playlist_collapsing_tb"
+                android:id="@+id/watch_history_collapsing_tb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_scrollFlags="scroll"

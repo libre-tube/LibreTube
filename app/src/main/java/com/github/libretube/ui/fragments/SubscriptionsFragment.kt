@@ -1,7 +1,9 @@
 package com.github.libretube.ui.fragments
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +18,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Subscription
@@ -71,6 +74,9 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
             PreferenceHelper.putBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, value)
             field = value
         }
+
+    private var subChannelsRecyclerViewState: Parcelable? = null
+    private var subFeedRecyclerViewState: Parcelable? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -176,6 +182,21 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
         binding.editGroups.setOnClickListener {
             ChannelGroupsSheet().show(childFragmentManager, null)
         }
+
+        // manually restore the recyclerview state due to https://github.com/material-components/material-components-android/issues/3473
+        binding.subChannels.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                subChannelsRecyclerViewState = binding.subChannels.layoutManager?.onSaveInstanceState()
+            }
+        })
+
+        binding.subFeed.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                subFeedRecyclerViewState = binding.subFeed.layoutManager?.onSaveInstanceState()
+            }
+        })
 
         lifecycleScope.launch(Dispatchers.IO) {
             val groups = DatabaseHolder.Database.subscriptionGroupsDao().getAll()
@@ -378,5 +399,12 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
 
         val subCount = subscriptions.size.toLong().formatShort()
         binding.toggleSubs.text = "${getString(R.string.subscriptions)} ($subCount)"
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        // manually restore the recyclerview state due to https://github.com/material-components/material-components-android/issues/3473
+        binding.subChannels.layoutManager?.onRestoreInstanceState(subChannelsRecyclerViewState)
+        binding.subFeed.layoutManager?.onRestoreInstanceState(subFeedRecyclerViewState)
     }
 }
