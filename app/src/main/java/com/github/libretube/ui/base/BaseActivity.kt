@@ -39,7 +39,7 @@ open class BaseActivity : AppCompatActivity() {
 
         // Set the navigation and statusBar color if SDK < 23
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            ThemeHelper.setSystemBarColors(this, window, false)
+            ThemeHelper.setSystemBarColors(this, window)
         }
 
         // set the apps language

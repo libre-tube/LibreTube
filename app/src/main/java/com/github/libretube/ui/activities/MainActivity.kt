@@ -50,8 +50,10 @@ import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.models.SearchViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.util.UpdateChecker
+import com.google.android.material.elevation.SurfaceColors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.internal.toHexString
 
 class MainActivity : BaseActivity() {
     lateinit var binding: ActivityMainBinding
@@ -111,7 +113,10 @@ class MainActivity : BaseActivity() {
         }
 
         // sets the color if the navigation bar is visible
-        ThemeHelper.setSystemBarColors(this, window, binding.bottomNav.menu.size() > 0)
+        val bottomNavColor = SurfaceColors.getColorForElevation(this, binding.bottomNav.elevation).takeIf {
+            binding.bottomNav.menu.size() > 0
+        }
+        ThemeHelper.setSystemBarColors(this, window, bottomNavColor)
 
         // set default tab as start fragment
         navController.graph = navController.navInflater.inflate(R.navigation.nav).also {

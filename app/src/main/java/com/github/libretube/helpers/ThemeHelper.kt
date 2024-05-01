@@ -9,6 +9,7 @@ import android.graphics.Color
 import android.os.Build
 import android.text.Spanned
 import android.view.Window
+import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.text.HtmlCompat
@@ -24,24 +25,21 @@ object ThemeHelper {
     /**
      * Set the colors of the system bars (status bat and navigation bar)
      */
-    fun setSystemBarColors(context: Context, window: Window, isBottomNavVisible: Boolean) {
+    fun setSystemBarColors(context: Context, window: Window, @ColorInt bottomNavColor: Int? = null) {
         setStatusBarColor(context, window)
-        setNavigationBarColor(context, window, isBottomNavVisible)
+        setNavigationBarColor(context, window, bottomNavColor)
     }
 
     /**
      * Set the background color of the status bar
      */
     private fun setStatusBarColor(context: Context, window: Window) {
-        window.statusBarColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getThemeColor(context, android.R.attr.colorBackground)
-        } else {
-            if (isDarkMode(context)) {
-                getThemeColor(context, android.R.attr.colorBackground)
-            } else {
+        window.statusBarColor =
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M && !isDarkMode(context)) {
                 getThemeColor(context, com.google.android.material.R.attr.colorOnBackground)
+            } else {
+                getThemeColor(context, android.R.attr.colorBackground)
             }
-        }
     }
 
     /**
@@ -50,17 +48,14 @@ object ThemeHelper {
     private fun setNavigationBarColor(
         context: Context,
         window: Window,
-        isBottomNavVisible: Boolean
+        @ColorInt bottomNavColor: Int?
     ) {
-        window.navigationBarColor = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M && !isDarkMode(context)) {
-            getThemeColor(context, com.google.android.material.R.attr.colorOnBackground)
-        } else {
-            if (isBottomNavVisible) {
-                getThemeColor(context, com.google.android.material.R.attr.colorSurfaceContainer)
+        window.navigationBarColor =
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M && !isDarkMode(context)) {
+                getThemeColor(context, com.google.android.material.R.attr.colorOnBackground)
             } else {
-                getThemeColor(context, android.R.attr.colorBackground)
+                bottomNavColor ?: getThemeColor(context, android.R.attr.colorBackground)
             }
-        }
     }
 
     /**
