@@ -3,6 +3,7 @@ package com.github.libretube.ui.activities
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.Menu
@@ -438,20 +439,29 @@ class MainActivity : BaseActivity() {
                 .show(supportFragmentManager, null)
         }
         intent?.getStringExtra(IntentData.videoId)?.let {
-            // the bottom navigation bar has to be created before opening the video
-            // otherwise the player layout measures aren't calculated properly
-            // and the miniplayer is opened at a closed state and overlapping the navigation bar
-            binding.bottomNav.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-                override fun onGlobalLayout() {
-                    NavigationHelper.navigateVideo(
-                        context = this@MainActivity,
-                        videoUrlOrId = it,
-                        timestamp = intent.getLongExtra(IntentData.timeStamp, 0L)
-                    )
+            // the below explained work around only seems to work on Android 11 and above
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                // the bottom navigation bar has to be created before opening the video
+                // otherwise the player layout measures aren't calculated properly
+                // and the miniplayer is opened at a closed state and overlapping the navigation bar
+                binding.bottomNav.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+                    override fun onGlobalLayout() {
+                        NavigationHelper.navigateVideo(
+                            context = this@MainActivity,
+                            videoUrlOrId = it,
+                            timestamp = intent.getLongExtra(IntentData.timeStamp, 0L)
+                        )
 
-                    binding.bottomNav.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                }
-            })
+                        binding.bottomNav.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    }
+                })
+            } else {
+                NavigationHelper.navigateVideo(
+                    context = this@MainActivity,
+                    videoUrlOrId = it,
+                    timestamp = intent.getLongExtra(IntentData.timeStamp, 0L)
+                )
+            }
         }
         intent?.getStringExtra(IntentData.query)?.let {
             savedSearchQuery = it
