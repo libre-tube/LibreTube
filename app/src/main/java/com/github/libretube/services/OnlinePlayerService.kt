@@ -371,15 +371,8 @@ class OnlinePlayerService : LifecycleService() {
         val streams = streams ?: return
 
         val (uri, mimeType) =
-            if (!PreferenceHelper.getBoolean(
-                    PreferenceKeys.USE_HLS_OVER_DASH,
-                    false,
-                ) && streams.audioStreams.isNotEmpty() && !PlayerHelper.disablePipedProxy
-            ) {
-                PlayerHelper.createDashSource(
-                    streams,
-                    this,
-                ) to MimeTypes.APPLICATION_MPD
+            if (!PlayerHelper.useHlsOverDash && streams.audioStreams.isNotEmpty() && !PlayerHelper.disablePipedProxy) {
+                PlayerHelper.createDashSource(streams, this,) to MimeTypes.APPLICATION_MPD
             } else {
                 ProxyHelper.unwrapStreamUrl(streams.hls.orEmpty())
                     .toUri() to MimeTypes.APPLICATION_M3U8
