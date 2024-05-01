@@ -500,4 +500,26 @@
     <string name="playback_during_call">بەردەوامی کارکردن لەکاتی پەیوەندیدا</string>
     <string name="autoplay_playlists">لێدانی خۆکاری لیستی لێدانەکان</string>
     <string name="same_as_fullscreen">هەروەکو پڕ بە شاشە</string>
+    <string name="segment">مەودا</string>
+    <string name="albums">ئەلبوم</string>
+    <string name="change_instance">گۆڕینی سەرچاوە</string>
+    <string name="suggest_change_instance">بارکردن ماوەیەکی زۆتر لە ئاسایی پێدەچێ، هەوڵبدە سەرچاوەکە بگۆڕیت</string>
+    <string name="segment_submitted">مەودا پێشکەشکرا</string>
+    <string name="best_quality">باشترین</string>
+    <string name="download_playlist">داگرتنی لیستی لێدان</string>
+    <string name="contribute_to_dearrow">بەشداریکردن لە DeArrow</string>
+    <string name="thumbnail_time">کاتی بچوککراوە</string>
+    <string name="downvote">کەمکردن</string>
+    <string name="playback_during_call_summary">تێبینی ئەوە بکە کە ئەمەش کاریگەری لەسەر ئەپەکە دەبێت کە ئیتر مامەڵە لەگەڵ هیچ جۆرە فۆکەسی دەنگییەکدا نەکات</string>
+    <string name="title">ناو</string>
+    <string name="show_updates">پشکنین بۆ نوێکردنەوە بەخۆکاری</string>
+    <string name="rich_caption_rendering_summary">بەکارهێنانی شێوازی وێب بۆ ژێرنووسەکان بۆ زانیاری زیاتر و گونجاوتر</string>
+    <string name="rich_caption_rendering">مەودای ڕوونی ژێرنووس</string>
+    <string name="delete_all">سەرجەم داگیراوەکان ئەسرێنەوە!</string>
+    <string name="grid_landscape">خانەی خشتەیی (دۆخی ئاسۆیی)</string>
+    <string name="upvote">زیادکردن</string>
+    <string name="undo">پێشوو</string>
+    <string name="copy_tooltip">لەبەرگرتنەوە</string>
+    <string name="vote_for_segment">دەنگدان بۆ مەودا</string>
+    <string name="comments_count">لێدوان (%1$s)</string>
 </resources>
