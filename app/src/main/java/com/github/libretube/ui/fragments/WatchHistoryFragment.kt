@@ -1,8 +1,11 @@
 package com.github.libretube.ui.fragments
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.os.Parcelable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,6 +49,7 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment() {
     private val handler = Handler(Looper.getMainLooper())
     private val playerViewModel: PlayerViewModel by activityViewModels()
     private var isLoading = false
+    private var recyclerViewState: Parcelable? = null
 
     private var selectedStatusFilter = PreferenceHelper.getInt(
         PreferenceKeys.SELECTED_HISTORY_STATUS_FILTER,
@@ -142,6 +146,14 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment() {
                 }
             }.show(childFragmentManager)
         }
+
+        // manually restore the recyclerview state due to https://github.com/material-components/material-components-android/issues/3473
+        binding.watchHistoryRecView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                recyclerViewState = binding.watchHistoryRecView.layoutManager?.onSaveInstanceState()
+            }
+        })
 
         showWatchHistory(allHistory)
     }
@@ -254,6 +266,12 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment() {
                 else -> throw IllegalArgumentException()
             }
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        // manually restore the recyclerview state due to https://github.com/material-components/material-components-android/issues/3473
+        binding.watchHistoryRecView.layoutManager?.onRestoreInstanceState(recyclerViewState)
     }
 
     override fun onDestroyView() {
