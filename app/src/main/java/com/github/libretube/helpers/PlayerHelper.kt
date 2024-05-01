@@ -352,6 +352,12 @@ object PlayerHelper {
             false
         )
 
+    val useHlsOverDash: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.USE_HLS_OVER_DASH,
+            true
+        )
+
     fun shouldPlayNextVideo(isPlaylist: Boolean = false): Boolean {
         // if there is no next video, it obviously should not be played
         if (!PlayingQueue.hasNext()) {
