@@ -528,7 +528,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             // set the max height to not cover the currently playing video
             commentsViewModel.handleLink = this::handleLink
             updateMaxSheetHeight()
-            commentsViewModel.videoIdLiveData.postValue(videoId)
+            if (commentsViewModel.videoIdLiveData.value != videoId) {
+                commentsViewModel.videoIdLiveData.postValue(videoId)
+            }
             commentsViewModel.channelAvatar = streams.uploaderAvatar
             CommentsSheet().show(childFragmentManager)
         }

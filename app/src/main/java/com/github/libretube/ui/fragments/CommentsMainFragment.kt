@@ -19,7 +19,9 @@ import com.github.libretube.extensions.formatShort
 import com.github.libretube.ui.adapters.CommentPagingAdapter
 import com.github.libretube.ui.models.CommentsViewModel
 import com.github.libretube.ui.sheets.CommentsSheet
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CommentsMainFragment : Fragment() {
     private var _binding: FragmentCommentsBinding? = null
@@ -74,10 +76,21 @@ class CommentsMainFragment : Fragment() {
         binding.commentsRV.adapter = commentPagingAdapter
 
         viewLifecycleOwner.lifecycleScope.launch {
+            var restoredScrollPosition = false
+
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     commentPagingAdapter.loadStateFlow.collect {
                         binding.progress.isVisible = it.refresh is LoadState.Loading
+
+                        if (!restoredScrollPosition && it.refresh is LoadState.NotLoading) {
+                            viewModel.currentCommentsPosition.value?.let { position ->
+                                withContext(Dispatchers.Main) {
+                                    binding.commentsRV.scrollToPosition(position)
+                                }
+                            }
+                            restoredScrollPosition = true
+                        }
 
                         if (it.append is LoadState.NotLoading && it.append.endOfPaginationReached && commentPagingAdapter.itemCount == 0) {
                             binding.errorTV.text = getString(R.string.no_comments_available)
