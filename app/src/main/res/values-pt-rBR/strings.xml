@@ -236,7 +236,7 @@
     <string name="backup_customInstances">Instâncias personalizadas</string>
     <string name="skip_buttons_summary">Mostrar botões para pular para o próximo vídeo ou anterior</string>
     <string name="skip_buttons">Ativar botões \'Anterior/Próximo\'</string>
-    <string name="background_mode">Modo de segundo plano</string>
+    <string name="background_mode">Modo em segundo plano</string>
     <string name="add_to_queue">Adicionar à fila</string>
     <string name="error_occurred">Erro</string>
     <string name="misc">Outros</string>
