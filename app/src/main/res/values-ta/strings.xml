@@ -11,4 +11,12 @@
     <string name="logout">வெளியேறு</string>
     <string name="share">பகிர்</string>
     <string name="instances">தேர்ந்தெடு…</string>
+    <string name="unsubscribe">சந்தா நீக்கு</string>
+    <string name="subscribe">சந்தாசேர்</string>
+    <string name="cancel">நிராகரி</string>
+    <string name="username">பயனாளி பெயர்</string>
+    <string name="password">கடவுச்சொல்</string>
+    <string name="register">பதிவுசெய்</string>
+    <string name="loggedIn">உள்நுழைந்துவிட்டோம்</string>
+    <string name="loggedout">வெளியேறிவிட்டோம்.</string>
 </resources>
