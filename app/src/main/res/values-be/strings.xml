@@ -138,7 +138,7 @@
     <string name="history_summary">Гісторыя прагляду і пошуку</string>
     <string name="reset_watch_positions">Скінуць</string>
     <string name="captions">Субтытры</string>
-    <string name="none">Адкл.</string>
+    <string name="none">Адсутнічае</string>
     <string name="general">Агульныя</string>
     <string name="general_summary">Мова і рэгіён</string>
     <string name="playingOnBackground">Прайграванне ў фонавым рэжыме…</string>
@@ -247,7 +247,7 @@
     <string name="repeat_mode">Рэжым паўтору</string>
     <string name="resize_mode_zoom">Набліжэнне</string>
     <string name="resize_mode_fit">Падганянне</string>
-    <string name="repeat_mode_none">Няма</string>
+    <string name="repeat_mode_none">Адкл.</string>
     <string name="repeat_mode_current">Ток</string>
     <string name="backup">Рэзервовае капіраванне</string>
     <string name="picture_in_picture">PiP</string>
