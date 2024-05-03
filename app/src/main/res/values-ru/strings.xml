@@ -192,7 +192,7 @@
     <string name="selected">Выбранное</string>
     <string name="watch_positions_title">Сохранённые позиции просмотра</string>
     <string name="system_caption_style">Системный стиль субтитров</string>
-    <string name="none">Нет</string>
+    <string name="none">Отсутствует</string>
     <string name="autoRotatePlayer_summary">Полноэкранный режим при повороте устройства</string>
     <string name="navLabelVisibility">Видимость меток</string>
     <string name="always">Всегда</string>
@@ -246,7 +246,7 @@
     <string name="resize_mode_fit">Подгонка</string>
     <string name="resize_mode_fill">Заполнение</string>
     <string name="resize_mode_zoom">Приближение</string>
-    <string name="repeat_mode_none">Нет</string>
+    <string name="repeat_mode_none">Откл.</string>
     <string name="repeat_mode_current">Текущее</string>
     <string name="player_resize_mode">Режим изменения размера</string>
     <string name="maximum_image_cache">Ограничение размера кэша изображений</string>
