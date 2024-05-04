@@ -212,7 +212,7 @@
     <string name="repeat_mode_current">Поточний</string>
     <string name="picture_in_picture">Картинка в картинці</string>
     <string name="new_videos_badge_summary">Показувати значок із кількістю нових відео, якщо такі є</string>
-    <string name="repeat_mode_none">Немає</string>
+    <string name="repeat_mode_none">Вимкнено</string>
     <string name="skip_segment">Пропустити сегмент</string>
     <string name="local_subscriptions">Локальні підписки</string>
     <string name="preferences">Налаштування</string>
@@ -264,7 +264,7 @@
     <string name="reset_watch_positions">Скинути</string>
     <string name="system_caption_style">Системний стиль субтитрів</string>
     <string name="captions">Субтитри</string>
-    <string name="none">Немає</string>
+    <string name="none">Відсутня</string>
     <string name="general">Загальні</string>
     <string name="instance_frontend_url">URL-адреса сервера</string>
     <string name="audio_video_summary">Якість і формат</string>

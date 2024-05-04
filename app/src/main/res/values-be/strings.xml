@@ -138,13 +138,13 @@
     <string name="history_summary">Гісторыя прагляду і пошуку</string>
     <string name="reset_watch_positions">Скінуць</string>
     <string name="captions">Субтытры</string>
-    <string name="none">Адкл.</string>
+    <string name="none">Адсутнічае</string>
     <string name="general">Агульныя</string>
     <string name="general_summary">Мова і рэгіён</string>
     <string name="playingOnBackground">Прайграванне ў фонавым рэжыме…</string>
     <string name="caption_settings">Налады субтытраў</string>
     <string name="playerAudioQuality">Якасць гуку</string>
-    <string name="worst_quality">Самая нізкая</string>
+    <string name="worst_quality">Найгоршая</string>
     <string name="default_subtitle_language">Мова субтытраў</string>
     <string name="notifications">Апавяшчэнні</string>
     <string name="startpage">Галоўная</string>
@@ -203,7 +203,7 @@
     <string name="color_yellow">Жалейны жоўтыя</string>
     <string name="material_you">Material You</string>
     <string name="app_icon">Значок</string>
-    <string name="enabled">Укл</string>
+    <string name="enabled">Ўкл.</string>
     <string name="update_available">Даступна абнаўленне</string>
     <string name="update_available_text">Даступна новае абнаўленне. Націсніце, каб адкрыць старонку выпускаў GitHub.</string>
     <string name="downloads">Загрузкі</string>
@@ -247,7 +247,7 @@
     <string name="repeat_mode">Рэжым паўтору</string>
     <string name="resize_mode_zoom">Набліжэнне</string>
     <string name="resize_mode_fit">Падганянне</string>
-    <string name="repeat_mode_none">Няма</string>
+    <string name="repeat_mode_none">Адкл.</string>
     <string name="repeat_mode_current">Ток</string>
     <string name="backup">Рэзервовае капіраванне</string>
     <string name="picture_in_picture">PiP</string>
@@ -298,14 +298,14 @@
     <string name="trends">Трэнды</string>
     <string name="bookmark">Закладка</string>
     <string name="clear_bookmarks">Ачысціць закладкі</string>
-    <string name="trending">Што зараз у трэндзе</string>
+    <string name="trending">Што зараз ў трэндзе</string>
     <string name="bookmarks">Закладкі</string>
     <string name="queue_insert_related_videos">Ўставіць звязаныя відэа</string>
     <string name="local_playlists">Лакальныя плэйлісты</string>
     <string name="swipe_controls">Кіраванне жэстамі</string>
     <string name="swipe_controls_summary">Правядзіце пальцам, каб наладзіць яркасць і гучнасць у поўнаэкранным рэжыме</string>
     <string name="volume">Гучнасць</string>
-    <string name="auto">Аўто</string>
+    <string name="auto">Аўта</string>
     <string name="defaults">Па змаўчанні</string>
     <string name="no_comments_available">Гэта відэа не мае каментароў.</string>
     <string name="theme_monochrome">Мінімалістычны манахром</string>
@@ -356,7 +356,7 @@
     <string name="faq">Часта задаюць пытанні</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d відэа</string>
     <string name="new_videos_badge_summary">Паказаць значок з колькасцю новых відэа, калі яны ёсць</string>
-    <string name="change_region">\"Трэнды\" недаступныя для бягучага рэгіёну. Калі ласка, абярыце іншы ў наладах.</string>
+    <string name="change_region">«Трэнды» недаступныя для бягучага рэгіёну. Калі ласка, абярыце іншы ў наладах.</string>
     <string name="filename">Імя файла</string>
     <string name="autoplay_countdown_summary">Паказваць 5-секундны зваротны адлік перад аўтаматычным прайграваннем наступнага відэа</string>
     <string name="lbry_hls_summary">Выкарыстоўвайце LBRY HLS для трансляцыі, калі гэта магчыма</string>
@@ -421,7 +421,7 @@
     <string name="import_playlists_from">Імпартаваць плэйлісты з</string>
     <string name="export_playlists_to">Экспартаваць плэйлісты ў</string>
     <string name="import_format_piped">Piped / LibreTube</string>
-    <string name="home_tab_content">Змесціва ўкладкі \"Галоўная старонка\"</string>
+    <string name="home_tab_content">Змесціва галоўнай ўкладкі</string>
     <string name="mark_as_unwatched">Пазначыць як непрагледжанае</string>
     <string name="welcome">Сардэчна запрашаем на LibreTube</string>
     <string name="choose_instance">Спачатку абярыце сервер!</string>
@@ -513,7 +513,7 @@
     <string name="segment_submitted">Сегмент адпраўлены</string>
     <string name="downvote">Зняважыць</string>
     <string name="repeat_mode_all">Паўтарыце ўсё</string>
-    <string name="successfully_removed_from_playlist">\"%1$s\" быў выдалены з падборкі.</string>
+    <string name="successfully_removed_from_playlist">«%1$s» быў выдалены з падборкі.</string>
     <string name="watched">Прагледжана</string>
     <string name="finished">Скончана</string>
     <string name="no_segments_found">Для гэтага відэа яшчэ няма сегментаў.</string>
@@ -549,5 +549,5 @@
     <string name="contribute_to_dearrow">Ўнесці паляпшэнне ў DeArrow</string>
     <string name="title">Загаловак</string>
     <string name="thumbnail_time">Паказваць час на мініяцюры</string>
-    <string name="best_quality">Самае высокае</string>
+    <string name="best_quality">Найлепшая</string>
 </resources>
