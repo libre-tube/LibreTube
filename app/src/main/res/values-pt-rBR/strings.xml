@@ -543,7 +543,7 @@
     <string name="albums">Álbuns</string>
     <string name="import_temp_playlist">Importar playlist temporária?</string>
     <string name="import_temp_playlist_summary">Deseja criar uma nova playlist chamada \"%1$s\"? A playlist conterá %2$d vídeos.</string>
-    <string name="contribute_to_dearrow">Contribuir para o DeArrow</string>
+    <string name="contribute_to_dearrow">Contribuir para DeArrow</string>
     <string name="thumbnail_time">Tempo da miniatura</string>
     <string name="title">Título</string>
     <string name="best_quality">Melhor qualidade</string>
