@@ -50,7 +50,7 @@ open class BaseActivity : AppCompatActivity() {
         // wait for the window decor view to be drawn before detecting display cutouts
         window.decorView.setOnApplyWindowInsetsListener { view, insets ->
             hasCutout = WindowHelper.hasCutout(view)
-            insets
+            window.decorView.onApplyWindowInsets(insets)
         }
 
         super.onCreate(savedInstanceState)
