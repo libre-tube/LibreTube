@@ -429,4 +429,6 @@
     <string name="group_name_error_empty">이름을 입력하세요</string>
     <string name="fallback_piped_proxy">Piped 프록시로 폴백</string>
     <string name="registration_disabled">가입 비활성화됨</string>
+    <string name="donate">후원하기</string>
+    <string name="comments_count">댓글  (%1$s)</string>
 </resources>
