@@ -37,7 +37,6 @@ object ImageHelper {
         val maxCacheSize = PreferenceHelper.getString(PreferenceKeys.MAX_IMAGE_CACHE, "128")
 
         val httpClient = OkHttpClient().newBuilder()
-            .addInterceptor(CronetInterceptor.newBuilder(CronetHelper.cronetEngine).build())
 
         if (BuildConfig.DEBUG) {
             val loggingInterceptor = HttpLoggingInterceptor().apply {
@@ -46,6 +45,8 @@ object ImageHelper {
 
             httpClient.addInterceptor(loggingInterceptor)
         }
+
+        httpClient.addInterceptor(CronetInterceptor.newBuilder(CronetHelper.cronetEngine).build())
 
         imageLoader = ImageLoader.Builder(context)
             .callFactory(CronetHelper.callFactory)
