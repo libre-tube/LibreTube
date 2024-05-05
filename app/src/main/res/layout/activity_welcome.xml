@@ -70,8 +70,9 @@
         android:id="@+id/instances_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clipToPadding="false"
         android:fadeScrollbars="false"
-        android:paddingBottom="100dp"
+        android:paddingBottom="70dp"
         android:scrollbars="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 

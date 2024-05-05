@@ -1,6 +1,7 @@
 package com.github.libretube.ui.activities
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -79,5 +80,9 @@ class WelcomeActivity : BaseActivity() {
         val mainActivityIntent = Intent(this@WelcomeActivity, MainActivity::class.java)
         startActivity(mainActivityIntent)
         finish()
+    }
+
+    override fun requestOrientationChange() {
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER
     }
 }
