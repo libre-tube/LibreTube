@@ -67,7 +67,6 @@ object RetrofitInstance {
 
     private fun buildClient(): OkHttpClient {
         val httpClient = OkHttpClient().newBuilder()
-            .addInterceptor(CronetInterceptor.newBuilder(CronetHelper.cronetEngine).build())
 
         if (BuildConfig.DEBUG) {
             val loggingInterceptor = HttpLoggingInterceptor().apply {
@@ -76,6 +75,8 @@ object RetrofitInstance {
 
             httpClient.addInterceptor(loggingInterceptor)
         }
+
+        httpClient.addInterceptor(CronetInterceptor.newBuilder(CronetHelper.cronetEngine).build())
 
         return httpClient.build()
     }
