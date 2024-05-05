@@ -59,7 +59,7 @@ open class BaseActivity : AppCompatActivity() {
     /**
      * Rotate the screen according to the app orientation preference
      */
-    fun requestOrientationChange() {
+    open fun requestOrientationChange() {
         requestedOrientation = screenOrientationPref
     }
 }
