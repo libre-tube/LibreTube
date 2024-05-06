@@ -111,7 +111,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                         // get the current fragment
                         val fragment = navHostFragment?.childFragmentManager?.fragments
                             ?.firstOrNull() as? SubscriptionsFragment
-                        fragment?.feedAdapter?.removeItemById(videoId)
+                        fragment?.removeItem(videoId)
                     }
                     setFragmentResult(VIDEO_OPTIONS_SHEET_REQUEST_KEY, bundleOf())
                 }
