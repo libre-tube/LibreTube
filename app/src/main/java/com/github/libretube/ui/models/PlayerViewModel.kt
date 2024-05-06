@@ -60,9 +60,7 @@ class PlayerViewModel : ViewModel() {
             if (isOrientationChangeInProgress && streamsInfo != null) return@withContext streamsInfo to null
 
             streamsInfo = try {
-                RetrofitInstance.api.getStreams(videoId).apply {
-                    relatedStreams = relatedStreams.deArrow()
-                }
+                RetrofitInstance.api.getStreams(videoId).deArrow(videoId)
             } catch (e: IOException) {
                 return@withContext null to context.getString(R.string.unknown_error)
             } catch (e: HttpException) {

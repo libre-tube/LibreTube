@@ -125,6 +125,6 @@ object SubscriptionHelper {
                     subscriptions.joinToString(",")
                 )
             }
-        }.deArrow()
+        }
     }
 }

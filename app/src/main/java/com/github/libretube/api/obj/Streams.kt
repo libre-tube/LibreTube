@@ -14,7 +14,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Streams(
-    val title: String,
+    var title: String,
     val description: String,
 
     @Serializable(SafeInstantSerializer::class)
@@ -24,7 +24,7 @@ data class Streams(
     val uploader: String,
     val uploaderUrl: String,
     val uploaderAvatar: String? = null,
-    val thumbnailUrl: String,
+    var thumbnailUrl: String,
     val category: String,
     val license: String = "YouTube licence",
     val visibility: String = "public",
