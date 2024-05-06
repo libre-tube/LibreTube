@@ -34,28 +34,12 @@ import com.github.libretube.util.TextUtils
 
 class VideosAdapter(
     private val streamItems: MutableList<StreamItem>,
-    private val showAllAtOnce: Boolean = true,
     private val forceMode: LayoutMode = LayoutMode.RESPECT_PREF
 ) : RecyclerView.Adapter<VideosViewHolder>() {
-
-    private var visibleCount = minOf(10, streamItems.size)
-
-    override fun getItemCount(): Int {
-        return when {
-            showAllAtOnce -> streamItems.size
-            else -> minOf(streamItems.size, visibleCount)
-        }
-    }
+    override fun getItemCount() = streamItems.size
 
     override fun getItemViewType(position: Int): Int {
         return if (streamItems[position].type == CAUGHT_UP_STREAM_TYPE) CAUGHT_UP_TYPE else NORMAL_TYPE
-    }
-
-    fun updateItems() {
-        val oldSize = visibleCount
-        visibleCount += minOf(10, streamItems.size - oldSize)
-        if (visibleCount == oldSize) return
-        notifyItemRangeInserted(oldSize, visibleCount)
     }
 
     fun insertItems(newItems: List<StreamItem>) {
@@ -69,7 +53,7 @@ class VideosAdapter(
             it.url?.toID() == videoId
         }.takeIf { it > 0 } ?: return
         streamItems.removeAt(index)
-        visibleCount--
+
         notifyItemRemoved(index)
         notifyItemRangeChanged(index, itemCount)
     }
