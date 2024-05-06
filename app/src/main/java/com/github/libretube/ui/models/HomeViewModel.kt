@@ -85,7 +85,7 @@ class HomeViewModel : ViewModel() {
     private suspend fun loadFeed(subscriptionsViewModel: SubscriptionsViewModel) {
         runSafely(
             onSuccess = { videos -> feed.updateIfChanged(videos) },
-            ioBlock = { tryLoadFeed(subscriptionsViewModel) }
+            ioBlock = { tryLoadFeed(subscriptionsViewModel).deArrow().take(20) }
         )
     }
 
