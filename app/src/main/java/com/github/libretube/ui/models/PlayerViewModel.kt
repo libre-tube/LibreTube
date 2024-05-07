@@ -15,7 +15,9 @@ import com.github.libretube.api.obj.Message
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.api.obj.Subtitle
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.deArrow
 import java.io.IOException
@@ -51,6 +53,7 @@ class PlayerViewModel : ViewModel() {
     val chaptersLiveData = MutableLiveData<List<ChapterSegment>>()
 
     val chapters get() = chaptersLiveData.value.orEmpty()
+    var sponsorBlockEnabled = PlayerHelper.sponsorBlockEnabled
 
     /**
      * @return pair of the stream info and the error message if the request was not successful

@@ -838,6 +838,9 @@ object PlayerHelper {
         }
     }
 
+    /**
+     * Handle basic [PlayerEvent]'s that can be handled by the player itself without context
+     */
     fun handlePlayerAction(player: Player, playerEvent: PlayerEvent): Boolean {
         return when (playerEvent) {
             PlayerEvent.PlayPause -> {

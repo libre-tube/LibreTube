@@ -2,12 +2,15 @@ package com.github.libretube.ui.views
 
 import android.content.Context
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.util.AttributeSet
 import android.view.Window
 import androidx.core.os.bundleOf
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.LifecycleOwner
 import androidx.media3.common.C
+import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.trackselection.TrackSelector
 import com.github.libretube.R
@@ -24,6 +27,7 @@ import com.github.libretube.ui.dialogs.SubmitDeArrowDialog
 import com.github.libretube.ui.dialogs.SubmitSegmentDialog
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.models.PlayerViewModel
+import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.util.PlayingQueue
 
 @UnstableApi
@@ -154,13 +158,38 @@ class OnlinePlayerView(
         playerViewModel.isFullscreen.observe(viewLifecycleOwner) { isFullscreen ->
             WindowHelper.toggleFullscreen(activity.window, isFullscreen)
             updateTopBarMargin()
+
+            binding.fullscreen.isInvisible = PlayerHelper.autoFullscreenEnabled
+            val fullscreenDrawable = if (isFullscreen) R.drawable.ic_fullscreen_exit else R.drawable.ic_fullscreen
+            binding.fullscreen.setImageResource(fullscreenDrawable)
+
+            binding.exoTitle.isInvisible = !isFullscreen
         }
 
+        binding.autoPlay.isVisible = true
         binding.autoPlay.isChecked = PlayerHelper.autoPlayEnabled
 
         binding.autoPlay.setOnCheckedChangeListener { _, isChecked ->
             PlayerHelper.autoPlayEnabled = isChecked
         }
+
+        binding.queueToggle.isVisible = true
+        binding.queueToggle.setOnClickListener {
+            PlayingQueueSheet().show(activity.supportFragmentManager, null)
+        }
+
+        val updateSbImageResource = {
+            binding.sbToggle.setImageResource(
+                if (playerViewModel.sponsorBlockEnabled) R.drawable.ic_sb_enabled else R.drawable.ic_sb_disabled
+            )
+        }
+        updateSbImageResource()
+        binding.sbToggle.setOnClickListener {
+            playerViewModel.sponsorBlockEnabled = !playerViewModel.sponsorBlockEnabled
+            updateSbImageResource()
+        }
+
+        syncQueueButtons()
 
         binding.sbSubmit.isVisible = PreferenceHelper.getBoolean(PreferenceKeys.CONTRIBUTE_TO_SB, false)
         binding.sbSubmit.setOnClickListener {
@@ -187,6 +216,38 @@ class OnlinePlayerView(
             IntentData.duration to duration,
             IntentData.videoId to videoId
         )
+    }
+
+    private fun syncQueueButtons() {
+        if (!PlayerHelper.skipButtonsEnabled) return
+
+        // toggle the visibility of next and prev buttons based on queue and whether the player view is locked
+        binding.skipPrev.isInvisible = !PlayingQueue.hasPrev() || isPlayerLocked
+        binding.skipNext.isInvisible = !PlayingQueue.hasNext() || isPlayerLocked
+
+        handler.postDelayed(this::syncQueueButtons, 100)
+    }
+
+    /**
+     * Update the displayed duration of the video
+     */
+    private fun updateDisplayedDuration() {
+        if (isLive) return
+
+        val duration = player?.duration?.div(1000) ?: return
+        if (duration < 0) return
+
+        val durationWithoutSegments = duration - playerViewModel?.segments.orEmpty().sumOf {
+            val (start, end) = it.segmentStartAndEnd
+            end.toDouble() - start.toDouble()
+        }.toLong()
+        val durationString = DateUtils.formatElapsedTime(duration)
+
+        binding.duration.text = if (durationWithoutSegments < duration) {
+            "$durationString (${DateUtils.formatElapsedTime(durationWithoutSegments)})"
+        } else {
+            durationString
+        }
     }
 
     override fun getWindow(): Window = currentWindow ?: activity.window
@@ -218,5 +279,10 @@ class OnlinePlayerView(
 
     override fun getChapters(): List<ChapterSegment> {
         return playerViewModel?.chapters.orEmpty()
+    }
+
+    override fun onPlaybackEvents(player: Player, events: Player.Events) {
+        super.onPlaybackEvents(player, events)
+        updateDisplayedDuration()
     }
 }
