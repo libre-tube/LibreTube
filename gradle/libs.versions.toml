@@ -2,7 +2,7 @@
 appcompat = "1.6.1"
 core = "1.13.1"
 gradle = "8.4.0"
-kotlin = "1.9.23"
+kotlin = "1.9.24"
 ksp = "1.9.23-1.0.20"
 lifecycle = "2.7.0"
 constraintlayout = "2.1.4"
