@@ -170,20 +170,7 @@ abstract class CustomExoPlayerView(
         player?.addListener(object : Player.Listener {
             override fun onEvents(player: Player, events: Player.Events) {
                 super.onEvents(player, events)
-                if (events.containsAny(
-                        Player.EVENT_PLAYBACK_STATE_CHANGED,
-                        Player.EVENT_IS_PLAYING_CHANGED,
-                        Player.EVENT_PLAY_WHEN_READY_CHANGED
-                    )
-                ) {
-                    binding.playPauseBTN.setImageResource(
-                        PlayerHelper.getPlayPauseActionIcon(player)
-                    )
-
-                    // keep screen on if the video is playing
-                    keepScreenOn = player.isPlaying == true
-                    onPlayerEvent(player, events)
-                }
+                this@CustomExoPlayerView.onPlaybackEvents(player, events)
             }
         })
 
@@ -818,6 +805,23 @@ abstract class CustomExoPlayerView(
         }
 
         return true
+    }
+
+    open fun onPlaybackEvents(player: Player, events: Player.Events) {
+        if (events.containsAny(
+                Player.EVENT_PLAYBACK_STATE_CHANGED,
+                Player.EVENT_IS_PLAYING_CHANGED,
+                Player.EVENT_PLAY_WHEN_READY_CHANGED
+            )
+        ) {
+            binding.playPauseBTN.setImageResource(
+                PlayerHelper.getPlayPauseActionIcon(player)
+            )
+
+            // keep screen on if the video is playing
+            keepScreenOn = player.isPlaying == true
+            onPlayerEvent(player, events)
+        }
     }
 
     open fun minimizeOrExitPlayer() = Unit
