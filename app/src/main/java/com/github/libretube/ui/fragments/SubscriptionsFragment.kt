@@ -212,17 +212,19 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
         if (viewModel.videoFeed.value != null && !isCurrentTabSubChannels && !binding.subRefresh.isRefreshing && hasMore) {
             binding.subRefresh.isRefreshing = true
 
-            lifecycleScope.launch(Dispatchers.IO) {
+            lifecycleScope.launch {
                 val toIndex = minOf(feedAdapter.itemCount + 10, sortedFeed.size)
 
-                val streamItemsToInsert = sortedFeed
+                var streamItemsToInsert = sortedFeed
                     .subList(feedAdapter.itemCount, toIndex)
-                    .deArrow()
+                    .toList()
 
-                withContext(Dispatchers.Main) {
-                    feedAdapter.insertItems(streamItemsToInsert)
-                    binding.subRefresh.isRefreshing = false
+                withContext(Dispatchers.IO) {
+                    runCatching { streamItemsToInsert = streamItemsToInsert.deArrow() }
                 }
+
+                feedAdapter.insertItems(streamItemsToInsert)
+                binding.subRefresh.isRefreshing = false
             }
         }
     }
