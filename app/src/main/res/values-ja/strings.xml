@@ -540,4 +540,5 @@
     <string name="title">題名</string>
     <string name="import_temp_playlist_summary">次の名前の新しい再生リストを作成しますか？「%1$s」%2$d 本の動画が含まれます。</string>
     <string name="import_temp_playlist">一時的な再生リストをインポートしますか？</string>
+    <string name="best_quality">最高</string>
 </resources>
