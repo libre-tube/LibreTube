@@ -368,8 +368,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         keepQueue = playerData.keepQueue
         timeStamp = playerData.timestamp
 
-        playerLayoutOrientation = resources.configuration.orientation
-
         // broadcast receiver for PiP actions
         ContextCompat.registerReceiver(
             requireContext(),
@@ -403,9 +401,16 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         changeOrientationMode()
 
+        playerLayoutOrientation = resources.configuration.orientation
+
         createExoPlayer()
         initializeTransitionLayout()
         initializeOnClickActions()
+
+        if (PlayerHelper.autoFullscreenEnabled && resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            setFullscreen()
+        }
+
         playVideo()
 
         showBottomBar()
@@ -1633,9 +1638,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 // exit fullscreen if not landscape
                 else -> unsetFullscreen()
             }
-        } else {
-            restartActivityIfNeeded()
         }
+
+        restartActivityIfNeeded()
     }
 
     private fun disableController() {
