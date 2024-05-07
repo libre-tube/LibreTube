@@ -16,6 +16,7 @@ object IntentData {
     const val fragmentToOpen = "fragmentToOpen"
     const val comment = "comment"
     const val minimizeByDefault = "minimizeByDefault"
+    const val returnToVideo = "returnToVideo"
     const val query = "query"
     const val playlistDescription = "playlistDescription"
     const val playlistName = "playlistName"
