@@ -13,11 +13,11 @@ import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.extensions.TAG
 import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.util.deArrow
-import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
+import java.io.IOException
 
 class TrendsViewModel : ViewModel() {
     val trendingVideos = MutableLiveData<List<StreamItem>>()

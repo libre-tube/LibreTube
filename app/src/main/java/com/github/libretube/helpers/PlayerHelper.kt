@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.util.Base64
-import android.util.Log
 import android.view.accessibility.CaptioningManager
 import android.widget.Toast
 import androidx.annotation.OptIn

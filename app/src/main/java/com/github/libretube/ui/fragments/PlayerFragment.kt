@@ -69,6 +69,7 @@ import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.extensions.togglePlayPauseState
+import com.github.libretube.extensions.updateIfChanged
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ImageHelper
@@ -525,9 +526,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             // set the max height to not cover the currently playing video
             commentsViewModel.handleLink = this::handleLink
             updateMaxSheetHeight()
-            if (commentsViewModel.videoIdLiveData.value != videoId) {
-                commentsViewModel.videoIdLiveData.postValue(videoId)
-            }
+            commentsViewModel.videoIdLiveData.updateIfChanged(videoId)
             commentsViewModel.channelAvatar = streams.uploaderAvatar
             CommentsSheet().show(childFragmentManager)
         }
