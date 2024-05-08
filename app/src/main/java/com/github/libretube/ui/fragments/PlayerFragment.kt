@@ -783,17 +783,30 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     override fun onDestroy() {
         super.onDestroy()
 
+        saveWatchPosition()
+
+        viewModel.nowPlayingNotification?.destroySelf()
+        viewModel.nowPlayingNotification = null
+        watchPositionTimer.destroy()
+        handler.removeCallbacksAndMessages(null)
+
         if (this::exoPlayer.isInitialized) {
             exoPlayer.removeListener(playerListener)
-
-            // the player could also be a different instance because a new player fragment
-            // got created in the meanwhile
-            if (!viewModel.isOrientationChangeInProgress && viewModel.player == exoPlayer) {
-                viewModel.player = null
-                viewModel.trackSelector = null
-            }
-
             exoPlayer.pause()
+
+            runCatching {
+                // the player could also be a different instance because a new player fragment
+                // got created in the meanwhile
+                if (!viewModel.isOrientationChangeInProgress) {
+                    if (viewModel.player == exoPlayer) {
+                        viewModel.player = null
+                        viewModel.trackSelector = null
+                    }
+
+                    exoPlayer.stop()
+                    exoPlayer.release()
+                }
+            }
 
             if (PlayerHelper.pipEnabled) {
                 // disable the auto PiP mode for SDK >= 32
@@ -802,35 +815,29 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
         }
 
-        handler.removeCallbacksAndMessages(null)
-
         runCatching {
             // unregister the receiver for player actions
             context?.unregisterReceiver(playerActionReceiver)
         }
 
+        // restore the orientation that's used by the main activity
+        (context as MainActivity).requestOrientationChange()
+
         _binding = null
-
-        stopVideoPlay()
-
-        watchPositionTimer.destroy()
     }
 
-    private fun stopVideoPlay() {
-        try {
-            saveWatchPosition()
+    private fun killPlayerFragment() {
+        viewModel.isFullscreen.value = false
+        viewModel.isMiniPlayerVisible.value = false
 
-            viewModel.nowPlayingNotification?.destroySelf()
-            viewModel.nowPlayingNotification = null
+        // dismiss the fullscreen dialog if it's currently visible
+        // otherwise it would stay alive while being detached from this fragment
+        fullscreenDialog.dismiss()
+        binding.player.currentWindow = null
 
-            if (!viewModel.isOrientationChangeInProgress) {
-                exoPlayer.stop()
-                exoPlayer.release()
-            }
-
-            (context as MainActivity).requestOrientationChange()
-        } catch (e: Exception) {
-            e.printStackTrace()
+        binding.playerMotionLayout.transitionToEnd()
+        mainActivity.supportFragmentManager.commit {
+            remove(this@PlayerFragment)
         }
     }
 
@@ -1510,22 +1517,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private fun shouldStartPiP(): Boolean {
         return shouldUsePip() && exoPlayer.isPlaying &&
                 !BackgroundHelper.isBackgroundServiceRunning(requireContext())
-    }
-
-    private fun killPlayerFragment() {
-        stopVideoPlay()
-        viewModel.isFullscreen.value = false
-        viewModel.isMiniPlayerVisible.value = false
-
-        // dismiss the fullscreen dialog if it's currently visible
-        // otherwise it would stay alive while being detached from this fragment
-        fullscreenDialog.dismiss()
-        binding.player.currentWindow = null
-
-        binding.playerMotionLayout.transitionToEnd()
-        mainActivity.supportFragmentManager.commit {
-            remove(this@PlayerFragment)
-        }
     }
 
     /**
