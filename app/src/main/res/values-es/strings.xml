@@ -464,7 +464,7 @@
     <string name="player_channel_name">Servicios del reproductor</string>
     <string name="player_channel_description">Aparece una notificación cuando se está reproduciendo</string>
     <string name="tooltip_sort">Ordenar</string>
-    <string name="tooltip_dismiss">Descartar</string>
+    <string name="tooltip_dismiss">Cancelar</string>
     <string name="tooltip_fullscreen">Pantalla completa</string>
     <string name="tooltip_close">Cerrar</string>
     <string name="tooltip_play">Reproducir</string>
