@@ -53,7 +53,6 @@ import com.github.libretube.util.UpdateChecker
 import com.google.android.material.elevation.SurfaceColors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.internal.toHexString
 
 class MainActivity : BaseActivity() {
     lateinit var binding: ActivityMainBinding

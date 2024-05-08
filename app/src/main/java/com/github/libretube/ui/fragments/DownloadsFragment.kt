@@ -33,12 +33,12 @@ import com.github.libretube.ui.adapters.DownloadsAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlin.io.path.fileSize
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlin.io.path.fileSize
 
 class DownloadsFragment : DynamicLayoutManagerFragment() {
     private var _binding: FragmentDownloadsBinding? = null

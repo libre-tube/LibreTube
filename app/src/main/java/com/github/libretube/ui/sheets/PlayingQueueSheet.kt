@@ -19,7 +19,6 @@ import com.github.libretube.ui.adapters.PlayingQueueAdapter
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.util.PlayingQueue
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.lang.IllegalArgumentException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

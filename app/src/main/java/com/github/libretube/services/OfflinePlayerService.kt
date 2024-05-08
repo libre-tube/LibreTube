@@ -32,10 +32,10 @@ import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PauseableTimer
-import kotlin.io.path.exists
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.io.path.exists
 
 /**
  * A service to play downloaded audio in the background

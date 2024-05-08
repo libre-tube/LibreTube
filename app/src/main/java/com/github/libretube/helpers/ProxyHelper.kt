@@ -3,13 +3,13 @@ package com.github.libretube.helpers
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.PreferenceKeys
-import java.net.HttpURLConnection
-import java.net.URL
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
+import java.net.HttpURLConnection
+import java.net.URL
 
 object ProxyHelper {
     fun fetchProxyUrl() {

@@ -8,7 +8,7 @@ import androidx.core.content.getSystemService
 import androidx.core.os.ConfigurationCompat
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.obj.Country
-import java.util.*
+import java.util.Locale
 
 object LocaleHelper {
     fun getAppLocale(): Locale {

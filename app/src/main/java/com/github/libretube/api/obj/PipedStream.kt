@@ -2,8 +2,8 @@ package com.github.libretube.api.obj
 
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
-import kotlin.io.path.Path
 import kotlinx.serialization.Serializable
+import kotlin.io.path.Path
 
 @Serializable
 data class PipedStream(

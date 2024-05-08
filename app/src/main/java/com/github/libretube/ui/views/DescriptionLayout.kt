@@ -19,9 +19,9 @@ import com.github.libretube.ui.activities.VideoTagsAdapter
 import com.github.libretube.util.HtmlParser
 import com.github.libretube.util.LinkHandler
 import com.github.libretube.util.TextUtils
-import java.util.Locale
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import java.util.Locale
 
 class DescriptionLayout(
     context: Context,

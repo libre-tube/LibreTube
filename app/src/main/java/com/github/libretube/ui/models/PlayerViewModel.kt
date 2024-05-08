@@ -15,16 +15,14 @@ import com.github.libretube.api.obj.Message
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.api.obj.Subtitle
-import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.helpers.PlayerHelper
-import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.deArrow
-import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
+import java.io.IOException
 
 @UnstableApi
 class PlayerViewModel : ViewModel() {
