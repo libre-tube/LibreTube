@@ -826,18 +826,28 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         _binding = null
     }
 
+    /**
+     * Manually kill the player fragment - call instead of using onDestroy directly
+     */
     private fun killPlayerFragment() {
-        viewModel.isFullscreen.value = false
+        binding.playerMotionLayout.transitionToEnd()
+
         viewModel.isMiniPlayerVisible.value = false
 
-        // dismiss the fullscreen dialog if it's currently visible
-        // otherwise it would stay alive while being detached from this fragment
-        fullscreenDialog.dismiss()
-        binding.player.currentWindow = null
+        if (viewModel.isFullscreen.value == true) {
+            unsetFullscreen()
 
-        binding.playerMotionLayout.transitionToEnd()
-        mainActivity.supportFragmentManager.commit {
-            remove(this@PlayerFragment)
+            // wait a short amount of time for the unset fullscreen process to properly finish
+            // (Android animations etc...)
+            handler.postDelayed(100) {
+                mainActivity.supportFragmentManager.commit {
+                    remove(this@PlayerFragment)
+                }
+            }
+        } else {
+            mainActivity.supportFragmentManager.commit {
+                remove(this@PlayerFragment)
+            }
         }
     }
 
