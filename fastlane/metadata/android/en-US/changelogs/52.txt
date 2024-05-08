@@ -1,0 +1,8 @@
+* fix: comments reloading on sheet reopen and scroll position not restored
+* fix: status bar doesn't follow app theme
+* fix: dearrow for playing video and watch history
+* fix: crash when trying to dearrow feed items
+* fix: auto fullscreen causes player layout issues
+* fix: crash when ending player service / fragment
+* fix: enter PiP mode when clicking link in description
+* fix: navigation bar missing when closing player in fullscreen
