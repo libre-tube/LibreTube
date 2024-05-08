@@ -541,4 +541,5 @@
     <string name="external_player">Player extern</string>
     <string name="show_updates">Verifică automat actualizările</string>
     <string name="albums">Albume</string>
+    <string name="best_quality">Cel mai bun</string>
 </resources>
