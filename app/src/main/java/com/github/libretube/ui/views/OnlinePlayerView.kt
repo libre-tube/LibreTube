@@ -2,6 +2,8 @@ package com.github.libretube.ui.views
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.format.DateUtils
 import android.util.AttributeSet
 import android.view.Window
@@ -39,6 +41,8 @@ class OnlinePlayerView(
     private var playerViewModel: PlayerViewModel? = null
     private var trackSelector: TrackSelector? = null
     private var viewLifecycleOwner: LifecycleOwner? = null
+
+    private val handler = Handler(Looper.getMainLooper())
 
     /**
      * The window that needs to be addressed for showing and hiding the system bars
