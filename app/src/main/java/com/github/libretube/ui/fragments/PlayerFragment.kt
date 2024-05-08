@@ -1088,7 +1088,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         if (videoId.isNullOrEmpty()) {
             // not a YouTube video link, thus handle normally
             val intent = Intent(Intent.ACTION_VIEW, uri)
+
+            // start PiP mode if enabled
+            onUserLeaveHint()
             startActivity(intent)
+
             return
         }
 
