@@ -31,7 +31,6 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
-import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.enums.NotificationId
 import com.github.libretube.enums.PlayerEvent
@@ -42,7 +41,6 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.checkForSegments
-import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.parcelable.PlayerData
@@ -372,7 +370,7 @@ class OnlinePlayerService : LifecycleService() {
 
         val (uri, mimeType) =
             if (!PlayerHelper.useHlsOverDash && streams.audioStreams.isNotEmpty() && !PlayerHelper.disablePipedProxy) {
-                PlayerHelper.createDashSource(streams, this,) to MimeTypes.APPLICATION_MPD
+                PlayerHelper.createDashSource(streams, this) to MimeTypes.APPLICATION_MPD
             } else {
                 ProxyHelper.unwrapStreamUrl(streams.hls.orEmpty())
                     .toUri() to MimeTypes.APPLICATION_M3U8
@@ -427,12 +425,17 @@ class OnlinePlayerService : LifecycleService() {
         PlayingQueue.resetToDefaults()
 
         if (this::nowPlayingNotification.isInitialized) nowPlayingNotification.destroySelf()
-
-        player?.stop()
-        player?.release()
-
         watchPositionTimer.destroy()
-        unregisterReceiver(playerActionReceiver)
+        handler.removeCallbacksAndMessages(null)
+
+        runCatching {
+            player?.stop()
+            player?.release()
+        }
+
+        runCatching {
+            unregisterReceiver(playerActionReceiver)
+        }
 
         // called when the user pressed stop in the notification
         // stop the service from being in the foreground and remove the notification

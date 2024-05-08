@@ -300,12 +300,19 @@ class OfflinePlayerActivity : BaseActivity() {
     override fun onDestroy() {
         saveWatchPosition()
 
-        playerViewModel.player = null
-        player.release()
-        watchPositionTimer.destroy()
         nowPlayingNotification?.destroySelf()
+        nowPlayingNotification = null
+        watchPositionTimer.destroy()
 
-        unregisterReceiver(playerActionReceiver)
+        playerViewModel.player = null
+        runCatching {
+            player.stop()
+            player.release()
+        }
+
+        runCatching {
+            unregisterReceiver(playerActionReceiver)
+        }
 
         super.onDestroy()
     }
