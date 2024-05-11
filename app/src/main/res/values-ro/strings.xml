@@ -542,4 +542,9 @@
     <string name="show_updates">Verifică automat actualizările</string>
     <string name="albums">Albume</string>
     <string name="best_quality">Cel mai bun</string>
+    <string name="title">Titlu</string>
+    <string name="thumbnail_time">Timp de miniatură</string>
+    <string name="import_temp_playlist">Importați un playlist temporar?</string>
+    <string name="import_temp_playlist_summary">Vreți să creezi un nou playlist numit \'%1$s\'? Playlist-ul va conține %2$d videoclipuri.</string>
+    <string name="contribute_to_dearrow">Contribuie la DeArrow</string>
 </resources>
