@@ -124,7 +124,7 @@
     <string name="navLabelVisibility">ڕوونی نووسین</string>
     <string name="always">هەمیشە</string>
     <string name="selected">دیاریکراوە</string>
-    <string name="category_preview_summary">بۆ تێپەڕاندنی ئەو بەشانەی کە وردەکاری ناوەڕۆکی داهاتوو دەخەنە ڕوو بەبێ زانیاری پێویست، ئەگەر زیاتر ئەو جۆرە کلیپانە لەخۆ بگرێت کە تەنها لێرەدا دەرەکەون، ئەوا بە ئەگەرێکی زۆرەوە ئەمە بەشێکی هەڵەیە.</string>
+    <string name="category_preview_summary">بۆ تێپەڕاندنی ئەو بەشانەی کە وردەکاری ناوەڕۆکی داهاتوو دەخەنە ڕوو بەبێ زانیاری پێویست، ئەگەر زیاتر ئەو جۆرە کلیپانە لەخۆ بگرێت کە تەنها لێرەدا دەرەکەون، ئەوا بە ئەگەرێکی زۆرەوە ئەمە بەشێکی هەڵەیە</string>
     <string name="appearance_summary">بەدڵی خۆت ڕووکاری بەرنامەکە ڕێکبخە</string>
     <string name="concurrent_downloads">زۆرترین ڕێژەی داگرتن</string>
     <string name="concurrent_downloads_limit_reached">گەیشتە زۆرترین ڕێژەی داگرتنەکان.</string>
@@ -531,4 +531,17 @@
     <string name="audio_language">زمانی دەنگ</string>
     <string name="successfully_removed_from_playlist">\"%1$s\" سەرکەوتووانە لابرا لە لیستی لێدانەکە.</string>
     <string name="remember_playback_speed">خێرایی لێدانت لەبیر بێت</string>
+    <string name="change">گۆڕین</string>
+    <string name="add_to_group">زیادکردن بۆ گرووپ</string>
+    <string name="import_temp_playlist">هێنانی لیستی لێدانە کاتییەکان؟</string>
+    <string name="import_temp_playlist_summary">ئەتەوێ لیستی لێدانێکی نوێ دروست بکەیت بەناوی \'%1$s\'؟ لیستی لێدانەکە %2$d ڤیدیۆ لەخۆدەگرێت.</string>
+    <string name="also_clear_watch_positions">هەروەها شوێنی بینراوەکانیش لابدە</string>
+    <string name="watched">بینراو</string>
+    <string name="start_sleep_timer">چالاککردنی کاتی وەستان</string>
+    <string name="invalid_input">نادروستە</string>
+    <string name="uptime">%.2f%% کاتی ماوە</string>
+    <string name="gestures">ئاماژەکان</string>
+    <string name="disable_sleep_timer">نا چالاککردنی کاتی وەستان</string>
+    <string name="time_in_minutes">ماوە بە خولەک</string>
+    <string name="no_segments_found">هیچ نیشانەکراوێک بەردەست نیە بۆ ئەم ڤیدیۆییە.</string>
 </resources>
