@@ -120,8 +120,9 @@
                         android:padding="10dp" />
 
                     <HorizontalScrollView
+                        android:visibility="gone"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:paddingHorizontal="10dp"
                         android:scrollbars="none">
 
@@ -167,14 +168,27 @@
                 </LinearLayout>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabMode="scrollable"
+                />
 
         </com.google.android.material.appbar.AppBarLayout>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            />
 
-        <androidx.recyclerview.widget.RecyclerView
+       <!-- <androidx.recyclerview.widget.RecyclerView
+            android:visibility="gone"
             android:id="@+id/channel_recView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </com.github.libretube.ui.views.CustomSwipeToRefresh>
