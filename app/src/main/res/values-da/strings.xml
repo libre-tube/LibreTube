@@ -270,7 +270,7 @@
     <string name="sort_by">Sortér efter</string>
     <string name="uploader_name">Uploaderens navn</string>
     <string name="unknown_or_no_audio">ukendt eller ingen lyd</string>
-    <string name="finished">Færdigt</string>
+    <string name="finished">Færdig</string>
     <string name="category_highlight">Vis videoens højdepunkt</string>
     <string name="welcome">Velkommen til LibreTube</string>
     <string name="choose_instance">Vælg venligst en instans først!</string>
@@ -538,4 +538,9 @@
     <string name="show_updates">Tjek for opdateringer automatisk</string>
     <string name="external_player">Ekstern afspiller</string>
     <string name="comments_count">Kommentarer (%1$s)</string>
+    <string name="best_quality">Bedste</string>
+    <string name="contribute_to_dearrow">Bidrag til DeArrow</string>
+    <string name="title">Titel</string>
+    <string name="import_temp_playlist">Importér midlertidig playliste?</string>
+    <string name="import_temp_playlist_summary">Ønsker du at oprette en ny playliste kaldet \'%1$s\'? Playlisten indeholder %2$d videoer.</string>
 </resources>
