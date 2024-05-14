@@ -47,7 +47,7 @@ object PlayingQueue {
         )
     }
 
-    // return the next item, or if repeating enabled, the first one of the queue
+    // return the next item, or if repeating enabled and no video left, the first one of the queue
     fun getNext(): String? {
         val nextItem = queue.getOrNull(currentIndex() + 1)
         if (nextItem != null) return nextItem.url?.toID()
@@ -57,17 +57,14 @@ object PlayingQueue {
         return null
     }
 
-    // return the previous item, or if repeating enabled, the last one of the queue
+    // return the previous item, or if repeating enabled and no video left, the last one of the queue
     fun getPrev(): String? {
-        if (repeatMode != Player.REPEAT_MODE_ONE) {
-            queue.getOrNull(currentIndex() - 1)?.url?.toID()?.let { return it }
-        }
+        val prevItem = queue.getOrNull(currentIndex() - 1)
+        if (prevItem != null) return prevItem.url?.toID()
 
-        return when (repeatMode) {
-            Player.REPEAT_MODE_ALL -> queue.lastOrNull()?.url?.toID()
-            Player.REPEAT_MODE_ONE -> currentStream?.url?.toID()
-            else -> null
-        }
+        if (repeatMode == Player.REPEAT_MODE_ALL) return queue.lastOrNull()?.url?.toID()
+
+        return null
     }
 
     fun hasPrev() = getPrev() != null
