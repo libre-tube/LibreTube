@@ -5,11 +5,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.core.net.toUri
-import com.github.libretube.constants.IntentData
 import com.github.libretube.extensions.TAG
+import com.github.libretube.helpers.IntentHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.ui.base.BaseActivity
-import com.github.libretube.util.TextUtils.toTimeInSeconds
 
 class RouterActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,42 +24,12 @@ class RouterActivity : BaseActivity() {
         }
     }
 
-    /**
-     * Resolve the uri and return a bundle with the arguments
-     */
-    private fun Intent.resolveType(uri: Uri) = apply {
-        val lastSegment = uri.lastPathSegment
-        val secondLastSegment = uri.pathSegments.getOrNull(uri.pathSegments.size - 2)
-        when {
-            lastSegment == "results" -> {
-                putExtra(IntentData.query, uri.getQueryParameter("search_query"))
-            }
-            secondLastSegment == "channel" -> {
-                putExtra(IntentData.channelId, lastSegment)
-            }
-            secondLastSegment == "c" || secondLastSegment == "user" -> {
-                putExtra(IntentData.channelName, lastSegment)
-            }
-            lastSegment == "playlist" -> {
-                putExtra(IntentData.playlistId, uri.getQueryParameter("list"))
-            }
-            lastSegment == "watch_videos" -> {
-                putExtra(IntentData.playlistName, uri.getQueryParameter("title"))
-                val videoIds = uri.getQueryParameter("video_ids")?.split(",")
-                putExtra(IntentData.videoIds, videoIds?.toTypedArray())
-            }
-            else -> {
-                val id = if (lastSegment == "watch") uri.getQueryParameter("v") else lastSegment
-                putExtra(IntentData.videoId, id)
-                putExtra(IntentData.timeStamp, uri.getQueryParameter("t")?.toTimeInSeconds())
-            }
-        }
-    }
-
     private fun handleSendText(uri: Uri) {
         Log.i(TAG(), uri.toString())
 
-        val intent = packageManager.getLaunchIntentForPackage(packageName)!!.resolveType(uri)
+        val intent = packageManager.getLaunchIntentForPackage(packageName)!!.let { intent ->
+            IntentHelper.resolveType(intent, uri)
+        }
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finishAndRemoveTask()

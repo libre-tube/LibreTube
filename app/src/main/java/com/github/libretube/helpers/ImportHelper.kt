@@ -20,10 +20,10 @@ import com.github.libretube.obj.NewPipeSubscriptions
 import com.github.libretube.obj.PipedImportPlaylist
 import com.github.libretube.obj.PipedPlaylistFile
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.util.TextUtils
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
-import java.util.Date
 import java.util.stream.Collectors
 
 object ImportHelper {
@@ -182,7 +182,7 @@ object ImportHelper {
 
                     val playlistName = lines[1].split(",").reversed().getOrNull(2)
                     // the playlist name can be undefined in some cases, e.g. watch later lists
-                    playlist.name = playlistName ?: Date().toString()
+                    playlist.name = playlistName ?: TextUtils.defaultPlaylistName
 
                     // start directly at the beginning if header playlist info such as name is missing
                     val startIndex = if (playlistName == null) {

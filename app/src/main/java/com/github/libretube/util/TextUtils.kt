@@ -14,6 +14,7 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.time.temporal.ChronoUnit
+import java.util.Date
 import kotlin.time.Duration
 import kotlinx.datetime.LocalDate as KotlinLocalDate
 
@@ -32,6 +33,8 @@ object TextUtils {
      * Date time formatter which uses the [FormatStyle.MEDIUM] format style.
      */
     private val MEDIUM_DATE_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
+
+    val defaultPlaylistName get() = Date().toString()
 
     /**
      * Localize the date from a date string, using the medium format.

@@ -112,6 +112,10 @@ object ThemeHelper {
         if (pureThemeEnabled) activity.theme.applyStyle(R.style.Pure, true)
     }
 
+    fun applyDialogActivityTheme(activity: Activity) {
+        activity.theme.applyStyle(R.style.DialogActivity, true)
+    }
+
     /**
      * set the theme mode (light, dark, auto)
      */
