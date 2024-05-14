@@ -1,6 +1,8 @@
 package com.github.libretube.ui.fragments
 
+import android.content.res.Configuration
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +15,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSearchResultBinding
@@ -35,6 +38,8 @@ class SearchResultFragment : DynamicLayoutManagerFragment() {
     private val binding get() = _binding!!
     private val args by navArgs<SearchResultFragmentArgs>()
     private val viewModel by viewModels<SearchResultViewModel>()
+
+    private var recyclerViewState: Parcelable? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -83,6 +88,13 @@ class SearchResultFragment : DynamicLayoutManagerFragment() {
         val searchResultsAdapter = SearchResultsAdapter(timeStamp ?: 0)
         binding.searchRecycler.adapter = searchResultsAdapter
 
+        binding.searchRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                recyclerViewState = binding.searchRecycler.layoutManager?.onSaveInstanceState()
+            }
+        })
+
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 searchResultsAdapter.loadStateFlow.collect {
@@ -110,6 +122,12 @@ class SearchResultFragment : DynamicLayoutManagerFragment() {
                 DatabaseHelper.addToSearchHistory(SearchHistoryItem(query.trim()))
             }
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        // manually restore the recyclerview state due to https://github.com/material-components/material-components-android/issues/3473
+        binding.searchRecycler.layoutManager?.onRestoreInstanceState(recyclerViewState)
     }
 
     override fun onDestroyView() {
