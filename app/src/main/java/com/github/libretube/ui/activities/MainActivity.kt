@@ -112,8 +112,12 @@ class MainActivity : BaseActivity() {
         }
 
         // sets the color if the navigation bar is visible
-        val bottomNavColor = SurfaceColors.getColorForElevation(this, binding.bottomNav.elevation).takeIf {
-            binding.bottomNav.menu.size() > 0
+        val bottomNavColor = if (binding.bottomNav.menu.size() == 0) {
+            null
+        } else if (PreferenceHelper.getBoolean(PreferenceKeys.PURE_THEME, false)) {
+            SurfaceColors.getColorForElevation(this, binding.bottomNav.elevation)
+        } else {
+            ThemeHelper.getThemeColor(this, com.google.android.material.R.attr.colorSurfaceContainer)
         }
         ThemeHelper.setSystemBarColors(this, window, bottomNavColor)
 
