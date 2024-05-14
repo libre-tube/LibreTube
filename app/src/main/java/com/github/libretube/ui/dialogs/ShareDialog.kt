@@ -88,7 +88,7 @@ class ShareDialog : DialogFragment() {
     private fun setupTimeStampBinding(binding: DialogShareBinding) {
         binding.timeCodeSwitch.isChecked = PreferenceHelper.getBoolean(
             PreferenceKeys.SHARE_WITH_TIME_CODE,
-            true
+            false
         )
         binding.timeCodeSwitch.setOnCheckedChangeListener { _, isChecked ->
             binding.timeStampLayout.isVisible = isChecked
