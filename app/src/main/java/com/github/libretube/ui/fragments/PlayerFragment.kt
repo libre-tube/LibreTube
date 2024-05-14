@@ -294,7 +294,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             // check if video has ended, next video is available and autoplay is enabled/the video is part of a played playlist.
             if (playbackState == Player.STATE_ENDED) {
-                if (!isTransitioning && PlayerHelper.shouldPlayNextVideo(playlistId != null)) {
+                if (!isTransitioning) {
                     isTransitioning = true
                     if (PlayerHelper.autoPlayCountdown) {
                         showAutoPlayCountdown()
@@ -995,13 +995,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             return
         }
 
+        if (!PlayerHelper.isAutoPlayEnabled(playlistId != null)) return
+
         // save the current watch position before starting the next video
         saveWatchPosition()
 
-        val nextVideoId = nextId ?: PlayingQueue.getNext() ?: return
-
+        videoId = nextId ?: PlayingQueue.getNext() ?: return
         isTransitioning = true
-        videoId = nextVideoId
 
         // fix: if the fragment is recreated, play the current video, and not the initial one
         arguments?.run {
