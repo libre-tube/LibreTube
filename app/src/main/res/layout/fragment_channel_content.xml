@@ -13,31 +13,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/pagination_pb"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:visibility="visible"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-    <ProgressBar
-        android:id="@+id/pagination_pb"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="center"
-        android:visibility="visible"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
-
-
-    <TextView
-
-        android:id="@+id/tv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="smthng"
-        android:visibility="gone" />
 
     <ProgressBar
         app:layout_constraintStart_toStartOf="parent"

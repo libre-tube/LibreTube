@@ -1,23 +1,19 @@
 package com.github.libretube.ui.fragments
 
-import android.content.res.Configuration
 import android.os.Bundle
-import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.os.bundleOf
-import androidx.core.view.children
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.ChannelTab
@@ -26,23 +22,17 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentChannelBinding
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.TAG
-import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
-import com.github.libretube.obj.ChannelTabs
 import com.github.libretube.obj.ShareData
-import com.github.libretube.ui.adapters.SearchChannelAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.dialogs.ShareDialog
-import com.github.libretube.ui.extensions.addOnBottomReachedListener
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.sheets.AddChannelToGroupSheet
 import com.github.libretube.util.deArrow
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -51,7 +41,6 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import retrofit2.HttpException
 import java.io.IOException
-import java.util.Arrays
 
 class ChannelFragment : DynamicLayoutManagerFragment() {
     private var _binding: FragmentChannelBinding? = null
@@ -63,21 +52,11 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
     private var channelAdapter: VideosAdapter? = null
     private var isLoading = true
 
-    private lateinit var channelContentAdapter : ChannelContentAdapter
+    private lateinit var channelContentAdapter: ChannelContentAdapter
 
-    private val possibleTabs = arrayOf(
-        ChannelTabs.Shorts,
-        ChannelTabs.Livestreams,
-        ChannelTabs.Playlists,
-        ChannelTabs.Albums
-    )
-    private var channelTabs: List<ChannelTab> = emptyList()
     private var nextPages = Array<String?>(5) { null }
-    private var searchChannelAdapter: SearchChannelAdapter? = null
-
     private var isAppBarFullyExpanded: Boolean = true
-    private var recyclerViewState: Parcelable? = null
-    private val tabList = mutableListOf(ChannelTab("Videos",""))
+    private val tabList = mutableListOf(ChannelTab("Videos", ""))
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         channelName = args.channelName
@@ -95,12 +74,7 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
         return binding.root
     }
 
-    override fun setLayoutManagers(gridItems: Int) {
-       /* _binding?.channelRecView?.layoutManager = GridLayoutManager(
-            context,
-            gridItems.ceilHalf()
-        )*/
-    }
+    override fun setLayoutManagers(gridItems: Int) {}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -109,6 +83,8 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
         binding.channelAppBar.addOnOffsetChangedListener { _, verticalOffset ->
             isAppBarFullyExpanded = verticalOffset == 0
         }
+
+        binding.pager.reduceDragSensitivity()
 
         // Determine if the child can scroll up
         binding.channelRefresh.setOnChildScrollUpCallback { _, _ ->
@@ -119,57 +95,24 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
             fetchChannel()
         }
 
-
-       /* binding.channelRecView.addOnBottomReachedListener {
-            if (_binding == null || isLoading) return@addOnBottomReachedListener
-
-            loadNextPage()
-        }*/
-/*
-        binding.channelRecView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                recyclerViewState = binding.channelRecView.layoutManager?.onSaveInstanceState()
-            }
-        })*/
-
         fetchChannel()
+    }
+
+    // adjust sensitivity due to the issue of viewpager2 with SwipeToRefresh https://issuetracker.google.com/issues/138314213
+    private fun ViewPager2.reduceDragSensitivity() {
+        val recyclerViewField = ViewPager2::class.java.getDeclaredField("mRecyclerView")
+        recyclerViewField.isAccessible = true
+        val recyclerView = recyclerViewField.get(this) as RecyclerView
+
+        val touchSlopField = RecyclerView::class.java.getDeclaredField("mTouchSlop")
+        touchSlopField.isAccessible = true
+        val touchSlop = touchSlopField.get(recyclerView) as Int
+        touchSlopField.set(recyclerView, touchSlop*3)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun loadNextPage() = lifecycleScope.launch {
-        val binding = _binding ?: return@launch
-
-        binding.channelRefresh.isRefreshing = true
-        isLoading = true
-
-        try {
-            if (binding.tabChips.checkedChipId == binding.videos.id) {
-                fetchChannelNextPage(nextPages[0] ?: return@launch).let {
-                    nextPages[0] = it
-                }
-            } else {
-                val currentTabIndex = binding.tabChips.children.indexOfFirst {
-                    it.id == binding.tabChips.checkedChipId
-                }
-                val channelTab = channelTabs.first { tab ->
-                    tab.name == possibleTabs[currentTabIndex - 1].identifierName
-                }
-                val nextPage = nextPages[currentTabIndex] ?: return@launch
-                fetchTabNextPage(nextPage, channelTab).let {
-                    nextPages[currentTabIndex] = it
-                }
-            }
-        } catch (e: Exception) {
-            Log.e("error fetching tabs", e.toString())
-        }
-    }.invokeOnCompletion {
-        _binding?.channelRefresh?.isRefreshing = false
-        isLoading = false
     }
 
     private fun fetchChannel() = lifecycleScope.launch {
@@ -268,128 +211,40 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
             )
         }
 
-        channelContentAdapter = ChannelContentAdapter(tabList,response.relatedStreams,this@ChannelFragment)
+        channelContentAdapter = ChannelContentAdapter(
+            tabList,
+            response.relatedStreams,
+            response.nextpage,
+            channelId,
+            this@ChannelFragment
+        )
         binding.pager.adapter = channelContentAdapter
         TabLayoutMediator(binding.tabParent, binding.pager) { tab, position ->
             tab.text = tabList[position].name
         }.attach()
 
-        // recyclerview of the videos by the channel
-        Log.e("Dataaa", (response.relatedStreams).size.toString())
         channelAdapter = VideosAdapter(
             response.relatedStreams.toMutableList(),
             forceMode = VideosAdapter.Companion.LayoutMode.CHANNEL_ROW
         )
-//        binding.channelRecView.adapter = channelAdapter
         tabList.removeIf {
-            it.name!="Videos"
+            it.name != "Videos"
         }
-        response.tabs.forEach{
-            tabList.add(ChannelTab(it.name.replaceFirstChar(Char::titlecase),it.data))
+        response.tabs.forEach {
+            tabList.add(ChannelTab(it.name.replaceFirstChar(Char::titlecase), it.data))
         }
-        channelContentAdapter.notifyItemRangeChanged(0,tabList.size-1)
+        channelContentAdapter.notifyItemRangeChanged(0, tabList.size - 1)
 
-        setupTabs(response.tabs)
-    }
-
-    private fun setupTabs(tabs: List<ChannelTab>) {
-        this.channelTabs = tabs
-
-        val binding = _binding ?: return
-
-        binding.tabChips.children.forEach { chip ->
-
-            val resourceTab = possibleTabs.firstOrNull { it.chipId == chip.id }
-            resourceTab?.let { resTab ->
-                if (tabs.any { it.name == resTab.identifierName }) chip.isVisible = true
-            }
-        }
-
-        binding.tabChips.setOnCheckedStateChangeListener { _, _ ->
-            when (binding.tabChips.checkedChipId) {
-                binding.videos.id -> {
-//                    binding.channelRecView.adapter = channelAdapter
-                }
-
-                else -> {
-                    possibleTabs.first { binding.tabChips.checkedChipId == it.chipId }.let {
-                        val tab = tabs.first { tab -> tab.name == it.identifierName }
-                        loadChannelTab(tab)
-                    }
-                }
-            }
-        }
-
-        // Load selected chip content if it's not videos tab.
-        possibleTabs.firstOrNull { binding.tabChips.checkedChipId == it.chipId }?.let {
-            val tab = tabs.first { tab -> tab.name == it.identifierName }
-            loadChannelTab(tab)
-        }
-    }
-
-    private fun loadChannelTab(tab: ChannelTab) = lifecycleScope.launch {
-        Log.e("Dataaa Tab",tab.data)
-        binding.channelRefresh.isRefreshing = true
-        isLoading = true
-
-        val response = try {
-            withContext(Dispatchers.IO) {
-                RetrofitInstance.api.getChannelTab(tab.data)
-            }.apply {
-                content = content.deArrow()
-            }
-        } catch (e: Exception) {
-            return@launch
-        }
-        Log.e("Dataaa",response.nextpage.toString())
-        Log.e("Dataaa",response.nextpage + "\n" + response.content.toString())
-        nextPages[channelTabs.indexOf(tab) + 1] = response.nextpage
-
-        val binding = _binding ?: return@launch
-
-        searchChannelAdapter = SearchChannelAdapter()
-//        binding.channelRecView.adapter = searchChannelAdapter
-        searchChannelAdapter?.submitList(response.content)
-
-        binding.channelRefresh.isRefreshing = false
-        isLoading = false
-    }
-
-    private suspend fun fetchChannelNextPage(nextPage: String): String? {
-        val response = withContext(Dispatchers.IO) {
-            RetrofitInstance.api.getChannelNextPage(channelId!!, nextPage).apply {
-                relatedStreams = relatedStreams.deArrow()
-            }
-        }
-
-        channelAdapter?.insertItems(response.relatedStreams)
-
-        return response.nextpage
-    }
-
-    private suspend fun fetchTabNextPage(nextPage: String, tab: ChannelTab): String? {
-        val newContent = withContext(Dispatchers.IO) {
-            RetrofitInstance.api.getChannelTab(tab.data, nextPage)
-        }.apply {
-            content = content.deArrow()
-        }
-
-        searchChannelAdapter?.let {
-            it.submitList(it.currentList + newContent.content)
-        }
-
-        return newContent.nextpage
-    }
-
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        // manually restore the recyclerview state due to https://github.com/material-components/material-components-android/issues/3473
-//        binding.channelRecView.layoutManager?.onRestoreInstanceState(recyclerViewState)
     }
 }
 
-class ChannelContentAdapter(private val list:List<ChannelTab>,private val videos : List<StreamItem>,fragment: Fragment):FragmentStateAdapter(fragment){
+class ChannelContentAdapter(
+    private val list: List<ChannelTab>,
+    private val videos: List<StreamItem>,
+    private val nextPage: String?,
+    private val channelId: String?,
+    fragment: Fragment
+) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int {
         return list.size
     }
@@ -397,37 +252,11 @@ class ChannelContentAdapter(private val list:List<ChannelTab>,private val videos
     override fun createFragment(position: Int): Fragment {
         val fragment = ChannelContentFragment()
         fragment.arguments = Bundle().apply {
-            putParcelable("data",list[position])
-            putString("videos_list",Json.encodeToString(videos))
+            putString(IntentData.tabData, Json.encodeToString(list[position]))
+            putString(IntentData.videoList, Json.encodeToString(videos))
+            putString(IntentData.channelId, channelId)
+            putString(IntentData.nextPage, nextPage)
         }
         return fragment
     }
-
 }
-
-/*class ChannelContentFragment:DynamicLayoutManagerFragment(){
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.fragment_channel, container, false)
-    }
-
-
-        override fun setLayoutManagers(gridItems: Int) {
-            _binding?.channelRecView?.layoutManager = GridLayoutManager(
-                context,
-                gridItems.ceilHalf()
-            )
-        }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        arguments?.takeIf { it.containsKey("ARG_OBJECT") }?.apply {
-            val textView: TextView = view.findViewById(R.id.channel_description)
-            textView.text = getInt("ARG_OBJECT").toString()
-        }
-    }
-}*/

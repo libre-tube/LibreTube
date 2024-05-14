@@ -1,10 +1,8 @@
 package com.github.libretube.ui.fragments
 
 import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.ChannelTab
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentChannelContentBinding
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.ui.adapters.SearchChannelAdapter
@@ -83,8 +82,6 @@ class ChannelContentFragment : DynamicLayoutManagerFragment() {
     }
 
     private fun loadChannelTab(tab: ChannelTab) = lifecycleScope.launch {
-        Log.e("Dataaa Tab in  fragment", tab.data)
-
         val response = try {
             withContext(Dispatchers.IO) {
                 RetrofitInstance.api.getChannelTab(tab.data)
@@ -122,18 +119,21 @@ class ChannelContentFragment : DynamicLayoutManagerFragment() {
             }
 
         } catch (e: Exception) {
-            Log.e("error fetching tabs", e.toString())
             isLoading = false
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val tabData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            arguments?.getParcelable("data", ChannelTab::class.java)
-        } else {
-            arguments?.getParcelable<ChannelTab>("data")
+        val tabData = try {
+            Json.decodeFromString<ChannelTab>(arguments?.getString(IntentData.tabData)?:"")
+        } catch (e: Exception) {
+            null
         }
+
+        channelId = arguments?.getString(IntentData.channelId)
+        nextPage = arguments?.getString(IntentData.nextPage)
+
         binding.channelRecView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -148,38 +148,30 @@ class ChannelContentFragment : DynamicLayoutManagerFragment() {
                     (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
                 if (_binding == null || isLoading) return
                 if (firstVisibleItemPosition + visibleItemCount >= totalItemCount) {
-                    binding.paginationPb.visibility = View.VISIBLE
                     loadNextPage(tabData?.data!!.isEmpty(), tabData)
                     isLoading = false
-                    binding.paginationPb.visibility = View.GONE
                 }
 
             }
         })
-        arguments?.takeIf { it.containsKey("data") }?.apply {
-            var data: ChannelTab? = null
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                data = getParcelable("data", ChannelTab::class.java)
-                binding.tv.text = data.toString()
 
-            } else {
-                data = getParcelable<ChannelTab>("data")
-                binding.tv.text = data.toString()
-            }
-            if (!data?.data.isNullOrEmpty()) {
-                loadChannelTab(data ?: ChannelTab("", ""))
 
-            } else {
-                val videoDataString = getString("videos_list")
-                val videos = Json.decodeFromString<List<StreamItem>>(videoDataString!!)
-                channelAdapter = VideosAdapter(
-                    videos.toMutableList(),
-                    forceMode = VideosAdapter.Companion.LayoutMode.CHANNEL_ROW
-                )
-                binding.channelRecView.adapter = channelAdapter
-                binding.progressBar.visibility = View.GONE
-                binding.channelRecView.visibility = View.VISIBLE
+        if (!tabData?.data.isNullOrEmpty()) {
+            loadChannelTab(tabData ?: return)
+        } else {
+            val videoDataString = arguments?.getString(IntentData.videoList)
+            val videos = try {
+                Json.decodeFromString<List<StreamItem>>(videoDataString!!)
+            } catch (e: Exception) {
+                mutableListOf()
             }
+            channelAdapter = VideosAdapter(
+                videos.toMutableList(),
+                forceMode = VideosAdapter.Companion.LayoutMode.CHANNEL_ROW
+            )
+            binding.channelRecView.adapter = channelAdapter
+            binding.progressBar.visibility = View.GONE
+            binding.channelRecView.visibility = View.VISIBLE
         }
     }
 
