@@ -131,7 +131,7 @@ class OnlinePlayerService : LifecycleService() {
 
             when (state) {
                 Player.STATE_ENDED -> {
-                    if (PlayerHelper.shouldPlayNextVideo(playlistId != null) && !isTransitioning) playNextVideo()
+                    if (!isTransitioning) playNextVideo()
                 }
 
                 Player.STATE_IDLE -> {
@@ -352,6 +352,10 @@ class OnlinePlayerService : LifecycleService() {
             player?.seekTo(0)
             return
         }
+
+        saveWatchPosition()
+
+        if (!PlayerHelper.isAutoPlayEnabled(playlistId != null)) return
 
         val nextVideo = nextId ?: PlayingQueue.getNext() ?: return
 

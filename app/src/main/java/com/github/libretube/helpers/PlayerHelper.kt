@@ -45,7 +45,6 @@ import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.obj.VideoStats
-import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -357,18 +356,9 @@ object PlayerHelper {
             true
         )
 
-    fun shouldPlayNextVideo(isPlaylist: Boolean = false): Boolean {
-        // if there is no next video, it obviously should not be played
-        if (!PlayingQueue.hasNext()) {
-            return false
-        }
-
-        return autoPlayEnabled || (
-                isPlaylist && PreferenceHelper.getBoolean(
-                    PreferenceKeys.AUTOPLAY_PLAYLISTS,
-                    false
-                )
-                )
+    fun isAutoPlayEnabled(isPlaylist: Boolean = false): Boolean {
+        return autoPlayEnabled || (isPlaylist && PreferenceHelper
+            .getBoolean(PreferenceKeys.AUTOPLAY_PLAYLISTS, false))
     }
 
     private val handleAudioFocus
