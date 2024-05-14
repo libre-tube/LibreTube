@@ -14,6 +14,7 @@ import com.github.libretube.extensions.getWhileDigit
 import com.github.libretube.extensions.serializable
 import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.services.PlaylistDownloadEnqueueService
+import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class DownloadPlaylistDialog : DialogFragment() {
@@ -25,7 +26,7 @@ class DownloadPlaylistDialog : DialogFragment() {
         super.onCreate(savedInstanceState)
 
         playlistId = requireArguments().getString(IntentData.playlistId)!!
-        playlistName = requireArguments().getString(IntentData.playlistName)!!
+        playlistName = requireArguments().getString(IntentData.playlistName) ?: TextUtils.defaultPlaylistName
         playlistType = requireArguments().serializable(IntentData.playlistType)!!
     }
 

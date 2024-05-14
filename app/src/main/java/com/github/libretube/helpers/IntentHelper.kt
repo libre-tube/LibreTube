@@ -14,6 +14,7 @@ import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.ui.sheets.IntentChooserSheet
+import com.github.libretube.util.TextUtils.toTimeInSeconds
 
 object IntentHelper {
     private fun getResolveIntent(link: String) = Intent(Intent.ACTION_VIEW)
@@ -65,6 +66,38 @@ object IntentHelper {
             context.startActivity(intent)
         } catch (e: Exception) {
             Toast.makeText(context, R.string.no_player_found, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    /**
+     * Resolve the uri and return a bundle with the arguments
+     */
+    fun resolveType(intent: Intent, uri: Uri) = with(intent) {
+        val lastSegment = uri.lastPathSegment
+        val secondLastSegment = uri.pathSegments.getOrNull(uri.pathSegments.size - 2)
+        when {
+            lastSegment == "results" -> {
+                putExtra(IntentData.query, uri.getQueryParameter("search_query"))
+            }
+            secondLastSegment == "channel" -> {
+                putExtra(IntentData.channelId, lastSegment)
+            }
+            secondLastSegment == "c" || secondLastSegment == "user" -> {
+                putExtra(IntentData.channelName, lastSegment)
+            }
+            lastSegment == "playlist" -> {
+                putExtra(IntentData.playlistId, uri.getQueryParameter("list"))
+            }
+            lastSegment == "watch_videos" -> {
+                putExtra(IntentData.playlistName, uri.getQueryParameter("title"))
+                val videoIds = uri.getQueryParameter("video_ids")?.split(",")
+                putExtra(IntentData.videoIds, videoIds?.toTypedArray())
+            }
+            else -> {
+                val id = if (lastSegment == "watch") uri.getQueryParameter("v") else lastSegment
+                putExtra(IntentData.videoId, id)
+                putExtra(IntentData.timeStamp, uri.getQueryParameter("t")?.toTimeInSeconds())
+            }
         }
     }
 }

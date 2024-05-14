@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.core.net.toUri
 import com.github.libretube.constants.IntentData
+import com.github.libretube.helpers.IntentHelper
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.util.PlayingQueue
 
@@ -15,31 +16,23 @@ class AddToQueueActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val uri = intent.getStringExtra(Intent.EXTRA_TEXT)!!.toUri()
-        var videoId: String? = null
-        listOf("/shorts/", "/v/", "/embed/").forEach {
-            if (uri.path!!.contains(it)) {
-                videoId = uri.path!!.replace(it, "")
+        val videoId = intent.getStringExtra(Intent.EXTRA_TEXT)
+            ?.let { IntentHelper.resolveType(Intent(), it.toUri()) }
+            ?.getStringExtra(IntentData.videoId)
+
+        if (videoId != null) {
+            val newIntent = packageManager.getLaunchIntentForPackage(packageName)
+
+            // if playing a video currently, the video will be added to the queue
+            if (PlayingQueue.isNotEmpty()) {
+                PlayingQueue.insertByVideoId(videoId)
+            } else {
+                newIntent?.putExtra(IntentData.videoId, videoId)
             }
-        }
-        if (
-            uri.path!!.contains("/watch") && uri.query != null
-        ) {
-            videoId = uri.getQueryParameter("v")
+
+            startActivity(newIntent)
         }
 
-        if (videoId == null) videoId = uri.path!!.replace("/", "")
-
-        val intent = packageManager.getLaunchIntentForPackage(packageName)
-
-        // if playing a video currently, the video will be added to the queue
-        if (PlayingQueue.isNotEmpty()) {
-            PlayingQueue.insertByVideoId(videoId!!)
-        } else {
-            intent?.putExtra(IntentData.videoId, videoId)
-        }
-
-        startActivity(intent)
         finishAndRemoveTask()
     }
 }

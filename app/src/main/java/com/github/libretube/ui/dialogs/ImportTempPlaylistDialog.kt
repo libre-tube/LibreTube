@@ -10,17 +10,17 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.obj.PipedImportPlaylist
+import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.Date
 
 class ImportTempPlaylistDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val title = arguments?.getString(IntentData.playlistName)
             ?.takeIf { it.isNotEmpty() }
-            ?: Date().toString()
+            ?: TextUtils.defaultPlaylistName
         val videoIds = arguments?.getStringArray(IntentData.videoIds).orEmpty()
 
         return MaterialAlertDialogBuilder(requireContext())
