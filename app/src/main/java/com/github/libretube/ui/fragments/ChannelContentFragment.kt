@@ -3,9 +3,11 @@ package com.github.libretube.ui.fragments
 import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Parcelable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +17,7 @@ import com.github.libretube.api.obj.ChannelTab
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentChannelContentBinding
+import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.ui.adapters.SearchChannelAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
@@ -89,7 +92,7 @@ class ChannelContentFragment : DynamicLayoutManagerFragment() {
                 content = content.deArrow()
             }
         } catch (e: Exception) {
-            binding.progressBar.visibility = View.GONE
+            binding.progressBar.isGone = true
             return@launch
         }
         withContext(Dispatchers.Main) {
@@ -98,38 +101,29 @@ class ChannelContentFragment : DynamicLayoutManagerFragment() {
         val binding = _binding ?: return@launch
         searchChannelAdapter = SearchChannelAdapter()
         binding.channelRecView.adapter = searchChannelAdapter
-
         searchChannelAdapter?.submitList(response.content)
-        binding.progressBar.visibility = View.GONE
-        binding.channelRecView.visibility = View.VISIBLE
+        binding.progressBar.isGone = true
         isLoading = false
     }
 
     private fun loadNextPage(isVideo: Boolean, tab: ChannelTab) = lifecycleScope.launch {
         try {
             isLoading = true
-            if (isVideo) {
-                fetchChannelNextPage(nextPage ?: return@launch).let {
-                    nextPage = it
-                }
+            nextPage = if (isVideo) {
+                fetchChannelNextPage(nextPage ?: return@launch)
             } else {
-                fetchTabNextPage(nextPage ?: return@launch, tab).let {
-                    nextPage = it
-                }
+                fetchTabNextPage(nextPage ?: return@launch, tab)
             }
-
         } catch (e: Exception) {
-            isLoading = false
+            Log.e(TAG(), e.toString())
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val tabData = try {
-            Json.decodeFromString<ChannelTab>(arguments?.getString(IntentData.tabData)?:"")
-        } catch (e: Exception) {
-            null
-        }
+        val tabData = kotlin.runCatching {
+            Json.decodeFromString<ChannelTab>(arguments?.getString(IntentData.tabData) ?: "")
+        }.getOrNull()
 
         channelId = arguments?.getString(IntentData.channelId)
         nextPage = arguments?.getString(IntentData.nextPage)
@@ -142,9 +136,9 @@ class ChannelContentFragment : DynamicLayoutManagerFragment() {
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                val visibleItemCount: Int = recyclerView.layoutManager!!.childCount
-                val totalItemCount: Int = recyclerView.layoutManager!!.getItemCount()
-                val firstVisibleItemPosition: Int =
+                val visibleItemCount = recyclerView.layoutManager!!.childCount
+                val totalItemCount = recyclerView.layoutManager!!.getItemCount()
+                val firstVisibleItemPosition =
                     (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
                 if (_binding == null || isLoading) return
                 if (firstVisibleItemPosition + visibleItemCount >= totalItemCount) {
@@ -155,23 +149,20 @@ class ChannelContentFragment : DynamicLayoutManagerFragment() {
             }
         })
 
-
-        if (!tabData?.data.isNullOrEmpty()) {
-            loadChannelTab(tabData ?: return)
-        } else {
+        if (tabData?.data.isNullOrEmpty()) {
             val videoDataString = arguments?.getString(IntentData.videoList)
-            val videos = try {
+            val videos = runCatching {
                 Json.decodeFromString<List<StreamItem>>(videoDataString!!)
-            } catch (e: Exception) {
-                mutableListOf()
-            }
+            }.getOrElse { mutableListOf() }
             channelAdapter = VideosAdapter(
                 videos.toMutableList(),
                 forceMode = VideosAdapter.Companion.LayoutMode.CHANNEL_ROW
             )
             binding.channelRecView.adapter = channelAdapter
-            binding.progressBar.visibility = View.GONE
-            binding.channelRecView.visibility = View.VISIBLE
+            binding.progressBar.isGone = true
+
+        } else {
+            loadChannelTab(tabData ?: return)
         }
     }
 

@@ -53,10 +53,11 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
     private var isLoading = true
 
     private lateinit var channelContentAdapter: ChannelContentAdapter
+    private val tabNameList = mutableListOf<Pair<String, String>>()
 
     private var nextPages = Array<String?>(5) { null }
     private var isAppBarFullyExpanded: Boolean = true
-    private val tabList = mutableListOf(ChannelTab("Videos", ""))
+    private val tabList = mutableListOf<ChannelTab>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         channelName = args.channelName
@@ -78,7 +79,15 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        tabList.add(ChannelTab(getString(R.string.videos), ""))
+        tabNameList.addAll(
+            listOf(
+                Pair("shorts", getString(R.string.yt_shorts)),
+                Pair("livestreams", getString(R.string.livestreams)),
+                Pair("playlists", getString(R.string.playlists)),
+                Pair("albums", getString(R.string.albums))
+            )
+        )
         // Check if the AppBarLayout is fully expanded
         binding.channelAppBar.addOnOffsetChangedListener { _, verticalOffset ->
             isAppBarFullyExpanded = verticalOffset == 0
@@ -107,7 +116,7 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
         val touchSlopField = RecyclerView::class.java.getDeclaredField("mTouchSlop")
         touchSlopField.isAccessible = true
         val touchSlop = touchSlopField.get(recyclerView) as Int
-        touchSlopField.set(recyclerView, touchSlop*3)
+        touchSlopField.set(recyclerView, touchSlop * 3)
     }
 
     override fun onDestroyView() {
@@ -228,13 +237,24 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
             forceMode = VideosAdapter.Companion.LayoutMode.CHANNEL_ROW
         )
         tabList.removeIf {
-            it.name != "Videos"
+            it.name != getString(R.string.videos)
         }
-        response.tabs.forEach {
-            tabList.add(ChannelTab(it.name.replaceFirstChar(Char::titlecase), it.data))
+        response.tabs.forEach { channelTab ->
+            val tabIndex = tabNameList.indexOfFirst {
+                it.first == channelTab.name
+            }
+            if (tabIndex == -1) {
+                tabList.add(
+                    ChannelTab(
+                        channelTab.name.replaceFirstChar(Char::titlecase),
+                        channelTab.data
+                    )
+                )
+            } else {
+                tabList.add(ChannelTab(tabNameList[tabIndex].second, channelTab.data))
+            }
         }
         channelContentAdapter.notifyItemRangeChanged(0, tabList.size - 1)
-
     }
 }
 
@@ -251,12 +271,12 @@ class ChannelContentAdapter(
 
     override fun createFragment(position: Int): Fragment {
         val fragment = ChannelContentFragment()
-        fragment.arguments = Bundle().apply {
-            putString(IntentData.tabData, Json.encodeToString(list[position]))
-            putString(IntentData.videoList, Json.encodeToString(videos))
-            putString(IntentData.channelId, channelId)
-            putString(IntentData.nextPage, nextPage)
-        }
+        fragment.arguments = bundleOf(
+            IntentData.tabData to Json.encodeToString(list[position]),
+            IntentData.videoList to Json.encodeToString(videos),
+            IntentData.channelId to channelId,
+            IntentData.nextPage to nextPage
+        )
         return fragment
     }
 }
