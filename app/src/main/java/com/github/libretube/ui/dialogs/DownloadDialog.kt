@@ -7,8 +7,10 @@ import android.text.InputFilter
 import android.text.format.Formatter
 import android.util.Log
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
@@ -253,6 +255,12 @@ class DownloadDialog : DialogFragment() {
         return null
     }
 
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+
+        setFragmentResult(DOWNLOAD_DIALOG_DISMISSED_KEY, bundleOf())
+    }
+
     companion object {
         /**
          * Max file name length at Android systems
@@ -264,5 +272,7 @@ class DownloadDialog : DialogFragment() {
         private const val AUDIO_DOWNLOAD_QUALITY = "audio_download_quality"
         private const val AUDIO_DOWNLOAD_FORMAT = "audio_download_format"
         private const val SUBTITLE_LANGUAGE = "subtitle_download_language"
+
+        const val DOWNLOAD_DIALOG_DISMISSED_KEY = "download_dialog_dismissed_key"
     }
 }
