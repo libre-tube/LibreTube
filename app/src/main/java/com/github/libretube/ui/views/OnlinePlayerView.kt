@@ -16,7 +16,6 @@ import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.trackselection.TrackSelector
 import com.github.libretube.R
-import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toID
@@ -279,10 +278,6 @@ class OnlinePlayerView(
 
     override fun minimizeOrExitPlayer() {
         playerOptions?.exitFullscreen()
-    }
-
-    override fun getChapters(): List<ChapterSegment> {
-        return playerViewModel?.chapters.orEmpty()
     }
 
     override fun onPlaybackEvents(player: Player, events: Player.Events) {

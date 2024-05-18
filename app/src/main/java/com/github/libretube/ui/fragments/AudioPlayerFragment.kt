@@ -31,6 +31,7 @@ import com.github.libretube.extensions.normalize
 import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.togglePlayPauseState
+import com.github.libretube.extensions.updateIfChanged
 import com.github.libretube.helpers.AudioHelper
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ImageHelper
@@ -42,6 +43,7 @@ import com.github.libretube.services.OnlinePlayerService
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.interfaces.AudioPlayerOptions
 import com.github.libretube.ui.listeners.AudioPlayerThumbnailListener
+import com.github.libretube.ui.models.ChaptersViewModel
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.ChaptersBottomSheet
 import com.github.libretube.ui.sheets.PlaybackOptionsSheet
@@ -61,6 +63,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     private lateinit var audioHelper: AudioHelper
     private val mainActivity get() = context as MainActivity
     private val viewModel: PlayerViewModel by activityViewModels()
+    private val chaptersModel: ChaptersViewModel by activityViewModels()
 
     // for the transition
     private var transitionStartId = 0
@@ -167,12 +170,24 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             )
         }
 
+        requireActivity().supportFragmentManager.setFragmentResultListener(
+            ChaptersBottomSheet.SEEK_TO_POSITION_REQUEST_KEY,
+            viewLifecycleOwner
+        ) { _, bundle ->
+            playerService?.player?.seekTo(bundle.getLong(IntentData.currentPosition))
+        }
+
         binding.openChapters.setOnClickListener {
             val playerService = playerService ?: return@setOnClickListener
-            viewModel.chaptersLiveData.value = playerService.streams?.chapters.orEmpty()
+            chaptersModel.chaptersLiveData.value = playerService.streams?.chapters.orEmpty()
 
             ChaptersBottomSheet()
-                .show(childFragmentManager)
+                .apply {
+                    arguments = bundleOf(
+                        IntentData.duration to playerService.player?.duration?.div(1000)
+                    )
+                }
+                .show(requireActivity().supportFragmentManager)
         }
 
         binding.miniPlayerClose.setOnClickListener {
@@ -205,6 +220,8 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         }
 
         if (!PlayerHelper.playAutomatically) updatePlayPauseButton()
+
+        updateChapterIndex()
     }
 
     private fun killFragment() {
@@ -434,5 +451,15 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         audioHelper.setVolumeWithScale(bar.progress, bar.max)
 
         binding.volumeTextView.text = "${bar.progress.normalize(0, bar.max, 0, 100)}"
+    }
+
+    private fun updateChapterIndex() {
+        if (_binding == null) return
+        handler.postDelayed(this::updateChapterIndex, 100)
+
+        val player = playerService?.player ?: return
+
+        val currentIndex = PlayerHelper.getCurrentChapterIndex(player.currentPosition, chaptersModel.chapters)
+        chaptersModel.currentChapterIndex.updateIfChanged(currentIndex ?: return)
     }
 }

@@ -10,7 +10,6 @@ import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.Message
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
@@ -48,9 +47,6 @@ class PlayerViewModel : ViewModel() {
 
     var maxSheetHeightPx = 0
 
-    val chaptersLiveData = MutableLiveData<List<ChapterSegment>>()
-
-    val chapters get() = chaptersLiveData.value.orEmpty()
     var sponsorBlockEnabled = PlayerHelper.sponsorBlockEnabled
 
     /**

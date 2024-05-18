@@ -31,6 +31,4 @@ class OfflinePlayerView(
         this.chapters = chapters
         setCurrentChapterName()
     }
-
-    override fun getChapters(): List<ChapterSegment> = chapters
 }
