@@ -538,4 +538,10 @@
     <string name="external_player">Externer Player</string>
     <string name="comments_count">Kommentare (%1$s)</string>
     <string name="albums">Alben</string>
+    <string name="best_quality">Beste</string>
+    <string name="contribute_to_dearrow">Zu DeArrow beitragen</string>
+    <string name="thumbnail_time">Vorschau Zeitpunkt</string>
+    <string name="import_temp_playlist_summary">Möchten Sie eine neue Wiedergabeliste mit dem Namen „%1$s“ erstellen? Die Wiedergabeliste wird %2$d Videos enthalten.</string>
+    <string name="title">Titel</string>
+    <string name="import_temp_playlist">Vorübergehende Wiedergabeliste importieren?</string>
 </resources>

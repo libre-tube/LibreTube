@@ -543,4 +543,5 @@
     <string name="title">Titel</string>
     <string name="import_temp_playlist">Importér midlertidig playliste?</string>
     <string name="import_temp_playlist_summary">Ønsker du at oprette en ny playliste kaldet \'%1$s\'? Playlisten indeholder %2$d videoer.</string>
+    <string name="thumbnail_time">Miniaturebillede tid</string>
 </resources>
