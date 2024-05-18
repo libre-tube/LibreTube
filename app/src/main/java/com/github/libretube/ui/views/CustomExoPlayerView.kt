@@ -19,6 +19,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.TooltipCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isGone
@@ -26,6 +27,7 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.core.view.marginStart
 import androidx.core.view.updateLayoutParams
+import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.media3.common.C
 import androidx.media3.common.Player
 import androidx.media3.common.text.Cue
@@ -36,7 +38,7 @@ import androidx.media3.ui.PlayerView
 import androidx.media3.ui.SubtitleView
 import androidx.media3.ui.TimeBar
 import com.github.libretube.R
-import com.github.libretube.api.obj.ChapterSegment
+import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
@@ -46,6 +48,7 @@ import com.github.libretube.extensions.normalize
 import com.github.libretube.extensions.round
 import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.togglePlayPauseState
+import com.github.libretube.extensions.updateIfChanged
 import com.github.libretube.helpers.AudioHelper
 import com.github.libretube.helpers.BrightnessHelper
 import com.github.libretube.helpers.ContextHelper
@@ -59,6 +62,7 @@ import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.interfaces.PlayerOptions
 import com.github.libretube.ui.listeners.PlayerGestureController
+import com.github.libretube.ui.models.ChaptersViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.ChaptersBottomSheet
 import com.github.libretube.ui.sheets.PlaybackOptionsSheet
@@ -81,6 +85,7 @@ abstract class CustomExoPlayerView(
     private lateinit var playerGestureController: PlayerGestureController
     private lateinit var brightnessHelper: BrightnessHelper
     private lateinit var audioHelper: AudioHelper
+    private lateinit var chaptersViewModel: ChaptersViewModel
     private var doubleTapOverlayBinding: DoubleTapOverlayBinding? = null
     private var chaptersBottomSheet: ChaptersBottomSheet? = null
     private var scrubbingTimeBar = false
@@ -114,10 +119,12 @@ abstract class CustomExoPlayerView(
 
     fun initialize(
         doubleTapOverlayBinding: DoubleTapOverlayBinding,
-        playerGestureControlsViewBinding: PlayerGestureControlsViewBinding
+        playerGestureControlsViewBinding: PlayerGestureControlsViewBinding,
+        chaptersViewModel: ChaptersViewModel
     ) {
         this.doubleTapOverlayBinding = doubleTapOverlayBinding
         this.gestureViewBinding = playerGestureControlsViewBinding
+        this.chaptersViewModel = chaptersViewModel
         this.playerGestureController = PlayerGestureController(context as BaseActivity, this)
         this.brightnessHelper = BrightnessHelper(context as Activity)
         this.audioHelper = AudioHelper(context)
@@ -216,11 +223,24 @@ abstract class CustomExoPlayerView(
 
         updateCurrentPosition()
 
+        activity.supportFragmentManager.setFragmentResultListener(
+            ChaptersBottomSheet.SEEK_TO_POSITION_REQUEST_KEY,
+            findViewTreeLifecycleOwner() ?: activity
+        ) { _, bundle ->
+            player?.seekTo(bundle.getLong(IntentData.currentPosition))
+        }
+
         // enable the chapters dialog in the player
         binding.chapterName.setOnClickListener {
-            val sheet = chaptersBottomSheet ?: ChaptersBottomSheet().also {
-                chaptersBottomSheet = it
-            }
+            val sheet = chaptersBottomSheet ?: ChaptersBottomSheet()
+                .apply {
+                    arguments = bundleOf(
+                        IntentData.duration to player?.duration?.div(1000)
+                    )
+                }
+                .also {
+                    chaptersBottomSheet = it
+                }
 
             if (sheet.isVisible) {
                 sheet.dismiss()
@@ -231,9 +251,9 @@ abstract class CustomExoPlayerView(
     }
 
     // set the name of the video chapter in the exoPlayerView
-   fun setCurrentChapterName(forceUpdate: Boolean = false, enqueueNew: Boolean = true) {
-       val player = player ?: return
-        val chapters = getChapters()
+    fun setCurrentChapterName(forceUpdate: Boolean = false, enqueueNew: Boolean = true) {
+        val player = player ?: return
+        val chapters = chaptersViewModel.chapters
 
         binding.chapterName.isInvisible = chapters.isEmpty()
 
@@ -246,10 +266,9 @@ abstract class CustomExoPlayerView(
         // if the user is scrubbing the time bar, don't update
         if (scrubbingTimeBar && !forceUpdate) return
 
-        val newChapterName =
-            PlayerHelper.getCurrentChapterIndex(player.currentPosition, chapters)
-                ?.let { chapters[it].title.trim() }
-                ?: context.getString(R.string.no_chapter)
+        val currentIndex = PlayerHelper.getCurrentChapterIndex(player.currentPosition, chapters)
+        val newChapterName = currentIndex?.let { chapters[it].title.trim() } ?: context.getString(R.string.no_chapter)
+        chaptersViewModel.currentChapterIndex.updateIfChanged(currentIndex ?: return)
 
         // change the chapter name textView text to the chapterName
         if (newChapterName != binding.chapterName.text) {
@@ -627,8 +646,10 @@ abstract class CustomExoPlayerView(
         if (!activity.hasCutout && binding.topBar.marginStart == LANDSCAPE_MARGIN_HORIZONTAL_NONE) return
 
         // add a margin to the top and the bottom bar in landscape mode for notches
-        val isForcedPortrait = activity.requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-        val horizontalMargin = if (isFullscreen() && !isForcedPortrait) LANDSCAPE_MARGIN_HORIZONTAL else LANDSCAPE_MARGIN_HORIZONTAL_NONE
+        val isForcedPortrait =
+            activity.requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+        val horizontalMargin =
+            if (isFullscreen() && !isForcedPortrait) LANDSCAPE_MARGIN_HORIZONTAL else LANDSCAPE_MARGIN_HORIZONTAL_NONE
 
         listOf(binding.topBar, binding.bottomBar).forEach {
             it.updateLayoutParams<MarginLayoutParams> {
@@ -784,23 +805,29 @@ abstract class CustomExoPlayerView(
             KeyEvent.KEYCODE_SPACE, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE -> {
                 player?.togglePlayPauseState()
             }
+
             KeyEvent.KEYCODE_DPAD_RIGHT, KeyEvent.KEYCODE_MEDIA_FAST_FORWARD -> {
                 forward()
             }
+
             KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_MEDIA_REWIND -> {
                 rewind()
             }
+
             KeyEvent.KEYCODE_N, KeyEvent.KEYCODE_NAVIGATE_NEXT -> {
                 PlayingQueue.navigateNext()
             }
+
             KeyEvent.KEYCODE_P, KeyEvent.KEYCODE_NAVIGATE_PREVIOUS -> {
                 PlayingQueue.navigatePrev()
             }
+
             KeyEvent.KEYCODE_F -> {
                 val fragmentManager = ContextHelper.unwrapActivity(context).supportFragmentManager
                 fragmentManager.fragments.filterIsInstance<PlayerFragment>().firstOrNull()
                     ?.toggleFullscreen()
             }
+
             else -> return false
         }
 
@@ -825,8 +852,6 @@ abstract class CustomExoPlayerView(
     }
 
     open fun minimizeOrExitPlayer() = Unit
-
-    abstract fun getChapters(): List<ChapterSegment>
 
     open fun getWindow(): Window = activity.window
 

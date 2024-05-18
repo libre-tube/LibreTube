@@ -14,7 +14,7 @@ import com.github.libretube.ui.viewholders.ChaptersViewHolder
 
 class ChaptersAdapter(
     var chapters: List<ChapterSegment>,
-    private val videoDuration: Long,
+    private val videoDurationSeconds: Long,
     private val seekTo: (Long) -> Unit
 ) : RecyclerView.Adapter<ChaptersViewHolder>() {
     private var selectedPosition = 0
@@ -36,12 +36,11 @@ class ChaptersAdapter(
             chapterTitle.text = chapter.title
             timeStamp.text = DateUtils.formatElapsedTime(chapter.start)
 
-            val playerDurationSeconds = videoDuration / 1000
             val chapterEnd = if (chapter.highlightDrawable == null) {
-                chapters.getOrNull(position + 1)?.start ?: playerDurationSeconds
+                chapters.getOrNull(position + 1)?.start ?: videoDurationSeconds
             } else {
                 // the duration for chapters is hardcoded, since it's not provided by the SB API
-                minOf(chapter.start + ChapterSegment.HIGHLIGHT_LENGTH, playerDurationSeconds)
+                minOf(chapter.start + ChapterSegment.HIGHLIGHT_LENGTH, videoDurationSeconds)
             }
             val durationSpan = chapterEnd - chapter.start
             duration.text = root.context.getString(
