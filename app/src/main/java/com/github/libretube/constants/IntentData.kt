@@ -43,4 +43,7 @@ object IntentData {
     const val audioLanguage = "audioLanguage"
     const val captionLanguage = "captionLanguage"
     const val wasIntentStopped = "wasIntentStopped"
+    const val tabData = "tabData"
+    const val videoList = "videoList"
+    const val nextPage = "nextPage"
 }
