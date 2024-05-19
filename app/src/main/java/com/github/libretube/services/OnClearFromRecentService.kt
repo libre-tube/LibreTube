@@ -7,15 +7,19 @@ import android.os.IBinder
 import androidx.core.content.getSystemService
 import com.github.libretube.util.NowPlayingNotification
 
-class OnClearFromRecentService: Service() {
+class OnClearFromRecentService : Service() {
 
-    private var nManager : NotificationManager? = null
+    private var nManager: NotificationManager? = null
 
     override fun onBind(p0: Intent?): IBinder? {
         return null
     }
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+    override fun onStartCommand(
+            intent: Intent?,
+            flags: Int,
+            startId: Int
+    ): Int {
         nManager = getSystemService<NotificationManager>()
         return START_NOT_STICKY
     }
