@@ -240,6 +240,7 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
         tabList.removeAll { tab ->
             tab.name != VIDEOS_TAB_KEY
         }
+        tabList[0] = ChannelTab(getString(tabNamesMap[VIDEOS_TAB_KEY]!!), "")
         response.tabs.forEach { channelTab ->
             val tabName = tabNamesMap[channelTab.name]?.let { getString(it) }
                 ?: channelTab.name.replaceFirstChar(Char::titlecase)
