@@ -47,7 +47,11 @@ class CommentPagingAdapter(
             return
         }
 
-        val args = bundleOf(IntentData.videoId to videoId, IntentData.comment to comment)
+        val args = bundleOf(
+            IntentData.videoId to videoId,
+            IntentData.comment to comment,
+            IntentData.channelAvatar to channelAvatar
+        )
         fragment!!.parentFragmentManager.commit {
             replace<CommentsRepliesFragment>(R.id.commentFragContainer, args = args)
             addToBackStack(null)

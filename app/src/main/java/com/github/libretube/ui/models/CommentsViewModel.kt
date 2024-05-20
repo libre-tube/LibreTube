@@ -26,16 +26,11 @@ class CommentsViewModel : ViewModel() {
 
     val commentSheetExpand = MutableLiveData<Boolean?>()
 
-    var channelAvatar: String? = null
-    var handleLink: ((url: String) -> Unit)? = null
-
     private val _currentCommentsPosition = MutableLiveData(0)
     val currentCommentsPosition: LiveData<Int> = _currentCommentsPosition
 
     private val _currentRepliesPosition = MutableLiveData(0)
     val currentRepliesPosition: LiveData<Int> = _currentRepliesPosition
-
-    var commentsSheetDismiss: (() -> Unit)? = null
 
     fun setCommentSheetExpand(value: Boolean?) {
         if (commentSheetExpand.value != value) {

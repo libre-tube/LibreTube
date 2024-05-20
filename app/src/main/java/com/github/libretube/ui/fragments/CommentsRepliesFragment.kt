@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -60,13 +62,15 @@ class CommentsRepliesFragment : Fragment() {
         val repliesAdapter = CommentPagingAdapter(
             null,
             videoId,
-            viewModel.channelAvatar,
+            requireArguments().getString(IntentData.channelAvatar) ?: return,
             isRepliesAdapter = true,
-            handleLink = viewModel.handleLink
+            handleLink = {
+                setFragmentResult(CommentsSheet.HANDLE_LINK_REQUEST_KEY, bundleOf(IntentData.url to it))
+            }
         ) {
-            viewModel.commentsSheetDismiss?.invoke()
+            setFragmentResult(CommentsSheet.DISMISS_SHEET_REQUEST_KEY, bundleOf())
         }
-        (parentFragment as CommentsSheet).updateFragmentInfo(
+        commentsSheet?.updateFragmentInfo(
             true,
             "${getString(R.string.replies)} (${comment.replyCount.formatShort()})"
         )

@@ -5,15 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentCommentsBinding
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.ui.adapters.CommentPagingAdapter
@@ -68,10 +71,12 @@ class CommentsMainFragment : Fragment() {
         val commentPagingAdapter = CommentPagingAdapter(
             this,
             viewModel.videoIdLiveData.value ?: return,
-            viewModel.channelAvatar ?: return,
-            handleLink = viewModel.handleLink
+            requireArguments().getString(IntentData.channelAvatar) ?: return,
+            handleLink = {
+                setFragmentResult(CommentsSheet.HANDLE_LINK_REQUEST_KEY, bundleOf(IntentData.url to it))
+            }
         ) {
-            viewModel.commentsSheetDismiss?.invoke()
+            setFragmentResult(CommentsSheet.DISMISS_SHEET_REQUEST_KEY, bundleOf())
         }
         binding.commentsRV.adapter = commentPagingAdapter
 

@@ -525,14 +525,19 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             exoPlayer.togglePlayPauseState()
         }
 
+        activity?.supportFragmentManager
+            ?.setFragmentResultListener(CommentsSheet.HANDLE_LINK_REQUEST_KEY, viewLifecycleOwner) { _, bundle ->
+                bundle.getString(IntentData.url)?.let { handleLink(it) }
+        }
+
         binding.commentsToggle.setOnClickListener {
             if (!this::streams.isInitialized) return@setOnClickListener
             // set the max height to not cover the currently playing video
-            commentsViewModel.handleLink = this::handleLink
             updateMaxSheetHeight()
             commentsViewModel.videoIdLiveData.updateIfChanged(videoId)
-            commentsViewModel.channelAvatar = streams.uploaderAvatar
-            CommentsSheet().show(childFragmentManager)
+            CommentsSheet()
+                .apply { arguments = bundleOf(IntentData.channelAvatar to streams.uploaderAvatar) }
+                .show(childFragmentManager)
         }
 
         // FullScreen button trigger
@@ -639,7 +644,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     private fun updateMaxSheetHeight() {
         val maxHeight = binding.root.height - binding.player.height
-        viewModel.maxSheetHeightPx = viewModel.maxSheetHeightPx
+        viewModel.maxSheetHeightPx = maxHeight
         chaptersViewModel.maxSheetHeightPx = maxHeight
     }
 
@@ -1022,7 +1027,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playVideo()
 
         // close comment bottom sheet if opened for next video
-        runCatching { commentsViewModel.commentsSheetDismiss?.invoke() }
+        activity?.supportFragmentManager?.fragments?.filterIsInstance<CommentsSheet>()
+                ?.firstOrNull()?.dismiss()
     }
 
     @SuppressLint("SetTextI18n")
