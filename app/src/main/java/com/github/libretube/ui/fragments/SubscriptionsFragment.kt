@@ -231,19 +231,14 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
 
     private fun setupSortAndFilter() {
         binding.filterSort.setOnClickListener {
-            val activityCompat = context as AppCompatActivity
-            val fragManager = activityCompat
-                .supportFragmentManager
-                .apply {
-                    setFragmentResultListener(
-                        FILTER_SORT_REQUEST_KEY,
-                        activityCompat
-                    ) { _, resultBundle ->
-                        selectedSortOrder = resultBundle.getInt(IntentData.sortOptions)
-                        hideWatched = resultBundle.getBoolean(IntentData.hideWatched)
-                        showFeed()
-                    }
-                }
+            childFragmentManager.setFragmentResultListener(
+                FILTER_SORT_REQUEST_KEY,
+                viewLifecycleOwner
+            ) { _, resultBundle ->
+                selectedSortOrder = resultBundle.getInt(IntentData.sortOptions)
+                hideWatched = resultBundle.getBoolean(IntentData.hideWatched)
+                showFeed()
+            }
 
             FilterSortBottomSheet()
                 .apply {
@@ -252,7 +247,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
                         IntentData.hideWatched to hideWatched
                     )
                 }
-                .show(fragManager)
+                .show(childFragmentManager)
         }
     }
 
