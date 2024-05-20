@@ -170,7 +170,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             )
         }
 
-        requireActivity().supportFragmentManager.setFragmentResultListener(
+        childFragmentManager.setFragmentResultListener(
             ChaptersBottomSheet.SEEK_TO_POSITION_REQUEST_KEY,
             viewLifecycleOwner
         ) { _, bundle ->
@@ -187,7 +187,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
                         IntentData.duration to playerService.player?.duration?.div(1000)
                     )
                 }
-                .show(requireActivity().supportFragmentManager)
+                .show(childFragmentManager)
         }
 
         binding.miniPlayerClose.setOnClickListener {
