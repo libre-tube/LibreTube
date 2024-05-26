@@ -1,10 +1,12 @@
 package com.github.libretube.ui.views
 
 import android.content.Context
+import android.text.InputType
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.ArrayAdapter
 import android.widget.FrameLayout
+import androidx.core.content.res.use
 import com.github.libretube.R
 import com.github.libretube.databinding.DropdownMenuBinding
 
@@ -15,38 +17,50 @@ class DropdownMenu(
     context: Context,
     attributeSet: AttributeSet
 ) : FrameLayout(context, attributeSet) {
-    var binding: DropdownMenuBinding
+    private val binding =
+        DropdownMenuBinding.inflate(LayoutInflater.from(context), this, true)
 
     @Suppress("UNCHECKED_CAST")
     var adapter: ArrayAdapter<String>
         get() = binding.autoCompleteTextView.adapter as ArrayAdapter<String>
-        set(value) {
+        private set(value) {
             binding.autoCompleteTextView.setAdapter(value)
-            binding.autoCompleteTextView.setText(value.getItem(0), false)
+            if (!value.isEmpty) binding.autoCompleteTextView.setText(value.getItem(0), false)
         }
 
-    val selectedItemPosition: Int
-        get() = adapter.getPosition(
-            binding.autoCompleteTextView.text.toString()
-        )
-
-    init {
-        val layoutInflater = LayoutInflater.from(context)
-        binding = DropdownMenuBinding.inflate(layoutInflater, this, true)
-
-        val ta = getContext().obtainStyledAttributes(attributeSet, R.styleable.DropdownMenu, 0, 0)
-
-        try {
-            binding.textInputLayout.hint = ta.getString(R.styleable.DropdownMenu_hint)
-            binding.textInputLayout.startIconDrawable = ta.getDrawable(
-                R.styleable.DropdownMenu_icon
-            )
-        } finally {
-            ta.recycle()
+    var items: List<String>
+        get() = (0 until adapter.count).mapNotNull { adapter.getItem(it) }
+        set(value) {
+            adapter = ArrayAdapter(context, R.layout.dropdown_item, value)
         }
+
+    var selectedItemPosition: Int
+        get() = adapter.getPosition(binding.autoCompleteTextView.text.toString())
+        set(index) = binding.autoCompleteTextView.setText(adapter.getItem(index), false)
+
+    val text get() = binding.autoCompleteTextView.text.toString()
+
+    override fun setEnabled(enabled: Boolean) {
+        binding.textInputLayout.isEnabled = enabled
     }
 
-    fun setSelection(index: Int) {
-        binding.autoCompleteTextView.setText(adapter.getItem(index), false)
+    override fun isEnabled(): Boolean {
+        return binding.textInputLayout.isEnabled
+    }
+
+    var typingEnabled: Boolean
+        set(enabled) {
+            binding.autoCompleteTextView.inputType = if (enabled) InputType.TYPE_CLASS_TEXT else InputType.TYPE_NULL
+        }
+        get() = binding.autoCompleteTextView.inputType != InputType.TYPE_NULL
+
+    init {
+        context.obtainStyledAttributes(attributeSet, R.styleable.DropdownMenu, 0, 0).use {
+            binding.textInputLayout.hint = it.getString(R.styleable.DropdownMenu_hint)
+            binding.textInputLayout.startIconDrawable =
+                it.getDrawable(R.styleable.DropdownMenu_icon)
+        }
+
+        adapter = ArrayAdapter(context, R.layout.dropdown_item)
     }
 }

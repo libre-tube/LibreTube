@@ -11,7 +11,9 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import com.github.libretube.R
+import com.github.libretube.compat.PictureInPictureCompat
 import com.github.libretube.databinding.AutoplayCountdownBinding
+import com.github.libretube.helpers.ContextHelper
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.models.PlayerViewModel
 
@@ -59,6 +61,12 @@ class AutoplayCountdownView(
             onCountdownEnd.invoke()
             return
         }
+
+        // don't show cancel and play next buttons in PiP mode
+        val context = ContextHelper.unwrapActivity(context)
+        val isInPipMode = PictureInPictureCompat.isInPictureInPictureMode(context)
+        binding.cancel.isVisible = !isInPipMode
+        binding.playNext.isVisible = !isInPipMode
 
         // only show countdown when mini player not visible
         this.isVisible = playerViewModel.isMiniPlayerVisible.value == false

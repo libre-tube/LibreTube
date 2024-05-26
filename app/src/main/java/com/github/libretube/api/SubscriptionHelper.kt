@@ -11,7 +11,6 @@ import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.LocalSubscription
 import com.github.libretube.extensions.TAG
 import com.github.libretube.helpers.PreferenceHelper
-import com.github.libretube.util.deArrow
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.runBlocking
 
@@ -125,6 +124,6 @@ object SubscriptionHelper {
                     subscriptions.joinToString(",")
                 )
             }
-        }.deArrow()
+        }
     }
 }

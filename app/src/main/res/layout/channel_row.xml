@@ -7,11 +7,10 @@
         android:id="@+id/search_channel_image"
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:layout_gravity="center"
         android:layout_marginVertical="5dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="55dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearance="@style/CircleImageView" />
 
     <LinearLayout

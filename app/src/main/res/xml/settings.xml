@@ -77,9 +77,8 @@
         <Preference
             android:icon="@drawable/ic_update"
             app:key="update"
-            app:summary="@string/update_summary"
-            app:title="App version" />
-
+            app:summary="@string/version"
+            app:title="@string/update_summary" />
 
     </PreferenceCategory>
 

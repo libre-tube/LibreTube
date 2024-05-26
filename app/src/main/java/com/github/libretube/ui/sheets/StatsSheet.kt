@@ -1,6 +1,5 @@
 package com.github.libretube.ui.sheets
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +7,7 @@ import android.view.ViewGroup
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogStatsBinding
 import com.github.libretube.extensions.parcelable
+import com.github.libretube.helpers.ClipboardHelper
 import com.github.libretube.obj.VideoStats
 
 class StatsSheet : ExpandedBottomSheet() {
@@ -29,11 +29,13 @@ class StatsSheet : ExpandedBottomSheet() {
         stats = arguments?.parcelable(IntentData.videoStats)!!
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = binding
 
         binding.videoId.setText(stats.videoId)
+        binding.videoIdCopy.setEndIconOnClickListener {
+            ClipboardHelper.save(requireContext(), "text", stats.videoId)
+        }
         binding.videoInfo.setText(stats.videoInfo)
         binding.audioInfo.setText(stats.audioInfo)
         binding.videoQuality.setText(stats.videoQuality)

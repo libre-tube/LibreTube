@@ -1,7 +1,9 @@
 package com.github.libretube.ui.fragments
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +13,11 @@ import androidx.core.text.parseAsHtml
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
@@ -28,16 +30,16 @@ import com.github.libretube.databinding.FragmentPlaylistBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
-import com.github.libretube.extensions.serializable
-import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
-import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.PlaylistAdapter
 import com.github.libretube.ui.base.BaseActivity
+import com.github.libretube.ui.base.DynamicLayoutManagerFragment
+import com.github.libretube.ui.extensions.addOnBottomReachedListener
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
@@ -47,12 +49,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
-class PlaylistFragment : Fragment() {
+class PlaylistFragment : DynamicLayoutManagerFragment() {
     private var _binding: FragmentPlaylistBinding? = null
     private val binding get() = _binding!!
+    private val args by navArgs<PlaylistFragmentArgs>()
 
     // general playlist information
-    private var playlistId: String? = null
+    private lateinit var playlistId: String
     private var playlistName: String? = null
     private var playlistType = PlaylistType.PUBLIC
 
@@ -71,13 +74,12 @@ class PlaylistFragment : Fragment() {
             field = value
         }
     private val sortOptions by lazy { resources.getStringArray(R.array.playlistSortOptions) }
+    private var recyclerViewState: Parcelable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            playlistId = it.getString(IntentData.playlistId)!!.toID()
-            playlistType = it.serializable(IntentData.playlistType) ?: PlaylistType.PUBLIC
-        }
+        playlistId = args.playlistId
+        playlistType = args.playlistType
     }
 
     override fun onCreateView(
@@ -89,20 +91,31 @@ class PlaylistFragment : Fragment() {
         return binding.root
     }
 
+    override fun setLayoutManagers(gridItems: Int) {
+        _binding?.playlistRecView?.layoutManager = GridLayoutManager(context, gridItems.ceilHalf())
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.playlistRecView.layoutManager = LinearLayoutManager(context)
         binding.playlistProgress.isVisible = true
 
         isBookmarked = runBlocking(Dispatchers.IO) {
-            DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId!!)
+            DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId)
         }
         updateBookmarkRes()
 
         playerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
             binding.playlistRecView.updatePadding(bottom = if (it) 64f.dpToPx() else 0)
         }
+
+        // manually restore the recyclerview state due to https://github.com/material-components/material-components-android/issues/3473
+        binding.playlistRecView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                recyclerViewState = binding.playlistRecView.layoutManager?.onSaveInstanceState()
+            }
+        })
 
         fetchPlaylist()
     }
@@ -119,11 +132,10 @@ class PlaylistFragment : Fragment() {
     }
 
     private fun fetchPlaylist() {
-        binding.playlistScrollview.isGone = true
         lifecycleScope.launch {
             val response = try {
                 withContext(Dispatchers.IO) {
-                    PlaylistsHelper.getPlaylist(playlistId!!)
+                    PlaylistsHelper.getPlaylist(playlistId)
                 }
             } catch (e: Exception) {
                 Log.e(TAG(), e.toString())
@@ -132,20 +144,20 @@ class PlaylistFragment : Fragment() {
             val binding = _binding ?: return@launch
 
             playlistFeed = response.relatedStreams.toMutableList()
-            binding.playlistScrollview.isVisible = true
             nextPage = response.nextpage
             playlistName = response.name
             isLoading = false
-            ImageHelper.loadImage(response.thumbnailUrl, binding.thumbnail)
+
+            if (!response.thumbnailUrl.isNullOrEmpty())
+                ImageHelper.loadImage(response.thumbnailUrl, binding.thumbnail)
             binding.playlistProgress.isGone = true
+            binding.playlistAppBar.isVisible = true
+            binding.playlistRecView.isVisible = true
             binding.playlistName.text = response.name
 
             binding.playlistInfo.text = getChannelAndVideoString(response, response.videos)
             binding.playlistInfo.setOnClickListener {
-                (context as MainActivity).navController.navigate(
-                    R.id.channelFragment,
-                    bundleOf(IntentData.channelId to response.uploaderUrl?.toID())
-                )
+                NavigationHelper.navigateChannel(requireContext(), response.uploaderUrl)
             }
 
             binding.playlistDescription.text = response.description?.parseAsHtml()
@@ -158,7 +170,7 @@ class PlaylistFragment : Fragment() {
             binding.optionsMenu.setOnClickListener {
                 val sheet = PlaylistOptionsBottomSheet()
                 sheet.arguments = bundleOf(
-                    IntentData.playlistId to playlistId.orEmpty(),
+                    IntentData.playlistId to playlistId,
                     IntentData.playlistName to playlistName.orEmpty(),
                     IntentData.playlistType to playlistType
                 )
@@ -194,13 +206,21 @@ class PlaylistFragment : Fragment() {
                 sheet.show(fragmentManager)
             }
 
-            binding.playAll.setOnClickListener {
-                if (playlistFeed.isEmpty()) return@setOnClickListener
-                NavigationHelper.navigateVideo(
-                    requireContext(),
-                    response.relatedStreams.first().url?.toID(),
-                    playlistId
-                )
+            if (playlistFeed.isEmpty()) {
+                binding.nothingHere.isVisible = true
+            }
+
+            if (playlistFeed.isEmpty()) {
+                binding.playAll.isGone = true
+            } else {
+                binding.playAll.setOnClickListener {
+                    if (playlistFeed.isEmpty()) return@setOnClickListener
+                    NavigationHelper.navigateVideo(
+                        requireContext(),
+                        response.relatedStreams.first().url,
+                        playlistId
+                    )
+                }
             }
 
             if (playlistType == PlaylistType.PUBLIC) {
@@ -210,40 +230,50 @@ class PlaylistFragment : Fragment() {
                     lifecycleScope.launch(Dispatchers.IO) {
                         if (!isBookmarked) {
                             DatabaseHolder.Database.playlistBookmarkDao()
-                                .deleteById(playlistId!!)
+                                .deleteById(playlistId)
                         } else {
                             DatabaseHolder.Database.playlistBookmarkDao()
-                                .insert(response.toPlaylistBookmark(playlistId!!))
+                                .insert(response.toPlaylistBookmark(playlistId))
                         }
                     }
                 }
             } else {
                 // private playlist, means shuffle is possible because all videos are received at once
-                binding.bookmark.setIconResource(R.drawable.ic_shuffle)
-                binding.bookmark.text = getString(R.string.shuffle)
-                binding.bookmark.setOnClickListener {
-                    if (playlistFeed.isEmpty()) return@setOnClickListener
-                    val queue = playlistFeed.shuffled()
-                    PlayingQueue.resetToDefaults()
-                    PlayingQueue.add(*queue.toTypedArray())
-                    NavigationHelper.navigateVideo(
-                        requireContext(),
-                        queue.first().url?.toID(),
-                        playlistId = playlistId,
-                        keepQueue = true
-                    )
+                if (playlistFeed.isEmpty()) {
+                    binding.bookmark.isGone = true
+                } else {
+                    binding.bookmark.setIconResource(R.drawable.ic_shuffle)
+                    binding.bookmark.text = getString(R.string.shuffle)
+                    binding.bookmark.setOnClickListener {
+                        val queue = playlistFeed.shuffled()
+                        PlayingQueue.resetToDefaults()
+                        PlayingQueue.add(*queue.toTypedArray())
+                        NavigationHelper.navigateVideo(
+                            requireContext(),
+                            queue.first().url,
+                            playlistId = playlistId,
+                            keepQueue = true
+                        )
+                    }
                 }
-                binding.sortContainer.isGone = false
+
+                if (playlistFeed.isEmpty()) {
+                    binding.sortContainer.isGone = true
+                } else {
+                    binding.sortContainer.isVisible = true
+                    binding.sortContainer.setOnClickListener {
+                        BaseBottomSheet().apply {
+                            setSimpleItems(sortOptions.toList()) { index ->
+                                selectedSortOrder = index
+                                binding.sortTV.text = sortOptions[index]
+                                showPlaylistVideos(response)
+                            }
+                        }.show(childFragmentManager)
+                    }
+                }
+
                 binding.sortTV.text = sortOptions[selectedSortOrder]
-                binding.sortContainer.setOnClickListener {
-                    BaseBottomSheet().apply {
-                        setSimpleItems(sortOptions.toList()) { index ->
-                            selectedSortOrder = index
-                            binding.sortTV.text = sortOptions[index]
-                            showPlaylistVideos(response)
-                        }
-                    }.show(childFragmentManager)
-                }
+
             }
 
             updatePlaylistBookmark(response)
@@ -291,7 +321,7 @@ class PlaylistFragment : Fragment() {
         playlistAdapter = PlaylistAdapter(
             playlistFeed,
             videos.toMutableList(),
-            playlistId!!,
+            playlistId,
             playlistType
         )
         binding.playlistRecView.adapter = playlistAdapter
@@ -311,18 +341,16 @@ class PlaylistFragment : Fragment() {
             }
         })
 
-        binding.playlistScrollview.viewTreeObserver.addOnScrollChangedListener {
-            if (_binding?.playlistScrollview?.canScrollVertically(1) == false &&
-                !isLoading
-            ) {
-                // append more playlists to the recycler view
-                if (playlistType != PlaylistType.PUBLIC) {
-                    isLoading = true
-                    playlistAdapter?.showMoreItems()
-                    isLoading = false
-                } else {
-                    fetchNextPage()
-                }
+        binding.playlistRecView.addOnBottomReachedListener {
+            if (isLoading) return@addOnBottomReachedListener
+
+            // append more playlists to the recycler view
+            if (playlistType != PlaylistType.PUBLIC) {
+                isLoading = true
+                playlistAdapter?.showMoreItems()
+                isLoading = false
+            } else {
+                fetchNextPage()
             }
         }
 
@@ -369,9 +397,9 @@ class PlaylistFragment : Fragment() {
                 withContext(Dispatchers.IO) {
                     // load locally stored playlists with the auth api
                     if (playlistType == PlaylistType.PRIVATE) {
-                        RetrofitInstance.authApi.getPlaylistNextPage(playlistId!!, nextPage!!)
+                        RetrofitInstance.authApi.getPlaylistNextPage(playlistId, nextPage!!)
                     } else {
-                        RetrofitInstance.api.getPlaylistNextPage(playlistId!!, nextPage!!)
+                        RetrofitInstance.api.getPlaylistNextPage(playlistId, nextPage!!)
                     }
                 }
             } catch (e: Exception) {
@@ -384,5 +412,11 @@ class PlaylistFragment : Fragment() {
             playlistAdapter?.updateItems(response.relatedStreams)
             isLoading = false
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        // manually restore the recyclerview state due to https://github.com/material-components/material-components-android/issues/3473
+        binding.playlistRecView.layoutManager?.onRestoreInstanceState(recyclerViewState)
     }
 }

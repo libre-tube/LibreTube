@@ -1,0 +1,8 @@
+* feat: chapters support for downloaded videos
+* feat: support for contributing to DeArrow
+* feat: support for importing temporary playlists from YouTube
+* feat: now playing notification for downloaded videos
+* feat: pip controls for offline player
+* feat: automatically scroll to current chapter
+* feat: preference to force maximum audio quality
+* feat: respect swipe controls option in audio mode

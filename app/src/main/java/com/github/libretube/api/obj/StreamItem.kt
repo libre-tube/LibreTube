@@ -24,6 +24,8 @@ data class StreamItem(
     val shortDescription: String? = null,
     val isShort: Boolean = false
 ) : Parcelable {
+    val isLive get() = (duration != null) && (duration <= 0L)
+
     fun toLocalPlaylistItem(playlistId: String): LocalPlaylistItem {
         return LocalPlaylistItem(
             playlistId = playlistId.toInt(),

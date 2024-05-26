@@ -1,6 +1,7 @@
 package com.github.libretube.ui.activities
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -48,7 +49,7 @@ class WelcomeActivity : BaseActivity() {
         // ALl the binding values are optional due to two different possible layouts (normal, landscape)
         viewModel.instances.observe(this) { instances ->
             binding.instancesRecycler?.layoutManager = LinearLayoutManager(this@WelcomeActivity)
-            binding.instancesRecycler?.adapter = InstancesAdapter(instances, viewModel) { index ->
+            binding.instancesRecycler?.adapter = InstancesAdapter(instances, viewModel.selectedInstanceIndex.value) { index ->
                 viewModel.selectedInstanceIndex.value = index
                 binding.okay?.alpha = 1f
             }
@@ -79,5 +80,9 @@ class WelcomeActivity : BaseActivity() {
         val mainActivityIntent = Intent(this@WelcomeActivity, MainActivity::class.java)
         startActivity(mainActivityIntent)
         finish()
+    }
+
+    override fun requestOrientationChange() {
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER
     }
 }

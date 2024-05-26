@@ -20,8 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: gradle/wrapper-validation-action@v1
-      - uses: actions/setup-python@v4
+      - uses: gradle/wrapper-validation-action@v3
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
           architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
@@ -33,7 +33,7 @@ jobs:
           cd ..
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: 17
           distribution: "temurin"
@@ -41,10 +41,10 @@ jobs:
 
       - name: Git Configuraion
         run: |
-          git config --global user.name "Bnyro"
-          git config --global user.email "bnyro@tutanota.com"
+          git config --global user.name "libretube-bot"
+          git config --global user.email "libretube@proton.me"
           git config --global credential.helper store
-          echo "https://bnyro:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
+          echo "https://libretube-bot:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
 
       - name: Compile
         run: |
@@ -73,7 +73,7 @@ jobs:
           python ../uploader.py
       
       - name: Upload APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: app
           path: nightly/*.apk

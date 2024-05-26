@@ -1,0 +1,10 @@
+* style: new player layout and various UI improvements
+* feat: support close video on MiniPlayer swipe down
+* feat: new sleep timer (integrated into the player UI)
+* feat: quick actions to add a channel to a group
+* feat: separate landscape grid columns pref + more impacted adapters
+* feat: show instance regions, uptime and registration status in settings
+* feat: automatically play the next downloaded video in offline audio mode
+* feat: add copy video ID button in stats sheet
+* feat: add preset to use 1.75x playback speed
+* feat: add Rich caption rendering setting

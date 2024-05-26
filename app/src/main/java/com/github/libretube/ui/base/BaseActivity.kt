@@ -1,6 +1,7 @@
 package com.github.libretube.ui.base
 
 import android.content.pm.ActivityInfo
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.libretube.R
@@ -14,6 +15,8 @@ import com.github.libretube.helpers.WindowHelper
  * Activity that applies the LibreTube theme and the in-app language
  */
 open class BaseActivity : AppCompatActivity() {
+    open val isDialogActivity: Boolean = false
+
     val screenOrientationPref by lazy {
         val orientationPref = PreferenceHelper.getString(
             PreferenceKeys.ORIENTATION,
@@ -30,26 +33,36 @@ open class BaseActivity : AppCompatActivity() {
     /**
      * Whether the phone of the user has a cutout like a notch or not
      */
-    val hasCutout by lazy {
-        WindowHelper.hasCutout(window.decorView.rootView)
-    }
+    var hasCutout: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // set the app theme (e.g. Material You)
         ThemeHelper.updateTheme(this)
+        if (isDialogActivity) ThemeHelper.applyDialogActivityTheme(this)
+
+        // Set the navigation and statusBar color if SDK < 23
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            ThemeHelper.setSystemBarColors(this, window)
+        }
 
         // set the apps language
         LocaleHelper.updateLanguage(this)
 
         requestOrientationChange()
 
+        // wait for the window decor view to be drawn before detecting display cutouts
+        window.decorView.setOnApplyWindowInsetsListener { view, insets ->
+            hasCutout = WindowHelper.hasCutout(view)
+            window.decorView.onApplyWindowInsets(insets)
+        }
+
         super.onCreate(savedInstanceState)
     }
 
     /**
-     * Rotate according to the preference
+     * Rotate the screen according to the app orientation preference
      */
-    fun requestOrientationChange() {
+    open fun requestOrientationChange() {
         requestedOrientation = screenOrientationPref
     }
 }

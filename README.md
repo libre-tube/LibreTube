@@ -1,6 +1,6 @@
 <div align="center">
   <img src="https://libre-tube.github.io/images/gh-banner.png" width="auto" height="auto" alt="LibreTube">
-  
+
 [![GPL-v3](https://libre-tube.github.io/assets/widgets/license-widget.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 </div><div align="center" style="width:100%; display:flex; justify-content:space-between;">
 
@@ -63,10 +63,13 @@ Screenshots
 
 <div style="width:100%; display:flex; justify-content:space-between;">
 
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_1.png" width=20% alt="Home">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_1.png)
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_2.png" width=20% alt="Home">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_2.png)
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_3.png" width=20% alt="Subscriptions">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_3.png)
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_4.png" width=20% alt="Library">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_4.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_1.jpg" width=19% alt="Home">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_1.jpg)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_2.jpg" width=19% alt="Home">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_2.jpg)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_3.jpg" width=19% alt="Subscriptions">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_3.jpg)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_4.jpg" width=19% alt="Library">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_4.jpg)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_9.jpg" width=19% alt="Channel Overview">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_9.jpg)
+
+* For more [Screenshot](https://github.com/libre-tube/LibreTube/blob/master/SCREEN_SHOT.md) 
 
 </div>
 
@@ -166,11 +169,12 @@ Privacy Policy and Disclaimer
 
 LibreTube aims to protect the privacy of its users. [Our Privacy Policy](/PRIVACY_POLICY.md) gives detailed information on which data the app stores in order to work, how it is being used, and how the project protects your personal information. It is recommended to read the privacy policy of LibreTube as well as the privacy policy of the instance you have chosen inside the app.
 
-### License
+## License
 [![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)](http://www.gnu.org/licenses/gpl-3.0.en.html)
 
-LibreTube is Free Software: You can use, study, share and modify it at your will. The app can be redistributed and/or modified under the terms of the
-[GNU General Public License](https://www.gnu.org/licenses/gpl.html) version 3 or later published by the Free Software Foundation.
+LibreTube is [Free Software](https://en.wikipedia.org/wiki/Free_software): You can use, study, share and modify it at your will. The app can be redistributed and/or modified under the terms of the
+[GNU General Public License version 3 or later](https://www.gnu.org/licenses/gpl.html) published by the 
+[Free Software Foundation](https://www.fsf.org/).
 
 <div align="right">
 <table><td>

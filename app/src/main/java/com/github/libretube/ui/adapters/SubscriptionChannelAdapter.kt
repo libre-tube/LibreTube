@@ -43,7 +43,7 @@ class SubscriptionChannelAdapter(
 
         holder.binding.apply {
             subscriptionChannelName.text = subscription.name
-            ImageHelper.loadImage(subscription.avatar, subscriptionChannelImage)
+            ImageHelper.loadImage(subscription.avatar, subscriptionChannelImage, true)
 
             root.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, subscription.url)
@@ -52,7 +52,8 @@ class SubscriptionChannelAdapter(
                 val channelOptionsSheet = ChannelOptionsBottomSheet()
                 channelOptionsSheet.arguments = bundleOf(
                     IntentData.channelId to subscription.url.toID(),
-                    IntentData.channelName to subscription.name
+                    IntentData.channelName to subscription.name,
+                    IntentData.isSubscribed to true
                 )
                 channelOptionsSheet.show((root.context as BaseActivity).supportFragmentManager)
                 true

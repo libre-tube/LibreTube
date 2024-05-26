@@ -8,6 +8,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
 import com.github.libretube.db.obj.Download
+import com.github.libretube.db.obj.DownloadChapter
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.db.obj.DownloadWithItems
 
@@ -22,13 +23,16 @@ interface DownloadDao {
     suspend fun findById(videoId: String): DownloadWithItems
 
     @Query("SELECT * FROM downloaditem WHERE id = :id")
-    suspend fun findDownloadItemById(id: Int): DownloadItem
+    suspend fun findDownloadItemById(id: Int): DownloadItem?
 
     @Query("DELETE FROM downloaditem WHERE id = :id")
     suspend fun deleteDownloadItemById(id: Int)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertDownload(download: Download)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertDownloadChapter(downloadChapter: DownloadChapter)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDownloadItem(downloadItem: DownloadItem): Long

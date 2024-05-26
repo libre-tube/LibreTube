@@ -16,7 +16,8 @@ fun TextView.setupSubscriptionButton(
     channelId: String?,
     channelName: String?,
     notificationBell: MaterialButton? = null,
-    isSubscribed: Boolean? = null
+    isSubscribed: Boolean? = null,
+    onIsSubscribedChange: (Boolean) -> Unit = {}
 ) {
     if (channelId == null) return
 
@@ -24,6 +25,7 @@ fun TextView.setupSubscriptionButton(
 
     CoroutineScope(Dispatchers.IO).launch {
         subscribed = isSubscribed ?: SubscriptionHelper.isSubscribed(channelId)
+        subscribed?.let { subscribed -> onIsSubscribedChange(subscribed) }
 
         withContext(Dispatchers.Main) {
             if (subscribed == true) {
@@ -42,6 +44,7 @@ fun TextView.setupSubscriptionButton(
                 this.text = context.getString(R.string.subscribe)
                 notificationBell?.isGone = true
                 subscribed = false
+                onIsSubscribedChange(false)
             }
         } else {
             runBlocking {
@@ -49,6 +52,7 @@ fun TextView.setupSubscriptionButton(
                 text = context.getString(R.string.unsubscribe)
                 notificationBell?.isVisible = true
                 subscribed = true
+                onIsSubscribedChange(true)
             }
         }
     }

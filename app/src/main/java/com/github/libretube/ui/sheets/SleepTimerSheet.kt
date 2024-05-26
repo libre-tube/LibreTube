@@ -15,7 +15,7 @@ import com.github.libretube.R
 import com.github.libretube.databinding.SleepTimerSheetBinding
 import com.github.libretube.ui.tools.SleepTimer
 
-class SleepTimerSheet: ExpandedBottomSheet() {
+class SleepTimerSheet : ExpandedBottomSheet() {
     private var _binding: SleepTimerSheetBinding? = null
     private val binding get() = _binding!!
     private val handler = Handler(Looper.getMainLooper())

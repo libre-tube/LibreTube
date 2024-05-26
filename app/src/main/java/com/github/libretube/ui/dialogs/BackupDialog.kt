@@ -13,6 +13,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.BackupFile
+import com.github.libretube.obj.PipedImportPlaylist
 import com.github.libretube.obj.PreferenceItem
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
@@ -40,7 +41,7 @@ class BackupDialog : DialogFragment() {
         })
 
         data object LocalSubscriptions : BackupOption(R.string.local_subscriptions, onSelected = {
-            it.localSubscriptions = Database.localSubscriptionDao().getAll()
+            it.subscriptions = Database.localSubscriptionDao().getAll()
         })
 
         data object CustomInstances : BackupOption(R.string.backup_customInstances, onSelected = {
@@ -53,10 +54,16 @@ class BackupDialog : DialogFragment() {
 
         data object LocalPlaylists : BackupOption(R.string.local_playlists, onSelected = {
             it.localPlaylists = Database.localPlaylistsDao().getAll()
+            it.playlists = it.localPlaylists?.map { (playlist, playlistVideos) ->
+                val videos = playlistVideos.map { item ->
+                    "${ShareDialog.YOUTUBE_FRONTEND_URL}/watch?v=${item.videoId}"
+                }
+                PipedImportPlaylist(playlist.name, "playlist", "private", videos)
+            }
         })
 
         data object SubscriptionGroups : BackupOption(R.string.channel_groups, onSelected = {
-            it.channelGroups = Database.subscriptionGroupsDao().getAll()
+            it.groups = Database.subscriptionGroupsDao().getAll()
         })
 
         data object Preferences : BackupOption(R.string.preferences, onSelected = { file ->
@@ -65,6 +72,7 @@ class BackupDialog : DialogFragment() {
                     is Number -> JsonPrimitive(value)
                     is Boolean -> JsonPrimitive(value)
                     is String -> JsonPrimitive(value)
+                    is Set<*> -> JsonPrimitive(value.joinToString(","))
                     else -> JsonNull
                 }
                 PreferenceItem(key, jsonValue)

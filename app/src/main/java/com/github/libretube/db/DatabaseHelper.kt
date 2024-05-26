@@ -6,9 +6,11 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.db.obj.WatchHistoryItem
+import com.github.libretube.enums.ContentFilter
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PreferenceHelper
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
@@ -90,6 +92,27 @@ object DatabaseHelper {
                 // show video only in feed when watched less than 90%
                 if (unfinished) progress < 0.9f * duration else progress > 0.9f * duration
             }
+        }
+    }
+
+    fun filterByStatusAndWatchPosition(streams: List<StreamItem>, hideWatched: Boolean): List<StreamItem> {
+        val streamItems = streams.filter {
+            val isVideo = !it.isShort && !it.isLive
+
+            return@filter when {
+                !ContentFilter.SHORTS.isEnabled && it.isShort -> false
+                !ContentFilter.VIDEOS.isEnabled && isVideo -> false
+                !ContentFilter.LIVESTREAMS.isEnabled && it.isLive -> false
+                else -> true
+            }
+        }
+
+        return if (hideWatched) {
+            runBlocking {
+                filterUnwatched(streamItems)
+            }
+        } else {
+            streamItems
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.github.libretube.ui.fragments
 
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.ServiceConnection
@@ -9,32 +10,37 @@ import android.os.IBinder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.databinding.FragmentDownloadsBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.DownloadWithItems
+import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.formatAsFileSize
+import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.obj.DownloadStatus
 import com.github.libretube.receivers.DownloadReceiver
 import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.adapters.DownloadsAdapter
+import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
-import kotlin.io.path.fileSize
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlin.io.path.fileSize
 
-class DownloadsFragment : Fragment() {
+class DownloadsFragment : DynamicLayoutManagerFragment() {
     private var _binding: FragmentDownloadsBinding? = null
     private val binding get() = _binding!!
 
@@ -72,8 +78,13 @@ class DownloadsFragment : Fragment() {
         return binding.root
     }
 
+    override fun setLayoutManagers(gridItems: Int) {
+        _binding?.downloads?.layoutManager = GridLayoutManager(context, gridItems.ceilHalf())
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.deleteAll.isInvisible = true
 
         val dbDownloads = runBlocking(Dispatchers.IO) {
             Database.downloadDao().getAll()
@@ -84,9 +95,6 @@ class DownloadsFragment : Fragment() {
 
         binding.downloadsEmpty.isGone = true
         binding.downloads.isVisible = true
-
-        binding.downloads.layoutManager = LinearLayoutManager(context)
-
         val adapter = DownloadsAdapter(requireContext(), downloads) {
             var isDownloading = false
             val ids = it.downloadItems
@@ -147,6 +155,30 @@ class DownloadsFragment : Fragment() {
                 }
             }
         )
+
+        if (dbDownloads.isNotEmpty()) {
+            binding.deleteAll.isVisible = true
+            binding.deleteAll.setOnClickListener {
+                showDeleteAllDialog(binding.root.context, adapter)
+            }
+        }
+
+        binding.shuffleBackground.setOnClickListener {
+            BackgroundHelper.playOnBackgroundOffline(requireContext(), null)
+        }
+    }
+
+    private fun showDeleteAllDialog(context: Context, adapter: DownloadsAdapter) {
+        MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.delete_all)
+            .setMessage(R.string.irreversible)
+            .setPositiveButton(R.string.okay) { _, _ ->
+                for (downloadIndex in downloads.size - 1 downTo 0) {
+                    adapter.deleteDownload(downloadIndex)
+                }
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
     }
 
     override fun onStart() {
@@ -159,10 +191,17 @@ class DownloadsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        val filter = IntentFilter()
-        filter.addAction(DownloadService.ACTION_SERVICE_STARTED)
-        filter.addAction(DownloadService.ACTION_SERVICE_STOPPED)
-        context?.registerReceiver(downloadReceiver, filter)
+
+        val filter = IntentFilter().apply {
+            addAction(DownloadService.ACTION_SERVICE_STARTED)
+            addAction(DownloadService.ACTION_SERVICE_STOPPED)
+        }
+        ContextCompat.registerReceiver(
+            requireContext(),
+            downloadReceiver,
+            filter,
+            ContextCompat.RECEIVER_NOT_EXPORTED
+        )
     }
 
     fun bindDownloadService(ids: IntArray? = null) {

@@ -2,44 +2,36 @@
 <resources>
     <string-array name="instances">
         <item>kavin.rocks (Official)</item>
-        <item>tokhmi.xyz</item>
-        <item>mha.fi</item>
-        <item>leptons.xyz</item>
+        <item>syncpundit.io</item>
         <item>lunar.icu</item>
+        <item>r4fo.com</item>
         <item>kavin.rocks libre (Official)</item>
         <item>projectsegfau.lt</item>
-        <item>projectsegfau.lt in</item>
-        <item>whatever.social</item>
-        <item>privacydev.net</item>
-        <item>palveluntarjoaja.eu</item>
+        <item>projectsegfau.lt us</item>
         <item>smnz.de</item>
         <item>adminforge.de</item>
-        <item>qdi.fi</item>
-        <item>hostux.net</item>
-        <item>vern.cc</item>
-        <item>frontendfriendly.xyz</item>
-        <item>piped.yt</item>
-        <item>osphost.fi</item>
-        <item>simpleprivacy.fr</item>
+        <item>astartes.nl</item>
+        <item>drgns.space</item>
+        <item>ducks.party</item>
+        <item>ngn.tf</item>
+        <item>coldforge.xyz</item>
     </string-array>
 
     <string-array name="instancesValue">
         <item>https://pipedapi.kavin.rocks</item>
-        <item>https://pipedapi.leptons.xyz</item>
+        <item>https://pipedapi.syncpundit.io</item>
         <item>https://piped-api.lunar.icu</item>
+        <item>https://pipedapi.r4fo.com</item>
         <item>https://pipedapi-libre.kavin.rocks</item>
         <item>https://api.piped.projectsegfau.lt</item>
-        <item>https://pipedapi.in.projectsegfau.lt</item>
-        <item>https://watchapi.whatever.social</item>
-        <item>https://api.piped.privacydev.net</item>
-        <item>https://pipedapi.palveluntarjoaja.eu</item>
+        <item>https://pipedapi.us.projectsegfau.lt</item>
         <item>https://pipedapi.smnz.de</item>
         <item>https://pipedapi.adminforge.de</item>
-        <item>https://pipedapi.qdi.fi</item>
-        <item>https://piped-api.hostux.net</item>
-        <item>https://pdapi.vern.cc</item>
-        <item>https://pipedapi.frontendfriendly.xyz</item>
-        <item>https://pipedapi.simpleprivacy.fr</item>
+        <item>https://pipedapi.astartes.nl</item>
+        <item>https://pipedapi.drgns.space</item>
+        <item>https://pipedapi.ducks.party</item>
+        <item>https://pipedapi.ngn.tf</item>
+        <item>https://pipedapi.coldforge.xyz</item>
     </string-array>
 
     <string-array name="languages">
@@ -205,6 +197,7 @@
         <item>3</item>
         <item>4</item>
         <item>5</item>
+        <item>6</item>
     </string-array>
 
     <string-array name="bufferingGoal">
@@ -272,11 +265,22 @@
     <string-array name="audioQuality">
         <item>@string/auto</item>
         <item>@string/worst_quality</item>
+        <item>@string/best_quality</item>
     </string-array>
 
     <string-array name="audioQualityValues">
         <item>auto</item>
         <item>worst</item>
+        <item>best</item>
+    </string-array>
+
+    <string-array name="audioQualityBitrates">
+        <item>196kbps</item>
+        <item>128kbps</item>
+        <item>96kbps</item>
+        <item>64kbps</item>
+        <item>48kbps</item>
+        <item>32kbps</item>
     </string-array>
 
     <string-array name="checkingFrequency">
@@ -506,5 +510,17 @@
         <item>@string/category_filler</item>
         <item>@string/category_music_offtopic</item>
         <item>@string/category_preview</item>
+    </string-array>
+
+    <string-array name="onMinimize">
+        <item>@string/picture_in_picture</item>
+        <item>@string/pause</item>
+        <item>@string/none</item>
+    </string-array>
+
+    <string-array name="onMinimizeValues">
+        <item>pip</item>
+        <item>pause</item>
+        <item>none</item>
     </string-array>
 </resources>

@@ -87,7 +87,7 @@
             app:useSimpleSummaryProvider="true" />
 
         <SwitchPreferenceCompat
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:icon="@drawable/ic_list"
             android:summary="@string/hls_instead_of_dash_summary"
             android:title="@string/hls_instead_of_dash"

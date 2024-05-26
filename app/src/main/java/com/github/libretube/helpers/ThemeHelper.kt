@@ -6,7 +6,10 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.Color
+import android.os.Build
 import android.text.Spanned
+import android.view.Window
+import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.text.HtmlCompat
@@ -18,6 +21,42 @@ import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.MaterialColors
 
 object ThemeHelper {
+
+    /**
+     * Set the colors of the system bars (status bat and navigation bar)
+     */
+    fun setSystemBarColors(context: Context, window: Window, @ColorInt bottomNavColor: Int? = null) {
+        setStatusBarColor(context, window)
+        setNavigationBarColor(context, window, bottomNavColor)
+    }
+
+    /**
+     * Set the background color of the status bar
+     */
+    private fun setStatusBarColor(context: Context, window: Window) {
+        window.statusBarColor =
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M && !isDarkMode(context)) {
+                getThemeColor(context, com.google.android.material.R.attr.colorOnBackground)
+            } else {
+                getThemeColor(context, android.R.attr.colorBackground)
+            }
+    }
+
+    /**
+     * Set the background color of the navigation bar
+     */
+    private fun setNavigationBarColor(
+        context: Context,
+        window: Window,
+        @ColorInt bottomNavColor: Int?
+    ) {
+        window.navigationBarColor =
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M && !isDarkMode(context)) {
+                getThemeColor(context, com.google.android.material.R.attr.colorOnBackground)
+            } else {
+                bottomNavColor ?: getThemeColor(context, android.R.attr.colorBackground)
+            }
+    }
 
     /**
      * Set the theme, including accent color and night mode
@@ -71,6 +110,10 @@ object ThemeHelper {
             false
         )
         if (pureThemeEnabled) activity.theme.applyStyle(R.style.Pure, true)
+    }
+
+    fun applyDialogActivityTheme(activity: Activity) {
+        activity.theme.applyStyle(R.style.DialogActivity, true)
     }
 
     /**
@@ -129,7 +172,8 @@ object ThemeHelper {
     }
 
     fun isDarkMode(context: Context): Boolean {
-        val darkModeFlag = context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        val darkModeFlag =
+            context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         return darkModeFlag == Configuration.UI_MODE_NIGHT_YES
     }
 }

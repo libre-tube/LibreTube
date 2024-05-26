@@ -32,20 +32,19 @@ class LegacySubscriptionAdapter(
             channelName.text = subscription.name
             ImageHelper.loadImage(
                 subscription.avatar,
-                channelAvatar
+                channelAvatar,
+                true
             )
             root.setOnClickListener {
-                NavigationHelper.navigateChannel(
-                    root.context,
-                    subscription.url.toID()
-                )
+                NavigationHelper.navigateChannel(root.context, subscription.url)
             }
 
             root.setOnLongClickListener {
                 val channelOptionsSheet = ChannelOptionsBottomSheet()
                 channelOptionsSheet.arguments = bundleOf(
                     IntentData.channelId to subscription.url.toID(),
-                    IntentData.channelName to subscription.name
+                    IntentData.channelName to subscription.name,
+                    IntentData.isSubscribed to true
                 )
                 channelOptionsSheet.show((root.context as BaseActivity).supportFragmentManager)
                 true

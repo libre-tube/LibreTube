@@ -5,16 +5,16 @@ import com.github.libretube.enums.FileType
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.json.SafeInstantSerializer
 import com.github.libretube.parcelable.DownloadData
-import kotlin.io.path.Path
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.io.path.Path
 
 @Serializable
 data class Streams(
-    val title: String,
+    var title: String,
     val description: String,
 
     @Serializable(SafeInstantSerializer::class)
@@ -24,12 +24,12 @@ data class Streams(
     val uploader: String,
     val uploaderUrl: String,
     val uploaderAvatar: String? = null,
-    val thumbnailUrl: String,
+    var thumbnailUrl: String,
     val category: String,
-    val license: String,
-    val visibility: String,
-    val tags: List<String>,
-    val metaInfo: List<MetaInfo>,
+    val license: String = "YouTube licence",
+    val visibility: String = "public",
+    val tags: List<String> = emptyList(),
+    val metaInfo: List<MetaInfo> = emptyList(),
     val hls: String? = null,
     val dash: String? = null,
     val lbryId: String? = null,

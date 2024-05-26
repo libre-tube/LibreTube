@@ -5,20 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingVertical="12dp">
 
     <LinearLayout
         android:id="@+id/player_title_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginHorizontal="4dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="12dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="8dp"
+            android:layout_marginBottom="8dp"
             android:orientation="horizontal">
 
             <TextView
@@ -26,7 +27,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="10dp"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
                 android:maxLines="2"
@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginStart="10dp"
                 android:src="@drawable/ic_arrow_down" />
 
         </LinearLayout>
@@ -46,7 +46,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
             android:orientation="horizontal">
 
             <TextView
@@ -55,13 +54,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
-                tools:text="10M views    2 days ago " />
+                tools:text="10M views - 2 days ago " />
 
             <com.github.libretube.ui.views.DrawableTextView
                 android:id="@+id/textLike"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
                 android:drawablePadding="5dp"
                 app:drawableStartCompat="@drawable/ic_like"
                 app:drawableStartDimen="12dp"
@@ -71,7 +69,7 @@
                 android:id="@+id/textDislike"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
+                android:layout_marginStart="5dp"
                 android:drawablePadding="5dp"
                 android:visibility="gone"
                 app:drawableStartCompat="@drawable/ic_dislike"

@@ -76,17 +76,20 @@ class PlaylistAdapter(
 
     override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) {
         val streamItem = sortedFeed[position]
+        val videoId = streamItem.url!!.toID()
+
         holder.binding.apply {
             videoTitle.text = streamItem.title
             videoInfo.text = streamItem.uploaderName
             channelImage.isGone = true
 
             thumbnailDuration.setFormattedDuration(streamItem.duration!!, streamItem.isShort)
+
             ImageHelper.loadImage(streamItem.thumbnail, thumbnail)
+
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, streamItem.url, playlistId)
             }
-            val videoId = streamItem.url!!.toID()
 
             val activity = (root.context as BaseActivity)
             val fragmentManager = activity.supportFragmentManager
@@ -105,7 +108,7 @@ class PlaylistAdapter(
 
             if (!streamItem.uploaderUrl.isNullOrBlank()) {
                 videoInfo.setOnClickListener {
-                    NavigationHelper.navigateChannel(root.context, streamItem.uploaderUrl.toID())
+                    NavigationHelper.navigateChannel(root.context, streamItem.uploaderUrl)
                 }
                 // add some extra padding to make it easier to click
                 val extraPadding = 3f.dpToPx()

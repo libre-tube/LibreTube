@@ -22,9 +22,12 @@ class AudioPlayerThumbnailListener(context: Context, private val listener: Audio
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(v: View, event: MotionEvent): Boolean {
         if (event.action == MotionEvent.ACTION_UP && isMoving) {
-            isMoving = false
             listener.onSwipeEnd()
             return false
+        }
+
+        if (event.action == MotionEvent.ACTION_DOWN) {
+            isMoving = false
         }
 
         runCatching {
@@ -37,8 +40,6 @@ class AudioPlayerThumbnailListener(context: Context, private val listener: Audio
     private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
 
         override fun onDown(e: MotionEvent): Boolean {
-            if (isMoving) return false
-
             handler.postDelayed(ACTION_INTERVAL, SINGLE_PRESS_TOKEN) {
                 if (!isMoving) listener.onSingleTap()
             }

@@ -15,7 +15,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
@@ -23,6 +23,7 @@
         android:name=".LibreTubeApp"
         android:allowBackup="true"
         android:banner="@mipmap/ic_launcher"
+        android:enableOnBackInvokedCallback="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -32,30 +33,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/StartupTheme"
-        tools:targetApi="n">
+        tools:targetApi="tiramisu">
 
         <activity
             android:name=".ui.activities.WelcomeActivity"
-            android:label="@string/welcome" />
+            android:label="@string/welcome"
+            android:screenOrientation="locked" />
 
         <activity
             android:name=".ui.activities.NoInternetActivity"
-            android:label="@string/noInternet" />
+            android:label="@string/noInternet"
+            android:screenOrientation="locked" />
 
         <activity
             android:name=".ui.activities.SettingsActivity"
-            android:label="@string/settings" />
+            android:label="@string/settings"
+            android:screenOrientation="locked" />
 
         <activity
             android:name=".ui.activities.AboutActivity"
-            android:label="@string/settings" />
+            android:label="@string/settings"
+            android:screenOrientation="locked" />
 
         <activity
             android:name=".ui.activities.HelpActivity"
-            android:label="@string/settings" />
+            android:label="@string/settings"
+            android:screenOrientation="locked" />
 
         <activity
-            android:name=".ui.activities.ZoomableImageActivity" />
+            android:name=".ui.activities.ZoomableImageActivity"
+            android:screenOrientation="locked" />
 
         <activity
             android:name=".ui.activities.AddToQueueActivity"
@@ -65,6 +72,22 @@
             android:launchMode="singleTop">
 
             <intent-filter android:label="@string/add_to_queue">
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".ui.activities.DownloadActivity"
+            android:enabled="true"
+            android:exported="true"
+            android:label="@string/download"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Material3.DayNight.Dialog">
+
+            <intent-filter android:label="@string/download">
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/plain" />
@@ -83,7 +106,7 @@
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="user"
+            android:screenOrientation="locked"
             android:supportsPictureInPicture="true"
             android:windowSoftInputMode="adjustPan">
             <!-- allow being recognized as a music player -->
@@ -299,6 +322,8 @@
                 <data android:pathPrefix="/playlist" />
                 <!-- search prefix -->
                 <data android:pathPrefix="/results" />
+                <!-- temporary playlist prefix -->
+                <data android:pathPrefix="/watch_videos" />
             </intent-filter>
 
             <!-- Support being detected as media player -->
@@ -329,45 +354,45 @@
                 <data android:scheme="https" />
                 <data android:pathPrefix="/" />
 
-                <data android:host="pd.vern.cc" />
                 <data android:host="piped.adminforge.de" />
-                <data android:host="piped.frontendfriendly.xyz" />
-                <data android:host="piped.hostux.net" />
-                <data android:host="piped.in.projectsegfau.lt" />
+                <data android:host="piped.astartes.nl" />
+                <data android:host="piped.coldforge.xyz" />
+                <data android:host="piped.drgns.space" />
+                <data android:host="piped.ducks.party" />
                 <data android:host="piped.lunar.icu" />
-                <data android:host="piped.mha.fi" />
-                <data android:host="piped.osphost.fi" />
-                <data android:host="piped.palveluntarjoaja.eu" />
-                <data android:host="piped.privacydev.net" />
+                <data android:host="piped.ngn.tf" />
                 <data android:host="piped.projectsegfau.lt" />
-                <data android:host="piped.qdi.fi" />
-                <data android:host="piped.simpleprivacy.fr" />
+                <data android:host="piped.r4fo.com" />
                 <data android:host="piped.smnz.de" />
-                <data android:host="piped.tokhmi.xyz" />
+                <data android:host="piped.syncpundit.io" />
+                <data android:host="piped.us.projectsegfau.lt" />
                 <data android:host="piped.video" />
-                <data android:host="piped.yt" />
-                <data android:host="watch.leptons.xyz" />
-                <data android:host="watch.whatever.social" />
             </intent-filter>
         </activity>
 
         <service
             android:name=".services.DownloadService"
-            android:foregroundServiceType="dataSync"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
+
+        <service
+            android:name=".services.PlaylistDownloadEnqueueService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
 
         <service
             android:name=".services.OnlinePlayerService"
-            android:foregroundServiceType="mediaPlayback"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
 
         <service
             android:name=".services.OfflinePlayerService"
-            android:foregroundServiceType="mediaPlayback"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
 
         <service android:name=".services.OnClearFromRecentService"
             android:enabled="true"

@@ -18,12 +18,13 @@ import com.github.libretube.obj.FreetubeSubscriptions
 import com.github.libretube.obj.NewPipeSubscription
 import com.github.libretube.obj.NewPipeSubscriptions
 import com.github.libretube.obj.PipedImportPlaylist
-import com.github.libretube.obj.PipedImportPlaylistFile
-import java.util.Date
-import java.util.stream.Collectors
+import com.github.libretube.obj.PipedPlaylistFile
+import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.util.TextUtils
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
+import java.util.stream.Collectors
 
 object ImportHelper {
     /**
@@ -61,7 +62,7 @@ object ImportHelper {
                     JsonHelper.json.decodeFromStream<NewPipeSubscriptions>(it)
                 }
                 subscriptions?.subscriptions.orEmpty().map {
-                    it.url.replace("https://www.youtube.com/channel/", "")
+                    it.url.replace("${ShareDialog.YOUTUBE_FRONTEND_URL}/channel/", "")
                 }
             }
 
@@ -70,7 +71,7 @@ object ImportHelper {
                     JsonHelper.json.decodeFromStream<FreetubeSubscriptions>(it)
                 }
                 subscriptions?.subscriptions.orEmpty().map {
-                    it.url.replace("https://www.youtube.com/channel/", "")
+                    it.url.replace("${ShareDialog.YOUTUBE_FRONTEND_URL}/channel/", "")
                 }
             }
 
@@ -105,7 +106,7 @@ object ImportHelper {
         when (importFormat) {
             ImportFormat.NEWPIPE -> {
                 val newPipeChannels = subs.map {
-                    NewPipeSubscription(it.name, 0, "https://www.youtube.com${it.url}")
+                    NewPipeSubscription(it.name, 0, "${ShareDialog.YOUTUBE_FRONTEND_URL}${it.url}")
                 }
                 val newPipeSubscriptions = NewPipeSubscriptions(subscriptions = newPipeChannels)
                 activity.contentResolver.openOutputStream(uri)?.use {
@@ -115,7 +116,11 @@ object ImportHelper {
 
             ImportFormat.FREETUBE -> {
                 val freeTubeChannels = subs.map {
-                    FreetubeSubscription(it.name, "", "https://www.youtube.com${it.url}")
+                    FreetubeSubscription(
+                        it.name,
+                        "",
+                        "${ShareDialog.YOUTUBE_FRONTEND_URL}${it.url}"
+                    )
                 }
                 val freeTubeSubscriptions = FreetubeSubscriptions(subscriptions = freeTubeChannels)
                 activity.contentResolver.openOutputStream(uri)?.use {
@@ -139,7 +144,7 @@ object ImportHelper {
         when (importFormat) {
             ImportFormat.PIPED -> {
                 val playlistFile = activity.contentResolver.openInputStream(uri)?.use {
-                    JsonHelper.json.decodeFromStream<PipedImportPlaylistFile>(it)
+                    JsonHelper.json.decodeFromStream<PipedPlaylistFile>(it)
                 }
                 importPlaylists.addAll(playlistFile?.playlists.orEmpty())
 
@@ -177,7 +182,7 @@ object ImportHelper {
 
                     val playlistName = lines[1].split(",").reversed().getOrNull(2)
                     // the playlist name can be undefined in some cases, e.g. watch later lists
-                    playlist.name = playlistName ?: Date().toString()
+                    playlist.name = playlistName ?: TextUtils.defaultPlaylistName
 
                     // start directly at the beginning if header playlist info such as name is missing
                     val startIndex = if (playlistName == null) {
@@ -229,7 +234,7 @@ object ImportHelper {
         when (importFormat) {
             ImportFormat.PIPED -> {
                 val playlists = PlaylistsHelper.exportPipedPlaylists()
-                val playlistFile = PipedImportPlaylistFile("Piped", 1, playlists)
+                val playlistFile = PipedPlaylistFile(playlists = playlists)
 
                 activity.contentResolver.openOutputStream(uri)?.use {
                     JsonHelper.json.encodeToStream(playlistFile, it)

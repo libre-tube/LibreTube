@@ -8,6 +8,7 @@
         style="@style/Widget.Material3.CardView.Elevated"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
         android:layout_marginHorizontal="3dp">
 
         <TextView

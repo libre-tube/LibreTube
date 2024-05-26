@@ -60,7 +60,7 @@ class WatchHistoryAdapter(
             videoInfo.text = video.uploadDate?.let { TextUtils.localizeDate(it) }
             thumbnailDuration.setFormattedDuration(video.duration!!, null)
             ImageHelper.loadImage(video.thumbnailUrl, thumbnail)
-            ImageHelper.loadImage(video.uploaderAvatar, channelImage)
+            ImageHelper.loadImage(video.uploaderAvatar, channelImage, true)
 
             channelImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, video.uploaderUrl)

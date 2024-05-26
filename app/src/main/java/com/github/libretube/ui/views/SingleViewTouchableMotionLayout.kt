@@ -21,6 +21,10 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
     private var touchStarted = false
     private val transitionListenerList = mutableListOf<TransitionListener?>()
     private val swipeUpListener = mutableListOf<() -> Unit>()
+    private val swipeDownListener = mutableListOf<() -> Unit>()
+
+    private var startedMinimized = false
+    private var isStrictlyDownSwipe = false
 
     init {
         addTransitionListener(object : TransitionAdapter() {
@@ -63,16 +67,30 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
             distanceX: Float,
             distanceY: Float
         ): Boolean {
-            if (progress != 0F || distanceY < 30F) return false
-            swipeUpListener.forEach {
-                it.invoke()
+            if (isStrictlyDownSwipe && distanceY > 0) {
+                isStrictlyDownSwipe = false
             }
-            return true
+
+            if (isStrictlyDownSwipe && startedMinimized && distanceY < -15F) {
+                swipeDownListener.forEach { it.invoke() }
+                return true
+            }
+
+            if (progress == 0F && distanceY > 30F) {
+                swipeUpListener.forEach { it.invoke() }
+                return true
+            }
+
+            return false
         }
     }
 
-    fun addSwipeUpListener(listener: () -> Unit) {
+    fun addSwipeUpListener(listener: () -> Unit) = apply {
         swipeUpListener.add(listener)
+    }
+
+    fun addSwipeDownListener(listener: () -> Unit) = apply {
+        swipeDownListener.add(listener)
     }
 
     private val gestureDetector = GestureDetector(context, Listener())
@@ -88,6 +106,10 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 touchStarted = false
                 return super.onTouchEvent(event)
+            }
+            MotionEvent.ACTION_DOWN -> {
+                isStrictlyDownSwipe = true
+                startedMinimized = progress == 1F
             }
         }
         if (!touchStarted) {

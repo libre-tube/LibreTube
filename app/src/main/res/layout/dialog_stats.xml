@@ -56,7 +56,11 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/CustomDialogTextInputLayout"
+                        android:id="@+id/video_id_copy"
                         android:layout_marginTop="10dp"
+                        app:endIconMode="custom"
+                        app:endIconContentDescription="@string/copy_tooltip"
+                        app:endIconDrawable="@drawable/ic_copy"
                         android:hint="@string/video_id">
 
                         <com.google.android.material.textfield.TextInputEditText

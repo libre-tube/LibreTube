@@ -1,9 +1,11 @@
 plugins {
     id("com.android.application")
-    id("com.google.devtools.ksp")
     id("kotlin-android")
     id("kotlinx-serialization")
     id("kotlin-parcelize")
+    id("androidx.navigation.safeargs.kotlin")
+    alias(libs.plugins.baselineprofile)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -12,9 +14,9 @@ android {
     defaultConfig {
         applicationId = "com.github.libretube"
         minSdk = 21
-        targetSdk = 33
-        versionCode = 45
-        versionName = "0.20.1"
+        targetSdk = 34
+        versionCode = 53
+        versionName = "0.23.2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         resValue("string", "app_name", "LibreTube")
 
@@ -55,6 +57,7 @@ android {
         jvmTarget = "17"
     }
 
+    // Comment this block if issues occur while generating the baseline profile
     splits {
         abi {
             isEnable = true
@@ -68,14 +71,18 @@ android {
         jniLibs.excludes.add("lib/armeabi-v7a/*_neon.so")
     }
 
-    namespace = "com.github.libretube"
-
     tasks.register("testClasses")
 
     lint {
         abortOnError = false
         checkReleaseBuilds = false
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    namespace = "com.github.libretube"
 }
 
 dependencies {
@@ -86,21 +93,19 @@ dependencies {
     implementation(libs.androidx.core)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.fragment)
-    implementation(libs.androidx.legacySupport)
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)
     implementation(libs.androidx.preference)
     implementation(libs.androidx.work.runtime)
+    implementation(libs.androidx.collection)
+    implementation(libs.androidx.media)
+    implementation(libs.androidx.swiperefreshlayout)
 
     /* Android Lifecycle */
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.lifecycle.runtime)
     implementation(libs.lifecycle.livedata)
     implementation(libs.lifecycle.service)
-
-    /* Testing */
-    androidTestImplementation(libs.androidx.test.junit)
-    androidTestImplementation(libs.androidx.test.espressoCore)
 
     /* Design */
     implementation(libs.material)
@@ -117,6 +122,7 @@ dependencies {
 
     /* Retrofit and Kotlinx Serialization */
     implementation(libs.square.retrofit)
+    implementation(libs.logging.interceptor)
     implementation(libs.kotlinx.serialization)
     implementation(libs.kotlinx.datetime)
     implementation(libs.kotlinx.serialization.retrofit)
@@ -130,4 +136,11 @@ dependencies {
     /* Room */
     ksp(libs.room.compiler)
     implementation(libs.room)
+
+    /* Baseline profile generation */
+    implementation(libs.androidx.profileinstaller)
+    baselineProfile(project(":baselineprofile"))
+
+    /* AndroidX Paging */
+    implementation(libs.androidx.paging)
 }

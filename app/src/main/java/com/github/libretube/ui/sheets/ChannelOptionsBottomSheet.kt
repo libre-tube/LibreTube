@@ -24,25 +24,28 @@ import kotlinx.coroutines.withContext
 class ChannelOptionsBottomSheet : BaseBottomSheet() {
     private lateinit var channelId: String
     private var channelName: String? = null
+    private var subscribed: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         channelId = arguments?.getString(IntentData.channelId)!!
         channelName = arguments?.getString(IntentData.channelName)
+        subscribed = arguments?.getBoolean(IntentData.isSubscribed, false) ?: false
 
         setTitle(channelName)
 
         // List that stores the different menu options. In the future could be add more options here.
         val optionsList = mutableListOf(
-            getString(R.string.share),
-            getString(R.string.play_latest_videos),
-            getString(R.string.playOnBackground)
+            R.string.share,
+            R.string.play_latest_videos,
+            R.string.playOnBackground
         )
+        if (subscribed) optionsList.add(R.string.add_to_group)
 
-        setSimpleItems(optionsList) { which ->
+        setSimpleItems(optionsList.map { getString(it) }) { which ->
             when (optionsList[which]) {
-                getString(R.string.share) -> {
+                R.string.share -> {
                     val bundle = bundleOf(
                         IntentData.id to channelId,
                         IntentData.shareObjectType to ShareObjectType.CHANNEL,
@@ -53,7 +56,14 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
                     newShareDialog.show(parentFragmentManager, null)
                 }
 
-                getString(R.string.play_latest_videos) -> {
+                R.string.add_to_group -> {
+                    val sheet = AddChannelToGroupSheet().apply {
+                        arguments = bundleOf(IntentData.channelId to channelId)
+                    }
+                    sheet.show(parentFragmentManager, null)
+                }
+
+                R.string.play_latest_videos -> {
                     try {
                         val channel = withContext(Dispatchers.IO) {
                             RetrofitInstance.api.getChannel(channelId)
@@ -70,7 +80,7 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
                     }
                 }
 
-                getString(R.string.playOnBackground) -> {
+                R.string.playOnBackground -> {
                     try {
                         val channel = withContext(Dispatchers.IO) {
                             RetrofitInstance.api.getChannel(channelId)

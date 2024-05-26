@@ -1,8 +1,10 @@
 package com.github.libretube.ui.fragments
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +12,12 @@ import androidx.core.os.postDelayed
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.withTransaction
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.PreferenceKeys
@@ -23,11 +25,14 @@ import com.github.libretube.databinding.FragmentWatchHistoryBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.WatchHistoryItem
+import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.ui.adapters.WatchHistoryAdapter
+import com.github.libretube.ui.base.DynamicLayoutManagerFragment
+import com.github.libretube.ui.extensions.addOnBottomReachedListener
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.util.PlayingQueue
@@ -36,13 +41,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class WatchHistoryFragment : Fragment() {
+class WatchHistoryFragment : DynamicLayoutManagerFragment() {
     private var _binding: FragmentWatchHistoryBinding? = null
     private val binding get() = _binding!!
 
     private val handler = Handler(Looper.getMainLooper())
     private val playerViewModel: PlayerViewModel by activityViewModels()
     private var isLoading = false
+    private var recyclerViewState: Parcelable? = null
 
     private var selectedStatusFilter = PreferenceHelper.getInt(
         PreferenceKeys.SELECTED_HISTORY_STATUS_FILTER,
@@ -70,6 +76,11 @@ class WatchHistoryFragment : Fragment() {
         return binding.root
     }
 
+    override fun setLayoutManagers(gridItems: Int) {
+        _binding?.watchHistoryRecView?.layoutManager =
+            GridLayoutManager(context, gridItems.ceilHalf())
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -83,18 +94,28 @@ class WatchHistoryFragment : Fragment() {
 
         if (allHistory.isEmpty()) return
 
-        binding.filterTypeTV.text = resources.getStringArray(R.array.filterOptions)[selectedTypeFilter]
-        binding.filterStatusTV.text = resources.getStringArray(R.array.filterStatusOptions)[selectedStatusFilter]
+        binding.filterTypeTV.text =
+            resources.getStringArray(R.array.filterOptions)[selectedTypeFilter]
+        binding.filterStatusTV.text =
+            resources.getStringArray(R.array.filterStatusOptions)[selectedStatusFilter]
+
+        val watchPositionItem = arrayOf(getString(R.string.also_clear_watch_positions))
+        val selected = booleanArrayOf(false)
 
         binding.clear.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.clear_history)
-                .setMessage(R.string.irreversible)
+                .setMultiChoiceItems(watchPositionItem, selected) { _, index, newValue ->
+                    selected[index] = newValue
+                }
                 .setPositiveButton(R.string.okay) { _, _ ->
-                    binding.historyScrollView.isGone = true
+                    binding.historyContainer.isGone = true
                     binding.historyEmpty.isVisible = true
                     lifecycleScope.launch(Dispatchers.IO) {
-                        Database.watchHistoryDao().deleteAll()
+                        Database.withTransaction {
+                            Database.watchHistoryDao().deleteAll()
+                            if (selected[0]) Database.watchPositionDao().deleteAll()
+                        }
                     }
                 }
                 .setNegativeButton(R.string.cancel, null)
@@ -124,6 +145,14 @@ class WatchHistoryFragment : Fragment() {
                 }
             }.show(childFragmentManager)
         }
+
+        // manually restore the recyclerview state due to https://github.com/material-components/material-components-android/issues/3473
+        binding.watchHistoryRecView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                recyclerViewState = binding.watchHistoryRecView.layoutManager?.onSaveInstanceState()
+            }
+        })
 
         showWatchHistory(allHistory)
     }
@@ -163,10 +192,9 @@ class WatchHistoryFragment : Fragment() {
             )
         }
 
-        binding.watchHistoryRecView.layoutManager = LinearLayoutManager(context)
         binding.watchHistoryRecView.adapter = watchHistoryAdapter
         binding.historyEmpty.isGone = true
-        binding.historyScrollView.isVisible = true
+        binding.historyContainer.isVisible = true
 
         val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
             0,
@@ -194,7 +222,7 @@ class WatchHistoryFragment : Fragment() {
             RecyclerView.AdapterDataObserver() {
             override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
                 if (watchHistoryAdapter.itemCount == 0) {
-                    binding.historyScrollView.isGone = true
+                    binding.historyContainer.isGone = true
                     binding.historyEmpty.isVisible = true
                 }
             }
@@ -203,14 +231,13 @@ class WatchHistoryFragment : Fragment() {
         // add a listener for scroll end, delay needed to prevent loading new ones the first time
         handler.postDelayed(200) {
             if (_binding == null) return@postDelayed
-            binding.historyScrollView.viewTreeObserver.addOnScrollChangedListener {
-                if (_binding?.historyScrollView?.canScrollVertically(1) == false &&
-                    !isLoading
-                ) {
-                    isLoading = true
-                    watchHistoryAdapter.showMoreItems()
-                    isLoading = false
-                }
+
+            binding.watchHistoryRecView.addOnBottomReachedListener {
+                if (isLoading) return@addOnBottomReachedListener
+
+                isLoading = true
+                watchHistoryAdapter.showMoreItems()
+                isLoading = false
             }
         }
     }
@@ -238,6 +265,12 @@ class WatchHistoryFragment : Fragment() {
                 else -> throw IllegalArgumentException()
             }
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        // manually restore the recyclerview state due to https://github.com/material-components/material-components-android/issues/3473
+        binding.watchHistoryRecView.layoutManager?.onRestoreInstanceState(recyclerViewState)
     }
 
     override fun onDestroyView() {

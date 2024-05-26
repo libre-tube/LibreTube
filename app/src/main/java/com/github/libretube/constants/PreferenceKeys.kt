@@ -19,7 +19,6 @@ object PreferenceKeys {
     const val LANGUAGE = "language"
     const val REGION = "region"
     const val ORIENTATION = "orientation"
-    const val SAVE_FEED = "save_feed"
     const val NAVBAR_ITEMS = "navbar_items"
     const val START_FRAGMENT = "start_fragment"
 
@@ -29,7 +28,8 @@ object PreferenceKeys {
     const val THEME_MODE = "theme_toggle"
     const val PURE_THEME = "pure_theme"
     const val ACCENT_COLOR = "accent_color"
-    const val GRID_COLUMNS = "grid"
+    const val GRID_COLUMNS_PORTRAIT = "grid"
+    const val GRID_COLUMNS_LANDSCAPE = "grid_landscape"
     const val LABEL_VISIBILITY = "label_visibility"
     const val APP_ICON = "icon_change"
     const val LEGACY_SUBSCRIPTIONS = "legacy_subscriptions"
@@ -70,6 +70,7 @@ object PreferenceKeys {
     const val SEARCH_HISTORY_TOGGLE = "search_history_toggle"
     const val SYSTEM_CAPTION_STYLE = "system_caption_style"
     const val CAPTION_SETTINGS = "caption_settings"
+    const val RICH_CAPTION_RENDERING = "rich_caption_rendering"
     const val SEEK_INCREMENT = "seek_increment"
     const val DEFAULT_RESOLUTION = "default_res"
     const val DEFAULT_RESOLUTION_MOBILE = "default_res_mobile"
@@ -79,7 +80,6 @@ object PreferenceKeys {
     const val PLAYER_AUDIO_QUALITY_MOBILE = "player_audio_quality_mobile"
     const val DEFAULT_SUBTITLE = "default_subtitle"
     const val SKIP_BUTTONS = "skip_buttons"
-    const val PICTURE_IN_PICTURE = "picture_in_picture"
     const val PLAYER_RESIZE_MODE = "player_resize_mode"
     const val DEARROW = "dearrow"
     const val USE_HLS_OVER_DASH = "use_hls"
@@ -89,7 +89,6 @@ object PreferenceKeys {
     const val PLAYER_PINCH_CONTROL = "player_pinch_control"
     const val CAPTIONS_SIZE = "captions_size"
     const val DOUBLE_TAP_TO_SEEK = "double_tap_seek"
-    const val PAUSE_ON_QUIT = "pause_on_quit"
     const val ALTERNATIVE_PIP_CONTROLS = "alternative_pip_controls"
     const val SKIP_SILENCE = "skip_silence"
     const val ENABLED_VIDEO_CODECS = "video_codecs"
@@ -101,8 +100,8 @@ object PreferenceKeys {
     const val UNLIMITED_SEARCH_HISTORY = "unlimited_search_history"
     const val SB_HIGHLIGHTS = "sb_highlights"
     const val SHOW_TIME_LEFT = "show_time_left"
-    const val FALLBACK_PIPED_PROXY = "fallback_piped_proxy"
     const val ALLOW_PLAYBACK_DURING_CALL = "playback_during_call"
+    const val BEHAVIOR_WHEN_MINIMIZED = "behavior_when_minimized"
 
     /**
      * Background mode
@@ -128,12 +127,13 @@ object PreferenceKeys {
     const val LAST_STREAM_VIDEO_ID = "last_stream_video_id"
     const val LAST_WATCHED_FEED_TIME = "last_watched_feed_time"
     const val HIDE_WATCHED_FROM_FEED = "hide_watched_from_feed"
-    const val SELECTED_FEED_FILTER = "filer_feed"
+    const val SELECTED_FEED_FILTERS = "filter_feed"
     const val FEED_SORT_ORDER = "sort_oder_feed"
 
     /**
      * Advanced
      */
+    const val AUTOMATIC_UPDATE_CHECKS = "automatic_update_checks"
     const val DATA_SAVER_MODE = "data_saver_mode_key"
     const val MAX_IMAGE_CACHE = "image_cache_size"
     const val RESET_SETTINGS = "reset_settings"
@@ -143,9 +143,10 @@ object PreferenceKeys {
     const val SHARE_WITH_TIME_CODE = "share_with_time_code"
     const val CONFIRM_UNSUBSCRIBE = "confirm_unsubscribing"
     const val CLEAR_BOOKMARKS = "clear_bookmarks"
-    const val MAX_CONCURRENT_DOWNLOADS = "max_concurrent_downloads"
+    const val MAX_CONCURRENT_DOWNLOADS = "max_parallel_downloads"
     const val DISABLE_VIDEO_IMAGE_PROXY = "disable_video_image_proxy"
     const val CONTRIBUTE_TO_SB = "sb_contribute_key"
+    const val CONTRIBUTE_TO_DEARROW = "dearrow_contribute_key"
 
     /**
      * History

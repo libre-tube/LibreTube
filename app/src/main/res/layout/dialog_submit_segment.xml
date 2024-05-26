@@ -1,50 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingHorizontal="15dp"
+    android:paddingTop="15dp">
 
     <LinearLayout
+        android:id="@+id/create_segment_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:baselineAligned="false">
+        android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/CustomDialogTextInputLayout"
-            android:hint="@string/start_time"
-            android:layout_width="0dp"
-            android:layout_weight="1">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sb_create_segment"
+            android:textSize="24sp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/start_time"
-                android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_weight="1"
+                android:hint="@string/start_time">
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/CustomDialogTextInputLayout"
-            android:hint="@string/end_time"
-            android:layout_width="0dp"
-            android:layout_weight="1">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/start_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/end_time"
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:hint="@string/end_time">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/end_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <com.github.libretube.ui.views.DropdownMenu
+            android:id="@+id/segment_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hint="@string/segment_type"
+            app:icon="@drawable/ic_frame" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/create_segment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:drawableStart="@drawable/ic_copy"
+            android:text="@string/sb_create_segment" />
 
     </LinearLayout>
 
-    <com.github.libretube.ui.views.DropdownMenu
-        android:id="@+id/segment_category"
+    <LinearLayout
+        android:id="@+id/vote_segment_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
-        app:hint="@string/segment_type"
-        app:icon="@drawable/ic_frame" />
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/vote_for_segment"
+            android:textSize="24sp" />
+
+        <com.github.libretube.ui.views.DropdownMenu
+            android:id="@+id/segments_dropdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hint="@string/segment"
+            app:icon="@drawable/ic_frame" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/upvote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:checked="true"
+                android:text="@string/upvote" />
+
+            <RadioButton
+                android:id="@+id/downvote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:text="@string/downvote" />
+
+            <RadioButton
+                android:id="@+id/undo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/undo" />
+
+        </RadioGroup>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/vote_segment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:drawableStart="@drawable/ic_copy"
+            android:text="@string/vote_for_segment" />
+
+    </LinearLayout>
 
 </LinearLayout>

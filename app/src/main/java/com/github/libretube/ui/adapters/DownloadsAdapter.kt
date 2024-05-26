@@ -3,6 +3,7 @@ package com.github.libretube.ui.adapters
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
@@ -23,11 +24,11 @@ import com.github.libretube.ui.sheets.DownloadOptionsBottomSheet.Companion.DELET
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
 import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import kotlin.io.path.deleteIfExists
 import kotlin.io.path.exists
 import kotlin.io.path.fileSize
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
 
 class DownloadsAdapter(
     private val context: Context,
@@ -74,6 +75,10 @@ class DownloadsAdapter(
             } else {
                 downloadOverlay.isGone = true
                 fileSize.text = totalSizeInfo
+                durationContainer.isVisible = true
+                download.duration?.let {
+                    thumbnailDuration.text = DateUtils.formatElapsedTime(it)
+                }
             }
 
             download.thumbnailPath?.let { path ->
@@ -131,14 +136,16 @@ class DownloadsAdapter(
             .show()
     }
 
-    private fun deleteDownload(position: Int) {
+    fun deleteDownload(position: Int) {
         val download = downloads[position].download
         val items = downloads[position].downloadItems
 
         items.forEach {
             it.path.deleteIfExists()
         }
-        download.thumbnailPath?.deleteIfExists()
+        runCatching {
+            download.thumbnailPath?.deleteIfExists()
+        }
 
         runBlocking(Dispatchers.IO) {
             DatabaseHolder.Database.downloadDao().deleteDownload(download)

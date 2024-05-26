@@ -35,7 +35,8 @@
                     android:id="@+id/featuredRV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
+                    android:paddingHorizontal="10dp"
+                    android:clipToPadding="false"
                     android:nestedScrollingEnabled="false"
                     android:visibility="gone" />
 
@@ -48,7 +49,8 @@
                     android:id="@+id/watchingRV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
+                    android:paddingHorizontal="10dp"
+                    android:clipToPadding="false"
                     android:nestedScrollingEnabled="false"
                     android:visibility="gone" />
 
@@ -124,6 +126,26 @@
             android:text="@string/emptyList"
             android:textSize="20sp"
             android:textStyle="bold" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/refresh_button"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:textSize="12sp"
+            android:text="@string/retry"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/change_instance"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            android:text="@string/change_instance"/>
     </LinearLayout>
 
 </FrameLayout>

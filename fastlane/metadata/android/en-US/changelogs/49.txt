@@ -1,0 +1,7 @@
+* fix: back gesture doesn't work on some devices
+* fix: respect feed filter on home tab
+* fix: search is showing inappropriate results
+* fix: autoplay stops after turning screen off
+* fix: auto rotation stops working after having entered the fullscreen player
+* fix: comment expands when tapping on timestamp
+* fix: crashes during pagination on server side cancelled requests

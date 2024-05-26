@@ -44,6 +44,18 @@ object DatabaseHolder {
         }
     }
 
+    private val MIGRATION_17_18 = object : Migration(17, 18) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("CREATE TABLE 'downloadChapters' (" +
+                    "id INTEGER PRIMARY KEY NOT NULL, " +
+                    "videoId TEXT NOT NULL, " +
+                    "name TEXT NOT NULL, " +
+                    "start INTEGER NOT NULL, " +
+                    "thumbnailUrl TEXT NOT NULL" +
+                    ")")
+        }
+    }
+
     val Database by lazy {
         Room.databaseBuilder(LibreTubeApp.instance, AppDatabase::class.java, DATABASE_NAME)
             .addMigrations(
@@ -51,7 +63,8 @@ object DatabaseHolder {
                 MIGRATION_12_13,
                 MIGRATION_13_14,
                 MIGRATION_14_15,
-                MIGRATION_15_16
+                MIGRATION_15_16,
+                MIGRATION_17_18
             )
             .fallbackToDestructiveMigration()
             .build()

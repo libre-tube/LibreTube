@@ -9,7 +9,6 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.github.libretube.R
@@ -19,6 +18,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.AllCaughtUpRowBinding
 import com.github.libretube.databinding.TrendingRowBinding
 import com.github.libretube.databinding.VideoRowBinding
+import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
@@ -34,28 +34,12 @@ import com.github.libretube.util.TextUtils
 
 class VideosAdapter(
     private val streamItems: MutableList<StreamItem>,
-    private val showAllAtOnce: Boolean = true,
-    private val forceMode: ForceMode = ForceMode.NONE
+    private val forceMode: LayoutMode = LayoutMode.RESPECT_PREF
 ) : RecyclerView.Adapter<VideosViewHolder>() {
-
-    private var visibleCount = minOf(10, streamItems.size)
-
-    override fun getItemCount(): Int {
-        return when {
-            showAllAtOnce -> streamItems.size
-            else -> minOf(streamItems.size, visibleCount)
-        }
-    }
+    override fun getItemCount() = streamItems.size
 
     override fun getItemViewType(position: Int): Int {
         return if (streamItems[position].type == CAUGHT_UP_STREAM_TYPE) CAUGHT_UP_TYPE else NORMAL_TYPE
-    }
-
-    fun updateItems() {
-        val oldSize = visibleCount
-        visibleCount += minOf(10, streamItems.size - oldSize)
-        if (visibleCount == oldSize) return
-        notifyItemRangeInserted(oldSize, visibleCount)
     }
 
     fun insertItems(newItems: List<StreamItem>) {
@@ -69,7 +53,7 @@ class VideosAdapter(
             it.url?.toID() == videoId
         }.takeIf { it > 0 } ?: return
         streamItems.removeAt(index)
-        visibleCount--
+
         notifyItemRemoved(index)
         notifyItemRangeChanged(index, itemCount)
     }
@@ -82,14 +66,13 @@ class VideosAdapter(
             )
 
             forceMode in listOf(
-                ForceMode.TRENDING,
-                ForceMode.RELATED,
-                ForceMode.HOME
+                LayoutMode.TRENDING_ROW,
+                LayoutMode.RELATED_COLUMN
             ) -> VideosViewHolder(
                 TrendingRowBinding.inflate(layoutInflater, parent, false)
             )
 
-            forceMode == ForceMode.CHANNEL -> VideosViewHolder(
+            forceMode == LayoutMode.CHANNEL_ROW -> VideosViewHolder(
                 VideoRowBinding.inflate(layoutInflater, parent, false)
             )
 
@@ -126,11 +109,9 @@ class VideosAdapter(
         // Trending layout
         holder.trendingRowBinding?.apply {
             // set a fixed width for better visuals
-            root.updateLayoutParams {
-                when (forceMode) {
-                    ForceMode.RELATED -> width = 210f.dpToPx()
-                    ForceMode.HOME -> width = 250f.dpToPx()
-                    else -> {}
+            if (forceMode == LayoutMode.RELATED_COLUMN) {
+                root.updateLayoutParams {
+                    width = 250f.dpToPx()
                 }
             }
 
@@ -150,7 +131,7 @@ class VideosAdapter(
                 NavigationHelper.navigateChannel(root.context, video.uploaderUrl)
             }
             ImageHelper.loadImage(video.thumbnail, thumbnail)
-            ImageHelper.loadImage(video.uploaderAvatar, channelImage)
+            ImageHelper.loadImage(video.uploaderAvatar, channelImage, true)
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, video.url)
             }
@@ -183,8 +164,8 @@ class VideosAdapter(
 
             ImageHelper.loadImage(video.thumbnail, thumbnail)
 
-            if (forceMode != ForceMode.CHANNEL) {
-                ImageHelper.loadImage(video.uploaderAvatar, channelImage)
+            if (forceMode != LayoutMode.CHANNEL_ROW) {
+                ImageHelper.loadImage(video.uploaderAvatar, channelImage, true)
                 channelName.text = video.uploaderName
 
                 channelContainer.setOnClickListener {
@@ -214,30 +195,23 @@ class VideosAdapter(
     }
 
     companion object {
-        enum class ForceMode {
-            NONE,
-            TRENDING,
-            ROW,
-            CHANNEL,
-            RELATED,
-            HOME
+        enum class LayoutMode {
+            RESPECT_PREF,
+            TRENDING_ROW,
+            VIDEO_ROW,
+            CHANNEL_ROW,
+            RELATED_COLUMN
         }
 
-        fun getLayout(context: Context): LayoutManager {
+        fun getLayout(context: Context, gridItems: Int): LayoutManager {
             return if (PreferenceHelper.getBoolean(
                     PreferenceKeys.ALTERNATIVE_VIDEOS_LAYOUT,
                     false
                 )
             ) {
-                LinearLayoutManager(context)
+                GridLayoutManager(context, gridItems.ceilHalf())
             } else {
-                GridLayoutManager(
-                    context,
-                    PreferenceHelper.getString(
-                        PreferenceKeys.GRID_COLUMNS,
-                        context.resources.getInteger(R.integer.grid_items).toString()
-                    ).toInt()
-                )
+                GridLayoutManager(context, gridItems)
             }
         }
 

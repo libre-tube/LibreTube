@@ -1,7 +1,10 @@
 package com.github.libretube.services
 
 import android.app.Notification
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Binder
 import android.os.Handler
 import android.os.IBinder
@@ -9,6 +12,7 @@ import android.os.Looper
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
@@ -28,9 +32,10 @@ import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHelper
-import com.github.libretube.db.DatabaseHolder.Database
-import com.github.libretube.db.obj.WatchPosition
+import com.github.libretube.enums.NotificationId
+import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.extensions.parcelableExtra
+import com.github.libretube.extensions.serializableExtra
 import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.updateParameters
@@ -40,9 +45,8 @@ import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.util.NowPlayingNotification
-import com.github.libretube.util.NowPlayingNotification.Companion.PLAYER_NOTIFICATION_ID
+import com.github.libretube.util.PauseableTimer
 import com.github.libretube.util.PlayingQueue
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -74,6 +78,7 @@ class OnlinePlayerService : LifecycleService() {
      * The [ExoPlayer] player. Followed tutorial [here](https://developer.android.com/codelabs/exoplayer-intro)
      */
     var player: ExoPlayer? = null
+    private var trackSelector: DefaultTrackSelector? = null
     private var isTransitioning = true
 
     /**
@@ -100,19 +105,33 @@ class OnlinePlayerService : LifecycleService() {
     /**
      * Listener for passing playback state changes to the AudioPlayerFragment
      */
-    var onIsPlayingChanged: ((isPlaying: Boolean) -> Unit)? = null
+    var onStateOrPlayingChanged: ((isPlaying: Boolean) -> Unit)? = null
     var onNewVideo: ((streams: Streams, videoId: String) -> Unit)? = null
+
+    private val watchPositionTimer = PauseableTimer(
+        onTick = this::saveWatchPosition,
+        delayMillis = PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS
+    )
 
     private val playerListener = object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
             super.onIsPlayingChanged(isPlaying)
-            onIsPlayingChanged?.invoke(isPlaying)
+            onStateOrPlayingChanged?.invoke(isPlaying)
+
+            // Start or pause watch position timer
+            if (isPlaying) {
+                watchPositionTimer.resume()
+            } else {
+                watchPositionTimer.pause()
+            }
         }
 
         override fun onPlaybackStateChanged(state: Int) {
+            onStateOrPlayingChanged?.invoke(player?.isPlaying ?: false)
+
             when (state) {
                 Player.STATE_ENDED -> {
-                    if (PlayerHelper.shouldPlayNextVideo(playlistId != null) && !isTransitioning) playNextVideo()
+                    if (!isTransitioning) playNextVideo()
                 }
 
                 Player.STATE_IDLE -> {
@@ -143,6 +162,36 @@ class OnlinePlayerService : LifecycleService() {
                 ).show()
             }
         }
+
+        override fun onEvents(player: Player, events: Player.Events) {
+            super.onEvents(player, events)
+
+            if (events.contains(Player.EVENT_TRACKS_CHANGED)) {
+                PlayerHelper.setPreferredAudioQuality(this@OnlinePlayerService, player, trackSelector ?: return)
+            }
+        }
+    }
+
+    private val playerActionReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val event = intent.serializableExtra<PlayerEvent>(PlayerHelper.CONTROL_TYPE) ?: return
+            val player = player ?: return
+
+            if (PlayerHelper.handlePlayerAction(player, event)) return
+
+            when (event) {
+                PlayerEvent.Next -> {
+                    PlayingQueue.navigateNext()
+                }
+                PlayerEvent.Prev -> {
+                    PlayingQueue.navigatePrev()
+                }
+                PlayerEvent.Stop -> {
+                    onDestroy()
+                }
+                else -> Unit
+            }
+        }
     }
 
     /**
@@ -157,7 +206,14 @@ class OnlinePlayerService : LifecycleService() {
             .setSmallIcon(R.drawable.ic_launcher_lockscreen)
             .build()
 
-        startForeground(PLAYER_NOTIFICATION_ID, notification)
+        startForeground(NotificationId.PLAYER_PLAYBACK.id, notification)
+
+        ContextCompat.registerReceiver(
+            this,
+            playerActionReceiver,
+            IntentFilter(PlayerHelper.getIntentActionName(this)),
+            ContextCompat.RECEIVER_NOT_EXPORTED
+        )
     }
 
     /**
@@ -178,25 +234,14 @@ class OnlinePlayerService : LifecycleService() {
             PlayingQueue.setOnQueueTapListener { streamItem ->
                 streamItem.url?.toID()?.let { playNextVideo(it) }
             }
-
-            if (PlayerHelper.watchPositionsAudio) {
-                updateWatchPosition()
-            }
         }
         return super.onStartCommand(intent, flags, startId)
     }
 
-    private fun updateWatchPosition() {
-        player?.currentPosition?.let {
-            if (isTransitioning) return@let
+    private fun saveWatchPosition() {
+        if (isTransitioning || !PlayerHelper.watchPositionsAudio) return
 
-            val watchPosition = WatchPosition(videoId, it)
-
-            CoroutineScope(Dispatchers.IO).launch {
-                Database.watchPositionDao().insert(watchPosition)
-            }
-        }
-        handler.postDelayed(this::updateWatchPosition, 500)
+        player?.let { PlayerHelper.saveWatchPosition(it, videoId) }
     }
 
     /**
@@ -246,7 +291,7 @@ class OnlinePlayerService : LifecycleService() {
                 if (seekToPosition != 0L) {
                     player?.seekTo(seekToPosition)
                 } else if (PlayerHelper.watchPositionsAudio) {
-                    PlayerHelper.getPosition(videoId, streams?.duration)?.let {
+                    PlayerHelper.getStoredWatchPosition(videoId, streams?.duration)?.let {
                         player?.seekTo(it)
                     }
                 }
@@ -258,7 +303,7 @@ class OnlinePlayerService : LifecycleService() {
             nowPlayingNotification = NowPlayingNotification(
                 this@OnlinePlayerService,
                 player!!,
-                true
+                NowPlayingNotification.Companion.NowPlayingNotificationType.AUDIO_ONLINE
             )
         }
         val playerNotificationData = PlayerNotificationData(
@@ -283,13 +328,12 @@ class OnlinePlayerService : LifecycleService() {
     private fun initializePlayer() {
         if (player != null) return
 
-        val trackSelector = DefaultTrackSelector(this)
-        PlayerHelper.applyPreferredAudioQuality(this, trackSelector)
-        trackSelector.updateParameters {
+        trackSelector = DefaultTrackSelector(this)
+        trackSelector!!.updateParameters {
             setTrackTypeDisabled(C.TRACK_TYPE_VIDEO, true)
         }
 
-        player = PlayerHelper.createPlayer(this, trackSelector, true)
+        player = PlayerHelper.createPlayer(this, trackSelector!!, true)
         // prevent android from putting LibreTube to sleep when locked
         player!!.setWakeMode(WAKE_MODE_NETWORK)
 
@@ -304,6 +348,15 @@ class OnlinePlayerService : LifecycleService() {
      * Plays the next video from the queue
      */
     private fun playNextVideo(nextId: String? = null) {
+        if (nextId == null && PlayingQueue.repeatMode == Player.REPEAT_MODE_ONE) {
+            player?.seekTo(0)
+            return
+        }
+
+        saveWatchPosition()
+
+        if (!PlayerHelper.isAutoPlayEnabled(playlistId != null)) return
+
         val nextVideo = nextId ?: PlayingQueue.getNext() ?: return
 
         // play new video on background
@@ -319,18 +372,13 @@ class OnlinePlayerService : LifecycleService() {
     private suspend fun setMediaItem() {
         val streams = streams ?: return
 
-        val (uri, mimeType) = if (streams.audioStreams.isNotEmpty()) {
-            val disableProxy = ProxyHelper.useYouTubeSourceWithoutProxy(
-                streams.videoStreams.first().url!!
-            )
-            PlayerHelper.createDashSource(
-                streams,
-                this,
-                disableProxy
-            ) to MimeTypes.APPLICATION_MPD
-        } else {
-            ProxyHelper.unwrapStreamUrl(streams.hls.orEmpty()).toUri() to MimeTypes.APPLICATION_M3U8
-        }
+        val (uri, mimeType) =
+            if (!PlayerHelper.useHlsOverDash && streams.audioStreams.isNotEmpty() && !PlayerHelper.disablePipedProxy) {
+                PlayerHelper.createDashSource(streams, this) to MimeTypes.APPLICATION_MPD
+            } else {
+                ProxyHelper.unwrapStreamUrl(streams.hls.orEmpty())
+                    .toUri() to MimeTypes.APPLICATION_M3U8
+            }
 
         val mediaItem = MediaItem.Builder()
             .setUri(uri)
@@ -380,7 +428,18 @@ class OnlinePlayerService : LifecycleService() {
         // reset the playing queue
         PlayingQueue.resetToDefaults()
 
-        if (this::nowPlayingNotification.isInitialized) nowPlayingNotification.destroySelfAndPlayer()
+        if (this::nowPlayingNotification.isInitialized) nowPlayingNotification.destroySelf()
+        watchPositionTimer.destroy()
+        handler.removeCallbacksAndMessages(null)
+
+        runCatching {
+            player?.stop()
+            player?.release()
+        }
+
+        runCatching {
+            unregisterReceiver(playerActionReceiver)
+        }
 
         // called when the user pressed stop in the notification
         // stop the service from being in the foreground and remove the notification
@@ -406,12 +465,4 @@ class OnlinePlayerService : LifecycleService() {
     fun getDuration() = player?.duration
 
     fun seekToPosition(position: Long) = player?.seekTo(position)
-
-    fun pause() {
-        player?.pause()
-    }
-
-    fun play() {
-        player?.play()
-    }
 }

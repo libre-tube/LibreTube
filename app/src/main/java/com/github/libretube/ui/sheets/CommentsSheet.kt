@@ -1,6 +1,5 @@
 package com.github.libretube.ui.sheets
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import androidx.fragment.app.setFragmentResult
 import com.github.libretube.R
 import com.github.libretube.databinding.CommentsSheetBinding
 import com.github.libretube.ui.fragments.CommentsMainFragment
@@ -34,9 +34,16 @@ class CommentsSheet : UndimmedBottomSheet() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        commentsViewModel.commentsSheetDismiss = this::dismiss
-
         val binding = binding
+
+        childFragmentManager.setFragmentResultListener(DISMISS_SHEET_REQUEST_KEY, viewLifecycleOwner) { _, _ ->
+            dismiss()
+        }
+
+        // forward requests to open links to the parent fragment
+        childFragmentManager.setFragmentResultListener(HANDLE_LINK_REQUEST_KEY, viewLifecycleOwner) { key, result ->
+            parentFragment?.setFragmentResult(key, result)
+        }
 
         binding.btnBack.setOnClickListener {
             if (childFragmentManager.backStackEntryCount > 0) {
@@ -47,7 +54,7 @@ class CommentsSheet : UndimmedBottomSheet() {
         binding.btnClose.setOnClickListener { dismiss() }
 
         childFragmentManager.commit {
-            replace<CommentsMainFragment>(R.id.commentFragContainer)
+            replace<CommentsMainFragment>(R.id.commentFragContainer, args = arguments)
         }
 
         commentsViewModel.setCommentSheetExpand(true)
@@ -76,8 +83,8 @@ class CommentsSheet : UndimmedBottomSheet() {
         binding.commentsTitle.text = title
     }
 
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
-        commentsViewModel.commentsSheetDismiss = null
+    companion object {
+        const val HANDLE_LINK_REQUEST_KEY = "handle_link_request_key"
+        const val DISMISS_SHEET_REQUEST_KEY = "dismiss_sheet_request_key"
     }
 }

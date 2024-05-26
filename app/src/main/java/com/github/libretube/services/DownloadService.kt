@@ -23,8 +23,10 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.Download
+import com.github.libretube.db.obj.DownloadChapter
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
+import com.github.libretube.enums.NotificationId
 import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.extensions.getContentLength
 import com.github.libretube.extensions.parcelableExtra
@@ -32,6 +34,7 @@ import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.DownloadHelper.getNotificationId
 import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.DownloadStatus
 import com.github.libretube.parcelable.DownloadData
 import com.github.libretube.receivers.NotificationReceiver
@@ -39,20 +42,7 @@ import com.github.libretube.receivers.NotificationReceiver.Companion.ACTION_DOWN
 import com.github.libretube.receivers.NotificationReceiver.Companion.ACTION_DOWNLOAD_RESUME
 import com.github.libretube.receivers.NotificationReceiver.Companion.ACTION_DOWNLOAD_STOP
 import com.github.libretube.ui.activities.MainActivity
-import java.io.File
-import java.net.HttpURLConnection
-import java.net.SocketTimeoutException
-import java.net.URL
-import java.nio.file.Path
-import java.nio.file.StandardOpenOption
-import java.util.concurrent.Executors
-import kotlin.io.path.createFile
-import kotlin.io.path.deleteIfExists
-import kotlin.io.path.div
-import kotlin.io.path.fileSize
-import kotlin.math.min
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
@@ -67,6 +57,18 @@ import kotlinx.datetime.toLocalDateTime
 import okio.buffer
 import okio.sink
 import okio.source
+import java.io.File
+import java.net.HttpURLConnection
+import java.net.SocketTimeoutException
+import java.net.URL
+import java.nio.file.Path
+import java.nio.file.StandardOpenOption
+import java.util.concurrent.Executors
+import kotlin.io.path.createFile
+import kotlin.io.path.deleteIfExists
+import kotlin.io.path.div
+import kotlin.io.path.fileSize
+import kotlin.math.min
 
 /**
  * Download service with custom implementation of downloading using [HttpURLConnection].
@@ -117,10 +119,20 @@ class DownloadService : LifecycleService() {
                     streams.title,
                     streams.description,
                     streams.uploader,
+                    streams.duration,
                     streams.uploadTimestamp.toLocalDateTime(TimeZone.currentSystemDefault()).date,
                     thumbnailTargetPath
                 )
                 Database.downloadDao().insertDownload(download)
+                for (chapter in streams.chapters) {
+                    val downloadChapter = DownloadChapter(
+                        videoId = videoId,
+                        name = chapter.title,
+                        start = chapter.start,
+                        thumbnailUrl = chapter.image
+                    )
+                    Database.downloadDao().insertDownloadChapter(downloadChapter)
+                }
                 ImageHelper.downloadImage(
                     this@DownloadService,
                     streams.thumbnailUrl,
@@ -162,9 +174,9 @@ class DownloadService : LifecycleService() {
         downloadQueue[item.id] = true
         val notificationBuilder = getNotificationBuilder(item)
         setResumeNotification(notificationBuilder, item)
-        val path = item.path
-        var totalRead = path.fileSize()
-        val url = URL(item.url ?: return)
+
+        var totalRead = item.path.fileSize()
+        val url = URL(ProxyHelper.unwrapStreamUrl(item.url ?: return))
 
         // only fetch the content length if it's not been returned by the API
         if (item.downloadSize <= 0L) {
@@ -179,7 +191,7 @@ class DownloadService : LifecycleService() {
                 val con = startConnection(item, url, totalRead, item.downloadSize) ?: return
 
                 @Suppress("NewApi") // The StandardOpenOption enum is desugared.
-                val sink = path.sink(StandardOpenOption.APPEND).buffer()
+                val sink = item.path.sink(StandardOpenOption.APPEND).buffer()
                 val sourceByte = con.inputStream.source()
 
                 var lastTime = System.currentTimeMillis() / 1000
@@ -269,7 +281,9 @@ class DownloadService : LifecycleService() {
         val limit = if (readLimit == null) {
             ""
         } else {
-            min(readLimit, alreadyRead + BYTES_PER_REQUEST)
+            // generate a random byte distance to make it more difficult to fingerprint
+            val nextBytesToReadSize = (BYTES_PER_REQUEST_MIN..BYTES_PER_REQUEST_MAX).random()
+            min(readLimit, alreadyRead + nextBytesToReadSize)
         }
         con.setRequestProperty("Range", "bytes=$alreadyRead-$limit")
         con.connectTimeout = DownloadHelper.DEFAULT_TIMEOUT
@@ -326,7 +340,8 @@ class DownloadService : LifecycleService() {
         }
 
         lifecycleScope.launch(coroutineContext) {
-            downloadFile(Database.downloadDao().findDownloadItemById(id))
+            val file = Database.downloadDao().findDownloadItemById(id) ?: return@launch
+            downloadFile(file)
         }
     }
 
@@ -346,16 +361,14 @@ class DownloadService : LifecycleService() {
     /**
      * Stop downloading job for given [id]. If no downloads are active, stop the service.
      */
-    private fun stop(id: Int) = CoroutineScope(Dispatchers.IO).launch {
+    private fun stop(id: Int) = lifecycleScope.launch(coroutineContext) {
         downloadQueue[id] = false
         _downloadFlow.emit(id to DownloadStatus.Stopped)
 
-        lifecycleScope.launch {
-            val item = Database.downloadDao().findDownloadItemById(id)
-            notificationManager.cancel(item.getNotificationId())
-            Database.downloadDao().deleteDownloadItemById(id)
-            stopServiceIfDone()
-        }
+        val item = Database.downloadDao().findDownloadItemById(id) ?: return@launch
+        notificationManager.cancel(item.getNotificationId())
+        Database.downloadDao().deleteDownloadItemById(id)
+        stopServiceIfDone()
     }
 
     /**
@@ -407,7 +420,7 @@ class DownloadService : LifecycleService() {
             .setOnlyAlertOnce(true)
             .setGroupSummary(true)
 
-        startForeground(DOWNLOAD_PROGRESS_NOTIFICATION_ID, summaryNotificationBuilder.build())
+        startForeground(NotificationId.DOWNLOAD_IN_PROGRESS.id, summaryNotificationBuilder.build())
     }
 
     private fun getNotificationBuilder(item: DownloadItem): NotificationCompat.Builder {
@@ -530,13 +543,17 @@ class DownloadService : LifecycleService() {
     }
 
     companion object {
-        private const val DOWNLOAD_PROGRESS_NOTIFICATION_ID = 2
         private const val DOWNLOAD_NOTIFICATION_GROUP = "download_notification_group"
         const val ACTION_SERVICE_STARTED =
             "com.github.libretube.services.DownloadService.ACTION_SERVICE_STARTED"
         const val ACTION_SERVICE_STOPPED =
             "com.github.libretube.services.DownloadService.ACTION_SERVICE_STOPPED"
+
+        // any values that are not in that range are strictly rate limited by YT or are very slow due
+        // to the amount of requests that's being made
+        private const val BYTES_PER_REQUEST_MIN = 500_000L
+        private const val BYTES_PER_REQUEST_MAX = 3_000_000L
+
         var IS_DOWNLOAD_RUNNING = false
-        private const val BYTES_PER_REQUEST = 10000000L
     }
 }

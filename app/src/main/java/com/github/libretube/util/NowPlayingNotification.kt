@@ -2,16 +2,13 @@ package com.github.libretube.util
 
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
 import androidx.core.app.PendingIntentCompat
@@ -25,9 +22,9 @@ import coil.request.ImageRequest
 import com.github.libretube.LibreTubeApp.Companion.PLAYER_CHANNEL_NAME
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
-import com.github.libretube.extensions.seekBy
+import com.github.libretube.enums.NotificationId
+import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.extensions.toMediaMetadataCompat
-import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.obj.PlayerNotificationData
@@ -39,7 +36,7 @@ import java.util.UUID
 class NowPlayingNotification(
     private val context: Context,
     private val player: ExoPlayer,
-    private val isBackgroundPlayerNotification: Boolean
+    private val notificationType: NowPlayingNotificationType
 ) {
     private var videoId: String? = null
     private val nManager = context.getSystemService<NotificationManager>()!!
@@ -66,6 +63,7 @@ class NowPlayingNotification(
 
     private fun loadCurrentLargeIcon() {
         if (DataSaverMode.isEnabled(context)) return
+
         if (notificationBitmap == null) {
             enqueueThumbnailRequest {
                 createOrUpdateNotification()
@@ -79,17 +77,20 @@ class NowPlayingNotification(
         // is set to "singleTop" in the AndroidManifest (important!!!)
         // that's the only way to launch back into the previous activity (e.g. the player view
         val intent = Intent(context, MainActivity::class.java).apply {
-            if (isBackgroundPlayerNotification) {
+            if (notificationType == NowPlayingNotificationType.AUDIO_ONLINE) {
                 putExtra(IntentData.openAudioPlayer, true)
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             }
         }
+
         return PendingIntentCompat
             .getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT, false)
     }
 
     private fun createIntent(action: String): PendingIntent? {
-        val intent = Intent(action).setPackage(context.packageName)
+        val intent = Intent(action)
+            .setPackage(context.packageName)
+
         return PendingIntentCompat
             .getBroadcast(context, 1, intent, PendingIntent.FLAG_CANCEL_CURRENT, false)
     }
@@ -127,14 +128,14 @@ class NowPlayingNotification(
 
     private val legacyNotificationButtons
         get() = listOf(
-            createNotificationAction(R.drawable.ic_prev_outlined, PREV),
+            createNotificationAction(R.drawable.ic_prev_outlined, PlayerEvent.Prev.name),
             createNotificationAction(
                 if (player.isPlaying) R.drawable.ic_pause else R.drawable.ic_play,
-                PLAY_PAUSE
+                PlayerEvent.PlayPause.name
             ),
-            createNotificationAction(R.drawable.ic_next_outlined, NEXT),
-            createNotificationAction(R.drawable.ic_rewind_md, REWIND),
-            createNotificationAction(R.drawable.ic_forward_md, FORWARD)
+            createNotificationAction(R.drawable.ic_next_outlined, PlayerEvent.Next.name),
+            createNotificationAction(R.drawable.ic_rewind_md, PlayerEvent.Rewind.name),
+            createNotificationAction(R.drawable.ic_forward_md, PlayerEvent.Forward.name)
         )
 
     private fun createNotificationAction(
@@ -159,38 +160,38 @@ class NowPlayingNotification(
         if (this::mediaSession.isInitialized) return
 
         val sessionCallback = object : MediaSessionCompat.Callback() {
-            override fun onSkipToNext() {
-                handlePlayerAction(NEXT)
-                super.onSkipToNext()
-            }
-
-            override fun onSkipToPrevious() {
-                handlePlayerAction(PREV)
-                super.onSkipToPrevious()
-            }
-
             override fun onRewind() {
-                handlePlayerAction(REWIND)
+                handlePlayerAction(PlayerEvent.Rewind)
                 super.onRewind()
             }
 
             override fun onFastForward() {
-                handlePlayerAction(FORWARD)
+                handlePlayerAction(PlayerEvent.Forward)
                 super.onFastForward()
             }
 
             override fun onPlay() {
-                handlePlayerAction(PLAY_PAUSE)
+                handlePlayerAction(PlayerEvent.PlayPause)
                 super.onPlay()
             }
 
             override fun onPause() {
-                handlePlayerAction(PLAY_PAUSE)
+                handlePlayerAction(PlayerEvent.PlayPause)
                 super.onPause()
             }
 
+            override fun onSkipToNext() {
+                handlePlayerAction(PlayerEvent.Next)
+                super.onSkipToNext()
+            }
+
+            override fun onSkipToPrevious() {
+                handlePlayerAction(PlayerEvent.Prev)
+                super.onSkipToPrevious()
+            }
+
             override fun onStop() {
-                handlePlayerAction(STOP)
+                handlePlayerAction(PlayerEvent.Stop)
                 super.onStop()
             }
 
@@ -200,7 +201,7 @@ class NowPlayingNotification(
             }
 
             override fun onCustomAction(action: String, extras: Bundle?) {
-                handlePlayerAction(action)
+                runCatching { handlePlayerAction(PlayerEvent.valueOf(action)) }
                 super.onCustomAction(action, extras)
             }
         }
@@ -245,15 +246,13 @@ class NowPlayingNotification(
     private fun updateSessionPlaybackState(isPlaying: Boolean? = null, isLoading: Boolean? = null) {
         val loading = isLoading == true || (isPlaying == false && player.isLoading)
 
-        val newPlaybackState = if (loading) {
-            createPlaybackState(PlaybackStateCompat.STATE_BUFFERING)
-        } else if (isPlaying ?: player.isPlaying) {
-            createPlaybackState(PlaybackStateCompat.STATE_PLAYING)
-        } else {
-            createPlaybackState(PlaybackStateCompat.STATE_PAUSED)
+        val newPlaybackState = when {
+            loading -> PlaybackStateCompat.STATE_BUFFERING
+            isPlaying ?: player.isPlaying -> PlaybackStateCompat.STATE_PLAYING
+            else -> PlaybackStateCompat.STATE_PAUSED
         }
 
-        mediaSession.setPlaybackState(newPlaybackState)
+        mediaSession.setPlaybackState(createPlaybackState(newPlaybackState))
     }
 
     private fun createPlaybackState(@PlaybackStateCompat.State state: Int): PlaybackStateCompat {
@@ -263,54 +262,25 @@ class NowPlayingNotification(
             PlaybackStateCompat.ACTION_FAST_FORWARD or
             PlaybackStateCompat.ACTION_PLAY_PAUSE or
             PlaybackStateCompat.ACTION_PAUSE or
+            PlaybackStateCompat.ACTION_PLAY or
             PlaybackStateCompat.ACTION_SEEK_TO
 
         return PlaybackStateCompat.Builder()
             .setActions(stateActions)
-            .addCustomAction(createMediaSessionAction(R.drawable.ic_rewind_md, REWIND))
-            .addCustomAction(createMediaSessionAction(R.drawable.ic_forward_md, FORWARD))
+            .addCustomAction(createMediaSessionAction(R.drawable.ic_rewind_md, PlayerEvent.Rewind.name))
+            .addCustomAction(createMediaSessionAction(R.drawable.ic_forward_md, PlayerEvent.Forward.name))
             .setState(state, player.currentPosition, player.playbackParameters.speed)
             .build()
     }
 
-    private fun handlePlayerAction(action: String) {
-        when (action) {
-            NEXT -> {
-                if (PlayingQueue.hasNext()) {
-                    PlayingQueue.onQueueItemSelected(
-                        PlayingQueue.currentIndex() + 1
-                    )
-                }
-            }
-
-            PREV -> {
-                if (PlayingQueue.hasPrev()) {
-                    PlayingQueue.onQueueItemSelected(
-                        PlayingQueue.currentIndex() - 1
-                    )
-                }
-            }
-
-            REWIND -> {
-                player.seekBy(-PlayerHelper.seekIncrement)
-            }
-
-            FORWARD -> {
-                player.seekBy(PlayerHelper.seekIncrement)
-            }
-
-            PLAY_PAUSE -> {
-                if (player.playerError != null) player.prepare()
-                if (player.isPlaying) player.pause() else player.play()
-            }
-
-            STOP -> {
-                Log.e("stop", "stop")
-                if (isBackgroundPlayerNotification) {
-                    BackgroundHelper.stopBackgroundPlay(context)
-                }
-            }
-        }
+    /**
+     * Forward the action to the responsible notification owner (e.g. PlayerFragment)
+     */
+    private fun handlePlayerAction(action: PlayerEvent) {
+        val intent = Intent(PlayerHelper.getIntentActionName(context))
+            .setPackage(context.packageName)
+            .putExtra(PlayerHelper.CONTROL_TYPE, action)
+        context.sendBroadcast(intent)
     }
 
     /**
@@ -327,7 +297,6 @@ class NowPlayingNotification(
         if (notificationBuilder == null) {
             createMediaSession()
             createNotificationBuilder()
-            createActionReceiver()
             // update the notification each time the player continues playing or pauses
             player.addListener(object : Player.Listener {
                 override fun onIsPlayingChanged(isPlaying: Boolean) {
@@ -348,7 +317,7 @@ class NowPlayingNotification(
         notificationBuilder = NotificationCompat.Builder(context, PLAYER_CHANNEL_NAME)
             .setSmallIcon(R.drawable.ic_launcher_lockscreen)
             .setContentIntent(createCurrentContentIntent())
-            .setDeleteIntent(createIntent(STOP))
+            .setDeleteIntent(createIntent(PlayerEvent.Stop.name))
             .setStyle(
                 MediaStyle()
                     .setMediaSession(mediaSession.sessionToken)
@@ -370,44 +339,32 @@ class NowPlayingNotification(
             }
             .build()
         updateSessionMetadata()
-        nManager.notify(PLAYER_NOTIFICATION_ID, notification)
-    }
-
-    private val notificationActionReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            handlePlayerAction(intent.action ?: return)
-        }
-    }
-
-    private fun createActionReceiver() {
-        listOf(PREV, NEXT, REWIND, FORWARD, PLAY_PAUSE, STOP).forEach {
-            context.registerReceiver(notificationActionReceiver, IntentFilter(it))
-        }
+        nManager.notify(NotificationId.PLAYER_PLAYBACK.id, notification)
     }
 
     /**
      * Destroy the [NowPlayingNotification]
      */
-    fun destroySelfAndPlayer() {
+    fun destroySelf() {
         mediaSession.release()
 
-        player.stop()
-        player.release()
+        nManager.cancel(NotificationId.PLAYER_PLAYBACK.id)
+    }
 
-        runCatching {
-            context.unregisterReceiver(notificationActionReceiver)
-        }
+    fun cancelNotification() {
+        nManager.cancel(NotificationId.PLAYER_PLAYBACK.id)
+    }
 
-        nManager.cancel(PLAYER_NOTIFICATION_ID)
+    fun refreshNotification() {
+        createOrUpdateNotification()
     }
 
     companion object {
-        const val PLAYER_NOTIFICATION_ID = 1
-        private const val PREV = "prev"
-        private const val NEXT = "next"
-        private const val REWIND = "rewind"
-        private const val FORWARD = "forward"
-        private const val PLAY_PAUSE = "play_pause"
-        private const val STOP = "stop"
+        enum class NowPlayingNotificationType {
+            VIDEO_ONLINE,
+            VIDEO_OFFLINE,
+            AUDIO_ONLINE,
+            AUDIO_OFFLINE
+        }
     }
 }

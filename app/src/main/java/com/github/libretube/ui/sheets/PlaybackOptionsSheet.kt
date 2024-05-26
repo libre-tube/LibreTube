@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.media3.common.PlaybackParameters
 import androidx.media3.exoplayer.ExoPlayer
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.PlaybackBottomSheetBinding
 import com.github.libretube.extensions.round
@@ -32,8 +32,8 @@ class PlaybackOptionsSheet(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = binding
 
-        binding.speedShortcuts.layoutManager = GridLayoutManager(context, SUGGESTED_SPEEDS.size)
-        binding.pitchShortcuts.layoutManager = GridLayoutManager(context, SUGGESTED_PITCHES.size)
+        binding.speedShortcuts.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.pitchShortcuts.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         binding.speedShortcuts.adapter = SliderLabelsAdapter(SUGGESTED_SPEEDS) {
             binding.speed.value = it
@@ -80,7 +80,7 @@ class PlaybackOptionsSheet(
     }
 
     companion object {
-        private val SUGGESTED_SPEEDS = listOf(0.5f, 1f, 1.25f, 1.5f, 2f)
+        private val SUGGESTED_SPEEDS = listOf(0.5f, 1f, 1.25f, 1.5f, 1.75f, 2f)
         private val SUGGESTED_PITCHES = listOf(0.5f, 1f, 1.5f, 2f)
     }
 }

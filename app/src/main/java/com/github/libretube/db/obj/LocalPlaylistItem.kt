@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 @Entity
 data class LocalPlaylistItem(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey(autoGenerate = true) var id: Int = 0,
     @ColumnInfo var playlistId: Int = 0,
     @ColumnInfo val videoId: String = "",
     @ColumnInfo val title: String? = null,

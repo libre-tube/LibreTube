@@ -2,21 +2,21 @@ package com.github.libretube.util
 
 import android.content.Context
 import android.icu.text.RelativeDateTimeFormatter
+import android.net.Uri
 import android.os.Build
 import android.text.format.DateUtils
+import com.github.libretube.BuildConfig
 import com.github.libretube.R
-import com.github.libretube.ui.dialogs.ShareDialog
+import kotlinx.datetime.toJavaLocalDate
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.time.temporal.ChronoUnit
+import java.util.Date
 import kotlin.time.Duration
 import kotlinx.datetime.LocalDate as KotlinLocalDate
-import kotlinx.datetime.toJavaLocalDate
-import okhttp3.HttpUrl.Companion.toHttpUrl
-import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 object TextUtils {
     /**
@@ -33,6 +33,8 @@ object TextUtils {
      * Date time formatter which uses the [FormatStyle.MEDIUM] format style.
      */
     private val MEDIUM_DATE_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
+
+    val defaultPlaylistName get() = Date().toString()
 
     /**
      * Localize the date from a date string, using the medium format.
@@ -54,17 +56,10 @@ object TextUtils {
     /**
      * Get video id if the link is a valid youtube video link
      */
-    fun getVideoIdFromUrl(link: String): String? {
-        val mainPipedFrontendUrl = ShareDialog.PIPED_FRONTEND_URL.toHttpUrl().host
-        val unShortenedHosts = listOf("www.youtube.com", "m.youtube.com", mainPipedFrontendUrl)
-
-        return link.toHttpUrlOrNull()?.let {
-            when (it.host) {
-                in unShortenedHosts -> it.queryParameter("v")
-                "youtu.be" -> it.pathSegments.lastOrNull()
-                else -> null
-            }
-        }
+    fun getVideoIdFromUri(uri: Uri) = when (uri.host) {
+        "www.youtube.com", "m.youtube.com", "piped.video" -> uri.getQueryParameter("v")
+        "youtu.be" -> uri.lastPathSegment
+        else -> null
     }
 
     fun formatRelativeDate(context: Context, unixTime: Long): CharSequence {
@@ -106,5 +101,9 @@ object TextUtils {
     fun limitTextToLength(text: String, maxLength: Int): String {
         if (text.length <= maxLength) return text
         return text.take(maxLength) + "…"
+    }
+
+    fun getUserAgent(context: Context): String {
+        return "${context.packageName}/${BuildConfig.VERSION_NAME}"
     }
 }
