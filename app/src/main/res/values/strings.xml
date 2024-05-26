@@ -506,6 +506,8 @@
     <string name="uptime">%.2f%% uptime</string>
     <string name="change">Change</string>
     <string name="gestures">Gestures</string>
+    <string name="external_download_provider">External download provider</string>
+    <string name="external_download_provider_summary">Enter the package name of the app you want to use for downloading videos. Leave blank to use LibreTube\'s inbuilt downloader.</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

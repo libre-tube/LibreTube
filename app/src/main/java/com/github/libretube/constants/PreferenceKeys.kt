@@ -144,6 +144,7 @@ object PreferenceKeys {
     const val CONFIRM_UNSUBSCRIBE = "confirm_unsubscribing"
     const val CLEAR_BOOKMARKS = "clear_bookmarks"
     const val MAX_CONCURRENT_DOWNLOADS = "max_parallel_downloads"
+    const val EXTERNAL_DOWNLOAD_PROVIDER = "external_download_provider"
     const val DISABLE_VIDEO_IMAGE_PROXY = "disable_video_image_proxy"
     const val CONTRIBUTE_TO_SB = "sb_contribute_key"
     const val CONTRIBUTE_TO_DEARROW = "dearrow_contribute_key"
