@@ -28,6 +28,7 @@ import com.github.libretube.extensions.toMediaMetadataCompat
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.obj.PlayerNotificationData
+import com.github.libretube.services.OnClearFromRecentService
 import com.github.libretube.ui.activities.MainActivity
 import java.util.UUID
 
@@ -303,6 +304,7 @@ class NowPlayingNotification(
                     super.onIsPlayingChanged(isPlaying)
                 }
             })
+            context.startService(Intent(context, OnClearFromRecentService::class.java))
         }
 
         createOrUpdateNotification()

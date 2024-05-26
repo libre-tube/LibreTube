@@ -394,6 +394,10 @@
             android:exported="false"
             android:foregroundServiceType="mediaPlayback" />
 
+        <service android:name=".services.OnClearFromRecentService"
+            android:enabled="true"
+            android:exported="false" />
+
         <receiver
             android:name=".receivers.NotificationReceiver"
             android:enabled="true"
