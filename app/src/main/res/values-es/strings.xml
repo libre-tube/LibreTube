@@ -547,4 +547,6 @@
     <string name="title">Título</string>
     <string name="thumbnail_time">Duracción de la miniatura</string>
     <string name="best_quality">Mejor</string>
+    <string name="external_download_provider_summary">Introduzca el nombre de la aplicación que desea utilizar para descargar los vídeos. Déjelo en blanco para utilizar el LibreTube.</string>
+    <string name="external_download_provider">Proveedor de descargas externo</string>
 </resources>
