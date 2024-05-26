@@ -545,4 +545,6 @@
     <string name="import_temp_playlist">Importer une liste de lecture temporaire ?</string>
     <string name="albums">Albums</string>
     <string name="import_temp_playlist_summary">Soyhaitez-vous créer une nouvelle liste de lecture nommée \'%1$s\' ? Cette liste de lecture contiendra %2$d vidéos.</string>
+    <string name="best_quality">Le meilleur</string>
+    <string name="thumbnail_time">Durée de la miniature</string>
 </resources>
