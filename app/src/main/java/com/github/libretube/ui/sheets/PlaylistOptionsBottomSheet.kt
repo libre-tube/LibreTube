@@ -13,10 +13,10 @@ import com.github.libretube.extensions.serializable
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.BackgroundHelper
+import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.DeletePlaylistDialog
-import com.github.libretube.ui.dialogs.DownloadPlaylistDialog
 import com.github.libretube.ui.dialogs.PlaylistDescriptionDialog
 import com.github.libretube.ui.dialogs.RenamePlaylistDialog
 import com.github.libretube.ui.dialogs.ShareDialog
@@ -139,14 +139,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                 }
 
                 R.string.download -> {
-                    val downloadPlaylistDialog = DownloadPlaylistDialog().apply {
-                        arguments = bundleOf(
-                            IntentData.playlistId to playlistId,
-                            IntentData.playlistName to playlistName,
-                            IntentData.playlistType to playlistType
-                        )
-                    }
-                    downloadPlaylistDialog.show(mFragmentManager, null)
+                    DownloadHelper.startDownloadPlaylistDialog(requireContext(), mFragmentManager, playlistId, playlistName, playlistType)
                 }
 
                 else -> {

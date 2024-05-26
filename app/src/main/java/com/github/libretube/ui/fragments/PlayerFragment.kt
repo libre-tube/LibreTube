@@ -72,6 +72,7 @@ import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateIfChanged
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.BackgroundHelper
+import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.IntentHelper
 import com.github.libretube.helpers.NavBarHelper
@@ -92,7 +93,6 @@ import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
-import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.animateDown
 import com.github.libretube.ui.extensions.setupSubscriptionButton
@@ -625,9 +625,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             if (streams.duration <= 0) {
                 Toast.makeText(context, R.string.cannotDownload, Toast.LENGTH_SHORT).show()
             } else {
-                val newFragment = DownloadDialog()
-                newFragment.arguments = bundleOf(IntentData.videoId to videoId)
-                newFragment.show(childFragmentManager, DownloadDialog::class.java.name)
+                DownloadHelper.startDownloadDialog(requireContext(), childFragmentManager, videoId)
             }
         }
 

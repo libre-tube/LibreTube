@@ -15,13 +15,13 @@ import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.BackgroundHelper
+import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
-import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.fragments.SubscriptionsFragment
 import com.github.libretube.util.PlayingQueue
@@ -71,9 +71,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                 }
 
                 R.string.download -> {
-                    val newFragment = DownloadDialog()
-                    newFragment.arguments = bundleOf(IntentData.videoId to videoId)
-                    newFragment.show(parentFragmentManager, DownloadDialog::class.java.name)
+                    DownloadHelper.startDownloadDialog(requireContext(), parentFragmentManager, videoId)
                 }
 
                 R.string.share -> {
