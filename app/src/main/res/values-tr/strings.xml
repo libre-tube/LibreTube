@@ -544,4 +544,6 @@
     <string name="title">Başlık</string>
     <string name="thumbnail_time">Küçük resim zamanı</string>
     <string name="best_quality">En iyi</string>
+    <string name="external_download_provider">Harici indirme sağlayıcısı</string>
+    <string name="external_download_provider_summary">Video indirmek için kullanmak istediğiniz uygulamanın paket adını girin. LibreTube\'un dahili indiricisini kullanmak için boş bırakın.</string>
 </resources>
