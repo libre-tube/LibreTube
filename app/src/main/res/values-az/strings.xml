@@ -544,4 +544,6 @@
     <string name="import_temp_playlist">Müvəqqəti pleylist idxal edilsin?</string>
     <string name="import_temp_playlist_summary">\'%1$s\' adlı yeni pleylist yaratmaq istəyirsiniz? Pleylistdə %2$d video olacaq.</string>
     <string name="best_quality">Ən yaxşı</string>
+    <string name="external_download_provider">Xarici yükləmə təchizatçısı</string>
+    <string name="external_download_provider_summary">Videoları yükləmək üçün istifadə etdiyiniz tətbiqin paket adını daxil edin. LibreTube-un daxili yükləyicisin istifadə etmək üçün boş buraxın.</string>
 </resources>
