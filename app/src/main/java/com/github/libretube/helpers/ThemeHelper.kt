@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.text.HtmlCompat
 import androidx.core.text.parseAsHtml
+import androidx.core.view.WindowCompat
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.ui.adapters.IconsSheetAdapter
@@ -40,6 +41,8 @@ object ThemeHelper {
             } else {
                 getThemeColor(context, android.R.attr.colorBackground)
             }
+        WindowCompat.getInsetsController(window, window.decorView)
+            .isAppearanceLightStatusBars = !isDarkMode(context)
     }
 
     /**

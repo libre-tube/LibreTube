@@ -82,6 +82,7 @@ import com.github.libretube.helpers.PlayerHelper.getVideoStats
 import com.github.libretube.helpers.PlayerHelper.isInSegment
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
+import com.github.libretube.helpers.ThemeHelper
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.obj.ShareData
@@ -692,12 +693,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     @SuppressLint("SourceLockedOrientationActivity")
     fun unsetFullscreen() {
         // set status bar icon color back to theme color
-        windowInsetsControllerCompat.isAppearanceLightStatusBars =
-            when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-                Configuration.UI_MODE_NIGHT_YES -> false
-                Configuration.UI_MODE_NIGHT_NO -> true
-                else -> true
-            }
+        windowInsetsControllerCompat.isAppearanceLightStatusBars = !ThemeHelper.isDarkMode(requireContext())
 
         viewModel.isFullscreen.value = false
 
