@@ -5,7 +5,7 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import androidx.core.content.getSystemService
-import com.github.libretube.util.NowPlayingNotification.Companion.PLAYER_NOTIFICATION_ID
+import com.github.libretube.enums.NotificationId
 
 class OnClearFromRecentService : Service() {
     private var nManager: NotificationManager? = null
@@ -22,7 +22,7 @@ class OnClearFromRecentService : Service() {
     }
 
     override fun onTaskRemoved(rootIntent: Intent?) {
-        nManager?.cancel(PLAYER_NOTIFICATION_ID)
+        nManager?.cancel(NotificationId.PLAYER_PLAYBACK.id)
         stopSelf()
     }
 }
