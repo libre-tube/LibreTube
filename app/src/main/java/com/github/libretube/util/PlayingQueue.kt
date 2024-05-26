@@ -9,12 +9,11 @@ import com.github.libretube.extensions.move
 import com.github.libretube.extensions.runCatchingIO
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PlayerHelper
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import java.util.Collections
 
 object PlayingQueue {
-    private val queue = mutableListOf<StreamItem>()
+    // queue is a synchronized list to be safely accessible from different coroutine threads
+    private val queue = Collections.synchronizedList(mutableListOf<StreamItem>())
     private var currentStream: StreamItem? = null
 
     /**
@@ -29,7 +28,7 @@ object PlayingQueue {
     /**
      * @param skipExisting Whether to skip the [streamItem] if it's already part of the queue
      */
-    fun add(vararg streamItem: StreamItem, skipExisting: Boolean = false) {
+    fun add(vararg streamItem: StreamItem, skipExisting: Boolean = false) = synchronized(queue) {
         for (stream in streamItem) {
             if ((skipExisting && contains(stream)) || stream.title.isNullOrBlank()) continue
 
@@ -38,17 +37,14 @@ object PlayingQueue {
         }
     }
 
-    fun addAsNext(streamItem: StreamItem) {
+    fun addAsNext(streamItem: StreamItem) = synchronized(queue) {
         if (currentStream == streamItem) return
         if (queue.contains(streamItem)) queue.remove(streamItem)
-        queue.add(
-            currentIndex() + 1,
-            streamItem
-        )
+        queue.add(currentIndex() + 1, streamItem)
     }
 
     // return the next item, or if repeating enabled and no video left, the first one of the queue
-    fun getNext(): String? {
+    fun getNext(): String? = synchronized(queue) {
         val nextItem = queue.getOrNull(currentIndex() + 1)
         if (nextItem != null) return nextItem.url?.toID()
 
@@ -58,7 +54,7 @@ object PlayingQueue {
     }
 
     // return the previous item, or if repeating enabled and no video left, the last one of the queue
-    fun getPrev(): String? {
+    fun getPrev(): String? = synchronized(queue) {
         val prevItem = queue.getOrNull(currentIndex() - 1)
         if (prevItem != null) return prevItem.url?.toID()
 
@@ -71,7 +67,7 @@ object PlayingQueue {
 
     fun hasNext() = getNext() != null
 
-    fun updateCurrent(streamItem: StreamItem, asFirst: Boolean = true) {
+    fun updateCurrent(streamItem: StreamItem, asFirst: Boolean = true) = synchronized(queue) {
         currentStream = streamItem
         if (!contains(streamItem)) {
             val indexToAdd = if (asFirst) 0 else size()
@@ -87,25 +83,34 @@ object PlayingQueue {
 
     fun isLast() = currentIndex() == size() - 1
 
-    fun currentIndex(): Int = queue.indexOfFirst {
-        it.url?.toID() == currentStream?.url?.toID()
-    }.takeIf { it >= 0 } ?: 0
+    fun currentIndex(): Int = synchronized(queue) {
+        return queue.indexOfFirst {
+            it.url?.toID() == currentStream?.url?.toID()
+        }.takeIf { it >= 0 } ?: 0
+    }
 
     fun getCurrent(): StreamItem? = currentStream
 
-    fun contains(streamItem: StreamItem) = queue.any { it.url?.toID() == streamItem.url?.toID() }
+    fun contains(streamItem: StreamItem) = synchronized(queue) {
+        queue.any { it.url?.toID() == streamItem.url?.toID() }
+    }
 
     // only returns a copy of the queue, no write access
     fun getStreams() = queue.toList()
 
-    fun setStreams(streams: List<StreamItem>) {
+    fun setStreams(streams: List<StreamItem>) = synchronized(queue) {
         queue.clear()
         queue.addAll(streams)
     }
 
-    fun remove(index: Int) = queue.removeAt(index)
+    fun remove(index: Int) = synchronized(queue) {
+        queue.removeAt(index)
+        return@synchronized
+    }
 
-    fun move(from: Int, to: Int) = queue.move(from, to)
+    fun move(from: Int, to: Int) = synchronized(queue) {
+        queue.move(from, to)
+    }
 
     /**
      * Adds a list of videos to the current queue while updating the position of the current stream
@@ -114,10 +119,8 @@ object PlayingQueue {
      * be touched, since it's an independent list.
      */
     private fun addToQueueAsync(
-        streams: List<StreamItem>,
-        currentStreamItem: StreamItem? = null,
-        isMainList: Boolean = true
-    ) {
+        streams: List<StreamItem>, currentStreamItem: StreamItem? = null, isMainList: Boolean = true
+    ) = synchronized(queue) {
         if (!isMainList) {
             add(*streams.toTypedArray())
             return
@@ -126,7 +129,7 @@ object PlayingQueue {
         // if the stream already got added to the queue earlier, although it's not yet
         // been found in the playlist, remove it and re-add it later
         var reAddStream = true
-        if (currentStream != null && streams.includes(currentStream)) {
+        if (currentStream != null && streams.any { it.url?.toID() == currentStream.url?.toID() }) {
             queue.removeAll { it.url?.toID() == currentStream.url?.toID() }
             reAddStream = false
         }
@@ -175,13 +178,9 @@ object PlayingQueue {
         fetchMoreFromChannel(channelId, channel.nextpage)
     }
 
-    fun insertByVideoId(videoId: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            runCatching {
-                val streams = RetrofitInstance.api.getStreams(videoId.toID())
-                add(streams.toStreamItem(videoId))
-            }
-        }
+    fun insertByVideoId(videoId: String) = runCatchingIO {
+        val streams = RetrofitInstance.api.getStreams(videoId.toID())
+        add(streams.toStreamItem(videoId))
     }
 
     fun updateQueue(
@@ -238,9 +237,5 @@ object PlayingQueue {
     fun resetToDefaults() {
         repeatMode = Player.REPEAT_MODE_OFF
         onQueueTapListener = {}
-    }
-
-    private fun List<StreamItem>.includes(item: StreamItem) = any {
-        it.url?.toID() == item.url?.toID()
     }
 }
