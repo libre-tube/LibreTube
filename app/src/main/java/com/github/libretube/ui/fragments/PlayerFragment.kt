@@ -692,9 +692,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     @SuppressLint("SourceLockedOrientationActivity")
     fun unsetFullscreen() {
-        // set status bar icon color back to theme color
-        windowInsetsControllerCompat.isAppearanceLightStatusBars = !ThemeHelper.isDarkMode(requireContext())
-
         viewModel.isFullscreen.value = false
 
         if (!PlayerHelper.autoFullscreenEnabled) {
@@ -705,6 +702,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         updateResolutionOnFullscreenChange(false)
 
         binding.player.updateMarginsByFullscreenMode()
+
+        // set status bar icon color back to theme color after fullscreen dialog closed!
+        windowInsetsControllerCompat.isAppearanceLightStatusBars = !ThemeHelper.isDarkMode(requireContext())
     }
 
     /**
