@@ -547,4 +547,6 @@
     <string name="title">Наслов</string>
     <string name="thumbnail_time">Време сличице</string>
     <string name="best_quality">Најбољи</string>
+    <string name="external_download_provider">Пружалац спољног програма за преузимање</string>
+    <string name="external_download_provider_summary">Унесите назив пакета апликације коју желите да користите за преузимање видео записа. Оставите празно да бисте користили уграђени програм за преузимање LibreTube-а.</string>
 </resources>
