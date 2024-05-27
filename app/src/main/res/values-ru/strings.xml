@@ -550,4 +550,6 @@
     <string name="title">Название</string>
     <string name="thumbnail_time">Показывать время на миниатюре</string>
     <string name="best_quality">Наилучшее</string>
+    <string name="external_download_provider">Внешний скачиватель</string>
+    <string name="external_download_provider_summary">Название пакета приложения, которое будет использоваться для скачивания видео. Оставьте пустым, чтобы скачивать через LibreTube.</string>
 </resources>
