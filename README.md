@@ -1,5 +1,6 @@
 <div align="center">
-  <img src="https://libre-tube.github.io/images/gh-banner.png" width="auto" height="auto" alt="LibreTube">
+  <img src="![322114913-624e65ec-8ae1-4207-bda4-8fdd154fb0b8](https://github.com/libre-tube/LibreTube/assets/149590337/9347f702-6143-489c-a373-5749a8af3461)
+" width="auto" height="auto" alt="LibreTube">
 
 [![GPL-v3](https://libre-tube.github.io/assets/widgets/license-widget.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 </div><div align="center" style="width:100%; display:flex; justify-content:space-between;">
