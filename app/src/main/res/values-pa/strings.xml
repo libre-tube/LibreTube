@@ -543,4 +543,7 @@
     <string name="thumbnail_time">ਥੰਬਨੇਲ ਸਮਾਂ</string>
     <string name="import_temp_playlist">ਕੀ ਅਸਥਾਈ ਪਲੇਲਿਸਟ ਨੂੰ ਆਯਾਤ ਕਰਨਾ ਹੈ?</string>
     <string name="import_temp_playlist_summary">ਕੀ ਤੁਸੀਂ \'%1$s\' ਨਾਮ ਦੀ ਇੱਕ ਨਵੀਂ ਪਲੇਲਿਸਟ ਬਣਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ? ਪਲੇਲਿਸਟ ਵਿੱਚ %2$d ਵੀਡੀਓ ਸ਼ਾਮਲ ਹੋਣਗੇ।</string>
+    <string name="best_quality">ਉੱਤਮ</string>
+    <string name="external_download_provider_summary">ਉਸ ਐਪ ਦਾ ਪੈਕੇਜ ਨਾਮ ਦਰਜ ਕਰੋ ਜਿਸਦੀ ਵਰਤੋਂ ਤੁਸੀਂ ਵੀਡੀਓ ਡਾਊਨਲੋਡ ਕਰਨ ਲਈ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ। ਲੀਬਰਟਿਊਬ ਦੇ ਇਨਬਿਲਟ ਡਾਊਨਲੋਡਰ ਦੀ ਵਰਤੋਂ ਕਰਨ ਲਈ ਖਾਲੀ ਛੱਡੋ।</string>
+    <string name="external_download_provider">ਬਾਹਰੀ ਡਾਊਨਲੋਡ ਪ੍ਰੋਵਾਈਡਰ</string>
 </resources>
