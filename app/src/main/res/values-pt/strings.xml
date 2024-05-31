@@ -547,4 +547,6 @@
     <string name="title">Título</string>
     <string name="thumbnail_time">Duração da miniatura</string>
     <string name="import_temp_playlist_summary">Deseja criar uma lista de reprodução com o nome %1$s? A lista será constituída por %2$d vídeos.</string>
+    <string name="external_download_provider">Serviço externo de descargas</string>
+    <string name="external_download_provider_summary">Introduza o nome da aplicação que pretende usar para descarregar vídeos. Deixe o campo vazio para descarregar através do LibreTube.</string>
 </resources>
