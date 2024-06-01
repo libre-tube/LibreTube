@@ -537,4 +537,13 @@
     <string name="external_player">Extern spelare</string>
     <string name="show_updates">Kontrollera uppdateringar automatiskt</string>
     <string name="albums">Album</string>
+    <string name="external_download_provider_summary">Ange paketnamnet för appen du vill använda för att ladda ner videor. Lämna det tomt för att använda LibreTubes inbyggda nedladdningsprogram.</string>
+    <string name="import_temp_playlist_summary">Vill du skapa en ny spellista nämnd \'%1$s\'? Spellistan kommer att innehålla %2$d videor.</string>
+    <string name="best_quality">Bästa</string>
+    <string name="contribute_to_dearrow">Bidra till DeArrow</string>
+    <string name="thumbnail_time">Tumnageltid</string>
+    <string name="title">Titel</string>
+    <string name="also_clear_watch_positions">Rensa även sekvenspositionerna</string>
+    <string name="external_download_provider">Extern nedladdnings leverantör</string>
+    <string name="import_temp_playlist">Importera tillfällig spellista?</string>
 </resources>
