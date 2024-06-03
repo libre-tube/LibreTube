@@ -551,4 +551,6 @@
     <string name="contribute_to_dearrow">Внести покращення у DeArrow</string>
     <string name="thumbnail_time">Показувати час на мініатюрі</string>
     <string name="best_quality">Найвища</string>
+    <string name="external_download_provider">Зовнішній постачальник завантажень</string>
+    <string name="external_download_provider_summary">Введіть назву пакету застосунку, який потрібно використовувати для завантаження відео. Залиште порожнім, щоб використовувати вбудований завантажувач LibreTube.</string>
 </resources>

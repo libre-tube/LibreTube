@@ -541,4 +541,6 @@
     <string name="title">標題</string>
     <string name="thumbnail_time">縮圖時間</string>
     <string name="best_quality">最佳</string>
+    <string name="external_download_provider">外部下載提供者</string>
+    <string name="external_download_provider_summary">輸入您要用於下載影片的應用程式軟體包名稱。留空以使用 LibreTube 的內建下載程式。</string>
 </resources>

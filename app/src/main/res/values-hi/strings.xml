@@ -544,4 +544,6 @@
     <string name="title">शीर्षक</string>
     <string name="thumbnail_time">थंबनेल समय</string>
     <string name="best_quality">श्रेष्ठ</string>
+    <string name="external_download_provider">बाहरी डाउनलोड प्रदाता</string>
+    <string name="external_download_provider_summary">उस ऐप का पैकेज नाम दर्ज करें जिसका उपयोग आप वीडियो डाउनलोड करने के लिए करना चाहते हैं। लिब्रेट्यूब के अंतर्निर्मित डाउनलोडर का उपयोग करने के लिए खाली छोड़ दें।</string>
 </resources>

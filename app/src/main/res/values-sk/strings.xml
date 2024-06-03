@@ -547,4 +547,6 @@
     <string name="title">Názov</string>
     <string name="thumbnail_time">Čas miniatúry</string>
     <string name="best_quality">Najlepšia</string>
+    <string name="external_download_provider">Externý poskytovateľ sťahovania</string>
+    <string name="external_download_provider_summary">Zadajte názov aplikácie, ktorú chcete používať na sťahovanie videí. Ak chcete použiť vstavaný sťahovač LibreTube, nechajte prázdne miesto.</string>
 </resources>

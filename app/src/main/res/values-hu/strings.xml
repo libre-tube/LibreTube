@@ -544,4 +544,6 @@
     <string name="thumbnail_time">Miniatűr ideje</string>
     <string name="contribute_to_dearrow">Közreműködés a DeArrow-hoz</string>
     <string name="best_quality">Legjobb</string>
+    <string name="external_download_provider">Külső letöltési szolgáltató</string>
+    <string name="external_download_provider_summary">Adja meg a videók letöltéséhez használni kívánt alkalmazás csomagnevét. A LibreTube beépített letöltőjének használatához hagyja üresen.</string>
 </resources>

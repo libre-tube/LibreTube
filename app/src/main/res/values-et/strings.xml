@@ -544,4 +544,6 @@
     <string name="download_playlist_note">Palun vali allalaaditava meedia suurim heli- ja videokvaliteet. Kui subtiitrid on saadaval, siis lisanduvad nad allalaaditud faili.</string>
     <string name="export_subscriptions_to">Vali rakendus, mille jaoks ekspordid tellimused</string>
     <string name="tooltip_play">Esita</string>
+    <string name="external_download_provider">Väline allalaadimisrakendus</string>
+    <string name="external_download_provider_summary">Sisesta välise allalaadimisrakenduse paketi nimi, mida soovid kasutada. Kui eelistad LibreTube\'i oma allalaadimislahendust, siis jäta tühjaks.</string>
 </resources>

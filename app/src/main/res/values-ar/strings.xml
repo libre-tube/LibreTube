@@ -556,4 +556,6 @@
     <string name="contribute_to_dearrow">المساهمة في DeArrow</string>
     <string name="thumbnail_time">وقت الصورة المصغرة</string>
     <string name="best_quality">الأفضل</string>
+    <string name="external_download_provider">مزود التحميل الخارجي</string>
+    <string name="external_download_provider_summary">أدخل اسم حزمة التطبيق الذي تريد استخدامه لتنزيل مقاطع الفيديو. اتركه فارغًا لاستخدام أداة التنزيل المدمجة في LibreTube.</string>
 </resources>

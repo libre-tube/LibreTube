@@ -13,8 +13,8 @@
     <string name="register">Регистрация</string>
     <string name="logout">Выйти</string>
     <string name="cancel">Отмена</string>
-    <string name="loggedIn">Успешный вход.</string>
-    <string name="loggedout">Успешный выход.</string>
+    <string name="loggedIn">Вход успешен.</string>
+    <string name="loggedout">Выход успешен.</string>
     <string name="registered">Успешная регистрация. Теперь вы можете подписываться на каналы.</string>
     <string name="already_logged_in">Вход уже выполнен. Вы можете выйти из своего аккаунта.</string>
     <string name="instances">Выбрать…</string>
@@ -149,7 +149,7 @@
     <string name="video">Видео</string>
     <string name="downloading">Загрузка…</string>
     <string name="player_autoplay">Автовоспроизведение</string>
-    <string name="no_video">Нет видео</string>
+    <string name="no_video">Без видео</string>
     <string name="no_audio">Без звука</string>
     <string name="reset">Восстановить настройки по умолчанию</string>
     <string name="reset_message">Сбросить все настройки и выйти из аккаунта\?</string>
@@ -384,7 +384,7 @@
         <item quantity="other">%d лет назад</item>
     </plurals>
     <string name="lbry_hls">LBRY HLS</string>
-    <string name="lbry_hls_summary">Использовать LBRY HLS для трансляции, если доступно</string>
+    <string name="lbry_hls_summary">Использовать LBRY HLS для трансляций, если доступно</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d видео</string>
     <string name="subscriberAndVideoCounts">%1$s подписчиков • %2$d видео</string>
     <string name="disable_proxy">Отключить прокси Piped</string>
@@ -425,7 +425,7 @@
     <string name="mark_as_unwatched">Пометить как непросмотренное</string>
     <string name="welcome">Добро пожаловать в LibreTube</string>
     <string name="choose_instance">Пожалуйста, сперва выберите сервер!</string>
-    <string name="choose_instance_long">Пожалуйста, выберите сервер Piped, который будет использован, снизу. Сервер Piped будет выступать в роли посредника между Вами и YouTube. Эти серверы расположены в разных частях мира, обозначенных флагами их стран. Серверы, физически находящиеся ближе к Вам, вероятно, будут быстрее серверов, расположенных дальше. Вы можете сменить сервер в настройках в любое время.</string>
+    <string name="choose_instance_long">Пожалуйста, выберите сервер Piped, который будет использован, снизу. Сервер Piped будет выступать в роли посредника между YouTube и вами. Эти серверы расположены в разных частях мира, обозначенных флагами их стран. Серверы, физически находящиеся ближе к вам, вероятно, будут быстрее серверов, расположенных далеко. Сменить сервер можно в любое время в настройках.</string>
     <string name="change_playlist_description">Изменить описание плейлиста</string>
     <string name="playlist_description">Описание плейлиста</string>
     <string name="emptyPlaylistDescription">Описание плейлиста не может быть пустым</string>
@@ -502,7 +502,7 @@
     <string name="no_fullscreen_resolution">Разрешение неполноэкранного режима</string>
     <string name="playback_during_call_summary">Приложение также будет игнорировать другие источники звука. Например, проигрывание музыки</string>
     <string name="playback_during_call">Не прерывать воспроизведение при вызове</string>
-    <string name="same_as_fullscreen">Такое же как для полноэкранного режима</string>
+    <string name="same_as_fullscreen">Как в полноэкранном</string>
     <string name="autoplay_playlists_summary">Автоматически воспроизводить следующее видео в плейлисте вне зависимости от настроек автовоспроизведения</string>
     <string name="autoplay_playlists">Автовоспроизведение в плейлистах</string>
     <string name="remember_playback_speed">Сохранение скорости воспроизведения</string>
@@ -550,4 +550,6 @@
     <string name="title">Название</string>
     <string name="thumbnail_time">Показывать время на миниатюре</string>
     <string name="best_quality">Наилучшее</string>
+    <string name="external_download_provider">Внешний скачиватель</string>
+    <string name="external_download_provider_summary">Название пакета приложения, которое будет использоваться для скачивания видео. Оставьте пустым, чтобы скачивать через LibreTube.</string>
 </resources>

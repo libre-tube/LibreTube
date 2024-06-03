@@ -541,4 +541,6 @@
     <string name="import_temp_playlist_summary">次の名前の新しい再生リストを作成しますか？「%1$s」%2$d 本の動画が含まれます。</string>
     <string name="import_temp_playlist">一時的な再生リストをインポートしますか？</string>
     <string name="best_quality">最高</string>
+    <string name="external_download_provider_summary">動画のダウンロードに使うアプリのパッケージ名を入力します。LibreTube 内蔵のダウンローダーを使うには空欄のままにします。</string>
+    <string name="external_download_provider">外部のダウンロード機能を使用</string>
 </resources>
