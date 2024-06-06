@@ -82,56 +82,27 @@
                         </LinearLayout>
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/channel_subscribe"
-                            style="@style/PlayerActionsButton"
+                            android:id="@+id/channel_share"
+                            style="@style/ElevatedIconButton"
+                            android:tooltipText="@string/share"
+                            app:icon="@drawable/ic_share"
+                            tools:targetApi="m" />
+
+                        <androidx.compose.ui.platform.ComposeView
+                            android:id="@+id/subscription_button"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:stateListAnimator="@null"
-                            android:text="@string/subscribe"
+                            android:layout_height="wrap_content" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/add_to_group"
+                            style="@style/PlayerActionsButton"
+                            android:text="@string/add_to_group"
                             android:textSize="12sp"
+                            android:tooltipText="@string/add_to_group"
+                            app:icon="@drawable/ic_add"
                             tools:targetApi="m" />
 
                     </LinearLayout>
-
-                    <HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:scrollbars="none">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <com.google.android.material.button.MaterialButton
-                                android:id="@+id/channel_share"
-                                style="@style/PlayerActionsButton"
-                                android:text="@string/share"
-                                android:textSize="12sp"
-                                android:tooltipText="@string/share"
-                                app:icon="@drawable/ic_share"
-                                tools:targetApi="m" />
-
-                            <com.google.android.material.button.MaterialButton
-                                android:id="@+id/notification_bell"
-                                style="@style/PlayerActionsButton"
-                                android:text="@string/notifications"
-                                android:textSize="12sp"
-                                android:tooltipText="@string/notifications"
-                                app:icon="@drawable/ic_notification"
-                                tools:targetApi="m" />
-
-                            <com.google.android.material.button.MaterialButton
-                                android:id="@+id/add_to_group"
-                                style="@style/PlayerActionsButton"
-                                android:text="@string/add_to_group"
-                                android:textSize="12sp"
-                                android:tooltipText="@string/add_to_group"
-                                app:icon="@drawable/ic_add"
-                                tools:targetApi="m" />
-
-                        </LinearLayout>
-
-                    </HorizontalScrollView>
 
                     <com.github.libretube.ui.views.ExpandableTextView
                         android:id="@+id/channel_description"
