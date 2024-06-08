@@ -547,4 +547,6 @@
     <string name="import_temp_playlist_summary">Soyhaitez-vous créer une nouvelle liste de lecture nommée \'%1$s\' ? Cette liste de lecture contiendra %2$d vidéos.</string>
     <string name="best_quality">Le meilleur</string>
     <string name="thumbnail_time">Durée de la miniature</string>
+    <string name="external_download_provider">Fournisseur de téléchargement externe</string>
+    <string name="external_download_provider_summary">Entrez le nom du package de l\'application que vous souhaitez utiliser pour télécharger des vidéos. Laissez vide pour utiliser le téléchargeur qui est intégré dans LibreTube.</string>
 </resources>
