@@ -260,14 +260,12 @@ class ChannelContentAdapter(
 ) : FragmentStateAdapter(fragment) {
     override fun getItemCount() = list.size
 
-    override fun createFragment(position: Int): Fragment {
-        val fragment = ChannelContentFragment()
-        fragment.arguments = bundleOf(
+    override fun createFragment(position: Int) = ChannelContentFragment().apply {
+        arguments = bundleOf(
             IntentData.tabData to Json.encodeToString(list[position]),
             IntentData.videoList to Json.encodeToString(videos),
             IntentData.channelId to channelId,
             IntentData.nextPage to nextPage
         )
-        return fragment
     }
 }
