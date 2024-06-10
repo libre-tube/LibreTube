@@ -56,9 +56,7 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
 
     private var nextPages = Array<String?>(5) { null }
     private var isAppBarFullyExpanded: Boolean = true
-    private val tabList = mutableListOf(
-        ChannelTab(VIDEOS_TAB_KEY, "")
-    )
+    private val tabList = mutableListOf<ChannelTab>()
 
     private val tabNamesMap = mapOf(
         VIDEOS_TAB_KEY to R.string.videos,
@@ -127,7 +125,7 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
 
     private fun fetchChannel() = lifecycleScope.launch {
         isLoading = true
-        binding.channelRefresh.isRefreshing = true
+        _binding?.channelRefresh?.isRefreshing = true
 
         val response = try {
             withContext(Dispatchers.IO) {
@@ -237,11 +235,10 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
             response.relatedStreams.toMutableList(),
             forceMode = VideosAdapter.Companion.LayoutMode.CHANNEL_ROW
         )
-        tabList.removeAll { tab ->
-            tab.name != VIDEOS_TAB_KEY
-        }
-        tabList[0] = ChannelTab(getString(tabNamesMap[VIDEOS_TAB_KEY]!!), "")
-        response.tabs.forEach { channelTab ->
+        tabList.clear()
+
+        val tabs = listOf(ChannelTab(VIDEOS_TAB_KEY, "")) + response.tabs
+        for (channelTab in tabs) {
             val tabName = tabNamesMap[channelTab.name]?.let { getString(it) }
                 ?: channelTab.name.replaceFirstChar(Char::titlecase)
             tabList.add(ChannelTab(tabName, channelTab.data))
