@@ -162,14 +162,6 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
             binding.notificationBell
         )
 
-        binding.channelSubscribe.setOnLongClickListener {
-            AddChannelToGroupSheet().apply {
-                arguments = bundleOf(IntentData.channelId to channelId)
-            }.show(childFragmentManager)
-
-            true
-        }
-
         binding.channelShare.setOnClickListener {
             val bundle = bundleOf(
                 IntentData.id to channelId.toID(),
@@ -179,6 +171,12 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
             val newShareDialog = ShareDialog()
             newShareDialog.arguments = bundle
             newShareDialog.show(childFragmentManager, ShareDialog::class.java.name)
+        }
+
+        binding.addToGroup.setOnClickListener {
+            AddChannelToGroupSheet().apply {
+                arguments = bundleOf(IntentData.channelId to channelId)
+            }.show(childFragmentManager)
         }
 
         nextPages[0] = response.nextpage
