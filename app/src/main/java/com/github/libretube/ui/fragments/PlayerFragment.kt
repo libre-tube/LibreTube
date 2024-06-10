@@ -143,11 +143,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var trackSelector: DefaultTrackSelector
     private lateinit var streams: Streams
-
-    // progress state of the motion layout transition
-    private var transitionStartId = 0
-    private var transitionEndId = 0
-    private var isTransitioning = true
+    private var isPlayerTransitioning = true
 
     // if null, it's been set to automatic
     private var fullscreenResolution: Int? = null
@@ -297,8 +293,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             // check if video has ended, next video is available and autoplay is enabled/the video is part of a played playlist.
             if (playbackState == Player.STATE_ENDED) {
-                if (!isTransitioning) {
-                    isTransitioning = true
+                if (!isPlayerTransitioning) {
+                    isPlayerTransitioning = true
                     if (PlayerHelper.autoPlayCountdown) {
                         showAutoPlayCountdown()
                     } else {
@@ -311,7 +307,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             if (playbackState == Player.STATE_READY) {
                 // media actually playing
-                isTransitioning = false
+                isPlayerTransitioning = false
             }
 
             // listen for the stop button in the notification
@@ -428,6 +424,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         mainActivity.binding.container.isVisible = true
         val mainMotionLayout = mainActivity.binding.mainMotionLayout
         mainMotionLayout.progress = 0F
+
+        var transitionStartId = 0
+        var transitionEndId = 0
 
         binding.playerMotionLayout.addTransitionListener(object : TransitionAdapter() {
             override fun onTransitionChange(
@@ -839,15 +838,20 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         viewModel.isMiniPlayerVisible.value = false
 
         if (viewModel.isFullscreen.value == true) {
-            unsetFullscreen()
+            // wait for the mini player transition to finish
+            // that guarantees that the navigation bar is shown properly
+            // before we kill the player fragment
+            binding.playerMotionLayout.addTransitionListener(object : TransitionAdapter() {
+                override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
+                    super.onTransitionCompleted(motionLayout, currentId)
 
-            // wait a short amount of time for the unset fullscreen process to properly finish
-            // (Android animations etc...)
-            handler.postDelayed(100) {
-                mainActivity.supportFragmentManager.commit {
-                    remove(this@PlayerFragment)
+                    mainActivity.supportFragmentManager.commit {
+                        remove(this@PlayerFragment)
+                    }
                 }
-            }
+            })
+
+            unsetFullscreen()
         } else {
             mainActivity.supportFragmentManager.commit {
                 remove(this@PlayerFragment)
@@ -857,7 +861,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     // save the watch position if video isn't finished and option enabled
     private fun saveWatchPosition() {
-        if (this::exoPlayer.isInitialized && !isTransitioning && PlayerHelper.watchPositionsVideo) {
+        if (this::exoPlayer.isInitialized && !isPlayerTransitioning && PlayerHelper.watchPositionsVideo) {
             PlayerHelper.saveWatchPosition(exoPlayer, videoId)
         }
     }
@@ -1006,7 +1010,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         saveWatchPosition()
 
         videoId = nextId ?: PlayingQueue.getNext() ?: return
-        isTransitioning = true
+        isPlayerTransitioning = true
 
         // fix: if the fragment is recreated, play the current video, and not the initial one
         arguments?.run {
