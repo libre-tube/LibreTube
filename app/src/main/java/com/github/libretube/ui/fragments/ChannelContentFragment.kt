@@ -91,7 +91,7 @@ class ChannelContentFragment : DynamicLayoutManagerFragment() {
                 content = content.deArrow()
             }
         } catch (e: Exception) {
-            binding.progressBar.isGone = true
+            _binding?.progressBar?.isGone = true
             return@launch
         }
         nextPage = response.nextpage
