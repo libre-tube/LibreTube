@@ -538,7 +538,7 @@
     <string name="enqueue_playlist_description">Pokaż powiadomienie gdy nagranie z playlisty zostanie przygotowane do pobrania.</string>
     <string name="audio_language">Język audio</string>
     <string name="default_language">Domyślny</string>
-    <string name="show_updates">Sprawdzaj aktualizacje automatycznie</string>
+    <string name="show_updates">Sprawdź aktualizacje automatycznie</string>
     <string name="behavior_when_minimized">Zachowanie po zminimalizowaniu</string>
     <string name="external_player">Zewnętrzny odtwarzacz</string>
     <string name="gestures">Gesty</string>
@@ -550,4 +550,6 @@
     <string name="contribute_to_dearrow">Przyczyń się do DeArrow</string>
     <string name="best_quality">Najwyższy</string>
     <string name="thumbnail_time">Pokaż czas na miniaturze</string>
+    <string name="external_download_provider">Zewnętrzny dostawca pobierania</string>
+    <string name="external_download_provider_summary">Wpisz nazwę pakietu aplikacji której chcesz używać do pobierania wideo. Pozostaw puste aby używać wbudowanego narzędzia LibreTube.</string>
 </resources>
