@@ -544,4 +544,6 @@
     <string name="title">Заглавие</string>
     <string name="thumbnail_time">Време за миниатюри</string>
     <string name="best_quality">Най-добро</string>
+    <string name="external_download_provider">Външен доставчик на изтегляне</string>
+    <string name="external_download_provider_summary">Въведете името на пакета на приложението, което искате да използвате за изтегляне на видеоклипове. Оставете празно, за да използвате вградената програма за изтегляне на LibreTube.</string>
 </resources>
