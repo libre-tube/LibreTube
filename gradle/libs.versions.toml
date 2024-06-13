@@ -1,7 +1,7 @@
 [versions]
 appcompat = "1.7.0"
 core = "1.13.1"
-gradle = "8.4.2"
+gradle = "8.5.0"
 kotlin = "1.9.24"
 ksp = "1.9.24-1.0.20"
 lifecycle = "2.8.2"
