@@ -139,4 +139,5 @@ object PreferenceKeys {
     const val LAST_WATCHED_FEED_TIME = "last_watched_feed_time"
     const val AUTH_PREF_FILE = "auth"
     const val IMAGE_PROXY_URL = "image_proxy_url"
+    const val SELECTED_CHANNEL_GROUP = "selected_channel_group"
 }
