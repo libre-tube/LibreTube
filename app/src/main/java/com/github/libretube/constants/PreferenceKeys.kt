@@ -5,26 +5,20 @@ package com.github.libretube.constants
  */
 object PreferenceKeys {
 
-    /**
-     * Authentication
-     */
-    const val AUTH_PREF_FILE = "auth"
+    // Authentications
     const val TOKEN = "token"
     const val USERNAME = "username"
-    const val IMAGE_PROXY_URL = "image_proxy_url"
 
-    /**
-     * General
-     */
+    // General
     const val LANGUAGE = "language"
     const val REGION = "region"
     const val ORIENTATION = "orientation"
     const val NAVBAR_ITEMS = "navbar_items"
     const val START_FRAGMENT = "start_fragment"
+    const val UNLIMITED_SEARCH_HISTORY = "unlimited_search_history"
+    const val AUDIO_ONLY_MODE = "audio_only_mode"
 
-    /**
-     * Appearance
-     */
+    // Appearance
     const val THEME_MODE = "theme_toggle"
     const val PURE_THEME = "pure_theme"
     const val ACCENT_COLOR = "accent_color"
@@ -41,9 +35,7 @@ object PreferenceKeys {
     const val HOME_TAB_CONTENT = "home_tab_content"
     const val SEARCH_SUGGESTIONS = "search_suggestions"
 
-    /**
-     * Instance
-     */
+    // Instance
     const val FETCH_INSTANCE = "selectInstance"
     const val AUTH_INSTANCE = "selectAuthInstance"
     const val AUTH_INSTANCE_TOGGLE = "auth_instance_toggle"
@@ -53,9 +45,7 @@ object PreferenceKeys {
     const val LOGOUT = "logout"
     const val DELETE_ACCOUNT = "delete_account"
 
-    /**
-     * Player
-     */
+    // Player behavior
     const val AUTO_FULLSCREEN = "auto_fullscreen"
     const val AUTOPLAY = "autoplay"
     const val RELATED_STREAMS = "related_streams_toggle"
@@ -81,7 +71,6 @@ object PreferenceKeys {
     const val DEFAULT_SUBTITLE = "default_subtitle"
     const val SKIP_BUTTONS = "skip_buttons"
     const val PLAYER_RESIZE_MODE = "player_resize_mode"
-    const val DEARROW = "dearrow"
     const val USE_HLS_OVER_DASH = "use_hls"
     const val QUEUE_AUTO_INSERT_RELATED = "queue_insert_related_videos"
     const val AUTOPLAY_PLAYLISTS = "autoplay_playlists"
@@ -97,20 +86,18 @@ object PreferenceKeys {
     const val AUTO_FULLSCREEN_SHORTS = "auto_fullscreen_shorts"
     const val PLAY_AUTOMATICALLY = "play_automatically"
     const val FULLSCREEN_GESTURES = "fullscreen_gestures"
-    const val UNLIMITED_SEARCH_HISTORY = "unlimited_search_history"
-    const val SB_HIGHLIGHTS = "sb_highlights"
     const val SHOW_TIME_LEFT = "show_time_left"
     const val ALLOW_PLAYBACK_DURING_CALL = "playback_during_call"
     const val BEHAVIOR_WHEN_MINIMIZED = "behavior_when_minimized"
 
-    /**
-     * Background mode
-     */
-    const val AUDIO_ONLY_MODE = "audio_only_mode"
+    // SponsorBlock
+    const val SB_USER_ID = "sb_user_id"
+    const val CONTRIBUTE_TO_SB = "sb_contribute_key"
+    const val CONTRIBUTE_TO_DEARROW = "dearrow_contribute_key"
+    const val DEARROW = "dearrow"
+    const val SB_HIGHLIGHTS = "sb_highlights"
 
-    /**
-     * Notifications
-     */
+    // Notifications
     const val NOTIFICATION_ENABLED = "notification_toggle"
     const val SHOW_STREAM_THUMBNAILS = "show_stream_thumbnails"
     const val SHORTS_NOTIFICATIONS = "shorts_notifications"
@@ -121,18 +108,12 @@ object PreferenceKeys {
     const val NOTIFICATION_START_TIME = "notification_start_time"
     const val NOTIFICATION_END_TIME = "notification_end_time"
 
-    /**
-     * Subscriptions
-     */
-    const val LAST_STREAM_VIDEO_ID = "last_stream_video_id"
-    const val LAST_WATCHED_FEED_TIME = "last_watched_feed_time"
+    // Subscriptions
     const val HIDE_WATCHED_FROM_FEED = "hide_watched_from_feed"
     const val SELECTED_FEED_FILTERS = "filter_feed"
     const val FEED_SORT_ORDER = "sort_oder_feed"
 
-    /**
-     * Advanced
-     */
+    // Advanced
     const val AUTOMATIC_UPDATE_CHECKS = "automatic_update_checks"
     const val DATA_SAVER_MODE = "data_saver_mode_key"
     const val MAX_IMAGE_CACHE = "image_cache_size"
@@ -146,23 +127,16 @@ object PreferenceKeys {
     const val MAX_CONCURRENT_DOWNLOADS = "max_parallel_downloads"
     const val EXTERNAL_DOWNLOAD_PROVIDER = "external_download_provider"
     const val DISABLE_VIDEO_IMAGE_PROXY = "disable_video_image_proxy"
-    const val CONTRIBUTE_TO_SB = "sb_contribute_key"
-    const val CONTRIBUTE_TO_DEARROW = "dearrow_contribute_key"
 
-    /**
-     * History
-     */
+    // History
     const val WATCH_HISTORY_SIZE = "watch_history_size"
     const val SELECTED_HISTORY_TYPE_FILTER = "filter_history_type"
     const val SELECTED_HISTORY_STATUS_FILTER = "filter_history_status"
 
-    /**
-     * Error logs
-     */
+    // Internally saved data / not a preference
     const val ERROR_LOG = "error_log"
-
-    /**
-     * SponsorBlock UUID
-     */
-    const val SB_USER_ID = "sb_user_id"
+    const val LAST_STREAM_VIDEO_ID = "last_stream_video_id"
+    const val LAST_WATCHED_FEED_TIME = "last_watched_feed_time"
+    const val AUTH_PREF_FILE = "auth"
+    const val IMAGE_PROXY_URL = "image_proxy_url"
 }
