@@ -19,6 +19,9 @@ android {
         versionName = "0.23.2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         resValue("string", "app_name", "LibreTube")
+        vectorDrawables {
+            useSupportLibrary = true
+        }
 
         ksp {
             arg("room.schemaLocation", "$projectDir/schemas")
@@ -69,6 +72,9 @@ android {
 
     packaging {
         jniLibs.excludes.add("lib/armeabi-v7a/*_neon.so")
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
     }
 
     tasks.register("testClasses")
@@ -80,9 +86,13 @@ android {
 
     buildFeatures {
         buildConfig = true
+        compose = true
     }
 
     namespace = "com.github.libretube"
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.14"
+    }
 }
 
 dependencies {
@@ -126,12 +136,22 @@ dependencies {
     implementation(libs.kotlinx.serialization)
     implementation(libs.kotlinx.datetime)
     implementation(libs.kotlinx.serialization.retrofit)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
 
     /* Cronet and Coil */
     coreLibraryDesugaring(libs.desugaring)
     implementation(libs.cronet.embedded)
     implementation(libs.cronet.okhttp)
     implementation(libs.coil)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
 
     /* Room */
     ksp(libs.room.compiler)

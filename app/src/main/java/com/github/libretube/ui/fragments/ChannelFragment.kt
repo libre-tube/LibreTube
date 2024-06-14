@@ -29,8 +29,8 @@ import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
+import com.github.libretube.ui.compose.SubscribeButton
 import com.github.libretube.ui.dialogs.ShareDialog
-import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.sheets.AddChannelToGroupSheet
 import com.github.libretube.util.deArrow
 import com.google.android.material.tabs.TabLayoutMediator
@@ -156,11 +156,9 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
 
         val channelId = channelId ?: return@launch
 
-        binding.channelSubscribe.setupSubscriptionButton(
-            channelId,
-            channelName,
-            binding.notificationBell
-        )
+        binding.subscriptionButton.setContent {
+            SubscribeButton(channelId)
+        }
 
         binding.channelShare.setOnClickListener {
             val bundle = bundleOf(
