@@ -13,11 +13,14 @@ fun MaterialButton.setupNotificationBell(channelId: String) {
     }
 
     var isIgnorable = PreferenceHelper.isChannelNotificationIgnorable(channelId)
-    setIconResource(if (isIgnorable) R.drawable.ic_bell else R.drawable.ic_notification)
+    setIconResource(iconResource(isIgnorable))
 
     setOnClickListener {
         isIgnorable = !isIgnorable
         PreferenceHelper.toggleIgnorableNotificationChannel(channelId)
-        setIconResource(if (isIgnorable) R.drawable.ic_bell else R.drawable.ic_notification)
+        setIconResource(iconResource(isIgnorable))
     }
 }
+
+private fun iconResource(isIgnorable: Boolean) =
+    if (isIgnorable) R.drawable.ic_bell else R.drawable.ic_notification
