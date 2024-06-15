@@ -426,7 +426,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
 
     fun removeItem(videoId: String) {
         feedAdapter?.removeItemById(videoId)
-        sortedFeed.removeAll { it.url!!.toID() != videoId }
+        sortedFeed.removeAll { it.url?.toID() != videoId }
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
