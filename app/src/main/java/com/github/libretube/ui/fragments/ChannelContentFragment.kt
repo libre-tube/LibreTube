@@ -19,6 +19,8 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentChannelContentBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.ceilHalf
+import com.github.libretube.extensions.parcelable
+import com.github.libretube.extensions.parcelableArrayList
 import com.github.libretube.ui.adapters.SearchChannelAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
@@ -121,12 +123,11 @@ class ChannelContentFragment : DynamicLayoutManagerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val tabData = kotlin.runCatching {
-            Json.decodeFromString<ChannelTab>(arguments?.getString(IntentData.tabData) ?: "")
-        }.getOrNull()
 
-        channelId = arguments?.getString(IntentData.channelId)
-        nextPage = arguments?.getString(IntentData.nextPage)
+        val arguments = requireArguments()
+        val tabData = arguments.parcelable<ChannelTab>(IntentData.tabData)
+        channelId = arguments.getString(IntentData.channelId)
+        nextPage = arguments.getString(IntentData.nextPage)
 
         binding.channelRecView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -151,12 +152,8 @@ class ChannelContentFragment : DynamicLayoutManagerFragment() {
         })
 
         if (tabData?.data.isNullOrEmpty()) {
-            val videoDataString = arguments?.getString(IntentData.videoList)
-            val videos = runCatching {
-                Json.decodeFromString<List<StreamItem>>(videoDataString!!)
-            }.getOrElse { mutableListOf() }
             channelAdapter = VideosAdapter(
-                videos.toMutableList(),
+                arguments.parcelableArrayList<StreamItem>(IntentData.videoList)!!,
                 forceMode = VideosAdapter.Companion.LayoutMode.CHANNEL_ROW
             )
             binding.channelRecView.adapter = channelAdapter
