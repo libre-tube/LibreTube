@@ -5,7 +5,7 @@
     <string name="category_intro">Millikafli/Hlé/Kynningarhreyfimynd</string>
     <string name="sponsorblock_notifications">Tilkynningar</string>
     <string name="version">Útgáfa %1$s</string>
-    <string name="empty_instance">Fylltu inn heiti og slóð á API-kerfisviðmótið</string>
+    <string name="empty_instance">Fylltu inn heiti og slóð á API-kerfisviðmótið.</string>
     <string name="related_streams_summary">Birta svipuð streymi jafnhliða því sem þú ert að horfa á</string>
     <string name="buffering_goal_summary">Hámarksfjöldi sekúndna myndskeiðs sem á að setja í biðminni</string>
     <string name="concurrent_downloads_limit_reached">Hámarksfjöldi samtímis niðurhala er náð.</string>
@@ -47,7 +47,7 @@
     <string name="clear_customInstances">Hreinsa viðbætt</string>
     <string name="invalid_url">Settu inn slóð sem virkar</string>
     <string name="instance_api_url">Slóð á API-kerfisviðmót tilviksins</string>
-    <string name="download_completed">Niðurhali lokið.</string>
+    <string name="download_completed">Niðurhali lokið</string>
     <string name="concurrent_downloads">Hámarksfjöldi samtímis niðurhala</string>
     <string name="player_summary">Sjálfgefin gildi og hegðun</string>
     <string name="seek_increment">Bil við hopp</string>
@@ -526,4 +526,18 @@
     <string name="player_channel_description">Birtir tilkynningu við afspilun</string>
     <string name="download_channel_description">Birtir tilkynningu við niðurhal efnis.</string>
     <string name="also_clear_watch_positions">Einnig hreinsa áhorfsstaðsetningar</string>
+    <string name="torchIcon">Trendý kastari</string>
+    <string name="system_caption_style">Skýringartextar í stíl kerfis</string>
+    <string name="autoplay_playlists_summary">Spila næsta myndskeið í spilunarlistum sjálfvirkt án tillits til valinna stillinga á sjálfvirkri afspilun</string>
+    <string name="category_preview_summary">Fyrir hluta sem útlista væntanlegt efni en án viðbótarupplýsinga. Ef þetta inniheldur myndefni sem einungis birtist hé, þa er þetta væntanlega röng flokkun</string>
+    <string name="change_region">Upplýsingar um tilhneigingu virðast ekki vera aðgengilegar á fyrirliggjandi svæði. Veldu eitthvað annað í stillingunum.</string>
+    <string name="category_music_offtopic_summary">Eingöngu fyrir tónlistarmyndbönd. Þetta ætti að ná yfir þá hluta myndskeiðs sem ekki eru hlutar opinberra samsetninga. Á endanum ætti myndskeiðið að líkjast sem mest útgáfunni á Spotify eða einhverjum öðrum samsetningum, eða minnka tal eða annað afvegaleiðandi</string>
+    <string name="category_highlight_summary">Gæti annað hvort verið auglýstur titill, smámyndin eða áhugaverðasti hluti myndskeiðsins. Þú getur hoppað yfir á þetta með því að pikka á kaflahlutann</string>
+    <string name="legacyIcon">Eldra vandfundið</string>
+    <string name="fireIcon">Glæstur eldur</string>
+    <string name="show_stream_thumbnails_summary">Birta smámyndir nýrra streyma. Sé þetta virkjað eykst notkun á gagnamagni</string>
+    <string name="dearrow_summary">Sýna nákvæmari og minna áberandi titla og smámyndir. Eykur hleðslutíma</string>
+    <string name="rich_caption_rendering">Flókin myndgerð skýringartexta</string>
+    <string name="rich_caption_rendering_summary">Myndgera skýringartexta í vefstíl fyrir ríkulegri og sérsníðanlega framsetningu</string>
+    <string name="sb_custom_colors_summary">Víxlar sérsniðnum litahlutum af/á fyrir SponsorBlock-hluta</string>
 </resources>
