@@ -120,7 +120,7 @@ class DownloadService : LifecycleService() {
                     streams.description,
                     streams.uploader,
                     streams.duration,
-                    streams.uploadTimestamp.toLocalDateTime(TimeZone.currentSystemDefault()).date,
+                    streams.uploadTimestamp?.toLocalDateTime(TimeZone.currentSystemDefault())?.date,
                     thumbnailTargetPath
                 )
                 Database.downloadDao().insertDownload(download)

@@ -143,9 +143,10 @@ class DescriptionLayout(
     }
 
     private fun localizeDate(streams: Streams): String {
-        if (streams.livestream) return ""
+        if (streams.livestream || streams.uploadTimestamp == null) return ""
 
         val date = streams.uploadTimestamp.toLocalDateTime(TimeZone.currentSystemDefault()).date
+
         return TextUtils.SEPARATOR + TextUtils.localizeDate(date)
     }
 

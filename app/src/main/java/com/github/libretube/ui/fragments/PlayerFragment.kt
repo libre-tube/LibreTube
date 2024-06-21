@@ -681,7 +681,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         commentsViewModel.setCommentSheetExpand(null)
 
         updateResolutionOnFullscreenChange(true)
-
         openOrCloseFullscreenDialog(true)
 
         binding.player.updateMarginsByFullscreenMode()
@@ -691,7 +690,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     fun unsetFullscreen() {
         viewModel.isFullscreen.value = false
 
-        if (!PlayerHelper.autoFullscreenEnabled) {
+        if (!PlayerHelper.autoFullscreenEnabled && activity != null) {
             mainActivity.requestedOrientation = mainActivity.screenOrientationPref
         }
 
