@@ -688,9 +688,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     @SuppressLint("SourceLockedOrientationActivity")
     fun unsetFullscreen() {
+        if (activity == null || _binding == null) return
+
         viewModel.isFullscreen.value = false
 
-        if (!PlayerHelper.autoFullscreenEnabled && activity != null) {
+        if (!PlayerHelper.autoFullscreenEnabled) {
             mainActivity.requestedOrientation = mainActivity.screenOrientationPref
         }
 
