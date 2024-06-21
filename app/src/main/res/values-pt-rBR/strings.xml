@@ -21,7 +21,7 @@
     <string name="import_from_yt">Importar inscrições</string>
     <string name="app_theme">Tema</string>
     <string name="server_error">Parece que existe um problema com o servidor selecionado. Tente outra instância.</string>
-    <string name="unknown_error">Erro de rede.</string>
+    <string name="unknown_error">Erro de Rede.</string>
     <string name="error">Algo deu errado.</string>
     <string name="empty">Você deve inserir o usuário e a senha.</string>
     <string name="notgmail">Isto é para uma conta Piped</string>
@@ -257,7 +257,7 @@
     <string name="download_channel_description">Mostrar notificação ao baixar mídia.</string>
     <string name="export_subscriptions">Exportar inscrições</string>
     <string name="history_size">Tamanho máximo do histórico</string>
-    <string name="resize_mode_zoom">Ampliar</string>
+    <string name="resize_mode_zoom">Zoom</string>
     <string name="player_resize_mode">Redimensionamento</string>
     <string name="renamePlaylist">Renomear playlist</string>
     <string name="new_videos_badge">Indicador para novos vídeos</string>
@@ -342,8 +342,8 @@
     <string name="rewind">Retroceder</string>
     <string name="forward">Avançar</string>
     <string name="pause">Pausar</string>
-    <string name="alternative_pip_controls">Controles PiP alternativos</string>
-    <string name="alternative_pip_controls_summary">Mostrar apenas áudio e pular controles em PiP ao invés de avançar e retroceder</string>
+    <string name="alternative_pip_controls">Controles \'PiP\' alternativos</string>
+    <string name="alternative_pip_controls_summary">Mostrar apenas áudio e pular controles em \"PiP\" ao invés de avançar e retroceder</string>
     <string name="no_subtitle">Sem legenda</string>
     <string name="download_paused">Download pausado</string>
     <string name="download_completed">Download concluído</string>
@@ -525,7 +525,7 @@
     <string name="grid_landscape">Colunas da grade (modo paisagem)</string>
     <string name="copy_tooltip">Copiar</string>
     <string name="change_instance">Alterar instância</string>
-    <string name="suggest_change_instance">O carregamento está demorando mais do que o esperado. Considere mudar de instância</string>
+    <string name="suggest_change_instance">O carregamento está demorando mais do que o normal. Considere a possibilidade de alterar a instância</string>
     <string name="change">Alterar</string>
     <string name="enqueue_playlist_description">Mostrar notificação ao enfileirar vídeos da playlist para o download.</string>
     <string name="download_playlist">Baixar playlist</string>
