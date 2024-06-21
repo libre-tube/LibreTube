@@ -160,7 +160,9 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
             channelId,
             channelName,
             binding.notificationBell
-        )
+        ) { isSubscribed ->
+            _binding?.addToGroup?.isVisible = isSubscribed
+        }
 
         binding.channelShare.setOnClickListener {
             val bundle = bundleOf(
