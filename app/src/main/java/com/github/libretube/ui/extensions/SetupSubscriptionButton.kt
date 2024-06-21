@@ -26,9 +26,10 @@ fun TextView.setupSubscriptionButton(
 
     CoroutineScope(Dispatchers.IO).launch {
         subscribed = isSubscribed ?: SubscriptionHelper.isSubscribed(channelId)
-        subscribed?.let { subscribed -> onIsSubscribedChange(subscribed) }
 
         withContext(Dispatchers.Main) {
+            subscribed?.let { subscribed -> onIsSubscribedChange(subscribed) }
+
             if (subscribed == true) {
                 this@setupSubscriptionButton.text = context.getString(R.string.unsubscribe)
             } else {
