@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.constants.IntentData
-import com.github.libretube.databinding.AddChannelToGroupSheetBinding
+import com.github.libretube.databinding.DialogAddChannelToGroupBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.ui.adapters.AddChannelToGroupAdapter
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +28,7 @@ class AddChannelToGroupSheet : ExpandedBottomSheet() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = AddChannelToGroupSheetBinding.inflate(layoutInflater)
+        val binding = DialogAddChannelToGroupBinding.inflate(layoutInflater)
 
         binding.groupsRV.layoutManager = LinearLayoutManager(context)
         binding.cancel.setOnClickListener {
