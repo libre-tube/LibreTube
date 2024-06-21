@@ -19,7 +19,8 @@ data class Streams(
 
     @Serializable(SafeInstantSerializer::class)
     @SerialName("uploadDate")
-    val uploadTimestamp: Instant,
+    val uploadTimestamp: Instant?,
+    val uploaded: Long? = null,
 
     val uploader: String,
     val uploaderUrl: String,
@@ -91,9 +92,9 @@ data class Streams(
             uploaderName = uploader,
             uploaderUrl = uploaderUrl,
             uploaderAvatar = uploaderAvatar,
-            uploadedDate = uploadTimestamp.toLocalDateTime(TimeZone.currentSystemDefault()).date
-                .toString(),
-            uploaded = uploadTimestamp.toEpochMilliseconds(),
+            uploadedDate = uploadTimestamp?.toLocalDateTime(TimeZone.currentSystemDefault())?.date
+                ?.toString(),
+            uploaded = uploaded ?: uploadTimestamp?.toEpochMilliseconds() ?: 0,
             duration = duration,
             views = views,
             uploaderVerified = uploaderVerified,
