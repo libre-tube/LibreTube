@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="12dp">
+    android:paddingHorizontal="12dp"
+    android:paddingVertical="3dp">
 
     <CheckBox
         android:id="@+id/group_checkbox"

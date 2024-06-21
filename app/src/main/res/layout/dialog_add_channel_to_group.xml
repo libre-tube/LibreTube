@@ -14,7 +14,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <!-- Drag handle for accessibility -->
@@ -47,7 +47,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/groupsRV"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -57,6 +58,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/cancel"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/cancel" />
