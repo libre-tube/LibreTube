@@ -288,7 +288,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
     private fun initChannelGroups() {
         val binding = _binding ?: return
 
-        binding.chipAll.isChecked = true
+        binding.chipAll.isChecked = selectedFilterGroup == 0
         binding.chipAll.setOnLongClickListener {
             playByGroup(0)
             true
