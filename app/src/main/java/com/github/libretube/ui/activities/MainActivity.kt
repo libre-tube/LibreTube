@@ -3,6 +3,7 @@ package com.github.libretube.ui.activities
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
@@ -13,6 +14,7 @@ import android.view.ViewTreeObserver
 import android.widget.ScrollView
 import androidx.activity.addCallback
 import androidx.activity.viewModels
+import androidx.annotation.ColorInt
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.os.bundleOf
@@ -112,13 +114,7 @@ class MainActivity : BaseActivity() {
         }
 
         // sets the color if the navigation bar is visible
-        val bottomNavColor = if (binding.bottomNav.menu.size() == 0) {
-            null
-        } else if (PreferenceHelper.getBoolean(PreferenceKeys.PURE_THEME, false)) {
-            SurfaceColors.getColorForElevation(this, binding.bottomNav.elevation)
-        } else {
-            ThemeHelper.getThemeColor(this, com.google.android.material.R.attr.colorSurfaceContainer)
-        }
+        val bottomNavColor = getBottomNavColor()
         ThemeHelper.setSystemBarColors(this, window, bottomNavColor)
 
         // set default tab as start fragment
@@ -198,6 +194,17 @@ class MainActivity : BaseActivity() {
         }
 
         loadIntentData()
+    }
+
+    @ColorInt
+    fun getBottomNavColor(): Int? {
+        return if (binding.bottomNav.menu.size() == 0) {
+            null
+        } else if (PreferenceHelper.getBoolean(PreferenceKeys.PURE_THEME, false)) {
+            SurfaceColors.getColorForElevation(this, binding.bottomNav.elevation)
+        } else {
+            ThemeHelper.getThemeColor(this, com.google.android.material.R.attr.colorSurfaceContainer)
+        }
     }
 
     /**

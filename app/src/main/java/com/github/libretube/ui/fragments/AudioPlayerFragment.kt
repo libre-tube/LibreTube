@@ -52,7 +52,6 @@ import com.github.libretube.ui.sheets.SleepTimerSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.util.DataSaverMode
 import com.github.libretube.util.PlayingQueue
-import com.google.android.material.elevation.SurfaceColors
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 
@@ -107,6 +106,10 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (activity as? MainActivity)?.getBottomNavColor()?.let { color ->
+            binding.audioPlayerContainer.setBackgroundColor(color)
+        }
 
         initializeTransitionLayout()
 
@@ -237,9 +240,6 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         mainActivity.binding.container.isVisible = true
         val mainMotionLayout = mainActivity.binding.mainMotionLayout
         mainMotionLayout.progress = 0F
-
-        val surfaceColor = SurfaceColors.getColorForElevation(requireContext(), 3f)
-        binding.audioPlayerContainer.setBackgroundColor(surfaceColor)
 
         binding.playerMotionLayout.addTransitionListener(object : TransitionAdapter() {
             override fun onTransitionChange(
