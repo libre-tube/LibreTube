@@ -18,6 +18,7 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.util.TextUtils
+import com.github.libretube.util.TextUtils.parseDurationString
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -52,7 +53,7 @@ class SubmitSegmentDialog : DialogFragment() {
             lifecycleScope.launch { voteForSegment() }
         }
 
-        binding.startTime.setText((currentPosition.toFloat() / 1000).toString())
+        binding.startTime.setText(DateUtils.formatElapsedTime(((currentPosition.toFloat() / 1000).toLong())))
 
         binding.segmentCategory.items = resources.getStringArray(R.array.sponsorBlockSegmentNames).toList()
 
@@ -72,8 +73,9 @@ class SubmitSegmentDialog : DialogFragment() {
 
         requireDialog().hide()
 
-        val startTime = binding.startTime.text.toString().toFloatOrNull()
-        var endTime = binding.endTime.text.toString().toFloatOrNull()
+        val startTime = binding.startTime.text.toString().parseDurationString()
+        var endTime = binding.endTime.text.toString().parseDurationString()
+
         if (endTime == null || startTime == null || startTime > endTime) {
             context.toastFromMainDispatcher(R.string.sb_invalid_segment)
             return

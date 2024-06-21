@@ -126,6 +126,7 @@ dependencies {
     implementation(libs.kotlinx.serialization)
     implementation(libs.kotlinx.datetime)
     implementation(libs.kotlinx.serialization.retrofit)
+    testImplementation(libs.testng)
 
     /* Cronet and Coil */
     coreLibraryDesugaring(libs.desugaring)
