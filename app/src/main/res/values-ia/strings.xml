@@ -544,4 +544,6 @@
     <string name="contribute_to_dearrow">Contribuer a DeArrow</string>
     <string name="thumbnail_time">Tempore de miniatura</string>
     <string name="best_quality">Melior</string>
+    <string name="external_download_provider">Fornitor de discarganentos externe</string>
+    <string name="external_download_provider_summary">Insere le nomine de pacchettos del app que tu vole usar pro discargar le videos. Lassa in blanc pro usar le discargator de LibreTube.</string>
 </resources>
