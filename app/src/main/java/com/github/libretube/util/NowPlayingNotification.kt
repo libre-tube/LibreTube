@@ -346,7 +346,7 @@ class NowPlayingNotification(
      * Destroy the [NowPlayingNotification]
      */
     fun destroySelf() {
-        mediaSession.release()
+        if (this::mediaSession.isInitialized) mediaSession.release()
 
         nManager.cancel(NotificationId.PLAYER_PLAYBACK.id)
     }
