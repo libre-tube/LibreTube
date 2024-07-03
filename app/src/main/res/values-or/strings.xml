@@ -111,7 +111,7 @@
     <string name="license">ଲାଇସେନ୍ସ</string>
     <string name="category_preview_summary">ଅତିରିକ୍ତ ସୂଚନା ବିନା ଭବିଷ୍ୟତର ବିଷୟବସ୍ତୁକୁ ବିସ୍ତୃତ ବିଭାଗଗୁଡିକ ପାଇଁ | ଯଦି ଏଥିରେ କ୍ଲିପ୍ ଅନ୍ତର୍ଭୂକ୍ତ ହୁଏ ଯାହା କେବଳ ଏଠାରେ ଦେଖାଯାଏ, ଏହା ସମ୍ଭବତଃ ଭୁଲ ବର୍ଗ ଅଟେ</string>
     <string name="sponsorblock_notifications">ବିଜ୍ଞପ୍ତି ଗୁଡ଼ିକ</string>
-    <string name="update_available">ବର୍ଶନ %1$s ଉପଲବ୍ଧ</string>
+    <string name="update_available">ଅଦ୍ୟତନ ଉପଲବ୍ଧ</string>
     <string name="downloads">ଡାଉନଲୋଡ୍ ଗୁଡିକ</string>
     <string name="player">ଚାଳକ</string>
     <string name="appearance_summary">ଆପକୁ ନିଜ ଇଚ୍ଛାରେ ଆଡଜଷ୍ଟ କରନ୍ତୁ</string>
@@ -310,7 +310,7 @@
     <string name="volume">ଶବ୍ଦ</string>
     <string name="auto">ସ୍ଵତଃ</string>
     <string name="swipe_controls">ସ୍ୱାଇପ୍ ନିୟନ୍ତ୍ରଣ</string>
-    <string name="swipe_controls_summary">ଉଜ୍ଜ୍ୱଳତା ଏବଂ ଭଲ୍ୟୁମ୍ ସଜାଡିବା ପାଇଁ ସ୍ୱାଇପ୍ ଅଙ୍ଗଭଙ୍ଗୀ ବ୍ୟବହାର କରନ୍ତୁ</string>
+    <string name="swipe_controls_summary">ଫୁଲ୍ ସ୍କ୍ରିନ୍ ମୋଡ୍ ରେ ଉଜ୍ଜ୍ୱଳତା ଏବଂ ଭଲ୍ୟୁମ୍ ଆଡଜଷ୍ଟ କରିବାକୁ ସ୍ୱାଇପ୍ କରନ୍ତୁ</string>
     <string name="defaults">ଡିଫଲ୍ଟ ଗୁଡ଼ିକ</string>
     <string name="no_comments_available">ଏହି ଭିଡିଓରେ କୌଣସି ମନ୍ତବ୍ୟ ନାହିଁ ।</string>
     <string name="comments_disabled">ମନ୍ତବ୍ୟଗୁଡିକ ଅପଲୋଡର୍ ଙ୍କ ଦ୍ୱାରା ଅକ୍ଷମ ହୋଇଛି ।</string>
@@ -334,7 +334,7 @@
     <string name="nothing_selected">କିଛି ମନୋନୀତ ହୋଇନାହିଁ!</string>
     <string name="color_violet">ବହୁମୁଖୀ ବାଇଗଣୀ</string>
     <string name="failed_fetching_instances">ଉପଲବ୍ଧ ଉଦାହରଣଗୁଡିକ ଆଣିପାରିଲା ନାହିଁ ।</string>
-    <string name="hide_watched_from_feed">ଫିଡ୍ ରୁ ଦେଖାଯାଇଥିବା ଭିଡିଓଗୁଡିକ ଲୁଚାନ୍ତୁ</string>
+    <string name="hide_watched_from_feed">ପୂର୍ବରୁ ଦେଖାଯାଇଥିବା ଭିଡିଓଗୁଡିକ ଲୁଚାନ୍ତୁ</string>
     <string name="playlistUrl">ପ୍ଲେଲିଷ୍ଟ୍ URL</string>
     <string name="shuffle">ସଫଲ୍</string>
     <string name="add_to_bookmarks">ବୁକମାର୍କରେ ଯୋଡନ୍ତୁ</string>
@@ -521,4 +521,29 @@
     <string name="uptime">%.2f%% ଅପଟାଇମ</string>
     <string name="grid_landscape">ଗ୍ରୀଡ ସ୍ତମ୍ଭ (ଦୃଶ୍ୟପଟ)</string>
     <string name="copy_tooltip">ନକଲ କରନ୍ତୁ</string>
+    <string name="enqueueing_playlist_download">ପ୍ଲେଲିଷ୍ଟ%1$s ଡାଉନଲୋଡ୍ କରିବାକୁ ଭିଡିଓଗୁଡିକୁ ଉତ୍ସାହିତ କରାଯାଉଛି</string>
+    <string name="default_language">ଡିଫଲ୍ଟ</string>
+    <string name="external_player">ବାହ୍ୟ ଖେଳାଳୀ</string>
+    <string name="change">ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
+    <string name="behavior_when_minimized">ସର୍ବନିମ୍ନ ହେଲେ ଆଚରଣ</string>
+    <string name="external_download_provider_summary">ଭିଡିଓ ଡାଉନଲୋଡ୍ କରିବା ପାଇଁ ଆପଣ ବ୍ୟବହାର କରିବାକୁ ଚାହୁଁଥିବା ଆପର ପ୍ୟାକେଜ୍ ନାମ ପ୍ରବେଶ କରନ୍ତୁ । LibreTube ର ଇନବିଲ୍ଟ ଡାଉନଲୋଡର୍ ବ୍ୟବହାର କରିବାକୁ ଖାଲି ଛାଡିଦିଅ ।</string>
+    <string name="external_download_provider">ବାହ୍ୟ ଡାଉନଲୋଡ୍ ପ୍ରଦାନକାରୀ</string>
+    <string name="import_temp_playlist_summary">ଆପଣ \'%1$s\' ନାମକ ଏକ ନୂତନ ପ୍ଲେଲିଷ୍ଟ ସୃଷ୍ଟି କରିବାକୁ ଚାହୁଁଛନ୍ତି କି? ପ୍ଲେ ଲିଷ୍ଟରେ%2$d ଭିଡିଓ ରହିବ ।</string>
+    <string name="download_playlist">ପ୍ଲେଲିଷ୍ଟ ଡାଉନଲୋଡ୍ କରନ୍ତୁ</string>
+    <string name="enqueue_playlist_description">ଡାଉନଲୋଡ୍ ହେବାକୁ ଥିବା ଏକ ପ୍ଲେଲିଷ୍ଟର ଭିଡିଓଗୁଡ଼ିକୁ ଏନକାଉଣ୍ଟର କରିବା ସମୟରେ ଏକ ବିଜ୍ଞପ୍ତି ଦେଖାଏ ।</string>
+    <string name="delete_all">ସମସ୍ତ ଡାଉନଲୋଡ୍ ବିଲୋପ ହେବ!</string>
+    <string name="albums">ଆଲବମ୍</string>
+    <string name="best_quality">ସର୍ବୋତ୍ତମ</string>
+    <string name="change_instance">ଉଦାହରଣ ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
+    <string name="suggest_change_instance">ସାଧାରଣ ଅପେକ୍ଷା ଲୋଡିଂ ହେଉଛି । ପରିବର୍ତ୍ତନ ପରିସ୍ଥିତିକୁ ବିଚାର କରନ୍ତୁ</string>
+    <string name="contribute_to_dearrow">DeArrow ରେ ଯୋଗଦାନ କରନ୍ତୁ</string>
+    <string name="thumbnail_time">ଥମ୍ବନେଲ୍ ସମୟ</string>
+    <string name="download_playlist_note">ଡାଉନଲୋଡ୍ କରିବାକୁ ଦୟାକରି ସର୍ବାଧିକ ଅଡିଓ / ଭିଡିଓ ଗୁଣ ଚୟନ କରନ୍ତୁ । ଉପଲବ୍ଧ ହେଲେ କ୍ୟାପସନ୍ କେବଳ ଡାଉନଲୋଡ୍ ହେବ ।</string>
+    <string name="title">ଆଖ୍ୟା</string>
+    <string name="gestures">ଅଙ୍ଗଭଙ୍ଗୀ</string>
+    <string name="also_clear_watch_positions">ୱାଚ୍ ପୋଜିସନ୍ ମଧ୍ୟ ସଫା କରନ୍ତୁ</string>
+    <string name="import_temp_playlist">ଅସ୍ଥାୟୀ ପ୍ଲେଲିଷ୍ଟ ଆମଦାନୀ କରନ୍ତୁ?</string>
+    <string name="show_updates">ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଅଦ୍ୟତନଗୁଡିକ ଯାଞ୍ଚ କରନ୍ତୁ</string>
+    <string name="comments_count">ମନ୍ତବ୍ୟଗୁଡିକ (%1$s)</string>
+    <string name="audio_language">ଅଡିଓ ଭାଷା</string>
 </resources>
