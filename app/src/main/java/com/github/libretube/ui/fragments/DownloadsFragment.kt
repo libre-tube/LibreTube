@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentDownloadsBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.DownloadWithItems
@@ -26,11 +27,13 @@ import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.DownloadHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.DownloadStatus
 import com.github.libretube.receivers.DownloadReceiver
 import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.adapters.DownloadsAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
+import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
@@ -43,7 +46,7 @@ import kotlin.io.path.fileSize
 class DownloadsFragment : DynamicLayoutManagerFragment() {
     private var _binding: FragmentDownloadsBinding? = null
     private val binding get() = _binding!!
-
+    private lateinit var adapter: DownloadsAdapter
     private var binder: DownloadService.LocalBinder? = null
     private val downloads = mutableListOf<DownloadWithItems>()
     private val downloadReceiver = DownloadReceiver()
@@ -85,6 +88,25 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.deleteAll.isInvisible = true
+        var selectedSortType =
+            PreferenceHelper.getInt(PreferenceKeys.SELECTED_DOWNLOAD_SORT_TYPE, 0)
+        val filterOptions = resources.getStringArray(R.array.downloadSortOptions)
+        binding.sortType.text = filterOptions[selectedSortType]
+        binding.sortType.setOnClickListener {
+            BaseBottomSheet().apply {
+                setSimpleItems(filterOptions.toList()) { index ->
+                    binding.sortType.text = filterOptions[index]
+                    if (::adapter.isInitialized) {
+                        sortDownloadList(index, selectedSortType)
+                    }
+                    selectedSortType = index
+                    PreferenceHelper.putInt(
+                        PreferenceKeys.SELECTED_DOWNLOAD_SORT_TYPE,
+                        index
+                    )
+                }
+            }.show(childFragmentManager)
+        }
 
         val dbDownloads = runBlocking(Dispatchers.IO) {
             Database.downloadDao().getAll()
@@ -92,10 +114,9 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
 
         downloads.clear()
         downloads.addAll(dbDownloads)
-
         binding.downloadsEmpty.isGone = true
         binding.downloads.isVisible = true
-        val adapter = DownloadsAdapter(requireContext(), downloads) {
+        adapter = DownloadsAdapter(requireContext(), downloads) {
             var isDownloading = false
             val ids = it.downloadItems
                 .filter { item -> item.path.fileSize() < item.downloadSize }
@@ -120,7 +141,7 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
             }
             return@DownloadsAdapter isDownloading.not()
         }
-
+        sortDownloadList(selectedSortType)
         binding.downloads.adapter = adapter
 
         val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
@@ -166,6 +187,18 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
         binding.shuffleBackground.setOnClickListener {
             BackgroundHelper.playOnBackgroundOffline(requireContext(), null)
         }
+    }
+
+    private fun sortDownloadList(sortType: Int, previousSortType: Int? = null) {
+        if(previousSortType == null && sortType == 1){
+            downloads.reverse()
+            adapter.notifyItemRangeChanged(0, downloads.size)
+        }
+        if (previousSortType!=null && sortType != previousSortType) {
+            downloads.reverse()
+            adapter.notifyItemRangeChanged(0, downloads.size)
+        }
+
     }
 
     private fun showDeleteAllDialog(context: Context, adapter: DownloadsAdapter) {

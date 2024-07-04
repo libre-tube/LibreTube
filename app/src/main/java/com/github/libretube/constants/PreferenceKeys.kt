@@ -140,4 +140,5 @@ object PreferenceKeys {
     const val AUTH_PREF_FILE = "auth"
     const val IMAGE_PROXY_URL = "image_proxy_url"
     const val SELECTED_CHANNEL_GROUP = "selected_channel_group"
+    const val SELECTED_DOWNLOAD_SORT_TYPE = "selected_download_sort_type"
 }

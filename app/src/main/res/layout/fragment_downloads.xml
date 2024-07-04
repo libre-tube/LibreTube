@@ -1,16 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/colorBackground">
 
+    <TextView
+        android:id="@+id/sort_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:paddingVertical="5dp"
+        android:focusable="true"
+        android:fontFamily="@font/roboto"
+        android:text="@string/sort_by"
+
+        android:clickable="true"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:drawablePadding="10dp"
+        app:drawableEndCompat="@drawable/ic_sort"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
     <LinearLayout
         android:id="@+id/downloads_empty"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:layout_width="100dp"
@@ -31,19 +53,25 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/downloads"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sort_type" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/delete_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="80dp"
         android:layout_marginEnd="18dp"
+        android:layout_marginBottom="80dp"
         android:contentDescription="@string/shuffle"
         android:src="@drawable/ic_delete"
         android:tooltipText="@string/delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:targetApi="o" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -51,10 +79,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
+        android:layout_margin="18dp"
         android:contentDescription="@string/shuffle"
         android:src="@drawable/ic_shuffle"
         android:tooltipText="@string/shuffle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:targetApi="o" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
