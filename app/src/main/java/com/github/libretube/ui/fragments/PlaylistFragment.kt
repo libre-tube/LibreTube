@@ -208,17 +208,19 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
 
             if (playlistFeed.isEmpty()) {
                 binding.nothingHere.isVisible = true
-            }
-
-            if (playlistFeed.isEmpty()) {
                 binding.playAll.isGone = true
             } else {
                 binding.playAll.setOnClickListener {
                     if (playlistFeed.isEmpty()) return@setOnClickListener
+
+                    val sortedStreams = getSortedVideos()
+                    PlayingQueue.setStreams(sortedStreams)
+
                     NavigationHelper.navigateVideo(
                         requireContext(),
-                        response.relatedStreams.first().url,
-                        playlistId
+                        sortedStreams.first().url,
+                        playlistId,
+                        keepQueue = true
                     )
                 }
             }
@@ -299,8 +301,8 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
         }
     }
 
-    private fun showPlaylistVideos(playlist: Playlist) {
-        val videos = when {
+    private fun getSortedVideos(): List<StreamItem> {
+        return when {
             selectedSortOrder in listOf(0, 1) || playlistType == PlaylistType.PUBLIC -> {
                 playlistFeed
             }
@@ -317,6 +319,10 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
         }.let {
             if (selectedSortOrder % 2 == 0) it else it.reversed()
         }
+    }
+
+    private fun showPlaylistVideos(playlist: Playlist) {
+        val videos = getSortedVideos()
 
         playlistAdapter = PlaylistAdapter(
             playlistFeed,
