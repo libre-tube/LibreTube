@@ -405,8 +405,8 @@
     <string name="shorts_notifications">Benachrichtigungen für Shorts</string>
     <string name="alphabetic_reversed">Alphabetisch Z→A</string>
     <string name="alphabetic">Alphabetisch A→Z</string>
-    <string name="creation_date">Erstellungsdatum (neueste zuerst)</string>
-    <string name="creation_date_reversed">Erstellungsdatum (älteste zuerst)</string>
+    <string name="creation_date">Erstellungsdatum (älteste zuerst)</string>
+    <string name="creation_date_reversed">Erstellungsdatum (neuste zuerst)</string>
     <string name="export_subscriptions_to">Abos exportieren im Format von</string>
     <string name="import_format_newpipe">NewPipe</string>
     <string name="import_format_freetube">FreeTube</string>
