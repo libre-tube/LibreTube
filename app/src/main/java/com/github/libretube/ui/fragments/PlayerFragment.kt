@@ -1313,11 +1313,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             if (enabledVideoCodecs != "all") {
                 // map the codecs to their corresponding mimetypes
                 val mimeType = when (enabledVideoCodecs) {
-                    "vp9" -> "video/webm"
-                    "avc" -> "video/mp4"
+                    "vp9" -> arrayOf("video/webm", "video/x-vnd.on2.vp9")
+                    "avc" -> arrayOf("video/mp4", "video/avc")
                     else -> throw IllegalArgumentException()
                 }
-                this.setPreferredVideoMimeType(mimeType)
+                this.setPreferredVideoMimeTypes(*mimeType)
             }
         }
     }
