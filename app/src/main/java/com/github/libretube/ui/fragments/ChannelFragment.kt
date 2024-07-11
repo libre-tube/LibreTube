@@ -181,6 +181,13 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
             }.show(childFragmentManager)
         }
 
+        binding.playAll.setOnClickListener {
+            val firstVideoId =
+                response.relatedStreams.firstOrNull()?.url?.toID() ?: return@setOnClickListener
+
+            NavigationHelper.navigateVideo(requireContext(), firstVideoId, channelId = channelId)
+        }
+
         nextPages[0] = response.nextpage
         isLoading = false
         binding.channelRefresh.isRefreshing = false

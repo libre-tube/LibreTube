@@ -131,6 +131,15 @@
                                 app:icon="@drawable/ic_add"
                                 tools:targetApi="m" />
 
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/play_all"
+                                style="@style/PlayerActionsButton"
+                                android:text="@string/play_latest_videos"
+                                android:textSize="12sp"
+                                android:tooltipText="@string/play_latest_videos"
+                                app:icon="@drawable/ic_playlist"
+                                tools:targetApi="m" />
+
                         </LinearLayout>
 
                     </HorizontalScrollView>
