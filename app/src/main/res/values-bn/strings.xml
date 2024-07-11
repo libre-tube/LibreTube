@@ -13,7 +13,7 @@
     <string name="unknown_error">নেটওয়ার্ক ত্রুটি।</string>
     <string name="error">একটি ত্রুটি দেখা দিয়েছে।</string>
     <string name="empty">আপনাকে ব্যবহারকারীর নাম ও পাসওয়ার্ড উল্লেখ করতে হবে।</string>
-    <string name="defres">ভিডিও রেজ্যুলেশন</string>
+    <string name="defres">ভিডিও রেজোলুশান</string>
     <string name="grid">গ্রিড কলামগুলো</string>
     <string name="emptyList">এখানে কিছুই পাওয়া যায়নি।</string>
     <string name="deletePlaylist">প্লেলিস্ট মুছে ফেলুন</string>
@@ -354,4 +354,6 @@
     <string name="show_stream_thumbnails">থাম্বনেইলগুলো দেখান</string>
     <string name="show_stream_thumbnails_summary">নতুন স্ট্রিমগুলোর জন্য থাম্বনেইল প্রদর্শন করুন। এই অপশনটা চালু করা হলে অতিরিক্ত ডাটা খরচ হবে</string>
     <string name="trending_views">%1$s • %2$s বার দেখা হয়েছে • %3$s</string>
+    <string name="best_quality">সেরা</string>
+    <string name="donate">দান করুন</string>
 </resources>
