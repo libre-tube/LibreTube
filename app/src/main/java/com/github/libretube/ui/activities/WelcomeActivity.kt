@@ -48,17 +48,17 @@ class WelcomeActivity : BaseActivity() {
 
         // ALl the binding values are optional due to two different possible layouts (normal, landscape)
         viewModel.instances.observe(this) { instances ->
-            binding.instancesRecycler?.layoutManager = LinearLayoutManager(this@WelcomeActivity)
-            binding.instancesRecycler?.adapter = InstancesAdapter(instances, viewModel.selectedInstanceIndex.value) { index ->
+            binding.instancesRecycler.layoutManager = LinearLayoutManager(this@WelcomeActivity)
+            binding.instancesRecycler.adapter = InstancesAdapter(instances, viewModel.selectedInstanceIndex.value) { index ->
                 viewModel.selectedInstanceIndex.value = index
-                binding.okay?.alpha = 1f
+                binding.okay.alpha = 1f
             }
-            binding.progress?.isGone = true
+            binding.progress.isGone = true
         }
         viewModel.fetchInstances()
 
-        binding.okay?.alpha = if (viewModel.selectedInstanceIndex.value != null) 1f else 0.5f
-        binding.okay?.setOnClickListener {
+        binding.okay.alpha = if (viewModel.selectedInstanceIndex.value != null) 1f else 0.5f
+        binding.okay.setOnClickListener {
             if (viewModel.selectedInstanceIndex.value != null) {
                 val selectedInstance =
                     viewModel.instances.value!![viewModel.selectedInstanceIndex.value!!]
@@ -69,7 +69,7 @@ class WelcomeActivity : BaseActivity() {
             }
         }
 
-        binding.restore?.setOnClickListener {
+        binding.restore.setOnClickListener {
             restoreFilePicker.launch(BackupRestoreSettings.JSON)
         }
     }
