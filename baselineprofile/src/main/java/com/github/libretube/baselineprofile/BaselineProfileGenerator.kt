@@ -65,16 +65,16 @@ class BaselineProfileGenerator {
             // https://d.android.com/training/testing/other-components/ui-automator
         }
     }
+}
 
-    private fun MacrobenchmarkScope.loadHomePage() {
-        // Select a Piped instance on the initial screen and click the OK button
-        val selector = By.clazz(RadioButton::class.java)
-        device.wait(Until.hasObject(selector), 1000)
-        device.findObject(selector)?.click()
+fun MacrobenchmarkScope.loadHomePage() {
+    // Select a Piped instance on the initial screen and click the OK button
+    val selector = By.clazz(RadioButton::class.java)
+    device.wait(Until.hasObject(selector), 1000)
+    device.findObject(selector)?.click()
 
-        device.findObject(By.text("OK"))?.click()
+    device.findObject(By.text("OK"))?.click()
 
-        // Wait until the home page is loaded
-        device.wait(Until.hasObject(By.text("Home")), 1000)
-    }
+    // Wait until the home page is loaded
+    device.wait(Until.hasObject(By.text("Home")), 1000)
 }
