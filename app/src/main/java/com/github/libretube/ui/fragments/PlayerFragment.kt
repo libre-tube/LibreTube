@@ -820,6 +820,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         runCatching {
+            if (fullscreenDialog.isShowing) fullscreenDialog.dismiss()
+        }
+
+        runCatching {
             // unregister the receiver for player actions
             context?.unregisterReceiver(playerActionReceiver)
         }
