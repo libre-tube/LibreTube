@@ -1,0 +1,7 @@
+* feat: changed chips in channels to swipable tabs
+* feat: download popup that can be displayed over other apps
+* feat: support for external download apps
+* feat: remember selected channel group across app restarts
+* feat: support for duration inputs in submit segment dialog
+* style: make audio player align with status bar color
+* style: minor channel page header redesign
