@@ -93,18 +93,16 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
         val filterOptions = resources.getStringArray(R.array.downloadSortOptions)
         binding.sortType.text = filterOptions[selectedSortType]
         binding.sortType.setOnClickListener {
-            BaseBottomSheet().apply {
-                setSimpleItems(filterOptions.toList()) { index ->
-                    binding.sortType.text = filterOptions[index]
-                    if (::adapter.isInitialized) {
-                        sortDownloadList(index, selectedSortType)
-                    }
-                    selectedSortType = index
-                    PreferenceHelper.putInt(
-                        PreferenceKeys.SELECTED_DOWNLOAD_SORT_TYPE,
-                        index
-                    )
+            BaseBottomSheet().setSimpleItems(filterOptions.toList()) { index ->
+                binding.sortType.text = filterOptions[index]
+                if (::adapter.isInitialized) {
+                    sortDownloadList(index, selectedSortType)
                 }
+                selectedSortType = index
+                PreferenceHelper.putInt(
+                    PreferenceKeys.SELECTED_DOWNLOAD_SORT_TYPE,
+                    index
+                )
             }.show(childFragmentManager)
         }
 
@@ -190,15 +188,14 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
     }
 
     private fun sortDownloadList(sortType: Int, previousSortType: Int? = null) {
-        if(previousSortType == null && sortType == 1){
+        if (previousSortType == null && sortType == 1) {
             downloads.reverse()
-            adapter.notifyItemRangeChanged(0, downloads.size)
+            adapter.notifyDataSetChanged()
         }
-        if (previousSortType!=null && sortType != previousSortType) {
+        if (previousSortType != null && sortType != previousSortType) {
             downloads.reverse()
-            adapter.notifyItemRangeChanged(0, downloads.size)
+            adapter.notifyDataSetChanged()
         }
-
     }
 
     private fun showDeleteAllDialog(context: Context, adapter: DownloadsAdapter) {
@@ -270,7 +267,7 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
                     if (progressBar.isIndeterminate) return
                     progressBar.incrementProgressBy(status.progress.toInt())
                     val progressInfo = progressBar.progress.formatAsFileSize() +
-                        " /\n" + progressBar.max.formatAsFileSize()
+                            " /\n" + progressBar.max.formatAsFileSize()
                     fileSize.text = progressInfo
                 }
 
