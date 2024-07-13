@@ -39,7 +39,7 @@
     <string name="deletePlaylist">Izdzēst atskaņošanas sarakstu</string>
     <string name="areYouSure">Vai izdzēst atskaņošanas sarakstu?</string>
     <string name="emptyList">Šeit nekā nav.</string>
-    <string name="grid">Režģa kolonnas</string>
+    <string name="grid">Režģa kolonnas (portreta)</string>
     <string name="register">Reģistrēties</string>
     <string name="playlistName">Atskaņošanas saraksta nosaukums</string>
     <string name="emptyPlaylistName">Atskaņošanas saraksta nosaukums nevar būt tukšs</string>
@@ -430,4 +430,9 @@
     <string name="export_playlists_to">Eksportēt atskaņošanas sarakstus uz</string>
     <string name="import_format_piped">Piped / LibreTube</string>
     <string name="choose_instance_long">Izvēlieties Piped instanci, ko izmantot. Piped instance darbosies kā starpnieks starp jums un YouTube. Šīs instances fiziski atrodas dažādās vietās, uz ko norāda to valstu karogi. Instances, kas ir tuvāk jums, visticamāk strādās ātrāk nekā instances, kas ir tālāk. Jūs jebkurā mirklī varat izmainīt instanci iestatījumos.</string>
+    <string name="albums">Albumi</string>
+    <string name="grid_landscape">Režģa kolonnas (ainavas)</string>
+    <string name="donate">Ziedot</string>
+    <string name="finished">Pabeigts</string>
+    <string name="comments_count">Komentāri (%1$s)</string>
 </resources>
