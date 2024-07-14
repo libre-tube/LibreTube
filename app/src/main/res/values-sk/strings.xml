@@ -493,7 +493,7 @@
     <string name="tooltip_clear_queue">Vymazanie poradia</string>
     <string name="tooltip_watch_position">Pozícia sledovania</string>
     <string name="tooltip_sort">Zoradenie</string>
-    <string name="tooltip_dismiss">Zrušenie</string>
+    <string name="tooltip_dismiss">Odmietnuť</string>
     <string name="tooltip_filter">Filter</string>
     <string name="tooltip_play">Prehratie</string>
     <string name="tooltip_close">Zatvorenie</string>

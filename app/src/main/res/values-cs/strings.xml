@@ -476,7 +476,7 @@
     <string name="tooltip_create_playlist">Vytvořit playlist</string>
     <string name="tooltip_scroll_to_top">Posunout nahoru</string>
     <string name="tooltip_clear_queue">Vymazat frontu</string>
-    <string name="tooltip_dismiss">Zavřít</string>
+    <string name="tooltip_dismiss">Odmítnout</string>
     <string name="tooltip_locked">Uzamknout přehrávač</string>
     <string name="tooltip_play">Přehrát</string>
     <string name="tooltip_close">Zavřít</string>

@@ -23,7 +23,7 @@
     <string name="server_error">Parece que existe um problema com o servidor selecionado. Tente outra instância.</string>
     <string name="unknown_error">Erro de Rede.</string>
     <string name="error">Algo deu errado.</string>
-    <string name="empty">Você deve inserir o usuário e a senha.</string>
+    <string name="empty">Digite seu nome de usuário ou a senha.</string>
     <string name="notgmail">Isto é para uma conta Piped</string>
     <string name="defres">Resolução dos vídeos</string>
     <string name="grid">Colunas da grade (modo retrato)</string>
@@ -51,7 +51,7 @@
     <string name="systemDefault">Sistema</string>
     <string name="lightTheme">Claro</string>
     <string name="darkTheme">Escuro</string>
-    <string name="import_from_yt_summary">YouTube ou NewPipe</string>
+    <string name="import_from_yt_summary">YouTube, FreeTube ou NewPipe</string>
     <string name="subscribers">%1$s inscritos</string>
     <string name="library">Biblioteca</string>
     <string name="startpage">Início</string>
@@ -97,7 +97,7 @@
     <string name="color_green">Verde daora</string>
     <string name="color_purple">Roxo prazeroso</string>
     <string name="material_you">Material You</string>
-    <string name="app_icon">Ícone</string>
+    <string name="app_icon">Estilo de ícone (app)</string>
     <string name="sponsorblock_notifications">Notificações</string>
     <string name="enabled">Habilitado</string>
     <string name="piped">Piped</string>
@@ -215,7 +215,7 @@
     <string name="instance_frontend_url">URL para a interface da instância</string>
     <string name="quality">Qualidade</string>
     <string name="behavior">Comportamento</string>
-    <string name="seek_increment">Intervalo de avanço/retrocesso</string>
+    <string name="seek_increment">Intervalo para avançar/retroceder</string>
     <string name="pauseOnScreenOff">Pausa automática</string>
     <string name="pauseOnScreenOff_summary">Pausar reprodução quando a tela estiver desligada</string>
     <string name="playingOnBackground">Reproduzindo em segundo plano…</string>
@@ -227,7 +227,7 @@
     <string name="worst_quality">Menor qualidade</string>
     <string name="new_videos_badge_summary">Mostrar um ícone com a quantidade de novos vídeos, se houver</string>
     <string name="backup_restore">Backup &amp; Restauração</string>
-    <string name="maximum_image_cache">Tamanho máximo do cache de imagem</string>
+    <string name="maximum_image_cache">Tamanho máximo do cache de imagens</string>
     <string name="open_copied">Abrir</string>
     <string name="audio_video_summary">Qualidade e formato</string>
     <string name="delete">Excluir dos downloads</string>
@@ -260,7 +260,7 @@
     <string name="resize_mode_zoom">Zoom</string>
     <string name="player_resize_mode">Redimensionamento</string>
     <string name="renamePlaylist">Renomear playlist</string>
-    <string name="new_videos_badge">Indicador para novos vídeos</string>
+    <string name="new_videos_badge">Indicador de novos vídeos</string>
     <string name="skip_segment">Pular segmento</string>
     <string name="playback_pitch">Tom de reprodução</string>
     <string name="copied">Copiado</string>
@@ -491,7 +491,7 @@
     <string name="segment_type">Tipo de segmento</string>
     <string name="sb_invalid_segment">Início ou fim do segmento inválido</string>
     <string name="proxy">Proxy</string>
-    <string name="contribute_to_sponsorblock">Contribuir para o SponsorBlock</string>
+    <string name="contribute_to_sponsorblock">Contribuir para SponsorBlock</string>
     <string name="filename_too_long">Nome do arquivo muito longo!</string>
     <string name="sponsorblock_user_id">ID do usuário SponsorBlock</string>
     <string name="donate">Doar</string>
