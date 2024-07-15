@@ -57,6 +57,12 @@ class SubmitSegmentDialog : DialogFragment() {
 
         binding.segmentCategory.items = resources.getStringArray(R.array.sponsorBlockSegmentNames).toList()
 
+        binding.swapTimestamps.setOnClickListener {
+            val temp = binding.startTime.text
+            binding.startTime.text = binding.endTime.text
+            binding.endTime.text = temp
+        }
+
         lifecycleScope.launch(Dispatchers.IO) {
             fetchSegments()
         }
