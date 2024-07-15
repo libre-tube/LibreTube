@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Parcelable
+import android.text.format.DateUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -385,6 +386,8 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
             val itemTouchHelper = ItemTouchHelper(itemTouchCallback)
             itemTouchHelper.attachToRecyclerView(binding.playlistRecView)
         }
+
+        updatePlaylistDuration()
     }
 
     @SuppressLint("StringFormatInvalid", "StringFormatMatches")
@@ -416,8 +419,16 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
 
             nextPage = response.nextpage
             playlistAdapter?.updateItems(response.relatedStreams)
+            updatePlaylistDuration()
             isLoading = false
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun updatePlaylistDuration() {
+        val totalDuration = playlistAdapter?.originalFeed?.sumOf { it.duration ?: 0 } ?: return
+        binding.playlistDuration.text = DateUtils.formatElapsedTime(totalDuration) +
+                if (nextPage != null) "+" else ""
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

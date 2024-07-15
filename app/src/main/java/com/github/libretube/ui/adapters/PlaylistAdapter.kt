@@ -40,7 +40,7 @@ import kotlinx.coroutines.withContext
  * playlists
  */
 class PlaylistAdapter(
-    private val originalFeed: MutableList<StreamItem>,
+    val originalFeed: MutableList<StreamItem>,
     private val sortedFeed: MutableList<StreamItem>,
     private val playlistId: String,
     private val playlistType: PlaylistType
