@@ -15,6 +15,7 @@ import com.github.libretube.databinding.DialogSubmitDearrowBinding
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.util.TextUtils
+import com.github.libretube.util.TextUtils.parseDurationString
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -88,7 +89,7 @@ class SubmitDeArrowDialog: DialogFragment() {
         val title = binding.dearrowTitle.text
             .takeIf { it.isNotEmpty() && binding.titleCheckbox.isChecked }
             ?.let { DeArrowSubmitTitle(it) }
-        val thumbnail = binding.thumbnailTime.text.toString().toFloatOrNull()
+        val thumbnail = binding.thumbnailTime.text.toString().parseDurationString()
             ?.takeIf { binding.thumbnailTimeCheckbox.isChecked }
             ?.let { DeArrowSubmitThumbnail(it) }
         val requestBody = DeArrowBody(videoId, userID, userAgent, title, thumbnail)
