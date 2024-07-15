@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
@@ -13,11 +14,14 @@ import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.serializable
+import com.github.libretube.helpers.ClipboardHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.ShareData
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 class ShareDialog : DialogFragment() {
     private lateinit var id: String
@@ -34,70 +38,74 @@ class ShareDialog : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        var shareOptions = arrayOf(
-            getString(R.string.piped),
-            getString(R.string.youtube)
-        )
-        val instanceUrl = getCustomInstanceFrontendUrl()
+        val customInstanceUrl = getCustomInstanceFrontendUrl().toHttpUrlOrNull()
         val shareableTitle = shareData.currentChannel
             ?: shareData.currentVideo
             ?: shareData.currentPlaylist.orEmpty()
-        // add instanceUrl option if custom instance frontend url available
-        if (instanceUrl.isNotEmpty()) {
-            shareOptions += getString(R.string.instance)
-        }
 
         val binding = DialogShareBinding.inflate(layoutInflater)
 
+        binding.shareHostGroup.check(
+            when (PreferenceHelper.getInt(PreferenceKeys.SELECTED_SHARE_HOST, 0)) {
+                0 -> binding.youtube.id
+                1 -> binding.piped.id
+                else -> if (customInstanceUrl != null) binding.customInstance.id else 0
+            }
+        )
+
+        binding.shareHostGroup.setOnCheckedChangeListener { _, _ ->
+            binding.linkPreview.text = generateLinkText(binding, customInstanceUrl)
+            PreferenceHelper.putInt(
+                PreferenceKeys.SELECTED_SHARE_HOST, when {
+                    binding.youtube.isChecked -> 0
+                    binding.piped.isChecked -> 1
+                    else -> 2
+                }
+            )
+        }
+
+        if (customInstanceUrl != null) {
+            binding.customInstance.isVisible = true
+            binding.customInstance.text = customInstanceUrl.host
+        }
+        if (shareObjectType == ShareObjectType.VIDEO) {
+            binding.timeStampSwitchLayout.isVisible = true
+            binding.timeCodeSwitch.isChecked = PreferenceHelper.getBoolean(
+                PreferenceKeys.SHARE_WITH_TIME_CODE,
+                false
+            )
+            binding.timeCodeSwitch.setOnCheckedChangeListener { _, isChecked ->
+                binding.timeStampInputLayout.isVisible = isChecked
+                PreferenceHelper.putBoolean(PreferenceKeys.SHARE_WITH_TIME_CODE, isChecked)
+                binding.linkPreview.text = generateLinkText(binding, customInstanceUrl)
+            }
+            binding.timeStamp.addTextChangedListener {
+                binding.linkPreview.text = generateLinkText(binding, customInstanceUrl)
+            }
+            binding.timeStamp.setText((shareData.currentPosition ?: 0L).toString())
+            if (binding.timeCodeSwitch.isChecked) {
+                binding.timeStampInputLayout.isVisible = true
+            }
+        }
+
+        binding.copyLink.setOnClickListener {
+            ClipboardHelper.save(requireContext(), text = binding.linkPreview.text.toString())
+        }
+
+        binding.linkPreview.text = generateLinkText(binding, customInstanceUrl)
+
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(R.string.share))
-            .setItems(shareOptions) { _, which ->
-                val host = when (which) {
-                    0 -> PIPED_FRONTEND_URL
-                    1 -> YOUTUBE_FRONTEND_URL
-                    // only available for custom instances
-                    else -> instanceUrl
-                }
-                var url = when {
-                    shareObjectType == ShareObjectType.VIDEO && host == YOUTUBE_FRONTEND_URL -> "$YOUTUBE_SHORT_URL/$id"
-                    shareObjectType == ShareObjectType.VIDEO -> "$host/watch?v=$id"
-                    shareObjectType == ShareObjectType.PLAYLIST -> "$host/playlist?list=$id"
-                    else -> "$host/channel/$id"
-                }
-
-                if (shareObjectType == ShareObjectType.VIDEO && binding.timeCodeSwitch.isChecked) {
-                    url += "&t=${binding.timeStamp.text}"
-                }
-
+            .setView(binding.root)
+            .setPositiveButton(R.string.share) { _, _ ->
                 val intent = Intent(Intent.ACTION_SEND)
-                    .putExtra(Intent.EXTRA_TEXT, url)
+                    .putExtra(Intent.EXTRA_TEXT, binding.linkPreview.text)
                     .putExtra(Intent.EXTRA_SUBJECT, shareableTitle)
                     .setType("text/plain")
                 val shareIntent = Intent.createChooser(intent, getString(R.string.shareTo))
                 requireContext().startActivity(shareIntent)
             }
-            .apply {
-                if (shareObjectType == ShareObjectType.VIDEO) {
-                    setupTimeStampBinding(binding)
-                    setView(binding.root)
-                }
-            }
             .show()
-    }
-
-    private fun setupTimeStampBinding(binding: DialogShareBinding) {
-        binding.timeCodeSwitch.isChecked = PreferenceHelper.getBoolean(
-            PreferenceKeys.SHARE_WITH_TIME_CODE,
-            false
-        )
-        binding.timeCodeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            binding.timeStampLayout.isVisible = isChecked
-            PreferenceHelper.putBoolean(PreferenceKeys.SHARE_WITH_TIME_CODE, isChecked)
-        }
-        binding.timeStamp.setText((shareData.currentPosition ?: 0L).toString())
-        if (binding.timeCodeSwitch.isChecked) {
-            binding.timeStampLayout.isVisible = true
-        }
     }
 
     // get the frontend url if it's a custom instance
@@ -114,6 +122,27 @@ class ShareDialog : DialogFragment() {
 
         // return the custom instance frontend url if available
         return customInstances.firstOrNull { it.apiUrl == instancePref }?.frontendUrl.orEmpty()
+    }
+
+    private fun generateLinkText(binding: DialogShareBinding, customInstanceUrl: HttpUrl?): String {
+        val host = when {
+            binding.piped.isChecked -> PIPED_FRONTEND_URL
+            binding.youtube.isChecked -> YOUTUBE_FRONTEND_URL
+            // only available for custom instances
+            else -> customInstanceUrl!!.toString()
+        }
+        var url = when {
+            shareObjectType == ShareObjectType.VIDEO && host == YOUTUBE_FRONTEND_URL -> "$YOUTUBE_SHORT_URL/$id"
+            shareObjectType == ShareObjectType.VIDEO -> "$host/watch?v=$id"
+            shareObjectType == ShareObjectType.PLAYLIST -> "$host/playlist?list=$id"
+            else -> "$host/channel/$id"
+        }
+
+        if (shareObjectType == ShareObjectType.VIDEO && binding.timeCodeSwitch.isChecked) {
+            url += "&t=${binding.timeStamp.text}"
+        }
+
+        return url
     }
 
     companion object {

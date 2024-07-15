@@ -4,45 +4,114 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingBottom="25dp">
+    android:paddingHorizontal="20dp"
+    android:paddingTop="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         tools:ignore="UselessParent">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="@string/share_with_time" />
-
-        <com.google.android.material.materialswitch.MaterialSwitch
-            android:id="@+id/timeCodeSwitch"
+        <RadioGroup
+            android:id="@+id/share_host_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <RadioButton
+                android:id="@+id/youtube"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/youtube" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/timeStampLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="5dp"
-        android:hint="@string/time_code"
-        android:visibility="gone">
+            <RadioButton
+                android:id="@+id/piped"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/piped" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/timeStamp"
+            <RadioButton
+                android:id="@+id/custom_instance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:text="kavin.rocks"
+                tools:visibility="visible" />
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/time_stamp_switch_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number" />
+            android:orientation="horizontal"
+            android:visibility="gone"
+            tools:visibility="visible">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/share_with_time" />
 
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/timeCodeSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/time_stamp_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="@string/time_code"
+            android:visibility="gone">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/timeStamp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/share_link_card"
+            style="@style/Widget.Material3.CardView.Elevated"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:background="?selectableItemBackground"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/copy_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginVertical="16dp">
+
+                <TextView
+                    android:id="@+id/link_preview"
+                    android:layout_gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    tools:text="https://youtu.be/abcdefghijgk" />
+
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_copy" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
 </LinearLayout>
