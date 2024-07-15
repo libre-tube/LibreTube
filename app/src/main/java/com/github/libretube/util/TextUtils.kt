@@ -63,6 +63,7 @@ object TextUtils {
 
             var milliseconds = 0
             var inMillis = false
+            var millisLength = 0
 
             for (char in timeString) {
                 if (inMillis) {
@@ -70,6 +71,7 @@ object TextUtils {
 
                     milliseconds *= 10
                     milliseconds += char.digitToInt()
+                    millisLength++
                 } else if (char.isDigit()) {
                     secondsScoped *= 10
                     secondsScoped += char.digitToInt()
@@ -82,8 +84,9 @@ object TextUtils {
                     inMillis = true
                 }
             }
+            secondsTotal += secondsScoped
 
-            val millisDecimal = milliseconds.toFloat() / pow(10, milliseconds.toString().length)
+            val millisDecimal = milliseconds.toFloat() / pow(10, millisLength)
             return secondsTotal.toFloat() + millisDecimal
         }
 

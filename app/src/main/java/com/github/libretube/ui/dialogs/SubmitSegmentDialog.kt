@@ -79,7 +79,7 @@ class SubmitSegmentDialog : DialogFragment() {
 
         requireDialog().hide()
 
-        val startTime = binding.startTime.text.toString().parseDurationString()
+        var startTime = binding.startTime.text.toString().parseDurationString()
         var endTime = binding.endTime.text.toString().parseDurationString()
 
         if (endTime == null || startTime == null || startTime > endTime) {
@@ -87,6 +87,7 @@ class SubmitSegmentDialog : DialogFragment() {
             return
         }
 
+        startTime = maxOf(startTime, 0f)
         if (duration != null) {
             // the end time can't be greater than the video duration
             endTime = minOf(endTime, duration!!.toFloat())
