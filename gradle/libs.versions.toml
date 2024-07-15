@@ -35,7 +35,6 @@ profileinstaller = "1.3.1"
 paging = "3.3.0"
 collection = "1.4.1"
 swiperefreshlayout = "1.1.0"
-testng = "7.10.2"
 
 [libraries]
 androidx-activity = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity" }
@@ -84,7 +83,6 @@ androidx-profileinstaller = { group = "androidx.profileinstaller", name = "profi
 androidx-paging = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "paging" }
 androidx-collection = { group = "androidx.collection", name = "collection", version.ref = "collection" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
-testng = { group = "org.testng", name = "testng", version.ref = "testng" }
 
 [plugins]
 androidTest = { id = "com.android.test", version.ref = "gradle" }

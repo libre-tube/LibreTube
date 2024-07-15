@@ -145,5 +145,5 @@ dependencies {
     implementation(libs.androidx.paging)
 
     /* Testing */
-    testImplementation(libs.testng)
+    testImplementation(libs.junit)
 }
