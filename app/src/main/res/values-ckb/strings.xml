@@ -351,7 +351,7 @@
     <string name="confirm_unsubscribe">ئایا دڵنیاییت لە لابردنی هاوبەشیکردن لەکەناڵی %1$s؟</string>
     <string name="confirm_unsubscribing">دڵنیاکردنەوەی لادانی هاوبەشیکردن</string>
     <string name="category">بەشەکان</string>
-    <string name="download_channel_name">دابەزاندنی فایل</string>
+    <string name="download_channel_name">خزمەتگوزاری دابەزاندن</string>
     <string name="codecs">کۆدەکان</string>
     <string name="push_channel_name">شێوازی ئاگادارکردنەوە</string>
     <string name="duration_reversed">ماوە (پێچەوانەکراو)</string>
@@ -544,4 +544,6 @@
     <string name="disable_sleep_timer">نا چالاککردنی کاتی وەستان</string>
     <string name="time_in_minutes">ماوە بە خولەک</string>
     <string name="no_segments_found">هیچ نیشانەکراوێک بەردەست نیە بۆ ئەم ڤیدیۆییە.</string>
+    <string name="external_download_provider">دابینکەری دابەزاندنی دەرەکی</string>
+    <string name="external_download_provider_summary">"ناوی پاکێجی ئەو ئەپە بنووسە کە دەتەوێت بۆ دابەزاندنی ڤیدیۆ بەکاری بهێنیت.  بۆ بەکارهێنانی دابەزاندنی ناوەکی LibreTube بە بەتاڵی بهێڵەرەوە."</string>
 </resources>
