@@ -541,4 +541,6 @@
     <string name="contribute_to_dearrow">Berkontribusi ke DeArrow</string>
     <string name="title">Judul</string>
     <string name="best_quality">Terbaik</string>
+    <string name="external_download_provider">Penyedia unduhan eksternal</string>
+    <string name="external_download_provider_summary">Masukkan nama paket apli yang Anda ingin gunakan untuk mengunduh video. Biarkan kosong untuk menggunakan pengunduh bawaan LibreTube.</string>
 </resources>
