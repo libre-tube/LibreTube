@@ -522,7 +522,7 @@
     <string name="rich_caption_rendering_summary">Daha zəngin və fərdiləşdirilmiş təcrübə üçün veb titrləri göstər</string>
     <string name="copy_tooltip">Köçür</string>
     <string name="change_instance">İnstansiyanı dəyişdir</string>
-    <string name="suggest_change_instance">Yüklənilmə həmişəkindən daha uzun çəkir. İnstansiyanı dəyişdirməyi düşünün</string>
+    <string name="suggest_change_instance">Yüklənmə həmişəkindən daha uzun çəkir. Serveri dəyişdirməyi düşün</string>
     <string name="change">Dəyişdir</string>
     <string name="audio_language">Səs dili</string>
     <string name="default_language">Standart</string>
