@@ -28,7 +28,6 @@ import com.github.libretube.util.deArrow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.json.Json
 
 class ChannelContentFragment : DynamicLayoutManagerFragment() {
     private var _binding: FragmentChannelContentBinding? = null
