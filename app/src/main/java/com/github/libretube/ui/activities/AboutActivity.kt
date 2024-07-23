@@ -1,11 +1,13 @@
 package com.github.libretube.ui.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import androidx.core.text.HtmlCompat
 import androidx.core.text.parseAsHtml
+import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivityAboutBinding
 import com.github.libretube.helpers.ClipboardHelper
@@ -18,6 +20,7 @@ import com.google.android.material.snackbar.Snackbar
 class AboutActivity : BaseActivity() {
     private lateinit var binding: ActivityAboutBinding
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -33,6 +36,12 @@ class AboutActivity : BaseActivity() {
                 .putExtra(Intent.EXTRA_TEXT, GITHUB_URL)
                 .setType("text/plain")
             startActivity(Intent.createChooser(sendIntent, null))
+        }
+
+        val versionText = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
+        binding.versionTv.text = versionText
+        binding.versionCard.setOnClickListener {
+            ClipboardHelper.save(this, text = versionText)
         }
 
         setupCard(binding.donate, DONATE_URL)

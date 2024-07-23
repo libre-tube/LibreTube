@@ -27,17 +27,43 @@
             app:tint="?attr/colorSecondary"
             tools:ignore="ContentDescription" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="40dp"
-            android:text="@string/app_name"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:layout_marginBottom="40dp">
 
-         <com.google.android.material.card.MaterialCardView
+            <TextView
+                android:id="@+id/app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:text="@string/app_name"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/version_card"
+                style="@style/Widget.Material3.CardView.Elevated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-40dp"
+                android:layout_toEndOf="@id/app_name">
+
+                <TextView
+                    android:id="@+id/version_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="6dp"
+                    android:layout_marginVertical="3dp"
+                    tools:text="1.0.0 (99)" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </RelativeLayout>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/donate"
             style="@style/AboutCard">
 
