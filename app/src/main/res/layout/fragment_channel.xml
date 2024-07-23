@@ -67,6 +67,7 @@
                                 android:drawablePadding="3dp"
                                 android:ellipsize="end"
                                 android:maxLines="1"
+                                android:textIsSelectable="true"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
                                 tools:text="Channel Name" />
@@ -150,7 +151,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
                         android:autoLink="web"
-                        android:padding="10dp" />
+                        android:padding="10dp"
+                        android:textIsSelectable="true" />
 
                 </LinearLayout>
 

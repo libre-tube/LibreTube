@@ -137,6 +137,7 @@
                 style="@style/TextViewMarquee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textIsSelectable="true"
                 android:textSize="24sp" />
 
             <TextView
@@ -269,8 +270,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingVertical="15dp"
-            android:paddingHorizontal="30dp">
+            android:paddingHorizontal="30dp"
+            android:paddingVertical="15dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"

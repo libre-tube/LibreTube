@@ -30,6 +30,7 @@
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
                 android:maxLines="2"
+                android:textIsSelectable="true"
                 android:textSize="18sp"
                 tools:text="Video Title" />
 
@@ -54,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
+                android:textIsSelectable="true"
                 tools:text="10M views - 2 days ago " />
 
             <com.github.libretube.ui.views.DrawableTextView
