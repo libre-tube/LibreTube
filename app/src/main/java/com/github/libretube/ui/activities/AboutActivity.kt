@@ -104,6 +104,9 @@ class AboutActivity : BaseActivity() {
         MaterialAlertDialogBuilder(this)
             .setTitle(R.string.device_info)
             .setMessage(text)
+            .setNegativeButton(R.string.copy_tooltip) { _, _ ->
+                ClipboardHelper.save(this@AboutActivity, text = text)
+            }
             .setPositiveButton(R.string.okay, null)
             .show()
     }
