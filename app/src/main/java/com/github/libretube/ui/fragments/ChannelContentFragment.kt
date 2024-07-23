@@ -107,18 +107,22 @@ class ChannelContentFragment : DynamicLayoutManagerFragment() {
         isLoading = false
     }
 
-    private fun loadNextPage(isVideo: Boolean, tab: ChannelTab) = lifecycleScope.launch {
-        try {
-            isLoading = true
-            nextPage = if (isVideo) {
-                fetchChannelNextPage(nextPage ?: return@launch)
-            } else {
-                fetchTabNextPage(nextPage ?: return@launch, tab)
+    private fun loadNextPage(isVideo: Boolean, tab: ChannelTab) {
+        if (isLoading) return
+
+        lifecycleScope.launch {
+            try {
+                isLoading = true
+                nextPage = if (isVideo) {
+                    fetchChannelNextPage(nextPage ?: return@launch)
+                } else {
+                    fetchTabNextPage(nextPage ?: return@launch, tab)
+                }
+            } catch (e: Exception) {
+                Log.e(TAG(), e.toString())
             }
-        } catch (e: Exception) {
-            Log.e(TAG(), e.toString())
+            isLoading = false
         }
-        isLoading = false
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -137,17 +141,17 @@ class ChannelContentFragment : DynamicLayoutManagerFragment() {
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
+
+                if (_binding == null || isLoading) return
+
                 val visibleItemCount = recyclerView.layoutManager!!.childCount
                 val totalItemCount = recyclerView.layoutManager!!.getItemCount()
                 val firstVisibleItemPosition =
                     (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-                
-                if (_binding == null || isLoading) return
+
                 if (firstVisibleItemPosition + visibleItemCount >= totalItemCount) {
                     loadNextPage(tabData?.data!!.isEmpty(), tabData)
-                    isLoading = false
                 }
-
             }
         })
 
