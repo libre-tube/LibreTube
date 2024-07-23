@@ -1,10 +1,13 @@
 package com.github.libretube.ui.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import androidx.core.text.HtmlCompat
 import androidx.core.text.parseAsHtml
+import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivityAboutBinding
 import com.github.libretube.helpers.ClipboardHelper
@@ -17,6 +20,7 @@ import com.google.android.material.snackbar.Snackbar
 class AboutActivity : BaseActivity() {
     private lateinit var binding: ActivityAboutBinding
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,6 +36,12 @@ class AboutActivity : BaseActivity() {
                 .putExtra(Intent.EXTRA_TEXT, GITHUB_URL)
                 .setType("text/plain")
             startActivity(Intent.createChooser(sendIntent, null))
+        }
+
+        val versionText = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
+        binding.versionTv.text = versionText
+        binding.versionCard.setOnClickListener {
+            ClipboardHelper.save(this, text = versionText)
         }
 
         setupCard(binding.donate, DONATE_URL)
@@ -93,17 +103,22 @@ class AboutActivity : BaseActivity() {
     }
 
     private fun showDeviceInfo() {
+        val metrics = Resources.getSystem().displayMetrics
+
         val text = "Manufacturer: ${Build.MANUFACTURER}\n" +
-            "Model: ${Build.MODEL}\n" +
-            "SDK: ${Build.VERSION.SDK_INT}\n" +
-            "Board: ${Build.BOARD}\n" +
-            "OS: Android ${Build.VERSION.RELEASE}\n" +
-            "Arch: ${Build.SUPPORTED_ABIS[0]}\n" +
-            "Product: ${Build.PRODUCT}"
+                "Board: ${Build.BOARD}\n" +
+                "Arch: ${Build.SUPPORTED_ABIS[0]}\n" +
+                "Android SDK: ${Build.VERSION.SDK_INT}\n" +
+                "OS: Android ${Build.VERSION.RELEASE}\n" +
+                "Display: ${metrics.widthPixels}x${metrics.heightPixels}\n" +
+                "Font scale: ${Resources.getSystem().configuration.fontScale}"
 
         MaterialAlertDialogBuilder(this)
             .setTitle(R.string.device_info)
             .setMessage(text)
+            .setNegativeButton(R.string.copy_tooltip) { _, _ ->
+                ClipboardHelper.save(this@AboutActivity, text = text)
+            }
             .setPositiveButton(R.string.okay, null)
             .show()
     }
