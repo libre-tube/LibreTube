@@ -1,6 +1,7 @@
 package com.github.libretube.ui.activities
 
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import androidx.core.text.HtmlCompat
@@ -93,13 +94,15 @@ class AboutActivity : BaseActivity() {
     }
 
     private fun showDeviceInfo() {
+        val metrics = Resources.getSystem().displayMetrics
+
         val text = "Manufacturer: ${Build.MANUFACTURER}\n" +
-            "Model: ${Build.MODEL}\n" +
-            "SDK: ${Build.VERSION.SDK_INT}\n" +
-            "Board: ${Build.BOARD}\n" +
-            "OS: Android ${Build.VERSION.RELEASE}\n" +
-            "Arch: ${Build.SUPPORTED_ABIS[0]}\n" +
-            "Product: ${Build.PRODUCT}"
+                "Board: ${Build.BOARD}\n" +
+                "Arch: ${Build.SUPPORTED_ABIS[0]}\n" +
+                "Android SDK: ${Build.VERSION.SDK_INT}\n" +
+                "OS: Android ${Build.VERSION.RELEASE}\n" +
+                "Display: ${metrics.widthPixels}x${metrics.heightPixels}\n" +
+                "Font scale: ${Resources.getSystem().configuration.fontScale}"
 
         MaterialAlertDialogBuilder(this)
             .setTitle(R.string.device_info)
