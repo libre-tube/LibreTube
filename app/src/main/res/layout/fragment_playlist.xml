@@ -93,6 +93,7 @@
                         android:layout_weight="1"
                         android:paddingHorizontal="5dp"
                         android:paddingVertical="2dp"
+                        android:textIsSelectable="true"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -149,7 +150,8 @@
                     android:autoLink="web"
                     android:paddingHorizontal="10dp"
                     android:paddingTop="5dp"
-                    android:paddingBottom="10dp" />
+                    android:paddingBottom="10dp"
+                    android:textIsSelectable="true" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
