@@ -1,14 +1,14 @@
 package com.github.libretube.ui.fragments
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
+import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.databinding.FragmentTrendsBinding
 import com.github.libretube.ui.activities.SettingsActivity
@@ -41,8 +41,9 @@ class TrendsFragment : DynamicLayoutManagerFragment() {
         viewModel.trendingVideos.observe(viewLifecycleOwner) { videos ->
             if (videos == null) return@observe
 
-            binding.recview.layoutManager?.onRestoreInstanceState(viewModel.recyclerViewState)
             binding.recview.adapter = VideosAdapter(videos.toMutableList())
+            binding.recview.layoutManager?.onRestoreInstanceState(viewModel.recyclerViewState)
+
             binding.homeRefresh.isRefreshing = false
             binding.progressBar.isGone = true
 
@@ -61,13 +62,20 @@ class TrendsFragment : DynamicLayoutManagerFragment() {
             viewModel.fetchTrending(requireContext())
         }
 
-        viewLifecycleOwner.lifecycle.addObserver(object : DefaultLifecycleObserver {
-            override fun onDestroy(owner: LifecycleOwner) {
+        binding.recview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
                 viewModel.recyclerViewState = _binding?.recview?.layoutManager?.onSaveInstanceState()
             }
         })
 
         viewModel.fetchTrending(requireContext())
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        // manually restore the recyclerview state due to https://github.com/material-components/material-components-android/issues/3473
+        binding.recview.layoutManager?.onRestoreInstanceState(viewModel.recyclerViewState)
     }
 
     override fun onDestroyView() {
