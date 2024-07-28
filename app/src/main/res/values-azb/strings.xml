@@ -2,4 +2,20 @@
 <resources>
     <string name="startpage">آنایارپاق</string>
     <string name="subscriptions">ایشتراک‌لار</string>
+    <string name="yes">Bəli</string>
+    <string name="search_hint">Axtar</string>
+    <string name="videos">Videolar</string>
+    <string name="subscribe">Abunə ol</string>
+    <string name="unsubscribe">Abunəliyi ləğ et</string>
+    <string name="library">Kitabxana</string>
+    <string name="download">Endir</string>
+    <string name="save">Yadda saxla</string>
+    <string name="share">Paylaş</string>
+    <string name="username">İstifadəçi adı</string>
+    <string name="password">Şifrə</string>
+    <string name="login">Daxil ol</string>
+    <string name="register">Qeydiyyatdan keç</string>
+    <string name="logout">Çıxış</string>
+    <string name="cancel">Ləğv et</string>
+    <string name="loggedIn">Giriş</string>
 </resources>
