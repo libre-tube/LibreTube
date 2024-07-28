@@ -161,7 +161,7 @@
     <string name="autoplay_playlists_summary">Автоматично възпроизвеждане на следващия видеоклип в плейлисти, независимо от избраната настройка за автоматично възпроизвеждане</string>
     <string name="dearrow_summary">Показвайте по-точни и по-малко сензационни заглавия и миниатюри. Увеличава времето за зареждане</string>
     <string name="default_or_unknown_audio_track">по подразбиране или неизвестен</string>
-    <string name="export_subscriptions_to">Експортиране на абонаменти към</string>
+    <string name="export_subscriptions_to">Изнасяне на абонаменти към</string>
     <string name="shareTo">Споделете URL към</string>
     <string name="disable_proxy">Деактивиране на Piped прокси</string>
     <plurals name="years_ago">
@@ -199,7 +199,7 @@
     <string name="pinch_control">Контрол чрез щипване</string>
     <string name="notgmail">Това е за Piped акаунт</string>
     <string name="change_region">Изглежда, че тенденцията не е налична за текущия регион. Моля, изберете друг в настройките.</string>
-    <string name="import_playlists_from">Импортиране на плейлисти от</string>
+    <string name="import_playlists_from">Внасяне на плейлисти от</string>
     <string name="tooltip_minimize">Минимизиране</string>
     <string name="playOnBackground">Изпълни във фонов режим</string>
     <string name="sb_create_segment">Създайте сегмент</string>
@@ -283,7 +283,7 @@
     <string name="advanced">Разширено</string>
     <string name="deletePlaylist">Изтриване на плейлист</string>
     <string name="mark_as_unwatched">Маркирай като негледано</string>
-    <string name="import_subscriptions_from">Импортиране на абонаменти от</string>
+    <string name="import_subscriptions_from">Внасяне на абонаменти от</string>
     <string name="category_segments">Сегменти</string>
     <string name="automatic">Автоматичен</string>
     <string name="play_latest_videos">Пуснете най-новите видеоклипове</string>
@@ -302,7 +302,7 @@
     <string name="play_automatically_summary">Започнете да възпроизвеждате видео автоматично при избор</string>
     <string name="local_playlists">Местни плейлисти</string>
     <string name="tooltip_clear_queue">Изчистване на опашката</string>
-    <string name="import_from_yt">Импортиране на абонаменти</string>
+    <string name="import_from_yt">Внасяне на абонаменти</string>
     <string name="queue_insert_related_videos">Вмъкване на свързани видеоклипове</string>
     <string name="stop">Спри</string>
     <string name="autoplay_countdown_summary">Показване на обратно броене от 5 секунди преди автоматично пускане на следващия видеоклип</string>
@@ -339,7 +339,7 @@
     <string name="captions">Надписи</string>
     <string name="original_or_main_audio_track">оригинален или основен</string>
     <string name="caption_settings">Надписи</string>
-    <string name="import_playlists">Импортиране на плейлисти</string>
+    <string name="import_playlists">Внасяне на плейлисти</string>
     <string name="tooltip_repeat">Повторение</string>
     <string name="piped">Piped</string>
     <string name="fallback_piped_proxy">Завръщане към Piped прокси</string>
@@ -347,7 +347,7 @@
     <string name="auth_instances">Изберете инстанция за удостоверяване</string>
     <string name="category_selfpromo_summary">Подобно на „спонсор“, с изключение на неплатено или самореклама. Това включва секции за стоки, дарения или информация за това с кого са си сътрудничили</string>
     <string name="color_purple">Лилав</string>
-    <string name="export_playlists">Експортиране на плейлисти</string>
+    <string name="export_playlists">Изнасяне на плейлисти</string>
     <string name="forward">Напред</string>
     <string name="no_subtitle">Без натписи</string>
     <string name="undo">Отмяна</string>
@@ -457,7 +457,7 @@
     <string name="addInstance">Добавете инстанция</string>
     <string name="clear_customInstances">Изчистване на потребителски инстанции</string>
     <string name="autoplay_playlists">Списъци за автоматично пускане</string>
-    <string name="export_playlists_to">Експортирайте плейлисти в</string>
+    <string name="export_playlists_to">Изнасяне на плейлисти в</string>
     <string name="duration_span">Продължителност: %1$s</string>
     <string name="category">Категории</string>
     <string name="flameIcon">Летящ пламък</string>
@@ -504,7 +504,7 @@
     <string name="duration_reversed">Продължителност (обърната)</string>
     <string name="alternative_videos_layout">Алтернативно оформление на видеоклипове</string>
     <string name="new_videos_badge_summary">Показване на значка с количеството нови видеоклипове, ако има такива</string>
-    <string name="backup_restore_summary">Импортиране и експортиране на абонаменти, плейлисти,…</string>
+    <string name="backup_restore_summary">Внасяне и изнасяне на абонаменти, плейлисти,…</string>
     <string name="fireIcon">Моден огън</string>
     <string name="repeat_mode">Режим на повторение</string>
     <string name="add_to_group">Добавяне към група</string>
