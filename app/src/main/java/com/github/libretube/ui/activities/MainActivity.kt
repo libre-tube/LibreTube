@@ -16,6 +16,7 @@ import androidx.activity.viewModels
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.view.allViews
 import androidx.core.view.children
@@ -35,6 +36,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.extensions.anyChildFocused
 import com.github.libretube.extensions.toID
+import com.github.libretube.helpers.IntentHelper
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.NetworkHelper
@@ -54,6 +56,7 @@ import com.github.libretube.util.UpdateChecker
 import com.google.android.material.elevation.SurfaceColors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 class MainActivity : BaseActivity() {
     lateinit var binding: ActivityMainBinding
@@ -202,7 +205,10 @@ class MainActivity : BaseActivity() {
         } else if (PreferenceHelper.getBoolean(PreferenceKeys.PURE_THEME, false)) {
             SurfaceColors.getColorForElevation(this, binding.bottomNav.elevation)
         } else {
-            ThemeHelper.getThemeColor(this, com.google.android.material.R.attr.colorSurfaceContainer)
+            ThemeHelper.getThemeColor(
+                this,
+                com.google.android.material.R.attr.colorSurfaceContainer
+            )
         }
     }
 
@@ -277,7 +283,12 @@ class MainActivity : BaseActivity() {
         if (!this::navController.isInitialized) return false
         val id = navController.currentDestination?.id ?: return false
 
-        return id in listOf(R.id.searchFragment, R.id.searchResultFragment, R.id.channelFragment, R.id.playlistFragment)
+        return id in listOf(
+            R.id.searchFragment,
+            R.id.searchResultFragment,
+            R.id.channelFragment,
+            R.id.playlistFragment
+        )
     }
 
     override fun invalidateMenu() {
@@ -301,8 +312,22 @@ class MainActivity : BaseActivity() {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                navController.navigate(NavDirections.showSearchResults(query))
                 searchView.clearFocus()
+
+                // handle inserted YouTube-like URLs and directly open the referenced
+                // channel, playlist or video instead of showing search results
+                if (query.toHttpUrlOrNull() != null) {
+                    val queryIntent = IntentHelper.resolveType(query.toUri())
+
+                    if (navigateToMediaByIntent(queryIntent)) {
+                        navController.popBackStack(R.id.searchFragment, true)
+                        searchItem.collapseActionView()
+                        return true
+                    }
+                }
+
+                navController.navigate(NavDirections.showSearchResults(query))
+
                 return true
             }
 
@@ -433,50 +458,9 @@ class MainActivity : BaseActivity() {
             return
         }
 
-        intent?.getStringExtra(IntentData.channelId)?.let {
-            navController.navigate(NavDirections.openChannel(channelId = it))
-        }
-        intent?.getStringExtra(IntentData.channelName)?.let {
-            navController.navigate(NavDirections.openChannel(channelName = it))
-        }
-        intent?.getStringExtra(IntentData.playlistId)?.let {
-            navController.navigate(NavDirections.openPlaylist(playlistId = it))
-        }
-        intent?.getStringArrayExtra(IntentData.videoIds)?.let {
-            ImportTempPlaylistDialog()
-                .apply {
-                    arguments = bundleOf(
-                        IntentData.playlistName to intent?.getStringExtra(IntentData.playlistName),
-                        IntentData.videoIds to it
-                    )
-                }
-                .show(supportFragmentManager, null)
-        }
-        intent?.getStringExtra(IntentData.videoId)?.let {
-            // the below explained work around only seems to work on Android 11 and above
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                // the bottom navigation bar has to be created before opening the video
-                // otherwise the player layout measures aren't calculated properly
-                // and the miniplayer is opened at a closed state and overlapping the navigation bar
-                binding.bottomNav.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-                    override fun onGlobalLayout() {
-                        NavigationHelper.navigateVideo(
-                            context = this@MainActivity,
-                            videoUrlOrId = it,
-                            timestamp = intent.getLongExtra(IntentData.timeStamp, 0L)
-                        )
+        // navigate to (temporary) playlist or channel if available
+        if (navigateToMediaByIntent(intent)) return
 
-                        binding.bottomNav.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                    }
-                })
-            } else {
-                NavigationHelper.navigateVideo(
-                    context = this@MainActivity,
-                    videoUrlOrId = it,
-                    timestamp = intent.getLongExtra(IntentData.timeStamp, 0L)
-                )
-            }
-        }
         intent?.getStringExtra(IntentData.query)?.let {
             savedSearchQuery = it
         }
@@ -500,6 +484,68 @@ class MainActivity : BaseActivity() {
                     (fragment as? DownloadsFragment)?.bindDownloadService()
                 }
         }
+    }
+
+    /**
+     * Navigates to the channel, video or playlist provided in the [Intent] if available
+     *
+     * @return Whether the method handled the event and triggered the navigation to a new fragment
+     */
+    fun navigateToMediaByIntent(intent: Intent): Boolean {
+        intent.getStringExtra(IntentData.channelId)?.let {
+            navController.navigate(NavDirections.openChannel(channelId = it))
+            return true
+        }
+        intent.getStringExtra(IntentData.channelName)?.let {
+            navController.navigate(NavDirections.openChannel(channelName = it))
+            return true
+        }
+        intent.getStringExtra(IntentData.playlistId)?.let {
+            navController.navigate(NavDirections.openPlaylist(playlistId = it))
+            return true
+        }
+        intent.getStringArrayExtra(IntentData.videoIds)?.let {
+            ImportTempPlaylistDialog()
+                .apply {
+                    arguments = bundleOf(
+                        IntentData.playlistName to intent.getStringExtra(IntentData.playlistName),
+                        IntentData.videoIds to it
+                    )
+                }
+                .show(supportFragmentManager, null)
+            return true
+        }
+
+        intent.getStringExtra(IntentData.videoId)?.let {
+            // the below explained work around only seems to work on Android 11 and above
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                // the bottom navigation bar has to be created before opening the video
+                // otherwise the player layout measures aren't calculated properly
+                // and the miniplayer is opened at a closed state and overlapping the navigation bar
+                binding.bottomNav.viewTreeObserver.addOnGlobalLayoutListener(object :
+                    ViewTreeObserver.OnGlobalLayoutListener {
+                    override fun onGlobalLayout() {
+                        NavigationHelper.navigateVideo(
+                            context = this@MainActivity,
+                            videoUrlOrId = it,
+                            timestamp = intent.getLongExtra(IntentData.timeStamp, 0L)
+                        )
+
+                        binding.bottomNav.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    }
+                })
+            } else {
+                NavigationHelper.navigateVideo(
+                    context = this@MainActivity,
+                    videoUrlOrId = it,
+                    timestamp = intent.getLongExtra(IntentData.timeStamp, 0L)
+                )
+            }
+
+            return true
+        }
+
+        return false
     }
 
     private fun minimizePlayer() {

@@ -18,7 +18,7 @@ class DownloadActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         val intentData = intent.getStringExtra(Intent.EXTRA_TEXT)?.let {
-            IntentHelper.resolveType(Intent(), it.toUri())
+            IntentHelper.resolveType(it.toUri())
         }
 
         val videoId = intentData?.getStringExtra(IntentData.videoId)
