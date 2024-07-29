@@ -8,18 +8,23 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
+import android.graphics.Bitmap
 import android.media.session.PlaybackState
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
 import android.view.KeyEvent
 import android.view.LayoutInflater
+import android.view.PixelCopy
+import android.view.SurfaceView
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.content.ContextCompat
@@ -117,6 +122,7 @@ import kotlinx.coroutines.withContext
 import java.util.concurrent.Executors
 import kotlin.math.abs
 import kotlin.math.ceil
+
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class PlayerFragment : Fragment(), OnlinePlayerOptions {
@@ -352,6 +358,21 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
     )
 
+    private var screenshotBitmap: Bitmap? = null
+    private val openScreenshotFile =
+        registerForActivityResult(ActivityResultContracts.CreateDocument("image/png")) { uri ->
+            if (uri == null) {
+                screenshotBitmap = null
+                return@registerForActivityResult
+            }
+
+            context?.contentResolver?.openOutputStream(uri)?.use { outputStream ->
+                screenshotBitmap?.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+            }
+
+            screenshotBitmap = null
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val playerData = requireArguments().parcelable<PlayerData>(IntentData.playerData)!!
@@ -526,9 +547,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         activity?.supportFragmentManager
-            ?.setFragmentResultListener(CommentsSheet.HANDLE_LINK_REQUEST_KEY, viewLifecycleOwner) { _, bundle ->
+            ?.setFragmentResultListener(
+                CommentsSheet.HANDLE_LINK_REQUEST_KEY,
+                viewLifecycleOwner
+            ) { _, bundle ->
                 bundle.getString(IntentData.url)?.let { handleLink(it) }
-        }
+            }
 
         binding.commentsToggle.setOnClickListener {
             if (!this::streams.isInitialized) return@setOnClickListener
@@ -628,6 +652,28 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
         }
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            binding.relPlayerScreenshot.setOnClickListener {
+                if (!this::exoPlayer.isInitialized || !this::streams.isInitialized) return@setOnClickListener
+                val surfaceView =
+                    binding.player.videoSurfaceView as? SurfaceView ?: return@setOnClickListener
+
+                val bmp = Bitmap.createBitmap(
+                    surfaceView.width,
+                    surfaceView.height,
+                    Bitmap.Config.ARGB_8888
+                )
+
+                PixelCopy.request(surfaceView, bmp, { _ ->
+                    screenshotBitmap = bmp
+                    val currentPosition = exoPlayer.currentPosition.toFloat() / 1000
+                    openScreenshotFile.launch("${streams.title}-${currentPosition}.png")
+                }, Handler(Looper.getMainLooper()))
+            }
+        } else {
+            binding.relPlayerScreenshot.isGone = true
+        }
+
         binding.playerChannel.setOnClickListener {
             if (!this::streams.isInitialized) return@setOnClickListener
 
@@ -702,7 +748,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         binding.player.updateMarginsByFullscreenMode()
 
         // set status bar icon color back to theme color after fullscreen dialog closed!
-        windowInsetsControllerCompat.isAppearanceLightStatusBars = !ThemeHelper.isDarkMode(requireContext())
+        windowInsetsControllerCompat.isAppearanceLightStatusBars =
+            !ThemeHelper.isDarkMode(requireContext())
     }
 
     /**
@@ -1031,13 +1078,17 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         // close comment bottom sheet if opened for next video
         activity?.supportFragmentManager?.fragments?.filterIsInstance<CommentsSheet>()
-                ?.firstOrNull()?.dismiss()
+            ?.firstOrNull()?.dismiss()
     }
 
     @SuppressLint("SetTextI18n")
     private fun initializePlayerView() {
         // initialize the player view actions
-        binding.player.initialize(doubleTapOverlayBinding, playerGestureControlsViewBinding, chaptersViewModel)
+        binding.player.initialize(
+            doubleTapOverlayBinding,
+            playerGestureControlsViewBinding,
+            chaptersViewModel
+        )
         binding.player.initPlayerOptions(viewModel, viewLifecycleOwner, trackSelector, this)
 
         binding.descriptionLayout.setStreams(streams)
