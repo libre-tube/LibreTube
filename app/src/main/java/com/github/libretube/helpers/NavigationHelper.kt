@@ -32,7 +32,8 @@ object NavigationHelper {
         val activity = ContextHelper.unwrapActivity(context)
         activity.navController.navigate(NavDirections.openChannel(channelUrlOrId.toID()))
         try {
-            if (activity.binding.mainMotionLayout.progress == 0.toFloat()) {
+            // minimize player if currently expanded
+            if (activity.binding.mainMotionLayout.progress == 0f) {
                 activity.binding.mainMotionLayout.transitionToEnd()
                 activity.findViewById<SingleViewTouchableMotionLayout>(R.id.playerMotionLayout)
                     .transitionToEnd()

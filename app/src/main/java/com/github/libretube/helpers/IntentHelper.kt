@@ -69,6 +69,8 @@ object IntentHelper {
         }
     }
 
+    fun resolveType(uri: Uri) = resolveType(Intent(), uri)
+
     /**
      * Resolve the uri and return a bundle with the arguments
      */
