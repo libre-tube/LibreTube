@@ -78,6 +78,12 @@
                         style="@style/PlayerActionsButton"
                         android:text="@string/pip"
                         app:icon="@drawable/ic_open" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/relPlayer_screenshot"
+                        style="@style/PlayerActionsButton"
+                        android:text="@string/screenshot"
+                        app:icon="@drawable/ic_copy" />
                 </LinearLayout>
 
             </HorizontalScrollView>
@@ -179,7 +185,8 @@
         app:layout_constraintBottom_toBottomOf="@id/main_container"
         app:layout_constraintStart_toStartOf="@id/main_container"
         app:layout_constraintTop_toTopOf="@id/main_container"
-        app:show_buffering="when_playing">
+        app:show_buffering="when_playing"
+        app:surface_type="surface_view">
 
         <com.github.libretube.ui.views.DoubleTapOverlay
             android:id="@+id/doubleTapOverlay"
