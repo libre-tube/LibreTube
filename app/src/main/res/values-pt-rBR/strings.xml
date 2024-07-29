@@ -549,4 +549,5 @@
     <string name="best_quality">Melhor qualidade</string>
     <string name="external_download_provider">Provedor de download externo</string>
     <string name="external_download_provider_summary">Digite o nome do pacote da aplicação que deseja usar para baixar vídeos. Deixe em branco para usar o provedor de download do LibreTube.</string>
+    <string name="screenshot">Captura de tela</string>
 </resources>
