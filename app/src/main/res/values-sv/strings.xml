@@ -546,4 +546,5 @@
     <string name="also_clear_watch_positions">Rensa även sekvenspositionerna</string>
     <string name="external_download_provider">Extern nedladdningsleverantör</string>
     <string name="import_temp_playlist">Importera tillfällig spellista?</string>
+    <string name="screenshot">Skärmbild</string>
 </resources>
