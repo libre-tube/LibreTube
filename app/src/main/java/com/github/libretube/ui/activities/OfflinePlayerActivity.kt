@@ -24,7 +24,6 @@ import androidx.media3.datasource.FileDataSource
 import androidx.media3.exoplayer.source.MergingMediaSource
 import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import androidx.media3.exoplayer.source.SingleSampleMediaSource
-import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.media3.ui.PlayerView
 import com.github.libretube.compat.PictureInPictureCompat
 import com.github.libretube.compat.PictureInPictureParamsCompat
@@ -60,7 +59,6 @@ class OfflinePlayerActivity : BaseActivity() {
     private lateinit var binding: ActivityOfflinePlayerBinding
     private lateinit var videoId: String
     private lateinit var playerView: PlayerView
-    private lateinit var trackSelector: DefaultTrackSelector
     private var timeFrameReceiver: TimeFrameReceiver? = null
     private var nowPlayingNotification: NowPlayingNotification? = null
 
@@ -205,7 +203,7 @@ class OfflinePlayerActivity : BaseActivity() {
 
             setMediaSource(videoUri, audioUri, subtitleUri)
 
-            trackSelector.updateParameters {
+            viewModel.trackSelector.updateParameters {
                 setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
                 setPreferredTextLanguage("en")
             }

@@ -12,6 +12,7 @@ import com.github.libretube.helpers.PlayerHelper
 @UnstableApi
 class OfflinePlayerViewModel(
     val player: ExoPlayer,
+    val trackSelector: DefaultTrackSelector,
 ) : ViewModel() {
 
     companion object {
@@ -21,6 +22,7 @@ class OfflinePlayerViewModel(
                 val trackSelector = DefaultTrackSelector(context)
                 OfflinePlayerViewModel(
                     player = PlayerHelper.createPlayer(context, trackSelector, false),
+                    trackSelector = trackSelector,
                 )
             }
         }
