@@ -546,4 +546,5 @@
     <string name="best_quality">Ən yaxşı</string>
     <string name="external_download_provider">Xarici yükləmə təchizatçısı</string>
     <string name="external_download_provider_summary">Videoları yükləmək üçün istifadə etdiyiniz tətbiqin paket adını daxil edin. LibreTube-un daxili yükləyicisin istifadə etmək üçün boş buraxın.</string>
+    <string name="screenshot">Ekran görüntüsü</string>
 </resources>
