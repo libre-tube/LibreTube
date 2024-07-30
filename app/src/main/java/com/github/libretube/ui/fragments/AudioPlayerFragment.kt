@@ -44,7 +44,7 @@ import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.interfaces.AudioPlayerOptions
 import com.github.libretube.ui.listeners.AudioPlayerThumbnailListener
 import com.github.libretube.ui.models.ChaptersViewModel
-import com.github.libretube.ui.models.PlayerViewModel
+import com.github.libretube.ui.models.CommonPlayerViewModel
 import com.github.libretube.ui.sheets.ChaptersBottomSheet
 import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
@@ -61,7 +61,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
 
     private lateinit var audioHelper: AudioHelper
     private val mainActivity get() = context as MainActivity
-    private val viewModel: PlayerViewModel by activityViewModels()
+    private val viewModel: CommonPlayerViewModel by activityViewModels()
     private val chaptersModel: ChaptersViewModel by activityViewModels()
 
     // for the transition
@@ -370,7 +370,6 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     }
 
     private fun handleServiceConnection() {
-        viewModel.player = playerService?.player
         playerService?.onStateOrPlayingChanged = { isPlaying ->
             updatePlayPauseButton()
             isPaused = !isPlaying
@@ -393,8 +392,6 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         runCatching {
             activity?.unbindService(connection)
         }
-
-        viewModel.player = null
 
         super.onDestroy()
     }

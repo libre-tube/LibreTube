@@ -27,6 +27,7 @@ import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.SubmitDeArrowDialog
 import com.github.libretube.ui.dialogs.SubmitSegmentDialog
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
+import com.github.libretube.ui.models.CommonPlayerViewModel
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.util.PlayingQueue
@@ -38,6 +39,7 @@ class OnlinePlayerView(
 ) : CustomExoPlayerView(context, attributeSet) {
     private var playerOptions: OnlinePlayerOptions? = null
     private var playerViewModel: PlayerViewModel? = null
+    private var commonPlayerViewModel: CommonPlayerViewModel? = null
     private var trackSelector: TrackSelector? = null
     private var viewLifecycleOwner: LifecycleOwner? = null
 
@@ -149,16 +151,18 @@ class OnlinePlayerView(
 
     fun initPlayerOptions(
         playerViewModel: PlayerViewModel,
+        commonPlayerViewModel: CommonPlayerViewModel,
         viewLifecycleOwner: LifecycleOwner,
         trackSelector: TrackSelector,
         playerOptions: OnlinePlayerOptions
     ) {
         this.playerViewModel = playerViewModel
+        this.commonPlayerViewModel = commonPlayerViewModel
         this.viewLifecycleOwner = viewLifecycleOwner
         this.trackSelector = trackSelector
         this.playerOptions = playerOptions
 
-        playerViewModel.isFullscreen.observe(viewLifecycleOwner) { isFullscreen ->
+        commonPlayerViewModel.isFullscreen.observe(viewLifecycleOwner) { isFullscreen ->
             WindowHelper.toggleFullscreen(activity.window, isFullscreen)
             updateTopBarMargin()
 
@@ -258,7 +262,7 @@ class OnlinePlayerView(
     override fun hideController() {
         super.hideController()
 
-        if (playerViewModel?.isFullscreen?.value == true) {
+        if (commonPlayerViewModel?.isFullscreen?.value == true) {
             toggleSystemBars(false)
         }
         updateTopBarMargin()
@@ -267,13 +271,13 @@ class OnlinePlayerView(
     override fun showController() {
         super.showController()
 
-        if (playerViewModel?.isFullscreen?.value == true && !isPlayerLocked) {
+        if (commonPlayerViewModel?.isFullscreen?.value == true && !isPlayerLocked) {
             toggleSystemBars(true)
         }
     }
 
     override fun isFullscreen(): Boolean {
-        return playerViewModel?.isFullscreen?.value ?: super.isFullscreen()
+        return commonPlayerViewModel?.isFullscreen?.value ?: super.isFullscreen()
     }
 
     override fun minimizeOrExitPlayer() {
