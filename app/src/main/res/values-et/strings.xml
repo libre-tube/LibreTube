@@ -546,4 +546,5 @@
     <string name="tooltip_play">Esita</string>
     <string name="external_download_provider">Väline allalaadimisrakendus</string>
     <string name="external_download_provider_summary">Sisesta välise allalaadimisrakenduse paketi nimi, mida soovid kasutada. Kui eelistad LibreTube\'i oma allalaadimislahendust, siis jäta tühjaks.</string>
+    <string name="screenshot">Ekraanitõmmis</string>
 </resources>
