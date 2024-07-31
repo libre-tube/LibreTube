@@ -540,4 +540,11 @@
     <string name="rich_caption_rendering">Flókin myndgerð skýringartexta</string>
     <string name="rich_caption_rendering_summary">Myndgera skýringartexta í vefstíl fyrir ríkulegri og sérsníðanlega framsetningu</string>
     <string name="sb_custom_colors_summary">Víxlar sérsniðnum litahlutum af/á fyrir SponsorBlock-hluta</string>
+    <string name="playback_during_call_summary">Athugaðu að þetta hefur þau áhrif á forritið að það meðhöndlar ekki lengur neina virkni á hljóði</string>
+    <string name="fallback_piped_proxy_summary">Sæktu myndskeið í gegnum milliþjóninn (proxy) ef ekki virkar að tengjast beint við YouTube fyrir þetta myndskeið (eykur hleðslutíma í upphafi). Ef þetta er óvirkt, mun tónlistarefni af YouTube líklega ekki spilast sökum hamla af hálfu YouTube</string>
+    <string name="enqueueing_playlist_download">Set myndskeið í niðurhalsröð fyrir spilunarlistann %1$s</string>
+    <string name="choose_instance_long">Veldu hér fyrir neðan það tilvik Piped sem ætti að nota. Piped-tilvikið mun virka sem milliþjónn milli þín og YouTube. Þessi tilvik eru staðsett á mismunandi stöðum í raunheimum, sem gefnir eru til kynna með landsfánum þeirra. Tilvik sem eru landfræðilega nær þér ættu almennt að vera hraðvirkari en tilvik sem eru fjær. Þú getur hvenær sem er skipt um tilvik í stillingunum þínum.</string>
+    <string name="download_playlist_note">Veldu mestu hljóð- og myndgæði til að sækja. Skjátextar verða einungis sóttir ef þeir eru tiltækir.</string>
+    <string name="enqueue_playlist_description">Birtir tilkynningu þegar myndskeið eru sett í niðurhalsröð fyrir spilunarlista.</string>
+    <string name="screenshot">Skjámynd</string>
 </resources>
