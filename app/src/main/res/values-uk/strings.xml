@@ -178,7 +178,7 @@
     <string name="chapters">Епізоди</string>
     <string name="no_audio">Немає аудіо</string>
     <string name="audio">Аудіо</string>
-    <string name="autoRotatePlayer_summary">Поноекранний режим при обертанні пристрою</string>
+    <string name="autoRotatePlayer_summary">Відтворювати на повноекранному режимі, коли пристрій повертається</string>
     <string name="require_restart">Потрібен перезапуск застосунку</string>
     <string name="navLabelVisibility">Відображення міток</string>
     <string name="always">Завжди</string>
@@ -193,13 +193,13 @@
     <string name="wifi">Wi-Fi</string>
     <string name="default_subtitle_language">Мова субтитрів</string>
     <string name="new_videos_badge">Індикатор нових відео</string>
-    <string name="notify_new_streams_summary">Показувати сповіщення про нові трансляції від авторів, на яких ви підписані</string>
+    <string name="notify_new_streams_summary">Показувати сповіщення про нові трансляції від творців, за якими ви стежите</string>
     <string name="irreversible">Ви впевнені\? Цю дію не можна скасувати!</string>
     <string name="history_empty">Історія порожня.</string>
     <string name="backup_restore">Резервне копіювання та відновлення</string>
-    <string name="data_saver_mode_summary">Пропускати мініатюри та інші зображення</string>
-    <string name="no_player_found">Зовнішній програвач не знайдено. Переконайтеся, що він установлений.</string>
-    <string name="playerAudioQuality">Якість звуку</string>
+    <string name="data_saver_mode_summary">Пропускати обкладинки та інші зображення</string>
+    <string name="no_player_found">Зовнішній програвач не знайдено. Переконайтеся, що він встановлений.</string>
+    <string name="playerAudioQuality">Якість аудіо</string>
     <string name="notify_new_streams">Показувати сповіщення про нові трансляції</string>
     <string name="notifications">Сповіщення</string>
     <string name="take_a_break">Час зробити перерву</string>
@@ -242,12 +242,12 @@
     <string name="repeat_mode">Режим повторення</string>
     <string name="resize_mode_fit">Допасування</string>
     <string name="resize_mode_fill">Заповнення</string>
-    <string name="resize_mode_zoom">Наближення</string>
+    <string name="resize_mode_zoom">Приближення</string>
     <string name="maximum_image_cache">Макс. розмір кешу зображень</string>
     <string name="data_saver_mode">Режим заощадження даних</string>
     <string name="search_history_summary">Пам\'ятати історію пошуку</string>
-    <string name="playerAudioFormat">Формат звуку для програвача</string>
-    <string name="checking_frequency">Перевірка кожного …</string>
+    <string name="playerAudioFormat">Формат аудіо для програвача</string>
+    <string name="checking_frequency">Перевірка кожні …</string>
     <string name="most_views">Найбільше переглядів</string>
     <string name="least_views">Найменше переглядів</string>
     <string name="skip_buttons">Кнопки пропуску</string>
@@ -258,8 +258,8 @@
     <string name="player_resize_mode">Режим зміни розміру</string>
     <string name="copied_to_clipboard">Скопійовано в буфер обміну</string>
     <string name="open_copied">Відкрити</string>
-    <string name="watch_history_summary">Запам\'ятовувати переглянуті локальні доріжки</string>
-    <string name="history_summary">Історія переглядів і пошуку</string>
+    <string name="watch_history_summary">Запам\'ятовувати локально переглянуті відео</string>
+    <string name="history_summary">Історія переглядів та пошуку</string>
     <string name="watch_positions_title">Запам\'ятовування позицій відтворення</string>
     <string name="reset_watch_positions">Скинути</string>
     <string name="system_caption_style">Системний стиль субтитрів</string>
@@ -333,7 +333,7 @@
     <string name="play_latest_videos">Грати останні відео</string>
     <string name="nothing_selected">Нічого не вибрано!</string>
     <string name="color_violet">Універсальний фіолетовий</string>
-    <string name="failed_fetching_instances">Неможливо отримати доступні екземпляри.</string>
+    <string name="failed_fetching_instances">Неможливо отримати доступні сервери.</string>
     <string name="hide_watched_from_feed">Приховати вже переглянуті відео</string>
     <string name="playlistUrl">URL добірки</string>
     <string name="shuffle">Перетасувати</string>
@@ -403,8 +403,8 @@
         <item quantity="many">%d нових трансляцій</item>
         <item quantity="other">%d нових трансляцій</item>
     </plurals>
-    <string name="show_stream_thumbnails_summary">Показувати мініатюри нових трансляцій. Увімкнення цієї опції споживає додаткові дані</string>
-    <string name="show_stream_thumbnails">Показувати мініатюри трансляцій</string>
+    <string name="show_stream_thumbnails_summary">Показувати обкладинки нових трансляцій. Увімкнення цієї опції споживатиме додаткові дані</string>
+    <string name="show_stream_thumbnails">Показувати обкладинки трансляцій</string>
     <string name="unlimited_search_history">Необмежена історія запитів</string>
     <string name="duration">Тривалість</string>
     <string name="duration_reversed">Тривалість (у зворотному порядку)</string>
@@ -454,7 +454,7 @@
     <string name="unknown_audio_track_type">Невідомий тип звукової доріжки</string>
     <string name="continue_watching">Продовжити перегляд</string>
     <string name="dearrow">Увімкнути DeArrow</string>
-    <string name="dearrow_summary">Показувати точніші та менш сенсаційні заголовки та мініатюри. Збільшує час завантаження</string>
+    <string name="dearrow_summary">Показувати точніші та менш сенсаційні заголовки та обкладинки. Це збільшує час завантаження</string>
     <string name="visibility">Видимість</string>
     <string name="visibility_public">Загальнодоступно</string>
     <string name="visibility_unlisted">Не показується</string>
@@ -524,7 +524,7 @@
     <string name="add_to_group">Додати до групи</string>
     <string name="uptime">Час онлайн %.2f%%</string>
     <string name="rich_caption_rendering">Просунуті субтитри</string>
-    <string name="rich_caption_rendering_summary">Малювати субтитри вебрушієм для підтримки розширених можливостей і налаштувань</string>
+    <string name="rich_caption_rendering_summary">Відображати вебсубтитри для підтримки розширених можливостей та налаштувань</string>
     <string name="grid_landscape">Стовпців (горизонтальний режим)</string>
     <string name="copy_tooltip">Копіювати</string>
     <string name="change_instance">Змінити сервер</string>
