@@ -418,7 +418,7 @@
     <string name="export_playlists_to">Exportar playlists para</string>
     <string name="import_format_piped">Piped/LibreTube</string>
     <string name="import_format_newpipe">NewPipe</string>
-    <string name="home_tab_content">Conteúdo da página inicial</string>
+    <string name="home_tab_content">Conteúdo da tela inicial</string>
     <string name="mark_as_unwatched">Marcar como não assistido</string>
     <string name="choose_instance_long">Escolha uma instância Piped para usar abaixo. A instância Piped atuará como intermediária entre você e o YouTube. Essas instâncias estão localizadas em locais físicos diferentes, indicados pelas bandeiras dos países. As instâncias fisicamente mais próximas de você são provavelmente mais rápidas do que as instâncias que não estão. Você pode alterar a instância usada nas configurações a qualquer momento.</string>
     <string name="choose_instance">Escolha uma instância primeiro!</string>
