@@ -74,7 +74,7 @@
     <string name="color_green">Màu xanh lá vui vẻ</string>
     <string name="color_red">Màu đỏ lạnh</string>
     <string name="sponsorblock_notifications">Thông báo</string>
-    <string name="piped">Đường ống</string>
+    <string name="piped">Piped</string>
     <string name="update_available">Đã có bản cập nhật</string>
     <string name="downloads">Tải xuống</string>
     <string name="appearance">Vẻ ngoài</string>
@@ -258,7 +258,7 @@
     <string name="background_mode">Chế độ nền</string>
     <string name="misc">Nhiều hơn</string>
     <string name="take_a_break">Đến lúc nghỉ ngơi</string>
-    <string name="yt_shorts">Những đoạn ngắn</string>
+    <string name="yt_shorts">Shorts</string>
     <string name="backup_restore">Sao lưu &amp; phục hồi</string>
     <string name="backup">Sao lưu</string>
     <string name="picture_in_picture">Hình-trong-Hình</string>
