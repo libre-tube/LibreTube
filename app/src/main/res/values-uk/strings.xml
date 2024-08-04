@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_icon">Значок</string>
+    <string name="app_icon">Піктограма</string>
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Відтворити у фоновому режимі</string>
     <string name="server_error">Здається, виникла проблема з обраним сервером. Спробуйте інший.</string>
     <string name="share">Поділитися</string>
     <string name="register">Зареєструватися</string>
-    <string name="downloadfailed">Завантаження не вдалося.</string>
+    <string name="downloadfailed">Не вдалося завантажити.</string>
     <string name="empty">Вам необхідно ввести ім\'я користувача та пароль.</string>
     <string name="clear_history">Очистити історію</string>
-    <string name="category_selfpromo_summary">Схоже до категорії \"Спонсор\", але стосується безкоштовних оголошень або самореклами. Це включає розділи про свої товари, пожертви або інформацію про тих з ким вони співпрацювали</string>
+    <string name="category_selfpromo_summary">Схоже до категорії \"Спонсор\", але стосується безплатних оголошень або самореклами. Це включає розділи про свої товари, фінансові внески або інформацію про тих з ким вони співпрацювали</string>
     <string name="color_yellow">Ранковий жовтий</string>
     <string name="color_accent">Акценти</string>
     <string name="startpage">Головна</string>
@@ -88,7 +88,7 @@
     <string name="category_segments">Сегменти</string>
     <string name="category_sponsor">Спонсор</string>
     <string name="category_sponsor_summary">Платні оголошення, платні рекомендації та пряма реклама. Не для самореклами або чесних відгуків про справи, творців, вебсайти та продукти</string>
-    <string name="category_selfpromo">Безкоштовна/Самореклама</string>
+    <string name="category_selfpromo">Неоплачувана/Самореклама</string>
     <string name="category_interaction">Нагадування про взаємодію</string>
     <string name="category_interaction_summary">Коли є коротке нагадування поставити вподобайку, підписатися або стежити за автором посеред контенту. Якщо це довге або стосується чогось конкретного, то це слід вважати саморекламою</string>
     <string name="category_intro">Антракт/Вступна анімація</string>
@@ -178,7 +178,7 @@
     <string name="chapters">Епізоди</string>
     <string name="no_audio">Немає аудіо</string>
     <string name="audio">Аудіо</string>
-    <string name="autoRotatePlayer_summary">Відтворювати на повноекранному режимі, коли пристрій повертається</string>
+    <string name="autoRotatePlayer_summary">Відтворювати в повноекранному режимі, коли пристрій повертається</string>
     <string name="require_restart">Потрібен перезапуск застосунку</string>
     <string name="navLabelVisibility">Відображення міток</string>
     <string name="always">Завжди</string>
@@ -242,7 +242,7 @@
     <string name="repeat_mode">Режим повторення</string>
     <string name="resize_mode_fit">Допасування</string>
     <string name="resize_mode_fill">Заповнення</string>
-    <string name="resize_mode_zoom">Приближення</string>
+    <string name="resize_mode_zoom">Наближення</string>
     <string name="maximum_image_cache">Макс. розмір кешу зображень</string>
     <string name="data_saver_mode">Режим заощадження даних</string>
     <string name="search_history_summary">Пам\'ятати історію пошуку</string>
