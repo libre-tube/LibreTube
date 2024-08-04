@@ -11,19 +11,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
-        android:paddingVertical="5dp"
+        android:clickable="true"
+        android:drawablePadding="10dp"
         android:focusable="true"
         android:fontFamily="@font/roboto"
+        android:paddingVertical="5dp"
         android:text="@string/sort_by"
-
-        android:clickable="true"
         android:textSize="15sp"
         android:textStyle="bold"
-        android:drawablePadding="10dp"
+        android:visibility="gone"
         app:drawableEndCompat="@drawable/ic_sort"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
     <LinearLayout
         android:id="@+id/downloads_empty"
@@ -70,9 +70,11 @@
         android:contentDescription="@string/shuffle"
         android:src="@drawable/ic_delete"
         android:tooltipText="@string/delete"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:targetApi="o" />
+        tools:targetApi="o"
+        tools:visibility="visible" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/shuffle_background"
@@ -83,8 +85,10 @@
         android:contentDescription="@string/shuffle"
         android:src="@drawable/ic_shuffle"
         android:tooltipText="@string/shuffle"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:targetApi="o" />
+        tools:targetApi="o"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
