@@ -242,7 +242,7 @@
     <string name="repeat_mode">Повтор</string>
     <string name="backup_restore">Резервное копирование и восстановление</string>
     <string name="backup">Создать копию</string>
-    <string name="picture_in_picture">Картинка в картинке</string>
+    <string name="picture_in_picture">Картинка в картинке (PiP)</string>
     <string name="resize_mode_fit">Подгонка</string>
     <string name="resize_mode_fill">Заполнение</string>
     <string name="resize_mode_zoom">Приближение</string>
@@ -339,8 +339,8 @@
     <string name="shuffle">Перемешать</string>
     <string name="rewind">Отмотать назад</string>
     <string name="forward">Отмотать вперед</string>
-    <string name="alternative_pip_controls">Альтернативное управление КвК</string>
-    <string name="alternative_pip_controls_summary">Показывать \"только звук\" и пропуск в КвК вместо перемотки вперед и назад</string>
+    <string name="alternative_pip_controls">Альтернативное управление PiP</string>
+    <string name="alternative_pip_controls_summary">Показывать \"только звук\" и пропуск в PiP вместо перемотки вперед и назад</string>
     <string name="pause">Пауза</string>
     <string name="add_to_bookmarks">Добавить в закладки</string>
     <string name="remove_bookmark">Удалить закладку</string>
@@ -552,4 +552,5 @@
     <string name="best_quality">Наилучшее</string>
     <string name="external_download_provider">Внешний скачиватель</string>
     <string name="external_download_provider_summary">Название пакета приложения, которое будет использоваться для скачивания видео. Оставьте пустым, чтобы скачивать через LibreTube.</string>
+    <string name="screenshot">Сохранить кадр</string>
 </resources>
