@@ -367,7 +367,7 @@
     <string name="trending_views">%1$s • %2$s baxış • %3$s</string>
     <string name="normal_views">%1$s baxış %2$s</string>
     <string name="playing_next">%1$s saniyə sonra növbəti oynadılır</string>
-    <string name="stats_for_nerds">Nerdlər üçün statistika</string>
+    <string name="stats_for_nerds">Mütəxəssislər üçün statistika</string>
     <string name="video_id">Video ID</string>
     <string name="autoplay_countdown">Avtomatik oynat geri sayım</string>
     <string name="autoplay_countdown_summary">Növbəti video avtomatik oynadılmazdan əvvəl 5 saniyəlik geri sayım göstər</string>
@@ -391,7 +391,7 @@
     <string name="new_group">Yeni</string>
     <string name="play_automatically_summary">Seçiləndə videonu avtomatik oynatmağa başla</string>
     <string name="play_automatically">Avtomatik oynat</string>
-    <string name="fullscreen_gestures">Tam ekran jestlərinə gir/çıx</string>
+    <string name="fullscreen_gestures">Tam ekran jestləri: gir/çıx</string>
     <string name="go_to_video">Videoya keç</string>
     <plurals name="channel_new_streams">
         <item quantity="one">%d yeni yayım</item>
@@ -495,12 +495,12 @@
     <string name="playback_during_call_summary">Nəzərə alın ki, bu, daha səs fokusunun hər növün idarə etməməsi üçün tətbiqədə təsir edir</string>
     <string name="donate">İanə Ver</string>
     <string name="music_artists">YT Musiqi Sənətkarları</string>
-    <string name="playback_during_call">Telefon zəngi ərzində oynatmağa davam et</string>
+    <string name="playback_during_call">Telefon zəngində də oynatmağa davam et</string>
     <string name="same_as_fullscreen">Tam ekran kimi</string>
     <string name="autoplay_playlists_summary">Seçilən avtomatik oynatma tənzimləməsindən asılı olmayaraq pleylistlərdəki növbəti videonu avtomatik oynat</string>
     <string name="autoplay_playlists">Oynatma siyahısın avto oynatma</string>
     <string name="remember_playback_speed">Oynatma sürətin xatırla</string>
-    <string name="vote_for_segment">Seqmentə səsvermə</string>
+    <string name="vote_for_segment">Bölümə səsvermə</string>
     <string name="upvote">Yuxarı</string>
     <string name="segment">Bölüm</string>
     <string name="undo">Geri al</string>
@@ -511,7 +511,7 @@
     <string name="watched">Baxılan</string>
     <string name="finished">Bitmiş</string>
     <string name="no_segments_found">Bu video üçün hələ heç bir bölüm yoxdur.</string>
-    <string name="time_in_minutes">Dəqiqələrlə vaxt</string>
+    <string name="time_in_minutes">Dəqiqəylə vaxt</string>
     <string name="invalid_input">Yanlış daxiletmə</string>
     <string name="disable_sleep_timer">Yuxu taymerin qeyri-aktiv et</string>
     <string name="start_sleep_timer">Yuxu taymerin başlat</string>
