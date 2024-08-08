@@ -549,4 +549,5 @@
     <string name="best_quality">Nejlepší</string>
     <string name="external_download_provider">Externí poskytovatel stahování</string>
     <string name="external_download_provider_summary">Zadejte název balíčku aplikace, kterou chcete použít pro stahování videí. Ponechte prázdné pro použití vestavěné služby stahování LibreTube.</string>
+    <string name="screenshot">Snímek obrazovky</string>
 </resources>

@@ -101,7 +101,7 @@
     <string name="app_icon">أيقونة</string>
     <string name="enabled">مفعل</string>
     <string name="disabled">ايقاف</string>
-    <string name="piped">Piped</string>
+    <string name="piped">الأنابيب</string>
     <string name="youtube">يوتيوب</string>
     <string name="playOnBackground">تشغيل في الخلفية</string>
     <string name="defaultIcon">الإفتراضي</string>
@@ -424,7 +424,7 @@
     <string name="import_format_youtube_csv">يوتيوب (CSV)</string>
     <string name="import_format_newpipe">نيوبايب</string>
     <string name="import_subscriptions_from">استيراد الاشتراكات من</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
+    <string name="import_format_piped">بايبد / ليبري تيوب</string>
     <string name="import_playlists_from">استيراد قوائم التشغيل من</string>
     <string name="export_playlists_to">تصدير قوائم التشغيل إلى</string>
     <string name="home_tab_content">محتوى تبويب \"الصفحة الرئيسية\"</string>
@@ -558,4 +558,5 @@
     <string name="best_quality">الأفضل</string>
     <string name="external_download_provider">مزود التحميل الخارجي</string>
     <string name="external_download_provider_summary">أدخل اسم حزمة التطبيق الذي تريد استخدامه لتنزيل مقاطع الفيديو. اتركه فارغًا لاستخدام أداة التنزيل المدمجة في LibreTube.</string>
+    <string name="screenshot">لقطة شاشة</string>
 </resources>
