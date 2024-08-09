@@ -49,7 +49,7 @@ import com.github.libretube.ui.dialogs.ImportTempPlaylistDialog
 import com.github.libretube.ui.fragments.AudioPlayerFragment
 import com.github.libretube.ui.fragments.DownloadsFragment
 import com.github.libretube.ui.fragments.PlayerFragment
-import com.github.libretube.ui.models.PlayerViewModel
+import com.github.libretube.ui.models.CommonPlayerViewModel
 import com.github.libretube.ui.models.SearchViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.util.UpdateChecker
@@ -66,7 +66,7 @@ class MainActivity : BaseActivity() {
 
     private var startFragmentId = R.id.homeFragment
 
-    private val playerViewModel: PlayerViewModel by viewModels()
+    private val commonPlayerViewModel: CommonPlayerViewModel by viewModels()
     private val searchViewModel: SearchViewModel by viewModels()
     private val subscriptionsViewModel: SubscriptionsViewModel by viewModels()
 
@@ -158,7 +158,7 @@ class MainActivity : BaseActivity() {
         setupSubscriptionsBadge()
 
         onBackPressedDispatcher.addCallback {
-            if (playerViewModel.isFullscreen.value == true) {
+            if (commonPlayerViewModel.isFullscreen.value == true) {
                 val fullscreenUnsetSuccess = runOnPlayerFragment {
                     unsetFullscreen()
                     true
@@ -564,7 +564,7 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        playerViewModel.isFullscreen.value = false
+        commonPlayerViewModel.isFullscreen.value = false
         requestOrientationChange()
     }
 

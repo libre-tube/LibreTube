@@ -15,14 +15,14 @@ import com.github.libretube.compat.PictureInPictureCompat
 import com.github.libretube.databinding.AutoplayCountdownBinding
 import com.github.libretube.helpers.ContextHelper
 import com.github.libretube.ui.activities.MainActivity
-import com.github.libretube.ui.models.PlayerViewModel
+import com.github.libretube.ui.models.CommonPlayerViewModel
 
 class AutoplayCountdownView(
     context: Context,
     attributeSet: AttributeSet?
 ) : FrameLayout(context, attributeSet) {
     private val layoutInflater = LayoutInflater.from(context)
-    private val playerViewModel: PlayerViewModel get() = ViewModelProvider(
+    private val commonPlayerViewModel: CommonPlayerViewModel get() = ViewModelProvider(
         context as MainActivity
     ).get()
 
@@ -69,7 +69,7 @@ class AutoplayCountdownView(
         binding.playNext.isVisible = !isInPipMode
 
         // only show countdown when mini player not visible
-        this.isVisible = playerViewModel.isMiniPlayerVisible.value == false
+        this.isVisible = commonPlayerViewModel.isMiniPlayerVisible.value == false
         binding.currentState.text = context.getString(
             R.string.playing_next,
             currentTimerState.toString()

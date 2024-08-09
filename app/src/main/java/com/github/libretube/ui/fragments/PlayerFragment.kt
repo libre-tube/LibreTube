@@ -40,6 +40,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.C
@@ -49,9 +50,7 @@ import androidx.media3.common.MimeTypes
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.datasource.cronet.CronetDataSource
-import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.hls.HlsMediaSource
-import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.api.CronetHelper
@@ -106,6 +105,7 @@ import com.github.libretube.ui.listeners.SeekbarPreviewListener
 import com.github.libretube.ui.models.ChaptersViewModel
 import com.github.libretube.ui.models.CommentsViewModel
 import com.github.libretube.ui.models.PlayerViewModel
+import com.github.libretube.ui.models.CommonPlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.CommentsSheet
 import com.github.libretube.ui.sheets.StatsSheet
@@ -133,7 +133,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private val doubleTapOverlayBinding get() = binding.doubleTapOverlay.binding
     private val playerGestureControlsViewBinding get() = binding.playerGestureControlsView.binding
 
-    private val viewModel: PlayerViewModel by activityViewModels()
+    private val commonPlayerViewModel: CommonPlayerViewModel by activityViewModels()
+    private val viewModel: PlayerViewModel by viewModels { PlayerViewModel.Factory }
     private val commentsViewModel: CommentsViewModel by activityViewModels()
     private val chaptersViewModel: ChaptersViewModel by activityViewModels()
 
@@ -146,8 +147,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private var isShort = false
 
     // data and objects stored for the player
-    private lateinit var exoPlayer: ExoPlayer
-    private lateinit var trackSelector: DefaultTrackSelector
     private lateinit var streams: Streams
     private var isPlayerTransitioning = true
 
@@ -205,7 +204,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         override fun onReceive(context: Context, intent: Intent) {
             val event = intent.serializableExtra<PlayerEvent>(PlayerHelper.CONTROL_TYPE) ?: return
 
-            if (PlayerHelper.handlePlayerAction(exoPlayer, event)) return
+            if (PlayerHelper.handlePlayerAction(viewModel.player, event)) return
 
             when (event) {
                 PlayerEvent.Next -> {
@@ -283,7 +282,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
 
             if (events.contains(Player.EVENT_TRACKS_CHANGED)) {
-                PlayerHelper.setPreferredAudioQuality(requireContext(), exoPlayer, trackSelector)
+                PlayerHelper.setPreferredAudioQuality(requireContext(), viewModel.player, viewModel.trackSelector)
             }
         }
 
@@ -292,9 +291,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             // set the playback speed to one if having reached the end of a livestream
             if (playbackState == Player.STATE_BUFFERING && binding.player.isLive &&
-                exoPlayer.duration - exoPlayer.currentPosition < 700
+                viewModel.player.duration - viewModel.player.currentPosition < 700
             ) {
-                exoPlayer.setPlaybackSpeed(1f)
+                viewModel.player.setPlaybackSpeed(1f)
             }
 
             // check if video has ended, next video is available and autoplay is enabled/the video is part of a played playlist.
@@ -328,7 +327,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             if (playbackState == Player.STATE_BUFFERING) {
                 if (bufferingTimeoutTask == null) {
                     bufferingTimeoutTask = Runnable {
-                        exoPlayer.pause()
+                        viewModel.player.pause()
                     }
                 }
 
@@ -346,7 +345,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         override fun onPlayerError(error: PlaybackException) {
             super.onPlayerError(error)
             try {
-                exoPlayer.play()
+                viewModel.player.play()
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -471,7 +470,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 if (_binding == null) return
 
                 if (currentId == transitionStartId) {
-                    viewModel.isMiniPlayerVisible.value = false
+                    commonPlayerViewModel.isMiniPlayerVisible.value = false
                     // re-enable captions
                     updateCurrentSubtitle(viewModel.currentSubtitle)
                     binding.player.useController = true
@@ -479,7 +478,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     mainMotionLayout.progress = 0F
                     changeOrientationMode()
                 } else if (currentId == transitionEndId) {
-                    viewModel.isMiniPlayerVisible.value = true
+                    commonPlayerViewModel.isMiniPlayerVisible.value = true
                     // disable captions temporarily
                     updateCurrentSubtitle(null)
                     disableController()
@@ -503,7 +502,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 }
             }
             .addSwipeDownListener {
-                if (viewModel.isMiniPlayerVisible.value == true) {
+                if (commonPlayerViewModel.isMiniPlayerVisible.value == true) {
                     closeMiniPlayer()
                 }
             }
@@ -543,7 +542,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         binding.playImageView.setOnClickListener {
-            exoPlayer.togglePlayPauseState()
+            viewModel.player.togglePlayPauseState()
         }
 
         activity?.supportFragmentManager
@@ -578,7 +577,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 IntentData.shareObjectType to ShareObjectType.VIDEO,
                 IntentData.shareData to ShareData(
                     currentVideo = streams.title,
-                    currentPosition = exoPlayer.currentPosition / 1000
+                    currentPosition = viewModel.player.currentPosition / 1000
                 )
             )
             val newShareDialog = ShareDialog()
@@ -605,7 +604,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         binding.relPlayerBackground.setOnClickListener {
             // pause the current player
-            exoPlayer.pause()
+            viewModel.player.pause()
 
             // start the background mode
             playOnBackground()
@@ -654,7 +653,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             binding.relPlayerScreenshot.setOnClickListener {
-                if (!this::exoPlayer.isInitialized || !this::streams.isInitialized) return@setOnClickListener
+                if (!this::streams.isInitialized) return@setOnClickListener
                 val surfaceView =
                     binding.player.videoSurfaceView as? SurfaceView ?: return@setOnClickListener
 
@@ -666,7 +665,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
                 PixelCopy.request(surfaceView, bmp, { _ ->
                     screenshotBitmap = bmp
-                    val currentPosition = exoPlayer.currentPosition.toFloat() / 1000
+                    val currentPosition = viewModel.player.currentPosition.toFloat() / 1000
                     openScreenshotFile.launch("${streams.title}-${currentPosition}.png")
                 }, Handler(Looper.getMainLooper()))
             }
@@ -688,7 +687,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     private fun updateMaxSheetHeight() {
         val maxHeight = binding.root.height - binding.player.height
-        viewModel.maxSheetHeightPx = maxHeight
+        commonPlayerViewModel.maxSheetHeightPx = maxHeight
         chaptersViewModel.maxSheetHeightPx = maxHeight
     }
 
@@ -697,7 +696,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         BackgroundHelper.playOnBackground(
             requireContext(),
             videoId,
-            exoPlayer.currentPosition,
+            viewModel.player.currentPosition,
             playlistId,
             channelId,
             keepQueue = true,
@@ -710,8 +709,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private fun updateFullscreenOrientation() {
         if (PlayerHelper.autoFullscreenEnabled || !this::streams.isInitialized) return
 
-        val height = streams.videoStreams.firstOrNull()?.height ?: exoPlayer.videoSize.height
-        val width = streams.videoStreams.firstOrNull()?.width ?: exoPlayer.videoSize.width
+        val height = streams.videoStreams.firstOrNull()?.height ?: viewModel.player.videoSize.height
+        val width = streams.videoStreams.firstOrNull()?.width ?: viewModel.player.videoSize.width
 
         mainActivity.requestedOrientation = PlayerHelper.getOrientation(width, height)
     }
@@ -720,7 +719,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // set status bar icon color to white
         windowInsetsControllerCompat.isAppearanceLightStatusBars = false
 
-        viewModel.isFullscreen.value = true
+        commonPlayerViewModel.isFullscreen.value = true
 
         updateFullscreenOrientation()
 
@@ -736,7 +735,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     fun unsetFullscreen() {
         if (activity == null || _binding == null) return
 
-        viewModel.isFullscreen.value = false
+        commonPlayerViewModel.isFullscreen.value = false
 
         if (!PlayerHelper.autoFullscreenEnabled) {
             mainActivity.requestedOrientation = mainActivity.screenOrientationPref
@@ -758,7 +757,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     fun toggleFullscreen() {
         binding.player.hideController()
 
-        if (viewModel.isFullscreen.value == false) {
+        if (commonPlayerViewModel.isFullscreen.value == false) {
             // go to fullscreen mode
             setFullscreen()
         } else {
@@ -792,17 +791,15 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         val isInteractive = requireContext().getSystemService<PowerManager>()!!.isInteractive
 
         // disable video stream since it's not needed when screen off
-        if (!isInteractive && this::trackSelector.isInitialized) {
-            trackSelector.updateParameters {
+        if (!isInteractive) {
+            viewModel.trackSelector.updateParameters {
                 setTrackTypeDisabled(C.TRACK_TYPE_VIDEO, true)
             }
         }
 
         // pause player if screen off and setting enabled
-        if (this::exoPlayer.isInitialized && !isInteractive &&
-            PlayerHelper.pausePlayerOnScreenOffEnabled
-        ) {
-            exoPlayer.pause()
+        if (!isInteractive && PlayerHelper.pausePlayerOnScreenOffEnabled) {
+            viewModel.player.pause()
         }
 
         // the app was put somewhere in the background - remember to not automatically continue
@@ -824,10 +821,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         // re-enable and load video stream
-        if (this::trackSelector.isInitialized) {
-            trackSelector.updateParameters {
-                setTrackTypeDisabled(C.TRACK_TYPE_VIDEO, false)
-            }
+        viewModel.trackSelector.updateParameters {
+            setTrackTypeDisabled(C.TRACK_TYPE_VIDEO, false)
         }
     }
 
@@ -841,29 +836,19 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         watchPositionTimer.destroy()
         handler.removeCallbacksAndMessages(null)
 
-        if (this::exoPlayer.isInitialized) {
-            exoPlayer.removeListener(playerListener)
-            exoPlayer.pause()
+        viewModel.player.removeListener(playerListener)
+        viewModel.player.pause()
 
-            runCatching {
-                // the player could also be a different instance because a new player fragment
-                // got created in the meanwhile
-                if (!viewModel.isOrientationChangeInProgress) {
-                    if (viewModel.player == exoPlayer) {
-                        viewModel.player = null
-                        viewModel.trackSelector = null
-                    }
-
-                    exoPlayer.stop()
-                    exoPlayer.release()
-                }
+        runCatching {
+            if (!viewModel.isOrientationChangeInProgress) {
+                viewModel.player.stop()
             }
+        }
 
-            if (PlayerHelper.pipEnabled) {
-                // disable the auto PiP mode for SDK >= 32
-                PictureInPictureCompat
-                    .setPictureInPictureParams(requireActivity(), pipParams)
-            }
+        if (PlayerHelper.pipEnabled) {
+            // disable the auto PiP mode for SDK >= 32
+            PictureInPictureCompat
+                .setPictureInPictureParams(requireActivity(), pipParams)
         }
 
         runCatching {
@@ -887,9 +872,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private fun killPlayerFragment() {
         binding.playerMotionLayout.transitionToEnd()
 
-        viewModel.isMiniPlayerVisible.value = false
+        commonPlayerViewModel.isMiniPlayerVisible.value = false
 
-        if (viewModel.isFullscreen.value == true) {
+        if (commonPlayerViewModel.isFullscreen.value == true) {
             // wait for the mini player transition to finish
             // that guarantees that the navigation bar is shown properly
             // before we kill the player fragment
@@ -913,32 +898,32 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     // save the watch position if video isn't finished and option enabled
     private fun saveWatchPosition() {
-        if (this::exoPlayer.isInitialized && !isPlayerTransitioning && PlayerHelper.watchPositionsVideo) {
-            PlayerHelper.saveWatchPosition(exoPlayer, videoId)
+        if (!isPlayerTransitioning && PlayerHelper.watchPositionsVideo) {
+            PlayerHelper.saveWatchPosition(viewModel.player, videoId)
         }
     }
 
     private fun checkForSegments() {
-        if (!exoPlayer.isPlaying || !PlayerHelper.sponsorBlockEnabled) return
+        if (!viewModel.player.isPlaying || !PlayerHelper.sponsorBlockEnabled) return
 
         handler.postDelayed(this::checkForSegments, 100)
         if (!viewModel.sponsorBlockEnabled || viewModel.segments.isEmpty()) return
 
-        exoPlayer.checkForSegments(
+        viewModel.player.checkForSegments(
             requireContext(),
             viewModel.segments,
             viewModel.sponsorBlockConfig
         )
             ?.let { segment ->
-                if (viewModel.isMiniPlayerVisible.value == true) return@let
+                if (commonPlayerViewModel.isMiniPlayerVisible.value == true) return@let
                 binding.sbSkipBtn.isVisible = true
                 binding.sbSkipBtn.setOnClickListener {
-                    exoPlayer.seekTo((segment.segmentStartAndEnd.second * 1000f).toLong())
+                    viewModel.player.seekTo((segment.segmentStartAndEnd.second * 1000f).toLong())
                     segment.skipped = true
                 }
                 return
             }
-        if (!exoPlayer.isInSegment(viewModel.segments)) binding.sbSkipBtn.isGone = true
+        if (!viewModel.player.isInSegment(viewModel.segments)) binding.sbSkipBtn.isGone = true
     }
 
     private fun playVideo() {
@@ -993,17 +978,17 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             binding.player.apply {
                 useController = false
-                player = exoPlayer
+                player = viewModel.player
             }
 
             initializePlayerView()
 
             // don't continue playback when the fragment is re-created after Android killed it
             val wasIntentStopped = requireArguments().getBoolean(IntentData.wasIntentStopped, false)
-            exoPlayer.playWhenReady = PlayerHelper.playAutomatically && !wasIntentStopped
+            viewModel.player.playWhenReady = PlayerHelper.playAutomatically && !wasIntentStopped
             requireArguments().putBoolean(IntentData.wasIntentStopped, false)
 
-            exoPlayer.prepare()
+            viewModel.player.prepare()
 
             if (binding.playerMotionLayout.progress != 1.0f) {
                 // show controllers when not in picture in picture mode
@@ -1021,7 +1006,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             fetchSponsorBlockSegments()
 
             if (streams.category == Streams.categoryMusic) {
-                exoPlayer.setPlaybackSpeed(1f)
+                viewModel.player.setPlaybackSpeed(1f)
             }
 
             viewModel.isOrientationChangeInProgress = false
@@ -1052,7 +1037,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      */
     private fun playNextVideo(nextId: String? = null) {
         if (nextId == null && PlayingQueue.repeatMode == Player.REPEAT_MODE_ONE) {
-            exoPlayer.seekTo(0)
+            viewModel.player.seekTo(0)
             return
         }
 
@@ -1089,7 +1074,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             playerGestureControlsViewBinding,
             chaptersViewModel
         )
-        binding.player.initPlayerOptions(viewModel, viewLifecycleOwner, trackSelector, this)
+        binding.player.initPlayerOptions(viewModel, commonPlayerViewModel, viewLifecycleOwner, viewModel.trackSelector, this)
 
         binding.descriptionLayout.setStreams(streams)
 
@@ -1175,7 +1160,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         if (videoId == this.videoId) {
             // try finding the time stamp of the url and seek to it if found
             uri.getQueryParameter("t")?.toTimeInSeconds()?.let {
-                exoPlayer.seekTo(it * 1000)
+                viewModel.player.seekTo(it * 1000)
             }
         } else {
             // YouTube video link without time or not the current video, thus load in player
@@ -1184,7 +1169,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private fun updatePlayPauseButton() {
-        binding.playImageView.setImageResource(PlayerHelper.getPlayPauseActionIcon(exoPlayer))
+        binding.playImageView.setImageResource(PlayerHelper.getPlayPauseActionIcon(viewModel.player))
     }
 
     private suspend fun initializeHighlight(highlight: Segment) {
@@ -1224,14 +1209,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     private fun setMediaSource(uri: Uri, mimeType: String) {
         val mediaItem = createMediaItem(uri, mimeType)
-        exoPlayer.setMediaItem(mediaItem)
+        viewModel.player.setMediaItem(mediaItem)
     }
 
     /**
      * Get all available player resolutions
      */
     private fun getAvailableResolutions(): List<VideoResolution> {
-        val resolutions = exoPlayer.currentTracks.groups.asSequence()
+        val resolutions = viewModel.player.currentTracks.groups.asSequence()
             .flatMap { group ->
                 (0 until group.length).map {
                     group.getTrackFormat(it).height
@@ -1247,7 +1232,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     private fun initStreamSources() {
         // use the video's default audio track when starting playback
-        trackSelector.updateParameters {
+        viewModel.trackSelector.updateParameters {
             setPreferredAudioRoleFlags(C.ROLE_FLAG_MAIN)
         }
 
@@ -1261,13 +1246,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             withContext(Dispatchers.Main) {
                 // support for time stamped links
                 if (timeStamp != 0L) {
-                    exoPlayer.seekTo(timeStamp * 1000)
+                    viewModel.player.seekTo(timeStamp * 1000)
                     // delete the time stamp because it already got consumed
                     timeStamp = 0L
                 } else if (!streams.livestream) {
                     // seek to the saved watch position
                     PlayerHelper.getStoredWatchPosition(videoId, streams.duration)?.let {
-                        exoPlayer.seekTo(it)
+                        viewModel.player.seekTo(it)
                     }
                 }
             }
@@ -1281,17 +1266,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             resolution
         }
 
-        trackSelector.updateParameters {
+        viewModel.trackSelector.updateParameters {
             setMaxVideoSize(Int.MAX_VALUE, transformedResolution)
             setMinVideoSize(Int.MIN_VALUE, transformedResolution)
         }
     }
 
     private fun updateResolutionOnFullscreenChange(isFullscreen: Boolean) {
-        // this occurs when the user has the phone in landscape mode and it thus rotates when
-        // opening a new video
-        if (!this::trackSelector.isInitialized) return
-
         if (!isFullscreen && noFullscreenResolution != null) {
             setPlayerResolution(noFullscreenResolution!!)
         } else if (fullscreenResolution != null) {
@@ -1300,7 +1281,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private suspend fun setStreamSource() {
-        updateResolutionOnFullscreenChange(viewModel.isFullscreen.value == true)
+        updateResolutionOnFullscreenChange(commonPlayerViewModel.isFullscreen.value == true)
 
         val (uri, mimeType) = when {
             // LBRY HLS
@@ -1341,7 +1322,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                         MimeTypes.APPLICATION_M3U8
                     )
                 )
-                withContext(Dispatchers.Main) { exoPlayer.setMediaSource(mediaSource) }
+                withContext(Dispatchers.Main) { viewModel.player.setMediaSource(mediaSource) }
                 return
             }
             // NO STREAM FOUND
@@ -1354,16 +1335,16 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private fun createExoPlayer() {
-        viewModel.keepOrCreatePlayer(requireContext()).let { (player, trackSelector) ->
-            this.exoPlayer = player
-            this.trackSelector = trackSelector
-        }
+//        viewModel.keepOrCreatePlayer(requireContext()).let { (player, trackSelector) ->
+//            localViewModel.player = player
+//            localViewModel.trackSelector = trackSelector
+//        }
 
-        exoPlayer.setWakeMode(C.WAKE_MODE_NETWORK)
-        exoPlayer.addListener(playerListener)
+        viewModel.player.setWakeMode(C.WAKE_MODE_NETWORK)
+        viewModel.player.addListener(playerListener)
 
         // control for the track sources like subtitles and audio source
-        trackSelector.updateParameters {
+        viewModel.trackSelector.updateParameters {
             val enabledVideoCodecs = PlayerHelper.enabledVideoCodecs
             if (enabledVideoCodecs != "all") {
                 // map the codecs to their corresponding mimetypes
@@ -1384,7 +1365,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         if (viewModel.nowPlayingNotification == null) {
             viewModel.nowPlayingNotification = NowPlayingNotification(
                 requireContext(),
-                exoPlayer,
+                viewModel.player,
                 NowPlayingNotification.Companion.NowPlayingNotificationType.VIDEO_ONLINE
             )
         }
@@ -1447,7 +1428,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     override fun onQualityClicked() {
         // get the available resolutions
         val resolutions = getAvailableResolutions()
-        val currentQuality = trackSelector.parameters.maxVideoHeight
+        val currentQuality = viewModel.trackSelector.parameters.maxVideoHeight
 
         // Dialog for quality selection
         BaseBottomSheet()
@@ -1460,7 +1441,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 setPlayerResolution(newResolution, true)
 
                 // save the selected resolution to update on fullscreen change
-                if (noFullscreenResolution != null && viewModel.isFullscreen.value != true) {
+                if (noFullscreenResolution != null && commonPlayerViewModel.isFullscreen.value != true) {
                     noFullscreenResolution = newResolution
                 } else {
                     fullscreenResolution = newResolution
@@ -1472,7 +1453,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     override fun onAudioStreamClicked() {
         val context = requireContext()
         val audioLanguagesAndRoleFlags = PlayerHelper.getAudioLanguagesAndRoleFlagsFromTrackGroups(
-            exoPlayer.currentTracks.groups,
+            viewModel.player.currentTracks.groups,
             false
         )
         val audioLanguages = audioLanguagesAndRoleFlags.map {
@@ -1502,7 +1483,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         } else {
             baseBottomSheet.setSimpleItems(audioLanguages) { index ->
                 val selectedAudioFormat = audioLanguagesAndRoleFlags[index]
-                trackSelector.updateParameters {
+                viewModel.trackSelector.updateParameters {
                     setPreferredAudioLanguage(selectedAudioFormat.first)
                     setPreferredAudioRoleFlags(selectedAudioFormat.second)
                 }
@@ -1518,7 +1499,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     override fun onStatsClicked() {
         if (!this::streams.isInitialized) return
-        val videoStats = getVideoStats(exoPlayer, videoId)
+        val videoStats = getVideoStats(viewModel.player, videoId)
         StatsSheet()
             .apply { arguments = bundleOf(IntentData.videoStats to videoStats) }
             .show(childFragmentManager)
@@ -1539,7 +1520,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             // close button got clicked in PiP mode
             // pause the video and keep the app alive
             if (lifecycle.currentState == Lifecycle.State.CREATED) {
-                exoPlayer.pause()
+                viewModel.player.pause()
                 viewModel.nowPlayingNotification?.cancelNotification()
                 closedVideo = true
             }
@@ -1547,13 +1528,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             updateCurrentSubtitle(viewModel.currentSubtitle)
 
             // unset fullscreen if it's not been enabled before the start of PiP
-            if (viewModel.isFullscreen.value != true) {
+            if (commonPlayerViewModel.isFullscreen.value != true) {
                 openOrCloseFullscreenDialog(false)
             }
         }
     }
 
-    private fun updateCurrentSubtitle(subtitle: Subtitle?) = trackSelector.updateParameters {
+    private fun updateCurrentSubtitle(subtitle: Subtitle?) = viewModel.trackSelector.updateParameters {
         val roleFlags = if (subtitle?.code != null) getSubtitleRoleFlags(subtitle) else 0
         setPreferredTextRoleFlags(roleFlags)
         setPreferredTextLanguage(subtitle?.code)
@@ -1563,17 +1544,17 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         if (shouldStartPiP()) {
             PictureInPictureCompat.enterPictureInPictureMode(requireActivity(), pipParams)
         } else if (PlayerHelper.pauseOnQuit) {
-            exoPlayer.pause()
+            viewModel.player.pause()
         }
     }
 
     private val pipParams
         get() = PictureInPictureParamsCompat.Builder()
-            .setActions(PlayerHelper.getPiPModeActions(requireActivity(), exoPlayer.isPlaying))
-            .setAutoEnterEnabled(PlayerHelper.pipEnabled && exoPlayer.isPlaying)
+            .setActions(PlayerHelper.getPiPModeActions(requireActivity(), viewModel.player.isPlaying))
+            .setAutoEnterEnabled(PlayerHelper.pipEnabled && viewModel.player.isPlaying)
             .apply {
-                if (exoPlayer.isPlaying) {
-                    setAspectRatio(exoPlayer.videoSize)
+                if (viewModel.player.isPlaying) {
+                    setAspectRatio(viewModel.player.videoSize)
                 }
             }
             .build()
@@ -1594,7 +1575,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private fun shouldStartPiP(): Boolean {
-        return shouldUsePip() && exoPlayer.isPlaying &&
+        return shouldUsePip() && viewModel.player.isPlaying &&
                 !BackgroundHelper.isBackgroundServiceRunning(requireContext())
     }
 
@@ -1606,11 +1587,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         if (mainActivity.screenOrientationPref in lockedOrientations || viewModel.isOrientationChangeInProgress) return
 
         val orientation = resources.configuration.orientation
-        if (viewModel.isFullscreen.value != true && orientation != playerLayoutOrientation) {
+        if (commonPlayerViewModel.isFullscreen.value != true && orientation != playerLayoutOrientation) {
             // remember the current position before recreating the activity
-            if (this::exoPlayer.isInitialized) {
-                arguments?.putLong(IntentData.timeStamp, exoPlayer.currentPosition / 1000)
-            }
+            arguments?.putLong(IntentData.timeStamp, viewModel.player.currentPosition / 1000)
             playerLayoutOrientation = orientation
 
             viewModel.isOrientationChangeInProgress = true

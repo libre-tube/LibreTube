@@ -1,9 +1,10 @@
 package com.github.libretube.ui.models
 
 import android.content.Context
-import androidx.annotation.OptIn
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
@@ -24,9 +25,10 @@ import retrofit2.HttpException
 import java.io.IOException
 
 @UnstableApi
-class PlayerViewModel : ViewModel() {
-    var player: ExoPlayer? = null
-    var trackSelector: DefaultTrackSelector? = null
+class PlayerViewModel(
+    val player: ExoPlayer,
+    val trackSelector: DefaultTrackSelector,
+) : ViewModel() {
 
     // data to remember for recovery on orientation change
     private var streamsInfo: Streams? = null
@@ -41,12 +43,6 @@ class PlayerViewModel : ViewModel() {
      * Set to true if the activity will be recreated due to an orientation change
      */
     var isOrientationChangeInProgress = false
-
-    val isMiniPlayerVisible = MutableLiveData(false)
-    val isFullscreen = MutableLiveData(false)
-
-    var maxSheetHeightPx = 0
-
     var sponsorBlockEnabled = PlayerHelper.sponsorBlockEnabled
 
     /**
@@ -82,13 +78,21 @@ class PlayerViewModel : ViewModel() {
         }
     }
 
-    @OptIn(UnstableApi::class)
-    fun keepOrCreatePlayer(context: Context): Pair<ExoPlayer, DefaultTrackSelector> {
-        if (!isOrientationChangeInProgress || player == null || trackSelector == null) {
-            this.trackSelector = DefaultTrackSelector(context)
-            this.player = PlayerHelper.createPlayer(context, trackSelector!!, false)
+    companion object {
+        val Factory = viewModelFactory {
+            initializer {
+                val context = this[APPLICATION_KEY]!!
+                val trackSelector = DefaultTrackSelector(context)
+                PlayerViewModel(
+                    player = PlayerHelper.createPlayer(context, trackSelector, false),
+                    trackSelector = trackSelector,
+                )
+            }
         }
+    }
 
-        return this.player!! to this.trackSelector!!
+    override fun onCleared() {
+        super.onCleared()
+        player.release()
     }
 }

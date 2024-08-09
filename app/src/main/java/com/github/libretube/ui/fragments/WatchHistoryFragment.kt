@@ -33,7 +33,7 @@ import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.ui.adapters.WatchHistoryAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.extensions.addOnBottomReachedListener
-import com.github.libretube.ui.models.PlayerViewModel
+import com.github.libretube.ui.models.CommonPlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.util.PlayingQueue
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -46,7 +46,7 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment() {
     private val binding get() = _binding!!
 
     private val handler = Handler(Looper.getMainLooper())
-    private val playerViewModel: PlayerViewModel by activityViewModels()
+    private val commonPlayerViewModel: CommonPlayerViewModel by activityViewModels()
     private var isLoading = false
     private var recyclerViewState: Parcelable? = null
 
@@ -84,7 +84,7 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        playerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
+        commonPlayerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
             _binding?.watchHistoryRecView?.updatePadding(bottom = if (it) 64f.dpToPx() else 0)
         }
 
