@@ -88,6 +88,8 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.deleteAll.isInvisible = true
+        binding.sortType.isInvisible = true
+        binding.shuffleBackground.isInvisible = true
         var selectedSortType =
             PreferenceHelper.getInt(PreferenceKeys.SELECTED_DOWNLOAD_SORT_TYPE, 0)
         val filterOptions = resources.getStringArray(R.array.downloadSortOptions)
@@ -170,16 +172,29 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
                     if (binding.downloads.adapter?.itemCount == 0) {
                         binding.downloads.isGone = true
                         binding.downloadsEmpty.isVisible = true
+                        binding.sortType.isInvisible = true
+                        binding.deleteAll.isInvisible = true
+                        binding.shuffleBackground.isInvisible = true
+                    } else {
+                        binding.downloads.isGone = false
+                        binding.downloadsEmpty.isGone = true
+                        binding.shuffleBackground.isVisible = true
                     }
                 }
             }
         )
 
         if (dbDownloads.isNotEmpty()) {
+            binding.sortType.isVisible = true
             binding.deleteAll.isVisible = true
+            binding.shuffleBackground.isVisible = true
             binding.deleteAll.setOnClickListener {
                 showDeleteAllDialog(binding.root.context, adapter)
             }
+        } else {
+            binding.sortType.isInvisible = true
+            binding.deleteAll.isInvisible = true
+            binding.shuffleBackground.isInvisible = true
         }
 
         binding.shuffleBackground.setOnClickListener {
