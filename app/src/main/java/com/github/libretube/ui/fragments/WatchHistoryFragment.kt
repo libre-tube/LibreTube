@@ -40,6 +40,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
+import kotlin.math.ceil
 
 class WatchHistoryFragment : DynamicLayoutManagerFragment() {
     private var _binding: FragmentWatchHistoryBinding? = null
@@ -88,86 +90,86 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment() {
             _binding?.watchHistoryRecView?.updatePadding(bottom = if (it) 64f.dpToPx() else 0)
         }
 
-        val allHistory = runBlocking(Dispatchers.IO) {
-            Database.watchHistoryDao().getAll().reversed()
-        }
+        lifecycleScope.launch {
+            val history = withContext(Dispatchers.IO) {
+                DatabaseHelper.getWatchHistoryPage(1, HISTORY_PAGE_SIZE)
+            }
 
-        if (allHistory.isEmpty()) return
+            if (history.isEmpty()) return@launch
 
-        binding.filterTypeTV.text =
-            resources.getStringArray(R.array.filterOptions)[selectedTypeFilter]
-        binding.filterStatusTV.text =
-            resources.getStringArray(R.array.filterStatusOptions)[selectedStatusFilter]
+            binding.filterTypeTV.text =
+                resources.getStringArray(R.array.filterOptions)[selectedTypeFilter]
+            binding.filterStatusTV.text =
+                resources.getStringArray(R.array.filterStatusOptions)[selectedStatusFilter]
 
-        val watchPositionItem = arrayOf(getString(R.string.also_clear_watch_positions))
-        val selected = booleanArrayOf(false)
+            val watchPositionItem = arrayOf(getString(R.string.also_clear_watch_positions))
+            val selected = booleanArrayOf(false)
 
-        binding.clear.setOnClickListener {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.clear_history)
-                .setMultiChoiceItems(watchPositionItem, selected) { _, index, newValue ->
-                    selected[index] = newValue
-                }
-                .setPositiveButton(R.string.okay) { _, _ ->
-                    binding.historyContainer.isGone = true
-                    binding.historyEmpty.isVisible = true
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        Database.withTransaction {
-                            Database.watchHistoryDao().deleteAll()
-                            if (selected[0]) Database.watchPositionDao().deleteAll()
+            binding.clear.setOnClickListener {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(R.string.clear_history)
+                    .setMultiChoiceItems(watchPositionItem, selected) { _, index, newValue ->
+                        selected[index] = newValue
+                    }
+                    .setPositiveButton(R.string.okay) { _, _ ->
+                        binding.historyContainer.isGone = true
+                        binding.historyEmpty.isVisible = true
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            Database.withTransaction {
+                                Database.watchHistoryDao().deleteAll()
+                                if (selected[0]) Database.watchPositionDao().deleteAll()
+                            }
                         }
                     }
-                }
-                .setNegativeButton(R.string.cancel, null)
-                .show()
-        }
-
-        binding.filterTypeTV.setOnClickListener {
-            val filterOptions = resources.getStringArray(R.array.filterOptions)
-
-            BaseBottomSheet().apply {
-                setSimpleItems(filterOptions.toList()) { index ->
-                    binding.filterTypeTV.text = filterOptions[index]
-                    selectedTypeFilter = index
-                    showWatchHistory(allHistory)
-                }
-            }.show(childFragmentManager)
-        }
-
-        binding.filterStatusTV.setOnClickListener {
-            val filterOptions = resources.getStringArray(R.array.filterStatusOptions)
-
-            BaseBottomSheet().apply {
-                setSimpleItems(filterOptions.toList()) { index ->
-                    binding.filterStatusTV.text = filterOptions[index]
-                    selectedStatusFilter = index
-                    showWatchHistory(allHistory)
-                }
-            }.show(childFragmentManager)
-        }
-
-        // manually restore the recyclerview state due to https://github.com/material-components/material-components-android/issues/3473
-        binding.watchHistoryRecView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                recyclerViewState = binding.watchHistoryRecView.layoutManager?.onSaveInstanceState()
+                    .setNegativeButton(R.string.cancel, null)
+                    .show()
             }
-        })
 
-        showWatchHistory(allHistory)
+            binding.filterTypeTV.setOnClickListener {
+                val filterOptions = resources.getStringArray(R.array.filterOptions)
+
+                BaseBottomSheet().apply {
+                    setSimpleItems(filterOptions.toList()) { index ->
+                        binding.filterTypeTV.text = filterOptions[index]
+                        selectedTypeFilter = index
+                        showWatchHistory(history)
+                    }
+                }.show(childFragmentManager)
+            }
+
+            binding.filterStatusTV.setOnClickListener {
+                val filterOptions = resources.getStringArray(R.array.filterStatusOptions)
+
+                BaseBottomSheet().apply {
+                    setSimpleItems(filterOptions.toList()) { index ->
+                        binding.filterStatusTV.text = filterOptions[index]
+                        selectedStatusFilter = index
+                        showWatchHistory(history)
+                    }
+                }.show(childFragmentManager)
+            }
+
+            // manually restore the recyclerview state due to https://github.com/material-components/material-components-android/issues/3473
+            binding.watchHistoryRecView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    recyclerViewState = binding.watchHistoryRecView.layoutManager?.onSaveInstanceState()
+                }
+            })
+
+            showWatchHistory(history)
+        }
     }
 
-    private fun showWatchHistory(allHistory: List<WatchHistoryItem>) {
-        val watchHistory = allHistory.filterByStatusAndWatchPosition()
+    private fun showWatchHistory(history: List<WatchHistoryItem>) {
+        val watchHistory = history.filterByStatusAndWatchPosition()
 
         watchHistory.forEach {
             it.thumbnailUrl = ProxyHelper.rewriteUrl(it.thumbnailUrl)
             it.uploaderAvatar = ProxyHelper.rewriteUrl(it.uploaderAvatar)
         }
 
-        val watchHistoryAdapter = WatchHistoryAdapter(
-            watchHistory.toMutableList()
-        )
+        val watchHistoryAdapter = WatchHistoryAdapter(watchHistory.toMutableList())
 
         binding.playAll.setOnClickListener {
             PlayingQueue.resetToDefaults()
@@ -234,10 +236,17 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment() {
 
             binding.watchHistoryRecView.addOnBottomReachedListener {
                 if (isLoading) return@addOnBottomReachedListener
-
                 isLoading = true
-                watchHistoryAdapter.showMoreItems()
-                isLoading = false
+
+                lifecycleScope.launch {
+                    val newHistory = withContext(Dispatchers.IO) {
+                        val currentPage = ceil(watchHistoryAdapter.itemCount.toFloat() / HISTORY_PAGE_SIZE).toInt()
+                        DatabaseHelper.getWatchHistoryPage( currentPage + 1, HISTORY_PAGE_SIZE)
+                    }.filterByStatusAndWatchPosition()
+
+                    watchHistoryAdapter.insertItems(newHistory)
+                    isLoading = false
+                }
             }
         }
     }
@@ -276,5 +285,9 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        private const val HISTORY_PAGE_SIZE = 10
     }
 }

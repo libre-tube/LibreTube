@@ -112,10 +112,10 @@ class HomeViewModel : ViewModel() {
     }
 
     private suspend fun loadWatchingFromDB(): List<StreamItem> {
-        val videos = DatabaseHolder.Database.watchHistoryDao().getAll()
+        val videos = DatabaseHelper.getWatchHistoryPage(1, 50)
+
         return DatabaseHelper
             .filterUnwatched(videos.map { it.toStreamItem() })
-            .reversed()
             .take(20)
     }
 
