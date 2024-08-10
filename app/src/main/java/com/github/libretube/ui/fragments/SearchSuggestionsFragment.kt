@@ -92,14 +92,18 @@ class SearchSuggestionsFragment : Fragment() {
     }
 
     private fun showHistory() {
+        val searchView = runCatching {
+            (activity as MainActivity).searchView
+        }.getOrNull()
+
         lifecycleScope.launch {
             val historyList = withContext(Dispatchers.IO) {
                 Database.searchHistoryDao().getAll().map { it.query }
             }
-            if (historyList.isNotEmpty()) {
+            if (historyList.isNotEmpty() && searchView != null) {
                 binding.suggestionsRecycler.adapter = SearchHistoryAdapter(
                     historyList,
-                    (activity as MainActivity).searchView
+                    searchView
                 )
             } else {
                 binding.suggestionsRecycler.isGone = true
