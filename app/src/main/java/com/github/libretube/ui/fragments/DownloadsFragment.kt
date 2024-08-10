@@ -12,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
-import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -87,7 +86,6 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.deleteAll.isInvisible = true
         var selectedSortType =
             PreferenceHelper.getInt(PreferenceKeys.SELECTED_DOWNLOAD_SORT_TYPE, 0)
         val filterOptions = resources.getStringArray(R.array.downloadSortOptions)
@@ -166,25 +164,31 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
             object : RecyclerView.AdapterDataObserver() {
                 override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
                     super.onItemRangeRemoved(positionStart, itemCount)
-                    val binding = _binding ?: return
-                    if (binding.downloads.adapter?.itemCount == 0) {
-                        binding.downloads.isGone = true
-                        binding.downloadsEmpty.isVisible = true
-                    }
+                    toggleButtonsVisibility()
                 }
             }
         )
 
-        if (dbDownloads.isNotEmpty()) {
-            binding.deleteAll.isVisible = true
-            binding.deleteAll.setOnClickListener {
-                showDeleteAllDialog(binding.root.context, adapter)
-            }
-        }
+        toggleButtonsVisibility()
 
         binding.shuffleBackground.setOnClickListener {
             BackgroundHelper.playOnBackgroundOffline(requireContext(), null)
         }
+
+        binding.deleteAll.setOnClickListener {
+            showDeleteAllDialog(binding.root.context, adapter)
+        }
+    }
+
+    private fun toggleButtonsVisibility() {
+        val binding = _binding ?: return
+
+        val isEmpty = binding.downloads.adapter?.itemCount == 0
+        binding.downloadsEmpty.isVisible = isEmpty
+        binding.downloads.isGone = isEmpty
+        binding.sortType.isGone = isEmpty
+        binding.deleteAll.isGone = isEmpty
+        binding.shuffleBackground.isGone = isEmpty
     }
 
     private fun sortDownloadList(sortType: Int, previousSortType: Int? = null) {
