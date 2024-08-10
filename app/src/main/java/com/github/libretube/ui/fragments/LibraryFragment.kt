@@ -34,7 +34,7 @@ import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.dialogs.CreatePlaylistDialog
 import com.github.libretube.ui.dialogs.CreatePlaylistDialog.Companion.CREATE_PLAYLIST_DIALOG_REQUEST_KEY
-import com.github.libretube.ui.models.PlayerViewModel
+import com.github.libretube.ui.models.CommonPlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -44,7 +44,7 @@ class LibraryFragment : DynamicLayoutManagerFragment() {
     private var _binding: FragmentLibraryBinding? = null
     private val binding get() = _binding!!
 
-    private val playerViewModel: PlayerViewModel by activityViewModels()
+    private val commonPlayerViewModel: CommonPlayerViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,7 +64,7 @@ class LibraryFragment : DynamicLayoutManagerFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // listen for the mini player state changing
-        playerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
+        commonPlayerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
             updateFABMargin(it)
         }
 

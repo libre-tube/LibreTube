@@ -15,7 +15,7 @@ import androidx.core.os.postDelayed
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
-import com.github.libretube.ui.models.PlayerViewModel
+import com.github.libretube.ui.models.CommonPlayerViewModel
 import kotlin.math.abs
 
 class PlayerGestureController(activity: BaseActivity, private val listener: PlayerGestureOptions) :
@@ -28,7 +28,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
     private val orientation get() = Resources.getSystem().configuration.orientation
     private val elapsedTime get() = SystemClock.elapsedRealtime()
 
-    private val playerViewModel: PlayerViewModel by activity.viewModels()
+    private val commonPlayerViewModel: CommonPlayerViewModel by activity.viewModels()
     private val handler = Handler(Looper.getMainLooper())
 
     private val gestureDetector: GestureDetector
@@ -46,7 +46,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
         gestureDetector = GestureDetector(activity, GestureListener(), handler)
         scaleGestureDetector = ScaleGestureDetector(activity, ScaleGestureListener(), handler)
 
-        playerViewModel.isFullscreen.observe(activity) {
+        commonPlayerViewModel.isFullscreen.observe(activity) {
             isFullscreen = it
             listener.onFullscreenChange(it)
         }

@@ -13,13 +13,13 @@ import com.github.libretube.R
 import com.github.libretube.databinding.CommentsSheetBinding
 import com.github.libretube.ui.fragments.CommentsMainFragment
 import com.github.libretube.ui.models.CommentsViewModel
-import com.github.libretube.ui.models.PlayerViewModel
+import com.github.libretube.ui.models.CommonPlayerViewModel
 
 class CommentsSheet : UndimmedBottomSheet() {
     private var _binding: CommentsSheetBinding? = null
     val binding get() = _binding!!
 
-    private val playerViewModel: PlayerViewModel by activityViewModels()
+    private val commonPlayerViewModel: CommonPlayerViewModel by activityViewModels()
     private val commentsViewModel: CommentsViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -72,7 +72,7 @@ class CommentsSheet : UndimmedBottomSheet() {
         _binding = null
     }
 
-    override fun getSheetMaxHeightPx() = playerViewModel.maxSheetHeightPx
+    override fun getSheetMaxHeightPx() = commonPlayerViewModel.maxSheetHeightPx
 
     override fun getDragHandle() = binding.dragHandle
 

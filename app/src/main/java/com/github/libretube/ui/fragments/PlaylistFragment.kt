@@ -41,7 +41,7 @@ import com.github.libretube.ui.adapters.PlaylistAdapter
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.extensions.addOnBottomReachedListener
-import com.github.libretube.ui.models.PlayerViewModel
+import com.github.libretube.ui.models.CommonPlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.util.PlayingQueue
@@ -68,7 +68,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
     private var isBookmarked = false
 
     // view models
-    private val playerViewModel: PlayerViewModel by activityViewModels()
+    private val commonPlayerViewModel: CommonPlayerViewModel by activityViewModels()
     private var selectedSortOrder = PreferenceHelper.getInt(PreferenceKeys.PLAYLIST_SORT_ORDER, 0)
         set(value) {
             PreferenceHelper.putInt(PreferenceKeys.PLAYLIST_SORT_ORDER, value)
@@ -106,7 +106,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
         }
         updateBookmarkRes()
 
-        playerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
+        commonPlayerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
             binding.playlistRecView.updatePadding(bottom = if (it) 64f.dpToPx() else 0)
         }
 
