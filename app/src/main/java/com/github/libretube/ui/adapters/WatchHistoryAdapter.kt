@@ -24,9 +24,7 @@ class WatchHistoryAdapter(
 ) :
     RecyclerView.Adapter<WatchHistoryViewHolder>() {
 
-    private var visibleCount = minOf(10, watchHistory.size)
-
-    override fun getItemCount() = visibleCount
+    override fun getItemCount() = watchHistory.size
 
     fun removeFromWatchHistory(position: Int) {
         val history = watchHistory[position]
@@ -34,16 +32,14 @@ class WatchHistoryAdapter(
             DatabaseHolder.Database.watchHistoryDao().delete(history)
         }
         watchHistory.removeAt(position)
-        visibleCount--
         notifyItemRemoved(position)
         notifyItemRangeChanged(position, itemCount)
     }
 
-    fun showMoreItems() {
-        val oldSize = visibleCount
-        visibleCount += minOf(10, watchHistory.size - oldSize)
-        if (visibleCount == oldSize) return
-        notifyItemRangeInserted(oldSize, visibleCount)
+    fun insertItems(items: List<WatchHistoryItem>) {
+        val oldSize = itemCount
+        this.watchHistory.addAll(items)
+        notifyItemRangeInserted(oldSize, itemCount)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatchHistoryViewHolder {
