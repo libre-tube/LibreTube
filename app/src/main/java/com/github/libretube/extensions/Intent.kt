@@ -10,5 +10,5 @@ inline fun <reified T : Parcelable> Intent.parcelableExtra(name: String?): T? {
 }
 
 inline fun <reified T : Serializable> Intent.serializableExtra(name: String?): T? {
-    return extras?.serializable(name)
+    return IntentCompat.getSerializableExtra(this, name, T::class.java)
 }
