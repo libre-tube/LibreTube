@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="download">Спампаваць</string>
-    <string name="piped">Piped</string>
     <string name="yes">Так</string>
     <string name="videos">Відэа</string>
     <string name="username">Імя карыстальніка</string>
@@ -182,7 +181,6 @@
     <string name="website">Вэб-сайт</string>
     <string name="sponsorblock_summary">На аснове API https://sponsor.ajay.app</string>
     <string name="channels">Каналы</string>
-    <string name="youtube">YouTube</string>
     <string name="all">Ўсе</string>
     <string name="clear_history">Ачысціць гісторыю</string>
     <string name="music_albums">Альбомы YT Music</string>
@@ -415,12 +413,8 @@
     <string name="alphabetic_reversed">Алфавітны (зваротны)</string>
     <string name="import_subscriptions_from">Імпартаваць падпіскі з</string>
     <string name="export_subscriptions_to">Экспарт падпісак у</string>
-    <string name="import_format_newpipe">NewPipe</string>
-    <string name="import_format_freetube">FreeTube</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="import_playlists_from">Імпартаваць плэйлісты з</string>
     <string name="export_playlists_to">Экспарт плэйлістоў у</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
     <string name="home_tab_content">Змесціва галоўнай укладкі</string>
     <string name="mark_as_unwatched">Пазначыць як непрагледжанае</string>
     <string name="welcome">Сардэчна запрашаем на LibreTube</string>

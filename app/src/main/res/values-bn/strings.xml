@@ -69,8 +69,6 @@
     <string name="app_icon">আইকন</string>
     <string name="enabled">চালু</string>
     <string name="disabled">বন্ধ</string>
-    <string name="piped">পাইপড</string>
-    <string name="youtube">ইউটিউব</string>
     <string name="playOnBackground">ব্যাকগ্রাউন্ডে প্লে করুন</string>
     <string name="update_available">সংস্করণ %1$s এ আপডেট করা যাবে</string>
     <string name="update_available_text">নতুন আপডেট এসেছে। গিটহাব রিলিজ পেইজ খুলতে চাপুন।</string>

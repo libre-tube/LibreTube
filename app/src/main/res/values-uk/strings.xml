@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_icon">Піктограма</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
     <string name="playOnBackground">Відтворити у фоновому режимі</string>
     <string name="server_error">Здається, виникла проблема з обраним сервером. Спробуйте інший.</string>
     <string name="share">Поділитися</string>
@@ -413,13 +411,9 @@
     <string name="alphabetic_reversed">Абетковий (зворотний)</string>
     <string name="creation_date">Дата створення</string>
     <string name="creation_date_reversed">Дата створення (зворотна)</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
-    <string name="import_format_newpipe">NewPipe</string>
     <string name="export_subscriptions_to">Експорт підписок із</string>
     <string name="import_subscriptions_from">Імпорт підписок із</string>
-    <string name="import_format_freetube">FreeTube</string>
     <string name="import_playlists_from">Імпорт списків відтворення з</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
     <string name="export_playlists_to">Експорт списків відтворення в</string>
     <string name="home_tab_content">Вміст головної вкладки</string>
     <string name="mark_as_unwatched">Позначити як непереглянуте</string>

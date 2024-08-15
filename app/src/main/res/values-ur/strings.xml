@@ -101,8 +101,6 @@
     <string name="app_icon">آئیکن</string>
     <string name="enabled">چالو</string>
     <string name="disabled">بند</string>
-    <string name="piped">پائپڈ</string>
-    <string name="youtube">یوٹیوب</string>
     <string name="playOnBackground">پس منظر میں چلائیں</string>
     <string name="update_available">ورژن %1$s دستیاب ہے</string>
     <string name="update_available_text">اسے ڈاؤن لوڈ کرنے کے لیے GitHub پر ریلیز پر جائیں؟</string>

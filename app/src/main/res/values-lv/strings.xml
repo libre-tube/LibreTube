@@ -101,8 +101,6 @@
     <string name="enabled">Ieslēgts</string>
     <string name="disabled">Izslēgts</string>
     <string name="app_icon">Ikona</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
     <string name="playOnBackground">Atskaņot fonā</string>
     <string name="shareTo">Kopīgot URL ar</string>
     <string name="defaultIcon">Noklusējuma</string>
@@ -410,9 +408,6 @@
     <string name="alphabetic">Alfabētisks</string>
     <string name="import_subscriptions_from">Importēt abonementus no</string>
     <string name="export_subscriptions_to">Eksportēt abonementus uz</string>
-    <string name="import_format_freetube">FreeTube</string>
-    <string name="import_format_newpipe">NewPipe</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="play_automatically">Atskaņot automātiski</string>
     <string name="play_automatically_summary">Sākt atskaņot video automātiski, kad to izvēlas</string>
     <string name="home_tab_content">Sākumlapas saturs</string>
@@ -428,7 +423,6 @@
     <string name="emptyPlaylistDescription">Atskaņošanas saraksta apraksts nevar būt tukšs!</string>
     <string name="mark_as_unwatched">Atzīmēt kā neskatītu</string>
     <string name="export_playlists_to">Eksportēt atskaņošanas sarakstus uz</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
     <string name="choose_instance_long">Izvēlieties Piped instanci, ko izmantot. Piped instance darbosies kā starpnieks starp jums un YouTube. Šīs instances fiziski atrodas dažādās vietās, uz ko norāda to valstu karogi. Instances, kas ir tuvāk jums, visticamāk strādās ātrāk nekā instances, kas ir tālāk. Jūs jebkurā mirklī varat izmainīt instanci iestatījumos.</string>
     <string name="albums">Albumi</string>
     <string name="grid_landscape">Režģa kolonnas (ainavas)</string>

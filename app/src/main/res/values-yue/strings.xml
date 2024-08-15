@@ -82,7 +82,6 @@
     <string name="audio">聲</string>
     <string name="pauseOnScreenOff_summary">當你部機嘅芒熄咗嘅時候就會自動暫停條片</string>
     <string name="never">永遠</string>
-    <string name="youtube">YouTube</string>
     <string name="playOnBackground">喺背景度播</string>
     <string name="update_available">版本 %1$s 已經有啦</string>
     <string name="update_available_text">去 Github 下載新嘅 Releases？</string>

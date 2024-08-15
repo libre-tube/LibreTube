@@ -73,7 +73,6 @@
     <string name="login">כניסה</string>
     <string name="logout">יציאה</string>
     <string name="sponsorblock_summary">משתמש ב־API ‏https://sponsor.ajay.app/‎</string>
-    <string name="youtube">YouTube‎</string>
     <string name="download">הורדה</string>
     <string name="username">שם משתמש</string>
     <string name="registered">ההרשמה הצליחה. עכשיו אפשר להירשם למינוי לערוצים.</string>
@@ -106,7 +105,6 @@
     <string name="category_sponsor">נותן חסות</string>
     <string name="category_selfpromo">קידום לא בתשלום/עצמי</string>
     <string name="disabled">כבוי</string>
-    <string name="piped">Piped‎</string>
     <string name="downloads">הורדות</string>
     <string name="advanced_summary">הורדות ואיפוס</string>
     <string name="app_uptodate">היישומון עדכני.</string>
@@ -415,12 +413,8 @@
     <string name="alphabetic_reversed">אלפביתי (הפוך)</string>
     <string name="import_subscriptions_from">ייבוא מינויים מתוך</string>
     <string name="export_subscriptions_to">ייצוא מינויים אל</string>
-    <string name="import_format_newpipe">NewPipe‎</string>
-    <string name="import_format_freetube">FreeTube‎</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)‎</string>
     <string name="import_playlists_from">ייבוא רשימות נגינה מתוך</string>
     <string name="export_playlists_to">ייצוא רשימות נגינה אל</string>
-    <string name="import_format_piped">Piped / LibreTube‎</string>
     <string name="home_tab_content">תוכן לשונית בית</string>
     <string name="mark_as_unwatched">סימון כלא נצפה</string>
     <string name="welcome">ברוך בואך ל־LibreTube</string>

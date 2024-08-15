@@ -94,13 +94,11 @@
     <string name="material_you">Material You</string>
     <string name="sponsorblock_notifications">Powiadomienia</string>
     <string name="app_icon">Ikona</string>
-    <string name="youtube">YouTube</string>
     <string name="music_songs">Muzyka (YT Music)</string>
     <string name="music_videos">Teledyski (YT Music)</string>
     <string name="music_albums">Albumy (YT Music)</string>
     <string name="music_playlists">Playlisty (YT Music)</string>
     <string name="playOnBackground">Odtwórz w tle</string>
-    <string name="piped">Piped</string>
     <string name="enabled">Wł.</string>
     <string name="disabled">Wył.</string>
     <string name="update_available_text">Dostępna nowa wersja. Kliknij, aby otworzyć stronę wydań na GitHubie.</string>
@@ -412,11 +410,8 @@
     <string name="creation_date">Data utworzenia</string>
     <string name="alphabetic">Alfabetycznie</string>
     <string name="alphabetic_reversed">Alfabetycznie (odwrotnie)</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="import_subscriptions_from">Importuj subskrypcje z</string>
     <string name="export_subscriptions_to">Eksportuj subskrypcje do</string>
-    <string name="import_format_freetube">FreeTube</string>
-    <string name="import_format_newpipe">NewPipe</string>
     <string name="welcome">Witamy w LibreTube</string>
     <string name="mark_as_unwatched">Oznacz jako nieobejrzane</string>
     <string name="dearrow">Włącz DeArrow</string>
@@ -438,7 +433,6 @@
     <string name="visibility_public">Publiczny</string>
     <string name="import_playlists_from">Importuj playlisty z</string>
     <string name="export_playlists_to">Eksportuj playlisty do</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
     <string name="fallback_piped_proxy_summary">Załaduj filmy przez serwer proxy, jeśli bezpośrednie połączenie z YouTube nie działa w przypadku bieżącego filmu (wydłuża początkowy czas ładowania). Jeśli ta opcja jest wyłączona, zawartość muzyczna YouTube prawdopodobnie nie będzie odtwarzana z powodu ograniczeń YT</string>
     <string name="playlist_description">Opis playlisty</string>
     <string name="choose_instance_long">Wybierz poniżej instancję Piped, której chcesz użyć. Instancja Piped będzie działać jako pośrednik między Tobą a YouTube. Instancje te znajdują się w różnych fizycznych lokalizacjach — na co wskazują ich flagi państwowe. Instancje fizycznie bliżej ciebie są prawdopodobnie szybsze niż instancje, które nie są. W każdej chwili możesz zmienić używaną instancję w ustawieniach.</string>

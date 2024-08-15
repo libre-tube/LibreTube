@@ -102,8 +102,6 @@
     <string name="website">Weboldal</string>
     <string name="open">Megnyitás…</string>
     <string name="reset">Alapértelmezések visszaállítása</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
     <string name="deleteAccount">Fiók törlése</string>
     <string name="deleteAccount_summary">A Piped fiókjának törlése</string>
     <string name="account">Fiók</string>
@@ -409,12 +407,8 @@
     <string name="alphabetic_reversed">Ábécé (fordított)</string>
     <string name="import_subscriptions_from">Feliratkozások importálása innen</string>
     <string name="export_subscriptions_to">Feliratkozások exportálása ide</string>
-    <string name="import_format_newpipe">NewPipe</string>
-    <string name="import_format_freetube">FreeTube</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="import_playlists_from">Lejátszási listák importálása innen</string>
     <string name="export_playlists_to">Lejátszási listák exportálása ide</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
     <string name="mark_as_unwatched">Meg nem nézettként jelölés</string>
     <string name="home_tab_content">Kezdőlap tartalma</string>
     <string name="choose_instance">Először válasszon egy példányt!</string>

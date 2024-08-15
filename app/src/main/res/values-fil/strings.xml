@@ -85,7 +85,6 @@
     <string name="version">Bersyon %1$s</string>
     <string name="loggedIn">Naka-log in.</string>
     <string name="playback_speed">Bilis ng playback</string>
-    <string name="youtube">YouTube</string>
     <string name="update_available_text">May available na bagong update. I-click para buksan ang GitHub releases page.</string>
     <string name="areYouSure">Burahin ang playlist\?</string>
     <string name="trending_views">%1$s • %2$s views • %3$s</string>

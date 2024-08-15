@@ -99,8 +99,6 @@
     <string name="material_you">Material You</string>
     <string name="sponsorblock_notifications">Ειδοποιήσεις</string>
     <string name="app_icon">Εικονίδιο</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
     <string name="enabled">Ενεργοποιημένο</string>
     <string name="disabled">Απενεργοποιημένο</string>
     <string name="playOnBackground">Αναπαραγωγή στο παρασκήνιο</string>
@@ -416,12 +414,8 @@
     <string name="codecs">Κωδικοποιητές</string>
     <string name="export_subscriptions_to">Εξαγωγή subscriptions σε</string>
     <string name="import_subscriptions_from">Εισαγωγή subscriptions από</string>
-    <string name="import_format_newpipe">NewPipe</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="push_channel_name">Εργάτης ειδοποίησης</string>
     <string name="export_playlists_to">Εξαγωγή playlists σε</string>
     <string name="import_playlists_from">Εισαγωγή playlists από</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
-    <string name="import_format_freetube">FreeTube</string>
     <string name="show_search_suggestions">Προβολή προτάσεων αναζήτησης</string>
 </resources>

@@ -83,8 +83,6 @@
     <string name="app_icon">Иконица</string>
     <string name="enabled">Укључено</string>
     <string name="disabled">Искључено</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTubе</string>
     <string name="playOnBackground">Пусти у позадини</string>
     <string name="update_available">Доступно је ажурирање</string>
     <string name="update_available_text">Ново ажурирање доступно. Кликните да бисте отворили страницу GitHub издања.</string>
@@ -400,7 +398,6 @@
     <string name="show_stream_thumbnails_summary">Прикажите сличице нових стримова. Ако ово омогућите, потрошиће се додатни подаци</string>
     <string name="donate">Донација</string>
     <string name="music_artists">YT Music извођачи</string>
-    <string name="import_format_freetube">FreeTube</string>
     <string name="emptyPlaylistDescription">Опис плејлисте не може бити празан</string>
     <string name="group_name_error_exists">Изаберите име које је јединствено</string>
     <string name="dearrow_summary">Прикажите тачније и мање сензационалистичке наслове и сличице. Повећава време учитавања</string>
@@ -409,7 +406,6 @@
     <string name="resolution_limited">ограничено</string>
     <string name="tooltip_close">Затвори</string>
     <string name="playlist_description">Опис плејлисте</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
     <string name="unknown_or_no_audio">непознато или без звука</string>
     <string name="auto_generated">аутоматски генерисано</string>
     <plurals name="channel_new_streams">
@@ -429,7 +425,6 @@
     <string name="tooltip_locked">Закључај плејер</string>
     <string name="remove_watched_videos">Уклони одгледане видео снимке</string>
     <string name="tooltip_play">Пусти</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="dubbed_audio_track">синхронизовано</string>
     <string name="change_playlist_description">Промени опис плејлисте</string>
     <string name="alphabetic">Абецедно</string>
@@ -467,7 +462,6 @@
     <string name="manual">Ручно</string>
     <string name="playback_during_call_summary">Имајте на уму да ово такође утиче на то да апликација више не управља било којом врстом фокуса аудио снимка</string>
     <string name="sb_custom_colors_summary">Укључује прилагођене боје сегмента за SponsorBlock сегменте</string>
-    <string name="import_format_newpipe">NewPipe</string>
     <string name="tooltip_reverse">Обрнуто</string>
     <string name="tooltip_create_playlist">Направи плејлисту</string>
     <string name="contribute_to_sponsorblock">Допринеси SponsorBlock-у</string>

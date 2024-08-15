@@ -101,8 +101,6 @@
     <string name="enabled">Aç</string>
     <string name="disabled">Bağla</string>
     <string name="app_icon">Nişan</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
     <string name="playOnBackground">Arxa planda oynat</string>
     <string name="update_available">Yeniləmə mövcuddur</string>
     <string name="update_available_text">Yeni yeniləmə mövcuddur. GitHub buraxılışlar səhifəsin açmaq üçün kliklə.</string>
@@ -408,13 +406,9 @@
     <string name="creation_date">Yaradılma tarixi</string>
     <string name="creation_date_reversed">Yaradılma tarixi (çevrilib)</string>
     <string name="export_subscriptions_to">Abunəlikləri bura ixrac et</string>
-    <string name="import_format_newpipe">NewPipe</string>
-    <string name="import_format_freetube">FreeTube</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="import_subscriptions_from">Abunəlikləri burdan idxal et</string>
     <string name="import_playlists_from">Oynatma siyahısın buradan idxal et</string>
     <string name="export_playlists_to">Oynatma siyahısın ixrac et</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
     <string name="home_tab_content">Əsas səhifə məzmunu</string>
     <string name="welcome">LibreTube-a Xoş Gəlmisiniz</string>
     <string name="choose_instance">Xahiş olunur, əvvəlcə instansiya seçin!</string>

@@ -190,12 +190,10 @@
     <string name="playlistName">Grojaraščio pavadinimas</string>
     <string name="fail">Nepavyko :(</string>
     <string name="okay">Gerai</string>
-    <string name="piped">Piped</string>
     <string name="category_segments">Segmentai</string>
     <string name="category_sponsor">Rėmėjas</string>
     <string name="category_selfpromo">Neapmokama / savireklama</string>
     <string name="disabled">Išjungta</string>
-    <string name="youtube">YouTube</string>
     <string name="player">Grotuvas</string>
     <string name="most_views">Daugiausiai peržiūrų</string>
     <string name="deleteAccount">Ištrinti paskyrą</string>

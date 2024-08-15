@@ -74,8 +74,6 @@
     <string name="app_icon">නිරූපකය</string>
     <string name="enabled">සක්‍රිය</string>
     <string name="disabled">අක්‍රිය</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
     <string name="update_available">නිකුතු අංකය %1$s ඇත</string>
     <string name="update_available_text">නව යාවත්කාලීන ලබා ගත හැක. GitHub නිකුතු පිටුව විවෘත කිරීමට ක්ලික් කරන්න.</string>
     <string name="appearance">පෙනුම</string>

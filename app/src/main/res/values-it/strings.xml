@@ -101,8 +101,6 @@
     <string name="category_outro">Titoli di coda e crediti</string>
     <string name="category_outro_summary">Informazioni dopo la fine. Non deve essere usato se contengono informazioni rilevanti</string>
     <string name="app_icon">Icona</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
     <string name="playOnBackground">Riproduci in sottofondo</string>
     <string name="downloads">Scaricati</string>
     <string name="advanced_summary">Download e ripristino</string>
@@ -412,12 +410,8 @@
     <string name="alphabetic">Alfabetico</string>
     <string name="import_subscriptions_from">Importa iscrizioni da</string>
     <string name="export_subscriptions_to">Esporta iscrizioni in</string>
-    <string name="import_format_newpipe">NewPipe</string>
-    <string name="import_format_freetube">FreeTube</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="import_playlists_from">Importa playlist da</string>
     <string name="export_playlists_to">Esporta playlist su</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
     <string name="home_tab_content">Contenuto della scheda principale</string>
     <string name="mark_as_unwatched">Segna come non visto</string>
     <string name="welcome">Benvenuti in LibreTube</string>

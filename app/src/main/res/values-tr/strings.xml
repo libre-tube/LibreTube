@@ -101,8 +101,6 @@
     <string name="enabled">Açık</string>
     <string name="disabled">Kapalı</string>
     <string name="app_icon">Simge</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
     <string name="playOnBackground">Arka planda oynat</string>
     <string name="update_available">Güncelleme var</string>
     <string name="update_available_text">Yeni versiyon mevcut. GitHub sürümler sayfasını açmak için tıklayın.</string>
@@ -404,7 +402,6 @@
     <string name="show_stream_thumbnails_summary">Yeni videoların küçük resimlerini gösterin. Bunu etkinleştirmek ek veri tüketecektir</string>
     <string name="fallback_piped_proxy_summary">YouTube\'a doğrudan bağlanmak mevcut video için çalışmıyorsa videoları proxy aracılığıyla (ilk yükleme sürelerini artırır) yükleyin. Devre dışı bırakılırsa YouTube Müzik içeriği, YT kısıtlamaları nedeniyle muhtemelen oynatılamayacaktır</string>
     <string name="fallback_piped_proxy">Piped proxy\'e dönüş yap</string>
-    <string name="import_format_freetube">FreeTube</string>
     <string name="welcome">Libretube\'e Hoş Geldiniz</string>
     <string name="choose_instance">Lütfen önce bir isteyici seçin!</string>
     <string name="mark_as_unwatched">İzlenmedi olarak işaretle</string>
@@ -421,14 +418,11 @@
     <string name="manual">El ile</string>
     <string name="automatic">Otomatik</string>
     <string name="export_playlists_to">Oynatma listelerini dışa aktar</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="creation_date">Oluşturulma tarihi</string>
     <string name="creation_date_reversed">Oluşturulma tarihi (ters)</string>
     <string name="alphabetic_reversed">Alfabetik (ters)</string>
     <string name="off">Kapalı</string>
     <string name="visible">İlerleme çubuğunda göster</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
-    <string name="import_format_newpipe">NewPipe</string>
     <string name="playlist_description">Oynatma listesi açıklaması</string>
     <string name="emptyPlaylistDescription">Oynatma listesi açıklaması boş bırakılamaz</string>
     <string name="shorts_notifications">Shorts için bildirimler</string>

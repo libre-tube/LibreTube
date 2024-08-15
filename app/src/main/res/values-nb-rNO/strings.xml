@@ -80,11 +80,9 @@
     <string name="retry">Prøv igjen</string>
     <string name="comments">Kommentarer</string>
     <string name="app_icon">Ikon</string>
-    <string name="youtube">YouTube</string>
     <string name="update_available">Versjon %1$s er tilgjengelig</string>
     <string name="appearance">Utseende</string>
     <string name="live">Direkte</string>
-    <string name="piped">Piped</string>
     <string name="search_history">Søkehistorikk</string>
     <string name="music_songs">YT Musikk-spor</string>
     <string name="music_videos">YT Musikk-videoer</string>
@@ -418,10 +416,6 @@
     <string name="choose_instance_long">Velg en Piped-instans nedenfor. Det er en mellommann mellom deg og YouTube. Disse befinner seg på forskjellige fysiske steder, indikert med flagg. Dem nærmere deg er vanligvis raskere. Du kan endre innstillingen når som helst.</string>
     <string name="import_playlists_from">Importer spillelister fra</string>
     <string name="export_playlists_to">Eksporter spillelister til</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
-    <string name="import_format_newpipe">NewPipe</string>
-    <string name="import_format_freetube">FreeTube</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="unlimited_search_history">Ubegrenset søkehistorikk</string>
     <string name="show_search_suggestions">Vis søkeforslag</string>
     <string name="fallback_piped_proxy">Fall tilbake til Piped-mellomtjener</string>

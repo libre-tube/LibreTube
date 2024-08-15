@@ -88,7 +88,6 @@
     <string name="license">Лиценз</string>
     <string name="enabled">Включено</string>
     <string name="sponsorblock_notifications">Известия</string>
-    <string name="youtube">YouTube</string>
     <string name="live">На живо</string>
     <string name="defaultIcon">По подразбиране</string>
     <string name="version">Версия %1$s</string>
@@ -150,7 +149,6 @@
     <string name="swipe_controls">Контрол чрез плъзгане</string>
     <string name="playerAudioQuality">Качество на звука</string>
     <string name="behavior">Поведение</string>
-    <string name="import_format_freetube">FreeTube</string>
     <string name="category_intro">Антракт/Въвеждаща Анимация</string>
     <string name="invalid_url">Моля, въведете URL който работи</string>
     <string name="emptyPlaylistDescription">Описанието на плейлиста не може да бъде празно</string>
@@ -184,7 +182,6 @@
     <string name="pure_theme">Чиста тема</string>
     <string name="trending">Набиращи популярност</string>
     <string name="end_time">Крайно време</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
     <string name="confirm_unsubscribing">Потвърдете отписването</string>
     <string name="unknown_or_no_audio">неизвестен или без звук</string>
     <string name="network_metered">Измерено</string>
@@ -240,7 +237,6 @@
     <string name="segment">Сегмент</string>
     <string name="download_completed">Изтеглянето завърши</string>
     <string name="auth_instance">Инстанция за удостоверяване</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="dubbed_audio_track">дублиран</string>
     <string name="none">Нищо</string>
     <string name="limit_to_runtime">Ограничение до време на изпълнение</string>
@@ -341,7 +337,6 @@
     <string name="caption_settings">Надписи</string>
     <string name="import_playlists">Внасяне на плейлисти</string>
     <string name="tooltip_repeat">Повторение</string>
-    <string name="piped">Piped</string>
     <string name="fallback_piped_proxy">Завръщане към Piped прокси</string>
     <string name="search_history_summary">Запомнете търсенията</string>
     <string name="auth_instances">Изберете инстанция за удостоверяване</string>
@@ -384,7 +379,6 @@
     <string name="legacyIcon">Изгубено наследство</string>
     <string name="instances">Избирам…</string>
     <string name="background_mode">Фонов режим</string>
-    <string name="import_format_newpipe">NewPipe</string>
     <string name="tooltip_reverse">Обръщане</string>
     <string name="tooltip_create_playlist">Създаване на плейлист</string>
     <string name="contribute_to_sponsorblock">Допринесете за SponsorBlock</string>

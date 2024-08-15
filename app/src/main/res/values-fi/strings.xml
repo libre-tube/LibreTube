@@ -67,8 +67,6 @@
     <string name="app_icon">Kuvake</string>
     <string name="enabled">Päällä</string>
     <string name="disabled">Pois päältä</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
     <string name="channels">Kanavat</string>
     <string name="all">Kaikki</string>
     <string name="playlists">Soittolistat</string>

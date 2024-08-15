@@ -31,8 +31,6 @@
     <string name="app_icon">Nyşan</string>
     <string name="enabled">Aç</string>
     <string name="disabled">Öçürilen</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
     <string name="playOnBackground">Arka tarapynda dowam et</string>
     <string name="update_available">%1$s wersiýasy bar</string>
     <string name="appearance">Tema sazlamalar</string>

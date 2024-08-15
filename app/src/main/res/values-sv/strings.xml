@@ -40,8 +40,6 @@
     <string name="app_icon">Ikon</string>
     <string name="enabled">På</string>
     <string name="disabled">Av</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
     <string name="update_available">Uppdatering tillgänglig</string>
     <string name="subscriptions">Prenumerationer</string>
     <string name="logout">Logga ut</string>
@@ -273,7 +271,6 @@
     <string name="deleteAccount">Radera konto</string>
     <string name="pauseOnScreenOff_summary">Pausa uppspelningen när skärmen är avstängd</string>
     <string name="watch_positions">Kom ihåg position</string>
-    <string name="import_format_freetube">FreeTube</string>
     <string name="emptyPlaylistDescription">Spellistans beskrivning kan inte vara tom</string>
     <string name="group_name_error_exists">Vänligen välj ett namn som är unikt</string>
     <string name="auto_fullscreen_shorts">Automatisk fullskärm på korta videor</string>
@@ -288,7 +285,6 @@
     <string name="copied_to_clipboard">Kopierad till urklipp</string>
     <string name="trending">Trendigt just nu</string>
     <string name="end_time">Sluttid</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
     <string name="confirm_unsubscribing">Bekräfta avslut av prenumeration</string>
     <string name="mobile_data">Mobildata</string>
     <string name="unknown_or_no_audio">okänt eller inget ljud</string>
@@ -315,7 +311,6 @@
     <string name="nothing_selected">Inget valt!</string>
     <string name="new_videos_badge">Indikator för nya videor</string>
     <string name="navigation_bar">Navigeringsfält</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="dubbed_audio_track">dubbat</string>
     <string name="limit_to_runtime">Begränsa till uppspelningstid</string>
     <string name="hide_watched_from_feed">Dölj redan sedda videor</string>
@@ -387,7 +382,6 @@
     <string name="playback_during_call_summary">Observera att detta också påverkar appen så att den inte längre hanterar någon form av ljudfokus</string>
     <string name="disable_proxy_summary">Ladda videor och bilder direkt från YouTubes servrar. Aktivera bara detta alternativ om du alltid använder en VPN</string>
     <string name="playlistCloned">Spellistan klonad</string>
-    <string name="import_format_newpipe">NewPipe</string>
     <string name="shuffle">Blanda</string>
     <string name="confirm_unsubscribe">Är du säker på att du vill avsluta prenumerationen på %1$s\?</string>
     <string name="fullscreen_gestures">Gester för helskärm på/av</string>

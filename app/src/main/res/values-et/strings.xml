@@ -87,8 +87,6 @@
     <string name="music_artists">YT Music - Esitajad</string>
     <string name="license">Litsents</string>
     <string name="segment_skipped">Vahelejäetud segment</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
     <string name="playOnBackground">Esita taustal</string>
     <string name="update_available_text">Saadaval on rakenduse uus versioon. Klõpsi siin, et avada asjakohane leht GitHub\'is.</string>
     <string name="downloads">Allalaadimised</string>
@@ -438,7 +436,6 @@
     <string name="download_playlist">Laadi esitusloend alla</string>
     <string name="default_language">Vaikimisi</string>
     <string name="behavior_when_minimized">Rakenduse käitumine minimeeritud vaates</string>
-    <string name="import_format_freetube">FreeTube</string>
     <string name="descriptive_audio_track">kirjeldav</string>
     <string name="sb_invalid_segment">Vigane segmendi algus või lõpp</string>
     <string name="segment_type">Segmendi tüüp</string>
@@ -463,8 +460,6 @@
     <string name="audio_language">Heliriba keel</string>
     <string name="external_player">Väline meediamängija</string>
     <string name="export_playlists_to">Vali rakendus, mille jaoks ekspordid esitusloendid</string>
-    <string name="import_format_newpipe">NewPipe</string>
-    <string name="import_format_youtube_csv">CSV-vormingus fail YouTube\'i jaoks</string>
     <string name="home_tab_content">Avalehe sisu</string>
     <string name="show_search_suggestions">Näita otsingusoovitusi</string>
     <string name="original_or_main_audio_track">algne või põhiline</string>
@@ -494,7 +489,6 @@
     <string name="import_subscriptions_from">Vali imporditavate tellimuste allikas</string>
     <string name="tooltip_sponsorblock">Lülita SponsorBlocki kasutamine sisse/välja</string>
     <string name="remove_watched_videos">Eemalda vaadatud videod</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
     <string name="default_or_unknown_audio_track">vaikimisi või teadmata</string>
     <string name="dubbed_audio_track">dubleeritud</string>
     <string name="successfully_removed_from_playlist">„%1$s“ eemaldamine esitusloendist õnnestus.</string>

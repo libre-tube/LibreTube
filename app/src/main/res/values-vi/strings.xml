@@ -74,7 +74,6 @@
     <string name="color_green">Màu xanh lá vui vẻ</string>
     <string name="color_red">Màu đỏ lạnh</string>
     <string name="sponsorblock_notifications">Thông báo</string>
-    <string name="piped">Piped</string>
     <string name="update_available">Đã có bản cập nhật</string>
     <string name="downloads">Tải xuống</string>
     <string name="appearance">Vẻ ngoài</string>
@@ -435,13 +434,11 @@
     <string name="all_caught_up">Bạn đã hoàn thành tất cả</string>
     <string name="import_playlists_from">Nhập danh sách phát từ</string>
     <string name="export_playlists_to">Xuất danh sách phát sang</string>
-    <string name="import_format_freetube">FreeTube</string>
     <string name="group_name_error_exists">Hãy chọn một cái tên độc nhất</string>
     <string name="autoplay_playlists_summary">Tự động phát video tiếp theo trong danh sách phát bất kể cài đặt tự động phát đã chọn</string>
     <string name="dearrow_summary">Hiển thị tiêu đề và hình thu nhỏ chính xác hơn và ít giật gân hơn. Tăng thời gian tải</string>
     <string name="resolution_limited">giới hạn</string>
     <string name="tooltip_close">Đóng</string>
-    <string name="import_format_piped">Đường ống / LibreTube</string>
     <string name="auto_generated">Tự động tạo ra</string>
     <string name="tooltip_minimize">Giảm thiểu</string>
     <string name="sb_create_segment">Tạo phân đoạn</string>
@@ -453,7 +450,6 @@
     <string name="remove_watched_videos">Xóa video đã xem</string>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="tooltip_play">Phát</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="no_chapter">Không có chương</string>
     <string name="no_fullscreen_resolution">Không có độ phân giải toàn màn hình</string>
     <string name="uploader_name">Tên người tải lên</string>
@@ -466,7 +462,6 @@
     <string name="faq">Câu hỏi thường gặp</string>
     <string name="sort_by">Sắp xếp theo</string>
     <string name="player_channel_description">Hiển thị thông báo khi đang phát</string>
-    <string name="youtube">YouTube</string>
     <string name="tooltip_scroll_to_top">Cuộn lên đầu</string>
     <string name="sponsorblock_user_id">ID người dùng Chặn Nhà tài trợ</string>
     <string name="dearrow">Kích hoạt DeArrow</string>
@@ -478,7 +473,6 @@
     <string name="tooltip_sponsorblock">Chuyển đổi Chặn nhà tài trợ</string>
     <string name="automatic_once">Tự động một lần</string>
     <string name="playback_during_call_summary">Lưu ý rằng điều này cũng ảnh hưởng đến việc ứng dụng không thể xử lý bất kỳ loại tiêu điểm âm thanh nào nữa</string>
-    <string name="import_format_newpipe">NewPipe</string>
     <string name="tooltip_reverse">Đảo ngược</string>
     <string name="tooltip_create_playlist">Tạo danh sách phát</string>
     <string name="contribute_to_sponsorblock">Đóng góp cho Chặn Nhà tài trợ</string>

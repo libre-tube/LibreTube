@@ -126,8 +126,6 @@
     <string name="app_icon">Icona</string>
     <string name="enabled">Activat</string>
     <string name="disabled">Desactivat</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
     <string name="playOnBackground">Reprodueix en segon plà</string>
     <string name="update_available">La versió %1$s està disponible</string>
     <string name="update_available_text">Nova actualització disponible. Feu clic per obrir la pàgina de versions de GitHub.</string>
@@ -284,7 +282,6 @@
     <string name="play_all">Reprodueix-ho tot</string>
     <string name="suggest_change_instance">La càrrega triga més del normal. Tingueu en compte la possibilitat de canviar la instància</string>
     <string name="change_instance">Canvia la instància</string>
-    <string name="import_format_newpipe">NewPipe</string>
     <string name="alternative_pip_controls">Controls Imatge sobre Imatge alternatius</string>
     <string name="behavior_when_minimized">Comportament en minimitzar</string>
     <string name="unknown_or_no_audio">desconegut o sense àudio</string>
@@ -399,7 +396,6 @@
     <string name="segment">Segment</string>
     <string name="export_subscriptions_to">Exporta subscripcions a</string>
     <string name="export_playlists_to">Exporta llistes de reproducció a</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
     <string name="show_search_suggestions">Mostra suggeriments de cerca</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">Idioma d\'àudio desconegut</string>
@@ -479,8 +475,6 @@
     <string name="default_or_unknown_audio_track">per defecte o desconegut</string>
     <string name="sponsorblock_user_id">ID d\'usuari de SponsorBlock</string>
     <string name="import_subscriptions_from">Importa subscripcions des de</string>
-    <string name="import_format_freetube">FreeTube</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="remember_playback_speed">Recorda la velocitat de reproducció</string>
     <string name="no_segments_found">Encara no hi ha segments per a aquest vídeo.</string>
     <string name="start_sleep_timer">Inicia el temporitzador d\'aturada</string>
