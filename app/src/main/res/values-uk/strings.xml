@@ -548,4 +548,5 @@
     <string name="external_download_provider">Зовнішній постачальник завантажень</string>
     <string name="external_download_provider_summary">Введіть назву пакету застосунку, який потрібно використовувати для завантаження відео. Залиште порожнім, щоб використовувати вбудований завантажувач LibreTube.</string>
     <string name="screenshot">Знімок екрана</string>
+    <string name="pip">КвК</string>
 </resources>
