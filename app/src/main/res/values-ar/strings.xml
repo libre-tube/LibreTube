@@ -101,8 +101,6 @@
     <string name="app_icon">أيقونة</string>
     <string name="enabled">مفعل</string>
     <string name="disabled">ايقاف</string>
-    <string name="piped">الأنابيب</string>
-    <string name="youtube">يوتيوب</string>
     <string name="playOnBackground">تشغيل في الخلفية</string>
     <string name="defaultIcon">الإفتراضي</string>
     <string name="update_summary">التحقق من وجود تحديث</string>
@@ -419,12 +417,8 @@
     <string name="creation_date">تاريخ الإنشاء</string>
     <string name="creation_date_reversed">تاريخ الإنشاء (معكوس)</string>
     <string name="alphabetic_reversed">أبجدي (معكوس)</string>
-    <string name="import_format_freetube">فري تيوب</string>
     <string name="export_subscriptions_to">تصدير الاشتراكات إلى</string>
-    <string name="import_format_youtube_csv">يوتيوب (CSV)</string>
-    <string name="import_format_newpipe">نيوبايب</string>
     <string name="import_subscriptions_from">استيراد الاشتراكات من</string>
-    <string name="import_format_piped">بايبد / ليبري تيوب</string>
     <string name="import_playlists_from">استيراد قوائم التشغيل من</string>
     <string name="export_playlists_to">تصدير قوائم التشغيل إلى</string>
     <string name="home_tab_content">محتوى تبويب \"الصفحة الرئيسية\"</string>

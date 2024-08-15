@@ -153,8 +153,6 @@
     <string name="update_available">%1$s आवृत्ती उपलब्ध आहे</string>
     <string name="appearance">अपेअरंस</string>
     <string name="downloads">डाउनलोड</string>
-    <string name="piped">Pipes</string>
-    <string name="youtube">यूट्यूब</string>
     <string name="update_summary">अपडेट साठी तपासा</string>
     <string name="live">लाइव्ह</string>
     <string name="trending_views">%1$s • %2$s व्ह्यूज • %3$s</string>

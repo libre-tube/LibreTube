@@ -62,7 +62,6 @@
     <string name="material_you">सामग्री तपाईंको</string>
     <string name="sponsorblock_notifications">सूचनाहरू</string>
     <string name="disabled">बन्द</string>
-    <string name="piped">पाइप गरिएको</string>
     <string name="playOnBackground">पृष्ठभूमिमा प्ले गर्नुहोस्</string>
     <string name="update_available">संस्करण %1$s उपलब्ध छ</string>
     <string name="update_available_text">नयाँ अपडेट उपलब्ध छ। GitHub रिलीज पृष्ठ खोल्न क्लिक गर्नुहोस्।</string>
@@ -104,7 +103,6 @@
     <string name="app_uptodate">नवीनतम संस्करण चलिरहेको छ।</string>
     <string name="category_music_offtopic_summary">संगीत भिडियोहरूमा प्रयोगको लागि मात्र। यसले भिडियोको अंशहरू कभर गर्नुपर्छ आधिकारिक मिक्सहरूको अंश होइन। अन्तमा, भिडियोले Spotify वा अन्य कुनै मिश्रित संस्करणलाई सकेसम्म नजिकबाट मिल्नुपर्छ, वा कुरा गर्ने वा अन्य अवरोधहरू कम गर्नुपर्छ</string>
     <string name="playback_speed">प्लेब्याक गति</string>
-    <string name="youtube">Youtube</string>
     <string name="category_preview">पूर्वावलोकन/रिक्याप</string>
     <string name="category_music_offtopic">संगीत: गैर-संगीत खण्ड</string>
     <string name="customization">समायोजनहरू</string>

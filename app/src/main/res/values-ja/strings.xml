@@ -111,8 +111,6 @@
     <string name="instance_name">インスタンス名</string>
     <string name="pauseOnScreenOff_summary">画面が消えた際に一時停止します</string>
     <string name="account">アカウント</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
     <string name="deleteAccount">アカウント削除</string>
     <string name="deleteAccount_summary">このPipedアカウントを削除します</string>
     <string name="restore">復元</string>
@@ -407,10 +405,6 @@
     <string name="export_subscriptions_to">以下へ登録チャンネルをエクスポート</string>
     <string name="import_playlists_from">以下から再生リストをインポート</string>
     <string name="export_playlists_to">以下へ再生リストをエクスポート</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
-    <string name="import_format_newpipe">NewPipe</string>
-    <string name="import_format_freetube">FreeTube</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="unlimited_search_history">無制限の検索履歴</string>
     <string name="home_tab_content">ホームタブに表示するコンテンツ</string>
     <string name="mark_as_unwatched">未視聴にする</string>

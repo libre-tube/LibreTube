@@ -233,8 +233,6 @@
     <string name="color_accent">Áherslulitir</string>
     <string name="color_red">Róandi rautt</string>
     <string name="color_blue">Brakandi blátt</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
     <string name="advanced">Ítarlegt</string>
     <string name="app_uptodate">Keyri nýjustu útgáfuna.</string>
     <string name="playback_speed">Afspilunarhraði</string>
@@ -284,10 +282,7 @@
     <string name="undo">Afturkalla</string>
     <string name="segment">Bútur</string>
     <string name="download_playlist">Sækja spilunarlista</string>
-    <string name="import_format_freetube">FreeTube</string>
     <string name="show_search_suggestions">Birta uppástungur í leit</string>
-    <string name="import_format_newpipe">NewPipe</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <plurals name="years_ago">
         <item quantity="one">Fyrir %d ári</item>
         <item quantity="other">Fyrir %d árum</item>
@@ -299,7 +294,6 @@
     <string name="visibility_unlisted">Óskráður</string>
     <string name="thumbnail_time">Tími á smámynd</string>
     <string name="duration_span">Tímalengd: %1$s</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
     <string name="no_chapter">Enginn kafli</string>
     <string name="home_tab_content">Efni á forsíðuflipa</string>
     <string name="add_to_group">Bæta í hóp</string>

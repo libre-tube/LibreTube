@@ -100,8 +100,6 @@
     <string name="app_icon">Значок</string>
     <string name="sponsorblock_notifications">Уведомления</string>
     <string name="enabled">Вкл.</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
     <string name="playOnBackground">Играть в фоне</string>
     <string name="disabled">Откл.</string>
     <string name="update_available">Доступно обновление</string>
@@ -413,14 +411,10 @@
     <string name="creation_date">Дата создания</string>
     <string name="creation_date_reversed">Дата создания (обратная)</string>
     <string name="alphabetic_reversed">Алфавитный (обратный)</string>
-    <string name="import_format_newpipe">NewPipe</string>
-    <string name="import_format_freetube">FreeTube</string>
     <string name="import_subscriptions_from">Импорт подписок из</string>
     <string name="export_subscriptions_to">Экспорт подписок в</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="import_playlists_from">Импорт плейлистов из</string>
     <string name="export_playlists_to">Экспорт плейлистов в</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
     <string name="home_tab_content">Содержимое главной вкладки</string>
     <string name="mark_as_unwatched">Пометить как непросмотренное</string>
     <string name="welcome">Добро пожаловать в LibreTube</string>

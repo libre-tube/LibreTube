@@ -119,8 +119,8 @@
     <string name="app_icon">Icon</string>
     <string name="enabled">On</string>
     <string name="disabled">Off</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
+    <string name="piped" translatable="false">Piped</string>
+    <string name="youtube" translatable="false">YouTube</string>
     <string name="playOnBackground">Play in the background</string>
     <string name="update_available">Update available</string>
     <string name="update_available_text">New update available. Click to open the GitHub releases page.</string>
@@ -278,7 +278,7 @@
     <string name="backup_restore">Backup &amp; restore</string>
     <string name="backup">Backup</string>
     <string name="picture_in_picture">Picture-in-Picture</string>
-    <string name="pip" translatable="false">PiP</string>
+    <string name="pip">PiP</string>
     <string name="player_resize_mode">Resize mode</string>
     <string name="maximum_image_cache">Max image cache size</string>
     <string name="copied_to_clipboard">Copied to clipboard</string>
@@ -470,10 +470,10 @@
     <string name="export_subscriptions_to">Export subscriptions to</string>
     <string name="import_playlists_from">Import playlists from</string>
     <string name="export_playlists_to">Export playlists to</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
-    <string name="import_format_newpipe">NewPipe</string>
-    <string name="import_format_freetube">FreeTube</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
+    <string name="import_format_piped" translatable="false">Piped</string>
+    <string name="import_format_newpipe" translatable="false">NewPipe</string>
+    <string name="import_format_freetube" translatable="false">FreeTube</string>
+    <string name="import_format_youtube_csv" translatable="false">YouTube (CSV)</string>
     <string name="home_tab_content">Home tab content</string>
     <string name="show_search_suggestions">Show search suggestions</string>
     <string name="audio_track_format">%1$s - %2$s</string>

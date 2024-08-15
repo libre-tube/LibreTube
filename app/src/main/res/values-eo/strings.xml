@@ -100,8 +100,6 @@
     <string name="app_icon">Apa bildsimbolo</string>
     <string name="enabled">Ebligita</string>
     <string name="disabled">Malebligita</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
     <string name="playOnBackground">Ludi en fono</string>
     <string name="region">Regiono</string>
     <string name="subscriberAndVideoCounts">%1$s abonantoj • %2$d videoj</string>

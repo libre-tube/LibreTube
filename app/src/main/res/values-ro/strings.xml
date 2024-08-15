@@ -99,8 +99,6 @@
     <string name="app_icon">Pictogramă</string>
     <string name="enabled">Pornit</string>
     <string name="disabled">Oprit</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
     <string name="playOnBackground">Redare în fundal</string>
     <string name="update_available">Actualizare disponibilă</string>
     <string name="appearance">Aspect</string>
@@ -413,10 +411,6 @@
     <string name="import_subscriptions_from">Importați abonamente din</string>
     <string name="export_subscriptions_to">Exportați abonamente la</string>
     <string name="import_playlists_from">Importă playlist-uri din</string>
-    <string name="import_format_newpipe">NewPipe</string>
-    <string name="import_format_freetube">FreeTube</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
     <string name="export_playlists_to">Exportă playlist-uri la</string>
     <string name="choose_instance">Mai întâi alegeți o instanță!</string>
     <string name="mark_as_unwatched">Marcați ca nevăzut</string>

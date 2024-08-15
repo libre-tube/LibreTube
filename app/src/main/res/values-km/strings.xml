@@ -50,7 +50,6 @@
     <string name="loggedIn">បានបញ្ជាប់ចូល។</string>
     <string name="retry">ព្យាយាមជាថ្មី</string>
     <string name="playback_speed">ល្បឿនចាក់</string>
-    <string name="youtube">យូធូប</string>
     <string name="update_available_text">បច្ចុប្បន្នភាពថ្មីអាចប្រើប្រាស់បាន។ ចុចដើម្បីបើកទំព័រចេញផ្សាយ GitHub ។</string>
     <string name="customization">កែតម្រូវ</string>
     <string name="instance">ឧបមា</string>
@@ -60,7 +59,6 @@
     <string name="emptyPlaylistName">ឈ្មោះកម្រងវីដេអូ មិនអាចទទេឡើយ</string>
     <string name="library">បណ្ណាល័យ</string>
     <string name="color_yellow">លឿងទុំ</string>
-    <string name="piped">Piped</string>
     <string name="unknown_error">កំហុសបណ្ដាញ។</string>
     <string name="license">កម្មសិទ្ធិបញ្ញា</string>
     <string name="playlistName">ឈ្មោះកម្រងវីដេអូ</string>

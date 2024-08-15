@@ -6,7 +6,6 @@
     <string name="confirm_unsubscribing">ઉમેદવારી દૂર કરવાની ખાતરી કરો</string>
     <string name="confirm_unsubscribing_summary">ઉમેદવારી દૂર કરવા પહેલાં ખાતરી સંવાદને બતાવો</string>
     <string name="local_playlists">સ્થાનિક પ્લેલિસ્ટ</string>
-    <string name="youtube">YouTube</string>
     <string name="play_all">બધું વગાડો</string>
     <string name="brightness">તેજસ્વીતા</string>
     <string name="volume">વોલ્યુમ</string>
@@ -152,7 +151,6 @@
     <string name="color_purple">આનંદદાયક જાંબલી</string>
     <string name="sponsorblock_notifications">સૂચનાઓ</string>
     <string name="app_icon">ચિહ્ન</string>
-    <string name="piped">પાઇપ્ડ</string>
     <string name="update_available_text">તેને ડાઉનલોડ કરવા માટે GitHub પર પ્રકાશિત કરવા જાઓ છો\?</string>
     <string name="appearance">દેખાવ</string>
     <string name="related_streams">સંબંધિત સામગ્રી</string>

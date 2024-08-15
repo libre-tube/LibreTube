@@ -101,8 +101,6 @@
     <string name="enabled">Ein</string>
     <string name="disabled">Aus</string>
     <string name="app_icon">App-Symbol</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
     <string name="playOnBackground">Im Hintergrund abspielen</string>
     <string name="update_available">Update verfügbar</string>
     <string name="update_available_text">Neue Aktualisierung verfügbar. Hier klicken, um die GitHub-Releases Seite zu öffnen.</string>
@@ -408,12 +406,8 @@
     <string name="creation_date">Erstellungsdatum (älteste zuerst)</string>
     <string name="creation_date_reversed">Erstellungsdatum (neuste zuerst)</string>
     <string name="export_subscriptions_to">Abos exportieren im Format von</string>
-    <string name="import_format_newpipe">NewPipe</string>
-    <string name="import_format_freetube">FreeTube</string>
-    <string name="import_format_youtube_csv">YouTube (als CSV)</string>
     <string name="import_subscriptions_from">Abos importieren im Format von</string>
     <string name="export_playlists_to">Playlists exportieren nach</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
     <string name="import_playlists_from">Playlists importieren aus</string>
     <string name="home_tab_content">Inhalt der Startseite</string>
     <string name="welcome">Willkommen bei LibreTube</string>

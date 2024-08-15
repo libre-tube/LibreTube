@@ -75,7 +75,6 @@
     <string name="playlists">سیاههٔ پخش</string>
     <string name="music_albums">آلبوم‌های موسیقی</string>
     <string name="license">پروانه</string>
-    <string name="youtube">یوتوب</string>
     <string name="music_playlists">سیاهه‌های پخش آهنگ‌های یوتوب</string>
     <string name="segment_skipped">بخش رد شده</string>
     <string name="category_segments">بخش‌ها</string>
@@ -111,7 +110,6 @@
     <string name="category_selfpromo">تبلیغ بدون پرداخت یا تبلیغ خود</string>
     <string name="app_icon">آیکون</string>
     <string name="update_summary">بررسی برای بروزرسانی</string>
-    <string name="piped">پایپد</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d ویدیو ها</string>
     <string name="defaultIcon">پیش‌گزیده</string>
     <string name="video">ویدیو</string>
@@ -403,10 +401,7 @@
     <string name="stats_for_nerds">آمار برای خوره‌ها</string>
     <string name="limit_to_runtime">محدود به زمان اجرا</string>
     <string name="home_tab_content">محتوای تب خانه</string>
-    <string name="import_format_freetube">فری‌توب</string>
     <string name="export_playlists_to">برون‌ریزی سیاهه‌های پخش به</string>
-    <string name="import_format_piped">پایپد / لیبره‌توب</string>
-    <string name="import_format_newpipe">نیوپایپ</string>
     <string name="shorts_notifications">اطلاع رسانی برای ویدیوهای کوتاه</string>
     <string name="creation_date">تاریخ ساخت</string>
     <string name="creation_date_reversed">تاریخ ساخت (معکوس)</string>
@@ -415,7 +410,6 @@
     <string name="import_subscriptions_from">درون‌ریزی اشتراک‌ها از</string>
     <string name="export_subscriptions_to">برون‌ریزی اشتراک‌ها به</string>
     <string name="import_playlists_from">درون‌ریزی سیاههٔ پخش از</string>
-    <string name="import_format_youtube_csv">یوتوب (CSV)</string>
     <string name="mark_as_unwatched">علامت به تماشا نشده</string>
     <string name="welcome">به لیبره‌توب خوش‌آمدید</string>
     <string name="choose_instance">لطفاً نخست نمونه‌ای برگزینید!</string>

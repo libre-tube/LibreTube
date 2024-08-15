@@ -84,8 +84,6 @@
     <string name="app_icon">Ikonoa</string>
     <string name="enabled">Piztuta</string>
     <string name="disabled">Itzalita</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
     <string name="playOnBackground">Erreproduzitu atzeko planoan</string>
     <string name="update_available">%1$s bertsioa eskuragarri dago</string>
     <string name="update_available_text">Eguneraketa berria eskuragarri dago. Egin klik GitHub-eko deskarga orrialdera joateko.</string>

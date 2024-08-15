@@ -101,8 +101,6 @@
     <string name="enabled">Activé</string>
     <string name="disabled">Désactivé</string>
     <string name="app_icon">Icône</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
     <string name="playOnBackground">Lire en arrière-plan</string>
     <string name="advanced_summary">Téléchargements et réinitialisation</string>
     <string name="update_available">Mise à jour disponible</string>
@@ -412,11 +410,7 @@
     <string name="play_automatically_summary">Lance la vidéo automatiquement durant la sélection</string>
     <string name="import_subscriptions_from">Importer les abonnements depuis</string>
     <string name="export_subscriptions_to">Exporter les abonnements vers</string>
-    <string name="import_format_newpipe">NewPipe</string>
-    <string name="import_format_freetube">FreeTube</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="import_playlists_from">Importer des listes de lecture depuis</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
     <string name="export_playlists_to">Exporter les listes de lecture vers</string>
     <string name="home_tab_content">Contenu de la page d\'accueil</string>
     <string name="welcome">Bienvenue sur LibreTube</string>

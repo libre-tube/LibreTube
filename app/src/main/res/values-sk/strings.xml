@@ -93,7 +93,6 @@
     <string name="color_purple">Príjemne fialový</string>
     <string name="material_you">Material You</string>
     <string name="sponsorblock_notifications">Oznámenia</string>
-    <string name="youtube">YouTube</string>
     <string name="category_intro">Animácia v prestávke/úvode</string>
     <string name="category_preview">Náhľad/Zhrnutie</string>
     <string name="appearance">Vzhľad</string>
@@ -121,7 +120,6 @@
     <string name="category_preview_summary">Pre segmenty popisujúce budúci obsah bez ďalších informácií. Ak obsahuje klipy, ktoré sa objavujú len tu, je veľmi pravdepodobné, že ide o nesprávnu kategóriu</string>
     <string name="playOnBackground">Prehrať na pozadí</string>
     <string name="update_available_text">K dispozícii je nová aktualizácia. Kliknutím otvoríte stránku vydaní GitHub.</string>
-    <string name="piped">Piped</string>
     <string name="playback_speed">Rýchlosť prehrávania</string>
     <string name="advanced_summary">Sťahovanie a resetovanie</string>
     <string name="app_uptodate">Používate najnovšiu verziu.</string>
@@ -267,7 +265,6 @@
     <string name="dearrow">Povoliť DeArrow</string>
     <string name="import_playlists_from">Importovať zoznamy skladieb z</string>
     <string name="export_subscriptions_to">Exportovať odbery do</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">Neznámy jazyk zvuku</string>
     <string name="duration">Trvanie</string>
@@ -356,8 +353,6 @@
     <string name="fullscreen_gestures">Gestá vstupu/opustenia celej obrazovky</string>
     <string name="duration_span">Trvanie: %1$s</string>
     <string name="vote_for_segment">Hlasovať za segment</string>
-    <string name="import_format_freetube">FreeTube</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="continue_watching">Pokračovať v sledovaní</string>
     <string name="contribute_to_sponsorblock">Prispejte do SponsorBlock</string>
     <string name="filename_too_long">Názov súboru je príliš dlhý!</string>
@@ -523,7 +518,6 @@
         <item quantity="few">Pred %d rokmi</item>
         <item quantity="other">Pred %d rokmi</item>
     </plurals>
-    <string name="import_format_newpipe">NewPipe</string>
     <string name="change_instance">Zmeniť inštanciu</string>
     <string name="suggest_change_instance">Načítanie trvá dlhšie ako zvyčajne. Zvážte zmenu inštancie</string>
     <string name="change">Zmeniť</string>

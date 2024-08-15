@@ -52,7 +52,6 @@
     <string name="category_intro_summary">Et interval uden egentligt indhold. Kan være en pause, statisk billede, gentagende animation. Bør ikke bruges til overgange, der indeholder info</string>
     <string name="sponsorblock_notifications">Notifikationer</string>
     <string name="app_icon">Ikon</string>
-    <string name="youtube">YouTube</string>
     <string name="playOnBackground">Afspil i baggrunden</string>
     <string name="update_available">Opdatering tilgængelig</string>
     <string name="update_available_text">Ny opdatering tilgængelig. Klik for at åbne Github-udgivelsessiden.</string>
@@ -110,7 +109,6 @@
     <string name="color_purple">Lemfældig lilla</string>
     <string name="material_you">Material You</string>
     <string name="update_summary">Tjek for opdatering</string>
-    <string name="piped">Piped</string>
     <string name="app_uptodate">Kører den seneste version.</string>
     <string name="player">Afspiller</string>
     <string name="advanced_summary">Downloads og nulstil</string>
@@ -350,7 +348,6 @@
     <string name="visibility_unlisted">Ikke opført</string>
     <string name="remove_watched_videos">Fjern sete videoer</string>
     <string name="segment_submitted">Segment indsendt</string>
-    <string name="import_format_youtube_csv">Youtube (CSV)</string>
     <string name="download_playlist">Download playliste</string>
     <string name="download_playlist_note">Vælg venligst den maksimale lyd-/video-kvalitet at downloade. Undertekster vil kun blive downloadet hvis tilgængelige.</string>
     <string name="enqueue_playlist_description">Viser en notifikation, når videoer i en playliste bliver sat i kø til at blive downloaded.</string>
@@ -399,7 +396,6 @@
     <string name="descriptive_audio_track">beskrivende</string>
     <string name="original_or_main_audio_track">original eller primær</string>
     <string name="tooltip_dismiss">Fjern</string>
-    <string name="import_format_newpipe">NewPipe</string>
     <string name="export_playlists_to">Eksportér playlister til</string>
     <string name="renamePlaylist">Omdøb playliste</string>
     <string name="help">Hjælp</string>
@@ -450,8 +446,6 @@
     <string name="auto_generated">autogenereret</string>
     <string name="import_playlists_from">Importér playlister fra</string>
     <string name="resolution_limited">begrænset</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
-    <string name="import_format_freetube">FreeTube</string>
     <string name="home_tab_content">Indhold i hjem-fane</string>
     <string name="sponsorblock_user_id">SponsorBlock BrugerID</string>
     <string name="successfully_removed_from_playlist">\"%1$s\" blev fjernet fra playlisten.</string>

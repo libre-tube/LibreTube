@@ -98,8 +98,6 @@
     <string name="color_purple">Púrpura</string>
     <string name="material_you">Material You</string>
     <string name="app_icon">Icono</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
     <string name="sponsorblock_notifications">Notificaciones</string>
     <string name="enabled">Activado</string>
     <string name="disabled">Desactivado</string>
@@ -410,13 +408,9 @@
     <string name="creation_date">Fecha de creación</string>
     <string name="alphabetic">Alfabético</string>
     <string name="alphabetic_reversed">Alfabético (invertido)</string>
-    <string name="import_format_newpipe">NewPipe</string>
     <string name="import_subscriptions_from">Importar suscripciones desde</string>
     <string name="export_subscriptions_to">Exportar suscripciones para</string>
-    <string name="import_format_freetube">FreeTube</string>
-    <string name="import_format_youtube_csv">YouTube (CSV)</string>
     <string name="export_playlists_to">Exportar listas para</string>
-    <string name="import_format_piped">Piped / LibreTube</string>
     <string name="import_playlists_from">Importar listas desde</string>
     <string name="home_tab_content">Contenido de pestaña \"Inicio\"</string>
     <string name="mark_as_unwatched">Marcar como no visto</string>
