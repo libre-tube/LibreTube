@@ -22,7 +22,7 @@
     <string name="customization">Personalització</string>
     <string name="advanced">Avançat</string>
     <string name="login">Inicia sessió</string>
-    <string name="logout">Surt</string>
+    <string name="logout">Tanca la sessió</string>
     <string name="already_logged_in">Sessió ja iniciada. Pots tancar la sessió del vostre compte.</string>
     <string name="register">Registra\'t</string>
     <string name="cannotDownload">No es pot descarregar aquesta transmissió.</string>
@@ -54,7 +54,7 @@
     <string name="downloading">S\'està baixant…</string>
     <string name="cancel">Cancel·la</string>
     <string name="loggedIn">Connectat.</string>
-    <string name="loggedout">Sesió tancada.</string>
+    <string name="loggedout">Sessió tancada.</string>
     <string name="registered">Registrat. Ara pots subscriure\'t a canals.</string>
     <string name="instances">Elegeix…</string>
     <string name="customInstance">Personalitzat</string>
@@ -127,7 +127,7 @@
     <string name="enabled">Activat</string>
     <string name="disabled">Desactivat</string>
     <string name="playOnBackground">Reprodueix en segon plà</string>
-    <string name="update_available">La versió %1$s està disponible</string>
+    <string name="update_available">Actualització disponible</string>
     <string name="update_available_text">Nova actualització disponible. Feu clic per obrir la pàgina de versions de GitHub.</string>
     <string name="appearance">Aparença</string>
     <string name="downloads">Descàrregues</string>
@@ -533,4 +533,14 @@
     <string name="import_playlists_from">Importa llistes de reproducció des de</string>
     <string name="auto_generated">generat automàticament</string>
     <string name="tooltip_dismiss">Descarta</string>
+    <string name="albums">Àlbums</string>
+    <string name="best_quality">Millors</string>
+    <string name="import_temp_playlist_summary">Voleu crear una nova llista de reproducció anomenada \'%1$s\'? La llista contindrà %2$d vídeos.</string>
+    <string name="thumbnail_time">Temps de la miniatura</string>
+    <string name="contribute_to_dearrow">Contribueix a DeArrow</string>
+    <string name="show_updates">Comprova si hi ha actualitzacions automàticament</string>
+    <string name="title">Títol</string>
+    <string name="screenshot">Captura de pantalla</string>
+    <string name="external_download_provider">Proveïdor extern de descàrregues</string>
+    <string name="external_download_provider_summary">Introduïu el nom del paquet de l\'app que voleu fer servir per descarregar vídeos. Deixeu-ho en blanc per fer servir el descarregador integrat de LibreTube.</string>
 </resources>
