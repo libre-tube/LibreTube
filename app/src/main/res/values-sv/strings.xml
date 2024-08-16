@@ -541,4 +541,5 @@
     <string name="external_download_provider">Extern nedladdningsleverantör</string>
     <string name="import_temp_playlist">Importera tillfällig spellista?</string>
     <string name="screenshot">Skärmbild</string>
+    <string name="pip">PiP</string>
 </resources>
