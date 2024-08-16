@@ -538,4 +538,5 @@
     <string name="external_download_provider">外部下载提供者</string>
     <string name="external_download_provider_summary">输入你想用于下载视频的包的名称。留空使用 LibreTube 的内置下载器。</string>
     <string name="screenshot">屏幕截图</string>
+    <string name="pip">画中画</string>
 </resources>
