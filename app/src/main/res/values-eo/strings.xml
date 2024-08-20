@@ -35,7 +35,7 @@
     <string name="empty">Vi devas enigi uzantnomon kaj pasvorton.</string>
     <string name="notgmail">Ĉi tio estas por Piped-konto</string>
     <string name="defres">Video-rezolucio</string>
-    <string name="grid">Krad-vertikaloj</string>
+    <string name="grid">Krad-vertikaloj (portreto)</string>
     <string name="emptyList">Estas nenio ĉi tie.</string>
     <string name="deletePlaylist">Forigi ludliston</string>
     <string name="areYouSure">Ĉu forigi la ludliston\?</string>
@@ -116,4 +116,6 @@
     <string name="failed_fetching_instances">Ne eblis akiri disponeblajn instancojn.</string>
     <string name="push_channel_description">Montras sciigon kiam novaj fluoj disponeblas.</string>
     <string name="lbry_hls_summary">Uzi LBRY HLS por enfluado se disponebla</string>
+    <string name="albums">Albumoj</string>
+    <string name="comments_count">Komentoj (%1$s)</string>
 </resources>
