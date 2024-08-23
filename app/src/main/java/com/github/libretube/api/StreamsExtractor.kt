@@ -30,7 +30,7 @@ object StreamsExtractor {
         val resp = StreamInfo.getInfo("https://www.youtube.com/watch?v=$videoId")
         return Streams(
             title = resp.name,
-            description = resp.description.toString(),
+            description = resp.description.content,
             uploader = resp.uploaderName,
             uploaderAvatar = resp.uploaderAvatars.maxBy { it.height }.url,
             uploaderUrl = resp.uploaderUrl.replace("https://www.youtube.com", ""),
@@ -56,7 +56,7 @@ object StreamsExtractor {
             uploadTimestamp = resp.uploadDate.offsetDateTime().toInstant().toKotlinInstant(),
             uploaded = resp.uploadDate.offsetDateTime().toEpochSecond(),
             thumbnailUrl = resp.thumbnails.maxBy { it.height }.url,
-            relatedStreams = resp.relatedItems.map { it as StreamInfoItem }.map {
+            relatedStreams = resp.relatedItems.filterIsInstance<StreamInfoItem>().map {
                 StreamItem(
                     it.url.replace("https://www.youtube.com", ""),
                     StreamItem.TYPE_STREAM,
@@ -72,7 +72,7 @@ object StreamsExtractor {
                     it.uploadDate?.offsetDateTime()?.toEpochSecond() ?: 0L,
                     it.shortDescription,
                     it.isShortFormContent,
-                    )
+                )
             },
             chapters = resp.streamSegments.map {
                 ChapterSegment(
