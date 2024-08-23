@@ -62,6 +62,8 @@ class PlayerViewModel(
                     JsonHelper.json.decodeFromString<Message>(this).message
                 }?.getOrNull() ?: context.getString(R.string.server_error)
                 return@withContext null to errorMessage
+            } catch (e: Exception) {
+                return@withContext null to e.message
             }
 
             return@withContext streamsInfo to null
