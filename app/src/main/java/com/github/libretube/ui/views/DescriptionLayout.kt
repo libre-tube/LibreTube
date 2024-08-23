@@ -15,6 +15,7 @@ import com.github.libretube.R
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.databinding.DescriptionLayoutBinding
 import com.github.libretube.extensions.formatShort
+import com.github.libretube.helpers.ClipboardHelper
 import com.github.libretube.ui.activities.VideoTagsAdapter
 import com.github.libretube.util.HtmlParser
 import com.github.libretube.util.LinkHandler
@@ -34,6 +35,10 @@ class DescriptionLayout(
     init {
         binding.playerTitleLayout.setOnClickListener {
             toggleDescription()
+        }
+        binding.playerTitleLayout.setOnLongClickListener {
+            streams?.title?.let { ClipboardHelper.save(context, text = it) }
+            true
         }
     }
 
