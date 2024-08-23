@@ -12,6 +12,9 @@ interface PlaylistBookmarkDao {
     @Query("SELECT * FROM playlistBookmark")
     suspend fun getAll(): List<PlaylistBookmark>
 
+    @Query("SELECT * FROM playlistBookmark WHERE playlistId = :playlistId LIMIT 1")
+    suspend fun findById(playlistId: String): PlaylistBookmark?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(bookmark: PlaylistBookmark)
 

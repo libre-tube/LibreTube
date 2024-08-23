@@ -29,6 +29,7 @@ import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.ui.adapters.PlaylistBookmarkAdapter
 import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
@@ -140,7 +141,9 @@ class LibraryFragment : DynamicLayoutManagerFragment() {
     private fun initBookmarks() {
         lifecycleScope.launch {
             val bookmarks = withContext(Dispatchers.IO) {
-                DatabaseHolder.Database.playlistBookmarkDao().getAll()
+                DatabaseHolder.Database.playlistBookmarkDao().getAll().map {
+                    it.copy(thumbnailUrl = ProxyHelper.rewriteUrl(it.thumbnailUrl))
+                }
             }
 
             val binding = _binding ?: return@launch
