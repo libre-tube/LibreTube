@@ -114,3 +114,9 @@
 
 # Settings fragments are loaded through reflection
 -keep class com.github.libretube.ui.preferences.** { *; }
+
+## Rules for NewPipeExtractor
+-keep class org.schabi.newpipe.extractor.timeago.patterns.** { *; }
+-keep class org.mozilla.javascript.** { *; }
+-keep class org.mozilla.classfile.ClassFileWriter
+-dontwarn org.mozilla.javascript.tools.**

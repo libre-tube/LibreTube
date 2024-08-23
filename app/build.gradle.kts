@@ -127,6 +127,9 @@ dependencies {
     implementation(libs.kotlinx.datetime)
     implementation(libs.kotlinx.serialization.retrofit)
 
+    /* NewPipe Extractor */
+    implementation(libs.newpipeextractor)
+
     /* Cronet and Coil */
     coreLibraryDesugaring(libs.desugaring)
     implementation(libs.cronet.embedded)

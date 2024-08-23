@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.media3.common.Player
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.StreamsExtractor
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.extensions.move
 import com.github.libretube.extensions.runCatchingIO
@@ -179,7 +180,7 @@ object PlayingQueue {
     }
 
     fun insertByVideoId(videoId: String) = runCatchingIO {
-        val streams = RetrofitInstance.api.getStreams(videoId.toID())
+        val streams = StreamsExtractor.extractStreams(videoId.toID())
         add(streams.toStreamItem(videoId))
     }
 

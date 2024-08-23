@@ -36,7 +36,7 @@ object ProxyHelper {
      * Detect whether the proxy should be used or not for a given stream URL based on user preferences
      */
     fun unwrapStreamUrl(url: String): String {
-        return if (PlayerHelper.disablePipedProxy) {
+        return if (PlayerHelper.disablePipedProxy && !PlayerHelper.localStreamExtraction) {
             unwrapUrl(url)
         } else {
             url
