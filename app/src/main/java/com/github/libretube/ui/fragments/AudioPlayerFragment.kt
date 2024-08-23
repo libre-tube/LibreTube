@@ -34,6 +34,7 @@ import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateIfChanged
 import com.github.libretube.helpers.AudioHelper
 import com.github.libretube.helpers.BackgroundHelper
+import com.github.libretube.helpers.ClipboardHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
@@ -116,6 +117,11 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         // select the title TV in order for it to automatically scroll
         binding.title.isSelected = true
         binding.uploader.isSelected = true
+
+        binding.title.setOnLongClickListener {
+            ClipboardHelper.save(requireContext(), text = binding.title.text.toString())
+            true
+        }
 
         binding.minimizePlayer.setOnClickListener {
             val mainMotionLayout = mainActivity.binding.mainMotionLayout
