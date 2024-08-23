@@ -47,4 +47,5 @@ object IntentData {
     const val tabData = "tabData"
     const val videoList = "videoList"
     const val nextPage = "nextPage"
+    const val videoInfo = "videoInfo"
 }

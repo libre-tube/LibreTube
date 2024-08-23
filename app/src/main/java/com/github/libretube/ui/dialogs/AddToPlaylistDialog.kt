@@ -15,12 +15,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
-import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.StreamsExtractor
 import com.github.libretube.api.obj.Playlists
+import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogAddToPlaylistBinding
 import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.ui.models.PlaylistViewModel
 import com.github.libretube.util.PlayingQueue
@@ -32,14 +32,15 @@ import kotlinx.coroutines.launch
  * videoId: The id of the video to add. If non is provided, insert the whole playing queue
  */
 class AddToPlaylistDialog : DialogFragment() {
-    private var videoId: String? = null
+    private var videoInfo: StreamItem? = null
     private val viewModel: PlaylistViewModel by activityViewModels()
 
     var playlists = emptyList<Playlists>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        videoId = arguments?.getString(IntentData.videoId)
+        videoInfo = arguments?.parcelable(IntentData.videoInfo)
+        Log.e("video info", videoInfo.toString())
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -110,15 +111,7 @@ class AddToPlaylistDialog : DialogFragment() {
     @SuppressLint("StringFormatInvalid")
     private suspend fun addToPlaylist(playlistId: String, playlistName: String) {
         val appContext = context?.applicationContext ?: return
-        val streams = when {
-            videoId != null -> listOfNotNull(
-                runCatching {
-                    StreamsExtractor.extractStreams(videoId!!).toStreamItem(videoId!!)
-                }.getOrNull()
-            )
-
-            else -> PlayingQueue.getStreams()
-        }
+        val streams = videoInfo?.let { listOf(it) } ?: PlayingQueue.getStreams()
 
         val success = try {
             if (streams.isEmpty()) throw IllegalArgumentException()

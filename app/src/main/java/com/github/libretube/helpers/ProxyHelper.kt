@@ -19,13 +19,26 @@ object ProxyHelper {
     }
 
     fun rewriteUrl(url: String?): String? {
+        if (url == null) return null
+
         val proxyUrl = PreferenceHelper.getString(PreferenceKeys.IMAGE_PROXY_URL, "")
             .toHttpUrlOrNull() ?: return url
 
-        return url?.toHttpUrlOrNull()?.newBuilder()
-            ?.host(proxyUrl.host)
-            ?.port(proxyUrl.port)
-            ?.toString()
+        val parsedUrl = url.toHttpUrlOrNull() ?: return url
+        if (parsedUrl.queryParameter("host").isNullOrEmpty()) {
+            return parsedUrl.newBuilder()
+                .host(proxyUrl.host)
+                .port(proxyUrl.port)
+                .setQueryParameter("host", parsedUrl.host)
+                .build()
+                .toString()
+        }
+
+        return parsedUrl.newBuilder()
+            .host(proxyUrl.host)
+            .port(proxyUrl.port)
+            .build()
+            .toString()
     }
 
     /**
