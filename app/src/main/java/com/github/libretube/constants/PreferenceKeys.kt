@@ -128,6 +128,7 @@ object PreferenceKeys {
     const val MAX_CONCURRENT_DOWNLOADS = "max_parallel_downloads"
     const val EXTERNAL_DOWNLOAD_PROVIDER = "external_download_provider"
     const val DISABLE_VIDEO_IMAGE_PROXY = "disable_video_image_proxy"
+    const val LOCAL_STREAM_EXTRACTION = "local_stream_extraction"
 
     // History
     const val WATCH_HISTORY_SIZE = "watch_history_size"

@@ -191,7 +191,7 @@ object PlaylistsHelper {
                         MAX_CONCURRENT_IMPORT_CALLS
                     ).map { videos ->
                         videos.parallelMap {
-                            runCatching { RetrofitInstance.api.getStreams(it) }
+                            runCatching { StreamsExtractor.extractStreams(it) }
                                 .getOrNull()
                                 ?.toStreamItem(it)
                         }.filterNotNull()

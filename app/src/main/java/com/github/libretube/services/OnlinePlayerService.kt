@@ -28,6 +28,7 @@ import com.github.libretube.LibreTubeApp.Companion.PLAYER_CHANNEL_NAME
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.StreamsExtractor
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
@@ -253,7 +254,7 @@ class OnlinePlayerService : LifecycleService() {
 
         lifecycleScope.launch(Dispatchers.IO) {
             streams = runCatching {
-                RetrofitInstance.api.getStreams(videoId)
+                StreamsExtractor.extractStreams(videoId)
             }.getOrNull() ?: return@launch
 
             // clear the queue if it shouldn't be kept explicitly

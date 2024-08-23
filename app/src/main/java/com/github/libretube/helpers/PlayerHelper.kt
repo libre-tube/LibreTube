@@ -350,6 +350,12 @@ object PlayerHelper {
             false
         )
 
+    val localStreamExtraction: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.LOCAL_STREAM_EXTRACTION,
+            true
+        )
+
     val useHlsOverDash: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.USE_HLS_OVER_DASH,

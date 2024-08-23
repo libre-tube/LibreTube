@@ -16,6 +16,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.StreamsExtractor
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogAddToPlaylistBinding
@@ -112,7 +113,7 @@ class AddToPlaylistDialog : DialogFragment() {
         val streams = when {
             videoId != null -> listOfNotNull(
                 runCatching {
-                    RetrofitInstance.api.getStreams(videoId!!).toStreamItem(videoId!!)
+                    StreamsExtractor.extractStreams(videoId!!).toStreamItem(videoId!!)
                 }.getOrNull()
             )
 

@@ -14,6 +14,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.StreamsExtractor
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.api.obj.Subtitle
@@ -81,7 +82,7 @@ class DownloadDialog : DialogFragment() {
         lifecycleScope.launch {
             val response = try {
                 withContext(Dispatchers.IO) {
-                    RetrofitInstance.api.getStreams(videoId)
+                    StreamsExtractor.extractStreams(videoId)
                 }
             } catch (e: IOException) {
                 println(e)

@@ -20,6 +20,7 @@ import com.github.libretube.LibreTubeApp.Companion.DOWNLOAD_CHANNEL_NAME
 import com.github.libretube.R
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.StreamsExtractor
 import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.Download
@@ -109,7 +110,7 @@ class DownloadService : LifecycleService() {
         lifecycleScope.launch(coroutineContext) {
             try {
                 val streams = withContext(Dispatchers.IO) {
-                    RetrofitInstance.api.getStreams(videoId)
+                    StreamsExtractor.extractStreams(videoId)
                 }
 
                 val thumbnailTargetPath = getDownloadPath(DownloadHelper.THUMBNAIL_DIR, fileName)
@@ -386,7 +387,7 @@ class DownloadService : LifecycleService() {
      * Regenerate stream url using available info format and quality.
      */
     private suspend fun regenerateLink(item: DownloadItem) {
-        val streams = RetrofitInstance.api.getStreams(item.videoId)
+        val streams = StreamsExtractor.extractStreams(item.videoId)
         val stream = when (item.type) {
             FileType.AUDIO -> streams.audioStreams
             FileType.VIDEO -> streams.videoStreams

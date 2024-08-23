@@ -10,6 +10,7 @@ import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.StreamsExtractor
 import com.github.libretube.api.obj.Message
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
@@ -57,7 +58,7 @@ class PlayerViewModel : ViewModel() {
             if (isOrientationChangeInProgress && streamsInfo != null) return@withContext streamsInfo to null
 
             streamsInfo = try {
-                RetrofitInstance.api.getStreams(videoId).deArrow(videoId)
+                StreamsExtractor.extractStreams(videoId).deArrow(videoId)
             } catch (e: IOException) {
                 return@withContext null to context.getString(R.string.unknown_error)
             } catch (e: HttpException) {
