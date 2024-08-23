@@ -1,0 +1,6 @@
+* feat: local streams extraction
+* feat: quick share action to add video to playlist
+* feat: share dialog redesign (including copy link feature)
+* feat: show total playlist duration
+* feat: button to screenshot/capture current frame
+* feat: improve about activity and device info dialog
