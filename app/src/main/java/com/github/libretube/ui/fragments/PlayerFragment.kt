@@ -104,8 +104,8 @@ import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.listeners.SeekbarPreviewListener
 import com.github.libretube.ui.models.ChaptersViewModel
 import com.github.libretube.ui.models.CommentsViewModel
-import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.models.CommonPlayerViewModel
+import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.CommentsSheet
 import com.github.libretube.ui.sheets.StatsSheet
@@ -282,7 +282,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
 
             if (events.contains(Player.EVENT_TRACKS_CHANGED)) {
-                PlayerHelper.setPreferredAudioQuality(requireContext(), viewModel.player, viewModel.trackSelector)
+                PlayerHelper.setPreferredAudioQuality(
+                    requireContext(),
+                    viewModel.player,
+                    viewModel.trackSelector
+                )
             }
         }
 
@@ -628,9 +632,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         )
 
         binding.relPlayerSave.setOnClickListener {
-            val newAddToPlaylistDialog = AddToPlaylistDialog()
-            newAddToPlaylistDialog.arguments = bundleOf(IntentData.videoId to videoId)
-            newAddToPlaylistDialog.show(childFragmentManager, AddToPlaylistDialog::class.java.name)
+            if (!::streams.isInitialized) return@setOnClickListener
+
+            AddToPlaylistDialog().apply {
+                arguments = bundleOf(IntentData.videoInfo to streams.toStreamItem(videoId))
+            }.show(childFragmentManager, AddToPlaylistDialog::class.java.name)
         }
 
         playerBinding.skipPrev.setOnClickListener {
@@ -1074,7 +1080,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             playerGestureControlsViewBinding,
             chaptersViewModel
         )
-        binding.player.initPlayerOptions(viewModel, commonPlayerViewModel, viewLifecycleOwner, viewModel.trackSelector, this)
+        binding.player.initPlayerOptions(
+            viewModel,
+            commonPlayerViewModel,
+            viewLifecycleOwner,
+            viewModel.trackSelector,
+            this
+        )
 
         binding.descriptionLayout.setStreams(streams)
 
@@ -1534,11 +1546,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
     }
 
-    private fun updateCurrentSubtitle(subtitle: Subtitle?) = viewModel.trackSelector.updateParameters {
-        val roleFlags = if (subtitle?.code != null) getSubtitleRoleFlags(subtitle) else 0
-        setPreferredTextRoleFlags(roleFlags)
-        setPreferredTextLanguage(subtitle?.code)
-    }
+    private fun updateCurrentSubtitle(subtitle: Subtitle?) =
+        viewModel.trackSelector.updateParameters {
+            val roleFlags = if (subtitle?.code != null) getSubtitleRoleFlags(subtitle) else 0
+            setPreferredTextRoleFlags(roleFlags)
+            setPreferredTextLanguage(subtitle?.code)
+        }
 
     fun onUserLeaveHint() {
         if (shouldStartPiP()) {
@@ -1550,7 +1563,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     private val pipParams
         get() = PictureInPictureParamsCompat.Builder()
-            .setActions(PlayerHelper.getPiPModeActions(requireActivity(), viewModel.player.isPlaying))
+            .setActions(
+                PlayerHelper.getPiPModeActions(
+                    requireActivity(),
+                    viewModel.player.isPlaying
+                )
+            )
             .setAutoEnterEnabled(PlayerHelper.pipEnabled && viewModel.player.isPlaying)
             .apply {
                 if (viewModel.player.isPlaying) {

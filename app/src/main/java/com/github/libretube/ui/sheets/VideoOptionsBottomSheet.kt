@@ -62,16 +62,20 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                 }
                 // Add Video to Playlist Dialog
                 R.string.addToPlaylist -> {
-                    val newAddToPlaylistDialog = AddToPlaylistDialog()
-                    newAddToPlaylistDialog.arguments = bundleOf(IntentData.videoId to videoId)
-                    newAddToPlaylistDialog.show(
+                    AddToPlaylistDialog().apply {
+                        arguments = bundleOf(IntentData.videoInfo to streamItem)
+                    }.show(
                         parentFragmentManager,
                         AddToPlaylistDialog::class.java.name
                     )
                 }
 
                 R.string.download -> {
-                    DownloadHelper.startDownloadDialog(requireContext(), parentFragmentManager, videoId)
+                    DownloadHelper.startDownloadDialog(
+                        requireContext(),
+                        parentFragmentManager,
+                        videoId
+                    )
                 }
 
                 R.string.share -> {

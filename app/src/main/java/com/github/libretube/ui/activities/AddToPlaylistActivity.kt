@@ -4,12 +4,21 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
+import androidx.lifecycle.lifecycleScope
+import com.github.libretube.R
+import com.github.libretube.api.StreamsExtractor
+import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
+import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.IntentHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class AddToPlaylistActivity: BaseActivity() {
+class AddToPlaylistActivity : BaseActivity() {
     override val isDialogActivity: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +38,22 @@ class AddToPlaylistActivity: BaseActivity() {
             this
         ) { _, _ -> finish() }
 
-        AddToPlaylistDialog().apply {
-            arguments = bundleOf(IntentData.videoId to videoId)
-        }.show(supportFragmentManager, null)
+        lifecycleScope.launch(Dispatchers.IO) {
+            val videoInfo = if (PreferenceHelper.getToken().isEmpty()) {
+                try {
+                    StreamsExtractor.extractStreams(videoId).toStreamItem(videoId)
+                } catch (e: Exception) {
+                    toastFromMainDispatcher(R.string.unknown_error)
+                }
+            } else {
+                StreamItem(videoId)
+            }
+
+            withContext(Dispatchers.Main) {
+                AddToPlaylistDialog().apply {
+                    arguments = bundleOf(IntentData.videoInfo to videoInfo)
+                }.show(supportFragmentManager, null)
+            }
+        }
     }
 }
