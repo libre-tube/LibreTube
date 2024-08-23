@@ -290,8 +290,8 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
         if (!isBookmarked) return
         withContext(Dispatchers.IO) {
             // update the playlist thumbnail and title if bookmarked
-            val playlistBookmark = DatabaseHolder.Database.playlistBookmarkDao().getAll()
-                .firstOrNull { it.playlistId == playlistId } ?: return@withContext
+            val playlistBookmark = DatabaseHolder.Database.playlistBookmarkDao().findById(playlistId)
+                ?: return@withContext
             if (playlistBookmark.thumbnailUrl != playlist.thumbnailUrl ||
                 playlistBookmark.playlistName != playlist.name ||
                 playlistBookmark.videos != playlist.videos
