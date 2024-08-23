@@ -538,4 +538,5 @@
     <string name="external_download_provider_summary">動画のダウンロードに使うアプリのパッケージ名を入力します。LibreTube 内蔵のダウンローダーを使うには空欄のままにします。</string>
     <string name="external_download_provider">外部のダウンロード機能を使用</string>
     <string name="screenshot">スクリーンショット</string>
+    <string name="pip">PiP</string>
 </resources>

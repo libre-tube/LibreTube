@@ -208,7 +208,7 @@
     <string name="required_network">Необхідне з\'єднання</string>
     <string name="network_metered">Лімітоване</string>
     <string name="repeat_mode_current">Поточний</string>
-    <string name="picture_in_picture">Картинка в картинці</string>
+    <string name="picture_in_picture">Зображення в зображенні</string>
     <string name="new_videos_badge_summary">Показувати значок із кількістю нових відео, якщо такі є</string>
     <string name="repeat_mode_none">Вимкнено</string>
     <string name="skip_segment">Пропустити сегмент</string>
@@ -548,5 +548,5 @@
     <string name="external_download_provider">Зовнішній постачальник завантажень</string>
     <string name="external_download_provider_summary">Введіть назву пакету застосунку, який потрібно використовувати для завантаження відео. Залиште порожнім, щоб використовувати вбудований завантажувач LibreTube.</string>
     <string name="screenshot">Знімок екрана</string>
-    <string name="pip">КвК</string>
+    <string name="pip">PiP</string>
 </resources>

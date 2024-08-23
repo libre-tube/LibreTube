@@ -546,4 +546,6 @@
     <string name="best_quality">Найлепшая</string>
     <string name="external_download_provider_summary">Назва пакета праграмы, якое будзе выкарыстоўвацца для спампоўкі відэа. Пакіньце пустым, каб спампоўваць праз LibreTube.</string>
     <string name="external_download_provider">Знешні запамповальнік</string>
+    <string name="pip">КўК</string>
+    <string name="screenshot">Скрыншот</string>
 </resources>

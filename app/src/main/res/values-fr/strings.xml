@@ -544,4 +544,5 @@
     <string name="external_download_provider">Fournisseur de téléchargement externe</string>
     <string name="external_download_provider_summary">Entrez le nom du package de l\'application que vous souhaitez utiliser pour télécharger des vidéos. Laissez vide pour utiliser le téléchargeur qui est intégré dans LibreTube.</string>
     <string name="screenshot">Capture d\'écran</string>
+    <string name="pip">PiP</string>
 </resources>

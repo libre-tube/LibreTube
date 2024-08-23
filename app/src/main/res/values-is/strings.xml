@@ -541,4 +541,5 @@
     <string name="download_playlist_note">Veldu mestu hljóð- og myndgæði til að sækja. Skjátextar verða einungis sóttir ef þeir eru tiltækir.</string>
     <string name="enqueue_playlist_description">Birtir tilkynningu þegar myndskeið eru sett í niðurhalsröð fyrir spilunarlista.</string>
     <string name="screenshot">Skjámynd</string>
+    <string name="pip">MíM</string>
 </resources>
