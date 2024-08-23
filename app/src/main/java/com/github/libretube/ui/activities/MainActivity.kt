@@ -441,6 +441,16 @@ class MainActivity : BaseActivity() {
                 true
             }
 
+            R.id.action_donate -> {
+                IntentHelper.openLinkFromHref(
+                    this,
+                    supportFragmentManager,
+                    AboutActivity.DONATE_URL,
+                    forceDefaultOpen = true
+                )
+                true
+            }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
