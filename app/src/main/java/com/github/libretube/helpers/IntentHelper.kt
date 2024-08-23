@@ -36,10 +36,10 @@ object IntentHelper {
         }
     }
 
-    fun openLinkFromHref(context: Context, fragmentManager: FragmentManager, link: String) {
+    fun openLinkFromHref(context: Context, fragmentManager: FragmentManager, link: String, forceDefaultOpen: Boolean = false) {
         val resolveInfoList = getResolveInfo(context, link)
 
-        if (resolveInfoList.isEmpty()) {
+        if (resolveInfoList.isEmpty() || forceDefaultOpen) {
             try {
                 context.startActivity(getResolveIntent(link))
             } catch (e: Exception) {
