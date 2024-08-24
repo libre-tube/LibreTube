@@ -549,4 +549,6 @@
     <string name="external_download_provider_summary">Введіть назву пакету застосунку, який потрібно використовувати для завантаження відео. Залиште порожнім, щоб використовувати вбудований завантажувач LibreTube.</string>
     <string name="screenshot">Знімок екрана</string>
     <string name="pip">PiP</string>
+    <string name="local_stream_extraction">Видобування локального потоку</string>
+    <string name="local_stream_extraction_summary">Безпосередньо отримувати інформацію про відтворення відео з YouTube без використання Piped.</string>
 </resources>
