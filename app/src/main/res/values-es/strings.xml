@@ -546,4 +546,5 @@
     <string name="screenshot">Capturas de pantalla</string>
     <string name="pip">PiP</string>
     <string name="local_stream_extraction_summary">Obten directamente la información de reproducción de un vídeo de YouTube sin utilizar Piped.</string>
+    <string name="local_stream_extraction">Adquisición de transmisión local</string>
 </resources>
