@@ -539,4 +539,6 @@
     <string name="external_download_provider_summary">输入你想用于下载视频的包的名称。留空使用 LibreTube 的内置下载器。</string>
     <string name="screenshot">屏幕截图</string>
     <string name="pip">画中画</string>
+    <string name="local_stream_extraction">本地流提取</string>
+    <string name="local_stream_extraction_summary">不使用 Piped 直接从 YouTube 取得视频播放信息。</string>
 </resources>
