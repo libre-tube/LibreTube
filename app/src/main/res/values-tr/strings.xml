@@ -542,4 +542,6 @@
     <string name="external_download_provider_summary">Video indirmek için kullanmak istediğiniz uygulamanın paket adını girin. LibreTube\'un dahili indiricisini kullanmak için boş bırakın.</string>
     <string name="screenshot">Ekran görüntüsü</string>
     <string name="pip">RiR</string>
+    <string name="local_stream_extraction">Yerel akış çıkarımı</string>
+    <string name="local_stream_extraction_summary">Piped kullanmadan YouTube\'dan doğrudan video oynatma bilgilerini alın.</string>
 </resources>
