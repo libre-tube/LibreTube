@@ -199,4 +199,5 @@
     <string name="unlimited_search_history">പരിധിയില്ലാത്ത തിരയൽ ചരിത്രം</string>
     <string name="alphabetic_reversed">അക്ഷരമാലാക്രമം (വിപരീതമായി)</string>
     <string name="creation_date_reversed">സൃഷ്‌ടിച്ച തീയതി (വിപരീതമായി)</string>
+    <string name="pip">PiP</string>
 </resources>
