@@ -542,4 +542,6 @@
     <string name="external_download_provider_summary">उस ऐप का पैकेज नाम दर्ज करें जिसका उपयोग आप वीडियो डाउनलोड करने के लिए करना चाहते हैं। लिब्रेट्यूब के अंतर्निर्मित डाउनलोडर का उपयोग करने के लिए खाली छोड़ दें।</string>
     <string name="screenshot">स्क्रीनशॉट</string>
     <string name="pip">PiP</string>
+    <string name="local_stream_extraction">स्थानीय स्ट्रीम प्राप्ती</string>
+    <string name="local_stream_extraction_summary">Piped का उपयोग किए बिना YouTube से सीधे वीडियो प्लेबैक जानकारी प्राप्त करें।</string>
 </resources>
