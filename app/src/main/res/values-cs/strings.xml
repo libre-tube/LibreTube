@@ -545,4 +545,6 @@
     <string name="external_download_provider_summary">Zadejte název balíčku aplikace, kterou chcete použít pro stahování videí. Ponechte prázdné pro použití vestavěné služby stahování LibreTube.</string>
     <string name="screenshot">Snímek obrazovky</string>
     <string name="pip">PiP</string>
+    <string name="local_stream_extraction">Lokální extrakce streamu</string>
+    <string name="local_stream_extraction_summary">Přímo načítat informace o přehrávání videa z YouTube bez použití služby Piped.</string>
 </resources>

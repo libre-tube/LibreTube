@@ -542,4 +542,6 @@
     <string name="external_download_provider_summary">Videoları yükləmək üçün istifadə etdiyiniz tətbiqin paket adını daxil edin. LibreTube-un daxili yükləyicisin istifadə etmək üçün boş buraxın.</string>
     <string name="screenshot">Ekran görüntüsü</string>
     <string name="pip">Ani</string>
+    <string name="local_stream_extraction_summary">Piped işlətmədən dərhal YouTube-dan video oynatma məlumatın əldə et.</string>
+    <string name="local_stream_extraction">Yerli axın əldə etmə</string>
 </resources>

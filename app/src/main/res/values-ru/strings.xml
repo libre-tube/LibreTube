@@ -548,4 +548,6 @@
     <string name="external_download_provider_summary">Название пакета приложения, которое будет использоваться для скачивания видео. Оставьте пустым, чтобы скачивать через LibreTube.</string>
     <string name="screenshot">Сохранить кадр</string>
     <string name="pip">КвК</string>
+    <string name="local_stream_extraction">Локальное извлечение потока</string>
+    <string name="local_stream_extraction_summary">Получать информацию о потоках напрямую из YouTube, не используя Piped.</string>
 </resources>

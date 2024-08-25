@@ -542,4 +542,6 @@
     <string name="external_download_provider_summary">Adja meg a videók letöltéséhez használni kívánt alkalmazás csomagnevét. A LibreTube beépített letöltőjének használatához hagyja üresen.</string>
     <string name="screenshot">Képernyőkép</string>
     <string name="pip">PiP</string>
+    <string name="local_stream_extraction">Helyi közvetítés kinyerése</string>
+    <string name="local_stream_extraction_summary">Közvetlen videólejátszási információk lekérése a YouTube-ról a Piped használata nélkül.</string>
 </resources>

@@ -23,7 +23,7 @@
     <string name="server_error">Parece que existe um problema com o servidor selecionado. Tente outra instância.</string>
     <string name="unknown_error">Erro de Rede.</string>
     <string name="error">Algo deu errado.</string>
-    <string name="empty">Digite seu nome de usuário ou a senha.</string>
+    <string name="empty">Digite seu Usuário e a Senha.</string>
     <string name="notgmail">Isto é para uma conta Piped</string>
     <string name="defres">Resolução dos vídeos</string>
     <string name="grid">Colunas da grade (modo retrato)</string>
@@ -252,7 +252,7 @@
     <string name="push_channel_name">Assistente de notificações</string>
     <string name="play_next">Reproduzir agora</string>
     <string name="navigation_bar">Barra de navegação</string>
-    <string name="download_channel_description">Mostrar notificação ao baixar mídia.</string>
+    <string name="download_channel_description">Mostrar notificação ao fazer downloads.</string>
     <string name="export_subscriptions">Exportar inscrições</string>
     <string name="history_size">Tamanho máximo do histórico</string>
     <string name="resize_mode_zoom">Zoom</string>
@@ -543,6 +543,8 @@
     <string name="best_quality">Melhor qualidade</string>
     <string name="external_download_provider">Provedor de download externo</string>
     <string name="external_download_provider_summary">Digite o nome do pacote da aplicação que deseja usar para baixar vídeos. Deixe em branco para usar o provedor de download do LibreTube.</string>
-    <string name="screenshot">Captura de tela</string>
+    <string name="screenshot">Capturar tela</string>
     <string name="pip">PiP</string>
+    <string name="local_stream_extraction">Extrair informações do vídeo localmente</string>
+    <string name="local_stream_extraction_summary">Obtenha informações sobre a reprodução do vídeo diretamente do YouTube sem usar o Piped.</string>
 </resources>
