@@ -329,4 +329,5 @@
     <string name="bookmarks">બુકમાર્કો</string>
     <string name="bookmark">બુકમાર્ક</string>
     <string name="clear_bookmarks">બુકમાર્કો સાફ કરો</string>
+    <string name="pip">PiP</string>
 </resources>
