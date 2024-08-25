@@ -543,4 +543,8 @@
     <string name="import_temp_playlist_summary">Deseja criar uma lista de reprodução com o nome %1$s? A lista será constituída por %2$d vídeos.</string>
     <string name="external_download_provider">Serviço externo de descargas</string>
     <string name="external_download_provider_summary">Introduza o nome da aplicação que pretende usar para descarregar vídeos. Deixe o campo vazio para descarregar através do LibreTube.</string>
+    <string name="pip">PiP</string>
+    <string name="screenshot">Captura de ecrã</string>
+    <string name="local_stream_extraction">Extração local de emissões</string>
+    <string name="local_stream_extraction_summary">Obter informações de reprodução diretamente de YouTube sem utilizar uma instância Piped.</string>
 </resources>
