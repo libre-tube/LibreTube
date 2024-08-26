@@ -2,6 +2,7 @@ package com.github.libretube.api
 
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.MetaInfo
+import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.PreviewFrames
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
@@ -12,6 +13,24 @@ import kotlinx.datetime.toKotlinInstant
 import org.schabi.newpipe.extractor.NewPipe
 import org.schabi.newpipe.extractor.stream.StreamInfo
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
+import org.schabi.newpipe.extractor.stream.VideoStream
+
+fun VideoStream.toPipedStream(): PipedStream = PipedStream(
+    url = content,
+    codec = codec,
+    format = format.toString(),
+    height = height,
+    width = width,
+    quality = getResolution(),
+    mimeType = format?.mimeType,
+    bitrate = bitrate,
+    initStart = initStart,
+    initEnd = initEnd,
+    indexStart = indexStart,
+    indexEnd = indexEnd,
+    fps = fps,
+    contentLength = itagItem?.contentLength ?: 0L
+)
 
 object StreamsExtractor {
 //    val npe by lazy {
@@ -81,8 +100,31 @@ object StreamsExtractor {
                     start = it.startTimeSeconds.toLong()
                 )
             },
-            audioStreams = emptyList(), // TODO: audio streams and video streams via DASH, currently broken anyways
-            videoStreams = emptyList(),
+            audioStreams = resp.audioStreams.map {
+                PipedStream(
+                    url = it.content,
+                    format = it.format?.toString(),
+                    quality = "${it.averageBitrate} bits",
+                    bitrate = it.bitrate,
+                    mimeType = it.format?.mimeType,
+                    initStart = it.initStart,
+                    initEnd = it.initEnd,
+                    indexStart = it.indexStart,
+                    indexEnd = it.indexEnd,
+                    contentLength = it.itagItem?.contentLength ?: 0L,
+                    codec = it.codec,
+                    audioTrackId = it.audioTrackId,
+                    audioTrackName = it.audioTrackName,
+                    audioTrackLocale = it.audioLocale?.toLanguageTag(),
+                    audioTrackType = it.audioTrackType?.name,
+                    videoOnly = false
+                )
+            },
+            videoStreams = resp.videoOnlyStreams.map {
+                it.toPipedStream().copy(videoOnly = true)
+            } + resp.videoStreams.map {
+                it.toPipedStream().copy(videoOnly = false)
+            },
             previewFrames = resp.previewFrames.map {
                 PreviewFrames(
                     it.urls,
