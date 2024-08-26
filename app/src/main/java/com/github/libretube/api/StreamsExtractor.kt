@@ -69,7 +69,7 @@ object StreamsExtractor {
                     it.duration,
                     it.viewCount,
                     it.isUploaderVerified,
-                    it.uploadDate?.offsetDateTime()?.toEpochSecond() ?: 0L,
+                    it.uploadDate?.offsetDateTime()?.toEpochSecond()?.times(1000) ?: 0L,
                     it.shortDescription,
                     it.isShortFormContent,
                 )
