@@ -19,4 +19,5 @@
     <string name="register">பதிவுசெய்</string>
     <string name="loggedIn">உள்நுழைந்துவிட்டோம்</string>
     <string name="loggedout">வெளியேறிவிட்டோம்.</string>
+    <string name="pip">PiP</string>
 </resources>

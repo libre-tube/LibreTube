@@ -545,4 +545,6 @@
     <string name="external_download_provider_summary">Entrez le nom du package de l\'application que vous souhaitez utiliser pour télécharger des vidéos. Laissez vide pour utiliser le téléchargeur qui est intégré dans LibreTube.</string>
     <string name="screenshot">Capture d\'écran</string>
     <string name="pip">PiP</string>
+    <string name="local_stream_extraction">Extraction de flux locaux</string>
+    <string name="local_stream_extraction_summary">Récupérer directement les informations de lecture vidéo de YouTube sans utiliser Piped.</string>
 </resources>

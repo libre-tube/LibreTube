@@ -542,4 +542,6 @@
     <string name="external_download_provider_summary">Sisesta välise allalaadimisrakenduse paketi nimi, mida soovid kasutada. Kui eelistad LibreTube\'i oma allalaadimislahendust, siis jäta tühjaks.</string>
     <string name="screenshot">Ekraanitõmmis</string>
     <string name="pip">PiP</string>
+    <string name="local_stream_extraction">Töötle meediavoogu kohalikus seadmes</string>
+    <string name="local_stream_extraction_summary">Kasuta YouTube\'i meediavoo töötlemiseks kohalikku seadet, mitte Pipedi teenust.</string>
 </resources>

@@ -276,7 +276,7 @@
     <string name="double_tap_seek">Докоснете двукратно за превъртане</string>
     <string name="fallback_piped_proxy_summary">Заредете видеоклипове през проксито, ако директното свързване с YouTube не работи за текущия видеоклип (увеличава първоначалното време за зареждане). Ако е деактивирано, музикалното съдържание в YouTube вероятно няма да се възпроизвежда поради ограниченията на YT</string>
     <string name="instance_frontend_url">URL към потребителски интерфейс</string>
-    <string name="advanced">Разширено</string>
+    <string name="advanced">Разширени</string>
     <string name="deletePlaylist">Изтриване на плейлист</string>
     <string name="mark_as_unwatched">Маркирай като негледано</string>
     <string name="import_subscriptions_from">Внасяне на абонаменти от</string>
@@ -319,7 +319,7 @@
     <string name="update_available_text">Налична е нова актуализация. Щракнете, за да отворите страницата с версиите на GitHub.</string>
     <string name="captions_size">Размер на надписите</string>
     <string name="dearrow">Активиране на DeArrow</string>
-    <string name="export_subscriptions">Експортиране на абонаменти</string>
+    <string name="export_subscriptions">Изнасяне на абонаменти</string>
     <string name="show_stream_thumbnails_summary">Показване на миниатюри на нови потоци. Активирането на това ще изразходва допълнителни данни</string>
     <string name="local_subscriptions">Местни абонаменти</string>
     <string name="segment_type">Тип сегмент</string>
@@ -541,4 +541,7 @@
     <string name="external_download_provider">Външен доставчик на изтегляне</string>
     <string name="external_download_provider_summary">Въведете името на пакета на приложението, което искате да използвате за изтегляне на видеоклипове. Оставете празно, за да използвате вградената програма за изтегляне на LibreTube.</string>
     <string name="screenshot">Екранна снимка</string>
+    <string name="pip">PiP</string>
+    <string name="local_stream_extraction">Извличане на локален поток</string>
+    <string name="local_stream_extraction_summary">Директно извличане на информация за възпроизвеждане на видео от YouTube, без да използвате Piped.</string>
 </resources>

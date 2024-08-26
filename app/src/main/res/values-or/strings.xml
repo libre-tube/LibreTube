@@ -540,4 +540,5 @@
     <string name="show_updates">ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଅଦ୍ୟତନଗୁଡିକ ଯାଞ୍ଚ କରନ୍ତୁ</string>
     <string name="comments_count">ମନ୍ତବ୍ୟଗୁଡିକ (%1$s)</string>
     <string name="audio_language">ଅଡିଓ ଭାଷା</string>
+    <string name="pip">PiP</string>
 </resources>

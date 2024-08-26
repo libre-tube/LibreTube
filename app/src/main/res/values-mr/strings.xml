@@ -384,4 +384,5 @@
         <item quantity="other">%d वर्षांपूर्वी</item>
     </plurals>
     <string name="unsupported_file_format">अनसपोर्टेड फाइल फॉर्मेट: %1$s</string>
+    <string name="pip">PiP</string>
 </resources>

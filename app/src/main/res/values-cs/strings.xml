@@ -546,5 +546,5 @@
     <string name="screenshot">Snímek obrazovky</string>
     <string name="pip">PiP</string>
     <string name="local_stream_extraction">Lokální extrakce streamu</string>
-    <string name="local_stream_extraction_summary">Přímo načítat informace o přehrávání videa z YouTube bez použití služby Piped.</string>
+    <string name="local_stream_extraction_summary">Přímo načítá informace o přehrávání videa z YouTube bez použití služby Piped.</string>
 </resources>

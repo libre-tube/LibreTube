@@ -539,4 +539,6 @@
     <string name="external_download_provider_summary">輸入您要用於下載影片的應用程式軟體包名稱。留空以使用 LibreTube 的內建下載程式。</string>
     <string name="screenshot">螢幕截圖</string>
     <string name="pip">畫中畫</string>
+    <string name="local_stream_extraction">本機串流擷取</string>
+    <string name="local_stream_extraction_summary">直接從 YouTube 擷取視訊播放資訊，不使用 Piped。</string>
 </resources>

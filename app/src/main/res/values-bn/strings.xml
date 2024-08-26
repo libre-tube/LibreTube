@@ -354,4 +354,5 @@
     <string name="trending_views">%1$s • %2$s বার দেখা হয়েছে • %3$s</string>
     <string name="best_quality">সেরা</string>
     <string name="donate">দান করুন</string>
+    <string name="pip">PiP</string>
 </resources>
