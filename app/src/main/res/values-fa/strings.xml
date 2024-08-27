@@ -537,4 +537,9 @@
     <string name="title">عنوان</string>
     <string name="thumbnail_time">زمان تصویر بند‌انگشتی</string>
     <string name="contribute_to_dearrow">کمک به DeArrow</string>
+    <string name="best_quality">بهترین</string>
+    <string name="pip">PIP</string>
+    <string name="screenshot">عکس گرفتن از صفحه</string>
+    <string name="external_download_provider">ارائه دهنده بارگیری خارجی</string>
+    <string name="local_stream_extraction">استخراج جریان داخلی</string>
 </resources>
