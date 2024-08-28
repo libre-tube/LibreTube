@@ -554,4 +554,6 @@
     <string name="external_download_provider_summary">أدخل اسم حزمة التطبيق الذي تريد استخدامه لتنزيل مقاطع الفيديو. اتركه فارغًا لاستخدام أداة التنزيل المدمجة في LibreTube.</string>
     <string name="screenshot">لقطة شاشة</string>
     <string name="pip">صورة داخل صورة</string>
+    <string name="local_stream_extraction_summary">جلب معلومات تشغيل الفيديو مباشرة من YouTube دون استخدام Piped.</string>
+    <string name="local_stream_extraction">استخراج البث المحلي</string>
 </resources>
