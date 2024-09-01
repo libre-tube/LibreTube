@@ -541,4 +541,5 @@
     <string name="external_download_provider">Externer Download Anbieter</string>
     <string name="external_download_provider_summary">Gib den Paketnamen der App ein, die zum Herunterladen von Videos verwendet werden soll. Nichts eintragen, um den eingebauten Downloader von Libretube zu verwenden.</string>
     <string name="screenshot">Bildschirmfoto</string>
+    <string name="pip">BiB</string>
 </resources>
