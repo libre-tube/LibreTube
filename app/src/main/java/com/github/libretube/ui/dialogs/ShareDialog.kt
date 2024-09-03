@@ -129,7 +129,7 @@ class ShareDialog : DialogFragment() {
             binding.piped.isChecked -> PIPED_FRONTEND_URL
             binding.youtube.isChecked -> YOUTUBE_FRONTEND_URL
             // only available for custom instances
-            else -> customInstanceUrl!!.toString()
+            else -> customInstanceUrl!!.toString().trimEnd('/')
         }
         var url = when {
             shareObjectType == ShareObjectType.VIDEO && host == YOUTUBE_FRONTEND_URL -> "$YOUTUBE_SHORT_URL/$id"
