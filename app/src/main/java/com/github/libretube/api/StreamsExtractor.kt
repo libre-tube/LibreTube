@@ -73,7 +73,7 @@ object StreamsExtractor {
             visibility = resp.privacy.name.lowercase(),
             duration = resp.duration,
             uploadTimestamp = resp.uploadDate.offsetDateTime().toInstant().toKotlinInstant(),
-            uploaded = resp.uploadDate.offsetDateTime().toEpochSecond(),
+            uploaded = resp.uploadDate.offsetDateTime().toEpochSecond() * 1000,
             thumbnailUrl = resp.thumbnails.maxBy { it.height }.url,
             relatedStreams = resp.relatedItems.filterIsInstance<StreamInfoItem>().map {
                 StreamItem(
