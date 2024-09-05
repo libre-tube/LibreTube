@@ -24,6 +24,7 @@ import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
+import com.github.libretube.helpers.ClipboardHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.obj.ShareData
@@ -193,6 +194,11 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
         binding.channelCoordinator.isVisible = true
 
         binding.channelName.text = response.name
+        binding.channelName.setOnLongClickListener {
+            ClipboardHelper.save(requireContext(), text = response.name.orEmpty())
+            true
+        }
+
         if (response.verified) {
             binding.channelName
                 .setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_verified, 0)
