@@ -67,7 +67,6 @@
                                 android:drawablePadding="3dp"
                                 android:ellipsize="end"
                                 android:maxLines="1"
-                                android:textIsSelectable="true"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
                                 tools:text="Channel Name" />
