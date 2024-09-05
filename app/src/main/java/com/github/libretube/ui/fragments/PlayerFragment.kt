@@ -845,12 +845,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         viewModel.player.removeListener(playerListener)
         viewModel.player.pause()
 
-        runCatching {
-            if (!viewModel.isOrientationChangeInProgress) {
-                viewModel.player.stop()
-            }
-        }
-
         if (PlayerHelper.pipEnabled) {
             // disable the auto PiP mode for SDK >= 32
             PictureInPictureCompat
@@ -1347,11 +1341,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private fun createExoPlayer() {
-//        viewModel.keepOrCreatePlayer(requireContext()).let { (player, trackSelector) ->
-//            localViewModel.player = player
-//            localViewModel.trackSelector = trackSelector
-//        }
-
         viewModel.player.setWakeMode(C.WAKE_MODE_NETWORK)
         viewModel.player.addListener(playerListener)
 
