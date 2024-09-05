@@ -574,7 +574,6 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        commonPlayerViewModel.isFullscreen.value = false
         requestOrientationChange()
     }
 
