@@ -1,0 +1,8 @@
+* feat: download support for local streams extractor
+* feat: support download of private playlists via external downloader
+* fix: related streams published 54 years ago with local extractor
+* fix: retain exoplayer on orientation change
+* fix: videos in watch history uploaded in 1970
+* fix: duplicated slash in custom instance's share url
+* fix: issues with channel name caused by textIsSelectable
+* fix: laggy behavior when using back gesture to minimize player
