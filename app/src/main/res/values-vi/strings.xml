@@ -393,7 +393,7 @@
     <string name="exportsuccess">Đã xuất.</string>
     <string name="proceed">Tiếp tục</string>
     <string name="play_latest_videos">Phát video mới nhất</string>
-    <string name="username_email">Tiếp tục với một địa chỉ e-mail không được khuyến nghị\?</string>
+    <string name="username_email">Tiếp tục với một địa chỉ e-mail không được khuyến nghị?</string>
     <string name="playlistUrl">URL danh sách phát</string>
     <string name="color_violet">Tím linh hoạt</string>
     <string name="mark_as_watched">Đánh dấu là đã xem</string>
