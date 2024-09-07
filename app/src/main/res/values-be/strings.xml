@@ -315,7 +315,7 @@
     <string name="backup_restore_summary">Імпарт і экспарт падпісак, плэйлістоў,…</string>
     <string name="exportsuccess">Экспартаваны.</string>
     <string name="privacy_alert">Абвестка аб прыватнасці</string>
-    <string name="username_email">Працягнуць з адрасам электроннай пошты, які не рэкамендуецца\?</string>
+    <string name="username_email">Працягнуць з адрасам электроннай пошты, які не рэкамендуецца?</string>
     <string name="app_backup">Рэзервовае капіраванне праграмы</string>
     <string name="hide_watched_from_feed">Схаваць ужо прагледжаныя відэа</string>
     <string name="play_latest_videos">Прайграць апошнія відэа</string>
