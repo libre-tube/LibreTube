@@ -319,7 +319,7 @@
     <string name="all_caught_up_summary">Ви переглянули всі нові відео</string>
     <string name="app_backup">Резервне копіювання застосунку</string>
     <string name="privacy_alert">Оповіщення про приватність</string>
-    <string name="username_email">Використовувати нерекомендовану адресу електронної пошти?</string>
+    <string name="username_email">Використовувати адресу пошти як ім\'я користувача не рекомендується. Все одно продовжувати?</string>
     <string name="import_playlists">Імпорт добірок</string>
     <string name="backup_restore_summary">Імпорт та експорт підписок, добірок, …</string>
     <string name="exportsuccess">Експортовано.</string>
