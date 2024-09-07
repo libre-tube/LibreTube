@@ -321,7 +321,7 @@
     <string name="backup_restore_summary">Import a export odběrů, playlistů, …</string>
     <string name="exportsuccess">Exportováno.</string>
     <string name="privacy_alert">Upozornění na soukromí</string>
-    <string name="username_email">Pokračovat s e-mailovou adresou\? (není doporučeno)</string>
+    <string name="username_email">Pokračovat s e-mailovou adresou? (není doporučeno)</string>
     <string name="proceed">Pokračovat</string>
     <string name="export_playlists">Exportovat playlisty</string>
     <string name="import_playlists">Importovat playlisty</string>
