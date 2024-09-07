@@ -262,7 +262,7 @@
     <string name="volume">음량</string>
     <string name="network_wifi">와이파이로만 네트워크 연결</string>
     <string name="nothing_selected">아무것도 선택되지 않음!</string>
-    <string name="username_email">권장하지 않는 이메일 주소로 진행하시겠습니까\?</string>
+    <string name="username_email">권장하지 않는 이메일 주소로 진행하시겠습니까?</string>
     <string name="proceed">진행하다</string>
     <string name="play_latest_videos">최신 동영상 재생</string>
     <string name="playlistCloned">재생 목록 복제</string>
