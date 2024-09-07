@@ -253,7 +253,7 @@
     <string name="push_channel_description">नवीन प्रवाह उपलब्ध असताना सूचना दाखवते.</string>
     <string name="added_to_playlist">प्लेलिस्टमध्ये जोडले</string>
     <string name="app_backup">ॲप बॅकअप</string>
-    <string name="username_email">शिफारस नसलेल्या ई-मेल पत्त्यासह पुढे जायचे\?</string>
+    <string name="username_email">शिफारस नसलेल्या ई-मेल पत्त्यासह पुढे जायचे?</string>
     <string name="proceed">पुढे जा</string>
     <string name="confirm_unsubscribe">तुमची खात्री आहे की तुम्ही %1$s सदस्यत्व रद्द करू इच्छिता\?</string>
     <string name="custom_playback_speed">सानुकूल गती</string>
