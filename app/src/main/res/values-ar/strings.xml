@@ -324,7 +324,7 @@
     <string name="proceed">استمر</string>
     <string name="privacy_alert">تنبيه الخصوصية</string>
     <string name="exportsuccess">تم التصدير.</string>
-    <string name="username_email">هل تريد المتابعة باستخدام عنوان بريد إلكتروني غير مستحسن؟</string>
+    <string name="username_email">لا ينصح باستخدام عنوان بريد إلكتروني كاسم مستخدم. هل تريد المتابعة على أي حال ؟</string>
     <string name="pinch_control">التحكم في ايماءة القرص</string>
     <string name="pinch_control_summary">استخدم إيماءة القرص للتكبير / التصغير</string>
     <string name="theme_monochrome">أضيق الحدود أحادية اللون</string>
