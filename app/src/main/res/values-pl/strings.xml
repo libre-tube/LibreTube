@@ -323,7 +323,7 @@
     <string name="exportsuccess">Wyeksportowano.</string>
     <string name="proceed">Kontynuuj</string>
     <string name="privacy_alert">Ostrzeżenie o prywatności</string>
-    <string name="username_email">Użycie adresu e-mail jako nazwy użytkownika nie jest zalecane. Kontynuować\?</string>
+    <string name="username_email">Użycie adresu e-mail jako nazwy użytkownika nie jest zalecane. Kontynuować?</string>
     <string name="pinch_control">Gesty zmiany rozmiaru obrazu</string>
     <string name="pinch_control_summary">Użyj gestu rozciągnięcia/uszczypania, aby powiększyć/zmniejszyć rozmiar obrazu</string>
     <string name="theme_monochrome">Monochromatyczny</string>
