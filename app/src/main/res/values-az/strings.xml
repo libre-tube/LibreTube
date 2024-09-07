@@ -323,7 +323,7 @@
     <string name="backup_restore_summary">Abunəlikləri, oynatma siyahıların idxal &amp; ixrac et …</string>
     <string name="exportsuccess">İxrac edildi.</string>
     <string name="privacy_alert">Məxfilik xəbərdarlığı</string>
-    <string name="username_email">Tövsiyə olunmayan e-poçt ünvanı ilə davam edilsin?</string>
+    <string name="username_email">İstifadəçi adı kimi e-poçt ünvanı istifadə etmək məsləhət deyil. Yenə də davam edilsin?</string>
     <string name="proceed">Davam et</string>
     <string name="pinch_control">Çimdik nəzarəti</string>
     <string name="pinch_control_summary">Böyütmək/kiçiltmək üçün çimdik jesti istifadə et</string>
