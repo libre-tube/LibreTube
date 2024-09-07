@@ -327,7 +327,7 @@
     <string name="exportsuccess">Exportado.</string>
     <string name="privacy_alert">Alerta de privacidad</string>
     <string name="proceed">Continuar</string>
-    <string name="username_email">Usar una dirección de email no se recomienda. ¿Estas seguro?</string>
+    <string name="username_email">No se recomienda utilizar una dirección de correo electrónico como nombre de usuario. ¿Proceder de todos modos?</string>
     <string name="play_latest_videos">Reproducir los últimos videos</string>
     <string name="nothing_selected">¡Nada seleccionado!</string>
     <string name="color_violet">Violeta Versátil</string>
