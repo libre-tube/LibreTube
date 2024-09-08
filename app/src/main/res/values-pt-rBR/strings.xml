@@ -324,7 +324,7 @@
     <string name="exportsuccess">Exportado.</string>
     <string name="privacy_alert">Alerta de privacidade</string>
     <string name="proceed">Continuar</string>
-    <string name="username_email">Não é recomendado usar um endereço de e-mail como nome de usuário. Continuar mesmo assim?</string>
+    <string name="username_email">Usar um endereço de e-mail como nome de usuário não é recomendado. Continuar mesmo assim?</string>
     <string name="pinch_control">Controle de pinças</string>
     <string name="pinch_control_summary">Use o gesto de pinça para aumentar ou diminuir o zoom</string>
     <string name="theme_monochrome">Monocromático minimalista</string>
