@@ -240,7 +240,7 @@
     <string name="end_time">Lopetusaika</string>
     <string name="notification_time_summary">Aikaväli, jolloin ilmoitukset voidaan näyttää</string>
     <string name="layout">Asettelu</string>
-    <string name="username_email">Jatka sähköpostiosoitteella, jota ei suositella\?</string>
+    <string name="username_email">Jatka sähköpostiosoitteella, jota ei suositella?</string>
     <string name="audio_only_mode_summary">Muuta LibreTube musiikkisoittimeksi</string>
     <string name="sleep_timer">Uniajastin</string>
     <string name="stats_for_nerds">Tilastot nörteille</string>

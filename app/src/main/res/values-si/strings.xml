@@ -240,7 +240,7 @@
     <string name="app_backup">යෙදුම් උපස්ථ</string>
     <string name="exportsuccess">අපනයනය කරන ලදී.</string>
     <string name="privacy_alert">ඇවිරීම් ඇඟවීම</string>
-    <string name="username_email">නිර්දේශ නොකළ විද්‍යුත් තැපැල් ලිපිනයක් සමඟ ඉදිරියට යන්නද\?</string>
+    <string name="username_email">නිර්දේශ නොකළ විද්‍යුත් තැපැල් ලිපිනයක් සමඟ ඉදිරියට යන්නද?</string>
     <string name="proceed">ඉදිරියට යන්න</string>
     <string name="play_latest_videos">නවතම වීඩියෝ වාදනය කරන්න</string>
     <string name="nothing_selected">කිසිවක් තෝරා නැත!</string>

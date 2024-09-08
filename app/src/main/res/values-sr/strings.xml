@@ -333,7 +333,7 @@
     <string name="backup_restore_summary">Увоз и извоз праћења, плејлиста,…</string>
     <string name="exportsuccess">Извезено.</string>
     <string name="privacy_alert">Упозорење о приватности</string>
-    <string name="username_email">Желите ли да наставите са имејл-адресом која се не препоручује\?</string>
+    <string name="username_email">Не препоручује се коришћење имејл адресе као корисничко име. Ипак наставити?</string>
     <string name="proceed">Настави</string>
     <string name="hide_watched_from_feed">Сакриј већ одгледане видео снимке</string>
     <string name="forward">Премотај унапред</string>

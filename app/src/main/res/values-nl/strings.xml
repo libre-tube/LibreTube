@@ -472,7 +472,7 @@
     <string name="swipe_controls_summary">Veeg tijdens volledig scherm om de helderheid en het volume aan te passen</string>
     <string name="hls_instead_of_dash_summary">Gebruik HLS in plaats van DASH (zal langzamer zijn, niet aanbevolen)</string>
     <string name="double_tap_seek_summary">Tik twee keer links of rechts om de speler terug of vooruit te spoelen</string>
-    <string name="username_email">Doorgaan met een e-mailadres dat niet wordt aanbevolen\?</string>
+    <string name="username_email">Doorgaan met een e-mailadres dat niet wordt aanbevolen?</string>
     <string name="custom_playback_speed_summary">Gebruik een andere afspeelsnelheid dan voor de normale speler</string>
     <string name="lbry_hls_summary">Gebruik LBRY HLS voor streaming indien beschikbaar</string>
     <string name="choose_instance_long">Kies hieronder een Piped-instantie die je wilt gebruiken. De Piped-instantie fungeert als tussenpersoon tussen jou en YouTube. Deze instanties bevinden zich op verschillende fysieke locaties - aangegeven door hun vlag(gen). Instanties die fysiek dichter bij jou in de buurt zijn, zijn waarschijnlijk sneller dan instanties die dat niet zijn. Je kunt de instantie die je gebruikt op elk moment wijzigen in de instellingen.</string>

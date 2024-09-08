@@ -323,7 +323,7 @@
     <string name="exportsuccess">Wyeksportowano.</string>
     <string name="proceed">Kontynuuj</string>
     <string name="privacy_alert">Ostrzeżenie o prywatności</string>
-    <string name="username_email">Użycie adresu e-mail jako nazwy użytkownika nie jest zalecane. Kontynuować\?</string>
+    <string name="username_email">Nie zaleca się używania adresu e-mail jako nazwy użytkownika. Kontynuować?</string>
     <string name="pinch_control">Gesty zmiany rozmiaru obrazu</string>
     <string name="pinch_control_summary">Użyj gestu rozciągnięcia/uszczypania, aby powiększyć/zmniejszyć rozmiar obrazu</string>
     <string name="theme_monochrome">Monochromatyczny</string>
@@ -546,4 +546,8 @@
     <string name="thumbnail_time">Pokaż czas na miniaturze</string>
     <string name="external_download_provider">Zewnętrzny dostawca pobierania</string>
     <string name="external_download_provider_summary">Wpisz nazwę pakietu aplikacji której chcesz używać do pobierania wideo. Pozostaw puste aby używać wbudowanego narzędzia LibreTube.</string>
+    <string name="pip">OwO</string>
+    <string name="screenshot">Zrzut ekranu</string>
+    <string name="local_stream_extraction">Lokalna ekstrakcja strumieniowa</string>
+    <string name="local_stream_extraction_summary">Otrzymuj informacje o strumieniach bezpośrednio z YouTube bez korzystania Piped.</string>
 </resources>

@@ -318,7 +318,7 @@
     <string name="pinch_control">Управление щипком</string>
     <string name="pinch_control_summary">Использовать жест щипка для приближения/отдаления</string>
     <string name="comments_disabled">Комментарии отключены загружающим.</string>
-    <string name="username_email">Продолжить с адресом электронной почты, который не рекомендуется\?</string>
+    <string name="username_email">Использовать адрес почты в качестве имени пользователя не рекомендуется. Всё равно продолжить?</string>
     <string name="proceed">Продолжить</string>
     <string name="theme_monochrome">Минималистичный монохромный</string>
     <string name="captions_size">Размер субтитров</string>

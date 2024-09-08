@@ -478,7 +478,7 @@
         <item quantity="other">%d menses retro</item>
     </plurals>
     <string name="autoplay_countdown">Computo a retro del reproduction automatic</string>
-    <string name="username_email">Continuar con un adresse de e-mail que non es reccomendate?</string>
+    <string name="username_email">Usar un adresse de e-mail como nomine de usator non es recommendate. Continuar in omne caso?</string>
     <string name="creation_date_reversed">Data de creation (invertite)</string>
     <string name="playback_during_call">Continuar le reproduction durante un appello telephonic</string>
     <string name="custom_playback_speed_summary">Usar un velocitate de reproduction differente que le reproductor normal</string>
@@ -541,4 +541,7 @@
     <string name="external_download_provider">Fornitor de discarganentos externe</string>
     <string name="external_download_provider_summary">Insere le nomine de pacchettos del app que tu vole usar pro discargar le videos. Lassa in blanc pro usar le discargator de LibreTube.</string>
     <string name="screenshot">Captura de schermo</string>
+    <string name="local_stream_extraction_summary">Obtene directemente le information de reproduction de video ab YouTube sin usar Piped.</string>
+    <string name="pip">PiP</string>
+    <string name="local_stream_extraction">Extraction de fluxo local</string>
 </resources>

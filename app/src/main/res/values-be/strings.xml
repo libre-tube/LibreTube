@@ -315,7 +315,7 @@
     <string name="backup_restore_summary">Імпарт і экспарт падпісак, плэйлістоў,…</string>
     <string name="exportsuccess">Экспартаваны.</string>
     <string name="privacy_alert">Абвестка аб прыватнасці</string>
-    <string name="username_email">Працягнуць з адрасам электроннай пошты, які не рэкамендуецца\?</string>
+    <string name="username_email">Выкарыстоўваць адрас пошты ў якасці імя карыстальніка не рэкамендуецца. Усё роўна працягнуць?</string>
     <string name="app_backup">Рэзервовае капіраванне праграмы</string>
     <string name="hide_watched_from_feed">Схаваць ужо прагледжаныя відэа</string>
     <string name="play_latest_videos">Прайграць апошнія відэа</string>
@@ -548,4 +548,6 @@
     <string name="external_download_provider">Знешні запамповальнік</string>
     <string name="pip">КўК</string>
     <string name="screenshot">Скрыншот</string>
+    <string name="local_stream_extraction">Лакальнае выманне патоку</string>
+    <string name="local_stream_extraction_summary">Атрымліваць інфармацыю аб патоках напрамую з YouTube, не выкарыстоўваючы Piped.</string>
 </resources>

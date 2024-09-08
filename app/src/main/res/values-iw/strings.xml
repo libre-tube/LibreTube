@@ -325,7 +325,7 @@
     <string name="app_backup">גיבוי היישומון</string>
     <string name="backup_restore_summary">ייבוא וייצוא מינויים, רשימות נגינה ועוד…</string>
     <string name="exportsuccess">הייצוא הושלם.</string>
-    <string name="username_email">להמשיך עם כתובת דוא״ל שאינה מומלצת\?</string>
+    <string name="username_email">לא מומלץ להשתמש בדוא״ל כשם משתמש. להמשיך בכל זאת?</string>
     <string name="proceed">להמשיך</string>
     <string name="play_latest_videos">לנגן את הסרטונים העדכניים ביותר</string>
     <string name="privacy_alert">התראת פרטיות</string>

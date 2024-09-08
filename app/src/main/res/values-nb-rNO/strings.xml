@@ -80,7 +80,7 @@
     <string name="retry">Prøv igjen</string>
     <string name="comments">Kommentarer</string>
     <string name="app_icon">Ikon</string>
-    <string name="update_available">Versjon %1$s er tilgjengelig</string>
+    <string name="update_available">Oppgradering tilgjengelig</string>
     <string name="appearance">Utseende</string>
     <string name="live">Direkte</string>
     <string name="search_history">Søkehistorikk</string>
@@ -172,7 +172,7 @@
     <string name="chapters">Kapitler</string>
     <string name="require_restart">Programomstart kreves</string>
     <string name="turnInternetOn">Skru på Wi-Fi eller mobildata for å koble deg til Internett.</string>
-    <string name="require_restart_message">Start programmet på ny\?</string>
+    <string name="require_restart_message">Start programmet på ny for å bruke endringer?</string>
     <string name="open">Åpne …</string>
     <string name="audio_video">Lyd og bilde</string>
     <string name="fullscreen_orientation">Fullskjerm</string>
@@ -324,7 +324,7 @@
     <string name="privacy_alert">Personvernsvarsel</string>
     <string name="proceed">Fortsett</string>
     <string name="captions_size">Undertekststørrelse</string>
-    <string name="username_email">Fortsett med en e-postadresse som ikke er anbefalt\?</string>
+    <string name="username_email">Fortsett med en e-postadresse som ikke er anbefalt?</string>
     <string name="pinch_control">Knipekontroll</string>
     <string name="pinch_control_summary">Bruk knipehåndvending for forminskelse/forstørrelse</string>
     <string name="theme_monochrome">Minimalistisk monokrom</string>
@@ -380,7 +380,7 @@
     <string name="lbry_hls_summary">Hent videostrøm i LBRY HLS-format hvis tilgjengelig</string>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="subscriberAndVideoCounts">%1$s abonnenter • %2$d videoer</string>
-    <string name="disable_proxy_summary">Last inn videoer og bilder direkte fra YouTube sine tjenere. Kun skru på dette valget hvis du bruker en VPN uansett. Merk at dette kanskje ikke fungerer for innhold fra YT music.</string>
+    <string name="disable_proxy_summary">Last inn videoer og bilder direkte fra YouTube sine tjenere. Kun skru på dette valget hvis du alltid bruker en VPN.</string>
     <string name="disable_proxy">Skru av Piped-mellomtjener</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d videoer</string>
     <string name="fullscreen_gestures">Start/avslutt fullskjermshåndvendinger</string>
@@ -540,4 +540,8 @@
     <string name="import_temp_playlist_summary">Opprett ny spilleliste som heter «%1$s» inneholdende %2$d videoer?</string>
     <string name="enqueueing_playlist_download">Legger til videoer som skal lastes ned i spillelisten «%1$s»</string>
     <string name="comments_count">Kommentarer (%1$s)</string>
+    <string name="local_stream_extraction_summary">Hent videoavspillingsinfo direkte fra YouTube, uten å bruke Piped.</string>
+    <string name="pip">BiB</string>
+    <string name="screenshot">Skjermavbildning</string>
+    <string name="local_stream_extraction">Uthenting fra lokal strøm</string>
 </resources>

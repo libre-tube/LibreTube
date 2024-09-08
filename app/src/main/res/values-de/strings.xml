@@ -323,7 +323,7 @@
     <string name="backup_restore_summary">Importieren &amp; Exportieren von Abos, Playlists, …</string>
     <string name="privacy_alert">Datenschutz-Warnung</string>
     <string name="proceed">Fortfahren</string>
-    <string name="username_email">Mit einer nicht empfohlenen E-Mail-Adresse fortfahren\?</string>
+    <string name="username_email">Mit einer nicht empfohlenen E-Mail-Adresse fortfahren?</string>
     <string name="exportsuccess">Exportiert.</string>
     <string name="pinch_control">Zwei-Finger-Gestensteuerung</string>
     <string name="pinch_control_summary">Verwende eine Zwei-Finger-Geste, um den Zoom anzupassen</string>

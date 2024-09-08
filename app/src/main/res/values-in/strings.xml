@@ -322,7 +322,7 @@
     <string name="app_backup">Cadangan Aplikasi</string>
     <string name="exportsuccess">Diekspor.</string>
     <string name="privacy_alert">Peringatan privasi</string>
-    <string name="username_email">Lanjutkan dengan alamat surel yang tidak disarankan\?</string>
+    <string name="username_email">Lanjutkan dengan alamat surel yang tidak disarankan?</string>
     <string name="proceed">Lanjutkan</string>
     <string name="backup_restore_summary">Impor &amp; ekspor langganan, daftar putar, …</string>
     <string name="pinch_control">Kendali cubit</string>
