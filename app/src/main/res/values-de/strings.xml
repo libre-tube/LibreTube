@@ -323,7 +323,7 @@
     <string name="backup_restore_summary">Importieren &amp; Exportieren von Abos, Playlists, …</string>
     <string name="privacy_alert">Datenschutz-Warnung</string>
     <string name="proceed">Fortfahren</string>
-    <string name="username_email">Mit einer nicht empfohlenen E-Mail-Adresse fortfahren?</string>
+    <string name="username_email">Es wird nicht empfohlen, eine E-Mail-Adresse als Benutzernamen zu verwenden. Trotzdem fortfahren?</string>
     <string name="exportsuccess">Exportiert.</string>
     <string name="pinch_control">Zwei-Finger-Gestensteuerung</string>
     <string name="pinch_control_summary">Verwende eine Zwei-Finger-Geste, um den Zoom anzupassen</string>
@@ -542,4 +542,6 @@
     <string name="external_download_provider_summary">Gib den Paketnamen der App ein, die zum Herunterladen von Videos verwendet werden soll. Nichts eintragen, um den eingebauten Downloader von Libretube zu verwenden.</string>
     <string name="screenshot">Bildschirmfoto</string>
     <string name="pip">BiB</string>
+    <string name="local_stream_extraction">Lokale Stream-Extraktion</string>
+    <string name="local_stream_extraction_summary">Video-Wiedergabeinformationen direkt von YouTube abrufen, ohne Piped zu verwenden.</string>
 </resources>
