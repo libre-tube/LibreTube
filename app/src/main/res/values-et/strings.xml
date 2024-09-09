@@ -287,7 +287,7 @@
     <string name="backup_restore_summary">Impordi ja ekspordi tellimusi ja esitusloendeid…</string>
     <string name="exportsuccess">Eksportimine õnnestus.</string>
     <string name="privacy_alert">Privaatsusega seotud hoiatus</string>
-    <string name="username_email">Me ei soovita, et kasutajanimi on e-posti aadress. Kas oled kindel, et soovid jätkata?</string>
+    <string name="username_email">Me ei soovita, et kasutajanimeks on e-posti aadress. Kas oled kindel, et soovid jätkata?</string>
     <string name="buffering_goal">Ennetav laadimine</string>
     <string name="buffering_goal_summary">Pikim video ennetav puhverdus sekundites</string>
     <string name="playerVideoFormat">Videovorming meediamängija jaoks</string>
