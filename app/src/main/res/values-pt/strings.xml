@@ -325,7 +325,7 @@
     <string name="backup_restore_summary">Importar e exportar subscrições, listas de reprodução…</string>
     <string name="exportsuccess">Exportado.</string>
     <string name="privacy_alert">Alerta de privacidade</string>
-    <string name="username_email">Não recomendamos a partilha do endereço de e-mail. Deseja continuar?</string>
+    <string name="username_email">Não recomendamos a utilização de um endereço de e-mail como nome de utilizador. Deseja continuar?</string>
     <string name="play_latest_videos">Reproduzir últimos vídeos</string>
     <string name="swipe_controls_summary">Deslize para ajustar o brilho e o volume no modo de ecrã completo</string>
     <string name="all_caught_up">É tudo por hoje</string>
