@@ -1,6 +1,7 @@
 package com.github.libretube.ui.fragments
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Dialog
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -175,6 +176,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      */
     private var playerLayoutOrientation = Int.MIN_VALUE
 
+    private var pipActivity: Activity? = null;
+
     private val mainActivity get() = activity as MainActivity
     private val windowInsetsControllerCompat
         get() = WindowCompat
@@ -219,7 +222,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     playOnBackground()
                     // wait some time in order for the service to get started properly
                     handler.postDelayed(500) {
-                        activity?.finish()
+                        pipActivity?.moveTaskToBack(false);
                     }
                 }
 
@@ -1515,6 +1518,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             updateCurrentSubtitle(null)
 
             openOrCloseFullscreenDialog(true)
+            pipActivity = activity;
         } else {
             binding.player.useController = true
 
