@@ -1,6 +1,7 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ open class BaseBottomSheet : ExpandedBottomSheet() {
     private val binding get() = _binding!!
 
     private var title: String? = null
+    private var preselectedItem: String? = null
     private lateinit var items: List<BottomSheetItem>
     private lateinit var listener: (index: Int) -> Unit
 
@@ -46,6 +48,13 @@ open class BaseBottomSheet : ExpandedBottomSheet() {
             }
         }
 
+        // set the selected item
+        for (item in items) {
+            Log.e(item.title, preselectedItem.toString())
+        }
+        for (item in items.filter { it.title == preselectedItem }) {
+            item.title = "${item.title} ✓"
+        }
         binding.optionsRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.optionsRecycler.adapter = BottomSheetAdapter(items, listener)
     }
@@ -72,8 +81,14 @@ open class BaseBottomSheet : ExpandedBottomSheet() {
         this.title = title
     }
 
-    fun setSimpleItems(titles: List<String>, listener: (suspend (index: Int) -> Unit)?) =
+    fun setSimpleItems(
+        titles: List<String>,
+        preselectedItem: String? = null,
+        listener: (suspend (index: Int) -> Unit)?
+    ) = apply {
         setItems(titles.map { BottomSheetItem(it) }, listener)
+        this.preselectedItem = preselectedItem
+    }
 
     companion object {
         private val titleTextSize = 7f.dpToPx().toFloat()
