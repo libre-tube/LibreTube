@@ -834,6 +834,10 @@ abstract class CustomExoPlayerView(
         return true
     }
 
+    override fun getViewMeasures(): Pair<Int, Int> {
+        return width to height
+    }
+
     open fun onPlaybackEvents(player: Player, events: Player.Events) {
         if (events.containsAny(
                 Player.EVENT_PLAYBACK_STATE_CHANGED,
