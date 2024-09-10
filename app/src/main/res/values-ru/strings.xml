@@ -182,8 +182,8 @@
     <string name="require_restart_message">Перезапустите приложение для применения изменений.</string>
     <string name="never">Никогда</string>
     <string name="autoRotatePlayer">Автоматический полноэкранный режим</string>
-    <string name="pure_theme">Чистая тема</string>
-    <string name="pure_theme_summary">Чистая белая/чёрная тема</string>
+    <string name="pure_theme">Контрастная тема</string>
+    <string name="pure_theme_summary">Контрастные белые/чёрные фоны</string>
     <string name="no_player_found">Внешний проигрыватель не найден. Убедитесь, что он у вас установлен.</string>
     <string name="data_saver_mode">Режим экономии трафика</string>
     <string name="search_history_summary">Запоминать историю поисков</string>
@@ -194,7 +194,7 @@
     <string name="autoRotatePlayer_summary">Полноэкранный режим при повороте устройства</string>
     <string name="navLabelVisibility">Видимость меток</string>
     <string name="always">Всегда</string>
-    <string name="data_saver_mode_summary">Пропускать миниатюры и другие изображения</string>
+    <string name="data_saver_mode_summary">Пропускать скачивание миниатюр и других изображений</string>
     <string name="history_summary">История просмотра и поиска</string>
     <string name="reset_watch_positions">Сбросить позиции</string>
     <string name="captions">Субтитры</string>
@@ -207,7 +207,7 @@
     <string name="irreversible">Вы уверены\? Это действие нельзя отменить!</string>
     <string name="least_recent">Сначала старые</string>
     <string name="most_recent">Сначала новые</string>
-    <string name="most_views">Количеству просмотров</string>
+    <string name="most_views">Больше просмотров</string>
     <string name="least_views">Меньше просмотров</string>
     <string name="network_metered">Лимитное</string>
     <string name="no_search_result">Нет результатов.</string>
@@ -221,7 +221,7 @@
     <string name="required_network">Используемое подключение</string>
     <string name="network_all">Любые сети</string>
     <string name="network_wifi">Только по Wi-Fi</string>
-    <string name="translate">Перевод</string>
+    <string name="translate">Локализация</string>
     <string name="share_with_time">Поделиться с тайм-кодом</string>
     <string name="playingOnBackground">Воспроизведение в фоновом режиме…</string>
     <string name="playerAudioFormat">Аудио формат для проигрывателя</string>
@@ -247,13 +247,13 @@
     <string name="repeat_mode_none">Откл.</string>
     <string name="repeat_mode_current">Текущее</string>
     <string name="player_resize_mode">Режим изменения размера</string>
-    <string name="maximum_image_cache">Ограничение размера кэша изображений</string>
+    <string name="maximum_image_cache">Ограничение кеша изображений</string>
     <string name="copied_to_clipboard">Скопировано в буфер обмена</string>
     <string name="open_copied">Открыть</string>
     <string name="device_info">Об устройстве</string>
     <string name="new_videos_badge">Индикатор новых видео</string>
     <string name="push_channel_description">Показывать уведомления о появлении новых трансляций.</string>
-    <string name="new_videos_badge_summary">Показывать значок с количеством, когда есть новые видео</string>
+    <string name="new_videos_badge_summary">Показывать метку с количеством, когда есть новые видео</string>
     <string name="download_channel_name">Служба загрузки</string>
     <string name="skip_segment">Пропустить отрывок</string>
     <string name="download_channel_description">Показывать уведомление при загрузке медиа.</string>
@@ -289,7 +289,7 @@
     <string name="end_time">Время окончания</string>
     <string name="notification_time">Ограничение времени уведомлений</string>
     <string name="notification_time_summary">Ограничение времени, в которое будут показаны уведомления о трансляцих</string>
-    <string name="navbar_order">Порядок навигации</string>
+    <string name="navbar_order">Разделы</string>
     <string name="layout">Раскладка</string>
     <string name="audio_track">Звуковая дорожка</string>
     <string name="hls_instead_of_dash">Использовать HLS</string>
@@ -318,7 +318,7 @@
     <string name="pinch_control">Управление щипком</string>
     <string name="pinch_control_summary">Использовать жест щипка для приближения/отдаления</string>
     <string name="comments_disabled">Комментарии отключены загружающим.</string>
-    <string name="username_email">Использовать адрес почты в качестве имени пользователя не рекомендуется. Всё равно продолжить?</string>
+    <string name="username_email">Не рекомендуется использовать адрес почты в качестве имени пользователя. Всё равно продолжить?</string>
     <string name="proceed">Продолжить</string>
     <string name="theme_monochrome">Минималистичный монохромный</string>
     <string name="captions_size">Размер субтитров</string>
@@ -332,7 +332,7 @@
     <string name="color_violet">Универсальный фиолетовый</string>
     <string name="nothing_selected">Ничего не выбрано!</string>
     <string name="failed_fetching_instances">Не удалось получить доступные серверы.</string>
-    <string name="hide_watched_from_feed">Скрывать уже просмотренные видео</string>
+    <string name="hide_watched_from_feed">Скрыть просмотренные видео</string>
     <string name="playlistUrl">URL плейлиста</string>
     <string name="shuffle">Перемешать</string>
     <string name="rewind">Отмотать назад</string>
@@ -392,7 +392,7 @@
     <string name="group_name">Название группы</string>
     <string name="channel_groups">Группы каналов</string>
     <string name="play_automatically">Проигрывать автоматически</string>
-    <string name="play_automatically_summary">Начинать воспроизведение видео автоматически при выборе</string>
+    <string name="play_automatically_summary">Начинать воспроизведение открытых видео автоматически</string>
     <string name="fullscreen_gestures">Жесты входа/выхода из полноэкранного режима</string>
     <string name="go_to_video">Перейти к видео</string>
     <plurals name="channel_new_streams">
@@ -407,10 +407,10 @@
     <string name="duration_reversed">Продолжительность (обратная)</string>
     <string name="duration">Длительность</string>
     <string name="shorts_notifications">Уведомлять о Shorts</string>
-    <string name="alphabetic">Алфавитный</string>
+    <string name="alphabetic">По алфавиту</string>
     <string name="creation_date">Дата создания</string>
     <string name="creation_date_reversed">Дата создания (обратная)</string>
-    <string name="alphabetic_reversed">Алфавитный (обратный)</string>
+    <string name="alphabetic_reversed">По алфавиту (наоборот)</string>
     <string name="import_subscriptions_from">Импорт подписок из</string>
     <string name="export_subscriptions_to">Экспорт подписок в</string>
     <string name="import_playlists_from">Импорт плейлистов из</string>

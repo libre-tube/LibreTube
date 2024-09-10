@@ -163,7 +163,7 @@
     <string name="open_copied">گشودن</string>
     <string name="time">زمان</string>
     <string name="proceed">ادامه</string>
-    <string name="username_email">ادامه با نشانی رایانامه‌ای که پیشنهاد نشده؟</string>
+    <string name="username_email">استفاده از نشانی رایانامه به عنوان نام کاربری پیشنهاد نمی‌شود. ادامه به هر روی؟</string>
     <string name="help">راهنما</string>
     <string name="faq">پرسش‌های پرتکرار</string>
     <string name="download_channel_name">خدمت بارگیری</string>
@@ -538,10 +538,10 @@
     <string name="thumbnail_time">زمان تصویر بند‌انگشتی</string>
     <string name="contribute_to_dearrow">کمک به DeArrow</string>
     <string name="best_quality">بهترین</string>
-    <string name="pip">PIP</string>
-    <string name="screenshot">عکس گرفتن از صفحه</string>
+    <string name="pip">تصویردرتصویر</string>
+    <string name="screenshot">نماگرفت</string>
     <string name="external_download_provider">ارائه دهنده بارگیری خارجی</string>
-    <string name="local_stream_extraction">استخراج جریان داخلی</string>
+    <string name="local_stream_extraction">استخراج جریان محلی</string>
     <string name="local_stream_extraction_summary">واکشی مستقیم اطّلاعات پخش ویدیو از یوتوب بدون استفاده از پایپد.</string>
     <string name="external_download_provider_summary">ورود نام بستهٔ کاره‌ای که می‌خواهید برای بارگیری ویدیوها استفاده کنید. خالی گذاشتن برای استفاده از بارگیر توکار لیبره‌تیوب.</string>
 </resources>

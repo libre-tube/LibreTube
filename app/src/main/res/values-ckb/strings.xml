@@ -540,4 +540,8 @@
     <string name="no_segments_found">هیچ نیشانەکراوێک بەردەست نیە بۆ ئەم ڤیدیۆییە.</string>
     <string name="external_download_provider">دابینکەری دابەزاندنی دەرەکی</string>
     <string name="external_download_provider_summary">"ناوی پاکێجی ئەو ئەپە بنووسە کە دەتەوێت بۆ دابەزاندنی ڤیدیۆ بەکاری بهێنیت.  بۆ بەکارهێنانی دابەزاندنی ناوەکی LibreTube بە بەتاڵی بهێڵەرەوە."</string>
+    <string name="pip">PiP</string>
+    <string name="screenshot">گرتەی شاشە</string>
+    <string name="local_stream_extraction">ستریمی ناوخۆیی</string>
+    <string name="local_stream_extraction_summary">وەرگرتنی زانیاری ڤیدیۆ ڕاستەوخۆ لە یوتوبەوە بەبێ بەکارهێنانی Piped.</string>
 </resources>

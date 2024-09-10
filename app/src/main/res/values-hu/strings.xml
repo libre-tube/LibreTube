@@ -321,7 +321,7 @@
     <string name="app_backup">Alkalmazás biztonsági mentése</string>
     <string name="export_playlists">Lejátszási listák exportálása</string>
     <string name="proceed">Folytatás</string>
-    <string name="username_email">Folytatja email címmel, akkor is, ha nem ajánlott?</string>
+    <string name="username_email">Az e-mail cím felhasználónévként való használata nem ajánlott. Mégis folytatja?</string>
     <string name="privacy_alert">Adatvédelmi figyelmeztetés</string>
     <string name="pinch_control">Csípésvezérlés</string>
     <string name="pinch_control_summary">Használjon csípés gesztust, a nagyításhoz/kicsinyítéshez</string>
