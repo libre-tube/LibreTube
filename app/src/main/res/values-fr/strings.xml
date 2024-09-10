@@ -317,7 +317,7 @@
     <string name="theme_monochrome">Monochrome minimaliste</string>
     <string name="nothing_selected">Rien n\'est sélectionné !</string>
     <string name="privacy_alert">Avertissement sur la protection des données</string>
-    <string name="username_email">Continuer avec une adresse email non recommandée ?</string>
+    <string name="username_email">Utiliser une adresse courriel comme nom d’utilisateur n’est pas recommandé. Procéder quand même ?</string>
     <string name="exportsuccess">Exporté.</string>
     <string name="pinch_control">Contrôle par pincement</string>
     <string name="pinch_control_summary">Utilisez le geste de pincement pour effectuer un zoom avant/arrière</string>
