@@ -21,10 +21,6 @@ import kotlin.math.abs
 class PlayerGestureController(activity: BaseActivity, private val listener: PlayerGestureOptions) :
     View.OnTouchListener {
 
-    // width and height should be obtained each time using getter to adopt layout
-    // size changes.
-    private val width get() = Resources.getSystem().displayMetrics.widthPixels
-    private val height get() = Resources.getSystem().displayMetrics.heightPixels
     private val orientation get() = Resources.getSystem().configuration.orientation
     private val elapsedTime get() = SystemClock.elapsedRealtime()
 
@@ -59,6 +55,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
             listener.onSwipeEnd()
         }
 
+        val (_, height) = listener.getViewMeasures()
         // ignore touches to the top of the player when in landscape mode
         if (event.y < height * 0.1 && orientation == Configuration.ORIENTATION_LANDSCAPE) return false
 
@@ -75,7 +72,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
     }
 
     private inner class ScaleGestureListener : ScaleGestureDetector.OnScaleGestureListener {
-        var scaleFactor: Float = 1f
+        var scaleFactor = 1f
 
         override fun onScale(detector: ScaleGestureDetector): Boolean {
             wasClick = false
@@ -111,6 +108,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
                 return true
             }
 
+            val (width, _) = listener.getViewMeasures()
             if (isEnabled && isSecondClick()) {
                 handler.removeCallbacksAndMessages(SINGLE_TAP_TOKEN)
                 lastDoubleClick = elapsedTime
@@ -142,6 +140,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
         ): Boolean {
             if (!isEnabled || scaleGestureDetector.isInProgress) return false
 
+            val (width, height) = listener.getViewMeasures()
             val insideThreshHold = abs(e2.y - e1!!.y) <= MOVEMENT_THRESHOLD
             val insideBorder =
                 (e1.x < BORDER_THRESHOLD || e1.y < BORDER_THRESHOLD || e1.x > width - BORDER_THRESHOLD || e1.y > height - BORDER_THRESHOLD)
