@@ -176,7 +176,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      */
     private var playerLayoutOrientation = Int.MIN_VALUE
 
-    private var pipActivity: Activity? = null;
+    private var pipActivity: Activity? = null
 
     private val mainActivity get() = activity as MainActivity
     private val windowInsetsControllerCompat
@@ -222,7 +222,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     playOnBackground()
                     // wait some time in order for the service to get started properly
                     handler.postDelayed(500) {
-                        pipActivity?.moveTaskToBack(false);
+                        pipActivity?.moveTaskToBack(false)
                     }
                 }
 
@@ -1518,7 +1518,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             updateCurrentSubtitle(null)
 
             openOrCloseFullscreenDialog(true)
-            pipActivity = activity;
+            pipActivity = activity
         } else {
             binding.player.useController = true
 
