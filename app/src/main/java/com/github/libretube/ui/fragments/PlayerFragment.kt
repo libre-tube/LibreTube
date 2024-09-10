@@ -176,6 +176,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
      */
     private var playerLayoutOrientation = Int.MIN_VALUE
 
+    // Activity that's active during PiP, can be used for controlling its lifecycle.
     private var pipActivity: Activity? = null
 
     private val mainActivity get() = activity as MainActivity
@@ -223,6 +224,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     // wait some time in order for the service to get started properly
                     handler.postDelayed(500) {
                         pipActivity?.moveTaskToBack(false)
+                        pipActivity = null
                     }
                 }
 
