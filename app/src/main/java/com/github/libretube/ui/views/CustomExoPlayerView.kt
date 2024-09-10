@@ -267,7 +267,8 @@ abstract class CustomExoPlayerView(
         if (scrubbingTimeBar && !forceUpdate) return
 
         val currentIndex = PlayerHelper.getCurrentChapterIndex(player.currentPosition, chapters)
-        val newChapterName = currentIndex?.let { chapters[it].title.trim() } ?: context.getString(R.string.no_chapter)
+        val newChapterName = currentIndex?.let { chapters[it].title.trim() }
+            ?: context.getString(R.string.no_chapter)
         chaptersViewModel.currentChapterIndex.updateIfChanged(currentIndex ?: return)
 
         // change the chapter name textView text to the chapterName
@@ -601,7 +602,10 @@ abstract class CustomExoPlayerView(
         )
 
         BaseBottomSheet()
-            .setSimpleItems(aspectRatioModeNames) { index ->
+            .setSimpleItems(
+                aspectRatioModeNames,
+                preselectedItem = aspectRatioModeNames[aspectRatioModes.indexOf(resizeMode)]
+            ) { index ->
                 resizeMode = aspectRatioModes[index]
             }
             .show(supportFragmentManager)
@@ -611,7 +615,12 @@ abstract class CustomExoPlayerView(
         // repeat mode options dialog
         BaseBottomSheet()
             .setSimpleItems(
-                PlayerHelper.repeatModes.map { context.getString(it.second) }
+                PlayerHelper.repeatModes.map { context.getString(it.second) },
+                preselectedItem = PlayerHelper.repeatModes
+                    .firstOrNull { it.first == PlayingQueue.repeatMode }
+                    ?.second?.let {
+                        context.getString(it)
+                    }
             ) { index ->
                 PlayingQueue.repeatMode = PlayerHelper.repeatModes[index].first
             }
