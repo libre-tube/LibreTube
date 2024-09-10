@@ -82,6 +82,7 @@ import com.github.libretube.helpers.IntentHelper
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.helpers.PlayerHelper.autoPlayEnabled
 import com.github.libretube.helpers.PlayerHelper.checkForSegments
 import com.github.libretube.helpers.PlayerHelper.getVideoStats
 import com.github.libretube.helpers.PlayerHelper.isInSegment
@@ -302,7 +303,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             // check if video has ended, next video is available and autoplay is enabled/the video is part of a played playlist.
             if (playbackState == Player.STATE_ENDED) {
-                if (!isPlayerTransitioning) {
+                if (!isPlayerTransitioning && PlayerHelper.isAutoPlayEnabled(playlistId != null)) {
                     isPlayerTransitioning = true
                     if (PlayerHelper.autoPlayCountdown) {
                         showAutoPlayCountdown()
