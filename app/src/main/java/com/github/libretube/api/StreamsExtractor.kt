@@ -58,7 +58,9 @@ object StreamsExtractor {
             category = resp.category,
             views = resp.viewCount,
             likes = resp.likeCount,
-            dislikes = RetrofitInstance.externalApi.getVotes(videoId).dislikes,
+            dislikes = if (PlayerHelper.localRYD)
+                RetrofitInstance.externalApi.getVotes(videoId).dislikes
+            else 0,
             license = resp.licence,
             hls = resp.hlsUrl,
             dash = resp.dashMpdUrl,

@@ -356,6 +356,12 @@ object PlayerHelper {
             true
         )
 
+    val localRYD: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.LOCAL_RYD,
+            true
+        )
+
     val useHlsOverDash: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.USE_HLS_OVER_DASH,

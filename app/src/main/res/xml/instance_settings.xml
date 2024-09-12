@@ -81,6 +81,14 @@
             android:dependency="disable_video_image_proxy"
             app:key="local_stream_extraction" />
 
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_dislike"
+            android:summary="@string/local_ryd_summary"
+            android:title="@string/local_ryd"
+            android:dependency="local_stream_extraction"
+            app:key="local_return_youtube_dislikes" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
