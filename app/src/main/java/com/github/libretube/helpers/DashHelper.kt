@@ -40,16 +40,24 @@ object DashHelper {
 
         val adapSetInfos = ArrayList<AdapSetInfo>()
 
-        for (
-        stream in streams.videoStreams
+        for (stream in streams.videoStreams) {
             // used to avoid including LBRY HLS inside the streams in the manifest
-            .filter { !it.format.orEmpty().contains("HLS") }
-            .filter { supportsHdr || !it.quality.orEmpty().uppercase().contains("HDR") }
-        ) {
+            if (stream.format.orEmpty().contains("HLS")) {
+                continue
+            }
+
+            // HDR is only supported by some new devices
+            if (!supportsHdr && stream.quality.orEmpty().uppercase().contains("HDR")) {
+                continue
+            }
+
             // ignore dual format and OTF streams
             if (!stream.videoOnly!! || stream.indexEnd!! <= 0) {
                 continue
             }
+
+            // only unwraps the url if the preference is set in the settings
+            stream.url = ProxyHelper.unwrapStreamUrl(stream.url.orEmpty())
 
             val adapSetInfo = adapSetInfos.find { it.mimeType == stream.mimeType }
             if (adapSetInfo != null) {
@@ -73,6 +81,10 @@ object DashHelper {
                 adapSetInfo.formats.add(stream)
                 continue
             }
+
+            // only unwraps the url if the preference is set in the settings
+            stream.url = ProxyHelper.unwrapStreamUrl(stream.url.orEmpty())
+
             adapSetInfos.add(
                 AdapSetInfo(
                     stream.mimeType!!,

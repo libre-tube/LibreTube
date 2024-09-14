@@ -7,7 +7,7 @@ import kotlin.io.path.Path
 
 @Serializable
 data class PipedStream(
-    val url: String? = null,
+    var url: String? = null,
     val format: String? = null,
     val quality: String? = null,
     val mimeType: String? = null,
