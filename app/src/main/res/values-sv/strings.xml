@@ -408,7 +408,7 @@
     <string name="playlistUrl">Spellistans URL</string>
     <string name="visible">Visa i scrollbaren</string>
     <string name="time_code">Tidskod (sekunder)</string>
-    <string name="username_email">Användning av e-postadress som användarnamn är inte rekommenderat. Vill du fortsätta ändå?</string>
+    <string name="username_email">Att använda en e-postadress som användarnamn rekommenderas inte. Fortsätt ändå?</string>
     <string name="creation_date_reversed">Datum skapad (omvänt)</string>
     <string name="shorts_notifications">Notifikationer för Shorts</string>
     <string name="all_caught_up_summary">Du har sett alla nya videor</string>
@@ -542,4 +542,5 @@
     <string name="import_temp_playlist">Importera tillfällig spellista?</string>
     <string name="screenshot">Skärmbild</string>
     <string name="pip">PiP</string>
+    <string name="local_stream_extraction_summary">Hämta videouppspelningsinformation direkt från YouTube utan att använda Piped.</string>
 </resources>
