@@ -512,6 +512,8 @@
     <string name="external_download_provider_summary">Enter the package name of the app you want to use for downloading videos. Leave blank to use LibreTube\'s inbuilt downloader.</string>
     <string name="local_stream_extraction">Local stream extraction</string>
     <string name="local_stream_extraction_summary">Directly fetch video playback information from YouTube without using Piped.</string>
+    <string name="local_ryd">Local Return Youtube Dislikes</string>
+    <string name="local_ryd_summary">Directly fetch dislike information from https://returnyoutubedislikeapi.com</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

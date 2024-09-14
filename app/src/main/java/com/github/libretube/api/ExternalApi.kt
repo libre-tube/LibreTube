@@ -3,6 +3,7 @@ package com.github.libretube.api
 import com.github.libretube.api.obj.DeArrowBody
 import com.github.libretube.api.obj.PipedInstance
 import com.github.libretube.api.obj.SubmitSegmentResponse
+import com.github.libretube.api.obj.VoteInfo
 import com.github.libretube.obj.update.UpdateInfo
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -12,6 +13,7 @@ import retrofit2.http.Url
 
 private const val GITHUB_API_URL = "https://api.github.com/repos/libre-tube/LibreTube/releases/latest"
 private const val SB_API_URL = "https://sponsor.ajay.app"
+private const val RYD_API_URL = "https://returnyoutubedislikeapi.com"
 
 interface ExternalApi {
     // only for fetching servers list
@@ -21,6 +23,9 @@ interface ExternalApi {
     // fetch latest version info
     @GET(GITHUB_API_URL)
     suspend fun getLatestRelease(): UpdateInfo
+
+    @GET("$RYD_API_URL/votes")
+    suspend fun getVotes(@Query("videoId") videoId: String): VoteInfo
 
     @POST("$SB_API_URL/api/skipSegments")
     suspend fun submitSegment(
