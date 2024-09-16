@@ -439,7 +439,7 @@
     <string name="yt_shorts">Кратки видеа</string>
     <string name="worst_quality">Лошо</string>
     <string name="chapters_videoHighlight">Видео акцент</string>
-    <string name="username_email">Да продължите с имейл адрес, който не се препоръчва?</string>
+    <string name="username_email">Използването на имейл адрес като потребителско име не се препоръчва. Да продължа ли въпреки това?</string>
     <string name="advanced_summary">Изтегляния, и нулиране</string>
     <string name="creation_date_reversed">Дата на създаване (обърнато)</string>
     <string name="shorts_notifications">Известия за кртки видеоклипове</string>
@@ -544,4 +544,6 @@
     <string name="pip">PiP</string>
     <string name="local_stream_extraction">Извличане на локален поток</string>
     <string name="local_stream_extraction_summary">Директно извличане на информация за възпроизвеждане на видео от YouTube, без да използвате Piped.</string>
+    <string name="local_ryd_summary">Директно извличане на информация за нехаресвания от https://returnyoutubedislikeapi.com</string>
+    <string name="local_ryd">Местно връщане на нехаресвания в Youtube</string>
 </resources>

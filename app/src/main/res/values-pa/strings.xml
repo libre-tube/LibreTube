@@ -544,4 +544,6 @@
     <string name="screenshot">ਸਕਰੀਨਸ਼ਾਟ</string>
     <string name="local_stream_extraction">ਸਥਾਨਕ ਸਟ੍ਰੀਮ ਪ੍ਰਾਪਤੀ</string>
     <string name="local_stream_extraction_summary">Piped ਦੀ ਵਰਤੋਂ ਕੀਤੇ ਬਿਨਾਂ YouTube ਤੋਂ ਸਿੱਧੇ ਵੀਡੀਓ ਪਲੇਬੈਕ ਜਾਣਕਾਰੀ ਪ੍ਰਾਪਤ ਕਰੋ।</string>
+    <string name="local_ryd">ਯੂਟਿਊਬ ਡਿਸਲਾਈਕ ਦੀ ਲੋਕਲ ਪ੍ਰਾਪਤੀ</string>
+    <string name="local_ryd_summary">ਡਿਸਲਾਈਕ ਜਾਣਕਾਰੀ ਸਿੱਧੀ https://returnyoutubedislikeapi.com ਤੋਂ ਪ੍ਰਾਪਤ ਕਰੋ</string>
 </resources>

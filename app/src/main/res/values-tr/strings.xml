@@ -544,4 +544,6 @@
     <string name="pip">RiR</string>
     <string name="local_stream_extraction">Yerel akış çıkarımı</string>
     <string name="local_stream_extraction_summary">Piped kullanmadan YouTube\'dan doğrudan video oynatma bilgilerini alın.</string>
+    <string name="local_ryd">YouTube Beğenmemelerini Yerel Olarak Geri Getir</string>
+    <string name="local_ryd_summary">Beğenmeme bilgisini doğrudan https://returnyoutubedislikeapi.com adresinden alın</string>
 </resources>

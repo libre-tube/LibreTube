@@ -547,4 +547,6 @@
     <string name="pip">PiP</string>
     <string name="local_stream_extraction">Extrair informações do vídeo localmente</string>
     <string name="local_stream_extraction_summary">Obtenha informações sobre a reprodução do vídeo diretamente do YouTube sem usar o Piped.</string>
+    <string name="local_ryd">Habilitar \'Return Youtube Dislikes\'</string>
+    <string name="local_ryd_summary">Obtenha informações de \"Não gostei\" diretamente em https://returnyoutubedislikeapi.com</string>
 </resources>

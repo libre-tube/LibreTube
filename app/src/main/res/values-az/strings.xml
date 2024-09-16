@@ -543,5 +543,7 @@
     <string name="screenshot">Ekran görüntüsü</string>
     <string name="pip">Ani</string>
     <string name="local_stream_extraction_summary">Piped işlətmədən dərhal YouTube-dan video oynatma məlumatın əldə et.</string>
-    <string name="local_stream_extraction">Yerli axın əldə etmə</string>
+    <string name="local_stream_extraction">Yerli yayım əldə etmə</string>
+    <string name="local_ryd">Yerli Return Youtube Dislikes</string>
+    <string name="local_ryd_summary">Bəyənməmə məlumatın birbaşa https://returnyoutubedislikeapi.com \'dan əldə et</string>
 </resources>
