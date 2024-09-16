@@ -547,4 +547,6 @@
     <string name="pip">PiP</string>
     <string name="local_stream_extraction">Lokálna extrakcia streamu</string>
     <string name="local_stream_extraction_summary">Priamo načíta informácie o prehrávaní videa z YouTube bez použitia Piped.</string>
+    <string name="local_ryd_summary">Priamo načíta informácie o neoblíbených z https://returnyoutubedislikeapi.com</string>
+    <string name="local_ryd">Lokálny návrat Youtube Neobľúbené</string>
 </resources>
