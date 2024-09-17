@@ -296,7 +296,7 @@
     <string name="backup_restore_summary">ਆਯਾਤ ਅਤੇ ਨਿਰਯਾਤ ਸਬਸਕ੍ਰਿਪਸ਼ਨ, ਪਲੇਲਿਸਟਾਂ, …</string>
     <string name="exportsuccess">ਨਿਰਯਾਤ ਕੀਤੀ ਗਈ।</string>
     <string name="privacy_alert">ਗੋਪਨੀਯਤਾ ਚੇਤਾਵਨੀ</string>
-    <string name="username_email">ਕੀ ਉਸ ਈ-ਮੇਲ ਪਤੇ ਨਾਲ ਅੱਗੇ ਵਧਣਾ ਹੈ ਜਿਸਦੀ ਸਿਫ਼ਾਰਸ਼ ਨਹੀਂ ਕੀਤੀ ਜਾਂਦੀ?</string>
+    <string name="username_email">ਇੱਕ ਉਪਭੋਗਤਾ ਨਾਮ ਵਜੋਂ ਈਮੇਲ ਪਤੇ ਦੀ ਵਰਤੋਂ ਕਰਨ ਦੀ ਸਿਫਾਰਸ਼ ਨਹੀਂ ਕੀਤੀ ਜਾਂਦੀ। ਕੀ ਫਿਰ ਵੀ ਅੱਗੇ ਵਧਣਾ ਹੈ?</string>
     <string name="play_latest_videos">ਨਵੀਨਤਮ ਵੀਡੀਓ ਚਲਾਓ</string>
     <string name="nothing_selected">ਕੁਝ ਵੀ ਨਹੀਂ ਚੁਣਿਆ ਗਿਆ!</string>
     <string name="color_violet">ਬਹੁਮੁਖੀ ਵੈਂਗਣੀ</string>
@@ -544,6 +544,6 @@
     <string name="screenshot">ਸਕਰੀਨਸ਼ਾਟ</string>
     <string name="local_stream_extraction">ਸਥਾਨਕ ਸਟ੍ਰੀਮ ਪ੍ਰਾਪਤੀ</string>
     <string name="local_stream_extraction_summary">Piped ਦੀ ਵਰਤੋਂ ਕੀਤੇ ਬਿਨਾਂ YouTube ਤੋਂ ਸਿੱਧੇ ਵੀਡੀਓ ਪਲੇਬੈਕ ਜਾਣਕਾਰੀ ਪ੍ਰਾਪਤ ਕਰੋ।</string>
-    <string name="local_ryd">ਯੂਟਿਊਬ ਡਿਸਲਾਈਕ ਦੀ ਲੋਕਲ ਪ੍ਰਾਪਤੀ</string>
+    <string name="local_ryd">ਯੂਟਿਊਬ ਡਿਸਲਾਈਕ ਦੀ ਸਥਾਨਕ ਪ੍ਰਾਪਤੀ</string>
     <string name="local_ryd_summary">ਡਿਸਲਾਈਕ ਜਾਣਕਾਰੀ ਸਿੱਧੀ https://returnyoutubedislikeapi.com ਤੋਂ ਪ੍ਰਾਪਤ ਕਰੋ</string>
 </resources>
