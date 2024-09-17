@@ -1,5 +1,7 @@
 package com.github.libretube.ui.base
 
+import android.text.InputType
+import android.widget.Toast
 import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.MultiSelectListPreference
@@ -8,6 +10,7 @@ import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.R
 import com.github.libretube.databinding.DialogTextPreferenceBinding
 import com.github.libretube.ui.activities.SettingsActivity
+import com.github.libretube.ui.preferences.EditNumberPreference
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
@@ -76,11 +79,21 @@ abstract class BasePreferenceFragment : PreferenceFragmentCompat() {
             is EditTextPreference -> {
                 val binding = DialogTextPreferenceBinding.inflate(layoutInflater)
                 binding.input.setText(preference.text)
+
+                if (preference is EditNumberPreference) {
+                    binding.input.inputType = InputType.TYPE_NUMBER_FLAG_SIGNED
+                }
+
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle(preference.title)
                     .setView(binding.root)
                     .setPositiveButton(android.R.string.ok) { _, _ ->
                         val newValue = binding.input.text.toString()
+                        if (preference is EditNumberPreference && newValue.any { !it.isDigit() }) {
+                            Toast.makeText(context, R.string.invalid_input, Toast.LENGTH_LONG).show()
+                            return@setPositiveButton
+                        }
+
                         if (preference.callChangeListener(newValue)) {
                             preference.text = newValue
                         }
