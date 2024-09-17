@@ -203,11 +203,9 @@
 
     <PreferenceCategory app:title="@string/misc">
 
-        <ListPreference
+        <com.github.libretube.ui.preferences.EditNumberPreference
             android:icon="@drawable/ic_time"
             app:defaultValue="50"
-            app:entries="@array/bufferingGoal"
-            app:entryValues="@array/bufferingGoalValues"
             app:key="buffering_goal"
             app:summary="@string/buffering_goal_summary"
             app:title="@string/buffering_goal" />

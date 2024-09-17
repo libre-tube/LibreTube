@@ -53,6 +53,7 @@ import kotlinx.coroutines.runBlocking
 import java.util.Locale
 import java.util.concurrent.Executors
 import kotlin.math.absoluteValue
+import kotlin.math.max
 import kotlin.math.roundToInt
 
 object PlayerHelper {
@@ -543,7 +544,7 @@ object PlayerHelper {
             .setBackBuffer(1000 * 60 * 3, true)
             .setBufferDurationsMs(
                 MINIMUM_BUFFER_DURATION,
-                bufferingGoal,
+                max(bufferingGoal, MINIMUM_BUFFER_DURATION),
                 DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_MS,
                 DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS
             )
