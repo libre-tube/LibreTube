@@ -321,7 +321,7 @@
     <string name="app_backup">ऐप बैकअप</string>
     <string name="backup_restore_summary">आयात और निर्यात सब्सक्रिप्शनस, प्लेलिस्ट, …</string>
     <string name="privacy_alert">गोपनीयता चेतावनी</string>
-    <string name="username_email">एक ऐसे ई-मेल पते के साथ आगे बढ़ें जो अनुशंसित नहीं है?</string>
+    <string name="username_email">उपयोगकर्ता नाम के रूप में ईमेल पते का उपयोग करना अनुशंसित नहीं है। फिर भी आगे बढ़ें?</string>
     <string name="proceed">आगे बढ़ें</string>
     <string name="exportsuccess">निर्यात किया गया।</string>
     <string name="comments_disabled">अपलोडर द्वारा टिप्पणियां अक्षम कर दी गई हैं।</string>
@@ -544,4 +544,6 @@
     <string name="pip">PiP</string>
     <string name="local_stream_extraction">स्थानीय स्ट्रीम प्राप्ती</string>
     <string name="local_stream_extraction_summary">Piped का उपयोग किए बिना YouTube से सीधे वीडियो प्लेबैक जानकारी प्राप्त करें।</string>
+    <string name="local_ryd">यूट्यूब डिसलाईकस की स्थानीय प्राप्ती</string>
+    <string name="local_ryd_summary">https://returnyoutubedislikeapi.com से सीधे डिसलाईकस की जानकारी प्राप्त करें</string>
 </resources>
