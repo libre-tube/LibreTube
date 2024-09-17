@@ -556,4 +556,6 @@
     <string name="pip">صورة داخل صورة</string>
     <string name="local_stream_extraction_summary">جلب معلومات تشغيل الفيديو مباشرة من YouTube دون استخدام Piped.</string>
     <string name="local_stream_extraction">استخراج البث المحلي</string>
+    <string name="local_ryd">الإرجاع المحلي لعدم الإعجاب على يوتيوب</string>
+    <string name="local_ryd_summary">جلب معلومات عدم الإعجاب مباشرة من https://returnyoutubedislikeapi.com</string>
 </resources>
