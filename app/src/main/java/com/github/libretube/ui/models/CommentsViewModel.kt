@@ -8,18 +8,22 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
+import com.github.libretube.extensions.updateIfChanged
 import com.github.libretube.ui.models.sources.CommentPagingSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flatMapLatest
 
 class CommentsViewModel : ViewModel() {
     val videoIdLiveData = MutableLiveData<String>()
+    val commentCountLiveData = MutableLiveData<Long>()
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val commentsFlow = videoIdLiveData.asFlow()
         .flatMapLatest {
             Pager(PagingConfig(pageSize = 20, enablePlaceholders = false)) {
-                CommentPagingSource(it)
+                CommentPagingSource(it) {
+                    commentCountLiveData.updateIfChanged(it)
+                }
             }.flow
         }
         .cachedIn(viewModelScope)
