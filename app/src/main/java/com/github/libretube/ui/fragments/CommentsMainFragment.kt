@@ -108,11 +108,16 @@ class CommentsMainFragment : Fragment() {
                 launch {
                     viewModel.commentsFlow.collect {
                         commentPagingAdapter.submitData(it)
+                    }
+                }
 
-                        val commentCount = commentPagingAdapter.itemCount.toLong().formatShort()
+                launch {
+                    viewModel.commentCountLiveData.observe(viewLifecycleOwner) { commentCount ->
+                        if (commentCount == null) return@observe
+
                         commentsSheet?.updateFragmentInfo(
                             false,
-                            getString(R.string.comments_count, commentCount)
+                            getString(R.string.comments_count, commentCount.formatShort())
                         )
                     }
                 }
