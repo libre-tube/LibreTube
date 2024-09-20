@@ -34,7 +34,7 @@ benchmarkMacroJunit4 = "1.3.0"
 baselineprofile = "1.3.0"
 profileinstaller = "1.4.0"
 paging = "3.3.2"
-collection = "1.4.3"
+collection = "1.4.4"
 swiperefreshlayout = "1.1.0"
 
 [libraries]
