@@ -544,4 +544,6 @@
     <string name="pip">PiP</string>
     <string name="local_stream_extraction">Töötle meediavoogu kohalikus seadmes</string>
     <string name="local_stream_extraction_summary">Kasuta YouTube\'i meediavoo töötlemiseks kohalikku seadet, mitte Pipedi teenust.</string>
+    <string name="local_ryd">Kuva Youtube\'i mittemeeldimised oma seadmes</string>
+    <string name="local_ryd_summary">Laadi Youtube\'i mittemeeldimiste teave teenusest https://returnyoutubedislikeapi.com</string>
 </resources>

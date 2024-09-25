@@ -14,7 +14,7 @@
     <string name="cannotDownload">Nem lehetséges ezt a közvetítést letölteni.</string>
     <string name="downloadfailed">Sikertelen letöltés.</string>
     <string name="import_from_yt">Feliratkozások importálása</string>
-    <string name="server_error">Úgy tűnik, hogy probléma van a kiválasztott szerverrel. Próbálj meg egy másik példányt.</string>
+    <string name="server_error">Úgy tűnik, hogy probléma van a kiválasztott szerverrel. Próbáljon meg egy másik példányt.</string>
     <string name="unknown_error">Hálózati hiba.</string>
     <string name="empty">Meg kell adnia egy felhasználónevet és jelszót.</string>
     <string name="defres">Videófelbontás</string>
@@ -75,7 +75,7 @@
     <string name="music_videos">YT Music videók</string>
     <string name="music_albums">YT Music albumok</string>
     <string name="music_playlists">YT Music lejátszási listák</string>
-    <string name="sponsorblock">SzponzorBlokk</string>
+    <string name="sponsorblock">SponsorBlock</string>
     <string name="category_sponsor">Szponzor</string>
     <string name="category_sponsor_summary">Fizetett promóciók, fizetett ajánlások és közvetlen hirdetések. Nem önreklámozás, vagy ingyenes elismerés ügyek, alkotók, honlapok, vagy termékek számára</string>
     <string name="category_selfpromo">Nem fizetett/önpromóció</string>
@@ -99,7 +99,7 @@
     <string name="disabled">Ki</string>
     <string name="customization">Kiigazítások</string>
     <string name="instance">Példány</string>
-    <string name="website">Weboldal</string>
+    <string name="website">Honlap</string>
     <string name="open">Megnyitás…</string>
     <string name="reset">Alapértelmezések visszaállítása</string>
     <string name="deleteAccount">Fiók törlése</string>
@@ -107,18 +107,18 @@
     <string name="account">Fiók</string>
     <string name="restore">Visszaállítás</string>
     <string name="notifications">Értesítések</string>
-    <string name="irreversible">Biztos benne\? Ezt nem lehet visszacsinálni!</string>
+    <string name="irreversible">Biztos benne? Ez a művelet nem vonható vissza!</string>
     <string name="most_recent">Legújabb</string>
     <string name="least_recent">Legrégebbi</string>
     <string name="most_views">Legtöbb megtekintés</string>
     <string name="least_views">Legkevesebb megtekintés</string>
     <string name="shareTo">URL megosztása ide</string>
-    <string name="playOnBackground">Lejátszás háttérben</string>
-    <string name="defaultIcon">Alapérték</string>
+    <string name="playOnBackground">Lejátszás indítása a háttérben</string>
+    <string name="defaultIcon">Alapértelmezett</string>
     <string name="gradientIcon">Sima átmenet</string>
     <string name="fireIcon">Divatos tűz</string>
     <string name="torchIcon">Trendi fáklya</string>
-    <string name="network_metered">Forgalmi díjas</string>
+    <string name="network_metered">Forgalomkorlátos</string>
     <string name="version">Verzió: %1$s</string>
     <string name="error_occurred">Hiba</string>
     <string name="copied">Másolva</string>
@@ -135,7 +135,7 @@
     <string name="appearance">Megjelenés</string>
     <string name="category_filler">Időkitöltés/viccek</string>
     <string name="category_preview">Előnézet/visszatekintés</string>
-    <string name="update_available_text">Új frissítés érhető el. Kattints a Github kiadások oldalának a megnyitásához.</string>
+    <string name="update_available_text">Új frissítés érhető el. Kattintson a Github kiadások oldalának a megnyitásához.</string>
     <string name="watch_history">Megtekintési előzmények</string>
     <string name="skip_buttons">Kihagyás gombok</string>
     <string name="skip_buttons_summary">Gombok megjelenítése a következő vagy az előző videóra való ugráshoz</string>
@@ -146,7 +146,7 @@
     <string name="audio_video">Hang és videó</string>
     <string name="fullscreen_orientation">Teljes képernyős tájolás</string>
     <string name="auto_rotation">Automatikus elforgatás</string>
-    <string name="landscape">Felvő</string>
+    <string name="landscape">Fekvő</string>
     <string name="portrait">Álló</string>
     <string name="aspect_ratio">Videó képaránya</string>
     <string name="app_uptodate">A legutóbbi verzió fut.</string>
@@ -164,7 +164,7 @@
     <string name="video">Videó</string>
     <string name="player_autoplay">Automatikus lejátszás</string>
     <string name="quality">Minőség</string>
-    <string name="behavior">Működés</string>
+    <string name="behavior">Viselkedés</string>
     <string name="github">GitHub</string>
     <string name="chapters">Fejezetek</string>
     <string name="require_restart">Alkalmazás újraindítása szükséges</string>
@@ -179,7 +179,7 @@
     <string name="auth_instance">Hitelesítési példány</string>
     <string name="auth_instance_summary">Használjon másik példányt a hitelesített hívásokhoz</string>
     <string name="watch_positions">Pozíció megjegyzése</string>
-    <string name="turnInternetOn">Az internethez való csatlakozáshoz kapcsolja be a wifit vagy a mobiladat-kapcsolatot.</string>
+    <string name="turnInternetOn">Az internethez való csatlakozáshoz kapcsolja be a Wi-Fi-t vagy a mobiladat-kapcsolatot.</string>
     <string name="empty_instance">Töltse be a nevet és az API URL-t.</string>
     <string name="buffering_goal_summary">Maximális másodpercnyi videó a puffereléshez</string>
     <string name="seek_increment">Léptetés időköze</string>
@@ -190,7 +190,7 @@
     <string name="history_empty">Nincsenek még előzmények.</string>
     <string name="autoRotatePlayer_summary">Teljes képernyős lejátszás, amikor az eszközt elforgatják</string>
     <string name="data_saver_mode_summary">Bélyegképek és egyéb képek kihagyása</string>
-    <string name="no_player_found">Nem található külső lejátszó. Győződjön meg, hogy van telepítve.</string>
+    <string name="no_player_found">Nem található külső lejátszó. Győződjön meg arról, hogy telepített egyet.</string>
     <string name="no_search_result">Nincs eredmény.</string>
     <string name="export_subscriptions">Feliratkozások exportálása</string>
     <string name="history_size">Előzmények maximális mérete</string>
@@ -223,15 +223,15 @@
     <string name="general">Általános</string>
     <string name="pauseOnScreenOff">Automatikus szüneteltetés</string>
     <string name="pauseOnScreenOff_summary">A lejátszás szüneteltetése, ha a képernyő ki van kapcsolva</string>
-    <string name="player_summary">Alapértelmezések és működés</string>
+    <string name="player_summary">Alapértelmezett értékek és viselkedés</string>
     <string name="audio_video_summary">Minőség és formátum</string>
     <string name="caption_settings">Feliratok</string>
     <string name="playerAudioFormat">Hangformátum a lejátszóhoz</string>
     <string name="playerAudioQuality">Hangminőség</string>
-    <string name="update_available">Frissítés elérhető</string>
+    <string name="update_available">Frissítés érhető el</string>
     <string name="app_icon">Ikon</string>
     <string name="downloads">Letöltések</string>
-    <string name="network_wifi">Csak wifin</string>
+    <string name="network_wifi">Csak Wi-Fi</string>
     <string name="update_summary">Frissítések ellenőrzése</string>
     <string name="translate">Fordítás</string>
     <string name="network_all">Összes</string>
@@ -253,7 +253,7 @@
     <string name="history_summary">Megtekintési és keresési előzmények</string>
     <string name="repeat_mode">Ismétlés mód</string>
     <string name="system_caption_style">Rendszerfeliratok stílusa</string>
-    <string name="wifi">Wifi</string>
+    <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">Mobiladat</string>
     <string name="new_videos_badge">Indikátor az új videókhoz</string>
     <string name="new_videos_badge_summary">Jelvény megjelenítése az új videók számával, ha több van</string>
@@ -270,7 +270,7 @@
     <string name="download_channel_description">Értesítés megjelenítése média letöltésekor.</string>
     <string name="skip_segment">Szakasz kihagyása</string>
     <string name="playback_pitch">Hangmagasság</string>
-    <string name="change_region">A felkapott úgy tűnik, hogy nem elérhető a jelenlegi régió számára. Válasszon egy másikat a beállításokban.</string>
+    <string name="change_region">A felkapott kategória úgy tűnik, hogy nem elérhető a jelenlegi régió számára. Válasszon egy másikat a beállításokban.</string>
     <string name="added_to_playlist">Hozzáadva a lejátszási listához %1$s</string>
     <string name="invalid_filename">Érvénytelen fájlnév!</string>
     <string name="filename">Fájlnév</string>
@@ -396,7 +396,7 @@
         <item quantity="other">%d új közvetítés</item>
     </plurals>
     <string name="show_stream_thumbnails">Közvetítés bélyegképének megjelenítése</string>
-    <string name="show_stream_thumbnails_summary">Megjeleníti az új streamek bélyegképeit Ennek engedélyezése további adatokat fogyaszt</string>
+    <string name="show_stream_thumbnails_summary">Megjeleníti az új streamek bélyegképeit. Ennek engedélyezése további adatokat fogyaszt</string>
     <string name="duration">Időtartam</string>
     <string name="duration_reversed">Időtartam (fordított)</string>
     <string name="unlimited_search_history">Korlátlan keresési előzmények</string>
@@ -414,7 +414,7 @@
     <string name="choose_instance">Először válasszon egy példányt!</string>
     <string name="welcome">Üdvözli a LibreTube</string>
     <string name="visible">Megjelenítés a keresési sávban</string>
-    <string name="stop">Stop</string>
+    <string name="stop">Leállítás</string>
     <string name="change_playlist_description">Lejátszási lista leírásának módosítása</string>
     <string name="playlist_description">Lejátszási lista leírása</string>
     <string name="emptyPlaylistDescription">A lejátszási lista leírása nem lehet üres</string>
@@ -422,14 +422,14 @@
     <string name="sb_custom_colors">Egyéni szakaszszínek</string>
     <string name="color">Szín</string>
     <string name="invalid_color">Érvénytelen a megadott színérték!</string>
-    <string name="sb_custom_colors_summary">Egyéni színek bekapcsolása a SzponzorBlokk-szakaszokhoz</string>
+    <string name="sb_custom_colors_summary">Egyéni színek bekapcsolása a SponsorBlock szakaszokhoz</string>
     <string name="category_highlight_summary">Lehet a meghirdetett cím, a bélyegkép vagy a videó legérdekesebb része. A fejezetek részben a rákoppintással ugorhat oda</string>
-    <string name="choose_instance_long">Válasszon ki az alább felsoroltak közül egy Piped példányt. A Piped példány közvetítőként fog működni Ön és a YouTube között. Ezek a példányok különböző fizikai helyszíneken találhatók - ezeket az országzászló jelzi. A fizikailag közelebbi példányok valószínűleg gyorsabbak, mint a távoli példányok. A beállításokban bármikor megváltoztatható a használt példány.</string>
+    <string name="choose_instance_long">Válasszon ki az alább felsoroltak közül egy Piped példányt. A Piped példány közvetítőként fog működni ön és a YouTube között. Ezek a példányok különböző fizikai helyszíneken találhatók - ezeket az országzászló jelzi. A fizikailag közelebbi példányok valószínűleg gyorsabbak, mint a távoli példányok. A beállításokban bármikor megváltoztatható a használt példány.</string>
     <string name="off">Ki</string>
     <string name="fallback_piped_proxy_summary">Videók betöltése proxy-n keresztül, ha a YouTube-hoz való közvetlen csatlakozás nem működik az aktuális videónál (növeli a kezdeti betöltési időt). Ha ki van kapcsolva, a YouTube zenei tartalma valószínűleg nem fog lejátszódni a YT korlátozások miatt</string>
     <string name="manual">Manuális</string>
     <string name="fallback_piped_proxy">Visszalépés a Piped proxyra</string>
-    <string name="chapters_videoHighlight">Videó kiemelés</string>
+    <string name="chapters_videoHighlight">Videókiemelés</string>
     <string name="automatic">Automatikus</string>
     <string name="show_search_suggestions">Keresési javaslatok megjelenítése</string>
     <string name="descriptive_audio_track">leíró</string>
@@ -468,7 +468,7 @@
     <string name="tooltip_edit_groups">Csoportok szerkesztése</string>
     <string name="tooltip_create_playlist">Lejátszási lista létrehozása</string>
     <string name="auto_generated">automatikusan generált</string>
-    <string name="tooltip_sponsorblock">SzponzorBlokk váltása</string>
+    <string name="tooltip_sponsorblock">SponsorBlock váltása</string>
     <string name="tooltip_options">Lehetőségek</string>
     <string name="resolution_limited">korlátozott</string>
     <string name="tooltip_watch_position">Megtekintési pozíció</string>
@@ -483,8 +483,8 @@
     <string name="group_name_error_empty">Adjon meg egy nevet</string>
     <string name="group_name_error_exists">Válasszon egyedi nevet</string>
     <string name="filename_too_long">A fájlnév túl hosszú!</string>
-    <string name="contribute_to_sponsorblock">Hozzájárulás a SzponzorBlokkhoz</string>
-    <string name="sponsorblock_user_id">SzponzorBlokk felhasználói azonosító</string>
+    <string name="contribute_to_sponsorblock">Hozzájárulás a SponsorBlock-hoz</string>
+    <string name="sponsorblock_user_id">SponsorBlock felhasználói azonosító</string>
     <string name="donate">Adományozás</string>
     <string name="music_artists">YT Music előadók</string>
     <string name="autoplay_playlists_summary">Automatikusan lejátssza a következő videót egy lejátszási listában az automatikus lejátszási adatoktól függetlenül</string>
@@ -531,7 +531,7 @@
     <string name="comments_count">Hozzászólások (%1$s)</string>
     <string name="external_player">Külső lejátszó</string>
     <string name="albums">Albumok</string>
-    <string name="show_updates">A frissítések automatikus ellenőrzése</string>
+    <string name="show_updates">Frissítések automatikus ellenőrzése</string>
     <string name="import_temp_playlist">Importálja az átmeneti lejátszási listát?</string>
     <string name="import_temp_playlist_summary">Szeretne új lejátszási listát létrehozni „%1$s” néven? A lejátszási lista %2$d videót fog tartalmazni.</string>
     <string name="title">Cím</string>

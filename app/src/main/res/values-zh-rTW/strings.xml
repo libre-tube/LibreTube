@@ -541,4 +541,6 @@
     <string name="pip">畫中畫</string>
     <string name="local_stream_extraction">本機串流擷取</string>
     <string name="local_stream_extraction_summary">直接從 YouTube 擷取視訊播放資訊，不使用 Piped。</string>
+    <string name="local_ryd">本機回傳 YouTube 不喜歡</string>
+    <string name="local_ryd_summary">直接從 https://returnyoutubedislikeapi.com 取得不喜歡資訊</string>
 </resources>

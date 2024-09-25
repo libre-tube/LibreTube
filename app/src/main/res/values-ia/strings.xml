@@ -544,4 +544,5 @@
     <string name="local_stream_extraction_summary">Obtene directemente le information de reproduction de video ab YouTube sin usar Piped.</string>
     <string name="pip">PiP</string>
     <string name="local_stream_extraction">Extraction de fluxo local</string>
+    <string name="local_ryd_summary">Obtener directemente le informationes del \"non me place\" ab https://returnyoutubedislikeapi.com</string>
 </resources>

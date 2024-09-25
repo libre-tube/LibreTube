@@ -166,7 +166,7 @@
     <string name="playback_speed">再生速度</string>
     <string name="advanced">高度な設定</string>
     <string name="player">プレーヤー</string>
-    <string name="appearance_summary">アプリを自分好みにしてください</string>
+    <string name="appearance_summary">アプリを自分好みに調整</string>
     <string name="advanced_summary">ダウンロードおよび初期化</string>
     <string name="no_audio">音声なし</string>
     <string name="no_video">映像なし</string>
@@ -379,7 +379,7 @@
     <string name="subscriberAndVideoCounts">登録者数 %1$s人 • %2$d 本の動画</string>
     <string name="replies">返信</string>
     <string name="disable_proxy">Pipedのプロキシを無効化</string>
-    <string name="disable_proxy_summary">動画や画像を YouTube のサーバーから直接取得します。VPN を常時使用する際にのみ使用します</string>
+    <string name="disable_proxy_summary">動画や画像を YouTube のサーバーから直接取得します。VPN を常時使用する際にのみ有効にしてください</string>
     <string name="auto_fullscreen_shorts">ショート動画を自動で全画面表示</string>
     <string name="sleep_timer">スリープタイマー</string>
     <string name="fullscreen_gestures">ジェスチャで全画面を開始/終了</string>
