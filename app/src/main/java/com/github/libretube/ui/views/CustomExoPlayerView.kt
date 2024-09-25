@@ -10,7 +10,6 @@ import android.os.Handler
 import android.os.Looper
 import android.text.format.DateUtils
 import android.util.AttributeSet
-import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
@@ -260,7 +259,6 @@ abstract class CustomExoPlayerView(
         val player = player ?: return
         val chapters = chaptersViewModel.chapters
 
-        Log.e("cha", chapters.isEmpty().toString())
         binding.chapterName.isInvisible = chapters.isEmpty()
 
         // the following logic to set the chapter title can be skipped if no chapters are available
@@ -661,10 +659,9 @@ abstract class CustomExoPlayerView(
         if (!activity.hasCutout && binding.topBar.marginStart == LANDSCAPE_MARGIN_HORIZONTAL_NONE) return
 
         // add a margin to the top and the bottom bar in landscape mode for notches
-        val isForcedPortrait =
-            activity.requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+        val isInPortrait = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
         val horizontalMargin =
-            if (isFullscreen() && !isForcedPortrait) LANDSCAPE_MARGIN_HORIZONTAL else LANDSCAPE_MARGIN_HORIZONTAL_NONE
+            if (isFullscreen() && !isInPortrait) LANDSCAPE_MARGIN_HORIZONTAL else LANDSCAPE_MARGIN_HORIZONTAL_NONE
 
         listOf(binding.topBar, binding.bottomBar).forEach {
             it.updateLayoutParams<MarginLayoutParams> {

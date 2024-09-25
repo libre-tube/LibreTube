@@ -31,4 +31,6 @@ class OfflinePlayerView(
         this.chapters = chapters
         setCurrentChapterName()
     }
+
+    override fun isFullscreen(): Boolean = true
 }
