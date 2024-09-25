@@ -17,6 +17,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.PixelCopy
@@ -1103,6 +1104,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         // init the chapters recyclerview
         chaptersViewModel.chaptersLiveData.value = streams.chapters
+        chaptersViewModel.chaptersLiveData.observe(viewLifecycleOwner) {
+            binding.player.setCurrentChapterName()
+        }
 
         if (PlayerHelper.relatedStreamsEnabled) {
             val relatedLayoutManager = binding.relatedRecView.layoutManager as LinearLayoutManager
@@ -1197,10 +1201,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         chaptersViewModel.chaptersLiveData.postValue(
             chaptersViewModel.chapters.plus(highlightChapter).sortedBy { it.start }
         )
-
-        withContext(Dispatchers.Main) {
-            binding.player.setCurrentChapterName()
-        }
     }
 
     private fun getSubtitleConfigs(): List<SubtitleConfiguration> = streams.subtitles.map {
@@ -1478,12 +1478,15 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 listener = null
             )
         } else {
-            baseBottomSheet.setSimpleItems(audioLanguages, preselectedItem = audioLanguagesAndRoleFlags.firstOrNull {
-                val format = viewModel.player.audioFormat
-                format?.language == it.first && format?.roleFlags == it.second
-            }?.let {
-                PlayerHelper.getAudioTrackNameFromFormat(context, it)
-            },) { index ->
+            baseBottomSheet.setSimpleItems(
+                audioLanguages,
+                preselectedItem = audioLanguagesAndRoleFlags.firstOrNull {
+                    val format = viewModel.player.audioFormat
+                    format?.language == it.first && format?.roleFlags == it.second
+                }?.let {
+                    PlayerHelper.getAudioTrackNameFromFormat(context, it)
+                },
+            ) { index ->
                 val selectedAudioFormat = audioLanguagesAndRoleFlags[index]
                 viewModel.trackSelector.updateParameters {
                     setPreferredAudioLanguage(selectedAudioFormat.first)
