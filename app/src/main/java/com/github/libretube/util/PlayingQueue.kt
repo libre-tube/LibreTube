@@ -10,12 +10,15 @@ import com.github.libretube.extensions.move
 import com.github.libretube.extensions.runCatchingIO
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PlayerHelper
+import kotlinx.coroutines.Job
 import java.util.Collections
 
 object PlayingQueue {
     // queue is a synchronized list to be safely accessible from different coroutine threads
     private val queue = Collections.synchronizedList(mutableListOf<StreamItem>())
     private var currentStream: StreamItem? = null
+
+    private val queueJobs = mutableListOf<Job>()
 
     /**
      * Listener that gets called when the user selects an item from the queue
@@ -24,7 +27,13 @@ object PlayingQueue {
 
     var repeatMode: Int = Player.REPEAT_MODE_OFF
 
-    fun clear() = queue.clear()
+    fun clear() {
+        queueJobs.forEach {
+            it.cancel()
+        }
+        queueJobs.clear()
+        queue.clear()
+    }
 
     /**
      * @param skipExisting Whether to skip the [streamItem] if it's already part of the queue
@@ -143,16 +152,19 @@ object PlayingQueue {
         }
     }
 
-    private fun fetchMoreFromPlaylist(playlistId: String, nextPage: String?, isMainList: Boolean) =
-        runCatchingIO {
-            var playlistNextPage = nextPage
-            while (playlistNextPage != null) {
-                RetrofitInstance.authApi.getPlaylistNextPage(playlistId, playlistNextPage).run {
-                    addToQueueAsync(relatedStreams, isMainList = isMainList)
-                    playlistNextPage = this.nextpage
-                }
+    private suspend fun fetchMoreFromPlaylist(
+        playlistId: String,
+        nextPage: String?,
+        isMainList: Boolean
+    ) {
+        var playlistNextPage = nextPage
+        while (playlistNextPage != null) {
+            RetrofitInstance.authApi.getPlaylistNextPage(playlistId, playlistNextPage).run {
+                addToQueueAsync(relatedStreams, isMainList = isMainList)
+                playlistNextPage = this.nextpage
             }
         }
+    }
 
     fun insertPlaylist(playlistId: String, newCurrentStream: StreamItem?) = runCatchingIO {
         val playlist = PlaylistsHelper.getPlaylist(playlistId)
@@ -160,14 +172,16 @@ object PlayingQueue {
         addToQueueAsync(playlist.relatedStreams, newCurrentStream, isMainList)
         if (playlist.nextpage == null) return@runCatchingIO
         fetchMoreFromPlaylist(playlistId, playlist.nextpage, isMainList)
-    }
+    }.let { queueJobs.add(it) }
 
-    private fun fetchMoreFromChannel(channelId: String, nextPage: String?) = runCatchingIO {
+    private suspend fun fetchMoreFromChannel(channelId: String, nextPage: String?) {
         var channelNextPage = nextPage
-        while (channelNextPage != null) {
-            RetrofitInstance.api.getChannelNextPage(channelId, nextPage!!).run {
+        var pageIndex = 1
+        while (channelNextPage != null && pageIndex < 10) {
+            RetrofitInstance.api.getChannelNextPage(channelId, channelNextPage).run {
                 addToQueueAsync(relatedStreams)
                 channelNextPage = this.nextpage
+                pageIndex++
             }
         }
     }
@@ -177,7 +191,7 @@ object PlayingQueue {
         addToQueueAsync(channel.relatedStreams, newCurrentStream)
         if (channel.nextpage == null) return@runCatchingIO
         fetchMoreFromChannel(channelId, channel.nextpage)
-    }
+    }.let { queueJobs.add(it) }
 
     fun insertByVideoId(videoId: String) = runCatchingIO {
         val streams = StreamsExtractor.extractStreams(videoId.toID())
