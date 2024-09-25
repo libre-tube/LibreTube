@@ -85,13 +85,16 @@ class DownloadDialog : DialogFragment() {
                     StreamsExtractor.extractStreams(videoId)
                 }
             } catch (e: IOException) {
-                println(e)
-                Log.e(TAG(), "IOException, you might not have internet connection")
+                Log.e(TAG(), e.stackTraceToString())
                 Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
                 return@launch
             } catch (e: HttpException) {
-                Log.e(TAG(), "HttpException, unexpected response")
+                Log.e(TAG(), e.stackTraceToString())
                 Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
+                return@launch
+            } catch (e: Exception) {
+                Log.e(TAG(), e.stackTraceToString())
+                Toast.makeText(context, e.localizedMessage, Toast.LENGTH_SHORT).show()
                 return@launch
             }
             initDownloadOptions(binding, response)
