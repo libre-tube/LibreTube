@@ -434,6 +434,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             setFullscreen()
         }
 
+        chaptersViewModel.chaptersLiveData.observe(viewLifecycleOwner) {
+            binding.player.setCurrentChapterName()
+        }
+
         playVideo()
 
         showBottomBar()
@@ -1007,8 +1011,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             // show the player notification
             initializePlayerNotification()
 
-            binding.player.setCurrentChapterName()
-
             fetchSponsorBlockSegments()
 
             if (streams.category == Streams.categoryMusic) {
@@ -1103,10 +1105,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playerBinding.exoTitle.text = streams.title
 
         // init the chapters recyclerview
-        chaptersViewModel.chaptersLiveData.value = streams.chapters
-        chaptersViewModel.chaptersLiveData.observe(viewLifecycleOwner) {
-            binding.player.setCurrentChapterName()
-        }
+        chaptersViewModel.chaptersLiveData.postValue(streams.chapters)
 
         if (PlayerHelper.relatedStreamsEnabled) {
             val relatedLayoutManager = binding.relatedRecView.layoutManager as LinearLayoutManager

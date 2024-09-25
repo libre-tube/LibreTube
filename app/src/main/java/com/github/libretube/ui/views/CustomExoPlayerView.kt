@@ -10,6 +10,7 @@ import android.os.Handler
 import android.os.Looper
 import android.text.format.DateUtils
 import android.util.AttributeSet
+import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
@@ -259,6 +260,7 @@ abstract class CustomExoPlayerView(
         val player = player ?: return
         val chapters = chaptersViewModel.chapters
 
+        Log.e("cha", chapters.isEmpty().toString())
         binding.chapterName.isInvisible = chapters.isEmpty()
 
         // the following logic to set the chapter title can be skipped if no chapters are available
@@ -272,7 +274,8 @@ abstract class CustomExoPlayerView(
 
         val currentIndex = PlayerHelper.getCurrentChapterIndex(player.currentPosition, chapters)
         val newChapterName = currentIndex?.let { chapters[it].title.trim() }.orEmpty()
-        chaptersViewModel.currentChapterIndex.updateIfChanged(currentIndex ?: return)
+
+        chaptersViewModel.currentChapterIndex.updateIfChanged(currentIndex ?: -1)
 
         // change the chapter name textView text to the chapterName
         if (newChapterName != binding.chapterName.text) {
