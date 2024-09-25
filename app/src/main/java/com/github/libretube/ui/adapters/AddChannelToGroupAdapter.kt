@@ -28,12 +28,10 @@ class AddChannelToGroupAdapter(
 
             groupCheckbox.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
-                    channelGroup.channels = channelGroup.channels + channelId
+                    channelGroup.channels += channelId
                 } else {
-                    channelGroup.channels = channelGroup.channels - channelId
+                    channelGroup.channels -= channelId
                 }
-
-                notifyItemChanged(position)
             }
         }
     }
