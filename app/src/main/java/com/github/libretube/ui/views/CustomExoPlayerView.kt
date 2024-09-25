@@ -250,7 +250,11 @@ abstract class CustomExoPlayerView(
         }
     }
 
-    // set the name of the video chapter in the exoPlayerView
+    /**
+     * Set the name of the video chapter in the [CustomExoPlayerView]
+     * @param forceUpdate Update the current chapter name no matter if the seek bar is scrubbed
+     * @param enqueueNew set a timeout to automatically repeat this function again in 100ms
+     */
     fun setCurrentChapterName(forceUpdate: Boolean = false, enqueueNew: Boolean = true) {
         val player = player ?: return
         val chapters = chaptersViewModel.chapters
@@ -267,8 +271,7 @@ abstract class CustomExoPlayerView(
         if (scrubbingTimeBar && !forceUpdate) return
 
         val currentIndex = PlayerHelper.getCurrentChapterIndex(player.currentPosition, chapters)
-        val newChapterName = currentIndex?.let { chapters[it].title.trim() }
-            ?: context.getString(R.string.no_chapter)
+        val newChapterName = currentIndex?.let { chapters[it].title.trim() }.orEmpty()
         chaptersViewModel.currentChapterIndex.updateIfChanged(currentIndex ?: return)
 
         // change the chapter name textView text to the chapterName
