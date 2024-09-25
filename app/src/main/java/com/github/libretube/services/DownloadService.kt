@@ -387,7 +387,9 @@ class DownloadService : LifecycleService() {
      * Regenerate stream url using available info format and quality.
      */
     private suspend fun regenerateLink(item: DownloadItem) {
-        val streams = StreamsExtractor.extractStreams(item.videoId)
+        val streams = runCatching {
+            StreamsExtractor.extractStreams(item.videoId)
+        }.getOrNull() ?: return
         val stream = when (item.type) {
             FileType.AUDIO -> streams.audioStreams
             FileType.VIDEO -> streams.videoStreams
