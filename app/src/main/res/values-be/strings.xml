@@ -550,4 +550,6 @@
     <string name="screenshot">Скрыншот</string>
     <string name="local_stream_extraction">Лакальнае выманне патоку</string>
     <string name="local_stream_extraction_summary">Атрымліваць інфармацыю аб патоках напрамую з YouTube, не выкарыстоўваючы Piped.</string>
+    <string name="local_ryd">Лакальны запыт дызлайкаў</string>
+    <string name="local_ryd_summary">Запытваць інфармацыю аб дызлайках напрамую з https://returnyoutubedislikeapi.com</string>
 </resources>
