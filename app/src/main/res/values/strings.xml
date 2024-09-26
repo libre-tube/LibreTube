@@ -361,6 +361,8 @@
     <string name="all_caught_up_summary">You\'ve seen all new videos</string>
     <string name="import_playlists">Import playlists</string>
     <string name="export_playlists">Export playlists</string>
+    <string name="import_watch_history">Import watch history</string>
+    <string name="import_watch_history_desc">Please note that not everything will be imported due to YouTube\'s limited export data.</string>
     <string name="app_backup">App Backup</string>
     <string name="backup_restore_summary">Import &amp; export subscriptions, playlists, …</string>
     <string name="exportsuccess">Exported.</string>
@@ -474,6 +476,7 @@
     <string name="import_format_newpipe" translatable="false">NewPipe</string>
     <string name="import_format_freetube" translatable="false">FreeTube</string>
     <string name="import_format_youtube_csv" translatable="false">YouTube (CSV)</string>
+    <string name="import_format_youtube_json" translatable="false">YouTube (JSON)</string>
     <string name="home_tab_content">Home tab content</string>
     <string name="show_search_suggestions">Show search suggestions</string>
     <string name="audio_track_format">%1$s - %2$s</string>

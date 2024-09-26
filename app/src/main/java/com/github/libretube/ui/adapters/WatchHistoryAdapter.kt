@@ -3,6 +3,7 @@ package com.github.libretube.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isGone
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.VideoRowBinding
@@ -54,9 +55,19 @@ class WatchHistoryAdapter(
             videoTitle.text = video.title
             channelName.text = video.uploader
             videoInfo.text = video.uploadDate?.let { TextUtils.localizeDate(it) }
-            thumbnailDuration.setFormattedDuration(video.duration!!, null)
             ImageHelper.loadImage(video.thumbnailUrl, thumbnail)
-            ImageHelper.loadImage(video.uploaderAvatar, channelImage, true)
+
+            if (video.duration != null) {
+                thumbnailDuration.setFormattedDuration(video.duration, null)
+            } else {
+                thumbnailDurationCard.isGone = true
+            }
+
+            if (video.uploaderAvatar != null) {
+                ImageHelper.loadImage(video.uploaderAvatar, channelImage, true)
+            } else {
+                channelImage.isGone = true
+            }
 
             channelImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, video.uploaderUrl)
@@ -81,7 +92,7 @@ class WatchHistoryAdapter(
                 true
             }
 
-            watchProgress.setWatchProgressLength(video.videoId, video.duration)
+            if (video.duration != null) watchProgress.setWatchProgressLength(video.videoId, video.duration)
         }
     }
 }

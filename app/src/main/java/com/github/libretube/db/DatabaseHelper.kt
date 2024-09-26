@@ -23,19 +23,25 @@ object DatabaseHelper {
         videoId,
         streams.toStreamItem(videoId)
     )
-    suspend fun addToWatchHistory(videoId: String, stream: StreamItem) =
+
+    suspend fun addToWatchHistory(videoId: String, stream: StreamItem) {
+        val watchHistoryItem = WatchHistoryItem(
+            videoId,
+            stream.title,
+            Instant.fromEpochMilliseconds(stream.uploaded)
+                .toLocalDateTime(TimeZone.currentSystemDefault()).date,
+            stream.uploaderName,
+            stream.uploaderUrl?.toID(),
+            stream.uploaderAvatar,
+            stream.thumbnail,
+            stream.duration
+        )
+
+        addToWatchHistory(watchHistoryItem)
+    }
+
+    suspend fun addToWatchHistory(watchHistoryItem: WatchHistoryItem) =
         withContext(Dispatchers.IO) {
-            val watchHistoryItem = WatchHistoryItem(
-                videoId,
-                stream.title,
-                Instant.fromEpochMilliseconds(stream.uploaded)
-                    .toLocalDateTime(TimeZone.currentSystemDefault()).date,
-                stream.uploaderName,
-                stream.uploaderUrl?.toID(),
-                stream.uploaderAvatar,
-                stream.thumbnail,
-                stream.duration
-            )
             Database.watchHistoryDao().insert(watchHistoryItem)
             val maxHistorySize = PreferenceHelper.getString(
                 PreferenceKeys.WATCH_HISTORY_SIZE,
