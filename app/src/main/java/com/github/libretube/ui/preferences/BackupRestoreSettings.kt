@@ -29,28 +29,25 @@ class BackupRestoreSettings : BasePreferenceFragment() {
     private val backupDateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss")
     private var backupFile = BackupFile()
     private var importFormat: ImportFormat = ImportFormat.NEWPIPE
-    private val importSubscriptionFormatList
-        get() = listOf(
-            ImportFormat.NEWPIPE,
-            ImportFormat.FREETUBE,
-            ImportFormat.YOUTUBECSV
-        )
-    private val exportSubscriptionFormatList
-        get() = listOf(
-            ImportFormat.NEWPIPE,
-            ImportFormat.FREETUBE
-        )
-    private val importPlaylistFormatList
-        get() = listOf(
-            ImportFormat.PIPED,
-            ImportFormat.FREETUBE,
-            ImportFormat.YOUTUBECSV
-        )
-    private val exportPlaylistFormatList
-        get() = listOf(
-            ImportFormat.PIPED,
-            ImportFormat.FREETUBE
-        )
+    private val importSubscriptionFormatList = listOf(
+        ImportFormat.NEWPIPE,
+        ImportFormat.FREETUBE,
+        ImportFormat.YOUTUBECSV
+    )
+    private val exportSubscriptionFormatList = listOf(
+        ImportFormat.NEWPIPE,
+        ImportFormat.FREETUBE
+    )
+    private val importPlaylistFormatList = listOf(
+        ImportFormat.PIPED,
+        ImportFormat.FREETUBE,
+        ImportFormat.YOUTUBECSV
+    )
+    private val exportPlaylistFormatList = listOf(
+        ImportFormat.PIPED,
+        ImportFormat.FREETUBE
+    )
+    private val importWatchHistoryFormatList = listOf(ImportFormat.YOUTUBEJSON)
 
     override val titleResourceId: Int = R.string.backup_restore
 
@@ -94,14 +91,22 @@ class BackupRestoreSettings : BasePreferenceFragment() {
         }
     }
 
-    /**
-     * result listeners for importing and exporting playlists
-     */
+
+    // result listeners for importing and exporting playlists
     private val getPlaylistsFile =
         registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) {
             it?.forEach {
                 CoroutineScope(Dispatchers.IO).launch {
                     ImportHelper.importPlaylists(requireActivity(), it, importFormat)
+                }
+            }
+        }
+
+    private val getWatchHistoryFile =
+        registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) {
+            it?.forEach {
+                CoroutineScope(Dispatchers.IO).launch {
+                    ImportHelper.importWatchHistory(requireActivity(), it, importFormat)
                 }
             }
         }
@@ -175,6 +180,16 @@ class BackupRestoreSettings : BasePreferenceFragment() {
                 createPlaylistsFile.launch(
                     "${getString(importFormat.value).lowercase()}-playlists.json"
                 )
+            }
+            true
+        }
+
+        val importWatchHistory = findPreference<Preference>("import_watch_history")
+        importWatchHistory?.setOnPreferenceClickListener {
+            val list = importWatchHistoryFormatList.map { getString(it.value) }
+            createImportFormatDialog(R.string.import_watch_history, list) {
+                importFormat = importWatchHistoryFormatList[it]
+                getWatchHistoryFile.launch(arrayOf("*/*"))
             }
             true
         }

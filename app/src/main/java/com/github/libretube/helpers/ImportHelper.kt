@@ -1,6 +1,7 @@
 package com.github.libretube.helpers
 
 import android.app.Activity
+import android.content.Context
 import android.net.Uri
 import android.util.Log
 import com.github.libretube.R
@@ -8,7 +9,9 @@ import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
+import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Database
+import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.enums.ImportFormat
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
@@ -19,6 +22,7 @@ import com.github.libretube.obj.NewPipeSubscription
 import com.github.libretube.obj.NewPipeSubscriptions
 import com.github.libretube.obj.PipedImportPlaylist
 import com.github.libretube.obj.PipedPlaylistFile
+import com.github.libretube.obj.YouTubeWatchHistoryFileItem
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.util.TextUtils
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -27,6 +31,8 @@ import kotlinx.serialization.json.encodeToStream
 import java.util.stream.Collectors
 
 object ImportHelper {
+    private const val IMPORT_THUMBNAIL_QUALITY = "mqdefault"
+
     /**
      * Import subscriptions by a file uri
      */
@@ -252,6 +258,45 @@ object ImportHelper {
             }
 
             else -> Unit
+        }
+    }
+
+    @OptIn(ExperimentalSerializationApi::class)
+    suspend fun importWatchHistory(context: Context, uri: Uri, importFormat: ImportFormat) {
+        val videos = when (importFormat) {
+            ImportFormat.YOUTUBEJSON -> {
+                context.contentResolver.openInputStream(uri)?.use {
+                    JsonHelper.json.decodeFromStream<List<YouTubeWatchHistoryFileItem>>(it)
+                }
+                    .orEmpty()
+                    .filter { it.activityControls.contains("YouTube watch history") }
+                    .reversed()
+                    .map {
+                        val videoId = it.titleUrl.substring(it.titleUrl.length - 11)
+
+                        WatchHistoryItem(
+                            videoId = videoId,
+                            title = it.title.replaceFirst("Watched ", ""),
+                            uploader = it.subtitles.firstOrNull()?.name,
+                            uploaderUrl = it.subtitles.firstOrNull()?.url?.let { url ->
+                                url.substring(url.length - 24)
+                            },
+                            thumbnailUrl = "https://img.youtube.com/vi/${videoId}/${IMPORT_THUMBNAIL_QUALITY}.jpg"
+                        )
+                    }
+            }
+
+            else -> emptyList()
+        }
+
+        for (video in videos) {
+            DatabaseHelper.addToWatchHistory(video)
+        }
+
+        if (videos.isEmpty()) {
+            context.toastFromMainDispatcher(R.string.emptyList)
+        } else {
+            context.toastFromMainDispatcher(R.string.success)
         }
     }
 }
