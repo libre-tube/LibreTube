@@ -1,6 +1,9 @@
 package com.github.libretube.api
 
+import android.content.Context
+import com.github.libretube.R
 import com.github.libretube.api.obj.ChapterSegment
+import com.github.libretube.api.obj.Message
 import com.github.libretube.api.obj.MetaInfo
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.PreviewFrames
@@ -14,6 +17,9 @@ import org.schabi.newpipe.extractor.NewPipe
 import org.schabi.newpipe.extractor.stream.StreamInfo
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
 import org.schabi.newpipe.extractor.stream.VideoStream
+import retrofit2.HttpException
+import java.io.IOException
+import java.lang.Exception
 
 fun VideoStream.toPipedStream(): PipedStream = PipedStream(
     url = content,
@@ -149,5 +155,15 @@ object StreamsExtractor {
                 )
             }
         )
+    }
+
+    fun getExtractorErrorMessageString(context: Context, exception: Exception): String {
+        return when (exception) {
+            is IOException -> context.getString(R.string.unknown_error)
+            is HttpException -> exception.response()?.errorBody()?.string()?.runCatching {
+                JsonHelper.json.decodeFromString<Message>(this).message
+            }?.getOrNull() ?: context.getString(R.string.server_error)
+            else -> exception.localizedMessage.orEmpty()
+        }
     }
 }

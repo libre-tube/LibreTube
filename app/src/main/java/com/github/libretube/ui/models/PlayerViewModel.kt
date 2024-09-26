@@ -22,8 +22,6 @@ import com.github.libretube.util.deArrow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
-import retrofit2.HttpException
-import java.io.IOException
 
 @UnstableApi
 class PlayerViewModel(
@@ -53,20 +51,11 @@ class PlayerViewModel(
         withContext(Dispatchers.IO) {
             if (isOrientationChangeInProgress && streamsInfo != null) return@withContext streamsInfo to null
 
-            streamsInfo = try {
-                StreamsExtractor.extractStreams(videoId).deArrow(videoId)
-            } catch (e: IOException) {
-                return@withContext null to context.getString(R.string.unknown_error)
-            } catch (e: HttpException) {
-                val errorMessage = e.response()?.errorBody()?.string()?.runCatching {
-                    JsonHelper.json.decodeFromString<Message>(this).message
-                }?.getOrNull() ?: context.getString(R.string.server_error)
-                return@withContext null to errorMessage
+            return@withContext try {
+                StreamsExtractor.extractStreams(videoId).deArrow(videoId) to null
             } catch (e: Exception) {
-                return@withContext null to e.message
+                return@withContext null to StreamsExtractor.getExtractorErrorMessageString(context, e)
             }
-
-            return@withContext streamsInfo to null
         }
 
     suspend fun fetchSponsorBlockSegments(videoId: String) = withContext(Dispatchers.IO) {
