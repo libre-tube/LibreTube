@@ -244,7 +244,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     private val playerListener = object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
-            if (PlayerHelper.pipEnabled) {
+            if (PlayerHelper.pipEnabled || PictureInPictureCompat.isInPictureInPictureMode(mainActivity)) {
                 PictureInPictureCompat.setPictureInPictureParams(requireActivity(), pipParams)
             }
 
