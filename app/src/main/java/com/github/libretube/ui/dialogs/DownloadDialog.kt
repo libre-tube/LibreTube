@@ -13,7 +13,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
-import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.StreamsExtractor
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Streams
@@ -22,6 +21,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogDownloadBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.getWhileDigit
+import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.parcelable.DownloadData
@@ -30,8 +30,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.HttpException
-import java.io.IOException
 
 class DownloadDialog : DialogFragment() {
     private lateinit var videoId: String
@@ -84,17 +82,11 @@ class DownloadDialog : DialogFragment() {
                 withContext(Dispatchers.IO) {
                     StreamsExtractor.extractStreams(videoId)
                 }
-            } catch (e: IOException) {
-                Log.e(TAG(), e.stackTraceToString())
-                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                return@launch
-            } catch (e: HttpException) {
-                Log.e(TAG(), e.stackTraceToString())
-                Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
-                return@launch
             } catch (e: Exception) {
                 Log.e(TAG(), e.stackTraceToString())
-                Toast.makeText(context, e.localizedMessage, Toast.LENGTH_SHORT).show()
+                val context = context ?: return@launch
+                val errorMessage = StreamsExtractor.getExtractorErrorMessageString(context, e)
+                context.toastFromMainDispatcher(errorMessage)
                 return@launch
             }
             initDownloadOptions(binding, response)
