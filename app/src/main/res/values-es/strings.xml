@@ -549,4 +549,6 @@
     <string name="local_stream_extraction">Adquisición de transmisión local</string>
     <string name="local_ryd_summary">Obtener directamente información de los \'no me gusta\' en https://returnyoutubedislikeapi.com</string>
     <string name="local_ryd">\'Return YouTube Dislike\' localmente</string>
+    <string name="import_watch_history">Importa tu historial de visualización</string>
+    <string name="import_watch_history_desc">Por favor, tenga en cuenta que no se importará todo debido a los datos de exportación limitados de YouTube.</string>
 </resources>
