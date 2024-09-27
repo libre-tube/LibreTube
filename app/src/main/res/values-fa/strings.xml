@@ -546,4 +546,6 @@
     <string name="external_download_provider_summary">ورود نام بستهٔ کاره‌ای که می‌خواهید برای بارگیری ویدیوها استفاده کنید. خالی گذاشتن برای استفاده از بارگیر توکار لیبره‌تیوب.</string>
     <string name="local_ryd">برگرداندن محلی ناپسندیدن‌های یوتوب</string>
     <string name="local_ryd_summary">واکشی مستقیم اطّلاعات نپسندیدن از https://returnyoutubedislikeapi.com</string>
+    <string name="import_watch_history">درون‌ریزی تاریخچهٔ تماشا</string>
+    <string name="import_watch_history_desc">به یاد داشته باشید که به خاطر داده‌های محدود برون‌ریزی یوتوب، همه‌چیز درون‌ریزی نخواهد شد.</string>
 </resources>
