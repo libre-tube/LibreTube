@@ -114,7 +114,7 @@
     <string name="irreversible">Сигурни ли сте\? Това не може да бъде отменено!</string>
     <string name="notify_new_streams">Известия за нови потоци</string>
     <string name="notifications">Известия</string>
-    <string name="default_subtitle_language">Език на надписите</string>
+    <string name="default_subtitle_language">Език на субтитрите</string>
     <string name="device_info">Информация за устройството</string>
     <string name="open_copied">Отваряне</string>
     <string name="copied_to_clipboard">Копирано в клипборда</string>
@@ -193,7 +193,7 @@
         <item quantity="other">%d нов потоци</item>
     </plurals>
     <string name="welcome">Добре дошли в LibreTube</string>
-    <string name="pinch_control">Контрол чрез щипване</string>
+    <string name="pinch_control">Контрол чрез притискане</string>
     <string name="notgmail">Това е за Piped акаунт</string>
     <string name="change_region">Изглежда, че тенденцията не е налична за текущия регион. Моля, изберете друг в настройките.</string>
     <string name="import_playlists_from">Внасяне на плейлисти от</string>
@@ -277,7 +277,7 @@
     <string name="fallback_piped_proxy_summary">Заредете видеоклипове през проксито, ако директното свързване с YouTube не работи за текущия видеоклип (увеличава първоначалното време за зареждане). Ако е деактивирано, музикалното съдържание в YouTube вероятно няма да се възпроизвежда поради ограниченията на YT</string>
     <string name="instance_frontend_url">URL към потребителски интерфейс</string>
     <string name="advanced">Разширени</string>
-    <string name="deletePlaylist">Изтриване на плейлист</string>
+    <string name="deletePlaylist">Изтриване на плейлиста</string>
     <string name="mark_as_unwatched">Маркирай като негледано</string>
     <string name="import_subscriptions_from">Внасяне на абонаменти от</string>
     <string name="category_segments">Сегменти</string>
@@ -356,7 +356,7 @@
     <string name="go_to_video">Отиди на видео</string>
     <string name="tooltip_sponsorblock">Превключване на SponsorBlock</string>
     <string name="skip_segment">Пропускане на сегмент</string>
-    <string name="pinch_control_summary">Използвайте жест за прищипване, за да увеличите/намалите мащаба</string>
+    <string name="pinch_control_summary">Използвайте жест с притискане за увеличаване/намаляване на мащаба</string>
     <string name="playerVideoFormat">Видео формат за плейър</string>
     <string name="automatic_once">Автоматично веднъж</string>
     <string name="instance_name">Име на инстанция</string>
@@ -546,4 +546,6 @@
     <string name="local_stream_extraction_summary">Директно извличане на информация за възпроизвеждане на видео от YouTube, без да използвате Piped.</string>
     <string name="local_ryd_summary">Директно извличане на информация за нехаресвания от https://returnyoutubedislikeapi.com</string>
     <string name="local_ryd">Местно връщане на нехаресвания в Youtube</string>
+    <string name="import_watch_history">Внасяне история на гледане</string>
+    <string name="import_watch_history_desc">Моля, обърнете внимание, че не всички данни ще бъдат внесени поради ограничения обем на изнесените данни от YouTube.</string>
 </resources>

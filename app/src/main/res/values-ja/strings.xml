@@ -543,4 +543,6 @@
     <string name="local_stream_extraction">ローカルストリームの抽出</string>
     <string name="local_ryd_summary">以下から低評価を直接取得 https://returnyoutubedislikeapi.com</string>
     <string name="local_ryd">Return Youtube Dislikes を直接取得</string>
+    <string name="import_watch_history">視聴履歴をインポート</string>
+    <string name="import_watch_history_desc">YouTubeのデータは、エクスポートの制限のため、すべてをインポートできないこともあります。</string>
 </resources>

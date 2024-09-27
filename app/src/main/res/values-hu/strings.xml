@@ -112,7 +112,7 @@
     <string name="least_recent">Legrégebbi</string>
     <string name="most_views">Legtöbb megtekintés</string>
     <string name="least_views">Legkevesebb megtekintés</string>
-    <string name="shareTo">URL megosztása ide</string>
+    <string name="shareTo">Webcím megosztása ide</string>
     <string name="playOnBackground">Lejátszás indítása a háttérben</string>
     <string name="defaultIcon">Alapértelmezett</string>
     <string name="gradientIcon">Sima átmenet</string>
@@ -171,16 +171,16 @@
     <string name="reset_message">Visszaállítja az összes beállítást és kijelentkezik\?</string>
     <string name="customInstance_summary">Hozzáadás…</string>
     <string name="instance_name">Példány neve</string>
-    <string name="instance_api_url">URL a példány API-hoz</string>
+    <string name="instance_api_url">Webcím a példány API-hoz</string>
     <string name="related_streams_summary">Mutasson hasonló közvetítéseket a jelenleg nézett mellett</string>
     <string name="playerVideoFormat">Videóformátum a lejátszóhoz</string>
-    <string name="instance_frontend_url">URL a példány frontendjéhez</string>
+    <string name="instance_frontend_url">Webcím a példány frontendjéhez</string>
     <string name="clonePlaylist">Lejátszási lista klónozása</string>
     <string name="auth_instance">Hitelesítési példány</string>
     <string name="auth_instance_summary">Használjon másik példányt a hitelesített hívásokhoz</string>
     <string name="watch_positions">Pozíció megjegyzése</string>
     <string name="turnInternetOn">Az internethez való csatlakozáshoz kapcsolja be a Wi-Fi-t vagy a mobiladat-kapcsolatot.</string>
-    <string name="empty_instance">Töltse be a nevet és az API URL-t.</string>
+    <string name="empty_instance">Töltse be a nevet és az API webcímet.</string>
     <string name="buffering_goal_summary">Maximális másodpercnyi videó a puffereléshez</string>
     <string name="seek_increment">Léptetés időköze</string>
     <string name="require_restart_message">Indítsa újra az alkalmazást a változtatások használatához.</string>
@@ -248,7 +248,7 @@
     <string name="player_resize_mode">Átméretezés mód</string>
     <string name="addInstance">Példány hozzáadása</string>
     <string name="clear_customInstances">Hozzáadott törlése</string>
-    <string name="invalid_url">Adjon meg egy működő URL-t</string>
+    <string name="invalid_url">Adjon meg egy működő webcímet</string>
     <string name="auth_instances">Hitelesítési példány kiválasztása</string>
     <string name="history_summary">Megtekintési és keresési előzmények</string>
     <string name="repeat_mode">Ismétlés mód</string>
@@ -333,7 +333,7 @@
     <string name="play_latest_videos">Legújabb videók lejátszása</string>
     <string name="failed_fetching_instances">Nem sikerült lekérni az elérhető példányokat.</string>
     <string name="hide_watched_from_feed">A már megnézett videók elrejtése</string>
-    <string name="playlistUrl">Lejátszási lista URL</string>
+    <string name="playlistUrl">Lejátszási lista webcíme</string>
     <string name="shuffle">Keverés</string>
     <string name="add_to_bookmarks">Hozzáadás a könyvjelzőkhöz</string>
     <string name="remove_bookmark">Könyvjelző eltávolítása</string>
@@ -546,4 +546,6 @@
     <string name="local_stream_extraction_summary">Közvetlen videólejátszási információk lekérése a YouTube-ról a Piped használata nélkül.</string>
     <string name="local_ryd">Youtube „Nem tetszik” számláló megjelenítése</string>
     <string name="local_ryd_summary">„Nem tetszik” információk közvetlen lekérése innen: https://returnyoutubedislikeapi.com</string>
+    <string name="import_watch_history">Megtekintési előzmények importálása</string>
+    <string name="import_watch_history_desc">Vegye figyelembe, hogy a YouTube korlátozott exportadatai miatt nem lesz minden importálva.</string>
 </resources>

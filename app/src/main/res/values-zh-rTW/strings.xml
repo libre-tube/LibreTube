@@ -543,4 +543,6 @@
     <string name="local_stream_extraction_summary">直接從 YouTube 擷取視訊播放資訊，不使用 Piped。</string>
     <string name="local_ryd">本機回傳 YouTube 不喜歡</string>
     <string name="local_ryd_summary">直接從 https://returnyoutubedislikeapi.com 取得不喜歡資訊</string>
+    <string name="import_watch_history">匯入觀看歷史紀錄</string>
+    <string name="import_watch_history_desc">請注意，由於 YouTube 的匯出資料有限，並非所有內容都會匯入。</string>
 </resources>

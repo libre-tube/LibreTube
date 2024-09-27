@@ -543,4 +543,6 @@
     <string name="local_stream_extraction_summary">不使用 Piped 直接从 YouTube 取得视频播放信息。</string>
     <string name="local_ryd">本地 Return Youtube Dislikes</string>
     <string name="local_ryd_summary">直接从 https://returnyoutubedislikeapi.com 获取 disllike 信息</string>
+    <string name="import_watch_history">导入观看历史</string>
+    <string name="import_watch_history_desc">注意，由于 YouTube 有限的导入数据不是所有历史都会被导入。</string>
 </resources>

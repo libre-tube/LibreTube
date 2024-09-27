@@ -70,7 +70,7 @@
     <string name="okay">OK</string>
     <string name="history">Historique</string>
     <string name="search_history">Historique de recherche</string>
-    <string name="clear_history">Effacer l’historique</string>
+    <string name="clear_history">Effacer l\'historique</string>
     <string name="music_songs">Chansons YT Music</string>
     <string name="music_videos">Vidéos YT Music</string>
     <string name="music_albums">Albums YT Music</string>
@@ -85,7 +85,7 @@
     <string name="category_sponsor">Sponsor</string>
     <string name="category_selfpromo">Communication non rémunérée/autopromotion</string>
     <string name="category_selfpromo_summary">Semblable au \"sponsor\" sauf pour les communications non rémunérées ou l\'autopromotion. Ceci inclut les sections sur les marchandises, les dons ou les informations sur les personnes avec lesquelles ils ont collaboré</string>
-    <string name="category_intro">Entracte/Animation d’intro</string>
+    <string name="category_intro">Entracte/Animation d\'intro</string>
     <string name="license">Licence</string>
     <string name="category_interaction_summary">Lorsqu\'il y a un bref rappel pour aimer, s\'abonner ou suivre au milieu du contenu. S\'il est long ou porte sur un sujet spécifique, il devrait plutôt s\'agir d\'autopromotion</string>
     <string name="category_sponsor_summary">Communication commerciale, recommandations payées et publicités directes. Il ne s\'agit pas d\'autopromotion ou d\'une véritable mise en avant gratuite de causes, de créateurs, de sites web et de produits</string>
@@ -317,7 +317,7 @@
     <string name="theme_monochrome">Monochrome minimaliste</string>
     <string name="nothing_selected">Rien n\'est sélectionné !</string>
     <string name="privacy_alert">Avertissement sur la protection des données</string>
-    <string name="username_email">Il est déconseillé d\'utiliser une adresse courriel comme nom d’utilisateur. Souhaitez-vous poursuivre ?</string>
+    <string name="username_email">Il est déconseillé d\'utiliser une adresse courriel comme nom d\'utilisateur. Souhaitez-vous poursuivre ?</string>
     <string name="exportsuccess">Exporté.</string>
     <string name="pinch_control">Contrôle par pincement</string>
     <string name="pinch_control_summary">Utilisez le geste de pincement pour effectuer un zoom avant/arrière</string>
@@ -548,5 +548,7 @@
     <string name="local_stream_extraction">Extraction de flux locaux</string>
     <string name="local_stream_extraction_summary">Récupérer directement les informations de lecture vidéo de YouTube sans utiliser Piped.</string>
     <string name="local_ryd">Return Youtube Dislikes</string>
-    <string name="local_ryd_summary">Récupérer les mentions « Je n’aime pas » de https://returnyoutubedislikeapi.com</string>
+    <string name="local_ryd_summary">Récupérer les mentions \"Je n\'aime pas\" de https://returnyoutubedislikeapi.com</string>
+    <string name="import_watch_history">Importer l\'historique des vidéos regardées</string>
+    <string name="import_watch_history_desc">Veuillez noter que tout ne sera pas importé en raison des données d\'exportation limitées de YouTube.</string>
 </resources>

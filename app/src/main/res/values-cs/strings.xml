@@ -549,4 +549,6 @@
     <string name="local_stream_extraction_summary">Přímo načítá informace o přehrávání videa z YouTube bez použití služby Piped.</string>
     <string name="local_ryd">Lokální Return YouTube Dislikes</string>
     <string name="local_ryd_summary">Přímo načítat informace o palcích dolů z https://returnyoutubedislikeapi.com</string>
+    <string name="import_watch_history">Importovat historii sledování</string>
+    <string name="import_watch_history_desc">Upozorňujeme, že nebude importováno vše z důvodu omezeného exportu dat z YouTube.</string>
 </resources>

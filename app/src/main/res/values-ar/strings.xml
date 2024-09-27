@@ -558,4 +558,6 @@
     <string name="local_stream_extraction">استخراج البث المحلي</string>
     <string name="local_ryd">الإرجاع المحلي لعدم الإعجاب على يوتيوب</string>
     <string name="local_ryd_summary">جلب معلومات عدم الإعجاب مباشرة من https://returnyoutubedislikeapi.com</string>
+    <string name="import_watch_history">استيراد سجل المشاهدة</string>
+    <string name="import_watch_history_desc">يرجى ملاحظة أنه لن يتم استيراد كل شيء بسبب بيانات التصدير المحدودة على YouTube.</string>
 </resources>

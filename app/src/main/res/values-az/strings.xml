@@ -546,4 +546,6 @@
     <string name="local_stream_extraction">Yerli yayım əldə etmə</string>
     <string name="local_ryd">Yerli Return Youtube Dislikes</string>
     <string name="local_ryd_summary">Bəyənməmə məlumatın birbaşa https://returnyoutubedislikeapi.com \'dan əldə et</string>
+    <string name="import_watch_history">Baxış tarixçəsin idxal et</string>
+    <string name="import_watch_history_desc">Nəzərə alın ki, YouTube-un məhdud ixrac məlumatına görə hər şey idxal edilməyəcək.</string>
 </resources>
