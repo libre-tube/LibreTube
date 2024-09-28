@@ -552,4 +552,6 @@
     <string name="local_stream_extraction_summary">Получать информацию о потоках напрямую из YouTube, не используя Piped.</string>
     <string name="local_ryd">Локальный запрос дизлайков</string>
     <string name="local_ryd_summary">Запрашивать информацию о дизлайках напрямую с https://returnyoutubedislikeapi.com</string>
+    <string name="import_watch_history">Импортировать историю просмотра</string>
+    <string name="import_watch_history_desc">Пожалуйста, учтите, что полноценный импорт невозможен из-за ограниченности данных, экспортируемых из YouTube.</string>
 </resources>
