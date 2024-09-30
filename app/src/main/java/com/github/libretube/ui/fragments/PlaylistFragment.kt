@@ -253,7 +253,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
                         PlayingQueue.add(*queue.toTypedArray())
                         NavigationHelper.navigateVideo(
                             requireContext(),
-                            queue.first().url,
+                            queue.firstOrNull()?.url,
                             playlistId = playlistId,
                             keepQueue = true
                         )
