@@ -549,4 +549,6 @@
     <string name="local_stream_extraction_summary">Priamo načíta informácie o prehrávaní videa z YouTube bez použitia Piped.</string>
     <string name="local_ryd_summary">Priamo načíta informácie o neoblíbených z https://returnyoutubedislikeapi.com</string>
     <string name="local_ryd">Lokálny návrat Youtube Neobľúbené</string>
+    <string name="import_watch_history">Importovať históriu pozerania</string>
+    <string name="import_watch_history_desc">Vezmite na vedomie, že nie všetko bude importované kvôli obmedzeniu exportu údajov z YouTube.</string>
 </resources>
