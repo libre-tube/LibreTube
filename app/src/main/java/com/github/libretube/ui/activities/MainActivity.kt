@@ -20,6 +20,7 @@ import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.view.allViews
 import androidx.core.view.children
+import androidx.core.view.isNotEmpty
 import androidx.core.view.isVisible
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.lifecycleScope
@@ -528,7 +529,7 @@ class MainActivity : BaseActivity() {
 
         intent.getStringExtra(IntentData.videoId)?.let {
             // the below explained work around only seems to work on Android 11 and above
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && binding.bottomNav.menu.isNotEmpty()) {
                 // the bottom navigation bar has to be created before opening the video
                 // otherwise the player layout measures aren't calculated properly
                 // and the miniplayer is opened at a closed state and overlapping the navigation bar
