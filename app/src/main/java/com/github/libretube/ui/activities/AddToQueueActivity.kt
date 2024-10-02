@@ -33,6 +33,6 @@ class AddToQueueActivity : BaseActivity() {
             startActivity(newIntent)
         }
 
-        finishAndRemoveTask()
+        finish()
     }
 }
