@@ -320,11 +320,11 @@ class MainActivity : BaseActivity() {
                 if (query.toHttpUrlOrNull() != null) {
                     val queryIntent = IntentHelper.resolveType(query.toUri())
 
-                    if (navigateToMediaByIntent(queryIntent)) {
+                    val didNavigate = navigateToMediaByIntent(queryIntent) {
                         navController.popBackStack(R.id.searchFragment, true)
                         searchItem.collapseActionView()
-                        return true
                     }
+                    if (didNavigate) return true
                 }
 
                 navController.navigate(NavDirections.showSearchResults(query))
@@ -502,20 +502,24 @@ class MainActivity : BaseActivity() {
      *
      * @return Whether the method handled the event and triggered the navigation to a new fragment
      */
-    fun navigateToMediaByIntent(intent: Intent): Boolean {
+    fun navigateToMediaByIntent(intent: Intent, actionBefore: () -> Unit = {}): Boolean {
         intent.getStringExtra(IntentData.channelId)?.let {
+            actionBefore()
             navController.navigate(NavDirections.openChannel(channelId = it))
             return true
         }
         intent.getStringExtra(IntentData.channelName)?.let {
+            actionBefore()
             navController.navigate(NavDirections.openChannel(channelName = it))
             return true
         }
         intent.getStringExtra(IntentData.playlistId)?.let {
+            actionBefore()
             navController.navigate(NavDirections.openPlaylist(playlistId = it))
             return true
         }
         intent.getStringArrayExtra(IntentData.videoIds)?.let {
+            actionBefore()
             ImportTempPlaylistDialog()
                 .apply {
                     arguments = bundleOf(
