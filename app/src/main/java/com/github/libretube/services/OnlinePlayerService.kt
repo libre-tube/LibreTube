@@ -338,11 +338,11 @@ class OnlinePlayerService : LifecycleService() {
         // prevent android from putting LibreTube to sleep when locked
         player!!.setWakeMode(WAKE_MODE_NETWORK)
 
-        /**
-         * Listens for changed playbackStates (e.g. pause, end)
-         * Plays the next video when the current one ended
-         */
+        // Listens for changed playbackStates (e.g. pause, end)
+        // Plays the next video when the current one ended
         player?.addListener(playerListener)
+
+        PlayerHelper.setPreferredCodecs(trackSelector!!)
     }
 
     /**
