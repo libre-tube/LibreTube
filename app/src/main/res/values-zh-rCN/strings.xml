@@ -356,7 +356,7 @@
     <string name="help">帮助</string>
     <string name="faq">常见问题</string>
     <string name="replies">回复</string>
-    <string name="codecs">编解码器</string>
+    <string name="codecs">视频编解码器</string>
     <string name="mark_as_watched">标记为已观看</string>
     <string name="unsupported_file_format">不支持的文件格式：%1$s</string>
     <string name="custom_playback_speed">自定义速度</string>
@@ -545,4 +545,5 @@
     <string name="local_ryd_summary">直接从 https://returnyoutubedislikeapi.com 获取 disllike 信息</string>
     <string name="import_watch_history">导入观看历史</string>
     <string name="import_watch_history_desc">注意，由于 YouTube 有限的导入数据不是所有历史都会被导入。</string>
+    <string name="audio_codecs">音频编解码器</string>
 </resources>
