@@ -356,7 +356,7 @@
     <string name="help">עזרה</string>
     <string name="faq">שו״ת</string>
     <string name="replies">תגובות</string>
-    <string name="codecs">מפענחים</string>
+    <string name="codecs">מפענחי וידאו</string>
     <string name="mark_as_watched">סימון כנצפה</string>
     <string name="unsupported_file_format">סוג הקובץ לא נתמך: %1$s</string>
     <string name="custom_playback_speed">מהירות מותאמת אישית</string>
@@ -547,4 +547,5 @@
     <string name="screenshot">צילום מסך</string>
     <string name="external_download_provider_summary">נא למלא את שם חבילת היישום לשימוש להורדת סרטונים. יש להשאיר ריק כדי להשתמש במוריד המובנה של LibreTube.</string>
     <string name="local_stream_extraction">חילוץ תזרים מקומי</string>
+    <string name="audio_codecs">מפענחי שמע</string>
 </resources>
