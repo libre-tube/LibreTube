@@ -356,7 +356,7 @@
     <string name="help">Nápověda</string>
     <string name="faq">Často kladené dotazy</string>
     <string name="replies">Odpovědi</string>
-    <string name="codecs">Kodeky</string>
+    <string name="codecs">Video kodeky</string>
     <string name="mark_as_watched">Označit jako zhlédnuté</string>
     <string name="unsupported_file_format">Nepodporovaný formát souboru: %1$s</string>
     <string name="custom_playback_speed">Vlastní rychlost</string>
@@ -551,4 +551,5 @@
     <string name="local_ryd_summary">Přímo načítat informace o palcích dolů z https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Importovat historii sledování</string>
     <string name="import_watch_history_desc">Upozorňujeme, že nebude importováno vše z důvodu omezeného exportu dat z YouTube.</string>
+    <string name="audio_codecs">Zvukové kodeky</string>
 </resources>
