@@ -41,7 +41,7 @@ class DownloadActivity : BaseActivity() {
                 )
             }.show(supportFragmentManager, null)
         } else {
-            finishAndRemoveTask()
+            finish()
         }
     }
 }

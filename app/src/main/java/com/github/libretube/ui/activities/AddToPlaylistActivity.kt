@@ -29,7 +29,7 @@ class AddToPlaylistActivity : BaseActivity() {
         }?.getStringExtra(IntentData.videoId)
 
         if (videoId == null) {
-            finishAndRemoveTask()
+            finish()
             return
         }
 
