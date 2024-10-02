@@ -388,7 +388,8 @@
     <string name="skip_silence">Skip silence</string>
     <string name="help">Help</string>
     <string name="faq">FAQ</string>
-    <string name="codecs">Codecs</string>
+    <string name="codecs">Video codecs</string>
+    <string name="audio_codecs">Audio codecs</string>
     <string name="mark_as_watched">Mark as watched</string>
     <string name="custom_playback_speed">Custom speed</string>
     <string name="custom_playback_speed_summary">Use a different playback speed than for the normal player</string>

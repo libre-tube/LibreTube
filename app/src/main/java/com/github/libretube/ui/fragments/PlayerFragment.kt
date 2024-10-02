@@ -17,7 +17,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
-import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.PixelCopy
@@ -1359,6 +1358,16 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     else -> throw IllegalArgumentException()
                 }
                 this.setPreferredVideoMimeTypes(*mimeType)
+            }
+            val enabledAudioCodecs = PlayerHelper.enabledAudioCodecs
+            if (enabledAudioCodecs != "all") {
+                // map the codecs to their corresponding mimetypes
+                val mimeType = when (enabledAudioCodecs) {
+                    "opus" -> arrayOf("audio/opus")
+                    "mp4" -> arrayOf("audio/mp4a-latm")
+                    else -> throw IllegalArgumentException()
+                }
+                this.setPreferredAudioMimeTypes(*mimeType)
             }
         }
     }

@@ -113,6 +113,15 @@
             app:title="@string/codecs"
             app:useSimpleSummaryProvider="true" />
 
+        <ListPreference
+            android:entries="@array/audioCodecs"
+            android:entryValues="@array/audioCodecValues"
+            android:icon="@drawable/ic_equalizer"
+            android:key="audio_codecs"
+            app:defaultValue="all"
+            app:title="@string/audio_codecs"
+            app:useSimpleSummaryProvider="true" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

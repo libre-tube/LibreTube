@@ -339,6 +339,12 @@ object PlayerHelper {
             "all"
         )
 
+    val enabledAudioCodecs: String
+        get() = PreferenceHelper.getString(
+            PreferenceKeys.ENABLED_AUDIO_CODECS,
+            "all"
+        )
+
     val playAutomatically: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.PLAY_AUTOMATICALLY,
