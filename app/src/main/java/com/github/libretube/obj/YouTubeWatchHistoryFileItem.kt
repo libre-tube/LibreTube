@@ -4,11 +4,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class YouTubeWatchHistoryFileItem(
-    val activityControls: List<String>,
     val header: String,
-    val products: List<String>,
-    val subtitles: List<YouTubeWatchHistoryChannelInfo>,
     val time: String,
     val title: String,
-    val titleUrl: String
+    val titleUrl: String,
+    val activityControls: List<String> = emptyList(),
+    val products: List<String> = emptyList(),
+    val subtitles: List<YouTubeWatchHistoryChannelInfo> = emptyList()
 )
