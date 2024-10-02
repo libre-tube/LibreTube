@@ -869,4 +869,30 @@ object PlayerHelper {
             else -> false
         }
     }
+
+    @OptIn(UnstableApi::class)
+    fun setPreferredCodecs(trackSelector: DefaultTrackSelector) {
+        trackSelector.updateParameters {
+            val enabledVideoCodecs = PlayerHelper.enabledVideoCodecs
+            if (enabledVideoCodecs != "all") {
+                // map the codecs to their corresponding mimetypes
+                val mimeType = when (enabledVideoCodecs) {
+                    "vp9" -> arrayOf("video/webm", "video/x-vnd.on2.vp9")
+                    "avc" -> arrayOf("video/mp4", "video/avc")
+                    else -> throw IllegalArgumentException()
+                }
+                this.setPreferredVideoMimeTypes(*mimeType)
+            }
+            val enabledAudioCodecs = PlayerHelper.enabledAudioCodecs
+            if (enabledAudioCodecs != "all") {
+                // map the codecs to their corresponding mimetypes
+                val mimeType = when (enabledAudioCodecs) {
+                    "opus" -> arrayOf("audio/opus")
+                    "mp4" -> arrayOf("audio/mp4a-latm")
+                    else -> throw IllegalArgumentException()
+                }
+                this.setPreferredAudioMimeTypes(*mimeType)
+            }
+        }
+    }
 }
