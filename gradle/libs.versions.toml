@@ -1,7 +1,7 @@
 [versions]
 appcompat = "1.7.0"
 core = "1.13.1"
-gradle = "8.5.2"
+gradle = "8.6.0"
 junit = "4.13.2"
 kotlin = "1.9.25"
 ksp = "1.9.25-1.0.20"
@@ -9,7 +9,7 @@ lifecycle = "2.8.6"
 constraintlayout = "2.1.4"
 loggingInterceptor = "4.12.0"
 material = "1.12.0"
-navigation = "2.7.7"
+navigation = "2.8.1"
 newpipeextractor = "6e3a4a6d9de61eafb73e7eb1b714847b5077856d"
 preference = "1.2.1"
 extJunit = "1.2.1"
@@ -27,7 +27,7 @@ kotlinxDatetime = "0.6.1"
 kotlinxRetrofit = "1.0.0"
 media = "1.7.0"
 media3 = "1.4.1"
-activity = "1.8.2"
+activity = "1.9.2"
 fragment = "1.8.3"
 uiautomator = "2.3.0"
 benchmarkMacroJunit4 = "1.3.1"
@@ -69,7 +69,6 @@ desugaring = { group = "com.android.tools", name = "desugar_jdk_libs_nio", versi
 cronet-embedded = { group = "org.chromium.net", name = "cronet-embedded", version.ref = "cronetEmbedded" }
 cronet-okhttp = { group = "com.google.net.cronet", name = "cronet-okhttp", version.ref = "cronetOkHttp" }
 coil = { group = "io.coil-kt", name = "coil", version.ref="coil" }
-square-leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakcanary" }
 lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
 lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }

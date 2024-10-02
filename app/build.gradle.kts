@@ -86,7 +86,6 @@ android {
 }
 
 dependencies {
-    // debugImplementation libs.square.leakcanary
     /* Android Core */
     implementation(libs.androidx.activity)
     implementation(libs.androidx.appcompat)
