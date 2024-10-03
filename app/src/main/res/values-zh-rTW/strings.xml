@@ -365,7 +365,7 @@
     <string name="custom_playback_speed_summary">使用不同於傳統播放器的播放速度</string>
     <string name="unsupported_file_format">不支援的檔案格式：%1$s</string>
     <string name="category">類別</string>
-    <string name="codecs">編解碼器</string>
+    <string name="codecs">視訊編解碼器</string>
     <plurals name="years_ago">
         <item quantity="other">%d 年前</item>
     </plurals>
@@ -545,4 +545,5 @@
     <string name="local_ryd_summary">直接從 https://returnyoutubedislikeapi.com 取得不喜歡資訊</string>
     <string name="import_watch_history">匯入觀看歷史紀錄</string>
     <string name="import_watch_history_desc">請注意，由於 YouTube 的匯出資料有限，並非所有內容都會匯入。</string>
+    <string name="audio_codecs">音訊編解碼器</string>
 </resources>
