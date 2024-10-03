@@ -370,7 +370,7 @@
     <string name="sleep_timer">Unetaimer</string>
     <string name="skip_silence">Jäta vaikus vahele</string>
     <string name="faq">Korduma kippuvad küsimused</string>
-    <string name="codecs">Koodekid</string>
+    <string name="codecs">Videokoodekid</string>
     <string name="mark_as_watched">Märgi vaadatuks</string>
     <string name="custom_playback_speed">Kohandatud kiirus</string>
     <string name="stats_for_nerds">Statistika it-huvilistele</string>
@@ -548,4 +548,5 @@
     <string name="local_ryd_summary">Laadi Youtube\'i mittemeeldimiste teave teenusest https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Impordi vaatamiste ajalugu</string>
     <string name="import_watch_history_desc">Kuna YouTube piirab eksporditavaid andmeid, siis palun arvesta, et kõike ei õnnestu importida.</string>
+    <string name="audio_codecs">Audiokoodekid</string>
 </resources>

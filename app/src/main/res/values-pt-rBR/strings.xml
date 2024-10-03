@@ -356,7 +356,7 @@
     <string name="help">Ajuda</string>
     <string name="faq">Perguntas frequentes</string>
     <string name="replies">Respostas</string>
-    <string name="codecs">Codecs</string>
+    <string name="codecs">Codecs de vídeo</string>
     <string name="unsupported_file_format">Formato de arquivo não suportado: %1$s</string>
     <string name="mark_as_watched">Marcar como assistido</string>
     <string name="custom_playback_speed">Velocidade personalizada</string>
@@ -551,4 +551,5 @@
     <string name="local_ryd_summary">Obtenha informações de \"Não gostei\" diretamente em https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Importar histórico de exibição</string>
     <string name="import_watch_history_desc">Observe que nem tudo será importado devido à limitação de dados de exportação do YouTube.</string>
+    <string name="audio_codecs">Codecs de áudio</string>
 </resources>

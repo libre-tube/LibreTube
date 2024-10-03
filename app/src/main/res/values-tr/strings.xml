@@ -356,7 +356,7 @@
     <string name="help">Yardım</string>
     <string name="faq">SSS</string>
     <string name="replies">Cevaplar</string>
-    <string name="codecs">Kodekler</string>
+    <string name="codecs">Video kodekleri</string>
     <string name="mark_as_watched">İzlendi olarak işaretle</string>
     <string name="unsupported_file_format">Desteklenmeyen dosya biçimi: %1$s</string>
     <string name="custom_playback_speed">Özel hız</string>
@@ -548,4 +548,5 @@
     <string name="local_ryd_summary">Beğenmeme bilgisini doğrudan https://returnyoutubedislikeapi.com adresinden alın</string>
     <string name="import_watch_history_desc">YouTube\'un sınırlı dışa aktarım verileri nedeniyle her şeyin içe aktarılmayacağını lütfen unutmayın.</string>
     <string name="import_watch_history">İzleme geçmişini içe aktar</string>
+    <string name="audio_codecs">Ses kodekleri</string>
 </resources>

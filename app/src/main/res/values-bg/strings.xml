@@ -265,7 +265,7 @@
     <string name="swipe_controls_summary">Плъзнете за да регулирате яркостта и силата на звука, докато сте в режим на цял екран</string>
     <string name="tooltip_filter">Филтър</string>
     <string name="off">Изключено</string>
-    <string name="codecs">Кодеци</string>
+    <string name="codecs">Видео кодеци</string>
     <string name="tooltip_unlocked">Отключване на плейъра</string>
     <string name="notification_time_summary">Ограничете периода от време, в който се показват известия за поток</string>
     <string name="category_outro">Крайни карти и кредити</string>
@@ -548,4 +548,5 @@
     <string name="local_ryd">Местно връщане на нехаресвания в Youtube</string>
     <string name="import_watch_history">Внасяне история на гледане</string>
     <string name="import_watch_history_desc">Моля, обърнете внимание, че не всички данни ще бъдат внесени поради ограничения обем на изнесените данни от YouTube.</string>
+    <string name="audio_codecs">Аудио кодеци</string>
 </resources>

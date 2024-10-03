@@ -370,7 +370,7 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d vidéos</string>
     <string name="subscriberAndVideoCounts">%1$s abonnés • %2$d vidéos</string>
     <string name="category">Catégorie</string>
-    <string name="codecs">Codecs</string>
+    <string name="codecs">Codecs vidéo</string>
     <string name="unsupported_file_format">Format de fichier non pris en charge : %1$s</string>
     <string name="lbry_hls">LBRY HLS</string>
     <plurals name="years_ago">
@@ -551,4 +551,5 @@
     <string name="local_ryd_summary">Récupérer les mentions « Je n’aime pas » de https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Importer l’historique des vidéos regardées</string>
     <string name="import_watch_history_desc">Veuillez noter que tout ne sera pas importé en raison des données d’exportation limitées de YouTube.</string>
+    <string name="audio_codecs">Codecs audio</string>
 </resources>

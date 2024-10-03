@@ -356,7 +356,7 @@
     <string name="help">Kömək</string>
     <string name="faq">FAQ</string>
     <string name="replies">Cavablar</string>
-    <string name="codecs">Kodlayıcılar</string>
+    <string name="codecs">Video kodlayıcılar</string>
     <string name="unsupported_file_format">Dəstəklənməyən fayl formatı: %1$s</string>
     <string name="mark_as_watched">Baxılmış kimi işarələ</string>
     <string name="custom_playback_speed_summary">Adi oynadıcıdan fərqli oynatma sürəti istifadə et</string>
@@ -548,4 +548,5 @@
     <string name="local_ryd_summary">Bəyənməmə məlumatın birbaşa https://returnyoutubedislikeapi.com \'dan əldə et</string>
     <string name="import_watch_history">Baxış tarixçəsin idxal et</string>
     <string name="import_watch_history_desc">Nəzərə alın ki, YouTube-un məhdud ixrac məlumatına görə hər şey idxal edilməyəcək.</string>
+    <string name="audio_codecs">Səs kodlayıcılar</string>
 </resources>
