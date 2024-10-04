@@ -65,6 +65,8 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.db.DatabaseHelper
+import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.formatShort
@@ -98,6 +100,7 @@ import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
+import com.github.libretube.ui.dialogs.PlayOfflineDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.animateDown
 import com.github.libretube.ui.extensions.setupSubscriptionButton
@@ -119,6 +122,7 @@ import com.github.libretube.util.TextUtils.toTimeInSeconds
 import com.github.libretube.util.YoutubeHlsPlaylistParser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import java.util.concurrent.Executors
 import kotlin.math.abs
@@ -129,6 +133,8 @@ import kotlin.math.ceil
 class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private var _binding: FragmentPlayerBinding? = null
     val binding get() = _binding!!
+
+    private var localSearchResult: DownloadWithItems? = null
 
     private val playerBinding get() = binding.player.binding
     private val doubleTapOverlayBinding get() = binding.doubleTapOverlay.binding
@@ -390,6 +396,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         keepQueue = playerData.keepQueue
         timeStamp = playerData.timestamp
 
+        localSearchResult = runBlocking(Dispatchers.IO) {
+            DatabaseHolder.Database.downloadDao().findById(videoId)
+        }
+
         // broadcast receiver for PiP actions
         ContextCompat.registerReceiver(
             requireContext(),
@@ -437,7 +447,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             binding.player.setCurrentChapterName()
         }
 
-        playVideo()
+
+        localSearchResult?.let {
+            PlayOfflineDialog(it) { _, _ ->
+                playVideo()
+            }.show(parentFragmentManager, null)
+        } ?: playVideo()
 
         showBottomBar()
     }
