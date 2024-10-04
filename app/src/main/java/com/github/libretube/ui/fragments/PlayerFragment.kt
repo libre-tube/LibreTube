@@ -970,7 +970,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     (videoStream?.height ?: 0) > (videoStream?.width ?: 0)
 
             PlayingQueue.setOnQueueTapListener { streamItem ->
-                streamItem.url?.toID()?.let { playNextVideo(it) }
+                streamItem.url?.toID()?.let { playNextVideo(it, true) }
             }
 
             // hide the button to skip SponsorBlock segments manually
@@ -1042,13 +1042,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     /**
      * Can be used for autoplay and manually skipping to the next video.
      */
-    private fun playNextVideo(nextId: String? = null) {
+    private fun playNextVideo(nextId: String? = null, isOnQueueClick: Boolean = false) {
         if (nextId == null && PlayingQueue.repeatMode == Player.REPEAT_MODE_ONE) {
             viewModel.player.seekTo(0)
             return
         }
 
-        if (!PlayerHelper.isAutoPlayEnabled(playlistId != null)) return
+        if (!PlayerHelper.isAutoPlayEnabled(playlistId != null) && !isOnQueueClick) return
 
         // save the current watch position before starting the next video
         saveWatchPosition()
