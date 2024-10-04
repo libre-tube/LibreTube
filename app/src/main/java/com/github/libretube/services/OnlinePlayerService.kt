@@ -233,7 +233,7 @@ class OnlinePlayerService : LifecycleService() {
             loadAudio(playerData)
 
             PlayingQueue.setOnQueueTapListener { streamItem ->
-                streamItem.url?.toID()?.let { playNextVideo(it) }
+                streamItem.url?.toID()?.let { playNextVideo(it, true) }
             }
         }
         return super.onStartCommand(intent, flags, startId)
@@ -348,7 +348,7 @@ class OnlinePlayerService : LifecycleService() {
     /**
      * Plays the next video from the queue
      */
-    private fun playNextVideo(nextId: String? = null) {
+    private fun playNextVideo(nextId: String? = null, isOnQueueClick: Boolean = false) {
         if (nextId == null && PlayingQueue.repeatMode == Player.REPEAT_MODE_ONE) {
             player?.seekTo(0)
             return
@@ -356,7 +356,7 @@ class OnlinePlayerService : LifecycleService() {
 
         saveWatchPosition()
 
-        if (!PlayerHelper.isAutoPlayEnabled(playlistId != null)) return
+        if (!PlayerHelper.isAutoPlayEnabled(playlistId != null) && !isOnQueueClick) return
 
         val nextVideo = nextId ?: PlayingQueue.getNext() ?: return
 
