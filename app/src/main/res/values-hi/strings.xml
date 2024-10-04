@@ -358,7 +358,7 @@
     <string name="replies">जवाब</string>
     <string name="unsupported_file_format">असमर्थित फाइल फॉर्मेट: %1$s</string>
     <string name="mark_as_watched">देखा गया चिह्नित करें</string>
-    <string name="codecs">कोडेक्स</string>
+    <string name="codecs">वीडियो कोडेक्स</string>
     <string name="custom_playback_speed">कस्टम गति</string>
     <string name="custom_playback_speed_summary">सामान्य प्लेयर की तुलना में एक अलग प्लेबैक गति का उपयोग करें</string>
     <string name="normal_views">%1$s ने देखा %2$s</string>
@@ -546,4 +546,7 @@
     <string name="local_stream_extraction_summary">Piped का उपयोग किए बिना YouTube से सीधे वीडियो प्लेबैक जानकारी प्राप्त करें।</string>
     <string name="local_ryd">यूट्यूब डिसलाईकस की स्थानीय प्राप्ती</string>
     <string name="local_ryd_summary">https://returnyoutubedislikeapi.com से सीधे डिसलाईकस की जानकारी प्राप्त करें</string>
+    <string name="import_watch_history">देखने का इतिहास आयात करें</string>
+    <string name="import_watch_history_desc">कृपया ध्यान दें कि YouTube के सीमित निर्यात डेटा के कारण सब कुछ आयात नहीं किया जाएगा।</string>
+    <string name="audio_codecs">ऑडियो कोडेक्स</string>
 </resources>
