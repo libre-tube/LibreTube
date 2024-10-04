@@ -12,6 +12,8 @@ import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.obj.DownloadItem
+import com.github.libretube.db.obj.DownloadWithItems
+import com.github.libretube.enums.FileType
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
@@ -138,5 +140,21 @@ object DownloadHelper {
                 }
             }
         }
+    }
+
+    fun extractDownloadInfoText(context: Context, download: DownloadWithItems): List<String> {
+        val downloadInfo = mutableListOf<String>()
+        download.downloadItems.firstOrNull { it.type == FileType.VIDEO }?.let { videoItem ->
+            downloadInfo.add(context.getString(R.string.video) + ": ${videoItem.format} ${videoItem.quality}")
+        }
+        download.downloadItems.firstOrNull { it.type == FileType.AUDIO }?.let { audioItem ->
+            var infoString = ": ${audioItem.quality} ${audioItem.format})"
+            if (audioItem.language != null) infoString += " ${audioItem.language}"
+            downloadInfo.add(context.getString(R.string.audio) + infoString)
+        }
+        download.downloadItems.firstOrNull { it.type == FileType.SUBTITLE }?.let {
+            downloadInfo.add(context.getString(R.string.captions) + ": ${it.language}")
+        }
+        return downloadInfo
     }
 }

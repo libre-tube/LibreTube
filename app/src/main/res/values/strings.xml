@@ -517,7 +517,8 @@
     <string name="local_stream_extraction_summary">Directly fetch video playback information from YouTube without using Piped.</string>
     <string name="local_ryd">Local Return Youtube Dislikes</string>
     <string name="local_ryd_summary">Directly fetch dislike information from https://returnyoutubedislikeapi.com</string>
-    <string name="view_count">%1$s views</string>
+    <string name="dialog_play_offline_title">A local version of this video is available.</string>
+    <string name="dialog_play_offline_body">Would you like to play the video from the download folder?</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
@@ -563,5 +564,4 @@
     <string name="also_clear_watch_positions">Also clear watch positions</string>
     <string name="import_temp_playlist">Import temporary playlist?</string>
     <string name="import_temp_playlist_summary">Do you want to create a new playlist named \'%1$s\'? The playlist will contain %2$d videos.</string>
-
 </resources>

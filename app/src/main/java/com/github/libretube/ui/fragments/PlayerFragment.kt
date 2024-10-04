@@ -65,6 +65,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.db.DatabaseHelper
+import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.formatShort
@@ -98,6 +99,7 @@ import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
+import com.github.libretube.ui.dialogs.PlayOfflineDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.animateDown
 import com.github.libretube.ui.extensions.setupSubscriptionButton
@@ -119,6 +121,7 @@ import com.github.libretube.util.TextUtils.toTimeInSeconds
 import com.github.libretube.util.YoutubeHlsPlaylistParser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import java.util.concurrent.Executors
 import kotlin.math.abs
@@ -243,7 +246,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     private val playerListener = object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
-            if (PlayerHelper.pipEnabled || PictureInPictureCompat.isInPictureInPictureMode(mainActivity)) {
+            if (PlayerHelper.pipEnabled || PictureInPictureCompat.isInPictureInPictureMode(
+                    mainActivity
+                )
+            ) {
                 PictureInPictureCompat.setPictureInPictureParams(requireActivity(), pipParams)
             }
 
@@ -437,7 +443,37 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             binding.player.setCurrentChapterName()
         }
 
-        playVideo()
+        val localDownloadVersion = runBlocking(Dispatchers.IO) {
+            DatabaseHolder.Database.downloadDao().findById(videoId)
+        }
+
+        if (localDownloadVersion != null) {
+            childFragmentManager.setFragmentResultListener(
+                PlayOfflineDialog.PLAY_OFFLINE_DIALOG_REQUEST_KEY, viewLifecycleOwner
+            ) { _, bundle ->
+                if (bundle.getBoolean(IntentData.isPlayingOffline)) {
+                    // offline video playback started and thus the player fragment is no longer needed
+                    killPlayerFragment()
+                } else {
+                    playVideo()
+                }
+            }
+
+            val downloadInfo = DownloadHelper.extractDownloadInfoText(
+                requireContext(),
+                localDownloadVersion
+            ).toTypedArray()
+
+            PlayOfflineDialog().apply {
+                arguments = bundleOf(
+                    IntentData.videoId to videoId,
+                    IntentData.videoTitle to localDownloadVersion.download.title,
+                    IntentData.downloadInfo to downloadInfo
+                )
+            }.show(childFragmentManager, null)
+        } else {
+            playVideo()
+        }
 
         showBottomBar()
     }

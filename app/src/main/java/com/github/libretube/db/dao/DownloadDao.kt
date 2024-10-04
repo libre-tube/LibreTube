@@ -21,7 +21,7 @@ interface DownloadDao {
 
     @Transaction
     @Query("SELECT * FROM download WHERE videoId = :videoId")
-    suspend fun findById(videoId: String): DownloadWithItems
+    suspend fun findById(videoId: String): DownloadWithItems?
 
     @Query("SELECT videoId FROM downloadItem WHERE type = :fileType ORDER BY RANDOM() LIMIT 1")
     suspend fun getRandomVideoIdByFileType(fileType: FileType): String?
