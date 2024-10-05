@@ -5,8 +5,8 @@
     <string name="videos">Videolar</string>
     <string name="subscribe">Abunə Ol</string>
     <string name="unsubscribe">Abunə Olma</string>
-    <string name="share">Paylaşma</string>
-    <string name="save">Saxlama</string>
+    <string name="share">Paylaş</string>
+    <string name="save">Saxla</string>
     <string name="download">Yüklə</string>
     <string name="username">İstifadəçi adı</string>
     <string name="password">Parol</string>
@@ -156,7 +156,7 @@
     <string name="instance_frontend_url">İnstansiya ön çıxış üçün URL</string>
     <string name="pauseOnScreenOff">Avtomatik fasilə</string>
     <string name="pauseOnScreenOff_summary">Ekran söndürüldükdə oynatmanı dayandır</string>
-    <string name="clonePlaylist">Oynatma siyahısın klonla</string>
+    <string name="clonePlaylist">Oynatma siyahısın fərdiləşdir</string>
     <string name="reset">Standartları qaytar</string>
     <string name="reset_message">Bütün tənzimləmələr sıfırlansın və çıxılsın\?</string>
     <string name="account">Hesab</string>
@@ -279,7 +279,7 @@
     <string name="livestreams">Canlı yayımlar</string>
     <string name="alternative_videos_layout">Alternativ video tərtibatı</string>
     <string name="defaultIconLight">Standart işıq</string>
-    <string name="playlistCloned">Oynatma siyahısı klonlandı</string>
+    <string name="playlistCloned">Oynatma siyahısı fərdiləşdi</string>
     <string name="confirm_unsubscribe">%1$s abunəliyin ləğv etmək istədiyinizə əminsiniz\?</string>
     <string name="confirm_unsubscribing">Abunəlik ləğvin təsdiqlə</string>
     <string name="confirm_unsubscribing_summary">Abunəliyi ləğv etməzdən əvvəl təsdiqləmə dialoqu göstər</string>
@@ -541,7 +541,7 @@
     <string name="external_download_provider">Xarici yükləmə təchizatçısı</string>
     <string name="external_download_provider_summary">Videoları yükləmək üçün istifadə etdiyiniz tətbiqin paket adını daxil edin. LibreTube-un daxili yükləyicisin istifadə etmək üçün boş buraxın.</string>
     <string name="screenshot">Ekran görüntüsü</string>
-    <string name="pip">Ani</string>
+    <string name="pip">ŞiŞ</string>
     <string name="local_stream_extraction_summary">Piped işlətmədən dərhal YouTube-dan video oynatma məlumatın əldə et.</string>
     <string name="local_stream_extraction">Yerli yayım əldə etmə</string>
     <string name="local_ryd">Yerli Return Youtube Dislikes</string>
