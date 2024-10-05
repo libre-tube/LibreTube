@@ -238,7 +238,7 @@
     <string name="unlimited">Необмежено</string>
     <string name="add_to_queue">Додати в чергу</string>
     <string name="repeat_mode">Режим повторення</string>
-    <string name="resize_mode_fit">Допасування</string>
+    <string name="resize_mode_fit">Вміщення</string>
     <string name="resize_mode_fill">Заповнення</string>
     <string name="resize_mode_zoom">Наближення</string>
     <string name="maximum_image_cache">Макс. розмір кешу зображень</string>
