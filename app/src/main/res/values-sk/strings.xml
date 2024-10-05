@@ -283,7 +283,7 @@
     <string name="navbar_order">Poradie</string>
     <string name="exportsuccess">Exportované.</string>
     <string name="proceed">Pokračovať</string>
-    <string name="codecs">Kodeky</string>
+    <string name="codecs">Video kodeky</string>
     <string name="no_chapter">Neexistuje žiadna kapitola</string>
     <string name="hide_watched_from_feed">Skryť už sledované videá</string>
     <string name="add_to_group">Pridať do skupiny</string>
@@ -551,4 +551,5 @@
     <string name="local_ryd">Lokálny návrat Youtube Neobľúbené</string>
     <string name="import_watch_history">Importovať históriu pozerania</string>
     <string name="import_watch_history_desc">Vezmite na vedomie, že nie všetko bude importované kvôli obmedzeniu exportu údajov z YouTube.</string>
+    <string name="audio_codecs">Audio kodeky</string>
 </resources>
