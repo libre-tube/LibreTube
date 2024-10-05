@@ -206,7 +206,7 @@
     <string name="backup">Резервне копіювання</string>
     <string name="delete">Видалити з завантажень</string>
     <string name="required_network">Необхідне з\'єднання</string>
-    <string name="network_metered">Лімітоване</string>
+    <string name="network_metered">Обмежена</string>
     <string name="repeat_mode_current">Поточний</string>
     <string name="picture_in_picture">Зображення в зображенні</string>
     <string name="new_videos_badge_summary">Показувати значок із кількістю нових відео, якщо такі є</string>
