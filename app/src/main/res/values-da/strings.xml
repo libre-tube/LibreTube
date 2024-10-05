@@ -540,4 +540,8 @@
     <string name="thumbnail_time">Miniaturebillede tid</string>
     <string name="external_download_provider">Ekstern downloadleverandør</string>
     <string name="external_download_provider_summary">Indtast pakkenavnet på den app, du vil bruge til at hente videoer. Lad det være tomt for at bruge LibreTubes indbyggede downloader.</string>
+    <string name="import_watch_history">Importér visningshistorik</string>
+    <string name="screenshot">Skærmbillede</string>
+    <string name="pip">BiB</string>
+    <string name="import_watch_history_desc">Bemærk, at ikke alt bliver importeret grundet YouTube\'s begrænsede eksportdata.</string>
 </resources>
