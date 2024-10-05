@@ -184,7 +184,7 @@
     <string name="notification_time">Takmarka tíma tilkynninga</string>
     <string name="double_tap_seek">Tvípikkaðu til að hoppa</string>
     <string name="faq">FAQ / Algengar spurningar</string>
-    <string name="codecs">Kóðunarlyklar (codecs)</string>
+    <string name="codecs">Kóðunarlyklar myndmerkis (codecs)</string>
     <string name="mark_as_watched">Merkja sem séð</string>
     <string name="custom_playback_speed">Sérsniðinn hraði</string>
     <string name="forward">Spóla áfram</string>
@@ -268,7 +268,7 @@
     <string name="trending">Hvað er í umræðunni</string>
     <string name="queue_insert_related_videos">Setja inn svipuð myndbönd</string>
     <string name="privacy_alert">Aðvörun varðandi friðhelgi</string>
-    <string name="username_email">Halda áfram með tölvupóstfangi sem ekki er ráðlagt?</string>
+    <string name="username_email">Notkun tölvupóstfangs sem notandanafn er ekki ráðlagt. Halda samt áfram?</string>
     <string name="color_violet">Fjölhæfur fjólublár</string>
     <string name="proceed">Halda áfram</string>
     <string name="play_latest_videos">Spila nýjustu myndskeið</string>
@@ -542,4 +542,11 @@
     <string name="enqueue_playlist_description">Birtir tilkynningu þegar myndskeið eru sett í niðurhalsröð fyrir spilunarlista.</string>
     <string name="screenshot">Skjámynd</string>
     <string name="pip">MíM</string>
+    <string name="import_watch_history">Flytja inn áhorfsferil</string>
+    <string name="import_watch_history_desc">Athugaðu að ekki verður allt flutt inn vegna takmarkana á útflutningi YouTube-gagna.</string>
+    <string name="audio_codecs">Kóðunarlyklar hljóðs</string>
+    <string name="local_ryd">Staðvær skil á mislíkandi einkunn Youtube (dislikes)</string>
+    <string name="local_ryd_summary">Sækja upplýsingar um misklíkandi einkunn (dislikes) beint frá https://returnyoutubedislikeapi.com</string>
+    <string name="local_stream_extraction">Afpökkun staðværs streymis</string>
+    <string name="local_stream_extraction_summary">Sækja afspilunarupplýsingar myndskeiðs beint frá YouTube án þess að nota Piped.</string>
 </resources>
