@@ -356,7 +356,7 @@
     <string name="sleep_timer">Таймер сну</string>
     <string name="skip_silence">Пропускати тишу</string>
     <string name="replies">Відповіді</string>
-    <string name="codecs">Кодеки</string>
+    <string name="codecs">Відеокодеки</string>
     <string name="mark_as_watched">Позначити переглянутим</string>
     <string name="unsupported_file_format">Непідтримуваний формат файлу: %1$s</string>
     <string name="custom_playback_speed">Користувацька швидкість</string>
@@ -555,4 +555,5 @@
     <string name="local_ryd_summary">Безпосередньо отримайте інформацію про дизлайки на сайті https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Імпорт історії перегляду</string>
     <string name="import_watch_history_desc">Зауважте, що не все буде імпортовано через обмеженість експортних даних YouTube.</string>
+    <string name="audio_codecs">Аудіокодеки</string>
 </resources>
