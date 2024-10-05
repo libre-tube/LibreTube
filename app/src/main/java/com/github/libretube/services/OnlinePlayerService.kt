@@ -356,7 +356,7 @@ class OnlinePlayerService : LifecycleService() {
 
         saveWatchPosition()
 
-        if (!PlayerHelper.isAutoPlayEnabled(playlistId != null)) return
+        if (!PlayerHelper.isAutoPlayEnabled(playlistId != null) && nextId == null) return
 
         val nextVideo = nextId ?: PlayingQueue.getNext() ?: return
 
