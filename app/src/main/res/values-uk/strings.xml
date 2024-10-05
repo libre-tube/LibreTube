@@ -145,7 +145,7 @@
     <string name="downloading">Завантаження…</string>
     <string name="turnInternetOn">Увімкніть Wi-Fi або мобільні дані для з\'єднання з інтернетом.</string>
     <string name="open">Відкрити…</string>
-    <string name="reset">Відновити стандартні налаштування</string>
+    <string name="reset">Відновити до стандартних налаштувань</string>
     <string name="reset_message">Скинути всі налаштування та вийти з облікового запису?</string>
     <string name="deleteAccount">Видалити обліковий запис</string>
     <string name="deleteAccount_summary">Видалити ваш обліковий запис Piped</string>
