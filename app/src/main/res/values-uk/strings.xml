@@ -56,8 +56,8 @@
     <string name="fail">Невдача :(</string>
     <string name="about">Про LibreTube</string>
     <string name="changeLanguage">Мова</string>
-    <string name="systemLanguage">Системна</string>
-    <string name="systemDefault">Системна</string>
+    <string name="systemLanguage">Як у системі</string>
+    <string name="systemDefault">Як у системі</string>
     <string name="lightTheme">Світла</string>
     <string name="darkTheme">Темна</string>
     <string name="subscribers">%1$s підписників</string>
@@ -115,7 +115,7 @@
     <string name="live">Наживо</string>
     <string name="advanced">Розширені</string>
     <string name="defaultIcon">Звичайна</string>
-    <string name="legacyIcon">Загублена спадщина</string>
+    <string name="legacyIcon">Втрачений спадок</string>
     <string name="gradientIcon">Плавний градієнт</string>
     <string name="flameIcon">Летючий вогонь</string>
     <string name="birdIcon">Посилений птах</string>
@@ -145,7 +145,7 @@
     <string name="downloading">Завантаження…</string>
     <string name="turnInternetOn">Увімкніть Wi-Fi або мобільні дані для з\'єднання з інтернетом.</string>
     <string name="open">Відкрити…</string>
-    <string name="reset">Відновити стандартні налаштування</string>
+    <string name="reset">Відновити до стандартних налаштувань</string>
     <string name="reset_message">Скинути всі налаштування та вийти з облікового запису?</string>
     <string name="deleteAccount">Видалити обліковий запис</string>
     <string name="deleteAccount_summary">Видалити ваш обліковий запис Piped</string>
@@ -206,7 +206,7 @@
     <string name="backup">Резервне копіювання</string>
     <string name="delete">Видалити з завантажень</string>
     <string name="required_network">Необхідне з\'єднання</string>
-    <string name="network_metered">Лімітоване</string>
+    <string name="network_metered">Обмежена</string>
     <string name="repeat_mode_current">Поточний</string>
     <string name="picture_in_picture">Зображення в зображенні</string>
     <string name="new_videos_badge_summary">Показувати значок із кількістю нових відео, якщо такі є</string>
@@ -238,7 +238,7 @@
     <string name="unlimited">Необмежено</string>
     <string name="add_to_queue">Додати в чергу</string>
     <string name="repeat_mode">Режим повторення</string>
-    <string name="resize_mode_fit">Допасування</string>
+    <string name="resize_mode_fit">Вміщення</string>
     <string name="resize_mode_fill">Заповнення</string>
     <string name="resize_mode_zoom">Наближення</string>
     <string name="maximum_image_cache">Макс. розмір кешу зображень</string>
@@ -356,7 +356,7 @@
     <string name="sleep_timer">Таймер сну</string>
     <string name="skip_silence">Пропускати тишу</string>
     <string name="replies">Відповіді</string>
-    <string name="codecs">Кодеки</string>
+    <string name="codecs">Відеокодеки</string>
     <string name="mark_as_watched">Позначити переглянутим</string>
     <string name="unsupported_file_format">Непідтримуваний формат файлу: %1$s</string>
     <string name="custom_playback_speed">Користувацька швидкість</string>
@@ -555,4 +555,5 @@
     <string name="local_ryd_summary">Безпосередньо отримайте інформацію про дизлайки на сайті https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Імпорт історії перегляду</string>
     <string name="import_watch_history_desc">Зауважте, що не все буде імпортовано через обмеженість експортних даних YouTube.</string>
+    <string name="audio_codecs">Аудіокодеки</string>
 </resources>
