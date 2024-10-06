@@ -2,6 +2,8 @@ package com.github.libretube.db.obj
 
 import androidx.room.Embedded
 import androidx.room.Relation
+import com.github.libretube.enums.FileType
+import com.github.libretube.ui.fragments.DownloadTab
 
 data class DownloadWithItems(
     @Embedded val download: Download,
@@ -16,3 +18,15 @@ data class DownloadWithItems(
     )
     val downloadChapters: List<DownloadChapter> = emptyList()
 )
+
+fun List<DownloadWithItems>.filterByTab(tab: DownloadTab) = filter { dl ->
+    when (tab) {
+        DownloadTab.AUDIO -> {
+            dl.downloadItems.any { it.type == FileType.AUDIO } && dl.downloadItems.none { it.type == FileType.VIDEO }
+        }
+
+        DownloadTab.VIDEO -> {
+            dl.downloadItems.any { it.type == FileType.VIDEO }
+        }
+    }
+}

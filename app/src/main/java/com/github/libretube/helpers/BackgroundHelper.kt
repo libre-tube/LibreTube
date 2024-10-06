@@ -10,6 +10,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.services.OnlinePlayerService
+import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.ui.fragments.PlayerFragment
 
 /**
@@ -50,13 +51,9 @@ object BackgroundHelper {
     /**
      * Stop the [OnlinePlayerService] service if it is running.
      */
-    fun stopBackgroundPlay(
-        context: Context,
-        serviceClass: Class<*> = OnlinePlayerService::class.java
-    ) {
-        if (isBackgroundServiceRunning(context, serviceClass)) {
-            // Intent to stop background mode service
-            val intent = Intent(context, serviceClass)
+    fun stopBackgroundPlay(context: Context) {
+        arrayOf(OnlinePlayerService::class.java, OfflinePlayerService::class.java).forEach {
+            val intent = Intent(context, it)
             context.stopService(intent)
         }
     }
@@ -79,11 +76,13 @@ object BackgroundHelper {
      * @param context the current context
      * @param videoId the videoId of the video or null if all available downloads should be shuffled
      */
-    fun playOnBackgroundOffline(context: Context, videoId: String?) {
+    fun playOnBackgroundOffline(context: Context, videoId: String?, downloadTab: DownloadTab) {
+        stopBackgroundPlay(context)
+
         val playerIntent = Intent(context, OfflinePlayerService::class.java)
             .putExtra(IntentData.videoId, videoId)
+            .putExtra(IntentData.downloadTab, downloadTab)
 
-        context.stopService(playerIntent)
         ContextCompat.startForegroundService(context, playerIntent)
     }
 }

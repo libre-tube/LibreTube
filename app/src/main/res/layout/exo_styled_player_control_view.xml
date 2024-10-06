@@ -76,7 +76,6 @@
                     android:scaleY="0.8"
                     android:thumb="@drawable/player_switch_thumb"
                     android:tooltipText="@string/player_autoplay"
-                    android:visibility="gone"
                     app:thumbTint="@android:color/white"
                     app:track="@drawable/player_switch_track"
                     app:trackTint="#88ffffff" />
@@ -114,7 +113,6 @@
                     android:layout_marginEnd="2dp"
                     android:src="@drawable/ic_queue"
                     android:tooltipText="@string/queue"
-                    android:visibility="gone"
                     app:tint="@android:color/white" />
 
                 <ImageButton

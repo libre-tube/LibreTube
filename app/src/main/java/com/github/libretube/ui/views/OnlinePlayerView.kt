@@ -173,18 +173,6 @@ class OnlinePlayerView(
             binding.exoTitle.isInvisible = !isFullscreen
         }
 
-        binding.autoPlay.isVisible = true
-        binding.autoPlay.isChecked = PlayerHelper.autoPlayEnabled
-
-        binding.autoPlay.setOnCheckedChangeListener { _, isChecked ->
-            PlayerHelper.autoPlayEnabled = isChecked
-        }
-
-        binding.queueToggle.isVisible = true
-        binding.queueToggle.setOnClickListener {
-            PlayingQueueSheet().show(activity.supportFragmentManager, null)
-        }
-
         val updateSbImageResource = {
             binding.sbToggle.setImageResource(
                 if (playerViewModel.sponsorBlockEnabled) R.drawable.ic_sb_enabled else R.drawable.ic_sb_disabled

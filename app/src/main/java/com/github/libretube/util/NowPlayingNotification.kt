@@ -13,12 +13,10 @@ import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
 import androidx.core.app.PendingIntentCompat
 import androidx.core.content.getSystemService
-import androidx.core.graphics.drawable.toBitmap
 import androidx.media.app.NotificationCompat.MediaStyle
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
-import coil.request.ImageRequest
 import com.github.libretube.LibreTubeApp.Companion.PLAYER_CHANNEL_NAME
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
@@ -35,8 +33,7 @@ import java.util.UUID
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class NowPlayingNotification(
     private val context: Context,
-    private val player: ExoPlayer,
-    private val notificationType: NowPlayingNotificationType
+    private val player: ExoPlayer
 ) {
     private var videoId: String? = null
     private val nManager = context.getSystemService<NotificationManager>()!!
@@ -77,10 +74,8 @@ class NowPlayingNotification(
         // is set to "singleTop" in the AndroidManifest (important!!!)
         // that's the only way to launch back into the previous activity (e.g. the player view
         val intent = Intent(context, MainActivity::class.java).apply {
-            if (notificationType == NowPlayingNotificationType.AUDIO_ONLINE) {
-                putExtra(IntentData.openAudioPlayer, true)
-                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            }
+            putExtra(IntentData.openAudioPlayer, true)
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         }
 
         return PendingIntentCompat
@@ -96,26 +91,13 @@ class NowPlayingNotification(
     }
 
     private fun enqueueThumbnailRequest(callback: (Bitmap) -> Unit) {
-        // If playing a downloaded file, show the downloaded thumbnail instead of loading an
-        // online image
-        notificationData?.thumbnailPath?.let { path ->
-            ImageHelper.getDownloadedImage(context, path)?.let {
-                notificationBitmap = processBitmap(it)
-                callback.invoke(notificationBitmap!!)
-            }
-            return
+        ImageHelper.getImageWithCallback(
+            context,
+            notificationData?.thumbnailPath?.toString() ?: notificationData?.thumbnailUrl
+        ) {
+            notificationBitmap = processBitmap(it)
+            callback.invoke(notificationBitmap!!)
         }
-
-        val request = ImageRequest.Builder(context)
-            .data(notificationData?.thumbnailUrl)
-            .target {
-                notificationBitmap = processBitmap(it.toBitmap())
-                callback.invoke(notificationBitmap!!)
-            }
-            .build()
-
-        // enqueue the thumbnail loading request
-        ImageHelper.imageLoader.enqueue(request)
     }
 
     private fun processBitmap(bitmap: Bitmap): Bitmap {
@@ -257,18 +239,28 @@ class NowPlayingNotification(
 
     private fun createPlaybackState(@PlaybackStateCompat.State state: Int): PlaybackStateCompat {
         val stateActions = PlaybackStateCompat.ACTION_SKIP_TO_NEXT or
-            PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS or
-            PlaybackStateCompat.ACTION_REWIND or
-            PlaybackStateCompat.ACTION_FAST_FORWARD or
-            PlaybackStateCompat.ACTION_PLAY_PAUSE or
-            PlaybackStateCompat.ACTION_PAUSE or
-            PlaybackStateCompat.ACTION_PLAY or
-            PlaybackStateCompat.ACTION_SEEK_TO
+                PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS or
+                PlaybackStateCompat.ACTION_REWIND or
+                PlaybackStateCompat.ACTION_FAST_FORWARD or
+                PlaybackStateCompat.ACTION_PLAY_PAUSE or
+                PlaybackStateCompat.ACTION_PAUSE or
+                PlaybackStateCompat.ACTION_PLAY or
+                PlaybackStateCompat.ACTION_SEEK_TO
 
         return PlaybackStateCompat.Builder()
             .setActions(stateActions)
-            .addCustomAction(createMediaSessionAction(R.drawable.ic_rewind_md, PlayerEvent.Rewind.name))
-            .addCustomAction(createMediaSessionAction(R.drawable.ic_forward_md, PlayerEvent.Forward.name))
+            .addCustomAction(
+                createMediaSessionAction(
+                    R.drawable.ic_rewind_md,
+                    PlayerEvent.Rewind.name
+                )
+            )
+            .addCustomAction(
+                createMediaSessionAction(
+                    R.drawable.ic_forward_md,
+                    PlayerEvent.Forward.name
+                )
+            )
             .setState(state, player.currentPosition, player.playbackParameters.speed)
             .build()
     }
@@ -357,14 +349,5 @@ class NowPlayingNotification(
 
     fun refreshNotification() {
         createOrUpdateNotification()
-    }
-
-    companion object {
-        enum class NowPlayingNotificationType {
-            VIDEO_ONLINE,
-            VIDEO_OFFLINE,
-            AUDIO_ONLINE,
-            AUDIO_OFFLINE
-        }
     }
 }

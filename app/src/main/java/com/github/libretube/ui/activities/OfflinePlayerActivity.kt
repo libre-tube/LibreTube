@@ -32,6 +32,7 @@ import com.github.libretube.databinding.ActivityOfflinePlayerBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.DownloadChapter
+import com.github.libretube.db.obj.filterByTab
 import com.github.libretube.enums.FileType
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.extensions.serializableExtra
@@ -41,6 +42,7 @@ import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.ui.base.BaseActivity
+import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.ui.interfaces.TimeFrameReceiver
 import com.github.libretube.ui.listeners.SeekbarPreviewListener
 import com.github.libretube.ui.models.ChaptersViewModel
@@ -49,6 +51,7 @@ import com.github.libretube.ui.models.OfflinePlayerViewModel
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.OfflineTimeFrameReceiver
 import com.github.libretube.util.PauseableTimer
+import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -85,7 +88,10 @@ class OfflinePlayerActivity : BaseActivity() {
             super.onIsPlayingChanged(isPlaying)
 
             if (PlayerHelper.pipEnabled) {
-                PictureInPictureCompat.setPictureInPictureParams(this@OfflinePlayerActivity, pipParams)
+                PictureInPictureCompat.setPictureInPictureParams(
+                    this@OfflinePlayerActivity,
+                    pipParams
+                )
             }
 
             // Start or pause watch position timer
@@ -108,21 +114,32 @@ class OfflinePlayerActivity : BaseActivity() {
                     )
                 )
             }
+
+            if (playbackState == Player.STATE_ENDED && PlayerHelper.isAutoPlayEnabled()) {
+                playNextVideo(PlayingQueue.getNext() ?: return)
+            }
         }
     }
 
     private val playerActionReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val event = intent.serializableExtra<PlayerEvent>(PlayerHelper.CONTROL_TYPE) ?: return
-            PlayerHelper.handlePlayerAction(viewModel.player, event)
+            if (PlayerHelper.handlePlayerAction(viewModel.player, event)) return
+
+            when (event) {
+                PlayerEvent.Prev -> playNextVideo(PlayingQueue.getPrev() ?: return)
+                PlayerEvent.Next -> playNextVideo(PlayingQueue.getNext() ?: return)
+                else -> Unit
+            }
         }
     }
 
-    private val pipParams get() = PictureInPictureParamsCompat.Builder()
-        .setActions(PlayerHelper.getPiPModeActions(this, viewModel.player.isPlaying))
-        .setAutoEnterEnabled(PlayerHelper.pipEnabled && viewModel.player.isPlaying)
-        .setAspectRatio(viewModel.player.videoSize)
-        .build()
+    private val pipParams
+        get() = PictureInPictureParamsCompat.Builder()
+            .setActions(PlayerHelper.getPiPModeActions(this, viewModel.player.isPlaying))
+            .setAutoEnterEnabled(PlayerHelper.pipEnabled && viewModel.player.isPlaying)
+            .setAspectRatio(viewModel.player.videoSize)
+            .build()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowHelper.toggleFullscreen(window, true)
@@ -135,6 +152,13 @@ class OfflinePlayerActivity : BaseActivity() {
 
         binding = ActivityOfflinePlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        PlayingQueue.resetToDefaults()
+        PlayingQueue.clear()
+
+        PlayingQueue.setOnQueueTapListener { streamItem ->
+            playNextVideo(streamItem.url ?: return@setOnQueueTapListener)
+        }
 
         initializePlayer()
         playVideo()
@@ -154,6 +178,14 @@ class OfflinePlayerActivity : BaseActivity() {
         if (PlayerHelper.pipEnabled) {
             PictureInPictureCompat.setPictureInPictureParams(this, pipParams)
         }
+
+        lifecycleScope.launch { fillQueue() }
+    }
+
+    private fun playNextVideo(videoId: String) {
+        saveWatchPosition()
+        this.videoId = videoId
+        playVideo()
     }
 
     private fun initializePlayer() {
@@ -171,13 +203,24 @@ class OfflinePlayerActivity : BaseActivity() {
             finish()
         }
 
+        playerBinding.skipPrev.setOnClickListener {
+            playNextVideo(PlayingQueue.getPrev() ?: return@setOnClickListener)
+        }
+
+        playerBinding.skipNext.setOnClickListener {
+            playNextVideo(PlayingQueue.getNext() ?: return@setOnClickListener)
+        }
+
         binding.player.initialize(
             binding.doubleTapOverlay.binding,
             binding.playerGestureControlsView.binding,
             chaptersViewModel
         )
 
-        nowPlayingNotification = NowPlayingNotification(this, viewModel.player, NowPlayingNotification.Companion.NowPlayingNotificationType.VIDEO_OFFLINE)
+        nowPlayingNotification = NowPlayingNotification(
+            this,
+            viewModel.player
+        )
     }
 
     private fun playVideo() {
@@ -185,6 +228,8 @@ class OfflinePlayerActivity : BaseActivity() {
             val (downloadInfo, downloadItems, downloadChapters) = withContext(Dispatchers.IO) {
                 Database.downloadDao().findById(videoId)
             }
+            PlayingQueue.updateCurrent(downloadInfo.toStreamItem())
+
             val chapters = downloadChapters.map(DownloadChapter::toChapterSegment)
             chaptersViewModel.chaptersLiveData.value = chapters
             binding.player.setChapters(chapters)
@@ -221,7 +266,11 @@ class OfflinePlayerActivity : BaseActivity() {
                 }
             }
 
-            val data = PlayerNotificationData(downloadInfo.title, downloadInfo.uploader, downloadInfo.thumbnailPath.toString())
+            val data = PlayerNotificationData(
+                downloadInfo.title,
+                downloadInfo.uploader,
+                downloadInfo.thumbnailPath.toString()
+            )
             nowPlayingNotification?.updatePlayerNotification(videoId, data)
         }
     }
@@ -274,6 +323,14 @@ class OfflinePlayerActivity : BaseActivity() {
         }
     }
 
+    private suspend fun fillQueue() {
+        val downloads = withContext(Dispatchers.IO) {
+            Database.downloadDao().getAll()
+        }.filterByTab(DownloadTab.VIDEO)
+
+        PlayingQueue.insertRelatedStreams(downloads.map { it.download.toStreamItem() })
+    }
+
     private fun saveWatchPosition() {
         if (!PlayerHelper.watchPositionsVideo) return
 
@@ -320,7 +377,10 @@ class OfflinePlayerActivity : BaseActivity() {
         super.onUserLeaveHint()
     }
 
-    override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean, configuration: Configuration) {
+    override fun onPictureInPictureModeChanged(
+        isInPictureInPictureMode: Boolean,
+        newConfig: Configuration
+    ) {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode)
 
         if (isInPictureInPictureMode) {

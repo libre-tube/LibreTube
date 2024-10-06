@@ -6,14 +6,17 @@ import androidx.fragment.app.setFragmentResult
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.enums.ShareObjectType
+import com.github.libretube.extensions.serializable
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.fragments.DownloadTab
 
 class DownloadOptionsBottomSheet : BaseBottomSheet() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val videoId = arguments?.getString(IntentData.videoId)!!
+        val downloadTab = arguments?.serializable<DownloadTab>(IntentData.downloadTab)!!
 
         val options = listOf(
             R.string.playOnBackground,
@@ -25,7 +28,7 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
         setSimpleItems(options.map { getString(it) }) { which ->
             when (options[which]) {
                 R.string.playOnBackground -> {
-                    BackgroundHelper.playOnBackgroundOffline(requireContext(), videoId)
+                    BackgroundHelper.playOnBackgroundOffline(requireContext(), videoId, downloadTab)
                 }
 
                 R.string.go_to_video -> {

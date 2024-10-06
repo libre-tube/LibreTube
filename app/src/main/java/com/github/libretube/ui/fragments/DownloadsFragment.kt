@@ -11,20 +11,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.github.libretube.R
+import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.databinding.FragmentDownloadContentBinding
 import com.github.libretube.databinding.FragmentDownloadsBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.DownloadWithItems
+import com.github.libretube.db.obj.filterByTab
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.formatAsFileSize
-import com.github.libretube.helpers.BackgroundHelper
+import com.github.libretube.extensions.serializable
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.DownloadStatus
@@ -35,20 +41,77 @@ import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import kotlin.io.path.fileSize
 
-class DownloadsFragment : DynamicLayoutManagerFragment() {
+enum class DownloadTab {
+    VIDEO,
+    AUDIO
+}
+
+class DownloadsFragment : Fragment() {
     private var _binding: FragmentDownloadsBinding? = null
     private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentDownloadsBinding.inflate(inflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.downloadsPager.adapter = DownloadsFragmentAdapter(this)
+
+        TabLayoutMediator(binding.tabLayout, binding.downloadsPager) { tab, position ->
+            tab.text = when (position) {
+                DownloadTab.VIDEO.ordinal -> getString(R.string.video)
+                DownloadTab.AUDIO.ordinal -> getString(R.string.audio)
+                else -> throw IllegalArgumentException()
+            }
+        }.attach()
+    }
+
+    fun bindDownloadService() {
+        childFragmentManager.fragments.filterIsInstance<DownloadsFragmentPage>().forEach {
+            it.bindDownloadService()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}
+
+class DownloadsFragmentAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+    override fun getItemCount() = DownloadTab.entries.size
+
+    override fun createFragment(position: Int): Fragment {
+        return DownloadsFragmentPage().apply {
+            arguments = bundleOf(IntentData.currentPosition to DownloadTab.entries[position])
+        }
+    }
+}
+
+class DownloadsFragmentPage : DynamicLayoutManagerFragment() {
     private lateinit var adapter: DownloadsAdapter
+    private var _binding: FragmentDownloadContentBinding? = null
+    private val binding get() = _binding!!
+
     private var binder: DownloadService.LocalBinder? = null
     private val downloads = mutableListOf<DownloadWithItems>()
     private val downloadReceiver = DownloadReceiver()
+    private lateinit var downloadTab: DownloadTab
 
     private val serviceConnection = object : ServiceConnection {
         var isBound = false
@@ -71,21 +134,28 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        this.downloadTab = requireArguments().serializable(IntentData.currentPosition)!!
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDownloadsBinding.inflate(inflater)
+        _binding = FragmentDownloadContentBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun setLayoutManagers(gridItems: Int) {
-        _binding?.downloads?.layoutManager = GridLayoutManager(context, gridItems.ceilHalf())
+        _binding?.downloadsRecView?.layoutManager = GridLayoutManager(context, gridItems.ceilHalf())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         var selectedSortType =
             PreferenceHelper.getInt(PreferenceKeys.SELECTED_DOWNLOAD_SORT_TYPE, 0)
         val filterOptions = resources.getStringArray(R.array.downloadSortOptions)
@@ -95,6 +165,7 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
                 binding.sortType.text = filterOptions[index]
                 if (::adapter.isInitialized) {
                     sortDownloadList(index, selectedSortType)
+                    adapter.notifyDataSetChanged()
                 }
                 selectedSortType = index
                 PreferenceHelper.putInt(
@@ -104,75 +175,79 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
             }.show(childFragmentManager)
         }
 
-        val dbDownloads = runBlocking(Dispatchers.IO) {
-            Database.downloadDao().getAll()
-        }.takeIf { it.isNotEmpty() } ?: return
-
-        downloads.clear()
-        downloads.addAll(dbDownloads)
-        binding.downloadsEmpty.isGone = true
-        binding.downloads.isVisible = true
-        adapter = DownloadsAdapter(requireContext(), downloads) {
-            var isDownloading = false
-            val ids = it.downloadItems
-                .filter { item -> item.path.fileSize() < item.downloadSize }
-                .map { item -> item.id }
-
-            if (!serviceConnection.isBound) {
-                DownloadHelper.startDownloadService(requireContext())
-                bindDownloadService(ids.toIntArray())
-                return@DownloadsAdapter true
+        lifecycleScope.launch {
+            val dbDownloads = withContext(Dispatchers.IO) {
+                Database.downloadDao().getAll()
             }
 
-            binder?.getService()?.let { service ->
-                isDownloading = ids.any { id -> service.isDownloading(id) }
+            downloads.clear()
+            downloads.addAll(dbDownloads.filterByTab(downloadTab))
 
-                ids.forEach { id ->
-                    if (isDownloading) {
-                        service.pause(id)
-                    } else {
-                        service.resume(id)
+            if (downloads.isEmpty()) return@launch
+
+            sortDownloadList(selectedSortType)
+
+            adapter = DownloadsAdapter(requireContext(), downloadTab, downloads) {
+                var isDownloading = false
+                val ids = it.downloadItems
+                    .filter { item -> item.path.fileSize() < item.downloadSize }
+                    .map { item -> item.id }
+
+                if (!serviceConnection.isBound) {
+                    DownloadHelper.startDownloadService(requireContext())
+                    bindDownloadService(ids.toIntArray())
+                    return@DownloadsAdapter true
+                }
+
+                binder?.getService()?.let { service ->
+                    isDownloading = ids.any { id -> service.isDownloading(id) }
+
+                    ids.forEach { id ->
+                        if (isDownloading) {
+                            service.pause(id)
+                        } else {
+                            service.resume(id)
+                        }
                     }
                 }
+                return@DownloadsAdapter isDownloading.not()
             }
-            return@DownloadsAdapter isDownloading.not()
-        }
-        sortDownloadList(selectedSortType)
-        binding.downloads.adapter = adapter
+            binding.downloadsRecView.adapter = adapter
 
-        val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-            override fun getMovementFlags(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder
-            ): Int = makeMovementFlags(0, ItemTouchHelper.LEFT)
+            val itemTouchCallback =
+                object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+                    override fun getMovementFlags(
+                        recyclerView: RecyclerView,
+                        viewHolder: RecyclerView.ViewHolder
+                    ): Int = makeMovementFlags(0, ItemTouchHelper.LEFT)
 
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean = false
+                    override fun onMove(
+                        recyclerView: RecyclerView,
+                        viewHolder: RecyclerView.ViewHolder,
+                        target: RecyclerView.ViewHolder
+                    ): Boolean = false
 
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                adapter.showDeleteDialog(requireContext(), viewHolder.absoluteAdapterPosition)
-                // put the item back to the center, as it's currently out of the screen
-                adapter.restoreItem(viewHolder.absoluteAdapterPosition)
-            }
-        }
-        ItemTouchHelper(itemTouchCallback).attachToRecyclerView(binding.downloads)
-
-        binding.downloads.adapter?.registerAdapterDataObserver(
-            object : RecyclerView.AdapterDataObserver() {
-                override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-                    super.onItemRangeRemoved(positionStart, itemCount)
-                    toggleButtonsVisibility()
+                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                        adapter.showDeleteDialog(
+                            requireContext(),
+                            viewHolder.absoluteAdapterPosition
+                        )
+                        // put the item back to the center, as it's currently out of the screen
+                        adapter.restoreItem(viewHolder.absoluteAdapterPosition)
+                    }
                 }
-            }
-        )
+            ItemTouchHelper(itemTouchCallback).attachToRecyclerView(binding.downloadsRecView)
 
-        toggleButtonsVisibility()
+            binding.downloadsRecView.adapter?.registerAdapterDataObserver(
+                object : RecyclerView.AdapterDataObserver() {
+                    override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+                        super.onItemRangeRemoved(positionStart, itemCount)
+                        toggleVisibilities()
+                    }
+                }
+            )
 
-        binding.shuffleBackground.setOnClickListener {
-            BackgroundHelper.playOnBackgroundOffline(requireContext(), null)
+            toggleVisibilities()
         }
 
         binding.deleteAll.setOnClickListener {
@@ -180,25 +255,21 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
         }
     }
 
-    private fun toggleButtonsVisibility() {
+    private fun toggleVisibilities() {
         val binding = _binding ?: return
 
-        val isEmpty = binding.downloads.adapter?.itemCount == 0
+        val isEmpty = downloads.isEmpty()
         binding.downloadsEmpty.isVisible = isEmpty
-        binding.downloads.isGone = isEmpty
-        binding.sortType.isGone = isEmpty
+        binding.downloadsContainer.isGone = isEmpty
         binding.deleteAll.isGone = isEmpty
-        binding.shuffleBackground.isGone = isEmpty
     }
 
     private fun sortDownloadList(sortType: Int, previousSortType: Int? = null) {
         if (previousSortType == null && sortType == 1) {
             downloads.reverse()
-            adapter.notifyDataSetChanged()
         }
         if (previousSortType != null && sortType != previousSortType) {
             downloads.reverse()
-            adapter.notifyDataSetChanged()
         }
     }
 
@@ -251,7 +322,7 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
             it.downloadItems.any { item -> item.id == id }
         }
         val view =
-            _binding?.downloads?.findViewHolderForAdapterPosition(index) as? DownloadsViewHolder
+            _binding?.downloadsRecView?.findViewHolderForAdapterPosition(index) as? DownloadsViewHolder
 
         view?.binding?.apply {
             when (status) {
