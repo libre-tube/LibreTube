@@ -1,13 +1,16 @@
 package com.github.libretube.services
 
 import android.content.Intent
-import android.os.IBinder
+import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
+import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHolder.Database
+import com.github.libretube.db.obj.DownloadChapter
+import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.enums.FileType
 import com.github.libretube.extensions.toAndroidUri
 import com.github.libretube.extensions.toID
@@ -24,6 +27,8 @@ import kotlin.io.path.exists
  */
 @UnstableApi
 class OfflinePlayerService : AbstractPlayerService() {
+    private var downloadWithItems: DownloadWithItems? = null
+
     override suspend fun onServiceCreated(intent: Intent) {
         videoId = intent.getStringExtra(IntentData.videoId) ?: return
 
@@ -43,6 +48,8 @@ class OfflinePlayerService : AbstractPlayerService() {
         val downloadWithItems = withContext(Dispatchers.IO) {
             Database.downloadDao().findById(videoId)
         }
+        this.downloadWithItems = downloadWithItems
+        onNewVideoStarted?.let { it(downloadWithItems.download.toStreamItem()) }
 
         PlayingQueue.updateCurrent(downloadWithItems.download.toStreamItem())
 
@@ -96,11 +103,6 @@ class OfflinePlayerService : AbstractPlayerService() {
         }
     }
 
-    override fun onBind(intent: Intent): IBinder? {
-        super.onBind(intent)
-        return null
-    }
-
     /**
      * Stop the service when app is removed from the task manager.
      */
@@ -115,4 +117,7 @@ class OfflinePlayerService : AbstractPlayerService() {
             playNextVideo(PlayingQueue.getNext() ?: return)
         }
     }
+
+    override fun getChapters(): List<ChapterSegment> =
+        downloadWithItems?.downloadChapters.orEmpty().map(DownloadChapter::toChapterSegment)
 }

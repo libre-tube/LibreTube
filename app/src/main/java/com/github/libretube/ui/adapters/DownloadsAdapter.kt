@@ -3,10 +3,13 @@ package com.github.libretube.ui.adapters
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.os.postDelayed
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +21,7 @@ import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.ui.activities.OfflinePlayerActivity
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.fragments.DownloadTab
@@ -38,6 +42,8 @@ class DownloadsAdapter(
     private val downloads: MutableList<DownloadWithItems>,
     private val toggleDownload: (DownloadWithItems) -> Boolean
 ) : RecyclerView.Adapter<DownloadsViewHolder>() {
+    private val handler = Handler(Looper.getMainLooper())
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DownloadsViewHolder {
         val binding = DownloadedMediaRowBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -107,6 +113,7 @@ class DownloadsAdapter(
                     root.context.startActivity(intent)
                 } else {
                     BackgroundHelper.playOnBackgroundOffline(root.context, download.videoId)
+                    NavigationHelper.startAudioPlayer(root.context, offlinePlayer = true)
                 }
             }
 

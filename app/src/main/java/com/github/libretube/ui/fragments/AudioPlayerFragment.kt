@@ -2,7 +2,6 @@ package com.github.libretube.ui.fragments
 
 import android.annotation.SuppressLint
 import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.graphics.Color
@@ -11,6 +10,7 @@ import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
 import android.text.format.DateUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
+import androidx.media3.common.util.UnstableApi
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
@@ -40,6 +41,8 @@ import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.ThemeHelper
+import com.github.libretube.services.AbstractPlayerService
+import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.services.OnlinePlayerService
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.interfaces.AudioPlayerOptions
@@ -56,6 +59,7 @@ import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 
+@UnstableApi
 class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     private var _binding: FragmentAudioPlayerBinding? = null
     val binding get() = _binding!!
@@ -72,13 +76,13 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     private var handler = Handler(Looper.getMainLooper())
     private var isPaused = !PlayerHelper.playAutomatically
 
-    private var playerService: OnlinePlayerService? = null
+    private var playerService: AbstractPlayerService? = null
 
     /** Defines callbacks for service binding, passed to bindService()  */
     private val connection = object : ServiceConnection {
         override fun onServiceConnected(className: ComponentName, service: IBinder) {
             // We've bound to LocalService, cast the IBinder and get LocalService instance
-            val binder = service as OnlinePlayerService.LocalBinder
+            val binder = service as AbstractPlayerService.LocalBinder
             playerService = binder.getService()
             handleServiceConnection()
         }
@@ -90,8 +94,14 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         super.onCreate(savedInstanceState)
 
         audioHelper = AudioHelper(requireContext())
-        Intent(activity, OnlinePlayerService::class.java).also { intent ->
-            activity?.bindService(intent, connection, Context.BIND_AUTO_CREATE)
+
+        val isOffline = requireArguments().getBoolean(IntentData.offlinePlayer)
+
+        val serviceClass =
+            if (isOffline) OfflinePlayerService::class.java else OnlinePlayerService::class.java
+        Log.e("class", serviceClass.name.toString())
+        Intent(activity, serviceClass).also { intent ->
+            activity?.bindService(intent, connection, 0)
         }
     }
 
@@ -188,7 +198,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
 
         binding.openChapters.setOnClickListener {
             val playerService = playerService ?: return@setOnClickListener
-            chaptersModel.chaptersLiveData.value = playerService.streams?.chapters.orEmpty()
+            chaptersModel.chaptersLiveData.value = playerService.getChapters()
 
             ChaptersBottomSheet()
                 .apply {
@@ -380,11 +390,15 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             updatePlayPauseButton()
             isPaused = !isPlaying
         }
-        playerService?.onNewVideo = { streams, videoId ->
-            updateStreamInfo(streams.toStreamItem(videoId))
-            _binding?.openChapters?.isVisible = streams.chapters.isNotEmpty()
+        playerService?.onNewVideoStarted = { streamItem ->
+            updateStreamInfo(streamItem)
+            _binding?.openChapters?.isVisible = !playerService?.getChapters().isNullOrEmpty()
         }
         initializeSeekBar()
+
+        if (playerService is OfflinePlayerService) {
+            binding.openVideo.isGone = true
+        }
     }
 
     override fun onDestroyView() {
@@ -462,7 +476,8 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
 
         val player = playerService?.player ?: return
 
-        val currentIndex = PlayerHelper.getCurrentChapterIndex(player.currentPosition, chaptersModel.chapters)
+        val currentIndex =
+            PlayerHelper.getCurrentChapterIndex(player.currentPosition, chaptersModel.chapters)
         chaptersModel.currentChapterIndex.updateIfChanged(currentIndex ?: return)
     }
 }

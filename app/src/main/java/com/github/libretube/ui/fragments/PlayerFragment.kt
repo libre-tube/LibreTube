@@ -1358,8 +1358,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         if (viewModel.nowPlayingNotification == null) {
             viewModel.nowPlayingNotification = NowPlayingNotification(
                 requireContext(),
-                viewModel.player,
-                NowPlayingNotification.Companion.NowPlayingNotificationType.VIDEO_ONLINE
+                viewModel.player
             )
         }
         val playerNotificationData = PlayerNotificationData(

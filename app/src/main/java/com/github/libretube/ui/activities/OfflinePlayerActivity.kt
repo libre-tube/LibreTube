@@ -217,8 +217,7 @@ class OfflinePlayerActivity : BaseActivity() {
 
         nowPlayingNotification = NowPlayingNotification(
             this,
-            viewModel.player,
-            NowPlayingNotification.Companion.NowPlayingNotificationType.VIDEO_OFFLINE
+            viewModel.player
         )
     }
 

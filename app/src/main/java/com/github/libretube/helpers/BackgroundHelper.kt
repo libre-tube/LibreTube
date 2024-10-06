@@ -50,13 +50,9 @@ object BackgroundHelper {
     /**
      * Stop the [OnlinePlayerService] service if it is running.
      */
-    fun stopBackgroundPlay(
-        context: Context,
-        serviceClass: Class<*> = OnlinePlayerService::class.java
-    ) {
-        if (isBackgroundServiceRunning(context, serviceClass)) {
-            // Intent to stop background mode service
-            val intent = Intent(context, serviceClass)
+    fun stopBackgroundPlay(context: Context) {
+        arrayOf(OnlinePlayerService::class.java, OfflinePlayerService::class.java).forEach {
+            val intent = Intent(context, it)
             context.stopService(intent)
         }
     }
@@ -80,10 +76,11 @@ object BackgroundHelper {
      * @param videoId the videoId of the video or null if all available downloads should be shuffled
      */
     fun playOnBackgroundOffline(context: Context, videoId: String?) {
+        stopBackgroundPlay(context)
+
         val playerIntent = Intent(context, OfflinePlayerService::class.java)
             .putExtra(IntentData.videoId, videoId)
 
-        context.stopService(playerIntent)
         ContextCompat.startForegroundService(context, playerIntent)
     }
 }

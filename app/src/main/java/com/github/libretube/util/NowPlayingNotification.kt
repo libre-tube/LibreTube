@@ -13,12 +13,10 @@ import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
 import androidx.core.app.PendingIntentCompat
 import androidx.core.content.getSystemService
-import androidx.core.graphics.drawable.toBitmap
 import androidx.media.app.NotificationCompat.MediaStyle
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
-import coil.request.ImageRequest
 import com.github.libretube.LibreTubeApp.Companion.PLAYER_CHANNEL_NAME
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
@@ -35,8 +33,7 @@ import java.util.UUID
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class NowPlayingNotification(
     private val context: Context,
-    private val player: ExoPlayer,
-    private val notificationType: NowPlayingNotificationType
+    private val player: ExoPlayer
 ) {
     private var videoId: String? = null
     private val nManager = context.getSystemService<NotificationManager>()!!
@@ -77,10 +74,8 @@ class NowPlayingNotification(
         // is set to "singleTop" in the AndroidManifest (important!!!)
         // that's the only way to launch back into the previous activity (e.g. the player view
         val intent = Intent(context, MainActivity::class.java).apply {
-            if (notificationType == NowPlayingNotificationType.AUDIO_ONLINE) {
-                putExtra(IntentData.openAudioPlayer, true)
-                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            }
+            putExtra(IntentData.openAudioPlayer, true)
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         }
 
         return PendingIntentCompat
@@ -354,14 +349,5 @@ class NowPlayingNotification(
 
     fun refreshNotification() {
         createOrUpdateNotification()
-    }
-
-    companion object {
-        enum class NowPlayingNotificationType {
-            VIDEO_ONLINE,
-            VIDEO_OFFLINE,
-            AUDIO_ONLINE,
-            AUDIO_OFFLINE
-        }
     }
 }

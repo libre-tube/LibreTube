@@ -1,8 +1,6 @@
 package com.github.libretube.services
 
 import android.content.Intent
-import android.os.Binder
-import android.os.IBinder
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaItem
@@ -11,6 +9,7 @@ import androidx.media3.common.Player
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.StreamsExtractor
+import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
@@ -53,17 +52,6 @@ class OnlinePlayerService : AbstractPlayerService() {
      */
     private var segments = listOf<Segment>()
     private var sponsorBlockConfig = PlayerHelper.getSponsorBlockCategories()
-
-    /**
-     * Used for connecting to the AudioPlayerFragment
-     */
-    private val binder = LocalBinder()
-
-    /**
-     * Listener for passing playback state changes to the AudioPlayerFragment
-     */
-    var onStateOrPlayingChanged: ((isPlaying: Boolean) -> Unit)? = null
-    var onNewVideo: ((streams: Streams, videoId: String) -> Unit)? = null
 
     override suspend fun onServiceCreated(intent: Intent) {
         val playerData = intent.parcelableExtra<PlayerData>(IntentData.playerData)
@@ -143,7 +131,7 @@ class OnlinePlayerService : AbstractPlayerService() {
             streams?.thumbnailUrl
         )
         nowPlayingNotification?.updatePlayerNotification(videoId, playerNotificationData)
-        streams?.let { onNewVideo?.invoke(it, videoId) }
+        streams?.let { onNewVideoStarted?.invoke(it.toStreamItem(videoId)) }
 
         player?.apply {
             playWhenReady = PlayerHelper.playAutomatically
@@ -225,19 +213,7 @@ class OnlinePlayerService : AbstractPlayerService() {
         player?.checkForSegments(this, segments, sponsorBlockConfig)
     }
 
-    inner class LocalBinder : Binder() {
-        // Return this instance of [BackgroundMode] so clients can call public methods
-        fun getService(): OnlinePlayerService = this@OnlinePlayerService
-    }
-
-    override fun onBind(intent: Intent): IBinder {
-        super.onBind(intent)
-        return binder
-    }
-
     override fun onPlaybackStateChanged(playbackState: Int) {
-        onStateOrPlayingChanged?.invoke(player?.isPlaying ?: false)
-
         when (playbackState) {
             Player.STATE_ENDED -> {
                 if (!isTransitioning) playNextVideo()
@@ -260,4 +236,6 @@ class OnlinePlayerService : AbstractPlayerService() {
             }
         }
     }
+
+    override fun getChapters(): List<ChapterSegment> = streams?.chapters.orEmpty()
 }

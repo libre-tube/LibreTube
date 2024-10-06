@@ -4,9 +4,11 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Binder
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.OptIn
 import androidx.core.app.NotificationCompat
@@ -22,6 +24,8 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import com.github.libretube.LibreTubeApp.Companion.PLAYER_CHANNEL_NAME
 import com.github.libretube.R
+import com.github.libretube.api.obj.ChapterSegment
+import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.enums.NotificationId
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.extensions.serializableExtra
@@ -43,6 +47,14 @@ abstract class AbstractPlayerService : LifecycleService() {
 
     val handler = Handler(Looper.getMainLooper())
 
+    private val binder = LocalBinder()
+
+    /**
+     * Listener for passing playback state changes to the AudioPlayerFragment
+     */
+    var onStateOrPlayingChanged: ((isPlaying: Boolean) -> Unit)? = null
+    var onNewVideoStarted: ((streamItem: StreamItem) -> Unit)? = null
+
     private val watchPositionTimer = PauseableTimer(
         onTick = ::saveWatchPosition,
         delayMillis = PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS
@@ -58,10 +70,14 @@ abstract class AbstractPlayerService : LifecycleService() {
             } else {
                 watchPositionTimer.pause()
             }
+
+            onStateOrPlayingChanged?.let { it(isPlaying) }
         }
 
         override fun onPlaybackStateChanged(playbackState: Int) {
             super.onPlaybackStateChanged(playbackState)
+
+            onStateOrPlayingChanged?.let { it(player?.isPlaying ?: false) }
 
             this@AbstractPlayerService.onPlaybackStateChanged(playbackState)
         }
@@ -162,8 +178,7 @@ abstract class AbstractPlayerService : LifecycleService() {
 
         nowPlayingNotification = NowPlayingNotification(
             this,
-            player!!,
-            NowPlayingNotification.Companion.NowPlayingNotificationType.AUDIO_OFFLINE
+            player!!
         )
     }
 
@@ -202,11 +217,6 @@ abstract class AbstractPlayerService : LifecycleService() {
         super.onDestroy()
     }
 
-    override fun onBind(intent: Intent): IBinder? {
-        super.onBind(intent)
-        return null
-    }
-
     /**
      * Stop the service when app is removed from the task manager.
      */
@@ -217,9 +227,21 @@ abstract class AbstractPlayerService : LifecycleService() {
 
     abstract fun onPlaybackStateChanged(playbackState: Int)
 
+    abstract fun getChapters(): List<ChapterSegment>
+
     fun getCurrentPosition() = player?.currentPosition
 
     fun getDuration() = player?.duration
 
     fun seekToPosition(position: Long) = player?.seekTo(position)
+
+    inner class LocalBinder : Binder() {
+        // Return this instance of [AbstractPlayerService] so clients can call public methods
+        fun getService(): AbstractPlayerService = this@AbstractPlayerService
+    }
+
+    override fun onBind(intent: Intent): IBinder {
+        super.onBind(intent)
+        return binder
+    }
 }
