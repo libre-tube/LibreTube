@@ -96,26 +96,13 @@ class NowPlayingNotification(
     }
 
     private fun enqueueThumbnailRequest(callback: (Bitmap) -> Unit) {
-        // If playing a downloaded file, show the downloaded thumbnail instead of loading an
-        // online image
-        notificationData?.thumbnailPath?.let { path ->
-            ImageHelper.getDownloadedImage(context, path)?.let {
-                notificationBitmap = processBitmap(it)
-                callback.invoke(notificationBitmap!!)
-            }
-            return
+        ImageHelper.getImageWithCallback(
+            context,
+            notificationData?.thumbnailPath?.toString() ?: notificationData?.thumbnailUrl
+        ) {
+            notificationBitmap = processBitmap(it)
+            callback.invoke(notificationBitmap!!)
         }
-
-        val request = ImageRequest.Builder(context)
-            .data(notificationData?.thumbnailUrl)
-            .target {
-                notificationBitmap = processBitmap(it.toBitmap())
-                callback.invoke(notificationBitmap!!)
-            }
-            .build()
-
-        // enqueue the thumbnail loading request
-        ImageHelper.imageLoader.enqueue(request)
     }
 
     private fun processBitmap(bitmap: Bitmap): Bitmap {
@@ -257,18 +244,28 @@ class NowPlayingNotification(
 
     private fun createPlaybackState(@PlaybackStateCompat.State state: Int): PlaybackStateCompat {
         val stateActions = PlaybackStateCompat.ACTION_SKIP_TO_NEXT or
-            PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS or
-            PlaybackStateCompat.ACTION_REWIND or
-            PlaybackStateCompat.ACTION_FAST_FORWARD or
-            PlaybackStateCompat.ACTION_PLAY_PAUSE or
-            PlaybackStateCompat.ACTION_PAUSE or
-            PlaybackStateCompat.ACTION_PLAY or
-            PlaybackStateCompat.ACTION_SEEK_TO
+                PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS or
+                PlaybackStateCompat.ACTION_REWIND or
+                PlaybackStateCompat.ACTION_FAST_FORWARD or
+                PlaybackStateCompat.ACTION_PLAY_PAUSE or
+                PlaybackStateCompat.ACTION_PAUSE or
+                PlaybackStateCompat.ACTION_PLAY or
+                PlaybackStateCompat.ACTION_SEEK_TO
 
         return PlaybackStateCompat.Builder()
             .setActions(stateActions)
-            .addCustomAction(createMediaSessionAction(R.drawable.ic_rewind_md, PlayerEvent.Rewind.name))
-            .addCustomAction(createMediaSessionAction(R.drawable.ic_forward_md, PlayerEvent.Forward.name))
+            .addCustomAction(
+                createMediaSessionAction(
+                    R.drawable.ic_rewind_md,
+                    PlayerEvent.Rewind.name
+                )
+            )
+            .addCustomAction(
+                createMediaSessionAction(
+                    R.drawable.ic_forward_md,
+                    PlayerEvent.Forward.name
+                )
+            )
             .setState(state, player.currentPosition, player.playbackParameters.speed)
             .build()
     }

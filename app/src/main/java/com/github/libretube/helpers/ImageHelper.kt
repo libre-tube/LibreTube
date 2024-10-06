@@ -2,10 +2,9 @@ package com.github.libretube.helpers
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
-import android.net.Uri
 import android.widget.ImageView
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.drawable.toBitmapOrNull
 import coil.ImageLoader
 import coil.disk.DiskCache
@@ -15,7 +14,6 @@ import com.github.libretube.BuildConfig
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toAndroidUri
-import com.github.libretube.extensions.toAndroidUriOrNull
 import com.github.libretube.util.DataSaverMode
 import com.google.net.cronet.okhttptransport.CronetInterceptor
 import kotlinx.coroutines.Dispatchers
@@ -26,7 +24,7 @@ import java.io.File
 import java.nio.file.Path
 
 object ImageHelper {
-    lateinit var imageLoader: ImageLoader
+    private lateinit var imageLoader: ImageLoader
 
     private val Context.coilFile get() = cacheDir.resolve("coil")
 
@@ -119,14 +117,15 @@ object ImageHelper {
         return imageLoader.execute(request).drawable?.toBitmapOrNull()
     }
 
-    fun getDownloadedImage(context: Context, path: Path): Bitmap? {
-        return path.toAndroidUriOrNull()?.let { getImage(context, it) }
-    }
+    fun getImageWithCallback(context: Context, url: String?, onBitmap: (Bitmap) -> Unit) {
+        val request = ImageRequest.Builder(context)
+            .data(url)
+            .target { drawable ->
+                onBitmap(drawable.toBitmap())
+            }
+            .build()
 
-    private fun getImage(context: Context, imagePath: Uri): Bitmap? {
-        return context.contentResolver.openInputStream(imagePath)?.use {
-            BitmapFactory.decodeStream(it)
-        }
+        imageLoader.enqueue(request)
     }
 
     /**

@@ -82,7 +82,7 @@ class DownloadsAdapter(
             }
 
             download.thumbnailPath?.let { path ->
-                thumbnailImage.setImageBitmap(ImageHelper.getDownloadedImage(context, path))
+                ImageHelper.loadImage(path.toString(), thumbnailImage)
             }
 
             progressBar.setOnClickListener {
