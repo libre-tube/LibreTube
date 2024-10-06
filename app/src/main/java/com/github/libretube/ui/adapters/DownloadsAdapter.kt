@@ -16,9 +16,11 @@ import com.github.libretube.databinding.DownloadedMediaRowBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.extensions.formatAsFileSize
+import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.ui.activities.OfflinePlayerActivity
 import com.github.libretube.ui.base.BaseActivity
+import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.ui.sheets.DownloadOptionsBottomSheet
 import com.github.libretube.ui.sheets.DownloadOptionsBottomSheet.Companion.DELETE_DOWNLOAD_REQUEST_KEY
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
@@ -32,6 +34,7 @@ import kotlin.io.path.fileSize
 
 class DownloadsAdapter(
     private val context: Context,
+    private val downloadTab: DownloadTab,
     private val downloads: MutableList<DownloadWithItems>,
     private val toggleDownload: (DownloadWithItems) -> Boolean
 ) : RecyclerView.Adapter<DownloadsViewHolder>() {
@@ -98,9 +101,13 @@ class DownloadsAdapter(
             }
 
             root.setOnClickListener {
-                val intent = Intent(root.context, OfflinePlayerActivity::class.java)
-                intent.putExtra(IntentData.videoId, download.videoId)
-                root.context.startActivity(intent)
+                if (downloadTab == DownloadTab.VIDEO) {
+                    val intent = Intent(root.context, OfflinePlayerActivity::class.java)
+                    intent.putExtra(IntentData.videoId, download.videoId)
+                    root.context.startActivity(intent)
+                } else {
+                    BackgroundHelper.playOnBackgroundOffline(root.context, download.videoId)
+                }
             }
 
             root.setOnLongClickListener {

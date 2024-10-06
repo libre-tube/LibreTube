@@ -7,7 +7,6 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import com.github.libretube.constants.IntentData
-import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.enums.FileType
 import com.github.libretube.extensions.toAndroidUri
