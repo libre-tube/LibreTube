@@ -10,7 +10,6 @@ import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
 import android.text.format.DateUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -99,7 +98,6 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
 
         val serviceClass =
             if (isOffline) OfflinePlayerService::class.java else OnlinePlayerService::class.java
-        Log.e("class", serviceClass.name.toString())
         Intent(activity, serviceClass).also { intent ->
             activity?.bindService(intent, connection, 0)
         }

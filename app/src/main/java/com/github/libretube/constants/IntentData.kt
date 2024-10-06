@@ -49,4 +49,5 @@ object IntentData {
     const val nextPage = "nextPage"
     const val videoInfo = "videoInfo"
     const val offlinePlayer = "offlinePlayer"
+    const val downloadTab = "downloadTab"
 }

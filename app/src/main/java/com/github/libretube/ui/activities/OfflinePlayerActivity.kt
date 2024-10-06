@@ -32,6 +32,7 @@ import com.github.libretube.databinding.ActivityOfflinePlayerBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.DownloadChapter
+import com.github.libretube.db.obj.filterByTab
 import com.github.libretube.enums.FileType
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.extensions.serializableExtra
@@ -41,6 +42,7 @@ import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.ui.base.BaseActivity
+import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.ui.interfaces.TimeFrameReceiver
 import com.github.libretube.ui.listeners.SeekbarPreviewListener
 import com.github.libretube.ui.models.ChaptersViewModel
@@ -324,7 +326,7 @@ class OfflinePlayerActivity : BaseActivity() {
     private suspend fun fillQueue() {
         val downloads = withContext(Dispatchers.IO) {
             Database.downloadDao().getAll()
-        }
+        }.filterByTab(DownloadTab.VIDEO)
 
         PlayingQueue.insertRelatedStreams(downloads.map { it.download.toStreamItem() })
     }

@@ -3,13 +3,10 @@ package com.github.libretube.ui.adapters
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.os.Handler
-import android.os.Looper
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.core.os.postDelayed
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -42,8 +39,6 @@ class DownloadsAdapter(
     private val downloads: MutableList<DownloadWithItems>,
     private val toggleDownload: (DownloadWithItems) -> Boolean
 ) : RecyclerView.Adapter<DownloadsViewHolder>() {
-    private val handler = Handler(Looper.getMainLooper())
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DownloadsViewHolder {
         val binding = DownloadedMediaRowBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -112,7 +107,7 @@ class DownloadsAdapter(
                     intent.putExtra(IntentData.videoId, download.videoId)
                     root.context.startActivity(intent)
                 } else {
-                    BackgroundHelper.playOnBackgroundOffline(root.context, download.videoId)
+                    BackgroundHelper.playOnBackgroundOffline(root.context, download.videoId, downloadTab)
                     NavigationHelper.startAudioPlayer(root.context, offlinePlayer = true)
                 }
             }
@@ -130,7 +125,8 @@ class DownloadsAdapter(
                     .apply {
                         arguments = bundleOf(
                             IntentData.videoId to download.videoId,
-                            IntentData.channelName to download.uploader
+                            IntentData.channelName to download.uploader,
+                            IntentData.downloadTab to downloadTab
                         )
                     }
                     .show(fragmentManager)

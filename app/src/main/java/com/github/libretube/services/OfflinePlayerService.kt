@@ -1,7 +1,6 @@
 package com.github.libretube.services
 
 import android.content.Intent
-import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
@@ -11,11 +10,14 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.DownloadChapter
 import com.github.libretube.db.obj.DownloadWithItems
+import com.github.libretube.db.obj.filterByTab
 import com.github.libretube.enums.FileType
+import com.github.libretube.extensions.serializableExtra
 import com.github.libretube.extensions.toAndroidUri
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.obj.PlayerNotificationData
+import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,9 +30,11 @@ import kotlin.io.path.exists
 @UnstableApi
 class OfflinePlayerService : AbstractPlayerService() {
     private var downloadWithItems: DownloadWithItems? = null
+    private lateinit var downloadTab: DownloadTab
 
     override suspend fun onServiceCreated(intent: Intent) {
         videoId = intent.getStringExtra(IntentData.videoId) ?: return
+        downloadTab = intent.serializableExtra(IntentData.downloadTab)!!
 
         PlayingQueue.clear()
 
@@ -88,7 +92,7 @@ class OfflinePlayerService : AbstractPlayerService() {
     private suspend fun fillQueue() {
         val downloads = withContext(Dispatchers.IO) {
             Database.downloadDao().getAll()
-        }
+        }.filterByTab(downloadTab)
 
         PlayingQueue.insertRelatedStreams(downloads.map { it.download.toStreamItem() })
     }

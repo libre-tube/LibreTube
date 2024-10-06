@@ -27,7 +27,7 @@ import com.github.libretube.databinding.FragmentDownloadContentBinding
 import com.github.libretube.databinding.FragmentDownloadsBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.DownloadWithItems
-import com.github.libretube.enums.FileType
+import com.github.libretube.db.obj.filterByTab
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.extensions.serializable
@@ -111,7 +111,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment() {
     private var binder: DownloadService.LocalBinder? = null
     private val downloads = mutableListOf<DownloadWithItems>()
     private val downloadReceiver = DownloadReceiver()
-    private lateinit var downloadTabSelf: DownloadTab
+    private lateinit var downloadTab: DownloadTab
 
     private val serviceConnection = object : ServiceConnection {
         var isBound = false
@@ -137,7 +137,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        this.downloadTabSelf = requireArguments().serializable(IntentData.currentPosition)!!
+        this.downloadTab = requireArguments().serializable(IntentData.currentPosition)!!
     }
 
     override fun onCreateView(
@@ -181,23 +181,13 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment() {
             }
 
             downloads.clear()
-            downloads.addAll(dbDownloads.filter { dl ->
-                when (downloadTabSelf) {
-                    DownloadTab.AUDIO -> {
-                        dl.downloadItems.any { it.type == FileType.AUDIO } && dl.downloadItems.none { it.type == FileType.VIDEO }
-                    }
-
-                    DownloadTab.VIDEO -> {
-                        dl.downloadItems.any { it.type == FileType.VIDEO }
-                    }
-                }
-            })
+            downloads.addAll(dbDownloads.filterByTab(downloadTab))
 
             if (downloads.isEmpty()) return@launch
 
             sortDownloadList(selectedSortType)
 
-            adapter = DownloadsAdapter(requireContext(), downloadTabSelf, downloads) {
+            adapter = DownloadsAdapter(requireContext(), downloadTab, downloads) {
                 var isDownloading = false
                 val ids = it.downloadItems
                     .filter { item -> item.path.fileSize() < item.downloadSize }

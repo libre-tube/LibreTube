@@ -10,6 +10,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.services.OnlinePlayerService
+import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.ui.fragments.PlayerFragment
 
 /**
@@ -75,11 +76,12 @@ object BackgroundHelper {
      * @param context the current context
      * @param videoId the videoId of the video or null if all available downloads should be shuffled
      */
-    fun playOnBackgroundOffline(context: Context, videoId: String?) {
+    fun playOnBackgroundOffline(context: Context, videoId: String?, downloadTab: DownloadTab) {
         stopBackgroundPlay(context)
 
         val playerIntent = Intent(context, OfflinePlayerService::class.java)
             .putExtra(IntentData.videoId, videoId)
+            .putExtra(IntentData.downloadTab, downloadTab)
 
         ContextCompat.startForegroundService(context, playerIntent)
     }
