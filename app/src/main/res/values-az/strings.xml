@@ -5,7 +5,7 @@
     <string name="videos">Videolar</string>
     <string name="subscribe">Abunə Ol</string>
     <string name="unsubscribe">Abunə Olma</string>
-    <string name="share">Paylaş</string>
+    <string name="share">Paylaşım</string>
     <string name="save">Saxla</string>
     <string name="download">Yüklə</string>
     <string name="username">İstifadəçi adı</string>
@@ -268,7 +268,7 @@
     <string name="push_channel_name">Bildiriş İşçisi</string>
     <string name="push_channel_description">Yeni yayımlar mövcuddursa bildiriş göstərir.</string>
     <string name="play_next">Sonra oynat</string>
-    <string name="navigation_bar">Naviqasiya çubuğu</string>
+    <string name="navigation_bar">Hərəkət çubuğu</string>
     <string name="change_region">Görünür, trendlər cari bölgə üçün əlçatan deyil. Xahiş olunur, tənzimləmələrdə başqasın seç.</string>
     <string name="playback_pitch">Ucalıq</string>
     <string name="filename">Fayl adı</string>
