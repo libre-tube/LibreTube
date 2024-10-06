@@ -8,11 +8,13 @@ import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHolder
-import com.github.libretube.db.obj.DownloadWithItems
+import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.enums.FileType
 import com.github.libretube.extensions.toAndroidUri
+import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.obj.PlayerNotificationData
+import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -23,38 +25,27 @@ import kotlin.io.path.exists
  */
 @UnstableApi
 class OfflinePlayerService : AbstractPlayerService() {
-    private var downloadsWithItems: List<DownloadWithItems> = emptyList()
-
     override suspend fun onServiceCreated(intent: Intent) {
-        downloadsWithItems = withContext(Dispatchers.IO) {
-            DatabaseHolder.Database.downloadDao().getAll()
-        }
-        if (downloadsWithItems.isEmpty()) {
-            onDestroy()
-            return
-        }
+        videoId = intent.getStringExtra(IntentData.videoId) ?: return
 
-        val videoId = intent.getStringExtra(IntentData.videoId)
+        PlayingQueue.clear()
 
-        val downloadToPlay = if (videoId == null) {
-            downloadsWithItems = downloadsWithItems.shuffled()
-            downloadsWithItems.first()
-        } else {
-            downloadsWithItems.first { it.download.videoId == videoId }
+        PlayingQueue.setOnQueueTapListener { streamItem ->
+            streamItem.url?.toID()?.let { playNextVideo(it) }
         }
 
-        this@OfflinePlayerService.videoId = downloadToPlay.download.videoId
+        fillQueue()
     }
 
     /**
      * Attempt to start an audio player with the given download items
      */
     override suspend fun startPlaybackAndUpdateNotification() {
-        val downloadWithItems = downloadsWithItems.firstOrNull { it.download.videoId == videoId }
-        if (downloadWithItems == null) {
-            stopSelf()
-            return
+        val downloadWithItems = withContext(Dispatchers.IO) {
+            Database.downloadDao().findById(videoId)
         }
+
+        PlayingQueue.updateCurrent(downloadWithItems.download.toStreamItem())
 
         val notificationData = PlayerNotificationData(
             title = downloadWithItems.download.title,
@@ -88,6 +79,24 @@ class OfflinePlayerService : AbstractPlayerService() {
         }
     }
 
+    private suspend fun fillQueue() {
+        val downloads = withContext(Dispatchers.IO) {
+            Database.downloadDao().getAll()
+        }
+
+        PlayingQueue.insertRelatedStreams(downloads.map { it.download.toStreamItem() })
+    }
+
+    private fun playNextVideo(videoId: String) {
+        saveWatchPosition()
+
+        this.videoId = videoId
+
+        lifecycleScope.launch {
+            startPlaybackAndUpdateNotification()
+        }
+    }
+
     override fun onBind(intent: Intent): IBinder? {
         super.onBind(intent)
         return null
@@ -103,15 +112,8 @@ class OfflinePlayerService : AbstractPlayerService() {
 
     override fun onPlaybackStateChanged(playbackState: Int) {
         // automatically go to the next video/audio when the current one ended
-        if (playbackState == Player.STATE_ENDED) {
-            val currentIndex = downloadsWithItems.indexOfFirst { it.download.videoId == videoId }
-            downloadsWithItems.getOrNull(currentIndex + 1)?.let {
-                this@OfflinePlayerService.videoId = it.download.videoId
-
-                lifecycleScope.launch {
-                    startPlaybackAndUpdateNotification()
-                }
-            }
+        if (playbackState == Player.STATE_ENDED && PlayerHelper.isAutoPlayEnabled()) {
+            playNextVideo(PlayingQueue.getNext() ?: return)
         }
     }
 }

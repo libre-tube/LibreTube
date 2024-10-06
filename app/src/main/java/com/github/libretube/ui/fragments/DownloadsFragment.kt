@@ -171,10 +171,6 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
 
         toggleButtonsVisibility()
 
-        binding.shuffleBackground.setOnClickListener {
-            BackgroundHelper.playOnBackgroundOffline(requireContext(), null)
-        }
-
         binding.deleteAll.setOnClickListener {
             showDeleteAllDialog(binding.root.context, adapter)
         }
@@ -188,7 +184,6 @@ class DownloadsFragment : DynamicLayoutManagerFragment() {
         binding.downloads.isGone = isEmpty
         binding.sortType.isGone = isEmpty
         binding.deleteAll.isGone = isEmpty
-        binding.shuffleBackground.isGone = isEmpty
     }
 
     private fun sortDownloadList(sortType: Int, previousSortType: Int? = null) {

@@ -66,6 +66,7 @@ import com.github.libretube.ui.models.ChaptersViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.ChaptersBottomSheet
 import com.github.libretube.ui.sheets.PlaybackOptionsSheet
+import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.sheets.SleepTimerSheet
 import com.github.libretube.util.PlayingQueue
 
@@ -203,6 +204,12 @@ abstract class CustomExoPlayerView(
             }
         })
 
+        binding.autoPlay.isChecked = PlayerHelper.autoPlayEnabled
+
+        binding.autoPlay.setOnCheckedChangeListener { _, isChecked ->
+            PlayerHelper.autoPlayEnabled = isChecked
+        }
+
         // restore the duration type from the previous session
         updateDisplayedDurationType()
 
@@ -247,6 +254,10 @@ abstract class CustomExoPlayerView(
             } else {
                 sheet.show(activity.supportFragmentManager)
             }
+        }
+
+        binding.queueToggle.setOnClickListener {
+            PlayingQueueSheet().show(supportFragmentManager, null)
         }
     }
 

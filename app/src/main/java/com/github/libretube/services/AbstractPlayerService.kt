@@ -15,7 +15,6 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.C
-import androidx.media3.common.MediaItem
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
@@ -23,24 +22,15 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import com.github.libretube.LibreTubeApp.Companion.PLAYER_CHANNEL_NAME
 import com.github.libretube.R
-import com.github.libretube.constants.IntentData
-import com.github.libretube.db.DatabaseHolder
-import com.github.libretube.db.obj.DownloadWithItems
-import com.github.libretube.enums.FileType
 import com.github.libretube.enums.NotificationId
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.extensions.serializableExtra
-import com.github.libretube.extensions.toAndroidUri
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
-import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PauseableTimer
 import com.github.libretube.util.PlayingQueue
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import kotlin.io.path.exists
 
 @UnstableApi
 abstract class AbstractPlayerService : LifecycleService() {
@@ -138,6 +128,8 @@ abstract class AbstractPlayerService : LifecycleService() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        PlayingQueue.resetToDefaults()
+
         lifecycleScope.launch {
             if (intent != null) {
                 createPlayerAndNotification()
