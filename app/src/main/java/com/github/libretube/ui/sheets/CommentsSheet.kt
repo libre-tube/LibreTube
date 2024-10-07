@@ -1,9 +1,17 @@
 package com.github.libretube.ui.sheets
 
+import android.app.Dialog
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.window.OnBackInvokedDispatcher
+import androidx.activity.OnBackPressedCallback
+import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
@@ -22,6 +30,7 @@ class CommentsSheet : UndimmedBottomSheet() {
     private val commonPlayerViewModel: CommonPlayerViewModel by activityViewModels()
     private val commentsViewModel: CommentsViewModel by activityViewModels()
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,12 +45,18 @@ class CommentsSheet : UndimmedBottomSheet() {
 
         val binding = binding
 
-        childFragmentManager.setFragmentResultListener(DISMISS_SHEET_REQUEST_KEY, viewLifecycleOwner) { _, _ ->
+        childFragmentManager.setFragmentResultListener(
+            DISMISS_SHEET_REQUEST_KEY,
+            viewLifecycleOwner
+        ) { _, _ ->
             dismiss()
         }
 
         // forward requests to open links to the parent fragment
-        childFragmentManager.setFragmentResultListener(HANDLE_LINK_REQUEST_KEY, viewLifecycleOwner) { key, result ->
+        childFragmentManager.setFragmentResultListener(
+            HANDLE_LINK_REQUEST_KEY,
+            viewLifecycleOwner
+        ) { key, result ->
             parentFragment?.setFragmentResult(key, result)
         }
 
@@ -65,6 +80,35 @@ class CommentsSheet : UndimmedBottomSheet() {
                 else -> dismiss()
             }
         }
+
+        requireActivity().apply {
+            when {
+                Build.VERSION.SDK_INT >= 33 -> {
+                    onBackInvokedDispatcher.registerOnBackInvokedCallback(
+                        OnBackInvokedDispatcher.PRIORITY_DEFAULT
+                    ) {
+                        exitOnBackPressed()
+                    }
+                }
+
+                else -> {
+                    onBackPressedDispatcher.addCallback(
+                        this@CommentsSheet,
+                        object : OnBackPressedCallback(true) {
+                            override fun handleOnBackPressed() {
+                                exitOnBackPressed()
+                            }
+                        })
+                }
+            }
+        }
+    }
+
+    private fun exitOnBackPressed() {
+        if (childFragmentManager.backStackEntryCount > 0)
+            childFragmentManager.popBackStack()
+        else
+            dismiss()
     }
 
     override fun onDestroyView() {
