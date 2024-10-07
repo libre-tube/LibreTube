@@ -454,12 +454,16 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
 
         localSearchResult?.let {
-            PlayOfflineDialog(it) { _, _ ->
+            PlayOfflineDialog(it, {
+                (requireActivity() as MainActivity).supportFragmentManager.commit {
+                    remove(this@PlayerFragment)
+                }
+            }) { _, _ ->
                 playVideo()
             }.show(parentFragmentManager, null)
 
         } ?: playVideo()
-        
+
         showBottomBar()
     }
 
