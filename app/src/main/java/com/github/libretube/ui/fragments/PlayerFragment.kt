@@ -97,6 +97,7 @@ import com.github.libretube.obj.ShareData
 import com.github.libretube.obj.VideoResolution
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.ui.activities.OfflinePlayerActivity
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
@@ -249,7 +250,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     private val playerListener = object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
-            if (PlayerHelper.pipEnabled || PictureInPictureCompat.isInPictureInPictureMode(mainActivity)) {
+            if (PlayerHelper.pipEnabled || PictureInPictureCompat.isInPictureInPictureMode(
+                    mainActivity
+                )
+            ) {
                 PictureInPictureCompat.setPictureInPictureParams(requireActivity(), pipParams)
             }
 
@@ -396,9 +400,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         keepQueue = playerData.keepQueue
         timeStamp = playerData.timestamp
 
-        localSearchResult = runBlocking(Dispatchers.IO) {
-            DatabaseHolder.Database.downloadDao().findById(videoId)
-        }
+        if (PlayerHelper.isPlayFromDownloadEnabled)
+            localSearchResult = runBlocking(Dispatchers.IO) {
+                DatabaseHolder.Database.downloadDao().findById(videoId)
+            }
 
         // broadcast receiver for PiP actions
         ContextCompat.registerReceiver(
@@ -418,6 +423,24 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentPlayerBinding.inflate(inflater)
+
+        localSearchResult?.let {
+            //TODO: add a remember choice?
+            when (PreferenceHelper.getBoolean("play_offline_remember", false)) {
+                true -> {
+                    val intent = Intent(requireContext(), OfflinePlayerActivity::class.java)
+                    intent.putExtra(IntentData.videoId, it.download.videoId)
+                    requireContext().startActivity(intent)
+                    mainActivity.supportFragmentManager.popBackStack()
+                }
+
+                false -> PlayOfflineDialog(it) { _, _ ->
+                    playVideo()
+                }.show(parentFragmentManager, null)
+            }
+        } ?: playVideo()
+
+
         return binding.root
     }
 
@@ -447,12 +470,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             binding.player.setCurrentChapterName()
         }
 
-
-        localSearchResult?.let {
-            PlayOfflineDialog(it) { _, _ ->
-                playVideo()
-            }.show(parentFragmentManager, null)
-        } ?: playVideo()
 
         showBottomBar()
     }
