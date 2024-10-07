@@ -423,24 +423,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentPlayerBinding.inflate(inflater)
-
-        localSearchResult?.let {
-            //TODO: add a remember choice?
-            when (PreferenceHelper.getBoolean("play_offline_remember", false)) {
-                true -> {
-                    val intent = Intent(requireContext(), OfflinePlayerActivity::class.java)
-                    intent.putExtra(IntentData.videoId, it.download.videoId)
-                    requireContext().startActivity(intent)
-                    mainActivity.supportFragmentManager.popBackStack()
-                }
-
-                false -> PlayOfflineDialog(it) { _, _ ->
-                    playVideo()
-                }.show(parentFragmentManager, null)
-            }
-        } ?: playVideo()
-
-
         return binding.root
     }
 
@@ -471,6 +453,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
 
+        localSearchResult?.let {
+            PlayOfflineDialog(it) { _, _ ->
+                playVideo()
+            }.show(parentFragmentManager, null)
+
+        } ?: playVideo()
+        
         showBottomBar()
     }
 
