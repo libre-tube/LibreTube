@@ -1,5 +1,5 @@
 * Automatically use Material You accent on first app startup when supported
-* Include playlist name in toast after succesfully adding video
+* Include playlist name in toast after successfully adding video
 * fix: too many chapters highlighted in dialog, crash on selection
 * fix: disabled proxy when lbry stream available
 * fix: watch positions don't retain

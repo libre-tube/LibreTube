@@ -3,7 +3,7 @@ Refactor background play (now supports SponsorBlock too)
 Audio quality and format settings
 Option to set default subtitle language
 Watch progress on the video thumbnail
-Push notifcations for new streams (unstable)
+Push notifications for new streams (unstable)
 New Toolbar Design
 Search Refactor
 In-app crash handler

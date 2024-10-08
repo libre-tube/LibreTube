@@ -13,7 +13,7 @@ data class PipedInstance(
     val cdn: Boolean = false,
     val registered: Long = 0,
     @SerialName("last_checked") val lastChecked: Long = 0,
-    @SerialName("cache") val chache: Boolean = false,
+    @SerialName("cache") val cache: Boolean = false,
     @SerialName("s3_enabled") val s3Enabled: Boolean = false,
     @SerialName("image_proxy_url") val imageProxyUrl: String = "",
     @SerialName("registration_disabled") val registrationDisabled: Boolean = false,
