@@ -1,4 +1,4 @@
-* fix: persistance of sponsorblock category prefs
+* fix: persistence of sponsorblock category prefs
 * fix: crash when removing video from playlist
 * fix: download paused notification shown instead of completed
 * fix(import): prevent crash when importing

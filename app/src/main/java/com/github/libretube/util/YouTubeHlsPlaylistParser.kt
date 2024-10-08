@@ -150,7 +150,7 @@ class YoutubeHlsPlaylistParser : ParsingLoadable.Parser<HlsPlaylist> {
 
             Rendition(
                 it.url,
-                createAudioFormatFromAcountValue(
+                createAudioFormatFromAccountValue(
                     pathSegments[sgoapPathParameterValueIndex],
                     it.format
                 ),
@@ -174,7 +174,7 @@ class YoutubeHlsPlaylistParser : ParsingLoadable.Parser<HlsPlaylist> {
      * @return an [Format] based of the original one provided or the original one if the `acont`
      * property has been not found
      */
-    private fun createAudioFormatFromAcountValue(
+    private fun createAudioFormatFromAccountValue(
         sgoapPathParameterValue: String,
         audioFormat: Format
     ): Format {
