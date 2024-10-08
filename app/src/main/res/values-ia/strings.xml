@@ -321,7 +321,7 @@
     <string name="clear_bookmarks">Rader le marcapaginas</string>
     <string name="filename">Nomine del file</string>
     <string name="off">Disactivate</string>
-    <string name="codecs">Codecs</string>
+    <string name="codecs">Codecs de video</string>
     <string name="tooltip_unlocked">Disblocar reproductor</string>
     <string name="filename_too_long">Le nomine es troppo longe!</string>
     <string name="help">Adjuta</string>
@@ -546,4 +546,6 @@
     <string name="local_stream_extraction">Extraction de fluxo local</string>
     <string name="local_ryd_summary">Obtener directemente le informationes del \"non me place\" ab https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Importar le chronologia de videos reguardate</string>
+    <string name="import_watch_history_desc">Nota que non toto essera importate a causa del exportation limitate de datos de YouTube.</string>
+    <string name="audio_codecs">Codecs de audio</string>
 </resources>
