@@ -382,7 +382,7 @@
     <string name="subscriberAndVideoCounts">%1$s abunəçi • %2$d video</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d video</string>
     <string name="disable_proxy">Piped proksini bağla</string>
-    <string name="disable_proxy_summary">Videoları və şəkilləri birbaşa YouTube serverlərindən yükləyin. Həmişə seçimi ancaq VPN istifadə edirsinizsə, aktivləşdirin</string>
+    <string name="disable_proxy_summary">Videoları və şəkilləri dərhal YouTube serverlərindən yüklə. Seçimi ancaq, həmişə VPN istifadə edirsinizsə, aktivləşdirin</string>
     <string name="auto_fullscreen_shorts">Qısa videolarda avto tam ekran</string>
     <string name="channel_groups">Kanal qrupları</string>
     <string name="group_name">Qrup adı</string>

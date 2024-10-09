@@ -356,7 +356,7 @@
     <string name="help">التعليمات</string>
     <string name="faq">الأسئلة المتداولة</string>
     <string name="replies">الردود</string>
-    <string name="codecs">الترميز</string>
+    <string name="codecs">مرمازات الفيديو</string>
     <string name="unsupported_file_format">تنسيق الملف غير المدعوم: %1$s</string>
     <string name="mark_as_watched">علّمه كفيديو تمت مشاهدته</string>
     <string name="custom_playback_speed">سرعة مخصصة</string>
@@ -560,4 +560,5 @@
     <string name="local_ryd_summary">جلب معلومات عدم الإعجاب مباشرة من https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">استيراد سجل المشاهدة</string>
     <string name="import_watch_history_desc">يرجى ملاحظة أنه لن يتم استيراد كل شيء بسبب بيانات التصدير المحدودة على YouTube.</string>
+    <string name="audio_codecs">مرمازات الصوت</string>
 </resources>
