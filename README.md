@@ -69,7 +69,7 @@ Screenshots
 [<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_4.jpg" width=19% alt="Library">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_4.jpg)
 [<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_9.jpg" width=19% alt="Channel Overview">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_9.jpg)
 
-* For more [Screenshot](https://github.com/libre-tube/LibreTube/blob/master/SCREEN_SHOT.md) 
+* More screenshots can be found [here](https://github.com/libre-tube/LibreTube/blob/master/SCREEN_SHOT.md)
 
 </div>
 
@@ -110,8 +110,11 @@ You can open and build the project like any other normal Android project by usin
 Please make sure the title of your pull request and the commit messages follow the [conventional commit types](https://github.com/commitizen/conventional-commit-types/blob/master/index.json) (e.g. `feat: support for xy`).
 For instance, the most common commit types are "feat", "fix", "refactor", "ci" and "chore".
 
-> **Note** <br>
+> [!NOTE]
 > Any issue avoiding the issue template will be ignored and forced to be closed.
+
+> [!NOTE]
+> The usage of AI to generate issue texts or pull requests is not permitted at this repository and thus such issues / pull requests will be ignored.
 
 <h2 align="left">
 <sub>
