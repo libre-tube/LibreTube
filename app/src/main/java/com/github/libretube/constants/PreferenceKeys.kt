@@ -91,6 +91,9 @@ object PreferenceKeys {
     const val ALLOW_PLAYBACK_DURING_CALL = "playback_during_call"
     const val BEHAVIOR_WHEN_MINIMIZED = "behavior_when_minimized"
 
+
+    const val PLAY_FROM_DOWNLOADS = "play_from_downloads"
+
     // SponsorBlock
     const val SB_USER_ID = "sb_user_id"
     const val CONTRIBUTE_TO_SB = "sb_contribute_key"

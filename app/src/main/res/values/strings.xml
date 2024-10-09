@@ -564,4 +564,12 @@
     <string name="import_temp_playlist">Import temporary playlist?</string>
     <string name="import_temp_playlist_summary">Do you want to create a new playlist named \'%1$s\'? The playlist will contain %2$d videos.</string>
 
+    <!--play already downloaded video dialog-->
+    <string name="dialog_play_offline_title">A local version of this video is available.</string>
+    <string name="dialog_play_offline_body">Would you like to play the video from the download folder?</string>
+    <!-- settings-->
+    <string name="play_from_download_folder_settings_title">Play from download folder</string>
+    <string name="play_from_download_folder_settings_body">If the video is in the download folder ask to play it from local source</string>
+    <string name="remember">Remember</string>
+
 </resources>
