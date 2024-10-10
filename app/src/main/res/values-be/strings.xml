@@ -345,7 +345,7 @@
     <string name="proceed">Працягвайце</string>
     <string name="playlistUrl">URL-адрас плэйліста</string>
     <string name="forward">Перамотка наперад</string>
-    <string name="codecs">Кодэкі</string>
+    <string name="codecs">Відэакодэкі</string>
     <string name="mark_as_watched">Пазначыць як прагледжанае</string>
     <string name="custom_playback_speed">Карыстальніцкая хуткасць</string>
     <string name="alternative_pip_controls">Альтэрнатыўныя элементы кіравання PiP</string>
@@ -552,4 +552,7 @@
     <string name="local_stream_extraction_summary">Атрымліваць інфармацыю аб патоках напрамую з YouTube, не выкарыстоўваючы Piped.</string>
     <string name="local_ryd">Лакальны запыт дызлайкаў</string>
     <string name="local_ryd_summary">Запытваць інфармацыю аб дызлайках напрамую з https://returnyoutubedislikeapi.com</string>
+    <string name="import_watch_history">Імпартаваць гісторыю прагляду</string>
+    <string name="audio_codecs">Аўдыёкодэкі</string>
+    <string name="import_watch_history_desc">Калі ласка, улічыце, што паўнавартасны імпарт немагчымы з-за абмежаванасці дадзеных, якія экспартуюцца з YouTube.</string>
 </resources>
