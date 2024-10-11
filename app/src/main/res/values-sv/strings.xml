@@ -209,7 +209,6 @@
     <string name="export_subscriptions">Exportera prenumerationer</string>
     <string name="show_stream_thumbnails_summary">Visa förhandsbilder för nya sändningar. Aktivering av detta kommer att förbruka ytterligare data</string>
     <string name="network_all">Alla</string>
-    <string name="trending_views">%1$s • %2$s visningar • %3$s</string>
     <string name="download_paused">Nerladdning pausad</string>
     <string name="skip_buttons">Nästa/föregående knappar</string>
     <string name="reset_watch_positions">Återställ</string>

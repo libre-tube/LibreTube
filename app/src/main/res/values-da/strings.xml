@@ -404,7 +404,6 @@
     <string name="donate">Donér</string>
     <string name="subscriberAndVideoCounts">%1$s abonnenter • %2$d videoer</string>
     <string name="music_artists">YT Musik Kunstnere</string>
-    <string name="trending_views">%1$s • %2$s visninger • %3$s</string>
     <string name="normal_views">%1$s visninger%2$s</string>
     <string name="download_paused">Download sat på pause</string>
     <string name="download_completed">Download fuldført</string>

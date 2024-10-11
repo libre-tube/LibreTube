@@ -362,7 +362,6 @@
     <string name="custom_playback_speed">कस्टम गति</string>
     <string name="custom_playback_speed_summary">सामान्य प्लेयर की तुलना में एक अलग प्लेबैक गति का उपयोग करें</string>
     <string name="normal_views">%1$s ने देखा %2$s</string>
-    <string name="trending_views">%1$s • %2$s दृश्य • %3$s</string>
     <string name="autoplay_countdown">ऑटोप्ले की उलटी गिनती</string>
     <string name="autoplay_countdown_summary">अगले वीडियो को स्वतः चलाने से पहले 5 सेकंड उलटी गिनती दिखाएं</string>
     <string name="playing_next">अगला %1$s में चलाया जा रहा है</string>

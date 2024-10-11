@@ -60,7 +60,6 @@
     <string name="appearance_summary">Наладзьце праграму на свой густ</string>
     <string name="advanced_summary">Загрузкі і скід</string>
     <string name="shareTo">Абагуліць URL для</string>
-    <string name="trending_views">%1$s • %2$s праглядаў • %3$s</string>
     <string name="normal_views">%1$s праглядаў%2$s</string>
     <string name="defaultIcon">Па змаўчанні</string>
     <string name="legacyIcon">Страчаная спадчына</string>

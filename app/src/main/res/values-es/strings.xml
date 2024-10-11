@@ -363,7 +363,6 @@
     <string name="custom_playback_speed_summary">Utilice una velocidad de reproducción diferente a la del reproductor normal</string>
     <string name="category">Categoría</string>
     <string name="normal_views">%1$s reproducciones%2$s</string>
-    <string name="trending_views">%1$s • %2$s reproducciones • %3$s</string>
     <string name="stats_for_nerds">Estadísticas para frikis</string>
     <string name="video_id">ID del vídeo</string>
     <string name="autoplay_countdown">Cuenta regresiva</string>

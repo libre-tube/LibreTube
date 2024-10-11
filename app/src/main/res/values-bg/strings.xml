@@ -326,7 +326,6 @@
     <string name="defaultIconLight">Светлина по подразбиране</string>
     <string name="visibility_public">Обществен</string>
     <string name="areYouSure">Изтриване на плейлиста\?</string>
-    <string name="trending_views">%1$s • %2$s показвания • %3$s</string>
     <string name="download_paused">Изтеглянето е на пауза</string>
     <string name="sleep_timer">Таймер за заспиване</string>
     <string name="skip_buttons">Бутони за пропускане</string>

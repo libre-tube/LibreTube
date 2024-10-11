@@ -360,7 +360,6 @@
     <string name="codecs">Kodeki</string>
     <string name="custom_playback_speed">Niestandardowa prędkość</string>
     <string name="custom_playback_speed_summary">Użyj innej prędkości odtwarzania</string>
-    <string name="trending_views">%1$s • %2$s wyświetleń • %3$s</string>
     <string name="normal_views">%1$s wyświetleń%2$s</string>
     <string name="autoplay_countdown">Timer autoodtwarzania</string>
     <string name="autoplay_countdown_summary">Pokaż 5 sekundowe odliczanie przed automatycznym odtwarzaniem następnego filmu</string>

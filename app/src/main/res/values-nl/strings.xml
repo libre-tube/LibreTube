@@ -164,7 +164,6 @@
     <string name="replies">Reacties</string>
     <string name="normal_views">%1$s weergaven%2$s</string>
     <string name="concurrent_downloads">Maximaal aantal gelijktijdige downloads</string>
-    <string name="trending_views">%1$s • %2$s weergaven • %3$s</string>
     <string name="category_highlight">Videohoogtepunt laten zien</string>
     <string name="category_highlight_summary">Kan de geadverteerde titel zijn, de thumbnail of het meest interessante deel van de video. Je kan het overslaan door er op te tikken in het hoofdstuk deel</string>
     <string name="download_completed">Download voltooid</string>

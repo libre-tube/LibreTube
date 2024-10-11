@@ -117,7 +117,6 @@
     <string name="normal_views">%1$s vaatamist%2$s</string>
     <string name="live">Otseeeter</string>
     <string name="shareTo">Jaga URL\'i</string>
-    <string name="trending_views">%1$s • %2$s vaatamist • %3$s</string>
     <string name="defaultIcon">Vaikimisi</string>
     <string name="category_intro_summary">Vahelõik ilma tegeliku sisuta. Võib olla paus, staatiline vahekaader või korduv vaheklipp. Seda ei peaks kasutama vaheklippideks, kus on tegelikku sisu</string>
     <string name="category_interaction">Suhtluse meeldetuletus</string>

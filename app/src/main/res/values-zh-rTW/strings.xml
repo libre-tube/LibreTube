@@ -356,7 +356,6 @@
     <string name="alternative_pip_controls_summary">只顯示音訊，跳過畫中畫的前進後退控制</string>
     <string name="all_caught_up_summary">您已經看完了所有影片</string>
     <string name="mark_as_watched">標記為已觀看</string>
-    <string name="trending_views">%1$s • %2$s 觀看次數 • %3$s</string>
     <string name="normal_views">%1$s 次觀看%2$s</string>
     <string name="autoplay_countdown">自動播放倒計時</string>
     <string name="autoplay_countdown_summary">在自動播放下一個影片之前顯示 5 秒倒計時</string>

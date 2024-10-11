@@ -350,7 +350,6 @@
     <string name="mark_as_watched">시청한 것으로 표시</string>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="normal_views">%1$s 조회수%2$s</string>
-    <string name="trending_views">%1$s • %2$s 조회수 • %3$s</string>
     <string name="unsupported_file_format">지원되지 않는 파일 형식: %1$s</string>
     <string name="help">돕다</string>
     <string name="uploaderAndVideoCount">%1$s • 동영상 %2$d개</string>

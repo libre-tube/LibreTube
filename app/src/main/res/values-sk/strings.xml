@@ -239,7 +239,6 @@
     <string name="subscriberAndVideoCounts">%1$s odberateľov • %2$d videí</string>
     <string name="normal_views">%1$s zobrazení%2$s</string>
     <string name="category_highlight">Zobraziť výber videa</string>
-    <string name="trending_views">%1$s • %2$s zobrazení • %3$s</string>
     <string name="download_paused">Sťahovanie je pozastavené</string>
     <string name="no_subtitle">Bez titulkov</string>
     <string name="donate">Prispieť</string>

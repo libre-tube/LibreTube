@@ -356,7 +356,6 @@
     <string name="add_to_bookmarks">Bokmerk</string>
     <string name="remove_bookmark">Fjern bokmerke</string>
     <string name="mark_as_watched">Marker som sett</string>
-    <string name="trending_views">%1$s • %2$s visninger • %3$s</string>
     <string name="normal_views">%1$s visninger%2$s</string>
     <string name="unsupported_file_format">Ustøttet filformat: %1$s</string>
     <string name="autoplay_countdown">Autospillingsnedtelling</string>

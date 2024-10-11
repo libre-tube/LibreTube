@@ -337,7 +337,6 @@
     <string name="shuffle">シャッフル再生</string>
     <string name="add_to_bookmarks">ブックマークに追加</string>
     <string name="remove_bookmark">ブックマークを削除</string>
-    <string name="trending_views">%1$s • %2$s 回視聴 • %3$s</string>
     <string name="normal_views">%1$s 回視聴%2$s</string>
     <string name="pause">一時停止</string>
     <string name="autoplay_countdown">自動再生の秒読み</string>

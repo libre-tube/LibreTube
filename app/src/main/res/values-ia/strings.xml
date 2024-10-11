@@ -128,7 +128,6 @@
     <string name="show_stream_thumbnails_summary">Monstra le miniaturas de nove fluxos. Activar iste option consumera datos additional</string>
     <string name="areYouSure">Deler le lista de reproduction\?</string>
     <string name="network_all">Tote</string>
-    <string name="trending_views">%1$s • %2$s reproductiones • %3$s</string>
     <string name="download_paused">Discargamento in pausa</string>
     <string name="location">Localisation</string>
     <string name="reset_watch_positions">Reinitialisar</string>

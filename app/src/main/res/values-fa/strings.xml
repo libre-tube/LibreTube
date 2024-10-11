@@ -198,7 +198,6 @@
     <string name="repeat_mode">حالت تکرار</string>
     <string name="backup_restore">پشتیبان و بازگردانی</string>
     <string name="legacyIcon">میراث گم‌گشته</string>
-    <string name="trending_views">%1$s • %2$s مشاهده • %3$s</string>
     <string name="normal_views">%1$s مشاهده%2$s</string>
     <string name="fireIcon">آتش مد</string>
     <string name="torchIcon">مشعل داغ</string>

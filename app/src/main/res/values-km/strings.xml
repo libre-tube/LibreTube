@@ -179,7 +179,6 @@
     <string name="notifications">ការជូនដំណឹង</string>
     <string name="export_subscriptions">នាំចេញការជាវ</string>
     <string name="network_all">ទាំងអស់</string>
-    <string name="trending_views">%1$s • %2$s ទស្សនា • %3$s</string>
     <string name="download_paused">ការទាញយកបានផ្អាក</string>
     <string name="skip_buttons">ប៊ូតុងរំលង</string>
     <string name="reset_watch_positions">កំណត់ជាថ្មី</string>

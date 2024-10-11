@@ -252,7 +252,6 @@
     <string name="custom_playback_speed">Mukauttu nopeus</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d videota</string>
     <string name="subscriberAndVideoCounts">%1$s tilaajaa • %2$d videota</string>
-    <string name="trending_views">%1$s • %2$s katselukertaa • %3$s</string>
     <string name="normal_views">%1$s katselukertaa%2$s</string>
     <string name="no_subtitle">Ei tekstitystä</string>
     <string name="download_paused">Lataus keskeytetty</string>
