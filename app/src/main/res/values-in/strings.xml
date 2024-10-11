@@ -322,7 +322,7 @@
     <string name="app_backup">Cadangan Aplikasi</string>
     <string name="exportsuccess">Diekspor.</string>
     <string name="privacy_alert">Peringatan privasi</string>
-    <string name="username_email">Lanjutkan dengan alamat surel yang tidak disarankan?</string>
+    <string name="username_email">Menggunakan alamat email sebagai nama pengguna tidak disarankan. Lanjut?</string>
     <string name="proceed">Lanjutkan</string>
     <string name="backup_restore_summary">Impor &amp; ekspor langganan, daftar putar, …</string>
     <string name="pinch_control">Kendali cubit</string>
@@ -356,7 +356,7 @@
     <string name="help">Bantuan</string>
     <string name="faq">SSD</string>
     <string name="replies">Balasan</string>
-    <string name="codecs">Kodek</string>
+    <string name="codecs">Kodek video</string>
     <string name="mark_as_watched">Tandai sebagai ditonton</string>
     <string name="unsupported_file_format">Format berkas tidak didukung: %1$s</string>
     <string name="custom_playback_speed">Kecepatan kustom</string>
@@ -536,4 +536,14 @@
     <string name="best_quality">Terbaik</string>
     <string name="external_download_provider">Penyedia unduhan eksternal</string>
     <string name="external_download_provider_summary">Masukkan nama paket apli yang Anda ingin gunakan untuk mengunduh video. Biarkan kosong untuk menggunakan pengunduh bawaan LibreTube.</string>
+    <string name="import_watch_history">Impor riwayat tontonan</string>
+    <string name="local_ryd">Return YouTube Dislikes lokal</string>
+    <string name="local_ryd_summary">Dapatkan informasi tidak suka secara langsung dari https://returnyoutubedislikeapi.com</string>
+    <string name="pip">PiP</string>
+    <string name="screenshot">Tangkapan layar</string>
+    <string name="local_stream_extraction">Ekstraksi aliran lokal</string>
+    <string name="local_stream_extraction_summary">Dapatkan informasi pemutaran video secara langsung dari YouTube tanpa menggunakan Piped.</string>
+    <string name="audio_codecs">Kodek audio</string>
+    <string name="import_watch_history_desc">Diingat bahwa tidak semuanya akan diimpor karena data pengeksporan YouTube yang terbatas.</string>
+    <string name="view_count">%1$s tampilan</string>
 </resources>
