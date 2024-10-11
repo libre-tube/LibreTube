@@ -548,4 +548,5 @@
     <string name="import_watch_history">देखने का इतिहास आयात करें</string>
     <string name="import_watch_history_desc">कृपया ध्यान दें कि YouTube के सीमित निर्यात डेटा के कारण सब कुछ आयात नहीं किया जाएगा।</string>
     <string name="audio_codecs">ऑडियो कोडेक्स</string>
+    <string name="view_count">%1$s व्यूज़</string>
 </resources>
