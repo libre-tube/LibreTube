@@ -320,7 +320,6 @@
     <string name="replies">Phản hồi</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d video</string>
     <string name="subscriberAndVideoCounts">%1$s người đăng ký • %2$d video</string>
-    <string name="trending_views">%1$s • %2$s lượt xem • %3$s</string>
     <string name="normal_views">%1$s lượt xem%2$s</string>
     <string name="unknown">Không xác định</string>
     <string name="resume">Tiếp tục</string>

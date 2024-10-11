@@ -39,7 +39,6 @@
     <string name="appearance_summary">Aðlagaðu forritið að smekk þínum</string>
     <string name="shapedIcon">Fáránlega formað</string>
     <string name="live">Í beinni</string>
-    <string name="trending_views">%1$s • %2$s áhorf • %3$s</string>
     <string name="instance_summary">Piped, innskráning og aðgangur</string>
     <string name="flameIcon">Fljúgandi eldur</string>
     <string name="birdIcon">Endurbirt tíst</string>

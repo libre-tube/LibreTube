@@ -360,7 +360,6 @@
     <string name="unsupported_file_format">Nicht unterstütztes Dateiformat: %1$s</string>
     <string name="codecs">Videocodecs</string>
     <string name="custom_playback_speed">Benutzerdefinierte Geschwindigkeit</string>
-    <string name="trending_views">%1$s • %2$s Aufrufe • %3$s</string>
     <string name="normal_views">%1$s Aufrufe%2$s</string>
     <string name="custom_playback_speed_summary">Verwende eine andere Wiedergabegeschwindigkeit als für den normalen Player</string>
     <string name="category">Kategorie</string>

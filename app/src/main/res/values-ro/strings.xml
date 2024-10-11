@@ -134,7 +134,6 @@
     <string name="invalid_url">Introduceți o adresă URL care funcționează</string>
     <string name="version">Versiune %1$s</string>
     <string name="related_streams">Conținut asociat</string>
-    <string name="trending_views">%1$s • %2$s vizualizări • %3$s</string>
     <string name="normal_views">%1$s vizualizări%2$s</string>
     <string name="chapters">Capitole</string>
     <string name="no_player_found">Nu a fost găsit niciun player extern. Vă rugăm să vă asigurați că aveți unul instalat.</string>

@@ -315,7 +315,6 @@
     <string name="stop">Gelditu</string>
     <string name="replies">Erantzun</string>
     <string name="category_highlight_summary">Izenburua, aurrebista edo bideoaren unerik interesgarriena izan daiteke. Aurrera egin dezakezu nabarmendutako atalean ukituz</string>
-    <string name="trending_views">%1$s • %2$s ikustaldi • %3$s</string>
     <string name="category_highlight">Erakutsi une nabarmenduak</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d bideo</string>
     <string name="subscriberAndVideoCounts">%1$s harpidedun • %2$d bideo</string>

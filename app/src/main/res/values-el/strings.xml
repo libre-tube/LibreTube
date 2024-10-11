@@ -364,7 +364,6 @@
     <string name="choose_instance">Παρακαλώ επιλέξτε πρώτα μια περίπτωση!</string>
     <string name="mark_as_unwatched">Σημειώστε ως μη παρακολουθούμενη</string>
     <string name="home_tab_content">Περιεχόμενο καρτέλας Home</string>
-    <string name="trending_views">%1$s• %2$sπροβολές• %3$s</string>
     <string name="unlimited_search_history">Απεριόριστο ιστορικό αναζήτησης</string>
     <string name="channel_groups">Ομάδες καναλιών</string>
     <string name="fullscreen_gestures">Χειρονομίες εισόδου/εξόδου πλήρους οθόνη</string>

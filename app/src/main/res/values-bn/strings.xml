@@ -351,7 +351,6 @@
     <string name="normal_views">%1$s বার দেখা হয়েছে %2$s</string>
     <string name="show_stream_thumbnails">থাম্বনেইলগুলো দেখান</string>
     <string name="show_stream_thumbnails_summary">নতুন স্ট্রিমগুলোর জন্য থাম্বনেইল প্রদর্শন করুন। এই অপশনটা চালু করা হলে অতিরিক্ত ডাটা খরচ হবে</string>
-    <string name="trending_views">%1$s • %2$s বার দেখা হয়েছে • %3$s</string>
     <string name="best_quality">সেরা</string>
     <string name="donate">দান করুন</string>
     <string name="pip">PiP</string>

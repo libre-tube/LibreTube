@@ -357,7 +357,6 @@
     <string name="sleep_timer">Minuterie de mise en veille</string>
     <string name="replies">Réponses</string>
     <string name="lbry_hls_summary">Utilisez LBRY HLS pour la diffusion en continu si disponible</string>
-    <string name="trending_views">%1$s • %2$s vues • %3$s</string>
     <string name="normal_views">%1$s vues%2$s</string>
     <string name="autoplay_countdown">Compte à rebours de lecture automatique</string>
     <string name="autoplay_countdown_summary">Afficher un compte à rebours de 5 secondes avant de lire automatiquement la vidéo suivante</string>

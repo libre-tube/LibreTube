@@ -374,7 +374,6 @@
     <string name="disable_proxy">Piped proxy letiltása</string>
     <string name="disable_proxy_summary">Videók és képek betöltése közvetlenül a YouTube szervereiről. Csak akkor engedélyezze ezt az opciót, ha mindig VPN-t használ</string>
     <string name="auto_fullscreen_shorts">Automatikus teljes képernyőre váltás rövid videóknál</string>
-    <string name="trending_views">%1$s • %2$s megtekintés • %3$s</string>
     <string name="normal_views">%1$s megtekintés %2$s</string>
     <plurals name="years_ago">
         <item quantity="one">%d éve</item>

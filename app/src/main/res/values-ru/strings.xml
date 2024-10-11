@@ -363,7 +363,6 @@
     <string name="custom_playback_speed_summary">Использовать скорость воспроизведения, отличную от скорости обычного проигрывателя</string>
     <string name="category">Категория</string>
     <string name="normal_views">%1$s просмотров%2$s</string>
-    <string name="trending_views">%1$s • %2$s просмотров • %3$s</string>
     <string name="autoplay_countdown_summary">Показывать 5-секундный обратный отсчёт перед автовоспроизведением следующего видео</string>
     <string name="autoplay_countdown">Таймер автовоспроизведения</string>
     <string name="playing_next">Следующее воспроизведение за %1$s</string>

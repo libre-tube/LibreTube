@@ -361,7 +361,6 @@
     <string name="codecs">ਵੀਡੀਓ ਕੋਡੈਕਸ</string>
     <string name="custom_playback_speed">ਕਸਟਮ ਗਤੀ</string>
     <string name="custom_playback_speed_summary">ਆਮ ਪਲੇਅਰ ਨਾਲੋਂ ਵੱਖਰੀ ਪਲੇਬੈਕ ਸਪੀਡ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
-    <string name="trending_views">%1$s • %2$s ਵਿਊਜ਼ • %3$s</string>
     <string name="normal_views">%1$s ਵਿਊਜ਼%2$s</string>
     <string name="autoplay_countdown">ਸਵੈਚਲਿਤ ਕਾਊਂਟਡਾਊਨ</string>
     <string name="autoplay_countdown_summary">ਅਗਲੀ ਵੀਡੀਓ ਨੂੰ ਆਟੋ-ਪਲੇਅ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ 5 ਸਕਿੰਟ ਕਾਊਂਟਡਾਊਨ ਦਿਖਾਓ</string>

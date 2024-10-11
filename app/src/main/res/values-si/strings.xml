@@ -361,7 +361,6 @@
     <string name="codecs">කෝඩෙක්ස්</string>
     <string name="custom_playback_speed">අභිරුචි වේගය</string>
     <string name="custom_playback_speed_summary">සාමාන්‍ය වාදකයට වෙනස් වාදන වේගයක් භාවිතා කරන්න</string>
-    <string name="trending_views">%1$s • %2$s බැලීම් • %3$s</string>
     <string name="normal_views">%1$s බැලීම්%2$s</string>
     <string name="autoplay_countdown_summary">මීළඟ වීඩියෝව ස්වයංක්‍රීයව වාදනය කිරීමට පෙර තත්පර 5 කවුන්ට් ඩවුන් එකක් පෙන්වන්න</string>
     <string name="video_id">වීඩියෝ ID</string>

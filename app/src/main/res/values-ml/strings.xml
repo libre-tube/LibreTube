@@ -140,7 +140,6 @@
     <string name="worst_quality">ഏറ്റവും മോശം</string>
     <string name="general">പൊതുവായ</string>
     <string name="category_music_offtopic">സംഗീതം: സംഗീതേതര വിഭാഗം</string>
-    <string name="trending_views">%1$s • %2$s കാഴ്‌ചകൾ • %3$s</string>
     <string name="addInstance">ഉദാഹരണം ചേർക്കുക</string>
     <string name="related_streams">ബന്ധപ്പെട്ട ഉള്ളടക്കം</string>
     <string name="customInstance_summary">ചേർക്കുക…</string>

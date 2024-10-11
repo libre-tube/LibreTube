@@ -355,7 +355,6 @@
     <string name="skip_silence">Прескочи тишину</string>
     <string name="help">Помоћ</string>
     <string name="faq">ЧПП</string>
-    <string name="trending_views">%1$s • %2$s прегледа • %3$s</string>
     <string name="normal_views">%1$s прегледа%2$s</string>
     <string name="replies">Одговори</string>
     <string name="unsupported_file_format">Неподржан формат фајла: %1$s</string>

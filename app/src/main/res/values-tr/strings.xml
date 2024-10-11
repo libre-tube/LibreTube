@@ -363,7 +363,6 @@
     <string name="custom_playback_speed_summary">Normal oynatıcıdan farklı oynatma hızı kullan</string>
     <string name="category">Kategori</string>
     <string name="normal_views">%1$s görüntüleme%2$s</string>
-    <string name="trending_views">%1$s • %2$s görüntüleme • %3$s</string>
     <string name="autoplay_countdown">Otomatik oynatma geri sayımı</string>
     <string name="autoplay_countdown_summary">Sonraki videoyu otomatik oynatmadan önce 5 saniyelik bir geri sayım gösterin</string>
     <string name="playing_next">Sıradaki %1$s içinde oynanıyor</string>

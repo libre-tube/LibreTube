@@ -155,7 +155,6 @@
     <string name="downloads">डाउनलोड</string>
     <string name="update_summary">अपडेट साठी तपासा</string>
     <string name="live">लाइव्ह</string>
-    <string name="trending_views">%1$s • %2$s व्ह्यूज • %3$s</string>
     <string name="instance_api_url">Instance API साठी URL</string>
     <string name="addInstance">Instance ॲड करा</string>
     <string name="empty_instance">नाव आणि API URL भरा.</string>
