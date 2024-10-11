@@ -20,8 +20,6 @@ import com.github.libretube.ui.activities.VideoTagsAdapter
 import com.github.libretube.util.HtmlParser
 import com.github.libretube.util.LinkHandler
 import com.github.libretube.util.TextUtils
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 import java.util.Locale
 
 class DescriptionLayout(
@@ -48,7 +46,7 @@ class DescriptionLayout(
 
         val views = streams.views.formatShort()
         binding.run {
-            playerViewsInfo.text = context.getString(R.string.normal_views, views, localizeDate(streams))
+            playerViewsInfo.text = context.getString(R.string.normal_views, views, TextUtils.formatRelativeDate(context, streams.uploaded ?: -1L))
 
             textLike.text = streams.likes.formatShort()
             textDislike.isVisible = streams.dislikes >= 0
@@ -119,7 +117,7 @@ class DescriptionLayout(
             // show exact view count
             "%,d".format(streams.views)
         }
-        val viewInfo = context.getString(R.string.normal_views, views, localizeDate(streams))
+        val viewInfo = context.getString(R.string.normal_views, views, TextUtils.formatRelativeDate(context, streams.uploaded ?: -1L))
         if (binding.descLinLayout.isVisible) {
             // hide the description and chapters
             binding.playerDescriptionArrow.animate().rotation(
@@ -145,14 +143,6 @@ class DescriptionLayout(
             binding.playerTitle.maxLines = Int.MAX_VALUE
         }
         binding.playerViewsInfo.text = viewInfo
-    }
-
-    private fun localizeDate(streams: Streams): String {
-        if (streams.livestream || streams.uploadTimestamp == null) return ""
-
-        val date = streams.uploadTimestamp.toLocalDateTime(TimeZone.currentSystemDefault()).date
-
-        return TextUtils.SEPARATOR + TextUtils.localizeDate(date)
     }
 
     companion object {

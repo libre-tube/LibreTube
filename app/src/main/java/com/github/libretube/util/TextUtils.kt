@@ -7,6 +7,7 @@ import android.os.Build
 import android.text.format.DateUtils
 import com.github.libretube.BuildConfig
 import com.github.libretube.R
+import com.github.libretube.extensions.formatShort
 import com.google.common.math.IntMath.pow
 import kotlinx.datetime.toJavaLocalDate
 import java.time.Instant
@@ -145,5 +146,15 @@ object TextUtils {
 
     fun getUserAgent(context: Context): String {
         return "${context.packageName}/${BuildConfig.VERSION_NAME}"
+    }
+
+    fun formatViewsString(context: Context, views: Long, uploaded: Long, uploader: String? = null): String {
+        val viewsString = views.takeIf { it != -1L }?.formatShort()?.let {
+            context.getString(R.string.view_count, it)
+        }
+        val uploadDate = uploaded.takeIf { it > 0 }?.let {
+            formatRelativeDate(context, it)
+        }
+        return listOfNotNull(uploader, viewsString, uploadDate).joinToString(SEPARATOR)
     }
 }

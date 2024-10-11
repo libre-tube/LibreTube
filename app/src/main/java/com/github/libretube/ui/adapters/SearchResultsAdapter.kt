@@ -82,16 +82,7 @@ class SearchResultsAdapter(
             ImageHelper.loadImage(item.thumbnail, thumbnail)
             thumbnailDuration.setFormattedDuration(item.duration, item.isShort)
             videoTitle.text = item.title
-
-            val viewsString = item.views.takeIf { it != -1L }?.formatShort().orEmpty()
-            val uploadDate = item.uploaded.takeIf { it > 0 }?.let {
-                " ${TextUtils.SEPARATOR} ${TextUtils.formatRelativeDate(root.context, it)}"
-            }.orEmpty()
-            videoInfo.text = root.context.getString(
-                R.string.normal_views,
-                viewsString,
-                uploadDate
-            )
+            videoInfo.text = TextUtils.formatViewsString(root.context, item.views, item.uploaded)
 
             channelName.text = item.uploaderName
             ImageHelper.loadImage(item.uploaderAvatar, channelImage, true)

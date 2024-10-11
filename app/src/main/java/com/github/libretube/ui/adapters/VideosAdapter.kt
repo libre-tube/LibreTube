@@ -11,7 +11,6 @@ import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
-import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
@@ -20,7 +19,6 @@ import com.github.libretube.databinding.TrendingRowBinding
 import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
-import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
@@ -102,10 +100,6 @@ class VideosAdapter(
         val activity = (context as BaseActivity)
         val fragmentManager = activity.supportFragmentManager
 
-        val uploadDateStr = video.uploaded.takeIf { it > 0 }
-            ?.let { TextUtils.formatRelativeDate(context, it) }
-            ?.toString()
-
         // Trending layout
         holder.trendingRowBinding?.apply {
             // set a fixed width for better visuals
@@ -116,16 +110,8 @@ class VideosAdapter(
             }
 
             textViewTitle.text = video.title
-            textViewChannel.text = if ((video.views ?: 0L) > 0L) {
-                root.context.getString(
-                    R.string.trending_views,
-                    video.uploaderName,
-                    video.views.formatShort(),
-                    uploadDateStr
-                )
-            } else {
-                "${video.uploaderName} ${TextUtils.SEPARATOR} $uploadDateStr"
-            }
+            textViewChannel.text = TextUtils.formatViewsString(root.context, video.views ?: -1, video.uploaded, video.uploaderName)
+
             video.duration?.let { thumbnailDuration.setFormattedDuration(it, video.isShort) }
             channelImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, video.uploaderUrl)
@@ -153,15 +139,9 @@ class VideosAdapter(
         // Normal videos row layout
         holder.videoRowBinding?.apply {
             videoTitle.text = video.title
-
-            videoInfo.text = root.context.getString(
-                R.string.normal_views,
-                video.views.formatShort(),
-                uploadDateStr?.let { " ${TextUtils.SEPARATOR} $it" }
-            )
+            videoInfo.text = TextUtils.formatViewsString(root.context, video.views ?: -1, video.uploaded)
 
             thumbnailDuration.text = video.duration?.let { DateUtils.formatElapsedTime(it) }
-
             ImageHelper.loadImage(video.thumbnail, thumbnail)
 
             if (forceMode != LayoutMode.CHANNEL_ROW) {
