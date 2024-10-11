@@ -8,8 +8,11 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.serializable
 import com.github.libretube.helpers.BackgroundHelper
+import com.github.libretube.helpers.ContextHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.obj.ShareData
+import com.github.libretube.ui.activities.DownloadActivity
+import com.github.libretube.ui.activities.NoInternetActivity
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.fragments.DownloadTab
 
@@ -18,12 +21,17 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
         val videoId = arguments?.getString(IntentData.videoId)!!
         val downloadTab = arguments?.serializable<DownloadTab>(IntentData.downloadTab)!!
 
-        val options = listOf(
+        val options = mutableListOf(
             R.string.playOnBackground,
             R.string.go_to_video,
             R.string.share,
             R.string.delete
         )
+
+        // can't navigate to video while in offline activity
+        if (ContextHelper.tryUnwrapActivity<NoInternetActivity>(requireContext()) != null) {
+            options.remove(R.string.go_to_video)
+        }
 
         setSimpleItems(options.map { getString(it) }) { which ->
             when (options[which]) {

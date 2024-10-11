@@ -10,6 +10,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.services.OnlinePlayerService
+import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.ui.fragments.PlayerFragment
 
@@ -33,7 +34,7 @@ object BackgroundHelper {
     ) {
         // close the previous video player if open
         if (!keepVideoPlayerAlive) {
-            val fragmentManager = ContextHelper.unwrapActivity(context).supportFragmentManager
+            val fragmentManager = ContextHelper.unwrapActivity<MainActivity>(context).supportFragmentManager
             fragmentManager.fragments.firstOrNull { it is PlayerFragment }?.let {
                 fragmentManager.commit { remove(it) }
             }

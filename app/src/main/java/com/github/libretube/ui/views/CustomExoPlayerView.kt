@@ -56,6 +56,7 @@ import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.BottomSheetItem
+import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.toggleSystemBars
 import com.github.libretube.ui.fragments.PlayerFragment
@@ -848,7 +849,7 @@ abstract class CustomExoPlayerView(
             }
 
             KeyEvent.KEYCODE_F -> {
-                val fragmentManager = ContextHelper.unwrapActivity(context).supportFragmentManager
+                val fragmentManager = ContextHelper.unwrapActivity<MainActivity>(context).supportFragmentManager
                 fragmentManager.fragments.filterIsInstance<PlayerFragment>().firstOrNull()
                     ?.toggleFullscreen()
             }
