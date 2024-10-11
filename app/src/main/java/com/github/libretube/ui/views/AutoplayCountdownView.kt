@@ -63,7 +63,7 @@ class AutoplayCountdownView(
         }
 
         // don't show cancel and play next buttons in PiP mode
-        val context = ContextHelper.unwrapActivity(context)
+        val context = ContextHelper.unwrapActivity<MainActivity>(context)
         val isInPipMode = PictureInPictureCompat.isInPictureInPictureMode(context)
         binding.cancel.isVisible = !isInPipMode
         binding.playNext.isVisible = !isInPipMode

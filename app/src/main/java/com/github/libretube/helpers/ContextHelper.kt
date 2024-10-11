@@ -1,15 +1,17 @@
 package com.github.libretube.helpers
 
+import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
-import com.github.libretube.ui.activities.MainActivity
 
 object ContextHelper {
-    fun unwrapActivity(context: Context): MainActivity {
+    inline fun <reified T : Activity> tryUnwrapActivity(context: Context): T? {
         var correctContext: Context? = context
-        while (correctContext !is MainActivity && correctContext is ContextWrapper) {
+        while (correctContext !is T && correctContext is ContextWrapper) {
             correctContext = correctContext.baseContext
         }
-        return correctContext as MainActivity
+        return correctContext as? T
     }
+
+    inline fun <reified T : Activity> unwrapActivity(context: Context): T = tryUnwrapActivity(context)!!
 }

@@ -18,6 +18,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.toID
 import com.github.libretube.parcelable.PlayerData
+import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.activities.ZoomableImageActivity
 import com.github.libretube.ui.fragments.AudioPlayerFragment
 import com.github.libretube.ui.fragments.PlayerFragment
@@ -29,7 +30,7 @@ object NavigationHelper {
     fun navigateChannel(context: Context, channelUrlOrId: String?) {
         if (channelUrlOrId == null) return
 
-        val activity = ContextHelper.unwrapActivity(context)
+        val activity = ContextHelper.unwrapActivity<MainActivity>(context)
         activity.navController.navigate(NavDirections.openChannel(channelUrlOrId.toID()))
         try {
             // minimize player if currently expanded
@@ -78,7 +79,7 @@ object NavigationHelper {
             PlayerData(videoUrlOrId.toID(), playlistId, channelId, keepQueue, timestamp)
         val bundle = bundleOf(IntentData.playerData to playerData)
 
-        val activity = ContextHelper.unwrapActivity(context)
+        val activity = ContextHelper.unwrapActivity<MainActivity>(context)
         activity.supportFragmentManager.commitNow {
             replace<PlayerFragment>(R.id.container, args = bundle)
         }
@@ -87,7 +88,7 @@ object NavigationHelper {
     fun navigatePlaylist(context: Context, playlistUrlOrId: String?, playlistType: PlaylistType) {
         if (playlistUrlOrId == null) return
 
-        val activity = ContextHelper.unwrapActivity(context)
+        val activity = ContextHelper.unwrapActivity<MainActivity>(context)
         activity.navController.navigate(
             NavDirections.openPlaylist(playlistUrlOrId.toID(), playlistType)
         )
@@ -97,7 +98,7 @@ object NavigationHelper {
      * Start the audio player fragment
      */
     fun startAudioPlayer(context: Context, offlinePlayer: Boolean = false, minimizeByDefault: Boolean = false) {
-        val activity = ContextHelper.unwrapActivity(context)
+        val activity = ContextHelper.unwrapActivity<MainActivity>(context)
         activity.supportFragmentManager.commitNow {
             val args = bundleOf(
                 IntentData.minimizeByDefault to minimizeByDefault,
