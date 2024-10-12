@@ -548,4 +548,5 @@
     <string name="import_watch_history">Внасяне история на гледане</string>
     <string name="import_watch_history_desc">Моля, обърнете внимание, че не всички данни ще бъдат внесени поради ограничения обем на изнесените данни от YouTube.</string>
     <string name="audio_codecs">Аудио кодеци</string>
+    <string name="view_count">%1$s показвания</string>
 </resources>
