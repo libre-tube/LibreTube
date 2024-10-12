@@ -545,4 +545,5 @@
     <string name="import_watch_history">視聴履歴をインポート</string>
     <string name="import_watch_history_desc">YouTubeのデータは、エクスポートの制限のため、すべてをインポートできないこともあります。</string>
     <string name="audio_codecs">音声コーデック</string>
+    <string name="view_count">%1$s回</string>
 </resources>
