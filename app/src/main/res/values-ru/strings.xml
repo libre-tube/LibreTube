@@ -254,7 +254,7 @@
     <string name="new_videos_badge">Индикатор новых видео</string>
     <string name="push_channel_description">Показывать уведомления о появлении новых трансляций.</string>
     <string name="new_videos_badge_summary">Показывать метку с количеством, когда есть новые видео</string>
-    <string name="download_channel_name">Служба загрузки</string>
+    <string name="download_channel_name">Служба скачивания</string>
     <string name="skip_segment">Пропустить отрывок</string>
     <string name="download_channel_description">Показывать уведомление при загрузке медиа.</string>
     <string name="push_channel_name">Агент уведомлений</string>
@@ -554,4 +554,5 @@
     <string name="import_watch_history">Импортировать историю просмотра</string>
     <string name="import_watch_history_desc">Пожалуйста, учтите, что полноценный импорт невозможен из-за ограниченности данных, экспортируемых из YouTube.</string>
     <string name="audio_codecs">Аудиокодеки</string>
+    <string name="view_count">%1$s просмотров</string>
 </resources>
