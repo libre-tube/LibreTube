@@ -548,5 +548,5 @@
     <string name="import_watch_history">Baxış tarixçəsin idxal et</string>
     <string name="import_watch_history_desc">Nəzərə alın ki, YouTube-un məhdud ixrac məlumatına görə hər şey idxal edilməyəcək.</string>
     <string name="audio_codecs">Səs kodlayıcılar</string>
-    <string name="view_count">%1$s baxış • %1$s</string>
+    <string name="view_count">%1$s baxış</string>
 </resources>
