@@ -551,4 +551,5 @@
     <string name="import_watch_history">Importar histórico de exibição</string>
     <string name="import_watch_history_desc">Observe que nem tudo será importado devido à limitação de dados de exportação do YouTube.</string>
     <string name="audio_codecs">Codecs de áudio</string>
+    <string name="view_count">%1$s visualizações</string>
 </resources>

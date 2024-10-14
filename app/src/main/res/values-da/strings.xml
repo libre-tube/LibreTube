@@ -320,7 +320,7 @@
     <string name="defaults">Standarder</string>
     <string name="all_caught_up">Du er ajour</string>
     <string name="all_caught_up_summary">Du har set alle nye videoer</string>
-    <string name="username_email">Fortsæt med en e-mailadresse, der ikke er anbefalet?</string>
+    <string name="username_email">Det anbefales ikke at bruge en e-mailadresse som brugernavn. Fortsæt alligevel?</string>
     <string name="play_latest_videos">Afspil seneste videoer</string>
     <string name="nothing_selected">Intet valgt!</string>
     <string name="color_violet">Alsidig violet</string>
@@ -543,4 +543,5 @@
     <string name="screenshot">Skærmbillede</string>
     <string name="pip">BiB</string>
     <string name="import_watch_history_desc">Bemærk, at ikke alt bliver importeret grundet YouTube\'s begrænsede eksportdata.</string>
+    <string name="view_count">%1$s visninger</string>
 </resources>

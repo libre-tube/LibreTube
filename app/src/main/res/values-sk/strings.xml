@@ -551,4 +551,5 @@
     <string name="import_watch_history">Importovať históriu pozerania</string>
     <string name="import_watch_history_desc">Vezmite na vedomie, že nie všetko bude importované kvôli obmedzeniu exportu údajov z YouTube.</string>
     <string name="audio_codecs">Audio kodeky</string>
+    <string name="view_count">%1$s zobrazení</string>
 </resources>

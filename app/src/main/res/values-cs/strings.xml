@@ -551,4 +551,5 @@
     <string name="import_watch_history">Importovat historii sledování</string>
     <string name="import_watch_history_desc">Upozorňujeme, že nebude importováno vše z důvodu omezeného exportu dat z YouTube.</string>
     <string name="audio_codecs">Zvukové kodeky</string>
+    <string name="view_count">%1$s zhlédnutí</string>
 </resources>

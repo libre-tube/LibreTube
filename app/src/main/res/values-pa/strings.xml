@@ -548,4 +548,5 @@
     <string name="import_watch_history">ਵੇਖਣ ਦਾ ਇਤਿਹਾਸ ਆਯਾਤ ਕਰੋ</string>
     <string name="audio_codecs">ਆਡੀਓ ਕੋਡੈਕਸ</string>
     <string name="import_watch_history_desc">ਕਿਰਪਾ ਕਰਕੇ ਨੋਟ ਕਰੋ ਕਿ YouTube ਦੇ ਸੀਮਤ ਨਿਰਯਾਤ ਡੇਟਾ ਦੇ ਕਾਰਨ ਸਭ ਕੁਝ ਆਯਾਤ ਨਹੀਂ ਕੀਤਾ ਜਾਵੇਗਾ।</string>
+    <string name="view_count">%1$s ਵਿਊਜ਼</string>
 </resources>
