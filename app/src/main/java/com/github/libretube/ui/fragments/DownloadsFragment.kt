@@ -31,7 +31,9 @@ import com.github.libretube.db.obj.filterByTab
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.extensions.serializable
+import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.DownloadHelper
+import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.DownloadStatus
 import com.github.libretube.receivers.DownloadReceiver
@@ -253,6 +255,17 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment() {
         binding.deleteAll.setOnClickListener {
             showDeleteAllDialog(binding.root.context, adapter)
         }
+
+        binding.shuffleAll.setOnClickListener {
+            BackgroundHelper.playOnBackgroundOffline(
+                requireContext(),
+                null,
+                downloadTab,
+                shuffle = true
+            )
+
+            NavigationHelper.startAudioPlayer(requireContext(), offlinePlayer = true)
+        }
     }
 
     private fun toggleVisibilities() {
@@ -262,6 +275,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment() {
         binding.downloadsEmpty.isVisible = isEmpty
         binding.downloadsContainer.isGone = isEmpty
         binding.deleteAll.isGone = isEmpty
+        binding.shuffleAll.isGone = isEmpty || downloadTab != DownloadTab.AUDIO
     }
 
     private fun sortDownloadList(sortType: Int, previousSortType: Int? = null) {

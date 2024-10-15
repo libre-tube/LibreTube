@@ -21,6 +21,7 @@ import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlin.io.path.exists
 
@@ -31,10 +32,20 @@ import kotlin.io.path.exists
 class OfflinePlayerService : AbstractPlayerService() {
     private var downloadWithItems: DownloadWithItems? = null
     private lateinit var downloadTab: DownloadTab
+    private var shuffle: Boolean = false
 
     override suspend fun onServiceCreated(intent: Intent) {
-        videoId = intent.getStringExtra(IntentData.videoId) ?: return
         downloadTab = intent.serializableExtra(IntentData.downloadTab)!!
+        shuffle = intent.getBooleanExtra(IntentData.shuffle, false)
+
+        videoId = if (shuffle) {
+            runBlocking(Dispatchers.IO) {
+                Database.downloadDao().getAll().filterByTab(downloadTab)
+                    .randomOrNull()?.download?.videoId
+            }
+        } else {
+            intent.getStringExtra(IntentData.videoId)
+        } ?: return
 
         PlayingQueue.clear()
 
@@ -92,7 +103,11 @@ class OfflinePlayerService : AbstractPlayerService() {
     private suspend fun fillQueue() {
         val downloads = withContext(Dispatchers.IO) {
             Database.downloadDao().getAll()
-        }.filterByTab(downloadTab)
+        }
+            .filterByTab(downloadTab)
+            .toMutableList()
+
+        if (shuffle) downloads.shuffle()
 
         PlayingQueue.insertRelatedStreams(downloads.map { it.download.toStreamItem() })
     }
