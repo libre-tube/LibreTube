@@ -77,11 +77,12 @@ object BackgroundHelper {
      * @param context the current context
      * @param videoId the videoId of the video or null if all available downloads should be shuffled
      */
-    fun playOnBackgroundOffline(context: Context, videoId: String?, downloadTab: DownloadTab) {
+    fun playOnBackgroundOffline(context: Context, videoId: String?, downloadTab: DownloadTab, shuffle: Boolean = false) {
         stopBackgroundPlay(context)
 
         val playerIntent = Intent(context, OfflinePlayerService::class.java)
             .putExtra(IntentData.videoId, videoId)
+            .putExtra(IntentData.shuffle, shuffle)
             .putExtra(IntentData.downloadTab, downloadTab)
 
         ContextCompat.startForegroundService(context, playerIntent)
