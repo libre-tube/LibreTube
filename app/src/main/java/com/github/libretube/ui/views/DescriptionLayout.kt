@@ -45,8 +45,9 @@ class DescriptionLayout(
         this.streams = streams
 
         val views = streams.views.formatShort()
+        val date = TextUtils.formatRelativeDate(context, streams.uploaded ?: -1L)
         binding.run {
-            playerViewsInfo.text = context.getString(R.string.normal_views, views, TextUtils.formatRelativeDate(context, streams.uploaded ?: -1L))
+            playerViewsInfo.text = context.getString(R.string.normal_views, views, TextUtils.SEPARATOR + date)
 
             textLike.text = streams.likes.formatShort()
             textDislike.isVisible = streams.dislikes >= 0
@@ -117,7 +118,8 @@ class DescriptionLayout(
             // show exact view count
             "%,d".format(streams.views)
         }
-        val viewInfo = context.getString(R.string.normal_views, views, TextUtils.formatRelativeDate(context, streams.uploaded ?: -1L))
+        val date = TextUtils.formatRelativeDate(context, streams.uploaded ?: -1L)
+        val viewInfo = context.getString(R.string.normal_views, views,  TextUtils.SEPARATOR + date)
         if (binding.descLinLayout.isVisible) {
             // hide the description and chapters
             binding.playerDescriptionArrow.animate().rotation(
