@@ -560,4 +560,5 @@
     <string name="import_watch_history">استيراد سجل المشاهدة</string>
     <string name="import_watch_history_desc">يرجى ملاحظة أنه لن يتم استيراد كل شيء بسبب بيانات التصدير المحدودة على YouTube.</string>
     <string name="audio_codecs">مرمازات الصوت</string>
+    <string name="view_count">مشاهدات %1$s</string>
 </resources>
