@@ -33,7 +33,9 @@ import java.util.UUID
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class NowPlayingNotification(
     private val context: Context,
-    private val player: ExoPlayer
+    private val player: ExoPlayer,
+    private val backgroundOnly: Boolean = false,
+    private val offlinePlayer: Boolean = false
 ) {
     private var videoId: String? = null
     private val nManager = context.getSystemService<NotificationManager>()!!
@@ -73,10 +75,14 @@ class NowPlayingNotification(
         // it doesn't start a completely new MainActivity because the MainActivity's launchMode
         // is set to "singleTop" in the AndroidManifest (important!!!)
         // that's the only way to launch back into the previous activity (e.g. the player view
+        if (!backgroundOnly) return null
+
         val intent = Intent(context, MainActivity::class.java).apply {
             putExtra(IntentData.openAudioPlayer, true)
+            putExtra(IntentData.offlinePlayer, offlinePlayer)
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         }
+
 
         return PendingIntentCompat
             .getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT, false)

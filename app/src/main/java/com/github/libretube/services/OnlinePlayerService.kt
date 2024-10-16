@@ -34,9 +34,9 @@ import kotlinx.serialization.encodeToString
  */
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class OnlinePlayerService : AbstractPlayerService() {
-    /**
-     * PlaylistId/ChannelId for autoplay
-     */
+    override val isOfflinePlayer: Boolean = false
+
+    // PlaylistId/ChannelId for autoplay
     private var playlistId: String? = null
     private var channelId: String? = null
     private var startTimestamp: Long? = null
@@ -47,10 +47,8 @@ class OnlinePlayerService : AbstractPlayerService() {
     var streams: Streams? = null
         private set
 
-    /**
-     * SponsorBlock Segment data
-     */
-    private var segments = listOf<Segment>()
+    // SponsorBlock Segment data
+    private var sponsorBlockSegments = listOf<Segment>()
     private var sponsorBlockConfig = PlayerHelper.getSponsorBlockCategories()
 
     override suspend fun onServiceCreated(intent: Intent) {
@@ -159,7 +157,7 @@ class OnlinePlayerService : AbstractPlayerService() {
         // play new video on background
         this.videoId = nextVideo
         this.streams = null
-        this.segments = emptyList()
+        this.sponsorBlockSegments = emptyList()
 
         lifecycleScope.launch {
             startPlaybackAndUpdateNotification()
@@ -195,7 +193,7 @@ class OnlinePlayerService : AbstractPlayerService() {
         lifecycleScope.launch(Dispatchers.IO) {
             runCatching {
                 if (sponsorBlockConfig.isEmpty()) return@runCatching
-                segments = RetrofitInstance.api.getSegments(
+                sponsorBlockSegments = RetrofitInstance.api.getSegments(
                     videoId,
                     JsonHelper.json.encodeToString(sponsorBlockConfig.keys)
                 ).segments
@@ -210,7 +208,7 @@ class OnlinePlayerService : AbstractPlayerService() {
     private fun checkForSegments() {
         handler.postDelayed(this::checkForSegments, 100)
 
-        player?.checkForSegments(this, segments, sponsorBlockConfig)
+        player?.checkForSegments(this, sponsorBlockSegments, sponsorBlockConfig)
     }
 
     override fun onPlaybackStateChanged(playbackState: Int) {

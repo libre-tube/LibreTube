@@ -30,6 +30,8 @@ import kotlin.io.path.exists
  */
 @UnstableApi
 class OfflinePlayerService : AbstractPlayerService() {
+    override val isOfflinePlayer: Boolean = true
+
     private var downloadWithItems: DownloadWithItems? = null
     private lateinit var downloadTab: DownloadTab
     private var shuffle: Boolean = false

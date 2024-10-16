@@ -8,7 +8,6 @@ import android.os.Binder
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import androidx.annotation.OptIn
 import androidx.core.app.NotificationCompat
@@ -124,6 +123,8 @@ abstract class AbstractPlayerService : LifecycleService() {
         }
     }
 
+    abstract val isOfflinePlayer: Boolean
+
     override fun onCreate() {
         super.onCreate()
 
@@ -178,7 +179,9 @@ abstract class AbstractPlayerService : LifecycleService() {
 
         nowPlayingNotification = NowPlayingNotification(
             this,
-            player!!
+            player!!,
+            backgroundOnly = true,
+            offlinePlayer = isOfflinePlayer
         )
     }
 

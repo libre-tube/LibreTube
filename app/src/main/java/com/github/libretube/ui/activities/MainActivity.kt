@@ -465,7 +465,8 @@ class MainActivity : BaseActivity() {
         }
 
         if (intent?.getBooleanExtra(IntentData.openAudioPlayer, false) == true) {
-            NavigationHelper.startAudioPlayer(this)
+            val offlinePlayer = intent!!.getBooleanExtra(IntentData.offlinePlayer, false)
+            NavigationHelper.startAudioPlayer(this, offlinePlayer = offlinePlayer)
             return
         }
 
