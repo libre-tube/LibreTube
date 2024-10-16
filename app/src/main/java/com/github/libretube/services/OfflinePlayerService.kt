@@ -42,8 +42,7 @@ class OfflinePlayerService : AbstractPlayerService() {
 
         videoId = if (shuffle) {
             runBlocking(Dispatchers.IO) {
-                Database.downloadDao().getAll().filterByTab(downloadTab)
-                    .randomOrNull()?.download?.videoId
+                Database.downloadDao().getRandomVideoIdByFileType(FileType.AUDIO)
             }
         } else {
             intent.getStringExtra(IntentData.videoId)

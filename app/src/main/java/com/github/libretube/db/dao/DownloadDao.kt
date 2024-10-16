@@ -11,6 +11,7 @@ import com.github.libretube.db.obj.Download
 import com.github.libretube.db.obj.DownloadChapter
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.db.obj.DownloadWithItems
+import com.github.libretube.enums.FileType
 
 @Dao
 interface DownloadDao {
@@ -21,6 +22,9 @@ interface DownloadDao {
     @Transaction
     @Query("SELECT * FROM download WHERE videoId = :videoId")
     suspend fun findById(videoId: String): DownloadWithItems
+
+    @Query("SELECT videoId FROM downloadItem WHERE type = :fileType ORDER BY RANDOM() LIMIT 1")
+    suspend fun getRandomVideoIdByFileType(fileType: FileType): String?
 
     @Query("SELECT * FROM downloaditem WHERE id = :id")
     suspend fun findDownloadItemById(id: Int): DownloadItem?
