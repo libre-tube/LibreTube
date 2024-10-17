@@ -271,7 +271,7 @@
     <string name="playlistCloned">سیاههٔ پخش شبیه‌سازی شد</string>
     <string name="appearance_summary">تنظیم کاره به سلیقه‌تان</string>
     <string name="privacy_alert">هشدار محرمانگی</string>
-    <string name="codecs">رمزینه‌ها</string>
+    <string name="codecs">رمزینه‌های ویدئویی</string>
     <string name="resume">از سر گیری</string>
     <string name="pause">مکث</string>
     <string name="category_preview_summary">برای بخش‌هایی که محتوای پیش رو را بدون اطَلاعات اضفی شرح می‌دهند. اگر شامل کلیپ‌هاییست که تنها این‌جا ظاهر شده‌اند احتمالاً این‌جا دستهٔ اشتباهی است</string>
@@ -547,4 +547,6 @@
     <string name="local_ryd_summary">واکشی مستقیم اطّلاعات نپسندیدن از https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">درون‌ریزی تاریخچهٔ تماشا</string>
     <string name="import_watch_history_desc">به یاد داشته باشید که به خاطر داده‌های محدود برون‌ریزی یوتوب، همه‌چیز درون‌ریزی نخواهد شد.</string>
+    <string name="audio_codecs">رمزینه‌های صوتی</string>
+    <string name="view_count">%1$s مشاهده‌ها</string>
 </resources>
