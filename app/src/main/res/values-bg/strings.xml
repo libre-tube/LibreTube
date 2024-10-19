@@ -76,7 +76,7 @@
     <string name="loggedIn">Вписване.</string>
     <string name="fail">Неуспешно :(</string>
     <string name="cancel">Отказ</string>
-    <string name="playlistCreated">Създаде плейлист.</string>
+    <string name="playlistCreated">Създаден плейлист.</string>
     <string name="unknown_error">Грешка в мрежата.</string>
     <string name="darkTheme">Тъмна</string>
     <string name="location">Местоположение</string>
