@@ -94,27 +94,27 @@ class BackupRestoreSettings : BasePreferenceFragment() {
 
     // result listeners for importing and exporting playlists
     private val getPlaylistsFile =
-        registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) {
-            it?.forEach {
+        registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) { files ->
+            for (file in files) {
                 CoroutineScope(Dispatchers.IO).launch {
-                    ImportHelper.importPlaylists(requireActivity(), it, importFormat)
+                    ImportHelper.importPlaylists(requireActivity(), file, importFormat)
                 }
             }
         }
 
     private val getWatchHistoryFile =
-        registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) {
-            it?.forEach {
+        registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) { files ->
+            for (file in files) {
                 CoroutineScope(Dispatchers.IO).launch {
-                    ImportHelper.importWatchHistory(requireActivity(), it, importFormat)
+                    ImportHelper.importWatchHistory(requireActivity(), file, importFormat)
                 }
             }
         }
 
-    private val createPlaylistsFile = registerForActivityResult(CreateDocument(JSON)) {
-        it?.let {
+    private val createPlaylistsFile = registerForActivityResult(CreateDocument(JSON)) { uri ->
+        uri?.let {
             lifecycleScope.launch(Dispatchers.IO) {
-                ImportHelper.exportPlaylists(requireActivity(), it, importFormat)
+                ImportHelper.exportPlaylists(requireActivity(), uri, importFormat)
             }
         }
     }
