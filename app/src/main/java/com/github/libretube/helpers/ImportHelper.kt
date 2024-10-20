@@ -161,10 +161,16 @@ object ImportHelper {
             }
 
             ImportFormat.FREETUBE -> {
-                val playlistFile = activity.contentResolver.openInputStream(uri)?.use {
-                    JsonHelper.json.decodeFromStream<List<FreeTubeImportPlaylist>>(it)
+                val playlistFile = activity.contentResolver.openInputStream(uri)?.use { inputStream ->
+                    val text = inputStream.bufferedReader().readText()
+                    runCatching {
+                        JsonHelper.json.decodeFromString<List<FreeTubeImportPlaylist>>(text)
+                    }.getOrNull() ?: runCatching {
+                        listOf(JsonHelper.json.decodeFromString<FreeTubeImportPlaylist>(text))
+                    }.getOrNull()
                 }
-                val playlists = playlistFile?.map { playlist ->
+
+                val playlists = playlistFile.orEmpty().map { playlist ->
                     // convert FreeTube videos to list of string
                     // convert FreeTube playlists to piped playlists
                     PipedImportPlaylist(
@@ -174,7 +180,7 @@ object ImportHelper {
                         playlist.videos.map { it.videoId }
                     )
                 }
-                importPlaylists.addAll(playlists.orEmpty())
+                importPlaylists.addAll(playlists)
             }
 
             ImportFormat.YOUTUBECSV -> {
@@ -221,6 +227,12 @@ object ImportHelper {
 
             else -> throw IllegalArgumentException()
         }
+
+        if (importPlaylists.isEmpty()) {
+            activity.toastFromMainDispatcher(R.string.emptyList)
+            return
+        }
+
         try {
             PlaylistsHelper.importPlaylists(importPlaylists)
             activity.toastFromMainDispatcher(R.string.success)
