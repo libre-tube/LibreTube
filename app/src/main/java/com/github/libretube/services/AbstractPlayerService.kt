@@ -124,6 +124,7 @@ abstract class AbstractPlayerService : LifecycleService() {
     }
 
     abstract val isOfflinePlayer: Boolean
+    abstract val intentActivity: Class<*>
 
     override fun onCreate() {
         super.onCreate()
@@ -149,8 +150,8 @@ abstract class AbstractPlayerService : LifecycleService() {
 
         lifecycleScope.launch {
             if (intent != null) {
-                createPlayerAndNotification()
                 onServiceCreated(intent)
+                createPlayerAndNotification()
                 startPlaybackAndUpdateNotification()
             }
             else stopSelf()
@@ -181,7 +182,8 @@ abstract class AbstractPlayerService : LifecycleService() {
             this,
             player!!,
             backgroundOnly = true,
-            offlinePlayer = isOfflinePlayer
+            offlinePlayer = isOfflinePlayer,
+            intentActivity = intentActivity
         )
     }
 

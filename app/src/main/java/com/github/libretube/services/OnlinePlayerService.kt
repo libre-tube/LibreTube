@@ -23,6 +23,7 @@ import com.github.libretube.helpers.PlayerHelper.checkForSegments
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.parcelable.PlayerData
+import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,6 +36,7 @@ import kotlinx.serialization.encodeToString
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class OnlinePlayerService : AbstractPlayerService() {
     override val isOfflinePlayer: Boolean = false
+    override val intentActivity: Class<*> = MainActivity::class.java
 
     // PlaylistId/ChannelId for autoplay
     private var playlistId: String? = null

@@ -11,6 +11,7 @@ import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.services.OnlinePlayerService
 import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.ui.activities.NoInternetActivity
 import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.ui.fragments.PlayerFragment
 
@@ -80,10 +81,14 @@ object BackgroundHelper {
     fun playOnBackgroundOffline(context: Context, videoId: String?, downloadTab: DownloadTab, shuffle: Boolean = false) {
         stopBackgroundPlay(context)
 
+        // whether the service is started from the MainActivity or NoInternetActivity
+        val noInternet = ContextHelper.tryUnwrapActivity<NoInternetActivity>(context) != null
+
         val playerIntent = Intent(context, OfflinePlayerService::class.java)
             .putExtra(IntentData.videoId, videoId)
             .putExtra(IntentData.shuffle, shuffle)
             .putExtra(IntentData.downloadTab, downloadTab)
+            .putExtra(IntentData.noInternet, noInternet)
 
         ContextCompat.startForegroundService(context, playerIntent)
     }

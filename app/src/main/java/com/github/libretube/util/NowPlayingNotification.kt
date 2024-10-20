@@ -35,7 +35,8 @@ class NowPlayingNotification(
     private val context: Context,
     private val player: ExoPlayer,
     private val backgroundOnly: Boolean = false,
-    private val offlinePlayer: Boolean = false
+    private val offlinePlayer: Boolean = false,
+    private val intentActivity: Class<*> = MainActivity::class.java
 ) {
     private var videoId: String? = null
     private val nManager = context.getSystemService<NotificationManager>()!!
@@ -74,13 +75,13 @@ class NowPlayingNotification(
         // starts a new MainActivity Intent when the player notification is clicked
         // it doesn't start a completely new MainActivity because the MainActivity's launchMode
         // is set to "singleTop" in the AndroidManifest (important!!!)
-        // that's the only way to launch back into the previous activity (e.g. the player view
-        if (!backgroundOnly) return null
-
-        val intent = Intent(context, MainActivity::class.java).apply {
-            putExtra(IntentData.openAudioPlayer, true)
-            putExtra(IntentData.offlinePlayer, offlinePlayer)
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        // that's the only way to launch back into the previous activity (e.g. the player view)
+        val intent = Intent(context, intentActivity).apply {
+            if (backgroundOnly) {
+                putExtra(IntentData.openAudioPlayer, true)
+                putExtra(IntentData.offlinePlayer, offlinePlayer)
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            }
         }
 
 

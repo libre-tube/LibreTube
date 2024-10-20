@@ -220,7 +220,8 @@ class OfflinePlayerActivity : BaseActivity() {
         nowPlayingNotification = NowPlayingNotification(
             this,
             viewModel.player,
-            offlinePlayer = true
+            offlinePlayer = true,
+            intentActivity = OfflinePlayerActivity::class.java
         )
     }
 

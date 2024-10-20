@@ -6,10 +6,12 @@ import androidx.activity.addCallback
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.github.libretube.R
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.ActivityNointernetBinding
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.NetworkHelper
 import com.github.libretube.ui.base.BaseActivity
+import com.github.libretube.ui.fragments.AudioPlayerFragment
 import com.github.libretube.ui.fragments.DownloadsFragment
 import com.google.android.material.snackbar.Snackbar
 
@@ -33,7 +35,7 @@ class NoInternetActivity : BaseActivity() {
 
         binding.downloads.setOnClickListener {
             supportFragmentManager.commit {
-                replace<DownloadsFragment>(R.id.noInternet_container)
+                replace<DownloadsFragment>(R.id.container)
                 addToBackStack(null)
             }
         }
@@ -49,6 +51,19 @@ class NoInternetActivity : BaseActivity() {
                     }
                 }
                 ?: finishAffinity()
+        }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+
+        if (intent.getBooleanExtra(IntentData.openAudioPlayer, false)) {
+            // attempt to recycle already existing audio player fragment first before creating new one
+            supportFragmentManager.fragments.filterIsInstance<AudioPlayerFragment>().firstOrNull()?.let {
+                it.binding.playerMotionLayout.transitionToStart()
+                return
+            }
+            NavigationHelper.startAudioPlayer(this)
         }
     }
 }
