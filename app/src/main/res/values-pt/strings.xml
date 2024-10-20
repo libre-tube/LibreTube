@@ -356,7 +356,7 @@
     <string name="sleep_timer">Temporizador</string>
     <string name="skip_silence">Ignorar silêncio</string>
     <string name="replies">Respostas</string>
-    <string name="codecs">Codificadores</string>
+    <string name="codecs">Codificadores de vídeo</string>
     <string name="mark_as_watched">Marcar como visto</string>
     <string name="unsupported_file_format">Formato não suportado: %1$s</string>
     <string name="custom_playback_speed">Personalizada</string>
@@ -548,4 +548,8 @@
     <string name="local_stream_extraction_summary">Obter informações de reprodução diretamente de YouTube sem utilizar uma instância Piped.</string>
     <string name="local_ryd">Retorno local Não gosta no Youtube</string>
     <string name="local_ryd_summary">Obter diretamente informações de desagrado em https://returnyoutubedislikeapi.com</string>
+    <string name="import_watch_history">Importar histórico de visualizações</string>
+    <string name="import_watch_history_desc">Tenha em atenção de que nem tudo será importado devido a algumas limitações na exportação de dados através do YouTube.</string>
+    <string name="view_count">%1$s visualizações</string>
+    <string name="audio_codecs">Codificadores de áudio</string>
 </resources>
