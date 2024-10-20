@@ -20,6 +20,7 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.activities.ZoomableImageActivity
+import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.fragments.AudioPlayerFragment
 import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.views.SingleViewTouchableMotionLayout
@@ -98,7 +99,7 @@ object NavigationHelper {
      * Start the audio player fragment
      */
     fun startAudioPlayer(context: Context, offlinePlayer: Boolean = false, minimizeByDefault: Boolean = false) {
-        val activity = ContextHelper.unwrapActivity<MainActivity>(context)
+        val activity = ContextHelper.unwrapActivity<BaseActivity>(context)
         activity.supportFragmentManager.commitNow {
             val args = bundleOf(
                 IntentData.minimizeByDefault to minimizeByDefault,

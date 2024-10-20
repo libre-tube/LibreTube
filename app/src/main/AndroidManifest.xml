@@ -43,6 +43,7 @@
         <activity
             android:name=".ui.activities.NoInternetActivity"
             android:label="@string/noInternet"
+            android:launchMode="singleTop"
             android:screenOrientation="locked" />
 
         <activity
@@ -114,6 +115,7 @@
         <activity
             android:name=".ui.activities.OfflinePlayerActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:launchMode="singleTop"
             android:label="@string/player"
             android:supportsPictureInPicture="true" />
 
@@ -410,7 +412,8 @@
             android:exported="false"
             android:foregroundServiceType="mediaPlayback" />
 
-        <service android:name=".services.OnClearFromRecentService"
+        <service
+            android:name=".services.OnClearFromRecentService"
             android:enabled="true"
             android:exported="false" />
 

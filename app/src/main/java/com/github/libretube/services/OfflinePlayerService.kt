@@ -17,6 +17,8 @@ import com.github.libretube.extensions.toAndroidUri
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.obj.PlayerNotificationData
+import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.ui.activities.NoInternetActivity
 import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +33,9 @@ import kotlin.io.path.exists
 @UnstableApi
 class OfflinePlayerService : AbstractPlayerService() {
     override val isOfflinePlayer: Boolean = true
+    private var noInternetService: Boolean = false
+    override val intentActivity: Class<*>
+        get() = if (noInternetService) NoInternetActivity::class.java else MainActivity::class.java
 
     private var downloadWithItems: DownloadWithItems? = null
     private lateinit var downloadTab: DownloadTab
@@ -39,6 +44,7 @@ class OfflinePlayerService : AbstractPlayerService() {
     override suspend fun onServiceCreated(intent: Intent) {
         downloadTab = intent.serializableExtra(IntentData.downloadTab)!!
         shuffle = intent.getBooleanExtra(IntentData.shuffle, false)
+        noInternetService = intent.getBooleanExtra(IntentData.noInternet, false)
 
         videoId = if (shuffle) {
             runBlocking(Dispatchers.IO) {

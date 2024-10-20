@@ -51,4 +51,5 @@ object IntentData {
     const val offlinePlayer = "offlinePlayer"
     const val downloadTab = "downloadTab"
     const val shuffle = "shuffle"
+    const val noInternet = "noInternet"
 }

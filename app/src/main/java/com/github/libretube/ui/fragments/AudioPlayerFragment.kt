@@ -44,6 +44,7 @@ import com.github.libretube.services.AbstractPlayerService
 import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.services.OnlinePlayerService
 import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.interfaces.AudioPlayerOptions
 import com.github.libretube.ui.listeners.AudioPlayerThumbnailListener
 import com.github.libretube.ui.models.ChaptersViewModel
@@ -64,7 +65,8 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     val binding get() = _binding!!
 
     private lateinit var audioHelper: AudioHelper
-    private val mainActivity get() = context as MainActivity
+    private val activity get() = context as BaseActivity
+    private val mainActivity get() = activity as? MainActivity
     private val viewModel: CommonPlayerViewModel by activityViewModels()
     private val chaptersModel: ChaptersViewModel by activityViewModels()
 
@@ -99,7 +101,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         val serviceClass =
             if (isOffline) OfflinePlayerService::class.java else OnlinePlayerService::class.java
         Intent(activity, serviceClass).also { intent ->
-            activity?.bindService(intent, connection, 0)
+            activity.bindService(intent, connection, 0)
         }
     }
 
@@ -132,8 +134,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         }
 
         binding.minimizePlayer.setOnClickListener {
-            val mainMotionLayout = mainActivity.binding.mainMotionLayout
-            mainMotionLayout.transitionToStart()
+            mainActivity?.binding?.mainMotionLayout?.transitionToStart()
             binding.playerMotionLayout.transitionToEnd()
         }
 
@@ -208,7 +209,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         }
 
         binding.miniPlayerClose.setOnClickListener {
-            activity?.unbindService(connection)
+            activity.unbindService(connection)
             BackgroundHelper.stopBackgroundPlay(requireContext())
             killFragment()
         }
@@ -244,15 +245,17 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     private fun killFragment() {
         viewModel.isFullscreen.value = false
         binding.playerMotionLayout.transitionToEnd()
-        mainActivity.supportFragmentManager.commit {
+        activity.supportFragmentManager.commit {
             remove(this@AudioPlayerFragment)
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initializeTransitionLayout() {
-        mainActivity.binding.container.isVisible = true
-        val mainMotionLayout = mainActivity.binding.mainMotionLayout
+        if (mainActivity == null) return
+
+        mainActivity!!.binding.container.isVisible = true
+        val mainMotionLayout = mainActivity!!.binding.mainMotionLayout
         mainMotionLayout.progress = 0F
 
         binding.playerMotionLayout.addTransitionListener(object : TransitionAdapter() {
@@ -408,7 +411,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         // unregister all listeners and the connected [playerService]
         playerService?.onStateOrPlayingChanged = null
         runCatching {
-            activity?.unbindService(connection)
+            activity.unbindService(connection)
         }
 
         super.onDestroy()
