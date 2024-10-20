@@ -65,6 +65,8 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.db.DatabaseHelper
+import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.formatShort
@@ -95,9 +97,11 @@ import com.github.libretube.obj.ShareData
 import com.github.libretube.obj.VideoResolution
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.ui.activities.OfflinePlayerActivity
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
+import com.github.libretube.ui.dialogs.PlayOfflineDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.animateDown
 import com.github.libretube.ui.extensions.setupSubscriptionButton
@@ -119,6 +123,7 @@ import com.github.libretube.util.TextUtils.toTimeInSeconds
 import com.github.libretube.util.YoutubeHlsPlaylistParser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import java.util.concurrent.Executors
 import kotlin.math.abs
@@ -129,6 +134,8 @@ import kotlin.math.ceil
 class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private var _binding: FragmentPlayerBinding? = null
     val binding get() = _binding!!
+
+    private var localSearchResult: DownloadWithItems? = null
 
     private val playerBinding get() = binding.player.binding
     private val doubleTapOverlayBinding get() = binding.doubleTapOverlay.binding
@@ -243,7 +250,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     private val playerListener = object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
-            if (PlayerHelper.pipEnabled || PictureInPictureCompat.isInPictureInPictureMode(mainActivity)) {
+            if (PlayerHelper.pipEnabled || PictureInPictureCompat.isInPictureInPictureMode(
+                    mainActivity
+                )
+            ) {
                 PictureInPictureCompat.setPictureInPictureParams(requireActivity(), pipParams)
             }
 
@@ -390,6 +400,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         keepQueue = playerData.keepQueue
         timeStamp = playerData.timestamp
 
+        if (PlayerHelper.isPlayFromDownloadEnabled)
+            localSearchResult = runBlocking(Dispatchers.IO) {
+                DatabaseHolder.Database.downloadDao().findById(videoId)
+            }
+
         // broadcast receiver for PiP actions
         ContextCompat.registerReceiver(
             requireContext(),
@@ -437,7 +452,17 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             binding.player.setCurrentChapterName()
         }
 
-        playVideo()
+
+        localSearchResult?.let {
+            PlayOfflineDialog(it, {
+                (requireActivity() as MainActivity).supportFragmentManager.commit {
+                    remove(this@PlayerFragment)
+                }
+            }) { _, _ ->
+                playVideo()
+            }.show(parentFragmentManager, null)
+
+        } ?: playVideo()
 
         showBottomBar()
     }

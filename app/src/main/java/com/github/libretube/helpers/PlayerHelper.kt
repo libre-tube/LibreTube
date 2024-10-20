@@ -895,4 +895,12 @@ object PlayerHelper {
             }
         }
     }
+
+    //play from local
+    val isPlayFromDownloadEnabled: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.PLAY_FROM_DOWNLOADS,
+            false
+        )
+
 }
