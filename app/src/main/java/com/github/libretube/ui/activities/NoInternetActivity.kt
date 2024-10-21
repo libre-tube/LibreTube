@@ -58,12 +58,7 @@ class NoInternetActivity : BaseActivity() {
         super.onNewIntent(intent)
 
         if (intent.getBooleanExtra(IntentData.openAudioPlayer, false)) {
-            // attempt to recycle already existing audio player fragment first before creating new one
-            supportFragmentManager.fragments.filterIsInstance<AudioPlayerFragment>().firstOrNull()?.let {
-                it.binding.playerMotionLayout.transitionToStart()
-                return
-            }
-            NavigationHelper.startAudioPlayer(this)
+            NavigationHelper.startAudioPlayer(this, offlinePlayer = true)
         }
     }
 }
