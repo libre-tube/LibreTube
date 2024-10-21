@@ -298,6 +298,8 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
      * Load the information from a new stream into the UI
      */
     private fun updateStreamInfo(stream: StreamItem? = null) {
+        val binding = _binding ?: return
+
         val current = stream ?: PlayingQueue.getCurrent() ?: return
 
         binding.title.text = current.title
@@ -380,6 +382,8 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
 
     private fun updatePlayPauseButton() {
         playerService?.player?.let {
+            val binding = _binding ?: return
+
             val iconRes = PlayerHelper.getPlayPauseActionIcon(it)
             binding.playPause.setIconResource(iconRes)
             binding.miniPlayerPause.setImageResource(iconRes)
