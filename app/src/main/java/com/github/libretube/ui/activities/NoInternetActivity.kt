@@ -3,6 +3,7 @@ package com.github.libretube.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.addCallback
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.github.libretube.R
@@ -43,15 +44,25 @@ class NoInternetActivity : BaseActivity() {
         setContentView(binding.root)
 
         onBackPressedDispatcher.addCallback(this) {
-            supportFragmentManager.fragments.filterIsInstance<DownloadsFragment>()
-                .firstOrNull()
-                ?.let {
-                    supportFragmentManager.commit {
-                        remove(it)
-                    }
-                }
-                ?: finishAffinity()
+            if (removeFragment<DownloadsFragment>() || removeFragment<AudioPlayerFragment>()) return@addCallback
+
+            finishAffinity()
         }
+    }
+
+    private inline fun <reified T: Fragment> removeFragment(): Boolean {
+        val fragment = supportFragmentManager.fragments.filterIsInstance<T>()
+            .firstOrNull()
+
+        if (fragment != null) {
+            supportFragmentManager.commit {
+                remove(fragment)
+            }
+
+            return true
+        }
+
+        return false
     }
 
     override fun onNewIntent(intent: Intent) {
