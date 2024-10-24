@@ -69,7 +69,7 @@ class OfflinePlayerService : AbstractPlayerService() {
     override suspend fun startPlaybackAndUpdateNotification() {
         val downloadWithItems = withContext(Dispatchers.IO) {
             Database.downloadDao().findById(videoId)
-        }
+        }!!
         this.downloadWithItems = downloadWithItems
         onNewVideoStarted?.let { it(downloadWithItems.download.toStreamItem()) }
 

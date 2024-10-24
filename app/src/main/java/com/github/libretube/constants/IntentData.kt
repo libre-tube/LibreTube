@@ -6,6 +6,7 @@ object IntentData {
     const val id = "id"
     const val videoId = "videoId"
     const val videoIds = "videoIds"
+    const val videoTitle = "videoTitle"
     const val channelId = "channelId"
     const val channelName = "channelName"
     const val channelAvatar = "channelAvatar"
@@ -52,4 +53,6 @@ object IntentData {
     const val downloadTab = "downloadTab"
     const val shuffle = "shuffle"
     const val noInternet = "noInternet"
+    const val isPlayingOffline = "isPlayingOffline"
+    const val downloadInfo = "downloadInfo"
 }
