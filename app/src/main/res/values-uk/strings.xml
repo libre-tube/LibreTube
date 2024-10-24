@@ -556,4 +556,6 @@
     <string name="import_watch_history_desc">Зауважте, що не все буде імпортовано через обмеженість експортних даних YouTube.</string>
     <string name="audio_codecs">Аудіокодеки</string>
     <string name="view_count">Переглядів: %1$s</string>
+    <string name="dialog_play_offline_title">Доступна локальна версія цього відео.</string>
+    <string name="dialog_play_offline_body">Відтворити відео з теки завантаження?</string>
 </resources>
