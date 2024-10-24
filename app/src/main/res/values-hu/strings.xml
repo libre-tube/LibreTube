@@ -549,4 +549,6 @@
     <string name="import_watch_history_desc">Vegye figyelembe, hogy a YouTube korlátozott exportadatai miatt nem lesz minden importálva.</string>
     <string name="audio_codecs">Hang kodekek</string>
     <string name="view_count">%1$s megtekintés</string>
+    <string name="dialog_play_offline_body">Szeretné lejátszani a videót a letöltési mappából?</string>
+    <string name="dialog_play_offline_title">A videó helyi változata is elérhető.</string>
 </resources>
