@@ -56,7 +56,7 @@
     <string name="disabled">Изключено</string>
     <string name="update_available">Налична актуализация</string>
     <string name="appearance">Външен вид</string>
-    <string name="downloads">Изтегляния</string>
+    <string name="downloads">Изтеглени</string>
     <string name="update_summary">Проверка за актуализация</string>
     <string name="app_uptodate">Използвате най-новата версия.</string>
     <string name="audio">Звук</string>
@@ -128,7 +128,7 @@
     <string name="mobile_data">Мобилни данни</string>
     <string name="wifi">Wi-Fi</string>
     <string name="renamePlaylist">Преименувай плейлист</string>
-    <string name="delete">Изтрий от изтегляния</string>
+    <string name="delete">Изтрий от изтеглени</string>
     <string name="audio_video_summary">Качество и формат</string>
     <string name="added_to_playlist">Добавено към плейлиста %1$s</string>
     <string name="filename">Име на файл</string>
@@ -439,7 +439,7 @@
     <string name="worst_quality">Лошо</string>
     <string name="chapters_videoHighlight">Видео акцент</string>
     <string name="username_email">Използването на имейл адрес като потребителско име не се препоръчва. Да продължа ли въпреки това?</string>
-    <string name="advanced_summary">Изтегляния, и нулиране</string>
+    <string name="advanced_summary">Изтеглени, и нулиране</string>
     <string name="creation_date_reversed">Дата на създаване (обърнато)</string>
     <string name="shorts_notifications">Известия за кртки видеоклипове</string>
     <string name="category_filler_summary">За тангенциални сцени, добавени само за запълване или хумор, които не са необходими за разбиране на основното съдържание на видеоклипа</string>
@@ -522,7 +522,7 @@
     <string name="also_clear_watch_positions">Също така изчистете позициите на гледане</string>
     <string name="audio_language">Аудио език</string>
     <string name="suggest_change_instance">Зареждането отнема повече от обикновено. Помислете за промяна на инстанцията</string>
-    <string name="download_playlist">Изтегли плейлиста</string>
+    <string name="download_playlist">Изтегли плейлист</string>
     <string name="enqueue_playlist_description">Показва известие, когато поставя в опашка видеоклипове от плейлист за изтегляне.</string>
     <string name="enqueueing_playlist_download">Поставя в опашка видеоклипове от плейлист за изтегляне %1$s</string>
     <string name="default_language">По подразбиране</string>
