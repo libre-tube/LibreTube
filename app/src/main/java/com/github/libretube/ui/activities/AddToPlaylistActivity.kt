@@ -44,6 +44,10 @@ class AddToPlaylistActivity : BaseActivity() {
                     StreamsExtractor.extractStreams(videoId).toStreamItem(videoId)
                 } catch (e: Exception) {
                     toastFromMainDispatcher(R.string.unknown_error)
+                    withContext(Dispatchers.Main) {
+                        finish()
+                    }
+                    return@launch
                 }
             } else {
                 StreamItem(videoId)
