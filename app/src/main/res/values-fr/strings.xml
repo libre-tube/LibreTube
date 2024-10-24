@@ -552,4 +552,5 @@
     <string name="import_watch_history_desc">Veuillez noter que tout ne sera pas importé en raison des données d’exportation limitées de YouTube.</string>
     <string name="audio_codecs">Codecs audio</string>
     <string name="view_count">%1$s visionnements</string>
+    <string name="dialog_play_offline_title">Une version locale de cette vidéo est disponible.</string>
 </resources>
