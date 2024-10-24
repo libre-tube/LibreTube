@@ -218,13 +218,17 @@ object PlaylistsHelper {
             getPlaylists()
                 .map { async { getPlaylist(it.id!!) } }
                 .awaitAll()
-                .map {
-                    val videos = it.relatedStreams.map { item ->
-                        item.url.orEmpty().replace("$YOUTUBE_FRONTEND_URL/watch?v=${item.url}", "")
-                    }.map { id ->
-                        FreeTubeVideo(id, it.name.orEmpty(), "", "")
+                .map { playlist ->
+                    val videos = playlist.relatedStreams.map { videoInfo ->
+                        FreeTubeVideo(
+                            videoId = videoInfo.url.orEmpty().toID(),
+                            title = videoInfo.title.orEmpty(),
+                            author = videoInfo.uploaderName.orEmpty(),
+                            authorId = videoInfo.uploaderUrl.orEmpty().toID(),
+                            lengthSeconds = videoInfo.duration ?: 0L
+                        )
                     }
-                    FreeTubeImportPlaylist(it.name.orEmpty(), videos)
+                    FreeTubeImportPlaylist(playlist.name.orEmpty(), videos)
                 }
         }
 
