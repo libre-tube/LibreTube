@@ -549,4 +549,6 @@
     <string name="import_watch_history_desc">Kuna YouTube piirab eksporditavaid andmeid, siis palun arvesta, et kõike ei õnnestu importida.</string>
     <string name="audio_codecs">Audiokoodekid</string>
     <string name="view_count">%1$s vaatamist</string>
+    <string name="dialog_play_offline_title">Sellest videost on olemas kohalikus seadmes asuv versioon.</string>
+    <string name="dialog_play_offline_body">Kas sa sooviksid seda videot esitada allalaadimiste kaustast?</string>
 </resources>
