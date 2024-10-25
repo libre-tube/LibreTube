@@ -79,4 +79,16 @@
     <string name="finished">เสร็จสิ้น</string>
     <string name="server_error">"ดูเหมือนจะมีปัญหากับเซิร์ฟเวอร์ที่เลือก  ลองตัวอย่างอื่น"</string>
     <string name="fail">ไม่สำเร็จ :(</string>
+    <string name="music_playlists">เพลย์ลิสต์ YT Music</string>
+    <string name="category_segments">เซกเมนต์</string>
+    <string name="albums">อัลบั้ม</string>
+    <string name="comments_count">ความคิดเห็น (%1$s)</string>
+    <string name="music_videos">วิดีโอ YT Music</string>
+    <string name="music_albums">อัลบั้ม YT Music</string>
+    <string name="segment_skipped">ข้ามเซกเมนต์</string>
+    <string name="category_sponsor_summary">การโปรโมทแบบชำระเงิน, การแนะนำแบบชำระเงิน และการโฆษณาโดยตรง ไม่รวมการโปรโมทตนเอง หรือการแนะนำฟรีให้ กับเนื้อหา, ผู้สร้าง, เว็บไซต์ และผลิตภัณฑ์</string>
+    <string name="music_songs">เพลง YT Music</string>
+    <string name="category_sponsor">สปอนเซอร์</string>
+    <string name="music_artists">ศิลปิน YT Music</string>
+    <string name="sponsorblock_summary">ใช้งาน https://sponsor.ajay.app API</string>
 </resources>
