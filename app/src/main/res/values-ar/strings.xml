@@ -561,4 +561,6 @@
     <string name="import_watch_history_desc">يرجى ملاحظة أنه لن يتم استيراد كل شيء بسبب بيانات التصدير المحدودة على YouTube.</string>
     <string name="audio_codecs">مرمازات الصوت</string>
     <string name="view_count">مشاهدات %1$s</string>
+    <string name="dialog_play_offline_title">تتوفر نسخة محلية من هذا الفيديو.</string>
+    <string name="dialog_play_offline_body">هل ترغب في تشغيل الفيديو من مجلد التنزيل ؟</string>
 </resources>
