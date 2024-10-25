@@ -555,4 +555,6 @@
     <string name="import_watch_history_desc">Пожалуйста, учтите, что полноценный импорт невозможен из-за ограниченности данных, экспортируемых из YouTube.</string>
     <string name="audio_codecs">Аудиокодеки</string>
     <string name="view_count">%1$s просмотров</string>
+    <string name="dialog_play_offline_body">Воспроизвести видео из папки загрузок?</string>
+    <string name="dialog_play_offline_title">Доступна сохранённая копия этого видео.</string>
 </resources>
