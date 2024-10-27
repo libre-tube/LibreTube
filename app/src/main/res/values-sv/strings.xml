@@ -328,7 +328,7 @@
     <string name="swipe_controls_summary">Svep för att justera ljusstyrkan och volymen i helskärmsläge</string>
     <string name="filename">Filnamn</string>
     <string name="off">Av</string>
-    <string name="codecs">Kodekar</string>
+    <string name="codecs">Video kodekar</string>
     <string name="help">Hjälp</string>
     <string name="double_tap_seek">Dubbelklicka för att söka</string>
     <string name="fallback_piped_proxy_summary">Ladda videor via proxyn om direktanslutning till YouTube inte fungerar för den aktuella videon (ökar den initiala laddningstiden). Om den är inaktiverad kommer musikinnehåll från YouTube sannolikt inte att spelas upp på grund av YT-begränsningar</string>
@@ -542,4 +542,10 @@
     <string name="screenshot">Skärmbild</string>
     <string name="pip">PiP</string>
     <string name="local_stream_extraction_summary">Hämta videouppspelningsinformation direkt från YouTube utan att använda Piped.</string>
+    <string name="dialog_play_offline_title">En lokal version av den här videon finns tillgänglig.</string>
+    <string name="import_watch_history">Importera visningshistorik</string>
+    <string name="dialog_play_offline_body">Vill du spela upp videon från nedladdningsmappen?</string>
+    <string name="import_watch_history_desc">Observera att allt inte importeras på grund av YouTubes begränsade exportdata.</string>
+    <string name="local_ryd_summary">Hämta ogilla-information direkt från https://returnyoutubedislikeapi.com</string>
+    <string name="audio_codecs">Ljud kodekar</string>
 </resources>
