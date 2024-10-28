@@ -549,4 +549,5 @@
     <string name="audio_codecs">מפענחי שמע</string>
     <string name="import_watch_history">ייבוא היסטוריית צפייה</string>
     <string name="import_watch_history_desc">נא לשים לב שהייבוא יהיה חלקי עקב הנתונים המצומצמים שאפשר לייצא מ־YouTube.</string>
+    <string name="dialog_play_offline_body">לנגן את הסרטון מתיקיית ההורדה?</string>
 </resources>
