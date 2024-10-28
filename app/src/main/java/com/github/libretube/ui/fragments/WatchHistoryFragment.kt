@@ -15,7 +15,6 @@ import androidx.core.view.updatePadding
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.withTransaction
 import com.github.libretube.R
@@ -27,6 +26,7 @@ import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
+import com.github.libretube.extensions.setOnDismissListener
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
@@ -198,26 +198,9 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment() {
         binding.historyEmpty.isGone = true
         binding.historyContainer.isVisible = true
 
-        val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
-            0,
-            ItemTouchHelper.LEFT
-        ) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.absoluteAdapterPosition
-                watchHistoryAdapter.removeFromWatchHistory(position)
-            }
+        binding.watchHistoryRecView.setOnDismissListener { position ->
+            watchHistoryAdapter.removeFromWatchHistory(position)
         }
-
-        val itemTouchHelper = ItemTouchHelper(itemTouchCallback)
-        itemTouchHelper.attachToRecyclerView(binding.watchHistoryRecView)
 
         // observe changes to indicate if the history is empty
         watchHistoryAdapter.registerAdapterDataObserver(object :

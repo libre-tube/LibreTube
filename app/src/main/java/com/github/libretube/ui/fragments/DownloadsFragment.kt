@@ -17,7 +17,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.github.libretube.R
@@ -31,6 +30,7 @@ import com.github.libretube.db.obj.filterByTab
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.extensions.serializable
+import com.github.libretube.extensions.setOnDismissListener
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.NavigationHelper
@@ -216,29 +216,11 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment() {
             }
             binding.downloadsRecView.adapter = adapter
 
-            val itemTouchCallback =
-                object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-                    override fun getMovementFlags(
-                        recyclerView: RecyclerView,
-                        viewHolder: RecyclerView.ViewHolder
-                    ): Int = makeMovementFlags(0, ItemTouchHelper.LEFT)
-
-                    override fun onMove(
-                        recyclerView: RecyclerView,
-                        viewHolder: RecyclerView.ViewHolder,
-                        target: RecyclerView.ViewHolder
-                    ): Boolean = false
-
-                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                        adapter.showDeleteDialog(
-                            requireContext(),
-                            viewHolder.absoluteAdapterPosition
-                        )
-                        // put the item back to the center, as it's currently out of the screen
-                        adapter.restoreItem(viewHolder.absoluteAdapterPosition)
-                    }
-                }
-            ItemTouchHelper(itemTouchCallback).attachToRecyclerView(binding.downloadsRecView)
+            binding.downloadsRecView.setOnDismissListener { position ->
+                adapter.showDeleteDialog(requireContext(), position)
+                // put the item back to the center, as it's currently out of the screen
+                adapter.restoreItem(position)
+            }
 
             binding.downloadsRecView.adapter?.registerAdapterDataObserver(
                 object : RecyclerView.AdapterDataObserver() {

@@ -18,7 +18,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
@@ -33,6 +32,7 @@ import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
+import com.github.libretube.extensions.setOnDismissListener
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
@@ -290,8 +290,9 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
         if (!isBookmarked) return
         withContext(Dispatchers.IO) {
             // update the playlist thumbnail and title if bookmarked
-            val playlistBookmark = DatabaseHolder.Database.playlistBookmarkDao().findById(playlistId)
-                ?: return@withContext
+            val playlistBookmark =
+                DatabaseHolder.Database.playlistBookmarkDao().findById(playlistId)
+                    ?: return@withContext
             if (playlistBookmark.thumbnailUrl != playlist.thumbnailUrl ||
                 playlistBookmark.playlistName != playlist.name ||
                 playlistBookmark.videos != playlist.videos
@@ -363,28 +364,10 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
 
         // listener for swiping to the left or right
         if (playlistType != PlaylistType.PUBLIC) {
-            val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
-                0,
-                ItemTouchHelper.LEFT
-            ) {
-                override fun onMove(
-                    recyclerView: RecyclerView,
-                    viewHolder: RecyclerView.ViewHolder,
-                    target: RecyclerView.ViewHolder
-                ): Boolean {
-                    return false
-                }
-
-                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    playlistAdapter!!.removeFromPlaylist(
-                        _binding?.root ?: return,
-                        viewHolder.absoluteAdapterPosition
-                    )
-                }
+            binding.playlistRecView.setOnDismissListener { position ->
+                val rootView = _binding?.root ?: return@setOnDismissListener
+                playlistAdapter!!.removeFromPlaylist(rootView, position)
             }
-
-            val itemTouchHelper = ItemTouchHelper(itemTouchCallback)
-            itemTouchHelper.attachToRecyclerView(binding.playlistRecView)
         }
 
         updatePlaylistDuration()

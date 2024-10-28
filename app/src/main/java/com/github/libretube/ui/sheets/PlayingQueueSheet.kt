@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import androidx.media3.common.Player
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.databinding.QueueBottomSheetBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchPosition
+import com.github.libretube.extensions.setActionListener
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.adapters.PlayingQueueAdapter
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
@@ -84,37 +84,23 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
             showWatchPositionsOptions()
         }
 
-        val callback = object : ItemTouchHelper.SimpleCallback(
-            ItemTouchHelper.UP or ItemTouchHelper.DOWN,
-            ItemTouchHelper.LEFT
-        ) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                val from = viewHolder.absoluteAdapterPosition
-                val to = target.absoluteAdapterPosition
-
-                PlayingQueue.move(from, to)
-                adapter.notifyItemMoved(from, to)
-                return true
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.absoluteAdapterPosition
+        binding.optionsRecycler.setActionListener(
+            swipeDirections = arrayOf(ItemTouchHelper.LEFT),
+            dragDirections = arrayOf(ItemTouchHelper.UP, ItemTouchHelper.DOWN),
+            onDismissedListener = { position ->
                 if (position == PlayingQueue.currentIndex()) {
                     adapter.notifyItemChanged(position)
-                    return
+                    return@setActionListener
                 }
                 PlayingQueue.remove(position)
                 adapter.notifyItemRemoved(position)
                 adapter.notifyItemRangeChanged(position, adapter.itemCount)
+            },
+            onDragListener = { from, to ->
+                PlayingQueue.move(from, to)
+                adapter.notifyItemMoved(from, to)
             }
-        }
-
-        val itemTouchHelper = ItemTouchHelper(callback)
-        itemTouchHelper.attachToRecyclerView(binding.optionsRecycler)
+        )
     }
 
     private fun updateRepeatButton() {

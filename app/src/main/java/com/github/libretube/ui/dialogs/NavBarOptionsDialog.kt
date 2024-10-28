@@ -3,11 +3,10 @@ package com.github.libretube.ui.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.databinding.SimpleOptionsRecyclerBinding
+import com.github.libretube.extensions.setOnDraggedListener
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.ui.adapters.NavBarOptionsAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -21,41 +20,15 @@ class NavBarOptionsDialog : DialogFragment() {
             NavBarHelper.getStartFragmentId(requireContext())
         )
 
-        val itemTouchCallback = object : ItemTouchHelper.Callback() {
-            override fun getMovementFlags(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder
-            ): Int {
-                val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
-                return makeMovementFlags(dragFlags, 0)
-            }
-
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                val itemToMove = adapter.items[viewHolder.absoluteAdapterPosition]
-                adapter.items.remove(itemToMove)
-                adapter.items.add(target.absoluteAdapterPosition, itemToMove)
-
-                adapter.notifyItemMoved(
-                    viewHolder.absoluteAdapterPosition,
-                    target.absoluteAdapterPosition
-                )
-                return true
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                // do nothing
-            }
-        }
-
         binding.optionsRecycler.layoutManager = LinearLayoutManager(context)
         binding.optionsRecycler.adapter = adapter
+        binding.optionsRecycler.setOnDraggedListener { from, to ->
+            val itemToMove = adapter.items[from]
+            adapter.items.remove(itemToMove)
+            adapter.items.add(to, itemToMove)
 
-        val itemTouchHelper = ItemTouchHelper(itemTouchCallback)
-        itemTouchHelper.attachToRecyclerView(binding.optionsRecycler)
+            adapter.notifyItemMoved(from, to)
+        }
 
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.navigation_bar)
