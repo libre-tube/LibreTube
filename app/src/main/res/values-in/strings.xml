@@ -546,4 +546,6 @@
     <string name="audio_codecs">Kodek audio</string>
     <string name="import_watch_history_desc">Diingat bahwa tidak semuanya akan diimpor karena data pengeksporan YouTube yang terbatas.</string>
     <string name="view_count">%1$s tampilan</string>
+    <string name="dialog_play_offline_title">Tersedia versi lokal video.</string>
+    <string name="dialog_play_offline_body">Apakah Anda ingin memutar video dari folder unduhan?</string>
 </resources>
