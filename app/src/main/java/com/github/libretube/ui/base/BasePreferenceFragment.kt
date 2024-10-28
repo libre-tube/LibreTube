@@ -89,7 +89,7 @@ abstract class BasePreferenceFragment : PreferenceFragmentCompat() {
                     .setView(binding.root)
                     .setPositiveButton(android.R.string.ok) { _, _ ->
                         val newValue = binding.input.text.toString()
-                        if (preference is EditNumberPreference && newValue.any { !it.isDigit() }) {
+                        if (preference is EditNumberPreference && newValue.toIntOrNull() == null) {
                             Toast.makeText(context, R.string.invalid_input, Toast.LENGTH_LONG).show()
                             return@setPositiveButton
                         }
