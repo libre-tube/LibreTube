@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.media3.common.Player
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.databinding.QueueBottomSheetBinding
@@ -85,8 +84,8 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
         }
 
         binding.optionsRecycler.setActionListener(
-            swipeDirections = arrayOf(ItemTouchHelper.LEFT),
-            dragDirections = arrayOf(ItemTouchHelper.UP, ItemTouchHelper.DOWN),
+            allowSwipe = true,
+            allowDrag = true,
             onDismissedListener = { position ->
                 if (position == PlayingQueue.currentIndex()) {
                     adapter.notifyItemChanged(position)
