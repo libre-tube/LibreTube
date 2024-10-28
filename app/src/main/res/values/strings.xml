@@ -519,6 +519,7 @@
     <string name="local_ryd_summary">Directly fetch dislike information from https://returnyoutubedislikeapi.com</string>
     <string name="dialog_play_offline_title">A local version of this video is available.</string>
     <string name="dialog_play_offline_body">Would you like to play the video from the download folder?</string>
+    <string name="view_count">%1$s views</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
