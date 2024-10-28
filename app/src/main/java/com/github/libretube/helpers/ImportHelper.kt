@@ -26,6 +26,7 @@ import com.github.libretube.obj.YouTubeWatchHistoryFileItem
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.util.TextUtils
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
 import java.util.stream.Collectors
@@ -164,7 +165,9 @@ object ImportHelper {
                 val playlistFile = activity.contentResolver.openInputStream(uri)?.use { inputStream ->
                     val text = inputStream.bufferedReader().readText()
                     runCatching {
-                        JsonHelper.json.decodeFromString<List<FreeTubeImportPlaylist>>(text)
+                        text.lines().map { line ->
+                            JsonHelper.json.decodeFromString<FreeTubeImportPlaylist>(line)
+                        }
                     }.getOrNull() ?: runCatching {
                         listOf(JsonHelper.json.decodeFromString<FreeTubeImportPlaylist>(text))
                     }.getOrNull()
@@ -263,8 +266,11 @@ object ImportHelper {
             ImportFormat.FREETUBE -> {
                 val playlists = PlaylistsHelper.exportFreeTubePlaylists()
 
+                val freeTubeExportDb = playlists.joinToString("\n") { playlist ->
+                    JsonHelper.json.encodeToString(playlist)
+                }
                 activity.contentResolver.openOutputStream(uri)?.use {
-                    JsonHelper.json.encodeToStream(playlists, it)
+                    it.write(freeTubeExportDb.toByteArray())
                 }
                 activity.toastFromMainDispatcher(R.string.exportsuccess)
             }
