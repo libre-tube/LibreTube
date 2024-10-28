@@ -7,13 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.DialogSubscriptionGroupsBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.SubscriptionGroup
 import com.github.libretube.extensions.move
+import com.github.libretube.extensions.setOnDraggedListener
 import com.github.libretube.ui.adapters.SubscriptionGroupsAdapter
 import com.github.libretube.ui.models.EditChannelGroupsModel
 import kotlinx.coroutines.CoroutineScope
@@ -56,27 +55,10 @@ class ChannelGroupsSheet : ExpandedBottomSheet() {
             dismiss()
         }
 
-        val callback = object : ItemTouchHelper.SimpleCallback(
-            ItemTouchHelper.UP or ItemTouchHelper.DOWN,
-            0
-        ) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                val from = viewHolder.absoluteAdapterPosition
-                val to = target.absoluteAdapterPosition
-                adapter.groups.move(from, to)
-                adapter.notifyItemMoved(from, to)
-                return true
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {}
+        binding.groupsRV.setOnDraggedListener { from, to ->
+            adapter.groups.move(from, to)
+            adapter.notifyItemMoved(from, to)
         }
-
-        val itemTouchHelper = ItemTouchHelper(callback)
-        itemTouchHelper.attachToRecyclerView(binding.groupsRV)
 
         return binding.root
     }
