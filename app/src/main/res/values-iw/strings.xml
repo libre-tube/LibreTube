@@ -547,4 +547,7 @@
     <string name="external_download_provider_summary">נא למלא את שם חבילת היישום לשימוש להורדת סרטונים. יש להשאיר ריק כדי להשתמש במוריד המובנה של LibreTube.</string>
     <string name="local_stream_extraction">חילוץ תזרים מקומי</string>
     <string name="audio_codecs">מפענחי שמע</string>
+    <string name="import_watch_history">ייבוא היסטוריית צפייה</string>
+    <string name="import_watch_history_desc">נא לשים לב שהייבוא יהיה חלקי עקב הנתונים המצומצמים שאפשר לייצא מ־YouTube.</string>
+    <string name="dialog_play_offline_body">לנגן את הסרטון מתיקיית ההורדה?</string>
 </resources>

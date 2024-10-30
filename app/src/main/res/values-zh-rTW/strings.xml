@@ -546,4 +546,6 @@
     <string name="import_watch_history_desc">請注意，由於 YouTube 的匯出資料有限，並非所有內容都會匯入。</string>
     <string name="audio_codecs">音訊編解碼器</string>
     <string name="view_count">%1$s 次觀看</string>
+    <string name="dialog_play_offline_title">此影片有本機版本。</string>
+    <string name="dialog_play_offline_body">您想要播放下載資料夾中的影片嗎？</string>
 </resources>

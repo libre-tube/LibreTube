@@ -546,4 +546,6 @@
     <string name="import_watch_history_desc">注意，由于 YouTube 有限的导入数据不是所有历史都会被导入。</string>
     <string name="audio_codecs">音频编解码器</string>
     <string name="view_count">%1$s 次观看</string>
+    <string name="dialog_play_offline_title">此视频有本地版本可用。</string>
+    <string name="dialog_play_offline_body">你想从“download\"文件夹播放此视频吗？</string>
 </resources>

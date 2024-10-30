@@ -552,4 +552,6 @@
     <string name="import_watch_history_desc">Por favor, tenga en cuenta que no se importará todo debido a los datos de exportación limitados de YouTube.</string>
     <string name="audio_codecs">Códecs de audio</string>
     <string name="view_count">%1$s visualizaciones</string>
+    <string name="dialog_play_offline_body">¿Te gustaría reproducir el video de la carpeta de descarga?</string>
+    <string name="dialog_play_offline_title">Se dispone de una versión local de este vídeo.</string>
 </resources>

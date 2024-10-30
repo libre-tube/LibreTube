@@ -549,4 +549,6 @@
     <string name="local_stream_extraction">Afpökkun staðværs streymis</string>
     <string name="local_stream_extraction_summary">Sækja afspilunarupplýsingar myndskeiðs beint frá YouTube án þess að nota Piped.</string>
     <string name="view_count">%1$s áhorf</string>
+    <string name="dialog_play_offline_title">Staðbundin útgáfa þessa myndskeiðs er tiltæk.</string>
+    <string name="dialog_play_offline_body">Viltu spila þetta myndskeið úr niðurhalsmöppunni?</string>
 </resources>

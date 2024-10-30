@@ -73,10 +73,10 @@
     <string name="retry">𐑮𐑰𐑑𐑮𐑲</string>
     <string name="comments">𐑒𐑪𐑥𐑧𐑯𐑑𐑕</string>
     <string name="replies">𐑮𐑦𐑐𐑤𐑲𐑟</string>
-    <string name="music_songs">·𐑿𐑑 𐑥𐑿𐑟𐑦𐑒 𐑕𐑪𐑙𐑟</string>
-    <string name="music_videos">·𐑿𐑑 𐑥𐑿𐑟𐑦𐑒 𐑝𐑦𐑛𐑦𐑴𐑟</string>
-    <string name="music_playlists">·𐑿𐑑 𐑥𐑿𐑟𐑦𐑒 𐑐𐑤𐑱𐑤𐑦𐑕𐑑𐑕</string>
-    <string name="music_artists">·𐑿𐑑 𐑥𐑿𐑟𐑦𐑒 𐑸𐑑𐑦𐑕𐑑𐑕</string>
+    <string name="music_songs">⸰𐑿𐑑 𐑥𐑿𐑟𐑦𐑒 𐑕𐑪𐑙𐑟</string>
+    <string name="music_videos">⸰𐑿𐑑 𐑥𐑿𐑟𐑦𐑒 𐑝𐑦𐑛𐑦𐑴𐑟</string>
+    <string name="music_playlists">⸰𐑿𐑑 𐑥𐑿𐑟𐑦𐑒 𐑐𐑤𐑱𐑤𐑦𐑕𐑑𐑕</string>
+    <string name="music_artists">⸰𐑿𐑑 𐑥𐑿𐑟𐑦𐑒 𐑸𐑑𐑦𐑕𐑑𐑕</string>
     <string name="sponsorblock">·𐑕𐑐𐑪𐑯𐑕𐑼𐑚𐑤𐑪𐑒</string>
     <string name="segment_skipped">𐑕𐑒𐑦𐑐𐑑 𐑕𐑧𐑜𐑥𐑩𐑯𐑑</string>
     <string name="category_segments">𐑕𐑧𐑜𐑥𐑩𐑯𐑑𐑕</string>
@@ -176,7 +176,7 @@
     <string name="resize_mode_fit">𐑓𐑦𐑑</string>
     <string name="resize_mode_fill">𐑓𐑦𐑤</string>
     <string name="repeat_mode_all">𐑮𐑦𐑐𐑰𐑑 𐑷𐑤</string>
-    <string name="backup_restore">𐑚𐑨𐑒𐑳𐑐 &amp; 𐑮𐑦𐑕𐑑𐑹</string>
+    <string name="backup_restore">𐑚𐑨𐑒𐑳𐑐 𐑯 𐑮𐑦𐑕𐑑𐑹</string>
     <string name="backup">𐑚𐑨𐑒𐑳𐑐</string>
     <string name="picture_in_picture">𐑐𐑦𐑒𐑗𐑼-𐑦𐑯-𐑐𐑦𐑒𐑗𐑼</string>
     <string name="pip">⸰𐑐𐑦𐑐</string>
@@ -231,7 +231,7 @@
     <string name="export_playlists">𐑦𐑒𐑕𐑐𐑹𐑑 𐑐𐑤𐑱𐑤𐑦𐑕𐑑𐑕</string>
     <string name="import_watch_history">𐑦𐑥𐑐𐑹𐑑 𐑢𐑪𐑗 𐑣𐑦𐑕𐑑𐑼𐑦</string>
     <string name="app_backup">𐑨𐑐 𐑚𐑨𐑒𐑳𐑐</string>
-    <string name="backup_restore_summary">𐑦𐑥𐑐𐑹𐑑 &amp; 𐑦𐑒𐑕𐑐𐑹𐑑 𐑕𐑩𐑚𐑕𐑒𐑮𐑦𐑐𐑖𐑩𐑯𐑟, 𐑐𐑤𐑱𐑤𐑦𐑕𐑑𐑕, …</string>
+    <string name="backup_restore_summary">𐑦𐑥𐑐𐑹𐑑 𐑯 𐑦𐑒𐑕𐑐𐑹𐑑 𐑕𐑩𐑚𐑕𐑒𐑮𐑦𐑐𐑖𐑩𐑯𐑟, 𐑐𐑤𐑱𐑤𐑦𐑕𐑑𐑕, …</string>
     <string name="exportsuccess">𐑦𐑒𐑕𐑐𐑹𐑑𐑩𐑛.</string>
     <string name="privacy_alert">𐑐𐑮𐑦𐑝𐑩𐑕𐑦 𐑩𐑤𐑻𐑑</string>
     <string name="username_email">𐑿𐑟𐑦𐑙 𐑩𐑯 𐑰𐑥𐑱𐑤 𐑩𐑛𐑮𐑧𐑕 𐑨𐑟 𐑩 𐑿𐑟𐑼𐑯𐑱𐑥 𐑦𐑟𐑩𐑯\'𐑑 𐑮𐑧𐑒𐑩𐑥𐑧𐑯𐑛𐑩𐑛. ¿𐑐𐑮𐑩𐑕𐑰𐑛 𐑧𐑯𐑦𐑢𐑱?</string>
@@ -254,7 +254,7 @@
     <string name="video_id">𐑝𐑦𐑛𐑦𐑴 ⸰𐑲𐑛</string>
     <string name="copy_tooltip">𐑒𐑪𐑐𐑦</string>
     <string name="playing_next">𐑐𐑤𐑱𐑦𐑙 𐑯𐑧𐑒𐑕𐑑 𐑦𐑯 %1$s</string>
-    <string name="lbry_hls">·𐑤𐑚𐑮𐑦 ⸰𐑣𐑤𐑕</string>
+    <string name="lbry_hls">⸰𐑤𐑚𐑮𐑦 ⸰𐑣𐑤𐑕</string>
     <string name="proxy">𐑐𐑮𐑪𐑒𐑕𐑦</string>
     <string name="disable_proxy">𐑛𐑦𐑕𐑱𐑚𐑩𐑤 ·𐑐𐑲𐑐𐑑 𐑐𐑮𐑪𐑒𐑕𐑦</string>
     <string name="channel_groups">𐑗𐑨𐑯𐑩𐑤 𐑜𐑮𐑵𐑐𐑕</string>
@@ -283,7 +283,7 @@
     <string name="also_clear_watch_positions">𐑷𐑤𐑕𐑴 𐑒𐑤𐑽 𐑢𐑪𐑗 𐑐𐑩𐑟𐑦𐑖𐑩𐑯𐑟</string>
     <string name="import_temp_playlist">¿𐑦𐑥𐑐𐑹𐑑 𐑑𐑧𐑥𐑐𐑼𐑼𐑦 𐑐𐑤𐑱𐑤𐑦𐑕𐑑?</string>
     <string name="import_temp_playlist_summary">¿𐑛𐑵 𐑿 𐑢𐑪𐑯𐑑 𐑑 𐑒𐑮𐑦𐑱𐑑 𐑩 𐑯𐑿 𐑐𐑤𐑱𐑤𐑦𐑕𐑑 𐑯𐑱𐑥𐑛 «%1$s»? 𐑞 𐑐𐑤𐑱𐑤𐑦𐑕𐑑 𐑢𐑦𐑤 𐑒𐑩𐑯𐑑𐑱𐑯 %2$d 𐑝𐑦𐑛𐑦𐑴𐑟.</string>
-    <string name="music_albums">·𐑿𐑑 𐑥𐑿𐑟𐑦𐑒 𐑨𐑤𐑚𐑩𐑥𐑟</string>
+    <string name="music_albums">⸰𐑿𐑑 𐑥𐑿𐑟𐑦𐑒 𐑨𐑤𐑚𐑩𐑥𐑟</string>
     <string name="sponsorblock_summary">𐑿𐑟𐑩𐑟 𐑞 https://sponsor.ajay.app ⸰𐑨𐑐𐑦</string>
     <string name="category_sponsor">𐑕𐑐𐑪𐑯𐑕𐑼</string>
     <string name="yes">𐑘𐑧𐑕</string>
@@ -427,8 +427,8 @@
     <string name="mark_as_watched">𐑥𐑸𐑒 𐑨𐑟 𐑢𐑪𐑗𐑑</string>
     <string name="autoplay_countdown">𐑷𐑑𐑴𐑐𐑤𐑱 𐑒𐑬𐑯𐑑𐑛𐑬𐑯</string>
     <string name="autoplay_countdown_summary">𐑖𐑴 𐑩 5𐑕 𐑒𐑬𐑯𐑑𐑛𐑬𐑯 𐑚𐑦𐑓𐑹 𐑷𐑑𐑴-𐑐𐑤𐑱𐑦𐑙 𐑞 𐑯𐑧𐑒𐑕𐑑 𐑝𐑦𐑛𐑦𐑴</string>
-    <string name="lbry_hls_summary">𐑿𐑟 ·𐑤𐑚𐑮𐑦 ⸰𐑣𐑤𐑕 𐑓 𐑕𐑑𐑮𐑰𐑥𐑦𐑙 𐑦𐑓 𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤</string>
-    <string name="disable_proxy_summary">𐑤𐑴𐑛 𐑝𐑦𐑛𐑦𐑴𐑟 𐑯 𐑦𐑥𐑦𐑡𐑩𐑟 𐑛𐑦𐑮𐑧𐑒𐑑𐑤𐑦 𐑓𐑮𐑪𐑥 ·𐑿𐑑𐑿𐑚\'𐑕 𐑕𐑻𐑝𐑼𐑟. 𐑴𐑯𐑤𐑦 𐑦𐑯𐑱𐑚𐑩𐑤 𐑞 𐑪𐑐𐑖𐑩𐑯 𐑦𐑓 𐑿 𐑷𐑤𐑢𐑱𐑟 𐑿𐑟 𐑩 ⸰𐑝𐑐𐑯</string>
+    <string name="lbry_hls_summary">𐑿𐑟 ⸰𐑤𐑚𐑮𐑦 ⸰𐑣𐑤𐑕 𐑓 𐑕𐑑𐑮𐑰𐑥𐑦𐑙 𐑦𐑓 𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤</string>
+    <string name="disable_proxy_summary">𐑤𐑴𐑛 𐑝𐑦𐑛𐑦𐑴𐑟 𐑯 𐑦𐑥𐑦𐑡𐑩𐑟 𐑛𐑦𐑮𐑧𐑒𐑑𐑤𐑦 𐑓𐑮𐑪𐑥 ·𐑿𐑑𐑿𐑚\'𐑟 𐑕𐑻𐑝𐑼𐑟. 𐑴𐑯𐑤𐑦 𐑦𐑯𐑱𐑚𐑩𐑤 𐑞 𐑪𐑐𐑖𐑩𐑯 𐑦𐑓 𐑿 𐑷𐑤𐑢𐑱𐑟 𐑿𐑟 𐑩 ⸰𐑝𐑐𐑯</string>
     <string name="auto_fullscreen_shorts">𐑷𐑑𐑴 𐑓𐑫𐑤𐑕𐑒𐑮𐑰𐑯 𐑪𐑯 𐑖𐑹𐑑 𐑝𐑦𐑛𐑦𐑴𐑟</string>
     <string name="group_name">𐑜𐑮𐑵𐑐 𐑯𐑱𐑥</string>
     <string name="play_automatically">𐑐𐑤𐑱 𐑷𐑑𐑩𐑥𐑨𐑑𐑦𐑒𐑤𐑦</string>
@@ -502,7 +502,7 @@
     <string name="sb_create_segment">𐑒𐑮𐑦𐑱𐑑 𐑕𐑧𐑜𐑥𐑩𐑯𐑑</string>
     <string name="segment_type">𐑕𐑧𐑜𐑥𐑩𐑯𐑑 𐑑𐑲𐑐</string>
     <string name="sb_invalid_segment">𐑦𐑯𐑝𐑨𐑤𐑦𐑛 𐑕𐑧𐑜𐑥𐑩𐑯𐑑 𐑕𐑑𐑸𐑑 𐑹 𐑧𐑯𐑛</string>
-    <string name="sponsorblock_user_id">·𐑕𐑐𐑪𐑯𐑕𐑼𐑚𐑤𐑪𐑒 𐑿𐑟𐑼⸰𐑲𐑛</string>
+    <string name="sponsorblock_user_id">·𐑕𐑐𐑪𐑯𐑕𐑼𐑚𐑤𐑪𐑒 ⸰𐑿𐑟𐑼𐑲𐑛</string>
     <string name="filename_too_long">¡𐑓𐑲𐑤𐑯𐑱𐑥 𐑦𐑟 𐑑𐑵 𐑤𐑪𐑙!</string>
     <string name="remember_playback_speed">𐑮𐑦𐑥𐑧𐑥𐑚𐑼 𐑐𐑤𐑱𐑚𐑨𐑒 𐑕𐑐𐑰𐑛</string>
     <string name="successfully_removed_from_playlist">𐑕𐑩𐑒𐑕𐑧𐑕𐑓𐑩𐑤𐑦 𐑮𐑦𐑥𐑵𐑝𐑛 «%1$s» 𐑓𐑮𐑪𐑥 𐑞 𐑐𐑤𐑱𐑤𐑦𐑕𐑑.</string>
@@ -549,4 +549,6 @@
     <string name="vote_for_segment">𐑝𐑴𐑑 𐑓 𐑕𐑧𐑜𐑥𐑩𐑯𐑑</string>
     <string name="download_playlist_note">𐑐𐑤𐑰𐑟 𐑕𐑦𐑤𐑧𐑒𐑑 𐑞 𐑥𐑨𐑒𐑕𐑦𐑥𐑩𐑥 𐑷𐑛𐑦𐑴/𐑝𐑦𐑛𐑦𐑴 𐑒𐑢𐑪𐑤𐑦𐑑𐑦 𐑑 𐑛𐑬𐑯𐑤𐑴𐑛. 𐑒𐑨𐑐𐑖𐑩𐑯𐑟 𐑢𐑦𐑤 𐑴𐑯𐑤𐑦 𐑚𐑰 𐑛𐑬𐑯𐑤𐑴𐑛𐑩𐑛 𐑦𐑓 𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤.</string>
     <string name="export_playlists_to">𐑦𐑒𐑕𐑐𐑹𐑑 𐑐𐑤𐑱𐑤𐑦𐑕𐑑𐑕 𐑑</string>
+    <string name="dialog_play_offline_title">𐑩 𐑤𐑴𐑒𐑩𐑤 𐑝𐑻𐑠𐑩𐑯 𐑝 𐑞𐑦𐑕 𐑝𐑦𐑛𐑦𐑴 𐑦𐑟 𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤.</string>
+    <string name="dialog_play_offline_body">¿𐑢𐑫𐑛 𐑿 𐑤𐑲𐑒 𐑑 𐑐𐑤𐑱 𐑞 𐑝𐑦𐑛𐑦𐑴 𐑓𐑮𐑪𐑥 𐑞 𐑛𐑬𐑯𐑤𐑴𐑛 𐑓𐑴𐑤𐑛𐑼?</string>
 </resources>

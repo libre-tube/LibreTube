@@ -552,4 +552,6 @@
     <string name="import_watch_history_desc">Имајте на уму да неће све бити увезено због YouTube-ових ограничених података за извоз.</string>
     <string name="audio_codecs">Аудио кодеци</string>
     <string name="view_count">%1$s прегледа</string>
+    <string name="dialog_play_offline_title">Доступна је локална верзија овог видео снимка.</string>
+    <string name="dialog_play_offline_body">Желите ли да пустите видео снимак из фолдера преузимања?</string>
 </resources>

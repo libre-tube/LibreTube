@@ -549,4 +549,6 @@
     <string name="import_watch_history_desc">Моля, обърнете внимание, че не всички данни ще бъдат внесени поради ограничения обем на изнесените данни от YouTube.</string>
     <string name="audio_codecs">Аудио кодеци</string>
     <string name="view_count">%1$s изгледи</string>
+    <string name="dialog_play_offline_body">Искате ли да изпълните видеото от папката за изтегляне?</string>
+    <string name="dialog_play_offline_title">Налична е локална версия на това видео.</string>
 </resources>

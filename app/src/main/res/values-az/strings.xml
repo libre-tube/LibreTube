@@ -549,4 +549,6 @@
     <string name="import_watch_history_desc">Nəzərə alın ki, YouTube-un məhdud ixrac məlumatına görə hər şey idxal edilməyəcək.</string>
     <string name="audio_codecs">Səs kodlayıcılar</string>
     <string name="view_count">%1$s baxış</string>
+    <string name="dialog_play_offline_title">Bu videonun yerli versiyası mövcuddur.</string>
+    <string name="dialog_play_offline_body">Videonu yükləmə qovluğundan oynatmaq istərdinizmi?</string>
 </resources>
