@@ -537,7 +537,7 @@
     <string name="external_download_provider">Penyedia unduhan eksternal</string>
     <string name="external_download_provider_summary">Masukkan nama paket apli yang Anda ingin gunakan untuk mengunduh video. Biarkan kosong untuk menggunakan pengunduh bawaan LibreTube.</string>
     <string name="import_watch_history">Impor riwayat tontonan</string>
-    <string name="local_ryd">Return YouTube Dislikes lokal</string>
+    <string name="local_ryd">Pengekstrak Return YouTube Dislikes lokal</string>
     <string name="local_ryd_summary">Dapatkan informasi tidak suka secara langsung dari https://returnyoutubedislikeapi.com</string>
     <string name="pip">PiP</string>
     <string name="screenshot">Tangkapan layar</string>
