@@ -83,7 +83,7 @@ class PlaylistAdapter(
             videoInfo.text = streamItem.uploaderName
             channelImage.isGone = true
 
-            thumbnailDuration.setFormattedDuration(streamItem.duration!!, streamItem.isShort)
+            thumbnailDuration.setFormattedDuration(streamItem.duration ?: -1, streamItem.isShort)
 
             ImageHelper.loadImage(streamItem.thumbnail, thumbnail)
 
@@ -115,7 +115,7 @@ class PlaylistAdapter(
                 videoInfo.updatePadding(top = extraPadding, bottom = extraPadding)
             }
 
-            watchProgress.setWatchProgressLength(videoId, streamItem.duration)
+            streamItem.duration?.let { watchProgress.setWatchProgressLength(videoId, it) }
         }
     }
 
