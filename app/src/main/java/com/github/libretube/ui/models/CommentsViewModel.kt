@@ -15,18 +15,20 @@ import kotlinx.coroutines.flow.flatMapLatest
 
 class CommentsViewModel : ViewModel() {
     val videoIdLiveData = MutableLiveData<String>()
-    val commentCountLiveData = MutableLiveData<Long>()
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val commentsFlow = videoIdLiveData.asFlow()
         .flatMapLatest {
             Pager(PagingConfig(pageSize = 20, enablePlaceholders = false)) {
                 CommentPagingSource(it) {
-                    commentCountLiveData.updateIfChanged(it)
+                    _commentCountLiveData.updateIfChanged(it)
                 }
             }.flow
         }
         .cachedIn(viewModelScope)
+
+    private val _commentCountLiveData = MutableLiveData<Long>()
+    val commentCountLiveData: LiveData<Long> = _commentCountLiveData
 
     val commentSheetExpand = MutableLiveData<Boolean?>()
 

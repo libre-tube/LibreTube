@@ -57,14 +57,20 @@ class CommentsMainFragment : Fragment() {
             viewModel.setCommentsPosition(POSITION_START)
         }
 
-        scrollListener = ViewTreeObserver.OnScrollChangedListener {
-            // save the last scroll position to become used next time when the sheet is opened
-            viewModel.setCommentsPosition(layoutManager.findFirstVisibleItemPosition())
+        var restoredScrollPosition = viewModel.currentCommentsPosition.value == 0
+        binding.commentsRV.viewTreeObserver.addOnScrollChangedListener {
             // hide or show the scroll to top button
             commentsSheet?.binding?.btnScrollToTop?.isVisible =
                 viewModel.currentCommentsPosition.value != 0
+
+            val firstVisiblePosition = layoutManager.findFirstVisibleItemPosition()
+            if (!restoredScrollPosition) {
+                restoredScrollPosition = firstVisiblePosition >= (viewModel.currentCommentsPosition.value ?: 0)
+                return@addOnScrollChangedListener
+            }
+
+            viewModel.setCommentsPosition(firstVisiblePosition)
         }
-        binding.commentsRV.viewTreeObserver.addOnScrollChangedListener(scrollListener)
 
         commentsSheet?.updateFragmentInfo(false, getString(R.string.comments))
 
@@ -73,7 +79,10 @@ class CommentsMainFragment : Fragment() {
             viewModel.videoIdLiveData.value ?: return,
             requireArguments().getString(IntentData.channelAvatar) ?: return,
             handleLink = {
-                setFragmentResult(CommentsSheet.HANDLE_LINK_REQUEST_KEY, bundleOf(IntentData.url to it))
+                setFragmentResult(
+                    CommentsSheet.HANDLE_LINK_REQUEST_KEY,
+                    bundleOf(IntentData.url to it)
+                )
             }
         ) {
             setFragmentResult(CommentsSheet.DISMISS_SHEET_REQUEST_KEY, bundleOf())
@@ -81,8 +90,6 @@ class CommentsMainFragment : Fragment() {
         binding.commentsRV.adapter = commentPagingAdapter
 
         viewLifecycleOwner.lifecycleScope.launch {
-            var restoredScrollPosition = false
-
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     commentPagingAdapter.loadStateFlow.collect {
@@ -94,7 +101,6 @@ class CommentsMainFragment : Fragment() {
                                     binding.commentsRV.scrollToPosition(position)
                                 }
                             }
-                            restoredScrollPosition = true
                         }
 
                         if (it.append is LoadState.NotLoading && it.append.endOfPaginationReached && commentPagingAdapter.itemCount == 0) {
