@@ -546,7 +546,7 @@
     <string name="pip">PiP</string>
     <string name="local_stream_extraction_summary">Директно прикупљање информација о репродукцији видео снимака са YouTube-а без коришћења Piped-а.</string>
     <string name="local_stream_extraction">Прикупљање локалног стрима</string>
-    <string name="local_ryd">Локални Return Youtube Dislike</string>
+    <string name="local_ryd">Локални издвајач Return YouTube Dislike</string>
     <string name="local_ryd_summary">Директно прикупљање информација о несвиђањима с https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Увоз историје гледања</string>
     <string name="import_watch_history_desc">Имајте на уму да неће све бити увезено због YouTube-ових ограничених података за извоз.</string>
