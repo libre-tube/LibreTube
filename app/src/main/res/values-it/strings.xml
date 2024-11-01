@@ -547,7 +547,7 @@
     <string name="local_stream_extraction">Estrazione locale del video</string>
     <string name="local_stream_extraction_summary">Recupera le informazioni video direttamente da YouTube senza usare Piped.</string>
     <string name="local_ryd_summary">Recupera i \"non mi piace\" direttamente da https://returnyoutubedislikeapi.com</string>
-    <string name="local_ryd">Return Youtube Dislike in locale</string>
+    <string name="local_ryd">Estrattore Return Youtube Dislike in locale</string>
     <string name="import_watch_history">Importa cronologia di visualizzazione</string>
     <string name="import_watch_history_desc">Nota che non tutto verrà importato a causa dei dati limitati esportati da YouTube.</string>
     <string name="audio_codecs">Codec audio</string>
