@@ -543,7 +543,7 @@
     <string name="pip">PiP</string>
     <string name="local_stream_extraction">Töötle meediavoogu kohalikus seadmes</string>
     <string name="local_stream_extraction_summary">Kasuta YouTube\'i meediavoo töötlemiseks kohalikku seadet, mitte Pipedi teenust.</string>
-    <string name="local_ryd">Kuva Youtube\'i mittemeeldimised oma seadmes</string>
+    <string name="local_ryd">Kohalik Youtube\'i mittemeeldimiste ekstraktor</string>
     <string name="local_ryd_summary">Laadi Youtube\'i mittemeeldimiste teave teenusest https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Impordi vaatamiste ajalugu</string>
     <string name="import_watch_history_desc">Kuna YouTube piirab eksporditavaid andmeid, siis palun arvesta, et kõike ei õnnestu importida.</string>

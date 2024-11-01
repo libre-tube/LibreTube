@@ -23,7 +23,7 @@
     <string name="server_error">Parece que existe um problema com o servidor selecionado. Tente outra instância.</string>
     <string name="unknown_error">Erro de Rede.</string>
     <string name="error">Algo deu errado.</string>
-    <string name="empty">Digite seu Usuário e a Senha.</string>
+    <string name="empty">Digite seu nome de usuário e a senha.</string>
     <string name="notgmail">Isto é para uma conta Piped</string>
     <string name="defres">Resolução dos vídeos</string>
     <string name="grid">Colunas da grade (modo retrato)</string>
@@ -546,12 +546,12 @@
     <string name="pip">PiP</string>
     <string name="local_stream_extraction">Extrair informações do vídeo localmente</string>
     <string name="local_stream_extraction_summary">Obtenha informações sobre a reprodução do vídeo diretamente do YouTube sem usar o Piped.</string>
-    <string name="local_ryd">Habilitar \'Return Youtube Dislikes\'</string>
+    <string name="local_ryd">Habilitar \'Return Youtube Dislike\'</string>
     <string name="local_ryd_summary">Obtenha informações de \"Não gostei\" diretamente em https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Importar histórico de exibição</string>
     <string name="import_watch_history_desc">Observe que nem tudo será importado devido à limitação de dados de exportação do YouTube.</string>
     <string name="audio_codecs">Codecs de áudio</string>
     <string name="view_count">%1$s visualizações</string>
     <string name="dialog_play_offline_title">Uma versão local desse vídeo está disponível.</string>
-    <string name="dialog_play_offline_body">Gostaria de reproduzir o vídeo da pasta de download?</string>
+    <string name="dialog_play_offline_body">Gostaria de reproduzir o vídeo a partir da pasta de downloads?</string>
 </resources>

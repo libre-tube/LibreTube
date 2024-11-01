@@ -550,7 +550,7 @@
     <string name="pip">PiP</string>
     <string name="local_stream_extraction">Видобування локального потоку</string>
     <string name="local_stream_extraction_summary">Безпосередньо отримувати інформацію про відтворення відео з YouTube без використання Piped.</string>
-    <string name="local_ryd">Локальне повернення дизлайків на Youtube</string>
+    <string name="local_ryd">Локальний видобувач «Повернення дизлайків на Youtube»</string>
     <string name="local_ryd_summary">Безпосередньо отримайте інформацію про дизлайки на сайті https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Імпорт історії перегляду</string>
     <string name="import_watch_history_desc">Зауважте, що не все буде імпортовано через обмеженість експортних даних YouTube.</string>
