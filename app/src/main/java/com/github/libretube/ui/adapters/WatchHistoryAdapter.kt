@@ -54,7 +54,8 @@ class WatchHistoryAdapter(
         holder.binding.apply {
             videoTitle.text = video.title
             channelName.text = video.uploader
-            videoInfo.text = video.uploadDate?.let { TextUtils.localizeDate(it) }
+            videoInfo.text =
+                video.uploadDate?.takeIf { !video.isLive }?.let { TextUtils.localizeDate(it) }
             ImageHelper.loadImage(video.thumbnailUrl, thumbnail)
 
             if (video.duration != null) {
