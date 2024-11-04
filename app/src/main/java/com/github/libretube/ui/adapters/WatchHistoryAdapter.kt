@@ -92,7 +92,10 @@ class WatchHistoryAdapter(
                 true
             }
 
-            if (video.duration != null) watchProgress.setWatchProgressLength(video.videoId, video.duration)
+            if (video.duration != null) watchProgress.setWatchProgressLength(
+                video.videoId,
+                video.duration
+            )
         }
     }
 }

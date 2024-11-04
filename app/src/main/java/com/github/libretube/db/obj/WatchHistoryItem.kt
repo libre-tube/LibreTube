@@ -21,6 +21,8 @@ data class WatchHistoryItem(
     @ColumnInfo val duration: Long? = null,
     @ColumnInfo val isShort: Boolean = false
 ) {
+    val isLive get() = (duration == null) || (duration <= 0L)
+
     fun toStreamItem() = StreamItem(
         url = videoId,
         type = StreamItem.TYPE_STREAM,

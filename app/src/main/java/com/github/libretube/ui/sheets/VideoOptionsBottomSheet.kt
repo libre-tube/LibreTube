@@ -52,6 +52,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
         }
 
         optionsList += listOf(R.string.addToPlaylist, R.string.download, R.string.share)
+        if (streamItem.isLive) optionsList.remove(R.string.download)
 
         setSimpleItems(optionsList.map { getString(it) }) { which ->
             when (optionsList[which]) {
