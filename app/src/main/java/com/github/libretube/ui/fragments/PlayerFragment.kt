@@ -1136,6 +1136,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 streams.uploaderSubscriberCount.formatShort()
             )
             player.isLive = streams.livestream
+            relPlayerDownload.isVisible = !streams.livestream
         }
         playerBinding.exoTitle.text = streams.title
 
