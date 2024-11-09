@@ -384,4 +384,19 @@
     </plurals>
     <string name="unsupported_file_format">अनसपोर्टेड फाइल फॉर्मेट: %1$s</string>
     <string name="pip">PiP</string>
+    <string name="finished">पूर्ण झाले</string>
+    <string name="delete_all">सर्व डाउनलोड्स डिलीट होतील!</string>
+    <string name="albums">अल्बम्स</string>
+    <string name="show_updates">आपोआप अपडेट तपासा</string>
+    <string name="best_quality">सर्वोत्तम</string>
+    <string name="suggest_change_instance">लोडिंग नेहमीपेक्षा जास्त वेळ घेत आहे, इन्स्टन्स बदलून बघा</string>
+    <string name="music_artists">YT संगीत कलाकार</string>
+    <string name="category_highlight">व्हिडिओ हायलाइट दाखवा</string>
+    <string name="show_stream_thumbnails_summary">नवीन स्ट्रीम थंबनेल्स दाखवा. ह्याद्वारे अतिरिक्त डेटा वापरला जाईल</string>
+    <string name="stop">थांबा</string>
+    <string name="repeat_mode_all">सर्व पुन्हा करा</string>
+    <string name="donate">दान</string>
+    <string name="show_stream_thumbnails">थंबनेल्स स्ट्रीम दाखवा</string>
+    <string name="comments_count">कंमेन्ट्स %1$s</string>
+    <string name="change_instance">इन्स्टन्स बदला</string>
 </resources>

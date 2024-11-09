@@ -546,7 +546,7 @@
     <string name="pip">PiP</string>
     <string name="local_stream_extraction">Extraction de flux locaux</string>
     <string name="local_stream_extraction_summary">Récupérer directement les informations de lecture vidéo de YouTube sans utiliser Piped.</string>
-    <string name="local_ryd">Extracteur Retour Youtube Dislike local</string>
+    <string name="local_ryd">Extracteur Return Youtube Dislike local</string>
     <string name="local_ryd_summary">Récupérer les mentions « Je n’aime pas » de https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Importer l’historique des vidéos regardées</string>
     <string name="import_watch_history_desc">Veuillez noter que tout ne sera pas importé en raison des données d’exportation limitées de YouTube.</string>
