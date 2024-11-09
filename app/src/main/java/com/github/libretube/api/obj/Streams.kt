@@ -49,6 +49,8 @@ data class Streams(
     val uploaderSubscriberCount: Long = 0,
     val previewFrames: List<PreviewFrames> = emptyList()
 ) {
+    val isLive = livestream || duration <= 0
+
     fun toDownloadItems(downloadData: DownloadData): List<DownloadItem> {
         val (id, name, videoFormat, videoQuality, audioFormat, audioQuality, audioTrackLocale, subCode) = downloadData
         val items = mutableListOf<DownloadItem>()
