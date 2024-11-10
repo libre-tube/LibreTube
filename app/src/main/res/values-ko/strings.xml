@@ -51,9 +51,9 @@
     <string name="changeLanguage">언어</string>
     <string name="systemLanguage">시스템</string>
     <string name="subscribers">구독자 %1$s명</string>
-    <string name="lightTheme">라이트</string>
+    <string name="lightTheme">밝은</string>
     <string name="library">라이브러리</string>
-    <string name="darkTheme">다크</string>
+    <string name="darkTheme">어두운</string>
     <string name="systemDefault">시스템</string>
     <string name="retry">재시도</string>
     <string name="comments">댓글</string>
@@ -64,15 +64,15 @@
     <string name="settings">설정</string>
     <string name="instance">인스턴스</string>
     <string name="website">웹사이트</string>
-    <string name="category_sponsor_summary">유료 프로모션, 유료 추천 및 직접 광고가 해당됩니다. 자기 홍보나 재료/제작자/웹사이트/제품에 대한 공인된 무료 홍보물은 포함되지 않습니다</string>
+    <string name="category_sponsor_summary">유료 프로모션, 유료 추천 및 직접 광고가 해당됩니다. 자기 홍보이거나 사회공헌, 크리에이터, 웹사이트, 상품에 대한 무료 홍보는 해당하지 않습니다</string>
     <string name="segment_skipped">건너뛴 구간</string>
     <string name="category_segments">구간</string>
     <string name="category_sponsor">스폰서</string>
-    <string name="category_interaction_summary">콘텐츠 중간에 좋아요, 구독 또는 팔로우하라는 짧은 리마인더가 있을 때 사용합니다. 길거나 특정한 것에 관한 부분은 이 분류가 아닌 자기 홍보 분류에 해당합니다</string>
+    <string name="category_interaction_summary">콘텐츠 중간에 좋아요, 구독 또는 팔로우하라는 짧은 리마인더가 있을 때 사용합니다. 길이가 길거나 특정한 것에 관한 홍보는 이 분류가 아닌 자기 홍보 분류에 해당합니다</string>
     <string name="channels">채널</string>
     <string name="history">기록</string>
     <string name="music_albums">유튜브 뮤직 앨범</string>
-    <string name="category_selfpromo_summary">\"스폰서\"와 유사하지만 무료 홍보 또는 자기 홍보 구간입니다. 여기에는 협업자에 대한 정보, 상품, 기부에 대한 부분이 포함됩니다</string>
+    <string name="category_selfpromo_summary">\"스폰서\"와 유사하지만, 무료 홍보 또는 자기 홍보인 구간입니다. 여기에는 협업자에 대한 정보, 상품, 기부에 대한 부분이 포함됩니다</string>
     <string name="all">모두</string>
     <string name="sponsorblock_summary">https://sponsor.ajay.app API를 사용합니다</string>
     <string name="category_selfpromo">무료 홍보/자기 홍보</string>
@@ -86,7 +86,7 @@
     <string name="sponsorblock">SponsorBlock</string>
     <string name="category_interaction">상호작용 알림(좋아요 및 구독)</string>
     <string name="category_intro">전환/인트로 애니메이션</string>
-    <string name="category_intro_summary">실제 내용이 없는 간격입니다. 일시정지, 정적 프레임, 반복되는 애니메이션이 될 수 있습니다. 정보가 포함된 전환에는 사용하면 안 됩니다</string>
+    <string name="category_intro_summary">실제 내용이 없는 구간입니다. 일시정지, 정적 프레임, 반복되는 애니메이션이 될 수 있습니다. 정보가 포함된 전환에는 사용하면 안 됩니다</string>
     <string name="category_outro">엔드카드 및 크레딧</string>
     <string name="category_outro_summary">엔딩 이후의 정보. 정보가 포함된 결론은 제외됩니다</string>
     <string name="license">라이선스</string>
@@ -129,7 +129,7 @@
     <string name="version">버전 %1$s</string>
     <string name="category_music_offtopic">음악: 비음악 섹션</string>
     <string name="category_preview">미리보기/요약</string>
-    <string name="category_preview_summary">추가 정보 없이 향후 콘텐츠를 설명하는 구간. 이 구간에만 표시되는 영상이라면 잘못된 카테고리일 가능성이 큽니다</string>
+    <string name="category_preview_summary">추가 정보 없이 이후 콘텐츠를 설명하는 구간. 이 구간에만 표시되는 내용이라면 잘못된 카테고리일 가능성이 큽니다</string>
     <string name="category_music_offtopic_summary">뮤직 비디오에서만 사용합니다. 영상 중 공식 음원에 포함되지 않은 부분이 해당합니다. 최종적으로 영상은 Spotify 또는 기타 믹스와 최대한 유사하거나, 대화 또는 기타 방해 요소를 줄여야 합니다</string>
     <string name="buffering_goal_summary">최대 버퍼링할 비디오의 시간(초)입니다</string>
     <string name="playerVideoFormat">플레이어의 동영상 형식</string>
@@ -415,7 +415,7 @@
     <string name="choose_instance">먼저 인스턴스를 선택하세요!</string>
     <string name="change_playlist_description">재생목록 설명 변경</string>
     <string name="playlist_description">재생목록 설명</string>
-    <string name="emptyPlaylistDescription">재생목록 설명은 빈 칸으로 둘 수 없습니다</string>
+    <string name="emptyPlaylistDescription">재생목록 설명은 비워둘 수 없습니다</string>
     <string name="automatic">자동</string>
     <string name="color">색상</string>
     <string name="proxy">프록시</string>

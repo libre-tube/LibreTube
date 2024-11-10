@@ -546,9 +546,8 @@
     <string name="audio_codecs">Audiocodecs</string>
     <string name="import_watch_history">Wiedergabe-Verlauf importieren</string>
     <string name="import_watch_history_desc">Bitte beachten Sie, dass aufgrund der begrenzten Exportdaten von YouTube nicht alles importiert werden kann.</string>
-    <string name="local_ryd">Lokale Rückgabe von Youtube Dislikes</string>
     <string name="local_ryd_summary">Dislikes direkt von https://returnyoutubedislikeapi.com abfragen</string>
     <string name="dialog_play_offline_title">Eine lokale Version des Videos ist nicht verfügbar.</string>
-    <string name="dialog_play_offline_body">Möchtest du das Video aus dem download -Ordner abspielen?</string>
-    <string name="view_count">"%1$s  Aufrufe"</string>
+    <string name="dialog_play_offline_body">Möchtest du das Video aus dem Download-Ordner abspielen?</string>
+    <string name="view_count">%1$s Aufrufe</string>
 </resources>
