@@ -551,4 +551,5 @@
     <string name="view_count">%1$s baxış</string>
     <string name="dialog_play_offline_title">Bu videonun yerli versiyası mövcuddur.</string>
     <string name="dialog_play_offline_body">Videonu yükləmə qovluğundan oynatmaq istərdinizmi?</string>
+    <string name="upcoming">Yaxınlaşan</string>
 </resources>
