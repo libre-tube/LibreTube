@@ -83,7 +83,7 @@ class PlaylistAdapter(
             videoInfo.text = streamItem.uploaderName
             channelImage.isGone = true
 
-            thumbnailDuration.setFormattedDuration(streamItem.duration ?: -1, streamItem.isShort)
+            thumbnailDuration.setFormattedDuration(streamItem.duration ?: -1, streamItem.isShort, streamItem.uploaded)
 
             ImageHelper.loadImage(streamItem.thumbnail, thumbnail)
 

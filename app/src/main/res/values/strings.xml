@@ -134,6 +134,7 @@
     <string name="appearance_summary">Adjust the app to your liking</string>
     <string name="advanced_summary">Downloads, and reset</string>
     <string name="live">Live</string>
+    <string name="upcoming">Upcoming</string>
     <string name="shareTo">Share URL to</string>
     <string name="normal_views">%1$s views%2$s</string>
     <string name="defaultIcon">Default</string>

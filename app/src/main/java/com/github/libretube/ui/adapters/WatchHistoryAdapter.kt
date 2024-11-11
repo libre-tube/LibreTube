@@ -59,7 +59,8 @@ class WatchHistoryAdapter(
             ImageHelper.loadImage(video.thumbnailUrl, thumbnail)
 
             if (video.duration != null) {
-                thumbnailDuration.setFormattedDuration(video.duration, null)
+                // we pass in 0 for the uploadDate, as a future video cannot be watched already
+                thumbnailDuration.setFormattedDuration(video.duration, null, 0)
             } else {
                 thumbnailDurationCard.isGone = true
             }
