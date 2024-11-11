@@ -29,6 +29,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.BuildConfig
 import com.github.libretube.NavDirections
 import com.github.libretube.R
 import com.github.libretube.compat.PictureInPictureCompat
@@ -153,7 +154,8 @@ class MainActivity : BaseActivity() {
 
         // handle error logs
         PreferenceHelper.getErrorLog().ifBlank { null }?.let {
-            ErrorDialog().show(supportFragmentManager, null)
+            if (!BuildConfig.DEBUG)
+                ErrorDialog().show(supportFragmentManager, null)
         }
 
         setupSubscriptionsBadge()
