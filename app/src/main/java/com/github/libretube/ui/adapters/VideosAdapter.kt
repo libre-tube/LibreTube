@@ -112,7 +112,7 @@ class VideosAdapter(
             textViewTitle.text = video.title
             textViewChannel.text = TextUtils.formatViewsString(root.context, video.views ?: -1, video.uploaded, video.uploaderName)
 
-            video.duration?.let { thumbnailDuration.setFormattedDuration(it, video.isShort) }
+            video.duration?.let { thumbnailDuration.setFormattedDuration(it, video.isShort, video.uploaded) }
             channelImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, video.uploaderUrl)
             }
@@ -141,7 +141,7 @@ class VideosAdapter(
             videoTitle.text = video.title
             videoInfo.text = TextUtils.formatViewsString(root.context, video.views ?: -1, video.uploaded)
 
-            thumbnailDuration.text = video.duration?.let { DateUtils.formatElapsedTime(it) }
+            video.duration?.let { thumbnailDuration.setFormattedDuration(it, video.isShort, video.uploaded) }
             ImageHelper.loadImage(video.thumbnail, thumbnail)
 
             if (forceMode != LayoutMode.CHANNEL_ROW) {

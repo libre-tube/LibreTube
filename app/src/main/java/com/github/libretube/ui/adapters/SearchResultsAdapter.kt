@@ -80,7 +80,7 @@ class SearchResultsAdapter(
     private fun bindVideo(item: ContentItem, binding: VideoRowBinding, position: Int) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, thumbnail)
-            thumbnailDuration.setFormattedDuration(item.duration, item.isShort)
+            thumbnailDuration.setFormattedDuration(item.duration, item.isShort, item.uploaded)
             videoTitle.text = item.title
             videoInfo.text = TextUtils.formatViewsString(root.context, item.views, item.uploaded)
 
