@@ -563,4 +563,5 @@
     <string name="view_count">مشاهدات %1$s</string>
     <string name="dialog_play_offline_title">تتوفر نسخة محلية من هذا الفيديو.</string>
     <string name="dialog_play_offline_body">هل ترغب في تشغيل الفيديو من مجلد التنزيل ؟</string>
+    <string name="upcoming">القادمة</string>
 </resources>
