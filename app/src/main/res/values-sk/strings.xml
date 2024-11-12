@@ -554,4 +554,5 @@
     <string name="view_count">%1$s zobrazení</string>
     <string name="dialog_play_offline_title">Dostupná je lokálna verzia tohto videa.</string>
     <string name="dialog_play_offline_body">Chcete si prehrať stiahnuté video?</string>
+    <string name="upcoming">Čosko</string>
 </resources>
