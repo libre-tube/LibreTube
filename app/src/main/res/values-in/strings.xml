@@ -548,4 +548,5 @@
     <string name="view_count">%1$s tampilan</string>
     <string name="dialog_play_offline_title">Tersedia versi lokal video.</string>
     <string name="dialog_play_offline_body">Apakah Anda ingin memutar video dari folder unduhan?</string>
+    <string name="upcoming">Akan datang</string>
 </resources>
