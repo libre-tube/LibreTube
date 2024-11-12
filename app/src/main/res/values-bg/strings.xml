@@ -551,4 +551,5 @@
     <string name="view_count">%1$s изгледи</string>
     <string name="dialog_play_offline_body">Искате ли да изпълните видеото от папката за изтегляне?</string>
     <string name="dialog_play_offline_title">Налична е локална версия на това видео.</string>
+    <string name="upcoming">Предстоящ</string>
 </resources>
