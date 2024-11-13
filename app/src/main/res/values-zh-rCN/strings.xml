@@ -548,4 +548,5 @@
     <string name="view_count">%1$s 次观看</string>
     <string name="dialog_play_offline_title">此视频有本地版本可用。</string>
     <string name="dialog_play_offline_body">你想从“download\"文件夹播放此视频吗？</string>
+    <string name="upcoming">即将到来</string>
 </resources>
