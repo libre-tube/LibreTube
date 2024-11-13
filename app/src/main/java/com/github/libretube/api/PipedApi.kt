@@ -43,7 +43,8 @@ interface PipedApi {
     @GET("sponsors/{videoId}")
     suspend fun getSegments(
         @Path("videoId") videoId: String,
-        @Query("category") category: String
+        @Query("category") category: String,
+        @Query("actionType") actionType: String? = null
     ): SegmentData
 
     @GET("dearrow")

@@ -25,4 +25,8 @@ data class Segment(
     @Transient
     @IgnoredOnParcel
     val segmentStartAndEnd = FloatFloatPair(segment[0], segment[1])
+
+    companion object {
+        const val TYPE_FULL = "full"
+    }
 }

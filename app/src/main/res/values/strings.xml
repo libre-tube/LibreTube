@@ -107,6 +107,7 @@
     <string name="category_preview_summary">For segments detailing future content without additional info. If it includes clips that only appear here, this is very likely the wrong category</string>
     <string name="category_highlight">Show video highlight</string>
     <string name="category_highlight_summary">Could either be the advertised title, the thumbnail or the most interesting part of the video. You can skip to it by tapping on it in the chapters section</string>
+    <string name="category_exclusive_access">Exclusive Access</string>
     <string name="license">License</string>
     <string name="color_accent">Accents</string>
     <string name="color_red">Resting red</string>

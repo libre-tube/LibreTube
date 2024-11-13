@@ -212,7 +212,8 @@ open class OnlinePlayerService : AbstractPlayerService() {
             if (sponsorBlockConfig.isEmpty()) return@runCatching
             sponsorBlockSegments = RetrofitInstance.api.getSegments(
                 videoId,
-                JsonHelper.json.encodeToString(sponsorBlockConfig.keys)
+                JsonHelper.json.encodeToString(sponsorBlockConfig.keys),
+                """["skip","mute","full","poi","chapter"]"""
             ).segments
 
             withContext(Dispatchers.Main) {

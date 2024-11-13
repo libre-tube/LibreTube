@@ -9,6 +9,23 @@
     android:paddingVertical="12dp">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/player_sponsor_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="false"
+            android:visibility="gone"
+            android:text="Sponsor"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/player_title_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
