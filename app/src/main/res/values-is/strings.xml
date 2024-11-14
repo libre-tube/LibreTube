@@ -551,4 +551,5 @@
     <string name="view_count">%1$s áhorf</string>
     <string name="dialog_play_offline_title">Staðbundin útgáfa þessa myndskeiðs er tiltæk.</string>
     <string name="dialog_play_offline_body">Viltu spila þetta myndskeið úr niðurhalsmöppunni?</string>
+    <string name="upcoming">Á næstunni</string>
 </resources>
