@@ -598,7 +598,7 @@ object PlayerHelper {
      * @param segments List of the SponsorBlock segments
      * @return If segment found and should skip manually, the end position of the segment in ms, otherwise null
      */
-    fun ExoPlayer.checkForSegments(
+    fun Player.checkForSegments(
         context: Context,
         segments: List<Segment>,
         sponsorBlockConfig: MutableMap<String, SbSkipOptions>
@@ -633,7 +633,7 @@ object PlayerHelper {
         return null
     }
 
-    fun ExoPlayer.isInSegment(segments: List<Segment>): Boolean {
+    fun Player.isInSegment(segments: List<Segment>): Boolean {
         return segments.any {
             val (start, end) = it.segmentStartAndEnd
             val (segmentStart, segmentEnd) = (start * 1000f).toLong() to (end * 1000f).toLong()
@@ -835,7 +835,7 @@ object PlayerHelper {
         else -> R.drawable.ic_play
     }
 
-    fun saveWatchPosition(player: ExoPlayer, videoId: String) {
+    fun saveWatchPosition(player: Player, videoId: String) {
         if (player.duration == C.TIME_UNSET || player.currentPosition in listOf(0L, C.TIME_UNSET)) {
             return
         }

@@ -1,5 +1,6 @@
 package com.github.libretube.api.obj
 
+import android.os.Parcelable
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
 import com.github.libretube.helpers.ProxyHelper
@@ -8,18 +9,22 @@ import com.github.libretube.parcelable.DownloadData
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import kotlinx.parcelize.IgnoredOnParcel
+import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.io.path.Path
 
 @Serializable
+@Parcelize
 data class Streams(
     var title: String,
     val description: String,
 
     @Serializable(SafeInstantSerializer::class)
     @SerialName("uploadDate")
-    val uploadTimestamp: Instant?,
+    @IgnoredOnParcel
+    val uploadTimestamp: Instant? = null,
     val uploaded: Long? = null,
 
     val uploader: String,
@@ -48,7 +53,8 @@ data class Streams(
     val chapters: List<ChapterSegment> = emptyList(),
     val uploaderSubscriberCount: Long = 0,
     val previewFrames: List<PreviewFrames> = emptyList()
-) {
+): Parcelable {
+    @IgnoredOnParcel
     val isLive = livestream || duration <= 0
 
     fun toDownloadItems(downloadData: DownloadData): List<DownloadItem> {

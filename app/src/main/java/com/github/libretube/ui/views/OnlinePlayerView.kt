@@ -14,7 +14,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.media3.common.C
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
-import androidx.media3.exoplayer.trackselection.TrackSelector
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
@@ -29,7 +28,6 @@ import com.github.libretube.ui.dialogs.SubmitSegmentDialog
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.models.CommonPlayerViewModel
 import com.github.libretube.ui.models.PlayerViewModel
-import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.util.PlayingQueue
 
 @UnstableApi
@@ -40,7 +38,6 @@ class OnlinePlayerView(
     private var playerOptions: OnlinePlayerOptions? = null
     private var playerViewModel: PlayerViewModel? = null
     private var commonPlayerViewModel: CommonPlayerViewModel? = null
-    private var trackSelector: TrackSelector? = null
     private var viewLifecycleOwner: LifecycleOwner? = null
 
     private val handler = Handler(Looper.getMainLooper())
@@ -50,6 +47,8 @@ class OnlinePlayerView(
      * If null, the activity's default/main window will be used
      */
     var currentWindow: Window? = null
+
+    var selectedResolution: Int? = null
 
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
     override fun getOptionsMenuItems(): List<BottomSheetItem> {
@@ -72,7 +71,7 @@ class OnlinePlayerView(
                 BottomSheetItem(
                     context.getString(R.string.captions),
                     R.drawable.ic_caption,
-                    this::getCurrentCaptionLanguage
+                    { playerViewModel?.currentSubtitle?.code ?: context.getString(R.string.none) }
                 ) {
                     playerOptions?.onCaptionsClicked()
                 },
@@ -89,23 +88,12 @@ class OnlinePlayerView(
     private fun getCurrentResolutionSummary(): String {
         val currentQuality = player?.videoSize?.height ?: 0
         var summary = "${currentQuality}p"
-        val trackSelector = trackSelector ?: return summary
-        val selectedQuality = trackSelector.parameters.maxVideoHeight
-        if (selectedQuality == Int.MAX_VALUE) {
+        if (selectedResolution == null) {
             summary += " - ${context.getString(R.string.auto)}"
-        } else if (selectedQuality > currentQuality) {
+        } else if ((selectedResolution ?: 0) > currentQuality) {
             summary += " - ${context.getString(R.string.resolution_limited)}"
         }
         return summary
-    }
-
-    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
-    private fun getCurrentCaptionLanguage(): String {
-        return if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
-            trackSelector!!.parameters.preferredTextLanguages[0]
-        } else {
-            context.getString(R.string.none)
-        }
     }
 
     private fun getCurrentAudioTrackTitle(): String {
@@ -153,13 +141,11 @@ class OnlinePlayerView(
         playerViewModel: PlayerViewModel,
         commonPlayerViewModel: CommonPlayerViewModel,
         viewLifecycleOwner: LifecycleOwner,
-        trackSelector: TrackSelector,
         playerOptions: OnlinePlayerOptions
     ) {
         this.playerViewModel = playerViewModel
         this.commonPlayerViewModel = commonPlayerViewModel
         this.viewLifecycleOwner = viewLifecycleOwner
-        this.trackSelector = trackSelector
         this.playerOptions = playerOptions
 
         commonPlayerViewModel.isFullscreen.observe(viewLifecycleOwner) { isFullscreen ->

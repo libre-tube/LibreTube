@@ -4,17 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.media3.common.PlaybackParameters
+import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.session.MediaController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.PlaybackBottomSheetBinding
+import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.extensions.round
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.services.AbstractPlayerService
 import com.github.libretube.ui.adapters.SliderLabelsAdapter
 
 class PlaybackOptionsSheet(
-    private val player: ExoPlayer
+    private val player: Player
 ) : ExpandedBottomSheet() {
     private var _binding: PlaybackBottomSheetBinding? = null
     private val binding get() = _binding!!
@@ -32,8 +37,10 @@ class PlaybackOptionsSheet(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = binding
 
-        binding.speedShortcuts.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.pitchShortcuts.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.speedShortcuts.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.pitchShortcuts.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         binding.speedShortcuts.adapter = SliderLabelsAdapter(SUGGESTED_SPEEDS) {
             binding.speed.value = it
@@ -57,7 +64,15 @@ class PlaybackOptionsSheet(
         }
 
         binding.skipSilence.setOnCheckedChangeListener { _, isChecked ->
-            player.skipSilenceEnabled = isChecked
+            // TODO: unify the skip silence handling
+            if (player is ExoPlayer) {
+                player.skipSilenceEnabled = isChecked
+            } else if (player is MediaController) {
+                player.sendCustomCommand(
+                    AbstractPlayerService.runPlayerActionCommand,
+                    bundleOf(PlayerCommand.SKIP_SILENCE.name to isChecked)
+                )
+            }
             PreferenceHelper.putBoolean(PreferenceKeys.SKIP_SILENCE, isChecked)
         }
     }
