@@ -1,0 +1,6 @@
+* feat: audio player support for no internet activity
+* feat: downloads fragment rework, playing queue and audio player support
+* feat: ask user to play downloaded version if video already downloaded
+* feat: support for importing watch history from YouTube
+* feat: support for shuffling downloaded audio content
+* feat: RYD support for local stream extraction
