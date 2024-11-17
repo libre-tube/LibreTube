@@ -550,4 +550,5 @@
     <string name="dialog_play_offline_title">Eine lokale Version des Videos ist nicht verfügbar.</string>
     <string name="dialog_play_offline_body">Möchtest du das Video aus dem Download-Ordner abspielen?</string>
     <string name="view_count">%1$s Aufrufe</string>
+    <string name="upcoming">Anstehend</string>
 </resources>
