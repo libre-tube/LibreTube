@@ -24,6 +24,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentDownloadContentBinding
 import com.github.libretube.databinding.FragmentDownloadsBinding
+import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.db.obj.filterByTab
@@ -270,12 +271,21 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment() {
     }
 
     private fun showDeleteAllDialog(context: Context, adapter: DownloadsAdapter) {
+        var onlyDeleteWatchedVideos = false
+
         MaterialAlertDialogBuilder(context)
             .setTitle(R.string.delete_all)
-            .setMessage(R.string.irreversible)
+            .setMultiChoiceItems(arrayOf(getString(R.string.delete_only_watched_videos)), null) { _, _, selected ->
+                onlyDeleteWatchedVideos = selected
+            }
             .setPositiveButton(R.string.okay) { _, _ ->
-                for (downloadIndex in downloads.size - 1 downTo 0) {
-                    adapter.deleteDownload(downloadIndex)
+                lifecycleScope.launch {
+                    for (downloadIndex in downloads.size - 1 downTo 0) {
+                        val download = adapter.itemAt(downloadIndex).download
+                        if (!onlyDeleteWatchedVideos || DatabaseHelper.isVideoWatched(download.videoId, download.duration ?: 0)) {
+                            adapter.deleteDownload(downloadIndex)
+                        }
+                    }
                 }
             }
             .setNegativeButton(R.string.cancel, null)
