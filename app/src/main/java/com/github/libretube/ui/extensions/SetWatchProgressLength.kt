@@ -31,21 +31,21 @@ fun View.setWatchProgressLength(videoId: String, duration: Long) {
     setBackgroundColor(backgroundColor)
     isGone = true
 
-    val progress = try {
-        runBlocking {
-            Database.watchPositionDao().findById(videoId)?.position
-        }
-    } catch (e: Exception) {
-        return
-    } // divide by 1000 to convert ms to seconds
-        ?.toFloat()?.div(1000)
-
-    if (progress == null || duration == 0L) {
+    if (duration == 0L) {
         return
     }
+
+    val progress = runCatching {
+        runBlocking {
+            Database.watchPositionDao().findById(videoId)?.position
+                // divide by 1000 to convert ms to seconds
+                ?.toFloat()?.div(1000)
+        }
+    }.getOrNull() ?: return
 
     updateLayoutParams<ConstraintLayout.LayoutParams> {
         matchConstraintPercentWidth = progress / duration.toFloat()
     }
+
     isVisible = true
 }
