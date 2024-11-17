@@ -162,16 +162,17 @@ object ImportHelper {
             }
 
             ImportFormat.FREETUBE -> {
-                val playlistFile = activity.contentResolver.openInputStream(uri)?.use { inputStream ->
-                    val text = inputStream.bufferedReader().readText()
-                    runCatching {
-                        text.lines().map { line ->
-                            JsonHelper.json.decodeFromString<FreeTubeImportPlaylist>(line)
-                        }
-                    }.getOrNull() ?: runCatching {
-                        listOf(JsonHelper.json.decodeFromString<FreeTubeImportPlaylist>(text))
-                    }.getOrNull()
-                }
+                val playlistFile =
+                    activity.contentResolver.openInputStream(uri)?.use { inputStream ->
+                        val text = inputStream.bufferedReader().readText()
+                        runCatching {
+                            text.lines().map { line ->
+                                JsonHelper.json.decodeFromString<FreeTubeImportPlaylist>(line)
+                            }
+                        }.getOrNull() ?: runCatching {
+                            listOf(JsonHelper.json.decodeFromString<FreeTubeImportPlaylist>(text))
+                        }.getOrNull()
+                    }
 
                 val playlists = playlistFile.orEmpty().map { playlist ->
                     // convert FreeTube videos to list of string
@@ -287,7 +288,7 @@ object ImportHelper {
                     JsonHelper.json.decodeFromStream<List<YouTubeWatchHistoryFileItem>>(it)
                 }
                     .orEmpty()
-                    .filter { it.activityControls.contains("YouTube watch history") && it.subtitles.isNotEmpty() }
+                    .filter { it.activityControls.contains("YouTube watch history") && it.subtitles.isNotEmpty() && it.titleUrl.isNotEmpty() }
                     .reversed()
                     .map {
                         val videoId = it.titleUrl.substring(it.titleUrl.length - 11)
