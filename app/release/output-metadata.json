@@ -11,8 +11,8 @@
       "type": "UNIVERSAL",
       "filters": [],
       "attributes": [],
-      "versionCode": 55,
-      "versionName": "0.25.0",
+      "versionCode": 58,
+      "versionName": "0.26.0",
       "outputFile": "app-universal-release.apk"
     },
     {
@@ -24,8 +24,8 @@
         }
       ],
       "attributes": [],
-      "versionCode": 55,
-      "versionName": "0.25.0",
+      "versionCode": 58,
+      "versionName": "0.26.0",
       "outputFile": "app-armeabi-v7a-release.apk"
     },
     {
@@ -37,22 +37,9 @@
         }
       ],
       "attributes": [],
-      "versionCode": 55,
-      "versionName": "0.25.0",
+      "versionCode": 58,
+      "versionName": "0.26.0",
       "outputFile": "app-arm64-v8a-release.apk"
-    },
-    {
-      "type": "ONE_OF_MANY",
-      "filters": [
-        {
-          "filterType": "ABI",
-          "value": "x86"
-        }
-      ],
-      "attributes": [],
-      "versionCode": 55,
-      "versionName": "0.25.0",
-      "outputFile": "app-x86-release.apk"
     },
     {
       "type": "ONE_OF_MANY",
@@ -63,9 +50,22 @@
         }
       ],
       "attributes": [],
-      "versionCode": 55,
-      "versionName": "0.25.0",
+      "versionCode": 58,
+      "versionName": "0.26.0",
       "outputFile": "app-x86_64-release.apk"
+    },
+    {
+      "type": "ONE_OF_MANY",
+      "filters": [
+        {
+          "filterType": "ABI",
+          "value": "x86"
+        }
+      ],
+      "attributes": [],
+      "versionCode": 58,
+      "versionName": "0.26.0",
+      "outputFile": "app-x86-release.apk"
     }
   ],
   "elementType": "File",
@@ -77,8 +77,8 @@
         "baselineProfiles/1/app-universal-release.dm",
         "baselineProfiles/1/app-armeabi-v7a-release.dm",
         "baselineProfiles/1/app-arm64-v8a-release.dm",
-        "baselineProfiles/1/app-x86-release.dm",
-        "baselineProfiles/1/app-x86_64-release.dm"
+        "baselineProfiles/1/app-x86_64-release.dm",
+        "baselineProfiles/1/app-x86-release.dm"
       ]
     },
     {
@@ -88,8 +88,8 @@
         "baselineProfiles/0/app-universal-release.dm",
         "baselineProfiles/0/app-armeabi-v7a-release.dm",
         "baselineProfiles/0/app-arm64-v8a-release.dm",
-        "baselineProfiles/0/app-x86-release.dm",
-        "baselineProfiles/0/app-x86_64-release.dm"
+        "baselineProfiles/0/app-x86_64-release.dm",
+        "baselineProfiles/0/app-x86-release.dm"
       ]
     }
   ],
