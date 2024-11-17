@@ -39,7 +39,7 @@ class VideoOfflinePlayerService: OfflinePlayerService() {
             videoUri != null && audioUri != null -> {
                 val videoItem = MediaItem.Builder()
                     .setUri(videoUri)
-                    .setMetadata(downloadWithItems.download)
+                    .setMetadata(downloadWithItems)
                     .setSubtitleConfigurations(listOfNotNull(subtitle))
                     .build()
 
@@ -63,7 +63,7 @@ class VideoOfflinePlayerService: OfflinePlayerService() {
             videoUri != null -> exoPlayer?.setMediaItem(
                 MediaItem.Builder()
                     .setUri(videoUri)
-                    .setMetadata(downloadWithItems.download)
+                    .setMetadata(downloadWithItems)
                     .setSubtitleConfigurations(listOfNotNull(subtitle))
                     .build()
             )
@@ -71,7 +71,7 @@ class VideoOfflinePlayerService: OfflinePlayerService() {
             audioUri != null -> exoPlayer?.setMediaItem(
                 MediaItem.Builder()
                     .setUri(audioUri)
-                    .setMetadata(downloadWithItems.download)
+                    .setMetadata(downloadWithItems)
                     .setSubtitleConfigurations(listOfNotNull(subtitle))
                     .build()
             )

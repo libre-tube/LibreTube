@@ -13,7 +13,6 @@ import androidx.media3.datasource.cronet.CronetDataSource
 import androidx.media3.exoplayer.hls.HlsMediaSource
 import com.github.libretube.R
 import com.github.libretube.api.CronetHelper
-import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.api.obj.Subtitle
 import com.github.libretube.constants.IntentData
@@ -172,8 +171,4 @@ class VideoOnlinePlayerService : AbstractPlayerService() {
             setPreferredTextRoleFlags(roleFlags)
             setPreferredTextLanguage(subtitle?.code)
         }
-
-    override fun onPlaybackStateChanged(playbackState: Int) = Unit
-
-    override fun getChapters(): List<ChapterSegment> = emptyList()
 }

@@ -1,13 +1,9 @@
 package com.github.libretube.ui.fragments
 
 import android.annotation.SuppressLint
-import android.content.ComponentName
-import android.content.Intent
-import android.content.ServiceConnection
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
-import android.os.IBinder
 import android.os.Looper
 import android.text.format.DateUtils
 import android.view.LayoutInflater
@@ -22,14 +18,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
+import androidx.media3.common.MediaMetadata
+import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
+import androidx.media3.session.MediaController
 import com.github.libretube.R
-import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentAudioPlayerBinding
 import com.github.libretube.extensions.normalize
+import com.github.libretube.extensions.parcelableList
 import com.github.libretube.extensions.seekBy
-import com.github.libretube.extensions.toID
+import com.github.libretube.extensions.serializable
 import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateIfChanged
 import com.github.libretube.helpers.AudioHelper
@@ -40,7 +40,6 @@ import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.ThemeHelper
-import com.github.libretube.services.AbstractPlayerService
 import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.services.OnlinePlayerService
 import com.github.libretube.ui.activities.MainActivity
@@ -77,31 +76,23 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     private var handler = Handler(Looper.getMainLooper())
     private var isPaused = !PlayerHelper.playAutomatically
 
-    private var playerService: AbstractPlayerService? = null
-
-    /** Defines callbacks for service binding, passed to bindService()  */
-    private val connection = object : ServiceConnection {
-        override fun onServiceConnected(className: ComponentName, service: IBinder) {
-            // We've bound to LocalService, cast the IBinder and get LocalService instance
-            val binder = service as AbstractPlayerService.LocalBinder
-            playerService = binder.getService()
-            handleServiceConnection()
-        }
-
-        override fun onServiceDisconnected(arg0: ComponentName) {}
-    }
+    private var isOffline: Boolean = false
+    private var playerController: MediaController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         audioHelper = AudioHelper(requireContext())
 
-        val isOffline = requireArguments().getBoolean(IntentData.offlinePlayer)
+        isOffline = requireArguments().getBoolean(IntentData.offlinePlayer)
 
-        val serviceClass =
-            if (isOffline) OfflinePlayerService::class.java else OnlinePlayerService::class.java
-        Intent(activity, serviceClass).also { intent ->
-            activity.bindService(intent, connection, 0)
+        BackgroundHelper.startMediaService(
+            requireContext(),
+            if (isOffline) OfflinePlayerService::class.java else OnlinePlayerService::class.java,
+            bundleOf()
+        ) {
+            playerController = it
+            handleServiceConnection()
         }
     }
 
@@ -155,10 +146,10 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             it.text = (PlayerHelper.seekIncrement / 1000).toString()
         }
         binding.rewindFL.setOnClickListener {
-            playerService?.exoPlayer?.seekBy(-PlayerHelper.seekIncrement)
+            playerController?.seekBy(-PlayerHelper.seekIncrement)
         }
         binding.forwardFL.setOnClickListener {
-            playerService?.exoPlayer?.seekBy(PlayerHelper.seekIncrement)
+            playerController?.seekBy(PlayerHelper.seekIncrement)
         }
 
         binding.openQueue.setOnClickListener {
@@ -166,7 +157,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         }
 
         binding.playbackOptions.setOnClickListener {
-            playerService?.exoPlayer?.let {
+            playerController?.let {
                 PlaybackOptionsSheet(it)
                     .show(childFragmentManager)
             }
@@ -182,7 +173,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             NavigationHelper.navigateVideo(
                 context = requireContext(),
                 videoUrlOrId = PlayingQueue.getCurrent()?.url,
-                timestamp = playerService?.exoPlayer?.currentPosition?.div(1000) ?: 0,
+                timestamp = playerController?.currentPosition?.div(1000) ?: 0,
                 keepQueue = true,
                 forceVideo = true
             )
@@ -192,24 +183,24 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             ChaptersBottomSheet.SEEK_TO_POSITION_REQUEST_KEY,
             viewLifecycleOwner
         ) { _, bundle ->
-            playerService?.exoPlayer?.seekTo(bundle.getLong(IntentData.currentPosition))
+            playerController?.seekTo(bundle.getLong(IntentData.currentPosition))
         }
 
         binding.openChapters.setOnClickListener {
-            val playerService = playerService ?: return@setOnClickListener
-            chaptersModel.chaptersLiveData.value = playerService.getChapters()
+            chaptersModel.chaptersLiveData.value =
+                playerController?.mediaMetadata?.extras?.serializable(IntentData.chapters)
 
             ChaptersBottomSheet()
                 .apply {
                     arguments = bundleOf(
-                        IntentData.duration to playerService.exoPlayer?.duration?.div(1000)
+                        IntentData.duration to playerController?.duration?.div(1000)
                     )
                 }
                 .show(childFragmentManager)
         }
 
         binding.miniPlayerClose.setOnClickListener {
-            activity.unbindService(connection)
+            playerController?.release()
             BackgroundHelper.stopBackgroundPlay(requireContext())
             killFragment()
         }
@@ -218,19 +209,16 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         binding.thumbnail.setOnTouchListener(listener)
 
         binding.playPause.setOnClickListener {
-            playerService?.exoPlayer?.togglePlayPauseState()
+            playerController?.togglePlayPauseState()
         }
 
         binding.miniPlayerPause.setOnClickListener {
-            playerService?.exoPlayer?.togglePlayPauseState()
+            playerController?.togglePlayPauseState()
         }
 
         binding.showMore.setOnClickListener {
             onLongTap()
         }
-
-        // load the stream info into the UI
-        updateStreamInfo()
 
         // update the currently shown volume
         binding.volumeProgressBar.let { bar ->
@@ -297,20 +285,19 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     /**
      * Load the information from a new stream into the UI
      */
-    private fun updateStreamInfo(stream: StreamItem? = null) {
+    private fun updateStreamInfo(metadata: MediaMetadata) {
         val binding = _binding ?: return
 
-        val current = stream ?: PlayingQueue.getCurrent() ?: return
+        binding.title.text = metadata.title
+        binding.miniPlayerTitle.text = metadata.title
 
-        binding.title.text = current.title
-        binding.miniPlayerTitle.text = current.title
-
-        binding.uploader.text = current.uploaderName
+        binding.uploader.text = metadata.artist
         binding.uploader.setOnClickListener {
-            NavigationHelper.navigateChannel(requireContext(), current.uploaderUrl?.toID())
+            val uploaderId = metadata.composer?.toString() ?: return@setOnClickListener
+            NavigationHelper.navigateChannel(requireContext(), uploaderId)
         }
 
-        current.thumbnail?.let { updateThumbnailAsync(it) }
+        metadata.artworkUri?.let { updateThumbnailAsync(it.toString()) }
 
         initializeSeekBar()
     }
@@ -344,7 +331,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
 
     private fun initializeSeekBar() {
         binding.timeBar.addOnChangeListener { _, value, fromUser ->
-            if (fromUser) playerService?.seekToPosition(value.toLong() * 1000)
+            if (fromUser) playerController?.seekTo(value.toLong() * 1000)
         }
         updateSeekBar()
     }
@@ -354,7 +341,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
      */
     private fun updateSeekBar() {
         val binding = _binding ?: return
-        val duration = playerService?.getDuration()?.takeIf { it > 0 } ?: let {
+        val duration = playerController?.duration?.takeIf { it > 0 } ?: let {
             // if there's no duration available, clear everything
             binding.timeBar.value = 0f
             binding.duration.text = ""
@@ -362,7 +349,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             handler.postDelayed(this::updateSeekBar, 100)
             return
         }
-        val currentPosition = playerService?.getCurrentPosition()?.toFloat() ?: 0f
+        val currentPosition = playerController?.currentPosition?.toFloat() ?: 0f
 
         // set the text for the indicators
         binding.duration.text = DateUtils.formatElapsedTime(duration / 1000)
@@ -381,7 +368,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     }
 
     private fun updatePlayPauseButton() {
-        playerService?.exoPlayer?.let {
+        playerController?.let {
             val binding = _binding ?: return
 
             val iconRes = PlayerHelper.getPlayPauseActionIcon(it)
@@ -391,19 +378,25 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     }
 
     private fun handleServiceConnection() {
-        playerService?.onStateOrPlayingChanged = { isPlaying ->
-            updatePlayPauseButton()
-            isPaused = !isPlaying
-        }
-        playerService?.onNewVideoStarted = { streamItem ->
-            handler.post {
-                updateStreamInfo(streamItem)
-                _binding?.openChapters?.isVisible = !playerService?.getChapters().isNullOrEmpty()
+        playerController?.addListener(object : Player.Listener {
+            override fun onIsPlayingChanged(isPlaying: Boolean) {
+                super.onIsPlayingChanged(isPlaying)
+
+                updatePlayPauseButton()
+                isPaused = !isPlaying
             }
-        }
+
+            override fun onMediaMetadataChanged(mediaMetadata: MediaMetadata) {
+                super.onMediaMetadataChanged(mediaMetadata)
+
+                updateStreamInfo(mediaMetadata)
+                val chapters: List<ChapterSegment>? = mediaMetadata.extras?.parcelableList(IntentData.chapters)
+                _binding?.openChapters?.isVisible = !chapters.isNullOrEmpty()
+            }
+        })
         initializeSeekBar()
 
-        if (playerService is OfflinePlayerService) {
+        if (isOffline) {
             binding.openVideo.isGone = true
         }
     }
@@ -413,18 +406,8 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         _binding = null
     }
 
-    override fun onDestroy() {
-        // unregister all listeners and the connected [playerService]
-        playerService?.onStateOrPlayingChanged = null
-        runCatching {
-            activity.unbindService(connection)
-        }
-
-        super.onDestroy()
-    }
-
     override fun onSingleTap() {
-        playerService?.exoPlayer?.togglePlayPauseState()
+        playerController?.togglePlayPauseState()
     }
 
     override fun onLongTap() {
@@ -481,10 +464,11 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         if (_binding == null) return
         handler.postDelayed(this::updateChapterIndex, 100)
 
-        val player = playerService?.exoPlayer ?: return
-
         val currentIndex =
-            PlayerHelper.getCurrentChapterIndex(player.currentPosition, chaptersModel.chapters)
+            PlayerHelper.getCurrentChapterIndex(
+                playerController?.currentPosition ?: return,
+                chaptersModel.chapters
+            )
         chaptersModel.currentChapterIndex.updateIfChanged(currentIndex ?: return)
     }
 }

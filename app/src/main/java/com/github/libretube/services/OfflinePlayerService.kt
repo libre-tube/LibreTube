@@ -6,10 +6,8 @@ import androidx.annotation.OptIn
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
-import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHolder.Database
-import com.github.libretube.db.obj.DownloadChapter
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.db.obj.filterByTab
 import com.github.libretube.enums.FileType
@@ -46,6 +44,14 @@ open class OfflinePlayerService : AbstractPlayerService() {
 
     private val scope = CoroutineScope(Dispatchers.Main)
 
+    private val playerListener = object : Player.Listener {
+        override fun onPlaybackStateChanged(playbackState: Int) {
+            if (playbackState == Player.STATE_ENDED && PlayerHelper.isAutoPlayEnabled()) {
+                playNextVideo(PlayingQueue.getNext() ?: return)
+            }
+        }
+    }
+
     override suspend fun onServiceCreated(args: Bundle) {
         downloadTab = args.serializable(IntentData.downloadTab)!!
         shuffle = args.getBoolean(IntentData.shuffle, false)
@@ -65,6 +71,8 @@ open class OfflinePlayerService : AbstractPlayerService() {
             streamItem.url?.toID()?.let { playNextVideo(it) }
         }
 
+        exoPlayer?.addListener(playerListener)
+
         fillQueue()
     }
 
@@ -76,7 +84,6 @@ open class OfflinePlayerService : AbstractPlayerService() {
             Database.downloadDao().findById(videoId)
         }!!
         this.downloadWithItems = downloadWithItems
-        onNewVideoStarted?.let { it(downloadWithItems.download.toStreamItem()) }
 
         PlayingQueue.updateCurrent(downloadWithItems.download.toStreamItem())
 
@@ -106,7 +113,7 @@ open class OfflinePlayerService : AbstractPlayerService() {
 
         val mediaItem = MediaItem.Builder()
             .setUri(audioItem.path.toAndroidUri())
-            .setMetadata(downloadWithItems.download)
+            .setMetadata(downloadWithItems)
             .build()
 
         exoPlayer?.setMediaItem(mediaItem)
@@ -141,14 +148,4 @@ open class OfflinePlayerService : AbstractPlayerService() {
         super.onTaskRemoved(rootIntent)
         onDestroy()
     }
-
-    override fun onPlaybackStateChanged(playbackState: Int) {
-        // automatically go to the next video/audio when the current one ended
-        if (playbackState == Player.STATE_ENDED && PlayerHelper.isAutoPlayEnabled()) {
-            playNextVideo(PlayingQueue.getNext() ?: return)
-        }
-    }
-
-    override fun getChapters(): List<ChapterSegment> =
-        downloadWithItems?.downloadChapters.orEmpty().map(DownloadChapter::toChapterSegment)
 }
