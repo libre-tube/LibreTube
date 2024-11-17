@@ -551,4 +551,5 @@
     <string name="view_count">%1$s vaatamist</string>
     <string name="dialog_play_offline_title">Sellest videost on olemas kohalikus seadmes asuv versioon.</string>
     <string name="dialog_play_offline_body">Kas sa sooviksid seda videot esitada allalaadimiste kaustast?</string>
+    <string name="upcoming">Järgmisena esitamisel</string>
 </resources>
