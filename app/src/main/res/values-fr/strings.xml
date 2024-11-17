@@ -555,4 +555,5 @@
     <string name="dialog_play_offline_title">Une version locale de cette vidéo est disponible.</string>
     <string name="dialog_play_offline_body">Souhaitez-vous lire la vidéo à partir du dossier de téléchargement ?</string>
     <string name="upcoming">À venir</string>
+    <string name="delete_only_watched_videos">Supprimer uniquement les vidéos déjà visionnées</string>
 </resources>
