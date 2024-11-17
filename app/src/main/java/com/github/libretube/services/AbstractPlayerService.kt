@@ -175,7 +175,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
         val notificationProvider = NowPlayingNotification(
             this,
-            backgroundOnly = true,
+            backgroundOnly = isAudioOnlyPlayer,
             offlinePlayer = isOfflinePlayer,
             intentActivity = intentActivity
         )
