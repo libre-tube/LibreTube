@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.media3.common.PlaybackParameters
-import androidx.media3.common.Player
-import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.session.MediaController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.constants.PreferenceKeys
@@ -19,7 +17,7 @@ import com.github.libretube.services.AbstractPlayerService
 import com.github.libretube.ui.adapters.SliderLabelsAdapter
 
 class PlaybackOptionsSheet(
-    private val player: Player
+    private val player: MediaController
 ) : ExpandedBottomSheet() {
     private var _binding: PlaybackBottomSheetBinding? = null
     private val binding get() = _binding!!
@@ -64,15 +62,10 @@ class PlaybackOptionsSheet(
         }
 
         binding.skipSilence.setOnCheckedChangeListener { _, isChecked ->
-            // TODO: unify the skip silence handling
-            if (player is ExoPlayer) {
-                player.skipSilenceEnabled = isChecked
-            } else if (player is MediaController) {
-                player.sendCustomCommand(
-                    AbstractPlayerService.runPlayerActionCommand,
-                    bundleOf(PlayerCommand.SKIP_SILENCE.name to isChecked)
-                )
-            }
+            player.sendCustomCommand(
+                AbstractPlayerService.runPlayerActionCommand,
+                bundleOf(PlayerCommand.SKIP_SILENCE.name to isChecked)
+            )
             PreferenceHelper.putBoolean(PreferenceKeys.SKIP_SILENCE, isChecked)
         }
     }

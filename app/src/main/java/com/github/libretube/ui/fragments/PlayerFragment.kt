@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.BroadcastReceiver
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
@@ -48,7 +47,6 @@ import androidx.media3.common.C
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.session.MediaController
-import androidx.media3.session.SessionToken
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.api.obj.ChapterSegment
@@ -389,11 +387,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         fullscreenResolution = PlayerHelper.getDefaultResolution(requireContext(), true)
         noFullscreenResolution = PlayerHelper.getDefaultResolution(requireContext(), false)
 
-        val sessionToken = SessionToken(
-            requireContext(),
-            ComponentName(requireContext(), VideoOnlinePlayerService::class.java)
-        )
-        BackgroundHelper.startMediaService(requireContext(), sessionToken, bundleOf()) {
+        BackgroundHelper.startMediaService(requireContext(), VideoOnlinePlayerService::class.java, bundleOf()) {
             playerController = it
             playerController.addListener(playerListener)
         }

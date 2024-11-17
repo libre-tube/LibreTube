@@ -56,4 +56,5 @@ object IntentData {
     const val isPlayingOffline = "isPlayingOffline"
     const val downloadInfo = "downloadInfo"
     const val streams = "streams"
+    const val chapters = "chapters"
 }

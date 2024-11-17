@@ -8,7 +8,6 @@ import androidx.media3.common.Player
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.StreamsExtractor
-import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
@@ -55,6 +54,32 @@ class OnlinePlayerService : AbstractPlayerService() {
 
     private val scope = CoroutineScope(Dispatchers.IO)
 
+    private val playerListener = object : Player.Listener {
+        override fun onPlaybackStateChanged(playbackState: Int) {
+            when (playbackState) {
+                Player.STATE_ENDED -> {
+                    if (!isTransitioning) playNextVideo()
+                }
+
+                Player.STATE_IDLE -> {
+                    onDestroy()
+                }
+
+                Player.STATE_BUFFERING -> {}
+                Player.STATE_READY -> {
+                    isTransitioning = false
+
+                    // save video to watch history when the video starts playing or is being resumed
+                    // waiting for the player to be ready since the video can't be claimed to be watched
+                    // while it did not yet start actually, but did buffer only so far
+                    scope.launch(Dispatchers.IO) {
+                        streams?.let { DatabaseHelper.addToWatchHistory(videoId, it) }
+                    }
+                }
+            }
+        }
+    }
+
     override suspend fun onServiceCreated(args: Bundle) {
         val playerData = args.parcelable<PlayerData>(IntentData.playerData)
         if (playerData == null) {
@@ -72,6 +97,8 @@ class OnlinePlayerService : AbstractPlayerService() {
         PlayingQueue.setOnQueueTapListener { streamItem ->
             streamItem.url?.toID()?.let { playNextVideo(it) }
         }
+
+        exoPlayer?.addListener(playerListener)
     }
 
     override suspend fun startPlayback() {
@@ -126,8 +153,6 @@ class OnlinePlayerService : AbstractPlayerService() {
                 }
             }
         }
-
-        streams?.let { onNewVideoStarted?.invoke(it.toStreamItem(videoId)) }
 
         exoPlayer?.apply {
             playWhenReady = PlayerHelper.playAutomatically
@@ -208,30 +233,4 @@ class OnlinePlayerService : AbstractPlayerService() {
 
         exoPlayer?.checkForSegments(this, sponsorBlockSegments, sponsorBlockConfig)
     }
-
-    override fun onPlaybackStateChanged(playbackState: Int) {
-        when (playbackState) {
-            Player.STATE_ENDED -> {
-                if (!isTransitioning) playNextVideo()
-            }
-
-            Player.STATE_IDLE -> {
-                onDestroy()
-            }
-
-            Player.STATE_BUFFERING -> {}
-            Player.STATE_READY -> {
-                isTransitioning = false
-
-                // save video to watch history when the video starts playing or is being resumed
-                // waiting for the player to be ready since the video can't be claimed to be watched
-                // while it did not yet start actually, but did buffer only so far
-                scope.launch(Dispatchers.IO) {
-                    streams?.let { DatabaseHelper.addToWatchHistory(videoId, it) }
-                }
-            }
-        }
-    }
-
-    override fun getChapters(): List<ChapterSegment> = streams?.chapters.orEmpty()
 }

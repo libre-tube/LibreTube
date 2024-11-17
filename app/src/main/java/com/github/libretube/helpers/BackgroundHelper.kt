@@ -53,10 +53,11 @@ object BackgroundHelper {
 
         val playerData = PlayerData(videoId, playlistId, channelId, keepQueue, position)
 
-        val sessionToken =
-            SessionToken(context, ComponentName(context, OnlinePlayerService::class.java))
-
-        startMediaService(context, sessionToken, bundleOf(IntentData.playerData to playerData))
+        startMediaService(
+            context,
+            OnlinePlayerService::class.java,
+            bundleOf(IntentData.playerData to playerData)
+        )
     }
 
     /**
@@ -98,8 +99,6 @@ object BackgroundHelper {
         downloadTab: DownloadTab,
         shuffle: Boolean = false
     ) {
-        stopBackgroundPlay(context)
-
         // whether the service is started from the MainActivity or NoInternetActivity
         val noInternet = ContextHelper.tryUnwrapActivity<NoInternetActivity>(context) != null
 
@@ -110,19 +109,21 @@ object BackgroundHelper {
             IntentData.noInternet to noInternet
         )
 
-        val sessionToken =
-            SessionToken(context, ComponentName(context, OfflinePlayerService::class.java))
-
-        startMediaService(context, sessionToken, arguments)
+        startMediaService(context, OfflinePlayerService::class.java, arguments)
     }
 
     @OptIn(UnstableApi::class)
     fun startMediaService(
         context: Context,
-        sessionToken: SessionToken,
+        serviceClass: Class<*>,
         arguments: Bundle,
         onController: (MediaController) -> Unit = {}
     ) {
+        stopBackgroundPlay(context)
+
+        val sessionToken =
+            SessionToken(context, ComponentName(context, serviceClass))
+
         val controllerFuture =
             MediaController.Builder(context, sessionToken).buildAsync()
         controllerFuture.addListener({

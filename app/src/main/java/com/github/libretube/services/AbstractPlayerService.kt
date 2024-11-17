@@ -1,12 +1,9 @@
 package com.github.libretube.services
 
 import android.content.Intent
-import android.os.Binder
 import android.os.Bundle
 import android.os.Handler
-import android.os.IBinder
 import android.os.Looper
-import android.widget.Toast
 import androidx.annotation.OptIn
 import androidx.core.app.ServiceCompat
 import androidx.media3.common.C
@@ -22,10 +19,9 @@ import androidx.media3.session.MediaSession
 import androidx.media3.session.SessionCommand
 import androidx.media3.session.SessionResult
 import com.github.libretube.R
-import com.github.libretube.api.obj.ChapterSegment
-import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.enums.PlayerEvent
+import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.util.NowPlayingNotification
@@ -49,14 +45,6 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
     val handler = Handler(Looper.getMainLooper())
 
-    private val binder = LocalBinder()
-
-    /**
-     * Listener for passing playback state changes to the AudioPlayerFragment
-     */
-    var onStateOrPlayingChanged: ((isPlaying: Boolean) -> Unit)? = null
-    var onNewVideoStarted: ((streamItem: StreamItem) -> Unit)? = null
-
     private val watchPositionTimer = PauseableTimer(
         onTick = ::saveWatchPosition,
         delayMillis = PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS
@@ -72,27 +60,11 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
             } else {
                 watchPositionTimer.pause()
             }
-
-            onStateOrPlayingChanged?.let { it(isPlaying) }
-        }
-
-        override fun onPlaybackStateChanged(playbackState: Int) {
-            super.onPlaybackStateChanged(playbackState)
-
-            onStateOrPlayingChanged?.let { it(exoPlayer?.isPlaying ?: false) }
-
-            this@AbstractPlayerService.onPlaybackStateChanged(playbackState)
         }
 
         override fun onPlayerError(error: PlaybackException) {
             // show a toast on errors
-            Handler(Looper.getMainLooper()).post {
-                Toast.makeText(
-                    applicationContext,
-                    error.localizedMessage,
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+            toastFromMainThread(error.localizedMessage)
         }
 
         override fun onEvents(player: Player, events: Player.Events) {
@@ -289,26 +261,6 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     override fun onTaskRemoved(rootIntent: Intent?) {
         super.onTaskRemoved(rootIntent)
         onDestroy()
-    }
-
-    abstract fun onPlaybackStateChanged(playbackState: Int)
-
-    abstract fun getChapters(): List<ChapterSegment>
-
-    fun getCurrentPosition() = exoPlayer?.currentPosition
-
-    fun getDuration() = exoPlayer?.duration
-
-    fun seekToPosition(position: Long) = exoPlayer?.seekTo(position)
-
-    inner class LocalBinder : Binder() {
-        // Return this instance of [AbstractPlayerService] so clients can call public methods
-        fun getService(): AbstractPlayerService = this@AbstractPlayerService
-    }
-
-    override fun onBind(intent: Intent?): IBinder {
-        // attempt to return [MediaLibraryServiceBinder] first if matched
-        return super.onBind(intent) ?: binder
     }
 
     companion object {

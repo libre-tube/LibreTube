@@ -1,7 +1,6 @@
 package com.github.libretube.ui.activities
 
 import android.content.BroadcastReceiver
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
@@ -17,7 +16,6 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.Player
 import androidx.media3.session.MediaController
-import androidx.media3.session.SessionToken
 import androidx.media3.ui.PlayerView
 import com.github.libretube.compat.PictureInPictureCompat
 import com.github.libretube.compat.PictureInPictureParamsCompat
@@ -60,7 +58,7 @@ class OfflinePlayerActivity : BaseActivity() {
     private lateinit var playerBinding: ExoStyledPlayerControlViewBinding
     private val commonPlayerViewModel: CommonPlayerViewModel by viewModels()
     private val chaptersViewModel: ChaptersViewModel by viewModels()
-    
+
     private val watchPositionTimer = PauseableTimer(
         onTick = this::saveWatchPosition,
         delayMillis = PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS
@@ -137,7 +135,7 @@ class OfflinePlayerActivity : BaseActivity() {
             val isPlaying = ::playerController.isInitialized && playerController.isPlaying
 
             PictureInPictureParamsCompat.Builder()
-                .setActions(PlayerHelper.getPiPModeActions(this,isPlaying))
+                .setActions(PlayerHelper.getPiPModeActions(this, isPlaying))
                 .setAutoEnterEnabled(PlayerHelper.pipEnabled && isPlaying)
                 .apply {
                     if (isPlaying) {
@@ -164,15 +162,11 @@ class OfflinePlayerActivity : BaseActivity() {
             playNextVideo(streamItem.url ?: return@setOnQueueTapListener)
         }
 
-        val sessionToken = SessionToken(
-            this,
-            ComponentName(this, VideoOfflinePlayerService::class.java)
-        )
         val arguments = bundleOf(
             IntentData.downloadTab to DownloadTab.VIDEO,
             IntentData.videoId to videoId
         )
-        BackgroundHelper.startMediaService(this, sessionToken, arguments) {
+        BackgroundHelper.startMediaService(this, VideoOfflinePlayerService::class.java, arguments) {
             playerController = it
             playerController.addListener(playerListener)
             initializePlayerView()
@@ -281,7 +275,7 @@ class OfflinePlayerActivity : BaseActivity() {
 
     override fun onDestroy() {
         saveWatchPosition()
-        
+
         watchPositionTimer.destroy()
 
         runCatching {
