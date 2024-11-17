@@ -55,4 +55,5 @@ object IntentData {
     const val noInternet = "noInternet"
     const val isPlayingOffline = "isPlayingOffline"
     const val downloadInfo = "downloadInfo"
+    const val streams = "streams"
 }

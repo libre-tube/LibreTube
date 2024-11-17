@@ -1,7 +1,8 @@
 package com.github.libretube.services
 
 import android.content.Intent
-import androidx.lifecycle.lifecycleScope
+import android.os.Bundle
+import androidx.annotation.OptIn
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
@@ -12,15 +13,16 @@ import com.github.libretube.db.obj.DownloadChapter
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.db.obj.filterByTab
 import com.github.libretube.enums.FileType
-import com.github.libretube.extensions.serializableExtra
+import com.github.libretube.extensions.serializable
+import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toAndroidUri
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PlayerHelper
-import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.activities.NoInternetActivity
 import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.util.PlayingQueue
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -30,9 +32,10 @@ import kotlin.io.path.exists
 /**
  * A service to play downloaded audio in the background
  */
-@UnstableApi
-class OfflinePlayerService : AbstractPlayerService() {
+@OptIn(UnstableApi::class)
+open class OfflinePlayerService : AbstractPlayerService() {
     override val isOfflinePlayer: Boolean = true
+    override val isAudioOnlyPlayer: Boolean = true
     private var noInternetService: Boolean = false
     override val intentActivity: Class<*>
         get() = if (noInternetService) NoInternetActivity::class.java else MainActivity::class.java
@@ -41,17 +44,19 @@ class OfflinePlayerService : AbstractPlayerService() {
     private lateinit var downloadTab: DownloadTab
     private var shuffle: Boolean = false
 
-    override suspend fun onServiceCreated(intent: Intent) {
-        downloadTab = intent.serializableExtra(IntentData.downloadTab)!!
-        shuffle = intent.getBooleanExtra(IntentData.shuffle, false)
-        noInternetService = intent.getBooleanExtra(IntentData.noInternet, false)
+    private val scope = CoroutineScope(Dispatchers.Main)
+
+    override suspend fun onServiceCreated(args: Bundle) {
+        downloadTab = args.serializable(IntentData.downloadTab)!!
+        shuffle = args.getBoolean(IntentData.shuffle, false)
+        noInternetService = args.getBoolean(IntentData.noInternet, false)
 
         videoId = if (shuffle) {
             runBlocking(Dispatchers.IO) {
                 Database.downloadDao().getRandomVideoIdByFileType(FileType.AUDIO)
             }
         } else {
-            intent.getStringExtra(IntentData.videoId)
+            args.getString(IntentData.videoId)
         } ?: return
 
         PlayingQueue.clear()
@@ -66,7 +71,7 @@ class OfflinePlayerService : AbstractPlayerService() {
     /**
      * Attempt to start an audio player with the given download items
      */
-    override suspend fun startPlaybackAndUpdateNotification() {
+    override suspend fun startPlayback() {
         val downloadWithItems = withContext(Dispatchers.IO) {
             Database.downloadDao().findById(videoId)
         }!!
@@ -75,13 +80,20 @@ class OfflinePlayerService : AbstractPlayerService() {
 
         PlayingQueue.updateCurrent(downloadWithItems.download.toStreamItem())
 
-        val notificationData = PlayerNotificationData(
-            title = downloadWithItems.download.title,
-            uploaderName = downloadWithItems.download.uploader,
-            thumbnailPath = downloadWithItems.download.thumbnailPath
-        )
-        nowPlayingNotification?.updatePlayerNotification(videoId, notificationData)
+        withContext(Dispatchers.Main) {
+            setMediaItem(downloadWithItems)
+            exoPlayer?.playWhenReady = PlayerHelper.playAutomatically
+            exoPlayer?.prepare()
 
+            if (PlayerHelper.watchPositionsAudio) {
+                PlayerHelper.getStoredWatchPosition(videoId, downloadWithItems.download.duration)?.let {
+                    exoPlayer?.seekTo(it)
+                }
+            }
+        }
+    }
+
+    open fun setMediaItem(downloadWithItems: DownloadWithItems) {
         val audioItem = downloadWithItems.downloadItems.filter { it.path.exists() }
             .firstOrNull { it.type == FileType.AUDIO }
             ?: // in some rare cases, video files can contain audio
@@ -94,17 +106,10 @@ class OfflinePlayerService : AbstractPlayerService() {
 
         val mediaItem = MediaItem.Builder()
             .setUri(audioItem.path.toAndroidUri())
+            .setMetadata(downloadWithItems.download)
             .build()
 
-        player?.setMediaItem(mediaItem)
-        player?.playWhenReady = PlayerHelper.playAutomatically
-        player?.prepare()
-
-        if (PlayerHelper.watchPositionsAudio) {
-            PlayerHelper.getStoredWatchPosition(videoId, downloadWithItems.download.duration)?.let {
-                player?.seekTo(it)
-            }
-        }
+        exoPlayer?.setMediaItem(mediaItem)
     }
 
     private suspend fun fillQueue() {
@@ -124,8 +129,8 @@ class OfflinePlayerService : AbstractPlayerService() {
 
         this.videoId = videoId
 
-        lifecycleScope.launch {
-            startPlaybackAndUpdateNotification()
+        scope.launch {
+            startPlayback()
         }
     }
 

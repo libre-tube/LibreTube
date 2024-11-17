@@ -1,8 +1,7 @@
 package com.github.libretube.services
 
-import android.content.Intent
+import android.os.Bundle
 import androidx.core.net.toUri
-import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MimeTypes
 import androidx.media3.common.Player
@@ -14,17 +13,17 @@ import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHelper
-import com.github.libretube.extensions.parcelableExtra
+import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.checkForSegments
 import com.github.libretube.helpers.ProxyHelper
-import com.github.libretube.obj.PlayerNotificationData
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.util.PlayingQueue
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -36,6 +35,7 @@ import kotlinx.serialization.encodeToString
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class OnlinePlayerService : AbstractPlayerService() {
     override val isOfflinePlayer: Boolean = false
+    override val isAudioOnlyPlayer: Boolean = true
     override val intentActivity: Class<*> = MainActivity::class.java
 
     // PlaylistId/ChannelId for autoplay
@@ -53,8 +53,10 @@ class OnlinePlayerService : AbstractPlayerService() {
     private var sponsorBlockSegments = listOf<Segment>()
     private var sponsorBlockConfig = PlayerHelper.getSponsorBlockCategories()
 
-    override suspend fun onServiceCreated(intent: Intent) {
-        val playerData = intent.parcelableExtra<PlayerData>(IntentData.playerData)
+    private val scope = CoroutineScope(Dispatchers.IO)
+
+    override suspend fun onServiceCreated(args: Bundle) {
+        val playerData = args.parcelable<PlayerData>(IntentData.playerData)
         if (playerData == null) {
             stopSelf()
             return
@@ -72,7 +74,7 @@ class OnlinePlayerService : AbstractPlayerService() {
         }
     }
 
-    override suspend fun startPlaybackAndUpdateNotification() {
+    override suspend fun startPlayback() {
         val timestamp = startTimestamp ?: 0L
         startTimestamp = null
 
@@ -110,30 +112,24 @@ class OnlinePlayerService : AbstractPlayerService() {
     }
 
     private fun playAudio(seekToPosition: Long) {
-        lifecycleScope.launch(Dispatchers.IO) {
+        scope.launch {
             setMediaItem()
 
             withContext(Dispatchers.Main) {
                 // seek to the previous position if available
                 if (seekToPosition != 0L) {
-                    player?.seekTo(seekToPosition)
+                    exoPlayer?.seekTo(seekToPosition)
                 } else if (PlayerHelper.watchPositionsAudio) {
                     PlayerHelper.getStoredWatchPosition(videoId, streams?.duration)?.let {
-                        player?.seekTo(it)
+                        exoPlayer?.seekTo(it)
                     }
                 }
             }
         }
 
-        val playerNotificationData = PlayerNotificationData(
-            streams?.title,
-            streams?.uploader,
-            streams?.thumbnailUrl
-        )
-        nowPlayingNotification?.updatePlayerNotification(videoId, playerNotificationData)
         streams?.let { onNewVideoStarted?.invoke(it.toStreamItem(videoId)) }
 
-        player?.apply {
+        exoPlayer?.apply {
             playWhenReady = PlayerHelper.playAutomatically
             prepare()
         }
@@ -146,7 +142,7 @@ class OnlinePlayerService : AbstractPlayerService() {
      */
     private fun playNextVideo(nextId: String? = null) {
         if (nextId == null && PlayingQueue.repeatMode == Player.REPEAT_MODE_ONE) {
-            player?.seekTo(0)
+            exoPlayer?.seekTo(0)
             return
         }
 
@@ -161,13 +157,13 @@ class OnlinePlayerService : AbstractPlayerService() {
         this.streams = null
         this.sponsorBlockSegments = emptyList()
 
-        lifecycleScope.launch {
-            startPlaybackAndUpdateNotification()
+        scope.launch {
+            startPlayback()
         }
     }
 
     /**
-     * Sets the [MediaItem] with the [streams] into the [player]
+     * Sets the [MediaItem] with the [streams] into the [exoPlayer]
      */
     private suspend fun setMediaItem() {
         val streams = streams ?: return
@@ -185,14 +181,14 @@ class OnlinePlayerService : AbstractPlayerService() {
             .setMimeType(mimeType)
             .setMetadata(streams)
             .build()
-        withContext(Dispatchers.Main) { player?.setMediaItem(mediaItem) }
+        withContext(Dispatchers.Main) { exoPlayer?.setMediaItem(mediaItem) }
     }
 
     /**
      * fetch the segments for SponsorBlock
      */
     private fun fetchSponsorBlockSegments() {
-        lifecycleScope.launch(Dispatchers.IO) {
+        scope.launch(Dispatchers.IO) {
             runCatching {
                 if (sponsorBlockConfig.isEmpty()) return@runCatching
                 sponsorBlockSegments = RetrofitInstance.api.getSegments(
@@ -210,7 +206,7 @@ class OnlinePlayerService : AbstractPlayerService() {
     private fun checkForSegments() {
         handler.postDelayed(this::checkForSegments, 100)
 
-        player?.checkForSegments(this, sponsorBlockSegments, sponsorBlockConfig)
+        exoPlayer?.checkForSegments(this, sponsorBlockSegments, sponsorBlockConfig)
     }
 
     override fun onPlaybackStateChanged(playbackState: Int) {
@@ -230,7 +226,7 @@ class OnlinePlayerService : AbstractPlayerService() {
                 // save video to watch history when the video starts playing or is being resumed
                 // waiting for the player to be ready since the video can't be claimed to be watched
                 // while it did not yet start actually, but did buffer only so far
-                lifecycleScope.launch(Dispatchers.IO) {
+                scope.launch(Dispatchers.IO) {
                     streams?.let { DatabaseHelper.addToWatchHistory(videoId, it) }
                 }
             }

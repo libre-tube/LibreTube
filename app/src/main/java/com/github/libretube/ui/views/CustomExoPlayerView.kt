@@ -31,7 +31,7 @@ import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.media3.common.C
 import androidx.media3.common.Player
 import androidx.media3.common.text.Cue
-import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.session.MediaController
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.CaptionStyleCompat
 import androidx.media3.ui.PlayerView
@@ -601,8 +601,8 @@ abstract class CustomExoPlayerView(
     }
 
     override fun onPlaybackSpeedClicked() {
-        player?.let {
-            PlaybackOptionsSheet(it as ExoPlayer).show(supportFragmentManager)
+        (player as? MediaController)?.let {
+            PlaybackOptionsSheet(it).show(supportFragmentManager)
         }
     }
 

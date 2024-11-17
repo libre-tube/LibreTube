@@ -2,17 +2,10 @@ package com.github.libretube.ui.models
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.media3.common.util.UnstableApi
-import androidx.media3.exoplayer.ExoPlayer
-import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
-import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.StreamsExtractor
-import com.github.libretube.api.obj.Message
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.api.obj.Subtitle
@@ -24,10 +17,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 
 @UnstableApi
-class PlayerViewModel(
-    val player: ExoPlayer,
-    val trackSelector: DefaultTrackSelector,
-) : ViewModel() {
+class PlayerViewModel : ViewModel() {
 
     // data to remember for recovery on orientation change
     private var streamsInfo: Streams? = null
@@ -68,23 +58,5 @@ class PlayerViewModel(
                     JsonHelper.json.encodeToString(sponsorBlockConfig.keys)
                 ).segments
         }
-    }
-
-    companion object {
-        val Factory = viewModelFactory {
-            initializer {
-                val context = this[APPLICATION_KEY]!!
-                val trackSelector = DefaultTrackSelector(context)
-                PlayerViewModel(
-                    player = PlayerHelper.createPlayer(context, trackSelector, false),
-                    trackSelector = trackSelector,
-                )
-            }
-        }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        player.release()
     }
 }
