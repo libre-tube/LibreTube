@@ -106,6 +106,7 @@ import com.github.libretube.ui.models.CommonPlayerViewModel
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.CommentsSheet
+import com.github.libretube.ui.sheets.StatsSheet
 import com.github.libretube.util.OnlineTimeFrameReceiver
 import com.github.libretube.util.PauseableTimer
 import com.github.libretube.util.PlayingQueue
@@ -153,7 +154,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     // if null, use same quality as fullscreen
     private var noFullscreenResolution: Int? = null
 
-    private var selectedAudioLanguageAndRoleFlags: Pair<String?, @C. RoleFlags Int>? = null
+    private var selectedAudioLanguageAndRoleFlags: Pair<String?, @C.RoleFlags Int>? = null
 
     private val handler = Handler(Looper.getMainLooper())
 
@@ -1421,11 +1422,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     override fun onStatsClicked() {
         if (!this::streams.isInitialized) return
-        // TODO: reimplement video stats
-//        val videoStats = getVideoStats(playerController, videoId)
-//        StatsSheet()
-//            .apply { arguments = bundleOf(IntentData.videoStats to videoStats) }
-//            .show(childFragmentManager)
+
+        val videoStats = PlayerHelper.getVideoStats(playerController.currentTracks, videoId)
+        StatsSheet()
+            .apply { arguments = bundleOf(IntentData.videoStats to videoStats) }
+            .show(childFragmentManager)
     }
 
     override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {

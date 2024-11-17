@@ -815,18 +815,38 @@ object PlayerHelper {
     }
 
     @OptIn(androidx.media3.common.util.UnstableApi::class)
-    fun getVideoStats(player: ExoPlayer, videoId: String): VideoStats {
-        val videoInfo = "${player.videoFormat?.codecs.orEmpty()} ${
-            TextUtils.formatBitrate(
-                player.videoFormat?.bitrate
-            )
-        }"
-        val audioInfo = "${player.audioFormat?.codecs.orEmpty()} ${
-            TextUtils.formatBitrate(player.audioFormat?.bitrate)
-        }"
-        val videoQuality =
-            "${player.videoFormat?.width}x${player.videoFormat?.height} ${player.videoFormat?.frameRate?.toInt()}fps"
-        return VideoStats(videoId, videoInfo, videoQuality, audioInfo)
+    fun getVideoStats(tracks: Tracks, videoId: String): VideoStats {
+        val videoStats = VideoStats(videoId, "", "", "")
+
+        for (group in tracks.groups) {
+            if (!group.isSelected || group.length == 0) continue
+
+            when (group.type) {
+                C.TRACK_TYPE_AUDIO -> {
+                    val audioFormat = (0..group.length).firstOrNull { index ->
+                        group.isTrackSelected(index)
+                    }?.let { index -> group.getTrackFormat(index) } ?: continue
+
+                    videoStats.audioInfo = "${audioFormat.codecs.orEmpty()} ${
+                        TextUtils.formatBitrate(audioFormat.bitrate)
+                    }"
+                }
+
+                C.TRACK_TYPE_VIDEO -> {
+                    val videoFormat = (0..group.length).firstOrNull { index ->
+                        group.isTrackSelected(index)
+                    }?.let { index -> group.getTrackFormat(index) } ?: continue
+
+                    videoStats.videoInfo = "${videoFormat.codecs.orEmpty()} ${
+                        TextUtils.formatBitrate(videoFormat.bitrate)
+                    }"
+                    videoStats.videoQuality =
+                        "${videoFormat.width}x${videoFormat.height} ${videoFormat.frameRate.toInt()}fps"
+                }
+            }
+        }
+
+        return videoStats
     }
 
     fun getPlayPauseActionIcon(player: Player) = when {
