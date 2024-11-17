@@ -87,16 +87,17 @@ object DatabaseHelper {
         }
     }
 
+    suspend fun isVideoWatched(videoId: String, duration: Long): Boolean = withContext(Dispatchers.IO) {
+        val historyItem = Database.watchPositionDao()
+            .findById(videoId) ?: return@withContext false
+        val progress = historyItem.position / 1000
+        // show video only in feed when watched less than 90%
+        return@withContext progress > 0.9f * duration
+    }
+
     suspend fun filterUnwatched(streams: List<StreamItem>): List<StreamItem> {
         return streams.filter {
-            withContext(Dispatchers.IO) {
-                val historyItem = Database.watchPositionDao()
-                    .findById(it.url.orEmpty().toID()) ?: return@withContext true
-                val progress = historyItem.position / 1000
-                val duration = it.duration ?: 0
-                // show video only in feed when watched less than 90%
-                progress < 0.9f * duration
-            }
+            !isVideoWatched(it.url.orEmpty().toID(), it.duration ?: 0)
         }
     }
 
@@ -105,14 +106,7 @@ object DatabaseHelper {
         unfinished: Boolean = true
     ): List<WatchHistoryItem> {
         return streams.filter {
-            withContext(Dispatchers.IO) {
-                val historyItem = Database.watchPositionDao()
-                    .findById(it.videoId) ?: return@withContext true
-                val progress = historyItem.position / 1000
-                val duration = it.duration ?: 0
-                // show video only in feed when watched less than 90%
-                if (unfinished) progress < 0.9f * duration else progress > 0.9f * duration
-            }
+            unfinished xor isVideoWatched(it.videoId, it.duration ?: 0)
         }
     }
 

@@ -148,6 +148,8 @@ class DownloadsAdapter(
             .show()
     }
 
+    fun itemAt(index: Int) = downloads[index]
+
     fun deleteDownload(position: Int) {
         val download = downloads[position].download
         val items = downloads[position].downloadItems
