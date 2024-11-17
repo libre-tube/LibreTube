@@ -21,6 +21,7 @@ import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.ui.activities.OfflinePlayerActivity
 import com.github.libretube.ui.base.BaseActivity
+import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.ui.sheets.DownloadOptionsBottomSheet
 import com.github.libretube.ui.sheets.DownloadOptionsBottomSheet.Companion.DELETE_DOWNLOAD_REQUEST_KEY
@@ -56,6 +57,7 @@ class DownloadsAdapter(
             title.text = download.title
             uploaderName.text = download.uploader
             videoInfo.text = download.uploadDate?.let { TextUtils.localizeDate(it) }
+            watchProgress.setWatchProgressLength(download.videoId, download.duration ?: 0)
 
             val downloadSize = items.sumOf { it.downloadSize }
             val currentSize = items.filter { it.path.exists() }.sumOf { it.path.fileSize() }
