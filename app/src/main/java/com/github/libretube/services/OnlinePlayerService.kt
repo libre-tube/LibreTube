@@ -32,7 +32,6 @@ import com.github.libretube.helpers.PlayerHelper.checkForSegments
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.parcelable.PlayerData
-import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.YoutubeHlsPlaylistParser
 import kotlinx.coroutines.CoroutineScope
@@ -49,7 +48,6 @@ import java.util.concurrent.Executors
 open class OnlinePlayerService : AbstractPlayerService() {
     override val isOfflinePlayer: Boolean = false
     override val isAudioOnlyPlayer: Boolean = true
-    override val intentActivity: Class<*> = MainActivity::class.java
 
     // PlaylistId/ChannelId for autoplay
     private var playlistId: String? = null
