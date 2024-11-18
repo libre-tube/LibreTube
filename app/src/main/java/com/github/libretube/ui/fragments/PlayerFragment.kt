@@ -405,6 +405,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         initializeTransitionLayout()
         initializeOnClickActions()
+        initializePlayerView()
 
         if (PlayerHelper.autoFullscreenEnabled && resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             setFullscreen()
@@ -466,6 +467,21 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             playerController = it
             playerController.addListener(playerListener)
         }
+    }
+
+    private fun initializePlayerView() {
+        // initialize the player view actions
+        binding.player.initialize(
+            doubleTapOverlayBinding,
+            playerGestureControlsViewBinding,
+            chaptersViewModel
+        )
+        binding.player.initPlayerOptions(
+            viewModel,
+            commonPlayerViewModel,
+            viewLifecycleOwner,
+            this
+        )
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -937,7 +953,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 return
             }
 
-        if (!playerController.isInSegment(viewModel.segments.value.orEmpty())) binding.sbSkipBtn.isGone = true
+        if (!playerController.isInSegment(viewModel.segments.value.orEmpty())) binding.sbSkipBtn.isGone =
+            true
     }
 
     private fun playVideo() {
@@ -975,7 +992,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             player = playerController
         }
 
-        initializePlayerView()
+        updatePlayerView()
 
         if (binding.playerMotionLayout.progress != 1.0f) {
             // show controllers when not in picture in picture mode
@@ -1008,20 +1025,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun initializePlayerView() {
-        // initialize the player view actions
-        binding.player.initialize(
-            doubleTapOverlayBinding,
-            playerGestureControlsViewBinding,
-            chaptersViewModel
-        )
-        binding.player.initPlayerOptions(
-            viewModel,
-            commonPlayerViewModel,
-            viewLifecycleOwner,
-            this
-        )
-
+    private fun updatePlayerView() {
         binding.descriptionLayout.setStreams(streams)
 
         binding.apply {
@@ -1114,7 +1118,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private fun updatePlayPauseButton() {
-        binding.playImageView.setImageResource(PlayerHelper.getPlayPauseActionIcon(playerController))
+        val playPauseAction = PlayerHelper.getPlayPauseActionIcon(playerController)
+        binding.playImageView.setImageResource(playPauseAction)
     }
 
     private suspend fun initializeHighlight(highlight: Segment) {

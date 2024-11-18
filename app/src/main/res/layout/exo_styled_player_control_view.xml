@@ -176,6 +176,7 @@
             style="@style/ExoStyledControls.Button.Center.PlayPause"
             android:layout_marginHorizontal="10dp"
             android:background="?android:selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_play"
             app:tint="@android:color/white" />
 
         <FrameLayout
