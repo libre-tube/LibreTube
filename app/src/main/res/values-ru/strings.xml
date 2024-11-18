@@ -557,4 +557,6 @@
     <string name="view_count">%1$s просмотров</string>
     <string name="dialog_play_offline_body">Воспроизвести видео из папки загрузок?</string>
     <string name="dialog_play_offline_title">Доступна сохранённая копия этого видео.</string>
+    <string name="delete_only_watched_videos">Удалять только уже просмотренные видео</string>
+    <string name="upcoming">Скоро</string>
 </resources>
