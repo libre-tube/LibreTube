@@ -81,7 +81,7 @@ class PlaylistAdapter(
         holder.binding.apply {
             videoTitle.text = streamItem.title
             videoInfo.text = streamItem.uploaderName
-            channelImage.isGone = true
+            channelImageContainer.isGone = true
 
             thumbnailDuration.setFormattedDuration(streamItem.duration ?: -1, streamItem.isShort, streamItem.uploaded)
 
