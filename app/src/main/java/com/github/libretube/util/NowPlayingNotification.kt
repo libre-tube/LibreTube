@@ -4,6 +4,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.core.app.PendingIntentCompat
 import androidx.media3.session.CommandButton
 import androidx.media3.session.DefaultMediaNotificationProvider
@@ -22,9 +23,10 @@ import com.google.common.collect.ImmutableList
 class NowPlayingNotification(
     private val context: Context,
     private val backgroundOnly: Boolean = false,
-    private val offlinePlayer: Boolean = false,
-    private val intentActivity: Class<*> = MainActivity::class.java
+    private val offlinePlayer: Boolean = false
 ): MediaNotification.Provider {
+    var intentActivity: Class<*> = MainActivity::class.java
+
     private val nProvider = DefaultMediaNotificationProvider.Builder(context)
         .setNotificationId(NotificationId.PLAYER_PLAYBACK.id)
         .setChannelId(PLAYER_CHANNEL_NAME)
@@ -43,6 +45,8 @@ class NowPlayingNotification(
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             }
         }
+
+        Log.e("get intent", intentActivity.name)
 
         return PendingIntentCompat
             .getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT, false)

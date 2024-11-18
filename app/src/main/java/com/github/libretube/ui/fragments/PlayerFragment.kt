@@ -16,7 +16,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
-import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.PixelCopy
@@ -326,8 +325,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 ?.let {
                     lifecycleScope.launch(Dispatchers.IO) { initializeHighlight(it) }
                 }
-
-            Log.e("rec", "segments received")
         }
 
         /**

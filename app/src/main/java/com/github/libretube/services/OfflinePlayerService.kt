@@ -35,8 +35,6 @@ open class OfflinePlayerService : AbstractPlayerService() {
     override val isOfflinePlayer: Boolean = true
     override val isAudioOnlyPlayer: Boolean = true
     private var noInternetService: Boolean = false
-    override val intentActivity: Class<*>
-        get() = if (noInternetService) NoInternetActivity::class.java else MainActivity::class.java
 
     private var downloadWithItems: DownloadWithItems? = null
     private lateinit var downloadTab: DownloadTab
@@ -76,6 +74,10 @@ open class OfflinePlayerService : AbstractPlayerService() {
         exoPlayer?.addListener(playerListener)
 
         fillQueue()
+    }
+
+    override fun getIntentActivity(): Class<*> {
+        return if (noInternetService) NoInternetActivity::class.java else MainActivity::class.java
     }
 
     /**

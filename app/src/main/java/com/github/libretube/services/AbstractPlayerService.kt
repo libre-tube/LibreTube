@@ -26,6 +26,7 @@ import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PauseableTimer
 import com.github.libretube.util.PlayingQueue
@@ -39,7 +40,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     private var mediaLibrarySession: MediaLibrarySession? = null
     var exoPlayer: ExoPlayer? = null
 
-    private var nowPlayingNotification: NowPlayingNotification? = null
+    private var notificationProvider: NowPlayingNotification? = null
     var trackSelector: DefaultTrackSelector? = null
 
     lateinit var videoId: String
@@ -93,6 +94,8 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
             CoroutineScope(Dispatchers.IO).launch {
                 onServiceCreated(args)
+                notificationProvider?.intentActivity = getIntentActivity()
+
                 startPlayback()
             }
 
@@ -184,7 +187,6 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
     abstract val isOfflinePlayer: Boolean
     abstract val isAudioOnlyPlayer: Boolean
-    abstract val intentActivity: Class<*>
 
     override fun onGetSession(controllerInfo: MediaSession.ControllerInfo): MediaLibrarySession? =
         mediaLibrarySession
@@ -192,16 +194,17 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     override fun onCreate() {
         super.onCreate()
 
-        val notificationProvider = NowPlayingNotification(
+        notificationProvider = NowPlayingNotification(
             this,
             backgroundOnly = isAudioOnlyPlayer,
             offlinePlayer = isOfflinePlayer,
-            intentActivity = intentActivity
         )
-        setMediaNotificationProvider(notificationProvider)
+        setMediaNotificationProvider(notificationProvider!!)
 
         createPlayerAndMediaSession()
     }
+
+    open fun getIntentActivity(): Class<*> = MainActivity::class.java
 
     abstract suspend fun onServiceCreated(args: Bundle)
 
@@ -283,7 +286,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
         saveWatchPosition()
 
-        nowPlayingNotification = null
+        notificationProvider = null
         watchPositionTimer.destroy()
 
         handler.removeCallbacksAndMessages(null)
