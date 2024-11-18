@@ -218,7 +218,9 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
         PlayerHelper.setPreferredCodecs(trackSelector)
 
-        mediaLibrarySession = MediaLibrarySession.Builder(this, player, this).build()
+        mediaLibrarySession = MediaLibrarySession.Builder(this, player, this)
+            .setId(this.javaClass.name)
+            .build()
     }
 
     abstract suspend fun startPlayback()
