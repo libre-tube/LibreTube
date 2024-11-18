@@ -6,7 +6,8 @@ import android.os.Looper
 import android.os.Process
 import androidx.core.os.postDelayed
 import com.github.libretube.R
-import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.helpers.ContextHelper
+import com.github.libretube.ui.base.BaseActivity
 import com.google.android.material.snackbar.Snackbar
 import java.util.Timer
 import kotlin.concurrent.scheduleAtFixedRate
@@ -45,9 +46,9 @@ object SleepTimer {
 
     private fun showTimerEndedSnackBar(context: Context) {
         var killApp = true
-        val mainActivity = context as? MainActivity ?: return
+        val activity = ContextHelper.unwrapActivity<BaseActivity>(context)
         val snackBar = Snackbar.make(
-            mainActivity.binding.root,
+            activity.window.decorView.rootView,
             R.string.take_a_break,
             Snackbar.LENGTH_INDEFINITE
         )
@@ -64,8 +65,8 @@ object SleepTimer {
         handler.postDelayed(REACTION_INTERVAL * 1000) {
             if (killApp) {
                 // kill the application
-                mainActivity.finishAffinity()
-                mainActivity.finish()
+                activity.finishAffinity()
+                activity.finish()
                 Process.killProcess(Process.myPid())
             }
         }
