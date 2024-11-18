@@ -136,10 +136,16 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private lateinit var videoId: String
     private var playlistId: String? = null
     private var channelId: String? = null
-    private var isShort = false
 
     // data and objects stored for the player
     private lateinit var streams: Streams
+    val isShort get() = run {
+        val heightGreaterThanWidth = streams.videoStreams.firstOrNull()?.let {
+            (it.height ?: 0) > (it.width ?: 0)
+        }
+
+        PlayingQueue.getCurrent()?.isShort == true || heightGreaterThanWidth == true
+    }
 
     // if null, it's been set to automatic
     private var fullscreenResolution: Int? = null
