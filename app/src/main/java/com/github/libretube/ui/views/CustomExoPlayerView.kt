@@ -260,6 +260,8 @@ abstract class CustomExoPlayerView(
         binding.queueToggle.setOnClickListener {
             PlayingQueueSheet().show(supportFragmentManager, null)
         }
+
+        updateMarginsByFullscreenMode()
     }
 
     /**

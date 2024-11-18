@@ -71,17 +71,15 @@ class OfflinePlayerActivity : BaseActivity() {
             playerBinding.duration.text = DateUtils.formatElapsedTime(
                 player.duration / 1000
             )
-
-            if (events.contains(Player.EVENT_TRACKS_CHANGED)) {
-                requestedOrientation = PlayerHelper.getOrientation(
-                    playerController.videoSize.width,
-                    playerController.videoSize.height
-                )
-            }
         }
 
         override fun onIsPlayingChanged(isPlaying: Boolean) {
             super.onIsPlayingChanged(isPlaying)
+
+            requestedOrientation = PlayerHelper.getOrientation(
+                playerController.videoSize.width,
+                playerController.videoSize.height
+            )
 
             if (PlayerHelper.pipEnabled) {
                 PictureInPictureCompat.setPictureInPictureParams(
