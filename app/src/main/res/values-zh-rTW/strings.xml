@@ -549,4 +549,5 @@
     <string name="dialog_play_offline_title">此影片有本機版本。</string>
     <string name="dialog_play_offline_body">您想要播放下載資料夾中的影片嗎？</string>
     <string name="upcoming">即將推出</string>
+    <string name="delete_only_watched_videos">僅刪除已觀看的影片</string>
 </resources>
