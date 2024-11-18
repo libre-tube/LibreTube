@@ -759,7 +759,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         commentsViewModel.setCommentSheetExpand(null)
 
-        updateResolutionOnFullscreenChange(true)
+        updateResolution(true)
         openOrCloseFullscreenDialog(true)
 
         binding.player.updateMarginsByFullscreenMode()
@@ -776,7 +776,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         openOrCloseFullscreenDialog(false)
-        updateResolutionOnFullscreenChange(false)
+        updateResolution(false)
 
         binding.player.updateMarginsByFullscreenMode()
 
@@ -1257,7 +1257,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         updateCurrentSubtitle(viewModel.currentSubtitle)
 
         // set media source and resolution in the beginning
-        updateResolutionOnFullscreenChange(commonPlayerViewModel.isFullscreen.value == true)
+        updateResolution(commonPlayerViewModel.isFullscreen.value == true)
         playerController.sendCustomCommand(
             AbstractPlayerService.runPlayerActionCommand,
             bundleOf(PlayerCommand.START_PLAYBACK.name to true)
@@ -1292,11 +1292,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         binding.player.selectedResolution = resolution
     }
 
-    private fun updateResolutionOnFullscreenChange(isFullscreen: Boolean) {
+    private fun updateResolution(isFullscreen: Boolean) {
         if (!isFullscreen && noFullscreenResolution != null) {
             setPlayerResolution(noFullscreenResolution!!)
         } else if (fullscreenResolution != null) {
-            setPlayerResolution(fullscreenResolution ?: Int.MAX_VALUE)
+            setPlayerResolution(fullscreenResolution!!)
+        } else {
+            setPlayerResolution(Int.MAX_VALUE)
         }
     }
 
@@ -1344,7 +1346,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         BaseBottomSheet()
             .setSimpleItems(
                 resolutions.map(VideoResolution::name),
-                preselectedItem = resolutions.firstOrNull { it.resolution == binding.player.selectedResolution }?.name
+                preselectedItem = resolutions.firstOrNull {
+                    it.resolution == binding.player.selectedResolution
+                }?.name ?: getString(R.string.auto_quality)
             ) { which ->
                 val newResolution = resolutions[which].resolution
                 setPlayerResolution(newResolution, true)
