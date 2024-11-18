@@ -139,13 +139,14 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     // data and objects stored for the player
     private lateinit var streams: Streams
-    val isShort get() = run {
-        val heightGreaterThanWidth = streams.videoStreams.firstOrNull()?.let {
-            (it.height ?: 0) > (it.width ?: 0)
-        }
+    val isShort
+        get() = run {
+            val heightGreaterThanWidth = streams.videoStreams.firstOrNull()?.let {
+                (it.height ?: 0) > (it.width ?: 0)
+            }
 
-        PlayingQueue.getCurrent()?.isShort == true || heightGreaterThanWidth == true
-    }
+            PlayingQueue.getCurrent()?.isShort == true || heightGreaterThanWidth == true
+        }
 
     // if null, it's been set to automatic
     private var fullscreenResolution: Int? = null
@@ -205,11 +206,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             when (event) {
                 PlayerEvent.Next -> {
-                    playNextVideo(PlayingQueue.getNext())
+                    PlayingQueue.getNext()?.let { playNextVideo(it) }
                 }
 
                 PlayerEvent.Prev -> {
-                    playNextVideo(PlayingQueue.getPrev())
+                    PlayingQueue.getPrev()?.let { playNextVideo(it) }
                 }
 
                 PlayerEvent.Background -> {
@@ -309,6 +310,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             mediaMetadata.extras?.getString(IntentData.videoId)?.let {
                 videoId = it
+                // fix: if the fragment is recreated, play the current video, and not the initial one
+                arguments?.run {
+                    val playerData =
+                        parcelable<PlayerData>(IntentData.playerData)!!.copy(videoId = videoId)
+                    putParcelable(IntentData.playerData, playerData)
+                }
             }
 
             val maybeStreams: Streams? = mediaMetadata.extras?.parcelable(IntentData.streams)
@@ -655,11 +662,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         playerBinding.skipPrev.setOnClickListener {
-            playNextVideo(PlayingQueue.getPrev())
+            PlayingQueue.getPrev()?.let { prev -> playNextVideo(prev) }
         }
 
         playerBinding.skipNext.setOnClickListener {
-            playNextVideo(PlayingQueue.getNext())
+            PlayingQueue.getNext()?.let { next -> playNextVideo(next) }
         }
 
         binding.relPlayerDownload.setOnClickListener {
@@ -984,26 +991,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     /**
-     * Can be used for autoplay and manually skipping to the next video.
+     * Manually skip to another video.
      */
-    private fun playNextVideo(nextId: String? = null) {
-        if (nextId == null && PlayingQueue.repeatMode == Player.REPEAT_MODE_ONE) {
-            playerController.seekTo(0)
-            return
-        }
-
-        if (!PlayerHelper.isAutoPlayEnabled(playlistId != null) && nextId == null) return
-
-        videoId = nextId ?: PlayingQueue.getNext() ?: return
-
-        // fix: if the fragment is recreated, play the current video, and not the initial one
-        arguments?.run {
-            val playerData = parcelable<PlayerData>(IntentData.playerData)!!.copy(videoId = videoId)
-            putParcelable(IntentData.playerData, playerData)
-        }
-
-        // start to play the next video
-        playVideo()
+    private fun playNextVideo(nextId: String) {
+        playerController.sendCustomCommand(
+            AbstractPlayerService.runPlayerActionCommand,
+            bundleOf(PlayerCommand.PLAY_VIDEO_BY_ID.name to nextId)
+        )
 
         // close comment bottom sheet if opened for next video
         activity?.supportFragmentManager?.fragments?.filterIsInstance<CommentsSheet>()
@@ -1081,9 +1075,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
         }
         binding.autoplayCountdown.startCountdown {
-            runCatching {
-                playNextVideo()
-            }
+            PlayingQueue.getNext()?.let { playNextVideo(it) }
         }
     }
 
