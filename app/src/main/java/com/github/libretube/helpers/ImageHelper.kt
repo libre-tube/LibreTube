@@ -3,9 +3,11 @@ package com.github.libretube.helpers
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.widget.ImageView
-import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.drawable.toBitmapOrNull
+import androidx.core.net.toUri
 import coil.ImageLoader
 import coil.disk.DiskCache
 import coil.request.CachePolicy
@@ -87,17 +89,12 @@ object ImageHelper {
         if (DataSaverMode.isEnabled(target.context) || url.isNullOrEmpty()) return
         val urlToLoad = ProxyHelper.unwrapImageUrl(url)
 
-        val request = ImageRequest.Builder(target.context)
-            .data(urlToLoad)
-            .listener { _, result ->
-                // set the background to white for transparent images
-                if (whiteBackground) target.setBackgroundColor(Color.WHITE)
+        getImageWithCallback(target.context, urlToLoad) { result ->
+            // set the background to white for transparent images
+            if (whiteBackground) target.setBackgroundColor(Color.WHITE)
 
-                target.setImageDrawable(result.drawable)
-            }
-            .build()
-
-        imageLoader.enqueue(request)
+            target.setImageDrawable(result)
+        }
     }
 
     suspend fun downloadImage(context: Context, url: String, path: Path) {
@@ -110,6 +107,10 @@ object ImageHelper {
     }
 
     suspend fun getImage(context: Context, url: String?): Bitmap? {
+        return getImage(context, url?.toUri())
+    }
+
+    suspend fun getImage(context: Context, url: Uri?): Bitmap? {
         val request = ImageRequest.Builder(context)
             .data(url)
             .build()
@@ -117,11 +118,11 @@ object ImageHelper {
         return imageLoader.execute(request).drawable?.toBitmapOrNull()
     }
 
-    fun getImageWithCallback(context: Context, url: String?, onBitmap: (Bitmap) -> Unit) {
+    private fun getImageWithCallback(context: Context, url: String?, onSuccess: (Drawable) -> Unit) {
         val request = ImageRequest.Builder(context)
             .data(url)
             .target { drawable ->
-                onBitmap(drawable.toBitmap())
+                onSuccess(drawable)
             }
             .build()
 

@@ -53,6 +53,8 @@ open class OfflinePlayerService : AbstractPlayerService() {
     }
 
     override suspend fun onServiceCreated(args: Bundle) {
+        if (args.isEmpty) return
+
         downloadTab = args.serializable(IntentData.downloadTab)!!
         shuffle = args.getBoolean(IntentData.shuffle, false)
         noInternetService = args.getBoolean(IntentData.noInternet, false)
