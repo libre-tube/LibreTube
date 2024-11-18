@@ -44,7 +44,6 @@ object IntentData {
     const val maxAudioQuality = "maxAudioQuality"
     const val audioLanguage = "audioLanguage"
     const val captionLanguage = "captionLanguage"
-    const val wasIntentStopped = "wasIntentStopped"
     const val tabData = "tabData"
     const val videoList = "videoList"
     const val nextPage = "nextPage"
@@ -57,4 +56,5 @@ object IntentData {
     const val downloadInfo = "downloadInfo"
     const val streams = "streams"
     const val chapters = "chapters"
+    const val segments = "segments"
 }

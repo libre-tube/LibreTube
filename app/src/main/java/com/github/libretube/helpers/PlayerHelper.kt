@@ -7,7 +7,6 @@ import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.util.Base64
 import android.view.accessibility.CaptioningManager
-import android.widget.Toast
 import androidx.annotation.OptIn
 import androidx.annotation.StringRes
 import androidx.core.app.PendingIntentCompat
@@ -42,6 +41,7 @@ import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.extensions.seekBy
+import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.obj.VideoStats
@@ -333,13 +333,13 @@ object PlayerHelper {
             false
         )
 
-    val enabledVideoCodecs: String
+    private val enabledVideoCodecs: String
         get() = PreferenceHelper.getString(
             PreferenceKeys.ENABLED_VIDEO_CODECS,
             "all"
         )
 
-    val enabledAudioCodecs: String
+    private val enabledAudioCodecs: String
         get() = PreferenceHelper.getString(
             PreferenceKeys.ENABLED_AUDIO_CODECS,
             "all"
@@ -601,7 +601,8 @@ object PlayerHelper {
     fun Player.checkForSegments(
         context: Context,
         segments: List<Segment>,
-        sponsorBlockConfig: MutableMap<String, SbSkipOptions>
+        sponsorBlockConfig: MutableMap<String, SbSkipOptions>,
+        skipAutomaticallyIfEnabled: Boolean
     ): Segment? {
         for (segment in segments.filter { it.category != SPONSOR_HIGHLIGHT_CATEGORY }) {
             val (start, end) = segment.segmentStartAndEnd
@@ -609,25 +610,26 @@ object PlayerHelper {
 
             // avoid seeking to the same segment multiple times, e.g. when the SB segment is at the end of the video
             if ((duration - currentPosition).absoluteValue < 500) continue
+            if (currentPosition !in segmentStart until segmentEnd) continue
 
-            if (currentPosition in segmentStart until segmentEnd) {
-                val key = sponsorBlockConfig[segment.category]
-                if (key == SbSkipOptions.AUTOMATIC ||
-                    (key == SbSkipOptions.AUTOMATIC_ONCE && !segment.skipped)
-                ) {
-                    if (sponsorBlockNotifications) {
-                        runCatching {
-                            Toast.makeText(context, R.string.segment_skipped, Toast.LENGTH_SHORT)
-                                .show()
-                        }
+            val key = sponsorBlockConfig[segment.category]
+
+            if (!skipAutomaticallyIfEnabled || key == SbSkipOptions.MANUAL ||
+                (key == SbSkipOptions.AUTOMATIC_ONCE && segment.skipped)
+            ) {
+                return segment
+            } else if (key == SbSkipOptions.AUTOMATIC ||
+                (key == SbSkipOptions.AUTOMATIC_ONCE && !segment.skipped)
+            ) {
+                if (sponsorBlockNotifications) {
+                    runCatching {
+                        context.toastFromMainThread(R.string.segment_skipped)
                     }
-                    seekTo(segmentEnd)
-                    segment.skipped = true
-                } else if (key == SbSkipOptions.MANUAL ||
-                    (key == SbSkipOptions.AUTOMATIC_ONCE && segment.skipped)
-                ) {
-                    return segment
                 }
+                seekTo(segmentEnd)
+                segment.skipped = true
+            } else {
+                return null
             }
         }
         return null

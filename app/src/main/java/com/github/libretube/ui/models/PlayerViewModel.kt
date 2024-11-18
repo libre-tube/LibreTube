@@ -1,27 +1,14 @@
 package com.github.libretube.ui.models
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.media3.common.util.UnstableApi
-import com.github.libretube.api.JsonHelper
-import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.StreamsExtractor
 import com.github.libretube.api.obj.Segment
-import com.github.libretube.api.obj.Streams
 import com.github.libretube.api.obj.Subtitle
 import com.github.libretube.helpers.PlayerHelper
-import com.github.libretube.util.NowPlayingNotification
-import com.github.libretube.util.deArrow
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import kotlinx.serialization.encodeToString
 
 @UnstableApi
 class PlayerViewModel : ViewModel() {
 
-    // data to remember for recovery on orientation change
-    private var streamsInfo: Streams? = null
-    var nowPlayingNotification: NowPlayingNotification? = null
     var segments = listOf<Segment>()
     var currentSubtitle = Subtitle(code = PlayerHelper.defaultSubtitleCode)
     var sponsorBlockConfig = PlayerHelper.getSponsorBlockCategories()
@@ -32,31 +19,4 @@ class PlayerViewModel : ViewModel() {
      * Set to true if the activity will be recreated due to an orientation change
      */
     var isOrientationChangeInProgress = false
-    var sponsorBlockEnabled = PlayerHelper.sponsorBlockEnabled
-
-    /**
-     * @return pair of the stream info and the error message if the request was not successful
-     */
-    suspend fun fetchVideoInfo(context: Context, videoId: String): Pair<Streams?, String?> =
-        withContext(Dispatchers.IO) {
-            if (isOrientationChangeInProgress && streamsInfo != null) return@withContext streamsInfo to null
-
-            return@withContext try {
-                StreamsExtractor.extractStreams(videoId).deArrow(videoId) to null
-            } catch (e: Exception) {
-                return@withContext null to StreamsExtractor.getExtractorErrorMessageString(context, e)
-            }
-        }
-
-    suspend fun fetchSponsorBlockSegments(videoId: String) = withContext(Dispatchers.IO) {
-        if (sponsorBlockConfig.isEmpty() || isOrientationChangeInProgress) return@withContext
-
-        runCatching {
-            segments =
-                RetrofitInstance.api.getSegments(
-                    videoId,
-                    JsonHelper.json.encodeToString(sponsorBlockConfig.keys)
-                ).segments
-        }
-    }
 }

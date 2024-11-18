@@ -13,10 +13,12 @@ import com.github.libretube.db.obj.DownloadChapter
 import com.github.libretube.db.obj.DownloadWithItems
 
 @OptIn(UnstableApi::class)
-fun MediaItem.Builder.setMetadata(streams: Streams) = apply {
+fun MediaItem.Builder.setMetadata(streams: Streams, videoId: String) = apply {
     val extras = bundleOf(
         MediaMetadataCompat.METADATA_KEY_TITLE to streams.title,
         MediaMetadataCompat.METADATA_KEY_ARTIST to streams.uploader,
+        IntentData.videoId to videoId,
+        IntentData.streams to streams,
         IntentData.chapters to streams.chapters
     )
     setMediaMetadata(
@@ -27,6 +29,8 @@ fun MediaItem.Builder.setMetadata(streams: Streams) = apply {
             .setArtworkUri(streams.thumbnailUrl.toUri())
             .setComposer(streams.uploaderUrl.toID())
             .setExtras(extras)
+            // send a unique timestamp to notify that the metadata changed, even if playing the same video twice
+            .setTrackNumber(System.currentTimeMillis().mod(Int.MAX_VALUE))
             .build()
     )
 }
@@ -38,6 +42,7 @@ fun MediaItem.Builder.setMetadata(downloadWithItems: DownloadWithItems) = apply 
     val extras = bundleOf(
         MediaMetadataCompat.METADATA_KEY_TITLE to download.title,
         MediaMetadataCompat.METADATA_KEY_ARTIST to download.uploader,
+        IntentData.videoId to download.videoId,
         IntentData.chapters to chapters.map(DownloadChapter::toChapterSegment)
     )
     setMediaMetadata(
@@ -47,6 +52,8 @@ fun MediaItem.Builder.setMetadata(downloadWithItems: DownloadWithItems) = apply 
             .setDurationMs(download.duration?.times(1000))
             .setArtworkUri(download.thumbnailPath?.toAndroidUri())
             .setExtras(extras)
+            // send a unique timestamp to notify that the metadata changed, even if playing the same video twice
+            .setTrackNumber(System.currentTimeMillis().mod(Int.MAX_VALUE))
             .build()
     )
 }
