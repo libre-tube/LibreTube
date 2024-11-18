@@ -230,6 +230,8 @@ class OfflinePlayerActivity : BaseActivity() {
     }
 
     override fun onDestroy() {
+        playerController.sendCustomCommand(AbstractPlayerService.stopServiceCommand, Bundle.EMPTY)
+
         runCatching {
             unregisterReceiver(playerActionReceiver)
         }

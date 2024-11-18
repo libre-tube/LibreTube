@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.IBinder
 import androidx.core.content.getSystemService
 import com.github.libretube.enums.NotificationId
+import com.github.libretube.helpers.BackgroundHelper
 
 class OnClearFromRecentService : Service() {
     private var nManager: NotificationManager? = null
@@ -22,6 +23,7 @@ class OnClearFromRecentService : Service() {
     }
 
     override fun onTaskRemoved(rootIntent: Intent?) {
+        BackgroundHelper.stopBackgroundPlay(this)
         nManager?.cancel(NotificationId.PLAYER_PLAYBACK.id)
         stopSelf()
     }

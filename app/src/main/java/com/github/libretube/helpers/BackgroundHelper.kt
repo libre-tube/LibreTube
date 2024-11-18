@@ -119,8 +119,6 @@ object BackgroundHelper {
         arguments: Bundle,
         onController: (MediaController) -> Unit = {}
     ) {
-        stopBackgroundPlay(context)
-
         val sessionToken =
             SessionToken(context, ComponentName(context, serviceClass))
 

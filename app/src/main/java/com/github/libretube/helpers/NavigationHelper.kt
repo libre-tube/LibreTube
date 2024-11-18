@@ -59,7 +59,6 @@ object NavigationHelper {
         forceVideo: Boolean = false
     ) {
         if (videoUrlOrId == null) return
-        BackgroundHelper.stopBackgroundPlay(context)
 
         if (PreferenceHelper.getBoolean(PreferenceKeys.AUDIO_ONLY_MODE, false) && !forceVideo) {
             BackgroundHelper.playOnBackground(

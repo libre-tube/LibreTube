@@ -238,11 +238,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 PictureInPictureCompat.setPictureInPictureParams(requireActivity(), pipParams)
             }
 
-            if (isPlaying) {
-                // Stop [BackgroundMode] service if it is running.
-                BackgroundHelper.stopBackgroundPlay(requireContext())
-            }
-
             if (isPlaying && PlayerHelper.sponsorBlockEnabled) {
                 handler.postDelayed(
                     this@PlayerFragment::checkForSegments,
@@ -567,23 +562,17 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             .animateDown(
                 duration = 300L,
                 dy = 500F,
-                onEnd = ::onManualPlayerClose
+                onEnd = ::killPlayerFragment
             )
-    }
-
-    private fun onManualPlayerClose() {
-        PlayingQueue.clear()
-        BackgroundHelper.stopBackgroundPlay(requireContext())
-        killPlayerFragment()
     }
 
     // actions that don't depend on video information
     private fun initializeOnClickActions() {
         binding.closeImageView.setOnClickListener {
-            onManualPlayerClose()
+            killPlayerFragment()
         }
         playerBinding.closeImageButton.setOnClickListener {
-            onManualPlayerClose()
+            killPlayerFragment()
         }
 
         binding.playImageView.setOnClickListener {
@@ -736,7 +725,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private fun playOnBackground() {
-        BackgroundHelper.stopBackgroundPlay(requireContext())
         BackgroundHelper.playOnBackground(
             requireContext(),
             videoId,
@@ -877,6 +865,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         playerController.removeListener(playerListener)
         playerController.pause()
+
+        playerController.sendCustomCommand(AbstractPlayerService.stopServiceCommand, Bundle.EMPTY)
 
         if (PlayerHelper.pipEnabled) {
             // disable the auto PiP mode for SDK >= 32
