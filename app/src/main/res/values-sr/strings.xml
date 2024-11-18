@@ -555,4 +555,5 @@
     <string name="dialog_play_offline_title">Доступна је локална верзија овог видео снимка.</string>
     <string name="dialog_play_offline_body">Желите ли да пустите видео снимак из фолдера преузимања?</string>
     <string name="upcoming">Предстојеће</string>
+    <string name="delete_only_watched_videos">Избриши само већ гледане видео снимке</string>
 </resources>
