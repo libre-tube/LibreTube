@@ -81,7 +81,8 @@ object PlayerHelper {
      */
     private val sbDefaultValues = mapOf(
         "sponsor" to SbSkipOptions.AUTOMATIC,
-        "selfpromo" to SbSkipOptions.AUTOMATIC
+        "selfpromo" to SbSkipOptions.AUTOMATIC,
+        "exclusive_access" to SbSkipOptions.AUTOMATIC,
     )
 
     /**

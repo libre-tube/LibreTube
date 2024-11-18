@@ -332,6 +332,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             val segments: List<Segment>? = mediaMetadata.extras?.parcelableList(IntentData.segments)
             viewModel.segments = segments.orEmpty()
 
+            binding.descriptionLayout.setSegments(viewModel.segments)
             playerBinding.exoProgress.setSegments(viewModel.segments)
             playerBinding.sbToggle.isVisible = true
             viewModel.segments.firstOrNull { it.category == PlayerHelper.SPONSOR_HIGHLIGHT_CATEGORY }
