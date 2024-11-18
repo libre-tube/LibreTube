@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.text.format.DateUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,6 +41,7 @@ import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.ThemeHelper
+import com.github.libretube.services.AbstractPlayerService
 import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.services.OnlinePlayerService
 import com.github.libretube.ui.activities.MainActivity
@@ -170,8 +170,8 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         }
 
         binding.openVideo.setOnClickListener {
-            BackgroundHelper.stopBackgroundPlay(requireContext())
             killFragment()
+
             NavigationHelper.navigateVideo(
                 context = requireContext(),
                 videoUrlOrId = PlayingQueue.getCurrent()?.url,
@@ -202,8 +202,6 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         }
 
         binding.miniPlayerClose.setOnClickListener {
-            playerController?.release()
-            BackgroundHelper.stopBackgroundPlay(requireContext())
             killFragment()
         }
 
@@ -233,6 +231,8 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     }
 
     private fun killFragment() {
+        playerController?.sendCustomCommand(AbstractPlayerService.stopServiceCommand, Bundle.EMPTY)
+
         viewModel.isFullscreen.value = false
         binding.playerMotionLayout.transitionToEnd()
         activity.supportFragmentManager.commit {

@@ -89,26 +89,27 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         customCommand: SessionCommand,
         args: Bundle
     ): ListenableFuture<SessionResult> {
-        if (customCommand.customAction == START_SERVICE_ACTION) {
-            PlayingQueue.resetToDefaults()
+        when (customCommand.customAction) {
+            START_SERVICE_ACTION -> {
+                PlayingQueue.resetToDefaults()
 
-            CoroutineScope(Dispatchers.IO).launch {
-                onServiceCreated(args)
-                notificationProvider?.intentActivity = getIntentActivity()
+                CoroutineScope(Dispatchers.IO).launch {
+                    onServiceCreated(args)
+                    notificationProvider?.intentActivity = getIntentActivity()
 
-                startPlayback()
+                    startPlayback()
+                }
             }
-
-            return super.onCustomCommand(session, controller, customCommand, args)
+            STOP_SERVICE_ACTION -> {
+                onDestroy()
+            }
+            RUN_PLAYER_COMMAND_ACTION -> {
+                runPlayerCommand(args)
+            }
+            else -> {
+                handlePlayerAction(PlayerEvent.valueOf(customCommand.customAction))
+            }
         }
-
-        if (customCommand.customAction == RUN_PLAYER_COMMAND_ACTION) {
-            runPlayerCommand(args)
-
-            return super.onCustomCommand(session, controller, customCommand, args)
-        }
-
-        handlePlayerAction(PlayerEvent.valueOf(customCommand.customAction))
 
         return super.onCustomCommand(session, controller, customCommand, args)
     }
@@ -238,11 +239,8 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         val mediaNotificationSessionCommands =
             connectionResult.availableSessionCommands.buildUpon()
                 .also { builder ->
-                    builder.add(startServiceCommand)
-                    builder.add(runPlayerActionCommand)
-                    customLayout.forEach { commandButton ->
-                        commandButton.sessionCommand?.let { builder.add(it) }
-                    }
+                    builder.addSessionCommands(listOf(startServiceCommand, runPlayerActionCommand, stopServiceCommand))
+                    builder.addSessionCommands(customLayout.mapNotNull(CommandButton::sessionCommand))
                 }
                 .build()
 
@@ -332,9 +330,11 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
     companion object {
         private const val START_SERVICE_ACTION = "start_service_action"
+        private const val STOP_SERVICE_ACTION = "stop_service_action"
         private const val RUN_PLAYER_COMMAND_ACTION = "run_player_command_action"
 
         val startServiceCommand = SessionCommand(START_SERVICE_ACTION, Bundle.EMPTY)
+        val stopServiceCommand = SessionCommand(STOP_SERVICE_ACTION, Bundle.EMPTY)
         val runPlayerActionCommand = SessionCommand(RUN_PLAYER_COMMAND_ACTION, Bundle.EMPTY)
     }
 }
