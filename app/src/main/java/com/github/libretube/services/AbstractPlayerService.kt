@@ -154,6 +154,14 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
                     setPreferredTextLanguage(subtitle?.code)
                 }
             }
+
+            args.containsKey(PlayerCommand.PLAY_VIDEO_BY_ID.name) -> {
+                videoId = args.getString(PlayerCommand.PLAY_VIDEO_BY_ID.name) ?: return
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    startPlayback()
+                }
+            }
         }
     }
 
@@ -273,6 +281,11 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
             .build()
     }
 
+    /**
+     * Load the stream source and start the playback.
+     *
+     * This function should base its actions on the videoId variable.
+     */
     abstract suspend fun startPlayback()
 
     fun saveWatchPosition() {

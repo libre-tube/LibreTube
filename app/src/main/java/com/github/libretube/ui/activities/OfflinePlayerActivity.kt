@@ -25,11 +25,13 @@ import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.DownloadChapter
 import com.github.libretube.enums.FileType
+import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.extensions.serializableExtra
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.WindowHelper
+import com.github.libretube.services.AbstractPlayerService
 import com.github.libretube.services.VideoOfflinePlayerService
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.fragments.DownloadTab
@@ -135,10 +137,6 @@ class OfflinePlayerActivity : BaseActivity() {
         binding = ActivityOfflinePlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        PlayingQueue.setOnQueueTapListener { streamItem ->
-            playNextVideo(streamItem.url ?: return@setOnQueueTapListener)
-        }
-
         val arguments = bundleOf(
             IntentData.downloadTab to DownloadTab.VIDEO,
             IntentData.videoId to videoId
@@ -161,9 +159,13 @@ class OfflinePlayerActivity : BaseActivity() {
         }
     }
 
-    private fun playNextVideo(videoId: String) {
-        this.videoId = videoId
-        playVideo()
+    private fun playNextVideo(nextId: String) {
+        this.videoId = nextId
+
+        playerController.sendCustomCommand(
+            AbstractPlayerService.runPlayerActionCommand,
+            bundleOf(PlayerCommand.PLAY_VIDEO_BY_ID.name to nextId)
+        )
     }
 
     private fun initializePlayerView() {

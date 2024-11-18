@@ -4,7 +4,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.core.app.PendingIntentCompat
 import androidx.media3.session.CommandButton
 import androidx.media3.session.DefaultMediaNotificationProvider
@@ -45,8 +44,6 @@ class NowPlayingNotification(
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             }
         }
-
-        Log.e("get intent", intentActivity.name)
 
         return PendingIntentCompat
             .getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT, false)
