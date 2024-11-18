@@ -321,7 +321,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             val maybeStreams: Streams? = mediaMetadata.extras?.parcelable(IntentData.streams)
             maybeStreams?.let {
                 streams = it
-                viewModel.segments = emptyList()
+                viewModel.segments.postValue(emptyList())
                 playVideo()
             }
         }
@@ -330,15 +330,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             super.onPlaylistMetadataChanged(mediaMetadata)
 
             val segments: List<Segment>? = mediaMetadata.extras?.parcelableList(IntentData.segments)
-            viewModel.segments = segments.orEmpty()
-
-            binding.descriptionLayout.setSegments(viewModel.segments)
-            playerBinding.exoProgress.setSegments(viewModel.segments)
-            playerBinding.sbToggle.isVisible = true
-            viewModel.segments.firstOrNull { it.category == PlayerHelper.SPONSOR_HIGHLIGHT_CATEGORY }
-                ?.let {
-                    lifecycleScope.launch(Dispatchers.IO) { initializeHighlight(it) }
-                }
+            viewModel.segments.postValue(segments.orEmpty())
         }
 
         /**
@@ -420,6 +412,16 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         chaptersViewModel.chaptersLiveData.observe(viewLifecycleOwner) {
             binding.player.setCurrentChapterName()
+        }
+
+        viewModel.segments.observe(viewLifecycleOwner) { segments ->
+            binding.descriptionLayout.setSegments(segments)
+            playerBinding.exoProgress.setSegments(segments)
+            playerBinding.sbToggle.isVisible = segments.isNotEmpty()
+            segments.firstOrNull { it.category == PlayerHelper.SPONSOR_HIGHLIGHT_CATEGORY }
+                ?.let {
+                    lifecycleScope.launch(Dispatchers.IO) { initializeHighlight(it) }
+                }
         }
 
         val localDownloadVersion = runBlocking(Dispatchers.IO) {
@@ -915,11 +917,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         if (!playerController.isPlaying || !PlayerHelper.sponsorBlockEnabled) return
 
         handler.postDelayed(this::checkForSegments, 100)
-        if (!PlayerHelper.sponsorBlockEnabled || viewModel.segments.isEmpty()) return
+        if (!PlayerHelper.sponsorBlockEnabled || !viewModel.segments.value.isNullOrEmpty()) return
 
         playerController.checkForSegments(
             requireContext(),
-            viewModel.segments,
+            viewModel.segments.value.orEmpty(),
             viewModel.sponsorBlockConfig,
             // skipping is done by player service
             skipAutomaticallyIfEnabled = false
@@ -935,7 +937,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 return
             }
 
-        if (!playerController.isInSegment(viewModel.segments)) binding.sbSkipBtn.isGone = true
+        if (!playerController.isInSegment(viewModel.segments.value.orEmpty())) binding.sbSkipBtn.isGone = true
     }
 
     private fun playVideo() {

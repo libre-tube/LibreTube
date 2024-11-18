@@ -233,7 +233,7 @@ class OnlinePlayerView(
         val duration = player?.duration?.div(1000) ?: return
         if (duration < 0) return
 
-        val durationWithoutSegments = duration - playerViewModel?.segments.orEmpty().sumOf {
+        val durationWithoutSegments = duration - playerViewModel?.segments?.value.orEmpty().sumOf {
             val (start, end) = it.segmentStartAndEnd
             end.toDouble() - start.toDouble()
         }.toLong()

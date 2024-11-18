@@ -1,5 +1,6 @@
 package com.github.libretube.ui.models
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.media3.common.util.UnstableApi
 import com.github.libretube.api.obj.Segment
@@ -9,7 +10,7 @@ import com.github.libretube.helpers.PlayerHelper
 @UnstableApi
 class PlayerViewModel : ViewModel() {
 
-    var segments = listOf<Segment>()
+    var segments = MutableLiveData<List<Segment>>()
     var currentSubtitle = Subtitle(code = PlayerHelper.defaultSubtitleCode)
     var sponsorBlockConfig = PlayerHelper.getSponsorBlockCategories()
 
