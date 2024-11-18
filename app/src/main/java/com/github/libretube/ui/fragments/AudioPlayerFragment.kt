@@ -2,10 +2,12 @@ package com.github.libretube.ui.fragments
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.text.format.DateUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -297,13 +299,13 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             NavigationHelper.navigateChannel(requireContext(), uploaderId)
         }
 
-        metadata.artworkUri?.let { updateThumbnailAsync(it.toString()) }
+        metadata.artworkUri?.let { updateThumbnailAsync(it) }
 
         initializeSeekBar()
     }
 
-    private fun updateThumbnailAsync(thumbnailUrl: String) {
-        if (DataSaverMode.isEnabled(requireContext())) {
+    private fun updateThumbnailAsync(thumbnailUri: Uri) {
+        if (DataSaverMode.isEnabled(requireContext()) && !isOffline) {
             binding.progress.isVisible = false
             binding.thumbnail.setImageResource(R.drawable.ic_launcher_monochrome)
             val primaryColor = ThemeHelper.getThemeColor(
@@ -321,7 +323,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
 
         lifecycleScope.launch {
             val binding = _binding ?: return@launch
-            val bitmap = ImageHelper.getImage(requireContext(), thumbnailUrl)
+            val bitmap = ImageHelper.getImage(requireContext(), thumbnailUri)
             binding.thumbnail.setImageBitmap(bitmap)
             binding.miniPlayerThumbnail.setImageBitmap(bitmap)
             binding.thumbnail.isVisible = true
