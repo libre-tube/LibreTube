@@ -68,7 +68,7 @@ class WatchHistoryAdapter(
             if (video.uploaderAvatar != null) {
                 ImageHelper.loadImage(video.uploaderAvatar, channelImage, true)
             } else {
-                channelImage.isGone = true
+                channelImageContainer.isGone = true
             }
 
             channelImage.setOnClickListener {

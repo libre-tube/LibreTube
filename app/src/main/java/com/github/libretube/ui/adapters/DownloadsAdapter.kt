@@ -12,7 +12,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
-import com.github.libretube.databinding.DownloadedMediaRowBinding
+import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.extensions.formatAsFileSize
@@ -41,7 +41,7 @@ class DownloadsAdapter(
     private val toggleDownload: (DownloadWithItems) -> Boolean
 ) : RecyclerView.Adapter<DownloadsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DownloadsViewHolder {
-        val binding = DownloadedMediaRowBinding.inflate(
+        val binding = VideoRowBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -53,9 +53,13 @@ class DownloadsAdapter(
     override fun onBindViewHolder(holder: DownloadsViewHolder, position: Int) {
         val download = downloads[position].download
         val items = downloads[position].downloadItems
+
         holder.binding.apply {
-            title.text = download.title
-            uploaderName.text = download.uploader
+            fileSize.isVisible = true
+
+            channelImageContainer.isGone = true
+            videoTitle.text = download.title
+            channelName.text = download.uploader
             videoInfo.text = download.uploadDate?.let { TextUtils.localizeDate(it) }
             watchProgress.setWatchProgressLength(download.videoId, download.duration ?: 0)
 
@@ -81,14 +85,14 @@ class DownloadsAdapter(
             } else {
                 downloadOverlay.isGone = true
                 fileSize.text = totalSizeInfo
-                durationContainer.isVisible = true
+                thumbnailDurationCard.isVisible = true
                 download.duration?.let {
                     thumbnailDuration.text = DateUtils.formatElapsedTime(it)
                 }
             }
 
             download.thumbnailPath?.let { path ->
-                ImageHelper.loadImage(path.toString(), thumbnailImage)
+                ImageHelper.loadImage(path.toString(), thumbnail)
             }
 
             progressBar.setOnClickListener {

@@ -66,6 +66,37 @@
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/downloadOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#BF000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:indeterminateOnly="false"
+                android:progressDrawable="@drawable/circular_progress"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/resumePauseBtn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_download"
+                app:layout_constraintBottom_toBottomOf="@id/progressBar"
+                app:layout_constraintLeft_toLeftOf="@id/progressBar"
+                app:layout_constraintRight_toRightOf="@id/progressBar"
+                app:layout_constraintTop_toTopOf="@id/progressBar" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -108,7 +139,9 @@
             android:id="@+id/channel_image_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="13.5dp">
+            app:cardCornerRadius="13.5dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp">
 
             <ImageView
                 android:id="@+id/channel_image"
@@ -122,9 +155,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="8dp"
             android:ellipsize="end"
+            tools:text="Uploader name"
             android:maxLines="1" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/file_size"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            tools:text="55MB/2050MB"
+            tools:visibility="visible"
+            android:textAlignment="viewEnd" />
 
     </LinearLayout>
 
