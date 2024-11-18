@@ -555,4 +555,5 @@
     <string name="dialog_play_offline_body">¿Te gustaría reproducir el video de la carpeta de descarga?</string>
     <string name="dialog_play_offline_title">Se dispone de una versión local de este vídeo.</string>
     <string name="upcoming">Próximamente</string>
+    <string name="delete_only_watched_videos">Borrar solo los vídeos ya vistos</string>
 </resources>

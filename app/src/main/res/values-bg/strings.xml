@@ -552,4 +552,5 @@
     <string name="dialog_play_offline_body">Искате ли да изпълните видеото от папката за изтегляне?</string>
     <string name="dialog_play_offline_title">Налична е локална версия на това видео.</string>
     <string name="upcoming">Предстоящ</string>
+    <string name="delete_only_watched_videos">Изтриване само на вече гледани видеоклипове</string>
 </resources>

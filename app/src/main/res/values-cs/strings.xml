@@ -555,4 +555,5 @@
     <string name="dialog_play_offline_title">Je dostupná lokální verze tohoto videa.</string>
     <string name="dialog_play_offline_body">Chcete přehrát stažené video?</string>
     <string name="upcoming">Nadcházející</string>
+    <string name="delete_only_watched_videos">Odstranit pouze zhlédnutá videa</string>
 </resources>
