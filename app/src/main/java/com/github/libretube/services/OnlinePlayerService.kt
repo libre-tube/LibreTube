@@ -1,38 +1,52 @@
 package com.github.libretube.services
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.core.net.toUri
+import androidx.core.os.bundleOf
 import androidx.media3.common.MediaItem
+import androidx.media3.common.MediaItem.SubtitleConfiguration
+import androidx.media3.common.MediaMetadata
 import androidx.media3.common.MimeTypes
 import androidx.media3.common.Player
+import androidx.media3.datasource.cronet.CronetDataSource
+import androidx.media3.exoplayer.hls.HlsMediaSource
+import com.github.libretube.R
+import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.StreamsExtractor
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHelper
+import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
+import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.checkForSegments
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.util.PlayingQueue
+import com.github.libretube.util.YoutubeHlsPlaylistParser
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
+import java.util.concurrent.Executors
 
 /**
  * Loads the selected videos audio in background mode with a notification area.
  */
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
-class OnlinePlayerService : AbstractPlayerService() {
+open class OnlinePlayerService : AbstractPlayerService() {
     override val isOfflinePlayer: Boolean = false
     override val isAudioOnlyPlayer: Boolean = true
     override val intentActivity: Class<*> = MainActivity::class.java
@@ -42,6 +56,11 @@ class OnlinePlayerService : AbstractPlayerService() {
     private var channelId: String? = null
     private var startTimestamp: Long? = null
 
+    private val cronetDataSourceFactory = CronetDataSource.Factory(
+        CronetHelper.cronetEngine,
+        Executors.newCachedThreadPool()
+    )
+
     /**
      * The response that gets when called the Api.
      */
@@ -49,6 +68,7 @@ class OnlinePlayerService : AbstractPlayerService() {
         private set
 
     // SponsorBlock Segment data
+    private var sponsorBlockAutoSkip = true
     private var sponsorBlockSegments = listOf<Segment>()
     private var sponsorBlockConfig = PlayerHelper.getSponsorBlockCategories()
 
@@ -90,6 +110,7 @@ class OnlinePlayerService : AbstractPlayerService() {
         // get the intent arguments
         videoId = playerData.videoId
         playlistId = playerData.playlistId
+        channelId = playerData.channelId
         startTimestamp = playerData.timestamp
 
         if (!playerData.keepQueue) PlayingQueue.clear()
@@ -111,7 +132,8 @@ class OnlinePlayerService : AbstractPlayerService() {
             try {
                 StreamsExtractor.extractStreams(videoId)
             } catch (e: Exception) {
-                val errorMessage = StreamsExtractor.getExtractorErrorMessageString(this@OnlinePlayerService, e)
+                val errorMessage =
+                    StreamsExtractor.getExtractorErrorMessageString(this@OnlinePlayerService, e)
                 this@OnlinePlayerService.toastFromMainDispatcher(errorMessage)
                 return@withContext null
             }
@@ -139,18 +161,14 @@ class OnlinePlayerService : AbstractPlayerService() {
     }
 
     private fun playAudio(seekToPosition: Long) {
-        scope.launch {
-            setMediaItem()
+        setStreamSource()
 
-            withContext(Dispatchers.Main) {
-                // seek to the previous position if available
-                if (seekToPosition != 0L) {
-                    exoPlayer?.seekTo(seekToPosition)
-                } else if (PlayerHelper.watchPositionsAudio) {
-                    PlayerHelper.getStoredWatchPosition(videoId, streams?.duration)?.let {
-                        exoPlayer?.seekTo(it)
-                    }
-                }
+        // seek to the previous position if available
+        if (seekToPosition != 0L) {
+            exoPlayer?.seekTo(seekToPosition)
+        } else if (PlayerHelper.watchPositionsAudio) {
+            PlayerHelper.getStoredWatchPosition(videoId, streams?.duration)?.let {
+                exoPlayer?.seekTo(it)
             }
         }
 
@@ -174,6 +192,7 @@ class OnlinePlayerService : AbstractPlayerService() {
         saveWatchPosition()
 
         if (!PlayerHelper.isAutoPlayEnabled(playlistId != null) && nextId == null) return
+        if (!isAudioOnlyPlayer && PlayerHelper.autoPlayCountdown) return
 
         val nextVideo = nextId ?: PlayingQueue.getNext() ?: return
 
@@ -188,42 +207,26 @@ class OnlinePlayerService : AbstractPlayerService() {
     }
 
     /**
-     * Sets the [MediaItem] with the [streams] into the [exoPlayer]
-     */
-    private suspend fun setMediaItem() {
-        val streams = streams ?: return
-
-        val (uri, mimeType) =
-            if (!PlayerHelper.useHlsOverDash && streams.audioStreams.isNotEmpty()) {
-                PlayerHelper.createDashSource(streams, this) to MimeTypes.APPLICATION_MPD
-            } else {
-                ProxyHelper.unwrapStreamUrl(streams.hls.orEmpty())
-                    .toUri() to MimeTypes.APPLICATION_M3U8
-            }
-
-        val mediaItem = MediaItem.Builder()
-            .setUri(uri)
-            .setMimeType(mimeType)
-            .setMetadata(streams)
-            .build()
-        withContext(Dispatchers.Main) { exoPlayer?.setMediaItem(mediaItem) }
-    }
-
-    /**
      * fetch the segments for SponsorBlock
      */
-    private fun fetchSponsorBlockSegments() {
-        scope.launch(Dispatchers.IO) {
-            runCatching {
-                if (sponsorBlockConfig.isEmpty()) return@runCatching
-                sponsorBlockSegments = RetrofitInstance.api.getSegments(
-                    videoId,
-                    JsonHelper.json.encodeToString(sponsorBlockConfig.keys)
-                ).segments
+    private fun fetchSponsorBlockSegments() = scope.launch(Dispatchers.IO) {
+        runCatching {
+            if (sponsorBlockConfig.isEmpty()) return@runCatching
+            sponsorBlockSegments = RetrofitInstance.api.getSegments(
+                videoId,
+                JsonHelper.json.encodeToString(sponsorBlockConfig.keys)
+            ).segments
+
+            withContext(Dispatchers.Main) {
+                exoPlayer?.playlistMetadata = MediaMetadata.Builder()
+                    .setExtras(bundleOf(IntentData.segments to ArrayList(sponsorBlockSegments)))
+                    .build()
+
                 checkForSegments()
             }
         }
     }
+
 
     /**
      * check for SponsorBlock segments
@@ -231,6 +234,96 @@ class OnlinePlayerService : AbstractPlayerService() {
     private fun checkForSegments() {
         handler.postDelayed(this::checkForSegments, 100)
 
-        exoPlayer?.checkForSegments(this, sponsorBlockSegments, sponsorBlockConfig)
+        exoPlayer?.checkForSegments(
+            this,
+            sponsorBlockSegments,
+            sponsorBlockConfig,
+            skipAutomaticallyIfEnabled = sponsorBlockAutoSkip
+        )
     }
+
+    override fun runPlayerCommand(args: Bundle) {
+        super.runPlayerCommand(args)
+
+        if (args.containsKey(PlayerCommand.SET_SB_AUTO_SKIP_ENABLED.name)) {
+            sponsorBlockAutoSkip = args.getBoolean(PlayerCommand.SET_SB_AUTO_SKIP_ENABLED.name)
+        }
+    }
+
+    /**
+     * Sets the [MediaItem] with the [streams] into the [exoPlayer]
+     */
+    private fun setStreamSource() {
+        val streams = streams ?: return
+
+        when {
+            // LBRY HLS
+            PreferenceHelper.getBoolean(
+                PreferenceKeys.LBRY_HLS,
+                false
+            ) && streams.videoStreams.any {
+                it.quality.orEmpty().contains("LBRY HLS")
+            } -> {
+                val lbryHlsUrl = streams.videoStreams.first {
+                    it.quality!!.contains("LBRY HLS")
+                }.url!!
+
+                val mediaItem =
+                    createMediaItem(lbryHlsUrl.toUri(), MimeTypes.APPLICATION_M3U8, streams)
+                exoPlayer?.setMediaItem(mediaItem)
+            }
+            // DASH
+            !PlayerHelper.useHlsOverDash && streams.videoStreams.isNotEmpty() -> {
+                // only use the dash manifest generated by YT if either it's a livestream or no other source is available
+                val dashUri =
+                    if (streams.isLive && streams.dash != null) {
+                        ProxyHelper.unwrapStreamUrl(
+                            streams.dash
+                        ).toUri()
+                    } else {
+                        // skip LBRY urls when checking whether the stream source is usable
+                        PlayerHelper.createDashSource(streams, this)
+                    }
+
+                val mediaItem = createMediaItem(dashUri, MimeTypes.APPLICATION_MPD, streams)
+                exoPlayer?.setMediaItem(mediaItem)
+            }
+            // HLS
+            streams.hls != null -> {
+                val hlsMediaSourceFactory = HlsMediaSource.Factory(cronetDataSourceFactory)
+                    .setPlaylistParserFactory(YoutubeHlsPlaylistParser.Factory())
+
+                val mediaItem = createMediaItem(
+                    ProxyHelper.unwrapStreamUrl(streams.hls).toUri(),
+                    MimeTypes.APPLICATION_M3U8,
+                    streams
+                )
+                val mediaSource = hlsMediaSourceFactory.createMediaSource(mediaItem)
+
+                exoPlayer?.setMediaSource(mediaSource)
+                return
+            }
+            // NO STREAM FOUND
+            else -> {
+                toastFromMainThread(R.string.unknown_error)
+                return
+            }
+        }
+    }
+
+    private fun getSubtitleConfigs(): List<SubtitleConfiguration> = streams?.subtitles?.map {
+        val roleFlags = getSubtitleRoleFlags(it)
+        SubtitleConfiguration.Builder(it.url!!.toUri())
+            .setRoleFlags(roleFlags)
+            .setLanguage(it.code)
+            .setMimeType(it.mimeType).build()
+    }.orEmpty()
+
+    private fun createMediaItem(uri: Uri, mimeType: String, streams: Streams) =
+        MediaItem.Builder()
+            .setUri(uri)
+            .setMimeType(mimeType)
+            .setSubtitleConfigurations(getSubtitleConfigs())
+            .setMetadata(streams, videoId)
+            .build()
 }

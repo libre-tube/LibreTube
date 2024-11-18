@@ -16,6 +16,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.PixelCopy
@@ -44,6 +45,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.C
+import androidx.media3.common.MediaMetadata
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.session.MediaController
@@ -58,16 +60,15 @@ import com.github.libretube.compat.PictureInPictureParamsCompat
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentPlayerBinding
-import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.parcelable
+import com.github.libretube.extensions.parcelableList
 import com.github.libretube.extensions.serializableExtra
 import com.github.libretube.extensions.toID
-import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateIfChanged
 import com.github.libretube.helpers.BackgroundHelper
@@ -106,7 +107,6 @@ import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.CommentsSheet
 import com.github.libretube.ui.sheets.StatsSheet
 import com.github.libretube.util.OnlineTimeFrameReceiver
-import com.github.libretube.util.PauseableTimer
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
@@ -137,13 +137,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private lateinit var videoId: String
     private var playlistId: String? = null
     private var channelId: String? = null
-    private var keepQueue = false
-    private var timeStamp = 0L
     private var isShort = false
 
     // data and objects stored for the player
     private lateinit var streams: Streams
-    private var isPlayerTransitioning = true
 
     // if null, it's been set to automatic
     private var fullscreenResolution: Int? = null
@@ -224,12 +221,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
     }
 
-    // schedule task to save the watch position each second
-    private val watchPositionTimer = PauseableTimer(
-        onTick = this::saveWatchPosition,
-        delayMillis = PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS
-    )
-
     private var bufferingTimeoutTask: Runnable? = null
 
     private val playerListener = object : Player.Listener {
@@ -246,25 +237,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 BackgroundHelper.stopBackgroundPlay(requireContext())
             }
 
-            // add the video to the watch history when starting to play the video
-            if (isPlaying && PlayerHelper.watchHistoryEnabled) {
-                lifecycleScope.launch(Dispatchers.IO) {
-                    DatabaseHelper.addToWatchHistory(videoId, streams)
-                }
-            }
-
             if (isPlaying && PlayerHelper.sponsorBlockEnabled) {
                 handler.postDelayed(
                     this@PlayerFragment::checkForSegments,
                     100
                 )
-            }
-
-            // Start or pause watch position timer
-            if (isPlaying) {
-                watchPositionTimer.resume()
-            } else {
-                watchPositionTimer.pause()
             }
         }
 
@@ -282,8 +259,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         override fun onPlaybackStateChanged(playbackState: Int) {
-            saveWatchPosition()
-
             // set the playback speed to one if having reached the end of a livestream
             if (playbackState == Player.STATE_BUFFERING && binding.player.isLive &&
                 playerController.duration - playerController.currentPosition < 700
@@ -293,21 +268,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             // check if video has ended, next video is available and autoplay is enabled/the video is part of a played playlist.
             if (playbackState == Player.STATE_ENDED) {
-                if (!isPlayerTransitioning && PlayerHelper.isAutoPlayEnabled(playlistId != null)) {
-                    isPlayerTransitioning = true
-                    if (PlayerHelper.autoPlayCountdown) {
-                        showAutoPlayCountdown()
-                    } else {
-                        playNextVideo()
-                    }
+                if (PlayerHelper.isAutoPlayEnabled(playlistId != null) && PlayerHelper.autoPlayCountdown) {
+                    showAutoPlayCountdown()
                 } else {
                     binding.player.showControllerPermanently()
                 }
-            }
-
-            if (playbackState == Player.STATE_READY) {
-                // media actually playing
-                isPlayerTransitioning = false
             }
 
             // listen for the stop button in the notification
@@ -332,6 +297,37 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
 
             super.onPlaybackStateChanged(playbackState)
+        }
+
+        override fun onMediaMetadataChanged(mediaMetadata: MediaMetadata) {
+            super.onMediaMetadataChanged(mediaMetadata)
+
+            mediaMetadata.extras?.getString(IntentData.videoId)?.let {
+                videoId = it
+            }
+
+            val maybeStreams: Streams? = mediaMetadata.extras?.parcelable(IntentData.streams)
+            maybeStreams?.let {
+                streams = it
+                viewModel.segments = emptyList()
+                playVideo()
+            }
+        }
+
+        override fun onPlaylistMetadataChanged(mediaMetadata: MediaMetadata) {
+            super.onPlaylistMetadataChanged(mediaMetadata)
+
+            val segments: List<Segment>? = mediaMetadata.extras?.parcelableList(IntentData.segments)
+            viewModel.segments = segments.orEmpty()
+
+            playerBinding.exoProgress.setSegments(viewModel.segments)
+            playerBinding.sbToggle.isVisible = true
+            viewModel.segments.firstOrNull { it.category == PlayerHelper.SPONSOR_HIGHLIGHT_CATEGORY }
+                ?.let {
+                    lifecycleScope.launch(Dispatchers.IO) { initializeHighlight(it) }
+                }
+
+            Log.e("rec", "segments received")
         }
 
         /**
@@ -369,12 +365,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val playerData = requireArguments().parcelable<PlayerData>(IntentData.playerData)!!
-        videoId = playerData.videoId
-        playlistId = playerData.playlistId
-        channelId = playerData.channelId
-        keepQueue = playerData.keepQueue
-        timeStamp = playerData.timestamp
 
         // broadcast receiver for PiP actions
         ContextCompat.registerReceiver(
@@ -386,11 +376,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         fullscreenResolution = PlayerHelper.getDefaultResolution(requireContext(), true)
         noFullscreenResolution = PlayerHelper.getDefaultResolution(requireContext(), false)
-
-        BackgroundHelper.startMediaService(requireContext(), VideoOnlinePlayerService::class.java, bundleOf()) {
-            playerController = it
-            playerController.addListener(playerListener)
-        }
     }
 
     override fun onCreateView(
@@ -406,11 +391,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         super.onViewCreated(view, savedInstanceState)
         SoftwareKeyboardControllerCompat(view).hide()
 
-        // reset the callbacks of the playing queue
-        PlayingQueue.resetToDefaults()
-
-        // clear the playing queue
-        if (!keepQueue) PlayingQueue.clear()
+        val playerData = requireArguments().parcelable<PlayerData>(IntentData.playerData)!!
+        videoId = playerData.videoId
+        playlistId = playerData.playlistId
+        channelId = playerData.channelId
 
         changeOrientationMode()
 
@@ -439,7 +423,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     // offline video playback started and thus the player fragment is no longer needed
                     killPlayerFragment()
                 } else {
-                    playVideo()
+                    attachToPlayerService(playerData)
                 }
             }
 
@@ -456,20 +440,19 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 )
             }.show(childFragmentManager, null)
         } else {
-            playVideo()
+            attachToPlayerService(playerData)
         }
-
-        showBottomBar()
     }
 
-    /**
-     * somehow the bottom bar is invisible on low screen resolutions, this fixes it
-     */
-    private fun showBottomBar() {
-        if (_binding?.player?.isPlayerLocked == false) {
-            playerBinding.bottomBar.isVisible = true
+    private fun attachToPlayerService(playerData: PlayerData) {
+        BackgroundHelper.startMediaService(
+            requireContext(),
+            VideoOnlinePlayerService::class.java,
+            bundleOf(IntentData.playerData to playerData)
+        ) {
+            playerController = it
+            playerController.addListener(playerListener)
         }
-        handler.postDelayed(this::showBottomBar, 100)
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -838,13 +821,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             playerController.pause()
         }
 
-        // the app was put somewhere in the background - remember to not automatically continue
-        // playing on re-creation of the app
-        // only run if the re-creation is not caused by an orientation change
-        if (!viewModel.isOrientationChangeInProgress) {
-            requireArguments().putBoolean(IntentData.wasIntentStopped, true)
-        }
-
         super.onPause()
     }
 
@@ -868,9 +844,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     override fun onDestroy() {
         super.onDestroy()
 
-        saveWatchPosition()
-
-        watchPositionTimer.destroy()
         handler.removeCallbacksAndMessages(null)
 
         playerController.removeListener(playerListener)
@@ -927,26 +900,22 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
     }
 
-    // save the watch position if video isn't finished and option enabled
-    private fun saveWatchPosition() {
-        if (!isPlayerTransitioning && PlayerHelper.watchPositionsVideo) {
-            PlayerHelper.saveWatchPosition(playerController, videoId)
-        }
-    }
-
     private fun checkForSegments() {
         if (!playerController.isPlaying || !PlayerHelper.sponsorBlockEnabled) return
 
         handler.postDelayed(this::checkForSegments, 100)
-        if (!viewModel.sponsorBlockEnabled || viewModel.segments.isEmpty()) return
+        if (!PlayerHelper.sponsorBlockEnabled || viewModel.segments.isEmpty()) return
 
         playerController.checkForSegments(
             requireContext(),
             viewModel.segments,
-            viewModel.sponsorBlockConfig
+            viewModel.sponsorBlockConfig,
+            // skipping is done by player service
+            skipAutomaticallyIfEnabled = false
         )
             ?.let { segment ->
                 if (commonPlayerViewModel.isMiniPlayerVisible.value == true) return@let
+
                 binding.sbSkipBtn.isVisible = true
                 binding.sbSkipBtn.setOnClickListener {
                     playerController.seekTo((segment.segmentStartAndEnd.second * 1000f).toLong())
@@ -954,8 +923,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 }
                 return
             }
-        if (!playerController.isInSegment(viewModel.segments)) binding.sbSkipBtn.isGone =
-            true
+
+        if (!playerController.isInSegment(viewModel.segments)) binding.sbSkipBtn.isGone = true
     }
 
     private fun playVideo() {
@@ -966,103 +935,49 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // reset the comments to become reloaded later
         commentsViewModel.reset()
 
-        lifecycleScope.launch(Dispatchers.Main) {
-            viewModel.fetchVideoInfo(requireContext(), videoId).let { (streams, errorMessage) ->
-                if (errorMessage != null) {
-                    context?.toastFromMainDispatcher(errorMessage, Toast.LENGTH_LONG)
-                    return@launch
-                }
+        // hide the button to skip SponsorBlock segments manually
+        binding.sbSkipBtn.isGone = true
 
-                this@PlayerFragment.streams = streams!!
-                playerController.sendCustomCommand(
-                    AbstractPlayerService.startServiceCommand,
-                    bundleOf(IntentData.streams to streams)
-                )
-            }
+        // use the video's default audio track when starting playback
+        playerController.sendCustomCommand(
+            AbstractPlayerService.runPlayerActionCommand, bundleOf(
+                PlayerCommand.SET_AUDIO_ROLE_FLAGS.name to C.ROLE_FLAG_MAIN
+            )
+        )
 
-            val isFirstVideo = PlayingQueue.isEmpty()
-            if (isFirstVideo) {
-                PlayingQueue.updateQueue(streams.toStreamItem(videoId), playlistId, channelId)
-            } else {
-                PlayingQueue.updateCurrent(streams.toStreamItem(videoId))
-            }
-            val isLastVideo = !isFirstVideo && PlayingQueue.isLast()
-            val isAutoQueue = playlistId == null && channelId == null
-            if ((isFirstVideo || isLastVideo) && isAutoQueue) {
-                PlayingQueue.insertRelatedStreams(streams.relatedStreams)
-            }
+        // set the default subtitle if available
+        updateCurrentSubtitle(viewModel.currentSubtitle)
 
-            val videoStream = streams.videoStreams.firstOrNull()
-            isShort = PlayingQueue.getCurrent()?.isShort == true ||
-                    (videoStream?.height ?: 0) > (videoStream?.width ?: 0)
+        // set media source and resolution in the beginning
+        updateResolution(commonPlayerViewModel.isFullscreen.value == true)
 
-            PlayingQueue.setOnQueueTapListener { streamItem ->
-                streamItem.url?.toID()?.let { playNextVideo(it) }
-            }
-
-            // hide the button to skip SponsorBlock segments manually
-            binding.sbSkipBtn.isGone = true
-
-            // set media sources for the player
-            if (!viewModel.isOrientationChangeInProgress) initStreamSources()
-
-            if (PreferenceHelper.getBoolean(PreferenceKeys.AUTO_FULLSCREEN_SHORTS, false) &&
-                isShort && binding.playerMotionLayout.progress == 0f
-            ) {
-                setFullscreen()
-            }
-
-            binding.player.apply {
-                useController = false
-                player = playerController
-            }
-
-            initializePlayerView()
-
-            // don't continue playback when the fragment is re-created after Android killed it
-            val wasIntentStopped = requireArguments().getBoolean(IntentData.wasIntentStopped, false)
-            playerController.playWhenReady =
-                PlayerHelper.playAutomatically && !wasIntentStopped
-            requireArguments().putBoolean(IntentData.wasIntentStopped, false)
-
-            playerController.prepare()
-
-            if (binding.playerMotionLayout.progress != 1.0f) {
-                // show controllers when not in picture in picture mode
-                val inPipMode = PlayerHelper.pipEnabled &&
-                        PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
-                if (!inPipMode) {
-                    binding.player.useController = true
-                }
-            }
-
-            fetchSponsorBlockSegments()
-
-            if (streams.category == Streams.categoryMusic) {
-                playerController.setPlaybackSpeed(1f)
-            }
-
-            viewModel.isOrientationChangeInProgress = false
+        if (PreferenceHelper.getBoolean(PreferenceKeys.AUTO_FULLSCREEN_SHORTS, false) &&
+            isShort && binding.playerMotionLayout.progress == 0f
+        ) {
+            setFullscreen()
         }
-    }
 
-    private suspend fun fetchSponsorBlockSegments() {
-        viewModel.sponsorBlockConfig = PlayerHelper.getSponsorBlockCategories()
-
-        // Since the highlight is also a chapter, we need to fetch the other segments
-        // first
-        viewModel.fetchSponsorBlockSegments(videoId)
-
-        if (viewModel.segments.isEmpty()) return
-
-        withContext(Dispatchers.Main) {
-            playerBinding.exoProgress.setSegments(viewModel.segments)
-            playerBinding.sbToggle.isVisible = true
+        binding.player.apply {
+            useController = false
+            player = playerController
         }
-        viewModel.segments.firstOrNull { it.category == PlayerHelper.SPONSOR_HIGHLIGHT_CATEGORY }
-            ?.let {
-                initializeHighlight(it)
+
+        initializePlayerView()
+
+        if (binding.playerMotionLayout.progress != 1.0f) {
+            // show controllers when not in picture in picture mode
+            val inPipMode = PlayerHelper.pipEnabled &&
+                    PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
+            if (!inPipMode) {
+                binding.player.useController = true
             }
+        }
+
+        if (streams.category == Streams.categoryMusic) {
+            playerController.setPlaybackSpeed(1f)
+        }
+
+        viewModel.isOrientationChangeInProgress = false
     }
 
     /**
@@ -1076,19 +991,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         if (!PlayerHelper.isAutoPlayEnabled(playlistId != null) && nextId == null) return
 
-        // save the current watch position before starting the next video
-        saveWatchPosition()
-
         videoId = nextId ?: PlayingQueue.getNext() ?: return
-        isPlayerTransitioning = true
 
         // fix: if the fragment is recreated, play the current video, and not the initial one
         arguments?.run {
             val playerData = parcelable<PlayerData>(IntentData.playerData)!!.copy(videoId = videoId)
             putParcelable(IntentData.playerData, playerData)
-            // make sure that autoplay continues without issues as the activity is obviously still alive
-            // when starting to play the next video
-            putBoolean(IntentData.wasIntentStopped, false)
         }
 
         // start to play the next video
@@ -1243,37 +1151,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         resolutions.add(VideoResolution(getString(R.string.auto_quality), Int.MAX_VALUE))
         return resolutions.toList()
-    }
-
-    private fun initStreamSources() {
-        // use the video's default audio track when starting playback
-        playerController.sendCustomCommand(
-            AbstractPlayerService.runPlayerActionCommand, bundleOf(
-                PlayerCommand.SET_AUDIO_ROLE_FLAGS.name to C.ROLE_FLAG_MAIN
-            )
-        )
-
-        // set the default subtitle if available
-        updateCurrentSubtitle(viewModel.currentSubtitle)
-
-        // set media source and resolution in the beginning
-        updateResolution(commonPlayerViewModel.isFullscreen.value == true)
-        playerController.sendCustomCommand(
-            AbstractPlayerService.runPlayerActionCommand,
-            bundleOf(PlayerCommand.START_PLAYBACK.name to true)
-        )
-
-        // support for time stamped links
-        if (timeStamp != 0L) {
-            playerController.seekTo(timeStamp * 1000)
-            // delete the time stamp because it already got consumed
-            timeStamp = 0L
-        } else if (!streams.isLive) {
-            // seek to the saved watch position
-            PlayerHelper.getStoredWatchPosition(videoId, streams.duration)?.let {
-                playerController.seekTo(it)
-            }
-        }
     }
 
     private fun setPlayerResolution(resolution: Int, isSelectedByUser: Boolean = false) {

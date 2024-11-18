@@ -24,7 +24,6 @@ import com.github.libretube.databinding.ActivityOfflinePlayerBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.DownloadChapter
-import com.github.libretube.db.obj.filterByTab
 import com.github.libretube.enums.FileType
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.extensions.serializableExtra
@@ -39,7 +38,6 @@ import com.github.libretube.ui.listeners.SeekbarPreviewListener
 import com.github.libretube.ui.models.ChaptersViewModel
 import com.github.libretube.ui.models.CommonPlayerViewModel
 import com.github.libretube.util.OfflineTimeFrameReceiver
-import com.github.libretube.util.PauseableTimer
 import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -58,11 +56,6 @@ class OfflinePlayerActivity : BaseActivity() {
     private lateinit var playerBinding: ExoStyledPlayerControlViewBinding
     private val commonPlayerViewModel: CommonPlayerViewModel by viewModels()
     private val chaptersViewModel: ChaptersViewModel by viewModels()
-
-    private val watchPositionTimer = PauseableTimer(
-        onTick = this::saveWatchPosition,
-        delayMillis = PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS
-    )
 
     private val playerListener = object : Player.Listener {
         override fun onEvents(player: Player, events: Player.Events) {
@@ -87,13 +80,6 @@ class OfflinePlayerActivity : BaseActivity() {
                     pipParams
                 )
             }
-
-            // Start or pause watch position timer
-            if (isPlaying) {
-                watchPositionTimer.resume()
-            } else {
-                watchPositionTimer.pause()
-            }
         }
 
         override fun onPlaybackStateChanged(playbackState: Int) {
@@ -107,10 +93,6 @@ class OfflinePlayerActivity : BaseActivity() {
                         playerController.duration
                     )
                 )
-            }
-
-            if (playbackState == Player.STATE_ENDED && PlayerHelper.isAutoPlayEnabled()) {
-                playNextVideo(PlayingQueue.getNext() ?: return)
             }
         }
     }
@@ -153,9 +135,6 @@ class OfflinePlayerActivity : BaseActivity() {
         binding = ActivityOfflinePlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        PlayingQueue.resetToDefaults()
-        PlayingQueue.clear()
-
         PlayingQueue.setOnQueueTapListener { streamItem ->
             playNextVideo(streamItem.url ?: return@setOnQueueTapListener)
         }
@@ -180,12 +159,9 @@ class OfflinePlayerActivity : BaseActivity() {
         if (PlayerHelper.pipEnabled) {
             PictureInPictureCompat.setPictureInPictureParams(this, pipParams)
         }
-
-        lifecycleScope.launch { fillQueue() }
     }
 
     private fun playNextVideo(videoId: String) {
-        saveWatchPosition()
         this.videoId = videoId
         playVideo()
     }
@@ -234,27 +210,7 @@ class OfflinePlayerActivity : BaseActivity() {
             timeFrameReceiver = downloadFiles.firstOrNull { it.type == FileType.VIDEO }?.path?.let {
                 OfflineTimeFrameReceiver(this@OfflinePlayerActivity, it)
             }
-
-            if (PlayerHelper.watchPositionsVideo) {
-                PlayerHelper.getStoredWatchPosition(videoId, downloadInfo.duration)?.let {
-                    playerController.seekTo(it)
-                }
-            }
         }
-    }
-
-    private suspend fun fillQueue() {
-        val downloads = withContext(Dispatchers.IO) {
-            Database.downloadDao().getAll()
-        }.filterByTab(DownloadTab.VIDEO)
-
-        PlayingQueue.insertRelatedStreams(downloads.map { it.download.toStreamItem() })
-    }
-
-    private fun saveWatchPosition() {
-        if (!PlayerHelper.watchPositionsVideo) return
-
-        PlayerHelper.saveWatchPosition(playerController, videoId)
     }
 
     override fun onResume() {
@@ -272,14 +228,6 @@ class OfflinePlayerActivity : BaseActivity() {
     }
 
     override fun onDestroy() {
-        saveWatchPosition()
-
-        watchPositionTimer.destroy()
-
-        runCatching {
-            playerController.stop()
-        }
-
         runCatching {
             unregisterReceiver(playerActionReceiver)
         }

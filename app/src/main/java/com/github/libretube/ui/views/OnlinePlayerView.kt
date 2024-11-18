@@ -14,14 +14,17 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.media3.common.C
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
+import androidx.media3.session.MediaController
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.BottomSheetItem
+import com.github.libretube.services.AbstractPlayerService
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.SubmitDeArrowDialog
 import com.github.libretube.ui.dialogs.SubmitSegmentDialog
@@ -49,39 +52,43 @@ class OnlinePlayerView(
     var currentWindow: Window? = null
 
     var selectedResolution: Int? = null
+    private var sponsorBlockAutoSkip = true
 
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
     override fun getOptionsMenuItems(): List<BottomSheetItem> {
         return super.getOptionsMenuItems() +
-            listOf(
-                BottomSheetItem(
-                    context.getString(R.string.quality),
-                    R.drawable.ic_hd,
-                    this::getCurrentResolutionSummary
-                ) {
-                    playerOptions?.onQualityClicked()
-                },
-                BottomSheetItem(
-                    context.getString(R.string.audio_track),
-                    R.drawable.ic_audio,
-                    this::getCurrentAudioTrackTitle
-                ) {
-                    playerOptions?.onAudioStreamClicked()
-                },
-                BottomSheetItem(
-                    context.getString(R.string.captions),
-                    R.drawable.ic_caption,
-                    { playerViewModel?.currentSubtitle?.code ?: context.getString(R.string.none) }
-                ) {
-                    playerOptions?.onCaptionsClicked()
-                },
-                BottomSheetItem(
-                    context.getString(R.string.stats_for_nerds),
-                    R.drawable.ic_info
-                ) {
-                    playerOptions?.onStatsClicked()
-                }
-            )
+                listOf(
+                    BottomSheetItem(
+                        context.getString(R.string.quality),
+                        R.drawable.ic_hd,
+                        this::getCurrentResolutionSummary
+                    ) {
+                        playerOptions?.onQualityClicked()
+                    },
+                    BottomSheetItem(
+                        context.getString(R.string.audio_track),
+                        R.drawable.ic_audio,
+                        this::getCurrentAudioTrackTitle
+                    ) {
+                        playerOptions?.onAudioStreamClicked()
+                    },
+                    BottomSheetItem(
+                        context.getString(R.string.captions),
+                        R.drawable.ic_caption,
+                        {
+                            playerViewModel?.currentSubtitle?.code
+                                ?: context.getString(R.string.none)
+                        }
+                    ) {
+                        playerOptions?.onCaptionsClicked()
+                    },
+                    BottomSheetItem(
+                        context.getString(R.string.stats_for_nerds),
+                        R.drawable.ic_info
+                    ) {
+                        playerOptions?.onStatsClicked()
+                    }
+                )
     }
 
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
@@ -153,7 +160,8 @@ class OnlinePlayerView(
             updateTopBarMargin()
 
             binding.fullscreen.isInvisible = PlayerHelper.autoFullscreenEnabled
-            val fullscreenDrawable = if (isFullscreen) R.drawable.ic_fullscreen_exit else R.drawable.ic_fullscreen
+            val fullscreenDrawable =
+                if (isFullscreen) R.drawable.ic_fullscreen_exit else R.drawable.ic_fullscreen
             binding.fullscreen.setImageResource(fullscreenDrawable)
 
             binding.exoTitle.isInvisible = !isFullscreen
@@ -161,25 +169,32 @@ class OnlinePlayerView(
 
         val updateSbImageResource = {
             binding.sbToggle.setImageResource(
-                if (playerViewModel.sponsorBlockEnabled) R.drawable.ic_sb_enabled else R.drawable.ic_sb_disabled
+                if (sponsorBlockAutoSkip) R.drawable.ic_sb_enabled else R.drawable.ic_sb_disabled
             )
         }
         updateSbImageResource()
         binding.sbToggle.setOnClickListener {
-            playerViewModel.sponsorBlockEnabled = !playerViewModel.sponsorBlockEnabled
+            sponsorBlockAutoSkip = !sponsorBlockAutoSkip
+            (player as? MediaController)?.sendCustomCommand(
+                AbstractPlayerService.runPlayerActionCommand, bundleOf(
+                    PlayerCommand.SET_SB_AUTO_SKIP_ENABLED.name to sponsorBlockAutoSkip
+                )
+            )
             updateSbImageResource()
         }
 
         syncQueueButtons()
 
-        binding.sbSubmit.isVisible = PreferenceHelper.getBoolean(PreferenceKeys.CONTRIBUTE_TO_SB, false)
+        binding.sbSubmit.isVisible =
+            PreferenceHelper.getBoolean(PreferenceKeys.CONTRIBUTE_TO_SB, false)
         binding.sbSubmit.setOnClickListener {
             val submitSegmentDialog = SubmitSegmentDialog()
             submitSegmentDialog.arguments = buildSbBundleArgs() ?: return@setOnClickListener
             submitSegmentDialog.show((context as BaseActivity).supportFragmentManager, null)
         }
 
-        binding.dearrowSubmit.isVisible = PreferenceHelper.getBoolean(PreferenceKeys.CONTRIBUTE_TO_DEARROW, false)
+        binding.dearrowSubmit.isVisible =
+            PreferenceHelper.getBoolean(PreferenceKeys.CONTRIBUTE_TO_DEARROW, false)
         binding.dearrowSubmit.setOnClickListener {
             val submitDialog = SubmitDeArrowDialog()
             submitDialog.arguments = buildSbBundleArgs() ?: return@setOnClickListener
