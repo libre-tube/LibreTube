@@ -307,6 +307,8 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         super.onDestroy()
     }
 
+    fun isVideoIdInitialized() = this::videoId.isInitialized
+
     /**
      * Stop the service when app is removed from the task manager.
      */

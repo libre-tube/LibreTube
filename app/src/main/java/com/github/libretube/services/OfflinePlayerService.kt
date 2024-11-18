@@ -84,6 +84,8 @@ open class OfflinePlayerService : AbstractPlayerService() {
      * Attempt to start an audio player with the given download items
      */
     override suspend fun startPlayback() {
+        if (!isVideoIdInitialized()) return
+
         val downloadWithItems = withContext(Dispatchers.IO) {
             Database.downloadDao().findById(videoId)
         }!!
