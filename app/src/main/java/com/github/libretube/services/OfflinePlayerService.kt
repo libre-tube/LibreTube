@@ -14,7 +14,6 @@ import com.github.libretube.enums.FileType
 import com.github.libretube.extensions.serializable
 import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toAndroidUri
-import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.activities.NoInternetActivity
@@ -66,10 +65,6 @@ open class OfflinePlayerService : AbstractPlayerService() {
         } ?: return
 
         PlayingQueue.clear()
-
-        PlayingQueue.setOnQueueTapListener { streamItem ->
-            streamItem.url?.toID()?.let { playNextVideo(it) }
-        }
 
         exoPlayer?.addListener(playerListener)
 

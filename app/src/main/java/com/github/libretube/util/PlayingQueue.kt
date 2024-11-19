@@ -1,6 +1,5 @@
 package com.github.libretube.util
 
-import android.util.Log
 import androidx.media3.common.Player
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
@@ -19,11 +18,6 @@ object PlayingQueue {
     private var currentStream: StreamItem? = null
 
     private val queueJobs = mutableListOf<Job>()
-
-    /**
-     * Listener that gets called when the user selects an item from the queue
-     */
-    private var onQueueTapListener: (StreamItem) -> Unit = {}
 
     var repeatMode: Int = Player.REPEAT_MODE_OFF
 
@@ -223,34 +217,7 @@ object PlayingQueue {
         add(*streams.filter { !it.isLive }.toTypedArray(), skipExisting = true)
     }
 
-    fun onQueueItemSelected(index: Int) {
-        try {
-            val streamItem = queue[index]
-            updateCurrent(streamItem)
-            onQueueTapListener.invoke(streamItem)
-        } catch (e: Exception) {
-            Log.e("Queue on tap", "lifecycle already ended")
-        }
-    }
-
-    fun navigatePrev() {
-        if (!hasPrev()) return
-
-        onQueueItemSelected(currentIndex() - 1)
-    }
-
-    fun navigateNext() {
-        if (!hasNext()) return
-
-        onQueueItemSelected(currentIndex() + 1)
-    }
-
-    fun setOnQueueTapListener(listener: (StreamItem) -> Unit) {
-        onQueueTapListener = listener
-    }
-
     fun resetToDefaults() {
         repeatMode = Player.REPEAT_MODE_OFF
-        onQueueTapListener = {}
     }
 }

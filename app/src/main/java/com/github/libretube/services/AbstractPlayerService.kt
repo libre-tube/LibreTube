@@ -158,12 +158,16 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
             }
 
             args.containsKey(PlayerCommand.PLAY_VIDEO_BY_ID.name) -> {
-                videoId = args.getString(PlayerCommand.PLAY_VIDEO_BY_ID.name) ?: return
-
-                CoroutineScope(Dispatchers.IO).launch {
-                    startPlayback()
-                }
+                navigateVideo(args.getString(PlayerCommand.PLAY_VIDEO_BY_ID.name) ?: return)
             }
+        }
+    }
+
+    private fun navigateVideo(videoId: String) {
+        this.videoId = videoId
+
+        CoroutineScope(Dispatchers.IO).launch {
+            startPlayback()
         }
     }
 
@@ -180,11 +184,11 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
         when (event) {
             PlayerEvent.Next -> {
-                PlayingQueue.navigateNext()
+                navigateVideo(PlayingQueue.getNext() ?: return)
             }
 
             PlayerEvent.Prev -> {
-                PlayingQueue.navigatePrev()
+                navigateVideo(PlayingQueue.getPrev() ?: return)
             }
 
             PlayerEvent.Stop -> {

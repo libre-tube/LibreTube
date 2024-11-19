@@ -27,6 +27,7 @@ import com.github.libretube.R
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentAudioPlayerBinding
+import com.github.libretube.extensions.navigateVideo
 import com.github.libretube.extensions.normalize
 import com.github.libretube.extensions.parcelableList
 import com.github.libretube.extensions.seekBy
@@ -143,11 +144,11 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         }
 
         binding.prev.setOnClickListener {
-            PlayingQueue.navigatePrev()
+            playerController?.navigateVideo(PlayingQueue.getPrev() ?: return@setOnClickListener)
         }
 
         binding.next.setOnClickListener {
-            PlayingQueue.navigateNext()
+            playerController?.navigateVideo(PlayingQueue.getNext() ?: return@setOnClickListener)
         }
 
         listOf(binding.forwardTV, binding.rewindTV).forEach {
@@ -160,6 +161,9 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             playerController?.seekBy(PlayerHelper.seekIncrement)
         }
 
+        childFragmentManager.setFragmentResultListener(PlayingQueueSheet.PLAYING_QUEUE_REQUEST_KEY, viewLifecycleOwner) { _, args ->
+            playerController?.navigateVideo(args.getString(IntentData.videoId) ?: return@setFragmentResultListener)
+        }
         binding.openQueue.setOnClickListener {
             PlayingQueueSheet().show(childFragmentManager)
         }
