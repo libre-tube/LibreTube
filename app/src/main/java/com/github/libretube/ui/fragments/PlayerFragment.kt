@@ -400,7 +400,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         initializeTransitionLayout()
         initializeOnClickActions()
-        initializePlayerView()
 
         if (PlayerHelper.autoFullscreenEnabled && resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             setFullscreen()
@@ -462,21 +461,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             playerController = it
             playerController.addListener(playerListener)
         }
-    }
-
-    private fun initializePlayerView() {
-        // initialize the player view actions
-        binding.player.initialize(
-            doubleTapOverlayBinding,
-            playerGestureControlsViewBinding,
-            chaptersViewModel
-        )
-        binding.player.initPlayerOptions(
-            viewModel,
-            commonPlayerViewModel,
-            viewLifecycleOwner,
-            this
-        )
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -981,6 +965,19 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             useController = false
             player = playerController
         }
+
+        // initialize the player view actions
+        binding.player.initialize(
+            doubleTapOverlayBinding,
+            playerGestureControlsViewBinding,
+            chaptersViewModel
+        )
+        binding.player.initPlayerOptions(
+            viewModel,
+            commonPlayerViewModel,
+            viewLifecycleOwner,
+            this
+        )
 
         updatePlayerView()
 
