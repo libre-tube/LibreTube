@@ -549,4 +549,6 @@
     <string name="dialog_play_offline_title">Tersedia versi lokal video.</string>
     <string name="dialog_play_offline_body">Apakah Anda ingin memutar video dari folder unduhan?</string>
     <string name="upcoming">Akan datang</string>
+    <string name="category_exclusive_access">Akses Eksklusif</string>
+    <string name="delete_only_watched_videos">Hanya hapus video yang sudah ditonton</string>
 </resources>
