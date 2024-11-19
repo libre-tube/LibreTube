@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.annotation.OptIn
 import androidx.core.app.ServiceCompat
+import androidx.core.os.postDelayed
 import androidx.media3.common.C
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
@@ -293,29 +294,36 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     }
 
     override fun onDestroy() {
-        PlayingQueue.resetToDefaults()
+        // wait for a short time before killing the mediaSession
+        // as the playerController must be released before we finish the session
+        // otherwise there would be a
+        // java.lang.SecurityException: Session rejected the connection request.
+        // because there can't be two active playerControllers at the same time.
+        handler.postDelayed(50) {
+            PlayingQueue.resetToDefaults()
 
-        saveWatchPosition()
+            saveWatchPosition()
 
-        notificationProvider = null
-        watchPositionTimer.destroy()
+            notificationProvider = null
+            watchPositionTimer.destroy()
 
-        handler.removeCallbacksAndMessages(null)
+            handler.removeCallbacksAndMessages(null)
 
-        runCatching {
-            exoPlayer?.stop()
-            exoPlayer?.release()
+            runCatching {
+                exoPlayer?.stop()
+                exoPlayer?.release()
+            }
+
+            kotlin.runCatching {
+                mediaLibrarySession?.release()
+                mediaLibrarySession = null
+            }
+
+            ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
+            stopSelf()
+
+            super.onDestroy()
         }
-
-        kotlin.runCatching {
-            mediaLibrarySession?.release()
-            mediaLibrarySession = null
-        }
-
-        ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
-        stopSelf()
-
-        super.onDestroy()
     }
 
     fun isVideoIdInitialized() = this::videoId.isInitialized

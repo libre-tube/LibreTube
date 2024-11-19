@@ -851,6 +851,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playerController.pause()
 
         playerController.sendCustomCommand(AbstractPlayerService.stopServiceCommand, Bundle.EMPTY)
+        playerController.release()
 
         if (PlayerHelper.pipEnabled) {
             // disable the auto PiP mode for SDK >= 32

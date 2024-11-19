@@ -232,6 +232,8 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
 
     private fun killFragment() {
         playerController?.sendCustomCommand(AbstractPlayerService.stopServiceCommand, Bundle.EMPTY)
+        playerController?.release()
+        playerController = null
 
         viewModel.isFullscreen.value = false
         binding.playerMotionLayout.transitionToEnd()
