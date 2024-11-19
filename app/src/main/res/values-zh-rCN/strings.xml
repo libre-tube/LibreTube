@@ -550,4 +550,5 @@
     <string name="dialog_play_offline_body">你想从“download\"文件夹播放此视频吗？</string>
     <string name="upcoming">即将到来</string>
     <string name="delete_only_watched_videos">仅删除已观看的视频</string>
+    <string name="category_exclusive_access">独家访问</string>
 </resources>
