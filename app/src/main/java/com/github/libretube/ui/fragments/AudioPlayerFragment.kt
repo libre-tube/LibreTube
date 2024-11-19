@@ -93,6 +93,12 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             if (isOffline) OfflinePlayerService::class.java else OnlinePlayerService::class.java,
             bundleOf()
         ) {
+            if (_binding == null) {
+                it.sendCustomCommand(AbstractPlayerService.stopServiceCommand, Bundle.EMPTY)
+                it.release()
+                return@startMediaService
+            }
+
             playerController = it
             handleServiceConnection()
         }

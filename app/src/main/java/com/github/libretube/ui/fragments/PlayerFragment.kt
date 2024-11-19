@@ -458,6 +458,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             VideoOnlinePlayerService::class.java,
             bundleOf(IntentData.playerData to playerData)
         ) {
+            if (_binding == null) {
+                playerController.sendCustomCommand(AbstractPlayerService.stopServiceCommand, Bundle.EMPTY)
+                playerController.release()
+                return@startMediaService
+            }
+
             playerController = it
             playerController.addListener(playerListener)
         }
@@ -847,11 +853,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         handler.removeCallbacksAndMessages(null)
 
-        playerController.removeListener(playerListener)
-        playerController.pause()
+        if (::playerController.isInitialized) {
+            playerController.removeListener(playerListener)
+            playerController.pause()
 
-        playerController.sendCustomCommand(AbstractPlayerService.stopServiceCommand, Bundle.EMPTY)
-        playerController.release()
+            playerController.sendCustomCommand(AbstractPlayerService.stopServiceCommand, Bundle.EMPTY)
+            playerController.release()
+        }
 
         if (PlayerHelper.pipEnabled) {
             // disable the auto PiP mode for SDK >= 32
