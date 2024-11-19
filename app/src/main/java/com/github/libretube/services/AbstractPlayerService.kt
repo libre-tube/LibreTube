@@ -98,7 +98,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
                     onServiceCreated(args)
                     notificationProvider?.intentActivity = getIntentActivity()
 
-                    startPlayback()
+                    if (::videoId.isInitialized) startPlayback()
                 }
             }
             STOP_SERVICE_ACTION -> {
@@ -329,8 +329,6 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
             super.onDestroy()
         }
     }
-
-    fun isVideoIdInitialized() = this::videoId.isInitialized
 
     /**
      * Stop the service when app is removed from the task manager.
