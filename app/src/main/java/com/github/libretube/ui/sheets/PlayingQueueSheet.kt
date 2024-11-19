@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import androidx.media3.common.Player
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.QueueBottomSheetBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
@@ -41,7 +44,9 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.optionsRecycler.layoutManager = LinearLayoutManager(context)
-        val adapter = PlayingQueueAdapter()
+        val adapter = PlayingQueueAdapter { videoId ->
+            setFragmentResult(PLAYING_QUEUE_REQUEST_KEY, bundleOf(IntentData.videoId to videoId))
+        }
         binding.optionsRecycler.adapter = adapter
 
         // scroll to the currently playing video in the queue
@@ -200,5 +205,9 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
                 }
             }
             .show()
+    }
+
+    companion object {
+        const val PLAYING_QUEUE_REQUEST_KEY = "playing_queue_request_key"
     }
 }

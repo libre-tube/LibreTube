@@ -44,6 +44,7 @@ import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.PlayerGestureControlsViewBinding
 import com.github.libretube.extensions.dpToPx
+import com.github.libretube.extensions.navigateVideo
 import com.github.libretube.extensions.normalize
 import com.github.libretube.extensions.round
 import com.github.libretube.extensions.seekBy
@@ -257,6 +258,14 @@ abstract class CustomExoPlayerView(
             }
         }
 
+        supportFragmentManager.setFragmentResultListener(
+            PlayingQueueSheet.PLAYING_QUEUE_REQUEST_KEY,
+            findViewTreeLifecycleOwner()!!
+        ) { _, args ->
+            (player as? MediaController)?.navigateVideo(
+                args.getString(IntentData.videoId) ?: return@setFragmentResultListener
+            )
+        }
         binding.queueToggle.setOnClickListener {
             PlayingQueueSheet().show(supportFragmentManager, null)
         }
@@ -675,7 +684,8 @@ abstract class CustomExoPlayerView(
         // add a margin to the top and the bottom bar in landscape mode for notches
         val isForcedLandscape =
             activity.requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
-        val isInLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+        val isInLandscape =
+            resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
         val horizontalMargin =
             if (isFullscreen() && (isInLandscape || isForcedLandscape)) LANDSCAPE_MARGIN_HORIZONTAL else LANDSCAPE_MARGIN_HORIZONTAL_NONE
 
@@ -843,15 +853,16 @@ abstract class CustomExoPlayerView(
             }
 
             KeyEvent.KEYCODE_N, KeyEvent.KEYCODE_NAVIGATE_NEXT -> {
-                PlayingQueue.navigateNext()
+                PlayingQueue.getNext()?.let { (player as? MediaController)?.navigateVideo(it) }
             }
 
             KeyEvent.KEYCODE_P, KeyEvent.KEYCODE_NAVIGATE_PREVIOUS -> {
-                PlayingQueue.navigatePrev()
+                PlayingQueue.getPrev()?.let { (player as? MediaController)?.navigateVideo(it) }
             }
 
             KeyEvent.KEYCODE_F -> {
-                val fragmentManager = ContextHelper.unwrapActivity<MainActivity>(context).supportFragmentManager
+                val fragmentManager =
+                    ContextHelper.unwrapActivity<MainActivity>(context).supportFragmentManager
                 fragmentManager.fragments.filterIsInstance<PlayerFragment>().firstOrNull()
                     ?.toggleFullscreen()
             }

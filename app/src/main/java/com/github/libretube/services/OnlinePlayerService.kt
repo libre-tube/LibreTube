@@ -24,7 +24,6 @@ import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.setMetadata
-import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.PlayerHelper
@@ -112,10 +111,6 @@ open class OnlinePlayerService : AbstractPlayerService() {
         startTimestamp = playerData.timestamp
 
         if (!playerData.keepQueue) PlayingQueue.clear()
-
-        PlayingQueue.setOnQueueTapListener { streamItem ->
-            streamItem.url?.toID()?.let { playNextVideo(it) }
-        }
 
         exoPlayer?.addListener(playerListener)
     }
