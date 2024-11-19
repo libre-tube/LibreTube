@@ -566,7 +566,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         binding.playImageView.setOnClickListener {
-            playerController.togglePlayPauseState()
+            if (::playerController.isInitialized) playerController.togglePlayPauseState()
         }
 
         activity?.supportFragmentManager
@@ -628,7 +628,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         binding.relPlayerBackground.setOnClickListener {
             // pause the current player
-            playerController.pause()
+            if (::playerController.isInitialized) playerController.pause()
 
             // start the background mode
             playOnBackground()
