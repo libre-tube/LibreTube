@@ -552,4 +552,6 @@
     <string name="dialog_play_offline_body">Szeretné lejátszani a videót a letöltési mappából?</string>
     <string name="dialog_play_offline_title">A videó helyi változata is elérhető.</string>
     <string name="upcoming">Közelgő</string>
+    <string name="category_exclusive_access">Kizárólagos hozzáférés</string>
+    <string name="delete_only_watched_videos">Csak a már megtekintett videók törlése</string>
 </resources>
