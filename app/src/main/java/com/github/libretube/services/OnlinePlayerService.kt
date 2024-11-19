@@ -182,15 +182,17 @@ open class OnlinePlayerService : AbstractPlayerService() {
      * Plays the next video from the queue
      */
     private fun playNextVideo(nextId: String? = null) {
-        if (nextId == null && PlayingQueue.repeatMode == Player.REPEAT_MODE_ONE) {
-            exoPlayer?.seekTo(0)
-            return
-        }
-
         saveWatchPosition()
 
-        if (!PlayerHelper.isAutoPlayEnabled(playlistId != null) && nextId == null) return
-        if (!isAudioOnlyPlayer && PlayerHelper.autoPlayCountdown) return
+        if (nextId == null) {
+            if (PlayingQueue.repeatMode == Player.REPEAT_MODE_ONE) {
+                exoPlayer?.seekTo(0)
+                return
+            }
+
+            if (!PlayerHelper.isAutoPlayEnabled(playlistId != null)) return
+            if (!isAudioOnlyPlayer && PlayerHelper.autoPlayCountdown) return
+        }
 
         val nextVideo = nextId ?: PlayingQueue.getNext() ?: return
 
