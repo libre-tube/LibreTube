@@ -174,18 +174,18 @@
     <string name="require_restart_message">변경사항을 적용하기 위해 앱을 다시 시작하세요.</string>
     <string name="autoRotatePlayer_summary">장치를 돌리면 전체 화면으로 재생</string>
     <string name="autoRotatePlayer">자동 전체화면</string>
-    <string name="data_saver_mode">데이터 세이버 모드</string>
+    <string name="data_saver_mode">데이터 절약 모드</string>
     <string name="search_history_summary">검색 기록 저장</string>
     <string name="history_summary">시청 및 검색 기록</string>
     <string name="pure_theme_summary">완전한 흰색/검은색 테마</string>
     <string name="no_player_found">외부 플레이어를 찾을 수 없습니다. 플레이어가 설치되어 있는지 확인하십시오.</string>
     <string name="data_saver_mode_summary">미리 보기 및 기타 이미지를 건너뜁니다</string>
-    <string name="watch_history_summary">시청한 비디오 목록을 기기에 저장</string>
+    <string name="watch_history_summary">시청 기록을 기기에 저장</string>
     <string name="pure_theme">순수 테마</string>
     <string name="watch_positions_title">시청 위치 저장</string>
     <string name="reset_watch_positions">재설정</string>
-    <string name="system_caption_style">시스템 캡션 스타일</string>
-    <string name="captions">캡션</string>
+    <string name="system_caption_style">기기 자막 스타일</string>
+    <string name="captions">자막</string>
     <string name="least_views">최소 조회수</string>
     <string name="notifications">알림</string>
     <string name="notify_new_streams">새 스트림에 대한 알림 표시</string>
@@ -200,10 +200,10 @@
     <string name="caption_settings">자막</string>
     <string name="no_search_result">결과가 없습니다.</string>
     <string name="worst_quality">최저</string>
-    <string name="default_subtitle_language">자막 언어</string>
+    <string name="default_subtitle_language">기본 자막 언어</string>
     <string name="most_recent">최신</string>
     <string name="least_recent">오래된</string>
-    <string name="required_network">필수 연결</string>
+    <string name="required_network">네트워크 제한</string>
     <string name="github">GitHub</string>
     <string name="chapters">챕터</string>
     <string name="playerAudioFormat">플레이어 오디오 형식</string>
@@ -260,7 +260,7 @@
     <string name="selected">선택됨</string>
     <string name="copied_to_clipboard">클립보드에 복사됨</string>
     <string name="volume">음량</string>
-    <string name="network_wifi">와이파이로만 네트워크 연결</string>
+    <string name="network_wifi">와이파이 연결 시</string>
     <string name="nothing_selected">아무것도 선택되지 않음!</string>
     <string name="username_email">이메일 주소를 아이디로 사용하는 것은 권장하지 않습니다. 그래도 진행하시겠습니까?</string>
     <string name="proceed">진행</string>
@@ -303,8 +303,8 @@
     <string name="repeat_mode_current">동영상 반복</string>
     <string name="resize_mode_fill">채우기</string>
     <string name="always">항상</string>
-    <string name="network_metered">미터링됨</string>
-    <string name="never">표시하지 않음</string>
+    <string name="network_metered">과금 네트워크 연결 시</string>
+    <string name="never">하지 않음</string>
     <string name="repeat_mode_none">없음</string>
     <string name="resize_mode_zoom">확대</string>
     <string name="resize_mode_fit">맞춤</string>
@@ -316,7 +316,7 @@
     <string name="navbar_order">순서</string>
     <string name="navLabelVisibility">레이블 표시</string>
     <string name="change_region">현재 지역에서는 인기 급상승 동영상을 사용할 수 없는 것 같습니다. 설정에서 다른 지역을 선택하십시오.</string>
-    <string name="network_all">전체</string>
+    <string name="network_all">전부</string>
     <string name="bookmark">북마크</string>
     <string name="theme_monochrome">미니멀리즘 단색</string>
     <string name="no_subtitles_available">사용 가능한 자막 없음</string>
@@ -444,7 +444,7 @@
     <string name="time_in_minutes">시간(분)</string>
     <string name="invalid_input">유효하지 않은 입력</string>
     <string name="also_clear_watch_positions">시청 위치도 지우기</string>
-    <string name="pip">\"사진 속 사진\"의 약어입니다. 이 문자열은 가능한 한 짧게(5자 이내) 입력하세요. 확실하지 않은 경우 대부분의 언어에서 가장 적합한 단어인 영어 \"PiP\"를 사용하세요.</string>
+    <string name="pip">PiP</string>
     <string name="autoplay_playlists_summary">선택된 자동 재생 설정에 관계 없이 재생목록에서 다음 동영상을 자동 재생합니다</string>
     <string name="import_watch_history">시청 기록 가져오기</string>
     <string name="albums">앨범</string>
@@ -548,4 +548,7 @@
     <string name="dialog_play_offline_body">다운로드한 폴더에서 영상을 재생하시겠습니까?</string>
     <string name="view_count">조회수 %1$s회</string>
     <string name="audio_codecs">오디오 코덱</string>
+    <string name="upcoming">예정된 기능</string>
+    <string name="delete_only_watched_videos">시청한 영상 삭제</string>
+    <string name="category_exclusive_access">독점적 콘텐츠</string>
 </resources>
