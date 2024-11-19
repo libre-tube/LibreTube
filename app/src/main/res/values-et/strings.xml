@@ -553,4 +553,5 @@
     <string name="dialog_play_offline_body">Kas sa sooviksid seda videot esitada allalaadimiste kaustast?</string>
     <string name="upcoming">Järgmisena esitamisel</string>
     <string name="delete_only_watched_videos">Kustuta vaid juba vaadatud videod</string>
+    <string name="category_exclusive_access">Eksklusiivne juurdepääs</string>
 </resources>

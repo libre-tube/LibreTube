@@ -553,4 +553,5 @@
     <string name="dialog_play_offline_title">Налична е локална версия на това видео.</string>
     <string name="upcoming">Предстоящ</string>
     <string name="delete_only_watched_videos">Изтриване само на вече гледани видеоклипове</string>
+    <string name="category_exclusive_access">Изключителен достъп</string>
 </resources>

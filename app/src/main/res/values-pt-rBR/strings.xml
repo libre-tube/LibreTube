@@ -556,4 +556,5 @@
     <string name="dialog_play_offline_body">Gostaria de reproduzir o vídeo a partir da pasta de downloads?</string>
     <string name="upcoming">A seguir</string>
     <string name="delete_only_watched_videos">Excluir apenas vídeos já assistidos</string>
+    <string name="category_exclusive_access">Acesso exclusivo</string>
 </resources>

@@ -556,4 +556,5 @@
     <string name="dialog_play_offline_body">Chcete přehrát stažené video?</string>
     <string name="upcoming">Nadcházející</string>
     <string name="delete_only_watched_videos">Odstranit pouze zhlédnutá videa</string>
+    <string name="category_exclusive_access">Exkluzivní přístup</string>
 </resources>

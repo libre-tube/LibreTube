@@ -553,4 +553,5 @@
     <string name="dialog_play_offline_body">Viltu spila þetta myndskeið úr niðurhalsmöppunni?</string>
     <string name="upcoming">Á næstunni</string>
     <string name="delete_only_watched_videos">Aðeins eyða myndskeiðum sem búið er að horfa á</string>
+    <string name="category_exclusive_access">Forgangs aðgangur</string>
 </resources>

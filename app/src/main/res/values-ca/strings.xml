@@ -542,4 +542,6 @@
     <string name="screenshot">Captura de pantalla</string>
     <string name="external_download_provider">Proveïdor extern de descàrregues</string>
     <string name="external_download_provider_summary">Introduïu el nom del paquet de l\'app que voleu fer servir per descarregar vídeos. Deixeu-ho en blanc per fer servir el descarregador integrat de LibreTube.</string>
+    <string name="audio_codecs">Còdecs d\'àudio</string>
+    <string name="category_exclusive_access">Accés exclusiu</string>
 </resources>

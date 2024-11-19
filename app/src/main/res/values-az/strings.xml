@@ -553,4 +553,5 @@
     <string name="dialog_play_offline_body">Videonu yükləmə qovluğundan oynatmaq istərdinizmi?</string>
     <string name="upcoming">Yaxınlaşan</string>
     <string name="delete_only_watched_videos">Təkcə artıq baxılan videoları sil</string>
+    <string name="category_exclusive_access">Xüsusi Giriş</string>
 </resources>
