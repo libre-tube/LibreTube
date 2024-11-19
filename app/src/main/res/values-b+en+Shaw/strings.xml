@@ -520,7 +520,7 @@
     <string name="external_download_provider_summary">𐑧𐑯𐑑𐑼 𐑞 𐑐𐑨𐑒𐑦𐑡 𐑯𐑱𐑥 𐑝 𐑞 𐑨𐑐 𐑿 𐑢𐑪𐑯𐑑 𐑑 𐑿𐑟 𐑓 𐑛𐑬𐑯𐑤𐑴𐑛𐑦𐑙 𐑝𐑦𐑛𐑦𐑴𐑟. 𐑤𐑰𐑝 𐑚𐑤𐑨𐑙𐑒 𐑑 𐑿𐑟 ·𐑤𐑰𐑚𐑮𐑩𐑑𐑿𐑚\'𐑟 𐑦𐑯𐑚𐑦𐑤𐑑 𐑛𐑬𐑯𐑤𐑴𐑛𐑼.</string>
     <string name="local_stream_extraction">𐑤𐑴𐑒𐑩𐑤 𐑕𐑑𐑮𐑰𐑥 𐑦𐑒𐑕𐑑𐑮𐑨𐑒𐑖𐑩𐑯</string>
     <string name="local_stream_extraction_summary">𐑛𐑦𐑮𐑧𐑒𐑑𐑤𐑦 𐑓𐑧𐑗 𐑝𐑦𐑛𐑦𐑴 𐑐𐑤𐑱𐑚𐑨𐑒 𐑦𐑯𐑓𐑼𐑥𐑱𐑖𐑩𐑯 𐑓𐑮𐑪𐑥 ·𐑿𐑑𐑿𐑚 𐑢𐑦𐑞𐑬𐑑 𐑿𐑟𐑦𐑙 ·𐑐𐑲𐑐𐑑.</string>
-    <string name="local_ryd">𐑤𐑴𐑒𐑩𐑤 ·𐑮𐑦𐑑𐑻𐑯 𐑿𐑑𐑿𐑚 𐑛𐑦𐑕𐑤𐑲𐑒𐑕</string>
+    <string name="local_ryd">𐑤𐑴𐑒𐑩𐑤 ·𐑮𐑦𐑑𐑻𐑯 𐑿𐑑𐑿𐑚 𐑛𐑦𐑕𐑤𐑲𐑒 𐑦𐑒𐑕𐑑𐑮𐑨𐑒𐑑𐑼</string>
     <string name="local_ryd_summary">𐑛𐑦𐑮𐑧𐑒𐑑𐑤𐑦 𐑓𐑧𐑗 𐑛𐑦𐑕𐑤𐑲𐑒 𐑦𐑯𐑓𐑼𐑥𐑱𐑖𐑩𐑯 𐑓𐑮𐑪𐑥 https://returnyoutubedislikeapi.com</string>
     <string name="view_count">%1$s 𐑝𐑿𐑟</string>
     <string name="download_channel_name">𐑛𐑬𐑯𐑤𐑴𐑛 𐑕𐑻𐑝𐑦𐑕</string>
@@ -551,4 +551,7 @@
     <string name="export_playlists_to">𐑦𐑒𐑕𐑐𐑹𐑑 𐑐𐑤𐑱𐑤𐑦𐑕𐑑𐑕 𐑑</string>
     <string name="dialog_play_offline_title">𐑩 𐑤𐑴𐑒𐑩𐑤 𐑝𐑻𐑠𐑩𐑯 𐑝 𐑞𐑦𐑕 𐑝𐑦𐑛𐑦𐑴 𐑦𐑟 𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤.</string>
     <string name="dialog_play_offline_body">¿𐑢𐑫𐑛 𐑿 𐑤𐑲𐑒 𐑑 𐑐𐑤𐑱 𐑞 𐑝𐑦𐑛𐑦𐑴 𐑓𐑮𐑪𐑥 𐑞 𐑛𐑬𐑯𐑤𐑴𐑛 𐑓𐑴𐑤𐑛𐑼?</string>
+    <string name="upcoming">𐑳𐑐𐑒𐑳𐑥𐑦𐑙</string>
+    <string name="delete_only_watched_videos">𐑴𐑯𐑤𐑦 𐑛𐑦𐑤𐑰𐑑 𐑷𐑤𐑮𐑧𐑛𐑦 𐑢𐑪𐑗𐑑 𐑝𐑦𐑛𐑦𐑴𐑟</string>
+    <string name="category_exclusive_access">𐑦𐑒𐑕𐑒𐑤𐑵𐑕𐑦𐑝 𐑨𐑒𐑕𐑧𐑕</string>
 </resources>
