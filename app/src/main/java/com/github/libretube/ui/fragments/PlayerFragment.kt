@@ -141,11 +141,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private lateinit var streams: Streams
     val isShort
         get() = run {
-            val heightGreaterThanWidth = streams.videoStreams.firstOrNull()?.let {
+            val heightGreaterThanWidth = ::streams.isInitialized && streams.videoStreams.firstOrNull()?.let {
                 (it.height ?: 0) > (it.width ?: 0)
-            }
+            } == true
 
-            PlayingQueue.getCurrent()?.isShort == true || heightGreaterThanWidth == true
+            PlayingQueue.getCurrent()?.isShort == true || heightGreaterThanWidth
         }
 
     // if null, it's been set to automatic
