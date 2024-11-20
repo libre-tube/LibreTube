@@ -80,6 +80,11 @@
             app:summary="@string/version"
             app:title="@string/update_summary" />
 
+        <Preference
+            android:icon="@drawable/ic_info"
+            app:key="crashlog"
+            app:title="@string/crashlog"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>
