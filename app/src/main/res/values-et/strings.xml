@@ -554,4 +554,5 @@
     <string name="upcoming">Järgmisena esitamisel</string>
     <string name="delete_only_watched_videos">Kustuta vaid juba vaadatud videod</string>
     <string name="category_exclusive_access">Eksklusiivne juurdepääs</string>
+    <string name="crashlog">Krahhilogi</string>
 </resources>
