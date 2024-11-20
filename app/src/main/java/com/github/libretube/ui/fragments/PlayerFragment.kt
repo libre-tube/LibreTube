@@ -164,6 +164,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     // True when the video was closed through the close button on PiP mode
     private var closedVideo = false
 
+    private var autoPlayCountdownEnabled = PlayerHelper.autoPlayCountdown
+
     /**
      * The orientation of the `fragment_player.xml` that's currently used
      * This is needed in order to figure out if the current layout is the landscape one or not.
@@ -269,7 +271,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             // check if video has ended, next video is available and autoplay is enabled/the video is part of a played playlist.
             if (playbackState == Player.STATE_ENDED) {
-                if (PlayerHelper.isAutoPlayEnabled(playlistId != null) && PlayerHelper.autoPlayCountdown) {
+                if (PlayerHelper.isAutoPlayEnabled(playlistId != null) && autoPlayCountdownEnabled) {
                     showAutoPlayCountdown()
                 } else {
                     binding.player.showControllerPermanently()
@@ -459,7 +461,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             bundleOf(IntentData.playerData to playerData)
         ) {
             if (_binding == null) {
-                playerController.sendCustomCommand(AbstractPlayerService.stopServiceCommand, Bundle.EMPTY)
+                playerController.sendCustomCommand(
+                    AbstractPlayerService.stopServiceCommand,
+                    Bundle.EMPTY
+                )
                 playerController.release()
                 return@startMediaService
             }
@@ -816,11 +821,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         // disable video stream since it's not needed when screen off
         if (!isInteractive) {
-            playerController.sendCustomCommand(
-                AbstractPlayerService.runPlayerActionCommand, bundleOf(
-                    PlayerCommand.SET_VIDEO_TRACK_TYPE_DISABLED.name to true
-                )
-            )
+            // disable the autoplay countdown while the screen is off
+            setAutoPlayCountdownEnabled(false)
+
+            // disable loading the video track while screen is off
+            setVideoTrackTypeDisabled(true)
         }
 
         // pause player if screen off and setting enabled
@@ -838,14 +843,33 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             closedVideo = false
         }
 
+        // re-enable the autoplay countdown
+        setAutoPlayCountdownEnabled(PlayerHelper.autoPlayCountdown)
+
         // re-enable and load video stream
-        if (::playerController.isInitialized) {
-            playerController.sendCustomCommand(
-                AbstractPlayerService.runPlayerActionCommand, bundleOf(
-                    PlayerCommand.SET_VIDEO_TRACK_TYPE_DISABLED.name to false
-                )
+        setVideoTrackTypeDisabled(false)
+    }
+
+    private fun setAutoPlayCountdownEnabled(enabled: Boolean) {
+        if (!::playerController.isInitialized) return
+
+        this.autoPlayCountdownEnabled = enabled
+
+        playerController.sendCustomCommand(
+            AbstractPlayerService.runPlayerActionCommand, bundleOf(
+                PlayerCommand.SET_AUTOPLAY_COUNTDOWN_ENABLED.name to enabled
             )
-        }
+        )
+    }
+
+    private fun setVideoTrackTypeDisabled(disabled: Boolean) {
+        if (!::playerController.isInitialized) return
+
+        playerController.sendCustomCommand(
+            AbstractPlayerService.runPlayerActionCommand, bundleOf(
+                PlayerCommand.SET_VIDEO_TRACK_TYPE_DISABLED.name to disabled
+            )
+        )
     }
 
     override fun onDestroy() {
@@ -857,7 +881,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             playerController.removeListener(playerListener)
             playerController.pause()
 
-            playerController.sendCustomCommand(AbstractPlayerService.stopServiceCommand, Bundle.EMPTY)
+            playerController.sendCustomCommand(
+                AbstractPlayerService.stopServiceCommand,
+                Bundle.EMPTY
+            )
             playerController.release()
         }
 
@@ -957,6 +984,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 PlayerCommand.SET_AUDIO_ROLE_FLAGS.name to C.ROLE_FLAG_MAIN
             )
         )
+
+        setAutoPlayCountdownEnabled(PlayerHelper.autoPlayCountdown)
 
         // set the default subtitle if available
         updateCurrentSubtitle(viewModel.currentSubtitle)

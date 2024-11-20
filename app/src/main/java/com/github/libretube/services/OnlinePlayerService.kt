@@ -61,13 +61,14 @@ open class OnlinePlayerService : AbstractPlayerService() {
     /**
      * The response that gets when called the Api.
      */
-    var streams: Streams? = null
-        private set
+    private var streams: Streams? = null
 
     // SponsorBlock Segment data
     private var sponsorBlockAutoSkip = true
     private var sponsorBlockSegments = listOf<Segment>()
     private var sponsorBlockConfig = PlayerHelper.getSponsorBlockCategories()
+
+    private var autoPlayCountdownEnabled = false
 
     private val scope = CoroutineScope(Dispatchers.IO)
 
@@ -185,8 +186,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
                 return
             }
 
-            if (!PlayerHelper.isAutoPlayEnabled(playlistId != null)) return
-            if (!isAudioOnlyPlayer && PlayerHelper.autoPlayCountdown) return
+            if (!PlayerHelper.isAutoPlayEnabled(playlistId != null) || autoPlayCountdownEnabled) return
         }
 
         val nextVideo = nextId ?: PlayingQueue.getNext() ?: return
@@ -243,6 +243,8 @@ open class OnlinePlayerService : AbstractPlayerService() {
 
         if (args.containsKey(PlayerCommand.SET_SB_AUTO_SKIP_ENABLED.name)) {
             sponsorBlockAutoSkip = args.getBoolean(PlayerCommand.SET_SB_AUTO_SKIP_ENABLED.name)
+        } else if (args.containsKey(PlayerCommand.SET_AUTOPLAY_COUNTDOWN_ENABLED.name)) {
+            autoPlayCountdownEnabled = args.getBoolean(PlayerCommand.SET_AUTOPLAY_COUNTDOWN_ENABLED.name)
         }
     }
 
