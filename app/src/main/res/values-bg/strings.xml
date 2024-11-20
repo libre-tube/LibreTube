@@ -554,4 +554,5 @@
     <string name="upcoming">Предстоящ</string>
     <string name="delete_only_watched_videos">Изтриване само на вече гледани видеоклипове</string>
     <string name="category_exclusive_access">Изключителен достъп</string>
+    <string name="crashlog">Регистър на сривове</string>
 </resources>
