@@ -260,7 +260,7 @@ abstract class CustomExoPlayerView(
 
         supportFragmentManager.setFragmentResultListener(
             PlayingQueueSheet.PLAYING_QUEUE_REQUEST_KEY,
-            findViewTreeLifecycleOwner()!!
+            findViewTreeLifecycleOwner() ?: activity
         ) { _, args ->
             (player as? MediaController)?.navigateVideo(
                 args.getString(IntentData.videoId) ?: return@setFragmentResultListener
