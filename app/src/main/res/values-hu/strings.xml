@@ -554,4 +554,5 @@
     <string name="upcoming">Közelgő</string>
     <string name="category_exclusive_access">Kizárólagos hozzáférés</string>
     <string name="delete_only_watched_videos">Csak a már megtekintett videók törlése</string>
+    <string name="crashlog">Hibanapló</string>
 </resources>
