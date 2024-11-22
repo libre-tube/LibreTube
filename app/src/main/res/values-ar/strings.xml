@@ -565,4 +565,6 @@
     <string name="dialog_play_offline_body">هل ترغب في تشغيل الفيديو من مجلد التنزيل ؟</string>
     <string name="upcoming">القادمة</string>
     <string name="delete_only_watched_videos">احذف فقط مقاطع الفيديو التي تمت مشاهدتها بالفعل</string>
+    <string name="category_exclusive_access">وصول حصري</string>
+    <string name="crashlog">سجل التحطم</string>
 </resources>

@@ -555,4 +555,7 @@
     <string name="dialog_play_offline_title">Dostupná je lokálna verzia tohto videa.</string>
     <string name="dialog_play_offline_body">Chcete si prehrať stiahnuté video?</string>
     <string name="upcoming">Čosko</string>
+    <string name="category_exclusive_access">Exkluzívny prístup</string>
+    <string name="crashlog">Protokol pádov</string>
+    <string name="delete_only_watched_videos">Odstrániť len pozreté videá</string>
 </resources>
