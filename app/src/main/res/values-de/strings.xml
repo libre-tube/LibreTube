@@ -551,4 +551,7 @@
     <string name="dialog_play_offline_body">Möchtest du das Video aus dem Download-Ordner abspielen?</string>
     <string name="view_count">%1$s Aufrufe</string>
     <string name="upcoming">Anstehend</string>
+    <string name="crashlog">Absturzprotokoll</string>
+    <string name="category_exclusive_access">Exklusiver Zugang</string>
+    <string name="delete_only_watched_videos">Nur bereits angesehene Videos löschen</string>
 </resources>
