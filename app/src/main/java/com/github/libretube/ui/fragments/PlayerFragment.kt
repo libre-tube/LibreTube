@@ -316,10 +316,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
 
             val maybeStreams: Streams? = mediaMetadata.extras?.parcelable(IntentData.streams)
-            maybeStreams?.let {
-                streams = it
+            maybeStreams?.let { streams ->
+                this@PlayerFragment.streams = streams
                 viewModel.segments.postValue(emptyList())
-                playVideo()
+                setPlayerDefaults()
+                updatePlayerView()
             }
         }
 
@@ -396,6 +397,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         playlistId = playerData.playlistId
         channelId = playerData.channelId
 
+        // remember if playback already started once and only restart playback if that's the first run
+        val createNewSession = !requireArguments().getBoolean(IntentData.alreadyStarted)
+        requireArguments().putBoolean(IntentData.alreadyStarted, true)
+
         changeOrientationMode()
 
         playerLayoutOrientation = resources.configuration.orientation
@@ -425,7 +430,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             DatabaseHolder.Database.downloadDao().findById(videoId)
         }
 
-        if (localDownloadVersion != null) {
+        if (localDownloadVersion != null && createNewSession) {
             childFragmentManager.setFragmentResultListener(
                 PlayOfflineDialog.PLAY_OFFLINE_DIALOG_REQUEST_KEY, viewLifecycleOwner
             ) { _, bundle ->
@@ -433,7 +438,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     // offline video playback started and thus the player fragment is no longer needed
                     killPlayerFragment()
                 } else {
-                    attachToPlayerService(playerData)
+                    attachToPlayerService(playerData, true)
                 }
             }
 
@@ -450,15 +455,16 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                 )
             }.show(childFragmentManager, null)
         } else {
-            attachToPlayerService(playerData)
+            attachToPlayerService(playerData, createNewSession)
         }
     }
 
-    private fun attachToPlayerService(playerData: PlayerData) {
+    private fun attachToPlayerService(playerData: PlayerData, startNewSession: Boolean) {
         BackgroundHelper.startMediaService(
             requireContext(),
             VideoOnlinePlayerService::class.java,
-            bundleOf(IntentData.playerData to playerData)
+            bundleOf(IntentData.playerData to playerData),
+            sendStartCommand = startNewSession
         ) {
             if (_binding == null) {
                 playerController.sendCustomCommand(
@@ -471,6 +477,19 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
             playerController = it
             playerController.addListener(playerListener)
+
+            if (!startNewSession) {
+                val streams: Streams? = playerController.mediaMetadata.extras?.parcelable(IntentData.streams)
+
+                // reload the streams data and playback, metadata apparently no longer exists
+                if (streams == null) {
+                    playNextVideo(videoId)
+                    return@startMediaService
+                }
+
+                this.streams = streams
+                updatePlayerView()
+            }
         }
     }
 
@@ -967,7 +986,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             true
     }
 
-    private fun playVideo() {
+    private fun setPlayerDefaults() {
         // reset the player view
         playerBinding.exoProgress.clearSegments()
         playerBinding.sbToggle.isGone = true
@@ -993,6 +1012,27 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // set media source and resolution in the beginning
         updateResolution(commonPlayerViewModel.isFullscreen.value == true)
 
+        if (streams.category == Streams.categoryMusic) {
+            playerController.setPlaybackSpeed(1f)
+        }
+    }
+
+    /**
+     * Manually skip to another video.
+     */
+    private fun playNextVideo(nextId: String) {
+        playerController.sendCustomCommand(
+            AbstractPlayerService.runPlayerActionCommand,
+            bundleOf(PlayerCommand.PLAY_VIDEO_BY_ID.name to nextId)
+        )
+
+        // close comment bottom sheet if opened for next video
+        activity?.supportFragmentManager?.fragments?.filterIsInstance<CommentsSheet>()
+            ?.firstOrNull()?.dismiss()
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun updatePlayerView() {
         if (PreferenceHelper.getBoolean(PreferenceKeys.AUTO_FULLSCREEN_SHORTS, false) &&
             isShort && binding.playerMotionLayout.progress == 0f
         ) {
@@ -1017,8 +1057,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             this
         )
 
-        updatePlayerView()
-
         if (binding.playerMotionLayout.progress != 1.0f) {
             // show controllers when not in picture in picture mode
             val inPipMode = PlayerHelper.pipEnabled &&
@@ -1028,29 +1066,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }
         }
 
-        if (streams.category == Streams.categoryMusic) {
-            playerController.setPlaybackSpeed(1f)
-        }
-
         viewModel.isOrientationChangeInProgress = false
-    }
 
-    /**
-     * Manually skip to another video.
-     */
-    private fun playNextVideo(nextId: String) {
-        playerController.sendCustomCommand(
-            AbstractPlayerService.runPlayerActionCommand,
-            bundleOf(PlayerCommand.PLAY_VIDEO_BY_ID.name to nextId)
-        )
-
-        // close comment bottom sheet if opened for next video
-        activity?.supportFragmentManager?.fragments?.filterIsInstance<CommentsSheet>()
-            ?.firstOrNull()?.dismiss()
-    }
-
-    @SuppressLint("SetTextI18n")
-    private fun updatePlayerView() {
         binding.descriptionLayout.setStreams(streams)
 
         binding.apply {
@@ -1438,6 +1455,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             playerLayoutOrientation = orientation
 
             viewModel.isOrientationChangeInProgress = true
+
+            playerController.release()
             activity?.recreate()
         }
     }

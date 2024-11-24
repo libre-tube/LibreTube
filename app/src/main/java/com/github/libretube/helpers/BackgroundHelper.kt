@@ -116,7 +116,8 @@ object BackgroundHelper {
     fun startMediaService(
         context: Context,
         serviceClass: Class<*>,
-        arguments: Bundle,
+        arguments: Bundle = Bundle.EMPTY,
+        sendStartCommand: Boolean = true,
         onController: (MediaController) -> Unit = {}
     ) {
         val sessionToken =
@@ -126,7 +127,7 @@ object BackgroundHelper {
             MediaController.Builder(context, sessionToken).buildAsync()
         controllerFuture.addListener({
             val controller = controllerFuture.get()
-            controller.sendCustomCommand(
+            if (sendStartCommand) controller.sendCustomCommand(
                 AbstractPlayerService.startServiceCommand,
                 arguments
             )
