@@ -57,4 +57,5 @@ object IntentData {
     const val streams = "streams"
     const val chapters = "chapters"
     const val segments = "segments"
+    const val alreadyStarted = "alreadyStarted"
 }
