@@ -1182,6 +1182,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private fun setPlayerResolution(resolution: Int, isSelectedByUser: Boolean = false) {
+        if (!::playerController.isInitialized) return
+
         val transformedResolution = if (!isSelectedByUser && isShort) {
             ceil(resolution * 16.0 / 9.0).toInt()
         } else {
