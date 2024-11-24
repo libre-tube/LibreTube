@@ -69,7 +69,7 @@ class NoInternetActivity : BaseActivity() {
         super.onNewIntent(intent)
 
         if (intent.getBooleanExtra(IntentData.openAudioPlayer, false)) {
-            NavigationHelper.startAudioPlayer(this, offlinePlayer = true)
+            NavigationHelper.openAudioPlayerFragment(this, offlinePlayer = true)
         }
     }
 }

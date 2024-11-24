@@ -6,11 +6,13 @@ import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.os.Process
+import androidx.annotation.OptIn
 import androidx.core.content.getSystemService
 import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import androidx.fragment.app.commitNow
 import androidx.fragment.app.replace
+import androidx.media3.common.util.UnstableApi
 import com.github.libretube.NavDirections
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
@@ -61,27 +63,53 @@ object NavigationHelper {
         if (videoUrlOrId == null) return
 
         if (PreferenceHelper.getBoolean(PreferenceKeys.AUDIO_ONLY_MODE, false) && !forceVideo) {
-            BackgroundHelper.playOnBackground(
-                context,
-                videoUrlOrId.toID(),
-                timestamp,
-                playlistId,
-                channelId,
-                keepQueue
-            )
-            handler.postDelayed(500) {
-                startAudioPlayer(context)
-            }
+            navigateAudio(context, videoUrlOrId.toID(), playlistId, channelId, keepQueue, timestamp)
             return
         }
+
+        val activity = ContextHelper.unwrapActivity<MainActivity>(context)
+        val attachedToRunningPlayer = activity.runOnPlayerFragment {
+            this.playNextVideo(videoUrlOrId.toID())
+            true
+        }
+        if (attachedToRunningPlayer) return
 
         val playerData =
             PlayerData(videoUrlOrId.toID(), playlistId, channelId, keepQueue, timestamp)
         val bundle = bundleOf(IntentData.playerData to playerData)
-
-        val activity = ContextHelper.unwrapActivity<MainActivity>(context)
         activity.supportFragmentManager.commitNow {
             replace<PlayerFragment>(R.id.container, args = bundle)
+        }
+    }
+
+    @OptIn(UnstableApi::class)
+    fun navigateAudio(
+        context: Context,
+        videoId: String,
+        playlistId: String? = null,
+        channelId: String? = null,
+        keepQueue: Boolean = false,
+        timestamp: Long = 0,
+        minimizeByDefault: Boolean = false
+    ) {
+        val activity = ContextHelper.unwrapActivity<MainActivity>(context)
+        val attachedToRunningPlayer = activity.runOnAudioPlayerFragment {
+            this.playNextVideo(videoId)
+            true
+        }
+        if (attachedToRunningPlayer) return
+
+        BackgroundHelper.playOnBackground(
+            context,
+            videoId,
+            timestamp,
+            playlistId,
+            channelId,
+            keepQueue
+        )
+
+        handler.postDelayed(500) {
+            openAudioPlayerFragment(context, minimizeByDefault = minimizeByDefault)
         }
     }
 
@@ -97,7 +125,11 @@ object NavigationHelper {
     /**
      * Start the audio player fragment
      */
-    fun startAudioPlayer(context: Context, offlinePlayer: Boolean = false, minimizeByDefault: Boolean = false) {
+    fun openAudioPlayerFragment(
+        context: Context,
+        offlinePlayer: Boolean = false,
+        minimizeByDefault: Boolean = false
+    ) {
         val activity = ContextHelper.unwrapActivity<BaseActivity>(context)
         activity.supportFragmentManager.commitNow {
             val args = bundleOf(

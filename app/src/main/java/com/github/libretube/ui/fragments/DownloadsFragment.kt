@@ -247,7 +247,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment() {
                 shuffle = true
             )
 
-            NavigationHelper.startAudioPlayer(requireContext(), offlinePlayer = true)
+            NavigationHelper.openAudioPlayerFragment(requireContext(), offlinePlayer = true)
         }
     }
 
