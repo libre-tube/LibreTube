@@ -468,7 +468,7 @@ class MainActivity : BaseActivity() {
 
         if (intent?.getBooleanExtra(IntentData.openAudioPlayer, false) == true) {
             val offlinePlayer = intent!!.getBooleanExtra(IntentData.offlinePlayer, false)
-            NavigationHelper.startAudioPlayer(this, offlinePlayer = offlinePlayer)
+            NavigationHelper.openAudioPlayerFragment(this, offlinePlayer = offlinePlayer)
             return
         }
 
@@ -639,8 +639,15 @@ class MainActivity : BaseActivity() {
      * Attempt to run code on the player fragment if running
      * Returns true if a running player fragment was found and the action got consumed, else false
      */
-    private fun runOnPlayerFragment(action: PlayerFragment.() -> Boolean): Boolean {
+    fun runOnPlayerFragment(action: PlayerFragment.() -> Boolean): Boolean {
         return supportFragmentManager.fragments.filterIsInstance<PlayerFragment>()
+            .firstOrNull()
+            ?.let(action)
+            ?: false
+    }
+
+    fun runOnAudioPlayerFragment(action: AudioPlayerFragment.() -> Boolean): Boolean {
+        return supportFragmentManager.fragments.filterIsInstance<AudioPlayerFragment>()
             .firstOrNull()
             ?.let(action)
             ?: false

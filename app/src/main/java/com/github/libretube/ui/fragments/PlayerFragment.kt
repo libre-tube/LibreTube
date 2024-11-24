@@ -749,7 +749,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             keepVideoPlayerAlive = true
         )
         killPlayerFragment()
-        NavigationHelper.startAudioPlayer(requireContext())
+        NavigationHelper.openAudioPlayerFragment(requireContext())
     }
 
     private fun updateFullscreenOrientation() {
@@ -1020,7 +1020,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     /**
      * Manually skip to another video.
      */
-    private fun playNextVideo(nextId: String) {
+    fun playNextVideo(nextId: String) {
         playerController.sendCustomCommand(
             AbstractPlayerService.runPlayerActionCommand,
             bundleOf(PlayerCommand.PLAY_VIDEO_BY_ID.name to nextId)

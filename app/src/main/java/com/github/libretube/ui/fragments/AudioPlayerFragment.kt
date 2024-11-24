@@ -252,6 +252,10 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         }
     }
 
+    fun playNextVideo(videoId: String) {
+        playerController?.navigateVideo(videoId)
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     private fun initializeTransitionLayout() {
         if (mainActivity == null) return

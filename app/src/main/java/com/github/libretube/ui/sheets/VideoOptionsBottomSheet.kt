@@ -14,7 +14,6 @@ import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.toID
-import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
@@ -58,8 +57,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
             when (optionsList[which]) {
                 // Start the background mode
                 R.string.playOnBackground -> {
-                    BackgroundHelper.playOnBackground(requireContext(), videoId)
-                    NavigationHelper.startAudioPlayer(requireContext(), minimizeByDefault = true)
+                    NavigationHelper.navigateAudio(requireContext(), videoId, minimizeByDefault = true)
                 }
                 // Add Video to Playlist Dialog
                 R.string.addToPlaylist -> {

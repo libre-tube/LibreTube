@@ -114,7 +114,7 @@ class DownloadsAdapter(
                     root.context.startActivity(intent)
                 } else {
                     BackgroundHelper.playOnBackgroundOffline(root.context, download.videoId, downloadTab)
-                    NavigationHelper.startAudioPlayer(root.context, offlinePlayer = true)
+                    NavigationHelper.openAudioPlayerFragment(root.context, offlinePlayer = true)
                 }
             }
 
