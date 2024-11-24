@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.KeyEvent
 import androidx.annotation.OptIn
 import androidx.core.app.ServiceCompat
 import androidx.core.os.postDelayed
@@ -24,6 +25,7 @@ import com.github.libretube.api.obj.Subtitle
 import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.extensions.parcelable
+import com.github.libretube.extensions.parcelableExtra
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
@@ -101,12 +103,15 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
                     if (::videoId.isInitialized) startPlayback()
                 }
             }
+
             STOP_SERVICE_ACTION -> {
                 onDestroy()
             }
+
             RUN_PLAYER_COMMAND_ACTION -> {
                 runPlayerCommand(args)
             }
+
             else -> {
                 handlePlayerAction(PlayerEvent.valueOf(customCommand.customAction))
             }
@@ -151,7 +156,8 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
                 val subtitle: Subtitle? = args.parcelable(PlayerCommand.SET_SUBTITLE.name)
 
                 trackSelector?.updateParameters {
-                    val roleFlags = if (subtitle?.code != null) getSubtitleRoleFlags(subtitle) else 0
+                    val roleFlags =
+                        if (subtitle?.code != null) getSubtitleRoleFlags(subtitle) else 0
                     setPreferredTextRoleFlags(roleFlags)
                     setPreferredTextLanguage(subtitle?.code)
                 }
@@ -244,7 +250,13 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         val mediaNotificationSessionCommands =
             connectionResult.availableSessionCommands.buildUpon()
                 .also { builder ->
-                    builder.addSessionCommands(listOf(startServiceCommand, runPlayerActionCommand, stopServiceCommand))
+                    builder.addSessionCommands(
+                        listOf(
+                            startServiceCommand,
+                            runPlayerActionCommand,
+                            stopServiceCommand
+                        )
+                    )
                     builder.addSessionCommands(customLayout.mapNotNull(CommandButton::sessionCommand))
                 }
                 .build()
@@ -295,6 +307,35 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         if (isTransitioning || !PlayerHelper.watchPositionsVideo) return
 
         exoPlayer?.let { PlayerHelper.saveWatchPosition(it, videoId) }
+    }
+
+    override fun onMediaButtonEvent(
+        session: MediaSession,
+        controllerInfo: MediaSession.ControllerInfo,
+        intent: Intent
+    ): Boolean {
+        val event: KeyEvent = intent.parcelableExtra(Intent.EXTRA_KEY_EVENT) ?: return false
+        when (event.keyCode) {
+            KeyEvent.KEYCODE_MEDIA_NEXT -> {
+                handlePlayerAction(PlayerEvent.Next)
+                return true
+            }
+            KeyEvent.KEYCODE_MEDIA_PREVIOUS -> {
+                handlePlayerAction(PlayerEvent.Prev)
+                return true
+            }
+            KeyEvent.KEYCODE_MEDIA_REWIND -> {
+                handlePlayerAction(PlayerEvent.Rewind)
+            }
+            KeyEvent.KEYCODE_MEDIA_FAST_FORWARD -> {
+                handlePlayerAction(PlayerEvent.Forward)
+            }
+            KeyEvent.KEYCODE_MEDIA_STOP -> {
+                handlePlayerAction(PlayerEvent.Stop)
+            }
+        }
+
+        return super.onMediaButtonEvent(session, controllerInfo, intent)
     }
 
     override fun onDestroy() {
