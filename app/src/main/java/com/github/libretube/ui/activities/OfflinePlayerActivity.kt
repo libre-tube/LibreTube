@@ -193,9 +193,7 @@ class OfflinePlayerActivity : BaseActivity() {
             binding.playerGestureControlsView.binding,
             chaptersViewModel
         )
-    }
 
-    private fun playVideo() {
         lifecycleScope.launch {
             val (downloadInfo, downloadItems, downloadChapters) = withContext(Dispatchers.IO) {
                 Database.downloadDao().findById(videoId)
@@ -205,11 +203,10 @@ class OfflinePlayerActivity : BaseActivity() {
             chaptersViewModel.chaptersLiveData.value = chapters
             binding.player.setChapters(chapters)
 
-            val downloadFiles = downloadItems.filter { it.path.exists() }
             playerBinding.exoTitle.text = downloadInfo.title
             playerBinding.exoTitle.isVisible = true
 
-            timeFrameReceiver = downloadFiles.firstOrNull { it.type == FileType.VIDEO }?.path?.let {
+            timeFrameReceiver = downloadItems.firstOrNull { it.path.exists() && it.type == FileType.VIDEO }?.path?.let {
                 OfflineTimeFrameReceiver(this@OfflinePlayerActivity, it)
             }
         }
