@@ -559,4 +559,6 @@
     <string name="dialog_play_offline_title">Доступна сохранённая копия этого видео.</string>
     <string name="delete_only_watched_videos">Удалять только уже просмотренные видео</string>
     <string name="upcoming">Скоро</string>
+    <string name="category_exclusive_access">Исключительный доступ</string>
+    <string name="crashlog">Журнал событий</string>
 </resources>
