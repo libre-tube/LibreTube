@@ -26,6 +26,7 @@ import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.fragments.AudioPlayerFragment
 import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.views.SingleViewTouchableMotionLayout
+import com.github.libretube.util.PlayingQueue
 
 object NavigationHelper {
     private val handler = Handler(Looper.getMainLooper())
@@ -70,6 +71,9 @@ object NavigationHelper {
         val activity = ContextHelper.unwrapActivity<MainActivity>(context)
         val attachedToRunningPlayer = activity.runOnPlayerFragment {
             this.playNextVideo(videoUrlOrId.toID())
+            PlayingQueue.clear()
+            // maximize player
+            this.binding.playerMotionLayout.transitionToStart()
             true
         }
         if (attachedToRunningPlayer) return
