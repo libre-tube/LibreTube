@@ -551,4 +551,5 @@
     <string name="upcoming">예정된 기능</string>
     <string name="delete_only_watched_videos">시청한 영상 삭제</string>
     <string name="category_exclusive_access">독점적 콘텐츠</string>
+    <string name="crashlog">충돌 로그</string>
 </resources>
