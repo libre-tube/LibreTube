@@ -555,4 +555,7 @@
     <string name="dialog_play_offline_title">Una versione locale di questo video e` disponibile.</string>
     <string name="dialog_play_offline_body">Vuoi riprodurre il video dalla cartella di download?</string>
     <string name="delete_only_watched_videos">Elimina solo i video già visti</string>
+    <string name="upcoming">In arrivo</string>
+    <string name="category_exclusive_access">Accesso esclusivo</string>
+    <string name="crashlog">Log dei crash</string>
 </resources>
