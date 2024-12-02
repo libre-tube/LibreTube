@@ -34,8 +34,7 @@ class AutoplayCountdownView(
 
     init {
         binding.cancel.setOnClickListener {
-            handler.removeCallbacksAndMessages(TIMER_RUNNABLE_TOKEN)
-            hideSelf.invoke()
+            cancelAndHideCountdown()
         }
     }
 
@@ -76,6 +75,11 @@ class AutoplayCountdownView(
         )
         currentTimerState--
         handler.postDelayed(1000, TIMER_RUNNABLE_TOKEN, this::updateCountdown)
+    }
+
+    fun cancelAndHideCountdown() {
+        handler.removeCallbacksAndMessages(TIMER_RUNNABLE_TOKEN)
+        hideSelf.invoke()
     }
 
     companion object {

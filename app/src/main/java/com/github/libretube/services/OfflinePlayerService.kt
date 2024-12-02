@@ -56,13 +56,14 @@ open class OfflinePlayerService : AbstractPlayerService() {
         shuffle = args.getBoolean(IntentData.shuffle, false)
         noInternetService = args.getBoolean(IntentData.noInternet, false)
 
-        videoId = if (shuffle) {
+        val videoId = if (shuffle) {
             runBlocking(Dispatchers.IO) {
                 Database.downloadDao().getRandomVideoIdByFileType(FileType.AUDIO)
             }
         } else {
             args.getString(IntentData.videoId)
         } ?: return
+        setVideoId(videoId)
 
         PlayingQueue.clear()
 
@@ -131,9 +132,7 @@ open class OfflinePlayerService : AbstractPlayerService() {
     }
 
     private fun playNextVideo(videoId: String) {
-        saveWatchPosition()
-
-        this.videoId = videoId
+        setVideoId(videoId)
 
         scope.launch {
             startPlayback()

@@ -6,7 +6,6 @@ import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaItem.SubtitleConfiguration
-import androidx.media3.common.MediaMetadata
 import androidx.media3.common.MimeTypes
 import androidx.media3.common.Player
 import androidx.media3.datasource.cronet.CronetDataSource
@@ -106,7 +105,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
         }
 
         // get the intent arguments
-        videoId = playerData.videoId
+        setVideoId(playerData.videoId)
         playlistId = playerData.playlistId
         channelId = playerData.channelId
         startTimestamp = playerData.timestamp
@@ -178,8 +177,6 @@ open class OnlinePlayerService : AbstractPlayerService() {
      * Plays the next video from the queue
      */
     private fun playNextVideo(nextId: String? = null) {
-        saveWatchPosition()
-
         if (nextId == null) {
             if (PlayingQueue.repeatMode == Player.REPEAT_MODE_ONE) {
                 exoPlayer?.seekTo(0)
@@ -192,7 +189,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
         val nextVideo = nextId ?: PlayingQueue.getNext() ?: return
 
         // play new video on background
-        this.videoId = nextVideo
+        setVideoId(nextVideo)
         this.streams = null
         this.sponsorBlockSegments = emptyList()
 
@@ -214,9 +211,9 @@ open class OnlinePlayerService : AbstractPlayerService() {
             ).segments
 
             withContext(Dispatchers.Main) {
-                exoPlayer?.playlistMetadata = MediaMetadata.Builder()
-                    .setExtras(bundleOf(IntentData.segments to ArrayList(sponsorBlockSegments)))
-                    .build()
+                updatePlaylistMetadata {
+                    setExtras(bundleOf(IntentData.segments to ArrayList(sponsorBlockSegments)))
+                }
 
                 checkForSegments()
             }
