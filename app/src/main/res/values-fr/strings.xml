@@ -558,4 +558,5 @@
     <string name="delete_only_watched_videos">Supprimer uniquement les vidéos déjà visionnées</string>
     <string name="category_exclusive_access">Accès exclusif</string>
     <string name="crashlog">Journal de plantage</string>
+    <string name="import_format_list_of_urls">Liste d\'URLs ou d\'identifiants de vidéos</string>
 </resources>
