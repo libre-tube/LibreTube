@@ -1436,7 +1436,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private fun shouldStartPiP(): Boolean {
-        return shouldUsePip() && playerController.isPlaying &&
+        return shouldUsePip() && ::playerController.isInitialized && playerController.isPlaying &&
                 !BackgroundHelper.isBackgroundServiceRunning(requireContext())
     }
 
