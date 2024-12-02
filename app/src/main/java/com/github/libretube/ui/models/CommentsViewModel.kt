@@ -30,22 +30,13 @@ class CommentsViewModel : ViewModel() {
     private val _commentCountLiveData = MutableLiveData<Long>()
     val commentCountLiveData: LiveData<Long> = _commentCountLiveData
 
-    val commentSheetExpand = MutableLiveData<Boolean?>()
-
     private val _currentCommentsPosition = MutableLiveData(0)
     val currentCommentsPosition: LiveData<Int> = _currentCommentsPosition
 
     private val _currentRepliesPosition = MutableLiveData(0)
     val currentRepliesPosition: LiveData<Int> = _currentRepliesPosition
 
-    fun setCommentSheetExpand(value: Boolean?) {
-        if (commentSheetExpand.value != value) {
-            commentSheetExpand.value = value
-        }
-    }
-
     fun reset() {
-        setCommentSheetExpand(null)
         _currentCommentsPosition.value = 0
     }
 

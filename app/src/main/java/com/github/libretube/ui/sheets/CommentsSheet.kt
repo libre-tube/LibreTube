@@ -12,15 +12,13 @@ import androidx.fragment.app.setFragmentResult
 import com.github.libretube.R
 import com.github.libretube.databinding.CommentsSheetBinding
 import com.github.libretube.ui.fragments.CommentsMainFragment
-import com.github.libretube.ui.models.CommentsViewModel
 import com.github.libretube.ui.models.CommonPlayerViewModel
 
-class CommentsSheet : UndimmedBottomSheet() {
+class CommentsSheet : ExpandablePlayerSheet() {
     private var _binding: CommentsSheetBinding? = null
     val binding get() = _binding!!
 
     private val commonPlayerViewModel: CommonPlayerViewModel by activityViewModels()
-    private val commentsViewModel: CommentsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,15 +53,6 @@ class CommentsSheet : UndimmedBottomSheet() {
 
         childFragmentManager.commit {
             replace<CommentsMainFragment>(R.id.commentFragContainer, args = arguments)
-        }
-
-        commentsViewModel.setCommentSheetExpand(true)
-        commentsViewModel.commentSheetExpand.observe(viewLifecycleOwner) {
-            when (it) {
-                true -> expand()
-                false -> expand(true)
-                else -> dismiss()
-            }
         }
     }
 
