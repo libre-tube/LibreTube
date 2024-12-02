@@ -70,11 +70,16 @@ object NavigationHelper {
 
         val activity = ContextHelper.unwrapActivity<MainActivity>(context)
         val attachedToRunningPlayer = activity.runOnPlayerFragment {
-            this.playNextVideo(videoUrlOrId.toID())
-            PlayingQueue.clear()
-            // maximize player
-            this.binding.playerMotionLayout.transitionToStart()
-            true
+            try {
+                this.playNextVideo(videoUrlOrId.toID())
+                // maximize player
+                this.binding.playerMotionLayout.transitionToStart()
+                PlayingQueue.clear()
+                true
+            } catch (e: Exception) {
+                this.onDestroy()
+                false
+            }
         }
         if (attachedToRunningPlayer) return
 
