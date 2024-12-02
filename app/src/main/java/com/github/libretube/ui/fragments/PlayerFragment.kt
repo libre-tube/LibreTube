@@ -305,16 +305,6 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         override fun onMediaMetadataChanged(mediaMetadata: MediaMetadata) {
             super.onMediaMetadataChanged(mediaMetadata)
 
-            mediaMetadata.extras?.getString(IntentData.videoId)?.let {
-                videoId = it
-                // fix: if the fragment is recreated, play the current video, and not the initial one
-                arguments?.run {
-                    val playerData =
-                        parcelable<PlayerData>(IntentData.playerData)!!.copy(videoId = videoId)
-                    putParcelable(IntentData.playerData, playerData)
-                }
-            }
-
             val maybeStreams: Streams? = mediaMetadata.extras?.parcelable(IntentData.streams)
             maybeStreams?.let { streams ->
                 this@PlayerFragment.streams = streams
@@ -326,6 +316,18 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         override fun onPlaylistMetadataChanged(mediaMetadata: MediaMetadata) {
             super.onPlaylistMetadataChanged(mediaMetadata)
+
+            mediaMetadata.extras?.getString(IntentData.videoId)?.let {
+                videoId = it
+                _binding?.autoplayCountdown?.cancelAndHideCountdown()
+
+                // fix: if the fragment is recreated, play the current video, and not the initial one
+                arguments?.run {
+                    val playerData =
+                        parcelable<PlayerData>(IntentData.playerData)!!.copy(videoId = videoId)
+                    putParcelable(IntentData.playerData, playerData)
+                }
+            }
 
             val segments: List<Segment>? = mediaMetadata.extras?.parcelableList(IntentData.segments)
             viewModel.segments.postValue(segments.orEmpty())

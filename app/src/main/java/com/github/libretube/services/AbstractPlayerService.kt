@@ -7,8 +7,10 @@ import android.os.Looper
 import android.view.KeyEvent
 import androidx.annotation.OptIn
 import androidx.core.app.ServiceCompat
+import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import androidx.media3.common.C
+import androidx.media3.common.MediaMetadata
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
@@ -22,6 +24,7 @@ import androidx.media3.session.SessionCommand
 import androidx.media3.session.SessionResult
 import com.github.libretube.R
 import com.github.libretube.api.obj.Subtitle
+import com.github.libretube.constants.IntentData
 import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.extensions.parcelable
@@ -47,6 +50,8 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     var trackSelector: DefaultTrackSelector? = null
 
     lateinit var videoId: String
+        private set
+
     var isTransitioning = true
 
     val handler = Handler(Looper.getMainLooper())
@@ -170,7 +175,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     }
 
     private fun navigateVideo(videoId: String) {
-        this.videoId = videoId
+        setVideoId(videoId)
 
         CoroutineScope(Dispatchers.IO).launch {
             startPlayback()
@@ -182,6 +187,28 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
             C.ROLE_FLAG_CAPTION
         } else {
             PlayerHelper.ROLE_FLAG_AUTO_GEN_SUBTITLE
+        }
+    }
+
+    /**
+     * Update the [videoId] to the new videoId and change the playlist metadata
+     * to reflect that videoId change
+     */
+    protected fun setVideoId(videoId: String) {
+        this.videoId = videoId
+
+        updatePlaylistMetadata {
+            setExtras(bundleOf(IntentData.videoId to videoId))
+        }
+    }
+
+    protected fun updatePlaylistMetadata(updateAction: MediaMetadata.Builder.() -> Unit) {
+        handler.post {
+            exoPlayer?.playlistMetadata = MediaMetadata.Builder()
+                .apply(updateAction)
+                // send a unique timestamp to notify that the metadata changed, even if playing the same video twice
+                .setTrackNumber(System.currentTimeMillis().mod(Int.MAX_VALUE))
+                .build()
         }
     }
 
@@ -303,7 +330,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
      */
     abstract suspend fun startPlayback()
 
-    fun saveWatchPosition() {
+    private fun saveWatchPosition() {
         if (isTransitioning || !PlayerHelper.watchPositionsVideo) return
 
         exoPlayer?.let { PlayerHelper.saveWatchPosition(it, videoId) }
