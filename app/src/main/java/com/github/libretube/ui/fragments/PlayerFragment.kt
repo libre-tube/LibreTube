@@ -517,7 +517,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     mainMotionLayout.progress = abs(progress)
                 }
                 disableController()
-                commentsViewModel.setCommentSheetExpand(false)
+                commonPlayerViewModel.setSheetExpand(false)
                 transitionEndId = endId
                 transitionStartId = startId
             }
@@ -530,7 +530,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     // re-enable captions
                     updateCurrentSubtitle(viewModel.currentSubtitle)
                     binding.player.useController = true
-                    commentsViewModel.setCommentSheetExpand(true)
+                    commonPlayerViewModel.setSheetExpand(true)
                     mainMotionLayout.progress = 0F
                     changeOrientationMode()
                 } else if (currentId == transitionEndId) {
@@ -538,7 +538,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     // disable captions temporarily
                     updateCurrentSubtitle(null)
                     disableController()
-                    commentsViewModel.setCommentSheetExpand(null)
+                    commonPlayerViewModel.setSheetExpand(null)
                     binding.sbSkipBtn.isGone = true
                     if (NavBarHelper.hasTabs()) {
                         mainMotionLayout.progress = 1F
@@ -773,7 +773,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
 
         updateFullscreenOrientation()
 
-        commentsViewModel.setCommentSheetExpand(null)
+        commonPlayerViewModel.setSheetExpand(null)
 
         updateResolution(true)
         openOrCloseFullscreenDialog(true)

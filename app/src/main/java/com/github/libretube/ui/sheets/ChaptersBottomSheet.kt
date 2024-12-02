@@ -17,7 +17,7 @@ import com.github.libretube.databinding.BottomSheetBinding
 import com.github.libretube.ui.adapters.ChaptersAdapter
 import com.github.libretube.ui.models.ChaptersViewModel
 
-class ChaptersBottomSheet : UndimmedBottomSheet() {
+class ChaptersBottomSheet : ExpandablePlayerSheet() {
     private var _binding: BottomSheetBinding? = null
     private val binding get() = _binding!!
 
