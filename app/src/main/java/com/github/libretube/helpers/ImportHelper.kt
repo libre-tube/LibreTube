@@ -191,9 +191,7 @@ object ImportHelper {
             ImportFormat.YOUTUBECSV -> {
                 val playlist = PipedImportPlaylist()
                 activity.contentResolver.openInputStream(uri)?.use { inputStream ->
-                    val lines = inputStream.bufferedReader().use { reader ->
-                        reader.lines().collect(Collectors.toList())
-                    }
+                    val lines = inputStream.bufferedReader().readLines()
                     // invalid playlist file, hence returning
                     if (lines.size < 2) return
 
@@ -214,12 +212,13 @@ object ImportHelper {
                     for (line in lines.subList(startIndex, lines.size)) {
                         if (line.isBlank()) continue
 
-                        line.split(",")
+                        val videoId = line.split(",")
                             .firstOrNull()
                             ?.takeIf { it.isNotBlank() }
-                            ?.let { videoId ->
-                                playlist.videos += videoId.trim()
-                            }
+
+                        if (videoId != null) {
+                            playlist.videos += videoId.trim()
+                        }
                     }
                     importPlaylists.add(playlist)
                 }
