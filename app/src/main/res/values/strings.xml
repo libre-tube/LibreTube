@@ -480,6 +480,7 @@
     <string name="import_format_freetube" translatable="false">FreeTube</string>
     <string name="import_format_youtube_csv" translatable="false">YouTube (CSV)</string>
     <string name="import_format_youtube_json" translatable="false">YouTube (JSON)</string>
+    <string name="import_format_list_of_urls">List of URls or video IDs</string>
     <string name="home_tab_content">Home tab content</string>
     <string name="show_search_suggestions">Show search suggestions</string>
     <string name="audio_track_format">%1$s - %2$s</string>

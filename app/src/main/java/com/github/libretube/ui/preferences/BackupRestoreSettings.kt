@@ -41,7 +41,8 @@ class BackupRestoreSettings : BasePreferenceFragment() {
     private val importPlaylistFormatList = listOf(
         ImportFormat.PIPED,
         ImportFormat.FREETUBE,
-        ImportFormat.YOUTUBECSV
+        ImportFormat.YOUTUBECSV,
+        ImportFormat.URLSORIDS
     )
     private val exportPlaylistFormatList = listOf(
         ImportFormat.PIPED,

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.net.Uri
 import android.util.Log
+import androidx.core.net.toUri
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.PlaylistsHelper
@@ -226,6 +227,26 @@ object ImportHelper {
                 // convert the YouTube URLs to videoIds
                 importPlaylists.forEach { importPlaylist ->
                     importPlaylist.videos = importPlaylist.videos.map { it.takeLast(11) }
+                }
+            }
+
+            ImportFormat.URLSORIDS -> {
+                activity.contentResolver.openInputStream(uri)?.use { inputStream ->
+                    val playlist = PipedImportPlaylist(name = TextUtils.defaultPlaylistName)
+
+                    playlist.videos = inputStream.bufferedReader().readLines()
+                        .flatMap { it.split(",") }
+                        .mapNotNull { videoUrlOrId ->
+                            if (videoUrlOrId.length == 11) {
+                                videoUrlOrId
+                            } else {
+                                TextUtils.getVideoIdFromUri(videoUrlOrId.toUri())
+                            }
+                        }
+
+                    if (playlist.videos.isNotEmpty()) {
+                        importPlaylists.add(playlist)
+                    }
                 }
             }
 
