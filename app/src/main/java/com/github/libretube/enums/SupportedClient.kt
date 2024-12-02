@@ -8,5 +8,6 @@ enum class ImportFormat(@StringRes val value: Int) {
     FREETUBE(R.string.import_format_freetube),
     YOUTUBECSV(R.string.import_format_youtube_csv),
     YOUTUBEJSON(R.string.youtube),
-    PIPED(R.string.import_format_piped)
+    PIPED(R.string.import_format_piped),
+    URLSORIDS(R.string.import_format_list_of_urls)
 }
