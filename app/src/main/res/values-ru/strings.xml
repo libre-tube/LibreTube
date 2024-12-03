@@ -561,4 +561,5 @@
     <string name="upcoming">Скоро</string>
     <string name="category_exclusive_access">Исключительный доступ</string>
     <string name="crashlog">Журнал событий</string>
+    <string name="import_format_list_of_urls">Список URL или ID видео</string>
 </resources>
