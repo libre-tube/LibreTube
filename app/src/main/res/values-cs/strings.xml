@@ -558,4 +558,5 @@
     <string name="delete_only_watched_videos">Odstranit pouze zhlédnutá videa</string>
     <string name="category_exclusive_access">Exkluzivní přístup</string>
     <string name="crashlog">Protokol pádů</string>
+    <string name="import_format_list_of_urls">Seznam URI nebo ID videa</string>
 </resources>
