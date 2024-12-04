@@ -552,4 +552,5 @@
     <string name="delete_only_watched_videos">僅刪除已觀看的影片</string>
     <string name="category_exclusive_access">獨家存取權</string>
     <string name="crashlog">當機紀錄</string>
+    <string name="import_format_list_of_urls">URI 或影片 ID 的清單</string>
 </resources>
