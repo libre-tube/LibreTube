@@ -552,4 +552,5 @@
     <string name="category_exclusive_access">Akses Eksklusif</string>
     <string name="delete_only_watched_videos">Hanya hapus video yang sudah ditonton</string>
     <string name="crashlog">Log kemogokan</string>
+    <string name="import_format_list_of_urls">Daftar URI atau ID video</string>
 </resources>

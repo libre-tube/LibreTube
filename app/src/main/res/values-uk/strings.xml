@@ -562,4 +562,5 @@
     <string name="category_exclusive_access">Ексклюзивний доступ</string>
     <string name="crashlog">Журнал збоїв</string>
     <string name="delete_only_watched_videos">Видаляти лише вже переглянуті відео</string>
+    <string name="import_format_list_of_urls">Список URL-адрес або відеоідентифікаторів</string>
 </resources>

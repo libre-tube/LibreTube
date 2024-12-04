@@ -552,4 +552,5 @@
     <string name="delete_only_watched_videos">仅删除已观看的视频</string>
     <string name="category_exclusive_access">独家访问</string>
     <string name="crashlog">崩溃记录</string>
+    <string name="import_format_list_of_urls">URI 或视频 ID 列表</string>
 </resources>
