@@ -558,4 +558,5 @@
     <string name="delete_only_watched_videos">Borrar solo los vídeos ya vistos</string>
     <string name="category_exclusive_access">Acceso exclusivo</string>
     <string name="crashlog">Registro de fallos</string>
+    <string name="import_format_list_of_urls">Lista de URL o identificaciones de videos</string>
 </resources>
