@@ -15,8 +15,10 @@ import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.enums.ImportFormat
 import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.obj.FreeTubeImportPlaylist
+import com.github.libretube.obj.FreeTubeVideo
 import com.github.libretube.obj.FreetubeSubscription
 import com.github.libretube.obj.FreetubeSubscriptions
 import com.github.libretube.obj.NewPipeSubscription
@@ -24,7 +26,8 @@ import com.github.libretube.obj.NewPipeSubscriptions
 import com.github.libretube.obj.PipedImportPlaylist
 import com.github.libretube.obj.PipedPlaylistFile
 import com.github.libretube.obj.YouTubeWatchHistoryFileItem
-import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_URL
+import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_SHORT_URL
 import com.github.libretube.util.TextUtils
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.encodeToString
@@ -34,6 +37,7 @@ import java.util.stream.Collectors
 
 object ImportHelper {
     private const val IMPORT_THUMBNAIL_QUALITY = "mqdefault"
+    private const val VIDEO_ID_LENGTH = 11
 
     /**
      * Import subscriptions by a file uri
@@ -70,7 +74,7 @@ object ImportHelper {
                     JsonHelper.json.decodeFromStream<NewPipeSubscriptions>(it)
                 }
                 subscriptions?.subscriptions.orEmpty().map {
-                    it.url.replace("${ShareDialog.YOUTUBE_FRONTEND_URL}/channel/", "")
+                    it.url.replace("$YOUTUBE_FRONTEND_URL/channel/", "")
                 }
             }
 
@@ -79,7 +83,7 @@ object ImportHelper {
                     JsonHelper.json.decodeFromStream<FreetubeSubscriptions>(it)
                 }
                 subscriptions?.subscriptions.orEmpty().map {
-                    it.url.replace("${ShareDialog.YOUTUBE_FRONTEND_URL}/channel/", "")
+                    it.url.replace("$YOUTUBE_FRONTEND_URL/channel/", "")
                 }
             }
 
@@ -114,7 +118,7 @@ object ImportHelper {
         when (importFormat) {
             ImportFormat.NEWPIPE -> {
                 val newPipeChannels = subs.map {
-                    NewPipeSubscription(it.name, 0, "${ShareDialog.YOUTUBE_FRONTEND_URL}${it.url}")
+                    NewPipeSubscription(it.name, 0, "$YOUTUBE_FRONTEND_URL${it.url}")
                 }
                 val newPipeSubscriptions = NewPipeSubscriptions(subscriptions = newPipeChannels)
                 activity.contentResolver.openOutputStream(uri)?.use {
@@ -127,7 +131,7 @@ object ImportHelper {
                     FreetubeSubscription(
                         it.name,
                         "",
-                        "${ShareDialog.YOUTUBE_FRONTEND_URL}${it.url}"
+                        "$YOUTUBE_FRONTEND_URL${it.url}"
                     )
                 }
                 val freeTubeSubscriptions = FreetubeSubscriptions(subscriptions = freeTubeChannels)
@@ -158,7 +162,7 @@ object ImportHelper {
 
                 // convert the YouTube URLs to videoIds
                 importPlaylists.forEach { playlist ->
-                    playlist.videos = playlist.videos.map { it.takeLast(11) }
+                    playlist.videos = playlist.videos.map { it.takeLast(VIDEO_ID_LENGTH) }
                 }
             }
 
@@ -225,7 +229,7 @@ object ImportHelper {
 
                 // convert the YouTube URLs to videoIds
                 importPlaylists.forEach { importPlaylist ->
-                    importPlaylist.videos = importPlaylist.videos.map { it.takeLast(11) }
+                    importPlaylist.videos = importPlaylist.videos.map { it.takeLast(VIDEO_ID_LENGTH) }
                 }
             }
 
@@ -236,7 +240,7 @@ object ImportHelper {
                     playlist.videos = inputStream.bufferedReader().readLines()
                         .flatMap { it.split(",") }
                         .mapNotNull { videoUrlOrId ->
-                            if (videoUrlOrId.length == 11) {
+                            if (videoUrlOrId.length == VIDEO_ID_LENGTH) {
                                 videoUrlOrId
                             } else {
                                 TextUtils.getVideoIdFromUri(videoUrlOrId.toUri())
@@ -272,11 +276,22 @@ object ImportHelper {
      * Export Playlists
      */
     @OptIn(ExperimentalSerializationApi::class)
-    suspend fun exportPlaylists(activity: Activity, uri: Uri, importFormat: ImportFormat) {
+    suspend fun exportPlaylists(
+        activity: Activity,
+        uri: Uri,
+        importFormat: ImportFormat,
+        selectedPlaylistIds: List<String>? = null
+    ) {
+        val playlists = PlaylistsHelper.getAllPlaylistsWithVideos(selectedPlaylistIds)
+
         when (importFormat) {
             ImportFormat.PIPED -> {
-                val playlists = PlaylistsHelper.exportPipedPlaylists()
-                val playlistFile = PipedPlaylistFile(playlists = playlists)
+                val playlistFile = PipedPlaylistFile(playlists = playlists.map {
+                    val videos = it.relatedStreams.map { item ->
+                        "$YOUTUBE_FRONTEND_URL/watch?v=${item.url!!.toID()}"
+                    }
+                    PipedImportPlaylist(it.name, "playlist", "private", videos)
+                })
 
                 activity.contentResolver.openOutputStream(uri)?.use {
                     JsonHelper.json.encodeToStream(playlistFile, it)
@@ -285,13 +300,34 @@ object ImportHelper {
             }
 
             ImportFormat.FREETUBE -> {
-                val playlists = PlaylistsHelper.exportFreeTubePlaylists()
-
-                val freeTubeExportDb = playlists.joinToString("\n") { playlist ->
+                val freeTubeExportDb = playlists.map { playlist ->
+                    val videos = playlist.relatedStreams.map { videoInfo ->
+                        FreeTubeVideo(
+                            videoId = videoInfo.url.orEmpty().toID(),
+                            title = videoInfo.title.orEmpty(),
+                            author = videoInfo.uploaderName.orEmpty(),
+                            authorId = videoInfo.uploaderUrl.orEmpty().toID(),
+                            lengthSeconds = videoInfo.duration ?: 0L
+                        )
+                    }
+                    FreeTubeImportPlaylist(playlist.name.orEmpty(), videos)
+                }.joinToString("\n") { playlist ->
                     JsonHelper.json.encodeToString(playlist)
                 }
+
                 activity.contentResolver.openOutputStream(uri)?.use {
                     it.write(freeTubeExportDb.toByteArray())
+                }
+                activity.toastFromMainDispatcher(R.string.exportsuccess)
+            }
+
+            ImportFormat.URLSORIDS -> {
+                val urlListExport = playlists
+                    .flatMap { it.relatedStreams }
+                    .joinToString("\n") { YOUTUBE_SHORT_URL + "/watch?v=" + it.url!!.toID() }
+
+                activity.contentResolver.openOutputStream(uri)?.use {
+                    it.write(urlListExport.toByteArray())
                 }
                 activity.toastFromMainDispatcher(R.string.exportsuccess)
             }
@@ -311,7 +347,7 @@ object ImportHelper {
                     .filter { it.activityControls.contains("YouTube watch history") && it.subtitles.isNotEmpty() && it.titleUrl.isNotEmpty() }
                     .reversed()
                     .map {
-                        val videoId = it.titleUrl.substring(it.titleUrl.length - 11)
+                        val videoId = it.titleUrl.takeLast(VIDEO_ID_LENGTH)
 
                         WatchHistoryItem(
                             videoId = videoId,
