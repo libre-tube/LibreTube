@@ -741,10 +741,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private fun playOnBackground() {
+        val currentPosition = if (::playerController.isInitialized) playerController.currentPosition else 0
+
         BackgroundHelper.playOnBackground(
             requireContext(),
             videoId,
-            playerController.currentPosition,
+            currentPosition,
             playlistId,
             channelId,
             keepQueue = true,
