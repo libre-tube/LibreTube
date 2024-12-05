@@ -10,19 +10,18 @@ import androidx.core.app.ServiceCompat
 import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import androidx.media3.common.C
+import androidx.media3.common.ForwardingPlayer
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
-import androidx.media3.session.CommandButton
 import androidx.media3.session.MediaLibraryService
 import androidx.media3.session.MediaLibraryService.MediaLibrarySession
 import androidx.media3.session.MediaSession
 import androidx.media3.session.SessionCommand
 import androidx.media3.session.SessionResult
-import com.github.libretube.R
 import com.github.libretube.api.obj.Subtitle
 import com.github.libretube.constants.IntentData
 import com.github.libretube.enums.PlayerCommand
@@ -261,19 +260,6 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     ): MediaSession.ConnectionResult {
         val connectionResult = super.onConnect(session, controller)
 
-        // Select the button to display.
-        val customLayout = listOf(
-            CommandButton.Builder()
-                .setDisplayName(getString(R.string.rewind))
-                .setSessionCommand(SessionCommand(PlayerEvent.Prev.name, Bundle.EMPTY))
-                .setIconResId(R.drawable.ic_prev_outlined)
-                .build(),
-            CommandButton.Builder()
-                .setDisplayName(getString(R.string.play_next))
-                .setSessionCommand(SessionCommand(PlayerEvent.Next.name, Bundle.EMPTY))
-                .setIconResId(R.drawable.ic_next_outlined)
-                .build(),
-        )
         val mediaNotificationSessionCommands =
             connectionResult.availableSessionCommands.buildUpon()
                 .also { builder ->
@@ -284,18 +270,17 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
                             stopServiceCommand
                         )
                     )
-                    builder.addSessionCommands(customLayout.mapNotNull(CommandButton::sessionCommand))
                 }
                 .build()
 
         val playerCommands = connectionResult.availablePlayerCommands.buildUpon()
-            .remove(Player.COMMAND_SEEK_TO_PREVIOUS)
+            .add(Player.COMMAND_SEEK_TO_NEXT)
+            .add(Player.COMMAND_SEEK_TO_PREVIOUS)
             .build()
 
         return MediaSession.ConnectionResult.AcceptedResultBuilder(session)
             .setAvailableSessionCommands(mediaNotificationSessionCommands)
             .setAvailablePlayerCommands(playerCommands)
-            .setCustomLayout(customLayout)
             .build()
     }
 
@@ -318,7 +303,8 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
         PlayerHelper.setPreferredCodecs(trackSelector)
 
-        mediaLibrarySession = MediaLibrarySession.Builder(this, player, this)
+        val forwardingPlayer = MediaSessionForwarder(player)
+        mediaLibrarySession = MediaLibrarySession.Builder(this, forwardingPlayer, this)
             .setId(this.javaClass.name)
             .build()
     }
@@ -347,16 +333,20 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
                 handlePlayerAction(PlayerEvent.Next)
                 return true
             }
+
             KeyEvent.KEYCODE_MEDIA_PREVIOUS -> {
                 handlePlayerAction(PlayerEvent.Prev)
                 return true
             }
+
             KeyEvent.KEYCODE_MEDIA_REWIND -> {
                 handlePlayerAction(PlayerEvent.Rewind)
             }
+
             KeyEvent.KEYCODE_MEDIA_FAST_FORWARD -> {
                 handlePlayerAction(PlayerEvent.Forward)
             }
+
             KeyEvent.KEYCODE_MEDIA_STOP -> {
                 handlePlayerAction(PlayerEvent.Stop)
             }
@@ -404,6 +394,40 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     override fun onTaskRemoved(rootIntent: Intent?) {
         super.onTaskRemoved(rootIntent)
         onDestroy()
+    }
+
+    /**
+     * [Player] wrapper that handles seeking actions (next/previous) itself instead of using the
+     * default [Player] implementation
+     */
+    inner class MediaSessionForwarder(player: Player) : ForwardingPlayer(player) {
+        override fun hasNextMediaItem(): Boolean {
+            return PlayingQueue.hasNext()
+        }
+
+        override fun hasPreviousMediaItem(): Boolean {
+            return PlayingQueue.hasPrev()
+        }
+
+        override fun seekToPrevious() {
+            handlePlayerAction(PlayerEvent.Prev)
+        }
+
+        override fun seekToNext() {
+            handlePlayerAction(PlayerEvent.Next)
+        }
+
+        override fun getAvailableCommands(): Player.Commands {
+            return super.getAvailableCommands().buildUpon()
+                .addAll(Player.COMMAND_SEEK_TO_PREVIOUS, Player.COMMAND_SEEK_TO_NEXT)
+                .build()
+        }
+
+        override fun isCommandAvailable(command: Int): Boolean {
+            if (command == Player.COMMAND_SEEK_TO_NEXT || command == Player.COMMAND_SEEK_TO_PREVIOUS) return true
+
+            return super.isCommandAvailable(command)
+        }
     }
 
     companion object {
