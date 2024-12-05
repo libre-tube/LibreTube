@@ -115,10 +115,6 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
             RUN_PLAYER_COMMAND_ACTION -> {
                 runPlayerCommand(args)
             }
-
-            else -> {
-                handlePlayerAction(PlayerEvent.valueOf(customCommand.customAction))
-            }
         }
 
         return super.onCustomCommand(session, controller, customCommand, args)
