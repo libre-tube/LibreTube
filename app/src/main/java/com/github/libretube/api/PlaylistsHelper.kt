@@ -14,10 +14,7 @@ import com.github.libretube.extensions.parallelMap
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
-import com.github.libretube.obj.FreeTubeImportPlaylist
-import com.github.libretube.obj.FreeTubeVideo
 import com.github.libretube.obj.PipedImportPlaylist
-import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_URL
 import com.github.libretube.util.deArrow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -201,35 +198,11 @@ object PlaylistsHelper {
             }
         }
 
-    suspend fun exportPipedPlaylists(): List<PipedImportPlaylist> = withContext(Dispatchers.IO) {
-        getPlaylists()
-            .map { async { getPlaylist(it.id!!) } }
-            .awaitAll()
-            .map {
-                val videos = it.relatedStreams.map { item ->
-                    "$YOUTUBE_FRONTEND_URL/watch?v=${item.url!!.toID()}"
-                }
-                PipedImportPlaylist(it.name, "playlist", "private", videos)
-            }
-    }
-
-    suspend fun exportFreeTubePlaylists(): List<FreeTubeImportPlaylist> =
+    suspend fun getAllPlaylistsWithVideos(playlistIds: List<String>? = null): List<Playlist> =
         withContext(Dispatchers.IO) {
-            getPlaylists()
-                .map { async { getPlaylist(it.id!!) } }
+            (playlistIds ?: getPlaylists().map { it.id!! })
+                .map { async { getPlaylist(it) } }
                 .awaitAll()
-                .map { playlist ->
-                    val videos = playlist.relatedStreams.map { videoInfo ->
-                        FreeTubeVideo(
-                            videoId = videoInfo.url.orEmpty().toID(),
-                            title = videoInfo.title.orEmpty(),
-                            author = videoInfo.uploaderName.orEmpty(),
-                            authorId = videoInfo.uploaderUrl.orEmpty().toID(),
-                            lengthSeconds = videoInfo.duration ?: 0L
-                        )
-                    }
-                    FreeTubeImportPlaylist(playlist.name.orEmpty(), videos)
-                }
         }
 
     suspend fun clonePlaylist(playlistId: String): String? {

@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.ScrollView
 import androidx.activity.addCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.SearchView
@@ -36,8 +37,10 @@ import com.github.libretube.compat.PictureInPictureCompat
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.ActivityMainBinding
+import com.github.libretube.enums.ImportFormat
 import com.github.libretube.extensions.anyChildFocused
 import com.github.libretube.extensions.toID
+import com.github.libretube.helpers.ImportHelper
 import com.github.libretube.helpers.IntentHelper
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
@@ -54,11 +57,14 @@ import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.models.CommonPlayerViewModel
 import com.github.libretube.ui.models.SearchViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
+import com.github.libretube.ui.preferences.BackupRestoreSettings.Companion.FILETYPE_ANY
+import com.github.libretube.ui.preferences.BackupRestoreSettings.Companion.JSON
 import com.github.libretube.util.UpdateChecker
 import com.google.android.material.elevation.SurfaceColors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
+import kotlin.math.exp
 
 class MainActivity : BaseActivity() {
     lateinit var binding: ActivityMainBinding
@@ -74,6 +80,25 @@ class MainActivity : BaseActivity() {
 
     private var savedSearchQuery: String? = null
     private var shouldOpenSuggestions = true
+
+    // registering for activity results is only possible, this here should have been part of
+    // PlaylistOptionsBottomSheet instead if Android allowed us to
+    private var playlistExportFormat: ImportFormat = ImportFormat.NEWPIPE
+    private var exportPlaylistId: String? = null
+    private val createPlaylistsFile = registerForActivityResult(
+        ActivityResultContracts.CreateDocument(FILETYPE_ANY)
+    ) { uri ->
+        if (uri == null) return@registerForActivityResult
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            ImportHelper.exportPlaylists(
+                this@MainActivity,
+                uri,
+                playlistExportFormat,
+                selectedPlaylistIds = listOf(exportPlaylistId!!)
+            )
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -651,5 +676,11 @@ class MainActivity : BaseActivity() {
             .firstOrNull()
             ?.let(action)
             ?: false
+    }
+
+    fun startPlaylistExport(playlistId: String, playlistName: String, format: ImportFormat) {
+        playlistExportFormat = format
+        exportPlaylistId = playlistId
+        createPlaylistsFile.launch("${playlistName}.${format.fileExtension}")
     }
 }

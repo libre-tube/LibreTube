@@ -7,19 +7,23 @@ import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.enums.ImportFormat
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.serializable
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.BackgroundHelper
+import com.github.libretube.helpers.ContextHelper
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.obj.ShareData
+import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.DeletePlaylistDialog
 import com.github.libretube.ui.dialogs.PlaylistDescriptionDialog
 import com.github.libretube.ui.dialogs.RenamePlaylistDialog
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.preferences.BackupRestoreSettings
 import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -30,7 +34,11 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
     private lateinit var playlistId: String
     private lateinit var playlistType: PlaylistType
 
+    private var exportFormat: ImportFormat = ImportFormat.NEWPIPE
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
         arguments?.let {
             playlistName = it.getString(IntentData.playlistName)!!
             playlistId = it.getString(IntentData.playlistId)!!
@@ -57,6 +65,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                 if (isBookmarked) R.string.remove_bookmark else R.string.add_to_bookmarks
             )
         } else {
+            optionsList.add(R.string.export_playlist)
             optionsList.add(R.string.renamePlaylist)
             optionsList.add(R.string.change_playlist_description)
             optionsList.add(R.string.deletePlaylist)
@@ -139,7 +148,27 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                 }
 
                 R.string.download -> {
-                    DownloadHelper.startDownloadPlaylistDialog(requireContext(), mFragmentManager, playlistId, playlistName, playlistType)
+                    DownloadHelper.startDownloadPlaylistDialog(
+                        requireContext(),
+                        mFragmentManager,
+                        playlistId,
+                        playlistName,
+                        playlistType
+                    )
+                }
+
+                R.string.export_playlist -> {
+                    val context = requireContext()
+
+                    BackupRestoreSettings.createImportFormatDialog(
+                        context,
+                        R.string.export_playlist,
+                        BackupRestoreSettings.exportPlaylistFormatList + listOf(ImportFormat.URLSORIDS)
+                    ) {
+                        exportFormat = it
+                        ContextHelper.unwrapActivity<MainActivity>(context)
+                            .startPlaylistExport(playlistId, playlistName, exportFormat)
+                    }
                 }
 
                 else -> {
@@ -158,7 +187,6 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                 }
             }
         }
-        super.onCreate(savedInstanceState)
     }
 
     companion object {
