@@ -27,7 +27,6 @@ import com.github.libretube.obj.PipedImportPlaylist
 import com.github.libretube.obj.PipedPlaylistFile
 import com.github.libretube.obj.YouTubeWatchHistoryFileItem
 import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_URL
-import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_SHORT_URL
 import com.github.libretube.util.TextUtils
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.encodeToString
@@ -38,6 +37,7 @@ import java.util.stream.Collectors
 object ImportHelper {
     private const val IMPORT_THUMBNAIL_QUALITY = "mqdefault"
     private const val VIDEO_ID_LENGTH = 11
+    private const val YOUTUBE_IMG_URL = "https://img.youtube.com"
 
     /**
      * Import subscriptions by a file uri
@@ -324,7 +324,7 @@ object ImportHelper {
             ImportFormat.URLSORIDS -> {
                 val urlListExport = playlists
                     .flatMap { it.relatedStreams }
-                    .joinToString("\n") { YOUTUBE_SHORT_URL + "/watch?v=" + it.url!!.toID() }
+                    .joinToString("\n") { YOUTUBE_FRONTEND_URL + "/watch?v=" + it.url!!.toID() }
 
                 activity.contentResolver.openOutputStream(uri)?.use {
                     it.write(urlListExport.toByteArray())
@@ -356,7 +356,7 @@ object ImportHelper {
                             uploaderUrl = it.subtitles.firstOrNull()?.url?.let { url ->
                                 url.substring(url.length - 24)
                             },
-                            thumbnailUrl = "https://img.youtube.com/vi/${videoId}/${IMPORT_THUMBNAIL_QUALITY}.jpg"
+                            thumbnailUrl = "${YOUTUBE_IMG_URL}/vi/${videoId}/${IMPORT_THUMBNAIL_QUALITY}.jpg"
                         )
                     }
             }
