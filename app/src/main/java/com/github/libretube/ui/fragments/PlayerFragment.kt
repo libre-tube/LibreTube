@@ -95,6 +95,7 @@ import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.PlayOfflineDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.animateDown
+import com.github.libretube.ui.extensions.setOnBackPressed
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.listeners.SeekbarPreviewListener
@@ -458,6 +459,20 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             }.show(childFragmentManager, null)
         } else {
             attachToPlayerService(playerData, createNewSession)
+        }
+
+        val onBackPressedCallback = setOnBackPressed {
+            if (commonPlayerViewModel.isFullscreen.value == true) unsetFullscreen()
+            else {
+                binding.playerMotionLayout.setTransitionDuration(250)
+                binding.playerMotionLayout.transitionToEnd()
+                mainActivity.binding.mainMotionLayout.transitionToEnd()
+                mainActivity.requestOrientationChange()
+            }
+        }
+        commonPlayerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) { isMiniPlayerVisible ->
+            // if the player is minimized, the fragment behind the player should handle the event
+            onBackPressedCallback.isEnabled = isMiniPlayerVisible != true
         }
     }
 

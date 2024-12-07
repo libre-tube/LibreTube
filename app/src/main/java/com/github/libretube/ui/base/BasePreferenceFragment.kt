@@ -19,6 +19,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 abstract class BasePreferenceFragment : PreferenceFragmentCompat() {
     abstract val titleResourceId: Int
 
+    private val settingsActivity get() = activity as? SettingsActivity
+
     /**
      * Whether any preference dialog is currently visible to the user.
      */
@@ -26,7 +28,8 @@ abstract class BasePreferenceFragment : PreferenceFragmentCompat() {
 
     override fun onStart() {
         super.onStart()
-        (activity as? SettingsActivity)?.changeTopBarText(getString(titleResourceId))
+
+        settingsActivity?.changeTopBarText(getString(titleResourceId))
     }
 
     override fun onDisplayPreferenceDialog(preference: Preference) {

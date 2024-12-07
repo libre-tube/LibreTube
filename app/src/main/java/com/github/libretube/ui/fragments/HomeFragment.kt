@@ -23,12 +23,14 @@ import com.github.libretube.constants.PreferenceKeys.HOME_TAB_CONTENT
 import com.github.libretube.databinding.FragmentHomeBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.obj.PlaylistBookmark
+import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.adapters.PlaylistBookmarkAdapter
 import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.adapters.VideosAdapter.Companion.LayoutMode
+import com.github.libretube.ui.extensions.setupFragmentAnimation
 import com.github.libretube.ui.models.HomeViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -83,6 +85,10 @@ class HomeFragment : Fragment() {
 
         binding.changeInstance.setOnClickListener {
             redirectToIntentSettings()
+        }
+
+        if (NavBarHelper.getStartFragmentId(requireContext()) != R.id.homeFragment) {
+            setupFragmentAnimation(binding.root)
         }
     }
 
