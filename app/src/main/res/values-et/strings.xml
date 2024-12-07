@@ -555,5 +555,6 @@
     <string name="delete_only_watched_videos">Kustuta vaid juba vaadatud videod</string>
     <string name="category_exclusive_access">Eksklusiivne juurdepääs</string>
     <string name="crashlog">Krahhilogi</string>
-    <string name="import_format_list_of_urls">Võrguaadreside või videotunnuste loend</string>
+    <string name="import_format_list_of_urls">Võrguaadresside või videotunnuste loend</string>
+    <string name="export_playlist">Ekspordi esitusloend</string>
 </resources>

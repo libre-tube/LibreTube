@@ -207,7 +207,7 @@
     <string name="maximum_image_cache">Maximális képgyorsítótár méret</string>
     <string name="copied_to_clipboard">Másolva a vágólapra</string>
     <string name="open_copied">Megnyitás</string>
-    <string name="add_to_queue">Sorbaállítás</string>
+    <string name="add_to_queue">Hozzáadás a várólistához</string>
     <string name="yt_shorts">Rövidek</string>
     <string name="no_subtitles_available">Nincs elérhető felirat</string>
     <string name="always">Mindig</string>
@@ -275,7 +275,7 @@
     <string name="invalid_filename">Érvénytelen fájlnév!</string>
     <string name="filename">Fájlnév</string>
     <string name="time_code">Időkód (másodperc)</string>
-    <string name="queue">Sor</string>
+    <string name="queue">Várólista</string>
     <string name="livestreams">Élő közvetítések</string>
     <string name="alternative_videos_layout">Alternatív videók elrendezés</string>
     <string name="defaultIconLight">Alapértelmezett világos</string>
@@ -456,7 +456,7 @@
     <string name="tooltip_repeat">Ismétlés</string>
     <string name="tooltip_reverse">Fordított</string>
     <string name="tooltip_sort">Rendezés</string>
-    <string name="tooltip_clear_queue">Várósor ürítése</string>
+    <string name="tooltip_clear_queue">Várólista ürítése</string>
     <string name="tooltip_dismiss">Elvetés</string>
     <string name="tooltip_unlocked">Lejátszó feloldása</string>
     <string name="tooltip_locked">Lejátszó lezárása</string>
@@ -556,4 +556,5 @@
     <string name="delete_only_watched_videos">Csak a már megtekintett videók törlése</string>
     <string name="crashlog">Hibanapló</string>
     <string name="import_format_list_of_urls">Webcímek vagy videóazonosítók listája</string>
+    <string name="export_playlist">Lejátszási lista exportálása</string>
 </resources>

@@ -556,4 +556,8 @@
     <string name="dialog_play_offline_body">Gostaria de reproduzir o vídeo a partir da pasta de descargas?</string>
     <string name="upcoming">Seguintes</string>
     <string name="delete_only_watched_videos">Eliminar apenas os visualizados</string>
+    <string name="import_format_list_of_urls">Lista de URL ou ID dos vídeos</string>
+    <string name="category_exclusive_access">Acesso exclusivo</string>
+    <string name="export_playlist">Exportar lista de reprodução</string>
+    <string name="crashlog">Registo de erros</string>
 </resources>
