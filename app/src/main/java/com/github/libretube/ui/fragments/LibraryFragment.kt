@@ -35,6 +35,7 @@ import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.dialogs.CreatePlaylistDialog
 import com.github.libretube.ui.dialogs.CreatePlaylistDialog.Companion.CREATE_PLAYLIST_DIALOG_REQUEST_KEY
+import com.github.libretube.ui.extensions.setupFragmentAnimation
 import com.github.libretube.ui.models.CommonPlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import kotlinx.coroutines.Dispatchers
@@ -130,6 +131,10 @@ class LibraryFragment : DynamicLayoutManagerFragment() {
                     fetchPlaylists()
                 }
             }.show(childFragmentManager)
+        }
+
+        if (NavBarHelper.getStartFragmentId(requireContext()) != R.id.libraryFragment) {
+            setupFragmentAnimation(binding.root)
         }
     }
 

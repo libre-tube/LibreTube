@@ -125,7 +125,7 @@ object NavBarHelper {
         return if (pref == Int.MAX_VALUE) {
             getNavBarItems(context).firstOrNull { it.isVisible }?.itemId ?: R.id.homeFragment
         } else {
-            defaultNavItems.get(pref).itemId
+            defaultNavItems[pref].itemId
         }
     }
 

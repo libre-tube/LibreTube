@@ -11,7 +11,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.ScrollView
-import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.ColorInt
@@ -22,7 +21,6 @@ import androidx.core.os.bundleOf
 import androidx.core.view.allViews
 import androidx.core.view.children
 import androidx.core.view.isNotEmpty
-import androidx.core.view.isVisible
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
@@ -38,7 +36,6 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.enums.ImportFormat
-import com.github.libretube.extensions.anyChildFocused
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ImportHelper
 import com.github.libretube.helpers.IntentHelper
@@ -54,17 +51,14 @@ import com.github.libretube.ui.dialogs.ImportTempPlaylistDialog
 import com.github.libretube.ui.fragments.AudioPlayerFragment
 import com.github.libretube.ui.fragments.DownloadsFragment
 import com.github.libretube.ui.fragments.PlayerFragment
-import com.github.libretube.ui.models.CommonPlayerViewModel
 import com.github.libretube.ui.models.SearchViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.preferences.BackupRestoreSettings.Companion.FILETYPE_ANY
-import com.github.libretube.ui.preferences.BackupRestoreSettings.Companion.JSON
 import com.github.libretube.util.UpdateChecker
 import com.google.android.material.elevation.SurfaceColors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
-import kotlin.math.exp
 
 class MainActivity : BaseActivity() {
     lateinit var binding: ActivityMainBinding
@@ -74,7 +68,6 @@ class MainActivity : BaseActivity() {
 
     private var startFragmentId = R.id.homeFragment
 
-    private val commonPlayerViewModel: CommonPlayerViewModel by viewModels()
     private val searchViewModel: SearchViewModel by viewModels()
     private val subscriptionsViewModel: SubscriptionsViewModel by viewModels()
 
@@ -184,44 +177,6 @@ class MainActivity : BaseActivity() {
         }
 
         setupSubscriptionsBadge()
-
-        onBackPressedDispatcher.addCallback {
-            if (commonPlayerViewModel.isFullscreen.value == true) {
-                val fullscreenUnsetSuccess = runOnPlayerFragment {
-                    unsetFullscreen()
-                    true
-                }
-                if (fullscreenUnsetSuccess) return@addCallback
-            }
-
-            if (binding.mainMotionLayout.progress == 0F) {
-                runCatching {
-                    minimizePlayer()
-                    return@addCallback
-                }
-            }
-
-            when (navController.currentDestination?.id) {
-                startFragmentId -> {
-                    moveTaskToBack(true)
-                    onUserLeaveHint()
-                }
-
-                R.id.searchFragment -> {
-                    if (searchView.anyChildFocused()) searchView.clearFocus()
-                    else navController.popBackStack()
-                }
-
-                R.id.searchResultFragment -> {
-                    navController.popBackStack(R.id.searchFragment, true) ||
-                            navController.popBackStack()
-                }
-
-                else -> {
-                    navController.popBackStack()
-                }
-            }
-        }
 
         loadIntentData()
     }
@@ -407,13 +362,8 @@ class MainActivity : BaseActivity() {
             }
 
             override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
-                if (binding.mainMotionLayout.progress == 0F) {
-                    runCatching {
-                        minimizePlayer()
-                    }
-                }
                 // Handover back press to `BackPressedDispatcher`
-                else if (binding.bottomNav.menu.children.none {
+                if (binding.bottomNav.menu.children.none {
                         it.itemId == navController.currentDestination?.id
                     }
                 ) {
@@ -589,25 +539,6 @@ class MainActivity : BaseActivity() {
         }
 
         return false
-    }
-
-    private fun minimizePlayer() {
-        binding.mainMotionLayout.transitionToEnd()
-        supportFragmentManager.fragments.forEach { fragment ->
-            (fragment as? PlayerFragment)?.binding?.apply {
-                mainContainer.isClickable = false
-                linLayout.isVisible = true
-                playerMotionLayout.setTransitionDuration(250)
-                playerMotionLayout.transitionToEnd()
-                playerMotionLayout.enableTransition(R.id.yt_transition, true)
-            }
-            (fragment as? AudioPlayerFragment)?.binding?.apply {
-                audioPlayerContainer.isClickable = false
-                playerMotionLayout.transitionToEnd()
-            }
-        }
-
-        requestOrientationChange()
     }
 
     @SuppressLint("SwitchIntDef")

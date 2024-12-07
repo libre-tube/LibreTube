@@ -47,6 +47,7 @@ import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.services.OnlinePlayerService
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.base.BaseActivity
+import com.github.libretube.ui.extensions.setOnBackPressed
 import com.github.libretube.ui.interfaces.AudioPlayerOptions
 import com.github.libretube.ui.listeners.AudioPlayerThumbnailListener
 import com.github.libretube.ui.models.ChaptersViewModel
@@ -238,6 +239,17 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         if (!PlayerHelper.playAutomatically) updatePlayPauseButton()
 
         updateChapterIndex()
+
+        val onBackPressedCallback = setOnBackPressed {
+            binding.audioPlayerContainer.isClickable = false
+            binding.playerMotionLayout.transitionToEnd()
+            mainActivity?.binding?.mainMotionLayout?.transitionToEnd()
+            mainActivity?.requestOrientationChange()
+        }
+        viewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) { isMiniPlayerVisible ->
+            // if the player is minimized, the fragment behind the player should handle the event
+            onBackPressedCallback.isEnabled = isMiniPlayerVisible != true
+        }
     }
 
     private fun killFragment() {

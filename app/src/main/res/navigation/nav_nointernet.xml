@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_noInternet"
+    app:startDestination="@id/noInternetFragment">
+    <fragment
+        android:id="@+id/noInternetFragment"
+        android:name="com.github.libretube.ui.fragments.NoInternetFragment"
+        android:label="fragment_nointernet"
+        tools:layout="@layout/fragment_nointernet" />
+
+    <fragment
+        android:id="@+id/downloadsFragment"
+        android:name="com.github.libretube.ui.fragments.DownloadsFragment"
+        android:label="@string/downloads"
+        tools:layout="@layout/fragment_downloads" />
+</navigation>

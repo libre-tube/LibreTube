@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.IntentData
@@ -17,10 +18,12 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSearchSuggestionsBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.anyChildFocused
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.SearchHistoryAdapter
 import com.github.libretube.ui.adapters.SearchSuggestionsAdapter
+import com.github.libretube.ui.extensions.setOnBackPressed
 import com.github.libretube.ui.models.SearchViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,6 +33,7 @@ class SearchSuggestionsFragment : Fragment() {
     private var _binding: FragmentSearchSuggestionsBinding? = null
     private val binding get() = _binding!!
     private val viewModel: SearchViewModel by activityViewModels()
+    private val mainActivity get() = activity as MainActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +60,11 @@ class SearchSuggestionsFragment : Fragment() {
         // waiting for the query to change
         viewModel.searchQuery.observe(viewLifecycleOwner) {
             showData(it)
+        }
+
+        setOnBackPressed {
+            if (mainActivity.searchView.anyChildFocused()) mainActivity.searchView.clearFocus()
+            else findNavController().popBackStack()
         }
     }
 

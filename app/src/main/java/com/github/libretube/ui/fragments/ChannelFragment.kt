@@ -31,6 +31,7 @@ import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.extensions.setupFragmentAnimation
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.sheets.AddChannelToGroupSheet
 import com.github.libretube.util.deArrow
@@ -103,6 +104,8 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
         }
 
         fetchChannel()
+
+        setupFragmentAnimation(binding.root)
     }
 
     // adjust sensitivity due to the issue of viewpager2 with SwipeToRefresh https://issuetracker.google.com/issues/138314213

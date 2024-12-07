@@ -1,7 +1,6 @@
 package com.github.libretube.ui.activities
 
 import android.os.Bundle
-import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
@@ -26,20 +25,15 @@ class SettingsActivity : BaseActivity() {
         }
 
         if (savedInstanceState == null) {
-            redirectTo<MainSettings>()
-        }
-
-        // new way of dealing with back presses instead of onBackPressed()
-        onBackPressedDispatcher.addCallback(this) {
-            if (supportFragmentManager.findFragmentById(R.id.settings) is MainSettings) {
-                finishAndRemoveTask()
-            } else {
-                redirectTo<MainSettings>()
-                changeTopBarText(getString(R.string.settings))
-            }
+            goToMainSettings()
         }
 
         handleRedirect()
+    }
+
+    fun goToMainSettings() {
+        redirectTo<MainSettings>()
+        changeTopBarText(getString(R.string.settings))
     }
 
     private fun handleRedirect() {
