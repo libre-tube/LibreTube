@@ -184,16 +184,15 @@ object PlaylistsHelper {
                 } else {
                     // if not logged in, all video information needs to become fetched manually
                     // Only do so with `MAX_CONCURRENT_IMPORT_CALLS` videos at once to prevent performance issues
-                    val streams = playlist.videos.chunked(
-                        MAX_CONCURRENT_IMPORT_CALLS
-                    ).map { videos ->
-                        videos.parallelMap {
+                    for (videoIdList in playlist.videos.chunked(MAX_CONCURRENT_IMPORT_CALLS)) {
+                        val streams = videoIdList.parallelMap {
                             runCatching { StreamsExtractor.extractStreams(it) }
                                 .getOrNull()
                                 ?.toStreamItem(it)
                         }.filterNotNull()
-                    }.flatten()
-                    addToPlaylist(playlistId, *streams.toTypedArray())
+
+                        addToPlaylist(playlistId, *streams.toTypedArray())
+                    }
                 }
             }
         }
