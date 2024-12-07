@@ -10,6 +10,8 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.BackEventCompat
+import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.os.bundleOf
@@ -240,12 +242,24 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
 
         updateChapterIndex()
 
-        val onBackPressedCallback = setOnBackPressed {
-            binding.audioPlayerContainer.isClickable = false
-            binding.playerMotionLayout.transitionToEnd()
-            mainActivity?.binding?.mainMotionLayout?.transitionToEnd()
-            mainActivity?.requestOrientationChange()
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                binding.audioPlayerContainer.isClickable = false
+                binding.playerMotionLayout.transitionToEnd()
+                mainActivity?.binding?.mainMotionLayout?.transitionToEnd()
+                mainActivity?.requestOrientationChange()
+            }
+
+            override fun handleOnBackProgressed(backEvent: BackEventCompat) {
+                binding.playerMotionLayout.progress = backEvent.progress
+            }
+
+            override fun handleOnBackCancelled() {
+                binding.playerMotionLayout.transitionToStart()
+            }
         }
+        setOnBackPressed(onBackPressedCallback)
+
         viewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) { isMiniPlayerVisible ->
             // if the player is minimized, the fragment behind the player should handle the event
             onBackPressedCallback.isEnabled = isMiniPlayerVisible != true
