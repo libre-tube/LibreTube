@@ -24,6 +24,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import android.widget.Toast
+import androidx.activity.BackEventCompat
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
@@ -142,9 +144,10 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     private lateinit var streams: Streams
     val isShort
         get() = run {
-            val heightGreaterThanWidth = ::streams.isInitialized && streams.videoStreams.firstOrNull()?.let {
-                (it.height ?: 0) > (it.width ?: 0)
-            } == true
+            val heightGreaterThanWidth =
+                ::streams.isInitialized && streams.videoStreams.firstOrNull()?.let {
+                    (it.height ?: 0) > (it.width ?: 0)
+                } == true
 
             PlayingQueue.getCurrent()?.isShort == true || heightGreaterThanWidth
         }
@@ -461,15 +464,27 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             attachToPlayerService(playerData, createNewSession)
         }
 
-        val onBackPressedCallback = setOnBackPressed {
-            if (commonPlayerViewModel.isFullscreen.value == true) unsetFullscreen()
-            else {
-                binding.playerMotionLayout.setTransitionDuration(250)
-                binding.playerMotionLayout.transitionToEnd()
-                mainActivity.binding.mainMotionLayout.transitionToEnd()
-                mainActivity.requestOrientationChange()
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (commonPlayerViewModel.isFullscreen.value == true) unsetFullscreen()
+                else {
+                    binding.playerMotionLayout.setTransitionDuration(250)
+                    binding.playerMotionLayout.transitionToEnd()
+                    mainActivity.binding.mainMotionLayout.transitionToEnd()
+                    mainActivity.requestOrientationChange()
+                }
+            }
+
+            override fun handleOnBackProgressed(backEvent: BackEventCompat) {
+                binding.playerMotionLayout.progress = backEvent.progress
+            }
+
+            override fun handleOnBackCancelled() {
+                binding.playerMotionLayout.transitionToStart()
             }
         }
+        setOnBackPressed(onBackPressedCallback)
+
         commonPlayerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) { isMiniPlayerVisible ->
             // if the player is minimized, the fragment behind the player should handle the event
             onBackPressedCallback.isEnabled = isMiniPlayerVisible != true
@@ -496,7 +511,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             playerController.addListener(playerListener)
 
             if (!startNewSession) {
-                val streams: Streams? = playerController.mediaMetadata.extras?.parcelable(IntentData.streams)
+                val streams: Streams? =
+                    playerController.mediaMetadata.extras?.parcelable(IntentData.streams)
 
                 // reload the streams data and playback, metadata apparently no longer exists
                 if (streams == null) {
@@ -756,7 +772,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     }
 
     private fun playOnBackground() {
-        val currentPosition = if (::playerController.isInitialized) playerController.currentPosition else 0
+        val currentPosition =
+            if (::playerController.isInitialized) playerController.currentPosition else 0
 
         BackgroundHelper.playOnBackground(
             requireContext(),

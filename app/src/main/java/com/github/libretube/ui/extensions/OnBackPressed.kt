@@ -10,10 +10,14 @@ fun Fragment.setOnBackPressed(action: OnBackPressedCallback.() -> Unit): OnBackP
         }
     }
 
+    return setOnBackPressed(callback)
+}
+
+fun Fragment.setOnBackPressed(callback: OnBackPressedCallback): OnBackPressedCallback {
     requireActivity().onBackPressedDispatcher.addCallback(
         viewLifecycleOwner,
         callback
-       )
+    )
 
     return callback
 }
