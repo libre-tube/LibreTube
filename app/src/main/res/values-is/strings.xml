@@ -555,4 +555,6 @@
     <string name="delete_only_watched_videos">Aðeins eyða myndskeiðum sem búið er að horfa á</string>
     <string name="category_exclusive_access">Forgangs aðgangur</string>
     <string name="crashlog">Hrunskýrsla</string>
+    <string name="export_playlist">Flytja út spilunarlista</string>
+    <string name="import_format_list_of_urls">Listi yfir slóðir eða auðkenni myndskeiða</string>
 </resources>
