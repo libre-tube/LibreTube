@@ -250,7 +250,7 @@
     <string name="delete">Eemalda allalaadimiste seast</string>
     <string name="delete_all">Kustutame kõik allalaadimised!</string>
     <string name="skip_segment">Jäta segment vahele</string>
-    <string name="filename">Faili nimi</string>
+    <string name="filename">Failinimi</string>
     <string name="confirm_unsubscribe">Kas sa oled kindel et soovid lõpetada %1$s esitusloendi tellimuse?</string>
     <string name="confirm_unsubscribing_summary">Tellimusest loobumisel küsi selleks lisakinnitust</string>
     <string name="unsupported_file_format">Failivormingu tugi puudub: %1$s</string>
@@ -468,7 +468,7 @@
     <string name="auto_generated">automaatselt loodud</string>
     <string name="resolution_limited">piiratud</string>
     <string name="sb_create_segment">Loo segment</string>
-    <string name="filename_too_long">Faili nimi on liiga pikk!</string>
+    <string name="filename_too_long">Failinimi on liiga pikk!</string>
     <string name="remember_playback_speed">Jäta taasesituse kiirus meelde</string>
     <string name="gestures">Viiped</string>
     <string name="download_channel_name">Allalaadimisteenus</string>
