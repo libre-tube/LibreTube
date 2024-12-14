@@ -558,4 +558,6 @@
     <string name="delete_only_watched_videos">Excluir apenas vídeos já assistidos</string>
     <string name="category_exclusive_access">Acesso exclusivo</string>
     <string name="crashlog">Log de erros</string>
+    <string name="import_format_list_of_urls">Lista de URL ou ID dos vídeos</string>
+    <string name="export_playlist">Exportar playlist</string>
 </resources>
