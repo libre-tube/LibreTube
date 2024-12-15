@@ -344,7 +344,7 @@ object ImportHelper {
                     JsonHelper.json.decodeFromStream<List<YouTubeWatchHistoryFileItem>>(it)
                 }
                     .orEmpty()
-                    .filter { it.activityControls.contains("YouTube watch history") && it.subtitles.isNotEmpty() && it.titleUrl.isNotEmpty() }
+                    .filter { it.activityControls.isNotEmpty() && it.subtitles.isNotEmpty() && it.titleUrl.isNotEmpty() }
                     .reversed()
                     .map {
                         val videoId = it.titleUrl.takeLast(VIDEO_ID_LENGTH)
