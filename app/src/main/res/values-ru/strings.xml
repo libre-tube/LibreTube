@@ -549,7 +549,7 @@
     <string name="pip">КвК</string>
     <string name="local_stream_extraction">Локальное извлечение потока</string>
     <string name="local_stream_extraction_summary">Получать информацию о потоках напрямую из YouTube, не используя Piped.</string>
-    <string name="local_ryd">Локальный экстрактор «Возврат дизлайков на Youtube»</string>
+    <string name="local_ryd">Локальный экстрактор «Возврат дизлайков на YouTube»</string>
     <string name="local_ryd_summary">Запрашивать информацию о дизлайках напрямую с https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Импортировать историю просмотра</string>
     <string name="import_watch_history_desc">Пожалуйста, учтите, что полноценный импорт невозможен из-за ограниченности данных, экспортируемых из YouTube.</string>
@@ -557,10 +557,10 @@
     <string name="view_count">%1$s просмотров</string>
     <string name="dialog_play_offline_body">Воспроизвести видео из папки загрузок?</string>
     <string name="dialog_play_offline_title">Доступна сохранённая копия этого видео.</string>
-    <string name="delete_only_watched_videos">Удалять только уже просмотренные видео</string>
+    <string name="delete_only_watched_videos">Удалять только просмотренные видео</string>
     <string name="upcoming">Скоро</string>
-    <string name="category_exclusive_access">Исключительный доступ</string>
-    <string name="crashlog">Журнал событий</string>
-    <string name="import_format_list_of_urls">Список URL адресов или идентификаторов видео</string>
+    <string name="category_exclusive_access">Эксклюзивный доступ</string>
+    <string name="crashlog">Журнал вылета</string>
+    <string name="import_format_list_of_urls">Список ссылок или идентификаторов видео</string>
     <string name="export_playlist">Экспорт списка воспроизведения</string>
 </resources>
