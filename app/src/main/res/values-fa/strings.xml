@@ -543,10 +543,18 @@
     <string name="local_stream_extraction">استخراج جریان محلی</string>
     <string name="local_stream_extraction_summary">واکشی مستقیم اطّلاعات پخش ویدیو از یوتوب بدون استفاده از پایپد.</string>
     <string name="external_download_provider_summary">ورود نام بستهٔ کاره‌ای که می‌خواهید برای بارگیری ویدیوها استفاده کنید. خالی گذاشتن برای استفاده از بارگیر توکار لیبره‌تیوب.</string>
-    <string name="local_ryd">برگرداندن محلی ناپسندیدن‌های یوتوب</string>
+    <string name="local_ryd">برگردان محلی استخراج کننده نپسندیدن یوتیوب</string>
     <string name="local_ryd_summary">واکشی مستقیم اطّلاعات نپسندیدن از https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">درون‌ریزی تاریخچهٔ تماشا</string>
     <string name="import_watch_history_desc">به یاد داشته باشید که به خاطر داده‌های محدود برون‌ریزی یوتوب، همه‌چیز درون‌ریزی نخواهد شد.</string>
     <string name="audio_codecs">رمزینه‌های صوتی</string>
     <string name="view_count">%1$s مشاهده‌ها</string>
+    <string name="upcoming">آینده</string>
+    <string name="category_exclusive_access">دسترسی انحصاری</string>
+    <string name="export_playlist">صادرات لیست پخش</string>
+    <string name="import_format_list_of_urls">فهرست نشانی‌های اینترنتی یا شناسه‌های ویدیو</string>
+    <string name="dialog_play_offline_title">نسخه محلی این ویدیو موجود است.</string>
+    <string name="dialog_play_offline_body">آیا می خواهید ویدیو را از پوشه دانلود پخش کنید؟</string>
+    <string name="delete_only_watched_videos">فقط ویدیوهایی را که قبلاً تماشا کرده‌اید حذف کنید</string>
+    <string name="crashlog">گزارش خطا</string>
 </resources>
