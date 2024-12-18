@@ -9,7 +9,9 @@ import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.extensions.formatShort
 import com.google.common.math.IntMath.pow
+import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toJavaLocalDate
+import kotlinx.datetime.toLocalDateTime
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -45,6 +47,12 @@ object TextUtils {
      */
     fun localizeDate(date: KotlinLocalDate): String {
         return date.toJavaLocalDate().format(MEDIUM_DATE_FORMATTER)
+    }
+
+    fun localizeInstant(instant: kotlinx.datetime.Instant): String {
+        val date = instant.toLocalDateTime(TimeZone.currentSystemDefault()).date
+
+        return localizeDate(date)
     }
 
     /**

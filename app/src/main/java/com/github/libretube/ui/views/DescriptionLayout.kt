@@ -131,40 +131,30 @@ class DescriptionLayout(
     private fun toggleDescription() {
         val streams = streams ?: return
 
-        val views = if (binding.descLinLayout.isVisible) {
-            // show formatted short view count
-            streams.views.formatShort()
-        } else {
-            // show exact view count
-            "%,d".format(streams.views)
-        }
-        val date = TextUtils.formatRelativeDate(context, streams.uploaded ?: -1L)
-        val viewInfo = context.getString(R.string.normal_views, views,  TextUtils.SEPARATOR + date)
-        if (binding.descLinLayout.isVisible) {
-            // hide the description and chapters
-            binding.playerDescriptionArrow.animate().rotation(
-                0F
-            ).setDuration(ANIMATION_DURATION).start()
-
-            binding.playerDescription.isGone = true
-
-            binding.descLinLayout.isGone = true
+        val isNewStateExpanded = binding.descLinLayout.isGone
+        if (!isNewStateExpanded) {
+            // show a short version of the view count and date
+            val formattedDate = TextUtils.formatRelativeDate(context, streams.uploaded ?: -1L)
+            binding.playerViewsInfo.text = context.getString(R.string.normal_views, streams.views.formatShort(),  TextUtils.SEPARATOR + formattedDate)
 
             // limit the title height to two lines
             binding.playerTitle.maxLines = 2
         } else {
-            // show the description and chapters
-            binding.playerDescriptionArrow.animate().rotation(
-                180F
-            ).setDuration(ANIMATION_DURATION).start()
-
-            binding.playerDescription.isVisible = true
-            binding.descLinLayout.isVisible = true
+            // show the full view count and upload date
+            val formattedDate = streams.uploadTimestamp?.let { TextUtils.localizeInstant(it) }.orEmpty()
+            binding.playerViewsInfo.text = context.getString(R.string.normal_views, "%,d".format(streams.views),  TextUtils.SEPARATOR + formattedDate)
 
             // show the whole title
             binding.playerTitle.maxLines = Int.MAX_VALUE
         }
-        binding.playerViewsInfo.text = viewInfo
+
+        binding.playerDescriptionArrow.animate()
+            .rotation(if (isNewStateExpanded) 180F else 0F)
+            .setDuration(ANIMATION_DURATION)
+            .start()
+
+        binding.playerDescription.isVisible = isNewStateExpanded
+        binding.descLinLayout.isVisible = isNewStateExpanded
     }
 
     companion object {
