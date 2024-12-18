@@ -37,7 +37,6 @@ object DownloadHelper {
     const val THUMBNAIL_DIR = "thumbnail"
     const val DOWNLOAD_CHUNK_SIZE = 8L * 1024
     const val DEFAULT_TIMEOUT = 15 * 1000
-    const val DEFAULT_RETRY = 3
     private const val VIDEO_MIMETYPE = "video/*"
 
     fun getDownloadDir(context: Context, path: String): Path {
