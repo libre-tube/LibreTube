@@ -378,9 +378,10 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
 
     @SuppressLint("StringFormatInvalid", "StringFormatMatches")
     private fun getChannelAndVideoString(playlist: Playlist, count: Int): String {
-        return playlist.uploader?.let {
-            getString(R.string.uploaderAndVideoCount, it, count)
-        } ?: getString(R.string.videoCount, count)
+        if (count < 0) return playlist.uploader.orEmpty()
+        if (playlist.uploader == null) return getString(R.string.videoCount, count)
+
+        return getString(R.string.uploaderAndVideoCount, playlist.uploader, count)
     }
 
     private fun fetchNextPage() {
