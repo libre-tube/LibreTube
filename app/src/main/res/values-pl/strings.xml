@@ -48,7 +48,7 @@
     <string name="videos">Filmy</string>
     <string name="changeLanguage">Język</string>
     <string name="systemLanguage">System</string>
-    <string name="systemDefault">Systemu</string>
+    <string name="systemDefault">System</string>
     <string name="lightTheme">Jasny</string>
     <string name="subscribers">%1$s subskrypcji</string>
     <string name="darkTheme">Ciemny</string>
@@ -357,7 +357,7 @@
     <string name="unsupported_file_format">Nieobsługiwany format pliku: %1$s</string>
     <string name="mark_as_watched">Oznacz jako obejrzane</string>
     <string name="replies">Odpowiedzi</string>
-    <string name="codecs">Kodeki</string>
+    <string name="codecs">Kodeki wideo</string>
     <string name="custom_playback_speed">Niestandardowa prędkość</string>
     <string name="custom_playback_speed_summary">Użyj innej prędkości odtwarzania</string>
     <string name="normal_views">%1$s wyświetleń%2$s</string>
@@ -549,4 +549,18 @@
     <string name="screenshot">Zrzut ekranu</string>
     <string name="local_stream_extraction">Lokalna ekstrakcja strumieniowa</string>
     <string name="local_stream_extraction_summary">Otrzymuj informacje o strumieniach bezpośrednio z YouTube bez korzystania Piped.</string>
+    <string name="dialog_play_offline_title">Dostępna jest lokalna wersja tego filmu.</string>
+    <string name="dialog_play_offline_body">Czy chcesz odtworzyć wideo z folderu pobierania?</string>
+    <string name="upcoming">Nadchodzące</string>
+    <string name="local_ryd">Lokalny ekstraktor Return YouTube Dislike</string>
+    <string name="local_ryd_summary">Bezpośrednio uzykuje informacje o łapkach w dół z https://returnyoutubedislikeapi.com</string>
+    <string name="category_exclusive_access">Wyłączny dostęp</string>
+    <string name="export_playlist">Eksportuj listę odtwarzania</string>
+    <string name="import_watch_history">Importuj historię oglądania</string>
+    <string name="import_watch_history_desc">Pamiętaj, że nie wszystko zostanie zaimportowane ze względu na ograniczone dane eksportu YouTube.</string>
+    <string name="import_format_list_of_urls">Lista adresów lub identyfikatorów wideo</string>
+    <string name="view_count">%1$s wyświetleń</string>
+    <string name="delete_only_watched_videos">Usuwaj tylko już obejrzane filmy</string>
+    <string name="crashlog">Dziennik wykrzaczeń</string>
+    <string name="audio_codecs">Kodeki audio</string>
 </resources>
