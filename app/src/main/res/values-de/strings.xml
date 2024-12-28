@@ -554,4 +554,5 @@
     <string name="crashlog">Absturzprotokoll</string>
     <string name="category_exclusive_access">Exklusiver Zugang</string>
     <string name="delete_only_watched_videos">Nur bereits angesehene Videos löschen</string>
+    <string name="import_format_list_of_urls">Liste von URLs oder Video-IDs</string>
 </resources>
