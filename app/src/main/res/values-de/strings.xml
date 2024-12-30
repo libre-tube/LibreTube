@@ -555,4 +555,6 @@
     <string name="category_exclusive_access">Exklusiver Zugang</string>
     <string name="delete_only_watched_videos">Nur bereits angesehene Videos löschen</string>
     <string name="import_format_list_of_urls">Liste von URLs oder Video-IDs</string>
+    <string name="local_ryd">Lokaler Return Youtube Dislike Extraktor</string>
+    <string name="export_playlist">Playlist exportieren</string>
 </resources>
