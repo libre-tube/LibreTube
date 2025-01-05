@@ -107,7 +107,7 @@
     <string name="category_filler">Filler Tangent / Trò đùa</string>
     <string name="category_preview">Xem trước/Tóm tắt</string>
     <string name="category_preview_summary">Đối với các phân đoạn nêu chi tiết nội dung trong tương lai mà không có thông tin bổ sung. Nếu nó bao gồm các clip chỉ xuất hiện ở đây, thì rất có thể đây là danh mục sai</string>
-    <string name="material_you">Chất liệu của bạn</string>
+    <string name="material_you">Material You</string>
     <string name="app_icon">Biểu tượng</string>
     <string name="enabled">Kích hoạt</string>
     <string name="disabled">Tắt</string>
@@ -186,7 +186,7 @@
     <string name="watch_positions">Nhớ vị trí</string>
     <string name="auth_instance">Instance được xác minh</string>
     <string name="auth_instances">Chọn instance đã được xác minh</string>
-    <string name="github">Github</string>
+    <string name="github">GitHub</string>
     <string name="fullscreen_orientation">Hướng toàn màn hình</string>
     <string name="aspect_ratio">Tỷ lệ khung hình video</string>
     <string name="auto_rotation">Tự động xoay</string>
@@ -290,7 +290,7 @@
     <string name="added_to_playlist">Đã thêm vào danh sách phát %1$s</string>
     <string name="filename">Tên tệp</string>
     <string name="invalid_filename">Tên tệp không hợp lệ!</string>
-    <string name="audio_track">Track âm thanh</string>
+    <string name="audio_track">Bản âm thanh</string>
     <string name="livestreams">Trực tiếp</string>
     <string name="alternative_videos_layout">Bố cục thay thế cho videos</string>
     <string name="defaultIconLight">Light mặc định</string>
@@ -453,7 +453,7 @@
     <string name="no_fullscreen_resolution">Không có độ phân giải toàn màn hình</string>
     <string name="uploader_name">Tên người tải lên</string>
     <string name="tooltip_filter">Lọc</string>
-    <string name="codecs">Bộ giải mã</string>
+    <string name="codecs">Bộ giải mã video</string>
     <string name="tooltip_unlocked">Mở khóa trình phát</string>
     <string name="filename_too_long">Tên tệp quá dài!</string>
     <string name="registration_disabled">Đăng ký bị vô hiệu hóa</string>
@@ -533,4 +533,11 @@
     <string name="title">Tiêu đề</string>
     <string name="import_temp_playlist">Nhập danh sách phát tạm thời?</string>
     <string name="import_temp_playlist_summary">Bạn có muốn tạo danh sách phát mới có tên \'%1$s\' không? Danh sách phát sẽ chứa %2$d băng hình.</string>
+    <string name="dialog_play_offline_body">Bạn có muốn phát video từ mục tải về?</string>
+    <string name="view_count">%1$s lượt xem</string>
+    <string name="delete_only_watched_videos">Chỉ xóa những video đã xem</string>
+    <string name="crashlog">Bản báo cáo lỗi</string>
+    <string name="screenshot">Chụp màn hình</string>
+    <string name="audio_codecs">Bộ giải mã âm thanh</string>
+    <string name="best_quality">Hay nhất</string>
 </resources>
