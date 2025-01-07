@@ -80,12 +80,14 @@ class PlaylistAdapter(
 
         holder.binding.apply {
             videoTitle.text = streamItem.title
-            videoInfo.text = streamItem.uploaderName
-            channelImageContainer.isGone = true
+            videoInfo.text = TextUtils.formatViewsString(root.context, streamItem.views ?: -1, streamItem.uploaded, streamItem.uploaderName)
+            videoInfo.maxLines = 2
 
-            thumbnailDuration.setFormattedDuration(streamItem.duration ?: -1, streamItem.isShort, streamItem.uploaded)
+            // piped does not load channel avatars for playlist views
+            channelContainer.isGone = true
 
             ImageHelper.loadImage(streamItem.thumbnail, thumbnail)
+            thumbnailDuration.setFormattedDuration(streamItem.duration ?: -1, streamItem.isShort, streamItem.uploaded)
 
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, streamItem.url, playlistId)
