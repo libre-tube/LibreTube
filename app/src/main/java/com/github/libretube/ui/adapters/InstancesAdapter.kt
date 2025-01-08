@@ -8,9 +8,10 @@ import com.github.libretube.R
 import com.github.libretube.api.obj.PipedInstance
 import com.github.libretube.databinding.InstanceRowBinding
 import com.github.libretube.ui.viewholders.InstancesViewHolder
+import com.google.common.collect.ImmutableList
 
 class InstancesAdapter(
-    private val instances: List<PipedInstance>,
+    private val instances: ImmutableList<PipedInstance>,
     initialSelectionApiIndex: Int?,
     private val onSelectInstance: (index: Int) -> Unit
 ) : RecyclerView.Adapter<InstancesViewHolder>() {

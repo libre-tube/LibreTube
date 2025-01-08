@@ -18,6 +18,7 @@ import com.github.libretube.ui.adapters.InstancesAdapter
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.models.WelcomeModel
 import com.github.libretube.ui.preferences.BackupRestoreSettings
+import com.google.common.collect.ImmutableList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -49,7 +50,7 @@ class WelcomeActivity : BaseActivity() {
         // ALl the binding values are optional due to two different possible layouts (normal, landscape)
         viewModel.instances.observe(this) { instances ->
             binding.instancesRecycler.layoutManager = LinearLayoutManager(this@WelcomeActivity)
-            binding.instancesRecycler.adapter = InstancesAdapter(instances, viewModel.selectedInstanceIndex.value) { index ->
+            binding.instancesRecycler.adapter = InstancesAdapter(ImmutableList.copyOf(instances), viewModel.selectedInstanceIndex.value) { index ->
                 viewModel.selectedInstanceIndex.value = index
                 binding.okay.alpha = 1f
             }
