@@ -5,6 +5,7 @@ import android.icu.text.RelativeDateTimeFormatter
 import android.net.Uri
 import android.os.Build
 import android.text.format.DateUtils
+import androidx.core.text.isDigitsOnly
 import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.extensions.formatShort
@@ -64,7 +65,7 @@ object TextUtils {
     fun String.parseDurationString(): Float? = parseTimeString(this)
 
     private fun parseTimeString(timeString: String): Float? {
-        if (timeString.all { it.isDigit() }) return timeString.toLongOrNull()?.toFloat()
+        if (timeString.isDigitsOnly()) return timeString.toLongOrNull()?.toFloat()
 
         if (timeString.all { it.isDigit() || ",.:".contains(it) }) {
             var secondsTotal = 0
