@@ -26,6 +26,7 @@ import com.github.libretube.ui.dialogs.DeleteAccountDialog
 import com.github.libretube.ui.dialogs.LoginDialog
 import com.github.libretube.ui.dialogs.LogoutDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.common.collect.ImmutableList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -184,6 +185,8 @@ class InstanceSettings : BasePreferenceFragment() {
         val layoutInflater = LayoutInflater.from(context)
         val binding = SimpleOptionsRecyclerBinding.inflate(layoutInflater)
         binding.optionsRecycler.layoutManager = LinearLayoutManager(context)
+
+        val instances = ImmutableList.copyOf(this.instances)
         binding.optionsRecycler.adapter = InstancesAdapter(instances, selectedIndex) {
             selectedInstance = instances[it].apiUrl
         }
