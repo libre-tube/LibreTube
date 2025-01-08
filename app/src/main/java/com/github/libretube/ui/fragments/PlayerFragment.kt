@@ -486,6 +486,13 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         setOnBackPressed(onBackPressedCallback)
 
         commonPlayerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) { isMiniPlayerVisible ->
+            // re-add the callback on top of the back pressed dispatcher listeners stack,
+            // so that it's the first one to become called while the full player is visible
+            if (!isMiniPlayerVisible) {
+                onBackPressedCallback.remove()
+                setOnBackPressed(onBackPressedCallback)
+            }
+
             // if the player is minimized, the fragment behind the player should handle the event
             onBackPressedCallback.isEnabled = isMiniPlayerVisible != true
         }
