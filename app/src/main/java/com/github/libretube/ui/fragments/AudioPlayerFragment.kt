@@ -72,6 +72,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     private lateinit var audioHelper: AudioHelper
     private val activity get() = context as BaseActivity
     private val mainActivity get() = activity as? MainActivity
+    private val mainActivityMotionLayout get() = mainActivity?.binding?.mainMotionLayout
     private val viewModel: CommonPlayerViewModel by activityViewModels()
     private val chaptersModel: ChaptersViewModel by activityViewModels()
 
@@ -121,7 +122,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as? MainActivity)?.getBottomNavColor()?.let { color ->
+        mainActivity?.getBottomNavColor()?.let { color ->
             binding.audioPlayerContainer.setBackgroundColor(color)
         }
 
@@ -137,7 +138,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
         }
 
         binding.minimizePlayer.setOnClickListener {
-            mainActivity?.binding?.mainMotionLayout?.transitionToStart()
+            mainActivityMotionLayout?.transitionToStart()
             binding.playerMotionLayout.transitionToEnd()
         }
 
@@ -246,7 +247,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
             override fun handleOnBackPressed() {
                 binding.audioPlayerContainer.isClickable = false
                 binding.playerMotionLayout.transitionToEnd()
-                mainActivity?.binding?.mainMotionLayout?.transitionToEnd()
+                mainActivityMotionLayout?.transitionToEnd()
                 mainActivity?.requestOrientationChange()
             }
 
@@ -284,11 +285,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initializeTransitionLayout() {
-        if (mainActivity == null) return
-
-        mainActivity!!.binding.container.isVisible = true
-        val mainMotionLayout = mainActivity!!.binding.mainMotionLayout
-        mainMotionLayout.progress = 0F
+        mainActivityMotionLayout?.progress = 0F
 
         binding.playerMotionLayout.addTransitionListener(object : TransitionAdapter() {
             override fun onTransitionChange(
@@ -298,7 +295,7 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
                 progress: Float
             ) {
                 if (NavBarHelper.hasTabs()) {
-                    mainMotionLayout.progress = abs(progress)
+                    mainActivityMotionLayout?.progress = abs(progress)
                 }
                 transitionEndId = endId
                 transitionStartId = startId
@@ -308,11 +305,11 @@ class AudioPlayerFragment : Fragment(), AudioPlayerOptions {
                 if (currentId == transitionEndId) {
                     viewModel.isMiniPlayerVisible.value = true
                     if (NavBarHelper.hasTabs()) {
-                        mainMotionLayout.progress = 1F
+                        mainActivityMotionLayout?.progress = 1F
                     }
                 } else if (currentId == transitionStartId) {
                     viewModel.isMiniPlayerVisible.value = false
-                    mainMotionLayout.progress = 0F
+                    mainActivityMotionLayout?.progress = 0F
                 }
             }
         })

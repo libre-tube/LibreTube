@@ -16,7 +16,7 @@ class NoInternetActivity : BaseActivity() {
         val binding = ActivityNointernetBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navController = findNavController(R.id.container)
+        val navController = findNavController(R.id.fragment)
         navController.graph = navController.navInflater.inflate(R.navigation.nav_nointernet)
     }
 
