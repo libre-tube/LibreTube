@@ -323,7 +323,7 @@
     <string name="backup_restore_summary">Importieren &amp; Exportieren von Abos, Playlists, …</string>
     <string name="privacy_alert">Datenschutz-Warnung</string>
     <string name="proceed">Fortfahren</string>
-    <string name="username_email">Es wird nicht empfohlen, eine E-Mail-Adresse als Benutzernamen zu verwenden. Trotzdem fortfahren?</string>
+    <string name="username_email">Es wird nicht empfohlen, eine E-Mail-Adresse als Anmeldenamen zu verwenden. Trotzdem fortfahren?</string>
     <string name="exportsuccess">Exportiert.</string>
     <string name="pinch_control">Zwei-Finger-Gestensteuerung</string>
     <string name="pinch_control_summary">Verwende eine Zwei-Finger-Geste, um den Zoom anzupassen</string>
@@ -440,7 +440,7 @@
     <string name="default_or_unknown_audio_track">Standard oder unbekannt</string>
     <string name="unknown_or_no_audio">Unbekannt oder kein Ton</string>
     <string name="continue_watching">Weiterschauen</string>
-    <string name="dearrow_summary">Präzisere und weniger sensationslüsterne Titel und Miniaturansichten (Thumbnails) anzeigen. Erhöht die Ladezeiten</string>
+    <string name="dearrow_summary">Präzisere und weniger sensationslüsterne Titel und Miniaturansichten (Thumbnails) anzeigen. Erhöht die Ladezeiten.</string>
     <string name="dearrow">DeArrow verwenden</string>
     <string name="visibility">Sichtbarkeit</string>
     <string name="visibility_public">Öffentlich</string>
@@ -533,20 +533,20 @@
     <string name="albums">Alben</string>
     <string name="best_quality">Beste</string>
     <string name="contribute_to_dearrow">Zu DeArrow beitragen</string>
-    <string name="thumbnail_time">Vorschau Zeitpunkt</string>
-    <string name="import_temp_playlist_summary">Möchten Sie eine neue Wiedergabeliste mit dem Namen ‚%1$s‘ erstellen? Die Wiedergabeliste wird %2$d Videos enthalten.</string>
+    <string name="thumbnail_time">Zeitpunkt des Vorschaubilds</string>
+    <string name="import_temp_playlist_summary">Neue Playlist mit dem Namen „%1$s“ erstellen? Die Playlist wird %2$d Videos enthalten.</string>
     <string name="title">Titel</string>
-    <string name="import_temp_playlist">Temporäre Wiedergabeliste importieren?</string>
-    <string name="external_download_provider">Externer Download Anbieter</string>
-    <string name="external_download_provider_summary">Gib den Paketnamen der App ein, die zum Herunterladen von Videos verwendet werden soll. Nichts eintragen, um den eingebauten Downloader von Libretube zu verwenden.</string>
-    <string name="screenshot">Bildschirmfoto</string>
-    <string name="pip">BiB</string>
-    <string name="local_stream_extraction">Lokale Stream-Extraktion</string>
+    <string name="import_temp_playlist">Temporäre Playlist importieren?</string>
+    <string name="external_download_provider">Externe Download-App</string>
+    <string name="external_download_provider_summary">Gib den Paketnamen der App ein, die zum Herunterladen von Videos verwendet werden soll. Nichts eintragen, um den eingebauten Downloader von LibreTube zu verwenden.</string>
+    <string name="screenshot">Screenshot</string>
+    <string name="pip">PiP</string>
+    <string name="local_stream_extraction">Direkter Abruf von Videos</string>
     <string name="local_stream_extraction_summary">Video-Wiedergabeinformationen direkt von YouTube abrufen, ohne Piped zu verwenden.</string>
     <string name="audio_codecs">Audiocodecs</string>
     <string name="import_watch_history">Wiedergabe-Verlauf importieren</string>
-    <string name="import_watch_history_desc">Bitte beachten Sie, dass aufgrund der begrenzten Exportdaten von YouTube nicht alles importiert werden kann.</string>
-    <string name="local_ryd_summary">Dislikes direkt von https://returnyoutubedislikeapi.com abfragen</string>
+    <string name="import_watch_history_desc">Bitte beachte, dass aufgrund der begrenzten aus YouTube exportieren Daten nicht alles importiert werden kann.</string>
+    <string name="local_ryd_summary">Dislikes direkt von https://returnyoutubedislikeapi.com abfragen.</string>
     <string name="dialog_play_offline_title">Eine lokale Version des Videos ist nicht verfügbar.</string>
     <string name="dialog_play_offline_body">Möchtest du das Video aus dem Download-Ordner abspielen?</string>
     <string name="view_count">%1$s Aufrufe</string>
@@ -555,6 +555,6 @@
     <string name="category_exclusive_access">Exklusiver Zugang</string>
     <string name="delete_only_watched_videos">Nur bereits angesehene Videos löschen</string>
     <string name="import_format_list_of_urls">Liste von URLs oder Video-IDs</string>
-    <string name="local_ryd">Lokaler Return Youtube Dislike Extraktor</string>
+    <string name="local_ryd">Direkter Abruf von Dislikes</string>
     <string name="export_playlist">Playlist exportieren</string>
 </resources>
