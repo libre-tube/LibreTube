@@ -4,11 +4,16 @@
     android:layout_height="match_parent">
 
     <fragment
-        android:id="@+id/container"
+        android:id="@+id/fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="20dp"
         android:paddingTop="10dp" />
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" />
 
 </FrameLayout>
