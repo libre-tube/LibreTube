@@ -364,7 +364,7 @@
     <string name="category">Kateqoriya</string>
     <string name="normal_views">%1$s baxış %2$s</string>
     <string name="playing_next">%1$s saniyə sonra növbəti oynadılır</string>
-    <string name="stats_for_nerds">Mütəxəssislər üçün statistika</string>
+    <string name="stats_for_nerds">İstək üçün statistika</string>
     <string name="video_id">Video ID</string>
     <string name="autoplay_countdown">Avtomatik oynat geri sayım</string>
     <string name="autoplay_countdown_summary">Növbəti video avtomatik oynadılmazdan əvvəl 5 saniyəlik geri sayım göstər</string>
