@@ -437,7 +437,11 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         }
 
         if (localDownloadVersion != null && createNewSession) {
-            childFragmentManager.setFragmentResultListener(
+            // the dialog must also be visible when in fullscreen, thus we need to use the activity's
+            // fragment manager and not the one from [PlayerFragment]
+            val fragmentManager = requireActivity().supportFragmentManager
+
+            fragmentManager.setFragmentResultListener(
                 PlayOfflineDialog.PLAY_OFFLINE_DIALOG_REQUEST_KEY, viewLifecycleOwner
             ) { _, bundle ->
                 if (bundle.getBoolean(IntentData.isPlayingOffline)) {
@@ -459,7 +463,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     IntentData.videoTitle to localDownloadVersion.download.title,
                     IntentData.downloadInfo to downloadInfo
                 )
-            }.show(childFragmentManager, null)
+            }.show(fragmentManager, null)
         } else {
             attachToPlayerService(playerData, createNewSession)
         }
