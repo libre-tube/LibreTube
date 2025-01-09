@@ -2,11 +2,11 @@ package com.github.libretube.ui.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +17,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.AllCaughtUpRowBinding
 import com.github.libretube.databinding.TrendingRowBinding
 import com.github.libretube.databinding.VideoRowBinding
+import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.toID
@@ -29,6 +30,10 @@ import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.VideosViewHolder
 import com.github.libretube.util.TextUtils
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class VideosAdapter(
     private val streamItems: MutableList<StreamItem>,
@@ -86,12 +91,10 @@ class VideosAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: VideosViewHolder, position: Int) {
         val video = streamItems[position]
-        val videoId = video.url?.toID()
+        val videoId = video.url.orEmpty().toID()
 
-        videoId?.let {
-            (holder.trendingRowBinding?.watchProgress ?: holder.videoRowBinding!!.watchProgress)
-                .setWatchProgressLength(it, video.duration ?: 0L)
-        }
+        (holder.trendingRowBinding?.watchProgress ?: holder.videoRowBinding!!.watchProgress)
+            .setWatchProgressLength(videoId, video.duration ?: 0L)
 
         val context = (
             holder.videoRowBinding ?: holder.trendingRowBinding
@@ -119,7 +122,7 @@ class VideosAdapter(
             ImageHelper.loadImage(video.thumbnail, thumbnail)
             ImageHelper.loadImage(video.uploaderAvatar, channelImage, true)
             root.setOnClickListener {
-                NavigationHelper.navigateVideo(root.context, video.url)
+                NavigationHelper.navigateVideo(root.context, videoId)
             }
 
             root.setOnLongClickListener {
@@ -156,7 +159,7 @@ class VideosAdapter(
             }
 
             root.setOnClickListener {
-                NavigationHelper.navigateVideo(root.context, video.url)
+                NavigationHelper.navigateVideo(root.context, videoId)
             }
 
             root.setOnLongClickListener {
@@ -170,6 +173,15 @@ class VideosAdapter(
                 sheet.arguments = bundleOf(IntentData.streamItem to video)
                 sheet.show(fragmentManager, VideosAdapter::class.java.name)
                 true
+            }
+
+            CoroutineScope(Dispatchers.IO).launch {
+                val isDownloaded =
+                    DatabaseHolder.Database.downloadDao().exists(videoId)
+
+                withContext(Dispatchers.Main) {
+                    downloadBadge.isVisible = isDownloaded
+                }
             }
         }
     }

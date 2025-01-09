@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
@@ -15,6 +16,7 @@ import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.VideoRowBinding
+import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.dpToPx
@@ -118,6 +120,15 @@ class PlaylistAdapter(
             }
 
             streamItem.duration?.let { watchProgress.setWatchProgressLength(videoId, it) }
+
+            CoroutineScope(Dispatchers.IO).launch {
+                val isDownloaded =
+                    DatabaseHolder.Database.downloadDao().exists(videoId)
+
+                withContext(Dispatchers.Main) {
+                    downloadBadge.isVisible = isDownloaded
+                }
+            }
         }
     }
 
