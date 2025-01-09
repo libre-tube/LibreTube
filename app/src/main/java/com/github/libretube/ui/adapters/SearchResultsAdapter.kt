@@ -3,6 +3,7 @@ package com.github.libretube.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
@@ -12,6 +13,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.ChannelRowBinding
 import com.github.libretube.databinding.PlaylistsRowBinding
 import com.github.libretube.databinding.VideoRowBinding
+import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
@@ -27,6 +29,10 @@ import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.SearchViewHolder
 import com.github.libretube.util.TextUtils
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 
 class SearchResultsAdapter(
@@ -112,6 +118,15 @@ class SearchResultsAdapter(
                 NavigationHelper.navigateChannel(root.context, item.uploaderUrl)
             }
             watchProgress.setWatchProgressLength(videoId, item.duration)
+
+            CoroutineScope(Dispatchers.IO).launch {
+                val isDownloaded =
+                    DatabaseHolder.Database.downloadDao().exists(videoId)
+
+                withContext(Dispatchers.Main) {
+                    downloadBadge.isVisible = isDownloaded
+                }
+            }
         }
     }
 

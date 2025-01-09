@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.VideoRowBinding
@@ -17,8 +18,11 @@ import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.WatchHistoryViewHolder
 import com.github.libretube.util.TextUtils
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 class WatchHistoryAdapter(
     private val watchHistory: MutableList<WatchHistoryItem>
@@ -98,6 +102,15 @@ class WatchHistoryAdapter(
                 video.videoId,
                 video.duration
             )
+
+            CoroutineScope(Dispatchers.IO).launch {
+                val isDownloaded =
+                    DatabaseHolder.Database.downloadDao().exists(video.videoId)
+
+                withContext(Dispatchers.Main) {
+                    downloadBadge.isVisible = isDownloaded
+                }
+            }
         }
     }
 }

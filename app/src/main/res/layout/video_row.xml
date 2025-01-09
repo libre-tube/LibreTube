@@ -107,7 +107,7 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:textAlignment="viewStart"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/download_badge"
         app:layout_constraintStart_toEndOf="@id/thumbnail_card"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -119,9 +119,21 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:textAlignment="viewStart"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/download_badge"
         app:layout_constraintStart_toEndOf="@id/thumbnail_card"
         app:layout_constraintTop_toBottomOf="@id/video_title" />
+
+    <ImageView
+        android:id="@+id/download_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_download_folder"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingStart="6dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
     <LinearLayout
         android:id="@+id/channel_container"
