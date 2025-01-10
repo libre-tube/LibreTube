@@ -6,6 +6,7 @@ import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.SubscriptionsFeedItem
+import com.github.libretube.enums.ContentFilter
 import com.github.libretube.extensions.parallelMap
 import com.github.libretube.helpers.NewPipeExtractorInstance
 import com.github.libretube.helpers.PreferenceHelper
@@ -19,7 +20,13 @@ import java.time.Instant
 
 class LocalFeedRepository : FeedRepository {
     private val relevantTabs =
-        arrayOf(ChannelTabs.LIVESTREAMS, ChannelTabs.VIDEOS, ChannelTabs.SHORTS)
+        listOf(
+            ContentFilter.LIVESTREAMS to ChannelTabs.LIVESTREAMS,
+            ContentFilter.VIDEOS to ChannelTabs.VIDEOS,
+            ContentFilter.SHORTS to ChannelTabs.SHORTS
+        ).mapNotNull { (filter, tab) ->
+            if (filter.isEnabled) tab else null
+        }.toTypedArray()
 
     override suspend fun getFeed(forceRefresh: Boolean): List<StreamItem> {
         val nowMillis = Instant.now().toEpochMilli()
