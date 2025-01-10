@@ -1,0 +1,11 @@
+package com.github.libretube.repo
+
+import com.github.libretube.api.obj.Subscription
+
+interface SubscriptionsRepository {
+    suspend fun subscribe(channelId: String)
+    suspend fun unsubscribe(channelId: String)
+    suspend fun isSubscribed(channelId: String): Boolean?
+    suspend fun importSubscriptions(newChannels: List<String>)
+    suspend fun getSubscriptions(): List<Subscription>
+}

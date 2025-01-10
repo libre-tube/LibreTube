@@ -1,0 +1,36 @@
+package com.github.libretube.repo
+
+import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.obj.Subscribe
+import com.github.libretube.api.obj.Subscription
+import com.github.libretube.helpers.PreferenceHelper
+
+class AccountSubscriptionsRepository: SubscriptionsRepository {
+    private val token get() = PreferenceHelper.getToken()
+
+    override suspend fun subscribe(channelId: String) {
+        runCatching {
+            RetrofitInstance.authApi.subscribe(token, Subscribe(channelId))
+        }
+    }
+
+    override suspend fun unsubscribe(channelId: String) {
+        runCatching {
+            RetrofitInstance.authApi.unsubscribe(token, Subscribe(channelId))
+        }
+    }
+
+    override suspend fun isSubscribed(channelId: String): Boolean? {
+        return runCatching {
+            RetrofitInstance.authApi.isSubscribed(channelId, token)
+        }.getOrNull()?.subscribed
+    }
+
+    override suspend fun importSubscriptions(newChannels: List<String>) {
+        RetrofitInstance.authApi.importSubscriptions(false, token, newChannels)
+    }
+
+    override suspend fun getSubscriptions(): List<Subscription> {
+        return RetrofitInstance.authApi.subscriptions(token)
+    }
+}
