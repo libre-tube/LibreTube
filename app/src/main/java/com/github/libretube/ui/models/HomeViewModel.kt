@@ -122,7 +122,7 @@ class HomeViewModel : ViewModel() {
     private suspend fun tryLoadFeed(subscriptionsViewModel: SubscriptionsViewModel): List<StreamItem> {
         subscriptionsViewModel.videoFeed.value?.let { return it }
 
-        val feed = SubscriptionHelper.getFeed()
+        val feed = SubscriptionHelper.getFeed(forceRefresh = false)
         subscriptionsViewModel.videoFeed.postValue(feed)
 
         return if (hideWatched) feed.filterWatched() else feed

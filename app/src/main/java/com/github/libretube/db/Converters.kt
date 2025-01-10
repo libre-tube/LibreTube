@@ -3,7 +3,6 @@ package com.github.libretube.db
 import androidx.room.TypeConverter
 import com.github.libretube.api.JsonHelper
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.toLocalDate
 import kotlinx.serialization.encodeToString
 import java.nio.file.Path
 import kotlin.io.path.Path
@@ -13,7 +12,7 @@ object Converters {
     fun localDateToString(localDate: LocalDate?) = localDate?.toString()
 
     @TypeConverter
-    fun stringToLocalDate(string: String?) = string?.toLocalDate()
+    fun stringToLocalDate(string: String?) = string?.let { LocalDate.parse(it) }
 
     @TypeConverter
     fun pathToString(path: Path?) = path?.toString()

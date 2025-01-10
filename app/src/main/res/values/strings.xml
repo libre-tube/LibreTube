@@ -526,6 +526,8 @@
     <string name="dialog_play_offline_body">Would you like to play the video from the download folder?</string>
     <string name="view_count">%1$s views</string>
     <string name="delete_only_watched_videos">Only delete already watched videos</string>
+    <string name="local_feed_extraction">Local feed extraction</string>
+    <string name="local_feed_extraction_summary">Directly fetch the feed from YouTube. This may be significantly slower.</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

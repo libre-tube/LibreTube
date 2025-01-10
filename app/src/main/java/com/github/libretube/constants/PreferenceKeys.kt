@@ -113,6 +113,8 @@ object PreferenceKeys {
     const val HIDE_WATCHED_FROM_FEED = "hide_watched_from_feed"
     const val SELECTED_FEED_FILTERS = "filter_feed"
     const val FEED_SORT_ORDER = "sort_oder_feed"
+    const val LOCAL_FEED_EXTRACTION = "local_feed_extraction"
+    const val LAST_FEED_REFRESH_TIMESTAMP_MILLIS = "last_feed_refresh_timestamp_millis"
 
     // Advanced
     const val AUTOMATIC_UPDATE_CHECKS = "automatic_update_checks"

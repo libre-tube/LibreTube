@@ -1059,7 +1059,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         // set media source and resolution in the beginning
         updateResolution(commonPlayerViewModel.isFullscreen.value == true)
 
-        if (streams.category == Streams.categoryMusic) {
+        if (streams.category == Streams.CATEGORY_MUSIC) {
             playerController.setPlaybackSpeed(1f)
         }
     }

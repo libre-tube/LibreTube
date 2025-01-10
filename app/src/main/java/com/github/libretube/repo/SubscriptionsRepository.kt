@@ -8,4 +8,5 @@ interface SubscriptionsRepository {
     suspend fun isSubscribed(channelId: String): Boolean?
     suspend fun importSubscriptions(newChannels: List<String>)
     suspend fun getSubscriptions(): List<Subscription>
+    suspend fun getSubscriptionChannelIds(): List<String>
 }

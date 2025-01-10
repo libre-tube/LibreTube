@@ -6,6 +6,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.repo.AccountSubscriptionsRepository
 import com.github.libretube.repo.FeedRepository
+import com.github.libretube.repo.LocalFeedRepository
 import com.github.libretube.repo.LocalSubscriptionsRepository
 import com.github.libretube.repo.PipedAccountFeedRepository
 import com.github.libretube.repo.PipedNoAccountFeedRepository
@@ -26,6 +27,7 @@ object SubscriptionHelper {
         else -> LocalSubscriptionsRepository()
     }
     private val feedRepository: FeedRepository get() = when {
+        PreferenceHelper.getBoolean(PreferenceKeys.LOCAL_FEED_EXTRACTION, false) -> LocalFeedRepository()
         token.isNotEmpty() -> PipedAccountFeedRepository()
         else -> PipedNoAccountFeedRepository()
     }
@@ -35,7 +37,8 @@ object SubscriptionHelper {
     suspend fun isSubscribed(channelId: String) = subscriptionsRepository.isSubscribed(channelId)
     suspend fun importSubscriptions(newChannels: List<String>) = subscriptionsRepository.importSubscriptions(newChannels)
     suspend fun getSubscriptions() = subscriptionsRepository.getSubscriptions()
-    suspend fun getFeed() = feedRepository.getFeed(false)
+    suspend fun getSubscriptionChannelIds() = subscriptionsRepository.getSubscriptionChannelIds()
+    suspend fun getFeed(forceRefresh: Boolean) = feedRepository.getFeed(forceRefresh)
 
     fun handleUnsubscribe(
         context: Context,

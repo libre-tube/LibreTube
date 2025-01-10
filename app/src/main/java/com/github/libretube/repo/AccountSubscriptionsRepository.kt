@@ -3,6 +3,7 @@ package com.github.libretube.repo
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Subscribe
 import com.github.libretube.api.obj.Subscription
+import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PreferenceHelper
 
 class AccountSubscriptionsRepository: SubscriptionsRepository {
@@ -32,5 +33,9 @@ class AccountSubscriptionsRepository: SubscriptionsRepository {
 
     override suspend fun getSubscriptions(): List<Subscription> {
         return RetrofitInstance.authApi.subscriptions(token)
+    }
+
+    override suspend fun getSubscriptionChannelIds(): List<String> {
+        return getSubscriptions().map { it.url.toID() }
     }
 }

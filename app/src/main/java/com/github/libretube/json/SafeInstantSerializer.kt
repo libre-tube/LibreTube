@@ -3,6 +3,7 @@ package com.github.libretube.json
 import android.util.Log
 import com.github.libretube.extensions.TAG
 import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.toInstant
@@ -19,10 +20,10 @@ object SafeInstantSerializer : KSerializer<Instant> {
     override fun deserialize(decoder: Decoder): Instant {
         val string = decoder.decodeString()
         return try {
-            string.toInstant()
+            Instant.parse(string)
         } catch (e: IllegalArgumentException) {
             Log.e(TAG(), "Error parsing date '$string'", e)
-            string.toLocalDate().atStartOfDayIn(TimeZone.currentSystemDefault())
+            LocalDate.parse(string).atStartOfDayIn(TimeZone.currentSystemDefault())
         }
     }
 

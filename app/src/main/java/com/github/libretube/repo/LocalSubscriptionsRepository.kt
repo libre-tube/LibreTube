@@ -24,16 +24,20 @@ class LocalSubscriptionsRepository: SubscriptionsRepository {
     }
 
     override suspend fun getSubscriptions(): List<Subscription> {
-        val subscriptions = Database.localSubscriptionDao().getAll().map { it.channelId }
+        val channelIds = getSubscriptionChannelIds()
 
         return when {
-            subscriptions.size > GET_SUBSCRIPTIONS_LIMIT ->
+            channelIds.size > GET_SUBSCRIPTIONS_LIMIT ->
                 RetrofitInstance.authApi
-                    .unauthenticatedSubscriptions(subscriptions)
+                    .unauthenticatedSubscriptions(channelIds)
 
             else -> RetrofitInstance.authApi.unauthenticatedSubscriptions(
-                subscriptions.joinToString(",")
+                channelIds.joinToString(",")
             )
         }
+    }
+
+    override suspend fun getSubscriptionChannelIds(): List<String> {
+        return Database.localSubscriptionDao().getAll().map { it.channelId }
     }
 }
