@@ -91,4 +91,15 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/subscriptions">
+
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_region"
+            android:summary="@string/local_feed_extraction_summary"
+            android:title="@string/local_feed_extraction"
+            app:key="local_feed_extraction" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

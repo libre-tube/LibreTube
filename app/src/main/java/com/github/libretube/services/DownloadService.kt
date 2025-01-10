@@ -33,6 +33,7 @@ import com.github.libretube.enums.NotificationId
 import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.extensions.getContentLength
 import com.github.libretube.extensions.parcelableExtra
+import com.github.libretube.extensions.toLocalDate
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.DownloadHelper
@@ -56,8 +57,6 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -159,7 +158,7 @@ class DownloadService : LifecycleService() {
             streams.description,
             streams.uploader,
             streams.duration,
-            streams.uploadTimestamp?.toLocalDateTime(TimeZone.currentSystemDefault())?.date,
+            streams.uploadTimestamp?.toLocalDate(),
             thumbnailTargetPath
         )
         Database.downloadDao().insertDownload(download)

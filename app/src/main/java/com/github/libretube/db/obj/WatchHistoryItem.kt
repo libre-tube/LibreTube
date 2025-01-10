@@ -30,6 +30,7 @@ data class WatchHistoryItem(
         thumbnail = thumbnailUrl,
         uploaderName = uploader,
         uploaded = uploadDate?.toMillis() ?: 0,
+        uploadedDate = uploadDate?.toString(),
         uploaderAvatar = uploaderAvatar,
         uploaderUrl = uploaderUrl,
         duration = duration,

@@ -118,7 +118,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
         binding.subProgress.isVisible = true
 
         if (viewModel.videoFeed.value == null) {
-            viewModel.fetchFeed(requireContext())
+            viewModel.fetchFeed(requireContext(), forceRefresh = false)
         }
         if (viewModel.subscriptions.value == null) {
             viewModel.fetchSubscriptions(requireContext())
@@ -134,7 +134,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment() {
 
         binding.subRefresh.setOnRefreshListener {
             viewModel.fetchSubscriptions(requireContext())
-            viewModel.fetchFeed(requireContext())
+            viewModel.fetchFeed(requireContext(), forceRefresh = true)
         }
 
         binding.toggleSubs.isVisible = true

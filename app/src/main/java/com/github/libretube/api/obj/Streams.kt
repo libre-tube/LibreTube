@@ -3,12 +3,11 @@ package com.github.libretube.api.obj
 import android.os.Parcelable
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
+import com.github.libretube.extensions.toLocalDate
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.json.SafeInstantSerializer
 import com.github.libretube.parcelable.DownloadData
 import kotlinx.datetime.Instant
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
@@ -100,8 +99,7 @@ data class Streams(
             uploaderName = uploader,
             uploaderUrl = uploaderUrl,
             uploaderAvatar = uploaderAvatar,
-            uploadedDate = uploadTimestamp?.toLocalDateTime(TimeZone.currentSystemDefault())?.date
-                ?.toString(),
+            uploadedDate = uploadTimestamp?.toLocalDate()?.toString(),
             uploaded = uploaded ?: uploadTimestamp?.toEpochMilliseconds() ?: 0,
             duration = duration,
             views = views,
@@ -111,6 +109,6 @@ data class Streams(
     }
 
     companion object {
-        const val categoryMusic = "Music"
+        const val CATEGORY_MUSIC = "Music"
     }
 }

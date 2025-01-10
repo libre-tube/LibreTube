@@ -11,15 +11,13 @@ import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.api.obj.Subtitle
 import com.github.libretube.helpers.PlayerHelper
-import com.github.libretube.util.NewPipeDownloaderImpl
+import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_URL
 import kotlinx.datetime.toKotlinInstant
-import org.schabi.newpipe.extractor.NewPipe
 import org.schabi.newpipe.extractor.stream.StreamInfo
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
 import org.schabi.newpipe.extractor.stream.VideoStream
 import retrofit2.HttpException
 import java.io.IOException
-import java.lang.Exception
 
 fun VideoStream.toPipedStream(): PipedStream = PipedStream(
     url = content,
@@ -39,26 +37,18 @@ fun VideoStream.toPipedStream(): PipedStream = PipedStream(
 )
 
 object StreamsExtractor {
-//    val npe by lazy {
-//        NewPipe.getService(ServiceList.YouTube.serviceId)
-//    }
-
-    init {
-        NewPipe.init(NewPipeDownloaderImpl())
-    }
-
     suspend fun extractStreams(videoId: String): Streams {
         if (!PlayerHelper.disablePipedProxy || !PlayerHelper.localStreamExtraction) {
             return RetrofitInstance.api.getStreams(videoId)
         }
 
-        val resp = StreamInfo.getInfo("https://www.youtube.com/watch?v=$videoId")
+        val resp = StreamInfo.getInfo("${YOUTUBE_FRONTEND_URL}/watch?v=$videoId")
         return Streams(
             title = resp.name,
             description = resp.description.content,
             uploader = resp.uploaderName,
             uploaderAvatar = resp.uploaderAvatars.maxBy { it.height }.url,
-            uploaderUrl = resp.uploaderUrl.replace("https://www.youtube.com", ""),
+            uploaderUrl = resp.uploaderUrl.replace(YOUTUBE_FRONTEND_URL, ""),
             uploaderVerified = resp.isUploaderVerified,
             uploaderSubscriberCount = resp.uploaderSubscriberCount,
             category = resp.category,
@@ -86,12 +76,12 @@ object StreamsExtractor {
             thumbnailUrl = resp.thumbnails.maxBy { it.height }.url,
             relatedStreams = resp.relatedItems.filterIsInstance<StreamInfoItem>().map {
                 StreamItem(
-                    it.url.replace("https://www.youtube.com", ""),
+                    it.url.replace(YOUTUBE_FRONTEND_URL, ""),
                     StreamItem.TYPE_STREAM,
                     it.name,
                     it.thumbnails.maxBy { image -> image.height }.url,
                     it.uploaderName,
-                    it.uploaderUrl.replace("https://www.youtube.com", ""),
+                    it.uploaderUrl.replace(YOUTUBE_FRONTEND_URL, ""),
                     it.uploaderAvatars.maxBy { image -> image.height }.url,
                     it.textualUploadDate,
                     it.duration,

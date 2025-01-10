@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.withTransaction
 import com.github.libretube.R
-import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentWatchHistoryBinding
 import com.github.libretube.db.DatabaseHelper
@@ -180,18 +179,7 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment() {
         binding.playAll.setOnClickListener {
             PlayingQueue.resetToDefaults()
             PlayingQueue.add(
-                *watchHistory.reversed().map {
-                    StreamItem(
-                        url = "/watch?v=${it.videoId}",
-                        title = it.title,
-                        thumbnail = it.thumbnailUrl,
-                        uploaderName = it.uploader,
-                        uploaderUrl = it.uploaderUrl,
-                        uploaderAvatar = it.uploaderAvatar,
-                        uploadedDate = it.uploadDate?.toString(),
-                        duration = it.duration
-                    )
-                }.toTypedArray()
+                *watchHistory.reversed().map(WatchHistoryItem::toStreamItem).toTypedArray()
             )
             NavigationHelper.navigateVideo(
                 requireContext(),

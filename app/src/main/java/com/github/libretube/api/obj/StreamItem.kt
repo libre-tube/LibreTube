@@ -2,6 +2,7 @@ package com.github.libretube.api.obj
 
 import android.os.Parcelable
 import com.github.libretube.db.obj.LocalPlaylistItem
+import com.github.libretube.db.obj.SubscriptionsFeedItem
 import com.github.libretube.extensions.toID
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
@@ -39,6 +40,21 @@ data class StreamItem(
             duration = duration
         )
     }
+
+    fun toFeedItem() = SubscriptionsFeedItem(
+        videoId = url!!.toID(),
+        title = title,
+        thumbnail = thumbnail,
+        uploaderName = uploaderName,
+        uploaded = uploaded,
+        uploaderAvatar = uploaderAvatar,
+        uploaderUrl = uploaderUrl,
+        duration = duration,
+        uploaderVerified = uploaderVerified ?: false,
+        shortDescription = shortDescription,
+        views = views,
+        isShort = isShort
+    )
 
     companion object {
         const val TYPE_STREAM = "stream"

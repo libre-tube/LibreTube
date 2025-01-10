@@ -10,8 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.constants.IntentData
-import com.github.libretube.enums.PlaylistType
-import com.github.libretube.extensions.serializable
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -21,14 +19,14 @@ import kotlinx.coroutines.withContext
 
 class DeletePlaylistDialog : DialogFragment() {
     private lateinit var playlistId: String
-    private lateinit var playlistType: PlaylistType
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             playlistId = it.getString(IntentData.playlistId)!!
-            playlistType = it.serializable(IntentData.playlistType)!!
         }
     }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.deletePlaylist)
@@ -39,7 +37,7 @@ class DeletePlaylistDialog : DialogFragment() {
             .apply {
                 getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
                     lifecycleScope.launch(Dispatchers.IO) {
-                        val success = PlaylistsHelper.deletePlaylist(playlistId, playlistType)
+                        val success = PlaylistsHelper.deletePlaylist(playlistId)
                         context.toastFromMainDispatcher(
                             if (success) R.string.success else R.string.fail
                         )

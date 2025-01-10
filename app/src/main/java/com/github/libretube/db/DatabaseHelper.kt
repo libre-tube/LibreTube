@@ -8,13 +8,11 @@ import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.enums.ContentFilter
 import com.github.libretube.extensions.toID
+import com.github.libretube.extensions.toLocalDate
 import com.github.libretube.helpers.PreferenceHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import kotlinx.datetime.Instant
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 
 object DatabaseHelper {
     private const val MAX_SEARCH_HISTORY_SIZE = 20
@@ -28,8 +26,7 @@ object DatabaseHelper {
         val watchHistoryItem = WatchHistoryItem(
             videoId,
             stream.title,
-            Instant.fromEpochMilliseconds(stream.uploaded)
-                .toLocalDateTime(TimeZone.currentSystemDefault()).date,
+            stream.uploaded.toLocalDate(),
             stream.uploaderName,
             stream.uploaderUrl?.toID(),
             stream.uploaderAvatar,
