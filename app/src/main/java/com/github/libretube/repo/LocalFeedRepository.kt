@@ -91,7 +91,8 @@ class LocalFeedRepository : FeedRepository {
                 duration = item.duration,
                 views = item.viewCount,
                 uploaderVerified = item.isUploaderVerified,
-                shortDescription = item.shortDescription
+                shortDescription = item.shortDescription,
+                isShort = item.isShortFormContent
             )
         }
     }
