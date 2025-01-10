@@ -1,6 +1,9 @@
-package com.github.libretube.api
+package com.github.libretube.repo
 
+import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.PlaylistsHelper.MAX_CONCURRENT_IMPORT_CALLS
+import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.StreamsExtractor
 import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
@@ -10,8 +13,8 @@ import com.github.libretube.extensions.parallelMap
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.PipedImportPlaylist
 
-object LocalPlaylistsRepository {
-    suspend fun getPlaylist(playlistId: String): Playlist {
+class LocalPlaylistsRepository: PlaylistRepository {
+    override suspend fun getPlaylist(playlistId: String): Playlist {
         val relation = DatabaseHolder.Database.localPlaylistsDao().getAll()
             .first { it.playlist.id.toString() == playlistId }
 
@@ -24,7 +27,7 @@ object LocalPlaylistsRepository {
         )
     }
 
-    suspend fun getPlaylists(): List<Playlists> {
+    override suspend fun getPlaylists(): List<Playlists> {
         return DatabaseHolder.Database.localPlaylistsDao().getAll()
             .map {
                 Playlists(
@@ -37,7 +40,7 @@ object LocalPlaylistsRepository {
             }
     }
 
-    suspend fun addToPlaylist(playlistId: String, vararg videos: StreamItem) {
+    override suspend fun addToPlaylist(playlistId: String, vararg videos: StreamItem): Boolean {
         val localPlaylist = DatabaseHolder.Database.localPlaylistsDao().getAll()
             .first { it.playlist.id.toString() == playlistId }
 
@@ -59,25 +62,31 @@ object LocalPlaylistsRepository {
                 }
             }
         }
+
+        return true
     }
 
-    suspend fun renamePlaylist(playlistId: String, newName: String) {
+    override suspend fun renamePlaylist(playlistId: String, newName: String): Boolean {
         val playlist = DatabaseHolder.Database.localPlaylistsDao().getAll()
             .first { it.playlist.id.toString() == playlistId }.playlist
         playlist.name = newName
         DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(playlist)
+
+        return true
     }
 
-    suspend fun changePlaylistDescription(playlistId: String, newDescription: String) {
+    override suspend fun changePlaylistDescription(playlistId: String, newDescription: String): Boolean {
         val playlist = DatabaseHolder.Database.localPlaylistsDao().getAll()
             .first { it.playlist.id.toString() == playlistId }.playlist
         playlist.description = newDescription
         DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(playlist)
+
+        return true
     }
 
-    suspend fun clonePlaylist(playlistId: String): String? {
+    override suspend fun clonePlaylist(playlistId: String): String {
         val playlist = RetrofitInstance.api.getPlaylist(playlistId)
-        val newPlaylist = createPlaylist(playlist.name ?: "Unknown name") ?: return null
+        val newPlaylist = createPlaylist(playlist.name ?: "Unknown name")
 
         PlaylistsHelper.addToPlaylist(newPlaylist, *playlist.relatedStreams.toTypedArray())
 
@@ -93,7 +102,7 @@ object LocalPlaylistsRepository {
         return playlistId
     }
 
-    suspend fun removeFromPlaylist(playlistId: String, index: Int) {
+    override suspend fun removeFromPlaylist(playlistId: String, index: Int): Boolean {
         val transaction = DatabaseHolder.Database.localPlaylistsDao().getAll()
             .first { it.playlist.id.toString() == playlistId }
         DatabaseHolder.Database.localPlaylistsDao().removePlaylistVideo(
@@ -105,11 +114,13 @@ object LocalPlaylistsRepository {
                 transaction.videos.getOrNull(1)?.thumbnailUrl.orEmpty()
         }
         DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(transaction.playlist)
+
+        return true
     }
 
-    suspend fun importPlaylists(playlists: List<PipedImportPlaylist>) {
+    override suspend fun importPlaylists(playlists: List<PipedImportPlaylist>) {
         for (playlist in playlists) {
-            val playlistId = createPlaylist(playlist.name!!) ?: return
+            val playlistId = createPlaylist(playlist.name!!)
 
             // if not logged in, all video information needs to become fetched manually
             // Only do so with `MAX_CONCURRENT_IMPORT_CALLS` videos at once to prevent performance issues
@@ -125,13 +136,15 @@ object LocalPlaylistsRepository {
         }
     }
 
-    suspend fun createPlaylist(playlistName: String): String {
+    override suspend fun createPlaylist(playlistName: String): String {
         val playlist = LocalPlaylist(name = playlistName, thumbnailUrl = "")
         return DatabaseHolder.Database.localPlaylistsDao().createPlaylist(playlist).toString()
     }
 
-    suspend fun deletePlaylist(playlistId: String) {
+    override suspend fun deletePlaylist(playlistId: String): Boolean {
         DatabaseHolder.Database.localPlaylistsDao().deletePlaylistById(playlistId)
         DatabaseHolder.Database.localPlaylistsDao().deletePlaylistItemsByPlaylistId(playlistId)
+
+        return true
     }
 }

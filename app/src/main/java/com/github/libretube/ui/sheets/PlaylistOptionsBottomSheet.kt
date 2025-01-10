@@ -123,8 +123,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                 R.string.deletePlaylist -> {
                     val newDeletePlaylistDialog = DeletePlaylistDialog()
                     newDeletePlaylistDialog.arguments = bundleOf(
-                        IntentData.playlistId to playlistId,
-                        IntentData.playlistType to playlistType
+                        IntentData.playlistId to playlistId
                     )
                     newDeletePlaylistDialog.show(mFragmentManager, null)
                 }
