@@ -557,4 +557,6 @@
     <string name="crashlog">Регистър на сривове</string>
     <string name="import_format_list_of_urls">Списък с URL адреси или видео IDs</string>
     <string name="export_playlist">Изнеси плейлист</string>
+    <string name="local_feed_extraction">Локално извличане на емисия</string>
+    <string name="local_feed_extraction_summary">Директно извличане на емисията от YouTube. Това може да е значително по-бавно.</string>
 </resources>
