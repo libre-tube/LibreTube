@@ -93,12 +93,8 @@ class VideosAdapter(
         val video = streamItems[position]
         val videoId = video.url.orEmpty().toID()
 
-        (holder.trendingRowBinding?.watchProgress ?: holder.videoRowBinding!!.watchProgress)
-            .setWatchProgressLength(videoId, video.duration ?: 0L)
-
         val context = (
-            holder.videoRowBinding ?: holder.trendingRowBinding
-                ?: holder.allCaughtUpBinding
+            holder.videoRowBinding ?: holder.trendingRowBinding ?: holder.allCaughtUpBinding
             )!!.root.context
         val activity = (context as BaseActivity)
         val fragmentManager = activity.supportFragmentManager
@@ -111,6 +107,7 @@ class VideosAdapter(
                     width = 250f.dpToPx()
                 }
             }
+            watchProgress.setWatchProgressLength(videoId, video.duration ?: 0L)
 
             textViewTitle.text = video.title
             textViewChannel.text = TextUtils.formatViewsString(root.context, video.views ?: -1, video.uploaded, video.uploaderName)
@@ -145,6 +142,7 @@ class VideosAdapter(
             videoInfo.text = TextUtils.formatViewsString(root.context, video.views ?: -1, video.uploaded)
 
             video.duration?.let { thumbnailDuration.setFormattedDuration(it, video.isShort, video.uploaded) }
+            watchProgress.setWatchProgressLength(videoId, video.duration ?: 0L)
             ImageHelper.loadImage(video.thumbnail, thumbnail)
 
             if (forceMode != LayoutMode.CHANNEL_ROW) {
