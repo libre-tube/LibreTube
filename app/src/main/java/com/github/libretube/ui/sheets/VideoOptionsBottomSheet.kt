@@ -103,7 +103,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                         DatabaseHolder.Database.watchPositionDao().insert(watchPosition)
                         if (!PlayerHelper.watchHistoryEnabled) return@withContext
                         // add video to watch history
-                        DatabaseHelper.addToWatchHistory(videoId, streamItem)
+                        DatabaseHelper.addToWatchHistory(streamItem.toWatchHistoryItem(videoId))
                     }
                     if (PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)) {
                         // get the host fragment containing the current fragment

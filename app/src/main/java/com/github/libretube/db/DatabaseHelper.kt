@@ -1,14 +1,12 @@
 package com.github.libretube.db
 
 import com.github.libretube.api.obj.StreamItem
-import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.enums.ContentFilter
 import com.github.libretube.extensions.toID
-import com.github.libretube.extensions.toLocalDate
 import com.github.libretube.helpers.PreferenceHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -16,26 +14,6 @@ import kotlinx.coroutines.withContext
 
 object DatabaseHelper {
     private const val MAX_SEARCH_HISTORY_SIZE = 20
-
-    suspend fun addToWatchHistory(videoId: String, streams: Streams) = addToWatchHistory(
-        videoId,
-        streams.toStreamItem(videoId)
-    )
-
-    suspend fun addToWatchHistory(videoId: String, stream: StreamItem) {
-        val watchHistoryItem = WatchHistoryItem(
-            videoId,
-            stream.title,
-            stream.uploaded.toLocalDate(),
-            stream.uploaderName,
-            stream.uploaderUrl?.toID(),
-            stream.uploaderAvatar,
-            stream.thumbnail,
-            stream.duration
-        )
-
-        addToWatchHistory(watchHistoryItem)
-    }
 
     suspend fun addToWatchHistory(watchHistoryItem: WatchHistoryItem) =
         withContext(Dispatchers.IO) {

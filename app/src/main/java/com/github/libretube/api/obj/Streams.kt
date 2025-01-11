@@ -4,7 +4,6 @@ import android.os.Parcelable
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
 import com.github.libretube.extensions.toLocalDate
-import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.json.SafeInstantSerializer
 import com.github.libretube.parcelable.DownloadData
 import kotlinx.datetime.Instant
@@ -12,7 +11,6 @@ import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlin.io.path.Path
 
 @Serializable
 @Parcelize
@@ -75,17 +73,8 @@ data class Streams(
         }
 
         if (!subCode.isNullOrEmpty()) {
-            items.add(
-                DownloadItem(
-                    type = FileType.SUBTITLE,
-                    videoId = id,
-                    fileName = "${name}_$subCode.srt",
-                    path = Path(""),
-                    url = subtitles.find {
-                        it.code == subCode
-                    }?.url?.let { ProxyHelper.unwrapUrl(it) }
-                )
-            )
+            val subtitle = subtitles.find { it.code == subCode }
+            subtitle?.toDownloadItem(id)?.let { items.add(it) }
         }
 
         return items
