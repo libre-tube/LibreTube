@@ -560,4 +560,6 @@
     <string name="crashlog">Protokol pádů</string>
     <string name="import_format_list_of_urls">Seznam adres nebo ID videí</string>
     <string name="export_playlist">Exportovat playlist</string>
+    <string name="local_feed_extraction">Lokální extrakce zdroje</string>
+    <string name="local_feed_extraction_summary">Načítat zdroj přímo z YouTube. Může být znatelně pomalejší.</string>
 </resources>

@@ -557,4 +557,6 @@
     <string name="crashlog">Krahhilogi</string>
     <string name="import_format_list_of_urls">Võrguaadresside või videotunnuste loend</string>
     <string name="export_playlist">Ekspordi esitusloend</string>
+    <string name="local_feed_extraction">Meediavoo kohalik töötlus</string>
+    <string name="local_feed_extraction_summary">Laadi meediavood otse YouTube\'ist. See võib aga olla märgatavalt aeglasem.</string>
 </resources>

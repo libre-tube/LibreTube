@@ -557,4 +557,6 @@
     <string name="crashlog">Çökmə jurnalı</string>
     <string name="import_format_list_of_urls">URL və ya video ID siyahısı</string>
     <string name="export_playlist">Pleylisti ixrac et</string>
+    <string name="local_feed_extraction_summary">Axını birbaşa YouTube-dan əldə et. Bu əhəmiyyətli dərəcədə yavaş ola bilər.</string>
+    <string name="local_feed_extraction">Yerli axın alınması</string>
 </resources>

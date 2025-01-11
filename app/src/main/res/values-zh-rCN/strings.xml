@@ -554,4 +554,6 @@
     <string name="crashlog">崩溃记录</string>
     <string name="import_format_list_of_urls">URI 或视频 ID 列表</string>
     <string name="export_playlist">导出播放列表</string>
+    <string name="local_feed_extraction">本地源提取</string>
+    <string name="local_feed_extraction_summary">直接从 YouTube 提取源。这可能会相当慢。</string>
 </resources>
