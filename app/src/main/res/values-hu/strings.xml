@@ -557,4 +557,6 @@
     <string name="crashlog">Hibanapló</string>
     <string name="import_format_list_of_urls">Webcímek vagy videóazonosítók listája</string>
     <string name="export_playlist">Lejátszási lista exportálása</string>
+    <string name="local_feed_extraction">Helyi hírfolyam kibontása</string>
+    <string name="local_feed_extraction_summary">A hírfolyam közvetlenül a YouTube-ról kerül letöltésre. Ez jelentősen lassabb lehet.</string>
 </resources>
