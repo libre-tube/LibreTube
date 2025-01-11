@@ -23,6 +23,11 @@ class LocalFeedRepository : FeedRepository {
 
     override suspend fun getFeed(forceRefresh: Boolean): List<StreamItem> {
         val nowMillis = Instant.now().toEpochMilli()
+        val minimumDateMillis = nowMillis - Duration.ofDays(MAX_FEED_AGE_DAYS).toMillis()
+
+        val channelIds = SubscriptionHelper.getSubscriptionChannelIds()
+        // remove videos from channels that are no longer subscribed
+        DatabaseHolder.Database.feedDao().deleteAllExcept(channelIds.map { id -> "/channel/${id}" })
 
         if (!forceRefresh) {
             val feed = DatabaseHolder.Database.feedDao().getAll()
@@ -37,18 +42,14 @@ class LocalFeedRepository : FeedRepository {
             }
         }
 
-        val minimumDateMillis = nowMillis - Duration.ofDays(MAX_FEED_AGE_DAYS).toMillis()
         DatabaseHolder.Database.feedDao().cleanUpOlderThan(minimumDateMillis)
-
-        refreshFeed(minimumDateMillis)
+        refreshFeed(channelIds, minimumDateMillis)
         PreferenceHelper.putLong(PreferenceKeys.LAST_FEED_REFRESH_TIMESTAMP_MILLIS, nowMillis)
 
         return DatabaseHolder.Database.feedDao().getAll().map(SubscriptionsFeedItem::toStreamItem)
     }
 
-    private suspend fun refreshFeed(minimumDateMillis: Long) {
-        val channelIds = SubscriptionHelper.getSubscriptionChannelIds()
-
+    private suspend fun refreshFeed(channelIds: List<String>, minimumDateMillis: Long) {
         for (channelIdChunk in channelIds.chunked(CHUNK_SIZE)) {
             val collectedFeedItems = channelIdChunk.parallelMap { channelId ->
                 try {
