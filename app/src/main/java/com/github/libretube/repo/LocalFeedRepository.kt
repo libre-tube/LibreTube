@@ -3,6 +3,7 @@ package com.github.libretube.repo
 import android.util.Log
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.api.toStreamItem
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.SubscriptionsFeedItem
@@ -72,7 +73,10 @@ class LocalFeedRepository : FeedRepository {
         }
     }
 
-    private suspend fun getRelatedStreams(channelId: String, minimumDateMillis: Long): List<StreamItem> {
+    private suspend fun getRelatedStreams(
+        channelId: String,
+        minimumDateMillis: Long
+    ): List<StreamItem> {
         val channelUrl = "$YOUTUBE_FRONTEND_URL/channel/${channelId}"
         val feedInfo = FeedInfo.getInfo(channelUrl)
 
@@ -95,23 +99,8 @@ class LocalFeedRepository : FeedRepository {
         }.flatten().filterIsInstance<StreamInfoItem>()
 
         return related.map { item ->
-            StreamItem(
-                type = StreamItem.TYPE_STREAM,
-                url = item.url.replace(YOUTUBE_FRONTEND_URL, ""),
-                title = item.name,
-                uploaded = item.uploadDate?.offsetDateTime()?.toEpochSecond()?.times(1000) ?: 0,
-                uploadedDate = item.uploadDate?.offsetDateTime()?.toLocalDateTime()?.toLocalDate()
-                    ?.toString(),
-                uploaderName = item.uploaderName,
-                uploaderUrl = item.uploaderUrl.replace(YOUTUBE_FRONTEND_URL, ""),
-                uploaderAvatar = channelInfo.avatars.maxByOrNull { it.height }?.url,
-                thumbnail = item.thumbnails.maxByOrNull { it.height }?.url,
-                duration = item.duration,
-                views = item.viewCount,
-                uploaderVerified = item.isUploaderVerified,
-                shortDescription = item.shortDescription,
-                isShort = item.isShortFormContent
-            )
+            // avatar is not always included in these info items, thus must be taken from channel info response
+            item.toStreamItem(channelInfo.avatars.maxByOrNull { it.height }?.url)
         }.filter { it.uploaded > minimumDateMillis }
     }
 
