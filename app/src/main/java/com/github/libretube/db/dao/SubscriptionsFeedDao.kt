@@ -17,6 +17,9 @@ interface SubscriptionsFeedDao {
     @Query("DELETE FROM feedItem WHERE uploaded < :olderThan")
     suspend fun cleanUpOlderThan(olderThan: Long)
 
+    @Query("DELETE FROM feedItem WHERE uploaderUrl NOT IN (:channelUrls)")
+    suspend fun deleteAllExcept(channelUrls: List<String>)
+
     @Query("DELETE FROM feedItem")
     suspend fun deleteAll()
 }
