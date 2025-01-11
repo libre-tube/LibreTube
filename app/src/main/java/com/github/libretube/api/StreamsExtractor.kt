@@ -36,6 +36,26 @@ fun VideoStream.toPipedStream(): PipedStream = PipedStream(
     contentLength = itagItem?.contentLength ?: 0L
 )
 
+fun StreamInfoItem.toStreamItem(
+    uploaderAvatarUrl: String? = null
+): StreamItem = StreamItem(
+    type = StreamItem.TYPE_STREAM,
+    url = url.replace(YOUTUBE_FRONTEND_URL, ""),
+    title = name,
+    uploaded = uploadDate?.offsetDateTime()?.toEpochSecond()?.times(1000) ?: 0,
+    uploadedDate = textualUploadDate ?: uploadDate?.offsetDateTime()?.toLocalDateTime()?.toLocalDate()
+        ?.toString(),
+    uploaderName = uploaderName,
+    uploaderUrl = uploaderUrl.replace(YOUTUBE_FRONTEND_URL, ""),
+    uploaderAvatar = uploaderAvatarUrl ?: uploaderAvatars.maxByOrNull { it.height }?.url,
+    thumbnail = thumbnails.maxByOrNull { it.height }?.url,
+    duration = duration,
+    views = viewCount,
+    uploaderVerified = isUploaderVerified,
+    shortDescription = shortDescription,
+    isShort = isShortFormContent
+)
+
 object StreamsExtractor {
     suspend fun extractStreams(videoId: String): Streams {
         if (!PlayerHelper.disablePipedProxy || !PlayerHelper.localStreamExtraction) {
@@ -74,24 +94,7 @@ object StreamsExtractor {
             uploadTimestamp = resp.uploadDate.offsetDateTime().toInstant().toKotlinInstant(),
             uploaded = resp.uploadDate.offsetDateTime().toEpochSecond() * 1000,
             thumbnailUrl = resp.thumbnails.maxBy { it.height }.url,
-            relatedStreams = resp.relatedItems.filterIsInstance<StreamInfoItem>().map {
-                StreamItem(
-                    it.url.replace(YOUTUBE_FRONTEND_URL, ""),
-                    StreamItem.TYPE_STREAM,
-                    it.name,
-                    it.thumbnails.maxBy { image -> image.height }.url,
-                    it.uploaderName,
-                    it.uploaderUrl.replace(YOUTUBE_FRONTEND_URL, ""),
-                    it.uploaderAvatars.maxBy { image -> image.height }.url,
-                    it.textualUploadDate,
-                    it.duration,
-                    it.viewCount,
-                    it.isUploaderVerified,
-                    it.uploadDate?.offsetDateTime()?.toEpochSecond()?.times(1000) ?: 0L,
-                    it.shortDescription,
-                    it.isShortFormContent,
-                )
-            },
+            relatedStreams = resp.relatedItems.filterIsInstance<StreamInfoItem>().map(StreamInfoItem::toStreamItem),
             chapters = resp.streamSegments.map {
                 ChapterSegment(
                     title = it.title,
