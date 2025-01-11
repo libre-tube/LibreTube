@@ -564,4 +564,6 @@
     <string name="delete_only_watched_videos">Видаляти лише вже переглянуті відео</string>
     <string name="import_format_list_of_urls">Список URL-адрес або відеоідентифікаторів</string>
     <string name="export_playlist">Експорт списку відтворення</string>
+    <string name="local_feed_extraction">Видобуток локального джерела</string>
+    <string name="local_feed_extraction_summary">Безпосередньо отримати стрічку з YouTube. Це може бути значно повільніше.</string>
 </resources>
