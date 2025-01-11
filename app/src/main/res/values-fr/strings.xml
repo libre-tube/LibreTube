@@ -560,4 +560,6 @@
     <string name="crashlog">Journal de plantage</string>
     <string name="import_format_list_of_urls">Liste d\'URLs ou d\'identifiants de vidéos</string>
     <string name="export_playlist">Exporter la liste de lecture</string>
+    <string name="local_feed_extraction_summary">Récupérer directement le flux sur YouTube. Cela peut être beaucoup plus lent.</string>
+    <string name="local_feed_extraction">Extraction de flux local</string>
 </resources>
