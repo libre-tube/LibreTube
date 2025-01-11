@@ -3,8 +3,12 @@ package com.github.libretube.api.obj
 import android.content.Context
 import android.os.Parcelable
 import com.github.libretube.R
+import com.github.libretube.db.obj.DownloadItem
+import com.github.libretube.enums.FileType
+import com.github.libretube.helpers.ProxyHelper
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
+import kotlin.io.path.Path
 
 @Serializable
 @Parcelize
@@ -20,4 +24,12 @@ data class Subtitle(
     } else {
         "$name (${context.getString(R.string.auto_generated)})"
     }
+
+    fun toDownloadItem(videoId: String) = DownloadItem(
+        type = FileType.SUBTITLE,
+        videoId = videoId,
+        fileName = "${name}_${code}.srt",
+        path = Path(""),
+        url = url?.let { ProxyHelper.unwrapUrl(it) }
+    )
 }

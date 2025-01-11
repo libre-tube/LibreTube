@@ -29,7 +29,6 @@ import com.github.libretube.extensions.setOnDismissListener
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
-import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.ui.adapters.WatchHistoryAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.extensions.addOnBottomReachedListener
@@ -168,12 +167,6 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment() {
 
     private fun showWatchHistory(history: List<WatchHistoryItem>) {
         val watchHistory = history.filterByStatusAndWatchPosition()
-
-        watchHistory.forEach {
-            it.thumbnailUrl = ProxyHelper.rewriteUrl(it.thumbnailUrl)
-            it.uploaderAvatar = ProxyHelper.rewriteUrl(it.uploaderAvatar)
-        }
-
         val watchHistoryAdapter = WatchHistoryAdapter(watchHistory.toMutableList())
 
         binding.playAll.setOnClickListener {

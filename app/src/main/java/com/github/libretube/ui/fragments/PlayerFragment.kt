@@ -683,7 +683,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
             val context = requireContext()
             lifecycleScope.launch {
                 val hlsStream = withContext(Dispatchers.IO) {
-                    ProxyHelper.unwrapStreamUrl(streams.hls!!).toUri()
+                    ProxyHelper.rewriteUrlUsingProxyPreference(streams.hls!!).toUri()
                 }
                 IntentHelper.openWithExternalPlayer(
                     context,

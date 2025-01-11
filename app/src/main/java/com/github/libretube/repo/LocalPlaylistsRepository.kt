@@ -10,7 +10,6 @@ import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.LocalPlaylist
 import com.github.libretube.extensions.parallelMap
-import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.PipedImportPlaylist
 
 class LocalPlaylistsRepository: PlaylistRepository {
@@ -21,7 +20,7 @@ class LocalPlaylistsRepository: PlaylistRepository {
         return Playlist(
             name = relation.playlist.name,
             description = relation.playlist.description,
-            thumbnailUrl = ProxyHelper.rewriteUrl(relation.playlist.thumbnailUrl),
+            thumbnailUrl = relation.playlist.thumbnailUrl,
             videos = relation.videos.size,
             relatedStreams = relation.videos.map { it.toStreamItem() }
         )
@@ -34,7 +33,7 @@ class LocalPlaylistsRepository: PlaylistRepository {
                     id = it.playlist.id.toString(),
                     name = it.playlist.name,
                     shortDescription = it.playlist.description,
-                    thumbnail = ProxyHelper.rewriteUrl(it.playlist.thumbnailUrl),
+                    thumbnail = it.playlist.thumbnailUrl,
                     videos = it.videos.size.toLong()
                 )
             }

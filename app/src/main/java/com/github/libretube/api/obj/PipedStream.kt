@@ -3,6 +3,7 @@ package com.github.libretube.api.obj
 import android.os.Parcelable
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
+import com.github.libretube.helpers.ProxyHelper
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 import kotlin.io.path.Path
@@ -40,7 +41,7 @@ data class PipedStream(
         videoId = videoId,
         fileName = getQualityString(fileName),
         path = Path(""),
-        url = url,
+        url = url?.let { ProxyHelper.unwrapUrl(it) },
         format = format,
         quality = quality,
         language = audioTrackLocale,

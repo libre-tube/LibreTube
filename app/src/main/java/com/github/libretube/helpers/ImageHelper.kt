@@ -87,7 +87,7 @@ object ImageHelper {
 
         // only load the image if the data saver mode is disabled
         if (DataSaverMode.isEnabled(target.context) || url.isNullOrEmpty()) return
-        val urlToLoad = ProxyHelper.unwrapImageUrl(url)
+        val urlToLoad = ProxyHelper.rewriteUrlUsingProxyPreference(url)
 
         getImageWithCallback(target.context, urlToLoad) { result ->
             // set the background to white for transparent images

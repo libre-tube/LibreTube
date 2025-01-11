@@ -3,7 +3,10 @@ package com.github.libretube.api.obj
 import android.os.Parcelable
 import com.github.libretube.db.obj.LocalPlaylistItem
 import com.github.libretube.db.obj.SubscriptionsFeedItem
+import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.extensions.toID
+import com.github.libretube.extensions.toLocalDate
+import com.github.libretube.helpers.ProxyHelper
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 
@@ -32,10 +35,10 @@ data class StreamItem(
             playlistId = playlistId.toInt(),
             videoId = url!!.toID(),
             title = title,
-            thumbnailUrl = thumbnail,
+            thumbnailUrl = thumbnail?.let { ProxyHelper.unwrapUrl(it) },
             uploader = uploaderName,
             uploaderUrl = uploaderUrl,
-            uploaderAvatar = uploaderAvatar,
+            uploaderAvatar = uploaderAvatar?.let { ProxyHelper.unwrapUrl(it) },
             uploadDate = uploadedDate,
             duration = duration
         )
@@ -54,6 +57,17 @@ data class StreamItem(
         shortDescription = shortDescription,
         views = views,
         isShort = isShort
+    )
+    
+    fun toWatchHistoryItem(videoId: String) = WatchHistoryItem(
+        videoId = videoId,
+        title = title,
+        uploadDate = uploaded.toLocalDate(),
+        uploader = uploaderName,
+        uploaderUrl = uploaderUrl?.toID(),
+        uploaderAvatar = uploaderAvatar?.let { ProxyHelper.unwrapUrl(it) },
+        thumbnailUrl = thumbnail?.let { ProxyHelper.unwrapUrl(it) },
+        duration = duration
     )
 
     companion object {

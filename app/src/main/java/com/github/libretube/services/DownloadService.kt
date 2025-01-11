@@ -214,7 +214,7 @@ class DownloadService : LifecycleService() {
         setResumeNotification(notificationBuilder, item)
 
         var totalRead = item.path.fileSize()
-        val url = URL(ProxyHelper.unwrapStreamUrl(item.url ?: return))
+        val url = URL(ProxyHelper.rewriteUrlUsingProxyPreference(item.url ?: return))
 
         // only fetch the content length if it's not been returned by the API
         if (item.downloadSize <= 0L) {
