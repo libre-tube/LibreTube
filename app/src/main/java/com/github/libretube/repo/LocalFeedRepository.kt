@@ -13,6 +13,7 @@ import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_UR
 import org.schabi.newpipe.extractor.channel.ChannelInfo
 import org.schabi.newpipe.extractor.channel.tabs.ChannelTabInfo
 import org.schabi.newpipe.extractor.channel.tabs.ChannelTabs
+import org.schabi.newpipe.extractor.feed.FeedInfo
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
 import java.time.Duration
 import java.time.Instant
@@ -34,9 +35,9 @@ class LocalFeedRepository : FeedRepository {
             val oneDayAgo = nowMillis - Duration.ofDays(1).toMillis()
 
             // only refresh if feed is empty or last refresh was more than a day ago
-            val lastRefresh =
+            val lastRefreshMillis =
                 PreferenceHelper.getLong(PreferenceKeys.LAST_FEED_REFRESH_TIMESTAMP_MILLIS, 0)
-            if (feed.isNotEmpty() && lastRefresh > oneDayAgo) {
+            if (feed.isNotEmpty() && lastRefreshMillis > oneDayAgo) {
                 return DatabaseHolder.Database.feedDao().getAll()
                     .map(SubscriptionsFeedItem::toStreamItem)
             }
@@ -53,20 +54,29 @@ class LocalFeedRepository : FeedRepository {
         for (channelIdChunk in channelIds.chunked(CHUNK_SIZE)) {
             val collectedFeedItems = channelIdChunk.parallelMap { channelId ->
                 try {
-                    getRelatedStreams(channelId)
+                    getRelatedStreams(channelId, minimumDateMillis)
                 } catch (e: Exception) {
                     Log.e(channelId, e.stackTraceToString())
                     null
                 }
             }.filterNotNull().flatten().map(StreamItem::toFeedItem)
-                .filter { it.uploaded > minimumDateMillis }
 
             DatabaseHolder.Database.feedDao().insertAll(collectedFeedItems)
         }
     }
 
-    private suspend fun getRelatedStreams(channelId: String): List<StreamItem> {
-        val channelInfo = ChannelInfo.getInfo("$YOUTUBE_FRONTEND_URL/channel/${channelId}")
+    private suspend fun getRelatedStreams(channelId: String, minimumDateMillis: Long): List<StreamItem> {
+        val channelUrl = "$YOUTUBE_FRONTEND_URL/channel/${channelId}"
+        val feedInfo = FeedInfo.getInfo(channelUrl)
+
+        val hasNewerUploads = feedInfo.relatedItems.any {
+            (it.uploadDate?.offsetDateTime()?.toInstant()?.toEpochMilli()
+                ?: 0) > minimumDateMillis
+        }
+        if (!hasNewerUploads) return emptyList()
+
+        val channelInfo = ChannelInfo.getInfo(channelUrl)
+
         val relevantInfoTabs = channelInfo.tabs.filter { tab ->
             relevantTabs.any { tab.contentFilters.contains(it) }
         }
@@ -95,7 +105,7 @@ class LocalFeedRepository : FeedRepository {
                 shortDescription = item.shortDescription,
                 isShort = item.isShortFormContent
             )
-        }
+        }.filter { it.uploaded > minimumDateMillis }
     }
 
     companion object {
