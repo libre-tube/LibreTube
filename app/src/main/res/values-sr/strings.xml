@@ -560,4 +560,6 @@
     <string name="crashlog">Евиденција отказивања</string>
     <string name="import_format_list_of_urls">Листа URL адреса или ID-јева видео снимака</string>
     <string name="export_playlist">Извоз плејлисте</string>
+    <string name="local_feed_extraction">Прикупљање локалног фида</string>
+    <string name="local_feed_extraction_summary">Директно прикупљање фида из YouTube-а. Ово може бити знатно спорије.</string>
 </resources>
