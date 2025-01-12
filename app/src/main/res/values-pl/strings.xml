@@ -563,4 +563,5 @@
     <string name="delete_only_watched_videos">Usuwaj tylko już obejrzane filmy</string>
     <string name="crashlog">Dziennik wykrzaczeń</string>
     <string name="audio_codecs">Kodeki audio</string>
+    <string name="local_feed_extraction_summary">Bezpośrednie pobieranie kanału z YouTube. Może to być znacznie wolniejsze.</string>
 </resources>
