@@ -554,4 +554,6 @@
     <string name="crashlog">Log kemogokan</string>
     <string name="import_format_list_of_urls">Daftar URL atau ID video</string>
     <string name="export_playlist">Ekspor daftar putar</string>
+    <string name="local_feed_extraction">Ekstraksi umpan lokal</string>
+    <string name="local_feed_extraction_summary">Dapatkan umpan secara langsung dari YouTube. Ini mungkin lebih lambat.</string>
 </resources>
