@@ -550,4 +550,14 @@
     <string name="import_watch_history">ייבוא היסטוריית צפייה</string>
     <string name="import_watch_history_desc">נא לשים לב שהייבוא יהיה חלקי עקב הנתונים המצומצמים שאפשר לייצא מ־YouTube.</string>
     <string name="dialog_play_offline_body">לנגן את הסרטון מתיקיית ההורדה?</string>
+    <string name="local_feed_extraction">חילוץ ערוץ מקומי</string>
+    <string name="local_feed_extraction_summary">משיכת הערוץ ישירות מ־YouTube. זה עלול להיות משמעותית איטי יותר.</string>
+    <string name="dialog_play_offline_title">יש גרסה מקומית של הסרטון הזה.</string>
+    <string name="view_count">%1$s צפיות</string>
+    <string name="import_format_list_of_urls">רשימת כתובות או מזהי סרטונים</string>
+    <string name="category_exclusive_access">גישה בלעדית</string>
+    <string name="upcoming">בקרוב</string>
+    <string name="export_playlist">ייצוא רשימת נגינה</string>
+    <string name="crashlog">יומן קריסות</string>
+    <string name="delete_only_watched_videos">למחוק רק סרטונים שכבר נצפו</string>
 </resources>

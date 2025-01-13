@@ -569,4 +569,6 @@
     <string name="crashlog">سجل التحطم</string>
     <string name="export_playlist">صدّر قائمة التشغيل</string>
     <string name="import_format_list_of_urls">قائمة عناوين URL أو معرّفات الفيديو</string>
+    <string name="local_feed_extraction">استخراج موجز المحلية</string>
+    <string name="local_feed_extraction_summary">قم بجلب الخلاصة مباشرةً من YouTube. قد يكون هذا أبطأ بشكل ملحوظ.</string>
 </resources>
