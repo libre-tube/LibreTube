@@ -201,7 +201,7 @@ object ImportHelper {
 
                     val playlistName = lines[1].split(",").reversed().getOrNull(2)
                     // the playlist name can be undefined in some cases, e.g. watch later lists
-                    playlist.name = playlistName ?: TextUtils.defaultPlaylistName
+                    playlist.name = playlistName ?: TextUtils.getFileSafeTimeStampNow()
 
                     // start directly at the beginning if header playlist info such as name is missing
                     val startIndex = if (playlistName == null) {
@@ -235,7 +235,7 @@ object ImportHelper {
 
             ImportFormat.URLSORIDS -> {
                 activity.contentResolver.openInputStream(uri)?.use { inputStream ->
-                    val playlist = PipedImportPlaylist(name = TextUtils.defaultPlaylistName)
+                    val playlist = PipedImportPlaylist(name = TextUtils.getFileSafeTimeStampNow())
 
                     playlist.videos = inputStream.bufferedReader().readLines()
                         .flatMap { it.split(",") }

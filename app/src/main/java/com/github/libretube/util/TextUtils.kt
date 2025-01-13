@@ -18,7 +18,6 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.time.temporal.ChronoUnit
-import java.util.Date
 import kotlin.time.Duration
 import kotlinx.datetime.LocalDate as KotlinLocalDate
 
@@ -38,7 +37,10 @@ object TextUtils {
      */
     private val MEDIUM_DATE_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
 
-    val defaultPlaylistName get() = Date().toString()
+    /**
+     * Date time formatter which doesn't use any forbidden characters for file names like ':'
+     */
+    private val SAFE_FILENAME_DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH_mm_ss")
 
     /**
      * Localize the date from a date string, using the medium format.
@@ -162,5 +164,12 @@ object TextUtils {
             formatRelativeDate(context, it)
         }
         return listOfNotNull(uploader, viewsString, uploadDate).joinToString(SEPARATOR)
+    }
+
+    /**
+     * Timestamp of the current time which doesn't use any forbidden characters for file names like ':'
+     */
+    fun getFileSafeTimeStampNow(): String {
+        return SAFE_FILENAME_DATETIME_FORMATTER.format(LocalDateTime.now())
     }
 }

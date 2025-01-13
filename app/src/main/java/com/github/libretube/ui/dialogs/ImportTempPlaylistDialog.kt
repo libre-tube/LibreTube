@@ -20,7 +20,7 @@ class ImportTempPlaylistDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val title = arguments?.getString(IntentData.playlistName)
             ?.takeIf { it.isNotEmpty() }
-            ?: TextUtils.defaultPlaylistName
+            ?: TextUtils.getFileSafeTimeStampNow()
         val videoIds = arguments?.getStringArray(IntentData.videoIds).orEmpty()
 
         return MaterialAlertDialogBuilder(requireContext())
