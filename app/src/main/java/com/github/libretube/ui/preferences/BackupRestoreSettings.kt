@@ -17,17 +17,15 @@ import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.BackupDialog
 import com.github.libretube.ui.dialogs.BackupDialog.Companion.BACKUP_DIALOG_REQUEST_KEY
 import com.github.libretube.ui.dialogs.RequireRestartDialog
+import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 class BackupRestoreSettings : BasePreferenceFragment() {
-    private val backupDateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss")
     private var backupFile = BackupFile()
     private var importFormat: ImportFormat = ImportFormat.NEWPIPE
 
@@ -159,8 +157,8 @@ class BackupRestoreSettings : BasePreferenceFragment() {
         ) { _, resultBundle ->
             val encodedBackupFile = resultBundle.getString(IntentData.backupFile)!!
             backupFile = Json.decodeFromString(encodedBackupFile)
-            val timestamp = backupDateTimeFormatter.format(LocalDateTime.now())
-            createBackupFile.launch("libretube-backup-$timestamp.json")
+            val timestamp = TextUtils.getFileSafeTimeStampNow()
+            createBackupFile.launch("libretube-backup-${timestamp}.json")
         }
         val advancedBackup = findPreference<Preference>("backup")
         advancedBackup?.setOnPreferenceClickListener {

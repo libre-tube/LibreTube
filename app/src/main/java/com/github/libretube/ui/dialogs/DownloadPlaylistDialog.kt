@@ -26,7 +26,7 @@ class DownloadPlaylistDialog : DialogFragment() {
         super.onCreate(savedInstanceState)
 
         playlistId = requireArguments().getString(IntentData.playlistId)!!
-        playlistName = requireArguments().getString(IntentData.playlistName) ?: TextUtils.defaultPlaylistName
+        playlistName = requireArguments().getString(IntentData.playlistName) ?: TextUtils.getFileSafeTimeStampNow()
         playlistType = requireArguments().serializable(IntentData.playlistType)!!
     }
 
