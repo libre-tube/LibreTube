@@ -13,6 +13,7 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.NewPipeExtractorInstance
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_URL
+import kotlinx.coroutines.delay
 import org.schabi.newpipe.extractor.channel.ChannelInfo
 import org.schabi.newpipe.extractor.channel.tabs.ChannelTabInfo
 import org.schabi.newpipe.extractor.channel.tabs.ChannelTabs
@@ -20,6 +21,7 @@ import org.schabi.newpipe.extractor.feed.FeedInfo
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
 import java.time.Duration
 import java.time.Instant
+import java.util.concurrent.atomic.AtomicInteger
 
 class LocalFeedRepository : FeedRepository {
     private val relevantTabs =
@@ -60,13 +62,24 @@ class LocalFeedRepository : FeedRepository {
     }
 
     private suspend fun refreshFeed(channelIds: List<String>, minimumDateMillis: Long) {
+        val extractionCount = AtomicInteger()
+
         for (channelIdChunk in channelIds.chunked(CHUNK_SIZE)) {
+            // add a delay after each BATCH_SIZE amount of visited channels
+            val count = extractionCount.get();
+            if (count >= BATCH_SIZE) {
+                delay(BATCH_DELAY.random())
+                extractionCount.set(0)
+            }
+
             val collectedFeedItems = channelIdChunk.parallelMap { channelId ->
                 try {
                     getRelatedStreams(channelId, minimumDateMillis)
                 } catch (e: Exception) {
                     Log.e(channelId, e.stackTraceToString())
                     null
+                } finally {
+                    extractionCount.incrementAndGet();
                 }
             }.filterNotNull().flatten().map(StreamItem::toFeedItem)
 
@@ -114,6 +127,14 @@ class LocalFeedRepository : FeedRepository {
 
     companion object {
         private const val CHUNK_SIZE = 2
+        /**
+         * Maximum amount of feeds that should be fetched together, before a delay should be applied.
+         */
+        private const val BATCH_SIZE = 50
+        /**
+         * Millisecond delay between two consecutive batches to avoid throttling.
+         */
+        private val BATCH_DELAY = (500L..1500L)
         private const val MAX_FEED_AGE_DAYS = 30L // 30 days
     }
 }
