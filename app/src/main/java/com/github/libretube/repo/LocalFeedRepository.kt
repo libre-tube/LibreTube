@@ -8,6 +8,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.SubscriptionsFeedItem
 import com.github.libretube.extensions.parallelMap
+import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.NewPipeExtractorInstance
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_URL
@@ -73,10 +74,17 @@ class LocalFeedRepository : FeedRepository {
         val channelUrl = "$YOUTUBE_FRONTEND_URL/channel/${channelId}"
         val feedInfo = FeedInfo.getInfo(channelUrl)
 
-        val hasNewerUploads = feedInfo.relatedItems.any {
-            (it.uploadDate?.offsetDateTime()?.toInstant()?.toEpochMilli()
-                ?: 0) > minimumDateMillis
-        }
+        val mostRecentChannelVideo = feedInfo.relatedItems.maxBy {
+            it.uploadDate?.offsetDateTime()?.toInstant()?.toEpochMilli() ?: 0
+        } ?: return emptyList()
+
+        // check if the channel has at least one video whose upload time is newer than the maximum
+        // feed ago and which is not yet stored in the database
+        val mostRecentUploadTime =
+            mostRecentChannelVideo.uploadDate?.offsetDateTime()?.toInstant()?.toEpochMilli() ?: 0
+        val hasNewerUploads =
+            mostRecentUploadTime > minimumDateMillis && !DatabaseHolder.Database.feedDao()
+                .contains(mostRecentChannelVideo.url.replace(YOUTUBE_FRONTEND_URL, "").toID())
         if (!hasNewerUploads) return emptyList()
 
         val channelInfo = ChannelInfo.getInfo(channelUrl)
