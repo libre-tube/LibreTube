@@ -554,4 +554,6 @@
     <string name="crashlog">當機紀錄</string>
     <string name="import_format_list_of_urls">URL 或影片 ID 的清單</string>
     <string name="export_playlist">匯出播放清單</string>
+    <string name="local_feed_extraction">本機 feed 擷取</string>
+    <string name="local_feed_extraction_summary">直接從 YouTube 擷取 feed。這可能會顯著變慢。</string>
 </resources>
