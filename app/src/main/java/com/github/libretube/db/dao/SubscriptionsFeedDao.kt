@@ -14,6 +14,9 @@ interface SubscriptionsFeedDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(feedItems: List<SubscriptionsFeedItem>)
 
+    @Query("SELECT EXISTS (SELECT * FROM feedItem WHERE videoId = :videoId)")
+    suspend fun contains(videoId: String): Boolean
+
     @Query("DELETE FROM feedItem WHERE uploaded < :olderThan")
     suspend fun cleanUpOlderThan(olderThan: Long)
 
