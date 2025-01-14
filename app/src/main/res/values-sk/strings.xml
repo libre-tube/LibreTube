@@ -560,4 +560,6 @@
     <string name="delete_only_watched_videos">Odstrániť len pozreté videá</string>
     <string name="import_format_list_of_urls">Zoznam URL adries alebo ID videa</string>
     <string name="export_playlist">Exportovať playlist</string>
+    <string name="local_feed_extraction_summary">Načítať kanál priamo z YouTube. Môže to byť výrazne pomalšie.</string>
+    <string name="local_feed_extraction">Lokálna extrakcia kanála</string>
 </resources>
