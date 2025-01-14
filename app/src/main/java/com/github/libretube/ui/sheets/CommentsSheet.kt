@@ -20,6 +20,14 @@ class CommentsSheet : ExpandablePlayerSheet() {
 
     private val commonPlayerViewModel: CommonPlayerViewModel by activityViewModels()
 
+    private val backPressedCallback by lazy(LazyThreadSafetyMode.NONE) {
+        (dialog as ComponentDialog?)?.onBackPressedDispatcher?.addCallback(owner = viewLifecycleOwner, enabled = false) {
+            if (childFragmentManager.backStackEntryCount > 0) {
+                childFragmentManager.popBackStack()
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -70,6 +78,7 @@ class CommentsSheet : ExpandablePlayerSheet() {
     fun updateFragmentInfo(showBackButton: Boolean, title: String) {
         binding.btnBack.isVisible = showBackButton
         binding.commentsTitle.text = title
+        backPressedCallback?.isEnabled = showBackButton
     }
 
     companion object {
