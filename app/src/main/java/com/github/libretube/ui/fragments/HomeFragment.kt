@@ -54,6 +54,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        with(homeViewModel) {
+            trending.observe(viewLifecycleOwner, ::showTrending)
+            feed.observe(viewLifecycleOwner, ::showFeed)
+            bookmarks.observe(viewLifecycleOwner, ::showBookmarks)
+            playlists.observe(viewLifecycleOwner, ::showPlaylists)
+            continueWatching.observe(viewLifecycleOwner, ::showContinueWatching)
+            isLoading.observe(viewLifecycleOwner, ::updateLoading)
+        }
+
         binding.featuredTV.setOnClickListener {
             findNavController().navigate(R.id.subscriptionsFragment)
         }
@@ -94,38 +103,10 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        observeChanges()
 
         // Avoid re-fetching when re-entering the screen if it was loaded successfully
         if (homeViewModel.loadedSuccessfully.value == false) {
             fetchHomeFeed()
-        }
-    }
-
-    private fun observeChanges() {
-        with(homeViewModel) {
-            trending.observe(viewLifecycleOwner, ::showTrending)
-            feed.observe(viewLifecycleOwner, ::showFeed)
-            bookmarks.observe(viewLifecycleOwner, ::showBookmarks)
-            playlists.observe(viewLifecycleOwner, ::showPlaylists)
-            continueWatching.observe(viewLifecycleOwner, ::showContinueWatching)
-            isLoading.observe(viewLifecycleOwner, ::updateLoading)
-        }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        stopObservingChanges()
-    }
-
-    private fun stopObservingChanges() {
-        with(homeViewModel) {
-            trending.removeObserver(::showTrending)
-            feed.removeObserver(::showFeed)
-            bookmarks.removeObserver(::showBookmarks)
-            playlists.removeObserver(::showPlaylists)
-            continueWatching.removeObserver(::showContinueWatching)
-            isLoading.removeObserver(::updateLoading)
         }
     }
 
