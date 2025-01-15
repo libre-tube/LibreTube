@@ -24,7 +24,6 @@ import androidx.core.view.isNotEmpty
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -125,7 +124,8 @@ class MainActivity : BaseActivity() {
         // set the action bar for the activity
         setSupportActionBar(binding.toolbar)
 
-        navController = findNavController(R.id.fragment)
+        val navHostFragment = binding.fragment.getFragment<NavHostFragment>()
+        navController = navHostFragment.navController
         binding.bottomNav.setupWithNavController(navController)
 
         // save start tab fragment id and apply navbar style
@@ -152,11 +152,8 @@ class MainActivity : BaseActivity() {
             if (it.itemId != navController.currentDestination?.id) {
                 navigateToBottomSelectedItem(it)
             } else {
-                // get the host fragment containing the current fragment
-                val navHostFragment =
-                    supportFragmentManager.findFragmentById(R.id.fragment) as? NavHostFragment
                 // get the current fragment
-                val fragment = navHostFragment?.childFragmentManager?.fragments?.firstOrNull()
+                val fragment = navHostFragment.childFragmentManager.fragments.firstOrNull()
                 tryScrollToTop(fragment?.requireView())
             }
         }
