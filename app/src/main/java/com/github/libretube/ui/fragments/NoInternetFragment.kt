@@ -2,9 +2,7 @@ package com.github.libretube.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.github.libretube.R
@@ -14,22 +12,12 @@ import com.github.libretube.helpers.NetworkHelper
 import com.github.libretube.ui.activities.SettingsActivity
 import com.google.android.material.snackbar.Snackbar
 
-class NoInternetFragment: Fragment() {
-    private var _binding: FragmentNointernetBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentNointernetBinding.inflate(layoutInflater)
-        return binding.root
-    }
+class NoInternetFragment: Fragment(R.layout.fragment_nointernet) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val binding = FragmentNointernetBinding.bind(view)
         binding.retryButton.setOnClickListener {
             if (NetworkHelper.isNetworkAvailable(requireContext())) {
                 NavigationHelper.restartMainActivity(requireContext())

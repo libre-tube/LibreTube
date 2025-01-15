@@ -207,6 +207,11 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
             .show()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     companion object {
         const val PLAYING_QUEUE_REQUEST_KEY = "playing_queue_request_key"
     }

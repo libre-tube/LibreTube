@@ -1538,4 +1538,9 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
     fun onKeyUp(keyCode: Int): Boolean {
         return _binding?.player?.onKeyBoardAction(keyCode) ?: false
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
