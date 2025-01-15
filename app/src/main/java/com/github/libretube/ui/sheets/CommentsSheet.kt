@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.ComponentDialog
+import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
@@ -19,6 +21,14 @@ class CommentsSheet : ExpandablePlayerSheet() {
     val binding get() = _binding!!
 
     private val commonPlayerViewModel: CommonPlayerViewModel by activityViewModels()
+
+    private val backPressedCallback by lazy(LazyThreadSafetyMode.NONE) {
+        (dialog as ComponentDialog?)?.onBackPressedDispatcher?.addCallback(owner = viewLifecycleOwner, enabled = false) {
+            if (childFragmentManager.backStackEntryCount > 0) {
+                childFragmentManager.popBackStack()
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,6 +80,7 @@ class CommentsSheet : ExpandablePlayerSheet() {
     fun updateFragmentInfo(showBackButton: Boolean, title: String) {
         binding.btnBack.isVisible = showBackButton
         binding.commentsTitle.text = title
+        backPressedCallback?.isEnabled = showBackButton
     }
 
     companion object {
