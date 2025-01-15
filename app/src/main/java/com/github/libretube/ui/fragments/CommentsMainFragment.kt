@@ -116,18 +116,16 @@ class CommentsMainFragment : Fragment() {
                         commentPagingAdapter.submitData(it)
                     }
                 }
-
-                launch {
-                    viewModel.commentCountLiveData.observe(viewLifecycleOwner) { commentCount ->
-                        if (commentCount == null) return@observe
-
-                        commentsSheet?.updateFragmentInfo(
-                            false,
-                            getString(R.string.comments_count, commentCount.formatShort())
-                        )
-                    }
-                }
             }
+        }
+
+        viewModel.commentCountLiveData.observe(viewLifecycleOwner) { commentCount ->
+            if (commentCount == null) return@observe
+
+            commentsSheet?.updateFragmentInfo(
+                false,
+                getString(R.string.comments_count, commentCount.formatShort())
+            )
         }
     }
 
