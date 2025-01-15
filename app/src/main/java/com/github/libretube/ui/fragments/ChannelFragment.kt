@@ -25,7 +25,8 @@ import com.github.libretube.helpers.ClipboardHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.ui.adapters.VideosAdapter
-import com.github.libretube.ui.extensions.setupFragmentAnimation
+import com.github.libretube.ui.base.DynamicLayoutManagerFragment
+import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.sheets.ChannelOptionsBottomSheet
 import com.google.android.material.tabs.TabLayoutMediator
@@ -85,8 +86,6 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
         }
 
         fetchChannel()
-
-        setupFragmentAnimation(binding.root)
     }
 
     // adjust sensitivity due to the issue of viewpager2 with SwipeToRefresh https://issuetracker.google.com/issues/138314213

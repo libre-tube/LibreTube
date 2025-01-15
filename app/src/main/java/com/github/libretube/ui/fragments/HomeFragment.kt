@@ -20,13 +20,11 @@ import com.github.libretube.databinding.FragmentHomeBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.obj.PlaylistBookmark
 import com.github.libretube.helpers.LocaleHelper
-import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.adapters.CarouselPlaylist
 import com.github.libretube.ui.adapters.CarouselPlaylistAdapter
 import com.github.libretube.ui.adapters.VideoCardsAdapter
-import com.github.libretube.ui.extensions.setupFragmentAnimation
 import com.github.libretube.ui.models.HomeViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.models.TrendsViewModel
@@ -167,10 +165,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         binding.changeInstance.setOnClickListener {
             redirectToIntentSettings()
-        }
-
-        if (NavBarHelper.getStartFragmentId(requireContext()) != R.id.homeFragment) {
-            setupFragmentAnimation(binding.root)
         }
     }
 
