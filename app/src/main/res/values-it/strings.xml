@@ -164,7 +164,7 @@
     <string name="restore">Ripristina</string>
     <string name="account">Account</string>
     <string name="watch_history">Cronologia delle visualizzazioni</string>
-    <string name="watch_positions">Posizioni da ricordare</string>
+    <string name="watch_positions">Ricorda la posizione</string>
     <string name="auth_instance">Istanza di autenticazione</string>
     <string name="auth_instance_summary">Usa un\'istanza diversa per le chiamate di autenticazione</string>
     <string name="auth_instances">Scegli un\'istanza di autenticazione</string>
@@ -560,4 +560,6 @@
     <string name="crashlog">Log dei crash</string>
     <string name="import_format_list_of_urls">Elenco di URL o ID video</string>
     <string name="export_playlist">Esporta playlist</string>
+    <string name="local_feed_extraction">Estrazione locale feed</string>
+    <string name="local_feed_extraction_summary">Recupera direttamente il feed da YouTube. Questo potrebbe essere significativamente più lento.</string>
 </resources>
