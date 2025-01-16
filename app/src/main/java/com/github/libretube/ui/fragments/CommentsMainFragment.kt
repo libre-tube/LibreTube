@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -15,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentCommentsBinding
@@ -30,8 +30,6 @@ class CommentsMainFragment : Fragment() {
     private var _binding: FragmentCommentsBinding? = null
     private val binding get() = _binding!!
     private val viewModel: CommentsViewModel by activityViewModels()
-
-    private var scrollListener: ViewTreeObserver.OnScrollChangedListener? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,20 +55,19 @@ class CommentsMainFragment : Fragment() {
             viewModel.setCommentsPosition(POSITION_START)
         }
 
-        var restoredScrollPosition = viewModel.currentCommentsPosition.value == 0
-        binding.commentsRV.viewTreeObserver.addOnScrollChangedListener {
-            // hide or show the scroll to top button
-            commentsSheet?.binding?.btnScrollToTop?.isVisible =
-                viewModel.currentCommentsPosition.value != 0
+        binding.commentsRV.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (newState != RecyclerView.SCROLL_STATE_IDLE) return
 
-            val firstVisiblePosition = layoutManager.findFirstVisibleItemPosition()
-            if (!restoredScrollPosition) {
-                restoredScrollPosition = firstVisiblePosition >= (viewModel.currentCommentsPosition.value ?: 0)
-                return@addOnScrollChangedListener
+                val firstVisiblePosition = layoutManager.findFirstVisibleItemPosition()
+
+                // hide or show the scroll to top button
+                commentsSheet?.binding?.btnScrollToTop?.isVisible = firstVisiblePosition != 0
+                viewModel.setCommentsPosition(firstVisiblePosition)
+
+                super.onScrollStateChanged(recyclerView, newState)
             }
-
-            viewModel.setCommentsPosition(firstVisiblePosition)
-        }
+        })
 
         commentsSheet?.updateFragmentInfo(false, getString(R.string.comments))
 
@@ -89,14 +86,17 @@ class CommentsMainFragment : Fragment() {
         }
         binding.commentsRV.adapter = commentPagingAdapter
 
+        var scrollPositionRestoreRequired = viewModel.currentCommentsPosition.value == 0
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     commentPagingAdapter.loadStateFlow.collect {
                         binding.progress.isVisible = it.refresh is LoadState.Loading
 
-                        if (!restoredScrollPosition && it.refresh is LoadState.NotLoading) {
+                        if (!scrollPositionRestoreRequired && it.refresh is LoadState.NotLoading) {
                             viewModel.currentCommentsPosition.value?.let { position ->
+                                scrollPositionRestoreRequired = false
+
                                 withContext(Dispatchers.Main) {
                                     binding.commentsRV.scrollToPosition(position)
                                 }
@@ -127,12 +127,6 @@ class CommentsMainFragment : Fragment() {
                 getString(R.string.comments_count, commentCount.formatShort())
             )
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        binding.commentsRV.viewTreeObserver.removeOnScrollChangedListener(scrollListener)
-        scrollListener = null
     }
 
     override fun onDestroyView() {
