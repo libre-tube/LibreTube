@@ -41,7 +41,7 @@ class AboutActivity : BaseActivity() {
         val versionText = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
         binding.versionTv.text = versionText
         binding.versionCard.setOnClickListener {
-            ClipboardHelper.save(this, text = versionText)
+            ClipboardHelper.save(this, text = versionText, notify = true)
         }
 
         setupCard(binding.donate, DONATE_URL)

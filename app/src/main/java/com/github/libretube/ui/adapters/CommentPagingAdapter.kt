@@ -3,7 +3,6 @@ package com.github.libretube.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.os.bundleOf
 import androidx.core.text.method.LinkMovementMethodCompat
@@ -127,9 +126,9 @@ class CommentPagingAdapter(
             root.setOnLongClickListener {
                 ClipboardHelper.save(
                     root.context,
-                    text = comment.commentText.orEmpty().parseAsHtml().toString()
+                    text = comment.commentText.orEmpty().parseAsHtml().toString(),
+                    notify = true
                 )
-                Toast.makeText(root.context, R.string.copied, Toast.LENGTH_SHORT).show()
                 true
             }
         }
