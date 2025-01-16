@@ -8,7 +8,29 @@
         android:id="@+id/homeFragment"
         android:name="com.github.libretube.ui.fragments.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_libraryFragment"
+            app:destination="@id/libraryFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
+        <action
+            android:id="@+id/action_homeFragment_to_watchHistoryFragment"
+            app:destination="@id/watchHistoryFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
+        <action
+            android:id="@+id/action_homeFragment_to_trendsFragment"
+            app:destination="@id/trendsFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
+    </fragment>
     <fragment
         android:id="@+id/trendsFragment"
         android:name="com.github.libretube.ui.fragments.TrendsFragment"
@@ -43,17 +65,17 @@
         android:id="@+id/channelFragment"
         android:name="com.github.libretube.ui.fragments.ChannelFragment"
         android:label="channel"
-        tools:layout="@layout/fragment_channel" >
+        tools:layout="@layout/fragment_channel">
         <argument
             android:name="channelId"
+            android:defaultValue="@null"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <argument
             android:name="channelName"
+            android:defaultValue="@null"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/playlistFragment"
@@ -66,9 +88,9 @@
             app:nullable="false" />
         <argument
             android:name="playlistType"
+            android:defaultValue="PUBLIC"
             app:argType="com.github.libretube.enums.PlaylistType"
-            app:nullable="false"
-            android:defaultValue="PUBLIC" />
+            app:nullable="false" />
     </fragment>
     <fragment
         android:id="@+id/watchHistoryFragment"
@@ -81,10 +103,13 @@
         android:label="@string/downloads"
         tools:layout="@layout/fragment_downloads" />
 
-    <action android:id="@+id/openChannel"
+    <action
+        android:id="@+id/openChannel"
         app:destination="@id/channelFragment" />
-    <action android:id="@+id/openPlaylist"
+    <action
+        android:id="@+id/openPlaylist"
         app:destination="@id/playlistFragment" />
-    <action android:id="@+id/showSearchResults"
+    <action
+        android:id="@+id/showSearchResults"
         app:destination="@id/searchResultFragment" />
 </navigation>

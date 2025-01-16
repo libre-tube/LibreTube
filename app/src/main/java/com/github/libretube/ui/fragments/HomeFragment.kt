@@ -35,6 +35,7 @@ import com.github.libretube.ui.models.HomeViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.google.android.material.snackbar.Snackbar
 
+
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -64,23 +65,23 @@ class HomeFragment : Fragment() {
         }
 
         binding.featuredTV.setOnClickListener {
-            findNavController().navigate(R.id.subscriptionsFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_libraryFragment)
         }
 
         binding.watchingTV.setOnClickListener {
-            findNavController().navigate(R.id.watchHistoryFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_watchHistoryFragment)
         }
 
         binding.trendingTV.setOnClickListener {
-            findNavController().navigate(R.id.trendsFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_trendsFragment)
         }
 
         binding.playlistsTV.setOnClickListener {
-            findNavController().navigate(R.id.libraryFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_libraryFragment)
         }
 
         binding.bookmarksTV.setOnClickListener {
-            findNavController().navigate(R.id.libraryFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_libraryFragment)
         }
 
         binding.refresh.setOnRefreshListener {
