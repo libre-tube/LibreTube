@@ -26,6 +26,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.BuildConfig
@@ -163,7 +164,6 @@ class MainActivity : BaseActivity() {
 
         binding.bottomNav.setOnItemSelectedListener {
             navigateToBottomSelectedItem(it)
-            false
         }
 
         if (binding.bottomNav.menu.children.none { it.itemId == startFragmentId }) deselectBottomBarItems()
@@ -551,21 +551,17 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private fun navigateToBottomSelectedItem(item: MenuItem) {
+    private fun navigateToBottomSelectedItem(item: MenuItem): Boolean {
         if (item.itemId == R.id.subscriptionsFragment) {
             binding.bottomNav.removeBadge(R.id.subscriptionsFragment)
-        }
-
-        // navigate to the selected fragment, if the fragment already
-        // exists in backstack then pop up to that entry
-        if (!navController.popBackStack(item.itemId, false)) {
-            navController.navigate(item.itemId)
         }
 
         // Remove focus from search view when navigating to bottom view.
         // Call only after navigate to destination, so it can be used in
         // onMenuItemActionCollapse for backstack management
         removeSearchFocus()
+
+        return item.onNavDestinationSelected(navController)
     }
 
     override fun onUserLeaveHint() {
