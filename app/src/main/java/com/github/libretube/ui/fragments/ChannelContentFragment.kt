@@ -156,9 +156,10 @@ class ChannelContentFragment : DynamicLayoutManagerFragment() {
 
         if (tabData?.data.isNullOrEmpty()) {
             channelAdapter = VideosAdapter(
-                arguments.parcelableArrayList<StreamItem>(IntentData.videoList)!!,
                 forceMode = VideosAdapter.Companion.LayoutMode.CHANNEL_ROW
-            )
+            ).also {
+                it.submitList(arguments.parcelableArrayList<StreamItem>(IntentData.videoList)!!)
+            }
             binding.channelRecView.adapter = channelAdapter
             binding.progressBar.isGone = true
 

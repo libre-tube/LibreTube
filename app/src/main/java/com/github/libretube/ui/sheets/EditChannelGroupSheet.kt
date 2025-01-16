@@ -32,6 +32,13 @@ class EditChannelGroupSheet : ExpandedBottomSheet() {
     private val channelGroupsModel: EditChannelGroupsModel by activityViewModels()
     private var channels = listOf<Subscription>()
 
+    private val channelsAdapter = SubscriptionGroupChannelsAdapter(
+        channelGroupsModel.groupToEdit!!
+    ) {
+        channelGroupsModel.groupToEdit = it
+        updateConfirmStatus()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,6 +50,7 @@ class EditChannelGroupSheet : ExpandedBottomSheet() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = binding
+        binding.channelsRV.adapter = channelsAdapter
 
         binding.groupName.setText(channelGroupsModel.groupToEdit?.name)
         val oldGroupName = channelGroupsModel.groupToEdit?.name.orEmpty()
@@ -110,15 +118,12 @@ class EditChannelGroupSheet : ExpandedBottomSheet() {
 
     private fun showChannels(channels: List<Subscription>, query: String?) {
         val binding = binding
-        binding.channelsRV.adapter = SubscriptionGroupChannelsAdapter(
-            channels.filter { query == null || it.name.lowercase().contains(query.lowercase()) },
-            channelGroupsModel.groupToEdit!!
-        ) {
-            channelGroupsModel.groupToEdit = it
-            updateConfirmStatus()
-        }
         binding.subscriptionsContainer.isVisible = true
         binding.progress.isVisible = false
+
+        channelsAdapter.submitList(
+            channels.filter { query == null || it.name.lowercase().contains(query.lowercase()) }
+        )
     }
 
     private fun updateConfirmStatus() {
