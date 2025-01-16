@@ -259,7 +259,7 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
                     Player.EVENT_PLAYBACK_STATE_CHANGED,
                     Player.EVENT_IS_PLAYING_CHANGED,
                     Player.EVENT_PLAY_WHEN_READY_CHANGED
-                )
+                ) && _binding != null
             ) {
                 updatePlayPauseButton()
             }
