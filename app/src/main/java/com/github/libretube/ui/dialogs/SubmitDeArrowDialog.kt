@@ -106,4 +106,9 @@ class SubmitDeArrowDialog: DialogFragment() {
 
         dialog?.dismiss()
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
