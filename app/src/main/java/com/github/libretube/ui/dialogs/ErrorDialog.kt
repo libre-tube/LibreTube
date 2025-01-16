@@ -3,7 +3,6 @@ package com.github.libretube.ui.dialogs
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.helpers.ClipboardHelper
@@ -22,8 +21,7 @@ class ErrorDialog : DialogFragment() {
             .setMessage(errorLog)
             .setNegativeButton(R.string.okay, null)
             .setPositiveButton(androidx.preference.R.string.copy) { _, _ ->
-                ClipboardHelper.save(requireContext(), text = errorLog)
-                Toast.makeText(context, R.string.copied, Toast.LENGTH_SHORT).show()
+                ClipboardHelper.save(requireContext(), text = errorLog, notify = true)
             }
             .show()
     }
