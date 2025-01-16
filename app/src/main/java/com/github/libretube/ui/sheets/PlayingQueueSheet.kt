@@ -2,9 +2,7 @@ package com.github.libretube.ui.sheets
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.media3.common.Player
@@ -26,21 +24,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class PlayingQueueSheet : ExpandedBottomSheet() {
+class PlayingQueueSheet : ExpandedBottomSheet(R.layout.queue_bottom_sheet) {
     private var _binding: QueueBottomSheetBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = QueueBottomSheetBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _binding = QueueBottomSheetBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
         binding.optionsRecycler.layoutManager = LinearLayoutManager(context)

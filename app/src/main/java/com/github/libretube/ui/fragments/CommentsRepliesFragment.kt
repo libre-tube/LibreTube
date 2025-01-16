@@ -1,9 +1,7 @@
 package com.github.libretube.ui.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -31,28 +29,18 @@ import com.github.libretube.ui.models.sources.CommentRepliesPagingSource
 import com.github.libretube.ui.sheets.CommentsSheet
 import kotlinx.coroutines.launch
 
-class CommentsRepliesFragment : Fragment() {
+class CommentsRepliesFragment : Fragment(R.layout.fragment_comments) {
     private var _binding: FragmentCommentsBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: CommentsViewModel by activityViewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentCommentsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _binding = FragmentCommentsBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
         val arguments = requireArguments()
         val videoId = arguments.getString(IntentData.videoId, "")
         val comment = arguments.parcelable<Comment>(IntentData.comment)!!
-
-        val binding = binding
 
         val commentsSheet = parentFragment as? CommentsSheet
         commentsSheet?.binding?.btnScrollToTop?.isGone = true

@@ -1,9 +1,7 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
@@ -24,7 +22,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
-class EditChannelGroupSheet : ExpandedBottomSheet() {
+class EditChannelGroupSheet : ExpandedBottomSheet(R.layout.dialog_edit_channel_group) {
     private var _binding: DialogEditChannelGroupBinding? = null
     private val binding get() = _binding!!
 
@@ -32,18 +30,8 @@ class EditChannelGroupSheet : ExpandedBottomSheet() {
     private val channelGroupsModel: EditChannelGroupsModel by activityViewModels()
     private var channels = listOf<Subscription>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = DialogEditChannelGroupBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val binding = binding
-
+        _binding = DialogEditChannelGroupBinding.bind(view)
         binding.groupName.setText(channelGroupsModel.groupToEdit?.name)
         val oldGroupName = channelGroupsModel.groupToEdit?.name.orEmpty()
 
@@ -109,7 +97,6 @@ class EditChannelGroupSheet : ExpandedBottomSheet() {
     }
 
     private fun showChannels(channels: List<Subscription>, query: String?) {
-        val binding = binding
         binding.channelsRV.adapter = SubscriptionGroupChannelsAdapter(
             channels.filter { query == null || it.name.lowercase().contains(query.lowercase()) },
             channelGroupsModel.groupToEdit!!

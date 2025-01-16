@@ -3,12 +3,13 @@ package com.github.libretube.ui.base
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.helpers.PreferenceHelper
 
-abstract class DynamicLayoutManagerFragment : Fragment() {
+abstract class DynamicLayoutManagerFragment(@LayoutRes layoutResId: Int) : Fragment(layoutResId) {
     abstract fun setLayoutManagers(gridItems: Int)
 
     private fun getGridItemsCount(orientation: Int): Int {
