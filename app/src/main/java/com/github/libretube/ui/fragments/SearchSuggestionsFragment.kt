@@ -2,9 +2,7 @@ package com.github.libretube.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -12,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
@@ -29,7 +28,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class SearchSuggestionsFragment : Fragment() {
+class SearchSuggestionsFragment : Fragment(R.layout.fragment_search_suggestions) {
     private var _binding: FragmentSearchSuggestionsBinding? = null
     private val binding get() = _binding!!
     private val viewModel: SearchViewModel by activityViewModels()
@@ -40,16 +39,8 @@ class SearchSuggestionsFragment : Fragment() {
         viewModel.searchQuery.value = arguments?.getString(IntentData.query)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentSearchSuggestionsBinding.inflate(inflater)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _binding = FragmentSearchSuggestionsBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
         binding.suggestionsRecycler.layoutManager = LinearLayoutManager(requireContext()).apply {

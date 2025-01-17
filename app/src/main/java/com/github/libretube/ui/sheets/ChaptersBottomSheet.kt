@@ -2,9 +2,7 @@ package com.github.libretube.ui.sheets
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -17,7 +15,7 @@ import com.github.libretube.databinding.BottomSheetBinding
 import com.github.libretube.ui.adapters.ChaptersAdapter
 import com.github.libretube.ui.models.ChaptersViewModel
 
-class ChaptersBottomSheet : ExpandablePlayerSheet() {
+class ChaptersBottomSheet : ExpandablePlayerSheet(R.layout.bottom_sheet) {
     private var _binding: BottomSheetBinding? = null
     private val binding get() = _binding!!
 
@@ -29,17 +27,9 @@ class ChaptersBottomSheet : ExpandablePlayerSheet() {
         duration = requireArguments().getLong(IntentData.duration, 0L)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = BottomSheetBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _binding = BottomSheetBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
         binding.optionsRecycler.layoutManager = LinearLayoutManager(context)

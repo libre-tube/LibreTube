@@ -4,14 +4,13 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.ChannelTab
 import com.github.libretube.api.obj.StreamItem
@@ -29,7 +28,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ChannelContentFragment : DynamicLayoutManagerFragment() {
+class ChannelContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_channel_content) {
     private var _binding: FragmentChannelContentBinding? = null
     private val binding get() = _binding!!
     private var channelId: String? = null
@@ -38,15 +37,6 @@ class ChannelContentFragment : DynamicLayoutManagerFragment() {
     private var recyclerViewState: Parcelable? = null
     private var nextPage: String? = null
     private var isLoading: Boolean = false
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentChannelContentBinding.inflate(inflater, container, false)
-        return _binding!!.root
-    }
 
     override fun setLayoutManagers(gridItems: Int) {
         binding.channelRecView.layoutManager = GridLayoutManager(
@@ -125,6 +115,7 @@ class ChannelContentFragment : DynamicLayoutManagerFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _binding = FragmentChannelContentBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
         val arguments = requireArguments()

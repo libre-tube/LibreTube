@@ -1,9 +1,7 @@
 package com.github.libretube.ui.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -26,24 +24,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class CommentsMainFragment : Fragment() {
+class CommentsMainFragment : Fragment(R.layout.fragment_comments) {
     private var _binding: FragmentCommentsBinding? = null
     private val binding get() = _binding!!
     private val viewModel: CommentsViewModel by activityViewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentCommentsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _binding = FragmentCommentsBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
-        val binding = binding
         val layoutManager = LinearLayoutManager(requireContext())
         binding.commentsRV.layoutManager = layoutManager
         binding.commentsRV.setItemViewCacheSize(20)

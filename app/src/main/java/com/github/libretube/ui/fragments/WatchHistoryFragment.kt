@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Parcelable
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.postDelayed
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -43,7 +41,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlin.math.ceil
 
-class WatchHistoryFragment : DynamicLayoutManagerFragment() {
+class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watch_history) {
     private var _binding: FragmentWatchHistoryBinding? = null
     private val binding get() = _binding!!
 
@@ -69,21 +67,13 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment() {
             field = value
         }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentWatchHistoryBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
     override fun setLayoutManagers(gridItems: Int) {
         _binding?.watchHistoryRecView?.layoutManager =
             GridLayoutManager(context, gridItems.ceilHalf())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _binding = FragmentWatchHistoryBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
         commonPlayerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
