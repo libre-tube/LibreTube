@@ -1495,15 +1495,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         val orientation = resources.configuration.orientation
         if (commonPlayerViewModel.isFullscreen.value != true && orientation != playerLayoutOrientation) {
             // remember the current position before recreating the activity
-            arguments?.putLong(
-                IntentData.timeStamp,
-                playerController.currentPosition / 1000
-            )
             playerLayoutOrientation = orientation
 
             viewModel.isOrientationChangeInProgress = true
 
-            playerController.release()
+            if (::playerController.isInitialized) playerController.release()
+
             activity?.recreate()
         }
     }
