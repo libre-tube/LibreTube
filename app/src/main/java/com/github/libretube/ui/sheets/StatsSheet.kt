@@ -1,28 +1,16 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogStatsBinding
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.helpers.ClipboardHelper
 import com.github.libretube.obj.VideoStats
 
-class StatsSheet : ExpandedBottomSheet() {
-    private var _binding: DialogStatsBinding? = null
-    private val binding get() = _binding!!
+class StatsSheet : ExpandedBottomSheet(R.layout.dialog_stats) {
     private lateinit var stats: VideoStats
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = DialogStatsBinding.inflate(layoutInflater)
-        return binding.root
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +18,7 @@ class StatsSheet : ExpandedBottomSheet() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val binding = binding
-
+        val binding = DialogStatsBinding.bind(view)
         binding.videoId.setText(stats.videoId)
         binding.videoIdCopy.setEndIconOnClickListener {
             ClipboardHelper.save(requireContext(), "text", stats.videoId)
@@ -39,10 +26,5 @@ class StatsSheet : ExpandedBottomSheet() {
         binding.videoInfo.setText(stats.videoInfo)
         binding.audioInfo.setText(stats.audioInfo)
         binding.videoQuality.setText(stats.videoQuality)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

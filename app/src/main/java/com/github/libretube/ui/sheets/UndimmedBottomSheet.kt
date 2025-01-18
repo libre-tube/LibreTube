@@ -8,12 +8,13 @@ import android.view.View
 import android.view.ViewTreeObserver
 import android.view.WindowManager
 import android.widget.FrameLayout
+import androidx.annotation.LayoutRes
 import androidx.core.view.updateLayoutParams
 
 /**
  * A bottom sheet that allows touches on its top/background
  */
-abstract class UndimmedBottomSheet : ExpandedBottomSheet() {
+abstract class UndimmedBottomSheet(@LayoutRes layoutResId: Int) : ExpandedBottomSheet(layoutResId) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

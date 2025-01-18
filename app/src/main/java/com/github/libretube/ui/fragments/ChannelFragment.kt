@@ -2,9 +2,7 @@ package com.github.libretube.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -42,7 +40,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
 
-class ChannelFragment : DynamicLayoutManagerFragment() {
+class ChannelFragment : DynamicLayoutManagerFragment(R.layout.fragment_channel) {
     private var _binding: FragmentChannelBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<ChannelFragmentArgs>()
@@ -74,18 +72,10 @@ class ChannelFragment : DynamicLayoutManagerFragment() {
         channelId = args.channelId
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentChannelBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
     override fun setLayoutManagers(gridItems: Int) {}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _binding = FragmentChannelBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
         // Check if the AppBarLayout is fully expanded
         binding.channelAppBar.addOnOffsetChangedListener { _, verticalOffset ->

@@ -17,7 +17,6 @@ import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
 import android.view.KeyEvent
-import android.view.LayoutInflater
 import android.view.PixelCopy
 import android.view.SurfaceView
 import android.view.View
@@ -121,7 +120,7 @@ import kotlin.math.ceil
 
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
-class PlayerFragment : Fragment(), OnlinePlayerOptions {
+class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     private var _binding: FragmentPlayerBinding? = null
     val binding get() = _binding!!
 
@@ -385,16 +384,8 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         noFullscreenResolution = PlayerHelper.getDefaultResolution(requireContext(), false)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentPlayerBinding.inflate(inflater)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _binding = FragmentPlayerBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
         SoftwareKeyboardControllerCompat(view).hide()
 
@@ -1495,15 +1486,12 @@ class PlayerFragment : Fragment(), OnlinePlayerOptions {
         val orientation = resources.configuration.orientation
         if (commonPlayerViewModel.isFullscreen.value != true && orientation != playerLayoutOrientation) {
             // remember the current position before recreating the activity
-            arguments?.putLong(
-                IntentData.timeStamp,
-                playerController.currentPosition / 1000
-            )
             playerLayoutOrientation = orientation
 
             viewModel.isOrientationChangeInProgress = true
 
-            playerController.release()
+            if (::playerController.isInitialized) playerController.release()
+
             activity?.recreate()
         }
     }

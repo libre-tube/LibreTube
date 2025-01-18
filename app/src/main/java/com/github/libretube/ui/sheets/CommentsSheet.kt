@@ -1,9 +1,7 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.activity.ComponentDialog
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
@@ -16,7 +14,7 @@ import com.github.libretube.databinding.CommentsSheetBinding
 import com.github.libretube.ui.fragments.CommentsMainFragment
 import com.github.libretube.ui.models.CommonPlayerViewModel
 
-class CommentsSheet : ExpandablePlayerSheet() {
+class CommentsSheet : ExpandablePlayerSheet(R.layout.comments_sheet) {
     private var _binding: CommentsSheetBinding? = null
     val binding get() = _binding!!
 
@@ -30,19 +28,9 @@ class CommentsSheet : ExpandablePlayerSheet() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = CommentsSheetBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _binding = CommentsSheetBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
-
-        val binding = binding
 
         childFragmentManager.setFragmentResultListener(DISMISS_SHEET_REQUEST_KEY, viewLifecycleOwner) { _, _ ->
             dismiss()
