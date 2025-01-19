@@ -2,9 +2,7 @@ package com.github.libretube.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
 import androidx.core.view.isGone
@@ -41,7 +39,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class LibraryFragment : DynamicLayoutManagerFragment() {
+class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) {
     private var _binding: FragmentLibraryBinding? = null
     private val binding get() = _binding!!
 
@@ -49,21 +47,13 @@ class LibraryFragment : DynamicLayoutManagerFragment() {
 
     val playlistsAdapter = PlaylistsAdapter(PlaylistsHelper.getPrivatePlaylistType())
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentLibraryBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
     override fun setLayoutManagers(gridItems: Int) {
         _binding?.bookmarksRecView?.layoutManager = GridLayoutManager(context, gridItems.ceilHalf())
         _binding?.playlistRecView?.layoutManager = GridLayoutManager(context, gridItems.ceilHalf())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _binding = FragmentLibraryBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
         // listen for playlists to become deleted

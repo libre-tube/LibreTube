@@ -7,9 +7,7 @@ import android.content.IntentFilter
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
@@ -59,20 +57,12 @@ enum class DownloadTab {
     AUDIO
 }
 
-class DownloadsFragment : Fragment() {
+class DownloadsFragment : Fragment(R.layout.fragment_downloads) {
     private var _binding: FragmentDownloadsBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentDownloadsBinding.inflate(inflater)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _binding = FragmentDownloadsBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
         binding.downloadsPager.adapter = DownloadsFragmentAdapter(this)
@@ -112,7 +102,7 @@ class DownloadsFragmentAdapter(fragment: Fragment) : FragmentStateAdapter(fragme
     }
 }
 
-class DownloadsFragmentPage : DynamicLayoutManagerFragment() {
+class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_download_content) {
     private lateinit var adapter: DownloadsAdapter
     private var _binding: FragmentDownloadContentBinding? = null
     private val binding get() = _binding!!
@@ -149,20 +139,12 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment() {
         this.downloadTab = requireArguments().serializable(IntentData.currentPosition)!!
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentDownloadContentBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
     override fun setLayoutManagers(gridItems: Int) {
         _binding?.downloadsRecView?.layoutManager = GridLayoutManager(context, gridItems.ceilHalf())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _binding = FragmentDownloadContentBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
         var selectedSortType =

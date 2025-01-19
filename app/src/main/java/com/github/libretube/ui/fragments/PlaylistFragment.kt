@@ -6,9 +6,7 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.text.format.DateUtils
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
 import androidx.core.view.isGone
@@ -51,7 +49,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
-class PlaylistFragment : DynamicLayoutManagerFragment() {
+class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist) {
     private var _binding: FragmentPlaylistBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<PlaylistFragmentArgs>()
@@ -84,20 +82,12 @@ class PlaylistFragment : DynamicLayoutManagerFragment() {
         playlistType = args.playlistType
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentPlaylistBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
     override fun setLayoutManagers(gridItems: Int) {
         _binding?.playlistRecView?.layoutManager = GridLayoutManager(context, gridItems.ceilHalf())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _binding = FragmentPlaylistBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
         binding.playlistProgress.isVisible = true

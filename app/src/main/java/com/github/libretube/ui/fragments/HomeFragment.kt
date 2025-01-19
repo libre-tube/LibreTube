@@ -2,9 +2,7 @@ package com.github.libretube.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -32,7 +30,8 @@ import com.github.libretube.ui.models.HomeViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.google.android.material.snackbar.Snackbar
 
-class HomeFragment : Fragment() {
+
+class HomeFragment : Fragment(R.layout.fragment_home) {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -45,16 +44,8 @@ class HomeFragment : Fragment() {
     private val bookmarkAdapter = PlaylistBookmarkAdapter(PlaylistBookmarkAdapter.Companion.BookmarkMode.HOME)
     private val playlistAdapter = PlaylistsAdapter(playlistType = PlaylistsHelper.getPrivatePlaylistType())
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _binding = FragmentHomeBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
         binding.trendingRV.adapter = trendingAdapter
@@ -83,23 +74,23 @@ class HomeFragment : Fragment() {
         }
 
         binding.featuredTV.setOnClickListener {
-            findNavController().navigate(R.id.subscriptionsFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_subscriptionsFragment)
         }
 
         binding.watchingTV.setOnClickListener {
-            findNavController().navigate(R.id.watchHistoryFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_watchHistoryFragment)
         }
 
         binding.trendingTV.setOnClickListener {
-            findNavController().navigate(R.id.trendsFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_trendsFragment)
         }
 
         binding.playlistsTV.setOnClickListener {
-            findNavController().navigate(R.id.libraryFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_libraryFragment)
         }
 
         binding.bookmarksTV.setOnClickListener {
-            findNavController().navigate(R.id.libraryFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_libraryFragment)
         }
 
         binding.refresh.setOnRefreshListener {

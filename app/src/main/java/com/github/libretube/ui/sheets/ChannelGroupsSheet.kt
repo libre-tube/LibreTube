@@ -2,12 +2,11 @@ package com.github.libretube.ui.sheets
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.libretube.R
 import com.github.libretube.databinding.DialogSubscriptionGroupsBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.SubscriptionGroup
@@ -19,17 +18,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ChannelGroupsSheet : ExpandedBottomSheet() {
+class ChannelGroupsSheet : ExpandedBottomSheet(R.layout.dialog_subscription_groups) {
     private val channelGroupsModel: EditChannelGroupsModel by activityViewModels()
 
     @SuppressLint("NotifyDataSetChanged")
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val binding = DialogSubscriptionGroupsBinding.inflate(layoutInflater)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        val binding = DialogSubscriptionGroupsBinding.inflate(layoutInflater)
         binding.groupsRV.layoutManager = LinearLayoutManager(context)
         val groups = channelGroupsModel.groups.value.orEmpty().toMutableList()
         val adapter = SubscriptionGroupsAdapter(groups, channelGroupsModel, parentFragmentManager)
@@ -59,7 +55,5 @@ class ChannelGroupsSheet : ExpandedBottomSheet() {
             adapter.groups.move(from, to)
             adapter.notifyItemMoved(from, to)
         }
-
-        return binding.root
     }
 }
