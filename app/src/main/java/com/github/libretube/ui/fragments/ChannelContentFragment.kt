@@ -87,10 +87,8 @@ class ChannelContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_ch
         }
         nextPage = response.nextpage
 
-        val binding = _binding ?: return@launch
-        searchChannelAdapter = SearchChannelAdapter()
-        binding.channelRecView.adapter = searchChannelAdapter
         searchChannelAdapter?.submitList(response.content)
+        val binding = _binding ?: return@launch
         binding.progressBar.isGone = true
 
         isLoading = false
@@ -122,6 +120,9 @@ class ChannelContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_ch
         val tabData = arguments.parcelable<ChannelTab>(IntentData.tabData)
         channelId = arguments.getString(IntentData.channelId)
         nextPage = arguments.getString(IntentData.nextPage)
+
+        searchChannelAdapter = SearchChannelAdapter()
+        binding.channelRecView.adapter = searchChannelAdapter
 
         binding.channelRecView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
