@@ -470,6 +470,8 @@
     <string name="external_player">External player</string>
     <string name="screenshot">Screenshot</string>
     <string name="crashlog">Crashlog</string>
+    <string name="never_show_again">Never show this again</string>
+    <string name="update_information">Update information</string>
 
     <!-- Backup & Restore Settings -->
     <string name="import_subscriptions_from">Import subscriptions from</string>

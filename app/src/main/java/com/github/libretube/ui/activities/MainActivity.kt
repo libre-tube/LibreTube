@@ -1,6 +1,7 @@
 package com.github.libretube.ui.activities
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
@@ -18,6 +19,8 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
+import androidx.core.text.bold
+import androidx.core.text.buildSpannedString
 import androidx.core.view.allViews
 import androidx.core.view.children
 import androidx.core.view.isNotEmpty
@@ -55,6 +58,7 @@ import com.github.libretube.ui.models.SearchViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.preferences.BackupRestoreSettings.Companion.FILETYPE_ANY
 import com.github.libretube.util.UpdateChecker
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.elevation.SurfaceColors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -176,6 +180,8 @@ class MainActivity : BaseActivity() {
         setupSubscriptionsBadge()
 
         loadIntentData()
+
+        showUserInfoDialogIfNeeded()
     }
 
     @ColorInt
@@ -606,5 +612,60 @@ class MainActivity : BaseActivity() {
         playlistExportFormat = format
         exportPlaylistId = playlistId
         createPlaylistsFile.launch("${playlistName}.${format.fileExtension}")
+    }
+
+    private fun showUserInfoDialogIfNeeded() {
+        // don't show the update information dialog for debug builds
+        if (BuildConfig.DEBUG) return
+
+        val lastShownVersionCode =
+            PreferenceHelper.getInt(PreferenceKeys.LAST_SHOWN_INFO_MESSAGE_VERSION_CODE, -1)
+
+        // mapping of version code to info message
+        val infoMessages = listOf(
+            59 to getUpdateInfoText(this)
+        )
+
+        val message =
+            infoMessages.lastOrNull { (versionCode, _) -> versionCode > lastShownVersionCode }?.second
+                ?: return
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.update_information)
+            .setMessage(message)
+            .setNegativeButton(R.string.okay, null)
+            .setPositiveButton(R.string.never_show_again) { _, _ ->
+                PreferenceHelper.putInt(
+                    PreferenceKeys.LAST_SHOWN_INFO_MESSAGE_VERSION_CODE,
+                    BuildConfig.VERSION_CODE
+                )
+            }
+            .show()
+    }
+
+    private fun getUpdateInfoText(context: Context) = buildSpannedString {
+        append("Most public Piped instances are not able to load any videos as of today because they're rate-limited very quickly by YouTube. Therefore please consider enabling ")
+        bold {
+            append(context.getString(R.string.local_stream_extraction))
+        }
+        append(" under ")
+        bold {
+            append("Settings -> Instance")
+        }
+        append(" in order to fetch video streams directly from YouTube without Piped in-between. Any other content will still be loaded via Piped.")
+
+        appendLine()
+        appendLine()
+
+        append("Due to the above mentioned issue, some instances do not properly generate the subscriptions feed. To fetch the feed directly from your phone, enable ")
+        bold {
+            append(context.getString(R.string.local_feed_extraction))
+        }
+        append(". Note that this might be slow if you have a lot of subscriptions.")
+
+        appendLine()
+        appendLine()
+
+        append("Please see the pinned issues at GitHub for more information on that topic.")
     }
 }
