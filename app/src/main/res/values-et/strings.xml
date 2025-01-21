@@ -559,4 +559,6 @@
     <string name="export_playlist">Ekspordi esitusloend</string>
     <string name="local_feed_extraction">Meediavoo kohalik töötlus</string>
     <string name="local_feed_extraction_summary">Laadi meediavood otse YouTube\'ist. See võib aga olla märgatavalt aeglasem.</string>
+    <string name="never_show_again">Ära enam näita seda uuesti</string>
+    <string name="update_information">Uuenduse teave</string>
 </resources>
