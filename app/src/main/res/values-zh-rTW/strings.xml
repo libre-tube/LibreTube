@@ -556,4 +556,6 @@
     <string name="export_playlist">匯出播放清單</string>
     <string name="local_feed_extraction">本機 feed 擷取</string>
     <string name="local_feed_extraction_summary">直接從 YouTube 擷取 feed。這可能會顯著變慢。</string>
+    <string name="never_show_again">永遠不要再顯示這個</string>
+    <string name="update_information">更新資訊</string>
 </resources>
