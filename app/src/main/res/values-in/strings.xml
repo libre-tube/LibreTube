@@ -556,4 +556,6 @@
     <string name="export_playlist">Ekspor daftar putar</string>
     <string name="local_feed_extraction">Ekstraksi umpan lokal</string>
     <string name="local_feed_extraction_summary">Dapatkan umpan secara langsung dari YouTube. Ini mungkin lebih lambat.</string>
+    <string name="never_show_again">Jangan tampilkan ini lagi</string>
+    <string name="update_information">Informasi pembaruan</string>
 </resources>
