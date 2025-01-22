@@ -101,9 +101,10 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                     val watchPosition = WatchPosition(videoId, Long.MAX_VALUE)
                     withContext(Dispatchers.IO) {
                         DatabaseHolder.Database.watchPositionDao().insert(watchPosition)
-                        if (!PlayerHelper.watchHistoryEnabled) return@withContext
-                        // add video to watch history
-                        DatabaseHelper.addToWatchHistory(streamItem.toWatchHistoryItem(videoId))
+
+                        if (PlayerHelper.watchHistoryEnabled) {
+                            DatabaseHelper.addToWatchHistory(streamItem.toWatchHistoryItem(videoId))
+                        }
                     }
                     if (PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)) {
                         // get the host fragment containing the current fragment
@@ -146,13 +147,14 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                 DatabaseHolder.Database.watchHistoryDao().findById(videoId)
             }
 
-            val isWatched = DatabaseHelper.isVideoWatchedBlocking(videoId, streamItem.duration ?: 0)
-            if (isWatched || watchHistoryEntry != null) {
+            val position = DatabaseHelper.getWatchPositionBlocking(videoId) ?: 0
+            val isCompleted = DatabaseHelper.isVideoWatched(position, streamItem.duration ?: 0)
+            if (position != 0L || watchHistoryEntry != null) {
                 optionsList += R.string.mark_as_unwatched
             }
 
-            if (!isWatched || watchHistoryEntry == null) {
-                R.string.mark_as_watched
+            if (!isCompleted || watchHistoryEntry == null) {
+                optionsList += R.string.mark_as_watched
             }
         }
 

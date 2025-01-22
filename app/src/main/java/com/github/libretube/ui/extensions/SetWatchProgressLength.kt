@@ -16,9 +16,16 @@ import com.github.libretube.helpers.ThemeHelper
  * @param duration The duration of the video in seconds
  */
 fun View.setWatchProgressLength(videoId: String, duration: Long) {
-    updateLayoutParams<ConstraintLayout.LayoutParams> {
-        matchConstraintPercentWidth = 0f
+    val progress = DatabaseHelper.getWatchPositionBlocking(videoId)?.div(1000)
+    if (progress == null || progress == 0L) {
+        isGone = true
+        return
     }
+
+    updateLayoutParams<ConstraintLayout.LayoutParams> {
+        matchConstraintPercentWidth = progress.toFloat()/ duration.toFloat()
+    }
+
     var backgroundColor = ThemeHelper.getThemeColor(
         context,
         com.google.android.material.R.attr.colorPrimaryDark
@@ -28,17 +35,6 @@ fun View.setWatchProgressLength(videoId: String, duration: Long) {
         backgroundColor = ColorUtils.blendARGB(backgroundColor, Color.WHITE, 0.4f)
     }
     setBackgroundColor(backgroundColor)
-    isGone = true
-
-    if (duration == 0L) {
-        return
-    }
-
-    val progress = DatabaseHelper.getWatchPositionBlocking(videoId)?.div(1000)?.toFloat() ?: 0f
-
-    updateLayoutParams<ConstraintLayout.LayoutParams> {
-        matchConstraintPercentWidth = progress / duration.toFloat()
-    }
 
     isVisible = true
 }
