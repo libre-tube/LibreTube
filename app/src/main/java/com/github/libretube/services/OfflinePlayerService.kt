@@ -7,6 +7,7 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import com.github.libretube.constants.IntentData
+import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.db.obj.filterByTab
@@ -92,9 +93,9 @@ open class OfflinePlayerService : AbstractPlayerService() {
             exoPlayer?.playWhenReady = PlayerHelper.playAutomatically
             exoPlayer?.prepare()
 
-            if (PlayerHelper.watchPositionsAudio) {
-                PlayerHelper.getStoredWatchPosition(videoId, downloadWithItems.download.duration)?.let {
-                    exoPlayer?.seekTo(it)
+            if (watchPositionsEnabled) {
+                DatabaseHelper.getWatchPosition(videoId)?.let {
+                    if (!DatabaseHelper.isVideoWatched(it, downloadWithItems.download.duration)) exoPlayer?.seekTo(it)
                 }
             }
         }

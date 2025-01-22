@@ -49,7 +49,6 @@ import com.github.libretube.util.TextUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.util.Locale
 import java.util.concurrent.Executors
 import kotlin.math.absoluteValue
@@ -664,20 +663,6 @@ object PlayerHelper {
                     (currentPositionSeconds - chapter.start) < ChapterSegment.HIGHLIGHT_LENGTH
                 chapter.highlightDrawable == null || isWithinMaxHighlightDuration
             }
-    }
-
-    fun getStoredWatchPosition(videoId: String, duration: Long?): Long? {
-        if (duration == null) return null
-
-        runCatching {
-            val watchPosition = runBlocking {
-                DatabaseHolder.Database.watchPositionDao().findById(videoId)
-            }
-            if (watchPosition != null && watchPosition.position < duration * 1000 * 0.9) {
-                return watchPosition.position
-            }
-        }
-        return null
     }
 
     /**
