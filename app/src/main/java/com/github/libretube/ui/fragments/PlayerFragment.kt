@@ -511,6 +511,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
             playerController = it
             playerController.addListener(playerListener)
+            updatePlayPauseButton()
 
             if (!startNewSession) {
                 val streams: Streams? =
