@@ -230,6 +230,9 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     abstract val isOfflinePlayer: Boolean
     abstract val isAudioOnlyPlayer: Boolean
 
+    val watchPositionsEnabled get() =
+        (PlayerHelper.watchPositionsAudio && isAudioOnlyPlayer) || (PlayerHelper.watchPositionsVideo && !isAudioOnlyPlayer)
+
     override fun onGetSession(controllerInfo: MediaSession.ControllerInfo): MediaLibrarySession? =
         mediaLibrarySession
 
@@ -313,9 +316,6 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     abstract suspend fun startPlayback()
 
     private fun saveWatchPosition() {
-        val watchPositionsEnabled =
-            (PlayerHelper.watchPositionsAudio && isAudioOnlyPlayer) || (PlayerHelper.watchPositionsVideo && !isAudioOnlyPlayer)
-
         if (isTransitioning || !watchPositionsEnabled) return
 
         exoPlayer?.let { PlayerHelper.saveWatchPosition(it, videoId) }

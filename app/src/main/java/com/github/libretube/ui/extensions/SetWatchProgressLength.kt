@@ -7,9 +7,8 @@ import androidx.core.graphics.ColorUtils
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
-import com.github.libretube.db.DatabaseHolder.Database
+import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.helpers.ThemeHelper
-import kotlinx.coroutines.runBlocking
 
 /**
  * Shows the already watched time under the video
@@ -35,13 +34,7 @@ fun View.setWatchProgressLength(videoId: String, duration: Long) {
         return
     }
 
-    val progress = runCatching {
-        runBlocking {
-            Database.watchPositionDao().findById(videoId)?.position
-                // divide by 1000 to convert ms to seconds
-                ?.toFloat()?.div(1000)
-        }
-    }.getOrNull() ?: return
+    val progress = DatabaseHelper.getWatchPositionBlocking(videoId)?.div(1000)?.toFloat() ?: 0f
 
     updateLayoutParams<ConstraintLayout.LayoutParams> {
         matchConstraintPercentWidth = progress / duration.toFloat()
