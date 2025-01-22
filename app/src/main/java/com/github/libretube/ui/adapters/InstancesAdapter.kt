@@ -3,18 +3,17 @@ package com.github.libretube.ui.adapters
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.R
 import com.github.libretube.api.obj.PipedInstance
 import com.github.libretube.databinding.InstanceRowBinding
+import com.github.libretube.ui.adapters.callbacks.diffUtilItemCallback
 import com.github.libretube.ui.viewholders.InstancesViewHolder
-import com.google.common.collect.ImmutableList
 
 class InstancesAdapter(
-    private val instances: ImmutableList<PipedInstance>,
     initialSelectionApiIndex: Int?,
     private val onSelectInstance: (index: Int) -> Unit
-) : RecyclerView.Adapter<InstancesViewHolder>() {
+) : ListAdapter<PipedInstance, InstancesViewHolder>(diffUtilItemCallback<PipedInstance>()) {
     private var selectedInstanceIndex = initialSelectionApiIndex?.takeIf { it >= 0 }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InstancesViewHolder {
@@ -23,11 +22,9 @@ class InstancesAdapter(
         return InstancesViewHolder(binding)
     }
 
-    override fun getItemCount() = instances.size
-
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: InstancesViewHolder, position: Int) {
-        val instance = instances[position]
+        val instance = getItem(holder.bindingAdapterPosition)
 
         holder.binding.apply {
             var instanceText = "${instance.name} ${instance.locations}"
