@@ -313,7 +313,10 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     abstract suspend fun startPlayback()
 
     private fun saveWatchPosition() {
-        if (isTransitioning || !PlayerHelper.watchPositionsVideo) return
+        val watchPositionsEnabled =
+            (PlayerHelper.watchPositionsAudio && isAudioOnlyPlayer) || (PlayerHelper.watchPositionsVideo && !isAudioOnlyPlayer)
+
+        if (isTransitioning || !watchPositionsEnabled) return
 
         exoPlayer?.let { PlayerHelper.saveWatchPosition(it, videoId) }
     }
