@@ -1490,6 +1490,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
             viewModel.isOrientationChangeInProgress = true
 
+            // detatch player view from player to stop surface rendering
+            binding.player.player = null
+
             if (::playerController.isInitialized) playerController.release()
 
             activity?.recreate()
