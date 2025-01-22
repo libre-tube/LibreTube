@@ -562,4 +562,6 @@
     <string name="export_playlist">Esporta playlist</string>
     <string name="local_feed_extraction">Estrazione locale feed</string>
     <string name="local_feed_extraction_summary">Recupera direttamente il feed da YouTube. Questo potrebbe essere significativamente più lento.</string>
+    <string name="update_information">Aggiorna informazioni</string>
+    <string name="never_show_again">Non mostrare più</string>
 </resources>

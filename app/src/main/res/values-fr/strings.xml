@@ -562,4 +562,6 @@
     <string name="export_playlist">Exporter la liste de lecture</string>
     <string name="local_feed_extraction_summary">Récupérer directement le flux sur YouTube. Cela peut être beaucoup plus lent.</string>
     <string name="local_feed_extraction">Extraction de flux local</string>
+    <string name="never_show_again">Ne plus jamais afficher cela</string>
+    <string name="update_information">Information mise à jour</string>
 </resources>

@@ -562,4 +562,6 @@
     <string name="export_playlist">Exportovať playlist</string>
     <string name="local_feed_extraction_summary">Načítať kanál priamo z YouTube. Môže to byť výrazne pomalšie.</string>
     <string name="local_feed_extraction">Lokálna extrakcia kanála</string>
+    <string name="never_show_again">Už neukazovať</string>
+    <string name="update_information">Informácie o aktualizácii</string>
 </resources>

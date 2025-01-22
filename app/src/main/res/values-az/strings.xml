@@ -559,4 +559,6 @@
     <string name="export_playlist">Pleylisti ixrac et</string>
     <string name="local_feed_extraction_summary">Axını birbaşa YouTube-dan əldə et. Bu əhəmiyyətli dərəcədə yavaş ola bilər.</string>
     <string name="local_feed_extraction">Yerli axın alınması</string>
+    <string name="update_information">Yenilənmə Məlumatı</string>
+    <string name="never_show_again">Bunu təkrar göstərmə</string>
 </resources>

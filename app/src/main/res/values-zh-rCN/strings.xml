@@ -556,4 +556,6 @@
     <string name="export_playlist">导出播放列表</string>
     <string name="local_feed_extraction">本地源提取</string>
     <string name="local_feed_extraction_summary">直接从 YouTube 提取源。这可能会相当慢。</string>
+    <string name="update_information">更新信息</string>
+    <string name="never_show_again">不再显示</string>
 </resources>

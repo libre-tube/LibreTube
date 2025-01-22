@@ -559,4 +559,6 @@
     <string name="export_playlist">Lejátszási lista exportálása</string>
     <string name="local_feed_extraction">Helyi hírfolyam kibontása</string>
     <string name="local_feed_extraction_summary">A hírfolyam közvetlenül a YouTube-ról kerül letöltésre. Ez jelentősen lassabb lehet.</string>
+    <string name="never_show_again">Többet ne jelenjen meg</string>
+    <string name="update_information">Frissítési információ</string>
 </resources>
