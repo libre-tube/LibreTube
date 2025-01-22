@@ -166,7 +166,10 @@ object PlayerHelper {
         get() = watchPositionsPref in listOf("always", "videos")
 
     val watchPositionsAudio: Boolean
-        get() = watchPositionsPref == "always"
+        get() = watchPositionsPref in listOf("always", "audio")
+
+    val watchPositionsAny: Boolean
+        get() = watchPositionsVideo || watchPositionsAudio
 
     val watchHistoryEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
