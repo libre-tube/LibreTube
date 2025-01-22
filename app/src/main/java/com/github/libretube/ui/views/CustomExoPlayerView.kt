@@ -184,6 +184,12 @@ abstract class CustomExoPlayerView(
             }
         })
 
+        player?.let { player ->
+            binding.playPauseBTN.setImageResource(
+                PlayerHelper.getPlayPauseActionIcon(player)
+            )
+        }
+
         player?.let { binding.exoProgress.setPlayer(it) }
         // prevent the controls from disappearing while scrubbing the time bar
         binding.exoProgress.addSeekBarListener(object : TimeBar.OnScrubListener {
