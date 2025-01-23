@@ -356,7 +356,7 @@ class MainActivity : BaseActivity() {
             override fun onMenuItemActionExpand(item: MenuItem): Boolean {
                 if (navController.currentDestination?.id != R.id.searchResultFragment) {
                     searchViewModel.setQuery(null)
-                    navController.navigate(R.id.searchFragment)
+                    navController.navigate(R.id.openSearch)
                 }
                 item.setShowAsAction(
                     MenuItem.SHOW_AS_ACTION_ALWAYS or MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW
