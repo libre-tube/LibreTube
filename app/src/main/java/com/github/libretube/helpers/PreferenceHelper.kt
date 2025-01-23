@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.github.libretube.constants.PreferenceKeys
-import java.time.Instant
 
 object PreferenceHelper {
     /**
@@ -105,8 +104,8 @@ object PreferenceHelper {
         return getString(PreferenceKeys.LAST_STREAM_VIDEO_ID, "")
     }
 
-    fun updateLastFeedWatchedTime() {
-        putLong(PreferenceKeys.LAST_WATCHED_FEED_TIME, Instant.now().epochSecond)
+    fun setLastFeedWatchedTime(time: Long) {
+        putLong(PreferenceKeys.LAST_WATCHED_FEED_TIME, time)
     }
 
     fun getLastCheckedFeedTime(): Long {
