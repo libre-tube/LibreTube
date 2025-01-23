@@ -358,7 +358,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         // add an "all caught up item"
         if (selectedSortOrder == 0) {
             val lastCheckedFeedTime = PreferenceHelper.getLastCheckedFeedTime()
-            val caughtUpIndex = feed.indexOfFirst { it.uploaded / 1000 < lastCheckedFeedTime }
+            val caughtUpIndex = feed.indexOfFirst { it.uploaded / 1000 < lastCheckedFeedTime && !it.isUpcoming }
             if (caughtUpIndex > 0) {
                 sortedFeed.add(
                     caughtUpIndex,
