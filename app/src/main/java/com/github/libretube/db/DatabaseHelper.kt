@@ -37,7 +37,7 @@ object DatabaseHelper {
         val watchHistoryDao = Database.watchHistoryDao()
         val historySize = watchHistoryDao.getSize()
 
-        if (historySize < pageSize * (page-1)) return emptyList()
+        if (historySize < pageSize * (page - 1)) return emptyList()
 
         val offset = historySize - (pageSize * page)
         val limit = if (offset < 0) {
@@ -58,16 +58,32 @@ object DatabaseHelper {
 
         while (searchHistory.size > MAX_SEARCH_HISTORY_SIZE) {
             Database.searchHistoryDao().delete(searchHistory.first())
-            searchHistory.removeFirst()
+            searchHistory.removeAt(0)
         }
     }
 
-    suspend fun isVideoWatched(videoId: String, duration: Long): Boolean = withContext(Dispatchers.IO) {
-        val historyItem = Database.watchPositionDao()
-            .findById(videoId) ?: return@withContext false
-        val progress = historyItem.position / 1000
+    suspend fun getWatchPosition(videoId: String) = Database.watchPositionDao().findById(videoId)?.position
+
+    fun getWatchPositionBlocking(videoId: String): Long? = runBlocking(Dispatchers.IO) {
+        getWatchPosition(videoId)
+    }
+
+    fun isVideoWatchedBlocking(videoId: String, duration: Long) =
+        runBlocking { isVideoWatched(videoId, duration) }
+
+    suspend fun isVideoWatched(videoId: String, duration: Long): Boolean =
+        withContext(Dispatchers.IO) {
+            val position = getWatchPosition(videoId) ?: return@withContext false
+
+            return@withContext isVideoWatched(position, duration)
+        }
+
+    fun isVideoWatched(positionMillis: Long, durationSeconds: Long?): Boolean {
+        if (durationSeconds == null) return false
+
+        val progress = positionMillis / 1000
         // show video only in feed when watched less than 90%
-        return@withContext progress > 0.9f * duration
+        return progress > 0.9f * durationSeconds
     }
 
     suspend fun filterUnwatched(streams: List<StreamItem>): List<StreamItem> {
@@ -85,7 +101,10 @@ object DatabaseHelper {
         }
     }
 
-    fun filterByStatusAndWatchPosition(streams: List<StreamItem>, hideWatched: Boolean): List<StreamItem> {
+    fun filterByStatusAndWatchPosition(
+        streams: List<StreamItem>,
+        hideWatched: Boolean
+    ): List<StreamItem> {
         val streamItems = streams.filter {
             val isVideo = !it.isShort && !it.isLive
 

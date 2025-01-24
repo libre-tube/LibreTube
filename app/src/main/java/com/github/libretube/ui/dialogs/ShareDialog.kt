@@ -10,6 +10,7 @@ import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.DialogShareBinding
+import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.parcelable
@@ -82,7 +83,8 @@ class ShareDialog : DialogFragment() {
             binding.timeStamp.addTextChangedListener {
                 binding.linkPreview.text = generateLinkText(binding, customInstanceUrl)
             }
-            binding.timeStamp.setText((shareData.currentPosition ?: getWatchPosition(id) ?: 0L).toString())
+            val timeStamp = shareData.currentPosition ?: DatabaseHelper.getWatchPositionBlocking(id)?.div(1000)
+            binding.timeStamp.setText((timeStamp ?: 0L).toString())
             if (binding.timeCodeSwitch.isChecked) {
                 binding.timeStampInputLayout.isVisible = true
             }
@@ -144,10 +146,6 @@ class ShareDialog : DialogFragment() {
 
         return url
     }
-
-    private fun getWatchPosition(videoId: String) = runBlocking {
-        Database.watchPositionDao().findById(videoId)
-    }?.position?.div(1000)
 
     companion object {
         const val YOUTUBE_FRONTEND_URL = "https://www.youtube.com"

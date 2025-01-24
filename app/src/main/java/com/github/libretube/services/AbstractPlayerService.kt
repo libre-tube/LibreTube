@@ -74,7 +74,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
         override fun onPlayerError(error: PlaybackException) {
             // show a toast on errors
-            toastFromMainThread(error.localizedMessage)
+            toastFromMainThread(error.localizedMessage.orEmpty())
         }
 
         override fun onEvents(player: Player, events: Player.Events) {
@@ -230,6 +230,9 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     abstract val isOfflinePlayer: Boolean
     abstract val isAudioOnlyPlayer: Boolean
 
+    val watchPositionsEnabled get() =
+        (PlayerHelper.watchPositionsAudio && isAudioOnlyPlayer) || (PlayerHelper.watchPositionsVideo && !isAudioOnlyPlayer)
+
     override fun onGetSession(controllerInfo: MediaSession.ControllerInfo): MediaLibrarySession? =
         mediaLibrarySession
 
@@ -313,7 +316,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     abstract suspend fun startPlayback()
 
     private fun saveWatchPosition() {
-        if (isTransitioning || !PlayerHelper.watchPositionsVideo) return
+        if (isTransitioning || !watchPositionsEnabled) return
 
         exoPlayer?.let { PlayerHelper.saveWatchPosition(it, videoId) }
     }

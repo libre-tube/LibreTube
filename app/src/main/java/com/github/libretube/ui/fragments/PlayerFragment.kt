@@ -511,6 +511,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
             playerController = it
             playerController.addListener(playerListener)
+            updatePlayPauseButton()
 
             if (!startNewSession) {
                 val streams: Streams? =
@@ -1489,6 +1490,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             playerLayoutOrientation = orientation
 
             viewModel.isOrientationChangeInProgress = true
+
+            // detatch player view from player to stop surface rendering
+            binding.player.player = null
 
             if (::playerController.isInitialized) playerController.release()
 

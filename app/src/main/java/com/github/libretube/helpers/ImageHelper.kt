@@ -13,11 +13,9 @@ import coil.disk.DiskCache
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.github.libretube.BuildConfig
-import com.github.libretube.api.CronetHelper
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toAndroidUri
 import com.github.libretube.util.DataSaverMode
-import com.google.net.cronet.okhttptransport.CronetInterceptor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
@@ -46,10 +44,7 @@ object ImageHelper {
             httpClient.addInterceptor(loggingInterceptor)
         }
 
-        httpClient.addInterceptor(CronetInterceptor.newBuilder(CronetHelper.cronetEngine).build())
-
         imageLoader = ImageLoader.Builder(context)
-            .callFactory(CronetHelper.callFactory)
             .crossfade(true)
             .okHttpClient {
                 httpClient.build()

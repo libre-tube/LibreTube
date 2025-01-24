@@ -559,5 +559,5 @@
     <string name="export_playlist">Playlist exportieren</string>
     <string name="local_feed_extraction">Direkter Abruf von Abos</string>
     <string name="local_feed_extraction_summary">Abos direkt von YouTube abrufen. Dies kann das Abrufen unter Umständen deutlich langsamer machen.</string>
-    <string name="never_show_again">Dies nie wieder anzeigen</string>
+    <string name="never_show_again">Nicht wieder anzeigen</string>
 </resources>

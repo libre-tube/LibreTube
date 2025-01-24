@@ -3,7 +3,6 @@ package com.github.libretube.api
 import com.github.libretube.BuildConfig
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.helpers.PreferenceHelper
-import com.google.net.cronet.okhttptransport.CronetInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -38,7 +37,6 @@ object RetrofitInstance {
     val api by resettableLazy(lazyMgr) {
         Retrofit.Builder()
             .baseUrl(apiUrl)
-            .callFactory(CronetHelper.callFactory)
             .client(httpClient)
             .addConverterFactory(kotlinxConverterFactory)
             .build()
@@ -48,7 +46,6 @@ object RetrofitInstance {
     val authApi by resettableLazy(lazyMgr) {
         Retrofit.Builder()
             .baseUrl(authUrl)
-            .callFactory(CronetHelper.callFactory)
             .client(httpClient)
             .addConverterFactory(kotlinxConverterFactory)
             .build()
@@ -58,7 +55,6 @@ object RetrofitInstance {
     val externalApi by resettableLazy(lazyMgr) {
         Retrofit.Builder()
             .baseUrl(apiUrl)
-            .callFactory(CronetHelper.callFactory)
             .client(httpClient)
             .addConverterFactory(kotlinxConverterFactory)
             .build()
@@ -75,8 +71,6 @@ object RetrofitInstance {
 
             httpClient.addInterceptor(loggingInterceptor)
         }
-
-        httpClient.addInterceptor(CronetInterceptor.newBuilder(CronetHelper.cronetEngine).build())
 
         return httpClient.build()
     }
