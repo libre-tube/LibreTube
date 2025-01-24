@@ -119,4 +119,10 @@
     <action
         android:id="@+id/showSearchResults"
         app:destination="@id/searchResultFragment" />
+    <action
+        android:id="@+id/openSearch"
+        app:destination="@id/searchFragment"
+        app:popUpTo="@id/homeFragment"
+        app:popUpToSaveState="true"
+        app:restoreState="false" />
 </navigation>
