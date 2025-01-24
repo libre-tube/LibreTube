@@ -254,17 +254,6 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    /**
-     * Remove the focus of the search view in the toolbar
-     */
-    private fun removeSearchFocus() {
-        searchView.setQuery("", false)
-        searchView.clearFocus()
-        searchView.isIconified = true
-        searchItem.collapseActionView()
-        searchView.onActionViewCollapsed()
-    }
-
     private fun isSearchInProgress(): Boolean {
         if (!this::navController.isInitialized) return false
         val id = navController.currentDestination?.id ?: return false
@@ -560,9 +549,7 @@ class MainActivity : BaseActivity() {
         }
 
         // Remove focus from search view when navigating to bottom view.
-        // Call only after navigate to destination, so it can be used in
-        // onMenuItemActionCollapse for backstack management
-        removeSearchFocus()
+        searchItem.collapseActionView()
 
         return item.onNavDestinationSelected(navController)
     }
