@@ -1,0 +1,5 @@
+* feat: support for predictive back gestures
+* feat: support for local feed extraction
+* feat: support for exporting single playlists
+* feat: support for importing playlist as list of video ids / urls
+* feat: display full video sponsorblock categories
