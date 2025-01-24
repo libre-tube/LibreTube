@@ -248,7 +248,7 @@ class OfflinePlayerActivity : BaseActivity() {
         isInPictureInPictureMode: Boolean,
         newConfig: Configuration
     ) {
-        super.onPictureInPictureModeChanged(isInPictureInPictureMode)
+        super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig)
 
         if (isInPictureInPictureMode) {
             playerView.hideController()

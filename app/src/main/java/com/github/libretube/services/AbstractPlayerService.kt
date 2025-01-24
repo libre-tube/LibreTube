@@ -74,7 +74,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
         override fun onPlayerError(error: PlaybackException) {
             // show a toast on errors
-            toastFromMainThread(error.localizedMessage)
+            toastFromMainThread(error.localizedMessage.orEmpty())
         }
 
         override fun onEvents(player: Player, events: Player.Events) {
