@@ -27,7 +27,7 @@
     <string name="category_sponsor_summary">ការផ្សព្វផ្សាយបង់ប្រាក់, ការណែនាំបង់ប្រាក់ និងការផ្សាយពាណិជ្ជកម្មផ្ទាល់។ មិនសម្រាប់ការផ្សាយខ្លួនឯង/ក្លែងធ្វើឥតគិតថ្លៃ, ស្រែកហៅរកមូលហេតុ, អ្នកបង្កើតមាតិកា, វេបសាយ និងផលិតផល</string>
     <string name="category_interaction_summary">នៅពេលដែលមានការរំលឹកខ្លីមួយនៅកណ្តាលមាតិកាដើម្បី ចូលចិត្ត ជាវ ឬតាមដាន។ ប្រសិនបើវាវែង ឬអំពីអ្វីមួយជាក់លាក់ វាគួរតែជាការផ្សព្វផ្សាយខ្លួនឯងជំនួសវិញ</string>
     <string name="import_from_yt_summary">ពីយូធូប ឬ NewPipe</string>
-    <string name="update_available">កំណែ %1$s គឺអាចប្រើប្រាស់បាន</string>
+    <string name="update_available">អាប់ដេតអាចប្រើប្រាស់បាន</string>
     <string name="appearance">លក្ខណៈខាងក្រៅ</string>
     <string name="login_register">បញ្ជាប់ចូល/ចុះឈ្មោះ</string>
     <string name="search_hint">ស្វែងរក</string>
@@ -48,9 +48,9 @@
     <string name="addToPlaylist">បន្ថែមទៅកម្រងវីដេអូ</string>
     <string name="import_from_yt">នាំចូលការជាវ</string>
     <string name="loggedIn">បានបញ្ជាប់ចូល។</string>
-    <string name="retry">ព្យាយាមជាថ្មី</string>
+    <string name="retry">ព្យាយាមម្តងទៀត</string>
     <string name="playback_speed">ល្បឿនចាក់</string>
-    <string name="update_available_text">បច្ចុប្បន្នភាពថ្មីអាចប្រើប្រាស់បាន។ ចុចដើម្បីបើកទំព័រចេញផ្សាយ GitHub ។</string>
+    <string name="update_available_text">អាប់ដេតថ្មីអាចប្រើប្រាស់បាន។ ចុចដើម្បីបើកទំព័រចេញផ្សាយ GitHub ។</string>
     <string name="customization">កែតម្រូវ</string>
     <string name="instance">ឧបមា</string>
     <string name="areYouSure">លុបកម្រងវីដេអូឬ\?</string>
@@ -85,14 +85,14 @@
     <string name="sponsorblock_summary">ប្រើ API https://sponsor.ajay.app</string>
     <string name="logout">បណ្ដាច់ចេញ</string>
     <string name="replies">ឆ្លើយតប</string>
-    <string name="grid">ជួរឈរក្រឡាចត្រង្គ</string>
+    <string name="grid">ជួរឈរក្រឡាចត្រង្គ (បញ្ឈរ)</string>
     <string name="sponsorblock">ប្លុកឧបត្ថម្ភក</string>
     <string name="fail">បានបរាជ័យ :(</string>
     <string name="downloadfailed">ទាញយកបានបរាជ័យ។</string>
     <string name="donate">បរិច្ចាគ</string>
     <string name="music_artists">សិល្បករ យូធូបតន្ត្រី</string>
     <string name="login">បញ្ជាប់ចូល</string>
-    <string name="update_summary">ពិនិត្យបច្ចុប្បន្នភាព</string>
+    <string name="update_summary">ពិនិត្យអាប់ដេត</string>
     <string name="empty">អ្នកត្រូវវាយបញ្ចូលអត្ថនាម និងពាក្យសម្ងាត់។</string>
     <string name="systemLanguage">ប្រព័ន្ធ</string>
     <string name="settings">ការកំណត់</string>
@@ -107,7 +107,7 @@
     <string name="share">ចែករំលែក</string>
     <string name="color_red">ក្រហមស្រាល</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d វីដេអូ</string>
-    <string name="comments">ខម្មិន្ត</string>
+    <string name="comments">មតិ</string>
     <string name="unsubscribe">ឈប់ជាវ</string>
     <string name="customInstance">ផ្ទាល់ខ្លួន</string>
     <string name="behavior">ឥរិយាបថ</string>
@@ -198,7 +198,7 @@
     <string name="always">ជានិច្ច</string>
     <string name="concurrent_downloads">ការទាញយកស្របគ្នាអតិបរមា</string>
     <string name="player_autoplay">ស្វ័យចាក់</string>
-    <string name="related_streams_summary">បង្ហាញស្ទ្រីមស្រដៀងគ្នាជាមួយនឹងអ្វីដែលអ្នកមើល។</string>
+    <string name="related_streams_summary">បង្ហាញស្ទ្រីមស្រដៀងគ្នាជាមួយនឹងអ្វីដែលអ្នកមើល</string>
     <string name="empty_instance">បំពេញឈ្មោះនិង API URL។</string>
     <string name="landscape">ផ្ដេក</string>
     <string name="shapedIcon">រាងឆ្កួត</string>
@@ -268,4 +268,12 @@
     <string name="picture_in_picture">រូបក្នុងរូប</string>
     <string name="resize_mode_fit">សម</string>
     <string name="repeat_mode">ម៉ូតសារឡើងវិញ</string>
+    <string name="no_comments_available">វីដេអូនេះមិនមានមតិទេ។</string>
+    <string name="update_information">ព័ត៌មានអាប់ដេត</string>
+    <string name="albums">អាល់ប៊ុម</string>
+    <string name="finished">បានបញ្ចប់</string>
+    <string name="comments_count">មតិ (%1$s)</string>
+    <string name="show_updates">ពិនិត្យអាប់ដេតដោយស្វ័យប្រវត្តិ</string>
+    <string name="grid_landscape">ជួរឈរក្រឡាចត្រង្គ (ផ្តេក)</string>
+    <string name="comments_disabled">មតិត្រូវបានបិទដោយអ្នកបង្ហោះ។</string>
 </resources>
