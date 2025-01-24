@@ -22,7 +22,6 @@ import androidx.media3.common.TrackSelectionOverride
 import androidx.media3.common.Tracks
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.DefaultDataSource
-import androidx.media3.datasource.cronet.CronetDataSource
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.LoadControl
@@ -31,7 +30,6 @@ import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.media3.ui.CaptionStyleCompat
 import com.github.libretube.LibreTubeApp
 import com.github.libretube.R
-import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
@@ -50,7 +48,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.Locale
-import java.util.concurrent.Executors
 import kotlin.math.absoluteValue
 import kotlin.math.max
 import kotlin.math.roundToInt
@@ -520,11 +517,7 @@ object PlayerHelper {
         trackSelector: DefaultTrackSelector,
         isBackgroundMode: Boolean
     ): ExoPlayer {
-        val cronetDataSourceFactory = CronetDataSource.Factory(
-            CronetHelper.cronetEngine,
-            Executors.newCachedThreadPool()
-        )
-        val dataSourceFactory = DefaultDataSource.Factory(context, cronetDataSourceFactory)
+        val dataSourceFactory = DefaultDataSource.Factory(context)
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(C.USAGE_MEDIA)
             .setContentType(C.AUDIO_CONTENT_TYPE_MOVIE)

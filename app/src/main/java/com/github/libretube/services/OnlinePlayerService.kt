@@ -8,10 +8,9 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaItem.SubtitleConfiguration
 import androidx.media3.common.MimeTypes
 import androidx.media3.common.Player
-import androidx.media3.datasource.cronet.CronetDataSource
+import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.exoplayer.hls.HlsMediaSource
 import com.github.libretube.R
-import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.StreamsExtractor
@@ -37,7 +36,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
-import java.util.concurrent.Executors
 
 /**
  * Loads the selected videos audio in background mode with a notification area.
@@ -51,11 +49,6 @@ open class OnlinePlayerService : AbstractPlayerService() {
     private var playlistId: String? = null
     private var channelId: String? = null
     private var startTimestamp: Long? = null
-
-    private val cronetDataSourceFactory = CronetDataSource.Factory(
-        CronetHelper.cronetEngine,
-        Executors.newCachedThreadPool()
-    )
 
     /**
      * The response that gets when called the Api.
@@ -290,7 +283,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
             }
             // HLS
             streams.hls != null -> {
-                val hlsMediaSourceFactory = HlsMediaSource.Factory(cronetDataSourceFactory)
+                val hlsMediaSourceFactory = HlsMediaSource.Factory(DefaultDataSource.Factory(this))
                     .setPlaylistParserFactory(YoutubeHlsPlaylistParser.Factory())
 
                 val mediaItem = createMediaItem(

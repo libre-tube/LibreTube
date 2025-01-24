@@ -131,8 +131,6 @@ dependencies {
 
     /* Cronet and Coil */
     coreLibraryDesugaring(libs.desugaring)
-    implementation(libs.cronet.embedded)
-    implementation(libs.cronet.okhttp)
     implementation(libs.coil)
 
     /* Room */
