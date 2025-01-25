@@ -72,7 +72,7 @@
     <string name="category_music_offtopic">Музика: Сегмент без музике</string>
     <string name="category_preview">Преглед/Рекапитулација</string>
     <string name="category_preview_summary">За сегменте са детаљима будућег садржаја без додатних информација. Ако укључује клипове који се појављују само овде, ово је врло вероватно погрешна категорија</string>
-    <string name="color_accent">Боја за акценте</string>
+    <string name="color_accent">Боја наглашавања</string>
     <string name="color_yellow">Јарко жута</string>
     <string name="color_green">Дивна зелена</string>
     <string name="color_purple">Пријатна љубичаста</string>
