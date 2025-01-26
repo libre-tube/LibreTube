@@ -554,4 +554,8 @@
     <string name="crashlog">충돌 로그</string>
     <string name="export_playlist">플레이리스트 내보내기</string>
     <string name="import_format_list_of_urls">URL 또는 비디오 ID 목록</string>
+    <string name="local_feed_extraction">로컬에서 피드 추출</string>
+    <string name="never_show_again">다시 표시하지 않음</string>
+    <string name="update_information">업데이트 정보</string>
+    <string name="local_feed_extraction_summary">YouTube로부터 직접 피드를 받아옵니다. 속도가 상당히 감소할 수 있습니다.</string>
 </resources>
