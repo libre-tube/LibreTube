@@ -57,7 +57,6 @@ androidx-media = { group = "androidx.media", name = "media", version.ref = "medi
 androidx-media3-exoplayer = { group = "androidx.media3", name="media3-exoplayer", version.ref="media3" }
 androidx-media3-exoplayer-hls = { group = "androidx.media3", name="media3-exoplayer-hls", version.ref="media3" }
 androidx-media3-exoplayer-dash = { group = "androidx.media3", name="media3-exoplayer-dash", version.ref="media3" }
-androidx-media3-datasource-cronet = { group = "androidx.media3", name = "media3-datasource-cronet", version.ref = "media3" }
 androidx-media3-session = { group="androidx.media3", name="media3-session", version.ref="media3" }
 androidx-media3-ui = { group="androidx.media3", name="media3-ui", version.ref="media3" }
 newpipeextractor = { module = "com.github.teamnewpipe:NewPipeExtractor", version.ref = "newpipeextractor" }
