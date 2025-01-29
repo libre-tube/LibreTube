@@ -559,4 +559,5 @@
     <string name="import_format_list_of_urls">Listi yfir slóðir eða auðkenni myndskeiða</string>
     <string name="local_feed_extraction_summary">Sækja streymið beint frá YouTube. Þetta gæti verið umtalsvert hægvirkara.</string>
     <string name="local_feed_extraction">Afþjöppun á staðværu streymi</string>
+    <string name="never_show_again">Aldrei birta þetta framar</string>
 </resources>
