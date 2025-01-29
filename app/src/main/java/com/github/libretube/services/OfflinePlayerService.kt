@@ -47,6 +47,15 @@ open class OfflinePlayerService : AbstractPlayerService() {
             if (playbackState == Player.STATE_ENDED && PlayerHelper.isAutoPlayEnabled()) {
                 playNextVideo(PlayingQueue.getNext() ?: return)
             }
+
+            if (playbackState == Player.STATE_READY) {
+                scope.launch(Dispatchers.IO) {
+                    val watchHistoryItem = downloadWithItems?.download?.toStreamItem()?.toWatchHistoryItem(videoId)
+                    if (watchHistoryItem != null) {
+                        DatabaseHelper.addToWatchHistory(watchHistoryItem)
+                    }
+                }
+            }
         }
     }
 
@@ -95,7 +104,11 @@ open class OfflinePlayerService : AbstractPlayerService() {
 
             if (watchPositionsEnabled) {
                 DatabaseHelper.getWatchPosition(videoId)?.let {
-                    if (!DatabaseHelper.isVideoWatched(it, downloadWithItems.download.duration)) exoPlayer?.seekTo(it)
+                    if (!DatabaseHelper.isVideoWatched(
+                            it,
+                            downloadWithItems.download.duration
+                        )
+                    ) exoPlayer?.seekTo(it)
                 }
             }
         }
