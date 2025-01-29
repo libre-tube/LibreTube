@@ -2,6 +2,7 @@ package com.github.libretube.ui.models
 
 import android.content.Context
 import android.net.Uri
+import android.os.Parcelable
 import androidx.annotation.StringRes
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -20,6 +21,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.helpers.BackupHelper
 import com.github.libretube.helpers.PreferenceHelper
 import kotlinx.coroutines.launch
+import kotlinx.parcelize.Parcelize
 
 class WelcomeViewModel(
     private val instanceRepository: InstanceRepository,
@@ -87,12 +89,13 @@ class WelcomeViewModel(
         savedStateHandle["uiState"] = _uiState.value.copy(navigateToMain = null)
     }
 
+    @Parcelize
     data class UiState(
         val selectedInstanceIndex: Int? = null,
         val instances: List<PipedInstance> = emptyList(),
         @StringRes val error: Int? = null,
         val navigateToMain: Unit? = null,
-    )
+    ) : Parcelable
 
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
