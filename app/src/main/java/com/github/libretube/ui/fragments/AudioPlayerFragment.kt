@@ -12,6 +12,7 @@ import androidx.activity.BackEventCompat
 import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
+import androidx.core.math.MathUtils.clamp
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -397,8 +398,9 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
 
         // update the time bar current value and maximum value
         binding.timeBar.valueTo = (duration / 1000).toFloat()
-        binding.timeBar.value = minOf(
+        binding.timeBar.value = clamp(
             currentPosition / 1000,
+            binding.timeBar.valueFrom,
             binding.timeBar.valueTo
         )
 

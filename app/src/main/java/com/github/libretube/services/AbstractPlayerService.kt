@@ -327,7 +327,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     }
 
     private fun saveWatchPosition() {
-        if (isTransitioning || !watchPositionsEnabled) return
+        if (isTransitioning || !watchPositionsEnabled || !::videoId.isInitialized) return
 
         exoPlayer?.let { PlayerHelper.saveWatchPosition(it, videoId) }
     }
