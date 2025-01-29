@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="clonePlaylist">Клонирай плейлист</string>
-    <string name="deleteAccount">Изтрий акаунт</string>
+    <string name="deleteAccount">Изтрий профил</string>
     <string name="reset_watch_positions">Нулиране</string>
     <string name="startpage">Начало</string>
     <string name="subscriptions">Абонаменти</string>
@@ -194,7 +194,7 @@
     </plurals>
     <string name="welcome">Добре дошли в LibreTube</string>
     <string name="pinch_control">Контрол чрез прищипване</string>
-    <string name="notgmail">Това е за Piped акаунт</string>
+    <string name="notgmail">Това е за Piped профил</string>
     <string name="change_region">Изглежда, че тенденцията не е налична за текущия регион. Моля, изберете друг в настройките.</string>
     <string name="import_playlists_from">Внеси плейлисти от</string>
     <string name="tooltip_minimize">Минимизиране</string>
@@ -216,7 +216,7 @@
     <string name="category_filler">Филтър Допирателна/Вицове</string>
     <string name="category_preview_summary">За сегменти, описващи подробно бъдещо съдържание без допълнителна информация. Ако включва клипове, които се показват само тук, това много вероятно е грешната категория</string>
     <string name="misc">Разни</string>
-    <string name="deleteAccount_summary">Изтрий своя Piped акаунт</string>
+    <string name="deleteAccount_summary">Изтрий своя Piped профил</string>
     <string name="tooltip_locked">Заключи плейъра</string>
     <string name="color_green">Зелен</string>
     <string name="featured">Представено</string>
@@ -307,7 +307,7 @@
     <string name="faq">ЧЗВ</string>
     <string name="sort_by">Сортирай по</string>
     <string name="playback_speed">Скорост на възпроизвеждане</string>
-    <string name="account">Акаунт</string>
+    <string name="account">Профил</string>
     <string name="player_channel_description">Покажи известие при изпълнение</string>
     <string name="system_caption_style">Системен стил на надписи</string>
     <string name="tooltip_scroll_to_top">Превърти нагоре</string>
@@ -392,7 +392,7 @@
     <string name="fullscreen_gestures">Влизане/излизане от жестове на цял екран</string>
     <string name="repeat_mode_none">Нито един</string>
     <string name="player_summary">По подразбиране и поведение</string>
-    <string name="already_logged_in">Вече сте влезли. Можете да излезете от акаунта си.</string>
+    <string name="already_logged_in">Вече сте влезли. Можете да излезете от профила си.</string>
     <string name="proceed">Продължете</string>
     <string name="creation_date">Дата на създаване</string>
     <string name="category_selfpromo">Неплатено/Самореклама</string>
@@ -415,7 +415,7 @@
     <string name="choose_instance_long">Моля, изберете Piped инстанция, която да използвате отдолу. Инстанцията Piped ще действа като посредник между вас и YouTube. Тези инстанции се намират на различни физически местоположения - обозначени с техните флагове на държавата. Инстанциите, които са физически по-близо до вас, вероятно са по-бързи от инстанциите, които не са. Можете да промените инстанцията, който използвате в настройките по всяко време.</string>
     <string name="take_a_break">Време е за почивка</string>
     <string name="notification_time">Ограничи времето за известия</string>
-    <string name="instance_summary">Piped, вход, и акаунт</string>
+    <string name="instance_summary">Piped, вход, и профил</string>
     <string name="autoRotatePlayer_summary">Възпроизвеждане на цял екран при завъртане на устройството</string>
     <string name="double_tap_seek_summary">Докосни два пъти отляво или отдясно, за да превъртите назад или напред позицията на плейъра</string>
     <string name="group_name_error_empty">Моля, въведете име</string>
