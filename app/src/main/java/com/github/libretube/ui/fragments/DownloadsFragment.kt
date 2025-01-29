@@ -172,6 +172,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
             return@DownloadsAdapter isDownloading.not()
         }
         binding.downloadsRecView.adapter = adapter
+        adapter.submitList(downloads)
 
         var selectedSortType =
             PreferenceHelper.getInt(PreferenceKeys.SELECTED_DOWNLOAD_SORT_TYPE, 0)
