@@ -355,10 +355,7 @@ class MainActivity : BaseActivity() {
 
             override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
                 // Handover back press to `BackPressedDispatcher`
-                if (binding.bottomNav.menu.children.none {
-                        it.itemId == navController.currentDestination?.id
-                    }
-                ) {
+                if (navController.graph.findNode(R.id.searchFragment) == navController.currentDestination) {
                     this@MainActivity.onBackPressedDispatcher.onBackPressed()
                 }
 
