@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.KeyEvent
+import androidx.annotation.CallSuper
 import androidx.annotation.OptIn
 import androidx.core.app.ServiceCompat
 import androidx.core.os.bundleOf
@@ -51,7 +52,8 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     lateinit var videoId: String
         private set
 
-    var isTransitioning = true
+    var isTransitioning = false
+        private set
 
     val handler = Handler(Looper.getMainLooper())
 
@@ -86,6 +88,14 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
                     player,
                     trackSelector ?: return
                 )
+            }
+        }
+
+        override fun onPlaybackStateChanged(playbackState: Int) {
+            super.onPlaybackStateChanged(playbackState)
+
+            if (playbackState == Player.STATE_READY) {
+                isTransitioning = false
             }
         }
     }
@@ -311,7 +321,10 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
      *
      * This function should base its actions on the videoId variable.
      */
-    abstract suspend fun startPlayback()
+    @CallSuper
+    open suspend fun startPlayback() {
+        isTransitioning = true
+    }
 
     private fun saveWatchPosition() {
         if (isTransitioning || !watchPositionsEnabled) return
