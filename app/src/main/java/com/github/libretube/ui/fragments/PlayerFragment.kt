@@ -1128,13 +1128,14 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         if (PlayerHelper.relatedStreamsEnabled) {
             val relatedLayoutManager = binding.relatedRecView.layoutManager as LinearLayoutManager
             binding.relatedRecView.adapter = VideosAdapter(
-                streams.relatedStreams.filter { !it.title.isNullOrBlank() }.toMutableList(),
                 forceMode = if (relatedLayoutManager.orientation == LinearLayoutManager.HORIZONTAL) {
                     VideosAdapter.Companion.LayoutMode.RELATED_COLUMN
                 } else {
                     VideosAdapter.Companion.LayoutMode.TRENDING_ROW
                 }
-            )
+            ).also { adapter ->
+                adapter.submitList(streams.relatedStreams.filter { !it.title.isNullOrBlank() })
+            }
         }
 
         // update the subscribed state
