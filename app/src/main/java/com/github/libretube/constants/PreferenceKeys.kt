@@ -90,6 +90,7 @@ object PreferenceKeys {
     const val SHOW_TIME_LEFT = "show_time_left"
     const val ALLOW_PLAYBACK_DURING_CALL = "playback_during_call"
     const val BEHAVIOR_WHEN_MINIMIZED = "behavior_when_minimized"
+    const val REPEAT_MODE = "repeat_mode"
 
     // SponsorBlock
     const val SB_USER_ID = "sb_user_id"

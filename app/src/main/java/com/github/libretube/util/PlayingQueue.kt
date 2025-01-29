@@ -19,7 +19,12 @@ object PlayingQueue {
 
     private val queueJobs = mutableListOf<Job>()
 
-    var repeatMode: Int = Player.REPEAT_MODE_OFF
+    // wrapper around PlayerHelper#repeatMode for compatibility
+    var repeatMode: Int
+        get() = PlayerHelper.repeatMode
+        set(value) {
+            PlayerHelper.repeatMode = value
+        }
 
     fun clear() {
         queueJobs.forEach {
@@ -215,9 +220,5 @@ object PlayingQueue {
         if (isLast() && repeatMode == Player.REPEAT_MODE_ALL) return
 
         add(*streams.filter { !it.isLive }.toTypedArray(), skipExisting = true)
-    }
-
-    fun resetToDefaults() {
-        repeatMode = Player.REPEAT_MODE_OFF
     }
 }

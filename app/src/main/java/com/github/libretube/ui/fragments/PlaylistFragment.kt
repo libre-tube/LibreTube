@@ -242,7 +242,6 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
                     binding.bookmark.text = getString(R.string.shuffle)
                     binding.bookmark.setOnClickListener {
                         val queue = playlistFeed.shuffled()
-                        PlayingQueue.resetToDefaults()
                         PlayingQueue.add(*queue.toTypedArray())
                         NavigationHelper.navigateVideo(
                             requireContext(),

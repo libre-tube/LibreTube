@@ -98,8 +98,6 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     ): ListenableFuture<SessionResult> {
         when (customCommand.customAction) {
             START_SERVICE_ACTION -> {
-                PlayingQueue.resetToDefaults()
-
                 CoroutineScope(Dispatchers.IO).launch {
                     onServiceCreated(args)
                     notificationProvider?.intentActivity = getIntentActivity()
@@ -361,8 +359,6 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         // java.lang.SecurityException: Session rejected the connection request.
         // because there can't be two active playerControllers at the same time.
         handler.postDelayed(50) {
-            PlayingQueue.resetToDefaults()
-
             saveWatchPosition()
 
             notificationProvider = null
