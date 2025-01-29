@@ -178,7 +178,6 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
         val watchHistory = history.filterByStatusAndWatchPosition()
 
         binding.playAll.setOnClickListener {
-            PlayingQueue.resetToDefaults()
             PlayingQueue.add(
                 *watchHistory.reversed().map(WatchHistoryItem::toStreamItem).toTypedArray()
             )

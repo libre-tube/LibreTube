@@ -375,6 +375,12 @@ object PlayerHelper {
             true
         )
 
+    var repeatMode: Int
+        get() = PreferenceHelper.getInt(PreferenceKeys.REPEAT_MODE, Player.REPEAT_MODE_OFF)
+        set(value) {
+            PreferenceHelper.putInt(PreferenceKeys.REPEAT_MODE, value)
+        }
+
     fun isAutoPlayEnabled(isPlaylist: Boolean = false): Boolean {
         return autoPlayEnabled || (isPlaylist && PreferenceHelper
             .getBoolean(PreferenceKeys.AUTOPLAY_PLAYLISTS, false))
