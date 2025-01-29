@@ -77,8 +77,6 @@ open class OnlinePlayerService : AbstractPlayerService() {
 
                 Player.STATE_BUFFERING -> {}
                 Player.STATE_READY -> {
-                    isTransitioning = false
-
                     // save video to watch history when the video starts playing or is being resumed
                     // waiting for the player to be ready since the video can't be claimed to be watched
                     // while it did not yet start actually, but did buffer only so far
@@ -113,10 +111,10 @@ open class OnlinePlayerService : AbstractPlayerService() {
     }
 
     override suspend fun startPlayback() {
+        super.startPlayback()
+
         val timestamp = startTimestamp ?: 0L
         startTimestamp = null
-
-        isTransitioning = true
 
         streams = withContext(Dispatchers.IO) {
             try {
