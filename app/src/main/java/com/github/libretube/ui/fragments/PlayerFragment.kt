@@ -511,6 +511,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
             playerController = it
             playerController.addListener(playerListener)
+            updatePlayPauseButton()
 
             if (!startNewSession) {
                 val streams: Streams? =
@@ -1127,13 +1128,14 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         if (PlayerHelper.relatedStreamsEnabled) {
             val relatedLayoutManager = binding.relatedRecView.layoutManager as LinearLayoutManager
             binding.relatedRecView.adapter = VideosAdapter(
-                streams.relatedStreams.filter { !it.title.isNullOrBlank() }.toMutableList(),
                 forceMode = if (relatedLayoutManager.orientation == LinearLayoutManager.HORIZONTAL) {
                     VideosAdapter.Companion.LayoutMode.RELATED_COLUMN
                 } else {
                     VideosAdapter.Companion.LayoutMode.TRENDING_ROW
                 }
-            )
+            ).also { adapter ->
+                adapter.submitList(streams.relatedStreams.filter { !it.title.isNullOrBlank() })
+            }
         }
 
         // update the subscribed state
@@ -1489,6 +1491,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             playerLayoutOrientation = orientation
 
             viewModel.isOrientationChangeInProgress = true
+
+            // detatch player view from player to stop surface rendering
+            binding.player.player = null
 
             if (::playerController.isInitialized) playerController.release()
 

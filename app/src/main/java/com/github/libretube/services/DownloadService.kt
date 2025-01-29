@@ -20,7 +20,6 @@ import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.LibreTubeApp.Companion.DOWNLOAD_CHANNEL_NAME
 import com.github.libretube.R
-import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.StreamsExtractor
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
@@ -47,7 +46,6 @@ import com.github.libretube.receivers.NotificationReceiver.Companion.ACTION_DOWN
 import com.github.libretube.receivers.NotificationReceiver.Companion.ACTION_DOWNLOAD_RESUME
 import com.github.libretube.receivers.NotificationReceiver.Companion.ACTION_DOWNLOAD_STOP
 import com.github.libretube.ui.activities.MainActivity
-import com.google.net.cronet.okhttptransport.CronetInterceptor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
@@ -95,12 +93,9 @@ class DownloadService : LifecycleService() {
     val downloadFlow: SharedFlow<Pair<Int, DownloadStatus>> = _downloadFlow
 
     private val httpClient: OkHttpClient by lazy {
-        val cronetInterceptor = CronetInterceptor.newBuilder(CronetHelper.cronetEngine).build()
-
         OkHttpClient.Builder()
             .connectTimeout(Duration.ofMillis(DownloadHelper.DEFAULT_TIMEOUT.toLong()))
             .readTimeout(Duration.ofMillis(DownloadHelper.DEFAULT_TIMEOUT.toLong()))
-            .addInterceptor(cronetInterceptor)
             .retryOnConnectionFailure(true)
             .build()
     }

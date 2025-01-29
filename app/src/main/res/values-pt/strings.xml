@@ -560,4 +560,8 @@
     <string name="category_exclusive_access">Acesso exclusivo</string>
     <string name="export_playlist">Exportar lista de reprodução</string>
     <string name="crashlog">Registo de erros</string>
+    <string name="never_show_again">Não mostrar novamente</string>
+    <string name="update_information">Informações relevantes</string>
+    <string name="local_feed_extraction">Extração local de fontes</string>
+    <string name="local_feed_extraction_summary">Obter videos diretamente do YouTube. Pode ter impacto na velocidade.</string>
 </resources>

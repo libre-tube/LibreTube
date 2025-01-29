@@ -548,4 +548,14 @@
     <string name="view_count">%1$s回</string>
     <string name="dialog_play_offline_title">この動画は端末内にあります。</string>
     <string name="dialog_play_offline_body">ダウンロードフォルダにある動画を再生しますか？</string>
+    <string name="never_show_again">再度表示しない</string>
+    <string name="update_information">更新のお知らせ</string>
+    <string name="local_feed_extraction">ローカルフィードの抽出</string>
+    <string name="local_feed_extraction_summary">YouTube から直接フィードを取得。かなり遅い可能性あり。</string>
+    <string name="upcoming">配信予定</string>
+    <string name="category_exclusive_access">独占的な広告</string>
+    <string name="export_playlist">再生リストのエクスポート</string>
+    <string name="import_format_list_of_urls">URLや動画IDの一覧</string>
+    <string name="crashlog">クラッシュの記録</string>
+    <string name="delete_only_watched_videos">視聴済みの動画のみ削除</string>
 </resources>

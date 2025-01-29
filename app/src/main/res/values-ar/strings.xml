@@ -571,4 +571,6 @@
     <string name="import_format_list_of_urls">قائمة عناوين URL أو معرّفات الفيديو</string>
     <string name="local_feed_extraction">استخراج موجز المحلية</string>
     <string name="local_feed_extraction_summary">قم بجلب الخلاصة مباشرةً من YouTube. قد يكون هذا أبطأ بشكل ملحوظ.</string>
+    <string name="update_information">تحديث المعلومات</string>
+    <string name="never_show_again">لا تعرض هذا مجدداً</string>
 </resources>

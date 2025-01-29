@@ -25,7 +25,7 @@ class ChannelGroupsSheet : ExpandedBottomSheet(R.layout.dialog_subscription_grou
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val binding = DialogSubscriptionGroupsBinding.inflate(layoutInflater)
+        val binding = DialogSubscriptionGroupsBinding.bind(view)
         binding.groupsRV.layoutManager = LinearLayoutManager(context)
         val groups = channelGroupsModel.groups.value.orEmpty().toMutableList()
         val adapter = SubscriptionGroupsAdapter(groups, channelGroupsModel, parentFragmentManager)

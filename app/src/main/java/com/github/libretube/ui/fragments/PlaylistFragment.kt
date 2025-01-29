@@ -242,7 +242,6 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
                     binding.bookmark.text = getString(R.string.shuffle)
                     binding.bookmark.setOnClickListener {
                         val queue = playlistFeed.shuffled()
-                        PlayingQueue.resetToDefaults()
                         PlayingQueue.add(*queue.toTypedArray())
                         NavigationHelper.navigateVideo(
                             requireContext(),
@@ -325,6 +324,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
             playlistId,
             playlistType
         )
+        // TODO make sure the adapter is set once in onViewCreated
         binding.playlistRecView.adapter = playlistAdapter
 
         // listen for playlist items to become deleted
