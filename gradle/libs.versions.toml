@@ -21,7 +21,6 @@ coil = "2.7.0"
 room = "2.6.1"
 kotlinxSerialization = "1.6.3"
 kotlinxDatetime = "0.6.1"
-kotlinxRetrofit = "1.0.0"
 media = "1.7.0"
 media3 = "1.4.1"
 activity = "1.9.3"
@@ -61,6 +60,7 @@ androidx-media3-session = { group="androidx.media3", name="media3-session", vers
 androidx-media3-ui = { group="androidx.media3", name="media3-ui", version.ref="media3" }
 newpipeextractor = { module = "com.github.teamnewpipe:NewPipeExtractor", version.ref = "newpipeextractor" }
 square-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+converter-kotlinx-serialization = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "retrofit" }
 desugaring = { group = "com.android.tools", name = "desugar_jdk_libs_nio", version.ref = "desugaring" }
 coil = { group = "io.coil-kt", name = "coil", version.ref="coil" }
 lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
@@ -71,7 +71,6 @@ room = { group = "androidx.room", name="room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
-kotlinx-serialization-retrofit = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "kotlinxRetrofit" }
 androidx-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
 androidx-benchmark-macro-junit4 = { group = "androidx.benchmark", name = "benchmark-macro-junit4", version.ref = "benchmarkMacroJunit4" }
 androidx-profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "profileinstaller" }
