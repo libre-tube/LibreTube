@@ -21,7 +21,6 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentTrendsBinding
 import com.github.libretube.databinding.FragmentTrendsContentBinding
 import com.github.libretube.extensions.serializable
-import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.adapters.VideoCardsAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
@@ -127,7 +126,7 @@ class TrendsContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_tre
             }
         })
 
-        viewModel.fetchTrending(requireContext())
+        viewModel.fetchTrending(requireContext(), category)
         lifecycleScope.launch {
             // every time the user navigates to the fragment for the selected category,
             // fetch the trends for the selected category if they're not yet cached
@@ -136,10 +135,6 @@ class TrendsContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_tre
                     viewModel.fetchTrending(requireContext(), category)
                 }
             }
-        }
-
-        if (NavBarHelper.getStartFragmentId(requireContext()) != R.id.trendsFragment) {
-            setupFragmentAnimation(binding.root)
         }
     }
 
