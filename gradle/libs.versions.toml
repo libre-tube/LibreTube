@@ -17,7 +17,7 @@ espresso = "3.6.1"
 workRuntime = "2.9.1"
 retrofit = "2.11.0"
 desugaring = "2.1.4"
-coil = "2.7.0"
+coil = "3.0.4"
 room = "2.6.1"
 kotlinxSerialization = "1.6.3"
 kotlinxDatetime = "0.6.1"
@@ -62,7 +62,8 @@ androidx-media3-ui = { group="androidx.media3", name="media3-ui", version.ref="m
 newpipeextractor = { module = "com.github.teamnewpipe:NewPipeExtractor", version.ref = "newpipeextractor" }
 square-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 desugaring = { group = "com.android.tools", name = "desugar_jdk_libs_nio", version.ref = "desugaring" }
-coil = { group = "io.coil-kt", name = "coil", version.ref="coil" }
+coil = { group = "io.coil-kt.coil3", name = "coil", version.ref = "coil" }
+coil-network-okhttp = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil"}
 lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
 lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }
