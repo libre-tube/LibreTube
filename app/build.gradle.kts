@@ -128,7 +128,7 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.kotlinx.serialization)
     implementation(libs.kotlinx.datetime)
-    implementation(libs.kotlinx.serialization.retrofit)
+    implementation(libs.converter.kotlinx.serialization)
 
     /* NewPipe Extractor */
     implementation(libs.newpipeextractor)
