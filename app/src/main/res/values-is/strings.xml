@@ -192,7 +192,7 @@
     <string name="proxy">Milliþjónn</string>
     <string name="channel_groups">Rásarhópar</string>
     <string name="play_automatically">Spila sjálfvirkt</string>
-    <string name="auto_fullscreen_shorts">Sjálfvirk skjáfylli stuttra myndskeiða</string>
+    <string name="auto_fullscreen_shorts">Sjálfvirk skjáfylli uppréttra myndskeiða</string>
     <string name="playlist_description">Lýsing spilunarlista</string>
     <string name="visibility_public">Opinber</string>
     <string name="play_automatically_summary">Hefja spilun sjálfkrafa þegar myndskeið er valið</string>
@@ -259,7 +259,7 @@
     <string name="default_subtitle_language">Tungumál skjátexta</string>
     <string name="notify_new_streams_summary">Birta tilkynningar um ný streymi fráframleiðendum efnis sem þú fylgist með</string>
     <string name="background_mode">Bakgrunnshamur</string>
-    <string name="yt_shorts">Stuttmyndir</string>
+    <string name="yt_shorts">Símamyndir</string>
     <string name="most_views">Mest áhorf</string>
     <string name="show_stream_thumbnails">Birta smámyndir streyma</string>
     <string name="hls_instead_of_dash">Nota HLS</string>
@@ -434,7 +434,7 @@
     <string name="creation_date_reversed">Upprunadagsetning (öfugt)</string>
     <string name="alphabetic">Stafrófsröð</string>
     <string name="duration_reversed">Tímalengd (öfug)</string>
-    <string name="shorts_notifications">Tilkynningar fyrir stuttmyndir</string>
+    <string name="shorts_notifications">Tilkynningar fyrir uppréttar símamyndir</string>
     <string name="change_playlist_description">Breyta lýsingu á spilunarlista</string>
     <string name="emptyPlaylistDescription">Lýsing á spilunarlista má ekki vera auð</string>
     <string name="no_fullscreen_resolution">Engin upplausn fyrir skjáfylli</string>
