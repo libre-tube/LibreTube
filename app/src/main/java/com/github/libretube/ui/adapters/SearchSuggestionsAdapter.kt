@@ -2,24 +2,15 @@ package com.github.libretube.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.databinding.SuggestionRowBinding
+import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.viewholders.SuggestionsViewHolder
 
 class SearchSuggestionsAdapter(
     private val onRootClickListener: (String) -> Unit,
     private val onArrowClickListener: (String) -> Unit,
-) : ListAdapter<String, SuggestionsViewHolder>(object: DiffUtil.ItemCallback<String>() {
-    override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
-        return oldItem == newItem
-    }
-
-    override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
-        return oldItem == newItem
-    }
-
-}) {
+) : ListAdapter<String, SuggestionsViewHolder>(DiffUtilItemCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuggestionsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

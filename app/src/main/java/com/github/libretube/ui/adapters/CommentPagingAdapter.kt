@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.DiffUtil
 import com.github.libretube.R
 import com.github.libretube.api.obj.Comment
 import com.github.libretube.constants.IntentData
@@ -25,6 +24,7 @@ import com.github.libretube.helpers.ClipboardHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.ThemeHelper
+import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.fragments.CommentsRepliesFragment
 import com.github.libretube.ui.viewholders.CommentsViewHolder
 import com.github.libretube.util.HtmlParser
@@ -37,7 +37,10 @@ class CommentPagingAdapter(
     private val isRepliesAdapter: Boolean = false,
     private val handleLink: ((url: String) -> Unit)?,
     private val dismiss: () -> Unit
-) : PagingDataAdapter<Comment, CommentsViewHolder>(CommentCallback) {
+) : PagingDataAdapter<Comment, CommentsViewHolder>(DiffUtilItemCallback(
+    areItemsTheSame = { oldItem, newItem -> oldItem.commentId == newItem.commentId},
+    areContentsTheSame = { _, _ -> true },
+)) {
     private var clickEventConsumedByLinkHandler = false
 
     private fun navigateToReplies(comment: Comment) {
@@ -139,12 +142,4 @@ class CommentPagingAdapter(
         val binding = CommentsRowBinding.inflate(layoutInflater, parent, false)
         return CommentsViewHolder(binding)
     }
-}
-
-private object CommentCallback : DiffUtil.ItemCallback<Comment>() {
-    override fun areItemsTheSame(oldItem: Comment, newItem: Comment): Boolean {
-        return oldItem.commentId == newItem.commentId
-    }
-
-    override fun areContentsTheSame(oldItem: Comment, newItem: Comment) = true
 }

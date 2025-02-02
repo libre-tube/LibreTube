@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
@@ -21,6 +20,7 @@ import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.ui.activities.OfflinePlayerActivity
+import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.fragments.DownloadTab
@@ -39,20 +39,7 @@ class DownloadsAdapter(
     private val context: Context,
     private val downloadTab: DownloadTab,
     private val toggleDownload: (DownloadWithItems) -> Boolean
-) : ListAdapter<DownloadWithItems, DownloadsViewHolder>(object :
-    DiffUtil.ItemCallback<DownloadWithItems>() {
-    override fun areItemsTheSame(oldItem: DownloadWithItems, newItem: DownloadWithItems): Boolean {
-        return oldItem == newItem
-    }
-
-    override fun areContentsTheSame(
-        oldItem: DownloadWithItems,
-        newItem: DownloadWithItems
-    ): Boolean {
-        return oldItem == newItem
-    }
-
-}) {
+) : ListAdapter<DownloadWithItems, DownloadsViewHolder>(DiffUtilItemCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DownloadsViewHolder {
         val binding = VideoRowBinding.inflate(
             LayoutInflater.from(parent.context),

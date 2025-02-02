@@ -8,7 +8,6 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
@@ -25,6 +24,7 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setFormattedDuration
 import com.github.libretube.ui.extensions.setWatchProgressLength
@@ -38,16 +38,8 @@ import kotlinx.coroutines.withContext
 
 class VideosAdapter(
     private val forceMode: LayoutMode = LayoutMode.RESPECT_PREF
-) : ListAdapter<StreamItem, VideosViewHolder>(object: DiffUtil.ItemCallback<StreamItem>() {
-    override fun areItemsTheSame(oldItem: StreamItem, newItem: StreamItem): Boolean {
-        return oldItem == newItem
-    }
+) : ListAdapter<StreamItem, VideosViewHolder>(DiffUtilItemCallback()) {
 
-    override fun areContentsTheSame(oldItem: StreamItem, newItem: StreamItem): Boolean {
-        return oldItem == newItem
-    }
-
-}) {
     override fun getItemViewType(position: Int): Int {
         return if (currentList[position].type == CAUGHT_UP_STREAM_TYPE) CAUGHT_UP_TYPE else NORMAL_TYPE
     }
