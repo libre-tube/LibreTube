@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.widget.ImageView
-import androidx.core.graphics.drawable.toBitmapOrNull
 import androidx.core.net.toUri
 import coil3.ImageLoader
 import coil3.asDrawable
@@ -16,6 +15,7 @@ import coil3.network.okhttp.OkHttpNetworkFetcherFactory
 import coil3.request.CachePolicy
 import coil3.request.ImageRequest
 import coil3.request.crossfade
+import coil3.toBitmap
 import com.github.libretube.BuildConfig
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toAndroidUri
@@ -116,8 +116,7 @@ object ImageHelper {
             .data(url)
             .build()
 
-        imageLoader.execute(request)
-        return imageLoader.execute(request).image?.asDrawable(context.resources)?.toBitmapOrNull()
+        return imageLoader.execute(request).image?.toBitmap()
     }
 
     private fun getImageWithCallback(context: Context, url: String?, onSuccess: (Drawable) -> Unit) {
