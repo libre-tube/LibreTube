@@ -356,7 +356,7 @@
     <string name="concurrent_downloads">Maximale Anzahl gleichzeitiger Downloads</string>
     <string name="sleep_timer">Einschlaf-Timer</string>
     <string name="skip_silence">Stille überspringen</string>
-    <string name="mark_as_watched">Als gesehen markieren</string>
+    <string name="mark_as_watched">Als angesehen markieren</string>
     <string name="unsupported_file_format">Nicht unterstütztes Dateiformat: %1$s</string>
     <string name="codecs">Videocodecs</string>
     <string name="custom_playback_speed">Benutzerdefinierte Geschwindigkeit</string>
@@ -504,7 +504,7 @@
     <string name="time_in_minutes">Zeit in Minuten</string>
     <string name="invalid_input">Ungültige Eingabe</string>
     <string name="disable_sleep_timer">Schlaf-Timer deaktivieren</string>
-    <string name="watched">Gesehen</string>
+    <string name="watched">Angesehen</string>
     <string name="start_sleep_timer">Schlaf-Timer starten</string>
     <string name="finished">Fertig</string>
     <string name="no_segments_found">Für dieses Video sind bisher keine Abschnitte vorhanden.</string>
