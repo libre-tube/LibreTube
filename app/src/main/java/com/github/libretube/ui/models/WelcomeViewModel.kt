@@ -28,17 +28,17 @@ class WelcomeViewModel(
     private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
-    private val _uiState = savedStateHandle.getStateFlow("uiState", UiState())
+    private val _uiState = savedStateHandle.getStateFlow(UI_STATE, UiState())
     val uiState = _uiState.asLiveData()
 
     init {
         viewModelScope.launch {
             instanceRepository.getInstances()
                 .onSuccess { instances ->
-                    savedStateHandle["uiState"] = _uiState.value.copy(instances = instances)
+                    savedStateHandle[UI_STATE] = _uiState.value.copy(instances = instances)
                 }
                 .onFailure {
-                    savedStateHandle["uiState"] = _uiState.value.copy(
+                    savedStateHandle[UI_STATE] = _uiState.value.copy(
                         instances = instanceRepository.getInstancesFallback(),
                         error = R.string.failed_fetching_instances,
                     )
@@ -47,13 +47,13 @@ class WelcomeViewModel(
     }
 
     fun setSelectedInstanceIndex(index: Int) {
-        savedStateHandle["uiState"] = _uiState.value.copy(selectedInstanceIndex = index)
+        savedStateHandle[UI_STATE] = _uiState.value.copy(selectedInstanceIndex = index)
     }
 
     fun saveSelectedInstance() {
         val selectedInstanceIndex = _uiState.value.selectedInstanceIndex
         if (selectedInstanceIndex == null) {
-            savedStateHandle["uiState"] = _uiState.value.copy(error = R.string.choose_instance)
+            savedStateHandle[UI_STATE] = _uiState.value.copy(error = R.string.choose_instance)
         } else {
             PreferenceHelper.putString(
                 PreferenceKeys.FETCH_INSTANCE,
@@ -78,15 +78,15 @@ class WelcomeViewModel(
     private fun refreshAndNavigate() {
         // refresh the api urls since they have changed likely
         RetrofitInstance.lazyMgr.reset()
-        savedStateHandle["uiState"] = _uiState.value.copy(navigateToMain = Unit)
+        savedStateHandle[UI_STATE] = _uiState.value.copy(navigateToMain = Unit)
     }
 
     fun onErrorShown() {
-        savedStateHandle["uiState"] = _uiState.value.copy(error = null)
+        savedStateHandle[UI_STATE] = _uiState.value.copy(error = null)
     }
 
     fun onNavigated() {
-        savedStateHandle["uiState"] = _uiState.value.copy(navigateToMain = null)
+        savedStateHandle[UI_STATE] = _uiState.value.copy(navigateToMain = null)
     }
 
     @Parcelize
@@ -98,6 +98,8 @@ class WelcomeViewModel(
     ) : Parcelable
 
     companion object {
+        private const val UI_STATE = "ui_state"
+
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 WelcomeViewModel(
