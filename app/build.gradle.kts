@@ -136,6 +136,7 @@ dependencies {
     /* Coil */
     coreLibraryDesugaring(libs.desugaring)
     implementation(libs.coil)
+    implementation(libs.coil.network.okhttp)
 
     /* Room */
     ksp(libs.room.compiler)
