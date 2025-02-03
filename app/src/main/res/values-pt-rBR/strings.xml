@@ -560,4 +560,8 @@
     <string name="crashlog">Log de erros</string>
     <string name="import_format_list_of_urls">Lista de URL ou ID dos vídeos</string>
     <string name="export_playlist">Exportar playlist</string>
+    <string name="update_information">Informações sobre atualização</string>
+    <string name="never_show_again">Não mostrar novamente</string>
+    <string name="local_feed_extraction_summary">Buscar diretamente o feed do YouTube. Isso pode ser significativamente mais lento.</string>
+    <string name="local_feed_extraction">Extração local de feed</string>
 </resources>
