@@ -51,6 +51,7 @@ import androidx.media3.common.Player
 import androidx.media3.session.MediaController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
+import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
@@ -66,7 +67,6 @@ import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.parcelable
-import com.github.libretube.extensions.parcelableList
 import com.github.libretube.extensions.serializableExtra
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.togglePlayPauseState
@@ -308,7 +308,10 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         override fun onMediaMetadataChanged(mediaMetadata: MediaMetadata) {
             super.onMediaMetadataChanged(mediaMetadata)
 
-            val maybeStreams: Streams? = mediaMetadata.extras?.parcelable(IntentData.streams)
+            // JSON-encode as work-around for https://github.com/androidx/media/issues/564
+            val maybeStreams: Streams? = mediaMetadata.extras?.getString(IntentData.streams)?.let {
+                JsonHelper.json.decodeFromString(it)
+            }
             maybeStreams?.let { streams ->
                 this@PlayerFragment.streams = streams
                 viewModel.segments.postValue(emptyList())
@@ -332,7 +335,10 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 }
             }
 
-            val segments: List<Segment>? = mediaMetadata.extras?.parcelableList(IntentData.segments)
+            // JSON-encode as work-around for https://github.com/androidx/media/issues/564
+            val segments: List<Segment>? = mediaMetadata.extras?.getString(IntentData.segments)?.let {
+                JsonHelper.json.decodeFromString(it)
+            }
             viewModel.segments.postValue(segments.orEmpty())
         }
 
@@ -514,8 +520,11 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             updatePlayPauseButton()
 
             if (!startNewSession) {
+                // JSON-encode as work-around for https://github.com/androidx/media/issues/564
                 val streams: Streams? =
-                    playerController.mediaMetadata.extras?.parcelable(IntentData.streams)
+                    playerController.mediaMetadata.extras?.getString(IntentData.streams)?.let { json ->
+                        JsonHelper.json.decodeFromString(json)
+                    }
 
                 // reload the streams data and playback, metadata apparently no longer exists
                 if (streams == null) {

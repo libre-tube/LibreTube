@@ -207,7 +207,9 @@ open class OnlinePlayerService : AbstractPlayerService() {
 
             withContext(Dispatchers.Main) {
                 updatePlaylistMetadata {
-                    setExtras(bundleOf(IntentData.segments to ArrayList(sponsorBlockSegments)))
+                    // JSON-encode as work-around for https://github.com/androidx/media/issues/564
+                    val segments = JsonHelper.json.encodeToString(sponsorBlockSegments)
+                    setExtras(bundleOf(IntentData.segments to segments))
                 }
 
                 checkForSegments()
