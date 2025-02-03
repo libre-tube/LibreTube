@@ -25,14 +25,13 @@ import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.session.MediaController
 import com.github.libretube.R
+import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentAudioPlayerBinding
 import com.github.libretube.extensions.navigateVideo
 import com.github.libretube.extensions.normalize
-import com.github.libretube.extensions.parcelableList
 import com.github.libretube.extensions.seekBy
-import com.github.libretube.extensions.serializable
 import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateIfChanged
 import com.github.libretube.helpers.AudioHelper
@@ -194,8 +193,11 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
         }
 
         binding.openChapters.setOnClickListener {
+            // JSON-encode as work-around for https://github.com/androidx/media/issues/564
             chaptersModel.chaptersLiveData.value =
-                playerController?.mediaMetadata?.extras?.serializable(IntentData.chapters)
+                playerController?.mediaMetadata?.extras?.getString(IntentData.chapters)?.let {
+                    JsonHelper.json.decodeFromString(it)
+                }
 
             ChaptersBottomSheet()
                 .apply {
@@ -430,7 +432,10 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
                 super.onMediaMetadataChanged(mediaMetadata)
 
                 updateStreamInfo(mediaMetadata)
-                val chapters: List<ChapterSegment>? = mediaMetadata.extras?.parcelableList(IntentData.chapters)
+                // JSON-encode as work-around for https://github.com/androidx/media/issues/564
+                val chapters: List<ChapterSegment>? = mediaMetadata.extras?.getString(IntentData.chapters)?.let {
+                    JsonHelper.json.decodeFromString(it)
+                }
                 _binding?.openChapters?.isVisible = !chapters.isNullOrEmpty()
             }
         })
