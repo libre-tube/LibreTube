@@ -18,7 +18,7 @@ import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
-import com.github.libretube.ui.adapters.callbacks.SearchCallback
+import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setFormattedDuration
 import com.github.libretube.ui.extensions.setWatchProgressLength
@@ -31,7 +31,12 @@ import com.github.libretube.util.TextUtils
 import kotlinx.serialization.encodeToString
 
 // TODO: Replace with SearchResultsAdapter when migrating the channel fragment to use Paging as well
-class SearchChannelAdapter : ListAdapter<ContentItem, SearchViewHolder>(SearchCallback) {
+class SearchChannelAdapter : ListAdapter<ContentItem, SearchViewHolder>(
+    DiffUtilItemCallback(
+        areItemsTheSame = { oldItem, newItem -> oldItem.url == newItem.url },
+        areContentsTheSame = { _, _ -> true },
+    )
+) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 

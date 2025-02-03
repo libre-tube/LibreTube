@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
@@ -16,6 +15,7 @@ import com.github.libretube.db.obj.PlaylistBookmark
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.ui.viewholders.PlaylistBookmarkViewHolder
@@ -25,16 +25,11 @@ import kotlinx.coroutines.launch
 
 class PlaylistBookmarkAdapter(
     private val bookmarkMode: BookmarkMode = BookmarkMode.FRAGMENT
-) : ListAdapter<PlaylistBookmark, PlaylistBookmarkViewHolder>(object: DiffUtil.ItemCallback<PlaylistBookmark>() {
-    override fun areItemsTheSame(oldItem: PlaylistBookmark, newItem: PlaylistBookmark): Boolean {
-        return oldItem.playlistId == newItem.playlistId
-    }
-
-    override fun areContentsTheSame(oldItem: PlaylistBookmark, newItem: PlaylistBookmark): Boolean {
-        return oldItem == newItem
-    }
-
-}) {
+) : ListAdapter<PlaylistBookmark, PlaylistBookmarkViewHolder>(
+    DiffUtilItemCallback(
+        areItemsTheSame = { oldItem, newItem -> oldItem.playlistId == newItem.playlistId }
+    )
+) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistBookmarkViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return when (bookmarkMode) {

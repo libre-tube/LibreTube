@@ -3,7 +3,6 @@ package com.github.libretube.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.R
 import com.github.libretube.api.obj.Playlists
@@ -12,6 +11,7 @@ import com.github.libretube.databinding.PlaylistsRowBinding
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet.Companion.PLAYLIST_OPTIONS_REQUEST_KEY
@@ -19,16 +19,9 @@ import com.github.libretube.ui.viewholders.PlaylistsViewHolder
 
 class PlaylistsAdapter(
     private val playlistType: PlaylistType
-) : ListAdapter<Playlists, PlaylistsViewHolder>(object : DiffUtil.ItemCallback<Playlists>() {
-    override fun areItemsTheSame(oldItem: Playlists, newItem: Playlists): Boolean {
-        return oldItem.id == newItem.id
-    }
-
-    override fun areContentsTheSame(oldItem: Playlists, newItem: Playlists): Boolean {
-        return oldItem == newItem
-    }
-
-}) {
+) : ListAdapter<Playlists, PlaylistsViewHolder>(
+    DiffUtilItemCallback(areItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id })
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
