@@ -68,9 +68,6 @@ object DatabaseHelper {
         getWatchPosition(videoId)
     }
 
-    fun isVideoWatchedBlocking(videoId: String, duration: Long) =
-        runBlocking { isVideoWatched(videoId, duration) }
-
     suspend fun isVideoWatched(videoId: String, duration: Long): Boolean =
         withContext(Dispatchers.IO) {
             val position = getWatchPosition(videoId) ?: return@withContext false

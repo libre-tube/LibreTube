@@ -94,8 +94,13 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         override fun onPlaybackStateChanged(playbackState: Int) {
             super.onPlaybackStateChanged(playbackState)
 
-            if (playbackState == Player.STATE_READY) {
-                isTransitioning = false
+            when (playbackState) {
+                Player.STATE_ENDED -> {
+                    exoPlayer?.let { PlayerHelper.saveWatchPosition(it, videoId) }
+                }
+                Player.STATE_READY -> {
+                 isTransitioning = false
+                }
             }
         }
     }
