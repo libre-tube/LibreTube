@@ -151,7 +151,7 @@ class SearchChannelAdapter : ListAdapter<ContentItem, SearchViewHolder>(
     private fun bindPlaylist(item: ContentItem, binding: PlaylistsRowBinding) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, playlistThumbnail)
-            if (item.videos != -1L) videoCount.text = item.videos.toString()
+            if (item.videos >= 0) videoCount.text = item.videos.toString()
             playlistTitle.text = item.name
             playlistDescription.text = item.uploaderName
             root.setOnClickListener {
