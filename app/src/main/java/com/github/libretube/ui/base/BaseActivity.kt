@@ -1,5 +1,6 @@
 package com.github.libretube.ui.base
 
+import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,7 @@ import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ThemeHelper
 import com.github.libretube.helpers.WindowHelper
+import java.util.Locale
 
 /**
  * Activity that applies the LibreTube theme and the in-app language
@@ -39,9 +41,6 @@ open class BaseActivity : AppCompatActivity() {
         ThemeHelper.updateTheme(this)
         if (isDialogActivity) ThemeHelper.applyDialogActivityTheme(this)
 
-        // set the apps language
-        LocaleHelper.updateLanguage(this)
-
         requestOrientationChange()
 
         // wait for the window decor view to be drawn before detecting display cutouts
@@ -51,6 +50,24 @@ open class BaseActivity : AppCompatActivity() {
         }
 
         super.onCreate(savedInstanceState)
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        if (newBase == null) {
+            super.attachBaseContext(null)
+            return
+        }
+
+        // change the locale according to the user's preference (or system language as fallback)
+        val locale = LocaleHelper.getAppLocale()
+        Locale.setDefault(locale)
+
+        val configuration = newBase.resources.configuration.apply {
+            setLocale(locale)
+        }
+        val newContext = newBase.createConfigurationContext(configuration)
+
+        super.attachBaseContext(newContext)
     }
 
     /**
