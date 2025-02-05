@@ -553,4 +553,5 @@
     <string name="local_feed_extraction">Yerli axın alınması</string>
     <string name="update_information">Yenilənmə Məlumatı</string>
     <string name="never_show_again">Bunu təkrar göstərmə</string>
+    <string name="show_upcoming_videos">Premerya videoları göstər</string>
 </resources>
