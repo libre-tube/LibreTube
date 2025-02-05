@@ -29,7 +29,6 @@ object LocaleHelper {
     fun updateLanguage(context: Context) {
         val locale = getAppLocale()
         updateResources(context, locale)
-        updateResourcesLegacy(context, locale)
     }
 
     private fun updateResources(context: Context, locale: Locale) {
@@ -37,15 +36,6 @@ object LocaleHelper {
         val configuration: Configuration = context.resources.configuration
         configuration.setLocale(locale)
         context.createConfigurationContext(configuration)
-    }
-
-    @Suppress("DEPRECATION")
-    private fun updateResourcesLegacy(context: Context, locale: Locale) {
-        Locale.setDefault(locale)
-        val resources = context.resources
-        val configuration = resources.configuration
-        configuration.locale = locale
-        resources.updateConfiguration(configuration, resources.displayMetrics)
     }
 
     private fun getDetectedCountry(context: Context): String {
