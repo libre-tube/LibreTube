@@ -7,10 +7,12 @@ import androidx.core.os.bundleOf
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.util.UnstableApi
+import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
 import com.github.libretube.db.obj.DownloadChapter
 import com.github.libretube.db.obj.DownloadWithItems
+import kotlinx.serialization.encodeToString
 
 @OptIn(UnstableApi::class)
 fun MediaItem.Builder.setMetadata(streams: Streams, videoId: String) = apply {
@@ -18,8 +20,9 @@ fun MediaItem.Builder.setMetadata(streams: Streams, videoId: String) = apply {
         MediaMetadataCompat.METADATA_KEY_TITLE to streams.title,
         MediaMetadataCompat.METADATA_KEY_ARTIST to streams.uploader,
         IntentData.videoId to videoId,
-        IntentData.streams to streams,
-        IntentData.chapters to streams.chapters
+        // JSON-encode as work-around for https://github.com/androidx/media/issues/564
+        IntentData.streams to JsonHelper.json.encodeToString(streams),
+        IntentData.chapters to JsonHelper.json.encodeToString(streams.chapters)
     )
     setMediaMetadata(
         MediaMetadata.Builder()
@@ -37,13 +40,14 @@ fun MediaItem.Builder.setMetadata(streams: Streams, videoId: String) = apply {
 
 @OptIn(UnstableApi::class)
 fun MediaItem.Builder.setMetadata(downloadWithItems: DownloadWithItems) = apply {
-    val (download, _, chapters) = downloadWithItems
+    val (download, _, downloadChapters) = downloadWithItems
+    val chapters = downloadChapters.map(DownloadChapter::toChapterSegment)
 
     val extras = bundleOf(
         MediaMetadataCompat.METADATA_KEY_TITLE to download.title,
         MediaMetadataCompat.METADATA_KEY_ARTIST to download.uploader,
         IntentData.videoId to download.videoId,
-        IntentData.chapters to chapters.map(DownloadChapter::toChapterSegment)
+        IntentData.chapters to JsonHelper.json.encodeToString(chapters)
     )
     setMediaMetadata(
         MediaMetadata.Builder()

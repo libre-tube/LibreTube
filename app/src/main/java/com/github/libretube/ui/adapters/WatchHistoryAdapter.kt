@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.VideoRowBinding
@@ -13,6 +12,7 @@ import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setFormattedDuration
 import com.github.libretube.ui.extensions.setWatchProgressLength
@@ -25,17 +25,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
-class WatchHistoryAdapter : ListAdapter<WatchHistoryItem, WatchHistoryViewHolder>(object :
-    DiffUtil.ItemCallback<WatchHistoryItem>() {
-    override fun areItemsTheSame(oldItem: WatchHistoryItem, newItem: WatchHistoryItem): Boolean {
-        return oldItem == newItem
-    }
-
-    override fun areContentsTheSame(oldItem: WatchHistoryItem, newItem: WatchHistoryItem): Boolean {
-        return oldItem == newItem
-    }
-
-}) {
+class WatchHistoryAdapter :
+    ListAdapter<WatchHistoryItem, WatchHistoryViewHolder>(DiffUtilItemCallback()) {
 
     fun removeFromWatchHistory(position: Int) {
         val history = getItem(position)

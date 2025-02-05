@@ -6,12 +6,16 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.widget.ImageView
-import androidx.core.graphics.drawable.toBitmapOrNull
 import androidx.core.net.toUri
-import coil.ImageLoader
-import coil.disk.DiskCache
-import coil.request.CachePolicy
-import coil.request.ImageRequest
+import coil3.ImageLoader
+import coil3.asDrawable
+import coil3.disk.DiskCache
+import coil3.disk.directory
+import coil3.network.okhttp.OkHttpNetworkFetcherFactory
+import coil3.request.CachePolicy
+import coil3.request.ImageRequest
+import coil3.request.crossfade
+import coil3.toBitmap
 import com.github.libretube.BuildConfig
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toAndroidUri
@@ -46,8 +50,10 @@ object ImageHelper {
 
         imageLoader = ImageLoader.Builder(context)
             .crossfade(true)
-            .okHttpClient {
-                httpClient.build()
+            .components {
+                add(
+                    OkHttpNetworkFetcherFactory(httpClient.build())
+                )
             }
             .apply {
                 if (maxCacheSize.isEmpty()) {
@@ -110,14 +116,14 @@ object ImageHelper {
             .data(url)
             .build()
 
-        return imageLoader.execute(request).drawable?.toBitmapOrNull()
+        return imageLoader.execute(request).image?.toBitmap()
     }
 
     private fun getImageWithCallback(context: Context, url: String?, onSuccess: (Drawable) -> Unit) {
         val request = ImageRequest.Builder(context)
             .data(url)
             .target { drawable ->
-                onSuccess(drawable)
+                onSuccess(drawable.asDrawable(context.resources))
             }
             .build()
 

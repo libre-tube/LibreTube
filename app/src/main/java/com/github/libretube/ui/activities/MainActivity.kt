@@ -354,11 +354,8 @@ class MainActivity : BaseActivity() {
             }
 
             override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
-                // Handover back press to `BackPressedDispatcher`
-                if (binding.bottomNav.menu.children.none {
-                        it.itemId == navController.currentDestination?.id
-                    }
-                ) {
+                // Handover back press to `BackPressedDispatcher` if not on a root destination
+                if (navController.previousBackStackEntry != null) {
                     this@MainActivity.onBackPressedDispatcher.onBackPressed()
                 }
 

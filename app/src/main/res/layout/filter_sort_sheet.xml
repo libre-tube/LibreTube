@@ -90,6 +90,13 @@
                     android:paddingHorizontal="16dp"/>
 
                 <CheckBox
+                    android:id="@+id/show_upcoming_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/show_upcoming_videos"
+                    android:layout_marginStart="16dp"/>
+
+                <CheckBox
                     android:id="@+id/hide_watched_checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

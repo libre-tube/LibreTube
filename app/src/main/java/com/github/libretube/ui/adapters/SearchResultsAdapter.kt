@@ -19,7 +19,7 @@ import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
-import com.github.libretube.ui.adapters.callbacks.SearchCallback
+import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setFormattedDuration
 import com.github.libretube.ui.extensions.setWatchProgressLength
@@ -37,7 +37,12 @@ import kotlinx.serialization.encodeToString
 
 class SearchResultsAdapter(
     private val timeStamp: Long = 0
-) : PagingDataAdapter<ContentItem, SearchViewHolder>(SearchCallback) {
+) : PagingDataAdapter<ContentItem, SearchViewHolder>(
+    DiffUtilItemCallback(
+        areItemsTheSame = { oldItem, newItem -> oldItem.url == newItem.url },
+        areContentsTheSame = { _, _ -> true },
+    )
+) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 
@@ -171,7 +176,7 @@ class SearchResultsAdapter(
     private fun bindPlaylist(item: ContentItem, binding: PlaylistsRowBinding) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, playlistThumbnail)
-            if (item.videos != -1L) videoCount.text = item.videos.toString()
+            if (item.videos >= 0) videoCount.text = item.videos.toString()
             playlistTitle.text = item.name
             playlistDescription.text = item.uploaderName
             root.setOnClickListener {

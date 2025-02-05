@@ -80,6 +80,13 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
             field = value
         }
 
+    private var showUpcoming =
+        PreferenceHelper.getBoolean(PreferenceKeys.SHOW_UPCOMING_IN_FEED, true)
+        set(value) {
+            PreferenceHelper.putBoolean(PreferenceKeys.SHOW_UPCOMING_IN_FEED, value)
+            field = value
+        }
+
     private var subChannelsRecyclerViewState: Parcelable? = null
     private var subFeedRecyclerViewState: Parcelable? = null
 
@@ -256,6 +263,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
             ) { _, resultBundle ->
                 selectedSortOrder = resultBundle.getInt(IntentData.sortOptions)
                 hideWatched = resultBundle.getBoolean(IntentData.hideWatched)
+                showUpcoming = resultBundle.getBoolean(IntentData.showUpcoming)
                 showFeed()
             }
 
@@ -263,7 +271,8 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
                 .apply {
                     arguments = bundleOf(
                         IntentData.sortOptions to fetchSortOptions(),
-                        IntentData.hideWatched to hideWatched
+                        IntentData.hideWatched to hideWatched,
+                        IntentData.showUpcoming to showUpcoming,
                     )
                 }
                 .show(childFragmentManager)
@@ -366,6 +375,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         binding.subRefresh.isRefreshing = false
         val feed = videoFeed
             .filterByGroup(selectedFilterGroup)
+            .filter { showUpcoming || !it.isUpcoming }
             .let {
                 DatabaseHelper.filterByStatusAndWatchPosition(it, hideWatched)
             }
@@ -379,7 +389,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         // add an "all caught up item"
         if (selectedSortOrder == 0) {
             val lastCheckedFeedTime = PreferenceHelper.getLastCheckedFeedTime()
-            val caughtUpIndex = feed.indexOfFirst { it.uploaded / 1000 < lastCheckedFeedTime && !it.isUpcoming }
+            val caughtUpIndex = feed.indexOfFirst { it.uploaded <= lastCheckedFeedTime && !it.isUpcoming }
             if (caughtUpIndex > 0) {
                 sortedFeed.add(
                     caughtUpIndex,
@@ -398,7 +408,9 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
         binding.toggleSubs.text = getString(R.string.subscriptions)
 
-        PreferenceHelper.updateLastFeedWatchedTime()
+        feed.firstOrNull { !it.isUpcoming }?.uploaded?.let {
+            PreferenceHelper.setLastFeedWatchedTime(it)
+        };
     }
 
     @SuppressLint("SetTextI18n")

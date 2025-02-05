@@ -128,7 +128,7 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.kotlinx.serialization)
     implementation(libs.kotlinx.datetime)
-    implementation(libs.kotlinx.serialization.retrofit)
+    implementation(libs.converter.kotlinx.serialization)
 
     /* NewPipe Extractor */
     implementation(libs.newpipeextractor)
@@ -136,6 +136,7 @@ dependencies {
     /* Coil */
     coreLibraryDesugaring(libs.desugaring)
     implementation(libs.coil)
+    implementation(libs.coil.network.okhttp)
 
     /* Room */
     ksp(libs.room.compiler)
