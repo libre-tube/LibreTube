@@ -530,6 +530,7 @@
     <string name="delete_only_watched_videos">Only delete already watched videos</string>
     <string name="local_feed_extraction">Local feed extraction</string>
     <string name="local_feed_extraction_summary">Directly fetch the feed from YouTube. This may be significantly slower.</string>
+    <string name="show_upcoming_videos">Show upcoming videos</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
