@@ -1,7 +1,6 @@
 package com.github.libretube.helpers
 
 import android.content.Context
-import android.content.res.Configuration
 import android.telephony.TelephonyManager
 import androidx.core.content.getSystemService
 import androidx.core.os.ConfigurationCompat
@@ -24,18 +23,6 @@ object LocaleHelper {
 
             else -> Locale(languageName)
         }
-    }
-
-    fun updateLanguage(context: Context) {
-        val locale = getAppLocale()
-        updateResources(context, locale)
-    }
-
-    private fun updateResources(context: Context, locale: Locale) {
-        Locale.setDefault(locale)
-        val configuration: Configuration = context.resources.configuration
-        configuration.setLocale(locale)
-        context.createConfigurationContext(configuration)
     }
 
     private fun getDetectedCountry(context: Context): String {
