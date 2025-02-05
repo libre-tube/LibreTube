@@ -56,14 +56,15 @@ class InstanceSettings : BasePreferenceFragment() {
             initInstancesPref(instancePrefs, InstanceRepository(appContext).getInstancesFallback())
 
             // try to fetch the public list of instances async
-            try {
-                val instances = withContext(Dispatchers.IO) {
-                    InstanceRepository(appContext).getInstances()
+            val instanceRepo = InstanceRepository(appContext)
+            val instances = instanceRepo.getInstances()
+                .onFailure {
+                    appContext.toastFromMainDispatcher(it.message.orEmpty())
                 }
-                initInstancesPref(instancePrefs, instances.getOrDefault(emptyList()))
-            } catch (e: Exception) {
-                appContext.toastFromMainDispatcher(e.message.orEmpty())
-            }
+            initInstancesPref(
+                instancePrefs,
+                instances.getOrDefault(instanceRepo.getInstancesFallback())
+            )
         }
 
         authInstance.setOnPreferenceChangeListener { _, _ ->
