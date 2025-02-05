@@ -299,11 +299,6 @@
     <string name="no_chapter">Sense capítol</string>
     <string name="mobile_data">Dades mòbils</string>
     <string name="push_channel_name">Treballador de notificacions</string>
-    <plurals name="months_ago">
-        <item quantity="one">fa %d mes</item>
-        <item quantity="many">fa %d mesos</item>
-        <item quantity="other"/>
-    </plurals>
     <string name="tooltip_filter">Filtra</string>
     <string name="delete_all">Se suprimiran totes les descàrregues.</string>
     <string name="new_videos_badge_summary">Mostra una insígnia amb la quantitat de vídeos nous si n\'hi ha</string>
@@ -480,11 +475,6 @@
     <string name="disable_sleep_timer">Desactiva el temporitzador d\'aturada</string>
     <string name="add_to_group">Afegeix al grup</string>
     <string name="uptime">%.2f%% temps en funcionament</string>
-    <plurals name="years_ago">
-        <item quantity="one">fa %d any</item>
-        <item quantity="many">fa %d anys</item>
-        <item quantity="other"/>
-    </plurals>
     <plurals name="channel_new_streams">
         <item quantity="one">%d transmissió nova</item>
         <item quantity="many">%d transmissions noves</item>

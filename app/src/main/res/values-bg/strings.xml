@@ -162,10 +162,6 @@
     <string name="export_subscriptions_to">Изнеси абонаменти към</string>
     <string name="shareTo">Сподели URL към</string>
     <string name="disable_proxy">Деактивирай Piped прокси</string>
-    <plurals name="years_ago">
-        <item quantity="one">%d година</item>
-        <item quantity="other">%d години</item>
-    </plurals>
     <string name="color_blue">Син</string>
     <string name="resolution_limited">ограничена</string>
     <string name="player_resize_mode">Режим на преоразмеряване</string>
@@ -404,10 +400,6 @@
     <string name="resize_mode_fill">Пълен</string>
     <string name="error">Нещо се обърка.</string>
     <string name="sponsorblock_summary">Използва https://sponsor.ajay.app API</string>
-    <plurals name="months_ago">
-        <item quantity="one">%d месец</item>
-        <item quantity="other">%d месеци</item>
-    </plurals>
     <string name="replies">Отговори</string>
     <string name="grid">Решетъчни колони (портрет)</string>
     <string name="new_group">Нова</string>

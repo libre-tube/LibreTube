@@ -365,12 +365,6 @@
     <string name="unsupported_file_format">不支援的檔案格式：%1$s</string>
     <string name="category">類別</string>
     <string name="codecs">視訊編解碼器</string>
-    <plurals name="years_ago">
-        <item quantity="other">%d 年前</item>
-    </plurals>
-    <plurals name="months_ago">
-        <item quantity="other">%d 個月前</item>
-    </plurals>
     <string name="subscriberAndVideoCounts">%1$s 訂閱者 • %2$d 個影片</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d 個影片</string>
     <string name="lbry_hls_summary">如果可用，請使用 LBRY HLS 進行流式傳輸</string>

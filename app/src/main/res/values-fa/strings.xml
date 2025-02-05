@@ -180,14 +180,6 @@
     <string name="end_time">زمان پایان</string>
     <string name="audio_track">قطعهٔ صوتی</string>
     <string name="shuffle">بر زدن</string>
-    <plurals name="years_ago">
-        <item quantity="one">%d سال پیش</item>
-        <item quantity="other">%d سال پیش</item>
-    </plurals>
-    <plurals name="months_ago">
-        <item quantity="one">%d ماه پیش</item>
-        <item quantity="other">%d ماه پیش</item>
-    </plurals>
     <string name="update_available_text">به‌روز رسانی جدیدی موجود است. برای گشودن صفحهٔ ارائه‌های گیت‌هاب بزنید.</string>
     <string name="new_group">جدید</string>
     <string name="resize_mode_fill">پر کردن</string>

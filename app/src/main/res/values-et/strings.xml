@@ -499,10 +499,6 @@
         <item quantity="other">%d uut meediavoogu</item>
     </plurals>
     <string name="unlimited_search_history">Salvesta otsingute ajalugu piiramatult</string>
-    <plurals name="months_ago">
-        <item quantity="one">%d kuu tagasi</item>
-        <item quantity="other">%d kuud tagasi</item>
-    </plurals>
     <string name="tooltip_options">Valikud</string>
     <string name="tooltip_minimize">Vähenda</string>
     <string name="tooltip_fullscreen">Täisekraanivaade</string>
@@ -517,10 +513,6 @@
     <string name="time_in_minutes">Aeg minututes</string>
     <string name="invalid_input">Vigane sisend</string>
     <string name="chapters_videoHighlight">Video esiletõste</string>
-    <plurals name="years_ago">
-        <item quantity="one">%d aasta tagasi</item>
-        <item quantity="other">%d aastat tagasi</item>
-    </plurals>
     <string name="tooltip_sort">Järjesta</string>
     <string name="tooltip_reverse">Pööra tagurpidi</string>
     <string name="player_channel_description">Meedia taasesitusel näita teavitust</string>

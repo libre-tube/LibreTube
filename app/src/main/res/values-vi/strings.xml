@@ -369,12 +369,6 @@
     <string name="duration">Thời lượng</string>
     <string name="duration_reversed">Thời lượng (đảo ngược)</string>
     <string name="unlimited_search_history">Lịch sử tìm kiếm không giới hạn</string>
-    <plurals name="months_ago">
-        <item quantity="other">%d tháng trước</item>
-    </plurals>
-    <plurals name="years_ago">
-        <item quantity="other">%d năm trước</item>
-    </plurals>
     <string name="import_subscriptions_from">Nhập đăng ký từ</string>
     <string name="export_subscriptions_to">Xuất đăng ký sang</string>
     <string name="rewind">Tua lại</string>

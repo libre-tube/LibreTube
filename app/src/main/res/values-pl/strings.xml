@@ -367,18 +367,6 @@
     <string name="stats_for_nerds">Statystyki dla nerdów</string>
     <string name="video_id">ID wideo</string>
     <string name="category">Kategoria</string>
-    <plurals name="years_ago">
-        <item quantity="one">%d rok temu</item>
-        <item quantity="few">%d lata temu</item>
-        <item quantity="many">%d lat temu</item>
-        <item quantity="other">%d lat temu</item>
-    </plurals>
-    <plurals name="months_ago">
-        <item quantity="one">%d miesiąc temu</item>
-        <item quantity="few">%d miesiące temu</item>
-        <item quantity="many">%d miesięcy temu</item>
-        <item quantity="other">%d miesięcy temu</item>
-    </plurals>
     <string name="lbry_hls_summary">Użyj LBRY HLS do transmisji strumieniowej, jeśli jest dostępna</string>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d filmów</string>

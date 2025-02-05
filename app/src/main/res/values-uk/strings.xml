@@ -368,18 +368,6 @@
     <string name="autoplay_countdown_summary">Показувати зворотний відлік 5 с до автовідтворення наступного відео</string>
     <string name="stats_for_nerds">Статистика для допитливих</string>
     <string name="video_id">ID відео</string>
-    <plurals name="years_ago">
-        <item quantity="one">%d рік тому</item>
-        <item quantity="few">%d роки тому</item>
-        <item quantity="many">%d років тому</item>
-        <item quantity="other">%d років тому</item>
-    </plurals>
-    <plurals name="months_ago">
-        <item quantity="one">%d місяць тому</item>
-        <item quantity="few">%d місяці тому</item>
-        <item quantity="many">%d місяців тому</item>
-        <item quantity="other">%d місяців тому</item>
-    </plurals>
     <string name="lbry_hls_summary">Використовувати LBRY HLS для стримінгу, якщо це можливо</string>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d відео</string>

@@ -540,15 +540,6 @@
     <string name="chapters_videoHighlight">Video Highlight</string>
     <string name="player_channel_name">Player Service</string>
     <string name="player_channel_description">Shows a notification when playing</string>
-    <!-- Relative time formatting strings (remove when setting the minSdk to 24) -->
-    <plurals name="years_ago">
-        <item quantity="one">%d year ago</item>
-        <item quantity="other">%d years ago</item>
-    </plurals>
-    <plurals name="months_ago">
-        <item quantity="one">%d month ago</item>
-        <item quantity="other">%d months ago</item>
-    </plurals>
     <plurals name="channel_new_streams">
         <item quantity="one">%d new stream</item>
         <item quantity="other">%d new streams</item>

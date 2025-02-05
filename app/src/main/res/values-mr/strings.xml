@@ -374,14 +374,6 @@
     <string name="sleep_timer">स्लीप टाइमर</string>
     <string name="help">मदत</string>
     <string name="faq">वारंवार विचारले जाणारे प्रश्न</string>
-    <plurals name="months_ago">
-        <item quantity="one">%d महिन्यापूर्वी</item>
-        <item quantity="other">%d महिन्यांपूर्वी</item>
-    </plurals>
-    <plurals name="years_ago">
-        <item quantity="one">%d वर्षापूर्वी</item>
-        <item quantity="other">%d वर्षांपूर्वी</item>
-    </plurals>
     <string name="unsupported_file_format">अनसपोर्टेड फाइल फॉर्मेट: %1$s</string>
     <string name="pip">PiP</string>
     <string name="finished">पूर्ण झाले</string>

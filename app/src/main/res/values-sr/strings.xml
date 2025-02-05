@@ -366,16 +366,6 @@
     <string name="custom_playback_speed">Прилагођена брзина</string>
     <string name="custom_playback_speed_summary">Користите другачију брзину репродукције него за нормалан плејер</string>
     <string name="category">Категорија</string>
-    <plurals name="years_ago">
-        <item quantity="one">Пре %d године</item>
-        <item quantity="few">Пре %d година</item>
-        <item quantity="other">Пре %d година</item>
-    </plurals>
-    <plurals name="months_ago">
-        <item quantity="one">Пре %d месец</item>
-        <item quantity="few">Пре %d месеца</item>
-        <item quantity="other">Пре %d месеци</item>
-    </plurals>
     <string name="playing_next">Следеће се пушта за %1$s</string>
     <string name="autoplay_countdown_summary">Прикажите одбројавање 5с. пре аутоматског пуштања следећег видео снимка</string>
     <string name="lbry_hls">LBRY HLS</string>

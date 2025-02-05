@@ -368,16 +368,6 @@
     <string name="autoplay_countdown">Cuenta regresiva</string>
     <string name="autoplay_countdown_summary">Muestra una cuenta atrás de 5 segundos antes de reproducir automáticamente el siguiente video</string>
     <string name="playing_next">Siguiente video en %1$s</string>
-    <plurals name="years_ago">
-        <item quantity="one">Hace %d año</item>
-        <item quantity="many">Hace %d años</item>
-        <item quantity="other">Hace %d años</item>
-    </plurals>
-    <plurals name="months_ago">
-        <item quantity="one">Hace %d mes</item>
-        <item quantity="many">Hace %d meses</item>
-        <item quantity="other">Hace %d meses</item>
-    </plurals>
     <string name="lbry_hls_summary">Usar LBRY HLS para la transmisión si está disponible</string>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="subscriberAndVideoCounts">%1$s suscriptores • %2$d videos</string>

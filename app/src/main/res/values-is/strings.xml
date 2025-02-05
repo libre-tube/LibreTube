@@ -171,10 +171,6 @@
     <string name="category_selfpromo_summary">Ekki ósvipað \"kynningaraðila\" nema án greiðslu eða kynning á sjálfum sér. Þetta á einnig við um hluta um vörur, gjafir eða upplýsingar um hverja viðkomandi eigi í samstarfi við</string>
     <string name="category_filler_summary">Fyrir lauslega tengdar senur sem bætt er við til uppfyllingar eða með húmor sem ekki eru nauðsynlegar til að skilja meginefni myndskeiðsins</string>
     <string name="uptime">%.2f%% uppitími</string>
-    <plurals name="months_ago">
-        <item quantity="one">Fyrir %d mánuði</item>
-        <item quantity="other">Fyrir %d mánuðum</item>
-    </plurals>
     <string name="best_quality">Best</string>
     <string name="no_subtitles_available">Engir skjátextar tiltækir</string>
     <string name="alternative_videos_layout">Varaleið framsetningar myndskeiða</string>
@@ -282,10 +278,6 @@
     <string name="segment">Bútur</string>
     <string name="download_playlist">Sækja spilunarlista</string>
     <string name="show_search_suggestions">Birta uppástungur í leit</string>
-    <plurals name="years_ago">
-        <item quantity="one">Fyrir %d ári</item>
-        <item quantity="other">Fyrir %d árum</item>
-    </plurals>
     <string name="chapters_videoHighlight">Hápunktur myndskeiðs</string>
     <string name="change">Breyta</string>
     <string name="tooltip_play">Spila</string>

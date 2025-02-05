@@ -406,10 +406,6 @@
     <string name="playerAudioFormat">Audioformaat voor speler</string>
     <string name="change_region">Trending is niet beschikbaar voor de huidige regio. Selecteer een andere onder instellingen.</string>
     <string name="comments_disabled">Opmerkingen zijn uitgeschakeld door de uploader.</string>
-    <plurals name="years_ago">
-        <item quantity="one">%d jaar geleden</item>
-        <item quantity="other">%d jaar geleden</item>
-    </plurals>
     <string name="player_channel_description">Toont een melding tijdens het afspelen</string>
     <string name="data_saver_mode_summary">Sla miniaturen en andere afbeeldingen over</string>
     <string name="notify_new_streams">Meldingen voor nieuwe streams</string>
@@ -443,10 +439,6 @@
     <string name="confirm_unsubscribe">Weet u zeker dat u zich wilt deabonneren van %1$s\?</string>
     <string name="sb_custom_colors">Aangepaste segment­kleuren</string>
     <string name="invalid_color">Ongeldige kleur­waarde ingevoerd!</string>
-    <plurals name="months_ago">
-        <item quantity="one">%d maand geleden</item>
-        <item quantity="other">%d maanden geleden</item>
-    </plurals>
     <string name="visible">In zoekbalk tonen</string>
     <string name="fallback_piped_proxy">Terugvallen op Piped-proxy</string>
     <string name="proxy">Proxy</string>

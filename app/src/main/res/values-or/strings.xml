@@ -368,14 +368,6 @@
     <string name="video_id">ଭିଡିଓ ID</string>
     <string name="autoplay_countdown">ଅଟୋପ୍ଲେ କାଉଣ୍ଟଡାଉନ୍</string>
     <string name="autoplay_countdown_summary">ପରବର୍ତ୍ତୀ ଭିଡିଓକୁ ଅଟୋ-ଖେଳିବା ପୂର୍ବରୁ 5s କାଉଣ୍ଟଡାଉନ୍ ଦେଖାନ୍ତୁ</string>
-    <plurals name="years_ago">
-        <item quantity="one">%d ବର୍ଷ ପୂର୍ବେ</item>
-        <item quantity="other">%d ବର୍ଷ ପୂର୍ବରୁ</item>
-    </plurals>
-    <plurals name="months_ago">
-        <item quantity="one">%d ମାସ ପୂର୍ବେ</item>
-        <item quantity="other">%d ମାସ ପୂର୍ବରୁ</item>
-    </plurals>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="lbry_hls_summary">ଉପଲବ୍ଧ ଥିଲେ ଷ୍ଟ୍ରିମିଂ ପାଇଁ LBRY HLS ବ୍ୟବହାର କରନ୍ତୁ</string>
     <string name="subscriberAndVideoCounts">%1$s ଗ୍ରାହକ • %2$d ଭିଡିଓ</string>

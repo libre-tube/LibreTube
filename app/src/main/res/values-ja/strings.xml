@@ -357,12 +357,6 @@
     <string name="custom_playback_speed_summary">通常のプレーヤーとは異なる再生速度を使います</string>
     <string name="category">カテゴリー</string>
     <string name="codecs">映像コーデック</string>
-    <plurals name="years_ago">
-        <item quantity="other">%d 年前</item>
-    </plurals>
-    <plurals name="months_ago">
-        <item quantity="other">%d か月前</item>
-    </plurals>
     <string name="concurrent_downloads_limit_reached">同時ダウンロード数の上限に達しました。</string>
     <string name="no_subtitle">字幕なし</string>
     <string name="download_paused">ダウンロードを一時停止しました</string>

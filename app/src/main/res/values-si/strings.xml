@@ -367,14 +367,6 @@
     <string name="category">කාණ්ඩය</string>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="lbry_hls_summary">තිබේ නම් ප්‍රවාහය සඳහා LBRY HLS භාවිත කරන්න</string>
-    <plurals name="years_ago">
-        <item quantity="one">වසර %d කට පෙර</item>
-        <item quantity="other">වසර %d කට පෙර</item>
-    </plurals>
-    <plurals name="months_ago">
-        <item quantity="one">මාස %dකට පෙර</item>
-        <item quantity="other">මාස %dකට පෙර</item>
-    </plurals>
     <string name="autoplay_countdown">ස්වයංක්‍රීය වාදනය ගණන් කිරීම</string>
     <string name="playing_next">මීළඟ වීඩියෝව %1$s හි වාදනය වේ</string>
     <string name="stats_for_nerds">නර්ඩ්ස් සඳහා සංඛ්‍යාලේඛන</string>
