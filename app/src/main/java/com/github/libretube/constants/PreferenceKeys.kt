@@ -112,6 +112,7 @@ object PreferenceKeys {
 
     // Subscriptions
     const val HIDE_WATCHED_FROM_FEED = "hide_watched_from_feed"
+    const val SHOW_UPCOMING_IN_FEED = "show_upcoming_in_feed"
     const val SELECTED_FEED_FILTERS = "filter_feed"
     const val FEED_SORT_ORDER = "sort_oder_feed"
     const val LOCAL_FEED_EXTRACTION = "local_feed_extraction"

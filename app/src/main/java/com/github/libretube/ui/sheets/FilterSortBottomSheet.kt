@@ -20,11 +20,13 @@ class FilterSortBottomSheet : ExpandedBottomSheet(R.layout.filter_sort_sheet) {
 
     private var selectedIndex = 0
     private var hideWatched = false
+    private var showUpcoming = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val arguments = requireArguments()
         sortOptions = arguments.parcelableArrayList(IntentData.sortOptions)!!
         hideWatched = arguments.getBoolean(IntentData.hideWatched)
+        showUpcoming = arguments.getBoolean(IntentData.showUpcoming)
         super.onCreate(savedInstanceState)
     }
 
@@ -34,7 +36,7 @@ class FilterSortBottomSheet : ExpandedBottomSheet(R.layout.filter_sort_sheet) {
         setInitialFiltersState()
 
         observeSortChanges()
-        observeHideWatchedChanges()
+        observeCheckboxFilters()
         observeFiltersChanges()
     }
 
@@ -73,9 +75,14 @@ class FilterSortBottomSheet : ExpandedBottomSheet(R.layout.filter_sort_sheet) {
         }
     }
 
-    private fun observeHideWatchedChanges() {
+    private fun observeCheckboxFilters() {
         binding.hideWatchedCheckbox.setOnCheckedChangeListener { _, checked ->
             hideWatched = checked
+            notifyChange()
+        }
+
+        binding.showUpcomingCheckbox.setOnCheckedChangeListener { _, checked ->
+            showUpcoming = checked
             notifyChange()
         }
     }
@@ -94,7 +101,8 @@ class FilterSortBottomSheet : ExpandedBottomSheet(R.layout.filter_sort_sheet) {
             requestKey = FILTER_SORT_REQUEST_KEY,
             result = bundleOf(
                 IntentData.sortOptions to selectedIndex,
-                IntentData.hideWatched to hideWatched
+                IntentData.hideWatched to hideWatched,
+                IntentData.showUpcoming to showUpcoming
             )
         )
     }

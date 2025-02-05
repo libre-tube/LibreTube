@@ -80,6 +80,13 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
             field = value
         }
 
+    private var showUpcoming =
+        PreferenceHelper.getBoolean(PreferenceKeys.SHOW_UPCOMING_IN_FEED, true)
+        set(value) {
+            PreferenceHelper.putBoolean(PreferenceKeys.SHOW_UPCOMING_IN_FEED, value)
+            field = value
+        }
+
     private var subChannelsRecyclerViewState: Parcelable? = null
     private var subFeedRecyclerViewState: Parcelable? = null
 
@@ -256,6 +263,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
             ) { _, resultBundle ->
                 selectedSortOrder = resultBundle.getInt(IntentData.sortOptions)
                 hideWatched = resultBundle.getBoolean(IntentData.hideWatched)
+                showUpcoming = resultBundle.getBoolean(IntentData.showUpcoming)
                 showFeed()
             }
 
@@ -263,7 +271,8 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
                 .apply {
                     arguments = bundleOf(
                         IntentData.sortOptions to fetchSortOptions(),
-                        IntentData.hideWatched to hideWatched
+                        IntentData.hideWatched to hideWatched,
+                        IntentData.showUpcoming to showUpcoming,
                     )
                 }
                 .show(childFragmentManager)
@@ -366,6 +375,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         binding.subRefresh.isRefreshing = false
         val feed = videoFeed
             .filterByGroup(selectedFilterGroup)
+            .filter { showUpcoming || !it.isUpcoming }
             .let {
                 DatabaseHelper.filterByStatusAndWatchPosition(it, hideWatched)
             }
