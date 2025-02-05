@@ -502,20 +502,10 @@
     <string name="show_stream_thumbnails">Zobraziť miniatúry streamov</string>
     <string name="no_fullscreen_resolution">Rozlíšenie bez celej obrazovky</string>
     <string name="same_as_fullscreen">Ako pri celej obrazovke</string>
-    <plurals name="months_ago">
-        <item quantity="one">Pred mesiacom</item>
-        <item quantity="few">Pred %d mesiacmi</item>
-        <item quantity="other">Pred %d mesiacmi</item>
-    </plurals>
     <plurals name="channel_new_streams">
         <item quantity="one">%d nový stream</item>
         <item quantity="few">%d nové streamy</item>
         <item quantity="other">%d nových streamov</item>
-    </plurals>
-    <plurals name="years_ago">
-        <item quantity="one">Pred rokom</item>
-        <item quantity="few">Pred %d rokmi</item>
-        <item quantity="other">Pred %d rokmi</item>
     </plurals>
     <string name="change_instance">Zmeniť inštanciu</string>
     <string name="suggest_change_instance">Načítanie trvá dlhšie ako zvyčajne. Zvážte zmenu inštancie</string>

@@ -357,20 +357,8 @@
     <string name="filename">Імя файла</string>
     <string name="autoplay_countdown_summary">Паказваць 5-секундны зваротны адлік перад аўтаматычным прайграваннем наступнага відэа</string>
     <string name="lbry_hls_summary">Выкарыстоўвайце LBRY HLS для трансляцыі, калі гэта магчыма</string>
-    <plurals name="months_ago">
-        <item quantity="one">%d месяц таму</item>
-        <item quantity="few">%d месяцы таму</item>
-        <item quantity="many">%d месяцаў таму</item>
-        <item quantity="other">%d месяцаў таму</item>
-    </plurals>
     <string name="hls_instead_of_dash_summary">Выкарыстоўвайце HLS замест DASH (будзе павольней, не рэкамендуецца)</string>
     <string name="navbar_order">Парадак</string>
-    <plurals name="years_ago">
-        <item quantity="one">%d год таму</item>
-        <item quantity="few">%d гады таму</item>
-        <item quantity="many">%d гадоў таму</item>
-        <item quantity="other">%d гадоў таму</item>
-    </plurals>
     <string name="category_preview_summary">Для сегментаў з падрабязным апісаннем будучага кантэнту без дадатковай інфармацыі. Калі яна ўключае ў сябе кліпы, якія з\'яўляюцца толькі тут, гэта, хутчэй за ўсё, няправільная катэгорыя</string>
     <string name="featured">Рэкамендацыі</string>
     <string name="pinch_control">Шчыпковы кантроль</string>

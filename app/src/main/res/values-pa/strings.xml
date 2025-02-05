@@ -368,14 +368,6 @@
     <string name="stats_for_nerds">ਨਰਡਾਂ ਲਈ ਅੰਕੜੇ</string>
     <string name="video_id">ਵੀਡੀਓ ਆਈ ਡੀ</string>
     <string name="category">ਸ਼੍ਰੇਣੀ</string>
-    <plurals name="years_ago">
-        <item quantity="one">%d ਸਾਲ ਪਹਿਲਾਂ</item>
-        <item quantity="other">%d ਸਾਲ ਪਹਿਲਾਂ</item>
-    </plurals>
-    <plurals name="months_ago">
-        <item quantity="one">%d ਮਹੀਨਾ ਪਹਿਲਾਂ</item>
-        <item quantity="other">%d ਮਹੀਨੇ ਪਹਿਲਾਂ</item>
-    </plurals>
     <string name="lbry_hls">ਲਿਬਰੀ HLS</string>
     <string name="lbry_hls_summary">ਉਪਲਬਧ ਹੋਵੇ ਤਾਂ ਸਟ੍ਰੀਮਿੰਗ ਲਈ ਲੀਬਰ HLS ਵਰਤੋ</string>
     <string name="subscriberAndVideoCounts">%1$s ਸਬਸਕ੍ਰਾਈਬਰ• %2$d ਵੀਡੀਓ</string>

@@ -357,11 +357,6 @@
     <string name="category">Categoria</string>
     <string name="codecs">Codec-uri</string>
     <string name="sleep_timer">Cronometru de somn</string>
-    <plurals name="months_ago">
-        <item quantity="one">acum %d lună</item>
-        <item quantity="few">acum %d luni</item>
-        <item quantity="other">acum %d de luni</item>
-    </plurals>
     <string name="color_violet">Violet polivalent</string>
     <string name="auto">Automat</string>
     <string name="playback_pitch">Înălțime</string>
@@ -375,11 +370,6 @@
     <string name="export_playlists">Exportați liste de redare</string>
     <string name="skip_silence">Omiteți tăcerea</string>
     <string name="theme_monochrome">Monocrom minimalist</string>
-    <plurals name="years_ago">
-        <item quantity="one">acum %d an</item>
-        <item quantity="few">acum %d ani</item>
-        <item quantity="other">acum %d de ani</item>
-    </plurals>
     <string name="uploaderAndVideoCount">%1$s • %2$d videoclipuri</string>
     <string name="subscriberAndVideoCounts">%1$s abonați • %2$d videoclipuri</string>
     <string name="disable_proxy">Dezactivați proxy-ul Piped</string>

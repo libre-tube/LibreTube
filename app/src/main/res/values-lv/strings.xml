@@ -351,16 +351,6 @@
     <string name="push_channel_description">Parāda paziņojumu, kad ir pieejamas jaunas straumes.</string>
     <string name="help">Palīdzība</string>
     <string name="faq">Biežāk uzdotie jautājumi</string>
-    <plurals name="years_ago">
-        <item quantity="zero">pirms %d gadiem</item>
-        <item quantity="one">pirms %d gada</item>
-        <item quantity="other">pirms %d gadiem</item>
-    </plurals>
-    <plurals name="months_ago">
-        <item quantity="zero">pirms %d mēnešiem</item>
-        <item quantity="one">pirms %d gada</item>
-        <item quantity="other">pirms %d gadiem</item>
-    </plurals>
     <string name="concurrent_downloads_limit_reached">Sasniegts vienlaikus atļauto lejuipelāžu skaits.</string>
     <string name="resume">Atsākt</string>
     <string name="concurrent_downloads">Vienlaikus atļautās lejupielādes</string>

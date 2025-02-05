@@ -529,14 +529,6 @@
     <string name="chapters_videoHighlight">𐑝𐑦𐑛𐑦𐑴 𐑣𐑲𐑤𐑲𐑑</string>
     <string name="player_channel_name">𐑐𐑤𐑱𐑼 𐑕𐑻𐑝𐑦𐑕</string>
     <string name="player_channel_description">𐑖𐑴𐑟 𐑩 𐑯𐑴𐑑𐑦𐑓𐑦𐑒𐑱𐑖𐑩𐑯 𐑢𐑧𐑯 𐑐𐑤𐑱𐑦𐑙</string>
-    <plurals name="years_ago">
-        <item quantity="one">%d 𐑘𐑽 𐑩𐑜𐑴</item>
-        <item quantity="other">%d 𐑘𐑽𐑟 𐑩𐑜𐑴</item>
-    </plurals>
-    <plurals name="months_ago">
-        <item quantity="one">%d 𐑥𐑳𐑯𐑔 𐑩𐑜𐑴</item>
-        <item quantity="other">%d 𐑥𐑳𐑯𐑔𐑕 𐑩𐑜𐑴</item>
-    </plurals>
     <string name="tooltip_repeat">𐑮𐑦𐑐𐑰𐑑</string>
     <string name="tooltip_watch_position">𐑢𐑪𐑗 𐑐𐑩𐑟𐑦𐑖𐑩𐑯</string>
     <string name="tooltip_clear_queue">𐑒𐑤𐑽 𐑒𐑿</string>

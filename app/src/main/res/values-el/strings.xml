@@ -387,18 +387,10 @@
     <string name="playing_next">Αναπαραγωγή επόμενου σε %1$s</string>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="lbry_hls_summary">Χρησιμοποιήστε το LBRY HLS για streaming εάν είναι διαθέσιμο</string>
-    <plurals name="years_ago">
-        <item quantity="one">%d έτος πριν</item>
-        <item quantity="other">%d έτη πριν</item>
-    </plurals>
     <string name="subscriberAndVideoCounts">%1$s συνδρομές•%2$dβίντεο</string>
     <string name="change_playlist_description">Αλλαγή περιγραφής λίστας αναπαραγωγής</string>
     <string name="playlist_description">Περιγραφή λίστας αναπαραγωγής</string>
     <string name="emptyPlaylistDescription">Η περιγραφή της λίστας αναπαραγωγής δεν μπορεί να είναι κενή</string>
-    <plurals name="months_ago">
-        <item quantity="one">%d μήνα πριν</item>
-        <item quantity="other">%d μήνες πριν</item>
-    </plurals>
     <string name="normal_views">%1$sπροβολές%2$s</string>
     <string name="category">Κατηγορία</string>
     <string name="auto_fullscreen_shorts">Αυτόματη πλήρης οθόνη σε short βίντεο</string>

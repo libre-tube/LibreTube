@@ -365,10 +365,6 @@
     <string name="contribute_to_sponsorblock">Bidrag til SponsorBlock</string>
     <string name="push_channel_name">Notifikationsarbejder</string>
     <string name="player_channel_name">Afspillerservice</string>
-    <plurals name="years_ago">
-        <item quantity="one">%d år siden</item>
-        <item quantity="other">%d år siden</item>
-    </plurals>
     <string name="tooltip_sponsorblock">Slå SponsorBlock til/fra</string>
     <string name="player_channel_description">Viser en notifikation ved afspilning</string>
     <string name="bookmark">Bogmærke</string>
@@ -457,10 +453,6 @@
     <string name="push_channel_description">Viser en notifikation, når nye streams er tilgængelige.</string>
     <string name="unlimited_search_history">Ubegrænset søgehistorik</string>
     <string name="chapters_videoHighlight">Videoens højdepunkt</string>
-    <plurals name="months_ago">
-        <item quantity="one">%d måned siden</item>
-        <item quantity="other">%d måneder siden</item>
-    </plurals>
     <plurals name="channel_new_streams">
         <item quantity="one">%d ny stream</item>
         <item quantity="other">%d nye streams</item>

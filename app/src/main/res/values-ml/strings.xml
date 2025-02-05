@@ -162,14 +162,6 @@
     <string name="exportsuccess">കയറ്റുമതി ചെയ്തു.</string>
     <string name="help">സഹായം</string>
     <string name="faq">പതിവുചോദ്യങ്ങൾ</string>
-    <plurals name="months_ago">
-        <item quantity="one">%d മാസം മുമ്പ്</item>
-        <item quantity="other">%d മാസങ്ങൾ മുമ്പ്</item>
-    </plurals>
-    <plurals name="years_ago">
-        <item quantity="one">%d വർഷം മുമ്പ്</item>
-        <item quantity="other">%d വർഷങ്ങൾ മുമ്പ്</item>
-    </plurals>
     <string name="mark_as_watched">കണ്ടതായി അടയാളപ്പെടുത്തുക</string>
     <string name="all_caught_up_summary">നിങ്ങൾ എല്ലാ പുതിയ വീഡിയോകളും കണ്ടു</string>
     <string name="nothing_selected">ഒന്നും തിരഞ്ഞെടുത്തില്ല!</string>

@@ -399,10 +399,6 @@
     <string name="invalid_input">தவறான உள்ளீடு</string>
     <string name="add_to_group">குழுவில் சேர்க்கவும்</string>
     <string name="uptime">%.2f %% இயக்க நேரம்</string>
-    <plurals name="years_ago">
-        <item quantity="one">%d ஆண்டுக்கு முன்பு</item>
-        <item quantity="other">%d ஆண்டுகளுக்கு முன்பு</item>
-    </plurals>
     <string name="tooltip_repeat">மீண்டும்</string>
     <string name="tooltip_options">விருப்பங்கள்</string>
     <string name="tooltip_minimize">குறைக்கவும்</string>
@@ -508,10 +504,6 @@
     <string name="no_segments_found">இந்த வீடியோவுக்கு இன்னும் பிரிவுகள் எதுவும் இல்லை.</string>
     <string name="external_download_provider">வெளிப்புற பதிவிறக்க வழங்குநர்</string>
     <string name="local_stream_extraction_summary">குழாய் பயன்படுத்தாமல் YouTube இலிருந்து வீடியோ பிளேபேக் தகவல்களை நேரடியாகப் பெறுங்கள்.</string>
-    <plurals name="months_ago">
-        <item quantity="one">%d மாதத்திற்கு முன்பு</item>
-        <item quantity="other">%d மாதங்களுக்கு முன்பு</item>
-    </plurals>
     <plurals name="channel_new_streams">
         <item quantity="one">%d புதிய ச்ட்ரீம்</item>
         <item quantity="other">%d புதிய நீரோடைகள்</item>

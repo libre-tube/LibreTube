@@ -429,10 +429,6 @@
     <string name="sleep_timer">Temporisator de somno</string>
     <string name="export_playlists">Exportar listas de reproduction</string>
     <string name="time_in_minutes">Tempore in minutas</string>
-    <plurals name="years_ago">
-        <item quantity="one">%d anno retro</item>
-        <item quantity="other">%d annos retro</item>
-    </plurals>
     <string name="invalid_input">Entrata non valide</string>
     <string name="disable_sleep_timer">Disactivar le temporisator de somno</string>
     <string name="start_sleep_timer">Initiar temporisator de somno</string>
@@ -472,10 +468,6 @@
     <string name="fullscreen_gestures">Gestos de entrata/exito in schermo plen</string>
     <string name="auth_instance_summary">Usar un instantia differente pro appellos authenticate</string>
     <string name="finished">Finite</string>
-    <plurals name="months_ago">
-        <item quantity="one">%d mense retro</item>
-        <item quantity="other">%d menses retro</item>
-    </plurals>
     <string name="autoplay_countdown">Computo a retro del reproduction automatic</string>
     <string name="username_email">Usar un adresse de e-mail como nomine de usator non es recommendate. Continuar in omne caso?</string>
     <string name="creation_date_reversed">Data de creation (invertite)</string>

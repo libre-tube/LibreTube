@@ -368,16 +368,6 @@
     <string name="playing_next">לנגן את הבא בעוד %1$s</string>
     <string name="autoplay_countdown">ספירה לאחור עד לנגינה אוטומטית</string>
     <string name="autoplay_countdown_summary">להציג ספירה לאחור של 5 שניות בטרם ניגון הסרטון הבא אוטומטית</string>
-    <plurals name="months_ago">
-        <item quantity="one">לפני חודש</item>
-        <item quantity="two">לפני חודשיים</item>
-        <item quantity="other">לפני %d חודשים</item>
-    </plurals>
-    <plurals name="years_ago">
-        <item quantity="one">לפני שנה</item>
-        <item quantity="two">לפני שנתיים</item>
-        <item quantity="other">לפני %d שנים</item>
-    </plurals>
     <string name="lbry_hls">LBRY HLS‎</string>
     <string name="lbry_hls_summary">להשתמש ב־LBRY HLS להזרמה אם זמין</string>
     <string name="subscriberAndVideoCounts">%1$s מנויים • %2$d סרטונים</string>

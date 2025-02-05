@@ -366,14 +366,6 @@
     <string name="custom_playback_speed_summary">Bruk avspillingshastighet forskjellig fra den for normal avspiller</string>
     <string name="category">Kategori</string>
     <string name="codecs">Kodek</string>
-    <plurals name="years_ago">
-        <item quantity="one">%d år siden</item>
-        <item quantity="other">%d år siden</item>
-    </plurals>
-    <plurals name="months_ago">
-        <item quantity="one">%d måned siden</item>
-        <item quantity="other">%d måneder siden</item>
-    </plurals>
     <string name="autoplay_countdown_summary">Vis 5 sekunders nedtelling før autospilling av neste video</string>
     <string name="playing_next">Spiller neste om %1$s</string>
     <string name="lbry_hls_summary">Hent videostrøm i LBRY HLS-format hvis tilgjengelig</string>

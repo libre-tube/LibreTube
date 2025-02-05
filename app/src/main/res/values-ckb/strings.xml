@@ -357,10 +357,6 @@
     <string name="go_to_video">چوون بۆ ڤیدیۆ</string>
     <string name="disable_proxy">ناچالاککردنی پرۆکسی Pipe</string>
     <string name="disable_proxy_summary">هێنانی ڤیدیۆ و وێنەکان ڕاستەوخۆ لە سێرڤەرەکانی یوتوبەوە. ئەمە تەنها کاتێک کارا بکە کە هەمیشە VPN بەکاربهێنیت</string>
-    <plurals name="years_ago">
-        <item quantity="one">%d ساڵ لەمەوپێس</item>
-        <item quantity="other">%d ساڵ لەمەوپێش</item>
-    </plurals>
     <string name="add_to_bookmarks">زیادکردن بۆ نیشانەکراوەکان</string>
     <string name="audio_only_mode_summary">بەکارهێنانی بەرنامەکە وەک لێدەرێکی دەنگی</string>
     <string name="play_automatically_summary">دەستپێکردنی لێدانی خۆکاری ڤیدیۆکان کاتێ دیاریکران</string>
@@ -378,10 +374,6 @@
     <string name="remove_bookmark">لابردنی نیشانەکراو</string>
     <string name="rewind">داوخستن</string>
     <string name="forward">پێشخستن</string>
-    <plurals name="months_ago">
-        <item quantity="one">%d مانگ لەمەوپێش</item>
-        <item quantity="other">%d مانگ لەمەوپێش</item>
-    </plurals>
     <plurals name="channel_new_streams">
         <item quantity="one">%d بڵاوکراوەی نوێ</item>
         <item quantity="other">%d بڵاوکراوەی نوێ</item>

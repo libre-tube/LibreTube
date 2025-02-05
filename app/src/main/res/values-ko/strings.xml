@@ -370,12 +370,6 @@
     <string name="custom_playback_speed_summary">기존 플레이어와 다른 재생 속도를 사용하십시오</string>
     <string name="category">분류</string>
     <string name="codecs">비디오 코덱</string>
-    <plurals name="years_ago">
-        <item quantity="other">%d년 전</item>
-    </plurals>
-    <plurals name="months_ago">
-        <item quantity="other">%d개월 전</item>
-    </plurals>
     <string name="resume">재개</string>
     <string name="forward">빨리 감기</string>
     <string name="disable_proxy">Piped 프록시 비활성화</string>

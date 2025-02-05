@@ -368,16 +368,6 @@
     <string name="video_id">ID do vídeo</string>
     <string name="autoplay_countdown">Contagem para reprodução automática</string>
     <string name="autoplay_countdown_summary">Mostrar contagem decrescente de 5 segundos antes de reproduzir o vídeo seguinte</string>
-    <plurals name="months_ago">
-        <item quantity="one">%d mês atrás</item>
-        <item quantity="many">%d meses atrás</item>
-        <item quantity="other">%d meses atrás</item>
-    </plurals>
-    <plurals name="years_ago">
-        <item quantity="one">%d ano atrás</item>
-        <item quantity="many">%d anos atrás</item>
-        <item quantity="other">%d anos atrás</item>
-    </plurals>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="lbry_hls_summary">Usar LBRY HLS para emissão, se disponível</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d vídeos</string>

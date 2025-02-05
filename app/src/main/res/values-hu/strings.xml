@@ -375,14 +375,6 @@
     <string name="disable_proxy_summary">Videók és képek betöltése közvetlenül a YouTube szervereiről. Csak akkor engedélyezze ezt az opciót, ha mindig VPN-t használ</string>
     <string name="auto_fullscreen_shorts">Automatikus teljes képernyőre váltás rövid videóknál</string>
     <string name="normal_views">%1$s megtekintés %2$s</string>
-    <plurals name="years_ago">
-        <item quantity="one">%d éve</item>
-        <item quantity="other">%d éve</item>
-    </plurals>
-    <plurals name="months_ago">
-        <item quantity="one">%d hónapja</item>
-        <item quantity="other">%d hónapja</item>
-    </plurals>
     <string name="new_group">Új</string>
     <string name="group_name">Csoportnév</string>
     <string name="channel_groups">Csatornacsoportok</string>

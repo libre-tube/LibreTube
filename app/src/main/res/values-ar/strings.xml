@@ -368,22 +368,6 @@
     <string name="autoplay_countdown">العد التنازلي للتشغيل التلقائي</string>
     <string name="playing_next">يتم التشغيل بعد ذلك في %1$s</string>
     <string name="autoplay_countdown_summary">أظهر العد التنازلي 5 ثوانٍ قبل التشغيل التلقائي للفيديو التالي</string>
-    <plurals name="years_ago">
-        <item quantity="zero">%d منذ سنة</item>
-        <item quantity="one">%d منذ سنة</item>
-        <item quantity="two">%d منذ سنتين</item>
-        <item quantity="few">%d منذ سنوات</item>
-        <item quantity="many">%d منذ سنوات</item>
-        <item quantity="other">%d منذ سنين</item>
-    </plurals>
-    <plurals name="months_ago">
-        <item quantity="zero">%d منذ شهر</item>
-        <item quantity="one">%d منذ شهر</item>
-        <item quantity="two">%d منذ شهرين</item>
-        <item quantity="few">%d منذ أشهر</item>
-        <item quantity="many">%d منذ أشهر</item>
-        <item quantity="other">%d منذ أشهر</item>
-    </plurals>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="lbry_hls_summary">استخدم LBRY HLS للبث إذا كان متاحا</string>
     <string name="subscriberAndVideoCounts">مشتركون %1$s • فيديوهات %2$d</string>
