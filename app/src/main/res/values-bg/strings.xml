@@ -553,4 +553,5 @@
     <string name="local_feed_extraction_summary">Директно извличане на емисията от YouTube. Това може да е значително по-бавно.</string>
     <string name="never_show_again">Никога не показвай това отново</string>
     <string name="update_information">Актуализиране на информация</string>
+    <string name="show_upcoming_videos">Покажи предстоящи видеоклипове</string>
 </resources>
