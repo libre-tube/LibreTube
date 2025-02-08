@@ -419,7 +419,7 @@
     <string name="sb_custom_colors_summary">تبديل شرائح الألوان المخصصة لشرائح كتلة الراعي</string>
     <string name="sb_custom_colors">ألوان شرائح مخصصة</string>
     <string name="invalid_color">تم إدخال قيمة لون غير صالحة!</string>
-    <string name="visible">عرض في شريط التمرير</string>
+    <string name="visible">أظهِر في شريط التمرير</string>
     <string name="color">اللون</string>
     <string name="category_highlight">إظهار تمييز الفيديو</string>
     <string name="category_highlight_summary">يمكن أن يكون العنوان المعلن عنه أو الصورة المصغرة أو الجزء الأكثر إثارة للاهتمام من الفيديو. يمكنك التخطي إليه من خلال النقر عليه في قسم الفصول</string>
@@ -436,7 +436,7 @@
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">لغة صوت غير معروفة</string>
     <string name="continue_watching">مواصلة المشاهدة</string>
-    <string name="dearrow_summary">اعرض عناوين وصورا مصغرة أكثر دقة وأقل إثارة. يزيد من أوقات التحميل</string>
+    <string name="dearrow_summary">أظهِر عناوين وصورا مصغرة أكثر دقة وأقل إثارة. يزيد من أوقات التحميل</string>
     <string name="dearrow">تمكين دي ارو</string>
     <string name="visibility_public">عام</string>
     <string name="visibility">رؤية</string>
@@ -557,4 +557,5 @@
     <string name="local_feed_extraction_summary">قم بجلب الخلاصة مباشرةً من YouTube. قد يكون هذا أبطأ بشكل ملحوظ.</string>
     <string name="update_information">تحديث المعلومات</string>
     <string name="never_show_again">لا تعرض هذا مجدداً</string>
+    <string name="show_upcoming_videos">أظهِر الفيديوهات القادمة</string>
 </resources>
