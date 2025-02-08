@@ -553,4 +553,5 @@
     <string name="local_feed_extraction_summary">A hírfolyam közvetlenül a YouTube-ról kerül letöltésre. Ez jelentősen lassabb lehet.</string>
     <string name="never_show_again">Többet ne jelenjen meg</string>
     <string name="update_information">Frissítési információ</string>
+    <string name="show_upcoming_videos">Közelgő videók megjelenítése</string>
 </resources>
