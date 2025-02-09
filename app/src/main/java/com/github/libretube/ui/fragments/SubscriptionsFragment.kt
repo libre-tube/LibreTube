@@ -175,7 +175,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
             if (viewModel.subscriptions.value != null && isCurrentTabSubChannels) {
                 binding.subRefresh.isRefreshing = true
-                channelsAdapter.updateItems()
                 binding.subRefresh.isRefreshing = false
             }
         }
