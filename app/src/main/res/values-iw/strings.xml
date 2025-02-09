@@ -550,4 +550,9 @@
     <string name="export_playlist">ייצוא רשימת נגינה</string>
     <string name="crashlog">יומן קריסות</string>
     <string name="delete_only_watched_videos">למחוק רק סרטונים שכבר נצפו</string>
+    <string name="never_show_again">אף פעם לא להציג את זה שוב</string>
+    <string name="update_information">פרטי עדכון</string>
+    <string name="local_ryd">מחלץ מקומי להחזרת אכזבות מ־YouTube</string>
+    <string name="local_ryd_summary">למשוך פרטי אכזבות ישירות מתוך https://returnyoutubedislikeapi.com</string>
+    <string name="show_upcoming_videos">הצגת סרטונים קרובים</string>
 </resources>
