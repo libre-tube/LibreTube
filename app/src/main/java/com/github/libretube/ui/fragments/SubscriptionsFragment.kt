@@ -179,10 +179,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
             }
         }
 
-        binding.subFeed.addOnBottomReachedListener {
-            loadNextFeedItems()
-        }
-
         // add some extra margin to the subscribed channels while the mini player is visible
         // otherwise the last channel would be invisible
         playerModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
@@ -191,8 +187,8 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
             }
         }
 
-        binding.channelGroups.setOnCheckedStateChangeListener { group, checkedIds ->
-            selectedFilterGroup = group.children.indexOfFirst { it.id == checkedIds.first() }
+        binding.channelGroups.setOnCheckedStateChangeListener { group, _ ->
+            selectedFilterGroup = group.children.indexOfFirst { it.id == group.checkedChipId }
             if (isCurrentTabSubChannels) showSubscriptions() else showFeed()
         }
 
@@ -230,25 +226,20 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         }
     }
 
-    private fun loadNextFeedItems() {
+    private fun loadFeedItems() {
         val binding = _binding ?: return
 
-        val hasMore = sortedFeed.size > feedAdapter.itemCount
-        if (viewModel.videoFeed.value != null && !isCurrentTabSubChannels && !binding.subRefresh.isRefreshing && hasMore) {
+        if (viewModel.videoFeed.value != null && !isCurrentTabSubChannels && !binding.subRefresh.isRefreshing) {
             binding.subRefresh.isRefreshing = true
 
             lifecycleScope.launch {
-                val toIndex = minOf(feedAdapter.itemCount + 10, sortedFeed.size)
-
-                var streamItemsToInsert = sortedFeed
-                    .subList(feedAdapter.itemCount, toIndex)
-                    .toList()
-
-                withContext(Dispatchers.IO) {
-                    runCatching { streamItemsToInsert = streamItemsToInsert.deArrow() }
+                val streamItemsToInsert = sortedFeed.toList().let {
+                    withContext(Dispatchers.IO) {
+                        runCatching { it.deArrow() }.getOrDefault(it)
+                    }
                 }
 
-                feedAdapter.insertItems(streamItemsToInsert)
+                feedAdapter.submitList(streamItemsToInsert)
                 binding.subRefresh.isRefreshing = false
             }
         }
@@ -403,13 +394,13 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         val notLoaded = viewModel.videoFeed.value.isNullOrEmpty()
         binding.subFeed.isGone = notLoaded
         binding.emptyFeed.isVisible = notLoaded
-        loadNextFeedItems()
+        loadFeedItems()
 
         binding.toggleSubs.text = getString(R.string.subscriptions)
 
         feed.firstOrNull { !it.isUpcoming }?.uploaded?.let {
             PreferenceHelper.setLastFeedWatchedTime(it)
-        };
+        }
     }
 
     @SuppressLint("SetTextI18n")
