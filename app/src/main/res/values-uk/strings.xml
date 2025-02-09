@@ -556,4 +556,5 @@
     <string name="local_feed_extraction_summary">Безпосередньо отримати стрічку з YouTube. Це може бути значно повільніше.</string>
     <string name="never_show_again">Ніколи більше не показувати</string>
     <string name="update_information">Оновити інформацію</string>
+    <string name="show_upcoming_videos">Показати наступні відео</string>
 </resources>
