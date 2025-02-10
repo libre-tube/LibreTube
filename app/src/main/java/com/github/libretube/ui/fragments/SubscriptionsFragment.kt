@@ -65,8 +65,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
     private var isAppBarFullyExpanded = true
 
     private var feedAdapter = VideosAdapter()
-    private val sortedFeed: MutableList<StreamItem> = mutableListOf()
-
     private var selectedSortOrder = PreferenceHelper.getInt(PreferenceKeys.FEED_SORT_ORDER, 0)
         set(value) {
             PreferenceHelper.putInt(PreferenceKeys.FEED_SORT_ORDER, value)
@@ -226,14 +224,14 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         }
     }
 
-    private fun loadFeedItems() {
+    private fun loadFeedItems(sortedFeed: List<StreamItem>) {
         val binding = _binding ?: return
 
         if (viewModel.videoFeed.value != null && !isCurrentTabSubChannels && !binding.subRefresh.isRefreshing) {
             binding.subRefresh.isRefreshing = true
 
             lifecycleScope.launch {
-                val streamItemsToInsert = sortedFeed.toList().let {
+                val streamItemsToInsert = sortedFeed.let {
                     withContext(Dispatchers.IO) {
                         runCatching { it.deArrow() }.getOrDefault(it)
                     }
@@ -373,15 +371,13 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         val sorted = feed
             .sortedBySelectedOrder()
             .toMutableList()
-        sortedFeed.clear()
-        sortedFeed.addAll(sorted)
 
         // add an "all caught up item"
         if (selectedSortOrder == 0) {
             val lastCheckedFeedTime = PreferenceHelper.getLastCheckedFeedTime()
             val caughtUpIndex = feed.indexOfFirst { it.uploaded <= lastCheckedFeedTime && !it.isUpcoming }
             if (caughtUpIndex > 0) {
-                sortedFeed.add(
+                sorted.add(
                     caughtUpIndex,
                     StreamItem(type = VideosAdapter.CAUGHT_UP_STREAM_TYPE)
                 )
@@ -394,7 +390,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         val notLoaded = viewModel.videoFeed.value.isNullOrEmpty()
         binding.subFeed.isGone = notLoaded
         binding.emptyFeed.isVisible = notLoaded
-        loadFeedItems()
+        loadFeedItems(sorted)
 
         binding.toggleSubs.text = getString(R.string.subscriptions)
 
@@ -432,7 +428,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
     fun removeItem(videoId: String) {
         feedAdapter.removeItemById(videoId)
-        sortedFeed.removeAll { it.url?.toID() != videoId }
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
