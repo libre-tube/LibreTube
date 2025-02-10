@@ -30,15 +30,18 @@ class EditChannelGroupSheet : ExpandedBottomSheet(R.layout.dialog_edit_channel_g
     private val channelGroupsModel: EditChannelGroupsModel by activityViewModels()
     private var channels = listOf<Subscription>()
 
-    private val channelsAdapter = SubscriptionGroupChannelsAdapter(
-        channelGroupsModel.groupToEdit!!
-    ) {
-        channelGroupsModel.groupToEdit = it
-        updateConfirmStatus()
-    }
+    private lateinit var channelsAdapter: SubscriptionGroupChannelsAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = DialogEditChannelGroupBinding.bind(view)
+
+        channelsAdapter = SubscriptionGroupChannelsAdapter(
+            channelGroupsModel.groupToEdit!!
+        ) {
+            channelGroupsModel.groupToEdit = it
+            updateConfirmStatus()
+        }
+
         binding.channelsRV.adapter = channelsAdapter
         binding.groupName.setText(channelGroupsModel.groupToEdit?.name)
         val oldGroupName = channelGroupsModel.groupToEdit?.name.orEmpty()
