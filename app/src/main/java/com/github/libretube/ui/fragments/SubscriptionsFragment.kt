@@ -65,8 +65,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
     private var isAppBarFullyExpanded = true
 
     private var feedAdapter = VideosAdapter()
-    private val sortedFeed: MutableList<StreamItem> = mutableListOf()
-
     private var selectedSortOrder = PreferenceHelper.getInt(PreferenceKeys.FEED_SORT_ORDER, 0)
         set(value) {
             PreferenceHelper.putInt(PreferenceKeys.FEED_SORT_ORDER, value)
@@ -175,13 +173,8 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
             if (viewModel.subscriptions.value != null && isCurrentTabSubChannels) {
                 binding.subRefresh.isRefreshing = true
-                channelsAdapter.updateItems()
                 binding.subRefresh.isRefreshing = false
             }
-        }
-
-        binding.subFeed.addOnBottomReachedListener {
-            loadNextFeedItems()
         }
 
         // add some extra margin to the subscribed channels while the mini player is visible
@@ -192,8 +185,8 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
             }
         }
 
-        binding.channelGroups.setOnCheckedStateChangeListener { group, checkedIds ->
-            selectedFilterGroup = group.children.indexOfFirst { it.id == checkedIds.first() }
+        binding.channelGroups.setOnCheckedStateChangeListener { group, _ ->
+            selectedFilterGroup = group.children.indexOfFirst { it.id == group.checkedChipId }
             if (isCurrentTabSubChannels) showSubscriptions() else showFeed()
         }
 
@@ -231,25 +224,22 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         }
     }
 
-    private fun loadNextFeedItems() {
+    private fun loadFeedItems(sortedFeed: List<StreamItem>) {
         val binding = _binding ?: return
 
-        val hasMore = sortedFeed.size > feedAdapter.itemCount
-        if (viewModel.videoFeed.value != null && !isCurrentTabSubChannels && !binding.subRefresh.isRefreshing && hasMore) {
+        if (viewModel.videoFeed.value != null && !isCurrentTabSubChannels && !binding.subRefresh.isRefreshing) {
             binding.subRefresh.isRefreshing = true
 
             lifecycleScope.launch {
-                val toIndex = minOf(feedAdapter.itemCount + 10, sortedFeed.size)
-
-                var streamItemsToInsert = sortedFeed
-                    .subList(feedAdapter.itemCount, toIndex)
-                    .toList()
-
-                withContext(Dispatchers.IO) {
-                    runCatching { streamItemsToInsert = streamItemsToInsert.deArrow() }
+                val streamItemsToInsert = sortedFeed.let {
+                    withContext(Dispatchers.IO) {
+                        runCatching { it.deArrow() }.getOrDefault(it)
+                    }
                 }
 
-                feedAdapter.insertItems(streamItemsToInsert)
+                feedAdapter.submitList(streamItemsToInsert) {
+                    binding.subFeed.scrollToPosition(0)
+                }
                 binding.subRefresh.isRefreshing = false
             }
         }
@@ -383,15 +373,13 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         val sorted = feed
             .sortedBySelectedOrder()
             .toMutableList()
-        sortedFeed.clear()
-        sortedFeed.addAll(sorted)
 
         // add an "all caught up item"
         if (selectedSortOrder == 0) {
             val lastCheckedFeedTime = PreferenceHelper.getLastCheckedFeedTime()
             val caughtUpIndex = feed.indexOfFirst { it.uploaded <= lastCheckedFeedTime && !it.isUpcoming }
             if (caughtUpIndex > 0) {
-                sortedFeed.add(
+                sorted.add(
                     caughtUpIndex,
                     StreamItem(type = VideosAdapter.CAUGHT_UP_STREAM_TYPE)
                 )
@@ -404,13 +392,13 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         val notLoaded = viewModel.videoFeed.value.isNullOrEmpty()
         binding.subFeed.isGone = notLoaded
         binding.emptyFeed.isVisible = notLoaded
-        loadNextFeedItems()
+        loadFeedItems(sorted)
 
         binding.toggleSubs.text = getString(R.string.subscriptions)
 
         feed.firstOrNull { !it.isUpcoming }?.uploaded?.let {
             PreferenceHelper.setLastFeedWatchedTime(it)
-        };
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -423,9 +411,13 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         )
 
         if (legacySubscriptions) {
-            legacySubscriptionsAdapter.submitList(subscriptions)
+            legacySubscriptionsAdapter.submitList(subscriptions) {
+                binding.subFeed.scrollToPosition(0)
+            }
         } else {
-            channelsAdapter.submitList(subscriptions)
+            channelsAdapter.submitList(subscriptions) {
+                binding.subFeed.scrollToPosition(0)
+            }
         }
 
         binding.subRefresh.isRefreshing = false
@@ -442,7 +434,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
     fun removeItem(videoId: String) {
         feedAdapter.removeItemById(videoId)
-        sortedFeed.removeAll { it.url?.toID() != videoId }
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
