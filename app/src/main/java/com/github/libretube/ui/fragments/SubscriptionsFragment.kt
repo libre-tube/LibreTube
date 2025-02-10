@@ -237,7 +237,9 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
                     }
                 }
 
-                feedAdapter.submitList(streamItemsToInsert)
+                feedAdapter.submitList(streamItemsToInsert) {
+                    binding.subFeed.scrollToPosition(0)
+                }
                 binding.subRefresh.isRefreshing = false
             }
         }
@@ -409,9 +411,13 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         )
 
         if (legacySubscriptions) {
-            legacySubscriptionsAdapter.submitList(subscriptions)
+            legacySubscriptionsAdapter.submitList(subscriptions) {
+                binding.subFeed.scrollToPosition(0)
+            }
         } else {
-            channelsAdapter.submitList(subscriptions)
+            channelsAdapter.submitList(subscriptions) {
+                binding.subFeed.scrollToPosition(0)
+            }
         }
 
         binding.subRefresh.isRefreshing = false
