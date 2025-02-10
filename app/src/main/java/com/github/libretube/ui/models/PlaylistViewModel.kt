@@ -46,7 +46,7 @@ class PlaylistViewModel(
         }
     }
 
-    fun onPostiveButtonClick(playlistIndex: Int) {
+    fun onAddToPlaylist(playlistIndex: Int) {
         val playlist = _uiState.value.playlists.getOrElse(playlistIndex) { return }
         savedStateHandle[UI_STATE] = _uiState.value.copy(lastSelectedPlaylistId = playlist.id)
 

@@ -69,15 +69,20 @@ class AddToPlaylistDialog : DialogFragment() {
 
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.addToPlaylist)
-            .setNegativeButton(R.string.createPlaylist) { _, _ ->
-                CreatePlaylistDialog().show(childFragmentManager, null)
-            }
-            .setPositiveButton(R.string.addToPlaylist) { _, _ ->
-                val selectedItemPosition = binding.playlistsSpinner.selectedItemPosition
-                viewModel.onPostiveButtonClick(selectedItemPosition)
-            }
+            .setNegativeButton(R.string.createPlaylist, null)
+            .setPositiveButton(R.string.addToPlaylist, null)
             .setView(binding.root)
             .show()
+            .apply {
+                // Click listeners without closing the dialog
+                getButton(DialogInterface.BUTTON_NEGATIVE).setOnClickListener {
+                    CreatePlaylistDialog().show(childFragmentManager, null)
+                }
+                getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
+                    val selectedItemPosition = binding.playlistsSpinner.selectedItemPosition
+                    viewModel.onAddToPlaylist(selectedItemPosition)
+                }
+            }
     }
 
     override fun onDismiss(dialog: DialogInterface) {
