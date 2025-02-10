@@ -552,4 +552,5 @@
     <string name="import_format_list_of_urls">URLや動画IDの一覧</string>
     <string name="crashlog">クラッシュの記録</string>
     <string name="delete_only_watched_videos">視聴済みの動画のみ削除</string>
+    <string name="show_upcoming_videos">配信予定の動画を表示</string>
 </resources>

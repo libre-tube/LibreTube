@@ -554,4 +554,5 @@
     <string name="local_feed_extraction">Lokálna extrakcia kanála</string>
     <string name="never_show_again">Už neukazovať</string>
     <string name="update_information">Informácie o aktualizácii</string>
+    <string name="show_upcoming_videos">Zobraziť pripravované videá</string>
 </resources>

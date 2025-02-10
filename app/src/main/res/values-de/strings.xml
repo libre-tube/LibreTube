@@ -553,4 +553,5 @@
     <string name="local_feed_extraction_summary">Abos direkt von YouTube abrufen. Dies kann das Abrufen unter Umständen deutlich langsamer machen.</string>
     <string name="never_show_again">Nicht wieder anzeigen</string>
     <string name="update_information">Information</string>
+    <string name="show_upcoming_videos">Demnächst erscheinende Videos anzeigen</string>
 </resources>
