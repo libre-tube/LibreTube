@@ -554,4 +554,5 @@
     <string name="never_show_again">Nunca mostrar esto de nuevo</string>
     <string name="local_feed_extraction_summary">Obtener el feed directamente de YouTube. Esto puede ser significativamente más lento.</string>
     <string name="local_feed_extraction">Extracción de feed local</string>
+    <string name="show_upcoming_videos">Mostrar proximos videos</string>
 </resources>
