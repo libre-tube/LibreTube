@@ -114,14 +114,14 @@
 
         <activity
             android:name=".ui.activities.OfflinePlayerActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
             android:launchMode="singleTop"
             android:label="@string/player"
             android:supportsPictureInPicture="true" />
 
         <activity
             android:name=".ui.activities.MainActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
             android:exported="true"
             android:launchMode="singleTask"
             android:screenOrientation="locked"
@@ -136,7 +136,7 @@
 
         <activity-alias
             android:name=".Default"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
             android:enabled="true"
             android:exported="true"
             android:icon="@mipmap/ic_launcher"
@@ -154,7 +154,7 @@
 
         <activity-alias
             android:name=".IconGradient"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_gradient"
@@ -173,7 +173,7 @@
 
         <activity-alias
             android:name=".DefaultLight"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_light"
@@ -192,7 +192,7 @@
 
         <activity-alias
             android:name=".IconFire"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_fire"
@@ -211,7 +211,7 @@
 
         <activity-alias
             android:name=".IconFlame"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_flame"
@@ -230,7 +230,7 @@
 
         <activity-alias
             android:name=".IconShaped"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_shaped"
@@ -247,7 +247,7 @@
 
         <activity-alias
             android:name=".IconTorch"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_torch"
@@ -266,7 +266,7 @@
 
         <activity-alias
             android:name=".IconLegacy"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_legacy"
@@ -285,7 +285,7 @@
 
         <activity-alias
             android:name=".IconBird"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_bird"
