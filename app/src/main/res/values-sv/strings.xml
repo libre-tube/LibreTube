@@ -187,7 +187,7 @@
     <string name="unlimited">Obegränsad</string>
     <string name="chapters">Kapitel</string>
     <string name="resume">Fortsätt</string>
-    <string name="category_highlight_summary">Kan antingen vara den annonserade titeln, förhandsbilden eller den intressantaste delen av videon. Du kan hoppa till den genom att trycka på den i kapitelavsnittet.</string>
+    <string name="category_highlight_summary">Kan antingen vara den annonserade titeln, förhandsbilden eller den intressantaste delen av videon. Du kan hoppa till den genom att trycka på den i kapitelavsnittet</string>
     <string name="notification_time_summary">Begränsa hur länge sändningsnotifikationer visas</string>
     <string name="show_stream_thumbnails">Visa förhandsbilder för sändningar</string>
     <string name="instance_frontend_url">URL till instansens frontend</string>
@@ -464,7 +464,7 @@
     <string name="tooltip_clear_queue">Töm kö</string>
     <string name="player_channel_description">Visar en notifikation vid uppspelning</string>
     <string name="tooltip_scroll_to_top">Skrolla till toppen</string>
-    <string name="sponsorblock_user_id">SponsorBlock UserID</string>
+    <string name="sponsorblock_user_id">SponsorBlock Användar-ID</string>
     <string name="unlimited_search_history">Obegränsad sökhistorik</string>
     <string name="segment_type">Typ av segment</string>
     <string name="tooltip_repeat">Upprepa</string>
@@ -532,7 +532,7 @@
     <string name="external_download_provider">Extern nedladdningsleverantör</string>
     <string name="import_temp_playlist">Importera tillfällig spellista?</string>
     <string name="screenshot">Skärmbild</string>
-    <string name="pip">PiP</string>
+    <string name="pip">BIB</string>
     <string name="local_stream_extraction_summary">Hämta videouppspelningsinformation direkt från YouTube utan att använda Piped.</string>
     <string name="dialog_play_offline_title">En lokal version av den här videon finns tillgänglig.</string>
     <string name="import_watch_history">Importera visningshistorik</string>
@@ -540,4 +540,18 @@
     <string name="import_watch_history_desc">Observera att allt inte importeras på grund av YouTubes begränsade exportdata.</string>
     <string name="local_ryd_summary">Hämta ogilla-information direkt från https://returnyoutubedislikeapi.com</string>
     <string name="audio_codecs">Ljud kodekar</string>
+    <string name="never_show_again">Visa aldrig detta igen</string>
+    <string name="update_information">Uppdateringsinformation</string>
+    <string name="local_feed_extraction">Hämta flöde lokalt</string>
+    <string name="local_feed_extraction_summary">Hämta flödet direkt från YouTube. Detta kan vara betydligt långsammare.</string>
+    <string name="upcoming">Kommande</string>
+    <string name="view_count">%1$s visningar</string>
+    <string name="import_format_list_of_urls">Lista med URL:er eller video-ID:n</string>
+    <string name="local_ryd">Lokal Return Youtube Dislike hämtning</string>
+    <string name="local_stream_extraction">Hämta videoström lokalt</string>
+    <string name="category_exclusive_access">Exklusiv åtkomst</string>
+    <string name="delete_only_watched_videos">Ta endast bort videor som redan setts</string>
+    <string name="show_upcoming_videos">Visa kommande videor</string>
+    <string name="export_playlist">Exportera spellista</string>
+    <string name="crashlog">Kraschlogg</string>
 </resources>
