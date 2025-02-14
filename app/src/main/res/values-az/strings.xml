@@ -477,7 +477,7 @@
     <string name="sponsorblock_user_id">SponsorBlock İstifadəçi ID</string>
     <string name="contribute_to_sponsorblock">SponsorBlock-a Töhfə Ver</string>
     <string name="no_fullscreen_resolution">Tam ekransız görüntü imkanı</string>
-    <string name="playback_during_call_summary">Nəzərə alın ki, bu, daha səs fokusunun hər növün idarə etməməsi üçün tətbiqədə təsir edir</string>
+    <string name="playback_during_call_summary">Nəzərə alın ki, bu, daha səs fokusunun hər növün idarə etməməsi üçün tətbiqə də təsir edir</string>
     <string name="donate">İanə Ver</string>
     <string name="music_artists">YT Musiqi Sənətkarları</string>
     <string name="playback_during_call">Telefon zəngində də oynatmağa davam et</string>
