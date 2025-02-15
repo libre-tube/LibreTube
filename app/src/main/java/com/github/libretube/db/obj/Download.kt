@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.extensions.toMillis
 import kotlinx.datetime.LocalDate
 import java.nio.file.Path
 
@@ -25,6 +26,7 @@ data class Download(
         shortDescription = description,
         thumbnail = thumbnailPath?.toUri()?.toString(),
         duration = duration,
+        uploaded = uploadDate?.toMillis() ?: 0L,
         uploadedDate = uploadDate?.toString(),
         uploaderName = uploader,
     )
