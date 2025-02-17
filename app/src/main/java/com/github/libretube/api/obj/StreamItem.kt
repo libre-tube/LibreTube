@@ -28,7 +28,7 @@ data class StreamItem(
     val shortDescription: String? = null,
     val isShort: Boolean = false
 ) : Parcelable {
-    val isLive get() = (duration == null) || (duration <= 0L)
+    val isLive get() = !isShort && ((duration == null) || (duration <= 0L))
     val isUpcoming get() = uploaded > System.currentTimeMillis()
 
     fun toLocalPlaylistItem(playlistId: String): LocalPlaylistItem {

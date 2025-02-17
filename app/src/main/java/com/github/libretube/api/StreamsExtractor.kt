@@ -10,6 +10,7 @@ import com.github.libretube.api.obj.PreviewFrames
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.api.obj.Subtitle
+import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_URL
 import kotlinx.datetime.toKotlinInstant
@@ -40,13 +41,13 @@ fun StreamInfoItem.toStreamItem(
     uploaderAvatarUrl: String? = null
 ): StreamItem = StreamItem(
     type = StreamItem.TYPE_STREAM,
-    url = url.replace(YOUTUBE_FRONTEND_URL, ""),
+    url = url.toID(),
     title = name,
-    uploaded = uploadDate?.offsetDateTime()?.toEpochSecond()?.times(1000) ?: 0,
+    uploaded = uploadDate?.offsetDateTime()?.toEpochSecond()?.times(1000) ?: -1,
     uploadedDate = textualUploadDate ?: uploadDate?.offsetDateTime()?.toLocalDateTime()?.toLocalDate()
         ?.toString(),
     uploaderName = uploaderName,
-    uploaderUrl = uploaderUrl.replace(YOUTUBE_FRONTEND_URL, ""),
+    uploaderUrl = uploaderUrl.toID(),
     uploaderAvatar = uploaderAvatarUrl ?: uploaderAvatars.maxByOrNull { it.height }?.url,
     thumbnail = thumbnails.maxByOrNull { it.height }?.url,
     duration = duration,
@@ -68,7 +69,7 @@ object StreamsExtractor {
             description = resp.description.content,
             uploader = resp.uploaderName,
             uploaderAvatar = resp.uploaderAvatars.maxBy { it.height }.url,
-            uploaderUrl = resp.uploaderUrl.replace(YOUTUBE_FRONTEND_URL, ""),
+            uploaderUrl = resp.uploaderUrl.toID(),
             uploaderVerified = resp.isUploaderVerified,
             uploaderSubscriberCount = resp.uploaderSubscriberCount,
             category = resp.category,
