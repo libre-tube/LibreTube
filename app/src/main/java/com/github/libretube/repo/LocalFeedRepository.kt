@@ -39,7 +39,10 @@ class LocalFeedRepository : FeedRepository {
 
         val channelIds = SubscriptionHelper.getSubscriptionChannelIds()
         // remove videos from channels that are no longer subscribed
-        DatabaseHolder.Database.feedDao().deleteAllExcept(channelIds.map { id -> "/channel/${id}" })
+        DatabaseHolder.Database.feedDao().deleteAllExcept(
+            // TODO: the /channel/ prefix is allowed for compatibility reasons and will be removed in the future
+            channelIds + channelIds.map { id -> "/channel/${id}" }
+        )
 
         if (!forceRefresh) {
             val feed = DatabaseHolder.Database.feedDao().getAll()
@@ -104,7 +107,7 @@ class LocalFeedRepository : FeedRepository {
             mostRecentChannelVideo.uploadDate?.offsetDateTime()?.toInstant()?.toEpochMilli() ?: 0
         val hasNewerUploads =
             mostRecentUploadTime > minimumDateMillis && !DatabaseHolder.Database.feedDao()
-                .contains(mostRecentChannelVideo.url.replace(YOUTUBE_FRONTEND_URL, "").toID())
+                .contains(mostRecentChannelVideo.url.toID())
         if (!hasNewerUploads) return emptyList()
 
         val channelInfo = ChannelInfo.getInfo(channelUrl)
@@ -122,7 +125,10 @@ class LocalFeedRepository : FeedRepository {
         return related.map { item ->
             // avatar is not always included in these info items, thus must be taken from channel info response
             item.toStreamItem(channelInfo.avatars.maxByOrNull { it.height }?.url)
-        }.filter { it.uploaded > minimumDateMillis }
+        }.filter {
+            // shorts don't have upload dates apparently
+            it.isShort || it.uploaded > minimumDateMillis
+        }
     }
 
     companion object {
