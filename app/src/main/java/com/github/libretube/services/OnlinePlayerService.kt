@@ -13,7 +13,7 @@ import androidx.media3.exoplayer.hls.HlsMediaSource
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.StreamsExtractor
+import com.github.libretube.api.local.StreamsExtractor
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData

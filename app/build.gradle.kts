@@ -133,6 +133,7 @@ dependencies {
     /* NewPipe Extractor */
     implementation(libs.newpipeextractor)
 
+
     /* Coil */
     coreLibraryDesugaring(libs.desugaring)
     implementation(libs.coil)

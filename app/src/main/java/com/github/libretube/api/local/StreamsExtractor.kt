@@ -1,7 +1,9 @@
-package com.github.libretube.api
+package com.github.libretube.api.local
 
 import android.content.Context
 import com.github.libretube.R
+import com.github.libretube.api.JsonHelper
+import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.Message
 import com.github.libretube.api.obj.MetaInfo
@@ -13,6 +15,7 @@ import com.github.libretube.api.obj.Subtitle
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_URL
 import kotlinx.datetime.toKotlinInstant
+import org.schabi.newpipe.extractor.services.youtube.extractors.YoutubeStreamExtractor
 import org.schabi.newpipe.extractor.stream.StreamInfo
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
 import org.schabi.newpipe.extractor.stream.VideoStream
@@ -57,6 +60,10 @@ fun StreamInfoItem.toStreamItem(
 )
 
 object StreamsExtractor {
+    init {
+        YoutubeStreamExtractor.setPoTokenProvider(PoTokenGenerator());
+    }
+
     suspend fun extractStreams(videoId: String): Streams {
         if (!PlayerHelper.disablePipedProxy || !PlayerHelper.localStreamExtraction) {
             return RetrofitInstance.api.getStreams(videoId)

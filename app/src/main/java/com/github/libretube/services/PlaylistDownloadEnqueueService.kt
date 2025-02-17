@@ -12,7 +12,7 @@ import com.github.libretube.LibreTubeApp.Companion.PLAYLIST_DOWNLOAD_ENQUEUE_CHA
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.StreamsExtractor
+import com.github.libretube.api.local.StreamsExtractor
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData

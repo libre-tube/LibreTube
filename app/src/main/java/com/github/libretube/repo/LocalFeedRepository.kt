@@ -3,7 +3,7 @@ package com.github.libretube.repo
 import android.util.Log
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.StreamItem
-import com.github.libretube.api.toStreamItem
+import com.github.libretube.api.local.toStreamItem
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.SubscriptionsFeedItem

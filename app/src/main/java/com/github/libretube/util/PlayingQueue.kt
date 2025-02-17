@@ -3,7 +3,7 @@ package com.github.libretube.util
 import androidx.media3.common.Player
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.StreamsExtractor
+import com.github.libretube.api.local.StreamsExtractor
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.extensions.move
 import com.github.libretube.extensions.runCatchingIO

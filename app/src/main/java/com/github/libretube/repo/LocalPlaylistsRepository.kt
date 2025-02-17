@@ -3,7 +3,7 @@ package com.github.libretube.repo
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.PlaylistsHelper.MAX_CONCURRENT_IMPORT_CALLS
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.StreamsExtractor
+import com.github.libretube.api.local.StreamsExtractor
 import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
