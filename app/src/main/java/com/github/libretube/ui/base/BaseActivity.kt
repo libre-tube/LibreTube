@@ -2,6 +2,7 @@ package com.github.libretube.ui.base
 
 import android.content.Context
 import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.libretube.R
@@ -53,21 +54,17 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     override fun attachBaseContext(newBase: Context?) {
-        if (newBase == null) {
-            super.attachBaseContext(null)
-            return
-        }
+        super.attachBaseContext(newBase)
 
         // change the locale according to the user's preference (or system language as fallback)
         val locale = LocaleHelper.getAppLocale()
         Locale.setDefault(locale)
 
-        val configuration = newBase.resources.configuration.apply {
+        val configuration = Configuration().apply {
             setLocale(locale)
         }
-        val newContext = newBase.createConfigurationContext(configuration)
 
-        super.attachBaseContext(newContext)
+        applyOverrideConfiguration(configuration)
     }
 
     /**
