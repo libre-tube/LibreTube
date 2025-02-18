@@ -120,7 +120,7 @@ class LocalFeedRepository : FeedRepository {
             runCatching {
                 ChannelTabInfo.getInfo(NewPipeExtractorInstance.extractor, tab).relatedItems
             }.getOrElse { emptyList() }
-        }.flatten().filterIsInstance<StreamInfoItem>()
+        }.flatten().filterIsInstance<StreamInfoItem>().filter { !it.requiresMembership() }
 
         return related.map { item ->
             // avatar is not always included in these info items, thus must be taken from channel info response
