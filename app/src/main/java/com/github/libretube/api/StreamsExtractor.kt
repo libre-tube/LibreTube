@@ -13,17 +13,22 @@ import com.github.libretube.api.obj.Subtitle
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_URL
+import com.github.libretube.util.deArrow
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.withContext
 import kotlinx.datetime.toKotlinInstant
+import org.schabi.newpipe.extractor.stream.AudioStream
 import org.schabi.newpipe.extractor.stream.StreamInfo
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
 import org.schabi.newpipe.extractor.stream.VideoStream
 import retrofit2.HttpException
 import java.io.IOException
 
-fun VideoStream.toPipedStream(): PipedStream = PipedStream(
+fun VideoStream.toPipedStream() = PipedStream(
     url = content,
     codec = codec,
-    format = format.toString(),
+    format = format?.toString(),
     height = height,
     width = width,
     quality = getResolution(),
@@ -37,14 +42,34 @@ fun VideoStream.toPipedStream(): PipedStream = PipedStream(
     contentLength = itagItem?.contentLength ?: 0L
 )
 
+fun AudioStream.toPipedStream() = PipedStream(
+    url = content,
+    format = format?.toString(),
+    quality = "$averageBitrate bits",
+    bitrate = bitrate,
+    mimeType = format?.mimeType,
+    initStart = initStart,
+    initEnd = initEnd,
+    indexStart = indexStart,
+    indexEnd = indexEnd,
+    contentLength = itagItem?.contentLength ?: 0L,
+    codec = codec,
+    audioTrackId = audioTrackId,
+    audioTrackName = audioTrackName,
+    audioTrackLocale = audioLocale?.toLanguageTag(),
+    audioTrackType = audioTrackType?.name,
+    videoOnly = false
+)
+
 fun StreamInfoItem.toStreamItem(
     uploaderAvatarUrl: String? = null
-): StreamItem = StreamItem(
+) = StreamItem(
     type = StreamItem.TYPE_STREAM,
     url = url.toID(),
     title = name,
     uploaded = uploadDate?.offsetDateTime()?.toEpochSecond()?.times(1000) ?: -1,
-    uploadedDate = textualUploadDate ?: uploadDate?.offsetDateTime()?.toLocalDateTime()?.toLocalDate()
+    uploadedDate = textualUploadDate ?: uploadDate?.offsetDateTime()?.toLocalDateTime()
+        ?.toLocalDate()
         ?.toString(),
     uploaderName = uploaderName,
     uploaderUrl = uploaderUrl.toID(),
@@ -58,13 +83,22 @@ fun StreamInfoItem.toStreamItem(
 )
 
 object StreamsExtractor {
-    suspend fun extractStreams(videoId: String): Streams {
+    suspend fun extractStreams(videoId: String): Streams = withContext(Dispatchers.IO) {
         if (!PlayerHelper.disablePipedProxy || !PlayerHelper.localStreamExtraction) {
-            return RetrofitInstance.api.getStreams(videoId)
+            return@withContext RetrofitInstance.api.getStreams(videoId).deArrow(videoId)
         }
 
-        val resp = StreamInfo.getInfo("${YOUTUBE_FRONTEND_URL}/watch?v=$videoId")
-        return Streams(
+        val respAsync = async {
+            StreamInfo.getInfo("$YOUTUBE_FRONTEND_URL/watch?v=$videoId")
+        }
+        val dislikesAsync = async {
+            if (PlayerHelper.localRYD) runCatching {
+                RetrofitInstance.externalApi.getVotes(videoId).dislikes
+            }.getOrElse { -1 } else -1
+        }
+        val (resp, dislikes) = Pair(respAsync.await(), dislikesAsync.await())
+
+        Streams(
             title = resp.name,
             description = resp.description.content,
             uploader = resp.uploaderName,
@@ -75,9 +109,7 @@ object StreamsExtractor {
             category = resp.category,
             views = resp.viewCount,
             likes = resp.likeCount,
-            dislikes = if (PlayerHelper.localRYD) runCatching {
-                RetrofitInstance.externalApi.getVotes(videoId).dislikes
-            }.getOrElse { -1 } else -1,
+            dislikes = dislikes,
             license = resp.licence,
             hls = resp.hlsUrl,
             dash = resp.dashMpdUrl,
@@ -95,7 +127,9 @@ object StreamsExtractor {
             uploadTimestamp = resp.uploadDate.offsetDateTime().toInstant().toKotlinInstant(),
             uploaded = resp.uploadDate.offsetDateTime().toEpochSecond() * 1000,
             thumbnailUrl = resp.thumbnails.maxBy { it.height }.url,
-            relatedStreams = resp.relatedItems.filterIsInstance<StreamInfoItem>().map(StreamInfoItem::toStreamItem),
+            relatedStreams = resp.relatedItems
+                .filterIsInstance<StreamInfoItem>()
+                .map { item -> item.toStreamItem() },
             chapters = resp.streamSegments.map {
                 ChapterSegment(
                     title = it.title,
@@ -103,31 +137,9 @@ object StreamsExtractor {
                     start = it.startTimeSeconds.toLong()
                 )
             },
-            audioStreams = resp.audioStreams.map {
-                PipedStream(
-                    url = it.content,
-                    format = it.format?.toString(),
-                    quality = "${it.averageBitrate} bits",
-                    bitrate = it.bitrate,
-                    mimeType = it.format?.mimeType,
-                    initStart = it.initStart,
-                    initEnd = it.initEnd,
-                    indexStart = it.indexStart,
-                    indexEnd = it.indexEnd,
-                    contentLength = it.itagItem?.contentLength ?: 0L,
-                    codec = it.codec,
-                    audioTrackId = it.audioTrackId,
-                    audioTrackName = it.audioTrackName,
-                    audioTrackLocale = it.audioLocale?.toLanguageTag(),
-                    audioTrackType = it.audioTrackType?.name,
-                    videoOnly = false
-                )
-            },
-            videoStreams = resp.videoOnlyStreams.map {
-                it.toPipedStream().copy(videoOnly = true)
-            } + resp.videoStreams.map {
-                it.toPipedStream().copy(videoOnly = false)
-            },
+            audioStreams = resp.audioStreams.map { it.toPipedStream() },
+            videoStreams = resp.videoOnlyStreams.map { it.toPipedStream().copy(videoOnly = true) } +
+                    resp.videoStreams.map { it.toPipedStream().copy(videoOnly = false) },
             previewFrames = resp.previewFrames.map {
                 PreviewFrames(
                     it.urls,
@@ -148,7 +160,7 @@ object StreamsExtractor {
                     it.isAutoGenerated
                 )
             }
-        )
+        ).deArrow(videoId)
     }
 
     fun getExtractorErrorMessageString(context: Context, exception: Exception): String {
@@ -157,6 +169,7 @@ object StreamsExtractor {
             is HttpException -> exception.response()?.errorBody()?.string()?.runCatching {
                 JsonHelper.json.decodeFromString<Message>(this).message
             }?.getOrNull() ?: context.getString(R.string.server_error)
+
             else -> exception.localizedMessage.orEmpty()
         }
     }
