@@ -24,12 +24,13 @@ class NewPipeDownloaderImpl : Downloader() {
             .url(url)
             .addHeader("User-Agent", USER_AGENT)
 
-        headers.forEach { (headerName, headerValueList) ->
-            headerValueList.forEach { headerValue ->
-                requestBuilder.addHeader(headerName, headerValue)
+        for (header in headers) {
+            val name = header.key
+            val values = header.value
+            for (headerValue in values) {
+                requestBuilder.addHeader(name, headerValue)
             }
         }
-
         val response = client.newCall(requestBuilder.build()).execute()
 
         return when (response.code) {

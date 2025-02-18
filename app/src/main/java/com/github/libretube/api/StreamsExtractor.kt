@@ -2,16 +2,30 @@ package com.github.libretube.api
 
 import android.content.Context
 import com.github.libretube.R
-import com.github.libretube.api.obj.*
+import com.github.libretube.api.obj.ChapterSegment
+import com.github.libretube.api.obj.Message
+import com.github.libretube.api.obj.MetaInfo
+import com.github.libretube.api.obj.PipedStream
+import com.github.libretube.api.obj.PreviewFrames
+import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.api.obj.Streams
+import com.github.libretube.api.obj.Subtitle
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_URL
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.withContext
 import kotlinx.datetime.toKotlinInstant
-import org.schabi.newpipe.extractor.stream.*
+import org.schabi.newpipe.extractor.stream.StreamInfo
+import org.schabi.newpipe.extractor.stream.StreamInfoItem
+import org.schabi.newpipe.extractor.stream.VideoStream
 import retrofit2.HttpException
 import java.io.IOException
-import kotlinx.coroutines.flow.*
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.coroutines.CoroutineContext
 val uploaderAvatarCache = ConcurrentHashMap<String, String>()
@@ -70,17 +84,15 @@ object StreamsExtractor {
                 }.getOrElse { -1 } else -1
             }
 
-            val relatedStreams = async {
+            val relatedStreams =async {
                 resp.relatedItems
                     .filterIsInstance<StreamInfoItem>()
-                    .chunked(4)
-                    .map { chunk ->
-                        chunk.map { item ->
-                            async { item.toStreamItem() }
-                        }
-                    }
-                    .flatMap { it.awaitAll() }
+                    .map { item -> async { item.toStreamItem() } }
+                    .awaitAll()
             }
+
+
+
 
             val audioStreams = async {
                 resp.audioStreams.map { stream ->
@@ -180,8 +192,7 @@ object StreamsExtractor {
             }
         )
     }
-
-   fun getExtractorErrorMessageString(context: Context, exception: Exception): String {
+    fun getExtractorErrorMessageString(context: Context, exception: Exception): String {
         return when (exception) {
             is IOException -> context.getString(R.string.unknown_error)
             is HttpException -> exception.response()?.errorBody()?.string()?.runCatching {
