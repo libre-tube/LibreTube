@@ -84,7 +84,7 @@ object StreamsExtractor {
                 }.getOrElse { -1 } else -1
             }
 
-            val relatedStreams =async {
+            val relatedStreams = async {
                 resp.relatedItems
                     .filterIsInstance<StreamInfoItem>()
                     .map { item -> async { item.toStreamItem() } }
