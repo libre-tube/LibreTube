@@ -555,4 +555,5 @@
     <string name="local_feed_extraction">Локальное извлечение корма</string>
     <string name="local_feed_extraction_summary">Непосредственно получайте поток с YouTube. Это может быть значительно медленнее.</string>
     <string name="update_information">Обновленная информация</string>
+    <string name="show_upcoming_videos">Показывать предстоящие видео</string>
 </resources>
