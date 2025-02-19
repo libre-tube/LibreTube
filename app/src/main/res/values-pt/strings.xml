@@ -554,4 +554,5 @@
     <string name="update_information">Informações relevantes</string>
     <string name="local_feed_extraction">Extração local de fontes</string>
     <string name="local_feed_extraction_summary">Obter videos diretamente do YouTube. Pode ter impacto na velocidade.</string>
+    <string name="show_upcoming_videos">Mostrar vídeos seguintes</string>
 </resources>
