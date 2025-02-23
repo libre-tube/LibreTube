@@ -552,8 +552,8 @@
     <string name="import_format_list_of_urls">Список ссылок или идентификаторов видео</string>
     <string name="export_playlist">Экспорт списка воспроизведения</string>
     <string name="never_show_again">Никогда больше не показывайте это</string>
-    <string name="local_feed_extraction">Локальное извлечение корма</string>
+    <string name="local_feed_extraction">Извлечение локального источника</string>
     <string name="local_feed_extraction_summary">Непосредственно получайте поток с YouTube. Это может быть значительно медленнее.</string>
-    <string name="update_information">Обновленная информация</string>
-    <string name="show_upcoming_videos">Показывать предстоящие видео</string>
+    <string name="update_information">Информация об обновлении</string>
+    <string name="show_upcoming_videos">Показывать следующие видео</string>
 </resources>
