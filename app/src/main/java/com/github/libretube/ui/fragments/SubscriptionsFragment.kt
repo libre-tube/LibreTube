@@ -378,7 +378,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         if (selectedSortOrder == 0) {
             val lastCheckedFeedTime = PreferenceHelper.getLastCheckedFeedTime()
             val caughtUpIndex = feed.indexOfFirst { it.uploaded <= lastCheckedFeedTime && !it.isUpcoming }
-            if (caughtUpIndex > 0) {
+            if (caughtUpIndex > 0 && !feed[caughtUpIndex-1].isUpcoming) {
                 sorted.add(
                     caughtUpIndex,
                     StreamItem(type = VideosAdapter.CAUGHT_UP_STREAM_TYPE)
