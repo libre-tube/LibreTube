@@ -214,7 +214,7 @@
     <string name="rewind">Terugspoelen</string>
     <string name="help">Hulp</string>
     <string name="faq">Veelgestelde vragen</string>
-    <string name="codecs">Codecs</string>
+    <string name="codecs">Video­codecs</string>
     <string name="watch_positions">Positie onthouden</string>
     <string name="resume">Hervatten</string>
     <string name="caption_settings">Ondertitels</string>
@@ -535,4 +535,11 @@
     <string name="pip">PiP</string>
     <string name="local_stream_extraction">Stream lokaal uitlezen</string>
     <string name="local_stream_extraction_summary">Haal recht­streeks video­weergave­informatie op van YouTube zonder gebruik te maken van Piped.</string>
+    <string name="upcoming">Binnenkort</string>
+    <string name="category_exclusive_access">Exclusieve toegang</string>
+    <string name="export_playlist">Afspeel­lĳst exporteren</string>
+    <string name="import_watch_history">Kĳk­geschiedenis importeren</string>
+    <string name="audio_codecs">Audio­codecs</string>
+    <string name="crashlog">Crash­logboek</string>
+    <string name="view_count">%1$s weergaven</string>
 </resources>

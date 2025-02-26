@@ -535,10 +535,23 @@
     <string name="pip">RiR</string>
     <string name="local_stream_extraction">Yerel akış çıkarımı</string>
     <string name="local_stream_extraction_summary">Piped kullanmadan YouTube\'dan doğrudan video oynatma bilgilerini alın.</string>
-    <string name="local_ryd">YouTube Beğenmemelerini Yerel Olarak Geri Getir</string>
+    <string name="local_ryd">YouTube Beğenmeme Özelliğini Yerel Olarak Geri Getir</string>
     <string name="local_ryd_summary">Beğenmeme bilgisini doğrudan https://returnyoutubedislikeapi.com adresinden alın</string>
     <string name="import_watch_history_desc">YouTube\'un sınırlı dışa aktarım verileri nedeniyle her şeyin içe aktarılmayacağını lütfen unutmayın.</string>
     <string name="import_watch_history">İzleme geçmişini içe aktar</string>
     <string name="audio_codecs">Ses kodekleri</string>
     <string name="view_count">%1$s görüntüleme</string>
+    <string name="dialog_play_offline_body">Videoyu indirme klasöründen oynatmak ister misiniz?</string>
+    <string name="never_show_again">Bunu bir daha asla gösterme</string>
+    <string name="update_information">Güncelleme bilgisi</string>
+    <string name="local_feed_extraction">Yerel akışı getir</string>
+    <string name="local_feed_extraction_summary">Akışı doğrudan YouTube\'dan alın. Bu önemli ölçüde daha yavaş olabilir.</string>
+    <string name="upcoming">Yakında</string>
+    <string name="category_exclusive_access">Özel Erişim</string>
+    <string name="delete_only_watched_videos">Yalnızca önceden izlenen videoları sil</string>
+    <string name="export_playlist">Oynatma listesini dışa aktar</string>
+    <string name="import_format_list_of_urls">URL\'lerin veya video kimliklerinin listesi</string>
+    <string name="show_upcoming_videos">Yaklaşan videoları göster</string>
+    <string name="crashlog">Çökme kaydı</string>
+    <string name="dialog_play_offline_title">Bu videonun indirilmiş bir sürümü mevcut.</string>
 </resources>

@@ -545,4 +545,15 @@
     <string name="dialog_play_offline_title">Даступная захаваная копія гэтага відэа.</string>
     <string name="view_count">%1$s праглядаў</string>
     <string name="dialog_play_offline_body">Прайграць відэа з тэчкі загрузак?</string>
+    <string name="never_show_again">Ніколі больш не паказваць гэта</string>
+    <string name="update_information">Інфармацыя пра абнаўленне</string>
+    <string name="local_feed_extraction">Выдаленне лакальнай крыніцы</string>
+    <string name="local_feed_extraction_summary">Непасрэдна атрымайце паток з YouTube. Гэта можа быць значна павольней.</string>
+    <string name="upcoming">Хутка</string>
+    <string name="delete_only_watched_videos">Выдаліць толькі прагледжаныя відэа</string>
+    <string name="category_exclusive_access">Эксклюзіўны доступ</string>
+    <string name="export_playlist">Экспарт плэйліста</string>
+    <string name="import_format_list_of_urls">Спіс спасылак або ідэнтыфікатараў відэа</string>
+    <string name="show_upcoming_videos">Паказаць наступны відэа</string>
+    <string name="crashlog">Часопіс адпраўлення</string>
 </resources>

@@ -61,7 +61,7 @@
     <string name="downloadfailed">Yükləmə uğursuz oldu.</string>
     <string name="import_from_yt">Abunəlikləri idxal et</string>
     <string name="import_from_yt_summary">YouTube və ya NewPipe-dan</string>
-    <string name="app_theme">Tema</string>
+    <string name="app_theme">Kolorit</string>
     <string name="server_error">Görünür, seçilən serverlə problem olacaq. Başqa instansiya sına.</string>
     <string name="unknown_error">Şəbəkə səhvi.</string>
     <string name="error">Nəsə səhv baş verdi.</string>
@@ -187,8 +187,8 @@
     <string name="selected">Seçilən</string>
     <string name="never">Heç vaxt</string>
     <string name="autoRotatePlayer">Avtomatik tam ekran</string>
-    <string name="pure_theme">Təmiz görünüş</string>
-    <string name="pure_theme_summary">Təmiz ağ/qara görünüş</string>
+    <string name="pure_theme">Təmiz kolorit</string>
+    <string name="pure_theme_summary">Təmiz ağ/qara kolorit</string>
     <string name="no_player_found">Xarici oynadıcı tapılmadı. Zəhmət olmasa, birinin quraşdırıldığına əmin olun.</string>
     <string name="data_saver_mode">Məlumat qənaətçisi rejimi</string>
     <string name="autoRotatePlayer_summary">Cihaz döndərildikdə tam ekran oynatma</string>
