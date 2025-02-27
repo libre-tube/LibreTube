@@ -331,7 +331,7 @@
     <string name="audio_track">Audio track</string>
     <string name="unsupported_file_format">Unsupported file format: %1$s</string>
     <string name="hls_instead_of_dash">Use HLS</string>
-    <string name="hls_instead_of_dash_summary">Use HLS instead of DASH (will be slower, not recommended)</string>
+    <string name="hls_instead_of_dash_summary">Use HLS instead of DASH for streaming media. Try toggling this option if video playback doesn't work.</string>
     <string name="auto_quality">Auto</string>
     <string name="limit_to_runtime">Limit to runtime</string>
     <string name="trends">Trends</string>
