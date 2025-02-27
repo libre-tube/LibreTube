@@ -372,7 +372,7 @@ object PlayerHelper {
     val useHlsOverDash: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.USE_HLS_OVER_DASH,
-            true
+            false
         )
 
     var repeatMode: Int
