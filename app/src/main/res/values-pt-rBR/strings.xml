@@ -293,7 +293,7 @@
     <string name="layout">Layout</string>
     <string name="audio_track">Faixa de áudio</string>
     <string name="hls_instead_of_dash">Usar HLS</string>
-    <string name="hls_instead_of_dash_summary">Usar HLS em vez de DASH (será mais lento, não recomendado)</string>
+    <string name="hls_instead_of_dash_summary">Usar HLS em vez de DASH para streaming de mídia. Tente alternar essa opção se a reprodução de vídeo não funcionar.</string>
     <string name="auto_quality">Auto</string>
     <string name="limit_to_runtime">Limite de tempo para execução</string>
     <string name="trends">Em alta</string>
@@ -314,7 +314,7 @@
     <string name="comments_disabled">Os comentários foram desativados pelo autor.</string>
     <string name="captions_size">Tamanho das legendas</string>
     <string name="double_tap_seek">Toque duas vezes para procurar</string>
-    <string name="all_caught_up">Você está em dia</string>
+    <string name="all_caught_up">Tudo em dia</string>
     <string name="all_caught_up_summary">Você já viu todos os novos vídeos</string>
     <string name="double_tap_seek_summary">Toque duas vezes à esquerda ou à direita para retroceder ou avançar a posição da reprodução</string>
     <string name="import_playlists">Importar playlists</string>
