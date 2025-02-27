@@ -294,7 +294,7 @@
     <string name="audio_track">Trek audio</string>
     <string name="hls_instead_of_dash">Gunakan HLS</string>
     <string name="auto_quality">Otomatis</string>
-    <string name="hls_instead_of_dash_summary">Gunakan HLS daripada DASH (akan lebih lambat, tidak disarankan)</string>
+    <string name="hls_instead_of_dash_summary">Gunakan HLS daripada DASH untuk memuat media. Coba mengubah opsi ini jika pemutaran video tidak bekerja.</string>
     <string name="limit_to_runtime">Batasi ke runtime</string>
     <string name="trends">Tren</string>
     <string name="featured">Unggulan</string>
@@ -316,7 +316,7 @@
     <string name="double_tap_seek">Ketuk dua kali untuk seek</string>
     <string name="double_tap_seek_summary">Ketuk dua kali pada sisi kiri atau kanan untuk mundur atau maju posisi pemain</string>
     <string name="all_caught_up_summary">Anda telah melihat semua video baru</string>
-    <string name="all_caught_up">Anda telah melihat semuanya</string>
+    <string name="all_caught_up">Sudah semuanya</string>
     <string name="import_playlists">Impor daftar putar</string>
     <string name="export_playlists">Ekspor daftar putar</string>
     <string name="app_backup">Cadangan Aplikasi</string>
