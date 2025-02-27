@@ -13,6 +13,7 @@ import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.getWhileDigit
 import com.github.libretube.extensions.serializable
 import com.github.libretube.helpers.LocaleHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.services.PlaylistDownloadEnqueueService
 import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -26,7 +27,8 @@ class DownloadPlaylistDialog : DialogFragment() {
         super.onCreate(savedInstanceState)
 
         playlistId = requireArguments().getString(IntentData.playlistId)!!
-        playlistName = requireArguments().getString(IntentData.playlistName) ?: TextUtils.getFileSafeTimeStampNow()
+        playlistName = requireArguments().getString(IntentData.playlistName)
+            ?: TextUtils.getFileSafeTimeStampNow()
         playlistType = requireArguments().serializable(IntentData.playlistType)!!
     }
 
@@ -38,6 +40,7 @@ class DownloadPlaylistDialog : DialogFragment() {
             it.subList(1, it.size)
         }
         val possibleAudioQualities = resources.getStringArray(R.array.audioQualityBitrates)
+            .toList()
         val availableLanguages = LocaleHelper.getAvailableLocales()
 
         binding.videoSpinner.items = listOf(getString(R.string.no_video)) + possibleVideoQualities
@@ -46,6 +49,8 @@ class DownloadPlaylistDialog : DialogFragment() {
             listOf(getString(R.string.no_subtitle)) + availableLanguages.map { it.name }
         binding.audioLanguageSpinner.items =
             listOf(getString(R.string.default_language)) + availableLanguages.map { it.name }
+
+        restoreSelections(binding)
 
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(R.string.download_playlist) + ": " + playlistName)
@@ -78,6 +83,8 @@ class DownloadPlaylistDialog : DialogFragment() {
                         null
                     }
 
+                    saveSelections(binding)
+
                     if (maxVideoQuality == null && maxAudioQuality == null) {
                         Toast.makeText(context, R.string.nothing_selected, Toast.LENGTH_SHORT)
                             .show()
@@ -99,5 +106,45 @@ class DownloadPlaylistDialog : DialogFragment() {
             }
             .setNegativeButton(R.string.cancel, null)
             .show()
+    }
+
+    private fun saveSelections(binding: DialogDownloadPlaylistBinding) {
+        binding.audioSpinner.selectedItemPosition.let { index ->
+            val item = binding.audioSpinner.items[index].takeIf { index != 0 }
+            PreferenceHelper.putString(PLAYLIST_DOWNLOAD_AUDIO_QUALITY, item.orEmpty())
+        }
+        binding.videoSpinner.selectedItemPosition.let { index ->
+            val item = binding.videoSpinner.items[index].takeIf { index != 0 }
+            PreferenceHelper.putString(PLAYLIST_DOWNLOAD_VIDEO_QUALITY, item.orEmpty())
+        }
+        binding.audioLanguageSpinner.selectedItemPosition.let { index ->
+            val item = binding.audioLanguageSpinner.items[index].takeIf { index != 0 }
+            PreferenceHelper.putString(PLAYLIST_DOWNLOAD_AUDIO_LANGUAGE, item.orEmpty())
+        }
+        binding.subtitleSpinner.selectedItemPosition.let { index ->
+            val item = binding.subtitleSpinner.items[index].takeIf { index != 0 }
+            PreferenceHelper.putString(PLAYLIST_DOWNLOAD_CAPTION_LANGUAGE, item.orEmpty())
+        }
+    }
+
+    private fun restoreSelections(binding: DialogDownloadPlaylistBinding) {
+        val videoQuality = PreferenceHelper.getString(PLAYLIST_DOWNLOAD_VIDEO_QUALITY, "")
+        binding.videoSpinner.selectedItemPosition = binding.videoSpinner.items.indexOf(videoQuality).takeIf { it != -1 } ?: 0
+
+        val audioQuality = PreferenceHelper.getString(PLAYLIST_DOWNLOAD_AUDIO_QUALITY, "")
+        binding.audioSpinner.selectedItemPosition = binding.audioSpinner.items.indexOf(audioQuality).takeIf { it != -1 } ?: 0
+
+        val audioLanguage = PreferenceHelper.getString(PLAYLIST_DOWNLOAD_AUDIO_LANGUAGE, "")
+        binding.audioLanguageSpinner.selectedItemPosition = binding.audioLanguageSpinner.items.indexOf(audioLanguage).takeIf { it != -1 } ?: 0
+
+        val captionLanguage = PreferenceHelper.getString(PLAYLIST_DOWNLOAD_CAPTION_LANGUAGE, "")
+        binding.subtitleSpinner.selectedItemPosition = binding.subtitleSpinner.items.indexOf(captionLanguage).takeIf { it != -1 } ?: 0
+    }
+
+    companion object {
+        private const val PLAYLIST_DOWNLOAD_VIDEO_QUALITY = "playlist_download_video_quality"
+        private const val PLAYLIST_DOWNLOAD_AUDIO_QUALITY = "playlist_download_audio_quality"
+        private const val PLAYLIST_DOWNLOAD_AUDIO_LANGUAGE = "playlist_download_audio_language"
+        private const val PLAYLIST_DOWNLOAD_CAPTION_LANGUAGE = "playlist_download_caption_language"
     }
 }
