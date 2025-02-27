@@ -293,7 +293,7 @@
     <string name="alternative_videos_layout">Алтернативни изглед видео снимка</string>
     <string name="defaultIconLight">Подразумевано светло</string>
     <string name="hls_instead_of_dash">Користи HLS</string>
-    <string name="hls_instead_of_dash_summary">Коришћење HLS-а уместо DASH-а (спорије, не препоручује се)</string>
+    <string name="hls_instead_of_dash_summary">Коришћење HLS уместо DASH за стримовање медија. Покушајте да укључите ову опцију ако репродукција видео снимка не ради.</string>
     <string name="auto_quality">Аутоматски</string>
     <string name="limit_to_runtime">Ограничи на време рада</string>
     <string name="trends">Трендови</string>
@@ -328,7 +328,7 @@
     <string name="no_comments_available">Овај видео снимак нема коментара.</string>
     <string name="theme_monochrome">Минималистички монохром</string>
     <string name="all_caught_up_summary">Видели сте све нове видео снимке</string>
-    <string name="all_caught_up">Све сте прегледали</string>
+    <string name="all_caught_up">Све је прегледано</string>
     <string name="import_playlists">Увези плејлисте</string>
     <string name="backup_restore_summary">Увоз и извоз праћења, плејлиста,…</string>
     <string name="exportsuccess">Извезено.</string>
