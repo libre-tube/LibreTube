@@ -1,7 +1,6 @@
 package com.github.libretube.ui.activities
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
@@ -19,8 +18,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
-import androidx.core.text.bold
-import androidx.core.text.buildSpannedString
 import androidx.core.view.allViews
 import androidx.core.view.children
 import androidx.core.view.isNotEmpty
@@ -607,7 +604,7 @@ class MainActivity : BaseActivity() {
 
         // mapping of version code to info message
         val infoMessages = listOf(
-            59 to getUpdateInfoText(this)
+            60 to "If you use Local Streams Extraction, please disable \"Use HLS\" in the instance settings."
         )
 
         val message =
@@ -625,31 +622,5 @@ class MainActivity : BaseActivity() {
                 )
             }
             .show()
-    }
-
-    private fun getUpdateInfoText(context: Context) = buildSpannedString {
-        append("Most public Piped instances are not able to load any videos as of today because they're rate-limited very quickly by YouTube. Therefore please consider enabling ")
-        bold {
-            append(context.getString(R.string.local_stream_extraction))
-        }
-        append(" under ")
-        bold {
-            append("Settings -> Instance")
-        }
-        append(" in order to fetch video streams directly from YouTube without Piped in-between. Any other content will still be loaded via Piped.")
-
-        appendLine()
-        appendLine()
-
-        append("Due to the above mentioned issue, some instances do not properly generate the subscriptions feed. To fetch the feed directly from your phone, enable ")
-        bold {
-            append(context.getString(R.string.local_feed_extraction))
-        }
-        append(". Note that this might be slow if you have a lot of subscriptions.")
-
-        appendLine()
-        appendLine()
-
-        append("Please see the pinned issues at GitHub for more information on that topic.")
     }
 }
