@@ -1,0 +1,5 @@
+This release fixes the "iOS player response not valid" error yet another time.
+
+If you don't self-host a Piped instance and therefore use "Local streams extraction", please disable "Use HLS" in the instance settings.
+
+Please note that Android versions below 7.1.1 are no longer supported by LibreTube.!
