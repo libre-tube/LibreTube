@@ -86,7 +86,7 @@ class SubmitDeArrowDialog: DialogFragment() {
 
         val userID = PreferenceHelper.getSponsorBlockUserID()
         val userAgent = TextUtils.getUserAgent(context)
-        val title = binding.dearrowTitle.text
+        val title = binding.dearrowTitle.selectedItem
             .takeIf { it.isNotEmpty() && binding.titleCheckbox.isChecked }
             ?.let { DeArrowSubmitTitle(it) }
         val thumbnail = binding.thumbnailTime.text.toString().parseDurationString()
