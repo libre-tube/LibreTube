@@ -293,7 +293,7 @@
     <string name="layout">布局</string>
     <string name="audio_track">音轨</string>
     <string name="hls_instead_of_dash">使用 HLS</string>
-    <string name="hls_instead_of_dash_summary">使用 HLS 而不是 DASH（会更慢，不推荐）</string>
+    <string name="hls_instead_of_dash_summary">流媒体使用 HLS 而不是 DASH。如无法播放在线视频，请尝试关闭该选项。</string>
     <string name="auto_quality">自动</string>
     <string name="limit_to_runtime">限制运行时间</string>
     <string name="trends">热门</string>
