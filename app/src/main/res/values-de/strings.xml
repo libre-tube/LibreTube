@@ -293,7 +293,7 @@
     <string name="livestreams">Livestreams</string>
     <string name="alternative_videos_layout">Alternatives Video-Layout</string>
     <string name="hls_instead_of_dash">HLS verwenden</string>
-    <string name="hls_instead_of_dash_summary">Verwende HLS statt DASH (wird langsamer sein, nicht empfohlen)</string>
+    <string name="hls_instead_of_dash_summary">HLS statt DASH zur Videoübertragung verwenden. Schalte diese Option um, falls die Videowiedergabe nicht funktioniert.</string>
     <string name="auto_quality">Automatisch</string>
     <string name="limit_to_runtime">Auf Laufzeit beschränken</string>
     <string name="time_code">Zeitstempel (Sekunden)</string>
@@ -315,7 +315,7 @@
     <string name="swipe_controls_summary">Im Vollbildmodus swipen, um Helligkeit und Lautstärke anzupassen</string>
     <string name="captions_size">Untertitelgröße</string>
     <string name="double_tap_seek">Doppeltippen zum Suchen</string>
-    <string name="all_caught_up">Du bist auf dem neuesten Stand</string>
+    <string name="all_caught_up">Auf dem neuesten Stand</string>
     <string name="double_tap_seek_summary">Tippe zweimal links oder rechts, um zurück- oder vorzuspulen</string>
     <string name="import_playlists">Playlists importieren</string>
     <string name="export_playlists">Playlists exportieren</string>
