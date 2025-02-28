@@ -73,7 +73,7 @@
     <string name="audio_track">Hljóðspor</string>
     <string name="confirm_unsubscribing">Staðfesta uppsögn áskriftar</string>
     <string name="clear_bookmarks">Hreinsa bókamerki</string>
-    <string name="hls_instead_of_dash_summary">Nota HLS í stað DASH (verður hægvirkara, ekki mælt með þessu)</string>
+    <string name="hls_instead_of_dash_summary">Nota HLS í stað DASH fyrir streymandi efni. Prófaðu að víxla þessu af/á ef afspilun myndskeiða virkar ekki.</string>
     <string name="autoplay_playlists">Spila spilunarlista sjálfkrafa</string>
     <string name="volume">Hljóðstyrkur</string>
     <string name="local_playlists">Spilunarlistar á tækinu</string>
