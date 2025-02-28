@@ -347,7 +347,7 @@
     <string name="end_time">Lõpuaeg</string>
     <string name="no_chapter">Peatükki pole</string>
     <string name="category_music_offtopic_summary">Kasutamiseks vaid muusikavideotes. Siia alla kuuluvad video need lõigud, mis pole algupärase plaadiproduktsiooni osa. Lõpuks peaks video heliriba enam-vähem vastama sellele, nagu ta tegelikult plaadil leidub või Spotify\'st leitav on. Video alguses ja lõpus leiduvad jutulõigud ja muu ebaoluline peaks olema välja jäetud</string>
-    <string name="hls_instead_of_dash_summary">Kasuta DASH\'i asemel HLS-vormingut (ta on aeglasem ja me ei soovita seda)</string>
+    <string name="hls_instead_of_dash_summary">Kasuta DASHi asemel HLS-vormingut. Kui video taasesitus ei toimi, siis proovi, kas selle eelistuse muutmine aitab.</string>
     <string name="featured">Esiletõstetud</string>
     <string name="bookmark">Järjehoidja</string>
     <string name="defaults">Vaikimisi väärtused</string>
