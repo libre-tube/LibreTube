@@ -13,6 +13,7 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.repo.FeedProgress
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -20,11 +21,14 @@ class SubscriptionsViewModel : ViewModel() {
     var videoFeed = MutableLiveData<List<StreamItem>?>()
 
     var subscriptions = MutableLiveData<List<Subscription>?>()
+    val feedProgress = MutableLiveData<FeedProgress?>()
 
     fun fetchFeed(context: Context, forceRefresh: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             val videoFeed = try {
-                SubscriptionHelper.getFeed(forceRefresh = forceRefresh)
+                SubscriptionHelper.getFeed(forceRefresh = forceRefresh) { feedProgress ->
+                    this@SubscriptionsViewModel.feedProgress.postValue(feedProgress)
+                }
             } catch (e: Exception) {
                 context.toastFromMainDispatcher(R.string.server_error)
                 Log.e(TAG(), e.toString())
