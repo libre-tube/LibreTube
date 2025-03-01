@@ -145,6 +145,45 @@
 
                         </HorizontalScrollView>
 
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:id="@+id/feed_progress_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginHorizontal="12dp"
+                            android:orientation="vertical"
+                            tools:visibility="visible">
+
+                            <com.google.android.material.progressindicator.LinearProgressIndicator
+                                android:id="@+id/feed_progress_bar"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="2dp"
+                                tools:progress="70" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/updating_feed" />
+
+                                <TextView
+                                    android:id="@+id/feed_progress_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    tools:text="5/20" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
                     </LinearLayout>
 
                 </com.google.android.material.appbar.CollapsingToolbarLayout>

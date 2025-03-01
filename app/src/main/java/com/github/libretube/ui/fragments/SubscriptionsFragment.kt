@@ -95,6 +95,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         _binding?.subFeed?.layoutManager = VideosAdapter.getLayout(requireContext(), gridItems)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentSubscriptionsBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
@@ -148,6 +149,17 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
         viewModel.subscriptions.observe(viewLifecycleOwner) {
             if (isCurrentTabSubChannels && it != null) showSubscriptions()
+        }
+
+        viewModel.feedProgress.observe(viewLifecycleOwner) { progress ->
+            if (progress == null || progress.currentProgress == progress.total) {
+                binding.feedProgressContainer.isGone = true
+            } else {
+                binding.feedProgressContainer.isVisible = true
+                binding.feedProgressText.text = "${progress.currentProgress}/${progress.total}"
+                binding.feedProgressBar.max = progress.total
+                binding.feedProgressBar.progress = progress.currentProgress
+            }
         }
 
         binding.subRefresh.setOnRefreshListener {

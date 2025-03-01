@@ -13,7 +13,9 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.NewPipeExtractorInstance
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_URL
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 import org.schabi.newpipe.extractor.channel.ChannelInfo
 import org.schabi.newpipe.extractor.channel.tabs.ChannelTabInfo
 import org.schabi.newpipe.extractor.channel.tabs.ChannelTabs
@@ -33,7 +35,10 @@ class LocalFeedRepository : FeedRepository {
             if (filter.isEnabled) tab else null
         }.toTypedArray()
 
-    override suspend fun getFeed(forceRefresh: Boolean): List<StreamItem> {
+    override suspend fun getFeed(
+        forceRefresh: Boolean,
+        onProgressUpdate: (FeedProgress) -> Unit
+    ): List<StreamItem> {
         val nowMillis = Instant.now().toEpochMilli()
         val minimumDateMillis = nowMillis - Duration.ofDays(MAX_FEED_AGE_DAYS).toMillis()
 
@@ -58,21 +63,31 @@ class LocalFeedRepository : FeedRepository {
         }
 
         DatabaseHolder.Database.feedDao().cleanUpOlderThan(minimumDateMillis)
-        refreshFeed(channelIds, minimumDateMillis)
+        refreshFeed(channelIds, minimumDateMillis, onProgressUpdate)
         PreferenceHelper.putLong(PreferenceKeys.LAST_FEED_REFRESH_TIMESTAMP_MILLIS, nowMillis)
 
         return DatabaseHolder.Database.feedDao().getAll().map(SubscriptionsFeedItem::toStreamItem)
     }
 
-    private suspend fun refreshFeed(channelIds: List<String>, minimumDateMillis: Long) {
-        val extractionCount = AtomicInteger()
+    private suspend fun refreshFeed(
+        channelIds: List<String>,
+        minimumDateMillis: Long,
+        onProgressUpdate: (FeedProgress) -> Unit
+    ) {
+        if (channelIds.isEmpty()) return
+
+        val totalExtractionCount = AtomicInteger()
+        val chunkedExtractionCount = AtomicInteger()
+        withContext(Dispatchers.Main) {
+            onProgressUpdate(FeedProgress(0, channelIds.size))
+        }
 
         for (channelIdChunk in channelIds.chunked(CHUNK_SIZE)) {
             // add a delay after each BATCH_SIZE amount of visited channels
-            val count = extractionCount.get();
+            val count = chunkedExtractionCount.get();
             if (count >= BATCH_SIZE) {
                 delay(BATCH_DELAY.random())
-                extractionCount.set(0)
+                chunkedExtractionCount.set(0)
             }
 
             val collectedFeedItems = channelIdChunk.parallelMap { channelId ->
@@ -82,7 +97,12 @@ class LocalFeedRepository : FeedRepository {
                     Log.e(channelId, e.stackTraceToString())
                     null
                 } finally {
-                    extractionCount.incrementAndGet();
+                    chunkedExtractionCount.incrementAndGet()
+                    val currentProgress = totalExtractionCount.incrementAndGet()
+
+                    withContext(Dispatchers.Main) {
+                        onProgressUpdate(FeedProgress(currentProgress, channelIds.size))
+                    }
                 }
             }.filterNotNull().flatten().map(StreamItem::toFeedItem)
 
@@ -133,10 +153,12 @@ class LocalFeedRepository : FeedRepository {
 
     companion object {
         private const val CHUNK_SIZE = 2
+
         /**
          * Maximum amount of feeds that should be fetched together, before a delay should be applied.
          */
         private const val BATCH_SIZE = 50
+
         /**
          * Millisecond delay between two consecutive batches to avoid throttling.
          */
