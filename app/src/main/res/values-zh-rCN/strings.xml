@@ -553,4 +553,5 @@
     <string name="update_information">更新信息</string>
     <string name="never_show_again">不再显示</string>
     <string name="show_upcoming_videos">显示即将到来的视频</string>
+    <string name="updating_feed">正在更新源…</string>
 </resources>
