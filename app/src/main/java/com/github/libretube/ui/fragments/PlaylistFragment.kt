@@ -382,11 +382,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
             val response = try {
                 withContext(Dispatchers.IO) {
                     // load locally stored playlists with the auth api
-                    if (playlistType == PlaylistType.PRIVATE) {
-                        RetrofitInstance.authApi.getPlaylistNextPage(playlistId, nextPage!!)
-                    } else {
-                        RetrofitInstance.api.getPlaylistNextPage(playlistId, nextPage!!)
-                    }
+                    RetrofitInstance.api.getPlaylistNextPage(playlistId, nextPage!!)
                 }
             } catch (e: Exception) {
                 context?.toastFromMainDispatcher(e.localizedMessage.orEmpty())
