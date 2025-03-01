@@ -1,0 +1,75 @@
+package com.github.libretube.api
+
+import com.github.libretube.api.RetrofitInstance.PIPED_API_URL
+import com.github.libretube.api.obj.Channel
+import com.github.libretube.api.obj.ChannelTabResponse
+import com.github.libretube.api.obj.CommentsPage
+import com.github.libretube.api.obj.DeArrowContent
+import com.github.libretube.api.obj.Playlist
+import com.github.libretube.api.obj.SearchResult
+import com.github.libretube.api.obj.SegmentData
+import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.api.obj.Streams
+import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.helpers.PreferenceHelper
+
+class PipedMediaServiceRepository : MediaServiceRepository {
+    override suspend fun getTrending(region: String): List<StreamItem> =
+        api.getTrending(region)
+
+    override suspend fun getStreams(videoId: String): Streams =
+        api.getStreams(videoId)
+
+    override suspend fun getComments(videoId: String): CommentsPage =
+        api.getComments(videoId)
+
+    override suspend fun getSegments(
+        videoId: String,
+        category: String,
+        actionType: String?
+    ): SegmentData = api.getSegments(videoId, category, actionType)
+
+    override suspend fun getDeArrowContent(videoIds: String): Map<String, DeArrowContent> =
+        api.getDeArrowContent(videoIds)
+
+    override suspend fun getCommentsNextPage(videoId: String, nextPage: String): CommentsPage =
+        api.getCommentsNextPage(videoId, nextPage)
+
+    override suspend fun getSearchResults(searchQuery: String, filter: String): SearchResult =
+        api.getSearchResults(searchQuery, filter)
+
+    override suspend fun getSearchResultsNextPage(
+        searchQuery: String,
+        filter: String,
+        nextPage: String
+    ): SearchResult = api.getSearchResultsNextPage(searchQuery, filter, nextPage)
+
+    override suspend fun getSuggestions(query: String): List<String> =
+        api.getSuggestions(query)
+
+    override suspend fun getChannel(channelId: String): Channel =
+        api.getChannel(channelId)
+
+    override suspend fun getChannelTab(data: String, nextPage: String?): ChannelTabResponse =
+        api.getChannelTab(data, nextPage)
+
+    override suspend fun getChannelByName(channelName: String): Channel =
+        api.getChannelByName(channelName)
+
+    override suspend fun getChannelNextPage(channelId: String, nextPage: String): Channel =
+        api.getChannelNextPage(channelId, nextPage)
+
+    override suspend fun getPlaylist(playlistId: String): Playlist =
+        api.getPlaylist(playlistId)
+
+    override suspend fun getPlaylistNextPage(playlistId: String, nextPage: String): Playlist =
+        api.getPlaylistNextPage(playlistId, nextPage)
+
+    companion object {
+        val apiUrl get() = PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, PIPED_API_URL)
+
+        private val api by resettableLazy(RetrofitInstance.apiLazyMgr) {
+            RetrofitInstance.buildRetrofitInstance<PipedApi>(apiUrl)
+        }
+    }
+}

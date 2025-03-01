@@ -1,6 +1,7 @@
 package com.github.libretube.util
 
 import androidx.media3.common.Player
+import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.StreamsExtractor
@@ -158,7 +159,7 @@ object PlayingQueue {
     ) {
         var playlistNextPage = nextPage
         while (playlistNextPage != null) {
-            RetrofitInstance.api.getPlaylistNextPage(playlistId, playlistNextPage).run {
+            MediaServiceRepository.instance.getPlaylistNextPage(playlistId, playlistNextPage).run {
                 addToQueueAsync(relatedStreams, isMainList = isMainList)
                 playlistNextPage = this.nextpage
             }
@@ -177,7 +178,7 @@ object PlayingQueue {
         var channelNextPage = nextPage
         var pageIndex = 1
         while (channelNextPage != null && pageIndex < 10) {
-            RetrofitInstance.api.getChannelNextPage(channelId, channelNextPage).run {
+            MediaServiceRepository.instance.getChannelNextPage(channelId, channelNextPage).run {
                 addToQueueAsync(relatedStreams)
                 channelNextPage = this.nextpage
                 pageIndex++
@@ -186,7 +187,7 @@ object PlayingQueue {
     }
 
     private fun insertChannel(channelId: String, newCurrentStream: StreamItem) = runCatchingIO {
-        val channel = RetrofitInstance.api.getChannel(channelId)
+        val channel = MediaServiceRepository.instance.getChannel(channelId)
         addToQueueAsync(channel.relatedStreams, newCurrentStream)
         if (channel.nextpage == null) return@runCatchingIO
         fetchMoreFromChannel(channelId, channel.nextpage)

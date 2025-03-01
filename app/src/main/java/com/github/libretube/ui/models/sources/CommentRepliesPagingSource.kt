@@ -2,7 +2,7 @@ package com.github.libretube.ui.models.sources
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.obj.Comment
 
 class CommentRepliesPagingSource(
@@ -14,7 +14,7 @@ class CommentRepliesPagingSource(
     override suspend fun load(params: LoadParams<String>): LoadResult<String, Comment> {
         return try {
             val key = params.key.orEmpty().ifEmpty { originalComment.repliesPage.orEmpty() }
-            val result = RetrofitInstance.api.getCommentsNextPage(videoId, key)
+            val result = MediaServiceRepository.instance.getCommentsNextPage(videoId, key)
 
             val replies = result.comments.toMutableList()
             if (params.key.isNullOrEmpty()) {

@@ -11,6 +11,7 @@ import androidx.preference.SwitchPreferenceCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.api.InstanceRepository
+import com.github.libretube.api.PipedMediaServiceRepository
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.PipedInstance
 import com.github.libretube.constants.IntentData
@@ -68,13 +69,13 @@ class InstanceSettings : BasePreferenceFragment() {
         }
 
         authInstance.setOnPreferenceChangeListener { _, _ ->
-            RetrofitInstance.lazyMgr.reset()
+            RetrofitInstance.apiLazyMgr.reset()
             logoutAndUpdateUI()
             true
         }
 
         authInstanceToggle.setOnPreferenceChangeListener { _, _ ->
-            RetrofitInstance.lazyMgr.reset()
+            RetrofitInstance.apiLazyMgr.reset()
             logoutAndUpdateUI()
             true
         }
@@ -147,7 +148,7 @@ class InstanceSettings : BasePreferenceFragment() {
 
         // add the currently used instances to the list if they're currently down / not part
         // of the public instances list
-        for (apiUrl in listOf(RetrofitInstance.apiUrl, RetrofitInstance.authUrl)) {
+        for (apiUrl in listOf(PipedMediaServiceRepository.apiUrl, RetrofitInstance.authUrl)) {
             if (instances.none { it.apiUrl == apiUrl }) {
                 val origin = apiUrl.toHttpUrl().host
                 instances.add(PipedInstance(origin, apiUrl, isCurrentlyDown = true))
@@ -215,7 +216,7 @@ class InstanceSettings : BasePreferenceFragment() {
         if (!authInstanceToggle.isChecked) {
             logoutAndUpdateUI()
         }
-        RetrofitInstance.lazyMgr.reset()
+        RetrofitInstance.apiLazyMgr.reset()
         ActivityCompat.recreate(requireActivity())
     }
 

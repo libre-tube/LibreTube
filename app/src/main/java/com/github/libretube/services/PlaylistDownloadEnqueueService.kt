@@ -10,8 +10,8 @@ import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.LibreTubeApp.Companion.PLAYLIST_DOWNLOAD_ENQUEUE_CHANNEL_NAME
 import com.github.libretube.R
+import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.PlaylistsHelper
-import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.StreamsExtractor
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.StreamItem
@@ -95,7 +95,7 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
 
     private suspend fun enqueuePublicPlaylist() {
         val playlist = try {
-            RetrofitInstance.api.getPlaylist(playlistId)
+            MediaServiceRepository.instance.getPlaylist(playlistId)
         } catch (e: Exception) {
             toastFromMainDispatcher(e.localizedMessage.orEmpty())
             stopSelf()
@@ -111,7 +111,7 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
 
         while (nextPage != null) {
             val playlistPage = runCatching {
-                RetrofitInstance.api.getPlaylistNextPage(playlistId, nextPage!!)
+                MediaServiceRepository.instance.getPlaylistNextPage(playlistId, nextPage!!)
             }.getOrNull()
 
             if (playlistPage == null && alreadyRetriedOnce) {

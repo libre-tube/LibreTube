@@ -85,7 +85,7 @@ fun StreamInfoItem.toStreamItem(
 object StreamsExtractor {
     suspend fun extractStreams(videoId: String): Streams = withContext(Dispatchers.IO) {
         if (!PlayerHelper.disablePipedProxy || !PlayerHelper.localStreamExtraction) {
-            return@withContext RetrofitInstance.api.getStreams(videoId).deArrow(videoId)
+            return@withContext MediaServiceRepository.instance.getStreams(videoId).deArrow(videoId)
         }
 
         val respAsync = async {

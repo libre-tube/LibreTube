@@ -52,7 +52,7 @@ object PlaylistsHelper {
     suspend fun getPlaylist(playlistId: String): Playlist {
         // load locally stored playlists with the auth api
         return when (getPrivatePlaylistType(playlistId)) {
-            PlaylistType.PUBLIC -> RetrofitInstance.api.getPlaylist(playlistId)
+            PlaylistType.PUBLIC -> MediaServiceRepository.instance.getPlaylist(playlistId)
             else -> playlistsRepository.getPlaylist(playlistId)
         }.apply {
             relatedStreams = relatedStreams.deArrow()

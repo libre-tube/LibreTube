@@ -10,6 +10,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
+import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.constants.IntentData
@@ -146,7 +147,7 @@ class SubmitSegmentDialog : DialogFragment() {
     private suspend fun fetchSegments() {
         val categories = resources.getStringArray(R.array.sponsorBlockSegments).toList()
         segments = try {
-            RetrofitInstance.api.getSegments(videoId, JsonHelper.json.encodeToString(categories)).segments
+            MediaServiceRepository.instance.getSegments(videoId, JsonHelper.json.encodeToString(categories)).segments
         } catch (e: Exception) {
             Log.e(TAG(), e.toString())
             return

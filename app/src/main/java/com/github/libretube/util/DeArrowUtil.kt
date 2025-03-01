@@ -1,7 +1,7 @@
 package com.github.libretube.util
 
 import android.util.Log
-import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.obj.ContentItem
 import com.github.libretube.api.obj.DeArrowContent
 import com.github.libretube.api.obj.StreamItem
@@ -26,7 +26,7 @@ object DeArrowUtil {
         val videoIdsString = videoIds.mapTo(TreeSet()) { it }.joinToString(",")
 
         return try {
-            RetrofitInstance.api.getDeArrowContent(videoIdsString)
+            MediaServiceRepository.instance.getDeArrowContent(videoIdsString)
         } catch (e: Exception) {
             Log.e(this::class.java.name, "Failed to fetch DeArrow content: ${e.message}")
             null

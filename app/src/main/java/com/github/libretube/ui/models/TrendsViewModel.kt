@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.libretube.R
-import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.extensions.TAG
 import com.github.libretube.helpers.LocaleHelper
@@ -28,7 +28,7 @@ class TrendsViewModel : ViewModel() {
             try {
                 val region = LocaleHelper.getTrendingRegion(context)
                 val response = withContext(Dispatchers.IO) {
-                    RetrofitInstance.api.getTrending(region).deArrow()
+                    MediaServiceRepository.instance.getTrending(region).deArrow()
                 }
                 trendingVideos.postValue(response)
             } catch (e: IOException) {
