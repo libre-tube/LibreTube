@@ -8,10 +8,8 @@ import androidx.core.net.toUri
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.PlaylistsHelper
-import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.db.DatabaseHelper
-import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.enums.ImportFormat
 import com.github.libretube.extensions.TAG
@@ -108,12 +106,7 @@ object ImportHelper {
     @OptIn(ExperimentalSerializationApi::class)
     suspend fun exportSubscriptions(activity: Activity, uri: Uri, importFormat: ImportFormat) {
         val token = PreferenceHelper.getToken()
-        val subs = if (token.isNotEmpty()) {
-            RetrofitInstance.authApi.subscriptions(token)
-        } else {
-            val subscriptions = Database.localSubscriptionDao().getAll().map { it.channelId }
-            RetrofitInstance.authApi.unauthenticatedSubscriptions(subscriptions)
-        }
+        val subs = SubscriptionHelper.getSubscriptions()
 
         when (importFormat) {
             ImportFormat.NEWPIPE -> {

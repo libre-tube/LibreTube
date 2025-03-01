@@ -158,7 +158,7 @@ object PlayingQueue {
     ) {
         var playlistNextPage = nextPage
         while (playlistNextPage != null) {
-            RetrofitInstance.authApi.getPlaylistNextPage(playlistId, playlistNextPage).run {
+            RetrofitInstance.api.getPlaylistNextPage(playlistId, playlistNextPage).run {
                 addToQueueAsync(relatedStreams, isMainList = isMainList)
                 playlistNextPage = this.nextpage
             }
