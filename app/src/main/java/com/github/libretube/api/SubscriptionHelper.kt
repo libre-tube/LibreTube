@@ -3,6 +3,7 @@ package com.github.libretube.api
 import android.content.Context
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.db.obj.SubscriptionsFeedItem
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.repo.AccountSubscriptionsRepository
 import com.github.libretube.repo.FeedProgress
@@ -49,6 +50,7 @@ object SubscriptionHelper {
     suspend fun getSubscriptionChannelIds() = subscriptionsRepository.getSubscriptionChannelIds()
     suspend fun getFeed(forceRefresh: Boolean, onProgressUpdate: (FeedProgress) -> Unit = {}) =
         feedRepository.getFeed(forceRefresh, onProgressUpdate)
+    suspend fun submitFeedItemChange(feedItem: SubscriptionsFeedItem) = feedRepository.submitFeedItemChange(feedItem)
 
     fun handleUnsubscribe(
         context: Context,

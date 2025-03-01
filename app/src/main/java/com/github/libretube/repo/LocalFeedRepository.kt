@@ -35,6 +35,10 @@ class LocalFeedRepository : FeedRepository {
             if (filter.isEnabled) tab else null
         }.toTypedArray()
 
+    override suspend fun submitFeedItemChange(feedItem: SubscriptionsFeedItem) {
+        DatabaseHolder.Database.feedDao().update(feedItem)
+    }
+
     override suspend fun getFeed(
         forceRefresh: Boolean,
         onProgressUpdate: (FeedProgress) -> Unit

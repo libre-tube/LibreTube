@@ -14,11 +14,13 @@ import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.StreamsExtractor
+import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHelper
+import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.setMetadata
@@ -138,9 +140,14 @@ open class OnlinePlayerService : AbstractPlayerService() {
             PlayingQueue.insertRelatedStreams(streams!!.relatedStreams)
         }
 
-        // save the current stream to the queue
         streams?.toStreamItem(videoId)?.let {
+            // save the current stream to the queue
             PlayingQueue.updateCurrent(it)
+
+            // update feed item with newer information, e.g. more up-to-date views
+            SubscriptionHelper.submitFeedItemChange(
+                it.toFeedItem()
+            )
         }
 
         withContext(Dispatchers.Main) {
