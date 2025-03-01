@@ -120,6 +120,7 @@ class LocalFeedRepository : FeedRepository {
     ): List<StreamItem> {
         val channelUrl = "$YOUTUBE_FRONTEND_URL/channel/${channelId}"
         val feedInfo = FeedInfo.getInfo(channelUrl)
+        val feedInfoItems = feedInfo.relatedItems.associateBy { it.url }
 
         val mostRecentChannelVideo = feedInfo.relatedItems.maxBy {
             it.uploadDate?.offsetDateTime()?.toInstant()?.toEpochMilli() ?: 0
@@ -146,13 +147,15 @@ class LocalFeedRepository : FeedRepository {
             }.getOrElse { emptyList() }
         }.flatten().filterIsInstance<StreamInfoItem>()
 
+        val channelAvatar = channelInfo.avatars.maxByOrNull { it.height }?.url
         return related.map { item ->
             // avatar is not always included in these info items, thus must be taken from channel info response
-            item.toStreamItem(channelInfo.avatars.maxByOrNull { it.height }?.url)
-        }.filter {
-            // shorts don't have upload dates apparently
-            it.isShort || it.uploaded > minimumDateMillis
-        }
+            item.toStreamItem(
+                channelAvatar,
+                // shorts fetched via the shorts tab don't have upload dates so we fall back to the feedInfo
+                feedInfoItems[item.url]
+            )
+        }.filter { it.uploaded > minimumDateMillis }
     }
 
     companion object {
