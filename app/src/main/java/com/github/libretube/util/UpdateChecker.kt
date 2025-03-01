@@ -18,14 +18,14 @@ import java.util.Locale
 
 class UpdateChecker(private val context: Context) {
     suspend fun checkUpdate(isManualCheck: Boolean = false) {
-        val currentAppVersion = BuildConfig.VERSION_NAME.replace(".", "").toInt()
+        val currentAppVersion = BuildConfig.VERSION_NAME.filter { it.isDigit() }.toInt()
 
         try {
             val response = RetrofitInstance.externalApi.getLatestRelease()
             // version would be in the format "0.21.1"
-            val update = response.name.replace(".", "").toIntOrNull()
+            val update = response.name.filter { it.isDigit() }.toInt()
 
-            if (update != null && currentAppVersion < update) {
+            if (currentAppVersion != update) {
                 withContext(Dispatchers.Main) {
                     showUpdateAvailableDialog(response.body, response.htmlUrl)
                 }
@@ -56,15 +56,15 @@ class UpdateChecker(private val context: Context) {
     }
 
     private fun sanitizeChangelog(changelog: String): String {
-        val removeBloat = changelog.substringBeforeLast("**Full Changelog**")
-        val removeLinks = removeBloat.replace(Regex("in https://github\\.com/\\S+"), "")
-        val uppercaseChangeType =
-            removeLinks.lines().joinToString("\n") { line ->
+        return changelog.substringBeforeLast("**Full Changelog**")
+            .replace(Regex("in https://github\\.com/\\S+"), "")
+            .lines().joinToString("\n") { line ->
                 if (line.startsWith("##")) line.uppercase(Locale.ROOT) + " :" else line
             }
-        val removeHashes = uppercaseChangeType.replace("## ", "")
-        val cleanPrefix = removeHashes.replace("*", "•")
-
-        return cleanPrefix.trim()
+            .replace("## ", "")
+            .replace(">", "")
+            .replace("*", "•")
+            .lines()
+            .joinToString("\n") { it.trim() }
     }
 }
