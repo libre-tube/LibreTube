@@ -294,7 +294,7 @@
     <string name="audio_track">Hangsáv</string>
     <string name="hls_instead_of_dash">HLS használata</string>
     <string name="auto_quality">Automatikus</string>
-    <string name="hls_instead_of_dash_summary">HLS használata DASH helyett (lassabb, nem ajánlott)</string>
+    <string name="hls_instead_of_dash_summary">HLS használata DASH helyett a közvetített médiatartalmakhoz. Ha a videolejátszás nem működik, próbálja meg bekapcsolni ezt az beállítást.</string>
     <string name="limit_to_runtime">Futás idejére való korlátozás</string>
     <string name="trending">Ami most felkapott</string>
     <string name="featured">Kiemelt</string>
@@ -326,7 +326,7 @@
     <string name="pinch_control">Csípésvezérlés</string>
     <string name="pinch_control_summary">Használjon csípés gesztust, a nagyításhoz/kicsinyítéshez</string>
     <string name="all_caught_up_summary">Már látta az összes új videót</string>
-    <string name="all_caught_up">Most már felzárkózott</string>
+    <string name="all_caught_up">Minden lemaradás pótolva</string>
     <string name="color_violet">Változékony lila</string>
     <string name="nothing_selected">Nincs semmi kiválasztva!</string>
     <string name="theme_monochrome">Minimalista monokróm</string>

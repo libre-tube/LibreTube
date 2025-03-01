@@ -294,7 +294,7 @@
     <string name="audio_track">Səs axını</string>
     <string name="auto_quality">Avtomatik</string>
     <string name="hls_instead_of_dash">HLS istifadə et</string>
-    <string name="hls_instead_of_dash_summary">DASH əvəzinə HLS istifadə et (daha yavaş olacaq, tövsiyə edilmədi)</string>
+    <string name="hls_instead_of_dash_summary">Media yayımı üçün DASH əvəzinə HLS istifadə edin. Video oynatma işləmirsə, bu seçimi dəyişdirməyə cəhd edin.</string>
     <string name="limit_to_runtime">İşləmə vaxtı ilə məhdudlaşdır</string>
     <string name="trends">Trendlər</string>
     <string name="featured">Seçilən</string>
@@ -314,7 +314,7 @@
     <string name="comments_disabled">Şərhlər yükləyici tərəfindən qeyri-aktiv edilib.</string>
     <string name="double_tap_seek">Axtarmaq üçün ikiqat kliklə</string>
     <string name="double_tap_seek_summary">Oynadıcı mövqeyin geri və ya irəli çəkmək üçün solda yaxud sağda iki dəfə kliklə</string>
-    <string name="all_caught_up">Hamısın yuxarıda tutdunuz</string>
+    <string name="all_caught_up">Hamısı tutuldu</string>
     <string name="all_caught_up_summary">Bütün yeni videoları görürsünüz</string>
     <string name="captions_size">Titr ölçüsü</string>
     <string name="import_playlists">Oynatma siyahısın idxal et</string>

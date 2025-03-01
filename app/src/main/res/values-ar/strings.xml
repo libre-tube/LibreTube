@@ -293,7 +293,7 @@
     <string name="layout">التَخطِيط</string>
     <string name="audio_track">مسار صوتي</string>
     <string name="hls_instead_of_dash">استخدام HLS</string>
-    <string name="hls_instead_of_dash_summary">استخدم HLS بدلا من DASH (سيكون أبطأ ، غير مستحسن)</string>
+    <string name="hls_instead_of_dash_summary">إستعملْ HLS بدلاً مِنْ DASH لبث الوسائط. حاول تمكين هذا الخيار إن لم ينجح عرض الفيديو.</string>
     <string name="auto_quality">تلقائي</string>
     <string name="limit_to_runtime">الحد من وقت التشغيل</string>
     <string name="trends">المتصدرة</string>
@@ -313,7 +313,7 @@
     <string name="no_comments_available">هذا الفيديو ليس له تعليقات.</string>
     <string name="comments_disabled">التعليقات معطلة من قبل القائم بالتحميل.</string>
     <string name="double_tap_seek_summary">اضغط مرتين على اليسار أو اليمين لترجيع موضع المشغل أو إعادة تقديمه</string>
-    <string name="all_caught_up">لقد وصلت الى النهاية</string>
+    <string name="all_caught_up">كل شيء تم عرضه</string>
     <string name="captions_size">حجم التسميات التوضيحية</string>
     <string name="double_tap_seek">انقر نقرا مزدوجا للسعي</string>
     <string name="all_caught_up_summary">لقد شاهدت جميع مقاطع الفيديو الجديدة</string>

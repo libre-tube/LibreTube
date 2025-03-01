@@ -168,7 +168,7 @@
     <string name="birdIcon">Подсилена птица</string>
     <string name="appearance_summary">Настройте приложението според вашите предпочитания</string>
     <string name="no_subtitles_available">Няма налични субтитри</string>
-    <string name="hls_instead_of_dash_summary">Използвай HLS вместо DASH (ще бъде по-бавно, не се препоръчва)</string>
+    <string name="hls_instead_of_dash_summary">Използвайте HLS вместо DASH за стрийминг на мултимедия. Опитайте да превключите тази опция, ако възпроизвеждането на видео не работи.</string>
     <string name="pure_theme_summary">Чисто бяла/черна тема</string>
     <string name="normal_views">%1$s изгледи%2$s</string>
     <string name="tooltip_close">Затвори</string>
@@ -419,7 +419,7 @@
     <string name="audio_track">Аудиозапис</string>
     <string name="backup_customInstances">Персонализирани инстанции</string>
     <string name="no_comments_available">Това видео няма коментари.</string>
-    <string name="all_caught_up">Наваксвайте всичко</string>
+    <string name="all_caught_up">Всичко е наваксано</string>
     <string name="empty">Трябва да въведете потребителско име и парола.</string>
     <string name="confirm_unsubscribing_summary">Покажи диалогов прозорец за потвърждение преди отписване</string>
     <string name="playlistUrl">Плейлист URL</string>
