@@ -4,6 +4,8 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.obj.Comment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class CommentRepliesPagingSource(
     private val videoId: String,
@@ -14,7 +16,9 @@ class CommentRepliesPagingSource(
     override suspend fun load(params: LoadParams<String>): LoadResult<String, Comment> {
         return try {
             val key = params.key.orEmpty().ifEmpty { originalComment.repliesPage.orEmpty() }
-            val result = MediaServiceRepository.instance.getCommentsNextPage(videoId, key)
+            val result = withContext(Dispatchers.IO) {
+                MediaServiceRepository.instance.getCommentsNextPage(videoId, key)
+            }
 
             val replies = result.comments.toMutableList()
             if (params.key.isNullOrEmpty()) {

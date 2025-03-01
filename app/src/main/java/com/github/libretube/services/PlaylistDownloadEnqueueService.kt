@@ -12,7 +12,6 @@ import com.github.libretube.LibreTubeApp.Companion.PLAYLIST_DOWNLOAD_ENQUEUE_CHA
 import com.github.libretube.R
 import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.PlaylistsHelper
-import com.github.libretube.api.StreamsExtractor
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
@@ -137,7 +136,7 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
 
         for (stream in streams) {
             val videoInfo = runCatching {
-                StreamsExtractor.extractStreams(stream.url!!.toID())
+                MediaServiceRepository.instance.getStreams(stream.url!!.toID())
             }.getOrNull() ?: continue
 
             val videoStream = getStream(videoInfo.videoStreams, maxVideoQuality)

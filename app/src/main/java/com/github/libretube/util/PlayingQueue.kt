@@ -3,8 +3,6 @@ package com.github.libretube.util
 import androidx.media3.common.Player
 import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.PlaylistsHelper
-import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.StreamsExtractor
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.extensions.move
 import com.github.libretube.extensions.runCatchingIO
@@ -194,7 +192,7 @@ object PlayingQueue {
     }.let { queueJobs.add(it) }
 
     fun insertByVideoId(videoId: String) = runCatchingIO {
-        val streams = StreamsExtractor.extractStreams(videoId.toID())
+        val streams = MediaServiceRepository.instance.getStreams(videoId.toID())
         add(streams.toStreamItem(videoId))
     }
 

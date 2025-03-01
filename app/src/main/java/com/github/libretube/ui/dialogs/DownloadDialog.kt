@@ -5,7 +5,6 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.format.Formatter
-import android.util.Log
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
@@ -13,13 +12,12 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
-import com.github.libretube.api.StreamsExtractor
+import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.api.obj.Subtitle
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogDownloadBinding
-import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.getWhileDigit
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.DownloadHelper
@@ -30,6 +28,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.IOException
 
 class DownloadDialog : DialogFragment() {
     private lateinit var videoId: String
@@ -80,13 +79,13 @@ class DownloadDialog : DialogFragment() {
         lifecycleScope.launch {
             val response = try {
                 withContext(Dispatchers.IO) {
-                    StreamsExtractor.extractStreams(videoId)
+                    MediaServiceRepository.instance.getStreams(videoId)
                 }
+            } catch (e: IOException) {
+                context?.toastFromMainDispatcher(getString(R.string.unknown_error))
+                return@launch
             } catch (e: Exception) {
-                Log.e(TAG(), e.stackTraceToString())
-                val context = context ?: return@launch
-                val errorMessage = StreamsExtractor.getExtractorErrorMessageString(context, e)
-                context.toastFromMainDispatcher(errorMessage)
+                context?.toastFromMainDispatcher(e.message ?: getString(R.string.server_error))
                 return@launch
             }
             initDownloadOptions(binding, response)

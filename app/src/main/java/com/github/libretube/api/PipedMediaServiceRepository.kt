@@ -5,6 +5,7 @@ import com.github.libretube.api.obj.Channel
 import com.github.libretube.api.obj.ChannelTabResponse
 import com.github.libretube.api.obj.CommentsPage
 import com.github.libretube.api.obj.DeArrowContent
+import com.github.libretube.api.obj.Message
 import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.SearchResult
 import com.github.libretube.api.obj.SegmentData
@@ -12,13 +13,23 @@ import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.helpers.PreferenceHelper
+import retrofit2.HttpException
 
-class PipedMediaServiceRepository : MediaServiceRepository {
+open class PipedMediaServiceRepository : MediaServiceRepository {
     override suspend fun getTrending(region: String): List<StreamItem> =
         api.getTrending(region)
 
-    override suspend fun getStreams(videoId: String): Streams =
-        api.getStreams(videoId)
+    override suspend fun getStreams(videoId: String): Streams {
+        return try {
+            api.getStreams(videoId)
+        } catch (e: HttpException) {
+            val errorMessage = e.response()?.errorBody()?.string()?.runCatching {
+                JsonHelper.json.decodeFromString<Message>(this).message
+            }?.getOrNull()
+
+            throw Exception(errorMessage)
+        }
+    }
 
     override suspend fun getComments(videoId: String): CommentsPage =
         api.getComments(videoId)

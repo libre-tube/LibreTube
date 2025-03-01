@@ -3,7 +3,6 @@ package com.github.libretube.repo
 import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.PlaylistsHelper.MAX_CONCURRENT_IMPORT_CALLS
-import com.github.libretube.api.StreamsExtractor
 import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
@@ -125,7 +124,7 @@ class LocalPlaylistsRepository: PlaylistRepository {
             // Only do so with `MAX_CONCURRENT_IMPORT_CALLS` videos at once to prevent performance issues
             for (videoIdList in playlist.videos.chunked(MAX_CONCURRENT_IMPORT_CALLS)) {
                 val streams = videoIdList.parallelMap {
-                    runCatching { StreamsExtractor.extractStreams(it) }
+                    runCatching { MediaServiceRepository.instance.getStreams(it) }
                         .getOrNull()
                         ?.toStreamItem(it)
                 }.filterNotNull()

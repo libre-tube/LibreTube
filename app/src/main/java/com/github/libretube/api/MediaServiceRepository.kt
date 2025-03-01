@@ -9,16 +9,27 @@ import com.github.libretube.api.obj.SearchResult
 import com.github.libretube.api.obj.SegmentData
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
+import com.github.libretube.helpers.PlayerHelper
 
 interface MediaServiceRepository {
     suspend fun getTrending(region: String): List<StreamItem>
     suspend fun getStreams(videoId: String): Streams
     suspend fun getComments(videoId: String): CommentsPage
-    suspend fun getSegments(videoId: String, category: String, actionType: String? = null): SegmentData
+    suspend fun getSegments(
+        videoId: String,
+        category: String,
+        actionType: String? = null
+    ): SegmentData
+
     suspend fun getDeArrowContent(videoIds: String): Map<String, DeArrowContent>
     suspend fun getCommentsNextPage(videoId: String, nextPage: String): CommentsPage
     suspend fun getSearchResults(searchQuery: String, filter: String): SearchResult
-    suspend fun getSearchResultsNextPage(searchQuery: String, filter: String, nextPage: String): SearchResult
+    suspend fun getSearchResultsNextPage(
+        searchQuery: String,
+        filter: String,
+        nextPage: String
+    ): SearchResult
+
     suspend fun getSuggestions(query: String): List<String>
     suspend fun getChannel(channelId: String): Channel
     suspend fun getChannelTab(data: String, nextPage: String? = null): ChannelTabResponse
@@ -29,7 +40,12 @@ interface MediaServiceRepository {
 
     companion object {
         val instance by lazy {
-            PipedMediaServiceRepository()
+            if (PlayerHelper.disablePipedProxy && PlayerHelper.localStreamExtraction) {
+                // TODO: LocalStreamsExtractionPipedMediaServiceRepository()
+                NewPipeMediaServiceRepository()
+            } else {
+                PipedMediaServiceRepository()
+            }
         }
     }
 }

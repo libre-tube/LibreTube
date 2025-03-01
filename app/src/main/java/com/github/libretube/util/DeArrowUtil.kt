@@ -5,6 +5,7 @@ import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.obj.ContentItem
 import com.github.libretube.api.obj.DeArrowContent
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.api.obj.StreamItem.Companion.TYPE_STREAM
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toID
@@ -89,7 +90,7 @@ object DeArrowUtil {
         if (!PreferenceHelper.getBoolean(PreferenceKeys.DEARROW, false)) return contentItems
 
         val videoIds = contentItems
-            .filter { it.type == "stream" }
+            .filter { it.type == TYPE_STREAM }
             .map { it.url.toID() }
 
         if (videoIds.isEmpty()) return contentItems

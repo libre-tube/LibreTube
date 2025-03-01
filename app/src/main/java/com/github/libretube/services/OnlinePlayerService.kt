@@ -13,7 +13,6 @@ import androidx.media3.exoplayer.hls.HlsMediaSource
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.MediaServiceRepository
-import com.github.libretube.api.StreamsExtractor
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
@@ -37,6 +36,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
+import java.io.IOException
 
 /**
  * Loads the selected videos audio in background mode with a notification area.
@@ -119,11 +119,12 @@ open class OnlinePlayerService : AbstractPlayerService() {
 
         streams = withContext(Dispatchers.IO) {
             try {
-                StreamsExtractor.extractStreams(videoId)
+                MediaServiceRepository.instance.getStreams(videoId)
+            } catch (e: IOException) {
+                toastFromMainDispatcher(getString(R.string.unknown_error))
+                return@withContext null
             } catch (e: Exception) {
-                val errorMessage =
-                    StreamsExtractor.getExtractorErrorMessageString(this@OnlinePlayerService, e)
-                this@OnlinePlayerService.toastFromMainDispatcher(errorMessage)
+                toastFromMainDispatcher(e.message ?: getString(R.string.server_error))
                 return@withContext null
             }
         } ?: return

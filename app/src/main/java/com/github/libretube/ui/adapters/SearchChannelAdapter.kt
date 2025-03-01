@@ -159,12 +159,10 @@ class SearchChannelAdapter : ListAdapter<ContentItem, SearchViewHolder>(
             }
 
             root.setOnLongClickListener {
-                val playlistId = item.url.toID()
-                val playlistName = item.name!!
                 val sheet = PlaylistOptionsBottomSheet()
                 sheet.arguments = bundleOf(
-                    IntentData.playlistId to playlistId,
-                    IntentData.playlistName to playlistName,
+                    IntentData.playlistId to item.url.toID(),
+                    IntentData.playlistName to item.name.orEmpty(),
                     IntentData.playlistType to PlaylistType.PUBLIC
                 )
                 sheet.show(
