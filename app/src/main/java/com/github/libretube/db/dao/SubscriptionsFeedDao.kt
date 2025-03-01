@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.github.libretube.db.obj.SubscriptionsFeedItem
 
 @Dao
@@ -13,6 +14,9 @@ interface SubscriptionsFeedDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(feedItems: List<SubscriptionsFeedItem>)
+
+    @Update
+    suspend fun update(feedItem: SubscriptionsFeedItem)
 
     @Query("SELECT EXISTS (SELECT * FROM feedItem WHERE videoId = :videoId)")
     suspend fun contains(videoId: String): Boolean

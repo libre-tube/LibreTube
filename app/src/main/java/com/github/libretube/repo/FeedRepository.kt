@@ -1,6 +1,7 @@
 package com.github.libretube.repo
 
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.db.obj.SubscriptionsFeedItem
 
 data class FeedProgress(
     val currentProgress: Int,
@@ -12,4 +13,5 @@ interface FeedRepository {
         forceRefresh: Boolean,
         onProgressUpdate: (FeedProgress) -> Unit
     ): List<StreamItem>
+    suspend fun submitFeedItemChange(feedItem: SubscriptionsFeedItem) {}
 }
