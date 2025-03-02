@@ -533,7 +533,7 @@
     <string name="import_watch_history">Impor riwayat tontonan</string>
     <string name="local_ryd">Pengekstrak Return YouTube Dislikes lokal</string>
     <string name="local_ryd_summary">Dapatkan informasi tidak suka secara langsung dari https://returnyoutubedislikeapi.com</string>
-    <string name="pip">PiP</string>
+    <string name="pip">Gambar didalam Gambar</string>
     <string name="screenshot">Tangkapan layar</string>
     <string name="local_stream_extraction">Ekstraksi aliran lokal</string>
     <string name="local_stream_extraction_summary">Dapatkan informasi pemutaran video secara langsung dari YouTube tanpa menggunakan Piped.</string>
@@ -553,4 +553,5 @@
     <string name="never_show_again">Jangan tampilkan ini lagi</string>
     <string name="update_information">Informasi pembaruan</string>
     <string name="show_upcoming_videos">Tampilkan video yang akan datang</string>
+    <string name="updating_feed">Memperbarui umpan…</string>
 </resources>

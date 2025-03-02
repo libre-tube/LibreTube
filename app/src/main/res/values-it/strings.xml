@@ -300,7 +300,7 @@
     <string name="layout">Disposizione</string>
     <string name="audio_track">Traccia audio</string>
     <string name="hls_instead_of_dash">Usa HLS</string>
-    <string name="hls_instead_of_dash_summary">Usa HLS invece di DASH (sarà più lento, non consigliato)</string>
+    <string name="hls_instead_of_dash_summary">Usa HLS invece di DASH per lo streaming multimediale. Prova ad abilitare questa opzione se la riproduzione multimediale non funziona.</string>
     <string name="auto_quality">Automatica</string>
     <string name="limit_to_runtime">Limita al tempo di esecuzione</string>
     <string name="trends">Tendenze</string>
@@ -555,4 +555,5 @@
     <string name="update_information">Aggiorna informazioni</string>
     <string name="never_show_again">Non mostrare più</string>
     <string name="show_upcoming_videos">Mostra video in programma</string>
+    <string name="updating_feed">Aggiornamento feed …</string>
 </resources>

@@ -287,14 +287,14 @@
     <string name="time">Zaman</string>
     <string name="start_time">Başlangıç zamanı</string>
     <string name="end_time">Bitiş zamanı</string>
-    <string name="notification_time">Bildirim zamanlamasını kısıtla</string>
+    <string name="notification_time">Bildirim süresini sınırla</string>
     <string name="notification_time_summary">Video bildirimlerinin gösterileceği zaman aralığını sınırla</string>
     <string name="layout">Düzen</string>
     <string name="navbar_order">Sıra</string>
     <string name="audio_track">Ses parçası</string>
     <string name="auto_quality">Oto</string>
     <string name="hls_instead_of_dash">HLS\'yi kullan</string>
-    <string name="hls_instead_of_dash_summary">DASH yerine HLS kullan (daha yavaş olacaktır, önerilmez)</string>
+    <string name="hls_instead_of_dash_summary">Akış medyası için DASH yerine HLS kullanın. Video oynatma çalışmıyorsa bu seçeneği değiştirmeyi deneyin.</string>
     <string name="limit_to_runtime">Çalışma zamanı ile sınırla</string>
     <string name="trends">Trendler</string>
     <string name="featured">Öne Çıkanlar</string>
@@ -316,7 +316,7 @@
     <string name="captions_size">Altyazı boyutu</string>
     <string name="double_tap_seek">Aramak için iki kez dokun</string>
     <string name="double_tap_seek_summary">Oynatıcı konumunu ileri veya geri sarmak için sola veya sağa iki kez dokun</string>
-    <string name="all_caught_up">Hepsini gördün</string>
+    <string name="all_caught_up">Hepsi görüldü</string>
     <string name="import_playlists">Oynatma listelerini içe aktar</string>
     <string name="export_playlists">Oynatma listelerini dışa aktar</string>
     <string name="app_backup">Uygulama Yedeği</string>
@@ -374,7 +374,7 @@
     <string name="lbry_hls_summary">Mevcut ise video yayını için LBRY HLS kullan</string>
     <string name="disable_proxy">Piped proxy\'yi devre dışı bırak</string>
     <string name="auto_fullscreen_shorts">Kısa videolar için otomatik tam ekran</string>
-    <string name="disable_proxy_summary">Videoları ve resimleri doğrudan YouTube sunucularından yükleyin. Bu seçeneği yalnızca sürekli bir VPN kullanıyorsanız etkinleştirin.</string>
+    <string name="disable_proxy_summary">Videoları ve görüntüleri doğrudan YouTube sunucularından yükleyin. Bu seçeneği yalnızca sürekli bir VPN kullanıyorsanız etkinleştirin</string>
     <string name="group_name">Grup adı</string>
     <string name="channel_groups">Kanal grupları</string>
     <string name="new_group">Yeni</string>
@@ -390,7 +390,7 @@
     <string name="duration_reversed">Süre (ters)</string>
     <string name="unlimited_search_history">Sınırsız arama geçmişi</string>
     <string name="show_stream_thumbnails">Video küçük resimlerini göster</string>
-    <string name="show_stream_thumbnails_summary">Yeni videoların küçük resimlerini gösterin. Bunu etkinleştirmek ek veri tüketecektir</string>
+    <string name="show_stream_thumbnails_summary">Yeni akış ön izlemelerini göster. Bunu etkinleştirmek ek veri tüketecektir</string>
     <string name="fallback_piped_proxy_summary">YouTube\'a doğrudan bağlanmak mevcut video için çalışmıyorsa videoları proxy aracılığıyla (ilk yükleme sürelerini artırır) yükleyin. Devre dışı bırakılırsa YouTube Müzik içeriği, YT kısıtlamaları nedeniyle muhtemelen oynatılamayacaktır</string>
     <string name="fallback_piped_proxy">Piped proxy\'e dönüş yap</string>
     <string name="welcome">Libretube\'e Hoş Geldiniz</string>
@@ -554,4 +554,5 @@
     <string name="show_upcoming_videos">Yaklaşan videoları göster</string>
     <string name="crashlog">Çökme kaydı</string>
     <string name="dialog_play_offline_title">Bu videonun indirilmiş bir sürümü mevcut.</string>
+    <string name="updating_feed">Akış güncelleniyor …</string>
 </resources>
