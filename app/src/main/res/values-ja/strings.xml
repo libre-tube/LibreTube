@@ -320,7 +320,7 @@
     <string name="proceed">続ける</string>
     <string name="play_latest_videos">最新の動画を再生</string>
     <string name="audio_track">音声トラック</string>
-    <string name="hls_instead_of_dash_summary">DASHの代わりにHLSを使用します (より低速、非推奨)</string>
+    <string name="hls_instead_of_dash_summary">メディアのストリーミングにDASHの代わりにHLSを使用。動画を再生できない際に切り替えてみてください。</string>
     <string name="hls_instead_of_dash">HLSを使う</string>
     <string name="auto_quality">自動</string>
     <string name="limit_to_runtime">ランタイムの上限</string>
