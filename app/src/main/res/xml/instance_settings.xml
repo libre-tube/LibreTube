@@ -2,6 +2,26 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <PreferenceCategory app:title="@string/mode_of_operation">
+
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_region"
+            android:defaultValue="false"
+            android:title="@string/full_local_mode"
+            android:key="full_local_mode"
+            android:disableDependentsState="true"
+            android:summary="@string/full_local_mode_desc" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_region"
+            android:dependency="full_local_mode"
+            android:summary="@string/local_stream_extraction_summary"
+            android:title="@string/local_stream_extraction"
+            app:key="local_stream_extraction" />
+
+    </PreferenceCategory>
+
     <PreferenceCategory app:title="@string/instance">
 
         <ListPreference
@@ -10,18 +30,40 @@
             app:entries="@array/instances"
             app:entryValues="@array/instancesValue"
             app:key="selectInstance"
+            android:dependency="full_local_mode"
             app:title="@string/instances" />
 
         <Preference
             android:icon="@drawable/ic_add_instance"
             app:key="customInstance"
+            android:dependency="full_local_mode"
             app:summary="@string/customInstance_summary"
             app:title="@string/customInstance" />
 
         <Preference
             android:icon="@drawable/ic_trash"
             app:key="clearCustomInstances"
+            android:dependency="full_local_mode"
             app:title="@string/clear_customInstances" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_server"
+            android:dependency="full_local_mode"
+            android:summary="@string/disable_proxy_summary"
+            android:title="@string/disable_proxy"
+            app:key="disable_video_image_proxy" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/authentication">
+
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_region"
+            android:summary="@string/local_feed_extraction_summary"
+            android:title="@string/local_feed_extraction"
+            app:key="local_feed_extraction" />
 
         <SwitchPreferenceCompat
             android:defaultValue="false"
@@ -38,21 +80,6 @@
             app:entryValues="@array/instancesValue"
             app:key="selectAuthInstance"
             app:title="@string/auth_instances" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/audio_video">
-
-        <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:icon="@drawable/ic_list"
-            android:summary="@string/hls_instead_of_dash_summary"
-            android:title="@string/hls_instead_of_dash"
-            app:key="use_hls" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/account">
 
         <Preference
             android:icon="@drawable/ic_login_filled"
@@ -75,41 +102,26 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/proxy">
+    <PreferenceCategory app:title="@string/audio_video">
 
         <SwitchPreferenceCompat
             android:defaultValue="false"
-            android:icon="@drawable/ic_server"
-            android:summary="@string/disable_proxy_summary"
-            android:title="@string/disable_proxy"
-            app:key="disable_video_image_proxy" />
+            android:icon="@drawable/ic_list"
+            android:summary="@string/hls_instead_of_dash_summary"
+            android:title="@string/hls_instead_of_dash"
+            app:key="use_hls" />
 
-        <SwitchPreferenceCompat
-            android:defaultValue="true"
-            android:icon="@drawable/ic_region"
-            android:summary="@string/local_stream_extraction_summary"
-            android:title="@string/local_stream_extraction"
-            android:dependency="disable_video_image_proxy"
-            app:key="local_stream_extraction" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/misc">
 
         <SwitchPreferenceCompat
             android:defaultValue="true"
             android:icon="@drawable/ic_dislike"
+            android:dependency="local_stream_extraction"
             android:summary="@string/local_ryd_summary"
             android:title="@string/local_ryd"
-            android:dependency="local_stream_extraction"
             app:key="local_return_youtube_dislikes" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/subscriptions">
-
-        <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:icon="@drawable/ic_region"
-            android:summary="@string/local_feed_extraction_summary"
-            android:title="@string/local_feed_extraction"
-            app:key="local_feed_extraction" />
 
     </PreferenceCategory>
 

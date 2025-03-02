@@ -39,13 +39,11 @@ interface MediaServiceRepository {
     suspend fun getPlaylistNextPage(playlistId: String, nextPage: String): Playlist
 
     companion object {
-        val instance by lazy {
-            if (PlayerHelper.disablePipedProxy && PlayerHelper.localStreamExtraction) {
-                // TODO: LocalStreamsExtractionPipedMediaServiceRepository()
-                NewPipeMediaServiceRepository()
-            } else {
-                PipedMediaServiceRepository()
+        val instance: MediaServiceRepository
+            get() = when {
+                PlayerHelper.fullLocalMode -> NewPipeMediaServiceRepository()
+                PlayerHelper.localStreamExtraction -> LocalStreamsExtractionPipedMediaServiceRepository()
+                else -> PipedMediaServiceRepository()
             }
-        }
     }
 }
