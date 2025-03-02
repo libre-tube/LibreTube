@@ -556,4 +556,5 @@
     <string name="local_feed_extraction_summary">Получать поток непосредственно с YouTube. Это может быть значительно медленнее.</string>
     <string name="update_information">Информация об обновлении</string>
     <string name="show_upcoming_videos">Показывать следующие видео</string>
+    <string name="updating_feed">Лента обновляется…</string>
 </resources>
