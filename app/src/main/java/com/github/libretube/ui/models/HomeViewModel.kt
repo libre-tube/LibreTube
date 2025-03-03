@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.PlaylistsHelper
-import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
@@ -78,7 +78,7 @@ class HomeViewModel : ViewModel() {
 
         runSafely(
             onSuccess = { videos -> trending.updateIfChanged(videos) },
-            ioBlock = { RetrofitInstance.api.getTrending(region).deArrow().take(10) }
+            ioBlock = { MediaServiceRepository.instance.getTrending(region).deArrow().take(10) }
         )
     }
 

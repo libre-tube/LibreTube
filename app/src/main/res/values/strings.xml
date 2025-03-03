@@ -472,6 +472,7 @@
     <string name="crashlog">Crashlog</string>
     <string name="never_show_again">Never show this again</string>
     <string name="update_information">Update information</string>
+    <string name="mode_of_operation">Mode of operation</string>
 
     <!-- Backup & Restore Settings -->
     <string name="import_subscriptions_from">Import subscriptions from</string>
@@ -532,6 +533,9 @@
     <string name="local_feed_extraction_summary">Directly fetch the feed from YouTube. This may be significantly slower.</string>
     <string name="show_upcoming_videos">Show upcoming videos</string>
     <string name="updating_feed">Updating feed …</string>
+    <string name="full_local_mode">Full local mode</string>
+    <string name="full_local_mode_desc">Directly fetch everything from YouTube, without using Piped.</string>
+    <string name="authentication">Authentication</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

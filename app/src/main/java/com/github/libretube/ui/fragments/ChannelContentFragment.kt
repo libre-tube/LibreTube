@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
-import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.obj.ChannelTab
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
@@ -47,7 +47,7 @@ class ChannelContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_ch
 
     private suspend fun fetchChannelNextPage(nextPage: String): String? {
         val response = withContext(Dispatchers.IO) {
-            RetrofitInstance.api.getChannelNextPage(channelId!!, nextPage).apply {
+            MediaServiceRepository.instance.getChannelNextPage(channelId!!, nextPage).apply {
                 relatedStreams = relatedStreams.deArrow()
             }
         }
@@ -57,7 +57,7 @@ class ChannelContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_ch
 
     private suspend fun fetchTabNextPage(nextPage: String, tab: ChannelTab): String? {
         val newContent = withContext(Dispatchers.IO) {
-            RetrofitInstance.api.getChannelTab(tab.data, nextPage)
+            MediaServiceRepository.instance.getChannelTab(tab.data, nextPage)
         }.apply {
             content = content.deArrow()
         }
@@ -77,7 +77,7 @@ class ChannelContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_ch
     private fun loadChannelTab(tab: ChannelTab) = lifecycleScope.launch {
         val response = try {
             withContext(Dispatchers.IO) {
-                RetrofitInstance.api.getChannelTab(tab.data)
+                MediaServiceRepository.instance.getChannelTab(tab.data)
             }.apply {
                 content = content.deArrow()
             }

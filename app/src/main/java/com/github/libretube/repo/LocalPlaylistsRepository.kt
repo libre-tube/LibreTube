@@ -1,9 +1,8 @@
 package com.github.libretube.repo
 
+import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.PlaylistsHelper.MAX_CONCURRENT_IMPORT_CALLS
-import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.StreamsExtractor
 import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
@@ -84,7 +83,7 @@ class LocalPlaylistsRepository: PlaylistRepository {
     }
 
     override suspend fun clonePlaylist(playlistId: String): String {
-        val playlist = RetrofitInstance.api.getPlaylist(playlistId)
+        val playlist = MediaServiceRepository.instance.getPlaylist(playlistId)
         val newPlaylist = createPlaylist(playlist.name ?: "Unknown name")
 
         PlaylistsHelper.addToPlaylist(newPlaylist, *playlist.relatedStreams.toTypedArray())
@@ -92,7 +91,7 @@ class LocalPlaylistsRepository: PlaylistRepository {
         var nextPage = playlist.nextpage
         while (nextPage != null) {
             nextPage = runCatching {
-                RetrofitInstance.api.getPlaylistNextPage(playlistId, nextPage!!).apply {
+                MediaServiceRepository.instance.getPlaylistNextPage(playlistId, nextPage!!).apply {
                     PlaylistsHelper.addToPlaylist(newPlaylist, *relatedStreams.toTypedArray())
                 }.nextpage
             }.getOrNull()
@@ -125,7 +124,7 @@ class LocalPlaylistsRepository: PlaylistRepository {
             // Only do so with `MAX_CONCURRENT_IMPORT_CALLS` videos at once to prevent performance issues
             for (videoIdList in playlist.videos.chunked(MAX_CONCURRENT_IMPORT_CALLS)) {
                 val streams = videoIdList.parallelMap {
-                    runCatching { StreamsExtractor.extractStreams(it) }
+                    runCatching { MediaServiceRepository.instance.getStreams(it) }
                         .getOrNull()
                         ?.toStreamItem(it)
                 }.filterNotNull()

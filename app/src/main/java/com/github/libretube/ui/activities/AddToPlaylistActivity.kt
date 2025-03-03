@@ -6,7 +6,7 @@ import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
-import com.github.libretube.api.StreamsExtractor
+import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.extensions.toastFromMainDispatcher
@@ -41,7 +41,7 @@ class AddToPlaylistActivity : BaseActivity() {
         lifecycleScope.launch(Dispatchers.IO) {
             val videoInfo = if (PreferenceHelper.getToken().isEmpty()) {
                 try {
-                    StreamsExtractor.extractStreams(videoId).toStreamItem(videoId)
+                    MediaServiceRepository.instance.getStreams(videoId).toStreamItem(videoId)
                 } catch (e: Exception) {
                     toastFromMainDispatcher(R.string.unknown_error)
                     withContext(Dispatchers.Main) {

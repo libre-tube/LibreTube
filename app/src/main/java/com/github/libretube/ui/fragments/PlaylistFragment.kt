@@ -18,8 +18,8 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.PlaylistsHelper
-import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
@@ -382,7 +382,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
             val response = try {
                 withContext(Dispatchers.IO) {
                     // load locally stored playlists with the auth api
-                    RetrofitInstance.api.getPlaylistNextPage(playlistId, nextPage!!)
+                    MediaServiceRepository.instance.getPlaylistNextPage(playlistId, nextPage!!)
                 }
             } catch (e: Exception) {
                 context?.toastFromMainDispatcher(e.localizedMessage.orEmpty())

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.github.libretube.R
-import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.obj.ChannelTab
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
@@ -122,9 +122,9 @@ class ChannelFragment : DynamicLayoutManagerFragment(R.layout.fragment_channel) 
         val response = try {
             withContext(Dispatchers.IO) {
                 if (channelId != null) {
-                    RetrofitInstance.api.getChannel(channelId!!)
+                    MediaServiceRepository.instance.getChannel(channelId!!)
                 } else {
-                    RetrofitInstance.api.getChannelByName(channelName!!)
+                    MediaServiceRepository.instance.getChannelByName(channelName!!)
                 }.apply {
                     relatedStreams = relatedStreams.deArrow()
                 }

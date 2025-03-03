@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
+import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.DeArrowBody
 import com.github.libretube.api.obj.DeArrowSubmitThumbnail
@@ -71,7 +72,7 @@ class SubmitDeArrowDialog: DialogFragment() {
     private suspend fun fetchDeArrowData() {
         val data = try {
             withContext(Dispatchers.IO) {
-                RetrofitInstance.api.getDeArrowContent(videoId)
+                MediaServiceRepository.instance.getDeArrowContent(videoId)
             }.getOrElse(videoId) { return }
         } catch (e: Exception) {
             return

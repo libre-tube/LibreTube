@@ -2,8 +2,10 @@ package com.github.libretube.ui.models.sources
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.obj.Comment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class CommentPagingSource(
     private val videoId: String,
@@ -13,9 +15,11 @@ class CommentPagingSource(
 
     override suspend fun load(params: LoadParams<String>): LoadResult<String, Comment> {
         return try {
-            val result = params.key?.let {
-                RetrofitInstance.api.getCommentsNextPage(videoId, it)
-            } ?: RetrofitInstance.api.getComments(videoId)
+            val result = withContext(Dispatchers.IO) {
+                params.key?.let {
+                    MediaServiceRepository.instance.getCommentsNextPage(videoId, it)
+                } ?: MediaServiceRepository.instance.getComments(videoId)
+            }
 
             if (result.commentCount > 0) onCommentCount(result.commentCount)
 

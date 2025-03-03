@@ -3,8 +3,8 @@ package com.github.libretube.ui.sheets
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import com.github.libretube.R
+import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.PlaylistsHelper
-import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.ImportFormat
@@ -176,7 +176,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                             DatabaseHolder.Database.playlistBookmarkDao().deleteById(playlistId)
                         } else {
                             val bookmark = try {
-                                RetrofitInstance.api.getPlaylist(playlistId)
+                                MediaServiceRepository.instance.getPlaylist(playlistId)
                             } catch (e: Exception) {
                                 return@withContext
                             }.toPlaylistBookmark(playlistId)

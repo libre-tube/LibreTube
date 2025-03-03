@@ -1,5 +1,6 @@
 package com.github.libretube.helpers
 
+import com.github.libretube.api.PipedMediaServiceRepository
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.PreferenceKeys
 import kotlinx.coroutines.CoroutineScope
@@ -11,9 +12,10 @@ object ProxyHelper {
     fun fetchProxyUrl() {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
-                RetrofitInstance.api.getConfig().imageProxyUrl?.let {
-                    PreferenceHelper.putString(PreferenceKeys.IMAGE_PROXY_URL, it)
-                }
+                RetrofitInstance.externalApi.getInstanceConfig(PipedMediaServiceRepository.apiUrl)
+                    .imageProxyUrl?.let {
+                        PreferenceHelper.putString(PreferenceKeys.IMAGE_PROXY_URL, it)
+                    }
             }
         }
     }

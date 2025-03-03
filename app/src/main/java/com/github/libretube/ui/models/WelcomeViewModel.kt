@@ -77,7 +77,7 @@ class WelcomeViewModel(
 
     private fun refreshAndNavigate() {
         // refresh the api urls since they have changed likely
-        RetrofitInstance.lazyMgr.reset()
+        RetrofitInstance.apiLazyMgr.reset()
         savedStateHandle[UI_STATE] = _uiState.value.copy(navigateToMain = Unit)
     }
 

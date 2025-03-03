@@ -20,7 +20,7 @@ import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.LibreTubeApp.Companion.DOWNLOAD_CHANNEL_NAME
 import com.github.libretube.R
-import com.github.libretube.api.StreamsExtractor
+import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHolder.Database
@@ -124,12 +124,13 @@ class DownloadService : LifecycleService() {
         lifecycleScope.launch(coroutineContext) {
             val streams = try {
                 withContext(Dispatchers.IO) {
-                    StreamsExtractor.extractStreams(videoId)
+                    MediaServiceRepository.instance.getStreams(videoId)
                 }
+            } catch (e: IOException) {
+                toastFromMainDispatcher(getString(R.string.unknown_error))
+                return@launch
             } catch (e: Exception) {
-                toastFromMainDispatcher(
-                    StreamsExtractor.getExtractorErrorMessageString(this@DownloadService, e)
-                )
+                toastFromMainDispatcher(e.message ?: getString(R.string.server_error))
                 return@launch
             }
 
@@ -443,7 +444,7 @@ class DownloadService : LifecycleService() {
      */
     private suspend fun regenerateLink(item: DownloadItem) {
         val streams = runCatching {
-            StreamsExtractor.extractStreams(item.videoId)
+            MediaServiceRepository.instance.getStreams(item.videoId)
         }.getOrNull() ?: return
         val stream = when (item.type) {
             FileType.AUDIO -> streams.audioStreams

@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.map
 import androidx.navigation.fragment.findNavController
 import com.github.libretube.R
-import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSearchSuggestionsBinding
@@ -102,7 +102,7 @@ class SearchSuggestionsFragment : Fragment(R.layout.fragment_search_suggestions)
         lifecycleScope.launch {
             val response = try {
                 withContext(Dispatchers.IO) {
-                    RetrofitInstance.api.getSuggestions(query)
+                    MediaServiceRepository.instance.getSuggestions(query)
                 }
             } catch (e: Exception) {
                 Log.e(TAG(), e.toString())

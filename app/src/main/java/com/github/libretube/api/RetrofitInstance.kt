@@ -11,55 +11,33 @@ import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import retrofit2.create
 
 object RetrofitInstance {
-    private const val PIPED_API_URL = "https://pipedapi.kavin.rocks"
-    val apiUrl get() = PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, PIPED_API_URL)
+    const val PIPED_API_URL = "https://pipedapi.kavin.rocks"
+
     val authUrl
-        get() = when (
+        get() = if (
             PreferenceHelper.getBoolean(
                 PreferenceKeys.AUTH_INSTANCE_TOGGLE,
                 false
             )
         ) {
-            true -> PreferenceHelper.getString(
+           PreferenceHelper.getString(
                 PreferenceKeys.AUTH_INSTANCE,
                 PIPED_API_URL
             )
-
-            false -> apiUrl
+        } else {
+            PipedMediaServiceRepository.apiUrl
         }
 
-    val lazyMgr = resettableManager()
-    private val kotlinxConverterFactory = JsonHelper.json
+    val apiLazyMgr = resettableManager()
+    val kotlinxConverterFactory = JsonHelper.json
         .asConverterFactory("application/json".toMediaType())
 
-    private val httpClient by lazy { buildClient() }
+    val httpClient by lazy { buildClient() }
 
-    val api by resettableLazy(lazyMgr) {
-        Retrofit.Builder()
-            .baseUrl(apiUrl)
-            .client(httpClient)
-            .addConverterFactory(kotlinxConverterFactory)
-            .build()
-            .create<PipedApi>()
-    }
+    val authApi = buildRetrofitInstance<PipedAuthApi>(authUrl)
 
-    val authApi by resettableLazy(lazyMgr) {
-        Retrofit.Builder()
-            .baseUrl(authUrl)
-            .client(httpClient)
-            .addConverterFactory(kotlinxConverterFactory)
-            .build()
-            .create<PipedApi>()
-    }
-
-    val externalApi by resettableLazy(lazyMgr) {
-        Retrofit.Builder()
-            .baseUrl(apiUrl)
-            .client(httpClient)
-            .addConverterFactory(kotlinxConverterFactory)
-            .build()
-            .create<ExternalApi>()
-    }
+    // the url provided here isn't actually used anywhere in the external api
+    val externalApi = buildRetrofitInstance<ExternalApi>(PIPED_API_URL)
 
     private fun buildClient(): OkHttpClient {
         val httpClient = OkHttpClient().newBuilder()
@@ -74,4 +52,11 @@ object RetrofitInstance {
 
         return httpClient.build()
     }
+
+    inline fun <reified T: Any> buildRetrofitInstance(apiUrl: String): T = Retrofit.Builder()
+        .baseUrl(apiUrl)
+        .client(httpClient)
+        .addConverterFactory(kotlinxConverterFactory)
+        .build()
+        .create<T>()
 }

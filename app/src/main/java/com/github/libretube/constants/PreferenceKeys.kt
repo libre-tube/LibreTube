@@ -133,6 +133,7 @@ object PreferenceKeys {
     const val MAX_CONCURRENT_DOWNLOADS = "max_parallel_downloads"
     const val EXTERNAL_DOWNLOAD_PROVIDER = "external_download_provider"
     const val DISABLE_VIDEO_IMAGE_PROXY = "disable_video_image_proxy"
+    const val FULL_LOCAL_MODE = "full_local_mode"
     const val LOCAL_RYD = "local_return_youtube_dislikes"
     const val LOCAL_STREAM_EXTRACTION = "local_stream_extraction"
 

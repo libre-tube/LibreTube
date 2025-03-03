@@ -1,6 +1,7 @@
 package com.github.libretube.api
 
 import com.github.libretube.api.obj.DeArrowBody
+import com.github.libretube.api.obj.PipedConfig
 import com.github.libretube.api.obj.PipedInstance
 import com.github.libretube.api.obj.SubmitSegmentResponse
 import com.github.libretube.api.obj.VoteInfo
@@ -19,6 +20,9 @@ interface ExternalApi {
     // only for fetching servers list
     @GET
     suspend fun getInstances(@Url url: String): List<PipedInstance>
+
+    @GET("config")
+    suspend fun getInstanceConfig(@Url url: String): PipedConfig
 
     // fetch latest version info
     @GET(GITHUB_API_URL)
