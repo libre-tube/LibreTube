@@ -4,66 +4,46 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.os.bundleOf
 import androidx.core.text.method.LinkMovementMethodCompat
 import androidx.core.text.parseAsHtml
-import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import androidx.paging.PagingDataAdapter
 import com.github.libretube.R
 import com.github.libretube.api.obj.Comment
-import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.CommentsRowBinding
 import com.github.libretube.extensions.formatShort
-import com.github.libretube.helpers.ClipboardHelper
 import com.github.libretube.helpers.ImageHelper
-import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.ThemeHelper
 import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
-import com.github.libretube.ui.fragments.CommentsRepliesFragment
-import com.github.libretube.ui.viewholders.CommentsViewHolder
+import com.github.libretube.ui.viewholders.CommentViewHolder
 import com.github.libretube.util.HtmlParser
 import com.github.libretube.util.LinkHandler
 
-class CommentPagingAdapter(
-    private val fragment: Fragment?,
-    private val videoId: String,
+class CommentsPagingAdapter(
+    private val isReplies: Boolean,
     private val channelAvatar: String?,
-    private val isRepliesAdapter: Boolean = false,
-    private val handleLink: ((url: String) -> Unit)?,
-    private val dismiss: () -> Unit
-) : PagingDataAdapter<Comment, CommentsViewHolder>(DiffUtilItemCallback(
-    areItemsTheSame = { oldItem, newItem -> oldItem.commentId == newItem.commentId},
-    areContentsTheSame = { _, _ -> true },
-)) {
-    private var clickEventConsumedByLinkHandler = false
+    private val handleLink: (url: String) -> Unit,
+    private val saveToClipboard: (Comment) -> Unit,
+    private val navigateToChannel: (Comment) -> Unit,
+    private val navigateToReplies: ((Comment, String?) -> Unit)? = null,
+) : PagingDataAdapter<Comment, CommentViewHolder>(
+    DiffUtilItemCallback(
+        areItemsTheSame = { oldItem, newItem -> oldItem.commentId == newItem.commentId },
+        areContentsTheSame = { _, _ -> true },
+    )
+) {
 
-    private fun navigateToReplies(comment: Comment) {
-        if (clickEventConsumedByLinkHandler) {
-            clickEventConsumedByLinkHandler = false
-            return
-        }
-
-        val args = bundleOf(
-            IntentData.videoId to videoId,
-            IntentData.comment to comment,
-            IntentData.channelAvatar to channelAvatar
-        )
-        fragment!!.parentFragmentManager.commit {
-            replace<CommentsRepliesFragment>(R.id.commentFragContainer, args = args)
-            addToBackStack(null)
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = CommentsRowBinding.inflate(layoutInflater, parent, false)
+        return CommentViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CommentsViewHolder, position: Int) {
-        val comment = getItem(position)!!
-
+    override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
         holder.binding.apply {
+            val comment = getItem(position)!!
             commentAuthor.text = comment.author
             commentAuthor.setBackgroundResource(
                 if (comment.channelOwner) R.drawable.comment_channel_owner_bg else 0
@@ -71,12 +51,8 @@ class CommentPagingAdapter(
             commentInfos.text = comment.commentedTime
 
             commentText.movementMethod = LinkMovementMethodCompat.getInstance()
-            val linkHandler = LinkHandler {
-                clickEventConsumedByLinkHandler = true
-                handleLink?.invoke(it)
-            }
             commentText.text = comment.commentText?.replace("</a>", "</a> ")
-                ?.parseAsHtml(tagHandler = HtmlParser(linkHandler))
+                ?.parseAsHtml(tagHandler = HtmlParser(LinkHandler(handleLink)))
 
             ImageHelper.loadImage(comment.thumbnail, commentorImage, true)
             likesTextView.text = comment.likeCount.formatShort()
@@ -84,24 +60,22 @@ class CommentPagingAdapter(
             if (comment.creatorReplied && !channelAvatar.isNullOrBlank()) {
                 ImageHelper.loadImage(channelAvatar, creatorReplyImageView, true)
                 creatorReplyImageView.isVisible = true
+            } else {
+                creatorReplyImageView.setImageDrawable(null)
+                creatorReplyImageView.isVisible = false
             }
 
             verifiedImageView.isVisible = comment.verified
             pinnedImageView.isVisible = comment.pinned
             heartedImageView.isVisible = comment.hearted
-            repliesCount.isVisible = comment.repliesPage != null
-            if (comment.replyCount > 0L) {
-                repliesCount.text = comment.replyCount.formatShort()
-            }
+            repliesCount.isVisible = !isReplies && comment.repliesPage != null
+            repliesCount.text = if (comment.replyCount > 0) comment.replyCount.formatShort() else null
 
             commentorImage.setOnClickListener {
-                NavigationHelper.navigateChannel(root.context, comment.commentorUrl)
-                dismiss()
+                navigateToChannel(comment)
             }
 
-            if (isRepliesAdapter) {
-                repliesCount.isGone = true
-
+            if (isReplies) {
                 // highlight the comment that is being replied to
                 if (position == 0) {
                     root.setBackgroundColor(
@@ -119,27 +93,17 @@ class CommentPagingAdapter(
                         R.drawable.rounded_ripple
                     )
                 }
-            }
-
-            if (!isRepliesAdapter && comment.repliesPage != null) {
-                val onClickListener = View.OnClickListener { navigateToReplies(comment) }
+            } else {
+                val onClickListener =
+                    View.OnClickListener { navigateToReplies?.invoke(comment, channelAvatar) }
                 root.setOnClickListener(onClickListener)
                 commentText.setOnClickListener(onClickListener)
             }
+
             root.setOnLongClickListener {
-                ClipboardHelper.save(
-                    root.context,
-                    text = comment.commentText.orEmpty().parseAsHtml().toString(),
-                    notify = true
-                )
+                saveToClipboard(comment)
                 true
             }
         }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentsViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = CommentsRowBinding.inflate(layoutInflater, parent, false)
-        return CommentsViewHolder(binding)
     }
 }
