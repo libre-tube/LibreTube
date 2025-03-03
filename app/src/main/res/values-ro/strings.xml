@@ -528,7 +528,7 @@
     <string name="title">Titlu</string>
     <string name="thumbnail_time">Timp de miniatură</string>
     <string name="import_temp_playlist">Importați un playlist temporar?</string>
-    <string name="import_temp_playlist_summary">Vreți să creezi un nou playlist numit \'%1$s\'? Playlist-ul va conține %2$d videoclipuri.</string>
+    <string name="import_temp_playlist_summary">Doriți să creați un nou playlist numit „%1$s”? Playlist-ul va conține %2$d (de) videoclipuri.</string>
     <string name="contribute_to_dearrow">Contribuie la DeArrow</string>
     <string name="external_download_provider_summary">Introduceți numele aplicației pe care vrei să o folosești pentru a descărca videoclipuri. Lăsați spațiul gol pentru a folosi descărcătorul integrat din LibreTube.</string>
     <string name="screenshot">Captură de ecran</string>
