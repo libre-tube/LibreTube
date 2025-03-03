@@ -555,4 +555,8 @@
     <string name="update_information">Frissítési információ</string>
     <string name="show_upcoming_videos">Közelgő videók megjelenítése</string>
     <string name="updating_feed">Hírfolyam frissítése …</string>
+    <string name="authentication">Hitelesítés</string>
+    <string name="mode_of_operation">Működési mód</string>
+    <string name="full_local_mode">Teljes helyi üzemmód</string>
+    <string name="full_local_mode_desc">Minden közvetlenül a YouTube-ról kerül lekérésre, a Piped használata nélkül.</string>
 </resources>
