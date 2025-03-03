@@ -558,4 +558,9 @@
     <string name="update_information">تحديث المعلومات</string>
     <string name="never_show_again">لا تعرض هذا مجدداً</string>
     <string name="show_upcoming_videos">أظهِر الفيديوهات القادمة</string>
+    <string name="full_local_mode">وضع الإتصال المحلي</string>
+    <string name="authentication">المصادقة</string>
+    <string name="mode_of_operation">طريقة التشغيل</string>
+    <string name="full_local_mode_desc">جلب كل شيء مباشرة من YouTube، دون استخدام Piped.</string>
+    <string name="updating_feed">تحديث التغذية …</string>
 </resources>
