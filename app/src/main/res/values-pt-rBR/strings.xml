@@ -556,4 +556,8 @@
     <string name="local_feed_extraction">Extração local de feed</string>
     <string name="show_upcoming_videos">Mostrar próximos vídeos</string>
     <string name="updating_feed">Atualizando o feed …</string>
+    <string name="mode_of_operation">Modo de operação</string>
+    <string name="full_local_mode_desc">Obtenha tudo diretamente do YouTube, sem usar o Piped.</string>
+    <string name="authentication">Autenticação</string>
+    <string name="full_local_mode">Modo local completo</string>
 </resources>
