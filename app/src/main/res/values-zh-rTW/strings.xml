@@ -191,7 +191,7 @@
     <string name="pause">暫停</string>
     <string name="rewind">後退</string>
     <string name="forward">前進</string>
-    <string name="all_caught_up">沒有更多了</string>
+    <string name="all_caught_up">這就是全部了</string>
     <string name="repeat_mode">重複模式</string>
     <string name="resize_mode_fill">填滿</string>
     <string name="resize_mode_zoom">放大</string>
@@ -332,7 +332,7 @@
     <string name="navbar_order">排序</string>
     <string name="layout">版面</string>
     <string name="hls_instead_of_dash">使用HLS</string>
-    <string name="hls_instead_of_dash_summary">使用HLS而非DASH (較慢，不推薦)</string>
+    <string name="hls_instead_of_dash_summary">使用 HLS 而非 DASH 來串流媒體。如果視訊播放無法正常運作，請嘗試切換此選項。</string>
     <string name="auto_quality">自動</string>
     <string name="trending">現正熱門</string>
     <string name="comments_disabled">上傳者停用了留言功能。</string>
@@ -553,4 +553,5 @@
     <string name="never_show_again">永遠不要再顯示這個</string>
     <string name="update_information">更新資訊</string>
     <string name="show_upcoming_videos">顯示即將推出的影片</string>
+    <string name="updating_feed">正在更新 feed……</string>
 </resources>
