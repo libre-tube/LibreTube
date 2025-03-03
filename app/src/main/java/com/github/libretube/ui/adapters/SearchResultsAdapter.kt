@@ -3,6 +3,7 @@ package com.github.libretube.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import com.github.libretube.R
@@ -91,10 +92,12 @@ class SearchResultsAdapter(
     private fun bindVideo(item: ContentItem, binding: VideoRowBinding, position: Int) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, thumbnail)
+
             thumbnailDuration.setFormattedDuration(item.duration, item.isShort, item.uploaded)
             videoTitle.text = item.title
             videoInfo.text = TextUtils.formatViewsString(root.context, item.views, item.uploaded)
 
+            channelContainer.isGone = item.uploaderAvatar.isNullOrEmpty()
             channelName.text = item.uploaderName
             ImageHelper.loadImage(item.uploaderAvatar, channelImage, true)
 
@@ -184,12 +187,10 @@ class SearchResultsAdapter(
             }
 
             root.setOnLongClickListener {
-                val playlistId = item.url.toID()
-                val playlistName = item.name!!
                 val sheet = PlaylistOptionsBottomSheet()
                 sheet.arguments = bundleOf(
-                    IntentData.playlistId to playlistId,
-                    IntentData.playlistName to playlistName,
+                    IntentData.playlistId to item.url.toID(),
+                    IntentData.playlistName to item.name.orEmpty(),
                     IntentData.playlistType to PlaylistType.PUBLIC
                 )
                 sheet.show(
