@@ -393,12 +393,22 @@ class NewPipeMediaServiceRepository : MediaServiceRepository {
     override suspend fun getChannelTab(data: String, nextPage: String?): ChannelTabResponse {
         val linkListHandler = data.toListLinkHandler()
 
-        val resp = ChannelTabInfo.getInfo(NewPipeExtractorInstance.extractor, linkListHandler)
-        val newNextPage = resp.nextPage?.toNextPageString()
+        val (items, newNextPage) = if (nextPage == null) {
+            val resp = ChannelTabInfo.getInfo(NewPipeExtractorInstance.extractor, linkListHandler)
+            resp.relatedItems to resp.nextPage
+        } else {
+            val resp = ChannelTabInfo.getMoreItems(
+                NewPipeExtractorInstance.extractor,
+                linkListHandler,
+                nextPage.toPage()
+            )
+            resp.items to resp.nextPage
+        }
 
-        val items = resp.relatedItems
-            .mapNotNull { it.toContentItem() }
-        return ChannelTabResponse(items, newNextPage)
+        return ChannelTabResponse(
+            content = items.mapNotNull { it.toContentItem() },
+            nextpage = newNextPage?.toNextPageString()
+        )
     }
 
     override suspend fun getChannelByName(channelName: String): Channel {
