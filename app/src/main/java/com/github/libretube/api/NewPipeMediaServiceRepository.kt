@@ -87,25 +87,31 @@ private fun AudioStream.toPipedStream() = PipedStream(
 )
 
 fun StreamInfoItem.toStreamItem(
-    uploaderAvatarUrl: String? = null
-) = StreamItem(
-    type = TYPE_STREAM,
-    url = url.toID(),
-    title = name,
-    uploaded = uploadDate?.offsetDateTime()?.toEpochSecond()?.times(1000) ?: -1,
-    uploadedDate = textualUploadDate ?: uploadDate?.offsetDateTime()?.toLocalDateTime()
-        ?.toLocalDate()
-        ?.toString(),
-    uploaderName = uploaderName,
-    uploaderUrl = uploaderUrl.toID(),
-    uploaderAvatar = uploaderAvatarUrl ?: uploaderAvatars.maxByOrNull { it.height }?.url,
-    thumbnail = thumbnails.maxByOrNull { it.height }?.url,
-    duration = duration,
-    views = viewCount,
-    uploaderVerified = isUploaderVerified,
-    shortDescription = shortDescription,
-    isShort = isShortFormContent
-)
+    uploaderAvatarUrl: String? = null,
+    feedInfo: StreamInfoItem? = null,
+): StreamItem {
+    val uploadDate = uploadDate ?: feedInfo?.uploadDate
+    val textualUploadDate = textualUploadDate ?: feedInfo?.textualUploadDate
+
+    return StreamItem(
+        type = TYPE_STREAM,
+        url = url.toID(),
+        title = name,
+        uploaded = uploadDate?.offsetDateTime()?.toEpochSecond()?.times(1000) ?: -1,
+        uploadedDate = textualUploadDate ?: uploadDate?.offsetDateTime()?.toLocalDateTime()
+            ?.toLocalDate()
+            ?.toString(),
+        uploaderName = uploaderName,
+        uploaderUrl = uploaderUrl.toID(),
+        uploaderAvatar = uploaderAvatarUrl ?: uploaderAvatars.maxByOrNull { it.height }?.url,
+        thumbnail = thumbnails.maxByOrNull { it.height }?.url,
+        duration = duration,
+        views = viewCount,
+        uploaderVerified = isUploaderVerified,
+        shortDescription = shortDescription,
+        isShort = isShortFormContent
+    )
+}
 
 fun InfoItem.toContentItem() = when (this) {
     is StreamInfoItem -> ContentItem(
