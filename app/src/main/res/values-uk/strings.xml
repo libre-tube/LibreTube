@@ -293,7 +293,7 @@
     <string name="layout">Вигляд</string>
     <string name="audio_track">Звукова доріжка</string>
     <string name="hls_instead_of_dash">Використовувати HLS</string>
-    <string name="hls_instead_of_dash_summary">Використовувати HLS замість DASH (працюватиме повільніше, не рекомендується)</string>
+    <string name="hls_instead_of_dash_summary">Використовувати HLS замість DASH для потокового мультимедіа. Спробуйте увімкнути цей параметр, якщо відтворення відео не працює.</string>
     <string name="auto_quality">Авто</string>
     <string name="limit_to_runtime">Обмеження часом роботи</string>
     <string name="featured">Популярні</string>
@@ -315,7 +315,7 @@
     <string name="no_comments_available">До цього відео немає коментарів.</string>
     <string name="comments_disabled">Коментарі вимкнені завантажувачем.</string>
     <string name="captions_size">Розмір підписів</string>
-    <string name="all_caught_up">Ви все переглянули</string>
+    <string name="all_caught_up">Все переглянуто</string>
     <string name="all_caught_up_summary">Ви переглянули всі нові відео</string>
     <string name="app_backup">Резервне копіювання застосунку</string>
     <string name="privacy_alert">Оповіщення про приватність</string>
@@ -557,4 +557,5 @@
     <string name="never_show_again">Ніколи більше не показувати</string>
     <string name="update_information">Оновити інформацію</string>
     <string name="show_upcoming_videos">Показати наступні відео</string>
+    <string name="updating_feed">Оновлення стрічки …</string>
 </resources>
