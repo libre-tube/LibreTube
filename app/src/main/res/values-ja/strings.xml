@@ -553,4 +553,5 @@
     <string name="crashlog">クラッシュの記録</string>
     <string name="delete_only_watched_videos">視聴済みの動画のみ削除</string>
     <string name="show_upcoming_videos">配信予定の動画を表示</string>
+    <string name="updating_feed">フィードを更新中…</string>
 </resources>
