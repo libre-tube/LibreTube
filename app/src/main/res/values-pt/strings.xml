@@ -294,7 +294,7 @@
     <string name="layout">Esquema</string>
     <string name="audio_track">Faixa de áudio</string>
     <string name="hls_instead_of_dash">Usar HLS</string>
-    <string name="hls_instead_of_dash_summary">Usar HLS em vez de DASH (mais lento, não recomendado)</string>
+    <string name="hls_instead_of_dash_summary">Utilizar HLS em vez de DASH. Ative esta opção se a reprodução não estiver a funcionar.</string>
     <string name="auto_quality">Automático</string>
     <string name="limit_to_runtime">Limite de tempo para execução</string>
     <string name="trends">Tendências</string>
@@ -555,4 +555,5 @@
     <string name="local_feed_extraction">Extração local de fontes</string>
     <string name="local_feed_extraction_summary">Obter videos diretamente do YouTube. Pode ter impacto na velocidade.</string>
     <string name="show_upcoming_videos">Mostrar vídeos seguintes</string>
+    <string name="updating_feed">A atualizar fontes…</string>
 </resources>

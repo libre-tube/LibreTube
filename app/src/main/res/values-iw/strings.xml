@@ -294,7 +294,7 @@
     <string name="audio_track">רצועת שמע</string>
     <string name="auto_quality">אוטומטי</string>
     <string name="hls_instead_of_dash">להשתמש בתזרים</string>
-    <string name="hls_instead_of_dash_summary">להשתמש בתזרים (HLS) במקום ב־DASH (אטי יותר, לא מומלץ)</string>
+    <string name="hls_instead_of_dash_summary">להשתמש בתזרים (HLS) במקום ב־DASH להזרמת מדיה. אפשר לנסות להפוך את המצב של האפשרות הזאת אם נגינת הווידאו לא עובדת.</string>
     <string name="limit_to_runtime">הגבלה לזמן הריצה</string>
     <string name="trends">מגמות</string>
     <string name="featured">מובילים</string>
@@ -555,4 +555,5 @@
     <string name="local_ryd">מחלץ מקומי להחזרת אכזבות מ־YouTube</string>
     <string name="local_ryd_summary">למשוך פרטי אכזבות ישירות מתוך https://returnyoutubedislikeapi.com</string>
     <string name="show_upcoming_videos">הצגת סרטונים קרובים</string>
+    <string name="updating_feed">הערוץ מתעדכן…</string>
 </resources>

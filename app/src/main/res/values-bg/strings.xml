@@ -411,7 +411,7 @@
     <string name="autoRotatePlayer_summary">Възпроизвеждане на цял екран при завъртане на устройството</string>
     <string name="double_tap_seek_summary">Докосни два пъти отляво или отдясно, за да превъртите назад или напред позицията на плейъра</string>
     <string name="group_name_error_empty">Моля, въведете име</string>
-    <string name="donate">Дарете</string>
+    <string name="donate">Дарение</string>
     <string name="music_artists">YT Музикални Изпълнители</string>
     <string name="navbar_order">Ред</string>
     <string name="tooltip_edit_groups">Редактирай групи</string>
