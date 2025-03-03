@@ -555,4 +555,8 @@
     <string name="update_information">Актуализиране на информация</string>
     <string name="show_upcoming_videos">Покажи предстоящи видеоклипове</string>
     <string name="updating_feed">Актуализиране на емисия …</string>
+    <string name="full_local_mode">Пълен местен режим</string>
+    <string name="full_local_mode_desc">Директно извличане на всичко от YouTube, без да използвате Piped.</string>
+    <string name="authentication">Удостоверяване</string>
+    <string name="mode_of_operation">Режим на работа</string>
 </resources>

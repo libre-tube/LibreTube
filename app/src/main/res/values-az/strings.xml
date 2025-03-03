@@ -555,4 +555,8 @@
     <string name="never_show_again">Bunu təkrar göstərmə</string>
     <string name="show_upcoming_videos">Premerya videoları göstər</string>
     <string name="updating_feed">Axın yenilənir…</string>
+    <string name="full_local_mode">Tam xüsusi rejim</string>
+    <string name="authentication">Təsdiqlənmə</string>
+    <string name="mode_of_operation">Fəaliyyət üsulu</string>
+    <string name="full_local_mode_desc">Piped işlətmədən hər şeyi dərhal YouTube-dan əldə et.</string>
 </resources>
