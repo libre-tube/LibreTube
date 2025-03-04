@@ -554,4 +554,8 @@
     <string name="never_show_again">不再显示</string>
     <string name="show_upcoming_videos">显示即将到来的视频</string>
     <string name="updating_feed">正在更新源…</string>
+    <string name="full_local_mode">完全本地模式</string>
+    <string name="mode_of_operation">运行模式</string>
+    <string name="full_local_mode_desc">直接从 YT 获取一切数据，不使用 Piped。</string>
+    <string name="authentication">身份验证</string>
 </resources>

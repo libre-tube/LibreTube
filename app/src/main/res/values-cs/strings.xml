@@ -556,4 +556,8 @@
     <string name="never_show_again">Již nezobrazovat</string>
     <string name="show_upcoming_videos">Zobrazit nadcházející videa</string>
     <string name="updating_feed">Aktualizace videí…</string>
+    <string name="full_local_mode_desc">Načítat obsah přímo z YouTube, bez použití Piped.</string>
+    <string name="authentication">Autentifikace</string>
+    <string name="full_local_mode">Plně lokální režim</string>
+    <string name="mode_of_operation">Režim operace</string>
 </resources>
