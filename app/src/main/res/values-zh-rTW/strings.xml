@@ -554,4 +554,8 @@
     <string name="update_information">更新資訊</string>
     <string name="show_upcoming_videos">顯示即將推出的影片</string>
     <string name="updating_feed">正在更新 feed……</string>
+    <string name="full_local_mode_desc">直接從 YouTube 擷取所有內容而不使用 Piped。</string>
+    <string name="mode_of_operation">操作模式</string>
+    <string name="full_local_mode">完全本機模式</string>
+    <string name="authentication">驗證</string>
 </resources>
