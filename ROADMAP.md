@@ -11,6 +11,5 @@ Feel free to help us if you have any knowledge concerning the following planned 
 ## Not planned
 - Google/MicroG Login
 - Support for anything else than Android on mobile devices (like iOS, Linux, Android TV)
-- Direct Scraping without Piped (e.g. by using NewPipe Extractor directly).
 - Downloading and muxing media for playback outside of LibreTube
 - Intelligent recommendation algorithm to pull users into a rabbit hole
