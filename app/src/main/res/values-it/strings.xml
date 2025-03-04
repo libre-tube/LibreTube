@@ -556,4 +556,8 @@
     <string name="never_show_again">Non mostrare più</string>
     <string name="show_upcoming_videos">Mostra video in programma</string>
     <string name="updating_feed">Aggiornamento feed …</string>
+    <string name="full_local_mode">Modalità totalmente locale</string>
+    <string name="full_local_mode_desc">Recupera tutto direttamente da YouTube, senza usare Piped.</string>
+    <string name="mode_of_operation">Modalità operativa</string>
+    <string name="authentication">Autenticazione</string>
 </resources>
