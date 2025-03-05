@@ -22,29 +22,10 @@ import com.github.libretube.util.TextUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class WatchHistoryAdapter :
     ListAdapter<WatchHistoryItem, WatchHistoryViewHolder>(DiffUtilItemCallback()) {
-
-    fun removeFromWatchHistory(position: Int) {
-        val history = getItem(position)
-        runBlocking(Dispatchers.IO) {
-            DatabaseHolder.Database.watchHistoryDao().delete(history)
-        }
-        val updatedList = currentList.toMutableList().also {
-            it.removeAt(position)
-        }
-        submitList(updatedList)
-    }
-
-    fun insertItems(items: List<WatchHistoryItem>) {
-        val updatedList = currentList.toMutableList().also {
-            it.addAll(items)
-        }
-        submitList(updatedList)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatchHistoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
