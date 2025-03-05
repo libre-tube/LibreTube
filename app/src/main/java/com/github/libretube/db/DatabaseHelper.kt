@@ -90,12 +90,10 @@ object DatabaseHelper {
     }
 
     suspend fun filterByWatchStatus(
-        streams: List<WatchHistoryItem>,
+        watchHistoryItem: WatchHistoryItem,
         unfinished: Boolean = true
-    ): List<WatchHistoryItem> {
-        return streams.filter {
-            unfinished xor isVideoWatched(it.videoId, it.duration ?: 0)
-        }
+    ): Boolean {
+        return unfinished xor isVideoWatched(watchHistoryItem.videoId, watchHistoryItem.duration ?: 0)
     }
 
     fun filterByStatusAndWatchPosition(
