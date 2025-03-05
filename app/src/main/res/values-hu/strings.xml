@@ -174,7 +174,7 @@
     <string name="instance_api_url">Webcím a példány API-hoz</string>
     <string name="related_streams_summary">Mutasson hasonló közvetítéseket a jelenleg nézett mellett</string>
     <string name="playerVideoFormat">Videóformátum a lejátszóhoz</string>
-    <string name="instance_frontend_url">Webcím a példány frontendjéhez</string>
+    <string name="instance_frontend_url">Webcím a példány előtétprogramjához (opcionális)</string>
     <string name="clonePlaylist">Lejátszási lista klónozása</string>
     <string name="auth_instance">Hitelesítési példány</string>
     <string name="auth_instance_summary">Használjon másik példányt a hitelesített hívásokhoz</string>
