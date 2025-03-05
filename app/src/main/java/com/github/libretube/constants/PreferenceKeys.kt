@@ -40,7 +40,6 @@ object PreferenceKeys {
     const val AUTH_INSTANCE = "selectAuthInstance"
     const val AUTH_INSTANCE_TOGGLE = "auth_instance_toggle"
     const val CUSTOM_INSTANCE = "customInstance"
-    const val CLEAR_CUSTOM_INSTANCES = "clearCustomInstances"
     const val LOGIN_REGISTER = "login_register"
     const val LOGOUT = "logout"
     const val DELETE_ACCOUNT = "delete_account"

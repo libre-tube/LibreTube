@@ -40,12 +40,6 @@
             app:summary="@string/customInstance_summary"
             app:title="@string/customInstance" />
 
-        <Preference
-            android:icon="@drawable/ic_trash"
-            app:key="clearCustomInstances"
-            android:dependency="full_local_mode"
-            app:title="@string/clear_customInstances" />
-
         <SwitchPreferenceCompat
             android:defaultValue="false"
             android:icon="@drawable/ic_server"
