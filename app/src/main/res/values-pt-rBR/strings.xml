@@ -210,7 +210,7 @@
     <string name="none">Nenhum</string>
     <string name="general">Geral</string>
     <string name="general_summary">Idioma e região</string>
-    <string name="instance_frontend_url">URL para a interface da instância</string>
+    <string name="instance_frontend_url">URL para a interface da instância (opcional)</string>
     <string name="quality">Qualidade</string>
     <string name="behavior">Comportamento</string>
     <string name="seek_increment">Intervalo para avançar/retroceder</string>
