@@ -558,4 +558,8 @@
     <string name="update_information">Оновити інформацію</string>
     <string name="show_upcoming_videos">Показати наступні відео</string>
     <string name="updating_feed">Оновлення стрічки …</string>
+    <string name="full_local_mode_desc">Безпосередньо завантажувати все з YouTube, не використовуючи Piped.</string>
+    <string name="mode_of_operation">Режим роботи</string>
+    <string name="full_local_mode">Повний локальний режим</string>
+    <string name="authentication">Автентифікація</string>
 </resources>
