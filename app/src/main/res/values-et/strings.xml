@@ -271,7 +271,7 @@
     <string name="suggest_change_instance">Video laadimine kestab tavalisest kauem. Palun kaalu teise vaheserveri kasutamist</string>
     <string name="concurrent_downloads_limit_reached">Samaaaegsete allalaadimiste ülempiir on käes.</string>
     <string name="unknown">Teadmata</string>
-    <string name="instance_frontend_url">Vaheserveri kasutajaliidese aadress</string>
+    <string name="instance_frontend_url">Vaheserveri kasutajaliidese aadress (valikuline)</string>
     <string name="repeat_mode_all">Korda kõiki</string>
     <string name="backup">Varundus</string>
     <string name="maximum_image_cache">Piltide vahemälu suurim lubatud suurus</string>
