@@ -1,7 +1,9 @@
 package com.github.libretube.ui.extensions
 
 import android.graphics.Color
+import android.graphics.Outline
 import android.view.View
+import android.view.ViewOutlineProvider
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.isGone
@@ -35,6 +37,15 @@ fun View.setWatchProgressLength(videoId: String, duration: Long) {
         backgroundColor = ColorUtils.blendARGB(backgroundColor, Color.WHITE, 0.4f)
     }
     setBackgroundColor(backgroundColor)
+
+    // set corner-radius
+    clipToOutline = true
+    outlineProvider = object : ViewOutlineProvider() {
+        override fun getOutline(view: View, outline: Outline) {
+            outline.setRoundRect(0, 0, view.width, view.height, 16f)
+        }
+    }
+
 
     isVisible = true
 }
