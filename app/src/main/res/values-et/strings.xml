@@ -555,4 +555,8 @@
     <string name="update_information">Uuenduse teave</string>
     <string name="show_upcoming_videos">Näita lähitulevikus lisanduvaid videoid</string>
     <string name="updating_feed">Uuendame uudisvoogu…</string>
+    <string name="mode_of_operation">Tööpõhimõte</string>
+    <string name="authentication">Autentimine</string>
+    <string name="full_local_mode">Täies mahus kohalikus nutiseadmes</string>
+    <string name="full_local_mode_desc">Laadi kogu sisu otse YouTube\'ist ilma kasutamata Piped\'i teenust.</string>
 </resources>
