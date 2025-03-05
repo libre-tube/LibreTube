@@ -59,4 +59,5 @@ object IntentData {
     const val segments = "segments"
     const val alreadyStarted = "alreadyStarted"
     const val showUpcoming = "showUpcoming"
+    const val customInstance = "customInstance"
 }

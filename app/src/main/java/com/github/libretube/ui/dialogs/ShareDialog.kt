@@ -118,12 +118,12 @@ class ShareDialog : DialogFragment() {
         )
 
         // get the api urls of the other custom instances
-        val customInstances = runBlocking(Dispatchers.IO) {
-            Database.customInstanceDao().getAll()
+        val customInstance = runBlocking(Dispatchers.IO) {
+            Database.customInstanceDao().getByApiUrl(instancePref)
         }
 
         // return the custom instance frontend url if available
-        return customInstances.firstOrNull { it.apiUrl == instancePref }?.frontendUrl.orEmpty()
+        return customInstance?.frontendUrl.orEmpty()
     }
 
     private fun generateLinkText(binding: DialogShareBinding, customInstanceUrl: HttpUrl?): String {

@@ -22,7 +22,8 @@ import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.InstancesAdapter
 import com.github.libretube.ui.base.BasePreferenceFragment
-import com.github.libretube.ui.dialogs.CustomInstanceDialog
+import com.github.libretube.ui.dialogs.CreateCustomInstanceDialog
+import com.github.libretube.ui.dialogs.CustomInstancesListDialog
 import com.github.libretube.ui.dialogs.DeleteAccountDialog
 import com.github.libretube.ui.dialogs.LoginDialog
 import com.github.libretube.ui.dialogs.LogoutDialog
@@ -82,17 +83,8 @@ class InstanceSettings : BasePreferenceFragment() {
 
         val customInstance = findPreference<Preference>(PreferenceKeys.CUSTOM_INSTANCE)
         customInstance?.setOnPreferenceClickListener {
-            CustomInstanceDialog()
-                .show(childFragmentManager, CustomInstanceDialog::class.java.name)
-            true
-        }
-
-        val clearCustomInstances = findPreference<Preference>(PreferenceKeys.CLEAR_CUSTOM_INSTANCES)
-        clearCustomInstances?.setOnPreferenceClickListener {
-            lifecycleScope.launch {
-                Database.customInstanceDao().deleteAll()
-                ActivityCompat.recreate(requireActivity())
-            }
+            CustomInstancesListDialog()
+                .show(childFragmentManager, CreateCustomInstanceDialog::class.java.name)
             true
         }
 

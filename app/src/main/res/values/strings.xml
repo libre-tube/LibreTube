@@ -176,7 +176,7 @@
     <string name="resume">Resume</string>
     <string name="stop">Stop</string>
     <string name="player_autoplay">Autoplay</string>
-    <string name="instance_frontend_url">URL to instance frontend</string>
+    <string name="instance_frontend_url">URL to instance frontend (optional)</string>
     <string name="quality">Quality</string>
     <string name="behavior">Behavior</string>
     <string name="player_summary">Defaults and behavior</string>
