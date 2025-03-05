@@ -297,7 +297,7 @@
     <string name="unknown">Óþekkt</string>
     <string name="pause">Gera hlé</string>
     <string name="clonePlaylist">Klóna spilunarlista</string>
-    <string name="instance_frontend_url">Slóð á framendaviðmót tilviksins</string>
+    <string name="instance_frontend_url">Slóð á framendaviðmót tilviksins (valkvætt)</string>
     <string name="resume">Halda áfram</string>
     <string name="player_autoplay">Spila sjálfkrafa</string>
     <string name="auth_instance">Auðkenningarþjónn</string>
