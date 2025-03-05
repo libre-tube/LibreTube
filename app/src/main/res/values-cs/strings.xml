@@ -176,7 +176,7 @@
     <string name="audio">Zvuk</string>
     <string name="downloading">Stahování…</string>
     <string name="player_autoplay">Automatické přehrávání</string>
-    <string name="instance_frontend_url">URL frontendu instance</string>
+    <string name="instance_frontend_url">Adresa frontendu instance (volitelná)</string>
     <string name="no_video">Žádné video</string>
     <string name="video">Video</string>
     <string name="watch_history_summary">Ponechat historii sledování lokálně</string>
