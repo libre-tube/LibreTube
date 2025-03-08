@@ -11,7 +11,6 @@ import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.media.session.PlaybackState
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -758,7 +757,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 val currentPosition =
                     playerController.currentPosition.toFloat() / 1000
                 openScreenshotFile.launch("${streams.title}-${currentPosition}.png")
-            }, Handler(Looper.getMainLooper()))
+            }, handler)
         }
 
         binding.playerChannel.setOnClickListener {
