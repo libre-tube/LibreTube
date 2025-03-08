@@ -535,7 +535,7 @@
     <string name="screenshot">ਸਕਰੀਨਸ਼ਾਟ</string>
     <string name="local_stream_extraction">ਸਥਾਨਕ ਸਟ੍ਰੀਮ ਪ੍ਰਾਪਤੀ</string>
     <string name="local_stream_extraction_summary">Piped ਦੀ ਵਰਤੋਂ ਕੀਤੇ ਬਿਨਾਂ YouTube ਤੋਂ ਸਿੱਧੇ ਵੀਡੀਓ ਪਲੇਬੈਕ ਜਾਣਕਾਰੀ ਪ੍ਰਾਪਤ ਕਰੋ।</string>
-    <string name="local_ryd">ਯੂਟਿਊਬ ਡਿਸਲਾਈਕ ਦੀ ਸਥਾਨਕ ਪ੍ਰਾਪਤੀ</string>
+    <string name="local_ryd">ਯੂਟਿਊਬ ਡਿਸਲਾਈਕ ਦੀ ਸਥਾਨਕ ਪ੍ਰਾਪਤੀ ਸਥਾਨਕ ਐਕਸਟਰੈਕਟਰ</string>
     <string name="local_ryd_summary">ਡਿਸਲਾਈਕ ਜਾਣਕਾਰੀ ਸਿੱਧੀ https://returnyoutubedislikeapi.com ਤੋਂ ਪ੍ਰਾਪਤ ਕਰੋ</string>
     <string name="import_watch_history">ਵੇਖਣ ਦਾ ਇਤਿਹਾਸ ਆਯਾਤ ਕਰੋ</string>
     <string name="audio_codecs">ਆਡੀਓ ਕੋਡੈਕਸ</string>
@@ -547,4 +547,16 @@
     <string name="upcoming">ਆਗਾਮੀ</string>
     <string name="export_playlist">ਪਲੇਲਿਸਟ ਨਿਰਯਾਤ ਕਰੋ</string>
     <string name="crashlog">ਕ੍ਰੈਸ਼ ਲੌਗ</string>
+    <string name="full_local_mode">ਫੁੱਲ ਸਥਾਨਕ ਮੋਡ</string>
+    <string name="full_local_mode_desc">ਪਾਈਪਡ ਦੀ ਵਰਤੋਂ ਕੀਤੇ ਬਿਨਾਂ, YouTube ਤੋਂ ਸਭ ਕੁਝ ਸਿੱਧੇ ਪ੍ਰਾਪਤ ਕਰੋ।</string>
+    <string name="authentication">ਪ੍ਰਮਾਣਿਕਤਾ</string>
+    <string name="dialog_play_offline_title">ਇਸ ਵੀਡੀਓ ਦਾ ਸਥਾਨਕ ਸੰਸਕਰਣ ਉਪਲਬਧ ਹੈ।</string>
+    <string name="mode_of_operation">ਸੰਚਾਲਨ ਦਾ ਢੰਗ</string>
+    <string name="dialog_play_offline_body">ਕੀ ਤੁਸੀਂ ਡਾਊਨਲੋਡ ਫ਼ੋਲਡਰ ਤੋਂ ਵੀਡੀਓ ਚਲਾਉਣਾ ਚਾਹੋਗੇ?</string>
+    <string name="delete_only_watched_videos">ਸਿਰਫ਼ ਪਹਿਲਾਂ ਤੋਂ ਵੇਖੇ ਗਏ ਵੀਡੀਓ ਹੀ ਮਿਟਾਓ</string>
+    <string name="local_feed_extraction_summary">YouTube ਤੋਂ ਸਿੱਧਾ ਫ਼ੀਡ ਪ੍ਰਾਪਤ ਕਰੋ। ਇਹ ਕਾਫ਼ੀ ਹੌਲੀ ਹੋ ਸਕਦਾ ਹੈ।</string>
+    <string name="local_feed_extraction">ਸਥਾਨਕ ਫ਼ੀਡ ਐਕਸਟਰੈਕਸ਼ਨ</string>
+    <string name="updating_feed">ਫੀਡ ਅੱਪਡੇਟ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ…</string>
+    <string name="import_format_list_of_urls">URL ਜਾਂ ਵੀਡੀਓ IDs ਦੀ ਸੂਚੀ</string>
+    <string name="show_upcoming_videos">ਆਗਾਮੀ ਵੀਡੀਓ ਵਿਖਾਓ</string>
 </resources>
