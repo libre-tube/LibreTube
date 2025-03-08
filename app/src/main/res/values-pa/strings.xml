@@ -153,7 +153,7 @@
     <string name="video">ਵੀਡੀਓ</string>
     <string name="downloading">ਡਾਊਨਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…</string>
     <string name="player_autoplay">ਆਟੋ-ਪਲੇਅ</string>
-    <string name="instance_frontend_url">URL ਤੋਂ ਇੰਸਟੈਂਸ ਫਰੰਟਐਂਡ</string>
+    <string name="instance_frontend_url">URL ਤੋਂ ਇੰਸਟੈਂਸ ਫਰੰਟਐਂਡ (ਵਿਕਲਪਿਕ)</string>
     <string name="quality">ਕੁਆਲਿਟੀ</string>
     <string name="behavior">ਵਿਵਹਾਰ</string>
     <string name="player_summary">ਡਿਫਾਲਟ ਅਤੇ ਵਿਵਹਾਰ</string>
@@ -312,7 +312,7 @@
     <string name="defaultIconLight">ਡਿਫ਼ਾਲਟ ਸਫ਼ੈਦ</string>
     <string name="clear_bookmarks">ਬੁੱਕਮਾਰਕਸ ਸਾਫ਼ ਕਰੋ</string>
     <string name="auto_quality">ਆਟੋ</string>
-    <string name="hls_instead_of_dash_summary">DASH ਦੀ ਬਜਾਏ HLS ਦੀ ਵਰਤੋਂ ਕਰੋ (ਹੌਲੀ ਹੋਵੇਗੀ, ਸਿਫ਼ਾਰਸ਼ ਨਹੀਂ ਕੀਤੀ ਗਈ)</string>
+    <string name="hls_instead_of_dash_summary">ਸਟ੍ਰੀਮਿੰਗ ਮੀਡੀਆ ਲਈ DASH ਦੀ ਬਜਾਏ HLS ਦੀ ਵਰਤੋਂ ਕਰੋ। ਜੇਕਰ ਵੀਡੀਓ ਪਲੇਬੈਕ ਕੰਮ ਨਹੀਂ ਕਰਦਾ ਹੈ ਤਾਂ ਇਸ ਵਿਕਲਪ ਨੂੰ ਟੌਗਲ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ।</string>
     <string name="notification_time">ਨੋਟੀਫਿਕੇਸ਼ਨ ਸਮਾਂ ਸੀਮਿਤ ਕਰੋ</string>
     <string name="layout">ਲੇਆਊਟ</string>
     <string name="notification_time_summary">ਸਮਾਂ ਸੀਮਤ ਕਰੋ ਜਿਸ ਵਿੱਚ ਸਟ੍ਰੀਮ ਸੂਚਨਾਵਾਂ ਦਿਖਾਈਆਂ ਜਾਂਦੀਆਂ ਹਨ</string>
@@ -541,4 +541,10 @@
     <string name="audio_codecs">ਆਡੀਓ ਕੋਡੈਕਸ</string>
     <string name="import_watch_history_desc">ਕਿਰਪਾ ਕਰਕੇ ਨੋਟ ਕਰੋ ਕਿ YouTube ਦੇ ਸੀਮਤ ਨਿਰਯਾਤ ਡੇਟਾ ਦੇ ਕਾਰਨ ਸਭ ਕੁਝ ਆਯਾਤ ਨਹੀਂ ਕੀਤਾ ਜਾਵੇਗਾ।</string>
     <string name="view_count">%1$s ਵਿਊਜ਼</string>
+    <string name="update_information">ਜਾਣਕਾਰੀ ਅੱਪਡੇਟ ਕਰੋ</string>
+    <string name="never_show_again">ਇਸਨੂੰ ਦੁਬਾਰਾ ਕਦੇ ਨਾ ਵਿਖਾਓ</string>
+    <string name="category_exclusive_access">ਵਿਸ਼ੇਸ਼ ਪਹੁੰਚ</string>
+    <string name="upcoming">ਆਗਾਮੀ</string>
+    <string name="export_playlist">ਪਲੇਲਿਸਟ ਨਿਰਯਾਤ ਕਰੋ</string>
+    <string name="crashlog">ਕ੍ਰੈਸ਼ ਲੌਗ</string>
 </resources>
