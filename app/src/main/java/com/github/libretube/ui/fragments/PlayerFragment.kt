@@ -1007,7 +1007,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         if (!playerController.isPlaying || !PlayerHelper.sponsorBlockEnabled) return
 
         handler.postDelayed(this::checkForSegments, 100)
-        if (!PlayerHelper.sponsorBlockEnabled || !viewModel.segments.value.isNullOrEmpty()) return
+        if (viewModel.segments.value.isNullOrEmpty()) return
 
         playerController.checkForSegments(
             requireContext(),
