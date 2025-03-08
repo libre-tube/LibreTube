@@ -335,9 +335,10 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             }
 
             // JSON-encode as work-around for https://github.com/androidx/media/issues/564
-            val segments: List<Segment>? = mediaMetadata.extras?.getString(IntentData.segments)?.let {
-                JsonHelper.json.decodeFromString(it)
-            }
+            val segments: List<Segment>? =
+                mediaMetadata.extras?.getString(IntentData.segments)?.let {
+                    JsonHelper.json.decodeFromString(it)
+                }
             viewModel.segments.postValue(segments.orEmpty())
         }
 
@@ -521,9 +522,10 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             if (!startNewSession) {
                 // JSON-encode as work-around for https://github.com/androidx/media/issues/564
                 val streams: Streams? =
-                    playerController.mediaMetadata.extras?.getString(IntentData.streams)?.let { json ->
-                        JsonHelper.json.decodeFromString(json)
-                    }
+                    playerController.mediaMetadata.extras?.getString(IntentData.streams)
+                        ?.let { json ->
+                            JsonHelper.json.decodeFromString(json)
+                        }
 
                 // reload the streams data and playback, metadata apparently no longer exists
                 if (streams == null) {
@@ -1296,7 +1298,11 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         BaseBottomSheet()
             .setSimpleItems(
                 subtitles.map { it.getDisplayName(requireContext()) },
-                preselectedItem = subtitles.firstOrNull { it == viewModel.currentSubtitle }
+                preselectedItem = subtitles.firstOrNull {
+                    val roleFlags = PlayerHelper.getSubtitleRoleFlags(it)
+                    val currentSubtitle = PlayerHelper.getCurrentPlayedCaptionFormat(playerController)
+                    it.code == currentSubtitle?.language && currentSubtitle?.roleFlags == roleFlags
+                }
                     ?.getDisplayName(requireContext()) ?: getString(R.string.none)
             ) { index ->
                 val subtitle = subtitles.getOrNull(index) ?: return@setSimpleItems

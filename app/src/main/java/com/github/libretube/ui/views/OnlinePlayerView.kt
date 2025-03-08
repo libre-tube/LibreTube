@@ -76,7 +76,7 @@ class OnlinePlayerView(
                         context.getString(R.string.captions),
                         R.drawable.ic_caption,
                         {
-                            playerViewModel?.currentSubtitle?.code
+                            player?.let { PlayerHelper.getCurrentPlayedCaptionFormat(it)?.language }
                                 ?: context.getString(R.string.none)
                         }
                     ) {
