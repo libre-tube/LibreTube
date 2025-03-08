@@ -153,7 +153,7 @@
     <string name="behavior">Davranış</string>
     <string name="player_summary">Standartlar və davranış</string>
     <string name="seek_increment">Axtarılan artım</string>
-    <string name="instance_frontend_url">İnstansiya ön çıxış üçün URL</string>
+    <string name="instance_frontend_url">İnstansiya ön çıxış üçün URL (vacib deyil)</string>
     <string name="pauseOnScreenOff">Avtomatik fasilə</string>
     <string name="pauseOnScreenOff_summary">Ekran söndürüldükdə oynatmanı dayandır</string>
     <string name="clonePlaylist">Oynatma siyahısın fərdiləşdir</string>

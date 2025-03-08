@@ -149,7 +149,7 @@
     <string name="audio">صوت</string>
     <string name="video">فيديو</string>
     <string name="downloading">جارِ التنزيل…</string>
-    <string name="instance_frontend_url">عنوان URL لنُسْخَة الواجهة الأمامية</string>
+    <string name="instance_frontend_url">عنوان URL لنُسْخَة الواجهة الأمامية (اختياري)</string>
     <string name="quality">الجودة</string>
     <string name="behavior">السلوك</string>
     <string name="player_summary">الإعدادات الافتراضية والسلوك</string>

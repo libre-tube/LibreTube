@@ -147,7 +147,7 @@
     <string name="video">视频</string>
     <string name="downloading">下载中…</string>
     <string name="player_autoplay">自动播放</string>
-    <string name="instance_frontend_url">实例前端的URL</string>
+    <string name="instance_frontend_url">实例前端的 URL（可选）</string>
     <string name="quality">清晰度</string>
     <string name="behavior">行为</string>
     <string name="player_summary">默认和行为</string>

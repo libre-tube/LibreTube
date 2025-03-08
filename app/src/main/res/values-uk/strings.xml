@@ -264,7 +264,7 @@
     <string name="captions">Субтитри</string>
     <string name="none">Відсутня</string>
     <string name="general">Загальні</string>
-    <string name="instance_frontend_url">Посилання до сервера</string>
+    <string name="instance_frontend_url">Посилання до сервера (необов\'язково)</string>
     <string name="audio_video_summary">Якість і формат</string>
     <string name="playingOnBackground">Відтворення у фоновому режимі…</string>
     <string name="caption_settings">Субтитри</string>

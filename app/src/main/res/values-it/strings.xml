@@ -149,7 +149,7 @@
     <string name="no_video">Senza video</string>
     <string name="video">Video</string>
     <string name="downloading">Download in corso…</string>
-    <string name="instance_frontend_url">URL del frontend dell\'istanza</string>
+    <string name="instance_frontend_url">URL verso il frontend dell\'istanza (opzionale)</string>
     <string name="quality">Qualità</string>
     <string name="behavior">Comportamento</string>
     <string name="player_summary">Predefiniti e comportamento</string>

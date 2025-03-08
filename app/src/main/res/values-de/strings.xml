@@ -117,7 +117,7 @@
     <string name="shareTo">URL teilen an</string>
     <string name="defaultIcon">Standard</string>
     <string name="instance_name">Instanzname</string>
-    <string name="instance_api_url">URL zur Instanz-API</string>
+    <string name="instance_api_url">URL der Instanz-API</string>
     <string name="addInstance">Instanz hinzufügen</string>
     <string name="empty_instance">Gib den Namen und die API-URL ein.</string>
     <string name="clear_customInstances">Benutzerdefinierte Instanzen löschen</string>
@@ -152,7 +152,7 @@
     <string name="pauseOnScreenOff">Automatische Pause</string>
     <string name="clonePlaylist">Playlist duplizieren</string>
     <string name="watch_history">Wiedergabeverlauf</string>
-    <string name="instance_frontend_url">URL zum Instanz-Frontend</string>
+    <string name="instance_frontend_url">URL des Instanz-Frontends (optional)</string>
     <string name="pauseOnScreenOff_summary">Den Player pausieren, wenn der Bildschirm ausgeschaltet ist</string>
     <string name="watch_positions">Position merken</string>
     <string name="auth_instance">Authentifizierungsinstanz</string>

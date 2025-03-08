@@ -194,7 +194,7 @@
     <string name="none">なし</string>
     <string name="general">一般</string>
     <string name="general_summary">言語と地域</string>
-    <string name="instance_frontend_url">インスタンスのフロントエンドのURL</string>
+    <string name="instance_frontend_url">インスタンスのフロントエンドのURL (任意)</string>
     <string name="quality">画質</string>
     <string name="behavior">動作</string>
     <string name="player_summary">標準設定と動作</string>
@@ -554,4 +554,8 @@
     <string name="delete_only_watched_videos">視聴済みの動画のみ削除</string>
     <string name="show_upcoming_videos">配信予定の動画を表示</string>
     <string name="updating_feed">フィードを更新中…</string>
+    <string name="mode_of_operation">操作の種類</string>
+    <string name="full_local_mode">完全ローカルモード</string>
+    <string name="full_local_mode_desc">Pipedを使わず、すべてをYouTubeから直接取得します。</string>
+    <string name="authentication">認証</string>
 </resources>

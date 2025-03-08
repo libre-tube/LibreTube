@@ -150,7 +150,7 @@
     <string name="video">視訊</string>
     <string name="downloading">下載中…</string>
     <string name="player_autoplay">自動播放</string>
-    <string name="instance_frontend_url">執行個體的前端URL地址</string>
+    <string name="instance_frontend_url">執行個體的前端 URL（選擇性）</string>
     <string name="quality">質量</string>
     <string name="behavior">行為</string>
     <string name="reset">恢復預設值</string>

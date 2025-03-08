@@ -271,7 +271,7 @@
     <string name="help">Помощ</string>
     <string name="double_tap_seek">Докосни двукратно за превъртане</string>
     <string name="fallback_piped_proxy_summary">Зареди видеоклипове чрез прокси, ако директното свързване с YouTube не работи за текущия видеоклип (увеличава времето за първоначално зареждане). Ако е деактивирано, музикалното съдържание в YouTube вероятно няма да се възпроизвежда поради ограниченията на YT</string>
-    <string name="instance_frontend_url">URL към потребителски интерфейс</string>
+    <string name="instance_frontend_url">URL адрес към интерфейс на инстанция (по избор)</string>
     <string name="advanced">Разширени</string>
     <string name="deletePlaylist">Изтрий плейлист</string>
     <string name="mark_as_unwatched">Маркирай като негледано</string>
@@ -372,7 +372,7 @@
     <string name="playlistCloned">Клониран плейлист</string>
     <string name="shapedIcon">Глупава форма</string>
     <string name="legacyIcon">Изгубено наследство</string>
-    <string name="instances">Избирам…</string>
+    <string name="instances">Изберете…</string>
     <string name="background_mode">Фонов режим</string>
     <string name="tooltip_reverse">Обръщане</string>
     <string name="tooltip_create_playlist">Създай плейлист</string>
@@ -440,7 +440,7 @@
     <string name="playback_during_call">Продължи възпроизвеждането по време на телефонно обаждане</string>
     <string name="screen_orientation">Ориентация на екрана</string>
     <string name="addInstance">Добави инстанция</string>
-    <string name="clear_customInstances">Изчисти добавено</string>
+    <string name="clear_customInstances">Изчисти добавени</string>
     <string name="autoplay_playlists">Списъци за автоматично пускане</string>
     <string name="export_playlists_to">Изнеси плейлисти в</string>
     <string name="duration_span">Продължителност: %1$s</string>
@@ -540,7 +540,7 @@
     <string name="import_watch_history">Внеси история на гледане</string>
     <string name="import_watch_history_desc">Моля, обърнете внимание, че не всички данни ще бъдат внесени поради ограничения обем на изнесените данни от YouTube.</string>
     <string name="audio_codecs">Аудио кодеци</string>
-    <string name="view_count">%1$s изгледи</string>
+    <string name="view_count">%1$s гледания</string>
     <string name="dialog_play_offline_body">Искате ли да изпълните видеото от папката за изтегляне?</string>
     <string name="dialog_play_offline_title">Налична е локална версия на това видео.</string>
     <string name="upcoming">Предстоящ</string>
