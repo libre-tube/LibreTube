@@ -202,7 +202,7 @@
     <string name="playerVideoFormat">Format video untuk pemain</string>
     <string name="no_audio">Tanpa audio</string>
     <string name="no_video">Tanpa video</string>
-    <string name="instance_frontend_url">URL ke frontend instansi</string>
+    <string name="instance_frontend_url">URL ke frontend instansi (opsional)</string>
     <string name="seek_increment">Kenaikan seek</string>
     <string name="clonePlaylist">Gandakan daftar putar</string>
     <string name="deleteAccount_summary">Hapus akun Piped Anda</string>
