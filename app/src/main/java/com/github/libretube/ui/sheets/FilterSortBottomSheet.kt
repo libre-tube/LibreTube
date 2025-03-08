@@ -65,6 +65,7 @@ class FilterSortBottomSheet : ExpandedBottomSheet(R.layout.filter_sort_sheet) {
         binding.filterShorts.isChecked = ContentFilter.SHORTS.isEnabled
         binding.filterLivestreams.isChecked = ContentFilter.LIVESTREAMS.isEnabled
         binding.hideWatchedCheckbox.isChecked = hideWatched
+        binding.showUpcomingCheckbox.isChecked = showUpcoming
     }
 
     private fun observeSortChanges() {
