@@ -22,9 +22,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentDownloadContentBinding
 import com.github.libretube.databinding.FragmentDownloadsBinding
-import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Database
-import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.db.obj.filterByTab
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.formatAsFileSize
@@ -108,7 +106,6 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
     private val binding get() = _binding!!
 
     private var binder: DownloadService.LocalBinder? = null
-    private val downloads = mutableListOf<DownloadWithItems>()
     private val downloadReceiver = DownloadReceiver()
     private lateinit var downloadTab: DownloadTab
 
@@ -172,7 +169,6 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
             return@DownloadsAdapter isDownloading.not()
         }
         binding.downloadsRecView.adapter = adapter
-        adapter.submitList(downloads)
 
         var selectedSortType =
             PreferenceHelper.getInt(PreferenceKeys.SELECTED_DOWNLOAD_SORT_TYPE, 0)
@@ -197,13 +193,9 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
                 Database.downloadDao().getAll()
             }
 
-            downloads.clear()
-            downloads.addAll(dbDownloads.filterByTab(downloadTab))
-
-            if (downloads.isEmpty()) return@launch
-
+            val downloads = dbDownloads.filterByTab(downloadTab)
+            adapter.submitList(downloads)
             sortDownloadList(selectedSortType)
-
 
             binding.downloadsRecView.setOnDismissListener { position ->
                 adapter.showDeleteDialog(requireContext(), position)
@@ -242,7 +234,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
     private fun toggleVisibilities() {
         val binding = _binding ?: return
 
-        val isEmpty = downloads.isEmpty()
+        val isEmpty = adapter.itemCount == 0
         binding.downloadsEmpty.isVisible = isEmpty
         binding.downloadsContainer.isGone = isEmpty
         binding.deleteAll.isGone = isEmpty
@@ -251,10 +243,10 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
 
     private fun sortDownloadList(sortType: Int, previousSortType: Int? = null) {
         if (previousSortType == null && sortType == 1) {
-            adapter.submitList(downloads.reversed())
+            adapter.submitList(adapter.items.reversed())
         }
         if (previousSortType != null && sortType != previousSortType) {
-            adapter.submitList(downloads.reversed())
+            adapter.submitList(adapter.items.reversed())
         }
     }
 
@@ -267,14 +259,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
                 onlyDeleteWatchedVideos = selected
             }
             .setPositiveButton(R.string.okay) { _, _ ->
-                lifecycleScope.launch {
-                    for (downloadIndex in downloads.size - 1 downTo 0) {
-                        val download = adapter.currentList[downloadIndex].download
-                        if (!onlyDeleteWatchedVideos || DatabaseHelper.isVideoWatched(download.videoId, download.duration ?: 0)) {
-                            adapter.deleteDownload(downloadIndex)
-                        }
-                    }
-                }
+                adapter.deleteAllDownloads(onlyDeleteWatchedVideos)
             }
             .setNegativeButton(R.string.cancel, null)
             .show()
@@ -312,7 +297,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
     }
 
     fun updateProgress(id: Int, status: DownloadStatus) {
-        val index = downloads.indexOfFirst {
+        val index = adapter.items.indexOfFirst {
             it.downloadItems.any { item -> item.id == id }
         }
         val view =

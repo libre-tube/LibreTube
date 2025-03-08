@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.VideoRowBinding
+import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.extensions.formatAsFileSize
@@ -40,6 +41,8 @@ class DownloadsAdapter(
     private val downloadTab: DownloadTab,
     private val toggleDownload: (DownloadWithItems) -> Boolean
 ) : ListAdapter<DownloadWithItems, DownloadsViewHolder>(DiffUtilItemCallback()) {
+    val items get() = (0 until itemCount).map { getItem(it) }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DownloadsViewHolder {
         val binding = VideoRowBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -156,9 +159,9 @@ class DownloadsAdapter(
             .show()
     }
 
-    fun deleteDownload(position: Int) {
-        val download = getItem(position).download
-        val items = getItem(position).downloadItems
+    private fun deleteDownloadContent(downloadWithItems: DownloadWithItems) {
+        val download = downloadWithItems.download
+        val items = downloadWithItems.downloadItems
 
         items.forEach {
             it.path.deleteIfExists()
@@ -170,9 +173,28 @@ class DownloadsAdapter(
         runBlocking(Dispatchers.IO) {
             DatabaseHolder.Database.downloadDao().deleteDownload(download)
         }
+    }
+
+    private fun deleteDownload(position: Int) {
+        deleteDownloadContent(getItem(position))
+
         submitList(currentList.toMutableList().also {
             it.removeAt(position)
         })
+    }
+
+    fun deleteAllDownloads(onlyDeleteWatched: Boolean) {
+        val (toDelete, toKeep) = items.partition {
+            !onlyDeleteWatched || runBlocking(Dispatchers.IO) {
+                DatabaseHelper.isVideoWatched(it.download.videoId, it.download.duration ?: 0)
+            }
+        }
+
+        for (item in toDelete) {
+            deleteDownloadContent(item)
+        }
+
+        submitList(toKeep)
     }
 
     fun restoreItem(position: Int) {
