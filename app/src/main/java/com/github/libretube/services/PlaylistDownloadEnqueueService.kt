@@ -23,6 +23,7 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.parcelable.DownloadData
+import com.github.libretube.util.TextUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -142,9 +143,16 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
             val videoStream = getStream(videoInfo.videoStreams, maxVideoQuality)
             val audioStream = getStream(videoInfo.audioStreams, maxAudioQuality)
 
+            // remove all UNIX reserved characters from the title in order to generate
+            // a valid filename
+            var fileName = videoInfo.title
+            TextUtils.RESERVED_CHARS.forEach {
+                fileName = fileName.replace(it, '_')
+            }
+
             val downloadData = DownloadData(
                 videoId = stream.url!!.toID(),
-                fileName = videoInfo.title,
+                fileName = fileName,
                 videoFormat = videoStream?.format,
                 videoQuality = videoStream?.quality,
                 audioFormat = audioStream?.format,
