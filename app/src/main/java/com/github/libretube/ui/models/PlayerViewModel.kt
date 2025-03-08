@@ -11,6 +11,8 @@ import com.github.libretube.helpers.PlayerHelper
 class PlayerViewModel : ViewModel() {
 
     var segments = MutableLiveData<List<Segment>>()
+    // this is only used to restore the subtitle after leaving PiP, the actual caption state
+    // should always be read from the player's selected tracks!
     var currentSubtitle = Subtitle(code = PlayerHelper.defaultSubtitleCode)
     var sponsorBlockConfig = PlayerHelper.getSponsorBlockCategories()
 

@@ -26,6 +26,7 @@ import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.checkForSegments
+import com.github.libretube.helpers.PlayerHelper.getSubtitleRoleFlags
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.parcelable.PlayerData
