@@ -15,6 +15,12 @@ import kotlinx.coroutines.withContext
 object DatabaseHelper {
     private const val MAX_SEARCH_HISTORY_SIZE = 20
 
+    // can only mark as watched if less than 60s remaining
+    private const val ABSOLUTE_WATCHED_THRESHOLD = 60.0f
+
+    // can only mark as watched if at least 75% watched
+    private const val RELATIVE_WATCHED_THRESHOLD = 0.75f
+
     suspend fun addToWatchHistory(watchHistoryItem: WatchHistoryItem) =
         withContext(Dispatchers.IO) {
             Database.watchHistoryDao().insert(watchHistoryItem)
@@ -79,8 +85,8 @@ object DatabaseHelper {
         if (durationSeconds == null) return false
 
         val progress = positionMillis / 1000
-        // show video only in feed when watched less than 90%
-        return progress > 0.9f * durationSeconds
+
+        return durationSeconds - progress <= ABSOLUTE_WATCHED_THRESHOLD && progress >= RELATIVE_WATCHED_THRESHOLD * durationSeconds
     }
 
     suspend fun filterUnwatched(streams: List<StreamItem>): List<StreamItem> {
