@@ -24,10 +24,11 @@ object SubscriptionHelper {
      */
     const val GET_SUBSCRIPTIONS_LIMIT = 100
 
-    private val localFeedExtraction get() = PreferenceHelper.getBoolean(
-        PreferenceKeys.LOCAL_FEED_EXTRACTION,
-        false
-    )
+    private val localFeedExtraction
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.LOCAL_FEED_EXTRACTION,
+            false
+        )
     private val token get() = PreferenceHelper.getToken()
     private val subscriptionsRepository: SubscriptionsRepository
         get() = when {
@@ -48,11 +49,15 @@ object SubscriptionHelper {
     suspend fun importSubscriptions(newChannels: List<String>) =
         subscriptionsRepository.importSubscriptions(newChannels)
 
-    suspend fun getSubscriptions() = subscriptionsRepository.getSubscriptions()
+    suspend fun getSubscriptions() =
+        subscriptionsRepository.getSubscriptions().sortedBy { it.name.lowercase() }
+
     suspend fun getSubscriptionChannelIds() = subscriptionsRepository.getSubscriptionChannelIds()
     suspend fun getFeed(forceRefresh: Boolean, onProgressUpdate: (FeedProgress) -> Unit = {}) =
         feedRepository.getFeed(forceRefresh, onProgressUpdate)
-    suspend fun submitFeedItemChange(feedItem: SubscriptionsFeedItem) = feedRepository.submitFeedItemChange(feedItem)
+
+    suspend fun submitFeedItemChange(feedItem: SubscriptionsFeedItem) =
+        feedRepository.submitFeedItemChange(feedItem)
 
     fun handleUnsubscribe(
         context: Context,
