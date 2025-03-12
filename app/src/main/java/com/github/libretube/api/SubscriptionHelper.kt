@@ -11,6 +11,7 @@ import com.github.libretube.repo.FeedRepository
 import com.github.libretube.repo.LocalFeedRepository
 import com.github.libretube.repo.LocalSubscriptionsRepository
 import com.github.libretube.repo.PipedAccountFeedRepository
+import com.github.libretube.repo.PipedLocalSubscriptionsRepository
 import com.github.libretube.repo.PipedNoAccountFeedRepository
 import com.github.libretube.repo.SubscriptionsRepository
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -23,19 +24,20 @@ object SubscriptionHelper {
      */
     const val GET_SUBSCRIPTIONS_LIMIT = 100
 
+    private val localFeedExtraction get() = PreferenceHelper.getBoolean(
+        PreferenceKeys.LOCAL_FEED_EXTRACTION,
+        false
+    )
     private val token get() = PreferenceHelper.getToken()
     private val subscriptionsRepository: SubscriptionsRepository
         get() = when {
+            localFeedExtraction -> LocalSubscriptionsRepository()
             token.isNotEmpty() -> AccountSubscriptionsRepository()
-            else -> LocalSubscriptionsRepository()
+            else -> PipedLocalSubscriptionsRepository()
         }
     private val feedRepository: FeedRepository
         get() = when {
-            PreferenceHelper.getBoolean(
-                PreferenceKeys.LOCAL_FEED_EXTRACTION,
-                false
-            ) -> LocalFeedRepository()
-
+            localFeedExtraction -> LocalFeedRepository()
             token.isNotEmpty() -> PipedAccountFeedRepository()
             else -> PipedNoAccountFeedRepository()
         }
