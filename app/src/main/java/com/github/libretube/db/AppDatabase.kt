@@ -44,14 +44,15 @@ import com.github.libretube.db.obj.WatchPosition
         SubscriptionGroup::class,
         SubscriptionsFeedItem::class
     ],
-    version = 19,
+    version = 20,
     autoMigrations = [
         AutoMigration(from = 7, to = 8),
         AutoMigration(from = 8, to = 9),
         AutoMigration(from = 9, to = 10),
         AutoMigration(from = 10, to = 11),
         AutoMigration(from = 16, to = 17),
-        AutoMigration(from = 18, to = 19)
+        AutoMigration(from = 18, to = 19),
+        AutoMigration(from = 19, to = 20)
     ]
 )
 @TypeConverters(Converters::class)
@@ -101,5 +102,8 @@ abstract class AppDatabase : RoomDatabase() {
      */
     abstract fun subscriptionGroupsDao(): SubscriptionGroupsDao
 
+    /**
+     * Locally cached subscription feed
+     */
     abstract fun feedDao(): SubscriptionsFeedDao
 }
