@@ -149,7 +149,7 @@
     <string name="video">וידאו</string>
     <string name="downloading">מתבצעת הורדה…</string>
     <string name="player_autoplay">נגינה אוטומטית</string>
-    <string name="instance_frontend_url">כתובת למנשק המשתמש של העותק</string>
+    <string name="instance_frontend_url">כתובת למנשק המשתמש של העותק (רשות)</string>
     <string name="player_summary">ברירות מחדל והתנהגות</string>
     <string name="quality">איכות</string>
     <string name="behavior">התנהגות</string>
@@ -556,4 +556,8 @@
     <string name="local_ryd_summary">למשוך פרטי אכזבות ישירות מתוך https://returnyoutubedislikeapi.com</string>
     <string name="show_upcoming_videos">הצגת סרטונים קרובים</string>
     <string name="updating_feed">הערוץ מתעדכן…</string>
+    <string name="full_local_mode_desc">למשוך הכול ישירות מ־YouTube, בלי להשתמש ב־Piped.</string>
+    <string name="authentication">אימות</string>
+    <string name="full_local_mode">מצב מקומי מלא</string>
+    <string name="mode_of_operation">מצב פעולה</string>
 </resources>
