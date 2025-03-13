@@ -48,6 +48,7 @@ import org.schabi.newpipe.extractor.stream.AudioStream
 import org.schabi.newpipe.extractor.stream.StreamInfo
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
 import org.schabi.newpipe.extractor.stream.VideoStream
+import java.security.MessageDigest
 
 
 private fun VideoStream.toPipedStream() = PipedStream(
@@ -319,11 +320,24 @@ class NewPipeMediaServiceRepository : MediaServiceRepository {
         )
     }
 
+    @OptIn(ExperimentalStdlibApi::class)
     override suspend fun getSegments(
         videoId: String,
-        category: String,
-        actionType: String?
-    ): SegmentData = SegmentData()
+        category: List<String>,
+        actionType: List<String>?
+    ): SegmentData {
+        // use hashed video id for privacy
+        // https://wiki.sponsor.ajay.app/w/API_Docs#GET_/api/skipSegments/:sha256HashPrefix
+        val hashedId = MessageDigest.getInstance("SHA-256")
+            .digest(videoId.toByteArray())
+            .toHexString()
+
+        return RetrofitInstance.externalApi.getSegments(
+            hashedId.substring(0..4),
+            category,
+            actionType
+        ).first { it.videoID == videoId }
+    }
 
     override suspend fun getDeArrowContent(videoIds: String): Map<String, DeArrowContent> =
         emptyMap()
