@@ -1,6 +1,7 @@
 package com.github.libretube.api
 
 import com.github.libretube.api.obj.DeArrowBody
+import com.github.libretube.api.obj.DeArrowContent
 import com.github.libretube.api.obj.PipedConfig
 import com.github.libretube.api.obj.PipedInstance
 import com.github.libretube.api.obj.SegmentData
@@ -64,4 +65,7 @@ interface ExternalApi {
         @Query("userID") userID: String,
         @Query("type") score: Int
     )
+
+    @GET("$SB_API_URL/api/branding/{videoId}")
+    suspend fun getDeArrowContent(@Path("videoId") videoId: String): Map<String, DeArrowContent>
 }
