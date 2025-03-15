@@ -20,6 +20,7 @@ import com.github.libretube.api.obj.StreamItem.Companion.TYPE_PLAYLIST
 import com.github.libretube.api.obj.StreamItem.Companion.TYPE_STREAM
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.api.obj.Subtitle
+import com.github.libretube.extensions.parallelMap
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.NewPipeExtractorInstance
 import com.github.libretube.helpers.PlayerHelper
@@ -48,6 +49,7 @@ import org.schabi.newpipe.extractor.stream.AudioStream
 import org.schabi.newpipe.extractor.stream.StreamInfo
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
 import org.schabi.newpipe.extractor.stream.VideoStream
+import java.security.MessageDigest
 
 
 private fun VideoStream.toPipedStream() = PipedStream(
@@ -319,14 +321,50 @@ class NewPipeMediaServiceRepository : MediaServiceRepository {
         )
     }
 
+    @OptIn(ExperimentalStdlibApi::class)
     override suspend fun getSegments(
         videoId: String,
-        category: String,
-        actionType: String?
-    ): SegmentData = SegmentData()
+        category: List<String>,
+        actionType: List<String>?
+    ): SegmentData {
+        // use hashed video id for privacy
+        // https://wiki.sponsor.ajay.app/w/API_Docs#GET_/api/skipSegments/:sha256HashPrefix
+        val hashedId = MessageDigest.getInstance("SHA-256")
+            .digest(videoId.toByteArray())
+            .toHexString()
 
-    override suspend fun getDeArrowContent(videoIds: String): Map<String, DeArrowContent> =
-        emptyMap()
+        return RetrofitInstance.externalApi.getSegments(
+            hashedId.substring(0..4),
+            category,
+            actionType
+        ).first { it.videoID == videoId }
+    }
+
+    @OptIn(ExperimentalStdlibApi::class)
+    override suspend fun getDeArrowContent(videoIds: String): Map<String, DeArrowContent> {
+        // use hashed video id for privacy
+        // https://wiki.sponsor.ajay.app/w/API_Docs/DeArrow#GET_/api/branding/:sha256HashPrefix
+        val digest = MessageDigest.getInstance("SHA-256")
+        return videoIds.split(',').chunked(25)
+            .flatMap {
+                it.parallelMap { videoId ->
+                    val hashedId = digest
+                        .digest(videoId.toByteArray())
+                        .toHexString()
+                    RetrofitInstance.externalApi.getDeArrowContent(
+                        hashedId.substring(0, 4)
+                    )
+                }
+            }.reduce { acc, map -> acc + map }.mapValues { (videoId, value) ->
+                value.copy(
+                    thumbnails = value.thumbnails.map { thumbnail ->
+                        thumbnail.takeIf { it.original } ?: thumbnail.copy(
+                            thumbnail = "https://dearrow-thumb.ajay.app/api/v1/getThumbnail?videoID=$videoId&time=${thumbnail.timestamp}"
+                        )
+                    }
+                )
+            }
+    }
 
     override suspend fun getSearchResults(searchQuery: String, filter: String): SearchResult {
         val queryHandler = NewPipeExtractorInstance.extractor.searchQHFactory.fromQuery(

@@ -209,8 +209,8 @@ open class OnlinePlayerService : AbstractPlayerService() {
             if (sponsorBlockConfig.isEmpty()) return@runCatching
             sponsorBlockSegments = MediaServiceRepository.instance.getSegments(
                 videoId,
-                JsonHelper.json.encodeToString(sponsorBlockConfig.keys),
-                """["skip","mute","full","poi","chapter"]"""
+                sponsorBlockConfig.keys.toList(),
+                listOf("skip","mute","full","poi","chapter")
             ).segments
 
             withContext(Dispatchers.Main) {

@@ -147,7 +147,7 @@ class SubmitSegmentDialog : DialogFragment() {
     private suspend fun fetchSegments() {
         val categories = resources.getStringArray(R.array.sponsorBlockSegments).toList()
         segments = try {
-            MediaServiceRepository.instance.getSegments(videoId, JsonHelper.json.encodeToString(categories)).segments
+            MediaServiceRepository.instance.getSegments(videoId, categories).segments
         } catch (e: Exception) {
             Log.e(TAG(), e.toString())
             return

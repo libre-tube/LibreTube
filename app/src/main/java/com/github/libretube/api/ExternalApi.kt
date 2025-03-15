@@ -1,14 +1,17 @@
 package com.github.libretube.api
 
 import com.github.libretube.api.obj.DeArrowBody
+import com.github.libretube.api.obj.DeArrowContent
 import com.github.libretube.api.obj.PipedConfig
 import com.github.libretube.api.obj.PipedInstance
+import com.github.libretube.api.obj.SegmentData
 import com.github.libretube.api.obj.SubmitSegmentResponse
 import com.github.libretube.api.obj.VoteInfo
 import com.github.libretube.obj.update.UpdateInfo
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.Url
 
@@ -43,6 +46,13 @@ interface ExternalApi {
         @Query("description") description: String = ""
     ): List<SubmitSegmentResponse>
 
+    @GET("$SB_API_URL/api/skipSegments/{videoId}")
+    suspend fun getSegments(
+        @Path("videoId") videoId: String,
+        @Query("category") category: List<String>,
+        @Query("actionType") actionType: List<String>? = null
+    ): List<SegmentData>
+
     @POST("$SB_API_URL/api/branding")
     suspend fun submitDeArrow(@Body body: DeArrowBody)
 
@@ -55,4 +65,7 @@ interface ExternalApi {
         @Query("userID") userID: String,
         @Query("type") score: Int
     )
+
+    @GET("$SB_API_URL/api/branding/{videoId}")
+    suspend fun getDeArrowContent(@Path("videoId") videoId: String): Map<String, DeArrowContent>
 }
