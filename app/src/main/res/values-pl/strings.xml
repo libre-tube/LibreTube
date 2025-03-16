@@ -179,7 +179,7 @@
     <string name="audio">Dźwięk</string>
     <string name="video">Obraz</string>
     <string name="player_autoplay">Autoodtwarzanie</string>
-    <string name="instance_frontend_url">Link do front-endu instancji</string>
+    <string name="instance_frontend_url">Link do front-endu instancji (opcjonalnie)</string>
     <string name="quality">Jakość</string>
     <string name="behavior">Zachowanie</string>
     <string name="pauseOnScreenOff">Auto-pauza</string>
@@ -292,7 +292,7 @@
     <string name="navbar_order">Zarządzanie</string>
     <string name="audio_track">Ścieżka dźwiękowa</string>
     <string name="hls_instead_of_dash">HTTP Live Streaming</string>
-    <string name="hls_instead_of_dash_summary">Użyj HLS zamiast DASH (będzie wolniej, nie zalecane)</string>
+    <string name="hls_instead_of_dash_summary">Użyj HLS zamiast DASH do strumieniowania mediów. Spróbuj przełączyć tę opcję, jeśli odtwarzanie wideo nie działa.</string>
     <string name="auto_quality">Automatyczna</string>
     <string name="limit_to_runtime">Ogranicz do czasu trwania</string>
     <string name="trends">Na czasie</string>
@@ -554,4 +554,11 @@
     <string name="local_feed_extraction_summary">Bezpośrednie pobieranie kanału z YouTube. Może to być znacznie wolniejsze.</string>
     <string name="never_show_again">Nigdy nie pokazuj więcej</string>
     <string name="update_information">Informacje o aktualizacji</string>
+    <string name="full_local_mode_desc">Bezpośrednio uzyskaj wszystkie treści z YouTube bez korzystania z Piped.</string>
+    <string name="mode_of_operation">Tryb działania</string>
+    <string name="full_local_mode">Pełny tryb lokalny</string>
+    <string name="authentication">Autoryzacja</string>
+    <string name="local_feed_extraction">Lokalna ekstrakcja kanału</string>
+    <string name="updating_feed">Aktualizowanie kanału …</string>
+    <string name="show_upcoming_videos">Pokaż nadchodzące filmy</string>
 </resources>

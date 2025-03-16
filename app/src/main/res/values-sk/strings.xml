@@ -332,7 +332,7 @@
     <string name="grid_landscape">Stĺpce mriežky (na šírku)</string>
     <string name="concurrent_downloads">Maximálny počet súbežných sťahovaní</string>
     <string name="concurrent_downloads_limit_reached">Dosiahnutý limit maximálneho súbežného sťahovania.</string>
-    <string name="instance_frontend_url">URL klientského rozhrania inštancie</string>
+    <string name="instance_frontend_url">URL klientského rozhrania inštancie (voliteľné)</string>
     <string name="seek_increment">Krok pretáčania</string>
     <string name="portrait">Na výšku</string>
     <string name="navLabelVisibility">Viditeľnosť označenia</string>
@@ -401,7 +401,7 @@
     <string name="delete">Odstrániť zo stiahnutých súborov</string>
     <string name="skip_segment">Vynechať segment</string>
     <string name="layout">Usporiadanie</string>
-    <string name="hls_instead_of_dash_summary">Použije HLS namiesto DASH (bude pomalšie, neodporúča sa)</string>
+    <string name="hls_instead_of_dash_summary">Použije HLS namiesto DASH (pre streamovanie médií. Ak prehrávanie videa nefunguje, skúste túto možnosť prepnúť.</string>
     <string name="trends">Trendy</string>
     <string name="trending">Čo je teraz v trende</string>
     <string name="queue_insert_related_videos">Zverejniť súvisiace videá</string>
@@ -415,7 +415,7 @@
     <string name="swipe_controls_summary">Potiahnutím prsta upravíte jas a hlasitosť v režime celej obrazovky</string>
     <string name="defaults">Predvolené nastavenia</string>
     <string name="all_caught_up_summary">Videli ste všetky nové videá</string>
-    <string name="all_caught_up">Už ste v obraze</string>
+    <string name="all_caught_up">Všetko je dokončené</string>
     <string name="pinch_control">Ovládanie dvomi prstami</string>
     <string name="pinch_control_summary">Použite gesto s dvomi prstami na priblíženie/oddialenie</string>
     <string name="export_playlists">Exportovať zoznamy skladieb</string>
@@ -555,4 +555,9 @@
     <string name="never_show_again">Už neukazovať</string>
     <string name="update_information">Informácie o aktualizácii</string>
     <string name="show_upcoming_videos">Zobraziť pripravované videá</string>
+    <string name="mode_of_operation">Režim činnosti</string>
+    <string name="full_local_mode">Plne lokálny režim</string>
+    <string name="full_local_mode_desc">Priamo načíta všetko z YouTube bez použitia Piped.</string>
+    <string name="authentication">Autentifikácia</string>
+    <string name="updating_feed">Aktualizácia kanála…</string>
 </resources>
