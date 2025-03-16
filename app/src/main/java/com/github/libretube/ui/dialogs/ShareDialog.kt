@@ -149,6 +149,7 @@ class ShareDialog : DialogFragment() {
 
     companion object {
         const val YOUTUBE_FRONTEND_URL = "https://www.youtube.com"
+        const val YOUTUBE_MUSIC_URL = "https://music.youtube.com"
         const val YOUTUBE_SHORT_URL = "https://youtu.be"
         const val PIPED_FRONTEND_URL = "https://piped.video"
     }
