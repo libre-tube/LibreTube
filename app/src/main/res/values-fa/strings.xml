@@ -292,7 +292,7 @@
     <string name="pauseOnScreenOff_summary">مکث پخش هنگام خاموش بودن صفحه</string>
     <string name="skip_buttons_summary">نمایش دکمه ها برای پرش به ویدیو بعدی یا قبلی</string>
     <string name="playerVideoFormat">قالب ویدیویی پخش‌کننده</string>
-    <string name="instance_frontend_url">نشانی پیشانهٔ نمونه</string>
+    <string name="instance_frontend_url">آدرس اینترنتی برای رابط جلویی نمونه (اختیاری)</string>
     <string name="seek_increment">پیشروی جویش</string>
     <string name="auth_instances">گزینش نمونه‌ای برای هویت‌سنجی</string>
     <string name="turnInternetOn">لطفاً وای‌فای یا دادهٔ همراه ر بارای وصل شدن به اینترنت روشن کنید.</string>
@@ -375,7 +375,7 @@
     <string name="alternative_pip_controls">کنترل های جایگزین PiP</string>
     <string name="queue_insert_related_videos">درج فیلم های مرتبط</string>
     <string name="double_tap_seek_summary">دوبار در سمت چپ یا راست ضربه بزنید تا موقعیت پخش کننده به عقب یا جلو برود</string>
-    <string name="all_caught_up">همه رو گرفتی</string>
+    <string name="all_caught_up">همه چیز انجام شده</string>
     <string name="audio_only_mode">حالت فقط صدا</string>
     <string name="audio_only_mode_summary">LibreTube را به یک پخش کننده موسیقی تبدیل کنید</string>
     <string name="all_caught_up_summary">همه ویدیوهای جدید را دیده اید</string>
@@ -388,7 +388,7 @@
     <string name="pinch_control_summary">برای بزرگ‌نمایی/کوچک‌نمایی از ژست نیشگون استفاده کنید</string>
     <string name="play_latest_videos">پخش آخرین ویدیوها</string>
     <string name="alternative_pip_controls_summary">فقط نمایش صدا و به جای جلو و عقب، از کنترل‌ها در PiP استفاده کنید</string>
-    <string name="hls_instead_of_dash_summary">استفاده از HLS به جای DASH (آهسته تر، توصیه نشده)</string>
+    <string name="hls_instead_of_dash_summary">از HLS به جای DASH برای پخش رسانه‌ای استفاده کنید. در صورتی که پخش ویدیو کار نمی‌کند، این گزینه را تغییر دهید.</string>
     <string name="stats_for_nerds">آمار برای خوره‌ها</string>
     <string name="limit_to_runtime">محدود به زمان اجرا</string>
     <string name="home_tab_content">محتوای تب خانه</string>
@@ -549,4 +549,14 @@
     <string name="dialog_play_offline_body">آیا می خواهید ویدیو را از پوشه دانلود پخش کنید؟</string>
     <string name="delete_only_watched_videos">فقط ویدیوهایی را که قبلاً تماشا کرده‌اید حذف کنید</string>
     <string name="crashlog">گزارش خطا</string>
+    <string name="full_local_mode">حالت کاملاً محلی</string>
+    <string name="authentication">احراز هویت</string>
+    <string name="full_local_mode_desc">همه چیز را مستقیماً از یوتیوب دریافت کنید، بدون استفاده از Pipe شدن.</string>
+    <string name="mode_of_operation">حالت عملیات</string>
+    <string name="never_show_again">دیگر این را نشان نده</string>
+    <string name="update_information">به‌روزرسانی اطلاعات</string>
+    <string name="local_feed_extraction">استخراج خوراک محلی</string>
+    <string name="local_feed_extraction_summary">خوراک را مستقیماً از یوتیوب دریافت کنید. ممکن است به طور قابل توجهی کندتر باشد.</string>
+    <string name="updating_feed">به‌روزرسانی خوراک …</string>
+    <string name="show_upcoming_videos">نمایش ویدیوهای آینده</string>
 </resources>
