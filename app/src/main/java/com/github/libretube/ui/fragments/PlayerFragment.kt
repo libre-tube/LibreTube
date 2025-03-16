@@ -1147,8 +1147,10 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
         // update the subscribed state
         binding.playerSubscribe.setupSubscriptionButton(
-            this.streams.uploaderUrl.toID(),
-            this.streams.uploader
+            streams.uploaderUrl.toID(),
+            streams.uploader,
+            streams.uploaderAvatar,
+            streams.uploaderVerified
         )
 
         // seekbar preview setup

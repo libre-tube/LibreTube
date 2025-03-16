@@ -159,7 +159,12 @@ class SearchResultsAdapter(
             }
 
             var subscribed = false
-            binding.searchSubButton.setupSubscriptionButton(item.url.toID(), item.name?.toID()) {
+            binding.searchSubButton.setupSubscriptionButton(
+                item.url.toID(),
+                item.name.orEmpty(),
+                item.uploaderAvatar,
+                item.uploaderVerified ?: false
+            ) {
                 subscribed = it
             }
 

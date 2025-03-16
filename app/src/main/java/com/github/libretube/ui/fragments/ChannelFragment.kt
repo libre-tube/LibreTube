@@ -150,7 +150,9 @@ class ChannelFragment : DynamicLayoutManagerFragment(R.layout.fragment_channel) 
 
         binding.channelSubscribe.setupSubscriptionButton(
             channelId,
-            channelName,
+            response.name.orEmpty(),
+            response.avatarUrl,
+            response.verified,
             binding.notificationBell
         ) { isSubscribed ->
             _binding?.addToGroup?.isVisible = isSubscribed
