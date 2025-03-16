@@ -7,16 +7,15 @@ import com.github.libretube.extensions.parallelMap
 import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_URL
 import org.schabi.newpipe.extractor.channel.ChannelInfo
 
-class LocalSubscriptionsRepository: SubscriptionsRepository {
-    override suspend fun subscribe(channelId: String) {
-        val channelUrl = "$YOUTUBE_FRONTEND_URL/channel/${channelId}"
-        val channelInfo = ChannelInfo.getInfo(channelUrl)
-
+class LocalSubscriptionsRepository : SubscriptionsRepository {
+    override suspend fun subscribe(
+        channelId: String, name: String, uploaderAvatar: String?, verified: Boolean
+    ) {
         val localSubscription = LocalSubscription(
-            channelId = channelInfo.id,
-            name = channelInfo.name,
-            avatar = channelInfo.avatars.maxByOrNull { it.height }?.url,
-            verified = channelInfo.isVerified
+            channelId = channelId,
+            name = name,
+            avatar = uploaderAvatar,
+            verified = verified
         )
 
         Database.localSubscriptionDao().insert(localSubscription)
@@ -33,7 +32,10 @@ class LocalSubscriptionsRepository: SubscriptionsRepository {
     override suspend fun importSubscriptions(newChannels: List<String>) {
         for (chunk in newChannels.chunked(CHANNEL_CHUNK_SIZE)) {
             chunk.parallelMap { channelId ->
-                runCatching { subscribe(channelId) }
+                val channelUrl = "$YOUTUBE_FRONTEND_URL/channel/${channelId}"
+                val channelInfo = ChannelInfo.getInfo(channelUrl)
+
+                runCatching { subscribe(channelId, channelInfo.name, channelInfo.avatars.maxByOrNull { it.height }?.url, channelInfo.isVerified) }
             }
         }
     }

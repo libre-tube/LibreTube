@@ -52,6 +52,8 @@ class SubscriptionChannelAdapter :
             subscriptionSubscribe.setupSubscriptionButton(
                 subscription.url.toID(),
                 subscription.name,
+                subscription.avatar,
+                subscription.verified,
                 notificationBell,
                 true
             )

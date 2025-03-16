@@ -43,7 +43,10 @@ object SubscriptionHelper {
             else -> PipedNoAccountFeedRepository()
         }
 
-    suspend fun subscribe(channelId: String) = subscriptionsRepository.subscribe(channelId)
+    suspend fun subscribe(
+        channelId: String, name: String, uploaderAvatar: String?, verified: Boolean
+    ) = subscriptionsRepository.subscribe(channelId, name, uploaderAvatar, verified)
+
     suspend fun unsubscribe(channelId: String) = subscriptionsRepository.unsubscribe(channelId)
     suspend fun isSubscribed(channelId: String) = subscriptionsRepository.isSubscribed(channelId)
     suspend fun importSubscriptions(newChannels: List<String>) =

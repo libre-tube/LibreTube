@@ -6,8 +6,10 @@ import com.github.libretube.api.obj.Subscription
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.LocalSubscription
 
-class PipedLocalSubscriptionsRepository: SubscriptionsRepository {
-    override suspend fun subscribe(channelId: String) {
+class PipedLocalSubscriptionsRepository : SubscriptionsRepository {
+    override suspend fun subscribe(
+        channelId: String, name: String, uploaderAvatar: String?, verified: Boolean
+    ) {
         // further meta info is not needed when using Piped local subscriptions
         Database.localSubscriptionDao().insert(LocalSubscription(channelId))
     }
@@ -29,9 +31,9 @@ class PipedLocalSubscriptionsRepository: SubscriptionsRepository {
         val channelIds = getSubscriptionChannelIds()
 
         return when {
-            channelIds.size > GET_SUBSCRIPTIONS_LIMIT ->
-                RetrofitInstance.authApi
-                    .unauthenticatedSubscriptions(channelIds)
+            channelIds.size > GET_SUBSCRIPTIONS_LIMIT -> RetrofitInstance.authApi.unauthenticatedSubscriptions(
+                    channelIds
+                )
 
             else -> RetrofitInstance.authApi.unauthenticatedSubscriptions(
                 channelIds.joinToString(",")

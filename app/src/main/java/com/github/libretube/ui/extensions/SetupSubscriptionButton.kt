@@ -15,7 +15,9 @@ import kotlinx.coroutines.withContext
 
 fun TextView.setupSubscriptionButton(
     channelId: String?,
-    channelName: String?,
+    channelName: String,
+    channelAvatar: String?,
+    channelVerified: Boolean,
     notificationBell: MaterialButton? = null,
     isSubscribed: Boolean? = null,
     onIsSubscribedChange: (Boolean) -> Unit = {}
@@ -53,7 +55,7 @@ fun TextView.setupSubscriptionButton(
         } else {
             CoroutineScope(Dispatchers.Main).launch {
                 withContext(Dispatchers.IO) {
-                    SubscriptionHelper.subscribe(channelId)
+                    SubscriptionHelper.subscribe(channelId, channelName, channelAvatar, channelVerified)
                 }
 
                 text = context.getString(R.string.unsubscribe)
