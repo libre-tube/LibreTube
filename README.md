@@ -82,17 +82,18 @@ Screenshots
 Features
 </h2>
 
-- [x] No Ads
-- [x] User Accounts
+- [x] No Ads or Tracking
 - [x] Subscriptions
 - [x] Subscription Groups
 - [x] User Playlists
 - [x] Playlist Bookmarks
 - [x] Watch/Search History
 - [x] SponsorBlock
-- [x] DeArrow
 - [x] ReturnYouTubeDislike
+- [x] DeArrow
 - [x] Downloads
+- [x] Background playback
+- [x] User Accounts via Piped (optional)
 
 <h2 align="left">
 <sub>
@@ -148,13 +149,8 @@ Contributions in any form are welcome!
 Differences to NewPipe
 </h2>
 
-
-With NewPipe, the extraction is done locally on your phone, and all the requests sent towards YouTube/Google are done directly from the network you're connected to, which doesn't use a middleman server in between. Therefore, Google can still access information such as the user's IP address. Aside from that, subscriptions can only be stored locally.
-
-LibreTube takes this one step further and proxies all requests via Piped (which uses the NewPipeExtractor). This prevents Google servers from accessing your IP address or any other personal data.<br>
-Apart from that, Piped allows syncing your subscriptions between LibreTube and Piped, which can be used on desktop too.
-
-If the NewPipeExtractor breaks, it only requires an update of Piped and not LibreTube itself. Therefore, fixes usually arrive faster than in NewPipe.
+With LibreTube, you have the choice to either send all requests directly to YouTube or proxy them via Piped for better privacy. Piped acts as a middleman server between you and YouTube in this case, which prevents YouTube from accessing personal information such as your IP address. 
+Additionally, using Piped allows you to sync your subscriptions between LibreTube and Piped, which can be used on desktop too.
 
 While LibreTube only supports YouTube, NewPipe also allows the use of other platforms like SoundCloud, PeerTube, Bandcamp and media.ccc.de.<br>
 Both are great clients for watching YouTube videos. It depends on the individual's use case which one fits their needs better.
