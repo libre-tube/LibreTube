@@ -13,6 +13,7 @@ import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.helpers.PreferenceHelper
+import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
 
 open class PipedMediaServiceRepository : MediaServiceRepository {
@@ -36,9 +37,13 @@ open class PipedMediaServiceRepository : MediaServiceRepository {
 
     override suspend fun getSegments(
         videoId: String,
-        category: String,
-        actionType: String?
-    ): SegmentData = api.getSegments(videoId, category, actionType)
+        category: List<String>,
+        actionType: List<String>?
+    ): SegmentData = api.getSegments(
+        videoId,
+        JsonHelper.json.encodeToString(category),
+        JsonHelper.json.encodeToString(actionType)
+    )
 
     override suspend fun getDeArrowContent(videoIds: String): Map<String, DeArrowContent> =
         api.getDeArrowContent(videoIds)
