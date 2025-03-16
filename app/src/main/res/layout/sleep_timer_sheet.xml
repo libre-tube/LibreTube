@@ -60,14 +60,14 @@
                     android:id="@+id/time_input_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginVertical="10dp"
                     android:hint="@string/time_in_minutes">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/time_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_marginVertical="10dp"
                         android:inputType="number"
                         android:text="30"
                         tools:ignore="HardcodedText" />
