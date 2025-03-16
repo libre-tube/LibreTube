@@ -50,6 +50,8 @@ This project is aimed at improving the users' privacy by being independent from 
 
 Therefore, the app is using the [Piped API](https://github.com/TeamPiped/Piped), which uses proxies to circumvent Google's data collection and includes some other additional features.
 
+You can disable the Piped API by selecting "Full Local Mode". This way you can get the data directly from the [NewPipe Extractor](https://github.com/TeamNewPipe/NewPipeExtractor).
+
 If you have questions or need help, please make sure to read the [FAQ](https://libre-tube.github.io/#faq) before asking for help at the community channels. The [Matrix room](https://matrix.to/#/#LibreTube:matrix.org) is considered as the main communication channel, all other forums or social media accounts are maintained by volunteers from the community but not the developer(s).
 
 <h2 align="left">
@@ -83,6 +85,9 @@ Features
 </h2>
 
 - [x] No Ads
+- [x] Full Local Mode
+- [x] Offline player support
+- [x] Background playback
 - [x] User Accounts
 - [x] Subscriptions
 - [x] Subscription Groups
@@ -145,16 +150,19 @@ Contributions in any form are welcome!
       height="30"
       width="30">
 </sub>
-Differences to NewPipe
+LibreTube is customizable
 </h2>
 
 
-With NewPipe, the extraction is done locally on your phone, and all the requests sent towards YouTube/Google are done directly from the network you're connected to, which doesn't use a middleman server in between. Therefore, Google can still access information such as the user's IP address. Aside from that, subscriptions can only be stored locally.
+LibreTube can be used with your custom or existing Piped (API) instances, depending on your preference. However, you may experience playback issues. This prevents Google servers from accessing your IP address or any other personal data.
+Apart from that, Piped allows syncing your subscriptions between LibreTube and Piped, which can be used on desktop too.If the NewPipeExtractor breaks, it only requires an update of Piped and not LibreTube itself. Therefore, fixes usually arrive faster than in NewPipe
 
-LibreTube takes this one step further and proxies all requests via Piped (which uses the NewPipeExtractor). This prevents Google servers from accessing your IP address or any other personal data.<br>
-Apart from that, Piped allows syncing your subscriptions between LibreTube and Piped, which can be used on desktop too.
+Optionally, you can completely disable the Piped API with the "Full Local Mode" option and get all data directly from NewPipe Extractor.
 
-If the NewPipeExtractor breaks, it only requires an update of Piped and not LibreTube itself. Therefore, fixes usually arrive faster than in NewPipe.
+</sub>
+❓️Differences to NewPipe
+</h2>
+
 
 While LibreTube only supports YouTube, NewPipe also allows the use of other platforms like SoundCloud, PeerTube, Bandcamp and media.ccc.de.<br>
 Both are great clients for watching YouTube videos. It depends on the individual's use case which one fits their needs better.
