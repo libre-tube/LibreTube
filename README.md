@@ -50,7 +50,7 @@ This project is aimed at improving the users' privacy by being independent from 
 
 Therefore, the app is using the [Piped API](https://github.com/TeamPiped/Piped), which uses proxies to circumvent Google's data collection and includes some other additional features.
 
-You can disable the Piped API by selecting "Full Local Mode". This way you can get the data directly from the [NewPipe Extractor](https://github.com/TeamNewPipe/NewPipeExtractor). Privacy and account-free video playback, local subscriptions, local playlist are available.
+You can disable the Piped API by selecting "Full Local Mode". This way you can get the data directly (no proxy) from the [NewPipe Extractor](https://github.com/TeamNewPipe/NewPipeExtractor). Privacy and account-free video playback, local subscriptions, local playlist are available.
 
 If you have questions or need help, please make sure to read the [FAQ](https://libre-tube.github.io/#faq) before asking for help at the community channels. The [Matrix room](https://matrix.to/#/#LibreTube:matrix.org) is considered as the main communication channel, all other forums or social media accounts are maintained by volunteers from the community but not the developer(s).
 
@@ -154,10 +154,10 @@ LibreTube is customizable
 </h2>
 
 
-LibreTube can be used with your custom or existing Piped (API) instances, depending on your preference. However, you may experience playback issues. Instances can be blocked. They weaken due to high usage This prevents Google servers from accessing your IP address or any other personal data.
+LibreTube can be used with your custom or existing Piped (API) instances, depending on your preference. However, you may experience playback issues. Instances can be blocked. They weaken due to high usage. This prevents Google servers from accessing your IP address or any other personal data.
 Apart from that, Piped allows syncing your subscriptions between LibreTube and Piped, which can be used on desktop too.If the NewPipeExtractor breaks, it only requires an update of Piped and not LibreTube itself. Therefore, fixes usually arrive faster than in NewPipe
 
-Optionally, you can completely disable the Piped API with the "Full Local Mode" option and get all data directly from NewPipe Extractor. You get more stability 
+Optionally, you can completely disable the Piped API with the "Full Local Mode" option and get all data directly (no proxy) from NewPipe Extractor. You get more stability 
 
 </sub>
 ❓️Differences to NewPipe
