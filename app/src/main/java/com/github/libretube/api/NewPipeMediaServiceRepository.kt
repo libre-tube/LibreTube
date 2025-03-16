@@ -143,6 +143,7 @@ fun InfoItem.toContentItem() = when (this) {
         url = url.toID(),
         type = TYPE_PLAYLIST,
         title = name,
+        name = name,
         shortDescription = description.content,
         thumbnail = thumbnails.maxByOrNull { it.height }?.url.orEmpty(),
         videos = streamCount,
