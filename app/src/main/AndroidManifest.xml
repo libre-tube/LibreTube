@@ -32,7 +32,7 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/StartupTheme"
+        android:theme="@style/BaseTheme"
         tools:targetApi="tiramisu">
 
         <activity
@@ -126,6 +126,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="locked"
             android:supportsPictureInPicture="true"
+            android:theme="@style/SplashScreenTheme"
             android:windowSoftInputMode="adjustPan">
             <!-- allow being recognized as a music player -->
             <intent-filter>
@@ -143,6 +144,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsPictureInPicture="true"
             android:targetActivity=".ui.activities.MainActivity"
+            android:theme="@style/SplashScreenTheme"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -161,6 +163,7 @@
             android:roundIcon="@mipmap/ic_gradient_round"
             android:supportsPictureInPicture="true"
             android:targetActivity=".ui.activities.MainActivity"
+            android:theme="@style/SplashScreenTheme"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -180,6 +183,7 @@
             android:roundIcon="@mipmap/ic_launcher_light_round"
             android:supportsPictureInPicture="true"
             android:targetActivity=".ui.activities.MainActivity"
+            android:theme="@style/SplashScreenTheme"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -199,6 +203,7 @@
             android:roundIcon="@mipmap/ic_fire_round"
             android:supportsPictureInPicture="true"
             android:targetActivity=".ui.activities.MainActivity"
+            android:theme="@style/SplashScreenTheme"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -218,6 +223,7 @@
             android:roundIcon="@mipmap/ic_flame_round"
             android:supportsPictureInPicture="true"
             android:targetActivity=".ui.activities.MainActivity"
+            android:theme="@style/SplashScreenTheme"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -237,6 +243,7 @@
             android:roundIcon="@mipmap/ic_shaped_round"
             android:supportsPictureInPicture="true"
             android:targetActivity=".ui.activities.MainActivity"
+            android:theme="@style/SplashScreenTheme"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -254,6 +261,7 @@
             android:roundIcon="@mipmap/ic_torch_round"
             android:supportsPictureInPicture="true"
             android:targetActivity=".ui.activities.MainActivity"
+            android:theme="@style/SplashScreenTheme"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -273,6 +281,7 @@
             android:roundIcon="@mipmap/ic_legacy_round"
             android:supportsPictureInPicture="true"
             android:targetActivity=".ui.activities.MainActivity"
+            android:theme="@style/SplashScreenTheme"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -292,6 +301,7 @@
             android:roundIcon="@mipmap/ic_bird_round"
             android:supportsPictureInPicture="true"
             android:targetActivity=".ui.activities.MainActivity"
+            android:theme="@style/SplashScreenTheme"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
