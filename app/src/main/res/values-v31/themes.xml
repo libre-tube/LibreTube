@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="StartupTheme" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_anim</item>
-        <item name="postSplashScreenTheme">@style/BaseTheme</item>
+    <style name="SplashScreenTheme" parent="BaseTheme">
+        <item name="colorSurface">@android:color/white</item>
+        <item name="android:colorBackground">@android:color/white</item>
+
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/splash_anim</item>
     </style>
 </resources>
