@@ -184,23 +184,6 @@ class DownloadService : LifecycleService() {
     }
 
     /**
-     * Initiate download [Job] using [DownloadItem] by creating file according to [FileType]
-     * for the requested file.
-     */
-    private fun start(item: DownloadItem) {
-        item.path = when (item.type) {
-            FileType.AUDIO -> getDownloadPath(DownloadHelper.AUDIO_DIR, item.fileName)
-            FileType.VIDEO -> getDownloadPath(DownloadHelper.VIDEO_DIR, item.fileName)
-            FileType.SUBTITLE -> getDownloadPath(DownloadHelper.SUBTITLE_DIR, item.fileName)
-        }.apply { deleteIfExists() }.createFile()
-
-        lifecycleScope.launch(coroutineContext) {
-            item.id = Database.downloadDao().insertDownloadItem(item).toInt()
-            downloadFile(item)
-        }
-    }
-
-    /**
      * Download file and emit [DownloadStatus] to the collectors of [downloadFlow]
      * and notification.
      */
@@ -379,16 +362,44 @@ class DownloadService : LifecycleService() {
     }
 
     /**
+     * Returns true if the current amount of downloads is still less than the maximum amount of
+     * concurrent downloads.
+     */
+    private fun mayStartNewDownload(): Boolean {
+        val downloadCount = downloadQueue.valueIterator().asSequence().count { it }
+        return downloadCount < DownloadHelper.getMaxConcurrentDownloads()
+    }
+
+    /**
+     * Initiate download [Job] using [DownloadItem] by creating file according to [FileType]
+     * for the requested file.
+     */
+    private fun start(item: DownloadItem) {
+        item.path = when (item.type) {
+            FileType.AUDIO -> getDownloadPath(DownloadHelper.AUDIO_DIR, item.fileName)
+            FileType.VIDEO -> getDownloadPath(DownloadHelper.VIDEO_DIR, item.fileName)
+            FileType.SUBTITLE -> getDownloadPath(DownloadHelper.SUBTITLE_DIR, item.fileName)
+        }.apply { deleteIfExists() }.createFile()
+
+        lifecycleScope.launch(coroutineContext) {
+            item.id = Database.downloadDao().insertDownloadItem(item).toInt()
+
+            if (mayStartNewDownload()) {
+                downloadFile(item)
+            } else {
+                pause(item.id)
+            }
+        }
+    }
+
+    /**
      * Resume download which may have been paused.
      */
     fun resume(id: Int) {
         // If file is already downloading then avoid new download job.
-        if (downloadQueue[id]) {
-            return
-        }
+        if (downloadQueue[id]) return
 
-        val downloadCount = downloadQueue.valueIterator().asSequence().count { it }
-        if (downloadCount >= DownloadHelper.getMaxConcurrentDownloads()) {
+        if (!mayStartNewDownload()) {
             toastFromMainThread(getString(R.string.concurrent_downloads_limit_reached))
             lifecycleScope.launch(coroutineContext) {
                 _downloadFlow.emit(id to DownloadStatus.Paused)
