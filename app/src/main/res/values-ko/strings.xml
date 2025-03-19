@@ -40,7 +40,7 @@
     <string name="fail">실패 :(</string>
     <string name="about">정보</string>
     <string name="error">문제가 발생했습니다.</string>
-    <string name="notgmail">Piped 계정을 위한 것입니다</string>
+    <string name="notgmail">Piped 계정으로 로그인</string>
     <string name="defres">동영상 해상도</string>
     <string name="playlistName">재생목록 이름</string>
     <string name="import_from_yt_summary">YouTube 또는 NewPipe에서</string>
@@ -155,7 +155,7 @@
     <string name="pauseOnScreenOff">자동 일시정지</string>
     <string name="pauseOnScreenOff_summary">화면이 꺼지면 재생을 일시정지합니다</string>
     <string name="clonePlaylist">재생목록 복제</string>
-    <string name="instance_frontend_url">인스턴스 프론트엔드에 대한 URL</string>
+    <string name="instance_frontend_url">인스턴스 프론트엔드 URL (선택사항)</string>
     <string name="deleteAccount">계정 삭제</string>
     <string name="deleteAccount_summary">Piped 계정 삭제</string>
     <string name="account">계정</string>
@@ -324,7 +324,7 @@
     <string name="history_size">최대 기록 크기</string>
     <string name="skip_buttons_summary">다음 또는 이전 비디오로 건너뛰기 위한 버튼을 표시합니다</string>
     <string name="skip_buttons">건너뛰기 버튼</string>
-    <string name="hls_instead_of_dash_summary">DASH 대신 HLS 사용 (속도가 느려짐, 권장하지 않음)</string>
+    <string name="hls_instead_of_dash_summary">DASH 대신 HLS 사용하여 재생. 비디오가 재생되지 않는다면 이 옵션을 시도해보세요.</string>
     <string name="trending">최신 유행</string>
     <string name="mobile_data">모바일 데이터</string>
     <string name="color_violet">화려한 보라색</string>
@@ -552,4 +552,9 @@
     <string name="never_show_again">다시 표시하지 않음</string>
     <string name="update_information">업데이트 정보</string>
     <string name="local_feed_extraction_summary">YouTube로부터 직접 피드를 받아옵니다. 속도가 상당히 감소할 수 있습니다.</string>
+    <string name="mode_of_operation">작동 방식</string>
+    <string name="authentication">인증</string>
+    <string name="updating_feed">피드 업데이트 중 …</string>
+    <string name="show_upcoming_videos">공개 예정 영상 표시</string>
+    <string name="full_local_mode_desc">Piped를 통하지 않고 모든 정보를 YouTube로부터 직접 가져옵니다.</string>
 </resources>

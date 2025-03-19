@@ -146,7 +146,7 @@
     <string name="player_autoplay">Reproducción automática</string>
     <string name="no_video">Sin vídeo</string>
     <string name="downloading">Descargando…</string>
-    <string name="instance_frontend_url">URL de la interfaz de la instancia</string>
+    <string name="instance_frontend_url">URL de la interfaz de la instancia (opcional)</string>
     <string name="no_audio">Sin audio</string>
     <string name="audio">Audio</string>
     <string name="video">Vídeo</string>
@@ -293,7 +293,7 @@
     <string name="layout">Diseño</string>
     <string name="audio_track">Pista de audio</string>
     <string name="auto_quality">Automática</string>
-    <string name="hls_instead_of_dash_summary">Usar HLS en vez de DASH (podría ser lento, no recomendado)</string>
+    <string name="hls_instead_of_dash_summary">Use HLS en lugar de DASH para la transmisión multimedia. Pruebe a activar esta opción si la reproducción de video no funciona.</string>
     <string name="hls_instead_of_dash">Usar HLS</string>
     <string name="limit_to_runtime">Limitar al tiempo de ejecución</string>
     <string name="trends">Tendencias</string>
@@ -555,4 +555,9 @@
     <string name="local_feed_extraction_summary">Obtener el feed directamente de YouTube. Esto puede ser significativamente más lento.</string>
     <string name="local_feed_extraction">Extracción de feed local</string>
     <string name="show_upcoming_videos">Mostrar proximos videos</string>
+    <string name="mode_of_operation">Modo de operación</string>
+    <string name="full_local_mode">Modo local completo</string>
+    <string name="updating_feed">Actualizando feed …</string>
+    <string name="full_local_mode_desc">Obtenga todo directamente de YouTube, sin utilizar Piped.</string>
+    <string name="authentication">Autentificación</string>
 </resources>
