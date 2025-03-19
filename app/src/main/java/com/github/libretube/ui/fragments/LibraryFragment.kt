@@ -186,9 +186,10 @@ class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) 
                 val binding = _binding ?: return@repeatOnLifecycle
                 binding.playlistRefresh.isRefreshing = false
 
-                if (playlists.isNotEmpty()) {
-                    showPlaylists(playlists)
-                } else {
+                // also update playlists recycler when the playlists are empty in order to remove
+                // playlists that were removed by the user
+                showPlaylists(playlists)
+                if (playlists.isEmpty()) {
                     binding.sortTV.isVisible = false
                     binding.nothingHere.isVisible = true
                 }
