@@ -108,7 +108,11 @@ class MainActivity : BaseActivity() {
             startActivity(noInternetIntent)
             finish()
             return
-        } else if (PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, "").isEmpty()) {
+        }
+
+        val isAppConfigured = PreferenceHelper.getBoolean(PreferenceKeys.LOCAL_FEED_EXTRACTION, false) ||
+                PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, "").isNotEmpty()
+        if (!isAppConfigured) {
             val welcomeIntent = Intent(this, WelcomeActivity::class.java)
             startActivity(welcomeIntent)
             finish()

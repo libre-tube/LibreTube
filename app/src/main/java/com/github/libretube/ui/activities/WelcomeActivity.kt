@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import com.github.libretube.databinding.ActivityWelcomeBinding
 import com.github.libretube.ui.adapters.InstancesAdapter
 import com.github.libretube.ui.base.BaseActivity
@@ -36,18 +37,25 @@ class WelcomeActivity : BaseActivity() {
         binding.instancesRecycler.adapter = adapter
 
         binding.okay.setOnClickListener {
-            viewModel.saveSelectedInstance()
+            viewModel.onConfirmSettings()
         }
 
         binding.restore.setOnClickListener {
             restoreFilePicker.launch(BackupRestoreSettings.JSON)
         }
 
-        viewModel.uiState.observe(this) { (selectedIndex, instances, error, navigateToMain) ->
-            binding.okay.isEnabled = selectedIndex != null
+        binding.operationModeGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (checkedId == binding.fullLocalModeToggleGroupButton.id) viewModel.setFullLocalModeEnabled(isChecked)
+        }
+
+        viewModel.uiState.observe(this) { (fullLocalMode, selectedIndex, instances, error, navigateToMain) ->
+            binding.okay.isEnabled = fullLocalMode || selectedIndex != null
             binding.progress.isGone = instances.isNotEmpty()
 
-            adapter.submitList(instances)
+            binding.instancesContainer.isVisible = !fullLocalMode
+            binding.localModeInfoContainer.isVisible = fullLocalMode
+
+            if (!fullLocalMode) adapter.submitList(instances)
 
             error?.let {
                 Toast.makeText(this, it, Toast.LENGTH_LONG).show()

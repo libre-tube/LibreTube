@@ -46,13 +46,23 @@ class WelcomeViewModel(
         }
     }
 
+    fun setFullLocalModeEnabled(enabled: Boolean) {
+        savedStateHandle[UI_STATE] = _uiState.value.copy(fullLocalMode = enabled)
+    }
+
     fun setSelectedInstanceIndex(index: Int) {
         savedStateHandle[UI_STATE] = _uiState.value.copy(selectedInstanceIndex = index)
     }
 
-    fun saveSelectedInstance() {
+    fun onConfirmSettings() {
+        val fullLocalMode = _uiState.value.fullLocalMode
         val selectedInstanceIndex = _uiState.value.selectedInstanceIndex
-        if (selectedInstanceIndex == null) {
+
+        if (fullLocalMode) {
+            PreferenceHelper.putBoolean(PreferenceKeys.FULL_LOCAL_MODE, true)
+            PreferenceHelper.putBoolean(PreferenceKeys.LOCAL_FEED_EXTRACTION, true)
+            refreshAndNavigate()
+        } else if (selectedInstanceIndex == null) {
             savedStateHandle[UI_STATE] = _uiState.value.copy(error = R.string.choose_instance)
         } else {
             PreferenceHelper.putString(
@@ -91,6 +101,7 @@ class WelcomeViewModel(
 
     @Parcelize
     data class UiState(
+        val fullLocalMode: Boolean = false,
         val selectedInstanceIndex: Int? = null,
         val instances: List<PipedInstance> = emptyList(),
         @StringRes val error: Int? = null,
