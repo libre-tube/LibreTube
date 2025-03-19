@@ -41,11 +41,14 @@ class DeletePlaylistDialog : DialogFragment() {
                         context.toastFromMainDispatcher(
                             if (success) R.string.success else R.string.fail
                         )
-                        setFragmentResult(
-                            PlaylistOptionsBottomSheet.PLAYLIST_OPTIONS_REQUEST_KEY,
-                            bundleOf(IntentData.playlistTask to true)
-                        )
-                        withContext(Dispatchers.Main) { dismiss() }
+                        withContext(Dispatchers.Main) {
+                            dismiss()
+
+                            setFragmentResult(
+                                PlaylistOptionsBottomSheet.PLAYLIST_OPTIONS_REQUEST_KEY,
+                                bundleOf(IntentData.playlistTask to true)
+                            )
+                        }
                     }
                 }
             }
