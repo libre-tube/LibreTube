@@ -30,7 +30,6 @@ import com.github.libretube.extensions.serializable
 import com.github.libretube.extensions.setOnDismissListener
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.DownloadHelper
-import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.DownloadStatus
@@ -38,7 +37,6 @@ import com.github.libretube.receivers.DownloadReceiver
 import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.adapters.DownloadsAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
-import com.github.libretube.ui.extensions.setupFragmentAnimation
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -72,10 +70,6 @@ class DownloadsFragment : Fragment(R.layout.fragment_downloads) {
                 else -> throw IllegalArgumentException()
             }
         }.attach()
-
-        if (NavBarHelper.getStartFragmentId(requireContext()) != R.id.downloadsFragment) {
-            setupFragmentAnimation(binding.root)
-        }
     }
 
     fun bindDownloadService() {
