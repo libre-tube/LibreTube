@@ -37,8 +37,8 @@
     <string name="fail">Échec</string>
     <string name="grid">Colonnes de la grille (portrait)</string>
     <string name="emptyList">Rien ici.</string>
-    <string name="deletePlaylist">Supprimer la playlist</string>
-    <string name="areYouSure">Souhaitez-vous supprimer la playlist ?</string>
+    <string name="deletePlaylist">Supprimer la liste de lecture</string>
+    <string name="areYouSure">Souhaitez-vous supprimer la liste de lecture ?</string>
     <string name="createPlaylist">Créer une liste de lecture</string>
     <string name="playlistCreated">Liste de lecture créée.</string>
     <string name="playlistName">Nom de la liste de lecture</string>
@@ -149,7 +149,7 @@
     <string name="audio">Audio</string>
     <string name="video">Vidéo</string>
     <string name="downloading">Téléchargement…</string>
-    <string name="instance_frontend_url">URL vers l’interface de l’instance</string>
+    <string name="instance_frontend_url">URL vers l’interface de l’instance (facultatif)</string>
     <string name="quality">Qualité</string>
     <string name="behavior">Comportement</string>
     <string name="player_summary">Valeurs par défaut et comportement</string>
@@ -293,7 +293,7 @@
     <string name="layout">Mise en page</string>
     <string name="audio_track">Piste audio</string>
     <string name="hls_instead_of_dash">Utiliser HLS</string>
-    <string name="hls_instead_of_dash_summary">Utiliser HLS à la place de DASH (sera plus lent, non recommandé)</string>
+    <string name="hls_instead_of_dash_summary">Utilisez HLS au lieu de DASH pour diffuser des médias. Essayez de l\'emporter si la lecture vidéo ne fonctionne pas.</string>
     <string name="auto_quality">Auto</string>
     <string name="limit_to_runtime">Limite d’exécution</string>
     <string name="featured">En vedette</string>
@@ -554,4 +554,10 @@
     <string name="local_feed_extraction">Extraction de flux local</string>
     <string name="never_show_again">Ne plus jamais afficher cela</string>
     <string name="update_information">Information mise à jour</string>
+    <string name="mode_of_operation">Mode de fonctionnement</string>
+    <string name="full_local_mode_desc">Récupérer directement tout de YouTube, sans utiliser Piped.</string>
+    <string name="updating_feed">Mise à jour du flux…</string>
+    <string name="full_local_mode">Mode local complet</string>
+    <string name="authentication">Authentification</string>
+    <string name="show_upcoming_videos">Afficher les vidéos à venir</string>
 </resources>
