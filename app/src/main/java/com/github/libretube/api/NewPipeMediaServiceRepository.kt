@@ -237,6 +237,7 @@ fun String.toListLinkHandler() = with(JsonHelper.json.decodeFromString<TabData>(
 }
 
 class NewPipeMediaServiceRepository : MediaServiceRepository {
+
     init {
         YoutubeStreamExtractor.setPoTokenProvider(PoTokenGenerator());
     }
