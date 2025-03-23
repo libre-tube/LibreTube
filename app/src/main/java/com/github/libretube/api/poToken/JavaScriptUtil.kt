@@ -25,11 +25,11 @@ fun parseChallengeData(rawChallengeData: String): String {
         scrambled[1].jsonArray
     }
 
-    val messageId = challengeData[0].jsonPrimitive.content
-    val interpreterHash = challengeData[3].jsonPrimitive.content
-    val program = challengeData[4].jsonPrimitive.content
-    val globalName = challengeData[5].jsonPrimitive.content
-    val clientExperimentsStateBlob = challengeData[7].jsonPrimitive.content
+    val messageId = challengeData.getOrNull(0)?.jsonPrimitive?.content
+    val interpreterHash = challengeData.getOrNull(3)?.jsonPrimitive?.content
+    val program = challengeData.getOrNull(4)?.jsonPrimitive?.content
+    val globalName = challengeData.getOrNull(5)?.jsonPrimitive?.content
+    val clientExperimentsStateBlob = challengeData.getOrNull(7)?.jsonPrimitive?.content
 
 
     val privateDoNotAccessOrElseSafeScriptWrappedValue = challengeData[1]
