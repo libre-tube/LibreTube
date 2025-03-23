@@ -50,9 +50,9 @@ fun parseChallengeData(rawChallengeData: String): String {
                 "interpreterJavascript" to JsonObject(
                     mapOf(
                         "privateDoNotAccessOrElseSafeScriptWrappedValue" to (privateDoNotAccessOrElseSafeScriptWrappedValue
-                            ?: JsonPrimitive("")),
+                            ?: JsonNull),
                         "privateDoNotAccessOrElseTrustedResourceUrlWrappedValue" to (privateDoNotAccessOrElseTrustedResourceUrlWrappedValue
-                            ?: JsonPrimitive(""))
+                            ?: JsonNull)
                     )
                 ),
                 "interpreterHash" to JsonPrimitive(interpreterHash),
