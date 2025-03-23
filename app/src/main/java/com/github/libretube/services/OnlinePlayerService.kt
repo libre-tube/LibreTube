@@ -50,7 +50,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
     // PlaylistId/ChannelId for autoplay
     private var playlistId: String? = null
     private var channelId: String? = null
-    private var startTimestamp: Long? = null
+    private var startTimestampSeconds: Long? = null
 
     /**
      * The response that gets when called the Api.
@@ -105,7 +105,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
         setVideoId(playerData.videoId)
         playlistId = playerData.playlistId
         channelId = playerData.channelId
-        startTimestamp = playerData.timestamp
+        startTimestampSeconds = playerData.timestamp
 
         if (!playerData.keepQueue) PlayingQueue.clear()
 
@@ -115,8 +115,8 @@ open class OnlinePlayerService : AbstractPlayerService() {
     override suspend fun startPlayback() {
         super.startPlayback()
 
-        val timestamp = startTimestamp ?: 0L
-        startTimestamp = null
+        val timestampMs = startTimestampSeconds?.times(1000) ?: 0L
+        startTimestampSeconds = null
 
         streams = withContext(Dispatchers.IO) {
             try {
@@ -152,16 +152,16 @@ open class OnlinePlayerService : AbstractPlayerService() {
         }
 
         withContext(Dispatchers.Main) {
-            playAudio(timestamp)
+            playAudio(timestampMs)
         }
     }
 
-    private fun playAudio(seekToPosition: Long) {
+    private fun playAudio(seekToPositionMs: Long) {
         setStreamSource()
 
         // seek to the previous position if available
-        if (seekToPosition != 0L) {
-            exoPlayer?.seekTo(seekToPosition)
+        if (seekToPositionMs != 0L) {
+            exoPlayer?.seekTo(seekToPositionMs)
         } else if (watchPositionsEnabled) {
             DatabaseHelper.getWatchPositionBlocking(videoId)?.let {
                 if (!DatabaseHelper.isVideoWatched(it, streams?.duration)) exoPlayer?.seekTo(it)

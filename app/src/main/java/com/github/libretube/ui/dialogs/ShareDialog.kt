@@ -133,15 +133,22 @@ class ShareDialog : DialogFragment() {
             // only available for custom instances
             else -> customInstanceUrl!!.toString().trimEnd('/')
         }
-        var url = when {
-            shareObjectType == ShareObjectType.VIDEO && host == YOUTUBE_FRONTEND_URL -> "$YOUTUBE_SHORT_URL/$id"
-            shareObjectType == ShareObjectType.VIDEO -> "$host/watch?v=$id"
-            shareObjectType == ShareObjectType.PLAYLIST -> "$host/playlist?list=$id"
-            else -> "$host/channel/$id"
-        }
+        val url = when (shareObjectType) {
+            ShareObjectType.VIDEO -> {
+                val queryParams = mutableListOf<String>()
+                if (host != YOUTUBE_FRONTEND_URL) {
+                    queryParams.add("v=${id}")
+                }
+                if (binding.timeCodeSwitch.isChecked) {
+                    queryParams += "t=${binding.timeStamp.text}"
+                }
+                val baseUrl = if (host == YOUTUBE_FRONTEND_URL) "$YOUTUBE_SHORT_URL/$id" else "$host/watch"
 
-        if (shareObjectType == ShareObjectType.VIDEO && binding.timeCodeSwitch.isChecked) {
-            url += "&t=${binding.timeStamp.text}"
+                if (queryParams.isEmpty()) baseUrl
+                else baseUrl + "?" + queryParams.joinToString("&")
+            }
+            ShareObjectType.PLAYLIST -> "$host/playlist?list=$id"
+            else -> "$host/channel/$id"
         }
 
         return url
