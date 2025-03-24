@@ -97,10 +97,10 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
             when (playbackState) {
                 Player.STATE_ENDED -> {
-                    exoPlayer?.let { PlayerHelper.saveWatchPosition(it, videoId) }
+                    saveWatchPosition()
                 }
                 Player.STATE_READY -> {
-                 isTransitioning = false
+                    isTransitioning = false
                 }
             }
         }
