@@ -1,5 +1,6 @@
 package com.github.libretube.api
 
+import android.util.Base64
 import com.github.libretube.api.obj.Channel
 import com.github.libretube.api.obj.ChannelTab
 import com.github.libretube.api.obj.ChannelTabResponse
@@ -210,11 +211,11 @@ private data class NextPage(
 )
 
 fun Page.toNextPageString() = JsonHelper.json.encodeToString(
-    NextPage(url, id, ids, cookies, body?.toString())
+    NextPage(url, id, ids, cookies, body?.let { Base64.encodeToString(it, Base64.DEFAULT) })
 )
 
 fun String.toPage(): Page = with(JsonHelper.json.decodeFromString<NextPage>(this)) {
-    return Page(url, id, ids, cookies, body?.toByteArray())
+    return Page(url, id, ids, cookies, body?.let { Base64.decode(it, Base64.DEFAULT) })
 }
 
 @Serializable
