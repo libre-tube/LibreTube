@@ -195,7 +195,8 @@ fun CommentsInfoItem.toComment() = Comment(
     verified = isUploaderVerified,
     replyCount = replyCount.toLong(),
     repliesPage = replies?.toNextPageString(),
-    thumbnail = thumbnails.maxByOrNull { it.height }?.url.orEmpty()
+    thumbnail = thumbnails.maxByOrNull { it.height }?.url.orEmpty(),
+    channelOwner = isChannelOwner
 )
 
 // the following classes are necessary because kotlinx can't deserialize
