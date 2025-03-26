@@ -152,7 +152,7 @@
     <string name="quality">Kalite</string>
     <string name="behavior">Davranış</string>
     <string name="player_summary">Varsayılan ayarlar ve davranış</string>
-    <string name="instance_frontend_url">Oluşum ön ucunun URL\'si</string>
+    <string name="instance_frontend_url">Sunucu ön ucunun internet adresi (isteğe bağlı)</string>
     <string name="seek_increment">Arama artışı</string>
     <string name="pauseOnScreenOff">Otomatik duraklatma</string>
     <string name="pauseOnScreenOff_summary">Ekran kapatılınca oynatmayı duraklat</string>
@@ -471,7 +471,7 @@
     <string name="tooltip_edit_groups">Grupları düzenle</string>
     <string name="chapters_videoHighlight">Video Vurgusu</string>
     <string name="tooltip_sort">Tür</string>
-    <string name="tooltip_watch_position">İzleme pozisyonu</string>
+    <string name="tooltip_watch_position">İzleme konumu</string>
     <string name="proxy">Proxy</string>
     <string name="filename_too_long">Dosya adı çok uzun!</string>
     <string name="sponsorblock_user_id">SponsorBlock Kullanıcı Kimliği</string>
@@ -555,7 +555,7 @@
     <string name="crashlog">Hata kayıtları</string>
     <string name="dialog_play_offline_title">Bu videonun indirilmiş bir sürümü mevcut.</string>
     <string name="updating_feed">Akış güncelleniyor …</string>
-    <string name="mode_of_operation">İşlem Modu</string>
+    <string name="mode_of_operation">Çalışma kipi</string>
     <string name="full_local_mode">Tam yerel kip</string>
     <string name="full_local_mode_desc">Piped kullanmadan herşeyi YouTube\'dan aktar.</string>
     <string name="authentication">Yetkilendirme</string>
