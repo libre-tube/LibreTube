@@ -67,7 +67,7 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
             RecyclerView.AdapterDataObserver() {
             override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
                 if (watchHistoryAdapter.itemCount == 0) {
-                    binding.historyContainer.isGone = true
+                    binding.watchHistoryRecView.isGone = true
                     binding.historyEmpty.isVisible = true
                 }
             }
@@ -98,7 +98,7 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
                     selected[index] = newValue
                 }
                 .setPositiveButton(R.string.okay) { _, _ ->
-                    binding.historyContainer.isGone = true
+                    binding.watchHistoryRecView.isGone = true
                     binding.historyEmpty.isVisible = true
                     lifecycleScope.launch(Dispatchers.IO) {
                         Database.withTransaction {
@@ -149,7 +149,7 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
 
         viewModel.filteredWatchHistory.observe(viewLifecycleOwner) { history ->
             binding.historyEmpty.isGone = history.isNotEmpty()
-            binding.historyContainer.isVisible = history.isNotEmpty()
+            binding.watchHistoryRecView.isVisible = history.isNotEmpty()
 
             watchHistoryAdapter.submitList(history)
         }
