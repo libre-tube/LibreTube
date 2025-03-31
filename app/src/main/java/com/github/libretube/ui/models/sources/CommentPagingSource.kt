@@ -18,10 +18,13 @@ class CommentPagingSource(
             val result = withContext(Dispatchers.IO) {
                 params.key?.let {
                     MediaServiceRepository.instance.getCommentsNextPage(videoId, it)
-                } ?: MediaServiceRepository.instance.getComments(videoId)
+                } ?: MediaServiceRepository.instance.getComments(videoId).also {
+                    // avoid negative comment counts, i.e. because they're disabled
+                    withContext(Dispatchers.Main) {
+                        onCommentCount(maxOf(0, it.commentCount))
+                    }
+                }
             }
-
-            if (result.commentCount > 0) onCommentCount(result.commentCount)
 
             LoadResult.Page(result.comments, null, result.nextpage)
         } catch (e: Exception) {
