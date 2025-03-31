@@ -33,7 +33,7 @@ import kotlin.io.path.exists
 @OptIn(UnstableApi::class)
 open class OfflinePlayerService : AbstractPlayerService() {
     override val isOfflinePlayer: Boolean = true
-    override val isAudioOnlyPlayer: Boolean = true
+    override var isAudioOnlyPlayer: Boolean = true
     private var noInternetService: Boolean = false
 
     private var downloadWithItems: DownloadWithItems? = null

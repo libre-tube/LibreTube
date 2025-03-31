@@ -14,7 +14,7 @@ object IntentData {
     const val timeStamp = "timeStamp"
     const val playlistType = "playlistType"
     const val downloading = "downloading"
-    const val openAudioPlayer = "openAudioPlayer"
+    const val maximizePlayer = "openAudioPlayer"
     const val fragmentToOpen = "fragmentToOpen"
     const val comment = "comment"
     const val minimizeByDefault = "minimizeByDefault"
@@ -60,4 +60,5 @@ object IntentData {
     const val alreadyStarted = "alreadyStarted"
     const val showUpcoming = "showUpcoming"
     const val customInstance = "customInstance"
+    const val audioOnly = "audioOnly"
 }

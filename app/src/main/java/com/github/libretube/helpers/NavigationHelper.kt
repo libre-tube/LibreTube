@@ -59,6 +59,7 @@ object NavigationHelper {
         channelId: String? = null,
         keepQueue: Boolean = false,
         timestamp: Long = 0,
+        alreadyStarted: Boolean = false,
         forceVideo: Boolean = false
     ) {
         if (videoUrlOrId == null) return
@@ -85,7 +86,10 @@ object NavigationHelper {
 
         val playerData =
             PlayerData(videoUrlOrId.toID(), playlistId, channelId, keepQueue, timestamp)
-        val bundle = bundleOf(IntentData.playerData to playerData)
+        val bundle = bundleOf(
+            IntentData.playerData to playerData,
+            IntentData.alreadyStarted to alreadyStarted
+        )
         activity.supportFragmentManager.commitNow {
             replace<PlayerFragment>(R.id.container, args = bundle)
         }

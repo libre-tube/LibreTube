@@ -29,6 +29,7 @@ import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentAudioPlayerBinding
+import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.extensions.navigateVideo
 import com.github.libretube.extensions.normalize
 import com.github.libretube.extensions.seekBy
@@ -174,13 +175,17 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
         }
 
         binding.openVideo.setOnClickListener {
-            killFragment()
+            playerController?.sendCustomCommand(
+                AbstractPlayerService.runPlayerActionCommand,
+                bundleOf(PlayerCommand.TOGGLE_AUDIO_ONLY_MODE.name to false)
+            )
+
+            killFragment(false)
 
             NavigationHelper.navigateVideo(
                 context = requireContext(),
                 videoUrlOrId = PlayingQueue.getCurrent()?.url,
-                timestamp = playerController?.currentPosition?.div(1000) ?: 0,
-                keepQueue = true,
+                alreadyStarted = true,
                 forceVideo = true
             )
         }
@@ -209,7 +214,7 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
         }
 
         binding.miniPlayerClose.setOnClickListener {
-            killFragment()
+            killFragment(true)
         }
 
         val listener = AudioPlayerThumbnailListener(requireContext(), this)
@@ -267,8 +272,8 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
         }
     }
 
-    private fun killFragment() {
-        playerController?.sendCustomCommand(AbstractPlayerService.stopServiceCommand, Bundle.EMPTY)
+    private fun killFragment(stopPlayer: Boolean) {
+        if (stopPlayer) playerController?.sendCustomCommand(AbstractPlayerService.stopServiceCommand, Bundle.EMPTY)
         playerController?.release()
         playerController = null
 
@@ -439,6 +444,8 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
                 _binding?.openChapters?.isVisible = !chapters.isNullOrEmpty()
             }
         })
+        playerController?.mediaMetadata?.let { updateStreamInfo(it) }
+
         initializeSeekBar()
 
         if (isOffline) {

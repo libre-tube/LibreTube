@@ -433,7 +433,12 @@ class MainActivity : BaseActivity() {
             startActivity(nIntent)
         }
 
-        if (intent?.getBooleanExtra(IntentData.openAudioPlayer, false) == true) {
+        if (intent?.getBooleanExtra(IntentData.maximizePlayer, false) == true) {
+            // attempt to open the current player fragment first before creating a new one
+            // TODO: handle this differently
+            if (runOnPlayerFragment { binding.playerMotionLayout.transitionToStart(); true }) return
+            if (runOnAudioPlayerFragment { binding.playerMotionLayout.transitionToStart(); true }) return
+
             val offlinePlayer = intent!!.getBooleanExtra(IntentData.offlinePlayer, false)
             NavigationHelper.openAudioPlayerFragment(this, offlinePlayer = offlinePlayer)
             return

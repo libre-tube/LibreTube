@@ -18,7 +18,6 @@ import com.github.libretube.services.AbstractPlayerService
 import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.services.OnlinePlayerService
 import com.github.libretube.services.VideoOfflinePlayerService
-import com.github.libretube.services.VideoOnlinePlayerService
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.activities.NoInternetActivity
 import com.github.libretube.ui.fragments.DownloadTab
@@ -56,7 +55,7 @@ object BackgroundHelper {
         startMediaService(
             context,
             OnlinePlayerService::class.java,
-            bundleOf(IntentData.playerData to playerData)
+            bundleOf(IntentData.playerData to playerData, IntentData.audioOnly to true)
         )
     }
 
@@ -67,8 +66,7 @@ object BackgroundHelper {
         arrayOf(
             OnlinePlayerService::class.java,
             OfflinePlayerService::class.java,
-            VideoOfflinePlayerService::class.java,
-            VideoOnlinePlayerService::class.java
+            VideoOfflinePlayerService::class.java
         ).forEach {
             val intent = Intent(context, it)
             context.stopService(intent)
@@ -117,7 +115,6 @@ object BackgroundHelper {
         context: Context,
         serviceClass: Class<*>,
         arguments: Bundle = Bundle.EMPTY,
-        sendStartCommand: Boolean = true,
         onController: (MediaController) -> Unit = {}
     ) {
         val sessionToken =
@@ -127,7 +124,7 @@ object BackgroundHelper {
             MediaController.Builder(context, sessionToken).buildAsync()
         controllerFuture.addListener({
             val controller = controllerFuture.get()
-            if (sendStartCommand) controller.sendCustomCommand(
+            if (!arguments.isEmpty) controller.sendCustomCommand(
                 AbstractPlayerService.startServiceCommand,
                 arguments
             )
