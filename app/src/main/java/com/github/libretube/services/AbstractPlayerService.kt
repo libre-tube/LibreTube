@@ -15,7 +15,6 @@ import androidx.media3.common.ForwardingPlayer
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
-import androidx.media3.common.util.Log
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
@@ -119,13 +118,6 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
                     onServiceCreated(args)
                     notificationProvider?.intentActivity = getIntentActivity()
 
-                    if (isAudioOnlyPlayer) {
-                        trackSelector?.updateParameters {
-                            setTrackTypeDisabled(C.TRACK_TYPE_VIDEO, true)
-                        }
-                    }
-
-                    Log.e("custom start", "custom start")
                     if (::videoId.isInitialized) startPlayback()
                 }
             }

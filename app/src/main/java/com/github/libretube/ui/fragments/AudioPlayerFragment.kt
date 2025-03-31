@@ -95,7 +95,6 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
         BackgroundHelper.startMediaService(
             requireContext(),
             if (isOffline) OfflinePlayerService::class.java else OnlinePlayerService::class.java,
-            bundleOf()
         ) {
             if (_binding == null) {
                 it.sendCustomCommand(AbstractPlayerService.stopServiceCommand, Bundle.EMPTY)

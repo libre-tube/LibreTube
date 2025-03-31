@@ -32,7 +32,7 @@ import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.services.AbstractPlayerService
-import com.github.libretube.services.VideoOfflinePlayerService
+import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.ui.interfaces.TimeFrameReceiver
@@ -139,9 +139,10 @@ class OfflinePlayerActivity : BaseActivity() {
 
         val arguments = bundleOf(
             IntentData.downloadTab to DownloadTab.VIDEO,
-            IntentData.videoId to videoId
+            IntentData.videoId to videoId,
+            IntentData.audioOnly to false
         )
-        BackgroundHelper.startMediaService(this, VideoOfflinePlayerService::class.java, arguments) {
+        BackgroundHelper.startMediaService(this, OfflinePlayerService::class.java, arguments) {
             playerController = it
             playerController.addListener(playerListener)
             initializePlayerView()
