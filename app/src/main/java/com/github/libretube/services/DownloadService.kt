@@ -172,7 +172,7 @@ class DownloadService : LifecycleService() {
         try {
             ImageHelper.downloadImage(
                 this@DownloadService,
-                streams.thumbnailUrl,
+                ProxyHelper.rewriteUrlUsingProxyPreference(streams.thumbnailUrl),
                 thumbnailTargetPath
             )
         } catch (e: Exception) {
