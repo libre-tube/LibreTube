@@ -17,7 +17,6 @@ import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.services.AbstractPlayerService
 import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.services.OnlinePlayerService
-import com.github.libretube.services.VideoOfflinePlayerService
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.activities.NoInternetActivity
 import com.github.libretube.ui.fragments.DownloadTab
@@ -65,8 +64,7 @@ object BackgroundHelper {
     fun stopBackgroundPlay(context: Context) {
         arrayOf(
             OnlinePlayerService::class.java,
-            OfflinePlayerService::class.java,
-            VideoOfflinePlayerService::class.java
+            OfflinePlayerService::class.java
         ).forEach {
             val intent = Intent(context, it)
             context.stopService(intent)
@@ -104,7 +102,8 @@ object BackgroundHelper {
             IntentData.videoId to videoId,
             IntentData.shuffle to shuffle,
             IntentData.downloadTab to downloadTab,
-            IntentData.noInternet to noInternet
+            IntentData.noInternet to noInternet,
+            IntentData.audioOnly to true
         )
 
         startMediaService(context, OfflinePlayerService::class.java, arguments)

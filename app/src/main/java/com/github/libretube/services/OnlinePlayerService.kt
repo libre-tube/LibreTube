@@ -4,6 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
+import androidx.media3.common.C
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaItem.SubtitleConfiguration
 import androidx.media3.common.MimeTypes
@@ -25,6 +26,7 @@ import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.extensions.toastFromMainThread
+import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.checkForSegments
 import com.github.libretube.helpers.PlayerHelper.getSubtitleRoleFlags
@@ -112,12 +114,13 @@ open class OnlinePlayerService : AbstractPlayerService() {
         if (!playerData.keepQueue) PlayingQueue.clear()
 
         exoPlayer?.addListener(playerListener)
+        trackSelector?.updateParameters {
+            setTrackTypeDisabled(C.TRACK_TYPE_VIDEO, isAudioOnlyPlayer)
+        }
     }
 
     override suspend fun startPlayback() {
         super.startPlayback()
-
-        Log.e("start", "playback")
 
         val timestampMs = startTimestampSeconds?.times(1000) ?: 0L
         startTimestampSeconds = null
