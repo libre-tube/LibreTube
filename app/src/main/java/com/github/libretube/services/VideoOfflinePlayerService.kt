@@ -19,7 +19,7 @@ import kotlin.io.path.exists
 
 @OptIn(UnstableApi::class)
 class VideoOfflinePlayerService: OfflinePlayerService() {
-    override val isAudioOnlyPlayer = false
+    override var isAudioOnlyPlayer = false
 
     override fun setMediaItem(downloadWithItems: DownloadWithItems) {
         val downloadFiles = downloadWithItems.downloadItems.filter { it.path.exists() }

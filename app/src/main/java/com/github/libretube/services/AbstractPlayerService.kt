@@ -15,6 +15,7 @@ import androidx.media3.common.ForwardingPlayer
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
+import androidx.media3.common.util.Log
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
@@ -118,6 +119,13 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
                     onServiceCreated(args)
                     notificationProvider?.intentActivity = getIntentActivity()
 
+                    if (isAudioOnlyPlayer) {
+                        trackSelector?.updateParameters {
+                            setTrackTypeDisabled(C.TRACK_TYPE_VIDEO, true)
+                        }
+                    }
+
+                    Log.e("custom start", "custom start")
                     if (::videoId.isInitialized) startPlayback()
                 }
             }
@@ -179,6 +187,13 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
             args.containsKey(PlayerCommand.PLAY_VIDEO_BY_ID.name) -> {
                 navigateVideo(args.getString(PlayerCommand.PLAY_VIDEO_BY_ID.name) ?: return)
             }
+
+            args.containsKey(PlayerCommand.TOGGLE_AUDIO_ONLY_MODE.name) -> {
+                isAudioOnlyPlayer = args.getBoolean(PlayerCommand.TOGGLE_AUDIO_ONLY_MODE.name)
+                trackSelector?.updateParameters {
+                    setTrackTypeDisabled(C.TRACK_TYPE_VIDEO, isAudioOnlyPlayer)
+                }
+            }
         }
     }
 
@@ -233,7 +248,8 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     }
 
     abstract val isOfflinePlayer: Boolean
-    abstract val isAudioOnlyPlayer: Boolean
+    abstract var isAudioOnlyPlayer: Boolean
+    open val maximizePlayer: Boolean = true
 
     val watchPositionsEnabled get() =
         (PlayerHelper.watchPositionsAudio && isAudioOnlyPlayer) || (PlayerHelper.watchPositionsVideo && !isAudioOnlyPlayer)
@@ -246,7 +262,6 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
         notificationProvider = NowPlayingNotification(
             this,
-            backgroundOnly = isAudioOnlyPlayer,
             offlinePlayer = isOfflinePlayer,
         )
         setMediaNotificationProvider(notificationProvider!!)
@@ -292,12 +307,6 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     private fun createPlayerAndMediaSession() {
         val trackSelector = DefaultTrackSelector(this)
         this.trackSelector = trackSelector
-
-        if (isAudioOnlyPlayer) {
-            trackSelector.updateParameters {
-                setTrackTypeDisabled(C.TRACK_TYPE_VIDEO, true)
-            }
-        }
 
         val player = PlayerHelper.createPlayer(this, trackSelector, true)
         // prevent android from putting LibreTube to sleep when locked

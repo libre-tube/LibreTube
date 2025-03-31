@@ -8,6 +8,7 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaItem.SubtitleConfiguration
 import androidx.media3.common.MimeTypes
 import androidx.media3.common.Player
+import androidx.media3.common.util.Log
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.exoplayer.hls.HlsMediaSource
 import com.github.libretube.R
@@ -45,7 +46,7 @@ import java.io.IOException
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 open class OnlinePlayerService : AbstractPlayerService() {
     override val isOfflinePlayer: Boolean = false
-    override val isAudioOnlyPlayer: Boolean = true
+    override var isAudioOnlyPlayer: Boolean = false
 
     // PlaylistId/ChannelId for autoplay
     private var playlistId: String? = null
@@ -100,6 +101,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
             stopSelf()
             return
         }
+        isAudioOnlyPlayer = args.getBoolean(IntentData.audioOnly)
 
         // get the intent arguments
         setVideoId(playerData.videoId)
@@ -114,6 +116,8 @@ open class OnlinePlayerService : AbstractPlayerService() {
 
     override suspend fun startPlayback() {
         super.startPlayback()
+
+        Log.e("start", "playback")
 
         val timestampMs = startTimestampSeconds?.times(1000) ?: 0L
         startTimestampSeconds = null
@@ -195,6 +199,8 @@ open class OnlinePlayerService : AbstractPlayerService() {
         setVideoId(nextVideo)
         this.streams = null
         this.sponsorBlockSegments = emptyList()
+
+        Log.e("play next", "play next")
 
         scope.launch {
             startPlayback()

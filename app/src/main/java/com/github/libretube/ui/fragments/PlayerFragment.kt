@@ -87,7 +87,7 @@ import com.github.libretube.obj.ShareData
 import com.github.libretube.obj.VideoResolution
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.services.AbstractPlayerService
-import com.github.libretube.services.VideoOnlinePlayerService
+import com.github.libretube.services.OnlinePlayerService
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseActivity
@@ -503,9 +503,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     private fun attachToPlayerService(playerData: PlayerData, startNewSession: Boolean) {
         BackgroundHelper.startMediaService(
             requireContext(),
-            VideoOnlinePlayerService::class.java,
-            bundleOf(IntentData.playerData to playerData),
-            sendStartCommand = startNewSession
+            OnlinePlayerService::class.java,
+            if (startNewSession) bundleOf(IntentData.playerData to playerData, IntentData.audioOnly to false) else Bundle.EMPTY,
         ) {
             if (_binding == null) {
                 playerController.sendCustomCommand(
@@ -698,9 +697,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         }
 
         binding.relPlayerBackground.setOnClickListener {
-            // pause the current player
-            if (::playerController.isInitialized) playerController.pause()
-
             // start the background mode
             playOnBackground()
         }
@@ -782,19 +778,16 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     }
 
     private fun playOnBackground() {
-        val currentPosition =
-            if (::playerController.isInitialized) playerController.currentPosition else 0
-
-        BackgroundHelper.playOnBackground(
-            requireContext(),
-            videoId,
-            currentPosition,
-            playlistId,
-            channelId,
-            keepQueue = true,
-            keepVideoPlayerAlive = true
+        playerController.sendCustomCommand(
+            AbstractPlayerService.runPlayerActionCommand,
+            bundleOf(PlayerCommand.TOGGLE_AUDIO_ONLY_MODE.name to true)
         )
+
+        binding.player.player = null
+
+        playerController.release()
         killPlayerFragment()
+
         NavigationHelper.openAudioPlayerFragment(requireContext())
     }
 
@@ -942,7 +935,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
         handler.removeCallbacksAndMessages(null)
 
-        if (::playerController.isInitialized) {
+        if (::playerController.isInitialized && playerController.isConnected) {
             playerController.removeListener(playerListener)
             playerController.pause()
 
@@ -1303,7 +1296,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 subtitles.map { it.getDisplayName(requireContext()) },
                 preselectedItem = subtitles.firstOrNull {
                     val roleFlags = PlayerHelper.getSubtitleRoleFlags(it)
-                    val currentSubtitle = PlayerHelper.getCurrentPlayedCaptionFormat(playerController)
+                    val currentSubtitle =
+                        PlayerHelper.getCurrentPlayedCaptionFormat(playerController)
                     it.code == currentSubtitle?.language && currentSubtitle?.roleFlags == roleFlags
                 }
                     ?.getDisplayName(requireContext()) ?: getString(R.string.none)

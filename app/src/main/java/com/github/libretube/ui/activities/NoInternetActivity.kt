@@ -18,7 +18,7 @@ class NoInternetActivity : BaseActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
 
-        if (intent.getBooleanExtra(IntentData.openAudioPlayer, false)) {
+        if (intent.getBooleanExtra(IntentData.maximizePlayer, false)) {
             NavigationHelper.openAudioPlayerFragment(this, offlinePlayer = true)
         }
     }
