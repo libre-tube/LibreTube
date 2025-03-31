@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="yes">Sim</string>
-    <string name="search_hint">Pesquisar</string>
+    <string name="search_hint">Buscar</string>
     <string name="unsubscribe">Cancelar inscrição</string>
     <string name="share">Compartilhar</string>
     <string name="download">Download</string>
@@ -202,8 +202,8 @@
     <string name="no_player_found">Nenhum player externo foi encontrado. Verifique se você tem um instalado.</string>
     <string name="data_saver_mode">Economia de dados</string>
     <string name="data_saver_mode_summary">Ignorar miniaturas e outras imagens</string>
-    <string name="search_history_summary">Lembrar pesquisas</string>
-    <string name="history_summary">Histórico de pesquisas e exibição</string>
+    <string name="search_history_summary">Lembrar buscas</string>
+    <string name="history_summary">Histórico de buscas e exibição</string>
     <string name="watch_positions_title">Lembrar posição de reprodução</string>
     <string name="system_caption_style">Estilo de legenda do sistema</string>
     <string name="captions">Legendas</string>
@@ -311,7 +311,7 @@
     <string name="volume">Volume</string>
     <string name="defaults">Padrões</string>
     <string name="no_comments_available">Este vídeo não tem comentários.</string>
-    <string name="comments_disabled">Os comentários foram desativados pelo autor.</string>
+    <string name="comments_disabled">Os comentários foram desabilitados pelo autor.</string>
     <string name="captions_size">Tamanho das legendas</string>
     <string name="double_tap_seek">Toque duas vezes para procurar</string>
     <string name="all_caught_up">Tudo em dia</string>
@@ -389,7 +389,7 @@
     </plurals>
     <string name="show_stream_thumbnails_summary">Mostrar miniaturas de novos vídeos. Habilitar isso consumirá dados adicionais</string>
     <string name="show_stream_thumbnails">Mostrar miniaturas do vídeo</string>
-    <string name="unlimited_search_history">Histórico de pesquisa ilimitado</string>
+    <string name="unlimited_search_history">Histórico de busca ilimitado</string>
     <string name="duration">Duração</string>
     <string name="duration_reversed">Duração (invertida)</string>
     <string name="shorts_notifications">Receber notificação de novos vídeos curtos</string>
@@ -409,7 +409,7 @@
     <string name="change_playlist_description">Alterar descrição da playlist</string>
     <string name="playlist_description">Descrição da playlist</string>
     <string name="emptyPlaylistDescription">A descrição da playlist não pode estar vazia</string>
-    <string name="show_search_suggestions">Mostrar sugestões de pesquisa</string>
+    <string name="show_search_suggestions">Mostrar sugestões de busca</string>
     <string name="off">Desativado</string>
     <string name="manual">Manual</string>
     <string name="automatic">Automático</string>
@@ -419,7 +419,7 @@
     <string name="category_highlight_summary">Pode ser o título anunciado, a miniatura ou a parte mais interessante do vídeo. Você pode pular tocando nele na seção de capítulos</string>
     <string name="chapters_videoHighlight">Vídeo em destaque</string>
     <string name="stop">Parar</string>
-    <string name="fallback_piped_proxy_summary">Carregar vídeos por meio do proxy se a conexão direta com o YouTube não funcionar para o vídeo atual (aumenta o tempo de carregamento inicial). Se desativado, o conteúdo musical do YouTube provavelmente não será reproduzido devido às restrições do YT</string>
+    <string name="fallback_piped_proxy_summary">Carregar vídeos por meio do proxy se a conexão direta com o YouTube não funcionar para o vídeo atual (aumenta o tempo de carregamento inicial). Se desabilitado, o conteúdo musical do YouTube provavelmente não será reproduzido devido às restrições do YT</string>
     <string name="sb_custom_colors">Cores de segmento personalizadas</string>
     <string name="sb_custom_colors_summary">Alterna segmentos de cores personalizadas para segmentos SponsorBlock</string>
     <string name="color">Cor</string>
@@ -496,7 +496,7 @@
     <string name="downvote">Não gostei</string>
     <string name="time_in_minutes">Tempo em minutos</string>
     <string name="invalid_input">Entrada inválida</string>
-    <string name="disable_sleep_timer">Desativar temporizador</string>
+    <string name="disable_sleep_timer">Desabilitar temporizador</string>
     <string name="watched">Assistido</string>
     <string name="start_sleep_timer">Iniciar temporizador</string>
     <string name="finished">Finalizado</string>
