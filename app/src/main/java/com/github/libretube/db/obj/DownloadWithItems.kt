@@ -26,7 +26,7 @@ fun List<DownloadWithItems>.filterByTab(tab: DownloadTab) = filter { dl ->
         }
 
         DownloadTab.VIDEO -> {
-            dl.downloadItems.any { it.type == FileType.VIDEO }
+            dl.downloadItems.any { it.type == FileType.VIDEO } || dl.downloadItems.isEmpty()
         }
     }
 }
