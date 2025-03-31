@@ -227,11 +227,17 @@ class DownloadService : LifecycleService() {
 
         downloadQueue[item.id] = false
 
-        if (_downloadFlow.firstOrNull { it.first == item.id }?.second == DownloadStatus.Stopped) {
+        if (downloadFlow.firstOrNull { it.first == item.id }?.second == DownloadStatus.Stopped) {
             downloadQueue.remove(item.id, false)
         }
 
-        stopServiceIfDone()
+        // start the next download if there are any remaining ones enqueued
+        val nextDownload = downloadFlow.firstOrNull { (_, status) -> status == DownloadStatus.Paused }
+        if (nextDownload != null) {
+            resume(nextDownload.first)
+        } else {
+            stopServiceIfDone()
+        }
     }
 
     private suspend fun progressDownload(
