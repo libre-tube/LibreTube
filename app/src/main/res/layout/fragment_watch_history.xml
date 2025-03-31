@@ -29,11 +29,9 @@
     </LinearLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/historyContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        android:visibility="gone">
+        android:scrollbars="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/watch_history_app_bar"

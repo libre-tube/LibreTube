@@ -31,8 +31,10 @@ import com.github.libretube.ui.models.WatchHistoryModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.util.PlayingQueue
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watch_history) {
     private var _binding: FragmentWatchHistoryBinding? = null
@@ -67,7 +69,7 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
             RecyclerView.AdapterDataObserver() {
             override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
                 if (watchHistoryAdapter.itemCount == 0) {
-                    binding.historyContainer.isGone = true
+                    binding.watchHistoryRecView.isGone = true
                     binding.historyEmpty.isVisible = true
                 }
             }
@@ -98,7 +100,7 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
                     selected[index] = newValue
                 }
                 .setPositiveButton(R.string.okay) { _, _ ->
-                    binding.historyContainer.isGone = true
+                    binding.watchHistoryRecView.isGone = true
                     binding.historyEmpty.isVisible = true
                     lifecycleScope.launch(Dispatchers.IO) {
                         Database.withTransaction {
@@ -149,7 +151,8 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
 
         viewModel.filteredWatchHistory.observe(viewLifecycleOwner) { history ->
             binding.historyEmpty.isGone = history.isNotEmpty()
-            binding.historyContainer.isVisible = history.isNotEmpty()
+            binding.playAll.isEnabled = history.isNotEmpty()
+            binding.watchHistoryRecView.isVisible = history.isNotEmpty()
 
             watchHistoryAdapter.submitList(history)
         }
@@ -163,6 +166,15 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
         if (NavBarHelper.getStartFragmentId(requireContext()) != R.id.watchHistoryFragment) {
             setupFragmentAnimation(binding.root)
         }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val hasItems = Database.watchHistoryDao().getSize() != 0
+
+            withContext(Dispatchers.Main) {
+                binding.clear.isEnabled = hasItems
+            }
+        }
+
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
