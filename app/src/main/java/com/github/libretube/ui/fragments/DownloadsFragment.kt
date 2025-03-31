@@ -23,6 +23,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentDownloadContentBinding
 import com.github.libretube.databinding.FragmentDownloadsBinding
 import com.github.libretube.db.DatabaseHolder.Database
+import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.db.obj.filterByTab
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.formatAsFileSize
@@ -109,6 +110,10 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
     private val downloadReceiver = DownloadReceiver()
     private lateinit var downloadTab: DownloadTab
 
+    private var selectedSortType
+        get() = PreferenceHelper.getInt(PreferenceKeys.SELECTED_DOWNLOAD_SORT_TYPE, 0)
+        set(value) {PreferenceHelper.putInt(PreferenceKeys.SELECTED_DOWNLOAD_SORT_TYPE, value) }
+
     private val serviceConnection = object : ServiceConnection {
         var isBound = false
         var job: Job? = null
@@ -170,32 +175,25 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
         }
         binding.downloadsRecView.adapter = adapter
 
-        var selectedSortType =
-            PreferenceHelper.getInt(PreferenceKeys.SELECTED_DOWNLOAD_SORT_TYPE, 0)
         val filterOptions = resources.getStringArray(R.array.downloadSortOptions)
         binding.sortType.text = filterOptions[selectedSortType]
-        binding.sortType.setOnClickListener {
-            BaseBottomSheet().setSimpleItems(filterOptions.toList()) { index ->
-                binding.sortType.text = filterOptions[index]
-                if (::adapter.isInitialized) {
-                    sortDownloadList(index, selectedSortType)
-                }
-                selectedSortType = index
-                PreferenceHelper.putInt(
-                    PreferenceKeys.SELECTED_DOWNLOAD_SORT_TYPE,
-                    index
-                )
-            }.show(childFragmentManager)
-        }
 
         lifecycleScope.launch {
-            val dbDownloads = withContext(Dispatchers.IO) {
+            val downloads = withContext(Dispatchers.IO) {
                 Database.downloadDao().getAll()
-            }
+            }.filterByTab(downloadTab)
 
-            val downloads = dbDownloads.filterByTab(downloadTab)
-            adapter.submitList(downloads)
-            sortDownloadList(selectedSortType)
+            submitDownloadList(downloads)
+
+            binding.sortType.setOnClickListener {
+                BaseBottomSheet().setSimpleItems(filterOptions.toList()) { index ->
+                    if (index == selectedSortType) return@setSimpleItems
+                    selectedSortType = index
+
+                    binding.sortType.text = filterOptions[index]
+                    submitDownloadList(downloads)
+                }.show(childFragmentManager)
+            }
 
             binding.downloadsRecView.setOnDismissListener { position ->
                 adapter.showDeleteDialog(requireContext(), position)
@@ -231,6 +229,15 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
         }
     }
 
+    private fun submitDownloadList(items: List<DownloadWithItems>) {
+        val sortedItems = when (selectedSortType) {
+            0 -> items
+            else -> items.reversed()
+        }
+
+        adapter.submitList(sortedItems)
+    }
+
     private fun toggleVisibilities() {
         val binding = _binding ?: return
 
@@ -239,15 +246,6 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
         binding.downloadsContainer.isGone = isEmpty
         binding.deleteAll.isGone = isEmpty
         binding.shuffleAll.isGone = isEmpty || downloadTab != DownloadTab.AUDIO
-    }
-
-    private fun sortDownloadList(sortType: Int, previousSortType: Int? = null) {
-        if (previousSortType == null && sortType == 1) {
-            adapter.submitList(adapter.items.reversed())
-        }
-        if (previousSortType != null && sortType != previousSortType) {
-            adapter.submitList(adapter.items.reversed())
-        }
     }
 
     private fun showDeleteAllDialog(context: Context, adapter: DownloadsAdapter) {
