@@ -1481,8 +1481,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     }
 
     private fun shouldStartPiP(): Boolean {
-        return shouldUsePip() && ::playerController.isInitialized && playerController.isPlaying &&
-                !BackgroundHelper.isBackgroundServiceRunning(requireContext())
+        return shouldUsePip() && ::playerController.isInitialized && playerController.isPlaying
     }
 
     /**

@@ -1,12 +1,10 @@
 package com.github.libretube.helpers
 
-import android.app.ActivityManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.annotation.OptIn
-import androidx.core.content.getSystemService
 import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.media3.common.util.UnstableApi
@@ -38,19 +36,17 @@ object BackgroundHelper {
         playlistId: String? = null,
         channelId: String? = null,
         keepQueue: Boolean = false,
-        keepVideoPlayerAlive: Boolean = false
     ) {
         // close the previous video player if open
-        if (!keepVideoPlayerAlive) {
-            val fragmentManager =
-                ContextHelper.unwrapActivity<MainActivity>(context).supportFragmentManager
-            fragmentManager.fragments.firstOrNull { it is PlayerFragment }?.let {
-                fragmentManager.commit { remove(it) }
-            }
+        val fragmentManager =
+            ContextHelper.unwrapActivity<MainActivity>(context).supportFragmentManager
+        fragmentManager.fragments.firstOrNull { it is PlayerFragment }?.let {
+            fragmentManager.commit { remove(it) }
         }
 
         val playerData = PlayerData(videoId, playlistId, channelId, keepQueue, position)
 
+        stopBackgroundPlay(context)
         startMediaService(
             context,
             OnlinePlayerService::class.java,
@@ -69,18 +65,6 @@ object BackgroundHelper {
             val intent = Intent(context, it)
             context.stopService(intent)
         }
-    }
-
-    /**
-     * Check if the [OnlinePlayerService] service is currently running.
-     */
-    fun isBackgroundServiceRunning(
-        context: Context,
-        serviceClass: Class<*> = OnlinePlayerService::class.java
-    ): Boolean {
-        @Suppress("DEPRECATION")
-        return context.getSystemService<ActivityManager>()!!.getRunningServices(Int.MAX_VALUE)
-            .any { serviceClass.name == it.service.className }
     }
 
     /**
@@ -106,6 +90,7 @@ object BackgroundHelper {
             IntentData.audioOnly to true
         )
 
+        stopBackgroundPlay(context)
         startMediaService(context, OfflinePlayerService::class.java, arguments)
     }
 
