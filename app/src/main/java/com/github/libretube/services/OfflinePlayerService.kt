@@ -75,10 +75,12 @@ open class OfflinePlayerService : AbstractPlayerService() {
         noInternetService = args.getBoolean(IntentData.noInternet, false)
         isAudioOnlyPlayer = args.getBoolean(IntentData.audioOnly, false)
 
+        PlayingQueue.clear()
+
         val videoId = if (shuffle) {
             runBlocking(Dispatchers.IO) {
-                Database.downloadDao().getRandomVideoIdByFileType(FileType.AUDIO)
-            }
+                Database.downloadDao().getAll().filterByTab(downloadTab).randomOrNull()
+            }?.download?.videoId
         } else {
             args.getString(IntentData.videoId)
         } ?: return
@@ -89,7 +91,6 @@ open class OfflinePlayerService : AbstractPlayerService() {
             setTrackTypeDisabled(C.TRACK_TYPE_VIDEO, isAudioOnlyPlayer)
         }
 
-        PlayingQueue.clear()
         fillQueue()
     }
 
@@ -203,6 +204,7 @@ open class OfflinePlayerService : AbstractPlayerService() {
             Database.downloadDao().getAll()
         }
             .filterByTab(downloadTab)
+            .filter { it.download.videoId != videoId }
             .toMutableList()
 
         if (shuffle) downloads.shuffle()

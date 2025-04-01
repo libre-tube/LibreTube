@@ -26,9 +26,6 @@ interface DownloadDao {
     @Query("SELECT EXISTS (SELECT * FROM download WHERE videoId = :videoId)")
     suspend fun exists(videoId: String): Boolean
 
-    @Query("SELECT videoId FROM downloadItem WHERE type = :fileType ORDER BY RANDOM() LIMIT 1")
-    suspend fun getRandomVideoIdByFileType(fileType: FileType): String?
-
     @Query("SELECT * FROM downloaditem WHERE id = :id")
     suspend fun findDownloadItemById(id: Int): DownloadItem?
 
