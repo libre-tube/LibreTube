@@ -1,9 +1,7 @@
 package com.github.libretube.ui.fragments
 
 import android.annotation.SuppressLint
-import android.content.res.Configuration
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.core.os.bundleOf
@@ -61,7 +59,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         set(value) = PreferenceHelper.putInt(PreferenceKeys.SELECTED_CHANNEL_GROUP, value)
         get() = PreferenceHelper.getInt(PreferenceKeys.SELECTED_CHANNEL_GROUP, 0)
 
-    private var isCurrentTabSubChannels = false
     private var isAppBarFullyExpanded = true
 
     private var feedAdapter = VideosAdapter()
@@ -84,9 +81,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
             PreferenceHelper.putBoolean(PreferenceKeys.SHOW_UPCOMING_IN_FEED, value)
             field = value
         }
-
-    private var subChannelsRecyclerViewState: Parcelable? = null
-    private var subFeedRecyclerViewState: Parcelable? = null
 
     private val legacySubscriptionsAdapter = LegacySubscriptionAdapter()
     private val channelsAdapter = SubscriptionChannelAdapter()
@@ -144,11 +138,11 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         }
 
         viewModel.videoFeed.observe(viewLifecycleOwner) {
-            if (!isCurrentTabSubChannels && it != null) showFeed()
+            if (!viewModel.isCurrentTabSubChannels && it != null) showFeed()
         }
 
         viewModel.subscriptions.observe(viewLifecycleOwner) {
-            if (isCurrentTabSubChannels && it != null) showSubscriptions()
+            if (viewModel.isCurrentTabSubChannels && it != null) showSubscriptions()
         }
 
         viewModel.feedProgress.observe(viewLifecycleOwner) { progress ->
@@ -172,18 +166,18 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         binding.toggleSubs.setOnClickListener {
             binding.subProgress.isVisible = true
             binding.subRefresh.isRefreshing = true
-            isCurrentTabSubChannels = !isCurrentTabSubChannels
+            viewModel.isCurrentTabSubChannels = !viewModel.isCurrentTabSubChannels
 
-            if (isCurrentTabSubChannels) showSubscriptions() else showFeed()
+            if (viewModel.isCurrentTabSubChannels) showSubscriptions() else showFeed()
 
-            binding.subChannels.isVisible = isCurrentTabSubChannels
-            binding.subFeed.isGone = isCurrentTabSubChannels
+            binding.subChannels.isVisible = viewModel.isCurrentTabSubChannels
+            binding.subFeed.isGone = viewModel.isCurrentTabSubChannels
         }
 
         binding.subChannels.addOnBottomReachedListener {
             val binding = _binding ?: return@addOnBottomReachedListener
 
-            if (viewModel.subscriptions.value != null && isCurrentTabSubChannels) {
+            if (viewModel.subscriptions.value != null && viewModel.isCurrentTabSubChannels) {
                 binding.subRefresh.isRefreshing = true
                 binding.subRefresh.isRefreshing = false
             }
@@ -199,7 +193,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
         binding.channelGroups.setOnCheckedStateChangeListener { group, _ ->
             selectedFilterGroup = group.children.indexOfFirst { it.id == group.checkedChipId }
-            if (isCurrentTabSubChannels) showSubscriptions() else showFeed()
+            if (viewModel.isCurrentTabSubChannels) showSubscriptions() else showFeed()
         }
 
         channelGroupsModel.groups.observe(viewLifecycleOwner) {
@@ -214,14 +208,18 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         binding.subChannels.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                subChannelsRecyclerViewState = binding.subChannels.layoutManager?.onSaveInstanceState()
+                viewModel.subChannelsRecyclerViewState = binding.subChannels.layoutManager?.onSaveInstanceState()?.takeIf {
+                    binding.subChannels.computeVerticalScrollOffset() != 0
+                }
             }
         })
 
         binding.subFeed.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                subFeedRecyclerViewState = binding.subFeed.layoutManager?.onSaveInstanceState()
+                viewModel.subFeedRecyclerViewState = binding.subFeed.layoutManager?.onSaveInstanceState()?.takeIf {
+                    binding.subFeed.computeVerticalScrollOffset() != 0
+                }
             }
         })
 
@@ -239,7 +237,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
     private fun loadFeedItems(sortedFeed: List<StreamItem>) {
         val binding = _binding ?: return
 
-        if (viewModel.videoFeed.value != null && !isCurrentTabSubChannels && !binding.subRefresh.isRefreshing) {
+        if (viewModel.videoFeed.value != null && !viewModel.isCurrentTabSubChannels && !binding.subRefresh.isRefreshing) {
             binding.subRefresh.isRefreshing = true
 
             lifecycleScope.launch {
@@ -250,7 +248,9 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
                 }
 
                 feedAdapter.submitList(streamItemsToInsert) {
-                    binding.subFeed.scrollToPosition(0)
+                    // manually restore the previous feed state
+                    binding.subFeed.layoutManager?.onRestoreInstanceState(viewModel.subFeedRecyclerViewState)
+                    binding.subscriptionsAppBar.setExpanded(viewModel.subFeedRecyclerViewState == null)
                 }
                 binding.subRefresh.isRefreshing = false
             }
@@ -422,14 +422,10 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
             false
         )
 
-        if (legacySubscriptions) {
-            legacySubscriptionsAdapter.submitList(subscriptions) {
-                binding.subFeed.scrollToPosition(0)
-            }
-        } else {
-            channelsAdapter.submitList(subscriptions) {
-                binding.subFeed.scrollToPosition(0)
-            }
+        val adapter = if (legacySubscriptions) legacySubscriptionsAdapter else channelsAdapter
+        adapter.submitList(subscriptions) {
+            binding.subFeed.layoutManager?.onRestoreInstanceState(viewModel.subChannelsRecyclerViewState)
+            binding.subscriptionsAppBar.setExpanded(viewModel.subChannelsRecyclerViewState == null)
         }
 
         binding.subRefresh.isRefreshing = false
@@ -446,12 +442,5 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
     fun removeItem(videoId: String) {
         feedAdapter.removeItemById(videoId)
-    }
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        // manually restore the recyclerview state due to https://github.com/material-components/material-components-android/issues/3473
-        binding.subChannels.layoutManager?.onRestoreInstanceState(subChannelsRecyclerViewState)
-        binding.subFeed.layoutManager?.onRestoreInstanceState(subFeedRecyclerViewState)
     }
 }
