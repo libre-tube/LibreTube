@@ -48,7 +48,6 @@ import java.io.IOException
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 open class OnlinePlayerService : AbstractPlayerService() {
     override val isOfflinePlayer: Boolean = false
-    override var isAudioOnlyPlayer: Boolean = false
 
     // PlaylistId/ChannelId for autoplay
     private var playlistId: String? = null

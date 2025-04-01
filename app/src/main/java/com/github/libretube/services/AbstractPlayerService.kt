@@ -41,6 +41,7 @@ import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @UnstableApi
 abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySession.Callback {
@@ -116,7 +117,9 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
             START_SERVICE_ACTION -> {
                 CoroutineScope(Dispatchers.IO).launch {
                     onServiceCreated(args)
-                    notificationProvider?.intentActivity = getIntentActivity()
+                    withContext(Dispatchers.Main) {
+                        updateNotification()
+                    }
 
                     if (::videoId.isInitialized) startPlayback()
                 }
@@ -185,6 +188,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
                 trackSelector?.updateParameters {
                     setTrackTypeDisabled(C.TRACK_TYPE_VIDEO, isAudioOnlyPlayer)
                 }
+                updateNotification()
             }
         }
     }
@@ -239,9 +243,24 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         }
     }
 
+    /**
+     * Trigger a notification update with an updated PendingIntent.
+     */
+    private fun updateNotification() {
+        val notificationIntent = Intent(this, getIntentActivity()).apply {
+            putExtra(IntentData.maximizePlayer, true)
+            putExtra(IntentData.offlinePlayer, isOfflinePlayer)
+            putExtra(IntentData.audioOnly, isAudioOnlyPlayer)
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        }
+        notificationProvider?.notificationIntent = notificationIntent
+        mediaLibrarySession?.let {
+            onUpdateNotification(it, true)
+        }
+    }
+
     abstract val isOfflinePlayer: Boolean
-    abstract var isAudioOnlyPlayer: Boolean
-    open val maximizePlayer: Boolean = true
+    var isAudioOnlyPlayer: Boolean = false
 
     val watchPositionsEnabled get() =
         (PlayerHelper.watchPositionsAudio && isAudioOnlyPlayer) || (PlayerHelper.watchPositionsVideo && !isAudioOnlyPlayer)
@@ -252,10 +271,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     override fun onCreate() {
         super.onCreate()
 
-        notificationProvider = NowPlayingNotification(
-            this,
-            offlinePlayer = isOfflinePlayer,
-        )
+        notificationProvider = NowPlayingNotification(this)
         setMediaNotificationProvider(notificationProvider!!)
 
         createPlayerAndMediaSession()

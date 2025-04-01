@@ -434,9 +434,13 @@ class MainActivity : BaseActivity() {
         }
 
         if (intent?.getBooleanExtra(IntentData.maximizePlayer, false) == true) {
-            // attempt to open the current player fragment first before creating a new one
-            // TODO: handle this differently
-            if (runOnPlayerFragment { binding.playerMotionLayout.transitionToStart(); true }) return
+            // attempt to open the current video player fragment
+            if (intent?.getBooleanExtra(IntentData.audioOnly, false) == false) {
+                runOnPlayerFragment { binding.playerMotionLayout.transitionToStart(); true }
+                return
+            }
+
+            // if it's an audio only session, attempt to maximize the audio player or create a new one
             if (runOnAudioPlayerFragment { binding.playerMotionLayout.transitionToStart(); true }) return
 
             val offlinePlayer = intent!!.getBooleanExtra(IntentData.offlinePlayer, false)

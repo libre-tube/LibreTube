@@ -26,6 +26,7 @@ import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.activities.NoInternetActivity
+import com.github.libretube.ui.activities.OfflinePlayerActivity
 import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.CoroutineScope
@@ -41,7 +42,6 @@ import kotlin.io.path.exists
 @OptIn(UnstableApi::class)
 open class OfflinePlayerService : AbstractPlayerService() {
     override val isOfflinePlayer: Boolean = true
-    override var isAudioOnlyPlayer: Boolean = true
     private var noInternetService: Boolean = false
 
     private var downloadWithItems: DownloadWithItems? = null
@@ -94,7 +94,11 @@ open class OfflinePlayerService : AbstractPlayerService() {
     }
 
     override fun getIntentActivity(): Class<*> {
-        return if (noInternetService) NoInternetActivity::class.java else MainActivity::class.java
+        return when {
+            !noInternetService && isAudioOnlyPlayer -> MainActivity::class.java
+            noInternetService && isAudioOnlyPlayer -> NoInternetActivity::class.java
+            else -> OfflinePlayerActivity::class.java
+        }
     }
 
     /**
