@@ -1,6 +1,7 @@
 package com.github.libretube.ui.fragments
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
@@ -438,6 +439,13 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
         val subCount = subscriptions.size.toLong().formatShort()
         binding.toggleSubs.text = "${getString(R.string.subscriptions)} ($subCount)"
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        // manually restore the recyclerview state after rotation due to https://github.com/material-components/material-components-android/issues/3473
+        binding.subChannels.layoutManager?.onRestoreInstanceState(viewModel.subChannelsRecyclerViewState)
+        binding.subFeed.layoutManager?.onRestoreInstanceState(viewModel.subFeedRecyclerViewState)
     }
 
     fun removeItem(videoId: String) {
