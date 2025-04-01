@@ -272,6 +272,8 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
     }
 
     private fun killFragment(stopPlayer: Boolean) {
+        viewModel.isMiniPlayerVisible.value = false
+
         if (stopPlayer) playerController?.sendCustomCommand(AbstractPlayerService.stopServiceCommand, Bundle.EMPTY)
         playerController?.release()
         playerController = null
