@@ -1,6 +1,7 @@
 package com.github.libretube.ui.models
 
 import android.content.Context
+import android.os.Parcelable
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,6 +23,10 @@ class SubscriptionsViewModel : ViewModel() {
 
     var subscriptions = MutableLiveData<List<Subscription>?>()
     val feedProgress = MutableLiveData<FeedProgress?>()
+
+    var isCurrentTabSubChannels = false
+    var subChannelsRecyclerViewState: Parcelable? = null
+    var subFeedRecyclerViewState: Parcelable? = null
 
     fun fetchFeed(context: Context, forceRefresh: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
