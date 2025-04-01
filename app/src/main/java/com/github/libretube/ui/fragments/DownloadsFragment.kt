@@ -1,5 +1,6 @@
 package com.github.libretube.ui.fragments
 
+import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -8,11 +9,15 @@ import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
 import android.view.View
+import android.view.ViewGroup.MarginLayoutParams
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.core.view.marginBottom
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +31,7 @@ import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.db.obj.filterByTab
 import com.github.libretube.extensions.ceilHalf
+import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.extensions.serializable
 import com.github.libretube.extensions.setOnDismissListener
@@ -40,6 +46,8 @@ import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.adapters.DownloadsAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.extensions.setupFragmentAnimation
+import com.github.libretube.ui.models.CommonPlayerViewModel
+import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -101,10 +109,13 @@ class DownloadsFragmentAdapter(fragment: Fragment) : FragmentStateAdapter(fragme
     }
 }
 
+@SuppressLint("UnsafeOptInUsageError")
 class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_download_content) {
     private lateinit var adapter: DownloadsAdapter
     private var _binding: FragmentDownloadContentBinding? = null
     private val binding get() = _binding!!
+
+    private val playerViewModel: CommonPlayerViewModel by activityViewModels()
 
     private var binder: DownloadService.LocalBinder? = null
     private val downloadReceiver = DownloadReceiver()
@@ -226,6 +237,12 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
             )
 
             NavigationHelper.openAudioPlayerFragment(requireContext(), offlinePlayer = true)
+        }
+
+        playerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) { isMiniPlayerVisible ->
+            binding.fabContainer.updateLayoutParams<MarginLayoutParams> {
+                bottomMargin = (if (isMiniPlayerVisible) 64f else 16f).dpToPx()
+            }
         }
     }
 
