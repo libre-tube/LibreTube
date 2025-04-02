@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isGone
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.databinding.FragmentTrendsBinding
@@ -23,7 +24,7 @@ class TrendsFragment : DynamicLayoutManagerFragment(R.layout.fragment_trends) {
     private val viewModel: TrendsViewModel by activityViewModels()
 
     override fun setLayoutManagers(gridItems: Int) {
-        _binding?.recview?.layoutManager = VideosAdapter.getLayout(requireContext(), gridItems)
+        _binding?.recview?.layoutManager = GridLayoutManager(context, gridItems)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -27,7 +27,6 @@ import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.adapters.VideosAdapter
-import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.setupFragmentAnimation
 import com.github.libretube.ui.extensions.setupSubscriptionButton
@@ -40,7 +39,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
 
-class ChannelFragment : DynamicLayoutManagerFragment(R.layout.fragment_channel) {
+class ChannelFragment : Fragment(R.layout.fragment_channel) {
     private var _binding: FragmentChannelBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<ChannelFragmentArgs>()
@@ -71,8 +70,6 @@ class ChannelFragment : DynamicLayoutManagerFragment(R.layout.fragment_channel) 
             ?.replace("/user/", "")
         channelId = args.channelId
     }
-
-    override fun setLayoutManagers(gridItems: Int) {}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentChannelBinding.bind(view)

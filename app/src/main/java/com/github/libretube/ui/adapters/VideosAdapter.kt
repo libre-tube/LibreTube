@@ -81,11 +81,6 @@ class VideosAdapter(
                 VideoRowBinding.inflate(layoutInflater, parent, false)
             )
 
-            PreferenceHelper.getBoolean(
-                PreferenceKeys.ALTERNATIVE_VIDEOS_LAYOUT,
-                false
-            ) -> VideosViewHolder(VideoRowBinding.inflate(layoutInflater, parent, false))
-
             else -> VideosViewHolder(TrendingRowBinding.inflate(layoutInflater, parent, false))
         }
     }
@@ -193,18 +188,6 @@ class VideosAdapter(
             VIDEO_ROW,
             CHANNEL_ROW,
             RELATED_COLUMN
-        }
-
-        fun getLayout(context: Context, gridItems: Int): LayoutManager {
-            return if (PreferenceHelper.getBoolean(
-                    PreferenceKeys.ALTERNATIVE_VIDEOS_LAYOUT,
-                    false
-                )
-            ) {
-                GridLayoutManager(context, gridItems.ceilHalf())
-            } else {
-                GridLayoutManager(context, gridItems)
-            }
         }
 
         private const val NORMAL_TYPE = 0

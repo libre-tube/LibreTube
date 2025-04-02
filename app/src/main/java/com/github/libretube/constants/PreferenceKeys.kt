@@ -28,7 +28,6 @@ object PreferenceKeys {
     const val APP_ICON = "icon_change"
     const val LEGACY_SUBSCRIPTIONS = "legacy_subscriptions"
     const val LEGACY_SUBSCRIPTIONS_COLUMNS = "legacy_subscriptions_columns"
-    const val ALTERNATIVE_VIDEOS_LAYOUT = "alternative_videos_layout"
     const val NEW_VIDEOS_BADGE = "new_videos_badge"
     const val PLAYLISTS_ORDER = "playlists_order"
     const val PLAYLIST_SORT_ORDER = "playlist_sort_order"
