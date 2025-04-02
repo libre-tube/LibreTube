@@ -302,8 +302,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
         if (streams.isEmpty()) return
 
-        PlayingQueue.clear()
-        PlayingQueue.add(*streams.toTypedArray())
+        PlayingQueue.setStreams(streams)
 
         NavigationHelper.navigateVideo(
             requireContext(),
