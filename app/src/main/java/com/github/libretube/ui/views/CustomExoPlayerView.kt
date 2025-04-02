@@ -106,10 +106,22 @@ abstract class CustomExoPlayerView(
             updateCurrentPosition()
         }
 
-    /**
-     * Preferences
-     */
-    private var resizeModePref = PlayerHelper.resizeModePref
+    private var resizeModePref: Int
+        set(value) {
+            PreferenceHelper.putInt(
+                PreferenceKeys.PLAYER_RESIZE_MODE,
+                value
+            )
+        }
+        get() = PreferenceHelper.getInt(
+            PreferenceKeys.PLAYER_RESIZE_MODE,
+            AspectRatioFrameLayout.RESIZE_MODE_FIT
+        )
+    private val resizeModes = listOf(
+        AspectRatioFrameLayout.RESIZE_MODE_FIT to R.string.resize_mode_fit,
+        AspectRatioFrameLayout.RESIZE_MODE_ZOOM to R.string.resize_mode_zoom,
+        AspectRatioFrameLayout.RESIZE_MODE_FILL to R.string.resize_mode_fill
+    )
 
     val activity get() = context as BaseActivity
 
@@ -167,11 +179,7 @@ abstract class CustomExoPlayerView(
             if (isFullscreen()) toggleSystemBars(!isPlayerLocked)
         }
 
-        resizeMode = when (resizeModePref) {
-            "fill" -> AspectRatioFrameLayout.RESIZE_MODE_FILL
-            "zoom" -> AspectRatioFrameLayout.RESIZE_MODE_ZOOM
-            else -> AspectRatioFrameLayout.RESIZE_MODE_FIT
-        }
+        resizeMode = resizeModePref
 
         binding.playPauseBTN.setOnClickListener {
             player?.togglePlayPauseState()
@@ -418,16 +426,8 @@ abstract class CustomExoPlayerView(
             context.getString(R.string.player_resize_mode),
             R.drawable.ic_aspect_ratio,
             {
-                when (resizeMode) {
-                    AspectRatioFrameLayout.RESIZE_MODE_FIT -> context.getString(
-                        R.string.resize_mode_fit
-                    )
-
-                    AspectRatioFrameLayout.RESIZE_MODE_FILL -> context.getString(
-                        R.string.resize_mode_fill
-                    )
-
-                    else -> context.getString(R.string.resize_mode_zoom)
+                resizeModes.find { it.first == resizeMode }?.second?.let {
+                    context.getString(it)
                 }
             }
         ) {
@@ -625,23 +625,22 @@ abstract class CustomExoPlayerView(
 
     override fun onResizeModeClicked() {
         // switching between original aspect ratio (black bars) and zoomed to fill device screen
-        val aspectRatioModeNames = context.resources?.getStringArray(R.array.resizeMode)
-            ?.toList().orEmpty()
-
-        val aspectRatioModes = listOf(
-            AspectRatioFrameLayout.RESIZE_MODE_FIT,
-            AspectRatioFrameLayout.RESIZE_MODE_ZOOM,
-            AspectRatioFrameLayout.RESIZE_MODE_FILL
-        )
-
         BaseBottomSheet()
             .setSimpleItems(
-                aspectRatioModeNames,
-                preselectedItem = aspectRatioModeNames[aspectRatioModes.indexOf(resizeMode)]
+                resizeModes.map { context.getString(it.second) },
+                preselectedItem = resizeModes.first { it.first == resizeMode }.second.let {
+                    context.getString(it)
+                }
             ) { index ->
-                resizeMode = aspectRatioModes[index]
+                resizeMode = resizeModes[index].first
             }
             .show(supportFragmentManager)
+    }
+
+    override fun setResizeMode(resizeMode: Int) {
+        super.setResizeMode(resizeMode)
+        // automatically remember the resize mode for the next session
+        resizeModePref = resizeMode
     }
 
     override fun onRepeatModeClicked() {
@@ -805,6 +804,7 @@ abstract class CustomExoPlayerView(
     override fun onMinimize() {
         if (!PlayerHelper.pinchGestureEnabled) return
         resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
+
         subtitleView?.setBottomPaddingFraction(SubtitleView.DEFAULT_BOTTOM_PADDING_FRACTION)
     }
 
