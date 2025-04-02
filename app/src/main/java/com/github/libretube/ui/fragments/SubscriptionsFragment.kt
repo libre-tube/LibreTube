@@ -87,7 +87,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
     private val channelsAdapter = SubscriptionChannelAdapter()
 
     override fun setLayoutManagers(gridItems: Int) {
-        _binding?.subFeed?.layoutManager = VideosAdapter.getLayout(requireContext(), gridItems)
+        _binding?.subFeed?.layoutManager = GridLayoutManager(context, gridItems)
     }
 
     @SuppressLint("SetTextI18n")
@@ -109,7 +109,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
                 context,
                 PreferenceHelper.getString(
                     PreferenceKeys.LEGACY_SUBSCRIPTIONS_COLUMNS,
-                    "4"
+                    "3"
                 ).toInt()
             )
             binding.subChannels.adapter = legacySubscriptionsAdapter
