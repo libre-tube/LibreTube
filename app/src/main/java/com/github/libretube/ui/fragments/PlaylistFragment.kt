@@ -214,7 +214,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
                     NavigationHelper.navigateVideo(
                         requireContext(),
                         sortedStreams.first().url,
-                        playlistId,
+                        playlistId = playlistId,
                         keepQueue = true
                     )
                 }
