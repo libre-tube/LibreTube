@@ -8,7 +8,7 @@
                 android:duration="500"
                 android:propertyName="scaleX"
                 android:valueFrom="0.3"
-                android:valueTo="0.55" />
+                android:valueTo="0.5" />
         </aapt:attr>
     </target>
     <target android:name="scaleGroup">
@@ -17,7 +17,7 @@
                 android:duration="500"
                 android:propertyName="scaleY"
                 android:valueFrom="0.3"
-                android:valueTo="0.55" />
+                android:valueTo="0.5" />
         </aapt:attr>
     </target>
 </animated-vector>
