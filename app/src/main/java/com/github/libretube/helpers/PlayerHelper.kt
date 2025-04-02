@@ -267,25 +267,11 @@ object PlayerHelper {
             .roundToInt()
             .toLong() * 1000
 
-    private val playbackSpeed: Float
+    private val defaultPlaybackSpeed: Float
         get() = PreferenceHelper.getString(
             PreferenceKeys.PLAYBACK_SPEED,
             "1"
         ).replace("F", "").toFloat()
-
-    private val backgroundSpeed: Float
-        get() = when (PreferenceHelper.getBoolean(PreferenceKeys.CUSTOM_PLAYBACK_SPEED, false)) {
-            true -> PreferenceHelper.getString(PreferenceKeys.BACKGROUND_PLAYBACK_SPEED, "1")
-                .toFloat()
-
-            else -> playbackSpeed
-        }
-
-    val resizeModePref: String
-        get() = PreferenceHelper.getString(
-            PreferenceKeys.PLAYER_RESIZE_MODE,
-            "fit"
-        )
 
     val autoInsertRelatedVideos: Boolean
         get() = PreferenceHelper.getBoolean(
@@ -526,11 +512,7 @@ object PlayerHelper {
      * Create a basic player, that is used for all types of playback situations inside the app
      */
     @OptIn(androidx.media3.common.util.UnstableApi::class)
-    fun createPlayer(
-        context: Context,
-        trackSelector: DefaultTrackSelector,
-        isBackgroundMode: Boolean
-    ): ExoPlayer {
+    fun createPlayer(context: Context, trackSelector: DefaultTrackSelector, ): ExoPlayer {
         val dataSourceFactory = DefaultDataSource.Factory(context)
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(C.USAGE_MEDIA)
@@ -546,7 +528,7 @@ object PlayerHelper {
             .setAudioAttributes(audioAttributes, handleAudioFocus)
             .build()
             .apply {
-                loadPlaybackParams(isBackgroundMode)
+                loadPlaybackParams()
             }
     }
 
@@ -571,10 +553,10 @@ object PlayerHelper {
      * Load playback parameters such as speed and skip silence
      */
     @OptIn(androidx.media3.common.util.UnstableApi::class)
-    fun ExoPlayer.loadPlaybackParams(isBackgroundMode: Boolean = false): ExoPlayer {
+    fun ExoPlayer.loadPlaybackParams(): ExoPlayer {
         skipSilenceEnabled = skipSilence
-        val speed = if (isBackgroundMode) backgroundSpeed else playbackSpeed
-        playbackParameters = PlaybackParameters(speed, 1.0f)
+
+        playbackParameters = PlaybackParameters(defaultPlaybackSpeed, 1.0f)
         return this
     }
 
