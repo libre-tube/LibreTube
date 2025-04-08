@@ -15,6 +15,7 @@ import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
+import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.NotificationId
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.getWhileDigit
@@ -136,35 +137,41 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
         nManager.notify(NotificationId.ENQUEUE_PLAYLIST_DOWNLOAD.id, buildNotification())
 
         for (stream in streams) {
-            val videoInfo = runCatching {
-                MediaServiceRepository.instance.getStreams(stream.url!!.toID())
-            }.getOrNull() ?: continue
+            val videoId = stream.url!!.toID()
 
-            val videoStream = getStream(videoInfo.videoStreams, maxVideoQuality)
-            val audioStream = getStream(videoInfo.audioStreams, maxAudioQuality)
+            // only download videos that have not been downloaded before
+            if (!DatabaseHolder.Database.downloadDao().exists(videoId)) {
+                val videoInfo = runCatching {
+                    MediaServiceRepository.instance.getStreams(videoId)
+                }.getOrNull() ?: continue
 
-            // remove all UNIX reserved characters from the title in order to generate
-            // a valid filename
-            var fileName = videoInfo.title
-            TextUtils.RESERVED_CHARS.forEach {
-                fileName = fileName.replace(it, '_')
-            }
+                val videoStream = getStream(videoInfo.videoStreams, maxVideoQuality)
+                val audioStream = getStream(videoInfo.audioStreams, maxAudioQuality)
 
-            val downloadData = DownloadData(
-                videoId = stream.url!!.toID(),
-                fileName = fileName,
-                videoFormat = videoStream?.format,
-                videoQuality = videoStream?.quality,
-                audioFormat = audioStream?.format,
-                audioQuality = audioStream?.quality,
-                audioLanguage = audioLanguage.takeIf {
-                    videoInfo.audioStreams.any { it.audioTrackLocale == audioLanguage }
-                },
-                subtitleCode = captionLanguage.takeIf {
-                    videoInfo.subtitles.any { it.code == captionLanguage }
+                // remove all UNIX reserved characters from the title in order to generate
+                // a valid filename
+                var fileName = videoInfo.title
+                TextUtils.RESERVED_CHARS.forEach {
+                    fileName = fileName.replace(it, '_')
                 }
-            )
-            DownloadHelper.startDownloadService(this, downloadData)
+
+                val downloadData = DownloadData(
+                    videoId = videoId,
+                    fileName = fileName,
+                    videoFormat = videoStream?.format,
+                    videoQuality = videoStream?.quality,
+                    audioFormat = audioStream?.format,
+                    audioQuality = audioStream?.quality,
+                    audioLanguage = audioLanguage.takeIf {
+                        videoInfo.audioStreams.any { it.audioTrackLocale == audioLanguage }
+                    },
+                    subtitleCode = captionLanguage.takeIf {
+                        videoInfo.subtitles.any { it.code == captionLanguage }
+                    }
+                )
+                DownloadHelper.startDownloadService(this, downloadData)
+            }
+            // TODO: inform the user if an already downloaded video has been skipped
 
             amountOfVideosDone++
             nManager.notify(NotificationId.ENQUEUE_PLAYLIST_DOWNLOAD.id, buildNotification())
