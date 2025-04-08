@@ -10,6 +10,7 @@ import androidx.media3.common.MimeTypes
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.FileDataSource
+import androidx.media3.exoplayer.source.MediaSource
 import androidx.media3.exoplayer.source.MergingMediaSource
 import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import androidx.media3.exoplayer.source.SingleSampleMediaSource
@@ -58,7 +59,8 @@ open class OfflinePlayerService : AbstractPlayerService() {
 
             if (playbackState == Player.STATE_READY) {
                 scope.launch(Dispatchers.IO) {
-                    val watchHistoryItem = downloadWithItems?.download?.toStreamItem()?.toWatchHistoryItem(videoId)
+                    val watchHistoryItem =
+                        downloadWithItems?.download?.toStreamItem()?.toWatchHistoryItem(videoId)
                     if (watchHistoryItem != null) {
                         DatabaseHelper.addToWatchHistory(watchHistoryItem)
                     }
@@ -137,65 +139,54 @@ open class OfflinePlayerService : AbstractPlayerService() {
 
         val videoUri = downloadFiles.firstOrNull { it.type == FileType.VIDEO }?.path?.toAndroidUri()
         val audioUri = downloadFiles.firstOrNull { it.type == FileType.AUDIO }?.path?.toAndroidUri()
-        if (isAudioOnlyPlayer && audioUri == null) {
+        val subtitleInfo = downloadFiles.firstOrNull { it.type == FileType.SUBTITLE }
+
+        val videoSource = videoUri?.let { videoUri ->
+            val videoItem = MediaItem.Builder()
+                .setUri(videoUri)
+                .setMetadata(downloadWithItems)
+                .build()
+
+            ProgressiveMediaSource.Factory(FileDataSource.Factory())
+                .createMediaSource(videoItem)
+        }
+
+        val audioSource = audioUri?.let { audioUri ->
+            val audioItem = MediaItem.Builder()
+                .setUri(audioUri)
+                .setMetadata(downloadWithItems)
+                .build()
+
+            ProgressiveMediaSource.Factory(FileDataSource.Factory())
+                .createMediaSource(audioItem)
+        }
+
+        val subtitleSource = subtitleInfo?.let { subtitleInfo ->
+            val subtitle = SubtitleConfiguration.Builder(subtitleInfo.path.toAndroidUri())
+                .setMimeType(MimeTypes.APPLICATION_TTML)
+                .setLanguage(subtitleInfo.language ?: "en")
+                .build()
+
+            SingleSampleMediaSource.Factory(FileDataSource.Factory())
+                .createMediaSource(subtitle, C.TIME_UNSET)
+        }
+
+        var mediaSource: MediaSource? = null
+        listOfNotNull(videoSource, audioSource, subtitleSource).forEach { source ->
+            mediaSource =
+                if (mediaSource == null) source else MergingMediaSource(mediaSource!!, source)
+        }
+
+        if (mediaSource == null || isAudioOnlyPlayer && audioSource == null) {
             stopSelf()
             return
         }
 
-        val subtitleInfo = downloadFiles.firstOrNull { it.type == FileType.SUBTITLE }
-
-        val subtitle = subtitleInfo?.let {
-            SubtitleConfiguration.Builder(it.path.toAndroidUri())
-                .setMimeType(MimeTypes.APPLICATION_TTML)
-                .setLanguage(it.language ?: "en")
-                .build()
-        }
-
-        when {
-            videoUri != null && audioUri != null -> {
-                val videoItem = MediaItem.Builder()
-                    .setUri(videoUri)
-                    .setMetadata(downloadWithItems)
-                    .setSubtitleConfigurations(listOfNotNull(subtitle))
-                    .build()
-
-                val videoSource = ProgressiveMediaSource.Factory(FileDataSource.Factory())
-                    .createMediaSource(videoItem)
-
-                val audioSource = ProgressiveMediaSource.Factory(FileDataSource.Factory())
-                    .createMediaSource(MediaItem.fromUri(audioUri))
-
-                var mediaSource = MergingMediaSource(audioSource, videoSource)
-                if (subtitle != null) {
-                    val subtitleSource = SingleSampleMediaSource.Factory(FileDataSource.Factory())
-                        .createMediaSource(subtitle, C.TIME_UNSET)
-
-                    mediaSource = MergingMediaSource(mediaSource, subtitleSource)
-                }
-
-                exoPlayer?.setMediaSource(mediaSource)
-            }
-
-            videoUri != null -> exoPlayer?.setMediaItem(
-                MediaItem.Builder()
-                    .setUri(videoUri)
-                    .setMetadata(downloadWithItems)
-                    .setSubtitleConfigurations(listOfNotNull(subtitle))
-                    .build()
-            )
-
-            audioUri != null -> exoPlayer?.setMediaItem(
-                MediaItem.Builder()
-                    .setUri(audioUri)
-                    .setMetadata(downloadWithItems)
-                    .setSubtitleConfigurations(listOfNotNull(subtitle))
-                    .build()
-            )
-        }
+        exoPlayer?.setMediaSource(mediaSource!!)
 
         trackSelector?.updateParameters {
             setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
-            setPreferredTextLanguage(subtitle?.language)
+            setPreferredTextLanguage(subtitleInfo?.language ?: "en")
         }
     }
 
