@@ -105,7 +105,6 @@ object ImportHelper {
      */
     @OptIn(ExperimentalSerializationApi::class)
     suspend fun exportSubscriptions(activity: Activity, uri: Uri, importFormat: ImportFormat) {
-        val token = PreferenceHelper.getToken()
         val subs = SubscriptionHelper.getSubscriptions()
 
         when (importFormat) {

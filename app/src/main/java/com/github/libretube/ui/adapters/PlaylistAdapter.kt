@@ -13,6 +13,7 @@ import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
+import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.VideoRowBinding
@@ -45,7 +46,8 @@ class PlaylistAdapter(
     val originalFeed: MutableList<StreamItem>,
     private val sortedFeed: MutableList<StreamItem>,
     private val playlistId: String,
-    private val playlistType: PlaylistType
+    private val playlistType: PlaylistType,
+    private val onVideoClick: (StreamItem) -> Unit
 ) : RecyclerView.Adapter<PlaylistViewHolder>() {
 
     private var visibleCount = minOf(20, sortedFeed.size)
@@ -92,7 +94,7 @@ class PlaylistAdapter(
             thumbnailDuration.setFormattedDuration(streamItem.duration ?: -1, streamItem.isShort, streamItem.uploaded)
 
             root.setOnClickListener {
-                NavigationHelper.navigateVideo(root.context, streamItem.url, playlistId)
+                onVideoClick(streamItem)
             }
 
             val activity = (root.context as BaseActivity)

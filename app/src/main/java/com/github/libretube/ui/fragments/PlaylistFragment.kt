@@ -32,6 +32,7 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.setOnDismissListener
+import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
@@ -206,17 +207,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
                 binding.playAll.isGone = true
             } else {
                 binding.playAll.setOnClickListener {
-                    if (playlistFeed.isEmpty()) return@setOnClickListener
-
-                    val sortedStreams = getSortedVideos()
-                    PlayingQueue.setStreams(sortedStreams)
-
-                    NavigationHelper.navigateVideo(
-                        requireContext(),
-                        sortedStreams.first().url,
-                        playlistId = playlistId,
-                        keepQueue = true
-                    )
+                    startVideoItemPlayback(getSortedVideos().first())
                 }
             }
 
@@ -243,7 +234,8 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
                     binding.bookmark.text = getString(R.string.shuffle)
                     binding.bookmark.setOnClickListener {
                         val queue = playlistFeed.shuffled()
-                        PlayingQueue.add(*queue.toTypedArray())
+                        PlayingQueue.setStreams(queue)
+
                         NavigationHelper.navigateVideo(
                             requireContext(),
                             queue.firstOrNull()?.url,
@@ -274,6 +266,20 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
 
             updatePlaylistBookmark(response)
         }
+    }
+
+    private fun startVideoItemPlayback(streamItem: StreamItem) {
+        if (playlistFeed.isEmpty()) return
+
+        val sortedStreams = getSortedVideos()
+        PlayingQueue.setStreams(sortedStreams)
+
+        NavigationHelper.navigateVideo(
+            requireContext(),
+            streamItem.url?.toID(),
+            playlistId = playlistId,
+            keepQueue = true
+        )
     }
 
     /**
@@ -324,7 +330,9 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
             videos.toMutableList(),
             playlistId,
             playlistType
-        )
+        ) { streamItem ->
+            startVideoItemPlayback(streamItem)
+        }
         // TODO make sure the adapter is set once in onViewCreated
         binding.playlistRecView.adapter = playlistAdapter
 
