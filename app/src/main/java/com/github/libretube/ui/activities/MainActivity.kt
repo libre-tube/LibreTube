@@ -112,7 +112,7 @@ class MainActivity : BaseActivity() {
 
         val isAppConfigured = PreferenceHelper.getBoolean(PreferenceKeys.LOCAL_FEED_EXTRACTION, false) ||
                 PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, "").isNotEmpty()
-        if (isAppConfigured) {
+        if (!isAppConfigured) {
             val welcomeIntent = Intent(this, WelcomeActivity::class.java)
             startActivity(welcomeIntent)
             finish()
