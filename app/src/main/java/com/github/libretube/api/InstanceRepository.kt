@@ -2,9 +2,11 @@ package com.github.libretube.api
 
 import android.content.Context
 import com.github.libretube.R
+import com.github.libretube.api.RetrofitInstance.PIPED_API_URL
 import com.github.libretube.api.obj.PipedInstance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import okhttp3.HttpUrl.Companion.toHttpUrl
 
 class InstanceRepository(private val context: Context) {
 
@@ -13,19 +15,23 @@ class InstanceRepository(private val context: Context) {
      */
     suspend fun getInstances(): Result<List<PipedInstance>> = withContext(Dispatchers.IO) {
         runCatching {
-            RetrofitInstance.externalApi.getInstances(PIPED_INSTANCES_URL)
+            RetrofitInstance.externalApi.getInstances()
         }
     }
 
-    fun getInstancesFallback(): List<PipedInstance> {
-        val instanceNames = context.resources.getStringArray(R.array.instances)
-        return context.resources.getStringArray(R.array.instancesValue)
-            .mapIndexed { index, instanceValue ->
-                PipedInstance(instanceNames[index], instanceValue)
-            }
-    }
+    suspend fun getInstancesFallback(): List<PipedInstance> = withContext(Dispatchers.IO) {
+        return@withContext try {
+            RetrofitInstance.externalApi.getInstancesMarkdown().body()!!.string().lines().reversed()
+                .takeWhile { !it.startsWith("---") }
+                .filter { it.isNotBlank() }
+                .map { line ->
+                    val infoParts = line.split("|")
 
-    companion object {
-        private const val PIPED_INSTANCES_URL = "https://piped-instances.kavin.rocks"
+                    PipedInstance(name = infoParts[0], apiUrl = infoParts[1], locations = infoParts[2], cdn = infoParts[3] == "Yes")
+                }
+        } catch (e: Exception) {
+            // worst case scenario: only return official instance
+            return@withContext listOf(PipedInstance(name = PIPED_API_URL.toHttpUrl().host, apiUrl = PIPED_API_URL))
+        }
     }
 }

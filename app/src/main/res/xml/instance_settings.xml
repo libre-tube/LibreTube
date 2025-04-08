@@ -27,8 +27,6 @@
         <ListPreference
             android:icon="@drawable/ic_server"
             app:defaultValue="https://pipedapi.kavin.rocks"
-            app:entries="@array/instances"
-            app:entryValues="@array/instancesValue"
             app:key="selectInstance"
             android:dependency="full_local_mode"
             app:title="@string/instances" />
@@ -70,8 +68,6 @@
             android:dependency="auth_instance_toggle"
             android:icon="@drawable/ic_server"
             app:defaultValue="https://pipedapi.kavin.rocks"
-            app:entries="@array/instances"
-            app:entryValues="@array/instancesValue"
             app:key="selectAuthInstance"
             app:title="@string/auth_instances" />
 
