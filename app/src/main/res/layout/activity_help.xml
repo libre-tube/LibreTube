@@ -17,15 +17,9 @@
             app:navigationIcon="?homeAsUpIndicator"
             app:title="@string/help" />
 
-        <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="40dp"
-            android:src="@drawable/ic_launcher_lockscreen"
-            app:tint="?attr/colorSecondary"
-            tools:ignore="ContentDescription" />
+        <com.github.libretube.ui.views.AppIconHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/faq"
