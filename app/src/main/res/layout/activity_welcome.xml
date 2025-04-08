@@ -19,33 +19,10 @@
             app:expandedTitleTextColor="@android:color/transparent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <LinearLayout
+            <com.github.libretube.ui.views.AppIconHeader
+                android:paddingTop="30dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="50dp"
-                android:paddingBottom="20dp">
-
-                <ImageView
-                    android:id="@+id/app_icon"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="15dp"
-                    android:src="@drawable/ic_launcher_lockscreen"
-                    app:tint="?attr/colorSecondary"
-                    tools:ignore="ContentDescription" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginVertical="16dp"
-                    android:text="@string/welcome"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
+                android:layout_height="wrap_content" />
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"

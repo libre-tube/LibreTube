@@ -1,13 +1,11 @@
 package com.github.libretube.ui.activities
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import androidx.core.text.HtmlCompat
 import androidx.core.text.parseAsHtml
-import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivityAboutBinding
 import com.github.libretube.helpers.ClipboardHelper
@@ -29,19 +27,6 @@ class AboutActivity : BaseActivity() {
 
         binding.toolbar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
-        }
-
-        binding.appIcon.setOnClickListener {
-            val sendIntent = Intent(Intent.ACTION_SEND)
-                .putExtra(Intent.EXTRA_TEXT, GITHUB_URL)
-                .setType("text/plain")
-            startActivity(Intent.createChooser(sendIntent, null))
-        }
-
-        val versionText = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
-        binding.versionTv.text = versionText
-        binding.versionCard.setOnClickListener {
-            ClipboardHelper.save(this, text = versionText, notify = true)
         }
 
         setupCard(binding.donate, DONATE_URL)
@@ -126,7 +111,7 @@ class AboutActivity : BaseActivity() {
     companion object {
         const val DONATE_URL = "https://github.com/libre-tube/LibreTube#donate"
         private const val WEBSITE_URL = "https://libretube.dev"
-        private const val GITHUB_URL = "https://github.com/libre-tube/LibreTube"
+        const val GITHUB_URL = "https://github.com/libre-tube/LibreTube"
         private const val PIPED_GITHUB_URL = "https://github.com/TeamPiped/Piped"
         private const val WEBLATE_URL = "https://hosted.weblate.org/projects/libretube/libretube/"
         private const val LICENSE_URL = "https://gnu.org/"
