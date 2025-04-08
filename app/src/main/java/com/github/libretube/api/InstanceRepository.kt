@@ -25,7 +25,7 @@ class InstanceRepository(private val context: Context) {
                 .takeWhile { !it.startsWith("---") }
                 .filter { it.isNotBlank() }
                 .map { line ->
-                    val infoParts = line.split("|")
+                    val infoParts = line.split("|").map { it.trim() }
 
                     PipedInstance(name = infoParts[0], apiUrl = infoParts[1], locations = infoParts[2], cdn = infoParts[3] == "Yes")
                 }
