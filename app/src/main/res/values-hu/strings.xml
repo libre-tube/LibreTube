@@ -418,7 +418,7 @@
     <string name="choose_instance_long">Válasszon ki az alább felsoroltak közül egy Piped példányt. A Piped példány közvetítőként fog működni Ön és a YouTube között. Ezek a példányok különböző fizikai helyszíneken találhatók - ezeket az országzászló jelzi. A fizikailag közelebbi példányok valószínűleg gyorsabbak, mint a távoli példányok. A beállításokban bármikor megváltoztatható a használt példány.</string>
     <string name="off">Ki</string>
     <string name="fallback_piped_proxy_summary">Videók betöltése proxy-n keresztül, ha a YouTube-hoz való közvetlen csatlakozás nem működik az aktuális videónál (növeli a kezdeti betöltési időt). Ha ki van kapcsolva, a YouTube zenei tartalma valószínűleg nem fog lejátszódni a YT korlátozások miatt</string>
-    <string name="manual">Manuális</string>
+    <string name="manual">Kézikönyv</string>
     <string name="fallback_piped_proxy">Visszalépés a Piped proxyra</string>
     <string name="chapters_videoHighlight">Videókiemelés</string>
     <string name="automatic">Automatikus</string>
@@ -443,7 +443,7 @@
     <string name="no_chapter">Nincs fejezet</string>
     <string name="screen_orientation">Képernyőtájolás</string>
     <string name="remove_watched_videos">Megnézett videók eltávolítása</string>
-    <string name="player_channel_name">Lejátszó szolgáltatás</string>
+    <string name="player_channel_name">Lejátszási szolgáltatás</string>
     <string name="player_channel_description">Értesítést jelenít meg lejátszás közben</string>
     <string name="tooltip_repeat">Ismétlés</string>
     <string name="tooltip_reverse">Fordított</string>
