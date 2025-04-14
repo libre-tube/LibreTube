@@ -356,7 +356,7 @@
     <string name="help">Súgó</string>
     <string name="faq">GYIK</string>
     <string name="replies">Válaszok</string>
-    <string name="mark_as_watched">Jelölés megtekintettnek</string>
+    <string name="mark_as_watched">Megjelölés megtekintettnek</string>
     <string name="custom_playback_speed">Egyéni sebesség</string>
     <string name="custom_playback_speed_summary">A normális lejátszótól való különböző sebesség használata</string>
     <string name="unsupported_file_format">Nem támogatott fájlformátum: %1$s</string>
@@ -400,7 +400,7 @@
     <string name="export_subscriptions_to">Feliratkozások exportálása ide</string>
     <string name="import_playlists_from">Lejátszási listák importálása innen</string>
     <string name="export_playlists_to">Lejátszási listák exportálása ide</string>
-    <string name="mark_as_unwatched">Meg nem tekintettnek jelölés</string>
+    <string name="mark_as_unwatched">Megjelölés nem megtekintettnek</string>
     <string name="home_tab_content">Kezdőlap tartalma</string>
     <string name="choose_instance">Először válasszon egy példányt!</string>
     <string name="welcome">Üdvözli a LibreTube</string>
