@@ -61,31 +61,4 @@ object SubscriptionHelper {
 
     suspend fun submitFeedItemChange(feedItem: SubscriptionsFeedItem) =
         feedRepository.submitFeedItemChange(feedItem)
-
-    fun handleUnsubscribe(
-        context: Context,
-        channelId: String,
-        channelName: String?,
-        onUnsubscribe: () -> Unit
-    ) {
-        if (!PreferenceHelper.getBoolean(PreferenceKeys.CONFIRM_UNSUBSCRIBE, false)) {
-            runBlocking {
-                unsubscribe(channelId)
-                onUnsubscribe()
-            }
-            return
-        }
-
-        MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.unsubscribe)
-            .setMessage(context.getString(R.string.confirm_unsubscribe, channelName))
-            .setPositiveButton(R.string.unsubscribe) { _, _ ->
-                runBlocking {
-                    unsubscribe(channelId)
-                    onUnsubscribe()
-                }
-            }
-            .setNegativeButton(R.string.cancel, null)
-            .show()
-    }
 }
