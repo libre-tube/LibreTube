@@ -60,9 +60,7 @@ class ChannelContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_ch
             var nextPage = arguments.getString(IntentData.nextPage)
             var isLoading = false
 
-            val channelAdapter = VideosAdapter(
-                forceMode = VideosAdapter.Companion.LayoutMode.CHANNEL_ROW
-            ).also {
+            val channelAdapter = VideosAdapter(showChannelInfo = false).also {
                 it.submitList(arguments.parcelableArrayList<StreamItem>(IntentData.videoList)!!)
             }
             binding.channelRecView.adapter = channelAdapter

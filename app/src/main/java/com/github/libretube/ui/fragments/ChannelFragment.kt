@@ -234,9 +234,7 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
             tab.text = tabList[position].name
         }.attach()
 
-        channelAdapter = VideosAdapter(
-            forceMode = VideosAdapter.Companion.LayoutMode.CHANNEL_ROW
-        ).also {
+        channelAdapter = VideosAdapter(showChannelInfo = false).also {
             it.submitList(response.relatedStreams)
         }
         tabList.clear()
