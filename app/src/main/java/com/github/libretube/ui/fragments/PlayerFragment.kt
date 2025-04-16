@@ -89,7 +89,7 @@ import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.services.AbstractPlayerService
 import com.github.libretube.services.OnlinePlayerService
 import com.github.libretube.ui.activities.MainActivity
-import com.github.libretube.ui.adapters.VideosAdapter
+import com.github.libretube.ui.adapters.VideoCardsAdapter
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.PlayOfflineDialog
@@ -1127,12 +1127,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
         if (PlayerHelper.relatedStreamsEnabled) {
             val relatedLayoutManager = binding.relatedRecView.layoutManager as LinearLayoutManager
-            binding.relatedRecView.adapter = VideosAdapter(
-                forceMode = if (relatedLayoutManager.orientation == LinearLayoutManager.HORIZONTAL) {
-                    VideosAdapter.Companion.LayoutMode.RELATED_COLUMN
-                } else {
-                    VideosAdapter.Companion.LayoutMode.TRENDING_ROW
-                }
+            binding.relatedRecView.adapter = VideoCardsAdapter(
+                columnWidthDp = if (relatedLayoutManager.orientation == LinearLayoutManager.HORIZONTAL) 250f else null
             ).also { adapter ->
                 adapter.submitList(streams.relatedStreams.filter { !it.title.isNullOrBlank() })
             }

@@ -12,7 +12,7 @@ import com.github.libretube.R
 import com.github.libretube.databinding.FragmentTrendsBinding
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.ui.activities.SettingsActivity
-import com.github.libretube.ui.adapters.VideosAdapter
+import com.github.libretube.ui.adapters.VideoCardsAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.extensions.setupFragmentAnimation
 import com.github.libretube.ui.models.TrendsViewModel
@@ -31,7 +31,7 @@ class TrendsFragment : DynamicLayoutManagerFragment(R.layout.fragment_trends) {
         _binding = FragmentTrendsBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = VideosAdapter()
+        val adapter = VideoCardsAdapter()
         binding.recview.adapter = adapter
         binding.recview.layoutManager?.onRestoreInstanceState(viewModel.recyclerViewState)
 

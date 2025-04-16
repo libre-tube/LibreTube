@@ -23,8 +23,7 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.adapters.PlaylistBookmarkAdapter
 import com.github.libretube.ui.adapters.PlaylistsAdapter
-import com.github.libretube.ui.adapters.VideosAdapter
-import com.github.libretube.ui.adapters.VideosAdapter.Companion.LayoutMode
+import com.github.libretube.ui.adapters.VideoCardsAdapter
 import com.github.libretube.ui.extensions.setupFragmentAnimation
 import com.github.libretube.ui.models.HomeViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
@@ -38,9 +37,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val subscriptionsViewModel: SubscriptionsViewModel by activityViewModels()
     private val homeViewModel: HomeViewModel by activityViewModels()
 
-    private val trendingAdapter = VideosAdapter(forceMode = LayoutMode.TRENDING_ROW)
-    private val feedAdapter = VideosAdapter(forceMode = LayoutMode.RELATED_COLUMN)
-    private val watchingAdapter = VideosAdapter(forceMode = LayoutMode.RELATED_COLUMN)
+    private val trendingAdapter = VideoCardsAdapter()
+    private val feedAdapter = VideoCardsAdapter(columnWidthDp = 250f)
+    private val watchingAdapter = VideoCardsAdapter(columnWidthDp = 250f)
     private val bookmarkAdapter = PlaylistBookmarkAdapter(PlaylistBookmarkAdapter.Companion.BookmarkMode.HOME)
     private val playlistAdapter = PlaylistsAdapter(playlistType = PlaylistsHelper.getPrivatePlaylistType())
 
