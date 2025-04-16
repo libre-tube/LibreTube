@@ -43,11 +43,9 @@ import com.github.libretube.ui.sheets.ChannelGroupsSheet
 import com.github.libretube.ui.sheets.FilterSortBottomSheet
 import com.github.libretube.ui.sheets.FilterSortBottomSheet.Companion.FILTER_SORT_REQUEST_KEY
 import com.github.libretube.util.PlayingQueue
-import com.github.libretube.util.deArrow
 import com.google.android.material.chip.Chip
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_subscriptions) {
     private var _binding: FragmentSubscriptionsBinding? = null
@@ -138,12 +136,24 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
             viewModel.fetchSubscriptions(requireContext())
         }
 
+        // only restore the previous state (i.e. scroll position) the first time the feed is shown
+        // any other feed updates are caused by manual refreshing and thus should reset the scroll
+        // position to zero
+        var alreadyShowedFeedOnce = false
         viewModel.videoFeed.observe(viewLifecycleOwner) {
-            if (!viewModel.isCurrentTabSubChannels && it != null) showFeed()
+            if (!viewModel.isCurrentTabSubChannels && it != null) {
+                showFeed(!alreadyShowedFeedOnce)
+                alreadyShowedFeedOnce = true
+            }
         }
 
+        // restore the scroll position, same conditions as above
+        var alreadyShowedSubscriptionsOnce = false
         viewModel.subscriptions.observe(viewLifecycleOwner) {
-            if (viewModel.isCurrentTabSubChannels && it != null) showSubscriptions()
+            if (viewModel.isCurrentTabSubChannels && it != null) {
+                showSubscriptions(!alreadyShowedSubscriptionsOnce)
+                alreadyShowedSubscriptionsOnce = true
+            }
         }
 
         viewModel.feedProgress.observe(viewLifecycleOwner) { progress ->
@@ -209,18 +219,20 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         binding.subChannels.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                viewModel.subChannelsRecyclerViewState = binding.subChannels.layoutManager?.onSaveInstanceState()?.takeIf {
-                    binding.subChannels.computeVerticalScrollOffset() != 0
-                }
+                viewModel.subChannelsRecyclerViewState =
+                    binding.subChannels.layoutManager?.onSaveInstanceState()?.takeIf {
+                        binding.subChannels.computeVerticalScrollOffset() != 0
+                    }
             }
         })
 
         binding.subFeed.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                viewModel.subFeedRecyclerViewState = binding.subFeed.layoutManager?.onSaveInstanceState()?.takeIf {
-                    binding.subFeed.computeVerticalScrollOffset() != 0
-                }
+                viewModel.subFeedRecyclerViewState =
+                    binding.subFeed.layoutManager?.onSaveInstanceState()?.takeIf {
+                        binding.subFeed.computeVerticalScrollOffset() != 0
+                    }
             }
         })
 
@@ -232,29 +244,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
         if (NavBarHelper.getStartFragmentId(requireContext()) != R.id.subscriptionsFragment) {
             setupFragmentAnimation(binding.root)
-        }
-    }
-
-    private fun loadFeedItems(sortedFeed: List<StreamItem>) {
-        val binding = _binding ?: return
-
-        if (viewModel.videoFeed.value != null && !viewModel.isCurrentTabSubChannels && !binding.subRefresh.isRefreshing) {
-            binding.subRefresh.isRefreshing = true
-
-            lifecycleScope.launch {
-                val streamItemsToInsert = sortedFeed.let {
-                    withContext(Dispatchers.IO) {
-                        runCatching { it.deArrow() }.getOrDefault(it)
-                    }
-                }
-
-                feedAdapter.submitList(streamItemsToInsert) {
-                    // manually restore the previous feed state
-                    binding.subFeed.layoutManager?.onRestoreInstanceState(viewModel.subFeedRecyclerViewState)
-                    binding.subscriptionsAppBar.setExpanded(viewModel.subFeedRecyclerViewState == null)
-                }
-                binding.subRefresh.isRefreshing = false
-            }
         }
     }
 
@@ -371,10 +360,10 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         else -> this
     }
 
-    private fun showFeed() {
+    private fun showFeed(restoreScrollState: Boolean = true) {
+        val binding = _binding ?: return
         val videoFeed = viewModel.videoFeed.value ?: return
 
-        binding.subRefresh.isRefreshing = false
         val feed = videoFeed
             .filterByGroup(selectedFilterGroup)
             .filter { showUpcoming || !it.isUpcoming }
@@ -382,16 +371,17 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
                 DatabaseHelper.filterByStatusAndWatchPosition(it, hideWatched)
             }
 
-        val sorted = feed
+        val sortedFeed = feed
             .sortedBySelectedOrder()
             .toMutableList()
 
         // add an "all caught up item"
         if (selectedSortOrder == 0) {
             val lastCheckedFeedTime = PreferenceHelper.getLastCheckedFeedTime()
-            val caughtUpIndex = feed.indexOfFirst { it.uploaded <= lastCheckedFeedTime && !it.isUpcoming }
-            if (caughtUpIndex > 0 && !feed[caughtUpIndex-1].isUpcoming) {
-                sorted.add(
+            val caughtUpIndex =
+                feed.indexOfFirst { it.uploaded <= lastCheckedFeedTime && !it.isUpcoming }
+            if (caughtUpIndex > 0 && !feed[caughtUpIndex - 1].isUpcoming) {
+                sortedFeed.add(
                     caughtUpIndex,
                     StreamItem(type = VideoCardsAdapter.CAUGHT_UP_STREAM_TYPE)
                 )
@@ -404,18 +394,30 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         val notLoaded = viewModel.videoFeed.value.isNullOrEmpty()
         binding.subFeed.isGone = notLoaded
         binding.emptyFeed.isVisible = notLoaded
-        loadFeedItems(sorted)
 
         binding.toggleSubs.text = getString(R.string.subscriptions)
 
         feed.firstOrNull { !it.isUpcoming }?.uploaded?.let {
             PreferenceHelper.setLastFeedWatchedTime(it)
         }
+
+        binding.subRefresh.isRefreshing = false
+
+        feedAdapter.submitList(sortedFeed) {
+            if (restoreScrollState) {
+                // manually restore the previous feed state
+                binding.subFeed.layoutManager?.onRestoreInstanceState(viewModel.subFeedRecyclerViewState)
+                binding.subscriptionsAppBar.setExpanded(viewModel.subFeedRecyclerViewState == null)
+            } else {
+                binding.subFeed.scrollToPosition(0)
+            }
+        }
     }
 
     @SuppressLint("SetTextI18n")
-    private fun showSubscriptions() {
-        val subscriptions = viewModel.subscriptions.value?.filterByGroup(selectedFilterGroup) ?: return
+    private fun showSubscriptions(restoreScrollState: Boolean = true) {
+        val subscriptions =
+            viewModel.subscriptions.value?.filterByGroup(selectedFilterGroup) ?: return
 
         val legacySubscriptions = PreferenceHelper.getBoolean(
             PreferenceKeys.LEGACY_SUBSCRIPTIONS,
@@ -424,8 +426,12 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
         val adapter = if (legacySubscriptions) legacySubscriptionsAdapter else channelsAdapter
         adapter.submitList(subscriptions) {
-            binding.subFeed.layoutManager?.onRestoreInstanceState(viewModel.subChannelsRecyclerViewState)
-            binding.subscriptionsAppBar.setExpanded(viewModel.subChannelsRecyclerViewState == null)
+            if (restoreScrollState) {
+                binding.subFeed.layoutManager?.onRestoreInstanceState(viewModel.subChannelsRecyclerViewState)
+                binding.subscriptionsAppBar.setExpanded(viewModel.subChannelsRecyclerViewState == null)
+            } else {
+                binding.subFeed.scrollToPosition(0)
+            }
         }
 
         binding.subRefresh.isRefreshing = false
