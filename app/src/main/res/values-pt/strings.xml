@@ -163,7 +163,7 @@
     <string name="video">Vídeo</string>
     <string name="player_autoplay">Reprodução automática</string>
     <string name="turnInternetOn">Ative uma ligação Wi-Fi ou de dados móveis para estabelecer ligação à Internet.</string>
-    <string name="instance_frontend_url">URL para a instância</string>
+    <string name="instance_frontend_url">URL para a instância (opcional)</string>
     <string name="quality">Qualidade</string>
     <string name="player_summary">Predefinições e comportamento</string>
     <string name="seek_increment">Incremento de avanço/recuo</string>
@@ -556,4 +556,8 @@
     <string name="local_feed_extraction_summary">Obter videos diretamente do YouTube. Pode ter impacto na velocidade.</string>
     <string name="show_upcoming_videos">Mostrar vídeos seguintes</string>
     <string name="updating_feed">A atualizar fontes…</string>
+    <string name="mode_of_operation">Modo de operações</string>
+    <string name="full_local_mode">Modo local</string>
+    <string name="full_local_mode_desc">Obter vídeos diretamente do YouTube, sem utilizar Piped.</string>
+    <string name="authentication">Autenticação</string>
 </resources>
