@@ -5,6 +5,7 @@ import com.github.libretube.api.obj.DeArrowContent
 import com.github.libretube.api.obj.PipedConfig
 import com.github.libretube.api.obj.SegmentData
 import com.github.libretube.api.obj.SubmitSegmentResponse
+import com.github.libretube.api.obj.VideoLabelData
 import com.github.libretube.api.obj.VoteInfo
 import com.github.libretube.obj.update.UpdateInfo
 import kotlinx.serialization.json.JsonElement
@@ -51,6 +52,11 @@ interface ExternalApi {
         @Query("category") category: List<String>,
         @Query("actionType") actionType: List<String>? = null
     ): List<SegmentData>
+
+    @GET("$SB_API_URL/api/videoLabels/{videoId}")
+    suspend fun getVideoLabels(
+        @Path("videoId") videoId: String,
+    ): List<VideoLabelData>
 
     @POST("$SB_API_URL/api/branding")
     suspend fun submitDeArrow(@Body body: DeArrowBody)
