@@ -13,15 +13,15 @@ import kotlinx.serialization.Transient
 @Serializable
 @Parcelize
 data class Segment(
-    @SerialName("UUID") val uuid: String,
-    val actionType: String,
+    @SerialName("UUID") val uuid: String? = null,
+    val actionType: String? = null,
     val category: String,
     val description: String? = null,
-    val locked: Int,
+    val locked: Int? = null,
     private val segment: List<Float> = listOf(0f, 0f),
     val userID: String? = null,
-    val videoDuration: Double,
-    val votes: Int,
+    val videoDuration: Double? = null,
+    val votes: Int? = null,
     var skipped: Boolean = false
 ): Parcelable {
     @Transient
@@ -29,16 +29,16 @@ data class Segment(
     val segmentStartAndEnd = FloatFloatPair(segment[0], segment[1])
 
     fun toDownloadSegment(videoId: String): DownloadSponsorBlockSegment = DownloadSponsorBlockSegment(
-        uuid = uuid,
+        uuid = uuid!!,
         videoId = videoId,
         startTime = segmentStartAndEnd.first,
         endTime = segmentStartAndEnd.second,
-        actionType = actionType,
+        actionType = actionType!!,
         category = category,
         description = description,
-        locked = locked,
-        videoDuration = videoDuration.toFloat(),
-        votes = votes
+        locked = locked!!,
+        videoDuration = videoDuration!!.toFloat(),
+        votes = votes!!
     )
 
     companion object {
