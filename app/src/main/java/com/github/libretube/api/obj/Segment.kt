@@ -18,7 +18,7 @@ data class Segment(
     val category: String,
     val description: String? = null,
     val locked: Int,
-    private val segment: List<Float> = listOf(),
+    private val segment: List<Float> = listOf(0f, 0f),
     val userID: String? = null,
     val videoDuration: Double,
     val votes: Int,
