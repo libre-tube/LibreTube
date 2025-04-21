@@ -104,8 +104,12 @@ object PreferenceHelper {
         return getString(PreferenceKeys.LAST_STREAM_VIDEO_ID, "")
     }
 
-    fun setLastFeedWatchedTime(time: Long) {
-        putLong(PreferenceKeys.LAST_WATCHED_FEED_TIME, time)
+    fun updateLastFeedWatchedTime(time: Long) {
+        // only update the time if the time is newer
+        // this avoids cases, where the user last saw an older video, which had already been seen,
+        // causing all following video to be incorrectly marked as unseen again
+        if (getLastCheckedFeedTime() < time)
+            putLong(PreferenceKeys.LAST_WATCHED_FEED_TIME, time)
     }
 
     fun getLastCheckedFeedTime(): Long {

@@ -398,7 +398,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         binding.toggleSubs.text = getString(R.string.subscriptions)
 
         feed.firstOrNull { !it.isUpcoming }?.uploaded?.let {
-            PreferenceHelper.setLastFeedWatchedTime(it)
+            PreferenceHelper.updateLastFeedWatchedTime(it)
         }
 
         binding.subRefresh.isRefreshing = false
