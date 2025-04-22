@@ -33,6 +33,7 @@ import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.extensions.navigateVideo
 import com.github.libretube.extensions.normalize
 import com.github.libretube.extensions.seekBy
+import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateIfChanged
 import com.github.libretube.helpers.AudioHelper
@@ -174,19 +175,7 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
         }
 
         binding.openVideo.setOnClickListener {
-            playerController?.sendCustomCommand(
-                AbstractPlayerService.runPlayerActionCommand,
-                bundleOf(PlayerCommand.TOGGLE_AUDIO_ONLY_MODE.name to false)
-            )
-
-            killFragment(false)
-
-            NavigationHelper.navigateVideo(
-                context = requireContext(),
-                videoUrlOrId = PlayingQueue.getCurrent()?.url,
-                alreadyStarted = true,
-                forceVideo = true
-            )
+            switchToVideoMode()
         }
 
         childFragmentManager.setFragmentResultListener(
@@ -269,6 +258,21 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
             // if the player is minimized, the fragment behind the player should handle the event
             onBackPressedCallback.isEnabled = isMiniPlayerVisible != true
         }
+    }
+
+    fun switchToVideoMode() {
+        playerController?.sendCustomCommand(
+            AbstractPlayerService.runPlayerActionCommand,
+            bundleOf(PlayerCommand.TOGGLE_AUDIO_ONLY_MODE.name to false)
+        )
+
+        killFragment(false)
+
+        NavigationHelper.openVideoPlayerFragment(
+            context = requireContext(),
+            videoId = PlayingQueue.getCurrent()?.url!!.toID(),
+            alreadyStarted = true,
+        )
     }
 
     private fun killFragment(stopPlayer: Boolean) {

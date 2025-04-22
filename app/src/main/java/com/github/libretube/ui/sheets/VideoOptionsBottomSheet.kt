@@ -57,7 +57,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
             when (optionsList[which]) {
                 // Start the background mode
                 R.string.playOnBackground -> {
-                    NavigationHelper.navigateAudio(requireContext(), videoId, minimizeByDefault = true)
+                    NavigationHelper.navigateVideo(requireContext(), videoId, audioOnlyPlayerRequested = true)
                 }
                 // Add Video to Playlist Dialog
                 R.string.addToPlaylist -> {

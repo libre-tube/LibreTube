@@ -218,7 +218,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 }
 
                 PlayerEvent.Background -> {
-                    playOnBackground()
+                    switchToAudioMode()
                     // wait some time in order for the service to get started properly
                     handler.postDelayed(500) {
                         pipActivity?.moveTaskToBack(false)
@@ -698,7 +698,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
         binding.relPlayerBackground.setOnClickListener {
             // start the background mode
-            playOnBackground()
+            switchToAudioMode()
         }
 
         binding.relPlayerPip.isVisible =
@@ -777,7 +777,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         chaptersViewModel.maxSheetHeightPx = maxHeight
     }
 
-    private fun playOnBackground() {
+    fun switchToAudioMode() {
         playerController.sendCustomCommand(
             AbstractPlayerService.runPlayerActionCommand,
             bundleOf(PlayerCommand.TOGGLE_AUDIO_ONLY_MODE.name to true)
