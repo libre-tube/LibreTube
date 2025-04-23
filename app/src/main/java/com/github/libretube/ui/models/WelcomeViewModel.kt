@@ -19,6 +19,7 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.PipedInstance
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.helpers.BackupHelper
+import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
@@ -69,6 +70,7 @@ class WelcomeViewModel(
                 PreferenceKeys.FETCH_INSTANCE,
                 _uiState.value.instances[selectedInstanceIndex].apiUrl
             )
+            PreferenceHelper.putBoolean(PreferenceKeys.FULL_LOCAL_MODE, false)
             refreshAndNavigate()
         }
     }
@@ -79,7 +81,7 @@ class WelcomeViewModel(
 
             // only skip the welcome activity if the restored backup contains an instance
             val instancePref = PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, "")
-            if (instancePref.isNotEmpty()) {
+            if (instancePref.isNotEmpty() || PlayerHelper.fullLocalMode) {
                 refreshAndNavigate()
             }
         }
@@ -101,7 +103,7 @@ class WelcomeViewModel(
 
     @Parcelize
     data class UiState(
-        val fullLocalMode: Boolean = false,
+        val fullLocalMode: Boolean = true,
         val selectedInstanceIndex: Int? = null,
         val instances: List<PipedInstance> = emptyList(),
         @StringRes val error: Int? = null,
