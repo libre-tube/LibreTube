@@ -1,7 +1,5 @@
 package com.github.libretube.api
 
-import android.content.Context
-import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.obj.SubscriptionsFeedItem
 import com.github.libretube.helpers.PreferenceHelper
@@ -14,8 +12,6 @@ import com.github.libretube.repo.PipedAccountFeedRepository
 import com.github.libretube.repo.PipedLocalSubscriptionsRepository
 import com.github.libretube.repo.PipedNoAccountFeedRepository
 import com.github.libretube.repo.SubscriptionsRepository
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.runBlocking
 
 object SubscriptionHelper {
     /**
