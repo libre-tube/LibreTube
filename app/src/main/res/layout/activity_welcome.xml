@@ -45,18 +45,11 @@
             android:id="@+id/operation_mode_group"
             app:selectionRequired="true"
             app:singleSelection="true"
-            app:checkedButton="@+id/piped_toggle_group_button"
+            app:checkedButton="@+id/full_local_mode_toggle_group_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/piped_toggle_group_button"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/piped" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/full_local_mode_toggle_group_button"
@@ -65,9 +58,31 @@
                 android:layout_height="wrap_content"
                 android:text="@string/full_local_mode" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/piped_toggle_group_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/piped" />
+
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <LinearLayout
+            android:id="@+id/local_mode_info_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/full_local_mode_desc" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            tools:visibility="gone"
             android:id="@+id/instances_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -91,21 +106,6 @@
                 android:scrollbars="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/instance_row" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:visibility="gone"
-            android:id="@+id/local_mode_info_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="10dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/full_local_mode_desc" />
 
         </LinearLayout>
     </LinearLayout>
