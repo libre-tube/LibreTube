@@ -28,6 +28,7 @@ import com.github.libretube.ui.extensions.setupFragmentAnimation
 import com.github.libretube.ui.models.HomeViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.runBlocking
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -150,7 +151,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         makeVisible(binding.featuredRV, binding.featuredTV)
         val hideWatched = PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)
         val feedVideos = streamItems
-            .let { DatabaseHelper.filterByStatusAndWatchPosition(it, hideWatched) }
+            .let { runBlocking { DatabaseHelper.filterByStatusAndWatchPosition(it, hideWatched) } }
             .take(20)
 
         feedAdapter.submitList(feedVideos)

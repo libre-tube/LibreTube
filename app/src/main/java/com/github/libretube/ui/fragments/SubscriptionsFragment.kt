@@ -142,7 +142,9 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         var alreadyShowedFeedOnce = false
         viewModel.videoFeed.observe(viewLifecycleOwner) {
             if (!viewModel.isCurrentTabSubChannels && it != null) {
-                showFeed(!alreadyShowedFeedOnce)
+                lifecycleScope.launch {
+                    showFeed(!alreadyShowedFeedOnce)
+                }
                 alreadyShowedFeedOnce = true
             }
         }
@@ -179,7 +181,9 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
             binding.subRefresh.isRefreshing = true
             viewModel.isCurrentTabSubChannels = !viewModel.isCurrentTabSubChannels
 
-            if (viewModel.isCurrentTabSubChannels) showSubscriptions() else showFeed()
+            lifecycleScope.launch {
+                if (viewModel.isCurrentTabSubChannels) showSubscriptions() else showFeed()
+            }
 
             binding.subChannels.isVisible = viewModel.isCurrentTabSubChannels
             binding.subFeed.isGone = viewModel.isCurrentTabSubChannels
@@ -204,7 +208,10 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
         binding.channelGroups.setOnCheckedStateChangeListener { group, _ ->
             selectedFilterGroup = group.children.indexOfFirst { it.id == group.checkedChipId }
-            if (viewModel.isCurrentTabSubChannels) showSubscriptions() else showFeed()
+
+            lifecycleScope.launch {
+                if (viewModel.isCurrentTabSubChannels) showSubscriptions() else showFeed()
+            }
         }
 
         channelGroupsModel.groups.observe(viewLifecycleOwner) {
@@ -256,7 +263,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
                 selectedSortOrder = resultBundle.getInt(IntentData.sortOptions)
                 hideWatched = resultBundle.getBoolean(IntentData.hideWatched)
                 showUpcoming = resultBundle.getBoolean(IntentData.showUpcoming)
-                showFeed()
+                lifecycleScope.launch { showFeed() }
             }
 
             FilterSortBottomSheet()
@@ -283,7 +290,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         _binding = null
     }
 
-    private fun playByGroup(groupIndex: Int) {
+    private suspend fun playByGroup(groupIndex: Int) {
         val streams = viewModel.videoFeed.value.orEmpty()
             .filterByGroup(groupIndex)
             .let { DatabaseHelper.filterByStatusAndWatchPosition(it, hideWatched) }
@@ -306,7 +313,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
         binding.chipAll.isChecked = selectedFilterGroup == 0
         binding.chipAll.setOnLongClickListener {
-            playByGroup(0)
+            lifecycleScope.launch { playByGroup(0) }
             true
         }
 
@@ -321,7 +328,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
                 text = group.name
                 setOnLongClickListener {
                     // the index must be increased by one to skip the "all channels" group button
-                    playByGroup(index + 1)
+                    lifecycleScope.launch { playByGroup(index + 1) }
                     true
                 }
             }
@@ -360,7 +367,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         else -> this
     }
 
-    private fun showFeed(restoreScrollState: Boolean = true) {
+    private suspend fun showFeed(restoreScrollState: Boolean = true) {
         val binding = _binding ?: return
         val videoFeed = viewModel.videoFeed.value ?: return
 

@@ -102,7 +102,7 @@ object DatabaseHelper {
         return unfinished xor isVideoWatched(watchHistoryItem.videoId, watchHistoryItem.duration ?: 0)
     }
 
-    fun filterByStatusAndWatchPosition(
+    suspend fun filterByStatusAndWatchPosition(
         streams: List<StreamItem>,
         hideWatched: Boolean
     ): List<StreamItem> {
@@ -116,13 +116,8 @@ object DatabaseHelper {
                 else -> true
             }
         }
+        if (!hideWatched) return streamItems
 
-        return if (hideWatched) {
-            runBlocking {
-                filterUnwatched(streamItems)
-            }
-        } else {
-            streamItems
-        }
+        return filterUnwatched(streamItems)
     }
 }
