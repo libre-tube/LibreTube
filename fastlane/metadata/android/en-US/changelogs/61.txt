@@ -1,0 +1,6 @@
+* feat: add "full local mode" to use the app without Piped
+* feat: add progress indicator for local feed extraction
+* feat: implement local extraction support for SponsorBlock and DeArrow
+* feat: locally store channel info when local streams extraction enabled
+* feat: rebuild custom instances dialogs for better UX
+* feat(StreamsExtractor): generate PoToken
