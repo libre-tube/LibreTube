@@ -1,1 +1,1 @@
-Alternative YouTube frontend for Android built with Piped
+Alternative frontend for YouTube with focus on privacy
