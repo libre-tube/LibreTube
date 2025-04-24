@@ -204,7 +204,7 @@
     <string name="data_saver_mode_summary">Ignorar miniaturas e outras imagens</string>
     <string name="search_history_summary">Lembrar buscas</string>
     <string name="history_summary">Histórico de buscas e exibição</string>
-    <string name="watch_positions_title">Lembrar posição de reprodução</string>
+    <string name="watch_positions_title">Reprodução organizada</string>
     <string name="system_caption_style">Estilo de legenda do sistema</string>
     <string name="captions">Legendas</string>
     <string name="none">Nenhum</string>
