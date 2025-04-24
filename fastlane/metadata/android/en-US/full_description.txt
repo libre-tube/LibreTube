@@ -1,1 +1,5 @@
-<i>LibreTube</i> is an alternative frontend for YouTube. It uses the <a href='https://github.com/TeamPiped/Piped' target='_blank' rel='nofollow'>Piped</a> API to load data and play videos and thus needs no YT account and no Google Services on your device.
+<i>LibreTube</i> is an alternative frontend for YouTube, focusing on user privacy and better watching experience. It doesn't require any YouTube account or Google Services installed on your device.
+<br />
+In comparison to YouTube, LibreTube has some additional features like SponsorBlock, DeArrow, Subscription Groups, Playlist bookmarks, and many more. Apart from that, you can subscribe to channels and create private playlists just as you're used to from YouTube.
+<br />
+LibreTube optionally allows you to use <a href='https://github.com/TeamPiped/Piped' target='_blank' rel='nofollow'>Piped</a> to load data and play videos for better privacy as well as syncing your subscriptions and playlists between different devices.
