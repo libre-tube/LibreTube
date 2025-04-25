@@ -126,6 +126,13 @@ class InstanceSettings : BasePreferenceFragment() {
                 .show(childFragmentManager, DeleteAccountDialog::class.java.name)
             true
         }
+
+        findPreference<SwitchPreferenceCompat>(PreferenceKeys.FULL_LOCAL_MODE)?.setOnPreferenceChangeListener { _, newValue ->
+            // when the full local mode gets enabled, the fetch instance is no longer used and replaced
+            // fully by local extraction. thus, the user has to be logged out from the fetch instance
+            if (newValue == true && !authInstanceToggle.isChecked) logoutAndUpdateUI()
+            true
+        }
     }
 
     private suspend fun initInstancesPref(
