@@ -46,6 +46,7 @@ import com.github.libretube.ui.models.CommonPlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.util.PlayingQueue
+import com.github.libretube.util.deArrow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -391,7 +392,9 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
             val response = try {
                 withContext(Dispatchers.IO) {
                     // load locally stored playlists with the auth api
-                    MediaServiceRepository.instance.getPlaylistNextPage(playlistId, nextPage!!)
+                    MediaServiceRepository.instance.getPlaylistNextPage(playlistId, nextPage!!).apply {
+                        relatedStreams = relatedStreams.deArrow()
+                    }
                 }
             } catch (e: Exception) {
                 context?.toastFromMainDispatcher(e.localizedMessage.orEmpty())
