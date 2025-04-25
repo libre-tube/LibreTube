@@ -35,6 +35,7 @@ import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.YoutubeHlsPlaylistParser
+import com.github.libretube.util.deArrow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -126,7 +127,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
 
         streams = withContext(Dispatchers.IO) {
             try {
-                MediaServiceRepository.instance.getStreams(videoId)
+                MediaServiceRepository.instance.getStreams(videoId).deArrow(videoId)
             } catch (e: IOException) {
                 toastFromMainDispatcher(getString(R.string.unknown_error))
                 return@withContext null

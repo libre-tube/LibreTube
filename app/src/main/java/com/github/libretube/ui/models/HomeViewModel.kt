@@ -78,14 +78,14 @@ class HomeViewModel : ViewModel() {
 
         runSafely(
             onSuccess = { videos -> trending.updateIfChanged(videos) },
-            ioBlock = { MediaServiceRepository.instance.getTrending(region).deArrow().take(10) }
+            ioBlock = { MediaServiceRepository.instance.getTrending(region).take(10).deArrow() }
         )
     }
 
     private suspend fun loadFeed(subscriptionsViewModel: SubscriptionsViewModel) {
         runSafely(
             onSuccess = { videos -> feed.updateIfChanged(videos) },
-            ioBlock = { tryLoadFeed(subscriptionsViewModel).deArrow().take(20) }
+            ioBlock = { tryLoadFeed(subscriptionsViewModel).take(20).deArrow() }
         )
     }
 
