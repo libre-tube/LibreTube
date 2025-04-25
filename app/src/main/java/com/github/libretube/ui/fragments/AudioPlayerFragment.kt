@@ -471,10 +471,7 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
         val current = PlayingQueue.getCurrent() ?: return
         VideoOptionsBottomSheet()
             .apply {
-                arguments = bundleOf(
-                    IntentData.streamItem to current,
-                    IntentData.isCurrentlyPlaying to true
-                )
+                arguments = bundleOf(IntentData.streamItem to current)
             }
             .show(childFragmentManager)
     }

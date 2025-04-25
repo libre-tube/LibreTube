@@ -60,7 +60,8 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
         }
 
         binding.watchHistoryRecView.setOnDismissListener { position ->
-            val item = viewModel.filteredWatchHistory.value?.getOrNull(position) ?: return@setOnDismissListener
+            val item = viewModel.filteredWatchHistory.value?.getOrNull(position)
+                ?: return@setOnDismissListener
             viewModel.removeFromHistory(item)
         }
 

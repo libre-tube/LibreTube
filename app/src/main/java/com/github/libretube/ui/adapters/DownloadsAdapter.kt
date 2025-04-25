@@ -137,8 +137,7 @@ class DownloadsAdapter(
                 DownloadOptionsBottomSheet()
                     .apply {
                         arguments = bundleOf(
-                            IntentData.videoId to download.videoId,
-                            IntentData.channelName to download.uploader,
+                            IntentData.streamItem to download.toStreamItem(),
                             IntentData.downloadTab to downloadTab
                         )
                     }

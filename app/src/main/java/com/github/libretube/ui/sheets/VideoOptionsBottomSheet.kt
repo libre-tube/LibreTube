@@ -24,6 +24,7 @@ import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.fragments.SubscriptionsFragment
 import com.github.libretube.util.PlayingQueue
+import com.github.libretube.util.PlayingQueueMode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -35,18 +36,17 @@ import kotlinx.coroutines.withContext
  */
 class VideoOptionsBottomSheet : BaseBottomSheet() {
     private lateinit var streamItem: StreamItem
-    private var isCurrentlyPlaying = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         streamItem = arguments?.parcelable(IntentData.streamItem)!!
-        isCurrentlyPlaying = arguments?.getBoolean(IntentData.isCurrentlyPlaying) ?: false
 
         val videoId = streamItem.url?.toID() ?: return
 
         setTitle(streamItem.title)
 
         val optionsList = mutableListOf<Int>()
-        if (!isCurrentlyPlaying) {
+        // these options are only available for other videos than the currently playing one
+        if (PlayingQueue.getCurrent()?.url?.toID() != videoId) {
             optionsList += getOptionsForNotActivePlayback(videoId)
         }
 
@@ -136,7 +136,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
         val optionsList = mutableListOf(R.string.playOnBackground)
 
         // Check whether the player is running and add queue options
-        if (PlayingQueue.isNotEmpty()) {
+        if (PlayingQueue.isNotEmpty() && PlayingQueue.queueMode == PlayingQueueMode.ONLINE) {
             optionsList += R.string.play_next
             optionsList += R.string.add_to_queue
         }
