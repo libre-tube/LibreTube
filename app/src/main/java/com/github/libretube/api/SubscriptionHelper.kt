@@ -28,8 +28,8 @@ object SubscriptionHelper {
     private val token get() = PreferenceHelper.getToken()
     private val subscriptionsRepository: SubscriptionsRepository
         get() = when {
-            localFeedExtraction -> LocalSubscriptionsRepository()
             token.isNotEmpty() -> AccountSubscriptionsRepository()
+            localFeedExtraction -> LocalSubscriptionsRepository()
             else -> PipedLocalSubscriptionsRepository()
         }
     private val feedRepository: FeedRepository
