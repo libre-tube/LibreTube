@@ -37,6 +37,7 @@ import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PauseableTimer
 import com.github.libretube.util.PlayingQueue
+import com.github.libretube.util.PlayingQueueMode
 import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -100,6 +101,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
                 Player.STATE_ENDED -> {
                     saveWatchPosition()
                 }
+
                 Player.STATE_READY -> {
                     isTransitioning = false
                 }
@@ -115,6 +117,9 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     ): ListenableFuture<SessionResult> {
         when (customCommand.customAction) {
             START_SERVICE_ACTION -> {
+                PlayingQueue.queueMode =
+                    if (isOfflinePlayer) PlayingQueueMode.OFFLINE else PlayingQueueMode.ONLINE
+
                 CoroutineScope(Dispatchers.IO).launch {
                     onServiceCreated(args)
                     withContext(Dispatchers.Main) {
@@ -262,8 +267,9 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     abstract val isOfflinePlayer: Boolean
     var isAudioOnlyPlayer: Boolean = false
 
-    val watchPositionsEnabled get() =
-        (PlayerHelper.watchPositionsAudio && isAudioOnlyPlayer) || (PlayerHelper.watchPositionsVideo && !isAudioOnlyPlayer)
+    val watchPositionsEnabled
+        get() =
+            (PlayerHelper.watchPositionsAudio && isAudioOnlyPlayer) || (PlayerHelper.watchPositionsVideo && !isAudioOnlyPlayer)
 
     override fun onGetSession(controllerInfo: MediaSession.ControllerInfo): MediaLibrarySession? =
         mediaLibrarySession

@@ -18,6 +18,12 @@ object PlayingQueue {
 
     private val queueJobs = mutableListOf<Job>()
 
+    /**
+     * Current use case of the queue. Do NOT add any offline videos while the [queueMode] is online
+     * or vice versa.
+     */
+    var queueMode: PlayingQueueMode = PlayingQueueMode.ONLINE
+
     // wrapper around PlayerHelper#repeatMode for compatibility
     var repeatMode: Int
         get() = PlayerHelper.repeatMode
@@ -221,4 +227,9 @@ object PlayingQueue {
 
         add(*streams.filter { !it.isLive }.toTypedArray(), skipExisting = true)
     }
+}
+
+enum class PlayingQueueMode {
+    ONLINE,
+    OFFLINE
 }
