@@ -62,7 +62,7 @@ fun TextView.setupSubscriptionButton(
                     updateUIStateAndNotifyObservers()
                 }
 
-                if (!PreferenceHelper.getBoolean(PreferenceKeys.CONFIRM_UNSUBSCRIBE, false)) {
+                if (PreferenceHelper.getBoolean(PreferenceKeys.CONFIRM_UNSUBSCRIBE, false)) {
                     showUnsubscribeDialog(context, channelName) {
                         CoroutineScope(Dispatchers.Main).launch { unsubscribeAction() }
                     }
