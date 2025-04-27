@@ -162,7 +162,7 @@ class SearchResultsAdapter(
             binding.searchSubButton.setupSubscriptionButton(
                 item.url.toID(),
                 item.name.orEmpty(),
-                item.uploaderAvatar,
+                item.thumbnail,
                 item.uploaderVerified ?: false
             ) {
                 subscribed = it
