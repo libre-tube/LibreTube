@@ -158,8 +158,6 @@
     <string name="show_updates">Check updates automatically</string>
     <string name="related_streams">Related content</string>
     <string name="related_streams_summary">Show similar streams alongside what you watch</string>
-    <string name="buffering_goal">Preloading</string>
-    <string name="buffering_goal_summary">Max. amount of seconds of video to buffer</string>
     <string name="playerVideoFormat">Video format for player</string>
     <string name="no_audio">No audio</string>
     <string name="no_video">No video</string>

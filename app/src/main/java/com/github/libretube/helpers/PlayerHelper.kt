@@ -188,12 +188,6 @@ object PlayerHelper {
             false
         )
 
-    private val bufferingGoal: Int
-        get() = PreferenceHelper.getString(
-            PreferenceKeys.BUFFERING_GOAL,
-            "50"
-        ).toInt() * 1000
-
     val sponsorBlockEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             "sb_enabled_key",
