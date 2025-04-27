@@ -162,7 +162,7 @@
     <string name="github">GitHub</string>
     <string name="pauseOnScreenOff_summary">當熒幕關閉時暫停播放</string>
     <string name="watch_positions">記錄上次播放的位置</string>
-    <string name="audio_video">音影片</string>
+    <string name="audio_video">音訊和影片</string>
     <string name="no_audio">無音訊</string>
     <string name="no_video">無視訊</string>
     <string name="clonePlaylist">複製播放清單</string>
@@ -232,7 +232,7 @@
     <string name="watch_history_summary">於本機儲存影片觀看歷史</string>
     <string name="history_summary">觀看和搜尋歷史</string>
     <string name="playerAudioQuality">音訊品質</string>
-    <string name="captions_size">說明文字大小</string>
+    <string name="captions_size">字幕大小</string>
     <string name="skip_buttons_summary">顯示按鈕，跳至上一部或下一部影片</string>
     <string name="take_a_break">是時候休息一下了</string>
     <string name="maximum_image_cache">最大圖片快取大小</string>
@@ -282,10 +282,10 @@
     <string name="defaults">預設</string>
     <string name="general_summary">語言和地區</string>
     <string name="worst_quality">最差</string>
-    <string name="caption_settings">說明文字</string>
+    <string name="caption_settings">字幕</string>
     <string name="least_recent">最舊</string>
     <string name="network_metered">監測</string>
-    <string name="captions">說明文字</string>
+    <string name="captions">字幕</string>
     <string name="network_wifi">僅限Wifi</string>
     <string name="checking_frequency">檢查頻率…</string>
     <string name="most_views">最多觀看</string>
@@ -307,7 +307,7 @@
     <string name="aspect_ratio">影片比例</string>
     <string name="auto_rotation">自動旋轉</string>
     <string name="landscape">橫向</string>
-    <string name="pinch_control">調整音高</string>
+    <string name="pinch_control">縮放控制</string>
     <string name="play_latest_videos">播放最新影片</string>
     <string name="audio_track">音訊曲目</string>
     <string name="export_subscriptions">匯出訂閱播放清單</string>
