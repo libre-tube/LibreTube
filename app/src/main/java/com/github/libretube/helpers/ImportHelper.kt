@@ -110,7 +110,7 @@ object ImportHelper {
         when (importFormat) {
             ImportFormat.NEWPIPE -> {
                 val newPipeChannels = subs.map {
-                    NewPipeSubscription(it.name, 0, "$YOUTUBE_FRONTEND_URL${it.url}")
+                    NewPipeSubscription(it.name, 0, "$YOUTUBE_FRONTEND_URL/channel/${it.url}")
                 }
                 val newPipeSubscriptions = NewPipeSubscriptions(subscriptions = newPipeChannels)
                 activity.contentResolver.openOutputStream(uri)?.use {
@@ -123,7 +123,7 @@ object ImportHelper {
                     FreetubeSubscription(
                         it.name,
                         "",
-                        "$YOUTUBE_FRONTEND_URL${it.url}"
+                        "$YOUTUBE_FRONTEND_URL/channel/${it.url}"
                     )
                 }
                 val freeTubeSubscriptions = FreetubeSubscriptions(subscriptions = freeTubeChannels)
