@@ -190,7 +190,7 @@
     <string name="category_highlight_summary">Kan antingen vara den annonserade titeln, förhandsbilden eller den intressantaste delen av videon. Du kan hoppa till den genom att trycka på den i kapitelavsnittet</string>
     <string name="notification_time_summary">Begränsa hur länge sändningsnotifikationer visas</string>
     <string name="show_stream_thumbnails">Visa förhandsbilder för sändningar</string>
-    <string name="instance_frontend_url">URL till instansens frontend</string>
+    <string name="instance_frontend_url">URL till instansens frontend (valfritt)</string>
     <string name="audio_video">Ljud och video</string>
     <string name="data_saver_mode">Datasparläge</string>
     <string name="fullscreen_orientation">Orientering i helskärm</string>
@@ -279,7 +279,7 @@
     <string name="disable_proxy">Inaktivera Piped-proxyn</string>
     <string name="player_resize_mode">Ändra storlek</string>
     <string name="renamePlaylist">Byt namn på spellistan</string>
-    <string name="hls_instead_of_dash_summary">Använd HLS istället för DASH (kommer vara långsammare, rekommenderas inte)</string>
+    <string name="hls_instead_of_dash_summary">Använd HLS istället för DASH för strömmande media. Försök att aktivera det här alternativet om videouppspelningen inte fungerar.</string>
     <string name="playlist_description">Beskrivning av spellista</string>
     <string name="copied_to_clipboard">Kopierad till urklipp</string>
     <string name="trending">Trendigt just nu</string>
@@ -554,4 +554,9 @@
     <string name="show_upcoming_videos">Visa kommande videor</string>
     <string name="export_playlist">Exportera spellista</string>
     <string name="crashlog">Kraschlogg</string>
+    <string name="mode_of_operation">Funktionssätt</string>
+    <string name="updating_feed">Uppdaterar flöde …</string>
+    <string name="full_local_mode">Fullständigt lokalt läge</string>
+    <string name="full_local_mode_desc">Hämta allt direkt från YouTube, utan att använda Piped.</string>
+    <string name="authentication">Autentisering</string>
 </resources>
