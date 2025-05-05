@@ -55,29 +55,27 @@ object ThemeHelper {
      * Set the theme, including accent color and night mode
      */
     fun updateTheme(activity: AppCompatActivity) {
-        val themeMode = PreferenceHelper.getString(PreferenceKeys.THEME_MODE, "A")
+        var accentColor = PreferenceHelper.getString(PreferenceKeys.ACCENT_COLOR, "")
+        if (accentColor.isEmpty()) {
+            accentColor = if (DynamicColors.isDynamicColorAvailable()) "my" else "blue"
+            PreferenceHelper.putString(PreferenceKeys.ACCENT_COLOR, accentColor)
+        }
 
-        updateAccentColor(activity)
-        applyPureThemeIfEnabled(activity)
-        updateThemeMode(themeMode)
+        activity.setTheme(getTheme(accentColor))
+        if (accentColor == "my") DynamicColors.applyToActivityIfAvailable(activity)
+
+        val pureThemeEnabled = PreferenceHelper.getBoolean(
+            PreferenceKeys.PURE_THEME,
+            false
+        )
+        if (pureThemeEnabled) activity.theme.applyStyle(R.style.Pure, true)
     }
 
     /**
      * Update the accent color of the app and apply dynamic colors if needed
      */
-    private fun updateAccentColor(activity: AppCompatActivity) {
-        var accentColor = PreferenceHelper.getString(PreferenceKeys.ACCENT_COLOR, "")
-
-        // automatically choose an accent color on the first app startup
-        if (accentColor.isEmpty()) {
-            accentColor = when (DynamicColors.isDynamicColorAvailable()) {
-                true -> "my"
-                else -> "blue"
-            }
-            PreferenceHelper.putString(PreferenceKeys.ACCENT_COLOR, accentColor)
-        }
-
-        val theme = when (accentColor) {
+    private fun getTheme(accentColor: String): Int {
+        return when (accentColor) {
             // set the accent color, use the pure black/white theme if enabled
             "my" -> R.style.BaseTheme
             "red" -> R.style.Theme_Red
@@ -89,20 +87,6 @@ object ThemeHelper {
             "violet" -> R.style.Theme_Violet
             else -> throw IllegalArgumentException()
         }
-        activity.setTheme(theme)
-        // apply dynamic wallpaper based colors
-        if (accentColor == "my") DynamicColors.applyToActivityIfAvailable(activity)
-    }
-
-    /**
-     * apply the pure black/white theme
-     */
-    private fun applyPureThemeIfEnabled(activity: Activity) {
-        val pureThemeEnabled = PreferenceHelper.getBoolean(
-            PreferenceKeys.PURE_THEME,
-            false
-        )
-        if (pureThemeEnabled) activity.theme.applyStyle(R.style.Pure, true)
     }
 
     fun applyDialogActivityTheme(activity: Activity) {
@@ -112,14 +96,13 @@ object ThemeHelper {
     /**
      * set the theme mode (light, dark, auto)
      */
-    private fun updateThemeMode(themeMode: String) {
-        val mode = when (themeMode) {
+    fun getThemeMode(themeMode: String): Int {
+        return when (themeMode) {
             "A" -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
             "L" -> AppCompatDelegate.MODE_NIGHT_NO
             "D" -> AppCompatDelegate.MODE_NIGHT_YES
             else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
         }
-        AppCompatDelegate.setDefaultNightMode(mode)
     }
 
     /**
