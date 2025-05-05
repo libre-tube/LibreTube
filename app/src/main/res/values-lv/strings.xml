@@ -418,7 +418,7 @@
     <string name="donate">Ziedot</string>
     <string name="finished">Pabeigts</string>
     <string name="comments_count">Komentāri (%1$s)</string>
-    <string name="music_artists">YT Music izpildītāji</string>
+    <string name="music_artists">YT Music Izpildītāji</string>
     <string name="sponsorblock_user_id">SponsorBlock lietotāja ID</string>
     <string name="import_format_list_of_urls">URL vai video ID saraksts</string>
     <string name="filename_too_long">Datnes nosaukums ir pārāk garš!</string>
@@ -456,4 +456,5 @@
     <string name="visibility_public">Publisks</string>
     <string name="autoplay_playlists_summary">Automātiski atskaņot nākamo video atskaņošanas sarakstos neatkarīgi no atlasītā automātiskās atskaņošanas iestatījuma</string>
     <string name="import_temp_playlist_summary">Vai vēlaties izveidot jaunu atskaņošanas sarakstu ar \'%1$s\' nosaukumu? Šajā atskaņošanas sarakstā būs %2$d video.</string>
+    <string name="category_highlight">Rādīt video izceltos momentus</string>
 </resources>
