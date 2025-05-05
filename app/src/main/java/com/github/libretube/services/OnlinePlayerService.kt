@@ -22,6 +22,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.enums.PlayerCommand
+import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toastFromMainDispatcher
@@ -219,7 +220,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
             sponsorBlockSegments = MediaServiceRepository.instance.getSegments(
                 videoId,
                 sponsorBlockConfig.keys.toList(),
-                listOf("skip","mute","full","poi","chapter")
+                listOf("skip", "mute", "full", "poi", "chapter")
             ).segments
 
             withContext(Dispatchers.Main) {
@@ -241,12 +242,17 @@ open class OnlinePlayerService : AbstractPlayerService() {
     private fun checkForSegments() {
         handler.postDelayed(this::checkForSegments, 100)
 
-        exoPlayer?.checkForSegments(
-            this,
+        val (currentSegment, sbSkipOption) = exoPlayer?.checkForSegments(
             sponsorBlockSegments,
-            sponsorBlockConfig,
-            skipAutomaticallyIfEnabled = sponsorBlockAutoSkip
-        )
+            sponsorBlockConfig
+        ) ?: return
+
+        if (sbSkipOption in arrayOf(SbSkipOptions.AUTOMATIC, SbSkipOptions.AUTOMATIC_ONCE)) {
+            exoPlayer?.seekTo(currentSegment.segmentStartAndEnd.second.toLong() * 1000)
+            currentSegment.skipped = true
+
+            if (PlayerHelper.sponsorBlockNotifications) toastFromMainThread(R.string.segment_skipped)
+        }
     }
 
     override fun runPlayerCommand(args: Bundle) {
