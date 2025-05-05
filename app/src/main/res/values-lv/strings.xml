@@ -25,7 +25,7 @@
     <string name="save">Saglabāt</string>
     <string name="subscriptions">Abonementi</string>
     <string name="library">Bibliotēka</string>
-    <string name="unsubscribe">Abonēts</string>
+    <string name="unsubscribe">Pārtraukt abonementu</string>
     <string name="username">Lietotājvārds</string>
     <string name="login">Pierakstīties</string>
     <string name="cancel">Atcelt</string>
@@ -111,7 +111,7 @@
     <string name="shapedIcon">Formu</string>
     <string name="birdIcon">Putna</string>
     <string name="legacyIcon">Vecā</string>
-    <string name="update_available">%1$s versija ir pieejama</string>
+    <string name="update_available">Pieejams atjauninājums</string>
     <string name="update_available_text">Ir pieejams jauns atjauninājums. Noklikšķiniet, lai atvērtu GitHub laidienu lapu.</string>
     <string name="appearance">Izskats</string>
     <string name="downloads">Lejupielādes</string>
@@ -210,7 +210,7 @@
     <string name="notifications">Notifikācijas</string>
     <string name="notify_new_streams">Rādīt jauna satura notifikācijas</string>
     <string name="notify_new_streams_summary">Rādīt notifikācijas par jaunu saturu no veidotājiem, kuriem jūs sekojat</string>
-    <string name="irreversible">Vai esat pārliecināts? Šī darbība ir neatgriezeniska.</string>
+    <string name="irreversible">Vai tiešām? Šī darbība ir neatgriezeniska!</string>
     <string name="most_recent">Jaunākie</string>
     <string name="least_recent">Senākie</string>
     <string name="most_views">Skatītākie</string>
@@ -235,7 +235,7 @@
     <string name="add_to_queue">Pievienot rindai</string>
     <string name="misc">Citi</string>
     <string name="take_a_break">Laiks pārtraukumam</string>
-    <string name="yt_shorts">Shorts</string>
+    <string name="yt_shorts">Īsie video</string>
     <string name="resize_mode_fill">Piepildīt</string>
     <string name="no_subtitles_available">Subtitri nav pieejami</string>
     <string name="resize_mode_zoom">Pietuvināt</string>
@@ -386,7 +386,7 @@
     <string name="new_group">Jauns</string>
     <string name="group_name">Kopas nosaukums</string>
     <string name="channel_groups">Kanālu kopas</string>
-    <string name="disable_proxy_summary">Lādēt video un attēlus tieši no YouTube serveriem. Ieslēdziet tikai tad, ja jūs izmantojat VPN! Šī opcija var nestrādāt saturam no YouTube Music.</string>
+    <string name="disable_proxy_summary">Lādēt video un attēlus tieši no YouTube serveriem. Ieslēdziet tikai tad, ja jūs vienmēr izmantojiet VPN</string>
     <string name="duration">Ilgums</string>
     <string name="duration_reversed">Ilgums (apgriezts)</string>
     <string name="creation_date">Izveidošanas datums</string>
@@ -418,4 +418,5 @@
     <string name="donate">Ziedot</string>
     <string name="finished">Pabeigts</string>
     <string name="comments_count">Komentāri (%1$s)</string>
+    <string name="music_artists">YT Music izpildītāji</string>
 </resources>
