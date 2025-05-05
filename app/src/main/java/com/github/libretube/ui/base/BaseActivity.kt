@@ -5,11 +5,13 @@ import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ThemeHelper
+import com.github.libretube.helpers.ThemeHelper.getThemeMode
 import com.github.libretube.helpers.WindowHelper
 import java.util.Locale
 
@@ -62,6 +64,9 @@ open class BaseActivity : AppCompatActivity() {
 
         val configuration = Configuration().apply {
             setLocale(locale)
+
+            val uiPref = PreferenceHelper.getString(PreferenceKeys.THEME_MODE, "A")
+            AppCompatDelegate.setDefaultNightMode(getThemeMode(uiPref))
         }
 
         applyOverrideConfiguration(configuration)
