@@ -1,7 +1,6 @@
 package com.github.libretube.api
 
 import android.util.Base64
-import com.github.libretube.api.poToken.PoTokenGenerator
 import com.github.libretube.api.obj.Channel
 import com.github.libretube.api.obj.ChannelTab
 import com.github.libretube.api.obj.ChannelTabResponse
@@ -48,7 +47,6 @@ import org.schabi.newpipe.extractor.localization.ContentCountry
 import org.schabi.newpipe.extractor.playlist.PlaylistInfo
 import org.schabi.newpipe.extractor.playlist.PlaylistInfoItem
 import org.schabi.newpipe.extractor.search.SearchInfo
-import org.schabi.newpipe.extractor.services.youtube.extractors.YoutubeStreamExtractor
 import org.schabi.newpipe.extractor.stream.AudioStream
 import org.schabi.newpipe.extractor.stream.StreamInfo
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
@@ -241,7 +239,8 @@ fun String.toListLinkHandler() = with(JsonHelper.json.decodeFromString<TabData>(
 class NewPipeMediaServiceRepository : MediaServiceRepository {
 
     init {
-        YoutubeStreamExtractor.setPoTokenProvider(PoTokenGenerator());
+        // TODO: implement SABR support and re-enable PoTokens afterwards
+        // YoutubeStreamExtractor.setPoTokenProvider(PoTokenGenerator());
     }
 
     override suspend fun getTrending(region: String): List<StreamItem> {
