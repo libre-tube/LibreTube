@@ -41,7 +41,6 @@ import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.extensions.seekBy
-import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.obj.VideoStats
@@ -50,7 +49,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.Locale
-import kotlin.math.absoluteValue
 import kotlin.math.max
 import kotlin.math.roundToInt
 
@@ -199,7 +197,7 @@ object PlayerHelper {
             true
         )
 
-    private val sponsorBlockNotifications: Boolean
+    val sponsorBlockNotifications: Boolean
         get() = PreferenceHelper.getBoolean(
             "sb_notifications_key",
             true
@@ -586,44 +584,29 @@ object PlayerHelper {
 
     /**
      * Check for SponsorBlock segments matching the current player position
-     * @param context A main dispatcher context
+     * Please make sure to set [Segment#skipped] to true after seeking to the segment end
+     *
      * @param segments List of the SponsorBlock segments
      * @return If segment found and should skip manually, the end position of the segment in ms, otherwise null
      */
     fun Player.checkForSegments(
-        context: Context,
         segments: List<Segment>,
         sponsorBlockConfig: MutableMap<String, SbSkipOptions>,
-        skipAutomaticallyIfEnabled: Boolean
-    ): Segment? {
+    ): Pair<Segment, SbSkipOptions>? {
         for (segment in segments.filter { it.category != SPONSOR_HIGHLIGHT_CATEGORY }) {
             val (start, end) = segment.segmentStartAndEnd
             val (segmentStart, segmentEnd) = (start * 1000f).toLong() to (end * 1000f).toLong()
 
             // avoid seeking to the same segment multiple times, e.g. when the SB segment is at the end of the video
-            if ((duration - currentPosition).absoluteValue < 500) continue
+            if (segmentEnd - currentPosition in 0..1000) continue
             if (currentPosition !in segmentStart until segmentEnd) continue
 
             val key = sponsorBlockConfig[segment.category]
+            if (key == SbSkipOptions.AUTOMATIC_ONCE && segment.skipped) continue
 
-            if (!skipAutomaticallyIfEnabled || key == SbSkipOptions.MANUAL ||
-                (key == SbSkipOptions.AUTOMATIC_ONCE && segment.skipped)
-            ) {
-                return segment
-            } else if (key == SbSkipOptions.AUTOMATIC ||
-                (key == SbSkipOptions.AUTOMATIC_ONCE && !segment.skipped)
-            ) {
-                if (sponsorBlockNotifications) {
-                    runCatching {
-                        context.toastFromMainThread(R.string.segment_skipped)
-                    }
-                }
-                seekTo(segmentEnd)
-                segment.skipped = true
-            } else {
-                return null
-            }
+            return segment to (key ?: SbSkipOptions.AUTOMATIC)
         }
+
         return null
     }
 

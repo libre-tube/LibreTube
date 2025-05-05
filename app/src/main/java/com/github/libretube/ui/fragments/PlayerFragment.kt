@@ -63,6 +63,7 @@ import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.enums.PlayerEvent
+import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.parcelable
@@ -504,7 +505,10 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         BackgroundHelper.startMediaService(
             requireContext(),
             OnlinePlayerService::class.java,
-            if (startNewSession) bundleOf(IntentData.playerData to playerData, IntentData.audioOnly to false) else Bundle.EMPTY,
+            if (startNewSession) bundleOf(
+                IntentData.playerData to playerData,
+                IntentData.audioOnly to false
+            ) else Bundle.EMPTY,
         ) {
             if (_binding == null) {
                 playerController.sendCustomCommand(
@@ -1004,25 +1008,24 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         if (viewModel.segments.value.isNullOrEmpty()) return
 
         playerController.checkForSegments(
-            requireContext(),
             viewModel.segments.value.orEmpty(),
-            viewModel.sponsorBlockConfig,
-            // skipping is done by player service
-            skipAutomaticallyIfEnabled = false
-        )
-            ?.let { segment ->
-                if (commonPlayerViewModel.isMiniPlayerVisible.value == true) return@let
+            viewModel.sponsorBlockConfig
+        )?.let { (segment, sbSkipOption) ->
+            if (commonPlayerViewModel.isMiniPlayerVisible.value == true) return@let
 
+            if (sbSkipOption in arrayOf(SbSkipOptions.AUTOMATIC_ONCE, SbSkipOptions.MANUAL)) {
                 binding.sbSkipBtn.isVisible = true
                 binding.sbSkipBtn.setOnClickListener {
                     playerController.seekTo((segment.segmentStartAndEnd.second * 1000f).toLong())
                     segment.skipped = true
                 }
-                return
             }
+            return
+        }
 
-        if (!playerController.isInSegment(viewModel.segments.value.orEmpty())) binding.sbSkipBtn.isGone =
-            true
+        if (!playerController.isInSegment(viewModel.segments.value.orEmpty())) {
+            binding.sbSkipBtn.isGone = true
+        }
     }
 
     private fun setPlayerDefaults() {
