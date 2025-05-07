@@ -210,7 +210,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
      * Update the [videoId] to the new videoId and change the playlist metadata
      * to reflect that videoId change
      */
-    protected fun setVideoId(videoId: String) {
+    protected open fun setVideoId(videoId: String) {
         this.videoId = videoId
 
         updatePlaylistMetadata {
