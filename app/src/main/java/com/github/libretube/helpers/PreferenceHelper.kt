@@ -96,24 +96,24 @@ object PreferenceHelper {
         authSettings.edit { putString(PreferenceKeys.USERNAME, newValue) }
     }
 
-    fun setLastSeenVideoId(videoId: String) {
-        putString(PreferenceKeys.LAST_STREAM_VIDEO_ID, videoId)
-    }
-
-    fun getLastSeenVideoId(): String {
-        return getString(PreferenceKeys.LAST_STREAM_VIDEO_ID, "")
-    }
-
-    fun updateLastFeedWatchedTime(time: Long) {
+    fun updateLastFeedWatchedTime(time: Long, seenByUser: Boolean) {
         // only update the time if the time is newer
         // this avoids cases, where the user last saw an older video, which had already been seen,
         // causing all following video to be incorrectly marked as unseen again
-        if (getLastCheckedFeedTime() < time)
-            putLong(PreferenceKeys.LAST_WATCHED_FEED_TIME, time)
+        if (getLastCheckedFeedTime(false) < time)
+            putLong(PreferenceKeys.LAST_REFRESHED_FEED_TIME, time)
+
+        // this value holds the last time the user opened the subscriptions feed
+        // whereas [LAST_REFRESHED_FEED_TIME] considers the last time the feed was loaded,
+        // which could also be possible in the background (e.g. via notifications)
+        if (seenByUser && getLastCheckedFeedTime(true) < time)
+            putLong(PreferenceKeys.LAST_USER_SEEN_FEED_TIME, time)
     }
 
-    fun getLastCheckedFeedTime(): Long {
-        return getLong(PreferenceKeys.LAST_WATCHED_FEED_TIME, 0)
+    fun getLastCheckedFeedTime(seenByUser: Boolean): Long {
+        val key =
+            if (seenByUser) PreferenceKeys.LAST_USER_SEEN_FEED_TIME else PreferenceKeys.LAST_REFRESHED_FEED_TIME
+        return getLong(key, 0)
     }
 
     fun saveErrorLog(log: String) {

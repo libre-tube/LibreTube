@@ -83,18 +83,15 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
         val videoFeed = try {
             withContext(Dispatchers.IO) {
                 SubscriptionHelper.getFeed(forceRefresh = true)
-            }
+            }.filter { !it.isUpcoming }
         } catch (e: Exception) {
             return false
         }
 
-        val lastUserSeenVideoId = PreferenceHelper.getLastSeenVideoId()
-        val mostRecentStreamId = videoFeed.firstOrNull()?.url?.toID() ?: return true
-        // save the latest streams that got notified about
-        PreferenceHelper.setLastSeenVideoId(mostRecentStreamId)
+        val lastFeedCheckMillis = PreferenceHelper.getLastCheckedFeedTime(seenByUser = false)
 
         // first time notifications are enabled or no new video available
-        if (lastUserSeenVideoId.isEmpty() || lastUserSeenVideoId == mostRecentStreamId) return true
+        if (lastFeedCheckMillis == 0L || videoFeed.none { it.uploaded > lastFeedCheckMillis }) return true
 
         val channelsToIgnore = PreferenceHelper.getIgnorableNotificationChannels()
         val enableShortsNotification =
@@ -102,13 +99,16 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
 
         val channelGroups = videoFeed.asSequence()
             // filter the new videos until the last seen video in the feed
-            .takeWhile { it.url!!.toID() != lastUserSeenVideoId }
+            .filter { it.uploaded > lastFeedCheckMillis }
             // don't show notifications for shorts videos if not enabled
             .filter { enableShortsNotification || !it.isShort }
             // hide for notifications unsubscribed channels
             .filter { it.uploaderUrl!!.toID() !in channelsToIgnore }
             // group the new streams by the uploader
             .groupBy { it.uploaderUrl!!.toID() }
+
+        // update the last feed check time in order to not show the same notification again
+        PreferenceHelper.updateLastFeedWatchedTime(videoFeed.first().uploaded, seenByUser = false)
 
         // return if the previous video didn't get found or all the channels have notifications disabled
         if (channelGroups.isEmpty()) return true
@@ -226,6 +226,6 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
 
     companion object {
         private const val INTENT_FLAGS = Intent.FLAG_ACTIVITY_CLEAR_TOP or
-            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     }
 }

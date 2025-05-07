@@ -140,11 +140,13 @@ object PreferenceKeys {
 
     // Internally saved data / not a preference
     const val ERROR_LOG = "error_log"
-    const val LAST_STREAM_VIDEO_ID = "last_stream_video_id"
-    const val LAST_WATCHED_FEED_TIME = "last_watched_feed_time"
     const val AUTH_PREF_FILE = "auth"
     const val IMAGE_PROXY_URL = "image_proxy_url"
     const val SELECTED_CHANNEL_GROUP = "selected_channel_group"
     const val SELECTED_DOWNLOAD_SORT_TYPE = "selected_download_sort_type"
     const val LAST_SHOWN_INFO_MESSAGE_VERSION_CODE = "last_shown_info_message_version"
+
+    // use the helper methods at PreferenceHelper to access these
+    const val LAST_USER_SEEN_FEED_TIME = "last_watched_feed_time"
+    const val LAST_REFRESHED_FEED_TIME = "last_refreshed_feed_time"
 }

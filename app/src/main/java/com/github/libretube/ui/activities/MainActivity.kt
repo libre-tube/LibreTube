@@ -37,7 +37,6 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.enums.ImportFormat
-import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ImportHelper
 import com.github.libretube.helpers.IntentHelper
 import com.github.libretube.helpers.NavBarHelper
@@ -240,9 +239,12 @@ class MainActivity : BaseActivity() {
         subscriptionsViewModel.fetchSubscriptions(this)
 
         subscriptionsViewModel.videoFeed.observe(this) { feed ->
+            val lastCheckedFeedTime = PreferenceHelper.getLastCheckedFeedTime(seenByUser = true)
             val lastSeenVideoIndex = feed.orEmpty()
-                .indexOfFirst { PreferenceHelper.getLastSeenVideoId() == it.url?.toID() }
+                .filter { !it.isUpcoming }
+                .indexOfFirst { it.uploaded <= lastCheckedFeedTime }
             if (lastSeenVideoIndex < 1) return@observe
+
             binding.bottomNav.getOrCreateBadge(R.id.subscriptionsFragment).apply {
                 number = lastSeenVideoIndex
                 backgroundColor = ThemeHelper.getThemeColor(
