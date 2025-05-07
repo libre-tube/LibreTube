@@ -60,7 +60,7 @@ class LocalFeedRepository : FeedRepository {
 
             // only refresh if feed is empty or last refresh was more than a day ago
             val lastRefreshMillis =
-                PreferenceHelper.getLong(PreferenceKeys.LAST_FEED_REFRESH_TIMESTAMP_MILLIS, 0)
+                PreferenceHelper.getLong(PreferenceKeys.LAST_LOCAL_FEED_REFRESH_TIMESTAMP_MILLIS, 0)
             if (feed.isNotEmpty() && lastRefreshMillis > oneDayAgo) {
                 return DatabaseHolder.Database.feedDao().getAll()
                     .map(SubscriptionsFeedItem::toStreamItem)
@@ -69,7 +69,7 @@ class LocalFeedRepository : FeedRepository {
 
         DatabaseHolder.Database.feedDao().cleanUpOlderThan(minimumDateMillis)
         refreshFeed(channelIds, minimumDateMillis, onProgressUpdate)
-        PreferenceHelper.putLong(PreferenceKeys.LAST_FEED_REFRESH_TIMESTAMP_MILLIS, nowMillis)
+        PreferenceHelper.putLong(PreferenceKeys.LAST_LOCAL_FEED_REFRESH_TIMESTAMP_MILLIS, nowMillis)
 
         return DatabaseHolder.Database.feedDao().getAll().map(SubscriptionsFeedItem::toStreamItem)
     }
