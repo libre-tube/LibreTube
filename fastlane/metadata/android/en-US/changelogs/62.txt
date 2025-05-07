@@ -1,0 +1,6 @@
+* fix: update NewPipeExtractor fork to latest version to fix playback issues
+* fix: support for adding downloads to playback queue
+* fix: don't block ui thread while filtering watched videos
+* fix: confirm unsubscribe preference only works if disabled instead of enabled
+* fix: channel avatar missing in subscriptions list when subbed from search
+* fix(Backup): use channel URL for subscription export
