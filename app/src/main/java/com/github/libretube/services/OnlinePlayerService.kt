@@ -9,7 +9,6 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaItem.SubtitleConfiguration
 import androidx.media3.common.MimeTypes
 import androidx.media3.common.Player
-import androidx.media3.common.util.Log
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.exoplayer.hls.HlsMediaSource
 import com.github.libretube.R
@@ -160,13 +159,12 @@ open class OnlinePlayerService : AbstractPlayerService() {
         }
 
         withContext(Dispatchers.Main) {
-            playAudio(timestampMs)
+            setStreamSource()
+            configurePlayer(timestampMs)
         }
     }
 
-    private fun playAudio(seekToPositionMs: Long) {
-        setStreamSource()
-
+    private fun configurePlayer(seekToPositionMs: Long) {
         // seek to the previous position if available
         if (seekToPositionMs != 0L) {
             exoPlayer?.seekTo(seekToPositionMs)
@@ -201,10 +199,6 @@ open class OnlinePlayerService : AbstractPlayerService() {
 
         // play new video on background
         setVideoId(nextVideo)
-        this.streams = null
-        this.sponsorBlockSegments = emptyList()
-
-        Log.e("play next", "play next")
 
         scope.launch {
             startPlayback()
@@ -264,6 +258,13 @@ open class OnlinePlayerService : AbstractPlayerService() {
             autoPlayCountdownEnabled =
                 args.getBoolean(PlayerCommand.SET_AUTOPLAY_COUNTDOWN_ENABLED.name)
         }
+    }
+
+    override fun setVideoId(videoId: String) {
+        super.setVideoId(videoId)
+
+        this.streams = null
+        this.sponsorBlockSegments = emptyList()
     }
 
     /**
