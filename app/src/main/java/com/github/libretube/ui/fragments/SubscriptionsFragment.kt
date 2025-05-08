@@ -140,12 +140,16 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         // any other feed updates are caused by manual refreshing and thus should reset the scroll
         // position to zero
         var alreadyShowedFeedOnce = false
-        viewModel.videoFeed.observe(viewLifecycleOwner) {
-            if (!viewModel.isCurrentTabSubChannels && it != null) {
+        viewModel.videoFeed.observe(viewLifecycleOwner) { feed ->
+            if (!viewModel.isCurrentTabSubChannels && feed != null) {
                 lifecycleScope.launch {
                     showFeed(!alreadyShowedFeedOnce)
                 }
                 alreadyShowedFeedOnce = true
+            }
+
+           feed?.firstOrNull { !it.isUpcoming }?.uploaded?.let {
+                PreferenceHelper.updateLastFeedWatchedTime(it, true)
             }
         }
 
@@ -384,7 +388,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
         // add an "all caught up item"
         if (selectedSortOrder == 0) {
-            val lastCheckedFeedTime = PreferenceHelper.getLastCheckedFeedTime()
+            val lastCheckedFeedTime = PreferenceHelper.getLastCheckedFeedTime(seenByUser = true)
             val caughtUpIndex =
                 feed.indexOfFirst { it.uploaded <= lastCheckedFeedTime && !it.isUpcoming }
             if (caughtUpIndex > 0 && !feed[caughtUpIndex - 1].isUpcoming) {
@@ -403,10 +407,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         binding.emptyFeed.isVisible = notLoaded
 
         binding.toggleSubs.text = getString(R.string.subscriptions)
-
-        feed.firstOrNull { !it.isUpcoming }?.uploaded?.let {
-            PreferenceHelper.updateLastFeedWatchedTime(it)
-        }
 
         binding.subRefresh.isRefreshing = false
 
