@@ -78,8 +78,7 @@ import com.github.libretube.helpers.IntentHelper
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
-import com.github.libretube.helpers.PlayerHelper.checkForSegments
-import com.github.libretube.helpers.PlayerHelper.isInSegment
+import com.github.libretube.helpers.PlayerHelper.getCurrentSegment
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.helpers.ThemeHelper
@@ -1007,23 +1006,29 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         handler.postDelayed(this::checkForSegments, 100)
         if (viewModel.segments.value.isNullOrEmpty()) return
 
-        playerController.checkForSegments(
+        val segmentData = playerController.getCurrentSegment(
             viewModel.segments.value.orEmpty(),
             viewModel.sponsorBlockConfig
-        )?.let { (segment, sbSkipOption) ->
-            if (commonPlayerViewModel.isMiniPlayerVisible.value == true) return@let
+        )
 
-            if (sbSkipOption in arrayOf(SbSkipOptions.AUTOMATIC_ONCE, SbSkipOptions.MANUAL)) {
+        if (segmentData != null && commonPlayerViewModel.isMiniPlayerVisible.value != true) {
+            val (segment, sbSkipOption) = segmentData
+
+            val autoSkipTemporarilyDisabled = !binding.player.sponsorBlockAutoSkip &&
+                    sbSkipOption !in arrayOf(SbSkipOptions.OFF, SbSkipOptions.VISIBLE)
+
+            if (sbSkipOption in arrayOf(
+                    SbSkipOptions.AUTOMATIC_ONCE,
+                    SbSkipOptions.MANUAL
+                ) || autoSkipTemporarilyDisabled
+            ) {
                 binding.sbSkipBtn.isVisible = true
                 binding.sbSkipBtn.setOnClickListener {
                     playerController.seekTo((segment.segmentStartAndEnd.second * 1000f).toLong())
                     segment.skipped = true
                 }
             }
-            return
-        }
-
-        if (!playerController.isInSegment(viewModel.segments.value.orEmpty())) {
+        } else {
             binding.sbSkipBtn.isGone = true
         }
     }
