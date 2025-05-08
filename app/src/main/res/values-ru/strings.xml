@@ -187,7 +187,7 @@
     <string name="no_player_found">Внешний проигрыватель не найден. Убедитесь, что он у вас установлен.</string>
     <string name="data_saver_mode">Режим экономии трафика</string>
     <string name="search_history_summary">Запоминать историю поисков</string>
-    <string name="selected">Выбранное</string>
+    <string name="selected">Выбранный раздел</string>
     <string name="watch_positions_title">Сохранённые позиции просмотра</string>
     <string name="system_caption_style">Системный стиль субтитров</string>
     <string name="none">Отсутствует</string>
@@ -454,7 +454,7 @@
     <string name="tooltip_sort">Упорядочивание</string>
     <string name="tooltip_watch_position">Позиция просмотра</string>
     <string name="tooltip_clear_queue">Очистить очередь</string>
-    <string name="tooltip_dismiss">Закрыть</string>
+    <string name="tooltip_dismiss">Отмена</string>
     <string name="tooltip_locked">Заблокировать проигрыватель</string>
     <string name="tooltip_unlocked">Разблокировать проигрыватель</string>
     <string name="tooltip_fullscreen">Полный экран</string>
@@ -493,7 +493,7 @@
     <string name="undo">Отмена</string>
     <string name="segment_submitted">Сегмент отправлен</string>
     <string name="downvote">Понизить</string>
-    <string name="repeat_mode_all">Все</string>
+    <string name="repeat_mode_all">Повторить все</string>
     <string name="successfully_removed_from_playlist">\"%1$s\" было успешно удалено из плейлиста.</string>
     <string name="watched">Просмотрено</string>
     <string name="finished">Завершено</string>
@@ -556,9 +556,9 @@
     <string name="local_feed_extraction_summary">Получать поток непосредственно с YouTube. Это может быть значительно медленнее.</string>
     <string name="update_information">Информация об обновлении</string>
     <string name="show_upcoming_videos">Показывать следующие видео</string>
-    <string name="updating_feed">Лента обновляется…</string>
+    <string name="updating_feed">Обновление ленты…</string>
     <string name="mode_of_operation">Режим работы</string>
     <string name="authentication">Аутентификация</string>
-    <string name="full_local_mode_desc">Непосредственно загружать все из YouTube, не используя Piped.</string>
+    <string name="full_local_mode_desc">Работать непосредственно с YouTube, не используя Piped.</string>
     <string name="full_local_mode">Полный локальный режим</string>
 </resources>
