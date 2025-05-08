@@ -212,7 +212,7 @@
     <string name="watch_positions_title">Запомненыя пазіцыі прайгравання</string>
     <string name="system_caption_style">Сістэмны стыль субтытраў</string>
     <string name="playerAudioFormat">Аўдыё фармат для прайгравальніка</string>
-    <string name="instance_frontend_url">URL-адрас сервера</string>
+    <string name="instance_frontend_url">Спасылка на сервер (неабавязкова)</string>
     <string name="seek_increment">Шукаць прырост</string>
     <string name="landscape">Альбомная</string>
     <string name="portrait">Партрэтная</string>
@@ -357,7 +357,7 @@
     <string name="filename">Імя файла</string>
     <string name="autoplay_countdown_summary">Паказваць 5-секундны зваротны адлік перад аўтаматычным прайграваннем наступнага відэа</string>
     <string name="lbry_hls_summary">Выкарыстоўвайце LBRY HLS для трансляцыі, калі гэта магчыма</string>
-    <string name="hls_instead_of_dash_summary">Выкарыстоўвайце HLS замест DASH (будзе павольней, не рэкамендуецца)</string>
+    <string name="hls_instead_of_dash_summary">Выкарыстоўваць HLS замест DASH. Паспрабуйце ўключыць ці выключыць, калі прайграванне не працуе.</string>
     <string name="navbar_order">Парадак</string>
     <string name="category_preview_summary">Для сегментаў з падрабязным апісаннем будучага кантэнту без дадатковай інфармацыі. Калі яна ўключае ў сябе кліпы, якія з\'яўляюцца толькі тут, гэта, хутчэй за ўсё, няправільная катэгорыя</string>
     <string name="featured">Рэкамендацыі</string>
@@ -369,7 +369,7 @@
     <string name="playback_pitch">Хуткасць</string>
     <string name="limit_to_runtime">Абмежаванне часу выканання</string>
     <string name="double_tap_seek">Падвойны націск для пошуку</string>
-    <string name="all_caught_up">Вы ўсё праглядзелі</string>
+    <string name="all_caught_up">Усё прагледжана</string>
     <string name="all_caught_up_summary">Вы бачылі ўсе новыя відэа</string>
     <string name="shuffle">Змяшаць</string>
     <string name="disable_proxy">Выключыць проксі Piped</string>
@@ -556,4 +556,9 @@
     <string name="import_format_list_of_urls">Спіс спасылак або ідэнтыфікатараў відэа</string>
     <string name="show_upcoming_videos">Паказаць наступны відэа</string>
     <string name="crashlog">Часопіс адпраўлення</string>
+    <string name="mode_of_operation">Рэжым працы</string>
+    <string name="full_local_mode">Поўны лакальны рэжым</string>
+    <string name="full_local_mode_desc">Працаваць непасрэдна з YouTube, не выкарыстоўваючы Piped.</string>
+    <string name="authentication">Аўтэнтыфікацыя</string>
+    <string name="updating_feed">Абнаўленне стужкі…</string>
 </resources>
