@@ -31,6 +31,7 @@ object ImageHelper {
     private lateinit var imageLoader: ImageLoader
 
     private val Context.coilFile get() = cacheDir.resolve("coil")
+    private const val HTTP_SCHEME = "http"
 
     /**
      * Initialize the image loader
@@ -80,15 +81,31 @@ object ImageHelper {
     }
 
     /**
+     * Checks if the corresponding image for the given key (e.g. a url) is cached.
+     */
+    private fun isCached(key: String): Boolean {
+        val cacheSnapshot = imageLoader.diskCache?.openSnapshot(key)
+        val isCacheHit = cacheSnapshot?.data?.toFile()?.exists()
+        cacheSnapshot?.close()
+
+        return isCacheHit ?: false
+    }
+
+    /**
      * load an image from a url into an imageView
      */
     fun loadImage(url: String?, target: ImageView, whiteBackground: Boolean = false) {
+        if (url.isNullOrEmpty()) return
+
         // clear image to avoid loading issues at fast scrolling
         target.setImageBitmap(null)
 
-        // only load the image if the data saver mode is disabled
-        if (DataSaverMode.isEnabled(target.context) || url.isNullOrEmpty()) return
         val urlToLoad = ProxyHelper.rewriteUrlUsingProxyPreference(url)
+
+        // only load online images if the data saver mode is disabled
+        if (DataSaverMode.isEnabled(target.context)) {
+            if (urlToLoad.startsWith(HTTP_SCHEME) && !isCached(urlToLoad)) return
+        }
 
         getImageWithCallback(target.context, urlToLoad) { result ->
             // set the background to white for transparent images
