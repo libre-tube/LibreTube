@@ -187,7 +187,7 @@
     <string name="no_player_found">Внешний проигрыватель не найден. Убедитесь, что он у вас установлен.</string>
     <string name="data_saver_mode">Режим экономии трафика</string>
     <string name="search_history_summary">Запоминать историю поисков</string>
-    <string name="selected">Выбранное</string>
+    <string name="selected">Выбранный раздел</string>
     <string name="watch_positions_title">Сохранённые позиции просмотра</string>
     <string name="system_caption_style">Системный стиль субтитров</string>
     <string name="none">Отсутствует</string>
@@ -559,6 +559,6 @@
     <string name="updating_feed">Обновление ленты…</string>
     <string name="mode_of_operation">Режим работы</string>
     <string name="authentication">Аутентификация</string>
-    <string name="full_local_mode_desc">Непосредственно загружать все из YouTube, не используя Piped.</string>
+    <string name="full_local_mode_desc">Работать непосредственно с YouTube, не используя Piped.</string>
     <string name="full_local_mode">Полный локальный режим</string>
 </resources>
