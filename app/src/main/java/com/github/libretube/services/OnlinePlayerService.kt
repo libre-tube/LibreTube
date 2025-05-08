@@ -28,7 +28,7 @@ import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
-import com.github.libretube.helpers.PlayerHelper.checkForSegments
+import com.github.libretube.helpers.PlayerHelper.getCurrentSegment
 import com.github.libretube.helpers.PlayerHelper.getSubtitleRoleFlags
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
@@ -236,12 +236,12 @@ open class OnlinePlayerService : AbstractPlayerService() {
     private fun checkForSegments() {
         handler.postDelayed(this::checkForSegments, 100)
 
-        val (currentSegment, sbSkipOption) = exoPlayer?.checkForSegments(
+        val (currentSegment, sbSkipOption) = exoPlayer?.getCurrentSegment(
             sponsorBlockSegments,
             sponsorBlockConfig
         ) ?: return
 
-        if (sbSkipOption in arrayOf(SbSkipOptions.AUTOMATIC, SbSkipOptions.AUTOMATIC_ONCE)) {
+        if (sbSkipOption in arrayOf(SbSkipOptions.AUTOMATIC, SbSkipOptions.AUTOMATIC_ONCE) && sponsorBlockAutoSkip) {
             exoPlayer?.seekTo(currentSegment.segmentStartAndEnd.second.toLong() * 1000)
             currentSegment.skipped = true
 

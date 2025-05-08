@@ -510,7 +510,7 @@ object PlayerHelper {
      * Create a basic player, that is used for all types of playback situations inside the app
      */
     @OptIn(androidx.media3.common.util.UnstableApi::class)
-    fun createPlayer(context: Context, trackSelector: DefaultTrackSelector, ): ExoPlayer {
+    fun createPlayer(context: Context, trackSelector: DefaultTrackSelector): ExoPlayer {
         val dataSourceFactory = DefaultDataSource.Factory(context)
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(C.USAGE_MEDIA)
@@ -589,7 +589,7 @@ object PlayerHelper {
      * @param segments List of the SponsorBlock segments
      * @return If segment found and should skip manually, the end position of the segment in ms, otherwise null
      */
-    fun Player.checkForSegments(
+    fun Player.getCurrentSegment(
         segments: List<Segment>,
         sponsorBlockConfig: MutableMap<String, SbSkipOptions>,
     ): Pair<Segment, SbSkipOptions>? {
@@ -608,14 +608,6 @@ object PlayerHelper {
         }
 
         return null
-    }
-
-    fun Player.isInSegment(segments: List<Segment>): Boolean {
-        return segments.any {
-            val (start, end) = it.segmentStartAndEnd
-            val (segmentStart, segmentEnd) = (start * 1000f).toLong() to (end * 1000f).toLong()
-            currentPosition in segmentStart..segmentEnd
-        }
     }
 
     /**

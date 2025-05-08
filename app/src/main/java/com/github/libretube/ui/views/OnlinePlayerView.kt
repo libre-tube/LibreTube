@@ -52,7 +52,7 @@ class OnlinePlayerView(
     var currentWindow: Window? = null
 
     var selectedResolution: Int? = null
-    private var sponsorBlockAutoSkip = true
+    var sponsorBlockAutoSkip = true
 
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
     override fun getOptionsMenuItems(): List<BottomSheetItem> {
