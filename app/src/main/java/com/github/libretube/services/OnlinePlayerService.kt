@@ -241,7 +241,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
             sponsorBlockConfig
         ) ?: return
 
-        if (sbSkipOption in arrayOf(SbSkipOptions.AUTOMATIC, SbSkipOptions.AUTOMATIC_ONCE)) {
+        if (sbSkipOption in arrayOf(SbSkipOptions.AUTOMATIC, SbSkipOptions.AUTOMATIC_ONCE) && sponsorBlockAutoSkip) {
             exoPlayer?.seekTo(currentSegment.segmentStartAndEnd.second.toLong() * 1000)
             currentSegment.skipped = true
 
