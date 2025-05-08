@@ -89,7 +89,7 @@
     <string name="color_yellow">Dzeltens</string>
     <string name="color_green">Zaļš</string>
     <string name="color_purple">Violets</string>
-    <string name="material_you">Material You</string>
+    <string name="material_you">Material You dizains</string>
     <string name="category_outro">Beigu ekrāns un titri</string>
     <string name="category_intro_summary">Šeit ietilpst brīži bez reāla satura, piemēram, pārtraukumi, statisks kadri, atkārtotas animācijas. Brīži, kuros ietilpst kaut kāda informācija, neskaitās</string>
     <string name="settings">Iestatījumi</string>
@@ -383,9 +383,9 @@
     <string name="go_to_video">Doties uz video</string>
     <string name="disable_proxy">Atspējot Piped starpniekserveri</string>
     <string name="auto_fullscreen_shorts">Automātisks pilnekrāna režīms īsiem video</string>
-    <string name="new_group">Jauns</string>
-    <string name="group_name">Kopas nosaukums</string>
-    <string name="channel_groups">Kanālu kopas</string>
+    <string name="new_group">Izveidot jaunu</string>
+    <string name="group_name">Grupas nosaukums</string>
+    <string name="channel_groups">Kanālu grupas</string>
     <string name="disable_proxy_summary">Lādēt video un attēlus tieši no YouTube serveriem. Ieslēdziet tikai tad, ja jūs vienmēr izmantojiet VPN</string>
     <string name="duration">Ilgums</string>
     <string name="duration_reversed">Ilgums (apgriezts)</string>
@@ -428,7 +428,7 @@
     <string name="delete_all">Visi lejupielādētie video tiks dzēsti!</string>
     <string name="autoplay_playlists">Automātiski atskaņot atskaņošanas sarakstus</string>
     <string name="audio_codecs">Audio kodeki</string>
-    <string name="group_name_error_exists">Lūdzu, izmantojiet nosaukumu, kas vēl nepastāv</string>
+    <string name="group_name_error_exists">Lūdzu, izmantojiet vēl neizmantotu nosaukumu</string>
     <string name="download_playlist">Lejupielādēt atskaņošanas sarakstu</string>
     <string name="undo">Atsaukt</string>
     <string name="successfully_removed_from_playlist">\"%1$s\" vienums veiksmīgi noņemts no atskaņošanas saraksta.</string>
@@ -457,4 +457,6 @@
     <string name="autoplay_playlists_summary">Automātiski atskaņot nākamo video atskaņošanas sarakstos neatkarīgi no atlasītā automātiskās atskaņošanas iestatījuma</string>
     <string name="import_temp_playlist_summary">Vai vēlaties izveidot jaunu atskaņošanas sarakstu ar \'%1$s\' nosaukumu? Šajā atskaņošanas sarakstā būs %2$d video.</string>
     <string name="category_highlight">Rādīt video izceltos momentus</string>
+    <string name="add_to_group">Pievienot grupai</string>
+    <string name="tooltip_edit_groups">Rediģēt grupas</string>
 </resources>
