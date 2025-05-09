@@ -267,7 +267,6 @@
     <string name="download_channel_name">Servizio di Download</string>
     <string name="push_channel_name">Operatore di notifica</string>
     <string name="push_channel_description">Mostra una notifica quando sono disponibili nuovi video.</string>
-    <string name="legacy_subscriptions">Vista delle iscrizioni obsoleta</string>
     <string name="navigation_bar">Barra di navigazione</string>
     <string name="change_region">La Tendenza sembra non essere disponibile per la regione attuale. Selezionane un\'altra nelle impostazioni.</string>
     <string name="playback_pitch">Tono</string>

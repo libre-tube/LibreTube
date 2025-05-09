@@ -239,7 +239,6 @@
     <string name="backup">Backup</string>
     <string name="maximum_image_cache">Dimensiunea maximă a memoriei cache de imagini</string>
     <string name="copied_to_clipboard">Copiat în clipboard</string>
-    <string name="legacy_subscriptions">Vizualizare abonamente vechi</string>
     <string name="delete">Ștergeți din descărcări</string>
     <string name="local_subscriptions">Abonamente locale</string>
     <string name="backup_customInstances">Instanțe personalizate</string>

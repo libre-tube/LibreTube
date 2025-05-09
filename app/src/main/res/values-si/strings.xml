@@ -321,7 +321,6 @@
     <string name="change_region">වත්මන් ප්‍රදේශය සඳහා නැගී එන වීඩියෝ නොමැති බව පෙනේ. කරුණාකර සැකසීම් තුළ වෙනත් එකක් තෝරන්න.</string>
     <string name="player_resize_mode">ප්‍රමාණය වෙනස් කිරීමේ ප්‍රකාරය</string>
     <string name="copied_to_clipboard">පසුරු පුවරුවට පිටපත් කර ඇත</string>
-    <string name="legacy_subscriptions">උරුම දායකත්ව දසුන</string>
     <string name="renamePlaylist">වාදන ලැයිස්තුව නැවත නම් කරන්න</string>
     <string name="time_code">කාල කේතය (තත්පර)</string>
     <string name="confirm_unsubscribing_summary">දායකත්වයෙන් ඉවත් වීමට පෙර තහවුරු කිරීමේ සංවාදයක් පෙන්වන්න</string>

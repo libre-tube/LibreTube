@@ -261,7 +261,6 @@
     <string name="copied">コピーしました</string>
     <string name="change_region">急上昇中の動画一覧は現在の地域にありません。設定で他の地域を選択してください。</string>
     <string name="share_with_time">時間指定で共有</string>
-    <string name="legacy_subscriptions">古い登録チャンネル表示</string>
     <string name="device_info">端末情報</string>
     <string name="history_empty">まだ履歴がありません。</string>
     <string name="most_recent">最新</string>

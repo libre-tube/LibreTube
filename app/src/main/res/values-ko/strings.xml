@@ -225,7 +225,6 @@
     <string name="open_copied">열기</string>
     <string name="device_info">기기 정보</string>
     <string name="delete">다운로드에서 삭제</string>
-    <string name="legacy_subscriptions">구독 목록(이전 방식)</string>
     <string name="added_to_playlist">%1$s 재생목록에 추가됨</string>
     <string name="filename">파일이름</string>
     <string name="invalid_filename">유효하지 않은 파일이름입니다!</string>

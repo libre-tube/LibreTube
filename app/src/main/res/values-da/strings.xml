@@ -250,7 +250,6 @@
     <string name="copied_to_clipboard">Kopieret til udklipsholder</string>
     <string name="maximum_image_cache">Maks. billedcachestørrelse</string>
     <string name="open_copied">Åbn</string>
-    <string name="legacy_subscriptions">Ældre abonnementsvisning</string>
     <string name="device_info">Enhedsoplysninger</string>
     <string name="audio_video_summary">Kvalitet og format</string>
     <string name="invalid_input">Ugyldigt input</string>

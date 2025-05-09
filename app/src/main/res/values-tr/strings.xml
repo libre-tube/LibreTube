@@ -251,7 +251,6 @@
     <string name="open_copied">Açık</string>
     <string name="copied_to_clipboard">Panoya kopyalandı</string>
     <string name="device_info">Aygıt bilgisi</string>
-    <string name="legacy_subscriptions">Eski abonelikler görünümü</string>
     <string name="audio_video_summary">Kalite ve biçim</string>
     <string name="delete">İndirilenlerden sil</string>
     <string name="new_videos_badge">Yeni videolar için gösterge</string>
