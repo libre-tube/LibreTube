@@ -64,6 +64,11 @@ interface ExternalApi {
         @Query("actionType") actionType: List<String>? = null
     ): List<SegmentData>
 
+    @GET("$SB_API_URL/api/videoLabels/{videoId}")
+    suspend fun getVideoLabels(
+        @Path("videoId") videoId: String,
+    ): List<SegmentData>
+
     @POST("$SB_API_URL/api/branding")
     suspend fun submitDeArrow(@Body body: DeArrowBody)
 
