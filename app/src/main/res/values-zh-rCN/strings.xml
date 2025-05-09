@@ -250,7 +250,6 @@
     <string name="maximum_image_cache">最大图片缓存尺寸</string>
     <string name="open_copied">打开</string>
     <string name="copied_to_clipboard">已复制到剪贴板</string>
-    <string name="legacy_subscriptions">旧版订阅视图</string>
     <string name="device_info">设备信息</string>
     <string name="audio_video_summary">清晰度和格式</string>
     <string name="delete">从下载删除</string>

@@ -342,7 +342,6 @@
     <string name="defaults">Valors per defecte</string>
     <string name="theme_monochrome">Monocrom minimalista</string>
     <string name="seek_increment">Increment del salt</string>
-    <string name="legacy_subscriptions">Vista de subscripcions antigues</string>
     <string name="device_info">Informació del dispositiu</string>
     <string name="renamePlaylist">Canvia el nom de la llista de reproducció</string>
     <string name="sb_custom_colors">Colors dels segments personalitzats</string>

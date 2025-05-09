@@ -305,7 +305,6 @@
         <item quantity="one">%d جریان جدید</item>
         <item quantity="other">%d جریان جدید</item>
     </plurals>
-    <string name="legacy_subscriptions">نمای اشتراک‌های قدیمی</string>
     <string name="category_filler_summary">برای صحنه‌‌هایی که فقط برای پرکردن یا طنز اضافه شده‌اند و برای درک محتوای اصلی ویدیو لازم نیستند</string>
     <string name="shareTo">هم‌رسانی نشانی با</string>
     <string name="instance_api_url">نشانی رابط برنامه‌نویسی نمونه</string>

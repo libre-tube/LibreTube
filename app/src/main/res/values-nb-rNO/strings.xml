@@ -253,7 +253,6 @@
     <string name="maximum_image_cache">Maks. bildehurtiglagringsstørrelse</string>
     <string name="copied_to_clipboard">Kopiert til utklippstavlen</string>
     <string name="open_copied">Åpne</string>
-    <string name="legacy_subscriptions">Visning for eldre abonnementer</string>
     <string name="renamePlaylist">Gi spillelisten nytt navn</string>
     <string name="new_videos_badge">Indikator for nye videoer</string>
     <string name="new_videos_badge_summary">Vis et skilt med evt. antall nye videoer</string>

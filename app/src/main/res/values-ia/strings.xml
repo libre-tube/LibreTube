@@ -244,7 +244,6 @@
     <string name="backup_restore">Copia de securitate e restauration</string>
     <string name="device_info">Information del apparato</string>
     <string name="copied">Copiate</string>
-    <string name="legacy_subscriptions">Visualisation ancian de subscriptiones</string>
     <string name="maximum_image_cache">Dimension maxime del cache de imagines</string>
     <string name="export_subscriptions">Exportar subscriptiones</string>
     <string name="local_subscriptions">Subscriptiones local</string>

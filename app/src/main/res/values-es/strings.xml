@@ -232,7 +232,6 @@
     <string name="backup_restore">Copia de seguridad y restauración</string>
     <string name="backup">Copia de seguridad</string>
     <string name="picture_in_picture">Reproductor flotante</string>
-    <string name="legacy_subscriptions">Ver suscripciones en una cuadrícula</string>
     <string name="device_info">Información del dispositivo</string>
     <string name="share_with_time">Compartir con marca de tiempo</string>
     <string name="export_subscriptions">Exportar suscripciones</string>
