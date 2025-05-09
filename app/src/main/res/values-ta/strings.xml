@@ -242,7 +242,6 @@
     <string name="alternative_pip_controls_summary">ஆடியோவை மட்டும் காண்பி, முன்னோக்கி மற்றும் முன்னாடி வைப்பதற்கு பதிலாக PIP இல் கட்டுப்பாடுகளைத் தவிர்க்கவும்</string>
     <string name="add_to_queue">வரிசையில் சேர்க்கவும்</string>
     <string name="open_copied">திற</string>
-    <string name="legacy_subscriptions">மரபு சந்தாக்கள் பார்வை</string>
     <string name="lbry_hls">Lbry hls</string>
     <string name="device_info">கருவி செய்தி</string>
     <string name="new_group">புதிய</string>

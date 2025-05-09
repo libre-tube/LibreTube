@@ -250,7 +250,6 @@
     <string name="maximum_image_cache">Max. velikost mezipaměti obrázků</string>
     <string name="copied_to_clipboard">Zkopírováno do schránky</string>
     <string name="open_copied">Otevřít</string>
-    <string name="legacy_subscriptions">Staré zobrazení odběrů</string>
     <string name="device_info">Informace o zařízení</string>
     <string name="audio_video_summary">Kvalita a formát</string>
     <string name="delete">Odstranit ze stažených</string>

@@ -349,7 +349,6 @@
     <string name="local_playlists">Lokala spellistor</string>
     <string name="queue_insert_related_videos">Lägg till relaterade videor</string>
     <string name="autoplay_countdown_summary">Visa en nedräkning på 5 sekunder innan nästa video spelas upp automatiskt</string>
-    <string name="legacy_subscriptions">Gammal vy för prenumerationer</string>
     <string name="faq">Frågor &amp; svar</string>
     <string name="swipe_controls">Svepkontroller</string>
     <string name="sort_by">Sortera efter</string>

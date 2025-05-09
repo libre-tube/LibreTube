@@ -376,7 +376,6 @@
     <string name="change_region">Zdá sa, že trendy nie sú pre aktuálny región k dispozícii. V nastaveniach vyberte iný.</string>
     <string name="sb_custom_colors_summary">Prepína používané farebné segmenty pre segmenty SponsorBlock</string>
     <string name="playback_pitch">Výška tónu</string>
-    <string name="legacy_subscriptions">Zobrazenie starých odberov</string>
     <string name="download_channel_description">Zobrazí upozornenie pri sťahovaní médií.</string>
     <string name="push_channel_name">Notifikačný pracovník</string>
     <string name="copy_tooltip">Kopírovanie</string>

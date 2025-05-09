@@ -15,7 +15,6 @@
     <string name="autoRotatePlayer_summary">Afspilun á fullum skjá þegar tækinu er snúið</string>
     <string name="playerAudioQuality">Hljóðgæði</string>
     <string name="checking_frequency">Tíðni athugana …</string>
-    <string name="legacy_subscriptions">Eldri sýn á áskriftir</string>
     <string name="device_info">Upplýsingar um tæki</string>
     <string name="playlistUrl">Slóð á spilunarlista</string>
     <string name="new_group">Búa til</string>

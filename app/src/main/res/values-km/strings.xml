@@ -254,7 +254,6 @@
     <string name="delete">លុបពីការទាញយក</string>
     <string name="backup_restore">បម្រុងទុក &amp; ស្ដារឡើងវិញ</string>
     <string name="device_info">ព័ត៌មានឧបករណ៍</string>
-    <string name="legacy_subscriptions">មើលការជាវដែលមានស្រាប់</string>
     <string name="maximum_image_cache">ទំហំឃ្លាំងសម្ងាត់រូបភាពអតិបរមា</string>
     <string name="backup">បម្រុងទុក</string>
     <string name="repeat_mode_all">សារឡើងវិញទាំងអស់</string>

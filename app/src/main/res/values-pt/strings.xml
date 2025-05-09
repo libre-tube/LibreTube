@@ -245,7 +245,6 @@
     <string name="maximum_image_cache">Máximo de imagens em cache</string>
     <string name="copied_to_clipboard">Copiado para a área de transferência</string>
     <string name="open_copied">Abrir</string>
-    <string name="legacy_subscriptions">Vista de subscrições (antiga)</string>
     <string name="device_info">Informação do dispositivo</string>
     <string name="audio_video_summary">Qualidade e formato</string>
     <string name="delete">Eliminar das descargas</string>

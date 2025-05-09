@@ -144,7 +144,6 @@
     <string name="version">Versi %1$s</string>
     <string name="error_occurred">Kesalahan</string>
     <string name="copied">Disalin</string>
-    <string name="legacy_subscriptions">Tampilan langganan lawas</string>
     <string name="device_info">Info perangkat</string>
     <string name="clear_customInstances">Hapus yang telah ditambahkan</string>
     <string name="pauseOnScreenOff">Jeda secara otomatis</string>

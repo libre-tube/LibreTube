@@ -250,7 +250,6 @@
     <string name="maximum_image_cache">Taille maximale du cache d’images</string>
     <string name="open_copied">Ouvrir</string>
     <string name="copied_to_clipboard">Copié dans le presse-papier</string>
-    <string name="legacy_subscriptions">Ancienne vue des abonnements</string>
     <string name="device_info">Informations de l’appareil</string>
     <string name="audio_video_summary">Qualité et format</string>
     <string name="new_videos_badge">Indicateur de nouvelles vidéos</string>

@@ -276,7 +276,6 @@
     <string name="backup">Varundus</string>
     <string name="maximum_image_cache">Piltide vahemälu suurim lubatud suurus</string>
     <string name="copied_to_clipboard">Kopeeritud lõikelauale</string>
-    <string name="legacy_subscriptions">Vanas stiilis tellimuste vaade</string>
     <string name="backup_customInstances">Kohandatud vaheserverid</string>
     <string name="color">Värv</string>
     <string name="invalid_color">Vigane värvikood!</string>

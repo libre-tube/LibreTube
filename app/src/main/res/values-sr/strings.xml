@@ -271,7 +271,6 @@
     <string name="download_channel_name">Услуга преузимања</string>
     <string name="download_channel_description">Приказује обавештења приликом преузимања медија.</string>
     <string name="renamePlaylist">Преименуј плејлисту</string>
-    <string name="legacy_subscriptions">Застарели приказ праћења</string>
     <string name="audio_video_summary">Квалитет и формат</string>
     <string name="added_to_playlist">Додато на плејлисту %1$s</string>
     <string name="queue">Редослед</string>

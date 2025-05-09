@@ -298,7 +298,6 @@
     <string name="queue_insert_related_videos">Вмъкни свързани видеоклипове</string>
     <string name="stop">Спри</string>
     <string name="autoplay_countdown_summary">Покажи обратно броене от 5 секунди преди автоматичното изпълнение на следващо видео</string>
-    <string name="legacy_subscriptions">Изглед на наследени абонаменти</string>
     <string name="related_streams">Свързано съдържание</string>
     <string name="faq">ЧЗВ</string>
     <string name="sort_by">Сортирай по</string>

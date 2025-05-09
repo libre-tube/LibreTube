@@ -313,7 +313,6 @@
     <string name="download_channel_name">Υπηρεσία λήψης</string>
     <string name="navbar_order">Σειρά</string>
     <string name="change_region">Οι τάσεις φαίνεται να μην είναι διαθέσιμες για την τρέχουσα περιοχή. Επιλέξτε άλλη στις ρυθμίσεις.</string>
-    <string name="legacy_subscriptions">Προβολή συνδρομών παλαιού τύπου</string>
     <string name="nothing_selected">Τίποτα επιλεγμένο!</string>
     <string name="no_subtitle">Χωρίς υποτίτλους</string>
     <string name="download_paused">Το κατέβασμα τέθηκε σε παύση</string>
