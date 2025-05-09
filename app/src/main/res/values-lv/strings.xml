@@ -170,7 +170,7 @@
     <string name="require_restart">Nepieciešams restartēt aplikāciju</string>
     <string name="require_restart_message">Restartējiet aplikāciju, lai veiktu jaunās izmaiņas.</string>
     <string name="auth_instance">Autentificētā instance</string>
-    <string name="watch_positions">Atcerēties skatīšanās vietu</string>
+    <string name="watch_positions">Saglabāt atskaņošanas pozīciju</string>
     <string name="auth_instance_summary">Lietojiet citu instanci priekš autentificētiem pieprasījumiem</string>
     <string name="auth_instances">Izvēlēties autentificēto instanci</string>
     <string name="github">GitHub</string>
@@ -191,7 +191,7 @@
     <string name="search_history_summary">Atcerēties meklēšanas vēsturi</string>
     <string name="history_summary">Skatīšanās un meklēšanas vēsture</string>
     <string name="reset_watch_positions">Atiestatīt</string>
-    <string name="watch_positions_title">Atcerētās atskaņošanas vietas</string>
+    <string name="watch_positions_title">Saglabāt atskaņošanas pozīcijas</string>
     <string name="captions">Subtitri</string>
     <string name="none">Nav</string>
     <string name="general">Vispārēji</string>
@@ -226,7 +226,7 @@
     <string name="error_occurred">Kļūda</string>
     <string name="copied">Nokopēts</string>
     <string name="export_subscriptions">Izgūt abonementus</string>
-    <string name="share_with_time">Kopīgot ar sākšanas laiku</string>
+    <string name="share_with_time">Sākot no</string>
     <string name="skip_buttons">Izlaišanas pogas</string>
     <string name="skip_buttons_summary">Rādīt pogas, kas ļauj pāriet uz nākamo vai iepriekšējo video</string>
     <string name="history_size">Maksimālais vēstures izmērs</string>
@@ -295,7 +295,7 @@
     <string name="stats_for_nerds">Statistika nūģiem</string>
     <string name="video_id">Video ID</string>
     <string name="replies">Atbildes</string>
-    <string name="time_code">Laika kods (sekundes)</string>
+    <string name="time_code">sekundes</string>
     <string name="queue">Rinda</string>
     <string name="livestreams">Tiešraides</string>
     <string name="defaultIconLight">Gaišs (noklusējuma)</string>
@@ -305,7 +305,7 @@
     <string name="color_violet">Daudzpusīgs violets</string>
     <string name="playlistUrl">Atskaņošanas saraksta saite</string>
     <string name="shuffle">Jaukta secība</string>
-    <string name="mark_as_watched">Atzīmēt kā skatītu</string>
+    <string name="mark_as_watched">Atzīmēt kā noskatītu</string>
     <string name="custom_playback_speed">Pielāgots atskaņošanas ātrums</string>
     <string name="custom_playback_speed_summary">Izmantot citu atskaņošanas ātrumu nekā parastajam atskaņotājam</string>
     <string name="download_channel_name">Lejuipielāžu serviss</string>
@@ -410,7 +410,7 @@
     <string name="change_playlist_description">Mainīt atskaņošanas saraksta aprakstu</string>
     <string name="playlist_description">Atskaņošanas saraksta apraksts</string>
     <string name="emptyPlaylistDescription">Atskaņošanas saraksta apraksts nevar būt tukšs!</string>
-    <string name="mark_as_unwatched">Atzīmēt kā neskatītu</string>
+    <string name="mark_as_unwatched">Atzīmēt kā nenoskatītu</string>
     <string name="export_playlists_to">Izgūt atskaņošanas sarakstus uz</string>
     <string name="choose_instance_long">Izvēlieties Piped instanci, ko izmantot. Piped instance darbosies kā starpnieks starp jums un YouTube. Šīs instances fiziski atrodas dažādās vietās, uz ko norāda to valstu karogi. Instances, kas ir tuvāk jums, visticamāk strādās ātrāk nekā instances, kas ir tālāk. Jūs jebkurā mirklī varat izmainīt instanci iestatījumos.</string>
     <string name="albums">Albumi</string>
@@ -459,4 +459,9 @@
     <string name="category_highlight">Rādīt video izceltos momentus</string>
     <string name="add_to_group">Pievienot grupai</string>
     <string name="tooltip_edit_groups">Rediģēt grupas</string>
+    <string name="delete_only_watched_videos">Dzēst tikai jau noskatītos video</string>
+    <string name="remove_watched_videos">Noņemt noskatītos video</string>
+    <string name="also_clear_watch_positions">Notīrīt arī atskaņošanas pozīcijas</string>
+    <string name="tooltip_watch_position">Atskaņošanas pozīcija</string>
+    <string name="continue_watching">Turpināt skatīties</string>
 </resources>
