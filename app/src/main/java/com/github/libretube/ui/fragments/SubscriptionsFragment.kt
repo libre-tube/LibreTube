@@ -30,7 +30,6 @@ import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.SelectableOption
-import com.github.libretube.ui.adapters.LegacySubscriptionAdapter
 import com.github.libretube.ui.adapters.SubscriptionChannelAdapter
 import com.github.libretube.ui.adapters.VideoCardsAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
@@ -81,7 +80,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
             field = value
         }
 
-    private val legacySubscriptionsAdapter = LegacySubscriptionAdapter()
     private val channelsAdapter = SubscriptionChannelAdapter()
 
     override fun setLayoutManagers(gridItems: Int) {
@@ -97,24 +95,8 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
         binding.subFeed.adapter = feedAdapter
 
-        val legacySubscriptions = PreferenceHelper.getBoolean(
-            PreferenceKeys.LEGACY_SUBSCRIPTIONS,
-            false
-        )
-
-        if (legacySubscriptions) {
-            binding.subChannels.layoutManager = GridLayoutManager(
-                context,
-                PreferenceHelper.getString(
-                    PreferenceKeys.LEGACY_SUBSCRIPTIONS_COLUMNS,
-                    "3"
-                ).toInt()
-            )
-            binding.subChannels.adapter = legacySubscriptionsAdapter
-        } else {
-            binding.subChannels.layoutManager = LinearLayoutManager(context)
-            binding.subChannels.adapter = channelsAdapter
-        }
+        binding.subChannels.layoutManager = LinearLayoutManager(context)
+        binding.subChannels.adapter = channelsAdapter
 
         // Check if the AppBarLayout is fully expanded
         binding.subscriptionsAppBar.addOnOffsetChangedListener { _, verticalOffset ->
@@ -426,13 +408,8 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         val subscriptions =
             viewModel.subscriptions.value?.filterByGroup(selectedFilterGroup) ?: return
 
-        val legacySubscriptions = PreferenceHelper.getBoolean(
-            PreferenceKeys.LEGACY_SUBSCRIPTIONS,
-            false
-        )
 
-        val adapter = if (legacySubscriptions) legacySubscriptionsAdapter else channelsAdapter
-        adapter.submitList(subscriptions) {
+        channelsAdapter.submitList(subscriptions) {
             if (restoreScrollState) {
                 binding.subFeed.layoutManager?.onRestoreInstanceState(viewModel.subChannelsRecyclerViewState)
                 binding.subscriptionsAppBar.setExpanded(viewModel.subChannelsRecyclerViewState == null)

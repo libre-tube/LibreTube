@@ -250,7 +250,6 @@
     <string name="copied_to_clipboard">Nokopēts starpliktuvē</string>
     <string name="player_resize_mode">Izmēra mainīšanas režīms</string>
     <string name="maximum_image_cache">Maksimālais attēlu kešatmiņas izmērs</string>
-    <string name="legacy_subscriptions">Vecais abonementu skats</string>
     <string name="device_info">Ierīces informācija</string>
     <string name="audio_video_summary">Kvalitāte un formāts</string>
     <string name="delete">Dzēst no lejupielādēm</string>

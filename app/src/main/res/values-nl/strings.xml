@@ -283,7 +283,6 @@
     <string name="add_to_queue">Toevoegen aan wachtrij</string>
     <string name="background_mode">Achtergrond­modus</string>
     <string name="renamePlaylist">Afspeellijst hernoemen</string>
-    <string name="legacy_subscriptions">Verouderde abonnementen­weergave</string>
     <string name="sort_by">Sorteren op</string>
     <string name="duration_span">Duur: %1$s</string>
     <string name="alternative_videos_layout">Alternative video-lay-out</string>

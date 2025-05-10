@@ -246,7 +246,6 @@
     <string name="queue">रांग</string>
     <string name="hide_watched_from_feed">फीडमधून पाहिलेले व्हिडिओ लपवा</string>
     <string name="picture_in_picture">चित्रात चित्र</string>
-    <string name="legacy_subscriptions">लीगेसी सदस्यता दृश्य</string>
     <string name="disable_proxy">पाइप्ड प्रॉक्सी अक्षम करा</string>
     <string name="disable_proxy_summary">YouTube च्या सर्व्हरवरून थेट व्हिडिओ आणि प्रतिमा लोड करा. तुम्ही VPN वापरत असाल तरच पर्याय सक्षम करा! लक्षात ठेवा की हे YT संगीतातील सामग्रीसह कार्य करू शकत नाही.</string>
     <string name="push_channel_description">नवीन प्रवाह उपलब्ध असताना सूचना दाखवते.</string>

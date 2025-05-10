@@ -305,7 +305,6 @@
     <string name="resize_mode_zoom">Zoomaa</string>
     <string name="repeat_mode_none">Ei mitään</string>
     <string name="maximum_image_cache">Kuva välimustin enimmäiskoko</string>
-    <string name="legacy_subscriptions">Vanha tilaukset näkymä</string>
     <string name="audio_video_summary">Laatu ja formaatti</string>
     <string name="delete">Poista latauksista</string>
     <string name="wifi">Wi-Fi</string>
