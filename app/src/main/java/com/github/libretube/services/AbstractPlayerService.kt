@@ -409,6 +409,8 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
                 mediaLibrarySession = null
             }
 
+            PlayingQueue.clear()
+
             ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
             stopSelf()
 

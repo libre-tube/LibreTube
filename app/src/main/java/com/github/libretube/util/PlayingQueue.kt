@@ -37,6 +37,7 @@ object PlayingQueue {
         }
         queueJobs.clear()
         queue.clear()
+        currentStream = null
     }
 
     /**
