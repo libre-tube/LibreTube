@@ -437,7 +437,7 @@
     <string name="unknown_audio_language">لغة صوت غير معروفة</string>
     <string name="continue_watching">مواصلة المشاهدة</string>
     <string name="dearrow_summary">أظهِر عناوين وصورا مصغرة أكثر دقة وأقل إثارة. يزيد من أوقات التحميل</string>
-    <string name="dearrow">تمكين دي ارو</string>
+    <string name="dearrow">تمكين DeArrow</string>
     <string name="visibility_public">عام</string>
     <string name="visibility">رؤية</string>
     <string name="visibility_unlisted">غير مدرج</string>
