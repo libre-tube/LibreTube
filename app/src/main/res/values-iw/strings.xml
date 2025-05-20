@@ -250,7 +250,6 @@
     <string name="maximum_image_cache">גודל מטמון התמונות המרבי</string>
     <string name="copied_to_clipboard">הועתק ללוח גזירים</string>
     <string name="open_copied">פתיחה</string>
-    <string name="legacy_subscriptions">תצוגת מינויים מיושנת</string>
     <string name="device_info">פרטי מכשיר</string>
     <string name="audio_video_summary">איכות ותצורה</string>
     <string name="delete">מחיקה מההורדות</string>

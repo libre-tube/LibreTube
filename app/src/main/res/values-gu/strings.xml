@@ -295,7 +295,6 @@
     <string name="notify_new_streams_summary">તમે અનુસરો છો તે સર્જકો તરફથી નવી સામગ્રી વિશેની સૂચનાઓ</string>
     <string name="backup_restore_summary">સબસ્ક્રિપ્શન્સ, પ્લેલિસ્ટ્સ, આયાત અને નિકાસ કરો…</string>
     <string name="error_occurred">ભૂલ</string>
-    <string name="legacy_subscriptions">વારસાગત સબસ્ક્રિપ્શન્સ દૃશ્ય</string>
     <string name="required_network">આવશ્યક કનેક્શન</string>
     <string name="translate">ભાષાંતર</string>
     <string name="share_with_time">ટાઇમ કોડ સાથે વહેંચો</string>

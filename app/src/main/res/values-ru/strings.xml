@@ -258,7 +258,6 @@
     <string name="skip_segment">Пропустить отрывок</string>
     <string name="download_channel_description">Показывать уведомление при загрузке медиа.</string>
     <string name="push_channel_name">Агент уведомлений</string>
-    <string name="legacy_subscriptions">Старый вид отображения подписок</string>
     <string name="audio_video_summary">Качество и формат</string>
     <string name="delete">Удалить из загрузок</string>
     <string name="renamePlaylist">Переименовать плейлист</string>

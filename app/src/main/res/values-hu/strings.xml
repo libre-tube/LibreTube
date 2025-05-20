@@ -122,7 +122,6 @@
     <string name="version">Verzió: %1$s</string>
     <string name="error_occurred">Hiba</string>
     <string name="copied">Másolva</string>
-    <string name="legacy_subscriptions">Régi feliratkozások nézet</string>
     <string name="device_info">Eszközinformáció</string>
     <string name="general_summary">Nyelv és régió</string>
     <string name="worst_quality">Legrosszabb</string>

@@ -274,7 +274,6 @@
     <string name="mobile_data">行動數據</string>
     <string name="navigation_bar">導航列</string>
     <string name="change_region">目前的區域似乎無法使用熱門影片。請在設定中選取其他地區。</string>
-    <string name="legacy_subscriptions">舊版訂閱播放清單</string>
     <string name="player_summary">預設值與行為</string>
     <string name="require_restart_message">重啟APP以套用變更。</string>
     <string name="share_with_time">分享時包含時間戳</string>
