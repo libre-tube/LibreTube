@@ -33,6 +33,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
+                android:layout_margin="5dp"
+                app:cardBackgroundColor="@color/duration_background_color"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/sponsor_badge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="2dp"
+                    android:src="@drawable/ic_block"
+                    android:visibility="gone"
+                    android:layout_gravity="center"
+                    app:tint="@color/duration_text_color"
+                    tools:ignore="RtlSymmetry"
+                    tools:visibility="visible" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
                 app:cardBackgroundColor="@color/duration_background_color"
