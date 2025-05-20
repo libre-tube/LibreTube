@@ -89,7 +89,7 @@
     <string name="color_yellow">Dzeltens</string>
     <string name="color_green">Zaļš</string>
     <string name="color_purple">Violets</string>
-    <string name="material_you">Material You</string>
+    <string name="material_you">Material You dizains</string>
     <string name="category_outro">Beigu ekrāns un titri</string>
     <string name="category_intro_summary">Šeit ietilpst brīži bez reāla satura, piemēram, pārtraukumi, statisks kadri, atkārtotas animācijas. Brīži, kuros ietilpst kaut kāda informācija, neskaitās</string>
     <string name="settings">Iestatījumi</string>
@@ -155,7 +155,7 @@
     <string name="quality">Kvalitāte</string>
     <string name="behavior">Uzvedība</string>
     <string name="player_summary">Noklusējumi un uzvedība</string>
-    <string name="seek_increment">Patīšanas iedaļa</string>
+    <string name="seek_increment">Patīšanas solis</string>
     <string name="pauseOnScreenOff">Automātiski iepauzēt</string>
     <string name="pauseOnScreenOff_summary">Pārtraukt atskaņošanu, kad ekrāns tiek izslēgts</string>
     <string name="clonePlaylist">Duplicēt atskaņošanas sarakstu</string>
@@ -170,7 +170,7 @@
     <string name="require_restart">Nepieciešams restartēt aplikāciju</string>
     <string name="require_restart_message">Restartējiet aplikāciju, lai veiktu jaunās izmaiņas.</string>
     <string name="auth_instance">Autentificētā instance</string>
-    <string name="watch_positions">Atcerēties skatīšanās vietu</string>
+    <string name="watch_positions">Saglabāt atskaņošanas pozīciju</string>
     <string name="auth_instance_summary">Lietojiet citu instanci priekš autentificētiem pieprasījumiem</string>
     <string name="auth_instances">Izvēlēties autentificēto instanci</string>
     <string name="github">GitHub</string>
@@ -191,7 +191,7 @@
     <string name="search_history_summary">Atcerēties meklēšanas vēsturi</string>
     <string name="history_summary">Skatīšanās un meklēšanas vēsture</string>
     <string name="reset_watch_positions">Atiestatīt</string>
-    <string name="watch_positions_title">Atcerētās atskaņošanas vietas</string>
+    <string name="watch_positions_title">Saglabāt atskaņošanas pozīcijas</string>
     <string name="captions">Subtitri</string>
     <string name="none">Nav</string>
     <string name="general">Vispārēji</string>
@@ -226,7 +226,7 @@
     <string name="error_occurred">Kļūda</string>
     <string name="copied">Nokopēts</string>
     <string name="export_subscriptions">Izgūt abonementus</string>
-    <string name="share_with_time">Kopīgot ar sākšanas laiku</string>
+    <string name="share_with_time">Sākot no</string>
     <string name="skip_buttons">Izlaišanas pogas</string>
     <string name="skip_buttons_summary">Rādīt pogas, kas ļauj pāriet uz nākamo vai iepriekšējo video</string>
     <string name="history_size">Maksimālais vēstures izmērs</string>
@@ -235,7 +235,7 @@
     <string name="add_to_queue">Pievienot rindai</string>
     <string name="misc">Citi</string>
     <string name="take_a_break">Laiks pārtraukumam</string>
-    <string name="yt_shorts">Īsie video</string>
+    <string name="yt_shorts">Īsais video</string>
     <string name="resize_mode_fill">Piepildīt</string>
     <string name="no_subtitles_available">Subtitri nav pieejami</string>
     <string name="resize_mode_zoom">Pietuvināt</string>
@@ -295,7 +295,7 @@
     <string name="stats_for_nerds">Statistika nūģiem</string>
     <string name="video_id">Video ID</string>
     <string name="replies">Atbildes</string>
-    <string name="time_code">Laika kods (sekundes)</string>
+    <string name="time_code">sekundes</string>
     <string name="queue">Rinda</string>
     <string name="livestreams">Tiešraides</string>
     <string name="defaultIconLight">Gaišs (noklusējuma)</string>
@@ -305,7 +305,7 @@
     <string name="color_violet">Daudzpusīgs violets</string>
     <string name="playlistUrl">Atskaņošanas saraksta saite</string>
     <string name="shuffle">Jaukta secība</string>
-    <string name="mark_as_watched">Atzīmēt kā skatītu</string>
+    <string name="mark_as_watched">Atzīmēt kā noskatītu</string>
     <string name="custom_playback_speed">Pielāgots atskaņošanas ātrums</string>
     <string name="custom_playback_speed_summary">Izmantot citu atskaņošanas ātrumu nekā parastajam atskaņotājam</string>
     <string name="download_channel_name">Lejuipielāžu serviss</string>
@@ -357,7 +357,7 @@
     <string name="unknown">Nezināms</string>
     <string name="pause">Pauzēt</string>
     <string name="trends">Trendi</string>
-    <string name="double_tap_seek">Pieskarieties divreiz, lai meklētu</string>
+    <string name="double_tap_seek">Piesist divreiz, lai patītu</string>
     <string name="trending">Kas šobrīd ir tendencēs</string>
     <string name="clear_bookmarks">Dzēst grāmatzīmes</string>
     <string name="sleep_timer">Miega taimeris</string>
@@ -382,10 +382,10 @@
     </plurals>
     <string name="go_to_video">Doties uz video</string>
     <string name="disable_proxy">Atspējot Piped starpniekserveri</string>
-    <string name="auto_fullscreen_shorts">Automātisks pilnekrāna režīms īsiem video</string>
-    <string name="new_group">Jauns</string>
-    <string name="group_name">Kopas nosaukums</string>
-    <string name="channel_groups">Kanālu kopas</string>
+    <string name="auto_fullscreen_shorts">Automātisks pilnekrāna režīms īsajiem video</string>
+    <string name="new_group">Izveidot jaunu</string>
+    <string name="group_name">Grupas nosaukums</string>
+    <string name="channel_groups">Kanālu grupas</string>
     <string name="disable_proxy_summary">Lādēt video un attēlus tieši no YouTube serveriem. Ieslēdziet tikai tad, ja jūs vienmēr izmantojiet VPN</string>
     <string name="duration">Ilgums</string>
     <string name="duration_reversed">Ilgums (apgriezts)</string>
@@ -393,7 +393,7 @@
     <string name="creation_date_reversed">Izveidošanas datums (apgriezts)</string>
     <string name="alphabetic_reversed">Alfabētisks (apgriezts)</string>
     <string name="unlimited_search_history">Neierobežota meklēšanas vēsture</string>
-    <string name="shorts_notifications">Notifikācijas īsiem video</string>
+    <string name="shorts_notifications">Notifikācijas īsajiem video</string>
     <string name="alphabetic">Alfabētisks</string>
     <string name="import_subscriptions_from">Ievietot abonementus no</string>
     <string name="export_subscriptions_to">Izgūt abonementus uz</string>
@@ -410,7 +410,7 @@
     <string name="change_playlist_description">Mainīt atskaņošanas saraksta aprakstu</string>
     <string name="playlist_description">Atskaņošanas saraksta apraksts</string>
     <string name="emptyPlaylistDescription">Atskaņošanas saraksta apraksts nevar būt tukšs!</string>
-    <string name="mark_as_unwatched">Atzīmēt kā neskatītu</string>
+    <string name="mark_as_unwatched">Atzīmēt kā nenoskatītu</string>
     <string name="export_playlists_to">Izgūt atskaņošanas sarakstus uz</string>
     <string name="choose_instance_long">Izvēlieties Piped instanci, ko izmantot. Piped instance darbosies kā starpnieks starp jums un YouTube. Šīs instances fiziski atrodas dažādās vietās, uz ko norāda to valstu karogi. Instances, kas ir tuvāk jums, visticamāk strādās ātrāk nekā instances, kas ir tālāk. Jūs jebkurā mirklī varat izmainīt instanci iestatījumos.</string>
     <string name="albums">Albumi</string>
@@ -428,7 +428,7 @@
     <string name="delete_all">Visi lejupielādētie video tiks dzēsti!</string>
     <string name="autoplay_playlists">Automātiski atskaņot atskaņošanas sarakstus</string>
     <string name="audio_codecs">Audio kodeki</string>
-    <string name="group_name_error_exists">Lūdzu, izmantojiet nosaukumu, kas vēl nepastāv</string>
+    <string name="group_name_error_exists">Lūdzu, izmantojiet vēl neizmantotu nosaukumu</string>
     <string name="download_playlist">Lejupielādēt atskaņošanas sarakstu</string>
     <string name="undo">Atsaukt</string>
     <string name="successfully_removed_from_playlist">\"%1$s\" vienums veiksmīgi noņemts no atskaņošanas saraksta.</string>
@@ -457,4 +457,26 @@
     <string name="autoplay_playlists_summary">Automātiski atskaņot nākamo video atskaņošanas sarakstos neatkarīgi no atlasītā automātiskās atskaņošanas iestatījuma</string>
     <string name="import_temp_playlist_summary">Vai vēlaties izveidot jaunu atskaņošanas sarakstu ar \'%1$s\' nosaukumu? Šajā atskaņošanas sarakstā būs %2$d video.</string>
     <string name="category_highlight">Rādīt video izceltos momentus</string>
+    <string name="add_to_group">Pievienot grupai</string>
+    <string name="tooltip_edit_groups">Rediģēt grupas</string>
+    <string name="delete_only_watched_videos">Dzēst tikai jau noskatītos video</string>
+    <string name="remove_watched_videos">Noņemt noskatītos video</string>
+    <string name="also_clear_watch_positions">Notīrīt arī atskaņošanas pozīcijas</string>
+    <string name="tooltip_watch_position">Atskaņošanas pozīcija</string>
+    <string name="continue_watching">Turpināt skatīties</string>
+    <string name="dearrow">Iespējot DeArrow</string>
+    <string name="audio_track_format">%2$s %1$s valodas</string>
+    <string name="unknown_audio_language">Nezināma audio valoda</string>
+    <string name="unknown_audio_track_type">Nezināms audio celiņa tips</string>
+    <string name="local_ryd_summary">Iegūt nepatīk informāciju tieši no https://returnyoutubedislikeapi.com</string>
+    <string name="audio_language">Audio valoda</string>
+    <string name="visible">Rādīt tīšanas joslā</string>
+    <string name="repeat_mode_all">Atkārtot visus</string>
+    <string name="import_watch_history_desc">Lūdzu, ņemiet vērā, ka pilnīgi viss netiks ievietots, jo YouTube ierobežo izgūto datu informāciju.</string>
+    <string name="dearrow_summary">Rāda daudz precīzākus un mazāk sensacionālus virsrakstus un sīktēlus. Palielina ielādes laiku</string>
+    <string name="download_playlist_note">Lūdzu, atlasiet maksimālo audio/video lejupielādes kvalitāti. Subtitri tiks lejupielādēti tikai tad, ja tie ir pieejami.</string>
+    <string name="dubbed_audio_track">ieskaņotais</string>
+    <string name="time_in_minutes">Laiks minūtēs</string>
+    <string name="original_or_main_audio_track">oriģinālais vai galvenais</string>
+    <string name="unknown_or_no_audio">nezināms vai bez audio</string>
 </resources>
