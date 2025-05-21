@@ -47,7 +47,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
         }
     private val createBackupFile = registerForActivityResult(CreateDocument(FILETYPE_ANY)) { uri ->
         if (uri == null) return@registerForActivityResult
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             BackupHelper.createAdvancedBackup(requireContext(), uri, backupFile)
         }
     }
@@ -59,7 +59,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
         ActivityResultContracts.GetContent()
     ) { uri ->
         if (uri == null) return@registerForActivityResult
-        lifecycleScope.launch(Dispatchers.IO) {
+        CoroutineScope(Dispatchers.IO).launch {
             ImportHelper.importSubscriptions(requireActivity(), uri, importFormat)
         }
     }
