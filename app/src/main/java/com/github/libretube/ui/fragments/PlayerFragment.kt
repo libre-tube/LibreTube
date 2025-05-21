@@ -315,7 +315,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             maybeStreams?.let { streams ->
                 this@PlayerFragment.streams = streams
                 viewModel.segments.postValue(emptyList())
-                setPlayerDefaults()
                 updatePlayerView()
             }
         }
@@ -1072,14 +1071,22 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             AbstractPlayerService.runPlayerActionCommand,
             bundleOf(PlayerCommand.PLAY_VIDEO_BY_ID.name to nextId)
         )
+    }
 
+    private fun dismissCommentsSheet() {
         // close comment bottom sheet if opened for next video
-        activity?.supportFragmentManager?.fragments?.filterIsInstance<CommentsSheet>()
-            ?.firstOrNull()?.dismiss()
+        childFragmentManager.fragments
+            .filterIsInstance<CommentsSheet>()
+            .firstOrNull()
+            ?.dismiss()
     }
 
     @SuppressLint("SetTextI18n")
     private fun updatePlayerView() {
+        dismissCommentsSheet()
+
+        setPlayerDefaults()
+
         if (PreferenceHelper.getBoolean(PreferenceKeys.AUTO_FULLSCREEN_SHORTS, false) &&
             isShort && binding.playerMotionLayout.progress == 0f
         ) {
