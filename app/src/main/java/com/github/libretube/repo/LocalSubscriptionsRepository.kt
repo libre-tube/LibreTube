@@ -30,12 +30,16 @@ class LocalSubscriptionsRepository : SubscriptionsRepository {
     }
 
     override suspend fun importSubscriptions(newChannels: List<String>) {
-        for (chunk in newChannels.chunked(CHANNEL_CHUNK_SIZE)) {
+        val subscribedChannels = getSubscriptionChannelIds()
+
+        val newFiltered = newChannels.filter { !subscribedChannels.contains(it) }
+        for (chunk in newFiltered.chunked(CHANNEL_CHUNK_SIZE)) {
             chunk.parallelMap { channelId ->
                 val channelUrl = "$YOUTUBE_FRONTEND_URL/channel/${channelId}"
                 val channelInfo = ChannelInfo.getInfo(channelUrl)
 
-                runCatching { subscribe(channelId, channelInfo.name, channelInfo.avatars.maxByOrNull { it.height }?.url, channelInfo.isVerified) }
+                val avatarUrl = channelInfo.avatars.maxByOrNull { it.height }?.url
+                subscribe(channelId, channelInfo.name, avatarUrl, channelInfo.isVerified)
             }
         }
     }

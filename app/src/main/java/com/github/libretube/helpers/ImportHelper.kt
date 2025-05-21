@@ -1,6 +1,5 @@
 package com.github.libretube.helpers
 
-import android.app.Activity
 import android.content.Context
 import android.net.Uri
 import android.util.Log
@@ -40,19 +39,19 @@ object ImportHelper {
     /**
      * Import subscriptions by a file uri
      */
-    suspend fun importSubscriptions(activity: Activity, uri: Uri, importFormat: ImportFormat) {
+    suspend fun importSubscriptions(context: Context, uri: Uri, importFormat: ImportFormat) {
         try {
-            SubscriptionHelper.importSubscriptions(getChannelsFromUri(activity, uri, importFormat))
-            activity.toastFromMainDispatcher(R.string.importsuccess)
+            SubscriptionHelper.importSubscriptions(getChannelsFromUri(context, uri, importFormat))
+            context.toastFromMainDispatcher(R.string.importsuccess)
         } catch (e: IllegalArgumentException) {
             Log.e(TAG(), e.toString())
-            val type = activity.contentResolver.getType(uri)
-            val message = activity.getString(R.string.unsupported_file_format, type)
-            activity.toastFromMainDispatcher(message)
+            val type = context.contentResolver.getType(uri)
+            val message = context.getString(R.string.unsupported_file_format, type)
+            context.toastFromMainDispatcher(message)
         } catch (e: Exception) {
             Log.e(TAG(), e.toString())
             e.localizedMessage?.let {
-                activity.toastFromMainDispatcher(it)
+                context.toastFromMainDispatcher(it)
             }
         }
     }
@@ -62,13 +61,13 @@ object ImportHelper {
      */
     @OptIn(ExperimentalSerializationApi::class)
     private fun getChannelsFromUri(
-        activity: Activity,
+        context: Context,
         uri: Uri,
         importFormat: ImportFormat
     ): List<String> {
         return when (importFormat) {
             ImportFormat.NEWPIPE -> {
-                val subscriptions = activity.contentResolver.openInputStream(uri)?.use {
+                val subscriptions = context.contentResolver.openInputStream(uri)?.use {
                     JsonHelper.json.decodeFromStream<NewPipeSubscriptions>(it)
                 }
                 subscriptions?.subscriptions.orEmpty().map {
@@ -77,7 +76,7 @@ object ImportHelper {
             }
 
             ImportFormat.FREETUBE -> {
-                val subscriptions = activity.contentResolver.openInputStream(uri)?.use {
+                val subscriptions = context.contentResolver.openInputStream(uri)?.use {
                     JsonHelper.json.decodeFromStream<FreetubeSubscriptions>(it)
                 }
                 subscriptions?.subscriptions.orEmpty().map {
@@ -87,7 +86,7 @@ object ImportHelper {
 
             ImportFormat.YOUTUBECSV -> {
                 // import subscriptions from Google/YouTube Takeout
-                activity.contentResolver.openInputStream(uri)?.use {
+                context.contentResolver.openInputStream(uri)?.use {
                     it.bufferedReader().use { reader ->
                         reader.lines().map { line -> line.substringBefore(",") }
                             .filter { channelId -> channelId.length == 24 }
@@ -104,7 +103,7 @@ object ImportHelper {
      * Write the text to the document
      */
     @OptIn(ExperimentalSerializationApi::class)
-    suspend fun exportSubscriptions(activity: Activity, uri: Uri, importFormat: ImportFormat) {
+    suspend fun exportSubscriptions(context: Context, uri: Uri, importFormat: ImportFormat) {
         val subs = SubscriptionHelper.getSubscriptions()
 
         when (importFormat) {
@@ -113,7 +112,7 @@ object ImportHelper {
                     NewPipeSubscription(it.name, 0, "$YOUTUBE_FRONTEND_URL/channel/${it.url}")
                 }
                 val newPipeSubscriptions = NewPipeSubscriptions(subscriptions = newPipeChannels)
-                activity.contentResolver.openOutputStream(uri)?.use {
+                context.contentResolver.openOutputStream(uri)?.use {
                     JsonHelper.json.encodeToStream(newPipeSubscriptions, it)
                 }
             }
@@ -127,7 +126,7 @@ object ImportHelper {
                     )
                 }
                 val freeTubeSubscriptions = FreetubeSubscriptions(subscriptions = freeTubeChannels)
-                activity.contentResolver.openOutputStream(uri)?.use {
+                context.contentResolver.openOutputStream(uri)?.use {
                     JsonHelper.json.encodeToStream(freeTubeSubscriptions, it)
                 }
             }
@@ -135,19 +134,19 @@ object ImportHelper {
             else -> throw IllegalArgumentException()
         }
 
-        activity.toastFromMainDispatcher(R.string.exportsuccess)
+        context.toastFromMainDispatcher(R.string.exportsuccess)
     }
 
     /**
      * Import Playlists
      */
     @OptIn(ExperimentalSerializationApi::class)
-    suspend fun importPlaylists(activity: Activity, uri: Uri, importFormat: ImportFormat) {
+    suspend fun importPlaylists(context: Context, uri: Uri, importFormat: ImportFormat) {
         val importPlaylists = mutableListOf<PipedImportPlaylist>()
 
         when (importFormat) {
             ImportFormat.PIPED -> {
-                val playlistFile = activity.contentResolver.openInputStream(uri)?.use {
+                val playlistFile = context.contentResolver.openInputStream(uri)?.use {
                     JsonHelper.json.decodeFromStream<PipedPlaylistFile>(it)
                 }
                 importPlaylists.addAll(playlistFile?.playlists.orEmpty())
@@ -160,7 +159,7 @@ object ImportHelper {
 
             ImportFormat.FREETUBE -> {
                 val playlistFile =
-                    activity.contentResolver.openInputStream(uri)?.use { inputStream ->
+                    context.contentResolver.openInputStream(uri)?.use { inputStream ->
                         val text = inputStream.bufferedReader().readText()
                         runCatching {
                             text.lines().map { line ->
@@ -186,7 +185,7 @@ object ImportHelper {
 
             ImportFormat.YOUTUBECSV -> {
                 val playlist = PipedImportPlaylist()
-                activity.contentResolver.openInputStream(uri)?.use { inputStream ->
+                context.contentResolver.openInputStream(uri)?.use { inputStream ->
                     val lines = inputStream.bufferedReader().readLines()
                     // invalid playlist file, hence returning
                     if (lines.size < 2) return
@@ -226,7 +225,7 @@ object ImportHelper {
             }
 
             ImportFormat.URLSORIDS -> {
-                activity.contentResolver.openInputStream(uri)?.use { inputStream ->
+                context.contentResolver.openInputStream(uri)?.use { inputStream ->
                     val playlist = PipedImportPlaylist(name = TextUtils.getFileSafeTimeStampNow())
 
                     playlist.videos = inputStream.bufferedReader().readLines()
@@ -249,17 +248,17 @@ object ImportHelper {
         }
 
         if (importPlaylists.isEmpty()) {
-            activity.toastFromMainDispatcher(R.string.emptyList)
+            context.toastFromMainDispatcher(R.string.emptyList)
             return
         }
 
         try {
             PlaylistsHelper.importPlaylists(importPlaylists)
-            activity.toastFromMainDispatcher(R.string.success)
+            context.toastFromMainDispatcher(R.string.success)
         } catch (e: Exception) {
             Log.e(TAG(), e.toString())
             e.localizedMessage?.let {
-                activity.toastFromMainDispatcher(it)
+                context.toastFromMainDispatcher(it)
             }
         }
     }
@@ -269,7 +268,7 @@ object ImportHelper {
      */
     @OptIn(ExperimentalSerializationApi::class)
     suspend fun exportPlaylists(
-        activity: Activity,
+        context: Context,
         uri: Uri,
         importFormat: ImportFormat,
         selectedPlaylistIds: List<String>? = null
@@ -285,10 +284,10 @@ object ImportHelper {
                     PipedImportPlaylist(it.name, "playlist", "private", videos)
                 })
 
-                activity.contentResolver.openOutputStream(uri)?.use {
+                context.contentResolver.openOutputStream(uri)?.use {
                     JsonHelper.json.encodeToStream(playlistFile, it)
                 }
-                activity.toastFromMainDispatcher(R.string.exportsuccess)
+                context.toastFromMainDispatcher(R.string.exportsuccess)
             }
 
             ImportFormat.FREETUBE -> {
@@ -307,10 +306,10 @@ object ImportHelper {
                     JsonHelper.json.encodeToString(playlist)
                 }
 
-                activity.contentResolver.openOutputStream(uri)?.use {
+                context.contentResolver.openOutputStream(uri)?.use {
                     it.write(freeTubeExportDb.toByteArray())
                 }
-                activity.toastFromMainDispatcher(R.string.exportsuccess)
+                context.toastFromMainDispatcher(R.string.exportsuccess)
             }
 
             ImportFormat.URLSORIDS -> {
@@ -318,10 +317,10 @@ object ImportHelper {
                     .flatMap { it.relatedStreams }
                     .joinToString("\n") { YOUTUBE_FRONTEND_URL + "/watch?v=" + it.url!!.toID() }
 
-                activity.contentResolver.openOutputStream(uri)?.use {
+                context.contentResolver.openOutputStream(uri)?.use {
                     it.write(urlListExport.toByteArray())
                 }
-                activity.toastFromMainDispatcher(R.string.exportsuccess)
+                context.toastFromMainDispatcher(R.string.exportsuccess)
             }
 
             else -> Unit
