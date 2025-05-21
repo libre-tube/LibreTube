@@ -53,8 +53,8 @@ open class OfflinePlayerService : AbstractPlayerService() {
 
     private val playerListener = object : Player.Listener {
         override fun onPlaybackStateChanged(playbackState: Int) {
-            if (playbackState == Player.STATE_ENDED && PlayerHelper.isAutoPlayEnabled()) {
-                playNextVideo(PlayingQueue.getNext() ?: return)
+            if (playbackState == Player.STATE_ENDED) {
+                playNextVideo()
             }
 
             if (playbackState == Player.STATE_READY) {
@@ -203,11 +203,16 @@ open class OfflinePlayerService : AbstractPlayerService() {
         PlayingQueue.insertRelatedStreams(downloads.map { it.download.toStreamItem() })
     }
 
-    private fun playNextVideo(videoId: String) {
-        setVideoId(videoId)
+    private fun playNextVideo(videoId: String? = null) {
+        if (PlayingQueue.repeatMode == Player.REPEAT_MODE_ONE) {
+            exoPlayer?.seekTo(0)
+        } else if (PlayerHelper.isAutoPlayEnabled()) {
+            val nextId = videoId ?: PlayingQueue.getNext() ?: return
+            setVideoId(nextId)
 
-        scope.launch {
-            startPlayback()
+            scope.launch {
+                startPlayback()
+            }
         }
     }
 
