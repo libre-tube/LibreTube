@@ -2,11 +2,15 @@ package com.github.libretube.helpers
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
+import com.github.libretube.BuildConfig
 import com.github.libretube.constants.PreferenceKeys
 
 object PreferenceHelper {
+    private val TAG = PreferenceHelper::class.simpleName
+
     /**
      * for normal preferences
      */
@@ -28,6 +32,19 @@ object PreferenceHelper {
     fun initialize(context: Context) {
         settings = getDefaultSharedPreferences(context)
         authSettings = getAuthenticationPreferences(context)
+    }
+
+    /**
+     * Migrate preference to a new version
+     */
+    fun migrate() {
+        val prefVersion = getInt(PreferenceKeys.PREFERENCE_VERSION, -1)
+        // check if there are any prefs to migrate
+        if (prefVersion == BuildConfig.VERSION_CODE)
+            return
+
+        // mark as successfully migrated
+        putInt(PreferenceKeys.PREFERENCE_VERSION, BuildConfig.VERSION_CODE)
     }
 
     fun putString(key: String, value: String) {
