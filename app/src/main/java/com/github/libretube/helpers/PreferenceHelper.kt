@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
-import com.github.libretube.BuildConfig
 import com.github.libretube.LibreTubeApp
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
@@ -13,6 +12,13 @@ import com.github.libretube.enums.SbSkipOptions
 
 object PreferenceHelper {
     private val TAG = PreferenceHelper::class.simpleName
+
+    /**
+     * Preference migration from [fromVersion] to [toVersion].
+     */
+    private class PreferenceMigration(
+        val fromVersion: Int, val toVersion: Int, val onMigration: () -> Unit
+    )
 
     /**
      * for normal preferences
@@ -29,25 +35,17 @@ object PreferenceHelper {
      */
     private const val USER_ID_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 
-    /**
-     * set the context that is being used to access the shared preferences
-     */
-    fun initialize(context: Context) {
-        settings = getDefaultSharedPreferences(context)
-        authSettings = getAuthenticationPreferences(context)
-    }
 
     /**
-     * Migrate preference to a new version
+     * Current version of the preferences.
      */
-    fun migrate() {
-        val prefVersion = getInt(PreferenceKeys.PREFERENCE_VERSION, -1)
-        // check if there are any prefs to migrate
-        if (prefVersion == BuildConfig.VERSION_CODE)
-            return
+    private const val PREFERENCE_VERSION = 1
 
-        if (prefVersion < 63) {
-            Log.i(TAG, "Migration to prefs v63")
+    /**
+     * Migrations required to migrate the application to a newer [PREFERENCE_VERSION].
+     */
+    private val MIGRATIONS = listOf(
+        PreferenceMigration(0, 1) {
             LibreTubeApp.instance.resources
                 .getStringArray(R.array.sponsorBlockSegments)
                 .forEach { category ->
@@ -57,10 +55,38 @@ object PreferenceHelper {
                         putString(key, SbSkipOptions.MANUAL.name.lowercase())
                     }
                 }
+        },
+    )
+
+    /**
+     * set the context that is being used to access the shared preferences
+     */
+    fun initialize(context: Context) {
+        settings = getDefaultSharedPreferences(context)
+        authSettings = getAuthenticationPreferences(context)
+    }
+
+    /**
+     * Migrate preference to a new version.
+     *
+     * Migrations are run up to [PREFERENCE_VERSION].
+     */
+    fun migrate() {
+        var currentPrefVersion = getInt(PreferenceKeys.PREFERENCE_VERSION, 0)
+
+        while (currentPrefVersion < PREFERENCE_VERSION) {
+            val next = currentPrefVersion + 1
+
+            val migration =
+                MIGRATIONS.find { it.fromVersion == currentPrefVersion && it.toVersion == next }
+            Log.i(TAG, "Performing migration from $currentPrefVersion to $next")
+            migration?.onMigration?.invoke()
+
+            currentPrefVersion++
+            // mark as successfully migrated
+            putInt(PreferenceKeys.PREFERENCE_VERSION, currentPrefVersion)
         }
 
-        // mark as successfully migrated
-        putInt(PreferenceKeys.PREFERENCE_VERSION, BuildConfig.VERSION_CODE)
     }
 
     fun putString(key: String, value: String) {
