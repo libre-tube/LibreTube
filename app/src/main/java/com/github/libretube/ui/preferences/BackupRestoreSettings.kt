@@ -36,7 +36,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
             if (uri == null) return@registerForActivityResult
             CoroutineScope(Dispatchers.IO).launch {
-                BackupHelper.restoreAdvancedBackup(requireContext(), uri)
+                BackupHelper.restoreAdvancedBackup(requireContext().applicationContext, uri)
                 withContext(Dispatchers.Main) {
                     // could fail if fragment is already closed
                     runCatching {
@@ -48,7 +48,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
     private val createBackupFile = registerForActivityResult(CreateDocument(FILETYPE_ANY)) { uri ->
         if (uri == null) return@registerForActivityResult
         lifecycleScope.launch(Dispatchers.IO) {
-            BackupHelper.createAdvancedBackup(requireContext(), uri, backupFile)
+            BackupHelper.createAdvancedBackup(requireContext().applicationContext, uri, backupFile)
         }
     }
 
@@ -60,14 +60,14 @@ class BackupRestoreSettings : BasePreferenceFragment() {
     ) { uri ->
         if (uri == null) return@registerForActivityResult
         CoroutineScope(Dispatchers.IO).launch {
-            ImportHelper.importSubscriptions(requireActivity(), uri, importFormat)
+            ImportHelper.importSubscriptions(requireContext().applicationContext, uri, importFormat)
         }
     }
 
     private val createSubscriptionsFile = registerForActivityResult(CreateDocument(FILETYPE_ANY)) { uri ->
         if (uri == null) return@registerForActivityResult
         lifecycleScope.launch(Dispatchers.IO) {
-            ImportHelper.exportSubscriptions(requireActivity(), uri, importFormat)
+            ImportHelper.exportSubscriptions(requireContext().applicationContext, uri, importFormat)
         }
     }
 
@@ -77,7 +77,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
         registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) { files ->
             for (file in files) {
                 CoroutineScope(Dispatchers.IO).launch {
-                    ImportHelper.importPlaylists(requireActivity(), file, importFormat)
+                    ImportHelper.importPlaylists(requireContext().applicationContext, file, importFormat)
                 }
             }
         }
@@ -86,7 +86,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
         registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) { files ->
             for (file in files) {
                 CoroutineScope(Dispatchers.IO).launch {
-                    ImportHelper.importWatchHistory(requireActivity(), file, importFormat)
+                    ImportHelper.importWatchHistory(requireContext().applicationContext, file, importFormat)
                 }
             }
         }
@@ -94,7 +94,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
     private val createPlaylistsFile = registerForActivityResult(CreateDocument(FILETYPE_ANY)) { uri ->
         uri?.let {
             lifecycleScope.launch(Dispatchers.IO) {
-                ImportHelper.exportPlaylists(requireActivity(), uri, importFormat)
+                ImportHelper.exportPlaylists(requireContext().applicationContext, uri, importFormat)
             }
         }
     }
