@@ -14,6 +14,7 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
 import androidx.media3.session.MediaController
 import androidx.media3.ui.PlayerView
@@ -63,9 +64,11 @@ class OfflinePlayerActivity : BaseActivity() {
         override fun onEvents(player: Player, events: Player.Events) {
             super.onEvents(player, events)
             // update the displayed duration on changes
-            playerBinding.duration.text = DateUtils.formatElapsedTime(
-                player.duration / 1000
-            )
+            if (::playerBinding.isInitialized && player.duration >= 0) {
+                playerBinding.duration.text = DateUtils.formatElapsedTime(
+                    player.duration / 1000
+                )
+            }
         }
 
         override fun onIsPlayingChanged(isPlaying: Boolean) {
@@ -96,6 +99,13 @@ class OfflinePlayerActivity : BaseActivity() {
                     )
                 )
             }
+        }
+
+        override fun onMediaMetadataChanged(mediaMetadata: MediaMetadata) {
+            super.onMediaMetadataChanged(mediaMetadata)
+
+            mediaMetadata.extras?.getString(IntentData.videoId)?.let { videoId = it }
+            lifecycleScope.launch { loadPlayerData() }
         }
     }
 
@@ -194,23 +204,24 @@ class OfflinePlayerActivity : BaseActivity() {
             binding.playerGestureControlsView.binding,
             chaptersViewModel
         )
+    }
 
-        lifecycleScope.launch {
-            val (downloadInfo, downloadItems, downloadChapters) = withContext(Dispatchers.IO) {
-                Database.downloadDao().findById(videoId)
-            }!!
+    private suspend fun loadPlayerData() {
+        val (downloadInfo, downloadItems, downloadChapters) = withContext(Dispatchers.IO) {
+            Database.downloadDao().findById(videoId)
+        }!!
 
-            val chapters = downloadChapters.map(DownloadChapter::toChapterSegment)
-            chaptersViewModel.chaptersLiveData.value = chapters
-            binding.player.setChapters(chapters)
+        val chapters = downloadChapters.map(DownloadChapter::toChapterSegment)
+        chaptersViewModel.chaptersLiveData.value = chapters
+        binding.player.setChapters(chapters)
 
-            playerBinding.exoTitle.text = downloadInfo.title
-            playerBinding.exoTitle.isVisible = true
+        playerBinding.exoTitle.text = downloadInfo.title
+        playerBinding.exoTitle.isVisible = true
 
-            timeFrameReceiver = downloadItems.firstOrNull { it.path.exists() && it.type == FileType.VIDEO }?.path?.let {
+        timeFrameReceiver =
+            downloadItems.firstOrNull { it.path.exists() && it.type == FileType.VIDEO }?.path?.let {
                 OfflineTimeFrameReceiver(this@OfflinePlayerActivity, it)
             }
-        }
     }
 
     override fun onResume() {
@@ -228,7 +239,10 @@ class OfflinePlayerActivity : BaseActivity() {
     }
 
     override fun onDestroy() {
-        playerController.sendCustomCommand(AbstractPlayerService.stopServiceCommand, Bundle.EMPTY)
+        playerController.sendCustomCommand(
+            AbstractPlayerService.stopServiceCommand,
+            Bundle.EMPTY
+        )
 
         runCatching {
             unregisterReceiver(playerActionReceiver)
