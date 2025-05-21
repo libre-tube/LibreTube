@@ -1014,8 +1014,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         if (segmentData != null && commonPlayerViewModel.isMiniPlayerVisible.value != true) {
             val (segment, sbSkipOption) = segmentData
 
-            val autoSkipTemporarilyDisabled = !binding.player.sponsorBlockAutoSkip &&
-                    sbSkipOption !in arrayOf(SbSkipOptions.OFF, SbSkipOptions.VISIBLE)
+            val autoSkipTemporarilyDisabled =
+                !binding.player.sponsorBlockAutoSkip && sbSkipOption != SbSkipOptions.OFF
 
             if (sbSkipOption in arrayOf(
                     SbSkipOptions.AUTOMATIC_ONCE,

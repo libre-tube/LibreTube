@@ -6,7 +6,10 @@ import android.util.Log
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.github.libretube.BuildConfig
+import com.github.libretube.LibreTubeApp
+import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.enums.SbSkipOptions
 
 object PreferenceHelper {
     private val TAG = PreferenceHelper::class.simpleName
@@ -42,6 +45,19 @@ object PreferenceHelper {
         // check if there are any prefs to migrate
         if (prefVersion == BuildConfig.VERSION_CODE)
             return
+
+        if (prefVersion < 63) {
+            Log.i(TAG, "Migration to prefs v63")
+            LibreTubeApp.instance.resources
+                .getStringArray(R.array.sponsorBlockSegments)
+                .forEach { category ->
+                    val key = "${category}_category"
+                    val stored = getString(key, "visible")
+                    if (stored == "visible") {
+                        putString(key, SbSkipOptions.MANUAL.name.lowercase())
+                    }
+                }
+        }
 
         // mark as successfully migrated
         putInt(PreferenceKeys.PREFERENCE_VERSION, BuildConfig.VERSION_CODE)
