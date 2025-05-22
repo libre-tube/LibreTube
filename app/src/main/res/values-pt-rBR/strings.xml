@@ -320,7 +320,7 @@
     <string name="import_playlists">Importar playlists</string>
     <string name="export_playlists">Exportar playlists</string>
     <string name="app_backup">Backup do aplicativo</string>
-    <string name="backup_restore_summary">Importar e exportar inscrições, playlist…</string>
+    <string name="backup_restore_summary">Importar e exportar inscrições, playlists…</string>
     <string name="exportsuccess">Exportado.</string>
     <string name="privacy_alert">Alerta de privacidade</string>
     <string name="proceed">Continuar</string>
