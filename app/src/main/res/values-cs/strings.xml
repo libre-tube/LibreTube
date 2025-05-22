@@ -478,7 +478,7 @@
     <string name="filename_too_long">Název souboru je příliš dlouhý!</string>
     <string name="sponsorblock_user_id">ID uživatele SponsorBlock</string>
     <string name="donate">Přispět</string>
-    <string name="no_fullscreen_resolution">Rozlišení bez celé obrazovky</string>
+    <string name="no_fullscreen_resolution">Rozlišení mimo celou obrazovku</string>
     <string name="playback_during_call_summary">Má to také vliv na to, že aplikace již nezpracovává žádný druh zaměření zvuku</string>
     <string name="music_artists">Umělci YT Music</string>
     <string name="playback_during_call">Pokračovat v přehrávání při hovoru</string>
