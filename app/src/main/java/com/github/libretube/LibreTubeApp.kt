@@ -26,6 +26,7 @@ class LibreTubeApp : Application() {
          * Initialize the [PreferenceHelper]
          */
         PreferenceHelper.initialize(applicationContext)
+        PreferenceHelper.migrate()
 
         /**
          * Set the api and the auth api url

@@ -422,7 +422,6 @@
 
     <string-array name="sb_skip_options">
         <item>@string/off</item>
-        <item>@string/visible</item>
         <item>@string/manual</item>
         <item>@string/automatic</item>
         <item>@string/automatic_once</item>
@@ -430,7 +429,6 @@
 
     <string-array name="sb_skip_options_values">
         <item>off</item>
-        <item>visible</item>
         <item>manual</item>
         <item>automatic</item>
         <item>automatic_once</item>

@@ -145,6 +145,7 @@ object PreferenceKeys {
     const val SELECTED_CHANNEL_GROUP = "selected_channel_group"
     const val SELECTED_DOWNLOAD_SORT_TYPE = "selected_download_sort_type"
     const val LAST_SHOWN_INFO_MESSAGE_VERSION_CODE = "last_shown_info_message_version"
+    const val PREFERENCE_VERSION = "PREFERENCE_VERSION"
 
     // use the helper methods at PreferenceHelper to access these
     const val LAST_USER_SEEN_FEED_TIME = "last_watched_feed_time"
