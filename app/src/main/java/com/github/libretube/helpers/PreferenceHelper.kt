@@ -35,16 +35,11 @@ object PreferenceHelper {
      */
     private const val USER_ID_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 
-
     /**
-     * Current version of the preferences.
+     * Migrations required to migrate the application to a newer preference version.
+     * The version is automatically determined from the number of migrations available.
      */
-    private const val PREFERENCE_VERSION = 1
-
-    /**
-     * Migrations required to migrate the application to a newer [PREFERENCE_VERSION].
-     */
-    private val MIGRATIONS = listOf(
+    private val MIGRATIONS = arrayOf(
         PreferenceMigration(0, 1) {
             LibreTubeApp.instance.resources
                 .getStringArray(R.array.sponsorBlockSegments)
@@ -68,13 +63,11 @@ object PreferenceHelper {
 
     /**
      * Migrate preference to a new version.
-     *
-     * Migrations are run up to [PREFERENCE_VERSION].
      */
     fun migrate() {
         var currentPrefVersion = getInt(PreferenceKeys.PREFERENCE_VERSION, 0)
 
-        while (currentPrefVersion < PREFERENCE_VERSION) {
+        while (currentPrefVersion < MIGRATIONS.count()) {
             val next = currentPrefVersion + 1
 
             val migration =
