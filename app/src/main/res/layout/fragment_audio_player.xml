@@ -44,17 +44,13 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <androidx.appcompat.widget.SwitchCompat
+            <com.google.android.material.materialswitch.MaterialSwitch
+                style="@style/Widget.Material3.CompoundButton.MaterialSwitch"
                 android:id="@+id/autoPlay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
-                android:scaleX="0.8"
-                android:scaleY="0.8"
-                android:thumb="@drawable/player_switch_thumb"
-                app:thumbTint="?colorPrimary"
-                app:track="@drawable/player_switch_track"
-                app:trackTint="?colorControlNormal" />
+                app:thumbIcon="@drawable/material_player_switch_thumb" />
 
         </LinearLayout>
 
