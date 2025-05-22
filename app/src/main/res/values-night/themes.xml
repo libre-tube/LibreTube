@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="BaseTheme" parent="Theme.Material3.Dark.NoActionBar">
+    <style name="BaseTheme" parent="Theme.Material3Expressive.Dark.NoActionBar">
 
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">false</item>
