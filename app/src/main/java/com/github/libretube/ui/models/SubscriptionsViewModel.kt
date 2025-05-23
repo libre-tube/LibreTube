@@ -24,8 +24,6 @@ class SubscriptionsViewModel : ViewModel() {
     var subscriptions = MutableLiveData<List<Subscription>?>()
     val feedProgress = MutableLiveData<FeedProgress?>()
 
-    var isCurrentTabSubChannels = false
-    var subChannelsRecyclerViewState: Parcelable? = null
     var subFeedRecyclerViewState: Parcelable? = null
 
     fun fetchFeed(context: Context, forceRefresh: Boolean) {
