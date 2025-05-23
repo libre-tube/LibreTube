@@ -195,13 +195,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/sub_channels"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </com.github.libretube.ui.views.CustomSwipeToRefresh>
 </RelativeLayout>
