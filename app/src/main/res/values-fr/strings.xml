@@ -326,7 +326,7 @@
     <string name="import_playlists">Importer des listes de lecture</string>
     <string name="export_playlists">Exporter des listes de lecture</string>
     <string name="app_backup">Sauvegarde de l’application</string>
-    <string name="backup_restore_summary">Importer et exporter des abonnements, des listes de lecture…</string>
+    <string name="backup_restore_summary">Importer et exporter des abonnements, des playlists…</string>
     <string name="play_latest_videos">Lire les vidéos les plus récentes</string>
     <string name="queue_insert_related_videos">Insérer des vidéos associées</string>
     <string name="captions_size">Taille des sous-titres</string>
