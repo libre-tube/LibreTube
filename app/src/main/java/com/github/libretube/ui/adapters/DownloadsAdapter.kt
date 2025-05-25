@@ -41,8 +41,6 @@ class DownloadsAdapter(
     private val downloadTab: DownloadTab,
     private val toggleDownload: (DownloadWithItems) -> Boolean
 ) : ListAdapter<DownloadWithItems, DownloadsViewHolder>(DiffUtilItemCallback()) {
-    val items get() = (0 until itemCount).map { getItem(it) }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DownloadsViewHolder {
         val binding = VideoRowBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -183,7 +181,7 @@ class DownloadsAdapter(
     }
 
     fun deleteAllDownloads(onlyDeleteWatched: Boolean) {
-        val (toDelete, toKeep) = items.partition {
+        val (toDelete, toKeep) = currentList.partition {
             !onlyDeleteWatched || runBlocking(Dispatchers.IO) {
                 DatabaseHelper.isVideoWatched(it.download.videoId, it.download.duration ?: 0)
             }
