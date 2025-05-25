@@ -14,7 +14,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.core.view.marginBottom
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -47,7 +46,6 @@ import com.github.libretube.ui.adapters.DownloadsAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.extensions.setupFragmentAnimation
 import com.github.libretube.ui.models.CommonPlayerViewModel
-import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -312,7 +310,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
     }
 
     fun updateProgress(id: Int, status: DownloadStatus) {
-        val index = adapter.items.indexOfFirst {
+        val index = adapter.currentList.indexOfFirst {
             it.downloadItems.any { item -> item.id == id }
         }
         val view =
