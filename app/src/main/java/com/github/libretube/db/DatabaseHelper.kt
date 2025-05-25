@@ -95,6 +95,9 @@ object DatabaseHelper {
         }
     }
 
+    /**
+     * @param unfinished If true, only returns unfinished videos. If false, only returns finished videos.
+     */
     suspend fun filterByWatchStatus(
         watchHistoryItem: WatchHistoryItem,
         unfinished: Boolean = true

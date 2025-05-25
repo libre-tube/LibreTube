@@ -134,7 +134,6 @@ object PreferenceKeys {
 
     // History
     const val WATCH_HISTORY_SIZE = "watch_history_size"
-    const val SELECTED_HISTORY_TYPE_FILTER = "filter_history_type"
     const val SELECTED_HISTORY_STATUS_FILTER = "filter_history_status"
 
     // Internally saved data / not a preference
