@@ -27,12 +27,9 @@ class WatchHistoryModel : ViewModel() {
     private val selectedStatus = MutableStateFlow(
         PreferenceHelper.getInt(PreferenceKeys.SELECTED_HISTORY_STATUS_FILTER, 0)
     )
-    private val selectedType = MutableStateFlow(
-        PreferenceHelper.getInt(PreferenceKeys.SELECTED_HISTORY_TYPE_FILTER, 0)
-    )
 
     val filteredWatchHistory =
-        combine(watchHistory.asFlow(), selectedStatus, selectedType) { history, _, _ -> history }
+        combine(watchHistory.asFlow(), selectedStatus) { history, _ -> history }
             .flowOn(Dispatchers.IO).map { history -> history.filter { it.shouldIncludeByFilters() } }
             .asLiveData()
 
@@ -43,25 +40,7 @@ class WatchHistoryModel : ViewModel() {
             selectedStatus.value = value
         }
 
-    var selectedTypeFilter
-        get() = selectedType.value
-        set(value) {
-            PreferenceHelper.putInt(PreferenceKeys.SELECTED_HISTORY_TYPE_FILTER, value)
-            selectedType.value = value
-        }
-
     private suspend fun WatchHistoryItem.shouldIncludeByFilters(): Boolean {
-        val isLive = (duration ?: -1L) < 0L
-        val matchesFilter = when (selectedTypeFilter) {
-            0 -> true
-            1 -> !isShort && !isLive
-            2 -> isShort // where is the StreamItem converted to watchHistoryItem?
-            3 -> isLive
-            else -> throw IllegalArgumentException()
-        }
-
-        if (!matchesFilter) return false
-
         // no watch position filter
         if (selectedStatusFilter == 0) return true
 
