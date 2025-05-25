@@ -219,4 +219,10 @@
         <item name="android:padding">5dp</item>
     </style>
 
+    <style name="Widget.Material3.Button.IconButton.Elevated" parent="Widget.Material3.Button.IconButton">
+        <item name="android:stateListAnimator">@animator/m3_btn_elevated_btn_state_list_anim</item>
+        <item name="elevation">@dimen/m3_comp_button_elevated_container_elevation</item>
+        <item name="materialThemeOverlay">@style/ThemeOverlay.Material3Expressive.Button.Elevated</item>
+    </style>
+
 </resources>
