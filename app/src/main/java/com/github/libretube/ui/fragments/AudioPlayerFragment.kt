@@ -175,7 +175,7 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
         }
 
         binding.openVideo.setOnClickListener {
-            switchToVideoMode()
+            switchToVideoMode(PlayingQueue.getCurrent()?.url!!.toID())
         }
 
         childFragmentManager.setFragmentResultListener(
@@ -260,7 +260,7 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
         }
     }
 
-    fun switchToVideoMode() {
+    fun switchToVideoMode(videoId: String) {
         playerController?.sendCustomCommand(
             AbstractPlayerService.runPlayerActionCommand,
             bundleOf(PlayerCommand.TOGGLE_AUDIO_ONLY_MODE.name to false)
@@ -270,7 +270,7 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
 
         NavigationHelper.openVideoPlayerFragment(
             context = requireContext(),
-            videoId = PlayingQueue.getCurrent()?.url!!.toID(),
+            videoId = videoId,
             alreadyStarted = true,
         )
     }
@@ -492,7 +492,7 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
     private fun updateVolume(distance: Float) {
         val bar = binding.volumeProgressBar
         binding.volumeControls.apply {
-            if (visibility == View.GONE) {
+            if (isGone) {
                 isVisible = true
                 // Volume could be changed using other mediums, sync progress
                 // bar with new value.
