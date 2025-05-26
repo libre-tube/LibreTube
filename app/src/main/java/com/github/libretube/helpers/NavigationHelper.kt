@@ -65,8 +65,8 @@ object NavigationHelper {
         val activity = ContextHelper.unwrapActivity<MainActivity>(context)
         val attachedToRunningPlayer = activity.runOnPlayerFragment {
             try {
-                this.playNextVideo(videoUrlOrId.toID())
                 PlayingQueue.clear()
+                this.playNextVideo(videoUrlOrId.toID())
 
                 if (audioOnlyPlayerRequested) {
                     // switch to audio only player
@@ -85,12 +85,12 @@ object NavigationHelper {
         if (attachedToRunningPlayer) return
 
         val attachedToRunningAudioPlayer = activity.runOnAudioPlayerFragment {
-            this.playNextVideo(videoUrlOrId.toID())
             PlayingQueue.clear()
+            this.playNextVideo(videoUrlOrId.toID())
 
             if (!audioOnlyPlayerRequested) {
                 // switch to video only player
-                this.switchToVideoMode()
+                this.switchToVideoMode(videoUrlOrId.toID())
             } else {
                 // maximize player
                 this.binding.playerMotionLayout.transitionToStart()
