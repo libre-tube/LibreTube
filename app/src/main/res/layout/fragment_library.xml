@@ -9,8 +9,7 @@
     <com.github.libretube.ui.views.CustomSwipeToRefresh
         android:id="@+id/playlist_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp">
+        android:layout_height="match_parent">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -22,160 +21,127 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.google.android.material.card.MaterialCardView
-                    style="@style/Widget.Material3.CardView.Elevated"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:paddingVertical="6dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/watch_history"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:text="@string/watch_history"
+                        android:textAlignment="viewStart"
+                        android:textStyle="bold"
+                        app:icon="@drawable/ic_time_outlined"
+                        android:layout_marginEnd="10dp"
+                        app:materialSizeOverlay="@style/SizeOverlay.Material3Expressive.Button.Medium"/>
 
-                        <TextView
-                            android:id="@+id/watch_history"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="?attr/selectableItemBackground"
-                            android:drawablePadding="10dp"
-                            android:paddingHorizontal="15dp"
-                            android:paddingVertical="12dp"
-                            android:text="@string/watch_history"
-                            android:textAlignment="viewStart"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            app:drawableStartCompat="@drawable/ic_time_outlined" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/downloads"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/downloads"
+                        android:textStyle="bold"
+                        app:icon="@drawable/ic_download"
+                        android:layout_gravity="end"
+                        app:materialSizeOverlay="@style/SizeOverlay.Material3Expressive.Button.Medium"/>
 
-                        <TextView
-                            android:id="@+id/downloads"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="?attr/selectableItemBackground"
-                            android:drawablePadding="10dp"
-                            android:paddingHorizontal="15dp"
-                            android:paddingVertical="12dp"
-                            android:text="@string/downloads"
-                            android:textAlignment="viewStart"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            app:drawableStartCompat="@drawable/ic_download" />
+                </LinearLayout>
 
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    style="@style/Widget.Material3.CardView.Elevated"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_weight="1">
+                    android:orientation="vertical"
+                    android:paddingVertical="10dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="10dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:maxLines="1"
-                                android:padding="8dp"
-                                android:text="@string/playlists"
-                                android:textAlignment="viewStart"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/sortTV"
-                                android:layout_width="0dp"
-                                android:tooltipText="@string/tooltip_sort"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:drawablePadding="5dp"
-                                android:ellipsize="end"
-                                android:maxLines="1"
-                                android:paddingHorizontal="10dp"
-                                android:text="@string/creation_date"
-                                android:textAlignment="textEnd"
-                                android:textSize="16sp"
-                                app:drawableEndCompat="@drawable/ic_sort" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/nothing_here"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginBottom="35dp"
-                            android:orientation="vertical"
-                            android:visibility="gone">
-
-                            <ImageView
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_list" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="@string/emptyList"
-                                android:textSize="20sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/playlist_recView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:nestedScrollingEnabled="false" />
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/bookmarksCV"
-                    style="@style/Widget.Material3.CardView.Elevated"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_weight="1"
-                    android:visibility="gone">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="10dp">
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:maxLines="1"
                             android:padding="8dp"
-                            android:text="@string/bookmarks"
+                            android:text="@string/playlists"
+                            android:textAlignment="viewStart"
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/bookmarks_recView"
-                            android:layout_width="match_parent"
+                        <com.google.android.material.button.MaterialButton
+                            style="?materialButtonTonalStyle"
+                            android:id="@+id/sortTV"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:nestedScrollingEnabled="false" />
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:paddingHorizontal="10dp"
+                            android:text="@string/creation_date"
+                            android:tooltipText="@string/tooltip_sort"
+                            app:icon="@drawable/ic_sort"
+                            app:iconGravity="textEnd" />
 
                     </LinearLayout>
 
-                </com.google.android.material.card.MaterialCardView>
+                    <LinearLayout
+                        android:id="@+id/nothing_here"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="35dp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_list" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/emptyList"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/playlist_recView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/bookmarksContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingVertical="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="@string/bookmarks"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/bookmarks_recView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
