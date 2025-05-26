@@ -49,7 +49,7 @@ object NavigationHelper {
     @SuppressLint("UnsafeOptInUsageError")
     fun navigateVideo(
         context: Context,
-        videoUrlOrId: String?,
+        videoId: String?,
         playlistId: String? = null,
         channelId: String? = null,
         keepQueue: Boolean = false,
@@ -58,7 +58,7 @@ object NavigationHelper {
         forceVideo: Boolean = false,
         audioOnlyPlayerRequested: Boolean = false,
     ) {
-        if (videoUrlOrId == null) return
+        if (videoId == null) return
 
         // attempt to attach to the current media session first by using the corresponding
         // video/audio player instance
@@ -66,7 +66,7 @@ object NavigationHelper {
         val attachedToRunningPlayer = activity.runOnPlayerFragment {
             try {
                 PlayingQueue.clear()
-                this.playNextVideo(videoUrlOrId.toID())
+                this.playNextVideo(videoId.toID())
 
                 if (audioOnlyPlayerRequested) {
                     // switch to audio only player
@@ -86,11 +86,11 @@ object NavigationHelper {
 
         val attachedToRunningAudioPlayer = activity.runOnAudioPlayerFragment {
             PlayingQueue.clear()
-            this.playNextVideo(videoUrlOrId.toID())
+            this.playNextVideo(videoId.toID())
 
             if (!audioOnlyPlayerRequested) {
                 // switch to video only player
-                this.switchToVideoMode(videoUrlOrId.toID())
+                this.switchToVideoMode(videoId.toID())
             } else {
                 // maximize player
                 this.binding.playerMotionLayout.transitionToStart()
@@ -106,7 +106,7 @@ object NavigationHelper {
             // its own!
             BackgroundHelper.playOnBackground(
                 context,
-                videoUrlOrId.toID(),
+                videoId.toID(),
                 timestamp,
                 playlistId,
                 channelId,
@@ -117,7 +117,7 @@ object NavigationHelper {
         } else {
             openVideoPlayerFragment(
                 context,
-                videoUrlOrId.toID(),
+                videoId.toID(),
                 playlistId,
                 channelId,
                 keepQueue,
