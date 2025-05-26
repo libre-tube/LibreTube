@@ -13,7 +13,6 @@ import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
-import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.VideoRowBinding
@@ -106,9 +105,13 @@ class PlaylistAdapter(
                 ) { _, _ ->
                     notifyItemChanged(position)
                 }
-                val sheet = VideoOptionsBottomSheet()
-                sheet.arguments = bundleOf(IntentData.streamItem to streamItem)
-                sheet.show(fragmentManager, VideoOptionsBottomSheet::class.java.name)
+                VideoOptionsBottomSheet().apply {
+                    arguments = bundleOf(
+                        IntentData.streamItem to streamItem,
+                        IntentData.playlistId to playlistId
+                    )
+                }
+                    .show(fragmentManager, VideoOptionsBottomSheet::class.java.name)
                 true
             }
 

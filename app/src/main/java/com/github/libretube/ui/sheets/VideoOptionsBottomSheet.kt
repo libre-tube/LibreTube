@@ -39,6 +39,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         streamItem = arguments?.parcelable(IntentData.streamItem)!!
+        val playlistId = arguments?.getString(IntentData.playlistId)
 
         val videoId = streamItem.url?.toID() ?: return
 
@@ -57,7 +58,12 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
             when (optionsList[which]) {
                 // Start the background mode
                 R.string.playOnBackground -> {
-                    NavigationHelper.navigateVideo(requireContext(), videoId, audioOnlyPlayerRequested = true)
+                    NavigationHelper.navigateVideo(
+                        requireContext(),
+                        videoId = videoId,
+                        playlistId = playlistId,
+                        audioOnlyPlayerRequested = true
+                    )
                 }
                 // Add Video to Playlist Dialog
                 R.string.addToPlaylist -> {

@@ -523,7 +523,7 @@ class MainActivity : BaseActivity() {
                     override fun onGlobalLayout() {
                         NavigationHelper.navigateVideo(
                             context = this@MainActivity,
-                            videoUrlOrId = it,
+                            videoId = it,
                             timestamp = intent.getLongExtra(IntentData.timeStamp, 0L)
                         )
 
@@ -533,7 +533,7 @@ class MainActivity : BaseActivity() {
             } else {
                 NavigationHelper.navigateVideo(
                     context = this@MainActivity,
-                    videoUrlOrId = it,
+                    videoId = it,
                     timestamp = intent.getLongExtra(IntentData.timeStamp, 0L)
                 )
             }
