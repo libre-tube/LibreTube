@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.HttpUrl.Companion.toHttpUrl
 
-class InstanceRepository(private val context: Context) {
+class InstanceRepository {
 
     /**
      * Fetch official public instances from kavin.rocks

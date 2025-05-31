@@ -55,10 +55,10 @@ class InstanceSettings : BasePreferenceFragment() {
 
         lifecycleScope.launch {
             // update the instances to also show custom ones
-            initInstancesPref(instancePrefs, InstanceRepository(appContext).getInstancesFallback())
+            initInstancesPref(instancePrefs, InstanceRepository().getInstancesFallback())
 
             // try to fetch the public list of instances async
-            val instanceRepo = InstanceRepository(appContext)
+            val instanceRepo = InstanceRepository()
             val instances = instanceRepo.getInstances()
                 .onFailure {
                     appContext.toastFromMainDispatcher(it.message.orEmpty())
