@@ -1,7 +1,5 @@
 package com.github.libretube.api
 
-import android.content.Context
-import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance.PIPED_API_URL
 import com.github.libretube.api.obj.PipedInstance
 import kotlinx.coroutines.Dispatchers
