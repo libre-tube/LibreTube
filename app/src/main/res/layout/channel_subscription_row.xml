@@ -28,25 +28,30 @@
         android:textSize="16sp"
         tools:text="Channel Name" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/notification_bell"
-        style="@style/ElevatedIconButton"
-        android:layout_gravity="center"
-        android:tooltipText="@string/notifications"
-        app:icon="@drawable/ic_notification"
-        tools:targetApi="m" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/subscription_subscribe"
-        style="@style/Widget.Material3.Button.ElevatedButton"
+    <com.google.android.material.button.MaterialButtonGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_marginEnd="8dp"
-        android:stateListAnimator="@null"
-        android:text="@string/unsubscribe"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="12sp"
-        app:cornerRadius="20dp"
-        app:elevation="10dp" />
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        style="@style/Widget.Material3.MaterialSplitButton">
+
+        <com.google.android.material.button.MaterialButton
+            style="?materialIconButtonFilledTonalStyle"
+            android:id="@+id/notification_bell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:tooltipText="@string/notifications"
+            app:icon="@drawable/ic_notification" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/subscription_subscribe"
+            style="?materialButtonTonalStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/unsubscribe"
+            android:textSize="12sp"/>
+
+    </com.google.android.material.button.MaterialButtonGroup>
 </LinearLayout>
