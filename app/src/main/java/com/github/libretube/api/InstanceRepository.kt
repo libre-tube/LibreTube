@@ -1,14 +1,12 @@
 package com.github.libretube.api
 
-import android.content.Context
-import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance.PIPED_API_URL
 import com.github.libretube.api.obj.PipedInstance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.HttpUrl.Companion.toHttpUrl
 
-class InstanceRepository(private val context: Context) {
+class InstanceRepository {
 
     /**
      * Fetch official public instances from kavin.rocks

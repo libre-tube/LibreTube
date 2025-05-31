@@ -116,7 +116,7 @@ class WelcomeViewModel(
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 WelcomeViewModel(
-                    instanceRepository = InstanceRepository(this[APPLICATION_KEY]!!),
+                    instanceRepository = InstanceRepository(),
                     savedStateHandle = createSavedStateHandle(),
                 )
             }
