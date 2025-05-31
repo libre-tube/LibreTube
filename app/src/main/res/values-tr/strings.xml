@@ -112,9 +112,9 @@
     <string name="advanced">Gelişmiş</string>
     <string name="player">Oynatıcı</string>
     <string name="appearance_summary">Uygulamayı zevkinize göre ayarlayın</string>
-    <string name="advanced_summary">İndirilenler ve sıfırlama</string>
+    <string name="advanced_summary">İndirmeler ve Sıfırlama</string>
     <string name="live">Canlı</string>
-    <string name="shareTo">URL\'yi şununla paylaş</string>
+    <string name="shareTo">URL\'yi şuraya paylaş</string>
     <string name="defaultIcon">Varsayılan</string>
     <string name="gradientIcon">Akıcı değişim</string>
     <string name="fireIcon">Moda ateş</string>
@@ -262,7 +262,7 @@
     <string name="skip_segment">Bölümü atla</string>
     <string name="local_subscriptions">Yerel abonelikler</string>
     <string name="preferences">Tercihler</string>
-    <string name="backup_customInstances">Özel Oluşumlar</string>
+    <string name="backup_customInstances">Özel örnekler</string>
     <string name="download_channel_name">İndirme Hizmeti</string>
     <string name="download_channel_description">İçerik indirilirken bildirim göster.</string>
     <string name="push_channel_name">Bildirim İstemcisi</string>
