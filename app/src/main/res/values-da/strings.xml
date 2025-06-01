@@ -243,7 +243,7 @@
     <string name="repeat_mode_current">Nuværende</string>
     <string name="resize_mode_fill">Udfyld</string>
     <string name="resize_mode_zoom">Zoom</string>
-    <string name="backup_restore">Backup &amp; gendannelse</string>
+    <string name="backup_restore">Backup og gendannelse</string>
     <string name="backup">Backup</string>
     <string name="picture_in_picture">Billede-i-billede</string>
     <string name="player_resize_mode">Tilpas størrelse tilstand</string>
@@ -259,7 +259,7 @@
     <string name="change_playlist_description">Ændr playlistebeskrivelse</string>
     <string name="mark_as_unwatched">Markér som ikke set</string>
     <string name="autoplay_playlists_summary">Afspil automatisk næste video i playlister uanset den valgte autoplay-indstilling</string>
-    <string name="app_backup">App-backup</string>
+    <string name="app_backup">App-sikkerhedskopiering</string>
     <string name="audio_only_mode_summary">Gør LibreTube til en musikafspiller</string>
     <string name="faq">FAQ</string>
     <string name="codecs">Video-codecs</string>
@@ -409,7 +409,7 @@
     <string name="resume">Genoptag</string>
     <string name="stop">Stop</string>
     <string name="repeat_mode_all">Gentag alle</string>
-    <string name="backup_customInstances">Brugerdefineret Instanser</string>
+    <string name="backup_customInstances">Brugerdefinerede instanser</string>
     <string name="preferences">Præferencer</string>
     <string name="pinch_control">Knibeindstillinger</string>
     <string name="alternative_pip_controls">Alternative BiB-indstillinger</string>
@@ -465,7 +465,7 @@
     <string name="sb_custom_colors_summary">Skifter brugerdefinerede farvesegmenter til SponsorBlock-segmenter</string>
     <string name="sb_custom_colors">Brugerdefinerede segmentfarver</string>
     <string name="playlistCloned">Playliste klonet</string>
-    <string name="backup_restore_summary">Importér &amp; eksportér abonnementer, playlister, …</string>
+    <string name="backup_restore_summary">Importér og eksportér abonnementer, playlister, …</string>
     <string name="export_playlists">Exportér playlister</string>
     <string name="import_playlists">Importér playlister</string>
     <string name="rich_caption_rendering">Rig undertekst visning</string>
@@ -502,7 +502,7 @@
     <string name="replies">Svar</string>
     <string name="wifi">Wi-Fi</string>
     <string name="show_stream_thumbnails_summary">Vis miniaturebillederne af nye streams. Aktivering af dette bruger ekstra data</string>
-    <string name="no_fullscreen_resolution">Ikke fuld skærm-opløsning</string>
+    <string name="no_fullscreen_resolution">Ikke-fuldskærmsopløsning</string>
     <string name="forward">Spol frem</string>
     <string name="confirm_unsubscribe">Er du sikker på, at du vil afmelde %1$s?</string>
     <string name="double_tap_seek_summary">Tryk to gange til venstre eller højre for at spole tilbage eller frem i afspillerpositionen</string>
