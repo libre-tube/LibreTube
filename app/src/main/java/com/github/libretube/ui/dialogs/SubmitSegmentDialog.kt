@@ -9,7 +9,6 @@ import androidx.core.view.isGone
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
-import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Segment
@@ -24,7 +23,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.encodeToString
 
 class SubmitSegmentDialog : DialogFragment() {
     private var videoId: String = ""

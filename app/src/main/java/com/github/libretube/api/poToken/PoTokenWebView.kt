@@ -1,7 +1,6 @@
 package com.github.libretube.api.poToken
 
 import android.content.Context
-import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -11,7 +10,12 @@ import androidx.annotation.MainThread
 import com.github.libretube.BuildConfig
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.USER_AGENT
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withContext
 import java.time.Instant
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume

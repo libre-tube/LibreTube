@@ -11,7 +11,6 @@ import com.github.libretube.db.obj.Download
 import com.github.libretube.db.obj.DownloadChapter
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.db.obj.DownloadWithItems
-import com.github.libretube.enums.FileType
 
 @Dao
 interface DownloadDao {
