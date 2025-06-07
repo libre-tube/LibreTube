@@ -2,7 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:id="@+id/history_empty"
@@ -45,75 +46,29 @@
                 app:layout_scrollFlags="scroll"
                 app:titleCollapseMode="scale">
 
-                <LinearLayout
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/status_filter_chips"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    tools:checkedChip="@id/chip_continue"
+                    app:selectionRequired="true"
+                    android:paddingHorizontal="12dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <com.google.android.material.chip.Chip
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:id="@+id/chip_continue"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="horizontal">
+                        android:text="@string/continue_watching"/>
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/play_all"
-                            style="@style/Widget.Material3.Button.OutlinedButton"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="10dp"
-                            android:layout_weight="1"
-                            android:maxLines="1"
-                            android:text="@string/play_all"
-                            app:icon="@drawable/ic_playlist" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/clear"
-                            style="@style/Widget.Material3.Button"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="10dp"
-                            android:layout_weight="1"
-                            android:maxLines="1"
-                            android:text="@string/clear_history"
-                            app:icon="@drawable/ic_delete" />
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
+                    <com.google.android.material.chip.Chip
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:id="@+id/chip_finished"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp">
+                        android:text="@string/finished"/>
 
-                        <TextView
-                            android:id="@+id/filterTypeTV"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="top"
-                            android:layout_marginStart="5dp"
-                            android:drawablePadding="5dp"
-                            android:paddingHorizontal="10dp"
-                            android:text="@string/all"
-                            android:textSize="16sp"
-                            android:tooltipText="@string/tooltip_filter"
-                            app:drawableEndCompat="@drawable/ic_filter" />
-
-                        <TextView
-                            android:id="@+id/filterStatusTV"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end"
-                            android:layout_marginEnd="5dp"
-                            android:drawablePadding="5dp"
-                            android:paddingHorizontal="10dp"
-                            android:text="@string/watched"
-                            android:textSize="16sp"
-                            android:tooltipText="@string/tooltip_filter"
-                            app:drawableEndCompat="@drawable/ic_filter" />
-
-                    </FrameLayout>
-
-                </LinearLayout>
+                </com.google.android.material.chip.ChipGroup>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -127,5 +82,37 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <LinearLayout
+        android:id="@+id/history_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_gravity="end|bottom">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/clear"
+            style="?attr/floatingActionButtonSmallSecondaryStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:contentDescription="@string/clear_history"
+            android:src="@drawable/ic_delete"
+            android:tooltipText="@string/clear_history"
+            tools:targetApi="o"
+            tools:visibility="visible" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/play_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/play_all"
+            android:src="@drawable/ic_play"
+            android:layout_marginTop="8dp"
+            android:tooltipText="@string/play_all"
+            tools:visibility="visible" />
+
+    </LinearLayout>
 
 </FrameLayout>

@@ -30,7 +30,7 @@ fun View.setWatchProgressLength(videoId: String, duration: Long) {
 
     var backgroundColor = ThemeHelper.getThemeColor(
         context,
-        com.google.android.material.R.attr.colorPrimaryDark
+        com.google.android.material.R.attr.colorPrimaryVariant
     )
     // increase the brightness for better contrast in light mode
     if (!ThemeHelper.isDarkMode(context)) {
