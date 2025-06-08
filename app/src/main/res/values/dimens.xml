@@ -2,4 +2,6 @@
 <resources>
     <integer name="grid_items">1</integer>
     <integer name="grid_items_landscape">2</integer>
+
+    <item name="landscape_player_constraint_width_percentage" type="dimen" format="float">0.55</item>
 </resources>
