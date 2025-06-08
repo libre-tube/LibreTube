@@ -177,7 +177,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent=".55" />
+        app:layout_constraintWidth_percent="@dimen/landscape_player_constraint_width_percentage" />
 
     <RelativeLayout
         android:id="@+id/related_container"
