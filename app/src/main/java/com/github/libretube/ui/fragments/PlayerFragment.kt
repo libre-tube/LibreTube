@@ -784,6 +784,14 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             AbstractPlayerService.runPlayerActionCommand,
             bundleOf(PlayerCommand.TOGGLE_AUDIO_ONLY_MODE.name to true)
         )
+        // disable autoplay countdown while the audio player is running
+        // otherwise playback of the next video wouldn't start automatically because
+        // it awaits the start of the autoplay countdown
+        playerController.sendCustomCommand(
+            AbstractPlayerService.runPlayerActionCommand, bundleOf(
+                PlayerCommand.SET_AUTOPLAY_COUNTDOWN_ENABLED.name to false
+            )
+        )
 
         binding.player.player = null
 
