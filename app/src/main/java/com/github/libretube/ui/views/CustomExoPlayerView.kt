@@ -190,6 +190,11 @@ abstract class CustomExoPlayerView(
                 super.onEvents(player, events)
                 this@CustomExoPlayerView.onPlaybackEvents(player, events)
             }
+
+            override fun onIsPlayingChanged(isPlaying: Boolean) {
+                super.onIsPlayingChanged(isPlaying)
+                keepScreenOn = isPlaying
+            }
         })
 
         player?.let { player ->
@@ -198,7 +203,11 @@ abstract class CustomExoPlayerView(
             )
         }
 
-        player?.let { binding.exoProgress.setPlayer(it) }
+        player?.let {
+            binding.exoProgress.setPlayer(it)
+            if (it.isPlaying) keepScreenOn = true
+        }
+
         // prevent the controls from disappearing while scrubbing the time bar
         binding.exoProgress.addSeekBarListener(object : TimeBar.OnScrubListener {
             override fun onScrubStart(timeBar: TimeBar, position: Long) {
