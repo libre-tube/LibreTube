@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import android.util.Log
 import androidx.core.net.toUri
+import androidx.documentfile.provider.DocumentFile
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.PlaylistsHelper
@@ -35,6 +36,9 @@ object ImportHelper {
     private const val IMPORT_THUMBNAIL_QUALITY = "mqdefault"
     private const val VIDEO_ID_LENGTH = 11
     private const val YOUTUBE_IMG_URL = "https://img.youtube.com"
+
+    // format: playlistName-videos.csv, where "videos" could also be i18ned to a different language
+    private val csvPlaylistNameRegex = Regex("""(.*)-(\w+)\.csv""")
 
     /**
      * Import subscriptions by a file uri
@@ -192,7 +196,8 @@ object ImportHelper {
 
                     val playlistName = lines[1].split(",").reversed().getOrNull(2)
                     // the playlist name can be undefined in some cases, e.g. watch later lists
-                    playlist.name = playlistName ?: TextUtils.getFileSafeTimeStampNow()
+                    playlist.name = playlistName ?: extractYTPlaylistName(context, uri)
+                            ?: TextUtils.getFileSafeTimeStampNow()
 
                     // start directly at the beginning if header playlist info such as name is missing
                     val startIndex = if (playlistName == null) {
@@ -212,15 +217,10 @@ object ImportHelper {
                             ?.takeIf { it.isNotBlank() }
 
                         if (videoId != null) {
-                            playlist.videos += videoId.trim()
+                            playlist.videos += videoId.trim().takeLast(VIDEO_ID_LENGTH)
                         }
                     }
                     importPlaylists.add(playlist)
-                }
-
-                // convert the YouTube URLs to videoIds
-                importPlaylists.forEach { importPlaylist ->
-                    importPlaylist.videos = importPlaylist.videos.map { it.takeLast(VIDEO_ID_LENGTH) }
                 }
             }
 
@@ -364,5 +364,12 @@ object ImportHelper {
         } else {
             context.toastFromMainDispatcher(R.string.success)
         }
+    }
+
+    private fun extractYTPlaylistName(context: Context, uri: Uri): String? {
+        val fileName = DocumentFile.fromSingleUri(context, uri)?.name
+
+        return csvPlaylistNameRegex.find(fileName.orEmpty())?.groupValues?.getOrNull(1)
+            ?: fileName?.removeSuffix(".csv")
     }
 }
