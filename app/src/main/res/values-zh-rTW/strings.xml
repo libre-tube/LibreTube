@@ -267,7 +267,7 @@
     <string name="unlimited">無限</string>
     <string name="yt_shorts">短影片</string>
     <string name="repeat_mode_current">目前的</string>
-    <string name="backup_restore">備份 &amp; 還原</string>
+    <string name="backup_restore">備份與還原</string>
     <string name="backup">備份</string>
     <string name="picture_in_picture">畫中畫</string>
     <string name="renamePlaylist">重新命名播放清單</string>
@@ -296,7 +296,7 @@
     <string name="audio_video_summary">品質與格式</string>
     <string name="nothing_selected">沒有選取任何項目！</string>
     <string name="double_tap_seek">按兩下快轉</string>
-    <string name="backup_restore_summary">匯入＆匯出訂閱播放清單，播放清單…</string>
+    <string name="backup_restore_summary">匯入與匯出訂閱播放清單，播放清單…</string>
     <string name="export_playlists">匯出播放清單</string>
     <string name="app_backup">應用程式備份</string>
     <string name="exportsuccess">已匯出。</string>
