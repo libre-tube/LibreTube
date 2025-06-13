@@ -56,7 +56,7 @@
     <string name="subscriptions">اشتراک‌ها</string>
     <string name="systemLanguage">سامانه</string>
     <string name="history">تاریخچه</string>
-    <string name="search_history">تاریخچه جستجو</string>
+    <string name="search_history">سابقه جستجو</string>
     <string name="channels">کانال‌ها</string>
     <string name="all">همه</string>
     <string name="okay">باشه</string>
@@ -143,7 +143,7 @@
     <string name="skip_buttons">دکمه‌های پرش</string>
     <string name="filename">نام پرونده</string>
     <string name="player_summary">پیش‌گزیده‌ها و رفتار</string>
-    <string name="watch_history">تاریخچهٔ نمایش</string>
+    <string name="watch_history">سابقه تماشا</string>
     <string name="account">حساب</string>
     <string name="deleteAccount">حذف حساب</string>
     <string name="restore">بازگردانی</string>
@@ -233,7 +233,7 @@
     <string name="trending">آن‌چه اکنون داغ است</string>
     <string name="bookmark">نشانک</string>
     <string name="volume">حجم صدا</string>
-    <string name="backup_restore_summary">درون و برون‌ریزی اشتراک‌ها، سیاهه‌های پخش و…</string>
+    <string name="backup_restore_summary">واردات و صادرات اشتراک‌ها، لیست‌های پخش، …</string>
     <string name="rewind">پس‌روی</string>
     <string name="push_channel_name">کارگر آگاهی</string>
     <string name="push_channel_description">نمایش آگاهی هنگام موجود بودن جریان‌های جدید.</string>
