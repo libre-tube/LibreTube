@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.net.Uri
+import android.os.Looper
 import android.util.Base64
 import android.view.accessibility.CaptioningManager
 import androidx.annotation.OptIn
@@ -24,9 +25,13 @@ import androidx.media3.common.Tracks
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.exoplayer.DefaultLoadControl
+import androidx.media3.exoplayer.DefaultRenderersFactory
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.LoadControl
+import androidx.media3.exoplayer.Renderer
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
+import androidx.media3.exoplayer.text.TextOutput
+import androidx.media3.exoplayer.text.TextRenderer
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.media3.ui.CaptionStyleCompat
 import com.github.libretube.LibreTubeApp
@@ -48,6 +53,7 @@ import com.github.libretube.util.TextUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.ArrayList
 import java.util.Locale
 import kotlin.math.max
 import kotlin.math.roundToInt
@@ -505,7 +511,24 @@ object PlayerHelper {
             listOf(rewindAction, playPauseAction, forwardAction)
         }
     }
-
+    @OptIn(UnstableApi::class)
+    private fun createRendererFactory(context: Context): DefaultRenderersFactory {
+        val renderersFactory = object : DefaultRenderersFactory(context) {
+            override fun buildTextRenderers(
+                context: Context,
+                output: TextOutput,
+                outputLooper: Looper,
+                extensionRendererMode: Int,
+                out: ArrayList<Renderer>
+            ) {
+                super.buildTextRenderers(context, output, outputLooper, extensionRendererMode,
+                    out as ArrayList<Renderer>
+                )
+                (out.last() as? TextRenderer)?.experimentalSetLegacyDecodingEnabled(true)
+            }
+        }
+        return renderersFactory
+    }
     /**
      * Create a basic player, that is used for all types of playback situations inside the app
      */
@@ -519,6 +542,7 @@ object PlayerHelper {
 
         return ExoPlayer.Builder(context)
             .setUsePlatformDiagnostics(false)
+            .setRenderersFactory(createRendererFactory(context))
             .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
             .setTrackSelector(trackSelector)
             .setHandleAudioBecomingNoisy(true)
