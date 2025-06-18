@@ -72,7 +72,7 @@
     <string name="okay">Tamam</string>
     <string name="history">Geçmiş</string>
     <string name="all">Hepsi</string>
-    <string name="search_history">Arama Geçmişi</string>
+    <string name="search_history">Arama geçmişi</string>
     <string name="sponsorblock_summary">https://sponsor.ajay.app API\'sini kullanır</string>
     <string name="category_segments">Bölümler</string>
     <string name="category_sponsor">Sponsor</string>
@@ -163,7 +163,7 @@
     <string name="account">Hesap</string>
     <string name="restore">Eski haline getir</string>
     <string name="deleteAccount">Hesabı sil</string>
-    <string name="watch_history">İzleme Geçmişi</string>
+    <string name="watch_history">İzleme geçmişi</string>
     <string name="watch_positions">Konumu hatırla</string>
     <string name="auth_instance_summary">Doğrulanmış davetiyeler için farklı bir oluşum kullanın</string>
     <string name="auth_instances">Yetkilendirme örneği seçin</string>
@@ -236,7 +236,7 @@
     <string name="take_a_break">Mola verme zamanı</string>
     <string name="yt_shorts">Shorts</string>
     <string name="no_subtitles_available">Altyazı yok</string>
-    <string name="repeat_mode">Tekrarlama Modu</string>
+    <string name="repeat_mode">Yineleme modu</string>
     <string name="resize_mode_zoom">Yakınlaştır</string>
     <string name="repeat_mode_none">Hiçbiri</string>
     <string name="resize_mode_fit">Sığdır</string>
@@ -250,7 +250,7 @@
     <string name="maximum_image_cache">Maksimum resim önbellek boyutu</string>
     <string name="open_copied">Açık</string>
     <string name="copied_to_clipboard">Panoya kopyalandı</string>
-    <string name="device_info">Cihaz Bilgisi</string>
+    <string name="device_info">Aygıt bilgisi</string>
     <string name="legacy_subscriptions">Eski abonelikler görünümü</string>
     <string name="audio_video_summary">Kalite ve biçim</string>
     <string name="delete">İndirilenlerden sil</string>
@@ -319,8 +319,8 @@
     <string name="all_caught_up">Hepsi görüldü</string>
     <string name="import_playlists">Oynatma listelerini içe aktar</string>
     <string name="export_playlists">Oynatma listelerini dışa aktar</string>
-    <string name="app_backup">Uygulama Yedeği</string>
-    <string name="backup_restore_summary">Abonelikleri, oynatma listelerini içe ve dışa aktar…</string>
+    <string name="app_backup">Uygulama yedeği</string>
+    <string name="backup_restore_summary">Abonelikleri, oynatma listelerini vs. içe ve dışa aktar.</string>
     <string name="nothing_selected">Hiçbir şey seçilmedi!</string>
     <string name="privacy_alert">Gizlilik uyarısı</string>
     <string name="username_email">Kullanıcı adı olarak bir e-posta adresi kullanılması tavsiye edilmiyor. Yine de devam edilsin mi?</string>
@@ -330,7 +330,7 @@
     <string name="shuffle">Karıştır</string>
     <string name="remove_bookmark">Yer imini kaldır</string>
     <string name="add_to_bookmarks">Yer imlerine ekle</string>
-    <string name="color_violet">Becerikli Menekşe</string>
+    <string name="color_violet">Kullanışlı mor</string>
     <string name="pause">Duraklat</string>
     <string name="rewind">Geri sar</string>
     <string name="alternative_pip_controls_summary">Resim içinde resim modundayken ileri ve geri sarmak yerine yalnızca sesi oynat ve denetimleri atla</string>
@@ -340,7 +340,7 @@
     <string name="concurrent_downloads_limit_reached">Aynı anda maksimum indirme sınırına ulaşıldı.</string>
     <string name="resume">Devam</string>
     <string name="pinch_control_summary">Elinizi kıstırarak yakınlaştırın veya uzaklaştırın</string>
-    <string name="theme_monochrome">Minimalist Tek Renkli</string>
+    <string name="theme_monochrome">Sade ve tek renk</string>
     <string name="exportsuccess">Dışa aktarıldı.</string>
     <string name="alternative_pip_controls">Alternatif PiP (RiR) denetimleri</string>
     <string name="pinch_control">Kıstırma denetimi</string>
@@ -393,7 +393,7 @@
     <string name="show_stream_thumbnails_summary">Yeni akış ön izlemelerini göster. Bunu etkinleştirmek ek veri tüketecektir</string>
     <string name="fallback_piped_proxy_summary">YouTube\'a doğrudan bağlanmak mevcut video için çalışmıyorsa videoları proxy aracılığıyla (ilk yükleme sürelerini artırır) yükleyin. Devre dışı bırakılırsa YouTube Müzik içeriği, YT kısıtlamaları nedeniyle muhtemelen oynatılamayacaktır</string>
     <string name="fallback_piped_proxy">Piped proxy\'e dönüş yap</string>
-    <string name="welcome">Libretube\'e Hoş Geldiniz</string>
+    <string name="welcome">Libretube\'ye Hoş Geldiniz</string>
     <string name="choose_instance">Lütfen önce bir isteyici seçin!</string>
     <string name="mark_as_unwatched">İzlenmedi olarak işaretle</string>
     <string name="choose_instance_long">Lütfen aşağıdan kullanmak için bir Piped isteyicisi seçin. Piped isteyicisi, siz ve YouTube arasında aracı görevi görür. Bu isteyiciler, ülke bayraklarıyla gösterilen farklı fiziksel konumlarda bulunur. Size fiziksel olarak daha yakın olan isteyiciler, muhtemelen, yakın olmayan isteyicilerden daha hızlıdır. Ayarlarda kullandığınız isteyiciyi istediğiniz zaman değiştirebilirsiniz.</string>
@@ -408,7 +408,7 @@
     <string name="alphabetic">Alfabetik</string>
     <string name="manual">El ile</string>
     <string name="automatic">Otomatik</string>
-    <string name="export_playlists_to">Oynatma listelerini dışa aktar</string>
+    <string name="export_playlists_to">Oynatma listelerini şuraya dışa aktar</string>
     <string name="creation_date">Oluşturulma tarihi</string>
     <string name="creation_date_reversed">Oluşturulma tarihi (ters)</string>
     <string name="alphabetic_reversed">Alfabetik (ters)</string>
@@ -416,7 +416,7 @@
     <string name="visible">İlerleme çubuğunda göster</string>
     <string name="playlist_description">Oynatma listesi açıklaması</string>
     <string name="emptyPlaylistDescription">Oynatma listesi açıklaması boş bırakılamaz</string>
-    <string name="shorts_notifications">Shorts için bildirimler</string>
+    <string name="shorts_notifications">Kısa videolar için bildirimler</string>
     <string name="sb_custom_colors_summary">SponsorBlock kısımları için özel renkler özelliğini açar veya kapatır</string>
     <string name="show_search_suggestions">Arama önerilerini göster</string>
     <string name="category_highlight_summary">Video başlığı, küçük resim veya videonun en ilginç kısmı. Bölümler kısmında üzerine dokunarak ilgili bölüme gidebilirsiniz</string>
@@ -439,7 +439,7 @@
     <string name="descriptive_audio_track">açıklayıcı</string>
     <string name="default_or_unknown_audio_track">Varsayılan veya bilinmeyen</string>
     <string name="unknown_or_no_audio">bilinmeyen veya ses yok</string>
-    <string name="group_name_error_exists">Lütfen benzersiz bir isim seçin</string>
+    <string name="group_name_error_exists">Lütfen benzersiz bir ad seçin</string>
     <string name="resolution_limited">sınırlı</string>
     <string name="tooltip_close">Kapat</string>
     <string name="auto_generated">otomatik oluşturuldu</string>
@@ -478,7 +478,7 @@
     <string name="contribute_to_sponsorblock">SponsorBlock\'a katkıda bulun</string>
     <string name="autoplay_playlists_summary">Seçilen otomatik oynatma ayarından bağımsız olarak oynatma listelerindeki bir sonraki videoyu otomatik olarak oynat</string>
     <string name="repeat_mode_all">Tümünü tekrarla</string>
-    <string name="donate">Bağış yap</string>
+    <string name="donate">Bağış</string>
     <string name="music_artists">YT Müzik Sanatçıları</string>
     <string name="autoplay_playlists">Oynatma listelerini otomatik olarak oynat</string>
     <string name="time_in_minutes">Dakika cinsinden zaman</string>
