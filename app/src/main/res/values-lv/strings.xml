@@ -245,7 +245,7 @@
     <string name="repeat_mode_current">Atkārtot pašreizējo</string>
     <string name="picture_in_picture">Attēls attēlā (AA - PiP)</string>
     <string name="backup">Dublēt</string>
-    <string name="backup_restore">Dublēt &amp; atjaunot</string>
+    <string name="backup_restore">Dublēt un atjaunot</string>
     <string name="open_copied">Atvērt</string>
     <string name="copied_to_clipboard">Nokopēts starpliktuvē</string>
     <string name="player_resize_mode">Izmēra mainīšanas režīms</string>
@@ -332,7 +332,7 @@
     <string name="import_playlists">Ievietot atskaņošanas sarakstus</string>
     <string name="no_comments_available">Šim video nav komentāru.</string>
     <string name="captions_size">Titru izmērs</string>
-    <string name="app_backup">Applikācijas dublēšana</string>
+    <string name="app_backup">Lietotnes rezerves kopijas</string>
     <string name="backup_restore_summary">Ievietot un izgūt abonementus, atskaņošanas sarakstus, …</string>
     <string name="exportsuccess">Izgūts.</string>
     <string name="add_to_bookmarks">Pievienot grāmatzīmēm</string>
@@ -409,7 +409,7 @@
     <string name="show_search_suggestions">Rādīt meklēšanas ieteikumus</string>
     <string name="change_playlist_description">Mainīt atskaņošanas saraksta aprakstu</string>
     <string name="playlist_description">Atskaņošanas saraksta apraksts</string>
-    <string name="emptyPlaylistDescription">Atskaņošanas saraksta apraksts nevar būt tukšs!</string>
+    <string name="emptyPlaylistDescription">Atskaņošanas saraksta apraksts nevar būt tukšs</string>
     <string name="mark_as_unwatched">Atzīmēt kā nenoskatītu</string>
     <string name="export_playlists_to">Izgūt atskaņošanas sarakstus uz</string>
     <string name="choose_instance_long">Izvēlieties Piped instanci, ko izmantot. Piped instance darbosies kā starpnieks starp jums un YouTube. Šīs instances fiziski atrodas dažādās vietās, uz ko norāda to valstu karogi. Instances, kas ir tuvāk jums, visticamāk strādās ātrāk nekā instances, kas ir tālāk. Jūs jebkurā mirklī varat izmainīt instanci iestatījumos.</string>
@@ -479,4 +479,12 @@
     <string name="time_in_minutes">Laiks minūtēs</string>
     <string name="original_or_main_audio_track">oriģinālais vai galvenais</string>
     <string name="unknown_or_no_audio">nezināms vai bez audio</string>
+    <string name="tooltip_minimize">Minimizēt</string>
+    <string name="tooltip_sort">Kārtot</string>
+    <string name="tooltip_repeat">Skatīties vēlreiz</string>
+    <string name="tooltip_close">Aizvērt</string>
+    <string name="upvote">Balsot par</string>
+    <string name="downvote">Balsot pret</string>
+    <string name="tooltip_play">Atskaņot</string>
+    <string name="resolution_limited">ierobežota</string>
 </resources>
