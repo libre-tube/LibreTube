@@ -189,4 +189,5 @@
     <string name="category">分類</string>
     <string name="download_channel_description">我 Down 緊野個陣就出個通知俾我.</string>
     <string name="codecs">Codecs</string>
+    <string name="uploaderAndVideoCount">%1$s • %2$d 條片</string>
 </resources>
