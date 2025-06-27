@@ -535,4 +535,18 @@
     <string name="screenshot">گرتەی شاشە</string>
     <string name="local_stream_extraction">ستریمی ناوخۆیی</string>
     <string name="local_stream_extraction_summary">وەرگرتنی زانیاری ڤیدیۆ ڕاستەوخۆ لە یوتوبەوە بەبێ بەکارهێنانی Piped.</string>
+    <string name="category_exclusive_access">ڕێگەپێدانی تایبەت</string>
+    <string name="upcoming">دواتر</string>
+    <string name="export_playlist">هەڵگرتنی لیستی لێدان</string>
+    <string name="import_watch_history">هێنانی مێژووی بینراوەکان</string>
+    <string name="import_watch_history_desc">ئەوە بزانە کە هەموو شتێک ناتوانرێ بهێنرێت، بەهۆی سنوری دیاریکراوی داتای یوتوبەوە.</string>
+    <string name="audio_codecs">کۆدیکی دەنگ</string>
+    <string name="crashlog">زانیاری لەکارکەوتن</string>
+    <string name="never_show_again">هەرگیز ئەمە پیشان مەدەرەوە</string>
+    <string name="update_information">زانیاری نوێکردنەوە</string>
+    <string name="mode_of_operation">جۆری فرمان</string>
+    <string name="import_format_list_of_urls">لیستی ناونیشان یان ناسێنەری ڤیدیۆکان</string>
+    <string name="local_ryd">ناوخۆیی گێرانەوەی بەدڵنەبونی یوتوب</string>
+    <string name="local_ryd_summary">وەرگرتنی زانیاری بەدڵنەبوون ڕاستەوخۆ لە https://returnyoutubedislikeapi.com</string>
+    <string name="dialog_play_offline_title">وەشانی ناوخۆیی ئەم ڤیدیۆییە بەردەستە</string>
 </resources>
