@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.ListAdapter
+import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.AllCaughtUpRowBinding
@@ -21,6 +23,10 @@ import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.VideoCardsViewHolder
 import com.github.libretube.util.TextUtils
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class VideoCardsAdapter(private val columnWidthDp: Float? = null) :
     ListAdapter<StreamItem, VideoCardsViewHolder>(DiffUtilItemCallback()) {
@@ -106,6 +112,14 @@ class VideoCardsAdapter(private val columnWidthDp: Float? = null) :
                 sheet.arguments = bundleOf(IntentData.streamItem to video)
                 sheet.show(fragmentManager, VideoCardsAdapter::class.java.name)
                 true
+            }
+
+            CoroutineScope(Dispatchers.IO).launch {
+                val sponsor = runCatching { MediaServiceRepository.instance.getVideoLabels(videoId) }.getOrNull()
+
+                withContext(Dispatchers.Main) {
+                    sponsorBadge.isVisible = sponsor?.segments?.isNotEmpty() == true
+                }
             }
         }
     }
