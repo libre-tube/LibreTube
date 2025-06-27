@@ -17,7 +17,7 @@
     <string name="username">பயனாளி பெயர்</string>
     <string name="password">கடவுச்சொல்</string>
     <string name="register">பதிவுசெய்</string>
-    <string name="loggedIn">உள்நுழைந்துவிட்டோம்</string>
+    <string name="loggedIn">உள்நுழைந்துவிட்டார்.</string>
     <string name="loggedout">வெளியேறிவிட்டோம்.</string>
     <string name="pip">பிப்</string>
     <string name="audio_only_mode">ஆடியோ மட்டும் பயன்முறை</string>
@@ -61,7 +61,7 @@
     <string name="backup_restore">காப்புப்பிரதி மற்றும் மீட்டமை</string>
     <string name="audio_video_summary">தகுதி மற்றும் வடிவம்</string>
     <string name="change_region">தற்போதைய பிராந்தியத்திற்கு ட்ரெண்டிங் கிடைக்கவில்லை என்று தெரிகிறது. அமைப்புகளில் இன்னொன்றைத் தேர்ந்தெடுக்கவும்.</string>
-    <string name="all_caught_up">நீங்கள் அனைவரும் பிடிபட்டீர்கள்</string>
+    <string name="all_caught_up">நீங்கள் அனைத்தும் பிடிபட்டீர்கள்</string>
     <string name="group_name_error_exists">தனித்துவமான பெயரைத் தேர்வுசெய்க</string>
     <string name="dearrow">அன்பே இயக்கு</string>
     <string name="change_instance">உதாரணத்தை மாற்றவும்</string>
@@ -141,7 +141,7 @@
     <string name="resume">மீண்டும் தொடங்குங்கள்</string>
     <string name="stop">நிறுத்து</string>
     <string name="player_autoplay">ஆட்டோபிளே</string>
-    <string name="instance_frontend_url">முகவரி க்கு நிகழ்வு முன்பதிவு</string>
+    <string name="instance_frontend_url">முகவரி க்கு நிகழ்வு முன்பதிவு (விருப்பம்)</string>
     <string name="reset">இயல்புநிலைகளை மீட்டெடுங்கள்</string>
     <string name="reset_message">எல்லா அமைப்புகளையும் மீட்டமைத்து வெளியேறவா?</string>
     <string name="watch_history">வரலாற்றைப் பாருங்கள்</string>
@@ -171,7 +171,7 @@
     <string name="share_with_time">நேரக் குறியீட்டைக் கொண்டு பகிரவும்</string>
     <string name="misc">இதர</string>
     <string name="no_subtitles_available">வசன வரிகள் எதுவும் கிடைக்கவில்லை</string>
-    <string name="repeat_mode">மீண்டும் பயன்முறை</string>
+    <string name="repeat_mode">மறுநிகழ்வு பயன்முறை</string>
     <string name="repeat_mode_current">மின்னோட்ட்ம், ஓட்டம்</string>
     <string name="resize_mode_fill">நிரப்பவும்</string>
     <string name="resize_mode_zoom">பெரிதாக்கு</string>
@@ -244,7 +244,7 @@
     <string name="open_copied">திற</string>
     <string name="legacy_subscriptions">மரபு சந்தாக்கள் பார்வை</string>
     <string name="lbry_hls">Lbry hls</string>
-    <string name="device_info">சாதன செய்தி</string>
+    <string name="device_info">கருவி செய்தி</string>
     <string name="new_group">புதிய</string>
     <string name="group_name_error_empty">தயவுசெய்து ஒரு பெயரை உள்ளிடவும்</string>
     <string name="duration_reversed">காலம் (தலைகீழ்)</string>
@@ -257,7 +257,7 @@
     <string name="auto_quality">தானி</string>
     <string name="limit_to_runtime">இயக்க நேரத்திற்கு வரம்பு</string>
     <string name="local_playlists">உள்ளக பிளேலிச்ட்கள்</string>
-    <string name="brightness">ஒளி</string>
+    <string name="brightness">வெளிச்சம்</string>
     <string name="volume">தொகுதி</string>
     <string name="pinch_control_summary">/வெளியே பெரிதாக்க பிஞ்ச் சைகை பயன்படுத்தவும்</string>
     <string name="failed_fetching_instances">கிடைக்கக்கூடிய நிகழ்வுகளைப் பெற முடியவில்லை.</string>
@@ -299,7 +299,7 @@
     <string name="search_history">தேடல் வரலாறு</string>
     <string name="clear_history">வரலாற்றை அழிக்கவும்</string>
     <string name="music_songs">Yt இசை பாடல்கள்</string>
-    <string name="category_intro_summary">உண்மையான உள்ளடக்கம் இல்லாத இடைவெளி. இடைநிறுத்தம், நிலையான சட்டகம், மீண்டும் மீண்டும் அனிமேசன் இருக்கலாம். தகவலைக் கொண்ட மாற்றங்களுக்கு பயன்படுத்தக்கூடாது</string>
+    <string name="category_intro_summary">உண்மையான உள்ளடக்கம் இல்லாத இடைவெளி. இடைநிறுத்தம், நிலையான சட்டகம், மறுநிகழ்வு அசைவுட்டம் இருக்கலாம். தகவலைக் கொண்ட மாற்றங்களுக்குப் பயன்படுத்தக் கூடாது</string>
     <string name="category_outro">அட்டைகள் மற்றும் வரவுகளை இறுதி</string>
     <string name="category_highlight">வீடியோ சிறப்பம்சத்தைக் காட்டு</string>
     <string name="license">உரிமம்</string>
@@ -310,7 +310,7 @@
     <string name="behavior">நடத்தை</string>
     <string name="player_summary">இயல்புநிலை மற்றும் நடத்தை</string>
     <string name="seek_increment">அதிகரிப்பு தேடுங்கள்</string>
-    <string name="pauseOnScreenOff_summary">திரை அணைக்கப்படும் போது பின்னணி பின்னணி</string>
+    <string name="pauseOnScreenOff_summary">திரை அணைக்கப்படும்போது பின்னணி இடைநிறுத்து</string>
     <string name="clonePlaylist">நகலி பிளேலிச்ட்</string>
     <string name="aspect_ratio">வீடியோ விகித விகிதம்</string>
     <string name="auto_rotation">ஆட்டோ-சுழற்சி</string>
@@ -346,7 +346,7 @@
     <string name="tooltip_sort">வரிசைப்படுத்து</string>
     <string name="show_updates">புதுப்பிப்புகளை தானாக சரிபார்க்கவும்</string>
     <string name="deleteAccount">கணக்கை நீக்கு</string>
-    <string name="restore">மீட்டமை</string>
+    <string name="restore">மீட்டெடு</string>
     <string name="landscape">நிலப்பரப்பு</string>
     <string name="portrait">உருவப்படம்</string>
     <string name="turnInternetOn">இணையத்துடன் இணைக்க வைஃபை அல்லது மொபைல் தரவை இயக்கவும்.</string>
@@ -371,7 +371,7 @@
     <string name="double_tap_seek">தேட இரட்டை தட்டு</string>
     <string name="double_tap_seek_summary">பிளேயர் நிலையை முன்னாடி அல்லது அனுப்ப இடது அல்லது வலதுபுறத்தில் இரண்டு முறை தட்டவும்</string>
     <string name="all_caught_up_summary">எல்லா புதிய வீடியோக்களையும் நீங்கள் பார்த்தீர்கள்</string>
-    <string name="backup_restore_summary">இறக்குமதி மற்றும் ஏற்றுமதி சந்தாக்கள், பிளேலிச்ட்கள்,…</string>
+    <string name="backup_restore_summary">இறக்குமதி மற்றும் ஏற்றுமதி சந்தாக்கள், பிளேலிச்ட்கள, …</string>
     <string name="privacy_alert">தனியுரிமை எச்சரிக்கை</string>
     <string name="username_email">மின்னஞ்சல் முகவரியை பயனர்பெயராகப் பயன்படுத்துவது பரிந்துரைக்கப்படவில்லை. எப்படியும் தொடரவா?</string>
     <string name="off">அணை</string>
@@ -542,7 +542,7 @@
     <string name="picture_in_picture">படம்-படம்</string>
     <string name="player_resize_mode">மறுஅளவிடுதல் பயன்முறை</string>
     <string name="unsupported_file_format">ஆதரிக்கப்படாத கோப்பு வடிவம்: %1$s</string>
-    <string name="hls_instead_of_dash_summary">கோடுக்கு பதிலாக HLS ஐப் பயன்படுத்தவும் (மெதுவாக இருக்கும், பரிந்துரைக்கப்படவில்லை)</string>
+    <string name="hls_instead_of_dash_summary">கோடுக்கு பதிலாக HLS ஐப் பயன்படுத்தவும். வீடியோ பிளேபேக் வேலை செய்யாவிட்டால் இந்த விருப்பத்தை மாற்ற முயற்சிக்கவும்.</string>
     <string name="trends">போக்குகள்</string>
     <string name="bookmarks">புக்மார்க்குகள்</string>
     <string name="bookmark">புத்தககுறி</string>
@@ -551,4 +551,12 @@
     <string name="alphabetic_reversed">அகரவரிசை (தலைகீழ்)</string>
     <string name="welcome">லிப்ரெட்யூப்பிற்கு வருக</string>
     <string name="choose_instance">முதலில் ஒரு நிகழ்வைத் தேர்வுசெய்க!</string>
+    <string name="full_local_mode">முழு உள்ளக பயன்முறை</string>
+    <string name="authentication">ஏற்பு</string>
+    <string name="never_show_again">இதை மீண்டும் காட்ட வேண்டாம்</string>
+    <string name="update_information">தகவலைப் புதுப்பிக்கவும்</string>
+    <string name="updating_feed">ஊட்டத்தைப் புதுப்பித்தல்…</string>
+    <string name="mode_of_operation">செயல்பாட்டு முறை</string>
+    <string name="full_local_mode_desc">குழாய் பயன்படுத்தாமல், யூடியூப்பிலிருந்து எல்லாவற்றையும் நேரடியாகப் பெறுங்கள்.</string>
+    <string name="show_upcoming_videos">வரவிருக்கும் வீடியோக்களைக் காண்பி</string>
 </resources>

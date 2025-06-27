@@ -413,7 +413,7 @@
     <string name="sb_custom_colors">Egyéni szakaszok színei</string>
     <string name="color">Szín</string>
     <string name="invalid_color">Érvénytelen a megadott színérték!</string>
-    <string name="sb_custom_colors_summary">Egyéni színek bekapcsolása a SponsorBlock szakaszokhoz</string>
+    <string name="sb_custom_colors_summary">Egyéni színek be/kikapcsolása a SponsorBlock szakaszokhoz</string>
     <string name="category_highlight_summary">Lehet a meghirdetett cím, a bélyegkép vagy a videó legérdekesebb része. A fejezetek részben a rákoppintással ugorhat oda</string>
     <string name="choose_instance_long">Válasszon ki az alább felsoroltak közül egy Piped példányt. A Piped példány közvetítőként fog működni Ön és a YouTube között. Ezek a példányok különböző fizikai helyszíneken találhatók - ezeket az országzászló jelzi. A fizikailag közelebbi példányok valószínűleg gyorsabbak, mint a távolabbi példányok. A beállításokban bármikor megváltoztatható a használt példány.</string>
     <string name="off">Ki</string>
@@ -459,7 +459,7 @@
     <string name="tooltip_edit_groups">Csoportok szerkesztése</string>
     <string name="tooltip_create_playlist">Lejátszási lista létrehozása</string>
     <string name="auto_generated">automatikusan generált</string>
-    <string name="tooltip_sponsorblock">SponsorBlock váltása</string>
+    <string name="tooltip_sponsorblock">SponsorBlock be/ki</string>
     <string name="tooltip_options">Lehetőségek</string>
     <string name="resolution_limited">korlátozott</string>
     <string name="tooltip_watch_position">Megtekintési pozíció</string>
