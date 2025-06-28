@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.github.libretube.R
@@ -45,6 +46,7 @@ open class BaseActivity : AppCompatActivity() {
         ThemeHelper.updateTheme(this)
         if (isDialogActivity) ThemeHelper.applyDialogActivityTheme(this)
 
+        // enable auto-rotation if enabled
         requestOrientationChange()
 
         // wait for the window decor view to be drawn before detecting display cutouts
@@ -52,6 +54,7 @@ open class BaseActivity : AppCompatActivity() {
             hasCutout = WindowHelper.hasCutout(view)
             window.decorView.onApplyWindowInsets(insets)
         }
+        enableEdgeToEdge()
 
         super.onCreate(savedInstanceState)
     }

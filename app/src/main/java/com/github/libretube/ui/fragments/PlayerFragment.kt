@@ -97,6 +97,7 @@ import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.PlayOfflineDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.animateDown
+import com.github.libretube.ui.extensions.getSystemInsets
 import com.github.libretube.ui.extensions.setOnBackPressed
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
@@ -404,6 +405,19 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         _binding = FragmentPlayerBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
         SoftwareKeyboardControllerCompat(view).hide()
+
+        // manually apply additional padding for edge-to-edge compatibility
+        activity?.getSystemInsets()?.let { systemBars ->
+            with (binding.root) {
+                setPadding(
+                    paddingLeft,
+                    paddingTop + systemBars.top,
+                    paddingRight,
+                    paddingBottom
+                )
+            }
+        }
+
 
         val playerData = requireArguments().parcelable<PlayerData>(IntentData.playerData)!!
         videoId = playerData.videoId
@@ -786,7 +800,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     }
 
     private fun updateMaxSheetHeight() {
-        val maxHeight = binding.root.height - binding.player.height
+        val systemBars = mainActivity.getSystemInsets() ?: return
+        val maxHeight = binding.root.height - (binding.player.height + systemBars.top + systemBars.bottom)
         commonPlayerViewModel.maxSheetHeightPx = maxHeight
         chaptersViewModel.maxSheetHeightPx = maxHeight
     }
