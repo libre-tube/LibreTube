@@ -53,7 +53,6 @@ import com.github.libretube.util.TextUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.ArrayList
 import java.util.Locale
 import kotlin.math.max
 import kotlin.math.roundToInt
@@ -365,12 +364,6 @@ object PlayerHelper {
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.LOCAL_RYD,
             true
-        )
-
-    val useHlsOverDash: Boolean
-        get() = PreferenceHelper.getBoolean(
-            PreferenceKeys.USE_HLS_OVER_DASH,
-            !localStreamExtraction // default to DASH when local streams extraction enabled
         )
 
     var repeatMode: Int
