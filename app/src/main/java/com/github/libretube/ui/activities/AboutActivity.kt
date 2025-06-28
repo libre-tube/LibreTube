@@ -28,6 +28,8 @@ class AboutActivity : BaseActivity() {
         binding.toolbar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
+        // manually apply additional padding for edge-to-edge compatibility
+        updateToolbarTopPadding(binding.toolbar)
 
         setupCard(binding.donate, DONATE_URL)
         setupCard(binding.website, WEBSITE_URL)

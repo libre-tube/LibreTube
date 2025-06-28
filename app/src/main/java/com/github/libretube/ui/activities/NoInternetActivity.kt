@@ -13,6 +13,9 @@ class NoInternetActivity : BaseActivity() {
 
         val binding = ActivityNointernetBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // manually apply additional padding for edge-to-edge compatibility
+        updateToolbarTopPadding(binding.root)
     }
 
     override fun onNewIntent(intent: Intent) {

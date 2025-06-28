@@ -13,8 +13,8 @@ import android.view.ViewTreeObserver
 import android.widget.ScrollView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.annotation.ColorInt
 import androidx.appcompat.widget.SearchView
+import androidx.constraintlayout.motion.widget.Key
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
@@ -48,6 +48,7 @@ import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.ErrorDialog
 import com.github.libretube.ui.dialogs.ImportTempPlaylistDialog
+import com.github.libretube.ui.extensions.onSystemInsets
 import com.github.libretube.ui.fragments.AudioPlayerFragment
 import com.github.libretube.ui.fragments.DownloadsFragment
 import com.github.libretube.ui.fragments.PlayerFragment
@@ -56,7 +57,6 @@ import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.preferences.BackupRestoreSettings.Companion.FILETYPE_ANY
 import com.github.libretube.util.UpdateChecker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.elevation.SurfaceColors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
@@ -98,9 +98,6 @@ class MainActivity : BaseActivity() {
         installSplashScreen()
         super.onCreate(savedInstanceState)
 
-        // enable auto rotation if turned on
-        requestOrientationChange()
-
         // show noInternet Activity if no internet available on app startup
         if (!NetworkHelper.isNetworkAvailable(this)) {
             val noInternetIntent = Intent(this, NoInternetActivity::class.java)
@@ -109,8 +106,9 @@ class MainActivity : BaseActivity() {
             return
         }
 
-        val isAppConfigured = PreferenceHelper.getBoolean(PreferenceKeys.LOCAL_FEED_EXTRACTION, false) ||
-                PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, "").isNotEmpty()
+        val isAppConfigured =
+            PreferenceHelper.getBoolean(PreferenceKeys.LOCAL_FEED_EXTRACTION, false) ||
+                    PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, "").isNotEmpty()
         if (!isAppConfigured) {
             val welcomeIntent = Intent(this, WelcomeActivity::class.java)
             startActivity(welcomeIntent)
@@ -120,6 +118,47 @@ class MainActivity : BaseActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // manually apply additional padding for edge-to-edge compatibility
+        // see https://developer.android.com/develop/ui/views/layout/edge-to-edge
+        binding.root.onSystemInsets { _, systemBarInsets ->
+            with(binding.appBarLayout) {
+                setPadding(
+                    paddingLeft,
+                    systemBarInsets.top,
+                    paddingRight,
+                    paddingBottom
+                )
+            }
+            with (binding.bottomNav) {
+                setPadding(
+                    paddingLeft,
+                    paddingTop,
+                    paddingRight,
+                    systemBarInsets.bottom
+                )
+            }
+        }
+        // manually update the bottom bar height in the mini player transition
+        binding.bottomNav.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+            val transition = binding.root.getTransition(R.id.bottom_bar_transition)
+            transition.keyFrameList.forEach { keyFrame ->
+                // These frame positions are hardcoded in activity_main_scene.xml!
+                for (key in keyFrame.getKeyFramesForView(binding.bottomNav.id)) {
+                    if (key.framePosition == 1) key.setValue(
+                        Key.TRANSLATION_Y,
+                        binding.bottomNav.height
+                    )
+                }
+                for (key in keyFrame.getKeyFramesForView(binding.container.id)) {
+                    if (key.framePosition == 100) key.setValue(
+                        Key.TRANSLATION_Y,
+                        -binding.bottomNav.height
+                    )
+                }
+            }
+            binding.root.scene.setTransition(transition)
+        }
 
         // Check update automatically
         if (PreferenceHelper.getBoolean(PreferenceKeys.AUTOMATIC_UPDATE_CHECKS, false)) {
@@ -142,16 +181,10 @@ class MainActivity : BaseActivity() {
             R.id.homeFragment
         }
 
-        // sets the color if the navigation bar is visible
-        val bottomNavColor = getBottomNavColor()
-        ThemeHelper.setSystemBarColors(this, window, bottomNavColor)
-
         // set default tab as start fragment
         navController.graph = navController.navInflater.inflate(R.navigation.nav).also {
             it.setStartDestination(startFragmentId)
         }
-
-        binding.bottomNav.setOnApplyWindowInsetsListener(null)
 
         // Prevent duplicate entries into backstack, if selected item and current
         // visible fragment is different, then navigate to selected item.
@@ -184,20 +217,6 @@ class MainActivity : BaseActivity() {
         loadIntentData()
 
         showUserInfoDialogIfNeeded()
-    }
-
-    @ColorInt
-    fun getBottomNavColor(): Int? {
-        return if (binding.bottomNav.menu.size() == 0) {
-            null
-        } else if (PreferenceHelper.getBoolean(PreferenceKeys.PURE_THEME, false)) {
-            SurfaceColors.getColorForElevation(this, binding.bottomNav.elevation)
-        } else {
-            ThemeHelper.getThemeColor(
-                this,
-                com.google.android.material.R.attr.colorSurfaceContainer
-            )
-        }
     }
 
     /**

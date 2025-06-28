@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Bundle
+import android.view.View
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.github.libretube.R
@@ -13,6 +15,7 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ThemeHelper
 import com.github.libretube.helpers.ThemeHelper.getThemeMode
 import com.github.libretube.helpers.WindowHelper
+import com.github.libretube.ui.extensions.onSystemInsets
 import java.util.Locale
 
 /**
@@ -44,6 +47,7 @@ open class BaseActivity : AppCompatActivity() {
         ThemeHelper.updateTheme(this)
         if (isDialogActivity) ThemeHelper.applyDialogActivityTheme(this)
 
+        // enable auto-rotation if enabled
         requestOrientationChange()
 
         // wait for the window decor view to be drawn before detecting display cutouts
@@ -51,6 +55,7 @@ open class BaseActivity : AppCompatActivity() {
             hasCutout = WindowHelper.hasCutout(view)
             window.decorView.onApplyWindowInsets(insets)
         }
+        enableEdgeToEdge()
 
         super.onCreate(savedInstanceState)
     }
@@ -70,6 +75,19 @@ open class BaseActivity : AppCompatActivity() {
         }
 
         applyOverrideConfiguration(configuration)
+    }
+
+    fun updateToolbarTopPadding(toolbar: View) {
+        toolbar.onSystemInsets { v, insets ->
+            // only apply system bars padding to toolbar, not the default toolbar padding
+            v.setPadding(v.paddingLeft, insets.top, v.paddingRight, v.paddingBottom)
+        }
+    }
+
+    fun updateRootViewVerticalPadding(toolbar: View) {
+        toolbar.onSystemInsets { v, insets ->
+            v.setPadding(v.paddingLeft, v.paddingTop + insets.top, v.paddingRight, v.paddingBottom + insets.bottom)
+        }
     }
 
     /**

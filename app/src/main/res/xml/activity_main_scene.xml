@@ -2,7 +2,10 @@
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
+    <!-- Reminder: Update the logic to dynamically set the bottom bar height
+     in MainActivity.kt when updating this! -->
     <Transition
+        android:id="@+id/bottom_bar_transition"
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
         motion:duration="10"
