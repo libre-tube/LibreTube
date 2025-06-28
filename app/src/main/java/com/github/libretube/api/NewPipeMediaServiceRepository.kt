@@ -190,6 +190,7 @@ fun CommentsInfoItem.toComment() = Comment(
     commentId = commentId,
     commentText = commentText.content,
     commentedTime = textualUploadDate,
+    commentedTimeMillis = uploadDate?.offsetDateTime()?.toEpochSecond()?.times(1000),
     commentorUrl = uploaderUrl.toID(),
     hearted = isHeartedByUploader,
     creatorReplied = hasCreatorReply(),

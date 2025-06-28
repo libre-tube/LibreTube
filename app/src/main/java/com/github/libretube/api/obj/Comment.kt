@@ -11,6 +11,8 @@ data class Comment(
     val commentId: String,
     val commentText: String?,
     val commentedTime: String,
+    // not part of Piped's API
+    val commentedTimeMillis: Long? = null,
     val commentorUrl: String,
     val repliesPage: String? = null,
     val hearted: Boolean,

@@ -29,6 +29,7 @@ import com.github.libretube.ui.fragments.CommentsRepliesFragment
 import com.github.libretube.ui.viewholders.CommentsViewHolder
 import com.github.libretube.util.HtmlParser
 import com.github.libretube.util.LinkHandler
+import com.github.libretube.util.TextUtils
 
 class CommentPagingAdapter(
     private val fragment: Fragment?,
@@ -37,10 +38,12 @@ class CommentPagingAdapter(
     private val isRepliesAdapter: Boolean = false,
     private val handleLink: ((url: String) -> Unit)?,
     private val dismiss: () -> Unit
-) : PagingDataAdapter<Comment, CommentsViewHolder>(DiffUtilItemCallback(
-    areItemsTheSame = { oldItem, newItem -> oldItem.commentId == newItem.commentId},
-    areContentsTheSame = { _, _ -> true },
-)) {
+) : PagingDataAdapter<Comment, CommentsViewHolder>(
+    DiffUtilItemCallback(
+        areItemsTheSame = { oldItem, newItem -> oldItem.commentId == newItem.commentId },
+        areContentsTheSame = { _, _ -> true },
+    )
+) {
     private var clickEventConsumedByLinkHandler = false
 
     private fun navigateToReplies(comment: Comment) {
@@ -68,7 +71,9 @@ class CommentPagingAdapter(
             commentAuthor.setBackgroundResource(
                 if (comment.channelOwner) R.drawable.comment_channel_owner_bg else 0
             )
-            commentInfos.text = comment.commentedTime
+            comment.commentedTimeMillis?.let {
+                commentInfos.text = TextUtils.formatRelativeDate(it)
+            } ?: comment.commentedTime
 
             commentText.movementMethod = LinkMovementMethodCompat.getInstance()
             val linkHandler = LinkHandler {
