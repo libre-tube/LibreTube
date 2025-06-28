@@ -9,12 +9,12 @@ plugins {
 }
 
 android {
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.github.libretube"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 62
         versionName = "0.28.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

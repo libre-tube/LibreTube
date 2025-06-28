@@ -49,6 +49,7 @@ import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.services.OnlinePlayerService
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.base.BaseActivity
+import com.github.libretube.ui.extensions.getSystemInsets
 import com.github.libretube.ui.extensions.setOnBackPressed
 import com.github.libretube.ui.interfaces.AudioPlayerOptions
 import com.github.libretube.ui.listeners.AudioPlayerThumbnailListener
@@ -113,8 +114,16 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
         _binding = FragmentAudioPlayerBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
-        mainActivity?.getBottomNavColor()?.let { color ->
-            binding.audioPlayerContainer.setBackgroundColor(color)
+        // manually apply additional padding for edge-to-edge compatibility
+        activity.getSystemInsets()?.let { systemBars ->
+            with (binding.audioPlayerMain) {
+                setPadding(
+                    paddingLeft,
+                    paddingTop + systemBars.top,
+                    paddingRight,
+                    paddingBottom + systemBars.bottom
+                )
+            }
         }
 
         initializeTransitionLayout()
@@ -156,8 +165,13 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
             playerController?.seekBy(PlayerHelper.seekIncrement)
         }
 
-        childFragmentManager.setFragmentResultListener(PlayingQueueSheet.PLAYING_QUEUE_REQUEST_KEY, viewLifecycleOwner) { _, args ->
-            playerController?.navigateVideo(args.getString(IntentData.videoId) ?: return@setFragmentResultListener)
+        childFragmentManager.setFragmentResultListener(
+            PlayingQueueSheet.PLAYING_QUEUE_REQUEST_KEY,
+            viewLifecycleOwner
+        ) { _, args ->
+            playerController?.navigateVideo(
+                args.getString(IntentData.videoId) ?: return@setFragmentResultListener
+            )
         }
         binding.openQueue.setOnClickListener {
             PlayingQueueSheet().show(childFragmentManager)
@@ -278,7 +292,10 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
     private fun killFragment(stopPlayer: Boolean) {
         viewModel.isMiniPlayerVisible.value = false
 
-        if (stopPlayer) playerController?.sendCustomCommand(AbstractPlayerService.stopServiceCommand, Bundle.EMPTY)
+        if (stopPlayer) playerController?.sendCustomCommand(
+            AbstractPlayerService.stopServiceCommand,
+            Bundle.EMPTY
+        )
         playerController?.release()
         playerController = null
 
@@ -443,9 +460,10 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
 
                 updateStreamInfo(mediaMetadata)
                 // JSON-encode as work-around for https://github.com/androidx/media/issues/564
-                val chapters: List<ChapterSegment>? = mediaMetadata.extras?.getString(IntentData.chapters)?.let {
-                    JsonHelper.json.decodeFromString(it)
-                }
+                val chapters: List<ChapterSegment>? =
+                    mediaMetadata.extras?.getString(IntentData.chapters)?.let {
+                        JsonHelper.json.decodeFromString(it)
+                    }
                 _binding?.openChapters?.isVisible = !chapters.isNullOrEmpty()
             }
         })

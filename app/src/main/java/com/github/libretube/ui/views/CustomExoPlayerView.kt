@@ -726,15 +726,6 @@ abstract class CustomExoPlayerView(
         }
     }
 
-    /**
-     * Add extra margin to the top bar to not overlap the status bar.
-     */
-    fun updateTopBarMargin() {
-        binding.topBar.updateLayoutParams<MarginLayoutParams> {
-            topMargin = (if (isFullscreen()) 18f else 0f).dpToPx()
-        }
-    }
-
     @SuppressLint("SetTextI18n")
     private fun updateCurrentPosition() {
         val position = player?.currentPosition?.div(1000) ?: 0
@@ -746,6 +737,15 @@ abstract class CustomExoPlayerView(
         binding.timeLeft.text = "-${DateUtils.formatElapsedTime(timeLeft)}"
 
         runnableHandler.postDelayed(100, UPDATE_POSITION_TOKEN, this::updateCurrentPosition)
+    }
+
+    /**
+     * Add extra margin to the top bar to not overlap the status bar.
+     */
+    fun updateTopBarMargin() {
+        binding.topBar.updateLayoutParams<MarginLayoutParams> {
+            topMargin = (if (isFullscreen()) 18f else 0f).dpToPx()
+        }
     }
 
     override fun onSingleTap() {

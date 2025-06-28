@@ -254,6 +254,7 @@ class OnlinePlayerView(
         if (commonPlayerViewModel?.isFullscreen?.value == true) {
             toggleSystemBars(false)
         }
+
         updateTopBarMargin()
     }
 

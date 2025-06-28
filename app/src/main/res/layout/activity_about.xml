@@ -14,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:navigationIcon="?homeAsUpIndicator"
+            android:fitsSystemWindows="true"
             app:title="@string/about" />
 
         <com.github.libretube.ui.views.AppIconHeader

@@ -7,13 +7,10 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.Color
 import android.text.Spanned
-import android.view.Window
-import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.text.HtmlCompat
 import androidx.core.text.parseAsHtml
-import androidx.core.view.WindowCompat
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.ui.adapters.IconsSheetAdapter
@@ -21,36 +18,6 @@ import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.MaterialColors
 
 object ThemeHelper {
-
-    /**
-     * Set the colors of the system bars (status bat and navigation bar)
-     */
-    fun setSystemBarColors(context: Context, window: Window, @ColorInt bottomNavColor: Int? = null) {
-        setStatusBarColor(context, window)
-        setNavigationBarColor(context, window, bottomNavColor)
-    }
-
-    /**
-     * Set the background color of the status bar
-     */
-    private fun setStatusBarColor(context: Context, window: Window) {
-        window.statusBarColor = getThemeColor(context, android.R.attr.colorBackground)
-        WindowCompat.getInsetsController(window, window.decorView)
-            .isAppearanceLightStatusBars = !isDarkMode(context)
-    }
-
-    /**
-     * Set the background color of the navigation bar
-     */
-    private fun setNavigationBarColor(
-        context: Context,
-        window: Window,
-        @ColorInt bottomNavColor: Int?
-    ) {
-        window.navigationBarColor =
-            bottomNavColor ?: getThemeColor(context, android.R.attr.colorBackground)
-    }
-
     /**
      * Set the theme, including accent color and night mode
      */
