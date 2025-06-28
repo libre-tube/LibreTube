@@ -808,6 +808,41 @@ object PlayerHelper {
                 isFlagSet(roleFlags, C.ROLE_FLAG_ALTERNATE)
     }
 
+    /**
+     * Get the full audio role flags of an audio track.
+     *
+     * Full role flags are the existing flags parsed by ExoPlayer and the flags coming from the
+     * audio track type parsed from the `acont` property value of the stream manifest URL.
+     *
+     * The following table describes what value is parsed
+     *
+     * | `acont` value  | Role flag added from [ExoPlayer track role flags][C.RoleFlags] |
+     * | ------------- | ------------- |
+     * | `dubbed`  | [C.ROLE_FLAG_DUB]  |
+     * | `descriptive`  | [C.ROLE_FLAG_DESCRIBES_VIDEO]  |
+     * | `original`  | [C.ROLE_FLAG_MAIN]  |
+     * | everything else  | [C.ROLE_FLAG_ALTERNATE]  |
+     *
+     * @param roleFlags the current role flags of the audio track
+     * @param acontValue the value of the `acont` property
+     * @return the full audio role flags of the audio track like described above
+     */
+    fun getFullAudioRoleFlags(roleFlags: Int, acontValue: String): Int {
+        val acontRoleFlags = when (acontValue.lowercase()) {
+            "dubbed" -> C.ROLE_FLAG_DUB
+            "descriptive" -> C.ROLE_FLAG_DESCRIBES_VIDEO
+            "original" -> C.ROLE_FLAG_MAIN
+            // Original audio tracks without other audio track should not have the `acont` property
+            // nor the `xtags` one, so the the track should be not set as the main one
+            // The alternate role flag should be the most relevant flag in this case
+            else -> C.ROLE_FLAG_ALTERNATE
+        }
+
+        // Add this flag to the existing ones (if it has been not already added) and return the
+        // result of this operation
+        return roleFlags or acontRoleFlags
+    }
+
     @OptIn(androidx.media3.common.util.UnstableApi::class)
     fun getVideoStats(tracks: Tracks, videoId: String): VideoStats {
         val videoStats = VideoStats(videoId, "", "", "")
