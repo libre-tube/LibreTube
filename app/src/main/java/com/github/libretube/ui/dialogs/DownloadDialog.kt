@@ -21,6 +21,7 @@ import com.github.libretube.databinding.DialogDownloadBinding
 import com.github.libretube.extensions.getWhileDigit
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.DownloadHelper
+import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.parcelable.DownloadData
 import com.github.libretube.util.TextUtils
@@ -103,9 +104,14 @@ class DownloadDialog : DialogFragment() {
 
         val audioStreams = streams.audioStreams.filter {
             !it.url.isNullOrEmpty()
-        }.sortedByDescending {
-            it.quality.getWhileDigit()
         }
+            .sortedBy {
+                // prioritize main audio track types (lower role flag) over secondary/subbed ones
+                PlayerHelper.getFullAudioRoleFlags(0, it.audioTrackType.orEmpty())
+            }
+            .sortedByDescending {
+                it.quality.getWhileDigit()
+            }
 
         val subtitles = streams.subtitles
             .filter { !it.url.isNullOrEmpty() && !it.name.isNullOrEmpty() }

@@ -2,7 +2,6 @@ package com.github.libretube.util
 
 import android.net.Uri
 import androidx.annotation.OptIn
-import androidx.media3.common.C
 import androidx.media3.common.Format
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.hls.playlist.HlsMediaPlaylist
@@ -12,6 +11,7 @@ import androidx.media3.exoplayer.hls.playlist.HlsPlaylist
 import androidx.media3.exoplayer.hls.playlist.HlsPlaylistParser
 import androidx.media3.exoplayer.hls.playlist.HlsPlaylistParserFactory
 import androidx.media3.exoplayer.upstream.ParsingLoadable
+import com.github.libretube.helpers.PlayerHelper
 import java.io.InputStream
 
 /**
@@ -166,7 +166,7 @@ class YoutubeHlsPlaylistParser : ParsingLoadable.Parser<HlsPlaylist> {
      *
      * If the `acont` property has been found in the `sgoap` path parameter value provided, an
      * audio track type role flag is added to the existing ones, if it isn't already added, using
-     * [getFullAudioRoleFlags]; otherwise, the format is kept as it is.
+     * [PlayerHelper.getFullAudioRoleFlags]; otherwise, the format is kept as it is.
      *
      * @param sgoapPathParameterValue a `sgoap` path parameter value
      * @param audioFormat             the audio format linked to the URL from which the
@@ -182,7 +182,7 @@ class YoutubeHlsPlaylistParser : ParsingLoadable.Parser<HlsPlaylist> {
             ?.let { acontValue ->
                 return audioFormat.buildUpon()
                     .setRoleFlags(
-                        getFullAudioRoleFlags(
+                        PlayerHelper.getFullAudioRoleFlags(
                             audioFormat.roleFlags,
                             acontValue
                         )
@@ -192,41 +192,6 @@ class YoutubeHlsPlaylistParser : ParsingLoadable.Parser<HlsPlaylist> {
 
         // If no info about format being original, dubbed or descriptive, return the format as it is
         return audioFormat
-    }
-
-    /**
-     * Get the full audio role flags of an audio track.
-     *
-     * Full role flags are the existing flags parsed by ExoPlayer and the flags coming from the
-     * audio track type parsed from the `acont` property value of the stream manifest URL.
-     *
-     * The following table describes what value is parsed
-     *
-     * | `acont` value  | Role flag added from [ExoPlayer track role flags][C.RoleFlags] |
-     * | ------------- | ------------- |
-     * | `dubbed`  | [C.ROLE_FLAG_DUB]  |
-     * | `descriptive`  | [C.ROLE_FLAG_DESCRIBES_VIDEO]  |
-     * | `original`  | [C.ROLE_FLAG_MAIN]  |
-     * | everything else  | [C.ROLE_FLAG_ALTERNATE]  |
-     *
-     * @param roleFlags the current role flags of the audio track
-     * @param acontValue the value of the `acont` property
-     * @return the full audio role flags of the audio track like described above
-     */
-    private fun getFullAudioRoleFlags(roleFlags: Int, acontValue: String): Int {
-        val acontRoleFlags = when (acontValue.lowercase()) {
-            "dubbed" -> C.ROLE_FLAG_DUB
-            "descriptive" -> C.ROLE_FLAG_DESCRIBES_VIDEO
-            "original" -> C.ROLE_FLAG_MAIN
-            // Original audio tracks without other audio track should not have the `acont` property
-            // nor the `xtags` one, so the the track should be not set as the main one
-            // The alternate role flag should be the most relevant flag in this case
-            else -> C.ROLE_FLAG_ALTERNATE
-        }
-
-        // Add this flag to the existing ones (if it has been not already added) and return the
-        // result of this operation
-        return roleFlags or acontRoleFlags
     }
 
     companion object {
