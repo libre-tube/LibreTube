@@ -93,7 +93,7 @@
     <string name="instance_summary">هەژمار و چونەژوورەوە</string>
     <string name="related_streams_summary">پیشاندانی ناوەڕۆکە هاوشێوەکان لەکاتی سەیرکردندا</string>
     <string name="player_summary">فرمانە بنەڕەتییەکان</string>
-    <string name="instance_frontend_url">ناونیشانی ڕاستەوخۆ</string>
+    <string name="instance_frontend_url">ناونیشانی ڕاستەوخۆ (دڵخواز)</string>
     <string name="customInstance_summary">زیادکردن…</string>
     <string name="category_segments">بەشەکان</string>
     <string name="category_sponsor_summary">تێپەڕاندنی پلە بەرزکردنەوە بە پارەکان، ڕەوانەکردنی پارە و ڕیکلامی ڕاستەوخۆ، نەک بۆ خۆناساندن یان هاوارکردنی ڕاستەقینەی بێبەرامبەر بۆ هۆکارەکان، دروستکەران، ماڵپەڕەکان و بەرهەمەکان</string>
@@ -308,7 +308,7 @@
     <string name="end_time">کاتی کۆتاییهاتن</string>
     <string name="bookmark">نیشانەکردن</string>
     <string name="clear_bookmarks">لابردنی نیشانەکردن</string>
-    <string name="hls_instead_of_dash_summary">بەکارهێنانی HLS لەجیاتی DASH (خاوترە، پێشنیار نەکراوە)</string>
+    <string name="hls_instead_of_dash_summary">بەکارهێنانی HLS لەجیاتی DASH بۆ لێدانی فایلە میدیاییەکان، هەوڵبدە ئەم هەڵبژاردەیە بەکاربهێنی ئەگەر ڤیدیۆکە کاری نەکرد.</string>
     <string name="help">یارمەتی</string>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="queue_insert_related_videos">زیادکردنی ڤیدیۆیی هاوشێوە</string>
@@ -349,7 +349,7 @@
     <string name="confirm_unsubscribing">دڵنیاکردنەوەی لادانی هاوبەشیکردن</string>
     <string name="category">بەشەکان</string>
     <string name="download_channel_name">خزمەتگوزاری دابەزاندن</string>
-    <string name="codecs">کۆدەکان</string>
+    <string name="codecs">کۆدیکی ڤیدیۆکان</string>
     <string name="push_channel_name">شێوازی ئاگادارکردنەوە</string>
     <string name="duration_reversed">ماوە (پێچەوانەکراو)</string>
     <string name="shuffle">تێکەڵاوکردن</string>
@@ -364,7 +364,7 @@
     <string name="unlimited_search_history">مێژووی گەڕانی بێسنوور</string>
     <string name="push_channel_description">پیشاندانی ئاگادارکردنەوە لەکاتی بوونی بڵاوکراوەی نوێ.</string>
     <string name="auto_fullscreen_shorts">گەورەکردنی خۆکاری بۆ تەواوی شاشە بۆ ڤیدیۆ کورتەکان</string>
-    <string name="username_email">بەردوامبون لەڕێی ئیمەیڵەوە کە پێشنیارکراو نییە؟</string>
+    <string name="username_email">بەردەوامبون لەڕێی ئیمەیڵەوە بۆ ناوی کەسی کە پێشنیارکراو نییە، دەتەوێ بەردەوام بیت؟</string>
     <string name="stats_for_nerds">زانیارییەکانی ڤیدیۆ</string>
     <string name="show_stream_thumbnails">پیشاندانی وێنەی بچووککراوەی بڵاوکراوە</string>
     <string name="show_stream_thumbnails_summary">وێنە بچووکەکانی بڵاوکراوەی نوێ پیشان دەدرێت، بە چالاککردنی ئەمە داتای زیادە بەکاردەهێنێت</string>
@@ -478,7 +478,7 @@
     <string name="sponsorblock_user_id">زانیاری بەکارهێنەری SponsorBlock</string>
     <string name="donate">بەخشین</string>
     <string name="autoplay_playlists_summary">لێدانی ڤیدیۆیی دواتر لەناو بەشی لیستی لێدانەکاندا بەپێی ڕێکخستنەکان</string>
-    <string name="no_fullscreen_resolution">قەبارەی پڕ بەشاشەی نییە</string>
+    <string name="no_fullscreen_resolution">قەبارەی پڕ بەشاشە بەردەست نیە</string>
     <string name="repeat_mode_all">دووبارەکردنەوەی هەمووی</string>
     <string name="finished">تەواوبوو</string>
     <string name="music_artists">هونەرمەندی YT Music</string>
@@ -535,4 +535,28 @@
     <string name="screenshot">گرتەی شاشە</string>
     <string name="local_stream_extraction">ستریمی ناوخۆیی</string>
     <string name="local_stream_extraction_summary">وەرگرتنی زانیاری ڤیدیۆ ڕاستەوخۆ لە یوتوبەوە بەبێ بەکارهێنانی Piped.</string>
+    <string name="category_exclusive_access">ڕێگەپێدانی تایبەت</string>
+    <string name="upcoming">دواتر</string>
+    <string name="export_playlist">هەڵگرتنی لیستی لێدان</string>
+    <string name="import_watch_history">هێنانی مێژووی بینراوەکان</string>
+    <string name="import_watch_history_desc">ئەوە بزانە کە هەموو شتێک ناتوانرێ بهێنرێت، بەهۆی سنوری دیاریکراوی داتای یوتوبەوە.</string>
+    <string name="audio_codecs">کۆدیکی دەنگ</string>
+    <string name="crashlog">زانیاری لەکارکەوتن</string>
+    <string name="never_show_again">هەرگیز ئەمە پیشان مەدەرەوە</string>
+    <string name="update_information">زانیاری نوێکردنەوە</string>
+    <string name="mode_of_operation">جۆری فرمان</string>
+    <string name="import_format_list_of_urls">لیستی ناونیشان یان ناسێنەری ڤیدیۆکان</string>
+    <string name="local_ryd">ناوخۆیی گێرانەوەی بەدڵنەبونی یوتوب</string>
+    <string name="local_ryd_summary">وەرگرتنی زانیاری بەدڵنەبوون ڕاستەوخۆ لە https://returnyoutubedislikeapi.com</string>
+    <string name="dialog_play_offline_title">وەشانی ناوخۆیی ئەم ڤیدیۆییە بەردەستە.</string>
+    <string name="dialog_play_offline_body">ئەتەوێ ئەم ڤیدیۆیە لێبدەیت لە فۆڵدەری داگیراوەکان؟</string>
+    <string name="view_count">%1$s بنینین</string>
+    <string name="delete_only_watched_videos">تەنیا سڕینەوەی ئەو ڤیدیۆیانەی سەیرکراون</string>
+    <string name="local_feed_extraction">دەرهێنانی زانیاری ناوخۆیی</string>
+    <string name="local_feed_extraction_summary">وەرگرتنی زانیارییەکان ڕاستەوخۆ لە یوتوبەوە، ئەمە ڕەنگە ماوەکەی خاوتر بێت.</string>
+    <string name="show_upcoming_videos">پیشاندانی ڤیدیۆکانی دواتر</string>
+    <string name="updating_feed">نوێکردنەوەی داتاکان …</string>
+    <string name="full_local_mode">دۆخی تەواو ناوخۆیی</string>
+    <string name="full_local_mode_desc">وەرگرتنی داتاکان ڕاستەخۆ لە یوتوبەوە، بەبێ بەکارهێنانی Piped.</string>
+    <string name="authentication">ڕێگەپێدان</string>
 </resources>
