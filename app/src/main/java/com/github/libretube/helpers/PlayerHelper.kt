@@ -733,9 +733,7 @@ object PlayerHelper {
                     context.getString(R.string.unknown_audio_language)
                 } else {
                     Locale.forLanguageTag(audioLanguage)
-                        .getDisplayLanguage(
-                            LocaleHelper.getAppLocale()
-                        )
+                        .getDisplayLanguage(Locale.getDefault())
                         .ifEmpty { context.getString(R.string.unknown_audio_language) }
                 },
                 getDisplayAudioTrackTypeFromFormat(context, audioLanguageAndRoleFlags.second)

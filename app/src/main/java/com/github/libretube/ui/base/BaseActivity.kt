@@ -3,6 +3,7 @@ package com.github.libretube.ui.base
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -58,12 +59,14 @@ open class BaseActivity : AppCompatActivity() {
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(newBase)
 
-        // change the locale according to the user's preference (or system language as fallback)
-        val locale = LocaleHelper.getAppLocale()
-        Locale.setDefault(locale)
-
         val configuration = Configuration().apply {
-            setLocale(locale)
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                // TODO: remove this case in the future
+                @Suppress("DEPRECATION")
+                val locale = LocaleHelper.getAppLocale()
+                Locale.setDefault(locale)
+                setLocale(locale)
+            }
 
             val uiPref = PreferenceHelper.getString(PreferenceKeys.THEME_MODE, "A")
             AppCompatDelegate.setDefaultNightMode(getThemeMode(uiPref))
