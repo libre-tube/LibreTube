@@ -1,5 +1,6 @@
 package com.github.libretube.ui.preferences
 
+import android.os.Build
 import android.os.Bundle
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -16,9 +17,28 @@ class GeneralSettings : BasePreferenceFragment() {
         setPreferencesFromResource(R.xml.general_settings, rootKey)
 
         val language = findPreference<ListPreference>("language")
-        language?.setOnPreferenceChangeListener { _, _ ->
-            RequireRestartDialog().show(childFragmentManager, RequireRestartDialog::class.java.name)
-            true
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            language?.setOnPreferenceChangeListener { _, _ ->
+                RequireRestartDialog().show(
+                    childFragmentManager,
+                    RequireRestartDialog::class.java.name
+                )
+                true
+            }
+            val languages = requireContext().resources.getStringArray(R.array.languageCodes)
+                .map { code ->
+                    val locale = LocaleHelper.getLocaleFromAndroidCode(code)
+
+                    // each language's name is displayed in its own language,
+                    // e.g. 'de': 'Deutsch', 'fr': 'Francais', ...
+                    locale.toString() to locale.getDisplayName(locale)
+                }.sortedBy { it.second.lowercase() }
+            language?.entries =
+                arrayOf(requireContext().getString(R.string.systemLanguage)) + languages.map { it.second }
+            language?.entryValues = arrayOf("sys") + languages.map { it.first }
+        } else {
+            // language is set through Android settings
+            language?.isVisible = false
         }
 
         val region = findPreference<ListPreference>("region")

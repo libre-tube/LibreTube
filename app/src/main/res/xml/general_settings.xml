@@ -13,8 +13,6 @@
         <ListPreference
             android:icon="@drawable/ic_translate"
             app:defaultValue="sys"
-            app:entries="@array/languages"
-            app:entryValues="@array/languagesValue"
             app:key="language"
             app:title="@string/changeLanguage"
             app:useSimpleSummaryProvider="true" />

@@ -89,6 +89,11 @@ android {
         includeInBundle = false
     }
 
+    // language preference for Android 13 and above
+    androidResources {
+        generateLocaleConfig = true
+    }
+
     namespace = "com.github.libretube"
 }
 
