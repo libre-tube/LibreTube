@@ -17,12 +17,13 @@ class SettingsActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivitySettingsBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
 
         binding.toolbar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
+        // manually apply additional padding for edge-to-edge compatibility
+        updateToolbarTopPadding(binding.toolbar)
 
         if (savedInstanceState == null) {
             goToMainSettings()
