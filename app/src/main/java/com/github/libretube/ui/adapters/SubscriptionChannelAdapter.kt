@@ -8,6 +8,7 @@ import com.github.libretube.api.obj.Subscription
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.ChannelSubscriptionRowBinding
 import com.github.libretube.extensions.toID
+import com.github.libretube.helpers.ContextHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
@@ -45,7 +46,8 @@ class SubscriptionChannelAdapter :
                     IntentData.channelName to subscription.name,
                     IntentData.isSubscribed to true
                 )
-                channelOptionsSheet.show((root.context as BaseActivity).supportFragmentManager)
+                val activity = ContextHelper.unwrapActivity<BaseActivity>(root.context)
+                channelOptionsSheet.show(activity.supportFragmentManager)
                 true
             }
 
