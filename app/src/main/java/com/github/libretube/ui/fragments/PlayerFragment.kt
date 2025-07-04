@@ -128,6 +128,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
     private val playerControlsBinding get() = binding.player.binding
     private val playerBackgroundBinding get() = binding.player.backgroundBinding
+    private val fastForwardViewBinding get() = playerBackgroundBinding.fastForwardView.binding
 
     private val commonPlayerViewModel: CommonPlayerViewModel by activityViewModels()
     private val viewModel: PlayerViewModel by viewModels()
