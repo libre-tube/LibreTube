@@ -29,6 +29,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
     private var isFullscreen = false
     private var scaleGestureWasInProgress = false
     private var isMoving = false
+    var longPressInProgress = false
 
     var areControlsLocked = false
 
@@ -43,7 +44,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
     }
 
     fun onTouchEvent(event: MotionEvent): Boolean {
-        when(event.action){
+        when (event.action) {
             MotionEvent.ACTION_DOWN -> {
                 scaleGestureWasInProgress = false
 
@@ -83,8 +84,11 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
             }
 
             MotionEvent.ACTION_CANCEL, MotionEvent.ACTION_UP -> {
+                if (isMoving) listener.onSwipeEnd()
                 isMoving = false
-                listener.onSwipeEnd()
+
+                if (longPressInProgress) listener.onLongPressEnd()
+                longPressInProgress = false
             }
         }
 
@@ -126,8 +130,15 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
             return true
         }
 
+        override fun onLongPress(e: MotionEvent) {
+            super.onLongPress(e)
+
+            longPressInProgress = true
+            listener.onLongPress()
+        }
+
         override fun onDoubleTapEvent(e: MotionEvent): Boolean {
-            when(e.action){
+            when (e.action) {
                 MotionEvent.ACTION_UP -> {
                     if (
                         abs(e.y - touchGestureDownY) > doubleTapSlop ||
