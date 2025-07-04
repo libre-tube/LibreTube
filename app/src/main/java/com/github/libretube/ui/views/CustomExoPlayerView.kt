@@ -71,6 +71,11 @@ import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.sheets.SleepTimerSheet
 import com.github.libretube.util.PlayingQueue
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @SuppressLint("ClickableViewAccessibility")
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
@@ -383,7 +388,33 @@ abstract class CustomExoPlayerView(
         super.showController()
     }
 
-    override fun onTouchEvent(event: MotionEvent) = false
+    private var seekJob: Job? = null
+
+    val runnable = Runnable {
+        seekJob = CoroutineScope(Dispatchers.Main).launch {
+            while (true) {
+                player?.seekBy(PlayerHelper.FAST_FORWARD_INCREMENT)
+                delay(PlayerHelper.FORWARD_INCREMENT_DELAY)
+            }
+        }
+    }
+
+
+    override fun dispatchTouchEvent(event: MotionEvent): Boolean {
+        if (event.action == MotionEvent.ACTION_DOWN) {
+            handler.postDelayed(runnable, 2000)
+        }
+        if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_MOVE) {
+            seekJob?.cancel()
+            handler.removeCallbacks(runnable)
+        }
+        return super.dispatchTouchEvent(event)
+    }
+
+
+    override fun onTouchEvent(event: MotionEvent):Boolean{
+        return super.onTouchEvent(event)
+    }
 
     private fun initRewindAndForward() {
         val seekIncrementText = (PlayerHelper.seekIncrement / 1000).toString()
