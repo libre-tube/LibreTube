@@ -12,6 +12,7 @@ import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import androidx.media3.common.C
 import androidx.media3.common.ForwardingPlayer
+import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
@@ -199,6 +200,8 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     }
 
     private fun navigateVideo(videoId: String) {
+        exoPlayer?.clearMediaItems()
+
         setVideoId(videoId)
 
         CoroutineScope(Dispatchers.IO).launch {
