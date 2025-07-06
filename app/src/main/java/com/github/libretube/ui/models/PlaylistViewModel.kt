@@ -20,15 +20,11 @@ import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 
 class PlaylistViewModel(
-    private val savedStateHandle: SavedStateHandle,
+    val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
     private val _uiState = savedStateHandle.getStateFlow(UI_STATE, UiState())
     val uiState = _uiState.asLiveData()
-
-    init {
-        fetchPlaylists()
-    }
 
     fun fetchPlaylists() {
         viewModelScope.launch {
@@ -54,7 +50,7 @@ class PlaylistViewModel(
         val streams = videoInfo?.let { listOf(it) } ?: PlayingQueue.getStreams()
 
         viewModelScope.launch {
-            kotlin.runCatching {
+            runCatching {
                 if (streams.isEmpty()) {
                     throw IllegalArgumentException()
                 }
