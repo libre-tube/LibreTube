@@ -10,6 +10,7 @@ import android.os.Handler
 import android.os.Looper
 import android.text.format.DateUtils
 import android.util.AttributeSet
+import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
@@ -42,6 +43,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
+import com.github.libretube.databinding.FastForwardViewBinding
 import com.github.libretube.databinding.PlayerGestureControlsViewBinding
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.navigateVideo
@@ -97,6 +99,7 @@ abstract class CustomExoPlayerView(
     private var doubleTapOverlayBinding: DoubleTapOverlayBinding? = null
     private var chaptersBottomSheet: ChaptersBottomSheet? = null
     private var scrubbingTimeBar = false
+    private var fastForwardOverlayBinding: FastForwardViewBinding? = null
 
     /**
      * Objects from the parent fragment
@@ -140,11 +143,13 @@ abstract class CustomExoPlayerView(
     fun initialize(
         doubleTapOverlayBinding: DoubleTapOverlayBinding,
         playerGestureControlsViewBinding: PlayerGestureControlsViewBinding,
-        chaptersViewModel: ChaptersViewModel
+        chaptersViewModel: ChaptersViewModel,
+        fastForwardOverlayBinding: FastForwardViewBinding?
     ) {
         this.doubleTapOverlayBinding = doubleTapOverlayBinding
         this.gestureViewBinding = playerGestureControlsViewBinding
         this.chaptersViewModel = chaptersViewModel
+        this.fastForwardOverlayBinding = fastForwardOverlayBinding
         this.playerGestureController = PlayerGestureController(context as BaseActivity, this)
         this.brightnessHelper = BrightnessHelper(context as Activity)
         this.audioHelper = AudioHelper(context)
@@ -388,32 +393,27 @@ abstract class CustomExoPlayerView(
         super.showController()
     }
 
-    private var seekJob: Job? = null
-
-    val runnable = Runnable {
-        seekJob = CoroutineScope(Dispatchers.Main).launch {
-            while (true) {
-                player?.seekBy(PlayerHelper.FAST_FORWARD_INCREMENT)
-                delay(PlayerHelper.FORWARD_INCREMENT_DELAY)
-            }
-        }
-    }
-
-
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
-        if (event.action == MotionEvent.ACTION_DOWN) {
-            handler.postDelayed(runnable, 2000)
-        }
-        if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_MOVE) {
-            seekJob?.cancel()
-            handler.removeCallbacks(runnable)
-        }
+        playerGestureController.onLongPress(event)
         return super.dispatchTouchEvent(event)
     }
 
 
     override fun onTouchEvent(event: MotionEvent):Boolean{
         return super.onTouchEvent(event)
+    }
+
+    override fun onLongPress() {
+        if(PlayerHelper.swipeGestureEnabled) {
+            fastForwardOverlayBinding?.fastForwardOverlay?.visibility = View.VISIBLE
+            player?.seekBy(PlayerHelper.FAST_FORWARD_INCREMENT)
+        }
+    }
+
+    override fun onLongPressEnd() {
+        if(PlayerHelper.swipeGestureEnabled) {
+            fastForwardOverlayBinding?.fastForwardOverlay?.visibility = View.GONE
+        }
     }
 
     private fun initRewindAndForward() {
