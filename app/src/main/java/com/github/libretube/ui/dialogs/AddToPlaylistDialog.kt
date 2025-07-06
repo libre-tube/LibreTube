@@ -3,12 +3,11 @@ package com.github.libretube.ui.dialogs
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResult
-import androidx.fragment.app.viewModels
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
@@ -24,12 +23,13 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 class AddToPlaylistDialog : DialogFragment() {
 
     private var videoInfo: StreamItem? = null
-    private val viewModel: PlaylistViewModel by viewModels { PlaylistViewModel.Factory }
+    private val viewModel: PlaylistViewModel by activityViewModels { PlaylistViewModel.Factory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         videoInfo = arguments?.parcelable(IntentData.videoInfo)
-        Log.e("video info", videoInfo.toString())
+        viewModel.savedStateHandle[IntentData.videoInfo] = videoInfo
+        viewModel.fetchPlaylists()
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
