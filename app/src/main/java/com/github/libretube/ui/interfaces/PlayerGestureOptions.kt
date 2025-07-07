@@ -24,9 +24,9 @@ interface PlayerGestureOptions {
 
     fun onFullscreenChange(isFullscreen: Boolean)
 
-    fun onLongPress();
+    fun onLongPress()
 
-    fun onLongPressEnd();
+    fun onLongPressEnd()
 
     /**
      *  Returns a pair of the width and height of the view this listener is used for

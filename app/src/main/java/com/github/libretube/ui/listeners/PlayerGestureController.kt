@@ -12,16 +12,10 @@ import android.view.ScaleGestureDetector
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.os.postDelayed
-import com.github.libretube.extensions.seekBy
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.models.CommonPlayerViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kotlin.math.abs
 
 class PlayerGestureController(activity: BaseActivity, private val listener: PlayerGestureOptions) :
@@ -39,7 +33,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
     private var isFullscreen = false
     var isMoving = false
     var isEnabled = true
-    var isLongPress = false
+    var isLongPressInProgress = false
 
     // Indicates last touch event was for click or other gesture, used to avoid single click
     // by runnable when scroll or pinch gesture already completed.
@@ -55,36 +49,16 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
         }
     }
 
-    private var seekJob: Job? = null
-    val runnable = Runnable {
-        seekJob = CoroutineScope(Dispatchers.Main).launch {
-            while (true) {
-                isLongPress = true
-                listener.onLongPress()
-                delay(PlayerHelper.FORWARD_INCREMENT_DELAY)
-            }
-        }
-    }
-
-    fun onLongPress(event: MotionEvent){
-        if (event.action == MotionEvent.ACTION_DOWN) {
-            handler.postDelayed(runnable, 2000)
-        }
-        if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_MOVE) {
-            seekJob?.cancel()
-            handler.removeCallbacks(runnable)
-            if(isLongPress){
-                listener.onLongPressEnd()
-                isLongPress = false
-            }
-        }
-    }
-
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(v: View, event: MotionEvent): Boolean {
         if (event.action == MotionEvent.ACTION_UP && isMoving) {
             isMoving = false
             listener.onSwipeEnd()
+        }
+
+        if (event.action == MotionEvent.ACTION_UP && isLongPressInProgress) {
+            isLongPressInProgress = false
+            listener.onLongPressEnd()
         }
 
         val (_, height) = listener.getViewMeasures()
@@ -102,8 +76,6 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
         // event and return true.
         return isFullscreen
     }
-
-
 
     private inner class ScaleGestureListener : ScaleGestureDetector.OnScaleGestureListener {
         var scaleFactor = 1f
@@ -130,6 +102,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
     private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
         private var lastClick = 0L
         private var lastDoubleClick = 0L
+
 
         override fun onDown(e: MotionEvent): Boolean {
             // Initially assume this event is for click
