@@ -16,12 +16,13 @@ import kotlinx.serialization.encodeToString
 
 @OptIn(UnstableApi::class)
 fun MediaItem.Builder.setMetadata(streams: Streams, videoId: String) = apply {
+    val clearedStreams = streams.copy(audioStreams = emptyList(), videoStreams = emptyList())
     val extras = bundleOf(
         MediaMetadataCompat.METADATA_KEY_TITLE to streams.title,
         MediaMetadataCompat.METADATA_KEY_ARTIST to streams.uploader,
         IntentData.videoId to videoId,
         // JSON-encode as work-around for https://github.com/androidx/media/issues/564
-        IntentData.streams to JsonHelper.json.encodeToString(streams),
+        IntentData.streams to JsonHelper.json.encodeToString(clearedStreams),
         IntentData.chapters to JsonHelper.json.encodeToString(streams.chapters)
     )
     setMediaMetadata(
