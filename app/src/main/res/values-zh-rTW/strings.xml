@@ -151,7 +151,7 @@
     <string name="downloading">下載中…</string>
     <string name="player_autoplay">自動播放</string>
     <string name="instance_frontend_url">執行個體的前端 URL（選擇性）</string>
-    <string name="quality">質量</string>
+    <string name="quality">畫質</string>
     <string name="behavior">行為</string>
     <string name="reset">恢復預設值</string>
     <string name="account">帳號</string>
@@ -399,7 +399,7 @@
     <string name="export_subscriptions_to">匯出訂閱至</string>
     <string name="import_playlists_from">匯入播放清單</string>
     <string name="export_playlists_to">匯出播放清單</string>
-    <string name="home_tab_content">家分頁內容</string>
+    <string name="home_tab_content">首頁分頁內容</string>
     <string name="mark_as_unwatched">標記為尚未觀看</string>
     <string name="welcome">歡迎使用 LibreTube</string>
     <string name="choose_instance">請先選擇站台！</string>
