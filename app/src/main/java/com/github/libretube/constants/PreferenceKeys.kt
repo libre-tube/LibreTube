@@ -60,7 +60,6 @@ object PreferenceKeys {
     const val SEEK_INCREMENT = "seek_increment"
     const val DEFAULT_RESOLUTION = "default_res"
     const val DEFAULT_RESOLUTION_MOBILE = "default_res_mobile"
-    const val BUFFERING_GOAL = "buffering_goal"
     const val PLAYER_AUDIO_FORMAT = "player_audio_format"
     const val PLAYER_AUDIO_QUALITY = "player_audio_quality"
     const val PLAYER_AUDIO_QUALITY_MOBILE = "player_audio_quality_mobile"
