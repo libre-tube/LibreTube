@@ -33,6 +33,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
     private var isFullscreen = false
     var isMoving = false
     var isEnabled = true
+    var isLongPressInProgress = false
 
     // Indicates last touch event was for click or other gesture, used to avoid single click
     // by runnable when scroll or pinch gesture already completed.
@@ -53,6 +54,11 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
         if (event.action == MotionEvent.ACTION_UP && isMoving) {
             isMoving = false
             listener.onSwipeEnd()
+        }
+
+        if (event.action == MotionEvent.ACTION_UP && isLongPressInProgress) {
+            isLongPressInProgress = false
+            listener.onLongPressEnd()
         }
 
         val (_, height) = listener.getViewMeasures()
@@ -96,6 +102,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
     private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
         private var lastClick = 0L
         private var lastDoubleClick = 0L
+
 
         override fun onDown(e: MotionEvent): Boolean {
             // Initially assume this event is for click
