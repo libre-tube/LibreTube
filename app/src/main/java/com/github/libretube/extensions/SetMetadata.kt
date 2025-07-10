@@ -16,6 +16,7 @@ import kotlinx.serialization.encodeToString
 
 @OptIn(UnstableApi::class)
 fun MediaItem.Builder.setMetadata(streams: Streams, videoId: String) = apply {
+    // Avoid reaching the max parcelable size of 1MB for binder transactions.
     val clearedStreams = streams.copy(audioStreams = emptyList(), videoStreams = emptyList())
     val extras = bundleOf(
         MediaMetadataCompat.METADATA_KEY_TITLE to streams.title,
