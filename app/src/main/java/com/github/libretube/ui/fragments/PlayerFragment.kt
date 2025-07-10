@@ -36,6 +36,7 @@ import androidx.core.os.postDelayed
 import androidx.core.view.SoftwareKeyboardControllerCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.isGone
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -44,6 +45,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.C
+import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
@@ -351,6 +353,15 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 playerController.play()
             } catch (e: Exception) {
                 e.printStackTrace()
+            }
+        }
+
+        override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
+            super.onMediaItemTransition(mediaItem, reason)
+            if (mediaItem == null) {
+                toggleVideoInfoVisibility(false)
+                disableController()
+                binding.titleTextView.text = ""
             }
         }
     }
@@ -1089,6 +1100,12 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             ?.dismiss()
     }
 
+    private fun toggleVideoInfoVisibility(show: Boolean){
+        binding.descriptionLayout.isInvisible = !show
+        binding.relatedRecView.isInvisible = !show
+        binding.playerChannel.isInvisible = !show
+    }
+
     @SuppressLint("SetTextI18n")
     private fun updatePlayerView() {
         dismissCommentsSheet()
@@ -1131,6 +1148,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         viewModel.isOrientationChangeInProgress = false
 
         binding.descriptionLayout.setStreams(streams)
+
+        toggleVideoInfoVisibility(true)
 
         binding.apply {
             ImageHelper.loadImage(streams.uploaderAvatar, binding.playerChannelImage, true)
