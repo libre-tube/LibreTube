@@ -4,44 +4,35 @@ import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup.MarginLayoutParams
 import androidx.core.os.bundleOf
 import androidx.core.view.children
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
-import com.github.libretube.api.obj.Subscription
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
-import com.github.libretube.extensions.dpToPx
-import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.SelectableOption
-import com.github.libretube.ui.adapters.LegacySubscriptionAdapter
-import com.github.libretube.ui.adapters.SubscriptionChannelAdapter
 import com.github.libretube.ui.adapters.VideoCardsAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
-import com.github.libretube.ui.extensions.addOnBottomReachedListener
 import com.github.libretube.ui.extensions.setupFragmentAnimation
-import com.github.libretube.ui.models.CommonPlayerViewModel
 import com.github.libretube.ui.models.EditChannelGroupsModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.sheets.ChannelGroupsSheet
 import com.github.libretube.ui.sheets.FilterSortBottomSheet
 import com.github.libretube.ui.sheets.FilterSortBottomSheet.Companion.FILTER_SORT_REQUEST_KEY
+import com.github.libretube.ui.sheets.SubscriptionsBottomSheet
 import com.github.libretube.util.PlayingQueue
 import com.google.android.material.chip.Chip
 import kotlinx.coroutines.Dispatchers
@@ -52,7 +43,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
     private val binding get() = _binding!!
 
     private val viewModel: SubscriptionsViewModel by activityViewModels()
-    private val playerModel: CommonPlayerViewModel by activityViewModels()
     private val channelGroupsModel: EditChannelGroupsModel by activityViewModels()
     private var selectedFilterGroup
         set(value) = PreferenceHelper.putInt(PreferenceKeys.SELECTED_CHANNEL_GROUP, value)
@@ -81,9 +71,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
             field = value
         }
 
-    private val legacySubscriptionsAdapter = LegacySubscriptionAdapter()
-    private val channelsAdapter = SubscriptionChannelAdapter()
-
     override fun setLayoutManagers(gridItems: Int) {
         _binding?.subFeed?.layoutManager = GridLayoutManager(context, gridItems)
     }
@@ -96,25 +83,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         setupSortAndFilter()
 
         binding.subFeed.adapter = feedAdapter
-
-        val legacySubscriptions = PreferenceHelper.getBoolean(
-            PreferenceKeys.LEGACY_SUBSCRIPTIONS,
-            false
-        )
-
-        if (legacySubscriptions) {
-            binding.subChannels.layoutManager = GridLayoutManager(
-                context,
-                PreferenceHelper.getString(
-                    PreferenceKeys.LEGACY_SUBSCRIPTIONS_COLUMNS,
-                    "3"
-                ).toInt()
-            )
-            binding.subChannels.adapter = legacySubscriptionsAdapter
-        } else {
-            binding.subChannels.layoutManager = LinearLayoutManager(context)
-            binding.subChannels.adapter = channelsAdapter
-        }
 
         // Check if the AppBarLayout is fully expanded
         binding.subscriptionsAppBar.addOnOffsetChangedListener { _, verticalOffset ->
@@ -141,7 +109,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         // position to zero
         var alreadyShowedFeedOnce = false
         viewModel.videoFeed.observe(viewLifecycleOwner) { feed ->
-            if (!viewModel.isCurrentTabSubChannels && feed != null) {
+            if (feed != null) {
                 lifecycleScope.launch {
                     showFeed(!alreadyShowedFeedOnce)
                 }
@@ -150,15 +118,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
            feed?.firstOrNull { !it.isUpcoming }?.uploaded?.let {
                 PreferenceHelper.updateLastFeedWatchedTime(it, true)
-            }
-        }
-
-        // restore the scroll position, same conditions as above
-        var alreadyShowedSubscriptionsOnce = false
-        viewModel.subscriptions.observe(viewLifecycleOwner) {
-            if (viewModel.isCurrentTabSubChannels && it != null) {
-                showSubscriptions(!alreadyShowedSubscriptionsOnce)
-                alreadyShowedSubscriptionsOnce = true
             }
         }
 
@@ -181,40 +140,15 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         binding.toggleSubs.isVisible = true
 
         binding.toggleSubs.setOnClickListener {
-            binding.subProgress.isVisible = true
-            binding.subRefresh.isRefreshing = true
-            viewModel.isCurrentTabSubChannels = !viewModel.isCurrentTabSubChannels
-
-            lifecycleScope.launch {
-                if (viewModel.isCurrentTabSubChannels) showSubscriptions() else showFeed()
-            }
-
-            binding.subChannels.isVisible = viewModel.isCurrentTabSubChannels
-            binding.subFeed.isGone = viewModel.isCurrentTabSubChannels
-        }
-
-        binding.subChannels.addOnBottomReachedListener {
-            val binding = _binding ?: return@addOnBottomReachedListener
-
-            if (viewModel.subscriptions.value != null && viewModel.isCurrentTabSubChannels) {
-                binding.subRefresh.isRefreshing = true
-                binding.subRefresh.isRefreshing = false
-            }
-        }
-
-        // add some extra margin to the subscribed channels while the mini player is visible
-        // otherwise the last channel would be invisible
-        playerModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
-            binding.subChannels.updateLayoutParams<MarginLayoutParams> {
-                bottomMargin = (if (it) 64f else 0f).dpToPx()
-            }
+            SubscriptionsBottomSheet()
+                .show(childFragmentManager)
         }
 
         binding.channelGroups.setOnCheckedStateChangeListener { group, _ ->
             selectedFilterGroup = group.children.indexOfFirst { it.id == group.checkedChipId }
 
             lifecycleScope.launch {
-                if (viewModel.isCurrentTabSubChannels) showSubscriptions() else showFeed()
+                showFeed()
             }
         }
 
@@ -225,17 +159,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         binding.editGroups.setOnClickListener {
             ChannelGroupsSheet().show(childFragmentManager, null)
         }
-
-        // manually restore the recyclerview state due to https://github.com/material-components/material-components-android/issues/3473
-        binding.subChannels.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                viewModel.subChannelsRecyclerViewState =
-                    binding.subChannels.layoutManager?.onSaveInstanceState()?.takeIf {
-                        binding.subChannels.computeVerticalScrollOffset() != 0
-                    }
-            }
-        })
 
         binding.subFeed.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -353,14 +276,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         }
     }
 
-    @JvmName("filterSubsByGroup")
-    private fun List<Subscription>.filterByGroup(groupIndex: Int): List<Subscription> {
-        if (groupIndex == 0) return this
-
-        val group = channelGroupsModel.groups.value?.getOrNull(groupIndex - 1)
-        return filter { group?.channels?.contains(it.url.toID()) != false }
-    }
-
     private fun List<StreamItem>.sortedBySelectedOrder() = when (selectedSortOrder) {
         0 -> this
         1 -> this.reversed()
@@ -399,7 +314,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
             }
         }
 
-        binding.subChannels.isGone = true
+
         binding.subProgress.isGone = true
 
         val notLoaded = viewModel.videoFeed.value.isNullOrEmpty()
@@ -421,42 +336,9 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         }
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun showSubscriptions(restoreScrollState: Boolean = true) {
-        val subscriptions =
-            viewModel.subscriptions.value?.filterByGroup(selectedFilterGroup) ?: return
-
-        val legacySubscriptions = PreferenceHelper.getBoolean(
-            PreferenceKeys.LEGACY_SUBSCRIPTIONS,
-            false
-        )
-
-        val adapter = if (legacySubscriptions) legacySubscriptionsAdapter else channelsAdapter
-        adapter.submitList(subscriptions) {
-            if (restoreScrollState) {
-                binding.subFeed.layoutManager?.onRestoreInstanceState(viewModel.subChannelsRecyclerViewState)
-                binding.subscriptionsAppBar.setExpanded(viewModel.subChannelsRecyclerViewState == null)
-            } else {
-                binding.subFeed.scrollToPosition(0)
-            }
-        }
-
-        binding.subRefresh.isRefreshing = false
-        binding.subProgress.isGone = true
-        binding.subFeed.isGone = true
-
-        val notLoaded = viewModel.subscriptions.value.isNullOrEmpty()
-        binding.subChannels.isGone = notLoaded
-        binding.emptyFeed.isVisible = notLoaded
-
-        val subCount = subscriptions.size.toLong().formatShort()
-        binding.toggleSubs.text = "${getString(R.string.subscriptions)} ($subCount)"
-    }
-
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         // manually restore the recyclerview state after rotation due to https://github.com/material-components/material-components-android/issues/3473
-        binding.subChannels.layoutManager?.onRestoreInstanceState(viewModel.subChannelsRecyclerViewState)
         binding.subFeed.layoutManager?.onRestoreInstanceState(viewModel.subFeedRecyclerViewState)
     }
 

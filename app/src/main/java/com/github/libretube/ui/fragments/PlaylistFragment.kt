@@ -247,21 +247,21 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
                 }
 
                 if (playlistFeed.isEmpty()) {
-                    binding.sortContainer.isGone = true
+                    binding.sortBTN.isGone = true
                 } else {
-                    binding.sortContainer.isVisible = true
-                    binding.sortContainer.setOnClickListener {
+                    binding.sortBTN.isVisible = true
+                    binding.sortBTN.setOnClickListener {
                         BaseBottomSheet().apply {
                             setSimpleItems(sortOptions.toList()) { index ->
                                 selectedSortOrder = index
-                                binding.sortTV.text = sortOptions[index]
+                                binding.sortBTN.text = sortOptions[index]
                                 showPlaylistVideos(response)
                             }
                         }.show(childFragmentManager)
                     }
                 }
 
-                binding.sortTV.text = sortOptions[selectedSortOrder]
+                binding.sortBTN.text = sortOptions[selectedSortOrder]
 
             }
 
