@@ -16,6 +16,8 @@ class HelpActivity : BaseActivity() {
         binding.toolbar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
+        // manually apply additional padding for edge-to-edge compatibility
+        updateToolbarTopPadding(binding.toolbar)
 
         setupCard(binding.faq, FAQ_URL)
         setupCard(binding.matrix, MATRIX_URL)

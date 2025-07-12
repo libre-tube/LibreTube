@@ -29,6 +29,8 @@ class WelcomeActivity : BaseActivity() {
 
         val binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        // manually apply additional padding for edge-to-edge compatibility
+        updateRootViewVerticalPadding(binding.root)
 
         val adapter = InstancesAdapter(
             viewModel.uiState.value?.selectedInstanceIndex,

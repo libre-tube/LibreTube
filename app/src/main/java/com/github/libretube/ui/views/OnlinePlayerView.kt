@@ -157,7 +157,6 @@ class OnlinePlayerView(
 
         commonPlayerViewModel.isFullscreen.observe(viewLifecycleOwner) { isFullscreen ->
             WindowHelper.toggleFullscreen(activity.window, isFullscreen)
-            updateTopBarMargin()
 
             binding.fullscreen.isInvisible = PlayerHelper.autoFullscreenEnabled
             val fullscreenDrawable =
@@ -254,7 +253,6 @@ class OnlinePlayerView(
         if (commonPlayerViewModel?.isFullscreen?.value == true) {
             toggleSystemBars(false)
         }
-        updateTopBarMargin()
     }
 
     override fun showController() {
