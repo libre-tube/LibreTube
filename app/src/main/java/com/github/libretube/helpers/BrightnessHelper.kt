@@ -21,20 +21,15 @@ class BrightnessHelper(activity: Activity) {
         }
 
     /**
-     * Wrapper for the brightness saved per session, set to the current screen brightness of the
-     * beginning of each session / player creation.
+     * Wrapper for the brightness saved per session.
+     * Used to restore the previous fullscreen brightness when entering fullscreen.
      */
     private var savedBrightness = window.attributes.screenBrightness
 
     /**
      * Restore screen brightness to device system brightness.
-     * if [forced] is false then value will be stored only if it's not
-     * [WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE] value.
      */
-    fun resetToSystemBrightness(forced: Boolean = true) {
-        if (forced || brightness != WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE) {
-            savedBrightness = brightness
-        }
+    fun resetToSystemBrightness() {
         brightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
     }
 
@@ -47,16 +42,43 @@ class BrightnessHelper(activity: Activity) {
 
     /**
      * Set current brightness value with scaling to given range.
-     * [shouldSave] determines whether the value should be persisted.
      */
     fun setBrightnessWithScale(
         value: Float,
         maxValue: Float,
-        minValue: Float = 0.0f,
-        shouldSave: Boolean = false
+        minValue: Float = 0.0f
     ) {
-        brightness = value.normalize(minValue, maxValue, minBrightness, maxBrightness)
-        if (shouldSave) savedBrightness = brightness
+        brightness = linearToGamma(
+            value.normalize(
+                minValue,
+                maxValue,
+                minBrightness,
+                maxBrightness
+            )
+        )
+
+        // remember brightness to restore it when fullscreen is entered again
+        savedBrightness = brightness
+    }
+
+    /**
+     * Logarithmically scale brightness changes, in order to have more control over the lower brightness area
+     * @param value brightness value in the interval [0, 1]
+     * @return scaled brightness value in the same interval [0, 1]
+     *
+     * see https://tunjid.medium.com/reverse-engineering-android-pies-logarithmic-brightness-curve-ecd41739d7a2
+     * and resolve the formula to x=... the constants are slightly adjusted to actually reach 100% max
+     */
+    private fun linearToGamma(value: Float): Float {
+        // original formula: (Math.exp((value*100+9.411)/19.811) / 255.0).toFloat()
+        return (Math.exp((value * LINEAR_MAX + LINEAR_OFFSET)/ SCALING_FACTOR) / GAMMA_MAX).toFloat()
+    }
+
+    /**
+     * Inverse method for [linearToGamma]
+     */
+    private fun gammaToLinear(value: Float): Float {
+        return ((SCALING_FACTOR * Math.log(value * GAMMA_MAX) - LINEAR_OFFSET) / LINEAR_MAX).toFloat()
     }
 
     /**
@@ -68,10 +90,18 @@ class BrightnessHelper(activity: Activity) {
         minValue: Float = 0.0f,
         saved: Boolean = false
     ): Float {
-        return if (saved) {
-            savedBrightness.normalize(minBrightness, maxBrightness, minValue, maxValue)
-        } else {
-            brightness.normalize(minBrightness, maxBrightness, minValue, maxValue)
-        }
+        val value = if (saved) savedBrightness else brightness
+
+        val scaled = gammaToLinear(value)
+            .normalize(minBrightness, maxBrightness, minValue, maxValue)
+        return scaled
+    }
+
+    companion object {
+        // constants only used for linear-gamma conversion
+        private const val GAMMA_MAX = 255.0
+        private const val LINEAR_MAX = 100.0
+        private const val LINEAR_OFFSET = 9.7
+        private const val SCALING_FACTOR = 19.9
     }
 }

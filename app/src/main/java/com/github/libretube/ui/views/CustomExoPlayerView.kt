@@ -831,7 +831,7 @@ abstract class CustomExoPlayerView(
             }
         } else {
             if (PlayerHelper.swipeGestureEnabled && this::brightnessHelper.isInitialized) {
-                brightnessHelper.resetToSystemBrightness(false)
+                brightnessHelper.resetToSystemBrightness()
             }
             subtitleView?.setFixedTextSize(
                 Cue.TEXT_SIZE_TYPE_ABSOLUTE,
