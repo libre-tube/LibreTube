@@ -39,7 +39,7 @@
     <string name="error">Valami gond van.</string>
     <string name="region">Régió</string>
     <string name="grid">Rács oszlopok (álló)</string>
-    <string name="notgmail">Ez a Piped fiók számára van</string>
+    <string name="notgmail">Ez a Piped-fiók számára van</string>
     <string name="playlistName">Lejátszási lista neve</string>
     <string name="fail">Sikertelen :(</string>
     <string name="about">Névjegy</string>
@@ -103,7 +103,7 @@
     <string name="open">Megnyitás…</string>
     <string name="reset">Alapértelmezések visszaállítása</string>
     <string name="deleteAccount">Fiók törlése</string>
-    <string name="deleteAccount_summary">A Piped fiókjának törlése</string>
+    <string name="deleteAccount_summary">A Piped-fiókjának törlése</string>
     <string name="account">Fiók</string>
     <string name="restore">Visszaállítás</string>
     <string name="notifications">Értesítések</string>
