@@ -9,6 +9,7 @@ import com.github.libretube.api.obj.SearchResult
 import com.github.libretube.api.obj.SegmentData
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
+import com.github.libretube.extensions.sha256Sum
 import com.github.libretube.helpers.PlayerHelper
 
 interface MediaServiceRepository {
@@ -20,6 +21,13 @@ interface MediaServiceRepository {
         category: List<String>,
         actionType: List<String>? = null
     ): SegmentData
+
+    suspend fun getVideoLabels(videoId: String
+    ): SegmentData? = RetrofitInstance.externalApi.getVideoLabels(
+        // use hashed video id for privacy
+        // https://wiki.sponsor.ajay.app/w/API_Docs/Draft#GET_/api/videoLabels/:sha256HashPrefix
+        videoId.sha256Sum().substring(0, 4),
+    ).firstOrNull { it.videoID == videoId }
 
     suspend fun getDeArrowContent(videoIds: String): Map<String, DeArrowContent>
     suspend fun getCommentsNextPage(videoId: String, nextPage: String): CommentsPage
