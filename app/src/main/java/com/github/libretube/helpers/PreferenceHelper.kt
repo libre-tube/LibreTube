@@ -40,6 +40,13 @@ object PreferenceHelper {
      * The version is automatically determined from the number of migrations available.
      */
     private val MIGRATIONS = arrayOf(
+        /**
+         * Removes the `VISIBLE` setting for SponsorBlock,
+         * as it provides no additional value and leads to bad UX,
+         * as a user is able to see the segment, but able to skip it.
+         *
+         * See https://github.com/libre-tube/LibreTube/pull/7434
+         */
         PreferenceMigration(0, 1) {context ->
             context.resources
                 .getStringArray(R.array.sponsorBlockSegments)
