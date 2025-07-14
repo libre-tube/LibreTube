@@ -214,7 +214,6 @@
     <string name="hls_instead_of_dash">𐑿𐑟 ⸰𐑣𐑤𐑕</string>
     <string name="auto_quality">𐑷𐑑𐑴</string>
     <string name="limit_to_runtime">𐑤𐑦𐑥𐑦𐑑 𐑑 𐑮𐑳𐑯𐑑𐑲𐑥</string>
-    <string name="trends">𐑑𐑮𐑧𐑯𐑛𐑟</string>
     <string name="bookmark">𐑚𐑫𐑒𐑥𐑸𐑒</string>
     <string name="clear_bookmarks">𐑒𐑤𐑽 𐑚𐑫𐑒𐑥𐑸𐑒𐑕</string>
     <string name="autoplay_playlists">𐑷𐑑𐑴𐑐𐑤𐑱 𐑐𐑤𐑱𐑤𐑦𐑕𐑑𐑕</string>
@@ -388,8 +387,6 @@
     <string name="new_videos_badge">𐑦𐑯𐑛𐑦𐑒𐑱𐑖𐑩𐑯 𐑓 𐑯𐑿 𐑝𐑦𐑛𐑦𐑴𐑟</string>
     <string name="skip_segment">𐑕𐑒𐑦𐑐 𐑕𐑧𐑜𐑥𐑩𐑯𐑑</string>
     <string name="local_subscriptions">𐑤𐑴𐑒𐑩𐑤 𐑕𐑩𐑚𐑕𐑒𐑮𐑦𐑐𐑖𐑩𐑯𐑟</string>
-    <string name="change_region">𐑑𐑮𐑧𐑯𐑛𐑦𐑙 𐑕𐑰𐑥𐑟 𐑑 𐑚𐑰 𐑳𐑯𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤 𐑓 𐑞 𐑒𐑳𐑮𐑩𐑯𐑑 𐑮𐑰𐑡𐑩𐑯. 𐑐𐑤𐑰𐑟 𐑕𐑦𐑤𐑧𐑒𐑑 𐑩𐑯𐑳𐑞𐑼 𐑦𐑯 𐑞 𐑕𐑧𐑑𐑦𐑙𐑟.</string>
-    <string name="trending">𐑢𐑪𐑑\'𐑕 𐑑𐑮𐑧𐑯𐑛𐑦𐑙 𐑯𐑬</string>
     <string name="playback_pitch">𐑐𐑦𐑗</string>
     <string name="time_code">𐑑𐑲𐑥 𐑒𐑴𐑛 (𐑕𐑧𐑒𐑩𐑯𐑛𐑟)</string>
     <string name="invalid_filename">¡𐑦𐑯𐑝𐑨𐑤𐑦𐑛 𐑓𐑲𐑤𐑯𐑱𐑥!</string>

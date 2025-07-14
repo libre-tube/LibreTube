@@ -262,7 +262,6 @@
     <string name="skip_segment">Pular segmento</string>
     <string name="playback_pitch">Tom de reprodução</string>
     <string name="copied">Copiado</string>
-    <string name="change_region">Parece que as tendências não estão disponíveis na sua região. Selecione outra região nas configurações.</string>
     <string name="legacy_subscriptions">Visualização antiga de inscrições</string>
     <string name="device_info">Informações do dispositivo</string>
     <string name="share_with_time">Compartilhar no momento atual</string>
@@ -296,9 +295,7 @@
     <string name="hls_instead_of_dash_summary">Usar HLS em vez de DASH para streaming de mídia. Tente alternar essa opção se a reprodução de vídeo não funcionar.</string>
     <string name="auto_quality">Auto</string>
     <string name="limit_to_runtime">Limite de tempo para execução</string>
-    <string name="trends">Em alta</string>
     <string name="featured">Destaques</string>
-    <string name="trending">Em alta agora</string>
     <string name="bookmarks">Favoritos</string>
     <string name="bookmark">Favorito</string>
     <string name="clear_bookmarks">Limpar favoritos</string>

@@ -269,7 +269,6 @@
     <string name="mobile_data">Dữ liệu di động</string>
     <string name="play_next">Tiếp theo</string>
     <string name="navigation_bar">Thanh điều hướng</string>
-    <string name="change_region">Xu hướng dường như không khả dụng cho khu vực hiện tại. Vui lòng chọn một cái khác trong cài đặt.</string>
     <string name="hls_instead_of_dash">Dùng HLS</string>
     <string name="hls_instead_of_dash_summary">Dùng HLS thay cho DASH (chậm hơn, không khuyến khích)</string>
     <string name="playlistCloned">Danh sách phát đã được sao chép</string>
@@ -296,9 +295,7 @@
     <string name="defaultIconLight">Light mặc định</string>
     <string name="auto_quality">Tự động</string>
     <string name="limit_to_runtime">Giới hạn thực thi</string>
-    <string name="trends">Xu hướng</string>
     <string name="featured">Tính năng</string>
-    <string name="trending">Xu hướng hiện tại</string>
     <string name="queue_insert_related_videos">Chèn thêm các video liên quan</string>
     <string name="bookmarks">Dấu trang</string>
     <string name="clear_bookmarks">Dọn dẹp dấu trang</string>

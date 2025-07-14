@@ -265,7 +265,6 @@
     <string name="backup_customInstances">Прилагођене инстанце</string>
     <string name="play_next">Пусти следеће</string>
     <string name="playback_pitch">Висина тона</string>
-    <string name="change_region">Чини се да видео снимци у тренду нису доступни за тренутни регион. Изаберите други регион у подешавањима.</string>
     <string name="filename">Назив фајла</string>
     <string name="invalid_filename">Неважећи назив фајла!</string>
     <string name="download_channel_name">Услуга преузимања</string>
@@ -296,9 +295,7 @@
     <string name="hls_instead_of_dash_summary">Коришћење HLS уместо DASH за стримовање медија. Покушајте да укључите ову опцију ако репродукција видео снимка не ради.</string>
     <string name="auto_quality">Аутоматски</string>
     <string name="limit_to_runtime">Ограничи на време рада</string>
-    <string name="trends">Трендови</string>
     <string name="featured">Истакнуто</string>
-    <string name="trending">Шта је сада у тренду</string>
     <string name="bookmarks">Обележивачи</string>
     <string name="bookmark">Обележивач</string>
     <string name="local_playlists">Локалне плејлисте</string>

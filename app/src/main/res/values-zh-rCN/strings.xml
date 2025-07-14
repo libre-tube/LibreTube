@@ -269,7 +269,6 @@
     <string name="preferences">选项</string>
     <string name="play_next">播放下一个</string>
     <string name="navigation_bar">导航栏</string>
-    <string name="change_region">“时下流行”似乎对当前地区不可用。请在设置中另选一个地区。</string>
     <string name="playback_pitch">音调</string>
     <string name="filename">文件名</string>
     <string name="invalid_filename">无效的文件名！</string>
@@ -296,9 +295,7 @@
     <string name="hls_instead_of_dash_summary">流媒体使用 HLS 而不是 DASH。如无法播放在线视频，请尝试关闭该选项。</string>
     <string name="auto_quality">自动</string>
     <string name="limit_to_runtime">限制运行时间</string>
-    <string name="trends">热门</string>
     <string name="featured">精选</string>
-    <string name="trending">时下热门</string>
     <string name="bookmarks">书签</string>
     <string name="bookmark">加入书签</string>
     <string name="clear_bookmarks">清除书签</string>

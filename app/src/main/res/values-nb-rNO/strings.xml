@@ -271,7 +271,6 @@
     <string name="navigation_bar">Navigasjonsfelt</string>
     <string name="filename">Filnavn</string>
     <string name="playback_pitch">Tonehøyde</string>
-    <string name="change_region">På vei opp ser ut til å være utilgjengelig for nåværende region. Velg en annen i innstillingene.</string>
     <string name="invalid_filename">Ugyldig filnavn</string>
     <string name="queue">Kø</string>
     <string name="added_to_playlist">Lagt til på spillelisten %1$s</string>
@@ -295,9 +294,7 @@
     <string name="hls_instead_of_dash_summary">Bruk HLS istedenfor DASH (tregere og ikke anbefalt)</string>
     <string name="auto_quality">Automatisk</string>
     <string name="limit_to_runtime">Begrens til spilletid</string>
-    <string name="trending">Hva er populært nå</string>
     <string name="layout">Tilpasning</string>
-    <string name="trends">På vei opp</string>
     <string name="featured">Framhevet</string>
     <string name="local_playlists">Lokale spillelister</string>
     <string name="queue_insert_related_videos">Legg til relaterte videoer</string>

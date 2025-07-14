@@ -315,7 +315,6 @@
     <string name="backup_customInstances">Mukautetut instanssit</string>
     <string name="notify_new_streams">Ilmoitukset uusista streameista</string>
     <string name="play_next">Toista seuraavaksi</string>
-    <string name="change_region">Trending ei näytä olevan saatavilla nykyisellä alueella. Valitse toinen asetuksista.</string>
     <string name="filename">Tiedoston nimi</string>
     <string name="invalid_filename">Virheellinen tiedoston nimi!</string>
     <string name="playback_pitch">Sävelkorkeus</string>
@@ -327,9 +326,7 @@
     <string name="hls_instead_of_dash_summary">Käytä HLS:ää DASHin sijaan (on hitaampi, ei suositella)</string>
     <string name="auto_quality">Auto</string>
     <string name="limit_to_runtime">Rajoita suoritusaikaa</string>
-    <string name="trends">Trendit</string>
     <string name="featured">Esillä</string>
-    <string name="trending">Mikä trendaa nyt</string>
     <string name="bookmarks">Kirjanmerkit</string>
     <string name="bookmark">Kirjanmerkki</string>
     <string name="queue_insert_related_videos">Lisää aiheeseen liittyviä videoita</string>

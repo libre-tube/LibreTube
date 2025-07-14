@@ -97,7 +97,6 @@
     <string name="start_time">เวลาเริ่ม</string>
     <string name="app_icon">ไอคอน</string>
     <string name="confirm_unsubscribing">ยืนยัน การยกเลิกสมัครสมาชิก</string>
-    <string name="trends">เทรนด์</string>
     <string name="skip_buttons">ปุ่มข้าม</string>
     <string name="import_watch_history">นำเข้าประวัติการรับชม</string>
     <string name="skip_buttons_summary">แสดงปุ่มเพื่อข้ามไปยังวิดีโอถัดไปหรือก่อนหน้า</string>

@@ -252,7 +252,6 @@
     <string name="playback_pitch">Tonhöhe</string>
     <string name="download_channel_description">Zeigt beim Herunterladen von Medien eine Benachrichtigung an.</string>
     <string name="push_channel_description">Zeigt eine Benachrichtigung an, wenn neue Videos verfügbar sind.</string>
-    <string name="change_region">Trends scheinen in ihrem Land nicht verfügbar zu sein. Bitte ein unterstütztes Land in den Einstellungen auswählen.</string>
     <string name="legacy_subscriptions">Altes Abo-Design</string>
     <string name="device_info">Geräteinformationen</string>
     <string name="network_wifi">Nur über WLAN</string>
@@ -297,9 +296,7 @@
     <string name="auto_quality">Automatisch</string>
     <string name="limit_to_runtime">Auf Laufzeit beschränken</string>
     <string name="time_code">Zeitstempel (Sekunden)</string>
-    <string name="trends">Trends</string>
     <string name="featured">Vorgestellt</string>
-    <string name="trending">Trends</string>
     <string name="queue_insert_related_videos">Ähnliche Videos einreihen</string>
     <string name="bookmarks">Lesezeichen</string>
     <string name="bookmark">Lesezeichen</string>

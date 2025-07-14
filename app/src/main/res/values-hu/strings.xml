@@ -270,7 +270,6 @@
     <string name="download_channel_description">Értesítés megjelenítése média letöltésekor.</string>
     <string name="skip_segment">Szakasz kihagyása</string>
     <string name="playback_pitch">Hangmagasság</string>
-    <string name="change_region">A felkapott kategória úgy tűnik, hogy nem elérhető a jelenlegi régió számára. Válasszon egy másikat a beállításokban.</string>
     <string name="added_to_playlist">Hozzáadva a lejátszási listához %1$s</string>
     <string name="invalid_filename">Érvénytelen fájlnév!</string>
     <string name="filename">Fájlnév</string>
@@ -296,14 +295,12 @@
     <string name="auto_quality">Automatikus</string>
     <string name="hls_instead_of_dash_summary">HLS használata DASH helyett a közvetített médiatartalmakhoz. Ha a videolejátszás nem működik, próbálja meg bekapcsolni ezt az beállítást.</string>
     <string name="limit_to_runtime">Futás idejére való korlátozás</string>
-    <string name="trending">Ami most felkapott</string>
     <string name="featured">Kiemelt</string>
     <string name="bookmarks">Könyvjelzők</string>
     <string name="bookmark">Könyvjelző</string>
     <string name="clear_bookmarks">Könyvjelzők törlése</string>
     <string name="local_playlists">Helyi lejátszási listák</string>
     <string name="queue_insert_related_videos">Kapcsolódó videók beszúrása</string>
-    <string name="trends">Felkapottak</string>
     <string name="volume">Hangerő</string>
     <string name="auto">Automatikus</string>
     <string name="brightness">Fényerő</string>

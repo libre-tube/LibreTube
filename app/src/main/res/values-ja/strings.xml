@@ -259,7 +259,6 @@
     <string name="playback_pitch">ピッチ</string>
     <string name="error_occurred">エラー</string>
     <string name="copied">コピーしました</string>
-    <string name="change_region">急上昇中の動画一覧は現在の地域にありません。設定で他の地域を選択してください。</string>
     <string name="share_with_time">時間指定で共有</string>
     <string name="legacy_subscriptions">古い登録チャンネル表示</string>
     <string name="device_info">端末情報</string>
@@ -324,9 +323,7 @@
     <string name="hls_instead_of_dash">HLSを使う</string>
     <string name="auto_quality">自動</string>
     <string name="limit_to_runtime">ランタイムの上限</string>
-    <string name="trends">急上昇</string>
     <string name="featured">注目</string>
-    <string name="trending">急上昇中</string>
     <string name="queue_insert_related_videos">関連動画を挿入する</string>
     <string name="bookmarks">ブックマーク</string>
     <string name="bookmark">ブックマーク</string>

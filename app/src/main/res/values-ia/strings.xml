@@ -276,7 +276,6 @@
     <string name="disable_proxy">Disactivar le proxy de Piped</string>
     <string name="resolution_limited">limitate</string>
     <string name="playlist_description">Description del lista de reproduction</string>
-    <string name="trending">Le tendentias del momento</string>
     <string name="end_time">Hora de fin</string>
     <string name="confirm_unsubscribing">Confirmar le desubscription</string>
     <string name="unknown_or_no_audio">incognite o sin audio</string>
@@ -413,7 +412,6 @@
     <string name="privacy_alert">Aviso de confidentialitate</string>
     <string name="show_search_suggestions">Monstrar suggestiones de recerca</string>
     <string name="bookmarks">Marcapaginas</string>
-    <string name="trends">Tendentias</string>
     <string name="video_id">ID del video</string>
     <string name="audio_only_mode">Modo solmente audio</string>
     <string name="custom_playback_speed">Velocitate personalisate</string>
@@ -479,7 +477,6 @@
     <string name="duration_reversed">Duration (invertite)</string>
     <string name="vote_for_segment">Votar per le segmento</string>
     <string name="pinch_control">Controlo de pinciamento</string>
-    <string name="change_region">Tendentias non pare esser disponibile pro le region actual. Selige altere in le parametros.</string>
     <string name="watch_history_summary">Mantener le controlo del videos reguardate localmente</string>
     <string name="alternative_pip_controls_summary">Monstrar solmente audio e saltar controlos in Imagine-in-Imagine in vice de avantiar e rebobinar</string>
     <string name="swipe_controls_summary">Glissar pro adjustar le luminositate e volumine in modo de schermo plen</string>

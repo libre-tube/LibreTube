@@ -265,7 +265,6 @@
     <string name="navigation_bar">Navigācijas panelis</string>
     <string name="backup_customInstances">Pašizveidotas instances</string>
     <string name="playback_pitch">Augstums</string>
-    <string name="change_region">Izskatās, ka tendences nav pieejamas jūsu reģionā. Lūdzu, izvēlieties citu iestatījumos.</string>
     <string name="filename">Datnes nosaukums</string>
     <string name="invalid_filename">Nederīgs datnes nosaukums!</string>
     <string name="play_next">Atskaņot nākamo</string>
@@ -356,9 +355,7 @@
     <string name="concurrent_downloads">Vienlaikus atļautās lejupielādes</string>
     <string name="unknown">Nezināms</string>
     <string name="pause">Pauzēt</string>
-    <string name="trends">Trendi</string>
     <string name="double_tap_seek">Piesist divreiz, lai patītu</string>
-    <string name="trending">Kas šobrīd ir tendencēs</string>
     <string name="clear_bookmarks">Dzēst grāmatzīmes</string>
     <string name="sleep_timer">Miega taimeris</string>
     <string name="download_channel_description">Rādīt paziņojumu, lejupielādējot video.</string>

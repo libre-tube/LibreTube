@@ -373,7 +373,6 @@
     <string name="category_highlight_summary">Môže to byť inzerovaný titul, miniatúra alebo najzaujímavejšia časť videa. Môžete na ňu prejsť ťuknutím v sekcii kapitol</string>
     <string name="player_resize_mode">Režim zmeny veľkosti</string>
     <string name="maximum_image_cache">Maximálna veľkosť vyrovnávacej pamäte obrazu</string>
-    <string name="change_region">Zdá sa, že trendy nie sú pre aktuálny región k dispozícii. V nastaveniach vyberte iný.</string>
     <string name="sb_custom_colors_summary">Prepína používané farebné segmenty pre segmenty SponsorBlock</string>
     <string name="playback_pitch">Výška tónu</string>
     <string name="legacy_subscriptions">Zobrazenie starých odberov</string>
@@ -402,8 +401,6 @@
     <string name="skip_segment">Vynechať segment</string>
     <string name="layout">Usporiadanie</string>
     <string name="hls_instead_of_dash_summary">Použije HLS namiesto DASH (pre streamovanie médií. Ak prehrávanie videa nefunguje, skúste túto možnosť prepnúť.</string>
-    <string name="trends">Trendy</string>
-    <string name="trending">Čo je teraz v trende</string>
     <string name="queue_insert_related_videos">Zverejniť súvisiace videá</string>
     <string name="local_playlists">Lokálne zoznamy skladieb</string>
     <string name="volume">Hlasitosť</string>

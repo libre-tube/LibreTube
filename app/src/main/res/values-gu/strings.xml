@@ -132,7 +132,6 @@
     <string name="material_you">સામગ્રી તમે</string>
     <string name="navbar_order">ક્રમ</string>
     <string name="layout">લેઆઉટ</string>
-    <string name="change_region">વર્તમાન ક્ષેત્ર માટે ટ્રેન્ડિંગ અનુપલબ્ધ હોય તેવું લાગે છે. કૃપા કરીને સેટિંગ્સમાં અન્યને પસંદ કરો.</string>
     <string name="downloading">ડાઉનલોડ કરી રહ્યું છે…</string>
     <string name="clear_customInstances">સ્પષ્ટ ઉમેર્યું</string>
     <string name="pauseOnScreenOff">સ્વતઃ વિરામ</string>
@@ -320,9 +319,7 @@
     <string name="download_channel_name">સેવા ડાઉનલોડ કરો</string>
     <string name="push_channel_name">સૂચના કામદાર</string>
     <string name="limit_to_runtime">રનટાઇમની મર્યાદા</string>
-    <string name="trends">વલણો</string>
     <string name="featured">ફીચર્ડ</string>
-    <string name="trending">હવે શું ચાલી રહ્યું છે ટ્રેન્ડ</string>
     <string name="require_restart_message">નવા ફેરફારોનો ઉપયોગ કરવા માટે એપ્લિકેશનને પુનઃપ્રારંભ કરો.</string>
     <string name="time_code">સમય કોડ (સેકંડો)</string>
     <string name="queue_insert_related_videos">સંબંધિત વિડિયોને દાખલ કરો</string>

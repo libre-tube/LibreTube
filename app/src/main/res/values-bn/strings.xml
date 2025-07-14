@@ -270,7 +270,6 @@
     <string name="backup_customInstances">কাস্টম ইন্সটেন্সগুলো</string>
     <string name="playback_pitch">পিচ</string>
     <string name="download_channel_name">ডাউনলোড সার্ভিস</string>
-    <string name="change_region">বর্তমান এলাকায় ট্রেডিং অ্যাভেলেবল নেই। সেটিংসে গিয়ে অন্যটি বাছুন।</string>
     <string name="download_channel_description">ডাউনলোডের সময় নোটিফিকেশন দেখান।</string>
     <string name="filename">ফাইলের নাম</string>
     <string name="invalid_filename">ইনভ্যালিড ফাইলনেম!</string>
@@ -295,9 +294,7 @@
     <string name="hls_instead_of_dash_summary">DASH এর বদলে HLS ব্যাবহার করুন (ধীরগতিসম্পন্ন হতে পারে, সুপারিশকৃত নয়)</string>
     <string name="auto_quality">স্বয়ংক্রিয়</string>
     <string name="limit_to_runtime">রানটাইম লিমিট</string>
-    <string name="trends">জনপ্রিয়গুলো</string>
     <string name="featured">বৈশিষ্ট্যযুক্ত</string>
-    <string name="trending">এখন যা যা জনপ্রিয়</string>
     <string name="local_playlists">স্থানীয় প্লেলিস্ট</string>
     <string name="navbar_order">ক্রম</string>
     <string name="username_email">ই-মেইল ঠিকানা প্রস্তাবিত নয়।</string>

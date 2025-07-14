@@ -262,7 +262,6 @@
     <string name="preferences">ਤਰਜੀਹਾਂ</string>
     <string name="backup_customInstances">ਕਸਟਮ ਇੰਸਟੈਂਸ</string>
     <string name="navigation_bar">ਨੈਵੀਗੇਸ਼ਨ ਪੱਟੀ</string>
-    <string name="change_region">ਮੌਜੂਦਾ ਖੇਤਰ ਲਈ ਰੁਝਾਨ ਅਣਉਪਲਬਧ ਜਾਪਦਾ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਕੋਈ ਹੋਰ ਚੁਣੋ।</string>
     <string name="playback_pitch">ਪਿੱਚ</string>
     <string name="filename">ਫਾਈਲ ਦਾ ਨਾਂ</string>
     <string name="invalid_filename">ਅਵੈਧ ਫਾਈਲ ਨਾਮ!</string>
@@ -317,10 +316,8 @@
     <string name="layout">ਲੇਆਊਟ</string>
     <string name="notification_time_summary">ਸਮਾਂ ਸੀਮਤ ਕਰੋ ਜਿਸ ਵਿੱਚ ਸਟ੍ਰੀਮ ਸੂਚਨਾਵਾਂ ਦਿਖਾਈਆਂ ਜਾਂਦੀਆਂ ਹਨ</string>
     <string name="navbar_order">ਆਰਡਰ</string>
-    <string name="trending">ਹੁਣ ਕੀ ਰੁਝਾਨ ਹੈ</string>
     <string name="hls_instead_of_dash">HLS ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
     <string name="limit_to_runtime">ਰਨਟਾਈਮ ਦੀ ਸੀਮਾ</string>
-    <string name="trends">ਰੁਝਾਨ</string>
     <string name="featured">ਫ਼ੀਚਰਡ</string>
     <string name="bookmarks">ਬੁੱਕਮਾਰਕਸ</string>
     <string name="bookmark">ਬੁੱਕਮਾਰਕ</string>

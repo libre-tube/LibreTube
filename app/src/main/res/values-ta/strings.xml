@@ -60,7 +60,6 @@
     <string name="none">எதுவுமில்லை</string>
     <string name="backup_restore">காப்புப்பிரதி மற்றும் மீட்டமை</string>
     <string name="audio_video_summary">தகுதி மற்றும் வடிவம்</string>
-    <string name="change_region">தற்போதைய பிராந்தியத்திற்கு ட்ரெண்டிங் கிடைக்கவில்லை என்று தெரிகிறது. அமைப்புகளில் இன்னொன்றைத் தேர்ந்தெடுக்கவும்.</string>
     <string name="all_caught_up">நீங்கள் அனைத்தும் பிடிபட்டீர்கள்</string>
     <string name="group_name_error_exists">தனித்துவமான பெயரைத் தேர்வுசெய்க</string>
     <string name="dearrow">அன்பே இயக்கு</string>
@@ -322,7 +321,6 @@
     <string name="show_stream_thumbnails">ச்ட்ரீம் சிறுபடங்களைக் காட்டு</string>
     <string name="checking_frequency">ஒவ்வொன்றையும் சரிபார்க்கிறது…</string>
     <string name="queue">வரிசை</string>
-    <string name="trending">இப்போது என்ன பிரபலமானது</string>
     <string name="fullscreen_gestures">முழுத்திரை சைகைகளை உள்ளிடவும்/வெளியேறவும்</string>
     <string name="uploader_name">பதிவேற்றும் பெயர்</string>
     <string name="watched">பார்த்தேன்</string>
@@ -543,7 +541,6 @@
     <string name="player_resize_mode">மறுஅளவிடுதல் பயன்முறை</string>
     <string name="unsupported_file_format">ஆதரிக்கப்படாத கோப்பு வடிவம்: %1$s</string>
     <string name="hls_instead_of_dash_summary">கோடுக்கு பதிலாக HLS ஐப் பயன்படுத்தவும். வீடியோ பிளேபேக் வேலை செய்யாவிட்டால் இந்த விருப்பத்தை மாற்ற முயற்சிக்கவும்.</string>
-    <string name="trends">போக்குகள்</string>
     <string name="bookmarks">புக்மார்க்குகள்</string>
     <string name="bookmark">புத்தககுறி</string>
     <string name="clear_bookmarks">தெளிவான புக்மார்க்குகள்</string>

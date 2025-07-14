@@ -269,7 +269,6 @@
     <string name="backup_customInstances">Свои серверы</string>
     <string name="play_next">Воспроизвести следующее</string>
     <string name="navigation_bar">Панель навигации</string>
-    <string name="change_region">Похоже, что тренды не доступны в текущем регионе. Выберите другой регион в настройках.</string>
     <string name="playback_pitch">Скорость</string>
     <string name="filename">Имя файла</string>
     <string name="invalid_filename">Неверное имя файла!</string>
@@ -295,10 +294,8 @@
     <string name="hls_instead_of_dash">Использовать HLS</string>
     <string name="hls_instead_of_dash_summary">Использовать HLS вместо DASH. Попробуйте включить или выключить, если воспроизведение не работает.</string>
     <string name="auto_quality">Авто</string>
-    <string name="trends">Тренды</string>
     <string name="bookmarks">Закладки</string>
     <string name="limit_to_runtime">Только при использовании</string>
-    <string name="trending">Сейчас в тренде</string>
     <string name="clear_bookmarks">Удалить закладки</string>
     <string name="featured">Рекомендации</string>
     <string name="bookmark">Закладка</string>
