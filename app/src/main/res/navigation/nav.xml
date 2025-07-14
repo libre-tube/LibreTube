@@ -24,13 +24,6 @@
             app:popUpToSaveState="true"
             app:restoreState="true" />
         <action
-            android:id="@+id/action_homeFragment_to_trendsFragment"
-            app:destination="@id/trendsFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="false"
-            app:popUpToSaveState="true"
-            app:restoreState="true" />
-        <action
             android:id="@+id/action_homeFragment_to_subscriptionsFragment"
             app:destination="@id/subscriptionsFragment"
             app:popUpTo="@id/homeFragment"
@@ -38,11 +31,6 @@
             app:popUpToSaveState="true"
             app:restoreState="true" />
     </fragment>
-    <fragment
-        android:id="@+id/trendsFragment"
-        android:name="com.github.libretube.ui.fragments.TrendsFragment"
-        android:label="fragment_trends"
-        tools:layout="@layout/fragment_trends" />
     <fragment
         android:id="@+id/subscriptionsFragment"
         android:name="com.github.libretube.ui.fragments.SubscriptionsFragment"

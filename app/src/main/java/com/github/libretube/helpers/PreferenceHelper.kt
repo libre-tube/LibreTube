@@ -58,6 +58,16 @@ object PreferenceHelper {
                     }
                 }
         },
+        /**
+         * Removes the trending layout options, due to YouTube dropping the trending section.
+         *
+         * See https://support.google.com/youtube/thread/356702168?sjid=13404251444768258109-EU
+         */
+        PreferenceMigration(1, 2) { context ->
+            val defaultItems = context.resources.getStringArray(R.array.homeTabItemsValues);
+            val items = getStringSet(PreferenceKeys.HOME_TAB_CONTENT, defaultItems.toSet())
+            putStringSet(PreferenceKeys.HOME_TAB_CONTENT, items.minus("trending"))
+        },
     )
 
     /**

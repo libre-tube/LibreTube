@@ -464,7 +464,6 @@ class MainActivity : BaseActivity() {
 
             when (it) {
                 "home" -> navController.navigate(R.id.homeFragment)
-                "trends" -> navController.navigate(R.id.trendsFragment)
                 "subscriptions" -> navController.navigate(R.id.subscriptionsFragment)
                 "library" -> navController.navigate(R.id.libraryFragment)
                 "downloads" -> navController.navigate(R.id.downloadsFragment)

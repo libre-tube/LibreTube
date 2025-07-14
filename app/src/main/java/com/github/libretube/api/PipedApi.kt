@@ -14,9 +14,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface PipedApi {
-    @GET("trending")
-    suspend fun getTrending(@Query("region") region: String): List<StreamItem>
-
     @GET("streams/{videoId}")
     suspend fun getStreams(@Path("videoId") videoId: String): Streams
 

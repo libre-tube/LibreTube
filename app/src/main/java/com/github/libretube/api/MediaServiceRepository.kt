@@ -12,7 +12,6 @@ import com.github.libretube.api.obj.Streams
 import com.github.libretube.helpers.PlayerHelper
 
 interface MediaServiceRepository {
-    suspend fun getTrending(region: String): List<StreamItem>
     suspend fun getStreams(videoId: String): Streams
     suspend fun getComments(videoId: String): CommentsPage
     suspend fun getSegments(

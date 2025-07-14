@@ -55,7 +55,6 @@ class HomeViewModel : ViewModel() {
         loadHomeJob = viewModelScope.launch {
             val result = async {
                 awaitAll(
-                    async { if (visibleItems.contains(TRENDING)) loadTrending(context) },
                     async { if (visibleItems.contains(FEATURED)) loadFeed(subscriptionsViewModel) },
                     async { if (visibleItems.contains(BOOKMARKS)) loadBookmarks() },
                     async { if (visibleItems.contains(PLAYLISTS)) loadPlaylists() },
@@ -72,14 +71,6 @@ class HomeViewModel : ViewModel() {
                 }
             }
         }
-    }
-    private suspend fun loadTrending(context: Context) {
-        val region = LocaleHelper.getTrendingRegion(context)
-
-        runSafely(
-            onSuccess = { videos -> trending.updateIfChanged(videos) },
-            ioBlock = { MediaServiceRepository.instance.getTrending(region).take(10).deArrow() }
-        )
     }
 
     private suspend fun loadFeed(subscriptionsViewModel: SubscriptionsViewModel) {
@@ -143,7 +134,6 @@ class HomeViewModel : ViewModel() {
         private const val UNUSUAL_LOAD_TIME_MS = 10000L
         private const val FEATURED = "featured"
         private const val WATCHING = "watching"
-        private const val TRENDING = "trending"
         private const val BOOKMARKS = "bookmarks"
         private const val PLAYLISTS = "playlists"
     }

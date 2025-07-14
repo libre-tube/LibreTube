@@ -245,17 +245,6 @@ class NewPipeMediaServiceRepository : MediaServiceRepository {
         YoutubeStreamExtractor.setPoTokenProvider(PoTokenGenerator());
     }
 
-    override suspend fun getTrending(region: String): List<StreamItem> {
-        val kioskList = NewPipeExtractorInstance.extractor.kioskList
-        kioskList.forceContentCountry(ContentCountry(region))
-
-        val extractor = kioskList.defaultKioskExtractor
-        extractor.fetchPage()
-
-        val info = KioskInfo.getInfo(extractor)
-        return info.relatedItems.filterIsInstance<StreamInfoItem>().map { it.toStreamItem() }
-    }
-
     override suspend fun getStreams(videoId: String): Streams = withContext(Dispatchers.IO) {
         val respAsync = async {
             StreamInfo.getInfo("$YOUTUBE_FRONTEND_URL/watch?v=$videoId")

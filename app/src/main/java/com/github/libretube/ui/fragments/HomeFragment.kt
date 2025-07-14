@@ -38,7 +38,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val subscriptionsViewModel: SubscriptionsViewModel by activityViewModels()
     private val homeViewModel: HomeViewModel by activityViewModels()
 
-    private val trendingAdapter = VideoCardsAdapter()
     private val feedAdapter = VideoCardsAdapter(columnWidthDp = 250f)
     private val watchingAdapter = VideoCardsAdapter(columnWidthDp = 250f)
     private val bookmarkAdapter = PlaylistBookmarkAdapter(PlaylistBookmarkAdapter.Companion.BookmarkMode.HOME)
@@ -48,7 +47,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         _binding = FragmentHomeBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
-        binding.trendingRV.adapter = trendingAdapter
         binding.featuredRV.adapter = feedAdapter
         binding.bookmarksRV.adapter = bookmarkAdapter
         binding.playlistsRV.adapter = playlistAdapter
@@ -65,7 +63,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.watchingRV.adapter = watchingAdapter
 
         with(homeViewModel) {
-            trending.observe(viewLifecycleOwner, ::showTrending)
             feed.observe(viewLifecycleOwner, ::showFeed)
             bookmarks.observe(viewLifecycleOwner, ::showBookmarks)
             playlists.observe(viewLifecycleOwner, ::showPlaylists)
@@ -79,10 +76,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         binding.watchingTV.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_watchHistoryFragment)
-        }
-
-        binding.trendingTV.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_trendsFragment)
         }
 
         binding.playlistsTV.setOnClickListener {
@@ -136,13 +129,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             visibleItems = visibleItems,
             onUnusualLoadTime = ::showChangeInstanceSnackBar
         )
-    }
-
-    private fun showTrending(streamItems: List<StreamItem>?) {
-        if (streamItems == null) return
-
-        makeVisible(binding.trendingRV, binding.trendingTV)
-        trendingAdapter.submitList(streamItems)
     }
 
     private fun showFeed(streamItems: List<StreamItem>?) {

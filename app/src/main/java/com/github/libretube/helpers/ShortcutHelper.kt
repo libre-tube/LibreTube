@@ -13,7 +13,6 @@ import com.github.libretube.ui.activities.MainActivity
 object ShortcutHelper {
     private val shortcuts = listOf(
         AppShortcut("home", R.string.startpage, R.drawable.ic_home),
-        AppShortcut("trends", R.string.trends, R.drawable.ic_trending),
         AppShortcut("subscriptions", R.string.subscriptions, R.drawable.ic_subscriptions),
         AppShortcut("library", R.string.library, R.drawable.ic_library)
     )
