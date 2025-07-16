@@ -31,7 +31,6 @@ import kotlinx.coroutines.withContext
 class HomeViewModel : ViewModel() {
     private val hideWatched get() = PreferenceHelper.getBoolean(HIDE_WATCHED_FROM_FEED, false)
 
-    val trending: MutableLiveData<List<StreamItem>> = MutableLiveData(null)
     val feed: MutableLiveData<List<StreamItem>> = MutableLiveData(null)
     val bookmarks: MutableLiveData<List<PlaylistBookmark>> = MutableLiveData(null)
     val playlists: MutableLiveData<List<Playlists>> = MutableLiveData(null)
@@ -39,7 +38,7 @@ class HomeViewModel : ViewModel() {
     val isLoading: MutableLiveData<Boolean> = MutableLiveData(true)
     val loadedSuccessfully: MutableLiveData<Boolean> = MutableLiveData(false)
 
-    private val sections get() = listOf(trending, feed, bookmarks, playlists, continueWatching)
+    private val sections get() = listOf(feed, bookmarks, playlists, continueWatching)
 
     private var loadHomeJob: Job? = null
 
