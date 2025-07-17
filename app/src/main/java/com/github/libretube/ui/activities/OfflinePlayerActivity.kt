@@ -199,11 +199,7 @@ class OfflinePlayerActivity : BaseActivity() {
             playNextVideo(PlayingQueue.getNext() ?: return@setOnClickListener)
         }
 
-        binding.player.initialize(
-            binding.doubleTapOverlay.binding,
-            binding.playerGestureControlsView.binding,
-            chaptersViewModel
-        )
+        binding.player.initialize(chaptersViewModel)
     }
 
     private suspend fun loadPlayerData() {
