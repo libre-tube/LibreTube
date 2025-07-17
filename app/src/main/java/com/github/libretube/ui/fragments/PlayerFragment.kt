@@ -1104,6 +1104,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         binding.descriptionLayout.isInvisible = !show
         binding.relatedRecView.isInvisible = !show
         binding.playerChannel.isInvisible = !show
+        binding.videoTransitionProgress.isVisible = !show
     }
 
     @SuppressLint("SetTextI18n")
