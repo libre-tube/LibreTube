@@ -128,6 +128,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     private val playerBinding get() = binding.player.binding
     private val doubleTapOverlayBinding get() = binding.doubleTapOverlay.binding
     private val playerGestureControlsViewBinding get() = binding.playerGestureControlsView.binding
+    private val fastForwardViewBinding get() = binding.fastForwardView?.binding
 
     private val commonPlayerViewModel: CommonPlayerViewModel by activityViewModels()
     private val viewModel: PlayerViewModel by viewModels()
@@ -1128,7 +1129,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         binding.player.initialize(
             doubleTapOverlayBinding,
             playerGestureControlsViewBinding,
-            chaptersViewModel
+            chaptersViewModel,
+            fastForwardViewBinding
         )
         binding.player.initPlayerOptions(
             viewModel,

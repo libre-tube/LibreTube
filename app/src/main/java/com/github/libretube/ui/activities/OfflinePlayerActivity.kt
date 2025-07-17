@@ -202,7 +202,8 @@ class OfflinePlayerActivity : BaseActivity() {
         binding.player.initialize(
             binding.doubleTapOverlay.binding,
             binding.playerGestureControlsView.binding,
-            chaptersViewModel
+            chaptersViewModel,
+            binding.fastForwardView.binding
         )
     }
 
