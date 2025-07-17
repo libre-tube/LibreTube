@@ -207,70 +207,14 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@android:color/black"
+        app:player_layout_id="@layout/custom_exo_player_view"
         app:controller_layout_id="@layout/exo_styled_player_control_view"
         app:layout_constraintBottom_toBottomOf="@id/main_container"
         app:layout_constraintEnd_toEndOf="@id/main_container"
         app:layout_constraintStart_toStartOf="@id/main_container"
         app:layout_constraintTop_toTopOf="@id/main_container"
         app:show_buffering="when_playing"
-        app:surface_type="surface_view">
-
-        <com.github.libretube.ui.views.DoubleTapOverlay
-            android:id="@+id/doubleTapOverlay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center" />
-
-        <com.github.libretube.ui.views.PlayerGestureControlsView
-            android:id="@+id/playerGestureControlsView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|end"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="-10dp"
-            android:paddingEnd="20dp"
-            app:cardBackgroundColor="#88000000"
-            app:strokeWidth="1dp"
-            tools:ignore="RtlSymmetry">
-
-            <com.github.libretube.ui.views.DrawableTextView
-                android:id="@+id/sb_skip_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="20dp"
-                android:padding="10dp"
-                android:text="@string/skip_segment"
-                android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:visibility="gone"
-                app:drawableEndCompat="@drawable/ic_next"
-                app:drawableEndDimen="20dp"
-                app:drawableTint="@android:color/white" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.github.libretube.ui.views.AutoplayCountdownView
-            android:id="@+id/autoplay_countdown"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone" />
-
-        <ProgressBar
-            android:id="@+id/video_transition_progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:indeterminate="true"
-            android:visibility="gone" />
-
-    </com.github.libretube.ui.views.OnlinePlayerView>
+        app:surface_type="surface_view" />
 
     <ImageView
         android:id="@+id/close_imageView"

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--based on https://github.com/androidx/media/blob/release/libraries/ui/src/main/res/layout/exo_player_view.xml -->
+
+    <androidx.media3.ui.AspectRatioFrameLayout android:id="@id/exo_content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+        <View
+            android:id="@id/exo_controls_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/exo_black_opacity_60"
+            android:alpha="0" />
+
+        <View android:id="@id/exo_shutter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/black"/>
+
+        <ImageView android:id="@id/exo_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:contentDescription="@null"/>
+
+        <ImageView android:id="@id/exo_artwork"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:contentDescription="@null"/>
+
+        <androidx.media3.ui.SubtitleView android:id="@id/exo_subtitles"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <ProgressBar android:id="@id/exo_buffering"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:layout_gravity="center"/>
+
+        <TextView android:id="@id/exo_error_message"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/exo_error_message_height"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/exo_error_message_margin_bottom"
+            android:gravity="center"
+            android:textColor="@color/exo_white"
+            android:textSize="@dimen/exo_error_message_text_size"
+            android:background="@drawable/exo_rounded_rectangle"
+            android:paddingLeft="@dimen/exo_error_message_text_padding_horizontal"
+            android:paddingRight="@dimen/exo_error_message_text_padding_horizontal"
+            android:paddingTop="@dimen/exo_error_message_text_padding_vertical"
+            android:paddingBottom="@dimen/exo_error_message_text_padding_vertical"/>
+
+    </androidx.media3.ui.AspectRatioFrameLayout>
+
+    <FrameLayout android:id="@id/exo_ad_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <FrameLayout android:id="@id/exo_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <com.github.libretube.ui.views.DoubleTapOverlay
+        android:id="@+id/doubleTapOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center" />
+
+    <com.github.libretube.ui.views.PlayerGestureControlsView
+        android:id="@+id/playerGestureControlsView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|end"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="-10dp"
+        android:paddingEnd="20dp"
+        app:cardBackgroundColor="#88000000"
+        app:strokeWidth="1dp"
+        tools:ignore="RtlSymmetry">
+
+        <com.github.libretube.ui.views.DrawableTextView
+            android:id="@+id/sb_skip_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="20dp"
+            android:padding="10dp"
+            android:text="@string/skip_segment"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:visibility="gone"
+            app:drawableEndCompat="@drawable/ic_next"
+            app:drawableEndDimen="20dp"
+            app:drawableTint="@android:color/white" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.github.libretube.ui.views.AutoplayCountdownView
+        android:id="@+id/autoplay_countdown"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/video_transition_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="gone" />
+
+</merge>

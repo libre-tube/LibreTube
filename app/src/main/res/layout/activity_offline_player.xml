@@ -10,23 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/black"
+        app:player_layout_id="@layout/custom_exo_player_view"
         app:controller_layout_id="@layout/exo_styled_player_control_view"
-        app:show_buffering="when_playing">
-
-        <com.github.libretube.ui.views.DoubleTapOverlay
-            android:id="@+id/doubleTapOverlay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center" />
-
-        <com.github.libretube.ui.views.PlayerGestureControlsView
-            android:id="@+id/playerGestureControlsView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center" />
-
-    </com.github.libretube.ui.views.OfflinePlayerView>
+        app:show_buffering="when_playing" />
 
 </LinearLayout>

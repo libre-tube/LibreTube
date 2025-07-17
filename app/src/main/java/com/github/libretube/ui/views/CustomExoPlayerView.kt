@@ -12,7 +12,6 @@ import android.text.format.DateUtils
 import android.util.AttributeSet
 import android.view.KeyEvent
 import android.view.MotionEvent
-import android.view.View
 import android.view.Window
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -40,6 +39,7 @@ import androidx.media3.ui.TimeBar
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.databinding.CustomExoPlayerViewTemplateBinding
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.PlayerGestureControlsViewBinding
@@ -80,16 +80,18 @@ abstract class CustomExoPlayerView(
 ) : PlayerView(context, attributeSet), PlayerOptions, PlayerGestureOptions {
     @Suppress("LeakingThis")
     val binding = ExoStyledPlayerControlViewBinding.bind(this)
+    val backgroundBinding = CustomExoPlayerViewTemplateBinding.bind(this)
 
     /**
      * Objects for player tap and swipe gesture
      */
-    private lateinit var gestureViewBinding: PlayerGestureControlsViewBinding
+    private val gestureViewBinding: PlayerGestureControlsViewBinding get() = backgroundBinding.playerGestureControlsView.binding
+    private val doubleTapOverlayBinding: DoubleTapOverlayBinding get() = backgroundBinding.doubleTapOverlay.binding
+
     private lateinit var playerGestureController: PlayerGestureController
     private lateinit var brightnessHelper: BrightnessHelper
     private lateinit var audioHelper: AudioHelper
     private lateinit var chaptersViewModel: ChaptersViewModel
-    private var doubleTapOverlayBinding: DoubleTapOverlayBinding? = null
     private var chaptersBottomSheet: ChaptersBottomSheet? = null
     private var scrubbingTimeBar = false
 
@@ -132,13 +134,7 @@ abstract class CustomExoPlayerView(
         if (isControllerFullyVisible) hideController() else showController()
     }
 
-    fun initialize(
-        doubleTapOverlayBinding: DoubleTapOverlayBinding,
-        playerGestureControlsViewBinding: PlayerGestureControlsViewBinding,
-        chaptersViewModel: ChaptersViewModel
-    ) {
-        this.doubleTapOverlayBinding = doubleTapOverlayBinding
-        this.gestureViewBinding = playerGestureControlsViewBinding
+    fun initialize(chaptersViewModel: ChaptersViewModel) {
         this.chaptersViewModel = chaptersViewModel
         this.playerGestureController = PlayerGestureController(context as BaseActivity, this)
         this.brightnessHelper = BrightnessHelper(context as Activity)
@@ -367,6 +363,10 @@ abstract class CustomExoPlayerView(
         // remove the callback to hide the controller
         cancelHideControllerTask()
         super.hideController()
+        backgroundBinding.exoControlsBackground.animate()
+            .alpha(0f)
+            .setDuration(500)
+            .start()
     }
 
     override fun showController() {
@@ -375,6 +375,10 @@ abstract class CustomExoPlayerView(
         // automatically hide the controller after 2 seconds
         enqueueHideControllerTask()
         super.showController()
+        backgroundBinding.exoControlsBackground.animate()
+            .alpha(1f)
+            .setDuration(200)
+            .start()
     }
 
     fun showControllerPermanently() {
@@ -388,12 +392,12 @@ abstract class CustomExoPlayerView(
     private fun initRewindAndForward() {
         val seekIncrementText = (PlayerHelper.seekIncrement / 1000).toString()
         listOf(
-            doubleTapOverlayBinding?.rewindTV,
-            doubleTapOverlayBinding?.forwardTV,
+            doubleTapOverlayBinding.rewindTV,
+            doubleTapOverlayBinding.forwardTV,
             binding.forwardTV,
             binding.rewindTV
         ).forEach {
-            it?.text = seekIncrementText
+            it.text = seekIncrementText
         }
         binding.forwardBTN.setOnClickListener {
             player?.seekBy(PlayerHelper.seekIncrement)
@@ -475,7 +479,7 @@ abstract class CustomExoPlayerView(
         }
 
         // hide the dimming background overlay if locked
-        binding.exoControlsBackground.setBackgroundColor(
+        backgroundBinding.exoControlsBackground.setBackgroundColor(
             if (isLocked) {
                 ContextCompat.getColor(
                     context,
@@ -494,7 +498,7 @@ abstract class CustomExoPlayerView(
         player?.seekBy(-PlayerHelper.seekIncrement)
 
         // show the rewind button
-        doubleTapOverlayBinding?.apply {
+        doubleTapOverlayBinding.apply {
             animateSeeking(rewindBTN, rewindIV, rewindTV, true)
 
             // start callback to hide the button
@@ -509,7 +513,7 @@ abstract class CustomExoPlayerView(
         player?.seekBy(PlayerHelper.seekIncrement)
 
         // show the forward button
-        doubleTapOverlayBinding?.apply {
+        doubleTapOverlayBinding.apply {
             animateSeeking(forwardBTN, forwardIV, forwardTV, false)
 
             // start callback to hide the button
@@ -604,7 +608,7 @@ abstract class CustomExoPlayerView(
     private fun updateVolume(distance: Float) {
         val bar = gestureViewBinding.volumeProgressBar
         gestureViewBinding.volumeControlView.apply {
-            if (visibility == View.GONE) {
+            if (isGone) {
                 isVisible = true
                 // Volume could be changed using other mediums, sync progress
                 // bar with new value.

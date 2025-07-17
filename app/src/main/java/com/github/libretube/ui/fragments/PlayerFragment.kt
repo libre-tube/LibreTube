@@ -125,9 +125,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     private var _binding: FragmentPlayerBinding? = null
     val binding get() = _binding!!
 
-    private val playerBinding get() = binding.player.binding
-    private val doubleTapOverlayBinding get() = binding.doubleTapOverlay.binding
-    private val playerGestureControlsViewBinding get() = binding.playerGestureControlsView.binding
+    private val playerControlsBinding get() = binding.player.binding
+    private val playerBackgroundBinding get() = binding.player.backgroundBinding
 
     private val commonPlayerViewModel: CommonPlayerViewModel by activityViewModels()
     private val viewModel: PlayerViewModel by viewModels()
@@ -275,7 +274,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
             // check if video has ended, next video is available and autoplay is enabled/the video is part of a played playlist.
             if (playbackState == Player.STATE_ENDED) {
-                binding.sbSkipBtn.isGone = true
+                playerBackgroundBinding.sbSkipBtn.isGone = true
                 if (PlayerHelper.isAutoPlayEnabled(playlistId != null) && autoPlayCountdownEnabled) {
                     showAutoPlayCountdown()
                 } else {
@@ -326,7 +325,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
             mediaMetadata.extras?.getString(IntentData.videoId)?.let {
                 videoId = it
-                _binding?.autoplayCountdown?.cancelAndHideCountdown()
+                if (_binding != null) playerBackgroundBinding.autoplayCountdown.cancelAndHideCountdown()
 
                 // fix: if the fragment is recreated, play the current video, and not the initial one
                 arguments?.run {
@@ -432,8 +431,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
         viewModel.segments.observe(viewLifecycleOwner) { segments ->
             binding.descriptionLayout.setSegments(segments)
-            playerBinding.exoProgress.setSegments(segments)
-            playerBinding.sbToggle.isVisible = segments.isNotEmpty()
+            playerControlsBinding.exoProgress.setSegments(segments)
+            playerControlsBinding.sbToggle.isVisible = segments.isNotEmpty()
             segments.firstOrNull { it.category == PlayerHelper.SPONSOR_HIGHLIGHT_CATEGORY }
                 ?.let {
                     lifecycleScope.launch(Dispatchers.IO) { initializeHighlight(it) }
@@ -508,6 +507,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             // if the player is minimized, the fragment behind the player should handle the event
             onBackPressedCallback.isEnabled = isMiniPlayerVisible != true
         }
+
+        toggleVideoInfoVisibility(false)
     }
 
     private fun attachToPlayerService(playerData: PlayerData, startNewSession: Boolean) {
@@ -596,7 +597,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                     updateCurrentSubtitle(null)
                     disableController()
                     commonPlayerViewModel.setSheetExpand(null)
-                    binding.sbSkipBtn.isGone = true
+                    playerBackgroundBinding.sbSkipBtn.isGone = true
                     if (NavBarHelper.hasTabs()) {
                         mainMotionLayout.progress = 1F
                     }
@@ -644,7 +645,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         binding.closeImageView.setOnClickListener {
             killPlayerFragment()
         }
-        playerBinding.closeImageButton.setOnClickListener {
+        playerControlsBinding.closeImageButton.setOnClickListener {
             killPlayerFragment()
         }
 
@@ -672,7 +673,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
         // FullScreen button trigger
         // hide fullscreen button if autorotation enabled
-        playerBinding.fullscreen.setOnClickListener {
+        playerControlsBinding.fullscreen.setOnClickListener {
             toggleFullscreen()
         }
 
@@ -739,11 +740,11 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             }.show(childFragmentManager, AddToPlaylistDialog::class.java.name)
         }
 
-        playerBinding.skipPrev.setOnClickListener {
+        playerControlsBinding.skipPrev.setOnClickListener {
             PlayingQueue.getPrev()?.let { prev -> playNextVideo(prev) }
         }
 
-        playerBinding.skipNext.setOnClickListener {
+        playerControlsBinding.skipNext.setOnClickListener {
             PlayingQueue.getNext()?.let { next -> playNextVideo(next) }
         }
 
@@ -1040,27 +1041,27 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                     SbSkipOptions.MANUAL
                 ) || autoSkipTemporarilyDisabled
             ) {
-                binding.sbSkipBtn.isVisible = true
-                binding.sbSkipBtn.setOnClickListener {
+                playerBackgroundBinding.sbSkipBtn.isVisible = true
+                playerBackgroundBinding.sbSkipBtn.setOnClickListener {
                     playerController.seekTo((segment.segmentStartAndEnd.second * 1000f).toLong())
                     segment.skipped = true
                 }
             }
         } else {
-            binding.sbSkipBtn.isGone = true
+            playerBackgroundBinding.sbSkipBtn.isGone = true
         }
     }
 
     private fun setPlayerDefaults() {
         // reset the player view
-        playerBinding.exoProgress.clearSegments()
-        playerBinding.sbToggle.isGone = true
+        playerControlsBinding.exoProgress.clearSegments()
+        playerControlsBinding.sbToggle.isGone = true
 
         // reset the comments to become reloaded later
         commentsViewModel.reset()
 
         // hide the button to skip SponsorBlock segments manually
-        binding.sbSkipBtn.isGone = true
+        playerBackgroundBinding.sbSkipBtn.isGone = true
 
         // use the video's default audio track when starting playback
         playerController.sendCustomCommand(
@@ -1104,7 +1105,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         binding.descriptionLayout.isInvisible = !show
         binding.relatedRecView.isInvisible = !show
         binding.playerChannel.isInvisible = !show
-        binding.videoTransitionProgress.isVisible = !show
+        playerBackgroundBinding.videoTransitionProgress.isVisible = !show
     }
 
     @SuppressLint("SetTextI18n")
@@ -1125,11 +1126,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         }
 
         // initialize the player view actions
-        binding.player.initialize(
-            doubleTapOverlayBinding,
-            playerGestureControlsViewBinding,
-            chaptersViewModel
-        )
+        binding.player.initialize(chaptersViewModel)
         binding.player.initPlayerOptions(
             viewModel,
             commonPlayerViewModel,
@@ -1163,7 +1160,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             player.isLive = streams.isLive
             relPlayerDownload.isVisible = !streams.isLive
         }
-        playerBinding.exoTitle.text = streams.title
+        playerControlsBinding.exoTitle.text = streams.title
 
         // init the chapters recyclerview
         chaptersViewModel.chaptersLiveData.postValue(streams.chapters)
@@ -1186,10 +1183,10 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         )
 
         // seekbar preview setup
-        playerBinding.seekbarPreview.isGone = true
-        seekBarPreviewListener?.let { playerBinding.exoProgress.removeListener(it) }
+        playerControlsBinding.seekbarPreview.isGone = true
+        seekBarPreviewListener?.let { playerControlsBinding.exoProgress.removeListener(it) }
         seekBarPreviewListener = createSeekbarPreviewListener().also {
-            playerBinding.exoProgress.addSeekBarListener(it)
+            playerControlsBinding.exoProgress.addSeekBarListener(it)
         }
     }
 
@@ -1197,14 +1194,14 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         if (!PlayingQueue.hasNext()) return
 
         disableController()
-        binding.autoplayCountdown.setHideSelfListener {
+        playerBackgroundBinding.autoplayCountdown.setHideSelfListener {
             // could fail if the video already got closed before
             runCatching {
-                binding.autoplayCountdown.isGone = true
+                playerBackgroundBinding.autoplayCountdown.isGone = true
                 binding.player.useController = true
             }
         }
-        binding.autoplayCountdown.startCountdown {
+        playerBackgroundBinding.autoplayCountdown.startCountdown {
             PlayingQueue.getNext()?.let { playNextVideo(it) }
         }
     }
@@ -1507,7 +1504,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     private fun createSeekbarPreviewListener(): SeekbarPreviewListener {
         return SeekbarPreviewListener(
             OnlineTimeFrameReceiver(requireContext(), streams.previewFrames),
-            playerBinding,
+            playerControlsBinding,
             streams.duration * 1000
         )
     }
