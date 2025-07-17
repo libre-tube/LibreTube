@@ -235,6 +235,13 @@
             android:layout_height="match_parent"
             android:visibility="gone" />
 
+        <ProgressBar
+            android:id="@+id/video_transition_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true" />
+
     </com.github.libretube.ui.views.OnlinePlayerView>
 
     <ImageView
