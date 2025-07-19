@@ -303,7 +303,6 @@
     <string name="mobile_data">मोबाइल डेटा</string>
     <string name="skip_segment">विभाग वगळा</string>
     <string name="local_subscriptions">स्थानिक सदस्यता</string>
-    <string name="change_region">सध्याच्या क्षेत्रासाठी ट्रेंडिंग अनुपलब्ध असल्याचे दिसते. कृपया सेटिंग्जमध्ये दुसरा निवडा.</string>
     <string name="filename">फाईलचे नाव</string>
     <string name="invalid_filename">अवैध फाइलनाव!</string>
     <string name="time_code">वेळ कोड (सेकंद)</string>
@@ -349,9 +348,7 @@
     <string name="lbry_hls">LBRY HLS</string>
     <string name="audio_video_summary">गुणवत्ता आणि स्वरूप</string>
     <string name="playlistUrl">प्लेलिस्ट URL</string>
-    <string name="trends">ट्रेंड्स</string>
     <string name="featured">वैशिष्ट्यपूर्ण</string>
-    <string name="trending">सध्या काय ट्रेंडिंग आहे</string>
     <string name="renamePlaylist">प्लेलिस्टचे नाव बदला</string>
     <string name="no_subtitles_available">कोणतीही उपशीर्षके उपलब्ध नाहीत</string>
     <string name="repeat_mode">रिपीट मोड</string>

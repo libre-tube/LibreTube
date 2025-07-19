@@ -220,9 +220,7 @@
     <string name="hls_instead_of_dash">HLS භාවිතා කරන්න</string>
     <string name="auto_quality">ස්වයං</string>
     <string name="limit_to_runtime">ධාවන කාලයට සීමා කරන්න</string>
-    <string name="trends">ප්‍රවණතා</string>
     <string name="featured">විශේෂාංගගත</string>
-    <string name="trending">දැන් නැගී එන්නේ කුමක්ද</string>
     <string name="bookmarks">පොත් සලකුණු</string>
     <string name="clear_bookmarks">පොත් සලකුණු හිස් කරන්න</string>
     <string name="brightness">දීප්තිය</string>
@@ -318,7 +316,6 @@
     <string name="resize_mode_zoom">විශාලනය කරන්න</string>
     <string name="repeat_mode_none">කිසිවක් නැත</string>
     <string name="add_to_queue">පෝලිමට එකතු කරන්න</string>
-    <string name="change_region">වත්මන් ප්‍රදේශය සඳහා නැගී එන වීඩියෝ නොමැති බව පෙනේ. කරුණාකර සැකසීම් තුළ වෙනත් එකක් තෝරන්න.</string>
     <string name="player_resize_mode">ප්‍රමාණය වෙනස් කිරීමේ ප්‍රකාරය</string>
     <string name="copied_to_clipboard">පසුරු පුවරුවට පිටපත් කර ඇත</string>
     <string name="legacy_subscriptions">උරුම දායකත්ව දසුන</string>

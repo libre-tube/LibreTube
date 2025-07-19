@@ -269,7 +269,6 @@
     <string name="push_channel_description">Yeni yayımlar mövcuddursa bildiriş göstərir.</string>
     <string name="play_next">Sonra oynat</string>
     <string name="navigation_bar">Hərəkət çubuğu</string>
-    <string name="change_region">Görünür, trendlər cari bölgə üçün əlçatan deyil. Xahiş olunur, tənzimləmələrdə başqasın seç.</string>
     <string name="playback_pitch">Ucalıq</string>
     <string name="filename">Fayl adı</string>
     <string name="invalid_filename">Yanlış fayl adı!</string>
@@ -296,9 +295,7 @@
     <string name="hls_instead_of_dash">HLS istifadə et</string>
     <string name="hls_instead_of_dash_summary">Media yayımı üçün DASH əvəzinə HLS istifadə edin. Video oynatma işləmirsə, bu seçimi dəyişdirməyə cəhd edin.</string>
     <string name="limit_to_runtime">İşləmə vaxtı ilə məhdudlaşdır</string>
-    <string name="trends">Trendlər</string>
     <string name="featured">Seçilən</string>
-    <string name="trending">İndi nə trenddədir</string>
     <string name="bookmarks">Əlfəcinlər</string>
     <string name="bookmark">Əlfəcin</string>
     <string name="clear_bookmarks">Əlfəcinləri təmizlə</string>

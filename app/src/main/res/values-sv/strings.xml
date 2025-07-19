@@ -282,7 +282,6 @@
     <string name="hls_instead_of_dash_summary">Använd HLS istället för DASH för strömmande media. Försök att aktivera det här alternativet om videouppspelningen inte fungerar.</string>
     <string name="playlist_description">Beskrivning av spellista</string>
     <string name="copied_to_clipboard">Kopierad till urklipp</string>
-    <string name="trending">Trendigt just nu</string>
     <string name="end_time">Sluttid</string>
     <string name="confirm_unsubscribing">Bekräfta avslut av prenumeration</string>
     <string name="mobile_data">Mobildata</string>
@@ -290,7 +289,6 @@
     <string name="audio_video_summary">Kvalitet och format</string>
     <string name="welcome">Välkommen till LibreTube</string>
     <string name="pinch_control">Nypkontroll</string>
-    <string name="change_region">Populära verkar inte vara tillgängligt för den aktuella regionen. Vänligen välj en annan i inställningarna.</string>
     <string name="import_playlists_from">Importera spellistor från</string>
     <string name="added_to_playlist">Tillagd i spellista %1$s</string>
     <string name="start_time">Starttid</string>
@@ -434,7 +432,6 @@
     <string name="show_search_suggestions">Visa sökförslag</string>
     <string name="bookmarks">Bokmärken</string>
     <string name="play_next">Spela upp nästa</string>
-    <string name="trends">Trendar</string>
     <string name="video_id">Video ID</string>
     <string name="resize_mode_fit">Anpassa</string>
     <string name="audio_only_mode">Endast ljud</string>

@@ -261,7 +261,6 @@
     <string name="backup_customInstances">Instâncias personalizadas</string>
     <string name="play_next">Reproduzir seguinte</string>
     <string name="navigation_bar">Barra de navegação</string>
-    <string name="change_region">Parece que as tendências não estão disponíveis na sua região. Selecione outra região nas definições.</string>
     <string name="renamePlaylist">Mudar nome da lista de reprodução</string>
     <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">Dados móveis</string>
@@ -297,9 +296,7 @@
     <string name="hls_instead_of_dash_summary">Utilizar HLS em vez de DASH. Ative esta opção se a reprodução não estiver a funcionar.</string>
     <string name="auto_quality">Automático</string>
     <string name="limit_to_runtime">Limite de tempo para execução</string>
-    <string name="trends">Tendências</string>
     <string name="featured">Destaques</string>
-    <string name="trending">Tendências atuais</string>
     <string name="queue_insert_related_videos">Colocar vídeos relacionados</string>
     <string name="bookmarks">Marcadores</string>
     <string name="bookmark">Marcador</string>

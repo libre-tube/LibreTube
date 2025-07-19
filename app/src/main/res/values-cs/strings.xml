@@ -269,7 +269,6 @@
     <string name="backup_customInstances">Vlastní instance</string>
     <string name="play_next">Přehrát jako další</string>
     <string name="navigation_bar">Navigační lišta</string>
-    <string name="change_region">Zdá se, že trendy nejsou pro aktuální oblast k dispozici. V nastavení prosím vyberte jinou.</string>
     <string name="playback_pitch">Výška</string>
     <string name="invalid_filename">Nesprávný název souboru!</string>
     <string name="filename">Název souboru</string>
@@ -296,9 +295,7 @@
     <string name="hls_instead_of_dash">Použít HLS</string>
     <string name="hls_instead_of_dash_summary">Použít HLS místo DASH pro streamování médií. Pokud nefunguje přehrávání, zkuste přepnout tuto možnost.</string>
     <string name="limit_to_runtime">Omezení doby běhu</string>
-    <string name="trends">Trendy</string>
     <string name="featured">Doporučené</string>
-    <string name="trending">Co je právě v trendech</string>
     <string name="bookmarks">Záložky</string>
     <string name="bookmark">Uložit</string>
     <string name="clear_bookmarks">Vymazat záložky</string>

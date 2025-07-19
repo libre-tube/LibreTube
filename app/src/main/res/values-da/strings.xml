@@ -309,7 +309,6 @@
     <string name="audio_track">Lydspor</string>
     <string name="unsupported_file_format">Ikke-understøttet filformat: %1$s</string>
     <string name="hls_instead_of_dash_summary">Brug HLS i stedet for DASH til mediestreaming. Prøv at ændre denne indstilling, hvis videoafspilning ikke virker.</string>
-    <string name="trends">Trends</string>
     <string name="queue_insert_related_videos">Indsæt relaterede videoer</string>
     <string name="autoplay_playlists">Auto-afspil playlister</string>
     <string name="local_playlists">Lokale playlister</string>
@@ -478,7 +477,6 @@
     <string name="local_subscriptions">Lokale abonnementer</string>
     <string name="play_next">Afspil næste</string>
     <string name="navigation_bar">Navigationslinje</string>
-    <string name="change_region">Trending ser ud til at være utilgængelig i den nuværende region. Vælg venligst en anden i indstillingerne.</string>
     <string name="playback_pitch">Tonehøjde</string>
     <string name="category_highlight_summary">Kan være enten sponsoreret titel, miniaturebilledet eller den mest interessante del af videoen. Du kan springe hen til den ved at trykke på den i kapitlersektionen</string>
     <string name="color">Farve</string>
@@ -497,7 +495,6 @@
     <string name="auto_quality">Auto</string>
     <string name="limit_to_runtime">Begræns til køretid</string>
     <string name="featured">Fremhævet</string>
-    <string name="trending">Hvad er populært lige nu</string>
     <string name="bookmarks">Bogmærker</string>
     <string name="replies">Svar</string>
     <string name="wifi">Wi-Fi</string>

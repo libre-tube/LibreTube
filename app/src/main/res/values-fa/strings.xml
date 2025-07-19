@@ -230,7 +230,6 @@
     <string name="navigation_bar">نوار ناوبری</string>
     <string name="hls_instead_of_dash">استفاده از HLS</string>
     <string name="auto_quality">خودکار</string>
-    <string name="trending">آن‌چه اکنون داغ است</string>
     <string name="bookmark">نشانک</string>
     <string name="volume">حجم صدا</string>
     <string name="backup_restore_summary">واردات و صادرات اشتراک‌ها، لیست‌های پخش، …</string>
@@ -248,7 +247,6 @@
     <string name="behavior">رفتار</string>
     <string name="never">هرگز</string>
     <string name="unlimited">نامحدود</string>
-    <string name="trends">داغ‌ها</string>
     <string name="exportsuccess">برون‌ریزی شد.</string>
     <string name="forward">پیش‌روی</string>
     <string name="featured">پیشنهادی</string>
@@ -288,7 +286,6 @@
     <string name="skip_segment">رد شدن از بخش</string>
     <string name="added_to_playlist">افزوده به سیاههٔ پخش %1$s</string>
     <string name="delete">حذف از دانلودها</string>
-    <string name="change_region">به نظر می رسد پرطرفدار ها برای منطقه فعلی در دسترس نیست. لطفاً یکی دیگر را در تنظیمات انتخاب کنید.</string>
     <string name="pauseOnScreenOff_summary">مکث پخش هنگام خاموش بودن صفحه</string>
     <string name="skip_buttons_summary">نمایش دکمه ها برای پرش به ویدیو بعدی یا قبلی</string>
     <string name="playerVideoFormat">قالب ویدیویی پخش‌کننده</string>

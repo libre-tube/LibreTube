@@ -60,15 +60,4 @@ object LocaleHelper {
             .map { Country(it.displayLanguage, it.language) }
             .sortedBy { it.name }
     }
-
-    fun getTrendingRegion(context: Context): String {
-        val regionPref = PreferenceHelper.getString(PreferenceKeys.REGION, "sys")
-
-        // get the system default country if auto region selected
-        return if (regionPref == "sys") {
-            getDetectedCountry(context).uppercase()
-        } else {
-            regionPref
-        }
-    }
 }

@@ -268,7 +268,6 @@
     <string name="download_channel_description">Pokazuje powiadomienie podczas pobierania multimediów.</string>
     <string name="play_next">Odtwórz następne</string>
     <string name="navigation_bar">Pasek nawigacyjny</string>
-    <string name="change_region">Filmy na czasie wydają się być niedostępne dla bieżącego regionu. Proszę wybrać inny w ustawieniach.</string>
     <string name="time_code">Kod czasowy (sekundy)</string>
     <string name="playback_pitch">Wysokość dźwięku</string>
     <string name="filename">Nazwa pliku</string>
@@ -295,9 +294,7 @@
     <string name="hls_instead_of_dash_summary">Użyj HLS zamiast DASH do strumieniowania mediów. Spróbuj przełączyć tę opcję, jeśli odtwarzanie wideo nie działa.</string>
     <string name="auto_quality">Automatyczna</string>
     <string name="limit_to_runtime">Ogranicz do czasu trwania</string>
-    <string name="trends">Na czasie</string>
     <string name="featured">Polecane</string>
-    <string name="trending">Aktualnie na czasie</string>
     <string name="bookmarks">Zakładki</string>
     <string name="bookmark">Zakładka</string>
     <string name="clear_bookmarks">Usuń zakładki</string>

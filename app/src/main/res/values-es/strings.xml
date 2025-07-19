@@ -269,7 +269,6 @@
     <string name="backup_customInstances">Instancias personalizadas</string>
     <string name="play_next">Reproducir el siguiente</string>
     <string name="navigation_bar">Barra de navegación</string>
-    <string name="change_region">Tendencias parece no estar disponible para la región actual. Selecciona otra en la configuración.</string>
     <string name="playback_pitch">Tono</string>
     <string name="filename">Nombre del archivo</string>
     <string name="invalid_filename">¡Nombre de archivo inválido!</string>
@@ -296,9 +295,7 @@
     <string name="hls_instead_of_dash_summary">Use HLS en lugar de DASH para la transmisión multimedia. Pruebe a activar esta opción si la reproducción de video no funciona.</string>
     <string name="hls_instead_of_dash">Usar HLS</string>
     <string name="limit_to_runtime">Limitar al tiempo de ejecución</string>
-    <string name="trends">Tendencias</string>
     <string name="featured">Destacado</string>
-    <string name="trending">Lo que está de moda ahora</string>
     <string name="bookmarks">Marcadores</string>
     <string name="bookmark">Marcador</string>
     <string name="clear_bookmarks">Borrar marcadores</string>

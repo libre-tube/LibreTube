@@ -154,7 +154,6 @@
     <string name="copied">कॉपी किया गया</string>
     <string name="navbar_order">क्रम</string>
     <string name="layout">लेआउट</string>
-    <string name="change_region">वर्तमान क्षेत्र के लिए चलन में अनुपलब्ध प्रतीत होता है। कृपया सेटिंग्स में दूसरे का चयन करें।</string>
     <string name="device_info">डिवाइस की जानकारी</string>
     <string name="disabled">आफ</string>
     <string name="added_to_playlist">%1$s प्लेलिस्ट में जोड़ा गया</string>
@@ -203,9 +202,7 @@
     <string name="hls_instead_of_dash_summary">डीएएसएच के बजाय एचएलएस का प्रयोग करें (धीमा होगा, अनुशंसित नहीं)</string>
     <string name="auto_quality">ऑटो</string>
     <string name="limit_to_runtime">रनटाइम तक सीमित करें</string>
-    <string name="trends">चलन में</string>
     <string name="featured">फीचर्ड</string>
-    <string name="trending">अभी क्या चलन में है</string>
     <string name="time_code">समय कोड (सेकंडस)</string>
     <string name="bookmark">बुकमार्क</string>
     <string name="bookmarks">बुकमार्कस</string>

@@ -17,7 +17,7 @@ object PreferenceHelper {
      * Preference migration from [fromVersion] to [toVersion].
      */
     private class PreferenceMigration(
-        val fromVersion: Int, val toVersion: Int, val onMigration: () -> Unit
+        val fromVersion: Int, val toVersion: Int, val onMigration: (Context) -> Unit
     )
 
     /**
@@ -40,8 +40,15 @@ object PreferenceHelper {
      * The version is automatically determined from the number of migrations available.
      */
     private val MIGRATIONS = arrayOf(
-        PreferenceMigration(0, 1) {
-            LibreTubeApp.instance.resources
+        /**
+         * Removes the `VISIBLE` setting for SponsorBlock,
+         * as it provides no additional value and leads to bad UX,
+         * as a user is able to see the segment, but able to skip it.
+         *
+         * See https://github.com/libre-tube/LibreTube/pull/7434
+         */
+        PreferenceMigration(0, 1) {context ->
+            context.resources
                 .getStringArray(R.array.sponsorBlockSegments)
                 .forEach { category ->
                     val key = "${category}_category"
@@ -50,6 +57,16 @@ object PreferenceHelper {
                         putString(key, SbSkipOptions.MANUAL.name.lowercase())
                     }
                 }
+        },
+        /**
+         * Removes the trending layout options, due to YouTube dropping the trending section.
+         *
+         * See https://support.google.com/youtube/thread/356702168?sjid=13404251444768258109-EU
+         */
+        PreferenceMigration(1, 2) { context ->
+            val defaultItems = context.resources.getStringArray(R.array.homeTabItemsValues);
+            val items = getStringSet(PreferenceKeys.HOME_TAB_CONTENT, defaultItems.toSet())
+            putStringSet(PreferenceKeys.HOME_TAB_CONTENT, items.minus("trending"))
         },
     )
 
@@ -64,7 +81,7 @@ object PreferenceHelper {
     /**
      * Migrate preference to a new version.
      */
-    fun migrate() {
+    fun migrate(context: Context) {
         var currentPrefVersion = getInt(PreferenceKeys.PREFERENCE_VERSION, 0)
 
         while (currentPrefVersion < MIGRATIONS.count()) {
@@ -73,7 +90,7 @@ object PreferenceHelper {
             val migration =
                 MIGRATIONS.find { it.fromVersion == currentPrefVersion && it.toVersion == next }
             Log.i(TAG, "Performing migration from $currentPrefVersion to $next")
-            migration?.onMigration?.invoke()
+            migration?.onMigration?.invoke(context)
 
             currentPrefVersion++
             // mark as successfully migrated

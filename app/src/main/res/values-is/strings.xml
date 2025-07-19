@@ -260,7 +260,6 @@
     <string name="show_stream_thumbnails">Birta smámyndir streyma</string>
     <string name="hls_instead_of_dash">Nota HLS</string>
     <string name="featured">Úrvals</string>
-    <string name="trending">Hvað er í umræðunni</string>
     <string name="queue_insert_related_videos">Setja inn svipuð myndbönd</string>
     <string name="privacy_alert">Aðvörun varðandi friðhelgi</string>
     <string name="username_email">Notkun tölvupóstfangs sem notandanafn er ekki ráðlagt. Halda samt áfram?</string>
@@ -504,7 +503,6 @@
     <string name="comments">Athugasemdir</string>
     <string name="customization">Lagfæringar</string>
     <string name="category_outro">Lokaskjáir og kreditlistar</string>
-    <string name="trends">Tilhneiging</string>
     <string name="screen_orientation">Stefna skjás</string>
     <string name="external_download_provider_summary">Settu inn nafn forritspakkans sem þú vilt að sé notaður til að sækja myndskeið. Skildu þetta eftir autt til að nota innbyggða niðurhalarann í LibreTube.</string>
     <string name="player_channel_name">Spilaraþjónusta</string>
@@ -515,7 +513,6 @@
     <string name="system_caption_style">Skýringartextar í stíl kerfis</string>
     <string name="autoplay_playlists_summary">Spila næsta myndskeið í spilunarlistum sjálfvirkt án tillits til valinna stillinga á sjálfvirkri afspilun</string>
     <string name="category_preview_summary">Fyrir hluta sem útlista væntanlegt efni en án viðbótarupplýsinga. Ef þetta inniheldur myndefni sem einungis birtist hé, þa er þetta væntanlega röng flokkun</string>
-    <string name="change_region">Upplýsingar um tilhneigingu virðast ekki vera aðgengilegar á fyrirliggjandi svæði. Veldu eitthvað annað í stillingunum.</string>
     <string name="category_music_offtopic_summary">Eingöngu fyrir tónlistarmyndbönd. Þetta ætti að ná yfir þá hluta myndskeiðs sem ekki eru hlutar opinberra samsetninga. Á endanum ætti myndskeiðið að líkjast sem mest útgáfunni á Spotify eða einhverjum öðrum samsetningum, eða minnka tal eða annað afvegaleiðandi</string>
     <string name="category_highlight_summary">Gæti annað hvort verið auglýstur titill, smámyndin eða áhugaverðasti hluti myndskeiðsins. Þú getur hoppað yfir á þetta með því að pikka á kaflahlutann</string>
     <string name="legacyIcon">Eldra vandfundið</string>

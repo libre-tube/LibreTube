@@ -292,10 +292,8 @@
     <string name="hls_instead_of_dash">Выкарыстоўвайце HLS</string>
     <string name="auto_quality">Аўта</string>
     <string name="unsupported_file_format">Фармат файла не падтрымліваецца: %1$s</string>
-    <string name="trends">Трэнды</string>
     <string name="bookmark">Закладка</string>
     <string name="clear_bookmarks">Ачысціць закладкі</string>
-    <string name="trending">Зараз у трэндзе</string>
     <string name="bookmarks">Закладкі</string>
     <string name="queue_insert_related_videos">Ўставіць звязаныя відэа</string>
     <string name="local_playlists">Лакальныя плэйлісты</string>
@@ -353,7 +351,6 @@
     <string name="faq">Часта задаюць пытанні</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d відэа</string>
     <string name="new_videos_badge_summary">Паказаць значок з колькасцю новых відэа, калі яны ёсць</string>
-    <string name="change_region">«Трэнды» недаступныя для бягучага рэгіёну. Калі ласка, абярыце іншы ў наладах.</string>
     <string name="filename">Імя файла</string>
     <string name="autoplay_countdown_summary">Паказваць 5-секундны зваротны адлік перад аўтаматычным прайграваннем наступнага відэа</string>
     <string name="lbry_hls_summary">Выкарыстоўвайце LBRY HLS для трансляцыі, калі гэта магчыма</string>

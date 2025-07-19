@@ -270,7 +270,6 @@
     <string name="play_next">לנגן את הבא</string>
     <string name="navigation_bar">סרגל ניווט</string>
     <string name="playback_pitch">גובה צליל</string>
-    <string name="change_region">כנראה שהמובילים לא זמינים לאזור הנוכחי. נא לבחור באזור אחר בהגדרות.</string>
     <string name="filename">שם קובץ</string>
     <string name="invalid_filename">שם הקובץ שגוי!</string>
     <string name="time_code">קוד זמן (שניות)</string>
@@ -296,9 +295,7 @@
     <string name="hls_instead_of_dash">להשתמש בתזרים</string>
     <string name="hls_instead_of_dash_summary">להשתמש בתזרים (HLS) במקום ב־DASH להזרמת מדיה. אפשר לנסות להפוך את המצב של האפשרות הזאת אם נגינת הווידאו לא עובדת.</string>
     <string name="limit_to_runtime">הגבלה לזמן הריצה</string>
-    <string name="trends">מגמות</string>
     <string name="featured">מובילים</string>
-    <string name="trending">מה מוביל כרגע</string>
     <string name="bookmarks">סימניות</string>
     <string name="bookmark">סימנייה</string>
     <string name="clear_bookmarks">פינוי סימניות</string>
