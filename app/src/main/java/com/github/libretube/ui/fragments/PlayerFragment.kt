@@ -1101,6 +1101,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     }
 
     private fun toggleVideoInfoVisibility(show: Boolean){
+        binding.descriptionLayout.collapseDescription()
         binding.descriptionLayout.isInvisible = !show
         binding.relatedRecView.isInvisible = !show
         binding.playerChannel.isInvisible = !show
