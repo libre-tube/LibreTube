@@ -113,6 +113,16 @@ class DescriptionLayout(
     }
 
     /**
+     * Collapses the description, if it is currently expanded.
+     */
+    fun collapseDescription() {
+        val isCollapsed = binding.descLinLayout.isGone
+        if (!isCollapsed) {
+            toggleDescription()
+        }
+    }
+
+    /**
      * Set up the description text with video links and timestamps
      */
     private fun setupDescription(description: String) {
