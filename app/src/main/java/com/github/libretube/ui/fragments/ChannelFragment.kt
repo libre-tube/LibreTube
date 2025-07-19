@@ -18,19 +18,15 @@ import com.github.libretube.api.obj.ChannelTab
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentChannelBinding
-import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.formatShort
-import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ClipboardHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
-import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.adapters.VideosAdapter
-import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.setupFragmentAnimation
 import com.github.libretube.ui.extensions.setupSubscriptionButton
-import com.github.libretube.ui.sheets.AddChannelToGroupSheet
+import com.github.libretube.ui.sheets.ChannelOptionsBottomSheet
 import com.github.libretube.util.deArrow
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.Dispatchers
@@ -141,42 +137,30 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
         // needed if the channel gets loaded by the ID
         channelId = response.id
         channelName = response.name
-        val shareData = ShareData(currentChannel = response.name)
 
         val channelId = channelId ?: return@launch
 
+        var isSubscribed = false
         binding.channelSubscribe.setupSubscriptionButton(
             channelId,
             response.name.orEmpty(),
             response.avatarUrl,
             response.verified,
             binding.notificationBell
-        ) { isSubscribed ->
-            _binding?.addToGroup?.isVisible = isSubscribed
+        ) {
+            isSubscribed = it
         }
 
-        binding.channelShare.setOnClickListener {
-            val bundle = bundleOf(
-                IntentData.id to channelId.toID(),
-                IntentData.shareObjectType to ShareObjectType.CHANNEL,
-                IntentData.shareData to shareData
-            )
-            val newShareDialog = ShareDialog()
-            newShareDialog.arguments = bundle
-            newShareDialog.show(childFragmentManager, ShareDialog::class.java.name)
-        }
-
-        binding.addToGroup.setOnClickListener {
-            AddChannelToGroupSheet().apply {
-                arguments = bundleOf(IntentData.channelId to channelId)
-            }.show(childFragmentManager)
-        }
-
-        binding.playAll.setOnClickListener {
-            val firstVideoId =
-                response.relatedStreams.firstOrNull()?.url?.toID() ?: return@setOnClickListener
-
-            NavigationHelper.navigateVideo(requireContext(), firstVideoId, channelId = channelId)
+        binding.showMore.setOnClickListener {
+            ChannelOptionsBottomSheet()
+                .apply {
+                    arguments = bundleOf(
+                        IntentData.channelId to channelId,
+                        IntentData.channelName to channelName,
+                        IntentData.isSubscribed to isSubscribed
+                    )
+                }
+                .show(childFragmentManager)
         }
 
         nextPages[0] = response.nextpage

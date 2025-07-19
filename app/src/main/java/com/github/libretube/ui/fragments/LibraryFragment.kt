@@ -155,7 +155,7 @@ class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) 
 
             val binding = _binding ?: return@launch
 
-            binding.bookmarksCV.isVisible = bookmarks.isNotEmpty()
+            binding.bookmarksContainer.isVisible = bookmarks.isNotEmpty()
             if (bookmarks.isNotEmpty()) {
                 playlistBookmarkAdapter.submitList(bookmarks)
             }
