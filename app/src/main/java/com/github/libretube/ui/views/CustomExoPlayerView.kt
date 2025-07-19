@@ -694,8 +694,6 @@ abstract class CustomExoPlayerView(
             bottomMargin = (if (isFullscreen()) 20f else 10f).dpToPx()
         }
 
-        updateTopBarMargin()
-
         // don't add extra padding if there's no cutout and no margin set that would need to be undone
         if (!activity.hasCutout && binding.topBar.marginStart == LANDSCAPE_MARGIN_HORIZONTAL_NONE) return
 
@@ -727,15 +725,6 @@ abstract class CustomExoPlayerView(
             if (!PlayerHelper.useSystemCaptionStyle) return
             setApplyEmbeddedStyles(captionStyle == CaptionStyleCompat.DEFAULT)
             setStyle(captionStyle)
-        }
-    }
-
-    /**
-     * Add extra margin to the top bar to not overlap the status bar.
-     */
-    fun updateTopBarMargin() {
-        binding.topBar.updateLayoutParams<MarginLayoutParams> {
-            topMargin = (if (isFullscreen()) 18f else 0f).dpToPx()
         }
     }
 
