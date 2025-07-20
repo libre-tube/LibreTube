@@ -129,7 +129,7 @@
     <string name="resize_mode_zoom">जूम</string>
     <string name="repeat_mode_none">कोई भी नहीं</string>
     <string name="repeat_mode_current">मौजूदा</string>
-    <string name="backup_restore">बैकअप और बहाली</string>
+    <string name="backup_restore">बैकअप और रीस्टोर</string>
     <string name="backup">बैकअप</string>
     <string name="picture_in_picture">पिक्चर इन पिक्चर</string>
     <string name="player_resize_mode">आकार बदलें मोड</string>
@@ -147,7 +147,7 @@
     <string name="skip_segment">खंड छोड़ें</string>
     <string name="local_subscriptions">स्थानीय सब्सक्रिप्शनें</string>
     <string name="preferences">तरजीहें</string>
-    <string name="backup_customInstances">कस्टम इंस्टैंस</string>
+    <string name="backup_customInstances">अनुकूलित इंस्टेंस</string>
     <string name="navigation_bar">नेविगेशन पट्टी</string>
     <string name="playback_pitch">पिॅच</string>
     <string name="error_occurred">ख़राबी</string>
@@ -200,7 +200,7 @@
     <string name="translate">अनुवाद</string>
     <string name="no_search_result">कोई परिणाम नहीं।</string>
     <string name="hls_instead_of_dash">एचएलएस का प्रयोग करें</string>
-    <string name="hls_instead_of_dash_summary">डीएएसएच के बजाय एचएलएस का प्रयोग करें (धीमा होगा, अनुशंसित नहीं)</string>
+    <string name="hls_instead_of_dash_summary">स्ट्रीमिंग मीडिया के लिए DASH की जगह HLS का उपयोग करें। यदि वीडियो नहीं चल रहा हो तो यह विकल्प बदलकर देखें।</string>
     <string name="auto_quality">ऑटो</string>
     <string name="limit_to_runtime">रनटाइम तक सीमित करें</string>
     <string name="trends">चलन में</string>
@@ -252,7 +252,7 @@
     <string name="quality">गुणवत्ता</string>
     <string name="behavior">व्‍यवहार</string>
     <string name="player_summary">डिफ़ॉल्टस और व्यवहार</string>
-    <string name="instance_frontend_url">URL से इंस्टेंस का फर॔टऐंड</string>
+    <string name="instance_frontend_url">इंस्टेंस फ्रंटएंड का URL</string>
     <string name="seek_increment">सीक में वृद्धि</string>
     <string name="pauseOnScreenOff">ऑटो ठहराव</string>
     <string name="pauseOnScreenOff_summary">स्क्रीन बंद होने पर प्लेबैक रोकें</string>
@@ -298,7 +298,7 @@
     <string name="least_views">सबसे कम देखे गए</string>
     <string name="turnInternetOn">कृपया इंटरनेट से कनेक्ट करने के लिए वाई-फ़ाई या मोबाइल डेटा चालू करें.</string>
     <string name="checking_frequency">चेकिंग हर…</string>
-    <string name="watch_history">देखा इतिहास</string>
+    <string name="watch_history">देखा गया इतिहास</string>
     <string name="aspect_ratio">वीडियो पहलू अनुपात</string>
     <string name="auto_rotation">ऑटो रोटेशन</string>
     <string name="landscape">लैंडस्केप</string>
@@ -315,11 +315,11 @@
     <string name="double_tap_seek">तलाश के लिए दो बार टैप करें</string>
     <string name="double_tap_seek_summary">प्लेयर की स्थिति को रिवाइंड या फॉरवर्ड करने के लिए बाईं या दाईं ओर दो बार टैप करें</string>
     <string name="all_caught_up_summary">आपने सभी नए वीडियो देख लिए हैं</string>
-    <string name="all_caught_up">आप सभी काफी अधिक रुचि ले चुके हैं</string>
+    <string name="all_caught_up">आपने सब देख लिया है</string>
     <string name="import_playlists">प्लेलिस्ट आयात करें</string>
     <string name="export_playlists">प्लेलिस्ट निर्यात करें</string>
     <string name="app_backup">ऐप बैकअप</string>
-    <string name="backup_restore_summary">आयात और निर्यात सब्सक्रिप्शनस, प्लेलिस्ट, …</string>
+    <string name="backup_restore_summary">सब्सक्रिप्शन, प्लेलिस्ट आदि को इम्पोर्ट और एक्सपोर्ट करें</string>
     <string name="privacy_alert">गोपनीयता चेतावनी</string>
     <string name="username_email">उपयोगकर्ता नाम के रूप में ईमेल पते का उपयोग करना अनुशंसित नहीं है। फिर भी आगे बढ़ें?</string>
     <string name="proceed">आगे बढ़ें</string>
@@ -327,7 +327,7 @@
     <string name="comments_disabled">अपलोडर द्वारा टिप्पणियां अक्षम कर दी गई हैं।</string>
     <string name="pinch_control">पिंच नियंत्रण</string>
     <string name="pinch_control_summary">ज़ूम इन/आउट करने के लिए पिंच जेस्चर का उपयोग करें</string>
-    <string name="theme_monochrome">मिनिमलिस्टिक मोनोक्रोम</string>
+    <string name="theme_monochrome">सरल एकरंगी</string>
     <string name="play_latest_videos">नवीनतम वीडियो चलाएँ</string>
     <string name="color_violet">बहुमुखी बैंगनी</string>
     <string name="nothing_selected">कुछ चुना नहीं!</string>
@@ -535,10 +535,28 @@
     <string name="pip">PiP</string>
     <string name="local_stream_extraction">स्थानीय स्ट्रीम प्राप्ती</string>
     <string name="local_stream_extraction_summary">Piped का उपयोग किए बिना YouTube से सीधे वीडियो प्लेबैक जानकारी प्राप्त करें।</string>
-    <string name="local_ryd">यूट्यूब डिसलाईकस की स्थानीय प्राप्ती</string>
+    <string name="local_ryd">Return Youtube Dislike की स्थानीय प्राप्ती</string>
     <string name="local_ryd_summary">https://returnyoutubedislikeapi.com से सीधे डिसलाईकस की जानकारी प्राप्त करें</string>
     <string name="import_watch_history">देखने का इतिहास आयात करें</string>
     <string name="import_watch_history_desc">कृपया ध्यान दें कि YouTube के सीमित निर्यात डेटा के कारण सब कुछ आयात नहीं किया जाएगा।</string>
     <string name="audio_codecs">ऑडियो कोडेक्स</string>
     <string name="view_count">%1$s व्यूज़</string>
+    <string name="category_exclusive_access">विशेष प्रवेश</string>
+    <string name="upcoming">आने वाला</string>
+    <string name="export_playlist">प्लेलिस्ट को सेव करें</string>
+    <string name="crashlog">क्रैश विवरण</string>
+    <string name="never_show_again">यह दोबारा न दिखाएं</string>
+    <string name="update_information">जानकारी संशोधित करें</string>
+    <string name="mode_of_operation">संचालन विधि</string>
+    <string name="import_format_list_of_urls">URL या वीडियो ID की सूची इम्पोर्ट करें</string>
+    <string name="dialog_play_offline_title">यह वीडियो पहले से डाउनलोड है।</string>
+    <string name="dialog_play_offline_body">वीडियो को डाउनलोड फ़ोल्डर से चलाएं?</string>
+    <string name="delete_only_watched_videos">देखे गए वीडियो डिलीट करें</string>
+    <string name="local_feed_extraction">बिना Piped इंस्टेंस के फ़ीड निकालें</string>
+    <string name="local_feed_extraction_summary">फ़ीड को सीधे YouTube से प्राप्त करें। यह काफ़ी धीमा हो सकता है।</string>
+    <string name="show_upcoming_videos">आने वाले वीडियो दिखाएं</string>
+    <string name="updating_feed">फ़ीड अपडेट हो रही है…</string>
+    <string name="full_local_mode">फुल लोकल मोड</string>
+    <string name="full_local_mode_desc">Piped का उपयोग किए बिना सब कुछ सीधे YouTube से प्राप्त करें।</string>
+    <string name="authentication">ऑथेंटिकेशन</string>
 </resources>
