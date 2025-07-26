@@ -1,8 +1,6 @@
 package com.github.libretube.ui.activities
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
@@ -44,7 +42,6 @@ import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.NetworkHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ThemeHelper
-import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.ErrorDialog
 import com.github.libretube.ui.dialogs.ImportTempPlaylistDialog
@@ -561,16 +558,6 @@ class MainActivity : BaseActivity() {
         }
 
         return false
-    }
-
-    @SuppressLint("SwitchIntDef")
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-
-        when (newConfig.orientation) {
-            Configuration.ORIENTATION_PORTRAIT -> WindowHelper.toggleFullscreen(window, false)
-            Configuration.ORIENTATION_LANDSCAPE -> WindowHelper.toggleFullscreen(window, true)
-        }
     }
 
     private fun navigateToBottomSelectedItem(item: MenuItem): Boolean {
