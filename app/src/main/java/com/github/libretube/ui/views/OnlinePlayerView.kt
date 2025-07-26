@@ -22,7 +22,6 @@ import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
-import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.services.AbstractPlayerService
 import com.github.libretube.ui.base.BaseActivity
@@ -156,7 +155,6 @@ class OnlinePlayerView(
         this.playerOptions = playerOptions
 
         commonPlayerViewModel.isFullscreen.observe(viewLifecycleOwner) { isFullscreen ->
-            WindowHelper.toggleFullscreen(activity.window, isFullscreen)
             updateTopBarMargin()
 
             binding.fullscreen.isInvisible = PlayerHelper.autoFullscreenEnabled
