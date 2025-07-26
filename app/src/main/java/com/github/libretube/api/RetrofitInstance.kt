@@ -34,7 +34,9 @@ object RetrofitInstance {
 
     val httpClient by lazy { buildClient() }
 
-    val authApi = buildRetrofitInstance<PipedAuthApi>(authUrl)
+    val authApi by resettableLazy(apiLazyMgr) {
+        buildRetrofitInstance<PipedAuthApi>(authUrl)
+    }
 
     // the url provided here isn't actually used anywhere in the external api
     val externalApi = buildRetrofitInstance<ExternalApi>(PIPED_API_URL)
