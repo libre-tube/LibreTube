@@ -116,6 +116,7 @@
 -keep class com.github.libretube.ui.preferences.** { *; }
 
 ## Rules for NewPipeExtractor
+-keep class org.schabi.newpipe.extractor.services.youtube.protos.** { *; }
 -keep class org.schabi.newpipe.extractor.timeago.patterns.** { *; }
 -keep class org.mozilla.javascript.** { *; }
 -keep class org.mozilla.javascript.engine.** { *; }
