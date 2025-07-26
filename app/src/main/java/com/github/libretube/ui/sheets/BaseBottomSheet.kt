@@ -15,6 +15,8 @@ import com.github.libretube.extensions.dpToPx
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.adapters.BottomSheetAdapter
 import kotlinx.coroutines.launch
+import com.github.libretube.ui.extensions.onSystemInsets
+
 
 open class BaseBottomSheet(@LayoutRes layoutResId: Int = R.layout.bottom_sheet) : ExpandedBottomSheet(layoutResId) {
 
@@ -46,6 +48,17 @@ open class BaseBottomSheet(@LayoutRes layoutResId: Int = R.layout.bottom_sheet) 
         }
         binding.optionsRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.optionsRecycler.adapter = BottomSheetAdapter(items, listener)
+
+        // add bottom padding to the list, to ensure that the last item is not overlapped by the system bars
+        binding.optionsRecycler.onSystemInsets { v, systemInsets ->
+            v.setPadding(
+                v.paddingLeft,
+                v.paddingTop,
+                v.paddingRight,
+                systemInsets.bottom
+            )
+        }
+
     }
 
     fun setItems(items: List<BottomSheetItem>, listener: (suspend (index: Int) -> Unit)?) = apply {

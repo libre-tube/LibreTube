@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
+import com.github.libretube.ui.extensions.onSystemInsets
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.BottomSheetBinding
 import com.github.libretube.ui.adapters.ChaptersAdapter
@@ -38,6 +39,17 @@ class ChaptersBottomSheet : ExpandablePlayerSheet(R.layout.bottom_sheet) {
                 setFragmentResult(SEEK_TO_POSITION_REQUEST_KEY, bundleOf(IntentData.currentPosition to it))
             }
         binding.optionsRecycler.adapter = adapter
+
+        // add bottom padding to the list, to ensure that the last item is not overlapped by the system bars
+        binding.optionsRecycler.onSystemInsets { v, systemInsets ->
+            v.setPadding(
+                v.paddingLeft,
+                v.paddingTop,
+                v.paddingRight,
+                systemInsets.bottom
+            )
+        }
+
 
         binding.optionsRecycler.viewTreeObserver.addOnGlobalLayoutListener(
             object : ViewTreeObserver.OnGlobalLayoutListener {

@@ -801,7 +801,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
     private fun updateMaxSheetHeight() {
         val systemBars = mainActivity.getSystemInsets() ?: return
-        val maxHeight = binding.root.height - (binding.player.height + systemBars.top + systemBars.bottom)
+        val maxHeight = binding.root.height - (binding.player.height + systemBars.top)
         commonPlayerViewModel.maxSheetHeightPx = maxHeight
         chaptersViewModel.maxSheetHeightPx = maxHeight
     }
