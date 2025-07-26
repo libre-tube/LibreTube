@@ -620,9 +620,7 @@ class MainActivity : BaseActivity() {
             PreferenceHelper.getInt(PreferenceKeys.LAST_SHOWN_INFO_MESSAGE_VERSION_CODE, -1)
 
         // mapping of version code to info message
-        val infoMessages = listOf(
-            60 to "If you use Local Streams Extraction, please disable \"Use HLS\" in the instance settings."
-        )
+        val infoMessages = emptyList<Pair<Int, String>>()
 
         val message =
             infoMessages.lastOrNull { (versionCode, _) -> versionCode > lastShownVersionCode }?.second
