@@ -52,8 +52,8 @@ class DownloadsAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: DownloadsViewHolder, position: Int) {
-        val download = getItem(holder.bindingAdapterPosition).download
-        val items = getItem(holder.bindingAdapterPosition).downloadItems
+        val downloadWithItems = getItem(holder.bindingAdapterPosition)
+        val (download, items, _) = downloadWithItems
 
         holder.binding.apply {
             fileSize.isVisible = true
@@ -130,7 +130,11 @@ class DownloadsAdapter(
                     DELETE_DOWNLOAD_REQUEST_KEY,
                     activity
                 ) { _, _ ->
-                    showDeleteDialog(root.context, position)
+                    // the position might have changed in the meanwhile if an other item was deleted
+                    // apparently [onBindViewHolder] is only retriggered if the item changes, but
+                    // not if the position changes (which would lead to IndexOutOfBounds here)
+                    val realPosition = currentList.indexOf(downloadWithItems)
+                    showDeleteDialog(root.context, realPosition)
                 }
                 DownloadOptionsBottomSheet()
                     .apply {
