@@ -11,13 +11,13 @@ import com.github.libretube.databinding.DialogCustomInstanceBinding
 import com.github.libretube.db.obj.CustomInstance
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.toastFromMainThread
-import com.github.libretube.ui.models.CustomInstancesModel
+import com.github.libretube.ui.models.InstancesModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import java.net.MalformedURLException
 
 class CreateCustomInstanceDialog : DialogFragment() {
-    val viewModel: CustomInstancesModel by activityViewModels()
+    val viewModel: InstancesModel by activityViewModels()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogCustomInstanceBinding.inflate(layoutInflater)

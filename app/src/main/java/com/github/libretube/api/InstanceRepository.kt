@@ -27,7 +27,7 @@ class InstanceRepository {
 
                     PipedInstance(name = infoParts[0], apiUrl = infoParts[1], locations = infoParts[2], cdn = infoParts[3] == "Yes")
                 }
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             // worst case scenario: only return official instance
             return@withContext listOf(PipedInstance(name = PIPED_API_URL.toHttpUrl().host, apiUrl = PIPED_API_URL))
         }
