@@ -11,13 +11,13 @@ import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogCustomIntancesListBinding
 import com.github.libretube.ui.adapters.CustomInstancesAdapter
-import com.github.libretube.ui.models.CustomInstancesModel
+import com.github.libretube.ui.models.InstancesModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class CustomInstancesListDialog: DialogFragment() {
-    val viewModel: CustomInstancesModel by activityViewModels()
+    val viewModel: InstancesModel by activityViewModels()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogCustomIntancesListBinding.inflate(layoutInflater)
@@ -36,7 +36,7 @@ class CustomInstancesListDialog: DialogFragment() {
         binding.customInstancesRecycler.adapter = adapter
 
         lifecycleScope.launch {
-            viewModel.instances.collectLatest {
+            viewModel.customInstances.collectLatest {
                 adapter.submitList(it)
             }
         }
