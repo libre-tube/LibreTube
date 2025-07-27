@@ -31,15 +31,15 @@ data class PipedStream(
     val audioTrackType: String? = null,
     val audioTrackLocale: String? = null
 ): Parcelable {
-    private fun getQualityString(fileName: String): String {
-        return "${fileName}_${quality?.replace(" ", "_")}_$format." +
+    private fun getQualityString(videoId: String): String {
+        return "${videoId}_${quality?.replace(" ", "_")}_$format." +
             mimeType?.split("/")?.last()
     }
 
-    fun toDownloadItem(fileType: FileType, videoId: String, fileName: String) = DownloadItem(
+    fun toDownloadItem(fileType: FileType, videoId: String) = DownloadItem(
         type = fileType,
         videoId = videoId,
-        fileName = getQualityString(fileName),
+        fileName = getQualityString(videoId),
         path = Path(""),
         url = url?.let { ProxyHelper.unwrapUrl(it) },
         format = format,

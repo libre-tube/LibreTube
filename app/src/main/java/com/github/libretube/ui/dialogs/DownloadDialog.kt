@@ -124,11 +124,6 @@ class DownloadDialog : DialogFragment() {
         restorePreviousSelections(binding, videoStreams, audioStreams, subtitles)
 
         onDownloadConfirm = onDownloadConfirm@{
-            var fileName = videoId.filter { TextUtils.RESERVED_CHARS.contains(it) }
-                .ifBlank { videoId.sha256Sum() }
-                // reserve 32 bytes for quality and extension
-                .take(MAX_FILE_NAME_BYTES - 32);
-
             val videoPosition = binding.videoSpinner.selectedItemPosition - 1
             val audioPosition = binding.audioSpinner.selectedItemPosition - 1
             val subtitlePosition = binding.subtitleSpinner.selectedItemPosition - 1
@@ -146,7 +141,6 @@ class DownloadDialog : DialogFragment() {
 
             val downloadData = DownloadData(
                 videoId = videoId,
-                fileName = fileName,
                 videoFormat = videoStream?.format,
                 videoQuality = videoStream?.quality,
                 audioFormat = audioStream?.format,
@@ -237,11 +231,6 @@ class DownloadDialog : DialogFragment() {
     }
 
     companion object {
-        /**
-         * Max file name length at Android systems
-         */
-        private const val MAX_FILE_NAME_BYTES = 255
-
         private const val VIDEO_DOWNLOAD_QUALITY = "video_download_quality"
         private const val VIDEO_DOWNLOAD_FORMAT = "video_download_format"
         private const val AUDIO_DOWNLOAD_QUALITY = "audio_download_quality"

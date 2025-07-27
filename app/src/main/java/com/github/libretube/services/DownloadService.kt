@@ -118,8 +118,7 @@ class DownloadService : LifecycleService() {
 
         val downloadData = intent?.parcelableExtra<DownloadData>(IntentData.downloadData)
             ?: return START_NOT_STICKY
-        val (videoId, name) = downloadData
-        val fileName = name.ifEmpty { videoId }
+        val videoId = downloadData.videoId
 
         lifecycleScope.launch(coroutineContext) {
             val streams = try {
@@ -134,9 +133,9 @@ class DownloadService : LifecycleService() {
                 return@launch
             }
 
-            storeVideoMetadata(videoId, streams, fileName)
+            storeVideoMetadata(videoId, streams)
 
-            val downloadItems = streams.toDownloadItems(downloadData.copy(fileName = fileName))
+            val downloadItems = streams.toDownloadItems(downloadData)
             for (downloadItem in downloadItems) {
                 start(downloadItem)
             }
@@ -145,8 +144,8 @@ class DownloadService : LifecycleService() {
         return START_NOT_STICKY
     }
 
-    private suspend fun storeVideoMetadata(videoId: String, streams: Streams, fileName: String) {
-        val thumbnailTargetPath = getDownloadPath(DownloadHelper.THUMBNAIL_DIR, fileName)
+    private suspend fun storeVideoMetadata(videoId: String, streams: Streams) {
+        val thumbnailTargetPath = getDownloadPath(DownloadHelper.THUMBNAIL_DIR, videoId)
 
         val download = Download(
             videoId,
