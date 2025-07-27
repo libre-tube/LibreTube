@@ -131,6 +131,12 @@
         android:gravity="center"
         android:padding="20dp">
 
+        <include
+            android:id="@+id/seek_button_rewind"
+            layout="@layout/seek_button_rewind"
+            android:visibility="invisible"
+            tools:visibility="visible" />
+
         <ImageView
             android:id="@+id/skip_prev"
             style="@style/PlayerControlCenter"
@@ -138,32 +144,6 @@
             android:src="@drawable/ic_prev"
             android:visibility="invisible"
             app:tint="@android:color/white" />
-
-        <FrameLayout
-            android:id="@+id/rewindBTN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="10dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:scaleX="0.8"
-            android:scaleY="0.8"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_rewind"
-                app:tint="@android:color/white" />
-
-            <TextView
-                android:id="@+id/rewindTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@android:color/white" />
-
-        </FrameLayout>
 
         <ImageButton
             android:id="@+id/playPauseBTN"
@@ -173,32 +153,6 @@
             android:src="@drawable/ic_play"
             app:tint="@android:color/white" />
 
-        <FrameLayout
-            android:id="@+id/forwardBTN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="10dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:scaleX="0.8"
-            android:scaleY="0.8"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_forward"
-                app:tint="@android:color/white" />
-
-            <TextView
-                android:id="@+id/forwardTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@android:color/white" />
-
-        </FrameLayout>
-
         <ImageView
             android:id="@+id/skip_next"
             style="@style/PlayerControlCenter"
@@ -206,6 +160,12 @@
             android:src="@drawable/ic_next"
             android:visibility="invisible"
             app:tint="@android:color/white" />
+
+        <include
+            android:id="@+id/seek_button_forward"
+            layout="@layout/seek_button_forward"
+            android:visibility="invisible"
+            tools:visibility="visible" />
 
     </LinearLayout>
 
