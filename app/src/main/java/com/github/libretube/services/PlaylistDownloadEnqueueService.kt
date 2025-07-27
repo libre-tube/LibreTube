@@ -148,16 +148,8 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
                 val videoStream = getStream(videoInfo.videoStreams, maxVideoQuality)
                 val audioStream = getStream(videoInfo.audioStreams, maxAudioQuality)
 
-                // remove all UNIX reserved characters from the title in order to generate
-                // a valid filename
-                var fileName = videoInfo.title
-                TextUtils.RESERVED_CHARS.forEach {
-                    fileName = fileName.replace(it, '_')
-                }
-
                 val downloadData = DownloadData(
                     videoId = videoId,
-                    fileName = fileName,
                     videoFormat = videoStream?.format,
                     videoQuality = videoStream?.quality,
                     audioFormat = audioStream?.format,
