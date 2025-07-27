@@ -392,22 +392,22 @@ abstract class CustomExoPlayerView(
     private fun initRewindAndForward() {
         val seekIncrementText = (PlayerHelper.seekIncrement / 1000).toString()
         listOf(
-            doubleTapOverlayBinding.rewindTV,
-            doubleTapOverlayBinding.forwardTV,
-            binding.forwardTV,
-            binding.rewindTV
+            doubleTapOverlayBinding.rewindLayout.rewindTV,
+            doubleTapOverlayBinding.forwardLayout.forwardTV,
+            binding.seekButtonForward.forwardTV,
+            binding.seekButtonRewind.rewindTV
         ).forEach {
             it.text = seekIncrementText
         }
-        binding.forwardBTN.setOnClickListener {
+        binding.seekButtonForward.forwardBTN.setOnClickListener {
             player?.seekBy(PlayerHelper.seekIncrement)
         }
-        binding.rewindBTN.setOnClickListener {
+        binding.seekButtonRewind.rewindBTN.setOnClickListener {
             player?.seekBy(-PlayerHelper.seekIncrement)
         }
         if (PlayerHelper.doubleTapToSeek) return
 
-        listOf(binding.forwardBTN, binding.rewindBTN).forEach {
+        listOf(binding.seekButtonForward.forwardBTN, binding.seekButtonRewind.rewindBTN).forEach {
             it.isVisible = true
         }
     }
@@ -474,8 +474,8 @@ abstract class CustomExoPlayerView(
         binding.playPauseBTN.isVisible = isLocked
 
         if (!PlayerHelper.doubleTapToSeek) {
-            binding.rewindBTN.isVisible = isLocked
-            binding.forwardBTN.isVisible = isLocked
+            binding.seekButtonRewind.rewindBTN.isVisible = isLocked
+            binding.seekButtonForward.forwardBTN.isVisible = isLocked
         }
 
         // hide the dimming background overlay if locked
@@ -499,12 +499,12 @@ abstract class CustomExoPlayerView(
 
         // show the rewind button
         doubleTapOverlayBinding.apply {
-            animateSeeking(rewindBTN, rewindIV, rewindTV, true)
+            animateSeeking(rewindLayout.rewindBTN, rewindLayout.rewindIV, rewindLayout.rewindTV, true)
 
             // start callback to hide the button
             runnableHandler.removeCallbacksAndMessages(HIDE_REWIND_BUTTON_TOKEN)
             runnableHandler.postDelayed(700, HIDE_REWIND_BUTTON_TOKEN) {
-                rewindBTN.isGone = true
+                rewindLayout.rewindBTN.isGone = true
             }
         }
     }
@@ -514,12 +514,12 @@ abstract class CustomExoPlayerView(
 
         // show the forward button
         doubleTapOverlayBinding.apply {
-            animateSeeking(forwardBTN, forwardIV, forwardTV, false)
+            animateSeeking(forwardLayout.forwardBTN, forwardLayout.forwardIV, forwardLayout.forwardTV, false)
 
             // start callback to hide the button
             runnableHandler.removeCallbacksAndMessages(HIDE_FORWARD_BUTTON_TOKEN)
             runnableHandler.postDelayed(700, HIDE_FORWARD_BUTTON_TOKEN) {
-                forwardBTN.isGone = true
+                forwardLayout.forwardBTN.isGone = true
             }
         }
     }
