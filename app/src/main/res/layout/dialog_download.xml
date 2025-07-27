@@ -6,20 +6,6 @@
     android:orientation="vertical"
     android:paddingHorizontal="20dp">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="10dp"
-        android:hint="@string/filename">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/fileName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
-
     <com.github.libretube.ui.views.DropdownMenu
         android:id="@+id/video_spinner"
         android:layout_width="match_parent"
