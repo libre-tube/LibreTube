@@ -19,6 +19,7 @@ import com.github.libretube.api.obj.Subtitle
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogDownloadBinding
 import com.github.libretube.extensions.getWhileDigit
+import com.github.libretube.extensions.sha256Sum
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.PlayerHelper
@@ -44,25 +45,6 @@ class DownloadDialog : DialogFragment() {
         val binding = DialogDownloadBinding.inflate(layoutInflater)
 
         fetchAvailableSources(binding)
-
-        binding.fileName.filters += InputFilter { source, start, end, _, _, _ ->
-            if (source.isNullOrBlank()) {
-                return@InputFilter null
-            }
-
-            // Extract actual source
-            val actualSource = source.subSequence(start, end)
-            // Filter out unsupported characters
-            val filtered = actualSource.filterNot {
-                TextUtils.RESERVED_CHARS.contains(it, true)
-            }
-            // Check if something was filtered out
-            return@InputFilter if (actualSource.length != filtered.length) {
-                filtered
-            } else {
-                null
-            }
-        }
 
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.download)
@@ -94,8 +76,6 @@ class DownloadDialog : DialogFragment() {
     }
 
     private fun initDownloadOptions(binding: DialogDownloadBinding, streams: Streams) {
-        binding.fileName.setText(streams.title)
-
         val videoStreams = streams.videoStreams.filter {
             !it.url.isNullOrEmpty()
         }.filter { !it.format.orEmpty().contains("HLS") }.sortedByDescending {
@@ -144,16 +124,10 @@ class DownloadDialog : DialogFragment() {
         restorePreviousSelections(binding, videoStreams, audioStreams, subtitles)
 
         onDownloadConfirm = onDownloadConfirm@{
-            val fileName = binding.fileName.text.toString()
-            if (fileName.isBlank()) {
-                Toast.makeText(context, R.string.invalid_filename, Toast.LENGTH_SHORT).show()
-                return@onDownloadConfirm
-            }
-
-            if (fileName.toByteArray().size > MAX_FILE_NAME_BYTES - 32) { // reserve 32 bytes for quality and extension
-                Toast.makeText(context, R.string.filename_too_long, Toast.LENGTH_SHORT).show()
-                return@onDownloadConfirm
-            }
+            var fileName = videoId.filter { TextUtils.RESERVED_CHARS.contains(it) }
+                .ifBlank { videoId.sha256Sum() }
+                // reserve 32 bytes for quality and extension
+                .take(MAX_FILE_NAME_BYTES - 32);
 
             val videoPosition = binding.videoSpinner.selectedItemPosition - 1
             val audioPosition = binding.audioSpinner.selectedItemPosition - 1
@@ -172,7 +146,7 @@ class DownloadDialog : DialogFragment() {
 
             val downloadData = DownloadData(
                 videoId = videoId,
-                fileName = binding.fileName.text?.toString().orEmpty(),
+                fileName = fileName,
                 videoFormat = videoStream?.format,
                 videoQuality = videoStream?.quality,
                 audioFormat = audioStream?.format,
