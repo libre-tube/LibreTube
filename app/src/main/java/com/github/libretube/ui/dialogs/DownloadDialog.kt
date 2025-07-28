@@ -76,6 +76,8 @@ class DownloadDialog : DialogFragment() {
     }
 
     private fun initDownloadOptions(binding: DialogDownloadBinding, streams: Streams) {
+        binding.videoTitle.text = streams.title
+
         val videoStreams = streams.videoStreams.filter {
             !it.url.isNullOrEmpty()
         }.filter { !it.format.orEmpty().contains("HLS") }.sortedByDescending {
