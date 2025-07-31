@@ -28,7 +28,7 @@ data class Subtitle(
     fun toDownloadItem(videoId: String) = DownloadItem(
         type = FileType.SUBTITLE,
         videoId = videoId,
-        fileName = "${name}_${code}.srt",
+        fileName = "${videoId}_${code}.srt",
         path = Path(""),
         url = url?.let { ProxyHelper.unwrapUrl(it) }
     )
