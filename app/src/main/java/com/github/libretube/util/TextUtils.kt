@@ -27,11 +27,6 @@ object TextUtils {
     const val SEPARATOR = " • "
 
     /**
-     * Reserved characters by unix which can not be used for file name.
-     */
-    const val RESERVED_CHARS = "#?:\"*|/\\<>\u0000"
-
-    /**
      * Date time formatter which uses the [FormatStyle.MEDIUM] format style.
      */
     private val MEDIUM_DATE_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
