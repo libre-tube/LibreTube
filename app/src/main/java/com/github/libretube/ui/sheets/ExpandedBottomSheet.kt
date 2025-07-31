@@ -3,7 +3,6 @@ package com.github.libretube.ui.sheets
 import android.app.Dialog
 import android.content.res.Configuration
 import android.os.Bundle
-import android.view.WindowManager
 import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.FragmentManager
@@ -24,18 +23,6 @@ open class ExpandedBottomSheet(@LayoutRes layoutResId: Int) :
         dialog.setOnShowListener { expand() }
 
         return dialog
-    }
-
-    override fun onStart() {
-        super.onStart()
-        // remove internal padding from the bottomsheet
-        // https://github.com/material-components/material-components-android/issues/3389#issuecomment-2049028605
-        dialog?.window?.apply {
-            setFlags(
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-            )
-        }
     }
 
     fun show(fragmentManager: FragmentManager) = show(fragmentManager, null)
