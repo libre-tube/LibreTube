@@ -20,7 +20,7 @@ class SliderLabelsAdapter(
     override fun onBindViewHolder(holder: SliderLabelViewHolder, position: Int) {
         val speed = playbackSpeeds[position]
         holder.binding.apply {
-            speedText.text = String.format("%.2f", speed)
+            speedText.text = String.format("%.2fx", speed)
             speedCard.setOnClickListener {
                 onItemClick.invoke(speed)
             }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/standard_bottom_sheet"
@@ -15,7 +15,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <!-- Drag handle for accessibility -->
@@ -24,76 +24,149 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <LinearLayout
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="23dp"
-                    android:text="@string/playback_speed" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/speed_shortcuts"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="20dp"
-                    android:clipToPadding="false"
-                    app:layoutManager="LinearLayoutManager"
-                    tools:listitem="@layout/slider_label_item"/>
+                    android:orientation="vertical">
 
-                <com.google.android.material.slider.Slider
-                    android:id="@+id/speed"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:stepSize="0.05"
-                    android:value="1.0"
-                    android:valueFrom="0.2"
-                    android:valueTo="4.0"
-                    android:layout_marginHorizontal="10dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="23dp"
+                        android:text="@string/playback_speed" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="23dp"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/playback_pitch" />
+                    <LinearLayout
+                        android:paddingStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/pitch_shortcuts"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="20dp"
-                    android:clipToPadding="false"
-                    app:layoutManager="LinearLayoutManager"
-                    tools:listitem="@layout/slider_label_item"/>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/speed_shortcuts"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="20dp"
+                            android:clipToPadding="false"
+                            app:layoutManager="LinearLayoutManager"
+                            tools:listitem="@layout/slider_label_item" />
 
-                <com.google.android.material.slider.Slider
-                    android:id="@+id/pitch"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:stepSize="0.1"
-                    android:value="1.0"
-                    android:valueFrom="0.5"
-                    android:valueTo="2.0"
-                    android:layout_marginHorizontal="10dp" />
+                        <com.google.android.material.slider.Slider
+                            android:id="@+id/speed"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:stepSize="0.05"
+                            android:value="1.0"
+                            android:valueFrom="0.2"
+                            android:valueTo="4.0"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginHorizontal="10dp" />
 
-            </LinearLayout>
+                    </LinearLayout>
 
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/skip_silence"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="17dp"
-                android:paddingHorizontal="5dp"
-                android:text="@string/skip_silence" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="23dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/playback_pitch" />
+
+                    <LinearLayout
+                        android:paddingHorizontal="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="23dp"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/playback_pitch_semitone"/>
+
+                            <com.google.android.material.button.MaterialButton
+                                style="@style/Widget.Material3.Button.TonalButton"
+                                android:id="@+id/semitone_decrement_button"
+                                android:layout_marginStart="18dp"
+                                android:layout_width="60dp"
+                                android:layout_height="50dp"
+                                android:text="-"
+                                app:shapeAppearance="?shapeAppearanceCornerMedium"
+                                tools:ignore="HardcodedText" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingHorizontal="10dp"
+                                app:hintEnabled="false"
+                                app:shapeAppearance="?shapeAppearanceCornerMedium">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/semitone_edit_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:inputType="numberDecimal|numberSigned"
+                                    android:textAppearance="?android:textAppearanceSmall"
+                                    android:imeOptions="actionDone"
+                                    tools:text="-1.0" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.button.MaterialButton
+                                style="@style/Widget.Material3.Button.TonalButton"
+                                android:id="@+id/semitone_increment_button"
+                                android:layout_width="60dp"
+                                android:layout_height="50dp"
+                                android:text="+"
+                                app:shapeAppearance="?shapeAppearanceCornerMedium"
+                                tools:ignore="HardcodedText" />
+
+                            <com.google.android.material.button.MaterialButton
+                                style="@style/Widget.Material3.Button.IconButton"
+                                android:id="@+id/pitch_reset_button"
+                                android:layout_marginStart="10dp"
+                                android:layout_width="60dp"
+                                android:layout_height="45dp"
+                                app:icon="@drawable/ic_restart" />
+
+                        </LinearLayout>
+
+                        <com.google.android.material.slider.Slider
+                            android:id="@+id/pitch"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:value="0"
+                            android:valueFrom="-12.0"
+                            android:valueTo="12.0"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginHorizontal="10dp" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/skip_silence"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="17dp"
+                        android:paddingHorizontal="5dp"
+                        android:text="@string/skip_silence" />
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
 
         </LinearLayout>
 
