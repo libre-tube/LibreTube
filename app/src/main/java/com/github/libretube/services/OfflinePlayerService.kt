@@ -200,7 +200,7 @@ open class OfflinePlayerService : AbstractPlayerService() {
 
         if (shuffle) downloads.shuffle()
 
-        PlayingQueue.insertRelatedStreams(downloads.map { it.download.toStreamItem() })
+        PlayingQueue.add(*downloads.map { it.download.toStreamItem() }.toTypedArray())
     }
 
     private fun playNextVideo(videoId: String? = null) {
