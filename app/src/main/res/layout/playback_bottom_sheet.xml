@@ -90,19 +90,16 @@
                             android:orientation="horizontal"
                             android:gravity="center_vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/playback_pitch_semitone"/>
-
                             <com.google.android.material.button.MaterialButton
                                 style="@style/Widget.Material3.Button.TonalButton"
                                 android:id="@+id/semitone_decrement_button"
-                                android:layout_marginStart="18dp"
                                 android:layout_width="60dp"
                                 android:layout_height="50dp"
-                                android:text="-"
                                 app:shapeAppearance="?shapeAppearanceCornerMedium"
+                                app:icon="@drawable/music_flat_symbol"
+                                app:iconSize="15dp"
+                                app:iconPadding="0dp"
+                                app:iconGravity="textStart"
                                 tools:ignore="HardcodedText" />
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -130,8 +127,11 @@
                                 android:id="@+id/semitone_increment_button"
                                 android:layout_width="60dp"
                                 android:layout_height="50dp"
-                                android:text="+"
                                 app:shapeAppearance="?shapeAppearanceCornerMedium"
+                                app:icon="@drawable/music_sharp_symbol"
+                                app:iconSize="15dp"
+                                app:iconPadding="0dp"
+                                app:iconGravity="textStart"
                                 tools:ignore="HardcodedText" />
 
                             <com.google.android.material.button.MaterialButton
