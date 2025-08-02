@@ -2,6 +2,7 @@ package com.github.libretube.ui.sheets
 
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import androidx.activity.ComponentDialog
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
@@ -53,6 +54,19 @@ class CommentsSheet : ExpandablePlayerSheet(R.layout.comments_sheet) {
             replace<CommentsMainFragment>(R.id.commentFragContainer, args = arguments)
         }
     }
+
+    override fun onStart() {
+        super.onStart()
+        // remove internal padding from the bottomsheet
+        // https://github.com/material-components/material-components-android/issues/3389#issuecomment-2049028605
+        dialog?.window?.apply {
+            setFlags(
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+            )
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
