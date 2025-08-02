@@ -240,16 +240,26 @@ fun String.toListLinkHandler() = with(JsonHelper.json.decodeFromString<TabData>(
 }
 
 class NewPipeMediaServiceRepository : MediaServiceRepository {
-
     init {
         YoutubeStreamExtractor.setPoTokenProvider(PoTokenGenerator());
     }
 
-    override suspend fun getTrending(region: String): List<StreamItem> {
+    private val trendingCategories = mapOf(
+        TrendingCategory.TRENDING to "Trending",
+        TrendingCategory.GAMING to "trending_gaming",
+        TrendingCategory.TRAILERS to "trending_movies_and_shows",
+        TrendingCategory.PODCASTS to "trending_podcasts_episodes",
+        TrendingCategory.MUSIC to "trending_music",
+        TrendingCategory.LIVE to "live"
+    )
+    override fun getTrendingCategories(): List<TrendingCategory> = trendingCategories.keys.toList()
+
+    override suspend fun getTrending(region: String, category: TrendingCategory): List<StreamItem> {
         val kioskList = NewPipeExtractorInstance.extractor.kioskList
         kioskList.forceContentCountry(ContentCountry(region))
 
-        val extractor = kioskList.defaultKioskExtractor
+        val kioskId = trendingCategories[category]
+        val extractor = kioskList.getExtractorById(kioskId, null)
         extractor.fetchPage()
 
         val info = KioskInfo.getInfo(extractor)

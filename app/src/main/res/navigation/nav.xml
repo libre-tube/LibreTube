@@ -42,7 +42,7 @@
         android:id="@+id/trendsFragment"
         android:name="com.github.libretube.ui.fragments.TrendsFragment"
         android:label="fragment_trends"
-        tools:layout="@layout/fragment_trends" />
+        tools:layout="@layout/fragment_trends_content" />
     <fragment
         android:id="@+id/subscriptionsFragment"
         android:name="com.github.libretube.ui.fragments.SubscriptionsFragment"

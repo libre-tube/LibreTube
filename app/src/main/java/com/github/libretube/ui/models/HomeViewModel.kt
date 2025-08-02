@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.SubscriptionHelper
+import com.github.libretube.api.TrendingCategory
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.PreferenceKeys.HIDE_WATCHED_FROM_FEED
@@ -78,7 +79,9 @@ class HomeViewModel : ViewModel() {
 
         runSafely(
             onSuccess = { videos -> trending.updateIfChanged(videos) },
-            ioBlock = { MediaServiceRepository.instance.getTrending(region).take(10).deArrow() }
+            ioBlock = {
+                MediaServiceRepository.instance.getTrending(region, TrendingCategory.TRENDING).take(10).deArrow()
+            }
         )
     }
 
