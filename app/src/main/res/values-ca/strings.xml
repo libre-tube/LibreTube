@@ -305,7 +305,6 @@
     <string name="invalid_filename">El nom del fitxer no és vàlid.</string>
     <string name="color">Color</string>
     <string name="notification_time_summary">Limita el lapse de temps en què es mostren les notificacions de transmissió</string>
-    <string name="trending">El que és tendència ara</string>
     <string name="bookmarks">Marcadors</string>
     <string name="bookmark">Marcador</string>
     <string name="clear_bookmarks">Neteja els marcadors</string>
@@ -329,7 +328,6 @@
     <string name="unsupported_file_format">Format de fitxer no compatible: %1$s</string>
     <string name="auto_quality">Automàtic</string>
     <string name="limit_to_runtime">Limita al temps d\'execució</string>
-    <string name="trends">Tendències</string>
     <string name="privacy_alert">Alerta de confidencialitat</string>
     <string name="rewind">Retrocedeix</string>
     <string name="time">Temps</string>
@@ -506,7 +504,6 @@
     <string name="tooltip_repeat">Repeteix</string>
     <string name="play_next">Reprodueix a continuació</string>
     <string name="navigation_bar">Barra de navegació</string>
-    <string name="change_region">Sembla que les tendències no estan disponibles per a la regió actual. Si us plau, seleccioneu-ne una altra a la configuració.</string>
     <string name="playback_pitch">To</string>
     <string name="filename">Nom del fitxer</string>
     <string name="hls_instead_of_dash">Utilitza HLS</string>

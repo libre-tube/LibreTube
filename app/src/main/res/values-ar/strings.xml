@@ -269,7 +269,6 @@
     <string name="push_channel_description">يظهر إشعارًا عند توفر تدفقات جديدة.</string>
     <string name="play_next">تشغيل التالي</string>
     <string name="navigation_bar">شريط التنقل</string>
-    <string name="change_region">المتصدرة يبدو أنها غير متاحة في المنطقة الحالية . الرجاء اختيار آخر في الإعداد .</string>
     <string name="playback_pitch">الحدة</string>
     <string name="filename">اسم الملف</string>
     <string name="invalid_filename">اسم الملف غير صالح!</string>
@@ -296,9 +295,7 @@
     <string name="hls_instead_of_dash_summary">إستعملْ HLS بدلاً مِنْ DASH لبث الوسائط. حاول تمكين هذا الخيار إن لم ينجح عرض الفيديو.</string>
     <string name="auto_quality">تلقائي</string>
     <string name="limit_to_runtime">الحد من وقت التشغيل</string>
-    <string name="trends">المتصدرة</string>
     <string name="featured">متميز</string>
-    <string name="trending">ما هو الشائع الآن</string>
     <string name="bookmarks">الإشارات المرجعية</string>
     <string name="bookmark">الإشارة المرجعية</string>
     <string name="clear_bookmarks">مسح الإشارات المرجعية</string>

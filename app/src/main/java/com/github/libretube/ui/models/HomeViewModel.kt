@@ -31,7 +31,6 @@ import kotlinx.coroutines.withContext
 class HomeViewModel : ViewModel() {
     private val hideWatched get() = PreferenceHelper.getBoolean(HIDE_WATCHED_FROM_FEED, false)
 
-    val trending: MutableLiveData<List<StreamItem>> = MutableLiveData(null)
     val feed: MutableLiveData<List<StreamItem>> = MutableLiveData(null)
     val bookmarks: MutableLiveData<List<PlaylistBookmark>> = MutableLiveData(null)
     val playlists: MutableLiveData<List<Playlists>> = MutableLiveData(null)
@@ -39,7 +38,7 @@ class HomeViewModel : ViewModel() {
     val isLoading: MutableLiveData<Boolean> = MutableLiveData(true)
     val loadedSuccessfully: MutableLiveData<Boolean> = MutableLiveData(false)
 
-    private val sections get() = listOf(trending, feed, bookmarks, playlists, continueWatching)
+    private val sections get() = listOf(feed, bookmarks, playlists, continueWatching)
 
     private var loadHomeJob: Job? = null
 
@@ -55,7 +54,6 @@ class HomeViewModel : ViewModel() {
         loadHomeJob = viewModelScope.launch {
             val result = async {
                 awaitAll(
-                    async { if (visibleItems.contains(TRENDING)) loadTrending(context) },
                     async { if (visibleItems.contains(FEATURED)) loadFeed(subscriptionsViewModel) },
                     async { if (visibleItems.contains(BOOKMARKS)) loadBookmarks() },
                     async { if (visibleItems.contains(PLAYLISTS)) loadPlaylists() },
@@ -72,14 +70,6 @@ class HomeViewModel : ViewModel() {
                 }
             }
         }
-    }
-    private suspend fun loadTrending(context: Context) {
-        val region = LocaleHelper.getTrendingRegion(context)
-
-        runSafely(
-            onSuccess = { videos -> trending.updateIfChanged(videos) },
-            ioBlock = { MediaServiceRepository.instance.getTrending(region).take(10).deArrow() }
-        )
     }
 
     private suspend fun loadFeed(subscriptionsViewModel: SubscriptionsViewModel) {
@@ -143,7 +133,6 @@ class HomeViewModel : ViewModel() {
         private const val UNUSUAL_LOAD_TIME_MS = 10000L
         private const val FEATURED = "featured"
         private const val WATCHING = "watching"
-        private const val TRENDING = "trending"
         private const val BOOKMARKS = "bookmarks"
         private const val PLAYLISTS = "playlists"
     }

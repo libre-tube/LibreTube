@@ -176,7 +176,6 @@
     <string name="vote_for_segment">Гласувай за сегмент</string>
     <string name="upvote">Горе</string>
     <string name="pure_theme">Чиста тема</string>
-    <string name="trending">Набиращи популярност</string>
     <string name="end_time">Крайно време</string>
     <string name="confirm_unsubscribing">Потвърдете отписването</string>
     <string name="unknown_or_no_audio">неизвестен или без звук</string>
@@ -191,7 +190,6 @@
     <string name="welcome">Добре дошли в LibreTube</string>
     <string name="pinch_control">Контрол чрез прищипване</string>
     <string name="notgmail">Това е за Piped профил</string>
-    <string name="change_region">Изглежда, че тенденцията не е налична за текущия регион. Моля, изберете друг в настройките.</string>
     <string name="import_playlists_from">Внеси плейлисти от</string>
     <string name="tooltip_minimize">Минимизиране</string>
     <string name="playOnBackground">Изпълни във фонов режим</string>
@@ -476,7 +474,6 @@
     <string name="color">Цвят</string>
     <string name="privacy_alert">Сигнал за поверителност</string>
     <string name="show_search_suggestions">Покажи предложения за търсене</string>
-    <string name="trends">Набиращи популярност</string>
     <string name="customInstance">Потребителски</string>
     <string name="lbry_hls_summary">Използвай LBRY HLS за стрийминг, ако има такъв</string>
     <string name="video_id">Видео ID</string>

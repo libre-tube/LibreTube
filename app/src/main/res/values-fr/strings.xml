@@ -268,7 +268,6 @@
     <string name="navigation_bar">Barre de navigation</string>
     <string name="download_channel_name">Service de téléchargement</string>
     <string name="download_channel_description">Affiche une notification lors du téléchargement d’un média.</string>
-    <string name="change_region">La section Tendances semble être indisponible pour la région actuelle. Veuillez en sélectionner une autre dans les paramètres.</string>
     <string name="push_channel_description">Affiche une notification lorsque de nouveaux flux sont disponibles.</string>
     <string name="playback_pitch">Hauteur</string>
     <string name="filename">Nom de fichier</string>
@@ -297,8 +296,6 @@
     <string name="auto_quality">Auto</string>
     <string name="limit_to_runtime">Limite d’exécution</string>
     <string name="featured">En vedette</string>
-    <string name="trends">Tendances</string>
-    <string name="trending">Les tendances du moment</string>
     <string name="bookmarks">Marque-pages</string>
     <string name="bookmark">Marque-page</string>
     <string name="clear_bookmarks">Effacer les marque-pages</string>

@@ -217,7 +217,6 @@
     <string name="backup_customInstances">ଅନୁକୂଳ୍ ଇନଷ୍ଟାନ୍ସ</string>
     <string name="play_next">ପରବର୍ତ୍ତୀ ଖେଳନ୍ତୁ</string>
     <string name="navigation_bar">ନାଭିଗେସନ୍ ବାର୍</string>
-    <string name="change_region">ସାମ୍ପ୍ରତିକ ଭାବେ ଟ୍ରେଡିଂ ଏହି ଜାଗାରେ ନାହିଁ ।</string>
     <string name="added_to_playlist">%1$s ପ୍ଲେ ଲିଷ୍ଟରେ ଯୋଡା ଯାଇଛି</string>
     <string name="reset">ଡିଫଲ୍ଟଗୁଡିକ ପୁନରୁଦ୍ଧାର କରନ୍ତୁ</string>
     <string name="reset_message">ସମସ୍ତ ସେଟିଂସମୂହ ପୁନ ରିସେଟ୍ କରନ୍ତୁ ଏବଂ ଲଗ୍ ଆଉଟ୍ କରନ୍ତୁ \?</string>
@@ -296,9 +295,7 @@
     <string name="hls_instead_of_dash_summary">DASH ପରିବର୍ତ୍ତେ HLS ବ୍ୟବହାର କରନ୍ତୁ (ଧୀର ହେବ, ସୁପାରିଶ ହେବ ନାହିଁ)</string>
     <string name="auto_quality">ସ୍ଵତଃ</string>
     <string name="limit_to_runtime">ଚାଲିବା ସମୟ ପର୍ଯ୍ୟନ୍ତ ସୀମିତ କରନ୍ତୁ</string>
-    <string name="trends">ଧାରା</string>
     <string name="featured">ବିଶିଷ୍ଟ</string>
-    <string name="trending">ବର୍ତ୍ତମାନ କ’ଣ ଟ୍ରେଣ୍ଡ୍ ହେଉଛି</string>
     <string name="bookmark">ବୁକ୍ ମାର୍କ୍</string>
     <string name="bookmarks">ବୁକ୍ ମାର୍କ୍ ଗୁଡ଼ିକ</string>
     <string name="clear_bookmarks">ବୁକ୍ ମାର୍କ୍ ଗୁଡ଼ିକୁ ଖାଲି କରନ୍ତୁ</string>

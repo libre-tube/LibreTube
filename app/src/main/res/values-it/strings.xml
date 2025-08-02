@@ -269,7 +269,6 @@
     <string name="push_channel_description">Mostra una notifica quando sono disponibili nuovi video.</string>
     <string name="legacy_subscriptions">Vista delle iscrizioni obsoleta</string>
     <string name="navigation_bar">Barra di navigazione</string>
-    <string name="change_region">La Tendenza sembra non essere disponibile per la regione attuale. Selezionane un\'altra nelle impostazioni.</string>
     <string name="playback_pitch">Tono</string>
     <string name="filename">Nome del file</string>
     <string name="invalid_filename">Nome del file non valido!</string>
@@ -303,9 +302,7 @@
     <string name="hls_instead_of_dash_summary">Usa HLS invece di DASH per lo streaming multimediale. Prova ad abilitare questa opzione se la riproduzione multimediale non funziona.</string>
     <string name="auto_quality">Automatica</string>
     <string name="limit_to_runtime">Limita al tempo di esecuzione</string>
-    <string name="trends">Tendenze</string>
     <string name="featured">In evidenza</string>
-    <string name="trending">Cos\'è di tendenza ora</string>
     <string name="queue_insert_related_videos">Inserisci video correlati</string>
     <string name="bookmarks">Segnalibri</string>
     <string name="bookmark">Segnalibro</string>

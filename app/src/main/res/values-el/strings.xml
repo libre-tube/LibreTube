@@ -281,7 +281,6 @@
     <string name="layout">Διάταξη</string>
     <string name="hls_instead_of_dash_summary">Χρησιμοποιήστε HLS αντί για DASH (πιο αργό, δεν συνιστάται)</string>
     <string name="auto_quality">Αυτόματο</string>
-    <string name="trending">Τι είναι σε τάση τώρα</string>
     <string name="defaults">Προεπιλογές</string>
     <string name="theme_monochrome">Μινιμαλιστική Μονόχρωμη</string>
     <string name="all_caught_up">Είστε έτοιμοι</string>
@@ -312,7 +311,6 @@
     <string name="local_subscriptions">Τοπικές συνδρομές</string>
     <string name="download_channel_name">Υπηρεσία λήψης</string>
     <string name="navbar_order">Σειρά</string>
-    <string name="change_region">Οι τάσεις φαίνεται να μην είναι διαθέσιμες για την τρέχουσα περιοχή. Επιλέξτε άλλη στις ρυθμίσεις.</string>
     <string name="legacy_subscriptions">Προβολή συνδρομών παλαιού τύπου</string>
     <string name="nothing_selected">Τίποτα επιλεγμένο!</string>
     <string name="no_subtitle">Χωρίς υποτίτλους</string>
@@ -321,7 +319,6 @@
     <string name="time_code">Κωδικός χρόνου (δευτερόλεπτα)</string>
     <string name="playlistCloned">Η λίστα αναπαραγωγής κλωνοποιήθηκε</string>
     <string name="limit_to_runtime">Περιορισμός χρόνου εκτέλεσης</string>
-    <string name="trends">Τάσεις</string>
     <string name="featured">Προτεινόμενα</string>
     <string name="double_tap_seek_summary">Πατήστε δύο φορές αριστερά ή δεξιά για να μετακινήσετε προς τα πίσω ή προς τα εμπρός τη θέση του αναπαραγωγέα</string>
     <string name="backup_restore_summary">Εισαγωγή και εξαγωγή συνδρομών, playlist,…</string>

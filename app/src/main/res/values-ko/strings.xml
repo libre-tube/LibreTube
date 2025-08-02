@@ -234,7 +234,6 @@
     <string name="audio_track">오디오 트랙</string>
     <string name="hls_instead_of_dash">HLS 사용</string>
     <string name="limit_to_runtime">앱 종료 시 삭제</string>
-    <string name="trends">최신 유행</string>
     <string name="queue_insert_related_videos">관련된 비디오 추가</string>
     <string name="no_comments_available">이 동영상에는 댓글이 없습니다.</string>
     <string name="all_caught_up_summary">새로운 비디오를 모두 시청함</string>
@@ -315,7 +314,6 @@
     <string name="playback_pitch">음높이</string>
     <string name="navbar_order">순서</string>
     <string name="navLabelVisibility">레이블 표시</string>
-    <string name="change_region">현재 지역에서는 인기 급상승 동영상을 사용할 수 없는 것 같습니다. 설정에서 다른 지역을 선택하십시오.</string>
     <string name="network_all">전부</string>
     <string name="bookmark">북마크</string>
     <string name="theme_monochrome">미니멀리즘 단색</string>
@@ -325,7 +323,6 @@
     <string name="skip_buttons_summary">다음 또는 이전 비디오로 건너뛰기 위한 버튼을 표시합니다</string>
     <string name="skip_buttons">건너뛰기 버튼</string>
     <string name="hls_instead_of_dash_summary">DASH 대신 HLS 사용하여 재생. 비디오가 재생되지 않는다면 이 옵션을 시도해보세요.</string>
-    <string name="trending">최신 유행</string>
     <string name="mobile_data">모바일 데이터</string>
     <string name="color_violet">화려한 보라색</string>
     <string name="failed_fetching_instances">사용가능한 인스턴스를 불러올 수 없습니다.</string>

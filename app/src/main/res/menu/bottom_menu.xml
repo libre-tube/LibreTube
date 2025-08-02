@@ -7,12 +7,6 @@
         android:title="@string/startpage" />
 
     <item
-        android:id="@+id/trendsFragment"
-        android:icon="@drawable/ic_trending"
-        android:title="@string/trends"
-        android:visible="false" />
-
-    <item
         android:id="@+id/subscriptionsFragment"
         android:icon="@drawable/ic_subscriptions"
         android:title="@string/subscriptions" />

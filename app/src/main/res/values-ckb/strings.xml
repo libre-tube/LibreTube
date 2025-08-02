@@ -317,15 +317,12 @@
     <string name="notification_time_summary">دیاریکردنی مەودای کاتی ئاگادارکردنەوەکان بۆ پیشاندانی بڵاوکراوە</string>
     <string name="audio_track">تراکی دەنگی</string>
     <string name="limit_to_runtime">سنوردارکردن بۆ لێدان</string>
-    <string name="trends">پێشنیارکراوەکان</string>
     <string name="featured">هەڵبژێردراوەکان</string>
-    <string name="trending">ئەمانە لەئێستادا پێشنیارکراون بۆ سەیرکردن</string>
     <string name="app_backup">پاشەکەوتکردنی بەرنامەکە</string>
     <string name="backup_restore_summary">هێنان و هەڵگرتنی هاوبەشیکردنەکان، لیستی لێدان، …</string>
     <string name="video_id">کۆدی ڤیدیۆ</string>
     <string name="alternative_videos_layout">بەشی هاوشێوەی ڤیدیۆ</string>
     <string name="autoRotatePlayer_summary">خستە دۆخی پڕ بە شاشە کاتێ ئامێرەکە خرایە سەرلا</string>
-    <string name="change_region">ڤیدیۆ پێشنیارکراوەکان بەردەست نییە لەم شوێنەدا، تکایە شوێنێکی تر هەڵبژێرە لەبەشی ڕێکخستندا.</string>
     <string name="unsupported_file_format">جۆری فایل نەگونجاوە: %1$s</string>
     <string name="hls_instead_of_dash">بەکارهێنانی HLS</string>
     <string name="auto_quality">خۆکار</string>

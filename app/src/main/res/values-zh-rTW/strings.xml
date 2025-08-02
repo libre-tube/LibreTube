@@ -273,7 +273,6 @@
     <string name="renamePlaylist">重新命名播放清單</string>
     <string name="mobile_data">行動數據</string>
     <string name="navigation_bar">導航列</string>
-    <string name="change_region">目前的區域似乎無法使用熱門影片。請在設定中選取其他地區。</string>
     <string name="legacy_subscriptions">舊版訂閱播放清單</string>
     <string name="player_summary">預設值與行為</string>
     <string name="require_restart_message">重啟APP以套用變更。</string>
@@ -323,7 +322,6 @@
     <string name="download_channel_description">在下載媒體檔案時顯示通知。</string>
     <string name="push_channel_name">通知工作器</string>
     <string name="time_code">時間戳 (秒)</string>
-    <string name="trends">熱門影片</string>
     <string name="featured">精選影片</string>
     <string name="audio_only_mode">純音訊模式</string>
     <string name="audio_only_mode_summary">將LibreTube變成音樂播放器</string>
@@ -334,7 +332,6 @@
     <string name="hls_instead_of_dash">使用HLS</string>
     <string name="hls_instead_of_dash_summary">使用 HLS 而非 DASH 來串流媒體。如果視訊播放無法正常運作，請嘗試切換此選項。</string>
     <string name="auto_quality">自動</string>
-    <string name="trending">現正熱門</string>
     <string name="comments_disabled">上傳者停用了留言功能。</string>
     <string name="theme_monochrome">極簡單色</string>
     <string name="queue_insert_related_videos">插入相關影片</string>

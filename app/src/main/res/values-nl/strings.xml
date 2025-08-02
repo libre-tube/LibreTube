@@ -262,7 +262,6 @@
     <string name="picture_in_picture">Picture-in-picture</string>
     <string name="resize_mode_zoom">Vullend</string>
     <string name="auto_quality">Automatisch</string>
-    <string name="trends">Trends</string>
     <string name="bookmarks">Bladwijzers</string>
     <string name="bookmark">Opslaan als bladwijzer</string>
     <string name="alphabetic">Alfabetisch</string>
@@ -390,7 +389,6 @@
     <string name="default_or_unknown_audio_track">standaard of onbekend</string>
     <string name="unsupported_file_format">Niet-ondersteund bestands­formaat: %1$s</string>
     <string name="mark_as_watched">Markeren als gezien</string>
-    <string name="trending">Nu trending</string>
     <string name="playingOnBackground">Afspelen op achtergrond…</string>
     <string name="no_comments_available">Deze video heeft geen opmerkingen.</string>
     <string name="backup_restore_summary">Importeren en exporteren van gegevens</string>
@@ -404,7 +402,6 @@
     <string name="pinch_control_summary">Gebruik knijpgebaren om in of uit te zoomen</string>
     <string name="hide_watched_from_feed">Bekeken video\'s verbergen</string>
     <string name="playerAudioFormat">Audioformaat voor speler</string>
-    <string name="change_region">Trending is niet beschikbaar voor de huidige regio. Selecteer een andere onder instellingen.</string>
     <string name="comments_disabled">Opmerkingen zijn uitgeschakeld door de uploader.</string>
     <string name="player_channel_description">Toont een melding tijdens het afspelen</string>
     <string name="data_saver_mode_summary">Sla miniaturen en andere afbeeldingen over</string>

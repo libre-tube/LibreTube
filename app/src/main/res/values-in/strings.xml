@@ -269,7 +269,6 @@
     <string name="push_channel_description">Menampilkan sebuah notifikasi ketika saluran baru telah tersedia.</string>
     <string name="play_next">Main berikutnya</string>
     <string name="navigation_bar">Bilah navigasi</string>
-    <string name="change_region">Sedang Tren sepertinya tidak tersedia untuk wilayah saat ini. Pilih yang lain di pengaturan.</string>
     <string name="playback_pitch">Nada</string>
     <string name="filename">Nama file</string>
     <string name="invalid_filename">Nama file tidak absah!</string>
@@ -296,9 +295,7 @@
     <string name="auto_quality">Otomatis</string>
     <string name="hls_instead_of_dash_summary">Gunakan HLS daripada DASH untuk memuat media. Coba mengubah opsi ini jika pemutaran video tidak bekerja.</string>
     <string name="limit_to_runtime">Batasi ke runtime</string>
-    <string name="trends">Tren</string>
     <string name="featured">Unggulan</string>
-    <string name="trending">Sedang Tren</string>
     <string name="bookmarks">Markah</string>
     <string name="bookmark">Markah</string>
     <string name="clear_bookmarks">Hapus markah</string>
