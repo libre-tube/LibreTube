@@ -17,7 +17,9 @@ import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
 
 open class PipedMediaServiceRepository : MediaServiceRepository {
-    override suspend fun getTrending(region: String): List<StreamItem> =
+    override fun getTrendingCategories(): List<TrendingCategory> = listOf(TrendingCategory.TRENDING)
+
+    override suspend fun getTrending(region: String, category: TrendingCategory): List<StreamItem> =
         api.getTrending(region)
 
     override suspend fun getStreams(videoId: String): Streams {
