@@ -155,13 +155,10 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
             playerController?.navigateVideo(PlayingQueue.getNext() ?: return@setOnClickListener)
         }
 
-        listOf(binding.forwardTV, binding.rewindTV).forEach {
-            it.text = (PlayerHelper.seekIncrement / 1000).toString()
-        }
-        binding.rewindFL.setOnClickListener {
+        binding.rewindBTN.setOnClickListener {
             playerController?.seekBy(-PlayerHelper.seekIncrement)
         }
-        binding.forwardFL.setOnClickListener {
+        binding.forwardBTN.setOnClickListener {
             playerController?.seekBy(PlayerHelper.seekIncrement)
         }
 
