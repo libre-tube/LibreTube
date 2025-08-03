@@ -43,7 +43,7 @@
         <item name="android:paddingBottom">15dp</item>
     </style>
 
-    <style name="CustomDialogTextInputLayout" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="CustomDialogTextInputLayout" parent="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

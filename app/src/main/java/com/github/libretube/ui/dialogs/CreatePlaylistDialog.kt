@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
@@ -21,6 +22,15 @@ import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 class CreatePlaylistDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogCreatePlaylistBinding.inflate(layoutInflater)
+
+        binding.createPlaylistSpinner.items = listOf(
+            getString(R.string.createNewPlaylist),
+            getString(R.string.clonePlaylist)
+        )
+        binding.createPlaylistSpinner.setOnSelectionChangeListener { position ->
+            binding.createPlayistContainerView.isVisible = position == 0
+            binding.clonePlaylistContainerView.isVisible = position == 1
+        }
 
         binding.clonePlaylist.setOnClickListener {
             val playlistUrl = binding.playlistUrl.text.toString().toHttpUrlOrNull()
