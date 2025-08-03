@@ -914,12 +914,12 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         // check whether the screen is on
         val isInteractive = requireContext().getSystemService<PowerManager>()!!.isInteractive
 
-        // disable video stream since it's not needed when screen off
-        if (!isInteractive) {
-            // disable the autoplay countdown while the screen is off
+        // disable video stream since it's not needed when screen off or when PiP is not enabled
+        if (!isInteractive || !PlayerHelper.pipEnabled) {
+            // disable the autoplay countdown while the screen is off or when PiP is not enabled
             setAutoPlayCountdownEnabled(false)
 
-            // disable loading the video track while screen is off
+            // disable loading the video track while screen is off or when PiP is not enabled
             setVideoTrackTypeDisabled(true)
         }
 
