@@ -559,4 +559,8 @@
     <string name="full_local_mode_desc">Pipedを使わず、すべてをYouTubeから直接取得します。</string>
     <string name="authentication">認証</string>
     <string name="playback_pitch_semitone_error_input">音量を指定できる範囲 -%1$.1f (最小) から %1$.1f (最大)</string>
+    <string name="gaming">ゲーム</string>
+    <string name="podcasts">ポッドキャスト</string>
+    <string name="trailers">トレーラー</string>
+    <string name="music">音楽</string>
 </resources>
