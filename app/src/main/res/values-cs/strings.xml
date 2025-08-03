@@ -561,4 +561,8 @@
     <string name="full_local_mode">Plně lokální režim</string>
     <string name="mode_of_operation">Režim operace</string>
     <string name="playback_pitch_semitone_error_input">Hodnota musí být mezi -%1$.1f (minimum) a %1$.1f (maximum)</string>
+    <string name="gaming">Hry</string>
+    <string name="podcasts">Podcasty</string>
+    <string name="trailers">Upoutávky</string>
+    <string name="music">Hudba</string>
 </resources>
