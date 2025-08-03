@@ -44,11 +44,30 @@ class AddToPlaylistDialog : DialogFragment() {
         }
 
         val binding = DialogAddToPlaylistBinding.inflate(layoutInflater)
+        binding.createPlaylist.setOnClickListener {
+            CreatePlaylistDialog().show(childFragmentManager, null)
+        }
+        binding.addToPlaylist.setOnClickListener {
+            val selectedItemPosition = binding.playlistsSpinner.selectedItemPosition
+            viewModel.onAddToPlaylist(selectedItemPosition)
+        }
+
         viewModel.uiState.observe(this) { (lastSelectedPlaylistId, playlists, msg, saved) ->
-            binding.playlistsSpinner.items = playlists.mapNotNull { it.name }
+            binding.playlistsSpinner.items =
+                playlists
+                    .mapNotNull { it.name }
+                    .ifEmpty { listOf("") }
+
+            // disable the spinner and the 'Add' button when there is no available playlist
+            binding.playlistsSpinner.isEnabled = playlists.isNotEmpty()
+            binding.addToPlaylist.isEnabled = playlists.isNotEmpty()
 
             // select the last used playlist
             lastSelectedPlaylistId?.let { id ->
+                // check if the list is empty, it's possible that the user just deleted
+                // all playlists and 'lastSelectedPlaylist' still has value
+                if (playlists.isEmpty()) return@let
+
                 binding.playlistsSpinner.selectedItemPosition = playlists
                     .indexOfFirst { it.id == id }
                     .takeIf { it >= 0 } ?: 0
@@ -56,7 +75,8 @@ class AddToPlaylistDialog : DialogFragment() {
 
             msg?.let {
                 with(binding.root.context) {
-                    Toast.makeText(this, getString(it.resId, it.formatArgs), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(it.resId, it.formatArgs), Toast.LENGTH_SHORT)
+                        .show()
                 }
                 viewModel.onMessageShown()
             }
@@ -69,20 +89,8 @@ class AddToPlaylistDialog : DialogFragment() {
 
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.addToPlaylist)
-            .setNegativeButton(R.string.createPlaylist, null)
-            .setPositiveButton(R.string.addToPlaylist, null)
             .setView(binding.root)
             .show()
-            .apply {
-                // Click listeners without closing the dialog
-                getButton(DialogInterface.BUTTON_NEGATIVE).setOnClickListener {
-                    CreatePlaylistDialog().show(childFragmentManager, null)
-                }
-                getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
-                    val selectedItemPosition = binding.playlistsSpinner.selectedItemPosition
-                    viewModel.onAddToPlaylist(selectedItemPosition)
-                }
-            }
     }
 
     override fun onDismiss(dialog: DialogInterface) {
