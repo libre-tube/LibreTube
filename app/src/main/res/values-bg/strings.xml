@@ -559,4 +559,5 @@
     <string name="full_local_mode_desc">Директно извличане на всичко от YouTube, без да използвате Piped.</string>
     <string name="authentication">Удостоверяване</string>
     <string name="mode_of_operation">Режим на работа</string>
+    <string name="playback_pitch_semitone_error_input">Стойността трябва да бъде между -%1$.1f (минимално) и %1$.1f (максимално)</string>
 </resources>
