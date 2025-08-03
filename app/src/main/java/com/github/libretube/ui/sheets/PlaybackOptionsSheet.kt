@@ -51,6 +51,13 @@ class PlaybackOptionsSheet(
                 return@setOnEditorActionListener false
             }
 
+            if (editText.text.isEmpty()) {
+                // reset to previous value
+                binding.semitoneEditText.setText(binding.pitch.value.round(2).toString())
+                clearEditTextFocusAndHideKeyboard()
+                return@setOnEditorActionListener false
+            }
+
             val enteredSemitoneValue = editText.text.toString().toFloat()
             if (enteredSemitoneValue.absoluteValue > SEMITONES_IN_ONE_OCTAVE) {
                 editText.error = context?.getString(
