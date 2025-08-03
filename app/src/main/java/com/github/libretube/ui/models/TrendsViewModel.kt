@@ -38,12 +38,7 @@ class TrendsViewModel : ViewModel() {
                 val response = withContext(Dispatchers.IO) {
                     MediaServiceRepository.instance.getTrending(region, category).deArrow()
                 }
-                val newState = trendingVideos.value.orEmpty()
-                    .toMutableMap()
-                    .apply {
-                        put(category, response)
-                    }
-                trendingVideos.postValue(newState)
+                setStreamsForCategory(category, response)
             } catch (e: IOException) {
                 println(e)
                 Log.e(TAG(), "IOException, you might not have internet connection")
@@ -55,5 +50,14 @@ class TrendsViewModel : ViewModel() {
                 return@launch
             }
         }
+    }
+
+    fun setStreamsForCategory(category: TrendingCategory, streams: List<StreamItem>) {
+        val newState = trendingVideos.value.orEmpty()
+            .toMutableMap()
+            .apply {
+                put(category, streams)
+            }
+        trendingVideos.postValue(newState)
     }
 }
