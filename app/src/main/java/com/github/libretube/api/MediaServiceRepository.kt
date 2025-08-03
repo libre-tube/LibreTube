@@ -12,7 +12,9 @@ import com.github.libretube.api.obj.Streams
 import com.github.libretube.helpers.PlayerHelper
 
 interface MediaServiceRepository {
-    suspend fun getTrending(region: String): List<StreamItem>
+    fun getTrendingCategories(): List<TrendingCategory>
+
+    suspend fun getTrending(region: String, category: TrendingCategory): List<StreamItem>
     suspend fun getStreams(videoId: String): Streams
     suspend fun getComments(videoId: String): CommentsPage
     suspend fun getSegments(
@@ -46,4 +48,13 @@ interface MediaServiceRepository {
                 else -> PipedMediaServiceRepository()
             }
     }
+}
+
+enum class TrendingCategory {
+    TRENDING,
+    GAMING,
+    PODCASTS,
+    TRAILERS,
+    MUSIC,
+    LIVE
 }
