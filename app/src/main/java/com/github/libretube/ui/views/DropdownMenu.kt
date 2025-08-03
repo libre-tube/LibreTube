@@ -52,6 +52,12 @@ class DropdownMenu(
 
     override fun isEnabled() = binding.textInputLayout.isEnabled
 
+    private var onSelectionChangeListener: ((Int) -> Unit)? = null
+
+    fun setOnSelectionChangeListener(listener: ((Int) -> Unit)?) {
+        onSelectionChangeListener = listener
+    }
+
     fun setSelection(item: String) {
         val itemIndex = items.indexOf(item)
         if (itemIndex != -1) selectedItemPosition = itemIndex
@@ -69,5 +75,9 @@ class DropdownMenu(
         }
 
         adapter = ArrayAdapter(context, R.layout.dropdown_item)
+
+        binding.autoCompleteTextView.setOnItemClickListener {_, _, position, _ ->
+            onSelectionChangeListener?.invoke(position)
+        }
     }
 }

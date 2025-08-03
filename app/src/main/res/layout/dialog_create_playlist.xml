@@ -1,49 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingTop="8dp">
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/CustomDialogTextInputLayout"
-        android:hint="@string/playlistUrl">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/playlist_url"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/clone_playlist"
-        android:layout_width="wrap_content"
+    <com.github.libretube.ui.views.DropdownMenu
+        android:id="@+id/create_playlist_spinner"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
-        android:drawableStart="@drawable/ic_copy"
-        android:text="@string/clonePlaylist" />
+        android:layout_marginHorizontal="15dp"
+        app:hint="@string/tooltip_options" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/CustomDialogTextInputLayout"
-        android:hint="@string/playlistName">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/playlist_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/create_new_playlist"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/clone_playlist_container_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginEnd="20dp"
-        android:drawableStart="@drawable/ic_copy"
-        android:text="@string/createPlaylist" />
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/CustomDialogTextInputLayout"
+            android:hint="@string/playlistUrl">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/playlist_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/clone_playlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="20dp"
+            android:drawableStart="@drawable/ic_copy"
+            android:text="@string/clonePlaylist" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/create_playist_container_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/CustomDialogTextInputLayout"
+            android:layout_marginHorizontal="0dp"
+            android:hint="@string/playlistName">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/playlist_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/create_new_playlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="20dp"
+            android:drawableStart="@drawable/ic_copy"
+            android:text="@string/createNewPlaylist" />
+    </LinearLayout>
+
 
 </LinearLayout>
