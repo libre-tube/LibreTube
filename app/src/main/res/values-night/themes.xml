@@ -13,6 +13,7 @@
 
         <item name="snackbarStyle">@style/snackBarStyle</item>
 
+        <item name="loadingIndicatorStyle">@style/Widget.Material3.LoadingIndicator.Contained</item>
     </style>
 
     <style name="StartupTheme" parent="Theme.SplashScreen">
