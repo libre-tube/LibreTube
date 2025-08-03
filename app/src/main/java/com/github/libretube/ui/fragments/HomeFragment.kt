@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
+import com.github.libretube.api.TrendingCategory
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.PreferenceKeys
@@ -27,6 +28,7 @@ import com.github.libretube.ui.adapters.VideoCardsAdapter
 import com.github.libretube.ui.extensions.setupFragmentAnimation
 import com.github.libretube.ui.models.HomeViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
+import com.github.libretube.ui.models.TrendsViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.runBlocking
 
@@ -35,8 +37,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val subscriptionsViewModel: SubscriptionsViewModel by activityViewModels()
     private val homeViewModel: HomeViewModel by activityViewModels()
+    private val subscriptionsViewModel: SubscriptionsViewModel by activityViewModels()
+    private val trendsViewModel: TrendsViewModel by activityViewModels()
 
     private val trendingAdapter = VideoCardsAdapter()
     private val feedAdapter = VideoCardsAdapter(columnWidthDp = 250f)
@@ -140,6 +143,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun showTrending(streamItems: List<StreamItem>?) {
         if (streamItems == null) return
+
+        // cache the loaded trends in the [TrendsViewModel] so that the trends don't need to be
+        // reloaded there
+        trendsViewModel.setStreamsForCategory(TrendingCategory.TRENDING, streamItems)
 
         makeVisible(binding.trendingRV, binding.trendingTV)
         trendingAdapter.submitList(streamItems)
