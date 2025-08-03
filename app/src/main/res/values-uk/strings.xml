@@ -562,4 +562,9 @@
     <string name="mode_of_operation">Режим роботи</string>
     <string name="full_local_mode">Повний локальний режим</string>
     <string name="authentication">Автентифікація</string>
+    <string name="playback_pitch_semitone_error_input">Значення повинно бути в діапазоні від -%1$.1f (мінімум) до %1$.1f (максимум)</string>
+    <string name="gaming">Ігри</string>
+    <string name="podcasts">Подкасти</string>
+    <string name="trailers">Трейлери</string>
+    <string name="music">Музика</string>
 </resources>
