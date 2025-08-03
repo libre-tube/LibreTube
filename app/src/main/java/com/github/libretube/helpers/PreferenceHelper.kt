@@ -10,7 +10,9 @@ import com.github.libretube.R
 import com.github.libretube.api.TrendingCategory
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.SbSkipOptions
+import com.github.libretube.extensions.round
 import com.github.libretube.helpers.LocaleHelper.getDetectedCountry
+import kotlin.math.roundToInt
 
 object PreferenceHelper {
     private val TAG = PreferenceHelper::class.simpleName
@@ -134,6 +136,13 @@ object PreferenceHelper {
         },
         PreferenceMigration(4, 5) {
             remove("remember_playback_speed")
+        },
+        PreferenceMigration(5, 6) {
+            val currentSpeed = (settings.getString(PreferenceKeys.PLAYBACK_SPEED, null)
+                ?: return@PreferenceMigration).replace("F", "").toFloat()
+            // round to the nearest .25 playback speed
+            val speed = (currentSpeed * 4f).roundToInt() / 4f
+            putString(PreferenceKeys.PLAYBACK_SPEED, speed.toString())
         },
     )
 
