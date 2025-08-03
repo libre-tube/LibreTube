@@ -174,7 +174,7 @@ class PlaybackOptionsSheet(
     }
 
     companion object {
-        private val SUGGESTED_SPEEDS = listOf(0.5f, 1f, 1.25f, 1.5f, 1.75f, 2f)
+        private val SUGGESTED_SPEEDS = listOf(0.5f, 1f, 1.25f, 1.5f, 1.75f, 2f, 2.5f, 3f)
 
         // Semitone's ratio in equal temperament is the 12th root of 2, or 2^(1/12)
         // References:
