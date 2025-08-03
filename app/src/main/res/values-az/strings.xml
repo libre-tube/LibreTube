@@ -559,4 +559,5 @@
     <string name="authentication">Təsdiqlənmə</string>
     <string name="mode_of_operation">Fəaliyyət üsulu</string>
     <string name="full_local_mode_desc">Piped işlətmədən hər şeyi dərhal YouTube-dan əldə et.</string>
+    <string name="playback_pitch_semitone_error_input">Dəyər -%1$.1f (ən az) və %1$.1f (ən yüksək) arasında olmalıdır</string>
 </resources>

@@ -563,4 +563,5 @@
     <string name="mode_of_operation">طريقة التشغيل</string>
     <string name="full_local_mode_desc">جلب كل شيء مباشرة من YouTube، دون استخدام Piped.</string>
     <string name="updating_feed">تحديث التغذية …</string>
+    <string name="playback_pitch_semitone_error_input">يجب أن تتراوح القيمة بين -%1$.1f (الحد الأدنى) و%1$.1f (الحد الأقصى)</string>
 </resources>

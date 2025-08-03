@@ -558,4 +558,5 @@
     <string name="mode_of_operation">运行模式</string>
     <string name="full_local_mode_desc">直接从 YT 获取一切数据，不使用 Piped。</string>
     <string name="authentication">身份验证</string>
+    <string name="playback_pitch_semitone_error_input">值须在 %1$.1f（最小值）和 %1$.1f（最大值）之间</string>
 </resources>
