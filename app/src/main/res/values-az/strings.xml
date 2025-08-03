@@ -560,4 +560,8 @@
     <string name="mode_of_operation">Fəaliyyət üsulu</string>
     <string name="full_local_mode_desc">Piped işlətmədən hər şeyi dərhal YouTube-dan əldə et.</string>
     <string name="playback_pitch_semitone_error_input">Dəyər -%1$.1f (ən az) və %1$.1f (ən yüksək) arasında olmalıdır</string>
+    <string name="gaming">Oyun</string>
+    <string name="podcasts">Podkastlar</string>
+    <string name="trailers">Filmlər</string>
+    <string name="music">Musiqi</string>
 </resources>
