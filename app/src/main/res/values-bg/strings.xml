@@ -560,4 +560,8 @@
     <string name="authentication">Удостоверяване</string>
     <string name="mode_of_operation">Режим на работа</string>
     <string name="playback_pitch_semitone_error_input">Стойността трябва да бъде между -%1$.1f (минимално) и %1$.1f (максимално)</string>
+    <string name="gaming">Игри</string>
+    <string name="podcasts">Подкасти</string>
+    <string name="trailers">Трейлъри</string>
+    <string name="music">Музика</string>
 </resources>
