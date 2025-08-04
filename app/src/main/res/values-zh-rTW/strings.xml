@@ -558,4 +558,9 @@
     <string name="mode_of_operation">操作模式</string>
     <string name="full_local_mode">完全本機模式</string>
     <string name="authentication">驗證</string>
+    <string name="playback_pitch_semitone_error_input">值必須在 -%1$.1f（最小值）到 %1$.1f（最大值）間</string>
+    <string name="gaming">遊戲</string>
+    <string name="podcasts">Podcast</string>
+    <string name="trailers">預告片</string>
+    <string name="music">音樂</string>
 </resources>
