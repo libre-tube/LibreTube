@@ -559,4 +559,8 @@
     <string name="full_local_mode_desc">直接从 YT 获取一切数据，不使用 Piped。</string>
     <string name="authentication">身份验证</string>
     <string name="playback_pitch_semitone_error_input">值须在 %1$.1f（最小值）和 %1$.1f（最大值）之间</string>
+    <string name="gaming">游戏</string>
+    <string name="podcasts">播客</string>
+    <string name="trailers">预告片</string>
+    <string name="music">音乐</string>
 </resources>
