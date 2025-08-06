@@ -44,25 +44,13 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <androidx.appcompat.widget.SwitchCompat
+            <com.google.android.material.materialswitch.MaterialSwitch
+                style="@style/Widget.Material3.CompoundButton.MaterialSwitch"
                 android:id="@+id/autoPlay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
-                android:scaleX="0.8"
-                android:scaleY="0.8"
-                android:thumb="@drawable/player_switch_thumb"
-                app:thumbTint="?colorPrimary"
-                app:track="@drawable/player_switch_track"
-                app:trackTint="?colorControlNormal" />
-
-            <ImageView
-                android:id="@+id/open_video"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="6dp"
-                android:src="@drawable/ic_video" />
+                app:thumbIcon="@drawable/material_player_switch_thumb" />
 
         </LinearLayout>
 
@@ -118,7 +106,7 @@
 
             </LinearLayout>
 
-            <ProgressBar
+            <com.google.android.material.loadingindicator.LoadingIndicator
                 android:id="@+id/progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -149,17 +137,43 @@
 
         </LinearLayout>
 
-        <com.google.android.material.slider.Slider
-            android:id="@+id/time_bar"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            app:labelBehavior="gone" />
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/prev"
+                style="?attr/materialIconButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:iconGravity="textStart"
+                app:icon="@drawable/ic_prev" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/time_bar"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                app:labelBehavior="gone" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/next"
+                style="?attr/materialIconButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:iconGravity="textStart"
+                app:icon="@drawable/ic_next" />
+
+        </LinearLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="20dp">
+            android:paddingHorizontal="40dp">
 
             <TextView
                 android:id="@+id/current_position"
@@ -177,162 +191,112 @@
 
         </FrameLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <com.google.android.material.button.MaterialButtonGroup
+            android:id="@+id/buttonGroup"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="36dp">
+            android:spacing="0dp"
+            android:paddingVertical="30dp"
+            android:layout_marginHorizontal="50dp"
+            android:gravity="center_horizontal">
 
-            <FrameLayout
-                android:id="@+id/rewindFL"
-                android:layout_width="wrap_content"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/rewindBTN"
+                style="?materialIconButtonFilledStyle"
+                android:layout_width="0dp"
+                android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="?attr/selectableItemBackgroundBorderless">
-
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_rewind_md" />
-
-                <TextView
-                    android:id="@+id/rewindTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="2dp"
-                    android:textSize="8sp"
-                    android:textStyle="bold"
-                    tools:ignore="SmallSp" />
-
-            </FrameLayout>
-
-            <ImageView
-                android:id="@+id/prev"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="20dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_prev" />
+                android:gravity="center"
+                app:iconGravity="textStart"
+                app:iconSize="40dp"
+                app:icon="@drawable/ic_rewind_md" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/play_pause"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                android:insetLeft="0dp"
-                android:insetTop="0dp"
-                android:insetRight="0dp"
-                android:insetBottom="0dp"
-                app:icon="@drawable/ic_pause"
-                app:iconSize="24dp"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+                style="?attr/materialIconButtonFilledStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                app:iconGravity="textStart"
+                app:iconSize="55dp"
+                app:icon="@drawable/ic_pause" />
 
-            <ImageView
-                android:id="@+id/next"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="20dp"
-                android:src="@drawable/ic_next" />
-
-            <FrameLayout
-                android:id="@+id/forwardFL"
-                android:layout_width="wrap_content"
+            <com.google.android.material.button.MaterialButton
+                style="?materialIconButtonFilledStyle"
+                android:id="@+id/forwardBTN"
+                android:layout_width="0dp"
+                android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="?attr/selectableItemBackgroundBorderless">
+                android:gravity="center"
+                app:iconGravity="textStart"
+                app:iconSize="40dp"
+                app:icon="@drawable/ic_forward_md" />
 
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_forward_md" />
-
-                <TextView
-                    android:id="@+id/forwardTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="2dp"
-                    android:textSize="8sp"
-                    android:textStyle="bold"
-                    tools:ignore="SmallSp" />
-
-            </FrameLayout>
-
-        </LinearLayout>
+        </com.google.android.material.button.MaterialButtonGroup>
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingHorizontal="30dp"
-            android:paddingVertical="15dp">
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="16dp">
 
-            <LinearLayout
+            <com.google.android.material.button.MaterialButtonGroup
+                style="@style/Widget.Material3.MaterialButtonGroup.Connected"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start|center_vertical"
-                android:orientation="horizontal">
+                android:layout_height="50dp"
+                android:gravity="center_horizontal"
+                android:layout_gravity="start|center_vertical">
 
-                <ImageView
-                    android:id="@+id/playback_options"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:scaleX="0.9"
-                    android:scaleY="0.9"
-                    android:src="@drawable/ic_speed" />
-
-                <ImageView
-                    android:id="@+id/sleep_timer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:scaleX="0.9"
-                    android:scaleY="0.9"
-                    android:src="@drawable/ic_sleep" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/open_chapters"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:scaleX="0.9"
-                    android:scaleY="0.9"
-                    android:src="@drawable/ic_frame" />
-
-                <ImageView
+                <com.google.android.material.button.MaterialButton
+                    style="?materialIconButtonOutlinedStyle"
                     android:id="@+id/open_queue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_queue" />
+                    app:icon="@drawable/ic_queue" />
 
-            </LinearLayout>
+                <com.google.android.material.button.MaterialButton
+                    style="?materialIconButtonOutlinedStyle"
+                    android:id="@+id/open_chapters"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/ic_frame" />
 
-            <ImageView
+                <com.google.android.material.button.MaterialButton
+                    style="?materialIconButtonOutlinedStyle"
+                    android:id="@+id/playback_options"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/ic_speed" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="?materialIconButtonOutlinedStyle"
+                    android:id="@+id/sleep_timer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/ic_sleep" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="?materialIconButtonOutlinedStyle"
+                    android:id="@+id/open_video"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/ic_video" />
+
+            </com.google.android.material.button.MaterialButtonGroup>
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/show_more"
+                style="?attr/materialIconButtonFilledStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                app:iconGravity="textStart"
                 android:layout_gravity="end|center_vertical"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:scaleX="0.9"
-                android:scaleY="0.9"
-                android:src="@drawable/ic_three_dots" />
+                app:icon="@drawable/ic_three_dots" />
 
         </FrameLayout>
 

@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="BaseTheme" parent="Theme.Material3.Light.NoActionBar">
+    <style name="BaseTheme" parent="Theme.Material3Expressive.Light.NoActionBar">
 
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">true</item>
@@ -13,6 +13,7 @@
 
         <item name="snackbarStyle">@style/snackBarStyle</item>
 
+        <item name="loadingIndicatorStyle">@style/Widget.Material3.LoadingIndicator.Contained</item>
     </style>
 
     <style name="SplashScreenTheme" parent="Theme.SplashScreen">
