@@ -86,6 +86,8 @@ class CommentPagingAdapter(
             ImageHelper.loadImage(comment.thumbnail, commentorImage, true)
             likesTextView.text = comment.likeCount.formatShort()
 
+            // clear the image view, to avoid it still being shown when android recycles the view
+            creatorReplyImageView.isGone = true
             if (comment.creatorReplied && !channelAvatar.isNullOrBlank()) {
                 ImageHelper.loadImage(channelAvatar, creatorReplyImageView, true)
                 creatorReplyImageView.isVisible = true
