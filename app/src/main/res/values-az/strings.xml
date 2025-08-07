@@ -564,4 +564,5 @@
     <string name="podcasts">Podkastlar</string>
     <string name="trailers">Filmlər</string>
     <string name="music">Musiqi</string>
+    <string name="createNewPlaylist">Yeni pleylist yarat</string>
 </resources>
