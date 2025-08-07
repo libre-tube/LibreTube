@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.format.Formatter
+import android.util.Log
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
@@ -18,6 +19,7 @@ import com.github.libretube.api.obj.Streams
 import com.github.libretube.api.obj.Subtitle
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogDownloadBinding
+import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.getWhileDigit
 import com.github.libretube.extensions.sha256Sum
 import com.github.libretube.extensions.toastFromMainDispatcher
@@ -25,12 +27,10 @@ import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.parcelable.DownloadData
-import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.IOException
 
 class DownloadDialog : DialogFragment() {
     private lateinit var videoId: String
@@ -64,11 +64,9 @@ class DownloadDialog : DialogFragment() {
                 withContext(Dispatchers.IO) {
                     MediaServiceRepository.instance.getStreams(videoId)
                 }
-            } catch (e: IOException) {
-                context?.toastFromMainDispatcher(getString(R.string.unknown_error))
-                return@launch
-            } catch (e: Exception) {
-                context?.toastFromMainDispatcher(e.message ?: getString(R.string.server_error))
+            }  catch (e: Exception) {
+                Log.e(TAG(), e.stackTraceToString())
+                context?.toastFromMainDispatcher(e.localizedMessage.orEmpty())
                 return@launch
             }
             initDownloadOptions(binding, response)

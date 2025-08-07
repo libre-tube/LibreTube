@@ -22,6 +22,7 @@ import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
+import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.ClipboardHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
@@ -36,8 +37,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.HttpException
-import java.io.IOException
 
 class ChannelFragment : Fragment(R.layout.fragment_channel) {
     private var _binding: FragmentChannelBinding? = null
@@ -126,11 +125,9 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
                     relatedStreams = relatedStreams.deArrow()
                 }
             }
-        } catch (e: IOException) {
-            Log.e(TAG(), "IOException, you might not have internet connection")
-            return@launch
-        } catch (e: HttpException) {
-            Log.e(TAG(), "HttpException, unexpected response")
+        } catch (e: Exception) {
+            Log.e(TAG(), e.stackTraceToString())
+            context?.toastFromMainDispatcher(e.localizedMessage.orEmpty())
             return@launch
         } finally {
             _binding?.channelRefresh?.isRefreshing = false
