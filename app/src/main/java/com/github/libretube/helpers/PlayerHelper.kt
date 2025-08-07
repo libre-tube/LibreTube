@@ -514,9 +514,8 @@ object PlayerHelper {
                 extensionRendererMode: Int,
                 out: ArrayList<Renderer>
             ) {
-                super.buildTextRenderers(context, output, outputLooper, extensionRendererMode,
-                    out as ArrayList<Renderer>
-                )
+                super.buildTextRenderers(context, output, outputLooper, extensionRendererMode, out)
+                @Suppress("DEPRECATION")
                 (out.last() as? TextRenderer)?.experimentalSetLegacyDecodingEnabled(true)
             }
         }
