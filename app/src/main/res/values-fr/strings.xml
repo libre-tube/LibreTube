@@ -560,4 +560,9 @@
     <string name="full_local_mode">Mode local complet</string>
     <string name="authentication">Authentification</string>
     <string name="show_upcoming_videos">Afficher les vidéos à venir</string>
+    <string name="playback_pitch_semitone_error_input">La valeur doit être comprise entre -%1$.1f (minimum) et %1$.1f (maximum)</string>
+    <string name="gaming">Jeux Vidéo</string>
+    <string name="podcasts">Podcasts</string>
+    <string name="trailers">Trailers</string>
+    <string name="music">Musique</string>
 </resources>

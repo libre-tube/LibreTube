@@ -559,4 +559,9 @@
     <string name="authentication">Authentifizierung</string>
     <string name="full_local_mode_desc">Alle Daten direkt von YouTube abrufen, ohne Piped zu nutzen.</string>
     <string name="mode_of_operation">Betriebsmodus</string>
+    <string name="playback_pitch_semitone_error_input">Wert muss zwischen -%1$.1f (Minimum) und %1$.1f (Maximum) liegen</string>
+    <string name="gaming">Gaming</string>
+    <string name="podcasts">Podcasts</string>
+    <string name="trailers">Trailer</string>
+    <string name="music">Musik</string>
 </resources>

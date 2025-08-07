@@ -559,4 +559,9 @@
     <string name="mode_of_operation">Működési mód</string>
     <string name="full_local_mode">Teljes helyi üzemmód</string>
     <string name="full_local_mode_desc">Minden közvetlenül a YouTube-ról kerül lekérésre, a Piped használata nélkül.</string>
+    <string name="playback_pitch_semitone_error_input">Az értéknek -%1$.1f (minimum) és %1$.1f (maximum) között kell lennie</string>
+    <string name="gaming">Játék</string>
+    <string name="podcasts">Podcastok</string>
+    <string name="trailers">Előzetesek</string>
+    <string name="music">Zene</string>
 </resources>

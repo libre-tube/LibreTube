@@ -564,4 +564,8 @@
     <string name="full_local_mode_desc">جلب كل شيء مباشرة من YouTube، دون استخدام Piped.</string>
     <string name="updating_feed">تحديث التغذية …</string>
     <string name="playback_pitch_semitone_error_input">يجب أن تتراوح القيمة بين -%1$.1f (الحد الأدنى) و%1$.1f (الحد الأقصى)</string>
+    <string name="gaming">لعب</string>
+    <string name="podcasts">بودكاست</string>
+    <string name="trailers">الرائجة</string>
+    <string name="music">الموسيقى</string>
 </resources>

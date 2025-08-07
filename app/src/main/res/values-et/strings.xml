@@ -560,4 +560,8 @@
     <string name="full_local_mode">Täies mahus kohalikus nutiseadmes</string>
     <string name="full_local_mode_desc">Laadi kogu sisu otse YouTube\'ist ilma kasutamata Piped\'i teenust.</string>
     <string name="playback_pitch_semitone_error_input">väärtus peab olema vahemikus -%1$.1f (miinimum) ja %1$.1f (maksimum)</string>
+    <string name="gaming">Mängumaailm</string>
+    <string name="podcasts">Taskuhäälingud</string>
+    <string name="trailers">Treilerid</string>
+    <string name="music">Muusika</string>
 </resources>

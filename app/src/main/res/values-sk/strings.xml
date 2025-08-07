@@ -560,4 +560,9 @@
     <string name="full_local_mode_desc">Priamo načíta všetko z YouTube bez použitia Piped.</string>
     <string name="authentication">Autentifikácia</string>
     <string name="updating_feed">Aktualizácia kanála…</string>
+    <string name="playback_pitch_semitone_error_input">Hodnota musí byť medzi -%1$.1f (minimum) a %1$.1f (maximum)</string>
+    <string name="gaming">Hry</string>
+    <string name="podcasts">Podcasty</string>
+    <string name="trailers">Upútavky</string>
+    <string name="music">Hudba</string>
 </resources>
