@@ -2,6 +2,7 @@ package com.github.libretube.services
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.media3.common.C
@@ -22,6 +23,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.enums.SbSkipOptions
+import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toastFromMainDispatcher
@@ -41,7 +43,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
-import java.io.IOException
 
 /**
  * Loads the selected videos audio in background mode with a notification area.
@@ -128,11 +129,9 @@ open class OnlinePlayerService : AbstractPlayerService() {
         streams = withContext(Dispatchers.IO) {
             try {
                 MediaServiceRepository.instance.getStreams(videoId).deArrow(videoId)
-            } catch (e: IOException) {
-                toastFromMainDispatcher(getString(R.string.unknown_error))
-                return@withContext null
-            } catch (e: Exception) {
-                toastFromMainDispatcher(e.message ?: getString(R.string.server_error))
+            }  catch (e: Exception) {
+                Log.e(TAG(), e.stackTraceToString())
+                toastFromMainDispatcher(e.localizedMessage.orEmpty())
                 return@withContext null
             }
         } ?: return

@@ -29,6 +29,7 @@ import com.github.libretube.db.obj.DownloadChapter
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
 import com.github.libretube.enums.NotificationId
+import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.extensions.getContentLength
 import com.github.libretube.extensions.parcelableExtra
@@ -125,11 +126,9 @@ class DownloadService : LifecycleService() {
                 withContext(Dispatchers.IO) {
                     MediaServiceRepository.instance.getStreams(videoId)
                 }
-            } catch (e: IOException) {
-                toastFromMainDispatcher(getString(R.string.unknown_error))
-                return@launch
             } catch (e: Exception) {
-                toastFromMainDispatcher(e.message ?: getString(R.string.server_error))
+                Log.e(TAG(), e.stackTraceToString())
+                toastFromMainDispatcher(e.localizedMessage.orEmpty())
                 return@launch
             }
 
