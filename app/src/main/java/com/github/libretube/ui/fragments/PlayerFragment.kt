@@ -923,8 +923,12 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             setVideoTrackTypeDisabled(true)
         }
 
-        // pause player if screen off and setting enabled
-        if (!isInteractive && PlayerHelper.pausePlayerOnScreenOffEnabled) {
+        val shouldPausePlayer =
+            (isInteractive && PlayerHelper.pauseOnQuit) ||
+                    (!isInteractive && PlayerHelper.pausePlayerOnScreenOffEnabled)
+
+        // pause player if screen off or app is put the background
+        if (shouldPausePlayer) {
             playerController.pause()
         }
 
