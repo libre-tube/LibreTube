@@ -15,39 +15,10 @@
         app:hint="@string/tooltip_options" />
 
     <LinearLayout
-        android:id="@+id/clone_playlist_container_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/CustomDialogTextInputLayout"
-            android:hint="@string/playlistUrl">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/playlist_url"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/clone_playlist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginEnd="20dp"
-            android:drawableStart="@drawable/ic_copy"
-            android:text="@string/clonePlaylist" />
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/create_playist_container_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="visible">
+        android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/CustomDialogTextInputLayout"
@@ -71,5 +42,33 @@
             android:text="@string/createNewPlaylist" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/clone_playlist_container_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/CustomDialogTextInputLayout"
+            android:hint="@string/playlistUrl">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/playlist_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/clone_playlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="20dp"
+            android:drawableStart="@drawable/ic_copy"
+            android:text="@string/clonePlaylist" />
+    </LinearLayout>
 
 </LinearLayout>
