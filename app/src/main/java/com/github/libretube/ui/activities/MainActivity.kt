@@ -119,22 +119,31 @@ class MainActivity : BaseActivity() {
         // manually apply additional padding for edge-to-edge compatibility
         // see https://developer.android.com/develop/ui/views/layout/edge-to-edge
         binding.root.onSystemInsets { _, systemBarInsets ->
-            with(binding.appBarLayout) {
-                setPadding(
-                    paddingLeft,
-                    systemBarInsets.top,
-                    paddingRight,
-                    paddingBottom
-                )
-            }
-            with (binding.bottomNav) {
-                setPadding(
-                    paddingLeft,
-                    paddingTop,
-                    paddingRight,
-                    systemBarInsets.bottom
-                )
-            }
+            // there's a possibility that the paddings are not being applied properly when
+            // exiting from player's fullscreen. Adding OnGlobalLayoutListener serves as
+            // a workaround for this issue
+            binding.root.viewTreeObserver.addOnGlobalLayoutListener(object:
+            ViewTreeObserver.OnGlobalLayoutListener{
+                override fun onGlobalLayout() {
+                    with(binding.appBarLayout) {
+                        setPadding(
+                            paddingLeft,
+                            systemBarInsets.top,
+                            paddingRight,
+                            paddingBottom
+                        )
+                    }
+                    with(binding.bottomNav) {
+                        setPadding(
+                            paddingLeft,
+                            paddingTop,
+                            paddingRight,
+                            systemBarInsets.bottom
+                        )
+                    }
+                    binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                }
+            })
         }
         // manually update the bottom bar height in the mini player transition
         binding.bottomNav.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
