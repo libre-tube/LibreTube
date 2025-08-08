@@ -34,7 +34,7 @@
     <string name="deletePlaylist">حذف قائمة التشغيل</string>
     <string name="areYouSure">حذف قائمة التشغيل؟</string>
     <string name="createPlaylist">إنشاء قائمة تشغيل</string>
-    <string name="playlistCreated">تم إنشاء قائمة التشغيل.</string>
+    <string name="playlistCreated">أُنشئت قائمة التشغيل.</string>
     <string name="playlistName">اسم قائمة التشغيل</string>
     <string name="success">انتهى.</string>
     <string name="fail">فشل ذريع :(</string>
@@ -568,4 +568,5 @@
     <string name="podcasts">بودكاست</string>
     <string name="trailers">الرائجة</string>
     <string name="music">الموسيقى</string>
+    <string name="createNewPlaylist">أنشئ قائمة تشغيل جديدة</string>
 </resources>
