@@ -563,4 +563,5 @@
     <string name="podcasts">Podcast</string>
     <string name="trailers">預告片</string>
     <string name="music">音樂</string>
+    <string name="createNewPlaylist">建立新播放清單</string>
 </resources>
