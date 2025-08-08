@@ -564,4 +564,5 @@
     <string name="podcasts">Podcasts</string>
     <string name="trailers">Trailer</string>
     <string name="music">Musik</string>
+    <string name="createNewPlaylist">Neue Playlist erstellen</string>
 </resources>
