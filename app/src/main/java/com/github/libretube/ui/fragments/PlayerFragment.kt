@@ -178,6 +178,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
     // Activity that's active during PiP, can be used for controlling its lifecycle.
     private var pipActivity: Activity? = null
+    // check if pip is entered via the dedicated button
+    private var isEnteringPiPMode = false
 
     private val mainActivity get() = activity as MainActivity
     private val windowInsetsControllerCompat
@@ -734,6 +736,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
         binding.relPlayerPip.setOnClickListener {
             PictureInPictureCompat.enterPictureInPictureMode(requireActivity(), pipParams)
+            isEnteringPiPMode = true
         }
 
         binding.relatedRecView.layoutManager = LinearLayoutManager(
@@ -914,8 +917,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         // check whether the screen is on
         val isInteractive = requireContext().getSystemService<PowerManager>()!!.isInteractive
 
-        // disable video stream since it's not needed when screen off or when PiP is not enabled
-        if (!isInteractive || !PlayerHelper.pipEnabled) {
+        // disable video stream since it's not needed when screen off or when PiP is not
+        // enabled, except when the user is intentionally entering PiP mode via the dedicated button
+        if ((!isInteractive || !PlayerHelper.pipEnabled) && !isEnteringPiPMode) {
             // disable the autoplay countdown while the screen is off or when PiP is not enabled
             setAutoPlayCountdownEnabled(false)
 
@@ -927,10 +931,13 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             (isInteractive && PlayerHelper.pauseOnQuit) ||
                     (!isInteractive && PlayerHelper.pausePlayerOnScreenOffEnabled)
 
-        // pause player if screen off or app is put the background
-        if (shouldPausePlayer) {
+        // pause player if screen off or app is put the background, except when
+        // the user is intentionally entering PiP mode via the dedicated button
+        if (shouldPausePlayer && !isEnteringPiPMode) {
             playerController.pause()
         }
+
+        isEnteringPiPMode = false
 
         super.onPause()
     }
