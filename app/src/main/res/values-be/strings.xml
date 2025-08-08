@@ -561,4 +561,10 @@
     <string name="full_local_mode_desc">Працаваць непасрэдна з YouTube, не выкарыстоўваючы Piped.</string>
     <string name="authentication">Аўтэнтыфікацыя</string>
     <string name="updating_feed">Абнаўленне стужкі…</string>
+    <string name="createNewPlaylist">Стварыць новы плэйліст</string>
+    <string name="playback_pitch_semitone_error_input">Значэнне павінна быць у дыяпазоне ад -%1$.1f (мінімум) да %1$.1f (максімум)</string>
+    <string name="gaming">Гульні</string>
+    <string name="podcasts">Падкасты</string>
+    <string name="trailers">Трэйлеры</string>
+    <string name="music">Музыка</string>
 </resources>
