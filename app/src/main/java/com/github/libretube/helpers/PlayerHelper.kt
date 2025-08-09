@@ -64,6 +64,8 @@ object PlayerHelper {
     private const val ROLE_FLAG_AUTO_GEN_SUBTITLE = C.ROLE_FLAG_SUPPLEMENTARY
     private const val MINIMUM_BUFFER_DURATION = 1000 * 10 // exo default is 50s
     const val WATCH_POSITION_TIMER_DELAY_MS = 1000L
+    const val FAST_FORWARD_INCREMENT = 2000L
+    const val FORWARD_INCREMENT_DELAY = 500L
 
     /**
      * The maximum amount of time to wait until the video starts playing: 10 minutes
