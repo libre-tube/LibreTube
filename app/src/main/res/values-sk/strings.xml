@@ -565,4 +565,5 @@
     <string name="podcasts">Podcasty</string>
     <string name="trailers">Upútavky</string>
     <string name="music">Hudba</string>
+    <string name="createNewPlaylist">Vytvoriť nový playlist</string>
 </resources>

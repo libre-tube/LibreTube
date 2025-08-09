@@ -565,4 +565,5 @@
     <string name="podcasts">Podcasts</string>
     <string name="trailers">Trailers</string>
     <string name="music">Musique</string>
+    <string name="createNewPlaylist">Créer une nouvelle playlist</string>
 </resources>
