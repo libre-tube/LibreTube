@@ -564,4 +564,5 @@
     <string name="podcasts">Taskuhäälingud</string>
     <string name="trailers">Treilerid</string>
     <string name="music">Muusika</string>
+    <string name="createNewPlaylist">Koosta uus esitusloend</string>
 </resources>
