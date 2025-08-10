@@ -319,14 +319,14 @@
     <string name="import_playlists">Importuj playlisty</string>
     <string name="export_playlists">Eksportuj playlisty</string>
     <string name="app_backup">Kopia ustawień aplikacji</string>
-    <string name="backup_restore_summary">Importuj lub eksportuj subskrypcje, playlisty, …</string>
+    <string name="backup_restore_summary">Importuj i eksportuj subskrypcje, playlisty, …</string>
     <string name="exportsuccess">Wyeksportowano.</string>
     <string name="proceed">Kontynuuj</string>
     <string name="privacy_alert">Ostrzeżenie o prywatności</string>
     <string name="username_email">Nie zaleca się używania adresu e-mail jako nazwy użytkownika. Kontynuować?</string>
     <string name="pinch_control">Gesty zmiany rozmiaru obrazu</string>
     <string name="pinch_control_summary">Użyj gestu rozciągnięcia/uszczypania, aby powiększyć/zmniejszyć rozmiar obrazu</string>
-    <string name="theme_monochrome">Monochromatyczny</string>
+    <string name="theme_monochrome">Minimalistyczny monochromatyczny</string>
     <string name="play_latest_videos">Odtwórz najnowsze filmy</string>
     <string name="nothing_selected">Nic nie zostało wybrane!</string>
     <string name="color_violet">Wszechstronny fiolet</string>
@@ -561,4 +561,7 @@
     <string name="local_feed_extraction">Lokalna ekstrakcja kanału</string>
     <string name="updating_feed">Aktualizowanie kanału …</string>
     <string name="show_upcoming_videos">Pokaż nadchodzące filmy</string>
+    <string name="createNewPlaylist">Utwórz nową playlistę</string>
+    <string name="playback_pitch_semitone_error_input">Wartość musi mieścić się w przedziale od -%1$.1f (minimum) do %1$.1f (maksimum)</string>
+    <string name="music">Muzyka</string>
 </resources>

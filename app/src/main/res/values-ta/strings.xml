@@ -559,4 +559,10 @@
     <string name="mode_of_operation">செயல்பாட்டு முறை</string>
     <string name="full_local_mode_desc">குழாய் பயன்படுத்தாமல், யூடியூப்பிலிருந்து எல்லாவற்றையும் நேரடியாகப் பெறுங்கள்.</string>
     <string name="show_upcoming_videos">வரவிருக்கும் வீடியோக்களைக் காண்பி</string>
+    <string name="createNewPlaylist">புதிய ஒளிச்சரம்</string>
+    <string name="gaming">கேமிங்</string>
+    <string name="podcasts">பாட்காஸ்டுகள்</string>
+    <string name="trailers">டிரெய்லர்கள்</string>
+    <string name="music">இசை</string>
+    <string name="playback_pitch_semitone_error_input">மதிப்பு -%1$.1f மற்றும் %1$.1f க்கு இடையில் இருக்க வேண்டும்</string>
 </resources>

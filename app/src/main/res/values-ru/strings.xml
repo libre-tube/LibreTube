@@ -561,4 +561,10 @@
     <string name="authentication">Аутентификация</string>
     <string name="full_local_mode_desc">Работать непосредственно с YouTube, не используя Piped.</string>
     <string name="full_local_mode">Полный локальный режим</string>
+    <string name="createNewPlaylist">Создать новый плейлист</string>
+    <string name="playback_pitch_semitone_error_input">Значение должно быть в диапазоне от -%1$.1f (минимум) до %1$.1f (максимум)</string>
+    <string name="gaming">Игры</string>
+    <string name="podcasts">Подкасты</string>
+    <string name="trailers">Трейлеры</string>
+    <string name="music">Музыка</string>
 </resources>
