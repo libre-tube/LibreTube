@@ -567,4 +567,5 @@
     <string name="podcasts">Подкасти</string>
     <string name="trailers">Трейлери</string>
     <string name="music">Музика</string>
+    <string name="createNewPlaylist">Створити новий список відтворення</string>
 </resources>
