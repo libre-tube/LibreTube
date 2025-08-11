@@ -560,4 +560,9 @@
     <string name="full_local_mode_desc">Recupera tutto direttamente da YouTube, senza usare Piped.</string>
     <string name="mode_of_operation">Modalità operativa</string>
     <string name="authentication">Autenticazione</string>
+    <string name="createNewPlaylist">Crea una nuova playlist</string>
+    <string name="playback_pitch_semitone_error_input">Il valore deve essere tra -%1$.1f (minimo) e %1$.1f (massimo)</string>
+    <string name="podcasts">Podcast</string>
+    <string name="trailers">Trailer</string>
+    <string name="music">Musica</string>
 </resources>
