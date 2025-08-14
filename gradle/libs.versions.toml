@@ -1,6 +1,6 @@
 [versions]
 appcompat = "1.7.1"
-core = "1.13.1"
+core = "1.17.0"
 documentfile = "1.1.0"
 gradle = "8.6.1"
 junit = "4.13.2"
