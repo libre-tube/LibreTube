@@ -10,13 +10,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="center">
 
-        <View
-            android:id="@id/exo_controls_background"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/exo_black_opacity_60"
-            android:alpha="0" />
-
         <View android:id="@id/exo_shutter"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -57,6 +50,13 @@
             android:paddingRight="@dimen/exo_error_message_text_padding_horizontal"
             android:paddingTop="@dimen/exo_error_message_text_padding_vertical"
             android:paddingBottom="@dimen/exo_error_message_text_padding_vertical"/>
+
+        <View
+            android:id="@id/exo_controls_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/exo_black_opacity_60"
+            android:alpha="0" />
 
     </androidx.media3.ui.AspectRatioFrameLayout>
 
