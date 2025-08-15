@@ -129,7 +129,8 @@
         android:layout_gravity="center"
         android:background="@android:color/transparent"
         android:gravity="center"
-        android:padding="20dp">
+        android:padding="20dp"
+        android:layoutDirection="ltr">
 
         <include
             android:id="@+id/seek_button_rewind"
