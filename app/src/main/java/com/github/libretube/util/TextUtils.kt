@@ -58,7 +58,7 @@ object TextUtils {
     fun String.parseDurationString(): Float? = parseTimeString(this)
 
     private fun parseTimeString(timeString: String): Float? {
-        if (timeString.isDigitsOnly()) return timeString.toLongOrNull()?.toFloat()
+        if (timeString.all { it.isDigit() }) return timeString.toLongOrNull()?.toFloat()
 
         if (timeString.all { it.isDigit() || ",.:".contains(it) }) {
             var secondsTotal = 0
@@ -79,7 +79,8 @@ object TextUtils {
                     secondsScoped *= 10
                     secondsScoped += char.digitToInt()
                 } else if (char == ':') {
-                    secondsTotal += secondsScoped * 60
+                    secondsTotal += secondsScoped
+                    secondsTotal *= 60
                     secondsScoped = 0
                 } else if (",.".contains(char)) {
                     secondsTotal += secondsScoped

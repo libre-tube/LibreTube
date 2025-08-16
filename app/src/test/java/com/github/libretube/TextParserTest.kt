@@ -14,5 +14,6 @@ class TextParserTest {
         assertEquals(15f * 60 + 20 + 0.25f, "15:20.25".parseDurationString())
         assertEquals(20f, "00:20".parseDurationString())
         assertEquals(60.02503f, "1:00.02503".parseDurationString())
+        assertEquals((1 * 60 * 60) + (3 * 60) + 40 + .251f, "1:03:40.251".parseDurationString())
     }
 }
