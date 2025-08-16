@@ -49,6 +49,7 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
+import androidx.media3.common.Tracks
 import androidx.media3.session.MediaController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
@@ -60,7 +61,6 @@ import com.github.libretube.api.obj.Subtitle
 import com.github.libretube.compat.PictureInPictureCompat
 import com.github.libretube.compat.PictureInPictureParamsCompat
 import com.github.libretube.constants.IntentData
-import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlayerCommand
@@ -142,14 +142,14 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
     // data and objects stored for the player
     private lateinit var streams: Streams
-    val isShort
-        get() = run {
-            val heightGreaterThanWidth =
-                ::streams.isInitialized && streams.videoStreams.firstOrNull()?.let {
-                    (it.height ?: 0) > (it.width ?: 0)
-                } == true
+    val isShort: Boolean
+        get() {
+            if (PlayingQueue.getCurrent()?.isShort == true) return true
+            if (!::playerController.isInitialized) return false
 
-            PlayingQueue.getCurrent()?.isShort == true || heightGreaterThanWidth
+            val currentVideoFormat = PlayerHelper.getCurrentVideoFormat(playerController)
+                ?: return false
+            return currentVideoFormat.height > currentVideoFormat.width
         }
 
     // if null, it's been set to automatic
@@ -267,6 +267,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             }
         }
 
+        var fullscreenOnShortsAlreadyDone = false
         override fun onPlaybackStateChanged(playbackState: Int) {
             // set the playback speed to one if having reached the end of a livestream
             if (playbackState == Player.STATE_BUFFERING && binding.player.isLive &&
@@ -305,6 +306,15 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             } else {
                 bufferingTimeoutTask?.let { handler.removeCallbacks(it) }
             }
+
+            if (playbackState == Player.STATE_READY && binding.playerMotionLayout.progress == 0f) {
+                if (PlayerHelper.autoFullscreenShortsEnabled && isShort && !fullscreenOnShortsAlreadyDone) {
+                    setFullscreen()
+                    fullscreenOnShortsAlreadyDone = true
+                }
+            }
+
+            if (playbackState == Player.STATE_ENDED) fullscreenOnShortsAlreadyDone = false
 
             super.onPlaybackStateChanged(playbackState)
         }
@@ -1140,12 +1150,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         dismissCommentsSheet()
 
         setPlayerDefaults()
-
-        if (PreferenceHelper.getBoolean(PreferenceKeys.AUTO_FULLSCREEN_SHORTS, false) &&
-            isShort && binding.playerMotionLayout.progress == 0f
-        ) {
-            setFullscreen()
-        }
 
         binding.player.apply {
             useController = false

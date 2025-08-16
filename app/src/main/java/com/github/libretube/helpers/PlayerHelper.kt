@@ -145,6 +145,12 @@ object PlayerHelper {
             false
         )
 
+    val autoFullscreenShortsEnabled: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.AUTO_FULLSCREEN_SHORTS,
+            false
+        )
+
     val relatedStreamsEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.RELATED_STREAMS,
@@ -645,9 +651,9 @@ object PlayerHelper {
             }
     }
 
-    fun getCurrentPlayedCaptionFormat(player: Player): Format? {
+    private fun getCurrentFormatByTrackType(player: Player, trackType: Int): Format? {
         for (trackGroup in player.currentTracks.groups) {
-            if (trackGroup.type != C.TRACK_TYPE_TEXT) continue
+            if (trackGroup.type != trackType) continue
 
             for (i in 0 until trackGroup.length) {
                 if (trackGroup.isTrackSelected(i)) return trackGroup.getTrackFormat(i)
@@ -655,6 +661,14 @@ object PlayerHelper {
         }
 
         return null
+    }
+
+    fun getCurrentPlayedCaptionFormat(player: Player): Format? {
+        return getCurrentFormatByTrackType(player, C.TRACK_TYPE_TEXT)
+    }
+
+    fun getCurrentVideoFormat(player: Player): Format? {
+        return getCurrentFormatByTrackType(player, C.TRACK_TYPE_VIDEO)
     }
 
     fun getSubtitleRoleFlags(subtitle: Subtitle?): Int {
