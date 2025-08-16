@@ -405,10 +405,10 @@ abstract class CustomExoPlayerView(
         binding.seekButtonRewind.rewindBTN.setOnClickListener {
             player?.seekBy(-PlayerHelper.seekIncrement)
         }
-        if (PlayerHelper.doubleTapToSeek) return
 
-        listOf(binding.seekButtonForward.forwardBTN, binding.seekButtonRewind.rewindBTN).forEach {
-            it.isVisible = true
+        if (!PlayerHelper.doubleTapToSeek) {
+            binding.seekButtonForward.forwardBTN.isVisible = !isPlayerLocked
+            binding.seekButtonRewind.rewindBTN.isVisible = !isPlayerLocked
         }
     }
 
