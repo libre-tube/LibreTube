@@ -559,4 +559,10 @@
     <string name="local_feed_extraction_summary">خوراک را مستقیماً از یوتیوب دریافت کنید. ممکن است به طور قابل توجهی کندتر باشد.</string>
     <string name="updating_feed">به‌روزرسانی خوراک …</string>
     <string name="show_upcoming_videos">نمایش ویدیوهای آینده</string>
+    <string name="createNewPlaylist">ایجاد لیست پخش جدید</string>
+    <string name="playback_pitch_semitone_error_input">مقدار باید بین -%1$.1f (حداقل) و %1$.1f (حداکثر) باشد</string>
+    <string name="gaming">بازی</string>
+    <string name="podcasts">پادکست‌ها</string>
+    <string name="trailers">تریلرها</string>
+    <string name="music">موسیقی</string>
 </resources>
