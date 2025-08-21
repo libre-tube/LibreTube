@@ -564,4 +564,7 @@
     <string name="createNewPlaylist">Utwórz nową playlistę</string>
     <string name="playback_pitch_semitone_error_input">Wartość musi mieścić się w przedziale od -%1$.1f (minimum) do %1$.1f (maksimum)</string>
     <string name="music">Muzyka</string>
+    <string name="gaming">Granie</string>
+    <string name="podcasts">Podkasty</string>
+    <string name="trailers">Zapowiedzi</string>
 </resources>
