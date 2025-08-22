@@ -559,4 +559,10 @@
     <string name="full_local_mode">Alveg staðbundinn hamur</string>
     <string name="full_local_mode_desc">Sækja allt beint frá YouTube, á þess að nota Piped.</string>
     <string name="authentication">Auðkenning</string>
+    <string name="createNewPlaylist">Útbúa nýjan spilunarlista</string>
+    <string name="playback_pitch_semitone_error_input">Gildið þarf að vara á milli -%1$.1f (lágmark) og %1$.1f (hámark)</string>
+    <string name="gaming">Leikir</string>
+    <string name="podcasts">Hlaðvörp</string>
+    <string name="trailers">Kynningarstiklur</string>
+    <string name="music">Tónlist</string>
 </resources>
