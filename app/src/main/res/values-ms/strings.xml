@@ -95,4 +95,5 @@
     <string name="category_interaction">Peringatan interaksi</string>
     <string name="category_interaction_summary">Apabila terdapat peringatan ringkas untuk memberi suka, melanggan atau mengikuti di pertengahan kandungan. Jika panjang atau mengenai sesuatu yang khusus, ia sepatutnya dikategorikan sebagai promosi kendiri</string>
     <string name="category_intro">Jeda/Animasi Intro</string>
+    <string name="createNewPlaylist">Buat senarai baru</string>
 </resources>
