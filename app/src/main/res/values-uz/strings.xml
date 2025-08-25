@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="startpage">Bosh menyu</string>
+    <string name="subscriptions">Obunalar</string>
 </resources>
