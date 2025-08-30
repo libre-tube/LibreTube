@@ -3,14 +3,13 @@ package com.github.libretube.helpers
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.widget.ImageView
 import androidx.core.net.toUri
 import coil3.ImageLoader
-import coil3.asDrawable
 import coil3.disk.DiskCache
 import coil3.disk.directory
+import coil3.load
 import coil3.network.okhttp.OkHttpNetworkFetcherFactory
 import coil3.request.CachePolicy
 import coil3.request.ImageRequest
@@ -107,11 +106,13 @@ object ImageHelper {
             if (urlToLoad.startsWith(HTTP_SCHEME) && !isCached(urlToLoad)) return
         }
 
-        getImageWithCallback(target.context, urlToLoad) { result ->
-            // set the background to white for transparent images
-            if (whiteBackground) target.setBackgroundColor(Color.WHITE)
-
-            target.setImageDrawable(result)
+        target.load(urlToLoad) {
+            listener(
+                onSuccess = { _, _ ->
+                    // set the background to white for transparent images
+                    if (whiteBackground) target.setBackgroundColor(Color.WHITE)
+                }
+            )
         }
     }
 
@@ -134,17 +135,6 @@ object ImageHelper {
             .build()
 
         return imageLoader.execute(request).image?.toBitmap()
-    }
-
-    private fun getImageWithCallback(context: Context, url: String?, onSuccess: (Drawable) -> Unit) {
-        val request = ImageRequest.Builder(context)
-            .data(url)
-            .target { drawable ->
-                onSuccess(drawable.asDrawable(context.resources))
-            }
-            .build()
-
-        imageLoader.enqueue(request)
     }
 
     /**
