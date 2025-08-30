@@ -31,14 +31,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/piped" />
 
-            <RadioButton
-                android:id="@+id/custom_instance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                tools:text="kavin.rocks"
-                tools:visibility="visible" />
-
         </RadioGroup>
 
         <LinearLayout
