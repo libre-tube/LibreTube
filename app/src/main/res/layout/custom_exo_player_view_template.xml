@@ -124,4 +124,12 @@
         android:indeterminate="true"
         android:visibility="gone" />
 
+    <com.github.libretube.ui.views.FastForwardView
+        android:id="@+id/fastForwardView"
+        android:visibility="gone"
+        android:layout_marginTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"/>
+
 </merge>
