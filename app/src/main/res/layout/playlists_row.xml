@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".45" />
+        app:layout_constraintGuide_percent="0.45" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_playlist_thumbnail"
@@ -60,7 +60,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
                     android:textColor="?colorControlNormal"
+                    android:textStyle="bold"
                     tools:ignore="RtlSymmetry"
                     tools:text="20" />
 
@@ -76,7 +78,8 @@
         android:layout_marginStart="8dp"
         android:ellipsize="end"
         android:maxLines="2"
-        android:textSize="18sp"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/bookmark_playlist"
         app:layout_constraintStart_toEndOf="@+id/card_playlist_thumbnail"
         app:layout_constraintTop_toTopOf="parent" />
@@ -86,11 +89,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="4dp"
         android:ellipsize="end"
         android:maxLines="2"
         android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@id/bookmark_playlist"
+        app:layout_constraintEnd_toEndOf="@+id/playlist_title"
         app:layout_constraintStart_toEndOf="@+id/card_playlist_thumbnail"
         app:layout_constraintTop_toBottomOf="@+id/playlist_title" />
 

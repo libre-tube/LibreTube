@@ -21,28 +21,31 @@
             <com.google.android.material.bottomsheet.BottomSheetDragHandleView
                 android:id="@+id/drag_handle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="20dp"
+                android:paddingTop="28dp" />
 
             <LinearLayout
                 android:id="@+id/bottom_sheet_title_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="12dp">
+                android:paddingHorizontal="10dp"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    style="@style/TextAppearance.Material3.ActionBar.Title"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
                     android:text="@string/add_to_group"
-                    android:textSize="27sp" />
-
-                <com.google.android.material.divider.MaterialDivider
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/groupsRV"
@@ -56,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginVertical="12dp">
+                android:paddingVertical="12dp">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/cancel"

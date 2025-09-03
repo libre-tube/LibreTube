@@ -30,7 +30,9 @@
                 <TextView
                     android:id="@+id/featuredTV"
                     style="@style/HomeCategoryTitle"
-                    android:text="@string/featured" />
+                    android:text="@string/featured"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/featuredRV"
@@ -46,7 +48,8 @@
                 <TextView
                     android:id="@+id/watchingTV"
                     style="@style/HomeCategoryTitle"
-                    android:text="@string/continue_watching" />
+                    android:text="@string/continue_watching"
+                    android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/watchingRV"
@@ -62,7 +65,8 @@
                 <TextView
                     android:id="@+id/trendingTV"
                     style="@style/HomeCategoryTitle"
-                    android:text="@string/trending" />
+                    android:text="@string/trending"
+                    android:textStyle="bold" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -84,7 +88,8 @@
                 <TextView
                     android:id="@+id/bookmarksTV"
                     style="@style/HomeCategoryTitle"
-                    android:text="@string/bookmarks" />
+                    android:text="@string/bookmarks"
+                    android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/bookmarksRV"
@@ -98,7 +103,8 @@
                 <TextView
                     android:id="@+id/playlistsTV"
                     style="@style/HomeCategoryTitle"
-                    android:text="@string/playlists" />
+                    android:text="@string/playlists"
+                    android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/playlistsRV"

@@ -45,8 +45,8 @@
 
                         <com.google.android.material.imageview.ShapeableImageView
                             android:id="@+id/channel_image"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
                             android:layout_gravity="center"
                             app:shapeAppearance="@style/CircleImageView" />
 
@@ -66,7 +66,7 @@
                                 android:layout_marginTop="3.5dp"
                                 android:drawablePadding="3dp"
                                 android:ellipsize="end"
-                                android:maxLines="1"
+                                android:maxLines="2"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
                                 tools:text="Channel Name" />
@@ -78,18 +78,19 @@
                                 android:layout_gravity="start"
                                 android:maxLines="1"
                                 android:text="@string/app_name"
-                                android:textSize="12sp" />
+                                android:textSize="14sp" />
 
                         </LinearLayout>
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/channel_subscribe"
-                            style="@style/PlayerActionsButton"
+                            style="@style/Widget.Material3.Button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:stateListAnimator="@null"
                             android:text="@string/subscribe"
                             android:textSize="12sp"
+                            android:textStyle="bold"
                             tools:targetApi="m" />
 
                     </LinearLayout>

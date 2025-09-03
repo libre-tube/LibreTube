@@ -26,6 +26,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:textSize="16sp"
+        android:textStyle="bold"
         tools:text="Channel Name" />
 
     <com.google.android.material.button.MaterialButton
@@ -38,14 +39,14 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/subscription_subscribe"
-        style="@style/Widget.Material3.Button.ElevatedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginEnd="8dp"
         android:stateListAnimator="@null"
         android:text="@string/unsubscribe"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textStyle="bold"
+        style="@style/Widget.Material3.Button"
         android:textSize="12sp"
         app:cornerRadius="20dp"
         app:elevation="10dp" />
