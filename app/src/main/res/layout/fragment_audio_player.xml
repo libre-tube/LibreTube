@@ -137,6 +137,7 @@
                 style="@style/TextViewMarquee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:textSize="24sp" />
 
             <TextView
@@ -365,6 +366,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:paddingHorizontal="8dp"
+            android:textStyle="bold"
             android:paddingVertical="15dp" />
 
         <ImageView

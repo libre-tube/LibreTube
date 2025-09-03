@@ -30,6 +30,71 @@
                 android:layout_height="wrap_content"
                 android:animateLayoutChanges="true" />
 
+            <LinearLayout
+                android:id="@+id/player_channel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/rounded_ripple"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/player_channelImage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="4dp"
+                    app:shapeAppearance="@style/CircleImageView" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:layoutDirection="locale"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/player_channelName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/player_channelSubCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textSize="12sp"
+                        tools:text="2.5M subscribers" />
+
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/player_subscribe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/subscribe"
+                    android:textStyle="bold"
+                    style="@style/Widget.Material3.Button"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/alternativeTrendingRec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,68 +152,6 @@
                 </LinearLayout>
 
             </HorizontalScrollView>
-
-            <LinearLayout
-                android:id="@+id/player_channel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginVertical="10dp"
-                android:background="@drawable/rounded_ripple"
-                android:orientation="horizontal"
-                android:padding="5dp">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/player_channelImage"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="4dp"
-                    app:shapeAppearance="@style/CircleImageView" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:layoutDirection="locale"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/player_channelName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/player_channelSubCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:textSize="11sp"
-                        tools:text="2.5M subscribers" />
-
-                </LinearLayout>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/player_subscribe"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/subscribe"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/alternativeTrendingRec"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/comments_toggle"
@@ -254,6 +257,7 @@
         android:paddingHorizontal="8dp"
         android:paddingVertical="15dp"
         android:visibility="gone"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/play_imageView"
         app:layout_constraintEnd_toStartOf="@+id/play_imageView"
         app:layout_constraintStart_toEndOf="@+id/player"

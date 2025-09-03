@@ -54,7 +54,6 @@
                     android:paddingHorizontal="6dp"
                     android:paddingVertical="2dp"
                     android:textColor="@color/duration_text_color"
-                    android:textSize="11sp"
                     tools:text="05:36" />
 
             </androidx.cardview.widget.CardView>
@@ -109,7 +108,9 @@
         android:textAlignment="viewStart"
         app:layout_constraintEnd_toStartOf="@id/download_badge"
         app:layout_constraintStart_toEndOf="@id/thumbnail_card"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/video_info"
@@ -121,7 +122,8 @@
         android:textAlignment="viewStart"
         app:layout_constraintEnd_toStartOf="@id/download_badge"
         app:layout_constraintStart_toEndOf="@id/thumbnail_card"
-        app:layout_constraintTop_toBottomOf="@id/video_title" />
+        app:layout_constraintTop_toBottomOf="@id/video_title"
+        android:textSize="12sp" />
 
     <ImageView
         android:id="@+id/download_badge"
@@ -151,14 +153,14 @@
             android:id="@+id/channel_image_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="13.5dp"
             android:layout_gravity="center"
-            android:layout_marginEnd="10dp">
+            android:layout_marginEnd="10dp"
+            app:cardCornerRadius="13.5dp">
 
             <ImageView
                 android:id="@+id/channel_image"
-                android:layout_width="27dp"
-                android:layout_height="27dp" />
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
 
         </androidx.cardview.widget.CardView>
 
@@ -168,20 +170,23 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:ellipsize="end"
+            android:maxLines="1"
             tools:text="Uploader name"
-            android:maxLines="1" />
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/file_size"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:ellipsize="end"
             android:maxLines="2"
+            android:textAlignment="viewEnd"
+            android:visibility="gone"
             tools:text="55MB/2050MB"
             tools:visibility="visible"
-            android:textAlignment="viewEnd" />
+            android:textSize="12sp" />
 
     </LinearLayout>
 

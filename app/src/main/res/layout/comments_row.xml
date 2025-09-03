@@ -18,8 +18,8 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/commentor_image"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginEnd="16dp"
             android:background="@android:color/darker_gray"
             app:shapeAppearance="@style/CircleImageView"
@@ -44,13 +44,14 @@
                     android:maxLines="2"
                     android:textAlignment="viewStart"
                     android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="14sp"
+                    android:textSize="12dp"
                     tools:text="Octacat" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" • "
+                    android:textSize="12dp"
                     tools:ignore="HardcodedText" />
 
                 <TextView
@@ -61,12 +62,12 @@
                     android:maxLines="2"
                     android:textAlignment="viewStart"
                     android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="14sp"
+                    android:textSize="12dp"
                     tools:text="10h ago" />
 
                 <ImageView
                     android:id="@+id/verified_imageView"
-                    android:layout_width="16dp"
+                    android:layout_width="14dp"
                     android:layout_height="16dp"
                     android:layout_marginStart="4dp"
                     android:visibility="gone"
@@ -75,8 +76,8 @@
 
                 <ImageView
                     android:id="@+id/pinned_imageView"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
                     android:layout_marginStart="4dp"
                     android:visibility="gone"
                     app:srcCompat="@drawable/ic_pinned"
@@ -85,6 +86,7 @@
 
             <TextView
                 android:id="@+id/comment_text"
+                style="@style/BaseTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -92,7 +94,7 @@
                 android:focusable="false"
                 android:textAlignment="viewStart"
                 android:textIsSelectable="true"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 tools:text="Comment Text" />
 
             <LinearLayout
@@ -109,14 +111,15 @@
                     android:drawablePadding="6dp"
                     android:gravity="center_vertical"
                     android:includeFontPadding="false"
+                    android:textStyle="bold"
                     app:drawableStartCompat="@drawable/ic_thumb_up"
                     app:drawableStartDimen="16dp"
-                    tools:text="1.2k" />
+                    tools:text="1.2K" />
 
                 <ImageView
                     android:id="@+id/hearted_imageView"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
                     android:layout_marginEnd="8dp"
                     android:visibility="gone"
                     app:srcCompat="@drawable/ic_hearted"
@@ -135,6 +138,7 @@
                     android:id="@+id/replies_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
                     android:drawablePadding="6dp"
                     android:gravity="center_vertical"
                     android:includeFontPadding="false"
@@ -142,6 +146,7 @@
                     app:drawableStartCompat="@drawable/ic_comment"
                     app:drawableStartDimen="16dp"
                     tools:text="53"
+                    android:textStyle="bold"
                     tools:visibility="visible" />
 
             </LinearLayout>

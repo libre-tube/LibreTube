@@ -9,8 +9,8 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/subscription_channel_image"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginStart="8dp"
         app:shapeAppearance="@style/CircleImageView" />
@@ -25,6 +25,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:textSize="16sp"
+        android:textStyle="bold"
         tools:text="Channel Name" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
