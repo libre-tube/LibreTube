@@ -43,7 +43,7 @@
     <string name="playlists">Afspeellijsten</string>
     <string name="okay">Oké</string>
     <string name="history">Geschiedenis</string>
-    <string name="search_history">Zoekgeschiedenis</string>
+    <string name="search_history">Zoek­geschiedenis</string>
     <string name="clear_history">Geschiedenis wissen</string>
     <string name="music_songs">YouTube Music - Nummers</string>
     <string name="music_videos">YouTube Music - Video\'s</string>
@@ -150,8 +150,8 @@
     <string name="audio">Audio</string>
     <string name="video">Video</string>
     <string name="downloading">Downloaden…</string>
-    <string name="player_autoplay">Automatisch afspelen</string>
-    <string name="instance_frontend_url">URL naar instantie-front-end</string>
+    <string name="player_autoplay">Auto-afspelen</string>
+    <string name="instance_frontend_url">URL naar instantie-front-end (optioneel)</string>
     <string name="quality">Kwaliteit</string>
     <string name="behavior">Gedrag</string>
     <string name="player_summary">Standaardwaarden en spelersgedrag</string>
@@ -296,7 +296,7 @@
     <string name="repeat_mode">Herhalings­modus</string>
     <string name="network_wifi">Enkel via wifi</string>
     <string name="no_subtitles_available">Geen ondertitels beschikbaar</string>
-    <string name="backup_restore">Back-up en herstellen</string>
+    <string name="backup_restore">Back-up en herstel</string>
     <string name="copied_to_clipboard">Gekopieerd naar klembord</string>
     <string name="play_all">Alles afspelen</string>
     <string name="captions_size">Ondertitelings­grootte</string>
@@ -392,7 +392,7 @@
     <string name="trending">Nu trending</string>
     <string name="playingOnBackground">Afspelen op achtergrond…</string>
     <string name="no_comments_available">Deze video heeft geen opmerkingen.</string>
-    <string name="backup_restore_summary">Importeren en exporteren van gegevens</string>
+    <string name="backup_restore_summary">Importeer en exporteer abonnementen, afspeel­lĳsten, …</string>
     <string name="add_to_bookmarks">Toevoegen aan bladwijzers</string>
     <string name="auto_fullscreen_shorts">Automatisch volledig scherm bij korte video\'s</string>
     <string name="change_playlist_description">Beschrijving van afspeellijst aanpassen</string>
@@ -418,7 +418,7 @@
     <string name="confirm_unsubscribing_summary">Toont een bevestigings­dialoog voor het deabonneren</string>
     <string name="sb_custom_colors_summary">Schakelt aangepaste kleuren voor SponsorBlock-segmenten in</string>
     <string name="all_caught_up_summary">U heeft alle nieuwe video\'s gezien</string>
-    <string name="all_caught_up">U bent helemaal bij</string>
+    <string name="all_caught_up">Helemaal bĳ</string>
     <string name="play_latest_videos">Nieuwste video\'s afspelen</string>
     <string name="failed_fetching_instances">Kon beschikbare instanties niet ophalen.</string>
     <string name="playing_next">Volgende afspelen over %1$s</string>
@@ -460,9 +460,9 @@
     <string name="play_automatically_summary">Start het afspelen automatisch bij het selecteren van een video</string>
     <string name="emptyPlaylistDescription">De afspeellijstbeschrijving kan niet leeg zijn</string>
     <string name="swipe_controls_summary">Veeg tijdens volledig scherm om de helderheid en het volume aan te passen</string>
-    <string name="hls_instead_of_dash_summary">Gebruik HLS in plaats van DASH (zal langzamer zijn, niet aanbevolen)</string>
+    <string name="hls_instead_of_dash_summary">Gebruik HLS in plaats van DASH voor het streamen van media. Probeer deze optie om te schakelen als het afspelen van video\'s niet werkt.</string>
     <string name="double_tap_seek_summary">Tik twee keer links of rechts om de speler terug of vooruit te spoelen</string>
-    <string name="username_email">Doorgaan met een e-mailadres dat niet wordt aanbevolen?</string>
+    <string name="username_email">Het gebruik van een e-mail­adres als gebruikers­naam wordt afgeraden. Toch doorgaan?</string>
     <string name="custom_playback_speed_summary">Gebruik een andere afspeelsnelheid dan voor de normale speler</string>
     <string name="lbry_hls_summary">Gebruik LBRY HLS voor streaming indien beschikbaar</string>
     <string name="choose_instance_long">Kies hieronder een Piped-instantie die je wilt gebruiken. De Piped-instantie fungeert als tussenpersoon tussen jou en YouTube. Deze instanties bevinden zich op verschillende fysieke locaties - aangegeven door hun vlag(gen). Instanties die fysiek dichter bij jou in de buurt zijn, zijn waarschijnlijk sneller dan instanties die dat niet zijn. Je kunt de instantie die je gebruikt op elk moment wijzigen in de instellingen.</string>
@@ -541,4 +541,27 @@
     <string name="audio_codecs">Audio­codecs</string>
     <string name="crashlog">Crash­logboek</string>
     <string name="view_count">%1$s weergaven</string>
+    <string name="createNewPlaylist">Nieuwe afspeel­lĳst aan­maken</string>
+    <string name="playback_pitch_semitone_error_input">Waarde moet liggen tussen -%1$.1f (minimum) en %1$.1f (maximum)</string>
+    <string name="import_watch_history_desc">Houd er rekening mee dat niet alles wordt geïmporteerd vanwege de beperkte export­gegevens van YouTube.</string>
+    <string name="never_show_again">Dit nooit meer tonen</string>
+    <string name="update_information">Update-informatie</string>
+    <string name="mode_of_operation">Werkings­wĳze</string>
+    <string name="import_format_list_of_urls">Lijst met url\'s of video-id\'s</string>
+    <string name="local_ryd">Lokale extractor voor Return Youtube Dislike</string>
+    <string name="local_ryd_summary">Haal direct dislike-informatie op van https://returnyoutubedislikeapi.com</string>
+    <string name="dialog_play_offline_title">Er is een lokale versie van deze video beschikbaar.</string>
+    <string name="dialog_play_offline_body">Wilt u de video vanuit de download­map afspelen?</string>
+    <string name="updating_feed">Feed bĳwerken…</string>
+    <string name="full_local_mode">Volledige lokale modus</string>
+    <string name="full_local_mode_desc">Haal alles recht­streeks op van YouTube, zonder Piped te gebruiken.</string>
+    <string name="authentication">Authenticatie</string>
+    <string name="local_feed_extraction">Lokale feed-extractie</string>
+    <string name="show_upcoming_videos">Aan­komende video\'s tonen</string>
+    <string name="delete_only_watched_videos">Enkel al bekeken video\'s verwĳderen</string>
+    <string name="local_feed_extraction_summary">Haal de feed recht­streeks op van YouTube. Dit kan aanzienlĳk langzamer zijn.</string>
+    <string name="gaming">Gaming</string>
+    <string name="podcasts">Podcasts</string>
+    <string name="trailers">Trailers</string>
+    <string name="music">Muziek</string>
 </resources>
