@@ -157,7 +157,7 @@
     <string name="pauseOnScreenOff">Pausa automática</string>
     <string name="pauseOnScreenOff_summary">Pausar el reproductor cuando se apaga la pantalla</string>
     <string name="clonePlaylist">Clonar lista de reproducción</string>
-    <string name="reset">Restaurar los valores predeterminados</string>
+    <string name="reset">Restaurar valores predeterminados</string>
     <string name="reset_message">¿Restablecer todos los ajustes y cerrar la sesión\?</string>
     <string name="account">Cuenta</string>
     <string name="restore">Restaurar</string>
@@ -279,7 +279,7 @@
     <string name="alternative_videos_layout">Compactar Tendencias y Suscripciones</string>
     <string name="defaultIconLight">Predeterminado claro</string>
     <string name="confirm_unsubscribe">¿Seguro que quieres anular tu suscripción a %1$s\?</string>
-    <string name="confirm_unsubscribing">Confirmar anulaciones de suscripción</string>
+    <string name="confirm_unsubscribing">Confirmar desuscripción</string>
     <string name="confirm_unsubscribing_summary">Mostrar un aviso para confirmar antes de anular la suscripción</string>
     <string name="playlistCloned">Lista clonada</string>
     <string name="play_all">Reproducir todo</string>
@@ -321,15 +321,15 @@
     <string name="app_backup">Respaldo de la aplicación</string>
     <string name="pinch_control">Pellizco</string>
     <string name="pinch_control_summary">Usa el pellizco para acercar/alejar</string>
-    <string name="theme_monochrome">Monocromo Minimalista</string>
-    <string name="backup_restore_summary">Importar/exportar suscripciones, listas, …</string>
+    <string name="theme_monochrome">Monocromo minimalista</string>
+    <string name="backup_restore_summary">Importar y exportar suscripciones, listas, …</string>
     <string name="exportsuccess">Exportado.</string>
     <string name="privacy_alert">Alerta de privacidad</string>
     <string name="proceed">Continuar</string>
     <string name="username_email">No se recomienda utilizar una dirección de correo electrónico como nombre de usuario. ¿Proceder de todos modos?</string>
     <string name="play_latest_videos">Reproducir los últimos videos</string>
     <string name="nothing_selected">¡Nada seleccionado!</string>
-    <string name="color_violet">Violeta Versátil</string>
+    <string name="color_violet">Violeta versátil</string>
     <string name="failed_fetching_instances">No se pudieron obtener las instancias disponibles.</string>
     <string name="hide_watched_from_feed">Ocultar los vídeos ya vistos</string>
     <string name="playlistUrl">URL de la lista de reproducción</string>
@@ -361,7 +361,7 @@
     <string name="custom_playback_speed">Velocidad personalizada</string>
     <string name="custom_playback_speed_summary">Utilice una velocidad de reproducción diferente a la del reproductor normal</string>
     <string name="category">Categoría</string>
-    <string name="normal_views">%1$s reproducciones%2$s</string>
+    <string name="normal_views">%1$s vistas%2$s</string>
     <string name="stats_for_nerds">Estadísticas para frikis</string>
     <string name="video_id">ID del vídeo</string>
     <string name="autoplay_countdown">Cuenta regresiva</string>
@@ -521,7 +521,7 @@
     <string name="also_clear_watch_positions">Borre también las posiciones de visualización</string>
     <string name="external_player">Reproductor externo</string>
     <string name="comments_count">Comentarios (%1$s)</string>
-    <string name="show_updates">Comprobar las actualizaciones automáticamente</string>
+    <string name="show_updates">Comprobar actualizaciones automáticamente</string>
     <string name="albums">Álbumes</string>
     <string name="import_temp_playlist_summary">¿Desea crear una nueva lista de reproducción llamada \'%1$s\'? La lista de reproducción contendrá %2$d vídeos.</string>
     <string name="import_temp_playlist">¿Importar lista de reproducción temporal?</string>
@@ -540,7 +540,7 @@
     <string name="import_watch_history">Importa tu historial de visualización</string>
     <string name="import_watch_history_desc">Por favor, tenga en cuenta que no se importará todo debido a los datos de exportación limitados de YouTube.</string>
     <string name="audio_codecs">Códecs de audio</string>
-    <string name="view_count">%1$s visualizaciones</string>
+    <string name="view_count">%1$s vistas</string>
     <string name="dialog_play_offline_body">¿Te gustaría reproducir el video de la carpeta de descarga?</string>
     <string name="dialog_play_offline_title">Se dispone de una versión local de este vídeo.</string>
     <string name="upcoming">Próximamente</string>
@@ -559,4 +559,10 @@
     <string name="updating_feed">Actualizando feed …</string>
     <string name="full_local_mode_desc">Obtenga todo directamente de YouTube, sin utilizar Piped.</string>
     <string name="authentication">Autentificación</string>
+    <string name="createNewPlaylist">Crear nueva lista de reproducción</string>
+    <string name="podcasts">Podcasts</string>
+    <string name="trailers">Tráileres</string>
+    <string name="music">Música</string>
+    <string name="playback_pitch_semitone_error_input">El valor debe estar entre -%1$.1f (mínimo) y %1$.1f (máximo)</string>
+    <string name="gaming">Videojuegos</string>
 </resources>
