@@ -361,7 +361,7 @@
     <string name="custom_playback_speed">Velocidad personalizada</string>
     <string name="custom_playback_speed_summary">Utilice una velocidad de reproducción diferente a la del reproductor normal</string>
     <string name="category">Categoría</string>
-    <string name="normal_views">%1$s reproducciones%2$s</string>
+    <string name="normal_views">%1$s vistas%2$s</string>
     <string name="stats_for_nerds">Estadísticas para frikis</string>
     <string name="video_id">ID del video</string>
     <string name="autoplay_countdown">Cuenta regresiva</string>
@@ -477,4 +477,5 @@
     <string name="filename_too_long">¡El nombre es demasiado largo!</string>
     <string name="sponsorblock_user_id">ID de usuario SponsorBlock</string>
     <string name="donate">Donar</string>
+    <string name="view_count">%1$s vistas</string>
 </resources>
