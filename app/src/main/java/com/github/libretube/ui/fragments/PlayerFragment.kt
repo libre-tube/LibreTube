@@ -67,6 +67,7 @@ import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.enums.ShareObjectType
+import com.github.libretube.extensions.anyChildFocused
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.serializableExtra
@@ -416,7 +417,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentPlayerBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
-        SoftwareKeyboardControllerCompat(view).hide()
 
         // manually apply additional padding for edge-to-edge compatibility
         activity?.getSystemInsets()?.let { systemBars ->
@@ -617,6 +617,11 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                     commonPlayerViewModel.setSheetExpand(true)
                     mainMotionLayout.progress = 0F
                     changeOrientationMode()
+
+                    // clear search bar focus to avoid keyboard popups
+                    with(mainActivity.searchView) {
+                        if (anyChildFocused()) clearFocus()
+                    }
                 } else if (currentId == transitionEndId) {
                     commonPlayerViewModel.isMiniPlayerVisible.value = true
                     // disable captions temporarily
