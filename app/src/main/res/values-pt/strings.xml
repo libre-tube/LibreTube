@@ -329,7 +329,7 @@
     <string name="swipe_controls_summary">Deslize para ajustar o brilho e o volume no modo de ecrã completo</string>
     <string name="all_caught_up">É tudo por hoje</string>
     <string name="nothing_selected">Nada selecionado!</string>
-    <string name="color_violet">Violeta</string>
+    <string name="color_violet">Violeta versátil</string>
     <string name="failed_fetching_instances">Não foi possível obter as instâncias disponíveis.</string>
     <string name="hide_watched_from_feed">Ocultar vídeos já vistos</string>
     <string name="playlistUrl">URL da lista de reprodução</string>
@@ -559,4 +559,10 @@
     <string name="full_local_mode">Modo local</string>
     <string name="full_local_mode_desc">Obter vídeos diretamente do YouTube, sem utilizar Piped.</string>
     <string name="authentication">Autenticação</string>
+    <string name="createNewPlaylist">Nova lista de reprodução</string>
+    <string name="playback_pitch_semitone_error_input">O valor tem que estar entre -%1$.1f (mínimo) e %1$.1f (máximo)</string>
+    <string name="gaming">Jogos</string>
+    <string name="podcasts">Podcasts</string>
+    <string name="trailers">Trailers</string>
+    <string name="music">Músicas</string>
 </resources>
