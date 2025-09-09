@@ -51,7 +51,7 @@ object PlaylistsHelper {
 
     suspend fun getPlaylist(playlistId: String): Playlist {
         // load locally stored playlists with the auth api
-        return when (getPrivatePlaylistType(playlistId)) {
+        return when (getPlaylistType(playlistId)) {
             PlaylistType.PUBLIC -> MediaServiceRepository.instance.getPlaylist(playlistId)
             else -> playlistsRepository.getPlaylist(playlistId)
         }.apply {
@@ -94,7 +94,7 @@ object PlaylistsHelper {
         return if (loggedIn) PlaylistType.PRIVATE else PlaylistType.LOCAL
     }
 
-    private fun getPrivatePlaylistType(playlistId: String): PlaylistType {
+    fun getPlaylistType(playlistId: String): PlaylistType {
         return if (playlistId.isDigitsOnly()) {
             PlaylistType.LOCAL
         } else if (playlistId.matches(pipedPlaylistRegex)) {

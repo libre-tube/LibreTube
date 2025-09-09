@@ -8,7 +8,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
-import com.github.libretube.databinding.PlaylistBookmarkRowBinding
 import com.github.libretube.databinding.PlaylistsRowBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.PlaylistBookmark
@@ -23,24 +22,16 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PlaylistBookmarkAdapter(
-    private val bookmarkMode: BookmarkMode = BookmarkMode.FRAGMENT
-) : ListAdapter<PlaylistBookmark, PlaylistBookmarkViewHolder>(
+class PlaylistBookmarkAdapter: ListAdapter<PlaylistBookmark, PlaylistBookmarkViewHolder>(
     DiffUtilItemCallback(
         areItemsTheSame = { oldItem, newItem -> oldItem.playlistId == newItem.playlistId }
     )
 ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistBookmarkViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return when (bookmarkMode) {
-            BookmarkMode.HOME -> PlaylistBookmarkViewHolder(
-                PlaylistBookmarkRowBinding.inflate(layoutInflater, parent, false)
-            )
-
-            BookmarkMode.FRAGMENT -> PlaylistBookmarkViewHolder(
-                PlaylistsRowBinding.inflate(layoutInflater, parent, false)
-            )
-        }
+        return PlaylistBookmarkViewHolder(
+            PlaylistsRowBinding.inflate(layoutInflater, parent, false)
+        )
     }
 
     private fun showPlaylistOptions(context: Context, bookmark: PlaylistBookmark) {
@@ -57,26 +48,8 @@ class PlaylistBookmarkAdapter(
 
     override fun onBindViewHolder(holder: PlaylistBookmarkViewHolder, position: Int) {
         val bookmark = getItem(holder.bindingAdapterPosition)
-        holder.playlistBookmarkBinding?.apply {
-            ImageHelper.loadImage(bookmark.thumbnailUrl, thumbnail)
-            playlistName.text = bookmark.playlistName
-            uploaderName.text = bookmark.uploader
 
-            root.setOnClickListener {
-                NavigationHelper.navigatePlaylist(
-                    root.context,
-                    bookmark.playlistId,
-                    PlaylistType.PUBLIC
-                )
-            }
-
-            root.setOnLongClickListener {
-                showPlaylistOptions(root.context, bookmark)
-                true
-            }
-        }
-
-        holder.playlistsBinding?.apply {
+        with(holder.binding) {
             var isBookmarked = true
 
             ImageHelper.loadImage(bookmark.thumbnailUrl, playlistThumbnail)
@@ -112,13 +85,6 @@ class PlaylistBookmarkAdapter(
                 showPlaylistOptions(root.context, bookmark)
                 true
             }
-        }
-    }
-
-    companion object {
-        enum class BookmarkMode {
-            HOME,
-            FRAGMENT
         }
     }
 }

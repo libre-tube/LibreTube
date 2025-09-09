@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.carousel.MaskableFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="250dp"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="10dp"
+    app:shapeAppearance="?attr/shapeAppearanceCornerExtraLarge">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/thumbnail"
+            android:layout_width="250dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/playlist_placeholder" />
+
+        <!-- darken image to make overlay text more visible -->
+        <View
+            android:id="@+id/overlay_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="#48000000" />
+
+        <TextView
+            android:id="@+id/playlistName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="200dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="6dp"
+            android:ellipsize="end"
+            android:textSize="18sp"
+            android:maxLines="1"
+            android:textStyle="bold"
+            tools:text="playlistName"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="@id/thumbnail"
+            app:layout_constraintLeft_toLeftOf="@id/thumbnail"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.carousel.MaskableFrameLayout>
