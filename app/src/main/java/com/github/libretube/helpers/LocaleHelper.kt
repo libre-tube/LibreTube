@@ -28,7 +28,7 @@ object LocaleHelper {
         }
     }
 
-    private fun getDetectedCountry(context: Context): String {
+    fun getDetectedCountry(context: Context): String {
         return detectSIMCountry(context)
             ?: detectNetworkCountry(context)
             ?: detectLocaleCountry(context)
@@ -59,16 +59,5 @@ object LocaleHelper {
             .distinctBy { it.language }
             .map { Country(it.displayLanguage, it.language) }
             .sortedBy { it.name }
-    }
-
-    fun getTrendingRegion(context: Context): String {
-        val regionPref = PreferenceHelper.getString(PreferenceKeys.REGION, "sys")
-
-        // get the system default country if auto region selected
-        return if (regionPref == "sys") {
-            getDetectedCountry(context).uppercase()
-        } else {
-            regionPref
-        }
     }
 }

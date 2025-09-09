@@ -5,12 +5,6 @@
     <PreferenceCategory app:title="@string/location">
 
         <ListPreference
-            android:icon="@drawable/ic_region"
-            app:defaultValue="sys"
-            app:key="region"
-            app:title="@string/region" />
-
-        <ListPreference
             android:icon="@drawable/ic_translate"
             app:defaultValue="sys"
             app:key="language"

@@ -11,7 +11,7 @@ import com.github.libretube.api.TrendingCategory
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
-import com.github.libretube.helpers.LocaleHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.util.deArrow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -31,7 +31,7 @@ class TrendsViewModel : ViewModel() {
 
         currentJob = viewModelScope.launch {
             try {
-                val region = LocaleHelper.getTrendingRegion(context)
+                val region = PreferenceHelper.getTrendingRegion(context)
                 val response = withContext(Dispatchers.IO) {
                     MediaServiceRepository.instance.getTrending(region, category).deArrow()
                 }
