@@ -35,15 +35,6 @@ class TrendsFragment : Fragment(R.layout.fragment_trends) {
     private var _binding: FragmentTrendsBinding? = null
     private val binding get() = _binding!!
 
-    private val categoryNamesToStringRes = mapOf(
-        TrendingCategory.TRENDING to R.string.trends,
-        TrendingCategory.GAMING to R.string.gaming,
-        TrendingCategory.TRAILERS to R.string.trailers,
-        TrendingCategory.PODCASTS to R.string.podcasts,
-        TrendingCategory.MUSIC to R.string.music,
-        TrendingCategory.LIVE to R.string.live
-    )
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentTrendsBinding.bind(view)
 
@@ -55,6 +46,17 @@ class TrendsFragment : Fragment(R.layout.fragment_trends) {
             val category = categories[position]
             tab.text = getString(categoryNamesToStringRes[category]!!)
         }.attach()
+    }
+
+    companion object {
+        val categoryNamesToStringRes = mapOf(
+            TrendingCategory.TRENDING to R.string.trends,
+            TrendingCategory.GAMING to R.string.gaming,
+            TrendingCategory.TRAILERS to R.string.trailers,
+            TrendingCategory.PODCASTS to R.string.podcasts,
+            TrendingCategory.MUSIC to R.string.music,
+            TrendingCategory.LIVE to R.string.live
+        )
     }
 }
 

@@ -9,6 +9,7 @@ import com.github.libretube.LibreTubeApp
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.SbSkipOptions
+import com.github.libretube.helpers.LocaleHelper.getDetectedCountry
 
 object PreferenceHelper {
     private val TAG = PreferenceHelper::class.simpleName
@@ -205,6 +206,17 @@ object PreferenceHelper {
             putString(PreferenceKeys.SB_USER_ID, uuid)
         }
         return uuid
+    }
+
+    fun getTrendingRegion(context: Context): String {
+        val regionPref = PreferenceHelper.getString(PreferenceKeys.REGION, "sys")
+
+        // get the system default country if auto region selected
+        return if (regionPref == "sys") {
+            getDetectedCountry(context).uppercase()
+        } else {
+            regionPref
+        }
     }
 
     private fun getDefaultSharedPreferences(context: Context): SharedPreferences {
