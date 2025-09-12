@@ -52,6 +52,7 @@ import org.schabi.newpipe.extractor.services.youtube.extractors.YoutubeStreamExt
 import org.schabi.newpipe.extractor.stream.AudioStream
 import org.schabi.newpipe.extractor.stream.StreamInfo
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
+import org.schabi.newpipe.extractor.stream.StreamInfoItem.ContentAvailability
 import org.schabi.newpipe.extractor.stream.VideoStream
 
 
@@ -449,7 +450,9 @@ class NewPipeMediaServiceRepository : MediaServiceRepository {
         }
 
         return ChannelTabResponse(
-            content = items.mapNotNull { it.toContentItem() },
+            content = items.filterIsInstance<StreamInfoItem>()
+                .filter { it.contentAvailability == ContentAvailability.AVAILABLE || it.contentAvailability == ContentAvailability.UPCOMING }
+                .mapNotNull { it.toContentItem() },
             nextpage = newNextPage?.toNextPageString()
         )
     }
