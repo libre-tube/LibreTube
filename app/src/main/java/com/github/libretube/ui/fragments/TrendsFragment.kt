@@ -50,7 +50,6 @@ class TrendsFragment : Fragment(R.layout.fragment_trends) {
 
     companion object {
         val categoryNamesToStringRes = mapOf(
-            TrendingCategory.TRENDING to R.string.trends,
             TrendingCategory.GAMING to R.string.gaming,
             TrendingCategory.TRAILERS to R.string.trailers,
             TrendingCategory.PODCASTS to R.string.podcasts,
