@@ -558,4 +558,10 @@
     <string name="full_local_mode">Fullständigt lokalt läge</string>
     <string name="full_local_mode_desc">Hämta allt direkt från YouTube, utan att använda Piped.</string>
     <string name="authentication">Autentisering</string>
+    <string name="createNewPlaylist">Skapa ny spellista</string>
+    <string name="playback_pitch_semitone_error_input">Värdet måste vara mellan -%1$.1f (minimum) och %1$.1f (maximum)</string>
+    <string name="gaming">Gaming</string>
+    <string name="podcasts">Poddsändningar</string>
+    <string name="trailers">Trailers</string>
+    <string name="music">Musik</string>
 </resources>

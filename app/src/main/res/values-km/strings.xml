@@ -97,7 +97,7 @@
     <string name="systemLanguage">ប្រព័ន្ធ</string>
     <string name="settings">ការកំណត់</string>
     <string name="playlistCreated">កម្រងវីដេអូបានបង្កើត។</string>
-    <string name="registered">បានចុះឈ្មោះ។ ឥឡូវ អ្នកអាចជាវកាណាល់នេះបាន។</string>
+    <string name="registered">បានចុះឈ្មោះ។ ឥឡូវ អ្នកអាចជាវឆាណែលនេះបាន។</string>
     <string name="loggedout">បានបណ្ដាច់ចេញ។</string>
     <string name="segment_skipped">ចម្រៀកដែលបានរំលង</string>
     <string name="music_videos">វីដេអូ យូធូបតន្ត្រី</string>
@@ -275,4 +275,5 @@
     <string name="show_updates">ពិនិត្យអាប់ដេតដោយស្វ័យប្រវត្តិ</string>
     <string name="grid_landscape">ជួរឈរក្រឡាចត្រង្គ (ផ្តេក)</string>
     <string name="comments_disabled">មតិត្រូវបានបិទដោយអ្នកបង្ហោះ។</string>
+    <string name="createNewPlaylist">បង្កើតកម្រងវីដេអូថ្មី</string>
 </resources>
