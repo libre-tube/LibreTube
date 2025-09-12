@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <com.google.android.material.loadingindicator.LoadingIndicator
         android:id="@+id/progress"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        tools:visibility="gone"/>
+        tools:visibility="gone" />
 
     <com.github.libretube.ui.views.CustomSwipeToRefresh
         android:id="@+id/refresh"
@@ -30,11 +30,20 @@
                 android:orientation="vertical"
                 android:paddingBottom="10dp">
 
-                <TextView
+                <LinearLayout
                     android:id="@+id/featuredTV"
-                    style="@style/HomeCategoryTitle"
-                    android:text="@string/featured"
-                    android:visibility="gone"/>
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackground"
+                    android:visibility="gone">
+
+                    <TextView
+                        style="@style/HomeCategoryTitle"
+                        android:text="@string/featured"
+                        app:drawableEndCompat="@drawable/ic_arrow_right" />
+
+                </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/featuredRV"
@@ -48,11 +57,20 @@
                     tools:visibility="visible"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-                <TextView
+                <LinearLayout
                     android:id="@+id/watchingTV"
-                    style="@style/HomeCategoryTitle"
-                    android:text="@string/continue_watching"
-                    android:visibility="gone"/>
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackground"
+                    android:visibility="gone">
+
+                    <TextView
+                        style="@style/HomeCategoryTitle"
+                        android:text="@string/continue_watching"
+                        app:drawableEndCompat="@drawable/ic_arrow_right" />
+
+                </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/watchingRV"
@@ -77,9 +95,13 @@
                     <TextView
                         style="@style/HomeCategoryTitle"
                         android:text="@string/trending"
+                        android:background="@null"
+                        app:drawableEndCompat="@drawable/ic_arrow_right" />
+
+                    <View
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:background="@null"/>
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/trending_category"
@@ -116,11 +138,20 @@
 
                 </RelativeLayout>
 
-                <TextView
+                <LinearLayout
                     android:id="@+id/bookmarksTV"
-                    style="@style/HomeCategoryTitle"
-                    android:text="@string/bookmarks"
-                    android:visibility="gone"/>
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackground"
+                    android:visibility="gone">
+
+                    <TextView
+                        style="@style/HomeCategoryTitle"
+                        android:text="@string/bookmarks"
+                        app:drawableEndCompat="@drawable/ic_arrow_right" />
+
+                </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/bookmarksRV"
@@ -132,11 +163,20 @@
                     android:visibility="gone"
                     app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager" />
 
-                <TextView
+                <LinearLayout
                     android:id="@+id/playlistsTV"
-                    style="@style/HomeCategoryTitle"
-                    android:text="@string/playlists"
-                    android:visibility="gone"/>
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackground"
+                    android:visibility="gone">
+
+                    <TextView
+                        style="@style/HomeCategoryTitle"
+                        android:text="@string/playlists"
+                        app:drawableEndCompat="@drawable/ic_arrow_right" />
+
+                </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/playlistsRV"
