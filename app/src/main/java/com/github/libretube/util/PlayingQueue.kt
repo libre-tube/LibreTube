@@ -8,6 +8,7 @@ import com.github.libretube.extensions.move
 import com.github.libretube.extensions.runCatchingIO
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.util.PlayingQueue.queueMode
 import kotlinx.coroutines.Job
 import java.util.Collections
 
@@ -31,13 +32,30 @@ object PlayingQueue {
             PlayerHelper.repeatMode = value
         }
 
-    fun clear() {
+    private fun clearJobs() {
         queueJobs.forEach {
             it.cancel()
         }
         queueJobs.clear()
+    }
+
+    fun clear() {
+        clearJobs()
         queue.clear()
         currentStream = null
+    }
+
+    /**
+     * Remove all items after the current [StreamItem] from the queue
+     *
+     * I.e., the current and all previous streams are kept
+     */
+    fun clearAfterCurrent() {
+        clearJobs()
+        synchronized(queue) {
+            val newQueue = queue.filterIndexed { index, item -> index <= currentIndex() }
+            setStreams(newQueue)
+        }
     }
 
     /**
@@ -82,12 +100,10 @@ object PlayingQueue {
 
     fun hasNext() = getNext() != null
 
-    fun updateCurrent(streamItem: StreamItem, asFirst: Boolean = true) = synchronized(queue) {
+    fun updateCurrent(streamItem: StreamItem) = synchronized(queue) {
         currentStream = streamItem
-        if (!contains(streamItem)) {
-            val indexToAdd = if (asFirst) 0 else size()
-            queue.add(indexToAdd, streamItem)
-        }
+
+        if (!contains(streamItem)) add(streamItem)
     }
 
     fun isNotEmpty() = queue.isNotEmpty()
@@ -154,7 +170,7 @@ object PlayingQueue {
 
         if (currentStream != null && reAddStream) {
             // re-add the stream to the end of the queue
-            updateCurrent(currentStream, false)
+            updateCurrent(currentStream)
         }
     }
 
@@ -210,6 +226,8 @@ object PlayingQueue {
         channelId: String?,
         relatedStreams: List<StreamItem> = emptyList()
     ) {
+        updateCurrent(streamItem)
+
         if (playlistId != null) {
             insertPlaylist(playlistId, streamItem)
         } else if (channelId != null) {
@@ -217,7 +235,6 @@ object PlayingQueue {
         } else if (relatedStreams.isNotEmpty()) {
             insertRelatedStreams(relatedStreams)
         }
-        updateCurrent(streamItem)
     }
 
     fun insertRelatedStreams(streams: List<StreamItem>) {

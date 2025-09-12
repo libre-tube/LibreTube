@@ -65,7 +65,7 @@ object NavigationHelper {
         val activity = ContextHelper.unwrapActivity<MainActivity>(context)
         val attachedToRunningPlayer = activity.runOnPlayerFragment {
             try {
-                PlayingQueue.clear()
+                PlayingQueue.clearAfterCurrent()
                 this.playNextVideo(videoId.toID())
 
                 if (audioOnlyPlayerRequested) {
@@ -85,7 +85,7 @@ object NavigationHelper {
         if (attachedToRunningPlayer) return
 
         val attachedToRunningAudioPlayer = activity.runOnAudioPlayerFragment {
-            PlayingQueue.clear()
+            PlayingQueue.clearAfterCurrent()
             this.playNextVideo(videoId.toID())
 
             if (!audioOnlyPlayerRequested) {

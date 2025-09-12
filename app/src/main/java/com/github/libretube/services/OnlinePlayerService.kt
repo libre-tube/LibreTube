@@ -136,20 +136,13 @@ open class OnlinePlayerService : AbstractPlayerService() {
             }
         } ?: return
 
-        if (PlayingQueue.isEmpty()) {
-            PlayingQueue.updateQueue(
-                streams!!.toStreamItem(videoId),
-                playlistId,
-                channelId,
-                streams!!.relatedStreams
-            )
-        } else if (PlayingQueue.isLast() && playlistId == null && channelId == null) {
-            PlayingQueue.insertRelatedStreams(streams!!.relatedStreams)
-        }
-
         streams?.toStreamItem(videoId)?.let {
             // save the current stream to the queue
             PlayingQueue.updateCurrent(it)
+
+            if (!PlayingQueue.hasNext()) {
+                PlayingQueue.updateQueue(it, playlistId, channelId, streams!!.relatedStreams)
+            }
 
             // update feed item with newer information, e.g. more up-to-date views
             SubscriptionHelper.submitFeedItemChange(
