@@ -107,7 +107,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
         isAudioOnlyPlayer = args.getBoolean(IntentData.audioOnly)
 
         // get the intent arguments
-        setVideoId(playerData.videoId)
+        this.videoId = playerData.videoId
         playlistId = playerData.playlistId
         channelId = playerData.channelId
         startTimestampSeconds = playerData.timestamp
@@ -197,11 +197,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
         val nextVideo = nextId ?: PlayingQueue.getNext() ?: return
 
         // play new video on background
-        setVideoId(nextVideo)
-
-        scope.launch {
-            startPlayback()
-        }
+        navigateVideo(nextVideo)
     }
 
     /**
@@ -259,11 +255,11 @@ open class OnlinePlayerService : AbstractPlayerService() {
         }
     }
 
-    override fun setVideoId(videoId: String) {
-        super.setVideoId(videoId)
-
+    override fun navigateVideo(videoId: String) {
         this.streams = null
         this.sponsorBlockSegments = emptyList()
+
+        super.navigateVideo(videoId)
     }
 
     /**

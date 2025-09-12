@@ -12,7 +12,6 @@ import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import androidx.media3.common.C
 import androidx.media3.common.ForwardingPlayer
-import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
@@ -54,7 +53,6 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     var trackSelector: DefaultTrackSelector? = null
 
     lateinit var videoId: String
-        private set
 
     var isTransitioning = false
         private set
@@ -199,25 +197,23 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         }
     }
 
-    private fun navigateVideo(videoId: String) {
+    /**
+     * Clear the currently playing video and start playing the new provided [videoId]
+     *
+     * If overriding, clearing old data must be done BEFORE calling [super.navigateVideo()]!
+     */
+    @CallSuper
+    open fun navigateVideo(videoId: String) {
+        updatePlaylistMetadata {
+            setExtras(bundleOf(IntentData.videoId to videoId))
+        }
+
         exoPlayer?.clearMediaItems()
 
-        setVideoId(videoId)
+        this.videoId = videoId
 
         CoroutineScope(Dispatchers.IO).launch {
             startPlayback()
-        }
-    }
-
-    /**
-     * Update the [videoId] to the new videoId and change the playlist metadata
-     * to reflect that videoId change
-     */
-    protected open fun setVideoId(videoId: String) {
-        this.videoId = videoId
-
-        updatePlaylistMetadata {
-            setExtras(bundleOf(IntentData.videoId to videoId))
         }
     }
 
