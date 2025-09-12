@@ -285,8 +285,7 @@
     <string name="maximum_image_cache">Max image cache size</string>
     <string name="copied_to_clipboard">Copied to clipboard</string>
     <string name="open_copied">Open</string>
-    <string name="legacy_subscriptions">Legacy subscriptions view</string>
-    <string name="device_info">Device info</string>
+    <string name="device_info">Device Info</string>
     <string name="audio_video_summary">Quality and format</string>
     <string name="delete">Delete from downloads</string>
     <string name="delete_all">All downloads will be deleted!</string>

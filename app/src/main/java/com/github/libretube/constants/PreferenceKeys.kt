@@ -27,8 +27,6 @@ object PreferenceKeys {
     const val GRID_COLUMNS_LANDSCAPE = "grid_landscape"
     const val LABEL_VISIBILITY = "label_visibility"
     const val APP_ICON = "icon_change"
-    const val LEGACY_SUBSCRIPTIONS = "legacy_subscriptions"
-    const val LEGACY_SUBSCRIPTIONS_COLUMNS = "legacy_subscriptions_columns"
     const val NEW_VIDEOS_BADGE = "new_videos_badge"
     const val PLAYLISTS_ORDER = "playlists_order"
     const val PLAYLIST_SORT_ORDER = "playlist_sort_order"
