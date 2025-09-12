@@ -139,7 +139,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.trendingCategory.setOnClickListener {
             val currentTrendingCategoryPref = PreferenceHelper.getString(
                 PreferenceKeys.TRENDING_CATEGORY,
-                TrendingCategory.TRENDING.name
+                TrendingCategory.LIVE.name
             ).let { TrendingCategory.valueOf(it) }
 
             val categories = trendingCategories.map { category ->
@@ -195,12 +195,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         )
     }
 
-    private fun showTrending(streamItems: List<StreamItem>?) {
-        if (streamItems == null) return
+    private fun showTrending(trends: Pair<TrendingCategory, List<StreamItem>>?) {
+        if (trends == null) return
+        val (category, streamItems) = trends
 
         // cache the loaded trends in the [TrendsViewModel] so that the trends don't need to be
         // reloaded there
-        trendsViewModel.setStreamsForCategory(TrendingCategory.TRENDING, streamItems)
+        trendsViewModel.setStreamsForCategory(category, streamItems)
 
         makeVisible(binding.trendingRV, binding.trendingTV)
         trendingAdapter.submitList(streamItems.take(10))

@@ -31,7 +31,7 @@ import kotlinx.coroutines.withContext
 class HomeViewModel : ViewModel() {
     private val hideWatched get() = PreferenceHelper.getBoolean(HIDE_WATCHED_FROM_FEED, false)
 
-    val trending: MutableLiveData<List<StreamItem>> = MutableLiveData(null)
+    val trending: MutableLiveData<Pair<TrendingCategory, List<StreamItem>>> = MutableLiveData(null)
     val feed: MutableLiveData<List<StreamItem>> = MutableLiveData(null)
     val bookmarks: MutableLiveData<List<PlaylistBookmark>> = MutableLiveData(null)
     val playlists: MutableLiveData<List<Playlists>> = MutableLiveData(null)
@@ -61,7 +61,7 @@ class HomeViewModel : ViewModel() {
                     async { if (visibleItems.contains(PLAYLISTS)) loadPlaylists() },
                     async { if (visibleItems.contains(WATCHING)) loadVideosToContinueWatching() }
                 )
-                loadedSuccessfully.value = sections.any { !it.value.isNullOrEmpty() }
+                loadedSuccessfully.value = sections.any { it.isInitialized }
                 isLoading.value = false
             }
 
@@ -77,11 +77,13 @@ class HomeViewModel : ViewModel() {
         val region = PreferenceHelper.getTrendingRegion(context)
         val category = PreferenceHelper.getString(
             PreferenceKeys.TRENDING_CATEGORY,
-            TrendingCategory.TRENDING.name
+            TrendingCategory.LIVE.name
         ).let { TrendingCategory.valueOf(it) }
 
         runSafely(
-            onSuccess = { videos -> trending.updateIfChanged(videos) },
+            onSuccess = { videos ->
+                trending.updateIfChanged(Pair(category, videos))
+            },
             ioBlock = {
                 MediaServiceRepository.instance.getTrending(region, category)
             }

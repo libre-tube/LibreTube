@@ -17,7 +17,7 @@ import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
 
 open class PipedMediaServiceRepository : MediaServiceRepository {
-    override fun getTrendingCategories(): List<TrendingCategory> = listOf(TrendingCategory.TRENDING)
+    override fun getTrendingCategories(): List<TrendingCategory> = emptyList()
 
     override suspend fun getTrending(region: String, category: TrendingCategory): List<StreamItem> =
         api.getTrending(region)

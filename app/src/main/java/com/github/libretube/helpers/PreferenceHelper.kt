@@ -7,6 +7,7 @@ import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.github.libretube.LibreTubeApp
 import com.github.libretube.R
+import com.github.libretube.api.TrendingCategory
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.helpers.LocaleHelper.getDetectedCountry
@@ -51,6 +52,10 @@ object PreferenceHelper {
                         putString(key, SbSkipOptions.MANUAL.name.lowercase())
                     }
                 }
+        },
+        PreferenceMigration(1, 2) {
+            // select a random category as the new value
+            putString(PreferenceKeys.TRENDING_CATEGORY, TrendingCategory.LIVE.name)
         },
     )
 
