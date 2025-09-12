@@ -180,13 +180,12 @@
 
     <style name="HomeCategoryTitle">
 
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">?attr/colorControlNormal</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:padding">15dp</item>
-        <item name="android:background">?attr/selectableItemBackground</item>
 
     </style>
 
