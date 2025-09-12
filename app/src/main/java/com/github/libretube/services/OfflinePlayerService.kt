@@ -79,14 +79,13 @@ open class OfflinePlayerService : AbstractPlayerService() {
 
         PlayingQueue.clear()
 
-        val videoId = if (shuffle) {
+        this.videoId = if (shuffle) {
             runBlocking(Dispatchers.IO) {
                 Database.downloadDao().getAll().filterByTab(downloadTab).randomOrNull()
             }?.download?.videoId
         } else {
             args.getString(IntentData.videoId)
         } ?: return
-        setVideoId(videoId)
 
         exoPlayer?.addListener(playerListener)
         trackSelector?.updateParameters {
@@ -208,11 +207,7 @@ open class OfflinePlayerService : AbstractPlayerService() {
             exoPlayer?.seekTo(0)
         } else if (PlayerHelper.isAutoPlayEnabled()) {
             val nextId = videoId ?: PlayingQueue.getNext() ?: return
-            setVideoId(nextId)
-
-            scope.launch {
-                startPlayback()
-            }
+            navigateVideo(nextId)
         }
     }
 
