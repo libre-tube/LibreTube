@@ -1198,6 +1198,14 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         }
         playerControlsBinding.exoTitle.text = streams.title
 
+        if (streams.uploaderVerified) {
+            binding.playerChannelName
+                .setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_verified, 0)
+        } else {
+            binding.playerChannelName
+                .setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+        }
+
         // init the chapters recyclerview
         chaptersViewModel.chaptersLiveData.postValue(streams.chapters)
 
