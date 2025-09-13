@@ -200,6 +200,13 @@
             app:key="pause_screen_off"
             app:title="@string/pauseOnScreenOff" />
 
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_play_circle"
+            android:summary="@string/play_automatically_summary"
+            app:key="play_automatically"
+            app:title="@string/play_automatically" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

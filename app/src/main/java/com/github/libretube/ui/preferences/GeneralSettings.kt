@@ -2,12 +2,17 @@ package com.github.libretube.ui.preferences
 
 import android.os.Build
 import android.os.Bundle
+import androidx.core.app.ActivityCompat
 import androidx.preference.ListPreference
+import androidx.preference.Preference
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.LocaleHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.RequireRestartDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class GeneralSettings : BasePreferenceFragment() {
     override val titleResourceId: Int = R.string.general
@@ -45,5 +50,34 @@ class GeneralSettings : BasePreferenceFragment() {
             RequireRestartDialog().show(childFragmentManager, RequireRestartDialog::class.java.name)
             true
         }
+
+        val maxImageCache = findPreference<ListPreference>(PreferenceKeys.MAX_IMAGE_CACHE)
+        maxImageCache?.setOnPreferenceChangeListener { _, _ ->
+            ImageHelper.initializeImageLoader(requireContext())
+            true
+        }
+
+        val resetSettings = findPreference<Preference>(PreferenceKeys.RESET_SETTINGS)
+        resetSettings?.setOnPreferenceClickListener {
+            showResetDialog()
+            true
+        }
+    }
+
+    private fun showResetDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.reset)
+            .setMessage(R.string.reset_message)
+            .setNegativeButton(R.string.cancel, null)
+            .setPositiveButton(R.string.reset) { _, _ ->
+                // clear default preferences
+                PreferenceHelper.clearPreferences()
+
+                // clear login token
+                PreferenceHelper.setToken("")
+
+                ActivityCompat.recreate(requireActivity())
+            }
+            .show()
     }
 }
