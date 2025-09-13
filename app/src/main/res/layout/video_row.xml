@@ -2,27 +2,28 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/ItemRow">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_ripple">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".45" />
+        app:layout_constraintGuide_percent="0.45" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/thumbnail_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:cardCornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="14dp"
         app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -39,8 +40,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginBottom="6dp"
                 app:cardBackgroundColor="@color/duration_background_color"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="0dp"
@@ -62,6 +63,7 @@
             <View
                 android:id="@+id/watch_progress"
                 style="@style/WatchProgress"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -71,9 +73,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#BF000000"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:visibility="gone">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -104,6 +106,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:ellipsize="end"
         android:maxLines="2"
         android:textAlignment="viewStart"
@@ -127,13 +130,32 @@
         android:id="@+id/download_badge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_download_folder"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:paddingStart="6dp"
+        android:src="@drawable/ic_download_folder"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlSymmetry"
-        android:visibility="gone"
         tools:visibility="visible" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/channel_image_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp"
+        app:cardCornerRadius="13.5dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/video_info">
+
+        <ImageView
+            android:id="@+id/channel_image"
+            android:layout_width="27dp"
+            android:layout_height="27dp" />
+
+    </androidx.cardview.widget.CardView>
 
     <LinearLayout
         android:id="@+id/channel_container"
@@ -141,26 +163,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start|center_vertical"
         android:layout_marginHorizontal="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toEndOf="@+id/channel_image_container"
         app:layout_constraintTop_toBottomOf="@id/video_info">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/channel_image_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="13.5dp"
-            android:layout_gravity="center"
-            android:layout_marginEnd="10dp">
-
-            <ImageView
-                android:id="@+id/channel_image"
-                android:layout_width="27dp"
-                android:layout_height="27dp" />
-
-        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/channel_name"
@@ -168,20 +177,20 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:ellipsize="end"
-            tools:text="Uploader name"
-            android:maxLines="1" />
+            android:maxLines="1"
+            tools:text="Uploader name" />
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/file_size"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:ellipsize="end"
             android:maxLines="2"
+            android:textAlignment="viewEnd"
+            android:visibility="gone"
             tools:text="55MB/2050MB"
-            tools:visibility="visible"
-            android:textAlignment="viewEnd" />
+            tools:visibility="visible" />
 
     </LinearLayout>
 
