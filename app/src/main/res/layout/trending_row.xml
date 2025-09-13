@@ -27,7 +27,8 @@
             <ImageView
                 android:id="@+id/thumbnail"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                tools:src="@tools:sample/backgrounds/scenic" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
@@ -73,7 +74,7 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:textAlignment="viewStart"
-        android:textSize="15sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/thumbnailcard"
         app:layout_constraintStart_toEndOf="@+id/channel_image_container"
@@ -88,6 +89,7 @@
         android:maxLines="2"
         android:paddingBottom="16dp"
         android:textAlignment="viewStart"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/textView_title"
         app:layout_constraintStart_toStartOf="@+id/textView_title"
         app:layout_constraintTop_toBottomOf="@+id/textView_title"
