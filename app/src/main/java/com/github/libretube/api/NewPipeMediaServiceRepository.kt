@@ -120,7 +120,7 @@ fun StreamInfoItem.toStreamItem(
 }
 
 fun InfoItem.toContentItem() = when (this) {
-    is StreamInfoItem -> ContentItem(
+    is StreamInfoItem -> if (contentAvailability == ContentAvailability.AVAILABLE || contentAvailability == ContentAvailability.UPCOMING) ContentItem(
         url = url.toID(),
         type = TYPE_STREAM,
         thumbnail = thumbnails.maxByOrNull { it.height }?.url.orEmpty(),
@@ -134,7 +134,7 @@ fun InfoItem.toContentItem() = when (this) {
         shortDescription = shortDescription,
         verified = isUploaderVerified,
         duration = duration
-    )
+    ) else null
 
     is ChannelInfoItem -> ContentItem(
         url = url.toID(),
@@ -450,9 +450,7 @@ class NewPipeMediaServiceRepository : MediaServiceRepository {
         }
 
         return ChannelTabResponse(
-            content = items.filterIsInstance<StreamInfoItem>()
-                .filter { it.contentAvailability == ContentAvailability.AVAILABLE || it.contentAvailability == ContentAvailability.UPCOMING }
-                .mapNotNull { it.toContentItem() },
+            content = items.mapNotNull { it.toContentItem() },
             nextpage = newNextPage?.toNextPageString()
         )
     }
