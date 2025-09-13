@@ -74,10 +74,11 @@
                             android:textStyle="bold" />
 
                         <com.google.android.material.button.MaterialButton
-                            style="?materialButtonTonalStyle"
                             android:id="@+id/sortTV"
+                            style="?materialButtonTonalStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
                             android:ellipsize="end"
                             android:maxLines="1"
                             android:paddingHorizontal="10dp"
