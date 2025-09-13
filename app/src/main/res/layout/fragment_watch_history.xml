@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/history_empty"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:layout_width="100dp"
@@ -31,7 +33,7 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:scrollbars="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -50,23 +52,23 @@
                     android:id="@+id/status_filter_chips"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:checkedChip="@id/chip_continue"
+                    android:paddingHorizontal="12dp"
                     app:selectionRequired="true"
-                    android:paddingHorizontal="12dp">
+                    tools:checkedChip="@id/chip_continue">
 
                     <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Filter"
                         android:id="@+id/chip_continue"
+                        style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/continue_watching"/>
+                        android:text="@string/continue_watching" />
 
                     <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Filter"
                         android:id="@+id/chip_finished"
+                        style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/finished"/>
+                        android:text="@string/finished" />
 
                 </com.google.android.material.chip.ChipGroup>
 
@@ -83,36 +85,33 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <LinearLayout
-        android:id="@+id/history_options"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/clear"
+        style="?attr/floatingActionButtonSmallSecondaryStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:layout_gravity="end|bottom">
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/clear_history"
+        android:src="@drawable/ic_delete"
+        android:tooltipText="@string/clear_history"
+        app:layout_constraintBottom_toTopOf="@+id/play_all"
+        app:layout_constraintEnd_toEndOf="@+id/history_empty"
+        tools:targetApi="o"
+        tools:visibility="visible" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/clear"
-            style="?attr/floatingActionButtonSmallSecondaryStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:contentDescription="@string/clear_history"
-            android:src="@drawable/ic_delete"
-            android:tooltipText="@string/clear_history"
-            tools:targetApi="o"
-            tools:visibility="visible" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/play_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@string/play_all"
+        android:src="@drawable/ic_play"
+        android:tooltipText="@string/play_all"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="visible" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/play_all"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/play_all"
-            android:src="@drawable/ic_play"
-            android:layout_marginTop="8dp"
-            android:tooltipText="@string/play_all"
-            tools:visibility="visible" />
-
-    </LinearLayout>
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
