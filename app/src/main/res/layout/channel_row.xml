@@ -25,22 +25,28 @@
             android:id="@+id/search_channel_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:drawablePadding="3dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/search_views"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:maxLines="1"
+            android:textSize="12sp" />
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/search_sub_button"
+            style="?materialButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:maxLines="1"
             android:text="@string/subscribe"
-            android:textColor="?attr/colorPrimary"
             android:visibility="gone" />
     </LinearLayout>
 
