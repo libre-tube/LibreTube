@@ -11,22 +11,20 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
+            style="?materialButtonTonalStyle"
             android:id="@+id/sort_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="6dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginVertical="4dp"
-            android:clickable="true"
-            android:drawablePadding="10dp"
-            android:focusable="true"
             android:layout_gravity="end"
-            android:paddingVertical="5dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="@string/sort_by"
-            android:textSize="15sp"
-            app:drawableEndCompat="@drawable/ic_sort"
-            android:background="@drawable/rounded_ripple" />
+            android:tooltipText="@string/tooltip_sort"
+            app:icon="@drawable/ic_sort"
+            app:iconGravity="textEnd" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/downloads_recView"
@@ -60,6 +58,38 @@
             android:textStyle="bold" />
     </LinearLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/delete_all"
+        style="?attr/floatingActionButtonSmallSecondaryStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/delete_all"
+        android:src="@drawable/ic_delete"
+        android:tooltipText="@string/delete"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/shuffle_all"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:targetApi="o"
+        tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/shuffle_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@string/shuffle"
+        android:src="@drawable/ic_shuffle"
+        android:tooltipText="@string/shuffle"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:targetApi="o"
+        tools:visibility="visible" />
+
     <LinearLayout
         android:id="@+id/fab_container"
         android:layout_width="wrap_content"
@@ -69,31 +99,6 @@
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="18dp"
         android:orientation="vertical">
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/delete_all"
-            style="?attr/floatingActionButtonSmallSecondaryStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:contentDescription="@string/delete_all"
-            android:src="@drawable/ic_delete"
-            android:tooltipText="@string/delete"
-            android:visibility="gone"
-            tools:targetApi="o"
-            tools:visibility="visible" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/shuffle_all"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/shuffle"
-            android:src="@drawable/ic_shuffle"
-            android:layout_marginTop="8dp"
-            android:tooltipText="@string/shuffle"
-            android:visibility="gone"
-            tools:targetApi="o"
-            tools:visibility="visible" />
 
     </LinearLayout>
 
