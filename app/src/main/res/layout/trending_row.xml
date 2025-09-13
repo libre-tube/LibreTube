@@ -13,7 +13,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="14dp"
         app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,8 +33,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginBottom="6dp"
                 app:cardBackgroundColor="@color/duration_background_color"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="0dp"
@@ -99,14 +99,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="25dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/thumbnailcard">
 
         <ImageView
             android:id="@+id/channel_image"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             tools:srcCompat="@mipmap/ic_launcher" />
 
     </androidx.cardview.widget.CardView>
