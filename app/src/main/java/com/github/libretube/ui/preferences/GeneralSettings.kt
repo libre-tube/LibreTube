@@ -41,8 +41,9 @@ class GeneralSettings : BasePreferenceFragment() {
                 arrayOf(requireContext().getString(R.string.systemLanguage)) + languages.map { it.second }
             language?.entryValues = arrayOf("sys") + languages.map { it.first }
         } else {
-            // language is set through Android settings
-            language?.isVisible = false
+            // on newer Android versions, the language is set through Android settings
+            // language is the only item in this category, so the whole category should be hidden
+            language?.parent?.isVisible = false
         }
 
         val autoRotation = findPreference<ListPreference>(PreferenceKeys.ORIENTATION)
