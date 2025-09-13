@@ -53,13 +53,14 @@
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/subscriptions_app_bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:liftOnScroll="false">
 
                 <com.google.android.material.appbar.CollapsingToolbarLayout
                     android:id="@+id/subscriptions_collapsing_tb"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_scrollFlags="scroll"
+                    app:layout_scrollFlags="scroll|enterAlways"
                     app:titleCollapseMode="scale">
 
                     <LinearLayout

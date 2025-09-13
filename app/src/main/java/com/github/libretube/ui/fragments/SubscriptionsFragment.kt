@@ -91,7 +91,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
         // Determine if the child can scroll up
         binding.subRefresh.setOnChildScrollUpCallback { _, _ ->
-            !isAppBarFullyExpanded
+            !isAppBarFullyExpanded || binding.subFeed.canScrollVertically(-1)
         }
 
         binding.subRefresh.isEnabled = true
@@ -328,7 +328,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
             if (restoreScrollState) {
                 // manually restore the previous feed state
                 binding.subFeed.layoutManager?.onRestoreInstanceState(viewModel.subFeedRecyclerViewState)
-                binding.subscriptionsAppBar.setExpanded(viewModel.subFeedRecyclerViewState == null)
             } else {
                 binding.subFeed.scrollToPosition(0)
             }
