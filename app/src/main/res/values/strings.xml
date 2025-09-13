@@ -230,7 +230,7 @@
     <string name="captions">Captions</string>
     <string name="none">None</string>
     <string name="general">General</string>
-    <string name="general_summary">Language, and region</string>
+    <string name="general_summary">Downloads and data-saver</string>
     <string name="playingOnBackground">Playing in the background…</string>
     <string name="caption_settings">Captions</string>
     <string name="playerAudioFormat">Audio format for player</string>
