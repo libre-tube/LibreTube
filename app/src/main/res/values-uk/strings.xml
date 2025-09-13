@@ -224,7 +224,7 @@
     <string name="error_occurred">Помилка</string>
     <string name="change_region">Здається, тренди недоступні для поточного регіону. Виберіть інший у налаштуваннях.</string>
     <string name="device_info">Відомості про пристрій</string>
-    <string name="general_summary">Мова та регіон</string>
+    <string name="general_summary">Завантаження та економія даних</string>
     <string name="most_recent">Найновіші</string>
     <string name="least_recent">Найдавніші</string>
     <string name="network_all">Усі</string>
