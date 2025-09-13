@@ -35,6 +35,7 @@ import com.github.libretube.helpers.PlayerHelper.getSubtitleRoleFlags
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.parcelable.PlayerData
+import com.github.libretube.player.SABRMediaSource
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.YoutubeHlsPlaylistParser
 import com.github.libretube.util.deArrow
@@ -273,6 +274,21 @@ open class OnlinePlayerService : AbstractPlayerService() {
         val streams = streams ?: return
 
         when {
+            // SABR
+            streams.serverAbrStreamingUrl != null && streams.videoPlaybackUstreamerConfig != null -> {
+                val sabrMediaSourceFactory = SABRMediaSource.Factory()
+                sabrMediaSourceFactory.setVideoId(videoId)
+                sabrMediaSourceFactory.setStreams(streams)
+
+                val mediaItem = createMediaItem(
+                    streams.serverAbrStreamingUrl.toUri(),
+                    "application/vnd.yt-ump",
+                    streams
+                )
+                val mediaSource = sabrMediaSourceFactory.createMediaSource(mediaItem)
+                exoPlayer?.setMediaSource(mediaSource)
+                return
+            }
             // LBRY HLS
             PreferenceHelper.getBoolean(
                 PreferenceKeys.LBRY_HLS,
