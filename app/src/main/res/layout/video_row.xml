@@ -107,6 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:ellipsize="end"
         android:maxLines="2"
         android:textAlignment="viewStart"
@@ -122,6 +123,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:textAlignment="viewStart"
@@ -137,7 +139,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:paddingStart="6dp"
         android:src="@drawable/ic_download_folder"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
@@ -150,10 +151,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="12dp"
+        android:layout_marginBottom="8dp"
         app:cardCornerRadius="13.5dp"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/video_info">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline">
 
         <ImageView
             android:id="@+id/channel_image"
@@ -167,23 +168,20 @@
         android:id="@+id/channel_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="start|center_vertical"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_margin="8dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/channel_image_container"
-        app:layout_constraintTop_toBottomOf="@id/video_info">
+        app:layout_constraintStart_toEndOf="@+id/channel_image_container">
 
         <TextView
             android:id="@+id/channel_name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_height="match_parent"
             android:ellipsize="end"
+            android:gravity="bottom"
             android:maxLines="1"
+            android:paddingVertical="5.5dp"
             android:textSize="14sp"
             tools:text="Channel name" />
 
@@ -191,6 +189,7 @@
             android:id="@+id/file_size"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:ellipsize="end"
             android:maxLines="2"

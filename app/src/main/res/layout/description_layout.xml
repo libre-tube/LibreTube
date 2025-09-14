@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
+    android:background="@drawable/rounded_ripple"
     android:orientation="vertical"
-    android:paddingVertical="12dp">
+    android:padding="12dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingHorizontal="12dp">
+        android:orientation="horizontal">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/player_sponsor_badge"
@@ -30,8 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:orientation="vertical"
-        android:paddingHorizontal="12dp">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,6 +47,7 @@
                 android:layout_weight="1"
                 android:maxLines="2"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 tools:text="Video Title" />
 
             <ImageView
@@ -72,6 +72,7 @@
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
                 android:textIsSelectable="true"
+                android:textSize="14sp"
                 tools:text="10M views - 2 days ago " />
 
             <com.github.libretube.ui.views.DrawableTextView
@@ -79,6 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="5dp"
+                android:textStyle="bold"
                 app:drawableStartCompat="@drawable/ic_like"
                 app:drawableStartDimen="12dp"
                 tools:text="4.2K" />
@@ -89,6 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:drawablePadding="5dp"
+                android:textStyle="bold"
                 android:visibility="gone"
                 app:drawableStartCompat="@drawable/ic_dislike"
                 app:drawableStartDimen="12dp"
@@ -102,7 +105,6 @@
         android:id="@+id/desc_linLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="5dp"
         android:orientation="vertical"
         android:visibility="gone">
 
@@ -110,25 +112,28 @@
             android:id="@+id/meta_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:paddingVertical="8dp"
             android:textSize="14sp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:text="Meta Info" />
 
         <TextView
             android:id="@+id/player_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:paddingVertical="8dp"
             android:textIsSelectable="true"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:text="Description" />
 
         <TextView
             android:id="@+id/additional_video_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:paddingVertical="8dp"
             android:textIsSelectable="true"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:text="Additional Info" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tags_recycler"

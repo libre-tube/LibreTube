@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/ItemRow">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -8,17 +9,15 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_gravity="center"
-        android:layout_marginVertical="5dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="55dp"
-        app:shapeAppearance="@style/CircleImageView" />
+        android:layout_marginHorizontal="50dp"
+        app:shapeAppearance="@style/CircleImageView"
+        app:srcCompat="@mipmap/ic_launcher" />
 
     <LinearLayout
         android:id="@+id/search_channel_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginEnd="10dp"
         android:orientation="vertical">
 
         <TextView
@@ -30,7 +29,8 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="Channel Name" />
 
         <TextView
             android:id="@+id/search_views"
@@ -38,7 +38,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:maxLines="1"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            tools:text="Views" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/search_sub_button"

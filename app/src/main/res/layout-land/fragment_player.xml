@@ -91,27 +91,24 @@
             <LinearLayout
                 android:id="@+id/player_channel"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginVertical="10dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginVertical="2dp"
+                android:padding="8dp"
                 android:background="@drawable/rounded_ripple"
-                android:orientation="horizontal"
-                android:padding="5dp">
+                android:orientation="horizontal">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/player_channelImage"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="4dp"
                     app:shapeAppearance="@style/CircleImageView" />
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="5dp"
                     android:layout_weight="1"
                     android:layoutDirection="locale"
                     android:orientation="vertical">
@@ -120,28 +117,32 @@
                         android:id="@+id/player_channelName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:drawablePadding="3dp"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:textSize="15sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/player_channelSubCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:textSize="11sp"
+                        android:textSize="12sp"
                         tools:text="2.5M subscribers" />
 
                 </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/player_subscribe"
+                    style="?materialButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/subscribe"
-                    android:textSize="12sp" />
+                    android:maxLines="1"
+                    android:text="@string/subscribe" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -155,8 +156,8 @@
                 style="@style/PlayerActionsButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="12dp"
-                android:layout_marginVertical="16dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/comments"
                 android:textAlignment="viewStart"
                 android:textColor="?colorPrimary"
@@ -253,6 +254,7 @@
         android:maxLines="1"
         android:paddingHorizontal="8dp"
         android:paddingVertical="15dp"
+        android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/play_imageView"
         app:layout_constraintEnd_toStartOf="@+id/play_imageView"

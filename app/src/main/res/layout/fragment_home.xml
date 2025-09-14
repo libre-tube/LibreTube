@@ -165,10 +165,10 @@
 
                 <LinearLayout
                     android:id="@+id/playlistsTV"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?selectableItemBackground"
+                    android:orientation="horizontal"
                     android:visibility="gone">
 
                     <TextView
@@ -182,9 +182,9 @@
                     android:id="@+id/playlistsRV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
                     android:clipChildren="false"
                     android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
                     android:visibility="gone"
                     app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager" />
 

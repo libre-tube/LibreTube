@@ -99,8 +99,8 @@
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/player_channelImage"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:layout_gravity="center"
                     app:shapeAppearance="@style/CircleImageView" />
 
@@ -227,6 +227,7 @@
         android:maxLines="1"
         android:paddingHorizontal="8dp"
         android:paddingVertical="15dp"
+        android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/play_imageView"
         app:layout_constraintEnd_toStartOf="@+id/play_imageView"

@@ -13,13 +13,14 @@
 
     <TextView
         android:id="@+id/instanceName"
-        android:layout_height="wrap_content"
         android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginEnd="6dp"
+        android:layout_weight="1"
         android:ellipsize="end"
-        android:maxLines="1" />
+        android:maxLines="1"
+        tools:text="Name" />
 
     <ImageView
         android:id="@+id/deleteInstance"
