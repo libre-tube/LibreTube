@@ -184,7 +184,7 @@
             android:layout_gravity="center"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textSize="14dp"
+            android:textSize="14sp"
             tools:text="Channel name" />
 
         <TextView
