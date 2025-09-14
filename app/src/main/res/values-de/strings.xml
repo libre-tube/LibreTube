@@ -194,7 +194,7 @@
     <string name="checking_frequency">Überprüfe alle …</string>
     <string name="reset_watch_positions">Zurücksetzen</string>
     <string name="general">Allgemein</string>
-    <string name="general_summary">Sprache und Region</string>
+    <string name="general_summary">Downloads und Datensparmodus</string>
     <string name="navLabelVisibility">Sichtbare Beschriftungen</string>
     <string name="watch_history_summary">Angesehene Videos lokal speichern</string>
     <string name="history_summary">Wiedergabe- und Suchverlauf</string>
