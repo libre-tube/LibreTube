@@ -565,4 +565,5 @@
     <string name="trailers">Filmlər</string>
     <string name="music">Musiqi</string>
     <string name="createNewPlaylist">Yeni pleylist yarat</string>
+    <string name="include_timestamp_in_filename">Fayl adına vaxt möhürü daxil et</string>
 </resources>
