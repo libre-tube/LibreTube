@@ -129,6 +129,8 @@ Donate
 Donations can be made at:
 * <https://github.com/sponsors/Bnyro>
 * <https://liberapay.com/Bnyro>
+* Monero (XMR): 47jAx7jMFo5iqy9VgDH98qL1bSK4kr6Pxi7HKWcRwsxbVYJdjxJtyrwXeAUa5MutvcQUmWMBfvAKnPAutDHvWEymUgLm5v8
+* Ethereum (ETH): 0x599909f54CdC18B997Be8F032341d1Fb14BF4F39
 
 Contributions in any form are welcome!
 
