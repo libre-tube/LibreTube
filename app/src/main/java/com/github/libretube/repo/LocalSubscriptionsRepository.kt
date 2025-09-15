@@ -1,8 +1,10 @@
 package com.github.libretube.repo
 
+import android.util.Log
 import com.github.libretube.api.obj.Subscription
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.LocalSubscription
+import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.parallelMap
 import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_URL
 import org.schabi.newpipe.extractor.channel.ChannelInfo
@@ -33,14 +35,25 @@ class LocalSubscriptionsRepository : SubscriptionsRepository {
         val subscribedChannels = getSubscriptionChannelIds()
 
         val newFiltered = newChannels.filter { !subscribedChannels.contains(it) }
+
+        val failedChannels = mutableListOf<String>()
         for (chunk in newFiltered.chunked(CHANNEL_CHUNK_SIZE)) {
             chunk.parallelMap { channelId ->
-                val channelUrl = "$YOUTUBE_FRONTEND_URL/channel/${channelId}"
-                val channelInfo = ChannelInfo.getInfo(channelUrl)
+                try {
+                    val channelUrl = "$YOUTUBE_FRONTEND_URL/channel/${channelId}"
+                    val channelInfo = ChannelInfo.getInfo(channelUrl)
 
-                val avatarUrl = channelInfo.avatars.maxByOrNull { it.height }?.url
-                subscribe(channelId, channelInfo.name, avatarUrl, channelInfo.isVerified)
+                    val avatarUrl = channelInfo.avatars.maxByOrNull { it.height }?.url
+                    subscribe(channelId, channelInfo.name, avatarUrl, channelInfo.isVerified)
+                } catch (e: Exception) {
+                    Log.e(TAG(), e.toString())
+                    failedChannels.add(channelId)
+                }
             }
+        }
+
+        if (!failedChannels.isEmpty()) {
+            throw Exception("Failed to import ${failedChannels.joinToString(", ")}")
         }
     }
 
