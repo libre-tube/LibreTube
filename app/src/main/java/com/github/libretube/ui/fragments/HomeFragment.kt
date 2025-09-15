@@ -209,7 +209,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         trendsViewModel.setStreamsForCategory(TrendingCategory.TRENDING, streamItems)
 
         makeVisible(binding.trendingRV, binding.trendingTV)
-        trendingAdapter.submitList(streamItems)
+        trendingAdapter.submitList(streamItems.take(10))
     }
 
     private fun showFeed(streamItems: List<StreamItem>?) {

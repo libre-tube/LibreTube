@@ -83,7 +83,7 @@ class HomeViewModel : ViewModel() {
         runSafely(
             onSuccess = { videos -> trending.updateIfChanged(videos) },
             ioBlock = {
-                MediaServiceRepository.instance.getTrending(region, category).take(10)
+                MediaServiceRepository.instance.getTrending(region, category)
             }
         )
     }
@@ -91,7 +91,7 @@ class HomeViewModel : ViewModel() {
     private suspend fun loadFeed(subscriptionsViewModel: SubscriptionsViewModel) {
         runSafely(
             onSuccess = { videos -> feed.updateIfChanged(videos) },
-            ioBlock = { tryLoadFeed(subscriptionsViewModel).take(20) }
+            ioBlock = { tryLoadFeed(subscriptionsViewModel) }
         )
     }
 
@@ -105,7 +105,7 @@ class HomeViewModel : ViewModel() {
     private suspend fun loadPlaylists() {
         runSafely(
             onSuccess = { newPlaylists -> playlists.updateIfChanged(newPlaylists) },
-            ioBlock = { PlaylistsHelper.getPlaylists().take(20) }
+            ioBlock = { PlaylistsHelper.getPlaylists() }
         )
     }
 
@@ -118,11 +118,10 @@ class HomeViewModel : ViewModel() {
     }
 
     private suspend fun loadWatchingFromDB(): List<StreamItem> {
-        val videos = DatabaseHelper.getWatchHistoryPage(1, 50)
+        val videos = DatabaseHelper.getWatchHistoryPage(1, 20)
 
         return DatabaseHelper
             .filterUnwatched(videos.map { it.toStreamItem() })
-            .take(20)
     }
 
     private suspend fun tryLoadFeed(subscriptionsViewModel: SubscriptionsViewModel): List<StreamItem> {
