@@ -87,9 +87,9 @@ class LocalFeedRepository : FeedRepository {
             onProgressUpdate(FeedProgress(0, channelIds.size))
         }
 
-        for (channelIdChunk in channelIds.chunked(CHUNK_SIZE)) {
+        for (channelIdChunk in channelIds.chunked(CHANNEL_CHUNK_SIZE)) {
             val count = channelExtractionCount.get();
-            if (count >= BATCH_SIZE) {
+            if (count >= CHANNEL_BATCH_SIZE) {
                 // add a delay after each BATCH_SIZE amount of fully-fetched channels
                 delay(CHANNEL_BATCH_DELAY.random())
                 channelExtractionCount.set(0)
@@ -167,12 +167,12 @@ class LocalFeedRepository : FeedRepository {
          *
          * Should ideally be a factor of `BATCH_SIZE` to be correctly applied.
          */
-        private const val CHUNK_SIZE = 5
+        const val CHANNEL_CHUNK_SIZE = 5
 
         /**
          * Maximum amount of feeds that should be fetched together, before a delay should be applied.
          */
-        private const val BATCH_SIZE = 50
+        const val CHANNEL_BATCH_SIZE = 50
 
         /**
          * Millisecond delay after fetching `BATCH_SIZE` channels to avoid throttling.
@@ -180,7 +180,7 @@ class LocalFeedRepository : FeedRepository {
          * A channel is only counted as fetched when it had a recent upload, requiring to fetch
          * the channelInfo via Innertube.
          */
-        private val CHANNEL_BATCH_DELAY = (500L..1500L)
+        val CHANNEL_BATCH_DELAY = (500L..1500L)
 
         private const val MAX_FEED_AGE_DAYS = 30L // 30 days
     }

@@ -6,8 +6,13 @@ import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.LocalSubscription
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.parallelMap
+import com.github.libretube.repo.LocalFeedRepository.Companion.CHANNEL_BATCH_DELAY
+import com.github.libretube.repo.LocalFeedRepository.Companion.CHANNEL_BATCH_SIZE
+import com.github.libretube.repo.LocalFeedRepository.Companion.CHANNEL_CHUNK_SIZE
 import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_URL
+import kotlinx.coroutines.delay
 import org.schabi.newpipe.extractor.channel.ChannelInfo
+import java.util.concurrent.atomic.AtomicInteger
 
 class LocalSubscriptionsRepository : SubscriptionsRepository {
     override suspend fun subscribe(
@@ -37,7 +42,17 @@ class LocalSubscriptionsRepository : SubscriptionsRepository {
         val newFiltered = newChannels.filter { !subscribedChannels.contains(it) }
 
         val failedChannels = mutableListOf<String>()
+
+        val channelExtractionCount = AtomicInteger()
         for (chunk in newFiltered.chunked(CHANNEL_CHUNK_SIZE)) {
+            // avoid being rate-limited by adding random delays between requests
+            val count = channelExtractionCount.get();
+            if (count >= CHANNEL_BATCH_SIZE) {
+                // add a delay after each BATCH_SIZE amount of fully-fetched channels
+                delay(CHANNEL_BATCH_DELAY.random())
+                channelExtractionCount.set(0)
+            }
+
             chunk.parallelMap { channelId ->
                 try {
                     val channelUrl = "$YOUTUBE_FRONTEND_URL/channel/${channelId}"
@@ -76,9 +91,5 @@ class LocalSubscriptionsRepository : SubscriptionsRepository {
 
     override suspend fun getSubscriptionChannelIds(): List<String> {
         return Database.localSubscriptionDao().getAll().map { it.channelId }
-    }
-
-    companion object {
-        private const val CHANNEL_CHUNK_SIZE = 2
     }
 }
