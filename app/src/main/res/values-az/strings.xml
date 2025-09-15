@@ -199,7 +199,7 @@
     <string name="captions">Titrlər</string>
     <string name="none">Heç biri</string>
     <string name="watch_positions_title">Xatırlanan oynatma mövqeləri</string>
-    <string name="general_summary">Dil və bölgə</string>
+    <string name="general_summary">Yükləmələr və məlumata qənaət</string>
     <string name="general">Ümumi</string>
     <string name="playingOnBackground">Arxa planda oynadılır…</string>
     <string name="caption_settings">Titrlər</string>
@@ -251,7 +251,7 @@
     <string name="maximum_image_cache">Maksimum şəkil qalığı həcmi</string>
     <string name="open_copied">Aç</string>
     <string name="legacy_subscriptions">Köhnə abunəliklər görünüşü</string>
-    <string name="device_info">Cihaz məlumatı</string>
+    <string name="device_info">Cihaz Məlumatı</string>
     <string name="audio_video_summary">Keyfiyyət və format</string>
     <string name="new_videos_badge">Yeni videolar üçün göstərici</string>
     <string name="new_videos_badge_summary">Bir neçəsi varsa, yeni videoların sayı ilə nişan göstər</string>

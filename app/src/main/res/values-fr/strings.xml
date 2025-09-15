@@ -199,7 +199,7 @@
     <string name="data_saver_mode_summary">Ignorer les miniatures et autres images</string>
     <string name="never">Jamais</string>
     <string name="pure_theme_summary">Thème blanc / noir</string>
-    <string name="general_summary">Langue et région</string>
+    <string name="general_summary">Téléchargements et économiseur de données</string>
     <string name="general">Général</string>
     <string name="playerAudioQuality">Qualité audio</string>
     <string name="worst_quality">Plus mauvaise</string>

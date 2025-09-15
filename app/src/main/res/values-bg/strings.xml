@@ -100,7 +100,7 @@
     <string name="require_restart">Изисква се рестартиране на приложението</string>
     <string name="open">Отваряне…</string>
     <string name="turnInternetOn">Моля, включете Wi-Fi или мобилни данни, за да се свържете с интернет.</string>
-    <string name="general_summary">Език и регион</string>
+    <string name="general_summary">Изтегляния и пестене на данни</string>
     <string name="copied">Копирано</string>
     <string name="error_occurred">Грешка</string>
     <string name="no_search_result">Няма резултати.</string>
