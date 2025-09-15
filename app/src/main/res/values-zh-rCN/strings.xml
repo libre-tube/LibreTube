@@ -200,7 +200,7 @@
     <string name="none">无</string>
     <string name="data_saver_mode_summary">不加载缩略图和其他图像</string>
     <string name="general">常规</string>
-    <string name="general_summary">语言和区域</string>
+    <string name="general_summary">下载和数据节省</string>
     <string name="playingOnBackground">后台播放中…</string>
     <string name="caption_settings">字幕</string>
     <string name="playerAudioFormat">播放器音频格式</string>
