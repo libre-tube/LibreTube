@@ -4,6 +4,8 @@ import android.app.NotificationManager
 import android.app.PendingIntent.FLAG_CANCEL_CURRENT
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.Network
 import android.os.Binder
 import android.os.IBinder
 import android.util.Log
@@ -13,6 +15,7 @@ import androidx.core.app.NotificationCompat.Builder
 import androidx.core.app.PendingIntentCompat
 import androidx.core.app.ServiceCompat
 import androidx.core.content.getSystemService
+import androidx.core.util.keyIterator
 import androidx.core.util.remove
 import androidx.core.util.set
 import androidx.core.util.valueIterator
@@ -39,6 +42,7 @@ import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.DownloadHelper.getNotificationId
 import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.NetworkHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.DownloadStatus
 import com.github.libretube.parcelable.DownloadData
@@ -108,6 +112,25 @@ class DownloadService : LifecycleService() {
         sendBroadcast(Intent(ACTION_SERVICE_STARTED))
     }
 
+    /**
+     * Listen for network changes and pause the download if the network connection becomes metered
+     */
+    fun registerNetworkChangedCallback() {
+        val connectivityManager = getSystemService<ConnectivityManager>()
+        connectivityManager?.registerDefaultNetworkCallback(object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: Network) {
+                super.onAvailable(network)
+
+                // pause all downloads when switching to an unmetered connection
+                if (NetworkHelper.isNetworkMetered(this@DownloadService)) {
+                    for (download in downloadQueue.keyIterator()) {
+                        pause(download)
+                    }
+                }
+            }
+        })
+    }
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
         val downloadId = intent?.getIntExtra("id", -1)
@@ -116,6 +139,8 @@ class DownloadService : LifecycleService() {
             ACTION_DOWNLOAD_PAUSE -> pause(downloadId!!)
             ACTION_DOWNLOAD_STOP -> stop(downloadId!!)
         }
+
+        registerNetworkChangedCallback()
 
         val downloadData = intent?.parcelableExtra<DownloadData>(IntentData.downloadData)
             ?: return START_NOT_STICKY
