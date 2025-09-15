@@ -4,7 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.obj.ContentItem
-import com.github.libretube.util.deArrow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -24,7 +23,7 @@ class SearchPagingSource(
                 } ?: MediaServiceRepository.instance.getSearchResults(searchQuery, searchFilter)
             }
 
-            LoadResult.Page(result.items.deArrow(), null, result.nextpage)
+            LoadResult.Page(result.items, null, result.nextpage)
         } catch (e: Exception) {
             LoadResult.Error(e)
         }

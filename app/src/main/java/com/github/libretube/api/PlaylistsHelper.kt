@@ -11,7 +11,6 @@ import com.github.libretube.obj.PipedImportPlaylist
 import com.github.libretube.repo.LocalPlaylistsRepository
 import com.github.libretube.repo.PipedPlaylistRepository
 import com.github.libretube.repo.PlaylistRepository
-import com.github.libretube.util.deArrow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -54,8 +53,6 @@ object PlaylistsHelper {
         return when (getPlaylistType(playlistId)) {
             PlaylistType.PUBLIC -> MediaServiceRepository.instance.getPlaylist(playlistId)
             else -> playlistsRepository.getPlaylist(playlistId)
-        }.apply {
-            relatedStreams = relatedStreams.deArrow()
         }
     }
 

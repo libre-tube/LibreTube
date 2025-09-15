@@ -12,7 +12,6 @@ import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.PreferenceHelper
-import com.github.libretube.util.deArrow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -33,7 +32,7 @@ class TrendsViewModel : ViewModel() {
             try {
                 val region = PreferenceHelper.getTrendingRegion(context)
                 val response = withContext(Dispatchers.IO) {
-                    MediaServiceRepository.instance.getTrending(region, category).deArrow()
+                    MediaServiceRepository.instance.getTrending(region, category)
                 }
                 setStreamsForCategory(category, response)
             } catch (e: Exception) {

@@ -20,6 +20,7 @@ import com.github.libretube.ui.extensions.setFormattedDuration
 import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.VideosViewHolder
+import com.github.libretube.util.DeArrowUtil
 import com.github.libretube.util.TextUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -95,6 +96,15 @@ class VideosAdapter(
 
                 withContext(Dispatchers.Main) {
                     downloadBadge.isVisible = isDownloaded
+                }
+            }
+
+            CoroutineScope(Dispatchers.IO).launch {
+                DeArrowUtil.deArrowVideoId(videoId)?.let { (title, thumbnail) ->
+                    if (title != null) holder.binding.videoTitle.text = title
+                    if (thumbnail != null) withContext(Dispatchers.Main) {
+                        ImageHelper.loadImage(thumbnail, holder.binding.thumbnail)
+                    }
                 }
             }
         }
