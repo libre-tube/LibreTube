@@ -51,6 +51,7 @@ import com.github.libretube.ui.fragments.DownloadsFragment
 import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.models.SearchViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
+import com.github.libretube.ui.preferences.BackupRestoreSettings
 import com.github.libretube.ui.preferences.BackupRestoreSettings.Companion.FILETYPE_ANY
 import com.github.libretube.util.UpdateChecker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -621,10 +622,12 @@ class MainActivity : BaseActivity() {
             ?: false
     }
 
-    fun startPlaylistExport(playlistId: String, playlistName: String, format: ImportFormat) {
+    fun startPlaylistExport(playlistId: String, playlistName: String, format: ImportFormat, includeTimestamp: Boolean) {
         playlistExportFormat = format
         exportPlaylistId = playlistId
-        createPlaylistsFile.launch("${playlistName}.${format.fileExtension}")
+
+        val fileName = BackupRestoreSettings.getExportFileName(this, format, playlistName, includeTimestamp)
+        createPlaylistsFile.launch(fileName)
     }
 
     private fun showUserInfoDialogIfNeeded() {

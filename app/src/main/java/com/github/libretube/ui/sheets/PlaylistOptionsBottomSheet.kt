@@ -163,10 +163,10 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                         context,
                         R.string.export_playlist,
                         BackupRestoreSettings.exportPlaylistFormatList + listOf(ImportFormat.URLSORIDS)
-                    ) {
-                        exportFormat = it
+                    ) { format, includeTimestamp ->
+                        exportFormat = format
                         ContextHelper.unwrapActivity<MainActivity>(context)
-                            .startPlaylistExport(playlistId, playlistName, exportFormat)
+                            .startPlaylistExport(playlistId, playlistName, exportFormat, includeTimestamp)
                     }
                 }
 
