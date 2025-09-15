@@ -20,7 +20,6 @@ import com.github.libretube.extensions.runSafely
 import com.github.libretube.extensions.updateIfChanged
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
-import com.github.libretube.util.deArrow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
@@ -84,7 +83,7 @@ class HomeViewModel : ViewModel() {
         runSafely(
             onSuccess = { videos -> trending.updateIfChanged(videos) },
             ioBlock = {
-                MediaServiceRepository.instance.getTrending(region, category).take(10).deArrow()
+                MediaServiceRepository.instance.getTrending(region, category).take(10)
             }
         )
     }
@@ -92,7 +91,7 @@ class HomeViewModel : ViewModel() {
     private suspend fun loadFeed(subscriptionsViewModel: SubscriptionsViewModel) {
         runSafely(
             onSuccess = { videos -> feed.updateIfChanged(videos) },
-            ioBlock = { tryLoadFeed(subscriptionsViewModel).take(20).deArrow() }
+            ioBlock = { tryLoadFeed(subscriptionsViewModel).take(20) }
         )
     }
 

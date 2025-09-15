@@ -28,7 +28,6 @@ import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.extensions.setupFragmentAnimation
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.sheets.ChannelOptionsBottomSheet
-import com.github.libretube.util.deArrow
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -117,8 +116,6 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
                     MediaServiceRepository.instance.getChannel(channelId!!)
                 } else {
                     MediaServiceRepository.instance.getChannelByName(channelName!!)
-                }.apply {
-                    relatedStreams = relatedStreams.deArrow()
                 }
             }
         } catch (e: Exception) {

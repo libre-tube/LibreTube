@@ -29,6 +29,7 @@ import com.github.libretube.ui.sheets.ChannelOptionsBottomSheet
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.SearchViewHolder
+import com.github.libretube.util.DeArrowUtil
 import com.github.libretube.util.TextUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -133,6 +134,15 @@ class SearchResultsAdapter(
 
                 withContext(Dispatchers.Main) {
                     downloadBadge.isVisible = isDownloaded
+                }
+            }
+
+            CoroutineScope(Dispatchers.IO).launch {
+                DeArrowUtil.deArrowVideoId(videoId)?.let { (title, thumbnail) ->
+                    if (title != null) binding.videoTitle.text = title
+                    if (thumbnail != null) withContext(Dispatchers.IO) {
+                        ImageHelper.loadImage(thumbnail, binding.thumbnail)
+                    }
                 }
             }
         }

@@ -20,7 +20,12 @@ import com.github.libretube.ui.extensions.setFormattedDuration
 import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.VideoCardsViewHolder
+import com.github.libretube.util.DeArrowUtil
 import com.github.libretube.util.TextUtils
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class VideoCardsAdapter(private val columnWidthDp: Float? = null) :
     ListAdapter<StreamItem, VideoCardsViewHolder>(DiffUtilItemCallback()) {
@@ -106,6 +111,15 @@ class VideoCardsAdapter(private val columnWidthDp: Float? = null) :
                 sheet.arguments = bundleOf(IntentData.streamItem to video)
                 sheet.show(fragmentManager, VideoCardsAdapter::class.java.name)
                 true
+            }
+
+            CoroutineScope(Dispatchers.Main).launch {
+                DeArrowUtil.deArrowVideoId(videoId)?.let { (title, thumbnail) ->
+                    if (title != null) this@apply.textViewTitle.text = title
+                    if (thumbnail != null) withContext(Dispatchers.Main) {
+                        ImageHelper.loadImage(thumbnail, this@apply.thumbnail)
+                    }
+                }
             }
         }
     }

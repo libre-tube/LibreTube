@@ -24,7 +24,6 @@ import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.extensions.addOnBottomReachedListener
 import com.github.libretube.ui.models.sources.ChannelTabPagingSource
-import com.github.libretube.util.deArrow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -73,9 +72,7 @@ class ChannelContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_ch
 
                 lifecycleScope.launch(Dispatchers.IO) {
                     val resp = try {
-                       MediaServiceRepository.instance.getChannelNextPage(channelId, nextPage!!).apply {
-                           relatedStreams = relatedStreams.deArrow()
-                       }
+                       MediaServiceRepository.instance.getChannelNextPage(channelId, nextPage!!)
                     } catch (e: Exception) {
                         return@launch
                     } finally {
