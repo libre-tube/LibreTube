@@ -194,7 +194,7 @@
     <string name="watch_history_summary">Cronologia locale delle visualizzazioni</string>
     <string name="data_saver_mode_summary">Salta miniature ed altre immagini</string>
     <string name="history_summary">Cronologia ricerche e visualizzazioni</string>
-    <string name="general_summary">Lingua e regione</string>
+    <string name="general_summary">Download e risparmio dati</string>
     <string name="copied_to_clipboard">Copiato negli appunti</string>
     <string name="watch_positions_title">Posizioni di riproduzione memorizzate</string>
     <string name="captions">Sottotitoli</string>
@@ -565,4 +565,5 @@
     <string name="trailers">Trailer</string>
     <string name="music">Musica</string>
     <string name="gaming">Giochi</string>
+    <string name="include_timestamp_in_filename">Includi data e ora nel nome del file</string>
 </resources>
