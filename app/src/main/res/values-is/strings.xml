@@ -310,7 +310,7 @@
     <string name="navLabelVisibility">Sýnileiki merkinga</string>
     <string name="pure_theme_summary">Hreint hvítt/svart þema</string>
     <string name="general">Almennt</string>
-    <string name="general_summary">Tungumál og landsvæði</string>
+    <string name="general_summary">Niðurhal og gagnasparnaður</string>
     <string name="playingOnBackground">Spila í bakgrunni…</string>
     <string name="caption_settings">Skýringartexti</string>
     <string name="worst_quality">Verst</string>
@@ -564,4 +564,5 @@
     <string name="podcasts">Hlaðvörp</string>
     <string name="trailers">Kynningarstiklur</string>
     <string name="music">Tónlist</string>
+    <string name="include_timestamp_in_filename">Hafa tímamerki í skráarheiti</string>
 </resources>
