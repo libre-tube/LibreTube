@@ -254,7 +254,8 @@ class NewPipeMediaServiceRepository : MediaServiceRepository {
         TrendingCategory.MUSIC to "trending_music",
         TrendingCategory.LIVE to "live"
     )
-    override fun getTrendingCategories(): List<TrendingCategory> = trendingCategories.keys.toList()
+    override fun getTrendingCategories(): List<TrendingCategory> =
+        trendingCategories.keys.drop(1).toList()
 
     override suspend fun getTrending(region: String, category: TrendingCategory): List<StreamItem> {
         val kioskList = NewPipeExtractorInstance.extractor.kioskList

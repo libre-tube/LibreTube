@@ -150,12 +150,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             var selected = TrendingCategory.entries.indexOf(currentTrendingCategoryPref)
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.category)
-                .setSingleChoiceItems(categories.map { it.second }.toTypedArray(), selected) { _, checked ->
+                .setSingleChoiceItems(categories.map { it.second }.drop(1).toTypedArray(), selected) { _, checked ->
                     selected = checked
                 }
                 .setNegativeButton(R.string.cancel, null)
                 .setPositiveButton(R.string.okay) { _, _ ->
-                    PreferenceHelper.putString(PreferenceKeys.TRENDING_CATEGORY, TrendingCategory.entries[selected].name)
+                    PreferenceHelper.putString(PreferenceKeys.TRENDING_CATEGORY, TrendingCategory.entries[selected + 1].name)
                     fetchHomeFeed()
                 }
                 .show()
@@ -201,12 +201,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         )
     }
 
-    private fun showTrending(streamItems: List<StreamItem>?) {
-        if (streamItems == null) return
+    private fun showTrending(trends: Pair<TrendingCategory, List<StreamItem>>?) {
+        if (trends == null) return
+        val (category, streamItems) = trends
 
         // cache the loaded trends in the [TrendsViewModel] so that the trends don't need to be
         // reloaded there
-        trendsViewModel.setStreamsForCategory(TrendingCategory.TRENDING, streamItems)
+        trendsViewModel.setStreamsForCategory(category, streamItems)
 
         makeVisible(binding.trendingRV, binding.trendingTV)
         trendingAdapter.submitList(streamItems.take(10))
