@@ -565,4 +565,5 @@
     <string name="trailers">Upútavky</string>
     <string name="music">Hudba</string>
     <string name="createNewPlaylist">Vytvoriť nový playlist</string>
+    <string name="include_timestamp_in_filename">Zahrnúť časovú známku do názvu súboru</string>
 </resources>
