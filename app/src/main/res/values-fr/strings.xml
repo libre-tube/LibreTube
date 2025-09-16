@@ -565,4 +565,5 @@
     <string name="trailers">Trailers</string>
     <string name="music">Musique</string>
     <string name="createNewPlaylist">Créer une nouvelle playlist</string>
+    <string name="include_timestamp_in_filename">Inclure l\'horodatage dans le nom de fichier</string>
 </resources>
