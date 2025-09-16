@@ -9,11 +9,21 @@ import androidx.media3.exoplayer.source.chunk.ChunkHolder
 import androidx.media3.exoplayer.source.chunk.MediaChunk
 import androidx.media3.exoplayer.trackselection.ExoTrackSelection
 import androidx.media3.exoplayer.upstream.LoadErrorHandlingPolicy
+import androidx.media3.exoplayer.upstream.LoaderErrorThrower
 import androidx.media3.extractor.mp4.FragmentedMp4Extractor
 import com.github.libretube.player.manifest.SABRManifest
 
 @OptIn(UnstableApi::class)
 class DefaultSABRChunkSource : SABRChunkSource {
+    class Factory : SABRChunkSource.Factory {
+        override fun createChunkSource(
+            manifestLoaderErrorThrower: LoaderErrorThrower?,
+            manifest: SABRManifest?,
+            streamElementIndex: Int,
+            trackSelection: ExoTrackSelection?
+        ): SABRChunkSource? = DefaultSABRChunkSource()
+    }
+
     override fun updateManifest(newManifest: SABRManifest?) {}
 
     override fun updateTrackSelection(trackSelection: ExoTrackSelection?) {
