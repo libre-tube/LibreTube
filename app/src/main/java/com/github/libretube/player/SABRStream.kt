@@ -11,8 +11,8 @@ class SABRStream {
      * Pointer to the stream on the native side.
      */
     private var streamPtr = 0L
-    private var audioChunks: MutableList<ByteBuffer> = mutableListOf()
-    private var videoChunks: MutableList<ByteBuffer> = mutableListOf()
+    private var audioChunks: MutableList<Segment> = mutableListOf()
+    private var videoChunks: MutableList<Segment> = mutableListOf()
 
     init {
         System.loadLibrary("sabr")
@@ -35,7 +35,7 @@ class SABRStream {
         video_format_last_modified: Long,
     ): Long;
 
-    private external fun media(streamPtr: Long): Pair<Array<ByteBuffer>, Array<ByteBuffer>>?;
+    private external fun media(streamPtr: Long): Pair<LongArray, LongArray>?;
 
 
     private external fun destroy(streamPtr: Long);
@@ -63,9 +63,8 @@ class SABRStream {
             updateChunks()
         }
 
-        val result = audioChunks.toList()
-        audioChunks.clear()
-        return result
+        val segment = audioChunks.removeAt(0);
+        return segment.data().toList()
     }
 
     fun video(): List<ByteBuffer> {
@@ -74,9 +73,8 @@ class SABRStream {
             updateChunks()
         }
 
-        val result = videoChunks.toList()
-        videoChunks.clear()
-        return result
+        val segment = videoChunks.removeAt(0);
+        return segment.data().toList()
     }
 
     private fun updateChunks(){
@@ -84,8 +82,13 @@ class SABRStream {
 
         try {
             val (audio, video) = media(streamPtr)?: return
-            audioChunks.addAll(audio)
-            videoChunks.addAll(video)
+            for (segPtr in audio) {
+                audioChunks.add(Segment(segPtr))
+            }
+
+            for (segPtr in video) {
+                videoChunks.add(Segment(segPtr))
+            }
         } catch (e: RuntimeException) {
             Log.e(TAG, "updateChunks: ${e.message}")
             throw e
@@ -96,5 +99,25 @@ class SABRStream {
         destroy(streamPtr)
         streamPtr = 0
     }
+}
 
+class Segment(private val nativePtr: Long) {
+    private external fun duration(ptr: Long): Long
+    private external fun len(ptr: Long): Int
+    private external fun data(ptr: Long): Array<ByteBuffer>
+    private external fun destroy(ptr: Long)
+
+    fun duration(): Long = duration(nativePtr)
+    fun len(): Int = len(nativePtr)
+    fun data(): Array<ByteBuffer> = data(nativePtr)
+
+    fun release() {
+        destroy(nativePtr)
+    }
+
+    companion object {
+        init {
+            System.loadLibrary("sabr")
+        }
+    }
 }
