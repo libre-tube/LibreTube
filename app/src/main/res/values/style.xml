@@ -4,7 +4,7 @@
     <style name="RoundedImageView">
 
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">8%</item>
+        <item name="cornerSize">14%</item>
 
     </style>
 
@@ -47,8 +47,7 @@
 
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginStart">15dp</item>
-        <item name="android:layout_marginEnd">15dp</item>
+        <item name="android:layout_marginHorizontal">20dp</item>
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginBottom">10dp</item>
 
@@ -183,9 +182,11 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textColor">?attr/colorControlNormal</item>
         <item name="android:textAlignment">viewStart</item>
-        <item name="android:padding">15dp</item>
+        <item name="android:paddingVertical">10dp</item>
+        <item name="android:paddingHorizontal">8dp</item>
 
     </style>
 
@@ -221,6 +222,15 @@
         <item name="android:stateListAnimator">@animator/m3_btn_elevated_btn_state_list_anim</item>
         <item name="elevation">@dimen/m3_comp_button_elevated_container_elevation</item>
         <item name="materialThemeOverlay">@style/ThemeOverlay.Material3Expressive.Button.Elevated</item>
+    </style>
+
+    <style name="AlertDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.Material3.Button.OutlinedButton</item>
+    </style>
+
+    <style name="PositiveButton" parent="Widget.Material3.Button">
+        <item name="android:layout_marginStart">16dp</item>
     </style>
 
 </resources>
