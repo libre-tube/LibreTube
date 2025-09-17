@@ -73,7 +73,7 @@
                             android:maxLines="1"
                             android:text="@string/playlists"
                             android:textAlignment="viewStart"
-                            android:textSize="18sp"
+                            android:textSize="20sp"
                             android:textStyle="bold" />
 
                         <com.google.android.material.button.MaterialButton
@@ -143,7 +143,7 @@
                             android:maxLines="1"
                             android:text="@string/bookmarks"
                             android:textAlignment="textStart"
-                            android:textSize="18sp"
+                            android:textSize="20sp"
                             android:textStyle="bold" />
 
                         <com.google.android.material.button.MaterialButton
