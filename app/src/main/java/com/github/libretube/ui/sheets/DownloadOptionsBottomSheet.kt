@@ -26,6 +26,8 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
         val videoId = streamItem.url!!.toID()
         val downloadTab = arguments?.serializable<DownloadTab>(IntentData.downloadTab)!!
 
+        setTitle(streamItem.title)
+
         val options = mutableListOf(
             R.string.playOnBackground,
             R.string.share,
