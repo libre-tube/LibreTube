@@ -5,13 +5,14 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingTop="8dp">
+    android:paddingHorizontal="20dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="20dp">
 
     <com.github.libretube.ui.views.DropdownMenu
         android:id="@+id/create_playlist_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
         app:hint="@string/tooltip_options" />
 
     <LinearLayout
@@ -22,6 +23,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/CustomDialogTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="0dp"
             android:hint="@string/playlistName">
 
@@ -30,16 +33,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/create_new_playlist"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginEnd="20dp"
-            android:drawableStart="@drawable/ic_copy"
-            android:text="@string/createNewPlaylist" />
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancel_create_button"
+                style="@style/Widget.Material3Expressive.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/create_new_playlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:drawableStart="@drawable/ic_copy"
+                android:text="@string/createNewPlaylist" />
+
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -52,6 +71,9 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/CustomDialogTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="0dp"
             android:hint="@string/playlistUrl">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -61,14 +83,29 @@
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/clone_playlist"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginEnd="20dp"
-            android:drawableStart="@drawable/ic_copy"
-            android:text="@string/clonePlaylist" />
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancel_clone_button"
+                style="@style/Widget.Material3Expressive.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/clone_playlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:drawableStart="@drawable/ic_copy"
+                android:text="@string/clonePlaylist" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
