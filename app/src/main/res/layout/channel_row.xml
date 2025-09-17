@@ -9,46 +9,54 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_gravity="center"
-        android:layout_marginHorizontal="50dp"
         app:shapeAppearance="@style/CircleImageView"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <LinearLayout
         android:id="@+id/search_channel_info"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/search_channel_name"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:drawablePadding="3dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            tools:text="Channel Name" />
+            android:layout_height="match_parent"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/search_views"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:maxLines="1"
-            android:textSize="12sp"
-            tools:text="Views" />
+            <TextView
+                android:id="@+id/search_channel_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:drawablePadding="3dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="Channel Name" />
+
+            <TextView
+                android:id="@+id/search_views"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:maxLines="1"
+                android:textSize="12sp"
+                tools:text="Views" />
+        </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/search_sub_button"
             style="?materialButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:maxLines="1"
             android:text="@string/subscribe"
-            android:visibility="gone" />
+            android:visibility="visible" />
     </LinearLayout>
 
 </LinearLayout>
