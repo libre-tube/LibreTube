@@ -1,62 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/rounded_ripple"
-    android:orientation="horizontal"
-    android:padding="10dp">
+    android:padding="8dp">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="80dp"
-        android:layout_height="45dp"
-        android:layout_gravity="center"
-        android:layout_marginEnd="10dp"
-        app:cardCornerRadius="8dp">
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
 
-        <ImageView
-            android:id="@+id/thumbnail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:src="@tools:sample/backgrounds/scenic" />
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/RoundedImageView"
+        tools:src="@tools:sample/backgrounds/scenic" />
 
-    </androidx.cardview.widget.CardView>
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Title - Episode 1" />
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            tools:text="Title - Episode 1" />
-
-        <TextView
-            android:id="@+id/videoInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="Title"
-            android:textSize="12sp"
-            tools:text="Description" />
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/videoInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/title"
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        tools:text="Description" />
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="10dp"
-        android:src="@drawable/ic_drag" />
+        android:src="@drawable/ic_drag"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
