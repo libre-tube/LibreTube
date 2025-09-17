@@ -18,30 +18,38 @@
             android:orientation="vertical">
 
             <!-- Drag handle for accessibility -->
+
             <com.google.android.material.bottomsheet.BottomSheetDragHandleView
                 android:id="@+id/drag_handle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+                android:id="@+id/drag_handle_title"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="0dp"
+                android:visibility="visible" />
 
             <LinearLayout
                 android:id="@+id/bottom_sheet_title_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingBottom="12dp"
                 android:visibility="gone"
                 tools:visibility="visible">
 
                 <TextView
                     android:id="@+id/bottom_sheet_title"
+                    style="@style/TextAppearance.Material3.ActionBar.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:maxLines="2"
+                    android:layout_marginHorizontal="8dp"
                     android:ellipsize="end"
-                    android:textSize="27sp"
-                    tools:text="Very long text that is going across more than two lines in total"/>
+                    android:maxLines="2"
+                    android:padding="8dp"
+                    tools:text="Very long text that is going across more than two lines in total" />
 
                 <com.google.android.material.divider.MaterialDivider
                     android:layout_width="match_parent"
