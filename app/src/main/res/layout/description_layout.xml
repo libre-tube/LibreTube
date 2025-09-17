@@ -43,7 +43,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:maxLines="2"
                 android:textSize="18sp"
@@ -55,7 +55,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="10dp"
                 android:src="@drawable/ic_arrow_down" />
 
         </LinearLayout>
@@ -69,7 +68,7 @@
                 android:id="@+id/player_views_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:textIsSelectable="true"
                 android:textSize="14sp"
@@ -117,6 +116,14 @@
             android:visibility="gone"
             tools:text="Meta Info" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tags_recycler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
         <TextView
             android:id="@+id/player_description"
             android:layout_width="match_parent"
@@ -134,13 +141,6 @@
             android:textIsSelectable="true"
             android:textSize="14sp"
             tools:text="Additional Info" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tags_recycler"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </LinearLayout>
 
