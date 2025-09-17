@@ -7,5 +7,4 @@
     android:paddingHorizontal="15dp"
     android:paddingVertical="12dp"
     android:textSize="18sp"
-    android:textStyle="bold"
     tools:text="TextView" />

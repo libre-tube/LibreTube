@@ -41,9 +41,8 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginVertical="10dp"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginEnd="1dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="8dp">
 
                         <com.google.android.material.imageview.ShapeableImageView
                             android:id="@+id/channel_image"

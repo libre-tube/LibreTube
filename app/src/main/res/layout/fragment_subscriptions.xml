@@ -10,8 +10,7 @@
         android:id="@+id/sub_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_centerInParent="true"
         android:visibility="gone" />
 
     <LinearLayout
@@ -65,18 +64,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
                         android:animateLayoutChanges="true"
                         android:orientation="vertical">
 
                         <com.google.android.material.button.MaterialButtonGroup
-                            style="@style/Widget.Material3.MaterialSplitButton"
+                            style="@style/Widget.Material3.MaterialButtonGroup.Connected"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginHorizontal="8dp"
-                            android:paddingTop="4dp"
-                            android:paddingBottom="4dp"
-                            android:gravity="center">
+                            android:gravity="center"
+                            android:orientation="horizontal">
 
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/toggle_subs"
@@ -89,8 +86,8 @@
                                 app:drawableEndCompat="@drawable/ic_arrow_up_down" />
 
                             <com.google.android.material.button.MaterialButton
-                                style="@style/Widget.Material3.Button.IconButton.Elevated"
                                 android:id="@+id/filter_sort"
+                                style="@style/Widget.Material3.Button.IconButton.Elevated"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:contentDescription="@string/tooltip_filter"
@@ -102,7 +99,7 @@
                             android:id="@+id/channel_groups_container"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginVertical="3dp"
+                            android:layout_marginTop="10dp"
                             android:scrollbars="none">
 
                             <LinearLayout
@@ -115,8 +112,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:layout_marginStart="12dp"
-                                    android:layout_marginEnd="6dp"
+                                    android:layout_margin="8dp"
+                                    android:layout_marginEnd="8dp"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     android:src="@drawable/ic_edit"
                                     android:tooltipText="@string/tooltip_edit_groups" />
@@ -125,7 +122,6 @@
                                     android:id="@+id/channel_groups"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="5dp"
                                     app:checkedChip="@id/chip_all"
                                     app:selectionRequired="true"
                                     app:singleLine="true"
@@ -143,20 +139,17 @@
                         </HorizontalScrollView>
 
                         <LinearLayout
-                            android:visibility="gone"
                             android:id="@+id/feed_progress_container"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginHorizontal="12dp"
+                            android:layout_marginTop="10dp"
                             android:orientation="vertical"
-                            tools:visibility="visible">
+                            android:visibility="gone">
 
                             <com.google.android.material.progressindicator.LinearProgressIndicator
                                 android:id="@+id/feed_progress_bar"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_marginBottom="2dp"
                                 tools:progress="70" />
 

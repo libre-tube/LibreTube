@@ -12,7 +12,6 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginStart="8dp"
         app:shapeAppearance="@style/CircleImageView"
         app:srcCompat="@mipmap/ic_launcher" />
 
@@ -33,7 +32,6 @@
         style="@style/Widget.Material3.MaterialSplitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:paddingTop="0dp"
         android:paddingBottom="0dp">
 

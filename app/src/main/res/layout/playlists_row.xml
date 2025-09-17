@@ -5,7 +5,8 @@
     android:id="@+id/playlist"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/rounded_ripple">
+    android:background="@drawable/rounded_ripple"
+    android:padding="8dp">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -18,7 +19,6 @@
         android:id="@+id/card_playlist_thumbnail"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="8dp"
         app:cardCornerRadius="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="16:9"
@@ -75,7 +75,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:ellipsize="end"
         android:maxLines="2"
         android:textSize="16sp"

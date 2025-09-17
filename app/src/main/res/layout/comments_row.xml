@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="8dp"
         android:animateLayoutChanges="true"
         android:orientation="horizontal">
 
@@ -46,7 +46,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text=" • "
                     tools:ignore="HardcodedText" />
 
@@ -84,6 +84,7 @@
                 android:id="@+id/comment_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
                 android:focusable="false"
                 android:textAlignment="viewStart"
                 android:textIsSelectable="true"

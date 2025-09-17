@@ -23,22 +23,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:paddingTop="8dp"
-                android:paddingBottom="0dp"
-                app:tint="?android:attr/textColorSecondaryInverse" />
+                android:paddingBottom="0dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:paddingHorizontal="10dp"
-                android:paddingBottom="7dp">
+                android:padding="8dp">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/btnBack"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:background="?selectableItemBackgroundBorderless"
-                    android:padding="7dp"
+                    android:padding="8dp"
                     android:src="?homeAsUpIndicator"
                     android:visibility="gone" />
 
@@ -47,30 +45,30 @@
                     style="@style/TextAppearance.Material3.ActionBar.Title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginHorizontal="8dp"
                     android:layout_weight="1"
                     android:textAlignment="viewStart"
                     tools:text="Title" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/btnScrollToTop"
-                    android:tooltipText="@string/tooltip_scroll_to_top"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:background="?selectableItemBackgroundBorderless"
-                    android:padding="7dp"
+                    android:padding="8dp"
                     android:rotationX="180"
                     android:src="@drawable/ic_arrow_downward"
+                    android:tooltipText="@string/tooltip_scroll_to_top"
                     android:visibility="gone" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/btnClose"
-                    android:tooltipText="@string/tooltip_close"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:background="?selectableItemBackgroundBorderless"
-                    android:padding="7dp"
-                    android:src="@drawable/ic_close" />
+                    android:padding="8dp"
+                    android:src="@drawable/ic_close"
+                    android:tooltipText="@string/tooltip_close" />
 
             </LinearLayout>
 

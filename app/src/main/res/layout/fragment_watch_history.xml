@@ -52,7 +52,7 @@
                     android:id="@+id/status_filter_chips"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="12dp"
+                    android:paddingHorizontal="8dp"
                     app:selectionRequired="true"
                     tools:checkedChip="@id/chip_continue">
 

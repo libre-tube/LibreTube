@@ -9,8 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:clipToPadding="false"
-        android:paddingVertical="15dp" />
+        android:clipToPadding="false" />
 
     <com.google.android.material.loadingindicator.LoadingIndicator
         android:id="@+id/progress"

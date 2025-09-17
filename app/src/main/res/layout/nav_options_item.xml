@@ -7,8 +7,6 @@
     android:descendantFocusability="blocksDescendants"
     android:focusable="true"
     android:orientation="horizontal"
-    android:paddingStart="16dp"
-    android:paddingEnd="0dp"
     tools:gravity="start|center_vertical">
 
     <ImageView
@@ -16,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:paddingHorizontal="10dp"
+        android:paddingHorizontal="16dp"
         android:src="@drawable/ic_home_outlined"
         tools:ignore="ContentDescription" />
 

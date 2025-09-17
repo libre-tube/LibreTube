@@ -18,29 +18,32 @@
             android:orientation="vertical">
 
             <!-- Drag handle for accessibility -->
+
             <com.google.android.material.bottomsheet.BottomSheetDragHandleView
                 android:id="@+id/drag_handle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="20dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="0dp" />
 
             <LinearLayout
                 android:id="@+id/bottom_sheet_title_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="12dp">
+                android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp">
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/subscriptions_search_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:hint="@string/search_hint"/>
+                        android:hint="@string/search_hint"
+                        android:inputType="text" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -50,7 +53,7 @@
                 android:id="@+id/channels_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         </LinearLayout>
 
