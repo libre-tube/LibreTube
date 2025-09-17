@@ -28,14 +28,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingBottom="10dp">
+                android:paddingBottom="20dp">
 
                 <LinearLayout
                     android:id="@+id/featuredTV"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?selectableItemBackground"
+                    android:orientation="horizontal"
                     android:visibility="gone">
 
                     <TextView
@@ -52,17 +52,16 @@
                     android:clipToPadding="false"
                     android:nestedScrollingEnabled="false"
                     android:orientation="horizontal"
-                    android:paddingHorizontal="10dp"
                     android:visibility="gone"
-                    tools:visibility="visible"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:visibility="visible" />
 
                 <LinearLayout
                     android:id="@+id/watchingTV"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?selectableItemBackground"
+                    android:orientation="horizontal"
                     android:visibility="gone">
 
                     <TextView
@@ -79,23 +78,21 @@
                     android:clipToPadding="false"
                     android:nestedScrollingEnabled="false"
                     android:orientation="horizontal"
-                    android:paddingHorizontal="10dp"
                     android:visibility="gone"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 <LinearLayout
+                    android:id="@+id/trendingTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/trendingTV"
-                    android:visibility="gone"
-                    tools:visibility="visible"
                     android:background="?selectableItemBackground"
-                    android:paddingEnd="10dp">
+                    android:paddingRight="8dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
 
                     <TextView
                         style="@style/HomeCategoryTitle"
                         android:text="@string/trending"
-                        android:background="@null"
                         app:drawableEndCompat="@drawable/ic_arrow_right" />
 
                     <View
@@ -130,20 +127,19 @@
                         android:id="@+id/trendingRV"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="10dp"
                         android:nestedScrollingEnabled="false"
                         android:visibility="gone"
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                        app:spanCount="2" />
+                        app:spanCount="1" />
 
                 </RelativeLayout>
 
                 <LinearLayout
                     android:id="@+id/bookmarksTV"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?selectableItemBackground"
+                    android:orientation="horizontal"
                     android:visibility="gone">
 
                     <TextView
@@ -157,9 +153,9 @@
                     android:id="@+id/bookmarksRV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
                     android:clipChildren="false"
                     android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
                     android:visibility="gone"
                     app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager" />
 
