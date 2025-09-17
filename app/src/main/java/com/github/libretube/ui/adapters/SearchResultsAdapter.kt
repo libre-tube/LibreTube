@@ -99,7 +99,6 @@ class SearchResultsAdapter(
 
             channelContainer.isGone = item.uploaderAvatar.isNullOrEmpty()
             channelName.text = item.uploaderName
-            ImageHelper.loadImage(item.uploaderAvatar, channelImage, true)
 
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, item.url, timestamp = timeStamp)

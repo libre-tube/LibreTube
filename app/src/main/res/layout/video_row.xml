@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/rounded_ripple">
+    android:background="@drawable/rounded_ripple"
+    android:padding="8dp">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -17,10 +18,9 @@
         android:id="@+id/thumbnail_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="8dp"
         app:cardCornerRadius="14dp"
-        app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -105,9 +105,7 @@
         android:id="@+id/video_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginHorizontal="8dp"
         android:ellipsize="end"
         android:maxLines="2"
         android:textAlignment="viewStart"
@@ -122,8 +120,7 @@
         android:id="@+id/video_info"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginHorizontal="8dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:textAlignment="viewStart"
@@ -137,8 +134,6 @@
         android:id="@+id/download_badge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:src="@drawable/ic_download_folder"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
@@ -151,37 +146,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
         app:cardCornerRadius="13.5dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline">
-
-        <ImageView
-            android:id="@+id/channel_image"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:srcCompat="@mipmap/ic_launcher" />
-
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintStart_toStartOf="@+id/guideline"/>
 
     <LinearLayout
         android:id="@+id/channel_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/channel_image_container">
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/video_info">
 
         <TextView
             android:id="@+id/channel_name"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:ellipsize="end"
             android:gravity="bottom"
             android:maxLines="1"
-            android:paddingVertical="5.5dp"
             android:textSize="14sp"
             tools:text="Channel name" />
 

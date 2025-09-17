@@ -62,7 +62,6 @@ class VideosAdapter(
             ImageHelper.loadImage(video.thumbnail, thumbnail)
 
             if (showChannelInfo) {
-                ImageHelper.loadImage(video.uploaderAvatar, channelImage, true)
                 channelName.text = video.uploaderName
 
                 channelContainer.setOnClickListener {

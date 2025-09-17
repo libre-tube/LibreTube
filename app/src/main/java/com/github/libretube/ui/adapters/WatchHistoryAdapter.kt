@@ -49,16 +49,6 @@ class WatchHistoryAdapter :
                 thumbnailDurationCard.isGone = true
             }
 
-            if (video.uploaderAvatar != null) {
-                ImageHelper.loadImage(video.uploaderAvatar, channelImage, true)
-            } else {
-                channelImageContainer.isGone = true
-            }
-
-            channelImage.setOnClickListener {
-                NavigationHelper.navigateChannel(root.context, video.uploaderUrl)
-            }
-
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, video.videoId)
             }
