@@ -4,14 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingHorizontal="15dp"
-    android:paddingTop="15dp">
+    android:padding="20dp">
 
     <TextView
+        style="@style/TextAppearance.Material3.ActionBar.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/contribute_to_dearrow"
-        android:textSize="24sp" />
+        android:text="@string/contribute_to_dearrow" />
 
     <LinearLayout
         android:layout_width="match_parent"

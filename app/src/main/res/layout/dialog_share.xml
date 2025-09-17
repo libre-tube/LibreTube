@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingHorizontal="20dp"
-    android:paddingTop="10dp">
+    android:paddingVertical="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,19 +15,19 @@
 
         <RadioGroup
             android:id="@+id/share_host_group"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <RadioButton
                 android:id="@+id/youtube"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/youtube" />
 
             <RadioButton
                 android:id="@+id/piped"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/piped" />
 
@@ -76,9 +76,9 @@
             android:id="@+id/share_link_card"
             style="@style/Widget.Material3.CardView.Elevated"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="?selectableItemBackground"
-            android:layout_height="wrap_content">
+            android:background="?selectableItemBackground">
 
             <LinearLayout
                 android:id="@+id/copy_link"
@@ -89,16 +89,16 @@
 
                 <TextView
                     android:id="@+id/link_preview"
-                    android:layout_gravity="center"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
                     tools:text="https://youtu.be/abcdefghijgk" />
 
                 <ImageView
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:src="@drawable/ic_copy" />
 
             </LinearLayout>
@@ -106,4 +106,5 @@
         </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
+
 </LinearLayout>

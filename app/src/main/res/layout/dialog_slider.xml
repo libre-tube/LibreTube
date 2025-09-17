@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingHorizontal="10dp"
-    android:paddingVertical="10dp">
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="20dp">
 
     <TextView
         android:id="@+id/currentValue"
@@ -12,7 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginVertical="10dp"
-        android:textSize="18sp" />
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:text="20" />
 
     <LinearLayout
         android:layout_width="match_parent"

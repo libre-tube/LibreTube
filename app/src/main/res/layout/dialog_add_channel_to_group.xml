@@ -18,25 +18,27 @@
             android:orientation="vertical">
 
             <!-- Drag handle for accessibility -->
+
             <com.google.android.material.bottomsheet.BottomSheetDragHandleView
                 android:id="@+id/drag_handle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="20dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="0dp" />
 
             <LinearLayout
                 android:id="@+id/bottom_sheet_title_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="12dp">
+                android:orientation="vertical">
 
                 <TextView
+                    style="@style/TextAppearance.Material3.ActionBar.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="@string/add_to_group"
-                    android:textSize="27sp" />
+                    android:layout_marginHorizontal="8dp"
+                    android:padding="8dp"
+                    android:text="@string/add_to_group" />
 
                 <com.google.android.material.divider.MaterialDivider
                     android:layout_width="match_parent"
@@ -56,20 +58,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginVertical="12dp">
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/cancel"
-                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    style="@style/Widget.Material3Expressive.Button.OutlinedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/cancel" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/okay"
+                    style="@style/Widget.Material3Expressive.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginStart="16dp"
                     android:text="@string/okay" />
 
             </LinearLayout>

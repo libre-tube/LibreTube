@@ -3,33 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:paddingBottom="20dp"
+    android:paddingHorizontal="20dp">
 
     <com.github.libretube.ui.views.DropdownMenu
         android:id="@+id/playlists_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="8dp"
         app:icon="@drawable/ic_playlist_add" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:padding="8dp"
+        android:layout_marginTop="10dp"
         android:gravity="end|center_vertical"
         android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
-            style="@style/Widget.Material3.Button.TextButton.Dialog"
             android:id="@+id/create_playlist"
+            style="@style/Widget.Material3Expressive.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:text="@string/createPlaylist" />
 
         <com.google.android.material.button.MaterialButton
-            style="@style/Widget.Material3.Button.TextButton.Dialog"
             android:id="@+id/add_to_playlist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

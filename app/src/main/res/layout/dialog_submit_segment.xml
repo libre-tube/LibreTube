@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingHorizontal="15dp"
-    android:paddingTop="15dp">
+    android:padding="20dp">
 
     <LinearLayout
         android:id="@+id/create_segment_container"
@@ -14,10 +13,10 @@
         android:orientation="vertical">
 
         <TextView
+            style="@style/TextAppearance.Material3.ActionBar.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sb_create_segment"
-            android:textSize="24sp" />
+            android:text="@string/sb_create_segment" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,10 +90,10 @@
         android:orientation="vertical">
 
         <TextView
+            style="@style/TextAppearance.Material3.ActionBar.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vote_for_segment"
-            android:textSize="24sp" />
+            android:text="@string/vote_for_segment" />
 
         <com.github.libretube.ui.views.DropdownMenu
             android:id="@+id/segments_dropdown"
