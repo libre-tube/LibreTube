@@ -89,8 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center|end"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="-10dp"
-        android:paddingEnd="20dp"
+        android:layout_marginEnd="10dp"
         app:cardBackgroundColor="#88000000"
         app:strokeWidth="1dp"
         tools:ignore="RtlSymmetry">
@@ -99,14 +98,13 @@
             android:id="@+id/sb_skip_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="20dp"
-            android:padding="10dp"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
             android:text="@string/skip_segment"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:visibility="gone"
             app:drawableEndCompat="@drawable/ic_next"
-            app:drawableEndDimen="20dp"
             app:drawableTint="@android:color/white" />
 
     </com.google.android.material.card.MaterialCardView>
