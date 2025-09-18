@@ -214,7 +214,7 @@
     <string name="captions">Legendas</string>
     <string name="none">Nada</string>
     <string name="general">Geral</string>
-    <string name="general_summary">Idioma e região</string>
+    <string name="general_summary">Descargas e poupança de dados</string>
     <string name="playingOnBackground">Reprodução em segundo plano…</string>
     <string name="caption_settings">Legendas</string>
     <string name="playerAudioFormat">Formato padrão do áudio</string>
@@ -245,7 +245,7 @@
     <string name="maximum_image_cache">Máximo de imagens em cache</string>
     <string name="copied_to_clipboard">Copiado para a área de transferência</string>
     <string name="open_copied">Abrir</string>
-    <string name="device_info">Informação do dispositivo</string>
+    <string name="device_info">Informações do dispositivo</string>
     <string name="audio_video_summary">Qualidade e formato</string>
     <string name="delete">Eliminar das descargas</string>
     <string name="new_videos_badge">Indicador para novos vídeos</string>
@@ -358,7 +358,7 @@
     <string name="codecs">Codificadores de vídeo</string>
     <string name="mark_as_watched">Marcar como visto</string>
     <string name="unsupported_file_format">Formato não suportado: %1$s</string>
-    <string name="custom_playback_speed">Personalizada</string>
+    <string name="custom_playback_speed">Velocidade personalizada</string>
     <string name="custom_playback_speed_summary">Utilizar velocidade de reprodução personalizada</string>
     <string name="normal_views">%1$s visualizações %2$s</string>
     <string name="category">Categoria</string>
@@ -422,7 +422,7 @@
     <string name="category_highlight_summary">Pode ser o título anunciado, a miniatura ou a parte mais interessante do vídeo. Pode ir para essa parte tocando-lhe na secção de capítulos</string>
     <string name="sb_custom_colors_summary">Alternar segmentos de cores personalizadas para segmentos SponsorBlock</string>
     <string name="fallback_piped_proxy">Usar Piped proxy como recurso</string>
-    <string name="fallback_piped_proxy_summary">Carregar vídeos através do proxy Piped se a ligação ao YouTube não funcionar para o vídeo atual (aumenta o tempo de carregamento inicial). Se desativado, é provável que o conteúdo musical não seja reproduzido devido a restrições do YouTube.</string>
+    <string name="fallback_piped_proxy_summary">Carregar vídeos através do proxy se a ligação ao YouTube não funcionar para o vídeo atual (aumenta o tempo de carregamento inicial). Se inativa, é provável que o conteúdo musical não seja reproduzido devido às restrições do YouTube.</string>
     <string name="continue_watching">Continuar a ver</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">Idioma de áudio desconhecido</string>
@@ -565,4 +565,5 @@
     <string name="podcasts">Podcasts</string>
     <string name="trailers">Trailers</string>
     <string name="music">Músicas</string>
+    <string name="include_timestamp_in_filename">Incluir data e hora no nome do ficheiro</string>
 </resources>
