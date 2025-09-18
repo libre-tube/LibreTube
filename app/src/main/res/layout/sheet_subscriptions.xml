@@ -22,9 +22,7 @@
             <com.google.android.material.bottomsheet.BottomSheetDragHandleView
                 android:id="@+id/drag_handle"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="0dp" />
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:id="@+id/bottom_sheet_title_layout"
