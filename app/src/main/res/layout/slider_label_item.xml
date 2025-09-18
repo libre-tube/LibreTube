@@ -10,10 +10,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginEnd="3dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="1.5dp"
         app:cardCornerRadius="6dp"
-        app:strokeColor="?colorControlHighlight"
-        app:strokeWidth="1dp">
+        app:strokeWidth="1dp"
+        app:strokeColor="?colorControlHighlight">
 
         <TextView
             android:id="@+id/speed_text"
