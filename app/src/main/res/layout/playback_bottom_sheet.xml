@@ -30,28 +30,28 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginBottom="20dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="23dp"
                         android:text="@string/playback_speed" />
 
                     <LinearLayout
-                        android:paddingStart="10dp"
-                        android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginVertical="10dp"
                         android:orientation="vertical">
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/speed_shortcuts"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:paddingHorizontal="20dp"
+                            android:layout_marginBottom="10dp"
                             android:clipToPadding="false"
+                            android:orientation="horizontal"
                             app:layoutManager="LinearLayoutManager"
                             tools:listitem="@layout/slider_label_item" />
 
@@ -62,43 +62,38 @@
                             android:stepSize="0.05"
                             android:value="1.0"
                             android:valueFrom="0.2"
-                            android:valueTo="4.0"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginHorizontal="10dp" />
+                            android:valueTo="4.0" />
 
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="23dp"
-                        android:layout_marginTop="20dp"
                         android:text="@string/playback_pitch" />
 
                     <LinearLayout
-                        android:paddingHorizontal="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginVertical="10dp"
                         android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="23dp"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical">
+                            android:layout_marginBottom="10dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
                             <com.google.android.material.button.MaterialButton
-                                style="@style/Widget.Material3.Button.TonalButton"
                                 android:id="@+id/semitone_decrement_button"
+                                style="@style/Widget.Material3.Button.TonalButton"
                                 android:layout_width="60dp"
                                 android:layout_height="50dp"
-                                app:shapeAppearance="?shapeAppearanceCornerMedium"
                                 app:icon="@drawable/music_flat_symbol"
-                                app:iconSize="15dp"
-                                app:iconPadding="0dp"
                                 app:iconGravity="textStart"
+                                app:iconPadding="0dp"
+                                app:iconSize="15dp"
+                                app:shapeAppearance="?shapeAppearanceCornerMedium"
                                 tools:ignore="HardcodedText" />
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -114,31 +109,31 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
+                                    android:imeOptions="actionDone"
                                     android:inputType="numberDecimal|numberSigned"
                                     android:textAppearance="?android:textAppearanceSmall"
-                                    android:imeOptions="actionDone"
                                     tools:text="-1.0" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.button.MaterialButton
-                                style="@style/Widget.Material3.Button.TonalButton"
                                 android:id="@+id/semitone_increment_button"
+                                style="@style/Widget.Material3.Button.TonalButton"
                                 android:layout_width="60dp"
                                 android:layout_height="50dp"
-                                app:shapeAppearance="?shapeAppearanceCornerMedium"
                                 app:icon="@drawable/music_sharp_symbol"
-                                app:iconSize="15dp"
-                                app:iconPadding="0dp"
                                 app:iconGravity="textStart"
+                                app:iconPadding="0dp"
+                                app:iconSize="15dp"
+                                app:shapeAppearance="?shapeAppearanceCornerMedium"
                                 tools:ignore="HardcodedText" />
 
                             <com.google.android.material.button.MaterialButton
-                                style="@style/Widget.Material3.Button.IconButton"
                                 android:id="@+id/pitch_reset_button"
-                                android:layout_marginStart="10dp"
+                                style="@style/Widget.Material3.Button.IconButton"
                                 android:layout_width="60dp"
                                 android:layout_height="45dp"
+                                android:layout_marginStart="10dp"
                                 app:icon="@drawable/ic_restart" />
 
                         </LinearLayout>
@@ -149,9 +144,7 @@
                             android:layout_height="wrap_content"
                             android:value="0"
                             android:valueFrom="-12.0"
-                            android:valueTo="12.0"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginHorizontal="10dp" />
+                            android:valueTo="12.0" />
 
                     </LinearLayout>
 
@@ -159,8 +152,6 @@
                         android:id="@+id/skip_silence"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="17dp"
-                        android:paddingHorizontal="5dp"
                         android:text="@string/skip_silence" />
 
                 </LinearLayout>

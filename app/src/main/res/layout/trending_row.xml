@@ -4,16 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/rounded_ripple">
+    android:background="@drawable/rounded_ripple"
+    android:padding="8dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/thumbnailcard"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="14dp"
         app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,14 +25,15 @@
             <ImageView
                 android:id="@+id/thumbnail"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                tools:src="@tools:sample/backgrounds/scenic" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginBottom="6dp"
                 app:cardBackgroundColor="@color/duration_background_color"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="0dp"
@@ -69,11 +68,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:ellipsize="end"
         android:maxLines="2"
         android:textAlignment="viewStart"
-        android:textSize="15sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/thumbnailcard"
         app:layout_constraintStart_toEndOf="@+id/channel_image_container"
@@ -86,8 +84,8 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="2"
-        android:paddingBottom="16dp"
         android:textAlignment="viewStart"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/textView_title"
         app:layout_constraintStart_toStartOf="@+id/textView_title"
         app:layout_constraintTop_toBottomOf="@+id/textView_title"
@@ -97,16 +95,15 @@
         android:id="@+id/channel_image_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="25dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/thumbnailcard">
 
         <ImageView
             android:id="@+id/channel_image"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             tools:srcCompat="@mipmap/ic_launcher" />
 
     </androidx.cardview.widget.CardView>

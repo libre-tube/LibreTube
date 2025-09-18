@@ -88,6 +88,7 @@ class PlaylistAdapter(
 
             // piped does not load channel avatars for playlist views
             channelContainer.isGone = true
+            channelImageContainer.isGone = true
 
             ImageHelper.loadImage(streamItem.thumbnail, thumbnail)
             thumbnailDuration.setFormattedDuration(streamItem.duration ?: -1, streamItem.isShort, streamItem.uploaded)

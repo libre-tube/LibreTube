@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingTop="8dp">
+    android:paddingTop="10dp">
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/CustomDialogTextInputLayout"

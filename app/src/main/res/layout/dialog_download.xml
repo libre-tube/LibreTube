@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingHorizontal="20dp">
+    android:paddingHorizontal="20dp"
+    android:paddingTop="10dp">
 
     <TextView
         android:id="@+id/video_title"
@@ -13,7 +15,9 @@
         android:layout_marginBottom="5dp"
         android:ellipsize="end"
         android:maxLines="2"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:text="Tittle" />
 
     <com.github.libretube.ui.views.DropdownMenu
         android:id="@+id/video_spinner"

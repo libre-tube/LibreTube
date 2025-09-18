@@ -33,28 +33,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/noInternet" />
+            android:text="@string/noInternet"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/retry_button"
-            style="@style/ThemeOverlay.Material3.Button.ElevatedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:text="@string/retry"
-            android:textColor="?android:attr/colorBackground"
             app:elevation="20dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/downloads"
-            style="@style/ThemeOverlay.Material3.Button.ElevatedButton"
+            style="@style/Widget.Material3Expressive.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:text="@string/downloads"
-            android:textColor="?android:attr/colorBackground"
             app:elevation="20dp" />
 
     </LinearLayout>

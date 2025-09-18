@@ -1,5 +1,6 @@
 package com.github.libretube.ui.sheets
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -30,13 +31,14 @@ open class BaseBottomSheet(@LayoutRes layoutResId: Int = R.layout.bottom_sheet) 
 
         if (title != null) {
             binding.bottomSheetTitleLayout.isVisible = true
+            binding.dragHandle.isVisible = false
 
             binding.bottomSheetTitle.text = title
             binding.bottomSheetTitle.textSize = titleTextSize
-            binding.bottomSheetTitle.updateLayoutParams<MarginLayoutParams> {
-                marginStart = titleMargin
-                marginEnd = titleMargin
-            }
+            binding.bottomSheetTitle.setTypeface(null, Typeface.BOLD)
+        } else {
+            binding.dragHandle.isVisible = true
+            binding.dragHandleTitle.isVisible = false
         }
 
         // set the selected item
@@ -88,7 +90,6 @@ open class BaseBottomSheet(@LayoutRes layoutResId: Int = R.layout.bottom_sheet) 
     }
 
     companion object {
-        private val titleTextSize = 7f.dpToPx().toFloat()
-        private val titleMargin = 24f.dpToPx()
+        private val titleTextSize = 8f.dpToPx().toFloat()
     }
 }
