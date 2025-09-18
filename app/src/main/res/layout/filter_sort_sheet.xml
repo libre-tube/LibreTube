@@ -83,13 +83,12 @@
                     android:id="@+id/sort_radio_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="16dp" />
+                    android:layout_marginVertical="10dp" />
 
                 <CheckBox
                     android:id="@+id/show_upcoming_checkbox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:text="@string/show_upcoming_videos" />
 
                 <CheckBox

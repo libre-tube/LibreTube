@@ -34,47 +34,47 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_all"
-                    style="@style/Chip"
+                    style="@style/ElevatedFilterChip"
                     android:text="@string/all" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_videos"
-                    style="@style/Chip"
+                    style="@style/ElevatedFilterChip"
                     android:text="@string/videos" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_channels"
-                    style="@style/Chip"
+                    style="@style/ElevatedFilterChip"
                     android:text="@string/channels" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_playlists"
-                    style="@style/Chip"
+                    style="@style/ElevatedFilterChip"
                     android:text="@string/playlists" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_music_songs"
-                    style="@style/Chip"
+                    style="@style/ElevatedFilterChip"
                     android:text="@string/music_songs" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_music_videos"
-                    style="@style/Chip"
+                    style="@style/ElevatedFilterChip"
                     android:text="@string/music_videos" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_music_albums"
-                    style="@style/Chip"
+                    style="@style/ElevatedFilterChip"
                     android:text="@string/music_albums" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_music_playlists"
-                    style="@style/Chip"
+                    style="@style/ElevatedFilterChip"
                     android:text="@string/music_playlists" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_music_artists"
-                    style="@style/Chip"
+                    style="@style/ElevatedFilterChip"
                     android:text="@string/music_artists" />
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
