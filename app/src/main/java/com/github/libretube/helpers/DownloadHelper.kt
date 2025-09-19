@@ -52,7 +52,7 @@ object DownloadHelper {
         return PreferenceHelper.getString(
             PreferenceKeys.MAX_CONCURRENT_DOWNLOADS,
             "6"
-        ).toFloat().toInt()
+        ).toIntOrNull() ?: 6
     }
 
     fun startDownloadService(context: Context, downloadData: DownloadData? = null) {
