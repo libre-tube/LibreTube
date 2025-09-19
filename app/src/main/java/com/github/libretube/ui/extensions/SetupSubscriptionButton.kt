@@ -74,7 +74,7 @@ fun TextView.setupSubscriptionButton(
                     .make(
                         rootView,
                         context.getString(R.string.unsubscribe_snackbar_message, channelName),
-                        Snackbar.LENGTH_SHORT
+                        1000
                     )
                     .setAction(R.string.undo, {
                         setSubscriptionState(true)
