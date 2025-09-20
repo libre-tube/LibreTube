@@ -565,4 +565,5 @@
     <string name="trailers">Trailer</string>
     <string name="music">Musik</string>
     <string name="createNewPlaylist">Neue Playlist erstellen</string>
+    <string name="include_timestamp_in_filename">Zeitstempel in Dateinamen einfügen</string>
 </resources>
