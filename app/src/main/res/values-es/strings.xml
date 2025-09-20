@@ -3,7 +3,7 @@
     <string name="save">Guardar</string>
     <string name="download">Descargar</string>
     <string name="subscribe">Suscribirse</string>
-    <string name="unsubscribe">Cancelar suscripción</string>
+    <string name="unsubscribe">Desuscribir</string>
     <string name="share">Compartir</string>
     <string name="username">Nombre de usuario</string>
     <string name="password">Contraseña</string>
@@ -163,7 +163,7 @@
     <string name="restore">Restaurar</string>
     <string name="deleteAccount_summary">Elimina tu cuenta Piped</string>
     <string name="deleteAccount">Eliminar cuenta</string>
-    <string name="watch_history">Historial de reproducciones</string>
+    <string name="watch_history">Historial</string>
     <string name="watch_positions">Recordar posición</string>
     <string name="auth_instance">Instancia de autenticación</string>
     <string name="auth_instance_summary">Usa otra instancia distinta para hacer solicitudes con autenticación</string>
@@ -537,7 +537,7 @@
     <string name="local_stream_extraction">Adquisición de transmisión local</string>
     <string name="local_ryd_summary">Obtener directamente información de los \'no me gusta\' en https://returnyoutubedislikeapi.com</string>
     <string name="local_ryd">\'Return YouTube Dislike\' localmente</string>
-    <string name="import_watch_history">Importa tu historial de visualización</string>
+    <string name="import_watch_history">Importa tu historial de reproducción</string>
     <string name="import_watch_history_desc">Por favor, tenga en cuenta que no se importará todo debido a los datos de exportación limitados de YouTube.</string>
     <string name="audio_codecs">Códecs de audio</string>
     <string name="view_count">%1$s vistas</string>
