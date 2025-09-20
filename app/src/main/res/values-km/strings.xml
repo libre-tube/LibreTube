@@ -39,7 +39,7 @@
     <string name="yes">បាទ/ចាស</string>
     <string name="username">អត្ថនាម</string>
     <string name="cannotDownload">មិនអាចទាញយកស្ទ្រីមនេះទេ។</string>
-    <string name="channels">កាណាល់</string>
+    <string name="channels">ឆាណែល</string>
     <string name="deletePlaylist">លុបកម្រងវីដេអូ</string>
     <string name="changeLanguage">ភាសា</string>
     <string name="category_segments">ចម្រៀក</string>
@@ -51,7 +51,7 @@
     <string name="retry">ព្យាយាមម្តងទៀត</string>
     <string name="playback_speed">ល្បឿនចាក់</string>
     <string name="update_available_text">អាប់ដេតថ្មីអាចប្រើប្រាស់បាន។ ចុចដើម្បីបើកទំព័រចេញផ្សាយ GitHub ។</string>
-    <string name="customization">កែតម្រូវ</string>
+    <string name="customization">ការកែតម្រូវ</string>
     <string name="instance">ឧបមា</string>
     <string name="areYouSure">លុបកម្រងវីដេអូឬ\?</string>
     <string name="download">ទាញយក</string>
