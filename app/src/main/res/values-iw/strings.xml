@@ -559,11 +559,11 @@
     <string name="authentication">אימות</string>
     <string name="full_local_mode">מצב מקומי מלא</string>
     <string name="mode_of_operation">מצב פעולה</string>
-    <string name="createNewPlaylist">צור רשימת השמעה חדשה</string>
-    <string name="playback_pitch_semitone_error_input">הערך חייב להיות בין -%1$.1f (מינימום) ל-%1$.1f (מקסימום)</string>
+    <string name="createNewPlaylist">יצירת רשימת נגינה חדשה</string>
+    <string name="playback_pitch_semitone_error_input">הערך חייב להיות בין ‎-%1$.1f (לכל הפחות) לבין %1$.1f (לכל היותר)</string>
     <string name="gaming">משחקים</string>
-    <string name="podcasts">פודקאסטים</string>
-    <string name="trailers">קדימון</string>
+    <string name="podcasts">הסכתים</string>
+    <string name="trailers">קדימונים</string>
     <string name="music">מוזיקה</string>
-    <string name="include_timestamp_in_filename">כלול חותמת זמן בשם הקובץ</string>
+    <string name="include_timestamp_in_filename">לכלול חותמת זמן בשם הקובץ</string>
 </resources>
