@@ -18,16 +18,13 @@ interface SABRChunkSource : ChunkSource {
          * @param manifest The initial manifest.
          * @param streamElementIndex The index of the corresponding stream element in the manifest.
          * @param trackSelection The track selection.
-         * @param transferListener The transfer listener which should be informed of any data transfers.
-         * May be null if no listener is available.
-         * @param cmcdConfiguration The [CmcdConfiguration] for this chunk source.
          * @return The created [SABRChunkSource].
          */
         fun createChunkSource(
-            manifestLoaderErrorThrower: LoaderErrorThrower?,
-            manifest: SABRManifest?,
+            manifestLoaderErrorThrower: LoaderErrorThrower,
+            manifest: SABRManifest,
             streamElementIndex: Int,
-            trackSelection: ExoTrackSelection?,
+            trackSelection: ExoTrackSelection,
         ): SABRChunkSource?
     }
 
@@ -36,12 +33,12 @@ interface SABRChunkSource : ChunkSource {
      *
      * @param newManifest The new manifest.
      */
-    fun updateManifest(newManifest: SABRManifest?)
+    fun updateManifest(newManifest: SABRManifest)
 
     /**
      * Updates the track selection.
      *
      * @param trackSelection The new track selection instance. Must be equivalent to the previous one.
      */
-    fun updateTrackSelection(trackSelection: ExoTrackSelection?)
+    fun updateTrackSelection(trackSelection: ExoTrackSelection)
 }

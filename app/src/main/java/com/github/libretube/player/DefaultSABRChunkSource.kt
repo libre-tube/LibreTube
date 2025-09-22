@@ -1,33 +1,40 @@
 package com.github.libretube.player
 
+import android.net.Uri
 import androidx.annotation.OptIn
 import androidx.media3.common.util.UnstableApi
+import androidx.media3.datasource.DataSpec
 import androidx.media3.exoplayer.LoadingInfo
 import androidx.media3.exoplayer.SeekParameters
 import androidx.media3.exoplayer.source.chunk.Chunk
 import androidx.media3.exoplayer.source.chunk.ChunkHolder
+import androidx.media3.exoplayer.source.chunk.ContainerMediaChunk
 import androidx.media3.exoplayer.source.chunk.MediaChunk
 import androidx.media3.exoplayer.trackselection.ExoTrackSelection
+import androidx.media3.exoplayer.trackselection.TrackSelectionUtil
 import androidx.media3.exoplayer.upstream.LoadErrorHandlingPolicy
 import androidx.media3.exoplayer.upstream.LoaderErrorThrower
-import androidx.media3.extractor.mp4.FragmentedMp4Extractor
 import com.github.libretube.player.manifest.SABRManifest
 
 @OptIn(UnstableApi::class)
-class DefaultSABRChunkSource : SABRChunkSource {
-    class Factory : SABRChunkSource.Factory {
+class DefaultSABRChunkSource(
+    private var trackSelection: ExoTrackSelection,
+    private var dataSourceFactory: SABRDataSouce.Factory,
+) : SABRChunkSource {
+
+    class Factory(private val dataSourceFactory: SABRDataSouce.Factory) : SABRChunkSource.Factory {
         override fun createChunkSource(
-            manifestLoaderErrorThrower: LoaderErrorThrower?,
-            manifest: SABRManifest?,
+            manifestLoaderErrorThrower: LoaderErrorThrower,
+            manifest: SABRManifest,
             streamElementIndex: Int,
-            trackSelection: ExoTrackSelection?
-        ): SABRChunkSource? = DefaultSABRChunkSource()
+            trackSelection: ExoTrackSelection,
+        ): SABRChunkSource? = DefaultSABRChunkSource(trackSelection, dataSourceFactory)
     }
 
-    override fun updateManifest(newManifest: SABRManifest?) {}
+    override fun updateManifest(newManifest: SABRManifest) {}
 
-    override fun updateTrackSelection(trackSelection: ExoTrackSelection?) {
-        TODO("Not yet implemented")
+    override fun updateTrackSelection(trackSelection: ExoTrackSelection) {
+        this.trackSelection = trackSelection
     }
 
     override fun getAdjustedSeekPositionUs(
@@ -42,17 +49,13 @@ class DefaultSABRChunkSource : SABRChunkSource {
     override fun getPreferredQueueSize(
         playbackPositionUs: Long,
         queue: List<out MediaChunk>
-    ): Int {
-        TODO("Not yet implemented")
-    }
+    ): Int = trackSelection.evaluateQueueSize(playbackPositionUs, queue)
 
     override fun shouldCancelLoad(
         playbackPositionUs: Long,
         loadingChunk: Chunk,
         queue: List<out MediaChunk>
-    ): Boolean {
-        TODO("Not yet implemented")
-    }
+    ): Boolean = trackSelection.shouldCancelChunkLoad(playbackPositionUs, loadingChunk, queue)
 
     override fun getNextChunk(
         loadingInfo: LoadingInfo,
@@ -63,9 +66,7 @@ class DefaultSABRChunkSource : SABRChunkSource {
         TODO("Not yet implemented")
     }
 
-    override fun onChunkLoadCompleted(chunk: Chunk) {
-        TODO("Not yet implemented")
-    }
+    override fun onChunkLoadCompleted(chunk: Chunk) {}
 
     override fun onChunkLoadError(
         chunk: Chunk,
@@ -73,7 +74,10 @@ class DefaultSABRChunkSource : SABRChunkSource {
         loadErrorInfo: LoadErrorHandlingPolicy.LoadErrorInfo,
         loadErrorHandlingPolicy: LoadErrorHandlingPolicy
     ): Boolean {
-        TODO("Not yet implemented")
+        val fallbackSelection = loadErrorHandlingPolicy.getFallbackSelectionFor(
+            TrackSelectionUtil.createFallbackOptions(trackSelection), loadErrorInfo
+        )
+        return cancelable && fallbackSelection != null && fallbackSelection.type == LoadErrorHandlingPolicy.FALLBACK_TYPE_TRACK
     }
 
     override fun release() {
