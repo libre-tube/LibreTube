@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     tools:ignore="UseCompoundDrawables"
     android:background="@drawable/rounded_ripple"
     android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="2dp"
     android:paddingHorizontal="8dp"
-    android:paddingVertical="4dp">
+    android:paddingVertical="2dp">
 
     <TextView
         android:id="@+id/instanceName"
@@ -21,11 +21,12 @@
         android:ellipsize="end"
         android:maxLines="1" />
 
-    <ImageView
+    <com.google.android.material.button.MaterialButton
+        style="?materialIconButtonFilledStyle"
         android:id="@+id/deleteInstance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@drawable/ic_delete" />
+        app:icon="@drawable/ic_delete" />
 
 </LinearLayout>
