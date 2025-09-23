@@ -14,16 +14,44 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.25" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/thumbnail"
+    <FrameLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/RoundedImageView"
-        tools:src="@tools:sample/backgrounds/scenic" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            app:cardBackgroundColor="@color/duration_background_color"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:id="@+id/thumbnail_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="3dp"
+                android:paddingVertical="1dp"
+                android:textColor="@color/duration_text_color"
+                android:textSize="10sp"
+                tools:ignore="SmallSp"
+                tools:text="05:36" />
+        </androidx.cardview.widget.CardView>
+
+    </FrameLayout>
 
     <TextView
         android:id="@+id/title"

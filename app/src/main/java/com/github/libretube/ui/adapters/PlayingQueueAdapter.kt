@@ -34,8 +34,8 @@ class PlayingQueueAdapter(
         holder.binding.apply {
             ImageHelper.loadImage(streamItem.thumbnail, thumbnail)
             title.text = streamItem.title
-            videoInfo.text = streamItem.uploaderName + "  •  " +
-                DateUtils.formatElapsedTime(streamItem.duration ?: 0)
+            videoInfo.text = streamItem.uploaderName
+            thumbnailDuration.text = DateUtils.formatElapsedTime(streamItem.duration ?: 0)
 
             val currentIndex = PlayingQueue.currentIndex()
             root.setBackgroundColor(
