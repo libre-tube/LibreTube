@@ -25,10 +25,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="10dp"
                     android:gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="8dp"
-                    android:paddingVertical="10dp">
+                    android:orientation="horizontal">
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/watch_history"
@@ -56,7 +56,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="10dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -102,6 +101,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_gravity="center"
+                            android:layout_marginBottom="16dp"
                             android:src="@drawable/ic_list" />
 
                         <TextView

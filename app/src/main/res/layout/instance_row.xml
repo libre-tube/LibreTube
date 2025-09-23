@@ -3,14 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingHorizontal="12dp">
+    android:orientation="vertical">
 
     <com.google.android.material.radiobutton.MaterialRadioButton
         android:id="@+id/radio_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="10dp"
+        android:layout_marginStart="20dp"
         tools:ignore="RtlSymmetry"
         tools:text="kavin.rocks" />
 
