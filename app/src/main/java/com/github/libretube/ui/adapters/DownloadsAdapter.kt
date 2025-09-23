@@ -58,7 +58,6 @@ class DownloadsAdapter(
         holder.binding.apply {
             fileSize.isVisible = true
 
-            channelImageContainer.isGone = true
             videoTitle.text = download.title
             channelName.text = download.uploader
             videoInfo.text = download.uploadDate?.let { TextUtils.localizeDate(it) }

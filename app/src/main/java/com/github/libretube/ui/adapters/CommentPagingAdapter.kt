@@ -117,9 +117,6 @@ class CommentPagingAdapter(
                             com.google.android.material.R.attr.colorSurface
                         )
                     )
-
-                    root.updatePadding(top = 20)
-                    root.updateLayoutParams<ViewGroup.MarginLayoutParams> { bottomMargin = 20 }
                 } else {
                     root.background = AppCompatResources.getDrawable(
                         root.context,

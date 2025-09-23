@@ -71,6 +71,7 @@ class ChaptersBottomSheet : ExpandablePlayerSheet(R.layout.bottom_sheet) {
         }
 
         binding.bottomSheetTitle.text = context?.getString(R.string.chapters)
+        binding.dragHandle.isVisible = false
         binding.bottomSheetTitleLayout.isVisible = true
 
         chaptersViewModel.chaptersLiveData.observe(viewLifecycleOwner) {

@@ -32,47 +32,47 @@
                 android:id="@+id/bottom_controls"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
                 android:background="@drawable/rounded_ripple"
-                android:padding="10dp">
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp">
 
                 <ImageView
                     android:id="@+id/repeat"
-                    android:tooltipText="@string/tooltip_repeat"
                     style="@style/QueueSheetOption"
-                    android:src="@drawable/ic_repeat" />
+                    android:src="@drawable/ic_repeat"
+                    android:tooltipText="@string/tooltip_repeat" />
 
                 <ImageView
                     android:id="@+id/add_to_playlist"
-                    android:tooltipText="@string/addToPlaylist"
                     style="@style/QueueSheetOption"
-                    android:src="@drawable/ic_playlist_add" />
+                    android:src="@drawable/ic_playlist_add"
+                    android:tooltipText="@string/addToPlaylist" />
 
                 <ImageView
                     android:id="@+id/sort"
-                    android:tooltipText="@string/tooltip_sort"
                     style="@style/QueueSheetOption"
-                    android:src="@drawable/ic_sort" />
+                    android:src="@drawable/ic_sort"
+                    android:tooltipText="@string/tooltip_sort" />
 
                 <ImageView
                     android:id="@+id/watch_positions_options"
-                    android:tooltipText="@string/tooltip_watch_position"
                     style="@style/QueueSheetOption"
-                    android:src="@drawable/ic_eye" />
+                    android:src="@drawable/ic_eye"
+                    android:tooltipText="@string/tooltip_watch_position" />
 
                 <ImageView
                     android:id="@+id/clear_queue"
-                    android:tooltipText="@string/tooltip_clear_queue"
                     style="@style/QueueSheetOption"
-                    android:src="@drawable/ic_close" />
+                    android:src="@drawable/ic_close"
+                    android:tooltipText="@string/tooltip_clear_queue" />
 
                 <ImageView
                     android:id="@+id/dismiss"
-                    android:tooltipText="@string/tooltip_dismiss"
                     style="@style/QueueSheetOption"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_arrow_down" />
+                    android:src="@drawable/ic_arrow_down"
+                    android:tooltipText="@string/tooltip_dismiss" />
 
             </LinearLayout>
 

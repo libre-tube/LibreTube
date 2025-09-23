@@ -6,8 +6,8 @@
     android:background="?attr/selectableItemBackground"
     android:drawablePadding="25dp"
     android:gravity="center_vertical"
-    android:paddingHorizontal="30dp"
-    android:paddingVertical="12dp"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="10dp"
     android:textSize="16sp"
     tools:drawableStart="@drawable/ic_download"
     tools:text="Option" />

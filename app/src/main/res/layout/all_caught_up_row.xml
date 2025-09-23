@@ -21,15 +21,16 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:text="@string/all_caught_up"
-        android:textColor="?android:attr/textColorPrimary" />
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="5dp"
         android:text="@string/all_caught_up_summary"
         android:textColor="?attr/colorControlNormal"
-        android:textSize="13sp" />
+        android:textSize="14sp" />
 
 </LinearLayout>

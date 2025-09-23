@@ -22,20 +22,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:paddingTop="8dp"
-                android:paddingBottom="0dp"
-                app:tint="?android:attr/textColorSecondaryInverse" />
+                android:paddingBottom="0dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                style="@style/TextAppearance.Material3.ActionBar.Title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="18dp"
-                android:layout_marginVertical="6dp"
-                android:layout_marginStart="15dp"
-                android:ellipsize="marquee"
-                android:fadingEdge="horizontal"
+                android:layout_marginHorizontal="8dp"
+                android:padding="8dp"
                 android:text="@string/stats_for_nerds"
-                android:textColor="?android:textColorPrimary"
-                android:textSize="24sp" />
+                android:textAlignment="viewStart" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
@@ -52,16 +48,17 @@
                     android:gravity="center_vertical"
                     android:orientation="vertical"
                     android:paddingHorizontal="20dp"
-                    android:paddingVertical="7dp">
+                    android:paddingTop="10dp"
+                    android:paddingBottom="20dp">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        style="@style/CustomDialogTextInputLayout"
                         android:id="@+id/video_id_copy"
-                        android:layout_marginTop="10dp"
-                        app:endIconMode="custom"
+                        style="@style/CustomDialogTextInputLayout"
+                        android:layout_marginHorizontal="0dp"
+                        android:hint="@string/video_id"
                         app:endIconContentDescription="@string/copy_tooltip"
                         app:endIconDrawable="@drawable/ic_copy"
-                        android:hint="@string/video_id">
+                        app:endIconMode="custom">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/video_id"
@@ -70,7 +67,7 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/CustomDialogTextInputLayout"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginHorizontal="0dp"
                         android:hint="@string/audio">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -80,7 +77,7 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/CustomDialogTextInputLayout"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginHorizontal="0dp"
                         android:hint="@string/video">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -90,7 +87,7 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/CustomDialogTextInputLayout"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginHorizontal="0dp"
                         android:hint="@string/quality">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -101,6 +98,8 @@
                 </LinearLayout>
 
             </ScrollView>
+
         </LinearLayout>
+
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

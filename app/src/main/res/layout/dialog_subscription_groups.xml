@@ -4,27 +4,39 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+        android:id="@+id/drag_handle"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="0dp" />
+
     <TextView
-        android:layout_width="wrap_content"
+        style="@style/TextAppearance.Material3.ActionBar.Title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="18dp"
-        android:text="@string/channel_groups"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:layout_marginHorizontal="8dp"
+        android:padding="8dp"
+        android:text="@string/channel_groups" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/materialDivider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/groupsRV"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
         android:layout_weight="1" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:paddingVertical="10dp">
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/new_group"
@@ -35,10 +47,10 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/confirm"
-            style="@style/Widget.Material3.Button.ElevatedButton"
+            style="@style/Widget.Material3Expressive.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginStart="16dp"
             android:text="@string/okay" />
 
     </LinearLayout>

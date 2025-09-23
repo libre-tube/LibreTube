@@ -50,6 +50,7 @@ class DownloadDialog : DialogFragment() {
             .setTitle(R.string.download)
             .setView(binding.root)
             .setPositiveButton(R.string.download, null)
+            .setNegativeButton(R.string.cancel, null)
             .show()
             .apply {
                 getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
