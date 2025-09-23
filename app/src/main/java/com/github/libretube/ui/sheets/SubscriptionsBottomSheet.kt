@@ -1,5 +1,6 @@
 package com.github.libretube.ui.sheets
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -39,8 +40,8 @@ class SubscriptionsBottomSheet : ExpandedBottomSheet(R.layout.sheet_subscription
 
         initHeaderLayout()
 
-        binding.subscriptionsSearchInput.addTextChangedListener { query ->
-            showFilteredSubscriptions(query.toString())
+        binding.subscriptionsSearchInput.addTextChangedListener { _ ->
+            showFilteredSubscriptions()
         }
 
         viewModel.subscriptions.observe(viewLifecycleOwner) {
@@ -48,58 +49,57 @@ class SubscriptionsBottomSheet : ExpandedBottomSheet(R.layout.sheet_subscription
         }
     }
 
-    private fun initHeaderLayout(){
-        binding.allSubsBtn.text = String.format(
-            Locale.getDefault(),
-            "%s (%d)",
-            ContextCompat.getString(requireContext(), R.string.subscriptions),
-            viewModel.subscriptions.value?.size
-        )
-        binding.allSubsBtn.isToggleCheckedStateOnClick = false
+    private fun initHeaderLayout() {
+        @SuppressLint("StringFormatInvalid")
+        binding.allSubsBtn.text =
+            "%s (%d)".format(
+                requireContext().getString(R.string.subscriptions),
+                viewModel.subscriptions.value?.size ?: 0
+            )
         binding.allSubsBtn.setOnClickListener {
             binding.groupEditBtn.isVisible = false
 
             showFilteredSubscriptions()
         }
 
-        channelGroupsModel.groups.value
-            ?.getOrNull(selectedChannelGroup - 1)
-            ?.let { channelGroup ->
-            binding.allSubsBtn.isToggleCheckedStateOnClick = true
-            binding.allSubsBtn.text = String.format(
-                Locale.getDefault(),
-                "%s (%d)",
-                ContextCompat.getString(requireContext(), R.string.all),
-                viewModel.subscriptions.value?.size
-            )
+        channelGroupsModel.groups.observe(viewLifecycleOwner) { groups ->
+            groups?.getOrNull(selectedChannelGroup - 1)?.let { channelGroup ->
+                @SuppressLint("StringFormatInvalid")
+                binding.allSubsBtn.text =
+                    "%s (%d)".format(
+                        requireContext().getString(R.string.all),
+                        viewModel.subscriptions.value?.size ?: 0
+                    )
 
-            binding.groupSubsBtn.isVisible = true
-            binding.groupSubsBtn.isChecked = true
-            binding.groupSubsBtn.text = String.format(
-                Locale.getDefault(),
-                "%s (%d)",
-                channelGroup.name,
-                channelGroup.channels.size
-            )
-            binding.groupSubsBtn.setOnClickListener {
+                binding.groupSubsBtn.isVisible = true
+                binding.groupSubsBtn.isChecked = true
+                binding.groupSubsBtn.text = "%s (%d)".format(
+                    channelGroup.name,
+                    channelGroup.channels.size
+                )
+                binding.groupSubsBtn.setOnClickListener {
+                    binding.groupEditBtn.isVisible = true
+
+                    showFilteredSubscriptions()
+                }
+
                 binding.groupEditBtn.isVisible = true
+                binding.groupEditBtn.setOnClickListener {
+                    channelGroupsModel.groupToEdit = channelGroup
+                    EditChannelGroupSheet()
+                        .show(parentFragmentManager, null)
+                }
 
-                showFilteredSubscriptions()
-            }
-
-            binding.groupEditBtn.isVisible = true
-            binding.groupEditBtn.setOnClickListener {
-                channelGroupsModel.groupToEdit = channelGroupsModel.groups.value
-                    ?.getOrNull(selectedChannelGroup - 1)?.also {
-                        dismiss()
-                        EditChannelGroupSheet().show(parentFragmentManager, null)
-                    }
+                // refresh displayed list of channels when channel groups have been edited
+                if (binding.groupSubsBtn.isChecked) {
+                    showFilteredSubscriptions()
+                }
             }
         }
     }
 
-    private fun showFilteredSubscriptions(query: String? = null) {
-        val loweredQuery = (query?: searchInputText).lowercase()
+    private fun showFilteredSubscriptions() {
+        val loweredQuery = searchInputText.trim().lowercase()
 
         val shouldFilterByGroup = binding.groupSubsBtn.isChecked
         val filteredSubscriptions = viewModel.subscriptions.value.orEmpty()
@@ -113,8 +113,8 @@ class SubscriptionsBottomSheet : ExpandedBottomSheet(R.layout.sheet_subscription
         if (groupIndex == 0) return this
 
         val group = channelGroupsModel.groups.value?.getOrNull(groupIndex - 1)
-        if (group == null) return this
+            ?: return this
 
-        return filter { group.channels.contains(it.url.toID()) != false }
+        return filter { group.channels.contains(it.url.toID()) }
     }
 }

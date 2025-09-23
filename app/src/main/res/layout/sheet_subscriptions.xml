@@ -44,6 +44,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.0"
                         android:spacing="4dp"
+                        app:selectionRequired="true"
                         app:singleSelection="true">
 
                         <com.google.android.material.button.MaterialButton
