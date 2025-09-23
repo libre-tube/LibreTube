@@ -318,9 +318,7 @@
     <string name="alternative_videos_layout">Alternative videos layout</string>
     <string name="defaultIconLight">Default light</string>
     <string name="playlistCloned">Playlist cloned</string>
-    <string name="confirm_unsubscribe">Are you sure you want to unsubscribe %1$s?</string>
-    <string name="confirm_unsubscribing">Confirm unsubscribing</string>
-    <string name="confirm_unsubscribing_summary">Show a confirmation dialog before unsubscribing</string>
+    <string name="unsubscribe_snackbar_message">Successfully unsubscribed from %1$s</string>
     <string name="play_all">Play all</string>
     <string name="time">Time</string>
     <string name="start_time">Start time</string>
