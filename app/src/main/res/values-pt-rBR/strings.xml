@@ -26,7 +26,7 @@
     <string name="empty">Digite seu nome de usuário e a senha.</string>
     <string name="notgmail">Isto é para uma conta Piped</string>
     <string name="defres">Resolução dos vídeos</string>
-    <string name="grid">Colunas da grade (modo retrato)</string>
+    <string name="grid">Colunas da grade (modo vertical)</string>
     <string name="emptyList">Não há nada aqui.</string>
     <string name="deletePlaylist">Excluir playlist</string>
     <string name="createPlaylist">Criar playlist</string>
@@ -67,7 +67,7 @@
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">Usa a API https://sponsor.ajay.app</string>
     <string name="channels">Canais</string>
-    <string name="clear_history">Limpar histórico</string>
+    <string name="clear_history">Excluir histórico</string>
     <string name="all">Todos</string>
     <string name="playlists">Playlists</string>
     <string name="music_songs">Músicas do YT Music</string>
@@ -103,7 +103,7 @@
     <string name="playOnBackground">Reproduzir em segundo plano</string>
     <string name="disabled">Desabilitado</string>
     <string name="defaultIcon">Padrão</string>
-    <string name="update_available_text">Nova atualização disponível. Clique para abrir a página de lançamentos no GitHub.</string>
+    <string name="update_available_text">Nova atualização disponível. Clique para abrir a página de downloads no GitHub.</string>
     <string name="app_uptodate">Você já possui a atualização mais recente.</string>
     <string name="fireIcon">Fogo elegante</string>
     <string name="shapedIcon">Forma boba</string>
@@ -120,7 +120,7 @@
     <string name="update_summary">Buscar atualizações</string>
     <string name="playback_speed">Velocidade de reprodução</string>
     <string name="advanced">Avançado</string>
-    <string name="player">Player</string>
+    <string name="player">Reprodução</string>
     <string name="appearance_summary">Ajuste o aplicativo ao seu gosto</string>
     <string name="birdIcon">Pássaro impulsionado</string>
     <string name="shareTo">Compartilhar URL</string>
@@ -131,7 +131,7 @@
     <string name="instance_api_url">URL para API da instância</string>
     <string name="addInstance">Adicionar instância</string>
     <string name="empty_instance">Preencha o nome e o URL da API.</string>
-    <string name="clear_customInstances">Limpar adicionadas</string>
+    <string name="clear_customInstances">Excluir adicionadas</string>
     <string name="invalid_url">Insira um URL que funcione</string>
     <string name="related_streams">Conteúdo relacionado</string>
     <string name="category_filler_summary">Para cenas tangenciais adicionadas apenas para preenchimento ou humor, não é necessário entender o conteúdo principal do vídeo</string>
@@ -186,8 +186,8 @@
     <string name="fullscreen_orientation">Orientação em tela cheia</string>
     <string name="aspect_ratio">Proporção do vídeo</string>
     <string name="auto_rotation">Rotação automática</string>
-    <string name="landscape">Paisagem</string>
-    <string name="portrait">Retrato</string>
+    <string name="landscape">Horizontal</string>
+    <string name="portrait">Vertical</string>
     <string name="live">Ao vivo</string>
     <string name="no_video">Sem vídeo</string>
     <string name="audio">Áudio</string>
@@ -196,9 +196,9 @@
     <string name="turnInternetOn">Ative o Wi-Fi ou os dados móveis para se conectar à Internet.</string>
     <string name="navLabelVisibility">Visibilidade dos textos</string>
     <string name="never">Nunca</string>
-    <string name="autoRotatePlayer_summary">Reproduzir em tela cheia quando a orientação da tela girar para o modo paisagem</string>
-    <string name="pure_theme">Tema puro</string>
-    <string name="pure_theme_summary">Tema branco/preto puro</string>
+    <string name="autoRotatePlayer_summary">Reproduzir no modo tela cheia quando a tela do dispositivo for ligada</string>
+    <string name="pure_theme">Tema natural</string>
+    <string name="pure_theme_summary">Tema branco/preto natural</string>
     <string name="no_player_found">Nenhum player externo foi encontrado. Verifique se você tem um instalado.</string>
     <string name="data_saver_mode">Economia de dados</string>
     <string name="data_saver_mode_summary">Ignorar miniaturas e outras imagens</string>
@@ -209,7 +209,7 @@
     <string name="captions">Legendas</string>
     <string name="none">Nenhum</string>
     <string name="general">Geral</string>
-    <string name="general_summary">Idioma e região</string>
+    <string name="general_summary">Downloads e economia de dados</string>
     <string name="instance_frontend_url">URL para a interface da instância (opcional)</string>
     <string name="quality">Qualidade</string>
     <string name="behavior">Comportamento</string>
@@ -222,7 +222,7 @@
     <string name="caption_settings">Legendas</string>
     <string name="playerAudioFormat">Formato padrão do áudio</string>
     <string name="playerAudioQuality">Qualidade do áudio</string>
-    <string name="worst_quality">Menor qualidade</string>
+    <string name="worst_quality">Pior qualidade</string>
     <string name="new_videos_badge_summary">Mostrar um ícone com a quantidade de novos vídeos, se houver</string>
     <string name="backup_restore">Backup &amp; Restauração</string>
     <string name="maximum_image_cache">Tamanho máximo do cache de imagens</string>
@@ -262,7 +262,7 @@
     <string name="skip_segment">Pular segmento</string>
     <string name="playback_pitch">Tom de reprodução</string>
     <string name="copied">Copiado</string>
-    <string name="change_region">Parece que as tendências não estão disponíveis na sua região. Selecione outra região nas configurações.</string>
+    <string name="change_region">Parece que os conteúdos em alta não estão disponíveis na sua região. Selecione outra região nas configurações.</string>
     <string name="device_info">Informações do dispositivo</string>
     <string name="share_with_time">Compartilhar no momento atual</string>
     <string name="download_channel_name">Assistente de Download</string>
@@ -300,7 +300,7 @@
     <string name="trending">Em alta agora</string>
     <string name="bookmarks">Favoritos</string>
     <string name="bookmark">Favorito</string>
-    <string name="clear_bookmarks">Limpar favoritos</string>
+    <string name="clear_bookmarks">Excluir favoritos</string>
     <string name="local_playlists">Playlist locais</string>
     <string name="queue_insert_related_videos">Inserir vídeos relacionados</string>
     <string name="auto">Auto</string>
@@ -347,7 +347,7 @@
     <string name="concurrent_downloads">Número de downloads simultâneos</string>
     <string name="concurrent_downloads_limit_reached">Limite máximo de downloads simultâneos atingido.</string>
     <string name="unknown">Desconhecido</string>
-    <string name="resume">Retomar</string>
+    <string name="resume">Continuar</string>
     <string name="audio_only_mode_summary">Usar o LibreTube como player de músicas</string>
     <string name="audio_only_mode">Somente áudio</string>
     <string name="sleep_timer">Temporizador</string>
@@ -447,7 +447,7 @@
     <string name="player_channel_description">Mostrar notificações durante a reprodução</string>
     <string name="tooltip_create_playlist">Criar playlist</string>
     <string name="tooltip_repeat">Repetir</string>
-    <string name="tooltip_clear_queue">Limpar fila</string>
+    <string name="tooltip_clear_queue">Excluir fila</string>
     <string name="tooltip_close">Fechar</string>
     <string name="tooltip_watch_position">Posição de reprodução</string>
     <string name="tooltip_minimize">Minimizar</string>
@@ -476,7 +476,7 @@
     <string name="contribute_to_sponsorblock">Contribuir para SponsorBlock</string>
     <string name="filename_too_long">Nome do arquivo muito longo!</string>
     <string name="sponsorblock_user_id">ID do usuário SponsorBlock</string>
-    <string name="donate">Doar</string>
+    <string name="donate">Fazer doação</string>
     <string name="autoplay_playlists_summary">Reproduzir automaticamente o próximo vídeo nas playlists, independentemente da configuração de reprodução automática selecionada</string>
     <string name="no_fullscreen_resolution">Resolução sem tela cheia</string>
     <string name="playback_during_call_summary">Observe que isso também afeta o aplicativo para não lidar mais com nenhum tipo de foco de áudio</string>
@@ -504,7 +504,7 @@
     <string name="rich_caption_rendering">Legendas melhoradas</string>
     <string name="rich_caption_rendering_summary">Processar legendas para um experiência melhorada e personalizada</string>
     <string name="uptime">%.2f%% em atividade</string>
-    <string name="grid_landscape">Colunas da grade (modo paisagem)</string>
+    <string name="grid_landscape">Colunas da grade (modo horizontal)</string>
     <string name="copy_tooltip">Copiar</string>
     <string name="change_instance">Alterar instância</string>
     <string name="suggest_change_instance">O carregamento está demorando mais do que o normal. Considere a possibilidade de alterar a instância</string>
@@ -516,7 +516,7 @@
     <string name="audio_language">Idioma do áudio</string>
     <string name="enqueueing_playlist_download">Enfileirando vídeos para o download da playlist %1$s</string>
     <string name="delete_all">Todos os downloads serão excluídos!</string>
-    <string name="also_clear_watch_positions">Limpar também as posições de reprodução</string>
+    <string name="also_clear_watch_positions">Excluir também as posições de reprodução</string>
     <string name="behavior_when_minimized">Comportamento quando minimizado</string>
     <string name="gestures">Gestos</string>
     <string name="comments_count">Comentários (%1$s)</string>
@@ -559,4 +559,11 @@
     <string name="full_local_mode_desc">Obtenha tudo diretamente do YouTube, sem usar o Piped.</string>
     <string name="authentication">Autenticação</string>
     <string name="full_local_mode">Modo local completo</string>
+    <string name="createNewPlaylist">Criar nova playlist</string>
+    <string name="playback_pitch_semitone_error_input">O valor deve estar entre -%1$.1f (mínimo) e %1$.1f (máximo)</string>
+    <string name="gaming">Jogos</string>
+    <string name="podcasts">Podcasts</string>
+    <string name="trailers">Trailers</string>
+    <string name="music">Músicas</string>
+    <string name="include_timestamp_in_filename">Incluir data e hora para o nome do arquivo</string>
 </resources>

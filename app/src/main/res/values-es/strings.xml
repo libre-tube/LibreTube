@@ -3,7 +3,7 @@
     <string name="save">Guardar</string>
     <string name="download">Descargar</string>
     <string name="subscribe">Suscribirse</string>
-    <string name="unsubscribe">Cancelar suscripción</string>
+    <string name="unsubscribe">Desuscribir</string>
     <string name="share">Compartir</string>
     <string name="username">Nombre de usuario</string>
     <string name="password">Contraseña</string>
@@ -75,7 +75,7 @@
     <string name="music_videos">YT Música: Vídeos</string>
     <string name="music_albums">YT Música: Álbumes</string>
     <string name="music_playlists">YT Música: Listas</string>
-    <string name="sponsorblock">SponsorBlock</string>
+    <string name="sponsorblock" translatable="false">SponsorBlock</string>
     <string name="sponsorblock_summary">Usa la API de https://sponsor.ajay.app</string>
     <string name="segment_skipped">Segmento omitido</string>
     <string name="category_sponsor">Patrocinador</string>
@@ -163,7 +163,7 @@
     <string name="restore">Restaurar</string>
     <string name="deleteAccount_summary">Elimina tu cuenta Piped</string>
     <string name="deleteAccount">Eliminar cuenta</string>
-    <string name="watch_history">Historial de reproducciones</string>
+    <string name="watch_history">Historial</string>
     <string name="watch_positions">Recordar posición</string>
     <string name="auth_instance">Instancia de autenticación</string>
     <string name="auth_instance_summary">Usa otra instancia distinta para hacer solicitudes con autenticación</string>
@@ -220,7 +220,7 @@
     <string name="network_all">Todas</string>
     <string name="notify_new_streams_summary">Mostrar notificaciones de nuevas transmisiones de los creadores que sigues</string>
     <string name="general">General</string>
-    <string name="general_summary">Idioma y región</string>
+    <string name="general_summary">Descargas y ahorro de datos</string>
     <string name="playerAudioFormat">Formato de audio para el reproductor</string>
     <string name="playerAudioQuality">Calidad de audio</string>
     <string name="resize_mode_zoom">Ampliar</string>
@@ -232,7 +232,7 @@
     <string name="backup_restore">Copia de seguridad y restauración</string>
     <string name="backup">Copia de seguridad</string>
     <string name="picture_in_picture">Reproductor flotante</string>
-    <string name="device_info">Información del dispositivo</string>
+    <string name="device_info">Información del Dispositivo</string>
     <string name="share_with_time">Compartir con marca de tiempo</string>
     <string name="export_subscriptions">Exportar suscripciones</string>
     <string name="take_a_break">Es hora de tomar un descanso</string>
@@ -258,11 +258,11 @@
     <string name="renamePlaylist">Renombrar lista de reproducción</string>
     <string name="wifi">En conexiones WiFi</string>
     <string name="mobile_data">En conexiones móviles</string>
-    <string name="download_channel_name">Servicio de descarga</string>
+    <string name="download_channel_name">Servicio de Descarga</string>
     <string name="skip_segment">Omitir</string>
     <string name="download_channel_description">Mostrar una notificación al descargar medios.</string>
-    <string name="push_channel_name">Notificador de novedades</string>
-    <string name="push_channel_description">Mostrar una notificación cuando hay nuevas transmisiones disponibles.</string>
+    <string name="push_channel_name">Notificador de Novedades</string>
+    <string name="push_channel_description">Mostrar una notificación cuando haya nuevas transmisiones disponibles.</string>
     <string name="local_subscriptions">Suscripciones locales</string>
     <string name="preferences">Preferencias</string>
     <string name="backup_customInstances">Instancias personalizadas</string>
@@ -327,7 +327,7 @@
     <string name="privacy_alert">Alerta de privacidad</string>
     <string name="proceed">Continuar</string>
     <string name="username_email">No se recomienda utilizar una dirección de correo electrónico como nombre de usuario. ¿Proceder de todos modos?</string>
-    <string name="play_latest_videos">Reproducir los últimos videos</string>
+    <string name="play_latest_videos">Reproducir últimos videos</string>
     <string name="nothing_selected">¡Nada seleccionado!</string>
     <string name="color_violet">Violeta versátil</string>
     <string name="failed_fetching_instances">No se pudieron obtener las instancias disponibles.</string>
@@ -442,9 +442,9 @@
     <string name="duration_span">Duración: %1$s</string>
     <string name="no_chapter">Sin capítulos</string>
     <string name="screen_orientation">Orientación de pantalla</string>
-    <string name="remove_watched_videos">Quitar los videos ya vistos</string>
-    <string name="player_channel_name">Servicios del reproductor</string>
-    <string name="player_channel_description">Aparece una notificación cuando se está reproduciendo</string>
+    <string name="remove_watched_videos">Quitar videos ya vistos</string>
+    <string name="player_channel_name">Servicios del Reproductor</string>
+    <string name="player_channel_description">Mostrar una notificación cuando se esta reproduciendo</string>
     <string name="tooltip_sort">Ordenar</string>
     <string name="tooltip_dismiss">Rechazar</string>
     <string name="tooltip_fullscreen">Pantalla completa</string>
@@ -456,7 +456,7 @@
     <string name="tooltip_reverse">Invertir</string>
     <string name="tooltip_clear_queue">Vaciar cola</string>
     <string name="tooltip_locked">Bloquear reproductor</string>
-    <string name="tooltip_watch_position">Posición de visionado</string>
+    <string name="tooltip_watch_position">Posición de reproducción</string>
     <string name="tooltip_unlocked">Desbloquear reproductor</string>
     <string name="tooltip_sponsorblock">Alternar SponsorBlock</string>
     <string name="tooltip_options">Opciones</string>
@@ -537,7 +537,7 @@
     <string name="local_stream_extraction">Adquisición de transmisión local</string>
     <string name="local_ryd_summary">Obtener directamente información de los \'no me gusta\' en https://returnyoutubedislikeapi.com</string>
     <string name="local_ryd">\'Return YouTube Dislike\' localmente</string>
-    <string name="import_watch_history">Importa tu historial de visualización</string>
+    <string name="import_watch_history">Importa tu historial de reproducción</string>
     <string name="import_watch_history_desc">Por favor, tenga en cuenta que no se importará todo debido a los datos de exportación limitados de YouTube.</string>
     <string name="audio_codecs">Códecs de audio</string>
     <string name="view_count">%1$s vistas</string>
@@ -565,4 +565,5 @@
     <string name="music">Música</string>
     <string name="playback_pitch_semitone_error_input">El valor debe estar entre -%1$.1f (mínimo) y %1$.1f (máximo)</string>
     <string name="gaming">Videojuegos</string>
+    <string name="include_timestamp_in_filename">Incluir marca de tiempo en el archivo</string>
 </resources>
