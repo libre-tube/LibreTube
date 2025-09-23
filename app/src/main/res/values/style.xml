@@ -208,15 +208,6 @@
 
     </style>
 
-    <style name="QueueSheetOption">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:background">?selectableItemBackgroundBorderless</item>
-        <item name="android:layout_marginStart">4dp</item>
-        <item name="android:layout_marginEnd">4dp</item>
-        <item name="android:padding">5dp</item>
-    </style>
-
     <style name="Widget.Material3.Button.IconButton.Elevated" parent="Widget.Material3.Button.IconButton">
         <item name="android:stateListAnimator">@animator/m3_btn_elevated_btn_state_list_anim</item>
         <item name="elevation">@dimen/m3_comp_button_elevated_container_elevation</item>

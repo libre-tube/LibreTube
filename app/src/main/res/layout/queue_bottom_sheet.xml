@@ -28,53 +28,72 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <LinearLayout
-                android:id="@+id/bottom_controls"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="@drawable/rounded_ripple"
+                android:orientation="horizontal"
                 android:padding="10dp">
 
-                <ImageView
-                    android:id="@+id/repeat"
-                    android:tooltipText="@string/tooltip_repeat"
-                    style="@style/QueueSheetOption"
-                    android:src="@drawable/ic_repeat" />
+                <com.google.android.material.button.MaterialButtonGroup
+                    style="@style/Widget.Material3.MaterialButtonGroup.Connected"
+                    android:id="@+id/bottom_controls"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/add_to_playlist"
-                    android:tooltipText="@string/addToPlaylist"
-                    style="@style/QueueSheetOption"
-                    android:src="@drawable/ic_playlist_add" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/repeat"
+                        style="?materialIconButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tooltipText="@string/tooltip_repeat"
+                        app:icon="@drawable/ic_repeat" />
 
-                <ImageView
-                    android:id="@+id/sort"
-                    android:tooltipText="@string/tooltip_sort"
-                    style="@style/QueueSheetOption"
-                    android:src="@drawable/ic_sort" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/add_to_playlist"
+                        style="?materialIconButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tooltipText="@string/addToPlaylist"
+                        app:icon="@drawable/ic_playlist_add" />
 
-                <ImageView
-                    android:id="@+id/watch_positions_options"
-                    android:tooltipText="@string/tooltip_watch_position"
-                    style="@style/QueueSheetOption"
-                    android:src="@drawable/ic_eye" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/sort"
+                        style="?materialIconButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tooltipText="@string/tooltip_sort"
+                        app:icon="@drawable/ic_sort" />
 
-                <ImageView
-                    android:id="@+id/clear_queue"
-                    android:tooltipText="@string/tooltip_clear_queue"
-                    style="@style/QueueSheetOption"
-                    android:src="@drawable/ic_close" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/watch_positions_options"
+                        style="?materialIconButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tooltipText="@string/tooltip_watch_position"
+                        app:icon="@drawable/ic_eye" />
 
-                <ImageView
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/clear_queue"
+                        style="?materialIconButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tooltipText="@string/tooltip_clear_queue"
+                        app:icon="@drawable/ic_close" />
+
+                </com.google.android.material.button.MaterialButtonGroup>
+
+                <com.google.android.material.button.MaterialButton
+                    style="?materialIconButtonFilledTonalStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="end|center"
+                    android:layout_height="wrap_content"
                     android:id="@+id/dismiss"
-                    android:tooltipText="@string/tooltip_dismiss"
-                    style="@style/QueueSheetOption"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/ic_arrow_down" />
+                    android:drawablePadding="30dp"
+                    app:iconGravity="end"
+                    app:icon="@drawable/ic_arrow_down"
+                    android:tooltipText="@string/tooltip_dismiss" />
 
-            </LinearLayout>
+            </FrameLayout>
 
         </LinearLayout>
 

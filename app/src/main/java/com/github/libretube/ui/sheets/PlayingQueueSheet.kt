@@ -100,7 +100,7 @@ class PlayingQueueSheet : ExpandedBottomSheet(R.layout.queue_bottom_sheet) {
     private fun updateRepeatButton() {
         binding.repeat.alpha = if (PlayingQueue.repeatMode == Player.REPEAT_MODE_OFF) 0.5f else 1f
         val drawableResource = if (PlayingQueue.repeatMode == Player.REPEAT_MODE_ONE) R.drawable.ic_repeat_one else R.drawable.ic_repeat
-        binding.repeat.setImageResource(drawableResource)
+        binding.repeat.setIconResource(drawableResource)
     }
 
     @SuppressLint("NotifyDataSetChanged")
