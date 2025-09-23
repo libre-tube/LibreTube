@@ -40,43 +40,52 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <androidx.cardview.widget.CardView
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    app:cardCornerRadius="14dp">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/thumbnail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitCenter"
-                        tools:src="@tools:sample/backgrounds/scenic" />
+                    android:layout_height="wrap_content">
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom|end"
-                        android:layout_marginEnd="6dp"
-                        android:layout_marginBottom="6dp"
-                        app:cardBackgroundColor="@color/duration_background_color"
-                        app:cardCornerRadius="8dp"
-                        app:cardElevation="0dp">
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_margin="8dp"
+                        app:cardCornerRadius="14dp"
+                        app:layout_constraintDimensionRatio="16:9"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
 
-                        <TextView
-                            android:id="@+id/playlist_duration"
+                        <ImageView
+                            android:id="@+id/thumbnail"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:adjustViewBounds="true"
+                            android:scaleType="centerCrop"/>
+
+
+                        <androidx.cardview.widget.CardView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingHorizontal="6dp"
-                            android:paddingVertical="2dp"
-                            android:textColor="@color/duration_text_color"
-                            android:textSize="12sp"
-                            tools:text="05:36" />
+                            android:layout_gravity="bottom|end"
+                            android:layout_marginEnd="6dp"
+                            android:layout_marginBottom="6dp"
+                            app:cardBackgroundColor="@color/duration_background_color"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="0dp">
+
+                            <TextView
+                                android:id="@+id/playlist_duration"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingHorizontal="6dp"
+                                android:paddingVertical="2dp"
+                                android:textColor="@color/duration_text_color"
+                                android:textSize="12sp"
+                                tools:text="05:36" />
+
+                        </androidx.cardview.widget.CardView>
 
                     </androidx.cardview.widget.CardView>
-
-                </androidx.cardview.widget.CardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -97,7 +106,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:text="Title" />
 
                         <TextView
                             android:id="@+id/playlistInfo"
@@ -142,7 +152,8 @@
                     android:id="@+id/playlistDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp" />
+                    android:padding="8dp"
+                    tools:text="Description" />
 
                 <com.google.android.material.button.MaterialButtonGroup
                     android:layout_width="match_parent"
@@ -154,7 +165,7 @@
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/play_all"
-                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        style="@style/Widget.Material3Expressive.Button.OutlinedButton"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -164,7 +175,7 @@
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/bookmark"
-                        style="@style/Widget.Material3.Button"
+                        style="@style/Widget.Material3Expressive.Button"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -186,6 +197,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
+                        android:layout_marginBottom="16dp"
                         android:src="@drawable/ic_list" />
 
                     <TextView
