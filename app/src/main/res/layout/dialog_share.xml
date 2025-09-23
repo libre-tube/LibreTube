@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingHorizontal="20dp"
     android:paddingTop="10dp">
@@ -81,7 +82,6 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:id="@+id/copy_link"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
@@ -93,13 +93,16 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textIsSelectable="true"
                     tools:text="https://youtu.be/abcdefghijgk" />
 
-                <ImageView
+                <com.google.android.material.button.MaterialButton
+                    style="?materialIconButtonFilledStyle"
+                    android:id="@+id/copy_link"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_copy" />
+                    app:icon="@drawable/ic_copy" />
 
             </LinearLayout>
 

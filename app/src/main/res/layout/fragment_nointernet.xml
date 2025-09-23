@@ -4,15 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <com.google.android.material.button.MaterialButton
+        style="?materialIconButtonFilledTonalStyle"
         android:id="@+id/noInternet_settingsImageView"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
         android:layout_gravity="end"
         android:layout_margin="16dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="3dp"
-        android:src="@drawable/ic_settings" />
+        app:icon="@drawable/ic_settings" />
 
     <LinearLayout
         android:id="@+id/middle"

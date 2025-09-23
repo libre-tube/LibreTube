@@ -111,15 +111,14 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
-                                <ImageView
+                                <com.google.android.material.button.MaterialButton
+                                    style="?materialIconButtonFilledTonalStyle"
                                     android:id="@+id/edit_groups"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:layout_marginStart="12dp"
-                                    android:layout_marginEnd="6dp"
-                                    android:background="?attr/selectableItemBackgroundBorderless"
-                                    android:src="@drawable/ic_edit"
+                                    android:layout_marginStart="6dp"
+                                    app:icon="@drawable/ic_edit"
                                     android:tooltipText="@string/tooltip_edit_groups" />
 
                                 <com.google.android.material.chip.ChipGroup

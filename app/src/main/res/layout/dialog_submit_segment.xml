@@ -39,16 +39,14 @@
                     android:inputType="time" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <ImageView
+            <com.google.android.material.button.MaterialButton
+                style="?materialIconButtonFilledStyle"
                 android:id="@+id/swap_timestamps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="2dp"
-                android:background="?selectableItemBackgroundBorderless"
-                android:padding="4dp"
-                android:src="@drawable/ic_arrow_left_right" />
+                app:icon="@drawable/ic_arrow_left_right" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="0dp"
