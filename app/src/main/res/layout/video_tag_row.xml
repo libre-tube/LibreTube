@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="4dp"
+            android:textColor="?attr/colorPrimary"
             android:textSize="12sp"
             android:textStyle="bold"
             tools:text="Gaming" />
