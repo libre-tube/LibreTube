@@ -7,13 +7,14 @@
     android:animateLayoutChanges="true"
     android:background="@drawable/rounded_ripple"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:layout_marginVertical="12dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="12dp">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/player_sponsor_badge"
@@ -30,7 +31,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginHorizontal="12dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -111,23 +113,38 @@
             android:id="@+id/meta_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
             android:paddingVertical="8dp"
             android:textSize="14sp"
             android:visibility="gone"
             tools:text="Meta Info" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tags_recycler"
-            android:layout_width="wrap_content"
+        <HorizontalScrollView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="8dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="8dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/tags_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            </LinearLayout>
+        </HorizontalScrollView>
 
         <TextView
             android:id="@+id/player_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
             android:paddingVertical="8dp"
             android:textIsSelectable="true"
             android:textSize="14sp"
@@ -137,6 +154,7 @@
             android:id="@+id/additional_video_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
             android:paddingVertical="8dp"
             android:textIsSelectable="true"
             android:textSize="14sp"
