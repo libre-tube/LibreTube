@@ -194,21 +194,22 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+                app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                android:padding="5dp"
-                app:strokeWidth="0dp">
+                app:strokeWidth="0dp"
+                app:cardCornerRadius="8dp">
 
                 <TextView
                     android:id="@+id/seekbar_preview_position"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="5dp" />
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="2dp" />
 
             </com.google.android.material.card.MaterialCardView>
 
