@@ -3,7 +3,7 @@
     <string name="save">Guardar</string>
     <string name="download">Descargar</string>
     <string name="subscribe">Suscribirse</string>
-    <string name="unsubscribe">Cancelar suscripción</string>
+    <string name="unsubscribe">Desuscribir</string>
     <string name="share">Compartir</string>
     <string name="username">Nombre de usuario</string>
     <string name="password">Contraseña</string>
@@ -17,7 +17,7 @@
     <string name="registered">Registrado. Ahora puedes suscribirte a canales.</string>
     <string name="already_logged_in">Sesión ya iniciada. Vas a cerrar la sesión de tu cuenta.</string>
     <string name="instances">Instancias disponibles…</string>
-    <string name="customInstance">Añadir instancia...</string>
+    <string name="customInstance">Instancia personalizada</string>
     <string name="login_register">Iniciar sesión/Registrarse</string>
     <string name="importsuccess">Suscrito</string>
     <string name="loggedout">Sesión cerrada.</string>
@@ -47,7 +47,7 @@
     <string name="startpage">Inicio</string>
     <string name="subscriptions">Suscripciones</string>
     <string name="library">Biblioteca</string>
-    <string name="videos">Videos</string>
+    <string name="videos">Vídeos</string>
     <string name="import_from_yt_summary">Desde YouTube, NewPipe o FreeTube</string>
     <string name="changeLanguage">Idioma</string>
     <string name="systemLanguage">Sistema</string>
@@ -56,7 +56,7 @@
     <string name="subscribers">%1$s suscriptores</string>
     <string name="systemDefault">Sistema</string>
     <string name="comments">Comentarios</string>
-    <string name="videoCount">%1$d videos</string>
+    <string name="videoCount">%1$d vídeos</string>
     <string name="noInternet">Conéctate primero a Internet.</string>
     <string name="retry">Reintentar</string>
     <string name="customization">Personalización</string>
@@ -103,7 +103,7 @@
     <string name="disabled">Desactivado</string>
     <string name="playOnBackground">Reproducir en segundo plano</string>
     <string name="update_available_text">Nueva actualización disponible. Toca para ir a la página de descargas de GitHub.</string>
-    <string name="update_available">La versión %1$s está disponible</string>
+    <string name="update_available">Versión disponible</string>
     <string name="appearance">Apariencia</string>
     <string name="shareTo">Enviar URL a</string>
     <string name="defaultIcon">Predeterminado</string>
@@ -163,7 +163,7 @@
     <string name="restore">Restaurar</string>
     <string name="deleteAccount_summary">Elimina tu cuenta Piped</string>
     <string name="deleteAccount">Eliminar cuenta</string>
-    <string name="watch_history">Historial de reproducciones</string>
+    <string name="watch_history">Historial</string>
     <string name="watch_positions">Recordar posición</string>
     <string name="auth_instance">Instancia de autenticación</string>
     <string name="auth_instance_summary">Usa otra instancia distinta para hacer solicitudes con autenticación</string>
@@ -292,7 +292,7 @@
     <string name="layout">Diseño</string>
     <string name="audio_track">Pista de audio</string>
     <string name="auto_quality">Automática</string>
-    <string name="hls_instead_of_dash_summary">Usar HLS en vez de DASH (podría ser lento, no recomendado)</string>
+    <string name="hls_instead_of_dash_summary">Usar HLS en lugar de DASH para transmitir. Alterne esta opción si la reproducción de video no funciona.</string>
     <string name="hls_instead_of_dash">Usar HLS</string>
     <string name="limit_to_runtime">Limitar al tiempo de ejecución</string>
     <string name="trends">Tendencias</string>
@@ -327,7 +327,7 @@
     <string name="privacy_alert">Alerta de privacidad</string>
     <string name="proceed">Continuar</string>
     <string name="username_email">Usar una dirección de email no se recomienda. ¿Estas seguro?</string>
-    <string name="play_latest_videos">Reproducir los últimos videos</string>
+    <string name="play_latest_videos">Reproducir últimos videos</string>
     <string name="nothing_selected">¡Nada seleccionado!</string>
     <string name="color_violet">Violeta Versátil</string>
     <string name="failed_fetching_instances">No se pudieron obtener las instancias disponibles.</string>
@@ -370,9 +370,9 @@
     <string name="lbry_hls_summary">Usar LBRY HLS para la transmisión si está disponible</string>
     <string name="lbry_hls">LBRY HLS</string>
     <string name="subscriberAndVideoCounts">%1$s suscriptores • %2$d videos</string>
-    <string name="uploaderAndVideoCount">%1$s • %2$d videos</string>
+    <string name="uploaderAndVideoCount">%1$s • %2$d vídeos</string>
     <string name="disable_proxy">Deshabilitar el proxy de Piped</string>
-    <string name="disable_proxy_summary">Carga videos e imágenes directamente desde los servidores de YouTube. Sólo activa esta opción si de todos modos utilizas una VPN!</string>
+    <string name="disable_proxy_summary">Carga videos e imágenes directamente desde los servidores de YouTube. Sólo activa esta opción si siempre usas una VPN</string>
     <string name="auto_fullscreen_shorts">Shorts en pantalla completa</string>
     <string name="channel_groups">Grupos de canales</string>
     <string name="new_group">Nuevo</string>
@@ -478,4 +478,8 @@
     <string name="sponsorblock_user_id">ID de usuario SponsorBlock</string>
     <string name="donate">Donar</string>
     <string name="view_count">%1$s vistas</string>
+    <string name="unsubscribe_snackbar_message">Desuscripción exitosa de %1$s</string>
+    <string name="successfully_removed_from_playlist">Removido %1$s de la lista exitosamente.</string>
+    <string name="grid_landscape">Cuadrícula vertical</string>
+    <string name="music_artists">Artistas de YT Music</string>
 </resources>
