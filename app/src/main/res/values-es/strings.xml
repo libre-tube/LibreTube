@@ -566,4 +566,5 @@
     <string name="playback_pitch_semitone_error_input">El valor debe estar entre -%1$.1f (mínimo) y %1$.1f (máximo)</string>
     <string name="gaming">Videojuegos</string>
     <string name="include_timestamp_in_filename">Incluir marca de tiempo en el archivo</string>
+    <string name="unsubscribe_snackbar_message">Desuscripción exitosa de %1$s</string>
 </resources>
