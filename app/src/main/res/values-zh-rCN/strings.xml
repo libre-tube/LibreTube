@@ -564,4 +564,5 @@
     <string name="music">音乐</string>
     <string name="createNewPlaylist">创建新播放列表</string>
     <string name="include_timestamp_in_filename">在文件名中包含时间戳</string>
+    <string name="unsubscribe_snackbar_message">取消订阅 %1$s 成功</string>
 </resources>
