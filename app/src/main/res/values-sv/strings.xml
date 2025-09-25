@@ -255,7 +255,7 @@
     <string name="watch_positions_title">Sparade positioner för uppspelning</string>
     <string name="yt_shorts">Shorts</string>
     <string name="worst_quality">Lägsta</string>
-    <string name="general_summary">Språk, och region</string>
+    <string name="general_summary">Nedladdningar och datasparare</string>
     <string name="playerAudioQuality">Ljudkvalitet</string>
     <string name="no_player_found">Ingen extern spelare hittades. Kontrollera att du har en installerad.</string>
     <string name="invalid_color">Ogiltigt färgvärde ifyllt!</string>
@@ -345,7 +345,7 @@
     <string name="group_name">Namn på grupp</string>
     <string name="remove_bookmark">Ta bort bokmärke</string>
     <string name="play_automatically_summary">Spela upp vald video automatiskt</string>
-    <string name="device_info">Enhetsinformation</string>
+    <string name="device_info">Enhets information</string>
     <string name="local_playlists">Lokala spellistor</string>
     <string name="queue_insert_related_videos">Lägg till relaterade videor</string>
     <string name="autoplay_countdown_summary">Visa en nedräkning på 5 sekunder innan nästa video spelas upp automatiskt</string>
@@ -564,4 +564,5 @@
     <string name="podcasts">Poddsändningar</string>
     <string name="trailers">Trailers</string>
     <string name="music">Musik</string>
+    <string name="include_timestamp_in_filename">Inkludera tidsstämpel i filnamn</string>
 </resources>
