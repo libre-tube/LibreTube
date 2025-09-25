@@ -139,9 +139,9 @@ class SearchResultsAdapter(
 
             CoroutineScope(Dispatchers.IO).launch {
                 DeArrowUtil.deArrowVideoId(videoId)?.let { (title, thumbnail) ->
-                    if (title != null) binding.videoTitle.text = title
-                    if (thumbnail != null) withContext(Dispatchers.IO) {
-                        ImageHelper.loadImage(thumbnail, binding.thumbnail)
+                    withContext(Dispatchers.Main) {
+                        if (title != null) binding.videoTitle.text = title
+                        if (thumbnail != null) ImageHelper.loadImage(thumbnail, binding.thumbnail)
                     }
                 }
             }
