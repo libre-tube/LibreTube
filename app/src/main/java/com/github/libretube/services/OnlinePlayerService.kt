@@ -268,6 +268,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
 
         when {
             // SABR
+            //TODO: enable only experimentally/in DEBUG mode
             streams.serverAbrStreamingUrl != null && streams.videoPlaybackUstreamerConfig != null -> {
                 val sabrMediaSourceFactory = SABRMediaSource.Factory()
                 sabrMediaSourceFactory.setVideoId(videoId)
