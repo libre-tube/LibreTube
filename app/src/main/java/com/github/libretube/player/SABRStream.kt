@@ -1,5 +1,6 @@
 package com.github.libretube.player
 
+import android.net.Uri
 import android.util.Log
 import java.lang.RuntimeException
 import java.nio.ByteBuffer
@@ -11,6 +12,7 @@ class SABRStream {
      * Pointer to the stream on the native side.
      */
     private var streamPtr = 0L
+    lateinit var sabrUri: Uri
     private var audioChunks: MutableList<Segment> = mutableListOf()
     private var videoChunks: MutableList<Segment> = mutableListOf()
 
@@ -43,7 +45,7 @@ class SABRStream {
 
     fun prepare(
         video_id: String,
-        url: String,
+        url: Uri,
         ustreamer_config: ByteArray,
         po_token: ByteArray,
         audio_format_itag: Int,
@@ -52,7 +54,7 @@ class SABRStream {
         video_format_last_modified: Long,
     ) {
         streamPtr = create(
-            video_id, url, ustreamer_config, po_token, audio_format_itag, audio_format_last_modified, video_format_itag, video_format_last_modified
+            video_id, url.toString(), ustreamer_config, po_token, audio_format_itag, audio_format_last_modified, video_format_itag, video_format_last_modified
         )
         Log.d(TAG, "start: created native stream at $streamPtr")
     }
