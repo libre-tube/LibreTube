@@ -64,7 +64,7 @@ class SABRMediaPeriod(
         Log.e(TAG, "prepare: ${streams.videoPlaybackUstreamerConfig}")
         sabrStream.prepare(
             videoId,
-            uri.toString(),
+            uri,
             Base64.UrlSafe.decode(streams.videoPlaybackUstreamerConfig!!),
             //TODO: retrieve the poToken from the generator
             byteArrayOf(),
