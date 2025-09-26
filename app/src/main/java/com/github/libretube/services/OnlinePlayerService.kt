@@ -11,6 +11,7 @@ import androidx.media3.common.MediaItem.SubtitleConfiguration
 import androidx.media3.common.MimeTypes
 import androidx.media3.common.Player
 import androidx.media3.datasource.DefaultDataSource
+import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.exoplayer.hls.HlsMediaSource
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
@@ -36,7 +37,7 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.util.DeArrowUtil
-import com.github.libretube.player.SABRMediaSource
+import com.github.libretube.player.SabrMediaSource
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.YoutubeHlsPlaylistParser
 import kotlinx.coroutines.CoroutineScope
@@ -270,16 +271,15 @@ open class OnlinePlayerService : AbstractPlayerService() {
             // SABR
             //TODO: enable only experimentally/in DEBUG mode
             streams.serverAbrStreamingUrl != null && streams.videoPlaybackUstreamerConfig != null -> {
-                val sabrMediaSourceFactory = SABRMediaSource.Factory()
-                sabrMediaSourceFactory.setVideoId(videoId)
-                sabrMediaSourceFactory.setStreams(streams)
-
+                val dashManifest = PlayerHelper.createDashSource(streams, this)
+                val sabrMediaSourceFactory = SabrMediaSource.Factory(DefaultDataSource.Factory(this))
                 val mediaItem = createMediaItem(
-                    streams.serverAbrStreamingUrl.toUri(),
+                    dashManifest,
                     "application/vnd.yt-ump",
                     streams
                 )
                 val mediaSource = sabrMediaSourceFactory.createMediaSource(mediaItem)
+
                 exoPlayer?.setMediaSource(mediaSource)
                 return
             }
