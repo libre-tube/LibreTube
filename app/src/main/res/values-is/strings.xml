@@ -565,4 +565,5 @@
     <string name="trailers">Kynningarstiklur</string>
     <string name="music">Tónlist</string>
     <string name="include_timestamp_in_filename">Hafa tímamerki í skráarheiti</string>
+    <string name="unsubscribe_snackbar_message">Tókst að segja upp áskrift á %1$s</string>
 </resources>
