@@ -1,6 +1,7 @@
 package com.github.libretube.player
 
 import androidx.media3.common.util.UnstableApi
+import androidx.media3.exoplayer.analytics.PlayerId
 import androidx.media3.exoplayer.source.chunk.ChunkSource
 import androidx.media3.exoplayer.trackselection.ExoTrackSelection
 import androidx.media3.exoplayer.upstream.CmcdConfiguration
@@ -25,6 +26,7 @@ interface SABRChunkSource : ChunkSource {
             manifest: SABRManifest,
             streamElementIndex: Int,
             trackSelection: ExoTrackSelection,
+            playerId: PlayerId,
         ): SABRChunkSource?
     }
 

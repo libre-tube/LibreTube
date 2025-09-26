@@ -25,6 +25,7 @@ import androidx.media3.exoplayer.upstream.Allocator
 import androidx.media3.exoplayer.upstream.LoadErrorHandlingPolicy
 import androidx.media3.exoplayer.upstream.LoaderErrorThrower
 import com.github.libretube.api.obj.Streams
+import com.github.libretube.api.poToken.PoTokenGenerator
 import com.github.libretube.player.manifest.SABRManifest
 import okhttp3.internal.immutableListOf
 import kotlin.io.encoding.Base64
@@ -66,9 +67,7 @@ class SABRMediaPeriod(
             videoId,
             uri,
             Base64.UrlSafe.decode(streams.videoPlaybackUstreamerConfig!!),
-            //TODO: retrieve the poToken from the generator
-            byteArrayOf(),
-            //Base64.UrlSafe.decode(PoTokenGenerator().getWebEmbedClientPoToken(videoId)?.streamingDataPoToken!!),
+            Base64.UrlSafe.decode(PoTokenGenerator().getWebEmbedClientPoToken(videoId)?.streamingDataPoToken!!),
             //TODO: retrieve the appropriate itag from the player
             streams.audioStreams.last().itag!!,
             streams.audioStreams.last().lastModified!!,
@@ -219,6 +218,7 @@ class SABRMediaPeriod(
         return ChunkSampleStream<SABRChunkSource>(
             //TODO: use correct tracktype
             C.TRACK_TYPE_VIDEO,
+            //manifest.streamElements[streamElementIndex].type,
             null,
             null,
             chunkSource,
