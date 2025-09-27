@@ -566,4 +566,5 @@
     <string name="trailers">Trailers</string>
     <string name="music">Músicas</string>
     <string name="include_timestamp_in_filename">Incluir data e hora para o nome do arquivo</string>
+    <string name="unsubscribe_snackbar_message">Inscrição cancelada com sucesso em %1$s</string>
 </resources>
