@@ -1,0 +1,6 @@
+syntax = "proto2";
+package video_streaming;
+
+message SnackbarMessage {
+  optional int32 id = 1;
+}
