@@ -4,8 +4,10 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
+import android.view.ViewGroup.MarginLayoutParams
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -54,8 +56,10 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
         _binding = FragmentWatchHistoryBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
-        commonPlayerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
-            _binding?.watchHistoryRecView?.updatePadding(bottom = if (it) 64f.dpToPx() else 0)
+        commonPlayerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) { isMiniPlayerVisible ->
+            _binding?.playAll?.updateLayoutParams<MarginLayoutParams> {
+                bottomMargin = (if (isMiniPlayerVisible) 64f else 16f).dpToPx()
+            }
         }
 
         binding.watchHistoryRecView.setOnDismissListener { position ->
@@ -100,7 +104,8 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
                 .setPositiveButton(R.string.okay) { _, _ ->
                     binding.watchHistoryRecView.isGone = true
                     binding.historyEmpty.isVisible = true
-                    binding.historyOptions.isGone = true
+                    binding.clear.isVisible = true
+                    binding.playAll.isGone = true
                     binding.statusFilterChips.isGone = true
 
                     lifecycleScope.launch(Dispatchers.IO) {
@@ -142,7 +147,8 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
         viewModel.filteredWatchHistory.observe(viewLifecycleOwner) { history ->
             binding.historyEmpty.isGone = history.isNotEmpty()
             binding.watchHistoryRecView.isVisible = history.isNotEmpty()
-            binding.historyOptions.isVisible = history.isNotEmpty()
+            binding.clear.isVisible = history.isNotEmpty()
+            binding.playAll.isVisible = history.isNotEmpty()
 
             watchHistoryAdapter.submitList(history)
         }
