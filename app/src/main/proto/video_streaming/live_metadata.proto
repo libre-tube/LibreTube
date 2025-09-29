@@ -1,0 +1,16 @@
+syntax = "proto2";
+package video_streaming;
+
+message LiveMetadata {
+  optional string broadcast_id = 1;
+  optional int64 head_sequence_number = 3;
+  optional int64 head_time_ms = 4;
+  optional int64 wall_time_ms = 5;
+  optional string video_id = 6;
+  optional bool post_live_dvr = 8;
+  optional int64 headm = 10;
+  optional int64 min_seekable_time_ticks = 12;
+  optional int32 min_seekable_timescale = 13;
+  optional int64 max_seekable_time_ticks = 14;
+  optional int32 max_seekable_timescale = 15;
+}

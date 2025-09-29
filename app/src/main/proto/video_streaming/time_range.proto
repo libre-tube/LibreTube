@@ -1,0 +1,8 @@
+syntax = "proto2";
+package video_streaming;
+
+message TimeRange {
+  optional int64 start_ticks = 1;
+  optional int64 duration_ticks = 2;
+  optional int32 timescale = 3;
+}

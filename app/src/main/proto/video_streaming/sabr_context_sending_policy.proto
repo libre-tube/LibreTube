@@ -1,0 +1,8 @@
+syntax = "proto2";
+package video_streaming;
+
+message SabrContextSendingPolicy {
+  repeated int32 start_policy = 1;
+  repeated int32 stop_policy = 2;
+  repeated int32 discard_policy = 3;
+}

@@ -1,0 +1,66 @@
+syntax = "proto2";
+package video_streaming;
+
+message StreamerContext {
+  message ClientInfo {
+    optional string device_make = 12;
+    optional string device_model = 13;
+    optional int32 client_name = 16;
+    optional string client_version = 17;
+    optional string os_name = 18;
+    optional string os_version = 19;
+    optional string accept_language = 21;
+    optional string accept_region = 22;
+    optional int32 screen_width_points = 37;
+    optional int32 screen_height_points = 38;
+    optional float screen_width_inches = 39;
+    optional float screen_height_inches = 40;
+    optional int32 screen_pixel_density = 41;
+    optional ClientFormFactor client_form_factor = 46;
+    optional int32 gmscore_version_code = 50; // e.g. 243731017
+    optional int32 window_width_points = 55;
+    optional int32 window_height_points = 56;
+    optional int32 android_sdk_version = 64;
+    optional float screen_density_float = 65;
+    optional int64 utc_offset_minutes = 67;
+    optional string time_zone = 80;
+    optional string chipset = 92; // e.g. "qcom;taro"
+    optional GLDeviceInfo gl_device_info = 102;
+  }
+
+  enum ClientFormFactor {
+    UNKNOWN_FORM_FACTOR = 0;
+    FORM_FACTOR_VAL1 = 1;
+    FORM_FACTOR_VAL2 = 2;
+  }
+
+  message GLDeviceInfo {
+    optional string gl_renderer = 1;
+    optional int32 gl_es_version_major = 2;
+    optional int32 gl_es_version_minor = 3;
+  }
+
+  message SabrContext {
+    optional int32 type = 1;
+    optional bytes value = 2;
+  }
+
+  message UnknownMessage1 {
+    message UnknownInnerMessage1 {
+      optional int32 code = 1;
+      optional string message = 2;
+    }
+
+    optional bytes field1 = 1;
+    optional UnknownInnerMessage1 field2 = 2;
+  }
+
+  optional ClientInfo client_info = 1;
+  optional bytes po_token = 2;
+  optional bytes playback_cookie = 3;
+  optional bytes field4 = 4;
+  repeated SabrContext sabr_contexts = 5;
+  repeated int32 unsent_sabr_contexts = 6;
+  optional string field7 = 7;
+  optional UnknownMessage1 field8 = 8;
+}

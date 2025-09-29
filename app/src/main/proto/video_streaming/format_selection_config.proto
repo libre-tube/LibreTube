@@ -1,0 +1,9 @@
+syntax = "proto2";
+
+package video_streaming;
+
+message FormatSelectionConfig {
+  repeated int32 itags = 2;
+  optional string video_id = 3;
+  optional int32 resolution = 4;
+}
