@@ -1,0 +1,7 @@
+syntax = "proto2";
+package video_streaming;
+
+message StreamProtectionStatus {
+  optional int32 status = 1;
+  optional int32 max_retries = 2;
+}

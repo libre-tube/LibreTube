@@ -1,0 +1,12 @@
+syntax = "proto2";
+package video_streaming;
+
+message PlaybackStartPolicy {
+  message ReadaheadPolicy {
+    optional int32 min_readahead_ms = 2;
+    optional int32 min_bandwidth_bytes_per_sec = 1;
+  }
+
+  optional ReadaheadPolicy start_min_readahead_policy = 1;
+  optional ReadaheadPolicy resume_min_readahead_policy = 2;
+}

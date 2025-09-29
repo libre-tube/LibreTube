@@ -1,0 +1,10 @@
+syntax = "proto2";
+package video_streaming;
+
+import "misc/common.proto";
+
+message SabrSeek {
+  optional int64 seek_media_time = 1;
+  optional int32 seek_media_timescale = 2;
+  optional .misc.SeekSource seek_source = 3;
+}
