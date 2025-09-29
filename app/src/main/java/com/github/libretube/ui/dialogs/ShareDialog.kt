@@ -128,6 +128,7 @@ class ShareDialog : DialogFragment() {
                 val shareIntent = Intent.createChooser(intent, getString(R.string.shareTo))
                 requireContext().startActivity(shareIntent)
             }
+            .setNegativeButton(R.string.cancel, null)
             .show()
     }
 
