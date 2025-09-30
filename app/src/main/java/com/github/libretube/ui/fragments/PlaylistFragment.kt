@@ -11,6 +11,7 @@ import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.core.view.setPadding
 import androidx.core.view.updatePadding
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -144,8 +145,13 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
             playlistName = response.name
             isLoading = false
 
-            if (!response.thumbnailUrl.isNullOrEmpty())
+            if (!response.thumbnailUrl.isNullOrEmpty()) {
                 ImageHelper.loadImage(response.thumbnailUrl, binding.thumbnail)
+            } else {
+                binding.thumbnail.setImageResource(R.drawable.ic_empty_playlist)
+                binding.thumbnail.setPadding(64f.dpToPx())
+                binding.thumbnail.setBackgroundColor(com.google.android.material.R.attr.colorSurface)
+            }
             binding.playlistProgress.isGone = true
             binding.playlistAppBar.isVisible = true
             binding.playlistRecView.isVisible = true
