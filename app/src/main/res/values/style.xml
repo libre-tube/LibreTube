@@ -214,4 +214,13 @@
         <item name="materialThemeOverlay">@style/ThemeOverlay.Material3Expressive.Button.Elevated</item>
     </style>
 
+    <style name="AlertDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.Material3.Button.OutlinedButton</item>
+    </style>
+
+    <style name="PositiveButton" parent="Widget.Material3.Button">
+        <item name="android:layout_marginStart">16dp</item>
+    </style>
+
 </resources>

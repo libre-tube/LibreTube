@@ -17,22 +17,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:padding="8dp"
         android:gravity="end|center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingVertical="8dp">
 
         <com.google.android.material.button.MaterialButton
-            style="@style/Widget.Material3.Button.TextButton.Dialog"
             android:id="@+id/create_playlist"
+            style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/createPlaylist" />
 
         <com.google.android.material.button.MaterialButton
-            style="@style/Widget.Material3.Button.TextButton.Dialog"
             android:id="@+id/add_to_playlist"
+            style="@style/Widget.Material3.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:text="@string/addToPlaylist" />
     </LinearLayout>
 

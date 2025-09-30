@@ -89,10 +89,17 @@ class CreatePlaylistDialog : DialogFragment() {
             }
         }
 
+        binding.cancelCreate.setOnClickListener {
+            dialog?.cancel()
+        }
+
+        binding.cancelClone.setOnClickListener {
+            dialog?.cancel()
+        }
+
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.createPlaylist)
             .setView(binding.root)
-            .setNegativeButton(R.string.cancel, null)
             .show()
     }
 
