@@ -98,6 +98,12 @@ private data class InitializedFormat(
         }
         return segments
     }
+
+    /**
+     * Whether the format has non-retrieved data.
+     */
+    fun hasFreshData(): Boolean =
+        downloadedSegments.containsKey(lastDownloadedSegment)
 }
 
 /**
@@ -189,8 +195,16 @@ class SabrClient(
         return runBlocking {
             // ensure that the data is only ever accessed by a single thread
             withContext(dispatcher) {
-                val data = initializedFormats[itag]?.data() ?: emptyList()
-                return@withContext data
+                var format = initializedFormats[itag]
+                if (format == null || !format.hasFreshData()) {
+                    // refetch new data
+                    if (media()) {
+                        // finished playback for these formats
+                        return@withContext emptyList()
+                    }
+                }
+                format = format ?: initializedFormats[itag]
+                return@withContext format?.data() ?: emptyList()
             }
         }
     }
@@ -201,7 +215,7 @@ class SabrClient(
      *
      * The data is returned as a pair of lists: (audio segments, video segments).
      */
-    private suspend fun media(): Pair<List<Segment>, List<Segment>>? {
+    private suspend fun media(): Boolean {
         // Check if we've downloaded all segments
         val audioComplete = initializedFormats[audioFormat.itag]?.let {
             playerTime >= it.duration
@@ -213,7 +227,7 @@ class SabrClient(
 
         if (audioComplete && videoComplete) {
             assert(partialSegments.isEmpty()) { "SabrClient has partial segments left" }
-            return null
+            return true
         }
 
         // update currently held UMP data
@@ -239,11 +253,7 @@ class SabrClient(
             Log.d(TAG, "media: Advancing player time by ${updatedPlayerTime}ms")
             playerTime += updatedPlayerTime
         }
-
-        val audio = initializedFormats[audioFormat.itag]?.data() ?: emptyList()
-        val video = videoFormat?.let { initializedFormats[it.itag]?.data() } ?: emptyList()
-
-        return Pair(audio, video)
+        return false
     }
 
     /**
