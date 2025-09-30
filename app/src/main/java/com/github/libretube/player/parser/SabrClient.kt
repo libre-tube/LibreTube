@@ -236,7 +236,7 @@ class SabrClient(
         val parser = UmpParser(data)
         while (true) {
             val part = parser.readPart() ?: break
-            Log.d(TAG, "media: Parsing ${part.type}")
+            Log.v(TAG, "media: Parsing ${part.type}")
             processPart(part)
         }
         assert(parser.data().isEmpty()) { "Parser has left-over data" }
@@ -344,8 +344,7 @@ class SabrClient(
                     return
                 }
 
-                Log.d(TAG, "processPart: Received header for $header")
-                Log.d(TAG, "processPart: Enqueuing partial segment $headerId")
+                Log.v(TAG, "processPart: Enqueuing partial segment $headerId")
                 partialSegments[headerId] = Segment(
                     header = header,
                     sequenceNumber = sequenceNumber,
@@ -368,7 +367,7 @@ class SabrClient(
                 val parser = UmpParser(part.data)
                 val headerId = parser.readVarint()?.toInt()!!
                 val segment = partialSegments.remove(headerId) ?: return
-                Log.d(TAG, "processPart: Dequeuing partial segment $headerId")
+                Log.v(TAG, "processPart: Dequeuing partial segment $headerId")
 
                 val segmentLength = segment.length()
                 if (segmentLength != segment.header.contentLength.toInt()) {
@@ -438,21 +437,21 @@ class SabrClient(
 
                 policy.startPolicyList.forEach { startPolicy ->
                     if (!activeSabrContexts.contains(startPolicy)) {
-                        Log.d(TAG, "processPart: Server requested to enable SABR Context Update ($startPolicy)")
+                        Log.v(TAG, "processPart: Server requested to enable SABR Context Update ($startPolicy)")
                         activeSabrContexts.add(startPolicy)
                     }
                 }
 
                 policy.stopPolicyList.forEach { stopPolicy ->
                     if (activeSabrContexts.contains(stopPolicy)) {
-                        Log.d(TAG, "processPart: Server requested to disable SABR Context Update ($stopPolicy)")
+                        Log.v(TAG, "processPart: Server requested to disable SABR Context Update ($stopPolicy)")
                         activeSabrContexts.remove(stopPolicy)
                     }
                 }
 
                 policy.discardPolicyList.forEach { discardPolicy ->
                     if (activeSabrContexts.contains(discardPolicy)) {
-                        Log.d(TAG, "processPart: Server requested to discard SABR Context Update ($discardPolicy)")
+                        Log.v(TAG, "processPart: Server requested to discard SABR Context Update ($discardPolicy)")
                         sabrContexts.remove(discardPolicy)
                     }
                 }
