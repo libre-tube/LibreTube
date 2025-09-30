@@ -177,10 +177,10 @@ class SabrClient(
 
     @OptIn(UnstableApi::class)
     fun selectFormat(itag: Int, lastModified: Long, xtags: String? = null, format: Format) {
-        val formatId = FormatId.newBuilder().setItag(itag).setLastModified(lastModified).setXtags(xtags).build()
+        val formatId = FormatId.newBuilder().setItag(itag).setLastModified(lastModified).setXtags(xtags ?: "").build()
         if (MimeTypes.isAudio(format.sampleMimeType)) {
             audioFormat = formatId
-        } else {
+        } else if (MimeTypes.isVideo(format.sampleMimeType)) {
             videoFormat = formatId
         }
     }
