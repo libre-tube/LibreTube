@@ -3,7 +3,7 @@
     <string name="save">Guardar</string>
     <string name="download">Descargar</string>
     <string name="subscribe">Suscribirse</string>
-    <string name="unsubscribe">Desuscribir</string>
+    <string name="unsubscribe">Desuscribirse</string>
     <string name="share">Compartir</string>
     <string name="username">Nombre de usuario</string>
     <string name="password">Contraseña</string>
@@ -71,10 +71,10 @@
     <string name="history">Historial</string>
     <string name="search_history">Historial de búsqueda</string>
     <string name="clear_history">Borrar historial</string>
-    <string name="music_songs">YT Música: Canciones</string>
-    <string name="music_videos">YT Música: Videos</string>
-    <string name="music_albums">YT Música: Álbumes</string>
-    <string name="music_playlists">YT Música: Listas</string>
+    <string name="music_songs">YT Music: Canciones</string>
+    <string name="music_videos">YT Music: Videos</string>
+    <string name="music_albums">YT Music: Álbumes</string>
+    <string name="music_playlists">YT Music: Listas</string>
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">Usa la API de https://sponsor.ajay.app</string>
     <string name="segment_skipped">Segmento omitido</string>
@@ -297,7 +297,7 @@
     <string name="limit_to_runtime">Limitar al tiempo de ejecución</string>
     <string name="trends">Tendencias</string>
     <string name="featured">Destacado</string>
-    <string name="trending">Lo que está de moda ahora</string>
+    <string name="trending">En tendencia</string>
     <string name="bookmarks">Marcadores</string>
     <string name="bookmark">Marcador</string>
     <string name="clear_bookmarks">Borrar marcadores</string>
@@ -481,5 +481,6 @@
     <string name="unsubscribe_snackbar_message">Desuscripción exitosa de %1$s</string>
     <string name="successfully_removed_from_playlist">Removido %1$s de la lista exitosamente.</string>
     <string name="grid_landscape">Cuadrícula vertical</string>
-    <string name="music_artists">Artistas de YT Music</string>
+    <string name="music_artists">YT Music: Artistas</string>
+    <string name="finished">Finalizados</string>
 </resources>
