@@ -3,7 +3,7 @@
     <string name="save">Guardar</string>
     <string name="download">Descargar</string>
     <string name="subscribe">Suscribirse</string>
-    <string name="unsubscribe">Desuscribir</string>
+    <string name="unsubscribe">Desuscribirse</string>
     <string name="share">Compartir</string>
     <string name="username">Nombre de usuario</string>
     <string name="password">Contraseña</string>
@@ -71,10 +71,10 @@
     <string name="history">Historial</string>
     <string name="search_history">Historial de búsqueda</string>
     <string name="clear_history">Borrar historial</string>
-    <string name="music_songs">YT Música: Canciones</string>
-    <string name="music_videos">YT Música: Vídeos</string>
-    <string name="music_albums">YT Música: Álbumes</string>
-    <string name="music_playlists">YT Música: Listas</string>
+    <string name="music_songs">YT Music: Canciones</string>
+    <string name="music_videos">YT Music: Vídeos</string>
+    <string name="music_albums">YT Music: Álbumes</string>
+    <string name="music_playlists">YT Music: Listas</string>
     <string name="sponsorblock" translatable="false">SponsorBlock</string>
     <string name="sponsorblock_summary">Usa la API de https://sponsor.ajay.app</string>
     <string name="segment_skipped">Segmento omitido</string>
@@ -297,7 +297,7 @@
     <string name="limit_to_runtime">Limitar al tiempo de ejecución</string>
     <string name="trends">Tendencias</string>
     <string name="featured">Destacado</string>
-    <string name="trending">Lo que está de moda ahora</string>
+    <string name="trending">En tendencia</string>
     <string name="bookmarks">Marcadores</string>
     <string name="bookmark">Marcador</string>
     <string name="clear_bookmarks">Borrar marcadores</string>
@@ -477,7 +477,7 @@
     <string name="filename_too_long">¡El nombre es demasiado largo!</string>
     <string name="sponsorblock_user_id">ID de usuario SponsorBlock</string>
     <string name="donate">Donar</string>
-    <string name="music_artists">Artistas de YouTube Música</string>
+    <string name="music_artists">YT Music: Artistas</string>
     <string name="no_fullscreen_resolution">Resolución cuando no estás a pantalla completa</string>
     <string name="same_as_fullscreen">Igual que a pantalla completa</string>
     <string name="playback_during_call_summary">Esto también hará que la app ya no pueda manejar ningún foco de audio</string>
@@ -494,7 +494,7 @@
     <string name="repeat_mode_all">Repetir todo</string>
     <string name="successfully_removed_from_playlist">Eliminado con éxito \"%1$s\" de la lista de reproducción.</string>
     <string name="watched">Vistos</string>
-    <string name="finished">Acabados</string>
+    <string name="finished">Finalizados</string>
     <string name="no_segments_found">Aún no hay partes para este vídeo.</string>
     <string name="time_in_minutes">Tiempo en minutos</string>
     <string name="invalid_input">Entrada no válida</string>
@@ -566,4 +566,5 @@
     <string name="playback_pitch_semitone_error_input">El valor debe estar entre -%1$.1f (mínimo) y %1$.1f (máximo)</string>
     <string name="gaming">Videojuegos</string>
     <string name="include_timestamp_in_filename">Incluir marca de tiempo en el archivo</string>
+    <string name="unsubscribe_snackbar_message">Desuscripción exitosa de %1$s</string>
 </resources>
