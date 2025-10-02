@@ -56,41 +56,36 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/fab_container"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/delete_all"
+        style="?attr/floatingActionButtonSmallSecondaryStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/delete_all"
+        android:src="@drawable/ic_delete"
+        android:tooltipText="@string/delete"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/shuffle_all"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:targetApi="o"
+        tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/shuffle_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@string/shuffle"
+        android:src="@drawable/ic_shuffle"
+        android:tooltipText="@string/shuffle"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="18dp"
-        android:layout_marginBottom="18dp"
-        android:orientation="vertical">
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/delete_all"
-            style="?attr/floatingActionButtonSmallSecondaryStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:contentDescription="@string/delete_all"
-            android:src="@drawable/ic_delete"
-            android:tooltipText="@string/delete"
-            android:visibility="gone"
-            tools:targetApi="o"
-            tools:visibility="visible" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/shuffle_all"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/shuffle"
-            android:src="@drawable/ic_shuffle"
-            android:layout_marginTop="8dp"
-            android:tooltipText="@string/shuffle"
-            android:visibility="gone"
-            tools:targetApi="o"
-            tools:visibility="visible" />
-
-    </LinearLayout>
+        tools:targetApi="o"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
