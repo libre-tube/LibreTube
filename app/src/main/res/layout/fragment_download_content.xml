@@ -11,22 +11,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/sort_type"
+            style="?materialButtonTonalStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="6dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginVertical="4dp"
-            android:clickable="true"
-            android:drawablePadding="10dp"
-            android:focusable="true"
             android:layout_gravity="end"
-            android:paddingVertical="5dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingHorizontal="10dp"
             android:text="@string/sort_by"
-            android:textSize="15sp"
-            app:drawableEndCompat="@drawable/ic_sort"
-            android:background="@drawable/rounded_ripple" />
+            app:icon="@drawable/ic_sort"
+            app:iconGravity="textEnd" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/downloads_recView"
