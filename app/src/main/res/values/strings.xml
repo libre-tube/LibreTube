@@ -468,6 +468,8 @@
     <string name="behavior_when_minimized">Behavior when minimized</string>
     <string name="external_player">External player</string>
     <string name="screenshot">Screenshot</string>
+    <string name="saving_screenshot">Saving screenshot...</string>
+    <string name="screenshot_is_saved">Screenshot is saved</string>
     <string name="crashlog">Crashlog</string>
     <string name="never_show_again">Never show this again</string>
     <string name="update_information">Update information</string>

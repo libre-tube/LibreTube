@@ -111,6 +111,8 @@ import com.github.libretube.util.OnlineTimeFrameReceiver
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -392,11 +394,31 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 return@registerForActivityResult
             }
 
-            context?.contentResolver?.openOutputStream(uri)?.use { outputStream ->
-                screenshotBitmap?.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
-            }
+            val savingScreenshotSnackbar =
+                Snackbar.make(requireView(), R.string.saving_screenshot, Snackbar.LENGTH_INDEFINITE)
+                    .apply { show() }
 
-            screenshotBitmap = null
+            CoroutineScope(Dispatchers.IO).launch{
+                context?.contentResolver?.openOutputStream(uri)?.use { outputStream ->
+                    screenshotBitmap?.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+                }
+                screenshotBitmap = null
+
+                withContext(Dispatchers.Main) {
+                    savingScreenshotSnackbar.dismiss()
+                    Snackbar.make(
+                        requireView(),
+                        R.string.screenshot_is_saved,
+                        Snackbar.LENGTH_SHORT
+                    ).apply {
+                        setDuration(1000)
+                        setAction(R.string.tooltip_dismiss) {
+                            dismiss()
+                        }
+                        show()
+                    }
+                }
+            }
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
