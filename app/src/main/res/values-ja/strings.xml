@@ -193,7 +193,7 @@
     <string name="captions">字幕</string>
     <string name="none">なし</string>
     <string name="general">一般</string>
-    <string name="general_summary">ダウンロードとデータ量削減</string>
+    <string name="general_summary">ダウンロードとデータ量節約</string>
     <string name="instance_frontend_url">インスタンスのフロントエンドのURL (任意)</string>
     <string name="quality">画質</string>
     <string name="behavior">動作</string>
