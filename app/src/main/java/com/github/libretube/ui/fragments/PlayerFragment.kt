@@ -111,6 +111,8 @@ import com.github.libretube.util.OnlineTimeFrameReceiver
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -392,11 +394,12 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 return@registerForActivityResult
             }
 
-            context?.contentResolver?.openOutputStream(uri)?.use { outputStream ->
-                screenshotBitmap?.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+            CoroutineScope(Dispatchers.IO).launch{
+                context?.contentResolver?.openOutputStream(uri)?.use { outputStream ->
+                    screenshotBitmap?.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+                }
+                screenshotBitmap = null
             }
-
-            screenshotBitmap = null
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
