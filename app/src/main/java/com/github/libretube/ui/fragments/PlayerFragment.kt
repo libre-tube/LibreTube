@@ -399,6 +399,23 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                     screenshotBitmap?.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
                 }
                 screenshotBitmap = null
+
+                withContext(Dispatchers.Main) {
+                    Snackbar.make(
+                        requireView(),
+                        R.string.screenshot_saved,
+                        2500
+                    ).apply {
+                        setAction(R.string.share) {
+                            startActivity(Intent.createChooser(with(Intent()) {
+                                setAction(Intent.ACTION_SEND)
+                                setType("image/png")
+                                putExtra(Intent.EXTRA_STREAM, uri)
+                            }, null))
+                        }
+                        show()
+                    }
+                }
             }
         }
 
