@@ -80,12 +80,12 @@ class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) 
             binding.watchHistory.isGone = true
         } else {
             binding.watchHistory.setOnClickListener {
-                findNavController().navigate(R.id.watchHistoryFragment)
+                findNavController().navigate(R.id.action_libraryFragment_to_watchHistoryFragment)
             }
         }
 
         binding.downloads.setOnClickListener {
-            findNavController().navigate(R.id.downloadsFragment)
+            findNavController().navigate(R.id.action_libraryFragment_to_downloadsFragment)
         }
 
         val navBarItems = NavBarHelper.getNavBarItems(requireContext())
