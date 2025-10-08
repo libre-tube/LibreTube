@@ -566,4 +566,5 @@
     <string name="trailers">קדימונים</string>
     <string name="music">מוזיקה</string>
     <string name="include_timestamp_in_filename">לכלול חותמת זמן בשם הקובץ</string>
+    <string name="unsubscribe_snackbar_message">ההרשמה אל %1$s בוטלה בהצלחה</string>
 </resources>
