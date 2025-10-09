@@ -566,4 +566,5 @@
     <string name="createNewPlaylist">Új lejátszási lista létrehozása</string>
     <string name="include_timestamp_in_filename">Időbélyeg hozzáadása a fájlnévhez</string>
     <string name="unsubscribe_snackbar_message">Sikeresen leiratkozott a következőről: %1$s</string>
+    <string name="screenshot_saved">Képernyőkép mentve</string>
 </resources>
