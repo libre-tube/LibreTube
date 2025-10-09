@@ -290,13 +290,18 @@
                     style="@style/PlayerControlBottom"
                     android:src="@drawable/ic_fullscreen"
                     android:tooltipText="@string/tooltip_fullscreen"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginRight="2dp"
+                    android:contentDescription="@string/tooltip_fullscreen"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     app:tint="@android:color/white" />
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
+
+            <LinearLayout
             android:id="@+id/progress_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
