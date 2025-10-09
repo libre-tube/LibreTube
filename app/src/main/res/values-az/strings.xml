@@ -567,4 +567,5 @@
     <string name="createNewPlaylist">Yeni pleylist yarat</string>
     <string name="include_timestamp_in_filename">Fayl adına vaxt möhürü daxil et</string>
     <string name="unsubscribe_snackbar_message">%1$s abunəliyi uğurla ləğv edildi</string>
+    <string name="screenshot_saved">Ekran görüntüsü saxlanıldı</string>
 </resources>
