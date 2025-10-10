@@ -59,12 +59,18 @@ class PlayingQueueSheet : ExpandedBottomSheet(R.layout.queue_bottom_sheet) {
         updateRepeatButton()
 
         binding.clearQueue.setOnClickListener {
-            val currentIndex = PlayingQueue.currentIndex()
-            PlayingQueue.setStreams(
-                PlayingQueue.getStreams()
-                    .filterIndexed { index, _ -> index == currentIndex }
-            )
-            adapter.notifyDataSetChanged()
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.tooltip_clear_queue)
+                .setPositiveButton(R.string.okay) { _, _ ->
+                    val currentIndex = PlayingQueue.currentIndex()
+                    PlayingQueue.setStreams(
+                        PlayingQueue.getStreams()
+                            .filterIndexed { index, _ -> index == currentIndex }
+                    )
+                    adapter.notifyDataSetChanged()
+                }
+                .setNegativeButton(R.string.cancel, null)
+                .show()
         }
         binding.sort.setOnClickListener {
             showSortDialog()
