@@ -713,6 +713,18 @@ abstract class CustomExoPlayerView(
                 marginEnd = horizontalMargin
             }
         }
+
+        binding.fullscreen.layoutParams = (binding.fullscreen.layoutParams as MarginLayoutParams).apply {
+            if (isFullscreen()) {
+                // Add extra bottom margin in fullscreen mode
+                bottomMargin = resources.getDimensionPixelSize(R.dimen.fullscreen_button_margin_bottom)
+                marginEnd = resources.getDimensionPixelSize(R.dimen.fullscreen_button_margin_end)
+            } else {
+                // Reset to default margin
+                bottomMargin = resources.getDimensionPixelSize(R.dimen.normal_button_margin_bottom)
+                marginEnd = resources.getDimensionPixelSize(R.dimen.normal_button_margin_end)
+            }
+        }
     }
 
     /**
@@ -843,6 +855,8 @@ abstract class CustomExoPlayerView(
             )
             subtitleView?.setBottomPaddingFraction(SubtitleView.DEFAULT_BOTTOM_PADDING_FRACTION)
         }
+
+        updateMarginsByFullscreenMode()
     }
 
     /**
