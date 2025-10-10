@@ -21,35 +21,48 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_gravity="center"
-                    android:paddingVertical="6dp">
+                    android:padding="6dp">
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/watch_history"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/watch_history"
+                        tools:text="a longer translated text version"
                         android:textAlignment="viewStart"
                         android:textStyle="bold"
                         app:icon="@drawable/ic_time_outlined"
+                        android:ellipsize="marquee"
+                        android:maxLines="1"
                         android:layout_marginEnd="10dp"
-                        app:materialSizeOverlay="@style/SizeOverlay.Material3Expressive.Button.Medium"/>
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/downloads"
+                        app:layout_constraintWidth_max="wrap"
+                        app:layout_constraintWidth_percent="0.5"
+                        app:materialSizeOverlay="@style/SizeOverlay.Material3Expressive.Button.Medium" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/downloads"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/downloads"
                         android:textStyle="bold"
                         app:icon="@drawable/ic_download"
-                        android:layout_gravity="end"
-                        app:materialSizeOverlay="@style/SizeOverlay.Material3Expressive.Button.Medium"/>
+                        android:ellipsize="marquee"
+                        android:maxLines="1"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/watch_history"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintWidth_max="wrap"
+                        app:layout_constraintWidth_percent="0.5"
+                        app:materialSizeOverlay="@style/SizeOverlay.Material3Expressive.Button.Medium" />
 
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
