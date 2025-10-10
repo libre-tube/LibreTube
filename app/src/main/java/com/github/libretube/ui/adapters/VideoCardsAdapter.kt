@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.api.obj.StreamItem
@@ -91,11 +93,20 @@ class VideoCardsAdapter(private val columnWidthDp: Float? = null) :
                     video.uploaded
                 )
             }
-            channelImage.setOnClickListener {
-                NavigationHelper.navigateChannel(root.context, video.uploaderUrl)
-            }
             ImageHelper.loadImage(video.thumbnail, thumbnail)
-            ImageHelper.loadImage(video.uploaderAvatar, channelImage, true)
+
+            if (video.uploaderAvatar != null) {
+                channelImageContainer.isVisible = true
+                ImageHelper.loadImage(video.uploaderAvatar, channelImage, true)
+                channelImage.setOnClickListener {
+                    NavigationHelper.navigateChannel(root.context, video.uploaderUrl)
+                }
+            } else {
+                channelImageContainer.isGone = true
+                textViewChannel.setOnClickListener {
+                    NavigationHelper.navigateChannel(root.context, video.uploaderUrl)
+                }
+            }
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, videoId)
             }
