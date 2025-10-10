@@ -882,7 +882,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         windowInsetsControllerCompat.isAppearanceLightStatusBars = false
 
         commonPlayerViewModel.isFullscreen.value = true
-
+        setFullscreenButtonMargin(true)
         updateFullscreenOrientation()
 
         commonPlayerViewModel.setSheetExpand(null)
@@ -898,7 +898,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         if (activity == null || _binding == null) return
 
         commonPlayerViewModel.isFullscreen.value = false
-
+        setFullscreenButtonMargin(false)
         if (!PlayerHelper.autoFullscreenEnabled) {
             mainActivity.requestedOrientation = mainActivity.screenOrientationPref
         }
@@ -911,6 +911,24 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         // set status bar icon color back to theme color after fullscreen dialog closed!
         windowInsetsControllerCompat.isAppearanceLightStatusBars =
             !ThemeHelper.isDarkMode(requireContext())
+
+
+    }
+
+    private fun setFullscreenButtonMargin(isFullscreen: Boolean) {
+        val layoutParams = playerControlsBinding.fullscreen.layoutParams as ViewGroup.MarginLayoutParams
+
+        if (isFullscreen) {
+            // Add extra bottom margin in fullscreen
+            layoutParams.bottomMargin = resources.getDimensionPixelSize(R.dimen.fullscreen_button_margin_bottom)
+            layoutParams.marginEnd = resources.getDimensionPixelSize(R.dimen.fullscreen_button_margin_end)
+        } else {
+            // Reset to default margin
+            layoutParams.bottomMargin = resources.getDimensionPixelSize(R.dimen.normal_button_margin_bottom)
+            layoutParams.marginEnd = resources.getDimensionPixelSize(R.dimen.normal_button_margin_end)
+        }
+
+        playerControlsBinding.fullscreen.layoutParams = layoutParams
     }
 
     /**
