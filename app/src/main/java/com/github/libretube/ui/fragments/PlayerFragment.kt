@@ -882,7 +882,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         windowInsetsControllerCompat.isAppearanceLightStatusBars = false
 
         commonPlayerViewModel.isFullscreen.value = true
-
         updateFullscreenOrientation()
 
         commonPlayerViewModel.setSheetExpand(null)

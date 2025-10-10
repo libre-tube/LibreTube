@@ -2,6 +2,9 @@
 <resources>
     <integer name="grid_items">1</integer>
     <integer name="grid_items_landscape">2</integer>
-
+    <dimen name="normal_button_margin_bottom">0dp</dimen>
+    <dimen name="normal_button_margin_end">0dp</dimen>
+    <dimen name="fullscreen_button_margin_bottom">5dp</dimen>
+    <dimen name="fullscreen_button_margin_end">3dp</dimen>
     <item name="landscape_player_constraint_width_percentage" type="dimen" format="float">0.55</item>
 </resources>
