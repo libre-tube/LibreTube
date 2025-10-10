@@ -20,6 +20,7 @@ import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.viewholders.CommentViewHolder
 import com.github.libretube.util.HtmlParser
 import com.github.libretube.util.LinkHandler
+import com.github.libretube.util.TextUtils
 
 class CommentsPagingAdapter(
     private val isReplies: Boolean,
@@ -50,7 +51,9 @@ class CommentsPagingAdapter(
             commentAuthor.setBackgroundResource(
                 if (comment.channelOwner) R.drawable.comment_channel_owner_bg else 0
             )
-            commentInfos.text = comment.commentedTime
+            commentInfos.text = comment.commentedTimeMillis?.let {
+                TextUtils.formatRelativeDate(it)
+            } ?: comment.commentedTime
 
             commentText.movementMethod = LinkMovementMethodCompat.getInstance()
             val linkHandler = LinkHandler {
