@@ -108,7 +108,7 @@ fun StreamInfoItem.toStreamItem(
             ?.toLocalDate()
             ?.toString(),
         uploaderName = uploaderName,
-        uploaderUrl = uploaderUrl.toID(),
+        uploaderUrl = uploaderUrl?.toID(),
         uploaderAvatar = uploaderAvatarUrl ?: uploaderAvatars.maxByOrNull { it.height }?.url,
         thumbnail = thumbnails.maxByOrNull { it.height }?.url,
         duration = duration,
