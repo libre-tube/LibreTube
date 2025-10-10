@@ -566,4 +566,5 @@
     <string name="trailers">Fragmanlar</string>
     <string name="music">Müzik</string>
     <string name="include_timestamp_in_filename">Dosya adına zaman damgası ekle</string>
+    <string name="screenshot_saved">Ekran görüntüsü kaydedildi</string>
 </resources>
