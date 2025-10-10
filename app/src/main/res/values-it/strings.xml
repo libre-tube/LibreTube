@@ -566,4 +566,5 @@
     <string name="music">Musica</string>
     <string name="gaming">Giochi</string>
     <string name="include_timestamp_in_filename">Includi data e ora nel nome del file</string>
+    <string name="unsubscribe_snackbar_message">Disiscritto da %1$s con successo</string>
 </resources>

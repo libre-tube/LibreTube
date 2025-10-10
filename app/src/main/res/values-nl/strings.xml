@@ -565,4 +565,6 @@
     <string name="trailers">Trailers</string>
     <string name="music">Muziek</string>
     <string name="include_timestamp_in_filename">Tĳd­stempel in bestands­naam opnemen</string>
+    <string name="unsubscribe_snackbar_message">Succesvol gedeabonneerd van %1$s</string>
+    <string name="screenshot_saved">Scherm­afdruk opgeslagen</string>
 </resources>

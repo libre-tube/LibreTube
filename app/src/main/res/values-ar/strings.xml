@@ -569,4 +569,6 @@
     <string name="music">الموسيقى</string>
     <string name="createNewPlaylist">أنشئ قائمة تشغيل جديدة</string>
     <string name="include_timestamp_in_filename">ضمّن الطابع الزمني في اسم الملف</string>
+    <string name="unsubscribe_snackbar_message">أُلغيت الاشتراك من %1$s بنجاج</string>
+    <string name="screenshot_saved">حُفظت لقطة الشاشة</string>
 </resources>

@@ -199,7 +199,7 @@
     <string name="watch_history_summary">İzlenen videoları yerel olarak takip edin</string>
     <string name="history_summary">İzleme ve arama geçmişi</string>
     <string name="watch_positions_title">Kaydedilmiş oynatma konumları</string>
-    <string name="general_summary">Dil ve bölge</string>
+    <string name="general_summary">İndirmeler ve veri tasarrufu</string>
     <string name="general">Genel</string>
     <string name="playingOnBackground">Arka planda oynatılıyor…</string>
     <string name="caption_settings">Altyazılar</string>
@@ -250,7 +250,7 @@
     <string name="maximum_image_cache">Maksimum resim önbellek boyutu</string>
     <string name="open_copied">Açık</string>
     <string name="copied_to_clipboard">Panoya kopyalandı</string>
-    <string name="device_info">Aygıt bilgisi</string>
+    <string name="device_info">Aygıt Bilgisi</string>
     <string name="audio_video_summary">Kalite ve biçim</string>
     <string name="delete">İndirilenlerden sil</string>
     <string name="new_videos_badge">Yeni videolar için gösterge</string>
@@ -558,4 +558,13 @@
     <string name="full_local_mode">Tam yerel kip</string>
     <string name="full_local_mode_desc">Piped kullanmadan herşeyi YouTube\'dan aktar.</string>
     <string name="authentication">Yetkilendirme</string>
+    <string name="createNewPlaylist">Yeni oynatma listesi oluştur</string>
+    <string name="playback_pitch_semitone_error_input">Değer -%1$.1f (en düşük) ve %1$.1f (en yüksek) arasında olmalıdır</string>
+    <string name="unsubscribe_snackbar_message">%1$s aboneliğinden çıkıldı</string>
+    <string name="gaming">Oyun</string>
+    <string name="podcasts">Podcast</string>
+    <string name="trailers">Fragmanlar</string>
+    <string name="music">Müzik</string>
+    <string name="include_timestamp_in_filename">Dosya adına zaman damgası ekle</string>
+    <string name="screenshot_saved">Ekran görüntüsü kaydedildi</string>
 </resources>

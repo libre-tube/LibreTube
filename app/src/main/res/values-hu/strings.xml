@@ -549,7 +549,7 @@
     <string name="import_format_list_of_urls">Webcímek vagy videóazonosítók listája</string>
     <string name="export_playlist">Lejátszási lista exportálása</string>
     <string name="local_feed_extraction">Helyi hírfolyam kibontása</string>
-    <string name="local_feed_extraction_summary">A hírfolyam közvetlenül a YouTube-ról kerül letöltésre. Ez jelentősen lassabb lehet.</string>
+    <string name="local_feed_extraction_summary">A hírfolyam közvetlenül a YouTube-ról lesz letöltve. Ez jelentősen lassabb lehet.</string>
     <string name="never_show_again">Többet ne jelenjen meg</string>
     <string name="update_information">Frissítési információ</string>
     <string name="show_upcoming_videos">Közelgő videók megjelenítése</string>
@@ -557,7 +557,7 @@
     <string name="authentication">Hitelesítés</string>
     <string name="mode_of_operation">Működési mód</string>
     <string name="full_local_mode">Teljes helyi üzemmód</string>
-    <string name="full_local_mode_desc">Minden közvetlenül a YouTube-ról kerül lekérésre, a Piped használata nélkül.</string>
+    <string name="full_local_mode_desc">Minden közvetlenül a YouTube-ról lesz lekérve, a Piped használata nélkül.</string>
     <string name="playback_pitch_semitone_error_input">Az értéknek -%1$.1f (minimum) és %1$.1f (maximum) között kell lennie</string>
     <string name="gaming">Játék</string>
     <string name="podcasts">Podcastok</string>
@@ -565,4 +565,6 @@
     <string name="music">Zene</string>
     <string name="createNewPlaylist">Új lejátszási lista létrehozása</string>
     <string name="include_timestamp_in_filename">Időbélyeg hozzáadása a fájlnévhez</string>
+    <string name="unsubscribe_snackbar_message">Sikeresen leiratkozott a következőről: %1$s</string>
+    <string name="screenshot_saved">Képernyőkép mentve</string>
 </resources>
