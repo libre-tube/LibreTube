@@ -12,6 +12,10 @@
         <action
             android:id="@+id/action_homeFragment_to_libraryFragment"
             app:destination="@id/libraryFragment"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+            app:popExitAnim="@animator/nav_default_pop_exit_anim"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false"
             app:popUpToSaveState="true"
@@ -19,6 +23,10 @@
         <action
             android:id="@+id/action_homeFragment_to_watchHistoryFragment"
             app:destination="@id/watchHistoryFragment"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+            app:popExitAnim="@animator/nav_default_pop_exit_anim"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false"
             app:popUpToSaveState="true"
@@ -26,6 +34,10 @@
         <action
             android:id="@+id/action_homeFragment_to_trendsFragment"
             app:destination="@id/trendsFragment"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+            app:popExitAnim="@animator/nav_default_pop_exit_anim"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false"
             app:popUpToSaveState="true"
@@ -33,6 +45,10 @@
         <action
             android:id="@+id/action_homeFragment_to_subscriptionsFragment"
             app:destination="@id/subscriptionsFragment"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+            app:popExitAnim="@animator/nav_default_pop_exit_anim"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false"
             app:popUpToSaveState="true"
@@ -52,7 +68,22 @@
         android:id="@+id/libraryFragment"
         android:name="com.github.libretube.ui.fragments.LibraryFragment"
         android:label="fragment_library"
-        tools:layout="@layout/fragment_library" />
+        tools:layout="@layout/fragment_library">
+        <action
+            android:id="@+id/action_libraryFragment_to_watchHistoryFragment"
+            app:destination="@id/watchHistoryFragment"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+            app:popExitAnim="@animator/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_libraryFragment_to_downloadsFragment"
+            app:destination="@id/downloadsFragment"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+            app:popExitAnim="@animator/nav_default_pop_exit_anim" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.github.libretube.ui.fragments.SearchSuggestionsFragment"
@@ -112,16 +143,32 @@
 
     <action
         android:id="@+id/openChannel"
-        app:destination="@id/channelFragment" />
+        app:destination="@id/channelFragment"
+        app:enterAnim="@animator/nav_default_enter_anim"
+        app:exitAnim="@animator/nav_default_exit_anim"
+        app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+        app:popExitAnim="@animator/nav_default_pop_exit_anim" />
     <action
         android:id="@+id/openPlaylist"
-        app:destination="@id/playlistFragment" />
+        app:destination="@id/playlistFragment"
+        app:enterAnim="@animator/nav_default_enter_anim"
+        app:exitAnim="@animator/nav_default_exit_anim"
+        app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+        app:popExitAnim="@animator/nav_default_pop_exit_anim" />
     <action
         android:id="@+id/showSearchResults"
-        app:destination="@id/searchResultFragment" />
+        app:destination="@id/searchResultFragment"
+        app:enterAnim="@animator/nav_default_enter_anim"
+        app:exitAnim="@animator/nav_default_exit_anim"
+        app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+        app:popExitAnim="@animator/nav_default_pop_exit_anim" />
     <action
         android:id="@+id/openSearch"
         app:destination="@id/searchFragment"
+        app:enterAnim="@animator/nav_default_enter_anim"
+        app:exitAnim="@animator/nav_default_exit_anim"
+        app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+        app:popExitAnim="@animator/nav_default_pop_exit_anim"
         app:popUpTo="@id/homeFragment"
         app:popUpToSaveState="true"
         app:restoreState="false" />

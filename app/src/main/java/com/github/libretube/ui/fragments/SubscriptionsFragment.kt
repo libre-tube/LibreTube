@@ -20,13 +20,11 @@ import com.github.libretube.databinding.FragmentSubscriptionsBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.extensions.toID
-import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.SelectableOption
 import com.github.libretube.ui.adapters.VideoCardsAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
-import com.github.libretube.ui.extensions.setupFragmentAnimation
 import com.github.libretube.ui.models.EditChannelGroupsModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.sheets.ChannelGroupsSheet
@@ -174,10 +172,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
             val groups = DatabaseHolder.Database.subscriptionGroupsDao().getAll()
                 .sortedBy { it.index }
             channelGroupsModel.groups.postValue(groups)
-        }
-
-        if (NavBarHelper.getStartFragmentId(requireContext()) != R.id.subscriptionsFragment) {
-            setupFragmentAnimation(binding.root)
         }
     }
 

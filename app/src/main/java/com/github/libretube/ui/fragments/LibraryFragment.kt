@@ -32,7 +32,6 @@ import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.dialogs.CreatePlaylistDialog
 import com.github.libretube.ui.dialogs.CreatePlaylistDialog.Companion.CREATE_PLAYLIST_DIALOG_REQUEST_KEY
-import com.github.libretube.ui.extensions.setupFragmentAnimation
 import com.github.libretube.ui.models.CommonPlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import kotlinx.coroutines.Dispatchers
@@ -81,12 +80,12 @@ class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) 
             binding.watchHistory.isGone = true
         } else {
             binding.watchHistory.setOnClickListener {
-                findNavController().navigate(R.id.watchHistoryFragment)
+                findNavController().navigate(R.id.action_libraryFragment_to_watchHistoryFragment)
             }
         }
 
         binding.downloads.setOnClickListener {
-            findNavController().navigate(R.id.downloadsFragment)
+            findNavController().navigate(R.id.action_libraryFragment_to_downloadsFragment)
         }
 
         val navBarItems = NavBarHelper.getNavBarItems(requireContext())
@@ -135,10 +134,6 @@ class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) 
                     fetchPlaylists()
                 }
             }.show(childFragmentManager)
-        }
-
-        if (NavBarHelper.getStartFragmentId(requireContext()) != R.id.libraryFragment) {
-            setupFragmentAnimation(binding.root)
         }
     }
 
