@@ -2,9 +2,9 @@ package com.github.libretube.player.parser
 
 import android.util.Log
 import androidx.annotation.OptIn
-import androidx.media3.common.Format
 import androidx.media3.common.MimeTypes
 import androidx.media3.common.util.UnstableApi
+import com.github.libretube.player.manifest.Representation
 import com.google.protobuf.ByteString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -111,21 +111,34 @@ private data class InitializedFormat(
  *
  * Handles the fetching and processing of streaming media data using the UMP protocol.
  */
-class SabrClient(
+@OptIn(UnstableApi::class)
+object SabrClient {
     /** Unique identifier for the SABR stream resource. */
-    private val videoId: String,
+    private lateinit var videoId: String
     /** The URL pointing to the SABR/UMP stream. */
-    private var url: String,
+    lateinit var url: String
     /** UStreamer configuration data. */
-    private val ustreamerConfig: ByteString,
+    private lateinit var ustreamerConfig: ByteString
     /** Po (Proof of Origin) Token. */
-    private var poToken: ByteString? = null,
-) {
-    private val TAG = "SabrStream"
+    private var poToken: ByteString? = null
+
+    private var fatalError: SabrError? = null
+    private const val TAG = "SabrStream"
     private val dispatcher = Dispatchers.IO.limitedParallelism(1)
 
     private lateinit var audioFormat: FormatId
     private var videoFormat: FormatId? = null
+
+    fun init(
+        videoId: String,
+        url: String,
+        ustreamerConfig: ByteString,
+    ) : SabrClient {
+        this.videoId = videoId
+        this.url = url
+        this.ustreamerConfig = ustreamerConfig
+        return this
+    }
 
     /**
      * Initialized formats.
@@ -478,11 +491,9 @@ class SabrClient(
         }
     }
 
-    companion object {
-        private const val CONTENT_TYPE = "application/x-protobuf"
-        private const val ENCODING = "identity"
-        private const val ACCEPT = "application/vnd.yt-ump"
-        private const val USER_AGENT =
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0"
-    }
+    private const val CONTENT_TYPE = "application/x-protobuf"
+    private const val ENCODING = "identity"
+    private const val ACCEPT = "application/vnd.yt-ump"
+    private const val USER_AGENT =
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0"
 }
