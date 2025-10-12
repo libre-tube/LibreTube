@@ -204,6 +204,10 @@ object SabrClient {
     }
 
     fun data(itag: Int): List<Segment> {
+        if (fatalError != null) {
+            throw Exception("SABR error: ${fatalError!!.type}")
+        }
+
         return runBlocking {
             // ensure that the data is only ever accessed by a single thread
             withContext(dispatcher) {
@@ -488,6 +492,7 @@ object SabrClient {
             UMPPartId.SABR_ERROR -> {
                 val error = SabrError.parseFrom(part.data)
                 Log.e(TAG, "processPart: Received SABR error: ${error.type} (${error.code})")
+                fatalError = error
                 throw Exception("SABR error: ${error.type}")
             }
 
