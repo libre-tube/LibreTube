@@ -32,6 +32,7 @@ data class PipedStream(
     val audioTrackLocale: String? = null,
     val itag: Int? = null,
     val lastModified: Long? = null,
+    val isDrc: Boolean? = null,
 ): Parcelable {
     private fun getQualityString(videoId: String): String {
         return "${videoId}_${quality?.replace(" ", "_")}_$format." +
