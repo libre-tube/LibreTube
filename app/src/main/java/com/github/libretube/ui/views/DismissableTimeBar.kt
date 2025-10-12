@@ -11,6 +11,7 @@ import androidx.media3.ui.PlayerControlView
 import androidx.media3.ui.TimeBar
 import androidx.media3.ui.TimeBar.OnScrubListener
 import com.github.libretube.extensions.dpToPx
+import kotlin.math.abs
 
 @UnstableApi
 open class DismissableTimeBar(
@@ -36,6 +37,23 @@ open class DismissableTimeBar(
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         lastYPosition = event.y
+
+        if (exoPlayer == null) return super.onTouchEvent(event)
+
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+                val duration = exoPlayer!!.duration
+                val currentPosition = exoPlayer!!.currentPosition
+
+                // We calculate the current point position relative to the length of the bar
+                val thumbX = (currentPosition.toFloat() / duration) * width
+                val touchX = event.x
+                val distance = abs(thumbX - touchX)
+
+                // Ignore touches that are far from the point
+                if (distance > 40) return false
+            }
+        }
 
         return super.onTouchEvent(event)
     }
