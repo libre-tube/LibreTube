@@ -126,8 +126,8 @@ object SabrClient {
     private const val TAG = "SabrStream"
     private val dispatcher = Dispatchers.IO.limitedParallelism(1)
 
-    private lateinit var audioFormat: FormatId
-    private var videoFormat: FormatId? = null
+    private lateinit var audioFormat: Representation
+    private var videoFormat: Representation? = null
 
     fun init(
         videoId: String,
@@ -273,8 +273,8 @@ object SabrClient {
      * Fetches streaming data from the URL.
      */
     private suspend fun fetchStreamData(
-        audioFormat: FormatId,
-        videoFormat: FormatId?,
+        audioFormat: Representation,
+        videoFormat: Representation?,
     ): ByteArray {
         backoffTime?.let { backoff ->
             Log.i(TAG, "fetchStreamData: Waiting for ${backoff}ms before making a request")
@@ -287,16 +287,20 @@ object SabrClient {
             .setEnabledTrackTypesBitfield(if (videoFormat == null) 1 else 0)
             .setPlaybackRate(1.0f)
             .setDrcEnabled(true)
+            .setAudioTrackId(audioFormat.stream.audioTrackId ?: "")
+            .setClientViewportIsFlexible(false)
+            .setVisibility(1)
             .build()
 
         val playbackRequest = VideoPlaybackAbrRequest.newBuilder().setClientAbrState(clientState)
             .addAllSelectedFormatIds(
                 initializedFormats.values.map { it.id }.toList()
             ).setVideoPlaybackUstreamerConfig(ustreamerConfig)
-            .addAllPreferredAudioFormatIds(listOf(audioFormat))
-            .addAllPreferredVideoFormatIds(videoFormat?.let { listOf(it) } ?: emptyList())
+            .addAllPreferredAudioFormatIds(listOf(audioFormat.formatId()))
+            .addAllPreferredVideoFormatIds(videoFormat?.let { listOf(it.formatId()) } ?: emptyList())
+            .addAllSelectedFormatIds(initializedFormats.map { it.value.id }.toList())
             .setStreamerContext(
-                StreamerContext.newBuilder().setPoToken(poToken)
+                StreamerContext.newBuilder().setPoToken(poToken?: ByteString.empty())
                     .setClientInfo(
                         StreamerContext.ClientInfo.newBuilder()
                             .setClientName(1)
@@ -313,6 +317,7 @@ object SabrClient {
             )
             .build()
 
+        // ideally we would use HTTP3 here, like the official, however okhttp does not support it
         val request = Request.Builder()
             .url(url)
             .post(
