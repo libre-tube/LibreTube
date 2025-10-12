@@ -200,3 +200,7 @@ message PlaybackAuthorization {
   repeated AuthorizedFormat authorized_formats = 1;
   optional bytes sabr_license_constraint = 2;
 }
+
+message XTags {
+  repeated KeyValuePair xtags = 1;
+}

@@ -93,7 +93,8 @@ private fun AudioStream.toPipedStream() = PipedStream(
     audioTrackType = audioTrackType?.name,
     videoOnly = false,
     itag = itagItem?.id,
-    lastModified = itagItem?.lastModified
+    lastModified = itagItem?.lastModified,
+    isDrc = itagItem?.isDrc
 )
 
 fun StreamInfoItem.toStreamItem(
