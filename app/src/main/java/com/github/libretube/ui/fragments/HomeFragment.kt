@@ -140,20 +140,27 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             val currentTrendingCategoryPref = PreferenceHelper.getString(
                 PreferenceKeys.TRENDING_CATEGORY,
                 TrendingCategory.LIVE.name
-            ).let { TrendingCategory.valueOf(it) }
+            ).let { categoryName -> trendingCategories.first { it.name == categoryName } }
 
             val categories = trendingCategories.map { category ->
                 category to getString(TrendsFragment.categoryNamesToStringRes[category]!!)
             }
-            var selected = TrendingCategory.entries.indexOf(currentTrendingCategoryPref)
+
+            var selected = trendingCategories.indexOf(currentTrendingCategoryPref)
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.category)
-                .setSingleChoiceItems(categories.map { it.second }.toTypedArray(), selected) { _, checked ->
+                .setSingleChoiceItems(
+                    categories.map { it.second }.toTypedArray(),
+                    selected
+                ) { _, checked ->
                     selected = checked
                 }
                 .setNegativeButton(R.string.cancel, null)
                 .setPositiveButton(R.string.okay) { _, _ ->
-                    PreferenceHelper.putString(PreferenceKeys.TRENDING_CATEGORY, TrendingCategory.entries[selected].name)
+                    PreferenceHelper.putString(
+                        PreferenceKeys.TRENDING_CATEGORY,
+                        trendingCategories[selected].name
+                    )
                     fetchHomeFeed()
                 }
                 .show()
