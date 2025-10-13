@@ -1,5 +1,7 @@
 package com.github.libretube.api
 
+import androidx.annotation.StringRes
+import com.github.libretube.R
 import com.github.libretube.api.obj.Channel
 import com.github.libretube.api.obj.ChannelTabResponse
 import com.github.libretube.api.obj.CommentsPage
@@ -50,10 +52,10 @@ interface MediaServiceRepository {
     }
 }
 
-enum class TrendingCategory {
-    GAMING,
-    TRAILERS,
-    PODCASTS,
-    MUSIC,
-    LIVE
+enum class TrendingCategory(@StringRes val titleRes: Int) {
+    GAMING(R.string.gaming),
+    TRAILERS(R.string.trailers),
+    PODCASTS(R.string.podcasts),
+    MUSIC(R.string.music),
+    LIVE(R.string.live)
 }
