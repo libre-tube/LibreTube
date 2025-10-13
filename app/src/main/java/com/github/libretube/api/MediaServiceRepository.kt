@@ -52,8 +52,8 @@ interface MediaServiceRepository {
 
 enum class TrendingCategory {
     GAMING,
-    PODCASTS,
     TRAILERS,
+    PODCASTS,
     MUSIC,
     LIVE
 }
