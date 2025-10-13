@@ -566,4 +566,5 @@
     <string name="createNewPlaylist">Koosta uus esitusloend</string>
     <string name="include_timestamp_in_filename">Lisa failinimesse ajatempel</string>
     <string name="unsubscribe_snackbar_message">„%1$s“ tellimusest loobumine õnnestus</string>
+    <string name="screenshot_saved">Ekraanitõmmis on salvestatud</string>
 </resources>
