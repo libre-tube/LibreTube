@@ -42,18 +42,8 @@ class TrendsFragment : Fragment(R.layout.fragment_trends) {
         if (categories.size <= 1) binding.tabLayout.isGone = true
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
             val category = categories[position]
-            tab.text = getString(categoryNamesToStringRes[category]!!)
+            tab.text = getString(category.titleRes)
         }.attach()
-    }
-
-    companion object {
-        val categoryNamesToStringRes = mapOf(
-            TrendingCategory.GAMING to R.string.gaming,
-            TrendingCategory.TRAILERS to R.string.trailers,
-            TrendingCategory.PODCASTS to R.string.podcasts,
-            TrendingCategory.MUSIC to R.string.music,
-            TrendingCategory.LIVE to R.string.live
-        )
     }
 }
 

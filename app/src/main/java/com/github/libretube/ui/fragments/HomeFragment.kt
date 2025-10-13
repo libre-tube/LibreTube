@@ -143,7 +143,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             ).let { categoryName -> trendingCategories.first { it.name == categoryName } }
 
             val categories = trendingCategories.map { category ->
-                category to getString(TrendsFragment.categoryNamesToStringRes[category]!!)
+                category to getString(category.titleRes)
             }
 
             var selected = trendingCategories.indexOf(currentTrendingCategoryPref)
