@@ -480,10 +480,18 @@ class MainActivity : BaseActivity() {
         // navigate to (temporary) playlist or channel if available
         if (navigateToMediaByIntent(intent)) return
 
+        // Get saved search query if available
         intent?.getStringExtra(IntentData.query)?.let {
             savedSearchQuery = it
         }
 
+        // Open the Downloads screen if requested
+        if (intent?.getBooleanExtra(IntentData.OPEN_DOWNLOADS, false) == true) {
+            navController.navigate(R.id.downloadsFragment)
+            return
+        }
+
+        // Handle navigation from app shortcuts (Home, Trends, etc.)
         intent?.getStringExtra(IntentData.fragmentToOpen)?.let {
             ShortcutManagerCompat.reportShortcutUsed(this, it)
             when (it) {
@@ -493,6 +501,8 @@ class MainActivity : BaseActivity() {
                 TopLevelDestination.Library.route -> navController.navigate(R.id.libraryFragment)
             }
         }
+
+        // Rebind the download service if the user is currently downloading
         if (intent?.getBooleanExtra(IntentData.downloading, false) == true) {
             (supportFragmentManager.fragments.find { it is NavHostFragment })
                 ?.childFragmentManager?.fragments?.forEach { fragment ->
