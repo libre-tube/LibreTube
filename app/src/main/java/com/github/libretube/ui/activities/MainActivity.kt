@@ -35,6 +35,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.enums.ImportFormat
+import com.github.libretube.enums.TopLevelDestination
 import com.github.libretube.helpers.ImportHelper
 import com.github.libretube.helpers.IntentHelper
 import com.github.libretube.helpers.NavBarHelper
@@ -123,8 +124,8 @@ class MainActivity : BaseActivity() {
             // there's a possibility that the paddings are not being applied properly when
             // exiting from player's fullscreen. Adding OnGlobalLayoutListener serves as
             // a workaround for this issue
-            binding.root.viewTreeObserver.addOnGlobalLayoutListener(object:
-            ViewTreeObserver.OnGlobalLayoutListener{
+            binding.root.viewTreeObserver.addOnGlobalLayoutListener(object :
+                ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
                     with(binding.appBarLayout) {
                         setPadding(
@@ -483,17 +484,13 @@ class MainActivity : BaseActivity() {
             savedSearchQuery = it
         }
 
-        intent?.getStringExtra("fragmentToOpen")?.let {
-            if (it != "downloads") { // Not a shortcut
-                ShortcutManagerCompat.reportShortcutUsed(this, it)
-            }
-
+        intent?.getStringExtra(IntentData.fragmentToOpen)?.let {
+            ShortcutManagerCompat.reportShortcutUsed(this, it)
             when (it) {
-                "home" -> navController.navigate(R.id.homeFragment)
-                "trends" -> navController.navigate(R.id.trendsFragment)
-                "subscriptions" -> navController.navigate(R.id.subscriptionsFragment)
-                "library" -> navController.navigate(R.id.libraryFragment)
-                "downloads" -> navController.navigate(R.id.downloadsFragment)
+                TopLevelDestination.Home.route -> navController.navigate(R.id.homeFragment)
+                TopLevelDestination.Trends.route -> navController.navigate(R.id.trendsFragment)
+                TopLevelDestination.Subscriptions.route -> navController.navigate(R.id.subscriptionsFragment)
+                TopLevelDestination.Library.route -> navController.navigate(R.id.libraryFragment)
             }
         }
         if (intent?.getBooleanExtra(IntentData.downloading, false) == true) {
@@ -622,11 +619,17 @@ class MainActivity : BaseActivity() {
             ?: false
     }
 
-    fun startPlaylistExport(playlistId: String, playlistName: String, format: ImportFormat, includeTimestamp: Boolean) {
+    fun startPlaylistExport(
+        playlistId: String,
+        playlistName: String,
+        format: ImportFormat,
+        includeTimestamp: Boolean
+    ) {
         playlistExportFormat = format
         exportPlaylistId = playlistId
 
-        val fileName = BackupRestoreSettings.getExportFileName(this, format, playlistName, includeTimestamp)
+        val fileName =
+            BackupRestoreSettings.getExportFileName(this, format, playlistName, includeTimestamp)
         createPlaylistsFile.launch(fileName)
     }
 
