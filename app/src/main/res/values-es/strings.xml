@@ -567,4 +567,5 @@
     <string name="gaming">Videojuegos</string>
     <string name="include_timestamp_in_filename">Incluir marca de tiempo en el archivo</string>
     <string name="unsubscribe_snackbar_message">Desuscripción exitosa de %1$s</string>
+    <string name="screenshot_saved">Captura de pantalla guardada</string>
 </resources>

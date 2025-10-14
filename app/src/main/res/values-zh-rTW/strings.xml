@@ -565,4 +565,5 @@
     <string name="createNewPlaylist">建立新播放清單</string>
     <string name="include_timestamp_in_filename">在檔案名稱中包含時間戳</string>
     <string name="unsubscribe_snackbar_message">已成功取消訂閱 %1$s</string>
+    <string name="screenshot_saved">已儲存螢幕截圖</string>
 </resources>

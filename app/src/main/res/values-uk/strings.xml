@@ -569,4 +569,5 @@
     <string name="createNewPlaylist">Створити новий список відтворення</string>
     <string name="include_timestamp_in_filename">Включити позначку часу в назву файлу</string>
     <string name="unsubscribe_snackbar_message">Успішно відписано від %1$s</string>
+    <string name="screenshot_saved">Знімок екрана збережно</string>
 </resources>
