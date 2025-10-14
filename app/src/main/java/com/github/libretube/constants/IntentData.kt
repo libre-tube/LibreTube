@@ -14,6 +14,7 @@ object IntentData {
     const val timeStamp = "timeStamp"
     const val playlistType = "playlistType"
     const val downloading = "downloading"
+    const val OPEN_DOWNLOADS = "openDownloads"
     const val maximizePlayer = "openAudioPlayer"
     const val fragmentToOpen = "fragmentToOpen"
     const val comment = "comment"

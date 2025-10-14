@@ -523,7 +523,7 @@ class DownloadService : LifecycleService() {
 
     private fun getNotificationBuilder(item: DownloadItem): Builder {
         val intent = Intent(this@DownloadService, MainActivity::class.java)
-            .putExtra("fragmentToOpen", "downloads")
+            .putExtra(IntentData.OPEN_DOWNLOADS, true)
         val activityIntent = PendingIntentCompat
             .getActivity(this@DownloadService, 0, intent, FLAG_CANCEL_CURRENT, false)
 
