@@ -184,8 +184,9 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">?attr/colorControlNormal</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textAlignment">viewStart</item>
-        <item name="android:padding">15dp</item>
+        <item name="android:padding">8dp</item>
 
     </style>
 
