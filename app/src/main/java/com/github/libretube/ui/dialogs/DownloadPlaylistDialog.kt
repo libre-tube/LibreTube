@@ -44,6 +44,7 @@ class DownloadPlaylistDialog : DialogFragment() {
         val possibleAudioQualities = resources.getStringArray(R.array.audioQualityBitrates)
             .toList()
 
+        binding.playlistTitle.text = playlistName
         binding.videoSpinner.items = listOf(getString(R.string.no_video)) + possibleVideoQualities
         binding.audioSpinner.items = listOf(getString(R.string.no_audio)) + possibleAudioQualities
         binding.subtitleSpinner.items =
@@ -54,7 +55,7 @@ class DownloadPlaylistDialog : DialogFragment() {
         restoreSelections(binding)
 
         return MaterialAlertDialogBuilder(requireContext())
-            .setTitle(getString(R.string.download_playlist) + ": " + playlistName)
+            .setTitle(getString(R.string.download_playlist))
             .setView(binding.root)
             .setPositiveButton(R.string.download) { _, _ ->
                 with(binding) {
