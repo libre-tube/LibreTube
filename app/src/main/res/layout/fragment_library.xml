@@ -24,40 +24,40 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="6dp">
+                    android:layout_marginVertical="10dp"
+                    android:orientation="horizontal">
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/watch_history"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:ellipsize="marquee"
+                        android:maxLines="1"
                         android:text="@string/watch_history"
-                        tools:text="a longer translated text version"
                         android:textAlignment="viewStart"
                         android:textStyle="bold"
                         app:icon="@drawable/ic_time_outlined"
-                        android:ellipsize="marquee"
-                        android:maxLines="1"
-                        android:layout_marginEnd="10dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/downloads"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintWidth_max="wrap"
                         app:layout_constraintWidth_percent="0.5"
-                        app:materialSizeOverlay="@style/SizeOverlay.Material3Expressive.Button.Medium" />
+                        app:materialSizeOverlay="@style/SizeOverlay.Material3Expressive.Button.Medium"
+                        tools:text="a longer translated text version" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/downloads"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:ellipsize="marquee"
+                        android:maxLines="1"
                         android:text="@string/downloads"
                         android:textStyle="bold"
                         app:icon="@drawable/ic_download"
-                        android:ellipsize="marquee"
-                        android:maxLines="1"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/watch_history"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/watch_history"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintWidth_max="wrap"
                         app:layout_constraintWidth_percent="0.5"
                         app:materialSizeOverlay="@style/SizeOverlay.Material3Expressive.Button.Medium" />
@@ -67,8 +67,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingVertical="10dp">
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -83,14 +82,15 @@
                             android:padding="8dp"
                             android:text="@string/playlists"
                             android:textAlignment="viewStart"
-                            android:textSize="18sp"
+                            android:textSize="20sp"
                             android:textStyle="bold" />
 
                         <com.google.android.material.button.MaterialButton
-                            style="?materialButtonTonalStyle"
                             android:id="@+id/sortTV"
+                            style="?materialButtonTonalStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
                             android:ellipsize="end"
                             android:maxLines="1"
                             android:paddingHorizontal="10dp"
@@ -136,15 +136,15 @@
                     android:id="@+id/bookmarksContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingVertical="10dp">
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
                         android:text="@string/bookmarks"
-                        android:textSize="18sp"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <androidx.recyclerview.widget.RecyclerView
