@@ -61,7 +61,7 @@ class HomeViewModel : ViewModel() {
                     async { if (visibleItems.contains(PLAYLISTS)) loadPlaylists() },
                     async { if (visibleItems.contains(WATCHING)) loadVideosToContinueWatching() }
                 )
-                loadedSuccessfully.value = sections.any { it.isInitialized }
+                loadedSuccessfully.value = sections.any { it.value != null }
                 isLoading.value = false
             }
 
