@@ -12,6 +12,38 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:id="@+id/search_suggestion_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:background="?selectableItemBackground">
+
+            <TextView
+                android:id="@+id/search_suggestion_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="@string/did_you_mean"
+                android:textSize="16sp"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:id="@+id/search_suggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="?colorPrimary"
+                android:textStyle="italic"
+                tools:text="'suggestion'" />
+
+        </LinearLayout>
+
+
+
         <HorizontalScrollView
             android:id="@+id/filter_bar"
             android:layout_width="match_parent"
