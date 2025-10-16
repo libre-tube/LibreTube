@@ -1,6 +1,7 @@
 package com.github.libretube.ui.models
 
 import androidx.core.net.toUri
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -25,11 +26,17 @@ class SearchResultViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
 
     private val filterMutableData = MutableStateFlow("all")
 
+    val searchSuggestion = MutableLiveData<Pair<String, Boolean>?>()
+
     @OptIn(ExperimentalCoroutinesApi::class)
     val searchResultsFlow = filterMutableData.flatMapLatest {
         Pager(
             PagingConfig(pageSize = 20, enablePlaceholders = false),
-            pagingSourceFactory = { SearchPagingSource(searchQuery, it) }
+            pagingSourceFactory = {
+                SearchPagingSource(searchQuery, it) { suggestion ->
+                    searchSuggestion.postValue(suggestion)
+                }
+            }
         ).flow
     }
         .cachedIn(viewModelScope)
