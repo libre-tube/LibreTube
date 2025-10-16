@@ -3,6 +3,7 @@ package com.github.libretube.ui.sheets
 import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
+import android.widget.RadioGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import com.github.libretube.R
@@ -57,8 +58,14 @@ class FilterSortBottomSheet : ExpandedBottomSheet(R.layout.filter_sort_sheet) {
         return RadioButton(context).apply {
             tag = index
             text = name
+            layoutParams = RadioGroup.LayoutParams(
+                RadioGroup.LayoutParams.MATCH_PARENT,
+                RadioGroup.LayoutParams.WRAP_CONTENT
+            )
+            textAlignment = View.TEXT_ALIGNMENT_VIEW_START
         }
     }
+
 
     private fun setInitialFiltersState() {
         binding.filterVideos.isChecked = ContentFilter.VIDEOS.isEnabled
