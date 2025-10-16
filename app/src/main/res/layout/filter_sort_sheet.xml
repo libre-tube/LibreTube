@@ -25,12 +25,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
                     android:layout_marginBottom="4dp"
                     android:text="@string/tooltip_filter" />
 
@@ -38,19 +38,15 @@
                     android:id="@+id/filters"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="16dp"
+                    app:chipMinTouchTargetSize="0dp"
                     app:selectionRequired="true"
                     app:singleLine="false"
-                    app:singleSelection="false"
-                    app:chipMinTouchTargetSize="0dp">
+                    app:singleSelection="false">
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/filter_videos"
                         style="@style/ElevatedFilterChip"
                         android:layout_marginHorizontal="0dp"
-                        app:chipSpacingVertical="10dp"
-                        app:chipEndPadding="6dp"
-                        app:chipStartPadding="6dp"
                         android:checked="true"
                         android:text="@string/videos" />
 
@@ -58,8 +54,6 @@
                         android:id="@+id/filter_shorts"
                         style="@style/ElevatedFilterChip"
                         android:layout_marginHorizontal="0dp"
-                        app:chipEndPadding="6dp"
-                        app:chipStartPadding="6dp"
                         android:checked="true"
                         android:text="@string/yt_shorts" />
 
@@ -67,8 +61,6 @@
                         android:id="@+id/filter_livestreams"
                         style="@style/ElevatedFilterChip"
                         android:layout_marginHorizontal="0dp"
-                        app:chipEndPadding="6dp"
-                        app:chipStartPadding="6dp"
                         android:checked="true"
                         android:text="@string/livestreams" />
 
@@ -77,7 +69,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="4dp"
                     android:text="@string/tooltip_sort" />
@@ -85,22 +76,19 @@
                 <RadioGroup
                     android:id="@+id/sort_radio_group"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="16dp"/>
+                    android:layout_height="wrap_content" />
 
                 <CheckBox
                     android:id="@+id/show_upcoming_checkbox"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/show_upcoming_videos"
-                    android:layout_marginStart="16dp"/>
+                    android:text="@string/show_upcoming_videos" />
 
                 <CheckBox
                     android:id="@+id/hide_watched_checkbox"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/hide_watched_from_feed"
-                    android:layout_marginStart="16dp"/>
+                    android:text="@string/hide_watched_from_feed" />
 
             </LinearLayout>
 
