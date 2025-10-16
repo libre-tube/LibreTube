@@ -18,7 +18,6 @@ open class DismissableTimeBar(
     context: Context,
     attributeSet: AttributeSet? = null
 ): DefaultTimeBar(context, attributeSet) {
-    private var shouldAddListener = false
     var exoPlayer: Player? = null
     private var lastYPosition = 0f
     private var lastXPosition = 0f
@@ -76,20 +75,16 @@ open class DismissableTimeBar(
         return super.onTouchEvent(event)
     }
 
-    /**
-     * DO NOT CALL THIS METHOD DIRECTLY. Use [addSeekBarListener] instead!
-     */
+    @Deprecated("DO NOT CALL THIS METHOD DIRECTLY. Use [addSeekBarListener] instead!")
     override fun addListener(listener: OnScrubListener) {
-        // do nothing - listeners are set via addSeekBarListener
+        // do nothing - listeners should only be set via addSeekBarListener
     }
 
     /**
      * Wrapper to circumvent adding the listener created by [PlayerControlView]
      */
     fun addSeekBarListener(listener: OnScrubListener) {
-        shouldAddListener = true
         listeners.add(listener)
-        shouldAddListener = false
     }
 
     fun setPlayer(player: Player) {
