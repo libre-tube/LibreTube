@@ -565,4 +565,5 @@
     <string name="createNewPlaylist">新しい再生リストを作成</string>
     <string name="include_timestamp_in_filename">ファイル名にタイムスタンプを含める</string>
     <string name="unsubscribe_snackbar_message">%1$sの登録を解除しました</string>
+    <string name="screenshot_saved">スクリーンショットが保存されました</string>
 </resources>

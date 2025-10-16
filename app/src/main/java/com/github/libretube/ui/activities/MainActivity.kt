@@ -35,6 +35,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.enums.ImportFormat
+import com.github.libretube.enums.TopLevelDestination
 import com.github.libretube.helpers.ImportHelper
 import com.github.libretube.helpers.IntentHelper
 import com.github.libretube.helpers.NavBarHelper
@@ -123,8 +124,8 @@ class MainActivity : BaseActivity() {
             // there's a possibility that the paddings are not being applied properly when
             // exiting from player's fullscreen. Adding OnGlobalLayoutListener serves as
             // a workaround for this issue
-            binding.root.viewTreeObserver.addOnGlobalLayoutListener(object:
-            ViewTreeObserver.OnGlobalLayoutListener{
+            binding.root.viewTreeObserver.addOnGlobalLayoutListener(object :
+                ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
                     with(binding.appBarLayout) {
                         setPadding(
@@ -479,23 +480,29 @@ class MainActivity : BaseActivity() {
         // navigate to (temporary) playlist or channel if available
         if (navigateToMediaByIntent(intent)) return
 
+        // Get saved search query if available
         intent?.getStringExtra(IntentData.query)?.let {
             savedSearchQuery = it
         }
 
-        intent?.getStringExtra("fragmentToOpen")?.let {
-            if (it != "downloads") { // Not a shortcut
-                ShortcutManagerCompat.reportShortcutUsed(this, it)
-            }
+        // Open the Downloads screen if requested
+        if (intent?.getBooleanExtra(IntentData.OPEN_DOWNLOADS, false) == true) {
+            navController.navigate(R.id.downloadsFragment)
+            return
+        }
 
+        // Handle navigation from app shortcuts (Home, Trends, etc.)
+        intent?.getStringExtra(IntentData.fragmentToOpen)?.let {
+            ShortcutManagerCompat.reportShortcutUsed(this, it)
             when (it) {
-                "home" -> navController.navigate(R.id.homeFragment)
-                "trends" -> navController.navigate(R.id.trendsFragment)
-                "subscriptions" -> navController.navigate(R.id.subscriptionsFragment)
-                "library" -> navController.navigate(R.id.libraryFragment)
-                "downloads" -> navController.navigate(R.id.downloadsFragment)
+                TopLevelDestination.Home.route -> navController.navigate(R.id.homeFragment)
+                TopLevelDestination.Trends.route -> navController.navigate(R.id.trendsFragment)
+                TopLevelDestination.Subscriptions.route -> navController.navigate(R.id.subscriptionsFragment)
+                TopLevelDestination.Library.route -> navController.navigate(R.id.libraryFragment)
             }
         }
+
+        // Rebind the download service if the user is currently downloading
         if (intent?.getBooleanExtra(IntentData.downloading, false) == true) {
             (supportFragmentManager.fragments.find { it is NavHostFragment })
                 ?.childFragmentManager?.fragments?.forEach { fragment ->
@@ -622,11 +629,17 @@ class MainActivity : BaseActivity() {
             ?: false
     }
 
-    fun startPlaylistExport(playlistId: String, playlistName: String, format: ImportFormat, includeTimestamp: Boolean) {
+    fun startPlaylistExport(
+        playlistId: String,
+        playlistName: String,
+        format: ImportFormat,
+        includeTimestamp: Boolean
+    ) {
         playlistExportFormat = format
         exportPlaylistId = playlistId
 
-        val fileName = BackupRestoreSettings.getExportFileName(this, format, playlistName, includeTimestamp)
+        val fileName =
+            BackupRestoreSettings.getExportFileName(this, format, playlistName, includeTimestamp)
         createPlaylistsFile.launch(fileName)
     }
 

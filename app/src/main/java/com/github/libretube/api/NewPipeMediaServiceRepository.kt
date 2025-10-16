@@ -246,13 +246,16 @@ class NewPipeMediaServiceRepository : MediaServiceRepository {
     }
 
     // see https://github.com/TeamNewPipe/NewPipeExtractor/tree/dev/extractor/src/main/java/org/schabi/newpipe/extractor/services/youtube/extractors/kiosk
-    private val trendingCategories = mapOf(
-        TrendingCategory.GAMING to "trending_gaming",
-        TrendingCategory.TRAILERS to "trending_movies_and_shows",
-        TrendingCategory.PODCASTS to "trending_podcasts_episodes",
-        TrendingCategory.MUSIC to "trending_music",
-        TrendingCategory.LIVE to "live"
-    )
+    private val trendingCategories = TrendingCategory.entries.associate {
+        when (it) {
+            TrendingCategory.GAMING -> it to "trending_gaming"
+            TrendingCategory.TRAILERS -> it to "trending_movies_and_shows"
+            TrendingCategory.PODCASTS -> it to "trending_podcasts_episodes"
+            TrendingCategory.MUSIC -> it to "trending_music"
+            TrendingCategory.LIVE -> it to "live"
+        }
+    }
+
     override fun getTrendingCategories(): List<TrendingCategory> =
         trendingCategories.keys.toList()
 

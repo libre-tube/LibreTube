@@ -566,4 +566,5 @@
     <string name="createNewPlaylist">Създаване на нов плейлист</string>
     <string name="include_timestamp_in_filename">Включи времеви печат в името на файла</string>
     <string name="unsubscribe_snackbar_message">Успешно се отписахте от %1$s</string>
+    <string name="screenshot_saved">Екранната снимка е запазена</string>
 </resources>

@@ -144,7 +144,7 @@
     <string name="version">Versi %1$s</string>
     <string name="error_occurred">Kesalahan</string>
     <string name="copied">Disalin</string>
-    <string name="device_info">Info perangkat</string>
+    <string name="device_info">Info Perangkat</string>
     <string name="clear_customInstances">Hapus yang telah ditambahkan</string>
     <string name="pauseOnScreenOff">Jeda secara otomatis</string>
     <string name="pauseOnScreenOff_summary">Jeda pemutaran ketika layar dimatikan</string>
@@ -246,7 +246,7 @@
     <string name="never">Tidak pernah</string>
     <string name="autoRotatePlayer">Penuhi layar secara otomatis</string>
     <string name="autoRotatePlayer_summary">Memainkan dengan layar penuh secara otomatis ketika perangkat diputar</string>
-    <string name="general_summary">Bahasa dan wilayah</string>
+    <string name="general_summary">Unduhan dan penghemat data</string>
     <string name="quality">Kualitas</string>
     <string name="behavior">Perilaku</string>
     <string name="player_summary">Bawaan dan perilaku</string>
@@ -557,4 +557,13 @@
     <string name="full_local_mode_desc">Langsung dapatkan semuanya dari YouTube, tanpa menggunakan Piped.</string>
     <string name="mode_of_operation">Mode tindakan</string>
     <string name="full_local_mode">Mode lokal penuh</string>
+    <string name="createNewPlaylist">Buat daftar putar baru</string>
+    <string name="playback_pitch_semitone_error_input">Nilai harus antara -%1$.1f (minimum) dan %1$.1f (maksimum)</string>
+    <string name="unsubscribe_snackbar_message">Berhasil berhenti berlangganan dari %1$s</string>
+    <string name="screenshot_saved">Tangkapan layar disimpan</string>
+    <string name="gaming">Permainan</string>
+    <string name="podcasts">Siniar</string>
+    <string name="trailers">Trailer</string>
+    <string name="music">Musik</string>
+    <string name="include_timestamp_in_filename">Sertakan stempel waktu dalam nama berkas</string>
 </resources>

@@ -86,11 +86,13 @@ open class OnlinePlayerService : AbstractPlayerService() {
                     // save video to watch history when the video starts playing or is being resumed
                     // waiting for the player to be ready since the video can't be claimed to be watched
                     // while it did not yet start actually, but did buffer only so far
-                    scope.launch(Dispatchers.IO) {
-                        streams?.let { streams ->
-                            val watchHistoryItem =
-                                streams.toStreamItem(videoId).toWatchHistoryItem(videoId)
-                            DatabaseHelper.addToWatchHistory(watchHistoryItem)
+                    if (PlayerHelper.watchHistoryEnabled) {
+                        scope.launch(Dispatchers.IO) {
+                            streams?.let { streams ->
+                                val watchHistoryItem =
+                                    streams.toStreamItem(videoId).toWatchHistoryItem(videoId)
+                                DatabaseHelper.addToWatchHistory(watchHistoryItem)
+                            }
                         }
                     }
                 }
