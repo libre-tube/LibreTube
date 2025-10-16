@@ -101,9 +101,9 @@ class VideosAdapter(
 
             CoroutineScope(Dispatchers.IO).launch {
                 DeArrowUtil.deArrowVideoId(videoId)?.let { (title, thumbnail) ->
-                    if (title != null) holder.binding.videoTitle.text = title
-                    if (thumbnail != null) withContext(Dispatchers.Main) {
-                        ImageHelper.loadImage(thumbnail, holder.binding.thumbnail)
+                    withContext(Dispatchers.Main) {
+                        if (title != null) holder.binding.videoTitle.text = title
+                        if (thumbnail != null) ImageHelper.loadImage(thumbnail, holder.binding.thumbnail)
                     }
                 }
             }
