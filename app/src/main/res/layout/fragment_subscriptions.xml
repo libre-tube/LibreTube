@@ -87,7 +87,9 @@
                                 android:layout_weight="1"
                                 android:text="@string/subscriptions"
                                 android:textAlignment="viewStart"
-                                app:drawableEndCompat="@drawable/ic_arrow_up_down" />
+                                app:iconGravity="end"
+                                app:iconSize="14dp"
+                                app:icon="@drawable/ic_arrow_up_down" />
 
                             <com.google.android.material.button.MaterialButton
                                 style="@style/Widget.Material3.Button.IconButton.Elevated"
