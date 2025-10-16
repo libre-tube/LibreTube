@@ -9,7 +9,8 @@ import kotlinx.coroutines.withContext
 
 class SearchPagingSource(
     private val searchQuery: String,
-    private val searchFilter: String
+    private val searchFilter: String,
+    private val onSearchSuggestion: (Pair<String, Boolean>?) -> Unit
 ) : PagingSource<String, ContentItem>() {
     override fun getRefreshKey(state: PagingState<String, ContentItem>) = null
 
@@ -21,6 +22,10 @@ class SearchPagingSource(
                         searchQuery, searchFilter, it
                     )
                 } ?: MediaServiceRepository.instance.getSearchResults(searchQuery, searchFilter)
+                    .also {
+                        if (it.suggestion.isNullOrEmpty()) onSearchSuggestion(null)
+                        else onSearchSuggestion(it.suggestion to it.corrected)
+                    }
             }
 
             LoadResult.Page(result.items, null, result.nextpage)

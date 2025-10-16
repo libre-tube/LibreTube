@@ -385,7 +385,9 @@ class NewPipeMediaServiceRepository : MediaServiceRepository {
 
         return SearchResult(
             items = searchInfo.relatedItems.mapNotNull { it.toContentItem() },
-            nextpage = searchInfo.nextPage?.toNextPageString()
+            nextpage = searchInfo.nextPage?.toNextPageString(),
+            suggestion = searchInfo.searchSuggestion,
+            corrected = searchInfo.isCorrectedSearch
         )
     }
 
