@@ -9,18 +9,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="16dp"
         android:animateLayoutChanges="true"
         android:orientation="horizontal"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp">
+        android:padding="16dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/commentor_image"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginEnd="16dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="8dp"
             android:background="@android:color/darker_gray"
             app:shapeAppearance="@style/CircleImageView"
             tools:src="@mipmap/ic_launcher" />
@@ -41,16 +38,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:maxLines="2"
+                    android:maxLines="1"
                     android:textAlignment="viewStart"
                     android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     tools:text="Octacat" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" • "
+                    android:textSize="12sp"
                     tools:ignore="HardcodedText" />
 
                 <TextView
@@ -58,10 +56,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:maxLines="2"
+                    android:maxLines="1"
                     android:textAlignment="viewStart"
                     android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     tools:text="10h ago" />
 
                 <ImageView
@@ -91,8 +89,8 @@
                 android:layout_marginBottom="8dp"
                 android:focusable="false"
                 android:textAlignment="viewStart"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textIsSelectable="true"
-                android:textSize="15sp"
                 tools:text="Comment Text" />
 
             <LinearLayout
@@ -109,6 +107,7 @@
                     android:drawablePadding="6dp"
                     android:gravity="center_vertical"
                     android:includeFontPadding="false"
+                    android:textStyle="bold"
                     app:drawableStartCompat="@drawable/ic_thumb_up"
                     app:drawableStartDimen="16dp"
                     tools:text="1.2k" />
@@ -124,8 +123,8 @@
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/creator_reply_imageView"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
                     android:layout_marginEnd="8dp"
                     android:visibility="gone"
                     app:shapeAppearance="@style/CircleImageView"
@@ -138,6 +137,7 @@
                     android:drawablePadding="6dp"
                     android:gravity="center_vertical"
                     android:includeFontPadding="false"
+                    android:textStyle="bold"
                     android:visibility="gone"
                     app:drawableStartCompat="@drawable/ic_comment"
                     app:drawableStartDimen="16dp"

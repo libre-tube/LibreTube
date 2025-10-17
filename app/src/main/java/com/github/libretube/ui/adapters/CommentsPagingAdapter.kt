@@ -93,14 +93,12 @@ class CommentsPagingAdapter(
                             com.google.android.material.R.attr.colorSurface
                         )
                     )
-
-                    root.updatePadding(top = 20)
-                    root.updateLayoutParams<ViewGroup.MarginLayoutParams> { bottomMargin = 20 }
                 } else {
                     root.background = AppCompatResources.getDrawable(
                         root.context,
                         R.drawable.rounded_ripple
                     )
+                    commentorImage.updateLayoutParams<ViewGroup.MarginLayoutParams> { leftMargin = 58 }
                 }
             } else {
                 val onClickListener = View.OnClickListener {
