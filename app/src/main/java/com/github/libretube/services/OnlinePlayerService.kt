@@ -12,6 +12,7 @@ import androidx.media3.common.MimeTypes
 import androidx.media3.common.Player
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.exoplayer.hls.HlsMediaSource
+import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.MediaServiceRepository
@@ -283,8 +284,8 @@ open class OnlinePlayerService : AbstractPlayerService() {
 
         when {
             // SABR
-            //TODO: enable only experimentally/in DEBUG mode
-            streams.serverAbrStreamingUrl != null && streams.videoPlaybackUstreamerConfig != null -> {
+            // only enable when in DEBUG, as the implementation is still experimental
+            BuildConfig.DEBUG && streams.serverAbrStreamingUrl != null && streams.videoPlaybackUstreamerConfig != null -> {
                 val sabrMediaSourceFactory = SabrMediaSource.Factory(
                     SABRDataSource.Factory(),
                     SabrManifest(videoId, streams)
