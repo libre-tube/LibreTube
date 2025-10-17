@@ -49,7 +49,7 @@
                     android:layout_weight="1"
                     android:textAlignment="viewStart"
                     android:textStyle="bold"
-                    tools:text="Title" />
+                    tools:text="Comments (1000)" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnScrollToTop"
