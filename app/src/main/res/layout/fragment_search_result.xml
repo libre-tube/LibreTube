@@ -16,7 +16,6 @@
             android:id="@+id/filter_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="10dp"
             android:scrollbars="none"
             app:layout_constraintBottom_toTopOf="@id/recycler_view"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,6 +26,7 @@
                 android:id="@+id/filter_chip_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingStart="10dp"
                 app:checkedChip="@id/chip_all"
                 app:selectionRequired="true"
                 app:singleLine="true"
@@ -98,7 +98,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
-                android:layout_marginVertical="10dp"
+                android:layout_marginBottom="16dp"
                 android:src="@drawable/ic_search" />
 
             <TextView

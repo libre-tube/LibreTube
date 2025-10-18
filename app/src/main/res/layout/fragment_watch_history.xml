@@ -50,23 +50,23 @@
                     android:id="@+id/status_filter_chips"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:checkedChip="@id/chip_continue"
+                    android:paddingHorizontal="10dp"
                     app:selectionRequired="true"
-                    android:paddingHorizontal="12dp">
+                    tools:checkedChip="@id/chip_continue">
 
                     <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Filter"
                         android:id="@+id/chip_continue"
+                        style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/continue_watching"/>
+                        android:text="@string/continue_watching" />
 
                     <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Filter"
                         android:id="@+id/chip_finished"
+                        style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/finished"/>
+                        android:text="@string/finished" />
 
                 </com.google.android.material.chip.ChipGroup>
 
