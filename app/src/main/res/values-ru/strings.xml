@@ -199,7 +199,7 @@
     <string name="reset_watch_positions">Сбросить позиции</string>
     <string name="captions">Субтитры</string>
     <string name="general">Общие</string>
-    <string name="general_summary">Язык и регион</string>
+    <string name="general_summary">Скачивания и экономия данных</string>
     <string name="watch_history_summary">Сохранять историю просмотра локально</string>
     <string name="caption_settings">Субтитры</string>
     <string name="playerAudioQuality">Качество звука</string>
@@ -566,4 +566,7 @@
     <string name="podcasts">Подкасты</string>
     <string name="trailers">Трейлеры</string>
     <string name="music">Музыка</string>
+    <string name="unsubscribe_snackbar_message">Успешно отписано от %1$s</string>
+    <string name="screenshot_saved">Снимок экрана сохранён</string>
+    <string name="include_timestamp_in_filename">Добавлять время в название файла</string>
 </resources>
