@@ -124,7 +124,7 @@ class VideoCardsAdapter(private val columnWidthDp: Float? = null) :
                 true
             }
 
-            CoroutineScope(Dispatchers.Main).launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 DeArrowUtil.deArrowVideoId(videoId)?.let { (title, thumbnail) ->
                     withContext(Dispatchers.Main) {
                         if (title != null) this@apply.textViewTitle.text = title
