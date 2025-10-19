@@ -17,7 +17,6 @@ interface SabrChunkSource : ChunkSource {
     interface Factory {
         /**
          * @param manifest The initial manifest.
-         * @param periodIndex The index of the corresponding period in the manifest.
          * @param adaptationSetIndices The indices of the corresponding adaptation sets in the period.
          * @param trackSelection The track selection.
          * @param trackType The [track type][androidx.media3.common.C.TrackType].
