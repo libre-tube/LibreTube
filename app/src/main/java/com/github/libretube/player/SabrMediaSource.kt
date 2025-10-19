@@ -43,32 +43,11 @@ class SabrMediaSource(
     }
 
     /** Factory for [SabrMediaSource]s.  */
-    class Factory(
-        private val chunkSourceFactory: SabrChunkSource.Factory,
-        private val manifest: SabrManifest,
-    ) : MediaSource.Factory {
-
+    class Factory( private val manifest: SabrManifest) : MediaSource.Factory {
         private var cmcdConfigurationFactory: CmcdConfiguration.Factory? = null
         private var drmSessionManagerProvider: DrmSessionManagerProvider = DefaultDrmSessionManagerProvider()
         private val compositeSequenceableLoaderFactory= DefaultCompositeSequenceableLoaderFactory()
         private var loadErrorHandlingPolicy: LoadErrorHandlingPolicy = DefaultLoadErrorHandlingPolicy()
-
-        /**
-         * Creates a new factory for [SabrMediaSource]s.
-         *
-         * The factory will use the following default components:
-         *  * [DefaultSabrChunkSource.Factory]
-         *  * [DefaultDrmSessionManagerProvider]
-         *  * [DefaultLoadErrorHandlingPolicy]
-         *  * [DefaultCompositeSequenceableLoaderFactory]
-         *
-         * @param dataSourceFactory A factory for [DataSource] instances that will be used to load
-         * manifest and media data.
-         */
-        constructor(dataSourceFactory: DataSource.Factory?, manifest: SabrManifest) : this(
-            DefaultSabrChunkSource.Factory(dataSourceFactory!!),
-            manifest
-        )
 
         override fun setCmcdConfigurationFactory(cmcdConfigurationFactory: CmcdConfiguration.Factory): Factory {
             this.cmcdConfigurationFactory =
@@ -106,7 +85,7 @@ class SabrMediaSource(
             return SabrMediaSource(
                 mediaItem,
                 manifest,
-                chunkSourceFactory,
+                DefaultSabrChunkSource.Factory(SabrDataSource.Factory()),
                 compositeSequenceableLoaderFactory,
                 cmcdConfiguration,
                 drmSessionManagerProvider.get(mediaItem),
