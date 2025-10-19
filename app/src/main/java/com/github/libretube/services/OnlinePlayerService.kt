@@ -35,7 +35,6 @@ import com.github.libretube.helpers.PlayerHelper.getSubtitleRoleFlags
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.util.DeArrowUtil
-import com.github.libretube.player.SABRDataSource
 import com.github.libretube.player.SabrMediaSource
 import com.github.libretube.player.manifest.SabrManifest
 import com.github.libretube.util.PlayingQueue
@@ -287,7 +286,6 @@ open class OnlinePlayerService : AbstractPlayerService() {
             // only enable when in DEBUG, as the implementation is still experimental
             BuildConfig.DEBUG && streams.serverAbrStreamingUrl != null && streams.videoPlaybackUstreamerConfig != null -> {
                 val sabrMediaSourceFactory = SabrMediaSource.Factory(
-                    SABRDataSource.Factory(),
                     SabrManifest(videoId, streams)
                 )
                 val mediaItem = createMediaItem(

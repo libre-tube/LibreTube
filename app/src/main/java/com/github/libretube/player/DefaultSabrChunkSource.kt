@@ -45,26 +45,10 @@ class DefaultSabrChunkSource(
 ) : SabrChunkSource {
 
     /** [SabrChunkSource.Factory] for [DefaultSabrChunkSource] instances.  */
-    class Factory
-    /**
-     * Creates a new instance.
-     *
-     * @param chunkExtractorFactory Creates [ChunkExtractor] instances to use for extracting
-     * chunks.
-     * @param dataSourceFactory Creates the [DataSource] to use for downloading chunks.
-     */(
-        private val chunkExtractorFactory: ChunkExtractor.Factory,
+    class Factory(
         private val dataSourceFactory: DataSource.Factory,
     ) : SabrChunkSource.Factory {
-
-        /**
-         * Equivalent to [new][.Factory].
-         */
-        constructor(dataSourceFactory: DataSource.Factory) : this(
-            BundledChunkExtractor.Factory(),
-            dataSourceFactory,
-        )
-
+        private val chunkExtractorFactory = BundledChunkExtractor.Factory()
 
         override fun createSabrChunkSource(
             manifest: SabrManifest,
