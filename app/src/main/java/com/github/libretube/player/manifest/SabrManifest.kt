@@ -40,9 +40,9 @@ class SabrManifest(
     /**
      * The duration of the presentation in milliseconds, or [C.TIME_UNSET] if not applicable.
      */
-    @JvmField val durationMs: Long,
+    val durationMs: Long,
 ) : FilterableManifest<SabrManifest?> {
-    @JvmField var adaptationSets: List<AdaptationSet> = emptyList()
+    var adaptationSets: List<AdaptationSet> = emptyList()
 
     internal constructor(
         videoId: String,
@@ -106,14 +106,6 @@ class SabrManifest(
     companion object {
         private fun buildRepresentation(stream: PipedStream, format: Format) = Representation(
             format,
-            listOf(BaseUrl("sabr://${stream.itag}/${stream.lastModified}")),
-            SegmentBase.SingleSegmentBase(
-                RangedUri(null, stream.initStart!!.toLong(), stream.initEnd!!.toLong()),
-                1,
-                0,
-                stream.indexStart!!.toLong(),
-                stream.indexEnd!!.toLong()
-            ),
             stream.itag!!,
             stream.lastModified!!,
             null,
