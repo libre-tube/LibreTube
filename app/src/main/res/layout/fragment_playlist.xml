@@ -99,23 +99,25 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_marginHorizontal="10dp">
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="8dp">
 
                         <com.github.libretube.ui.views.ExpandableTextView
                             android:id="@+id/playlist_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingHorizontal="5dp"
                             android:paddingVertical="2dp"
+                            android:textColor="?android:attr/textColorPrimary"
                             android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:text="Playlist name" />
 
                         <TextView
                             android:id="@+id/playlistInfo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingHorizontal="5dp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:text="info" />
 
                     </LinearLayout>
 
@@ -123,24 +125,25 @@
                         style="@style/Widget.Material3.MaterialSplitButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:gravity="center"
                         android:paddingTop="0dp"
-                        android:paddingBottom="0dp"
-                        android:gravity="center">
+                        android:paddingBottom="0dp">
 
                         <com.google.android.material.button.MaterialButton
-                            style="?materialButtonTonalStyle"
                             android:id="@+id/sortBTN"
+                            style="?materialButtonTonalStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:visibility="gone"
                             app:icon="@drawable/ic_sort"
                             app:iconGravity="textEnd"
-                            android:visibility="gone"
                             tools:text="@string/most_recent"
                             tools:visibility="visible" />
 
                         <com.google.android.material.button.MaterialButton
-                            style="?materialIconButtonFilledTonalStyle"
                             android:id="@+id/optionsMenu"
+                            style="?materialIconButtonFilledTonalStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -154,21 +157,20 @@
                     android:id="@+id/playlistDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="5dp"
-                    android:paddingHorizontal="10dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="10dp" />
+                    android:layout_marginHorizontal="2dp"
+                    android:padding="10dp" />
 
                 <com.google.android.material.button.MaterialButtonGroup
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginVertical="10dp"
                     android:orientation="horizontal"
                     app:buttonSizeChange="@null">
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/play_all"
-                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        style="@style/Widget.Material3Expressive.Button.OutlinedButton"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -178,7 +180,7 @@
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/bookmark"
-                        style="@style/Widget.Material3.Button"
+                        style="@style/Widget.Material3Expressive.Button"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
