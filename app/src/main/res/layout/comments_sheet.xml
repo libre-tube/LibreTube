@@ -23,24 +23,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:paddingTop="8dp"
-                android:paddingBottom="0dp"
-                app:tint="?android:attr/textColorSecondaryInverse" />
+                android:paddingBottom="0dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:paddingHorizontal="10dp"
-                android:paddingBottom="7dp">
+                android:paddingHorizontal="10dp">
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnBack"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:background="?selectableItemBackgroundBorderless"
-                    android:padding="7dp"
-                    android:src="?homeAsUpIndicator"
-                    android:visibility="gone" />
+                    style="@style/Widget.Material3Expressive.Button.IconButton.Tonal"
+                    android:backgroundTint="?colorSurfaceContainerLow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    app:icon="?homeAsUpIndicator" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/commentsTitle"
@@ -50,27 +49,30 @@
                     android:layout_marginHorizontal="10dp"
                     android:layout_weight="1"
                     android:textAlignment="viewStart"
-                    tools:text="Title" />
+                    android:textStyle="bold"
+                    tools:text="Comments (1000)" />
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnScrollToTop"
-                    android:tooltipText="@string/tooltip_scroll_to_top"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:background="?selectableItemBackgroundBorderless"
-                    android:padding="7dp"
+                    style="@style/Widget.Material3Expressive.Button.IconButton.Tonal"
+                    android:backgroundTint="?colorSurfaceContainerLow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:rotationX="180"
-                    android:src="@drawable/ic_arrow_downward"
-                    android:visibility="gone" />
+                    android:tooltipText="@string/tooltip_scroll_to_top"
+                    android:visibility="gone"
+                    app:icon="@drawable/ic_arrow_downward" />
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnClose"
+                    style="@style/Widget.Material3Expressive.Button.IconButton.Tonal"
+                    android:backgroundTint="?colorSurfaceContainerLow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:tooltipText="@string/tooltip_close"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:background="?selectableItemBackgroundBorderless"
-                    android:padding="7dp"
-                    android:src="@drawable/ic_close" />
+                    app:icon="@drawable/ic_close" />
 
             </LinearLayout>
 
