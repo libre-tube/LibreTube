@@ -568,4 +568,6 @@
     <string name="include_timestamp_in_filename">Zahrnout časovou známku do názvu souboru</string>
     <string name="unsubscribe_snackbar_message">Odběr kanálu %1$s úspěšně zrušen</string>
     <string name="screenshot_saved">Snímek uložen</string>
+    <string name="did_you_mean">Mysleli jste:</string>
+    <string name="showing_results_for">Zobrazování výsledků pro:</string>
 </resources>
