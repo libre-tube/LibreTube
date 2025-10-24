@@ -568,4 +568,6 @@
     <string name="include_timestamp_in_filename">Includi data e ora nel nome del file</string>
     <string name="unsubscribe_snackbar_message">Disiscritto da %1$s con successo</string>
     <string name="screenshot_saved">Cattura dello schermo salvata</string>
+    <string name="did_you_mean">Intendevi:</string>
+    <string name="showing_results_for">Mostrando risultati per:</string>
 </resources>
