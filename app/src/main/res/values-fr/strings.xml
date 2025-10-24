@@ -568,4 +568,6 @@
     <string name="include_timestamp_in_filename">Inclure l\'horodatage dans le nom de fichier</string>
     <string name="unsubscribe_snackbar_message">Désabonnement réussi de %1$s</string>
     <string name="screenshot_saved">Capture d\'écran enregistrée</string>
+    <string name="did_you_mean">Vouliez-vous dire :</string>
+    <string name="showing_results_for">Affichage des résultats pour :</string>
 </resources>
