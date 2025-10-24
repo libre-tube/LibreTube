@@ -571,4 +571,6 @@
     <string name="include_timestamp_in_filename">ضمّن الطابع الزمني في اسم الملف</string>
     <string name="unsubscribe_snackbar_message">أُلغيت الاشتراك من %1$s بنجاج</string>
     <string name="screenshot_saved">حُفظت لقطة الشاشة</string>
+    <string name="did_you_mean">هل تقصد:</string>
+    <string name="showing_results_for">يظهر نتائج ل:</string>
 </resources>
