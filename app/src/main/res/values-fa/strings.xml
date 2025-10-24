@@ -567,4 +567,6 @@
     <string name="include_timestamp_in_filename">گذاشتن برچسب زمانی در نام پرونده</string>
     <string name="unsubscribe_snackbar_message">لغو موفّق اشتراک %1$s</string>
     <string name="screenshot_saved">نماگرفت ذخیره شد</string>
+    <string name="did_you_mean">آیا منظورتان این بود:</string>
+    <string name="showing_results_for">نمایش نتیجه‌ها برای:</string>
 </resources>
