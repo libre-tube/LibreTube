@@ -10,7 +10,6 @@
         android:id="@+id/suggestions_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:reverseLayout="true"
         app:stackFromEnd="true" />
@@ -27,7 +26,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
-            android:layout_marginVertical="10dp"
+            android:layout_marginBottom="16dp"
             android:src="@drawable/ic_history" />
 
         <TextView
