@@ -162,7 +162,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 viewModel.subFeedRecyclerViewState =
-                    binding.subFeed.layoutManager?.onSaveInstanceState()?.takeIf {
+                    recyclerView.layoutManager?.onSaveInstanceState()?.takeIf {
                         binding.subFeed.computeVerticalScrollOffset() != 0
                     }
             }
