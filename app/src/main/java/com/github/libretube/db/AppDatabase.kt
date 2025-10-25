@@ -18,6 +18,8 @@ import com.github.libretube.db.obj.CustomInstance
 import com.github.libretube.db.obj.Download
 import com.github.libretube.db.obj.DownloadChapter
 import com.github.libretube.db.obj.DownloadItem
+import com.github.libretube.db.obj.DownloadPlaylist
+import com.github.libretube.db.obj.DownloadPlaylistVideosCrossRef
 import com.github.libretube.db.obj.LocalPlaylist
 import com.github.libretube.db.obj.LocalPlaylistItem
 import com.github.libretube.db.obj.LocalSubscription
@@ -41,10 +43,12 @@ import com.github.libretube.db.obj.WatchPosition
         Download::class,
         DownloadItem::class,
         DownloadChapter::class,
+        DownloadPlaylist::class,
+        DownloadPlaylistVideosCrossRef::class,
         SubscriptionGroup::class,
         SubscriptionsFeedItem::class
     ],
-    version = 20,
+    version = 21,
     autoMigrations = [
         AutoMigration(from = 7, to = 8),
         AutoMigration(from = 8, to = 9),
@@ -52,7 +56,8 @@ import com.github.libretube.db.obj.WatchPosition
         AutoMigration(from = 10, to = 11),
         AutoMigration(from = 16, to = 17),
         AutoMigration(from = 18, to = 19),
-        AutoMigration(from = 19, to = 20)
+        AutoMigration(from = 19, to = 20),
+        AutoMigration(from = 20, to = 21)
     ]
 )
 @TypeConverters(Converters::class)

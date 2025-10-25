@@ -14,10 +14,10 @@ import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.db.DatabaseHelper
-import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.helpers.BackgroundHelper
+import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.ui.activities.OfflinePlayerActivity
@@ -30,9 +30,11 @@ import com.github.libretube.ui.sheets.DownloadOptionsBottomSheet.Companion.DELET
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
 import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlin.io.path.deleteIfExists
+import kotlinx.coroutines.withContext
 import kotlin.io.path.exists
 import kotlin.io.path.fileSize
 
@@ -160,28 +162,16 @@ class DownloadsAdapter(
             .show()
     }
 
-    private fun deleteDownloadContent(downloadWithItems: DownloadWithItems) {
-        val download = downloadWithItems.download
-        val items = downloadWithItems.downloadItems
-
-        items.forEach {
-            it.path.deleteIfExists()
-        }
-        runCatching {
-            download.thumbnailPath?.deleteIfExists()
-        }
-
-        runBlocking(Dispatchers.IO) {
-            DatabaseHolder.Database.downloadDao().deleteDownload(download)
-        }
-    }
-
     private fun deleteDownload(position: Int) {
-        deleteDownloadContent(getItem(position))
+        CoroutineScope(Dispatchers.IO).launch {
+            DownloadHelper.deleteDownloadIncludingFiles(getItem(position))
 
-        submitList(currentList.toMutableList().also {
-            it.removeAt(position)
-        })
+            withContext(Dispatchers.Main) {
+                submitList(currentList.toMutableList().also {
+                    it.removeAt(position)
+                })
+            }
+        }
     }
 
     fun deleteAllDownloads(onlyDeleteWatched: Boolean) {
@@ -191,11 +181,15 @@ class DownloadsAdapter(
             }
         }
 
-        for (item in toDelete) {
-            deleteDownloadContent(item)
-        }
+        CoroutineScope(Dispatchers.IO).launch {
+            for (item in toDelete) {
+                DownloadHelper.deleteDownloadIncludingFiles(item)
+            }
 
-        submitList(toKeep)
+            withContext(Dispatchers.Main) {
+                submitList(toKeep)
+            }
+        }
     }
 
     fun restoreItem(position: Int) {

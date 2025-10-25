@@ -28,5 +28,7 @@ fun List<DownloadWithItems>.filterByTab(tab: DownloadTab) = filter { dl ->
         DownloadTab.VIDEO -> {
             dl.downloadItems.any { it.type == FileType.VIDEO } || dl.downloadItems.isEmpty()
         }
+
+        DownloadTab.PLAYLIST -> throw IllegalArgumentException("not applicable for playlist tab, playlistId must be passed")
     }
 }
