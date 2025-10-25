@@ -49,7 +49,9 @@ data class Streams(
     val proxyUrl: String? = null,
     val chapters: List<ChapterSegment> = emptyList(),
     val uploaderSubscriberCount: Long = 0,
-    val previewFrames: List<PreviewFrames> = emptyList()
+    val previewFrames: List<PreviewFrames> = emptyList(),
+    val serverAbrStreamingUrl: String? = null,
+    val videoPlaybackUstreamerConfig: String? = null
 ): Parcelable {
     @IgnoredOnParcel
     val isLive = livestream || duration <= 0
