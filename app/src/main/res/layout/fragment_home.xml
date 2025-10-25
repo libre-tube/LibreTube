@@ -22,7 +22,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            tools:visibility="visible">
+            tools:visibility="visible"
+            android:scrollbars="none"
+            android:overScrollMode="never">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -32,10 +34,10 @@
 
                 <LinearLayout
                     android:id="@+id/featuredTV"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?selectableItemBackground"
+                    android:orientation="horizontal"
                     android:visibility="gone">
 
                     <TextView
@@ -47,22 +49,21 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/featuredRV"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
                     android:nestedScrollingEnabled="false"
                     android:orientation="horizontal"
-                    android:paddingHorizontal="10dp"
                     android:visibility="gone"
-                    tools:visibility="visible"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:visibility="visible" />
 
                 <LinearLayout
                     android:id="@+id/watchingTV"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?selectableItemBackground"
+                    android:orientation="horizontal"
                     android:visibility="gone">
 
                     <TextView
@@ -74,28 +75,27 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/watchingRV"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
                     android:nestedScrollingEnabled="false"
                     android:orientation="horizontal"
-                    android:paddingHorizontal="10dp"
                     android:visibility="gone"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 <LinearLayout
+                    android:id="@+id/trendingTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/trendingTV"
-                    android:visibility="gone"
-                    tools:visibility="visible"
                     android:background="?selectableItemBackground"
-                    android:paddingEnd="10dp">
+                    android:paddingEnd="12dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
 
                     <TextView
                         style="@style/HomeCategoryTitle"
-                        android:text="@string/trending"
                         android:background="@null"
+                        android:text="@string/trending"
                         app:drawableEndCompat="@drawable/ic_arrow_right" />
 
                     <View
@@ -117,6 +117,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
                         app:icon="@drawable/ic_region" />
 
                 </LinearLayout>
@@ -130,7 +131,6 @@
                         android:id="@+id/trendingRV"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="10dp"
                         android:nestedScrollingEnabled="false"
                         android:visibility="gone"
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
@@ -140,10 +140,11 @@
 
                 <LinearLayout
                     android:id="@+id/bookmarksTV"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginVertical="8dp"
                     android:background="?selectableItemBackground"
+                    android:orientation="horizontal"
                     android:visibility="gone">
 
                     <TextView
@@ -157,18 +158,19 @@
                     android:id="@+id/bookmarksRV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
                     android:clipChildren="false"
                     android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
                     android:visibility="gone"
                     app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager" />
 
                 <LinearLayout
                     android:id="@+id/playlistsTV"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginVertical="8dp"
                     android:background="?selectableItemBackground"
+                    android:orientation="horizontal"
                     android:visibility="gone">
 
                     <TextView
@@ -182,9 +184,9 @@
                     android:id="@+id/playlistsRV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
                     android:clipChildren="false"
                     android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
                     android:visibility="gone"
                     app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager" />
 
@@ -207,6 +209,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
             android:src="@drawable/ic_list" />
 
         <TextView
@@ -219,23 +222,21 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/refresh_button"
-            style="@style/Widget.Material3.Button.ElevatedButton"
+            style="@style/Widget.Material3Expressive.Button"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:text="@string/retry"
-            android:textSize="12sp" />
+            android:layout_marginTop="20dp"
+            android:text="@string/retry" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/change_instance"
-            style="@style/Widget.Material3.Button.ElevatedButton"
+            style="@style/Widget.Material3Expressive.Button"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
-            android:text="@string/change_instance"
-            android:textSize="12sp" />
+            android:text="@string/change_instance" />
     </LinearLayout>
 
 </FrameLayout>
