@@ -10,6 +10,7 @@ import androidx.paging.LoadState
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.obj.ChannelTab
@@ -110,6 +111,12 @@ class ChannelContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_ch
                 }
             }
         }
+
+        binding.channelRecView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                recyclerViewState = recyclerView.layoutManager?.onSaveInstanceState()
+            }
+        })
     }
 
     override fun onDestroyView() {
