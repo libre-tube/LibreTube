@@ -568,4 +568,6 @@
     <string name="include_timestamp_in_filename">Zahrnúť časovú známku do názvu súboru</string>
     <string name="unsubscribe_snackbar_message">Odber kanálu %1$s bol úspešne zrušený</string>
     <string name="screenshot_saved">Snímka obrazovky uložená</string>
+    <string name="did_you_mean">Mysleli ste:</string>
+    <string name="showing_results_for">Zobrazovanie výsledkov pre:</string>
 </resources>
