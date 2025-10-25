@@ -110,8 +110,7 @@ class TrendsContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_tre
         binding.recview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                viewModel.recyclerViewState =
-                    _binding?.recview?.layoutManager?.onSaveInstanceState()
+                viewModel.recyclerViewState = recyclerView.layoutManager?.onSaveInstanceState()
             }
         })
 

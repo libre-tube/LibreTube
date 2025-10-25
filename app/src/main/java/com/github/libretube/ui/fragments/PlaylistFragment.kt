@@ -107,7 +107,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
         binding.playlistRecView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                recyclerViewState = binding.playlistRecView.layoutManager?.onSaveInstanceState()
+                recyclerViewState = recyclerView.layoutManager?.onSaveInstanceState()
             }
         })
 

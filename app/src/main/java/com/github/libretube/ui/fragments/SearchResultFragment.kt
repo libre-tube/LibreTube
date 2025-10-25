@@ -84,7 +84,7 @@ class SearchResultFragment : DynamicLayoutManagerFragment(R.layout.fragment_sear
         binding.searchRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                recyclerViewState = binding.searchRecycler.layoutManager?.onSaveInstanceState()
+                recyclerViewState = recyclerView.layoutManager?.onSaveInstanceState()
             }
         })
 

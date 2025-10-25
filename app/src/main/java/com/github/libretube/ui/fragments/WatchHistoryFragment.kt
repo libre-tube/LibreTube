@@ -84,7 +84,7 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
         binding.watchHistoryRecView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                recyclerViewState = binding.watchHistoryRecView.layoutManager?.onSaveInstanceState()
+                recyclerViewState = recyclerView.layoutManager?.onSaveInstanceState()
             }
         })
 
