@@ -67,7 +67,6 @@ import okhttp3.ResponseBody
 import okio.buffer
 import okio.sink
 import okio.source
-import java.io.File
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
@@ -616,7 +615,7 @@ class DownloadService : LifecycleService() {
     }
 
     /**
-     * Get a [File] from the corresponding download directory and the file name
+     * Get a [Path] from the corresponding download directory and the file name
      */
     private fun getDownloadPath(directory: String, fileName: String): Path {
         return DownloadHelper.getDownloadDir(this, directory) / fileName

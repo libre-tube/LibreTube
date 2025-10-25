@@ -10,6 +10,7 @@ import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.enums.FileType
@@ -27,6 +28,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.nio.file.Path
 import kotlin.io.path.createDirectories
+import kotlin.io.path.deleteIfExists
 import kotlin.io.path.div
 
 object DownloadHelper {
@@ -34,6 +36,7 @@ object DownloadHelper {
     const val AUDIO_DIR = "audio"
     const val SUBTITLE_DIR = "subtitle"
     const val THUMBNAIL_DIR = "thumbnail"
+    const val PLAYLIST_THUMBNAIL_DIR = "playlist_thumbnail"
     const val DOWNLOAD_CHUNK_SIZE = 8L * 1024
     const val DEFAULT_TIMEOUT = 15 * 1000
     private const val VIDEO_MIMETYPE = "video/*"
@@ -151,5 +154,21 @@ object DownloadHelper {
             downloadInfo.add(context.getString(R.string.captions) + ": ${it.language}")
         }
         return downloadInfo
+    }
+
+    suspend fun deleteDownloadIncludingFiles(downloadWithItems: DownloadWithItems) {
+        val download = downloadWithItems.download
+        val items = downloadWithItems.downloadItems
+
+        items.forEach {
+            it.path.deleteIfExists()
+        }
+        runCatching {
+            download.thumbnailPath?.deleteIfExists()
+        }
+
+        withContext(Dispatchers.IO) {
+            DatabaseHolder.Database.downloadDao().deleteDownload(download)
+        }
     }
 }
