@@ -571,4 +571,5 @@
     <string name="screenshot_saved">حُفظت لقطة الشاشة</string>
     <string name="did_you_mean">هل تقصد:</string>
     <string name="showing_results_for">يظهر نتائج ل:</string>
+    <string name="delete_playlist_include_vidoes">هل تريد حذف جميع مقاطع الفيديو من قائمة التشغيل أيضًا؟</string>
 </resources>
