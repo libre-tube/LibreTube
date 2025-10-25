@@ -146,7 +146,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
             selectedFilterGroup = group.children.indexOfFirst { it.id == group.checkedChipId }
 
             lifecycleScope.launch {
-                showFeed()
+                showFeed(restoreScrollState = false)
             }
         }
 
