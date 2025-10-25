@@ -567,4 +567,7 @@
     <string name="music">מוזיקה</string>
     <string name="include_timestamp_in_filename">לכלול חותמת זמן בשם הקובץ</string>
     <string name="unsubscribe_snackbar_message">ההרשמה אל %1$s בוטלה בהצלחה</string>
+    <string name="did_you_mean">האם הכוונה הייתה:</string>
+    <string name="showing_results_for">מוצגות תוצאות עבור:</string>
+    <string name="screenshot_saved">צילום המסך נשמר</string>
 </resources>

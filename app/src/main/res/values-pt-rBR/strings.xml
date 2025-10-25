@@ -568,4 +568,6 @@
     <string name="include_timestamp_in_filename">Incluir data e hora para o nome do arquivo</string>
     <string name="unsubscribe_snackbar_message">Inscrição cancelada com sucesso em %1$s</string>
     <string name="screenshot_saved">Captura de tela salva</string>
+    <string name="did_you_mean">Você quis dizer:</string>
+    <string name="showing_results_for">Mostrando resultados para:</string>
 </resources>

@@ -567,4 +567,6 @@
     <string name="music">Müzik</string>
     <string name="include_timestamp_in_filename">Dosya adına zaman damgası ekle</string>
     <string name="screenshot_saved">Ekran görüntüsü kaydedildi</string>
+    <string name="did_you_mean">Bunu mu demek istediniz:</string>
+    <string name="showing_results_for">Sonuçlar gösteriliyor:</string>
 </resources>

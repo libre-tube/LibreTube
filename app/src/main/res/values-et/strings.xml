@@ -567,4 +567,6 @@
     <string name="include_timestamp_in_filename">Lisa failinimesse ajatempel</string>
     <string name="unsubscribe_snackbar_message">„%1$s“ tellimusest loobumine õnnestus</string>
     <string name="screenshot_saved">Ekraanitõmmis on salvestatud</string>
+    <string name="did_you_mean">Kas sa mõtlesid:</string>
+    <string name="showing_results_for">Näitan tulemusi:</string>
 </resources>
