@@ -148,7 +148,13 @@ class LocalFeedRepository : FeedRepository {
                 ChannelTabInfo.getInfo(NewPipeExtractorInstance.extractor, tab).relatedItems
             }.getOrElse { emptyList() }
         }.flatten().filterIsInstance<StreamInfoItem>()
-            .filter { it.contentAvailability == ContentAvailability.AVAILABLE || it.contentAvailability == ContentAvailability.UPCOMING }
+            .filter {
+                it.contentAvailability in arrayOf(
+                    ContentAvailability.AVAILABLE,
+                    ContentAvailability.UPCOMING,
+                    ContentAvailability.UNKNOWN
+                )
+            }
 
         val channelAvatar = channelInfo.avatars.maxByOrNull { it.height }?.url
         return related.map { item ->
