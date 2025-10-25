@@ -3,6 +3,8 @@ package com.github.libretube.services
 import android.app.Notification
 import android.app.NotificationManager
 import android.content.Intent
+import android.content.pm.ServiceInfo
+import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
 import androidx.core.content.getSystemService
@@ -49,7 +51,16 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
     override fun onCreate() {
         super.onCreate()
 
-        startForeground(NotificationId.ENQUEUE_PLAYLIST_DOWNLOAD.id, buildNotification())
+        ServiceCompat.startForeground(
+            this,
+            NotificationId.ENQUEUE_PLAYLIST_DOWNLOAD.id,
+            buildNotification(),
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
+            } else {
+                0
+            }
+        )
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
