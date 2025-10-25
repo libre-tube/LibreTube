@@ -5,15 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
+    android:background="@drawable/rounded_ripple"
     android:orientation="vertical"
-    android:paddingVertical="12dp">
+    android:layout_marginVertical="12dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingHorizontal="12dp">
+        android:layout_marginHorizontal="12dp">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/player_sponsor_badge"
@@ -31,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:orientation="vertical"
-        android:paddingHorizontal="12dp">
+        android:layout_marginHorizontal="12dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,10 +45,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:maxLines="2"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 tools:text="Video Title" />
 
             <ImageView
@@ -55,7 +58,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="10dp"
                 android:src="@drawable/ic_arrow_down" />
 
         </LinearLayout>
@@ -69,7 +71,7 @@
                 android:id="@+id/player_views_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:textIsSelectable="true"
                 tools:text="10M views - 2 days ago " />
@@ -102,7 +104,6 @@
         android:id="@+id/desc_linLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="5dp"
         android:orientation="vertical"
         android:visibility="gone">
 
@@ -110,32 +111,49 @@
             android:id="@+id/meta_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:textSize="14sp"
-            android:visibility="gone" />
+            android:layout_marginHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:visibility="gone"
+            tools:text="Meta Info" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/tags_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            </LinearLayout>
+        </HorizontalScrollView>
 
         <TextView
             android:id="@+id/player_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:layout_marginHorizontal="12dp"
+            android:paddingVertical="8dp"
             android:textIsSelectable="true"
-            android:textSize="14sp" />
+            tools:text="Description" />
 
         <TextView
             android:id="@+id/additional_video_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:layout_marginHorizontal="12dp"
+            android:paddingVertical="8dp"
             android:textIsSelectable="true"
-            android:textSize="14sp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tags_recycler"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            tools:text="Additional Info" />
 
     </LinearLayout>
 
