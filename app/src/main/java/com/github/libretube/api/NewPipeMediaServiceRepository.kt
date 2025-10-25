@@ -120,7 +120,12 @@ fun StreamInfoItem.toStreamItem(
 }
 
 fun InfoItem.toContentItem() = when (this) {
-    is StreamInfoItem -> if (contentAvailability == ContentAvailability.AVAILABLE || contentAvailability == ContentAvailability.UPCOMING) ContentItem(
+    is StreamInfoItem -> if (contentAvailability in arrayOf(
+            ContentAvailability.AVAILABLE,
+            ContentAvailability.UPCOMING,
+            ContentAvailability.UNKNOWN
+        )
+    ) ContentItem(
         url = url.toID(),
         type = TYPE_STREAM,
         thumbnail = thumbnails.maxByOrNull { it.height }?.url.orEmpty(),
