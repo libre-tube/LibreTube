@@ -22,6 +22,8 @@ open class DismissableTimeBar(
     private var shouldAddListener = false
     var exoPlayer: Player? = null
 
+    private val listeners = mutableListOf<OnScrubListener>()
+
     // Drag-only seeking state
     private var initialX: Float = 0f
     private var initialY: Float = 0f
@@ -30,15 +32,22 @@ open class DismissableTimeBar(
     private val touchSlopPx: Int = ViewConfiguration.get(context).scaledTouchSlop
 
     init {
-        addSeekBarListener(object : OnScrubListener {
-            override fun onScrubStart(timeBar: TimeBar, position: Long) = Unit
+        super.addListener(object : OnScrubListener {
+            override fun onScrubStart(timeBar: TimeBar, position: Long) {
+                listeners.forEach { it.onScrubStart(timeBar, position) }
+            }
 
-            override fun onScrubMove(timeBar: TimeBar, position: Long) = Unit
+            override fun onScrubMove(timeBar: TimeBar, position: Long) {
+                listeners.forEach { it.onScrubMove(timeBar, position) }
+            }
 
             override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {
+                listeners.forEach { it.onScrubStop(timeBar, position, canceled) }
+
                 if (canceled) return
                 // Ignore if gesture started too far above the bar (keep original behavior)
                 if (initialY <= MINIMUM_ACCEPTED_HEIGHT.dpToPx()) return
+
                 exoPlayer?.seekTo(position)
             }
         })
@@ -109,17 +118,16 @@ open class DismissableTimeBar(
     /**
      * DO NOT CALL THIS METHOD DIRECTLY. Use [addSeekBarListener] instead!
      */
+    @Deprecated("Use addSeekBarListener instead")
     override fun addListener(listener: OnScrubListener) {
-        if (shouldAddListener) super.addListener(listener)
+        // do nothing, see below on how listeners should be set
     }
 
     /**
      * Wrapper to circumvent adding the listener created by [PlayerControlView]
      */
     fun addSeekBarListener(listener: OnScrubListener) {
-        shouldAddListener = true
-        addListener(listener)
-        shouldAddListener = false
+        listeners.add(listener)
     }
 
     fun setPlayer(player: Player) {
