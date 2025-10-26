@@ -208,7 +208,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         // cache the loaded trends in the [TrendsViewModel] so that the trends don't need to be
         // reloaded there
-        trendsViewModel.setStreamsForCategory(category, streamItems)
+        val region = PreferenceHelper.getTrendingRegion(requireContext())
+        trendsViewModel.setStreamsForCategory(category, TrendsViewModel.TrendingStreams(region, streamItems))
 
         makeVisible(binding.trendingRV, binding.trendingTV)
         trendingAdapter.submitList(streamItems.take(10))

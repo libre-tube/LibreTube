@@ -90,9 +90,9 @@ class TrendsContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_tre
             binding.homeRefresh.isRefreshing = false
             binding.progressBar.isGone = true
 
-            adapter.submitList(videos)
+            adapter.submitList(videos.streams)
 
-            if (videos.isEmpty()) {
+            if (videos.streams.isEmpty()) {
                 Snackbar.make(binding.root, R.string.change_region, Snackbar.LENGTH_LONG)
                     .setAction(R.string.settings) {
                         val settingsIntent = Intent(context, SettingsActivity::class.java)
@@ -119,7 +119,8 @@ class TrendsContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_tre
             // every time the user navigates to the fragment for the selected category,
             // fetch the trends for the selected category if they're not yet cached
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                if (viewModel.trendingVideos.value.orEmpty()[category].isNullOrEmpty()) {
+                val trendingVideos = viewModel.trendingVideos.value.orEmpty()[category]
+                if (trendingVideos == null) {
                     viewModel.fetchTrending(requireContext(), category)
                 }
             }
