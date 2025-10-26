@@ -5,13 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.loadingindicator.LoadingIndicator
-        android:id="@+id/progress"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        tools:visibility="gone" />
-
     <com.github.libretube.ui.views.CustomSwipeToRefresh
         android:id="@+id/refresh"
         android:layout_width="match_parent"
@@ -238,5 +231,12 @@
             android:layout_marginTop="5dp"
             android:text="@string/change_instance" />
     </LinearLayout>
+
+    <com.google.android.material.loadingindicator.LoadingIndicator
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        tools:visibility="gone" />
 
 </FrameLayout>

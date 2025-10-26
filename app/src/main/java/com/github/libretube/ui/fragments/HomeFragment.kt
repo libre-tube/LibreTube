@@ -178,8 +178,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onResume() {
         super.onResume()
 
-        // Avoid re-fetching when re-entering the screen if it was loaded successfully
-        if (homeViewModel.loadedSuccessfully.value == false) {
+        // Avoid re-fetching when re-entering the screen if it was loaded successfully, except when
+        // the value of trending region has changed
+        val isTrendingRegionChanged = homeViewModel.trending.value?.let {
+            it.second.region != PreferenceHelper.getTrendingRegion(requireContext())
+        } == true
+
+        if (homeViewModel.loadedSuccessfully.value == false || isTrendingRegionChanged) {
             fetchHomeFeed()
         }
     }
@@ -202,17 +207,20 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         )
     }
 
-    private fun showTrending(trends: Pair<TrendingCategory, List<StreamItem>>?) {
+    private fun showTrending(trends: Pair<TrendingCategory, TrendsViewModel.TrendingStreams>?) {
         if (trends == null) return
-        val (category, streamItems) = trends
+        val (category, trendingStreams) = trends
 
         // cache the loaded trends in the [TrendsViewModel] so that the trends don't need to be
         // reloaded there
         val region = PreferenceHelper.getTrendingRegion(requireContext())
-        trendsViewModel.setStreamsForCategory(category, TrendsViewModel.TrendingStreams(region, streamItems))
+        trendsViewModel.setStreamsForCategory(
+            category,
+            TrendsViewModel.TrendingStreams(region, trendingStreams.streams)
+        )
 
         makeVisible(binding.trendingRV, binding.trendingTV)
-        trendingAdapter.submitList(streamItems.take(10))
+        trendingAdapter.submitList(trendingStreams.streams.take(10))
     }
 
     private fun showFeed(streamItems: List<StreamItem>?) {
@@ -271,6 +279,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun showLoading() {
         binding.progress.isVisible = !binding.refresh.isRefreshing
         binding.nothingHere.isVisible = false
+        binding.scroll.alpha = 0.3f
     }
 
     private fun hideLoading() {
@@ -283,6 +292,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         } else {
             showNothingHere()
         }
+        binding.scroll.alpha = 1.0f
     }
 
     private fun showNothingHere() {
