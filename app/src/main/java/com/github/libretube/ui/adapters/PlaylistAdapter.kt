@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
@@ -19,7 +18,6 @@ import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
-import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.ImageHelper
@@ -83,11 +81,12 @@ class PlaylistAdapter(
 
         holder.binding.apply {
             videoTitle.text = streamItem.title
-            videoInfo.text = TextUtils.formatViewsString(root.context, streamItem.views ?: -1, streamItem.uploaded, streamItem.uploaderName)
+            videoInfo.text = TextUtils.formatViewsString(root.context, streamItem.views ?: -1, streamItem.uploaded)
             videoInfo.maxLines = 2
 
             // piped does not load channel avatars for playlist views
-            channelContainer.isGone = true
+            channelImageContainer.isGone = true
+            channelName.text = streamItem.uploaderName
 
             ImageHelper.loadImage(streamItem.thumbnail, thumbnail)
             thumbnailDuration.setFormattedDuration(streamItem.duration ?: -1, streamItem.isShort, streamItem.uploaded)
@@ -116,12 +115,9 @@ class PlaylistAdapter(
             }
 
             if (!streamItem.uploaderUrl.isNullOrBlank()) {
-                videoInfo.setOnClickListener {
+                channelContainer.setOnClickListener {
                     NavigationHelper.navigateChannel(root.context, streamItem.uploaderUrl)
                 }
-                // add some extra padding to make it easier to click
-                val extraPadding = 3f.dpToPx()
-                videoInfo.updatePadding(top = extraPadding, bottom = extraPadding)
             }
 
             streamItem.duration?.let { watchProgress.setWatchProgressLength(videoId, it) }
