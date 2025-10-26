@@ -568,4 +568,5 @@
     <string name="screenshot_saved">Ekran görüntüsü saxlanıldı</string>
     <string name="did_you_mean">Bunu nəzərdə tutursunuz:</string>
     <string name="showing_results_for">Bunun üçün nəticələr göstərilir:</string>
+    <string name="delete_playlist_include_vidoes">Həmçinin bütün videolar pleylistdən silinsinmi?</string>
 </resources>
