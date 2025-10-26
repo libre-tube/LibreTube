@@ -19,7 +19,6 @@ import com.github.libretube.constants.PreferenceKeys.HOME_TAB_CONTENT
 import com.github.libretube.databinding.FragmentHomeBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.obj.PlaylistBookmark
-import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.adapters.CarouselPlaylist
@@ -114,24 +113,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         binding.trendingRegion.setOnClickListener {
-            val currentRegionPref = PreferenceHelper.getTrendingRegion(requireContext())
-
-            val countries = LocaleHelper.getAvailableCountries()
-            var selected = countries.indexOfFirst { it.code == currentRegionPref }
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.region)
-                .setSingleChoiceItems(
-                    countries.map { it.name }.toTypedArray(),
-                    selected
-                ) { _, checked ->
-                    selected = checked
-                }
-                .setNegativeButton(R.string.cancel, null)
-                .setPositiveButton(R.string.okay) { _, _ ->
-                    PreferenceHelper.putString(PreferenceKeys.REGION, countries[selected].code)
-                    fetchHomeFeed()
-                }
-                .show()
+            TrendsFragment.showChangeRegionDialog(requireContext()) {
+                fetchHomeFeed()
+            }
         }
 
         val trendingCategories = MediaServiceRepository.instance.getTrendingCategories()

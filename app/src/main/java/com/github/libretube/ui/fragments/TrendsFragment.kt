@@ -59,8 +59,8 @@ class TrendsFragment : Fragment(R.layout.fragment_trends) {
         }
     }
 
-    companion object{
-        fun showChangeRegionDialog(context: Context, onPositiveButtonClick: () -> Unit){
+    companion object {
+        fun showChangeRegionDialog(context: Context, onPositiveButtonClick: () -> Unit) {
             val currentRegionPref = PreferenceHelper.getTrendingRegion(context)
 
             val countries = LocaleHelper.getAvailableCountries()
@@ -102,7 +102,7 @@ class TrendsAdapter(fragment: Fragment, private val categories: List<TrendingCat
         return categories.size
     }
 
-    fun getFragmentAt(position: Int): TrendsContentFragment?{
+    fun getFragmentAt(position: Int): TrendsContentFragment? {
         return fragments[position]
     }
 }
@@ -134,13 +134,17 @@ class TrendsContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_tre
             val videos = categoryMap[category]
             if (videos == null) return@observe
 
-            showLoadingIndicator(false)
+            toggleLoadingIndicator(false)
 
             adapter.submitList(videos.streams)
 
             val trendingRegion = PreferenceHelper.getTrendingRegion(requireContext())
             if (videos.streams.isEmpty() && (videos.region == trendingRegion)) {
-                Snackbar.make(requireParentFragment().requireView(), R.string.change_region, Snackbar.LENGTH_LONG)
+                Snackbar.make(
+                    requireParentFragment().requireView(),
+                    R.string.change_region,
+                    Snackbar.LENGTH_LONG
+                )
                     .setAction(R.string.change) {
                         TrendsFragment.showChangeRegionDialog(requireContext()) {
                             refreshTrending()
@@ -188,14 +192,14 @@ class TrendsContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_tre
         _binding = null
     }
 
-    private fun showLoadingIndicator(show: Boolean){
-        binding.recview.alpha = if(show) 0.3f else 1.0f
+    private fun toggleLoadingIndicator(show: Boolean) {
+        binding.recview.alpha = if (show) 0.3f else 1.0f
         binding.progressBar.isGone = !show
         if (!show) binding.homeRefresh.isRefreshing = false
     }
 
-    fun refreshTrending(){
-        showLoadingIndicator(true)
+    fun refreshTrending() {
+        toggleLoadingIndicator(true)
         viewModel.fetchTrending(requireContext(), category)
     }
 }
