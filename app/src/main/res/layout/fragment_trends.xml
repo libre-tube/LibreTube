@@ -27,7 +27,8 @@
             android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="4dp"
             app:icon="@drawable/ic_region"
-            app:iconSize="24dp" />
+            app:iconSize="24dp"
+            android:tooltipText="@string/region" />
 
     </LinearLayout>
 

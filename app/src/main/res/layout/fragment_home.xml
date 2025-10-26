@@ -102,7 +102,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        app:icon="@drawable/ic_frame" />
+                        app:icon="@drawable/ic_frame"
+                        android:tooltipText="@string/category"/>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/trending_region"
@@ -111,7 +112,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="5dp"
-                        app:icon="@drawable/ic_region" />
+                        app:icon="@drawable/ic_region"
+                        android:tooltipText="@string/region"/>
 
                 </LinearLayout>
 
