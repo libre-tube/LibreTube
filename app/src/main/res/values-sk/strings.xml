@@ -568,4 +568,5 @@
     <string name="screenshot_saved">Snímka obrazovky uložená</string>
     <string name="did_you_mean">Mysleli ste:</string>
     <string name="showing_results_for">Zobrazovanie výsledkov pre:</string>
+    <string name="delete_playlist_include_vidoes">Odstrániť aj všetky videá z playlistu?</string>
 </resources>
