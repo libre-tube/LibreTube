@@ -1,0 +1,9 @@
+* update ui components to material 3 expressive
+* add support for viewing downloaded playlists
+* support for trending categories (gaming, trailers, ...)
+* use system default animations
+* display search suggestion / typo correction in results page
+* support edge to edge 
+* new semitone mode in playback options sheet
+* filter members-only videos from channel tab
+* keep queue history when opening new video

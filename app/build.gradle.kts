@@ -15,15 +15,15 @@ android {
         applicationId = "com.github.libretube"
         minSdk = 26
         targetSdk = 35
-        versionCode = 62
-        versionName = "0.28.1"
+        versionCode = 63
+        versionName = "0.29.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         resValue("string", "app_name", "LibreTube")
+    }
 
-        ksp {
-            arg("room.schemaLocation", "$projectDir/schemas")
-            arg("exportSchema", "true")
-        }
+    ksp {
+        arg("room.schemaLocation", "$projectDir/schemas")
+        arg("exportSchema", "true")
     }
 
     viewBinding {
