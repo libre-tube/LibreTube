@@ -18,7 +18,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class TrendsViewModel : ViewModel() {
-    val trendingVideos = MutableLiveData<Map<TrendingCategory, List<StreamItem>>>()
+    data class TrendingStreams(val region: String, val streams: List<StreamItem>)
+
+    val trendingVideos = MutableLiveData<Map<TrendingCategory, TrendingStreams>>()
     var recyclerViewState: Parcelable? = null
 
     private var currentJob: Job? = null
@@ -34,7 +36,7 @@ class TrendsViewModel : ViewModel() {
                 val response = withContext(Dispatchers.IO) {
                     MediaServiceRepository.instance.getTrending(region, category)
                 }
-                setStreamsForCategory(category, response)
+                setStreamsForCategory(category, TrendingStreams(region, response))
             } catch (e: Exception) {
                 Log.e(TAG(), e.stackTraceToString())
                 context.toastFromMainDispatcher(e.localizedMessage.orEmpty())
@@ -42,7 +44,7 @@ class TrendsViewModel : ViewModel() {
         }
     }
 
-    fun setStreamsForCategory(category: TrendingCategory, streams: List<StreamItem>) {
+    fun setStreamsForCategory(category: TrendingCategory, streams: TrendingStreams) {
         val newState = trendingVideos.value.orEmpty()
             .toMutableMap()
             .apply {

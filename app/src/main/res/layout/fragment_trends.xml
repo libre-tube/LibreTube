@@ -5,11 +5,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabMode="scrollable" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:requiresFadingEdge="horizontal"
+            app:tabMode="scrollable" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.Material3Expressive.Button.IconButton.Tonal"
+            android:id="@+id/trending_region"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="4dp"
+            app:icon="@drawable/ic_region"
+            app:iconSize="24dp"
+            android:tooltipText="@string/region" />
+
+    </LinearLayout>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager"
