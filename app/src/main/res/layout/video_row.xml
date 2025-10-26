@@ -111,17 +111,39 @@
         app:layout_constraintStart_toEndOf="@id/thumbnail_card"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/video_info"
+    <LinearLayout
+        android:id="@+id/video_info_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textAlignment="viewStart"
-        app:layout_constraintEnd_toStartOf="@id/download_badge"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="@id/download_badge"
         app:layout_constraintStart_toEndOf="@id/thumbnail_card"
-        app:layout_constraintTop_toBottomOf="@id/video_title" />
+        app:layout_constraintTop_toBottomOf="@id/video_title">
+
+        <TextView
+            android:id="@+id/video_info"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_marginEnd="6dp" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/file_size"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textAlignment="viewEnd"
+            tools:text="55MB/2050MB"
+            tools:visibility="visible" />
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/download_badge"
@@ -137,15 +159,14 @@
 
     <LinearLayout
         android:id="@+id/channel_container"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start|center_vertical"
         android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="6dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/video_info">
+        app:layout_constraintTop_toBottomOf="@id/video_info_container">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/channel_image_container"
@@ -170,18 +191,6 @@
             android:ellipsize="end"
             tools:text="Uploader name"
             android:maxLines="1" />
-
-        <TextView
-            android:visibility="gone"
-            android:id="@+id/file_size"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="2"
-            tools:text="55MB/2050MB"
-            tools:visibility="visible"
-            android:textAlignment="viewEnd" />
 
     </LinearLayout>
 
