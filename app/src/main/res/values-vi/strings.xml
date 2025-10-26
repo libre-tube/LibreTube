@@ -53,11 +53,11 @@
     <string name="all">Tất cả</string>
     <string name="playlists">Danh sách phát</string>
     <string name="okay">OK</string>
-    <string name="history">Video đã xem</string>
-    <string name="search_history">Tìm video đã xem</string>
+    <string name="history">Lịch sử</string>
+    <string name="search_history">Lịch sử tìm kiếm</string>
     <string name="clear_history">Xóa lịch sử</string>
     <string name="music_songs">Bài hát trên YT Music</string>
-    <string name="music_videos">Videos ca nhạc trên YT Music</string>
+    <string name="music_videos">Videos âm nhạc trên YT Music</string>
     <string name="music_albums">Albums ca nhạc trên YT Music</string>
     <string name="music_playlists">Danh sách nhạc trên YT Music</string>
     <string name="sponsorblock">Chặn Quảng Cáo Tài Trợ</string>
