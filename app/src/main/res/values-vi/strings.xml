@@ -60,9 +60,9 @@
     <string name="music_videos">Videos âm nhạc trên YT Music</string>
     <string name="music_albums">Albums ca nhạc trên YT Music</string>
     <string name="music_playlists">Danh sách nhạc trên YT Music</string>
-    <string name="sponsorblock">Chặn Quảng Cáo Tài Trợ</string>
-    <string name="segment_skipped">Đã bỏ qua phân đoạn</string>
-    <string name="category_sponsor">Nhà tài trợ</string>
+    <string name="sponsorblock">Chặn quảng cáo được tài trợ</string>
+    <string name="segment_skipped">Đã bỏ qua phân đoạn quảng cáo</string>
+    <string name="category_sponsor">Quảng cáo được tài trợ</string>
     <string name="category_selfpromo">Không trả tiền/Tự quảng cáo</string>
     <string name="category_interaction">Nhắc nhở tương tác</string>
     <string name="category_intro">Gián đoạn/Hoạt cảnh giới thiệu</string>
@@ -91,7 +91,7 @@
     <string name="success">Xong.</string>
     <string name="addToPlaylist">Thêm vào danh sách phát</string>
     <string name="customization">Tùy chỉnh</string>
-    <string name="sponsorblock_summary">Sử dụng API sponsor.ajay.app</string>
+    <string name="sponsorblock_summary">Sử dụng API của sponsor.ajay.app</string>
     <string name="category_selfpromo_summary">Tương tự như \"nhà tài trợ\" ngoại trừ không trả tiền hoặc tự quảng cáo. Điều này bao gồm các phần về hàng hóa, quyên góp hoặc thông tin về người mà họ đã cộng tác</string>
     <string name="category_interaction_summary">Khi có một lời nhắc ngắn hãy thích, đăng ký hoặc theo dõi ở giữa nội dung. Nếu dài hoặc về một cái gì đó cụ thể, thay vào nên liệt vào dạng tự quảng cáo</string>
     <string name="category_outro">Thẻ kết thúc và tín dụng</string>
@@ -122,7 +122,7 @@
     <string name="loggedout">Đã đăng xuất.</string>
     <string name="downloadfailed">Tải xuống thất bại.</string>
     <string name="server_error">Có vẻ như có một vấn đề với máy chủ được chọn. Hãy thử một máy chủ Piped khác.</string>
-    <string name="category_segments">Các phân đoạn</string>
+    <string name="category_segments">Các phân đoạn quảng cáo</string>
     <string name="category_sponsor_summary">Quảng cáo có trả tiền, giới thiệu có trả tiền và quảng cáo trực tiếp. Không phải để tự quảng cáo hoặc gửi lời cảm ơn miễn phí tới các hoạt động chính nghĩa / người sáng tạo / trang web / sản phẩm mà họ thích</string>
     <string name="category_intro_summary">Khoảng thời gian không có chứa nội dung của video. Có thể là tạm dừng, khung tĩnh, hoạt ảnh lặp lại. Không nên được sử dụng cho các phân cảnh chuyển có chứa thông tin</string>
     <string name="category_music_offtopic_summary">Chỉ sử dụng cho các video ca nhạc. Nó phải bao gồm các phần của video không phải là một phần của bản phối chính thức. Chung quy lại, video phải giống với Spotify hoặc bất kỳ phiên bản phối nào khác càng giống càng tốt, hoặc giảm nói chuyện hoặc các yếu tố gây xao nhãng khác</string>
@@ -470,7 +470,7 @@
     <string name="tooltip_dismiss">Bỏ qua</string>
     <string name="group_name_error_empty">Hãy nhập một cái tên</string>
     <string name="donate">Khuyên góp</string>
-    <string name="music_artists">Nghệ sĩ YT Music</string>
+    <string name="music_artists">Các nghệ sĩ YT Music</string>
     <string name="tooltip_edit_groups">Chỉnh sửa nhóm</string>
     <string name="playback_during_call">Tiếp tục phát lại trong khi gọi điện thoại</string>
     <string name="screen_orientation">Hướng màn hình</string>
