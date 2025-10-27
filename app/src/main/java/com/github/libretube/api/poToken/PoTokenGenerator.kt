@@ -19,7 +19,6 @@ class PoTokenGenerator : PoTokenProvider {
 
     private object WebPoTokenGenLock
     private var webPoTokenVisitorData: String? = null
-    private var webPoTokenStreamingPot: String? = null
     private var webPoTokenGenerator: PoTokenWebView? = null
 
 
@@ -37,10 +36,7 @@ class PoTokenGenerator : PoTokenProvider {
      * [PoTokenGenerator.getWebClientPoToken] was called
      */
     private fun getWebClientPoToken(videoId: String, forceRecreate: Boolean): PoTokenResult {
-        // just a helper class since Kotlin does not have builtin support for 4-tuples
-        data class Quadruple<T1, T2, T3, T4>(val t1: T1, val t2: T2, val t3: T3, val t4: T4)
-
-        val (poTokenGenerator, visitorData, streamingPot, hasBeenRecreated) =
+        val (poTokenGenerator, visitorData, hasBeenRecreated) =
             synchronized(WebPoTokenGenLock) {
                 val shouldRecreate = webPoTokenGenerator == null || forceRecreate || webPoTokenGenerator!!.isExpired()
 
@@ -66,22 +62,17 @@ class PoTokenGenerator : PoTokenProvider {
                         // create a new webPoTokenGenerator
                         webPoTokenGenerator = PoTokenWebView
                             .newPoTokenGenerator(LibreTubeApp.instance)
-
-                        // The streaming poToken needs to be generated exactly once before generating
-                        // any other (player) tokens.
-                        webPoTokenStreamingPot = webPoTokenGenerator!!.generatePoToken(webPoTokenVisitorData!!)
                     }
                 }
 
-                return@synchronized Quadruple(
+                return@synchronized Triple(
                     webPoTokenGenerator!!,
                     webPoTokenVisitorData!!,
-                    webPoTokenStreamingPot!!,
                     shouldRecreate
                 )
             }
 
-        val playerPot = try {
+        val poToken = try {
             // Not using synchronized here, since poTokenGenerator would be able to generate
             // multiple poTokens in parallel if needed. The only important thing is for exactly one
             // visitorData/streaming poToken to be generated before anything else.
@@ -105,13 +96,11 @@ class PoTokenGenerator : PoTokenProvider {
 
         if (BuildConfig.DEBUG) {
             Log.d(
-                TAG,
-                "poToken for $videoId: playerPot=$playerPot, " +
-                        "streamingPot=$streamingPot, visitor_data=$visitorData"
+                TAG, "poToken for $videoId: $poToken, visitor_data=$visitorData"
             )
         }
 
-        return PoTokenResult(visitorData, playerPot, streamingPot)
+        return PoTokenResult(visitorData, poToken, poToken)
     }
 
     override fun getWebEmbedClientPoToken(videoId: String?): PoTokenResult? = null
