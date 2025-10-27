@@ -568,5 +568,5 @@
     <string name="screenshot_saved">Screenshot gespeichert</string>
     <string name="did_you_mean">Meintest du:</string>
     <string name="showing_results_for">Ergebnisse für:</string>
-    <string name="delete_playlist_include_vidoes">Auch alle Videos aus der Wiedergabeliste löschen?</string>
+    <string name="delete_playlist_include_vidoes">Auch alle Videos aus der Playlist löschen?</string>
 </resources>
