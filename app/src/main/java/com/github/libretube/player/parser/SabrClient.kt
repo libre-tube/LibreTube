@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.annotation.OptIn
 import androidx.media3.common.MimeTypes
 import androidx.media3.common.util.UnstableApi
+import com.github.libretube.api.poToken.PoTokenGenerator
 import com.github.libretube.player.manifest.Representation
 import com.google.protobuf.ByteString
 import kotlinx.coroutines.Dispatchers
@@ -123,6 +124,8 @@ object SabrClient {
     private lateinit var ustreamerConfig: ByteString
     /** Po (Proof of Origin) Token. */
     private var poToken: ByteString? = null
+    /** Generator to create PoTokens. */
+    private var poTokenGenerator = PoTokenGenerator()
 
     private var fatalError: SabrError? = null
     private const val TAG = "SabrStream"
@@ -139,6 +142,7 @@ object SabrClient {
         this.videoId = videoId
         this.url = url
         this.ustreamerConfig = ustreamerConfig
+        poToken = generatePoToken()
         return this
     }
 
@@ -483,12 +487,23 @@ object SabrClient {
                 }
             }
 
+            UMPPartId.RELOAD_PLAYER_RESPONSE -> {
+                val reloadPlaybackContext = ReloadPlaybackContext.parseFrom(part.data)
+                TODO("Handle request to reload the player")
+            }
+
             UMPPartId.STREAM_PROTECTION_STATUS -> {
                 val status = StreamProtectionStatus.parseFrom(part.data)
                 // https://github.com/coletdjnz/yt-dlp-dev/blob/5c0c2963396009a92101bc6e038b61844368409d/yt_dlp/extractor/youtube/_streaming/sabr/part.py
                 when (status.status) {
                     1 -> Log.i(TAG, "processPart: [StreamProtectionStatus] OK")
-                    2 -> Log.i(TAG, "processPart: [StreamProtectionStatus] Attestation pending.")
+                    2 -> {
+                        Log.i(TAG, "processPart: [StreamProtectionStatus] Attestation pending.")
+                        // try to regenerate the poToken for the next request
+                        poToken = generatePoToken()
+                    }
+                    // we assume that we got a attestation pending warning before and already tried to regenerate the token,
+                    // but it's not accepted, so we bail
                     3 -> throw Exception("Attestation required")
                     else -> Log.e(TAG, "processPart: Unknown StreamProtectionStatus (${status.status})")
                 }
@@ -503,6 +518,16 @@ object SabrClient {
 
             else -> {}
         }
+    }
+
+    /**
+     * Generates new poToken using the set generator.
+     *
+     * NOTE: This should use the same client used for the requests made for the server
+     */
+    fun generatePoToken() : ByteString? {
+        val poTokenResult = poTokenGenerator.getWebClientPoToken(videoId) ?: return null
+        return ByteString.copyFrom(poTokenResult.streamingDataPoToken!!.toByteArray())
     }
 
     private const val CONTENT_TYPE = "application/x-protobuf"
