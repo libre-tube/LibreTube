@@ -218,7 +218,7 @@
     <string name="backup_restore">백업 및 복원</string>
     <string name="backup">백업</string>
     <string name="general">일반</string>
-    <string name="general_summary">언어 및 지역</string>
+    <string name="general_summary">다운로드 및 저장소</string>
     <string name="audio_video_summary">품질 및 형식</string>
     <string name="queue">대기열</string>
     <string name="none">없음</string>
@@ -317,7 +317,7 @@
     <string name="change_region">현재 지역에서는 인기 급상승 동영상을 사용할 수 없는 것 같습니다. 설정에서 다른 지역을 선택하십시오.</string>
     <string name="network_all">전부</string>
     <string name="bookmark">북마크</string>
-    <string name="theme_monochrome">미니멀리즘 단색</string>
+    <string name="theme_monochrome">단일 색조</string>
     <string name="no_subtitles_available">사용 가능한 자막 없음</string>
     <string name="take_a_break">휴식을 취할 시간</string>
     <string name="history_size">최대 기록 크기</string>
@@ -554,4 +554,12 @@
     <string name="updating_feed">피드 업데이트 중 …</string>
     <string name="show_upcoming_videos">공개 예정 영상 표시</string>
     <string name="full_local_mode_desc">Piped를 통하지 않고 모든 정보를 YouTube로부터 직접 가져옵니다.</string>
+    <string name="createNewPlaylist">새로운 재생목록 생성</string>
+    <string name="playback_pitch_semitone_error_input">"입력 값은 -%1$.1f (최소) 와(과)  %1$.1f (최대) 사이여야 합니다."</string>
+    <string name="unsubscribe_snackbar_message">%1$s을(를) 구독 해제했습니다.</string>
+    <string name="screenshot_saved">스크린샷 저장됨</string>
+    <string name="delete_playlist_include_vidoes">재생목록의 모든 영상을 삭제하시겠습니까?</string>
+    <string name="podcasts">팟캐스트</string>
+    <string name="music">음악</string>
+    <string name="include_timestamp_in_filename">파일 이름에 타임스탬프 추가</string>
 </resources>
