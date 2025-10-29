@@ -744,23 +744,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             newShareDialog.show(childFragmentManager, ShareDialog::class.java.name)
         }
 
-        binding.relPlayerExternalPlayer.setOnClickListener {
-            if (!this::streams.isInitialized || streams.hls == null) return@setOnClickListener
-
-            val context = requireContext()
-            lifecycleScope.launch {
-                val hlsStream = withContext(Dispatchers.IO) {
-                    ProxyHelper.rewriteUrlUsingProxyPreference(streams.hls!!).toUri()
-                }
-                IntentHelper.openWithExternalPlayer(
-                    context,
-                    hlsStream,
-                    streams.title,
-                    streams.uploader
-                )
-            }
-        }
-
         binding.relPlayerBackground.setOnClickListener {
             // start the background mode
             switchToAudioMode()

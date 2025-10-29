@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.os.Build
-import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
@@ -49,23 +48,6 @@ object IntentHelper {
             IntentChooserSheet()
                 .apply { arguments = bundleOf(IntentData.url to link) }
                 .show(fragmentManager)
-        }
-    }
-
-    fun openWithExternalPlayer(context: Context, uri: Uri, title: String?, uploader: String?) {
-        // start an intent with video as mimetype using the hls stream
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            setDataAndType(uri, "video/*")
-            putExtra(Intent.EXTRA_TITLE, title)
-            putExtra("title", title)
-            putExtra("artist", uploader)
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        }
-
-        try {
-            context.startActivity(intent)
-        } catch (e: Exception) {
-            Toast.makeText(context, R.string.no_player_found, Toast.LENGTH_SHORT).show()
         }
     }
 
