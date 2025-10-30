@@ -12,6 +12,7 @@ import androidx.media3.common.MimeTypes
 import androidx.media3.common.Player
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.exoplayer.hls.HlsMediaSource
+import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.MediaServiceRepository
@@ -36,6 +37,8 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.util.DeArrowUtil
+import com.github.libretube.player.SabrMediaSource
+import com.github.libretube.player.manifest.SabrManifest
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.YoutubeHlsPlaylistParser
 import kotlinx.coroutines.CoroutineScope
@@ -266,6 +269,22 @@ open class OnlinePlayerService : AbstractPlayerService() {
         val streams = streams ?: return
 
         when {
+            // SABR
+            // only enable when in DEBUG, as the implementation is still experimental
+            BuildConfig.DEBUG && streams.serverAbrStreamingUrl != null && streams.videoPlaybackUstreamerConfig != null -> {
+                val sabrMediaSourceFactory = SabrMediaSource.Factory(
+                    SabrManifest(videoId, streams)
+                )
+                val mediaItem = createMediaItem(
+                    streams.serverAbrStreamingUrl.toUri(),
+                    "application/vnd.yt-ump",
+                    streams
+                )
+                val mediaSource = sabrMediaSourceFactory.createMediaSource(mediaItem)
+
+                exoPlayer?.setMediaSource(mediaSource)
+                return
+            }
             // LBRY HLS
             PreferenceHelper.getBoolean(
                 PreferenceKeys.LBRY_HLS,

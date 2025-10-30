@@ -1,0 +1,43 @@
+syntax = "proto2";
+package video_streaming;
+
+message SabrContextUpdate {
+  enum SabrContextScope {
+    UNKNOWN = 0;
+    PLAYBACK = 1;
+    REQUEST = 2;
+    WATCH_ENDPOINT = 3;
+    CONTENT_ADS = 4;
+  }
+
+  enum SabrContextWritePolicy {
+    UNSPECIFIED = 0;
+    OVERWRITE = 1;
+    KEEP_EXISTING = 2;
+  }
+
+  optional int32 type = 1;
+  optional SabrContextScope scope = 2;
+
+  optional bytes value = 3;
+  optional bool send_by_default = 4;
+  optional SabrContextWritePolicy write_policy = 5;
+}
+
+// For debugging
+message SabrContextValue {
+  message ContentInfo {
+    optional string content_id = 1; // Looks like a content identifier of some sort "mQxOaLekHJ2f-LAPtq3hwQ4"
+    optional int32 content_type = 2; // Value of 1 observed (unsure what it truly means/is)
+  }
+
+  message TimingInfo {
+    optional int64 timestamp_ms = 1;
+    optional int32 duration_ms = 2;
+    optional ContentInfo content = 3;
+  }
+
+  optional TimingInfo timing = 1;
+  optional bytes signature = 2;
+  optional int32 field5 = 5;
+}

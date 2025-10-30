@@ -1,0 +1,6 @@
+syntax = "proto2";
+package video_streaming;
+
+message SabrRedirect {
+  optional string url = 1;
+}
