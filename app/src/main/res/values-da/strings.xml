@@ -387,7 +387,6 @@
     <string name="unknown_audio_track_type">Ukendt lydsporstype</string>
     <string name="proceed">Fortsæt</string>
     <string name="autoplay_countdown_summary">Vis en 5s nedtælling før automatisk afspilning af den næste video</string>
-    <string name="lbry_hls">LBRY-HLS</string>
     <string name="descriptive_audio_track">beskrivende</string>
     <string name="original_or_main_audio_track">original eller primær</string>
     <string name="tooltip_dismiss">Fjern</string>
@@ -505,7 +504,6 @@
     <string name="forward">Spol frem</string>
     <string name="confirm_unsubscribe">Er du sikker på, at du vil afmelde %1$s?</string>
     <string name="double_tap_seek_summary">Tryk to gange til venstre eller højre for at spole tilbage eller frem i afspillerpositionen</string>
-    <string name="lbry_hls_summary">Brug LBRY-HLS til streaming, hvis tilgængeligt</string>
     <string name="choose_instance_long">Vælg venligst en Piped-instans, du vil bruge, nedenfor. Piped-instansen vil fungere som en mellemmand for dig og Youtube. Disse instanser er placeret i forskellige fysiske lokationer - indikeret af deres landeflag. Instanser, der er tættere på dig, er sandsynligvis hurtigere end instanser, der ikke er. Du kan til enhver tid ændre den instans, du bruger, i indstillingerne.</string>
     <string name="off">Fra</string>
     <string name="tooltip_scroll_to_top">Rul til toppen</string>

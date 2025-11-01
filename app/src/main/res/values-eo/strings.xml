@@ -115,7 +115,6 @@
     <string name="no_comments_available">Ĉi tiu video ne havas komentojn.</string>
     <string name="failed_fetching_instances">Ne eblis akiri disponeblajn instancojn.</string>
     <string name="push_channel_description">Montras sciigon kiam novaj fluoj disponeblas.</string>
-    <string name="lbry_hls_summary">Uzi LBRY HLS por enfluado se disponebla</string>
     <string name="albums">Albumoj</string>
     <string name="comments_count">Komentoj (%1$s)</string>
 </resources>

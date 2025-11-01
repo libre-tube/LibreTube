@@ -355,7 +355,6 @@
     <string name="download_completed">Téléchargement terminé</string>
     <string name="sleep_timer">Minuterie de mise en veille</string>
     <string name="replies">Réponses</string>
-    <string name="lbry_hls_summary">Utiliser LBRY HLS pour la diffusion en continu si disponible</string>
     <string name="normal_views">%1$s vues%2$s</string>
     <string name="autoplay_countdown">Compte à rebours de lecture automatique</string>
     <string name="autoplay_countdown_summary">Afficher un compte à rebours de 5 secondes avant de lire automatiquement la vidéo suivante</string>
@@ -370,7 +369,6 @@
     <string name="category">Catégorie</string>
     <string name="codecs">Codecs vidéo</string>
     <string name="unsupported_file_format">Format de fichier non pris en charge : %1$s</string>
-    <string name="lbry_hls">LBRY HLS</string>
     <string name="disable_proxy">Désactiver le proxy Piped</string>
     <string name="disable_proxy_summary">Chargez des vidéos et des images directement depuis les serveurs de YouTube. N’activez l’option que si vous utilisez toujours un VPN.</string>
     <string name="auto_fullscreen_shorts">Plein écran automatique sur les vidéos courtes</string>

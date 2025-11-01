@@ -318,7 +318,6 @@
     <string name="new_videos_badge">نشانگر ویدئوهای جدید</string>
     <string name="autoplay_countdown">شمارش معکوس پخش خودکار</string>
     <string name="playing_next">پخش بعدی در %1$s</string>
-    <string name="lbry_hls">کتابخانه HLS</string>
     <string name="category_sponsor_summary">تبلیغ‌های مستقیم، ارجاع‌ها و معرّفی‌های پولی. نه برای خودتبلیغی یا اشاره‌های منصفانهٔ رایگان به جنبش‌ها، ایجادکنندگان محتوا، پایگاه‌های وب و محصولات</string>
     <string name="related_streams_summary">نمایش جریان‌های مشابه کنار آن چه تماشا می‌کنید</string>
     <string name="invalid_url">لطفاً نشانی‌ای را وارد کنید که کار می‌کند</string>
@@ -365,7 +364,6 @@
     <string name="auto_fullscreen_shorts">تمام صفحه خودکار در ویدیوهای کوتاه</string>
     <string name="channel_groups">گروه‌های کانال</string>
     <string name="group_name">نام گروه</string>
-    <string name="lbry_hls_summary">استفاده از کتابخانهٔ LBRY HSL برای جریان‌ها در صورت وجود</string>
     <string name="disable_proxy_summary">بارگیری مستقیم ویدیوها و تصاویر از کارسازهای یوتوب. به کار انداختن تنها در صورت استفادهٔ همیشگی از وی‌پی‌ان</string>
     <string name="failed_fetching_instances">نمونه‌های موجود واکشی نشد.</string>
     <string name="play_automatically">پخش خودکار</string>

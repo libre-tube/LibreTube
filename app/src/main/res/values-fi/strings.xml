@@ -165,7 +165,6 @@
     <string name="clonePlaylist">Kloonaa soittolista</string>
     <string name="watch_history">Katso historia</string>
     <string name="playlistCloned">Soittolista kloonattu</string>
-    <string name="lbry_hls">LBRY HLS</string>
     <string name="local_playlists">Paikalliset soittolistat</string>
     <string name="volume">Äänenvoimakkuus</string>
     <string name="auto">Auto</string>
@@ -204,7 +203,6 @@
     <string name="hls_instead_of_dash">Käytä HLS</string>
     <string name="nothing_selected">Mitään ei ole valittu!</string>
     <string name="alternative_pip_controls">Vaihtoehtoiset kuva kuvassa kontrollit</string>
-    <string name="lbry_hls_summary">Käytä LBRY HLS:sää suoratoistoon, jos mahdollista</string>
     <string name="added_to_playlist">Lisätty soittolistaan</string>
     <string name="autoplay_countdown_summary">Näytä 5 sekunnin lähtölaskenta ennen seuraavan videon automaattista toistoa</string>
     <string name="exportsuccess">Vietiin.</string>
