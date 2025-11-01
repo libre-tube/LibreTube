@@ -35,7 +35,6 @@ data class Streams(
     val metaInfo: List<MetaInfo> = emptyList(),
     val hls: String? = null,
     val dash: String? = null,
-    val lbryId: String? = null,
     val uploaderVerified: Boolean,
     val duration: Long,
     val views: Long = 0,

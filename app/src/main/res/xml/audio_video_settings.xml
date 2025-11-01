@@ -86,13 +86,6 @@
             app:title="@string/playerAudioFormat"
             app:useSimpleSummaryProvider="true" />
 
-        <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:icon="@drawable/ic_library"
-            android:summary="@string/lbry_hls_summary"
-            android:title="@string/lbry_hls"
-            app:key="lbry_hls" />
-
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/advanced">
