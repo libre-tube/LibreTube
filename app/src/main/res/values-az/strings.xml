@@ -568,5 +568,7 @@
     <string name="screenshot_saved">Ekran görüntüsü saxlanıldı</string>
     <string name="did_you_mean">Bunu nəzərdə tutursunuz:</string>
     <string name="showing_results_for">Bunun üçün nəticələr göstərilir:</string>
-    <string name="delete_playlist_include_vidoes">Həmçinin bütün videolar pleylistdən silinsinmi?</string>
+    <string name="delete_playlist_include_vidoes">Eləcə də bütün videolar pleylistdən silinsinmi?</string>
+    <string name="category_hook">Giriş/Salamlar</string>
+    <string name="category_hook_summary">Eyni video və ya seriyanın gələcək epizodlarında daha sonrakı hadisələri lağa qoymaqla və ya təsvir etməklə izləyicinin diqqətini çəkən (tez-tez ilk səhnə kimi) hekayə qoşmaları üçün</string>
 </resources>
