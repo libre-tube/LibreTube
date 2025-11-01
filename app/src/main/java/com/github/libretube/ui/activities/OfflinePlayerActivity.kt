@@ -18,6 +18,7 @@ import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
 import androidx.media3.session.MediaController
 import androidx.media3.ui.PlayerView
+import androidx.media3.ui.TimeBar
 import com.github.libretube.compat.PictureInPictureCompat
 import com.github.libretube.compat.PictureInPictureParamsCompat
 import com.github.libretube.constants.IntentData
@@ -55,6 +56,7 @@ class OfflinePlayerActivity : BaseActivity() {
     private lateinit var playerController: MediaController
     private lateinit var playerView: PlayerView
     private var timeFrameReceiver: TimeFrameReceiver? = null
+    private var seekBarPreviewListener: TimeBar.OnScrubListener? = null
 
     private lateinit var playerBinding: ExoStyledPlayerControlViewBinding
     private val commonPlayerViewModel: CommonPlayerViewModel by viewModels()
@@ -91,13 +93,11 @@ class OfflinePlayerActivity : BaseActivity() {
             super.onPlaybackStateChanged(playbackState)
             // setup seekbar preview
             if (playbackState == Player.STATE_READY) {
-                binding.player.binding.exoProgress.addSeekBarListener(
-                    SeekbarPreviewListener(
-                        timeFrameReceiver ?: return,
-                        binding.player.binding,
-                        playerController.duration
-                    )
-                )
+                with(binding.player.binding.exoProgress){
+                    seekBarPreviewListener?.also { removeSeekBarListener(it) }
+                    seekBarPreviewListener =
+                        createSeekBarPreviewListener()?.also { addSeekBarListener(it) }
+                }
             }
         }
 
@@ -200,6 +200,14 @@ class OfflinePlayerActivity : BaseActivity() {
         }
 
         binding.player.initialize(chaptersViewModel)
+    }
+
+    private fun createSeekBarPreviewListener(): TimeBar.OnScrubListener?{
+        return SeekbarPreviewListener(
+            timeFrameReceiver ?: return null,
+            binding.player.binding,
+            playerController.duration
+        )
     }
 
     private suspend fun loadPlayerData() {

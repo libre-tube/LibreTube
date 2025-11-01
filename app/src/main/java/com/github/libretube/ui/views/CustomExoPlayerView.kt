@@ -92,6 +92,7 @@ abstract class CustomExoPlayerView(
     private lateinit var brightnessHelper: BrightnessHelper
     private lateinit var audioHelper: AudioHelper
     private lateinit var chaptersViewModel: ChaptersViewModel
+    private lateinit var seekBarListener: TimeBar.OnScrubListener
     private var chaptersBottomSheet: ChaptersBottomSheet? = null
     private var scrubbingTimeBar = false
 
@@ -205,25 +206,28 @@ abstract class CustomExoPlayerView(
         }
 
         // prevent the controls from disappearing while scrubbing the time bar
-        binding.exoProgress.addSeekBarListener(object : TimeBar.OnScrubListener {
-            override fun onScrubStart(timeBar: TimeBar, position: Long) {
-                cancelHideControllerTask()
+        if (!::seekBarListener.isInitialized) {
+            seekBarListener = object: TimeBar.OnScrubListener {
+                override fun onScrubStart(timeBar: TimeBar, position: Long) {
+                    cancelHideControllerTask()
+                }
+
+                override fun onScrubMove(timeBar: TimeBar, position: Long) {
+                    cancelHideControllerTask()
+
+                    setCurrentChapterName(forceUpdate = true, enqueueNew = false)
+                    scrubbingTimeBar = true
+                }
+
+                override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {
+                    enqueueHideControllerTask()
+
+                    setCurrentChapterName(forceUpdate = true, enqueueNew = false)
+                    scrubbingTimeBar = false
+                }
             }
-
-            override fun onScrubMove(timeBar: TimeBar, position: Long) {
-                cancelHideControllerTask()
-
-                setCurrentChapterName(forceUpdate = true, enqueueNew = false)
-                scrubbingTimeBar = true
-            }
-
-            override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {
-                enqueueHideControllerTask()
-
-                setCurrentChapterName(forceUpdate = true, enqueueNew = false)
-                scrubbingTimeBar = false
-            }
-        })
+            binding.exoProgress.addSeekBarListener(seekBarListener)
+        }
 
         binding.autoPlay.isChecked = PlayerHelper.autoPlayEnabled
 

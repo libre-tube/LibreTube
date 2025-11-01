@@ -124,10 +124,25 @@ open class DismissableTimeBar(
     }
 
     /**
+     * DO NOT CALL THIS METHOD DIRECTLY. Use [removeSeekBarListener] instead!
+     */
+    @Deprecated("Use removeSeekBarListener instead")
+    override fun removeListener(listener: OnScrubListener) {
+        // do nothing
+    }
+
+    /**
      * Wrapper to circumvent adding the listener created by [PlayerControlView]
      */
     fun addSeekBarListener(listener: OnScrubListener) {
         listeners.add(listener)
+    }
+
+    /**
+     * Wrapper to circumvent removing the listener created by [PlayerControlView]
+     */
+    fun removeSeekBarListener(listener: OnScrubListener){
+        listeners.remove(listener)
     }
 
     fun setPlayer(player: Player) {

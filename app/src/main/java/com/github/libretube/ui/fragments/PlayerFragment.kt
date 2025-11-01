@@ -1222,7 +1222,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
         // seekbar preview setup
         playerControlsBinding.seekbarPreview.isGone = true
-        seekBarPreviewListener?.let { playerControlsBinding.exoProgress.removeListener(it) }
+        seekBarPreviewListener?.let { playerControlsBinding.exoProgress.removeSeekBarListener(it) }
         seekBarPreviewListener = createSeekbarPreviewListener().also {
             playerControlsBinding.exoProgress.addSeekBarListener(it)
         }
