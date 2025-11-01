@@ -109,6 +109,8 @@
     <string name="category_highlight">Show video highlight</string>
     <string name="category_highlight_summary">Could either be the advertised title, the thumbnail or the most interesting part of the video. You can skip to it by tapping on it in the chapters section</string>
     <string name="category_exclusive_access">Exclusive Access</string>
+    <string name="category_hook">Hook/Greetings</string>
+    <string name="category_hook_summary">For narrative hooks that grab the viewer\'s attention (often as the first scene) by teasing or describing events from later in the same video or future episodes in a series</string>
     <string name="license">License</string>
     <string name="color_accent">Accents</string>
     <string name="color_red">Resting red</string>

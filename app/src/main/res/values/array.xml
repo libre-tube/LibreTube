@@ -366,6 +366,7 @@
         <item>music_offtopic</item>
         <item>preview</item>
         <item>exclusive_access</item>
+        <item>hook</item>
     </string-array>
 
     <string-array name="sponsorBlockSegmentNames">
