@@ -1,6 +1,7 @@
 package com.github.libretube.helpers
 
 import android.app.Activity
+import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -195,12 +196,6 @@ object PlayerHelper {
             PreferenceKeys.RICH_CAPTION_RENDERING,
             false
         )
-
-    private val bufferingGoal: Int
-        get() = PreferenceHelper.getString(
-            PreferenceKeys.BUFFERING_GOAL,
-            "50"
-        ).toInt() * 1000
 
     val sponsorBlockEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
@@ -552,22 +547,38 @@ object PlayerHelper {
             }
     }
 
+
+    /**
+     * Returns the recommended duration that should be buffer in milliseconds, based on the available memory.
+     */
+    private fun getRecommendedBufferMs(): Int {
+        val activityManager =
+            LibreTubeApp.instance.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val memInfo = ActivityManager.MemoryInfo().also { memoryInfo ->
+            activityManager.getMemoryInfo(memoryInfo)
+        }
+        // device memory in MB
+        val availableMemory = memInfo.totalMem / (1024 * 1024)
+        return when {
+            availableMemory >= 8192 -> 1000 * 450
+            availableMemory >= 4096 -> 1000 * 300
+            availableMemory > 2048 -> 1000 * 60 * 2
+            else -> MINIMUM_BUFFER_DURATION
+        }
+    }
+
     /**
      * Get the load controls for the player (buffering, etc)
      */
     @OptIn(androidx.media3.common.util.UnstableApi::class)
-    fun getLoadControl(): LoadControl {
-        return DefaultLoadControl.Builder()
-            // cache the last three minutes
-            .setBackBuffer(1000 * 60 * 3, true)
-            .setBufferDurationsMs(
-                MINIMUM_BUFFER_DURATION,
-                max(bufferingGoal, MINIMUM_BUFFER_DURATION),
-                DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_MS,
-                DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS
-            )
-            .build()
-    }
+    fun getLoadControl(): LoadControl = DefaultLoadControl.Builder()
+        // cache the last three minutes
+        .setBackBuffer(1000 * 60 * 3, true).setBufferDurationsMs(
+            MINIMUM_BUFFER_DURATION,
+            getRecommendedBufferMs(),
+            DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_MS,
+            DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS
+        ).build()
 
     /**
      * Load playback parameters such as speed and skip silence
