@@ -149,6 +149,12 @@
             app:summary="@string/category_preview_summary"
             app:title="@string/category_preview" />
 
+        <com.github.libretube.ui.views.SbSpinnerPreference
+            app:defaultValue="off"
+            app:key="hook_category"
+            app:summary="@string/category_hook_summary"
+            app:title="@string/category_hook" />
+
         <com.github.libretube.ui.views.ColorPreference
             android:dependency="sb_enable_custom_colors"
             app:defaultValue="#008fd6"
