@@ -568,4 +568,5 @@
     <string name="screenshot_saved">Snímek uložen</string>
     <string name="did_you_mean">Mysleli jste:</string>
     <string name="showing_results_for">Zobrazování výsledků pro:</string>
+    <string name="delete_playlist_include_vidoes">Odstranit také všechna videa z playlistu?</string>
 </resources>

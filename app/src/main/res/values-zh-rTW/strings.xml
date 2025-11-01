@@ -564,4 +564,7 @@
     <string name="include_timestamp_in_filename">在檔案名稱中包含時間戳</string>
     <string name="unsubscribe_snackbar_message">已成功取消訂閱 %1$s</string>
     <string name="screenshot_saved">已儲存螢幕截圖</string>
+    <string name="delete_playlist_include_vidoes">也從播放清單刪除所有影片？</string>
+    <string name="did_you_mean">您是否指的是：</string>
+    <string name="showing_results_for">顯示結果：</string>
 </resources>

@@ -565,5 +565,6 @@
     <string name="unsubscribe_snackbar_message">取消订阅 %1$s 成功</string>
     <string name="screenshot_saved">已保存截屏</string>
     <string name="did_you_mean">你是不是想找：</string>
-    <string name="showing_results_for">正显示这些搜索词的结果：</string>
+    <string name="showing_results_for">正显示下列搜索词的结果：</string>
+    <string name="delete_playlist_include_vidoes">同样删除所有来自该播放列表的视频？</string>
 </resources>

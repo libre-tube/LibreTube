@@ -568,4 +568,5 @@
     <string name="screenshot_saved">Cattura dello schermo salvata</string>
     <string name="did_you_mean">Intendevi:</string>
     <string name="showing_results_for">Mostrando risultati per:</string>
+    <string name="delete_playlist_include_vidoes">Eliminare anche tutti i video dalla playlist?</string>
 </resources>

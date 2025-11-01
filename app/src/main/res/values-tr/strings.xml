@@ -567,4 +567,5 @@
     <string name="screenshot_saved">Ekran görüntüsü kaydedildi</string>
     <string name="did_you_mean">Bunu mu demek istediniz:</string>
     <string name="showing_results_for">Sonuçlar gösteriliyor:</string>
+    <string name="delete_playlist_include_vidoes">Oynatma listesindeki tüm videolar da silinsin mi?</string>
 </resources>

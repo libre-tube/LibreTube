@@ -567,4 +567,5 @@
     <string name="screenshot_saved">Екранната снимка е запазена</string>
     <string name="showing_results_for">Показване на резултати за:</string>
     <string name="did_you_mean">Имахте предвид:</string>
+    <string name="delete_playlist_include_vidoes">Да се изтрият ли и всички видеоклипове от плейлиста?</string>
 </resources>

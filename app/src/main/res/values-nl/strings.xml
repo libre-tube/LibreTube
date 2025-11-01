@@ -567,4 +567,5 @@
     <string name="screenshot_saved">Scherm­afdruk opgeslagen</string>
     <string name="did_you_mean">Bedoelde u:</string>
     <string name="showing_results_for">Resultaten getoond voor:</string>
+    <string name="delete_playlist_include_vidoes">Ook alle video\'s uit de afspeel­lĳst verwĳderen?</string>
 </resources>

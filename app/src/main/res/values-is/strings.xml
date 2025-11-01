@@ -565,4 +565,7 @@
     <string name="include_timestamp_in_filename">Hafa tímamerki í skráarheiti</string>
     <string name="unsubscribe_snackbar_message">Tókst að segja upp áskrift á %1$s</string>
     <string name="screenshot_saved">Skjámynd vistuð</string>
+    <string name="delete_playlist_include_vidoes">Einnig eyða öllum myndskeiðum af spilunarlistanum?</string>
+    <string name="did_you_mean">Meinaðir þú:</string>
+    <string name="showing_results_for">Birti niðurstöður fyrir:</string>
 </resources>
