@@ -204,7 +204,6 @@
     <string name="codecs">வீடியோ கோடெக்குகள்</string>
     <string name="autoplay_countdown_summary">அடுத்த வீடியோவை தானாக விளையாடுவதற்கு முன் 5 எச் கவுண்ட்டவுனைக் காட்டு</string>
     <string name="playing_next">%1$s இல் அடுத்து விளையாடுவது</string>
-    <string name="lbry_hls_summary">கிடைத்தால் ச்ட்ரீமிங்கிற்கு LBRY HLS ஐப் பயன்படுத்தவும்</string>
     <string name="disable_proxy_summary">YouTube இன் சேவையகங்களிலிருந்து நேரடியாக வீடியோக்களையும் படங்களையும் ஏற்றவும். நீங்கள் எப்போதும் VPN ஐப் பயன்படுத்தினால் மட்டுமே விருப்பத்தை இயக்கவும்</string>
     <string name="auto_fullscreen_shorts">குறுகிய வீடியோக்களில் ஆட்டோ முழுத்திரை</string>
     <string name="channel_groups">சேனல் குழுக்கள்</string>
@@ -242,7 +241,6 @@
     <string name="alternative_pip_controls_summary">ஆடியோவை மட்டும் காண்பி, முன்னோக்கி மற்றும் முன்னாடி வைப்பதற்கு பதிலாக PIP இல் கட்டுப்பாடுகளைத் தவிர்க்கவும்</string>
     <string name="add_to_queue">வரிசையில் சேர்க்கவும்</string>
     <string name="open_copied">திற</string>
-    <string name="lbry_hls">Lbry hls</string>
     <string name="device_info">கருவி செய்தி</string>
     <string name="new_group">புதிய</string>
     <string name="group_name_error_empty">தயவுசெய்து ஒரு பெயரை உள்ளிடவும்</string>

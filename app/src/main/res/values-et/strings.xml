@@ -376,7 +376,6 @@
     <string name="autoplay_countdown">Automaatse taasesituse pöördloendus</string>
     <string name="autoplay_countdown_summary">Enne järgmise video automaatset esitamist näita 5-sekundilist pöördloendust</string>
     <string name="playing_next">Järgmine video %1$s sekundi pärast</string>
-    <string name="lbry_hls">LBRY HLS</string>
     <string name="proxy">Puhverserver</string>
     <string name="disable_proxy_summary">Laadi videod ja pildid otse YouTube\'i serveritest. Privaatsuskaalutlustel lülita see eelistus sisse siis, kui sul alati on VPN kasutusel</string>
     <string name="disable_proxy">Eemalda Piped\'i vaheserver kasutusest</string>
@@ -405,7 +404,6 @@
     <string name="queue_insert_related_videos">Lisa samateemalisi videoid</string>
     <string name="playlistUrl">Esitusloendi URL</string>
     <string name="custom_playback_speed_summary">Kasuta tavalise taasesituse kiiruse asemel enda valitud kiirust</string>
-    <string name="lbry_hls_summary">Kui võimalik, siis kasuta voogesitusel LBRY HLS teeki</string>
     <string name="go_to_video">Mine video juurde</string>
     <string name="change_playlist_description">Muuda esitusloendi kirjeldust</string>
     <string name="duration">Kestus</string>

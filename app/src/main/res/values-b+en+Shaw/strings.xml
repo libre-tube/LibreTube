@@ -254,7 +254,6 @@
     <string name="video_id">𐑝𐑦𐑛𐑦𐑴 ⸰𐑲𐑛</string>
     <string name="copy_tooltip">𐑒𐑪𐑐𐑦</string>
     <string name="playing_next">𐑐𐑤𐑱𐑦𐑙 𐑯𐑧𐑒𐑕𐑑 𐑦𐑯 %1$s</string>
-    <string name="lbry_hls">⸰𐑤𐑚𐑮𐑦 ⸰𐑣𐑤𐑕</string>
     <string name="proxy">𐑐𐑮𐑪𐑒𐑕𐑦</string>
     <string name="disable_proxy">𐑛𐑦𐑕𐑱𐑚𐑩𐑤 ·𐑐𐑲𐑐𐑑 𐑐𐑮𐑪𐑒𐑕𐑦</string>
     <string name="channel_groups">𐑗𐑨𐑯𐑩𐑤 𐑜𐑮𐑵𐑐𐑕</string>
@@ -426,7 +425,6 @@
     <string name="mark_as_watched">𐑥𐑸𐑒 𐑨𐑟 𐑢𐑪𐑗𐑑</string>
     <string name="autoplay_countdown">𐑷𐑑𐑴𐑐𐑤𐑱 𐑒𐑬𐑯𐑑𐑛𐑬𐑯</string>
     <string name="autoplay_countdown_summary">𐑖𐑴 𐑩 5𐑕 𐑒𐑬𐑯𐑑𐑛𐑬𐑯 𐑚𐑦𐑓𐑹 𐑷𐑑𐑴-𐑐𐑤𐑱𐑦𐑙 𐑞 𐑯𐑧𐑒𐑕𐑑 𐑝𐑦𐑛𐑦𐑴</string>
-    <string name="lbry_hls_summary">𐑿𐑟 ⸰𐑤𐑚𐑮𐑦 ⸰𐑣𐑤𐑕 𐑓 𐑕𐑑𐑮𐑰𐑥𐑦𐑙 𐑦𐑓 𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤</string>
     <string name="disable_proxy_summary">𐑤𐑴𐑛 𐑝𐑦𐑛𐑦𐑴𐑟 𐑯 𐑦𐑥𐑦𐑡𐑩𐑟 𐑛𐑦𐑮𐑧𐑒𐑑𐑤𐑦 𐑓𐑮𐑪𐑥 ·𐑿𐑑𐑿𐑚\'𐑟 𐑕𐑻𐑝𐑼𐑟. 𐑴𐑯𐑤𐑦 𐑦𐑯𐑱𐑚𐑩𐑤 𐑞 𐑪𐑐𐑖𐑩𐑯 𐑦𐑓 𐑿 𐑷𐑤𐑢𐑱𐑟 𐑿𐑟 𐑩 ⸰𐑝𐑐𐑯</string>
     <string name="auto_fullscreen_shorts">𐑷𐑑𐑴 𐑓𐑫𐑤𐑕𐑒𐑮𐑰𐑯 𐑪𐑯 𐑖𐑹𐑑 𐑝𐑦𐑛𐑦𐑴𐑟</string>
     <string name="group_name">𐑜𐑮𐑵𐑐 𐑯𐑱𐑥</string>

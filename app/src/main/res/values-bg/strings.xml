@@ -223,7 +223,6 @@
     <string name="autoRotatePlayer">Автоматично цял екран</string>
     <string name="pause">Пауза</string>
     <string name="pauseOnScreenOff">Автоматична пауза</string>
-    <string name="lbry_hls">LBRY HLS</string>
     <string name="buffering_goal">Предварително зареждане</string>
     <string name="tooltip_play">Изпълни</string>
     <string name="navLabelVisibility">Видимост на етикета</string>
@@ -477,7 +476,6 @@
     <string name="show_search_suggestions">Покажи предложения за търсене</string>
     <string name="trends">Набиращи популярност</string>
     <string name="customInstance">Потребителски</string>
-    <string name="lbry_hls_summary">Използвай LBRY HLS за стрийминг, ако има такъв</string>
     <string name="video_id">Видео ID</string>
     <string name="resize_mode_fit">Подходящ</string>
     <string name="audio_only_mode">Режим само аудио</string>

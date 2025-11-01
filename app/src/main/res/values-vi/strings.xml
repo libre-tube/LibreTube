@@ -392,7 +392,6 @@
     <string name="skip_silence">Bỏ qua khoảng lặng</string>
     <string name="help">Giúp đỡ</string>
     <string name="disable_proxy_summary">Tải videos và hình ảnh trực tiếp từ máy chủ của YouTube. Chỉ bật tùy chọn nếu bạn vẫn sử dụng VPN</string>
-    <string name="lbry_hls_summary">Sử dụng LBRY HLS để phát trực tuyến nếu có</string>
     <string name="video_id">ID của video</string>
     <string name="shorts_notifications">Thông báo cho các đoạn ngắn</string>
     <string name="creation_date">Ngày tạo</string>
@@ -440,7 +439,6 @@
     <string name="tooltip_options">Tùy chọn</string>
     <string name="tooltip_locked">Khóa trình phát</string>
     <string name="remove_watched_videos">Xóa video đã xem</string>
-    <string name="lbry_hls">LBRY HLS</string>
     <string name="tooltip_play">Phát</string>
     <string name="no_chapter">Không có chương</string>
     <string name="no_fullscreen_resolution">Không có độ phân giải toàn màn hình</string>

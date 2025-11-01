@@ -261,7 +261,6 @@
     <string name="backup_restore">Рэзервовае капіраванне і аднаўленне</string>
     <string name="resize_mode_fill">Запаўненне</string>
     <string name="player_resize_mode">Рэжым змены памеру</string>
-    <string name="lbry_hls">LBRY HLS</string>
     <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">Мабільная сетка</string>
     <string name="new_videos_badge">Індыкатар для новых відэа</string>
@@ -355,7 +354,6 @@
     <string name="change_region">«Трэнды» недаступныя для бягучага рэгіёну. Калі ласка, абярыце іншы ў наладах.</string>
     <string name="filename">Імя файла</string>
     <string name="autoplay_countdown_summary">Паказваць 5-секундны зваротны адлік перад аўтаматычным прайграваннем наступнага відэа</string>
-    <string name="lbry_hls_summary">Выкарыстоўвайце LBRY HLS для трансляцыі, калі гэта магчыма</string>
     <string name="hls_instead_of_dash_summary">Выкарыстоўваць HLS замест DASH. Паспрабуйце ўключыць ці выключыць, калі прайграванне не працуе.</string>
     <string name="navbar_order">Парадак</string>
     <string name="category_preview_summary">Для сегментаў з падрабязным апісаннем будучага кантэнту без дадатковай інфармацыі. Калі яна ўключае ў сябе кліпы, якія з\'яўляюцца толькі тут, гэта, хутчэй за ўсё, няправільная катэгорыя</string>

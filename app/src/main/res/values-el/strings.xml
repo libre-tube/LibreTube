@@ -384,8 +384,6 @@
     <string name="custom_playback_speed_summary">Χρησιμοποιήστε διαφορετική ταχύτητα αναπαραγωγής από αυτήν της κανονικής συσκευής αναπαραγωγής</string>
     <string name="autoplay_countdown">Αντίστροφη μέτρηση αυτόματης αναπαραγωγής</string>
     <string name="playing_next">Αναπαραγωγή επόμενου σε %1$s</string>
-    <string name="lbry_hls">LBRY HLS</string>
-    <string name="lbry_hls_summary">Χρησιμοποιήστε το LBRY HLS για streaming εάν είναι διαθέσιμο</string>
     <string name="subscriberAndVideoCounts">%1$s συνδρομές•%2$dβίντεο</string>
     <string name="change_playlist_description">Αλλαγή περιγραφής λίστας αναπαραγωγής</string>
     <string name="playlist_description">Περιγραφή λίστας αναπαραγωγής</string>

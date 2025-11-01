@@ -367,8 +367,6 @@
     <string name="stats_for_nerds">ਨਰਡਾਂ ਲਈ ਅੰਕੜੇ</string>
     <string name="video_id">ਵੀਡੀਓ ਆਈ ਡੀ</string>
     <string name="category">ਸ਼੍ਰੇਣੀ</string>
-    <string name="lbry_hls">ਲਿਬਰੀ HLS</string>
-    <string name="lbry_hls_summary">ਉਪਲਬਧ ਹੋਵੇ ਤਾਂ ਸਟ੍ਰੀਮਿੰਗ ਲਈ ਲੀਬਰ HLS ਵਰਤੋ</string>
     <string name="subscriberAndVideoCounts">%1$s ਸਬਸਕ੍ਰਾਈਬਰ• %2$d ਵੀਡੀਓ</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d ਵੀਡੀਓ</string>
     <string name="fullscreen_gestures">ਫੁਲਸਕ੍ਰੀਨ ਸੰਕੇਤਾਂ ਵਿੱਚ ਦਾਖਲ/ਬਾਹਰ ਜਾਓ</string>

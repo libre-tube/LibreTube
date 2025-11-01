@@ -365,9 +365,7 @@
     <string name="resume">再開</string>
     <string name="autoplay_countdown_summary">次の動画を自動再生する前に5秒間の秒読みを表示します</string>
     <string name="unsupported_file_format">未対応のファイル形式: %1$s</string>
-    <string name="lbry_hls">LBRY HLS</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d 本の動画</string>
-    <string name="lbry_hls_summary">可能な場合は、ストリーミングに LBRY HLS を使用します</string>
     <string name="subscriberAndVideoCounts">登録者数 %1$s人 • %2$d 本の動画</string>
     <string name="replies">返信</string>
     <string name="disable_proxy">Pipedのプロキシを無効化</string>
