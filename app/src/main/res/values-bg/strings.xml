@@ -568,4 +568,6 @@
     <string name="showing_results_for">Показване на резултати за:</string>
     <string name="did_you_mean">Имахте предвид:</string>
     <string name="delete_playlist_include_vidoes">Да се изтрият ли и всички видеоклипове от плейлиста?</string>
+    <string name="category_hook">Закачка/Поздрави</string>
+    <string name="category_hook_summary">За разказвателни закачки, които грабват вниманието на зрителя (често още в първата сцена), като загатват или описват събития от по-късни моменти в същото видео или бъдещи епизоди от поредица</string>
 </resources>
