@@ -20,7 +20,6 @@ import androidx.media3.common.C
 import androidx.media3.common.Format
 import androidx.media3.common.PlaybackParameters
 import androidx.media3.common.Player
-import androidx.media3.common.TrackSelectionOverride
 import androidx.media3.common.Tracks
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.DefaultDataSource
@@ -400,48 +399,6 @@ object PlayerHelper {
         return PreferenceHelper.getString(prefKey, "")
             .replace("p", "")
             .toIntOrNull()
-    }
-
-    @OptIn(UnstableApi::class)
-    fun setPreferredAudioQuality(
-        context: Context,
-        player: Player,
-        trackSelector: DefaultTrackSelector
-    ) {
-        val prefKey = if (NetworkHelper.isNetworkMetered(context)) {
-            PreferenceKeys.PLAYER_AUDIO_QUALITY_MOBILE
-        } else {
-            PreferenceKeys.PLAYER_AUDIO_QUALITY
-        }
-
-        val qualityPref = PreferenceHelper.getString(prefKey, "auto")
-        if (qualityPref == "auto") return
-
-        // multiple groups due to different possible audio languages
-        val audioTrackGroups = player.currentTracks.groups
-            .filter { it.type == C.TRACK_TYPE_AUDIO }
-
-        for (audioTrackGroup in audioTrackGroups) {
-            // find the best audio bitrate
-            val streams = (0 until audioTrackGroup.length).map { index ->
-                index to audioTrackGroup.getTrackFormat(index).bitrate
-            }
-
-            // if no bitrate info is available, fallback to the
-            // - first stream for lowest quality
-            // - last stream for highest quality
-            val streamIndex = if (qualityPref == "best") {
-                streams.maxByOrNull { it.second }?.takeIf { it.second != -1 }?.first
-                    ?: (streams.size - 1)
-            } else {
-                streams.minByOrNull { it.second }?.takeIf { it.second != -1 }?.first ?: 0
-            }
-
-            trackSelector.updateParameters {
-                val override = TrackSelectionOverride(audioTrackGroup.mediaTrackGroup, streamIndex)
-                setOverrideForType(override)
-            }
-        }
     }
 
     fun getIntentActionName(context: Context): String {

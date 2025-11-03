@@ -34,6 +34,7 @@ import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.getSubtitleRoleFlags
 import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.util.DefaultTrackSelectorWithAudioQualitySupport
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PauseableTimer
 import com.github.libretube.util.PlayingQueue
@@ -79,18 +80,6 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         override fun onPlayerError(error: PlaybackException) {
             // show a toast on errors
             toastFromMainThread(error.localizedMessage.orEmpty())
-        }
-
-        override fun onEvents(player: Player, events: Player.Events) {
-            super.onEvents(player, events)
-
-            if (events.contains(Player.EVENT_TRACKS_CHANGED)) {
-                PlayerHelper.setPreferredAudioQuality(
-                    this@AbstractPlayerService,
-                    player,
-                    trackSelector ?: return
-                )
-            }
         }
 
         override fun onPlaybackStateChanged(playbackState: Int) {
@@ -318,7 +307,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
     @OptIn(UnstableApi::class)
     private fun createPlayerAndMediaSession() {
-        val trackSelector = DefaultTrackSelector(this)
+        val trackSelector = DefaultTrackSelectorWithAudioQualitySupport(this)
         this.trackSelector = trackSelector
 
         val player = PlayerHelper.createPlayer(this, trackSelector)
