@@ -2,7 +2,7 @@
 appcompat = "1.7.1"
 core = "1.13.1"
 documentfile = "1.1.0"
-gradle = "8.6.1"
+gradle = "8.13.0"
 junit = "4.13.2"
 kotlin = "1.9.25"
 ksp = "1.9.25-1.0.20"
