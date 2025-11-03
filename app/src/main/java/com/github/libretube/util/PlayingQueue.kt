@@ -130,7 +130,7 @@ object PlayingQueue {
     fun getStreams() = queue.toList()
 
     fun setStreams(streams: List<StreamItem>) = synchronized(queue) {
-        clear()
+        queue.clear()
 
         queue.addAll(streams)
     }
