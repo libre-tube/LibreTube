@@ -542,4 +542,6 @@
     <string name="did_you_mean">Meintest du:</string>
     <string name="showing_results_for">Ergebnisse für:</string>
     <string name="delete_playlist_include_vidoes">Auch alle Videos aus der Playlist löschen?</string>
+    <string name="category_hook_summary">Narrative Hooks, welche die Aufmerksamkeit der Zuschauenden auf sich ziehen (oft als erste Szene), indem sie Ereignisse aus späteren Teilen des Videos oder zukünftigen Episoden einer Serie andeuten oder beschreiben</string>
+    <string name="category_hook">Hooks/Begrüßungen</string>
 </resources>
