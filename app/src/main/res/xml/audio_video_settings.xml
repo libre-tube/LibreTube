@@ -64,30 +64,6 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/quality">
-
-        <ListPreference
-            android:icon="@drawable/ic_videocam"
-            app:defaultValue="webm"
-            app:entries="@array/playerVideoFormat"
-            app:entryValues="@array/playerVideoFormatValues"
-            app:isPreferenceVisible="false"
-            app:key="player_video_format"
-            app:title="@string/playerVideoFormat"
-            app:useSimpleSummaryProvider="true" />
-
-        <ListPreference
-            android:icon="@drawable/ic_music"
-            app:defaultValue="all"
-            app:entries="@array/playerAudioFormat"
-            app:entryValues="@array/playerAudioFormatValues"
-            app:isPreferenceVisible="false"
-            app:key="player_audio_format"
-            app:title="@string/playerAudioFormat"
-            app:useSimpleSummaryProvider="true" />
-
-    </PreferenceCategory>
-
     <PreferenceCategory app:title="@string/advanced">
 
         <ListPreference
